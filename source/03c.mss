@@ -1,9 +1,9 @@
  @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:42:47 $}
+@Comment{$Date: 2005/11/24 02:15:01 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1178,7 +1178,7 @@ Type extension is a new concept.
 @LabeledSubClause{Dispatching Operations of Tagged Types}
 
 @begin{Intro}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02],ARef=[AI95-00335-01]}
 @RootDefn{dispatching operation}
 @Defn2{Term=[dispatching call], Sec=(on a dispatching operation)}
 @Defn2{Term=[nondispatching call], Sec=(on a dispatching operation)}
@@ -1187,8 +1187,11 @@ Type extension is a new concept.
 @Defn{polymorphism}
 @Defn{run-time polymorphism}
 @Defn2{Term=[controlling tag], Sec=(for a call on a dispatching operation)}
-The primitive subprograms of a tagged type@Chg{Version=[2],New=[ and the
-subprograms declared by @nt{formal_abstract_subprogram_declaration}s],Old=[]}
+The primitive subprograms of a tagged type@Chg{Version=[2],New=[, the
+subprograms declared by @nt{formal_abstract_subprogram_declaration}s,
+and and the stream attributes of a specific tagged type that are available (see
+@RefSecNum{Stream-Oriented Attributes}) at the end of the declaration list
+where the type is declared],Old=[]}
 are called @i(dispatching operations).
 @Redundant[A dispatching operation can be called using a statically
 determined @i{controlling} tag, in which case the body to be
@@ -1208,6 +1211,19 @@ by a dispatching call.]
 @IndexSee{Term=[message],See=[dispatching call]}
 @IndexSee{Term=[method],See=[dispatching subprogram]}
 @IndexSee{Term=[virtual function],See=[dispatching subprogram]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00335-01]}
+@ChgAdded{Version=[2],Text=[For the stream attributes of a type
+declared immediately within a @nt{package_specification} that has a
+partial view, the declaration list to consider is the visible part of the
+package. Stream attributes that are not available in the same declaration
+list are not dispatching as there is no guarantee that descendants of the
+type have available attributes (there is such a guarantee for visibly
+available attributes). If we allowed dispatching for any available
+attribute, then for attributes defined in the private part we could end up
+executing a non-existent body.]}
+@end{Reason}
+
 @end{Intro}
 
 @begin{MetaRules}
@@ -1785,6 +1801,12 @@ The concept of dispatching operations is new.
   @ChgAdded{Version=[2],Text=[Dispatching calls include operations
   implemented by entries and protected operations, so we have to update the
   wording to reflect that.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02]}
+  @ChgAdded{Version=[2],Text=[An stream attribute of a tagged type is
+  is usually a dispatching operation, even though it is not a primitive
+  operation. If they weren't dispatching, T'Class'Input and T'Class'Output
+  wouldn't work.]}
 @end{Diffword95}
 
 
@@ -2308,7 +2330,7 @@ ancestors.]]}
   except possibly null procedures. Interface types are used for
   composing other interfaces and tagged types and thereby
   provide multiple inheritance. Only an interface type can be used as a
-  progenitor of a derived type.]}>}
+  progenitor of another type.]}>}
 @end{Intro}
 
 @begin{MetaRules}
@@ -2370,9 +2392,8 @@ interfaces.]}
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Synchronized>,
   Text=<@ChgAdded{Version=[2],Text=[A synchronized entity is one
   that will work safely with multiple tasks at one time. A synchronized
-  interface can be used with either a task or a protected type, while a
-  synchronized tagged type is any of a tagged task type, tagged protected type,
-  or a synchronized interface.]}>}
+  interface can be an ancestor of either a task or a protected type. Such a
+  task or protected type is called a synchronized tagged type.]}>}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Text=[@Defn{synchronized tagged type}
@@ -2441,9 +2462,10 @@ progenitor type in the same way that a derived type inherits user-defined
 primitive subprograms from its progenitor types
 (see @RefSecNum{Derived Types and Classes}).]}
 @ChgToGlossary{Version=[2],Kind=[Added],Term=<Progenitor>,
-  Text=<@ChgAdded{Version=[2],Text=[A progenitor type of a derived type is
-  one of the types mentioned in the definition of the derived type other
-  than the first. A progenitor type is always an interface type.]}>}
+  Text=<@ChgAdded{Version=[2],Text=[A progenitor of a derived type is
+  one of the types given in the definition of the derived type other
+  than the first. A progenitor is always an interface type.
+  Interfaces, tasks, and protected types may also have progenitors.]}>}
 
 @end{StaticSem}
 

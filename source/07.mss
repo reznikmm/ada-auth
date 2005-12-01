@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:42:51 $}
+@Comment{$Date: 2005/11/24 02:15:03 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1686,12 +1686,11 @@ they are simply a special case of @nt<object_declaration>s.
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
-@redundant[@ChgToGlossaryAlso{Version=[2],Kind=[Revised],Term=<Limited type>,
-  Text=<A limited type is (a view of) a type for which
+@redundant[A limited type is (a view of) a type for which
   @Chg{Version=[2],New=[copying (such as for an @nt{assignment_statement})],
     Old=[the assignment operation]} is not allowed.
   A nonlimited type is a (view of a) type for which
-  @Chg{Version=[2],New=[copying], Old=[the assignment operation]} is allowed.>}]
+  @Chg{Version=[2],New=[copying], Old=[the assignment operation]} is allowed.]
 @begin{Discussion}
 The concept of the @i(value) of a limited type is difficult
 to define, since the abstract value of a limited type often
@@ -1718,7 +1717,15 @@ For a limited partial view whose full view is nonlimited,
 passing and function return. To prevent any copying whatsoever, one should
 make both the partial @i{and} full views limited.
 @end{Honest}
-@end{Intro}
+@Comment{The below was moved from a ChgToGlossaryAlso.}
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Limited type>,
+  Text=<A limited type is @Chg{Version=[2],New=[],Old=[(a view of) ]}a type
+  for which
+  @Chg{Version=[2],New=[copying (such as in an @nt{assignment_statement})],
+    Old=[the assignment operation]} is not allowed.
+  A nonlimited type is a @Chg{Version=[2],New=[],Old=[(view of a) ]}type for
+  which
+  @Chg{Version=[2],New=[copying], Old=[the assignment operation]} is allowed.>}]@end{Intro}
 
 @begin{Legality}
 

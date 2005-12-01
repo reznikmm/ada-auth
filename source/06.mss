@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:42:50 $}
+@Comment{$Date: 2005/11/24 02:15:03 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -30,10 +30,10 @@ are two forms of subprograms: functions, which return values, and procedures,
 which do not.]}>}
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Function>,
 Text=<@ChgAdded{Version=[2],Text=[A function is a form of subprogram that
-returns a result and is used as part of an expression.]}>}
+returns a result and can be called used as part of an expression.]}>}
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Procedure>,
 Text=<@ChgAdded{Version=[2],Text=[A procedure is a form of subprogram that
-does not return a result and is called by a @nt{statement} standing alone.]}>}
+does not return a result and can only be called by a @nt{statement}.]}>}
 
 @Defn{callable entity}
 A @i(callable entity) is a subprogram or entry (see Section 9).

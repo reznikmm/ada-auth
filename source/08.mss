@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/10/28 05:45:34 $}
+@Comment{$Date: 2005/11/24 02:15:04 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -711,7 +711,7 @@ their profiles are type conformant.
 
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Overriding operation>,
 Text=[@ChgAdded{Version=[2],Text=[An overriding operation
-is one that replaces an inherited operation. Operations may be marked
+is one that replaces an inherited primitive operation. Operations may be marked
 explicitly as overriding or not overriding.]}]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],ARef=[AI95-00044-01]}

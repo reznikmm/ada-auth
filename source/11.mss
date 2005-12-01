@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:42:54 $}
+@Comment{$Date: 2005/11/24 02:15:05 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -606,16 +606,16 @@ are not handled by the handlers of the
 @key[end] Ada.Exceptions;]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00438-01]}
-@ChgAdded{Version=[2],Text=[    @key[package] Stream_Attributes @key[is]
-       @key[procedure] Read (Stream : @key[not null access] Ada.Streams.Root_Stream_Type'Class;
-                       Item : @key[out] Exception_Occurrence);
-       @key[procedure] Write (Stream : @key[not null access] Ada.Streams.Root_Stream_Type'Class;
-                       Item : @key[in] Exception_Occurrence);
-    @key[end] Stream_Attributes;]}
+@ChgAdded{Version=[2],Text=[    @key[procedure] Read_Exception_Occurrence
+       (Stream : @key[not null access] Ada.Streams.Root_Stream_Type'Class;
+        Item   : @key[out] Exception_Occurrence);
+    @key[procedure] Write_Exception_Occurrence
+       (Stream : @key[not null access] Ada.Streams.Root_Stream_Type'Class;
+        Item : @key[in] Exception_Occurrence);]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00438-01]}
-@ChgAdded{Version=[2],Text=[    @key[for] Exception_Occurrence'Read @key[use] Stream_Attributes.Read;
-    @key[for] Exception_Occurrence'Write @key[use] Stream_Attributes.Write;]}
+@ChgAdded{Version=[2],Text=[    @key[for] Exception_Occurrence'Read @key[use] Read_Exception_Occurrence;
+    @key[for] Exception_Occurrence'Write @key[use] Write_Exception_Occurrence;]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00438-01]}
 @ChgAdded{Version=[2],Text=[@key[private]
@@ -820,9 +820,9 @@ but simply save the Null_Occurrence.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00438-01]}
-@ChgAdded{Version=[2],Text=[Stream_Attributes.Write writes a representation of
-an exception occurrence to a stream; Stream_Attributes.Read reconstructs an
-exception occurrence from a stream (including one written in a different
+@ChgAdded{Version=[2],Text=[Write_Exception_Occurrence writes a representation
+of an exception occurrence to a stream; Read_Exception_Occurrence reconstructs
+an exception occurrence from a stream (including one written in a different
 partition).]}
 @ChgNote{All of these notes (except the first) are moved from below.}
 @begin{Ramification}
@@ -1110,8 +1110,8 @@ exception contains such a character.]}
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01],ARef=[AI95-00400-01],ARef=[AI95-00438-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  Functions Wide_Exception_Name and Wide_Wide_Exception_Name, and package
-  Stream_Attributes
+  Functions Wide_Exception_Name and Wide_Wide_Exception_Name, and procedures
+  Read_Exception_Occurrence and Write_Exception_Occurrence
   are newly added to Ada.Exceptions. If Ada.Exceptions is referenced in a
   @nt{use_clause}, and an entity @i<E> with the same @nt{defining_identifier}
   as a new entity in Ada.Exceptions is defined in a

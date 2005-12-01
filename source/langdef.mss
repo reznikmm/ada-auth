@@ -1,10 +1,10 @@
 @Part(glossary, Root="ada.mss")
 
-@Comment{$Date: 2005/10/29 06:03:37 $}
+@Comment{$Date: 2005/11/24 02:15:07 $}
 @LabeledAddedInformativeAnnex{Version=[2],Name=[Language-Defined Entities]}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/langdef.mss,v $}
-@comment{$Revision: 1.1 $}
+@comment{$Revision: 1.2 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
@@ -51,12 +51,18 @@ subtypes.]}
 @ExceptionList
 
 
-@LabeledAddedClause{Version=[2],Name=[Language-Defined Objects and Values]}
+@LabeledAddedClause{Version=[2],Name=[Language-Defined Objects]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
 @ChgAdded{Version=[2],Text=[This clause lists all language-defined constants,
-variables, and enumeration literals.]}
+variables, named numbers, and enumeration literals.]}
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Formally, named numbers and enumeration literals
+  aren't objects, but it was thought to be too weird to say @lquotes@;Language-Defined
+  Objects and Values@rquotes.]}
+@end{Honest}
 @end{Intro}
 
 @ObjectList

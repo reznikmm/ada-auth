@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:42:45 $}
+@Comment{$Date: 2005/11/24 02:14:59 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -105,11 +105,9 @@ but instead defines a view of an existing entity
 (see @RefSecNum(Renaming Declarations))).
 
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<View>,
-Text=<@Chg{Version=[2],New=[A view consists of an identification of an entity
-(the entity of the view), plus view-specific characteristics that affect the
-use of the entity through that view (such as mode of access to an object,
-formal parameter names and defaults for a subprogram, or visibility to
-components of a type],Old=[(See @b[Definition]]}.)>}
+Text=<@Chg{Version=[2],New=[A view of an entity reveals some or all of the
+properties of the entity. A single entity may have multiple views.],
+Old=[(See @b[Definition]]}.)>}
 @begin{Discussion}
   Most declarations define a view (of some entity) whose
   view-specific characteristics are unchanging for the
@@ -428,7 +426,7 @@ a value of the type.
   are in that class]}.>}
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<Subtype>,
   Text=<A subtype is a type together with a constraint@Chg{Version=[2],
-  New=[ and/or null exclusion],Old=[]},
+  New=[ or null exclusion],Old=[]},
   which constrains the values of the subtype to satisfy a certain
   condition.
   The values of a subtype are a subset of the values of its type.>}
@@ -457,7 +455,7 @@ of @i(component) values.
   @ChgAdded{Version=[2],Text=[The formal definition of @i<category> and
   @i<class> is found in @RefSecNum{Derived Types and Classes}.]}
 @end{TheProof}
-@ToGlossary{Term=<Class>,
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Class@Chg{Version=[2],New=[ (of types)],Old=[]}>,
   Text=<@Defn(closed under derivation)
   A class is a set of types that is
   closed under derivation,
@@ -517,21 +515,24 @@ of @i(component) values.
 @ToGlossary{Term=<Array type>,
   Text=<An array type is a composite type whose components are all of
   the same type. Components are selected by indexing.>}
-@ToGlossary{Term=<Task type>,
-  Text=<A task type is a composite type whose values are tasks,
-  which are active entities
-  that may execute concurrently with other tasks.
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Task type>,
+  Text=<A task type is a composite type @Chg{Version=[2],New=[used to
+  represent], Old=[whose values are tasks, which are]} active entities
+  @Chg{Version=[2],New=[which],Old=[that may]} execute concurrently
+  @Chg{Version=[2],New=[and which can communicate via queued task entries],
+  Old=[with other tasks]}.
   The top-level task of a partition is called the environment task.>}
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<Protected type>,
   Text=<A protected type is a composite type whose components are
-  protected from @Chg{Version=[2],New=[being accessed concurrently],
-  Old=[concurrent access]} by multiple tasks.>}
+  @Chg{Version=[2],New=[accessible only
+  through one of its protected operations which synchronize],
+  Old=[protected from]} concurrent access by multiple tasks.>}
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<Private type>,
   Text=<A private type @Chg{Version=[2],New=[gives a],Old=[is a partial]} view
     of a type @Chg{Version=[2],New=[that reveals only some of its properties.
     The remaining properties are provided by the],Old=[whose]} full view
-    @Chg{Version=[2],New=[given elsewhere. Private types are valuable for
-    defining abstractions which hide unnecessary detail],Old=[hidden]} from
+    @Chg{Version=[2],New=[given elsewhere. Private types can be used for
+    defining abstractions that hide unnecessary details],Old=[hidden]} from
     @Chg{Version=[2],New=[a client],Old=[its clients]}.>}@ChgNote{This was
     changed to parallel "incomplete type"}
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<Private extension>,
@@ -543,7 +544,7 @@ of @i(component) values.
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Incomplete type>,
   Text=<@ChgAdded{Version=[2],Text=[An incomplete type gives a view of a type
   that reveals only some of its properties. The remaining properties are
-  provided by the full view given elsewhere. Incomplete types are valuable
+  provided by the full view given elsewhere. Incomplete types can be used
   for defining recursive data structures.]}>}
 
 @Defn{scalar type}
@@ -873,10 +874,11 @@ all types
 @lquotes@;numeric@rquotes@; and
 @lquotes@;@Chg{Version=[2],New=[discriminated],Old=[nonlimited]}@rquotes@;@Chg{Version=[2],
 New=[, which],Old=[]}
-represent other classification dimensions@Chg{Version=[2],New=[, but],
+represent other @Chg{Version=[2],New=[categorization],Old=[classification]}
+dimensions@Chg{Version=[2],New=[, but],
 Old=[ and]} do not fit into the above strictly hierarchical picture.
 @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00345-01]}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00442-01]}
   @ChgAdded{Version=[2],Text=[Note that this is also true for some categories
   mentioned in the chart. The category @lquotes@;task@rquotes@; includes both
   untagged tasks and tagged tasks. Similarly for @lquotes@;protected@rquotes@;,
@@ -1362,26 +1364,6 @@ specific type are defined as follows:
   explicitly declared immediately within the same
   @nt<package_specification> and that operate on the type;
 
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00335-01]}
-  @ChgAdded{Version=[2],Text=[For a specific type, the stream-oriented
-  attributes of the type that are
-  available (see @RefSecNum{Stream-Oriented Attributes}) at the end of the
-  declaration list where the type is declared;]}
-  @begin{Ramification}
-    @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @ChgAdded{Version=[2],Text=[For a type declared immediately within a
-    @nt{package_specification} which has a partial view, the declaration
-    list to consider is the visible part of the package.]}
-  @end{Ramification}
-  @begin{Reason}
-    @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @ChgAdded{Version=[2],Text=[ Even if a stream-oriented attribute is
-    specified by an @nt{attribute_definition_clause}, it is not itself
-    considered a user-defined subprogram, so it is not inherited. Rather, the
-    rules explaining what happens to the stream-oriented attributes on type
-    derivation are spelled out in @Refsec{Stream-Oriented Attributes}.]}
-  @end{Reason}
-
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00200-01]}
   @Defn2{Term=[override], Sec=(a primitive subprogram)}
   @Chg{Version=[2],New=[For a nonformal type, any],Old=[Any]}
@@ -1456,11 +1438,6 @@ The description of S'Base has been moved to
   @ChgAdded{Version=[2],Text=[Clarified that a formal subprogram that happens
   to override a primitive operation of a formal type is not a primitive
   operation (and thus not a dispatching operation) of the formal type.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00335-01]}
-  @ChgAdded{Version=[2],Text=[Added wording to make it clear that
-  stream-oriented attributes are dispatching (if they weren't, T'Class'Input
-  and T'Class'Output couldn't work).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Added wording to include access result types
@@ -2323,7 +2300,7 @@ Old=[@i(parent type)]}.
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<Derived type>,
   Text=<A derived type is a type defined in terms of @Chg{Version=[2],
   New=[one or more other types given in a derived type definition. The
-  first type given],Old=[another type, which]}
+  first of those types],Old=[another type, which]}
   is the parent type of the derived type@Chg{Version=[2],New=[ and
   any others are progenitor types],Old=[]}.
   Each class containing the parent type @Chg{Version=[2],New=[or a progenitor
@@ -2340,11 +2317,11 @@ A @i<class of types> is a set of types that is closed under
 derivation; that is, if the parent or a progenitor type of a
 derived type belongs to a class, then so does the derived type.
 By saying that a particular group of types forms a class,
-we are saying that all derivatives of such a type inherit
-the characteristics that define that class. The
+we are saying that all derivatives of a type in the set inherit
+the characteristics that define that set. The
 more general term @i<category of types> is used for a set of types
 whose defining characteristics are not necessarily inherited by
-derivatives; limited, abstract, and interface are all
+derivatives; for example, limited, abstract, and interface are all
 categories of types, but not classes of types.]}
 
 @begin{Ramification}
@@ -2371,9 +2348,9 @@ its type is the @Chg{Version=[2],New=[@i(parent type)],Old=[parent type]}.
 has one parent type and zero or more progenitor types.],Old=[]}
 
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Parent>,
-  Text=<@ChgAdded{Version=[2],Text=[The parent type of a derived type is the
-  first type mentioned in the definition of the derived type. The parent type
-  can be almost any specific type, including an interface type.]}>}
+  Text=<@ChgAdded{Version=[2],Text=[The parent of a derived type is the
+  first type given in the definition of the derived type. The parent
+  can be almost any kind of type, including an interface type.]}>}
 
 
 A type shall be completely defined
@@ -3237,13 +3214,14 @@ has a unique ultimate ancestor.],Old=[]}
 
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Ancestor>,
   Text=<@ChgAdded{Version=[2],Text=[An ancestor of a type is the type itself
-  or, in the case of a derived type, its parent type or one of its progenitor
-  types or one of their ancestors.]}>}
+  or, in the case of a type derived from other types, its parent type or one
+  of its progenitor types or one of their ancestors. Note that ancestor and
+  descendant are inverse relationships.]}>}
 
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Descendant>,
-  Text=<@ChgAdded{Version=[2],Text=[A descendant of a type is any type of which
-  the given type is an ancestor type. Note that a type is a descendant of
-  itself.]}>}
+  Text=<@ChgAdded{Version=[2],Text=[A type is a descendant of itself, its
+  parent and progenitor types, and their ancestors. Note that descendant and
+  ancestor are inverse relationships.]}>}
 
 @Defn2{Term=[inherited], Sec=(from an ancestor type)}
 An inherited component @Redundant[(including an inherited discriminant)] of a

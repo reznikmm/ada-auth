@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:42:55 $}
+@Comment{$Date: 2005/11/24 02:15:06 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 
 @LabeledClause{The Package System}
 
@@ -1978,6 +1978,13 @@ objects incorrectly by missing various cases.
   @ChgAdded{Version=[2],Text=[Added wording to clarify that an @nt{allocator}
   for a coextension nested inside an outer @nt{allocator} shares
   the pool with the outer @nt{allocator}.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00435-01]}
+  @ChgAdded{Version=[2],Text=[Clarified that storage pools (and Storage_Size)
+  are not defined for access-to-subprogram types. The Ada 95 wording defined
+  the attributes, but said nothing about their values. This would be an
+  incompatible change, except that the AI declares the Ada 95 wording to have
+  been in error.]}
 @end{DiffWord95}
 
 
