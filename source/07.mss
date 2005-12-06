@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/11/24 02:15:03 $}
+@Comment{$Date: 2005/12/01 05:55:43 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2740,9 +2740,9 @@ except in the case of a @i{master}:
 the execution of
 a @Chg{Version=[2],New=[body other than a @nt{package_body};
 the execution of a @nt{statement};
-or the evaluation of an @nt{expression}, @nt{name}, or @nt{range} that is not
-part of an enclosing @nt{expression}, @nt{name}, @nt{range}, or
-@nt{simple_statement}],
+or the evaluation of an @nt{expression}, @nt{function_call}, or @nt{range} that
+is not part of an enclosing @nt{expression}, @nt{function_call}, @nt{range}, or
+@nt{simple_statement} other than a @nt{simple_return_statement}],
 Old=[@nt{task_body}, a @nt{block_statement},
 a @nt{subprogram_body}, an @nt{entry_body}, or an @nt{accept_statement}]}.
 A master is finalized after it is
@@ -2756,25 +2756,28 @@ complete, and before it is left.
   finalized and have their tasks awaited before the @nt{expression}s or
   @nt{statement}s are left. Note that @nt{expression}s like the @nt{condition}
   of an @nt{if_statement} are masters, because they are not enclosed by a
-  @nt{simple_statement}.],
+  @nt{simple_statement}. Similarly, a @nt{function_call} which is renamed
+  is a master, as it is not in a @nt{simple_statement}.],
   Old=[Note that although an @nt{accept_statement} has no
   @nt{declarative_part}, it can call functions and evaluate @nt{aggregate}s,
   possibly causing anonymous controlled objects to be created,
   and we don't want those objects to escape outside the rendezvous.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
-  @ChgAdded{Version=[2],Text=[We have to include @nt{name}s in the contexts that
-  do not cause masters to occur so that @nt{expression}s contained in a
-  @nt{name} (that is not part of an @nt{expression} or @nt{simple_statement})
-  do not become masters. For a @nt{function_call} used as a @nt{name}, we
-  certainly do not want the parameter @nt{expression}s to be masters, as they
-  would then be finalized before the function is called.]}
+  @ChgAdded{Version=[2],Text=[We have to include @nt{function_call}s in the
+  contexts that do not cause masters to occur so that @nt{expression}s
+  contained in a @nt{function_call} (that is not part of an @nt{expression} or
+  @nt{simple_statement}) do not individually become masters. We certainly do
+  not want the parameter @nt{expression}s of a @nt{function_call} to be
+  separate masters, as they would then be finalized before the function is
+  called.]}
 @end{Reason}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
-  @ChgAdded{Version=[2],Text=[The fact that a @nt{name} is a master generally
-  does not change the accessibility of the entity denoted by the @nt{name};
-  that depends on the declaration of the entity. The @nt{name} is the master
+  @ChgAdded{Version=[2],Text=[The fact that a @nt{function_call} is a master
+  does not change the accessibility of the return object denoted by the
+  @nt{function_call}; that depends on the use of the @nt{function_call}.
+  The @nt{function_call} is the master
   of any short-lived entities (such as @nt{aggregate}s used as parameters of
   types with task or controlled parts).]}
 @end{Ramification}

@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:42:49 $}
+@Comment{$Date: 2005/12/01 05:55:41 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2899,17 +2899,24 @@ scalar type @i(T), and for every discrete array type
 
 @begin{Resolution}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01],ARef=[AI95-00420-01]}
-@ChgAdded{Version=[2],Text=[At least one of the operands of an equality
+@ChgAdded{Version=[2],Type=[Leading],Text=[At least one of the operands of an equality
 operator for @i<universal_access> shall be of a specific anonymous access type.
-These equality operators shall not be used if either operand is of an
-access-to-object type whose
-designated type is @i<D> or @i<D>'Class, where @i<D> has a user-defined
-primitive equality operator with
-result type Boolean, that is declared immediately within the same
-declaration list as @i<D>, and at least one of whose operands is an access
-parameter also with designated type @i<D>, unless the predefined equality
-operator is identified using an expanded name with prefix denoting the package
-Standard.]}
+Unless the predefined equality operator is identified using an expanded name
+with @nt{prefix} denoting the package Standard, neither operand shall be of an
+access-to-object type whose designated type is @i<D> or @i<D>'Class, where
+@i<D> has a user-defined primitiv equality operator such that:]}
+@begin{Itemize}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[its result type is Boolean;]}
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[it is declared immediately within the same
+  declaration list as @i<D>; and]}
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[at least one of its operands is an
+  access parameter with designated type @i<D>.]}
+@end{Itemize}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2939,19 +2946,19 @@ Standard.]}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
-@ChgAdded{Version=[2],Text=[At least one of the operands of the equality operators for
-@i<universal_access> shall be null, or both shall be
-access-to-object types, or both shall be access-to-subprogram
-types. Further:]}
+@ChgAdded{Version=[2],Text=[At least one of the operands of the equality
+operators for @i<universal_access> shall be of type @i<universal_access>, or
+both shall be of access-to-object types, or both shall be of
+access-to-subprogram types. Further:]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[When both are access-to-object types, the
+@ChgAdded{Version=[2],Text=[When both are of access-to-object types, the
 designated types shall be the same or one shall cover the
 other, and if the designated types are elementary or array types,
 then the designated subtypes shall statically match;]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[When both are access-to-subprogram types,
+@ChgAdded{Version=[2],Text=[When both are of access-to-subprogram types,
 the designated profiles shall be subtype conformant.]}
 @end{Itemize}
 @begin{Reason}
@@ -2966,7 +2973,6 @@ the designated profiles shall be subtype conformant.]}
   this doesn't impose any further restrictions on Ada implementations.]}
 @end{Reason}
 @end{Legality}
-
 
 @begin{RunTime}
 For discrete types, the predefined relational operators are
@@ -3608,18 +3614,28 @@ any fixed point type.
 
 @begin{Resolution}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00364-01],ARef=[AI95-00420-01]}
-@ChgAdded{Version=[2],Text=[The above two fixed-fixed multiplying operators shall
+@ChgAdded{Version=[2],Type=[Leading],Text=[The above two fixed-fixed
+multiplying operators shall
 not be used in a context where the expected type for the result is itself
 @i(universal_fixed) @Redundant[@em the context has to identify some other
 numeric type to which the result is to be converted, either explicitly or
-implicitly]. An explicit conversion is required on the result when using the
-above fixed-fixed multiplication operator when either operand is of a type
-having a user-defined primitive multiplication operator declared immediately
-within the same declaration list as the type and with both formal
-parameters of a fixed-point type, unless the predefined universal
-operator is identified using an expanded name with the @nt{prefix} denoting
-the package Standard. A corresponding requirement applies to
-the universal fixed-fixed division operator.]}
+implicitly]. Unless the predefined universal operator is identified using an
+expanded name with @nt{prefix} denoting the package Standard, an explicit
+conversion is required on the result when using the above fixed-fixed
+multiplication operator if either operand is of a type having a user-defined
+primitive multiplication operator such that:]}
+@begin{Itemize}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[it is declared immediately within the same
+  declaration list as the type; and]}
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[both of its formal parameters are of a
+  fixed-point type.]}
+@end{Itemize}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00364-01],ARef=[AI95-00420-01]}
+@ChgAdded{Version=[2],Text=[A corresponding requirement applies to the
+universal fixed-fixed division operator.]}
 
 @begin(Discussion)
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3634,7 +3650,8 @@ expressions like A * B * C if A, B, and C are each of some fixed point
 type.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[On the other hand, X := A * B; is permitted by this rule, even if X, A, and B
+@ChgAdded{Version=[2],Text=[On the other hand, X := A * B; is permitted by
+this rule, even if X, A, and B
 are all of different fixed point types, since the expected type
 for the result of the multiplication is the type of X, which is necessarily
 not @i(universal_fixed).]}
@@ -3642,8 +3659,8 @@ not @i(universal_fixed).]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00364-01],ARef=[AI95-00420-01]}
 @ChgAdded{Version=[2],Text=[We have made these into Name Resolution rules to
 ensure that user-defined primitive fixed-fixed operators are not made unusable
-due to the presence of these universal fixed-fixed operators. But we do allow these
-operators to be used if prefixed by package Standard, so that they can be
+due to the presence of these universal fixed-fixed operators. But we do allow
+these operators to be used if prefixed by package Standard, so that they can be
 used in the definitions of user-defined operators.]}
 @end(Discussion)
 @end{Resolution}

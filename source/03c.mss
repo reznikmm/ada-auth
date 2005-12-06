@@ -1,9 +1,9 @@
  @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/11/24 02:15:01 $}
+@Comment{$Date: 2005/12/01 05:55:39 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -128,7 +128,8 @@ declared in the specification of the generic unit.
 @Defn{tagged type}
 A record type or private type that has the reserved word @key(tagged)
 in its declaration is called a @i(tagged) type.@Chg{Version=[2],New=[ In
-addition, an interface type is a tagged type (see @RefSecNum{Interface Types}).],Old=[]}
+addition, an interface type is a tagged type, as is a task or protected
+type derived from an interface (see @RefSecNum{Interface Types}).],Old=[]}
 @Redundant[When deriving
 from a tagged type, @Chg{Version=[2],New=[as],Old=[additional components
 may be defined. As]} for any derived type,
@@ -158,10 +159,8 @@ or in a generic formal part
 @Defn{private extension}
 @Defn2{Term=[extension], Sec=(of a private type)}
 Every type extension is also a tagged type, and
-is either a @i(record extension) of some other
-tagged type, a @i(private extension) of some other
-tagged type, or a non-interface task or protected type
-derived from an interface type (a synchronized tagged type @em see
+is a @i(record extension) or a @i(private extension) of some other
+tagged type, or a non-interface synchronized tagged type (see
 @RefSecNum{Interface Types}).
 A record extension is defined by a @nt<derived_type_definition>
 with a @nt<record_extension_part> (see @RefSecNum{Type Extensions})@Redundant[,
@@ -864,9 +863,10 @@ Tagged types are a new concept.
 @Defn{private extension}
 @Defn2{Term=[extension], Sec=(of a private type)}
 Every type extension is a tagged type, and
-is either a @i(record extension) or a @i(private extension) of
+is @Chg{Version=[2],New=[],Old=[either ]}a @i(record extension) or a
+@i(private extension) of
 some other tagged type@Chg{Version=[2],New=[, or a non-interface
- task or protected type derived from an interface type.],Old=[]}.]
+synchronized tagged type.],Old=[]}.]
 @end{Intro}
 
 @begin{MetaRules}
@@ -2428,13 +2428,11 @@ a concrete (nonabstract) indefinite tagged composite type.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
-@ChgAdded{Version=[2],Text=[A task interface is a @Redundant[(tagged,
-abstract)] task type. A protected interface is a @Redundant[(tagged,
-abstract)] protected type.]}
-
+@ChgAdded{Version=[2],Text=[A task interface is an @Redundant[abstract] task
+type. A protected interface is an @Redundant[abstract] protected type.]}
 @begin{TheProof}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The @lquotes@;(tagged, abstract)@rquotes follows
+  @ChgAdded{Version=[2],Text=[The @lquotes@;abstract@rquotes follows
   from the definition of an interface type.]}
 @end{TheProof}
 @begin{Reason}
@@ -4044,34 +4042,39 @@ the operand.
 return-by-reference type,
 the accessibility level of the result object is the same as
 that of the master that elaborated the function body. For
-any other function, the]} accessibility level of the result
-@Chg{Version=[2],New=[of a function call that is
-used to directly initialize part of an ],Old=[]}object
+any other function, the]} accessibility level of @Chg{Version=[2],New=[an
+@nt{aggregate} or ],Old=[]}the result
+@Chg{Version=[2],New=[of a function call @Redundant[(or equivalent use of
+an operator)] that is
+used (in its entity) to directly initialize part of an ],Old=[]}object
 is that of the
-@Chg{Version=[2],New=[object being initialized from
-the execution of the called function result. The accessibility level of the
-result of a function call that is renamed in whole or in part is that of
-the innermost master of the @nt{object_renaming_declaration}. Otherwise, the
-accessibility level of the result of a function call is that of the innermost
-master of the],Old=[execution of the called]} function@Chg{Version=[2],
-New=[ call],Old=[]}.
+@Chg{Version=[2],New=[object being initialized. In other contexts, the
+accessibility level of an @nt{aggregate} or the result of a function call
+is that of the innermost
+master of the @nt{aggregate} or],Old=[execution of the called]}
+function@Chg{Version=[2],New=[ call],Old=[]}.
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[The first sentence is talking about a static
+  use of the entire return object - a slice that happens to be the entire
+  return object doesn't count. On the other hand, this is intended to allow
+  parentheses and @nt{qualified_expression}s.]}
+
+  @ChgAdded{Version=[2],Text=[The @lquotes@;innermost master of
+  the function call@rquotes@; does not include the function call itself (which
+  might be a master).]}
+@end{Honest}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
-  @ChgAdded{Version=[2],Text=[We're talking about the entire result of the
-  function in the first sentence. If the function is used as a @nt{prefix}
-  other than in an object renaming, the third sentence applies. Similarly, an
-  @nt{assignment_statement} is not an initialization of an object, so the third
-  sentence applies.]}
+  @ChgAdded{Version=[2],Text=[If the function is used as a @nt{prefix},
+  the second sentence applies. Similarly, an
+  @nt{assignment_statement} is not an initialization of an object, so the
+  second sentence applies.]}
 
   @ChgAdded{Version=[2],Text=[We really mean the innermost master here,
-  which could be a very  short lifetime. Consider a function call used as
+  which could be a very short lifetime. Consider a function call used as
   a parameter of a procedure call. In this case the innermost master for
   the function call is the procedure call.]}
-
-  @Comment{This will be true, I think, but it isn't right now.
-  @ChgAdded{Version=[2],Text=[The second sentence is necessary because a
-  the @nt{name} here is a master, so the innermost master is the function
-  call itself. And that's too short.]}}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
@@ -4117,13 +4120,14 @@ constrained subtype.]}
 
 @begin{InnerItemize}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[For an access discriminant whose value is
+@ChgAdded{Version=[2],Text=[If the value of an access discriminant is
 determined by a @nt{discriminant_association} in a @nt{subtype_indication},
 the accessibility level of the object or subprogram designated by
 the associated value (or library level if the value is null);]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Type=[Leading],Text=[This deals with the following cases;]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[This deals with the following cases,
+    when they occur in the context of an @nt{allocator} or return statement:]}
   @begin{InnerItemize}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[An @nt{extension_aggregate} where the
@@ -4142,24 +4146,39 @@ the associated value (or library level if the value is null);]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[For an access discriminant of an object defined by
-an @nt{aggregate} where the value of the discriminant is determined by a
-@nt{component_association} in the @nt{aggregate}, the accessibility
-level of the object or subprogram designated by the associated
+@ChgAdded{Version=[2],Text=[If the value of the access discriminant is
+determined by a @nt{component_association} in an @nt{aggregate}, the
+accessibility level of the object or subprogram designated by the associated
 value (or library level if the value is null);]}
 
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[In this bullet, the @nt{aggregate} has to occur
+  in the context of an @nt{allocator} or return statement, while the
+  @nt{subtype_indication} of the previous bullet can occur anywhere
+  (it doesn't have to be directly given in the @nt{allocator} or
+  return statement).]}
+@end{Discussion}
+
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[For an access discriminant of any other object
+@ChgAdded{Version=[2],Text=[In other cases, where the value of the access
+discriminant is determined by an object
 with an unconstrained nominal subtype, the accessibility level of the object.]}
 
 @end{InnerItemize}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[In other words, if you know the value of the
-  discriminant from a discriminant constraint or an @nt{aggregate} component
+  discriminant for an @nt{allocator} or return statement from a discriminant
+  constraint or an @nt{aggregate} component
   association, then that determines the accessibility level; if you don't know
   it, then it is based on the object itself.]}
 @end{Discussion}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgAdded{Version=[2],Text=[The accessibility level of the anonymous access
+type of an access discriminant in any other context is that of the
+enclosing object.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01],ARef=[AI95-00254-01]}
 The accessibility level of
