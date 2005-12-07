@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/11/24 02:15:05 $}
+@Comment{$Date: 2005/12/06 06:34:01 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.57 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -353,7 +353,7 @@ the exception occurrence that caused transfer of control to the
 innermost enclosing handler is raised @Redundant[again].
 @begin{TheProof}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01]}
-@ChgAdded{Version=[2],Text=[The definition of Ada.Exceptions.Exception_Message
+@ChgAdded{Version=[2],Text=[The definition of Exceptions.Exception_Message
 includes a statement that the string is returned (see
 @RefSecNum{The Package Exceptions}). We describe the use of the string
 here so that we don't have an unexplained parameter in this subclause.]}
@@ -391,7 +391,7 @@ any force.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00361-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}The syntax of a
   @nt{raise_statement} is extended to include a string message. This is more
-  convenient than calling Ada.Exceptions.Exception_Message
+  convenient than calling Exceptions.Exception_Message
   (@SynI{exception_}@nt{name}'Identity, @SynI{string_}@nt{expression}), and
   should encourage the use of message strings when raising exceptions.]}
 @end{Extend95}
@@ -1112,9 +1112,9 @@ exception contains such a character.]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   Functions Wide_Exception_Name and Wide_Wide_Exception_Name, and procedures
   Read_Exception_Occurrence and Write_Exception_Occurrence
-  are newly added to Ada.Exceptions. If Ada.Exceptions is referenced in a
+  are newly added to Exceptions. If Exceptions is referenced in a
   @nt{use_clause}, and an entity @i<E> with the same @nt{defining_identifier}
-  as a new entity in Ada.Exceptions is defined in a
+  as a new entity in Exceptions is defined in a
   package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
   longer be use-visible, resulting in errors. This should be rare and is easily
   fixed if it does occur.]}
@@ -1123,7 +1123,7 @@ exception contains such a character.]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The package Ada.Exceptions is preelaborated, and types Exception_Id and
+  The package Exceptions is preelaborated, and types Exception_Id and
   Exception_Occurrence have preelaborable initialization, allowing this package
   to be used in preelaborated units.]}
 @end{Extend95}
@@ -1244,7 +1244,7 @@ language-defined library package exists:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @ChgAdded{Version=[2],Text=[A compilation unit containing a @nt{pragma} Assert has a
-semantic dependence on the Ada.Assertions library unit.]}
+semantic dependence on the Assertions library unit.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @ChgAdded{Version=[2],Text=[The assertion policy that applies to a generic unit
@@ -1260,12 +1260,12 @@ policy is Ignore at the point of a @nt{pragma} Assert, the pragma is ignored.
 If the assertion policy is Check at the point of a @nt{pragma} Assert, the
 elaboration of the pragma consists of evaluating the boolean expression, and if
 the result is False, evaluating the Message argument, if any, and raising the
-exception Ada.Assertions.Assertion_Error, with a message if the Message
+exception Assertions.Assertion_Error, with a message if the Message
 argument is provided.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Calling the procedure
-Ada.Assertions.Assert without a Message parameter is equivalent to:]}
+Assertions.Assert without a Message parameter is equivalent to:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1276,7 +1276,7 @@ Ada.Assertions.Assert without a Message parameter is equivalent to:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Calling the procedure
-Ada.Assertions.Assert with a Message parameter is equivalent to:]}
+Assertions.Assert with a Message parameter is equivalent to:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1317,7 +1317,7 @@ effect will not affect normal operation of the program.]}
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-Pragmas Assert and Assertion_Policy, and package Ada.Assertions are new.]}
+Pragmas Assert and Assertion_Policy, and package Assertions are new.]}
 @end{Extend95}
 
 @LabeledSubClause{Example of Exception Handling}

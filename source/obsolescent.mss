@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:43:03 $}
+@Comment{$Date: 2005/12/06 06:34:08 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -811,7 +811,7 @@ this pragma.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
-@ChgAdded{Version=[2],Text=[The following @nt<restrictions> involve dependence
+@ChgAdded{Version=[2],Text=[The following restrictions involve dependence
 on specific language-defined units. The more general restriction No_Dependence
 (see @RefSecNum{Language-Defined Restrictions}) should be used for this purpose.]}
 @end{Intro}

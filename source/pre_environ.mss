@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_environ.mss,v $ }
-@comment{ $Revision: 1.7 $ $Date: 2005/08/17 00:07:32 $ $Author: Randy $ }
+@comment{ $Revision: 1.8 $ $Date: 2005/12/06 06:34:05 $ $Author: Randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2005/08/17 00:07:32 $}
+@Comment{$Date: 2005/12/06 06:34:05 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Environment_Variables]}
 
@@ -217,6 +217,6 @@ Environment_Variables should be reflected immediately.]}]}
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00370-01]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-Package Ada.Environment_Variables is new.]}
+Package Environment_Variables is new.]}
 @end{Extend95}
 

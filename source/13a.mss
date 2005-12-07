@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:42:54 $}
+@Comment{$Date: 2005/12/06 06:34:02 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -562,13 +562,13 @@ at run time.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
 @ChgAdded{Version=[2],Text=[A @nt{type_declaration} is illegal if it has one or
-more progenitors, and a representation item applies to a progenitor or
-ancestor, and this representation item conflicts with the representation of
-some other progenitor or ancestor. The cases that cause conflicts are
+more progenitors, and a representation item applies to an ancestor, and this
+representation item conflicts with the representation of
+some other ancestor. The cases that cause conflicts are
 implementation defined.]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The cases that cause conflicts between the representation of
-the ancestor and progenitors of a @nt{type_declaration}.]}]}
+the ancestors of a @nt{type_declaration}.]}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[This rule is needed because it may be the case
@@ -589,7 +589,7 @@ the ancestor and progenitors of a @nt{type_declaration}.]}]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[Assume the implementation uses a
-  single tag with a default offset of zero, and it allows the use of
+  single tag with a default offset of zero, and that it allows the use of
   non-default locations for the tag (and thus accepts representation items
   like the one above). The representation item will force a non-default
   location for the tag (by putting a component other than the tag into the
@@ -620,9 +620,9 @@ the ancestor and progenitors of a @nt{type_declaration}.]}]}
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[An implementation can only use this rule to
-  reject @nt{type_declaration}s where either the ancestor or one of the
-  progenitors has a representation item. An implementation must ensure that
-  the default representations of ancestors and progenitors cannot conflict.]}
+  reject @nt{type_declaration}s where one its ancestors has a representation
+  item. An implementation must ensure that
+  the default representations of ancestors cannot conflict.]}
 @end{ImplNote}
 @end{Legality}
 

@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:42:53 $}
+@Comment{$Date: 2005/12/06 06:34:00 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3206,12 +3206,12 @@ initialization.]}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[A derived type has preelaborable initialization if its
 parent type has preelaborable initialization and (in the case of a derived
-record or protected type) if the non-inherited components all have
-preelaborable initialization. Moreover, a user-defined controlled type with an
+record extension) if the non-inherited components all have
+preelaborable initialization. However, a user-defined controlled type with an
 overriding Initialize procedure does not have preelaborable
 initialization.]}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Text=[A view of a type has preelaborable initialization if it
 is an elementary type, an array type whose component type has preelaborable
 initialization, a record type whose components all have preelaborable
@@ -3223,7 +3223,7 @@ initialization, or an interface type.]}
 preelaborable initialization. This pragma shall appear in the visible part
 of a package or generic package.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Text=[If the pragma appears in the first list of
 @nt{basic_declarative_item}s of a
 @nt<package_specification>, then the @nt<direct_name> shall denote the first

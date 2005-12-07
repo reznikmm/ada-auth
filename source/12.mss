@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/10/29 06:01:13 $}
+@Comment{$Date: 2005/12/06 06:34:02 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1322,15 +1322,17 @@ Old=[The type of a generic formal object of mode
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
-  @ChgAdded{Version=[2],Text=[for an instantiation that occurs
-  within the body of a generic unit @i{G} or within the body of a generic unit
-  declared within the declarative region of the generic unit @i{G}, and the
-  actual denotes a generic formal object of @i{G},
-  then the declaration of that formal object shall have a @nt{null_exclusion};]}
+  @ChgAdded{Version=[2],Text=[If the actual matching the
+  @nt{formal_object_declaration} denotes the generic formal object
+  of another generic unit @i{G}, and the instantation containing the actual
+  occurs within the body
+  of @i{G} or within the body of a generic unit declared within the declarative
+  region of @i{G}, then the declaration of the formal object of @i{G}
+  shall have a @nt{null_exclusion};]}
 
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[otherwise, the subtype of the actual
-  shall exclude null.
+  matching the @nt{formal_object_declaration} shall exclude null.
   @PDefn{generic contract issue}
   In addition to the places where @LegalityTitle normally apply
   (see @RefSecNum{Generic Instantiation}),
@@ -2712,15 +2714,18 @@ a @nt{formal_subprogram_declaration} that has an explicit @nt{null_exclusion}:]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
-  @ChgAdded{Version=[2],Text=[for an instantiation that occurs within the body
-  of a generic unit @i{G} or within the body of a generic unit declared within
-  the declarative region of the generic unit @i{G}, and the actual denotes a
-  generic formal subprogram of @i{G}, then the corresponding parameter or
-  result type of that formal subprogram shall have a @nt{null_exclusion};]}
+  @ChgAdded{Version=[2],Text=[if the actual matching the
+  @nt{formal_subprogram_declaration} denotes a generic formal object of
+  another generic unit @i{G}, and the instantiation containing the actual
+  that occurs within the body of a generic unit @i{G} or within the body of a
+  generic unit declared within the declarative region of
+  the generic unit @i{G}, then the corresponding parameter or result type of
+  the formal subprogram of @i{G} shall have a @nt{null_exclusion};]}
 
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[otherwise, the subtype of the corresponding
-  parameter or result type of the actual shall exclude null.
+  parameter or result type of the actual matching the
+  @nt{formal_subprogram_declaration} shall exclude null.
   @PDefn{generic contract issue}
   In addition to the places where @LegalityTitle normally apply
   (see @RefSecNum{Generic Instantiation}),

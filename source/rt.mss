@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.62 $ $Date: 2005/11/16 06:43:00 $ $Author: Randy $ }
+@comment{ $Revision: 1.63 $ $Date: 2005/12/06 06:34:07 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/11/16 06:43:00 $}
+@Comment{$Date: 2005/12/06 06:34:07 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -233,20 +233,17 @@ specified (see @RefSecNum{Entry Queuing Policies}).]
 
 @Leading@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00357-01]}
 At any time, the active priority of a task is the maximum of all the
-priorities the task is inheriting at that instant. @Chg{Version=[2],
-New=[Sources],Old=[For a task that is not
-held (see @RefSecNum{Asynchronous Task Control}), its base priority is always
-a source of priority inheritance. Other sources]} of priority inheritance
-are specified under the following
+priorities the task is inheriting at that instant. For a task that is not
+held (see @RefSecNum{Asynchronous Task Control}), its base priority is
+@Chg{Version=[2],New=[],Old=[always ]}a source of priority inheritance
+@Chg{Version=[2],New=[unless otherwise
+specified for a particular task dispatching policy],Old=[]}.
+Other sources of priority inheritance are specified under the following
 conditions:
 @begin{Discussion}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00357-01]}
-Other parts of the
-annex @Chg{Version=[2],New=[],Old=[, e.g.
-@RefSecNum{Asynchronous Task Control}, ]}define
-other sources of priority inheritance.@Chg{Version=[2],New=[ For instance,
-most dispatching policies define the base priority as a source of priority
-inheritance.],Old=[]}
+Other parts of the annex, e.g.
+@RefSecNum{Asynchronous Task Control}, define
+other sources of priority inheritance.
 @end{Discussion}
 @begin{itemize}
 
@@ -607,7 +604,7 @@ policies.]]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Priority_Specific_Dispatching> (@*
-@ @ @ @SynI{policy_}@Syn2{identifier}, @SynI{first_priority_}@Syn2{expression}, @SynI{last_priority_}@Syn2{expression});''}
+@ @ @ @ @ @SynI{policy_}@Syn2{identifier}, @SynI{first_priority_}@Syn2{expression}, @SynI{last_priority_}@Syn2{expression});''}
 
 @end{Syntax}
 
@@ -1196,7 +1193,7 @@ FIFO_Within_Priorities.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[The procedures Set_Quantum set the required Quantum
-value for a single priority level Pri or a range of levels Low .. High.
+value for a single priority level Pri or a range of priority levels Low .. High.
 If no quantum is set for a Round Robin priority level, Default_Quantum is used.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
@@ -1211,7 +1208,7 @@ Round_Robin_Within_Priorities; otherwise it returns False.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[A call of Actual_Quantum or Set_Quantum raises
 exception Dispatching.Dispatching_Policy_Error if a predefined policy other
-than Round_Robin_Within_Priorities applies to the specified priority,
+than Round_Robin_Within_Priorities applies to the specified priority
 or any of the priorities in the specified range.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
@@ -1324,15 +1321,13 @@ priority will not be subject to round robin dispatching.]}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[The deadline of a task is an indication of the
-urgency of the task; it represents a point on an ideal physical time line.
-For policies that use deadlines, whenever tasks compete for processors or other
-implementation-defined resources, the resources are allocated to the task with
-the earliest deadline.]}
+urgency of the task; it represents a point on an ideal physical time line.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[This clause defines a package for representing a
-task's deadline and a dispatching policy that defines Earliest Deadline First
-(EDF) dispatching. A pragma is defined to assign an initial deadline to a task.]}
+@ChgAdded{Version=[2],Text=[This clause defines a package for representing the
+deadline of a task and a dispatching policy that defines Earliest Deadline
+First (EDF) dispatching. A pragma is defined to assign an initial deadline to a
+task.]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1485,10 +1480,10 @@ again it will have deadline Delay_Until_Time + Deadline_Offset.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[On a system with a single processor, the setting of
-a task's deadline to the new value occurs immediately at the first point that
-is outside the execution of a protected action. If the task is
-currently on a ready queue it is removed and re-entered on to the ready queue
-determined by the rules defined below.]}
+the deadline of a task to the new value occurs immediately at the first point
+that is outside the execution of a protected action. If the task is currently
+on a ready queue it is removed and re-entered on to the ready queue determined
+by the rules defined below.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[When EDF_Across_Priorities is specified for
@@ -1523,7 +1518,8 @@ the ready queue for its active priority.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For a task @i<T> to which policy
-EDF_Across_Priorities applies, the active priority when first activated or
+EDF_Across_Priorities applies, the base priority is not a source of
+priority inheritance; the active priority when first activated or
 while it is blocked is defined as the maximum of the following:]}
 
 @begin{Itemize}
@@ -1565,13 +1561,13 @@ inheriting a higher priority.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[When the setting of the base priority of a task
-takes effect and the new priority is in a range specified as
+@ChgAdded{Version=[2],Text=[When the setting of the base priority of a ready
+task takes effect and the new priority is in a range specified as
 EDF_Across_Priorities, the task is added to the ready queue
 corresponding to its new active priority, as determined above.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[For all the operations defined in Ada.Dispatching.EDF,
+@ChgAdded{Version=[2],Text=[For all the operations defined in Dispatching.EDF,
 Tasking_Error is raised if the task identified by T has terminated.
 Program_Error is raised if the value of T is Null_Task_Id.]}
 
@@ -1603,11 +1599,11 @@ the execution of the program is erroneous.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[On a multiprocessor, the implementation shall
-document any conditions that cause the completion of the setting of a task's
-deadline to be delayed later than what is specified for a single processor.]}
+document any conditions that cause the completion of the setting of the deadline
+of a task to be delayed later than what is specified for a single processor.]}
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[Any conditions that cause the completion of the setting of a task's
-deadline to be delayed for a multiprocessor.]}]}
+Text=[Any conditions that cause the completion of the setting of the deadline
+of a task to be delayed for a multiprocessor.]}]}
 @end{DocReq}
 
 @begin{Notes}
@@ -1679,9 +1675,9 @@ A Locking_Policy pragma is a configuration pragma.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00327-01]}
 @Defn{locking policy}
 @Redundant[A locking policy specifies the details of protected object
-locking. @Chg{Version=[2],New=[While all protected objects have a priority,
-these],Old=[These]} rules specify @Chg{Version=[2],New=[the meaning of
-the priority of a],Old=[whether or not]} protected @Chg{Version=[2],
+locking. @Chg{Version=[2],New=[All protected objects have a priority.
+The locking policy specifies the meaning of
+the priority of a],Old=[These rules specify whether or not]} protected @Chg{Version=[2],
 New=[object],Old=[objects have
 priorities]}, and the relationships between these priorities and
 task priorities. In addition, the policy specifies the state of a task
@@ -2261,7 +2257,7 @@ to Null_Task_Id.
 Old=[Setting]} the @Chg{Version=[2],New=[],Old=[task's ]}base
 priority@Chg{Version=[2],New=[ of a task @i{T}],Old=[]}
 to the new value @Chg{Version=[2],
-New=[occurs immediately at the first point that @i{T} is
+New=[occurs immediately at the first point when @i{T} is
 outside the execution of],Old=[takes place as soon
 as is practical but not while the task is performing]} a
 protected action@Chg{Version=[2],New=[],Old=[.
@@ -2486,15 +2482,16 @@ is defined for @PrefixType{a @nt{prefix} P that denotes a protected object}:]}
   Leading=<F>, Prefix=<P>, AttrName=<Priority>, ARef=[AI95-00327-01],
   Text=[@Chg{Version=[2],New=[Denotes a non-aliased component of the
   protected object P. This component is of type System.Any_Priority and its
-  value is the priority of P. A reference to this attribute shall appear only
+  value is the priority of P. P'Priority denotes a variable if and only if P
+  denotes a variable. A reference to this attribute shall appear only
   within the body of P.],Old=[]}]}
 @EndPrefixType{}
 @end{Description}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
 @ChgAdded{Version=[2],Text=[The initial value of this attribute is
-the initial value of the priority of the protected object, and can
-be changed by an assignment.]}
+the initial value of the priority of the protected object@Redundant[, and can
+be changed by an assignment].]}
 @end{StaticSem}
 
 @begin{Runtime}
@@ -4565,9 +4562,10 @@ order of the components of the array is unspecified.]}
 @ChgAdded{Version=[2],Text=[The procedure Replenish loads the group budget GB
 with To as the Time_Span value. The exception Group_Budget_Error is raised if
 the Time_Span value To is non-positive. Any execution of any member of the
-group of tasks results in the budget counting down. When the budget becomes
-exhausted (reaches Time_Span_Zero), the associated handler is executed if the
-handler of group budget GB is set; the tasks continue to execute.]}
+group of tasks results in the budget counting down, unless exhausted. When the
+budget becomes exhausted (reaches Time_Span_Zero), the associated handler is
+executed if the handler of group budget GB is set. Nevertheless, the tasks
+continue to execute.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
 @ChgAdded{Version=[2],Text=[The procedure Add modifies the budget of the group
@@ -4714,7 +4712,7 @@ language-defined library package exists:]}
   @key{function} @AdaSubDefn{Current_Handler} (Event : Timing_Event)
        @key{return} Timing_Event_Handler;
   @key{procedure} @AdaSubDefn{Cancel_Handler} (Event     : @key{in out} Timing_Event;
-             Cancelled : @key{out} Boolean);]}
+                            Cancelled : @key{out} Boolean);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[  @key{function} @AdaSubDefn{Time_Of_Event} (Event : Timing_Event) @key{return} Time;]}

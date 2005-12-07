@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.48 $ $Date: 2005/11/16 06:42:58 $ $Author: Randy $ }
+@comment{ $Revision: 1.49 $ $Date: 2005/12/06 06:34:06 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:42:58 $}
+@Comment{$Date: 2005/12/06 06:34:06 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -276,7 +276,7 @@ properly on machines with native sizes that are not 32 bits. For instance, a
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The package Ada.Containers is new.]}
+  The package Containers is new.]}
 @end{Extend95}
 
 
@@ -739,10 +739,19 @@ to the Index_Type'Last.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[@Redundant[Some operations of this generic package
+have access-to-subprogram parameters. To ensure such operations are
+well-defined, these operations guard against certain actions by the designated
+subprogram. In particular, some operations check for @lquotes@;tampering with
+cursors@rquotes of a container because they depend on the set of elements of
+the container remaining constant, and others check for @lquotes@;tampering with
+elements@rquotes of a container because they depend on elements of the
+container not being replaced.]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with cursors],Sec=[of a vector]}
-Some operations are assumed to work on a constant
-set of elements. During the execution of such an operation, a subprogram is said to
-@i<tamper with cursors> of a vector object @i<V> if:]}
+A subprogram is said to
+@i{tamper with cursors} of a vector object @i<V> if:]}
 
 @begin{Itemize}
 
@@ -775,8 +784,7 @@ a parameter.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a vector]}
-Some operations are assumed not to replace elements. During the execution of such
-an operation, a subprogram is said to @i{tamper with elements} of a vector object @i<V> if:]}
+A subprogram is said to @i{tamper with elements} of a vector object @i<V> if:]}
 
 @begin{Itemize}
 
@@ -1521,7 +1529,7 @@ and J.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If either I or J is No_Element,
 then Constraint_Error is propagated. If either I or J do not designate an
-element in Container, then Program_Error is propagated. Otherwise Swap
+element in Container, then Program_Error is propagated. Otherwise, Swap
 exchanges the values of the elements designated by I and J.]}
 
 @begin{Ramification}
@@ -2171,7 +2179,7 @@ value of Last_Index.]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The package Ada.Containers.Vectors is new.]}
+  The package Containers.Vectors is new.]}
 @end{Extend95}
 
 @LabeledAddedSubclause{Version=[2],
@@ -2470,10 +2478,18 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[@Redundant[Some operations of this generic package
+have access-to-subprogram parameters. To ensure such operations are
+well-defined, these operations guard against certain actions by the designated
+subprogram. In particular, some operations check for @lquotes@;tampering with
+cursors@rquotes of a container because they depend on the set of elements of
+the container remaining constant, and others check for @lquotes@;tampering with
+elements@rquotes of a container because they depend on elements of the
+container not being replaced.]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with cursors],Sec=[of a list]}
-Some operations are assumed to work on a constant set of elements. During
-the execution of such
-an operation, a subprogram is said to @i{tamper with cursors} of a list object
+A subprogram is said to @i{tamper with cursors} of a list object
 @i<L> if:]}
 
 @begin{Itemize}
@@ -2510,8 +2526,7 @@ parameter.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a list]}
-Some operations are assumed not to replace elements. During the execution of
-such an operation, a subprogram is said to @i{tamper with elements} of a list
+A subprogram is said to @i{tamper with elements} of a list
 object @i<L> if:]}
 
 @begin{Itemize}
@@ -2806,7 +2821,7 @@ in reverse order.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If either I or J is No_Element,
 then Constraint_Error is propagated. If either I or J do not designate an
-element in Container, then Program_Error is propagated. Otherwise Swap
+element in Container, then Program_Error is propagated. Otherwise, Swap
 exchanges the values of the elements designated by I and J.]}
 
 @begin{Ramification}
@@ -3315,7 +3330,7 @@ probably not a stable sort.]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The generic package Ada.Containers.Doubly_Linked_Lists is new.]}
+  The generic package Containers.Doubly_Linked_Lists is new.]}
 @end{Extend95}
 
 
@@ -3389,10 +3404,19 @@ once until the last node is reached. The exact definition of these terms is
 different for hashed maps and ordered maps.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[@Redundant[Some operations of these generic packages
+have access-to-subprogram parameters. To ensure such operations are
+well-defined, these operations guard against certain actions by the designated
+subprogram. In particular, some operations check for @lquotes@;tampering with
+cursors@rquotes of a container because they depend on the set of elements of
+the container remaining constant, and others check for @lquotes@;tampering with
+elements@rquotes of a container because they depend on elements of the
+container not being replaced.]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[
 @Defn2{Term=[tamper with cursors],Sec=[of a map]}
-Some operations are assumed to work on a constant set of elements. During the
-execution of such an operation, a subprogram is said to @i{tamper with cursors} of a map object @i<M>
+A subprogram is said to @i{tamper with cursors} of a map object @i<M>
 if:]}
 
 @begin{Itemize}
@@ -3431,8 +3455,7 @@ with the cursors of @i<M>.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[
 @Defn2{Term=[tamper with elements],Sec=[of a map]}
-Some operations are assumed not to replace elements. During the execution of
-such an operation, a subprogram is said to @i{tamper with elements} of a map object @i<M> if:]}
+A subprogram is said to @i{tamper with elements} of a map object @i<M> if:]}
 
 @begin{Itemize}
 
@@ -4541,7 +4564,7 @@ a cursor parameter should be @i{O}(1).]}]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The generic package Ada.Containers.Hashed_Maps is new.]}
+  The generic package Containers.Hashed_Maps is new.]}
 @end{Extend95}
 
 
@@ -5040,7 +5063,7 @@ a cursor parameter should be @i{O}(1).]}]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The generic package Ada.Containers.Ordered_Maps is new.]}
+  The generic package Containers.Ordered_Maps is new.]}
 @end{Extend95}
 
 
@@ -5112,10 +5135,18 @@ last element is reached. The exact definition of these terms is different for
 hashed sets and ordered sets.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgAdded{Version=[2],Text=[@Redundant[Some operations of these generic packages
+have access-to-subprogram parameters. To ensure such operations are
+well-defined, these operations guard against certain actions by the designated
+subprogram. In particular, some operations check for @lquotes@;tampering with
+cursors@rquotes of a container because they depend on the set of elements of
+the container remaining constant, and others check for @lquotes@;tampering with
+elements@rquotes of a container because they depend on elements of the
+container not being replaced.]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with cursors],Sec=[of a set]}
-Some operations are assumed to work on a constant set of elements. During the
-execution of such an operation, a subprogram is said to @i{tamper with cursors}
-of a set object @i{S} if:]}
+A subprogram is said to @i{tamper with cursors} of a set object @i{S} if:]}
 
 @begin{Itemize}
 
@@ -5154,8 +5185,7 @@ parameter; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a set]}
-Some operations are assumed not to replace elements. During the execution of
-such an operation, a subprogram is said to @i{tamper with elements} of a set
+A subprogram is said to @i{tamper with elements} of a set
 object @i<S> if:]}
 
 @begin{Itemize}
@@ -6334,7 +6364,7 @@ average time complexity of Containers.Hashed_Sets.Reserve_Capacity should be
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The generic package Ada.Containers.Hashed_Sets is new.]}
+  The generic package Containers.Hashed_Sets is new.]}
 @end{Extend95}
 
 @LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Ordered_Sets]}
@@ -6877,7 +6907,7 @@ of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The generic package Ada.Containers.Ordered_Sets is new.]}
+  The generic package Containers.Ordered_Sets is new.]}
 @end{Extend95}
 
 
@@ -6939,7 +6969,7 @@ of Update_Element may be constrained even if Element_Type is unconstrained.]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The generic package Ada.Containers.Indefinite_Vectors is new.]}
+  The generic package Containers.Indefinite_Vectors is new.]}
 @end{Extend95}
 
 
@@ -7002,7 +7032,7 @@ of Update_Element may be constrained even if Element_Type is unconstrained.]}
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The generic package Ada.Containers.Indefinite_Doubly_Linked_Lists is new.]}
+The generic package Containers.Indefinite_Doubly_Linked_Lists is new.]}
 @end{Extend95}
 
 
@@ -7066,7 +7096,7 @@ of Update_Element may be constrained even if Element_Type is unconstrained.]}
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The generic package Ada.Containers.Indefinite_Hashed_Maps is new.]}
+The generic package Containers.Indefinite_Hashed_Maps is new.]}
 @end{Extend95}
 
 
@@ -7131,7 +7161,7 @@ of Update_Element may be constrained even if Element_Type is unconstrained.]}
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The generic package Ada.Containers.Indefinite_Ordered_Maps is new.]}
+The generic package Containers.Indefinite_Ordered_Maps is new.]}
 @end{Extend95}
 
 
@@ -7169,7 +7199,7 @@ unconstrained.]}
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The generic package Ada.Containers.Indefinite_Hashed_Sets is new.]}
+The generic package Containers.Indefinite_Hashed_Sets is new.]}
 @end{Extend95}
 
 
@@ -7206,7 +7236,7 @@ unconstrained.]}
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The generic package Ada.Containers.Indefinite_Ordered_Sets is new.]}
+The generic package Containers.Indefinite_Ordered_Sets is new.]}
 @end{Extend95}
 
 
@@ -7349,7 +7379,7 @@ should minimize copying of elements.]}]}
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The generic packages Ada.Containers.Generic_Array_Sort and
-Ada.Containers.Generic_Constrained_Array_Sort are new.]}
+The generic packages Containers.Generic_Array_Sort and
+Containers.Generic_Constrained_Array_Sort are new.]}
 @end{Extend95}
 

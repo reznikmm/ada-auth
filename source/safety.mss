@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.34 $ $Date: 2005/11/16 06:43:01 $ $Author: Randy $ }
+@Comment{ $Revision: 1.35 $ $Date: 2005/12/06 06:34:08 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:43:01 $}
+@Comment{$Date: 2005/12/06 06:34:08 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -103,13 +103,13 @@ It applies to all
 @begin{DocReq}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 If a @nt{pragma} Normalize_Scalars applies,
-the implementation shall document the implicit initial value for
-@Chg{Version=[2],New=[objects of ],Old=[]}scalar subtypes,
+the implementation shall document the implicit initial @Chg{Version=[2],
+New=[values],Old=[value]} for scalar subtypes,
 and shall identify each case in which such a value is used
 and is not an invalid representation.
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[If
-a @nt{pragma} Normalize_Scalars applies, the implicit initial value for
-objects of scalar subtypes shall be documented. Such a value should be an
+a @nt{pragma} Normalize_Scalars applies, the implicit initial values of
+scalar subtypes shall be documented. Such a value should be an
 invalid representation when possible; any cases when is it not shall be
 documented.]}]}
 @begin{Honest}
@@ -137,8 +137,8 @@ the object code listing or similar output produced during compilation.
 
 @begin{ImplAdvice}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
-Whenever possible, the implicit initial value for @Chg{Version=[2],New=[an object
-of ],Old=[]}a scalar subtype
+Whenever possible, the implicit initial @Chg{Version=[2],
+New=[values],Old=[value]} for a scalar subtype
 should be an invalid representation
 (see @RefSecNum{Data Validity}).
 @begin{Discussion}
@@ -882,36 +882,25 @@ shall support:]}
 @ChgAdded{Version=[2],Text=[the restrictions defined in this subclause; and]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[the following uses of
-@SynI{restriction_parameter_}@nt{identifier}
-No_Dependence defined in @RefSecNum{Language-Defined Restrictions}:
-No_Dependence => Ada.Unchecked_Deallocation and No_Dependence =>
-Ada.Unchecked_Conversion; and]}
-@begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Other uses of No_Dependence can also be
-  appropriate for high-integrity systems. The specific mention of two uses
-  is meant to replace the identifiers now banished to
-  @RefSec{Dependence Restriction Identifiers}.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Restriction No_Dependence => Ada.Unchecked_Deallocation
-  would be useful in those
-  contexts in which heap storage is needed on program start-up, but need not be
-  increased subsequently. The danger of a dangling pointer can therefore be
-  avoided.]}@ChgNote{Moved up from below.}
-@end{Discussion}
-
-@ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[the following restrictions defined in
 @RefSecNum{Tasking Restrictions}: No_Task_Hierarchy,
 No_Abort_Statement, No_Implicit_Heap_Allocation; and]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[the following uses of @SynI{restriction_parameter_}@nt{identifier}s
-defined in @RefSecNum{Tasking Restrictions}, which are
-checked prior to program execution: Max_Task_Entries => 0,
-Max_Asynchronous_Select_Nesting => 0, and Max_Tasks => 0; and]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[the following uses of
+@SynI{restriction_parameter_}@nt{identifier}s defined in
+@RefSecNum{Tasking Restrictions}@Redundant[, which are checked
+prior to program execution]:]}
+@begin{InnerItemize}
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[Max_Task_Entries => 0,]}
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[Max_Asynchronous_Select_Nesting => 0, and]}
+
+  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgAdded{Version=[2],Text=[Max_Tasks => 0; and]}
+@end{InnerItemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00347-01]}
 @ChgAdded{Version=[2],Text=[the @key{pragma} Profile(Ravenscar).]}
@@ -1014,10 +1003,34 @@ still formally erroneous.
 @end{Erron}
 
 @ChgNote{I can't find any reason in the normative wording for this item;
-therefore I've removed it. The notes below refer only to a non-standard mode,
-which is irrelevant in the Standard.}
+therefore I've removed it. The notes below (commented out anyway) refer only
+to a non-standard mode, which is irrelevant in the Standard.}
 @ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
 Text=[Any restrictions on pragma Restrictions.]}]}
+
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
+@ChgAdded{Version=[2],Text=[Uses of @Syni{restriction_parameter_}@nt{identifier}
+No_Dependence defined in @RefSecNum{Language-Defined Restrictions}:
+No_Dependence => Ada.Unchecked_Deallocation and No_Dependence =>
+Ada.Unchecked_Conversion may be appropriate for high-integrity systems.
+Other uses of No_Dependence can also be appropriate for high-integrity
+systems.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The specific mention of these two uses
+  is meant to replace the identifiers now banished to
+  @RefSec{Dependence Restriction Identifiers}.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Restriction No_Dependence => Ada.Unchecked_Deallocation
+  would be useful in those
+  contexts in which heap storage is needed on program start-up, but need not be
+  increased subsequently. The danger of a dangling pointer can therefore be
+  avoided.]}@ChgNote{Moved down from above.}
+@end{Discussion}
+
+@end{Notes}
 
 @begin{comment}
 @begin{Notes}

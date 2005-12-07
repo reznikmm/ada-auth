@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/11/24 02:15:04 $}
+@Comment{$Date: 2005/12/06 06:33:58 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1982,11 +1982,12 @@ subtype conformant designated profiles.
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
-  @ChgAdded{Version=[2],Text=[if the @nt{object_renaming_declaration} occurs
-  within the body of a generic unit @i<G> or within the body of a generic unit
-  declared within the declarative region of the generic unit @i<G>, and the
-  @Syni{object_}@nt{name} denotes a generic formal object of @i<G>,
-  then the declaration of that formal object shall have a @nt{null_exclusion};]}
+  @ChgAdded{Version=[2],Text=[if the @Syni{object_}@nt{name} denotes a
+  generic formal object of a generic unit @i{G}, and the
+  @nt{object_renaming_declaration} occurs within the body of @i{G} or within
+  the body of a generic unit declared within the declarative region of @i{G},
+  then the declaration of the formal object of @i{G} shall have a
+  @nt{null_exclusion};]}
 
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[otherwise, the subtype of the
@@ -2327,12 +2328,13 @@ the @nt{subprogram_specification} that has an explicit @nt{null_exclusion}:]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
-  @ChgAdded{Version=[2],Text=[if the @nt{subprogram_renaming_declaration}
-  occurs within the body of a generic unit @i<G> or within the body of a
-  generic unit declared within the declarative region of the generic unit
-  @i<G>, and the @Syni{callable_entity_}@nt{name} denotes a generic formal
-  subprogram of @i<G>, then the corresponding parameter or result subtype of
-  that formal subprogram shall have a @nt{null_exclusion};]}
+  @ChgAdded{Version=[2],Text=[if the @Syni{callable_entity_}@nt{name}
+  denotes a generic formal subprogram of
+  a generic unit @i{G}, and the @nt{subprogram_renaming_declaration} occurs
+  within the body of a generic unit @i{G} or within the body of a generic unit
+  declared within the declarative region of the generic unit @i{G}, then the
+  corresponding parameter or result subtype of the formal subprogram of @i{G}
+  shall have a @nt{null_exclusion};]}
 
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[otherwise, the subtype of the corresponding

@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/11/24 02:15:06 $}
+@Comment{$Date: 2005/12/06 06:34:03 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 
 @LabeledClause{The Package System}
 
@@ -2409,9 +2409,12 @@ and its value shall be nonnegative.
 @end{Legality}
 
 @begin{StaticSem}
-The set of @nt{restrictions} is implementation defined.
-@ImplDef{The set of @nt{restrictions} allowed in a @nt{pragma}
-Restrictions.}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00394-01]}
+The set of @Chg{Version=[2],New=[restrictions],Old=[@nt{restrictions}]} is
+implementation defined.
+@ChgImplDef{Version=[2],Kind=[Revised],Text=[The set of
+@Chg{Version=[2],New=[restrictions],Old=[@nt{restrictions}]}
+allowed in a @nt{pragma} Restrictions.]}
 @end{StaticSem}
 
 @begin{LinkTime}
@@ -3450,13 +3453,10 @@ the result of the Input function.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
 @ChgAdded{Version=[2],Text=[@Defn{support external streaming}
 @Defn2{Term=[external streaming],Sec={type supports}}
-A type is said to @i{support external streaming} if Read and Write attributes
+@Redundant[A type is said to @i{support external streaming} if Read and Write attributes
 are provided for sending values of such a type between active
 partitions, with Write marshalling the representation, and Read unmarshalling
-the representation.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
-@ChgAdded{Version=[2],Text=[A limited type supports external streaming only if
+the representation.] A limited type supports external streaming only if
 it has available Read and Write attributes. A type with a part that is of an
 access type supports external streaming only if that access type or the type of
 some part that includes the access type component, has Read and Write

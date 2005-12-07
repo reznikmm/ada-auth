@@ -1,9 +1,9 @@
  @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/12/01 05:55:39 $}
+@Comment{$Date: 2005/12/06 06:33:57 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -670,7 +670,8 @@ tag passed is No_Tag.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
 @ChgAdded{Version=[2],Text=[An instance of Tags.Generic_Dispatching_Constructor
-raises Tag_Error if The_Tag does not represent a concrete descendant of T.
+raises Tag_Error if The_Tag does not represent a concrete descendant of T or
+if the innermost master of this descendant is not also a master of the instance.
 Otherwise, it dispatches to the primitive function denoted by the formal
 Constructor for the type identified by The_Tag, passing Params, and
 returns the result. Any exception raised by the function is propagated.]}
@@ -680,7 +681,11 @@ returns the result. Any exception raised by the function is propagated.]}
 @ChgAdded{Version=[2],Text=[The tag check checks both that The_Tag is in
 T'Class, and that it is not abstract. These checks are similar to the ones
 required by streams for T'Class'Input
-(see @RefSecNum{Stream-Oriented Attributes}).]}
+(see @RefSecNum{Stream-Oriented Attributes}). In addition, there is a
+check that the tag identifies a type declared on the current dynamic
+call chain, and not a more nested type or a type declared by another
+task. This check is not necessary for streams, because the stream attributes
+are declared at the same dynamic level as the type used.]}
 @end{Ramification}
 
 @end{RunTime}
@@ -688,13 +693,20 @@ required by streams for T'Class'Input
 @begin{Erron}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
-If the internal tag provided to an instance of
-Tags.Generic_Dispatching_Constructor identifies a type that is not
+If an internal tag provided to an instance of
+Tags.Generic_Dispatching_Constructor or to any subprogram declared in
+package Tags identifies either a type that is not
 library-level and whose tag has not been created
 (see @RefSecNum{Freezing Rules}), or does not exist in the partition at the
-time of the call, execution is erroneous.]}
+time of the call, then execution is erroneous.]}
 
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[One reason that a type might not exist in
+the partition is that the tag refers to a type whose declaration was
+elaborated as part of an execution of a @nt{subprogram_body} which has been
+left (see @RefSecNum{Completion and Finalization}).]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[We exclude tags of library-level types from
 the current execution of the partition, because misuse of such tags
@@ -704,38 +716,86 @@ cannot return the tag of a library-level type that has not been created.
 All ancestors of a tagged type must be frozen no later than the (full)
 declaration of a type that uses them, so Parent_Tag and Interface_Ancestor_Tags
 cannot return a tag that has not been created.
-Finally, library-level types never cease to exist. Thus, if the tag comes from
+Finally, library-level types never cease to exist while the partition is
+executing. Thus, if the tag comes from
 a library-level type, there cannot be erroneous execution (the use of
 Descendant_Tag rather than Internal_Tag can help ensure that the tag is
 of a library-level type). This is also similar to the rules for T'Class'Input
 (see @RefSecNum{Stream-Oriented Attributes}).]}
 @end{Ramification}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
+@ChgAdded{Version=[2],Text=[Ada 95 allowed Tag_Error in this case, or expected
+the functions to work. This worked because most implementations used tags
+constructed at link-time, and each elaboration of the same @nt{type_declaration}
+produced the same tag. However, Ada 2005 requires at least part of the tags
+to be dynamically constructed for a type derived from a type at a shallower
+level. For dynamically constructed tags, detecting the error can be expensive
+and unreliable. To see
+this, consider a program containing two tasks. Task A creates a nested tagged
+type, passes the tag to task B (which saves it), and then terminates. The
+nested tag (if dynamic) probably will need to refer in some way to the stack
+frame for task A.
+If task B later tries to use the tag created by task A, the tag's reference to
+the stack frame of A probably is a dangling pointer. Avoiding this would
+require some sort of protected tag manager, which would be a bottleneck in a
+program's performance. Moreover, we'd still have a race condition; if task A
+terminated after the tag check, but before the tag was used, we'd still have
+a problem. That means that all of these operations would have to be serialized.
+That could be a significant performance drain, whether or not nested tagged
+types are every used. Therefore, we allow execution to become erroneous
+as we do for other dangling pointers. If the implementation can detect the
+error, we recommend that Tag_Error be raised.]}
+@end{Discussion}
 @end{Erron}
 
 @begin{ImplPerm}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00279-01]}
-The implementation of the functions in
-Ada.Tags may raise Tag_Error if no specific type
-corresponding to the tag@Chg{Version=[2],New=[ or external tag],Old=[]} passed
-as a parameter exists in the partition at the time the function is called.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02],ARef=[AI95-00279-01]}
+The implementation of @Chg{Version=[2],New=[Internal_Tag and Descendant_Tag],
+Old=[the functions in Ada.Tags]}
+may raise Tag_Error if no specific type corresponding to the
+@Chg{Version=[2],New=[string External],Old=[tag]} passed
+as a parameter exists in the partition at the time the function is
+called@Chg{Version=[2],New=[, or if there is no such type whose innermost
+master is a master of the point of the function call],Old=[]}.
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02],ARef=[AI95-00279-01],ARef=[AI95-00344-01]}
-In most implementations,
-repeated elaborations of the same@Chg{Version=[2],New=[ non-extension],Old=[]}
+@Chg{Version=[2],New=[Locking would be required to ensure that the mapping of
+strings to tags never returned tags of types which no longer exist, because
+types can cease to exist (because they belong to another task, as described
+above) during the execution of these operations. Moreover, even if these
+functions did use locking, that would not prevent the type from ceasing to
+exist at the instant that the function returned. Thus, we do not require the
+overhead of locking;],Old=[In most implementations,
+repeated elaborations of the same
 @nt{type_declaration} will all produce the same tag.
 In such an implementation, Tag_Error will be raised in cases where the
-internal or external tag was passed from a different partition@Chg{Version=[2],
-New=[, or when a library-level type hasn't yet been created],Old=[]}.
+internal or external tag was passed from a different partition.
 However, some implementations might create a new tag value at run time
-for each elaboration of a @nt{type_declaration}.@Chg{Version=[2],New=[ (This is
-required if the type is derived from a type at a shallower level.)],Old=[]}
+for each elaboration of a @nt{type_declaration}.
 In that case, Tag_Error could also be raised if the created type
 no longer exists because the subprogram
 containing it has returned, for example.
-We don't require the latter behavior@Chg{Version=[2],New=[ for non-library-level
-types],Old=[]}; hence the word @lquotes@;may@rquotes@; in this rule.
+We don't require the latter behavior;]} hence the word
+@lquotes@;may@rquotes@; in this rule.
 @end{Reason}
 @end{ImplPerm}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgAdded{Version=[2],Text=[Internal_Tag should return the tag of a type whose
+innermost master is the master of the point of the function call.]}
+@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],
+New=[Tags.Internal_Tag should return the tag of a type whose
+innermost master is the master of the point of the function call.],Old=[]}.]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02],ARef=[AI95-00344-01]}
+@ChgAdded{Version=[2],Text=[It's not helpful if Internal_Tag returns the tag of
+some type in another task when one is available in the task that made the call.
+We don't require this behavior (because it requires the same implementation
+techniques we decided not to insist on previously), but encourage it.]}
+@end{Reason}
+@end{ImplAdvice}
 
 @begin{Notes}
 A type declared with the reserved word @key[tagged]
@@ -4051,7 +4111,7 @@ is that of the
 @Chg{Version=[2],New=[object being initialized. In other contexts, the
 accessibility level of an @nt{aggregate} or the result of a function call
 is that of the innermost
-master of the @nt{aggregate} or],Old=[execution of the called]}
+master that evaluated the @nt{aggregate} or],Old=[execution of the called]}
 function@Chg{Version=[2],New=[ call],Old=[]}.
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
@@ -4059,10 +4119,6 @@ function@Chg{Version=[2],New=[ call],Old=[]}.
   use of the entire return object - a slice that happens to be the entire
   return object doesn't count. On the other hand, this is intended to allow
   parentheses and @nt{qualified_expression}s.]}
-
-  @ChgAdded{Version=[2],Text=[The @lquotes@;innermost master of
-  the function call@rquotes@; does not include the function call itself (which
-  might be a master).]}
 @end{Honest}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
@@ -4071,10 +4127,14 @@ function@Chg{Version=[2],New=[ call],Old=[]}.
   @nt{assignment_statement} is not an initialization of an object, so the
   second sentence applies.]}
 
+  @ChgAdded{Version=[2],Text=[The @lquotes@;innermost master which evaluated
+  the function call@rquotes@; does not include the function call itself (which
+  might be a master).]}
+
   @ChgAdded{Version=[2],Text=[We really mean the innermost master here,
   which could be a very short lifetime. Consider a function call used as
-  a parameter of a procedure call. In this case the innermost master for
-  the function call is the procedure call.]}
+  a parameter of a procedure call. In this case the innermost master which
+  evaluated the function call is the procedure call.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
@@ -5124,7 +5184,7 @@ that does not resolve by the new rules would have failed a Legality Rule.]}
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
 @Chg{Version=[2],New=[Adjusted the wording to reflect the fact that expressions
-and names are masters.],Old=[]}
+and function calls are masters.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00254-01],ARef=[AI95-00318-02],ARef=[AI95-00385-01],ARef=[AI95-00416-01]}
 @Chg{Version=[2],New=[Defined the accessibility of the various new kinds and

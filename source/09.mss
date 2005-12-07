@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:42:52 $}
+@Comment{$Date: 2005/12/06 06:33:59 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 
 @begin{Intro}
 
@@ -731,6 +731,12 @@ access type.
 If the task is created by the elaboration of an @nt<object_declaration>,
 it depends on each master that includes this elaboration.
 @end(itemize)
+@begin{honest}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
+  @ChgAdded{Version=[2],Text=[The master of a task (like all objects) is
+  really defined in @RefSecNum{Completion and Finalization}. There are other
+  ways to create task objects than those listed here.]}
+@end{honest}
 
 @Defn2{term=[dependence], Sec=(of a task on another task)}
 Furthermore, if a task depends on a given master, it is defined
@@ -1747,7 +1753,7 @@ considered to manipulate a file. An instance of a language-defined input-output
 generic package provides subprograms that are covered by this rule. The only
 subprograms in language-defined input-output packages not covered by this rule
 (and thus not potentially blocking) are the Get and Put routines that take
-string parameters defined in the packages nested in Ada.Text_IO.]}@ChgNote{This
+string parameters defined in the packages nested in Text_IO.]}@ChgNote{This
 was the resolution of a ramification.}
  @end{Discussion}
 @end{Bounded}
@@ -3583,7 +3589,7 @@ environment (such as POSIX).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
 @ChgAdded{Version=[2],Text=[Type Time_Offset represents the number of minutes
-difference between the implementation-defined time zone used by Ada.Calendar
+difference between the implementation-defined time zone used by Calendar
 and another time zone.]}
 
 @begin{DescribeCode}
@@ -3953,7 +3959,7 @@ than 100 hours.]}]}
 @begin{ImplNote}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[This cannot be implemented (directly) by calling
-    Ada.Calendar.Formatting.Split, since it may be out of the range of
+    Calendar.Formatting.Split, since it may be out of the range of
     Day_Duration, and thus the number of hours may be out of the range of
     Hour_Number.]}
 

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.23 $ $Date: 2005/11/16 06:42:57 $ $Author: Randy $ }
+@comment{ $Revision: 1.24 $ $Date: 2005/12/06 06:34:05 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:42:57 $}
+@Comment{$Date: 2005/12/06 06:34:05 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -734,8 +734,8 @@ altered while a search is in progress.],Old=[]}]}
         Directory_Entry : @key{in} Directory_Entry_Type));]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Searches, in the directory named by
-Directory, for entries matching Pattern. The subprogram designated by Process
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Searches in the directory named by
+Directory for entries matching Pattern. The subprogram designated by Process
 is called with each matching entry in turn. Pattern represents a pattern for
 matching file names. If Pattern is null, all items in the directory are matched;
 otherwise, the interpretation of Pattern is implementation-defined. Only
@@ -1100,13 +1100,13 @@ is not recommended.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[If the target system does not support directories
-inside of directories, Kind will never return Directory, and
+inside of directories, then Kind will never return Directory and
 Containing_Directory will always raise Use_Error.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[If the target system does not support creation or
-deletion of directories, Create_Directory, Create_Path, Delete_Directory, and
-Delete_Tree will always propagate Use_Error.]}
+deletion of directories, then Create_Directory, Create_Path, Delete_Directory,
+and Delete_Tree will always propagate Use_Error.]}
 
 @end{Notes}
 

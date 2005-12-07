@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.47 $ $Date: 2005/10/31 17:34:20 $ $Author: Randy $ }
+@comment{ $Revision: 1.48 $ $Date: 2005/12/06 06:34:04 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/10/31 17:34:20 $}
+@Comment{$Date: 2005/12/06 06:34:04 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -729,12 +729,13 @@ function, the branch cuts should be invariant by reflection in the origin.]}
 @end{Itemize}
 @end{Discussion}
 
-@Leading@;The computed results of the mathematically multivalued functions are rendered
-single-valued by the following conventions, which are meant to imply
-@Chg{Version=[2],New=[that ],Old=[]}the
+@Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00185-01]}The
+computed results of the mathematically multivalued functions
+are rendered single-valued by the following conventions, which are meant to
+imply @Chg{Version=[2],New=[that ],Old=[]}the
 principal branch@Chg{Version=[2],New=[ is an analytic continuation of
 the corresponding real-valued function in
-Ada.Numerics.Generic_Elementary_Functions. (For Arctan and Arccot,
+Numerics.Generic_Elementary_Functions. (For Arctan and Arccot,
 the single-argument function in question is that obtained from the two-argument
 version by fixing the second argument to be its default value.)],Old=[:]}
 @begin{Itemize}
@@ -1254,7 +1255,7 @@ procedures of Text_IO.Float_IO.
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00328-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Nongeneric equivalents for Ada.Text_IO.Complex_IO are added, to be consistent
+  Nongeneric equivalents for Text_IO.Complex_IO are added, to be consistent
   with all other language-defined Numerics generic packages.]}
 @end{Extend95}
 
@@ -2713,12 +2714,12 @@ Numerics.Long_Real_Arrays, etc.]}
    The nongeneric equivalents are provided to allow the programmer to
    construct simple mathematical applications without being required to
    understand and use generics, and to be consistent with other
-   Ada.Numerics packages.]}
+   Numerics packages.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Two types are defined and exported by
-Ada.Numerics.Generic_Real_Arrays. The composite type Real_Vector is provided to
+Numerics.Generic_Real_Arrays. The composite type Real_Vector is provided to
 represent a vector with components of type Real; it is defined as an
 unconstrained, one-dimensional array with an index of type Integer. The
 composite type Real_Matrix is provided to represent a matrix with components of
@@ -3164,7 +3165,7 @@ Numerics.Generic_Real_Matrix is symmetric.]}]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The package Ada.Numerics.Generic_Real_Arrays and its nongeneric equivalents
+  The package Numerics.Generic_Real_Arrays and its nongeneric equivalents
   are new.]}
 @end{Extend95}
 
@@ -3458,7 +3459,7 @@ names Numerics.Short_Complex_Arrays, Numerics.Long_Complex_Arrays, etc.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Two types are defined and exported by
-Ada.Numerics.Generic_Complex_Arrays. The composite type Complex_Vector is
+Numerics.Generic_Complex_Arrays. The composite type Complex_Vector is
 provided to represent a vector with components of type Complex; it is defined
 as an unconstrained one-dimensional array with an index of type Integer. The
 composite type Complex_Matrix is provided to represent a matrix with components
@@ -4240,7 +4241,7 @@ the real operand to complex.]}]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The package Ada.Numerics.Generic_Complex_Arrays and its nongeneric equivalents
+  The package Numerics.Generic_Complex_Arrays and its nongeneric equivalents
   are new.@Comment{ It would be better if this was called
   "Ada.Numerics.Generic_Imitation_Arrays", 'cause that's the opposite of Real. :-)
   Just checking if anyone reads this stuff.}]}
