@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.63 $ $Date: 2005/12/06 06:34:07 $ $Author: Randy $ }
+@comment{ $Revision: 1.64 $ $Date: 2005/12/07 01:06:37 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/12/06 06:34:07 $}
+@Comment{$Date: 2005/12/07 01:06:37 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -647,9 +647,21 @@ single task dispatching policy.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[@nt{Pragma} Priority_Specific_Dispatching specifies
-the task dispatching policy for the specified range of priorities. Tasks within
-the range of priorities specified in a Priority_Specific_Dispatching pragma are
-dispatched according to the specified dispatching policy.]}
+the task dispatching policy for the specified range of priorities. Tasks with
+base priorities within the range of priorities specified in a
+Priority_Specific_Dispatching pragma have their active priorities determined
+according to the specified dispatching policy. Tasks with active priorities
+within the range of priorities specified in a Priority_Specific_Dispatching
+pragma are dispatched according to the specified dispatching policy.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+  @ChgAdded{Version=[2],Text=[Each ready queue is managed by exactly one
+  policy. Anything else would be chaos. The ready queue is determined by
+  the active priority. However, how the active priority is calculated is
+  determined by the policy; in order to break out of this circle, we have
+  to say that the active priority is calculated by the method determined
+  by the policy of the base priority.]}
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[If a partition contains one or more
@@ -1100,9 +1112,7 @@ task is added to the tail of the ready queue for its active priority.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[When a task executes a @nt{delay_statement} that
 does not result in blocking, it is added to the tail of the ready queue for
-its active priority. This is a task dispatching point
-(see @RefSecNum{The Task Dispatching Model}).@PDefn{task dispatching point}
-@PDefn{dispatching point}]}
+its active priority.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[If the delay does result in blocking,
@@ -1111,6 +1121,12 @@ its active priority. This is a task dispatching point
 @end{Ramification}
 
 @end{itemize}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[A non-blocking @nt{delay_statement} is the only
+non-blocking event that is a task dispatching point (see
+@RefSecNum{The Task Dispatching Model}) for this policy.@PDefn{task dispatching point}
+@PDefn{dispatching point}]}
 
 @end{RunTime}
 
@@ -1134,7 +1150,7 @@ Non_Preemptive_FIFO_Within_Priorities and also the locking policy (see
 ceiling priorities in subrange System.Priority to System.Priority'Last (see
 @RefSecNum{Priority Ceiling Locking}), an implementation may allow a task to
 execute within a protected object without raising its active priority provided
-the protected object does not contain pragma Interrupt_Priority,
+the associated protected unit does not contain pragma Interrupt_Priority,
 Interrupt_Handler, or Attach_Handler.]}
 
 @end{ImplPerm}
@@ -1361,12 +1377,12 @@ before some existing tasks but not preempt the currently executing task.]}
 @begin{Syntax}
 
 @begin{SyntaxText}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00357-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The form of a
 @nt{pragma} Relative_Deadline is as follows:]}
 @end{SyntaxText}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Relative_Deadline> (@SynI{relative_deadline_}@Syn2{expression});''}
 
 @end{Syntax}
@@ -1399,7 +1415,7 @@ EDF_Across_Priorities is a task dispatching policy.]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
 language-defined library package exists:]}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{with} Ada.Real_Time;
 @key{with} Ada.Task_Identification;
 @key{package} Ada.Dispatching.EDF @key{is}@ChildUnit{Parent=[Ada.Dispatching],Child=[EDF]}
@@ -1412,7 +1428,7 @@ language-defined library package exists:]}
   @key{procedure} @AdaSubDefn{Delay_Until_And_Set_Deadline} (
               Delay_Until_Time : @key{in} Ada.Real_Time.Time;
               Deadline_Offset : @key{in} Ada.Real_Time.Time_Span);
-  @key{function} @AdaSubDefn{Get_Deadline} (T : @key{in} Ada.Task_Identification.Task_Id :=
+  @key{function} @AdaSubDefn{Get_Deadline} (T : Ada.Task_Identification.Task_Id :=
               Ada.Task_Identification.Current_Task) @key{return} Deadline;
 @key{end} Ada.Dispatching.EDF;]}
 @end{Example}
@@ -1494,12 +1510,12 @@ deadline.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[A task dispatching point occurs
 for the currently running task @i<T> to
-which policy EDF_Across_Priorities applies whenever:]}
+which policy EDF_Across_Priorities applies:]}
 
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[a change to the deadline of @i<T> occurs;]}
+@ChgAdded{Version=[2],Text=[when a change to the deadline of @i<T> occurs;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[there is a task on the ready queue for the
@@ -3625,6 +3641,7 @@ It uses a conceptual @i{held priority} value to represent the task's
 
 @begin{RunTime}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00357-01]}
 @PDefn2{Term=[task state], Sec=(held)}
 @Defn{held priority}
 @Defn{idle task}
@@ -3632,26 +3649,49 @@ After the Hold operation has been applied to a task, the task becomes
 @i{held}. For each processor there is a conceptual @i{idle task},
 which is always ready. The base priority of the idle task is below
 System.@!Any_@!Priority'First. The @i{held priority} is a
-constant of the type integer whose value is below the base priority of the
-idle task.
+constant of the type @Chg{Version=[2],New=[Integer],Old=[integer]}
+whose value is below the base priority of the idle task.
 @begin{Discussion}
 The held state should not be confused with the blocked state as defined
 in @RefSecNum{Task Execution - Task Activation}; the task is still ready.
 @end{Discussion}
 
-The Hold operation sets the state of T to held. For a held task:
-the task's own base priority does not constitute an inheritance source
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00357-01]}
+@ChgAdded{Version=[2],Text=[For any priority below System.Any_Priority'First,
+the task dispatching policy is FIFO_Within_Priorities.]}
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This applies even if a Task_Dispatching_Policy
+  specifies the policy for all of the priorities of the partition.]}
+@end{Honest}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[A task at the held priority never runs, so it is
+  not necessary to implement FIFO_Within_Priorities for systems that have only
+  one policy (such as EDF_Across_Priorities).]}
+@end{Ramification}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00357-01]}
+The Hold operation sets the state of T to held. For a held
+task@Chg{Version=[2],New=[, the active
+priority is reevaluated as if the base priority of the task were the held
+priority],Old=[: the task's own base priority does not constitute an
+inheritance source
 (see @RefSecNum{Task Priorities}), and the value of the held priority
-is defined to be such a source instead.
+is defined to be such a source instead]}.
 @begin{Ramification}
 For example, if T is currently inheriting priorities from other sources (e.g.
 it is executing in a protected action), its active priority does not change,
 and it continues to execute until it leaves the protected action.
 @end{Ramification}
 
-The Continue operation resets the state of T to not-held; T's active priority
-is then reevaluated as described in @RefSecNum{Task Priorities}.
-@Redundant[This time, T's base priority is taken into account.]
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00357-01]}
+The Continue operation resets the state of T to not-held;
+@Chg{Version=[2],New=[its],Old=[T's]} active priority
+is then reevaluated as @Chg{Version=[2],New=[determined by the
+task dispatching policy associated with its base priority.],Old=[described in
+@RefSecNum{Task Priorities}.
+@Redundant[This time, T's base priority is taken into account.]]}
 
 The Is_Held function returns True if and only if T is in the held state.
 @begin{Discussion}
@@ -3738,18 +3778,25 @@ whose barrier becomes open. The corresponding entry body executes.
 
 @end{Notes}
 
-@begin{DiffWord95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0077],ARef=[AI95-00111-01]}
-  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected to eliminate the
-  use of the undefined term @lquotes@;accept body@rquotes@;.]}
-@end{DiffWord95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Asynchronous_Task_Control is now Preelaborated,
   so it can be used in preelaborated units.]}
 @end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0077],ARef=[AI95-00111-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected to eliminate the
+  use of the undefined term @lquotes@;accept body@rquotes@;.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+  @ChgAdded{Version=[2],Text=[The description of held tasks was changed to
+  reflect that the calculatation of active priorities depends on the
+  dispatching policy of the base priority. Thus, the policy of the held
+  priority was specified in order to avoid surprises (especially when using
+  the EDF policy).]}
+@end{DiffWord95}
 
 
 @LabeledClause{Other Optimizations and Determinism Rules}
@@ -4913,8 +4960,8 @@ real-time clock interrupt mechanism.]}]}
 @begin{Notes}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
-@ChgAdded{Version=[2],Text=[Since a call of Set_Handler is not a blocking
-operation, it can be called from within a handler.]}
+@ChgAdded{Version=[2],Text=[Since a call of Set_Handler is not a potentionally
+blocking operation, it can be called from within a handler.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],Text=[A Timing_Event_Handler can be associated with several

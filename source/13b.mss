@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/12/06 06:34:03 $}
+@Comment{$Date: 2005/12/07 01:06:36 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 
 @LabeledClause{The Package System}
 
@@ -2112,6 +2112,8 @@ or it might deallocate @i{y} and then @i{x}.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
 @IndexSee{Term=[freed],See=(nonexistent)}
 @Defn{nonexistent}
+@PDefn2{Term=[exist],Sec=[cease to]}
+@PDefn2{Term=[ceast to exist],Sec=[object]}
 After Free(X), the object designated by X, and any
 subcomponents @Chg{Version=[2],New=[(and coextensions) ],Old=[]}thereof, no
 longer exist; their storage can be reused for other purposes.

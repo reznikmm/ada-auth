@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.35 $ $Date: 2005/12/06 06:34:08 $ $Author: Randy $ }
+@Comment{ $Revision: 1.36 $ $Date: 2005/12/07 01:06:38 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2005/12/06 06:34:08 $}
+@Comment{$Date: 2005/12/07 01:06:38 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -886,6 +886,16 @@ shall support:]}
 @RefSecNum{Tasking Restrictions}: No_Task_Hierarchy,
 No_Abort_Statement, No_Implicit_Heap_Allocation; and]}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00347-01]}
+@ChgAdded{Version=[2],Text=[the @key{pragma} Profile(Ravenscar).]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00347-01]}
+  @ChgAdded{Version=[2],Text=[The reference to pragma Profile(Ravenscar) is
+  intended to show that properly restricted tasking is appropriate for use
+  in high integrity systems. The Ada 95
+  Annex seemed to suggest that tasking was inappropriate for such systems.]}
+@end{Discussion}
+
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[the following uses of
 @SynI{restriction_parameter_}@nt{identifier}s defined in
@@ -899,18 +909,8 @@ prior to program execution]:]}
   @ChgAdded{Version=[2],Text=[Max_Asynchronous_Select_Nesting => 0, and]}
 
   @ChgRef{Version=[2],Kind=[Added]}
-  @ChgAdded{Version=[2],Text=[Max_Tasks => 0; and]}
+  @ChgAdded{Version=[2],Text=[Max_Tasks => 0.]}
 @end{InnerItemize}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00347-01]}
-@ChgAdded{Version=[2],Text=[the @key{pragma} Profile(Ravenscar).]}
-@begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00347-01]}
-  @ChgAdded{Version=[2],Text=[The reference to pragma Profile(Ravenscar) is
-  intended to show that properly restricted tasking is appropriate for use
-  in high integrity systems. The Ada 95
-  Annex seemed to suggest that tasking was inappropriate for such systems.]}
-@end{Discussion}
 @end{Itemize}
 
 If an implementation supports @nt[pragma] Restrictions for a particular

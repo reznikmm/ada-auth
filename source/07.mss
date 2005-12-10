@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/12/06 06:33:58 $}
+@Comment{$Date: 2005/12/07 01:06:35 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2899,7 +2899,13 @@ at the first freezing point
 (see @RefSecNum{Freezing Rules})
 of the ultimate ancestor type@Chg{Version=[2],New=[; the finalization of
 these objects is called the @i<finalization of the
-collection>@Defn{finalization of the collection}@Defn2{Term=[collection],Sec=[finalization of]}],Old=[]}.
+collection>@Defn{finalization of the collection}
+@Defn2{Term=[collection],Sec=[finalization of]}],Old=[]}.@Chg{Version=[2],
+New=[After the finalization of a master is complete, the objects finalized
+as part of its finalization cease to @i<exist>, as do any types and subtypes
+defined and created within the master.@PDefn2{Term=[exist],Sec=[cease to]}
+@PDefn2{Term=[cease to exist],Sec=[object]}
+@Defn2{Term=[cease to exist],Sec=[type]}],Old=[]}
 @begin{Reason}
   Note that we talk about the type of the @nt{allocator} here.
     There may be access values of a (general) access type
