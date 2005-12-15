@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/11/24 02:14:59 $}
+@Comment{$Date: 2005/12/10 07:15:06 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.74 $}
+@Comment{$Revision: 1.75 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -118,7 +118,21 @@ Old=[(See @b[Definition]]}.)>}
   By contrast, a private type provides a single, unchanging (partial)
   view of its full type.
 @end{Discussion}
-@ChgToGlossaryAlso{Version=[2],Kind=[Deleted],Term=<Definition>,
+
+@Defn(view)
+All declarations contain a @i(definition) for a @i(view) of an entity.
+A view consists of an identification of the entity
+(the entity @i(of) the view),
+plus view-specific characteristics that affect the use
+of the entity through that view (such as mode of access to an object,
+formal parameter names and defaults for a subprogram, or visibility to
+components of a type).
+In most cases, a declaration also contains the definition for the
+entity itself (a @nt(renaming_declaration) is an example of a declaration
+that does not define a new entity,
+but instead defines a view of an existing entity
+(see @RefSecNum(Renaming Declarations))).
+@ChgToGlossary{Version=[2],Kind=[Deleted],Term=<Definition>,
   Text=<@ChgDeleted{Version=[2],Text=[@Defn(view)
 All declarations contain a @i(definition) for a @i(view) of an entity.
 A view consists of an identification of the entity

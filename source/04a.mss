@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/12/01 05:55:41 $}
+@Comment{$Date: 2005/12/10 07:15:11 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2904,7 +2904,7 @@ operator for @i<universal_access> shall be of a specific anonymous access type.
 Unless the predefined equality operator is identified using an expanded name
 with @nt{prefix} denoting the package Standard, neither operand shall be of an
 access-to-object type whose designated type is @i<D> or @i<D>'Class, where
-@i<D> has a user-defined primitiv equality operator such that:]}
+@i<D> has a user-defined primitive equality operator such that:]}
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[its result type is Boolean;]}

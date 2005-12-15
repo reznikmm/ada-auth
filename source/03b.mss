@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/11/24 02:15:00 $}
+@Comment{$Date: 2005/12/10 07:15:08 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 
 @LabeledClause{Array Types}
 
@@ -758,8 +758,8 @@ are indefinite subtypes.]
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<Discriminant>,
   Text=<A discriminant is a parameter @Chg{Version=[2],New=[for],Old=[of]} a composite type.
   It can control, for example, the bounds of a component
-  of the type if @Chg{Version=[2],New=[the component has],Old=[that type is]}
-  an array type.
+  of the type if @Chg{Version=[2],New=[the component is],Old=[that type is]}
+  an array@Chg{Version=[2],New=[],Old=[ type]}.
   A discriminant @Chg{Version=[2],New=[for],Old=[of]} a task type can be
   used to pass data to a task of the type upon creation.>}
 @begin{Discussion}

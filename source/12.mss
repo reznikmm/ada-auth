@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/12/06 06:34:02 $}
+@Comment{$Date: 2005/12/10 07:15:17 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.60 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1322,7 +1322,7 @@ Old=[The type of a generic formal object of mode
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
-  @ChgAdded{Version=[2],Text=[If the actual matching the
+  @ChgAdded{Version=[2],Text=[if the actual matching the
   @nt{formal_object_declaration} denotes the generic formal object
   of another generic unit @i{G}, and the instantation containing the actual
   occurs within the body

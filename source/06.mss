@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/11/24 02:15:03 $}
+@Comment{$Date: 2005/12/10 07:15:13 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -30,7 +30,7 @@ are two forms of subprograms: functions, which return values, and procedures,
 which do not.]}>}
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Function>,
 Text=<@ChgAdded{Version=[2],Text=[A function is a form of subprogram that
-returns a result and can be called used as part of an expression.]}>}
+returns a result and can be called as part of an expression.]}>}
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Procedure>,
 Text=<@ChgAdded{Version=[2],Text=[A procedure is a form of subprogram that
 does not return a result and can only be called by a @nt{statement}.]}>}
@@ -1896,7 +1896,7 @@ innermost enclosing @nt{subprogram_@!body},
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=[extended_return_statement],Old=[]}>,
 rhs="@Chg{Version=[2],New=<
-    @key{return} @Syn2{identifier} : [@Key{aliased}] @Syn2{return_subtype_indication} [:= @Syn2{expression}] [@Key{do}
+    @key{return} @Syn2{defining_identifier} : [@Key{aliased}] @Syn2{return_subtype_indication} [:= @Syn2{expression}] [@Key{do}
         @Syn2{handled_sequence_of_statements}
     @key{end} @key{return}];>,Old=[]}"}
 
@@ -2048,10 +2048,10 @@ statically deeper than that of the master that elaborated the function body.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[@PDefn2{Term=[return object], Sec=(extended_return_statement)}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=[return object], Sec=(extended_return_statement)}
 Within an @nt{extended_return_statement}, the @i{return object} is declared
-with the given identifier, with the nominal subtype defined by the
-@nt{return_subtype_indication}.],Old=[]}
+with the given @nt{defining_identifier}, with the nominal subtype defined by
+the @nt{return_subtype_indication}.]}
 @end{StaticSem}
 
 @begin{RunTime}

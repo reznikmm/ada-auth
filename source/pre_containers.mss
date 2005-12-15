@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.49 $ $Date: 2005/12/06 06:34:06 $ $Author: Randy $ }
+@comment{ $Revision: 1.50 $ $Date: 2005/12/10 07:15:20 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/12/06 06:34:06 $}
+@Comment{$Date: 2005/12/10 07:15:20 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -741,7 +741,7 @@ to the Index_Type'Last.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[@Redundant[Some operations of this generic package
 have access-to-subprogram parameters. To ensure such operations are
-well-defined, these operations guard against certain actions by the designated
+well-defined, they guard against certain actions by the designated
 subprogram. In particular, some operations check for @lquotes@;tampering with
 cursors@rquotes of a container because they depend on the set of elements of
 the container remaining constant, and others check for @lquotes@;tampering with
@@ -2480,7 +2480,7 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[@Redundant[Some operations of this generic package
 have access-to-subprogram parameters. To ensure such operations are
-well-defined, these operations guard against certain actions by the designated
+well-defined, they guard against certain actions by the designated
 subprogram. In particular, some operations check for @lquotes@;tampering with
 cursors@rquotes of a container because they depend on the set of elements of
 the container remaining constant, and others check for @lquotes@;tampering with
@@ -3406,7 +3406,7 @@ different for hashed maps and ordered maps.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[@Redundant[Some operations of these generic packages
 have access-to-subprogram parameters. To ensure such operations are
-well-defined, these operations guard against certain actions by the designated
+well-defined, they guard against certain actions by the designated
 subprogram. In particular, some operations check for @lquotes@;tampering with
 cursors@rquotes of a container because they depend on the set of elements of
 the container remaining constant, and others check for @lquotes@;tampering with
@@ -5137,7 +5137,7 @@ hashed sets and ordered sets.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[@Redundant[Some operations of these generic packages
 have access-to-subprogram parameters. To ensure such operations are
-well-defined, these operations guard against certain actions by the designated
+well-defined, they guard against certain actions by the designated
 subprogram. In particular, some operations check for @lquotes@;tampering with
 cursors@rquotes of a container because they depend on the set of elements of
 the container remaining constant, and others check for @lquotes@;tampering with

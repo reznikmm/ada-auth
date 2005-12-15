@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.36 $ $Date: 2005/12/07 01:06:38 $ $Author: Randy $ }
+@Comment{ $Revision: 1.37 $ $Date: 2005/12/10 07:15:24 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2005/12/07 01:06:38 $}
+@Comment{$Date: 2005/12/10 07:15:24 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -887,7 +887,7 @@ shall support:]}
 No_Abort_Statement, No_Implicit_Heap_Allocation; and]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00347-01]}
-@ChgAdded{Version=[2],Text=[the @key{pragma} Profile(Ravenscar).]}
+@ChgAdded{Version=[2],Text=[the @key{pragma} Profile(Ravenscar); and]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00347-01]}
   @ChgAdded{Version=[2],Text=[The reference to pragma Profile(Ravenscar) is

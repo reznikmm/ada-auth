@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/12/07 01:06:35 $}
+@Comment{$Date: 2005/12/10 07:15:14 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1023,12 +1023,7 @@ of the parent type of the full view.
 See @RefSecNum{Dispatching Operations of Tagged Types}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00401]}
-@ChgAdded{Version=[2],Noprefix=[T],Text=[Similarly, if the ancestor type is an
-interface type, the parent type can be anything so long as the full view is a
-descendant of the ancestor type.]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00401]}
-@ChgAdded{Version=[2],Text=[if the ancestor type specified in a
+@ChgAdded{Version=[2],Text=[If the ancestor type specified in a
 @nt{private_extension_declaration} is an
 interface type, the parent type can be anything so long as the full view is a
 descendant of the ancestor type. The progenitor types specified in a
@@ -2901,7 +2896,7 @@ of the ultimate ancestor type@Chg{Version=[2],New=[; the finalization of
 these objects is called the @i<finalization of the
 collection>@Defn{finalization of the collection}
 @Defn2{Term=[collection],Sec=[finalization of]}],Old=[]}.@Chg{Version=[2],
-New=[After the finalization of a master is complete, the objects finalized
+New=[ After the finalization of a master is complete, the objects finalized
 as part of its finalization cease to @i<exist>, as do any types and subtypes
 defined and created within the master.@PDefn2{Term=[exist],Sec=[cease to]}
 @PDefn2{Term=[cease to exist],Sec=[object]}

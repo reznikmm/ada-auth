@@ -1,9 +1,9 @@
  @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/12/06 06:33:57 $}
+@Comment{$Date: 2005/12/10 07:15:10 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -697,8 +697,8 @@ If an internal tag provided to an instance of
 Tags.Generic_Dispatching_Constructor or to any subprogram declared in
 package Tags identifies either a type that is not
 library-level and whose tag has not been created
-(see @RefSecNum{Freezing Rules}), or does not exist in the partition at the
-time of the call, then execution is erroneous.]}
+(see @RefSecNum{Freezing Rules}), or a type that does not exist in the
+partition at the time of the call, then execution is erroneous.]}
 
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1249,7 +1249,7 @@ Type extension is a new concept.
 @Defn2{Term=[controlling tag], Sec=(for a call on a dispatching operation)}
 The primitive subprograms of a tagged type@Chg{Version=[2],New=[, the
 subprograms declared by @nt{formal_abstract_subprogram_declaration}s,
-and and the stream attributes of a specific tagged type that are available (see
+and the stream attributes of a specific tagged type that are available (see
 @RefSecNum{Stream-Oriented Attributes}) at the end of the declaration list
 where the type is declared],Old=[]}
 are called @i(dispatching operations).
@@ -2452,7 +2452,7 @@ interfaces.]}
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<Synchronized>,
   Text=<@ChgAdded{Version=[2],Text=[A synchronized entity is one
   that will work safely with multiple tasks at one time. A synchronized
-  interface can be an ancestor of either a task or a protected type. Such a
+  interface can be an ancestor of a task or a protected type. Such a
   task or protected type is called a synchronized tagged type.]}>}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
@@ -4106,7 +4106,7 @@ any other function, the]} accessibility level of @Chg{Version=[2],New=[an
 @nt{aggregate} or ],Old=[]}the result
 @Chg{Version=[2],New=[of a function call @Redundant[(or equivalent use of
 an operator)] that is
-used (in its entity) to directly initialize part of an ],Old=[]}object
+used (in its entirety) to directly initialize part of an ],Old=[]}object
 is that of the
 @Chg{Version=[2],New=[object being initialized. In other contexts, the
 accessibility level of an @nt{aggregate} or the result of a function call
@@ -4180,7 +4180,7 @@ constrained subtype.]}
 
 @begin{InnerItemize}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[If the value of an access discriminant is
+@ChgAdded{Version=[2],Text=[If the value of the access discriminant is
 determined by a @nt{discriminant_association} in a @nt{subtype_indication},
 the accessibility level of the object or subprogram designated by
 the associated value (or library level if the value is null);]}

@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.64 $ $Date: 2005/12/07 01:06:37 $ $Author: Randy $ }
+@comment{ $Revision: 1.65 $ $Date: 2005/12/10 07:15:23 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/12/07 01:06:37 $}
+@Comment{$Date: 2005/12/10 07:15:23 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1123,9 +1123,9 @@ its active priority.]}
 @end{itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[A non-blocking @nt{delay_statement} is the only
-non-blocking event that is a task dispatching point (see
-@RefSecNum{The Task Dispatching Model}) for this policy.@PDefn{task dispatching point}
+@ChgAdded{Version=[2],Text=[For this policy, a non-blocking @nt{delay_statement}
+is the only non-blocking event that is a task dispatching point (see
+@RefSecNum{The Task Dispatching Model}).@PDefn{task dispatching point}
 @PDefn{dispatching point}]}
 
 @end{RunTime}
@@ -1337,7 +1337,8 @@ priority will not be subject to round robin dispatching.]}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[The deadline of a task is an indication of the
-urgency of the task; it represents a point on an ideal physical time line.]}
+urgency of the task; it represents a point on an ideal physical time line.
+The deadline might affect how resources are allocated to the task.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[This clause defines a package for representing the
@@ -2197,7 +2198,7 @@ implementation-defined queuing policies.]}]}
 
 @begin{Intro}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
-  @ChgAdded{Version=[2],Text=[@Redundant[This clause specifies how the
+  @ChgAdded{Version=[2],Text=[@Redundant[This clause describes how the
   priority of an entity can be modified or queried at run time.]]}
 @end{Intro}
 
@@ -2384,11 +2385,12 @@ calling Get_Priority causes erroneous execution.
 @begin{DocReq}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00188-02]}
 @ChgAdded{Version=[2],Text=[On a multiprocessor, the implementation shall
-document any conditions that cause the completion of the setting of a task's
-priority to be delayed later than what is specified for a single processor.]}
+document any conditions that cause the completion of the setting of the
+priority of a task to be delayed later than what is specified for a
+single processor.]}
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[Any conditions that cause the completion of the setting of a task's
-priority to be delayed for a multiprocessor.]}]}
+Text=[Any conditions that cause the completion of the setting of the priority
+of a task to be delayed for a multiprocessor.]}]}
 @end{DocReq}
 
 @begin{Metrics}
@@ -4960,7 +4962,7 @@ real-time clock interrupt mechanism.]}]}
 @begin{Notes}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
-@ChgAdded{Version=[2],Text=[Since a call of Set_Handler is not a potentionally
+@ChgAdded{Version=[2],Text=[Since a call of Set_Handler is not a potentially
 blocking operation, it can be called from within a handler.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}

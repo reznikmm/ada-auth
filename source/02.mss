@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/10/31 17:34:08 $}
+@Comment{$Date: 2005/12/10 07:15:06 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -269,7 +269,7 @@ character whose General Category is defined to be @lquotes@;Other, Surrogate@rqu
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @Chg{Version=[2],New=[@Defn{graphic_character}@nt{graphic_character}],
 Old=[@Defn{other_control_function}@nt<other_control_function>]}@\@Chg{Version=[2],
-New=[Any character which is not in the categories @nt{other_control},
+New=[Any character that is not in the categories @nt{other_control},
 @nt{other_private_use}, @nt{other_surrogate},
 @nt{format_effector}, and whose relative code position in its plane is neither
 16#FFFE# nor 16#FFFF#.],

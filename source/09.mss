@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/12/06 06:33:59 $}
+@Comment{$Date: 2005/12/10 07:15:15 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 
 @begin{Intro}
 
@@ -730,13 +730,21 @@ access type.
 
 If the task is created by the elaboration of an @nt<object_declaration>,
 it depends on each master that includes this elaboration.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgAdded{Version=[2],Text=[Otherwise, the task depends on
+the master of the outermost object of which it is a part, as determined by the
+accessibililty level of that object (see
+@RefSecNum{Operations of Access Types} and
+@RefSecNum{Completion and Finalization}).]}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[The master of a task created by a return
+  statement changes when the accessibility of the return object changes. Note
+  that its activation happens, if at all, only after the function returns and
+  all accessibility level changes have occurred.]}
+@end{Ramification}
 @end(itemize)
-@begin{honest}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
-  @ChgAdded{Version=[2],Text=[The master of a task (like all objects) is
-  really defined in @RefSecNum{Completion and Finalization}. There are other
-  ways to create task objects than those listed here.]}
-@end{honest}
 
 @Defn2{term=[dependence], Sec=(of a task on another task)}
 Furthermore, if a task depends on a given master, it is defined
@@ -867,6 +875,13 @@ resulting from selecting @nt<terminate_alternative>s. This is because
 finalization still occurs for such tasks, and this happens after
 selecting the @nt<terminate_alternative>, but before termination.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgAdded{Version=[2],Text=[Added missing wording that explained the
+  master of tasks that are neither object declarations nor allocators,
+  such as function returns.]}
+@end{DiffWord95}
 
 
 @LabeledClause{Protected Units and Protected Objects}
