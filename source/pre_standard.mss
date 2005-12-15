@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.30 $ $Date: 2005/10/31 17:34:29 $ $Author: Randy $ }
+@comment{ $Revision: 1.31 $ $Date: 2005/12/15 02:36:43 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2005/10/31 17:34:29 $}
+@Comment{$Date: 2005/12/15 02:36:43 $}
 
 @LabeledClause{The Package Standard}
 
@@ -193,7 +193,7 @@ the visible part of package Standard.}
       @RI[dle],@\@RI[dc1],@\@RI[dc2],@\@RI[dc3],@\@RI[dc4],@\@RI[nak],@\@RI[syn],@\@RI[etb],@\--@RI{16 (16#10#) .. 23 (16#17#)}
       @RI[can],@\@RI[em],@\@RI[sub],@\@RI[esc],@\@RI[fs],@\@RI[gs],@\@RI[rs],@\@RI[us],@\--@RI{24 (16#18#) .. 31 (16#1F#)}
 @comment{blank line}
-      ' ',@\'!',@\'"',@\'#',@\'$',@\'%',@\'&',@\@rquotes@;',@\--@RI{32 (16#20#) .. 39 (16#27#)}
+      ' ',@\'!',@\'"',@\'#',@\'$',@\'%',@\'&',@\''',@\--@RI{32 (16#20#) .. 39 (16#27#)}
       '(',@\')',@\'*',@\'+',@\',',@\'-',@\'.',@\'/',@\--@RI{40 (16#28#) .. 47 (16#2F#)}
 @comment{blank line}
       '0',@\'1',@\'2',@\'3',@\'4',@\'5',@\'6',@\'7',@\--@RI{48 (16#30#) .. 55 (16#37#)}

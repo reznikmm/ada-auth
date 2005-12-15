@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/12/10 07:15:11 $}
+@Comment{$Date: 2005/12/15 02:36:32 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.74 $}
+@Comment{$Revision: 1.75 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1552,7 +1552,8 @@ be in the same order as in the @nt<known_discriminant_part>.
 
 @begin{Wide}
 @leading@keepnext@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
-@i(Example@Chg{Version=[2],New=[s],Old=[]} of component association with
+@i(@Chg{Version=[2],New=[Examples],Old=[Example]} of component
+@Chg{Version=[2],New=[associations],Old=[association]} with
 several choices:)
 @end{Wide}
 @begin{Example}

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/12/10 07:15:17 $}
+@Comment{$Date: 2005/12/15 02:36:35 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1324,7 +1324,7 @@ Old=[The type of a generic formal object of mode
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[if the actual matching the
   @nt{formal_object_declaration} denotes the generic formal object
-  of another generic unit @i{G}, and the instantation containing the actual
+  of another generic unit @i{G}, and the instantiation containing the actual
   occurs within the body
   of @i{G} or within the body of a generic unit declared within the declarative
   region of @i{G}, then the declaration of the formal object of @i{G}
@@ -1527,7 +1527,7 @@ important benefit, and any change has some cost.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
 @redundant[A generic formal subtype can be used to pass to a generic unit
 a subtype whose type is in a certain @Chg{Version=[2],New=[category],
-Old=[class]} of types.]}
+Old=[class]} of types.]
 @begin{Reason}
 We considered having intermediate syntactic categories
 @nt{formal_integer_type_definition},
@@ -3227,12 +3227,14 @@ an instantiation of a package with formal packages:}]}
 @ChgAdded{Version=[2],Text=[   @key[type] Symbol_Info @key[is] ...]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key[package] String_Table @key[is new] Ada.Containers.Ordered_Maps(Key_Type => String,
-                                                           Element_Type => String_Id);]}
+@ChgAdded{Version=[2],Text=[   @key[package] String_Table @key[is new] Ada.Containers.Ordered_Maps
+           (Key_Type => String,
+            Element_Type => String_Id);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key[package] Symbol_Table @key[is new] Ada.Containers.Ordered_Maps(Key_Type => String_Id,
-                                                           Element_Type => Symbol_Info);]}
+@ChgAdded{Version=[2],Text=[   @key[package] Symbol_Table @key[is new] Ada.Containers.Ordered_Maps
+           (Key_Type => String_Id,
+            Element_Type => Symbol_Info);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key[package] String_Info @key[is new] Ordered_Join(Mapping_1 => String_Table,

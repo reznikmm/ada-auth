@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.65 $ $Date: 2005/12/10 07:15:23 $ $Author: Randy $ }
+@comment{ $Revision: 1.66 $ $Date: 2005/12/15 02:36:41 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/12/10 07:15:23 $}
+@Comment{$Date: 2005/12/15 02:36:41 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -3794,7 +3794,7 @@ whose barrier becomes open. The corresponding entry body executes.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
   @ChgAdded{Version=[2],Text=[The description of held tasks was changed to
-  reflect that the calculatation of active priorities depends on the
+  reflect that the calculation of active priorities depends on the
   dispatching policy of the base priority. Thus, the policy of the held
   priority was specified in order to avoid surprises (especially when using
   the EDF policy).]}
@@ -4273,7 +4273,8 @@ language-defined library package exists:]}
 @key{package} Ada.Execution_Time.Timers @key{is}@ChildUnit{Parent=[Ada.Execution_Time],Child=[Timers]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Timer} (T : @key{not null access constant} Ada.Task_Identification.Task_Id) @key{is}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Timer} (T : @key{not null access constant}
+                       Ada.Task_Identification.Task_Id) @key{is}
       @key{tagged limited private};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4553,7 +4554,7 @@ to at most one group. Tasks of any priority can be added to a group.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
 @ChgAdded{Version=[2],Text=[An object of type Group_Budget has an associated
-non-negative value of type Time_Span known as its @i<budget>, which is
+nonnegative value of type Time_Span known as its @i<budget>, which is
 initially Time_Span_Zero. The type Group_Budget_Handler identifies a protected
 procedure to be executed by the implementation when the budget is
 @i<exhausted>, that is, reaches zero. Such a protected procedure is called a

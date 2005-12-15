@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.44 $ $Date: 2005/11/16 06:43:02 $ $Author: Randy $ }
+@comment{ $Revision: 1.45 $ $Date: 2005/12/15 02:36:42 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:43:02 $}
+@Comment{$Date: 2005/12/15 02:36:42 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -1601,7 +1601,7 @@ for objects imported from, exported to, or passed to C.@end{discussion}
 @end{Example}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0061],ARef=[AI95-00140-01]}
 @Trailing@;If Item is @key(null), then To_Chars_Ptr returns Null_Ptr.
-@Chg{New=[If Item is not @key(null),], Old=[Otherwise, if ]}Nul_Check is
+@Chg{New=[If Item is not @key(null),], Old=[Otherwise, if]} Nul_Check is
 True@Chg{New=[,],Old=[]} and Item.@key(all) does not contain nul, then
 the function propagates Terminator_Error;
 @Chg{New=[otherwise],
@@ -2011,8 +2011,8 @@ terminated by Terminator.
 Execution of Copy_Terminated_Array(Source, Target, Limit, Terminator)
 is erroneous in either of the following situations:
 @begin[itemize]
-Execution of both Value(Source,Terminator) and
-Value(Source,Limit) are erroneous, or
+Execution of both Value(Source, Terminator) and
+Value(Source, Limit) are erroneous, or
 
 Copying writes past the end of the array containing the Element
 designated by Target.

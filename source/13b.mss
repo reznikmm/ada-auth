@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/12/07 01:06:36 $}
+@Comment{$Date: 2005/12/15 02:36:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 
 @LabeledClause{The Package System}
 
@@ -45,9 +45,7 @@ of package System@Chg{Version=[2],New=[],Old=[and its language-defined children]
 
    --@RI{ Storage-related Declarations:}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
-   @key[type] @AdaTypeDefn{Address} @key[is] @RI{implementation-defined};@Chg{Version=[2],New=[
-   @key[pragma] Preelaborable_Initialization(Address);],Old=[]}
+   @key[type] @AdaTypeDefn{Address} @key[is] @RI{implementation-defined};
    @AdaObjDefn{Null_Address} : @key[constant] Address;
 
    @AdaObjDefn{Storage_Unit} : @key[constant] := @RI{implementation-defined};
@@ -177,7 +175,10 @@ Thus, Memory_Size is not very useful.
 @end{Discussion}
 @end{Description}
 
-Address is of a definite, nonlimited type.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
+Address is @Chg{Version=[2],New=[],Old=[of ]}a definite, nonlimited
+type@Chg{Version=[2],New=[ with preelaborable initialization (see
+@RefSecNum{Elaboration Control})],Old=[]}.
 Address represents machine addresses capable of addressing individual
 storage elements.
 Null_Address is an address that is distinct from the
@@ -196,6 +197,13 @@ Address is required to be nonlimited and definite because
 it is important to be able to assign addresses,
 and to declare uninitialized address variables.
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
+  @ChgAdded{Version=[2],Text=[If System.Address is defined as a private type
+  (as suggested below), it might be necessary to add a pragma
+  Preelaborable_Initialization to the specification of System in order that
+  Address have preelaborable initialization as required.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00221-01]}
 @Chg{Version=[2],New=[ Default_Bit_Order shall
@@ -295,9 +303,11 @@ have been moved to the Real Time Annex.
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Added @nt{pragma} Preelaborable_Initialization to
-  type Address, so that it can be used to declare default-initialized objects
-  in preelaborated units.]}
+  Type Address is defined to have preelaborable initialization, so that it
+  can be used without restriction in preelaborated units. (If Address is
+  defined to be a private type, as suggested by the @ImplAdviceTitle,
+  in Ada 95 it cannot be used in some contexts in a preelaborated units.
+  This is an unnecessary portability issue.)]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00221-01]}
   @ChgAdded{Version=[2],Text=[Default_Bit_Order is now a static
@@ -2824,7 +2834,7 @@ an elementary type @i(T)}, the following representation attribute is defined:]}
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],NoPrefix=[T],Text=[Stream_Size may be specified for
   first subtypes via an @nt{attribute_definition_clause}; the @nt{expression}
-  of such a clause shall be static, non-negative, and a multiple of
+  of such a clause shall be static, nonnegative, and a multiple of
   Stream_Element'Size.]}
 @end{Description}
 @EndPrefixType{}
@@ -3004,7 +3014,7 @@ terms of stream elements]}.]}
 attribute if the value of the elementary item is outside the range of values
 representable using Stream_Size bits. For a signed integer type, an enumeration
 type, or a fixed point type, the range is unsigned only if the integer code for
-the lower bound of the first subtype is non-negative, and a (symmetric) signed
+the lower bound of the first subtype is nonnegative, and a (symmetric) signed
 range that covers all values of the first subtype would require more than
 Stream_Size bits; otherwise the range is signed.]}
 
@@ -3159,8 +3169,8 @@ specification:
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
 @noprefix@;First writes the external tag of @i{Item} to @i{Stream}
-(by calling String'Output(@Chg{Version=[2],New=[@I{Stream}, ],Old=[]}Tags.@!External_Tag(@i{Item}'Tag) @em
-see @RefSecNum{Tagged Types and Type Extensions})
+(by calling String'Output(@Chg{Version=[2],New=[@I{Stream}, ],Old=[]}Tags.@!External_Tag(@i{Item}'Tag)@Chg{Version=[2],New=[)],Old=[]}
+@em see @RefSecNum{Tagged Types and Type Extensions})
 and then dispatches to the subprogram denoted by the Output attribute of
 the specific type identified by the tag.@Chg{Version=[2],New=[ Tag_Error is
 raised if the tag of Item identifies a type declared at an accessibility

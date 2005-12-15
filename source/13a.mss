@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/12/06 06:34:02 $}
+@Comment{$Date: 2005/12/15 02:36:36 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -2832,8 +2832,9 @@ for an enumeration type.
 The attributes of the type, such as Succ, Pred, and Pos,
 are unaffected by the @nt{@Chg{New=[enumeration_representation_clause],Old=[representation_clause]}}.
 For example, Pos always returns the position number, @i{not} the
-internal integer code that might have been specified in a
-@nt{@Chg{New=[enumeration_representation_clause],Old=[representation_clause]}}.
+internal integer code that might have been specified in
+@nt{@Chg{New=[an enumeration_representation_clause],
+Old=[a representation_clause]}}.
 @begin{Discussion}
 @Leading@;Suppose the enumeration type in question is derived:
 @begin{Example}

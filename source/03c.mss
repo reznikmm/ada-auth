@@ -1,9 +1,9 @@
  @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/12/10 07:15:10 $}
+@Comment{$Date: 2005/12/15 02:36:31 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2638,7 +2638,8 @@ interface and a synchronized interface extending it:}]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{type} Queue @key{is limited interface};
 @key{procedure} Append(Q : @key{in out} Queue; Person : @key{in} Person_Name) @key{is abstract};
-@key{procedure} Remove_First(Q : @key{in out} Queue; Person : @key{out} Person_Name) @key{is abstract};
+@key{procedure} Remove_First(Q      : @key{in out} Queue;
+                       Person : @key{out} Person_Name) @key{is abstract};
 @key{function} Cur_Count(Q : @key{in} Queue) @key{return} Natural @key{is abstract};
 @key{function} Max_Count(Q : @key{in} Queue) @key{return} Natural @key{is abstract};
 -- @RI[See @RefSecNum{Incomplete Type Declarations} for Person_Name.]]}
@@ -2650,8 +2651,10 @@ interface and a synchronized interface extending it:}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{type} Synchronized_Queue @key{is synchronized interface and} Queue; --@RI[ see @RefSecNum{Example of Tasking and Synchronization}]
-@key{procedure} Append_Wait(Q : @key{in out} Synchronized_Queue; Person : @key{in} Person_Name) @key{is abstract};
-@key{procedure} Remove_First_Wait(Q : @key{in out} Synchronized_Queue; Person : @key{out} Person_Name) @key{is abstract};]}
+@key{procedure} Append_Wait(Q      : @key{in out} Synchronized_Queue;
+                      Person : @key{in} Person_Name) @key{is abstract};
+@key{procedure} Remove_First_Wait(Q      : @key{in out} Synchronized_Queue;
+                            Person : @key{out} Person_Name) @key{is abstract};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[...]}

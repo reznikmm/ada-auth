@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.48 $ $Date: 2005/12/06 06:34:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.49 $ $Date: 2005/12/15 02:36:38 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/12/06 06:34:04 $}
+@Comment{$Date: 2005/12/15 02:36:38 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -2596,7 +2596,8 @@ package Numerics.Generic_Real_Arrays has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Real_Vector} @key{is array} (Integer @key{range} <>) @key{of} Real'Base;
-   @key{type} @AdaTypeDefn{Real_Matrix} @key{is array} (Integer @key{range} <>, Integer @key{range} <>) @key{of} Real'Base;]}
+   @key{type} @AdaTypeDefn{Real_Matrix} @key{is array} (Integer @key{range} <>, Integer @key{range} <>)
+                                                   @key{of} Real'Base;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI{Subprograms for Real_Vector types}]}
@@ -2623,9 +2624,12 @@ package Numerics.Generic_Real_Arrays has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   -- @RI[Real_Vector scaling operations]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left : Real'Base;   Right : Real_Vector) @key{return} Real_Vector;
-   @key{function} "*" (Left : Real_Vector; Right : Real'Base)   @key{return} Real_Vector;
-   @key{function} "/" (Left : Real_Vector; Right : Real'Base)   @key{return} Real_Vector;]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left : Real'Base;   Right : Real_Vector)
+      @key{return} Real_Vector;
+   @key{function} "*" (Left : Real_Vector; Right : Real'Base)
+      @key{return} Real_Vector;
+   @key{function} "/" (Left : Real_Vector; Right : Real'Base)
+      @key{return} Real_Vector;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI[Other Real_Vector operations]]}
@@ -2656,16 +2660,21 @@ package Numerics.Generic_Real_Arrays has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{function} "*" (Left, Right : Real_Vector) @key{return} Real_Matrix;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left : Real_Vector; Right : Real_Matrix) @key{return} Real_Vector;
-   @key{function} "*" (Left : Real_Matrix; Right : Real_Vector) @key{return} Real_Vector;]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left : Real_Vector; Right : Real_Matrix)
+      @key{return} Real_Vector;
+   @key{function} "*" (Left : Real_Matrix; Right : Real_Vector)
+      @key{return} Real_Vector;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI[Real_Matrix scaling operations]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left : Real'Base;   Right : Real_Matrix) @key{return} Real_Matrix;
-   @key{function} "*" (Left : Real_Matrix; Right : Real'Base)   @key{return} Real_Matrix;
-   @key{function} "/" (Left : Real_Matrix; Right : Real'Base)   @key{return} Real_Matrix;]}
+@ChgAdded{Version=[2],Text=[   @key{function} "*" (Left : Real'Base;   Right : Real_Matrix)
+      @key{return} Real_Matrix;
+   @key{function} "*" (Left : Real_Matrix; Right : Real'Base)
+      @key{return} Real_Matrix;
+   @key{function} "/" (Left : Real_Matrix; Right : Real'Base)
+      @key{return} Real_Matrix;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI[Real_Matrix inversion and related operations]]}
@@ -3181,9 +3190,11 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{with} Ada.Numerics.Generic_Real_Arrays, Ada.Numerics.Generic_Complex_Types;
 @key{generic}
-   @key{with package} Real_Arrays   @key{is new} Ada.Numerics.Generic_Real_Arrays   (<>);
+   @key{with package} Real_Arrays   @key{is new}
+      Ada.Numerics.Generic_Real_Arrays   (<>);
    @key{use} Real_Arrays;
-   @key{with package} Complex_Types @key{is new} Ada.Numerics.Generic_Complex_Types (Real);
+   @key{with package} Complex_Types @key{is new}
+      Ada.Numerics.Generic_Complex_Types (Real);
    @key{use} Complex_Types;
 @key{package} Ada.Numerics.Generic_Complex_Arrays @key{is}@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Complex_@!Arrays]}
    @key{pragma} Pure(Generic_Complex_Arrays);]}
@@ -3521,7 +3532,8 @@ is raised if Re'Length is not equal to Im'Length.]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Modulus  (X     : Complex_Vector) @key{return} Real_Vector;
-@key{function} "@key{abs}"    (Right : Complex_Vector) @key{return} Real_Vector @key{renames} Modulus;
+@key{function} "@key{abs}"    (Right : Complex_Vector) @key{return} Real_Vector
+                                              @key{renames} Modulus;
 @key{function} Argument (X     : Complex_Vector) @key{return} Real_Vector;
 @key{function} Argument (X     : Complex_Vector;
                    Cycle : Real'Base)      @key{return} Real_Vector;]}
@@ -3669,7 +3681,8 @@ Left'Range.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Real'Base; Right : Complex_Vector) @key{return} Complex_Vector;]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Real'Base;
+              Right : Complex_Vector) @key{return} Complex_Vector;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
@@ -3680,8 +3693,10 @@ Right'Range.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Complex_Vector; Right : Real'Base) @key{return} Complex_Vector;
-@key{function} "/" (Left : Complex_Vector; Right : Real'Base) @key{return} Complex_Vector;]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Complex_Vector;
+              Right : Real'Base) @key{return} Complex_Vector;
+@key{function} "/" (Left : Complex_Vector;
+              Right : Real'Base) @key{return} Complex_Vector;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
@@ -3745,7 +3760,8 @@ Re'Length(2) is not equal to Im'Length(2).]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Modulus  (X     : Complex_Matrix) @key{return} Real_Matrix;
-@key{function} "@key{abs}"    (Right : Complex_Matrix) @key{return} Real_Matrix @key{renames} Modulus;
+@key{function} "@key{abs}"    (Right : Complex_Matrix) @key{return} Real_Matrix
+                                              @key{renames} Modulus;
 @key{function} Argument (X     : Complex_Matrix) @key{return} Real_Matrix;
 @key{function} Argument (X     : Complex_Matrix;
                    Cycle : Real'Base)      @key{return} Real_Matrix;]}
@@ -3974,7 +3990,8 @@ are those of Left.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Real'Base; Right : Complex_Matrix) @key{return} Complex_Matrix;]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Real'Base;
+              Right : Complex_Matrix) @key{return} Complex_Matrix;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
@@ -3985,8 +4002,10 @@ of Right.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Complex_Matrix; Right : Real'Base) @key{return} Complex_Matrix;
-@key{function} "/" (Left : Complex_Matrix; Right : Real'Base) @key{return} Complex_Matrix;]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "*" (Left : Complex_Matrix;
+              Right : Real'Base) @key{return} Complex_Matrix;
+@key{function} "/" (Left : Complex_Matrix;
+              Right : Real'Base) @key{return} Complex_Matrix;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
@@ -4076,7 +4095,7 @@ A is not Hermitian.]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[A Hermitian matrix is one whose transpose is
   equal to its complex conjugate. The eigenvalues of a Hermitian matrix are
-  alwasy real. We only support this case because algorithms for solving the
+  always real. We only support this case because algorithms for solving the
   general case are inherently unstable.]}
 @end{Discussion}
 

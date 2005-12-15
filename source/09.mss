@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/12/10 07:15:15 $}
+@Comment{$Date: 2005/12/15 02:36:34 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.79 $}
+@Comment{$Revision: 1.80 $}
 
 @begin{Intro}
 
@@ -733,10 +733,11 @@ it depends on each master that includes this elaboration.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
 @ChgAdded{Version=[2],Text=[Otherwise, the task depends on
-the master of the outermost object of which it is a part, as determined by the
-accessibililty level of that object (see
+the master of the outermost object of which it is a part (as determined by the
+accessibility level of that object @em see
 @RefSecNum{Operations of Access Types} and
-@RefSecNum{Completion and Finalization}).]}
+@RefSecNum{Completion and Finalization}), as well as on any master whose
+execution includes that of the master of the outermost object.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[The master of a task created by a return
@@ -3646,7 +3647,7 @@ unknown, then Unknown_Zone_Error is raised.]}
 Left and Right. Days is the number of days of difference, Seconds is the
 remainder seconds of difference excluding leap seconds, and Leap_Seconds is
 the number of leap seconds. If Left < Right, then Seconds <= 0.0, Days <= 0,
-and Leap_Seconds <= 0. Otherwise, all values are non-negative.
+and Leap_Seconds <= 0. Otherwise, all values are nonnegative.
 The absolute value of Seconds is always less than 86_400.0.
 For the returned values, if Days =
 0, then Seconds + Duration(Leap_Seconds) = Calendar."@en" (Left, Right).]}

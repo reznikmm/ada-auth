@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.50 $ $Date: 2005/12/10 07:15:20 $ $Author: Randy $ }
+@comment{ $Revision: 1.51 $ $Date: 2005/12/15 02:36:39 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/12/10 07:15:20 $}
+@Comment{$Date: 2005/12/15 02:36:39 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -446,13 +446,15 @@ package Containers.Vectors has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Update_Element}
      (Container : @key{in out} Vector;
       Index     : @key{in}     Index_Type;
-      Process   : @key{not null access procedure} (Element : @key{in out} Element_Type));]}
+      Process   : @key{not null access procedure}
+                      (Element : @key{in out} Element_Type));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Update_Element}
      (Container : @key{in out} Vector;
       Position  : @key{in}     Cursor;
-      Process   : @key{not null access procedure} (Element : @key{in out} Element_Type));]}
+      Process   : @key{not null access procedure}
+                      (Element : @key{in out} Element_Type));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} Vector;
@@ -2055,7 +2057,7 @@ to an array. In particular, if the length of a vector is @i{N}, then]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[the worst-case time complexity of Element should
-  be @i{O}(log @i{N}); and]}
+  be @i{O}(log @i{N});]}
   @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
   Text=[The worst-case time complexity of Element
   for Containers.Vector should be @i{O}(log @i{N}).]}]}
@@ -2262,7 +2264,8 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Update_Element}
      (Container : @key{in out} List;
       Position  : @key{in}     Cursor;
-      Process   : @key{not null access procedure} (Element : @key{in out} Element_Type));]}
+      Process   : @key{not null access procedure}
+                      (Element : @key{in out} Element_Type));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} List;
@@ -4097,8 +4100,9 @@ package Containers.Hashed_Maps has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Update_Element}
      (Container : @key{in out} Map;
       Position  : @key{in}     Cursor;
-      Process   : @key{not null access procedure} (Key     : @key{in}     Key_Type;
-                                             Element : @key{in out} Element_Type));]}
+      Process   : @key{not null access procedure}
+                      (Key     : @key{in}     Key_Type;
+                       Element : @key{in out} Element_Type));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} Map;
@@ -4635,8 +4639,9 @@ package Containers.Ordered_Maps has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Update_Element}
      (Container : @key{in out} Map;
       Position  : @key{in}     Cursor;
-      Process   : @key{not null access procedure} (Key     : @key{in}     Key_Type;
-                                             Element : @key{in out} Element_Type));]}
+      Process   : @key{not null access procedure}
+                      (Key     : @key{in}     Key_Type;
+                       Element : @key{in out} Element_Type));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} Map;
@@ -6148,7 +6153,7 @@ package Containers.Hashed_Sets has the following declaration:]}
         (Container : @key{in out} Set;
          Position  : @key{in}     Cursor;
          Process   : @key{not null access procedure}
-                                       (Element : @key{in out} Element_Type));]}
+                         (Element : @key{in out} Element_Type));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{end} Generic_Keys;]}
@@ -6654,7 +6659,7 @@ package Containers.Ordered_Sets has the following declaration:]}
          (Container : @key{in out} Set;
           Position  : @key{in}     Cursor;
           Process   : @key{not null access procedure}
-                                         (Element : @key{in out} Element_Type));]}
+                          (Element : @key{in out} Element_Type));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{end} Generic_Keys;]}

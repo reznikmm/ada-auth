@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.47 $ $Date: 2005/11/16 06:43:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.48 $ $Date: 2005/12/15 02:36:43 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/11/16 06:43:04 $}
+@Comment{$Date: 2005/12/15 02:36:43 $}
 
 @LabeledClause{String Handling}
 
@@ -1681,7 +1681,7 @@ propagates Index_Error if Low > Length(Source)+1 or High > Length(Source).]}
 
 @end{DescribeCode}
 
-Each of the functions "=", "<", ">","<=", and ">="
+Each of the functions "=", "<", ">", "<=", and ">="
 returns the same result as the corresponding String
 operation applied to the String values given or represented by
 the two parameters.
@@ -2169,7 +2169,7 @@ Unbounded_String representing the slice at positions Low through High in the
 string represented by Source. Both routines propagate Index_Error if Low >
 Length(Source)+1 or High > Length(Source).]}
 
-Each of the functions "=", "<", ">","<=", and ">="
+Each of the functions "=", "<", ">", "<=", and ">="
 returns the same result as the corresponding String
 operation applied to the String values given or represented by Left and Right.
 

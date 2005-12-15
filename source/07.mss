@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/12/10 07:15:14 $}
+@Comment{$Date: 2005/12/15 02:36:33 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2894,8 +2894,8 @@ at the first freezing point
 (see @RefSecNum{Freezing Rules})
 of the ultimate ancestor type@Chg{Version=[2],New=[; the finalization of
 these objects is called the @i<finalization of the
-collection>@Defn{finalization of the collection}
-@Defn2{Term=[collection],Sec=[finalization of]}],Old=[]}.@Chg{Version=[2],
+collection>@Defn{finalization of the collection}@Defn2{Term=[collection],
+Sec=[finalization of]}],Old=[]}.@Chg{Version=[2],
 New=[ After the finalization of a master is complete, the objects finalized
 as part of its finalization cease to @i<exist>, as do any types and subtypes
 defined and created within the master.@PDefn2{Term=[exist],Sec=[cease to]}

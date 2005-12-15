@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/12/10 07:15:06 $}
+@Comment{$Date: 2005/12/15 02:36:29 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -64,6 +64,7 @@ declaration).>}
   implicit declarations, as part of a type declaration.
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @Defn{declaration}
 Each of the following is defined to be a declaration:
 any @nt{basic_@!declaration};
@@ -76,7 +77,9 @@ a @nt{subprogram_@!body};
 an @nt{entry_@!declaration};
 an @nt{entry_@!index_@!specification};
 a @nt{choice_@!parameter_@!specification};
-a @nt{generic_@!formal_@!parameter_@!declaration}.
+a @nt{generic_@!formal_@!parameter_@!declaration}.@Chg{Version=[2],New=[
+In addition, an @nt{extended_return_statement} is a declaration of its
+@nt{defining_identifier}.],Old=[]}
 @begin(Discussion)
   This list (when @nt<basic_declaration> is expanded out)
   contains all syntactic categories that end in "_declaration"
@@ -409,6 +412,10 @@ the task creation.
 @end{DiffWord83}
 
 @begin{DiffWord95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+  @ChgAdded{Version=[2],Text=[Added @nt{extended_return_statement} to
+  the list of declarations.]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
   @ChgAdded{Version=[2],Text=[Added null procedures
   (see @RefSecNum{Null Procedures}) to the syntax.]}
