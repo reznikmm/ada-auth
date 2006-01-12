@@ -184,6 +184,10 @@ package body ARM_Format is
     -- 10/28/05 - RLB - Made index changes for Ada 200Y.
     --		- RLB - Added added Annex headers.
     --		- RLB - Added Language-Defined Entity indexes.
+    -- 10/31/05 - RLB - Fixed the "this paragraph was deleted" code to
+    --			not change the version; it's not necessarily
+    --			initialized, and the Kind isn't set anyway if the
+    --			version is too new.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -2807,41 +2811,41 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		    if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted) or else
 		       ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number) then
 			-- If needed, make the "deleted text" message.
-			if Format_Object.Current_Change_Version > Format_Object.Change_Version then
-		            -- Beyond the current version, so its not deleted.
-			    null; -- Not deleted.
-			else
-		            case Format_Object.Changes is
-			        when ARM_Format.New_Only |
-			             ARM_Format.Changes_Only |
-			             ARM_Format.Show_Changes |
-			             ARM_Format.New_Changes =>
-				    -- Note that we include this in the
-				    -- "Show_Changes" and "Changes_Only" versions,
-				    -- so that complete paragraph deletions are obvious,
-				    -- and also so that we can use revision bars rather than
-				    -- displaying the changes in the RM version.
-			            ARM_Output.Text_Format (Output_Object,
-					        Bold => Format_Object.Is_Bold,
-					        Italic => True,
-					        Font => Format_Object.Font,
-					        Change => ARM_Output.None, -- Never mark this as changed!!
-					        Size => ARM_Output."-"(Format_Object.Size, 1),
-					        Location => Format_Object.Location);
-			            ARM_Output.Ordinary_Text (Output_Object,
-				         Text => "This paragraph was deleted.");
-			            ARM_Output.Text_Format (Output_Object, -- Restore the format.
-					        Bold => Format_Object.Is_Bold,
-					        Italic => Format_Object.Is_Italic,
-					        Font => Format_Object.Font,
-					        Change => Format_Object.Change,
-					        Version => Format_Object.Current_Change_Version,
-					        Added_Version => Format_Object.Current_Old_Change_Version,
-					        Size => Format_Object.Size,
-					        Location => Format_Object.Location);
-			        when ARM_Format.Old_Only => null; -- Not deleted.
-		            end case;
-		        end if;
+			-- We trust that Next_Paragraph_Change_Kind is not
+			-- set to Deleted if the version number of the change
+			-- is beyond the document generation version.
+			-- (Note that Current_Change_Version may not be set,
+			-- so it is not safe to test here.)
+		        case Format_Object.Changes is
+			    when ARM_Format.New_Only |
+			         ARM_Format.Changes_Only |
+			         ARM_Format.Show_Changes |
+			         ARM_Format.New_Changes =>
+			        -- Note that we include this in the
+			        -- "Show_Changes" and "Changes_Only" versions,
+			        -- so that complete paragraph deletions are obvious,
+			        -- and also so that we can use revision bars rather than
+			        -- displaying the changes in the RM version.
+			        ARM_Output.Text_Format (Output_Object,
+					    Bold => Format_Object.Is_Bold,
+					    Italic => True,
+					    Font => Format_Object.Font,
+					    Change => ARM_Output.None, -- Never mark this as changed!!
+					    Size => ARM_Output."-"(Format_Object.Size, 1),
+					    Location => Format_Object.Location);
+			        ARM_Output.Ordinary_Text (Output_Object,
+				     Text => "This paragraph was deleted.");
+			        ARM_Output.Text_Format (Output_Object, -- Restore the format.
+					    Bold => Format_Object.Is_Bold,
+					    Italic => Format_Object.Is_Italic,
+					    Font => Format_Object.Font,
+					    Change => Format_Object.Change,
+					    Version => Format_Object.Current_Change_Version,
+					    Added_Version => Format_Object.Current_Old_Change_Version,
+					    Size => Format_Object.Size,
+					    Location => Format_Object.Location);
+			    when ARM_Format.Old_Only => null; -- Not deleted.
+		        end case;
 		    end if;
 		    Format_Object.In_Paragraph := True;
 		    Format_Object.Next_Paragraph_Change_Kind := ARM_Database.None;

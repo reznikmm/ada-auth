@@ -322,7 +322,7 @@ private
 	Pragma_DB : ARM_Database.Database_Type;
 
 	-- Glossary:
-	Glossary_Term : String (1..20); -- Glossary term; used only when
+	Glossary_Term : String (1..50); -- Glossary term; used only when
 	Glossary_Term_Len : Natural := 0; -- processing [Chg]ToGlossary[Also] commands.
 	Glossary_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
 			-- The change kind of the ToGlossary.

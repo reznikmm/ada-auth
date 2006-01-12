@@ -1,3 +1,4 @@
+--with Ada.Text_IO; -- Debug.
 with Ada.Unchecked_Deallocation,
      Ada.Strings.Fixed,
      Ada.Characters.Handling;
@@ -53,7 +54,7 @@ package body ARM_Database is
     type String_Ptr is access String;
     type Item is record
 	Next : Item_List;
-	Sort_Key : String(1 .. 20);
+	Sort_Key : String(1 .. 50);
 	Hang : String(1 .. 50);
 	Hang_Len : Natural;
 	Text : String_Ptr;
@@ -253,6 +254,10 @@ package body ARM_Database is
 		Format_Text ("@begin(intro)" & Ascii.LF, "Prefix");
 		Temp := Database_Object.List;
 		while Temp /= null loop
+--** Debug:
+--Ada.Text_IO.Put_Line("Format " & Change_if_Needed (Temp) &
+--			"@defn{" & Ada.Strings.Fixed.Trim (Temp.Sort_Key, Ada.Strings.Right) & "}" & Ascii.LF &
+--			Temp.Text.all);
 		    Format_Text (Change_if_Needed (Temp) &
 			"@defn{" & Ada.Strings.Fixed.Trim (Temp.Sort_Key, Ada.Strings.Right) & "}" & Ascii.LF &
 			Temp.Text.all & Ascii.LF & Ascii.LF, Temp.Sort_Key);
