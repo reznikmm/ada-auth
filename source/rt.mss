@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.66 $ $Date: 2005/12/15 02:36:41 $ $Author: Randy $ }
+@comment{ $Revision: 1.67 $ $Date: 2006/01/12 22:17:17 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2005/12/15 02:36:41 $}
+@Comment{$Date: 2006/01/12 22:17:17 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2517,6 +2517,13 @@ be changed by an assignment].]}
 @ChgAdded{Version=[2],Text=[If the locking policy Ceiling_Locking is in effect
 then the ceiling priority of a protected object P is set to the value of
 P'Priority at the end of each protected action of P.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00445-01]}
+@ChgAdded{Version=[2],Text=[If the locking policy Ceiling_Locking is in effect
+then for protected objects with either an Attach_Handler or Interrupt_Handler
+pragma applying to one of its procedures, a check is made that the value to be
+assigned to 'Priority is in the range System.Interrupt_Priority. If the check
+fails, Program_Error is raised.]}
 @end{Runtime}
 
 @begin{Metrics}
@@ -2565,7 +2572,7 @@ completion of the protected action in which it is executed.]}
 @end{Notes}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01],ARef=[AI95-00445-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The ability to dynamically change and query the priority of a protected
   object is new.]}

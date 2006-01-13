@@ -1,0 +1,75 @@
+@Comment{Master file for the AARM}
+
+@Comment{Global properties}
+@ShowIndexEntries @Comment{To match the Ada 95 AARM}
+@ShowAnnotations
+@NumberParagraphs
+@Title{Version=[0],Text=[Annotated Ada Reference Manual]}@Comment{Same title for all versions}
+@FilePrefix{AA}
+
+@Comment{RTF properties}
+@SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}
+@RTFHeaderPrefix{Version=[0],Text=[ISO/IEC 8652:1995(E)]}
+@RTFHeaderPrefix{Version=[1],Text=[ISO/IEC 8652:1995(E) with COR.1:2001]}
+@RTFHeaderPrefix{Version=[2],Text=[ISO/IEC 8652:200y(E) Ed. 3]}
+
+@Comment{HTML properties}
+@Comment{Many small files are used, thus no @SingleHTMLOutputFile command}
+
+@Comment{Source files and related items, in collating order}
+@Source{Name=<Title.MSS>,SectionName=<Ttl>,SectionNumber=[0],NewSection=[T],HasTitle=[F]}
+@TOC @Comment{The table of contents goes here in the collating order}
+@Source{Name=<Front_Matter.MSS>,SectionName=<00>,SectionNumber=[0],NewSection=[T],HasTitle=[F]}
+@Source{Name=<01.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[T],HasTitle=[T]}
+@Source{Name=<02.MSS>,SectionName=<02>,SectionNumber=[2],NewSection=[T],HasTitle=[T]}
+@Source{Name=<03A.MSS>,SectionName=<03>,SectionNumber=[3],NewSection=[T],HasTitle=[T]}
+@Source{Name=<03B.MSS>,SectionName=<03>,SectionNumber=[3],NewSection=[F],HasTitle=[F]}
+@Source{Name=<03C.MSS>,SectionName=<03>,SectionNumber=[3],NewSection=[F],HasTitle=[F]}
+@Source{Name=<04A.MSS>,SectionName=<04>,SectionNumber=[4],NewSection=[T],HasTitle=[T]}
+@Source{Name=<04B.MSS>,SectionName=<04>,SectionNumber=[4],NewSection=[F],HasTitle=[F]}
+@Source{Name=<05.MSS>,SectionName=<05>,SectionNumber=[5],NewSection=[T],HasTitle=[T]}
+@Source{Name=<06.MSS>,SectionName=<06>,SectionNumber=[6],NewSection=[T],HasTitle=[T]}
+@Source{Name=<07.MSS>,SectionName=<07>,SectionNumber=[7],NewSection=[T],HasTitle=[T]}
+@Source{Name=<08.MSS>,SectionName=<08>,SectionNumber=[8],NewSection=[T],HasTitle=[T]}
+@Source{Name=<09.MSS>,SectionName=<09>,SectionNumber=[9],NewSection=[T],HasTitle=[T]}
+@Source{Name=<10.MSS>,SectionName=<10>,SectionNumber=[10],NewSection=[T],HasTitle=[T]}
+@Source{Name=<11.MSS>,SectionName=<11>,SectionNumber=[11],NewSection=[T],HasTitle=[T]}
+@Source{Name=<12.MSS>,SectionName=<12>,SectionNumber=[12],NewSection=[T],HasTitle=[T]}
+@Source{Name=<13A.MSS>,SectionName=<13>,SectionNumber=[13],NewSection=[T],HasTitle=[T]}
+@Source{Name=<13B.MSS>,SectionName=<13>,SectionNumber=[13],NewSection=[F],HasTitle=[F]}
+@Comment{Now, the "Standard Libraries" separator page}
+@Source{Name=<LIBRARY.MSS>,SectionName=<Lib>,SectionNumber=[20],NewSection=[T],HasTitle=[F]}
+   @Comment{Note, this isn't a real section number}
+@Comment{Annex A; all of the files starting with "Pre_" are part of Annex A.}
+@Source{Name=<PRE.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[T],HasTitle=[T]}
+@Source{Name=<PRE_Standard.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F],HasTitle=[F]}
+@Source{Name=<PRE_Ada.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F],HasTitle=[F]}
+@Source{Name=<PRE_Chars.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F],HasTitle=[F]}
+@Source{Name=<PRE_Strings.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F],HasTitle=[F]}
+@Source{Name=<PRE_Math.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F],HasTitle=[F]}
+@Source{Name=<Real_Attribs.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F],HasTitle=[F]}
+@Source{Name=<PRE_IO.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F],HasTitle=[F]}
+@Source{Name=<PRE_Cmdln.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F],HasTitle=[F]}
+@Source{Name=<PRE_Dirs.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F],HasTitle=[F]}
+@Source{Name=<PRE_Environ.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F],HasTitle=[F]}
+@Source{Name=<PRE_Containers.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F],HasTitle=[F]}
+@Comment{Other normative annexes:}
+@Source{Name=<Interface.MSS>,SectionName=<B>,SectionNumber=[B],NewSection=[T],HasTitle=[T]}
+@Source{Name=<SP.MSS>,SectionName=<C>,SectionNumber=[C],NewSection=[T],HasTitle=[T]}
+@Source{Name=<RT.MSS>,SectionName=<D>,SectionNumber=[D],NewSection=[T],HasTitle=[T]}
+@Source{Name=<DS.MSS>,SectionName=<E>,SectionNumber=[E],NewSection=[T],HasTitle=[T]}
+@Source{Name=<InfoSys.MSS>,SectionName=<F>,SectionNumber=[F],NewSection=[T],HasTitle=[T]}
+@Source{Name=<Numerics.MSS>,SectionName=<G>,SectionNumber=[G],NewSection=[T],HasTitle=[T]}
+@Source{Name=<Safety.MSS>,SectionName=<H>,SectionNumber=[H],NewSection=[T],HasTitle=[T]}
+@Comment{We don't use Annex I, as ISO requires skipping I and O}
+@Source{Name=<Obsolescent.MSS>,SectionName=<J>,SectionNumber=[J],NewSection=[T],HasTitle=[T]}
+@Comment{Informative annexes:}
+@Source{Name=<Attribs.MSS>,SectionName=<K>,SectionNumber=[K],NewSection=[T],HasTitle=[T]}
+@Source{Name=<Pragmas.MSS>,SectionName=<L>,SectionNumber=[L],NewSection=[T],HasTitle=[T]}
+@Source{Name=<Impldef.MSS>,SectionName=<M>,SectionNumber=[M],NewSection=[T],HasTitle=[T]}
+@Source{Name=<Glossary.MSS>,SectionName=<N>,SectionNumber=[N],NewSection=[T],HasTitle=[T]}
+@Comment{We don't use Annex O, as ISO requires skipping I and O}
+@Source{Name=<Syntax.MSS>,SectionName=<P>,SectionNumber=[P],NewSection=[T],HasTitle=[T]}
+@Source{Name=<Langdef.MSS>,SectionName=<Q>,SectionNumber=[Q],NewSection=[T],HasTitle=[T]}
+@Index
+

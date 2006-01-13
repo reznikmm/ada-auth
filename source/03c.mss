@@ -1,9 +1,9 @@
  @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/12/15 02:36:31 $}
+@Comment{$Date: 2006/01/12 22:17:10 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2455,7 +2455,7 @@ interfaces.]}
   interface can be an ancestor of a task or a protected type. Such a
   task or protected type is called a synchronized tagged type.]}>}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01],ARef=[AI95-00443-01]}
 @ChgAdded{Version=[2],Text=[@Defn{synchronized tagged type}
 @PDefn2{Term=[type],Sec=[synchronized tagged]}
 @PDefn2{Term=[tagged type],Sec=[synchronized]}
@@ -2465,8 +2465,8 @@ interfaces.]}
 @Defn{protected tagged type}
 @Redundant[A task or protected type derived from an interface is a tagged type.]
 Such a tagged type is called a @i<synchronized> tagged
-type, as are synchronized interfaces and private extensions derived from
-synchronized interfaces.]}
+type, as are synchronized interfaces and private extensions whose declaration
+includes the reserved word @b{synchronized}.]}
 
 @begin{TheProof}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2485,6 +2485,11 @@ interface is @i<not> an interface type, as @lquotes@;interface@rquotes is
 derivation). In this sense, @lquotes@;interface@rquotes is similar to
 @lquotes@;abstract@rquotes. The class-wide type associated with an interface is
 a concrete (nonabstract) indefinite tagged composite type.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@LQuotes@;Private extension@rquote@; includes
+generic formal private extensions, as explained in
+@RefSecNum{Formal Private and Derived Types}.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}

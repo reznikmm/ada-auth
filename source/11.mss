@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2005/12/06 06:34:01 $}
+@Comment{$Date: 2006/01/12 22:17:15 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1108,7 +1108,7 @@ exception contains such a character.]}
 @end{Inconsistent95}
 
 @begin{Incompatible95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01],ARef=[AI95-00400-01],ARef=[AI95-00438-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00400-01],ARef=[AI95-00438-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   Functions Wide_Exception_Name and Wide_Wide_Exception_Name, and procedures
   Read_Exception_Occurrence and Write_Exception_Occurrence

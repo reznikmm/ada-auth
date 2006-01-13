@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2005/12/15 02:36:34 $}
+@Comment{$Date: 2006/01/12 22:17:14 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.80 $}
+@Comment{$Revision: 1.81 $}
 
 @begin{Intro}
 
@@ -1752,6 +1752,15 @@ If not detected, the bounded error
 might result in deadlock or a (nested)
 protected action on the same target object.
 
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
+@ChgAdded{Version=[2],Text=[By @lquotes@;nested protected action@rquotes,
+we mean that an additional protected action can be started by another task
+on the same protected object. This means that mutual exclusion may be broken
+in this bounded error case. A way to ensure that this does not happen is to use
+pragma Detect_Blocking (see @RefSecNum{Pragma Detect_Blocking}).]}
+@end{Discussion}
+
 Certain language-defined subprograms are
 potentially blocking.
 In particular, the subprograms of
@@ -1771,7 +1780,7 @@ subprograms in language-defined input-output packages not covered by this rule
 (and thus not potentially blocking) are the Get and Put routines that take
 string parameters defined in the packages nested in Text_IO.]}@ChgNote{This
 was the resolution of a ramification.}
- @end{Discussion}
+@end{Discussion}
 @end{Bounded}
 
 @begin{Notes}
@@ -1814,9 +1823,9 @@ target object is not considered a potentially blocking operation.
 @end(Reason)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
-@ChgAdded{Version=[2],Text=[The @nt{pragma} Detect_Blocking may be used to ensure
-that all executions of potentially blocking operations during a protected
-action raise Program_Error.
+@ChgAdded{Version=[2],Text=[The @nt{pragma} Detect_Blocking may be used to
+ensure that all executions of potentially blocking operations during a
+protected action raise Program_Error.
 See @RefSecNum{Pragma Detect_Blocking}.]}
 @end{Notes}
 

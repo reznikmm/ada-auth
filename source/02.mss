@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2005/12/10 07:15:06 $}
+@Comment{$Date: 2006/01/12 22:17:08 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -1856,7 +1856,7 @@ to @RefSec(Obsolescent Features).
 
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00284-02]}
-  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 83}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   The following words are not reserved in Ada 95, but are reserved in Ada
   2005: @key{interface}, @key{overriding}, @key{synchronized}. A special
   allowance is made for @key{pragma} Interface (see @RefSecNum{Pragma Interface}).

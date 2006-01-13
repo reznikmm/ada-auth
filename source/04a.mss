@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/12/15 02:36:32 $}
+@Comment{$Date: 2006/01/12 22:17:12 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -3138,12 +3138,25 @@ for those composite types covered earlier) is defined as follows:
   occur for integer types, since one's complement machines
   typically have both a plus and minus (integer) zero.
 @end{Ramification}
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
+  @ChgAdded{Version=[2],Text=[For a component with an anonymous access type,
+  @lquotes@;predefined equality@rquotes@; is that defined for the
+  @i<universal_access> type (anonymous access types have no equality operators
+  of their own).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[For a component with a tagged type @i{T},
+  @lquotes@;the primitive equals operator@rquotes@; is the one with two
+  parameters of @i(T) which returns Boolean. We're not talking about some
+  random other primitive function named "=".]}
+@end{Honest}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0016],ARef=[AI95-00123-01]}
-@Chg{New=[For any composite type, the order in which "=" is called for
-components is unspecified. Furthermore, if the result can be determined
-before calling "=" on some components, it is unspecified whether "=" is called
-on those components.@PDefn{Unspecified}],Old=[]}
+@ChgAdded{Version=[1],Text=[For any composite type, the order in which "="
+is called for components is unspecified. Furthermore, if the result can be
+determined before calling "=" on some components, it is unspecified whether
+"=" is called on those components.@PDefn{Unspecified}]}
 
 The predefined "/=" operator gives the complementary result
 to the predefined "=" operator.
@@ -3247,6 +3260,16 @@ but an exception can be raised by the evaluation of
 the operands. A predefined equality operator for a composite
 type can only raise an exception if the type has a tagged part
 whose primitive equals operator propagates an exception.
+
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[For elementary types, if one of the operands is
+  invalid or abnormal, evaluating it might raise an exception
+  (see @RefSecNum{Data Validity}). For instance, for a floating point type,
+  comparing a signalling NaN to another value is likely to raise an exception.
+  We're not talking about cases like that; we're only talking about the test
+  or operator itself.]}
+@end{Reason}
 
 If a composite type has components that depend on discriminants, two values
 of this type have matching components if and only if their

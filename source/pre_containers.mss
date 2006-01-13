@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.51 $ $Date: 2005/12/15 02:36:39 $ $Author: Randy $ }
+@comment{ $Revision: 1.52 $ $Date: 2006/01/12 22:17:16 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2005/12/15 02:36:39 $}
+@Comment{$Date: 2006/01/12 22:17:16 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -1089,9 +1089,10 @@ propagated.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The tamper with the elements check is intended to
-  prevent the Element parameter of Process from being modified or deleted
-  outside of Process. The check prevent data loss (if Element_Type is passed by
+  @ChgAdded{Version=[2],Text=[The @lquotes@;tamper with the elements@rquotes@;
+  check is intended to prevent the Element parameter of Process from being
+  modified or deleted
+  outside of Process. The check prevents data loss (if Element_Type is passed by
   copy) or erroneous execution (if Element_Type is an unconstrained type in an
   indefinite container).]}
 @end{Reason}
@@ -1759,7 +1760,8 @@ exception raised by Process is propagated.]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The purpose of the tamper with cursors check is
+  @ChgAdded{Version=[2],Text=[The purpose of the @lquotes@;tamper with the
+  cursors@rquotes@; check is
   to prevent erroneous execution from the Position parameter of Process.@key{all}
   becoming invalid. This check takes place when the operations that tamper with
   the cursors of the container are called. The check cannot be made later (say
@@ -5788,8 +5790,8 @@ from the set and Program_Error is propagated.]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The key check ensures that the invariants of
   the set are preserved by the modification. The @lquotes@;tampers with
-  elements@rquotes@; check prevents data loss (if Element_Type is by-copy) or
-  erroneous execution (if element type is unconstrained and indefinite).]}
+  the elements@rquotes@; check prevents data loss (if Element_Type is by-copy)
+  or erroneous execution (if element type is unconstrained and indefinite).]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}

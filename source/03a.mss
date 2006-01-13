@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/12/15 02:36:29 $}
+@Comment{$Date: 2006/01/12 22:17:09 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -4644,6 +4644,13 @@ Context is used to resolve their type.
   Wide_Character'Wide_Image will change for the position numbers 16#FFFE#
   and 16#FFFF#. It is very unlikely that this will matter in practice,
   as these names do not represent useable characters.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+  @ChgAdded{Version=[2],Text=[Because of the previously mentioned changes to
+  the Wide_Character'Wide_Image of various character values, the value of
+  attribute Wide_Width will change for some subtypes of Wide_Character.
+  However, the new language-defined names were chosen so that the value of
+  Wide_Character'Wide_Width itself does not change.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
   @ChgAdded{Version=[2],Text=[The declaration of Wide_Wide_Character in

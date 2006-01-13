@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2005/12/06 06:33:58 $}
+@Comment{$Date: 2006/01/12 22:17:13 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1956,12 +1956,13 @@ That makes the rule different for @key[in] vs. @key[in out].
 @end{Resolution}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00409-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[]}@ChgNote{Conditional leading}
-The renamed entity shall be an object.@Chg{Version=[2],New=[ In the case
+The renamed entity shall be an object.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01],ARef=[AI95-00409-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[In the case
 where the type is defined by an @nt{access_definition},
 the type of the renamed object and the type defined by the
-@nt{access_definition}:],Old=[]}
+@nt{access_definition}:]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01],ARef=[AI95-00409-01]}
 @ChgAdded{Version=[2],Text=[shall both be access-to-object types with
