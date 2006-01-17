@@ -108,7 +108,7 @@ Note that regular source commands are not allowed in the master file, unless
 otherwise noted.
 
 Source commands (the order of these determines the collating order):
-@Source{Name=<File Name>,SectionName=<Name>,SectionNumber=<AlphaNum>,NewSection=[T|F],HasTitle=[T|F]} -
+@Source{Name=<File Name>,SectionName=<Name>,SectionNumber=<AlphaNum>,NewSection=[T|F]} -
      Specifies a source file for the document. The <File Name> indicates where
      the source file is found, and may include a path if desired. If <File Name>
      does not include an extension, ".MSS" is assumed. <Name> gives
@@ -118,11 +118,7 @@ Source commands (the order of these determines the collating order):
      from A .. Z. If NewSection is true (T), this is the first file for the
      indicated section; otherwise, this is a continuation file for the
      section. (If this setting is wrong, there will be extra or missing headers
-     for the section.) If HasTitle is true (T), this section has a title;
-     otherwise it does not.
-@Index
-     Specifies where the index will appear in the collating order (usually last);
-     if this is omitted, there will be no index.
+     for the section.)
 @TOC
      Specifies where the table of contents will appear in the collating order;
      if this is omitted, there will be no table of contents.
@@ -148,6 +144,15 @@ Global properties:
      If given in the master file, or ShowAnnotations is not given,
      annotations are not included in the output in any form, and "RMOnly"
      text is included in the output.
+@ShowISO
+     If given in the master file, text marked "ISOOnly" will be included in the
+     output. "NotISO" text is not included in the output. If this command is
+     not given, "ISOOnly" text is not included in any form, and "NotISO" text
+     is included.
+@HideISO
+     If given in the master file, or ShowISO is not given,
+     "ISOOnly" text is not included in the output in any form, and "NotISO"
+     text is included in the output.
 @NumberParagraphs
      If given in the master file, paragraphs are numbered per subclause
      (as in the Ada Reference Manual). Otherwise, paragraphs are not numbered.
@@ -166,6 +171,58 @@ HTML Output properties:
      If given in the master file, generate a single large file for
      the output, rather than one file per clause. If this is not given,
      smaller files are generated.
+@HTMLKind{Version=[3|4Comp|4],Unicode=[T|F]}
+     Specifies the kind of HTML that will be output.
+     If Version=3, HTML compatible with (virtually) all browsers will be
+     generated, but it will have limited formatting. The Unicode setting is
+     ignored; special characters will be output using ASCII equivalents,
+     and explicit output with the @Unicode command is prohibited and will
+     cause an error.
+     If Version=4Comp, the HTML will have more extensive formatting, but older
+     browsers will have more limited formatting. If Unicode is true (T),
+     Unicode characters will be used where appropriate (presuming the
+     characters are available on the US version of Windows 2000); otherwise
+     ASCII equivalents will be used. In either case, explicit Unicode
+     characters (@Unicode) are generated.
+     If Version=4, the HTML will have the best formatting on modern
+     browsers (IE 5.0, Firefox 1.0, Netscape 6.2, and later versions of these)
+     but older browsers will have almost no formatting. If Unicode is true (T),
+     Unicode characters will be used where appropriate (presuming the
+     characters are available on the US version of Windows 2000); otherwise
+     ASCII equivalents will be used. In either case, explicit Unicode
+     characters (@Unicode) are generated.
+     The default is a version of 4Comp with Unicode = T.
+@HTMLNavBar{RefName=[<URL>],SrchName=[<URL>],IndexName=[<URL>],
+   UseButtons=[T|F],OnTop=[T|F],OnBottom=[T|F]}
+     Specifies the properties of the Navigation Bar in the files.
+     RefName gives the URL of the references page. This can be part of the
+     current document (in which case the URL can be relative), or an external
+     page. It will be the URL assigned to the "References" button/label;
+     if set to null, the "References" button/label will be omitted.
+     SrchName gives the URL of the search page. This can be a relative or
+     absolute URL. It will be the URL assigned to the "Search" button/label;
+     if set to null, the "Search" button/label will be omitted.
+     IndexName gives the URL of the search page. This can be a relative or
+     absolute URL. It will be the URL assigned to the "Index" button/label;
+     if set to null, the "Index" button/label will be omitted.
+     If UseButtons is true (T), the navigation bar will use graphic buttons;
+     otherwise, text labels will be generated.
+     If OnTop is true (T), the navigation bar will be on the top of the
+     document page(s) in the header; otherwise it will not appear on top.
+     If OnBottom is true (T), the navigation bar will be on the bottom of the
+     document page(s) in the footer; otherwise it will not appear on the bottom.
+     One of OnTop or OnBottom should be true, or navigation will be difficult!
+     By default, the "References" and "Search" buttons are omitted, buttons
+     are used, and navigation bars are shown on the top and bottom of every
+     page.
+@HTMLHeader{<HTML_for_Header>}
+     Specifies HTML markup for the header of the the document. This will be
+     repeated on every page, and needs to be a self-contained HTML fragment.
+     By default, this is empty.
+@HTMLFooter{<HTML_for_Footer>}
+     Specifies HTML markup for the footer of the the document. This will be
+     repeated on every page, and needs to be a self-contained HTML fragment.
+     By default, this is empty.
 
 RTF Output properties:
 
@@ -178,6 +235,13 @@ RTF Output properties:
      If no header prefix is given for the current version, the prefix of the
      previous version is used; to use the same prefix for all versions, give
      the prefix for Version=[0].
+@RTFPageSize{Letter|A4|HalfLetter|Ada95}
+     Specifies the size of the RTF output; Letter is used if this is not
+     specified. Letter is 8.5"x11"; A4 is European standard size; HalfLetter
+     is 5.5"x8.5"; Ada95 is 7"x9".
+@RTFFonts{Serif=[Times|Souvenir],SansSerif=[Arial|Helvetica]}
+     Specifies the specific fonts used for the Serif and Sans Serif fonts.
+     If not specified, Times ("Times New Roman") and Arial are used.
 
 Other commands:
 
@@ -232,9 +296,9 @@ Text commands:
 @comment{<text>} - The text is a comment to the input files, and is ignored
 	     on output.
 @newpage   - Insert a page break. Ends a paragraph.
-@rmnewpage - Insert a page break in the RM, ignored in other documents. Ends a
-	     paragraph. Use to insert page breaks to make the printed RM
-             look better.
+@rmnewpage - Insert a page break in the RM (that is, when HideAnnotations is
+	     used), ignored otherwise. Ends a paragraph. Use to insert page
+	     breaks to make the printed RM look better.
 @newcolumn - Insert a column break. Only allowed in a multi-column formats.
 	     Ends a paragraph.
 @softpage  - Insert a soft page break in a format that does not generally
@@ -351,14 +415,30 @@ Text commands:
 	clause number. This is intended to be used internally to the tool,
 	not in document source (the tool assigns the clause numbers).
 
+@LocalTarget{Target=[<target-text>],Text=[<text>]} - Generates a target for
+	future @LocalLink commands at the current location. <target-text>
+        should be short, using alphanumeric characters. <text> will be
+	generated normally, using the current formatting (no formatting
+	is allowed in <text>).
+@LocalLink{Target=[<target-text>],Sec=[<title>],Text=[<text>]} - Generates a
+	link to the target specifed in the section given by "title" (this
+	should have been defined by a @LocalTarget command). <text> will be
+	generated as the body of the link, using the current formatting (no
+	formatting in <text>).
+@URLLink{URL=[<URL>],Text=[<text>]} - Generates a link to the URL specified;
+	<text> will be the body of the link, using the current formatting (no
+	formatting in <text>). The URL should be a complete URL, including
+	"http://".
+
+
 -- Ada specific commands:
 @nt{<text>} - A non-terminal in normal text. This will be set in a Swiss
 	      (sans-serif) font.
 @key{<text>} - A keyword in normal text. This will be set in boldface.
 @redundant{<text>} - Marks text thought to be unnecessary in the RM. That is,
 	the rules are explained elsewhere. The text is formatted normally.
-	For the AARM, this text is surrounded in brackets. For the RM, no
-	special formatting is used.
+	When annotations are shown, this text is surrounded in brackets.
+        When annotations are not shown, no special formatting is used.
 
 @syn{[Tabs=<Tabset>, ]LHS=<Non-terminal>, RHS=<Production>}
        - Marks a syntax production.
@@ -442,6 +522,8 @@ If Show-Index-Entries is used on the command line, indexing entries show as
 italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 "[partial]", IndexSee adds ": see <OtherTerm>", and IndexSeeAlso adds
 ": see also <OtherTerm>" to the reference.
+
+@IndexList - Generates the index at this point.
 
 @defn{<text>} - Defines a term, where the entire definition is given in the
 	referenced paragraph.
@@ -762,9 +844,11 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 		    inside of "Examples".)
 	NotIso    - Text that is not included in ISO documents. No format is implied.
 	IsoOnly   - Text that is included only in ISO documents. No format is implied.
-	RMOnly    - Text that is not included in the AARM. No format is implied.
+	RMOnly    - Text that is not included in the AARM (that is, it is only
+		    included in the output if HideAnnotations is used). No
+		    format is implied.
 
-    AARM-only groupings:
+    AARM-only groupings: (not shown if HideAnnotations is used)
 	MetaRules - Language Design Principles.
 	Inconsistent83 - Inconsistenies with Ada 83.
 	Incompatible83 - Incompatibilities with Ada 83.
@@ -776,7 +860,7 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	DiffWord95- Wording Changes from Ada 95.
 	AARMOnly  - Text that is not included in the RM. No format is implied.
 
-    AARM annotations:
+    AARM annotations: (not shown if HideAnnotations is used)
 	Reason    - Why a rule is necessary.
 	Ramification- Consequences of rules. (Important ones should be Notes).
 	Discussion - General annotations.
@@ -867,7 +951,7 @@ annotations and (visible) index entries.
 The master file RM.MSM specifies the Ada Reference Manual. This is the
 version used by most users.
 
-The master file RM-ISO.MSM specifies Ada 95 Reference Manual in ISO format.
+The master file ISO-RM.MSM specifies Ada 95 Reference Manual in ISO format.
 This version lacks some sections, paragraph numbers, and is printed on A4
 paper.
 

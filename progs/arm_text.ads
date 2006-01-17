@@ -75,6 +75,7 @@ package ARM_Text is
     --  5/27/05 - RLB - Added arbitrary Unicode characters.
     --  1/11/06 - RLB - Eliminated dispatching Create in favor of tailored
     --			versions.
+    --  1/13/06 - RLB - Added new Link operations.
 
     type Text_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -329,6 +330,31 @@ package ARM_Text is
 	-- of the reference is "Text", and AI_Number denotes
 	-- the target (in folded format). For hyperlinked formats, this should
 	-- generate a link; for other formats, the text alone is generated.
+
+    procedure Local_Target (Output_Object : in out Text_Output_Type;
+			    Text : in String;
+			    Target : in String);
+	-- Generate a local target. This marks the potential target of local
+	-- links identified by "Target". Text is the text of the target.
+	-- For hyperlinked formats, this should generate a link target;
+	-- for other formats, only the text is generated.
+
+    procedure Local_Link (Output_Object : in out Text_Output_Type;
+			  Text : in String;
+			  Target : in String;
+			  Clause_Number : in String);
+	-- Generate a local link to the target and clause given.
+	-- Text is the text of the link.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+
+    procedure URL_Link (Output_Object : in out Text_Output_Type;
+			Text : in String;
+			URL : in String);
+	-- Generate a link to the URL given.
+	-- Text is the text of the link.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
 
 private
 

@@ -13,7 +13,7 @@ package ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -80,6 +80,10 @@ package ARM_Format is
     -- 12/11/04 - RLB - Increased Syntax_NT length.
     -- 10/17/05 - RLB - Added Glossary change items.
     -- 10/28/05 - RLB - Added Language-Define subindexes.
+    --  1/12/06 - RLB - Replaced "Document" with a number of new more general
+    --			properties.
+    --  1/16/06 - RLB - Added "Unnumbered_Section" counter, so we can assign
+    --			names without special cases.
 
     type Format_Type is tagged limited private;
 
@@ -101,20 +105,23 @@ package ARM_Format is
 	-- ignored. Thus Change_Version = '0' is the same as Old_Only no
 	-- matter what command is given.
 
-    type Document_Type is (AARM, RM, RM_ISO);
-	-- Which document to generate? The AARM, the RM, or the RM for ISO?
-
     procedure Create (Format_Object : in out Format_Type;
-		      Document : ARM_Format.Document_Type;
 		      Changes : in ARM_Format.Change_Kind;
 		      Change_Version : in ARM_Contents.Change_Version_Type;
-		      Display_Index_Entries : in Boolean);
-	-- Initialize an input object. Document determines the type of
-	-- document to create. Changes and Change_Version determine which
-	-- changes should be displayed. If Display_Index_Entries is True,
+		      Display_Index_Entries : in Boolean;
+		      Include_Annotations : in Boolean;
+		      Include_ISO : in Boolean;
+		      Number_Paragraphs : in Boolean);
+	-- Initialize an input object. Changes and Change_Version determine
+	-- which changes should be displayed. If Display_Index_Entries is True,
 	-- index entries will be printed in the document; otherwise, they
 	-- will not generate any visible text (although they might generate
-	-- a link anchor).
+	-- a link anchor). If Include_Annotations is True, annotations (AARM
+	-- text) will be included in the output; otherwise it will not be.
+	-- If Include_ISO is True, ISOOnly text will be included in the output
+	-- (and NotISO text will not); otherwise the reverse is true.
+	-- If Number_Paragraphs is true, paragraphs will be numbered (per
+	-- subclause); otherwise they will not be.
 
     procedure Destroy (Format_Object : in out Format_Type);
 	-- Destroy a format object, releasing any resources.
@@ -131,20 +138,11 @@ package ARM_Format is
 	-- @SeeSecNum, and similar commands. For that, we need the full names
 	-- of the sections and clauses.
 
-    procedure Insert_Index (Format_Object : in out Format_Type);
-	-- Insert the header for the index into the table of contents.
-
     procedure Write_Table_of_Contents (
 		        Format_Object : in out Format_Type;
 		       Output_Object : in out ARM_Output.Output_Type'Class);
 	-- Writes the table of contents for the document. (It will have
 	-- a section name of "TOC").
-
-    procedure Write_Index (
-		        Format_Object : in out Format_Type;
-		       Output_Object : in out ARM_Output.Output_Type'Class);
-	-- Writes the index for the document. (It will have
-	-- a section name of "IDX").
 
     procedure Process (Format_Object : in out Format_Type;
 		       File_Name : in String;
@@ -163,13 +161,13 @@ package ARM_Format is
 		      Text : in String;
 		      Output_Object : in out ARM_Output.Output_Type'Class;
 		      Text_Name : in String;
-		      No_AARM_Text : in Boolean);
+		      No_Annotations : in Boolean);
 	-- Format the contents of Text, writing the results to
 	-- Output_Object. (Output_Object uses dispatching calls to provide
 	-- the correct formatting). Text is assumed to be a component of
 	-- a larger section. Text_Name is an identifying name for error messages.
-	-- If No_AARM_Text is true, we don't want any AARM text even if we
-	-- are generating the AARM.
+	-- If No_Annotations is true, we don't want any annotations even if we
+	-- are generating a document with annotations.
 
 private
     type Paragraph_Type is (Plain, Introduction,
@@ -203,15 +201,19 @@ private
 
     type Format_Type is tagged limited record
 	-- Document information:
-	Document : ARM_Format.Document_Type;
 	Changes : ARM_Format.Change_Kind; -- No Both here.
 	Change_Version : ARM_Contents.Change_Version_Type;
 	Display_Index_Entries : Boolean;
+	Include_Annotations : Boolean;
+	Include_ISO : Boolean;
+	Number_Paragraphs : Boolean;
 
 	-- Clause numbers:
 	Section : ARM_Contents.Section_Number_Type; -- The current section number.
 	Clause : Natural; -- The current clause number.
 	Subclause : Natural; -- The current subclause number.
+	Unnumbered_Section : Natural; -- The current (if any) clause number
+		-- for unnumbered sections.
 
 	-- Paragraph format info:
 	Next_Paragraph_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;

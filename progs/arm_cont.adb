@@ -1,4 +1,5 @@
 with Ada.Characters.Handling;
+--with Ada.Text_IO; -- Debug.
 package body ARM_Contents is
 
     --
@@ -8,7 +9,7 @@ package body ARM_Contents is
     -- references.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004, 2005  AXE Consultants.
+    -- Copyright 2000, 2004, 2005, 2006  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -46,6 +47,7 @@ package body ARM_Contents is
     --  8/22/00 - RLB - Added Old_Title handling.
     --  9/ 9/04 - RLB - Removed unused with.
     --  2/ 2/05 - RLB - Allowed more old titles.
+    --  1/16/06 - RLB - Added debugging.
 
     type Title_Record is record
 	Title : Title_Type; -- Title in original format.
@@ -96,6 +98,10 @@ package body ARM_Contents is
 	     Clause_Number => Clause_Number,
 	     Subclause_Number => Subclause_Number,
              Version => Version);
+--Ada.Text_IO.Put_Line ("  Add " & Title &
+-- " Index=" & Natural'Image(Last_Title) & " Level=" & Level_Type'Image(Level));
+--Ada.Text_IO.Put_Line ("    Section" & Section_Number_Type'Image(Section_Number) &
+-- " Clause" & Natural'Image(Clause_Number) & " Subclause" & Natural'Image(Subclause_Number));
     end Add;
 
 
@@ -124,6 +130,10 @@ package body ARM_Contents is
 	     Clause_Number => Clause_Number,
 	     Subclause_Number => Subclause_Number,
              Version => '0');
+--Ada.Text_IO.Put_Line ("  Add_Old " & Old_Title &
+-- " Index=" & Natural'Image(Last_Old_Title) & " Level=" & Level_Type'Image(Level));
+--Ada.Text_IO.Put_Line ("    Section" & Section_Number_Type'Image(Section_Number) &
+-- " Clause" & Natural'Image(Clause_Number) & " Subclause" & Natural'Image(Subclause_Number));
     end Add_Old;
 
 

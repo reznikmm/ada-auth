@@ -79,12 +79,29 @@ package ARM_HTML is
     --  5/27/05 - RLB - Added arbitrary Unicode characters.
     --  1/11/06 - RLB - Eliminated dispatching Create in favor of tailored
     --			versions.
+    --  1/12/06 - RLB - Added a number of parameters to Create.
+    --  1/13/06 - RLB - Added new Link operations.
+    --  1/16/06 - RLB - Added Index_URL to Create.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
+
+    type HTML_Type is (HTML_3, -- Use only HTML 3 elements.
+		       HTML_4_Compatible, -- Use HTML 4 when needed, but try to look good on old browsers.
+		       HTML_4_Only); -- Use only HTML 4 elements (no attempt to look good on old browsers).
 
     procedure Create (Output_Object : in out HTML_Output_Type;
 		      Big_Files : in Boolean;
 		      File_Prefix : in String;
+		      HTML_Kind : in HTML_Type;
+		      Use_Unicode : in Boolean;
+	              Ref_URL : in String;
+	              Srch_URL : in String;
+	              Index_URL : in String;
+	              Use_Buttons : Boolean;
+	              Nav_On_Top : Boolean;
+	              Nav_On_Bottom : Boolean;
+	              Header_HTML : String;
+	              Footer_HTML : String;
 		      Title : in String := "");
 	-- Create an Output_Object for a document.
 	-- Generate a few large output files if
@@ -92,6 +109,30 @@ package ARM_HTML is
 	-- The prefix of the output file names is File_Prefix - this
 	-- should be no more then 4 characters allowed in file names.
 	-- The title of the document is Title.
+	-- HTML_Kind determines the kind of HTML generated; HTML_3 works on
+	-- every browser but has little control over formatting;
+	-- HTML_4_Compatible has better control, but tries to make the results
+	-- look good on older browsers; HTML_4_Only uses maximum formatting,
+	-- but makes no attempt to look good on browsers older than IE 5.0 and
+	-- Firefox 1.0.
+	-- If Use_Unicode is true, Unicode characters available on US versions
+	-- of Windows 2000 are used when appropriate; otherwise, Unicode
+	-- characters are only used when explicitly requested with
+	-- Unicode_Character (other characters are replaced with reasonable
+	-- equivalents). [Note: It's known that IE on Windows 95/98/ME cannot
+	-- display Unicode characters.] Use_Unicode has no effect if HTML_Kind
+	-- is set to HTML_3.
+	-- Ref_URL, Srch_URL, and Index_URL are the URLs (possibly relative)
+	-- for the "References", "Search", and "Index" buttons/labels,
+	-- respectively. If null, these buttons/labels are omitted.
+	-- If Use_Buttons is true, button images are used, otherwise text labels
+	-- are used for the navigation bar.
+	-- If Nav_On_Top is true, the navigation bar will appear in the header
+	-- of each page. If Nav_On_Bottom is true, the navigation bar will
+	-- appear in the footer of each page.
+	-- Header_HTML gives self-contained HTML that will appear before the
+	-- navigation bar in the header. Footer_HTML gives self-contained HTML
+	-- that will appear after the navigation bar in the footer.
 
     procedure Close (Output_Object : in out HTML_Output_Type);
 	-- Close an Output_Object. No further output to the object is
@@ -339,6 +380,31 @@ package ARM_HTML is
 	-- the target (in folded format). For hyperlinked formats, this should
 	-- generate a link; for other formats, the text alone is generated.
 
+    procedure Local_Target (Output_Object : in out HTML_Output_Type;
+			    Text : in String;
+			    Target : in String);
+	-- Generate a local target. This marks the potential target of local
+	-- links identified by "Target". Text is the text of the target.
+	-- For hyperlinked formats, this should generate a link target;
+	-- for other formats, only the text is generated.
+
+    procedure Local_Link (Output_Object : in out HTML_Output_Type;
+			  Text : in String;
+			  Target : in String;
+			  Clause_Number : in String);
+	-- Generate a local link to the target and clause given.
+	-- Text is the text of the link.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+
+    procedure URL_Link (Output_Object : in out HTML_Output_Type;
+			Text : in String;
+			URL : in String);
+	-- Generate a link to the URL given.
+	-- Text is the text of the link.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+
 private
 
     type Column_Text_Item_Type;
@@ -355,15 +421,29 @@ private
     subtype Prefix_String is String(1..4);
     type HTML_Output_Type is new ARM_Output.Output_Type with record
 	Is_Valid : Boolean := False;
+
+	-- Global properties:
+	File_Prefix : Prefix_String; -- Blank padded.
+	Big_Files : Boolean; -- For HTML, this means to generate a single monster file.
+	Title : Ada.Strings.Unbounded.Unbounded_String;
+        HTML_Kind : HTML_Type;
+        Use_Unicode : Boolean;
+        Ref_URL : Ada.Strings.Unbounded.Unbounded_String;
+        Srch_URL : Ada.Strings.Unbounded.Unbounded_String;
+        Index_URL : Ada.Strings.Unbounded.Unbounded_String;
+        Use_Buttons : Boolean := True;
+        Nav_On_Top : Boolean := True;
+        Nav_On_Bottom : Boolean := True;
+        Header_HTML : Ada.Strings.Unbounded.Unbounded_String;
+        Footer_HTML : Ada.Strings.Unbounded.Unbounded_String;
+
+	-- Current formatting properties:
 	Is_In_Paragraph : Boolean := False;
 	Paragraph_Format : ARM_Output.Paragraph_Type;
 	Had_Prefix : Boolean := False; -- If in paragraph, value of not No_Prefix.
 	Column_Count : ARM_Output.Column_Count := 1;
 	Output_File : Ada.Text_IO.File_Type;
-	File_Prefix : Prefix_String; -- Blank padded.
 	Section_Name : String(1..3);
-	Big_Files : Boolean; -- For HTML, this means to generate a single monster file.
-	Title : Ada.Strings.Unbounded.Unbounded_String;
 	Char_Count : Natural := 0; -- Characters on current line.
 	Disp_Char_Count : Natural := 0; -- Displayed characters on current line.
 	Any_Nonspace : Boolean := False; -- Have we output any non-space on this line?

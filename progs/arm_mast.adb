@@ -55,33 +55,42 @@ package body ARM_Master is
     --  1/05/06 - RLB - Created base package to replace hard-coded main program.
     --  1/11/06 - RLB - Continued expanding this; revised to handle separate
     --			creations for the various kinds of output objects.
+    --  1/12/06 - RLB - Added more commands for additional properties.
 
     type Command_Type is (
 	-- Source commands:
-        Source, TOC, Index,
+        Source, TOC,
 	-- Global properties:
 	Show_Index_Entries,
 	Hide_Index_Entries,
 	Show_Annotations,
 	Hide_Annotations,
+	Show_ISO,
+	Hide_ISO,
 	Number_Paragraphs,
 	Title,
 	File_Prefix,
 	-- HTML properties:
 	Single_HTML_Output_File,
+	HTML_Kind_Command,
+	HTML_Nav_Bar,
+	HTML_Header,
+	HTML_Footer,
 	-- RTF properties:
 	Single_RTF_Output_File,
 	RTF_Header_Prefix,
+	RTF_Page_Size,
+	RTF_Fonts,
 	-- Other commands:
 	Comment, Unknown);
 
-    type Source_Kind is (A_File, TOC, Index, Empty);
+    type Source_Kind is (A_File, TOC, Empty);
 
     type Source_Item (Kind : Source_Kind := Empty) is record
 	case Kind is
 	    when Empty => null; 	-- This item includes no source item.
-            when TOC | Index => null; -- No info for these, they just hold a place
-				      -- in the collating order.
+            when TOC => null;	        -- No info for this, it just holds a
+				        -- place in the collating order.
 	    when A_File =>
 		File_Name          : String(1..80);
 		File_Name_Len      : Natural;
@@ -89,7 +98,6 @@ package body ARM_Master is
 		Section_Name_Len   : Natural;
 		Section_Number     : ARM_Contents.Section_Number_Type;
 		Starts_New_Section : Boolean;
-		Has_Title          : Boolean;
 	end case;
     end record;
 
@@ -104,21 +112,34 @@ package body ARM_Master is
     -- Command line (global) properties:
     Change_Kind : ARM_Format.Change_Kind; -- Changes to generate.
     Change_Version : ARM_Contents.Change_Version_Type; -- Change version.
-    Document : ARM_Format.Document_Type; -- Document to generate. -- *** Remove.
 
     -- Global properties:
     Display_Index_Entries : Boolean := False; -- Should Index entries be displayed?
     Document_Title : Versioned_Item; -- Document title.
     Output_File_Prefix : Ada.Strings.Unbounded.Unbounded_String; -- Output file prefix.
     Include_Annotations : Boolean := False; -- Should annotations be included in the output?
+    Include_ISO_Text : Boolean := False; -- Should ISO text be included in the output?
     Should_Number_Paragraphs : Boolean := False; -- Should paragraphs be numbered?
 
     -- HTML properties:
-    Use_Large_HTML_Files : Boolean := False; -- Use large output files.
+    Use_Large_HTML_Files : Boolean := False; -- Use small output files by default.
+    HTML_Kind : ARM_HTML.HTML_Type := ARM_HTML.HTML_4_Compatible;
+    HTML_Use_Unicode : Boolean := False;
+    HTML_Index_URL : Ada.Strings.Unbounded.Unbounded_String;
+    HTML_Ref_URL : Ada.Strings.Unbounded.Unbounded_String;
+    HTML_Srch_URL : Ada.Strings.Unbounded.Unbounded_String;
+    HTML_Use_Buttons : Boolean := True;
+    HTML_Nav_On_Top : Boolean := True;
+    HTML_Nav_On_Bottom : Boolean := True;
+    HTML_Header_Text : Ada.Strings.Unbounded.Unbounded_String; -- Empty by default.
+    HTML_Footer_Text : Ada.Strings.Unbounded.Unbounded_String; -- Empty by default.
 
     -- RTF properties:
-    Use_Large_RTF_Files : Boolean := False; -- Use large output files.
+    Use_Large_RTF_Files : Boolean := False; -- Use small output files by default.
     Header_Prefix : Versioned_Item;
+    Page_Size : ARM_RTF.Page_Size := ARM_RTF.Letter; -- Use Letter size by default.
+    Serif_Font : ARM_RTF.Serif_Fonts := ARM_RTF.Times_New_Roman; -- Use Times by default.
+    Sans_Serif_Font : ARM_RTF.Sans_Serif_Fonts := ARM_RTF.Arial; -- Use Arial by default.
 
     function "+" (Source : Ada.Strings.Unbounded.Unbounded_String) return String
         renames Ada.Strings.Unbounded.To_String;
@@ -135,8 +156,6 @@ package body ARM_Master is
 	    return Source;
 	elsif Canonical_Name = "toc" then
 	    return TOC;
-	elsif Canonical_Name = "index" then
-	    return Index;
 	elsif Canonical_Name = "showindexentries" then
 	    return Show_Index_Entries;
 	elsif Canonical_Name = "hideindexentries" then
@@ -145,6 +164,10 @@ package body ARM_Master is
 	    return Show_Annotations;
 	elsif Canonical_Name = "hideannotations" then
 	    return Hide_Annotations;
+	elsif Canonical_Name = "showiso" then
+	    return Show_ISO;
+	elsif Canonical_Name = "hideiso" then
+	    return Hide_ISO;
 	elsif Canonical_Name = "numberparagraphs" then
 	    return Number_Paragraphs;
 	elsif Canonical_Name = "title" then
@@ -153,10 +176,22 @@ package body ARM_Master is
 	    return File_Prefix;
 	elsif Canonical_Name = "singlehtmloutputfile" then
 	    return Single_HTML_Output_File;
+	elsif Canonical_Name = "htmlkind" then
+	    return HTML_Kind_Command;
+	elsif Canonical_Name = "htmlnavbar" then
+	    return HTML_Nav_Bar;
+	elsif Canonical_Name = "htmlheader" then
+	    return HTML_Header;
+	elsif Canonical_Name = "htmlfooter" then
+	    return HTML_Footer;
 	elsif Canonical_Name = "singlertfoutputfile" then
 	    return Single_RTF_Output_File;
 	elsif Canonical_Name = "rtfheaderprefix" then
 	    return RTF_Header_Prefix;
+	elsif Canonical_Name = "rtfpagesize" then
+	    return RTF_Page_Size;
+	elsif Canonical_Name = "rtffonts" then
+	    return RTF_Fonts;
 	elsif Canonical_Name = "comment" then
 	    return Comment;
 	else
@@ -209,7 +244,7 @@ package body ARM_Master is
 	    function Get_Single_String return String is
 		-- Returns the (single) parameter of a command.
 		Ch : Character;
-	        Item : String(1..200);
+	        Item : String(1..2000);
 	        ILen : Natural := 0;
 	    begin
 		Get_Open_Char;
@@ -311,9 +346,221 @@ package body ARM_Master is
 		end if;
  	    end Process_Versioned_Item;
 
+	    procedure Process_RTF_Fonts is
+	        -- @RTFFonts{Serif=[Times|Souvenir]},SansSerif=[Arial|Helvetica]}
+	        Param_Close_Ch : Character;
+	        Item : String(1..80);
+	        ILen : Natural := 0;
+	    begin
+		Get_Open_Char;
+--Ada.Text_IO.Put_Line("Process RTF Fonts");
+	        ARM_Input.Check_Parameter_Name (Input_Object,
+		    Param_Name => "Serif" & (6..ARM_Input.Command_Name_Type'Last => ' '),
+		    Is_First => True,
+		    Param_Close_Bracket => Param_Close_Ch);
+	        if Param_Close_Ch /= ' ' then
+		    -- Copy over the font name:
+		    ARM_Input.Copy_to_String_until_Close_Char (
+		        Input_Object,
+		        Param_Close_Ch,
+		        Item,
+		        ILen);
+		    Ada.Text_IO.Put_Line("RTF Serif Font=" & Item(1..ILen));
+		    declare
+			Name : constant String :=
+			    Ada.Characters.Handling.To_Lower (Item(1..ILen));
+		    begin
+			if Name = "times" then
+			    Serif_Font := ARM_RTF.Times_New_Roman;
+			elsif Name = "souvenir" then
+			    Serif_Font := ARM_RTF.Souvenir;
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown serif font name: " & Name &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		    end;
+	        -- else no parameter, error already produced.
+	        end if;
+	        ARM_Input.Check_Parameter_Name (Input_Object,
+		    Param_Name => "SansSerif" & (10..ARM_Input.Command_Name_Type'Last => ' '),
+		    Is_First => False,
+		    Param_Close_Bracket => Param_Close_Ch);
+	        if Param_Close_Ch /= ' ' then
+		    -- Copy over the font name:
+		    ARM_Input.Copy_to_String_until_Close_Char (
+		        Input_Object,
+		        Param_Close_Ch,
+		        Item,
+		        ILen);
+		    Ada.Text_IO.Put_Line("RTF Sans_Serif Font=" & Item(1..ILen));
+		    declare
+			Name : constant String :=
+			    Ada.Characters.Handling.To_Lower (Item(1..ILen));
+		    begin
+			if Name = "arial" then
+			    Sans_Serif_Font := ARM_RTF.Arial;
+			elsif Name = "helvetica" then
+			    Sans_Serif_Font := ARM_RTF.Helvetica;
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown serif font name: " & Name &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		    end;
+	        -- else no parameter, error already produced.
+	        end if;
+	        ARM_Input.Get_Char (Input_Object, Ch);
+	        if Ch = Close_Ch then
+		    null;
+	        else
+		    Ada.Text_IO.Put_Line ("** Missing closing character for command on line" & ARM_Input.Line_String (Input_Object));
+	            ARM_Input.Replace_Char (Input_Object);
+	        end if;
+	    end Process_RTF_Fonts;
+
+	    procedure Process_HTML_Kind is
+		-- @HTMLKind{Version=[3|4Comp|4],Unicode=[T|F]}
+	        Param_Close_Ch : Character;
+	        Item : String(1..80);
+	        ILen : Natural := 0;
+	    begin
+		Get_Open_Char;
+--Ada.Text_IO.Put_Line("Process HTML Kind");
+	        ARM_Input.Check_Parameter_Name (Input_Object,
+		    Param_Name => "Version" & (8..ARM_Input.Command_Name_Type'Last => ' '),
+		    Is_First => True,
+		    Param_Close_Bracket => Param_Close_Ch);
+	        if Param_Close_Ch /= ' ' then
+		    -- Copy over the version:
+		    ARM_Input.Copy_to_String_until_Close_Char (
+		        Input_Object,
+		        Param_Close_Ch,
+		        Item,
+		        ILen);
+		    Ada.Text_IO.Put_Line("HTML version and kind=" & Item(1..ILen));
+		    declare
+			Kind : constant String :=
+			    Ada.Characters.Handling.To_Lower (Item(1..ILen));
+		    begin
+			if Kind = "3" then
+			    HTML_Kind := ARM_HTML.HTML_3;
+			elsif Kind = "4comp" then
+			    HTML_Kind := ARM_HTML.HTML_4_Compatible;
+			elsif Kind = "4" then
+			    HTML_Kind := ARM_HTML.HTML_4_Only;
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown HTML version: " & Kind &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		    end;
+	        -- else no parameter, error already produced.
+	        end if;
+
+	        Get_Boolean ("Unicode" & (8..ARM_Input.Command_Name_Type'Last => ' '),
+			     HTML_Use_Unicode);
+		if HTML_Use_Unicode then
+		    Ada.Text_IO.Put_Line("HTML will use Unicode characters where appropriate");
+		else
+		    Ada.Text_IO.Put_Line("HTML will use Unicode characters only when explicitly requested");
+		end if;
+
+	        ARM_Input.Get_Char (Input_Object, Ch);
+	        if Ch = Close_Ch then
+		    null;
+	        else
+		    Ada.Text_IO.Put_Line ("** Missing closing character for command on line" & ARM_Input.Line_String (Input_Object));
+	            ARM_Input.Replace_Char (Input_Object);
+	        end if;
+	    end Process_HTML_Kind;
+
+	    procedure Process_HTML_Nav_Bar is
+		--@HTMLNavBar{RefName=[<URL>],SrchName=[<URL>],
+		--    UseButtons=[T|F],OnTop=[T|F],OnBottom=[T|F]}
+	        Param_Close_Ch : Character;
+	        Item : String(1..80);
+	        ILen : Natural := 0;
+	    begin
+		Get_Open_Char;
+--Ada.Text_IO.Put_Line("Process HTML Nav Bar");
+	        ARM_Input.Check_Parameter_Name (Input_Object,
+		    Param_Name => "RefName" & (8..ARM_Input.Command_Name_Type'Last => ' '),
+		    Is_First => True,
+		    Param_Close_Bracket => Param_Close_Ch);
+	        if Param_Close_Ch /= ' ' then
+		    -- Copy over the version:
+		    ARM_Input.Copy_to_String_until_Close_Char (
+		        Input_Object,
+		        Param_Close_Ch,
+		        Item,
+		        ILen);
+		    Ada.Text_IO.Put_Line("HTML reference URL=" & Item(1..ILen));
+		    HTML_Ref_Url := + Item(1..ILen);
+	        -- else no parameter, error already produced.
+	        end if;
+
+	        ARM_Input.Check_Parameter_Name (Input_Object,
+		    Param_Name => "SrchName" & (9..ARM_Input.Command_Name_Type'Last => ' '),
+		    Is_First => False,
+		    Param_Close_Bracket => Param_Close_Ch);
+	        if Param_Close_Ch /= ' ' then
+		    -- Copy over the version:
+		    ARM_Input.Copy_to_String_until_Close_Char (
+		        Input_Object,
+		        Param_Close_Ch,
+		        Item,
+		        ILen);
+		    Ada.Text_IO.Put_Line("HTML search URL=" & Item(1..ILen));
+		    HTML_Srch_Url := + Item(1..ILen);
+	        -- else no parameter, error already produced.
+	        end if;
+
+	        ARM_Input.Check_Parameter_Name (Input_Object,
+		    Param_Name => "IndexName" & (10..ARM_Input.Command_Name_Type'Last => ' '),
+		    Is_First => False,
+		    Param_Close_Bracket => Param_Close_Ch);
+	        if Param_Close_Ch /= ' ' then
+		    -- Copy over the version:
+		    ARM_Input.Copy_to_String_until_Close_Char (
+		        Input_Object,
+		        Param_Close_Ch,
+		        Item,
+		        ILen);
+		    Ada.Text_IO.Put_Line("HTML index URL=" & Item(1..ILen));
+		    HTML_Index_Url := + Item(1..ILen);
+	        -- else no parameter, error already produced.
+	        end if;
+
+	        Get_Boolean ("UseButtons" & (11..ARM_Input.Command_Name_Type'Last => ' '),
+			     HTML_Use_Buttons);
+		if HTML_Use_Buttons then
+		    Ada.Text_IO.Put_Line("HTML navigation will use buttons");
+		else
+		    Ada.Text_IO.Put_Line("HTML navigation will use text labels");
+		end if;
+
+	        Get_Boolean ("OnTop" & (6..ARM_Input.Command_Name_Type'Last => ' '),
+			     HTML_Nav_On_Top);
+		if HTML_Nav_On_Top then
+		    Ada.Text_IO.Put_Line("HTML navigation bar will appear on top of pages");
+		end if;
+
+	        Get_Boolean ("OnBottom" & (9..ARM_Input.Command_Name_Type'Last => ' '),
+			     HTML_Nav_On_Bottom);
+		if HTML_Nav_On_Bottom then
+		    Ada.Text_IO.Put_Line("HTML navigation bar will appear on bottom of pages");
+		end if;
+
+	        ARM_Input.Get_Char (Input_Object, Ch);
+	        if Ch = Close_Ch then
+		    null;
+	        else
+		    Ada.Text_IO.Put_Line ("** Missing closing character for command on line" & ARM_Input.Line_String (Input_Object));
+	            ARM_Input.Replace_Char (Input_Object);
+	        end if;
+	    end Process_HTML_Nav_Bar;
+
 	    procedure Process_Source_Command is
 	        -- @Source{Name=<File Name>,SectionName=<Name>,
-		-- SectionNumber=<AlphaNum>,NewSection=[T|F],HasTitle=[T|F]}
+		-- SectionNumber=<AlphaNum>,NewSection=[T|F]}
 	        Param_Close_Ch : Character;
 	        Item : String(1..80);
 	        ILen : Natural := 0;
@@ -332,8 +579,7 @@ package body ARM_Master is
 			 Section_Name       => (others => ' '),
 			 Section_Name_Len   => 0,
 			 Section_Number     => 0,
-			 Starts_New_Section => True,
-			 Has_Title	    => True);
+			 Starts_New_Section => True);
 		    ARM_Input.Check_Parameter_Name (Input_Object,
 		        Param_Name => "Name" & (5..ARM_Input.Command_Name_Type'Last => ' '),
 		        Is_First => True,
@@ -412,9 +658,6 @@ package body ARM_Master is
 		    Get_Boolean ("NewSection" & (11..ARM_Input.Command_Name_Type'Last => ' '),
 				 Source_Data(Source_Length).Starts_New_Section);
 
-		    Get_Boolean ("HasTitle" & (9..ARM_Input.Command_Name_Type'Last => ' '),
-				 Source_Data(Source_Length).Has_Title);
-
 	            ARM_Input.Get_Char (Input_Object, Ch);
 	            if Ch = Close_Ch then
 		        null;
@@ -430,7 +673,7 @@ package body ARM_Master is
 	    -- go directly to getting the name:
 	    ARM_Input.Get_Name (Input_Object, Command_Name);
 	    Command := Decode_Command (Command_Name);
-Ada.Text_IO.Put_Line("Process command=" & Command_Type'Image(Command));
+--Ada.Text_IO.Put_Line("Process command=" & Command_Type'Image(Command));
 --Ada.Text_IO.Put_Line("Process command=" & Command_Type'Image(Command) & " Name=" & Command_Name);
 
 	    case Command is
@@ -447,22 +690,37 @@ Ada.Text_IO.Put_Line("Process command=" & Command_Type'Image(Command));
 		when Show_Index_Entries =>
 		    -- @ShowIndexEntries
 		    Display_Index_Entries := True;
+		    Ada.Text_IO.Put_Line("Show Index Entries");
 
 		when Hide_Index_Entries =>
 		    -- @HideIndexEntries
 		    Display_Index_Entries := False;
+		    Ada.Text_IO.Put_Line("Hide Index Entries");
 
 		when Show_Annotations =>
 		    -- @ShowAnnotations
 		    Include_Annotations := True;
+		    Ada.Text_IO.Put_Line("Show Annotations");
 
 		when Hide_Annotations =>
 		    -- @HideAnnotations
 		    Include_Annotations := False;
+		    Ada.Text_IO.Put_Line("Hide Annotations");
+
+		when Show_ISO =>
+		    -- @ShowISO
+		    Include_ISO_Text := True;
+		    Ada.Text_IO.Put_Line("Show ISO Text");
+
+		when Hide_ISO =>
+		    -- @HideISO
+		    Include_ISO_Text := False;
+		    Ada.Text_IO.Put_Line("Hide ISO Text");
 
 		when Number_Paragraphs =>
 		    -- @NumberParagraphs
 		    Should_Number_Paragraphs := True;
+		    Ada.Text_IO.Put_Line("Number Paragraphs");
 
 		when Title =>
 		    -- @Title{Version=[<version>],Text=[<title_text>]}
@@ -471,24 +729,71 @@ Ada.Text_IO.Put_Line("Process command=" & Command_Type'Image(Command));
 		when File_Prefix =>
 		    -- @FilePrefix{<File_Prefix>}
 		    Output_File_Prefix := +Get_Single_String;
+		    Ada.Text_IO.Put_Line("File Prefix is " &
+			(+Output_File_Prefix));
 
 		-- HTML properties:
 
 		when Single_HTML_Output_File =>
 		    -- @Single_HTML_Output_File
 		    Use_Large_HTML_Files := True;
+		    Ada.Text_IO.Put_Line("Single HTML Output File");
+
+		when HTML_Kind_Command =>
+		    --@HTMLKind{Version=[3|4Comp|4],Unicode=[T|F]}
+		    Process_HTML_Kind;
+
+		when HTML_Nav_Bar =>
+		    --@HTMLNavBar{RefName=[<URL>],SrchName=[<URL>],UseButtons=[T|F],OnTop=[T|F],OnBottom=[T|F]}
+		    Process_HTML_Nav_Bar;
+
+		when HTML_Header =>
+		    --@HTMLHeader{<HTML_for_Header>}
+		    HTML_Header_Text := +Get_Single_String;
+
+		when HTML_Footer =>
+		    --@HTMLFooter{<HTML_for_Footer>}
+		    HTML_Footer_Text := +Get_Single_String;
 
 		-- RTF properties:
 
 		when Single_RTF_Output_File =>
 		    -- @Single_RTF_Output_File
 		    Use_Large_RTF_Files := True;
+		    Ada.Text_IO.Put_Line("Single RTF Output File");
 
 		when RTF_Header_Prefix =>
 		    -- @RTFHeaderPrefix{Version=[<version>],Text=[<title_text>]}
 		    Process_Versioned_Item (Header_Prefix);
 
+		when RTF_Page_Size =>
+		    -- @RTFPageSize{Letter|A4|HalfLetter|Ada95}
+		    declare
+			Size : constant String :=
+			    Ada.Characters.Handling.To_Lower (Get_Single_String);
+		    begin
+			if Size = "letter" then
+			    Page_Size := ARM_RTF.Letter;
+			elsif Size = "a4" then
+			    Page_Size := ARM_RTF.A4;
+			elsif Size = "halfletter" then
+			    Page_Size := ARM_RTF.Half_Letter;
+			elsif Size = "ada95" then
+			    Page_Size := ARM_RTF.Ada95;
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown page size name: " & Size &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		        Ada.Text_IO.Put_Line("RTF Page Size is " &
+			    ARM_RTF.Page_Size'Image(Page_Size));
+		    end;
+
+		when RTF_Fonts =>
+		    -- @RTFFonts{Serif=[Times|Souvenir]},SansSerif=[Arial|Helvetica]}
+		    Process_RTF_Fonts;
+
 		-- Source files:
+
 		when TOC =>
 		    -- @TOC
 		    if Source_Length = Source_Count'Last then
@@ -497,16 +802,6 @@ Ada.Text_IO.Put_Line("Process command=" & Command_Type'Image(Command));
 			Source_Length := Source_Length + 1;
 			Source_Data(Source_Length) :=
 			    (Kind => TOC);
-		    end if;
-
-		when Index =>
-		    -- @Index
-		    if Source_Length = Source_Count'Last then
-			Ada.Text_IO.Put_Line ("** Too many source files on line" & ARM_Input.Line_String (Input_Object));
-		    else
-			Source_Length := Source_Length + 1;
-			Source_Data(Source_Length) :=
-			    (Kind => Index);
 		    end if;
 
 		when Source =>
@@ -549,9 +844,11 @@ Ada.Text_IO.Put_Line("Process command=" & Command_Type'Image(Command));
     procedure Create_Format (Format_Object : in out ARM_Format.Format_Type) is
 	-- Create an appropriate format object.
     begin
-	ARM_Format.Create (Format_Object, Document, Change_Kind, Change_Version,
-		Display_Index_Entries);
---*** TBD: Use Include_Annotations and Should_Number_Paragraphs instead of "Document" here.
+	ARM_Format.Create (Format_Object, Change_Kind, Change_Version,
+		Display_Index_Entries => Display_Index_Entries,
+		Include_Annotations => Include_Annotations,
+		Include_ISO => Include_ISO_Text,
+		Number_Paragraphs => Should_Number_Paragraphs);
     end Create_Format;
 
 
@@ -563,8 +860,6 @@ Ada.Text_IO.Put_Line("Process command=" & Command_Type'Image(Command));
 	for Source_Index in Source_Data'First .. Source_Length loop
 	    case Source_Data(Source_Index).Kind is
 		when TOC => null;
-		when Index =>
-		    ARM_Format.Insert_Index (Format_Object);
 		when A_File =>
 		    ARM_Format.Scan (Format_Object,
 			Source_Data(Source_Index).File_Name(1..Source_Data(Source_Index).File_Name_Len),
@@ -588,24 +883,13 @@ Ada.Text_IO.Put_Line("Process command=" & Command_Type'Image(Command));
 	    case Source_Data(Source_Index).Kind is
 		when TOC =>
 		    ARM_Format.Write_Table_of_Contents (Format_Object, Output_Object);
-		when Index =>
-		    ARM_Format.Write_Index (Format_Object, Output_Object);
 		when A_File =>
-		    if Source_Data(Source_Index).Has_Title then
-		        ARM_Format.Process (Format_Object,
-			    Source_Data(Source_Index).File_Name(1..Source_Data(Source_Index).File_Name_Len),
-			    Output_Object,
-		            Section_Name   => Source_Data(Source_Index).Section_Name(1..Source_Data(Source_Index).Section_Name_Len),
-			    Section_Number => Source_Data(Source_Index).Section_Number,
-		            Starts_New_Section => Source_Data(Source_Index).Starts_New_Section);
-		    else
-		        ARM_Format.Process (Format_Object,
-			    Source_Data(Source_Index).File_Name(1..Source_Data(Source_Index).File_Name_Len),
-			    Output_Object,
-		            Section_Name   => Source_Data(Source_Index).Section_Name(1..Source_Data(Source_Index).Section_Name_Len),
-			    Section_Number => 0, -- No title.
-		            Starts_New_Section => Source_Data(Source_Index).Starts_New_Section);
-		    end if;
+		    ARM_Format.Process (Format_Object,
+		        Source_Data(Source_Index).File_Name(1..Source_Data(Source_Index).File_Name_Len),
+		        Output_Object,
+		        Section_Name   => Source_Data(Source_Index).Section_Name(1..Source_Data(Source_Index).Section_Name_Len),
+		        Section_Number => Source_Data(Source_Index).Section_Number,
+		        Starts_New_Section => Source_Data(Source_Index).Starts_New_Section);
 		when Empty => null;
 	    end case;
 	end loop;
@@ -616,7 +900,6 @@ Ada.Text_IO.Put_Line("Process command=" & Command_Type'Image(Command));
 
     procedure Read_and_Process_Master_File (
 	File_Name : in String;
-	The_Document : ARM_Format.Document_Type; -- Document to generate.
 	The_Change_Kind : ARM_Format.Change_Kind; -- Changes to generate.
 	The_Change_Version : ARM_Contents.Change_Version_Type; -- Change version.
         Output_Format : in Output_Format_Type) is
@@ -632,7 +915,6 @@ Ada.Text_IO.Put_Line("Process command=" & Command_Type'Image(Command));
 		return;
 	end;
 
-	Document := The_Document;
 	Change_Kind := The_Change_Kind;
 	Change_Version := The_Change_Version;
 
@@ -656,6 +938,16 @@ Ada.Text_IO.Put_Line("Process command=" & Command_Type'Image(Command));
 		    ARM_HTML.Create (Output,
 				     Big_Files => Use_Large_HTML_Files,
 				     File_Prefix => +Output_File_Prefix,
+				     HTML_Kind => HTML_Kind,
+				     Use_Unicode => HTML_Use_Unicode,
+				     Ref_URL => +HTML_Ref_URL,
+				     Srch_URL => +HTML_Srch_URL,
+				     Index_URL => +HTML_Index_URL,
+				     Use_Buttons => HTML_Use_Buttons,
+			             Nav_On_Top => HTML_Nav_On_Top,
+			             Nav_On_Bottom => HTML_Nav_On_Bottom,
+			             Header_HTML => +HTML_Header_Text,
+			             Footer_HTML => +HTML_Footer_Text,
 				     Title => Get_Versioned_Item(Document_Title,Change_Version));
 		    Generate_Sources (Output);
 		    ARM_HTML.Close (Output);
@@ -664,78 +956,28 @@ Ada.Text_IO.Put_Line("Process command=" & Command_Type'Image(Command));
 	        declare
 		    Output : ARM_RTF.RTF_Output_Type;
 	        begin
---*** Temp: (Document will be removed; details will move to the .MSM file.)
-		    case Document is
-		        when ARM_Format.AARM =>
-			    if ARM_Format."=" (Change_Kind, ARM_Format.Old_Only) or else
-			       Change_Version = '0' then
-			        ARM_RTF.Create (Output,
-					        Page_Size => ARM_RTF.Letter,
-					        Includes_Changes => False,
-					        Big_Files => Use_Large_RTF_Files,
-					        Primary_Serif_Font => ARM_RTF.Times_New_Roman,
-					        Primary_Sans_Serif_Font => ARM_RTF.Arial,
-					        File_Prefix => +Output_File_Prefix,
-					        Title => Get_Versioned_Item(Document_Title,Change_Version),
-					        Header_Prefix => Get_Versioned_Item(Header_Prefix,Change_Version));
-			    else
-			        ARM_RTF.Create (Output,
-					        Page_Size => ARM_RTF.Letter,
-					        Includes_Changes => True,
-					        Big_Files => Use_Large_RTF_Files,
-					        Primary_Serif_Font => ARM_RTF.Times_New_Roman,
-					        Primary_Sans_Serif_Font => ARM_RTF.Arial,
-					        File_Prefix => +Output_File_Prefix,
-					        Title => Get_Versioned_Item(Document_Title,Change_Version),
-					        Header_Prefix => Get_Versioned_Item(Header_Prefix,Change_Version));
-			    end if;
-		        when ARM_Format.RM =>
-			    if ARM_Format."=" (Change_Kind, ARM_Format.Old_Only) or else
-			       Change_Version = '0' then
-			        ARM_RTF.Create (Output,
-					        Page_Size => ARM_RTF.Ada95,
-					        Includes_Changes => False,
-					        Big_Files => Use_Large_RTF_Files,
-					        Primary_Serif_Font => ARM_RTF.Times_New_Roman,
-					        Primary_Sans_Serif_Font => ARM_RTF.Arial,
-					        File_Prefix => +Output_File_Prefix,
-					        Title => Get_Versioned_Item(Document_Title,Change_Version),
-					        Header_Prefix => Get_Versioned_Item(Header_Prefix,Change_Version));
-			    else
-			        ARM_RTF.Create (Output,
-					        Page_Size => ARM_RTF.Ada95,
-					        Includes_Changes => True,
-					        Big_Files => Use_Large_RTF_Files,
-					        Primary_Serif_Font => ARM_RTF.Times_New_Roman,
-					        Primary_Sans_Serif_Font => ARM_RTF.Arial,
-					        File_Prefix => +Output_File_Prefix,
-					        Title => Get_Versioned_Item(Document_Title,Change_Version),
-					        Header_Prefix => Get_Versioned_Item(Header_Prefix,Change_Version));
-			    end if;
-		        when ARM_Format.RM_ISO =>
-			    if ARM_Format."=" (Change_Kind, ARM_Format.Old_Only) or else
-			       Change_Version = '0' then
-			        ARM_RTF.Create (Output,
-					        Page_Size => ARM_RTF.A4,
-					        Includes_Changes => False,
-					        Big_Files => Use_Large_RTF_Files,
-					        Primary_Serif_Font => ARM_RTF.Times_New_Roman,
-					        Primary_Sans_Serif_Font => ARM_RTF.Helvetica,
-					        File_Prefix => +Output_File_Prefix,
-					        Title => Get_Versioned_Item(Document_Title,Change_Version),
-					        Header_Prefix => Get_Versioned_Item(Header_Prefix,Change_Version));
-			    else
-			        ARM_RTF.Create (Output,
-					        Page_Size => ARM_RTF.A4,
-					        Includes_Changes => True,
-					        Big_Files => Use_Large_RTF_Files,
-					        Primary_Serif_Font => ARM_RTF.Times_New_Roman,
-					        Primary_Sans_Serif_Font => ARM_RTF.Helvetica,
-					        File_Prefix => +Output_File_Prefix,
-					        Title => Get_Versioned_Item(Document_Title,Change_Version),
-					        Header_Prefix => Get_Versioned_Item(Header_Prefix,Change_Version));
-			    end if;
-		    end case;
+		    if ARM_Format."=" (Change_Kind, ARM_Format.Old_Only) or else
+		       Change_Version = '0' then
+		        ARM_RTF.Create (Output,
+				        Page_Size => Page_Size,
+				        Includes_Changes => False,
+				        Big_Files => Use_Large_RTF_Files,
+				        Primary_Serif_Font => Serif_Font,
+				        Primary_Sans_Serif_Font => Sans_Serif_Font,
+				        File_Prefix => +Output_File_Prefix,
+				        Title => Get_Versioned_Item(Document_Title,Change_Version),
+				        Header_Prefix => Get_Versioned_Item(Header_Prefix,Change_Version));
+		    else
+		        ARM_RTF.Create (Output,
+				        Page_Size => Page_Size,
+				        Includes_Changes => True,
+				        Big_Files => Use_Large_RTF_Files,
+				        Primary_Serif_Font => Serif_Font,
+				        Primary_Sans_Serif_Font => Sans_Serif_Font,
+				        File_Prefix => +Output_File_Prefix,
+				        Title => Get_Versioned_Item(Document_Title,Change_Version),
+				        Header_Prefix => Get_Versioned_Item(Header_Prefix,Change_Version));
+		    end if;
 		    Generate_Sources (Output);
 		    ARM_RTF.Close (Output);
 	        end;

@@ -14,7 +14,7 @@ package body ARM_Index is
     -- This package contains the routines to manage and generate the index.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2003, 2004, 2005 AXE Consultants.
+    -- Copyright 2000, 2002, 2003, 2004, 2005, 2006 AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -53,6 +53,8 @@ package body ARM_Index is
     --  9/09/04 - RLB - Removed unused junk noted by Stephen Leake.
     -- 10/28/05 - RLB - Added key reuse.
     -- 10/30/05 - RLB - Added subtype declaration.
+    --  1/16/06 - RLB - Fixed so a letter header is output if the first
+    --			indexed item starts with a letter.
 
     Next_Index_Key : Index_Key;
 
@@ -788,9 +790,12 @@ package body ARM_Index is
 	Temp := Index_List;
 	while Temp /= null loop
 	    -- First, check if we've changed to a new group:
-	    if Last /= null and then
-		To_Lower (Last.Term(1)) /= To_Lower(Temp.Term(1)) then
-		-- The first character has changed.
+	    if (Last /= null and then
+		To_Lower (Last.Term(1)) /= To_Lower(Temp.Term(1))) or else
+		(Last = null and then To_Lower(Temp.Term(1)) in 'a' .. 'z') then
+		-- The first character has changed, or this is the first item.
+		-- We only generate letters, so we try not to come here for
+		-- non-letters.
 		ARM_Output.End_Paragraph (Output_Object);
 		ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index, Number => "");
 		Keep_Set := False;

@@ -122,6 +122,8 @@ package body ARM_HTML is
     --  5/27/05 - RLB - Added arbitrary Unicode characters.
     --  1/11/06 - RLB - Eliminated dispatching Create in favor of tailored
     --			versions.
+    --  1/12/06 - RLB - Added a number of parameters to Create.
+    --  1/16/06 - RLB - Reduced space around button bars.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -129,17 +131,6 @@ package body ARM_HTML is
     SWISS_FONT_CODE : constant String := "<FONT FACE=""Arial, Helvetica"">";
 
     TINY_SWISS_FONT_CODE : constant String := "<FONT FACE=""Arial, Helvetica"" SIZE=-2>";
-
-    type HTML_Type is (HTML_3, -- Use only HTML 3 elements.
-		       HTML_4_Compatible, -- Use HTML 4 when needed, but try to look good on old browsers.
-		       HTML_4_Only); -- Use only HTML 4 elements (no attempt to look good on old browsers).
-
-    HTML_Kind : constant HTML_Type := HTML_4_Compatible;
-	-- Eventually, this will be a parameter to the Create routine.
-
-    Use_Unicode : constant Boolean := True;
-	-- Use Unicode characters. (Many older browsers can't display these;
-	-- it's known that IE can't do so on Windows 95/98/ME.)
 
     LEADING_PERCENT : constant := 70;
 	-- Leading is 70% of normal height.
@@ -572,6 +563,160 @@ package body ARM_HTML is
     end Put_EMs;
 
 
+    procedure Make_Navigation_Bar (Output_Object : in out HTML_Output_Type;
+			           Clause : in String;
+				   Clause_is_Next : in Boolean;
+				   Is_Top : in Boolean) is
+	-- Internal routine.
+	-- Generate a properly formatted navigation bar.
+    begin
+        if Output_Object.Use_Buttons then
+	    if Is_Top and then Output_Object.HTML_Kind > HTML_3 then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Style=""margin-top: 0.6em; margin-bottom: 0.0em"">");
+	    elsif (not Is_Top) and then Output_Object.HTML_Kind > HTML_3 then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Style=""margin-top: 0.0em; margin-bottom: 0.6em"">");
+	    else
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<P>");
+	    end if;
+	    Ada.Text_IO.Put (Output_Object.Output_File, "<A Class=""image"" HREF=""");
+	    if Output_Object.Big_Files then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "#TOC");
+	    else
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+		       "-TOC.html");
+	    end if;
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""cont.gif"" ALT=""Table of Contents""></A>&nbsp;");
+	    if Ada.Strings.Unbounded.Length(Output_Object.Index_URL) /= 0 then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""");
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+	            Ada.Strings.Unbounded.To_String(Output_Object.Index_URL));
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""index.gif"" ALT=""Index""></A>&nbsp;");
+	    end if;
+	    if Ada.Strings.Unbounded.Length(Output_Object.Ref_URL) /= 0 then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""");
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+	            Ada.Strings.Unbounded.To_String(Output_Object.Ref_URL));
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""lib.gif"" ALT=""References""></A>&nbsp;");
+	    end if;
+	    if Ada.Strings.Unbounded.Length(Output_Object.Srch_URL) /= 0 then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""");
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+	            Ada.Strings.Unbounded.To_String(Output_Object.Srch_URL));
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""find.gif"" ALT=""Search""></A>&nbsp;");
+	    end if;
+	    if Clause /= "" then
+	        begin
+		    -- Note: We do the following in one big glup so that if
+		    -- Not_Found_Error is raised, nothing is output.
+		    if Clause_is_Next then
+		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
+		            Make_Clause_Link_Name (Output_Object,
+			        ARM_Contents.Previous_Clause(ARM_Contents.Previous_Clause(Clause))));
+		    else
+		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
+		            Make_Clause_Link_Name (Output_Object,
+			        ARM_Contents.Previous_Clause(Clause)));
+		    end if;
+		    Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""prev.gif"" ALT=""Previous""></A>&nbsp;");
+	        exception
+		    when ARM_Contents.Not_Found_Error =>
+		        null; -- Probably the first section.
+	        end;
+	        begin
+		    -- Note: We do the following in one big glup so that if
+		    -- Not_Found_Error is raised, nothing is output.
+		    if Clause_is_Next then
+		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
+		            Make_Clause_Link_Name (Output_Object, Clause));
+		    else
+		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
+		            Make_Clause_Link_Name (Output_Object,
+			        ARM_Contents.Next_Clause(Clause)));
+		    end if;
+		    Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""next.gif"" ALT=""Next""></A>&nbsp;");
+	        exception
+		    when ARM_Contents.Not_Found_Error =>
+		        null; -- Probably the last section.
+	        end;
+	    end if;
+	    if Output_Object.HTML_Kind > HTML_3 then
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</DIV>");
+	    else
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</P>");
+	    end if;
+        else -- Use text navigation
+	    Ada.Text_IO.Put (Output_Object.Output_File, "<P><A HREF=""");
+	    if Output_Object.Big_Files then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "#TOC");
+	    else
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+		       "-TOC.html");
+	    end if;
+	    Ada.Text_IO.Put (Output_Object.Output_File, """>Contents</A>");
+	    if Ada.Strings.Unbounded.Length(Output_Object.Index_URL) /= 0 then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+	            Ada.Strings.Unbounded.To_String(Output_Object.Index_URL));
+	        Ada.Text_IO.Put (Output_Object.Output_File, """>Index</A>");
+	    end if;
+	    if Ada.Strings.Unbounded.Length(Output_Object.Srch_URL) /= 0 then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+	            Ada.Strings.Unbounded.To_String(Output_Object.Srch_URL));
+	        Ada.Text_IO.Put (Output_Object.Output_File, """>Search</A>");
+	    end if;
+	    if Ada.Strings.Unbounded.Length(Output_Object.Ref_URL) /= 0 then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+	            Ada.Strings.Unbounded.To_String(Output_Object.Ref_URL));
+	        Ada.Text_IO.Put (Output_Object.Output_File, """>Reference Documents</A>");
+	    end if;
+	    if Clause /= "" then
+	        begin
+		    -- Note: We do the following in one big glup so that if
+		    -- Not_Found_Error is raised, nothing is output.
+		    if Clause_is_Next then
+		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
+		            Make_Clause_Link_Name (Output_Object,
+			        ARM_Contents.Previous_Clause(ARM_Contents.Previous_Clause(Clause))));
+		    else
+		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
+		            Make_Clause_Link_Name (Output_Object,
+			        ARM_Contents.Previous_Clause(Clause)));
+		    end if;
+		    Ada.Text_IO.Put (Output_Object.Output_File, """>Previous</A>");
+	        exception
+		    when ARM_Contents.Not_Found_Error =>
+		        null; -- Probably the first section.
+	        end;
+	        begin
+		    -- Note: We do the following in one big glup so that if
+		    -- Not_Found_Error is raised, nothing is output.
+		    if Clause_is_Next then
+		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
+		            Make_Clause_Link_Name (Output_Object, Clause));
+		    else
+		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
+		            Make_Clause_Link_Name (Output_Object,
+			        ARM_Contents.Next_Clause(Clause)));
+		    end if;
+		    Ada.Text_IO.Put (Output_Object.Output_File, """>Next</A>");
+	        exception
+		    when ARM_Contents.Not_Found_Error =>
+		        null; -- Probably the last section.
+	        end;
+	    end if;
+
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</P>");
+        end if;
+    end Make_Navigation_Bar;
+
+
     procedure Start_HTML_File (Output_Object : in out HTML_Output_Type;
 			       File_Name : in String;
 			       Title : in String;
@@ -589,7 +734,7 @@ package body ARM_HTML is
 	    function Units_to_EMs (Value : in Natural) return Natural is
 		-- Convert Value from indentation units to EMs. (0.1 EMs, really).
 	    begin
-		if HTML_Kind = HTML_4_Only then
+		if Output_Object.HTML_Kind = HTML_4_Only then
 	            case Paragraph_Info(Format).Font is
 		        when ARM_Output.Default | ARM_Output.Roman | ARM_Output.Swiss =>
 			    case Paragraph_Info(Format).Size is
@@ -644,7 +789,7 @@ package body ARM_HTML is
 		when ARM_Output.Swiss => Ada.Text_IO.Put (Output_Object.Output_File, "font-family: Arial, Helvetica, sans-serif");
 		when ARM_Output.Fixed => Ada.Text_IO.Put (Output_Object.Output_File, "font-family: ""Courier New"", monospace");
 	    end case;
-	    if HTML_Kind = HTML_4_Only then
+	    if Output_Object.HTML_Kind = HTML_4_Only then
 	        case Paragraph_Info(Format).Font is
 		    when ARM_Output.Default | ARM_Output.Roman | ARM_Output.Swiss =>
 		        case Paragraph_Info(Format).Size is
@@ -730,7 +875,7 @@ package body ARM_HTML is
 	    ".\Output\" & File_Name & ".html");
 --Ada.Text_IO.Put_Line ("--Creating " & File_Name & ".html");
 	-- File introduction:
-	if HTML_Kind > HTML_3 then
+	if Output_Object.HTML_Kind > HTML_3 then
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.01 Transitional//EN""");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, """http://www.w3.org/TR/html4/loose.dtd"">"); -- HTML 4.01 (with depreciated features)
 	else
@@ -744,11 +889,11 @@ package body ARM_HTML is
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <META http-equiv=""Content-Type"" content=""text/html; charset=iso-8859-1"">");
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <META NAME=""Author"" CONTENT=""JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor"">");
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <META NAME=""GENERATOR"" CONTENT=""Arm_Form.Exe, Ada Reference Manual generator"">");
-	if HTML_Kind = HTML_4_Only then
+	if Output_Object.HTML_Kind = HTML_4_Only then
 	     -- The style sheet.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <STYLE type=""text/css"">");
 	    -- Element styles:
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {position: absolute; font-family: Arial, Helvetica, sans-serif; left: 0.5em; top: auto}");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {position: absolute; font-family: Arial, Helvetica, sans-serif; font-size: 64%; left: 0.5em; top: auto}");
 		-- CSS2. See HTML_4_Compatible for comments.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.roman {font-family: ""Times New Roman"", Times, serif}");
@@ -766,6 +911,13 @@ package body ARM_HTML is
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(0,91,0) }"); -- Dark green.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete2 {text-decoration: line-through; color: rgb(0,91,0) }");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: underline, line-through; color: rgb(0,91,0) }");
+
+	    -- Link styles:
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A.image:link {color: rgb(255,255,240)}"); -- This doesn't work on IE 6; we also use the
+													    --    default link colors to ensure the job gets done.
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A.image:visited {color: rgb(255,255,240)}"); -- This doesn't work on IE 6 (see above).
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A:link {color: rgb(0,0,255)}");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A:visited {color: rgb(128,0,128)}");
 
 	    -- Paragraph styles:
 	    Make_Style ("Normal", ARM_Output.Normal);
@@ -823,7 +975,7 @@ package body ARM_HTML is
 	    Make_Style ("SmallNestedEnumerated", ARM_Output.Small_Nested_Enumerated);
 
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    </STYLE>");
-	elsif HTML_Kind = HTML_4_Compatible then
+	elsif Output_Object.HTML_Kind = HTML_4_Compatible then
 	     -- The style sheet.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <STYLE type=""text/css"">");
 	    -- Element styles:
@@ -904,68 +1056,29 @@ package body ARM_HTML is
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    </STYLE>");
 	end if;
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "</HEAD>");
-	Ada.Text_IO.Put_Line (Output_Object.Output_File, "<BODY TEXT=""#000000"" BGCOLOR=""#FFFFF0"" LINK=""#0000FF"" VLINK=""#800080"" ALINK=""#FF0000"">");
-
-	Ada.Text_IO.Put (Output_Object.Output_File, "<P><A HREF=""");
-        if Output_Object.Big_Files then
-	    Ada.Text_IO.Put (Output_Object.Output_File, "#TOC");
+	if Output_Object.HTML_Kind = HTML_4_Only then
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<BODY TEXT=""#000000"" BGCOLOR=""#FFFFF0"" LINK=""#FFFFF0"" VLINK=""#FFFFF0"" ALINK=""#FF0000"">");
+	        -- Links are blank for buttons here (IE doesn't seem to pay attention
+	        -- to the A:link color for IMGs).
 	else
-	    Ada.Text_IO.Put (Output_Object.Output_File,
-		Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
-		   "-TOC.html");
-	end if;
-	Ada.Text_IO.Put (Output_Object.Output_File, """>Contents</A>");
-	Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
-	Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
-        if Output_Object.Big_Files then
-	    Ada.Text_IO.Put (Output_Object.Output_File, "#0-29");
-	else
-	    Ada.Text_IO.Put (Output_Object.Output_File,
-		Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
-	            "-0-29.html");
-	end if;
-	Ada.Text_IO.Put (Output_Object.Output_File, """>Index</A>");
-	Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
-	Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
-        Ada.Text_IO.Put (Output_Object.Output_File,
-	    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
-	        "-SRCH.html");
-	Ada.Text_IO.Put (Output_Object.Output_File, """>Search</A>");
-	Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
-	Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
-        Ada.Text_IO.Put (Output_Object.Output_File,
-	    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
-	        "-STDS.html");
-	Ada.Text_IO.Put (Output_Object.Output_File, """>Related Documents</A>");
-	if Clause /= "" then
-	    begin
-		-- Note: We do the following in one big glup so that if
-		-- Not_Found_Error is raised, nothing is output.
-		Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
-		    Make_Clause_Link_Name (Output_Object,
-			ARM_Contents.Previous_Clause(Clause)));
-		Ada.Text_IO.Put (Output_Object.Output_File, """>Previous</A>");
-	    exception
-	        when ARM_Contents.Not_Found_Error =>
-		    null; -- Probably the first section.
-	    end;
-	    begin
-		-- Note: We do the following in one big glup so that if
-		-- Not_Found_Error is raised, nothing is output.
-		Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
-		    Make_Clause_Link_Name (Output_Object,
-			ARM_Contents.Next_Clause(Clause)));
-		Ada.Text_IO.Put (Output_Object.Output_File, """>Next</A>");
-	    exception
-	        when ARM_Contents.Not_Found_Error =>
-		    null; -- Probably the last section.
-	    end;
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<BODY TEXT=""#000000"" BGCOLOR=""#FFFFF0"" LINK=""#0000FF"" VLINK=""#800080"" ALINK=""#FF0000"">");
 	end if;
 
-	Ada.Text_IO.Put_Line (Output_Object.Output_File, "</P>");
+ 	if Ada.Strings.Unbounded.Length(Output_Object.Header_HTML) /= 0 then
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File,
+		Ada.Strings.Unbounded.To_String(Output_Object.Header_HTML));
+	end if;
 
-	Ada.Text_IO.Put_Line (Output_Object.Output_File, "<HR>"); -- Horizontal line (rule).
+	if Output_Object.Nav_on_Top then
+	    Make_Navigation_Bar (Output_Object, Clause, Clause_is_Next => False, Is_Top => True);
+	-- else no navigation bar
+	end if;
 
+	if Output_Object.Nav_on_Top or else
+	   Ada.Strings.Unbounded.Length(Output_Object.Header_HTML) /= 0 then
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<HR>"); -- Horizontal line (rule).
+	-- else nothing on top at all.
+	end if;
     end Start_HTML_File;
 
 
@@ -978,66 +1091,21 @@ package body ARM_HTML is
     begin
 	Ada.Text_IO.New_Line (Output_Object.Output_File); -- Blank line to set off paragraphs.
 
-	Ada.Text_IO.Put_Line (Output_Object.Output_File, "<HR>"); -- Horizontal line (rule).
-	Ada.Text_IO.Put (Output_Object.Output_File, "<P><A HREF=""");
-        if Output_Object.Big_Files then
-	    Ada.Text_IO.Put (Output_Object.Output_File, "#TOC");
-	else
-	    Ada.Text_IO.Put (Output_Object.Output_File,
-		Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
-	            "-TOC.html");
+	if Output_Object.Nav_on_Bottom or else
+	   Ada.Strings.Unbounded.Length(Output_Object.Footer_HTML) /= 0 then
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<HR>"); -- Horizontal line (rule).
+	-- else nothing on top at all.
 	end if;
-	Ada.Text_IO.Put (Output_Object.Output_File, """>Contents</A>");
-	Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
-	Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
-        if Output_Object.Big_Files then
-	    Ada.Text_IO.Put (Output_Object.Output_File, "#0-29");
-	else
-	    Ada.Text_IO.Put (Output_Object.Output_File,
-		Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
-	            "-0-29.html");
-	end if;
-	Ada.Text_IO.Put (Output_Object.Output_File, """>Index</A>");
-	Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
-	Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
-        Ada.Text_IO.Put (Output_Object.Output_File,
-	    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
-	        "-SRCH.html");
-	Ada.Text_IO.Put (Output_Object.Output_File, """>Search</A>");
-	Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
-	Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
-        Ada.Text_IO.Put (Output_Object.Output_File,
-	    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
-	        "-STDS.html");
-	Ada.Text_IO.Put (Output_Object.Output_File, """>Related Documents</A>");
-	if Clause /= "" then
-	    begin
-		-- Note: We do the following in one big glup so that if
-		-- Not_Found_Error is raised, nothing is output.
-		Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
-		    Make_Clause_Link_Name (Output_Object,
-			ARM_Contents.Previous_Clause(
-			    ARM_Contents.Previous_Clause(Clause))));
-		Ada.Text_IO.Put (Output_Object.Output_File, """>Previous</A>");
-	    exception
-	        when ARM_Contents.Not_Found_Error =>
-		    null; -- Probably the first section.
-	    end;
-	    Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
-	        Make_Clause_Link_Name (Output_Object, Clause));
-	    Ada.Text_IO.Put (Output_Object.Output_File, """>Next</A>");
-	end if;
-        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""");
-        if Output_Object.Big_Files then
-	    Ada.Text_IO.Put (Output_Object.Output_File, "#TTL");
-	else
-	    Ada.Text_IO.Put (Output_Object.Output_File,
-		Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
-	            "-TTL.html");
-	end if;
-	Ada.Text_IO.Put (Output_Object.Output_File, """>Legal</A>");
 
-	Ada.Text_IO.Put_Line (Output_Object.Output_File, "</P>");
+	if Output_Object.Nav_on_Bottom then
+	    Make_Navigation_Bar (Output_Object, Clause, Clause_is_Next => True, Is_Top => False);
+	-- else no navigation bar.
+	end if;
+
+ 	if Ada.Strings.Unbounded.Length(Output_Object.Footer_HTML) /= 0 then
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File,
+		Ada.Strings.Unbounded.To_String(Output_Object.Footer_HTML));
+	end if;
 
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "</BODY>");
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "</HTML>");
@@ -1048,6 +1116,16 @@ package body ARM_HTML is
     procedure Create (Output_Object : in out HTML_Output_Type;
 		      Big_Files : in Boolean;
 		      File_Prefix : in String;
+		      HTML_Kind : in HTML_Type;
+		      Use_Unicode : in Boolean;
+	              Ref_URL : in String;
+	              Srch_URL : in String;
+	              Index_URL : in String;
+	              Use_Buttons : Boolean;
+	              Nav_On_Top : Boolean;
+	              Nav_On_Bottom : Boolean;
+	              Header_HTML : String;
+	              Footer_HTML : String;
 		      Title : in String := "") is
 	-- Create an Output_Object for a document.
 	-- Generate a few large output files if
@@ -1055,6 +1133,30 @@ package body ARM_HTML is
 	-- The prefix of the output file names is File_Prefix - this
 	-- should be no more then 4 characters allowed in file names.
 	-- The title of the document is Title.
+	-- HTML_Kind determines the kind of HTML generated; HTML_3 works on
+	-- every browser but has little control over formatting;
+	-- HTML_4_Compatible has better control, but tries to make the results
+	-- look good on older browsers; HTML_4_Only uses maximum formatting,
+	-- but makes no attempt to look good on browsers older than IE 5.0 and
+	-- Firefox 1.0.
+	-- If Use_Unicode is true, Unicode characters available on US versions
+	-- of Windows 2000 are used when appropriate; otherwise, Unicode
+	-- characters are only used when explicitly requested with
+	-- Unicode_Character (other characters are replaced with reasonable
+	-- equivalents). [Note: It's known that IE on Windows 95/98/ME cannot
+	-- display Unicode characters.] Use_Unicode has no effect if HTML_Kind
+	-- is set to HTML_3.
+	-- Ref_URL, Srch_URL, and Index_URL are the URLs (possibly relative)
+	-- for the "References", "Search", and "Index" buttons/labels,
+	-- respectively. If null, these buttons/labels are omitted.
+	-- If Use_Buttons is true, button images are used, otherwise text labels
+	-- are used for the navigation bar.
+	-- If Nav_On_Top is true, the navigation bar will appear in the header
+	-- of each page. If Nav_On_Bottom is true, the navigation bar will
+	-- appear in the footer of each page.
+	-- Header_HTML gives self-contained HTML that will appear before the
+	-- navigation bar in the header. Footer_HTML gives self-contained HTML
+	-- that will appear after the navigation bar in the footer.
     begin
 	if Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -1065,6 +1167,17 @@ package body ARM_HTML is
 			        Source => File_Prefix);
 	Output_Object.Title := Ada.Strings.Unbounded.To_Unbounded_String (Title);
 	Output_Object.Big_Files := Big_Files;
+	Output_Object.HTML_Kind := HTML_Kind;
+	Output_Object.Use_Unicode := Use_Unicode;
+	Output_Object.Ref_URL := Ada.Strings.Unbounded.To_Unbounded_String(Ref_URL);
+	Output_Object.Srch_URL := Ada.Strings.Unbounded.To_Unbounded_String(Srch_URL);
+	Output_Object.Index_URL := Ada.Strings.Unbounded.To_Unbounded_String(Index_URL);
+	Output_Object.Use_Buttons := Use_Buttons;
+	Output_Object.Nav_on_Top := Nav_on_Top;
+	Output_Object.Nav_on_Bottom := Nav_on_Bottom;
+	Output_Object.Header_HTML := Ada.Strings.Unbounded.To_Unbounded_String(Header_HTML);
+	Output_Object.Footer_HTML := Ada.Strings.Unbounded.To_Unbounded_String(Footer_HTML);
+
 	if Output_Object.Big_Files then
 	    Start_HTML_File (Output_Object,
 			     Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right),
@@ -1138,7 +1251,7 @@ package body ARM_HTML is
 	    Output_Object.Current_Item := 1;
 	elsif Output_Object.Column_Count >= 4 and then Number_of_Columns = 1 then
 	    -- Finished processing columns, output the columns as a table.
-	    if HTML_Kind = HTML_3 then
+	    if Output_Object.HTML_Kind = HTML_3 then
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<UL><UL><TABLE Width=""70%"">"); -- Table with no border or caption, takes up 70% of the screen.
 	    else
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<DIV Class=""CodeIndented""><TABLE Width=""70%"">"); -- Table with no border or caption, takes up 70% of the screen.
@@ -1186,7 +1299,7 @@ package body ARM_HTML is
 		if Output_Object.Column_Text = Column_Text_Ptrs_Type'(others => null) then
 		    -- We've output everything.
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
-		    if HTML_Kind = HTML_3 then
+		    if Output_Object.HTML_Kind = HTML_3 then
 	                Ada.Text_IO.Put_Line (Output_Object.Output_File, "</TABLE></UL></UL>");
 		    else
 	                Ada.Text_IO.Put_Line (Output_Object.Output_File, "</TABLE></DIV>");
@@ -1224,7 +1337,7 @@ package body ARM_HTML is
 	-- Internal:
         -- Output the font information for HTML 4.0 compatibility mode.
     begin
-        if HTML_Kind = HTML_4_Compatible then
+        if Output_Object.HTML_Kind = HTML_4_Compatible then
 	    case Paragraph_Info(Format).Font is
 	        when ARM_Output.Default | ARM_Output.Roman =>
 		    null;
@@ -1267,7 +1380,7 @@ package body ARM_HTML is
 	-- Internal:
         -- Output the font information for HTML 4.0 compatibility mode.
     begin
-        if HTML_Kind = HTML_4_Compatible then
+        if Output_Object.HTML_Kind = HTML_4_Compatible then
 	    if ARM_Output."=" (Paragraph_Info(Format).Font, ARM_Output.Fixed) then
 	        null; -- No font change here.
 	    else
@@ -1367,7 +1480,7 @@ package body ARM_HTML is
 	    end case;
 	    Ada.Text_IO.Put (Output_Object.Output_File, ">");
 	    Output_Object.Char_Count := Output_Object.Char_Count + 1;
-	    if HTML_Kind = HTML_4_Compatible and then Include_Compatibility then
+	    if Output_Object.HTML_Kind = HTML_4_Compatible and then Include_Compatibility then
 		Put_Compatibility_Font_Info (Output_Object, Format);
 	    end if;
 	end Put_Style;
@@ -1465,7 +1578,7 @@ package body ARM_HTML is
 		Output_Object.Emulate_Tabs := False;
 	end case;
 
-	if HTML_Kind = HTML_3 then
+	if Output_Object.HTML_Kind = HTML_3 then
 	    -- Note: We can't control the space below the paragraphs here, so
 	    -- Space_After is ignored.
 	    case Format is
@@ -1768,9 +1881,9 @@ package body ARM_HTML is
 		    -- Note: Count these as half characters, as the font is so small.
 	    end if;
 
-	elsif HTML_Kind = HTML_4_Compatible then
+	elsif Output_Object.HTML_Kind = HTML_4_Compatible then
 	    if Number /= "" then -- Has paragraph number.
-		Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Class=""Paranum"">");
+		Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Class=""paranum"">");
 	        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=-2>");
 	        Ada.Text_IO.Put (Output_Object.Output_File, Number);
 	        Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
@@ -2080,7 +2193,7 @@ package body ARM_HTML is
 	    end if;
 	else -- HTML_4_Only.
 	    if Number /= "" then -- Has paragraph number.
-	        Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Class=""Paranum"">");
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Class=""paranum"">");
 	        Ada.Text_IO.Put (Output_Object.Output_File, Number);
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</DIV>");
 	        Output_Object.Char_Count := 0;
@@ -2378,7 +2491,7 @@ package body ARM_HTML is
 	    -- Output a end style for HTML 4.0; if Include_Compatibility is True,
 	    -- include compatibility font information as well.
 	begin
-	    if HTML_Kind = HTML_4_Compatible and then Include_Compatibility then
+	    if Output_Object.HTML_Kind = HTML_4_Compatible and then Include_Compatibility then
 		Put_End_Compatibility_Font_Info (Output_Object, Format);
 	    end if;
 	    case Paragraph_Info(Format).Tag is
@@ -2416,7 +2529,7 @@ package body ARM_HTML is
 	    return; -- Nothing else to do here.
 	end if;
 
-	if HTML_Kind = HTML_3 then
+	if Output_Object.HTML_Kind = HTML_3 then
 	    case Output_Object.Paragraph_Format is
 	        when ARM_Output.Normal | ARM_Output.Wide |
 	             ARM_Output.Index =>
@@ -2586,7 +2699,7 @@ package body ARM_HTML is
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</FONT></DL></UL></UL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	    end case;
-	else -- if HTML_Kind = HTML_4_Compatible or else HTML_Kind = HTML_4_Only then
+	else -- if Output_Object.HTML_Kind = HTML_4_Compatible or else Output_Object.HTML_Kind = HTML_4_Only then
 	    case Output_Object.Paragraph_Format is
 	        when ARM_Output.Normal | ARM_Output.Wide |
 	             ARM_Output.Notes | ARM_Output.Notes_Header |
@@ -2648,8 +2761,8 @@ package body ARM_HTML is
 		"Header in paragraph");
 	end if;
 	Ada.Text_IO.New_Line (Output_Object.Output_File);
-	if HTML_Kind = HTML_4_Only then
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H4 Class=""Centered"">" & Header_Text & "</H4>");
+	if Output_Object.HTML_Kind = HTML_4_Only then
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H4 Class=""centered"">" & Header_Text & "</H4>");
 	else
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H4 ALIGN=CENTER>" & Header_Text & "</H4>");
 	end if;
@@ -2771,7 +2884,7 @@ package body ARM_HTML is
 	-- Raises Not_Valid_Error if in a paragraph.
 	function Header_Text return String is
 	begin
-	    if HTML_Kind = HTML_3 then
+	    if Output_Object.HTML_Kind = HTML_3 then
 		return "<U>" & New_Header_Text & "</U> <S>" & Old_Header_Text & "</S>";
 	    else
 		return "<SPAN class=""insert" & Version & """>" & New_Header_Text &
@@ -2926,7 +3039,7 @@ package body ARM_HTML is
 		"Table in paragraph");
 	end if;
 
-	if HTML_Kind /= HTML_3 then
+	if Output_Object.HTML_Kind /= HTML_3 then
             Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Class=""SyntaxIndented"">");
 	end if;
         Ada.Text_IO.Put (Output_Object.Output_File, "<TABLE frame=""border"" rules=""all"" border=""2"">");
@@ -3003,7 +3116,7 @@ package body ARM_HTML is
 	        Output_Object.Conditional_Space := False; -- Don't need it here.
 	    when ARM_Output.End_Table =>
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
-		if HTML_Kind /= HTML_3 then
+		if Output_Object.HTML_Kind /= HTML_3 then
 		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</TABLE></DIV>");
 		else
 		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</TABLE>");
@@ -3462,7 +3575,7 @@ package body ARM_HTML is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-	if HTML_Kind > HTML_3 and then Use_Unicode then
+	if Output_Object.HTML_Kind > HTML_3 and then Output_Object.Use_Unicode then
             Output_Text (Output_Object, "&#8203;");
 	-- else no Soft break in HTML 3.2.
 	end if;
@@ -3557,7 +3670,7 @@ package body ARM_HTML is
 	end if;
 	case Char is
 	    when ARM_Output.EM_Dash =>
-		if HTML_Kind > HTML_3 and Use_Unicode then
+		if Output_Object.HTML_Kind > HTML_3 and Output_Object.Use_Unicode then
 	            Output_Text (Output_Object, "&mdash;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
         	else
@@ -3565,7 +3678,7 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 2;
 		end if;
 	    when ARM_Output.EN_Dash =>
-		if HTML_Kind > HTML_3 and Use_Unicode then
+		if Output_Object.HTML_Kind > HTML_3 and Output_Object.Use_Unicode then
 		    Output_Text (Output_Object, "&ndash;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3573,7 +3686,7 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.GEQ =>
-		if HTML_Kind > HTML_3 and Use_Unicode then
+		if Output_Object.HTML_Kind > HTML_3 and Output_Object.Use_Unicode then
 	            Output_Text (Output_Object, "&ge;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3581,7 +3694,7 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 2;
 		end if;
 	    when ARM_Output.LEQ =>
-		if HTML_Kind > HTML_3 and Use_Unicode then
+		if Output_Object.HTML_Kind > HTML_3 and Output_Object.Use_Unicode then
 	            Output_Text (Output_Object, "&le;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3589,7 +3702,7 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 2;
 		end if;
 	    when ARM_Output.NEQ =>
-		if HTML_Kind > HTML_3 and Use_Unicode then
+		if Output_Object.HTML_Kind > HTML_3 and Output_Object.Use_Unicode then
 	            Output_Text (Output_Object, "&ne;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3597,7 +3710,7 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 2;
 		end if;
 	    when ARM_Output.PI =>
-		if HTML_Kind > HTML_3 and Use_Unicode then
+		if Output_Object.HTML_Kind > HTML_3 and Output_Object.Use_Unicode then
 	            Output_Text (Output_Object, "&pi;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3605,8 +3718,8 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 2;
 		end if;
 	    when ARM_Output.Left_Ceiling =>
-		if FALSE and (HTML_Kind > HTML_3 and Use_Unicode) then
-		    -- This character doesn't display on Windows 2000/XP.
+		if FALSE and (Output_Object.HTML_Kind > HTML_3 and Output_Object.Use_Unicode) then
+		    -- This character doesn't display on US Windows 2000/XP.
 	            Output_Text (Output_Object, "&lceil;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3614,8 +3727,8 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 8;
 		end if;
 	    when ARM_Output.Right_Ceiling =>
-		if FALSE and (HTML_Kind > HTML_3 and Use_Unicode) then
-		    -- This character doesn't display on Windows 2000/XP.
+		if FALSE and (Output_Object.HTML_Kind > HTML_3 and Output_Object.Use_Unicode) then
+		    -- This character doesn't display on US Windows 2000/XP.
 	            Output_Text (Output_Object, "&rceil;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3623,8 +3736,8 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Left_Floor =>
-		if FALSE and (HTML_Kind > HTML_3 and Use_Unicode) then
-		    -- This character doesn't display on Windows 2000/XP.
+		if FALSE and (Output_Object.HTML_Kind > HTML_3 and Output_Object.Use_Unicode) then
+		    -- This character doesn't display on US Windows 2000/XP.
 	            Output_Text (Output_Object, "&lfloor;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3632,8 +3745,8 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 6;
 		end if;
 	    when ARM_Output.Right_Floor =>
-		if FALSE and (HTML_Kind > HTML_3 and Use_Unicode) then
-		    -- This character doesn't display on Windows 2000/XP.
+		if FALSE and (Output_Object.HTML_Kind > HTML_3 and Output_Object.Use_Unicode) then
+		    -- This character doesn't display on US Windows 2000/XP.
 	            Output_Text (Output_Object, "&rfloor;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3641,8 +3754,8 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Thin_Space =>
-		if FALSE and (HTML_Kind > HTML_3 and Use_Unicode) then
-		    -- This character doesn't display on Windows 2000/XP.
+		if FALSE and (Output_Object.HTML_Kind > HTML_3 and Output_Object.Use_Unicode) then
+		    -- This character doesn't display on US Windows 2000/XP.
 	            Output_Text (Output_Object, "&thinsp;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3650,7 +3763,7 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Left_Quote =>
-		if HTML_Kind > HTML_3 then --and Use_Unicode then
+		if Output_Object.HTML_Kind > HTML_3 then
 	            Output_Text (Output_Object, "&lsquo;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3658,7 +3771,7 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Right_Quote =>
-		if HTML_Kind > HTML_3 then --and Use_Unicode then
+		if Output_Object.HTML_Kind > HTML_3 then
 	            Output_Text (Output_Object, "&rsquo;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3666,7 +3779,7 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Left_Double_Quote =>
-		if HTML_Kind > HTML_3 then --and Use_Unicode then
+		if Output_Object.HTML_Kind > HTML_3 then
 	            Output_Text (Output_Object, "&ldquo;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3674,7 +3787,7 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Right_Double_Quote =>
-		if HTML_Kind > HTML_3 then --and Use_Unicode then
+		if Output_Object.HTML_Kind > HTML_3 then
 	            Output_Text (Output_Object, "&rdquo;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3682,7 +3795,7 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Small_Dotless_I =>
-		if HTML_Kind > HTML_3 then --and Use_Unicode then -- We'll use it if it might be supported.
+		if Output_Object.HTML_Kind > HTML_3 then --and Output_Object.Use_Unicode then -- We'll use it if it might be supported.
 	            Output_Text (Output_Object, "&#0305;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3690,7 +3803,7 @@ package body ARM_HTML is
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		end if;
 	    when ARM_Output.Capital_Dotted_I =>
-		if HTML_Kind > HTML_3 then --and Use_Unicode then -- We'll use it if it might be supported.
+		if Output_Object.HTML_Kind > HTML_3 then --and Output_Object.Use_Unicode then -- We'll use it if it might be supported.
 	            Output_Text (Output_Object, "&#0304;");
 		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 		else
@@ -3715,6 +3828,10 @@ package body ARM_HTML is
 	if not Output_Object.Is_In_Paragraph then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
+	end if;
+	if Output_Object.HTML_Kind = HTML_3 then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Unicode not available for HTML 3");
 	end if;
 	if Output_Object.Conditional_Space then
 	    Output_Object.Conditional_Space := False;
@@ -3754,7 +3871,7 @@ package body ARM_HTML is
 		"Already saw the end of the hanging part");
 	end if;
 	Output_Object.Saw_Hang_End := True;
-	if HTML_Kind = HTML_3 then
+	if Output_Object.HTML_Kind = HTML_3 then
 	    case Output_Object.Paragraph_Format is
 	        -- Part of a definition list.
 		when ARM_Output.Small_Hanging |
@@ -3888,14 +4005,14 @@ package body ARM_HTML is
 		when ARM_Output.Fixed =>
 		    Output_Text (Output_Object, "</TT>");
 		when ARM_Output.Roman =>
-		    if HTML_Kind = HTML_4_Only then
+		    if Output_Object.HTML_Kind = HTML_4_Only then
 		        Output_Text (Output_Object, "</SPAN>");
 		    else
 			null; -- Default, currently.
 		        --Output_Text (Output_Object, "</FONT>");
 		    end if;
 		when ARM_Output.Swiss =>
-		    if HTML_Kind = HTML_4_Only then
+		    if Output_Object.HTML_Kind = HTML_4_Only then
 		        Output_Text (Output_Object, "</SPAN>");
 		    else
 		        Output_Text (Output_Object, "</FONT>");
@@ -3908,7 +4025,7 @@ package body ARM_HTML is
 	   Added_Version /= Output_Object.Added_Version then
 	    case Output_Object.Change is
 		when ARM_Output.Insertion =>
-		    if HTML_Kind = HTML_3 then
+		    if Output_Object.HTML_Kind = HTML_3 then
 		        Output_Text (Output_Object, "</U>");
 		    else
 		        --Output_Text (Output_Object, "</INS>");
@@ -3940,14 +4057,14 @@ package body ARM_HTML is
 			Output_Object.Conditional_Space := True;
 		    end if;
 		when ARM_Output.Deletion =>
-		    if HTML_Kind = HTML_3 then
+		    if Output_Object.HTML_Kind = HTML_3 then
 		        Output_Text (Output_Object, "</S>");
 		    else
 		        --Output_Text (Output_Object, "</DEL>");
 		        Output_Text (Output_Object, "</SPAN>");
 		    end if;
 		when ARM_Output.Both =>
-		    if HTML_Kind = HTML_3 then
+		    if Output_Object.HTML_Kind = HTML_3 then
 		        Output_Text (Output_Object, "</S></U>");
 		    else
 		        --Output_Text (Output_Object, "</DEL></INS>");
@@ -3966,21 +4083,21 @@ package body ARM_HTML is
 	    end case;
 	    case Change is
 		when ARM_Output.Insertion =>
-		    if HTML_Kind = HTML_3 then
+		    if Output_Object.HTML_Kind = HTML_3 then
 		        Output_Text (Output_Object, "<U>");
 		    else
 		        --Output_Text (Output_Object, "<INS>");
 		        Output_Text (Output_Object, "<SPAN class=""insert" & Version & """>");
 		    end if;
 		when ARM_Output.Deletion =>
-		    if HTML_Kind = HTML_3 then
+		    if Output_Object.HTML_Kind = HTML_3 then
 		        Output_Text (Output_Object, "<S>");
 		    else
 		        --Output_Text (Output_Object, "<DEL>");
 		        Output_Text (Output_Object, "<SPAN class=""delete" & Version & """>");
 		    end if;
 		when ARM_Output.Both =>
-		    if HTML_Kind = HTML_3 then
+		    if Output_Object.HTML_Kind = HTML_3 then
 		        Output_Text (Output_Object, "<U><S>");
 		    else
 		        --Output_Text (Output_Object, "<INS><DEL>");
@@ -4004,15 +4121,15 @@ package body ARM_HTML is
 		when ARM_Output.Fixed =>
 		    Output_Text (Output_Object, "<TT>");
 		when ARM_Output.Roman =>
-		    if HTML_Kind = HTML_4_Only then
-		        Output_Text (Output_Object, "<SPAN Class=""Roman"">");
+		    if Output_Object.HTML_Kind = HTML_4_Only then
+		        Output_Text (Output_Object, "<SPAN Class=""roman"">");
 		    else
 			null; -- Default, currently.
 		        --Output_Text (Output_Object, "<FONT xxx>");
 		    end if;
 		when ARM_Output.Swiss =>
-		    if HTML_Kind = HTML_4_Only then
-		        Output_Text (Output_Object, "<SPAN Class=""Swiss"">");
+		    if Output_Object.HTML_Kind = HTML_4_Only then
+		        Output_Text (Output_Object, "<SPAN Class=""swiss"">");
 		    else
 		        Output_Text (Output_Object, SWISS_FONT_CODE);
 		    end if;
@@ -4219,5 +4336,91 @@ package body ARM_HTML is
         Ordinary_Text (Output_Object, Text);
         Output_Text (Output_Object, "</A>");
     end AI_Reference;
+
+
+    procedure Local_Target (Output_Object : in out HTML_Output_Type;
+			    Text : in String;
+			    Target : in String) is
+	-- Generate a local target. This marks the potential target of local
+	-- links identified by "Target". Text is the text of the target.
+	-- For hyperlinked formats, this should generate a link target;
+	-- for other formats, only the text is generated.
+    begin
+	if not Output_Object.Is_Valid then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not valid object");
+	end if;
+	if not Output_Object.Is_In_Paragraph then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not in paragraph");
+	end if;
+	-- Insert an anchor:
+	Output_Text (Output_Object, "<A NAME=""");
+        Output_Text (Output_Object, Target);
+	Output_Text (Output_Object, """>");
+        Ordinary_Text (Output_Object, Text);
+        Output_Text (Output_Object, "</A>");
+    end Local_Target;
+
+
+    procedure Local_Link (Output_Object : in out HTML_Output_Type;
+			  Text : in String;
+			  Target : in String;
+			  Clause_Number : in String) is
+	-- Generate a local link to the target and clause given.
+	-- Text is the text of the link.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+    begin
+	if not Output_Object.Is_Valid then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not valid object");
+	end if;
+	if not Output_Object.Is_In_Paragraph then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not in paragraph");
+	end if;
+	-- Insert an anchor:
+	Output_Text (Output_Object, "<A HREF=""");
+	if Output_Object.Big_Files then
+	    null; -- No file name needed, this is a self-reference.
+	else
+	    declare
+	        Name : constant String :=
+		    Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
+	    begin
+	        Output_Text (Output_Object, Name);
+	    end;
+	end if;
+	Output_Text (Output_Object, "#" & Target);
+	Output_Text (Output_Object, """>");
+	Ordinary_Text (Output_Object, Text);
+	Output_Text (Output_Object, "</A>");
+    end Local_Link;
+
+
+    procedure URL_Link (Output_Object : in out HTML_Output_Type;
+			Text : in String;
+			URL : in String) is
+	-- Generate a link to the URL given.
+	-- Text is the text of the link.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+    begin
+	if not Output_Object.Is_Valid then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not valid object");
+	end if;
+	if not Output_Object.Is_In_Paragraph then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not in paragraph");
+	end if;
+	-- Insert an anchor:
+	Output_Text (Output_Object, "<A HREF=""");
+        Output_Text (Output_Object, URL);
+	Output_Text (Output_Object, """>");
+        Ordinary_Text (Output_Object, Text);
+        Output_Text (Output_Object, "</A>");
+    end URL_Link;
 
 end ARM_HTML;

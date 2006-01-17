@@ -40,12 +40,12 @@ package ARM_Master is
     -- Edit History:
     --
     --  1/05/06 - RLB - Created base package to replace hard-coded main program.
+    --  1/12/06 - RLB - Removed obsolete Document parameter.
 
     type Output_Format_Type is (HTML, RTF, Text, Corr, Info);
 
     procedure Read_and_Process_Master_File (
 	File_Name : in String;
-	The_Document : ARM_Format.Document_Type; -- Document to generate.
 	The_Change_Kind : ARM_Format.Change_Kind; -- Changes to generate.
 	The_Change_Version : ARM_Contents.Change_Version_Type; -- Change version.
         Output_Format : in Output_Format_Type);

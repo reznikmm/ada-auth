@@ -300,6 +300,31 @@ package ARM_Corr is
 	-- the target (in folded format). For hyperlinked formats, this should
 	-- generate a link; for other formats, the text alone is generated.
 
+    procedure Local_Target (Output_Object : in out Corr_Output_Type;
+			    Text : in String;
+			    Target : in String);
+	-- Generate a local target. This marks the potential target of local
+	-- links identified by "Target". Text is the text of the target.
+	-- For hyperlinked formats, this should generate a link target;
+	-- for other formats, only the text is generated.
+
+    procedure Local_Link (Output_Object : in out Corr_Output_Type;
+			  Text : in String;
+			  Target : in String;
+			  Clause_Number : in String);
+	-- Generate a local link to the target and clause given.
+	-- Text is the text of the link.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+
+    procedure URL_Link (Output_Object : in out Corr_Output_Type;
+			Text : in String;
+			URL : in String);
+	-- Generate a link to the URL given.
+	-- Text is the text of the link.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+
 private
 
     subtype Buffer_String is String (1 .. 120);
