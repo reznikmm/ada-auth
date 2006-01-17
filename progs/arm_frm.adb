@@ -19,7 +19,7 @@ package body ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2003, 2004, 2005  AXE Consultants.
+    -- Copyright 2000, 2002, 2003, 2004, 2005, 2006  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -188,6 +188,7 @@ package body ARM_Format is
     --			not change the version; it's not necessarily
     --			initialized, and the Kind isn't set anyway if the
     --			version is too new.
+    --  1/ 5/06 - RLB - Corrected a comment.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -4013,7 +4014,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    Is_First => False,
 		    Param_Close_Bracket => Close_Ch);
 		if Close_Ch /= ' ' then
-		    -- Get the version character:
+		    -- Get the Boolean character:
 		    ARM_Input.Get_Char (Input_Object, Ch);
 		    case Ch is
 			when 'F' | 'f' | 'N' | 'n' =>

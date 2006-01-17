@@ -13,7 +13,7 @@ package body ARM_Text is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -90,6 +90,8 @@ package body ARM_Text is
     --  1/24/05 - RLB - Added Inner_Indented.
     --  2/ 1/05 - RLB - Added Turkish chars to allow an AARM note.
     --  5/27/05 - RLB - Added arbitrary Unicode characters.
+    --  1/11/06 - RLB - Eliminated dispatching Create in favor of tailored
+    --			versions.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -107,22 +109,12 @@ package body ARM_Text is
 
 
     procedure Create (Output_Object : in out Text_Output_Type;
-		      Page_Size : in ARM_Output.Page_Size;
-		      Includes_Changes : in Boolean;
-		      Big_Files : in Boolean;
-		      For_ISO : in Boolean := False;
 		      File_Prefix : in String;
-		      Header_Prefix : in String := "";
 		      Title : in String := "") is
-	-- Create an Output_Object for a document with the specified page
-	-- size. Changes from the base standard are included if
-	-- Includes_Changes is True. Generate a few large output files if
-	-- Big_Files is True; otherwise generate smaller output files.
+	-- Create an Output_Object for a document.
 	-- The prefix of the output file names is File_Prefix - this
 	-- should be no more then 4 characters allowed in file names.
 	-- The title of the document is Title.
-	-- The header prefix appears in the header (if any) before the title,
-	-- separated by a dash.
     begin
 	if Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -131,8 +123,7 @@ package body ARM_Text is
 	Output_Object.Is_Valid := True;
 	Ada.Strings.Fixed.Move (Target => Output_Object.File_Prefix,
 				Source => File_Prefix);
-	-- We don't use the page size, changes flag, big files flag,
-	-- for ISO flag, the header prefix, or the title.
+	-- We don't use the title.
     end Create;
 
 

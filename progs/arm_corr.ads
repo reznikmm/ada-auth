@@ -11,7 +11,7 @@ package ARM_Corr is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -43,26 +43,18 @@ package ARM_Corr is
     -- Edit History:
     --
     --  6/ 2/05 - RLB - Created base package from text and HTML versions.
+    --  1/11/06 - RLB - Eliminated dispatching Create in favor of tailored
+    --			versions.
 
     type Corr_Output_Type is new ARM_Output.Output_Type with private;
 
     procedure Create (Output_Object : in out Corr_Output_Type;
-		      Page_Size : in ARM_Output.Page_Size;
-		      Includes_Changes : in Boolean;
-		      Big_Files : in Boolean;
-		      For_ISO : in Boolean := False;
 		      File_Prefix : in String;
-		      Header_Prefix : in String := "";
 		      Title : in String := "");
-	-- Create an Output_Object for a document with the specified page
-	-- size. Changes from the base standard are included if
-	-- Includes_Changes is True. Generate a few large output files if
-	-- Big_Files is True; otherwise generate smaller output files.
+	-- Create an Output_Object for a document.
 	-- The prefix of the output file names is File_Prefix - this
 	-- should be no more then 4 characters allowed in file names.
 	-- The title of the document is Title.
-	-- The header prefix appears in the header (if any) before the title,
-	-- separated by a dash.
 
     procedure Close (Output_Object : in out Corr_Output_Type);
 	-- Close an Output_Object. No further output to the object is

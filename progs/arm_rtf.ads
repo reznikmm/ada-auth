@@ -13,7 +13,7 @@ package ARM_RTF is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -66,26 +66,41 @@ package ARM_RTF is
     --			replacement of changed text.
     --  9/14/04 - RLB - Moved Change_Version_Type to ARM_Contents.
     --  5/27/05 - RLB - Added arbitrary Unicode characters.
+    --  1/11/06 - RLB - Eliminated dispatching Create in favor of tailored
+    --			versions.
 
     type RTF_Output_Type is new ARM_Output.Output_Type with private;
 
+    type Page_Size is (A4, Letter, Ada95, Half_Letter);
+	-- A4 is standard European letter size.
+	-- Letter is standard American letter size (8.5x11).
+	-- Half_Letter is standard America half size (5.5x8.5).
+	-- Ada95 is the size of the existing Ada 95 standard (7x9).
+
+    type Serif_Fonts is (Times_New_Roman, Souvenir);
+    type Sans_Serif_Fonts is (Arial, Helvetica);
+
     procedure Create (Output_Object : in out RTF_Output_Type;
-		      Page_Size : in ARM_Output.Page_Size;
+		      Page_Size : in ARM_RTF.Page_Size;
 		      Includes_Changes : in Boolean;
 		      Big_Files : in Boolean;
-		      For_ISO : in Boolean := False;
+		      Primary_Sans_Serif_Font : in Sans_Serif_Fonts := Arial;
+		      Primary_Serif_Font : in Serif_Fonts := Times_New_Roman;
 		      File_Prefix : in String;
 		      Header_Prefix : in String := "";
 		      Title : in String := "");
 	-- Create an Output_Object for a document with the specified page
-	-- size. Changes from the base standard are included if
-	-- Includes_Changes is True. Generate a few large output files if
+	-- size. Changes from the base document are included if
+	-- Includes_Changes is True (otherwise no revisions are generated).
+	-- Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
 	-- The prefix of the output file names is File_Prefix - this
 	-- should be no more then 4 characters allowed in file names.
 	-- The title of the document is Title.
 	-- The header prefix appears in the header (if any) before the title,
 	-- separated by a dash.
+	-- The primary font used for the Sans_Serif text, and for the Serif
+	-- text, is as specified.
 
     procedure Close (Output_Object : in out RTF_Output_Type);
 	-- Close an Output_Object. No further output to the object is
@@ -348,9 +363,11 @@ private
 	File_Prefix : Prefix_String; -- Blank padded.
 	Title : Ada.Strings.Unbounded.Unbounded_String;
 	Header_Prefix : Ada.Strings.Unbounded.Unbounded_String;
-	Page_Size : ARM_Output.Page_Size;
+	Page_Size : ARM_RTF.Page_Size;
 	Includes_Changes : Boolean;
 	Big_Files : Boolean; -- For RTF, this means to generate a single monster file.
+	Primary_Sans_Serif_Font : Sans_Serif_Fonts;
+	Primary_Serif_Font : Serif_Fonts;
 	For_ISO : Boolean;
 	Char_Count : Natural := 0; -- Characters on current line.
 	Saw_Hang_End : Boolean := False; -- If we are in a hanging paragraph,

@@ -1,5 +1,6 @@
 with Ada.Text_IO,
      Ada.Strings.Fixed,
+     Ada.Strings.Unbounded,
      Ada.Characters.Handling,
      Ada.Command_Line;
 with ARM_Format,
@@ -8,6 +9,7 @@ with ARM_Format,
      ARM_HTML,
      ARM_RTF,
      ARM_Corr,
+     ARM_Master,
      ARM_Contents;
 procedure ARM_Formatter is
 
@@ -17,7 +19,7 @@ procedure ARM_Formatter is
     -- reference manual files (in various formats).
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -70,94 +72,56 @@ procedure ARM_Formatter is
     --			Amendment document.
     -- 10/12/05 - RLB - Changed the title to reflect what we learned from ISO.
     -- 10/28/05 - RLB - Added Annex Q.
+    --  1/ 5/06 - RLB - Revised to use master files, rather than hard-coded
+    --			properties.
 
     -- Standard commands:
     -- For Original RM:
-    --	   Arm_Form RM <Format> No-Changes 0 Big_Files
+    --	   Arm_Form RM <Format> No-Changes 0
     -- For Original AARM:
-    --	   Arm_Form AARM <Format> No-Changes 0 Show-Index-Entries
+    --	   Arm_Form AARM <Format> No-Changes 0
     -- For RM with Corr:
     --     [With change bars for Word 97/2000:]
-    --	   Arm_Form RM RTF New-Changes 1 Big_Files
+    --	   Arm_Form RM RTF New-Changes 1
     --     [Final versions with no changes:]
-    --	   Arm_Form RM <Format> New-Only 1 Big_Files
+    --	   Arm_Form RM <Format> New-Only 1
     -- For AARM with Corr:
     --     [HTML; RTF for display]:
-    --	      Arm_Form RM <Format> Show-Changes 1 Show-Index-Entries
+    --	      Arm_Form RM <Format> Show-Changes 1
     --     [TXT; RTF for printing]:
-    --	      Arm_Form RM <Format> New-Only 1 Show-Index-Entries
+    --	      Arm_Form RM <Format> New-Only 1
     -- For RM with Corr and Amd:
     --     [With change bars for Word 97/2000:]
-    --	   Arm_Form RM RTF New-Changes 2 Big_Files
+    --	   Arm_Form RM RTF New-Changes 2
     --     [With change ballons for Word XP/2003:]
-    --	   Arm_Form RM RTF Show-Changes 2 Big_Files
+    --	   Arm_Form RM RTF Show-Changes 2
     --     [Final versions with no changes:]
-    --	   Arm_Form RM <Format> New-Only 2 Big_Files
+    --	   Arm_Form RM <Format> New-Only 2
     -- For AARM with Corr and Amd:
     --     [HTML; RTF for display]:
-    --	      Arm_Form RM <Format> Changes-Only 2 Show-Index-Entries
+    --	      Arm_Form RM <Format> Changes-Only 2
     --        (for only Amd changes) or
-    --	      Arm_Form RM <Format> Show-Changes 2 Show-Index-Entries
+    --	      Arm_Form RM <Format> Show-Changes 2
     --        (for all changes)
     --     [TXT; RTF for printing]:
-    --	      Arm_Form RM <Format> New-Only 2 Show-Index-Entries
+    --	      Arm_Form RM <Format> New-Only 2
 
 
-    type Output_Format_Type is (HTML, RTF, Text, Corr, All_Formats);
     No_Command_Error : exception;
 
-    Format : Output_Format_Type; -- Format to generate.
+    Format : ARM_Master.Output_Format_Type; -- Format to generate.
     Document : ARM_Format.Document_Type; -- Document to generate.
+    Master_File : Ada.Strings.Unbounded.Unbounded_String; -- Master file for document to generate.
     Change_Kind : ARM_Format.Change_Kind; -- Changes to generate.
     Change_Version : ARM_Contents.Change_Version_Type; -- Change version.
     Display_Index_Entries : Boolean; -- Should Index entries be displayed?
-    Use_Large_Files : Boolean; -- Use large output files.
 
     procedure Get_Commands is
 	-- Process the command line for this program.
     begin
-	if Ada.Command_Line.Argument_Count not in 1 .. 6 then
+	if Ada.Command_Line.Argument_Count not in 1 .. 4 then
 	    Ada.Text_IO.Put_Line ("** Wrong number of arguments");
 	    raise No_Command_Error;
-	end if;
-	if Ada.Command_Line.Argument_Count >= 5 then
-	    Display_Index_Entries := False;
-	    Use_Large_Files := False;
-	    if Ada.Command_Line.Argument_Count >= 6 then
-	        declare
-		    Options_Arg : String :=
-		         Ada.Characters.Handling.To_Lower (
-			    Ada.Strings.Fixed.Trim (Ada.Command_Line.Argument(6),
-			    Ada.Strings.Right));
-	        begin
-		    if Options_Arg = "show-index-entries" then
-		        Display_Index_Entries := True;
-		    elsif Options_Arg = "big-files" then
-		        Use_Large_Files := True;
-		    else
-		        Ada.Text_IO.Put_Line ("** Unrecognized option: " & Options_Arg);
-		        raise No_Command_Error;
-		    end if;
-	        end;
-	    end if;
-	    declare
-		Options_Arg : String :=
-		     Ada.Characters.Handling.To_Lower (
-			Ada.Strings.Fixed.Trim (Ada.Command_Line.Argument(5),
-			Ada.Strings.Right));
-	    begin
-		if Options_Arg = "show-index-entries" then
-		    Display_Index_Entries := True;
-		elsif Options_Arg = "big-files" then
-		    Use_Large_Files := True;
-		else
-		    Ada.Text_IO.Put_Line ("** Unrecognized option: " & Options_Arg);
-		    raise No_Command_Error;
-		end if;
-	    end;
-	else
-	    Display_Index_Entries := False;
-	    Use_Large_Files := False;
 	end if;
 	if Ada.Command_Line.Argument_Count >= 4 then
 	    declare
@@ -209,35 +173,47 @@ procedure ARM_Formatter is
 			Ada.Strings.Fixed.Trim (Ada.Command_Line.Argument(2),
 			Ada.Strings.Right));
 	    begin
-		if Format_Arg = "all" then
-		    Format := All_Formats;
-		elsif Format_Arg = "rtf" then
-		    Format := RTF;
+		if Format_Arg = "rtf" then
+		    Format := ARM_Master.RTF;
 		elsif Format_Arg = "html" then
-		    Format := HTML;
+		    Format := ARM_Master.HTML;
 		elsif Format_Arg = "text" then
-		    Format := Text;
+		    Format := ARM_Master.Text;
 		elsif Format_Arg = "corr" then
-		    Format := Corr;
+		    Format := ARM_Master.Corr;
+		elsif Format_Arg = "info" then
+		    Format := ARM_Master.Info;
 		else
 		    Ada.Text_IO.Put_Line ("** Unrecognized format: " & Format_Arg);
 		    raise No_Command_Error;
 		end if;
 	    end;
 	else
-	    Format := All_Formats;
+	    Format := ARM_Master.HTML;
 	end if;
         declare
 	    Document_Arg : String :=
 		 Ada.Characters.Handling.To_Lower (
 		    Ada.Strings.Fixed.Trim (Ada.Command_Line.Argument(1),
 		    Ada.Strings.Right));
+	    use type Ada.Strings.Unbounded.Unbounded_String;
         begin
-	    if Document_Arg = "aarm" then
+	    Master_File := Ada.Strings.Unbounded.To_Unbounded_String(
+		    Ada.Strings.Fixed.Trim (Ada.Command_Line.Argument(1),
+		       Ada.Strings.Right));
+	    if Ada.Strings.Unbounded.Index (Master_File, ".") = 0 then
+		-- Add extension if it is missing.
+		Master_File := Master_File & ".MSM";
+	    end if;
+--*** Temp:
+	    if Document_Arg = "aarm" or else
+	       Document_Arg = "aarm.msm" then
 	        Document := ARM_Format.AARM;
-	    elsif Document_Arg = "rm" then
+	    elsif Document_Arg = "rm" or else
+	          Document_Arg = "rm.msm" then
 	        Document := ARM_Format.RM;
-	    elsif Document_Arg = "iso-rm" then
+	    elsif Document_Arg = "iso-rm" or else
+	          Document_Arg = "iso-rm.msm" then
 	        Document := ARM_Format.RM_ISO;
 	    else
 	        Ada.Text_IO.Put_Line ("** Unrecognized document: " & Document_Arg);
@@ -246,15 +222,14 @@ procedure ARM_Formatter is
         end;
     exception
 	when No_Command_Error =>
-	    Ada.Text_IO.Put_Line ("  Usage: Arm_Form <Document> [<Format>, [<Changes>, [<Version>, [<Options>]]]}");
+	    Ada.Text_IO.Put_Line ("  Usage: Arm_Form <Document> [<Format>[, <Changes>[, <Version>]]]}");
 	    Ada.Text_IO.Put_Line ("     where: <Document> = 'RM' (reference manual),");
 	    Ada.Text_IO.Put_Line ("                         'ISO-RM' (reference manual for ISO),");
 	    Ada.Text_IO.Put_Line ("                         'AARM' (annotated reference manual);");
 	    Ada.Text_IO.Put_Line ("     where: <Format> = 'Text' (text files),");
 	    Ada.Text_IO.Put_Line ("                       'HTML' (HTML files),");
 	    Ada.Text_IO.Put_Line ("                       'RTF' (RTF files for Word 97 or later),");
-	    Ada.Text_IO.Put_Line ("                       'Corr' (Corrigendum-style command files for comparisons),");
-	    Ada.Text_IO.Put_Line ("                       'All' (Files of all formats);");
+	    Ada.Text_IO.Put_Line ("                       'Corr' (Corrigendum-style command files for comparisons);");
 	    Ada.Text_IO.Put_Line ("     where: <Changes> = 'No-Changes' (RM text),");
 	    Ada.Text_IO.Put_Line ("                        'New-Only' (Revised RM text only for <Version>),");
 	    Ada.Text_IO.Put_Line ("                        'Changes-Only' (Text with changes marked for <Version> only),");
@@ -264,522 +239,375 @@ procedure ARM_Formatter is
 	    Ada.Text_IO.Put_Line ("                        0-Original Ada 95 (equivalent to No-Changes)");
 	    Ada.Text_IO.Put_Line ("                        1-Technical Corrigendum 1");
 	    Ada.Text_IO.Put_Line ("                        2-Amendment 1");
-	    Ada.Text_IO.Put_Line ("     where: <Options> = 'Show-Index-Entries' (print in document);");
-	    Ada.Text_IO.Put_Line ("                        'Big-Files' (large output files).");
 	    raise No_Command_Error;
     end Get_Commands;
 
 
-    procedure Scan is
-	-- Scan the document for section/clause headings, building the
-	-- table of contents.
-	Format : ARM_Format.Format_Type;
-    begin
-	ARM_Format.Create (Format, Document, Change_Kind, Change_Version,
-		Display_Index_Entries);
-
-	ARM_Contents.Initialize; -- Make sure that the contents DB is empty.
-
-	-- Scan each of the files in order:
-
-	ARM_Format.Scan (Format, "Title.MSS", Section_Number => 0,
-	    Starts_New_Section => True);
-
-	ARM_Format.Scan (Format, "Front_matter.MSS", Section_Number => 0,
-	    Starts_New_Section => False);
-
-	ARM_Format.Scan (Format, "01.MSS", Section_Number => 1,
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "02.MSS", Section_Number => 2,
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "03A.MSS", Section_Number => 3,
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "03B.MSS", Section_Number => 3,
-	    Starts_New_Section => False);
-	ARM_Format.Scan (Format, "03C.MSS", Section_Number => 3,
-	    Starts_New_Section => False);
-	ARM_Format.Scan (Format, "04A.MSS", Section_Number => 4,
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "04B.MSS", Section_Number => 4,
-	    Starts_New_Section => False);
-	ARM_Format.Scan (Format, "05.MSS", Section_Number => 5,
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "06.MSS", Section_Number => 6,
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "07.MSS", Section_Number => 7,
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "08.MSS", Section_Number => 8,
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "09.MSS", Section_Number => 9,
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "10.MSS", Section_Number => 10,
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "11.MSS", Section_Number => 11,
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "12.MSS", Section_Number => 12,
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "13A.MSS", Section_Number => 13,
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "13B.MSS", Section_Number => 13,
-	    Starts_New_Section => False);
-
-	-- Library separator page:
-	ARM_Format.Scan (Format, "LIBRARY.MSS", Section_Number => 20, -- Not a real section number.
-	    Starts_New_Section => True);
-
-	-- Normative annexes:
-	ARM_Format.Scan (Format, "PRE.MSS", Section_Number => 21, -- represents A
-	    Starts_New_Section => True);
-	    --	  Note: All of the following named "Pre_" are sections of "Pre".
-	    --	  These were include files, which I've eliminated.
-	ARM_Format.Scan (Format, "PRE_Standard.MSS",
-	    Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Scan (Format, "PRE_Ada.MSS",
-	    Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Scan (Format, "PRE_Chars.MSS",
-	    Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Scan (Format, "PRE_Strings.MSS",
-	    Section_Number => 21,
- 	    Starts_New_Section => False);
-	ARM_Format.Scan (Format, "PRE_Math.MSS",
-	    Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Scan (Format, "Real_Attribs.MSS",
-	    Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Scan (Format, "PRE_IO.MSS",
-	    Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Scan (Format, "PRE_Cmdln.MSS",
-	    Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Scan (Format, "PRE_Dirs.MSS",
-	    Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Scan (Format, "PRE_Environ.MSS",
-	    Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Scan (Format, "PRE_Containers.MSS",
-	    Section_Number => 21,
-	    Starts_New_Section => False);
-
-	-- Back to "normal" appendixes:
-	ARM_Format.Scan (Format, "Interface.MSS",
-	    Section_Number => 22, -- represents B
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "SP.MSS",
-	    Section_Number => 23, -- represents C
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "RT.MSS",
-	    Section_Number => 24, -- represents D
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "DS.MSS",
-	    Section_Number => 25, -- represents E
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "InfoSys.MSS",
-	    Section_Number => 26, -- represents F
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "Numerics.MSS",
-	    Section_Number => 27, -- represents G
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "Safety.MSS",
-	    Section_Number => 28, -- represents H
-	    Starts_New_Section => True);
-	ARM_Format.Scan (Format, "Obsolescent.MSS",
-	    Section_Number => 30, -- represents J
-	    Starts_New_Section => True);
-
-	-- Informative annexes:
-	ARM_Format.Scan (Format, "Attribs.MSS",
-	    Section_Number => 31, -- represents K
-	    Starts_New_Section => True);
-		-- Mostly generated from the sections and annexes.
-	ARM_Format.Scan (Format, "Pragmas.MSS",
-	    Section_Number => 32, -- represents L
-	    Starts_New_Section => True);
-		-- Mostly generated from the sections and annexes.
-	ARM_Format.Scan (Format, "Impldef.MSS",
-	    Section_Number => 33, -- represents M
-	    Starts_New_Section => True);
-		-- Mostly generated from the sections and annexes.
-	ARM_Format.Scan (Format, "Glossary.MSS",
-	    Section_Number => 34, -- represents N
-	    Starts_New_Section => True);
-		-- Mostly generated from the sections and annexes.
-	ARM_Format.Scan (Format, "Syntax.MSS",
-	    Section_Number => 36, -- represents P
-	    Starts_New_Section => True);
-		-- Mostly generated from the sections and annexes.
-	ARM_Format.Scan (Format, "LangDef.MSS",
-	    Section_Number => 37, -- represents Q
-	    Starts_New_Section => True);
-		-- Mostly generated from the sections and annexes.
-
-	ARM_Format.Insert_Index (Format);
-
-	ARM_Format.Destroy (Format);
-    end Scan;
-
-
-    procedure Generate (Output_Object : in out ARM_Output.Output_Type'Class) is
-	-- Generate a document into Output_Object.
-	Format : ARM_Format.Format_Type;
-    begin
-	ARM_Format.Create (Format, Document, Change_Kind, Change_Version,
-		Display_Index_Entries);
-
-	-- This subprogram stands in for Ada.MSS in the original Scribe
-	-- sources (which we don't use).
-
-	-- For the RTF output, we had better use the big-files option, so
-	-- we get one large file.
-
-	ARM_Format.Process (Format, "Title.MSS", Output_Object,
-	    Section_Name => "Ttl", Section_Number => 0,
-	    Starts_New_Section => True);
-
-	-- The table of contents goes here in the collating order for the
-	-- final document. However, for Word, we let Word generate
-	-- it (this lets us use page number references in the ToC).
-	ARM_Format.Write_Table_of_Contents (Format, Output_Object);
-
-	ARM_Format.Process (Format, "Front_matter.MSS", Output_Object,
-	    Section_Name => "00", Section_Number => 0,
-	    Starts_New_Section => True);
-
-	ARM_Format.Process (Format, "01.MSS", Output_Object,
-	    Section_Name => "01", Section_Number => 1,
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "02.MSS", Output_Object,
-	    Section_Name => "02", Section_Number => 2,
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "03A.MSS", Output_Object,
-	    Section_Name => "03", Section_Number => 3,
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "03B.MSS", Output_Object,
-	    Section_Name => "03", Section_Number => 3,
-	    Starts_New_Section => False);
-	ARM_Format.Process (Format, "03C.MSS", Output_Object,
-	    Section_Name => "03", Section_Number => 3,
-	    Starts_New_Section => False);
-	ARM_Format.Process (Format, "04A.MSS", Output_Object,
-	    Section_Name => "04", Section_Number => 4,
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "04B.MSS", Output_Object,
-	    Section_Name => "04", Section_Number => 4,
-	    Starts_New_Section => False);
-	ARM_Format.Process (Format, "05.MSS", Output_Object,
-	    Section_Name => "05", Section_Number => 5,
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "06.MSS", Output_Object,
-	    Section_Name => "06", Section_Number => 6,
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "07.MSS", Output_Object,
-	    Section_Name => "07", Section_Number => 7,
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "08.MSS", Output_Object,
-	    Section_Name => "08", Section_Number => 8,
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "09.MSS", Output_Object,
-	    Section_Name => "09", Section_Number => 9,
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "10.MSS", Output_Object,
-	    Section_Name => "10", Section_Number => 10,
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "11.MSS", Output_Object,
-	    Section_Name => "11", Section_Number => 11,
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "12.MSS", Output_Object,
-	    Section_Name => "12", Section_Number => 12,
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "13A.MSS", Output_Object,
-	    Section_Name => "13", Section_Number => 13,
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "13B.MSS", Output_Object,
-	    Section_Name => "13", Section_Number => 13,
-	    Starts_New_Section => False);
-
-	-- The "standard libraries" separator page:
-	ARM_Format.Process (Format, "LIBRARY.MSS", Output_Object,
-	    Section_Name => "Lib", Section_Number => 0, -- Not a real section number.
-	    Starts_New_Section => True);
-
-	-- Normative annexes:
-	ARM_Format.Process (Format, "PRE.MSS", Output_Object,
-	    Section_Name => "A", Section_Number => 21, -- represents A
-	    Starts_New_Section => True);
-	    --	  Note: All of the following named "Pre_" are sections of "Pre".
-	    --	  These were include files, which I've eliminated.
-	ARM_Format.Process (Format, "PRE_Standard.MSS", Output_Object,
-	    Section_Name => "A", Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Process (Format, "PRE_Ada.MSS", Output_Object,
-	    Section_Name => "A", Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Process (Format, "PRE_Chars.MSS", Output_Object,
-	    Section_Name => "A", Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Process (Format, "PRE_Strings.MSS", Output_Object,
-	    Section_Name => "A", Section_Number => 21,
- 	    Starts_New_Section => False);
-	ARM_Format.Process (Format, "PRE_Math.MSS", Output_Object,
-	    Section_Name => "A", Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Process (Format, "Real_Attribs.MSS", Output_Object,
-	    Section_Name => "A", Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Process (Format, "PRE_IO.MSS", Output_Object,
-	    Section_Name => "A", Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Process (Format, "PRE_Cmdln.MSS", Output_Object,
-	    Section_Name => "A", Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Process (Format, "PRE_Dirs.MSS", Output_Object,
-	    Section_Name => "A", Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Process (Format, "PRE_Environ.MSS", Output_Object,
-	    Section_Name => "A", Section_Number => 21,
-	    Starts_New_Section => False);
-	ARM_Format.Process (Format, "PRE_Containers.MSS", Output_Object,
-	    Section_Name => "A", Section_Number => 21,
-	    Starts_New_Section => False);
-
-	-- Back to "normal" appendixes:
-	ARM_Format.Process (Format, "Interface.MSS", Output_Object,
-	    Section_Name => "B", Section_Number => 22, -- represents B
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "SP.MSS", Output_Object,
-	    Section_Name => "C", Section_Number => 23, -- represents C
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "RT.MSS", Output_Object,
-	    Section_Name => "D", Section_Number => 24, -- represents D
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "DS.MSS", Output_Object,
-	    Section_Name => "E", Section_Number => 25, -- represents E
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "InfoSys.MSS", Output_Object,
-	    Section_Name => "F", Section_Number => 26, -- represents F
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "Numerics.MSS", Output_Object,
-	    Section_Name => "G", Section_Number => 27, -- represents G
-	    Starts_New_Section => True);
-	ARM_Format.Process (Format, "Safety.MSS", Output_Object,
-	    Section_Name => "H", Section_Number => 28, -- represents H
-	    Starts_New_Section => True);
-
-	-- Do something here so that the next Annex is Annex J;
-	-- ISO requires skipping I and O.
-
-	ARM_Format.Process (Format, "Obsolescent.MSS", Output_Object,
-	    Section_Name => "J", Section_Number => 30, -- represents J
-	    Starts_New_Section => True);
-
-	-- Informative annexes:
-	ARM_Format.Process (Format, "Attribs.MSS", Output_Object,
-	    Section_Name => "K", Section_Number => 31, -- represents K
-	    Starts_New_Section => True);
-		-- Mostly generated from the sections and annexes.
-	ARM_Format.Process (Format, "Pragmas.MSS", Output_Object,
-	    Section_Name => "L", Section_Number => 32, -- represents L
-	    Starts_New_Section => True);
-		-- Mostly generated from the sections and annexes.
-	ARM_Format.Process (Format, "Impldef.MSS", Output_Object,
-	    Section_Name => "M", Section_Number => 33, -- represents M
-	    Starts_New_Section => True);
-		-- Mostly generated from the sections and annexes.
-	ARM_Format.Process (Format, "Glossary.MSS", Output_Object,
-	    Section_Name => "N", Section_Number => 34, -- represents N
-	    Starts_New_Section => True);
-		-- Mostly generated from the sections and annexes.
-
-	-- Do something here so that the next Annex is Annex P;
-	-- ISO requires skipping I and O.
-
-	ARM_Format.Process (Format, "Syntax.MSS", Output_Object,
-	    Section_Name => "P", Section_Number => 36, -- represents P
-	    Starts_New_Section => True);
-		-- Mostly generated from the sections and annexes.
-	ARM_Format.Process (Format, "LangDef.MSS", Output_Object,
-	    Section_Name => "Q", Section_Number => 37, -- represents Q
-	    Starts_New_Section => True);
-		-- Mostly generated from the sections and annexes.
-
-	-- The index is generated here.
-	ARM_Format.Write_Index (Format, Output_Object);
-
-	ARM_Format.Destroy (Format);
-    end Generate;
-
-
-    procedure Create (Output_Object : in out ARM_Output.Output_Type'Class) is
-	-- Create an Output_Object for the current parameters.
-    begin
-	case Document is
-	    when ARM_Format.AARM =>
-		if ARM_Format."=" (Change_Kind, ARM_Format.Old_Only) or else
-		   Change_Version = '0' then
-		    ARM_Output.Create (Output_Object,
-				       Page_Size => ARM_Output.Letter,
-				       Includes_Changes => False,
-				       Big_Files => Use_Large_Files,
-				       For_ISO => False,
-				       File_Prefix => "AA",
-				       Title => "Annotated Ada Reference Manual",
-				       Header_Prefix => "ISO/IEC 8652:1995(E)");
-		elsif Change_Version = '1' then
-		    ARM_Output.Create (Output_Object,
-				       Page_Size => ARM_Output.Letter,
-				       Includes_Changes => True,
-				       Big_Files => Use_Large_Files,
-				       For_ISO => False,
-				       File_Prefix => "AA",
-				       Title => "Annotated Ada Reference Manual",
-				       Header_Prefix => "ISO/IEC 8652:1995(E) with COR.1:2001");
-		else
-		    ARM_Output.Create (Output_Object,
-				       Page_Size => ARM_Output.Letter,
-				       Includes_Changes => True,
-				       Big_Files => Use_Large_Files,
-				       For_ISO => False,
-				       File_Prefix => "AA",
-				       Title => "Annotated Ada Reference Manual",
-				       Header_Prefix => "ISO/IEC 8652:200y(E) Ed. 3");
-		end if;
-	    when ARM_Format.RM =>
-		if ARM_Format."=" (Change_Kind, ARM_Format.Old_Only) or else
-		   Change_Version = '0' then
-		    ARM_Output.Create (Output_Object,
-				       Page_Size => ARM_Output.Ada95,
-				       Includes_Changes => False,
-				       Big_Files => Use_Large_Files,
-				       For_ISO => False,
-				       File_Prefix => "RM",
-				       Title => "Ada Reference Manual",
-				       Header_Prefix => "ISO/IEC 8652:1995(E)");
-		elsif Change_Version = '1' then
-		    ARM_Output.Create (Output_Object,
-				       Page_Size => ARM_Output.Ada95,
-				       Includes_Changes => True,
-				       Big_Files => Use_Large_Files,
-				       For_ISO => False,
-				       File_Prefix => "RM",
-				       Title => "Ada Reference Manual",
-				       Header_Prefix => "ISO/IEC 8652:1995(E) with COR.1:2001");
-		else
-		    ARM_Output.Create (Output_Object,
-				       Page_Size => ARM_Output.Ada95,
-				       Includes_Changes => True,
-				       Big_Files => Use_Large_Files,
-				       For_ISO => False,
-				       File_Prefix => "RM",
-				       Title => "Ada Reference Manual",
-				       Header_Prefix => "ISO/IEC 8652:200y(E) Ed. 3");
-		end if;
-	    when ARM_Format.RM_ISO =>
-		if ARM_Format."=" (Change_Kind, ARM_Format.Old_Only) or else
-		   Change_Version = '0' then
-		    ARM_Output.Create (Output_Object,
-				       Page_Size => ARM_Output.A4,
-				       Includes_Changes => False,
-				       Big_Files => Use_Large_Files,
-				       For_ISO => False,
-				       File_Prefix => "RM",
-				       Title => "Ada Reference Manual",
-				       Header_Prefix => "ISO/IEC 8652:1995(E)");
-		elsif Change_Version = '1' then
-		    ARM_Output.Create (Output_Object,
-				       Page_Size => ARM_Output.A4,
-				       Includes_Changes => True,
-				       Big_Files => Use_Large_Files,
-				       For_ISO => False,
-				       File_Prefix => "RM",
-				       Title => "Ada Reference Manual",
-				       Header_Prefix => "ISO/IEC 8652:1995(E) with COR.1:2001");
-		else
-		    ARM_Output.Create (Output_Object,
-				       Page_Size => ARM_Output.A4,
-				       Includes_Changes => True,
-				       Big_Files => Use_Large_Files,
-				       For_ISO => False,
-				       File_Prefix => "RM",
-				       Title => "Ada Reference Manual",
-				       Header_Prefix => "ISO/IEC 8652:200y(E) Ed. 3");
-		end if;
-	end case;
-    end Create;
+--    procedure Scan is
+--	-- Scan the document for section/clause headings, building the
+--	-- table of contents.
+--	Format : ARM_Format.Format_Type;
+--    begin
+--	ARM_Format.Create (Format, Document, Change_Kind, Change_Version,
+--		Display_Index_Entries);
+--
+--	ARM_Contents.Initialize; -- Make sure that the contents DB is empty.
+--
+--	-- Scan each of the files in order:
+--
+--	ARM_Format.Scan (Format, "Title.MSS", Section_Number => 0,
+--	    Starts_New_Section => True);
+--
+--	ARM_Format.Scan (Format, "Front_matter.MSS", Section_Number => 0,
+--	    Starts_New_Section => False);
+--
+--	ARM_Format.Scan (Format, "01.MSS", Section_Number => 1,
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "02.MSS", Section_Number => 2,
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "03A.MSS", Section_Number => 3,
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "03B.MSS", Section_Number => 3,
+--	    Starts_New_Section => False);
+--	ARM_Format.Scan (Format, "03C.MSS", Section_Number => 3,
+--	    Starts_New_Section => False);
+--	ARM_Format.Scan (Format, "04A.MSS", Section_Number => 4,
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "04B.MSS", Section_Number => 4,
+--	    Starts_New_Section => False);
+--	ARM_Format.Scan (Format, "05.MSS", Section_Number => 5,
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "06.MSS", Section_Number => 6,
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "07.MSS", Section_Number => 7,
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "08.MSS", Section_Number => 8,
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "09.MSS", Section_Number => 9,
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "10.MSS", Section_Number => 10,
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "11.MSS", Section_Number => 11,
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "12.MSS", Section_Number => 12,
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "13A.MSS", Section_Number => 13,
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "13B.MSS", Section_Number => 13,
+--	    Starts_New_Section => False);
+--
+--	-- Library separator page:
+--	ARM_Format.Scan (Format, "LIBRARY.MSS", Section_Number => 20, -- Not a real section number.
+--	    Starts_New_Section => True);
+--
+--	-- Normative annexes:
+--	ARM_Format.Scan (Format, "PRE.MSS", Section_Number => 21, -- represents A
+--	    Starts_New_Section => True);
+--	    --	  Note: All of the following named "Pre_" are sections of "Pre".
+--	    --	  These were include files, which I've eliminated.
+--	ARM_Format.Scan (Format, "PRE_Standard.MSS",
+--	    Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Scan (Format, "PRE_Ada.MSS",
+--	    Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Scan (Format, "PRE_Chars.MSS",
+--	    Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Scan (Format, "PRE_Strings.MSS",
+--	    Section_Number => 21,
+-- 	    Starts_New_Section => False);
+--	ARM_Format.Scan (Format, "PRE_Math.MSS",
+--	    Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Scan (Format, "Real_Attribs.MSS",
+--	    Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Scan (Format, "PRE_IO.MSS",
+--	    Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Scan (Format, "PRE_Cmdln.MSS",
+--	    Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Scan (Format, "PRE_Dirs.MSS",
+--	    Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Scan (Format, "PRE_Environ.MSS",
+--	    Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Scan (Format, "PRE_Containers.MSS",
+--	    Section_Number => 21,
+--	    Starts_New_Section => False);
+--
+--	-- Back to "normal" appendixes:
+--	ARM_Format.Scan (Format, "Interface.MSS",
+--	    Section_Number => 22, -- represents B
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "SP.MSS",
+--	    Section_Number => 23, -- represents C
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "RT.MSS",
+--	    Section_Number => 24, -- represents D
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "DS.MSS",
+--	    Section_Number => 25, -- represents E
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "InfoSys.MSS",
+--	    Section_Number => 26, -- represents F
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "Numerics.MSS",
+--	    Section_Number => 27, -- represents G
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "Safety.MSS",
+--	    Section_Number => 28, -- represents H
+--	    Starts_New_Section => True);
+--	ARM_Format.Scan (Format, "Obsolescent.MSS",
+--	    Section_Number => 30, -- represents J
+--	    Starts_New_Section => True);
+--
+--	-- Informative annexes:
+--	ARM_Format.Scan (Format, "Attribs.MSS",
+--	    Section_Number => 31, -- represents K
+--	    Starts_New_Section => True);
+--		-- Mostly generated from the sections and annexes.
+--	ARM_Format.Scan (Format, "Pragmas.MSS",
+--	    Section_Number => 32, -- represents L
+--	    Starts_New_Section => True);
+--		-- Mostly generated from the sections and annexes.
+--	ARM_Format.Scan (Format, "Impldef.MSS",
+--	    Section_Number => 33, -- represents M
+--	    Starts_New_Section => True);
+--		-- Mostly generated from the sections and annexes.
+--	ARM_Format.Scan (Format, "Glossary.MSS",
+--	    Section_Number => 34, -- represents N
+--	    Starts_New_Section => True);
+--		-- Mostly generated from the sections and annexes.
+--	ARM_Format.Scan (Format, "Syntax.MSS",
+--	    Section_Number => 36, -- represents P
+--	    Starts_New_Section => True);
+--		-- Mostly generated from the sections and annexes.
+--	ARM_Format.Scan (Format, "LangDef.MSS",
+--	    Section_Number => 37, -- represents Q
+--	    Starts_New_Section => True);
+--		-- Mostly generated from the sections and annexes.
+--
+--	ARM_Format.Insert_Index (Format);
+--
+--	ARM_Format.Destroy (Format);
+--    end Scan;
+--
+--
+--    procedure Generate (Output_Object : in out ARM_Output.Output_Type'Class) is
+--	-- Generate a document into Output_Object.
+--	Format : ARM_Format.Format_Type;
+--    begin
+--	ARM_Format.Create (Format, Document, Change_Kind, Change_Version,
+--		Display_Index_Entries);
+--
+--	-- This subprogram stands in for Ada.MSS in the original Scribe
+--	-- sources (which we don't use).
+--
+--	-- For the RTF output, we had better use the big-files option, so
+--	-- we get one large file.
+--
+--	ARM_Format.Process (Format, "Title.MSS", Output_Object,
+--	    Section_Name => "Ttl", Section_Number => 0,
+--	    Starts_New_Section => True);
+--
+--	-- The table of contents goes here in the collating order for the
+--	-- final document. However, for Word, we let Word generate
+--	-- it (this lets us use page number references in the ToC).
+--	ARM_Format.Write_Table_of_Contents (Format, Output_Object);
+--
+--	ARM_Format.Process (Format, "Front_matter.MSS", Output_Object,
+--	    Section_Name => "00", Section_Number => 0,
+--	    Starts_New_Section => True);
+--
+--	ARM_Format.Process (Format, "01.MSS", Output_Object,
+--	    Section_Name => "01", Section_Number => 1,
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "02.MSS", Output_Object,
+--	    Section_Name => "02", Section_Number => 2,
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "03A.MSS", Output_Object,
+--	    Section_Name => "03", Section_Number => 3,
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "03B.MSS", Output_Object,
+--	    Section_Name => "03", Section_Number => 3,
+--	    Starts_New_Section => False);
+--	ARM_Format.Process (Format, "03C.MSS", Output_Object,
+--	    Section_Name => "03", Section_Number => 3,
+--	    Starts_New_Section => False);
+--	ARM_Format.Process (Format, "04A.MSS", Output_Object,
+--	    Section_Name => "04", Section_Number => 4,
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "04B.MSS", Output_Object,
+--	    Section_Name => "04", Section_Number => 4,
+--	    Starts_New_Section => False);
+--	ARM_Format.Process (Format, "05.MSS", Output_Object,
+--	    Section_Name => "05", Section_Number => 5,
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "06.MSS", Output_Object,
+--	    Section_Name => "06", Section_Number => 6,
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "07.MSS", Output_Object,
+--	    Section_Name => "07", Section_Number => 7,
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "08.MSS", Output_Object,
+--	    Section_Name => "08", Section_Number => 8,
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "09.MSS", Output_Object,
+--	    Section_Name => "09", Section_Number => 9,
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "10.MSS", Output_Object,
+--	    Section_Name => "10", Section_Number => 10,
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "11.MSS", Output_Object,
+--	    Section_Name => "11", Section_Number => 11,
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "12.MSS", Output_Object,
+--	    Section_Name => "12", Section_Number => 12,
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "13A.MSS", Output_Object,
+--	    Section_Name => "13", Section_Number => 13,
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "13B.MSS", Output_Object,
+--	    Section_Name => "13", Section_Number => 13,
+--	    Starts_New_Section => False);
+--
+--	-- The "standard libraries" separator page:
+--	ARM_Format.Process (Format, "LIBRARY.MSS", Output_Object,
+--	    Section_Name => "Lib", Section_Number => 0, -- Not a real section number.
+--	    Starts_New_Section => True);
+--
+--	-- Normative annexes:
+--	ARM_Format.Process (Format, "PRE.MSS", Output_Object,
+--	    Section_Name => "A", Section_Number => 21, -- represents A
+--	    Starts_New_Section => True);
+--	    --	  Note: All of the following named "Pre_" are sections of "Pre".
+--	    --	  These were include files, which I've eliminated.
+--	ARM_Format.Process (Format, "PRE_Standard.MSS", Output_Object,
+--	    Section_Name => "A", Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Process (Format, "PRE_Ada.MSS", Output_Object,
+--	    Section_Name => "A", Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Process (Format, "PRE_Chars.MSS", Output_Object,
+--	    Section_Name => "A", Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Process (Format, "PRE_Strings.MSS", Output_Object,
+--	    Section_Name => "A", Section_Number => 21,
+-- 	    Starts_New_Section => False);
+--	ARM_Format.Process (Format, "PRE_Math.MSS", Output_Object,
+--	    Section_Name => "A", Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Process (Format, "Real_Attribs.MSS", Output_Object,
+--	    Section_Name => "A", Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Process (Format, "PRE_IO.MSS", Output_Object,
+--	    Section_Name => "A", Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Process (Format, "PRE_Cmdln.MSS", Output_Object,
+--	    Section_Name => "A", Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Process (Format, "PRE_Dirs.MSS", Output_Object,
+--	    Section_Name => "A", Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Process (Format, "PRE_Environ.MSS", Output_Object,
+--	    Section_Name => "A", Section_Number => 21,
+--	    Starts_New_Section => False);
+--	ARM_Format.Process (Format, "PRE_Containers.MSS", Output_Object,
+--	    Section_Name => "A", Section_Number => 21,
+--	    Starts_New_Section => False);
+--
+--	-- Back to "normal" appendixes:
+--	ARM_Format.Process (Format, "Interface.MSS", Output_Object,
+--	    Section_Name => "B", Section_Number => 22, -- represents B
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "SP.MSS", Output_Object,
+--	    Section_Name => "C", Section_Number => 23, -- represents C
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "RT.MSS", Output_Object,
+--	    Section_Name => "D", Section_Number => 24, -- represents D
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "DS.MSS", Output_Object,
+--	    Section_Name => "E", Section_Number => 25, -- represents E
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "InfoSys.MSS", Output_Object,
+--	    Section_Name => "F", Section_Number => 26, -- represents F
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "Numerics.MSS", Output_Object,
+--	    Section_Name => "G", Section_Number => 27, -- represents G
+--	    Starts_New_Section => True);
+--	ARM_Format.Process (Format, "Safety.MSS", Output_Object,
+--	    Section_Name => "H", Section_Number => 28, -- represents H
+--	    Starts_New_Section => True);
+--
+--	-- Do something here so that the next Annex is Annex J;
+--	-- ISO requires skipping I and O.
+--
+--	ARM_Format.Process (Format, "Obsolescent.MSS", Output_Object,
+--	    Section_Name => "J", Section_Number => 30, -- represents J
+--	    Starts_New_Section => True);
+--
+--	-- Informative annexes:
+--	ARM_Format.Process (Format, "Attribs.MSS", Output_Object,
+--	    Section_Name => "K", Section_Number => 31, -- represents K
+--	    Starts_New_Section => True);
+--		-- Mostly generated from the sections and annexes.
+--	ARM_Format.Process (Format, "Pragmas.MSS", Output_Object,
+--	    Section_Name => "L", Section_Number => 32, -- represents L
+--	    Starts_New_Section => True);
+--		-- Mostly generated from the sections and annexes.
+--	ARM_Format.Process (Format, "Impldef.MSS", Output_Object,
+--	    Section_Name => "M", Section_Number => 33, -- represents M
+--	    Starts_New_Section => True);
+--		-- Mostly generated from the sections and annexes.
+--	ARM_Format.Process (Format, "Glossary.MSS", Output_Object,
+--	    Section_Name => "N", Section_Number => 34, -- represents N
+--	    Starts_New_Section => True);
+--		-- Mostly generated from the sections and annexes.
+--
+--	-- Do something here so that the next Annex is Annex P;
+--	-- ISO requires skipping I and O.
+--
+--	ARM_Format.Process (Format, "Syntax.MSS", Output_Object,
+--	    Section_Name => "P", Section_Number => 36, -- represents P
+--	    Starts_New_Section => True);
+--		-- Mostly generated from the sections and annexes.
+--	ARM_Format.Process (Format, "LangDef.MSS", Output_Object,
+--	    Section_Name => "Q", Section_Number => 37, -- represents Q
+--	    Starts_New_Section => True);
+--		-- Mostly generated from the sections and annexes.
+--
+--	-- The index is generated here.
+--	ARM_Format.Write_Index (Format, Output_Object);
+--
+--	ARM_Format.Destroy (Format);
+--    end Generate;
 
 
 begin
-    Ada.Text_IO.Put_Line ("ARM 95/200Y formatter");
-    Ada.Text_IO.Put_Line ("  Copyright 2000, 2002, 2004, 2005  AXE Consultants");
+    Ada.Text_IO.Put_Line ("Ada Manual formatter");
+    Ada.Text_IO.Put_Line ("  Copyright 2000, 2002, 2004, 2005, 2006  AXE Consultants");
     Ada.Text_IO.Put_Line ("  P.O. Box 1512, Madison WI  53701");
 
     Get_Commands;
 
 Ada.Text_IO.Put_Line ("  Document = " & ARM_Format.Document_Type'Image(Document));
-Ada.Text_IO.Put_Line ("  Format = " & Output_Format_Type'Image(Format));
+Ada.Text_IO.Put_Line ("  Master File = " & Ada.Strings.Unbounded.To_String(Master_File));
+Ada.Text_IO.Put_Line ("  Format = " & ARM_Master.Output_Format_Type'Image(Format));
 Ada.Text_IO.Put_Line ("  Changes = " & ARM_Format.Change_Kind'Image(Change_Kind));
 Ada.Text_IO.Put_Line ("  Version = " & Change_Version);
-Ada.Text_IO.Put_Line ("  Display Index Entries = " & Boolean'Image(Display_Index_Entries));
 
-    Scan;
+    ARM_Master.Read_and_Process_Master_File (
+		File_Name => Ada.Strings.Unbounded.To_String(Master_File),
+		The_Document => Document,
+		The_Change_Kind => Change_Kind,
+		The_Change_Version => Change_Version,
+		Output_Format => Format);
 
-    case Format is
-	when HTML =>
-	    declare
-		Output : ARM_HTML.HTML_Output_Type;
-	    begin
-		Create (Output);
-		Generate (Output);
-		ARM_HTML.Close (Output);
-	    end;
-	when RTF =>
-	    declare
-		Output : ARM_RTF.RTF_Output_Type;
-	    begin
-		Create (Output);
-		Generate (Output);
-		ARM_RTF.Close (Output);
-	    end;
-	when Text =>
-	    declare
-		Output : ARM_Text.Text_Output_Type;
-	    begin
-		Create (Output);
-		Generate (Output);
-		ARM_Text.Close (Output);
-	    end;
-	when Corr =>
-	    declare
-		Output : ARM_Corr.Corr_Output_Type;
-	    begin
-		Create (Output);
-		Generate (Output);
-		ARM_Corr.Close (Output);
-	    end;
-	when All_Formats =>
-	    declare
-		TOutput : ARM_Text.Text_Output_Type;
-		ROutput : ARM_RTF.RTF_Output_Type;
-		HOutput : ARM_HTML.HTML_Output_Type;
-	    begin
-		Create (TOutput);
-		Generate (TOutput);
-		ARM_Text.Close (TOutput);
-		Create (ROutput);
-		Generate (ROutput);
-		ARM_RTF.Close (ROutput);
-		Create (HOutput);
-		Generate (HOutput);
-		ARM_HTML.Close (HOutput);
-	    end;
-
-    end case;
-
-    Ada.Text_IO.Put_Line ("ARM 95/200Y document created");
+    Ada.Text_IO.Put_Line ("Ada document created");
 exception
     when No_Command_Error =>
 	null; -- Error message displayed by command line processor.

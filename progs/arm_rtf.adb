@@ -16,7 +16,7 @@ package body ARM_RTF is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -103,6 +103,8 @@ package body ARM_RTF is
     --  1/24/05 - RLB - Added Inner_Indent.
     --  2/ 1/05 - RLB - Added Turkish chars to allow an AARM note.
     --  5/27/05 - RLB - Added arbitrary Unicode characters.
+    --  1/11/06 - RLB - Eliminated dispatching Create in favor of tailored
+    --			versions.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -276,25 +278,31 @@ package body ARM_RTF is
 	function Paper_Width return PWidth is
 	    -- Return the paper width in twips:
 	begin
-	    if ARM_Output."="(Output_Object.Page_Size, ARM_Output.A4) then
-		return "9030";
-	    elsif ARM_Output."="(Output_Object.Page_Size, ARM_Output.Letter) then
-		return "9360";
-	    else -- ARM_Output."="(Output_Object.Page_Size, ARM_Output.Ada95) then
-		return "7740";
-	    end if;
+	    case Output_Object.Page_Size is
+		when ARM_RTF.A4 =>
+		    return "9030";
+		when ARM_RTF.Letter =>
+		    return "9360";
+		when ARM_RTF.Half_Letter =>
+		    return "5760";
+		when ARM_RTF.Ada95 =>
+		    return "7740";
+	    end case;
 	end Paper_Width;
 
 	function Half_Paper_Width return PWidth is
 	    -- Return the center of the paper width in twips:
 	begin
-	    if ARM_Output."="(Output_Object.Page_Size, ARM_Output.A4) then
-		return "4515";
-	    elsif ARM_Output."="(Output_Object.Page_Size, ARM_Output.Letter) then
-		return "4680";
-	    else -- ARM_Output."="(Output_Object.Page_Size, ARM_Output.Ada95) then
-		return "3870";
-	    end if;
+	    case Output_Object.Page_Size is
+		when ARM_RTF.A4 =>
+		    return "4515";
+		when ARM_RTF.Letter =>
+		    return "4680";
+		when ARM_RTF.Half_Letter =>
+		    return "2880";
+		when ARM_RTF.Ada95 =>
+		    return "3870";
+	    end case;
 	end Half_Paper_Width;
 
 
@@ -316,12 +324,18 @@ package body ARM_RTF is
 
 	-- Font table:
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\fonttbl");
-	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\f0\froman\fcharset0 Times New Roman;}");
-	if Output_Object.For_ISO then
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\f1\fswiss\fcharset0 Helvetica{\*\falt Arial};}"); -- Really Arial, but this makes ISO happy.
-	else
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\f1\fswiss\fcharset0 Arial{\*\falt Helvetica};}"); -- Give Arial preference, because otherwise it screwed up Jim Moore's machine.
-	end if;
+	case Output_Object.Primary_Serif_Font is
+	    when Times_New_Roman =>
+		Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\f0\froman\fcharset0 Times New Roman;}");
+	    when Souvenir =>
+		Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\f0\froman\fcharset0 Souvenir{\*\falt Souvienne};}");
+	end case;
+	case Output_Object.Primary_Sans_Serif_Font is
+	    when Helvetica =>
+		Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\f1\fswiss\fcharset0 Helvetica{\*\falt Arial};}"); -- Usually Arial on most Windows machines.
+	    when Arial =>
+		Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\f1\fswiss\fcharset0 Arial{\*\falt Helvetica};}"); -- Give Arial preference, because otherwise it screwed up Jim Moore's machine.
+	end case;
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\f2\fmodern\fcharset0\fprq1 Courier New;}");
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\f3\ftech\fcharset0 Symbol;}}");
 	    -- f=Font number;
@@ -331,7 +345,7 @@ package body ARM_RTF is
 	    -- falt=alternative font name;
 	    -- followed by the font name
 
-	-- File table: (Only in the master document, created by hand)
+	-- File table: (None used.)
 
 	-- Color table:
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\colortbl;");
@@ -367,8 +381,11 @@ package body ARM_RTF is
 	-- Style sheet:
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\stylesheet");
 
-	if ARM_Output."=" (Output_Object.Page_Size, ARM_Output.Ada95) then
-	    -- The Ada95 page size is smaller than the other sizes.
+	if Output_Object.Page_Size = ARM_RTF.Ada95 or else
+	   Output_Object.Page_Size = ARM_RTF.Half_Letter then
+	    -- These are smaller page sizes than the other sizes.
+	    -- ** TBD: Consider putting this into a separate parameter (there is
+	    -- ** little reason for the font size to depend on the page size).
 	    Set_Style (Paragraph_Info(ARM_Output.Normal),
 		       Font_Size => 18,
 		       Style_Indent => 0,
@@ -1507,21 +1524,25 @@ package body ARM_RTF is
 	-- Paper size:
 	-- Note: If changing the page size or margins, be sure to change the
 	-- header and footer tab settings as well.
-	if ARM_Output."="(Output_Object.Page_Size, ARM_Output.A4) then
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\paperw11909\paperh16834"); -- Set paper to A4.
-	elsif ARM_Output."="(Output_Object.Page_Size, ARM_Output.Letter) then
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\paperw12240\paperh15840"); -- Set paper to US Letter.
-	else --ARM_Output."="(Output_Object.Page_Size, ARM_Output.Ada95) then
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\paperw10080\paperh12960"); -- Set paper to 7x9.
-	end if;
+	case Output_Object.Page_Size is
+	    when ARM_RTF.A4 =>
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\paperw11909\paperh16834"); -- Set paper to A4.
+	    when ARM_RTF.Letter =>
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\paperw12240\paperh15840"); -- Set paper to US Letter.
+	    when ARM_RTF.Half_Letter =>
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\paperw7920\paperh12240");  -- Set paper to 5.5x8.5.
+	    when ARM_RTF.Ada95 =>
+		Ada.Text_IO.Put_Line (Output_Object.Output_File, "\paperw10080\paperh12960"); -- Set paper to 7x9.
+	end case;
 
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "\facingp\margmirror"); -- Set to facing pages and mirrored margins.
 	-- Margins.
-	if ARM_Output."=" (Output_Object.Page_Size, ARM_Output.Ada95) then
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\margl1440\margr900\margt1080\margb1080");
-	else
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\margl1800\margr1080\margt1440\margb1440");
-	end if;
+	case Output_Object.Page_Size is
+	    when ARM_RTF.Ada95 | ARM_RTF.Half_Letter =>
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\margl1440\margr900\margt1080\margb1080");
+	    when ARM_RTF.Letter | ARM_RTF.A4 =>
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\margl1800\margr1080\margt1440\margb1440");
+	end case;
 	-- Revisions:
 	if Output_Object.Includes_Changes then
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\revisions\revprop3 \revbar0 ");
@@ -1597,22 +1618,26 @@ package body ARM_RTF is
 
 
     procedure Create (Output_Object : in out RTF_Output_Type;
-		      Page_Size : in ARM_Output.Page_Size;
+		      Page_Size : in ARM_RTF.Page_Size;
 		      Includes_Changes : in Boolean;
 		      Big_Files : in Boolean;
-		      For_ISO : in Boolean := False;
+		      Primary_Sans_Serif_Font : in Sans_Serif_Fonts := Arial;
+		      Primary_Serif_Font : in Serif_Fonts := Times_New_Roman;
 		      File_Prefix : in String;
 		      Header_Prefix : in String := "";
 		      Title : in String := "") is
 	-- Create an Output_Object for a document with the specified page
-	-- size. Changes from the base standard are included if
-	-- Includes_Changes is True. Generate a few large output files if
+	-- size. Changes from the base document are included if
+	-- Includes_Changes is True (otherwise no revisions are generated).
+	-- Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
 	-- The prefix of the output file names is File_Prefix - this
 	-- should be no more then 4 characters allowed in file names.
 	-- The title of the document is Title.
 	-- The header prefix appears in the header (if any) before the title,
 	-- separated by a dash.
+	-- The primary font used for the Sans_Serif text, and for the Serif
+	-- text, is as specified.
     begin
 	if Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -1622,7 +1647,8 @@ package body ARM_RTF is
 	Output_Object.Page_Size := Page_Size;
 	Output_Object.Includes_Changes := Includes_Changes;
 	Output_Object.Big_Files := Big_Files;
-	Output_Object.For_ISO := For_ISO;
+	Output_Object.Primary_Sans_Serif_Font := Primary_Sans_Serif_Font;
+	Output_Object.Primary_Serif_Font := Primary_Serif_Font;
 	Ada.Strings.Fixed.Move (Target => Output_Object.File_Prefix,
 			        Source => File_Prefix);
 	Output_Object.Title := Ada.Strings.Unbounded.To_Unbounded_String (Title);
@@ -2535,13 +2561,16 @@ package body ARM_RTF is
 	Output_Object.Is_In_Paragraph := True;
 	Output_Object.Is_In_Table := True;
 
-        if ARM_Output."="(Output_Object.Page_Size, ARM_Output.A4) then
-	    Page_Width := 9030;
-        elsif ARM_Output."="(Output_Object.Page_Size, ARM_Output.Letter) then
-	    Page_Width := 9360;
-        else -- ARM_Output."="(Output_Object.Page_Size, ARM_Output.Ada95) then
-	    Page_Width := 7740;
-        end if;
+	case Output_Object.Page_Size is
+	    when ARM_RTF.A4 =>
+	        Page_Width := 9030;
+	    when ARM_RTF.Letter =>
+	        Page_Width := 9360;
+	    when ARM_RTF.Half_Letter =>
+	        Page_Width := 5040;
+	    when ARM_RTF.Ada95 =>
+	        Page_Width := 7740;
+        end case;
 	if Columns <= 3 then
 	    Output_Object.Table_Indent := Page_Width / 6;
             Output_Object.Table_Width  := Page_Width - Output_Object.Table_Indent*2;

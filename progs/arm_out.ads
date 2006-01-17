@@ -13,7 +13,7 @@ package ARM_Output is
     -- determines the details of the text.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -89,33 +89,14 @@ package ARM_Output is
     --  1/24/05 - RLB - Added Inner_Indented.
     --  2/ 1/05 - RLB - Added Turkish chars to allow an AARM note.
     --  5/27/05 - RLB - Added arbitrary Unicode characters.
+    --  1/11/06 - RLB - Eliminated dispatching Create in favor of tailored
+    --			versions.
 
     type Output_Type is abstract tagged limited null record;
 
     Not_Valid_Error : exception; -- Raised when an operation is invalid.
 
-    type Page_Size is (A4, Letter, Ada95);
-	-- A4 is standard European letter size.
-	-- Letter is standard American letter size (8.5x11).
-	-- Ada95 is the size of the existing Ada 95 standard (7x9).
-
-    procedure Create (Output_Object : in out Output_Type;
-		      Page_Size : in ARM_Output.Page_Size;
-		      Includes_Changes : in Boolean;
-		      Big_Files : in Boolean;
-		      For_ISO : in Boolean := False;
-		      File_Prefix : in String;
-		      Header_Prefix : in String := "";
-		      Title : in String := "") is abstract;
-	-- Create an Output_Object for a document with the specified page
-	-- size. Changes from the base standard are included if
-	-- Includes_Changes is True. Generate a few large output files if
-	-- Big_Files is True; otherwise generate smaller output files.
-	-- The prefix of the output file names is File_Prefix - this
-	-- should be no more then 4 characters allowed in file names.
-	-- The title of the document is Title.
-	-- The header prefix appears in the header (if any) before the title,
-	-- separated by a dash.
+    -- Creation is handled by the individual output types.
 
     procedure Close (Output_Object : in out Output_Type) is abstract;
 	-- Close an Output_Object. No further output to the object is

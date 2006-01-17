@@ -15,7 +15,7 @@ package body ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2001, 2002, 2003, 2004, 2005  AXE Consultants.
+    -- Copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -120,6 +120,8 @@ package body ARM_HTML is
     --			the RM and AARM (and also so that they see the ARA
     --			sponsor ads).
     --  5/27/05 - RLB - Added arbitrary Unicode characters.
+    --  1/11/06 - RLB - Eliminated dispatching Create in favor of tailored
+    --			versions.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -1044,22 +1046,15 @@ package body ARM_HTML is
 
 
     procedure Create (Output_Object : in out HTML_Output_Type;
-		      Page_Size : in ARM_Output.Page_Size;
-		      Includes_Changes : in Boolean;
 		      Big_Files : in Boolean;
-		      For_ISO : in Boolean := False;
 		      File_Prefix : in String;
-		      Header_Prefix : in String := "";
 		      Title : in String := "") is
-	-- Create an Output_Object for a document with the specified page
-	-- size. Changes from the base standard are included if
-	-- Includes_Changes is True. Generate a few large output files if
+	-- Create an Output_Object for a document.
+	-- Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
 	-- The prefix of the output file names is File_Prefix - this
 	-- should be no more then 4 characters allowed in file names.
 	-- The title of the document is Title.
-	-- The header prefix appears in the header (if any) before the title,
-	-- separated by a dash.
     begin
 	if Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -1069,8 +1064,6 @@ package body ARM_HTML is
 	Ada.Strings.Fixed.Move (Target => Output_Object.File_Prefix,
 			        Source => File_Prefix);
 	Output_Object.Title := Ada.Strings.Unbounded.To_Unbounded_String (Title);
-	-- We don't use the page size, changes flag, for ISO flag, or
-	-- Header prefix.
 	Output_Object.Big_Files := Big_Files;
 	if Output_Object.Big_Files then
 	    Start_HTML_File (Output_Object,

@@ -1,6 +1,6 @@
-Ada Reference Manual formatting tool.
+Ada formatting tool.
 
-Copyright 2000, 2002, 2004, 2005 AXE Consultants.
+Copyright 2000, 2002, 2004, 2005, 2006 AXE Consultants.
 P.O. Box 1512, Madison WI  53701
 E-Mail: randy@rrsoftware.com
 
@@ -30,67 +30,55 @@ POSSIBILITY OF SUCH DAMAGES.
 
 Running the formmating tool:
 
-The formmating tool reads the ARM text input files (.MSS files) in a
-Scribe-like format. The tool allows determining the output document,
-format, and other properties. The output is written into a subdirectory
-"Output" of the directory where Arm_Form is run. The input files are
-assumed to be in the current directory. The tool is self-contained; it does
-not require any pre or post processing except to have Word create the real
+The formmating tool reads the source text input files (.MSS files) in a
+Scribe-like format. The files to read, and general formatting parameters,
+are controlled by a master input file (.MSM file). The tool allows determining
+the output document, format, and other properties.
+
+The output of the tool is written into a subdirectory
+"Output" of the directory where Arm_Form is run. The tool is self-contained; it
+does not require any pre or post processing except to have Word create the real
 table of contents for the .RTF outout.
 
-Usage: Arm_Form <Document> [<Format>, [<Changes>, [<Version>, [<Options>]]]
+Usage: Arm_Form <Master_File> [<Format>[, <Changes>[, <Version>]]]
 
-The documents are:
-   AARM: The Annotated Ada 95 Reference Manual. This is mainly intended for
-	 implementors and language lawyers.
-   RM:   The Ada 95 Reference Manual. This is the version used by most users.
-   ISO-RM: The Ada 95 Reference Manual in ISO format. This version lacks some
-	 sections, paragraph numbers, and is printed on A4 paper.
+The <Master_File> specifies the layout of the document to generate (see below).
+If <Master_File> has no extension, ".MSM" is assumed.
 
 The formats are:
    Text: Pure text files. These are missing a lot of formatting; we recommend
 	 using the HTML versions instead.
-   HTML: HTML files. The HTML is designed for HTML version 4.0. Old browsers
-	 may display the documents with little formatting.
+   HTML: (Default) HTML files. The HTML is designed for HTML version 4.0. Old
+         browsers may display the documents with little formatting.
    RTF:  RTF files. The RTF files are designed for Word 97 and later. PDF
 	 versions should be created from these file using Word and Adobe tools.
-   All:  (Default) Generate all of the above formats.
+   Corr: Text files with !corrigendum like markup.
+   Info: File in the open source Info format (not supported by AXE).
 
 <Changes> are:
-   No-Changes: The original (AA)RM 95 text.
-   New-Only: (AA)RM 95 text with changes applied through the specified version.
-   Show-Changes: The RM 95 text with changes up through the specified version
+   No-Changes: The original text (same as specifying version 0).
+   New-Only: Text with changes applied through the specified version.
+   Show-Changes: The text with changes up through the specified version
                  applied, and changes marked. For HTML, deleted text is shown
                  as struck-through and inserted text as underlined. Changes for
 		 different versions are in different colors.
-		 For RTF, this uses Word's "changes" mechanisms, which also
+		 For RTF, this uses Word's "changes" mechanisms, which can
                  shows changes in different colors.
-   Changes-Only: The RM 95 text with changes up through the specified version
+   Changes-Only: The text with changes up through the specified version
                  applied, and changes for the specified version only marked
                  as described above.
-   New-Changes: The RM 95 text with changes up through the specified version
+   New-Changes: The text with changes up through the specified version
                 applied, and insertions marked. Deletions are marked by just a
                 single blank space. (See above for how these are marked). This
-                form is intended to be used with revision bars in Word (Word
-                does not reformat the document when deletions are hidden,
-                leaving unsightly blank spaces.)
+                form is intended to be used with revision bars in Word 97/2000
+                (Older versions of Word do not reformat the document when
+                deletions are hidden, leaving unsightly blank spaces. This is
+                not a problem with current versions of Word)
 
-<Version> = a value in 0 .. 9 representing the change version desired
-   0-Original Ada 95 (equivalent to No-Changes)
-   1-Technical Corrigendum 1
-   2-Amendment 1
-
-<Options> are:
-   Show-Index-Entries: Index and glossary entries are visibly displayed in the
-		       document. If this option is not used, these items are
-		       not displayed (although they may create links if the
-		       output format supports links).
-   Big-Files:	       Generate a few (possibly one) large file for the output,
-		       rather than a set of smaller files. What this means
-		       exactly depends on the output format.
+<Version> = a value in 0 .. 9 representing the change version desired.
 
 
-Summary of commands used in the ARM text input files (.MSS files):
+Summary of commands used in the ARM text input files (.MSM and .MSS files):
 
 Syntax summary:
 
@@ -109,7 +97,98 @@ note that there is no sane way to tell the end of a quoted parameter from a
 nested one, so parameters nested in a "" pair should never used "" as their
 brackets.)
 
-Command summary:
+-----------------
+
+Master file (.MSM) command summary:
+
+The master file determines the source files that make up a document and their
+collating order, along with general properties of the output as a whole.
+
+Note that regular source commands are not allowed in the master file, unless
+otherwise noted.
+
+Source commands (the order of these determines the collating order):
+@Source{Name=<File Name>,SectionName=<Name>,SectionNumber=<AlphaNum>,NewSection=[T|F],HasTitle=[T|F]} -
+     Specifies a source file for the document. The <File Name> indicates where
+     the source file is found, and may include a path if desired. If <File Name>
+     does not include an extension, ".MSS" is assumed. <Name> gives
+     a short name for the section; it will be used to name the output files,
+     if appropriate for the specified kind of output. <AlphaNum> specifies the
+     section number; it is either a number in the range 0 to 20, or a letter
+     from A .. Z. If NewSection is true (T), this is the first file for the
+     indicated section; otherwise, this is a continuation file for the
+     section. (If this setting is wrong, there will be extra or missing headers
+     for the section.) If HasTitle is true (T), this section has a title;
+     otherwise it does not.
+@Index
+     Specifies where the index will appear in the collating order (usually last);
+     if this is omitted, there will be no index.
+@TOC
+     Specifies where the table of contents will appear in the collating order;
+     if this is omitted, there will be no table of contents.
+
+Global properties:
+
+@ShowIndexEntries
+     If given in the master file, index and glossary entries are visibly
+     displayed in the document. If this command is not given, these items are
+     not displayed (although they may create links if the
+     output format supports links).
+@HideIndexEntries
+     If given in the master file, or ShowIndexEntries is not given, Index and
+     glossary entries are not displayed in the document (although they may
+     create links if the output format supports links).
+@ShowAnnotations
+     If given in the master file, annotations will be included in the output.
+     "Annotations" are often described as belonging to the "AARM" below.
+     "RMOnly" text is not included in the output. If this command is not given,
+     the annotations are not included in any form, and "RMOnly" text is
+     included.
+@HideAnnotations
+     If given in the master file, or ShowAnnotations is not given,
+     annotations are not included in the output in any form, and "RMOnly"
+     text is included in the output.
+@NumberParagraphs
+     If given in the master file, paragraphs are numbered per subclause
+     (as in the Ada Reference Manual). Otherwise, paragraphs are not numbered.
+@Title{Version=[<version>],Text=[<title_text>]}
+     The document title for version, this is used in headers and footers.
+     If no title is given for the current version, the title of the previous
+     version is used; to use the same title for all versions, give the title
+     for Version=[0].
+@FilePrefix{<Prefix>}
+     This specifies the prefix of the output file(s). All of the output files
+     will start with this prefix. Keep this short!
+
+HTML Output properties:
+
+@SingleHTMLOutputFile
+     If given in the master file, generate a single large file for
+     the output, rather than one file per clause. If this is not given,
+     smaller files are generated.
+
+RTF Output properties:
+
+@SingleRTFOutputFile
+     If given in the master file, generate a single large file for
+     the output, rather than one file per section. If this is not given,
+     smaller files are generated.
+@RTFHeaderPrefix{Version=[<version>],Text=[<title_text>]}
+     The text given in the header before the title.
+     If no header prefix is given for the current version, the prefix of the
+     previous version is used; to use the same prefix for all versions, give
+     the prefix for Version=[0].
+
+Other commands:
+
+@comment{<text>} - The text is a comment to the master file, and is ignored
+	     on output.
+
+
+
+---------------------
+
+Source file (.MSS) command summary:
 
 Meta-commands:
 
@@ -774,4 +853,28 @@ various mathematical symbols.
 	  tab marking the end of an item.
 @Last	- Marks the end of the second last row of the table. (If left out,
 	  the bottom line of the table may be missing).
+
+
+-------------------
+
+Use to create Ada 95 standard documents.
+
+
+The master file AARM.MSM specifies the Annotated Ada 95 Reference Manual. This
+is mainly intended for implementors and language lawyers. It includes
+annotations and (visible) index entries.
+
+The master file RM.MSM specifies the Ada Reference Manual. This is the
+version used by most users.
+
+The master file RM-ISO.MSM specifies Ada 95 Reference Manual in ISO format.
+This version lacks some sections, paragraph numbers, and is printed on A4
+paper.
+
+Versions:
+   0-Original Ada 95 (equivalent to No-Changes)
+   1-Technical Corrigendum 1
+   2-Amendment 1
+
+
 
