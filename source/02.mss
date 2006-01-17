@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2006/01/12 22:17:08 $}
+@Comment{$Date: 2006/01/17 07:20:58 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -327,15 +327,18 @@ These are mentioned in ISO/IEC 10646:2003 as useful for implementations, with a
 reference to Unicode. Machine-readable tables are available on the web at URLs:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[http://www.unicode.org/Public/4.0-Update/UnicodeData-4.0.0.txt
-http://www.unicode.org/Public/4.0-Update/CaseFolding-4.0.0.txt]}
+@ChgAdded{Version=[2],Text=[@URLLink{URL=[http://www.unicode.org/Public/4.0-Update/UnicodeData-4.0.0.txt],
+Text=[http://www.unicode.org/Public/4.0-Update/UnicodeData-4.0.0.txt]}
+@URLLink{URL=[http://www.unicode.org/Public/4.0-Update/CaseFolding-4.0.0.txt],
+Text=[http://www.unicode.org/Public/4.0-Update/CaseFolding-4.0.0.txt]}]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[with an explanatory document found at URL:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[http://www.unicode.org/Public/4.0-Update/UCD-4.0.0.html]}
+@ChgAdded{Version=[2],Text=[@URLLink{URL=[http://www.unicode.org/Public/4.0-Update/UCD-4.0.0.html],
+Text=[http://www.unicode.org/Public/4.0-Update/UCD-4.0.0.html]}]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Added]}

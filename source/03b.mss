@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2005/12/10 07:15:08 $}
+@Comment{$Date: 2006/01/17 07:20:58 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 
 @LabeledClause{Array Types}
 
@@ -1561,7 +1561,7 @@ these rules apply also in the private part of an instance
 of a generic unit. In a generic body, this rule is checked presuming all
 formal access types of the generic might be general access types, and all
 untagged discriminated formal types of the generic might have
-@nt{default_expression}s for its discriminants.
+@nt{default_expression}s for their discriminants.
 @PDefn{generic contract issue}],
 Old=[there is a place within the
 immediate scope of the designated subtype where the designated subtype's view

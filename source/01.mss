@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2005/11/16 06:42:45 $}
+@Comment{$Date: 2006/01/17 07:20:57 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1825,7 +1825,8 @@ The index contains an entry for every defined term.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00415-01]}
 @ChgAdded{Version=[2],Text=[The contents of the @i<CRC Concise Encyclopedia of
-Mathematics, Second Edition> can be accessed on http://www.mathworld.com.
+Mathematics, Second Edition> can be accessed on
+@URLLink{URL=[http://www.mathworld.com],Text=[http://www.mathworld.com]}.
 The ISBN number of the book is ISBN 1584883472.]}
 @end{Discussion}
 @begin{GlossaryMarker}

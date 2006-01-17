@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2005/12/15 02:36:33 $}
+@Comment{$Date: 2006/01/17 07:20:58 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1025,7 +1025,7 @@ See @RefSecNum{Dispatching Operations of Tagged Types}.
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00401]}
 @ChgAdded{Version=[2],Text=[If the ancestor type specified in a
 @nt{private_extension_declaration} is an
-interface type, the parent type can be anything so long as the full view is a
+interface type, the parent type can be any type so long as the full view is a
 descendant of the ancestor type. The progenitor types specified in a
 @nt{private_extension_declaration} and the progenitor types specified in the
 corresponding declaration of a record extension given in the private part need

@@ -1,9 +1,9 @@
  @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/01/12 22:17:10 $}
+@Comment{$Date: 2006/01/17 07:20:58 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4119,7 +4119,7 @@ is that of the
 @Chg{Version=[2],New=[object being initialized. In other contexts, the
 accessibility level of an @nt{aggregate} or the result of a function call
 is that of the innermost
-master that evaluated the @nt{aggregate} or],Old=[execution of the called]}
+master that evaluates the @nt{aggregate} or],Old=[execution of the called]}
 function@Chg{Version=[2],New=[ call],Old=[]}.
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
