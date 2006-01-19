@@ -7,6 +7,7 @@
 @Comment{No paragraph numbers - no @NumberParagraphs command}
 @Title{Version=[0],Text=[Rationale for Ada 2005]}@Comment{Same title for all versions}
 @FilePrefix{Rat}
+@ExampleFont{Swiss}
 
 @Comment{RTF properties}
 @SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}
@@ -17,8 +18,9 @@
 @Comment{HTML properties}
 @Comment{Many small files are used, thus no @SingleHTMLOutputFile command}
 @HTMLKind{Version=[4],Unicode=[T]}
-@HTMLNavBar{RefName=[Rat-0-1.html],SrchName=[Rat-SRCH.html],IndexName=[Rat-0-2.html],
+@HTMLNavBar{RefName=[],SrchName=[Rat-SRCH.html],IndexName=[],
    UseButtons=[T],OnTop=[T],OnBottom=[T]}@Comment{We let the program assign the links for Index and Refs}
+@Comment{We let the program generate the links to "References" and "Index"}
 @HTMLHeader{<H1 Style='font-family: "Rockwell", "Times New Roman", Times, serif; font-size: 240%'><B><SPAN Style="color:rgb(0,0,153)">Rationale</SPAN> for <SPAN Style="color:rgb(204,0,0)">Ada 2005</SPAN></B></H1>
 <DIV Class="Normal"><FONT SIZE="+1"><I><A HREF="Rat-TTL.html">John Barnes</A></I></FONT></DIV>}
 @HTMLFooter{<DIV Class="Normal">&copy; 2005, 2006 John Barnes Informatics.</DIV>
