@@ -84,6 +84,7 @@ package ARM_Format is
     --			properties.
     --  1/16/06 - RLB - Added "Unnumbered_Section" counter, so we can assign
     --			names without special cases.
+    --  1/18/06 - RLB - Added "Example_Font".
 
     type Format_Type is tagged limited private;
 
@@ -111,7 +112,8 @@ package ARM_Format is
 		      Display_Index_Entries : in Boolean;
 		      Include_Annotations : in Boolean;
 		      Include_ISO : in Boolean;
-		      Number_Paragraphs : in Boolean);
+		      Number_Paragraphs : in Boolean;
+		      Examples_Font : in ARM_Output.Font_Family_Type);
 	-- Initialize an input object. Changes and Change_Version determine
 	-- which changes should be displayed. If Display_Index_Entries is True,
 	-- index entries will be printed in the document; otherwise, they
@@ -122,6 +124,7 @@ package ARM_Format is
 	-- (and NotISO text will not); otherwise the reverse is true.
 	-- If Number_Paragraphs is true, paragraphs will be numbered (per
 	-- subclause); otherwise they will not be.
+	-- Example_Font specifies the font that examples will be set in.
 
     procedure Destroy (Format_Object : in out Format_Type);
 	-- Destroy a format object, releasing any resources.
@@ -207,6 +210,7 @@ private
 	Include_Annotations : Boolean;
 	Include_ISO : Boolean;
 	Number_Paragraphs : Boolean;
+	Examples_Font : ARM_Output.Font_Family_Type;
 
 	-- Clause numbers:
 	Section : ARM_Contents.Section_Number_Type; -- The current section number.

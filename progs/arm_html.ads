@@ -124,7 +124,9 @@ package ARM_HTML is
 	-- is set to HTML_3.
 	-- Ref_URL, Srch_URL, and Index_URL are the URLs (possibly relative)
 	-- for the "References", "Search", and "Index" buttons/labels,
-	-- respectively. If null, these buttons/labels are omitted.
+	-- respectively. If null, these buttons/labels link to sections named
+	-- "References", "Search", and "Index"; if these do not exist, the
+	-- buttons/labels are omitted.
 	-- If Use_Buttons is true, button images are used, otherwise text labels
 	-- are used for the navigation bar.
 	-- If Nav_On_Top is true, the navigation bar will appear in the header
@@ -473,6 +475,10 @@ private
 	Current_Item : Natural := 0; -- When processing 4-column+ text, the current item within the column.
 	Column_Text : Column_Text_Ptrs_Type := (others => null);
 		-- If we are processing 4-column+ text, the text for the columns.
+
+	Current_Clause : Ada.Strings.Unbounded.Unbounded_String;
+		-- The name of the clause of the currently open file (for
+		-- Big_Files = False); used to generate the navigation bar.
     end record;
 
 end ARM_HTML;

@@ -47,6 +47,7 @@ package body ARM_Corr is
     --  6/ 2/05 - RLB - Created package from text and HTML versions.
     --  1/11/06 - RLB - Eliminated dispatching Create in favor of tailored
     --			versions.
+    --  1/18/06 - RLB - Added additional styles.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -301,11 +302,28 @@ package body ARM_Corr is
 	    when ARM_Output.Small_Indented_Examples => Output_Object.Indent_Amount := 26; --** TBD.
 	        Ada.Text_IO.Put (Output_Object.Output_File, "                    "); -- Six units.
 	        Output_Object.Char_Count := 20;
+	    when ARM_Output.Swiss_Examples =>
+	        Ada.Text_IO.Put (Output_Object.Output_File, "@xcode<");
+	        Output_Object.Char_Count := 7;
+		Output_Object.Is_Fixed_Format := True;
+		Output_Object.Indent_Amount := 0; -- %% Temp.
+	    when ARM_Output.Small_Swiss_Examples => Output_Object.Indent_Amount := 10; --** TBD.
+                Ada.Text_IO.Put (Output_Object.Output_File, "    ");
+		Output_Object.Char_Count := 4;
+	    when ARM_Output.Swiss_Indented_Examples => Output_Object.Indent_Amount := 18; --** TBD.
+                Ada.Text_IO.Put (Output_Object.Output_File, "            ");
+		Output_Object.Char_Count := 12;
+	    when ARM_Output.Small_Swiss_Indented_Examples => Output_Object.Indent_Amount := 26; --** TBD.
+	        Ada.Text_IO.Put (Output_Object.Output_File, "                    "); -- Six units.
+	        Output_Object.Char_Count := 20;
 	    when ARM_Output.Syntax_Indented =>
 	        Ada.Text_IO.Put (Output_Object.Output_File, "@xcode<");
 	        Output_Object.Char_Count := 7;
 		Output_Object.Is_Fixed_Format := True;
 		Output_Object.Indent_Amount := 0; -- %% Temp.
+	    when ARM_Output.Small_Syntax_Indented => Output_Object.Indent_Amount := 10; --** TBD.
+                Ada.Text_IO.Put (Output_Object.Output_File, "    ");
+		Output_Object.Char_Count := 4;
 	    when ARM_Output.Code_Indented => Output_Object.Indent_Amount := 10; --** TBD.
                 Ada.Text_IO.Put (Output_Object.Output_File, "    ");
 		Output_Object.Char_Count := 4;
@@ -501,11 +519,12 @@ package body ARM_Corr is
 		 ARM_Output.Index | ARM_Output.Syntax_Summary |
 		 ARM_Output.Examples | ARM_Output.Small_Examples |
 		 ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples |
-		 ARM_Output.Syntax_Indented |
+		 ARM_Output.Swiss_Examples | ARM_Output.Small_Swiss_Examples |
+		 ARM_Output.Swiss_Indented_Examples | ARM_Output.Small_Swiss_Indented_Examples |
+		 ARM_Output.Syntax_Indented | ARM_Output.Small_Syntax_Indented |
 		 ARM_Output.Indented | ARM_Output.Small_Indented |
 		 ARM_Output.Inner_Indented | ARM_Output.Small_Inner_Indented |
-		 ARM_Output.Code_Indented |
-		 ARM_Output.Small_Code_Indented =>
+		 ARM_Output.Code_Indented | ARM_Output.Small_Code_Indented =>
 		Output_Object.Tab_Stops := Tab_Stops;
 		    -- We'll expand proportional stops here (text characters
 		    -- are larger than the variable ones these are set up for).
@@ -570,8 +589,14 @@ package body ARM_Corr is
 	    when ARM_Output.Small_Examples => null; -- ** TBD.
 	    when ARM_Output.Indented_Examples => null; -- ** TBD.
 	    when ARM_Output.Small_Indented_Examples => null; -- ** TBD.
+	    when ARM_Output.Swiss_Examples =>
+		Buffer (Output_Object, '>');
+	    when ARM_Output.Small_Swiss_Examples => null; -- ** TBD.
+	    when ARM_Output.Swiss_Indented_Examples => null; -- ** TBD.
+	    when ARM_Output.Small_Swiss_Indented_Examples => null; -- ** TBD.
 	    when ARM_Output.Syntax_Indented =>
 		Buffer (Output_Object, '>');
+	    when ARM_Output.Small_Syntax_Indented => null; -- ** TBD.
 	    when ARM_Output.Code_Indented => null; -- ** TBD.
 	    when ARM_Output.Small_Code_Indented => null; -- ** TBD.
 	    when ARM_Output.Indented =>

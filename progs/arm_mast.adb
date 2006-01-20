@@ -56,6 +56,7 @@ package body ARM_Master is
     --  1/11/06 - RLB - Continued expanding this; revised to handle separate
     --			creations for the various kinds of output objects.
     --  1/12/06 - RLB - Added more commands for additional properties.
+    --  1/18/06 - RLB - Added the ExampleFont command.
 
     type Command_Type is (
 	-- Source commands:
@@ -70,6 +71,7 @@ package body ARM_Master is
 	Number_Paragraphs,
 	Title,
 	File_Prefix,
+	Example_Font,
 	-- HTML properties:
 	Single_HTML_Output_File,
 	HTML_Kind_Command,
@@ -120,6 +122,8 @@ package body ARM_Master is
     Include_Annotations : Boolean := False; -- Should annotations be included in the output?
     Include_ISO_Text : Boolean := False; -- Should ISO text be included in the output?
     Should_Number_Paragraphs : Boolean := False; -- Should paragraphs be numbered?
+    Font_of_Examples : ARM_Output.Font_Family_Type :=
+	ARM_Output.Fixed; -- Which font should be used for examples?
 
     -- HTML properties:
     Use_Large_HTML_Files : Boolean := False; -- Use small output files by default.
@@ -174,6 +178,8 @@ package body ARM_Master is
 	    return Title;
 	elsif Canonical_Name = "fileprefix" then
 	    return File_Prefix;
+	elsif Canonical_Name = "examplefont" then
+	    return Example_Font;
 	elsif Canonical_Name = "singlehtmloutputfile" then
 	    return Single_HTML_Output_File;
 	elsif Canonical_Name = "htmlkind" then
@@ -732,6 +738,28 @@ package body ARM_Master is
 		    Ada.Text_IO.Put_Line("File Prefix is " &
 			(+Output_File_Prefix));
 
+		when Example_Font =>
+		    -- @ExampleFont{Swiss|Fixed|Roman}
+		    declare
+			Font_Name : constant String :=
+			    Ada.Characters.Handling.To_Lower (
+				Get_Single_String);
+		    begin
+			if Font_Name = "swiss" then
+			    Font_of_Examples := ARM_Output.Swiss;
+			    Ada.Text_IO.Put_Line("Examples in swiss font");
+			elsif Font_Name = "fixed" then
+			    Font_of_Examples := ARM_Output.Fixed;
+			    Ada.Text_IO.Put_Line("Examples in fixed-width font");
+			elsif Font_Name = "roman" then
+			    Font_of_Examples := ARM_Output.Roman;
+			    Ada.Text_IO.Put_Line("Examples in roman font");
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown example font name: " & Font_Name &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		    end;
+
 		-- HTML properties:
 
 		when Single_HTML_Output_File =>
@@ -848,7 +876,8 @@ package body ARM_Master is
 		Display_Index_Entries => Display_Index_Entries,
 		Include_Annotations => Include_Annotations,
 		Include_ISO => Include_ISO_Text,
-		Number_Paragraphs => Should_Number_Paragraphs);
+		Number_Paragraphs => Should_Number_Paragraphs,
+		Examples_Font => Font_of_Examples);
     end Create_Format;
 
 

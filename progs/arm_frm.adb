@@ -196,6 +196,10 @@ package body ARM_Format is
     --		- RLB - Added IndexList command.
     --		- RLB - Added Unnumbered_Section counter to ensure that
     --			such sections are uniquely named.
+    --  1/18/06 - RLB - Added "Example_Font".
+    --		- RLB - Redid formatting command nesting so that closing
+    --			restores to the initial state for the command, not the
+    --			default state.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -353,7 +357,8 @@ package body ARM_Format is
 		      Display_Index_Entries : in Boolean;
 		      Include_Annotations : in Boolean;
 		      Include_ISO : in Boolean;
-		      Number_Paragraphs : in Boolean) is
+		      Number_Paragraphs : in Boolean;
+		      Examples_Font : in ARM_Output.Font_Family_Type) is
 	-- Initialize an input object. Changes and Change_Version determine
 	-- which changes should be displayed. If Display_Index_Entries is True,
 	-- index entries will be printed in the document; otherwise, they
@@ -364,6 +369,7 @@ package body ARM_Format is
 	-- (and NotISO text will not); otherwise the reverse is true.
 	-- If Number_Paragraphs is true, paragraphs will be numbered (per
 	-- subclause); otherwise they will not be.
+	-- Example_Font specifies the font that examples will be set in.
     begin
 	Format_Object.Changes := Changes;
 	Format_Object.Change_Version := Change_Version;
@@ -371,6 +377,7 @@ package body ARM_Format is
 	Format_Object.Include_Annotations := Include_Annotations;
 	Format_Object.Include_ISO := Include_ISO;
 	Format_Object.Number_Paragraphs := Number_Paragraphs;
+	Format_Object.Examples_Font := Examples_Font;
 
 	Format_Object.Section := 0;
 	Format_Object.Clause := 0;
@@ -426,7 +433,8 @@ package body ARM_Format is
 	New_Column, RM_New_Page,
 	-- Basic text formatting:
 	Bold, Italic, Roman, Swiss, Fixed, Roman_Italic, Shrink, Grow,
-	Keyword, Non_Terminal, No_Prefix, No_Para_Num, Keep_with_Next,
+	Keyword, Non_Terminal, Example_Text, Example_Comment,
+	No_Prefix, No_Para_Num, Keep_with_Next,
         Leading, Trailing, Up, Down, Thin_Line, Thick_Line, Tab_Clear, Tab_Set,
 	-- Tables:
 	Table, Table_Param_Caption, Table_Param_Header, Table_Param_Body, Table_Last,
@@ -571,6 +579,10 @@ package body ARM_Format is
 	    return Keyword;
 	elsif Canonical_Name = "nt" then
 	    return Non_Terminal;
+	elsif Canonical_Name = "exam" then
+	    return Example_Text;
+	elsif Canonical_Name = "examcom" then
+	    return Example_Comment;
 	elsif Canonical_Name = "indexlist" then
 	    return Index_List;
 	elsif Canonical_Name = "defn" then
@@ -1636,6 +1648,16 @@ package body ARM_Format is
         Name : ARM_Input.Command_Name_Type;
         Command : Command_Type;
         Close_Char : Character; -- Ought to be }, ], >, or ).
+	-- Format at the start of the command:
+	Is_Bold : Boolean; -- Is the text currently bold?
+	Is_Italic : Boolean; -- Is the text currently italic?
+	Font : ARM_Output.Font_Family_Type; -- What is the current font family?
+	Size : ARM_Output.Size_Type; -- What is the current font size?
+	Change : ARM_Output.Change_Type; -- What is the current kind of change?
+	Current_Change_Version : ARM_Contents.Change_Version_Type; -- What is the current version of change?
+	Current_Old_Change_Version : ARM_Contents.Change_Version_Type; -- What is the current old version of change? (Only used if Change is Both).
+	Location : ARM_Output.Location_Type; -- What is the current (vertical) location?
+
         -- The next four are only used if Kind=Begin_Word, or for
         -- Command=Implementation_Defined, Glossary_Text_Param, or
 	--    Syntax_Rule_RHS.
@@ -1684,6 +1706,16 @@ package body ARM_Format is
 		 Kind => Kind,
 		 Command => Command (Name),
 		 Close_Char => ' ', -- Set below.
+		 -- Save the current format:
+		 Is_Bold => Format_Object.Is_Bold,
+		 Is_Italic => Format_Object.Is_Italic,
+		 Font => Format_Object.Font,
+		 Size => Format_Object.Size,
+		 Change => Format_Object.Change,
+		 Current_Change_Version => Format_Object.Current_Change_Version,
+		 Current_Old_Change_Version => Format_Object.Current_Old_Change_Version,
+		 Location => Format_Object.Location,
+		 -- Other things next necessarily used:
 		 Old_Last_Subhead_Paragraph => Plain, -- Not used.
 		 Old_Next_Subhead_Paragraph => Plain, -- Not used.
 		 Old_Next_Paragraph_Format => Plain, -- Not used.
@@ -1710,6 +1742,15 @@ package body ARM_Format is
 		 Kind => Parameter,
 		 Command => Command,
 		 Close_Char => Close_Ch,
+		 -- Save the current format (not really used here):
+		 Is_Bold => Format_Object.Is_Bold,
+		 Is_Italic => Format_Object.Is_Italic,
+		 Font => Format_Object.Font,
+		 Size => Format_Object.Size,
+		 Change => Format_Object.Change,
+		 Current_Change_Version => Format_Object.Current_Change_Version,
+		 Current_Old_Change_Version => Format_Object.Current_Old_Change_Version,
+		 Location => Format_Object.Location,
 		 Old_Last_Subhead_Paragraph => Plain, -- Not used.
 		 Old_Next_Subhead_Paragraph => Plain, -- Not used.
 		 Old_Next_Paragraph_Format => Plain, -- Not used.
@@ -2102,18 +2143,49 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			Format_Object.Format := ARM_Output.Annotations;
 			Format_Object.No_Breaks := False;
         	    when Example_Text =>
-			if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-			   Format_Object.Format := ARM_Output.Small_Examples;
-			else
-			   Format_Object.Format := ARM_Output.Examples;
-			end if;
+			case Format_Object.Examples_Font is
+			    when ARM_Output.Fixed | ARM_Output.Default =>
+			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			           Format_Object.Format := ARM_Output.Small_Examples;
+			        else
+			           Format_Object.Format := ARM_Output.Examples;
+			        end if;
+			    when ARM_Output.Roman =>
+			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+				   Format_Object.Format := ARM_Output.Small_Syntax_Indented;
+			        else
+				   Format_Object.Format := ARM_Output.Syntax_Indented;
+			        end if;
+			    when ARM_Output.Swiss =>
+			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+				   Format_Object.Format := ARM_Output.Small_Swiss_Examples;
+			        else
+				   Format_Object.Format := ARM_Output.Swiss_Examples;
+			        end if;
+			end case;
 			Format_Object.No_Breaks := True;
+
         	    when Indented_Example_Text =>
-			if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-			   Format_Object.Format := ARM_Output.Small_Indented_Examples;
-			else
-			   Format_Object.Format := ARM_Output.Indented_Examples;
-			end if;
+			case Format_Object.Examples_Font is
+			    when ARM_Output.Fixed | ARM_Output.Default =>
+				if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+				   Format_Object.Format := ARM_Output.Small_Indented_Examples;
+				else
+				   Format_Object.Format := ARM_Output.Indented_Examples;
+				end if;
+			    when ARM_Output.Roman =>
+			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+				   Format_Object.Format := ARM_Output.Small_Inner_Indented;
+			        else
+				   Format_Object.Format := ARM_Output.Inner_Indented;
+			        end if;
+			    when ARM_Output.Swiss => --??
+			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+				   Format_Object.Format := ARM_Output.Small_Swiss_Indented_Examples;
+				else
+				   Format_Object.Format := ARM_Output.Swiss_Indented_Examples;
+			        end if;
+			end case;
 			Format_Object.No_Breaks := True;
         	    when Code_Indented =>
 			if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
@@ -2340,11 +2412,9 @@ Ada.Text_IO.Put_Line ("%% Oops, Display in Wide paragraph, line " & ARM_Input.Li
 				    when ARM_Output.Notes | ARM_Output.Notes_Header =>
 				        Format_Object.Format := ARM_Output.Annotations;
 				    when ARM_Output.Annotations =>
-					Format_Object.Format := ARM_Output.Small_Code_Indented;
-					    -- %% Really one level too deep for annotations.
+					Format_Object.Format := ARM_Output.Small_Syntax_Indented;
 				    when ARM_Output.Wide_Annotations =>
-					Format_Object.Format := ARM_Output.Small_Code_Indented;
-					    -- %% Really one level too deep for annotations.
+					Format_Object.Format := ARM_Output.Small_Syntax_Indented;
 Ada.Text_IO.Put_Line ("%% Oops, Display in Wide_Annotated paragraph, line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Index =>
 					Format_Object.Format := ARM_Output.Index;
@@ -2352,20 +2422,22 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph in Index, line " 
 				    when ARM_Output.Syntax_Summary =>
 					Format_Object.Format := ARM_Output.Syntax_Summary;
 Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph in Syntax Summary, line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Examples =>
+				    when ARM_Output.Examples | ARM_Output.Swiss_Examples =>
 					Format_Object.Format := ARM_Output.Code_Indented;
-				    when ARM_Output.Small_Examples =>
+				    when ARM_Output.Small_Examples | ARM_Output.Small_Swiss_Examples =>
 					Format_Object.Format := ARM_Output.Small_Code_Indented;
-				    when ARM_Output.Indented_Examples =>
+				    when ARM_Output.Indented_Examples | ARM_Output.Swiss_Indented_Examples =>
 				        Format_Object.Format := ARM_Output.Inner_Indented;
 				        -- %%%% No additional indent.
 Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Indented Examples), line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Small_Indented_Examples =>
+				    when ARM_Output.Small_Indented_Examples | ARM_Output.Small_Swiss_Indented_Examples =>
 				        Format_Object.Format := ARM_Output.Small_Inner_Indented;
 				        -- %%%% No additional indent.
 Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Small Indented Examples), line " & ARM_Input.Line_String (Input_Object));
 				    when ARM_Output.Syntax_Indented =>
 				        Format_Object.Format := ARM_Output.Code_Indented;
+				    when ARM_Output.Small_Syntax_Indented =>
+				        Format_Object.Format := ARM_Output.Small_Code_Indented;
 				    when ARM_Output.Code_Indented =>
 				        Format_Object.Format := ARM_Output.Indented;
 				    when ARM_Output.Small_Code_Indented =>
@@ -4482,6 +4554,33 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    Location => Format_Object.Location);
 		    Format_Object.Font := ARM_Output.Swiss;
 
+		when Example_Text =>
+		    Check_Paragraph;
+		    ARM_Output.Text_Format (Output_Object,
+					    Bold => Format_Object.Is_Bold,
+					    Italic => Format_Object.Is_Italic,
+					    Font => Format_Object.Examples_Font,
+					    Size => Format_Object.Size,
+					    Change => Format_Object.Change,
+				            Version => Format_Object.Current_Change_Version,
+				            Added_Version => Format_Object.Current_Old_Change_Version,
+					    Location => Format_Object.Location);
+		    Format_Object.Font := Format_Object.Examples_Font;
+
+		when Example_Comment =>
+		    Check_Paragraph;
+		    ARM_Output.Text_Format (Output_Object,
+					    Bold => Format_Object.Is_Bold,
+					    Italic => True,
+					    Font => ARM_Output.Roman,
+					    Size => Format_Object.Size,
+					    Change => Format_Object.Change,
+				            Version => Format_Object.Current_Change_Version,
+				            Added_Version => Format_Object.Current_Old_Change_Version,
+					    Location => Format_Object.Location);
+		    Format_Object.Font := ARM_Output.Roman;
+		    Format_Object.Is_Italic := True;
+
 		when Tab_Clear =>
 		    Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 
@@ -4599,6 +4698,15 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			         Kind => Begin_Word,
 			         Command => Text_Begin,
 			         Close_Char => ' ',-- No close character.
+				 -- Save the current format:
+				 Is_Bold => Format_Object.Is_Bold,
+				 Is_Italic => Format_Object.Is_Italic,
+				 Font => Format_Object.Font,
+				 Size => Format_Object.Size,
+				 Change => Format_Object.Change,
+				 Current_Change_Version => Format_Object.Current_Change_Version,
+				 Current_Old_Change_Version => Format_Object.Current_Old_Change_Version,
+				 Location => Format_Object.Location,
 				 Old_Last_Subhead_Paragraph => Format_Object.Last_Paragraph_Subhead_Type,
 				 Old_Next_Subhead_Paragraph => Format_Object.Next_Paragraph_Subhead_Type,
 				 Old_Next_Paragraph_Format => Format_Object.Next_Paragraph_Format_Type,
@@ -8168,8 +8276,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 
 		when Text_Begin | Text_End | Redundant | Part | Bold | Italic |
 		     Roman | Swiss | Fixed | Roman_Italic | Shrink | Grow |
-		     Keyword | Non_Terminal | Up | Down | Tab_Clear | Tab_Set |
-		     Table |
+		     Keyword | Non_Terminal | Example_Text | Example_Comment |
+		     Up | Down | Tab_Clear | Tab_Set | Table |
 		     Defn | RootDefn | PDefn | Defn2 | RootDefn2 | PDefn2 |
 		     Index_See | Index_See_Also | See_Other | See_Also |
 		     Index_Root_Unit | Index_Child_Unit | Index_Subprogram_Child_Unit |
@@ -8587,154 +8695,34 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		        ARM_Output.Ordinary_Character (Output_Object, ']');
 		    -- else ignored.
 		    end if;
-		when Bold =>
-		    Check_Paragraph;
-		    ARM_Output.Text_Format (Output_Object,
-					    Bold => False,
-					    Italic => Format_Object.Is_Italic,
-					    Font => Format_Object.Font,
-					    Size => Format_Object.Size,
-				            Change => Format_Object.Change,
-			                    Version => Format_Object.Current_Change_Version,
-			                    Added_Version => Format_Object.Current_Old_Change_Version,
-					    Location => Format_Object.Location);
-		    Format_Object.Is_Bold := False;
 
-		when Italic =>
-		    Check_Paragraph;
-		    ARM_Output.Text_Format (Output_Object,
-					    Bold => Format_Object.Is_Bold,
-					    Italic => False,
-					    Font => Format_Object.Font,
-					    Size => Format_Object.Size,
-				            Change => Format_Object.Change,
-			                    Version => Format_Object.Current_Change_Version,
-			                    Added_Version => Format_Object.Current_Old_Change_Version,
-					    Location => Format_Object.Location);
-		    Format_Object.Is_Italic := False;
-
-		when Roman | Swiss | Fixed =>
-		    Check_Paragraph;
-		    ARM_Output.Text_Format (Output_Object,
-					    Bold => Format_Object.Is_Bold,
-					    Italic => Format_Object.Is_Italic,
-					    Font => ARM_Output.Default,
-					    Size => Format_Object.Size,
-				            Change => Format_Object.Change,
-			                    Version => Format_Object.Current_Change_Version,
-			                    Added_Version => Format_Object.Current_Old_Change_Version,
-					    Location => Format_Object.Location);
-		    Format_Object.Font := ARM_Output.Default;
-
-		when Roman_Italic =>
-		    Check_Paragraph;
-		    ARM_Output.Text_Format (Output_Object,
-					    Bold => Format_Object.Is_Bold,
-					    Italic => False,
-					    Font => ARM_Output.Default,
-					    Size => Format_Object.Size,
-				            Change => Format_Object.Change,
-			                    Version => Format_Object.Current_Change_Version,
-			                    Added_Version => Format_Object.Current_Old_Change_Version,
-					    Location => Format_Object.Location);
-		    Format_Object.Is_Italic := False;
-		    Format_Object.Font := ARM_Output.Default;
-
-		when Shrink =>
+		when Bold | Italic | Roman | Swiss | Fixed | Roman_Italic |
+		     Shrink | Grow | Up | Down |
+		     Keyword | Non_Terminal | Example_Text | Example_Comment =>
+		    -- Formatting commands; revert to the previous (saved)
+		    -- version:
 		    declare
-			use type ARM_Output.Size_Type;
+			NI : Items renames Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr);
 		    begin
 		        Check_Paragraph;
 		        ARM_Output.Text_Format (Output_Object,
-					        Bold => Format_Object.Is_Bold,
-					        Italic => Format_Object.Is_Italic,
-					        Font => Format_Object.Font,
-					        Size => Format_Object.Size+1,
-				                Change => Format_Object.Change,
-			                        Version => Format_Object.Current_Change_Version,
-			                        Added_Version => Format_Object.Current_Old_Change_Version,
-					        Location => Format_Object.Location);
-		        Format_Object.Size := Format_Object.Size + 1;
+					        Bold => NI.Is_Bold,
+					        Italic => NI.Is_Italic,
+					        Font => NI.Font,
+					        Size => NI.Size,
+				                Change => NI.Change,
+			                        Version => NI.Current_Change_Version,
+			                        Added_Version => NI.Current_Old_Change_Version,
+					        Location => NI.Location);
+		        Format_Object.Is_Bold := NI.Is_Bold;
+		        Format_Object.Is_Italic := NI.Is_Italic;
+		        Format_Object.Font := NI.Font;
+		        Format_Object.Size := NI.Size;
+			Format_Object.Change := NI.Change;
+			Format_Object.Current_Change_Version := NI.Current_Change_Version;
+			Format_Object.Current_Old_Change_Version := NI.Current_Old_Change_Version;
+			Format_Object.Location := NI.Location;
 		    end;
-
-		when Grow =>
-		    declare
-			use type ARM_Output.Size_Type;
-		    begin
-		        Check_Paragraph;
-		        ARM_Output.Text_Format (Output_Object,
-					        Bold => Format_Object.Is_Bold,
-					        Italic => Format_Object.Is_Italic,
-					        Font => Format_Object.Font,
-					        Size => Format_Object.Size-1,
-				                Change => Format_Object.Change,
-			                        Version => Format_Object.Current_Change_Version,
-			                        Added_Version => Format_Object.Current_Old_Change_Version,
-					        Location => Format_Object.Location);
-		        Format_Object.Size := Format_Object.Size - 1;
-		    end;
-
-		when Up =>
-		    declare
-		        use type ARM_Output.Size_Type;
-		    begin
-		        Check_Paragraph;
-		        ARM_Output.Text_Format (Output_Object,
-					        Bold => Format_Object.Is_Bold,
-					        Italic => Format_Object.Is_Italic,
-					        Font => Format_Object.Font,
-					        Size => Format_Object.Size+2,
-				                Change => Format_Object.Change,
-			                        Version => Format_Object.Current_Change_Version,
-			                        Added_Version => Format_Object.Current_Old_Change_Version,
-					        Location => ARM_Output.Normal);
-		        Format_Object.Location := ARM_Output.Normal;
-		        Format_Object.Size := Format_Object.Size+2;
-		    end;
-
-		when Down =>
-		    declare
-		        use type ARM_Output.Size_Type;
-		    begin
-		        Check_Paragraph;
-		        ARM_Output.Text_Format (Output_Object,
-					        Bold => Format_Object.Is_Bold,
-					        Italic => Format_Object.Is_Italic,
-					        Font => Format_Object.Font,
-					        Size => Format_Object.Size+2,
-				                Change => Format_Object.Change,
-			                        Version => Format_Object.Current_Change_Version,
-			                        Added_Version => Format_Object.Current_Old_Change_Version,
-					        Location => ARM_Output.Normal);
-		        Format_Object.Location := ARM_Output.Normal;
-		        Format_Object.Size := Format_Object.Size+2;
-		    end;
-
-		when Keyword =>
-		    Check_Paragraph;
-		    ARM_Output.Text_Format (Output_Object,
-					    Bold => False,
-					    Italic => Format_Object.Is_Italic,
-					    Font => Format_Object.Font,
-					    Size => Format_Object.Size,
-				            Change => Format_Object.Change,
-			                    Version => Format_Object.Current_Change_Version,
-			                    Added_Version => Format_Object.Current_Old_Change_Version,
-					    Location => Format_Object.Location);
-		    Format_Object.Is_Bold := False;
-
-		when Non_Terminal =>
-		    Check_Paragraph;
-		    ARM_Output.Text_Format (Output_Object,
-					    Bold => Format_Object.Is_Bold,
-					    Italic => Format_Object.Is_Italic,
-					    Font => ARM_Output.Default,
-					    Size => Format_Object.Size,
-				            Change => Format_Object.Change,
-			                    Version => Format_Object.Current_Change_Version,
-			                    Added_Version => Format_Object.Current_Old_Change_Version,
-					    Location => Format_Object.Location);
-		    Format_Object.Font := ARM_Output.Default;
 
 		when Subheading | Heading =>
 		    -- Restore the format.

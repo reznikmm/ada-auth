@@ -105,6 +105,7 @@ package body ARM_RTF is
     --  5/27/05 - RLB - Added arbitrary Unicode characters.
     --  1/11/06 - RLB - Eliminated dispatching Create in favor of tailored
     --			versions.
+    --  1/18/06 - RLB - Added additional styles.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -411,7 +412,7 @@ package body ARM_RTF is
 		       Style_String =>
 			 "\s2\sb240\sa120\keepn\widctlpar\outlinelevel1\adjustright \b\f1\fs24\ql\cgrid \sbasedon0 \snext0 ");
 	    Set_Style (Heading_3_Info,
-		       Font_Size => 24,
+		       Font_Size => 23,
 		       Style_Indent => 0,
 		       Style_Before => 210,
 		       Style_After => 90,
@@ -833,6 +834,46 @@ package body ARM_RTF is
 		       Style_Justified => TRUE,
 		       Style_String =>
 			 "\s49\widctlpar\adjustright \li2160\fs15\f0\cgrid\sa90\qj\sl-180\slmult0 \snext49 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Syntax_Indented),
+		       Font_Size => 15,
+		       Style_Indent => 1080,
+		       Style_Before => 0,
+		       Style_After => 90,
+		       Style_Justified => TRUE,
+		       Style_String =>
+			 "\s50\widctlpar\adjustright \li1080\fs15\f0\cgrid\sa90\qj\sl-180\slmult0 \snext50 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Examples),
+		       Font_Size => 16,
+		       Style_Indent => 360,
+		       Style_Before => 0,
+		       Style_After => 80,
+		       Style_Justified => FALSE,
+		       Style_String =>
+			 "\s51\widctlpar\adjustright \li360\fs16\f1\cgrid\sa80\sl-180\ql \snext51 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Examples),
+		       Font_Size => 14,
+		       Style_Indent => 1080,
+		       Style_Before => 0,
+		       Style_After => 70,
+		       Style_Justified => FALSE,
+		       Style_String =>
+			 "\s52\widctlpar\adjustright \li1080\fs14\f1\cgrid\sa70\sl-160\ql \snext52 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Indented_Examples),
+		       Font_Size => 16,
+		       Style_Indent => 1440,
+		       Style_Before => 0,
+		       Style_After => 80,
+		       Style_Justified => FALSE,
+		       Style_String =>
+			 "\s53\widctlpar\adjustright \li1440\fs16\f1\cgrid\sa80\ql\sl-180 \snext53 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Indented_Examples),
+		       Font_Size => 14,
+		       Style_Indent => 2160,
+		       Style_Before => 0,
+		       Style_After => 70,
+		       Style_Justified => FALSE,
+		       Style_String =>
+			 "\s54\widctlpar\adjustright \li2160\fs14\f1\cgrid\sa70\ql\sl-160 \snext54 ");
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
                 Set_Style (TOC_1_Info,
@@ -842,7 +883,7 @@ package body ARM_RTF is
 		           Style_After => 45,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s50\sa45\sb45\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s55\sa45\sb45\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs20\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font_Size => 17,
@@ -851,7 +892,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s51\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s56\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs17\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font_Size => 17,
@@ -860,7 +901,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s52\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s57\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs17\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_Text_Info,
@@ -1330,6 +1371,46 @@ package body ARM_RTF is
 		       Style_Justified => TRUE,
 		       Style_String =>
 			 "\s49\widctlpar\adjustright \li1800\fs18\f0\cgrid\sa90\qj\sl-200\slmult0 \snext49 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Syntax_Indented),
+		       Font_Size => 18,
+		       Style_Indent => 1080,
+		       Style_Before => 0,
+		       Style_After => 90,
+		       Style_Justified => TRUE,
+		       Style_String =>
+			 "\s50\widctlpar\adjustright \li1440\fs18\f0\cgrid\sa90\qj\sl-200\slmult0 \snext50 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Examples),
+		       Font_Size => 20,
+		       Style_Indent => 360,
+		       Style_Before => 0,
+		       Style_After => 110,
+		       Style_Justified => FALSE,
+		       Style_String =>
+			 "\s51\widctlpar\adjustright \li360\fs20\f1\cgrid\sa110\ql\sl-230\slmult0 \snext51 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Examples),
+		       Font_Size => 16,
+		       Style_Indent => 1080,
+		       Style_Before => 0,
+		       Style_After => 80,
+		       Style_Justified => FALSE,
+		       Style_String =>
+			 "\s52\widctlpar\adjustright \li1080\fs16\f1\cgrid\sa80\ql\sl-180\slmult0 \snext52 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Indented_Examples),
+		       Font_Size => 20,
+		       Style_Indent => 1440,
+		       Style_Before => 0,
+		       Style_After => 110,
+		       Style_Justified => FALSE,
+		       Style_String =>
+			 "\s53\widctlpar\adjustright \li1440\fs20\f1\cgrid\sa110\ql\sl-230\slmult0 \snext53 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Indented_Examples),
+		       Font_Size => 16,
+		       Style_Indent => 2160,
+		       Style_Before => 0,
+		       Style_After => 80,
+		       Style_Justified => FALSE,
+		       Style_String =>
+			 "\s54\widctlpar\adjustright \li2160\fs16\f1\cgrid\sa80\ql\sl-180\slmult0 \snext54 ");
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
                 Set_Style (TOC_1_Info,
@@ -1339,7 +1420,7 @@ package body ARM_RTF is
 			   Style_After => 60,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s50\sb60\sa60\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s55\sb60\sa60\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs24\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font_Size => 22,
@@ -1348,7 +1429,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s51\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s56\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs22\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font_Size => 22,
@@ -1357,7 +1438,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String =>
-		             "\s52\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
+		             "\s57\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs22\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_Text_Info,
@@ -1468,9 +1549,19 @@ package body ARM_RTF is
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Indented Nested Bulleted;}");
 	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Inner_Indented));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Inner Indented;}");
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Inner_Indented));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Inner Indented;}");
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Syntax_Indented));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Syntax Indented;}");
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Swiss_Examples));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Swiss Examples;}");
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Swiss_Examples));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Swiss Examples;}");
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Swiss_Indented_Examples));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Swiss Indented Examples;}");
         if Output_Object.Big_Files then
-	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Inner_Indented));
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Inner Indented;}");
+	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Swiss_Indented_Examples));
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Swiss Indented Examples;}");
 	    -- Define the TOC styles:
 	    Write_Style (Output_Object.Output_File, TOC_1_Info);
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "toc 1;}");
@@ -1479,8 +1570,8 @@ package body ARM_RTF is
 	    Write_Style (Output_Object.Output_File, TOC_3_Info);
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "toc 3;}}");
 	else
-	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Inner_Indented));
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Inner Indented;}}");
+	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Swiss_Indented_Examples));
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Swiss Indented Examples;}}");
 	end if;
             -- \additive means that the style inherits from the previous style.
 	    -- \basedon defines the style that the style was inherited from.
@@ -1778,11 +1869,12 @@ package body ARM_RTF is
 		 ARM_Output.Index | ARM_Output.Syntax_Summary |
 		 ARM_Output.Examples | ARM_Output.Small_Examples |
 		 ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples |
-		 ARM_Output.Syntax_Indented |
+		 ARM_Output.Swiss_Examples | ARM_Output.Small_Swiss_Examples |
+		 ARM_Output.Swiss_Indented_Examples | ARM_Output.Small_Swiss_Indented_Examples |
+		 ARM_Output.Syntax_Indented | ARM_Output.Small_Syntax_Indented |
 		 ARM_Output.Indented | ARM_Output.Small_Indented |
 		 ARM_Output.Inner_Indented | ARM_Output.Small_Inner_Indented |
-		 ARM_Output.Code_Indented |
-		 ARM_Output.Small_Code_Indented =>
+		 ARM_Output.Code_Indented | ARM_Output.Small_Code_Indented =>
 		if Output_Object.Tab_Stops.Number /= 0 then
 		    if (Output_Object.Tab_Stops.Number * 8) + Output_Object.Char_Count >
 			LINE_LENGTH then
@@ -1921,9 +2013,12 @@ package body ARM_RTF is
 	    when ARM_Output.Normal | ARM_Output.Wide |
 		 ARM_Output.Notes | ARM_Output.Notes_Header |
 		 ARM_Output.Annotations | ARM_Output.Wide_Annotations |
-		 ARM_Output.Index | ARM_Output.Syntax_Summary | ARM_Output.Examples |
-		 ARM_Output.Small_Examples | ARM_Output.Indented_Examples |
-		 ARM_Output.Small_Indented_Examples | ARM_Output.Syntax_Indented |
+		 ARM_Output.Index | ARM_Output.Syntax_Summary |
+		 ARM_Output.Examples | ARM_Output.Small_Examples |
+		 ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples |
+		 ARM_Output.Swiss_Examples | ARM_Output.Small_Swiss_Examples |
+		 ARM_Output.Swiss_Indented_Examples | ARM_Output.Small_Swiss_Indented_Examples |
+		 ARM_Output.Syntax_Indented | ARM_Output.Small_Syntax_Indented |
 		 ARM_Output.Indented | ARM_Output.Small_Indented |
 		 ARM_Output.Inner_Indented | ARM_Output.Small_Inner_Indented |
 		 ARM_Output.Code_Indented | ARM_Output.Small_Code_Indented =>

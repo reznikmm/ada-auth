@@ -121,7 +121,9 @@ package ARM_Output is
 	Notes, Notes_Header, Annotations, Wide_Annotations, Index, Syntax_Summary,
 	Examples, Small_Examples,
 	Indented_Examples, Small_Indented_Examples,
-	Syntax_Indented, Code_Indented,
+	Swiss_Examples, Small_Swiss_Examples,
+	Swiss_Indented_Examples, Small_Swiss_Indented_Examples,
+	Syntax_Indented, Small_Syntax_Indented, Code_Indented,
 	Small_Code_Indented, Indented, Small_Indented,
 	Inner_Indented, Small_Inner_Indented,
 	Bulleted, Nested_Bulleted, Nested_X2_Bulleted,
@@ -150,8 +152,18 @@ package ARM_Output is
 	-- Indented_Examples are indented four units, and are in a fixed font.
 	-- Small_Indented_Examples are indented six units, and are in a smaller
 	--     fixed font.
+	-- Swiss_Examples are indented one unit, and are in a swiss
+	--     (sans-serif) font.
+	-- Small_Swiss_Examples are indented three units, and are in a smaller
+	--     swiss (sans-serif) font.
+	-- Swiss_Indented_Examples are indented four units, and are in a
+	--     swiss (sans-serif) font.
+	-- Small_Swiss_Indented_Examples are indented six units, and are in
+	--     a smaller swiss (sans-serif) font.
 	-- Syntax_Indented paragraphs are indented one unit, and are in the
 	--     normal font.
+	-- Small_Syntax_Indented paragraphs are indented three units, and are in
+	--     a smaller normal font.
 	-- Code_Indented paragraphs are indented two units, and are in the
 	--     normal font.
 	-- Small_Code_Indented paragraphs are indented four units, and are in a

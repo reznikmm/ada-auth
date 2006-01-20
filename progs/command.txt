@@ -164,6 +164,10 @@ Global properties:
 @FilePrefix{<Prefix>}
      This specifies the prefix of the output file(s). All of the output files
      will start with this prefix. Keep this short!
+@ExampleFont{Swiss|Fixed|Roman}
+     This specifies which font is used to display examples.
+     This changes the @Exam{<text>} and @begin{Example} formats.
+     By default, the Fixed font is used.
 
 HTML Output properties:
 
@@ -197,14 +201,17 @@ HTML Output properties:
      Specifies the properties of the Navigation Bar in the files.
      RefName gives the URL of the references page. This can be part of the
      current document (in which case the URL can be relative), or an external
-     page. It will be the URL assigned to the "References" button/label;
-     if set to null, the "References" button/label will be omitted.
+     page. It will be the URL assigned to the "References" button/label; if set
+     to null, the "References" button/label will link to the section named
+     "References" if one exists, or the button/label will be omitted otherwise.
      SrchName gives the URL of the search page. This can be a relative or
-     absolute URL. It will be the URL assigned to the "Search" button/label;
-     if set to null, the "Search" button/label will be omitted.
+     absolute URL. It will be the URL assigned to the "Search" button/label; if
+     set to null, the "Search" button/label will link to the section named
+     "Search" if one exists, or the button/label will be omitted otherwise.
      IndexName gives the URL of the search page. This can be a relative or
      absolute URL. It will be the URL assigned to the "Index" button/label;
-     if set to null, the "Index" button/label will be omitted.
+     if set to null, the "Index" button/label will link to the section named
+     "Index" if one exists, or the button/label will be omitted otherwise.
      If UseButtons is true (T), the navigation bar will use graphic buttons;
      otherwise, text labels will be generated.
      If OnTop is true (T), the navigation bar will be on the top of the
@@ -435,6 +442,11 @@ Text commands:
 @nt{<text>} - A non-terminal in normal text. This will be set in a Swiss
 	      (sans-serif) font.
 @key{<text>} - A keyword in normal text. This will be set in boldface.
+@exam{<text>} - Example text occurring in normal text. This will be set
+        in the example font (which is selected in the master file).
+@examcom{<text>} - The body of an example comment; this is shown in the
+        roman font in italics. (This is the same as the @RI command, but
+        by using a separate name, we can change the format in the future.)
 @redundant{<text>} - Marks text thought to be unnecessary in the RM. That is,
 	the rules are explained elsewhere. The text is formatted normally.
 	When annotations are shown, this text is surrounded in brackets.
@@ -779,12 +791,12 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 		  otherwise normal.
 	DescribeCode -
 		  The text is indented 2 units.
-	Example - The text is formatted in a fixed-width example font with
-		  an indent of 1 unit; spaces and breaks are preserved. This
-		  format preserves size characteristics of its parent (if any),
-		  except that if the parent is "DescribeCode", the normal
-		  characteristics are used. No page breaks are allowed
-		  within a paragraph.
+	Example - The text is formatted in the example font (which is selected
+		  in the master file) with an indent of 1 unit; spaces and
+		  breaks are preserved. This format preserves size
+		  characteristics of its parent (if any), except that if the
+		  parent is "DescribeCode", the normal characteristics are
+		  used. No page breaks are allowed within a paragraph.
 		  Do not confuse this with "Examples", which is a text
 		  grouping.
 	Itemize - The text is indented and bulleted (with solid circle bullets).

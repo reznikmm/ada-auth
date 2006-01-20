@@ -124,11 +124,14 @@ package body ARM_HTML is
     --			versions.
     --  1/12/06 - RLB - Added a number of parameters to Create.
     --  1/16/06 - RLB - Reduced space around button bars.
+    --  1/18/06 - RLB - Added additional styles.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
 
     SWISS_FONT_CODE : constant String := "<FONT FACE=""Arial, Helvetica"">";
+
+    SMALL_SWISS_FONT_CODE : constant String := "<FONT FACE=""Arial, Helvetica"" SIZE=-1>";
 
     TINY_SWISS_FONT_CODE : constant String := "<FONT FACE=""Arial, Helvetica"" SIZE=-2>";
 
@@ -231,6 +234,54 @@ package body ARM_HTML is
 		 Right_Indent => 0,
 		 Before => 0,
 		 After => 6),
+	    ARM_Output.Indented_Examples =>
+		(Tag  => DIV,
+		 Size => 0,
+		 Font => ARM_Output.Fixed,
+		 Indent => 4,
+		 Right_Indent => 0,
+		 Before => 0,
+		 After => 6),
+	    ARM_Output.Small_Indented_Examples =>
+		(Tag  => DIV,
+		 Size => -1,
+		 Font => ARM_Output.Fixed,
+		 Indent => 6,
+		 Right_Indent => 0,
+		 Before => 0,
+		 After => 6),
+	    ARM_Output.Swiss_Examples =>
+		(Tag  => DIV,
+		 Size => 0,
+		 Font => ARM_Output.Swiss,
+		 Indent => 1,
+		 Right_Indent => 0,
+		 Before => 0,
+		 After => 6),
+	    ARM_Output.Small_Swiss_Examples =>
+		(Tag  => DIV,
+		 Size => -1,
+		 Font => ARM_Output.Swiss,
+		 Indent => 3,
+		 Right_Indent => 0,
+		 Before => 0,
+		 After => 6),
+	    ARM_Output.Swiss_Indented_Examples =>
+		(Tag  => DIV,
+		 Size => 0,
+		 Font => ARM_Output.Swiss,
+		 Indent => 4,
+		 Right_Indent => 0,
+		 Before => 0,
+		 After => 6),
+	    ARM_Output.Small_Swiss_Indented_Examples =>
+		(Tag  => DIV,
+		 Size => -1,
+		 Font => ARM_Output.Swiss,
+		 Indent => 6,
+		 Right_Indent => 0,
+		 Before => 0,
+		 After => 6),
 	    ARM_Output.Syntax_Indented =>
 		(Tag  => DIV,
 		 Size => 0,
@@ -239,6 +290,14 @@ package body ARM_HTML is
 		 Right_Indent => 0,
 		 Before => 0,
 		 After => 4), -- 80
+	    ARM_Output.Small_Syntax_Indented =>
+		(Tag  => DIV,
+		 Size => -1,
+		 Font => ARM_Output.Roman,
+		 Indent => 3,
+		 Right_Indent => 0,
+		 Before => 0,
+		 After => 6),
 	    ARM_Output.Indented =>
 		(Tag  => DIV,
 		 Size => 0,
@@ -284,22 +343,6 @@ package body ARM_HTML is
 		 Size => -1,
 		 Font => ARM_Output.Roman,
 		 Indent => 4,
-		 Right_Indent => 0,
-		 Before => 0,
-		 After => 6),
-	    ARM_Output.Indented_Examples =>
-		(Tag  => DIV,
-		 Size => 0,
-		 Font => ARM_Output.Fixed,
-		 Indent => 4,
-		 Right_Indent => 0,
-		 Before => 0,
-		 After => 6),
-	    ARM_Output.Small_Indented_Examples =>
-		(Tag  => DIV,
-		 Size => -1,
-		 Font => ARM_Output.Fixed,
-		 Indent => 6,
 		 Right_Indent => 0,
 		 Before => 0,
 		 After => 6),
@@ -564,11 +607,11 @@ package body ARM_HTML is
 
 
     procedure Make_Navigation_Bar (Output_Object : in out HTML_Output_Type;
-			           Clause : in String;
-				   Clause_is_Next : in Boolean;
 				   Is_Top : in Boolean) is
 	-- Internal routine.
 	-- Generate a properly formatted navigation bar.
+	Clause : constant String :=
+	    Ada.Strings.Unbounded.To_String(Output_Object.Current_Clause);
     begin
         if Output_Object.Use_Buttons then
 	    if Is_Top and then Output_Object.HTML_Kind > HTML_3 then
@@ -592,32 +635,62 @@ package body ARM_HTML is
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 	            Ada.Strings.Unbounded.To_String(Output_Object.Index_URL));
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""index.gif"" ALT=""Index""></A>&nbsp;");
+	    else -- Link to the section named "Index".
+	        begin
+		    -- Note: We do the following in one big glup so that if
+		    -- Not_Found_Error is raised, nothing is output.
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
+			Make_Clause_Link_Name(Output_Object,
+			    ARM_Contents.Lookup_Clause_Number ("Index" & (6 .. ARM_Contents.Title_Type'Last => ' '))) &
+	                """><IMG SRC=""index.gif"" ALT=""Index""></A>&nbsp;");
+	        exception
+		    when ARM_Contents.Not_Found_Error =>
+		        null; -- No section named "Index".
+	        end;
 	    end if;
 	    if Ada.Strings.Unbounded.Length(Output_Object.Ref_URL) /= 0 then
 	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""");
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 	            Ada.Strings.Unbounded.To_String(Output_Object.Ref_URL));
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""lib.gif"" ALT=""References""></A>&nbsp;");
+	    else -- Link to the section named "References".
+	        begin
+		    -- Note: We do the following in one big glup so that if
+		    -- Not_Found_Error is raised, nothing is output.
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
+		        Make_Clause_Link_Name(Output_Object,
+			    ARM_Contents.Lookup_Clause_Number ("References" & (11 .. ARM_Contents.Title_Type'Last => ' '))) &
+	                """><IMG SRC=""lib.gif"" ALT=""References""></A>&nbsp;");
+	        exception
+		    when ARM_Contents.Not_Found_Error =>
+		        null; -- No section named "References".
+	        end;
 	    end if;
 	    if Ada.Strings.Unbounded.Length(Output_Object.Srch_URL) /= 0 then
 	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""");
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 	            Ada.Strings.Unbounded.To_String(Output_Object.Srch_URL));
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""find.gif"" ALT=""Search""></A>&nbsp;");
+	    else -- Link to the section named "References".
+	        begin
+		    -- Note: We do the following in one big glup so that if
+		    -- Not_Found_Error is raised, nothing is output.
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
+			Make_Clause_Link_Name(Output_Object,
+			    ARM_Contents.Lookup_Clause_Number ("Search" & (7 .. ARM_Contents.Title_Type'Last => ' '))) &
+	                """><IMG SRC=""find.gif"" ALT=""Search""></A>&nbsp;");
+	        exception
+		    when ARM_Contents.Not_Found_Error =>
+		        null; -- No section named "Index".
+		end;
 	    end if;
 	    if Clause /= "" then
 	        begin
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
-		    if Clause_is_Next then
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
-		            Make_Clause_Link_Name (Output_Object,
-			        ARM_Contents.Previous_Clause(ARM_Contents.Previous_Clause(Clause))));
-		    else
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
-		            Make_Clause_Link_Name (Output_Object,
-			        ARM_Contents.Previous_Clause(Clause)));
-		    end if;
+		    Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
+		        Make_Clause_Link_Name (Output_Object,
+			    ARM_Contents.Previous_Clause(Clause)));
 		    Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""prev.gif"" ALT=""Previous""></A>&nbsp;");
 	        exception
 		    when ARM_Contents.Not_Found_Error =>
@@ -626,14 +699,9 @@ package body ARM_HTML is
 	        begin
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
-		    if Clause_is_Next then
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
-		            Make_Clause_Link_Name (Output_Object, Clause));
-		    else
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
-		            Make_Clause_Link_Name (Output_Object,
-			        ARM_Contents.Next_Clause(Clause)));
-		    end if;
+		    Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
+		        Make_Clause_Link_Name (Output_Object,
+			    ARM_Contents.Next_Clause(Clause)));
 		    Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""next.gif"" ALT=""Next""></A>&nbsp;");
 	        exception
 		    when ARM_Contents.Not_Found_Error =>
@@ -661,6 +729,18 @@ package body ARM_HTML is
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 	            Ada.Strings.Unbounded.To_String(Output_Object.Index_URL));
 	        Ada.Text_IO.Put (Output_Object.Output_File, """>Index</A>");
+	    else -- Link to the section named "Index".
+	        begin
+		    -- Note: We do the following in one big glup so that if
+		    -- Not_Found_Error is raised, nothing is output.
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
+			Make_Clause_Link_Name(Output_Object,
+			    ARM_Contents.Lookup_Clause_Number ("Index" & (6 .. ARM_Contents.Title_Type'Last => ' '))) &
+	                """>Index</A>");
+	        exception
+		    when ARM_Contents.Not_Found_Error =>
+		        null; -- No section named "Index".
+	        end;
 	    end if;
 	    if Ada.Strings.Unbounded.Length(Output_Object.Srch_URL) /= 0 then
 	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
@@ -668,6 +748,18 @@ package body ARM_HTML is
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 	            Ada.Strings.Unbounded.To_String(Output_Object.Srch_URL));
 	        Ada.Text_IO.Put (Output_Object.Output_File, """>Search</A>");
+	    else -- Link to the section named "Search".
+	        begin
+		    -- Note: We do the following in one big glup so that if
+		    -- Not_Found_Error is raised, nothing is output.
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
+			Make_Clause_Link_Name(Output_Object,
+			    ARM_Contents.Lookup_Clause_Number ("Search" & (7 .. ARM_Contents.Title_Type'Last => ' '))) &
+	                """>Search</A>");
+	        exception
+		    when ARM_Contents.Not_Found_Error =>
+		        null; -- No section named "Search".
+	        end;
 	    end if;
 	    if Ada.Strings.Unbounded.Length(Output_Object.Ref_URL) /= 0 then
 	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;");
@@ -675,20 +767,26 @@ package body ARM_HTML is
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 	            Ada.Strings.Unbounded.To_String(Output_Object.Ref_URL));
 	        Ada.Text_IO.Put (Output_Object.Output_File, """>Reference Documents</A>");
+	    else -- Link to the section named "References".
+	        begin
+		    -- Note: We do the following in one big glup so that if
+		    -- Not_Found_Error is raised, nothing is output.
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
+			Make_Clause_Link_Name(Output_Object,
+			    ARM_Contents.Lookup_Clause_Number ("References" & (11 .. ARM_Contents.Title_Type'Last => ' '))) &
+	                """>Reference Documents</A>");
+	        exception
+		    when ARM_Contents.Not_Found_Error =>
+		        null; -- No section named "References".
+	        end;
 	    end if;
 	    if Clause /= "" then
 	        begin
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
-		    if Clause_is_Next then
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
-		            Make_Clause_Link_Name (Output_Object,
-			        ARM_Contents.Previous_Clause(ARM_Contents.Previous_Clause(Clause))));
-		    else
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
-		            Make_Clause_Link_Name (Output_Object,
-			        ARM_Contents.Previous_Clause(Clause)));
-		    end if;
+		    Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
+		        Make_Clause_Link_Name (Output_Object,
+			    ARM_Contents.Previous_Clause(Clause)));
 		    Ada.Text_IO.Put (Output_Object.Output_File, """>Previous</A>");
 	        exception
 		    when ARM_Contents.Not_Found_Error =>
@@ -697,14 +795,9 @@ package body ARM_HTML is
 	        begin
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
-		    if Clause_is_Next then
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
-		            Make_Clause_Link_Name (Output_Object, Clause));
-		    else
-		        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
-		            Make_Clause_Link_Name (Output_Object,
-			        ARM_Contents.Next_Clause(Clause)));
-		    end if;
+		    Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
+		        Make_Clause_Link_Name (Output_Object,
+			    ARM_Contents.Next_Clause(Clause)));
 		    Ada.Text_IO.Put (Output_Object.Output_File, """>Next</A>");
 	        exception
 		    when ARM_Contents.Not_Found_Error =>
@@ -736,7 +829,7 @@ package body ARM_HTML is
 	    begin
 		if Output_Object.HTML_Kind = HTML_4_Only then
 	            case Paragraph_Info(Format).Font is
-		        when ARM_Output.Default | ARM_Output.Roman | ARM_Output.Swiss =>
+		        when ARM_Output.Default | ARM_Output.Roman =>
 			    case Paragraph_Info(Format).Size is
 			        when 0 => return Paragraph_Info(Format).Indent * 20;
 			        when 1 => return Paragraph_Info(Format).Indent * 16; -- 20/1.25.
@@ -746,7 +839,7 @@ package body ARM_HTML is
 			        when -3 => return Paragraph_Info(Format).Indent * 40; -- 20/0.50.
 			        when others => return Value; -- Out of range.
 			    end case;
-		        when ARM_Output.Fixed => -- Start at 90% (otherwise it is huge!)
+		        when ARM_Output.Fixed | ARM_Output.Swiss => -- Start at 90% (otherwise they are huge!)
 			    case Paragraph_Info(Format).Size is
 			        when 0 => return Paragraph_Info(Format).Indent * 22; -- 20/0.90
 			        when 1 => return Paragraph_Info(Format).Indent * 18; -- 20/1.13.
@@ -791,7 +884,7 @@ package body ARM_HTML is
 	    end case;
 	    if Output_Object.HTML_Kind = HTML_4_Only then
 	        case Paragraph_Info(Format).Font is
-		    when ARM_Output.Default | ARM_Output.Roman | ARM_Output.Swiss =>
+		    when ARM_Output.Default | ARM_Output.Roman =>
 		        case Paragraph_Info(Format).Size is
 		            when 0 => null; -- Default.
 		            when 1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 125%");
@@ -801,7 +894,8 @@ package body ARM_HTML is
 		            when -3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 50%");
 		            when others => null; -- Out of range.
 		        end case;
-		    when ARM_Output.Fixed => -- Start at 90% (otherwise it is huge!)
+		    when ARM_Output.Fixed | ARM_Output.Swiss => -- Start at 90% (otherwise they are huge!)
+			-- Note: This size adjustment is for sections of text, not for in-line text.
 		        case Paragraph_Info(Format).Size is
 		            when 0 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 90%");
 		            when 1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 113%");
@@ -874,6 +968,9 @@ package body ARM_HTML is
 	Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
 	    ".\Output\" & File_Name & ".html");
 --Ada.Text_IO.Put_Line ("--Creating " & File_Name & ".html");
+	-- Save the current clause:
+	Output_Object.Current_Clause :=
+	    Ada.Strings.Unbounded.To_Unbounded_String(Clause);
 	-- File introduction:
 	if Output_Object.HTML_Kind > HTML_3 then
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.01 Transitional//EN""");
@@ -929,6 +1026,7 @@ package body ARM_HTML is
 	    Make_Style ("Notes", ARM_Output.Notes);
 	    Make_Style ("NotesHeader", ARM_Output.Notes_Header);
 	    Make_Style ("SyntaxIndented", ARM_Output.Syntax_Indented);
+	    Make_Style ("SmallSyntaxIndented", ARM_Output.Small_Syntax_Indented);
 	    Make_Style ("Indented", ARM_Output.Indented);
 	    Make_Style ("SmallIndented", ARM_Output.Small_Indented);
 	    Make_Style ("CodeIndented", ARM_Output.Code_Indented);
@@ -939,6 +1037,10 @@ package body ARM_HTML is
 	    Make_Style ("SmallExamples", ARM_Output.Small_Examples);
 	    Make_Style ("IndentedExamples", ARM_Output.Indented_Examples);
 	    Make_Style ("SmallIndentedExamples", ARM_Output.Small_Indented_Examples);
+	    Make_Style ("SwissExamples", ARM_Output.Swiss_Examples);
+	    Make_Style ("SmallSwissExamples", ARM_Output.Small_Swiss_Examples);
+	    Make_Style ("SwissIndentedExamples", ARM_Output.Swiss_Indented_Examples);
+	    Make_Style ("SmallSwissIndentedExamples", ARM_Output.Small_Swiss_Indented_Examples);
 
 	    Make_Style ("Bulleted", ARM_Output.Bulleted);
 	    Make_Style ("SmallBulleted", ARM_Output.Small_Bulleted);
@@ -1008,6 +1110,7 @@ package body ARM_HTML is
 	    Make_Style ("Notes", ARM_Output.Notes);
 	    Make_Style ("NotesHeader", ARM_Output.Notes_Header);
 	    Make_Style ("SyntaxIndented", ARM_Output.Syntax_Indented);
+	    Make_Style ("SmallSyntaxIndented", ARM_Output.Small_Syntax_Indented);
 	    Make_Style ("Indented", ARM_Output.Indented);
 	    Make_Style ("SmallIndented", ARM_Output.Small_Indented);
 	    Make_Style ("InnerIndented", ARM_Output.Inner_Indented);
@@ -1018,6 +1121,10 @@ package body ARM_HTML is
 	    Make_Style ("SmallExamples", ARM_Output.Small_Examples);
 	    Make_Style ("IndentedExamples", ARM_Output.Indented_Examples);
 	    Make_Style ("SmallIndentedExamples", ARM_Output.Small_Indented_Examples);
+	    Make_Style ("SwissExamples", ARM_Output.Swiss_Examples);
+	    Make_Style ("SmallSwissExamples", ARM_Output.Small_Swiss_Examples);
+	    Make_Style ("SwissIndentedExamples", ARM_Output.Swiss_Indented_Examples);
+	    Make_Style ("SmallSwissIndentedExamples", ARM_Output.Small_Swiss_Indented_Examples);
 
 	    Make_Style ("Bulleted", ARM_Output.Bulleted);
 	    Make_Style ("SmallBulleted", ARM_Output.Small_Bulleted);
@@ -1070,7 +1177,7 @@ package body ARM_HTML is
 	end if;
 
 	if Output_Object.Nav_on_Top then
-	    Make_Navigation_Bar (Output_Object, Clause, Clause_is_Next => False, Is_Top => True);
+	    Make_Navigation_Bar (Output_Object, Is_Top => True);
 	-- else no navigation bar
 	end if;
 
@@ -1082,12 +1189,9 @@ package body ARM_HTML is
     end Start_HTML_File;
 
 
-    procedure End_HTML_File (Output_Object : in out HTML_Output_Type;
-			     Clause : in String) is
+    procedure End_HTML_File (Output_Object : in out HTML_Output_Type) is
 	-- Internal routine.
 	-- Generate the needed text to end an HTML file. Also closes the file.
-	-- Clause is the properly formatted Clause number for the NEXT file,
-	-- if known.
     begin
 	Ada.Text_IO.New_Line (Output_Object.Output_File); -- Blank line to set off paragraphs.
 
@@ -1098,7 +1202,7 @@ package body ARM_HTML is
 	end if;
 
 	if Output_Object.Nav_on_Bottom then
-	    Make_Navigation_Bar (Output_Object, Clause, Clause_is_Next => True, Is_Top => False);
+	    Make_Navigation_Bar (Output_Object, Is_Top => False);
 	-- else no navigation bar.
 	end if;
 
@@ -1148,7 +1252,9 @@ package body ARM_HTML is
 	-- is set to HTML_3.
 	-- Ref_URL, Srch_URL, and Index_URL are the URLs (possibly relative)
 	-- for the "References", "Search", and "Index" buttons/labels,
-	-- respectively. If null, these buttons/labels are omitted.
+	-- respectively. If null, these buttons/labels link to sections named
+	-- "References", "Search", and "Index"; if these do not exist, the
+	-- buttons/labels are omitted.
 	-- If Use_Buttons is true, button images are used, otherwise text labels
 	-- are used for the navigation bar.
 	-- If Nav_On_Top is true, the navigation bar will appear in the header
@@ -1198,7 +1304,7 @@ package body ARM_HTML is
 		"Not valid object");
 	end if;
 	if Ada.Text_IO.Is_Open (Output_Object.Output_File) then
-	    End_HTML_File (Output_Object, "");
+	    End_HTML_File (Output_Object);
 	end if;
 	Output_Object.Is_Valid := False;
     end Close;
@@ -1533,11 +1639,12 @@ package body ARM_HTML is
 		 ARM_Output.Index | ARM_Output.Syntax_Summary |
 		 ARM_Output.Examples | ARM_Output.Small_Examples |
 		 ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples |
-		 ARM_Output.Syntax_Indented |
+		 ARM_Output.Swiss_Examples | ARM_Output.Small_Swiss_Examples |
+		 ARM_Output.Swiss_Indented_Examples | ARM_Output.Small_Swiss_Indented_Examples |
+		 ARM_Output.Syntax_Indented | ARM_Output.Small_Syntax_Indented |
 		 ARM_Output.Indented | ARM_Output.Small_Indented |
 		 ARM_Output.Inner_Indented | ARM_Output.Small_Inner_Indented |
-		 ARM_Output.Code_Indented |
-		 ARM_Output.Small_Code_Indented =>
+		 ARM_Output.Code_Indented | ARM_Output.Small_Code_Indented =>
 		Output_Object.Tab_Stops := Tab_Stops;
 		-- No tabs in HTML; we'll emulate them for fixed fonts.
 		-- We'll expand proportional stops here (text characters
@@ -1641,9 +1748,24 @@ package body ARM_HTML is
 	        when ARM_Output.Small_Indented_Examples =>
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><UL><UL><UL><TT><FONT SIZE=-1>");
 		    Output_Object.Char_Count := 42;
+	        when ARM_Output.Swiss_Examples =>
+	    	    Ada.Text_IO.Put (Output_Object.Output_File, "<UL>" & SWISS_FONT_CODE);
+		    Output_Object.Char_Count := 8;
+	        when ARM_Output.Small_Swiss_Examples =>
+	    	    Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL>" & SMALL_SWISS_FONT_CODE);
+		    Output_Object.Char_Count := 30;
+	        when ARM_Output.Swiss_Indented_Examples =>
+	    	    Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><UL>" & SWISS_FONT_CODE);
+		    Output_Object.Char_Count := 20;
+	        when ARM_Output.Small_Swiss_Indented_Examples =>
+	    	    Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><UL><UL><UL>" & SMALL_SWISS_FONT_CODE);
+		    Output_Object.Char_Count := 42;
 	        when ARM_Output.Syntax_Indented =>
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "<UL>");
 		    Output_Object.Char_Count := 4;
+	        when ARM_Output.Small_Syntax_Indented =>
+	            Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL><UL><FONT SIZE=-1>");
+	            Output_Object.Char_Count := 30;
 	        when ARM_Output.Code_Indented =>
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "<UL><UL>");
 		    Output_Object.Char_Count := 8;
@@ -1920,8 +2042,18 @@ package body ARM_HTML is
 		    Put_Style ("IndentedExamples");
 	        when ARM_Output.Small_Indented_Examples =>
 		    Put_Style ("SmallIndentedExamples");
+	        when ARM_Output.Swiss_Examples =>
+		    Put_Style ("SwissExamples");
+	        when ARM_Output.Small_Swiss_Examples =>
+		    Put_Style ("SmallSwissExamples");
+	        when ARM_Output.Swiss_Indented_Examples =>
+		    Put_Style ("SwissIndentedExamples");
+	        when ARM_Output.Small_Swiss_Indented_Examples =>
+		    Put_Style ("SmallSwissIndentedExamples");
 	        when ARM_Output.Syntax_Indented =>
 		    Put_Style ("SyntaxIndented");
+	        when ARM_Output.Small_Syntax_Indented =>
+		    Put_Style ("SmallSyntaxIndented");
 	        when ARM_Output.Code_Indented =>
 		    Put_Style ("CodeIndented");
 	        when ARM_Output.Small_Code_Indented =>
@@ -2228,8 +2360,18 @@ package body ARM_HTML is
 		    Put_Style ("IndentedExamples");
 	        when ARM_Output.Small_Indented_Examples =>
 		    Put_Style ("SmallIndentedExamples");
+	        when ARM_Output.Swiss_Examples =>
+		    Put_Style ("SwissExamples");
+	        when ARM_Output.Small_Swiss_Examples =>
+		    Put_Style ("SmallSwissExamples");
+	        when ARM_Output.Swiss_Indented_Examples =>
+		    Put_Style ("SwissIndentedExamples");
+	        when ARM_Output.Small_Swiss_Indented_Examples =>
+		    Put_Style ("SmallSwissIndentedExamples");
 	        when ARM_Output.Syntax_Indented =>
 		    Put_Style ("SyntaxIndented");
+	        when ARM_Output.Small_Syntax_Indented =>
+		    Put_Style ("SmallSyntaxIndented");
 	        when ARM_Output.Code_Indented =>
 		    Put_Style ("CodeIndented");
 	        when ARM_Output.Small_Code_Indented =>
@@ -2556,26 +2698,41 @@ package body ARM_HTML is
 	        when ARM_Output.Small_Indented_Examples =>
 	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></TT></UL></UL></UL></UL></UL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
+	        when ARM_Output.Swiss_Examples =>
+	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL>");
+		    Ada.Text_IO.New_Line (Output_Object.Output_File);
+	        when ARM_Output.Small_Swiss_Examples =>
+	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL>");
+		    Ada.Text_IO.New_Line (Output_Object.Output_File);
+	        when ARM_Output.Swiss_Indented_Examples =>
+	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL></UL>");
+		    Ada.Text_IO.New_Line (Output_Object.Output_File);
+	        when ARM_Output.Small_Swiss_Indented_Examples =>
+	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL></UL></UL></UL>");
+		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Syntax_Indented =>
 	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</UL>");
+		    Ada.Text_IO.New_Line (Output_Object.Output_File);
+	        when ARM_Output.Small_Syntax_Indented =>
+	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Code_Indented =>
 	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</UL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Small_Code_Indented =>
-	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL>");
+	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Indented =>
 	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</UL></UL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Small_Indented =>
-	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL></UL>");
+	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL></UL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Inner_Indented =>
 	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</UL></UL></UL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Small_Inner_Indented =>
-	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL></UL></UL>");
+	    	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT></UL></UL></UL></UL></UL></UL>");
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 	        when ARM_Output.Bulleted =>
 		    if Output_Object.Had_Prefix then
@@ -2708,7 +2865,9 @@ package body ARM_HTML is
 		    Put_End_Style (Output_Object.Paragraph_Format);
 	        when ARM_Output.Examples | ARM_Output.Small_Examples |
 	             ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples |
-	             ARM_Output.Syntax_Indented |
+	             ARM_Output.Swiss_Examples | ARM_Output.Small_Swiss_Examples |
+	             ARM_Output.Swiss_Indented_Examples | ARM_Output.Small_Swiss_Indented_Examples |
+	             ARM_Output.Syntax_Indented | ARM_Output.Small_Syntax_Indented |
 	             ARM_Output.Code_Indented | ARM_Output.Small_Code_Indented |
 	             ARM_Output.Indented | ARM_Output.Small_Indented |
 	             ARM_Output.Inner_Indented | ARM_Output.Small_Inner_Indented =>
@@ -2797,7 +2956,7 @@ package body ARM_HTML is
 
 	if not Output_Object.Big_Files then
 	    if Ada.Text_IO.Is_Open (Output_Object.Output_File) then
-	        End_HTML_File (Output_Object, Clause_Number);
+	        End_HTML_File (Output_Object);
 	    end if;
 
 	    -- Special for table of contents:
@@ -2903,7 +3062,7 @@ package body ARM_HTML is
 
 	if not Output_Object.Big_Files then
 	    if Ada.Text_IO.Is_Open (Output_Object.Output_File) then
-	        End_HTML_File (Output_Object, Clause_Number);
+	        End_HTML_File (Output_Object);
 	    end if;
 
 	    Start_HTML_File (Output_Object,
