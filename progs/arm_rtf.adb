@@ -1386,7 +1386,7 @@ package body ARM_RTF is
 		       Style_After => 110,
 		       Style_Justified => FALSE,
 		       Style_String =>
-			 "\s51\widctlpar\adjustright \li360\fs20\f1\cgrid\sa110\ql\sl-230\slmult0 \snext51 ");
+			 "\s51\widctlpar\adjustright \li360\fs20\f1\cgrid\sa110\ql\sl-240\slmult0 \snext51 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Examples),
 		       Font_Size => 16,
 		       Style_Indent => 1080,
@@ -1402,7 +1402,7 @@ package body ARM_RTF is
 		       Style_After => 110,
 		       Style_Justified => FALSE,
 		       Style_String =>
-			 "\s53\widctlpar\adjustright \li1440\fs20\f1\cgrid\sa110\ql\sl-230\slmult0 \snext53 ");
+			 "\s53\widctlpar\adjustright \li1440\fs20\f1\cgrid\sa110\ql\sl-240\slmult0 \snext53 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Indented_Examples),
 		       Font_Size => 16,
 		       Style_Indent => 2160,

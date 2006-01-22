@@ -125,6 +125,9 @@ package body ARM_HTML is
     --  1/12/06 - RLB - Added a number of parameters to Create.
     --  1/16/06 - RLB - Reduced space around button bars.
     --  1/18/06 - RLB - Added additional styles.
+    --  1/19/06 - RLB - Added code so that only styles that are used are
+    --		        included in the result (this decreases the minimum
+    --			file size by a lot).
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -530,6 +533,11 @@ package body ARM_HTML is
 		 Right_Indent => 1,
 		 Before => 0,
 		 After => 5));
+    -- Are the various styles used??
+    Paragraph_Used : array (ARM_Output.Paragraph_Type) of Boolean;
+    Revision_Used : array (ARM_Contents.Change_Version_Type) of Boolean;
+    Paranum_Used : Boolean;
+
 
     procedure Free is new Ada.Unchecked_Deallocation (Column_Text_Item_Type, Column_Text_Ptr);
 
@@ -810,6 +818,319 @@ package body ARM_HTML is
     end Make_Navigation_Bar;
 
 
+    procedure Make_Style (Output_Object : in out HTML_Output_Type;
+			  Name : in String;
+			  Format : in ARM_Output.Paragraph_Type) is
+	-- Internal routine.
+        -- Generate the style needed.
+
+        function Units_to_EMs (Value : in Natural) return Natural is
+	    -- Convert Value from indentation units to EMs. (0.1 EMs, really).
+        begin
+	    if Output_Object.HTML_Kind = HTML_4_Only then
+	        case Paragraph_Info(Format).Font is
+		    when ARM_Output.Default | ARM_Output.Roman =>
+		        case Paragraph_Info(Format).Size is
+			    when 0 => return Paragraph_Info(Format).Indent * 20;
+			    when 1 => return Paragraph_Info(Format).Indent * 16; -- 20/1.25.
+			    when 2 => return Paragraph_Info(Format).Indent * 13; -- 20/1.56.
+			    when -1 => return Paragraph_Info(Format).Indent * 25; -- 20/0.80.
+			    when -2 => return Paragraph_Info(Format).Indent * 31; -- 20/0.64.
+			    when -3 => return Paragraph_Info(Format).Indent * 40; -- 20/0.50.
+			    when others => return Value; -- Out of range.
+		        end case;
+		    when ARM_Output.Fixed | ARM_Output.Swiss => -- Start at 90% (otherwise they are huge!)
+		        case Paragraph_Info(Format).Size is
+			    when 0 => return Paragraph_Info(Format).Indent * 22; -- 20/0.90
+			    when 1 => return Paragraph_Info(Format).Indent * 18; -- 20/1.13.
+			    when 2 => return Paragraph_Info(Format).Indent * 14; -- 20/1.40.
+			    when -1 => return Paragraph_Info(Format).Indent * 28; -- 20/0.72.
+			    when -2 => return Paragraph_Info(Format).Indent * 34; -- 20/0.58.
+			    when -3 => return Paragraph_Info(Format).Indent * 44; -- 20/0.45.
+			    when others => return Value; -- Out of range.
+		        end case;
+	        end case;
+	    elsif ARM_Output."=" (Paragraph_Info(Format).Font, ARM_Output.Fixed) then
+	        -- Special case, see below.
+	        case Paragraph_Info(Format).Size is
+		    when 0 => return Paragraph_Info(Format).Indent * 20;
+		    when 1 => return Paragraph_Info(Format).Indent * 16; -- 20/1.25.
+		    when 2 => return Paragraph_Info(Format).Indent * 13; -- 20/1.56.
+		    when -1 => return Paragraph_Info(Format).Indent * 25; -- 20/0.80.
+		    when -2 => return Paragraph_Info(Format).Indent * 31; -- 20/0.64.
+		    when -3 => return Paragraph_Info(Format).Indent * 40; -- 20/0.50.
+		    when others => return Value; -- Out of range.
+	        end case;
+	    else
+	        return Paragraph_Info(Format).Indent * 20; -- No font sizes here.
+	    end if;
+        end Units_to_EMs;
+
+    begin
+	if not Paragraph_Used (Format) then
+	    return; -- Not used, so don't generate.
+	end if;
+        case Paragraph_Info(Format).Tag is
+	    when DIV =>
+	        Ada.Text_IO.Put (Output_Object.Output_File, "    DIV.");
+	    when UL =>
+	        Ada.Text_IO.Put (Output_Object.Output_File, "    UL.");
+	    when DL =>
+	        Ada.Text_IO.Put (Output_Object.Output_File, "    DL.");
+        end case;
+        Ada.Text_IO.Put (Output_Object.Output_File, Name & " {");
+        case Paragraph_Info(Format).Font is
+	    when ARM_Output.Default => null; -- Shouldn't happen.
+	    when ARM_Output.Roman => Ada.Text_IO.Put (Output_Object.Output_File, "font-family: ""Times New Roman"", Times, serif");
+	    when ARM_Output.Swiss => Ada.Text_IO.Put (Output_Object.Output_File, "font-family: Arial, Helvetica, sans-serif");
+	    when ARM_Output.Fixed => Ada.Text_IO.Put (Output_Object.Output_File, "font-family: ""Courier New"", monospace");
+        end case;
+        if Output_Object.HTML_Kind = HTML_4_Only then
+	    case Paragraph_Info(Format).Font is
+	        when ARM_Output.Default | ARM_Output.Roman =>
+		    case Paragraph_Info(Format).Size is
+		        when 0 => null; -- Default.
+		        when 1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 125%");
+		        when 2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 156%");
+		        when -1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 80%");
+		        when -2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 64%");
+		        when -3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 50%");
+		        when others => null; -- Out of range.
+		    end case;
+	        when ARM_Output.Fixed | ARM_Output.Swiss => -- Start at 90% (otherwise they are huge!)
+		    -- Note: This size adjustment is for sections of text, not for in-line text.
+		    case Paragraph_Info(Format).Size is
+		        when 0 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 90%");
+		        when 1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 113%");
+		        when 2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 140%");
+		        when -1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 72%");
+		        when -2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 58%");
+		        when -3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 45%");
+		        when others => null; -- Out of range.
+		    end case;
+	    end case;
+        elsif ARM_Output."=" (Paragraph_Info(Format).Font, ARM_Output.Fixed) then
+	    -- Special case because the font otherwise gets too small and
+	    -- loses bold-facing.
+	    case Paragraph_Info(Format).Size is
+	        when 0 => null; -- Default.
+	        when 1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 125%");
+	        when 2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 156%");
+	        when -1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 80%");
+	        when -2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 64%");
+	        when -3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 50%");
+	        when others => null; -- Out of range.
+	    end case;
+        -- else the size will be set explicitly for HTML_4_Compatible.
+        end if;
+        if Paragraph_Info(Format).Indent /= 0 then
+	    Ada.Text_IO.Put (Output_Object.Output_File, "; margin-left: ");
+	    Put_Ems (Output_Object.Output_File, Units_to_EMs(Paragraph_Info(Format).Indent));
+        end if;
+        if Paragraph_Info(Format).Right_Indent /= 0 then
+	    Ada.Text_IO.Put (Output_Object.Output_File, "; margin-right: ");
+	    Put_Ems (Output_Object.Output_File, Units_to_EMs(Paragraph_Info(Format).Right_Indent));
+        end if;
+        if Paragraph_Info(Format).Before /= 0 then
+	    Ada.Text_IO.Put (Output_Object.Output_File, "; margin-top: ");
+	    Put_Ems (Output_Object.Output_File, Paragraph_Info(Format).Before);
+        elsif Paragraph_Info(Format).Tag /= DIV then
+	    -- The default is non-zero.
+	    Ada.Text_IO.Put (Output_Object.Output_File, "; margin-top: 0em");
+        end if;
+        if Paragraph_Info(Format).After /= 0 then
+	    Ada.Text_IO.Put (Output_Object.Output_File, "; margin-bottom: ");
+	    Put_Ems (Output_Object.Output_File, Paragraph_Info(Format).After);
+        end if;
+        -- Done, close it.
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "}");
+    end Make_Style;
+
+
+    procedure Make_Hung_Text_Style
+		     (Output_Object : in out HTML_Output_Type;
+		      Name : in String;
+		      Format : in ARM_Output.Paragraph_Type;
+		      Indent : in Natural) is
+	-- Internal routine.
+        -- Generate the style needed.
+    begin
+        Ada.Text_IO.Put (Output_Object.Output_File, "    DD." & Name & " {");
+        Ada.Text_IO.Put (Output_Object.Output_File, "margin-left: ");
+        case Paragraph_Info(Format).Size is
+	    when 0 => Put_Ems (Output_Object.Output_File, Indent * 20);
+	    when 1 => Put_Ems (Output_Object.Output_File, Indent * 16); -- 20/1.25.
+	    when 2 => Put_Ems (Output_Object.Output_File, Indent * 13); -- 20/1.56.
+	    when -1 => Put_Ems (Output_Object.Output_File, Indent * 25); -- 20/0.80.
+	    when -2 => Put_Ems (Output_Object.Output_File, Indent * 31); -- 20/0.64.
+	    when -3 => Put_Ems (Output_Object.Output_File, Indent * 40); -- 20/0.50.
+	    when others => null; -- Out of range.
+        end case;
+        -- Done, close it.
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "}");
+    end Make_Hung_Text_Style;
+
+
+    procedure Make_Paragraph_Styles
+		     (Output_Object : in out HTML_Output_Type) is
+	-- Internal routine.
+	-- Generate all of the paragraph and related styles.
+    begin
+	-- Basic element styles:
+	if Paranum_Used then
+	    if Output_Object.HTML_Kind = HTML_4_Compatible then
+		Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {position: absolute; font-family: Arial, Helvetica, sans-serif; left: 0.5em; top: auto}");
+	        -- Uses absolute positioning (CSS2).
+	        -- An alternative would be: "    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; width: 3em; margin-right: -3em}"
+	        -- but this offsets the first line of each paragraph by a single space. Looks ugly.
+	        -- If absolute positioning is not supported, the paragraph number will end up on a line by itself, which is fine.
+	    else
+		Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {position: absolute; font-family: Arial, Helvetica, sans-serif; font-size: 64%; left: 0.5em; top: auto}");
+		-- Uses absolute positioning (CSS2); see above.
+	    end if;
+	end if;
+
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "    TT {font-family: ""Courier New"", monospace}");
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DT {display: compact}"); -- CSS2. This doesn't seem to work on IE 4.01, but it is harmless.
+
+        -- Revision styles:
+	if Revision_Used ('0') then
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert0 {text-decoration: underline; color: black}");
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete0 {text-decoration: line-through; color: black }");
+            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both0 {text-decoration: underline, line-through; color: black }");
+		-- Both doesn't seem to work, so forget it.
+	-- else not used, don't generate it.
+	end if;
+	if Revision_Used ('1') then
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert1 {text-decoration: underline; color: rgb(0,0,102) }"); -- Dark blue.
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete1 {text-decoration: line-through; color: rgb(0,0,102) }");
+            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both1 {text-decoration: underline, line-through; color: rgb(0,0,102) }");
+		-- Both doesn't seem to work, so forget it.
+	-- else not used, don't generate it.
+	end if;
+	if Revision_Used ('2') then
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }"); -- Dark green.
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }");
+            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: underline, line-through; color: rgb(0,102,0) }");
+		-- Both doesn't seem to work, so forget it.
+	-- else not used, don't generate it.
+	end if;
+	if Revision_Used ('3') then
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }"); -- Dark brown.
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }");
+            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both3 {text-decoration: underline, line-through; color: rgb(102,51,0) }");
+		-- Both doesn't seem to work, so forget it.
+	-- else not used, don't generate it.
+	end if;
+
+        -- Link styles:
+        if Output_Object.Use_Buttons then
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A.image:link {color: rgb(255,255,240)}"); -- This doesn't work on IE 6; we also use the
+												            --    default link colors to ensure the job gets done.
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A.image:visited {color: rgb(255,255,240)}"); -- This doesn't work on IE 6 (see above).
+	-- else used only for navigation buttons.
+	end if;
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A:link {color: rgb(0,0,255)}");
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A:visited {color: rgb(128,0,128)}");
+
+	-- Paragraph styles:
+        Make_Style (Output_Object, "Normal", ARM_Output.Normal);
+        Make_Style (Output_Object, "Wide", ARM_Output.Wide);
+        Make_Style (Output_Object, "Annotations", ARM_Output.Annotations);
+        Make_Style (Output_Object, "WideAnnotations", ARM_Output.Wide_Annotations);
+        Make_Style (Output_Object, "Index", ARM_Output.Index);
+        Make_Style (Output_Object, "SyntaxSummary", ARM_Output.Syntax_Summary);
+        Make_Style (Output_Object, "Notes", ARM_Output.Notes);
+        Make_Style (Output_Object, "NotesHeader", ARM_Output.Notes_Header);
+        Make_Style (Output_Object, "SyntaxIndented", ARM_Output.Syntax_Indented);
+        Make_Style (Output_Object, "SmallSyntaxIndented", ARM_Output.Small_Syntax_Indented);
+        Make_Style (Output_Object, "Indented", ARM_Output.Indented);
+        Make_Style (Output_Object, "SmallIndented", ARM_Output.Small_Indented);
+        Make_Style (Output_Object, "CodeIndented", ARM_Output.Code_Indented);
+        Make_Style (Output_Object, "SmallCodeIndented", ARM_Output.Small_Code_Indented);
+        Make_Style (Output_Object, "InnerIndented", ARM_Output.Inner_Indented);
+        Make_Style (Output_Object, "SmallInnerIndented", ARM_Output.Small_Inner_Indented);
+        Make_Style (Output_Object, "Examples", ARM_Output.Examples);
+        Make_Style (Output_Object, "SmallExamples", ARM_Output.Small_Examples);
+        Make_Style (Output_Object, "IndentedExamples", ARM_Output.Indented_Examples);
+        Make_Style (Output_Object, "SmallIndentedExamples", ARM_Output.Small_Indented_Examples);
+        Make_Style (Output_Object, "SwissExamples", ARM_Output.Swiss_Examples);
+        Make_Style (Output_Object, "SmallSwissExamples", ARM_Output.Small_Swiss_Examples);
+        Make_Style (Output_Object, "SwissIndentedExamples", ARM_Output.Swiss_Indented_Examples);
+        Make_Style (Output_Object, "SmallSwissIndentedExamples", ARM_Output.Small_Swiss_Indented_Examples);
+
+        Make_Style (Output_Object, "Bulleted", ARM_Output.Bulleted);
+        Make_Style (Output_Object, "SmallBulleted", ARM_Output.Small_Bulleted);
+        Make_Style (Output_Object, "NestedBulleted", ARM_Output.Nested_Bulleted);
+        Make_Style (Output_Object, "SmallNestedBulleted", ARM_Output.Small_Nested_Bulleted);
+        Make_Style (Output_Object, "NestedX2Bulleted", ARM_Output.Nested_X2_Bulleted);
+        Make_Style (Output_Object, "SmallNestedX2Bulleted", ARM_Output.Small_Nested_X2_Bulleted);
+        Make_Style (Output_Object, "IndentedBulleted", ARM_Output.Indented_Bulleted);
+        Make_Style (Output_Object, "IndentedNestedBulleted", ARM_Output.Indented_Nested_Bulleted);
+        Make_Style (Output_Object, "CodeIndentedBulleted", ARM_Output.Code_Indented_Bulleted);
+        Make_Style (Output_Object, "CodeIndentedNestedBulleted", ARM_Output.Code_Indented_Nested_Bulleted);
+        Make_Style (Output_Object, "SyntaxIndentedBulleted", ARM_Output.Syntax_Indented_Bulleted);
+        Make_Style (Output_Object, "NotesBulleted", ARM_Output.Notes_Bulleted);
+        Make_Style (Output_Object, "NotesNestedBulleted", ARM_Output.Notes_Nested_Bulleted);
+
+	if Paragraph_Used (ARM_Output.Hanging) then
+            Make_Style (Output_Object, "Hanging", ARM_Output.Hanging);
+            Make_Hung_Text_Style (Output_Object, "Hanging", ARM_Output.Hanging, Indent => 3);
+	-- else not used.
+	end if;
+	if Paragraph_Used (ARM_Output.Indented_Hanging) then
+            Make_Style (Output_Object, "IndentedHanging", ARM_Output.Indented_Hanging);
+            Make_Hung_Text_Style (Output_Object, "IndentedHanging", ARM_Output.Indented_Hanging, Indent => 1);
+	-- else not used.
+	end if;
+	if Paragraph_Used (ARM_Output.Hanging_in_Bulleted) then
+            Make_Style (Output_Object, "HangingInBulleted", ARM_Output.Hanging_in_Bulleted);
+            Make_Hung_Text_Style (Output_Object, "HangingInBulleted", ARM_Output.Hanging_in_Bulleted, Indent => 2);
+	-- else not used.
+	end if;
+	if Paragraph_Used (ARM_Output.Small_Hanging) then
+            Make_Style (Output_Object, "SmallHanging", ARM_Output.Small_Hanging);
+            Make_Hung_Text_Style (Output_Object, "SmallHanging", ARM_Output.Small_Hanging, Indent => 3);
+	-- else not used.
+	end if;
+	if Paragraph_Used (ARM_Output.Small_Indented_Hanging) then
+            Make_Style (Output_Object, "SmallIndentedHanging", ARM_Output.Small_Indented_Hanging);
+            Make_Hung_Text_Style (Output_Object, "SmallIndentedHanging", ARM_Output.Small_Indented_Hanging, Indent => 1);
+	-- else not used.
+	end if;
+	if Paragraph_Used (ARM_Output.Small_Hanging_in_Bulleted) then
+            Make_Style (Output_Object, "SmallHangingInBulleted", ARM_Output.Small_Hanging_in_Bulleted);
+            Make_Hung_Text_Style (Output_Object, "SmallHangingInBulleted", ARM_Output.Small_Hanging_in_Bulleted, Indent => 2);
+	-- else not used.
+	end if;
+
+	if Paragraph_Used (ARM_Output.Enumerated) then
+            Make_Style (Output_Object, "Enumerated", ARM_Output.Enumerated);
+	-- else not used.
+	end if;
+	if Paragraph_Used (ARM_Output.Enumerated) or Paragraph_Used (ARM_Output.Nested_Enumerated) then
+            Make_Hung_Text_Style (Output_Object, "Enumerated", ARM_Output.Enumerated, Indent => 1); -- Also used for nested style.
+	end if;
+	if Paragraph_Used (ARM_Output.Small_Enumerated) then
+            Make_Style (Output_Object, "SmallEnumerated", ARM_Output.Small_Enumerated);
+	-- else not used.
+	end if;
+	if Paragraph_Used (ARM_Output.Small_Enumerated) or Paragraph_Used (ARM_Output.Small_Nested_Enumerated) then
+            Make_Hung_Text_Style (Output_Object, "SmallEnumerated", ARM_Output.Small_Enumerated, Indent => 1); -- Also used for nested style.
+	end if;
+	if Paragraph_Used (ARM_Output.Small_Nested_Enumerated) then
+            Make_Style (Output_Object, "NestedEnumerated", ARM_Output.Nested_Enumerated);
+	-- else not used.
+	end if;
+	if Paragraph_Used (ARM_Output.Small_Nested_Enumerated) then
+            Make_Style (Output_Object, "SmallNestedEnumerated", ARM_Output.Small_Nested_Enumerated);
+	-- else not used.
+	end if;
+    end Make_Paragraph_Styles;
+
+    MAGIC_STYLE_MARKER : constant String := "&%$# STYLES GO HERE #$%&";
+
+
     procedure Start_HTML_File (Output_Object : in out HTML_Output_Type;
 			       File_Name : in String;
 			       Title : in String;
@@ -819,155 +1140,15 @@ package body ARM_HTML is
 	-- file. The file name is just the name portion, not the path or
 	-- extension. Clause is the properly formatted Clause number for
 	-- this file, if known.
-
-	procedure Make_Style (Name : in String;
-			      Format : in ARM_Output.Paragraph_Type) is
-	    -- Generate the style needed.
-
-	    function Units_to_EMs (Value : in Natural) return Natural is
-		-- Convert Value from indentation units to EMs. (0.1 EMs, really).
-	    begin
-		if Output_Object.HTML_Kind = HTML_4_Only then
-	            case Paragraph_Info(Format).Font is
-		        when ARM_Output.Default | ARM_Output.Roman =>
-			    case Paragraph_Info(Format).Size is
-			        when 0 => return Paragraph_Info(Format).Indent * 20;
-			        when 1 => return Paragraph_Info(Format).Indent * 16; -- 20/1.25.
-			        when 2 => return Paragraph_Info(Format).Indent * 13; -- 20/1.56.
-			        when -1 => return Paragraph_Info(Format).Indent * 25; -- 20/0.80.
-			        when -2 => return Paragraph_Info(Format).Indent * 31; -- 20/0.64.
-			        when -3 => return Paragraph_Info(Format).Indent * 40; -- 20/0.50.
-			        when others => return Value; -- Out of range.
-			    end case;
-		        when ARM_Output.Fixed | ARM_Output.Swiss => -- Start at 90% (otherwise they are huge!)
-			    case Paragraph_Info(Format).Size is
-			        when 0 => return Paragraph_Info(Format).Indent * 22; -- 20/0.90
-			        when 1 => return Paragraph_Info(Format).Indent * 18; -- 20/1.13.
-			        when 2 => return Paragraph_Info(Format).Indent * 14; -- 20/1.40.
-			        when -1 => return Paragraph_Info(Format).Indent * 28; -- 20/0.72.
-			        when -2 => return Paragraph_Info(Format).Indent * 34; -- 20/0.58.
-			        when -3 => return Paragraph_Info(Format).Indent * 44; -- 20/0.45.
-			        when others => return Value; -- Out of range.
-			    end case;
-		    end case;
-		elsif ARM_Output."=" (Paragraph_Info(Format).Font, ARM_Output.Fixed) then
-		    -- Special case, see below.
-		    case Paragraph_Info(Format).Size is
-		        when 0 => return Paragraph_Info(Format).Indent * 20;
-		        when 1 => return Paragraph_Info(Format).Indent * 16; -- 20/1.25.
-		        when 2 => return Paragraph_Info(Format).Indent * 13; -- 20/1.56.
-		        when -1 => return Paragraph_Info(Format).Indent * 25; -- 20/0.80.
-		        when -2 => return Paragraph_Info(Format).Indent * 31; -- 20/0.64.
-		        when -3 => return Paragraph_Info(Format).Indent * 40; -- 20/0.50.
-		        when others => return Value; -- Out of range.
-		    end case;
-		else
-		    return Paragraph_Info(Format).Indent * 20; -- No font sizes here.
-		end if;
-	    end Units_to_EMs;
-
-	begin
-	    case Paragraph_Info(Format).Tag is
-		when DIV =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "    DIV.");
-		when UL =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "    UL.");
-		when DL =>
-		    Ada.Text_IO.Put (Output_Object.Output_File, "    DL.");
-	    end case;
-	    Ada.Text_IO.Put (Output_Object.Output_File, Name & " {");
-	    case Paragraph_Info(Format).Font is
-		when ARM_Output.Default => null; -- Shouldn't happen.
-		when ARM_Output.Roman => Ada.Text_IO.Put (Output_Object.Output_File, "font-family: ""Times New Roman"", Times, serif");
-		when ARM_Output.Swiss => Ada.Text_IO.Put (Output_Object.Output_File, "font-family: Arial, Helvetica, sans-serif");
-		when ARM_Output.Fixed => Ada.Text_IO.Put (Output_Object.Output_File, "font-family: ""Courier New"", monospace");
-	    end case;
-	    if Output_Object.HTML_Kind = HTML_4_Only then
-	        case Paragraph_Info(Format).Font is
-		    when ARM_Output.Default | ARM_Output.Roman =>
-		        case Paragraph_Info(Format).Size is
-		            when 0 => null; -- Default.
-		            when 1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 125%");
-		            when 2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 156%");
-		            when -1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 80%");
-		            when -2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 64%");
-		            when -3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 50%");
-		            when others => null; -- Out of range.
-		        end case;
-		    when ARM_Output.Fixed | ARM_Output.Swiss => -- Start at 90% (otherwise they are huge!)
-			-- Note: This size adjustment is for sections of text, not for in-line text.
-		        case Paragraph_Info(Format).Size is
-		            when 0 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 90%");
-		            when 1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 113%");
-		            when 2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 140%");
-		            when -1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 72%");
-		            when -2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 58%");
-		            when -3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 45%");
-		            when others => null; -- Out of range.
-		        end case;
-		end case;
-	    elsif ARM_Output."=" (Paragraph_Info(Format).Font, ARM_Output.Fixed) then
-		-- Special case because the font otherwise gets too small and
-		-- loses bold-facing.
-	        case Paragraph_Info(Format).Size is
-	            when 0 => null; -- Default.
-	            when 1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 125%");
-	            when 2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 156%");
-	            when -1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 80%");
-	            when -2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 64%");
-	            when -3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 50%");
-	            when others => null; -- Out of range.
-	        end case;
-	    -- else the size will be set explicitly for HTML_4_Compatible.
-	    end if;
-	    if Paragraph_Info(Format).Indent /= 0 then
-		Ada.Text_IO.Put (Output_Object.Output_File, "; margin-left: ");
-	        Put_Ems (Output_Object.Output_File, Units_to_EMs(Paragraph_Info(Format).Indent));
-	    end if;
-	    if Paragraph_Info(Format).Right_Indent /= 0 then
-		Ada.Text_IO.Put (Output_Object.Output_File, "; margin-right: ");
-	        Put_Ems (Output_Object.Output_File, Units_to_EMs(Paragraph_Info(Format).Right_Indent));
-	    end if;
-	    if Paragraph_Info(Format).Before /= 0 then
-		Ada.Text_IO.Put (Output_Object.Output_File, "; margin-top: ");
-		Put_Ems (Output_Object.Output_File, Paragraph_Info(Format).Before);
-	    elsif Paragraph_Info(Format).Tag /= DIV then
-		-- The default is non-zero.
-		Ada.Text_IO.Put (Output_Object.Output_File, "; margin-top: 0em");
-	    end if;
-	    if Paragraph_Info(Format).After /= 0 then
-		Ada.Text_IO.Put (Output_Object.Output_File, "; margin-bottom: ");
-		Put_Ems (Output_Object.Output_File, Paragraph_Info(Format).After);
-	    end if;
-	    -- Done, close it.
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "}");
-	end Make_Style;
-
-	procedure Make_Hung_Text_Style
-			 (Name : in String;
-			  Format : in ARM_Output.Paragraph_Type;
-			  Indent : in Natural) is
-	    -- Generate the style needed.
-	begin
-	    Ada.Text_IO.Put (Output_Object.Output_File, "    DD." & Name & " {");
-	    Ada.Text_IO.Put (Output_Object.Output_File, "margin-left: ");
-	    case Paragraph_Info(Format).Size is
-	        when 0 => Put_Ems (Output_Object.Output_File, Indent * 20);
-	        when 1 => Put_Ems (Output_Object.Output_File, Indent * 16); -- 20/1.25.
-	        when 2 => Put_Ems (Output_Object.Output_File, Indent * 13); -- 20/1.56.
-	        when -1 => Put_Ems (Output_Object.Output_File, Indent * 25); -- 20/0.80.
-	        when -2 => Put_Ems (Output_Object.Output_File, Indent * 31); -- 20/0.64.
-	        when -3 => Put_Ems (Output_Object.Output_File, Indent * 40); -- 20/0.50.
-	        when others => null; -- Out of range.
-	    end case;
-	    -- Done, close it.
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "}");
-	end Make_Hung_Text_Style;
-
     begin
-	Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
-	    ".\Output\" & File_Name & ".html");
+	if Output_Object.HTML_Kind > HTML_3 then
+	    Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
+	        ".\Output\" & File_Name & ".$$$");
 --Ada.Text_IO.Put_Line ("--Creating " & File_Name & ".html");
+	else
+	    Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
+	        ".\Output\" & File_Name & ".html");
+	end if;
 	-- Save the current clause:
 	Output_Object.Current_Clause :=
 	    Ada.Strings.Unbounded.To_Unbounded_String(Clause);
@@ -990,175 +1171,37 @@ package body ARM_HTML is
 	     -- The style sheet.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <STYLE type=""text/css"">");
 	    -- Element styles:
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {position: absolute; font-family: Arial, Helvetica, sans-serif; font-size: 64%; left: 0.5em; top: auto}");
-		-- CSS2. See HTML_4_Compatible for comments.
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    H4.centered {text-align: center}");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.roman {font-family: ""Times New Roman"", Times, serif}");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    TT {font-family: ""Courier New"", monospace; font-size: 90%}");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    H4.centered {text-align: center}");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DT {display: compact}"); -- CSS2. This doesn't seem to work on IE 4.01, but it is harmless.
-
-	    -- Revision styles:
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert0 {text-decoration: underline; color: black}");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete0 {text-decoration: line-through; color: black }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both0 {text-decoration: underline, line-through; color: black }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert1 {text-decoration: underline; color: rgb(0,0,91) }"); -- Dark blue.
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete1 {text-decoration: line-through; color: rgb(0,0,91) }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both1 {text-decoration: underline, line-through; color: rgb(0,0,91) }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(0,91,0) }"); -- Dark green.
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete2 {text-decoration: line-through; color: rgb(0,91,0) }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: underline, line-through; color: rgb(0,91,0) }");
-
-	    -- Link styles:
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A.image:link {color: rgb(255,255,240)}"); -- This doesn't work on IE 6; we also use the
-													    --    default link colors to ensure the job gets done.
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A.image:visited {color: rgb(255,255,240)}"); -- This doesn't work on IE 6 (see above).
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A:link {color: rgb(0,0,255)}");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A:visited {color: rgb(128,0,128)}");
 
 	    -- Paragraph styles:
-	    Make_Style ("Normal", ARM_Output.Normal);
-	    Make_Style ("Wide", ARM_Output.Wide);
-	    Make_Style ("Annotations", ARM_Output.Annotations);
-	    Make_Style ("WideAnnotations", ARM_Output.Wide_Annotations);
-	    Make_Style ("Index", ARM_Output.Index);
-	    Make_Style ("SyntaxSummary", ARM_Output.Syntax_Summary);
-	    Make_Style ("Notes", ARM_Output.Notes);
-	    Make_Style ("NotesHeader", ARM_Output.Notes_Header);
-	    Make_Style ("SyntaxIndented", ARM_Output.Syntax_Indented);
-	    Make_Style ("SmallSyntaxIndented", ARM_Output.Small_Syntax_Indented);
-	    Make_Style ("Indented", ARM_Output.Indented);
-	    Make_Style ("SmallIndented", ARM_Output.Small_Indented);
-	    Make_Style ("CodeIndented", ARM_Output.Code_Indented);
-	    Make_Style ("SmallCodeIndented", ARM_Output.Small_Code_Indented);
-	    Make_Style ("InnerIndented", ARM_Output.Inner_Indented);
-	    Make_Style ("SmallInnerIndented", ARM_Output.Small_Inner_Indented);
-	    Make_Style ("Examples", ARM_Output.Examples);
-	    Make_Style ("SmallExamples", ARM_Output.Small_Examples);
-	    Make_Style ("IndentedExamples", ARM_Output.Indented_Examples);
-	    Make_Style ("SmallIndentedExamples", ARM_Output.Small_Indented_Examples);
-	    Make_Style ("SwissExamples", ARM_Output.Swiss_Examples);
-	    Make_Style ("SmallSwissExamples", ARM_Output.Small_Swiss_Examples);
-	    Make_Style ("SwissIndentedExamples", ARM_Output.Swiss_Indented_Examples);
-	    Make_Style ("SmallSwissIndentedExamples", ARM_Output.Small_Swiss_Indented_Examples);
+	    --Paragraph_Used := (others => True); -- Force showing all, we don't know what is used.
+	    --Revision_Used := (others => True);
+	    --Paranum_Used := True;
+	    --Make_Paragraph_Styles (Output_Object);
+	    -- Dummy line to be replaced after the file is created.
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, MAGIC_STYLE_MARKER);
 
-	    Make_Style ("Bulleted", ARM_Output.Bulleted);
-	    Make_Style ("SmallBulleted", ARM_Output.Small_Bulleted);
-	    Make_Style ("NestedBulleted", ARM_Output.Nested_Bulleted);
-	    Make_Style ("SmallNestedBulleted", ARM_Output.Small_Nested_Bulleted);
-	    Make_Style ("NestedX2Bulleted", ARM_Output.Nested_X2_Bulleted);
-	    Make_Style ("SmallNestedX2Bulleted", ARM_Output.Small_Nested_X2_Bulleted);
-	    Make_Style ("IndentedBulleted", ARM_Output.Indented_Bulleted);
-	    Make_Style ("IndentedNestedBulleted", ARM_Output.Indented_Nested_Bulleted);
-	    Make_Style ("CodeIndentedBulleted", ARM_Output.Code_Indented_Bulleted);
-	    Make_Style ("CodeIndentedNestedBulleted", ARM_Output.Code_Indented_Nested_Bulleted);
-	    Make_Style ("SyntaxIndentedBulleted", ARM_Output.Syntax_Indented_Bulleted);
-	    Make_Style ("NotesBulleted", ARM_Output.Notes_Bulleted);
-	    Make_Style ("NotesNestedBulleted", ARM_Output.Notes_Nested_Bulleted);
-
-	    Make_Style ("Hanging", ARM_Output.Hanging);
-	    Make_Hung_Text_Style ("Hanging", ARM_Output.Hanging, Indent => 3);
-	    Make_Style ("IndentedHanging", ARM_Output.Indented_Hanging);
-	    Make_Hung_Text_Style ("IndentedHanging", ARM_Output.Indented_Hanging, Indent => 1);
-	    Make_Style ("HangingInBulleted", ARM_Output.Hanging_in_Bulleted);
-	    Make_Hung_Text_Style ("HangingInBulleted", ARM_Output.Hanging_in_Bulleted, Indent => 2);
-	    Make_Style ("SmallHanging", ARM_Output.Small_Hanging);
-	    Make_Hung_Text_Style ("SmallHanging", ARM_Output.Small_Hanging, Indent => 3);
-	    Make_Style ("SmallIndentedHanging", ARM_Output.Small_Indented_Hanging);
-	    Make_Hung_Text_Style ("SmallIndentedHanging", ARM_Output.Small_Indented_Hanging, Indent => 1);
-	    Make_Style ("SmallHangingInBulleted", ARM_Output.Small_Hanging_in_Bulleted);
-	    Make_Hung_Text_Style ("SmallHangingInBulleted", ARM_Output.Small_Hanging_in_Bulleted, Indent => 2);
-
-	    Make_Style ("Enumerated", ARM_Output.Enumerated);
-	    Make_Hung_Text_Style ("Enumerated", ARM_Output.Enumerated, Indent => 1); -- Also used for nested style.
-	    Make_Style ("SmallEnumerated", ARM_Output.Small_Enumerated);
-	    Make_Hung_Text_Style ("SmallEnumerated", ARM_Output.Small_Enumerated, Indent => 1); -- Also used for nested style.
-	    Make_Style ("NestedEnumerated", ARM_Output.Nested_Enumerated);
-	    Make_Style ("SmallNestedEnumerated", ARM_Output.Small_Nested_Enumerated);
+	    Paragraph_Used := (others => False);
+	    Revision_Used := (others => False);
+	    Paranum_Used := False;
 
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    </STYLE>");
 	elsif Output_Object.HTML_Kind = HTML_4_Compatible then
 	     -- The style sheet.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    <STYLE type=""text/css"">");
-	    -- Element styles:
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {position: absolute; font-family: Arial, Helvetica, sans-serif; left: 0.5em; top: auto}");
-		-- Uses absolute positioning (CSS2).
-		-- An alternative would be: "    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; width: 3em; margin-right: -3em}"
-		-- but this offsets the first line of each paragraph by a single space. Looks ugly.
-		-- If absolute positioning is not supported, the paragraph number will end up on a line by itself, which is fine.
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    TT {font-family: ""Courier New"", monospace}");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DT {display: compact}"); -- CSS2. This doesn't seem to work on IE 4.01, but it is harmless.
-
-	    -- Revision styles:
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert0 {text-decoration: underline; color: black}");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete0 {text-decoration: line-through; color: black }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both0 {text-decoration: underline, line-through; color: black }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert1 {text-decoration: underline; color: rgb(0,0,91) }"); -- Dark blue.
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete1 {text-decoration: line-through; color: rgb(0,0,91) }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both1 {text-decoration: underline, line-through; color: rgb(0,0,91) }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(0,91,0) }"); -- Dark green.
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete2 {text-decoration: line-through; color: rgb(0,91,0) }");
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: underline, line-through; color: rgb(0,91,0) }");
 
 	    -- Paragraph styles:
-	    Make_Style ("Normal", ARM_Output.Normal);
-	    Make_Style ("Wide", ARM_Output.Wide);
-	    Make_Style ("Annotations", ARM_Output.Annotations);
-	    Make_Style ("WideAnnotations", ARM_Output.Wide_Annotations);
-	    Make_Style ("Index", ARM_Output.Index);
-	    Make_Style ("SyntaxSummary", ARM_Output.Syntax_Summary);
-	    Make_Style ("Notes", ARM_Output.Notes);
-	    Make_Style ("NotesHeader", ARM_Output.Notes_Header);
-	    Make_Style ("SyntaxIndented", ARM_Output.Syntax_Indented);
-	    Make_Style ("SmallSyntaxIndented", ARM_Output.Small_Syntax_Indented);
-	    Make_Style ("Indented", ARM_Output.Indented);
-	    Make_Style ("SmallIndented", ARM_Output.Small_Indented);
-	    Make_Style ("InnerIndented", ARM_Output.Inner_Indented);
-	    Make_Style ("SmallInnerIndented", ARM_Output.Small_Inner_Indented);
-	    Make_Style ("CodeIndented", ARM_Output.Code_Indented);
-	    Make_Style ("SmallCodeIndented", ARM_Output.Small_Code_Indented);
-	    Make_Style ("Examples", ARM_Output.Examples);
-	    Make_Style ("SmallExamples", ARM_Output.Small_Examples);
-	    Make_Style ("IndentedExamples", ARM_Output.Indented_Examples);
-	    Make_Style ("SmallIndentedExamples", ARM_Output.Small_Indented_Examples);
-	    Make_Style ("SwissExamples", ARM_Output.Swiss_Examples);
-	    Make_Style ("SmallSwissExamples", ARM_Output.Small_Swiss_Examples);
-	    Make_Style ("SwissIndentedExamples", ARM_Output.Swiss_Indented_Examples);
-	    Make_Style ("SmallSwissIndentedExamples", ARM_Output.Small_Swiss_Indented_Examples);
-
-	    Make_Style ("Bulleted", ARM_Output.Bulleted);
-	    Make_Style ("SmallBulleted", ARM_Output.Small_Bulleted);
-	    Make_Style ("NestedBulleted", ARM_Output.Nested_Bulleted);
-	    Make_Style ("SmallNestedBulleted", ARM_Output.Small_Nested_Bulleted);
-	    Make_Style ("NestedX2Bulleted", ARM_Output.Nested_X2_Bulleted);
-	    Make_Style ("SmallNestedX2Bulleted", ARM_Output.Small_Nested_X2_Bulleted);
-	    Make_Style ("IndentedBulleted", ARM_Output.Indented_Bulleted);
-	    Make_Style ("IndentedNestedBulleted", ARM_Output.Indented_Nested_Bulleted);
-	    Make_Style ("CodeIndentedBulleted", ARM_Output.Code_Indented_Bulleted);
-	    Make_Style ("CodeIndentedNestedBulleted", ARM_Output.Code_Indented_Nested_Bulleted);
-	    Make_Style ("SyntaxIndentedBulleted", ARM_Output.Syntax_Indented_Bulleted);
-	    Make_Style ("NotesBulleted", ARM_Output.Notes_Bulleted);
-	    Make_Style ("NotesNestedBulleted", ARM_Output.Notes_Nested_Bulleted);
-
-	    Make_Style ("Hanging", ARM_Output.Hanging);
-	    Make_Hung_Text_Style ("Hanging", ARM_Output.Hanging, Indent => 3);
-	    Make_Style ("IndentedHanging", ARM_Output.Indented_Hanging);
-	    Make_Hung_Text_Style ("IndentedHanging", ARM_Output.Indented_Hanging, Indent => 1);
-	    Make_Style ("HangingInBulleted", ARM_Output.Hanging_in_Bulleted);
-	    Make_Hung_Text_Style ("HangingInBulleted", ARM_Output.Hanging_in_Bulleted, Indent => 2);
-	    Make_Style ("SmallHanging", ARM_Output.Small_Hanging);
-	    Make_Hung_Text_Style ("SmallHanging", ARM_Output.Small_Hanging, Indent => 3);
-	    Make_Style ("SmallIndentedHanging", ARM_Output.Small_Indented_Hanging);
-	    Make_Hung_Text_Style ("SmallIndentedHanging", ARM_Output.Small_Indented_Hanging, Indent => 1);
-	    Make_Style ("SmallHangingInBulleted", ARM_Output.Small_Hanging_in_Bulleted);
-	    Make_Hung_Text_Style ("SmallHangingInBulleted", ARM_Output.Small_Hanging_in_Bulleted, Indent => 2);
-
-	    Make_Style ("Enumerated", ARM_Output.Enumerated);
-	    Make_Hung_Text_Style ("Enumerated", ARM_Output.Enumerated, Indent => 1); -- Also used for nested style.
-	    Make_Style ("SmallEnumerated", ARM_Output.Small_Enumerated);
-	    Make_Hung_Text_Style ("SmallEnumerated", ARM_Output.Small_Enumerated, Indent => 1); -- Also used for nested style.
-	    Make_Style ("NestedEnumerated", ARM_Output.Nested_Enumerated);
-	    Make_Style ("SmallNestedEnumerated", ARM_Output.Small_Nested_Enumerated);
+	    --Paragraph_Used := (others => True); -- Force showing all, we don't know what is used.
+	    --Revision_Used := (others => True);
+	    --Paranum_Used := True;
+	    --Make_Paragraph_Styles (Output_Object);
+	    -- Dummy line to be replaced after the file is created.
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, MAGIC_STYLE_MARKER);
+	    Paragraph_Used := (others => False);
+	    Revision_Used := (others => False);
+	    Paranum_Used := False;
 
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    </STYLE>");
 	end if;
@@ -1213,7 +1256,42 @@ package body ARM_HTML is
 
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "</BODY>");
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "</HTML>");
-	Ada.Text_IO.Close (Output_Object.Output_File);
+	if Output_Object.HTML_Kind <= HTML_3 then
+	    Ada.Text_IO.Close (Output_Object.Output_File);
+	else -- Close and reread the file to add JUST the styles by the file;
+	     -- this decreases the minimun size of the files (by as much as
+	     -- 7K as of this writing [1/2006]), which matters when there are
+	     -- hundreds.
+	    declare
+		Original_Name : constant String := Ada.Text_IO.Name (Output_Object.Output_File);
+		Reading_File : Ada.Text_IO.File_Type;
+		Real_Name : constant String :=
+		    Ada.Strings.Fixed.Head (Original_Name, Original_Name'Length-3) & "html";
+		Buffer : String (1..1000);
+		Len : Natural;
+	    begin
+		Ada.Text_IO.Close (Output_Object.Output_File);
+	        Ada.Text_IO.Open (Reading_File, Ada.Text_IO.In_File,
+	            Original_Name);
+	        Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
+	            Real_Name);
+		begin
+		    loop
+			Ada.Text_IO.Get_Line (Reading_File, Buffer, Len);
+			if Buffer(1..Len) = MAGIC_STYLE_MARKER then
+			    -- Output only the styles used here.
+			    Make_Paragraph_Styles (Output_Object);
+			else
+			    Ada.Text_IO.Put_Line (Output_Object.Output_File, Buffer(1..Len));
+			end if;
+		    end loop;
+		exception
+		    when Ada.Text_IO.End_Error => null; -- Done copying.
+		end;
+		Ada.Text_IO.Close (Output_Object.Output_File);
+		Ada.Text_IO.Delete (Reading_File); -- This was temporary.
+	    end;
+	end if;
     end End_HTML_File;
 
 
@@ -1361,6 +1439,7 @@ package body ARM_HTML is
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<UL><UL><TABLE Width=""70%"">"); -- Table with no border or caption, takes up 70% of the screen.
 	    else
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<DIV Class=""CodeIndented""><TABLE Width=""70%"">"); -- Table with no border or caption, takes up 70% of the screen.
+		Paragraph_Used(ARM_Output.Code_Indented) := True;
 	    end if;
 	    -- And start the first row:
 	    Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TD align=""left"">");
@@ -2005,6 +2084,7 @@ package body ARM_HTML is
 
 	elsif Output_Object.HTML_Kind = HTML_4_Compatible then
 	    if Number /= "" then -- Has paragraph number.
+		Paranum_Used := True;
 		Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Class=""paranum"">");
 	        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=-2>");
 	        Ada.Text_IO.Put (Output_Object.Output_File, Number);
@@ -2325,6 +2405,7 @@ package body ARM_HTML is
 	    end if;
 	else -- HTML_4_Only.
 	    if Number /= "" then -- Has paragraph number.
+		Paranum_Used := True;
 	        Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Class=""paranum"">");
 	        Ada.Text_IO.Put (Output_Object.Output_File, Number);
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</DIV>");
@@ -2619,6 +2700,7 @@ package body ARM_HTML is
 		end if;
 	    end if;
 	end if;
+	Paragraph_Used(Format) := True;
 
 	-- Note: No_Breaks and Keep_with_Next have no effect here, because
 	-- HTML doesn't have page breaks.
@@ -3046,6 +3128,7 @@ package body ARM_HTML is
 	    if Output_Object.HTML_Kind = HTML_3 then
 		return "<U>" & New_Header_Text & "</U> <S>" & Old_Header_Text & "</S>";
 	    else
+		Revision_Used(Version) := True;
 		return "<SPAN class=""insert" & Version & """>" & New_Header_Text &
 		  "</SPAN> <SPAN class=""delete" & Version & """>" & Old_Header_Text & "</SPAN>";
 	    end if;
@@ -3200,6 +3283,7 @@ package body ARM_HTML is
 
 	if Output_Object.HTML_Kind /= HTML_3 then
             Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Class=""SyntaxIndented"">");
+	    Paragraph_Used(ARM_Output.Syntax_Indented) := True;
 	end if;
         Ada.Text_IO.Put (Output_Object.Output_File, "<TABLE frame=""border"" rules=""all"" border=""2"">");
         Ada.Text_IO.Put (Output_Object.Output_File, "<CAPTION>");
@@ -4067,6 +4151,7 @@ package body ARM_HTML is
 	    end case;
 	    Put_Compatibility_Font_Info (Output_Object, Output_Object.Paragraph_Format);
 	end if;
+	Paragraph_Used(Output_Object.Paragraph_Format) := True;
         Output_Object.Char_Count := 0;
 	Output_Object.Disp_Char_Count := 0;
 	Output_Object.Any_Nonspace := False;
@@ -4247,6 +4332,7 @@ package body ARM_HTML is
 		    else
 		        --Output_Text (Output_Object, "<INS>");
 		        Output_Text (Output_Object, "<SPAN class=""insert" & Version & """>");
+			Revision_Used(Version) := True;
 		    end if;
 		when ARM_Output.Deletion =>
 		    if Output_Object.HTML_Kind = HTML_3 then
@@ -4254,6 +4340,7 @@ package body ARM_HTML is
 		    else
 		        --Output_Text (Output_Object, "<DEL>");
 		        Output_Text (Output_Object, "<SPAN class=""delete" & Version & """>");
+			Revision_Used(Version) := True;
 		    end if;
 		when ARM_Output.Both =>
 		    if Output_Object.HTML_Kind = HTML_3 then
@@ -4265,6 +4352,7 @@ package body ARM_HTML is
 			-- to nest them. But that might not be right, either (it works on IE).
 		        Output_Text (Output_Object, "<SPAN class=""insert" & Added_Version & """>");
 		        Output_Text (Output_Object, "<SPAN class=""delete" & Version & """>");
+			Revision_Used(Version) := True;
 		    end if;
 		when ARM_Output.None =>
 		    null;
