@@ -1,7 +1,7 @@
-@Part(title, Root="rat.msm")
+@Part(intro, Root="rat.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/Rationale/intro.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/01/19 06:31:38 $}
+@comment{$Revision: 1.3 $ $Date: 2006/01/22 05:07:39 $}
 
 @LabeledSection{Introduction}
 
@@ -173,7 +173,7 @@ namely, inclusion of the Ravenscar profile
 and a solution to the problem of mutually dependent types across two packages
 (see Section @RefSecNum{Overview: Structure, visibility, and limited types} below).
 
-@leading@;The ARG is then requested to pay particular attention to
+@leading@keepnext@;The ARG is then requested to pay particular attention to
 @begin{Description}
 A@\Improvements that will maintain or improve Ada's
  advantages, especially in those user domains where safety
@@ -196,7 +196,7 @@ is interesting that WG9 rejected the thought that "design by
 contract" features should be added to the above general
 categories on the grounds that they would not be static.
 
-@leading@;The ARG is also asked to consider the following factors in
+@leading@keepnext@;The ARG is also asked to consider the following factors in
 selecting features for inclusion:
 @begin{Itemize}
 
@@ -266,10 +266,9 @@ hair-shirt flavour compared with other languages because
 of the general need for explicit conversions with named
 access types. This is alleviated by permitting anonymous
 access types in more contexts. It is also possible to
-indicate whether an access type is an access to a constant
-and whether a null value is permitted. Anonymous access-to-
-subprogram types are also introduced thus permitting so-
-called downward closures.
+indicate whether an access type is an access to a constant and whether a null
+value is permitted. Anonymous access-to-subprogram types are also introduced
+thus permitting so-called downward closures.
 
 Enhanced structure and visibility control. The most
 important change here is the introduction of limited with
@@ -491,25 +490,27 @@ whereas in Ada 95 we had to write
 @end{Example}
 which is perhaps a bit untidy.
 
-@leading@;A related advantage concerns dereferencing. If we have an
+@leading@keepnext@;A related advantage concerns dereferencing. If we have an
 access type such as
 @begin{Example}
 @key[type] Pointer @key[is access all] Object'Class;
 ...
 This_One: Pointer := A_Circle'Access;
 @end{Example}
-@leading@;and suppose we wish to print out the coordinates and area
+@leading@keepnext@;and suppose we wish to print out the coordinates and area
 then in Ada 2005 we can uniformly write
 @begin{Example}
+@tabset(P28)
 Put(This_One.X_Coord); ...
 Put(This_One.Y_Coord); ...
-Put(This_One.Area); ...  -- @ExamCom[Ada 2005]
+Put(This_One.Area); ...@\-- @ExamCom[Ada 2005]
 @end{Example}
-@leading@;whereas in Ada 95 we have to write
+@leading@keepnext@;whereas in Ada 95 we have to write
 @begin{Example}
+@tabset(P28)
 Put(This_One.X_Coord); ...
 Put(This_One.Y_Coord); ...
-Put(Area(This_One.@key[all])); ... -- @ExamCom[Ada 95]
+Put(Area(This_One.@key[all])); ...@\-- @ExamCom[Ada 95]
 @end{Example}
 
 In Ada 2005 the dereferencing is all implicit whereas in Ada
@@ -535,7 +536,7 @@ the possible properties of parents. This is done by
 introducing the notion of an interface.@Defn{interface}
 
 @leading@;An interface can be thought of as an abstract type with no
-components @em but it can of course have abstract operations.
+components @en but it can of course have abstract operations.
 It has also proved useful to introduce the idea of a null
 procedure as an operation of a tagged type; we don't have to
 provide an actual body for such a null procedure (and indeed
@@ -583,7 +584,7 @@ permitted
 @key[type] DT3 @key[is new] T1 and Int1 and Int2 @key[with] ...
 @end{Example}
 
-@Leading@;It is also possible to compose interfaces to create further
+@Leading@keepnext@;It is also possible to compose interfaces to create further
 interfaces thus
 @begin{Example}
 @key[type] Int3 @key[is interface and] Int1;
@@ -601,7 +602,7 @@ two ancestor interfaces have the same operation. Thus a null
 procedure overrides an abstract one but otherwise repeated
 operations have to have the same profile.
 
-@leading@;Interfaces can also be marked as limited.
+@leading@keepnext@;Interfaces can also be marked as limited.
 @begin{Example}
 @key[type] LI @key[is limited interface];
 @end{Example}
@@ -610,7 +611,7 @@ An important rule is that a descendant of a nonlimited
 interface must be nonlimited. But the reverse is not true.
 
 Some more extensive examples of the use of interfaces will be
-given in a later paper.
+given in a later paper (see @RefSecNum{Interfaces}).
 
 @leading@;Incidentally, the newly introduced null procedures are not
 just for interfaces. We can give a null procedure as a
@@ -640,7 +641,7 @@ change since the Ada 95 RM states that the default
 implementations have no effect. However, this neatly
 clarifies the situation and removes ad hoc semantic rules.
 (The pragma @Exam{Preelaborable_Initialization} will be explained in
-a later paper.)
+a later paper.)@Comment{** Ref TBD}
 
 Another important change is the ability to do type extension
 at a level more nested than that of the parent type. This
@@ -683,7 +684,7 @@ than our own code. This sort of error can be very difficult
 to track down.
 
 @leading@;In Ada 2005 we can protect against such errors since it is
-possible to mark overridding operations as such thus
+possible to mark overriding operations as such thus
 @begin{Example}
    @key{overriding}
    @key{procedure} Finalize(Obj: in out T);
@@ -693,7 +694,9 @@ will detect the error. Note that @key{overriding} is another new
 reserved word. However, partly for reasons of compatibility,
 the use of overriding indicators is optional; there are also
 deeper reasons concerning private types and generics which
-will be discussed in a later paper.@Defn2{Term=[overriding],Sec=[keyword]}
+will be discussed in a later paper @en see
+@RefSecNum{Overriding and overloading}.@Defn2{Term=[overriding],
+Sec=[keyword]}
 
 @Leading@;Similar problems can arise if we get the profile wrong.
 Suppose we derive a new type from @Exam{T} and attempt to override
@@ -731,7 +734,7 @@ ensure that we modify all the derived types appropriately.@Defn{overriding indic
 @LabeledSubclause{Overview: Access types}
 
 It has been said that playing with pointers is like playing
-with fire @em properly used all is well but carelessness can
+with fire @en properly used all is well but carelessness can
 lead to disaster. In order to avoid disasters, Ada 95 takes a
 stern view regarding the naming of access types and their
 conversion. However, experience has shown that the Ada 95
@@ -742,12 +745,13 @@ programming.
 types. In Ada 95 all access types are named except for access
 parameters and access discriminants. Thus we might have
 @begin{Example}
+@tabset(P49)
 @key[type] Animal @key[is tagged]
    @key[record] Legs: Integer; ... @key[end record];
 
-@key[type] Acc_Animal @key[is access] Animal;  -- @ExamCom{named}
+@key[type] Acc_Animal @key[is access] Animal;@\-- @ExamCom{named}
 
-@key[procedure] P(Beast: @key[access] Animal; ... );   -- @ExamCom{anonymous}
+@key[procedure] P(Beast: @key[access] Animal; ... );@\-- @ExamCom{anonymous}
 @end{Example}
 
 @leading@;Moreover, there is a complete lack of symmetry between named
@@ -764,7 +768,8 @@ be restricted to be access to constant types such as
 @leading@;which means that we cannot change the value of the @Exam{Animal}
 referred to. But in the case of access parameters, we cannot say
 @begin{Example}
-@key[procedure] P(Beast: @key[access constant] Animal);  -- @ExamCom{not Ada 95}
+@tabset(P49)
+@key[procedure] P(Beast: @key[access constant] Animal);@\-- @ExamCom{not Ada 95}
 @end{Example}
 
 In Ada 2005 almost all these various restrictions are swept
@@ -823,7 +828,7 @@ Ada 2005 whereas it was forbidden in Ada 95. This is actually
 a variation at runtime which is normally considered
 abhorrent. But in this case it just means that any check that
 will still raise @Exam{Constraint_Error} will be in a different
-place @em and in any event the program was presumably
+place @en and in any event the program was presumably
 incorrect.
 
 @Leading@;Another change in Ada 2005 is that we can use anonymous
@@ -839,7 +844,7 @@ a renaming declaration,
 a function return type.
 @end{Itemize}
 
-@leading@;Thus we can extend our farmyard example
+@leading@keepnext@;Thus we can extend our farmyard example
 @begin{Example}
 @key[type] Horse @key[is new] Animal @key[with] ... ;
 
@@ -850,7 +855,7 @@ Napoleon, Snowball: Acc_Pig := ... ;
 
 Boxer, Clover: Acc_Horse := ... ;
 @end{Example}
-@leading@;and now we can declare an array of animals
+@leading@keepnext@;and now we can declare an array of animals
 @begin{Example}
 Animal_Farm: @key[constant array] (Positive @key[range] <>) @key[of access] Animal'Class :=
                                              (Napoleon, Snowball, Boxer, Clover);
@@ -876,7 +881,7 @@ This is not a very good example since I am sure that Noah
 took care to take actual animals into the Ark and not merely
 their addresses.
 
-@leading@;A more useful example is given by the classic linked list. In
+@leading@keepnext@;A more useful example is given by the classic linked list. In
 Ada 95 (and Ada 83) we have
 @begin{Example}
 @key[type] Cell;
@@ -906,7 +911,7 @@ as referring to the current instance of the type (for
 example, in a task body) but the rule has been changed to
 permit its usage as here.
 
-@leading@;We can also use an anonymous access type for a single
+@leading@keepnext@;We can also use an anonymous access type for a single
 variable such as
 @begin{Example}
 List: @key[access] Cell := ... ;
@@ -917,7 +922,7 @@ function result might be in another animal function such as
 @begin{Example}
 @key[function] Mate_Of(A: @key[access] Animal'Class) @key[return access] Animal'Class;
 @end{Example}
-@leading@;We could then perhaps write
+@leading@keepnext@;We could then perhaps write
 @begin{Example}
 @key[if] Mate_Of(Noahs_Ark.Ram) /= Noahs_Ark.Ewe @key[then]
    ... -- @ExamCom{better get Noah to sort things out}
@@ -925,7 +930,7 @@ function result might be in another animal function such as
 @end{Example}
 Anonymous access types can also be used in a renaming
 declaration. This and other detailed points on matters such
-as accessibility will be discussed in a later paper.
+as accessibility will be discussed in a later paper.@Comment{** Ref TBD}
 
 The final important change in access types concerns access to
 subprogram types. Access to subprogram types were introduced
@@ -937,7 +942,7 @@ manipulated is passed as a parameter. The Ada 83 and Ada 95
 approach has always been to say "use generics". But this can
 be clumsy and so a direct alternative is now provided.
 
-@leading@;Recall that in Ada 95 we can write
+@leading@keepnext@;Recall that in Ada 95 we can write
 @begin{Example}
 @key[type] Integrand @key[is access function](X: Float) @key[return] Float;
 @key[function] Integrate(Fn: Integrand; Lo, Hi: Float) @key[return] Float;
@@ -954,7 +959,7 @@ level. Thus to evaluate
 @Unicode(8993)@-{0}}
 @end{Example}
 
-@leading@;we can write
+@leading@keepnext@;we can write
 @begin{Example}
 Result := Integrate(Sqrt'Access, 0.0, 1.0);
 @end{Example}
@@ -968,6 +973,7 @@ access to subprogram types. Consider the following example
 which aims to compute the integral of the expression @i{xy} over
 the square region 0 @Unicode(8804) x, y @Unicode(8804) 1.
 @begin{Example}
+@tabset(P42)
 @key{with} Integrate;
 @key{procedure} Main @key{is}
    @key{function} G(X: Float) @key{return} Float @key{is}
@@ -976,13 +982,13 @@ the square region 0 @Unicode(8804) x, y @Unicode(8804) 1.
          @key{return} X*Y;
       @key{end} F;
    @key{begin}
-      @key{return} Integrate(F'Access, 0.0, 1.0); -- @ExamCom{illegal in Ada 95}
+      @key{return} Integrate(F'Access, 0.0, 1.0);@\-- @ExamCom{illegal in Ada 95}
    @key{end} G;
 
    Result: Float;
 
 @key{begin}
-   Result:= Integrate(G'Access, 0.0, 1.0); -- @ExamCom{illegal in Ada 95}
+   Result:= Integrate(G'Access, 0.0, 1.0);@\-- @ExamCom{illegal in Ada 95}
    ...
 @key[end] Main;
 @end{Example}
@@ -998,7 +1004,7 @@ Note that although we could make the outer function @Exam{G} global
 so that @Exam{G'Access} would be allowed nevertheless the function @Exam{F}
 has to be nested inside @Exam{G} in order to gain access to the
 parameter @Exam{X} of @Exam{G}. It is typical of functions being integrated
-that they have to have information passed globally @em the
+that they have to have information passed globally @en the
 number of parameters of course is fixed by the profile used
 by the function Integrate.
 
@@ -1020,7 +1026,7 @@ problems arise. (The reader will recall that accessibility
 problems with anonymous access to object types are prevented
 by a runtime check; in the case of anonymous access to
 subprogram types the corresponding problems are prevented by
-decreeing that the accessibility level is infinite @em actually
+decreeing that the accessibility level is infinite @en actually
 the RM says larger than that of any master which comes to the
 same thing.)
 
@@ -1096,15 +1102,15 @@ packages.
 What we need therefore is some way of logically enabling the
 incomplete view and the completion to be in different
 packages. The elderly might remember that in the 1980 version
-of Ada the situation was even worse @em the completion had to
+of Ada the situation was even worse @en the completion had to
 be in the same list of declarations as the incomplete
 declaration. Ada 83 relaxed this (the so-called Taft
 Amendment) and permits the private part and body to be
-treated as one list @em the same rule applies in Ada 95. We now
+treated as one list @en the same rule applies in Ada 95. We now
 go one step further.
 
 @leading@;Ada 2005 solves the problem by introducing a variation on the
-with clause @em the limited with clause.@Defn{limited with clause}
+with clause @en the limited with clause.@Defn{limited with clause}
 The idea is that a
 library package (and subprogram) can refer to another library
 package that has not yet been declared and can refer to the
@@ -1154,7 +1160,7 @@ limited view of the other) and thus would be essentially
 unusable. The net result would be many named access types and
 wretched type conversions all over the place.
 
-@leading@;There are also some related changes to the notation for
+@leading@keepnext@;There are also some related changes to the notation for
 incomplete types. We can now write
 @begin{Example}
 @key{type} T @key{is tagged};
@@ -1169,7 +1175,7 @@ of points and lines above, since @Exam{Line} is visibly tagged in
 the package @Exam{Geometry.Lines} we will thus get an incomplete
 tagged view of Lines.@Defn{tagged incomplete type}
 
-@leading@;The introduction of tagged incomplete types clarifies the
+@leading@keepnext@;The introduction of tagged incomplete types clarifies the
 ability to write
 @begin{Example}
 @key[type] T_Ptr @key[is access all] T'Class;
@@ -1185,15 +1191,13 @@ been retained but banished to
 for obsolescent features.
 
 Further examples of the use of limited with clauses will be
-given in a later paper.
+given in a later paper.@Comment{** Ref TBD}
 
 Another enhancement in this area is the introduction of
 private with clauses which overcome a problem with private
 child packages.
 
-*** Stopped here ***
-
-Private child packages were introduced to enable the details
+@leading@;Private child packages were introduced to enable the details
 of the implementation of part of a system to be decomposed
 and yet not be visible to the external world. However, it is
 often convenient to have public packages that use these
@@ -1205,36 +1209,45 @@ visible part of a specification. But there is no logical
 reason why the private part of a package should not have
 access to a private child. Ada 2005 overcomes this by
 introducing private with clauses. We can write
-  private package App.Secret_Details is
-   type Inner is ...
-   ...  -- various operations on Inner etc
-  end App.Secret_Details;
-  private with App.Secret_Details;
-  package App.User_View is
-   type Outer is private;
-   ...  -- various operations on Outer visible to the
-  user
-    -- type Inner is not visible here
-  private
-    -- type Inner is visible here
-    type Outer is
-     record
-      X: Secret_Details.Inner;
-      ...
-     end record;
+@begin{Example}
+@key[private package] App.Secret_Details @key[is]
+   @key[type] Inner @key[is] ...
+   ...  -- @ExamCom{various operations on Inner etc}
+@key[end] App.Secret_Details;
+
+@key[private with] App.Secret_Details;
+@key[package] App.User_View @key[is]
+
+   @key[type] Outer @key[is private];
+   ...  -- @ExamCom{various operations on Outer visible to the user}
+
+   -- @ExamCom{type Inner is not visible here}
+@key{private}
+   -- @ExamCom{type Inner is visible here}
+
+   @key[type] Outer @key[is]
+      @key[record]
+         X: Secret_Details.Inner;
+         ...
+      @key[end record];
    ...
-  end App.User_View;
-thus the private part of the public child has access to the
-type Inner but it is still hidden from the external user.
+@key[end] App.User_View;
+@end{Example}
+
+@Leading@;thus the private part of the public child has access to the
+type @Exam{Inner} but it is still hidden from the external user.
 Note that the public child and private child might have
 mutually declared types as well in which case they might also
 wish to use the limited with facility. In this case the
 public child would have a limited private with clause for the
 private child written thus
-  limited private with App.Secret_Details;
-  package App.User_View is ...
-In the case of a parent package, its specification cannot
-have a with clause for a child @em logically the specification
+@begin{Example}
+@key[limited private with] App.Secret_Details;
+@key[package] App.User_View @key[is] ...
+@end{Example}
+
+@Leading@;In the case of a parent package, its specification cannot
+have a with clause for a child @en logically the specification
 cannot know about the child because the parent must be
 declared (that is put into the program library) first.
 Similarly a parent cannot have a private with clause for a
@@ -1242,762 +1255,975 @@ private child. But it can have a limited with clause for any
 child (thereby breaking the circularity) and in particular it
 can have a limited private with clause for a private child.
 So we might also have
-  limited private with App.Secret_Details;
-  package App is ...
+@begin{Example}
+@key[limited private with] App.Secret_Details;
+@key[package] App @key[is] ...
+@end{Example}
+
 The final topic in this section is limited types. The reader
 will recall that the general idea of a limited type is to
 restrict the operations that the user can perform on a type
 to just those provided by the developer of the type and in
 particular to prevent the user from doing assignment and thus
 making copies of an object of the type.
+
 However, limited types have never quite come up to
 expectation both in Ada 83 and Ada 95. Ada 95 brought
 significant improvements by disentangling the concept of a
 limited type from a private type but problems have remained.
+
 The key problem is that Ada 95 does not allow the
 initialization of limited types because of the view that
 initialization requires assignment and thus copying. A
 consequence is that we cannot declare constants of a limited
 type either. Ada 2005 overcomes this problem by allowing
 initialization by aggregates.
-As a simple example, consider
-  type T is limited
-   record
-     A: Integer;
-     B: Boolean;
-     C: Float;
-   end record;
-in which the type as a whole is limited but the components
-are not. If we declare an object of type T in Ada 95 then we
-have to initialize the components (by assigning to them)
-individually thus
+
+@leading@keepnext@;As a simple example, consider
+@begin{Example}
+@key[type] T @key[is limited]
+   @key[record]
+      A: Integer;
+      B: Boolean;
+      C: Float;
+   @key[end record];
+@end{Example}
+
+@leading@;in which the type as a whole is limited but the components are not.
+If we declare an object of type @exam[T] in Ada 95 then we have to
+initialize the components (by assigning to them) individually thus
+@begin[Example]
    X: T;
-  begin
-   X.A := 10; X.B := True; X.C := 45.7;
-Not only is this annoying but it is prone to errors as well.
-If we add a further component D to the record type T then we
-might forget to initialize it. One of the advantages of
-aggregates is that we have to supply all the components
-(allowing automatic so-called full coverage analysis, a key
-benefit of Ada).
-Ada 2005 allows the initialization with aggregates thus
-   X: T := (A => 10, B => True, C => 45.7);
-Technically, Ada 2005 just recognizes properly that
-initialization is not assignment. Thus we should think of the
-individual components as being initialized individually in
-situ @em an actual aggregated value is not created and then
-assigned. (Much the same happens when initializing controlled
-types with an aggregate.)
-Sometimes a limited type has components where an initial
-value cannot be given. This happens with task and protected
-types. For example
-  protected type Semaphore is ... ;
-  type PT is
-   record
-     Guard: Semaphore;
-     Count: Integer;
-     Finished: Boolean := False;
-   end record;
-Remember that a protected type is inherently limited. This
-means that the type PT is limited because a type with a
-limited component is itself limited. It is good practice to
-explicitly put limited on the type PT in such cases but it
-has been omitted here for illustration. Now we cannot give an
-explicit initial value for a Semaphore but we would still
-like to use an aggregate to get the coverage check. In such
-cases we can use the box symbol <> to mean use the default
-value for the type (if any). So we can write
-  X: PT := (Guard => <>, Count => 0, Finished => <>);
-Note that the ability to use <> in an aggregate for a default
-value is not restricted to the initialization of limited
-types. It is a new feature applicable to aggregates in
-general. But, in order to avoid confusion, it is only
-permitted with named notation.
-Limited aggregates are also allowed in other similar contexts
-where copying is not involved including as actual parameters
-of mode in.
-There are also problems with returning results of a limited
-type from a function. This is overcome in Ada 2005 by the
-introduction of an extended form of return statement. This
-will be described in detail in a later paper.
+@key[begin]
+   X.A := 10;  X.B := True;  X.C := 45.7;
+@end[Example]
 
-@LabeledSubclause{Overview: Tasking and real-time facilities}
+Not only is this annoying but it is prone to errors as well. If we
+add a further component @exam[D] to the record type @exam[T] then
+we might forget to initialize it. One of the advantages of aggregates
+is that we have to supply all the components (allowing automatic so-called
+full coverage analysis, a key benefit of Ada).
 
-Unless mentioned otherwise all the changes in this section
-concern the Real-Time Systems annex.
-First, the well-established Ravenscar profile is included in
-Ada 2005 as directed by WG9. A profile is a mode of operation
-and is specified by the pragma Profile which defines the
-particular profile to be used. Thus to ensure that a program
-conforms to the Ravenscar profile we write
-  pragma Profile(Ravenscar);
-The purpose of Ravenscar is to restrict the use of many of
-the tasking facilities so that the effect of the program is
-predictable. This is very important for real-time safety-
-critical systems. In the case of Ravenscar the pragma is
-equivalent to the joint effect of the following pragmas
-  pragma Task_Dispatching_Policy(FIFO_Within_Priorities);
-  pragma Locking_Policy(Ceiling_Locking);
-  pragma Detect_Blocking;
-plus a pragma Restrictions with a host of arguments such as
-No_Abort_Statements and No_Dynamic_Priorities.
-The pragma Detect_Blocking plus many of the Restrictions
-identifiers are new to Ada 2005. Further details will be
-given in a later paper.
-Ada 95 allows the priority of a task to be changed but does
-not permit the ceiling priority of a protected object to be
-changed. This is rectified in Ada 2005 by the introduction of
-an attribute Priority for protected objects and the ability
-to change it by a simple assignment such as
-  My_PO'Priority := P;
-inside a protected operation of the object My_PO. The change
+@leading@keepnext@;Ada 2005 allows the initialization with aggregates thus
+
+@begin[Example]
+   X: T := (A => 10,  B => True,  C => 45.7);
+@end[Example]
+
+Technically, Ada 2005 just recognizes properly that initialization
+is not assignment. Thus we should think of the individual components
+as being initialized individually @i[in situ] @en an actual aggregated
+value is not created and then assigned. (Much the same happens when
+initializing controlled types with an aggregate.)@Defn2{Term=[aggregate],Sec=[for limited types]}
+
+@leading@;Sometimes a limited type has components where an initial value cannot
+be given. This happens with task and protected types. For example
+@begin[Example]
+@key[protected type] Semaphore @key[is] ... ;
+
+@key[type] PT @key[is]
+   @key[record]
+      Guard: Semaphore;
+      Count: Integer;
+      Finished: Boolean := False;
+   @key[end record];
+@end[Example]
+
+@leading@;Remember that a protected type is inherently limited. This means
+that the type @exam[PT] is limited because a type with a limited component
+is itself limited. It is good practice to explicitly put @key[limited]
+on the type @exam[PT] in such cases but it has been omitted here for
+illustration. Now we cannot give an explicit initial value for a
+@exam[Semaphore]  but we would still like to use an aggregate to
+get the coverage check.
+In such cases we can use the box symbol @exam[<>] to mean use the
+default value for the type (if any). So we can write
+@begin[Example]
+X: PT := (Guard => <>, Count => 0, Finished => <>);
+@end[Example]
+
+Note that the ability to use @exam[<>] in an aggregate for a default
+value is not restricted to the initialization of limited types. It
+is a new feature applicable to aggregates in general. But, in order
+to avoid confusion, it is only permitted with named notation.
+
+Limited aggregates are also allowed in other similar contexts where
+copying is not involved including as actual parameters of mode @key[in].
+
+There are also problems with returning results of a limited type from
+a function. This is overcome in Ada 2005 by the introduction of an
+extended form of return statement. This will be described in detail
+in a later paper.@Comment{** Ref TBD}
+
+@LabeledSubclause{Tasking and real-time facilities}
+
+Unless mentioned otherwise all the changes in this section concern
+the Real-Time Systems annex.
+
+@leading@;First, the well-established Ravenscar profile is included in
+Ada 2005  as directed by WG9. A profile is a mode of operation and is
+specified  by the pragma @exam[Profile] which defines the particular profile
+to be used. Thus to ensure that a program conforms to the Ravenscar
+profile we write@Defn{Ravenscar profile}
+@begin[Example]
+@key[pragma] Profile(Ravenscar);
+@end[Example]
+
+@leading@;The purpose of Ravenscar is to restrict the use of many of the
+tasking  facilities so that the effect of the program is predictable. This
+is very important for real-time safety-critical systems. In the case
+of Ravenscar the pragma is equivalent to the joint effect of the following
+pragmas
+
+@begin[Example]
+@key[pragma] Task_Dispatching_Policy(FIFO_Within_Priorities);
+@key[pragma] Locking_Policy(Ceiling_Locking);
+@key[pragma] Detect_Blocking;
+@end[Example]
+
+plus a @key[pragma] @exam[Restrictions] with a host of arguments such
+as @exam[No_Abort_Statements] and @exam[No_Dynamic_Priorities].
+
+The pragma @exam[Detect_Blocking] plus many of the @exam[Restrictions]
+identifiers are new to Ada 2005. Further details will be given in
+a later paper.@Comment{** Ref TBD}
+
+@leading@;Ada 95 allows the priority of a task to be changed but does not
+permit the ceiling priority of a protected object to be changed. This is
+rectified in Ada 2005 by the introduction of an attribute @exam[Priority]
+for protected objects and the ability to change it by a simple assignment
+such as@Defn{priority attribute}@Defn2{Term=[attribute],Sec=[Priority]}
+
+@begin[Example]
+My_PO'Priority := P;
+@end[Example]
+
+inside a protected operation of the object @exam[My_PO]. The change
 takes effect at the end of the protected operation.
-The monitoring and control of execution time naturally are
-important for real-time programs. Ada 2005 includes packages
-for three different aspects of this
-Ada.Execution_Time @em this is the root package and enables the
-  monitoring of execution time of individual tasks.
-Ada.Execution_Time.Timers @em this provides facilities for
-  defining and enabling timers and for establishing a
-  handler which is called by the run time system when the
-  execution time of the task reaches a given value.
-Ada.Execution_Time.Group_Budgets @em this allows several tasks
-  to share a budget and provides means whereby action can be
-  taken when the budget expires.
-The execution time of a task or CPU time, as it is commonly
-called, is the time spent by the system executing the task
-and services on its behalf. CPU times are represented by the
-private type CPU_Time. The CPU time of a particular task is
-obtained by calling the following function Clock in the
-package Ada.Execution_Time
-  function Clock(T: Task_Id := Current_Task) return
-  CPU_Time;
-A value of type CPU_Time can be converted to a Seconds_Count
-plus residual Time_Span by a procedure Split similar to that
-in the package Ada.Real_Time. Incidentally we are guaranteed
-that the granularity of CPU times is no greater than one
-millisecond and that the range is at least 50 years.
-In order to find out when a task reaches a particular CPU
-time we use the facilities of the child package
-Ada.Execution_Time.Timers. This includes a discriminated type
-Timer and a type Handler thus
-  type Timer(T: not null access constant Task_Id) is tagged
-  limited private;
-  type Timer_Handler is access protected procedure (TM: in
-  out Timer);
-Note how the access discriminant illustrates the use of both
-not null and constant.
-We can then set the timer to expire at some absolute time by
-  Set_Handler(My_Timer, Time_Limit, My_Handler'Access);
-and then when the CPU time of the task reaches Time_Limit (of
-type CPU_Time), the protected procedure My_Handler is
-executed. Note how the timer object incorporates the
-information regarding the task concerned using an access
-discriminant and that this is passed to the handler via its
-parameter. Another version of Set_Handler enables the timer
-to be triggered after a given interval (of type Time_Span).
-In order to program various aperiodic servers it is necessary
-for tasks to share a CPU budget. This can be done using the
-child package Ada.Execution_Time.Group_Budgets. In this case
-we have
-  type Group Budget is tagged limited private;
-  type Group_Budget_Handler is access protected procedure
-  (GB: in out Group_Budget);
-The type Group_Budget both identifies the group of tasks it
-belongs to and the size of the budget. Various subprograms
-enable tasks to be added to and removed from a group budget.
-Other procedures enable the budget to be set and replenished.
-A procedure Set_Handler associates a particular handler with
+
+@leading@;The monitoring and control of execution time naturally are
+important for real-time programs.@Defn{execution time} Ada 2005 includes
+packages for three different aspects of this
+
+@begin[Description]
+@exam[Ada.Execution_Time] @en@\This is the root
+package and enables the monitoring of execution time of individual
+tasks.
+
+@exam[Ada.Execution_Time.Timers] @en@\This provides
+facilities for defining and enabling timers and for establishing a
+handler which is called by the run time system when the execution
+time of the task reaches a given value.
+
+@exam[Ada.Execution_Time.Group_Budgets] @en@\This
+allows several tasks to share a budget and provides means whereby
+action can be taken when the budget expires.
+@end[Description]
+
+@leading@;The execution time of a task or CPU time, as it is commonly called,
+is the time spent by the system executing the task and services on
+its behalf. CPU times are represented by the private type @exam[CPU_Time].
+The CPU time of a particular task is obtained by calling the following
+function @exam[Clock] in the package @exam[Ada.Execution_Time]
+
+@begin[Example]
+@key[function] Clock(T: Task_Id := Current_Task) @key[return] CPU_Time;
+@end[Example]
+
+A value of type @exam[CPU_Time] can be converted to a @exam[Seconds_Count]
+plus residual @exam[Time_Span] by a procedure @exam[Split] similar
+to that in the package @exam[Ada.Real_Time]. Incidentally we are guaranteed
+that the granularity of CPU times is no greater than one millisecond
+and that the range is at least 50 years.
+
+@leading@;In order to find out when a task reaches a particular CPU time we
+use the facilities of the child package @exam[Ada.Execution_Time.Timers].
+This includes a discriminated type @exam[Timer] and a type @exam[Handler]
+thus
+
+@begin[Example]
+@key[type] Timer(T: @key[not null access] @key[constant] Task_Id) @key[is tagged limited private];
+@key[type] Timer_Handler @key[is access protected procedure ](TM: @key[in out] Timer);
+@end[Example]
+Note how the access discriminant illustrates the use of both @key[not]
+@key[null] and @key[constant].
+
+@leading@keepnext@;We can then set the timer to expire at some absolute time by
+
+@begin[Example]
+Set_Handler(My_Timer, Time_Limit, My_Handler'Access);
+@end[Example]
+
+and then when the CPU time of the task reaches @exam[Time_Limit] (of
+type @exam[CPU_Time]), the protected procedure @exam[My_Handler] is
+executed. Note how the timer object incorporates the information regarding
+the task concerned using an access discriminant and that this is passed
+to the handler via its parameter. Another version of @exam[Set_Handler]
+enables the timer to be triggered after a given interval (of type
+@exam[Time_Span]).
+
+@leading@;In order to program various aperiodic servers it is necessary for
+tasks to share a CPU budget.@Defn{CPU budget} This can be done using the
+child package @exam[Ada.Execution_Time.Group_Budgets]. In this case we have
+
+@begin[Example]
+@key[type] Group Budget @key[is tagged limited private];
+@key[type] Group_Budget_Handler @key[is access protected procedure ](GB: @key[in out] Group_Budget);
+@end[Example]
+
+The type @exam[Group_Budget] both identifies the group of tasks it
+belongs to and the size of the budget. Various subprograms enable
+tasks to be added to and removed from a group budget. Other procedures
+enable the budget to be set and replenished.
+
+@leading@;A procedure @exam[Set_Handler] associates a particular handler with
 a budget.
-  Set_Handler(GB => My_Group_Budget, Handler =>
-  My_Handler'Access);
-When the group budget expires the associated protected
-procedure is executed.
-A somewhat related topic is that of low level timing events.
-The facilities are provided by the package
-Ada.Real_Time.Timing_Events. In this case we have
-  type Timing_Event is tagged limited private;
-  type Timing_Event_Handler is access protected procedure
-  (Event: in out Timing_Event);
-The idea here is that a protected procedure can be nominated
-to be executed at some time in the future. Thus to ring a
-pinger when our egg is boiled after four minutes we might
-have a protected procedure
-  protected body Egg is
-   procedure Is_Done(Event: in out Timing_Event) is
-   begin
-     Ring_The_Pinger;
-   end Is_Done;
-  end Egg;
-and then
-  Egg_Done: Timing_Event;
-  Four_Min: Time_Span := Minutes(4);
-  ...
-  Put_Egg_In_Water;
-  Set_Handler(Event => Egg_Done, In_Time => Four_Min,
-  Handler => Egg.Is_Done'Access);
-  -- now read newspaper whilst waiting for egg
-This facility is of course very low level and does not
-involve Ada tasks at all. Note that we can set the event to
-occur at some absolute time as well as at a relative time as
-above. Incidentally, the function Minutes is a new function
-added to the parent package Ada.Real_Time. Otherwise we would
-have had to write something revolting such as
-4*60*Milliseconds(1000). A similar function Seconds has also
-been added.
-There is a minor flaw in the above example. If we are
-interrupted by the telephone between putting the egg in the
-water and setting the handler then our egg will be overdone.
-We will see how to cure this in a later paper.
-Readers will recall the old problem of how tasks can have a
-silent death. If something in a task goes wrong in Ada 95 and
-an exception is raised which is not handled by the task, then
-it is propagated into thin air and just vanishes. It was
-always deemed impossible for the exception to be handled by
-the enclosing unit because of the inherent asynchronous
-nature of the event.
-This is overcome in Ada 2005 by the package
-Ada.Task_Termination which provides facilities  for
-associating a protected procedure with a task. The protected
-procedure is invoked when the task terminates with an
-indication of the reason. Thus we might declare a protected
-object Grim_Reaper
-  protected Grim_Reaper is
-   procedure Last_Gasp(C: Cause_Of_Termination; T:
-  Task_Id; X: Exception_Occurrence);
-  end Grim_Reaper;
-We can then nominate Last_Gasp as the protected procedure to
-be called when task T dies by
-  Set_Specific_Handler(T'Identity,
-  Grim_Reaper.Last_Gasp'Access);
-The body of the protected procedure Last_Gasp might then
+
+@begin[Example]
+Set_Handler(GB => My_Group_Budget, Handler => My_Handler'Access);
+@end[Example]
+
+When the group budget expires the associated protected procedure is
+executed.
+
+@leading@;A somewhat related topic is that of low level timing events. The
+facilities are provided by the package
+@exam[Ada.Real_Time.Timing_Events].@Defn{timing event} In this case we have
+
+@begin[Example]
+@key[type] Timing_Event @key[is tagged limited private];
+@key[type] Timing_Event_Handler @key[is access protected procedure](Event: @key[in out ]Timing_Event);
+@end[Example]
+
+@leading@;The idea here is that a protected procedure can be nominated to be
+executed at some time in the future. Thus to ring a pinger when our
+egg is boiled after four minutes we might have a protected procedure
+
+@begin[Example]
+@key[protected] @key[body] Egg @key[is]
+   @key[procedure] Is_Done(Event: @key[in out] Timing_Event) @key[is]
+   @key[begin]
+      Ring_The_Pinger;
+   @key[end] Is_Done;
+@key[end] Egg;
+@end[Example]
+
+@leading@keepnext@;and then
+
+@begin[Example]
+Egg_Done: Timing_Event;
+Four_Min: Time_Span := Minutes(4);
+...
+Put_Egg_In_Water;
+Set_Handler(Event => Egg_Done, In_Time => Four_Min, Handler => Egg.Is_Done'Access);
+-- @examcom[ now read newspaper whilst waiting for egg]
+@end[Example]
+
+This facility is of course very low level and does not involve Ada
+tasks at all. Note that we can set the event to occur at some absolute
+time as well as at a relative time as above. Incidentally, the function
+@exam[Minutes] is a new function added to the parent package
+@exam[Ada.Real_Time]. Otherwise we would have had to write something revolting
+such as @exam[4*60*Milliseconds(1000)]. A similar function @exam[Seconds] has
+also been added.
+
+There is a minor flaw in the above example. If we are interrupted
+by the telephone between putting the egg in the water and setting
+the handler then our egg will be overdone. We will see how to cure
+this in a later paper.@Comment{** Ref TBD}
+
+Readers will recall the old problem of how tasks can have a silent
+death. If something in a task goes wrong in Ada 95 and an exception
+is raised which is not handled by the task, then it is propagated
+into thin air and just vanishes. It was always deemed impossible for
+the exception to be handled by the enclosing unit because of the inherent
+asynchronous nature of the event.
+
+@leading@;This is overcome in Ada 2005 by the package
+@exam[Ada.Task_Termination] which provides facilities for associating a
+protected procedure with a task. The protected procedure is invoked when the
+task terminates with an indication of the reason. Thus we might declare a
+protected object @exam[Grim_Reaper]@Defn{termination handler}
+
+@begin[Example]
+@key[protected] Grim_Reaper @key[is]
+   @key[procedure] Last_Gasp(C: Cause_Of_Termination; T: Task_Id; X: Exception_Occurrence);
+@key[end] Grim_Reaper;
+@end[Example]
+
+@leading@;We can then nominate @exam[Last_Gasp] as the protected procedure to
+be called when task @exam[T] dies by
+
+@begin[Example]
+Set_Specific_Handler(T'Identity, Grim_Reaper.Last_Gasp'Access);
+@end[Example]
+
+@leading@;The body of the protected procedure @exam[Last_Gasp] might then
 output various diagnostic messages
-  procedure Last_Gasp(C: Cause_Of_Termination; T: Task_Id;
-  X: Exception_Occurrence) is
-  begin
-   case C is
-     when Normal => null;
-     when Abnormal =>
-      Put("Something nasty happened"); ...
-     when Unhandled_Exception =>
-      Put("Unhandled exception occurred"); ...
-   end case;
-  end Last_Gasp;
-There are three possible reasons for termination, it could be
-normal, abnormal, or caused by an unhandled exception. In the
-last case the parameter X gives details of the exception
-occurrence.
-Another area of increased flexibility in Ada 2005 is that of
-task dispatching policies. In Ada 95, the only predefined
-policy is FIFO_Within_Priorities although other policies are
-permitted. Ada 2005 provides further pragmas, policies and
-packages which facilitate many different mechanisms such as
-non-preemption within priorities, the familiar Round Robin
-using timeslicing, and the more recently acclaimed Earliest
-Deadline First (EDF) policy. Moreover, it is possible to mix
-different policies according to priority level within a
-partition.
-Various facilities are provided by the package
-Ada.Dispatching plus two child packages
-Ada.Dispatching @em this is the root package and simply
-  declares an exception Dispatching_Policy_Error.
-Ada.Dispatching.Round_Robin @em this enables the setting of the
-  time quanta for time slicing within one or more priority
-  levels.
-Ada.Dispatching.EDF @em this enables the setting of the
-  deadlines for various tasks.
-A policy can be selected for a whole partition by one of
-  pragma
-  Task_Dispatching_Policy(Non_Preemptive_FIFO_Within_Priorit
-  ies);
-  pragma
-  Task_Dispatching_Policy(Round_Robin_Within_Priorities);
-  pragma Task_Dispatching_Policy(EDF_Across_Priorities);
-In order to mix different policies across different priority
-levels we use the pragma Priority_Specific_Dispatching with
-various policy identifiers thus
-  pragma
-  Priority_Specific_Dispatching(Round_Robin_Within_Prioritie
-  s, 1, 1);
-  pragma
-  Priority_Specific_Dispatching(EDF_Across_Priorities, 2,
-  10);
-  pragma
-  Priority_Specific_Dispatching(FIFO_Within_Priorities, 11,
-  24);
-This sets Round Robin at priority level 1, EDF at levels 2 to
-10, and FIFO at levels 11 to 24.
-The final topic in this section concerns the core language
-and not the Real-Time Systems annex. Ada 2005 introduces a
-means whereby object oriented and real-time features can be
-closely linked together through inheritance.
-Recall from Section 3.1 that we can declare an interface to
-be limited thus
-  type LI is limited interface;
-We can also declare an interface to be synchronized, task, or
+
+@begin[Example]
+@key[procedure] Last_Gasp(C: Cause_Of_Termination; T: Task_Id; X: Exception_Occurrence) @key[is]
+@key[begin]
+   @key[case] C @key[is]
+      @key[when] Normal => @key[null];
+      @key[when] Abnormal =>
+         Put("Something nasty happened"); ...
+      @key[when] Unhandled_Exception =>
+         Put("Unhandled exception occurred"); ...
+   @key[end case];
+@key[end] Last_Gasp;
+@end[Example]
+
+There are three possible reasons for termination, it could be normal,
+abnormal, or caused by an unhandled exception. In the last case the
+parameter @exam[X] gives details of the exception occurrence.
+
+Another area of increased flexibility in Ada 2005 is that of task
+dispatching policies. In Ada 95, the only predefined policy is @exam[FIFO_Within_Priorities]
+although other policies are permitted. Ada 2005 provides further pragmas,
+policies and packages which facilitate many different mechanisms such
+as non-preemption within priorities, the familiar Round Robin using
+timeslicing, and the more recently acclaimed Earliest Deadline First
+(EDF) policy. Moreover, it is possible to mix different policies according
+to priority level within a partition.
+
+@leading@;Various facilities are provided by the package @exam[Ada.Dispatching]
+plus two child packages
+
+@begin[Description]
+@exam[Ada.Dispatching] @en@\This is the root package
+and simply declares an exception @exam[Dispatching_Policy_Error].
+
+@exam[Ada.Dispatching.Round_Robin] @en@\This enables
+the setting of the time quanta for time slicing within one or more
+priority levels.
+
+@exam[Ada.Dispatching.EDF] @en@\This enables the
+setting of the deadlines for various tasks.
+@end[Description]
+
+@leading@keepnext@;A policy can be selected for a whole partition by one of
+@begin[Example]
+@key[pragma] Task_Dispatching_Policy(Non_Preemptive_FIFO_Within_Priorities);
+
+@key[pragma] Task_Dispatching_Policy(Round_Robin_Within_Priorities);
+
+@key[pragma] Task_Dispatching_Policy(EDF_Across_Priorities);
+@end[Example]
+
+@leading@;In order to mix different policies across different priority levels
+we use the pragma @exam[Priority_Specific_Dispatching] with various
+policy identifiers thus
+@begin[Example]
+@key[pragma] Priority_Specific_Dispatching(Round_Robin_Within_Priorities, 1, 1);
+@key[pragma] Priority_Specific_Dispatching(EDF_Across_Priorities, 2, 10);
+@key[pragma] Priority_Specific_Dispatching(FIFO_Within_Priorities, 11, 24);
+@end[Example]
+
+This sets Round Robin at priority level 1, EDF at levels 2 to 10,
+and FIFO at levels 11 to 24.
+
+The final topic in this section concerns the core language and not
+the Real-Time Systems annex. Ada 2005 introduces a means whereby object
+oriented and real-time features can be closely linked together through
+inheritance.
+
+@leading@;Recall from Section 3.1 that we can declare an interface to be
+limited thus
+@begin[Example]
+@key[type] LI @key[is limited interface];
+@end[Example]
+
+@leading@;We can also declare an interface to be synchronized, task, or
 protected thus
-  type SI is synchronized interface;
-  type TI is task interface;
-  type PI is protected interface;
-A task interface or protected interface has to be implemented
-by a task type or protected type respectively. However, a
-synchronized interface can be implemented by either a task
-type or a protected type. These interfaces can also be
-composed with certain restrictions. Detailed examples will be
-given in a later paper.
+@begin[Example]
+@key[type] SI @key[is synchronized interface];
+@key[type] TI @key[is task interface];
+@key[type] PI @key[is protected interface];
+@end[Example]
 
-@LabeledSubClause{Overview: Exceptions, numerics, generics etc}
+A task interface or protected interface has to be implemented by a
+task type or protected type respectively. However, a synchronized
+interface can be implemented by either a task type or a protected
+type. These interfaces can also be composed with certain restrictions.
+Detailed examples will be given in a later paper.@Comment{** Ref TBD}
 
-As well as the major features discussed above there are also
-a number of improvements in various other areas.
-There are two small changes concerning exceptions. One is
-that we can give a message with a raise statement, thus
-  raise Some_Error with "A message";
-This is a lot neater than having to write (as in Ada 95)
-  Ada.Exceptions.Raise_Exception(Some_Error'Identity, "A
-  message");
-The other change concerns the detection of a null exception
-occurrence which might be useful in a package analysing a log
-of exceptions. The problem is that exception occurrences are
-of a limited private type and so we cannot compare an
-occurrence with Null_Occurrence to see if they are equal. In
-Ada 95 applying the function Exception_Identity to a null
-occurrence unhelpfully raises Constraint_Error. This has been
-changed in Ada 2005 to return Null_Id so that we can now
-write
-  procedure Process_Ex(X: Exception_Occurrence) is
-  begin
-   if Exception_Identity(X) = Null_Id then
-     -- process the case of a Null_Occurrence
+
+@LabeledSubclause{Overview: Exceptions, numerics, generics etc}
+
+As well as the major features discussed above there are also a number
+of improvements in various other areas.
+
+@leading@;There are two small changes concerning exceptions. One is that we
+can give a message with a raise statement, thus@Defn{raise with message}
+@begin[Example]
+@key[raise] Some_Error @key[with] "A message";
+@end[Example]
+
+@leading@keepnext@;This is a lot neater than having to write (as in Ada 95)
+@begin[Example]
+Ada.Exceptions.Raise_Exception(Some_Error'Identity, "A message");
+@end[Example]
+
+@leading@;The other change concerns the detection of a null exception
+occurrence which might be useful in a package analysing a log of exceptions.
+The problem is that exception occurrences are of a limited private type and so
+we cannot compare an occurrence with @exam[Null_Occurrence] to see if they are
+equal. In Ada 95 applying the function @exam[Exception_Identity] to a null
+occurrence unhelpfully raises @exam[Constraint_Error]. This has been changed in
+Ada 2005 to return @exam[Null_Id] so that we can now write
+@begin[Example]
+@key[procedure] Process_Ex(X: Exception_Occurrence) @key[is]
+@key[begin]
+   @key[if] Exception_Identity(X) = Null_Id @key[then]
+      -- @examcom[process the case of a Null_Occurrence]
    ...
-  end Process_Ex;
-Ada 95 introduced modular types which are of course unsigned
-integers. However it has in certain cases proved very
-difficult to get unsigned integers and signed integers to
-work together. This is a trivial matter in fragile languages
-such as C but in Ada the type model has proved obstructive.
-The basic problem is converting a value of a signed type
-which happens to be negative to an unsigned type. Thus
-suppose we want to add a signed offset to an unsigned address
-value, we might have
-  type Offset_Type is range -(2**31) .. 2**31-1;
-  type Address_Type is mod 2**32;
-  Offset: Offset_Type;
-  Address: Address_Type;
-We cannot just add Offset to Address because they are of
-different types. If we convert the Offset to the address type
-then we might get Constraint_Error and so on. The solution in
-Ada 2005 is to use a new functional attribute S'Mod which
-applies to any modular subtype S and converts a universal
-integer value to the modular type using the corresponding
-mathematical mod operation. So we can now write
-  Address := Address + Address_Type'Mod(Offset);
-Another new attribute is Machine_Rounding. This enables high-
-performance conversions from floating point types to integer
-types when the exact rounding does not matter.
-The third numeric change concerns fixed point types. It was
-common practice for some Ada 83 programs to define their own
-multiply and divide operations, perhaps to obtain saturation
-arithmetic. These programs ran afoul of the Ada 95 rules that
-introduced universal fixed operations and resulted in
-ambiguities. Without going into details, this problem has
-been fixed in Ada 2005 so that user-defined operations can
-now be used.
-Ada 2005 has several new pragmas. The first is
-  pragma Unsuppress(Identifier);
-where the identifier is that of a check such as Range_Check.
-The general idea is to ensure that checks are performed in a
-declarative region irrespective of the use of a corresponding
-pragma Suppress. Thus we might have a type My_Int that
-behaves as a saturated type. Writing
-  function "*" (Left, Right: My_Int) return My_Int is
-   pragma Unsuppress(Overflow_Check);
-  begin
-   return Integer(Left) * Integer(Right);
-  exception
-   when Constraint_Error =>
-     if (Left>0 and Right>0) or (Left<0 and Right<0) then
-      return My_Int'Last;
-     else
-      return My_Int'First;
-     end if;
-  end "*";
-ensures that the code always works as intended even if checks
-are suppressed in the program as a whole. Incidentally the On
-parameter of pragma Suppress which never worked well has been
-banished to Annex J.
-Many implementations of Ada 95 support a pragma Assert and
-this is now consolidated into Ada 2005. The general idea is
-that we can write pragmas such as
-  pragma Assert(X >50);
-  pragma Assert(not Buffer_Full, "buffer is full");
-The first parameter is a Boolean expression and the second
-(and optional) parameter is a string. If at the point of the
-pragma at execution time, the expression is False then action
-can be taken. The action is controlled by another pragma
-Assertion_Policy which can switch the assertion mechanism on
-and off by one of
-  pragma Assertion_Policy(Check);
-  pragma Assertion_Policy(Ignore);
-If the policy is to check then the exception Assertion_Error
-is raised with the message, if any. This exception is
-declared in the predefined package Ada.Assertions. There are
-some other facilities as well.
-The pragma No_Return also concerns exceptions. It can be
-applied to a procedure (not to a function) and indicates that
-the procedure never returns normally but only by propagating
-an exception (it might also loop for ever). Thus
-  procedure Fatal_Error(Message: in String);
-  pragma No_Return(Fatal_Error);
-And now whenever we call Fatal_Error the compiler is assured
-that control is not returned and this might enable some
-optimization or better diagnostic messages.
+@key[end] Process_Ex;
+@end[Example]
+
+@leading@;Ada 95 introduced modular types which are of course unsigned integers.
+However it has in certain cases proved very difficult to get unsigned
+integers and signed integers to work together. This is a trivial matter
+in fragile languages such as C but in Ada the type model has proved
+obstructive. The basic problem is converting a value of a signed type
+which happens to be negative to an unsigned type. Thus suppose we
+want to add a signed offset to an unsigned address value, we might have
+@begin[Example]
+@key[type] Offset_Type @key[is range] @en@;(2**31) .. 2**31@en@;1;
+@key[type] Address_Type @key[is mod] 2**32;
+
+Offset: Offset_Type;
+Address: Address_Type;
+@end[Example]
+
+@leading@;We cannot just add @exam[Offset] to @exam[Address] because they are
+of different types. If we convert the @exam[Offset] to the address
+type then we might get @exam[Constraint_Error] and so on. The solution
+in Ada 2005 is to use a new functional attribute @exam[S'Mod] which
+applies to any modular subtype @exam[S] and converts a universal integer
+value to the modular type using the corresponding mathematical mod
+operation. So we can now write@Defn{mod attribute}@Defn2{Term=[attribute],Sec=[Mod]}
+@begin[Example]
+Address := Address + Address_Type'Mod(Offset);
+@end[Example]
+
+Another new attribute is @exam[Machine_Rounding]. This enables high-performance
+conversions from floating point types to integer types when the exact
+rounding does not matter.@Defn{machine_rounding attribute}@Defn2{Term=[attribute],Sec=[Machine_Rounding]}
+
+The third numeric change concerns fixed point types. It was common
+practice for some Ada 83 programs to define their own multiply and
+divide operations, perhaps to obtain saturation arithmetic. These
+programs ran afoul of the Ada 95 rules that introduced universal fixed
+operations and resulted in ambiguities. Without going into details,
+this problem has been fixed in Ada 2005 so that user-defined operations
+can now be used.
+
+@leading@;Ada 2005 has several new pragmas. The first is
+@begin[Example]
+@key[pragma] Unsuppress(Identifier);
+@end[Example]
+@leading@;where the identifier is that of a check such as
+@exam[Range_Check].@Defn{unsuppress pragma}@Defn2{Term=[pragma],Sec=[Unsuppress]}
+The general idea is to ensure that checks are performed in a declarative
+region irrespective of the use of a corresponding pragma @exam[Suppress].
+Thus we might have a type @exam[My_Int] that behaves as a saturated
+type. Writing
+@begin[Example]
+@key[function] "*" (Left, Right: My_Int) @key[return] My_Int @key[is]
+   @key[pragma] Unsuppress(Overflow_Check);
+@key[begin]
+   @key[return] Integer(Left) * Integer(Right);
+@key[exception]
+   @key[when] Constraint_Error =>
+      @key[if] (Left>0 @key[and] Right>0) @key[or] (Left<0 @key[and] Right<0) @key[then]
+         @key[return] My_Int'Last;
+      @key[else]
+         @key[return] My_Int'First;
+      @key[end if];
+@key[end] "*";
+@end[Example]
+
+ensures that the code always works as intended even if checks are
+suppressed in the program as a whole. Incidentally the @exam[On] parameter
+of pragma @exam[Suppress] which never worked well has been banished
+to Annex J.
+
+@leading@;Many implementations of Ada 95 support a pragma @exam[Assert] and
+this is now consolidated into Ada 2005. The general idea is that we
+can write pragmas such as@Defn{assert pragma}@Defn2{Term=[pragma],Sec=[Assert]}
+@begin[Example]
+@key[pragma] Assert(X >50);
+
+@key[pragma] Assert(@key[not] Buffer_Full, "buffer is full");
+@end[Example]
+
+@leading@;The first parameter is a Boolean expression and the second (and
+optional) parameter is a string. If at the point of the pragma at execution
+time, the expression is @exam[False] then action can be taken. The action is
+controlled by another pragma @exam[Assertion_Policy] which can switch the
+assertion mechanism on and off by one of@Defn{assertion policy}@Defn2{Term=[pragma],Sec=[Assertion_Policy]}
+@begin[Example]
+@key[pragma] Assertion_Policy(Check);
+
+@key[pragma] Assertion_Policy(Ignore);
+@end[Example]
+
+If the policy is to check then the exception @exam[Assertion_Error]
+is raised with the message, if any. This exception is declared in
+the predefined package @exam[Ada.Assertions]. There are some other
+facilities as well.
+
+@leading@;The pragma @exam[No_Return] also concerns exceptions. It can be applied
+to a procedure (not to a function) and indicates that the procedure
+never returns normally but only by propagating an exception (it might
+also loop for ever). Thus@Defn{non-returning procedures}@Defn2{Term=[pragma],Sec=[No_Return]}
+@begin[Example]
+@key[procedure] Fatal_Error(Message: @key[in] String);
+@key[pragma] No_Return(Fatal_Error);
+@end[Example]
+
+And now whenever we call @exam[Fatal_Error] the compiler is assured
+that control is not returned and this might enable some optimization
+or better diagnostic messages.
+
 Note that this pragma applies to the predefined procedure
-Ada.Exceptions.Raise_Exception.
-Another new pragma is Preelaborable_Initialization. This is
-used with private types and indicates that the full type will
-have preelaborable initialization. A number of examples occur
-with the predefined packages such as
-  pragma Preelaborable_Initialization(Controlled);
-in Ada.Finalization.
-Finally, there is the pragma Unchecked_Union. This is useful
-for interfacing to programs written in C that use the concept
-of unions. Unions in C correspond to variant types in Ada but
-do not store any discriminant which is entirely in the mind
-of the C programmer. The pragma enables a C union to be
-mapped to an Ada variant record type by omitting the storage
-for the discriminant.
-If the C program has
-  union {
+@exam[Ada.Exceptions.Raise_Exception].
+
+Another new pragma is @exam[Preelaborable_Initialization]. This is
+used with private types and indicates that the full type will have
+preelaborable initialization. A number of examples occur with the
+predefined packages such as@Defn{preelaborable initialization}@Defn2{Term=[pragma],Sec=[Preelaborable_Initialization]}
+@begin[Example]
+@key[pragma] Preelaborable_Initialization(Controlled);
+@end[Example]
+in @exam[Ada.Finalization].
+
+Finally, there is the pragma @exam[Unchecked_Union].@Defn{union}@Defn{C union}@Defn2{Term=[pragma],Sec=[Unchecked_Union]}
+This is useful
+for interfacing to programs written in C that use the concept of unions.
+Unions in C correspond to variant types in Ada but do not store any
+discriminant which is entirely in the mind of the C programmer. The
+pragma enables a C union to be mapped to an Ada variant record type
+by omitting the storage for the discriminant.
+
+@leading@keepnext@;If the C program has
+@begin[Example]
+union {
    double spvalue;
    struct {
-     int length;
-     double* first;
-     } mpvalue;
-  } number;
-then this can be mapped in the Ada program by
-  type Number(Kind: Precision) is
-   record
-     case Kind is
-      when Single_Precision =>
-        SP_Value: Long_Float;
-      when Multiple_Precision =>
-        MP_Value_Length: Integer;
-        MP_Value_First: access Long_Float;
-     end case;
-   end record;
-  pragma Unchecked_Union(Number);
-One problem with pragmas (and attributes) is that many
-implementations have added implementation defined ones (as
-they are indeed permitted to do). However, this can impede
-portability from one implementation to another. To overcome
-this there are further Restrictions identifiers so we can
-write
-  pragma Restrictions(No_Implementation_Pragmas,
-  No_Implementation_Attributes);
-Observe that one of the goals of Ada 2005 has been to
-standardize as many of the implementation defined attributes
-and pragmas as possible.
+      int length;
+      double* first;
+      } mpvalue;
+} number;
+@end[Example]
+
+@leading@keepnext@;then this can be mapped in the Ada program by
+@begin[Example]
+@key[type] Number(Kind: Precision) @key[is]
+   @key[record]
+      @key[case] Kind @key[is]
+         @key[when] Single_Precision =>
+            SP_Value: Long_Float;
+         @key[when] Multiple_Precision =>
+            MP_Value_Length: Integer;
+            MP_Value_First: @key[access] Long_Float;
+      @key[end case];
+   @key[end record];
+@key[pragma] Unchecked_Union(Number);
+@end[Example]
+
+One problem with pragmas (and attributes) is that many implementations
+have added implementation defined ones (as they are indeed permitted
+to do). However, this can impede portability from one implementation
+to another. To overcome this there are further @exam[Restrictions]
+identifiers so we can write@Defn{restrictions identifier}
+@begin[Example]
+@key[pragma] Restrictions(No_Implementation_Pragmas, No_Implementation_Attributes);
+@end[Example]
+
+Observe that one of the goals of Ada 2005 has been to standardize
+as many of the implementation defined attributes and pragmas as possible.
+
 Readers might care to consider the paradox that GNAT has an
 (implementation-defined) restrictions identifier
-No_Implementation_Restrictions.
-Another new restrictions identifier prevents us from
-inadvertently using features in Annex J thus
-  pragma Restrictions(No_Obsolescent_Features);
-Similarly we can use the restrictions identifier
-No_Dependence to state that a program does not depend on a
-given library unit. Thus we might write
-  pragma Restrictions(No_Dependence => Ada.Command_Line);
-Note that the unit mentioned might be a predefined library
-unit as in the above example but it can also be used with any
-library unit.
-The final new general feature concerns formal generic package
-parameters. Ada 95 introduced the ability to have formal
-packages as parameters of generic units. This greatly reduced
-the need for long generic parameter lists since the formal
-package encapsulated them.
-Sometimes it is necessary for a generic unit to have two (or
-more) formal packages. When this happens it is often the case
-that some of the actual parameters of one formal package must
-be identical to those of the other. In order to permit this
-there are two forms of generic parameters. One possibility is
-  generic
-   with package P is new Q(<>);
-  package Gen is ...
-and then the package Gen can be instantiated with any package
-that is an instantiation of Q. On the other hand we can have
-  generic
-   with package R is new S(P1, P2, ... );
-  package Gen is ...
-and then the package Gen can only be instantiated with a
-package that is an instantiation of S with the given actual
-parameters P1, P2 etc.
-These mechanisms are often used together as in
-  generic
-   with package P is new Q(<>);
-   with package R is new S(P.F1);
-  package Gen is ...
-This ensures that the instantiation of S has the same actual
-parameter (assumed only one in this example) as the parameter
-F1 of Q used in the instantiation of Q to create the actual
-package corresponding to P.
-There is an example of this in one of the packages for
-vectors and matrices in ISO/IEC 13813 which is now
-incorporated into Ada 2005 (see Section 3.6). The generic
-package for complex arrays has two package parameters. One is
-the corresponding package for real arrays and the other is
-the package Generic_Complex_Types from the existing Numerics
-annex. Both of these packages have a floating type as their
-single formal parameter and it is important that both
-instantiations use the same floating type (eg both Float and
-not one Float and one Long_Float) otherwise a terrible mess
-will occur. This is assured by writing (using some
-abbreviations)
-  with ... ;
-  generic
-   with package Real_Arrays is new
-  Generic_Real_Arrays(<>);
-   with package Complex_Types is new
-  Generic_Complex_Types(Real_Arrays.Real);
-  package Generic_Complex_Arrays is ...
-Well this works fine in simple cases (the reader may wonder
-whether this example is simple anyway) but in more elaborate
-situations it is a pain. The trouble is that we have to give
-all the parameters for the formal package or none at all in
-Ada 95.
-Ada 2005 permits only some of the parameters to be specified,
-and any not specified can be indicated using the box. So we
-can write any of
-  with package Q is new R(P1, P2, F3 => <>);
-  with package Q is new R(P1, others => <>);
-  with package Q is new R(F1 => <>, F2 => P2, F3 => P3);
-Note that the existing form (<>) is now deemed to be a
-shorthand for (others => <>). As with aggregates, the form <>
-is only permitted with named notation.
-Examples using this new facility will be given in a later
-paper.
+@exam[No_Implementation_Restrictions].
 
-@LabeledSubclause{Overview: Standard library}
+@leading@;Another new restrictions identifier prevents us from inadvertently
+using features in Annex J thus
+@begin[Example]
+@key[pragma] Restrictions(No_Obsolescent_Features);
+@end[Example]
 
-There are significant improvements to the standard library in
-Ada 2005. One of the strengths of Java is the huge library
-that comes with it. Ada has tended to take the esoteric view
-that it is a language for constructing programs from
-components and has in the past rather assumed that the
-components would spring up by magic from the user community.
-There has also perhaps been a reluctance to specify standard
-components in case that preempted the development of better
-ones. However, it is now recognized that standardizing useful
-stuff is a good thing. And moreover, secondary ISO standards
-are not very helpful because they are almost invisible. Ada
-95 added quite a lot to the predefined library and Ada 2005
-adds more.
-First, there are packages for manipulating vectors and
-matrices already mentioned in Section 3.5 when discussing
-formal package parameters. There are two packages,
-Ada.Numerics.Generic_Real_Arrays for real vectors and
-matrices and Ada.Numerics.Generic_Complex_Arrays for complex
-vectors and matrices. They can be instantiated according to
-the underlying floating point type used. There are also
-nongeneric versions as usual.
-These packages export types for declaring vectors and
-matrices and many operations for manipulating them. Thus if
-we have an expression in mathematical notation such as
-  y = Ax + z
-where x , y and z are vectors and A is a square matrix, then
+@leading@;Similarly we can use the restrictions identifier @exam[No_Dependence]
+to state that a program does not depend on a given library unit. Thus
+we might write
+@begin[Example]
+@key[pragma] Restrictions(No_Dependence => Ada.Command_Line);
+@end[Example]
+
+Note that the unit mentioned might be a predefined library unit as
+in the above example but it can also be used with any library unit.
+
+The final new general feature concerns formal generic package parameters.
+Ada 95 introduced the ability to have formal packages as parameters
+of generic units. This greatly reduced the need for long generic parameter
+lists since the formal package encapsulated them.
+
+@leading@;Sometimes it is necessary for a generic unit to have two (or more)
+formal packages. When this happens it is often the case that some
+of the actual parameters of one formal package must be identical to
+those of the other. In order to permit this there are two forms of
+generic parameters. One possibility is
+
+@begin[Example]
+@key[generic]
+   @key[with package] P @key[is new] Q(<>);
+@key[package] Gen @key[is] ...
+@end[Example]
+
+@leading@;and then the package @exam[Gen] can be instantiated with any package
+that is an instantiation of @exam[Q]. On the other hand we can have
+@begin[Example]
+@key[generic]
+   @key[with package] R @key[is new] S(P1, P2, ... );
+@key[package] Gen @key[is] ...
+@end[Example]
+
+and then the package @exam[Gen] can only be instantiated with a package
+that is an instantiation of @exam[S] with the given actual parameters
+@exam[P1], @exam[P2] etc.
+
+@leading@keepnext@;These mechanisms are often used together as in
+@begin[Example]
+@key[generic]
+   @key[with package] P @key[is new] Q(<>);
+   @key[with package] R @key[is new] S(P.F1);
+@key[package] Gen @key[is] ...
+@end[Example]
+
+This ensures that the instantiation of @exam[S] has the same actual
+parameter (assumed only one in this example) as the parameter @exam[F1]
+of @exam[Q] used in the instantiation of @exam[Q] to create the actual
+package corresponding to@exam[ P].
+
+@leading@;There is an example of this in one of the packages for vectors and
+matrices in ISO/IEC 13813 which is now incorporated into Ada 2005
+(see Section 3.6). The generic package for complex arrays has two
+package parameters. One is the corresponding package for real arrays
+and the other is the package @exam[Generic_Complex_Types] from the
+existing Numerics annex. Both of these packages have a floating type
+as their single formal parameter and it is important that both instantiations
+use the same floating type (eg both @exam[Float] and not one @exam[Float]
+and one @exam[Long_Float]) otherwise a terrible mess will occur. This
+is assured by writing (using some abbreviations)
+@begin[Example]
+@key[with] ... ;
+@key[generic]
+   @key[with package] Real_Arrays @key[is] @key[new] Generic_Real_Arrays(<>);
+   @key[with package] Complex_Types @key[is new] Generic_Complex_Types(Real_Arrays.Real);
+@key[package] Generic_Complex_Arrays @key[is] ...
+@end[Example]
+
+Well this works fine in simple cases (the reader may wonder whether
+this example is simple anyway) but in more elaborate situations it
+is a pain. The trouble is that we have to give all the parameters
+for the formal package or none at all in Ada 95.
+
+@leading@;Ada 2005 permits only some of the parameters to be specified, and
+any not specified can be indicated using the box. So we can write any of
+@begin[Example]
+@key[with package] Q @key[is new] R(P1, P2, F3 => <>);
+@key[with package] Q @key[is new] R(P1, @key[others] => <>);
+@key[with package] Q @key[is new] R(F1 => <>, F2 => P2, F3 => P3);
+@end[Example]
+
+Note that the existing form @exam[(<>)] is now deemed to be a shorthand
+for@exam[ (]@key[others]@exam[ => <>)]. As with aggregates, the form
+@exam[<>] is only permitted with named notation.
+
+Examples using this new facility will be given in a later paper.@Comment{** Ref TBD}
+
+
+@LabeledSubClause{Overview: Standard library}
+
+There are significant improvements to the standard library in Ada
+2005. One of the strengths of Java is the huge library that comes
+with it. Ada has tended to take the esoteric view that it is a language
+for constructing programs from components and has in the past rather
+assumed that the components would spring up by magic from the user
+community. There has also perhaps been a reluctance to specify standard
+components in case that preempted the development of better ones.
+However, it is now recognized that standardizing useful stuff is a
+good thing. And moreover, secondary ISO standards are not very helpful
+because they are almost invisible. Ada 95 added quite a lot to the
+predefined library and Ada 2005 adds more.
+
+First, there are packages for manipulating vectors and matrices already
+mentioned in Section @RefSecNum{Overview: Exceptions, numerics, generics etc}
+when discussing formal package parameters.
+There are two packages, @exam[Ada.Numerics.Generic_Real_Arrays] for
+real vectors and matrices and @exam[Ada.Numerics.Generic_Complex_Arrays]
+for complex vectors and matrices. They can be instantiated according
+to the underlying floating point type used. There are also nongeneric
+versions as usual.@Defn{vector}@Defn{matrix}
+
+@leading@;These packages export types for declaring vectors and matrices and
+many operations for manipulating them. Thus if we have an expression
+in mathematical notation such as
+@begin[Example]
+@b{@i{y}} = @b{@i{Ax}} + @b{@i{z}}
+@end[Example]
+
+where @b{@i{x}}, @b{@i{y}} and @b{@i{z}}
+are vectors and @b{@i{A}} is a square matrix, then
 this calculation can be simply programmed as
-  X, Y, Z: Real_Vector(1 .. N);
-  A: Real_Matrix(1 .. N, 1 .. N);
-  ...
-  Y := A * X + Z;
-and the appropriate operations will be invoked. The packages
-also include subprograms for the most useful linear algebra
-computations, namely, the solution of linear equations,
-matrix inversion and determinant evaluation, plus the
-determination of eigenvalues and eigenvectors for symmetric
-matrices (Hermitian in the complex case). Thus to determine X
-given Y, Z and A in the above example we can write
-  X := Solve(A, Y @em Z);
-It should not be thought that these Ada packages in any way
-compete with the very comprehensive BLAS (Basic Linear
-Algebra Subprograms). The purpose of the Ada packages is to
-provide simple implementations of very commonly used
-algorithms (perhaps for small embedded systems or for
-prototyping) and to provide a solid framework for developing
-bindings to the BLAS for more demanding situations.
-Incidentally, they are in the Numerics annex.
-Another (but very trivial) change to the Numerics annex is
-that nongeneric versions of Ada.Text_IO.Complex_IO have been
-added in line with the standard principle of providing
-nongeneric versions of generic predefined packages for
-convenience. Their omission from Ada 95 was an oversight.
-There is a new predefined package in Annex A for accessing
-tree-structured file systems. The scope is perhaps indicated
-by this fragment of its specification
-with ...
-package Ada.Directories is
-  -- Directory and file operations
-  function Current_Directory return String;
-  procedure Set_Directory(Directory: in String);
-   ...
-   -- File and directory name operations
-   function Full_Name(Name: in String) return String;
-   function Simple_Name(Name: in String) return String;
-   ...
-     -- File and directory queries
-      type File_Kind is (Directory, Ordinary_File,
-   Special_File);
-      type File_Size is range 0 .. implementation-defined;
-      function Exists(Name: in String) return Boolean;
-      ...
-      -- Directory searching
-      type Directory_Entry_Type is limited private;
-      type Filter_Type is array (File_Kind) of Boolean;
-      ...
-      -- Operations on directory entries
-      ...
-   end Ada.Directories;
-The package contains facilities which will be useful on any
-Unix or Windows system. However, it has to be recognized that
-like Ada.Command_Line it might not be supportable on every
-environment.
-There is also a package Ada.Environment_Variables for
-accessing the environment variables that occur in most
-operating systems.
-A number of additional subprograms have been added to the
-existing string handling packages. There are several problems
-with the Ada 95 packages. One is that conversion between
-bounded and unbounded strings and the raw type String is
-required rather a lot and is both ugly and inefficient. For
-example, searching only part of a bounded or unbounded string
-can only be done by converting it to a String and then
-searching the appropriate slice (or by making a truncated
-copy first).
-In brief the additional subprograms are as follows
-? Three further versions of function Index with an
-  additional parameter From indicating the start of the
-  search are added to each of Strings.Fixed, Strings.Bounded
-  and Strings.Unbounded.
-? A further version of function Index_Non_Blank is similarly
-  added to all three packages.
-? A procedure Set_Bounded_String with similar behaviour to
-  the function To_Bounded_String is added to
-  Strings.Bounded. This avoids the overhead of using a
-  function. A similar procedure Set_Unbounded_String is
-  added to Strings.Unbounded.
-? A function and procedure Bounded_Slice are added to
-  Strings.Bounded. These avoid conversions from type String.
-  A similar function and procedure Unbounded_Slice are added
-  to Strings.Unbounded.
-As well as these additions there is a new package
-Ada.Text_IO.Unbounded_IO for the input and output of
-unbounded strings. This again avoids unnecessary conversion
-to the type String. Similarly, there is a generic package
-Ada.Text_IO.Bounded_IO; this is generic because the package
-Strings.Bounded has an inner generic package which is
-parameterized by the maximum string length.
-Finally, two functions Get_Line are added to Ada.Text_IO
-itself. These avoid difficulties with the length of the
-string which occurs with the existing procedures Get_Line.
-In Ada 83, program identifiers used the 7-bit ASCII set. In
-Ada 95 this was extended to the 8-bit Latin-1 set. In Ada
-2005 this is extended yet again to the entire ISO/IEC
-10646:2003 character repertoire. This means that identifiers
-can now use Cyrillic and Greek characters. Thus we could
-extend the animal example by
-  ¥t…‰Š¡: access Pig renames Napoleon;
-  PegasuV: Horse;
-In order to encourage us to write our mathematical programs
-nicely the additional constant
-  p: constant := Pi;
-has been added to the package Ada.Numerics in Ada 2005.
-In a similar way types Wide_String and Wide_Character were
-added to Ada 95. In Ada 2005 this process is also extended
-and a set of wide-wide types and packages for 32-bit
-characters are added. Thus we have types Wide_Wide_Character
-and Wide_Wide_String and so on.
-A major addition to the predefined library is the package
-Ada.Containers and its children plus some auxiliary child
-functions of Ada.Strings. These are very important and
-considerable additions to the predefined capability of Ada
-and bring the best in standard data structure manipulation to
-the fingers of every Ada programmer. The scope is perhaps
-best illustrated by listing the units involved.
-Ada.Containers @em this is the root package and just declares
-  types Hash_Type and Count_Type which are an implementation-
-  defined modular and integer type respectively.
-Ada.Strings.Hash  @em this function hashes a string into the
-  type Hash_Type. There are also versions for bounded and
-  unbounded strrings.
-Ada.Containers.Vectors @em this is a generic package with
-  parameters giving the index type and element type of a
-  vector plus "=" for the element type. This package
-  declares types and operations for manipulating vectors.
-  (These are vectors in the sense of flexible arrays and not
-  the mathematical vectors used for linear algebra as in the
-  vectors and matrices packages mentioned earlier.) As well
-  as subprograms for adding, moving and removing elements
-  there are also generic subprograms for searching, sorting
-  and iterating over vectors.
-Ada.Containers.Doubly_Linked_Lists @em this is  a  generic
-  package with parameters giving the element type and "="
-  for the element type. This package declares types and
-  operations for manipulating doubly-linked lists. It has
-  similar functionality to the vectors package. Thus, as
-  well as subprograms for adding, moving and removing
-  elements there are also generic subprograms for searching,
-  sorting and iterating over lists.
-Ada.Containers.Hashed_Maps @em this is a generic package with
-  parameters giving a key type and an element type plus a
-  hash function for the key, a function to test for equality
-  between keys and "=" for the element type. It declares
-  types and operations for manipulating hashed maps.
-Ada.Containers.Ordered_Maps @em this is a similar generic
-  package for ordered maps with parameters giving a key type
-  and an element type and "<" for the key type and "=" for
-  the element type.
-Ada.Containers.Hashed_Sets @em this is a generic package with
-  parameters giving the element type plus a hash function
-  for the elements and a function to test for equality
-  between elements. It declares types and operations for
-  manipulating hashed sets.
-Ada.Containers.Ordered_Sets @em this is a similar generic
-  package for ordered sets with parameters giving the
-  element type and "<" and "=" for the element type.
-There are then another six packages with similar
-functionality but for indefinite types with corresponding
-names such as Ada.Containers.Indefinite_Vectors.
-Ada.Containers.Generic_Array_Sort @em this is a generic
-  procedure for sorting arrays. The generic parameters give
-  the index type, the element type, the array type and "<"
-  for the element type. The array type is unconstrained.
-Finally there is a very similar generic procedure
-Ada.Containers.Generic_Constrained_Array_Sort but for
-constrained array types.
-It is hoped that the above list gives a flavour of the
-capability of the package Containers. Some examples of the
-use of the facilities will be given in a later paper.
-Finally, there are further packages for manipulating times
-(that is of type Ada.Calendar.Time and not Ada.Real_Time.Time
-and thus more appropriate in a discussion of the predefined
-library than the real-time features). The package
-Ada.Calendar has a number of obvious omissions and in order
-to rectify this the following packages are added.
-Ada.Calendar.Time_Zones @em this declares a type Time_Offset
-  describing in minutes the difference between two time
-  zones and a function UTC_Time_Offset which given a time
-  returns the difference between the time zone of Calendar
-  at that time and UTC (Coordinated Universal Time which is
-  close to Greenwich Mean Time). It also has an exception
-  which is raised if the time zone of Calendar is not known
-  (maybe the clock is broken).
-Ada.Calendar.Arithmetic @em this declares various types and
-  operations for coping with leap seconds.
-Ada.Calendar.Formatting @em this declares further types and
-  operations for dealing with formatting and related
-  matters.
 
-*** Started here ***
+@begin[Example]
+X, Y, Z: Real_Vector(1 .. N);
+A: Real_Matrix(1 .. N, 1 .. N);
+...
+Y := A * X + Z;
+@end[Example]
+
+and the appropriate operations will
+be invoked. The packages also include subprograms for the most useful
+linear algebra computations, namely, the solution of linear equations,
+matrix inversion and determinant evaluation, plus the determination
+of eigenvalues and eigenvectors for symmetric matrices (Hermitian
+in the complex case). Thus to determine @exam[X]
+given @exam[Y], @exam[Z] and @exam[A] in the above example we can write
+@begin[Example]
+X := Solve(A, Y @en Z);
+@end[Example]
+
+It should not be thought that these
+Ada packages in any way compete with the very comprehensive BLAS (Basic
+Linear Algebra Subprograms). The purpose of the Ada packages is to
+provide simple implementations of very commonly used algorithms (perhaps
+for small embedded systems or for prototyping) and to provide a solid
+framework for developing bindings to the BLAS for more demanding situations.
+Incidentally, they are in the Numerics annex.
+
+Another (but very trivial) change to the Numerics annex is that nongeneric
+versions of @exam[Ada.Text_IO.Complex_IO]
+have been added in line with the standard principle of providing
+nongeneric versions of generic predefined packages for convenience.
+Their omission from Ada 95 was an oversight.
+
+@leading@;There is a new predefined package in Annex A for accessing
+tree-structured file systems. The scope is perhaps indicated by this fragment
+of its specification@Defn{directory operations}
+
+@begin[Example]
+@key[with] ...
+@key[package] Ada.Directories @key[is]
+
+   -- @examcom[Directory and file operations]
+
+   @key[function] Current_Directory @key[return] String;
+   @key[procedure] Set_Directory(Directory: @key[in] String);
+   ...
+   -- @examcom[File and directory name operations]
+
+   @key[function] Full_Name(Name: @key[in] String) @key[return] String;
+   @key[function] Simple_Name(Name: @key[in] String) @key[return] String;
+   ...
+   -- @examcom[File and directory queries]
+
+   @key[type] File_Kind @key[is] (Directory, Ordinary_File, Special_File);
+   @key[type] File_Size @key[is range] 0 .. @examcom[implementation-defined];
+   @key[function] Exists(Name: @key[in] String) @key[return] Boolean;
+   ...
+   -- @examcom[Directory searching]
+
+   @key[type] Directory_Entry_Type @key[is limited private];
+   @key[type] Filter_Type @key[is array] (File_Kind) @key[of] Boolean;
+   ...
+   -- @examcom[Operations on directory entries]
+
+   ...
+@key[end] Ada.Directories;
+@end[Example]
+
+The package contains facilities which
+will be useful on any Unix or Windows system. However, it has to be
+recognized that like @exam[Ada.Command_Line]
+it might not be supportable on every environment.
+
+There is also a package @exam[Ada.Environment_Variables]
+for accessing the environment variables that occur in most operating
+systems.@Defn{environment variables}
+
+A number of additional subprograms
+have been added to the existing string handling packages. There are
+several problems with the Ada 95 packages. One is that conversion
+between bounded and unbounded strings and the raw type @exam[String]
+is required rather a lot and is both ugly and inefficient. For example,
+searching only part of a bounded or unbounded string can only be done
+by converting it to a @exam[String]
+and then searching the appropriate slice (or by making a truncated
+copy first).
+
+In brief the additional subprograms are as follows
+
+@begin[Itemize]
+Three further versions of function @exam[Index] with an additional parameter
+@exam[From] indicating the start of the search are added to each of
+@exam[Strings.Fixed], @exam[Strings.Bounded] and @exam[Strings.Unbounded].
+
+A further version of function @exam[Index_Non_Blank] is similarly added to all
+three packages.
+
+A procedure @exam[Set_Bounded_String] with similar behaviour to the function
+@exam[To_Bounded_String] is added to @exam[Strings.Bounded]. This avoids the
+overhead of using a function. A similar procedure @exam[Set_Unbounded_String]
+is added to @exam[Strings.Unbounded].
+
+A function and procedure @exam[Bounded_Slice] are added to
+@exam[Strings.Bounded]. These avoid conversions from type @exam[String]. A
+similar function and procedure @exam[Unbounded_Slice]are added to
+@exam[Strings.Unbounded].
+
+@end[Itemize]
+
+As well as these additions there
+is a new package @exam[Ada.Text_IO.Unbounded_IO]
+for the input and output of unbounded strings. This again avoids
+unnecessary conversion to the type @exam[String]. Similarly, there is a
+generic package @exam[Ada.Text_IO.Bounded_IO]; this is generic because
+the package @exam[Strings.Bounded]
+has an inner generic package which is parameterized by the maximum
+string length.
+
+Finally, two functions @exam[Get_Line] are added to @exam[Ada.Text_IO]
+itself. These avoid difficulties with the length of the string which
+occurs with the existing procedures @exam[Get_Line].
+
+In Ada 83, program identifiers used
+the 7-bit ASCII set. In Ada 95 this was extended to the 8-bit Latin-1
+set. In Ada 2005 this is extended yet again to the entire ISO/IEC
+10646:2003 character repertoire. This means that identifiers can now
+use Cyrillic and Greek characters. Thus we could extend the animal
+example by@Defn{ISO 10646 characters}
+
+@begin[Example]@comment{Cyrillic codes in hex: 421h, 442h, 430h, 43bh, 438h, 43dh}
+@unicode(1057)@unicode(1090)@unicode(1072)@unicode(1083)@unicode(1080)@unicode(1085) : @key[access] Pig @key[renames] Napoleon;
+@unicode(928)@unicode(949)@unicode(947)@unicode(945)@unicode(963)@unicode(965)@unicode(962) : Horse;
+@end[Example]
+
+@leading@;In order to encourage us to write
+our mathematical programs nicely the additional constant
+@begin[Example]
+@pi : @key[constant] := Pi;
+@end[Example]
+
+has been added to the package @exam[Ada.Numerics] in Ada 2005.
+
+In a similar way types @exam[Wide_String] and @exam[Wide_Character] were
+added to Ada 95. In Ada 2005 this process is also extended and a set
+of wide-wide types and packages for 32-bit characters are added. Thus
+we have types @exam[Wide_Wide_Character] and @exam[Wide_Wide_String]
+and so on.
+
+A major addition to the predefined
+library is the package @exam[Ada.Containers]
+and its children plus some auxiliary child functions of @exam[Ada.Strings].
+These are very important and considerable additions to the predefined
+capability of Ada and bring the best in standard data structure manipulation
+to the fingers of every Ada programmer. The scope is perhaps best
+illustrated by listing the units involved.@Defn{containers}
+
+@begin[Description]
+@exam[Ada.Containers] @en@\This
+is the root package and just declares types @exam[Hash_Type] and
+@exam[Count_Type] which are an implementation-defined modular and integer type
+respectively.
+
+@exam[Ada.Strings.Hash] @en@\This function hashes a string into the type
+@exam[Hash_Type]. There are also versions for bounded and unbounded strrings.
+
+@exam[Ada.Containers.Vectors] @en@\This
+is a generic package with parameters giving the index type and element
+type of a vector plus @exam["="]
+for the element type. This package declares types and operations
+for manipulating vectors. (These are vectors in the sense of flexible
+arrays and not the mathematical vectors used for linear algebra as
+in the vectors and matrices packages mentioned earlier.) As well as
+subprograms for adding, moving and removing elements there are also
+generic subprograms for searching, sorting and iterating over vectors.
+
+@exam[Ada.Containers.Doubly_Linked_Lists] @en@\This is a generic package with
+parameters giving the element type and @exam["="] for the element type. This
+package declares types and operations for manipulating doubly-linked lists. It
+has similar functionality to the vectors package. Thus, as well as subprograms
+for adding, moving and removing elements there are also generic subprograms for
+searching, sorting and iterating over lists.
+
+@exam[Ada.Containers.Hashed_Maps] @en@\This is a generic package with
+parameters giving a key type and an element type plus a hash function for the
+key, a function to test for equality between keys and @exam["="] for the
+element type. It declares types and operations for manipulating hashed maps.
+
+@exam[Ada.Containers.Ordered_Maps] @en@\This is a similar generic package for
+ordered maps with parameters giving a key type and an element type and
+@exam["<"] for the key type and @exam["="] for the element type.
+
+@exam[Ada.Containers.Hashed_Sets] @en@\This is a generic package with
+parameters giving the element type plus a hash function for the elements and a
+function to test for equality between elements. It declares types and
+operations for manipulating hashed sets.
+
+@exam[Ada.Containers.Ordered_Sets] @en@\This is a similar generic package for
+ordered sets with parameters giving the element type and @exam["<"] and
+@exam["="] for the element type.
+@end[Description]
+
+There are then another six packages
+with similar functionality but for indefinite types with corresponding
+names such as @exam[Ada.Containers.Indefinite_Vectors].
+
+@begin[Description]
+@exam[Ada.Containers.Generic_Array_Sort] @en@\This is a generic procedure for
+sorting arrays. The generic parameters give the index type, the element type,
+the array type and @exam["<"] for the element type. The array type is
+unconstrained.@Defn{array sorting}
+@end[Description]
+
+Finally there is a very similar generic procedure
+@exam[Ada.Containers.Generic_Constrained_Array_Sort] but for constrained array
+types.
+
+It is hoped that the above list gives a flavour of the capability of the
+package @exam[Containers]. Some examples of the use of the facilities will be
+given in a later paper.@Comment{** Ref TBD - entire containers section}
+
+Finally, there are further packages for manipulating times (that is
+of type @exam[Ada.Calendar.Time] and not @exam[Ada.Real_Time.Time]
+and thus more appropriate in a discussion of the predefined library
+than the real-time features). The package @exam[Ada.Calendar]
+has a number of obvious omissions and in order to rectify this the
+following packages are added.@Defn{time operations}
+
+@begin[Description]
+@exam[Ada.Calendar.Time_Zones] @en@\This
+declares a type @exam[Time_Offset]
+describing in minutes the difference between two time zones and a
+function @exam[UTC_Time_Offset]
+which given a time returns the difference between the time zone of
+@exam[Calendar] at that time and
+UTC (Coordinated Universal Time which is close to Greenwich Mean Time).
+It also has an exception which is raised if the time zone of @exam[Calendar]
+is not known (maybe the clock is broken).
+
+@exam[Ada.Calendar.Arithmetic] @en@\This
+declares various types and operations for coping with leap seconds.
+
+@exam[Ada.Calendar.Formatting] @en@\This
+declares further types and operations for dealing with formatting
+and related matters.
+
+@end[Description]
 
 @leading@;Most of the new calendar features are clearly only for the
 chronological addict but the need for them does illustrate
@@ -2084,3 +2310,5 @@ suggests that this document when complete be called the Ada
 Language Enhancement Guide. This means that if combined with
 the final Ada Reference Manual, the whole document can then
 be referred to as the ARM and ALEG. Thanks Randy.
+
+

@@ -1,7 +1,7 @@
 @Comment{Master file for the Ada 2005 Rationale}
 
 @Comment{Global properties}
-@HideIndexEntries
+@HideIndexEntries@Comment{@Comment{@HideIndexEntries - Temporarily, show them}@ShowIndexEntries}
 @HideAnnotations @Comment{Hopefully, none of these here.}
 @HideISO
 @Comment{No paragraph numbers - no @NumberParagraphs command}
@@ -43,6 +43,8 @@
 @Source{Name=<Title.MSS>,SectionName=<TTL>,SectionNumber=[0],NewSection=[T]}
 @TOC @Comment{The table of contents goes here in the collating order}
 @Source{Name=<Intro.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[T]}
+@Source{Name=<Oop.MSS>,SectionName=<02>,SectionNumber=[2],NewSection=[T]}
+@Source{Name=<Access.MSS>,SectionName=<03>,SectionNumber=[3],NewSection=[T]}
 @Source{Name=<Refs.MSS>,SectionName=<REF>,SectionNumber=[0],NewSection=[T]}
 @Source{Name=<Index.MSS>,SectionName=<IDX>,SectionNumber=[0],NewSection=[T]}
 
