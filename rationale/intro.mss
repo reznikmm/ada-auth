@@ -1,7 +1,7 @@
 @Part(intro, Root="rat.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/Rationale/intro.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2006/01/22 05:07:39 $}
+@comment{$Revision: 1.4 $ $Date: 2006/01/24 06:44:36 $}
 
 @LabeledSection{Introduction}
 
@@ -930,7 +930,8 @@ function result might be in another animal function such as
 @end{Example}
 Anonymous access types can also be used in a renaming
 declaration. This and other detailed points on matters such
-as accessibility will be discussed in a later paper.@Comment{** Ref TBD}
+as accessibility will be discussed in a later paper
+(see @RefSecNum{Anonymous access types}).
 
 The final important change in access types concerns access to
 subprogram types. Access to subprogram types were introduced
@@ -954,9 +955,9 @@ the limits @Exam{Lo} and @Exam{Hi}. This works fine in Ada 95 for simple
 cases such as where the function is declared at library
 level. Thus to evaluate
 @begin{Example}@Comment{This might be better displayed as a graphic; a lot of systems won't have these characters.}
-@Roman{@Unicode(8992)@+{1}
-@Unicode(9474)  @Unicode(8730)x dx
-@Unicode(8993)@-{0}}
+@Roman{@grow{@grow{@Unicode(8992)}@+{1}
+@grow{@Unicode(9474)}  @Unicode(8730)x @i{dx}
+@grow{@Unicode(8993)}@-{0}}}
 @end{Example}
 
 @leading@keepnext@;we can write

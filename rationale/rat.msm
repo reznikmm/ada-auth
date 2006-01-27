@@ -24,7 +24,10 @@
 @HTMLHeader{<H1 Style='font-family: "Rockwell", "Times New Roman", Times, serif; font-size: 240%'><B><SPAN Style="color:rgb(0,0,153)">Rationale</SPAN> for <SPAN Style="color:rgb(204,0,0)">Ada 2005</SPAN></B></H1>
 <DIV Class="Normal"><FONT SIZE="+1"><I><A HREF="Rat-TTL.html">John Barnes</A></I></FONT></DIV>}
 @HTMLFooter{<DIV Class="Normal">&copy; 2005, 2006 John Barnes Informatics.</DIV>
-<DIV Class="Normal">Sponsored in part by the <A HREF="http://www.adaic.org/ARA/index.html">Ada Resource Association</A> and its member companies:</DIV>
+<DIV Class="Normal">Sponsored in part by:</DIV>
+<TABLE Summary="Sponsors" Width="710">
+<TR><TD VAlign="Top" Width="490">
+<SPAN Style="font-family: Arial, Helvetica, sans-serif; font-size: 92%">The <A HREF="http://www.adaic.org/ARA/index.html">Ada Resource Association</A> and its member companies:</SPAN>
 <img src="http://www.adaic.org/images/ARA-members-5.gif" alt="ARA Members" usemap="#member-map" border=1>
 <map name="member-map">
   <AREA href="http://www.adacore.com/" alt="AdaCore"
@@ -37,7 +40,11 @@
 	         shape="rect"         coords="222,0,480,66">
 	<AREA href="http://www.sofcheck.com/" alt="Sofcheck"
 	         shape="rect"         coords="296,66,480,130">
-</map>}
+</map>
+<TD Width="220" Align="Center" VAlign="Top">
+<SPAN Style="font-family: Arial, Helvetica, sans-serif; font-size: 92%">and <A HREF="http://www.ada-europe.org">Ada Europe</A>:<BR>
+<A HREF="http://www.ada-europe.org"><IMG SRC="AE_logo.gif" ALT="Ada Europe" Height="200"></A></SPAN>
+</TABLE>}
 
 @Comment{Source files and related items, in collating order}
 @Source{Name=<Title.MSS>,SectionName=<TTL>,SectionNumber=[0],NewSection=[T]}
@@ -45,6 +52,7 @@
 @Source{Name=<Intro.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[T]}
 @Source{Name=<Oop.MSS>,SectionName=<02>,SectionNumber=[2],NewSection=[T]}
 @Source{Name=<Access.MSS>,SectionName=<03>,SectionNumber=[3],NewSection=[T]}
+@Source{Name=<Struct.MSS>,SectionName=<04>,SectionNumber=[4],NewSection=[T]}
 @Source{Name=<Refs.MSS>,SectionName=<REF>,SectionNumber=[0],NewSection=[T]}
 @Source{Name=<Index.MSS>,SectionName=<IDX>,SectionNumber=[0],NewSection=[T]}
 

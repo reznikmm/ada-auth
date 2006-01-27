@@ -1,7 +1,7 @@
 @Part(oop, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/oop.mss,v $)
-@comment($Revision: 1.1 $ $Date: 2006/01/22 05:07:41 $)
+@comment($Revision: 1.2 $ $Date: 2006/01/24 06:44:39 $)
 
 @LabeledSection{Object oriented model}
 
@@ -143,7 +143,8 @@ it is convenient to discuss it here (@AILink{AI=[AI95-00310-01],Text=[310]}).
 
 There are many other OO related improvements in Ada 2005 concerning
 matters such as access types, visibility, and generics. They will
-be described in later papers.@Comment{** Ref TBD - entire access and "general" sections}
+be described in later papers (see @RefSecNum{Access types} and
+@RefSecNum{Exceptions, generics etc}).
 
 
 @LabeledClause{Reserved words}
@@ -1700,8 +1701,12 @@ subprogram of the class of types.
 This is all very tedious and needs careful maintenance if we add further
 types to the class.
 
-@leading@;Ada 2005 overcomes this problem by providing a generic object constructor
-function. Its specification is@Defn{object constructor}@Defn{object factory}@Defn{factory}
+@leading@;Ada 2005 overcomes this problem by providing a generic constructor
+function. The objective of this is to create an object given the value of its
+tag. Such functions are often called object factory functions for obvious
+reasons (the word factory is derived from the Latin facere, to make.) The
+specification of the
+function is@Defn{object constructor}@Defn{object factory}@Defn{factory}
 @begin[Example]
 @key[generic]
    @key[type] T (<>) @key[is abstract tagged limited private];

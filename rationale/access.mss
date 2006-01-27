@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/access.mss,v $)
-@comment($Revision: 1.1 $ $Date: 2006/01/22 05:07:37 $)
+@comment($Revision: 1.2 $ $Date: 2006/01/24 06:44:34 $)
 
 @LabeledSection{Access types}
 
@@ -695,13 +695,9 @@ X: @key[aliased access] T;
 
 although such constructions are likely to be used rarely.
 
-**** Stopped here ****
-
-Anonymous access types can also be used as the components of arrays
+@leading@;Anonymous access types can also be used as the components of arrays
 and records. In the Introduction we saw that rather than having to
 write
-
-}
 @begin[Example]
 @key[type] Cell;
 @key[type] Cell_Ptr @key[is access] Cell;
@@ -711,24 +707,20 @@ write
       Next: Cell_Ptr;
       Value: Integer;
    @key[end record];
-
-
 @end[Example]
-we can simply write
 
-
+@leading@keepnext@;we can simply write
 @begin[Example]
 @key[type] Cell @key[is]
    @key[record]
       Next: @key[access] Cell;
       Value: Integer;
    @key[end record];
-
-
 @end[Example]
-and this not only avoids having to declare the named access type @exam[Cell_Ptr]
-but it also avoids the need for the incomplete type declaration of
-@exam[Cell].
+
+and this not only avoids having to declare the named access type
+@exam[Cell_Ptr] but it also avoids the need for the incomplete type declaration
+of @exam[Cell].
 
 Permitting this required some changes to a rule regarding the use
 of a type name within its own declaration @en the so-called current
@@ -747,8 +739,8 @@ number and for creating the next task when a new prime number is discovered.
 It is thus quite natural that the task should need to make a clone
 of itself.
 
-
 @begin[Example]
+@tabset[P42]
 @key[task type] TT (P: Integer) @key[is]
    ...
 @key[end];
@@ -757,8 +749,8 @@ of itself.
 
 @key[task body] TT @key[is]
    @key[function] Make_Clone(N: Integer) @key[return] ATT @key[is]
-   @key[begin
-]      @key[return new] TT(N);@\@\-- @examcom[illegal ]
+   @key[begin]
+      @key[return new] TT(N);@\-- @examcom[illegal]
    @key[end] Make_Clone;
 
    Ref_Clone: ATT;
@@ -767,12 +759,11 @@ of itself.
    ...
    Ref_Clone := Make_Clone(N);
    ...
-   @key[abort] TT;@\@\@\-- @examcom[legal ]
+   @key[abort] TT;@\-- @examcom[legal]
    ...
 @key[end] TT;
-
-
 @end[Example]
+
 The attempt to make a slave clone of the task in the function @exam[Make_Clone]
 is illegal because within the task type its name refers to the current
 instance and not to the type. However, the abort statement is permitted
@@ -790,182 +781,145 @@ in Ada 2005 to allow the type name to denote the type itself within
 an anonymous access type declaration (but not a named access type
 declaration). So the type @exam[Cell] is permitted.
 
-Note however that in Ada 2005, the task @exam[TT] still cannot contain
-the declaration of the function @exam[Make_Clone]. Although we no
+@leading@;Note however that in Ada 2005, the task @exam[TT] still cannot
+contain the declaration of the function @exam[Make_Clone]. Although we no
 longer need to declare the named type @exam[ATT] since we can now
 declare @exam[Ref_Clone] as
-
-
 @begin[Example]
 Ref_Clone: @key[access] TT;
-
-
 @end[Example]
-and we can declare the function as
 
-
+@leading@keepnext@;and we can declare the function as
 @begin[Example]
-   @key[function] Make_Clone(N: Integer) @key[return] @key[access]
-TT @key[is]
+   @key[function] Make_Clone(N: Integer) @key[return] @key[access] TT @key[is]
    @key[begin]
-      @key[return new] TT(N);@\
+      @key[return new] TT(N);
    @key[end] Make_Clone;
-
-
 @end[Example]
+
 where we have an anonymous result type, nevertheless the allocator
-@key[new]@exam[ TT] inside@exam[ Make_Clone] remains illegal if @exam[Make_Clone]
-is declared within the task body @exam[TT]. But such a use is unusual
-and declaring a distinct external function is hardly a burden.
+@key[new]@exam[ TT] inside@exam[ Make_Clone] remains illegal if
+@exam[Make_Clone] is declared within the task body @exam[TT]. But such a use is
+unusual and declaring a distinct external function is hardly a burden.
 
-To be honest we can simply declare a subtype of a different name outside
-the task
-
-
+@leading@;To be honest we can simply declare a subtype of a different name
+outside the task
 @begin[Example]
 @key[subtype] XTT @key[is] TT;
-
-
 @end[Example]
-and then we can write @key[new]@exam[ XTT(N);] in the function and
+
+@leading@;and then we can write @key[new] @exam[XTT(N);] in the function and
 keep the function hidden inside the task. Indeed we don't need the
 function anyway because we can just write
-
-
 @begin[Example]
 Ref_Clone := @key[new] XTT(N);
-
-
 @end[Example]
 in the task body.
 
-The introduction of the wider use
+@leading@;The introduction of the wider use
 of anonymous access types requires some revision to the rules concerning
 type comparisons and conversions. This is achieved by the introduction
-of a type }{\cs24\i\f1\fs20 universal_access}
- by analogy with the types }{\cs24\i\f1\fs20 universal_integer}
- and }{\cs24\i\f1\fs20 universal_real}
-. Two new equality operators are defined in the package @exam[Standard]
- thus
-
-}
+of a type @examcom{universal_access} by analogy with the types
+@examcom{universal_integer} and @examcom{universal_real}. Two new equality
+operators are defined in the package @exam[Standard] thus
 @begin[Example]
-@key[function] "=" (Left, Right: @examcom[universal_access]) }@key[return] Boolean;
+@key[function] "=" (Left, Right: @examcom[universal_access]) @key[return] Boolean;
 
-@key[function] "/=" (Left, Right: @examcom[universal_access]) }@key[return] Boolean;
-
-}
+@key[function] "/=" (Left, Right: @examcom[universal_access]) @key[return] Boolean;
 @end[Example]
-The literal @key[null]
- is now deemed to be of type }{\cs24\i\f1\fs20 universal_access}
- and appropriate conversions are defined as well. These new operations
+
+The literal @key[null] is now deemed to be of type @i{universal_access}
+and appropriate conversions are defined as well. These new operations
 are only applied when at least one of the arguments is of an anonymous
 access type (not counting @key[null]).
 
-}Interesting problems arise if we define our own equality operation.
+@leading@;Interesting problems arise if we define our own equality operation.
 For example, suppose we wish to do a deep comparison on two lists
 defined by the type @exam[Cell]. We might decide to write a recursive
 function with specification
-
-
 @begin[Example]
 @key[function] "=" (L, R: @key[access] Cell) @key[return] Boolean;
-
-
 @end[Example]
-Note that it is easier to use access parameters rather than parameters
-of type @exam[Cell] itself because it then caters naturally for cases
-where null is used to represent an empty list. We might attempt to
-write the body as
 
-
+@leading@;Note that it is easier to use access parameters rather than
+parameters of type @exam[Cell] itself because it then caters naturally for
+cases where null is used to represent an empty list. We might attempt to write
+the body as
 @begin[Example]
-@key[function] "=" (L, R: @key[access] Cell) @key[return] Boolean
-@key[is]
+@tabset[P42]
+@key[function] "=" (L, R: @key[access] Cell) @key[return] Boolean @key[is]
 @key[begin]
-   @key[if] L = @key[null or] R = @key[null then]@\@\-- @examcom[wrong
-=]
-      @key[return] L = R;@\@\@\@\-- @examcom[wrong =]
+   @key[if] L = @key[null or] R = @key[null then]@\-- @examcom[wrong =]
+      @key[return] L = R;@\-- @examcom[wrong =]
    @key[elsif] L.Value = R.Value @key[then]
-      @key[return] L.Next = R.Next;@\@\-- @examcom[recurses OK]
+      @key[return] L.Next = R.Next;@\-- @examcom[recurses OK]
    @key[else]
       @key[return] False;
    @key[end if];
 @key[end] "=" ;
-
-
 @end[Example]
+
 But this doesn't work because the calls of @exam["="] in the first
 two lines recursively call the function being declared whereas we
 want to call the predefined @exam["="] in these cases.
 
-The difficulty is overcome by writing@exam[ Standard."="] thus
-
-
+@leading@;The difficulty is overcome by writing@exam[ Standard."="] thus
 @begin[Example]
-   @key[if] Standard."=" (L, @key[null) or] Standard."=" (R, @key[null)
-then]
+   @key[if] Standard."=" (L, @key[null]) @key[or] Standard."=" (R, @key[null]) @key[then]
       @key[return] Standard."=" (L, R);
-
-
 @end[Example]
+
 The full rules regarding the use of the predefined equality are that
 it cannot be used if there is a user-defined primitive equality operation
 for either operand type unless we use the prefix @exam[Standard].
 A similar rule applies to fixed point types as we shall see in a later
-paper.
+paper.@Comment{(see **TBD reference**)}
 
-Another example of the use of the type @exam[Cell] occurred in the
+@leading@;Another example of the use of the type @exam[Cell] occurred in the
 previous paper when we were discussing type extension at nested levels.
 That example also illustrated that access types have to be named in
 some circumstances such as when they provide the full type for a private
 type. We had
-
-
 @begin[Example]
-@key[package] Lists@key[ is
-]   @key[type] List @key[is limited private];@\@\-- @examcom[private
-type]
+@tabset[P42]
+@key[package] Lists @key[is]
+   @key[type] List @key[is limited private];@\-- @examcom[private type]
    ...
 @key[private]
    @key[type] Cell @key[is]
       @key[record]
-         Next: @key[access] Cell;@\@\@\-- @examcom[anonymous type]
+         Next: @key[access] Cell;@\-- @examcom[anonymous type]
          C: Colour;
       @key[end record];
 
-   @key[type] List @key[is access] Cell;@\@\@\-- @examcom[full type]
+   @key[type] List @key[is access] Cell;@\-- @examcom[full type]
 @key[end];
 
 @key[package body] Lists @key[is]
-   @key[procedure] Iterate(IC: @key[in] Iterator'Class; L: @key[in]
-List) @key[is]
-      This: @key[access] Cell := L;@\@\@\-- @examcom[anonymous type]
+   @key[procedure] Iterate(IC: @key[in] Iterator'Class; L: @key[in] List) @key[is]
+      This: @key[access] Cell := L;@\-- @examcom[anonymous type]
    @key[begin]
       @key[while] This /= @key[null loop]
-         IC.Action(This.C);@\@\@\-- @examcom[dispatches]
+         IC.Action(This.C);@\-- @examcom[dispatches]
          This := This.Next;
       @key[end loop];
    @key[end] Iterate;
 @key[end] Lists;
-
-
 @end[Example]
+
 In this case we have to name the type @exam[List] because it is a
 private type. Nevertheless it is convenient to use an anonymous access
 type to avoid an incomplete declaration of @exam[Cell].
 
-In the procedure @exam[Iterate] the local variable @exam[This] is
+@leading@;In the procedure @exam[Iterate] the local variable @exam[This] is
 also of an anonymous type. It is interesting to observe that if @exam[This]
 had been declared to be of the named type @exam[List] then we would
 have needed an explicit conversion in
-
-
 @begin[Example]
-         This := List(This.Next); @\@\-- @examcom[explicit conversion]
-
-
+@tabset[P42]
+         This := List(This.Next); @\-- @examcom[explicit conversion]
 @end[Example]
+
 Remember that we @i[always] need an explicit conversion when converting
 to a named access type. There is clearly an art in using anonymous
 types to best advantage.
@@ -980,12 +934,11 @@ The accessibility rules are designed to prevent dangling references.
 The basic rule is that we cannot create an access value if the object
 referred to has a lesser lifetime than the access type.
 
-However there are circumstances where the rule is unnecessarily severe
-and that was one reason for the introduction of access parameters.
+@leading@;However there are circumstances where the rule is unnecessarily
+severe and that was one reason for the introduction of access parameters.
 Perhaps some recapitulation of the problems would be helpful. Consider
-
-
 @begin[Example]
+@tabset[P42]
 @key[type] T @key[is] ...
 Global: T;
 @key[type] Ref_T @key[is access all] T;
@@ -994,24 +947,23 @@ Dodgy: Ref_T;
 @key[procedure] P(Ptr: @key[access] T) is
 @key[begin]
    ...
-   Dodgy := Ref_T(Ptr);@\@\@\-- @examcom[dynamic check]
+   Dodgy := Ref_T(Ptr);@\-- @examcom[dynamic check]
 @key[end] P;
 
 @key[procedure] Q(Ptr: Ref_T) @key[is]
 @key[begin]
    ...
-   Dodgy := Ptr;@\@\@\@\-- @examcom[legal]
+   Dodgy := Ptr;@\-- @examcom[legal]
 @key[end] Q;
 ...
 @key[declare]
    X: @key[aliased] T;
 @key[begin]
-   P(X'Access);@\@\@\@\-- @examcom[legal]
-   Q(X'Access);@\@\@\@\-- @examcom[illegal]
+   P(X'Access);@\-- @examcom[legal]
+   Q(X'Access);@\-- @examcom[illegal]
 @key[end];
-
-
 @end[Example]
+
 Here we have an object @exam[X] with a short lifetime and we must
 not squirrel away an access referring to @exam[X] in an object with
 a longer lifetime such as @exam[Dodgy]. Nevertheless we want to manipulate
@@ -1031,14 +983,11 @@ foolish within the procedure such as make an assignment to @exam[Dodgy].
 The conversion to the type @exam[Ref_T] in this assignment fails dynamically
 and disaster is avoided.
 
-But note that if we had called @exam[P] with
-
-
+@leading@keepnext@;But note that if we had called @exam[P] with
 @begin[Example]
 P(Global'Access);
-
-
 @end[Example]
+
 where @exam[Global] is declared at the same level as @exam[Ref_T]
 then the assignment to @exam[Dodgy] would be permitted.
 
@@ -1048,39 +997,28 @@ enclosing declaration and no dynamic information is involved. (The
 possibility of preserving dynamic information was considered but this
 would have led to inefficiencies at the points of use.)
 
-In the case of a stand-alone variable such as
-
-
+@leading@keepnext@;In the case of a stand-alone variable such as
 @begin[Example]
 V: @key[access] Integer;
-
-
 @end[Example]
-then this is essentially equivalent to
 
-
+@leading@keepnext@;then this is essentially equivalent to
 @begin[Example]
 @key[type] @examcom[anon] @key[is access all] Integer;
 V: @examcom[anon];
-
-
 @end[Example]
-A similar situation applies in the case of a component of a record
+
+@leading@;A similar situation applies in the case of a component of a record
 or array type. Thus if we have
-
-
 @begin[Example]
 @key[type] R @key[is]
    @key[record]
       C: @key[access] Integer;
       ...
    @key[end record];
-
-
 @end[Example]
-then this is essentially equivalent to
 
-
+@leading@keepnext@;then this is essentially equivalent to
 @begin[Example]
 @key[type] @examcom[anon] @key[is access all] Integer;
 @key[type] R @key[is]
@@ -1088,15 +1026,13 @@ then this is essentially equivalent to
       C: @examcom[anon];
       ...
    @key[end record];
-
-
 @end[Example]
-Further if we now declare a derived type then there is no new physical
-access definition, and the accessibility level is that of the original
+
+@leading@;Further if we now declare a derived type then there is no new
+physical access definition, and the accessibility level is that of the original
 declaration. Thus consider
-
-
 @begin[Example]
+@tabset[P42]
 @key[procedure] Proc @key[is]
    Local: @key[aliased] Integer;
    @key[type] D @key[is new] R;
@@ -1104,46 +1040,41 @@ declaration. Thus consider
 @key[begin]
    ...
 @key[end] Proc;
-
-
 @end[Example]
+
 In this example the accessibility level of the component @exam[C]
 of the derived type is the same as that of the parent type @exam[R
 ]and so the aggregate is illegal. This somewhat surprising rule is
 necessary to prevent some very strange problems which we will not
 explore in this paper.
 
-One consequence of which users should be aware is that if we assign
+@leading@;One consequence of which users should be aware is that if we assign
 the value in an access parameter to a local variable of an anonymous
 access type then the dynamic accessibility of the actual parameter
 will not be held in the local variable. Thus consider again the example
 of the procedure @exam[P] containing the assignment to @exam[Dodgy]
-
-
 @begin[Example]
+@tabset[P42]
 @key[procedure] P(Ptr: @key[access] T) @key[is]
 @key[begin]
    ...
-   Dodgy := Ref_T(Ptr);@\@\@\-- @examcom[dynamic check]
+   Dodgy := Ref_T(Ptr);@\-- @examcom[dynamic check]
 @key[end] P;
-
-
 @end[Example]
-and this variation in which we have introduced a local variable of
+
+@leading@;and this variation in which we have introduced a local variable of
 an anonymous access type
-
-
 @begin[Example]
+@tabset[P42]
 @key[procedure] P1(Ptr: @key[access] T) @key[is]
    Local_Ptr: @key[access] T;
 @key[begin]
    ...
-   Local_Ptr := Ptr;@\@\@\@\-- @examcom[implicit conversion]
-   Dodgy := Ref_T(Local_Ptr);@\@\-- @examcom[static check, illegal]
+   Local_Ptr := Ptr;@\-- @examcom[implicit conversion]
+   Dodgy := Ref_T(Local_Ptr);@\-- @examcom[static check, illegal]
 @key[end] P1;
-
-
 @end[Example]
+
 Here we have copied the value in the parameter to a local variable
 before attempting the assignment to @exam[Dodgy]. (Actually it won't
 compile but let us analyze it in detail anyway.)
@@ -1164,7 +1095,7 @@ in @exam[P1] is also static and will always fail no matter whether
 
 So the effective behaviours of @exam[P] and@exam[ P1] are the same
 if the actual parameter is @exam[X] (they both fail, although one
-dynamically and the other statically)@exam[ ]but will be different
+dynamically and the other statically) but will be different
 if the actual parameter has the same level as the type @exam[Ref_T]
 such as the variable @exam[Global]. The assignment to @exam[Dodgy]
 in @exam[P] will work in the case of @exam[Global] but the assignment
@@ -1176,36 +1107,32 @@ consequent loss of the accessibility information. In practice this
 is very unlikely to be a problem. In any event programmers are aware
 that access parameters are special and carry dynamic information.
 
-In this particular example the loss of the accessibility information
+@leading@;In this particular example the loss of the accessibility information
 through the use of the intermediate stand-alone variable is detected
 at compile time. More elaborate examples can be constructed whereby
 the problem only shows up at execution time. Thus suppose we introduce
 a third procedure @exam[Agent] and modify @exam[P] and @exam[P1] so
 that we have
-
-
-
-
 @begin[Example]
+@tabset[P42]
 @key[procedure] Agent(A: @key[access] T) @key[is]
 @key[begin]
-   Dodgy := Ref_T(A);@\@\@\-- @examcom[dynamic check]
+   Dodgy := Ref_T(A);@\-- @examcom[dynamic check]
 @key[end] Agent;
 
 @key[procedure] P(Ptr: @key[access] T) @key[is]
 @key[begin]
-   Agent(Ptr);@\@\@\@\-- @examcom[may be OK]
+   Agent(Ptr);@\-- @examcom[may be OK]
 @key[end] P;
 
 @key[procedure] P1(Ptr: @key[access] T) @key[is]
    Local_Ptr: @key[access] T;
 @key[begin]
-   Local_Ptr := Ptr;@\@\@\@\-- @examcom[implicit conversion ]
-   Agent(Local_Ptr);@\@\@\-- @examcom[never OK]
+   Local_Ptr := Ptr;@\-- @examcom[implicit conversion ]
+   Agent(Local_Ptr);@\-- @examcom[never OK]
 @key[end] P1;
-
-
 @end[Example]
+
 Now we find that @exam[P] works much as before. The accessibility
 level passed into @exam[P] is passed to @exam[Agent] which then carries
 out the assignment to @exam[Dodgy]. If the parameter passed to @exam[P]
@@ -1220,110 +1147,85 @@ that is passed to @exam[Agent] and this means that the assignment
 to @exam[Dodgy] always fails and raises @exam[Program_Error] irrespective
 of whether @exam[P1] was called with @exam[X] or @exam[Global].
 
-If we just want to use another name for some reason then we can avoid
-the loss of the accessibility level by using renaming. Thus we could
-have
-
-
+@leading@;If we just want to use another name for some reason then we can avoid
+the loss of the accessibility level by using renaming. Thus we could have
 @begin[Example]
+@tabset[P42]
 @key[procedure] P2(Ptr: @key[access] T) @key[is]
    Local_Ptr: @key[access] T @key[renames] Ptr;
 @key[begin]
    ...
-   Dodgy := Ref_T(Local_Ptr);@\@\-- @examcom[dynamic check]
+   Dodgy := Ref_T(Local_Ptr);@\-- @examcom[dynamic check]
 @key[end] P2;
-
-
 @end[Example]
+
 and this will behave exactly as the original procedure @exam[P].
 
 As usual a renaming just provides another view of the same entity
 and thus preserves the accessibility information.
 
-A renaming can also include @key[not null] thus
-
-
+@leading@keepnext@;A renaming can also include @key[not null] thus
 @begin[Example]
 Local_Ptr: @key[not null access] T @key[renames] Ptr;
-
-
 @end[Example]
+
 Remember that not null must never lie so this is only legal if @exam[Ptr]
 is indeed of a type that excludes null (which it will be if @exam[Ptr]
 is a controlling access parameter of the procedure @exam[P2]).
 
-A renaming might be useful when the accessed type @exam[T] has components
-that we wish to refer to many times in the procedure. For example
-the accessed type might be the type @exam[Cell] declared earlier in
-which case we might usefully have
-
-
+@leading@;A renaming might be useful when the accessed type @exam[T] has
+components that we wish to refer to many times in the procedure. For example
+the accessed type might be the type @exam[Cell] declared earlier in which case
+we might usefully have
 @begin[Example]
 Next: @key[access] Cell @key[renames] Ptr.Next;
-
-
 @end[Example]
+
 and this will preserve the accessibility information.
 
-Anonymous access types can also be used as the result of a function.
+@leading@;Anonymous access types can also be used as the result of a function.
 In the Introduction we had
-
-
 @begin[Example]
-@key[function] Mate_Of(A: @key[access] Animal'Class) @key[return]
-@key[access] Animal'Class;
-
-
+@key[function] Mate_Of(A: @key[access] Animal'Class) @key[return] @key[access] Animal'Class;
 @end[Example]
+
 The accessibility level of the result in this case is the same as
 that of the declaration of the function itself.
 
-We can also dispatch on the result of a function if the result is
+@leading@;We can also dispatch on the result of a function if the result is
 an access to a tagged type. Consider
-
-
 @begin[Example]
 @key[function] Unit @key[return access] T;
-
-
 @end[Example]
+
 We can suppose that @exam[T] is a tagged type representing some category
 of objects such as our geometrical objects and that @exam[Unit] is
 a function returning a unit object such as a circle of unit radius
 or a triangle with unit side.
 
-We might also have a function
-
-
+@leading@keepnext@;We might also have a function
 @begin[Example]
 @key[function] Is_Bigger(X, Y: @key[access] T) @key[return] Boolean;
-
-
 @end[Example]
-and then
 
-
+@leading@keepnext@;and then
 @begin[Example]
 Thing: @key[access] T'Class := ... ;
 ...
 Test: Boolean := Is_Bigger(Thing, Unit);
-
-
 @end[Example]
+
 This will dispatch to the function @exam[Unit] according to the tag
 of @exam[Thing] and then of course dispatch to the appropriate function@exam[
 Is_Bigger].
 
-The function @exam[Unit] could also be used as a default value for
+@leading@;The function @exam[Unit] could also be used as a default value for
 a parameter thus
-
-
 @begin[Example]
 @key[function] Is_Bigger(X: @key[access] T; Y: @key[access] T := Unit)
 @key[return] Boolean;
-
-
 @end[Example]
+
 Remember that a default used in such a construction has to be tag
 indeterminate.
 
@@ -1333,13 +1235,11 @@ strange concept in Ada 95 and primarily concerned limited types (including
 task and protected types) which of course could not be copied. Enabling
 us to write @key[access] explicitly and thereby tell the truth removes
 much confusion. Limited types will be discussed in detail in a later
-paper.
+paper.@Comment{(see @RefSecNum{**TBD**}}
 
-Access return types can be a convenient way of getting a constant
+@leading@;Access return types can be a convenient way of getting a constant
 view of an object such as a table. We might have an array in a package
 body (or private part) and a function in the specification thus
-
-
 @begin[Example]
 @key[package] P @key[is]
    @key[type] Vector @key[is array] (Integer @key[range] <>) of Float;
@@ -1368,26 +1268,21 @@ body (or private part) and a function in the specification thus
 X := Read_Vec(7);@\-- @examcom[read element of array]
 @end[Example]
 
-This is strictly short for
-
-
+@leading@keepnext@;This is strictly short for
 @begin[Example]
 X := Read_Vec.@key[all](7);
-
-
 @end[Example]
-Note that we cannot write
 
-
+@leading@keepnext@;Note that we cannot write
 @begin[Example]
-Read_Vec(7) := Y;@\@\@\@\-- @examcom[illegal]
-
-
+@tabset(P42)
+Read_Vec(7) := Y;@\-- @examcom[illegal]
 @end[Example]
+
 although we could do so if we removed @key[constant] from the return
 type (in which case we should use a different name for the function).
 
-The last new use of anonymous access types concerns discriminants.
+@leading@;The last new use of anonymous access types concerns discriminants.
 Remember that a discriminant can be of a named access type or an anonymous
 access type (as well as oher things). Discriminants of an anonymous
 access type are known as access discriminants. In Ada 95, access discriminants
@@ -1397,8 +1292,6 @@ access discriminants of limited types are special. Since the type
 is limited, the object cannot be changed by a whole record assignment
 and so the discriminant cannot be changed even if it has defaults.
 Thus
-
-
 @begin[Example]
 @key[type] Minor @key[is] ...
 
@@ -1409,29 +1302,25 @@ Thus
 
 Small: @key[aliased] Minor;
 Large: Major(Small'Access);
-
-
 @end[Example]
+
 The objects @exam[Small] and @exam[Large] are now bound permanently
 together.
 
-In Ada 2005, access discriminants are also allowed for nonlimited
+@leading@;In Ada 2005, access discriminants are also allowed for nonlimited
 types. However, defaults are not permitted so that the discriminant
 cannot be changed so again the objects are bound permanently together.
 An interesting case arises when the discriminant is provided by an
 allocator thus
-
-
 @begin[Example]
 Larger: Major(@key[new] Minor( ... ));
-
-
 @end[Example]
+
 In this case we say that the allocated object is a coextension of
 @exam[Larger]. Coextensions have the same lifetime as the major object
 and so are finalized when it is finalized. There are various accessibility
 and other rules concerning objects which have coextensions which prevent
-difficulty when returning such objects from functions.
+difficulty when returning such objects from functions.@Defn{coextension}
 
 
 @LabeledClause{Downward closures}
@@ -1475,7 +1364,6 @@ As outlined in the Introduction, the matter was partly improved in
 Ada 95 by the introduction of named access-to-subprogram types. This
 was essentially done to allow program call back to be implemented.
 
-
 Program call back is when one program passes the "address" of a subprogram
 within it to another program so that this other program can later
 respond by calling back to the first program using the subprogram
@@ -1483,30 +1371,24 @@ address supplied. This is often used for communication between an
 Ada application program and some other software such as an operating
 system which might even be written in another language such as C.
 
-Named access to subprogram types certainly work for call back (especially
+@leading@;Named access to subprogram types certainly work for call back
+(especially
 with languages such as C that do not have nested subprograms) but
 the accessibility rules which followed those for general access to
 object types were restrictive. For example, suppose we have a general
 library level function for integration using a named access to subprogram
 type to pass the function to be integrated thus
-
-
 @begin[Example]
-{\cs20\b\expnd0\expndtw-2 type}{\expnd0\expndtw-2  Integrand }{\cs20\b\expnd0\expndtw-2
-is access}{\expnd0\expndtw-2  }{\cs20\b\expnd0\expndtw-2 function}{\expnd0\expndtw-2
-(X: Float) }{\cs20\b\expnd0\expndtw-2 return}{\expnd0\expndtw-2  Float;
+@key[type] Integrand @key[is access function] (X: Float) @key[return] Float;
 
-@key[function] Integrate(Fn: Integrand; Lo, Hi: Float) @key[return]
-Float;
-
-
+@key[function] Integrate(Fn: Integrand; Lo, Hi: Float) @key[return] Float;
 @end[Example]
-then we cannot even do the simplest integration of our own function
+
+@leading@;then we cannot even do the simplest integration of our own function
 in a natural way. For example, suppose we wish to integrate a function
 such as @exam[Exp(X**2)]. We can try
-
-
 @begin[Example]
+@tabset[P42]
 @key[with] Integrate;
 @key[procedure] Main @key[is]
    @key[function] F(X: Float) @key[return] Float @key[is]
@@ -1516,20 +1398,16 @@ such as @exam[Exp(X**2)]. We can try
 
    Result, L, H: Float;
 @key[begin]
-   ...@\@\ -- @examcom[set bounds in L and H say]
+   ...        -- @examcom[set bounds in L and H say]
    Result := Integrate(F'Access, L, H);@\-- @examcom[illegal in 95]
    ...
 @key[end] Main;
-
-
 @end[Example]
-But this is illegal because of the accessibility check necessary to
+
+@leading@;But this is illegal because of the accessibility check necessary to
 prevent us from writing something like
-
-
-
-
 @begin[Example]
+@tabset[P42]
 Evil: Integrand;
 X: Float;
 ...
@@ -1537,22 +1415,23 @@ X: Float;
    Y: Float;
    @key[function] F(X: Float) @key[return] Float @key[is]
       ...
-      Y := X;@\@\@\@\@\--@examcom[assign to Y in local block]
+      Y := X;@\--@examcom[assign to Y in local block]
       ...
    @key[end] F;
 @key[begin]
    Evil := F'Access:@\-- @examcom[illegal]
 @key[end];
-   X := Evil(X);@\@\@\@\-- @examcom[call function out of context]
+   X := Evil(X);@\-- @examcom[call function out of context]
 @end[Example]
-Here we have attempted to assign an access to the local function @exam[F
-]in the global variable @exam[Evil]. If this assignment had been permitted
+
+Here we have attempted to assign an access to the local function @exam[F]
+in the global variable @exam[Evil]. If this assignment had been permitted
 then the call of @exam[Evil] would indirectly have called the function
 @exam[F] when the context in which @exam[F] was declared no longer
 existed;@exam[ F] would then have attempted to assign to the variable
 @exam[Y] which no longer existed and whose storage space might now
 be used for something else. We can summarise this perhaps by saying
-that we are attempting to call@exam[ F ]when it no longer exists.
+that we are attempting to call @exam[F] when it no longer exists.
 
 Ada 2005 overcomes the problem by introducing anonymous access to
 subprogram types. This was actually considered during the design of
@@ -1567,30 +1446,27 @@ contorted. Moreover, the continued use of generics when other languages
 forty years ago had included a more natural mechanism was tiresome.
 So at long last Ada 2005 includes anonymous access to subprogram types.
 
-We rewrite the integration function much as follows
-
-
+@leading@keepnext@;We rewrite the integration function much as follows
 @begin[Example]
-{\cs20\b\expnd0\expndtw-4 function}{\expnd0\expndtw-4  Integrate(Fn:
-}{\cs20\b\expnd0\expndtw-4 access function}{\expnd0\expndtw-4 (X:
-Float) }{\cs20\b\expnd0\expndtw-4 return}{\expnd0\expndtw-4  Float;
-@\@\@\@\ Lo, Hi: Float) @key[return] Float @key[is]
+@tabset[P42]
+@key[function] Integrate(
+         Fn: @key[access function] (X: Float) @key[return] Float;
+         Lo, Hi: Float) @key[return] Float @key[is]
    Total: Float;
-   N: @key[constant] Integer := ... ;@\@\-- @examcom[no of subdivisions
-]   Step: Float := (Hi @en Lo) / Float(N);
-   X: Float := Lo; @\@\@\@\-- @examcom[current point]
+   N: @key[constant] Integer := ... ;@\-- @examcom[no of subdivisions]
+   Step: Float := (Hi @en Lo) / Float(N);
+   X: Float := Lo; @\-- @examcom[current point]
 @key[begin]
-   Total := 0.5 * Fn(Lo);@\@\@\-- @examcom[value at low bound]
+   Total := 0.5 * Fn(Lo);@\-- @examcom[value at low bound]
    @key[for] I @key[in] 1 .. N@en@;1 @key[loop]
-      X := X + Step;@\@\@\@\-- @examcom[add values at]
-      Total := Total + Fn(X);@\@\@\-- @examcom[intermediate points]
+      X := X + Step;@\-- @examcom[add values at]
+      Total := Total + Fn(X);@\-- @examcom[intermediate points]
    @key[end loop];
-   Total := Total + 0.5 * Fn(Hi);@\@\-- @examcom[add final value]
-   @key[return] Total * Step;@\@\@\-- @examcom[normalize]
+   Total := Total + 0.5 * Fn(Hi);@\-- @examcom[add final value]
+   @key[return] Total * Step;@\-- @examcom[normalize]
 @key[end] Integrate;
-
-
 @end[Example]
+
 The important thing to notice is the profile of @exam[Integrate] in
 which the parameter @exam[Fn] is of an anonymous access to subprogram
 type. We have also shown a simple body which uses the trapezium/trapezoid
@@ -1600,7 +1476,9 @@ intermediate points.
 
 (NB It is time for a linguistic interlude. Roughly speaking English
 English trapezium equals US English trapezoid. They both originate
-from the Greek {\f3 \'74\'72\'61\'70\'65\'7a\'61} meaning a table
+from the Greek @Comment{Hex: 03C4; 03C1; 03B1; 03C0; 03B5; 03B6;
+03B1}@Unicode(964)@Unicode(961)@Unicode(945)@Unicode(960)@Unicode(949)@Unicode(950)@Unicode(945)
+meaning a table
 (literally with four feet). Both originally meant a quadrilateral
 with no pairs of sides parallel. In the late 17th century, trapezium
 came to mean having one pair of sides parallel. In the 18th century
@@ -1622,20 +1500,20 @@ We still have to consider how a type conversion which would permit
 an assignment to a global variable is prevented. The following text
 illustrates both access to object and access to subprogram parameters.
 
-
 @begin[Example]
+@tabset[P42]
 @key[type] AOT @key[is access all] Integer;
 @key[type] APT @key[is access procedure] (X: in out Float);
 
 Evil_Obj: AOT;
 Evil_Proc: APT;
 
-@key[procedure] P(Objptr: @key[access] Integer;
-                      Procptr: @key[access procedure] (X: @key[in
-out] Float)) @key[is]
+@key[procedure] P(
+              Objptr: @key[access] Integer;
+              Procptr: @key[access procedure] (X: @key[in out] Float)) @key[is]
 @key[begin]
-   Evil_Obj := AOT(Objptr);@\@\@\-- @examcom[fails at run time]
-   Evil_Proc := APT(Procptr);@\@\-- @examcom[fails at compile time]
+   Evil_Obj := AOT(Objptr);@\-- @examcom[fails at run time]
+   Evil_Proc := APT(Procptr);@\-- @examcom[fails at compile time]
 @key[end] P;
 
 @key[declare]
@@ -1646,11 +1524,10 @@ out] Float)) @key[is]
    P(An_Obj'Access, A_Proc'Access);@\-- @examcom[legal]
 @key[end];
 
-Evil_Obj.@key[all] := 0;@\@\@\@\-- @examcom[assign to nowhere]
-Evil_Proc.@key[all]( ... );@\@\@\@\-- @examcom[call nowhere]
-
-
+Evil_Obj.@key[all] := 0;@\-- @examcom[assign to nowhere]
+Evil_Proc.@key[all]( ... );@\-- @examcom[call nowhere]
 @end[Example]
+
 This repeats some of the structure of the previous section. The procedure
 @exam[P] has an access to object parameter @exam[Objptr] and an access
 to subprogram parameter @exam[Procptr]; they are both of anonymous
@@ -1663,7 +1540,6 @@ and calling indirectly via @exam[Evil_Proc] after the object and procedure
 referred to no longer exist.
 
 Both of these wicked deeds are prevented by the accessibility rules.
-
 
 In the case of the object parameter @exam[Objptr] it knows the accessibility
 level of the actual @exam[An_Obj] and this is seen to be greater than
@@ -1695,25 +1571,17 @@ access to subprogram types. Recall that the attribute @exam[Unchecked_Access]
 is permitted for access to object types but was considered far too
 dangerous for access to subprogram types for similar reasons.
 
-The reader may be feeling both tired and that there are other ways
+@leading@;The reader may be feeling both tired and that there are other ways
 around the problems of accessibility anyway. Thus the double integration
 presented in the Introduction can easily be circumvented in many cases.
 We computed
+@begin{Example}@Comment{This might be better displayed as a graphic; a lot of systems won't have these characters.}
+@Roman{@grow{@grow{@Unicode(8992)}@+{1}@grow{@Unicode(8992)}@+{1}
+@grow{@Unicode(9474)} @grow{@Unicode(9474)}  xy @i{dy dx}
+@grow{@Unicode(8993)}@-{0}@grow{@Unicode(8993)}@-{0}}}
+@end{Example}
 
-
-@begin[Example]
-{\f0\fs26 \u8992\'28}{\f0\fs22\super 1}{\f0\fs26 \u8992\'28}{\f0\fs22\super
-1}{\f0\fs22
-}{\f0\fs26 \u9474\'a6}{\f0\fs18  }{\f0\fs26 \u9474\'a6}{\f0\fs22
- }{\i\f0\fs22 xy dy dx}{\f0\fs22
-}{\f0\fs26 \u8993\'29}{\f0\fs22\sub 0}{\f0\fs26 \u8993\'29}{\f0\fs22\sub
-0
-
-}
-@end[Example]
-using the following program
-
-
+@leading@keepnext@;using the following program
 @begin[Example]
 @key[with] Integrate;
 @key[procedure] Main @key[is]
@@ -1723,24 +1591,21 @@ using the following program
          @key[return] X*Y;
       @key[end] F;
    @key[begin]
-      @key[return] Integrate(F'Access, 0.0, 1.0);@\
+      @key[return] Integrate(F'Access, 0.0, 1.0);
    @key[end] G;
 
    Result: Float;
 @key[begin]
-   Result:= Integrate(G'Access, 0.0, 1.0);@\
+   Result:= Integrate(G'Access, 0.0, 1.0);
    ...
 @key[end] Main;
-
-
 @end[Example]
-The essence of the problem was that @exam[F] had to be declared inside
-@exam[G] because it needed access to the parameter @exam[X] of @exam[G].
+
+@leading@;The essence of the problem was that @exam[F] had to be declared
+inside @exam[G] because it needed access to the parameter @exam[X] of @exam[G].
 But the astute reader will note that this example is not very convincing
 because the integrals can be separated and the functions both declared
 at library level thus
-
-
 @begin[Example]
 @key[function] F(Y: Float) @key[return] Float @key[is]
 @key[begin]
@@ -1757,49 +1622,36 @@ Result:= Integrate(F'Access, 0.0, 1.0) * Integrate(G'Access, 0.0, 1.0);
 
 and so it all works using the Ada 95 version of @exam[Integrate] anyway.
 
-However, if the two integrals had been more convoluted or perhaps
+@leading@;However, if the two integrals had been more convoluted or perhaps
 the region had not been square but triangular so that the bound of
 the inner integral depended on the outer variable as in
 
+@begin{Example}@Comment{This might be better displayed as a graphic; a lot of systems won't have these characters.}
+@Roman{@grow{@grow{@Unicode(8992)}@+{1}@grow{@Unicode(8992)}@+{x}
+@grow{@Unicode(9474)} @grow{@Unicode(9474)}  xy @i{dy dx}
+@grow{@Unicode(8993)}@-{0}@grow{@Unicode(8993)}@-{0}}}
+@end{Example}
 
-@begin[Example]
-{\f0\fs26 \u8992\'28}{\f0\fs22\super 1}{\f0\fs26 \u8992\'28}{\i\f0\fs22\super
-x}{\f0\fs22
-}{\f0\fs26 \u9474\'a6}{\f0\fs18  }{\f0\fs26 \u9474\'a6}{\f0\fs22
- }{\i\f0\fs22 xy dy dx}{\f0\fs22
-}{\f0\fs26 \u8993\'29}{\f0\fs22\sub 0}{\f0\fs26 \u8993\'29}{\f0\fs22\sub
-0
-
-}
-@end[Example]
 then nested functions would be vital.
 
 We will now consider a more elegant example which illustrates how
 we might integrate an arbitrary function of two variables @i[F](@i[x],
 @i[y]) over a rectangular region.
 
-Assume that we have the function @exam[Integrate] for one dimension
+@leading@;Assume that we have the function @exam[Integrate] for one dimension
 as before
-
-
 @begin[Example]
-{\cs20\b\expnd0\expndtw-4 function}{\expnd0\expndtw-4  Integrate(Fn:
-}{\cs20\b\expnd0\expndtw-4 access function}{\expnd0\expndtw-4 (X:
-Float) }{\cs20\b\expnd0\expndtw-4 return}{\expnd0\expndtw-4  Float;
-@\@\@\Lo, Hi: Float) @key[return] Float;
-
-
+@key[function] Integrate(
+          Fn: @key[access function](X: Float) @key[return] Float;
+          Lo, Hi: Float) @key[return] Float;
 @end[Example]
-Now consider
 
-
+@leading@keepnext@;Now consider
 @begin[Example]
-{\cs20\b\expnd-1\expndtw-8 function}{\expnd-1\expndtw-8  Integrate(Fn:
-}{\cs20\b\expnd-1\expndtw-8 access function}{\expnd-1\expndtw-8 (X,
-Y: Float) }{\cs20\b\expnd-1\expndtw-8 return}{\expnd-1\expndtw-8
-Float;}{\expnd0\expndtw-4
-@\@\@\LoX, HiX: Float;
-@\@\@\LoY, HiY: Float) @key[return] Float @key[is]
+@key[function] Integrate(
+          Fn: @key[access function](X: Float) @key[return] Float;
+          LoX, HiX: Float;
+          LoY, HiY: Float) @key[return] Float @key[is]
    @key[function] FnX(X: Float) @key[return] Float @key[is]
       @key[function] FnY(Y: Float) @key[return] Float @key[is]
       @key[begin]
@@ -1811,18 +1663,15 @@ Float;}{\expnd0\expndtw-4
 @key[begin]
    @key[return] Integrate(FnX'Access, LoX, HiX);
 @key[end] integrate;
-
-
 @end[Example]
+
 The new function @exam[Integrate] for two dimensions overloads and
 uses the function @exam[Integrate] for one dimension (a good example
 of overloading). With this generality it is again impossible to arrange
 the structure in a manner which is legal in Ada 95.
 
-We might use the two-dimensional integration routine to solve the
+@leading@;We might use the two-dimensional integration routine to solve the
 original trivial problem as follows
-
-
 @begin[Example]
 @key[function] F(X, Y: Float) @key[return] Float @key[is]
 @key[begin]
@@ -1831,11 +1680,7 @@ original trivial problem as follows
 ...
 
 Result := Integrate(F'Access, 0.0, 1.0, 0.0, 1.0);
-
-
 @end[Example]
-
-**** Started here ****
 
 @leading@;As an exercise the reader might like to rewrite the two dimensional
 function to work on a non-rectangular domain. The trick is to pass
@@ -1843,8 +1688,8 @@ the bounds of the inner integral also as functions. The profile then
 becomes
 @begin[Example]
 @key[function] Integrate(
-        Fn: @key[access function] (X, Y: Float) @key[return] Float};
-        LoX, HiX: Float
+        Fn: @key[access function] (X, Y: Float) @key[return] Float;
+        LoX, HiX: Float;
         LoY, HiY: @key[access function](X: Float) @key[return] Float)
                                         @key[return] Float;
 @end[Example]
