@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/access.mss,v $)
-@comment($Revision: 1.2 $ $Date: 2006/01/24 06:44:34 $)
+@comment($Revision: 1.3 $ $Date: 2006/01/27 06:40:01 $)
 
 @LabeledSection{Access types}
 
@@ -873,10 +873,11 @@ The full rules regarding the use of the predefined equality are that
 it cannot be used if there is a user-defined primitive equality operation
 for either operand type unless we use the prefix @exam[Standard].
 A similar rule applies to fixed point types as we shall see in a later
-paper.@Comment{(see **TBD reference**)}
+paper (see @RefSecNum{Numerics}).
 
 @leading@;Another example of the use of the type @exam[Cell] occurred in the
-previous paper when we were discussing type extension at nested levels.
+previous paper (see @RefSecNum{Nested type extension}) when we were discussing
+type extension at nested levels.
 That example also illustrated that access types have to be named in
 some circumstances such as when they provide the full type for a private
 type. We had
@@ -1235,7 +1236,7 @@ strange concept in Ada 95 and primarily concerned limited types (including
 task and protected types) which of course could not be copied. Enabling
 us to write @key[access] explicitly and thereby tell the truth removes
 much confusion. Limited types will be discussed in detail in a later
-paper.@Comment{(see @RefSecNum{**TBD**}}
+paper (see @RefSecNum{Limited types and return statements}).
 
 @leading@;Access return types can be a convenient way of getting a constant
 view of an object such as a table. We might have an array in a package
@@ -1727,7 +1728,7 @@ to 10, then we would first declare a procedure such as
 @end[Example]
 
 Further details of the use of access to subprogram types with containers
-will be found in a later paper.@Comment{ Ref TBD - container example}
+will be found in a later paper.@Comment{ Ref *** TBD - container example}
 
 Finally it should be noted that anonymous access to subprogram types
 can also be used in all those places where anonymous access to object

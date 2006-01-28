@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/struct.mss,v $)
-@comment($Revision: 1.1 $ $Date: 2006/01/24 06:44:38 $)
+@comment($Revision: 1.2 $ $Date: 2006/01/27 06:40:05 $)
 
 @LabeledSection{Structure and visibility}
 
@@ -33,83 +33,80 @@ identifies the solution of the problem of mutually dependent types as one of
 the two specific issues that
 need to be addressed in devising Ada 2005.
 
-*** Stopped here ***
-Moreover the guidance document also emphasizes
+@leading@keepnext@;Moreover the guidance document also emphasizes
+@begin[SyntaxText]
+Improvements that will remedy shortcomings in Ada. It cites in
+particular improvements in OO features, specifically, adding a Java-like
+interface feature and improved interfacing to other OO languages.
+@end[SyntaxText]
 
-
-@begin[Description]
-@\Improvements that will remedy shortcomings in Ada. It cites in particular
-improvements in OO features, specifically, adding a Java-like interface
-feature and improved interfacing to other OO languages.
-
-
-@end[Description]
 OO is largely about structure and visibility and so further improvements
 and in particular those that remedy shortcomings are desirable.
 
 The following Ada Issues cover the relevant changes and are described
 in detail in this paper:
 
-
 @begin[Description]
-217  Mutually recursive types @en limited with
+@AILink{AI=[AI95-00217-06],Text=[217]}@\Mutually recursive types @en limited
+with
 
-262  Access to private units in the private part
+@AILink{AI=[AI95-00262-01],Text=[262]}@\Access to private units in the private
+part
 
-287  Limited aggregates allowed
+@AILink{AI=[AI95-00287-01],Text=[287]}@\Limited aggregates allowed
 
-318  Limited and anonymous access return types
+@AILink{AI=[AI95-00318-02],Text=[318]}@\Limited and anonymous access return
+types
 
-326  Tagged incomplete types
+@AILink{AI=[AI95-00326-01],Text=[326]}@\Tagged incomplete types
 
-412  Subtypes and renamings of incomplete entities
+@AILink{AI=[AI95-00412-01],Text=[412]}@\Subtypes and renamings of incomplete
+entities
 
 These changes can be grouped as follows.
 
 
 @end[Description]
 First there is the important solution to the problem of mutually dependent
-types across packages provided by the introduction of limited with
-clauses (217). Related changes are the introduction of tagged incomplete
-types (326) and the ability to have subtypes and renamings of incomplete
-views (412).
+types across packages provided by the introduction of limited with clauses
+(@AILink{AI=[AI95-00217-06],Text=[217]}). Related changes are the introduction
+of tagged incomplete types (@AILink{AI=[AI95-00326-01],Text=[326]}) and the
+ability to have subtypes and renamings of incomplete views
+(@AILink{AI=[AI95-00412-01],Text=[412]}).
 
 Another improvement to the visibility rules is the introduction of
-private with clauses (262).
+private with clauses (@AILink{AI=[AI95-00262-01],Text=[262]}).
 
 There are some changes to aggregates. These were triggered by problems
-with limited types but apply to aggregates in general (part of 287).
+with limited types but apply to aggregates in general
+(part of @AILink{AI=[AI95-00287-01],Text=[287]}).
 
 An important area is that of limited types which are somewhat confused
 in Ada 95. There are two changes which permit limited values to be
 built @i[in situ]. One is the use of aggregates for initialization
 and the other is a more elaborate return statement which enables the
-construction of limited values when returning from a function (287,
-318).
+construction of limited values when returning from a
+function (@AILink{AI=[AI95-00287-01],Text=[287]},
+@AILink{AI=[AI95-00318-02],Text=[318]}).
 
 
-\pard\plain \s26\ql \li0\ri0\sb120\sa120\sl-280\slmult0\keep\keepn\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0
-\b\fs28\lang2057\langfe1033\cgrid\langnp2057\langfenp1033 2   Mutually
-dependent types
-
+@LabeledClause{Mutually dependent types}
 
 For many programmers the solution of the problem of mutually dependent
 types will be the single most important improvement introduced in
-Ada 2005.
+Ada 2005.@Defn{mutually dependent types}
 
-This topic was discussed in the Introduction using an example of two
+@leading@;This topic was discussed in the Introduction using an example of two
 mutually dependent types, @exam[Point] and @exam[Line]. Each type
 needed to refer to the other in its declaration and of course the
 solution to this problem is to use incomplete types. In Ada 95 there
 are three stages. We first declare the incomplete types
-
-
 @begin[Example]
-@key[type] Point;@\@\@\-- @examcom[incomplete types]
+@tabset[P35]
+@key[type] Point;@\-- @examcom[incomplete types]
 @key[type] Line;
-
-
 @end[Example]
+
 Suppose for simplicity that we wish to study patterns of points and
 lines such that each point has exactly three lines through it and
 that each line has exactly three points on it. (This is not so stupid.
@@ -117,99 +114,82 @@ The two most fundamental theorems of projective geometry, those of
 Pappus and Desargues, concern such structures and so does the simplest
 of finite geometries, the Fano plane.)
 
-Using the incomplete types we can then declare
-
-
+@leading@keepnext@;Using the incomplete types we can then declare
 @begin[Example]
-@key[type] Point_Ptr @key[is access] Point;@\-- @examcom[use incomplete
-types]
+@tabset[P35]
+@key[type] Point_Ptr @key[is access] Point;@\-- @examcom[use incomplete types]
 @key[type] Line_Ptr @key[is access] Line;
-
-
 @end[Example]
-and finally we can complete the type declarations thus
 
-
+@leading@keepnext@;and finally we can complete the type declarations thus
 @begin[Example]
-@key[type] Point @key[is] @\@\@\-- @examcom[complete the types]
+@tabset[P35]
+@key[type] Point @key[is]@\-- @examcom[complete the types]
    @key[record]
       L, M, N: Line_Ptr;
-   @key[end record];@examcom[
+   @key[end record];
 
-]@key[type] Line @key[is]
+@key[type] Line @key[is]
    @key[record]
       P, Q, R: Point_Ptr;
    @key[end record];
-
-
 @end[Example]
-Of course, in Ada 2005, as discussed in the previous paper, we can
+
+@leading@;Of course, in Ada 2005, as discussed in the previous paper
+(see @RefSecNum{Anonymous access types}), we can
 use anonymous access types more freely so that the second stage can
 be omitted in this example. As a consequence the complete declarations
 are simply
-
-
 @begin[Example]
-@key[type] Point @key[is] @\@\@\-- @examcom[complete the types]
+@tabset[P35]
+@key[type] Point @key[is]@\-- @examcom[complete the types]
    @key[record]
       L, M, N: @key[access] Line;
-   @key[end record];@examcom[
+   @key[end record];
 
-]@key[type] Line @key[is]
+@key[type] Line @key[is]
    @key[record]
       P, Q, R: @key[access] Point;
    @key[end record];
-
-
 @end[Example]
+
 This has the important advantage that we do not have to invent irritating
 identifiers such as @exam[Point_Ptr].
 
-But we will stick to Ada 95 for the moment. In Ada 95 there are two
+@leading@;But we will stick to Ada 95 for the moment. In Ada 95 there are two
 rules
-
-
-@begin[Description]
-{\u9642\'3f@\the incomplete type can only be used in the definition
+@begin[Itemize]
+the incomplete type can only be used in the definition
 of access types;
 
-\u9642\'3f@\the complete type declaration must be in the same declarative
+the complete type declaration must be in the same declarative
 region as the incomplete type.
+@end[Itemize]
 
-}
-@end[Description]
-The first rule does actually permit
-
-
+@leading@keepnext@;The first rule does actually permit
 @begin[Example]
 @key[type] T;
 @key[type] A @key[is access procedure ](X: @key[in out] T);
-
-
 @end[Example]
+
 Note that we are here using the incomplete type @exam[T] for a parameter.
 This is not normally allowed, but in this case the procedure itself
 is being used in an access type. The additional level of indirection
 means that the fact that the parameter mechanism for @exam[T] is not
 known yet does not matter.
 
-Apart from this, it is not possible to use an incomplete type for
+@leading@;Apart from this, it is not possible to use an incomplete type for
 a parameter in a subprogram in Ada 95 except in the case of an access
 parameter. Thus we cannot have
-
-
 @begin[Example]
 @key[function] Is_Point_On_Line(P: Point; L: Line) @key[return] Boolean;
-
-
 @end[Example]
+
 before the complete type declarations.
 
-It is also worth pointing out that the problem of mutually dependent
+@leading@;It is also worth pointing out that the problem of mutually dependent
 types (within a single unit) can often be solved by using private
 types thus
-
-
 @begin[Example]
    @key[type] Point @key[is private];
    @key[type] Point_Ptr @key[is access] Point;
@@ -226,9 +206,8 @@ types thus
       @key[record]
          P, Q, R: Point_Ptr;
       @key[end record];
-
-
 @end[Example]
+
 But we need to use incomplete types if we want the user to see the
 full view of a type so the situation is somewhat different.
 
@@ -239,37 +218,31 @@ user nor indeed the compiler can see the complete type and this is
 the main reason why we cannot have parameters of incomplete types
 whereas we can for private types.
 
-We will now introduce what has become a canonical example for discussing
-this topic. This concerns employees and the departments of the organization
-in which they work. The information about employees needs to refer
-to the departments and the departments need to refer to the employees.
-We assume that the material regarding employees and departments is
-quite large so that we naturally wish to declare the two types in
-distinct packages @exam[Employees] and @exam[Departments]. So we would
-like to say
-
-
+@leading@;We will now introduce what has become a canonical example for
+discussing this topic. This concerns employees and the departments of the
+organization in which they work. The information about employees needs to refer
+to the departments and the departments need to refer to the employees. We
+assume that the material regarding employees and departments is quite large so
+that we naturally wish to declare the two types in distinct packages
+@exam[Employees] and @exam[Departments]. So we would like to say
 @begin[Example]
-@key[with] Departments;  @key[use] Departments;
+@key[with] Departments; @key[use] Departments;
 @key[package] Employees @key[is]
    @key[type] Employee @key[is private];
-   @key[procedure] Assign_Employee(E: @key[in out] Employee; D: @key[in
-out] Department);
+   @key[procedure] Assign_Employee(E: @key[in out] Employee; D: @key[in out] Department);
    @key[type] Dept_Ptr @key[is access all] Department;
    @key[function] Current_Department(E: Employee) @key[return] Dept_Ptr;
    ...
 @key[end] Employees;
 
-@key[with] Employees;  @key[use] Employees;
+@key[with] Employees; @key[use] Employees;
 @key[package] Departments @key[is]
    @key[type] Department @key[is private];
-   @key[procedure] Choose_Manager(D:@key[ in out] Department; M: @key[in
-out] Employee);
+   @key[procedure] Choose_Manager(D:@key[ in out] Department; M: @key[in out] Employee);
    ...
 @key[end] Departments;
-
-
 @end[Example]
+
 We cannot write this because each package has a with clause for the
 other and they cannot both be declared (or entered into the library)
 first.
@@ -280,25 +253,20 @@ the type @exam[Department] contains information regarding the manager
 of the department and presumably a list of the other employees as
 well @en note that the manager is naturally also an @exam[Employee].
 
-So in Ada 95 we are forced to put everything into one package thus
-
-
+@leading@;So in Ada 95 we are forced to put everything into one package thus
 @begin[Example]
 @key[package] Workplace @key[is]
    @key[type] Employee @key[is private];
    @key[type] Department @key[is private];
-   @key[procedure] Assign_Employee(E: @key[in out] Employee; D: @key[in
-out] Department);
+   @key[procedure] Assign_Employee(E: @key[in out] Employee; D: @key[in out] Department);
    @key[type] Dept_Ptr @key[is access all] Department;
    @key[function] Current_Department(E: Employee) @key[return] Dept_Ptr;
-   @key[procedure] Choose_Manager(D:@key[ in out] Department; M: @key[in
-out] Employee);
+   @key[procedure] Choose_Manager(D:@key[ in out] Department; M: @key[in out] Employee);
 @key[private]
    ...
 @key[end] Workplace;
-
-
 @end[Example]
+
 Not only does this give rise to huge cumbersome packages but it also
 prevents us from using the proper abstractions. Thus the types @exam[Employee]
 and @exam[Department] have to be declared in the same private part
@@ -307,15 +275,12 @@ and so are not protected from each other's operations.
 Ada 2005 solves this by introducing a variation of the with clause
 @en the limited with clause. A limited with clause enables a library
 unit to have an incomplete view of all the visible types in another
-package. We can now write
-
-
+package. We can now write@Defn{limited with clause}@Defn2{Term=[with clause],Sec=[limited]}
 @begin[Example]
 @key[limited with] Departments;
 @key[package] Employees @key[is]
    @key[type] Employee @key[is private];
-   @key[procedure] Assign_Employee(E: @key[in out] Employee; D: @key[access]
-Departments.Department);
+   @key[procedure] Assign_Employee(E: @key[in out] Employee; D: @key[access] Departments.Department);
    @key[type] Dept_Ptr @key[is access all] Departments.Department;
    @key[function] Current_Department(E: Employee) @key[return] Dept_Ptr;
    ...
@@ -324,19 +289,16 @@ Departments.Department);
 @key[limited with] Employees;
 @key[package] Departments @key[is]
    @key[type] Department @key[is private];
-   @key[procedure] Choose_Manager(D:@key[ in out] Department; M: @key[access]
-Employees.Employee);
+   @key[procedure] Choose_Manager(D:@key[ in out] Department; M: @key[access] Employees.Employee);
    ...
 @key[end] Departments;
-
-
 @end[Example]
+
 It is important to understand that a limited with clause does not
 impose a dependence. Thus if a package @exam[A] has a limited with
 clause for @exam[B], then @exam[A] does not depend on @exam[B] as
 it would with a normal with clause, and so @exam[B] does not have
 to be compiled before @exam[A] or placed into the library before @exam[A].
-
 
 If we have a cycle of packages we only have to put @key[limited with]
 on one package since that is sufficient to break the cycle of dependences.
@@ -346,7 +308,7 @@ a limited view of each other.
 Note the terminology: we say that we have a limited view of a package
 if the view is provided through a limited with clause. So a limited
 view of a package provides an incomplete view of its visible types.
-And by an incomplete view we mean as if they were incomplete types.
+And by an incomplete view we mean as if they were incomplete types.@Defn{limited view}
 
 In the example, because an incomplete view of a type cannot generally
 be used as a parameter, we have had to change one parameter of each
@@ -362,24 +324,21 @@ with clause for the same package in the same context clause (a normal
 with clause is now officially referred to as a nonlimited with clause).
 An important and perhaps unexpected rule is that we cannot have a
 use package clause with a limited view because severe surprises might
-happen.
+happen.@Defn{nonlimited with clause}
 
-To understand how this could be possible it is important to realise
+@leading@;To understand how this could be possible it is important to realise
 that a limited with clause provides a very restricted view of a package.
 It just makes visible
+@begin[Itemize]
+the name of the package and packages nested within,
 
-
-@begin[Description]
-{\u9642\'3f@\the name of the package and packages nested within,
-
-}{\u9642\'3f@\an incomplete view of the types declared in the visible
+an incomplete view of the types declared in the visible
 parts of the packages.
+@end{Itemize}
 
-Nothing else is visible at all. Now consider
-
-}
-@end[Description]
+@leading@keepnext@;Nothing else is visible at all. Now consider
 @begin[Example]
+@tabset[P35]
 @key[package] A @key[is]
    X: Integer := 99;
 @key[end] A;
@@ -390,47 +349,41 @@ Nothing else is visible at all. Now consider
 
 @key[limited with] A, B;
 @key[package] P @key[is]
-   ...@\@\@\@\-- @examcom[neither X visible here]
+   ...@\-- @examcom[neither X visible here]
 @key[end] P;
-
-
 @end[Example]
-Within package @exam[P] we cannot access @exam[A.X] or @exam[B.X]
+
+@leading@;Within package @exam[P] we cannot access @exam[A.X] or @exam[B.X]
 because they are not types but objects. But we could declare a child
 package with its own with clause thus
-
-
 @begin[Example]
 @key[with] A;
 @key[package] P.C @key[is]
    Y: Integer := A.X;
 @key[end] P.C;
-
-
 @end[Example]
+
 The nonlimited with clause on the child "overrides" the limited with
 clause on the parent so that @exam[A.X ]is visible.
 
-Now suppose we were allowed to add a use package clause to the parent
+@leading@;Now suppose we were allowed to add a use package clause to the parent
 package; since a use clause on a parent applies to a child this means
 that we could refer to @exam[A.X] as just @exam[X] within the child
 so we would have
-
-
 @begin[Example]
+@tabset[P35]
 @key[limited with] A, B;
-@key[use] A, B;@\@\@\@\-- @examcom[illegal]
+@key[use] A, B;@\-- @examcom[illegal]
 @key[package] P @key[is]
-   ...@\@\@\@\-- @examcom[neither X visible here]
+   ...@\-- @examcom[neither X visible here]
 @key[end] P;
 
 @key[with] A;
 @key[package] P.C @key[is]
-   Y: Integer := X;@\@\@\-- @examcom[A.X now visible as just X]
+   Y: Integer := X;@\-- @examcom[A.X now visible as just X]
 @key[end] P.C;
-
-
 @end[Example]
+
 If we were now to change the with clause on the child to refer to
 @exam[B] instead of @exam[A], then @exam[X] would refer to @exam[B.X]
 rather than @exam[A.X]. This would not be at all obvious because the
@@ -439,117 +392,83 @@ the context clause of the parent at all. This would clearly be unacceptable
 and so use package clauses are forbidden if we only have a limited
 view of the package.
 
-Here is a reasonably complete list of the rules designed to prevent
+@leading@;Here is a reasonably complete list of the rules designed to prevent
 misadventure when using limited with clauses
-
-
-@begin[Description]
-{\u9642\'3f@\a use package clause cannot refer to a package with a
+@begin[Itemize]
+@leading@;a use package clause cannot refer to a package with a
 limited view as illustrated above,
-
-}
-@end[Description]
 @begin[Example]
-@key[limited with] P;  @key[use] P;@\@\-- @examcom[illegal]
+@tabset[P35]
+@key[limited with] P; @key[use] P;@\-- @examcom[illegal]
 @key[package] Q @key[is] ...
-
-
 @end[Example]
-@begin[Description]
-@\the rule also prevents
 
-
-@end[Description]
+@leading@noprefix@;the rule also prevents
 @begin[Example]
+@tabset[P35]
 @key[limited with] P;
 @key[package] Q @key[is]
-   @key[use] P;@\@\@\@\-- @examcom[illegal]
-
-
+   @key[use] P;@\-- @examcom[illegal]
 @end[Example]
-@begin[Description]
-{\u9642\'3f@\a limited with clause can only appear on a specification
+
+@leading@;a limited with clause can only appear on a specification
 @en it cannot appear on a body or a subunit,
-
-}
-@end[Description]
 @begin[Example]
-@key[limited with] P;@\@\@\-- @examcom[illegal]
+@tabset[P35]
+@key[limited with] P;@\-- @examcom[illegal]
 @key[package body] Q @key[is ]...
-
-
 @end[Example]
-@begin[Description]
-{\u9642\'3f@\a limited with clause and a nonlimited with clause for
+
+@leading@;a limited with clause and a nonlimited with clause for
 the same package may not appear in the same context clause,
-
-}
-@end[Description]
 @begin[Example]
-@key[limited with] P; @key[with] P;@\@\-- @examcom[illegal]
-
-
+@tabset[P35]
+@key[limited with] P; @key[with] P;@\-- @examcom[illegal]
 @end[Example]
-@begin[Description]
-{\u9642\'3f@\a limited with clause and a use clause for the same package
+
+@leading@;a limited with clause and a use clause for the same package
 or one of its children may not appear in the same context clause,
-
-}
-@end[Description]
 @begin[Example]
-@key[limited with] P; @key[use] P.C;@\@\-- @examcom[illegal]
-
-
+@tabset[P35]
+@key[limited with] P; @key[use] P.C;@\-- @examcom[illegal]
 @end[Example]
-@begin[Description]
-{\u9642\'3f@\a limited with clause may not appear in the context clause
+
+@leading@;a limited with clause may not appear in the context clause
 applying to itself,
-
-}
-@end[Description]
 @begin[Example]
-@key[limited with] P;@\@\@\-- @examcom[illegal]
-@key[package] P @key[is] ...@\
-
-
+@tabset[P35]
+@key[limited with] P;@\-- @examcom[illegal]
+@key[package] P @key[is] ...
 @end[Example]
-@begin[Description]
-{\u9642\'3f@\a limited with clause may not appear on a child unit
+
+@leading@;a limited with clause may not appear on a child unit
 if a nonlimited with clause for the same package applies to its parent
 or grandparent etc,
-
-}
-@end[Description]
 @begin[Example]
+@tabset[P35]
 @key[with] Q;
 @key[package] P @key[is] ...
 
-@key[limited with] Q;@\@\@\-- @examcom[illegal]
+@key[limited with] Q;@\-- @examcom[illegal]
 @key[package] P.C @key[is] ...
-
-
 @end[Example]
-@begin[Description]
-@\but note that the reverse is allowed as mentioned above
 
+@leading@noprefix@;but note that the reverse is allowed as mentioned above
 
-@end[Description]
 @begin[Example]
+@tabset[P35]
 @key[limited with] Q;
 @key[package] P @key[is] ...
 
-@key[with] Q;@\@\@\@\-- @examcom[OK]
+@key[with] Q;@\-- @examcom[OK]
 @key[package] P.C @key[is] ...
-
-
 @end[Example]
-@begin[Description]
-{\u9642\'3f@\a limited with clause may not appear in the scope of
+
+@leading@;a limited with clause may not appear in the scope of
 a use clause which names the unit or one of its children,
 
-}
-@end[Description]
 @begin[Example]
+@tabset[P35]
 @key[with] A;
 @key[package] P @key[is]
    @key[package] R @key[renames] A;
@@ -557,20 +476,17 @@ a use clause which names the unit or one of its children,
 
 @key[with] P;
 @key[package] Q @key[is]
-   @key[use] P.R;@\@\@\@\-- @examcom[applies to A]
+   @key[use] P.R;@\-- @examcom[applies to A]
 @key[end] Q;
 
-@key[limited with] A;@\@\@\-- @examcom[illegal]
+@key[limited with] A;@\-- @examcom[illegal]
 @key[package] Q.C @key[is] ...
-
-
 @end[Example]
-@begin[Description]
-@\without this specific rule, the use clause in @exam[Q] which actually
-refers to @exam[A] would clash with the limited with clause for @exam[A].
+@noprefix@;without this specific rule, the use clause in @exam[Q] which
+actually refers to @exam[A] would clash with the limited with clause for
+@exam[A].
+@end[Itemize]
 
-
-@end[Description]
 Finally note that a limited with clause can only refer to a package
 declaration and not to a subprogram, generic declaration or instantiation,
 or to a package renaming.
@@ -581,50 +497,39 @@ from the curious case of an access to subprogram type it is not possible
 to use an incomplete type for a parameter other than in an access
 parameter.
 
-Ada 2005 enables some relaxation of these rules by introducing tagged
-incomplete types. We can write
-
-
+@leading@;Ada 2005 enables some relaxation of these rules by introducing tagged
+incomplete types. We can write@Defn{tagged incomplete type}
 @begin[Example]
 @key[type] T @key[is tagged];
-
-
 @end[Example]
-and then the complete type must be a tagged type. Of course the reverse
-does not hold. If we have just
 
-
+@leading@;and then the complete type must be a tagged type. Of course the
+reverse does not hold. If we have just
 @begin[Example]
 @key[type] T;
-
-
 @end[Example]
+
 then the complete type @exam[T] might be tagged or not.
 
-A curious feature of Ada 95 was mentioned in the Introduction. In
+@leading@;A curious feature of Ada 95 was mentioned in the Introduction. In
 Ada 95 we can write
-
-
 @begin[Example]
 @key[type] T;
 ...
-@key[type] T_Ptr@key[ is access all] T'Class;
-
-
+@key[type] T_Ptr @key[is access all] T'Class;
 @end[Example]
-By using the attribute @exam[Class,] this promises in a rather sly
+
+@leading@;By using the attribute @exam[Class], this promises in a rather sly
 way that the complete type @exam[T] will be tagged. This is strictly
-obsolescent in Ada 2005 and moved to Annex J. In Ada 2005 we should
-write
-
-
+obsolescent in Ada 2005 and moved
+to @URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-J-11.html],Text=[Annex J]}.
+In Ada 2005 we should write
 @begin[Example]
 @key[type] T @key[is tagged];
 ...
 @key[type] T_Ptr @key[is access all] T'Class;
-
-
 @end[Example]
+
 The big advantage of introducing tagged incomplete types is that we
 know that tagged types are always passed by reference and so we are
 allowed to use tagged incomplete types for parameters.
@@ -634,19 +539,15 @@ with clause. If a type in a package is visibly tagged then the incomplete
 view obtained is tagged incomplete and so the type can then be used
 for parameters.
 
-Returning to the packages @exam[Employees] and @exam[Departments]
+@leading@;Returning to the packages @exam[Employees] and @exam[Departments]
 it probably makes sense to make both types tagged since it is likely
 that the types @exam[Employee] and @exam[Department] form a hierarchy.
 So we can write
-
-
 @begin[Example]
 @key[limited with] Departments;
 @key[package] Employees @key[is]
    @key[type] Employee @key[is tagged private];
-   @key[procedure] {\expnd0\expndtw-2 Assign_Employee(E: }{\cs20\b\expnd0\expndtw-2
-in out}{\expnd0\expndtw-2  Employee; D: }{\cs20\b\expnd0\expndtw-2
-in out}{\expnd0\expndtw-2  Departments.Department'Class);}
+   @key[procedure] Assign_Employee(E: @key[in out] Employee; D: @key[in out] Departments.Department'Class);
    @key[type] Dept_Ptr @key[is] @key[access all] Departments.Department'Class;
    @key[function] Current_Department(E: Employee) @key[return] Dept_Ptr;
    ...
@@ -655,29 +556,24 @@ in out}{\expnd0\expndtw-2  Departments.Department'Class);}
 @key[limited with] Employees;
 @key[package] Departments @key[is]
    @key[type] Department @key[is tagged private];
-   @key[procedure] Choose_Manager(D:@key[ in out] Department; M: @key[in
-out] Employees.Employee'Class);
+   @key[procedure] Choose_Manager(D:@key[ in out] Department; M: @key[in out] Employees.Employee'Class);
    ...
 @key[end] Departments;
-
-
 @end[Example]
-The text is a bit cumbersome now with @exam[Class] sprinkled liberally
+
+@leading@;The text is a bit cumbersome now with @exam[Class] sprinkled liberally
 around but we can introduce some subtypes in order to shorten the
 names. We can also avoid the introduction of the type @exam[Dept_Ptr]
 since we can use an anonymous access type for the function result
-as mentioned in the previous paper. So we get
-
-
+as mentioned in the previous paper (see @RefSecNum{Anonymous access types}).
+So we get
 @begin[Example]
 @key[limited with] Departments;
 @key[package] Employees @key[is]
    @key[type] Employee @key[is tagged private];
    @key[subtype] Dept @key[is] Departments.Department;
-   @key[procedure] Assign_Employee(E: @key[in out] Employee; D: @key[in
-out] Dept'Class);
-   @key[function] Current_Department(E: Employee) @key[return] @key[access]
-Dept'Class;
+   @key[procedure] Assign_Employee(E: @key[in out] Employee; D: @key[in out] Dept'Class);
+   @key[function] Current_Department(E: Employee) @key[return] @key[access] Dept'Class;
    ...
 @key[end] Employees;
 
@@ -685,22 +581,17 @@ Dept'Class;
 @key[package] Departments @key[is]
    @key[type] Department @key[is tagged private];
    @key[subtype] Empl @key[is] Employees.Employee;
-   @key[procedure] Choose_Manager(D:@key[ in out] Department; M: @key[in
-out] Empl'Class);
+   @key[procedure] Choose_Manager(D:@key[ in out] Department; M: @key[in out] Empl'Class);
    ...
 @key[end] Departments;
-
-
 @end[Example]
-Observe that in Ada 2005 we can use a simple subtype as an abbreviation
-for an incomplete type thus
 
-
+@leading@;Observe that in Ada 2005 we can use a simple subtype as an
+abbreviation for an incomplete type thus
 @begin[Example]
 @key[subtype] Dept @key[is] Departments.Department;
-
-
 @end[Example]
+
 but such a subtype cannot have a constraint or a null exclusion. In
 essence it is just a renaming. Remember that we cannot have a use
 clause with a limited view. Moreover, many projects forbid use clauses
@@ -708,14 +599,11 @@ anyway but permit renamings and subtypes for local abbreviations.
 It would be a pain if such abbreviations were not also available when
 using a limited with clause.
 
-It's a pity we cannot also write
-
-
+@leading@;It's a pity we cannot also write
 @begin[Example]
 @key[subtype] A_Dept @key[is] Departments.Department'Class;
-
-
 @end[Example]
+
 but then you cannot have everything in life.
 
 A similar situation arises with the names of nested packages. They
@@ -726,7 +614,6 @@ with clauses does not mean that the implementation does not check
 everything thoroughly in a rigorous Ada way. It is just that some
 checks might have to be deferred. The details depend upon the implementation.
 
-
 For the human reader it is very helpful that use clauses are not allowed
 in conjunction with limited with clauses since it eliminates any doubt
 about the location of types involved. It probably helps the poor compilers
@@ -734,57 +621,53 @@ as well.
 
 Readers might be interested to know that this topic was one of the
 most difficult to solve satisfactorily in the design of Ada 2005.
-Altogether seven different versions of AI-217 were developed. This
-chosen solution is on reflection by far the best and was in fact number
-6.
+Altogether seven different versions of @AILink{AI=[AI95-00217-06],Text=[AI-217]}
+were developed. This chosen solution is on reflection by far the best and was
+in fact number 6.
 
 A number of loopholes in Ada 95 regarding incomplete types are also
 closed in Ada 2005.
 
-One such loophole is illustrated by the following (this is Ada 95)
-
-
+@leading@;One such loophole is illustrated by the following (this is Ada 95)
 @begin[Example]
+@tabset[P35]
 @key[package] P @key[is]
    ...
 @key[private]
-   @key[type] T;@\@\@\@\@\-- @examcom[an incomplete type]
-   @key[type] ATC @key[is access all] T'Class;  @\-- @examcom[it must
-be tagged]
+   @key[type] T;@\-- @examcom[an incomplete type]
+   @key[type] ATC @key[is access all] T'Class;@\-- @examcom[it must be tagged]
    X: ATC;
-   @key[procedure] Op(X: @key[access] T);@\@\-- @examcom[primitive
-operation]
+   @key[procedure] Op(X: @key[access] T);@\-- @examcom[primitive operation]
    ...
 @key[end] P;
-
-
 @end[Example]
+
 The incomplete type @exam[T] is declared in the private part of the
 package @exam[P]. The access type @exam[ACT] is then declared and
 since it is class wide this implies that the type @exam[T] must be
 tagged (the reader will recall from the discussion above that this
-odd feature is banished to Annex J in Ada 2005). The full type @exam[T]
+odd feature is banished to
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-J-11.html],Text=[Annex J]} in Ada 2005).
+The full type @exam[T]
 is then declared in the body. We also declare a primitive operation
 @exam[Op] of the type @exam[T] in the private part.
 
-However, before the body of @exam[P] is declared, nothing in Ada 95
+@leading@;However, before the body of @exam[P] is declared, nothing in Ada 95
 prevents us from writing a private child thus
-
-
 @begin[Example]
+@tabset[P35]
 @key[private package] P.C @key[is]
    @key[procedure] Naughty;
 @key[end] P.C;
 
-@key[package body ]P.C @key[is]
+@key[package body] P.C @key[is]
    @key[procedure] Naughty @key[is]
    @key[begin]
-      Op(X);@\@\@\@\-- @examcom[a dispatching call]
+      Op(X);@\-- @examcom[a dispatching call]
    @key[end] Naughty;
 @key[end] P.C;
-
-
 @end[Example]
+
 and the procedure @exam[Naughty] can call the dispatching operation
 @exam[Op]. The problem is that we are required to compile this call
 before the type @exam[T] is completed and thus before the location
@@ -794,43 +677,35 @@ This problem is prevented in Ada 2005 by a rule that if an incomplete
 type declared in a private part has primitive operations then the
 completion cannot be deferred to the body.
 
-Similar problems arise with access to subprogram types. Thus, as mentioned
-above, Ada 95 permits
-
-
+@leading@;Similar problems arise with access to subprogram types. Thus, as
+mentioned above, Ada 95 permits
 @begin[Example]
 @key[type] T;
 @key[type] A @key[is access procedure ](X: @key[in out] T);
-
-
 @end[Example]
+
 In Ada 2005, the completion of @exam[T] cannot be deferred to a body.
 Nor can we declare such an access to subprogram type if we only have
 an incomplete view of @exam[T] arising from a limited with clause.
 
-Another change in Ada 2005 can be illustrated by the @exam[Departments]
-and @exam[Employees] example. We can write
-
-
+@leading@;Another change in Ada 2005 can be illustrated by the
+@exam[Departments] and @exam[Employees] example. We can write
 @begin[Example]
 @key[limited with] Departments;
 @key[package] Employees @key[is]
    @key[type] Employee @key[is tagged private];
-   @key[procedure] {\expnd0\expndtw-2 Assign_Employee(E: }{\cs20\b\expnd0\expndtw-2
-in out}{\expnd0\expndtw-2  Employee; D: }{\cs20\b\expnd0\expndtw-2
-in out}{\expnd0\expndtw-2  Departments.Department'Class);
-}   @key[type] Dept_Ptr @key[is] @key[access all] Departments.Department'Class;
+   @key[procedure] Assign_Employee(E: @key[in out] Employee; D: @key[in out] Departments.Department'Class);
+   @key[type] Dept_Ptr @key[is] @key[access all] Departments.Department'Class;
    ...
 @key[end] Employees;
 
-@key[with] Employees;  @key[use] Employees;
+@key[with] Employees; @key[use] Employees;
 @key[procedure] Recruit(D: Dept_Ptr; E: @key[in out] Employee) @key[is]
 @key[begin]
    Assign_Employee(E, D.@key[all]);
 @key[end] Recruit;
-
-
 @end[Example]
+
 Ada 95 has a rule that says "thou shalt not dereference an incomplete
 type". This would prevent the call of @exam[Assign_Employee] which
 is clearly harmless. It would be odd to require @exam[Recruit] to
@@ -840,56 +715,47 @@ Ada 2005 so that dereferencing an incomplete view is only forbidden
 when used as a prefix as, for example, in @exam[D'Size].
 
 
-\pard\plain \s26\ql \li0\ri0\sb120\sa120\sl-280\slmult0\keep\keepn\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0
-\b\fs28\lang2057\langfe1033\cgrid\langnp2057\langfenp1033 3  Visibility
-from private parts
+@LabeledClause{Visibility from private parts}
 
-
-Ada 95 introduced public and private child packages in order to enable
+@leading@;Ada 95 introduced public and private child packages in order to enable
 subsystems to be decomposed in a structured manner. The general idea
 is that
-
-
-@begin[Description]
-{\u9642\'3f@\public children enable the decomposition of the view
+@begin{Itemize}
+public children enable the decomposition of the view
 of a subsystem to the user of the subsystem,
 
-}{\u9642\'3f@\private children enable the decomposition of the implementation
+private children enable the decomposition of the implementation
 of a subsystem.
+@end[Itemize]
 
-}
-@end[Description]
 In turn both public and private children can themselves have children
 of both kinds. This has proved to work well in most cases but a difficulty
 has arisen regarding private parts.
 
-Recall that the private part of a package really concerns the implementation
-of the package rather than specifying the facilities to the external
-user. Although it does not concern algorithmic aspects of the implementation
-it does concern the implementation of data abstraction. During the
-original design of Ada some thought was given to the idea that a package
-should truly be written and compiled as three distinct parts. Perhaps
-like this
-
-
+@leading@;Recall that the private part of a package really concerns the
+implementation of the package rather than specifying the facilities to the
+external user. Although it does not concern algorithmic aspects of the
+implementation it does concern the implementation of data abstraction. During
+the original design of Ada some thought was given to the idea that a package
+should truly be written and compiled as three distinct parts. Perhaps like this
 @begin[Example]
+@tabset[P35]
 @key[with] ...
 @key[package] P @key[is]
-   ...@\@\@\@\-- @examcom[visible specification]
+   ...@\-- @examcom[visible specification]
 @key[end];
 
 @key[with] ...
-@key[package private] P @key[is]@\@\-- @examcom[just dreaming]
-   ...@\@\@\@\-- @examcom[private part]
+@key[package private] P @key[is]@\-- @examcom[just dreaming]
+   ...@\-- @examcom[private part]
 @key[end];
 
 @key[with] ...
 @key[package body] P is
-   ...@\@\@\@\-- @examcom[body]
+   ...@\-- @examcom[body]
 @key[end];
-
-
 @end[Example]
+
 Each part could even have had its own context clause as shown.
 
 However, it was clear that this would be an administrative nightmare
@@ -903,14 +769,12 @@ private part is not part of the logical interface to the user it does
 provide information about the physical interface and that is needed
 by the compiler.
 
-The problem that has emerged is that the private part of a public
-package cannot access the information in private child packages. Private
-children are of course not visible to the user but there is no reason
+@leading@;The problem that has emerged is that the private part of a public
+package cannot access the information in private child packages.@Defn{private child packages}
+Private children are of course not visible to the user but there is no reason
 why they should not be visible to the private part of a public package
 provided that somehow the information does not leak out. Thus consider
 a hierarchy
-
-
 @begin[Example]
 @key[package] App @key[is]
    ...
@@ -929,9 +793,8 @@ a hierarchy
 @key[private]
    ...
 @key[end] App.Priv;
-
-
 @end[Example]
+
 There is no reason why the private parts of @exam[App] and @exam[App.Pub]
 and the visible part of the specification of @exam[App.Priv] should
 not share visibility (the private part of @exam[App.Priv] logically
@@ -971,35 +834,30 @@ difficult and forcing frequent recompilations of the parent and thus
 the whole hierarchy of packages.
 
 The situation is much alleviated in Ada 2005 by the introduction of
-private with clauses.
+private with clauses.@Defn{private with clause}@Defn2{Term=[with clause],Sec=[private]}
 
-If a package @exam[P] has a private with clause for a package @exam[Q]
-thus
-
-
+@leading@;If a package @exam[P] has a private with clause for a package
+@exam[Q] thus
 @begin[Example]
 @key[private with] Q;
 @key[package] P @key[is] ...
-
-
 @end[Example]
-then the private part of @exam[P] has visibility of the visible part
-of the package@exam[ Q], whereas the visible part of @exam[P] does
+
+@leading@;then the private part of @exam[P] has visibility of the visible part
+of the package @exam[Q], whereas the visible part of @exam[P] does
 not have visibility of @exam[Q] and so visibility cannot be transmitted
 to a user of @exam[P]. It is rather as if the with clause were attached
-to just the private part of@exam[ P] thus
-
-
+to just the private part of @exam[P] thus
 @begin[Example]
+@tabset[P35]
 @key[package] P @key[is]
    ...
-@key[with] Q;@\@\@\@\-- @examcom[we cannot write this]
+@key[with] Q;@\-- @examcom[we cannot write this]
 @key[private]
    ...
 @key[end] P;
-
-
 @end[Example]
+
 This echoes the three-part decomposition of a package discussed above.
 
 A private with clause can be placed wherever a normal with clause
@@ -1007,85 +865,77 @@ for the units mentioned can be placed and in addition a private with
 clause which mentions a private unit can be placed on any of its parent's
 descendants.
 
-So we can put a private with clause for @exam[App.Priv] on @exam[App.Pub]
-thereby permitting visibility of the private child from the private
-part of its public sibling. Thus
-
-
+@leading@;So we can put a private with clause for @exam[App.Priv] on
+@exam[App.Pub] thereby permitting visibility of the private child from the
+private part of its public sibling. Thus
 @begin[Example]
+@tabset[P35]
 @key[private with] App.Priv;
 @key[package] App.Pub @key[is]
-   ...@\@\@\@\-- @examcom[App.Priv not visible here]
+   ...@\-- @examcom[App.Priv not visible here]
 @key[private]
-   ...@\@\@\@\-- @examcom[App.Priv visible here]
+   ...@\-- @examcom[App.Priv visible here]
 @key[end] App.Pub;
-
-
 @end[Example]
+
 This works provided we don't run afoul of the dependence rules. The
 private with clause means that the public child has a dependence on
 the private child and therefore the private child must be compiled
 or entered into the program library first.
 
-We might get a situation where there exists a mutual dependence between
-the public and private sibling in that each has a type that the other
+@leading@;We might get a situation where there exists a mutual dependence
+between the public and private sibling in that each has a type that the other
 wants to access. In such a case we can use a limited private with
-clause thus
-
+clause thus@Defn{limited private with clause}@Defn2{Term=[with clause],Sec=[limited private]}
 
 @begin[Example]
+@tabset[P35]
 @key[limited private with] App.Priv;
 @key[package] App.Pub @key[is]
-   ...@\@\@\@\-- @examcom[App.Priv not visible here]
+   ...@\-- @examcom[App.Priv not visible here]
 @key[private]
-   ...@\@\@\@\-- @examcom[limited view of App.Priv here]
+   ...@\-- @examcom[limited view of App.Priv here]
 @key[end] App.Pub;
-
-
 @end[Example]
-The child packages are both dependent on the parent package and so
+
+@leading@;The child packages are both dependent on the parent package and so
 the parent cannot have with clauses for them. But a parent can have
 a limited with clause for a public child and a limited private with
 clause for a private child thus
-
-
 @begin[Example]
-@key[limited with] App.Pub;  @key[limited private with] App.Priv;
+@tabset[P35]
+@key[limited with] App.Pub; @key[limited private with] App.Priv;
 @key[package] App @key[is]
-   ...@\@\@\@\-- @examcom[limited view of App.Pub here]
+   ...@\-- @examcom[limited view of App.Pub here]
 @key[private]
-   ...@\@\@\@\-- @examcom[limited view of App.Priv here]
+   ...@\-- @examcom[limited view of App.Priv here]
+@key[end] App;
+@end[Example]
+
+@leading@;A simple example of the use of private with clauses was given in the
+Introduction. Here it is somewhat extended
+@begin[Example]
+@tabset[P35]
+@key[limited with] App.User_View; @key[limited private with] App.Secret_Details;
+@key[package] App @key[is]
+   ...@\-- @examcom[limited view of type Outer visible here]
+@key[private]
+   ...@\-- @examcom[limited view of type Inner visible here]
 @key[end] App;
 
-
-@end[Example]
-A simple example of the use of private with clauses was given in the
-Introduction. Here it is somewhat extended
-
-
-@begin[Example]
-@key[limited with] App.User_View;  @key[limited private with] App.Secret_Details;
-@key[package] App @key[is]
-   ...@\@\@\@\-- @examcom[limited view of type Outer visible here]
-@key[private]
-   ...@\@\@\@\-- @examcom[limited view of type Inner visible here]
-@key[end] App;@key[
-
-]@key[private package ]App.Secret_Details @key[is]
+@key[private package ]App.Secret_Details @key[is]
    @key[type] Inner @key[is] ...
-   ... @\@\@\@\-- @examcom[various operations on Inner etc]
+   ... @\-- @examcom[various operations on Inner etc]
 @key[end] App.Secret_Details;
 
 @key[private with] App.Secret_Details;
 @key[package] App.User_View @key[is]
 
    @key[type] Outer @key[is private];
-   ...@\@\@\@\-- @examcom[various operations on Outer visible to the
-user]
+   ...@\-- @examcom[various operations on Outer visible to the user]
 
-@\@\@\@\-- @examcom[type Inner is not visible here
-]@key[private
-@\@\]@\@\-- @examcom[type Inner is visible here]
+@\-- @examcom[type Inner is not visible here]
+@key[private]@\-- @examcom[type Inner is visible here]
 
     @key[type] Outer @key[is]
       @key[record]
@@ -1094,9 +944,8 @@ user]
       @key[end record];
    ...
 @key[end] App.User_View;
-
-
 @end[Example]
+
 In the previous section we observed that there were problems with
 interactions between use clauses, nonlimited with clauses, and limited
 with clauses. Those rules also apply to private with clauses where
@@ -1104,31 +953,28 @@ a private with clause is treated as a nonlimited with clause and a
 limited private with clause is treated as a limited with clause. In
 other words private is ignored for the purpose of those rules.
 
-Moreover, we cannot place a package use clause in the same context
+@leading@;Moreover, we cannot place a package use clause in the same context
 clause as a private with clause (limited or not). This is because
 we would then expect it to apply to the visible part as well which
 would be wrong. However, we can always put a use clause in the private
 part thus
-
-
 @begin[Example]
-@key[private with] Q;@key[
-package] P @key[is]
-   ...@\@\@\@\-- @examcom[Q not visible here]
-@key[private
-]   @key[use] Q;
-   ...@\@\@\@\-- @examcom[use visibility of Q here]
+@tabset[P35]
+@key[private with] Q;
+@key[package] P @key[is]
+   ...@\-- @examcom[Q not visible here]
+@key[private]
+   @key[use] Q;
+   ...@\-- @examcom[use visibility of Q here]
 @key[end] P;
-
-
 @end[Example]
-At the risk of confusing the reader it might be worth pointing out
+
+@leading@;At the risk of confusing the reader it might be worth pointing out
 that strictly speaking the rules regarding private with are treated
 as legality rules rather than visibility rules. Here is an example
 which illustrates this subtlety and the dangers it avoids
-
-
 @begin[Example]
+@tabset[P35]
 @key[package] P @key[is]
    @key[function] F @key[return] Integer;
 @key[end] P;
@@ -1139,14 +985,13 @@ which illustrates this subtlety and the dangers it avoids
 @key[private with] F;
 @key[package] Q @key[is]
    @key[use] P;
-   X: Integer := F;@\@\@\-- @examcom[illegal
-]   Y: Integer := P.F;@\@\-- @examcom[legal]
+   X: Integer := F;@\-- @examcom[illegal]
+   Y: Integer := P.F;@\-- @examcom[legal]
 @key[private]
-   Z: Integer := F;@\@\@\-- @examcom[legal, calls the library F
-]@key[end] Q;
-
-
+   Z: Integer := F;@\-- @examcom[legal, calls the library F]
+@key[end] Q;
 @end[Example]
+
 If we treated the rules regarding private with as pure visibility
 rules then the call of @exam[F] in the declaration of @exam[X] in
 the visible part would be a call of @exam[P.F]. So moving the declaration
@@ -1159,52 +1004,39 @@ but unmentionable in the visible part. In practice programmers can
 just treat them as visibility rules so that the entities are not visible
 at all which is how we have described them above.
 
-A useful consequence of the unmentionable rather than invisible approach
-is that we can use the name of a package mentioned in a private with
+@leading@;A useful consequence of the unmentionable rather than invisible
+approach is that we can use the name of a package mentioned in a private with
 clause in a pragma in the context clause thus
-
-
 @begin[Example]
 @key[private with] P;  @key[pragma] Elaborate(P);
 @key[package] Q @key[is] ...
-
-
 @end[Example]
-Private with clauses are in fact allowed on bodies as well, in which
+
+@leading@;Private with clauses are in fact allowed on bodies as well, in which
 case they just behave as a normal with clause. Another minor point
 is that Ada has always permitted several with clauses for the same
 unit in one context clause thus
-
-
 @begin[Example]
 @key[with] P;  @key[with] P;  @key[with] P, P;
 @key[package] Q is ...
-
-
 @end[Example]
-To avoid complexity we similarly allow
 
-
+@leading@keepnext@;To avoid complexity we similarly allow
 @begin[Example]
 @key[with] P;  @key[private with] P;
 @key[package] Q @key[is]
-
-
 @end[Example]
+
 and then the private with is ignored.
 
-We have introduced private with clauses in this section as the solution
-to the problem of access to private children from the private part
-of the parent or public sibling. But they have other important uses.
-If we have
-
-
+@leading@;We have introduced private with clauses in this section as the
+solution to the problem of access to private children from the private part of
+the parent or public sibling. But they have other important uses. If we have
 @begin[Example]
 @key[private with] P;
 @key[package] Q @key[is] ...
-
-
 @end[Example]
+
 then we are assured that the package @exam[Q] cannot inadvertently
 access @exam[P] in the visible part and, in particular, pass on access
 to entities in @exam[P] by renamings and so on. Thus writing @key[private
@@ -1213,29 +1045,24 @@ to both human reviewers and program analysis tools. So if we have
 a situation where a private with clause is all that is needed then
 we should use it rather than a normal with clause.
 
-In summary, whereas in Ada 95 there is just one form of with clause,
+@leading@;In summary, whereas in Ada 95 there is just one form of with clause,
 Ada 2005 provides four forms
-
-
 @begin[Example]
-@key[with] P;@\@\@\-- @examcom[full view ]
+@tabset[P35]
+@key[with] P;@\-- @examcom[full view]
 
-@key[limited with] P;@\@\-- @examcom[limited view ]
+@key[limited with] P;@\-- @examcom[limited view]
 
-@key[private with] P;@\@\-- @examcom[full view from private part]
+@key[private with] P;@\-- @examcom[full view from private part]
 
-@key[limited private with] P;@\-- @examcom[limited view from private
-part
-
-]
+@key[limited private with] P;@\-- @examcom[limited view from private part]
 @end[Example]
+
 Finally, note that if a private with clause is given on a specification
 then it applies to the body as well as to the private part.
 
 
-\pard\plain \s26\ql \li0\ri0\sb120\sa120\sl-280\slmult0\keep\keepn\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0
-\b\fs28\lang2057\langfe1033\cgrid\langnp2057\langfenp1033 4  Aggregates
-
+@LabeledClause{Aggregates}
 
 There are important changes to aggregates in Ada 2005 which are very
 useful in a number of contexts. These were triggered by the changes
@@ -1244,11 +1071,9 @@ but it is convenient to first consider aggregates separately.
 
 The main change is that the box notation @exam[<>] is now permitted
 as the value in a named aggregate. The meaning is that the component
-of the aggregate takes the default value if there is one.
+of the aggregate takes the default value if there is one.@Defn2{Term=[default value],Sec=[in aggregate]}@Defn2{Term=[box],Sec=[in aggregate]}
 
-So if we have a record type such as
-
-
+@leading@keepnext@;So if we have a record type such as
 @begin[Example]
 @key[type] RT @key[is]
    @key[record]
@@ -1256,17 +1081,13 @@ So if we have a record type such as
       B: @key[access] Integer;
       C: Float;
    @key[end record];
-
-
 @end[Example]
-then if we write
 
-
+@leading@keepnext@;then if we write
 @begin[Example]
 X: RT := (A => <>, B => <>, C => <>);
-
-
 @end[Example]
+
 then @exam[X.A] has the value @exam[7], @exam[X.B] has the value @key[null]
 and @exam[X.C] is undefined. So the default value is that given in
 the record type declaration or, in the absence of such an explicit
@@ -1274,87 +1095,67 @@ default value, it is the default value for the type. If there is no
 explicit default value and the type does not have one either then
 the value is simply undefined as usual.
 
-The above example could be abbreviated to
-
-
+@leading@keepnext@;The above example could be abbreviated to
 @begin[Example]
 X: RT := (@key[others] => <>);
-
-
 @end[Example]
-The obvious combinations are allowed
 
-
+@leading@keepnext@;The obvious combinations are allowed
 @begin[Example]
 (A => <>, B => An_Integer'Access, C => 2.5)
 (A => 3, @key[others] => <>)
 (A => 3, B | C => <>)
-
-
 @end[Example]
+
 The last two are the same. There is a rule in Ada 95 that if several
 record components in an aggregate are given the same expression using
 a @exam[|] then they have to be of the same type. This does not apply
-in the case of @exam[<> ]because no typed expression is involved.
+in the case of @exam[<>] because no typed expression is involved.
 
-The @exam[<>] notation is not permitted with positional notation.
+@leading@;The @exam[<>] notation is not permitted with positional notation.
 So we cannot write
-
-
 @begin[Example]
-(3, <>, 2.5)@\@\@\-- @examcom[illegal]
-
-
+@tabset[P35]
+(3, <>, 2.5)@\-- @examcom[illegal]
 @end[Example]
-But we can mix named and positional notations in a record aggregate
+
+@leading@;But we can mix named and positional notations in a record aggregate
 as usual provided the named components follow the positional ones,
 so the following are permitted
-
-
 @begin[Example]
 (3, B => <>, C => 2.5)
 (3, @key[others] => <>)
-
-
 @end[Example]
+
 A minor but important rule is that we cannot use @exam[<>] for a component
 of an aggregate that is a discriminant if it does not have a default.
 Otherwise we could end up with an undefined discriminant.
 
-The @exam[<>] notation is also allowed with array aggregates. But
+@leading@;The @exam[<>] notation is also allowed with array aggregates. But
 in this case the situation is much simpler because it is not possible
 to give a default value for array components. Thus we might have
-
-
 @begin[Example]
-P: @key[array] (1.. 1000) @key[of] Integer := (1 => 2, @key[others]
-=> <>);
-
-
+P: @key[array] (1.. 1000) @key[of] Integer := (1 => 2, @key[others] => <>);
 @end[Example]
-The array @exam[P] has its first component set to @exam[2] and the
+
+@leading@;The array @exam[P] has its first component set to @exam[2] and the
 rest undefined. (Maybe @exam[P] is going to be used to hold the first
 1000 prime numbers and we have a simple algorithm to generate them
 which requires the first prime to be provided.) The aggregate could
 also be written as
-
-
 @begin[Example]
 (2, @key[others] => <>)
-
-
 @end[Example]
+
 Remember that @key[others] is permitted with a positional array aggregate
 provided it is at the end. But otherwise @exam[<>] is not allowed
 with a positional array aggregate.
 
-We can add @key[others]@exam[ => <>] even when there are no components
+We can add @key[others] @exam[=> <>] even when there are no components
 left. This applies to both arrays and records.
 
-The box notation is also useful with tasks and protected objects used
+@leading@;The box notation is also useful with tasks and protected objects used
 as components. Consider
-
-
 @begin[Example]
 @key[protected type] Semaphore @key[is] ... ;
 
@@ -1364,37 +1165,29 @@ as components. Consider
       Count: Integer;
       Finished: Boolean := False;
    @key[end record];
-
-
 @end[Example]
-As explained in the next section, we can now use an aggregate to initialize
-an object of a limited type. Although we cannot give an explicit initial
-value for a @exam[Semaphore] we would still like to use an aggregate
-to get a coverage check. So we can write
 
-
+@leading@;As explained in the next section, we can now use an aggregate to
+initialize an object of a limited type. Although we cannot give an explicit
+initial value for a @exam[Semaphore] we would still like to use an aggregate to
+get a coverage check. So we can write
 @begin[Example]
 X: PT := (Guard => <>, Count => 0, Finished => <>);
-
-
 @end[Example]
-Note that although we can use @exam[<>] to stand for the value of
+
+@leading@;Note that although we can use @exam[<>] to stand for the value of
 a component of a protected type in a record we cannot use it for a
 protected object standing alone.
-
-
 @begin[Example]
-Sema: Semaphore := <>;@\@\-- @examcom[illegal
-
-]
+@tabset[P35]
+Sema: Semaphore := <>;@\-- @examcom[illegal]
 @end[Example]
+
 The reason is that there is no need since we have no coverage check
 to concern us and there could be no other reason for doing it anyway.
 
-Similarly we can use @exam[<>] with a component of a private type
+@leading@;Similarly we can use @exam[<>] with a component of a private type
 as in
-
-
 @begin[Example]
 @key[type] Secret@key[ is private];
 
@@ -1405,23 +1198,19 @@ as in
    @key[end record];
 
 X: Visible := (A => 77; S => <>);
-
-
 @end[Example]
-but not when standing alone
 
-
+@leading@keepnext@;but not when standing alone
 @begin[Example]
-S: Secret := <>;@\@\@\-- @examcom[illegal
-
-]
+@tabset[P35]
+S: Secret := <>;@\-- @examcom[illegal]
 @end[Example]
+
 It would not have any purpose because such a variable will take any
 default value anyway.
 
-We conclude by mentioning a small point for the language lawyer. Consider
-
-
+@leading@;We conclude by mentioning a small point for the language lawyer.
+Consider
 @begin[Example]
 @key[function] F @key[return] Integer;
 
@@ -1430,27 +1219,22 @@ We conclude by mentioning a small point for the language lawyer. Consider
       A: Integer := F;
       B: Integer := 3;
    @key[end record];
-
-
 @end[Example]
-Writing
 
-
+@leading@keepnext@;Writing
 @begin[Example]
+@tabset[P35]
 X: T := (A => 5, @key[others] => <>);@\-- @examcom[does not call F]
-
-
 @end[Example]
-is not quite the same as
 
-
+@leading@keepnext@;is not quite the same as
 @begin[Example]
-X: T;@\@\@\@\-- @examcom[calls F]
+@tabset[P35]
+X: T;@\-- @examcom[calls F]
 ...
 X.A := 5;  X.B := 3;
-
-
 @end[Example]
+
 In the first case the function @exam[F] is not called whereas in the
 second case it is called when @exam[X] is declared in order to default
 initialize @exam[X.A]. If it had a nasty side effect then this could
@@ -1494,11 +1278,9 @@ that we cannot initialize objects of a limited type nor can we declare
 constants  of a limited type. We cannot declare constants because
 they have to be initialized and yet initialization is forbidden. This
 is more annoying in Ada 95 since we can make a type limited but not
-private.
+private.@Defn2{Term=[initialization],Sec=[of limited objects]}@Defn{limited object initialization}
 
-The following example was discussed in the Introduction
-
-
+@leading@;The following example was discussed in the Introduction
 @begin[Example]
 @key[type] T is @key[limited]
    @key[record]
@@ -1506,22 +1288,18 @@ The following example was discussed in the Introduction
       B: Boolean;
       C: Float;
    @key[end record];
-
-
 @end[Example]
-Note that this type is explicitly limited (but not private) but its
+
+@leading@;Note that this type is explicitly limited (but not private) but its
 components are not limited. If we declare an object of type @exam[T]
 in Ada 95 then we have to initialize the components (by assigning
 to them) individually thus
-
-
 @begin[Example]
    X: T;
 @key[begin]
    X.A := 10;  X.B := True;  X.C := 45.7;
-
-
 @end[Example]
+
 Not only is this annoying but it is prone to errors as well. If we
 add a further component @exam[D] to the type @exam[T] then we might
 forget to initialize it. One of the advantages of aggregates is that
@@ -1532,16 +1310,13 @@ This problem did not arise in Ada 83 because we could not make a type
 limited without making it also private and so the individual components
 were not visible anyway.
 
-Ada 2005 overcomes the difficulty by stating that initialization by
+@leading@;Ada 2005 overcomes the difficulty by stating that initialization by
 an aggregate is not actually assignment even though depicted by the
 same symbol. This permits
-
-
 @begin[Example]
    X: T := (A => 10,  B => True,  C => 45.7);
-
-
 @end[Example]
+
 We should think of the individual components as being initialized
 individually @i[in situ] @en an actual aggregated value is not created
 and then assigned.
@@ -1552,69 +1327,46 @@ originally defined but it was corrected in
 @AILink{AI=[AI95-00083-01],Text=[AI-83]} and consolidated
 in the 2001 Corrigendum @LocalLink{Target=[R2],Sec=[References],Text={[2]}}.
 
-We can now declare a constant of a limited type as expected
-
-
+@leading@;We can now declare a constant of a limited type as expected@Defn2{Term=[constant],Sec=[of a limited type]}
 @begin[Example]
    X: @key[constant] T := (A => 10,  B => True,  C => 45.7);
-
-
 @end[Example]
-Limited aggregates can be used in a number of other contexts as well
 
+@leading@;Limited aggregates can be used in a number of other contexts as well
+@begin[Itemize]
+as the default expression in a component declaration,
 
-@begin[Description]
-{\u9642\'3f@\as the default expression in a component declaration,
-
-}@\so if we nest the type @exam[T] inside some other type (which itself
-then is always limited @en it could be explicitly limited but there
-is a general rule that a type is implicitly limited if it has a limited
+@leading@noprefix@;so if we nest the type @exam[T] inside some other type
+(which itself then is always limited @en it could be explicitly limited but
+there is a general rule that a type is implicitly limited if it has a limited
 component) we might have
-
-
-@end[Description]
 @begin[Example]
 @key[type] Twrapper @key[is]
    @key[record]
       Tcomp: T := (0, False, 0.0);
    @key[end record];
-
-
 @end[Example]
-@begin[Description]
-{\u9642\'3f@\as an expression in a record aggregate,
 
-}@\so again using the type @exam[Twrapper] as in
+as an expression in a record aggregate,
 
+@leading@keepnext@noprefix@;so again using the type @exam[Twrapper] as in
 
-@end[Description]
 @begin[Example]
 XT: Twrapper := (Tcomp => (1, True, 1.0));
-
-
 @end[Example]
-@begin[Description]
-{\u9642\'3f@\as an expression in an array aggregate similarly,
 
-}@\so we might have
+as an expression in an array aggregate similarly,
 
-
-@end[Description]
+@leading@keepnext@noprefix@;so we might have
 @begin[Example]
 @key[type] Tarr @key[is array] (1 .. 5) @key[of] T;
 
 Xarr: Tarr := (1 .. 5 => (2, True, 2.0));
-
-
 @end[Example]
-@begin[Description]
-{\u9642\'3f@\as the expression for the ancestor part of an extension
-aggregate,
 
-@\so if }@exam[TT] were tagged as in
+as the expression for the ancestor part of an extension aggregate,
 
-
-@end[Description]
+@leading@keepnext@noprefix@;so if @exam[TT] were tagged as in
 @begin[Example]
 @key[type] TT@key[ is tagged limited]
    @key[record]
@@ -1629,94 +1381,66 @@ aggregate,
    @key[end record];
 ...
 XTT: TTplus := ((1, True, 1.0) @key[with] 2);
-
-
 @end[Example]
-@begin[Description]
-{\u9642\'3f@\as the expression in an initialized allocator,
 
-}@\so we might have
+as the expression in an initialized allocator,
 
-
-@end[Description]
+@leading@keepnext@noprefix@;so we might have
 @begin[Example]
 @key[type] T_Ptr @key[is access] T;
 XT_Ptr: T_Ptr;
 ...
 XT_Ptr := @key[new] T'(3, False, 3.0);
-
-
 @end[Example]
-@begin[Description]
-{\u9642\'3f@\as the actual parameter for a subprogram parameter of
-a limited type of mode in
 
-}
-@end[Description]
+@leading@;as the actual parameter for a subprogram parameter of
+a limited type of mode in
 @begin[Example]
 @key[procedure] P(X: @key[in] T);
 ...
 P((4, True, 4.0));
-
-
 @end[Example]
-@begin[Description]
-{\u9642\'3f@\similarly as the default expression for a parameter
 
-}
-@end[Description]
+@leading@;similarly as the default expression for a parameter
 @begin[Example]
 @key[procedure] P(X: @key[in] T := (4, True, 4.0));
-
-
 @end[Example]
-@begin[Description]
-{\u9642\'3f@\as the result in a return statement
 
-}
-@end[Description]
+@leading@;as the result in a return statement
 @begin[Example]
 @key[function] F( ... ) @key[return] T @key[is]
 @key[begin]
    ...
    @key[return] (5, False, 5.0);
 @key[end] F;
-
-
 @end[Example]
-@begin[Description]
-@\this really concerns the other major change to limited types which
+
+@noprefix@;this really concerns the other major change to limited types which
 we shall return to in a moment.
 
-{\u9642\'3f@\as the actual parameter for a generic formal limited
+@leading@;as the actual parameter for a generic formal limited
 object parameter of mode in,
-
-}
-@end[Description]
 @begin[Example]
 @key[generic]
    FT: @key[in] T;
 @key[package] P @key[is] ...
 ...
 @key[package] Q @key[is new] P(FT => (7, True, 7.0));
-
-
 @end[Example]
-The last example is interesting. Limited generic parameters were not
+@end[Itemize]
+
+@leading@;The last example is interesting. Limited generic parameters were not
 allowed in Ada 95 at all because there was no way of passing an actual
 parameter because the generic parameter mechanism for an in parameter
 is considered to be assignment. But now the actual parameter can be
 passed as an aggregate. An aggregate can also be used as a default
 value for the parameter thus
-
-
 @begin[Example]
 @key[generic]
    FT: @key[in] T := (0, False, 0.0);
 @key[package] P @key[is] ...
-
-
 @end[Example]
+
 Remember that there is a difference between subprogram and generic
 parameters. Subprogram parameters were always allowed to be of limited
 types since they are mostly implemented by reference and no copying
@@ -1726,8 +1450,6 @@ types where the full type is an elementary type.
 The change in Ada 2005 is that an aggregate can be used as the actual
 parameter in the case of a subprogram parameter of mode @key[in] whereas
 that was not possible in Ada 95.
-
-*** Started here ***
 
 @leading@;Sometimes a limited type has components where an initial value cannot
 be given as in
@@ -1742,7 +1464,7 @@ be given as in
    @key[end record];
 @end[Example]
 
-@leading@;Since a protected type is inherently limited the type@exam[ PT] is
+@leading@;Since a protected type is inherently limited the type @exam[PT] is
 also limited because a type with a limited component is itself limited.
 Although we cannot give an explicit initial value for a @exam[Semaphore],
 we would still like to use an aggregate to get the coverage check.
@@ -1880,7 +1602,7 @@ general way before finally returning from the function. @Defn{extended return st
 
 @leading@keepnext@;The basic structure is
 @begin[Example]
-@tabset[P42]
+@tabset[P35]
 @key[function] Make( ... ) @key[return] T @key[is]
 @key[begin]
    ...
@@ -1910,7 +1632,7 @@ to create the space for @exam[R]. No copying is therefore ever performed.
 
 @leading@keepnext@;The sequence of statements could have an exception handler
 @begin[Example]
-@tabset[P42]
+@tabset[P35]
    @key[return] R: T @key[do]
       ...  @\-- @examcom[statements]
    @key[exception]
@@ -1921,7 +1643,7 @@ to create the space for @exam[R]. No copying is therefore ever performed.
 @leading@;If we need local variables within an extended return statement then
 we can declare an inner block in the usual way
 @begin[Example]
-@tabset[P42]
+@tabset[P35]
    @key[return] R: T @key[do]
       @key[declare]
          ...@\-- @examcom[local declarations]
@@ -1955,7 +1677,7 @@ or explicit initial value.
 @leading@;Observe that extended return statements cannot be nested but could
 have simple return statements inside
 @begin[Example]
-@tabset[P42]
+@tabset[P35]
    @key[return] R: T := Init( ... ) @key[do]
       @key[if] ... @key[then]
           ...
@@ -2017,7 +1739,7 @@ is constrained. We can use both with extended return statements.
 has to statically match (typically it will be the same textually but
 need not) thus
 @begin[Example]
-@tabset[P42]
+@tabset[P35]
 @key[function] Make( ... ) @key[return] CA @key[is]
 @key[begin]
    ...
@@ -2052,7 +1774,8 @@ either by its subtype or by its initial value. Thus
 @end[Example]
 
 @leading@;The other important change to the result of functions which was
-discussed in the previous paper is that the result type can be of an anonymous
+discussed in the previous paper (see @RefSecNum{Anonymous access types}) is
+that the result type can be of an anonymous
 access type. So we can write a function such as
 @begin[Example]
 @key[function] Mate_Of(A: @key[access] Animal'Class) @key[return access]  Animal'Class;
@@ -2067,7 +1790,7 @@ acting as servers. Individual slave tasks might be busy or idle. We
 might have a manager task which allocates slave tasks to different
 jobs. The manager might declare the tasks as an array
 @begin[Example]
-@tabset[P42]
+@tabset[P35]
 Slaves: @key[array ](1 .. 10) @key[of] TT;@\-- @examcom[TT is some task type]
 @end[Example]
 
@@ -2085,7 +1808,7 @@ Slave_Data: @key[array ](1 .. 10) @key[of] Task_Data;
 @leading@keepnext@;We now need a function to find an available slave. In Ada 95
 we write
 @begin[Example]
-@tabset[P42]
+@tabset[P35]
 @key[function] Get_Slave @key[return] TT @key[is]
 @key[begin]
    ...@\-- @examcom[find index K of first idle slave]
@@ -2103,7 +1826,7 @@ concept of returning by reference.
 
 @leading@keepnext@;So we have to write
 @begin[Example]
-@tabset[P42]
+@tabset[P35]
 @key[function] Get_Slave @key[return] @key[access] TT @key[is]
 @key[begin]
    ...@\-- @examcom[find index K of first idle slave]

@@ -1,7 +1,7 @@
 @Part(intro, Root="rat.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/Rationale/intro.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2006/01/24 06:44:36 $}
+@comment{$Revision: 1.5 $ $Date: 2006/01/27 06:40:03 $}
 
 @LabeledSection{Introduction}
 
@@ -369,7 +369,7 @@ an identifier and as a keyword in the same program would be
 nasty. Note also that the pragma Interface which many
 compilers still support from Ada 83 (although not mentioned
 by Ada 95 at all) is being put into
-@URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-J.html],Text=[Annex J]}
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-J-12.html],Text=[Annex J]}
 for obsolescent features.
 
 @LabeledSubClause{Overview: The object oriented model}
@@ -641,7 +641,7 @@ change since the Ada 95 RM states that the default
 implementations have no effect. However, this neatly
 clarifies the situation and removes ad hoc semantic rules.
 (The pragma @Exam{Preelaborable_Initialization} will be explained in
-a later paper.)@Comment{** Ref TBD}
+a later paper @en see @RefSecNum{Pragmas and Restrictions}.)
 
 Another important change is the ability to do type extension
 at a level more nested than that of the parent type. This
@@ -1111,7 +1111,7 @@ treated as one list @en the same rule applies in Ada 95. We now
 go one step further.
 
 @leading@;Ada 2005 solves the problem by introducing a variation on the
-with clause @en the limited with clause.@Defn{limited with clause}
+with clause @en the limited with clause.@Defn{limited with clause}@Defn2{Term=[with clause],Sec=[limited]}
 The idea is that a
 library package (and subprogram) can refer to another library
 package that has not yet been declared and can refer to the
@@ -1188,11 +1188,11 @@ tagged. In Ada 2005 this is frowned upon since we should now
 declare that T is tagged incomplete if we wish to declare a
 class wide access type. For compatibility the old feature has
 been retained but banished to
-@URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-J.html],Text=[Annex J]}
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-J-11.html],Text=[Annex J]}
 for obsolescent features.
 
 Further examples of the use of limited with clauses will be
-given in a later paper.@Comment{** Ref TBD}
+given in a later paper (see @RefSecNum{Mutually dependent types}).
 
 Another enhancement in this area is the introduction of
 private with clauses which overcome a problem with private
@@ -1354,7 +1354,7 @@ copying is not involved including as actual parameters of mode @key[in].
 There are also problems with returning results of a limited type from
 a function. This is overcome in Ada 2005 by the introduction of an
 extended form of return statement. This will be described in detail
-in a later paper.@Comment{** Ref TBD}
+in a later paper (see @RefSecNum{Limited types and return statements}).
 
 @LabeledSubclause{Tasking and real-time facilities}
 
@@ -1387,7 +1387,7 @@ as @exam[No_Abort_Statements] and @exam[No_Dynamic_Priorities].
 
 The pragma @exam[Detect_Blocking] plus many of the @exam[Restrictions]
 identifiers are new to Ada 2005. Further details will be given in
-a later paper.@Comment{** Ref TBD}
+a later paper (see @RefSecNum{The Ravenscar profile}).
 
 @leading@;Ada 95 allows the priority of a task to be changed but does not
 permit the ceiling priority of a protected object to be changed. This is
@@ -1531,7 +1531,7 @@ also been added.
 There is a minor flaw in the above example. If we are interrupted
 by the telephone between putting the egg in the water and setting
 the handler then our egg will be overdone. We will see how to cure
-this in a later paper.@Comment{** Ref TBD}
+this in a later paper (see @RefSecNum{CPU clocks and timers}).
 
 Readers will recall the old problem of how tasks can have a silent
 death. If something in a task goes wrong in Ada 95 and an exception
@@ -1647,7 +1647,8 @@ A task interface or protected interface has to be implemented by a
 task type or protected type respectively. However, a synchronized
 interface can be implemented by either a task type or a protected
 type. These interfaces can also be composed with certain restrictions.
-Detailed examples will be given in a later paper.@Comment{** Ref TBD}
+Detailed examples will be given in a later paper
+(see @RefSecNum{Synchronized interfaces}).
 
 
 @LabeledSubclause{Overview: Exceptions, numerics, generics etc}
@@ -1943,7 +1944,8 @@ Note that the existing form @exam[(<>)] is now deemed to be a shorthand
 for@exam[ (]@key[others]@exam[ => <>)]. As with aggregates, the form
 @exam[<>] is only permitted with named notation.
 
-Examples using this new facility will be given in a later paper.@Comment{** Ref TBD}
+Examples using this new facility will be given in a later paper
+(see @RefSecNum{Generic units}).
 
 
 @LabeledSubClause{Overview: Standard library}

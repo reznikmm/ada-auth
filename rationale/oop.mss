@@ -1,7 +1,7 @@
 @Part(oop, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/oop.mss,v $)
-@comment($Revision: 1.2 $ $Date: 2006/01/24 06:44:39 $)
+@comment($Revision: 1.3 $ $Date: 2006/01/27 06:40:08 $)
 
 @LabeledSection{Object oriented model}
 
@@ -934,7 +934,8 @@ come back to this topic in a moment.
 There are other forms of interfaces, namely synchronized interfaces,
 task interfaces, and protected interfaces. These bring support for
 polymorphic, class wide object oriented programming to the real time
-programming arena. They will be described in a later paper.@Comment{** Ref TBD}
+programming arena. They will be described in a later paper (see
+@RefSecNum{Synchronized interfaces}.
 
 Having described the general ideas in somewhat symbolic terms, we
 will now discuss a more concrete example.
@@ -1775,7 +1776,7 @@ can be passed to the function @exam[Constructor].
 The generic function @exam[Generic_Dispatching_Constructor] takes
 two parameters, one is the tag of the type of the object to be created
 and the other is the auxiliary information to be passed to the dispatching
-function @exam[Constructor].
+function @exam[Constructor].@Defn2{Term=[function],Sec=[Generic_Dispatching_Constructor]}@Defn{Generic_Dispatching_Constructor function}@Defn{Ada.Generic_Dispatching_Constructor function}
 
 @leading@;Note that the type @exam[Parameters] is used as an access parameter
 in both the generic function and the formal function @exam[Constructor].
@@ -2007,7 +2008,7 @@ will be returned by @exam[Decode] and this will cause @exam[Make_Object] to
 raise @exam[Tag_Error].
 
 A more elegant registration system could be easily implemented using
-the container library which will be described in a later paper.@Comment{ Ref TBD - entire container section}
+the container library which will be described in a later paper.@Comment{ *** Ref TBD - entire container section}
 
 Note that any instance of @exam[Generic_Dispatching_Constructor]
 checks that the tag passed as parameter is indeed that of a type descended

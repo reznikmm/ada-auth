@@ -1,7 +1,7 @@
 @Part(title, Root="rat.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/Rationale/refs.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/01/22 05:07:41 $}
+@comment{$Revision: 1.3 $ $Date: 2006/01/27 06:40:05 $}
 
 @UnnumberedSection{References}
 
@@ -41,5 +41,11 @@ Springer-Verlag. @Shrink{@i{(Online versions can be found
 at @URLLink{URL=[http://www.adaic.org/standards/ada95.html],
 Text=[http://www.adaic.org/standards/ada95.html]}.)}}
 
+@LocalTarget{Target=[R8],Text={[8]}}@\A. Burns and A. Wellings (2006)
+@i{Concurrent and Real-Time Programming In Ada 2005}, Cambridge University
+Press.
+
+@LocalTarget{Target=[R9],Text={[9]}}@\J. G. P. Barnes (2003) @i{High Integrity Software
+@en The SPARK Approach to Safety and Security}, Addison-Wesley.
 @end{Description}
 
