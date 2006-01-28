@@ -1,7 +1,7 @@
 @Part(intro, Root="rat.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/Rationale/intro.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2006/01/27 06:40:03 $}
+@comment{$Revision: 1.6 $ $Date: 2006/01/28 06:49:01 $}
 
 @LabeledSection{Introduction}
 
@@ -1907,11 +1907,12 @@ that is an instantiation of @exam[S] with the given actual parameters
 This ensures that the instantiation of @exam[S] has the same actual
 parameter (assumed only one in this example) as the parameter @exam[F1]
 of @exam[Q] used in the instantiation of @exam[Q] to create the actual
-package corresponding to@exam[ P].
+package corresponding to @exam[P].
 
 @leading@;There is an example of this in one of the packages for vectors and
 matrices in ISO/IEC 13813 which is now incorporated into Ada 2005
-(see Section 3.6). The generic package for complex arrays has two
+(see Section @RefSecNum{Overview: Standard library}). The generic package for
+complex arrays has two
 package parameters. One is the corresponding package for real arrays
 and the other is the package @exam[Generic_Complex_Types] from the
 existing Numerics annex. Both of these packages have a floating type

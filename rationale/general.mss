@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/general.mss,v $)
-@comment($Revision: 1.1 $ $Date: 2006/01/27 06:40:02 $)
+@comment($Revision: 1.2 $ $Date: 2006/01/28 06:49:01 $)
 
 @LabeledSection{Exceptions, generics etc}
 
@@ -38,95 +38,121 @@ other than under the request to remedy shortcomings and improve interfacing.
 @leading@;The following Ada Issues cover the relevant changes and are described
 in detail in this paper.
 
-*** Stopped here ***
 @begin[Description]
-161  Preelaborable initialization
+@AILink{AI=[AI95-00161-01],Text=[161]}@\Preelaborable initialization
 
-216  Unchecked unions @en variants without discriminant
+@AILink{AI=[AI95-00216-01],Text=[216]}@\Unchecked unions @en variants without
+discriminant
 
-224  pragma Unsuppress
+@AILink{AI=[AI95-00224-01],Text=[224]}@\pragma Unsuppress
 
-241  Testing for null occurrence
+@AILink{AI=[AI95-00241-01],Text=[241]}@\Testing for null occurrence
 
-251  Abstract interfaces to provide multiple inheritance
+@AILink{AI=[AI95-00251-01],Text=[251]}@\Abstract interfaces to provide multiple
+inheritance
 
-257  Restrictions for implementation defined entities
+@AILink{AI=[AI95-00257-01],Text=[257]}@\Restrictions for implementation defined
+entities
 
-260  {\expnd0\expndtw-4 Abstract formal subprograms & dispatching
-constructors}
+@AILink{AI=[AI95-00260-02],Text=[260]}@\Abstract formal subprograms &
+dispatching constructors
 
-267  Fast float to integer conversion
+@AILink{AI=[AI95-00267-01],Text=[267]}@\Fast float to integer conversion
 
-286  Assert pragma
+@AILink{AI=[AI95-00286-01],Text=[286]}@\Assert pragma
 
-317  Partial parameter lists for formal packages
+@AILink{AI=[AI95-00317-01],Text=[317]}@\Partial parameter lists for formal
+packages
 
-329  pragma No_Return @en procedures that never return
+@AILink{AI=[AI95-00329-01],Text=[329]}@\pragma No_Return @en procedures that
+never return
 
-340  Mod attribute
+@AILink{AI=[AI95-00340-01],Text=[340]}@\Mod attribute
 
-361  Raise with message
+@AILink{AI=[AI95-00361-01],Text=[361]}@\Raise with message
 
-364  Fixed point multiply and divide
+@AILink{AI=[AI95-00364-01],Text=[364]}@\Fixed point multiply and divide
 
-368  Restrictions for obsolescent features
+@AILink{AI=[AI95-00368-01],Text=[368]}@\Restrictions for obsolescent features
 
-381  New Restrictions identifier @en No_Dependence
+@AILink{AI=[AI95-00381-01],Text=[381]}@\New Restrictions identifier @en
+No_Dependence
 
-394  Redundant Restrictions identifiers and Ravenscar
+@AILink{AI=[AI95-00394-01],Text=[394]}@\Redundant Restrictions identifiers and
+Ravenscar
 
-398  Parameters of formal packages given at most once
+@AILink{AI=[AI95-00398-01],Text=[398]}@\Parameters of formal packages given at
+most once
 
-400  Wide and wide-wide images
+@AILink{AI=[AI95-00400-01],Text=[400]}@\Wide and wide-wide images
 
-414  pragma No_Return for overriding procedures
+@AILink{AI=[AI95-00414-01],Text=[414]}@\pragma No_Return for overriding
+procedures
 
-417  Lower bound of functions in @exam[Ada.Exceptions] etc
+@AILink{AI=[AI95-00417-01],Text=[417]}@\Lower bound of functions in
+@exam[Ada.Exceptions] etc
 
-419  Limitedness of derived types
+@AILink{AI=[AI95-00419-01],Text=[419]}@\Limitedness of derived types
 
-420  Resolution of universal operations in @exam[Standard]
+@AILink{AI=[AI95-00420-01],Text=[420]}@\Resolution of universal operations in
+@exam[Standard]
 
-423  Renaming, null exclusion and formal objects
+@AILink{AI=[AI95-00423-01],Text=[423]}@\Renaming, null exclusion and formal
+objects
 
 @end[Description]
 
 These changes can be grouped as follows.
 
 First there are some minor changes to exception handling. There are
-neater means for testing for null occurrence and raising an exception
-with a message (241, 361) and also wide and wide-wide versions of
-some procedures (400, 417).
+neater means for testing for null occurrence and raising an exception with a
+message (@AILink{AI=[AI95-00241-01],Text=[241]},
+@AILink{AI=[AI95-00361-01],Text=[361]}) and also wide and wide-wide
+versions of some procedures (@AILink{AI=[AI95-00400-01],Text=[400]},
+@AILink{AI=[AI95-00417-01],Text=[417]}).
 
-The numerics area has a number of small but important changes. They
-are the introduction of an attribute @exam[Mod] to aid conversion
-between signed and unsigned integers (340); changes to the rules for
-fixed point multiplication and division which permit user-defined
-operations (364, 420); and an attribute @exam[Machine_Rounding] which
-can be used to aid fast conversions from floating to integer types
-(267).
+The numerics area has a number of small but important changes. They are the
+introduction of an attribute @exam[Mod] to aid conversion between signed and
+unsigned integers (@AILink{AI=[AI95-00340-01],Text=[340]}); changes to the
+rules for fixed point multiplication and division which permit user-defined
+operations (@AILink{AI=[AI95-00364-01],Text=[364]},
+@AILink{AI=[AI95-00420-01],Text=[420]}); and an attribute
+@exam[Machine_Rounding] which can be used to aid fast conversions from floating
+to integer types (@AILink{AI=[AI95-00267-01],Text=[267]}).
 
-A number of new pragmas and @exam[Restrictions] identifiers have been
-added. These generally make for more reliable programming. The pragmas
-are: @exam[Assert], @exam[No_Return], @exam[Preelaborable_Initialization],
-@exam[Unchecked_Union], and @exam[Unsuppress] (161, 216, 224, 286,
-329, 414). The restrictions identifiers are @exam[No_Dependence],
-@exam[No_Implementation_Pragmas], @exam[No_Implementation_Restrictions],
-and }@exam[No_Obsolescent_Features] (257, 368, 381). Note that there are also
-other  new pragmas and new restrictions identifiers concerned with tasking
-as described in the previous paper (see @RefSecNum{The Ravenscar profile}).
-However, the introduction of @exam[No_Dependence]
-means that the identifiers @exam[No_Asynchronous_Control],
-@exam[No_Unchecked_Conversion
-and No_Unchecked_Deallocation ]are now obsolescent (394).
+A number of new pragmas and @exam[Restrictions] identifiers have been added.
+These generally make for more reliable programming. The pragmas are:
+@exam[Assert], @exam[No_Return], @exam[Preelaborable_Initialization],
+@exam[Unchecked_Union], and @exam[Unsuppress]
+(@AILink{AI=[AI95-00161-01],Text=[161]},
+@AILink{AI=[AI95-00216-01],Text=[216]},
+@AILink{AI=[AI95-00224-01],Text=[224]},
+@AILink{AI=[AI95-00286-01],Text=[286]},
+@AILink{AI=[AI95-00329-01],Text=[329]},
+@AILink{AI=[AI95-00414-01],Text=[414]}). The restrictions identifiers are
+@exam[No_Dependence], @exam[No_Implementation_Pragmas],
+@exam[No_Implementation_Restrictions], and @exam[No_Obsolescent_Features]
+(@AILink{AI=[AI95-00257-01],Text=[257]},
+@AILink{AI=[AI95-00368-01],Text=[368]},
+@AILink{AI=[AI95-00381-01],Text=[381]}). Note that there are also other new
+pragmas and new restrictions identifiers concerned with tasking as described in
+the previous paper (see @RefSecNum{The Ravenscar profile}). However, the
+introduction of @exam[No_Dependence] means that the identifiers
+@exam[No_Asynchronous_Control], @exam[No_Unchecked_Conversion] and
+@exam[No_Unchecked_Deallocation] are now obsolescent
+(@AILink{AI=[AI95-00394-01],Text=[394]}).
 
 Finally there are changes in generic units. There are changes in generic
-parameters which are consequences of changes in other areas such as
-the introduction of interfaces and dispatching constructors as described
-in the paper on the object oriented model (parts of 251 and 260);
-there are also changes to formal access and derived types (419, 423).
-Also, it is now possible to give just some parameters of a formal
-package in the generic formal part (317, 398).
+parameters which are consequences of changes in other areas such as the
+introduction of interfaces and dispatching constructors as described in the
+paper on the object oriented model (parts of
+@AILink{AI=[AI95-00251-01],Text=[251]} and
+@AILink{AI=[AI95-00260-02],Text=[260]}); there are also changes to formal
+access and derived types (@AILink{AI=[AI95-00419-01],Text=[419]},
+@AILink{AI=[AI95-00423-01],Text=[423]}). Also, it is now possible to give
+just some parameters of a formal package in the generic formal part
+(@AILink{AI=[AI95-00317-01],Text=[317]},
+@AILink{AI=[AI95-00398-01],Text=[398]}).
 
 
 @LabeledClause{Exceptions}
@@ -141,21 +167,17 @@ in the package @exam[Ada.Exceptions], the type @exam[Exception_Occurrence]
 is limited and no equality is provided. So the obvious test cannot
 be performed.
 
-We can however apply the function @exam[Exception_Identity] to a value
-of the type @exam[Exception_Occurrence] and this returns the corresponding
-@exam[Exception_Id]. Thus we could check to see whether a particular
-occurrence @exam[X] was caused by @exam[Program_Error] by writing
-
-
+@leading@;We can however apply the function @exam[Exception_Identity] to a
+value of the type @exam[Exception_Occurrence] and this returns the
+corresponding @exam[Exception_Id]. Thus we could check to see whether a
+particular occurrence @exam[X] was caused by @exam[Program_Error] by writing
 @begin[Example]
 @key[if] Exception_Identity(X) = Program_Error'Identity @key[then]
-
-
 @end[Example]
+
 However, in Ada 95, applying @exam[Exception_Identity] to the value
 @exam[Null_Occurrence] raises @exam[Constraint_Error] so we have to
 resort to a revolting trick such as declaring a function as follows
-
 
 @begin[Example]
 @key[function] Is_Null_Occurrence(X: Exception_Occurrence) @key[return]
@@ -167,46 +189,40 @@ Boolean @key[is]
 @key[exception]
    @key[when] Constraint_Error => @key[return] True;
 @key[end] Is_Null_Occurrence;
-
-
 @end[Example]
-We can now write some general analysis routine as
 
-
+@leading@;We can now write some general analysis routine as
 @begin[Example]
+@tabset[P42]
 @key[procedure] Process_Ex(X: @key[in] Exception_Occurrence) @key[is]
 @key[begin]
-   @key[if] Is_Null_Occurrence(X) @key[then]@\         @\@\-- @examcom[OK
-in Ada 95]
-      --@examcom[ process the case of a null occurrence]
+   @key[if] Is_Null_Occurrence(X) @key[then]@\-- @examcom[OK in Ada 95]
+      -- @examcom[process the case of a null occurrence]
    @key[else]
       -- @examcom[process proper occurrences]
    @key[end if];
 @key[end] Process_Ex;
-
-
 @end[Example]
-But the detection of @exam[Constraint_Error] in @exam[Is_Null_Occurrence]
+
+@leading@;But the detection of @exam[Constraint_Error] in
+@exam[Is_Null_Occurrence]
 is clearly bad practice since it would be all too easy to mask some
 other error by mistake. Accordingly, in Ada 2005, the behaviour of
 @exam[Exception_Identity] is changed to return @exam[Null_Id] when
 applied to @exam[Null_Occurrence]. So we can now dispense with the
-dodgy function @exam[Is_Null_Occurrence] and just write
-
-
+dodgy function @exam[Is_Null_Occurrence] and just write@Defn{Exception_Identity}
 @begin[Example]
+@tabset[P42]
 @key[procedure] Process_Ex(X: @key[in] Exception_Occurrence) @key[is]
 @key[begin]
-   @key[if] Exception_Identity(X) = Null_Id @key[then@\@\]-- @examcom[OK
-in 2005]
-      --@examcom[ process the case of a null occurrence]
+   @key[if] Exception_Identity(X) = Null_Id @key[then]@\-- @examcom[OK in Ada 2005]
+      -- @examcom[process the case of a null occurrence]
    @key[else]
       -- @examcom[process proper occurrences]
    @key[end if];
 @key[end] Process_Ex;
-
-
 @end[Example]
+
 Beware that, technically, we now have an incompatibility between Ada
 95 and Ada 2005 since the nasty function @exam[Is_Null_Occurrence]
 will always return @exam[False] in Ada 2005.
@@ -221,61 +237,50 @@ by mistake. Actually the change described here was originally classified
 as a correction to Ada 95 but later reclassified as an amendment in
 order to draw more attention to it because of the potential incompatibility.
 
-The other change in the exception area concerns the raise statement.
-It is now possible (optionally of course) to supply a message thus
-
-
+@leading@;The other change in the exception area concerns the raise statement.
+It is now possible (optionally of course) to supply a message thus@Defn{raise with message}
 @begin[Example]
 @key[raise] An_Error @key[with] "A message";
-
-
 @end[Example]
-This is purely for convenience and is identical to writing
 
-
+@leading@;This is purely for convenience and is identical to writing
 @begin[Example]
 Raise_Exception(An_Error'Identity, "A message");
-
-
 @end[Example]
+
 There is no change to the form of raise statement without an exception
 which simply reraises an existing occurrence.
 
-Note the difference between
-
-
+@leading@keepnext@;Note the difference between
 @begin[Example]
-@key[raise] An_Error;  @\@\@\ -- @examcom[message is implementation
-defined]
-
-
+@tabset[P35]
+@key[raise] An_Error;@\-- @examcom[message is implementation defined]
 @end[Example]
-and
 
-
+@leading@keepnext@;and
 @begin[Example]
-@key[raise] An_Error @key[with] "";@\@\--@examcom[ message is null]
-
-
+@tabset[P35]
+@key[raise] An_Error @key[with] "";@\-- @examcom[message is null]
 @end[Example]
+
 In the first case a subsequent call of @exam[Exception_Message] returns
 implementation defined information about the error whereas in the
 second case it simply returns the given message which in this example
 is a null string.
 
 Some minor changes to the procedure @exam[Raise_Exception] are mentioned
-in Section 4 below.
+in Section @RefSecNum{Pragmas and Restrictions} below.
 
-There are also additional functions in the package @exam[Ada.Exceptions]
-to return the name of an exception as a @exam[Wide_String] or @exam[Wide_Wide_String].
-They have identifiers @exam[Wide_Exception_Name] and @exam[Wide_Wide_Exception_Name
-]and are overloaded to take a parameter of type @exam[Exception_Id]
-or @exam[Exception_Occurrence]. The lower bound of the strings returned
-by these functions and by the existing functions @exam[Exception_Name],
-@exam[Exception_Message] and @exam[Exception_Information] is @exam[1]
-(Ada 95 forgot to state this for the existing functions). The reader
-will recall that similar additional functions (and forgetfulness)
-in the package @exam[Ada.Tags] were mentioned in
+There are also additional functions in the package @exam[Ada.Exceptions] to
+return the name of an exception as a @exam[Wide_String] or
+@exam[Wide_Wide_String]. They have identifiers @exam[Wide_Exception_Name] and
+@exam[Wide_Wide_Exception_Name ]and are overloaded to take a parameter of type
+@exam[Exception_Id] or @exam[Exception_Occurrence]. The lower bound of the
+strings returned by these functions and by the existing functions
+@exam[Exception_Name], @exam[Exception_Message] and
+@exam[Exception_Information] is @exam[1] (Ada 95 forgot to state this for the
+existing functions). The reader will recall that similar additional functions
+(and forgetfulness) in the package @exam[Ada.Tags] were mentioned in
 @RefSecNum{Object factory functions}.
 
 
@@ -284,99 +289,82 @@ in the package @exam[Ada.Tags] were mentioned in
 Although Ada 95 introduced unsigned integer types in the form of modular
 types, nevertheless, the strong typing rules of Ada have not made
 it easy to get unsigned and signed integers to work together. The
-following discussion using Ada 95 is based on that in AI-340.
+following discussion using Ada 95 is based on that in
+@AILink{AI=[AI95-00340-01],Text=[AI-340]}.
 
-Suppose we wish to implement a simulation of a typical machine which
+@leading@;Suppose we wish to implement a simulation of a typical computer which
 has addresses and offsets. We make it a generic
-
-
 @begin[Example]
 @key[generic]
    @key[type] Address_Type @key[is mod] <>;
    @key[type] Offset_Type @key[is range] <>;
    ...
 @key[package] Simulator @key[is]
-   @key[function] Calc_Address(Base_Add: Address_Type;
-@\@\@\           Offset: Offset_Type) @key[return] Address_Type;
+   @key[function] Calc_Address(
+                Base_Add: Address_Type;
+                Offset: Offset_Type) @key[return] Address_Type;
    ...
 @key[end] Simulator;
-
-
 @end[Example]
-Addresses are represented as unsigned integers (a modular type), whereas
-offsets are signed integers. The function @exam[Calc_Address] aims
+
+@leading@;Addresses are represented as unsigned integers (a modular type),
+whereas offsets are signed integers. The function @exam[Calc_Address] aims
 to add an offset to a base address and return an address. The offset
 could be negative.
 
-Na\'efvely we might hope to write
-
-
+Na@latin1(239)vely we might hope to write
 @begin[Example]
-@key[function] Calc_Address(Base_Add: Address_Type;
-@\@\@\        Offset: Offset_Type) @key[return] Address_Type @key[is]
+@tabset[P35]
+@key[function] Calc_Address(
+             Base_Add: Address_Type;
+             Offset: Offset_Type) @key[return] Address_Type @key[is]
 @key[begin]
-   @key[return] Base_Add + Offset;@\@\-- @examcom[illegal]
+   @key[return] Base_Add + Offset;@\-- @examcom[illegal]
 @key[end] Calc_Address;
-
-
 @end[Example]
+
 but this is plainly illegal because @exam[Base_Add] and @exam[Offset]
 are of different types.
 
-We can try a type conversion thus
-
-
+@leading@keepnext@;We can try a type conversion thus
 @begin[Example]
 @key[return] Base_Add + Address_Type(Offset);
-
-
 @end[Example]
-or perhaps, since @exam[Address_Type] might have a constraint,
 
-
+@leading@;or perhaps, since @exam[Address_Type] might have a constraint,
 @begin[Example]
 @key[return] Base_Add + Address_Type'Base(Offset);
-
-
 @end[Example]
+
 but in any case the conversion is doomed to raise @exam[Constraint_Error]
 if @exam[Offset] is negative.
 
-We then try to be clever and write
-
-
+@leading@keepnext@;We then try to be clever and write
 @begin[Example]
-@key[return] Base_Add + Address_Type'Base(Offset @key[mod]
-@\          @\@\@\@\@\ Offset_Type'Base(Address_Type'Modulus));
-
-
+@key[return] Base_Add +
+    Address_Type'Base(Offset @key[mod] Offset_Type'Base(Address_Type'Modulus));
 @end[Example]
-but this raises @exam[Constraint_Error] if @exam[Address_Type'Modulus
+
+@leading@;but this raises @exam[Constraint_Error] if @exam[Address_Type'Modulus
 > Offset_Type'Base'Last] which it often will be. To see this consider
 for example a 32-bit machine with
-
-
 @begin[Example]
 @key[type] Offset_Type @key[is range] @en@;(2**31) .. 2**31@en@;1;
 @key[type] Address_Type @key[is mod] 2**32;
-
-
 @end[Example]
+
 in which case @exam[Address_Type'Modulus] is @exam[2**32] which is
 greater than @exam[Offset_Type'Base'Last] which is @exam[2**31@en@;1].
 
-So we try an explicit test for a negative offset
-
-
+@leading@keepnext@;So we try an explicit test for a negative offset
 @begin[Example]
 @key[if] Offset >= 0 @key[then]
    @key[return] Base_Add + Address_Type'Base(Offset);
 @key[else]
    @key[return] Base_Add - Address_Type'Base(@en@;Offset);
 @key[end if];
-
-
 @end[Example]
+
 But if @exam[Address_Type'Base'Last < Offset_Type'Last] then this
 will raise @exam[Constraint_Error] for some values of @exam[Offset].
 Unlikely perhaps but this is a generic and so ought to work for all
@@ -391,38 +379,29 @@ handle the @exam[Constraint_Error] and then patch up the answer. The
 ruthless programmer might even think of @exam[Unchecked_Conversion]
 but this has its own problems. And so on @en 'tis a wearisome tale.
 
-The problem is neatly overcome in Ada 2005 by the introduction of
-a new functional attribute
-
-
+@leading@;The problem is neatly overcome in Ada 2005 by the introduction of
+a new functional attribute@Defn{Mod attribute}@Defn2{Term=[attribute],Sec=[Mod]}
 @begin[Example]
-@key[function] S'Mod(Arg: @examcom[universal_integer]) @key[return]
-S'Base;
-
-
+@key[function] S'Mod(Arg: @examcom[universal_integer]) @key[return] S'Base;
 @end[Example]
-@exam[S'Mod] applies to any modular subtype @exam[S] and returns
 
-
+@leading@;@exam[S'Mod] applies to any modular subtype @exam[S] and returns
 @begin[Example]
 Arg @key[mod] S'Modulus
-
-
 @end[Example]
-In other words it converts a {\cs24\i\f1\fs20 universal_integer} value
+
+@leading@;In other words it converts a @examcom{universal_integer} value
 to the modular type using the corresponding mathematical mod operation.
 We can then happily write
-
-
 @begin[Example]
-@key[function] Calc_Address(Base_Add: Address_Type;
-@\@\@\        Offset: Offset_Type) @key[return] Address_Type @key[is]
+@key[function] Calc_Address(
+             Base_Add: Address_Type;
+             Offset: Offset_Type) @key[return] Address_Type @key[is]
 @key[begin]
    @key[return] Base_Add + Address_Type'Mod(Offset);
 @key[end] Calc_Address;
-
-
 @end[Example]
+
 and this always works.
 
 The next topic in the numerics area concerns rounding. One of the
@@ -438,31 +417,25 @@ An interesting example of this problem arises with conversions from
 a floating point type to an integer type when the floating type value
 is midway between two integer values.
 
-In Ada 83 the rounding in the midway case was not specified. This
+@leading@;In Ada 83 the rounding in the midway case was not specified. This
 upset some people and so Ada 95 went the other way and decreed that
 such rounding was always away from zero. As well as this rule for
 conversion to integer types, Ada 95 also introduced a functional attribute
 to round a floating value. Thus for a subtype @exam[S] of a floating
 point type @exam[T] we have
-
-
 @begin[Example]
 @key[function] S'Rounding(X: T) @key[return] T;
-
-
 @end[Example]
+
 This returns the nearest integral value and for midway values rounds
 away from zero.
 
-Ada 95 also gives a bit more control for the benefit of the statistically
-minded by introducing
-
-
+@leading@;Ada 95 also gives a bit more control for the benefit of the
+statistically minded by introducing
 @begin[Example]
 @key[function] S'Unbiased_Rounding(X: T) @key[return] T;
-
-
 @end[Example]
+
 This returns the nearest integral value and for midway values rounds
 to the even value.
 
@@ -475,15 +448,12 @@ popular hardware such as the Pentium, doing the exact rounding required
 by Ada 95 just wastes time and the resulting function is perhaps 20%
 slower. This is serious in any comparison with C.
 
-This problem is overcome in Ada 2005 by the introduction of a further
-attribute
-
-
+@leading@;This problem is overcome in Ada 2005 by the introduction of a further
+attribute@Defn{Machine_Rounding attribute}@Defn2{Term=[attribute],Sec=[Machine_Rounding]}
 @begin[Example]
 @key[function] S'Machine_Rounding(X: T) @key[return] T;
-
-
 @end[Example]
+
 This does not specify which of the adjacent integral values is returned
 if @exam[X] lies midway. Note that it is not implementation defined
 but deliberately unspecified. This should discourage users from depending
@@ -493,21 +463,19 @@ non-portable code.
 Zerophiles will be pleased to note that if @exam[S'Signed_Zeros] is
 true and the answer is zero then it has the same sign as @exam[X].
 
-It should be noted that @exam[Machine_Rounding], like the other rounding
-functions, returns a value of the floating point type and not perhaps
-{\cs24\i\f1\fs20 universal_integer} as might be expected. So it will
+@leading@;It should be noted that @exam[Machine_Rounding], like the other
+rounding functions, returns a value of the floating point type and not perhaps
+@examcom{universal_integer} as might be expected. So it will
 typically be used in a context such as
-
-
 @begin[Example]
+@tabset[P35]
 X: Some_Float;
 Index: Integer;
 ...
 Index := Integer(Some_Float'Machine_Rounding(X));
-... @\@\@\@\-- @examcom[now use Index for table look-up]
-
-
+...@\-- @examcom[now use Index for table look-up]
 @end[Example]
+
 Implementations are urged to detect this case in order to generate
 fast code.
 
@@ -521,18 +489,15 @@ used some form of scaled integers for many decades and the Ada fixed
 point facility is important in certain applications where rigorous
 error analysis is desirable.
 
-The model of fixed point was changed somewhat from Ada 83 to Ada 95.
+@leading@;The model of fixed point was changed somewhat from Ada 83 to Ada 95.
 One change was that the concepts of model and safe numbers were replaced
 by a much simpler model just based on the multiples of the number
 @i[small]. Thus consider the type
-
-
 @begin[Example]
 Del: @key[constant] := 2.0**(@en@;15);
 @key[type] Frac @key[is delta] Del @key[range] @en@;1.0 .. 1.0;
-
-
 @end[Example]
+
 In Ada 83 small was defined to be the largest power of 2 not greater
 than @exam[Del], and in this case is indeed @exam[2.0**(@en@;15)]. But
 in Ada 95, small can be chosen by the implementation to be any power
@@ -542,126 +507,106 @@ be used to specify small and it need not be a power of 2. (Remember
 that representation clauses are now known as aspect clauses.)
 
 A more far reaching change introduced in Ada 95 concerns the introduction
-of operations on the type {\cs24\i\f1\fs20 universal_fixed} and type
+of operations on the type @examcom{universal_fixed} and type
 conversion.
 
-A minor problem in Ada 83 was that explicit type conversion was required
-in places where it might have been considered quite unnecessary. Thus
+@leading@;A minor problem in Ada 83 was that explicit type conversion was
+required in places where it might have been considered quite unnecessary. Thus
 supposing we have variables @exam[F], @exam[G], @exam[H] of the above
 type @exam[Frac], then in Ada 83 we could not write
+@begin[Example]
+@tabset[P35]
+H := F * G;@\-- @examcom[illegal in Ada 83]
+@end[Example]
 
+@leading@keepnext@;but had to use an explicit conversion
 
 @begin[Example]
-H := F * G;@\@\@\@\--@examcom[ illegal in Ada 83]
-
-
+@tabset[P35]
+H := Frac(F * G);@\-- @examcom[legal in Ada 83]
 @end[Example]
-but had to use an explicit conversion
 
-
-@begin[Example]
-H := Frac(F * G);@\@\@\--@examcom[ legal in Ada 83]
-
-
-@end[Example]
 In Ada 83, multiplication was defined between any two fixed point
-types and produced a result of the type {\cs24\i\f1\fs20 universal_fixed}
+types and produced a result of the type @examcom{universal_fixed}
 and an explicit conversion was then required to convert this to the
 type @exam[Frac].
 
-This explicit conversion was considered to be a nuisance so the rule
+@leading@;This explicit conversion was considered to be a nuisance so the rule
 was changed in Ada 95 to say that multiplication was only defined
-between {\cs24\i\f1\fs20 universal_fixed} operands and delivered a
-{\cs24\i\f1\fs20 universal_fixed} result. Implicit conversions were
+between @examcom{universal_fixed} operands and delivered a
+@examcom{universal_fixed} result. Implicit conversions were
 then allowed for both operands and result provided the type resolution
 rules identified no ambiguity. So since the expected type was @exam[Frac]
 and no other interpretation was possible, the implicit conversion
 was allowed and so in Ada 95 we can simply write
-
-
 @begin[Example]
-H := F * G;@\@\@\@\--@examcom[ legal in Ada 95]
-
-
+@tabset[P35]
+H := F * G;@\-- @examcom[legal in Ada 95]
 @end[Example]
+
 Similar rules apply to division in both Ada 83 and Ada 95.
 
-Note however that
-
-
+@leading@keepnext@;Note however that
 @begin[Example]
-F := F * G * H;@\@\@\-- @examcom[illegal
-
-]
+@tabset[P35]
+F := F * G * H;@\-- @examcom[illegal]
 @end[Example]
+
 is illegal in Ada 95 because of the existence of the pervasive type
 @exam[Duration] defined in @exam[Standard]. The intermediate result
 could be either @exam[Frac] or @exam[Duration]. So we have to add
 an explicit conversion somewhere.
 
-One of the great things about Ada is the ability to define your own
+@leading@;One of the great things about Ada is the ability to define your own
 operations. And in Ada 83 many programmers wrote their own arithmetic
 operations for fixed point. These might be saturation operations in
 which the result is not allowed to overflow but just takes the extreme
 implemented value. Such operations often match the behaviour of some
 external device. So we might declare
-
-
 @begin[Example]
 @key[function] "*"(Left, Right: Frac) @key[return] Frac @key[is]
 @key[begin]
    @key[return] Standard."*"(Left, Right);
 @key[exception]
    @key[when] Constraint_Error =>
-      @key[if] (Left>0.0 @key[and] Right>0.0) @key[or] (Left<0.0 @key[and]
-Right<0.0) @key[then]
+      @key[if] (Left>0.0 @key[and] Right>0.0) @key[or] (Left<0.0 @key[and] Right<0.0) @key[then]
          @key[return] Frac'Last;
       @key[else]
          @key[return] Frac'First;
       @key[end if];
 @key[end] "*";
-
-
 @end[Example]
+
 and similar functions for addition, subtraction, and division (taking
 due care over division by zero and so on). This works fine in Ada
 83 and all calculations can now use the new operations rather than
 the predefined ones in a natural manner.
 
-Note however that
-
-
+@leading@keepnext@;Note however that
 @begin[Example]
-H := Frac(F * G);@\
-
-
+H := Frac(F * G);
 @end[Example]
-is now ambiguous in Ada 83 since both our own new @exam["*"] and the
+
+@leading@;is now ambiguous in Ada 83 since both our own new @exam["*"] and the
 predefined @exam["*"] are possible interpretations. However, if we
 simply write the more natural
-
-
 @begin[Example]
 H := F * G;
-
-
 @end[Example]
+
 then there is no ambiguity. So we can program in Ada 83 without the
 explicit conversion.
 
-However, in Ada 95 we run into a problem when we introduce our own
+@leading@;However, in Ada 95 we run into a problem when we introduce our own
 operations since
-
-
 @begin[Example]
 H := F * G;
-
-
 @end[Example]
+
 is ambiguous because both the predefined operation and our own operation
 are possible interpretations of @exam["*"] in this context. There
 is no cure for this in Ada 95 except for changing our own multiplying
-operations to be procedures with identifiers such as @exam[mul] and
+operations to be functions with identifiers such as @exam[mul] and
 @exam[div]. This is a very tedious chore and prone to errors.
 
 It has been reported that because of this difficulty many projects
@@ -673,52 +618,39 @@ operation if there is a user-defined primitive multiplication (division)
 operation for either operand type unless there is an explicit conversion
 on the result or we write @exam[Standard."*"] (or @exam[Standard."/"]).
 
-This means that when there is no conversion as in
-
-
+@leading@keepnext@;This means that when there is no conversion as in
 @begin[Example]
 H := F * G;
-
-
 @end[Example]
+
 then the predefined operation cannot apply if there is a primitive
 user-defined @exam["*"] for one of the operand types. So the ambiguity
 is resolved. Note that if there is a conversion then it is still ambiguous
 as in Ada 83.
 
-If we absolutely need to have a conversion then we can always use
+@leading@;If we absolutely need to have a conversion then we can always use
 a qualification as well or just instead. Thus we can write
-
-
 @begin[Example]
 F := Frac'(F * G) * H;
-
-
 @end[Example]
+
 and this will unambiguously use our own operation.
 
-On the other hand if we truly want to use the predefined operation
+@leading@;On the other hand if we truly want to use the predefined operation
 then we can always write
-
-
 @begin[Example]
 H := Standard."*"(F, G);
-
-
 @end[Example]
-Another example might be instructive. Suppose we declare three types
+
+@leading@;Another example might be instructive. Suppose we declare three types
 @exam[TL], @exam[TA], @exam[TV] representing lengths, areas, and volumes.
 We use centimetres as the basic unit with an accuracy of 0.1 cm together
 with corresponding consistent units and accuracies for areas and volumes.
 We might declare
-
-
 @begin[Example]
 @key[type] TL @key[is delta] 0.1 @key[range] @en@;100.0 .. 100.0;
 @key[type] TA @key[is delta] 0.01 @key[range] @en@;10_000.0 .. 10_000.0;
-@key[type] TV @key[is delta]{\expnd0\expndtw-2  }{\expnd0\expndtw-4
-0.001 }{\cs20\b\expnd0\expndtw-4 range}{\expnd0\expndtw-4  @en@;1000_000.0
-.. 1000_000.0;}
+@key[type] TV @key[is delta] 0.001 @key[range] @en@;1000_000.0 .. 1000_000.0;
 @key[for] TL'Small @key[use] TL'Delta;
 @key[for] TA'Small @key[use] TA'Delta;
 @key[for] TV'Small @key[use] TV'Delta;
@@ -730,12 +662,11 @@ We might declare
 @key[function] "/"(Left: TV; Right: TA) @key[return] TL;
 @key[function] "/"(Left: TA; Right: TL) @key[return] TL;
 
-{\lang1033\langfe1033\langnp1033 XL, YL: TL;
+XL, YL: TL;
 XA, YA: TA;
 XV, YV: TV;
-
-}
 @end[Example]
+
 These types have an explicit small equal to their delta and are such
 that no scaling is required to implement the appropriate multiplication
 and division operations. This absence of scaling is not really relevant
@@ -748,51 +679,37 @@ and division operations even though in the case of multiplication,
 or division with any of these types as operands can only be considered
 if the result has a type conversion.
 
-As a consequence the following are legal
-
-
+@leading@keepnext@;As a consequence the following are legal
 @begin[Example]
-XV := XL * XA;@\@\@\-- @examcom[OK, volume = length ]@examcom[\'d7]@examcom[
-area ]
-XL := XV / XA;@\@\@\-- @examcom[OK, length = volume ]@examcom[\'f7]@examcom[
-area]
-
-
+@tabset[P35]
+XV := XL * XA;@\-- @examcom[OK, volume = length @latin1(215) area]
+XL := XV / XA;@\-- @examcom[OK, length = volume @latin1(247) area]
 @end[Example]
-but the following are not because they do not match the user-defined
+
+@leading@;but the following are not because they do not match the user-defined
 operations
-
-
 @begin[Example]
-XV := XL * XL;@\@\@\--@examcom[ no, volume ]@examcom[\u8800\'3f]@examcom[
- length ]@examcom[\'d7]@examcom[ length]
-XV := XL / XA;@\@\@\--@examcom[ no, volume ]@examcom[\u8800\'3f]@examcom[
- length ]@examcom[\'f7]@examcom[ area]
-XL := XL * XL;@\@\@\--@examcom[ no, length ]@examcom[\u8800\'3f ]@examcom[
-length ]@examcom[\'d7]@examcom[ length]
-
-
+@tabset[P35]
+XV := XL * XL;@\-- @examcom[no, volume @unicode(8800) length @latin1(215) length]
+XV := XL / XA;@\-- @examcom[no, volume @unicode(8800) length @latin1(247) area]
+XL := XL * XL;@\-- @examcom[no, length @unicode(8800) length @latin1(215) length]
 @end[Example]
-But if we insist on multiplying two lengths together then we can use
+
+@leading@;But if we insist on multiplying two lengths together then we can use
 an explicit conversion thus
-
-
 @begin[Example]
-XL := TL(XL * XL); @\@\--@examcom[ legal, predefined operation]
-
-
+@tabset[P35]
+XL := TL(XL * XL);@\-- @examcom[legal, predefined operation]
 @end[Example]
+
 and this uses the predefined operation.
 
-If we need to multiply three lengths to get a volume without storing
+@leading@;If we need to multiply three lengths to get a volume without storing
 an intermediate area then we can write
-
-
 @begin[Example]
 XV := XL * XL * XL;
-
-
 @end[Example]
+
 and this is unambiguous since there are no explicit conversions and
 so the only relevant operations are those we have declared.
 
@@ -819,6 +736,8 @@ identifiers. Many of these were described in the previous paper when
 discussing tasking and the Real-Time and High Integrity annexes (see
 @RefSecNum{The Ravenscar profile}. For
 convenience here is a complete list giving the annex if appropriate.
+
+*** Stopped here ***
 
 The new pragmas are
 
@@ -988,7 +907,7 @@ as equivalent to
 @begin[Example]
 {\cs20\b\expnd0\expndtw-2 if}{\expnd0\expndtw-2  }@examcom[policy_identifier]
 = Check{\expnd0\expndtw-2  }{\cs20\b\expnd0\expndtw-2 then}
-   Assert(Some_Test);@\       --@examcom[ call of procedure Assert]
+   Assert(Some_Test);@\       -- @examcom[call of procedure Assert]
 @key[end if];
 
 
@@ -1230,9 +1149,9 @@ Specifying the pragma @exam[Unchecked_Union] ensures the following
 {\u9642\'3f@\The representation of the type does not allow space for
 any discriminants.
 
-}{\u9642\'3f@\There is an implicit suppression of}@exam[ Discriminant_Check].
+}{\u9642\'3f@\There is an implicit suppression of} @exam[Discriminant_Check].
 
-{\u9642\'3f@\There is an implicit }@key[pragma]@exam[ Convention(C)].
+{\u9642\'3f@\There is an implicit }@key[pragma] @exam[Convention(C)].
 
 
 @end[Description]
@@ -1361,10 +1280,10 @@ to unchecked conversion. Thus consider
 
 
 @begin[Example]
-X: T;@\@\@\@\--@examcom[ Float by default]
-Y: Integer := X.F2;@\@\@\-- @examcom[erroneous
+X: T;@\@\@\@\-- @examcom[Float by default]
+Y: Integer := X.F2;@\@\@\-- @examcom[erroneous]
 
-]
+
 @end[Example]
 The object @exam[X] has discriminant @exam[False] by default and thus
 has the value zero of type @exam[Integer]. In the absence of the pragma
@@ -1414,8 +1333,8 @@ point operations mentioned in Section 3 thus
 
 
 @begin[Example]
-@key[function] "*"(Left, Right: Frac) @key[return] Frac @key[is
-]   @key[pragma] Unsuppress(Overflow_Check);
+@key[function] "*"(Left, Right: Frac) @key[return] Frac @key[is]
+   @key[pragma] Unsuppress(Overflow_Check);
 @key[begin]
    @key[return] Standard."*"(Left, Right);
 @key[exception]
@@ -1453,9 +1372,9 @@ in the core language is similar to @exam[Unsuppress] thus
 
 
 @begin[Example]
-@key[pragma] Suppress(identifier);@\@\@\-- @examcom[Ada 2005
+@key[pragma] Suppress(identifier);@\@\@\-- @examcom[Ada 2005]
 
-]
+
 @end[Example]
 For symmetry, Annex J actually allows an obsolete @exam[On] parameter
 for @exam[Unsuppress]. It might seem curious that a feature should
@@ -1590,7 +1509,7 @@ Similarly if the formal parameter is derived from an access type
 @begin[Example]
 @key[generic]
    ...
-   @key[type] FA @key[is new] A;@\@\--@examcom[ A is an access type]
+   @key[type] FA @key[is new] A;@\@\-- @examcom[A is an access type]
    ...
 
 
@@ -1604,7 +1523,7 @@ the declaration
 
 
 @begin[Example]
-@key[type] A@key[ is access all] Integer;@\@\--@examcom[ does not
+@key[type] A @key[is access all] Integer;@\@\-- @examcom[does not
 exclude null]
 
 
@@ -1613,9 +1532,9 @@ then we can declare
 
 
 @begin[Example]
-@key[type] NA @key[is new] A;@\@\@\@\--@examcom[ does not exclude
+@key[type] NA @key[is new] A;@\@\@\@\-- @examcom[does not exclude
 null]
-@key[type] NNA @key[is new not null] A;@\@\--@examcom[ does exclude
+@key[type] NNA @key[is new not null] A;@\@\-- @examcom[does exclude
 null]
 
 
@@ -1632,10 +1551,8 @@ thus
 @begin[Example]
 @key[generic]
    @key[type] T @key[is limited new] LT;@\@\@\-- @examcom[untagged]
-   @key[type] TT @key[is limited new] TLT @key[with private];  @\--
-@examcom[tagged
+   @key[type] TT @key[is limited new] TLT @key[with private];@\-- @examcom[tagged]
 
-]
 @end[Example]
 However, this can be seen simply as a documentation aid since the
 actual types corresponding to @exam[T] and @exam[TT] must be derived
@@ -1707,7 +1624,7 @@ This can be matched by
 @key[type] A @key[is access] ...;
 @key[procedure] Q(Y: @key[in] @key[not null] A);
 ...
-@key[package] NG@key[ is new] G(T => A; P => Q);
+@key[package] NG @key[is new] G(T => A; P => Q);
 
 
 @end[Example]
@@ -1728,13 +1645,11 @@ now three possible forms of default as follows
 
 @begin[Example]
 @key[with procedure] P( ... ) @key[is] <>;@\@\-- @examcom[OK in 95]
-@key[with procedure] Q( ... ) @key[is] Some_Proc;@\--@examcom[ OK
-in 95]
-@key[with procedure] R( ... ) @key[is null];@\@\-- @examcom[only in
-2005
-
-]
+@key[with procedure] Q( ... ) @key[is] Some_Proc;@\-- @examcom[OK
+in Ada 95]
+@key[with procedure] R( ... ) @key[is null];@\@\-- @examcom[only in Ada 2005]
 @end[Example]
+
 So if we have
 
 
@@ -1788,8 +1703,7 @@ thus
    @key[with function] Constructor(Params: @key[not null] @key[access]
 Parameters) @key[return] T @key[is abstract];
 @key[function] Ada.Tags.Generic_Dispatching_Constructor
-@\(The_Tag: Tag; Params: @key[not null] @key[access] Parameters) @key[return]
-T'Class;
+   (The_Tag: Tag; Params: @key[not null] @key[access] Parameters) @key[return] T'Class;
 
 
 @end[Example]
@@ -1808,7 +1722,7 @@ that formal concrete subprograms can have defaults. We write
 @begin[Example]
 @key[with] @key[procedure] P(X: @key[in out] T) @key[is abstract]
 <>;
-@key[with function] F @key[return] T@key[ is abstract] Unit;
+@key[with function] F @key[return] T @key[is abstract] Unit;
 
 
 @end[Example]
@@ -1836,12 +1750,11 @@ operations
 
 
 @begin[Example]
-@key[type] A@key[ is interface];
-@key[procedure] Op1(X: A; ... )@key[ is abstract];@key[
-procedure] N1(X: A; ... ) @key[is null];
-
-
+@key[type] A @key[is interface];
+@key[procedure] Op1(X: A; ... ) @key[is abstract];
+@key[procedure] N1(X: A; ... ) @key[is null];
 @end[Example]
+
 and then
 
 
@@ -1859,7 +1772,7 @@ A formal interface might specify several ancestors
 
 @begin[Example]
 @key[generic]
-   @key[type] FAB@key[ is interface and ]A @key[and] B;
+   @key[type] FAB @key[is interface and ]A @key[and] B;
 
 
 @end[Example]
@@ -1884,8 +1797,7 @@ the possibility of interfaces. Thus we might have
 
 @begin[Example]
 @key[generic]
-   @key[type] NT @key[is new] T @key[and] A @key[and] B @key[with
-private];
+   @key[type] NT @key[is new] T @key[and] A @key[and] B @key[with private];
 
 
 @end[Example]
@@ -1927,22 +1839,21 @@ package to take any of these interfaces thus
 Any_Printable @key[with private];
    ...
 @key[end];
-
-
 @end[Example]
+
+*** Started here ***
+
 A formal interface can also be marked as limited in which case the
 actual interface must also be limited and vice versa.
 
-As discussed in the previous paper (see @RefSecNum{Synchronized interfaces}),
+@leading@;As discussed in the previous paper (see
+@RefSecNum{Synchronized interfaces}),
 interfaces can also be synchronized, task, or protected. Thus we might have
-
-
 @begin[Example]
 @key[generic]
    @key[type] T @key[is task interface];
-
-
 @end[Example]
+
 and then the actual interface must itself be a task interface. The
 correspondence must be exact. A formal synchronized interface can
 only be matched by an actual synchronized interface and so on. Remember
@@ -1950,40 +1861,35 @@ from the discussion in the previous paper that a task interface can
 be composed from a synchronized interface. This flexibility does not
 extend to matching actual and formal generic parameters.
 
-Another small change concerns object parameters of limited types.
+@leading@;Another small change concerns object parameters of limited types.
 In Ada 95 the following is illegal
-
-
 @begin[Example]
-@key[type] LT @key[is limited
-]   @key[record]
+@tabset[P42]
+@key[type] LT @key[is limited]
+   @key[record]
       A: Integer;
       B: Float;
-   @key[end record];@\@\@\-- @examcom[a limited type]
+   @key[end record];@\-- @examcom[a limited type]
 
 @key[generic]
-   X: @key[in] LT;@\@\@\@\-- @examcom[illegal in Ada 95]
+   X: @key[in] LT;@\-- @examcom[illegal in Ada 95]
    ...
 @key[procedure] P ...
-
-
 @end[Example]
+
 It is illegal in Ada 95 because it is not possible to provide an actual
 parameter. This is because the parameter mechanism is one of initialization
 of the formal object parameter by the actual and this is treated as
-assignment and so is not permitted for limited types.
+assignment and so is not permitted for limited types.@Defn[limited generic formal object]
 
-However, in Ada 2005, initialization of a limited object by an aggregate
-is allowed since the value is created @i[in situ] as discussed in
-an earlier paper (see @RefSecNum{Limited types and return statements}).
-So an instantiation is possible thus
-
-
+@leading@;However, in Ada 2005, initialization of a limited object by an
+aggregate is allowed since the value is created @i[in situ] as discussed in an
+earlier paper (see @RefSecNum{Limited types and return statements}). So an
+instantiation is possible thus
 @begin[Example]
 @key[procedure] Q @key[is new] P(X => (A => 1, B => 2.0), ... );
-
-
 @end[Example]
+
 Remember that an initial value can also be provided by a function
 call and so the actual parameter could also be a function call returning
 a limited type.
@@ -1991,143 +1897,107 @@ a limited type.
 The final improvement to the generic parameter mechanism concerns
 package parameters.
 
-In Ada 95 package parameters take two forms. Given a generic package
+@leading@;In Ada 95 package parameters take two forms. Given a generic package
 @exam[Q] with formal parameters @exam[F1], @exam[F2], @exam[F3], then
 we can have
-
-
 @begin[Example]
 @key[generic]
-   @key[with package] P@key[ is new] Q(<>);
-
-
+   @key[with package] P @key[is new] Q(<>);
 @end[Example]
-and then the actual package corresponding to the formal @exam[P] can
+
+@leading@;and then the actual package corresponding to the formal @exam[P] can
 be any instantiation of @exam[Q]. Alternatively
-
-
 @begin[Example]
 @key[generic]
    @key[with package] R @key[is new] Q(P1, P2, P3);
-
-
 @end[Example]
+
 and then the actual package corresponding to @exam[R] must be an instantiation
 of @exam[Q] with the specified actual parameters @exam[P1], @exam[P2],
 @exam[P3].
 
-As mentioned in the Introduction, a simple example of the use of these
-two forms occurs with the package @exam[Generic_Complex_Arrays] which
-takes instantiations of @exam[Generic_Real_Arrays] and @exam[Generic_Complex_Types]
-which in turn both have the underlying floating type as their single
-parameter. It is vital that both packages use the same floating point
-type and this is assured by writing
-
-
+@leading@;As mentioned in the Introduction, a simple example of the use of
+these two forms occurs with the package @exam[Generic_Complex_Arrays] which
+takes instantiations of @exam[Generic_Real_Arrays] and
+@exam[Generic_Complex_Types] which in turn both have the underlying floating
+type as their single parameter. It is vital that both packages use the same
+floating point type and this is assured by writing
 @begin[Example]
 @key[generic]
    @key[with package] Real_Arrays @key[is] @key[new] Generic_Real_Arrays(<>);
    @key[with package] Complex_Types @key[is new] Generic_Complex_Types(Real_Arrays.Real);
 @key[package] Generic_Complex_Arrays @key[is] ...
-
-
 @end[Example]
+
 However, the mechanism does not work very well when several parameters
 are involved as will now be illustrated with some examples.
 
-The first example concerns using the new container library which will
+@leading@;The first example concerns using the new container library which will
 be discussed in some detail in a later paper@Comment{ (see @RefSecNum{*** TBD - containers ***})}.
 There are generic packages such as
-
-
 @begin[Example]
 @key[generic]
    @key[type] Index_Type @key[is range] <>;
    @key[type] Element_Type @key[is private]:
-   @key[with function] "=" (Left, Right: Element_Type ) @key[return]
-Boolean @key[is] <>;
+   @key[with function] "=" (Left, Right: Element_Type ) @key[return] Boolean @key[is] <>;
 @key[package] Ada.Containers.Vectors @key[is] ...
-
-
 @end[Example]
-and
 
-
+@leading@;and
 @begin[Example]
 @key[generic]
    @key[type] Key_Type @key[is private];
    @key[type] Element_Type @key[is private]:
-   @key[with function]{\expnd0\expndtw-4  Hash(Key: Key_Type) }{\cs20\b\expnd0\expndtw-4
-return}{\expnd0\expndtw-4  Hash_Type;}
-   @key[with function] Equivalent_Keys(Left, Right: Key_Type) @key[return]
-Boolean;
-   @key[with function] "=" (Left, Right: Element_Type ) @key[return]
-Boolean @key[is] <>;
+   @key[with function] Hash(Key: Key_Type) @key[return] Hash_Type;
+   @key[with function] Equivalent_Keys(Left, Right: Key_Type) @key[return] Boolean;
+   @key[with function] "=" (Left, Right: Element_Type ) @key[return] Boolean @key[is] <>;
 @key[package] Ada.Containers.Hashed_Maps @key[is] ...
-
-
 @end[Example]
+
 We might wish to pass instantiations of both of these to some other
 package with the proviso that both were instantiated with the same
 @exam[Element_Type]. Otherwise the parameters can be unrelated.
 
-It would be natural to make the vector package the first parameter
+@leading@;It would be natural to make the vector package the first parameter
 and give it the @exam[(<>)] form. But we then find that in Ada 95
 we have to repeat all the parameters other than @exam[Element_Type]
 for the maps package. So we have
-
-
 @begin[Example]
 @key[with] ... ; @key[use] Ada.Containers;
 @key[generic]
    @key[with package] V @key[is new] Vectors(<>);
    @key[type] Key_Type @key[is private];
-   @key[with function]{\expnd0\expndtw-4  Hash(Key: Key_Type) }{\cs20\b\expnd0\expndtw-4
-return}{\expnd0\expndtw-4  Hash_Type;}
-   @key[with function] Equivalent_Keys(Left, Right: Key_Type) @key[return]
-Boolean;
-   @key[with function] "=" (Left, Right: Element_Type ) @key[return]
-Boolean @key[is] <>;
+   @key[with function] Hash(Key: Key_Type) @key[return] Hash_Type;
+   @key[with function] Equivalent_Keys(Left, Right: Key_Type) @key[return] Boolean;
+   @key[with function] "=" (Left, Right: Element_Type ) @key[return] Boolean @key[is] <>;
    @key[with package] HM @key[is new] Hashed_Maps(
-@\@\@\Key_Type => Key_Type,
-@\@\@\Element_Type => V.Element_Type,
-@\@\@\Hash => Hash,
-@\@\@\Equivalent_Keys => Equivalent_Keys,
-@\@\@\"=" => "=");
-@key[package] HMV@key[ is] ...
-
-
+             Key_Type => Key_Type,
+             Element_Type => V.Element_Type,
+             Hash => Hash,
+             Equivalent_Keys => Equivalent_Keys,
+             "=" => "=");
+@key[package] HMV @key[is] ...
 @end[Example]
-This is a nuisance since when we instantiate @exam[HMV] we have to
+
+@leading@;This is a nuisance since when we instantiate @exam[HMV] we have to
 provide all the parameters required by @exam[Hashed_Maps] even though
 we must already have instantiated it elsewhere in the program. Suppose
 that instantiation was
-
-
 @begin[Example]
-@key[package] My_Hashed_Map @key[is new] Hashed_Maps(My_Key, Integer,
-Hash_It, Equiv, "=");
-
-
+@key[package] My_Hashed_Map @key[is new] Hashed_Maps(My_Key, Integer, Hash_It, Equiv, "=");
 @end[Example]
-and suppose also that we have instantiated @exam[Vectors]
 
-
+@leading@keepnext@;and suppose also that we have instantiated @exam[Vectors]
 @begin[Example]
-@key[package]{\expnd0\expndtw-2  My_Vectors }{\cs20\b\expnd0\expndtw-2
-is new}{\expnd0\expndtw-2  Vectors(Index, Integer, "=");}
-
-
+@key[package] My_Vectors @key[is new] Vectors(Index, Integer, "=");
 @end[Example]
-Now when we come to instantiate @exam[HMV] we have to write
 
-
+@leading@keepnext@;Now when we come to instantiate @exam[HMV] we have to write
 @begin[Example]
-@key[package] My_HMV@key[ is
-@\@\@\new] HMV(My_Vectors, My_Key, Hash_It, Equiv, "=", My_Hashed_Maps);
-
-
+@key[package] My_HMV @key[is]
+             @key[new] HMV(My_Vectors, My_Key, Hash_It, Equiv, "=", My_Hashed_Maps);
 @end[Example]
+
 This is very annoying. Not only do we have to repeat all the auxiliary
 parameters of @exam[Hashed_Maps] but the situation regarding @exam[Vectors]
 and @exam[Hashed_Maps] is artificially made asymmetric. (Life would
@@ -2139,129 +2009,96 @@ parameters. This rather defeats the point of package parameters which
 were introduced into Ada 95 in order to avoid the huge parameter lists
 that had occurred in Ada 83.
 
-Ada 2005 overcomes this problem by permitting just some of the actual
+@leading@;Ada 2005 overcomes this problem by permitting just some of the actual
 parameters to be specified. Any omitted parameters are indicated using
-the @exam[<>] notation thus
-
-
+the @exam[<>] notation thus@Defn2{Term=[actual parameter],Sec=[for formal package]}
 @begin[Example]
 @key[generic]
-   @key[with package] S@key[ is new] Q(P1, F2 => <>, F3 => <>);
-
-
+   @key[with package] S @key[is new] Q(P1, F2 => <>, F3 => <>);
 @end[Example]
-In this case the actual package corresponding to @exam[S] can be any
+
+@leading@;In this case the actual package corresponding to @exam[S] can be any
 package which is an instantiation of @exam[Q] where the first actual
 parameter is @exam[P1] but the other two parameters are left unspecified.
 We can also abbreviate this to
-
-
 @begin[Example]
 @key[generic]
-   @key[with package] S@key[ is new] Q(P1, @key[others] => <>);
-
-
+   @key[with package] S @key[is new] Q(P1, @key[others] => <>);
 @end[Example]
+
 Note that the @exam[<>] notation can only be used with named parameters
-and also that @exam[(<>)] is now considered to be a shorthand for@exam[
-(]@key[others]@exam[ => <>)].
+and also that @exam[(<>)] is now considered to be a shorthand for
+@exam[(]@key[others] @exam[=> <>)].
 
-As another example
-
-
+@leading@keepnext@;As another example
 @begin[Example]
 @key[generic]
-   @key[with package] S@key[ is new] Q(F1 => <>, F2 => P2, F3 => <>);
-
-
+   @key[with package] S @key[is new] Q(F1 => <>, F2 => P2, F3 => <>);
 @end[Example]
-means that the actual package corresponding to @exam[S] can be any
+
+@leading@;means that the actual package corresponding to @exam[S] can be any
 package which is an instantiation of @exam[Q] where the second actual
 parameter is @exam[P2] but the other two parameters are left unspecified.
 This can be abbreviated to
-
-
 @begin[Example]
 @key[generic]
-   @key[with package] S@key[ is new] Q(F2 => P2, @key[others] => <>);
-
-
+   @key[with package] S @key[is new] Q(F2 => P2, @key[others] => <>);
 @end[Example]
-Using this new notation, the package @exam[HMV] can now simply be
+
+@leading@;Using this new notation, the package @exam[HMV] can now simply be
 written as
-
-
 @begin[Example]
 @key[with] ... ; @key[use] Ada.Containers;
 @key[generic]
    @key[with package] V @key[is new] Vectors(<>);
    @key[with package] HM @key[is new] Hashed_Maps
-@\@\@\(Element_Type => V.Element_Type, @key[others] => <>);
-@key[package] HMV@key[ is] ...
-
-
+             (Element_Type => V.Element_Type, @key[others] => <>);
+@key[package] HMV @key[is] ...
 @end[Example]
-and our instantiation of@exam[ HMV] becomes simply
 
-
+@leading@;and our instantiation of @exam[HMV] becomes simply
 @begin[Example]
 @key[package] My_HMV @key[is] @key[new] HMV(My_Vectors, My_Hashed_Maps);
-
-
 @end[Example]
-Some variations on this example are obviously possible. For example
+
+@leading@;Some variations on this example are obviously possible. For example
 it is likely that the instantiation of @exam[Hashed_Maps] must use
 the same definition of equality for the type @exam[Element_Type] as
 @exam[Vectors]. We can ensure this by writing
-
-
 @begin[Example]
 @key[with] ... ; @key[use] Ada.Containers;
 @key[generic]
    @key[with package] V @key[is new] Vectors(<>);
    @key[with package] HM @key[is new] Hashed_Maps
-@\@\@\(Element_Type => V.Element_Type, "=" => V."=", @key[others]
-=> <>);
-@key[package] HMV@key[ is] ...
-
-
+             (Element_Type => V.Element_Type, "=" => V."=", @key[others] => <>);
+@key[package] HMV @key[is] ...
 @end[Example]
-If this seems rather too hypothetical, a more concrete example might
+
+@leading@;If this seems rather too hypothetical, a more concrete example might
 be a generic function which converts a vector into a list provided
 they have the same element type and equality. Note first that the
 specification of the container package for lists is
-
-
 @begin[Example]
 @key[generic]
    @key[type] Element_Type @key[is private];
-   @key[with function] "=" (Left, Right: Element_Type) @key[return]
-Boolean @key[is] <>;
+   @key[with function] "=" (Left, Right: Element_Type) @key[return] Boolean @key[is] <>;
 @key[package] Ada.Containers.Doubly_Linked_Lists @key[is] ...
-
-
 @end[Example]
-The specification of a generic function @exam[Convert] might be
 
-
+@leading@;The specification of a generic function @exam[Convert] might be
 @begin[Example]
 @key[generic]
-   @key[with package] DLL@key[ is new] Doubly_Linked_Lists(<>);
+   @key[with package] DLL @key[is new] Doubly_Linked_Lists(<>);
    @key[with package] V @key[is new] Vectors
-@\@\@\(Index_Type => <>, Element_Type => DLL.Element_Type, "=" =>
-DLL."=");
+             (Index_Type => <>, Element_Type => DLL.Element_Type, "=" => DLL."=");
 @key[function] Convert(The_Vector: V.Vector) @key[return] DLL.List;
-
-
 @end[Example]
-
-*** Started here ***
 
 @leading@;On the other hand if we only care about the element types matching
 and not about equality then we could write
 @begin[Example]
 @key[generic]
-   @key[with package] DLL@key[ is new] Doubly_Linked_Lists(<>);
+   @key[with package] DLL @key[is new] Doubly_Linked_Lists(<>);
    @key[with package] V @key[is new] Vectors(Element_Type => DLL.Element_Type, @key[others] => <>);
 @key[function] Convert(The_Vector: V.Vector) @key[return] DLL.List;
 @end[Example]
@@ -2304,7 +2141,7 @@ but otherwise the parameters are unrelated. In Ada 95 we are again
 forced to repeat one set of parameters thus@Defn{super solver}
 @begin[Example]
 @key[generic]
-   @key[with package] This@key[ is new] Do_This(<>);
+   @key[with package] This @key[is new] Do_This(<>);
    S_Bounds: @key[in] This.Real;
    S_Iterations: @key[in] Integer;
    S_Repeat: @key[in] Boolean;
@@ -2336,7 +2173,7 @@ an artificial asymmetry between @exam[This] and @exam[That].
 @leading@;In Ada 2005 the package @exam[Super_Solver] can be written as
 @begin[Example]
 @key[generic]
-   @key[with package] This@key[ is new] Do_This(<>);
+   @key[with package] This @key[is new] Do_This(<>);
    @key[with package] That @key[is new] Do_That(This.Real, @key[others] => <>);
 @key[package] Super_Solver @key[is] ...
 @end[Example]
@@ -2410,7 +2247,7 @@ in @RefSecNum{Overriding and overloading}. Thus (in appropriate
 circumstances) we can write@Defn{overriding indicator}
 @begin[Example]
 @key[overriding]
-@key[procedure] This@key[ is new] That( ... );
+@key[procedure] This @key[is new] That( ... );
 @end[Example]
 
 This means that the instantiation must be an overriding operation

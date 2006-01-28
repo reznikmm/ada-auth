@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/access.mss,v $)
-@comment($Revision: 1.3 $ $Date: 2006/01/27 06:40:01 $)
+@comment($Revision: 1.4 $ $Date: 2006/01/28 06:49:01 $)
 
 @LabeledSection{Access types}
 
@@ -1933,7 +1933,7 @@ has not peeked at the private part) writes
 @begin[Example]
 @tabset[P42]
 Chris: Mutant_Name := @key[new] Mutant'(F);@\-- @examcom[OK]
-...]
+...
 Chris.@key[all] := M;@\--@examcom[raises Constraint_Error]
 @end[Example]
 
