@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/struct.mss,v $)
-@comment($Revision: 1.2 $ $Date: 2006/01/27 06:40:05 $)
+@comment($Revision: 1.3 $ $Date: 2006/02/03 07:39:46 $)
 
 @LabeledSection{Structure and visibility}
 
@@ -934,8 +934,9 @@ Introduction. Here it is somewhat extended
    @key[type] Outer @key[is private];
    ...@\-- @examcom[various operations on Outer visible to the user]
 
-@\-- @examcom[type Inner is not visible here]
-@key[private]@\-- @examcom[type Inner is visible here]
+   -- @examcom[type Inner is not visible here]
+@key[private]
+   -- @examcom[type Inner is visible here]
 
     @key[type] Outer @key[is]
       @key[record]

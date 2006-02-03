@@ -1,7 +1,7 @@
 @Part(oop, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/oop.mss,v $)
-@comment($Revision: 1.3 $ $Date: 2006/01/27 06:40:08 $)
+@comment($Revision: 1.4 $ $Date: 2006/02/03 07:39:47 $)
 
 @LabeledSection{Object oriented model}
 
@@ -864,7 +864,8 @@ Thus if one operation is a function @exam[F] thus
 @end[Example]
 
 then in this case the type @exam[NT] must provide a concrete function
-@exam[F]. See however the discussion at the end of this paper for
+@exam[F]. See however the discussion at the end of this paper (see
+@RefSecNum{Overriding and overloading}) for
 the case when the type @exam[NT] has a null extension.
 
 @leading@;Class wide types also apply to interface types. The class wide type
@@ -2132,7 +2133,8 @@ a parameter of type @exam[String] rather than @exam[Integer].
 
 @leading@;The overriding indicators can also be used with abstract subprograms,
 null procedures, renamings, instantiations, stubs, bodies and entries
-(we will deal with entries in the paper on tasking). So we can have
+(we will deal with entries in the paper on tasking @en
+@RefSecNum{Synchronized interfaces}). So we can have
 @begin[Example]
 @key[overriding]
 @key[procedure] Pap(X: TT) @key[is abstract];

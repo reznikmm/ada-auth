@@ -43,8 +43,8 @@
 	         shape="rect"         coords="296,66,480,130">
 </map>
 <TD Width="220" Align="Center" VAlign="Top">
-<SPAN Style="font-family: Arial, Helvetica, sans-serif; font-size: 92%">and &nbsp; <A HREF="http://www.ada-europe.org">Ada Europe</A>:<BR>
-<A HREF="http://www.ada-europe.org"><IMG SRC="AE_logo.gif" ALT="Ada Europe" Height="200"></A></SPAN>
+<SPAN Style="font-family: Arial, Helvetica, sans-serif; font-size: 92%">and &nbsp; <A HREF="http://www.ada-europe.org">Ada-Europe</A>:<BR>
+<A HREF="http://www.ada-europe.org"><IMG SRC="AE_logo.gif" ALT="Ada-Europe" Height="200"></A></SPAN>
 </TABLE>}
 
 @Comment{Source files and related items, in collating order}
@@ -56,6 +56,7 @@
 @Source{Name=<Struct.MSS>,SectionName=<04>,SectionNumber=[4],NewSection=[T]}
 @Source{Name=<Tasking.MSS>,SectionName=<05>,SectionNumber=[5],NewSection=[T]}
 @Source{Name=<General.MSS>,SectionName=<06>,SectionNumber=[6],NewSection=[T]}
+@Source{Name=<Library.MSS>,SectionName=<07>,SectionNumber=[7],NewSection=[T]}
 @Source{Name=<Refs.MSS>,SectionName=<REF>,SectionNumber=[0],NewSection=[T]}
 @Source{Name=<Index.MSS>,SectionName=<IDX>,SectionNumber=[0],NewSection=[T]}
 

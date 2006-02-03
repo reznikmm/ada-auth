@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/general.mss,v $)
-@comment($Revision: 1.2 $ $Date: 2006/01/28 06:49:01 $)
+@comment($Revision: 1.3 $ $Date: 2006/02/03 07:39:46 $)
 
 @LabeledSection{Exceptions, generics etc}
 
@@ -180,8 +180,7 @@ However, in Ada 95, applying @exam[Exception_Identity] to the value
 resort to a revolting trick such as declaring a function as follows
 
 @begin[Example]
-@key[function] Is_Null_Occurrence(X: Exception_Occurrence) @key[return]
-Boolean @key[is]
+@key[function] Is_Null_Occurrence(X: Exception_Occurrence) @key[return] Boolean @key[is]
    Id: Exception_Id;
 @key[begin]
    Id := Exception_Identity(X);
@@ -725,7 +724,7 @@ the problems with Ada 95 have been resolved.
 
 There are a number of other improvements in the numerics area but
 these concern the Numerics annex and so will be discussed in a later
-paper@Comment{ (see @RefSecNum{*** TBD ***})}.
+paper (see @RefSecNum{Numerics annex}).
 
 
 @LabeledClause{Pragmas and Restrictions}
@@ -734,64 +733,55 @@ paper@Comment{ (see @RefSecNum{*** TBD ***})}.
 Ada 2005 introduces a number of new pragmas and @exam[Restrictions]
 identifiers. Many of these were described in the previous paper when
 discussing tasking and the Real-Time and High Integrity annexes (see
-@RefSecNum{The Ravenscar profile}. For
+@RefSecNum{The Ravenscar profile}). For
 convenience here is a complete list giving the annex if appropriate.
 
-*** Stopped here ***
-
-The new pragmas are
-
-
+@leading@keepnext@;The new pragmas are
 @begin[Example]
+@tabset[P35]
 Assert
 Assertion_Policy
-Detect_Blocking@\@\High-Integrity
+Detect_Blocking@\@examcom[High-Integrity]
 No_Return
 Preelaborable_Initialization
-Profile@\@\Real-Time
-Relative_Deadline@\@\Real-Time
-Unchecked_Union@\@\Interface
+Profile@\@examcom[Real-Time]
+Relative_Deadline@\@examcom[Real-Time]
+Unchecked_Union@\@examcom[Interface]
 Unsuppress
-
-
 @end[Example]
-The new @exam[Restrictions] identifiers are
 
-
+@leading@keepnext@;The new @exam[Restrictions] identifiers are
 @begin[Example]
-Max_Entry_Queue_Length@\@\Real-Time
+@tabset[P35]
+Max_Entry_Queue_Length@\@examcom[Real-Time]
 No_Dependence
-No_Dynamic_Attachment@\@\Real-Time
+No_Dynamic_Attachment@\@examcom[Real-Time]
 No_Implementation_Attributes
 No_Implementation_Pragmas
-No_Local_Protected_Objects@\@\Real-Time
+No_Local_Protected_Objects@\@examcom[Real-Time]
 No_Obsolescent_Features
-No_Protected_Type_Allocators@\Real-Time
-No_Relative_Delay@\@\Real-Time
-No_Requeue_Statements@\@\Real-Time
-No_Select_Statements@\@\Real-Time
-No_Synchronous_Control@\@\Real-Time
-No_Task_Termination@\@\Real-Time
-Simple_Barriers@\@\Real-Time
-
-
+No_Protected_Type_Allocators@\@examcom[Real-Time]
+No_Relative_Delay@\@examcom[Real-Time]
+No_Requeue_Statements@\@examcom[Real-Time]
+No_Select_Statements@\@examcom[Real-Time]
+No_Synchronous_Control@\@examcom[Real-Time]
+No_Task_Termination@\@examcom[Real-Time]
+Simple_Barriers@\@examcom[Real-Time]
 @end[Example]
+
 We will now discuss in detail the pragmas and @exam[Restrictions]
 identifiers in the core language and so not discussed in the previous
 paper.
 
-First there is the pragma @exam[Assert] and the associated pragma
+@leading@Defn{Assert pragma}@Defn2{Term=[pragma],Sec=[Assert]}@Defn{Assertion_Policy pragma}@Defn2{Term=[pragma],Sec=[Assertion_Policy]}@;First
+there is the pragma @exam[Assert] and the associated pragma
 @exam[Assertion_Policy]. Their syntax is as follows
-
-
 @begin[Example]
-@key[pragma] Assert([Check =>] @examcom[boolean]_expression [, [Message
-=>] @examcom[string]_expression]);
+@key[pragma] Assert([Check =>] @examcom[boolean]_expression [, [Message =>] @examcom[string]_expression]);
 
 @key[pragma] Assertion_Policy(@examcom[policy]_identifier);
-
-
 @end[Example]
+
 The first parameter of @exam[Assert] is thus a boolean expression
 and the second (and optional) parameter is a string. Remember that
 when we write Boolean we mean of the predefined type whereas boolean
@@ -802,9 +792,7 @@ the behaviour of the pragma @exam[Assert]. Two policies are defined
 by the language, namely, @exam[Check] and @exam[Ignore]. Further policies
 may be defined by the implementation.
 
-There is also a package @exam[Ada.Assertions] thus
-
-
+@leading@;There is also a package @exam[Ada.Assertions] thus
 @begin[Example]
 @key[package] Ada.Assertions @key[is]
    @key[pragma] Pure(Assertions);
@@ -812,54 +800,40 @@ There is also a package @exam[Ada.Assertions] thus
    Assertion_Error: @key[exception];
 
    @key[procedure] Assert(Check: @key[in] Boolean);
-   @key[procedure] Assert(Check: @key[in] Boolean; Message: @key[in]
-String);
+   @key[procedure] Assert(Check: @key[in] Boolean; Message: @key[in] String);
 @key[end] Ada.Assertions;
-
-
 @end[Example]
-The pragma @exam[Assert] can be used wherever a declaration or statement
+
+@leading@;The pragma @exam[Assert] can be used wherever a declaration or statement
 is allowed. Thus it might occur in a list of declarations such as
-
-
 @begin[Example]
 N: @key[constant] Integer := ... ;
 @key[pragma] Assert(N > 1);
 A: Real_Matrix(1 .. N, 1 .. N);
 EV: Real_Vector(1 .. N);
-
-
 @end[Example]
-and in a sequence of statements such as
 
-
+@leading@;and in a sequence of statements such as
 @begin[Example]
 @key[pragma] Assert(Transpose(A) = A, "A not symmetric");
 EV := Eigenvalues(A);
-
-
 @end[Example]
-If the policy set by @exam[Assertion_Policy] is @exam[Check] then
+
+@leading@;If the policy set by @exam[Assertion_Policy] is @exam[Check] then
 the above pragmas are equivalent to
-
-
 @begin[Example]
 @key[if not] N > 1 @key[then]
    @key[raise] Assertion_Error;
 @key[end if];
-
-
 @end[Example]
-and
 
-
+@leading@;and
 @begin[Example]
 @key[if not] Transpose(A) = A @key[then]
    @key[raise] Assertion_Error @key[with] "A not symmetric";
 @key[end if];
-
-
 @end[Example]
+
 Remember from Section 2 that a raise statement without any explicit
 message is not the same as one with an explicit null message. In the
 former case a subsequent call of @exam[Exception_Message ]returns
@@ -872,45 +846,32 @@ If the policy set by @exam[Assertion_Policy] is @exam[Ignore] then
 the @exam[Assert] pragma is ignored at execution time @en but of course
 the syntax of the parameters is checked during compilation.
 
-The two procedures @exam[Assert] in the package @exam[Ada.Assertions
-]have an identical effect to the corresponding @exam[Assert] pragmas
+@leading@;The two procedures @exam[Assert] in the package @exam[Ada.Assertions]
+have an identical effect to the corresponding @exam[Assert] pragmas
 except that their behaviour does not depend upon the assertion policy.
 Thus the call
-
-
 @begin[Example]
 Assert(Some_Test);
-
-
 @end[Example]
-is always equivalent to
 
-
+@leading@;is always equivalent to
 @begin[Example]
-@key[if not ]Some_Test @key[then]
+@key[if not] Some_Test @key[then]
    @key[raise] Assertion_Error;
 @key[end if];
-
-
 @end[Example]
-In other words we could define the behaviour of
 
-
+@leading@;In other words we could define the behaviour of
 @begin[Example]
 @key[pragma] Assert(Some_Test);
-
-
 @end[Example]
-as equivalent to
 
-
+@leading@keepnext@;as equivalent to
 @begin[Example]
-{\cs20\b\expnd0\expndtw-2 if}{\expnd0\expndtw-2  }@examcom[policy_identifier]
-= Check{\expnd0\expndtw-2  }{\cs20\b\expnd0\expndtw-2 then}
+@tabset[P35]
+@key[if] @examcom[policy_identifier] = Check @key[then]
    Assert(Some_Test);@\       -- @examcom[call of procedure Assert]
 @key[end if];
-
-
 @end[Example]
 
 Note again that there are two procedures @exam[Assert], one with and
@@ -928,7 +889,7 @@ on the assumption that the boolean expressions are true although there
 would be no code to check that they were true. Careless use of such
 a policy could lead to erroneous behaviour.
 
-There was some concern that pragmas such as @exam[Assert] might be
+@leading@;There was some concern that pragmas such as @exam[Assert] might be
 misunderstood to imply that static analysis was being carried out.
 Thus in the SPARK language
 @LocalLink{Target=[R9],Sec=[References],Text={[9]}}, the annotation
@@ -945,27 +906,26 @@ implementations of Ada have already provided a pragma @exam[Assert]
 so it is expected that there will be no confusion with its incorporation
 into the standard.
 
-@leading@;Another pragma with a related flavour is @exam[No_Return]. This can
+@leading@Defn{No_Return pragma}@Defn2{Term=[pragma],Sec=[No_Return]}@;Another
+pragma with a related flavour is @exam[No_Return]. This can
 be applied to a procedure (not to a function) and asserts that the
 procedure never returns in the normal sense. Control can leave the
 procedure only by the propagation of an exception or it might loop
-forever (which is common among certain real-time programs). The syntax
-is
+forever (which is common among certain real-time programs). The syntax is
 @begin[Example]
 @key[pragma] No_Return(@examcom[procedure]_local_name {, @examcom[procedure]_local_name});
 @end[Example]
 
-Thus we might have a procedure @exam[Fatal_Error] which outputs some
+@leading@;Thus we might have a procedure @exam[Fatal_Error] which outputs some
 message and then propagates an exception which can be handled in the
 main subprogram. For example
-
-
 @begin[Example]
+@tabset[P35]
 @key[procedure] Fatal_Error(Msg: @key[in] String) is
    @key[pragma] No_Return(Fatal_Error);
 @key[begin]
    Put_Line(Msg);
-   ...@\@\@\@\-- @examcom[other last wishes]
+   ...@\-- @examcom[other last wishes]
    @key[raise] Death;
 @key[end] Fatal_Error;
 ...
@@ -980,87 +940,76 @@ main subprogram. For example
    @key[when others] =>
       Put_Line("Program terminated: unknown error");
 @key[end] Main;
-
-
 @end[Example]
+
 There are two consequences of supplying a pragma @exam[No_Return].
 
-
-
-@begin[Description]
-{\u9642\'3f@\The implementation checks at compile time that the procedure
+@begin[Itemize]
+The implementation checks at compile time that the procedure
 concerned has no explicit return statements. There is also a check
 at run time that it does not attempt to run into the final end @en
-}@exam[Program_Error] is raised if it does as in the case of running
+@exam[Program_Error] is raised if it does as in the case of running
 into the end of a function.
 
-\u9642\'3f@\The implementation is able to assume that calls of the
+The implementation is able to assume that calls of the
 procedure do not return and so various optimizations can be made.
+@end[Itemize]
 
-We might then have a call of @exam[Fatal_Error] as in
+@leading@;We might then have a call of @exam[Fatal_Error] as in
 
-
-@end[Description]
 @begin[Example]
+@tabset[P35]
 @key[function] Pop @key[return] Symbol @key[is]
 @key[begin]
    @key[if] Top = 0 @key[then]
-      Fatal_Error("Stack empty");@\@\-- @examcom[never returns]
+      Fatal_Error("Stack empty");@\-- @examcom[never returns]
    @key[elsif]
       Top := Top @en 1;
       @key[return] S(Top+1);
    @key[end if];
 @key[end] Pop;
-
-
 @end[Example]
+
 If @exam[No_Return] applies to @exam[Fatal_Error] then the compiler
 should not compile a jump after the call of @exam[Fatal_Error] and
 should not produce a warning that control might run into the final
 end of @exam[Pop].
 
-The pragma @exam[No_Return] now applies to the predefined procedure
+@leading@;The pragma @exam[No_Return] now applies to the predefined procedure
 @exam[Raise_Exception]. To enable this to be possible its behaviour
 with @exam[Null_Id] has had to be changed. In Ada 95 writing
-
-
 @begin[Example]
 Raise_Exception(Null_Id, "Nothing");
-
-
 @end[Example]
+
 does nothing at all (and so does return in that case) whereas in Ada
 2005 it is defined to raise @exam[Constraint_Error] and so now never
 returns.
 
-We could restructure the procedure @exam[Fatal_Error] to use @exam[Raise_Exception]
-thus
-
-
+@leading@;We could restructure the procedure @exam[Fatal_Error] to use
+@exam[Raise_Exception] thus
 @begin[Example]
+@tabset[P35]
 @key[procedure] Fatal_Error(Msg: @key[in] String) is
    @key[pragma] No_Return(Fatal_Error);
 @key[begin]
-   ...@\@\@\-- @examcom[other last wishes]
+   ...@\-- @examcom[other last wishes]
    Raise_Exception(Death'Identity, Msg);
 @key[end] Fatal_Error;
-
-
 @end[Example]
+
 Since pragma @exam[No_Return] applies to @exam[Fatal_Error] it is
 important that we also know that @exam[Raise_Exception] cannot return.
 
 The exception handler for @exam[Death] in the main subprogram can
 now use @exam[Exception_Message] to print out the message.
 
-Remember also from Section 2 above that we can now also write
-
-
+@leading@;Remember also from Section @RefSecNum{Exceptions} that we can
+now also write
 @begin[Example]
 @key[raise] Death @key[with] Msg;
-
-
 @end[Example]
+
 rather than call @exam[Raise_Exception].
 
 The pragma @exam[No_Return] is a representation pragma. If a subprogram
@@ -1070,13 +1019,10 @@ specification then the pragma must follow the specification in the
 same compilation or declarative region. Thus one pragma @exam[No_Return]
 could apply to several subprograms declared in the same package specification.
 
-
-It is important that dispatching works correctly with procedures that
+@leading@;It is important that dispatching works correctly with procedures that
 do not return. A non-returning dispatching procedure can only be overridden
 by a non-returning procedure and so the overriding procedure must
 also have pragma @exam[No_Return] thus
-
-
 @begin[Example]
 @key[type] T @key[is tagged] ...
 @key[procedure] P(X: T; ... );
@@ -1086,9 +1032,8 @@ also have pragma @exam[No_Return] thus
 @key[overriding]
 @key[procedure] P(X: TT; ... );
 @key[pragma] No_Return(P);
-
-
 @end[Example]
+
 The reverse is not true of course. A procedure that does return can
 be overridden by one that does not.
 
@@ -1097,35 +1042,29 @@ but obviously not for a null procedure. A pragma @exam[No_Return]
 can also be given for a generic procedure. It then applies to all
 instances.
 
-The next new pragma is @exam[Preelaborable_Initialization]. The syntax
+@leading@Defn{Preelaborable_Initialization pragma}@Defn2{Term=[pragma],Sec=[Preelaborable_Initialization]}The
+next new pragma is @exam[Preelaborable_Initialization]. The syntax
 is
-
-
 @begin[Example]
 @key[pragma] Preelaborable_Initialization(direct_name);
-
-
 @end[Example]
+
 This pragma concerns the categorization of library units and is related
 to pragmas such as @exam[Pure] and @exam[Preelaborate]. It is used
 with a private type and promises that the full type given by the parameter
 will indeed have preelaborable initialization. The details of its
-use will be explained in the next paper@Comment{ (see @RefSecNum{*** TBD ***})}.
+use will be explained in the next paper (see @RefSecNum{Categorization of library units}).
 
-Another new pragma is @exam[Unchecked_Union]. The syntax is
-
-
+@leading@Defn{Unchecked_Union pragma}@Defn2{Term=[pragma],Sec=[Unchecked_Union]}Another
+new pragma is @exam[Unchecked_Union]. The syntax is
 @begin[Example]
 @key[pragma] Unchecked_Union(@examcom[first_subtype]_local_name);
-
-
 @end[Example]
+
 The parameter has to denote an unconstrained discriminated record
 subtype with a variant part. The purpose of the pragma is to permit
 interfacing to unions in C. The following example was given in the
-Introduction
-
-
+Introduction@Defn2{Term=[union],Sec=[of C]}
 @begin[Example]
 @key[type] Number(Kind: Precision) @key[is]
    @key[record]
@@ -1139,25 +1078,19 @@ Introduction
    @key[end record];
 
 @key[pragma] Unchecked_Union(Number);
-
-
 @end[Example]
-Specifying the pragma @exam[Unchecked_Union] ensures the following
 
-
-@begin[Description]
-{\u9642\'3f@\The representation of the type does not allow space for
+@leading@;Specifying the pragma @exam[Unchecked_Union] ensures the following
+@begin[Itemize]
+The representation of the type does not allow space for
 any discriminants.
 
-}{\u9642\'3f@\There is an implicit suppression of} @exam[Discriminant_Check].
+There is an implicit suppression of @exam[Discriminant_Check].
 
-{\u9642\'3f@\There is an implicit }@key[pragma] @exam[Convention(C)].
+There is an implicit @key[pragma] @exam[Convention(C)].
+@end[Itemize]
 
-
-@end[Description]
-The above Ada text provides a mapping of the following C union
-
-
+@leading@;The above Ada text provides a mapping of the following C union
 @begin[Example]
 union {
    double spvalue;
@@ -1166,9 +1099,8 @@ union {
       double* first;
       } mpvalue;
 } number;
-
-
 @end[Example]
+
 The general idea is that the C programmer has created a type which
 can be used to represent a floating point number in one of two ways
 according to the precision required. One way is just as a double length
@@ -1178,15 +1110,12 @@ as a structure consisting of an integer giving the number of items
 followed by a pointer to the first of them. These two different forms
 are the two alternatives of the union.
 
-In the Ada mapping the choice of precision is governed by the discriminant
-@exam[Kind] which is of an enumeration type as follows
-
-
+@leading@;In the Ada mapping the choice of precision is governed by the
+discriminant @exam[Kind] which is of an enumeration type as follows
 @begin[Example]
 @key[type] Precision @key[is] (Single_Precision, Multiple_Precision);
-
-
 @end[Example]
+
 In the single precision case the component @exam[SP_Value] of type
 @exam[Long_Float] maps onto the C component @exam[spvalue ]of type
 @exam[double].
@@ -1196,26 +1125,20 @@ The multiple precision case is somewhat troublesome. The Ada component
 the Ada component @exam[MP_Value_First] of type @key[access]@exam[
 Long_Float] maps onto the C component @exam[first] of type @exam[double*].
 
-In our Ada program we can declare a variable thus
-
-
+@leading@;In our Ada program we can declare a variable thus
 @begin[Example]
 X: Number(Multiple_Precision);
-
-
 @end[Example]
-and we then obtain a value in @exam[X] by calling some C subprogram.
+
+@leading@;and we then obtain a value in @exam[X] by calling some C subprogram.
 We can then declare an array and map it onto the C sequence of double
 length values thus
-
-
 @begin[Example]
 A: @key[array] (1 .. X.MP_Value_Length) @key[of] Long_Float;
 @key[for] A'Address @key[use] X.MP_Value_First.@key[all]'Address;
 @key[pragma] Import(C, A);
-
-
 @end[Example]
+
 The elements of @exam[A] are now the required values. Note that we
 don't use an Ada array in the declaration of @exam[Number] because
 there might be problems with dope information.
@@ -1223,43 +1146,36 @@ there might be problems with dope information.
 The Ada type can also have a non-variant part preceding the variant
 part and variant parts can be nested. It may have several discriminants.
 
-When an object of an unchecked union type is created, values must
+@leading@;When an object of an unchecked union type is created, values must
 be supplied for all its discriminants even though they are not stored.
 This ensures that appropriate default values can be supplied and that
 an aggregate contains the correct components. However, since the discriminants
 are not stored, they cannot be read. So we can write
-
-
 @begin[Example]
 X: Number := (Single_Precision, 45.6);
 Y: Number(Single_Precision);
 ...
 Y.SP_Value := 55.7;
-
-
 @end[Example]
-The variable @exam[Y] is said to have an inferable discriminant whereas
+
+@leading@;The variable @exam[Y] is said to have an inferable discriminant whereas
 @exam[X] does not. Although it is clear that playing with unchecked
 unions is potentially dangerous, nevertheless Ada 2005 imposes certain
 rules that avoid some dangers. One rule is that predefined equality
 can only be used on operands with inferable discriminants; @exam[Program_Error]
 is raised otherwise. So
-
-
 @begin[Example]
-@key[if] Y = 55.8 @key[then]@\@\@\-- @examcom[OK]
+@tabset[P35]
+@key[if] Y = 55.8 @key[then]@\-- @examcom[OK]
 
-@key[if] X = 45.5 @key[then]@\@\@\-- @examcom[raises Program_Error]
+@key[if] X = 45.5 @key[then]@\-- @examcom[raises Program_Error]
 
-@key[if] X = Y @key[then]@\@\@\-- @examcom[raises Program_Error]
-
-
+@key[if] X = Y @key[then]@\-- @examcom[raises Program_Error]
 @end[Example]
-It is important to be aware that unchecked union types are introduced
+
+@leading@;It is important to be aware that unchecked union types are introduced
 in Ada 2005 for the sole purpose of interfacing to C programs and
 not for living dangerously. Thus consider
-
-
 @begin[Example]
 @key[type] T(Flag: Boolean := False) @key[is]
    @key[record]
@@ -1271,20 +1187,17 @@ not for living dangerously. Thus consider
       @key[end case];
    @key[end record];
 @key[pragma] Unchecked_Union(T);
-
-
 @end[Example]
-The type @exam[T] can masquerade as either type @exam[Integer] or
+
+@leading@;The type @exam[T] can masquerade as either type @exam[Integer] or
 @exam[Float]. But we should not use unchecked union types as an alternative
 to unchecked conversion. Thus consider
-
-
 @begin[Example]
-X: T;@\@\@\@\-- @examcom[Float by default]
-Y: Integer := X.F2;@\@\@\-- @examcom[erroneous]
-
-
+@tabset[P35]
+X: T;@\-- @examcom[Float by default]
+Y: Integer := X.F2;@\-- @examcom[erroneous]
 @end[Example]
+
 The object @exam[X] has discriminant @exam[False] by default and thus
 has the value zero of type @exam[Integer]. In the absence of the pragma
 @exam[Unchecked_Union], the attempt to read @exam[X.F2] would raise
@@ -1298,15 +1211,12 @@ However, assigning a @exam[Float] value to an @exam[Integer] object
 using @exam[Unchecked_Conversion] is not erroneous providing certain
 conditions hold such as that @exam[Float'Size = Integer'Size].
 
-The final pragma to be considered is @exam[Unsuppress]. Its syntax
-is
-
-
+@leading@Defn{Unsuppress pragma}@Defn2{Term=[pragma],Sec=[Unsuppress]}@;The
+final pragma to be considered is @exam[Unsuppress]. Its syntax is
 @begin[Example]
 @key[pragma] Unsuppress(identifier);
-
-
 @end[Example]
+
 The identifier is that of a check or perhaps @exam[All_Checks]. The
 pragma @exam[Unsuppress] is essentially the opposite of the existing
 pragma @exam[Suppress] and can be used in the same places with similar
@@ -1328,10 +1238,8 @@ Note that @exam[Unsuppress] does not override the implicit @exam[Suppress]
 of @exam[Discriminant_Check] provided by the pragma @exam[Unchecked_Union]
 just discussed.
 
-A sensible application of @exam[Unsuppress] would be in the fixed
-point operations mentioned in Section 3 thus
-
-
+@leading@;A sensible application of @exam[Unsuppress] would be in the fixed
+point operations mentioned in Section @RefSecNum{Numerics} thus
 @begin[Example]
 @key[function] "*"(Left, Right: Frac) @key[return] Frac @key[is]
    @key[pragma] Unsuppress(Overflow_Check);
@@ -1339,91 +1247,79 @@ point operations mentioned in Section 3 thus
    @key[return] Standard."*"(Left, Right);
 @key[exception]
    @key[when] Constraint_Error =>
-      @key[if] (Left>0.0 @key[and] Right>0.0) @key[or] (Left<0.0 @key[and]
-Right<0.0) @key[then]
+      @key[if] (Left>0.0 @key[and] Right>0.0) @key[or] (Left<0.0 @key[and] Right<0.0) @key[then]
          @key[return] Frac'Last;
       @key[else]
          @key[return] Frac'First;
       @key[end if];
 @key[end] "*";
-
-
 @end[Example]
+
 The use of @exam[Unsuppress] ensures that the overflow check is not
 suppressed even if there is a global @exam[Suppress] for the whole
 program (or the user has switched checks off through the compiler
 command line). So @exam[Constraint_Error] will be raised as necessary
 and the code will work correctly.
 
-In Ada 95 the pragma @exam[Suppress] has the syntax
-
-
+@leading@;In Ada 95 the pragma @exam[Suppress] has the syntax
 @begin[Example]
-@key[pragma] Suppress(identifier [ , [On =>] name]);  @\--@examcom[
-Ada 95]
-
-
+@tabset[P49]
+@key[pragma] Suppress(identifier [ , [On =>] name]);@\--@examcom[Ada 95]
 @end[Example]
-The second and optional parameter gives the name of the entity to
+
+@leading@;The second and optional parameter gives the name of the entity to
 which the permission applies. There was never any clear agreement
 on what this meant and implementations varied. Accordingly, in Ada
-2005 the second parameter is banished to Annex J so that the syntax
+2005 the second parameter is banished to
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-J-10.html],Text=[Annex J]}
+so that the syntax
 in the core language is similar to @exam[Unsuppress] thus
-
-
 @begin[Example]
-@key[pragma] Suppress(identifier);@\@\@\-- @examcom[Ada 2005]
-
-
+@tabset[P49]
+@key[pragma] Suppress(identifier);@\-- @examcom[Ada 2005]
 @end[Example]
+
 For symmetry, Annex J actually allows an obsolete @exam[On] parameter
 for @exam[Unsuppress]. It might seem curious that a feature should
 be born obsolescent.
 
-A number of new @exam[Restrictions] identifiers are added in Ada 2005.
+@leading@Defn2{Term=[restrictions identifier],Sec=[No_Dependence]}A
+number of new @exam[Restrictions] identifiers are added in Ada 2005.
 The first is @exam[No_Dependence] whose syntax is
-
-
 @begin[Example]
 @key[pragma] Restrictions(No_Dependence => name);
-
-
 @end[Example]
+
 This indicates that there is no dependence on a library unit with
 the given name.
 
-The name might be that of a predefined unit but it could in fact be
+@leading@;The name might be that of a predefined unit but it could in fact be
 any unit. For example, it might be helpful to know that there is no
 dependence on a particular implementation-defined unit such as a package
 @exam[Superstring] thus
-
-
 @begin[Example]
 @key[pragma] Restrictions(No_Dependence => Superstring);
-
-
 @end[Example]
-Care needs to be taken to spell the name correctly; if we write @exam[Supperstring]
-by mistake then the compiler will not be able to help us.
 
-The introduction of @exam[No_Dependence] means that the existing @exam[Restrictions]
-identifier @exam[No_Asynchronous_Control] is moved to Annex J since
-we can now write
+Care needs to be taken to spell the name correctly; if we write
+@exam[Supperstring] by mistake then the compiler will not be able to help us.
 
-
+@leading@;The introduction of @exam[No_Dependence] means that the existing
+@exam[Restrictions] identifier @exam[No_Asynchronous_Control] is moved to
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-J-13.html],Text=[Annex J]}
+since we can now write
 @begin[Example]
 @key[pragma] Restrictions(No_Dependence => Ada.Asynchronous_Task_Control);
-
-
 @end[Example]
+
 Similarly, the identifiers @exam[No_Unchecked_Conversion] and @exam[No_Unchecked_Deallocation]
-are also moved to Annex J.
+are also moved to @URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-J-13.html],Text=[Annex J]}.
 
 Note that the identifier @exam[No_Dynamic_Attachment] which refers
 to the use of the subprograms in the package @exam[Ada.Interrupts]
-cannot be treated in this way because of the child package @exam[Ada.Interrupts.Names].
-No dependence on @exam[Ada.Interrupts] would exclude the use of the
-child package @exam[Names] as well.
+cannot be treated in this way because of the child package
+@exam[Ada.Interrupts.Names]. No dependence on @exam[Ada.Interrupts] would
+exclude the use of the child package @exam[Names] as well.
 
 The restrictions identifier @exam[No_Dynamic_Priorities] cannot be
 treated this way either for a rather different reason. In Ada 2005
@@ -1431,51 +1327,49 @@ this identifier is extended so that it also excludes the use of the
 attribute @exam[Priority] and this would not be excluded by just saying
 no dependence on @exam[Ada.Dynamic_Priorities].
 
-Two further @exam[Restrictions] identifiers are introduced to encourage
+@leading@Defn2{Term=[restrictions identifier],Sec=[No_Implementation_Pragmas]}@Defn2{Term=[restrictions identifier],Sec=[No_Implementation_Attributes]}Two
+further @exam[Restrictions] identifiers are introduced to encourage
 portability. We can write
-
-
 @begin[Example]
 @key[pragma] Restrictions(No_Implementation_Pragmas, No_Implementation_Attributes);
-
-
 @end[Example]
+
 These do not apply to the whole partition but only to the compilation
 or environment concerned. This helps us to ensure that implementation
 dependent areas of a program are identified.
 
-The final new restrictions identifier similarly prevents us from inadvertently
-using features in Annex J thus
-
-
+@leading@Defn2{Term=[restrictions identifier],Sec=[No_Obsolescent_Features]}The
+final new restrictions identifier similarly prevents us from inadvertently
+using features in
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-J.html],Text=[Annex J]}
+thus
 @begin[Example]
 @key[pragma] Restrictions(No_Obsolescent_Features);
-
-
 @end[Example]
+
 Again this does not apply to the whole partition but only to the compilation
 or environment concerned. (It is of course not itself defined in Annex
 J.)
 
-The reader will recall that in Ada 83 the predefined packages had
-names such as @exam[Text_IO] whereas in Ada 95 they are @exam[Ada.Text_IO
-]and so on. In order to ease transition from Ada 83, a number of renamings
-were declared in Annex J such as
-
-
+@leading@;The reader will recall that in Ada 83 the predefined packages had
+names such as @exam[Text_IO] whereas in Ada 95 they are @exam[Ada.Text_IO]
+and so on. In order to ease transition from Ada 83, a number of renamings
+were declared in
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-J-1.html],Text=[Annex J]}
+such as
 @begin[Example]
 @key[with] Ada.Text_IO;
 @key[package] Text_IO @key[renames] Ada.Text_IO;
-
-
 @end[Example]
+
 A mild problem is that the user could write these renamings anyway
 and we do not want the @exam[No_Obsolescent_Features] restriction
 to prevent this. Moreover, implementations might actually implement
 the renamings in Annex J by just compiling them and we don't want
 to force implementations to use some trickery to permit the user to
-do it but not the implementation. Accordingly, whether the @exam[No_Obsolescent_Features]
-restriction applies to these renamings or not is implementation defined.
+do it but not the implementation. Accordingly, whether the
+@exam[No_Obsolescent_Features] restriction applies to these renamings or not is
+implementation defined.
 
 
 @LabeledClause{Generic units}
@@ -1484,94 +1378,78 @@ restriction applies to these renamings or not is implementation defined.
 There are a number of improvements in the area of generics many of
 which have already been outlined in earlier papers.
 
-A first point concerns access types. The introduction of types that
+@leading@;A first point concerns access types. The introduction of types that
 exclude null means that a formal access type parameter can take the
 form
-
-
 @begin[Example]
 @key[generic]
    ...
    @key[type] A @key[is not null access] T;
    ...
-
-
 @end[Example]
+
 The actual type corresponding to @exam[A] must then itself be an access
 type that excludes null. A similar rule applies in reverse @en if
 the formal parameter includes null then the actual parameter must
 also include null. If the two did not match in this respect then all
 sorts of difficulties could arise.
 
-Similarly if the formal parameter is derived from an access type
-
-
+@leading@;Similarly if the formal parameter is derived from an access type
 @begin[Example]
+@tabset[P35]
 @key[generic]
    ...
-   @key[type] FA @key[is new] A;@\@\-- @examcom[A is an access type]
+   @key[type] FA @key[is new] A;@\-- @examcom[A is an access type]
    ...
-
-
 @end[Example]
-then the actual type corresponding to @exam[FA] must exclude null
+
+@leading@;then the actual type corresponding to @exam[FA] must exclude null
 if @exam[A] excludes null and vice versa. Half of this rule is automatically
 enforced since a type derived from a type that excludes null will
 automatically exclude null. But the reverse is not true as mentioned
-in an earlier paper when discussing access types. If @exam[A] has
-the declaration
-
-
+in an earlier paper (see @RefSecNum{Null exclusion and constant}) when
+discussing access types. If @exam[A] has the declaration
 @begin[Example]
-@key[type] A @key[is access all] Integer;@\@\-- @examcom[does not
-exclude null]
-
-
+@tabset[P35]
+@key[type] A @key[is access all] Integer;@\-- @examcom[does not exclude null]
 @end[Example]
-then we can declare
 
-
+@leading@keepnext@;then we can declare
 @begin[Example]
-@key[type] NA @key[is new] A;@\@\@\@\-- @examcom[does not exclude
-null]
-@key[type] NNA @key[is new not null] A;@\@\-- @examcom[does exclude
-null]
-
-
+@tabset[P35]
+@key[type] NA @key[is new] A;@\-- @examcom[does not exclude null]
+@key[type] NNA @key[is new not null] A;@\-- @examcom[does exclude null]
 @end[Example]
+
 and then @exam[NA] matches the formal parameter @exam[FA] in the above
 generic but @exam[NNA] does not.
 
-There is also a change to formal derived types concerning limitedness.
+@leading@;There is also a change to formal derived types concerning limitedness.
 In line with the changes described in the paper on the object oriented
-model, the syntax now permits @key[limited] to be stated explicitly
-thus
-
-
+model (see @RefSecNum{Interfaces}), the syntax now permits @key[limited]
+to be stated explicitly thus
 @begin[Example]
+@tabset[P49]
 @key[generic]
-   @key[type] T @key[is limited new] LT;@\@\@\-- @examcom[untagged]
+   @key[type] T @key[is limited new] LT;@\-- @examcom[untagged]
    @key[type] TT @key[is limited new] TLT @key[with private];@\-- @examcom[tagged]
-
 @end[Example]
+
 However, this can be seen simply as a documentation aid since the
 actual types corresponding to @exam[T] and @exam[TT] must be derived
 from @exam[LT] and @exam[TLT] and so will be limited if @exam[LT]
 and @exam[TLT] are limited anyway.
 
-Objects of anonymous access types are now also allowed as generic
+@leading@;Objects of anonymous access types are now also allowed as generic
 formal parameters so we can have
-
-
 @begin[Example]
 @key[generic]
    A: @key[access] T := @key[null];
    AN: @key[in out] @key[not null access] T;
    F: @key[access function ](X: Float) @key[return] Float;
    FN: @key[not null access function] (X: Float) @key[return] Float;
-
-
 @end[Example]
+
 If the subtype of the formal object excludes null (as in @exam[AN]
 and @exam[FN]) then the actual must also exclude null but not vice
 versa. This contrasts with the rule for formal access types discussed
@@ -1579,134 +1457,105 @@ above in which case both the formal type and actual type have to exclude
 null or not. Note moreover that object parameters of anonymous access
 types can have mode @key[in out].
 
-If the subprogram profile itself has access parameters that exclude
+@leading@;If the subprogram profile itself has access parameters that exclude
 null as in
-
-
 @begin[Example]
 @key[generic]
    PN: @key[access procedure] (AN: @key[not null access] T);
-
-
 @end[Example]
-then the actual subprogram must also have access parameters that exclude
-null and so on. The same rule applies to named formal subprogram parameters.
-If we have
 
-
+@leading@;then the actual subprogram must also have access parameters that
+exclude null and so on. The same rule applies to named formal subprogram
+parameters. If we have
 @begin[Example]
 @key[generic]
    @key[with procedure] P(AN: @key[not null access] T);
    @key[with procedure] Q(AN: @key[access] T);
-
-
 @end[Example]
-then the actual corresponding to @exam[P] must have a parameter that
-excludes null but the actual corresponding to @exam[Q ]might or might
+
+@leading@;then the actual corresponding to @exam[P] must have a parameter that
+excludes null but the actual corresponding to @exam[Q] might or might
 not. The rule is similar to renaming @en "not null must never lie".
 Remember that the matching of object and subprogram generic parameters
 is defined in terms of renaming. Here is an example to illustrate
 why the asymmetry is important. Suppose we have
-
-
 @begin[Example]
 @key[generic]
    @key[type] T @key[is private];
    @key[with procedure] P(Z: @key[in] T);
 @key[package] G @key[is]
-
-
 @end[Example]
-This can be matched by
 
-
+@leading@keepnext@;This can be matched by
 @begin[Example]
 @key[type] A @key[is access] ...;
 @key[procedure] Q(Y: @key[in] @key[not null] A);
 ...
 @key[package] NG @key[is new] G(T => A; P => Q);
-
-
 @end[Example]
+
 Note that since the formal type @exam[T] is not known to be an access
 type in the generic declaration, there is no mechanism for applying
 a null exclusion to it. Nevertheless there is no reason why the instantiation
 should not be permitted.
 
-There are some other changes to existing named formal subprogram parameters.
+@leading@;There are some other changes to existing named formal subprogram parameters.
 The reader will recall from the discussion on interfaces in an earlier
 paper (see @RefSecNum{Interfaces}) that the concept of null procedures
-has been added in Ada 2005.
+has been added in Ada 2005.@Defn2{Term=[null procedure],Sec=[formal parameter default]}
 A null procedure has no body but behaves as if it has a body comprising
 a null statement. It is now possible to use a null procedure as a
 possible form of default for a subprogram parameter. Thus there are
 now three possible forms of default as follows
-
-
 @begin[Example]
-@key[with procedure] P( ... ) @key[is] <>;@\@\-- @examcom[OK in 95]
-@key[with procedure] Q( ... ) @key[is] Some_Proc;@\-- @examcom[OK
-in Ada 95]
-@key[with procedure] R( ... ) @key[is null];@\@\-- @examcom[only in Ada 2005]
+@tabset[P42]
+@key[with procedure] P( ... ) @key[is] <>;@\-- @examcom[OK in Ada 95]
+@key[with procedure] Q( ... ) @key[is] Some_Proc;@\-- @examcom[OK in Ada 95]
+@key[with procedure] R( ... ) @key[is null];@\-- @examcom[only in Ada 2005]
 @end[Example]
 
-So if we have
-
-
+@leading@keepnext@;So if we have
 @begin[Example]
 @key[generic]
    @key[type] T @key[is] (<>);
-   @key[with procedure] R(X: @key[in] Integer; Y: @key[in out] T)
-@key[is null];
+   @key[with procedure] R(X: @key[in] Integer; Y: @key[in out] T) @key[is null];
 @key[package] PP ...
-
-
 @end[Example]
-then an instantiation omitting the parameter for @exam[R] such as
 
-
-
+@leading@;then an instantiation omitting the parameter for @exam[R] such as
 @begin[Example]
 @key[package] NPP @key[is new] PP(T => Colour);
-
-
 @end[Example]
-is equivalent to providing an actual procedure @exam[AR] thus
 
-
+@leading@;is equivalent to providing an actual procedure @exam[AR] thus
 @begin[Example]
 @key[procedure] AR(X: @key[in] Integer; Y: @key[in out] Colour) @key[is]
 @key[begin]
    @key[null];
 @key[end] AR;
-
-
 @end[Example]
+
 Note that the profile of the actual procedure is conjured up to match
 the formal procedure.
 
 Of course, there is no such thing as a null function and so null is
 not permitted as the default for a formal function.
 
-A new kind of subprogram parameter was introduced in some detail when
-discussing object factory functions in the paper on the object oriented
+@leading@;A new kind of subprogram parameter was introduced in some detail
+when discussing object factory functions in the paper on the object oriented
 model (see @RefSecNum{Object factory functions}). This is the abstract
-formal subprogram. The example given was
+formal subprogram.@Defn{abstract formal subprogram} The example given was
 the predefined generic function @exam[Generic_Dispatching_Constructor]
 thus
-
-
 @begin[Example]
 @key[generic]
    @key[type] T (<>) @key[is abstract tagged limited private];
    @key[type] Parameters (<>) @key[is limited private];
-   @key[with function] Constructor(Params: @key[not null] @key[access]
-Parameters) @key[return] T @key[is abstract];
+   @key[with function] Constructor(Params: @key[not null] @key[access] Parameters) @key[return] T @key[is abstract];
 @key[function] Ada.Tags.Generic_Dispatching_Constructor
    (The_Tag: Tag; Params: @key[not null] @key[access] Parameters) @key[return] T'Class;
-
-
 @end[Example]
+
 The formal function @exam[Constructor] is an example of an abstract
 formal subprogram. Remember that the interpretation is that the actual
 function must be a dispatching operation of a tagged type uniquely
@@ -1715,92 +1564,71 @@ can be concrete or abstract. Formal abstract subprograms can of course
 be procedures as well as functions. It is important that there is
 exactly one controlling type in the profile.
 
-Formal abstract subprograms can have defaults in much the same way
+@leading@;Formal abstract subprograms can have defaults in much the same way
 that formal concrete subprograms can have defaults. We write
-
-
 @begin[Example]
-@key[with] @key[procedure] P(X: @key[in out] T) @key[is abstract]
-<>;
+@key[with] @key[procedure] P(X: @key[in out] T) @key[is abstract] <>;
 @key[with function] F @key[return] T @key[is abstract] Unit;
-
-
 @end[Example]
+
 The first means of course that the default has to have identifier
 @exam[P] and the second means that the default is some function @exam[Unit].
 It is not possible to give null as the default for an abstract parameter
 for various reasons. Defaults will probably be rarely used for abstract
 parameters.
 
-The introduction of interfaces in Ada 2005 means that a new class
-of generic parameters is possible. Thus we might have
-
-
+@leading@;The introduction of interfaces in Ada 2005 means that a new class
+of generic parameters is possible. Thus we might have@Defn2{Term=[interface],Sec=[formal type]}
 @begin[Example]
 @key[generic]
    @key[type] F @key[is interface];
-
-
 @end[Example]
+
 The actual type could then be any interface. This is perhaps unlikely.
 
-If we wanted to ensure that a formal interface had certain operations
+@leading@;If we wanted to ensure that a formal interface had certain operations
 then we might first declare an interface @exam[A] with the required
 operations
-
-
 @begin[Example]
 @key[type] A @key[is interface];
 @key[procedure] Op1(X: A; ... ) @key[is abstract];
 @key[procedure] N1(X: A; ... ) @key[is null];
 @end[Example]
 
-and then
-
-
+@leading@keepnext@;and then
 @begin[Example]
 @key[generic]
    @key[type] F @key[is interface and ]A;
-
-
 @end[Example]
+
 and then the actual interface must be descended from @exam[A] and
 so have operations which match @exam[Op1] and @exam[N1].
 
-A formal interface might specify several ancestors
-
-
+@leading@;A formal interface might specify several ancestors
 @begin[Example]
 @key[generic]
-   @key[type] FAB @key[is interface and ]A @key[and] B;
-
-
+   @key[type] FAB @key[is interface and] A @key[and] B;
 @end[Example]
-where @exam[A] and @exam[B] are themselves interfaces. And @exam[A]
+
+@leading@;where @exam[A] and @exam[B] are themselves interfaces. And @exam[A]
 and @exam[B] or just some of them might themselves be further formal
 parameters as in
-
-
 @begin[Example]
 @key[generic]
    @key[type] A @key[is interface];
    @key[type] FAB @key[is interface and] A @key[and] B;
-
-
 @end[Example]
+
 These means that @exam[FAB] must have both @exam[A] and @exam[B] as
 ancestors; it could of course have other ancestors as well.
 
-The syntax for formal tagged types is also changed to take into account
-the possibility of interfaces. Thus we might have
-
-
+@leading@;The syntax for formal tagged types is also changed to take into
+account the possibility of interfaces. Thus we might have
 @begin[Example]
 @key[generic]
    @key[type] NT @key[is new] T @key[and] A @key[and] B @key[with private];
-
-
 @end[Example]
+
 in which case the actual type must be descended both from the tagged
 type @exam[T] and the interfaces @exam[A] and @exam[B]. The parent
 type @exam[T] itself might be an interface or a normal tagged type.
@@ -1808,40 +1636,32 @@ Again some or all of @exam[T], @exam[A], and @exam[B] might be earlier
 formal parameters. Also we can explicitly state @key[limited] in which
 case all of the ancestor types must also be limited.
 
-An example of this sort of structure occurred when discussing printable
-geometric objects in the paper on the object oriented model
+@leading@;An example of this sort of structure occurred when discussing
+printable geometric objects in the paper on the object oriented model
 (see @RefSecNum{Interfaces}). We had
-
-
 @begin[Example]
 @key[generic]
    @key[type] T @key[is abstract tagged private];
 @key[package] Make_Printable @key[is]
-   @key[type] Printable_T @key[is] @key[abstract new] T @key[and]
-Printable @key[with private];
+   @key[type] Printable_T @key[is] @key[abstract new] T @key[and] Printable @key[with private];
    ...
 @key[end];
-
-
 @end[Example]
-It might be that we have various interfaces all derived from @exam[Printable]
+
+@leading@;It might be that we have various interfaces all derived from
+@exam[Printable]
 which serve different purposes (perhaps for different output devices,
 laser printer, card punch and so on). We would then want the generic
 package to take any of these interfaces thus
-
-
 @begin[Example]
 @key[generic]
    @key[type] T @key[is abstract tagged private];
    @key[type] Any_Printable @key[is interface and] Printable;
 @key[package] Make_Printable @key[is]
-   @key[type] Printable_T @key[is] @key[abstract new] T @key[and]
-Any_Printable @key[with private];
+   @key[type] Printable_T @key[is] @key[abstract new] T @key[and] Any_Printable @key[with private];
    ...
 @key[end];
 @end[Example]
-
-*** Started here ***
 
 A formal interface can also be marked as limited in which case the
 actual interface must also be limited and vice versa.
@@ -1857,7 +1677,8 @@ interfaces can also be synchronized, task, or protected. Thus we might have
 and then the actual interface must itself be a task interface. The
 correspondence must be exact. A formal synchronized interface can
 only be matched by an actual synchronized interface and so on. Remember
-from the discussion in the previous paper that a task interface can
+from the discussion in the previous paper (see @RefSecNum{Synchronized interfaces})
+that a task interface can
 be composed from a synchronized interface. This flexibility does not
 extend to matching actual and formal generic parameters.
 
@@ -2154,7 +1975,7 @@ provide all the auxiliary parameters required by @exam[Do_That] even though we
 must already have instantiated it elsewhere in the program. Suppose the
 instantiation was
 @begin[Example]
-@key[package] That_One @key[is new] Do_That(Float, 0.01, 7, False);}
+@key[package] That_One @key[is new] Do_That(Float, 0.01, 7, False);
 @end[Example]
 
 @leading@;and suppose also that we have instantiated @exam[Do_This]

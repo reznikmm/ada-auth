@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/tasking.mss,v $)
-@comment($Revision: 1.1 $ $Date: 2006/01/27 06:40:07 $)
+@comment($Revision: 1.2 $ $Date: 2006/02/03 07:39:46 $)
 
 @LabeledSection{Tasking and Real-Time}
 
@@ -148,7 +148,7 @@ H]} which is now entitled High Integrity Systems
 
 Note that further operations for the manipulation of time in child packages of
 @exam[Calendar] (@AILink{AI=[AI95-00351-01],Text=[351]}) will be discussed with
-the predefined library in a later paper@Comment{(see ***TBD***)}.
+the predefined library in a later paper @en see @RefSecNum{Times and dates}}.
 
 
 @LabeledClause{Task termination}
@@ -231,8 +231,7 @@ If both are null then no handler is invoked.
 @leading@;The body of protected procedure @exam[Last_Gasp] might then output
 various diagnostic messages
 @begin[Example]
-@key[procedure] Last_Gasp(C: Cause_Of_Termination; T: Task_Id; X:
-Exception_Occurrence) @key[is]
+@key[procedure] Last_Gasp(C: Cause_Of_Termination; T: Task_Id; X: Exception_Occurrence) @key[is]
 @key[begin]
    @key[case] C @key[is]
       @key[when] Normal => @key[null];
@@ -947,7 +946,8 @@ or possibly a synchronized, protected or task interface.
 
 @leading@;We conclude this discussion on interfaces by saying a few words about
 the use of the word limited. (Much of this has already been explained
-in the paper on the object oriented model but it is worth repeating
+in the paper on the object oriented model (see @RefSecNum{Interfaces}) but it
+is worth repeating
 in the context of concurrent types.) We always explicitly insert limited,
 synchronized, task, or protected in the case of a limited interface
 in order to avoid confusion. So to derive a new explicitly limited
@@ -1011,7 +1011,8 @@ throne as Henry IV. Ravenscar is mentioned several times by Shakespeare
 in Act II of King Richard II; it is spelt Ravenspurg which is slightly
 confusing @en maybe we need the ability to rename profile identifiers.
 
-@leading@;A profile is a mode of operation and is specified by the pragma @exam[Profile]
+@leading@Defn{Profile pragma}@Defn2{Term=[pragma],Sec=[Profile]}@;A
+profile is a mode of operation and is specified by the pragma @exam[Profile]
 which defines the particular profile to be used. The syntax is
 @begin[Example]
 @key[pragma] Profile(@examcom[profile]_identifier [ , profile_argument_associations]);
@@ -1124,14 +1125,14 @@ object.@Defn2{Term=[restrictions identifier],Sec=[Max_Entry_Queue_Length]}
 
 The identifier @exam[No_Dependence] is not specific to the Real-Time
 Systems annex and is properly described in the next
-paper@Comment{see @RefSecNum{Pragmas and Restrictions})}.
+paper (see @RefSecNum{Pragmas and Restrictions}).
 In essence it indicates that the program does not depend upon the given
 language defined package. In this case it means that a program conforming to
 the Ravenscar profile cannot use any of the packages @exam[Asynchronous_Task_Control],
 @exam[Calendar], @exam[Execution_Time.Group_Budget],
 @exam[Execution_Time.Timers] and @exam[Task_Attributes].
-Some of these packages are new and are described later in this
-paper.@Defn2{Term=[restrictions identifier],Sec=[No_Dependence]}
+Some of these packages are new and are described later in this paper (see
+@RefSecNum{CPU clocks and timers}).@Defn2{Term=[restrictions identifier],Sec=[No_Dependence]}
 
 Note that @exam[No_Dependence] cannot be used for @exam[No_Dynamic_Attachment]
 because that would prevent use of the child package @exam[Ada.Interrupts.Names].
@@ -2125,8 +2126,10 @@ usage patterns.
 @LabeledClause{High Integrity Systems annex}
 
 There are a few changes to this annex. The most noticeable is that
-its title has been changed from Safety and Security to High Integrity
-Systems. This reflects common practice in that high-integrity is now
+its title has been changed from Safety and Security to
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-H.html],
+Text=[High Integrity Systems]}. This reflects common practice in that
+high-integrity is now
 the accepted general term for systems such as safety-critical systems
 and security-critical systems.
 

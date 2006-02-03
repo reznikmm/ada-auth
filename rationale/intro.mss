@@ -1,7 +1,7 @@
 @Part(intro, Root="rat.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/Rationale/intro.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2006/01/28 06:49:01 $}
+@comment{$Revision: 1.7 $ $Date: 2006/02/03 07:39:46 $}
 
 @LabeledSection{Introduction}
 
@@ -1356,7 +1356,7 @@ a function. This is overcome in Ada 2005 by the introduction of an
 extended form of return statement. This will be described in detail
 in a later paper (see @RefSecNum{Limited types and return statements}).
 
-@LabeledSubclause{Tasking and real-time facilities}
+@LabeledSubclause{Overview: Tasking and real-time facilities}
 
 Unless mentioned otherwise all the changes in this section concern
 the Real-Time Systems annex.
