@@ -196,6 +196,23 @@ HTML Output properties:
      ASCII equivalents will be used. In either case, explicit Unicode
      characters (@Unicode) are generated.
      The default is a version of 4Comp with Unicode = T.
+@HTMLTabs{[SingleSpace|QuadSpace|EmulateFixedOnly|EmulateFixedOnlyQuad|EmulateAll]}
+     Specifies how tabs are emulated for text.
+     (HTML does not have tabs, they have to be faked.)
+     For SingleSpace, the tabs are replaced by a single space (always).
+     For QuadSpace, the tabs are replaced by a four hard spaces (always).
+     For EmulateFixedOnly, the tabs are replaced by an appropriate number of
+     hard spaces for styles using fixed fonts (or if the tab is the first
+     character on a line); for other styles, a single space is used.
+     For EmulateFixedOnlyQuad, the tabs are replaced by an appropriate number
+     of hard spaces for styles using fixed fonts; for other styles, four hard
+     spaces are used.
+     For EmulateAll, the tabs are replaced by an appropriate number of
+     hard spaces for all styles. Note that the number of spaces is a guess
+     for non-fixed fonts, and it is unlikely that the tabbed text will line up
+     perfectly.
+     EmulateFixedOnly is the default (as the result will look correct in a
+     fixed font).
 @HTMLNavBar{RefName=[<URL>],SrchName=[<URL>],IndexName=[<URL>],
    UseButtons=[T|F],OnTop=[T|F],OnBottom=[T|F]}
      Specifies the properties of the Navigation Bar in the files.
@@ -436,7 +453,10 @@ Text commands:
 	<text> will be the body of the link, using the current formatting (no
 	formatting in <text>). The URL should be a complete URL, including
 	"http://".
-
+@AILink{AI=[<AI>],Text=[<text>]} - Generates a link to the AI specified;
+	<text> will be the body of the link, using the current formatting (no
+	formatting in <text>). The AI should be an AI number in the full
+	format (AIxx-0yyyy-zz).
 
 -- Ada specific commands:
 @nt{<text>} - A non-terminal in normal text. This will be set in a Swiss

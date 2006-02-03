@@ -200,6 +200,8 @@ package body ARM_Format is
     --		- RLB - Redid formatting command nesting so that closing
     --			restores to the initial state for the command, not the
     --			default state.
+    --  1/20/06 - RLB - Added AILink command.
+
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -460,7 +462,7 @@ package body ARM_Format is
 	-- Clause references:
 	Ref_Section, Ref_Section_Number, Ref_Section_by_Number,
 	-- Links:
-	Local_Target, Local_Link, URL_Link,
+	Local_Target, Local_Link, URL_Link, AI_Link,
 	-- Information:
 	Syntax_Rule, Syntax_Rule_RHS, Syntax_Term, Syntax_Prefix,
 	Syntax_Summary, Syntax_Xref,
@@ -753,6 +755,8 @@ package body ARM_Format is
 	    return Local_Target;
 	elsif Canonical_Name = "urllink" then
 	    return URL_Link;
+	elsif Canonical_Name = "ailink" then
+	    return AI_Link;
 	elsif Canonical_Name = "chg" then
 	    return Change;
 	elsif Canonical_Name = "chgadded" then
@@ -1541,6 +1545,80 @@ package body ARM_Format is
     end Write_Table_of_Contents;
 
 
+    function Folded_AI95_Number (AI_String : in String) return String is
+	-- Internal routine.
+	-- Calculate the "folded" AI number from the full version.
+	-- AI_String should be in the form "AIzz-00xxx-yy", where -yy, 00,
+	-- and zz are optional, and 'zz' = 95 if given.
+	Result : String(1..5);
+	Hyphen_1 : Natural := Ada.Strings.Fixed.Index (AI_String, "-");
+	Hyphen_2 : Natural;
+    begin
+        if Hyphen_1 = 0 or else AI_String'Last < Hyphen_1+3 then
+	    Result := "00001";
+	    Ada.Text_IO.Put_Line ("** Bad AI reference " & AI_String);
+	elsif Hyphen_1 = AI_String'First+4 and then
+	    AI_String(AI_String'First..Hyphen_1-1) /= "AI95" then
+	    Ada.Text_IO.Put_Line ("** AI reference for other than AI95 " & AI_String);
+	    Result := "00001";
+	elsif Hyphen_1 = AI_String'First+2 and then
+	    AI_String(AI_String'First..Hyphen_1-1) /= "AI" then
+	    Ada.Text_IO.Put_Line ("** AI reference not AI " & AI_String);
+	    Result := "00001";
+	else
+	    Hyphen_2 := Ada.Strings.Fixed.Index (AI_String(Hyphen_1+1..AI_String'Last), "-");
+	    if Hyphen_2 = 0 then
+	        if AI_String'Last = Hyphen_1+5 then
+		    Result := AI_String(Hyphen_1+1 .. Hyphen_1+5);
+	        elsif AI_String'Last = Hyphen_1+4 then
+		    Result(2..5) := AI_String(Hyphen_1+1 .. Hyphen_1+4);
+		    Result(1) := '0';
+	        elsif AI_String'Last = Hyphen_1+3 then
+		    Result(3..5) := AI_String(Hyphen_1+1 .. Hyphen_1+3);
+		    Result(1) := '0';
+		    Result(2) := '0';
+	        else
+	            Ada.Text_IO.Put_Line ("** AI reference too wrong length " & AI_String);
+	            Result := "00001";
+	        end if;
+	    else
+		if (Hyphen_2-1) - (Hyphen_1+1) = 5-1 then
+		    Result := AI_String (Hyphen_1+1 .. Hyphen_2-1);
+		elsif (Hyphen_2-1) - (Hyphen_1+1) = 4-1 then
+		    Result(2..5) := AI_String (Hyphen_1+1 .. Hyphen_2-1);
+		    Result(1) := '0';
+		elsif (Hyphen_2-1) - (Hyphen_1+1) = 3-1 then
+		    Result(3..5) := AI_String (Hyphen_1+1 .. Hyphen_2-1);
+		    Result(1) := '0';
+		    Result(2) := '0';
+		else
+		    Result := "00001";
+		    Ada.Text_IO.Put_Line ("** Bad AI reference (hyphen dist) " & AI_String);
+		end if;
+		if AI_String'Last < Hyphen_2+1 or else
+		   AI_String'Last > Hyphen_2+2 then
+	            Ada.Text_IO.Put_Line ("** Bad AI alternative reference " & AI_String);
+		elsif  AI_String'Last = Hyphen_2+1 then
+		    Result(1) := Character'Pred(AI_String(Hyphen_2+1));
+		elsif AI_String'Last = Hyphen_2+2 and then AI_String(Hyphen_2+1) = '0' then
+		    Result(1) := Character'Pred(AI_String(Hyphen_2+2));
+		elsif AI_String'Last = Hyphen_2+2 and then AI_String(Hyphen_2+1) = '1' then
+		    if AI_String(Hyphen_2+2) = '0' then
+		        Result(1) := '9';
+		    else
+		        Result(1) := Character'Val(Character'Pos(AI_String(Hyphen_2+2)) - Character'Pos('1') + Character'Pos('A'));
+		    end if;
+		elsif AI_String'Last = Hyphen_2+2 and then AI_String(Hyphen_2+1) = '2' then
+		    Result(1) := Character'Val(Character'Pos(AI_String(Hyphen_2+2)) - Character'Pos('1') + Character'Pos('A') + 10);
+	        else
+		    Ada.Text_IO.Put_Line ("** Bad AI alternative reference " & AI_String);
+	        end if;
+	    end if;
+	end if;
+	return Result;
+    end Folded_AI95_Number;
+
+
     procedure Make_References (List : in out Reference_Ptr;
 			       Format_Object : in out Format_Type;
 			       Output_Object : in out ARM_Output.Output_Type'Class) is
@@ -1548,7 +1626,6 @@ package body ARM_Format is
 	-- of Format_Object.
 	-- Deallocate the references on List; List will be null afterwards.
 	Temp : Reference_Ptr;
-	AI_Number : String(1..5);
     begin
 	-- We assume these are only stored here if we want to see them
 	-- on *this* paragraph. Thus, we just output them if they exist
@@ -1577,43 +1654,11 @@ package body ARM_Format is
 					 Text => List.Ref_Name(1..List.Ref_Len),
 					 DR_Number => List.Ref_Name(1..List.Ref_Len));
 	    else
-	        -- Calculate the "folded" AI number.
-	        declare
-		    Hyphen_1 : Natural := Ada.Strings.Fixed.Index (List.Ref_Name(1..List.Ref_Len), "-");
-		    -- Should be "AIzz-00xxx-yy", where -yy and zz are
-		    -- optional.
-	        begin
-		    if Hyphen_1 = 0 or else List.Ref_Len < Hyphen_1+5 then
-		        AI_Number := "00001";
-		        Ada.Text_IO.Put_Line ("** Bad AI reference " & List.Ref_Name(1..List.Ref_Len));
-		    elsif List.Ref_Len = Hyphen_1+5 then -- No alternative number.
-		        AI_Number := List.Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
-		    elsif List.Ref_Len < Hyphen_1+8 or else List.Ref_Name(Hyphen_1+6) /= '-' then
-		        AI_Number := List.Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
-		        Ada.Text_IO.Put_Line ("** Bad AI alternative reference " & List.Ref_Name(1..List.Ref_Len));
-		    elsif List.Ref_Name(Hyphen_1+7) = '0' then
-		        AI_Number := List.Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
-		        AI_Number(1) := Character'Pred(List.Ref_Name(Hyphen_1+8));
-		    elsif List.Ref_Name(Hyphen_1+7) = '1' then
-		        AI_Number := List.Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
-		        if List.Ref_Name(Hyphen_1+8) = '0' then
-			    AI_Number(1) := '9';
-		        else
-			    AI_Number(1) := Character'Val(Character'Pos(List.Ref_Name(Hyphen_1+8)) - Character'Pos('1') + Character'Pos('A'));
-		        end if;
-		    elsif List.Ref_Name(Hyphen_1+7) = '2' then
-		        AI_Number := List.Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
-		        AI_Number(1) := Character'Val(Character'Pos(List.Ref_Name(Hyphen_1+8)) - Character'Pos('1') + Character'Pos('A') + 10);
-		    else
-		        AI_Number := List.Ref_Name(Hyphen_1+1 .. Hyphen_1+5);
-		        Ada.Text_IO.Put_Line ("** Bad AI alternative reference " & List.Ref_Name(1..List.Ref_Len));
-		    end if;
-	        end;
-
 	        -- Output an AI reference.
 	        ARM_Output.AI_Reference (Output_Object,
 					 Text => List.Ref_Name(1..List.Ref_Len),
-					 AI_Number => AI_Number);
+					 AI_Number =>
+					     Folded_AI95_Number(List.Ref_Name(1..List.Ref_Len)));
 	    end if;
 	    ARM_Output.Text_Format (Output_Object,
 				    Bold => Format_Object.Is_Bold,
@@ -6951,7 +6996,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		        ARM_Output.Local_Target (Output_Object,
 			    Text => Text(1..Text_Len),
 			    Target => Target(1..Target_Len));
-			if Text_Len /= 0 then
+			if Text_Len /= 0 and then Text(Text_Len) /= ' ' then
 		            Format_Object.Last_Non_Space := True;
 			end if;
 		    end;
@@ -7023,7 +7068,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				    Text => Text(1..Text_Len),
 				    Target => Target(1..Target_Len),
 				    Clause_Number => Clause_Number_Text);
-				if Text_Len /= 0 then
+				if Text_Len /= 0 and then Text(Text_Len) /= ' ' then
 			            Format_Object.Last_Non_Space := True;
 				end if;
 			    end;
@@ -7077,7 +7122,55 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		        ARM_Output.URL_Link (Output_Object,
 			    Text => Text(1..Text_Len),
 			    URL => URL(1..URL_Len));
-			if Text_Len /= 0 then
+			if Text_Len /= 0 and then Text(Text_Len) /= ' ' then
+		            Format_Object.Last_Non_Space := True;
+			end if;
+		    end;
+		    -- Leave the command end marker, let normal processing
+		    -- get rid of it.
+
+		when AI_Link =>
+		    -- @AILink{AI=[<AI>],Text=[<text>]}
+		    declare
+			Close_Ch : Character;
+			AI : String(1..30);
+			AI_Len : Natural;
+			Text : String(1..100);
+			Text_Len : Natural;
+		    begin
+			ARM_Input.Check_Parameter_Name (Input_Object,
+			    Param_Name => "AI" & (3..ARM_Input.Command_Name_Type'Last => ' '),
+			    Is_First => True,
+			    Param_Close_Bracket => Close_Ch);
+			if Close_Ch /= ' ' then
+			    -- Save AI:
+			    ARM_Input.Copy_to_String_until_Close_Char (
+				Input_Object,
+				Close_Ch,
+				AI,
+				AI_Len);
+			-- else no parameter. Weird.
+			end if;
+
+			ARM_Input.Check_Parameter_Name (Input_Object,
+			    Param_Name => "Text" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+			    Is_First => False,
+			    Param_Close_Bracket => Close_Ch);
+			if Close_Ch /= ' ' then
+			    -- Save name:
+			    ARM_Input.Copy_to_String_until_Close_Char (
+				Input_Object,
+				Close_Ch,
+				Text,
+				Text_Len);
+			-- else no parameter. Weird.
+			end if;
+
+		        Check_Paragraph;
+		        ARM_Output.AI_Reference (Output_Object,
+			    Text => Text(1..Text_Len),
+			    AI_Number => Folded_AI95_Number(AI(1..AI_Len)));
+			if Text_Len /= 0 and then Text(Text_Len) /= ' ' then
 		            Format_Object.Last_Non_Space := True;
 			end if;
 		    end;
@@ -8303,7 +8396,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		     Unnumbered_Section | Subheading | Added_Subheading | Heading |
 		     Center | Right |
 		     Preface_Section | Ref_Section | Ref_Section_Number | Ref_Section_by_Number |
-		     Local_Target | Local_Link | URL_Link |
+		     Local_Target | Local_Link | URL_Link | AI_Link |
 		     Change | Change_Reference | Change_Note |
 		     Change_Added | Change_Deleted |
 		     Change_Implementation_Defined |

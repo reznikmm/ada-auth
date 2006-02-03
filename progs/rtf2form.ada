@@ -12,6 +12,8 @@ procedure Rtf2Form is
     -- Edit History:
     --
     --  1/19/06 - RLB - Created program.
+    --  1/20/06 - RLB - Changed to generate tab markers for tabs, as John
+    --			wants to preserve tabs where possible.
 
     use Ada.Strings.Unbounded;
 
@@ -131,11 +133,11 @@ procedure Rtf2Form is
 
 
     -- Stack of RTF command information:
-    type RTF_Area_Kind is (Unknown, Empty,
-			   Bold, Italic, Tab, Line_Break,
-			   Exam, ExamCom, Key); -- Type of RTF command.
+    type RTF_Group_Kind is (Unknown, Empty,
+			    Bold, Italic, Tab, Line_Break,
+			    Exam, ExamCom, Key); -- Type of RTF command.
     type Brace_Info is record
-	Kind : RTF_Area_Kind;
+	Kind : RTF_Group_Kind;
     end record;
     Brace_Info_Stack : array (1..1000) of Brace_Info;
     Current_Brace : Natural := 0;
@@ -151,11 +153,12 @@ procedure Rtf2Form is
 	-- Data:
 	Deepest_Brace_Nesting : Natural := 0;
 	Paragraphs : Natural := 0;
+	Escaped_Chars : Natural := 0;
 	EM_Dashes : Natural := 0;
 	EN_Dashes : Natural := 0;
 	Intraparagraph_Line_Breaks : Natural := 0;
 	Intraparagraph_Tabs : Natural := 0;
-	Brace_Kinds_Found : array (RTF_Area_Kind) of Natural := (others => 0);
+	Brace_Kinds_Found : array (RTF_Group_Kind) of Natural := (others => 0);
 	Styles_Found : array (Paragraph_Styles) of Natural := (others => 0);
 	procedure Close_Old_Style is
 	    -- Close the current paragraph style in preparation for a new one.
@@ -177,7 +180,7 @@ procedure Rtf2Form is
 	Ada.Text_IO.Put_Line (File, "@Part(xxx, Root=""rat.msm"")");
 	Ada.Text_IO.Put_Line (File, "");
 	Ada.Text_IO.Put_Line (File, "@comment($Source: e:\\cvsroot/ARM/Progs/rtf2form.ada,v $)");
-	Ada.Text_IO.Put_Line (File, "@comment($Revision: 1.1 $ $Date: 2006/01/20 22:49:28 $)");
+	Ada.Text_IO.Put_Line (File, "@comment($Revision: 1.2 $ $Date: 2006/01/28 06:49:32 $)");
 	Ada.Text_IO.Put_Line (File, "");
 
 	while Cursor /= null loop
@@ -202,11 +205,11 @@ procedure Rtf2Form is
 --Ada.Text_IO.Put_Line ("Possible style=" & Our_Line(Head..Tail));
 		    for I in Head .. Tail loop
 			if Our_Line(I) = '{' then
---Ada.Text_IO.Put_Line ("  NO - open area");
-			    return False; -- Starts some area, not part of a style.
+--Ada.Text_IO.Put_Line ("  NO - open group");
+			    return False; -- Starts some group, not part of a style.
 			elsif Our_Line(I) = '{' then
---Ada.Text_IO.Put_Line ("  NO - close area");
-			    return False; -- Ends some area, not part of a style.
+--Ada.Text_IO.Put_Line ("  NO - close group");
+			    return False; -- Ends some group, not part of a style.
 			elsif Our_Line(I) = ' ' then
 			    if I = Tail then
 --Ada.Text_IO.Put_Line ("  OK");
@@ -345,8 +348,8 @@ procedure Rtf2Form is
 			elsif Working+5 <= Our_Line'Last and then
 			   Our_Line(Working..Working+5) = "{\tab " then
 			    Brace_Info_Stack(Current_Brace).Kind := Tab;
-			    Ada.Text_IO.Put (File, "    ");
-			    Chars_on_Line := Chars_on_Line + 3;
+			    Ada.Text_IO.Put (File, "@\");
+			    Chars_on_Line := Chars_on_Line + 2;
 			    Last_Output := Working+5;
 --Ada.Text_IO.Put_Line("Tab Open Brace on Line" & Line_Count'Image(Cursor.Number));
 
@@ -462,7 +465,8 @@ procedure Rtf2Form is
 			end if;
 
 		    elsif Our_Line(Working) = '\' then
-			-- RTF command; see whether its interesting.
+			-- RTF control word or symbol; see whether it is
+			-- interesting.
 			if Working+5 <= Our_Line'Last and then
 			   Our_Line(Working..Working+5) = "\line " then
 			    -- Line break in a paragraph (without an open
@@ -476,15 +480,33 @@ procedure Rtf2Form is
 
 			elsif Working+4 <= Our_Line'Last and then
 			   Our_Line(Working..Working+4) = "\tab " then
-			    -- Line break in a paragraph. Output a New_line.
+			    -- Tab inside of a paragraph. Output the previous text and a tab command.
+			    -- (Note: We don't define any tabstops here; that
+			    -- will need to be done by hand as needed).
 			    Ada.Text_IO.Put (File, Our_Line(Last_Output+1..Working-1));
---Ada.Text_IO.Put_Line("Endash on Line" & Line_Count'Image(Cursor.Number) & ": output=" & Our_Line(Last_Output+1..Working));
+--Ada.Text_IO.Put_Line("Tab on Line" & Line_Count'Image(Cursor.Number) & ": output=" & Our_Line(Last_Output+1..Working));
 			    Chars_on_Line := Chars_on_Line + ((Working-1) - (Last_Output+1) + 1);
-			    Ada.Text_IO.Put (File, "    ");
-			    Chars_on_Line := Chars_on_Line + 4;
+			    Ada.Text_IO.Put (File, "@\");
+			    Chars_on_Line := Chars_on_Line + 2;
 			    Intraparagraph_Tabs := Intraparagraph_Tabs + 1;
 			    Last_Output := Working+4;
 			    Working := Last_Output + 1;
+
+			elsif Working+1 <= Our_Line'Last and then
+			   (Our_Line(Working+1) = '\' or else
+			    Our_Line(Working+1) = '{' or else
+			    Our_Line(Working+1) = '}') then
+			    -- Escaped character. Output the previous text and
+			    -- the literal character. (We have to do this to
+			    -- prevent the escaped character from being
+			    -- acted on as if it is a control or group marker).
+			    Ada.Text_IO.Put (File, Our_Line(Last_Output+1..Working-1));
+--Ada.Text_IO.Put_Line("Escaped char on Line" & Line_Count'Image(Cursor.Number) & ": output=" & Our_Line(Last_Output+1..Working));
+			    Chars_on_Line := Chars_on_Line + ((Working-1) - (Last_Output+1) + 1);
+			    Escaped_Chars := Escaped_Chars + 1;
+			    Last_Output := Working;
+			    Working := Working + 2;
+			    -- We leave the literal character in the output buffer for later writing.
 
 			elsif Working+7 <= Our_Line'Last and then
 			   Our_Line(Working..Working+7) = "\endash " then
@@ -607,10 +629,11 @@ procedure Rtf2Form is
 	Ada.Text_IO.Put_Line ("Conversion statistics:");
 	Ada.Text_IO.Put_Line ("  Total paragraphs:" & Natural'Image(Paragraphs));
 	Ada.Text_IO.Put_Line ("  Deepest nesting:" & Natural'Image(Deepest_Brace_Nesting));
-	for I in RTF_Area_Kind loop
-	    Ada.Text_IO.Put_Line ("  Kind " & RTF_Area_Kind'Image(I) &
+	for I in RTF_Group_Kind loop
+	    Ada.Text_IO.Put_Line ("  Kind " & RTF_Group_Kind'Image(I) &
 		":" & Natural'Image(Brace_Kinds_Found(I)));
 	end loop;
+	Ada.Text_IO.Put_Line ("  Escaped characters found:" & Natural'Image(Escaped_Chars));
 	Ada.Text_IO.Put_Line ("  EM Dashes found:" & Natural'Image(EM_Dashes));
 	Ada.Text_IO.Put_Line ("  EN Dashes found:" & Natural'Image(EN_Dashes));
 	Ada.Text_IO.Put_Line ("  Line breaks inside of paragraphs:" & Natural'Image(Intraparagraph_Line_Breaks));

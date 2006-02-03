@@ -57,6 +57,7 @@ package body ARM_Master is
     --			creations for the various kinds of output objects.
     --  1/12/06 - RLB - Added more commands for additional properties.
     --  1/18/06 - RLB - Added the ExampleFont command.
+    --  1/27/06 - RLB - Added HTMLTabs command.
 
     type Command_Type is (
 	-- Source commands:
@@ -76,6 +77,7 @@ package body ARM_Master is
 	Single_HTML_Output_File,
 	HTML_Kind_Command,
 	HTML_Nav_Bar,
+	HTML_Tabs,
 	HTML_Header,
 	HTML_Footer,
 	-- RTF properties:
@@ -135,6 +137,7 @@ package body ARM_Master is
     HTML_Use_Buttons : Boolean := True;
     HTML_Nav_On_Top : Boolean := True;
     HTML_Nav_On_Bottom : Boolean := True;
+    HTML_Tab_Emulation : ARM_HTML.Tab_Emulation_Type := ARM_HTML.Emulate_Fixed_Only;
     HTML_Header_Text : Ada.Strings.Unbounded.Unbounded_String; -- Empty by default.
     HTML_Footer_Text : Ada.Strings.Unbounded.Unbounded_String; -- Empty by default.
 
@@ -186,6 +189,8 @@ package body ARM_Master is
 	    return HTML_Kind_Command;
 	elsif Canonical_Name = "htmlnavbar" then
 	    return HTML_Nav_Bar;
+	elsif Canonical_Name = "htmltabs" then
+	    return HTML_Tabs;
 	elsif Canonical_Name = "htmlheader" then
 	    return HTML_Header;
 	elsif Canonical_Name = "htmlfooter" then
@@ -775,6 +780,30 @@ package body ARM_Master is
 		    --@HTMLNavBar{RefName=[<URL>],SrchName=[<URL>],UseButtons=[T|F],OnTop=[T|F],OnBottom=[T|F]}
 		    Process_HTML_Nav_Bar;
 
+		when HTML_Tabs =>
+		    -- @HTMLTabs{[SingleSpace|QuadSpace|EmulateFixedOnly|EmulateFixedOnlyQuad|EmulateAll]}
+		    declare
+			Tabs : constant String :=
+			    Ada.Characters.Handling.To_Lower (Get_Single_String);
+		    begin
+			if Tabs = "singlespace" then
+			    HTML_Tab_Emulation := ARM_HTML.Single_Space;
+			elsif Tabs = "quadspace" then
+			    HTML_Tab_Emulation := ARM_HTML.Quad_Space;
+			elsif Tabs = "emulatefixedonly" then
+			    HTML_Tab_Emulation := ARM_HTML.Emulate_Fixed_Only;
+			elsif Tabs = "emulatefixedonlyquad" then
+			    HTML_Tab_Emulation := ARM_HTML.Emulate_Fixed_Only_Quad;
+			elsif Tabs = "emulateall" then
+			    HTML_Tab_Emulation := ARM_HTML.Emulate_All;
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown tab emulation name: " & Tabs &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		        Ada.Text_IO.Put_Line("HTML Tab Emulation is " &
+			    ARM_HTML.Tab_Emulation_Type'Image(HTML_Tab_Emulation));
+		    end;
+
 		when HTML_Header =>
 		    --@HTMLHeader{<HTML_for_Header>}
 		    HTML_Header_Text := +Get_Single_String;
@@ -975,6 +1004,7 @@ package body ARM_Master is
 				     Use_Buttons => HTML_Use_Buttons,
 			             Nav_On_Top => HTML_Nav_On_Top,
 			             Nav_On_Bottom => HTML_Nav_On_Bottom,
+				     Tab_Emulation => HTML_Tab_Emulation,
 			             Header_HTML => +HTML_Header_Text,
 			             Footer_HTML => +HTML_Footer_Text,
 				     Title => Get_Versioned_Item(Document_Title,Change_Version));

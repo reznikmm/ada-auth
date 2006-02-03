@@ -128,6 +128,10 @@ package body ARM_HTML is
     --  1/19/06 - RLB - Added code so that only styles that are used are
     --		        included in the result (this decreases the minimum
     --			file size by a lot).
+    --  1/21/06 - RLB - Specified leading for Swiss example styles, because
+    --			they are too close otherwise.
+    --  1/28/06 - RLB - Changed so that button highlights are removed correctly.
+    --		- RLB - Added tab emulation settings.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -629,7 +633,7 @@ package body ARM_HTML is
 	    else
 	        Ada.Text_IO.Put (Output_Object.Output_File, "<P>");
 	    end if;
-	    Ada.Text_IO.Put (Output_Object.Output_File, "<A Class=""image"" HREF=""");
+	    Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
 	    if Output_Object.Big_Files then
 	        Ada.Text_IO.Put (Output_Object.Output_File, "#TOC");
 	    else
@@ -637,56 +641,57 @@ package body ARM_HTML is
 		    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
 		       "-TOC.html");
 	    end if;
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""cont.gif"" ALT=""Table of Contents""></A>&nbsp;");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""cont.gif"" ALT=""Table of Contents"" BORDER=0></A>&nbsp;");
+		-- Border=0 prevents the link highlight from being applied.
 	    if Ada.Strings.Unbounded.Length(Output_Object.Index_URL) /= 0 then
-	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""");
+	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A HREF=""");
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 	            Ada.Strings.Unbounded.To_String(Output_Object.Index_URL));
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""index.gif"" ALT=""Index""></A>&nbsp;");
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""index.gif"" ALT=""Index"" BORDER=0></A>&nbsp;");
 	    else -- Link to the section named "Index".
 	        begin
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
-	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A HREF=""" &
 			Make_Clause_Link_Name(Output_Object,
 			    ARM_Contents.Lookup_Clause_Number ("Index" & (6 .. ARM_Contents.Title_Type'Last => ' '))) &
-	                """><IMG SRC=""index.gif"" ALT=""Index""></A>&nbsp;");
+	                """><IMG SRC=""index.gif"" ALT=""Index"" BORDER=0></A>&nbsp;");
 	        exception
 		    when ARM_Contents.Not_Found_Error =>
 		        null; -- No section named "Index".
 	        end;
 	    end if;
 	    if Ada.Strings.Unbounded.Length(Output_Object.Ref_URL) /= 0 then
-	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""");
+	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A HREF=""");
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 	            Ada.Strings.Unbounded.To_String(Output_Object.Ref_URL));
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""lib.gif"" ALT=""References""></A>&nbsp;");
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""lib.gif"" ALT=""References"" BORDER=0></A>&nbsp;");
 	    else -- Link to the section named "References".
 	        begin
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
-	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A HREF=""" &
 		        Make_Clause_Link_Name(Output_Object,
 			    ARM_Contents.Lookup_Clause_Number ("References" & (11 .. ARM_Contents.Title_Type'Last => ' '))) &
-	                """><IMG SRC=""lib.gif"" ALT=""References""></A>&nbsp;");
+	                """><IMG SRC=""lib.gif"" ALT=""References"" BORDER=0></A>&nbsp;");
 	        exception
 		    when ARM_Contents.Not_Found_Error =>
 		        null; -- No section named "References".
 	        end;
 	    end if;
 	    if Ada.Strings.Unbounded.Length(Output_Object.Srch_URL) /= 0 then
-	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""");
+	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A HREF=""");
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 	            Ada.Strings.Unbounded.To_String(Output_Object.Srch_URL));
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""find.gif"" ALT=""Search""></A>&nbsp;");
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""find.gif"" ALT=""Search"" BORDER=0></A>&nbsp;");
 	    else -- Link to the section named "References".
 	        begin
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
-	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A HREF=""" &
 			Make_Clause_Link_Name(Output_Object,
 			    ARM_Contents.Lookup_Clause_Number ("Search" & (7 .. ARM_Contents.Title_Type'Last => ' '))) &
-	                """><IMG SRC=""find.gif"" ALT=""Search""></A>&nbsp;");
+	                """><IMG SRC=""find.gif"" ALT=""Search"" BORDER=0></A>&nbsp;");
 	        exception
 		    when ARM_Contents.Not_Found_Error =>
 		        null; -- No section named "Index".
@@ -696,10 +701,10 @@ package body ARM_HTML is
 	        begin
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
-		    Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
+		    Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A HREF=""" &
 		        Make_Clause_Link_Name (Output_Object,
 			    ARM_Contents.Previous_Clause(Clause)));
-		    Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""prev.gif"" ALT=""Previous""></A>&nbsp;");
+		    Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""prev.gif"" ALT=""Previous"" BORDER=0></A>&nbsp;");
 	        exception
 		    when ARM_Contents.Not_Found_Error =>
 		        null; -- Probably the first section.
@@ -707,10 +712,10 @@ package body ARM_HTML is
 	        begin
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
-		    Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A Class=""image"" HREF=""" &
+		    Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A HREF=""" &
 		        Make_Clause_Link_Name (Output_Object,
 			    ARM_Contents.Next_Clause(Clause)));
-		    Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""next.gif"" ALT=""Next""></A>&nbsp;");
+		    Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""next.gif"" ALT=""Next"" BORDER=0></A>&nbsp;");
 	        exception
 		    when ARM_Contents.Not_Found_Error =>
 		        null; -- Probably the last section.
@@ -909,6 +914,8 @@ package body ARM_HTML is
 		        when others => null; -- Out of range.
 		    end case;
 	    end case;
+	    -- Set the leading, because otherwise the lines are too close on IE.
+	    Ada.Text_IO.Put (Output_Object.Output_File, "; line-height: 122%");
         elsif ARM_Output."=" (Paragraph_Info(Format).Font, ARM_Output.Fixed) then
 	    -- Special case because the font otherwise gets too small and
 	    -- loses bold-facing.
@@ -1024,14 +1031,10 @@ package body ARM_HTML is
 	end if;
 
         -- Link styles:
-        if Output_Object.Use_Buttons then
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A.image:link {color: rgb(255,255,240)}"); -- This doesn't work on IE 6; we also use the
-												            --    default link colors to ensure the job gets done.
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A.image:visited {color: rgb(255,255,240)}"); -- This doesn't work on IE 6 (see above).
-	-- else used only for navigation buttons.
-	end if;
-        Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A:link {color: rgb(0,0,255)}");
-        Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A:visited {color: rgb(128,0,128)}");
+	-- We don't need these (they're given in the BODY command), but I've
+	-- kept them in case we want to change these in the future.
+        --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A:link {color: rgb(0,0,255)}");
+        --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A:visited {color: rgb(128,0,128)}");
 
 	-- Paragraph styles:
         Make_Style (Output_Object, "Normal", ARM_Output.Normal);
@@ -1206,13 +1209,7 @@ package body ARM_HTML is
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    </STYLE>");
 	end if;
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "</HEAD>");
-	if Output_Object.HTML_Kind = HTML_4_Only then
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<BODY TEXT=""#000000"" BGCOLOR=""#FFFFF0"" LINK=""#FFFFF0"" VLINK=""#FFFFF0"" ALINK=""#FF0000"">");
-	        -- Links are blank for buttons here (IE doesn't seem to pay attention
-	        -- to the A:link color for IMGs).
-	else
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<BODY TEXT=""#000000"" BGCOLOR=""#FFFFF0"" LINK=""#0000FF"" VLINK=""#800080"" ALINK=""#FF0000"">");
-	end if;
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<BODY TEXT=""#000000"" BGCOLOR=""#FFFFF0"" LINK=""#0000FF"" VLINK=""#800080"" ALINK=""#FF0000"">");
 
  	if Ada.Strings.Unbounded.Length(Output_Object.Header_HTML) /= 0 then
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File,
@@ -1306,6 +1303,7 @@ package body ARM_HTML is
 	              Use_Buttons : Boolean;
 	              Nav_On_Top : Boolean;
 	              Nav_On_Bottom : Boolean;
+		      Tab_Emulation : Tab_Emulation_Type;
 	              Header_HTML : String;
 	              Footer_HTML : String;
 		      Title : in String := "") is
@@ -1338,6 +1336,7 @@ package body ARM_HTML is
 	-- If Nav_On_Top is true, the navigation bar will appear in the header
 	-- of each page. If Nav_On_Bottom is true, the navigation bar will
 	-- appear in the footer of each page.
+	-- Tab_Emulation determines how tabs are emulated.
 	-- Header_HTML gives self-contained HTML that will appear before the
 	-- navigation bar in the header. Footer_HTML gives self-contained HTML
 	-- that will appear after the navigation bar in the footer.
@@ -1359,6 +1358,7 @@ package body ARM_HTML is
 	Output_Object.Use_Buttons := Use_Buttons;
 	Output_Object.Nav_on_Top := Nav_on_Top;
 	Output_Object.Nav_on_Bottom := Nav_on_Bottom;
+	Output_Object.Tab_Emulation := Tab_Emulation;
 	Output_Object.Header_HTML := Ada.Strings.Unbounded.To_Unbounded_String(Header_HTML);
 	Output_Object.Footer_HTML := Ada.Strings.Unbounded.To_Unbounded_String(Footer_HTML);
 
@@ -1728,7 +1728,7 @@ package body ARM_HTML is
 		-- No tabs in HTML; we'll emulate them for fixed fonts.
 		-- We'll expand proportional stops here (text characters
 		-- are larger than the variable ones these are set up for).
-		Output_Object.Emulate_Tabs :=
+		Output_Object.Can_Emulate_Tabs :=
 		    ARM_Output."=" (Paragraph_Info(Format).Font, ARM_Output.Fixed);
 		for I in 1 .. Tab_Stops.Number loop
 		    if ARM_Output."=" (Tab_Stops.Stops(I).Kind,
@@ -1761,7 +1761,7 @@ package body ARM_HTML is
 	            Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		        "Tabs in hanging/bulleted paragraph");
 		end if;
-		Output_Object.Emulate_Tabs := False;
+		Output_Object.Can_Emulate_Tabs := False;
 	end case;
 
 	if Output_Object.HTML_Kind = HTML_3 then
@@ -3850,6 +3850,8 @@ package body ARM_HTML is
 	-- Raises Not_Valid_Error if the paragraph was created with
 	-- Tab_Stops = ARM_Output.NO_TABS.
     begin
+	-- HTML does not have tabs. Emulation is not successful on proportional
+	-- fonts, so we let the user select how to do it.
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not valid object");
@@ -3865,8 +3867,46 @@ package body ARM_HTML is
 
         Output_Object.Conditional_Space := False; -- Never need a conditional space here.
         Output_Object.Last_was_Space := True; -- Treat this as a space.
-	if Output_Object.Emulate_Tabs or else
-	    (not Output_Object.Any_Nonspace) then -- Always can emulate if they're first on a line.
+	if Output_Object.Tab_Emulation = Single_Space then
+	    -- Don't emulate these, just use a single space.
+	    Output_Text (Output_Object, "&nbsp;");
+	    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+	elsif Output_Object.Tab_Emulation = Quad_Space then
+	    -- Don't emulate these, just use a single space.
+	    Output_Text (Output_Object, "&nbsp;&nbsp;&nbsp;&nbsp;");
+	    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 4;
+	elsif Output_Object.Tab_Emulation = Emulate_Fixed_Only or else
+	      Output_Object.Tab_Emulation = Emulate_Fixed_Only_Quad then
+	    if Output_Object.Can_Emulate_Tabs or else
+	        (not Output_Object.Any_Nonspace) then -- Always can emulate if they're first on a line.
+	        Output_Text (Output_Object, "&nbsp;");
+	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+	        for I in 1 .. Output_Object.Tab_Stops.Number loop
+	            if Output_Object.Tab_Stops.Stops(I).Stop >= Output_Object.Disp_Char_Count then
+		        for J in Output_Object.Disp_Char_Count+1 .. Output_Object.Tab_Stops.Stops(I).Stop loop
+		            Output_Text (Output_Object, "&nbsp;");
+		            Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+		        end loop;
+		        exit;
+	            end if;
+	        end loop; -- If we drop out without finding a tab, we just use the single
+		          -- space already written.
+	    elsif Output_Object.Tab_Emulation = Emulate_Fixed_Only then
+	        -- Put in a space.
+	        Output_Text (Output_Object, "&nbsp;");
+	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
+	        if ARM_Output."=" (Output_Object.Paragraph_Format, ARM_Output.Syntax_Summary) and then
+		    Output_Object.Column_Count > 1 then
+		    -- Special case (hack!) to make Syntax cross-reference look better:
+	            Output_Text (Output_Object, "&nbsp;&nbsp;");
+	            Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 2;
+	        end if;
+	    elsif Output_Object.Tab_Emulation = Emulate_Fixed_Only_Quad then
+	        -- Put in four hard spaces.
+	        Output_Text (Output_Object, "&nbsp;&nbsp;&nbsp;&nbsp;");
+	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 4;
+	    end if;
+	else -- Emulate all.
 	    Output_Text (Output_Object, "&nbsp;");
 	    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
 	    for I in 1 .. Output_Object.Tab_Stops.Number loop
@@ -3877,19 +3917,8 @@ package body ARM_HTML is
 		    end loop;
 		    exit;
 	        end if;
-	    end loop; -- If we drop out without finding a tab, we just use the single
-		      -- space already written.
-	else
-	    -- HTML does not have tabs. We can't even emulate them for a
-	    -- proportional font. Put in a space.
-	    Output_Text (Output_Object, "&nbsp;");
-	    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 1;
-	    if ARM_Output."=" (Output_Object.Paragraph_Format, ARM_Output.Syntax_Summary) and then
-		Output_Object.Column_Count > 1 then
-		-- Special case to make Syntax cross-reference look better:
-		    Output_Text (Output_Object, "&nbsp;&nbsp;");
-		    Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + 2;
-	    end if;
+	    end loop; -- If we drop out without finding a tab, we just use the
+		      -- single space already written.
 	end if;
     end Tab;
 

@@ -82,12 +82,24 @@ package ARM_HTML is
     --  1/12/06 - RLB - Added a number of parameters to Create.
     --  1/13/06 - RLB - Added new Link operations.
     --  1/16/06 - RLB - Added Index_URL to Create.
+    --  1/27/06 - RLB - Added Tab_Emulation.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
     type HTML_Type is (HTML_3, -- Use only HTML 3 elements.
 		       HTML_4_Compatible, -- Use HTML 4 when needed, but try to look good on old browsers.
 		       HTML_4_Only); -- Use only HTML 4 elements (no attempt to look good on old browsers).
+
+    type Tab_Emulation_Type is
+		(Single_Space,		-- Replace all tabs by a single space.
+		 Quad_Space,		-- Replace all tabs by four hard spaces.
+		 Emulate_Fixed_Only,	-- Emulate tabs in fixed font styles;
+					-- replace others by a single space.
+		 Emulate_Fixed_Only_Quad,--Emulate tabs in fixed font styles;
+					-- replace others by four hard spaces.
+		 Emulate_All);		-- Replace tabs in all styles; note that
+					-- it is unlikely that they will line
+					-- up perfectly for non-fixed fonts.
 
     procedure Create (Output_Object : in out HTML_Output_Type;
 		      Big_Files : in Boolean;
@@ -100,6 +112,7 @@ package ARM_HTML is
 	              Use_Buttons : Boolean;
 	              Nav_On_Top : Boolean;
 	              Nav_On_Bottom : Boolean;
+		      Tab_Emulation : Tab_Emulation_Type;
 	              Header_HTML : String;
 	              Footer_HTML : String;
 		      Title : in String := "");
@@ -132,6 +145,7 @@ package ARM_HTML is
 	-- If Nav_On_Top is true, the navigation bar will appear in the header
 	-- of each page. If Nav_On_Bottom is true, the navigation bar will
 	-- appear in the footer of each page.
+	-- Tab_Emulation determines how tabs are emulated.
 	-- Header_HTML gives self-contained HTML that will appear before the
 	-- navigation bar in the header. Footer_HTML gives self-contained HTML
 	-- that will appear after the navigation bar in the footer.
@@ -436,6 +450,7 @@ private
         Use_Buttons : Boolean := True;
         Nav_On_Top : Boolean := True;
         Nav_On_Bottom : Boolean := True;
+	Tab_Emulation : Tab_Emulation_Type;
         Header_HTML : Ada.Strings.Unbounded.Unbounded_String;
         Footer_HTML : Ada.Strings.Unbounded.Unbounded_String;
 
@@ -466,7 +481,7 @@ private
 	Added_Version : ARM_Contents.Change_Version_Type := '0';
 	Location : ARM_Output.Location_Type := ARM_Output.Normal;
 	Tab_Stops : ARM_Output.Tab_Info := ARM_Output.NO_TABS;
-	Emulate_Tabs : Boolean := False; -- Can we emulate tabs in the current style?
+	Can_Emulate_Tabs : Boolean := False; -- Can we emulate tabs in the current style?
 
 	Is_In_Table : Boolean := False; -- Are we processing a table?
 	In_Header : Boolean := False; -- If Is_In_Table, are we processing the header?
