@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.52 $ $Date: 2006/01/12 22:17:16 $ $Author: Randy $ }
+@comment{ $Revision: 1.53 $ $Date: 2006/02/03 07:40:46 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2006/01/12 22:17:16 $}
+@Comment{$Date: 2006/02/03 07:40:46 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -819,12 +819,22 @@ parameter.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Left and Right denote the same
 vector object, then the function returns True. If Left and Right have different
-lengths, then the function returns False. Otherwise, it compares each element
-in Left to the corresponding element in Right using the generic formal equality
-operator; if element equality returns False, then the function returns False.
-If the function has not returned a result after checking all of the elements,
-it returns True. Any exception raised during evaluation of element equality is
-propagated.]}
+lengths, then the function returns False.
+Otherwise, it compares each element in Left to
+the corresponding element in Right using the generic formal equality operator.
+If any such comparison returns False, the function returns False; otherwise it
+returns True. Any exception raised during
+evaluation of element equality is propagated.]}
+
+@begin{ImplNote}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[This wording describes the canonical semantics.
+However, the order and number of calls on the formal equality function is
+unspecified for all of the operations that use it in this package, so an
+implementation can call it as many or as few times as it needs to get the
+correct answer. Specifically, there is no requirement to call the formal
+equality additional times once the answer has been determined.]}
+@end{ImplNote}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2340,7 +2350,7 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Splice} (Container: @key{in out} List;
                      Before   : @key{in}     Cursor;
-                     Position : @key{in out} Cursor);]}
+                     Position : @key{in}     Cursor);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First} (Container : List) @key{return} Cursor;]}
@@ -2565,12 +2575,22 @@ a parameter.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Left and Right denote the same
 list object, then the function returns True. If Left and Right have different
-lengths, then the function returns False. Otherwise, it compares each element
-in Left to the corresponding element in Right using the generic formal equality
-operator; if element equality returns False, then the function returns False.
-If the function has not returned a result after checking all of the elements,
-it returns True. Any exception raised during evaluation of element equality is
-propagated.]}
+lengths, then the function returns False.
+Otherwise, it compares each element in Left to
+the corresponding element in Right using the generic formal equality operator.
+If any such comparison returns False, the function returns False; otherwise it
+returns True. It is unspecified whether all comparisons are performed if at
+least one returns False.@PDefn{unspecified} Any exception raised during
+evaluation of element equality is propagated.]}
+@begin{ImplNote}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[This wording describes the canonical semantics.
+However, the order and number of calls on the formal equality function is
+unspecified for all of the operations that use it in this package, so an
+implementation can call it as many or as few times as it needs to get the
+correct answer. Specifically, there is no requirement to call the formal
+equality additional times once the answer has been determined.]}
+@end{ImplNote}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2898,7 +2918,9 @@ Position does not equal No_Element, and does not designate a node in Source,
 then Program_Error is propagated. If Source denotes the same object as Target,
 then there is no effect if Position equals Before, else the element
 designated by Position is moved immediately prior to Before, or, if Before
-equals No_Element, after the last element. Otherwise the element
+equals No_Element, after the last element.
+In both cases, Position and the length of Target are unchanged. Otherwise the
+element
 designated by Position is removed from Source and moved to Target, immediately
 prior to Before, or, if Before equals No_Element, after the last element of
 Target. The length of Target is incremented, the length of Source is
@@ -2910,18 +2932,22 @@ decremented, and Position is updated to represent an element in Target.]}
   the element does not have to move to meet the postcondition.]}
 @end{Ramification}
 
-
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Splice (Container: @key{in out} List;
                   Before   : @key{in}     Cursor;
-                  Position : @key{in out} Cursor);]}
+                  Position : @key{in}     Cursor);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to
-Splice (Target => Container, Before => Before,
-Source => Container, Position => Position);]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is No_Element then
+Constraint_Error is propagated. If Before does not equal No_Element, and does
+not designate an element in Container, then Program_Error is propagated. If
+Position does not equal No_Element, and does not designate a node in Container,
+then Program_Error is propagated. If Position equals Before there is no effect.
+Otherwise, the element designated by Position is moved immediately prior to
+Before, or, if Before equals No_Element, after the last element. The length of
+Container is unchanged.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3538,6 +3564,15 @@ generic formal equality operator for elements).]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If the function has not returned a
 result after checking all of the keys, it returns True. Any exception raised
 during evaluation of key equivalence or element equality is propagated.]}
+@begin{ImplNote}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[This wording describes the canonical semantics.
+However, the order and number of calls on the formal equality function is
+unspecified for all of the operations that use it in this package, so an
+implementation can call it as many or as few times as it needs to get the
+correct answer. Specifically, there is no requirement to call the formal
+equality additional times once the answer has been determined.]}
+@end{ImplNote}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5262,6 +5297,15 @@ Left, the function returns False if an element equal to @i<E> (using
 the generic formal equality operator) is not present in Right. If the function
 has not returned a result after checking all of the elements, it returns True.
 Any exception raised during evaluation of element equality is propagated.]}
+@begin{ImplNote}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[This wording describes the canonical semantics.
+However, the order and number of calls on the formal equality function is
+unspecified for all of the operations that use it in this package, so an
+implementation can call it as many or as few times as it needs to get the
+correct answer. Specifically, there is no requirement to call the formal
+equality additional times once the answer has been determined.]}
+@end{ImplNote}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}

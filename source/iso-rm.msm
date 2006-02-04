@@ -7,6 +7,7 @@
 @Comment{Paragraphs are not numbered here}
 @Title{Version=[0],Text=[Ada Reference Manual]}@Comment{Same title for all versions}
 @FilePrefix{8652}
+@ExampleFont{Fixed}
 
 @Comment{RTF properties}
 @SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}
@@ -19,11 +20,13 @@
          so these settings aren't important}
 @Comment{Many small files are used, thus no @SingleHTMLOutputFile command}
 @HTMLKind{Version=[4],Unicode=[T]}
-@HTMLNavBar{RefName=[8652-STDS.html],SrchName=[8652-SRCH.html],IndexName=[8652-0-5.html],
+@HTMLNavBar{RefName=[8652-STDS.html],SrchName=[8652-SRCH.html],IndexName=[],
    UseButtons=[T],OnTop=[T],OnBottom=[T]}
+@Comment{We let the program link to the index}
+@HTMLTabs{EmulateFixedOnly}
 @HTMLHeader{<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="8652-TTL.html"><B>Legal Information</B></A></DIV>}
 @HTMLFooter{<DIV><IMG SRC="AE_logo.gif" height=100 width=113 align=right>
-<SPAN Style="vertical-align: middle">Sponsored by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada Europe</B></A></SPAN></SPAN></DIV>}
+<SPAN Style="vertical-align: middle">Sponsored by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>}
 
 @Comment{Source files and related items, in collating order}
 @Source{Name=<Title.MSS>,SectionName=<Ttl>,SectionNumber=[0],NewSection=[T]}

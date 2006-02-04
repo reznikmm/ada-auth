@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2006/01/12 22:17:12 $}
+@Comment{$Date: 2006/02/03 07:40:46 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -3253,23 +3253,13 @@ requirement.]}
 @end{ImplReq}
 
 @begin{Notes}
-No exception is ever raised by a membership test, by a predefined
-ordering operator,
-or by a predefined equality operator for an elementary type,
-but an exception can be raised by the evaluation of
-the operands. A predefined equality operator for a composite
-type can only raise an exception if the type has a tagged part
-whose primitive equals operator propagates an exception.
-
-@begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[For elementary types, if one of the operands is
-  invalid or abnormal, evaluating it might raise an exception
-  (see @RefSecNum{Data Validity}). For instance, for a floating point type,
-  comparing a signalling NaN to another value is likely to raise an exception.
-  We're not talking about cases like that; we're only talking about the test
-  or operator itself.]}
-@end{Reason}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00230-01]}
+@ChgDeleted{Version=[2],Text=[No exception is ever raised by a membership test,
+by a predefined ordering operator, or by a predefined equality operator for an
+elementary type, but an exception can be raised by the evaluation of the
+operands. A predefined equality operator for a composite type can only raise an
+exception if the type has a tagged part whose primitive equals operator
+propagates an exception.]}
 
 If a composite type has components that depend on discriminants, two values
 of this type have matching components if and only if their

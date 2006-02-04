@@ -1,9 +1,9 @@
  @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/01/17 07:20:58 $}
+@Comment{$Date: 2006/02/03 07:40:45 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.68 $}
+@Comment{$Revision: 1.69 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -671,7 +671,8 @@ tag passed is No_Tag.]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
 @ChgAdded{Version=[2],Text=[An instance of Tags.Generic_Dispatching_Constructor
 raises Tag_Error if The_Tag does not represent a concrete descendant of T or
-if the innermost master of this descendant is not also a master of the instance.
+if the innermost master (see @RefSecNum{Completion and Finalization}) of this
+descendant is not also a master of the instance.
 Otherwise, it dispatches to the primitive function denoted by the formal
 Constructor for the type identified by The_Tag, passing Params, and
 returns the result. Any exception raised by the function is propagated.]}
@@ -3697,7 +3698,7 @@ the private part; it shall not be deferred to the package body.]}
 incomplete view of a type are allowed.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
-@Chg{Version=[2],New=[A @nt{prefix}],
+@Chg{Version=[2],New=[A @nt{prefix} that denotes an object],
 Old=[A dereference (whether implicit or explicit @em see @RefSecNum(Names))]}
 shall not be of an incomplete @Chg{Version=[2],New=[view],Old=[type]}.
   @begin{Reason}
@@ -3707,6 +3708,19 @@ shall not be of an incomplete @Chg{Version=[2],New=[view],Old=[type]}.
   Dereferences used in other contexts do not pose a problem since normal type
   matching will preclude their use except when the full type is @lquotes@;nearby@rquotes@;
   as context (for example, as the expected type).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This also disallows @nt{prefix}es that are
+  directly of an incomplete view. For instance, a parameter @i{P} can be
+  declared of a tagged incomplete type, but we don't want to allow @i{P}'Size,
+  @i{P}'Alignment, or the like, as representation values aren't known for an
+  incomplete view.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[We say @lquotes@;denotes an object@rquotes
+  so that prefixes that directly name an incomplete view are not covered;
+  the previous rules cover such cases, and we certainly don't want to ban
+  Incomp'Class.]}
   @end{Reason}
 @end{Legality}
 
@@ -5123,8 +5137,8 @@ legality of 'Access didn't change for them. For example:],Old=[]}
             C1 : @key{aliased} Integer;
          @key{when} True =>
             @key{null};
-         @key{end} @key{case};
-      @key{end} @key{record};
+      @key{end} @key{case};
+   @key{end} @key{record};
 @key{type} Acc_Int @key{is access all} Integer;],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
