@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/general.mss,v $)
-@comment($Revision: 1.3 $ $Date: 2006/02/03 07:39:46 $)
+@comment($Revision: 1.4 $ $Date: 2006/02/04 06:53:42 $)
 
 @LabeledSection{Exceptions, generics etc}
 
@@ -792,7 +792,8 @@ the behaviour of the pragma @exam[Assert]. Two policies are defined
 by the language, namely, @exam[Check] and @exam[Ignore]. Further policies
 may be defined by the implementation.
 
-@leading@;There is also a package @exam[Ada.Assertions] thus
+@leading@;There is also a package @exam[Ada.Assertions]
+thus@Defn2{Term=[package],Sec=[Ada.Assertions]}@Defn{Ada.Assertions package}@Defn{Assertions package}
 @begin[Example]
 @key[package] Ada.Assertions @key[is]
    @key[pragma] Pure(Assertions);
