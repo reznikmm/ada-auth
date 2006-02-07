@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2005/12/15 02:36:35 $}
+@Comment{$Date: 2006/02/04 06:54:18 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1827,10 +1827,10 @@ derived type is the derivation class rooted at the ancestor type.]
   rhs="[[@key{abstract}] @key{tagged}] [@key{limited}] @key{private}"}
 
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00419-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00419-01],ARef=[AI95-00443-01]}
 @Syn{lhs=<formal_derived_type_definition>,
   rhs="@Chg{Version=[2],New=[
-     ],Old=[]}[@key{abstract}] @Chg{Version=[2],New=<[@key{limited}] >,Old=[]}@key{new} @Syn2{subtype_mark} [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}]>,Old=<>}@key{with} @key{private}]"}
+     ],Old=[]}[@key{abstract}] @Chg{Version=[2],New=<[@key{limited} | @key{synchronized}] >,Old=[]}@key{new} @Syn2{subtype_mark} [@Chg{Version=[2],New=<[@key{and} @Syn2{interface_list}]>,Old=<>}@key{with} @key{private}]"}
 @end{Syntax}
 
 @begin{Legality}
@@ -1845,7 +1845,7 @@ the declaration of a stand-alone variable has to provide a constraint
 on such a subtype, either explicitly, or by its initial value.
 @end{Ramification}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01],ARef=[AI95-00419-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01],ARef=[AI95-00419-01],ARef=[AI95-00443-01]}
 @Defn2{Term=[ancestor subtype], Sec=(of a formal derived type)}
 @PDefn{private extension}
 The @i(ancestor subtype) of a formal derived type is the
@@ -1858,10 +1858,15 @@ the formal derived type is a private extension of the
 ancestor type and the ancestor shall not be a class-wide
 type.
 @Redundant[Similarly, @Chg{Version=[2],New=[an @nt{interface_list} or ],Old=[]}
-the optional reserved word @key{abstract} shall
+the optional reserved @Chg{Version=[2],New=[words],Old=[word]} @key{abstract}
+@Chg{Version=[2],New=[or @key{synchronized} ],Old=[]}shall
 appear only if the ancestor type is a tagged type].@Chg{Version=[2],
-New=[ Finally, the reserved word @key{limited} shall appear only if
-the ancestor type @Redundant[and any progenitor types] are limited types.],Old=[]}
+New=[ The reserved word @key{limited} or @key{synchronized} shall appear
+only if the ancestor type @Redundant[and any progenitor types] are limited types.
+The reserved word @key{synchronized} shall appear (rather than @key{limited}) if
+the ancestor type or any of the progenitor types are
+synchronized interfaces.],Old=[]}
+
 @begin{Reason}
 We use the term @lquotes@;ancestor@rquotes@; here instead of @lquotes@;parent@rquotes@;
 because the actual can be any descendant of the ancestor,
@@ -1876,17 +1881,46 @@ was just too weird. Integer still matches a formal limited private type;
 it is only a problem when the type is known to be elementary.
 Note that the progenitors are required to be limited by rules in
 @RefSecNum{Interface Types}, thus that part of the rule is redundant.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00443-01]}
+@ChgAdded{Version=[2],Text=[We require that @key{synchronized} appear if the
+ancestor or any
+of the progenitors are synchronized, so that property is explicitly given
+in the program text @en it is not automatically inherited from the ancestors.
+However, it can be given even if neither the ancestor nor the progenitors
+are synchronized.]}
 @end{Reason}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
-@ChgAdded{Version=[2],Text=[The actual type for a generic formal derived type
-shall be a descendant of every progenitor of the formal type.]}
-@begin{Ramification}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01],ARef=[AI95-00401-01],ARef=[AI95-00443-01]}
+@ChgAdded{Version=[2],Text=[The actual type for a formal derived type
+shall be a descendant of @Redundant[the ancestor type and] every progenitor of
+the formal type. If the reserved word @key[synchronized] appears
+in the declaration of the formal derived type, the actual
+type shall be a synchronized tagged type.]}
+@begin{TheProof}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The actual type has to be a descendant of the
-  parent type, in order that it be in the correct class. So we don't have to
-  mention that explicitly.]}
-@end{Ramification}
+  ancestor type, in order that it be in the correct class. Thus, that part
+  of the rule is redundant.]}
+@end{TheProof}
+
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[For a non-formal private extension, we
+  require the partial view to be synchronized if the full view is synchronized
+  tagged. This does not apply to a formal private extension @em it is OK if
+  the formal is not synchronized. Any attempt to extend the formal
+  type will be rechecked in the instance, where the rule disallowing
+  extending a sychronized non-interface type will be enforced. This is
+  consistent with the @lquotes@;no hidden interfaces@rquotes rule also
+  applying only to non-formal private extensions, as well as the rule that
+  a limited non-formal private extension implies a limited full type.
+  Formal private extensions are exempted from all these rules to
+  enable the construction of generics that can be used with the widest
+  possible range of types. In particular, an indefinite tagged
+  limited formal private type can match any @lquotes@;concrete@rquotes
+  actual tagged type.]}
+@end{Discussion}
 
 If the formal subtype is definite, then the actual subtype shall
 also be definite.
@@ -2202,11 +2236,12 @@ run-time check to a compile-time check.
 @end{Incompatible83}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00401-01],ARef=[AI95-00419-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00401-01],ARef=[AI95-00419-01],ARef=[AI95-00443-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   A generic formal derived type can include progenitors (interfaces) as well
   as a primary ancestor. It also may include @key{limited} to indicate that
-  it is a limited type.]}
+  it is a limited type, and @key{synchronized} to indicate that it is a
+  synchronized type.]}
 @end{Extend95}
 
 @begin{DiffWord95}

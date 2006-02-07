@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/12/15 02:36:36 $}
+@Comment{$Date: 2006/02/04 06:54:18 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -28,7 +28,7 @@ be used to specify aspects of entities. Two kinds of aspects of entities can be
 specified: aspects of representation and operational aspects. Representation
 items specify how the types and other entities of the language are to be mapped
 onto the underlying machine. Operational items specify other properties of
-entities. ]]}
+entities.]]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Defn{representation item}
@@ -719,11 +719,17 @@ then inheritance does not happen for that representation item.
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00444-01]}
 @ChgAdded{Version=[1],Text=[In contrast, whether operational aspects are
-inherited by a
-derived type depends on each specific aspect. When operational aspects are
-inherited by a derived type, aspects that were directly specified before the
-declaration of the derived type, or (in the case where the parent is derived)
+inherited by @Chg{Version=[2],New=[an untagged],Old=[a]}
+derived type depends on each specific aspect.
+@Chg{Version=[2],New=[@Redundant[Operational aspects are never inherited
+for a tagged type.] ],Old=[]}When operational aspects are
+inherited by @Chg{Version=[2],New=[an untagged],Old=[a]} derived type,
+aspects that were directly specified @Chg{Version=[2],New=[by operational
+items that are visible at the point],Old=[before the declaration]} of
+the derived type@Chg{Version=[2],New=[ declaration],Old=[]}, or
+(in the case where the parent is derived)
 that were inherited by the parent type from the grandparent type are inherited.
 An inherited operational aspect is overridden by a subsequent operational item
 that specifies the same aspect of the type.]}
@@ -735,12 +741,33 @@ inheritance does not happen for that operational item.]}
 @end{Ramification}
 @begin{Discussion}
 @ChgRef{Version=[1],Kind=[Added]}
-@ChgAdded{Version=[1],Text=[Currently, only untagged types inherit operational aspects. We
-considered writing this rule that way, but rejected it as that could be too
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00444-01]}
+@ChgAdded{Version=[1],Text=[@Chg{Version=[2],New=[Only],Old=[Currently, only]}
+untagged types inherit operational aspects.
+@Chg{Version=[2],New=[Inheritance from tagged types causes problems, as the
+different views can have different visibility on operational items @em
+potentially leading to operational items that depend on the view. We want
+aspects to be the same for all views. Untagged types don't have this problem
+as plain private types don't have ancestors, and thus can't inherit anything.
+In addition, it seems unlikely that we'll need inheritance for tagged types,
+as usually we'll want to incorporate the parent's operation into a new one that
+also handles any extension components.],Old=[We considered writing this rule
+that way, but rejected it as that could be too
 specific for future operational aspects. (After all, that is precisely the
 problem that caused us to introduce @lquotes@;operational aspects@rquotes in
-the first place.)]}
+the first place.)]}]}
 @end{Discussion}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00444-01]}
+@ChgAdded{Version=[2],Text=[When an aspect that is a subprogram is inherited,
+the derived type inherits the aspect in the same way that a derived type
+inherits a user-defined primitive subprogram from its parent (see
+@RefSecNum{Derived Types and Classes}).]}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[This defines the parameter names and types,
+and the needed implicit conversions.]}
+@end{Reason}
 
 @Leading@;Each aspect of representation of an entity is as follows:
 @begin{Itemize}
@@ -1081,6 +1108,16 @@ Some of the more stringent requirements are moved to
   objects never need be supported if they would not be implementable
   without distributed overhead even if other recommended level of support
   says otherwise.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00444-01]}
+  @ChgAdded{Version=[2],Text=[Added wording so that inheritance depends on
+  whether operational items are visible rather than whether they occur before
+  the declaration (we don't want to look into private parts). Limited
+  operational inheritance to untagged types to avoid anomolies with private
+  extensions (this is not incompatible, no existing operational attribute
+  used this capability). Also added
+  wording to clearly define that subprogram inheritance works like derivation
+  of subprograms.]}
 @end{DiffWord95}
 
 

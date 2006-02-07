@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2006/01/17 07:20:58 $}
+@Comment{$Date: 2006/02/04 06:54:16 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.79 $}
+@Comment{$Revision: 1.80 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -397,10 +397,10 @@ and those will presumably be implemented in terms of dispatching).
 @Syn{lhs=<private_type_declaration>,rhs="
    @key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}] @key{is} [[@key{abstract}] @key{tagged}] [@key{limited}] @key{private};"}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00419-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00419-01],ARef=[AI95-00443-01]}
 @Syn{lhs=<private_extension_declaration>,rhs="
    @key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}] @key{is}
-     [@key{abstract}]@Chg{Version=[2],New=<[@key{limited}]>,Old=[]} @key{new} @SynI(ancestor_)@Syn2{subtype_indication}@Chg{Version=[2],New=<
+     [@key{abstract}] @Chg{Version=[2],New=<[@key{limited} | @key{synchronized}]>,Old=[]} @key{new} @SynI(ancestor_)@Syn2{subtype_indication}@Chg{Version=[2],New=<
      [@key{and} @Syn2[interface_list]]>,Old=<>} @key{with private};"}
 @end{Syntax}
 
@@ -454,12 +454,13 @@ representation item.]
 
 
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01],ARef=[AI95-00443-01]}
 @Redundant[A private type is limited if its declaration includes
 the reserved word @key[limited];
 a private extension is limited if its ancestor type is @Chg{Version=[2],
 New=[a limited type that is not an interface type, or if the reserved word
-@key{limited} appears in its definition],Old=[limited]}.]
+@key{limited} or @key{synchronized} appears in its
+definition],Old=[limited]}.]
 If the partial view is nonlimited, then
 the full view shall be nonlimited.
 If a tagged partial view is limited,
@@ -752,9 +753,12 @@ private part of an instance of a generic unit.
   @nt{generic_instantiation}s.
 @end{Reason}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01],ARef=[AI95-00443-01]}
 @ChgAdded{Version=[2],Text=[If the reserved word @key{limited} appears in a
-@nt{private_extension_declaration}, the ancestor type shall be a limited type.]}
+@nt{private_extension_declaration}, the ancestor type shall be a limited type.
+If the reserved word @key{synchronized} appears in a
+@nt{private_extension_declaration}, the ancestor type shall be a limited
+interface.]}
 
 If the declaration of a partial view includes
 a @nt{known_discriminant_part}, then
@@ -1096,6 +1100,12 @@ completely defined, unless the derived type is a private extension.
   limited type. This is required for interface ancestors (from which
   limitedness is not inherited), but it is generally useful as documentation of
   limitedness.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00443-01]}
+  @ChgAdded{Version=[2],Text=[A private extension may specify that it is a
+  synchronized type. This is required in order so that a regular limited
+  interface can be used as the ancestor of a synchronized type (we do not
+  allow hiding of synchronization).]}
 @end{Extend95}
 
 
@@ -1722,7 +1732,8 @@ make both the partial @i{and} full views limited.
     Old=[the assignment operation]} is not allowed.
   A nonlimited type is a @Chg{Version=[2],New=[],Old=[(view of a) ]}type for
   which
-  @Chg{Version=[2],New=[copying], Old=[the assignment operation]} is allowed.>}]@end{Intro}
+  @Chg{Version=[2],New=[copying], Old=[the assignment operation]} is allowed.>}
+@end{Intro}
 
 @begin{Legality}
 

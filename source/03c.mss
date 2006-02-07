@@ -1,9 +1,9 @@
  @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/02/03 07:40:45 $}
+@Comment{$Date: 2006/02/04 06:54:15 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2488,7 +2488,7 @@ derivation). In this sense, @lquotes@;interface@rquotes is similar to
 a concrete (nonabstract) indefinite tagged composite type.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@LQuotes@;Private extension@rquote@; includes
+@ChgAdded{Version=[2],Text=[@lquotes@;Private extension@rquotes@; includes
 generic formal private extensions, as explained in
 @RefSecNum{Formal Private and Derived Types}.]}
 @end{Ramification}

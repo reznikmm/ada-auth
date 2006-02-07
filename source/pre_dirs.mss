@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.24 $ $Date: 2005/12/06 06:34:05 $ $Author: Randy $ }
+@comment{ $Revision: 1.25 $ $Date: 2006/02/04 06:54:20 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2005/12/06 06:34:05 $}
+@Comment{$Date: 2006/02/04 06:54:20 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -1108,6 +1108,28 @@ Containing_Directory will always raise Use_Error.]}
 deletion of directories, then Create_Directory, Create_Path, Delete_Directory,
 and Delete_Tree will always propagate Use_Error.]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[To move a file or directory to a different
+location, use Rename. Most target systems will allow renaming of files from one
+directory to another. If the target file or directory might already exist, it
+should be deleted first.]}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[While Rename is only guaranteed to
+  work for name changes within a single directory, its unlikely that
+  implementers would purposely prevent functionality present in the underlying
+  system from working. To move a file totally portably, it's necessary to
+  handle failure of the Rename and fall back to Copy_File and Delete:]}
+@begin{Example}
+@ChgAdded{Version=[2],Text=[@key[begin]
+   Rename (Source, Target);
+@key[exception]
+   @key[when] Use_Error =>
+      Copy_File (Source, Target);
+      Delete (Source);
+@key[end];]}
+@end{Example}
+@end{Discussion}
 @end{Notes}
 
 @begin{Extend95}

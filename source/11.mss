@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2006/01/12 22:17:15 $}
+@Comment{$Date: 2006/02/04 06:54:17 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -774,7 +774,7 @@ about the exception occurrence.
 @Chg{Version=[2],New=[The returned string has lower bound 1.],Old=[]}
 @ImplDef{The information returned by Exception_Information.}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00241-01],ARef=[AI95-00329-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00241-01],ARef=[AI95-00446-01]}
 @Chg{Version=[2],New=[],Old=[Raise_Exception and ]}Reraise_Occurrence
 @Chg{Version=[2],New=[has],Old=[have]} no effect in the case of
 @Chg{Version=[2],New=[],Old=[Null_Id or ]}Null_Occurrence.
@@ -794,14 +794,14 @@ Exception_Identity(Occurrence) to Null_Id.]}
 @end{Ramification}
 
 @begin{Discussion}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00329-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00446-01]}
 @ChgAdded{Version=[2],Text=[Raise_Exception was changed so that it always
-raises an exception and thus is a No_Return procedure. A similar change was not
-made for Reraise_Occurrence, as doing so was determined to be a significant
-incompatibility. It is not unusual to pass an Exception_Occurrence to other
-code to delay raising it. If there was no exception, passing Null_Occurrence
-works fine (nothing is raised). Moreover, as there is no test for
-Null_Occurrence in Ada 95, this is the only way to write such code without
+raises an exception and thus can be a No_Return procedure. A similar change
+was not made for Reraise_Occurrence, as doing so was determined to be a
+significant incompatibility. It is not unusual to pass an Exception_Occurrence
+to other code to delay raising it. If there was no exception, passing
+Null_Occurrence works fine (nothing is raised). Moreover, as there is no test
+for Null_Occurrence in Ada 95, this is the only way to write such code without
 using additional flags. Breaking this sort of code is unacceptable.]}
 @end{Discussion}
 
@@ -1097,7 +1097,7 @@ exception contains such a character.]}
   they can be easily fixed by explicitly testing for Null_Id or by using
   Exception_Name instead.]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00446-01]}
   @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
   Raise_Exception now raises Constraint_Error if passed Null_Id. This means
   that it always raises an exception, and thus we can apply pragma No_Return to

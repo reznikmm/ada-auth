@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.68 $ $Date: 2006/02/03 07:40:46 $ $Author: Randy $ }
+@comment{ $Revision: 1.69 $ $Date: 2006/02/04 06:54:21 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2006/02/03 07:40:46 $}
+@Comment{$Date: 2006/02/04 06:54:21 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2514,16 +2514,18 @@ be changed by an assignment].]}
 
 @begin{Runtime}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
-@ChgAdded{Version=[2],Text=[If the locking policy Ceiling_Locking is in effect
+@ChgAdded{Version=[2],Text=[If the locking policy Ceiling_Locking (see
+@RefSecNum{Priority Ceiling Locking}) is in effect
 then the ceiling priority of a protected object @i<P> is set to the value of
 @i<P>'Priority at the end of each protected action of @i<P>.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00445-01]}
-@ChgAdded{Version=[2],Text=[If the locking policy Ceiling_Locking is in effect
-then, given a protected object @i<P> for which either an Attach_Handler or
-Interrupt_Handler pragma applies to one of its procedures, a check is made
+@ChgAdded{Version=[2],Text=[If the locking policy Ceiling_Locking is in effect,
+then for a protected object @i<P> with either an Attach_Handler or
+Interrupt_Handler pragma applying to one of its procedures, a check is made
 that the value to be assigned to @i<P>'Priority is in the range
-System.Interrupt_Priority. If the check fails, Program_Error is raised.]}
+System.Interrupt_Priority. If the check fails, Program_Error is
+raised.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
 @end{Runtime}
 
 @begin{Metrics}

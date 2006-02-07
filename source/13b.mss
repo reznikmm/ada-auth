@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2005/12/15 02:36:37 $}
+@Comment{$Date: 2006/02/04 06:54:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 
 @LabeledClause{The Package System}
 
@@ -2936,17 +2936,23 @@ the following attributes are defined.
 
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
-@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00434-01]}
-@ChgAdded{Version=[1],Text=[For untagged derived types, the
-@Chg{Version=[2],New=[default implementations of the ],Old=[]}Write
-and Read attributes @Chg{Version=[2],New=[],Old=[of the parent type ]}are
-inherited @Chg{Version=[2],New=[from the parent type ],Old=[]}as
-specified in
-@RefSecNum(Operational and Representation Items);
-@Chg{Version=[2],New=[for other types],Old=[otherwise]}, the default
-implementations of @Chg{Version=[2],New=[],Old=[these attributes are used.
-The default implementations of ]}Write and Read attributes execute
-as follows:]}
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00444-01]}
+@ChgAdded{Version=[1],Text=[For @Chg{Version=[2],New=[an ],Old=[]}untagged
+derived @Chg{Version=[2],New=[type],Old=[types]}, the Write
+@Chg{Version=[2],New=[(resp.],Old=[and]}
+Read@Chg{Version=[2],New=[) attribute is],Old=[ attributes are]}
+inherited @Chg{Version=[2],New=[according to the rules given],Old=[as specified]}
+in @RefSecNum(Operational and Representation Items)@Chg{Version=[2],
+New=[if the attribute is available for the parent type at the point
+where @i{T} is declared. For a tagged derived type, these attributes are
+not inherited, but rather],Old=[; otherwise,]} the default
+implementations of @Chg{Version=[2],New=[],Old=[these attributes ]}are
+used.@Chg{Version=[2],New=[],Old=[The default implementations of Write and
+Read attributes execute as follows:]}]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00444-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The default implementations of
+the Write and Read attributes, where available, execute as follows:]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01],ARef=[AI95-00251-01],ARef=[AI95-00270-01]}
@@ -3104,19 +3110,27 @@ S'Output to determine how much to read.>}
 @end{Description}
 @EndPrefixType{}
 
-@Leading@;@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
-@Chg{New=[For untagged derived types,
-@Chg{Version=[2],New=[the default implementations of ],Old=[]}the Output
-and Input attributes @Chg{Version=[2],New=[],Old=[of the parent type ]}are
-inherited @Chg{Version=[2],New=[from the parent type ],Old=[]}as
-specified in @RefSecNum(Operational and Representation Items);
-@Chg{Version=[2],New=[for other types],Old=[otherwise]}, the
-@Chg{Version=[2],New=[],Old=[default implementations of these
-attributes are used. The ]}default implementations of Output and Input
-attributes execute as follows:],
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00444-01]}
+@Chg{New=[For @Chg{Version=[2],New=[an ],Old=[]}untagged derived
+@Chg{Version=[2],New=[type],Old=[types]}, the Output
+@Chg{Version=[2],New=[(resp.],Old=[and]} Input@Chg{Version=[2],New=[) attribute
+is],Old=[attributes of the parent type are]}
+inherited @Chg{Version=[2],New=[according to the rules given],
+Old=[as specified]} in
+@RefSecNum(Operational and Representation Items)@Chg{Version=[2],
+New=[ if the attribute is available for the parent type at point where @i{T}
+is declared. For a tagged derived type, these attributes are not
+inherited, but rather],Old=[; otherwise]}, the default
+implementations@Chg{Version=[2],New=[],Old=[ of these
+attributes]} are used.@Chg{Version=[2],New=[],Old=[ The default implementations of
+Output and Input attributes execute as follows:]}],
 Old=[Unless overridden by an @nt<attribute_definition_clause>, these
 subprograms execute as follows:]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00444-01]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[The default implementations of the
+Output and Input attributes, where available, execute as follows:]}
 @begin(Itemize)
 If @i(T) is an array type, S'Output first writes the bounds,
 and S'Input first reads the bounds.
@@ -3354,6 +3368,16 @@ extension components.]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[In this case, the language provides a
   well-defined default implementation, which we want to be able to call.]}
+@end{Reason}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@i{T} is a limited untagged derived type, and the
+attribute was inherited for the type.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[Attributes are only inherited for
+  untagged derived types, and surely we want to be able to call
+  inherited attributes.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3618,7 +3642,7 @@ class-wide types descended from S.
   also was changed; this is not incompatible because @ImplAdviceTitle does
   not have to be followed.]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0040],ARef=[AI95-00108-01],ARef=[AI95-00195-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0040],ARef=[AI95-00108-01],ARef=[AI95-00195-01],ARef=[AI95-00444-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Limited types may have default
   constructed attributes if all of the parent and (for extensions) extension
   components have available attributes. Ada 2005 adds the notion of
@@ -3676,6 +3700,12 @@ class-wide types descended from S.
   because mode conformance is required for subprograms specified as
   stream attributes, and @nt{null_exclusion}s are not considered for
   mode conformance.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00444-01]}
+  @ChgAdded{Version=[2],Text=[Improved the wording to make it clear that
+  we don't define the default implementations of attributes that cannot be
+  called (that is, aren't available). Also clarified when inheritance takes
+  place.]}
 @end{DiffWord95}
 
 
