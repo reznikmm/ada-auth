@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.25 $ $Date: 2006/02/04 06:54:20 $ $Author: Randy $ }
+@comment{ $Revision: 1.26 $ $Date: 2006/02/09 07:54:41 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2006/02/04 06:54:20 $}
+@Comment{$Date: 2006/02/09 07:54:41 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -383,6 +383,17 @@ is propagated if the external environment does not support the renaming of the
 file with the given name (in the absence of Name_Error). In particular,
 Use_Error is propagated if a file or directory already exists with name
 New_Name.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This operation is expected to work within a
+  a single directory, and implementers are encouraged to support it across
+  directories on a single device. Copying files from one device to another
+  is discouraged (that's what Copy_File is for). However, there is no
+  requirement to detect file copying by the target system. If the target
+  system has an API that gives that for @lquotes@;free@rquotes, it can be
+  used. For Windows, for instance, MoveFile can be used to implement Rename.]}
+@end{ImplNote}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Copy_File (Source_Name,

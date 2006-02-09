@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.69 $ $Date: 2006/02/04 06:54:21 $ $Author: Randy $ }
+@comment{ $Revision: 1.70 $ $Date: 2006/02/09 07:54:42 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2006/02/04 06:54:21 $}
+@Comment{$Date: 2006/02/09 07:54:42 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2544,8 +2544,6 @@ calls to the following procedures in protected object P:]}
 @ChgAdded{Version=[2],Text=[@key<protected> P @key<is>
    @key<procedure> Do_Not_Set_Ceiling (Pr : System.Any_Priority);
    @key<procedure> Set_Ceiling (Pr : System.Any_Priority);
-@key<private>
-   @key<null>;
 @key<end> P;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}

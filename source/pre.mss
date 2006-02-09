@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2005/08/19 06:37:28 $}
+@Comment{$Date: 2006/02/09 07:54:41 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.30 $}
+@comment{$Revision: 1.31 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -27,7 +27,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @begin{TwoCol}
 @Noparanum@redundant[@shrink<Standard @em @RefSecNum{The Package Standard}
 @\Ada @em @RefSecNum{The Package Ada}
-@\@\Asynchronous_Task_Control @em @RefSecNum{Asynchronous Task Control}
+@Chg{Version=[2],New=(@\@\Assertions @em @RefSecNum{Pragmas Assert and Assertion_Policy}
+), Old=()}@\@\Asynchronous_Task_Control @em @RefSecNum{Asynchronous Task Control}
 @\@\Calendar @em @RefSecNum{Delay Statements, Duration, and Time}
 @Chg{Version=[2],New=(@\@\@\Arithmetic @em @RefSecNum{Formatting, Time Zones, and other operations for Time}
 @\@\@\Formatting @em @RefSecNum{Formatting, Time Zones, and other operations for Time}

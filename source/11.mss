@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2006/02/04 06:54:17 $}
+@Comment{$Date: 2006/02/09 07:54:39 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.60 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -346,7 +346,8 @@ as explained in @RefSecNum{Exception Handling}].
 For the execution of a @nt{raise_statement} with an
 @SynI{exception_}@nt{name}, the named exception is raised.
 @Chg{Version=[2],New=[@redundant{If a @SynI<string_>@nt<expression> is present,
-the value of the @nt{expression} is associated with the exception occurrence.}],Old=[]}
+the @nt{expression} is evaluated and its value is associated with the
+exception occurrence.}],Old=[]}
 @PDefn2{Term=[execution], Sec=(re-raise statement)}
 For the execution of a re-raise statement,
 the exception occurrence that caused transfer of control to the
