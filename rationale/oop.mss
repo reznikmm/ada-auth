@@ -1,7 +1,7 @@
 @Part(oop, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/oop.mss,v $)
-@comment($Revision: 1.4 $ $Date: 2006/02/03 07:39:47 $)
+@comment($Revision: 1.5 $ $Date: 2006/02/07 07:47:52 $)
 
 @LabeledSection{Object oriented model}
 
@@ -2009,7 +2009,8 @@ will be returned by @exam[Decode] and this will cause @exam[Make_Object] to
 raise @exam[Tag_Error].
 
 A more elegant registration system could be easily implemented using
-the container library which will be described in a later paper.@Comment{ *** Ref TBD - entire container section}
+the container library which will be described in a later paper (see
+@RefSecNum{Containers}).
 
 Note that any instance of @exam[Generic_Dispatching_Constructor]
 checks that the tag passed as parameter is indeed that of a type descended

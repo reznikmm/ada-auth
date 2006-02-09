@@ -1,7 +1,7 @@
 @Part(intro, Root="rat.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/Rationale/intro.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2006/02/03 07:39:46 $}
+@comment{$Revision: 1.8 $ $Date: 2006/02/07 07:47:51 $}
 
 @LabeledSection{Introduction}
 
@@ -2200,7 +2200,7 @@ types.
 
 It is hoped that the above list gives a flavour of the capability of the
 package @exam[Containers]. Some examples of the use of the facilities will be
-given in a later paper.@Comment{** Ref TBD - entire containers section}
+given in a later paper (see @RefSec{Containers}).
 
 Finally, there are further packages for manipulating times (that is
 of type @exam[Ada.Calendar.Time] and not @exam[Ada.Real_Time.Time]

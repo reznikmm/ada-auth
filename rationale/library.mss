@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/library.mss,v $)
-@comment($Revision: 1.2 $ $Date: 2006/02/04 06:53:44 $)
+@comment($Revision: 1.3 $ $Date: 2006/02/07 07:47:51 $)
 
 @LabeledSection{Predefined library}
 
@@ -153,7 +153,7 @@ exclusion (@AILink{AI=[AI95-00441-01],Text=[441]}).
 
 
 This is a huge addition to the language and is described in a separate
-paper@Comment{ (see @RefSecNum{*** TBD - containers ***})} for convenience.
+paper (see @RefSecNum{Containers}) for convenience.
 
 
 @LabeledClause{Times and dates}
@@ -538,7 +538,7 @@ It decomposes a value of type @exam[Duration] into @exam[Hour], @exam[Minute],
 @begin[Example]
 @tabset[P42]
 Split(Some_Time, Y, M, D, Secs);@\-- @examcom[split time]
-Split(Secs, H, M, S, SS);@\@\-- @examcom[split secs]
+Split(Secs, H, M, S, SS);@\-- @examcom[split secs]
 @end[Example]
 
 The next procedure @exam[Split] (no 2) takes a @exam[Time] and a
@@ -672,7 +672,7 @@ function available in their operating system it is also allowed to produce
 @exam[Duration] thus
 @begin[Example]
 @tabset[P35]
-Image(10_000.0)\@\-- @examcom["02:46:40"]
+Image(10_000.0)@\-- @examcom["02:46:40"]
 @end[Example]
 
 with the optional parameter @exam[Include_Time_Fraction] as before.
@@ -1153,59 +1153,46 @@ mathematical programs in a more natural notation thus
 Circumference: Float := 2.0 * @Pi * Radius;
 @end[Example]
 
-*** Stopped here ***
-
-Other examples might be for describing polar coordinates thus
-
-
+@leading@;Other examples might be for describing polar coordinates thus
 @begin[Example]
 R: Float := Sqrt(X*X + Y*Y);
-{\f3 \'71}: Angle := Arctan(Y, X);
+@unicode(952): Angle := Arctan(Y, X);
 
 
 @end[Example]
-and of course in France we can now declare a decent set of ingredients
+
+@leading@;and of course in France we can now declare a decent set of ingredients
 for breakfast
-
-
 @begin[Example]
-@key[type] Breakfast_Stuff @key[is] (Croissant, Caf{\'e9}, {\'8c}uf,
-Beurre);
-
-
+@key[type] Breakfast_Stuff @key[is] (Croissant, Caf@latin1(233), @unicode(338)uf, Beurre);
 @end[Example]
-Curiously, although the ligature @exam[\'e6] is in Latin-1 and thus
-available in Ada 95 in identifiers, the ligature @exam[\'9c] is not
-(for reasons we need not go into). However, in Ada 95, @exam[\'9c
-]is a character of the type @exam[Wide_Character] and so even in Ada
+
+@leading@;Curiously, although the ligature @exam[@latin1(230)] is in Latin-1 and thus
+available in Ada 95 in identifiers, the ligature @exam[@unicode(339)] is not
+(for reasons we need not go into). However, in Ada 95, @exam[@unicode(339)]
+is a character of the type @exam[Wide_Character] and so even in Ada
 95 one can order breakfast thus
-
-
 @begin[Example]
-Put("Deux {\'9c}ufs easy-over avec jambon");@\@\ -- @examcom[wide
-string]
-
-
+@tabset[P49]
+Put("Deux @unicode(339)ufs easy-over avec jambon");@\ -- @examcom[wide string]
 @end[Example]
-In order to manipulate 32-bit characters, Ada 2005 includes types
+
+@leading@;In order to manipulate 32-bit characters, Ada 2005 includes types
 @exam[Wide_Wide_Character] and @exam[Wide_Wide_String] in the package
 @exam[Standard] and the appropriate operations to manipulate them
-in packages such as
-
-
+in packages such as@Defn{Wide_Wide_Character}@Defn{Wide_Wide_String}
 @begin[Example]
 Ada.Strings.Wide_Wide_Bounded
-Ada.Strings.Wide_Wide_Fixed
+Ada.Strings.Wide_Wide_Fixed@Defn2{Term=[package],Sec=[Ada.Strings.Wide_Wide_Fixed]}@Defn{Ada.Strings.Wide_Wide_Fixed package}@Defn{Strings.Wide_Wide_Fixed package}
 Ada.Strings.Wide_Wide_Maps
 Ada.Strings.Wide_Wide_Maps.Wide_Wide_Constants
 Ada.Strings.Wide_Wide_Unbounded
-Ada.Wide_Wide_Text_IO
+Ada.Wide_Wide_Text_IO@Defn2{Term=[package],Sec=[Ada.Wide_Wide_Text_IO]}@Defn{Ada.Wide_Wide_Text_IO package}@Defn{Wide_Wide_Text_IO package}
 Ada.Wide_Wide_Text_IO.Text_Streams
 Ada.Wide_Wide_Text_IO.Complex_IO
 Ada.Wide_Wide_Text_IO.Editing
-
-
 @end[Example]
+
 There are also new attributes @exam[Wide_Wide_Image], @exam[Wide_Wide_Value]
 and @exam[Wide_Wide_Width] and so on.
 
@@ -1217,33 +1204,31 @@ Conversions] has been added. This contains conversions in all combinations
 between @exam[Character], @exam[Wide_Character] and @exam[Wide_Wide_Character]
 and similarly for strings. The existing functions from @exam[Is_Character]
 to @exam[To_Wide_String] in @exam[Ada.Characters.Handling] have been
-banished to Annex J.
+banished to
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-J-14.html],Text=[Annex J]}.
 
 The introduction of more complex writing systems makes the definition
 of the case insensitivity of identifiers, (the equivalence between
 upper and lower case), much more complicated.
 
-In some systems, such as the ideographic system used by Chinese, Japanese
-and Korean, there is only one case, so things are easy. But in other
+@leading@;In some systems, such as the ideographic system used by Chinese,
+Japanese and Korean, there is only one case, so things are easy. But in other
 systems, like the Latin, Greek and Cyrillic alphabets, upper and lower
 case characters have to be considered. Their equivalence is usually
 straightforward but there are some interesting exceptions such as
 
+@begin[Itemize]
+Greek has two forms for lower case sigma (the normal
+form @unicode(963) and the final form @unicode(962) which is used at the
+end of a word). These both convert to the one upper case letter @unicode(931).
 
-@begin[Description]
-{\u9642\'3f@\Greek has two forms for lower case sigma (the normal
-form }{\f3 \'73} and the final form {\f3 \'56} which is used at the
-end of a word). These both convert to the one upper case letter {\f3
-\'53}.
-
-\u9642\'3f@\German has the lower case letter \'df whose upper case
+German has the lower case letter @latin1(223) whose upper case
 form is made of two letters, namely SS.
 
-\u9642\'3f@\Slovenian has a grapheme LJ which is considered a single
+Slovenian has a grapheme LJ which is considered a single
 letter and has three forms: LJ, Lj and lj.
+@end[Itemize]
 
-
-@end[Description]
 The Greek situation used to apply in English where the long s was
 used in the middle of words (where it looked like an f but without
 a cross stroke) and the familiar short s only at the end. To modern
@@ -1262,30 +1247,31 @@ in the Introduction, Ada 95 requires rather too many conversions between
 bounded and unbounded strings and the raw type @exam[String] and,
 moreover, multiple searching is inconvenient.
 
-The additional subprograms in the packages are as follows.
+@leading@;The additional subprograms in the packages are as follows.
 
-In the package @exam[Ada.Strings.Fixed ](assuming @key[use]@exam[
-Maps;] for brevity)@exam[
-
-]
+In the package @exam[Ada.Strings.Fixed] (assuming @key[use] @exam[Maps;]
+for brevity)
 @begin[Example]
-@key[function] Index(Source: String; Pattern: String;
-@\@\From: Positive; Going: Direction := Forward;
-@\@\Mapping: Character_Mapping := Identity) @key[return] Natural;
+@key[function] Index(
+      Source: String; Pattern: String;
+      From: Positive; Going: Direction := Forward;
+      Mapping: Character_Mapping := Identity) @key[return] Natural;
 
-@key[function] Index(Source: String; Pattern: String;
-@\@\From: Positive; Going: Direction := Forward;
-@\@\Mapping: Character_Mapping_Function) @key[return] Natural;
+@key[function] Index(
+      Source: String; Pattern: String;
+      From: Positive; Going: Direction := Forward;
+      Mapping: Character_Mapping_Function) @key[return] Natural;
 
-@key[function] Index(Source: String; Set: Character_Set;
-@\@\From: Positive; Test: Membership := Inside;
-@\@\Going: Direction := Forward) @key[return] Natural;
+@key[function] Index(
+      Source: String; Set: Character_Set;
+      From: Positive; Test: Membership := Inside;
+      Going: Direction := Forward) @key[return] Natural;
 
-@key[function] Index_Non_Blank(Source: String;
-@\@\From: Positive; Going: Direction := Forward) @key[return] Natural;
-
-
+@key[function] Index_Non_Blank(
+      Source: String;
+      From: Positive; Going: Direction := Forward) @key[return] Natural;
 @end[Example]
+
 The difference between these and the existing functions is that these
 have an additional parameter @exam[From]. This makes it much easier
 to search for all the occurrences of some pattern in a string.
@@ -1293,89 +1279,79 @@ to search for all the occurrences of some pattern in a string.
 Similar functions are also added to the packages @exam[Ada.Strings.Bounded]
 and @exam[Ada.Strings.Unbounded].
 
-Thus suppose we want to find all the occurrences of @exam["bar"] in
+@leading@;Thus suppose we want to find all the occurrences of @exam["bar"] in
 the string @exam["barbara barnes"] held in the variable @exam[BS]
 of type @exam[Bounded_String]. (I have put my wife into lower case
 for convenience.) There are 3 of course. The existing function @exam[Count]
 can be used to determine this fact quite easily
-
-
 @begin[Example]
-N := Count(BS, "bar")@\@\@\-- @examcom[is 3]
+@tabset[P35]
+N := Count(BS, "bar")@\-- @examcom[is 3]
 @end[Example]
 
-But we really need to know where they are; we want the corresponding
+@leading@;But we really need to know where they are; we want the corresponding
 index values. The first is easy in Ada 95
-
-
 @begin[Example]
-I := Index(BS, "bar")@\@\@\-- @examcom[is 1]
+@tabset[P35]
+I := Index(BS, "bar")@\-- @examcom[is 1]
 @end[Example]
 
-But to find the next one in Ada 95 we have to do something such as
+@leading@;But to find the next one in Ada 95 we have to do something such as
 take a slice by removing the first three characters and then search
 again. This would destroy the original string so we need to make a
 copy of at least part of it thus
 @begin[Example]
-Part := Delete(BS, I, I+2);@\@\@\-- @examcom[2 is length "bar" @en 1]
-I := Index(Part, "bar") + 3;@\@\@\-- @examcom[is 4]
+@tabset[P35]
+Part := Delete(BS, I, I+2);@\-- @examcom[2 is length "bar" @en 1]
+I := Index(Part, "bar") + 3;@\-- @examcom[is 4]
 @end[Example]
 
-and so on in the not-so-obvious loop. (There are other ways such as
+@leading@;and so on in the not-so-obvious loop. (There are other ways such as
 making a complete copy first, this could either be in another bounded
 string or perhaps it is simplest just to copy it into a normal @exam[String]
 first; but whatever we do it is messy.) In Ada 2005, having found
 the index of the first in @exam[I], we can find the second by writing
-
-
 @begin[Example]
 I := Index(BS, "bar", From => I+3);
 @end[Example]
 
 and so on. This is clearly much easier.
 
-The following are also added to @exam[Ada.Strings.Bounded]
-
-
+@leading@;The following are also added to @exam[Ada.Strings.Bounded]
 @begin[Example]
-@key[procedure] Set_Bounded_String(Target: @key[out] Bounded_String;
-@\@\Source: @key[in] String; Drop: @key[in] Truncation := Error);
+@key[procedure] Set_Bounded_String(
+      Target: @key[out] Bounded_String;
+      Source: @key[in] String; Drop: @key[in] Truncation := Error);
 
-@key[function] Bounded_Slice(Source: Bounded_String;
-@\@\Low: Positive; High: Natural) @key[return] Bounded_String;
+@key[function] Bounded_Slice(
+      Source: Bounded_String;
+      Low: Positive; High: Natural) @key[return] Bounded_String;
 
-@key[procedure] Bounded_Slice(Source: @key[in] Bounded_String;
-@\@\Target: @key[out] Bounded_String;
-@\@\Low: @key[in] Positive; High: @key[in] Natural);
-
-
+@key[procedure] Bounded_Slice(
+      Source: @key[in] Bounded_String;
+      Target: @key[out] Bounded_String;
+      Low: @key[in] Positive; High: @key[in] Natural);
 @end[Example]
-The procedure @exam[Set_Bounded_String] is similar to the existing
+
+@leading@;The procedure @exam[Set_Bounded_String] is similar to the existing
 function @exam[To_Bounded_String]. Thus rather than
-
-
 @begin[Example]
 BS := To_Bounded_String("A Bounded String");
-
-
 @end[Example]
-we can equally write
 
-
+@leading@;we can equally write
 @begin[Example]
 Set_Bounded_String(BS, "A Bounded String");
-
-
 @end[Example]
-The slice subprograms avoid conversion to and from the type @exam[String].
-Thus to extract the characters from 3 to 9 we can write
 
-
+@leading@;The slice subprograms avoid conversion to and from the type
+@exam[String]. Thus to extract the characters from 3 to 9 we can write
 @begin[Example]
-BS := Bounded_Slice(BS, 3, 9);@\@\@\-- @examcom["Bounded"]
+@tabset[P35]
+BS := Bounded_Slice(BS, 3, 9);@\-- @examcom["Bounded"]
 @end[Example]
 
-whereas in Ada 95 we have to write something like
+@leading@;whereas in Ada 95 we have to write something like
 
 @begin[Example]
 BS := To_Bounded(Slice(BS, 3, 9));
@@ -1387,14 +1363,12 @@ with controlled types and the use of a procedure such as @exam[Set_Unbounded_Str
 is much more efficient than the function @exam[To_Unbounded_String]
 because it avoids assignment and thus calls of @exam[Adjust].
 
-Input and output of bounded and unbounded strings in Ada 95 can only
+@leading@;Input and output of bounded and unbounded strings in Ada 95 can only
 be done by converting to or from the type @exam[String]. This is both
 slow and untidy. This problem is particularly acute with unbounded
 strings and so Ada 2005 provides the following additional package
 (we have added a use clause for brevity as
 usual)@Defn2{Term=[package],Sec=[Ada.Text_IO.Unbounded_IO]}@Defn{Ada.Text_IO.Unbounded_IO package}@Defn{Unbounded_IO package}
-
-
 @begin[Example]
 @key[with] Ada.Strings.Unbounded;  @key[use] Ada.Strings.Unbounded;
 @key[package] Ada.Text_IO.Unbounded_IO @key[is]
@@ -1402,21 +1376,18 @@ usual)@Defn2{Term=[package],Sec=[Ada.Text_IO.Unbounded_IO]}@Defn{Ada.Text_IO.Unb
    @key[procedure] Put(File: @key[in] File_Type; Item: @key[in] Unbounded_String);
    @key[procedure] Put(Item: @key[in] Unbounded_String);
 
-   @key[procedure] Put_Line(File: @key[in] File_Type; Item: @key[in]
-Unbounded_String);
+   @key[procedure] Put_Line(File: @key[in] File_Type; Item: @key[in] Unbounded_String);
    @key[procedure] Put_Line(Item: @key[in] Unbounded_String);
 
    @key[function] Get_Line(File: File_Type) @key[return] Unbounded_String;
    @key[function] Get_Line @key[return ]Unbounded_String;
 
-   @key[procedure] Get_Line(File: @key[in] File_Type; Item: @key[out]
-Unbounded_String);
+   @key[procedure] Get_Line(File: @key[in] File_Type; Item: @key[out] Unbounded_String);
    @key[procedure] Get_Line(Item: @key[out] Unbounded_String);
 
 @key[end] Ada.Text_IO.Unbounded_IO;
-
-
 @end[Example]
+
 The behaviour is as expected.
 
 There is a similar package for bounded strings but it is generic.
@@ -1424,16 +1395,12 @@ It has to be generic because the package @exam[Generic_Bounded_Length]
 within @exam[Strings.Bounded] is itself generic and has to be instantiated
 with the maximum string size. So the specification
 is@Defn2{Term=[package],Sec=[Ada.Text_IO.Bounded_IO]}@Defn{Ada.Text_IO.Bounded_IO package}@Defn{Bounded_IO package}
-
-
 @begin[Example]
-@key[with] Ada.Strings.Bounded;  @key[use] Ada.Strings.Bounded;{\expnd0\expndtw-4
-
-}@key[generic]{\expnd0\expndtw-4
-   }@key[with package]{\expnd0\expndtw-4  Bounded }@key[is new]{\expnd0\expndtw-4
- Generic_Bounded_Length(<>);
-   }@key[use]{\expnd0\expndtw-4  Bounded;
-}@key[package] Ada.Text_IO.Bounded_IO @key[is]
+@key[with] Ada.Strings.Bounded;  @key[use] Ada.Strings.Bounded;
+@key[generic]
+   @key[with package] Bounded @key[is new] Generic_Bounded_Length(<>);
+   @key[use] Bounded;
+@key[package] Ada.Text_IO.Bounded_IO @key[is]
 
    @key[procedure] Put(File: @key[in] File_Type; Item: @key[in] Bounded_String);
    @key[procedure] Put(Item: @key[in] Bounded_String);
@@ -1441,31 +1408,27 @@ is@Defn2{Term=[package],Sec=[Ada.Text_IO.Bounded_IO]}@Defn{Ada.Text_IO.Bounded_I
 ... -- @examcom[etc as for Unbounded_IO]
 
 @key[end] Ada.Text_IO.Bounded_IO;
-
-
 @end[Example]
+
 It will be noticed that these packages include functions @exam[Get_Line]
 as well as procedures @exam[Put_Line] and @exam[Get_Line] corresponding
 to those in @exam[Text_IO]. The reason is that procedures @exam[Get_Line]
 are not entirely satisfactory.
 
-If we do successive calls of the procedure @exam[Text_IO].@exam[Get_Line]
+If we do successive calls of the procedure @exam[Text_IO.Get_Line]
 using a string of length 80 on a series of lines of length 80 (we
 are reading a nice old deck of punched cards), then it does not work
 as expected. Alternate calls return a line of characters and a null
 string (the history of this behaviour goes back to early Ada 83 days
 and is best left dormant).
 
-Ada 2005 accordingly adds corresponding functions @exam[Get_Line]
+@leading@;Ada 2005 accordingly adds corresponding functions @exam[Get_Line]
 to the package @exam[Ada.Text_IO] itself thus
-
-
 @begin[Example]
 @key[function] Get_Line(File: File_Type) @key[return] String;
 @key[function] Get_Line @key[return] String;
-
-
 @end[Example]
+
 Successive calls of a function @exam[Get_Line] then neatly return
 the text on the cards one by one without bother.
 
@@ -1478,77 +1441,74 @@ at length over what features should be included in Ada 95 itself,
 what should be placed in secondary standards, and what should be left
 to the creativeness of the user community.
 
-A number of secondary standards had been developed for Ada 83. They
+@leading@;A number of secondary standards had been developed for Ada 83. They
 were
-
-
 @begin[Description]
-11430\u8194\'20\u8194\'20Generic package of elementary functions for
-Ada,
+11430@\Generic package of elementary functions for Ada,
 
-11729\u8194\'20\u8194\'20Generic package of primitive functions for
-Ada,
+11729@\Generic package of primitive functions for Ada,
 
-13813\u8194\'20\u8194\'20Generic package of real and complex type
-declarations and basic operations for Ada (including vector and matrix
-types),
+13813@\Generic package of real and complex type
+declarations and basic operations for Ada (including vector and matrix types),
 
-13814\u8194\'20\u8194\'20Generic package of complex elementary functions
-for Ada.
-
-
+13814@\Generic package of complex elementary functions for Ada.
 @end[Description]
+
 The first two, 11430 and 11729, were incorporated into the Ada 95
 core language. The elementary functions, 11430, (@exam[Sqrt], @exam[Sin],
 @exam[Cos] etc) became the package @exam[Ada.Numerics.Generic_Elementary_
-Functions] in A.5.1, and the primitive functions, 11729, became the
+Functions] in
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/A-5-1.html],Text=[A.5.1]},
+and the primitive functions, 11729, became the
 various attributes such as @exam[Floor], @exam[Ceiling], @exam[Exponent]
-and @exam[Fraction] in A.5.3. The original standards were withdrawn
-long ago.
+and @exam[Fraction] in
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/A-5-3.html],Text=[A.5.3]}.
+The original standards were withdrawn long ago.
 
 The other two standards, although originally developed as Ada 83 standards
 did not become finally approved until 1998.
 
 In the case of 13814, the functionality was all incorporated into
-the Numerics annex of Ada 95 as the package @exam[Ada.Numerics.Generic_Complex_Elementary_Functions]
-in G.1.2. Accordingly the original standard has now lapsed.
+the Numerics annex of Ada 95 as the package
+@exam[Ada.Numerics.Generic_Complex_Elementary_Functions] in
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/G-1-2.html],Text=[G.1.2]}.
+Accordingly the original standard has now lapsed.
 
-However, the situation regarding 13813 was not so clear. It covered
+@leading@;However, the situation regarding 13813 was not so clear. It covered
 four areas
 
+@begin[Enumerate]
+a complex types package including various complex arithmetic operations,
 
-@begin[Description]
-1@\a complex types package including various complex arithmetic operations,
+a real arrays package covering both vectors and matrices,
 
-2@\a real arrays package covering both vectors and matrices,
+a complex arrays package covering both vectors and matrices, and
 
-3@\a complex arrays package covering both vectors and matrices, and
+a complex input@en@;output package.
+@end[Enumerate]
 
-4@\a complex input@en@;output package.
-
-
-@end[Description]
 The first of these was incorporated into the Numerics annex of Ada
-95 as the package @exam[Ada.Numerics.Generic_Complex_Types] in G.1.1
-and the last similarly became the package @exam[Ada.Text_IO.Complex_IO]
-in G.1.3. However, the array packages, both real and complex, were
+95 as the package @exam[Ada.Numerics.Generic_Complex_Types] in
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/G-1-1.html],Text=[G.1.1]},
+and the last similarly became the package @exam[Ada.Text_IO.Complex_IO] in
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/G-1-3.html],Text=[G.1.3]}.
+However, the array packages, both real and complex, were
 not incorporated into Ada 95.
 
-The reason for this omission is explained in Section G.1.1 of the
-Rationale for Ada 95 @LocalLink{Target=[R3],Sec=[References],Text={[3]}} which says
+The reason for this omission is explained in
+@URLLink{URL=[http://www.adaic.org/standards/95rat/RAThtml/rat95-p3-g.html#1],Text=[Section G.1.1]}
+of the Rationale for Ada 95 @LocalLink{Target=[R3],Sec=[References],Text={[3]}} which says
 
-
-@begin[Description]
-@\A decision was made to abbreviate the Ada 95 packages by omitting
+@begin[SyntaxText]
+A decision was made to abbreviate the Ada 95 packages by omitting
 the vector and matrix types and operations. One reason was that such
 types and operations were largely self-evident, so that little real
 help would be provided by defining them in the language. Another reason
 was that a future version of Ada might add enhancements for array
 manipulation and so it would be inappropriate to lock in such operations
 permanently.
+@end[SyntaxText]
 
-
-@end[Description]
 The sort of enhancements that perhaps were being anticipated were
 facilities for manipulating arbitrary subpartitions of arrays such
 as were provided in Algol 68. These rather specialized facilities
@@ -1561,34 +1521,30 @@ we have taken the approach that we should further add some basic facilities
 that are commonly required, not completely trivial to implement, but
 on the other hand are mathematically well understood.
 
-So the outcome is that Ada 2005 includes almost everything from 13813
+@leading@;So the outcome is that Ada 2005 includes almost everything from 13813
 plus subprograms for
 
+@begin[Itemize]
+finding the norm of a vector,@Defn{vector norm}@Defn2{Term=[norm],Sec=[vector]}
 
-@begin[Description]
-{\u9642\'3f@\finding the norm of a vector,
+solving sets of linear equations,@Defn2{Term=[linear equations],Sec=[solving]}
 
-}{\u9642\'3f@\solving sets of linear equations,
+finding the inverse and determinant of a matrix,@Defn2{Term=[inverse],Sec=[matrix]}@Defn{determinant}
 
-}{\u9642\'3f@\finding the inverse and determinant of a matrix,
+finding the eigenvalues and eigenvectors of a symmetric
+real or Hermitian matrix.@Defn{eigenvalues}@Defn{eigenvectors}
+@end[Itemize]
 
-}{\u9642\'3f@\finding the eigenvalues and eigenvectors of a symmetric
-real or Hermitian matrix.
-
-}
-@end[Description]
 A small number of operations that were not related to linear algebra
 were removed (such as raising all elements of a matrix to a given
 power).
 
-So Ada 2005 includes two new packages which are @exam[Ada.Numerics.Generic_Real_Arrays]
+@leading@;So Ada 2005 includes two new packages which are @exam[Ada.Numerics.Generic_Real_Arrays]
 and @exam[Ada.Numerics.Generic_Complex_Arrays]. It would take too
 much space to give the specifications of both in full so we give just
 an abbreviated form of the real package in which the specifications
 of the usual operators are omitted
 thus@Defn2{Term=[package],Sec=[Ada.Numerics.Generic_Real_Arrays]}@Defn{Ada.Numerics.Generic_Real_Arrays package}@Defn{Generic_Real_Arrays package}
-
-
 @begin[Example]
 @key[generic]
    @key[type] Real@key[ is digits] <>;
@@ -1596,85 +1552,69 @@ thus@Defn2{Term=[package],Sec=[Ada.Numerics.Generic_Real_Arrays]}@Defn{Ada.Numer
    @key[pragma] Pure(Generic_Real_Arrays);
 
    -- @examcom[Types]
-   @key[type] Real_Vector @key[is array] (Integer @key[range] <>)
-@key[of] Real'Base;
-   @key[type] Real_Matrix @key[is array] (Integer @key[range] <>,
-Integer @key[range] <>) @key[of] Real'Base;
+   @key[type] Real_Vector @key[is array] (Integer @key[range] <>) @key[of] Real'Base;
+   @key[type] Real_Matrix @key[is array] (Integer @key[range] <>, Integer @key[range] <>) @key[of] Real'Base;
 
    -- @examcom[Real_Vector arithmetic operations]
-   ... -- @examcom[unary and binary "+" and "@en" giving a vector
-  ] ... -- @examcom[also inner product and two versions of "abs" @en
-one ]{\cs24\i\expnd0\expndtw-2 returns a vector and the
-   ... -- other a value of Real'Base}
+   ... -- @examcom[unary and binary "+" and "@en" giving a vector]
+   ... -- @examcom[also inner product and two versions of "abs" @en one returns a vector and the]
+   ... -- @examcom[other a value of Real'Base]
 
-   -- @examcom[Real_Vector scaling operations
-   ... ]-- @examcom[operations "*" and "/" to multiply a vector by
-a] @examcom[scalar and divide a vector by a scalar]
+   -- @examcom[Real_Vector scaling operations]
+   ... -- @examcom[operations "*" and "/" to multiply a vector by a scalar and divide a vector by a scalar]
 
    -- @examcom[Other Real_Vector operations]
-   @key[function] Unit_Vector(Index: Integer; Order: Positive; First:
-Integer := 1) @key[return] Real_Vector;
+   @key[function] Unit_Vector(Index: Integer; Order: Positive; First: Integer := 1) @key[return] Real_Vector;
 
    -- @examcom[Real_Matrix arithmetic operations]
-   ... -- @examcom[unary "+", "@en", "abs", binary "+", "@en" giving
-a matrix]
-   ... -- @examcom["*" on two matrices giving a matrix, on a vector]
-@examcom[and a matrix giving a vector,
-   ... --  outer product of two] @examcom[vectors giving a matrix,
-and of course
-]   @key[function] Transpose(X: Real_Matrix) @key[return] Real_Matrix;
+   ... -- @examcom[unary "+", "@en", "abs", binary "+", "@en" giving a matrix]
+   ... -- @examcom["*" on two matrices giving a matrix, on a vector and a matrix giving a vector,]
+   ... -- @examcom[outer product of two vectors giving a matrix, and of course]
+   @key[function] Transpose(X: Real_Matrix) @key[return] Real_Matrix;
 
    -- @examcom[Real_Matrix scaling operations]
-@examcom[   ... ]-- @examcom[operations "*" and "/" to multiply a
-matrix by a] @examcom[scalar and divide a matrix by a scalar]
+   ... -- @examcom[operations "*" and "/" to multiply a matrix by a scalar and divide a matrix by a scalar]
 
    -- @examcom[Real_Matrix inversion and related operations]
-   @key[function] Solve(A: Real_Matrix; X: Real_Vector) @key[return]
-Real_Vector;
+   @key[function] Solve(A: Real_Matrix; X: Real_Vector) @key[return] Real_Vector;
    @key[function] Solve(A, X: Real_Matrix) @key[return] Real_Matrix;
    @key[function] Inverse(A: Real_Matrix) @key[return] Real_Matrix;
    @key[function] Determinant(A: Real_Matrix) @key[return] Real'Base;
 
    -- @examcom[Eigenvalues and vectors of a real symmetric matrix]
    @key[function] Eigenvalues(A: Real_Matrix) @key[return] Real_Vector;
-   @key[procedure] Eigensystem(A: @key[in] Real_Matrix;
-@\@\@\@\Values: @key[out] Real_Vector; Vectors: @key[out] Real_Matrix);
+   @key[procedure] Eigensystem(
+         A: @key[in] Real_Matrix;
+         Values: @key[out] Real_Vector; Vectors: @key[out] Real_Matrix);
 
    -- @examcom[Other Real_Matrix operations]
-   @key[function] Unit_Matrix(Order: Positive; First_1, First_2: Integer
-:= 1) @key[return] Real_Matrix;
+   @key[function] Unit_Matrix(Order: Positive; First_1, First_2: Integer := 1) @key[return] Real_Matrix;
 
 @key[end] Ada.Numerics.Generic_Real_Arrays;
-
-
 @end[Example]
+
 Many of these operations are quite self-evident. The general idea
 as far as the usual arithmetic operations are concerned is that we
 just write an expression in the normal way as illustrated in the Introduction.
 But the following points should be noted.
 
-There are two operations@exam[ "]@key[abs]@exam["] applying to a @exam[Real_Vector]
-thus
-
-
+@leading@;There are two operations @exam["]@key[abs]@exam["] applying to a
+@exam[Real_Vector] thus
 @begin[Example]
 @key[function] "@key[abs]"(Right: Real_Vector) @key[return] Real_Vector;
 @key[function] "@key[abs]"(Right: Real_Vector) @key[return] Real'Base;
-
-
 @end[Example]
+
 One returns a vector each of whose elements is the absolute value
 of the corresponding element of the parameter (rather boring) and
 the other returns a scalar which is the so-called L2-norm of the vector.
 This is the square root of the inner product of the vector with itself
-or \u8730\'76({\f3 \'53}@i[x]{\i\sub i}@i[x]{\i\sub i}) @en or just
-\u8730\'76(@i[x]{\i\sub i}@i[x]{\i\sub i}) using the summation convention
+or @unicode[8730](@unicode(931)@i[x]@-{@i{i}}@i[x]@-{@i{i}}) @en or just
+@unicode[8730](@i[x]@-{@i{i}}@i[x]@-{@i{i}}) using the summation convention
 (which will be familiar to those who dabble in the relative world
 of tensors). This is provided as a distinct operation in order to
 avoid any intermediate overflow that might occur if the user were
 to compute it directly using the inner product "*".
-
-*** Started here ***
 
 @leading@;There are two functions @exam[Solve] for solving one and several sets
 of linear equations respectively.@Defn2{Term=[linear equations],Sec=[solving]}
@@ -2119,5 +2059,5 @@ and so this change just clarifies the situation.
 
 On this dullish but important topic here endeth the Rationale for
 Ada 2005 apart from various exciting appendices and an extensive subpaper
-on containers@Comment{ (see @RefSecNum{*** TBD - containers ***})}.
+on containers (see @RefSecNum{Containers}, or just press the Next button below).
 

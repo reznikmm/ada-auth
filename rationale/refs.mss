@@ -1,7 +1,7 @@
 @Part(title, Root="rat.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/Rationale/refs.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2006/01/27 06:40:05 $}
+@comment{$Revision: 1.4 $ $Date: 2006/02/07 07:47:52 $}
 
 @UnnumberedSection{References}
 
@@ -47,5 +47,8 @@ Press.
 
 @LocalTarget{Target=[R9],Text={[9]}}@\J. G. P. Barnes (2003) @i{High Integrity Software
 @en The SPARK Approach to Safety and Security}, Addison-Wesley.
+
+@LocalTarget{Target=[R10],Text={[10]}}@\D. E. Knuth (1973). @i{The Art of
+Computer Programming, vol 3 @en Searching and Sorting}, Addison-Wesley.
 @end{Description}
 

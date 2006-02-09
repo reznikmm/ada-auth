@@ -57,6 +57,8 @@
 @Source{Name=<Tasking.MSS>,SectionName=<05>,SectionNumber=[5],NewSection=[T]}
 @Source{Name=<General.MSS>,SectionName=<06>,SectionNumber=[6],NewSection=[T]}
 @Source{Name=<Library.MSS>,SectionName=<07>,SectionNumber=[7],NewSection=[T]}
+@Source{Name=<Contain.MSS>,SectionName=<08>,SectionNumber=[8],NewSection=[T]}
+@Source{Name=<CAnnex.MSS>,SectionName=<8>,SectionNumber=[8],NewSection=[F]}
 @Source{Name=<Refs.MSS>,SectionName=<REF>,SectionNumber=[0],NewSection=[T]}
 @Source{Name=<Index.MSS>,SectionName=<IDX>,SectionNumber=[0],NewSection=[T]}
 

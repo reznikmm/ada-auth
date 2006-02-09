@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/access.mss,v $)
-@comment($Revision: 1.4 $ $Date: 2006/01/28 06:49:01 $)
+@comment($Revision: 1.5 $ $Date: 2006/02/07 07:47:51 $)
 
 @LabeledSection{Access types}
 
@@ -1728,7 +1728,7 @@ to 10, then we would first declare a procedure such as
 @end[Example]
 
 Further details of the use of access to subprogram types with containers
-will be found in a later paper.@Comment{ Ref *** TBD - container example}
+will be found in a later paper (see @RefSecNum{Lists and vectors}).
 
 Finally it should be noted that anonymous access to subprogram types
 can also be used in all those places where anonymous access to object

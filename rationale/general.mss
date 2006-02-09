@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/general.mss,v $)
-@comment($Revision: 1.4 $ $Date: 2006/02/04 06:53:42 $)
+@comment($Revision: 1.5 $ $Date: 2006/02/07 07:47:51 $)
 
 @LabeledSection{Exceptions, generics etc}
 
@@ -1755,7 +1755,7 @@ However, the mechanism does not work very well when several parameters
 are involved as will now be illustrated with some examples.
 
 @leading@;The first example concerns using the new container library which will
-be discussed in some detail in a later paper@Comment{ (see @RefSecNum{*** TBD - containers ***})}.
+be discussed in some detail in a later paper (see @RefSecNum{Containers}).
 There are generic packages such as
 @begin[Example]
 @key[generic]
