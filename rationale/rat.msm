@@ -44,7 +44,7 @@
 </map>
 <TD Width="220" Align="Center" VAlign="Top">
 <SPAN Style="font-family: Arial, Helvetica, sans-serif; font-size: 92%">and &nbsp; <A HREF="http://www.ada-europe.org">Ada-Europe</A>:<BR>
-<A HREF="http://www.ada-europe.org"><IMG SRC="AE_logo.gif" ALT="Ada-Europe" Height="200"></A></SPAN>
+<A HREF="http://www.ada-europe.org"><IMG SRC="AE_logo.gif" ALT="Ada-Europe" Height="200" Border="0"></A></SPAN>
 </TABLE>}
 
 @Comment{Source files and related items, in collating order}
