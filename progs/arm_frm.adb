@@ -201,6 +201,7 @@ package body ARM_Format is
     --			restores to the initial state for the command, not the
     --			default state.
     --  1/20/06 - RLB - Added AILink command.
+    --  2/ 8/06 - RLB - Added command checking at the end of each table row.
 
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
@@ -10051,6 +10052,33 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			        ARM_Output.Table_Marker (Output_Object, ARM_Output.End_Row);
 			        ARM_Input.Replace_Char (Input_Object);
 			        Format_Object.Last_Non_Space := False;
+				-- There should be nothing above the table at
+				-- this point. Complain about other commands
+				-- (this is a signficant aid to building tables):
+				declare
+				    Start_Depth : Natural := 1;
+				begin
+				    --Find the table:
+				    for I in reverse 1 .. Format_State.Nesting_Stack_Ptr loop
+				        if Format_State.Nesting_Stack(I).Command = Table then
+					    Start_Depth := I;
+					    exit;
+				        end if;
+				    end loop;
+				    if Format_State.Nesting_Stack(Start_Depth+1).Command /= Table_Param_Body then
+				        Ada.Text_IO.Put_Line ("   ** Wrong command on top of table, line " & ARM_Input.Line_String (Input_Object));
+				        Ada.Text_IO.Put_Line ("      Command=" & Format_State.Nesting_Stack(Start_Depth+1).Name & " Class=" &
+					    Command_Type'Image(Format_State.Nesting_Stack(Start_Depth+1).Command));
+				    elsif Format_State.Nesting_Stack_Ptr /= Start_Depth+1 then
+				        Ada.Text_IO.Put_Line ("   ** Unfinished commands detected at end of row, line " & ARM_Input.Line_String (Input_Object));
+				    end if;
+				    for I in reverse Start_Depth+2 .. Format_State.Nesting_Stack_Ptr loop
+				        Ada.Text_IO.Put_Line ("      Open command=" &
+					    Format_State.Nesting_Stack(I).Name & " Class=" &
+					    Command_Type'Image(Format_State.Nesting_Stack(I).Command));
+				    end loop;
+				end;
+
 			    else -- Normal paragraph:
 			        -- Output a space if the last character was
 			        -- not a space and the next character is
