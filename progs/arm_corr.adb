@@ -48,6 +48,10 @@ package body ARM_Corr is
     --  1/11/06 - RLB - Eliminated dispatching Create in favor of tailored
     --			versions.
     --  1/18/06 - RLB - Added additional styles.
+    --  2/ 8/06 - RLB - Added additional parameters to the table command.
+    --  2/10/06 - RLB - Added even more additional parameters to the
+    --			table command.
+    --		- RLB - Added picture command.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -902,13 +906,29 @@ package body ARM_Corr is
 
 
     procedure Start_Table (Output_Object : in out Corr_Output_Type;
-			   Columns : in ARM_Output.Column_Count) is
-	-- Starts a table. The number of columns is Columns.
+			   Columns : in ARM_Output.Column_Count;
+			   First_Column_Width : in ARM_Output.Column_Count;
+			   Alignment : in ARM_Output.Column_Text_Alignment;
+			   No_Page_Break : in Boolean;
+			   Has_Border : in Boolean;
+			   Small_Text_Size : in Boolean;
+			   Header_Kind : in ARM_Output.Header_Kind_Type) is
+	-- Starts a table. The number of columns is Columns; the first
+	-- column has First_Column_Width times the normal column width.
+	-- Alignment is the horizontal text alignment within the columns.
+	-- No_Page_Break should be True to keep the table intact on a single
+	-- page; False to allow it to be split across pages.
+	-- Has_Border should be true if a border is desired, false otherwise.
+	-- Small_Text_Size means that the contents will have the AARM size;
+	-- otherwise it will have the normal size.
+	-- Header_Kind determines whether the table has headers.
 	-- This command starts a paragraph; the entire table is a single
 	-- paragraph. Text will be considered part of the caption until the
 	-- next table marker call.
 	-- Raises Not_Valid_Error if in a paragraph.
     begin
+	-- Alignment, No_Page_Break, Border, Small_Text_Size, and Header_Kind
+	-- not used here.
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not valid object");
@@ -919,17 +939,18 @@ package body ARM_Corr is
 	end if;
 
 	Output_Object.Tab_Stops.Number := Columns;
-	if Columns in 1 .. 3 then
+	declare
+	     Width : Natural :=
+		(72/(Columns+First_Column_Width-1));
+	begin
+	    if Columns+First_Column_Width-1 <= 3 then -- Keep it from getting too wide.
+		Width := 22;
+	    end if;
 	    for I in 1 .. Columns loop
 	        Output_Object.Tab_Stops.Stops(I) := (Kind => ARM_Output.Left_Fixed,
-						     Stop => I*22+10);
+						     Stop => Width*(I+First_Column_Width-1)+10);
 	    end loop;
-	else
-	    for I in 1 .. Columns loop
-	        Output_Object.Tab_Stops.Stops(I) := (Kind => ARM_Output.Left_Fixed,
-						     Stop => I*(72/Columns)+10);
-	    end loop;
-	end if;
+	end;
 
 	Output_Object.Indent_Amount := 10;
         Ada.Text_IO.Put (Output_Object.Output_File, "          ");
@@ -1643,5 +1664,27 @@ package body ARM_Corr is
     begin
 	Ordinary_Text (Output_Object, Text); -- Nothing special in this format.
     end URL_Link;
+
+
+    procedure Picture  (Output_Object : in out Corr_Output_Type;
+			Name  : in String;
+			Descr : in String;
+			Alignment : in ARM_Output.Picture_Alignment;
+			Height, Width : in Natural;
+			Border : in ARM_Output.Border_Kind) is
+	-- Generate a picture.
+	-- Name is the (simple) file name of the picture; Descr is a
+	-- descriptive name for the picture (it will appear in some web
+	-- browsers).
+	-- We assume that it is a .GIF or .JPG and that it will be present
+	-- in the same directory as the input files and the same directory as
+	-- the .HTML output files.
+	-- Alignment specifies the picture alignment.
+	-- Height and Width specify the picture size in pixels.
+	-- Border specifies the kind of border.
+    begin
+	Ordinary_Text (Output_Object, "[Picture: " & Name &
+	  " - " & Descr & "]");
+    end Picture;
 
 end ARM_Corr;

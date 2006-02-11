@@ -132,6 +132,10 @@ package body ARM_HTML is
     --			they are too close otherwise.
     --  1/28/06 - RLB - Changed so that button highlights are removed correctly.
     --		- RLB - Added tab emulation settings.
+    --  2/ 8/06 - RLB - Added additional parameters to the table command.
+    --  2/10/06 - RLB - Added even more additional parameters to the
+    --			table command.
+    --		- RLB - Added picture command.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -3265,13 +3269,30 @@ package body ARM_HTML is
 
 
     procedure Start_Table (Output_Object : in out HTML_Output_Type;
-			   Columns : in ARM_Output.Column_Count) is
-	-- Starts a table. The number of columns is Columns.
+			   Columns : in ARM_Output.Column_Count;
+			   First_Column_Width : in ARM_Output.Column_Count;
+			   Alignment : in ARM_Output.Column_Text_Alignment;
+			   No_Page_Break : in Boolean;
+			   Has_Border : in Boolean;
+			   Small_Text_Size : in Boolean;
+			   Header_Kind : in ARM_Output.Header_Kind_Type) is
+	-- Starts a table. The number of columns is Columns; the first
+	-- column has First_Column_Width times the normal column width.
+	-- Alignment is the horizontal text alignment within the columns.
+	-- No_Page_Break should be True to keep the table intact on a single
+	-- page; False to allow it to be split across pages.
+	-- Has_Border should be true if a border is desired, false otherwise.
+	-- Small_Text_Size means that the contents will have the AARM size;
+	-- otherwise it will have the normal size.
+	-- Header_Kind determines whether the table has headers.
 	-- This command starts a paragraph; the entire table is a single
 	-- paragraph. Text will be considered part of the caption until the
 	-- next table marker call.
 	-- Raises Not_Valid_Error if in a paragraph.
+	use type ARM_Output.Header_Kind_Type;
+	use type ARM_Output.Column_Text_Alignment;
     begin
+	-- No_Page_Break and First_Column_Width not used.
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not valid object");
@@ -3285,9 +3306,34 @@ package body ARM_HTML is
             Ada.Text_IO.Put (Output_Object.Output_File, "<DIV Class=""SyntaxIndented"">");
 	    Paragraph_Used(ARM_Output.Syntax_Indented) := True;
 	end if;
-        Ada.Text_IO.Put (Output_Object.Output_File, "<TABLE frame=""border"" rules=""all"" border=""2"">");
-        Ada.Text_IO.Put (Output_Object.Output_File, "<CAPTION>");
-	Output_Object.Char_Count := 9;
+	if Has_Border then
+            Ada.Text_IO.Put (Output_Object.Output_File, "<TABLE frame=""border"" rules=""all"" border=""2"" cellpadding=""4"">");
+	else
+            Ada.Text_IO.Put (Output_Object.Output_File, "<TABLE frame=""void"" rules=""all"" border=""0"" cellpadding=""2"">");
+	end if;
+	if Header_Kind = ARM_Output.Both_Caption_and_Header then
+            Ada.Text_IO.Put (Output_Object.Output_File, "<CAPTION>");
+	    Output_Object.Char_Count := 9;
+	    Output_Object.In_Header := True;
+	elsif Header_Kind = ARM_Output.Header_Only then
+	    if Alignment = ARM_Output.Center_All then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TH align=""center"">");
+	        Output_Object.Char_Count := 24;
+	    else
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TH align=""left"">");
+	        Output_Object.Char_Count := 22;
+	    end if;
+	    Output_Object.In_Header := True;
+	else -- Header_Kind = ARM_Output.No_Headers then
+	    if Alignment = ARM_Output.Center_All then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TD align=""center"">");
+	        Output_Object.Char_Count := 24;
+	    else
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TD align=""left"">");
+	        Output_Object.Char_Count := 22;
+	    end if;
+	    Output_Object.In_Header := False;
+	end if;
 	Output_Object.Disp_Char_Count := 0;
 	Output_Object.Any_Nonspace := False;
         Output_Object.Last_Was_Space := True; -- Start of line.
@@ -3295,7 +3341,18 @@ package body ARM_HTML is
 
 	Output_Object.Is_In_Paragraph := True;
 	Output_Object.Is_In_Table := True;
-	Output_Object.In_Header := True;
+
+	Output_Object.Table_Column_Alignment := Alignment;
+	Output_Object.Table_Has_Small_Text := Small_Text_Size;
+	if Output_Object.Table_Has_Small_Text then
+	    if Output_Object.HTML_Kind = HTML_4_Only then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<SPAN STYLE=""font-size: 80%"">");
+	        Output_Object.Char_Count := Output_Object.Char_Count + 29;
+	    else
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=""-1"">");
+	        Output_Object.Char_Count := Output_Object.Char_Count + 16;
+	    end if;
+	end if;
     end Start_Table;
 
 
@@ -3314,6 +3371,7 @@ package body ARM_HTML is
 	--	and another started.
 	-- If Marker is End_Table, the entire table is finished.
 	-- Raises Not_Valid_Error if not in a table.
+	use type ARM_Output.Column_Text_Alignment;
     begin
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -3323,27 +3381,60 @@ package body ARM_HTML is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Table marker not in table");
 	end if;
+
+	-- Close the small fonts (we always need to do this):
+	if Output_Object.Table_Has_Small_Text then
+	    if Output_Object.HTML_Kind = HTML_4_Only then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "</SPAN>");
+	        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+	    else
+	        Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
+	        Output_Object.Char_Count := Output_Object.Char_Count + 7;
+	    end if;
+	end if;
+
 	case Marker is
 	    when ARM_Output.End_Item =>
+		-- Note: This isn't the first item on a row.
 		if Output_Object.In_Header then
-	            Ada.Text_IO.Put (Output_Object.Output_File, "<TH align=""center"">");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 20;
+		    if Output_Object.Table_Column_Alignment = ARM_Output.Left_All then
+	                Ada.Text_IO.Put (Output_Object.Output_File, "<TH align=""left"">");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 18;
+		    else
+	                Ada.Text_IO.Put (Output_Object.Output_File, "<TH align=""center"">");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 20;
+		    end if;
 		else
-	            Ada.Text_IO.Put (Output_Object.Output_File, "<TD align=""center"">");
-		    Output_Object.Char_Count := Output_Object.Char_Count + 20;
+		    if Output_Object.Table_Column_Alignment = ARM_Output.Left_All then
+	                Ada.Text_IO.Put (Output_Object.Output_File, "<TD align=""left"">");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 18;
+		    else
+	                Ada.Text_IO.Put (Output_Object.Output_File, "<TD align=""center"">");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 20;
+		    end if;
 		end if;
 	    when ARM_Output.End_Caption =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</CAPTION>");
-	        Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TH align=""center"">");
-		Output_Object.Char_Count := 24;
+	        if Output_Object.Table_Column_Alignment = ARM_Output.Center_All then
+	            Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TH align=""center"">");
+		    Output_Object.Char_Count := 24;
+		else
+	            Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TH align=""left"">");
+		    Output_Object.Char_Count := 22;
+		end if;
 		Output_Object.Disp_Char_Count := 0;
 		Output_Object.Any_Nonspace := False;
 	        Output_Object.Last_Was_Space := True; -- Start of line.
 	        Output_Object.Conditional_Space := False; -- Don't need it here.
 	    when ARM_Output.End_Header =>
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
-	        Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TD align=""center"">");
-		Output_Object.Char_Count := 24;
+	        if Output_Object.Table_Column_Alignment = ARM_Output.Center_All then
+	            Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TD align=""center"">");
+		    Output_Object.Char_Count := 24;
+		else
+	            Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TD align=""left"">");
+		    Output_Object.Char_Count := 22;
+		end if;
 		Output_Object.Disp_Char_Count := 0;
 		Output_Object.Any_Nonspace := False;
 	        Output_Object.Last_Was_Space := True; -- Start of line.
@@ -3351,8 +3442,13 @@ package body ARM_HTML is
 		Output_Object.In_Header := False;
 	    when ARM_Output.End_Row | ARM_Output.End_Row_Next_Is_Last =>
 		Ada.Text_IO.New_Line (Output_Object.Output_File);
-	        Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TD align=""center"">");
-		Output_Object.Char_Count := 24;
+	        if Output_Object.Table_Column_Alignment = ARM_Output.Center_All then
+	            Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TD align=""center"">");
+		    Output_Object.Char_Count := 24;
+		else
+	            Ada.Text_IO.Put (Output_Object.Output_File, "<TR><TD align=""left"">");
+		    Output_Object.Char_Count := 22;
+		end if;
 		Output_Object.Disp_Char_Count := 0;
 		Output_Object.Any_Nonspace := False;
 	        Output_Object.Last_Was_Space := True; -- Start of line.
@@ -3367,6 +3463,17 @@ package body ARM_HTML is
 		Output_Object.Is_In_Paragraph := False;
 		Output_Object.Is_In_Table := False;
 	end case;
+
+	if Output_Object.Table_Has_Small_Text and then ARM_Output."/=" (Marker,
+	    ARM_Output.End_Table) then
+	    if Output_Object.HTML_Kind = HTML_4_Only then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<SPAN STYLE=""font-size: 80%"">");
+	        Output_Object.Char_Count := Output_Object.Char_Count + 29;
+	    else
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=""-1"">");
+	        Output_Object.Char_Count := Output_Object.Char_Count + 16;
+	    end if;
+        end if;
     end Table_Marker;
 
 
@@ -4257,16 +4364,28 @@ package body ARM_HTML is
 
 	if Size /= Output_Object.Size then
 	    if Output_Object.Size /= 0 then
-	        Output_Text (Output_Object, "</FONT>");
+	        if Output_Object.HTML_Kind = HTML_4_Only then
+	            Output_Text (Output_Object, "</SPAN>");
+		else
+	            Output_Text (Output_Object, "</FONT>");
+		end if;
 	    end if;
 	end if;
 
 	if Location /= Output_Object.Location then
 	    case Output_Object.Location is
 		when ARM_Output.Superscript =>
-		    Output_Text (Output_Object, "</FONT></SUP>");
+		    if Output_Object.HTML_Kind = HTML_4_Only then
+		        Output_Text (Output_Object, "</SPAN></SUP>");
+		    else
+		        Output_Text (Output_Object, "</FONT></SUP>");
+		    end if;
 		when ARM_Output.Subscript =>
-		    Output_Text (Output_Object, "</FONT></SUB>");
+		    if Output_Object.HTML_Kind = HTML_4_Only then
+		        Output_Text (Output_Object, "</SPAN></SUB>");
+		    else
+		        Output_Text (Output_Object, "</FONT></SUB>");
+		    end if;
 		when ARM_Output.Normal =>
 		    null;
 	    end case;
@@ -4419,9 +4538,19 @@ package body ARM_HTML is
 	    -- size.
 	    case Location is
 		when ARM_Output.Superscript =>
-		    Output_Text (Output_Object, "<SUP><FONT SIZE=""+1"">");
+		    if Output_Object.HTML_Kind = HTML_4_Only then
+		        Output_Text (Output_Object, "<SUP><SPAN STYLE=""font-size: 140%"">");
+			   -- This is a bit larger than +1; the text is usually too small.
+		    else
+		        Output_Text (Output_Object, "<SUP><FONT SIZE=""+1"">");
+		    end if;
 		when ARM_Output.Subscript =>
-		    Output_Text (Output_Object, "<SUB><FONT SIZE=""+1"">");
+		    if Output_Object.HTML_Kind = HTML_4_Only then
+		        Output_Text (Output_Object, "<SUB><SPAN STYLE=""font-size: 140%"">");
+			   -- This is a bit larger than +1; the text is usually too small.
+		    else
+		        Output_Text (Output_Object, "<SUB><FONT SIZE=""+1"">");
+		    end if;
 		when ARM_Output.Normal =>
 		    null;
 	    end case;
@@ -4429,22 +4558,45 @@ package body ARM_HTML is
 	end if;
 
 	if Size /= Output_Object.Size then
-	    -- HTML sizes are 1..7, with a default of 3. So we limit the changes.
-	    if Size > 0 then
-		if Size > 5 then
-	            Output_Text (Output_Object, "<FONT SIZE=""+5"">");
-		else
-	            Output_Text (Output_Object, "<FONT SIZE=""+" &
-		        Character'Val(Size + Character'Pos('0')) & """>");
-		end if;
-	    elsif Size < 0 then
-		if Size < -4 then
-	            Output_Text (Output_Object, "<FONT SIZE=""-4"">");
-		else
-	            Output_Text (Output_Object, "<FONT SIZE=""-" &
-		        Character'Val(abs Size + Character'Pos('0')) & """>");
-		end if;
-	    -- else Size=0, nothing to do.
+	    if Output_Object.HTML_Kind = HTML_4_Only then
+		case Size is
+		    when 0 => null; -- Do nothing.
+		    when 1 => Output_Text (Output_Object, "<SPAN STYLE=""font-size: 125%"">");
+		    when 2 => Output_Text (Output_Object, "<SPAN STYLE=""font-size: 156%"">");
+		    when 3 => Output_Text (Output_Object, "<SPAN STYLE=""font-size: 194%"">");
+		    when 4 => Output_Text (Output_Object, "<SPAN STYLE=""font-size: 244%"">");
+		    when 5 => Output_Text (Output_Object, "<SPAN STYLE=""font-size: 305%"">");
+		    when -1 => Output_Text (Output_Object, "<SPAN STYLE=""font-size: 80%"">");
+		    when -2 => Output_Text (Output_Object, "<SPAN STYLE=""font-size: 64%"">");
+		    when -3 => Output_Text (Output_Object, "<SPAN STYLE=""font-size: 51%"">");
+		    when -4 => Output_Text (Output_Object, "<SPAN STYLE=""font-size: 41%"">");
+		    when -5 => Output_Text (Output_Object, "<SPAN STYLE=""font-size: 33%"">");
+		    when others =>
+			-- Too much change:
+			if Size > 0 then
+			    Output_Text (Output_Object, "<SPAN STYLE=""font-size: 305%"">");
+			else
+			    Output_Text (Output_Object, "<SPAN STYLE=""font-size: 33%"">");
+			end if;
+		end case;
+	    else
+	        -- HTML sizes are 1..7, with a default of 3. So we limit the changes.
+	        if Size > 0 then
+		    if Size > 5 then
+	                Output_Text (Output_Object, "<FONT SIZE=""+5"">");
+		    else
+	                Output_Text (Output_Object, "<FONT SIZE=""+" &
+		            Character'Val(Size + Character'Pos('0')) & """>");
+		    end if;
+	        elsif Size < 0 then
+		    if Size < -4 then
+	                Output_Text (Output_Object, "<FONT SIZE=""-4"">");
+		    else
+	                Output_Text (Output_Object, "<FONT SIZE=""-" &
+		            Character'Val(abs Size + Character'Pos('0')) & """>");
+		    end if;
+	        -- else Size=0, nothing to do.
+	        end if;
 	    end if;
 	    Output_Object.Size := Size;
 	end if;
@@ -4698,5 +4850,115 @@ package body ARM_HTML is
         Ordinary_Text (Output_Object, Text);
         Output_Text (Output_Object, "</A>");
     end URL_Link;
+
+
+    procedure Picture  (Output_Object : in out HTML_Output_Type;
+			Name : in String;
+			Descr : in String;
+			Alignment : in ARM_Output.Picture_Alignment;
+			Height, Width : in Natural;
+			Border : in ARM_Output.Border_Kind) is
+	-- Generate a picture.
+	-- Name is the (simple) file name of the picture; Descr is a
+	-- descriptive name for the picture (it will appear in some web
+	-- browsers).
+	-- We assume that it is a .GIF or .JPG and that it will be present
+	-- in the same directory as the output files.
+	-- Alignment specifies the picture alignment.
+	-- Height and Width specify the picture size in pixels.
+	-- Border specifies the kind of border.
+
+	procedure Make_Img (Extra_Attribs : in String) is
+	    H : constant String := Natural'Image(Height);
+	    W : constant String := Natural'Image(Width);
+	begin
+	    Output_Text (Output_Object, "<IMG src=""" & Name & """");
+	    Output_Text (Output_Object, " height=""" & H(2..H'Last) &
+		""" width=""" & W(2..W'Last) & """");
+	    Output_Text (Output_Object, " alt=""" & Descr & """");
+	    case Border is
+		when ARM_Output.None =>
+		    Output_Text (Output_Object, " border=""0"">");
+		when ARM_Output.Thin =>
+		    Output_Text (Output_Object, " border=""1"">");
+		when ARM_Output.Thick =>
+		    Output_Text (Output_Object, " border=""2"">");
+	    end case;
+	end Make_Img;
+
+    begin
+	if not Output_Object.Is_Valid then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not valid object");
+	end if;
+	case Alignment is
+	    when ARM_Output.Inline =>
+		if not Output_Object.Is_In_Paragraph then
+		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+			"Not in paragraph");
+		end if;
+		Make_Img("");
+	    when ARM_Output.Float_Left =>
+		if not Output_Object.Is_In_Paragraph then
+		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+			"Not in paragraph");
+		end if;
+		Make_Img (" align=""left""");
+	    when ARM_Output.Float_Right =>
+		if Output_Object.Is_In_Paragraph then
+		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+			"Not in paragraph");
+		end if;
+		Make_Img (" align=""right""");
+	    when ARM_Output.Alone_Left =>
+		if Output_Object.Is_In_Paragraph then
+		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+			"In paragraph");
+		end if;
+		if Output_Object.HTML_Kind = HTML_4_Only then
+		    Output_Text (Output_Object, "<DIV Class=""Normal"">");
+		else
+		    Output_Text (Output_Object, "<P>");
+		end if;
+		Make_Img("");
+		if Output_Object.HTML_Kind = HTML_4_Only then
+		    Output_Text (Output_Object, "</DIV>");
+		else
+		    Output_Text (Output_Object, "</P>");
+		end if;
+	    when ARM_Output.Alone_Right =>
+		if Output_Object.Is_In_Paragraph then
+		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+			"In paragraph");
+		end if;
+		if Output_Object.HTML_Kind = HTML_4_Only then
+		    Output_Text (Output_Object, "<DIV Style=""text-align: right"">");
+		else
+		    Output_Text (Output_Object, "<RIGHT>");
+		end if;
+		Make_Img("");
+		if Output_Object.HTML_Kind = HTML_4_Only then
+		    Output_Text (Output_Object, "</DIV>");
+		else
+		    Output_Text (Output_Object, "</RIGHT>");
+		end if;
+	    when ARM_Output.Alone_Center =>
+		if Output_Object.Is_In_Paragraph then
+		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+			"In paragraph");
+		end if;
+		if Output_Object.HTML_Kind = HTML_4_Only then
+		    Output_Text (Output_Object, "<DIV Style=""text-align: center"">");
+		else
+		    Output_Text (Output_Object, "<CENTER>");
+		end if;
+		Make_Img("");
+		if Output_Object.HTML_Kind = HTML_4_Only then
+		    Output_Text (Output_Object, "</DIV>");
+		else
+		    Output_Text (Output_Object, "</CENTER>");
+		end if;
+	end case;
+    end Picture;
 
 end ARM_HTML;

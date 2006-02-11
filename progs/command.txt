@@ -954,11 +954,29 @@ various mathematical symbols.
 
 -- Tables:
 @table(Columns=<number>,
+       Alignment=<AllLeft|AllCenter|CenterExceptFirst>,
+       FirstColWidth=<number>,
+       NoBreak=<T|F>,
+       Border=<T|F>,
+       SmallSize=<T|F>,
        Caption=<text>,
        Headers=<text>,
        Body=<row_text>)
 
-	- Defines a table. Columns must be a single digit (2-9).
+       Defines a table.
+	- Columns must be a single digit (2-9).
+	- Alignment defines the column text alignment (centered or left edge).
+	- FirstColWidth defines the width of the first column compared to
+	  the rest - it's in multiples of the standard column width.
+          Note that some target formats with self-sizing columns (i.e. HTML)
+          ignore this value. It must be a single digit from 1 to 9.
+	- If NoBreak is T, the table will be formatted on a single page.
+	  Otherwise, it will be allowed to be split across pages. This
+	  must be F if the table is larger than a single page!
+	- If Border is T, then a border will be drawn around the table;
+          otherwise, not border will be used.
+	- If SmallSize is T, then the text size will be small (AARM-sized);
+	  else the text size will be normal.
 	- Caption defines the table caption. This spans the entire table.
 	- Headers defines the table headers. Each header is separated by
 	  a tab stop (@\). This should be a single line.
@@ -970,6 +988,31 @@ various mathematical symbols.
 @Last	- Marks the end of the second last row of the table. (If left out,
 	  the bottom line of the table may be missing).
 
+-- Pictures: (Graphics, Images)
+
+@PictureInline(Alignment=<Inline|FloatLeft|FloatRight>,
+         Border=<None|Thin|Thick>,
+         Height=<nnn>,
+         Width=<nnn>,
+         Name=<name>,
+         Descr=<descr>)
+@PictureAlone(Alignment=<Left|Right|Center>,
+         Border=<None|Thin|Thick>,
+         Height=<nnn>,
+         Width=<nnn>,
+         Name=<name>,
+         Descr=<descr>)
+	Includes a picture in the output. PictureAlone is a stand-alone
+	picture with the appropriate alignment; it must appear outside
+	of a paragraph. PictureInline occurs in the flow of text (Inline),
+	or floats to the appropriate margin; it must appear inside of a
+	paragraph. Otherwise, these are the same.
+	The picture file's simple name is
+	"name"; the file is assumed to be a .GIF or .JPG, found in the output
+	directory. (It needs to be included with the HTML output.)
+	"descr" is a description of the picture; it's used for the popups
+	in HTML. Height and Width are the picture size in pixels.
+	Border specifies the border of the picture.
 
 -------------------
 

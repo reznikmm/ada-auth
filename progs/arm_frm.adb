@@ -202,7 +202,10 @@ package body ARM_Format is
     --			default state.
     --  1/20/06 - RLB - Added AILink command.
     --  2/ 8/06 - RLB - Added command checking at the end of each table row.
-
+    --  2/ 9/06 - RLB - Implemented enhanced Table command.
+    --  2/10/06 - RLB - Split scanning phase into a separate file.
+    --		- RLB - Added additional features to the Table command.
+    --		- RLB - Added the picture command.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -441,6 +444,8 @@ package body ARM_Format is
         Leading, Trailing, Up, Down, Thin_Line, Thick_Line, Tab_Clear, Tab_Set,
 	-- Tables:
 	Table, Table_Param_Caption, Table_Param_Header, Table_Param_Body, Table_Last,
+	-- Pictures:
+	Picture_Alone, Picture_Inline,
         -- Indexing:
 	Index_List,
 	Defn, RootDefn, PDefn, Defn2, RootDefn2, PDefn2, Index_See,
@@ -550,6 +555,10 @@ package body ARM_Format is
 	    return Tab_Set;
 	elsif Canonical_Name = "table" then
 	    return Table;
+	elsif Canonical_Name = "picturealone" then
+	    return Picture_Alone;
+	elsif Canonical_Name = "pictureinline" then
+	    return Picture_Inline;
 	elsif Canonical_Name = "last" then
 	    return Table_Last;
 	elsif Canonical_Name = "part" then
@@ -927,498 +936,12 @@ package body ARM_Format is
     procedure Scan (Format_Object : in out Format_Type;
 		    File_Name : in String;
 		    Section_Number : in ARM_Contents.Section_Number_Type;
-		    Starts_New_Section : in Boolean) is
+		    Starts_New_Section : in Boolean) is separate;
 	-- Scans the contents for File_Name, determining the table of contents
 	-- for the section. The results are written to the contents package.
 	-- Starts_New_Section is True if the file starts a new section.
 	-- Section_Number is the number (or letter) of the section.
-
-	type Items is record
-	    Command : Command_Type;
-	    Close_Char : Character; -- Ought to be }, ], >, or ).
-	end record;
-	Nesting_Stack : array (1 .. 60) of Items;
-	Nesting_Stack_Ptr : Natural := 0;
-	Saw_a_Section_Header : Boolean := False;
-
-	Input_Object : ARM_File.File_Input_Type;
-
-	procedure Set_Nesting_for_Command (Command : in Command_Type;
-					   Param_Ch : in Character) is
-	    -- Push the command onto the nesting stack.
-	begin
-	    if Nesting_Stack_Ptr < Nesting_Stack'Last then
-	        Nesting_Stack_Ptr := Nesting_Stack_Ptr + 1;
-	        Nesting_Stack (Nesting_Stack_Ptr) :=
-	            (Command => Command,
-		     Close_Char => ARM_Input.Get_Close_Char (Param_Ch));
---Ada.Text_IO.Put_Line (" &Stack (" & Command_Type'Image(Command) & "); Close-Char=" &
---  Nesting_Stack(Nesting_Stack_Ptr).Close_Char);
-	    else
-		Ada.Text_IO.Put_Line ("** Nesting stack overflow on line" & ARM_File.Line_String (Input_Object));
-		for I in reverse Nesting_Stack'range loop
-		    Ada.Text_IO.Put_Line ("-- Command at" & Natural'Image(I) & " has a close char of '" &
-			Nesting_Stack (Nesting_Stack_Ptr).Close_Char & "' for " & Command_Type'Image(Nesting_Stack (Nesting_Stack_Ptr).Command));
-		end loop;
-		raise Program_Error;
-	    end if;
-	end Set_Nesting_for_Command;
-
-
-	procedure Scan_Command_with_Parameter is
-	    -- Scan the start of a command with a parameter.
-	    -- The parameter character has been scanned, and
-	    -- a stack item pushed.
-	    Title : ARM_Contents.Title_Type;
-	    Title_Length : Natural;
-
-	    procedure Get_Change_Version (Is_First : in Boolean;
-					  Version : out ARM_Contents.Change_Version_Type) is
-		-- Get a parameter named "Version", containing a character
-		-- representing the version number.
-		Ch, Close_Ch : Character;
-	    begin
-		ARM_Input.Check_Parameter_Name (Input_Object,
-		    Param_Name => "Version" & (8..ARM_Input.Command_Name_Type'Last => ' '),
-		    Is_First => Is_First,
-		    Param_Close_Bracket => Close_Ch);
-		if Close_Ch /= ' ' then
-		    -- Get the version character:
-		    ARM_File.Get_Char (Input_Object, Ch);
-		    Version := ARM_Contents.Change_Version_Type(Ch);
-		    ARM_File.Get_Char (Input_Object, Ch);
-		    if Ch /= Close_Ch then
-			Ada.Text_IO.Put_Line ("  ** Bad close for change version on line " & ARM_File.Line_String (Input_Object));
-			ARM_File.Replace_Char (Input_Object);
-		    end if;
-		-- else no parameter. Weird.
-		end if;
-	    end Get_Change_Version;
-
-	begin
-	    case Nesting_Stack(Nesting_Stack_Ptr).Command is
-		when Labeled_Section | Labeled_Section_No_Break |
-		     Labeled_Informative_Annex |
-		     Labeled_Normative_Annex | Labeled_Clause |
-		     Labeled_Subclause =>
-		    -- Load the title into the Title string:
-		    ARM_Input.Copy_to_String_until_Close_Char (
-		        Input_Object,
-		        Nesting_Stack(Nesting_Stack_Ptr).Close_Char,
-		        Title, Title_Length);
-		    Title(Title_Length+1 .. Title'Last) :=
-			(others => ' ');
-		    if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Subclause then
-			Format_Object.Subclause := Format_Object.Subclause + 1;
-		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Clause then
-			Format_Object.Clause := Format_Object.Clause + 1;
-			Format_Object.Subclause := 0;
-		    elsif Saw_a_Section_Header then
-			Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
-				ARM_File.Line_String (Input_Object));
-		    else
-			Saw_a_Section_Header := True;
-			Format_Object.Clause := 0;
-			Format_Object.Subclause := 0;
-		    end if;
-
-		    -- Load the title into the contents package:
-		    if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Subclause then
-			ARM_Contents.Add (Title, ARM_Contents.Subclause,
-					  Format_Object.Section,
-					  Format_Object.Clause,
-					  Format_Object.SubClause);
-		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Clause then
-			ARM_Contents.Add (Title, ARM_Contents.Clause,
-					  Format_Object.Section,
-					  Format_Object.Clause);
-		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Section or else
-		          Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Section_No_Break then
-			ARM_Contents.Add (Title, ARM_Contents.Section,
-					  Format_Object.Section);
-		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Normative_Annex then
-			ARM_Contents.Add (Title, ARM_Contents.Normative_Annex,
-					  Format_Object.Section);
-		    else
-			ARM_Contents.Add (Title, ARM_Contents.Informative_Annex,
-					  Format_Object.Section);
-		    end if;
-
-		    Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
---Ada.Text_IO.Put_Line (" &Unstack (Header)");
-
-		when Unnumbered_Section =>
-		    -- Load the title into the Title string:
-		    ARM_Input.Copy_to_String_until_Close_Char (
-		        Input_Object,
-		        Nesting_Stack(Nesting_Stack_Ptr).Close_Char,
-		        Title, Title_Length);
-		    Title(Title_Length+1 .. Title'Last) :=
-			(others => ' ');
-		    Format_Object.Unnumbered_Section :=
-			Format_Object.Unnumbered_Section + 1;
-		    -- This section will be numbered 0.Unnumbered_Section:
-		    Format_Object.Clause := Format_Object.Unnumbered_Section;
-		    Format_Object.Subclause := 0;
-		    -- Load the title into the contents package:
-		    ARM_Contents.Add (Title, ARM_Contents.Unnumbered_Section,
-				      0, -- Section is 0, so there is no number.
-				      Format_Object.Clause);
-
-		    Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
---Ada.Text_IO.Put_Line (" &Unstack (Header)");
-
-		when Labeled_Revised_Informative_Annex |
-		     Labeled_Revised_Normative_Annex |
-		     Labeled_Revised_Clause |
-		     Labeled_Revised_Subclause =>
-		    declare
-			Old_Title : ARM_Contents.Title_Type;
-			Old_Title_Length : Natural;
-			Ch : Character;
-			Version : ARM_Contents.Change_Version_Type := '0';
-		    begin
-			Get_Change_Version (Is_First => True,
-					    Version => Version);
-			ARM_Input.Check_Parameter_Name (Input_Object,
-			    Param_Name => "New" & (4..ARM_Input.Command_Name_Type'Last => ' '),
-			    Is_First => False,
-			    Param_Close_Bracket => Ch);
-			if Ch /= ' ' then
-			    -- There is a parameter:
-			    -- Load the new title into the Title string:
-			    ARM_Input.Copy_to_String_until_Close_Char (
-			        Input_Object,
-			        Ch,
-			        Title, Title_Length);
-			    Title(Title_Length+1 .. Title'Last) :=
-				(others => ' ');
-			    ARM_Input.Check_Parameter_Name (Input_Object,
-			        Param_Name => "Old" & (4..ARM_Input.Command_Name_Type'Last => ' '),
-			        Is_First => False,
-			        Param_Close_Bracket => Ch);
-			    if Ch /= ' ' then
-			        -- There is a parameter:
-			        -- Load the new title into the Title string:
-			        ARM_Input.Copy_to_String_until_Close_Char (
-			            Input_Object,
-			            Ch,
-			            Old_Title, Old_Title_Length);
-			        Old_Title(Old_Title_Length+1 .. Old_Title'Last) :=
-				    (others => ' ');
-			    end if;
-			end if;
-		        ARM_File.Get_Char (Input_Object, Ch);
-		        if Ch /= Nesting_Stack(Nesting_Stack_Ptr).Close_Char then
-			    Ada.Text_IO.Put_Line ("  ** Bad close for Labeled_Revised_(SubClause|Annex) on line " & ARM_File.Line_String (Input_Object));
-			    ARM_File.Replace_Char (Input_Object);
-		        end if;
-
-		        if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Subclause then
-			    Format_Object.Subclause := Format_Object.Subclause + 1;
-		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Clause then
-			    Format_Object.Clause := Format_Object.Clause + 1;
-			    Format_Object.Subclause := 0;
-		        elsif Saw_a_Section_Header then
-			    Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
-				    ARM_File.Line_String (Input_Object));
-		        else
-			    Saw_a_Section_Header := True;
-			    Format_Object.Clause := 0;
-			    Format_Object.Subclause := 0;
-		        end if;
-
-		        -- Load the title into the contents package:
-		        if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Subclause then
-			    ARM_Contents.Add (Title, ARM_Contents.Subclause,
-					      Format_Object.Section,
-					      Format_Object.Clause,
-					      Format_Object.SubClause,
-					      Version => Version);
-			    ARM_Contents.Add_Old (Old_Title,
-					      ARM_Contents.Subclause,
-					      Format_Object.Section,
-					      Format_Object.Clause,
-					      Format_Object.SubClause);
-		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Clause then
-			    ARM_Contents.Add (Title, ARM_Contents.Clause,
-					      Format_Object.Section,
-					      Format_Object.Clause,
-					      Version => Version);
-			    ARM_Contents.Add_Old (Old_Title,
-					      ARM_Contents.Clause,
-					      Format_Object.Section,
-					      Format_Object.Clause);
-		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Normative_Annex then
-			    ARM_Contents.Add (Title,
-					      ARM_Contents.Normative_Annex,
-					      Format_Object.Section,
-					      Version => Version);
-			    ARM_Contents.Add_Old (Old_Title,
-					      ARM_Contents.Normative_Annex,
-					      Format_Object.Section);
-		        else -- Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Informative_Annex then
-			    ARM_Contents.Add (Title,
-					      ARM_Contents.Informative_Annex,
-					      Format_Object.Section,
-					      Version => Version);
-			    ARM_Contents.Add_Old (Old_Title,
-					      ARM_Contents.Informative_Annex,
-					      Format_Object.Section);
-		        end if;
-
-			Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
---Ada.Text_IO.Put_Line (" &Unstack (Header)");
-		    end;
-
-		when Labeled_Added_Informative_Annex |
-		     Labeled_Added_Normative_Annex |
-		     Labeled_Added_Clause |
-		     Labeled_Added_Subclause =>
-		    declare
-			Ch : Character;
-			Version : ARM_Contents.Change_Version_Type := '0';
-		    begin
-			Get_Change_Version (Is_First => True,
-					    Version => Version);
-			ARM_Input.Check_Parameter_Name (Input_Object,
-			    Param_Name => "Name" & (5..ARM_Input.Command_Name_Type'Last => ' '),
-			    Is_First => False,
-			    Param_Close_Bracket => Ch);
-			if Ch /= ' ' then
-			    -- There is a parameter:
-			    -- Load the new title into the Title string:
-			    ARM_Input.Copy_to_String_until_Close_Char (
-			        Input_Object,
-			        Ch,
-			        Title, Title_Length);
-			    Title(Title_Length+1 .. Title'Last) :=
-				(others => ' ');
-			end if;
-		        ARM_File.Get_Char (Input_Object, Ch);
-		        if Ch /= Nesting_Stack(Nesting_Stack_Ptr).Close_Char then
-			    Ada.Text_IO.Put_Line ("  ** Bad close for Labeled_Added_(Sub)Clause on line " & ARM_File.Line_String (Input_Object));
-			    ARM_File.Replace_Char (Input_Object);
-		        end if;
-
-		        -- Load the title into the contents package:
-		        if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Subclause then
-			    Format_Object.Subclause := Format_Object.Subclause + 1;
-			    ARM_Contents.Add (Title, ARM_Contents.Subclause,
-					      Format_Object.Section,
-					      Format_Object.Clause,
-					      Format_Object.SubClause,
-					      Version => Version);
-			    ARM_Contents.Add_Old ((others => ' '),
-					      ARM_Contents.Subclause,
-					      Format_Object.Section,
-					      Format_Object.Clause,
-					      Format_Object.SubClause);
-		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Clause then
-			    Format_Object.Clause := Format_Object.Clause + 1;
-			    Format_Object.Subclause := 0;
-			    ARM_Contents.Add (Title, ARM_Contents.Clause,
-					      Format_Object.Section,
-					      Format_Object.Clause,
-					      Version => Version);
-			    ARM_Contents.Add_Old ((others => ' '),
-					      ARM_Contents.Clause,
-					      Format_Object.Section,
-					      Format_Object.Clause);
-		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Normative_Annex then
-		            if Saw_a_Section_Header then
-			        Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
-				        ARM_File.Line_String (Input_Object));
-			    end if;
-			    Saw_a_Section_Header := True;
-			    Format_Object.Clause := 0;
-			    Format_Object.Subclause := 0;
-			    ARM_Contents.Add (Title,
-					      ARM_Contents.Normative_Annex,
-					      Format_Object.Section,
-					      Version => Version);
-			    ARM_Contents.Add_Old ((others => ' '),
-					      ARM_Contents.Normative_Annex,
-					      Format_Object.Section);
-		        else -- Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Informative_Annex then
-		            if Saw_a_Section_Header then
-			        Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
-				        ARM_File.Line_String (Input_Object));
-			    end if;
-			    Saw_a_Section_Header := True;
-			    Format_Object.Clause := 0;
-			    Format_Object.Subclause := 0;
-			    ARM_Contents.Add (Title,
-					      ARM_Contents.Informative_Annex,
-					      Format_Object.Section,
-					      Version => Version);
-			    ARM_Contents.Add_Old ((others => ' '),
-					      ARM_Contents.Informative_Annex,
-					      Format_Object.Section);
-		        end if;
-
-			Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
---Ada.Text_IO.Put_Line (" &Unstack (Header)");
-		    end;
-
-		when others =>
-		    null; -- Not in scanner.
-	    end case;
-	end Scan_Command_with_Parameter;
-
-
-	procedure Handle_End_of_Command is
-	    -- Unstack and handle the end of Commands.
-	begin
-	    case Nesting_Stack(Nesting_Stack_Ptr).Command is
-		when others =>
-		    -- No special handling needed.
-		    null;
-	    end case;
---Ada.Text_IO.Put_Line (" &Unstack (Normal-"& Command_Type'Image(Nesting_Stack(Nesting_Stack_Ptr).Command) & ")");
-	    Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
-	end Handle_End_of_Command;
-
-
-	procedure Scan_Special is
-	    -- Scan a special command/macro/tab.
-	    -- These all start with '@'.
-	    -- @xxxx is a command. It may have parameters delimited by
-	    -- (), {}, [], or <>. There does not appear to be an escape, so
-	    -- we don't have to worry about '}' being used in {} brackets,
-	    -- for example. (Must be a pain to write, though.)
-	    Command_Name : ARM_Input.Command_Name_Type;
-	    Ch : Character;
-	begin
-	    ARM_File.Get_Char (Input_Object, Ch);
-	    if Ch = '\' then
-		-- This represents a tab (or the end of centered text). We're
-		-- done here.
-		return;
-	    elsif Ch = '=' then
-		-- This marks the beginning of centered text.
-		-- We're done here.
-		return;
-	    elsif Ch = '^' then
-		-- This represented a tab stop (these should have been
-		-- deleted from the input). We're done here.
-		return;
-	    elsif Ch = '@' then
-		-- This represents @ in the text. We're done here.
-		return;
-	    elsif Ch = ' ' then
-		-- This represents a hard space in the text. We're done here.
-		return;
-	    elsif Ch = ';' then
-		-- This seems to be an end of command (or substitution) marker.
-		-- For instance, it is used in Section 1:
-		-- .. the distinction between @ResolutionName@;s and ...
-		-- This converts to:
-		-- .. the distinction between Name Resolution Rules and ...
-		-- Without it, the 's' would append to the command name, and
-		-- we would get the wrong command. Thus, it itself does nothing
-		-- at all, so we're done here.
-		return;
-	    elsif Ch = '-' then
-		-- This represents a subscript. It has an argument.
-	        ARM_File.Get_Char (Input_Object, Ch);
-		if ARM_Input.Is_Open_Char (Ch) then -- Start parameter:
-		    Set_Nesting_for_Command
-		        (Command  => Unknown,
-			 Param_Ch => Ch);
-		else -- No parameter. Weird.
-		    ARM_File.Replace_Char (Input_Object);
-		end if;
-		return;
-	    elsif Ch = '+' then
-		-- This represents a superscript. It has an argument.
-	        ARM_File.Get_Char (Input_Object, Ch);
-		if ARM_Input.Is_Open_Char (Ch) then -- Start parameter:
-		    Set_Nesting_for_Command
-		        (Command  => Unknown,
-			 Param_Ch => Ch);
-		else -- No parameter. Weird.
-		    ARM_File.Replace_Char (Input_Object);
-		end if;
-		return;
-	    elsif Ch = ':' then
-		-- This is a period type marker. We're done here.
-		return;
-	    elsif Ch = '*' then
-		-- This is a line break. We're done here.
-		return;
-	    elsif Ch = '|' then
-		-- This is a soft line break. We're done here.
-		return;
-	    elsif Ch = '!' then
-		-- This is a soft hyphen break. We're done here.
-		return;
-	    elsif Ch = Ascii.LF then
-		-- Stand alone '@'.
-		-- I now believe this is an error. It appears in
-		-- Infosys.MSS, and seems to have something to do with formatting.
-		return;
-	    end if;
-	    ARM_File.Replace_Char (Input_Object);
-	    Arm_Input.Get_Name (Input_Object, Command_Name);
-
-	    ARM_File.Get_Char (Input_Object, Ch);
-	    if ARM_Input.Is_Open_Char (Ch) then -- Start parameter:
-	        Set_Nesting_for_Command
-		    (Command  => Command (Ada.Characters.Handling.To_Lower (Command_Name)),
-		     Param_Ch => Ch);
-		Scan_Command_with_Parameter;
-	    else
-		ARM_File.Replace_Char (Input_Object);
-		-- We're not interested in commands with no parameters.
-	    end if;
-	end Scan_Special;
-
-    begin
-	Ada.Text_IO.Put_Line ("-- Scanning " & File_Name);
-	begin
-	    Arm_File.Open (Input_Object, File_Name);
-	exception
-	    when others =>
-		Ada.Text_IO.Put_Line ("** Unable to open file " & File_Name);
-		return;
-	end;
-	if Starts_New_Section then
-	    Format_Object.Section := Section_Number;
-	    Format_Object.Clause := 0;
-	    Format_Object.Subclause := 0;
-	end if;
-        loop
-	    declare
-	        Char : Character;
-	    begin
-	        ARM_File.Get_Char (Input_Object, Char);
---Ada.Text_IO.Put_Line("Char=" & Char & " Nesting=" & Natural'Image(Nesting_Stack_Ptr));
-	        case Char is
-		    when '@' =>
-		        Scan_Special;
-		    when Ascii.SUB =>
-		        exit; -- End of file.
-		    when others =>
-		        if Nesting_Stack_Ptr /= 0 and then
-			   Nesting_Stack (Nesting_Stack_Ptr).Close_Char /= ' ' and then
-			   Nesting_Stack (Nesting_Stack_Ptr).Close_Char = Char then
-    			    -- Closing a command, remove it from the stack.
-			    Handle_End_of_Command;
-		        else
-			    null; -- Ordinary characters, nothing to do.
-		        end if;
-	        end case;
-	    end;
-        end loop;
-        -- Reached end of the file.
-        Ada.Text_IO.Put_Line ("  Lines scanned: " &
-			 ARM_File.Line_String (Input_Object));
-        ARM_File.Close (Input_Object);
-        if Nesting_Stack_Ptr /= 0 then
-	    Ada.Text_IO.Put_Line ("   ** Unfinished commands detected.");
-        end if;
-    end Scan;
+	-- See ARM_FRMS.ADB.
 
 
     procedure Write_Table_of_Contents (
@@ -4663,6 +4186,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		-- Tables:
 		when Table =>
 			-- @table(Columns=<number>,
+			--       Alignment=<AllLeft|AllCenter|CenterExceptFirst>,
+			--       FirstColWidth=<number>,
+			--       NoBreak=<T|F>,
+			--       Border=<T|F>,
+			--       SmallSize=<T|F>,
 			--       Caption=<text>,
 			--       Headers=<text>,
 			--       Body=<row_text>)
@@ -4674,41 +4202,217 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    Check_End_Paragraph; -- End any paragraph we're in.
 		    declare
 			Close_Ch, Ch : Character;
+			Align_Name : ARM_Input.Command_Name_Type;
+			Cols, FirstWidth : Character;
+			No_Page_Break : Boolean;
+			Has_Border : Boolean;
+			Small_Text : Boolean;
+			Alignment : ARM_Output.Column_Text_Alignment;
 		    begin
 		        ARM_Input.Check_Parameter_Name (Input_Object,
 			    Param_Name => "Columns" & (8..ARM_Input.Command_Name_Type'Last => ' '),
 			    Is_First => True,
 			    Param_Close_Bracket => Close_Ch);
 		        if Close_Ch /= ' ' then
-			    ARM_Input.Get_Char (Input_Object, Ch);
-			    -- Set to the table format:
-			    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph := Format_Object.Last_Paragraph_Subhead_Type;
-			    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph := Format_Object.Next_Paragraph_Subhead_Type;
-			    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Paragraph_Format := Format_Object.Next_Paragraph_Format_Type;
-			    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops := Format_Object.Paragraph_Tab_Stops;
-			    Format_Object.Next_Paragraph_Format_Type := In_Table;
-			    Format_Object.In_Paragraph := True; -- A fake, but we cannot have any format.
-			    Arm_Output.Start_Table (Output_Object, Columns => Character'Pos(Ch) - Character'Pos('0'));
+			    ARM_Input.Get_Char (Input_Object, Cols);
 			    ARM_Input.Get_Char (Input_Object, Ch);
 			    if Ch /= Close_Ch then
-				Ada.Text_IO.Put_Line ("  ** Bad close for Table columns on line " & ARM_Input.Line_String (Input_Object));
+				Ada.Text_IO.Put_Line ("  ** Bad close for Table Columns on line " & ARM_Input.Line_String (Input_Object));
 				ARM_Input.Replace_Char (Input_Object);
 			    end if;
+			    if Cols not in '2'..'9' then
+				Ada.Text_IO.Put_Line ("  ** Bad table column count on line " & ARM_Input.Line_String (Input_Object));
+			    end if;
 			end if;
+
+		        ARM_Input.Check_Parameter_Name (Input_Object,
+			    Param_Name => "Alignment" & (10..ARM_Input.Command_Name_Type'Last => ' '),
+			    Is_First => False,
+			    Param_Close_Bracket => Close_Ch);
+		        if Close_Ch /= ' ' then
+			    -- Get the alignment word:
+			    Arm_Input.Get_Name (Input_Object, Align_Name);
+			    ARM_Input.Get_Char (Input_Object, Ch);
+			    if Ch /= Close_Ch then
+				Ada.Text_IO.Put_Line ("  ** Bad close for Table Alignment on line " & ARM_Input.Line_String (Input_Object));
+				ARM_Input.Replace_Char (Input_Object);
+			    end if;
+
+			    if Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right)) =
+				"allleft" then
+				Alignment := ARM_Output.Left_All;
+			    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right)) =
+				"allcenter" then
+				Alignment := ARM_Output.Center_All;
+			    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right)) =
+				"centerexceptfirst" then
+				Alignment := ARM_Output.Center_Except_First;
+			    else
+				Ada.Text_IO.Put_Line ("  ** Bad column alignment: " &
+					Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right) &
+					" on line " & ARM_Input.Line_String (Input_Object));
+			    end if;
+			-- else no parameter. Weird.
+			end if;
+
+		        ARM_Input.Check_Parameter_Name (Input_Object,
+			    Param_Name => "FirstColWidth" & (14..ARM_Input.Command_Name_Type'Last => ' '),
+			    Is_First => False,
+			    Param_Close_Bracket => Close_Ch);
+		        if Close_Ch /= ' ' then
+			    ARM_Input.Get_Char (Input_Object, FirstWidth);
+			    ARM_Input.Get_Char (Input_Object, Ch);
+			    if Ch /= Close_Ch then
+				Ada.Text_IO.Put_Line ("  ** Bad close for Table FirstColWidth on line " & ARM_Input.Line_String (Input_Object));
+				ARM_Input.Replace_Char (Input_Object);
+			    end if;
+			    if FirstWidth not in '1'..'9' then
+				Ada.Text_IO.Put_Line ("  ** Bad table 1st column width on line " & ARM_Input.Line_String (Input_Object));
+			    end if;
+			end if;
+
+			Get_Boolean ("NoBreak" & (8..ARM_Input.Command_Name_Type'Last => ' '), No_Page_Break);
+			Get_Boolean ("Border" & (7..ARM_Input.Command_Name_Type'Last => ' '), Has_Border);
+			Get_Boolean ("SmallSize" & (10..ARM_Input.Command_Name_Type'Last => ' '), Small_Text);
+
+		        -- Set to the table format:
+		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph := Format_Object.Last_Paragraph_Subhead_Type;
+		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph := Format_Object.Next_Paragraph_Subhead_Type;
+		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Paragraph_Format := Format_Object.Next_Paragraph_Format_Type;
+		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops := Format_Object.Paragraph_Tab_Stops;
+		        Format_Object.Next_Paragraph_Format_Type := In_Table;
+		        Format_Object.In_Paragraph := True; -- A fake, but we cannot have any format.
+
 			-- OK, we've started the table. Now, get the caption:
 			ARM_Input.Check_Parameter_Name (Input_Object,
 			    Param_Name => "Caption" & (8..ARM_Input.Command_Name_Type'Last => ' '),
 			    Is_First => False,
 			    Param_Close_Bracket => Close_Ch);
 			if Close_Ch /= ' ' then
-			    -- Now, handle the parameter:
-		            -- Stack it so we can process the end:
-			    Set_Nesting_for_Parameter
-			        (Command => Table_Param_Caption,
-				 Close_Ch => Close_Ch);
+			    -- Check if the parameter is empty:
+			    ARM_Input.Get_Char (Input_Object, Ch);
+			    if Ch /= Close_Ch then
+				-- There is a caption:
+				ARM_Input.Replace_Char (Input_Object);
+
+				-- Create the table.
+			        Arm_Output.Start_Table (
+					Output_Object,
+					Columns => Character'Pos(Cols) - Character'Pos('0'),
+				        First_Column_Width => Character'Pos(FirstWidth) - Character'Pos('0'),
+					Alignment => Alignment,
+					No_Page_Break => No_Page_Break,
+					Has_Border => Has_Border,
+					Small_Text_Size => Small_Text,
+					Header_Kind => ARM_Output.Both_Caption_and_Header);
+
+			        -- Now, handle the parameter:
+		                -- Stack it so we can process the end:
+			        Set_Nesting_for_Parameter
+			            (Command => Table_Param_Caption,
+				     Close_Ch => Close_Ch);
+
+			    else -- Empty Caption. Move on to the Headers
+				 -- command.
+				ARM_Input.Check_Parameter_Name (Input_Object,
+				    Param_Name => "Headers" & (8..ARM_Input.Command_Name_Type'Last => ' '),
+				    Is_First => False,
+				    Param_Close_Bracket => Close_Ch);
+
+				if Close_Ch /= ' ' then
+				    -- Check if the parameter is empty:
+				    ARM_Input.Get_Char (Input_Object, Ch);
+				    if Ch /= Close_Ch then
+					-- There is a header:
+					ARM_Input.Replace_Char (Input_Object);
+
+					-- Create the table.
+				        Arm_Output.Start_Table (
+						Output_Object,
+						Columns => Character'Pos(Cols) - Character'Pos('0'),
+					        First_Column_Width => Character'Pos(FirstWidth) - Character'Pos('0'),
+						Alignment => Alignment,
+						No_Page_Break => No_Page_Break,
+						Has_Border => Has_Border,
+						Small_Text_Size => Small_Text,
+						Header_Kind => ARM_Output.Header_Only);
+
+				        -- Now, handle the parameter:
+			                -- Stack it so we can process the end:
+				        Set_Nesting_for_Parameter
+				            (Command => Table_Param_Header,
+					     Close_Ch => Close_Ch);
+
+				    else -- Empty Headers, too. Move on to the
+					 -- Body command.
+					ARM_Input.Check_Parameter_Name (Input_Object,
+					    Param_Name => "Body" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+					    Is_First => False,
+					    Param_Close_Bracket => Close_Ch);
+
+					if Close_Ch /= ' ' then
+					    -- Create the table.
+				            Arm_Output.Start_Table (
+						    Output_Object,
+						    Columns => Character'Pos(Cols) - Character'Pos('0'),
+					            First_Column_Width => Character'Pos(FirstWidth) - Character'Pos('0'),
+						    Alignment => Alignment,
+						    No_Page_Break => No_Page_Break,
+						    Has_Border => Has_Border,
+						    Small_Text_Size => Small_Text,
+						    Header_Kind => ARM_Output.No_Headers);
+
+				            -- Now, handle the parameter:
+			                    -- Stack it so we can process the end:
+				            Set_Nesting_for_Parameter
+				                (Command => Table_Param_Body,
+					         Close_Ch => Close_Ch);
+
+					-- else no parameter, weird.
+					end if;
+
+				    end if;
+
+				-- else no parameter, weird.
+				end if;
+
+                            end if;
 
 			-- else no parameter, weird.
 			end if;
+		    end;
+
+		-- Pictures:
+		when Picture_Alone | Picture_Inline =>
+		    -- @PictureInline(Alignment=<Inline|FloatLeft|FloatRight>,
+		    --		     Border=<None|Thin|Thick>,
+		    --		     Height=<nnn>,
+		    --		     Width=<nnn>,
+		    --		     Name=<name>,
+		    --		     Descr=<descr>)
+		    -- @PictureAlone(Alignment=<Left|Right|Center>,
+		    --		     Border=<None|Thin|Thick>,
+		    --		     Height=<nnn>,
+		    --		     Width=<nnn>,
+		    --		     Name=<name>,
+		    --		     Descr=<descr>)
+		    declare
+			Ch : Character;
+		    begin
+		        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command =
+			    Picture_Alone then
+			    Check_End_Paragraph; -- End any paragraph that we're in.
+
+			    -- ** TBD: Get the alignment parameter.
+
+		        else -- Picture_Inline.
+			    Check_Paragraph; -- Make sure we're in a paragraph.
+
+			    -- ** TBD: Get the alignment parameter.
+		        end if;
+--**** TBD: get the other parameters, then call Picture.
+
+
 		    end;
 
 		-- Paragraph kind commands:
@@ -8372,6 +8076,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		     Roman | Swiss | Fixed | Roman_Italic | Shrink | Grow |
 		     Keyword | Non_Terminal | Example_Text | Example_Comment |
 		     Up | Down | Tab_Clear | Tab_Set | Table |
+		     Picture_Alone | Picture_Inline |
 		     Defn | RootDefn | PDefn | Defn2 | RootDefn2 | PDefn2 |
 		     Index_See | Index_See_Also | See_Other | See_Also |
 		     Index_Root_Unit | Index_Child_Unit | Index_Subprogram_Child_Unit |
@@ -9968,7 +9673,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 
 		case Command (Command_Name) is
 		    when Text_Begin | Text_End | New_Page | New_Column | RM_New_Page |
-			Thin_Line | Thick_Line | Table |
+			Thin_Line | Thick_Line | Table | Picture_Alone |
 			To_Glossary | Change_To_Glossary |
 			Implementation_Defined |
 			Change_Implementation_Defined |

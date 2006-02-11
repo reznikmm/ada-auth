@@ -106,6 +106,10 @@ package body ARM_RTF is
     --  1/11/06 - RLB - Eliminated dispatching Create in favor of tailored
     --			versions.
     --  1/18/06 - RLB - Added additional styles.
+    --  2/ 8/06 - RLB - Added additional parameters to the table command.
+    --  2/10/06 - RLB - Added even more additional parameters to the
+    --			table command.
+    --		- RLB - Added picture command.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -143,7 +147,10 @@ package body ARM_RTF is
     TOC_2_Info : Format_Info_Type;
     TOC_3_Info : Format_Info_Type;
 
-    Table_Text_Info : Format_Info_Type;
+    Table_C_Text_Info : Format_Info_Type;
+    Table_L_Text_Info : Format_Info_Type;
+    Table_C_Sml_Text_Info : Format_Info_Type;
+    Table_L_Sml_Text_Info : Format_Info_Type;
 
     procedure Set_Style (Into : in out Format_Info_Type;
 			 Font_Size : in Natural;
@@ -904,14 +911,40 @@ package body ARM_RTF is
 		             "\s57\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs17\cgrid \sbasedon0 \snext0 ");
 	    end if;
-	    Set_Style (Table_Text_Info,
+	    Set_Style (Table_C_Text_Info,
 		       Font_Size => 18,
 		       Style_Indent => 0,
-		       Style_Before => 0,
-		       Style_After => 0,
+		       Style_Before => 20,
+		       Style_After => 20,
 		       Style_Justified => FALSE,
 		       Style_String =>
-			 "\fs18\f0\qc ");
+			 "\fs18\f0\sa20\sb20\qc ");
+		-- We use a bit of space above and below to avoid overrunning
+		-- the borders of the cells.
+	    Set_Style (Table_L_Text_Info,
+		       Font_Size => 18,
+		       Style_Indent => 0,
+		       Style_Before => 20,
+		       Style_After => 20,
+		       Style_Justified => FALSE,
+		       Style_String =>
+			 "\fs18\f0\sa20\sb20\ql ");
+	    Set_Style (Table_C_Sml_Text_Info,
+		       Font_Size => 15,
+		       Style_Indent => 0,
+		       Style_Before => 20,
+		       Style_After => 20,
+		       Style_Justified => FALSE,
+		       Style_String =>
+			 "\fs15\f0\sa20\sb20\qc ");
+	    Set_Style (Table_L_Sml_Text_Info,
+		       Font_Size => 15,
+		       Style_Indent => 0,
+		       Style_Before => 20,
+		       Style_After => 20,
+		       Style_Justified => FALSE,
+		       Style_String =>
+			 "\fs15\f0\sa20\sb20\ql ");
 	else
 	    Set_Style (Paragraph_Info(ARM_Output.Normal),
 		       Font_Size => 22,
@@ -1441,14 +1474,40 @@ package body ARM_RTF is
 		             "\s57\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
 				"\adjustright \b\f1\fs22\cgrid \sbasedon0 \snext0 ");
 	    end if;
-	    Set_Style (Table_Text_Info,
+	    Set_Style (Table_C_Text_Info,
 		       Font_Size => 22,
 		       Style_Indent => 0,
-		       Style_Before => 0,
-		       Style_After => 0,
+		       Style_Before => 10,
+		       Style_After => 10,
 		       Style_Justified => FALSE,
 		       Style_String =>
-			 "\fs22\f0\qc ");
+			 "\fs22\f0\sa10\sb10\qc ");
+		-- We use a bit of space above and below to avoid overrunning
+		-- the borders of the cells.
+	    Set_Style (Table_L_Text_Info,
+		       Font_Size => 22,
+		       Style_Indent => 0,
+		       Style_Before => 20,
+		       Style_After => 20,
+		       Style_Justified => FALSE,
+		       Style_String =>
+			 "\fs22\f0\sa20\sb20\ql ");
+	    Set_Style (Table_C_Sml_Text_Info,
+		       Font_Size => 18,
+		       Style_Indent => 0,
+		       Style_Before => 20,
+		       Style_After => 20,
+		       Style_Justified => FALSE,
+		       Style_String =>
+			 "\fs18\f0\sa20\sb20\qc ");
+	    Set_Style (Table_L_Sml_Text_Info,
+		       Font_Size => 18,
+		       Style_Indent => 0,
+		       Style_Before => 20,
+		       Style_After => 20,
+		       Style_Justified => FALSE,
+		       Style_String =>
+			 "\fs18\f0\sa20\sb20\ql ");
 	end if;
 
 	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Normal));
@@ -1598,7 +1657,7 @@ package body ARM_RTF is
 	    -- \tqr - set following tab as a right tab.
 
 	-- Revision table:
-	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\*\revtbl {Original Text;}{Technical Corrigendum 1;}{Unused Hot Pink;}{Amendment 1;}}");
+	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\*\revtbl {Original Text;}{Technical Corrigendum 1;}{Amendment 1;}}");
 
 	-- Information (truncated):
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\info{\title " &
@@ -1683,20 +1742,6 @@ package body ARM_RTF is
 	end if;
         Output_Object.Wrote_into_Section := False;
     end Start_RTF_File;
-
-
-    function Adj (Version : ARM_Contents.Change_Version_Type) return ARM_Contents.Change_Version_Type is
-       -- Adjust the revision version number to match the revision table.
-       use type ARM_Contents.Change_Version_Type;
-    begin
-        -- Code to skip over weirdly colored second revision (mostly a problem
-	-- on Word 98).
-        if Version = '0' or else Version = '1' then
-	    return Version;
-        else
-	    return ARM_Contents.Change_Version_Type'Succ(Version);
-        end if;
-    end Adj;
 
 
     procedure End_RTF_File (Output_Object : in out RTF_Output_Type) is
@@ -2411,7 +2456,7 @@ package body ARM_RTF is
 	Count : Natural; -- Not used after being set.
 	function Header_Text return String is
 	begin
-	    return "{\revised\revauth" & Adj(Version) & " " & New_Header_Text & "}{\deleted\revauthdel" & Adj(Version) & " " & Old_Header_Text & "}";
+	    return "{\revised\revauth" & Version & " " & New_Header_Text & "}{\deleted\revauthdel" & Version & " " & Old_Header_Text & "}";
 	end Header_Text;
     begin
 	if not Output_Object.Is_Valid then
@@ -2616,8 +2661,12 @@ package body ARM_RTF is
     end Format_Value;
 
 
-    procedure RTF_Table_Info (Output_Object : in out RTF_Output_Type) is
+    type Table_Info_Kind is (Caption, Header, Header_no_Caption, First_Row, Row, Last_Row);
+
+    procedure RTF_Table_Info (Output_Object : in out RTF_Output_Type;
+			      Kind : in Table_Info_Kind) is
 	-- Output the current table definition (Word needs this on every row):
+	use type ARM_Output.Column_Text_Alignment;
     begin
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "\trowd \trgaph108 ");
 
@@ -2625,91 +2674,189 @@ package body ARM_RTF is
 	    Format_Value(Paragraph_Info(ARM_Output.Normal).Size * 16) &
 	    "\trleft" & Format_Value(Output_Object.Table_Indent) & " ");
 
-	-- Set all of the borders to the normal:
-        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\trbrdrt\brdrs\brdrw10 " &
-	    "\trbrdrl\brdrs\brdrw10 " & "\trbrdrb\brdrs\brdrw10 " &
-	    "\trbrdrr\brdrs\brdrw10 " & "\trbrdrh\brdrs\brdrw10 " &
-	    "\trbrdrv\brdrs\brdrw10 ");
-
-        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\trkeep\trkeepfollow ");
-    end RTF_Table_Info;
-
-
-    procedure Start_Table (Output_Object : in out RTF_Output_Type;
-			   Columns : in ARM_Output.Column_Count) is
-	-- Starts a table. The number of columns is Columns.
-	-- This command starts a paragraph; the entire table is a single
-	-- paragraph. Text will be considered part of the caption until the
-	-- next table marker call.
-	-- Raises Not_Valid_Error if in a paragraph.
-	Page_Width : Natural;
-    begin
-	if not Output_Object.Is_Valid then
-	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
-		"Not valid object");
-	end if;
-	if Output_Object.Is_In_Paragraph then
-	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
-		"Table in paragraph");
+	if Output_Object.Table_Has_Border then
+	    -- Set all of the borders to the normal:
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "\trbrdrt\brdrs\brdrw10 " &
+	        "\trbrdrl\brdrs\brdrw10 " & "\trbrdrb\brdrs\brdrw10 " &
+	        "\trbrdrr\brdrs\brdrw10 " & "\trbrdrh\brdrs\brdrw10 " &
+	        "\trbrdrv\brdrs\brdrw10 ");
+	-- else nothing.
 	end if;
 
-	Output_Object.Is_In_Paragraph := True;
-	Output_Object.Is_In_Table := True;
-
-	case Output_Object.Page_Size is
-	    when ARM_RTF.A4 =>
-	        Page_Width := 9030;
-	    when ARM_RTF.Letter =>
-	        Page_Width := 9360;
-	    when ARM_RTF.Half_Letter =>
-	        Page_Width := 5040;
-	    when ARM_RTF.Ada95 =>
-	        Page_Width := 7740;
-        end case;
-	if Columns <= 3 then
-	    Output_Object.Table_Indent := Page_Width / 6;
-            Output_Object.Table_Width  := Page_Width - Output_Object.Table_Indent*2;
-            Output_Object.Table_Column_Width  := Output_Object.Table_Width / Columns;
+	if Output_Object.Table_No_Page_Break then
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "\trkeep\trkeepfollow ");
+	elsif Kind = Header_no_Caption then
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "\trhdr\trkeep ");
 	else
-	    -- ** Kludge alert **
-	    -- Whether the first column is wider ought to be a parameter here,
-	    -- not assumed.
-	    Output_Object.Table_Indent := Page_Width / 16;
-            Output_Object.Table_Width  := Page_Width - Output_Object.Table_Indent*2;
-            Output_Object.Table_Column_Width  := Output_Object.Table_Width / (Columns+1);
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "\trkeep ");
 	end if;
-	Output_Object.Column_Count := Columns;
 
-	-- Make a blank line before, of the right size:
-	Write_Style_for_Paragraph (Output_Object.Output_File,
-				   Table_Text_Info,
-				   Output_Object.Char_Count);
-        Ada.Text_IO.Put (Output_Object.Output_File, "\par }");
-	Output_Object.Char_Count := 0;
+	case Kind is
+	    when Caption =>
+		-- Now, define the cell borders:
+		if Output_Object.Table_Has_Border then
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File,
+		        "\clvertalc \clbrdrt\brdrs\brdrw10 " &
+		        "\clbrdrl\brdrs\brdrw10 " &
+		        "\clbrdrb\brdrs\brdrw10 " &
+		        "\clbrdrr\brdrs\brdrw10 ");
+		else
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File,
+		        "\clvertalc ");
+		end if;
 
-	RTF_Table_Info (Output_Object);
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
+		    Format_Value(Output_Object.Table_Indent + Output_Object.Table_Width) & " ");
+		    -- Caption cell crosses entire line.
 
-	-- Now, define the cell borders:
-        Ada.Text_IO.Put_Line (Output_Object.Output_File,
-	    "\clvertalc \clbrdrt\brdrs\brdrw10 " &
-	    "\clbrdrl\brdrs\brdrw10 " &
-	    "\clbrdrb\brdrs\brdrw10 " &
-	    "\clbrdrr\brdrs\brdrw10 ");
+		-- Now, set up text (normal, centered):
+		if Output_Object.Table_Has_Small_Text then
+		    Write_Style_for_Paragraph (Output_Object.Output_File,
+					       Table_C_Sml_Text_Info,
+					       Output_Object.Char_Count);
+		    Output_Object.Real_Size := Table_C_Sml_Text_Info.Size;
+		    Output_Object.Size := 0;
+		else
+		    Write_Style_for_Paragraph (Output_Object.Output_File,
+					       Table_C_Text_Info,
+					       Output_Object.Char_Count);
+		    Output_Object.Real_Size := Table_C_Text_Info.Size;
+		    Output_Object.Size := 0;
+		end if;
+	        Ada.Text_IO.Put (Output_Object.Output_File, "\intbl ");
+		Output_Object.Char_Count := Output_Object.Char_Count + 6;
 
-        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
-	    Format_Value(Output_Object.Table_Indent + Output_Object.Table_Width) & " ");
-	    -- Caption cell crosses entire line.
+	    when Header | Header_No_Caption =>
+		-- Now, define the cell borders for each cell:
+		for I in 1 .. Output_Object.Column_Count loop
+		    if Output_Object.Table_Has_Border then
+	                Ada.Text_IO.Put_Line (Output_Object.Output_File,
+		            "\clvertalc \clbrdrt\brdrs\brdrw10 " &
+		            "\clbrdrl\brdrs\brdrw10 " &
+		            "\clbrdrb\brdrs\brdrw10 " &
+		            "\clbrdrr\brdrs\brdrw10 ");
+		    else
+	                Ada.Text_IO.Put_Line (Output_Object.Output_File,
+		            "\clvertalc ");
+		    end if;
+--Ada.Text_IO.Put_Line("Header:");
+--Ada.Text_IO.Put_Line("Indent:" & Natural'Image(Output_Object.Table_Indent) &
+--	" Count:" & Natural'Image(I+Output_Object.Table_First_Column_Mult-1));
+		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
+		        Format_Value(Output_Object.Table_Indent +
+			    Output_Object.Table_Column_Width*(Integer(I+Output_Object.Table_First_Column_Mult-1))) & " ");
+		end loop;
 
-	-- Now, set up text (normal, centered):
-	Write_Style_for_Paragraph (Output_Object.Output_File,
-				   Table_Text_Info,
-				   Output_Object.Char_Count);
-        Ada.Text_IO.Put (Output_Object.Output_File, "\intbl ");
-	Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		-- Now, define text format:
+		if Output_Object.Table_Alignment = ARM_Output.Center_All then
+		    if Output_Object.Table_Has_Small_Text then
+		        Write_Style_for_Paragraph (Output_Object.Output_File,
+					           Table_C_Sml_Text_Info,
+					           Output_Object.Char_Count);
+		        Output_Object.Real_Size := Table_C_Sml_Text_Info.Size;
+		        Output_Object.Size := 0;
+		    else
+		        Write_Style_for_Paragraph (Output_Object.Output_File,
+					           Table_C_Text_Info,
+					           Output_Object.Char_Count);
+		        Output_Object.Real_Size := Table_C_Text_Info.Size;
+		        Output_Object.Size := 0;
+		    end if;
+		else
+		    if Output_Object.Table_Has_Small_Text then
+		        Write_Style_for_Paragraph (Output_Object.Output_File,
+					           Table_L_Sml_Text_Info,
+					           Output_Object.Char_Count);
+		        Output_Object.Real_Size := Table_L_Sml_Text_Info.Size;
+		        Output_Object.Size := 0;
+		    else
+		        Write_Style_for_Paragraph (Output_Object.Output_File,
+					           Table_L_Text_Info,
+					           Output_Object.Char_Count);
+		        Output_Object.Real_Size := Table_L_Text_Info.Size;
+		        Output_Object.Size := 0;
+		    end if;
+		end if;
+	        Ada.Text_IO.Put (Output_Object.Output_File, "\intbl ");
+		Output_Object.Char_Count := Output_Object.Char_Count + 6;
+
+	    when First_Row | Row | Last_Row =>
+		-- Now, define the cell borders for each cell:
+		for I in 1 .. Output_Object.Column_Count loop
+		    if Output_Object.Table_Has_Border then
+			if Kind = First_Row then
+	                    Ada.Text_IO.Put_Line (Output_Object.Output_File,
+		                "\clvertalc \clbrdrt\brdrs\brdrw10 " &
+		                "\clbrdrl\brdrs\brdrw10 " &
+		                "\clbrdrb\brdrs\brdrw10 " &
+		                "\clbrdrr\brdrs\brdrw10 ");
+			elsif Kind = Row then
+	                    --Ada.Text_IO.Put_Line (Output_Object.Output_File,
+		            --    "\clvertalc \clbrdrl\brdrs\brdrw10 " &
+		            --    "\clbrdrr\brdrs\brdrw10 ");
+			    -- Why no bottom border??
+
+			    -- No top border!
+	                    Ada.Text_IO.Put_Line (Output_Object.Output_File,
+		                "\clvertalc \clbrdrl\brdrs\brdrw10 " &
+		                "\clbrdrb\brdrs\brdrw10 " &
+		                "\clbrdrr\brdrs\brdrw10 ");
+			else -- Kind = Last_Row then
+			    -- No top border!
+	                    Ada.Text_IO.Put_Line (Output_Object.Output_File,
+		                "\clvertalc \clbrdrl\brdrs\brdrw10 " &
+		                "\clbrdrb\brdrs\brdrw10 " &
+		                "\clbrdrr\brdrs\brdrw10 ");
+			end if;
+		    else
+	                Ada.Text_IO.Put_Line (Output_Object.Output_File,
+		            "\clvertalc ");
+		    end if;
+
+		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
+		        Format_Value(Output_Object.Table_Indent +
+			    Output_Object.Table_Column_Width*(Integer(I+Output_Object.Table_First_Column_Mult-1))) & " ");
+		end loop;
+
+		-- Now, define text format:
+		if Output_Object.Table_Alignment = ARM_Output.Center_All then
+		    if Output_Object.Table_Has_Small_Text then
+		        Write_Style_for_Paragraph (Output_Object.Output_File,
+					           Table_C_Sml_Text_Info,
+					           Output_Object.Char_Count);
+		        Output_Object.Real_Size := Table_C_Sml_Text_Info.Size;
+		        Output_Object.Size := 0;
+		    else
+		        Write_Style_for_Paragraph (Output_Object.Output_File,
+					           Table_C_Text_Info,
+					           Output_Object.Char_Count);
+		        Output_Object.Real_Size := Table_C_Text_Info.Size;
+		        Output_Object.Size := 0;
+		    end if;
+		else
+		    if Output_Object.Table_Has_Small_Text then
+		        Write_Style_for_Paragraph (Output_Object.Output_File,
+					           Table_L_Sml_Text_Info,
+					           Output_Object.Char_Count);
+		        Output_Object.Real_Size := Table_L_Sml_Text_Info.Size;
+		        Output_Object.Size := 0;
+		    else
+		        Write_Style_for_Paragraph (Output_Object.Output_File,
+					           Table_L_Text_Info,
+					           Output_Object.Char_Count);
+		        Output_Object.Real_Size := Table_L_Text_Info.Size;
+		        Output_Object.Size := 0;
+		    end if;
+		end if;
+	        Ada.Text_IO.Put (Output_Object.Output_File, "\intbl ");
+		Output_Object.Char_Count := Output_Object.Char_Count + 6;
+
+	end case;
 
 	-- \trowd - Start a table row.
 	-- \row - End a table row.
 	-- \trgaph - Half of of the gap between cells, in twips.
+	-- \trhdr - Repeat line as header on following pages.
 	-- \trkeep - Keep the row together (no page break).
 	-- \trkeepfollow - Keep the row with the following (no page break).
 	-- \trleft - Left edge of table row (in twips).
@@ -2735,6 +2882,91 @@ package body ARM_RTF is
 	-- \brdrs - Single width border
 	-- \brdrw - Width of the pen (can't be more than 75).
 
+    end RTF_Table_Info;
+
+
+    procedure Start_Table (Output_Object : in out RTF_Output_Type;
+			   Columns : in ARM_Output.Column_Count;
+			   First_Column_Width : in ARM_Output.Column_Count;
+			   Alignment : in ARM_Output.Column_Text_Alignment;
+			   No_Page_Break : in Boolean;
+			   Has_Border : in Boolean;
+			   Small_Text_Size : in Boolean;
+			   Header_Kind : in ARM_Output.Header_Kind_Type) is
+	-- Starts a table. The number of columns is Columns; the first
+	-- column has First_Column_Width times the normal column width.
+	-- Alignment is the horizontal text alignment within the columns.
+	-- No_Page_Break should be True to keep the table intact on a single
+	-- page; False to allow it to be split across pages.
+	-- Has_Border should be true if a border is desired, false otherwise.
+	-- Small_Text_Size means that the contents will have the AARM size;
+	-- otherwise it will have the normal size.
+	-- Header_Kind determines whether the table has headers.
+	-- This command starts a paragraph; the entire table is a single
+	-- paragraph. Text will be considered part of the caption until the
+	-- next table marker call.
+	-- Raises Not_Valid_Error if in a paragraph.
+	Page_Width : Natural;
+    begin
+	if not Output_Object.Is_Valid then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not valid object");
+	end if;
+	if Output_Object.Is_In_Paragraph then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Table in paragraph");
+	end if;
+
+	Output_Object.Is_In_Paragraph := True;
+	Output_Object.Is_In_Table := True;
+	Output_Object.Table_No_Page_Break := No_Page_Break;
+	Output_Object.Table_Alignment := Alignment;
+	Output_Object.Table_First_Column_Mult := First_Column_Width;
+	Output_Object.Table_Has_Border := Has_Border;
+	Output_Object.Table_Has_Small_Text := Small_Text_Size;
+
+	case Output_Object.Page_Size is
+	    when ARM_RTF.A4 =>
+	        Page_Width := 9030;
+	    when ARM_RTF.Letter =>
+	        Page_Width := 9360;
+	    when ARM_RTF.Half_Letter =>
+	        Page_Width := 5040;
+	    when ARM_RTF.Ada95 =>
+	        Page_Width := 7740;
+        end case;
+	if Columns+First_Column_Width-1 <= 3 then
+	    Output_Object.Table_Indent := Page_Width / 6;
+	elsif Columns+First_Column_Width-1 <= 8 then
+	    Output_Object.Table_Indent := Page_Width / 16;
+	else
+	    Output_Object.Table_Indent := 0;
+	end if;
+        Output_Object.Table_Width  := Page_Width - Output_Object.Table_Indent*2;
+        Output_Object.Table_Column_Width  := Output_Object.Table_Width / (Columns+First_Column_Width-1);
+	Output_Object.Column_Count := Columns;
+--Ada.Text_IO.Put_Line("Table information");
+--Ada.Text_IO.Put_Line("Columns:" & Natural'Image(Columns) &
+--	" 1st column mult:" & Natural'Image(First_Column_Width));
+--Ada.Text_IO.Put_Line("Width (twips):" & Natural'Image(Output_Object.Table_Width) &
+--	" Column width:" & Natural'Image(Output_Object.Table_Column_Width));
+
+	-- Make a blank line before, of the right size:
+	Write_Style_for_Paragraph (Output_Object.Output_File,
+				   Table_L_Text_Info,
+				   Output_Object.Char_Count);
+        Ada.Text_IO.Put (Output_Object.Output_File, "\par }");
+	Output_Object.Char_Count := 0;
+
+	case Header_Kind is
+	    when ARM_Output.Both_Caption_and_Header =>
+		RTF_Table_Info (Output_Object, Kind => Caption);
+	    when ARM_Output.Header_Only =>
+		RTF_Table_Info (Output_Object, Kind => Header_no_Caption);
+	    when ARM_Output.No_Headers =>
+		RTF_Table_Info (Output_Object, Kind => Row);
+	end case;
+
     end Start_Table;
 
 
@@ -2753,6 +2985,7 @@ package body ARM_RTF is
 	--	and another started.
 	-- If Marker is End_Table, the entire table is finished.
 	-- Raises Not_Valid_Error if not in a table.
+	use type ARM_Output.Column_Text_Alignment;
     begin
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -2764,129 +2997,55 @@ package body ARM_RTF is
 	end if;
 	case Marker is
 	    when ARM_Output.End_Item =>
-		Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cell ");
-	        Output_Object.Char_Count := 0;
-		-- Text format stays the same.
+		if Output_Object.Table_Alignment = ARM_Output.Center_except_First then
+		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cell }");
+	            Output_Object.Char_Count := 0;
+		    -- Now, define text format:
+		    if Output_Object.Table_Has_Small_Text then
+		        Write_Style_for_Paragraph (Output_Object.Output_File,
+					           Table_C_Sml_Text_Info,
+					           Output_Object.Char_Count);
+		        Output_Object.Real_Size := Table_C_Sml_Text_Info.Size;
+		        Output_Object.Size := 0;
+		    else
+		        Write_Style_for_Paragraph (Output_Object.Output_File,
+					           Table_C_Text_Info,
+					           Output_Object.Char_Count);
+		        Output_Object.Real_Size := Table_C_Text_Info.Size;
+		        Output_Object.Size := 0;
+		    end if;
+		else -- Text format stays the same.
+		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cell ");
+	            Output_Object.Char_Count := 0;
+		end if;
 
 	    when ARM_Output.End_Caption =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cell }");
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\row "); -- End row.
 
 		-- Start header row:
-		RTF_Table_Info (Output_Object); -- Repeat table definition.
-
-		-- Now, define the cell borders for each cell:
-		for I in 1 .. Output_Object.Column_Count loop
-	            Ada.Text_IO.Put_Line (Output_Object.Output_File,
-		        "\clvertalc \clbrdrt\brdrs\brdrw10 " &
-		        "\clbrdrl\brdrs\brdrw10 " &
-		        "\clbrdrb\brdrs\brdrw10 " &
-		        "\clbrdrr\brdrs\brdrw10 ");
-
-		    if Output_Object.Column_Count > 3 then
-		        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
-			    Format_Value(Output_Object.Table_Indent + Output_Object.Table_Column_Width*(Integer(I)+1)) & " ");
-		    else
-		        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
-			    Format_Value(Output_Object.Table_Indent + Output_Object.Table_Column_Width*Integer(I)) & " ");
-		    end if;
-		end loop;
-
-		-- Now, define text format:
-		Write_Style_for_Paragraph (Output_Object.Output_File,
-					   Table_Text_Info,
-					   Output_Object.Char_Count);
-	        Ada.Text_IO.Put (Output_Object.Output_File, "\intbl ");
-		Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		RTF_Table_Info (Output_Object, Kind => Header); -- Repeat table definition.
 
 	    when ARM_Output.End_Header =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cell }");
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\row "); -- End row.
 
 		-- Start 1st body row:
-		RTF_Table_Info (Output_Object); -- Repeat table definition.
-
-		-- Now, define the cell borders for each cell:
-		for I in 1 .. Output_Object.Column_Count loop
-	            Ada.Text_IO.Put_Line (Output_Object.Output_File,
-		        "\clvertalc \clbrdrt\brdrs\brdrw10 " &
-		        "\clbrdrl\brdrs\brdrw10 " &
-		        "\clbrdrr\brdrs\brdrw10 ");
-
-		    if Output_Object.Column_Count > 3 then
-		        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
-			    Format_Value(Output_Object.Table_Indent + Output_Object.Table_Column_Width*(Integer(I)+1)) & " ");
-		    else
-		        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
-			    Format_Value(Output_Object.Table_Indent + Output_Object.Table_Column_Width*Integer(I)) & " ");
-		    end if;
-		end loop;
-
-		-- Now, define text format:
-		Write_Style_for_Paragraph (Output_Object.Output_File,
-					   Table_Text_Info,
-					   Output_Object.Char_Count);
-	        Ada.Text_IO.Put (Output_Object.Output_File, "\intbl ");
-		Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		RTF_Table_Info (Output_Object, Kind => First_Row); -- Repeat table definition.
 
 	    when ARM_Output.End_Row =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cell }");
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\row "); -- End row.
 
 		-- Start other body rows (no top border!):
-		RTF_Table_Info (Output_Object); -- Repeat table definition.
-
-		-- Now, define the cell borders for each cell:
-		for I in 1 .. Output_Object.Column_Count loop
-	            Ada.Text_IO.Put_Line (Output_Object.Output_File,
-		        "\clvertalc \clbrdrl\brdrs\brdrw10 " &
-		        "\clbrdrr\brdrs\brdrw10 ");
-
-		    if Output_Object.Column_Count > 3 then
-		        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
-			    Format_Value(Output_Object.Table_Indent + Output_Object.Table_Column_Width*(Integer(I)+1)) & " ");
-		    else
-		        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
-			    Format_Value(Output_Object.Table_Indent + Output_Object.Table_Column_Width*Integer(I)) & " ");
-		    end if;
-		end loop;
-
-		-- Now, define text format:
-		Write_Style_for_Paragraph (Output_Object.Output_File,
-					   Table_Text_Info,
-					   Output_Object.Char_Count);
-	        Ada.Text_IO.Put (Output_Object.Output_File, "\intbl ");
-		Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		RTF_Table_Info (Output_Object, Kind => Row); -- Repeat table definition.
 
 	    when ARM_Output.End_Row_Next_Is_Last =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cell }");
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\row "); -- End row.
 
 		-- Start other body rows (no top border!):
-		RTF_Table_Info (Output_Object); -- Repeat table definition.
-
-		-- Now, define the cell borders for each cell:
-		for I in 1 .. Output_Object.Column_Count loop
-	            Ada.Text_IO.Put_Line (Output_Object.Output_File,
-		        "\clvertalc \clbrdrl\brdrs\brdrw10 " &
-		        "\clbrdrb\brdrs\brdrw10 " &
-		        "\clbrdrr\brdrs\brdrw10 ");
-
-		    if Output_Object.Column_Count > 3 then
-		        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
-			    Format_Value(Output_Object.Table_Indent + Output_Object.Table_Column_Width*(Integer(I)+1)) & " ");
-		    else
-		        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
-			    Format_Value(Output_Object.Table_Indent + Output_Object.Table_Column_Width*Integer(I)) & " ");
-		    end if;
-		end loop;
-
-		-- Now, define text format:
-		Write_Style_for_Paragraph (Output_Object.Output_File,
-					   Table_Text_Info,
-					   Output_Object.Char_Count);
-	        Ada.Text_IO.Put (Output_Object.Output_File, "\intbl ");
-		Output_Object.Char_Count := Output_Object.Char_Count + 6;
+		RTF_Table_Info (Output_Object, Kind => Last_Row); -- Repeat table definition.
 
 	    when ARM_Output.End_Table =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cell }");
@@ -2898,7 +3057,7 @@ package body ARM_RTF is
 
 		-- Make a blank line after, of the right size:
 		Write_Style_for_Paragraph (Output_Object.Output_File,
-					   Table_Text_Info,
+					   Table_L_Text_Info,
 					   Output_Object.Char_Count);
 	        Ada.Text_IO.Put (Output_Object.Output_File, "\par }");
 		Output_Object.Char_Count := 0;
@@ -3598,7 +3757,7 @@ package body ARM_RTF is
 	    case Change is
 		when ARM_Output.Insertion =>
 --Ada.Text_Io.Put (" Change ins");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth" & Adj(Version) & ' ');
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth" & Version & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 18;
 			-- Note: \revauthN indicates the author. Each version
 			-- that we'll use needs an entry in the \revtbl.
@@ -3606,7 +3765,7 @@ package body ARM_RTF is
 			-- (And we don't know the date of the revision yet.)
 		when ARM_Output.Deletion =>
 --Ada.Text_Io.Put (" Change del");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel" & Adj(Version) & ' ');
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel" & Version & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 21;
 			-- Note: \revauthdelN indicates the author. Each version
 			-- that we'll use needs an entry in the \revtbl.
@@ -3614,9 +3773,9 @@ package body ARM_RTF is
 			-- (And we don't know the date of the revision yet.)
 		when ARM_Output.Both =>
 --Ada.Text_Io.Put (" Change both");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth" & Adj(Added_Version) & ' ');
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth" & Added_Version & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 18;
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel" & Adj(Version) & ' ');
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel" & Version & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 21;
 			-- Note: \revauthdelN indicates the author. Each version
 			-- that we'll use needs an entry in the \revtbl.
@@ -3846,6 +4005,29 @@ package body ARM_RTF is
     begin
 	Ordinary_Text (Output_Object, Text); -- Nothing special in this format.
     end URL_Link;
+
+
+    procedure Picture  (Output_Object : in out RTF_Output_Type;
+			Name  : in String;
+			Descr : in String;
+			Alignment : in ARM_Output.Picture_Alignment;
+			Height, Width : in Natural;
+			Border : in ARM_Output.Border_Kind) is
+	-- Generate a picture.
+	-- Name is the (simple) file name of the picture; Descr is a
+	-- descriptive name for the picture (it will appear in some web
+	-- browsers).
+	-- We assume that it is a .GIF or .JPG and that it will be present
+	-- in the same directory as the output files.
+	-- Alignment specifies the picture alignment.
+	-- Height and Width specify the picture size in pixels.
+	-- Border specifies the kind of border.
+    begin
+--**** TBD: Need to implement this!
+	Ordinary_Text (Output_Object, "[Picture: " & Name &
+	  " - " & Descr & "]");
+    end Picture;
+
 
 -- Notes:
 -- "\_" is a non-breaking hyphen.

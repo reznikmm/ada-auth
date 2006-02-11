@@ -76,6 +76,10 @@ package ARM_Text is
     --  1/11/06 - RLB - Eliminated dispatching Create in favor of tailored
     --			versions.
     --  1/13/06 - RLB - Added new Link operations.
+    --  2/ 8/06 - RLB - Added additional parameters to the table command.
+    --  2/10/06 - RLB - Added even more additional parameters to the
+    --			table command.
+    --		- RLB - Added picture command.
 
     type Text_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -195,8 +199,22 @@ package ARM_Text is
 	-- Raises Not_Valid_Error if in a paragraph.
 
     procedure Start_Table (Output_Object : in out Text_Output_Type;
-			   Columns : in ARM_Output.Column_Count);
-	-- Starts a table. The number of columns is Columns.
+			   Columns : in ARM_Output.Column_Count;
+			   First_Column_Width : in ARM_Output.Column_Count;
+			   Alignment : in ARM_Output.Column_Text_Alignment;
+			   No_Page_Break : in Boolean;
+			   Has_Border : in Boolean;
+			   Small_Text_Size : in Boolean;
+			   Header_Kind : in ARM_Output.Header_Kind_Type);
+	-- Starts a table. The number of columns is Columns; the first
+	-- column has First_Column_Width times the normal column width.
+	-- Alignment is the horizontal text alignment within the columns.
+	-- No_Page_Break should be True to keep the table intact on a single
+	-- page; False to allow it to be split across pages.
+	-- Has_Border should be true if a border is desired, false otherwise.
+	-- Small_Text_Size means that the contents will have the AARM size;
+	-- otherwise it will have the normal size.
+	-- Header_Kind determines whether the table has headers.
 	-- This command starts a paragraph; the entire table is a single
 	-- paragraph. Text will be considered part of the caption until the
 	-- next table marker call.
@@ -355,6 +373,23 @@ package ARM_Text is
 	-- Text is the text of the link.
 	-- For hyperlinked formats, this should generate a link;
 	-- for other formats, only the text is generated.
+
+    procedure Picture  (Output_Object : in out Text_Output_Type;
+			Name  : in String;
+			Descr : in String;
+			Alignment : in ARM_Output.Picture_Alignment;
+			Height, Width : in Natural;
+			Border : in ARM_Output.Border_Kind);
+	-- Generate a picture.
+	-- Name is the (simple) file name of the picture; Descr is a
+	-- descriptive name for the picture (it will appear in some web
+	-- browsers).
+	-- We assume that it is a .GIF or .JPG and that it will be present
+	-- in the same directory as the input files and the same directory as
+	-- the .HTML output files.
+	-- Alignment specifies the picture alignment.
+	-- Height and Width specify the picture size in pixels.
+	-- Border specifies the kind of border.
 
 private
 
