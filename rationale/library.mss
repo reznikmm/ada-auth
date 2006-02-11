@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/library.mss,v $)
-@comment($Revision: 1.3 $ $Date: 2006/02/07 07:47:51 $)
+@comment($Revision: 1.4 $ $Date: 2006/02/11 07:43:13 $)
 
 @LabeledSection{Predefined library}
 
@@ -1097,7 +1097,7 @@ the active approach the loop might then become
 @end[Example]
 
 @leading@;This might produce a table such as
-@begin[Example]
+@Comment{@begin[Example] -- Original version:
 @Tabset[P21, P35]
 access.doc@\    152 KB@\2005-04-05  09:03:10
 containers.doc@\    372 KB@\2005-06-14  21:39:05
@@ -1108,6 +1108,18 @@ oop.doc@\    179 KB@\2005-02-25  18:34:55
 structure.doc@\    151 KB@\2005-04-05  09:09:25
 tasking.doc@\    174 KB@\2005-03-31  11:16:40
 @end[Example]
+}@table{Columns=[4],Alignment=[AllLeft],FirstColWidth=[1],NoBreak=[T],
+Border=[F],SmallSize=[F],
+Caption=[],
+Headers=[],
+Body=[@exam{access.doc}@\@exam{152 KB}@ @ @\@exam{2005-04-05}@ @ @\@exam{09:03:10}
+@exam{containers.doc}@\@exam{372 KB}@ @ @\@exam{2005-06-14}@ @ @\@exam{21:39:05}
+@exam{general.doc}@\@exam{181 KB}@ @ @\@exam{2005-03-03}@ @ @\@exam{08:43:15}
+@exam{intro.doc}@\@exam{173 KB}@ @ @\@exam{2004-11-25}@ @ @\@exam{15:52:20}
+@exam{library.doc}@\@exam{149 KB}@ @ @\@exam{2005-04-08}@ @ @\@exam{13:50:05}
+@exam{oop.doc}@\@exam{179 KB}@ @ @\@exam{2005-02-25}@ @ @\@exam{18:34:55}
+@exam{structure.doc}@\@exam{151 KB}@ @ @\@exam{2005-04-05}@ @ @\@exam{09:09:25}
+@exam{tasking.doc}@\@exam{174 KB}@ @ @\@exam{2005-03-31}@ @ @\@exam{11:16:40}]}
 
 Note that the function @exam[Image] is from the package
 @exam[Ada.Calendar.Formatting] discussed in the previous section.

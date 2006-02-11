@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/contain.mss,v $)
-@comment($Revision: 1.2 $ $Date: 2006/02/09 07:54:22 $)
+@comment($Revision: 1.3 $ $Date: 2006/02/11 07:43:11 $)
 
 @LabeledSection{Containers}
 
@@ -306,7 +306,7 @@ by the two cursors. The elements must be in the given container otherwise
 
 This performs the low level operation of swapping the links rather
 than the values which can be much faster if the elements are large.
-There is no analog in the vectors package.
+There is no analogue in the vectors package.
 
 @begin[Example]
 @key[procedure] Splice(
@@ -2124,8 +2124,7 @@ wide types are also indefinite.@Defn{Indefinite subtype}
 @begin[Example]
 @key[generic]
    @key[type] Element_Type(<>) @key[is private];
-   @key[with] @key[function] "=" (Left, Right: Element_Type) @key[return]
-Boolean @key[is] <>;
+   @key[with] @key[function] "=" (Left, Right: Element_Type) @key[return] Boolean @key[is] <>;
 @key[package] Ada.Containers.Indefinite_Doubly_Linked_Lists @key[is]
    @key[pragma] Preelaborate(Indefinite_Doubly_Linked_Lists);
 @end[Example]
