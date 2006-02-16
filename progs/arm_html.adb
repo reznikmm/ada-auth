@@ -4875,6 +4875,9 @@ package body ARM_HTML is
 	    Output_Text (Output_Object, "<IMG src=""" & Name & """");
 	    Output_Text (Output_Object, " height=""" & H(2..H'Last) &
 		""" width=""" & W(2..W'Last) & """");
+	    if Extra_Attribs /= "" then
+	        Output_Text (Output_Object, Extra_Attribs);
+	    end if;
 	    Output_Text (Output_Object, " alt=""" & Descr & """");
 	    case Border is
 		when ARM_Output.None =>
@@ -4905,7 +4908,7 @@ package body ARM_HTML is
 		end if;
 		Make_Img (" align=""left""");
 	    when ARM_Output.Float_Right =>
-		if Output_Object.Is_In_Paragraph then
+		if not Output_Object.Is_In_Paragraph then
 		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 			"Not in paragraph");
 		end if;

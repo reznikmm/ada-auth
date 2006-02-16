@@ -206,6 +206,8 @@ package body ARM_Format is
     --  2/10/06 - RLB - Split scanning phase into a separate file.
     --		- RLB - Added additional features to the Table command.
     --		- RLB - Added the picture command.
+    --	2/15/06 - RLB - Added code to prevent the generation of note numbers
+    --			for deleted notes in final documents.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -1509,7 +1511,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 	        end if;
 	    elsif Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Inserted or else
 	          Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Revised_Inserted_Number or else
-	          Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Deleted_Inserted_Number then
+	          Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Deleted_Inserted_Number or else
+	          Format_Object.Next_Paragraph_Change_Kind = ARM_Database.Deleted_Inserted_Number_No_Delete_Message then
 	        -- We'll assume that there are no more than 99 inserted
 		-- paragraphs in a row.
 	        Format_Object.Current_Paragraph_String(1 .. PNum_Pred'Last-1) :=
@@ -1538,7 +1541,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			Format_Object.Next_AARM_Insert_Para :=
 			    Format_Object.Next_AARM_Insert_Para + 1;
 		    end if;
-		else
+		else -- None inserted paragraphs.
 		    Format_Object.Current_Paragraph_Len := PNum_Pred'Last - 1;
 	            Format_Object.Current_Paragraph_String(Format_Object.Current_Paragraph_Len + 1) :=
 		        '.';
@@ -2313,6 +2316,79 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		end case;
 	    end Make_Annotation_Preface;
 
+
+	    function Show_Leading_Text_for_Paragraph return Boolean is
+		-- Returns True if the leading text (note number,
+		-- annotation preface, etc.) should be shown for this paragraph.
+		-- We assume that the current paragraph has a version less than
+		-- or equal to the one that we're displaying.
+		-- ** Note: This is not quite right. If this
+		-- paragraph is deleted, but a following one needs the
+		-- leading item, this will still lead the item out.
+		-- We *do* have enough information for that, at least in the
+		-- case of annotations: they can be marked as deleted, in
+		-- which case we don't need them here. *But* that information
+		-- doesn't get here in the case that we're not showing deletions.
+		-- I can't think of a fix right now, and the note numbers need
+		-- fixing ASAP.
+	    begin
+--Ada.Text_IO.Put_Line ("Show_Leading_Text, para kind: " &
+--ARM_Database.Paragraph_Change_Kind_Type'Image(Format_Object.Next_Paragraph_Change_Kind) &
+--"; version=" & Format_Object.Next_Paragraph_Version);
+		if (ARM_Database."/=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted) and then
+		    ARM_Database."/=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number) and then
+		    ARM_Database."/=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_No_Delete_Message) and then
+		    ARM_Database."/=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message)) then
+		    -- Not a deleted paragraph.
+--Ada.Text_IO.Put_Line ("%% True - Not deleted");
+		    return True;
+		end if;
+	        case Format_Object.Changes is
+		    when ARM_Format.Old_Only =>
+		        -- Display only the original version ('0').
+			if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number) or else
+			   ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message) then
+--Ada.Text_IO.Put_Line ("%% True - Not original");
+			    return False; -- Not in the original document.
+			else
+--Ada.Text_IO.Put_Line ("%% True - Original");
+			    return True; -- Probably in the original document.
+				-- (If the paragraph numbers were "new" in a
+				-- later version, we couldn't tell.)
+			end if;
+		    when ARM_Format.New_Only =>
+		        -- Display only the version
+		        -- Format_Object.Change_Version, no insertions or deletions.
+--Ada.Text_IO.Put_Line ("%% False - New only");
+			return False; -- This is always deleted.
+		    when ARM_Format.Changes_Only =>
+		        -- Display only the the changes for version
+		        -- Format_Object.Change_Version, older changes
+		        -- are applied and newer changes are ignored.
+		        if Format_Object.Next_Paragraph_Version < Format_Object.Change_Version then
+			    -- Change version is older than we're displaying;
+			    -- no text will be shown.
+--Ada.Text_IO.Put_Line ("%% False - changes only, old version");
+			    return False; -- This is always deleted.
+		        else
+			    -- The correct version.
+--Ada.Text_IO.Put_Line ("%% True - changes only, current version");
+			    return True; -- Show the item, as the old text
+					 -- will be shown as deleted.
+		        end if;
+		    when ARM_Format.Show_Changes |
+		         ARM_Format.New_Changes =>
+		        -- Display all of the changes up to version
+		        -- Format_Object.Change_Version, newer changes are
+		        -- ignored. (New_Changes shows deletions as a single
+		        -- character for older versions of Word, but otherwise
+		        -- is the same.)
+--Ada.Text_IO.Put_Line ("%% True - show changes");
+		        return True; -- Show the item, as the old text
+				     -- will be shown as deleted.
+	        end case;
+	    end Show_Leading_Text_for_Paragraph;
+
 	begin
 	    if not Format_Object.In_Paragraph then
 		-- Output subheader, if needed.
@@ -2334,15 +2410,24 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 --Format_Object.Current_Paragraph_String (1 .. Format_Object.Current_Paragraph_Len) &
 --": format= " & Paragraph_Type'Image(Format_Object.Next_Paragraph_Format_Type));
 		    -- ...and start the paragraph:
-		    ARM_Output.Start_Paragraph (Output_Object,
-					        Format => Format_Object.Format,
-					        Number => Format_Object.Current_Paragraph_String (1 .. Format_Object.Current_Paragraph_Len),
-					        No_Prefix => Format_Object.No_Prefix,
-					        Tab_Stops => Format_Object.Paragraph_Tab_Stops,
-					        No_Breaks => Format_Object.No_Breaks or Format_Object.In_Bundle,
-					        Keep_with_Next => Format_Object.Keep_with_Next or Format_Object.In_Bundle,
-					        Space_After => Format_Object.Space_After);
-
+		    if (ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_No_Delete_Message) or else
+		        ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message)) and then
+		       ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
+			-- Nothing at all should be showm.
+			-- ** Warning ** If we lie here, the program will crash!
+		        Format_Object.No_Start_Paragraph := True;
+--Ada.Text_IO.Put_Line("No Start Paragraph");
+		    else
+		        ARM_Output.Start_Paragraph (Output_Object,
+					            Format => Format_Object.Format,
+					            Number => Format_Object.Current_Paragraph_String (1 .. Format_Object.Current_Paragraph_Len),
+					            No_Prefix => Format_Object.No_Prefix,
+					            Tab_Stops => Format_Object.Paragraph_Tab_Stops,
+					            No_Breaks => Format_Object.No_Breaks or Format_Object.In_Bundle,
+					            Keep_with_Next => Format_Object.Keep_with_Next or Format_Object.In_Bundle,
+					            Space_After => Format_Object.Space_After);
+		        Format_Object.No_Start_Paragraph := False;
+		    end if;
 		    if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted) or else
 		       ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number) then
 			-- If needed, make the "deleted text" message.
@@ -2383,8 +2468,6 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		        end case;
 		    end if;
 		    Format_Object.In_Paragraph := True;
-		    Format_Object.Next_Paragraph_Change_Kind := ARM_Database.None;
-		    Format_Object.Next_Paragraph_Version := '0';
 		    Format_Object.Last_Non_Space := False;
 
 		else -- No paragraph numbers (or if the paragraph
@@ -2399,14 +2482,14 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 						Keep_with_Next => Format_Object.Keep_with_Next or Format_Object.In_Bundle,
 						Space_After => Format_Object.Space_After);
 		    Format_Object.In_Paragraph := True;
-		    Format_Object.Next_Paragraph_Change_Kind := ARM_Database.None;
-		    Format_Object.Next_Paragraph_Version := '0';
-		    Format_Object.Current_Paragraph_Len := 0;
+		    Format_Object.No_Start_Paragraph := False;
+		    Format_Object.Current_Paragraph_Len := 0; -- Empty paragraph number.
 		    Format_Object.No_Para_Num := False;
 		end if;
 
 		if not Format_Object.No_Prefix then
-		    if Format_Object.Next_Paragraph_Format_Type = Notes then
+		    if Format_Object.Next_Paragraph_Format_Type = Notes and then
+		       Show_Leading_Text_for_Paragraph then
 		        -- Output the note number.
 		        declare
 		            NNum : constant String := Integer'Image(Format_Object.Next_Note);
@@ -2417,7 +2500,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		            ARM_Output.Hard_Space (Output_Object);
 		            Format_Object.Next_Note := Format_Object.Next_Note + 1;
 		        end;
-		    elsif Format_Object.Next_Paragraph_Format_Type = Enumerated then
+		    elsif Format_Object.Next_Paragraph_Format_Type = Enumerated and then
+		       Show_Leading_Text_for_Paragraph then
 		        -- Output the item number.
 		        declare
 		            NNum : constant String := Integer'Image(Format_Object.Next_Enumerated_Num);
@@ -2440,7 +2524,9 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		-- Output the annotation preface, if needed.
 		if Format_Object.Next_Paragraph_Subhead_Type /=
 		   Format_Object.Last_Paragraph_Subhead_Type then
-		    Make_Annotation_Preface (Format_Object.Next_Paragraph_Subhead_Type);
+		    if Show_Leading_Text_for_Paragraph then
+		        Make_Annotation_Preface (Format_Object.Next_Paragraph_Subhead_Type);
+		    end if;
 		end if;
 
 		if Format_Object.References /= null then
@@ -2451,6 +2537,11 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		    Make_References (Format_Object.References, Format_Object, Output_Object);
 		end if;
 
+		-- Reset the "next" paragraph kind and version (we have to
+		-- wait, so that we can use this to determine whether
+		-- note numbers and things are output):
+	        Format_Object.Next_Paragraph_Change_Kind := ARM_Database.None;
+	        Format_Object.Next_Paragraph_Version := '0';
 	    -- else already in a paragraph.
 	    end if;
 	end Check_Paragraph;
@@ -2461,8 +2552,12 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	    -- We will never be in a paragraph after this routine.
 	begin
 	    if Format_Object.In_Paragraph then
-		ARM_Output.End_Paragraph (Output_Object);
+		if not Format_Object.No_Start_Paragraph then
+		    ARM_Output.End_Paragraph (Output_Object);
+--else Ada.Text_IO.Put_Line("No Start Paragraph, so no End Paragraph");
+		end if;
 	        Format_Object.In_Paragraph := False;
+	        Format_Object.No_Start_Paragraph := False;
 	        Format_Object.No_Para_Num := False;
 			-- Make sure any "leftover"
 			-- NoParaNums are cleared; we don't want this lasting into
@@ -3526,6 +3621,12 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Kind_Name, Ada.Strings.Right)) =
 			"deletedadded" then
 			Kind := ARM_Database.Deleted_Inserted_Number;
+		    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Kind_Name, Ada.Strings.Right)) =
+			"deletednodelmsg" then
+			Kind := ARM_Database.Deleted_No_Delete_Message;
+		    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Kind_Name, Ada.Strings.Right)) =
+			"deletedaddednodelmsg" then
+			Kind := ARM_Database.Deleted_Inserted_Number_No_Delete_Message;
 		    else
 			Ada.Text_IO.Put_Line ("  ** Bad kind for change kind: " &
 				Ada.Strings.Fixed.Trim (Kind_Name, Ada.Strings.Right) &
@@ -3844,10 +3945,14 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		        if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
 		           ARM_Database.Deleted) or else
 		           ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
-		           ARM_Database.Deleted_Inserted_Number) then
+		           ARM_Database.Deleted_Inserted_Number) or else
+		           ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
+		           ARM_Database.Deleted_No_Delete_Message) or else
+		           ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
+		           ARM_Database.Deleted_Inserted_Number_No_Delete_Message) then
 			    -- In a deleted paragraph, call Check_Paragraph
 			    -- to trigger the "deleted paragraph" message.
-			    -- (Otherwise, this may never happens.)
+			    -- (Otherwise, this may never happen.)
 		            Check_Paragraph;
 		        -- else null; -- Nothing special to do.
 		        end if;
@@ -4282,6 +4387,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops := Format_Object.Paragraph_Tab_Stops;
 		        Format_Object.Next_Paragraph_Format_Type := In_Table;
 		        Format_Object.In_Paragraph := True; -- A fake, but we cannot have any format.
+		        Format_Object.No_Start_Paragraph := True; -- Fits with the fake.
 
 			-- OK, we've started the table. Now, get the caption:
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -4397,23 +4503,194 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    --		     Name=<name>,
 		    --		     Descr=<descr>)
 		    declare
-			Ch : Character;
+			Close_Ch, Ch : Character;
+			Align_Name : ARM_Input.Command_Name_Type;
+			Alignment : ARM_Output.Picture_Alignment;
+			Border : ARM_Output.Border_Kind;
+			Height : Natural := 0;
+			Width : Natural := 0;
+		        Name, Descr : String(1..120);
+		        NLen, DLen : Natural := 0;
 		    begin
 		        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command =
 			    Picture_Alone then
 			    Check_End_Paragraph; -- End any paragraph that we're in.
 
-			    -- ** TBD: Get the alignment parameter.
+		            ARM_Input.Check_Parameter_Name (Input_Object,
+			        Param_Name => "Alignment" & (10..ARM_Input.Command_Name_Type'Last => ' '),
+			        Is_First => True,
+			        Param_Close_Bracket => Close_Ch);
+			    if Close_Ch /= ' ' then
+			        -- Get the alignment word:
+			        Arm_Input.Get_Name (Input_Object, Align_Name);
+			        ARM_Input.Get_Char (Input_Object, Ch);
+			        if Ch /= Close_Ch then
+				    Ada.Text_IO.Put_Line ("  ** Bad close for Picture Alignment on line " & ARM_Input.Line_String (Input_Object));
+				    ARM_Input.Replace_Char (Input_Object);
+			        end if;
+
+			        if Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right)) =
+				    "left" then
+				    Alignment := ARM_Output.Alone_Left;
+			        elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right)) =
+				    "right" then
+				    Alignment := ARM_Output.Alone_Right;
+			        elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right)) =
+				    "center" then
+				    Alignment := ARM_Output.Alone_Center;
+			        else
+				    Ada.Text_IO.Put_Line ("  ** Bad stand-alone picture alignment: " &
+					    Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right) &
+					    " on line " & ARM_Input.Line_String (Input_Object));
+			        end if;
+			    -- else no parameter. Weird.
+			    end if;
 
 		        else -- Picture_Inline.
 			    Check_Paragraph; -- Make sure we're in a paragraph.
 
-			    -- ** TBD: Get the alignment parameter.
+		            ARM_Input.Check_Parameter_Name (Input_Object,
+			        Param_Name => "Alignment" & (10..ARM_Input.Command_Name_Type'Last => ' '),
+			        Is_First => True,
+			        Param_Close_Bracket => Close_Ch);
+			    if Close_Ch /= ' ' then
+			        -- Get the alignment word:
+			        Arm_Input.Get_Name (Input_Object, Align_Name);
+			        ARM_Input.Get_Char (Input_Object, Ch);
+			        if Ch /= Close_Ch then
+				    Ada.Text_IO.Put_Line ("  ** Bad close for Picture Alignment on line " & ARM_Input.Line_String (Input_Object));
+				    ARM_Input.Replace_Char (Input_Object);
+			        end if;
+
+			        if Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right)) =
+				    "inline" then
+				    Alignment := ARM_Output.Inline;
+			        elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right)) =
+				    "floatleft" then
+				    Alignment := ARM_Output.Float_Left;
+			        elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right)) =
+				    "floatright" then
+				    Alignment := ARM_Output.Float_Right;
+			        else
+				    Ada.Text_IO.Put_Line ("  ** Bad inline picture alignment: " &
+					    Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right) &
+					    " on line " & ARM_Input.Line_String (Input_Object));
+			        end if;
+			    -- else no parameter. Weird.
+			    end if;
+
 		        end if;
---**** TBD: get the other parameters, then call Picture.
 
+		        ARM_Input.Check_Parameter_Name (Input_Object,
+			    Param_Name => "Border" & (7..ARM_Input.Command_Name_Type'Last => ' '),
+			    Is_First => False,
+			    Param_Close_Bracket => Close_Ch);
+		        if Close_Ch /= ' ' then
+			    -- Get the alignment word:
+			    Arm_Input.Get_Name (Input_Object, Align_Name);
+			    ARM_Input.Get_Char (Input_Object, Ch);
+			    if Ch /= Close_Ch then
+			        Ada.Text_IO.Put_Line ("  ** Bad close for Picture Border on line " & ARM_Input.Line_String (Input_Object));
+			        ARM_Input.Replace_Char (Input_Object);
+			    end if;
 
+			    if Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right)) =
+			        "none" then
+			        Border := ARM_Output.None;
+			    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right)) =
+			        "thin" then
+			        Border := ARM_Output.Thin;
+			    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right)) =
+			        "thick" then
+			        Border := ARM_Output.Thick;
+			    else
+			        Ada.Text_IO.Put_Line ("  ** Bad picture border: " &
+				        Ada.Strings.Fixed.Trim (Align_Name, Ada.Strings.Right) &
+				        " on line " & ARM_Input.Line_String (Input_Object));
+			    end if;
+		        -- else no parameter. Weird.
+		        end if;
+
+		        ARM_Input.Check_Parameter_Name (Input_Object,
+			            Param_Name => "Height" & (7..ARM_Input.Command_Name_Type'Last => ' '),
+			            Is_First => False,
+			            Param_Close_Bracket => Close_Ch);
+		        if Close_Ch /= ' ' then
+		            -- Copy over the term:
+		            ARM_Input.Copy_to_String_until_Close_Char (
+			        Input_Object,
+			        Close_Ch,
+			        Name,
+			        NLen);
+			    begin
+				Height := Natural'Value(Name(1..NLen));
+			    exception
+				when Constraint_Error =>
+			            Ada.Text_IO.Put_Line ("  ** Bad picture height: " &
+				            Name(1..NLen) & " on line " & ARM_Input.Line_String (Input_Object));
+			    end;
+		        -- else no parameter. Weird.
+		        end if;
+
+		        ARM_Input.Check_Parameter_Name (Input_Object,
+			            Param_Name => "Width" & (6..ARM_Input.Command_Name_Type'Last => ' '),
+			            Is_First => False,
+			            Param_Close_Bracket => Close_Ch);
+		        if Close_Ch /= ' ' then
+		            -- Copy over the term:
+		            ARM_Input.Copy_to_String_until_Close_Char (
+			        Input_Object,
+			        Close_Ch,
+			        Name,
+			        NLen);
+			    begin
+				Width := Natural'Value(Name(1..NLen));
+			    exception
+				when Constraint_Error =>
+			            Ada.Text_IO.Put_Line ("  ** Bad picture width: " &
+				            Name(1..NLen) & " on line " & ARM_Input.Line_String (Input_Object));
+			    end;
+		        -- else no parameter. Weird.
+		        end if;
+
+		        ARM_Input.Check_Parameter_Name (Input_Object,
+			            Param_Name => "Name" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+			            Is_First => False,
+			            Param_Close_Bracket => Close_Ch);
+		        if Close_Ch /= ' ' then
+		            -- Copy over the term:
+		            ARM_Input.Copy_to_String_until_Close_Char (
+			        Input_Object,
+			        Close_Ch,
+			        Name,
+			        NLen);
+		        -- else no parameter. Weird.
+		        end if;
+
+		        ARM_Input.Check_Parameter_Name (Input_Object,
+		            Param_Name => "Descr" & (6..ARM_Input.Command_Name_Type'Last => ' '),
+		            Is_First => False,
+		            Param_Close_Bracket => Close_Ch);
+		        if Close_Ch /= ' ' then
+		            -- Copy over the term:
+		            ARM_Input.Copy_to_String_until_Close_Char (
+			        Input_Object,
+			        Close_Ch,
+			        Descr,
+			        DLen);
+		        -- else no parameter. Weird.
+		        end if;
+
+			ARM_Output.Picture (
+			    Output_Object,
+			    Alignment => Alignment,
+			    Border => Border,
+			    Height => Height,
+			    Width => Width,
+			    Name => Name(1..NLen),
+			    Descr => Descr(1..DLen));
 		    end;
+		    -- Normal processing should remove the command end marker.
 
 		-- Paragraph kind commands:
 
@@ -5595,7 +5872,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			        end if;
 				Format_Object.Glossary_Change_Kind := ARM_Database.Inserted;
 		            elsif (Format_Object.Glossary_Change_Kind = ARM_Database.Deleted or else
-			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_Inserted_Number) then
+			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_Inserted_Number or else
+			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_No_Delete_Message or else
+			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_Inserted_Number_No_Delete_Message) then
 			        Format_Object.Add_to_Glossary := True;
 				Format_Object.Glossary_Change_Kind := ARM_Database.Deleted;
 		            else -- we always display it.
@@ -5620,7 +5899,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			        end if;
 				Format_Object.Glossary_Change_Kind := ARM_Database.Inserted;
 		            elsif (Format_Object.Glossary_Change_Kind = ARM_Database.Deleted or else
-			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_Inserted_Number) then
+			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_Inserted_Number or else
+			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_No_Delete_Message or else
+			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_Inserted_Number_No_Delete_Message) then
 			        Format_Object.Glossary_Displayed :=
 				    Format_Object.Include_Annotations;
 			        Format_Object.Add_to_Glossary := True;
@@ -6405,6 +6686,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			     Number => "",
 			     No_Breaks => True, Keep_with_Next => True);
 		    Format_Object.In_Paragraph := True;
+		    Format_Object.No_Start_Paragraph := False;
+
 		    ARM_Output.Text_Format (Output_Object,
 			   Bold => True, Italic => False,
 			   Font => ARM_Output.Swiss,
@@ -6459,6 +6742,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		                 Number => "",
 		                 No_Breaks => True, Keep_with_Next => True);
 		            Format_Object.In_Paragraph := True;
+			    Format_Object.No_Start_Paragraph := False;
 		            ARM_Output.Text_Format (Output_Object,
 		               Bold => True, Italic => False,
 		               Font => ARM_Output.Swiss,
@@ -6484,6 +6768,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		                 Number => "",
 		                 No_Breaks => True, Keep_with_Next => True);
 		            Format_Object.In_Paragraph := True;
+			    Format_Object.No_Start_Paragraph := False;
 		            ARM_Output.Text_Format (Output_Object,
 		               Bold => True, Italic => False,
 		               Font => ARM_Output.Swiss,
@@ -6516,6 +6801,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			     No_Breaks => True, Keep_with_Next => True,
 			     Justification => ARM_Output.Center);
 		    Format_Object.In_Paragraph := True;
+		    Format_Object.No_Start_Paragraph := False;
 		    ARM_Output.Text_Format (Output_Object,
 			   Bold => True, Italic => False,
 			   Font => ARM_Output.Swiss,
@@ -6542,6 +6828,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			     No_Breaks => True, Keep_with_Next => False,
 			     Justification => ARM_Output.Center);
 		    Format_Object.In_Paragraph := True;
+		    Format_Object.No_Start_Paragraph := False;
 
 		when Right =>
 		    Check_End_Paragraph; -- End any paragraph that we're in.
@@ -6551,6 +6838,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			     No_Breaks => True, Keep_with_Next => False,
 			     Justification => ARM_Output.Right);
 		    Format_Object.In_Paragraph := True;
+		    Format_Object.No_Start_Paragraph := False;
 
 		when Ref_Section | Ref_Section_Number =>
 		    -- Load the title into the Title string:
@@ -6958,7 +7246,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				        if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
 				           ARM_Database.Deleted) or else
 				           ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
-				           ARM_Database.Deleted_Inserted_Number) then
+				           ARM_Database.Deleted_Inserted_Number) or else
+				           ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
+				           ARM_Database.Deleted_No_Delete_Message) or else
+				           ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
+				           ARM_Database.Deleted_Inserted_Number_No_Delete_Message) then
 					    -- In a deleted paragraph, call Check_Paragraph
 					    -- to trigger the "deleted paragraph" message.
 					    -- (Otherwise, this never happens.)
@@ -6975,7 +7267,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				            if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
 				               ARM_Database.Deleted) or else
 				               ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
-				               ARM_Database.Deleted_Inserted_Number) then
+				               ARM_Database.Deleted_Inserted_Number) or else
+				               ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
+				               ARM_Database.Deleted_No_Delete_Message) or else
+				               ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
+				               ARM_Database.Deleted_Inserted_Number_No_Delete_Message) then
 					        -- In a deleted paragraph, call Check_Paragraph
 					        -- to trigger the "deleted paragraph" message.
 					        -- (Otherwise, this never happens.)
@@ -7031,9 +7327,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    Ada.Text_IO.Put_Line ("  ** Change parameter command?? on line " & ARM_Input.Line_String (Input_Object));
 
 		when Change_Added | Change_Deleted =>
-		    -- @ChgAdded{Version=[<Version>],[NoPrefix=[T|F],]
+		    -- @ChgAdded{Version=[<Version>],[NoPrefix=[T|F],][NoParanum=[T|F],]
 		    --     [Type=[Leading|Trailing|Normal],][Keepnext=[T|F],]Text=[text]}
-		    -- @ChgDeleted{Version=[<Version>],[NoPrefix=[T|F],]
+		    -- @ChgDeleted{Version=[<Version>],[NoPrefix=[T|F],][NoParanum=[T|F],]
 		    --     [Type=[Leading|Trailing|Normal],][Keepnext=[T|F],]Text=[text]}
 		    -- Whole paragraph change. These let us modify the AARM prefix
 		    -- (like "Reason:" or "Discussion:", and also let us
@@ -7043,7 +7339,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		        Which_Param : ARM_Input.Param_Num;
 		        Ch, Close_Ch : Character;
 
-			NoPrefix, Keepnext : Boolean := False;
+			NoPrefix, Noparanum, Keepnext : Boolean := False;
 			Space_After : ARM_Output.Space_After_Type := ARM_Output.Normal;
 
 			Disposition : ARM_Output.Change_Type;
@@ -7120,9 +7416,10 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    -- Handle the optional parameters; stop on Text.
 		            ARM_Input.Check_One_of_Parameter_Names (Input_Object,
 			        Param_Name_1 => "NoPrefix" & (9..ARM_Input.Command_Name_Type'Last => ' '),
-			        Param_Name_2 => "Type" & (5..ARM_Input.Command_Name_Type'Last => ' '),
-			        Param_Name_3 => "Keepnext" & (9..ARM_Input.Command_Name_Type'Last => ' '),
-			        Param_Name_4 => "Text" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+			        Param_Name_2 => "NoParanum" & (10..ARM_Input.Command_Name_Type'Last => ' '),
+			        Param_Name_3 => "Type" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+			        Param_Name_4 => "Keepnext" & (9..ARM_Input.Command_Name_Type'Last => ' '),
+			        Param_Name_5 => "Text" & (5..ARM_Input.Command_Name_Type'Last => ' '),
 			        Is_First => False,
 			        Param_Found => Which_Param,
 			        Param_Close_Bracket => Close_Ch);
@@ -7130,8 +7427,10 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    if Which_Param = 1 and then Close_Ch /= ' ' then
 				NoPrefix := Read_Boolean (Close_Ch, "NoPrefix");
 			    elsif Which_Param = 2 and then Close_Ch /= ' ' then
-				Space_After := Read_Type (Close_Ch);
+				NoParanum := Read_Boolean (Close_Ch, "NoParanum");
 			    elsif Which_Param = 3 and then Close_Ch /= ' ' then
+				Space_After := Read_Type (Close_Ch);
+			    elsif Which_Param = 4 and then Close_Ch /= ' ' then
 				Keepnext := Read_Boolean (Close_Ch, "KeepNext");
 			    else
 				exit; -- We found "Text" (or an error)
@@ -7162,12 +7461,14 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    elsif Disposition = ARM_Output.None then
 				-- Display the text normally.
 				Format_Object.No_Prefix := NoPrefix;
+				Format_Object.No_Para_Num := NoParanum;
 				Format_Object.Keep_with_Next := KeepNext;
 			        Format_Object.Space_After := Space_After;
 			    elsif Disposition = ARM_Output.Deletion then
 			        raise Program_Error; -- A deletion inside of an insertion command!
 			    else -- Insertion.
 				Format_Object.No_Prefix := NoPrefix;
+				Format_Object.No_Para_Num := NoParanum;
 				Format_Object.Keep_with_Next := KeepNext;
 			        Format_Object.Space_After := Space_After;
 			        -- We assume non-empty text and no outer changes;
@@ -7213,16 +7514,22 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			        if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
 			           ARM_Database.Deleted) or else
 			           ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
-			           ARM_Database.Deleted_Inserted_Number) then
-				    -- In a deleted paragraph, call Check_Paragraph
+			           ARM_Database.Deleted_Inserted_Number) or else
+			           ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
+			           ARM_Database.Deleted_No_Delete_Message) or else
+			           ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
+			           ARM_Database.Deleted_Inserted_Number_No_Delete_Message) then
+			            -- In a deleted paragraph, call Check_Paragraph
 				    -- to trigger the "deleted paragraph" message.
-				    -- (Otherwise, this may never happens.)
+				    -- (Otherwise, this may never happen.)
+				    Format_Object.No_Para_Num := NoParanum;
 			            Check_Paragraph;
 			        -- else null; -- Nothing special to do.
 			        end if;
 			    elsif Disposition = ARM_Output.None then
 				-- Display the text normally.
 				Format_Object.No_Prefix := NoPrefix;
+				Format_Object.No_Para_Num := NoParanum;
 				Format_Object.Keep_with_Next := KeepNext;
 			        Format_Object.Space_After := Space_After;
 			    elsif Disposition = ARM_Output.Insertion then
@@ -7233,8 +7540,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				    -- We assume that the text is non-empty;
 				    -- set the new change state.
 				    -- Note: We ignore the formatting here!
-				    Format_Object.No_Prefix := True;
-
+			            Format_Object.No_Prefix := True;
+			            Format_Object.No_Para_Num := NoParanum;
 				    Format_Object.Change := ARM_Output.Deletion;
 				    Format_Object.Current_Change_Version :=
 				       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
@@ -7259,7 +7566,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			        else -- Normal.
 			            -- We assume that the text is non-empty;
 			            -- set the new change state and formatting.
-			            Format_Object.No_Prefix := NoPrefix;
+				    Format_Object.No_Prefix := NoPrefix;
+				    Format_Object.No_Para_Num := NoParanum;
 			            Format_Object.Keep_with_Next := KeepNext;
 			            Format_Object.Space_After := Space_After;
 
@@ -7355,7 +7663,14 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			if Version <= Format_Object.Change_Version then
 			    Format_Object.Next_Paragraph_Version := Version;
 			    Format_Object.Next_Paragraph_Change_Kind := Kind;
-			    Display_It := Format_Object.Include_Annotations;
+			    if (ARM_Database."=" (Kind, ARM_Database.Deleted_No_Delete_Message) or else
+			        ARM_Database."=" (Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message)) and then
+			       ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
+			        -- In this case, display nothing, period.
+				Display_It := False;
+			    else
+			        Display_It := Format_Object.Include_Annotations;
+			    end if;
             		else --This reference is too new, ignore it.
 			    Display_It := False;
 			end if;
@@ -7486,7 +7801,14 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			if Version <= Format_Object.Change_Version then
 			    Format_Object.Next_Paragraph_Version := Version;
 			    Format_Object.Next_Paragraph_Change_Kind := Kind;
-			    Display_Ref := Format_Object.Include_Annotations;
+			    if (ARM_Database."=" (Kind, ARM_Database.Deleted_No_Delete_Message) or else
+			        ARM_Database."=" (Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message)) and then
+			       ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
+			        -- In this case, display nothing, period.
+				Display_Ref := False;
+			    else
+			        Display_Ref := Format_Object.Include_Annotations;
+			    end if;
 			else --This reference is too new, ignore it.
 			    Display_Ref := False;
 			end if;
@@ -7695,7 +8017,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			        -- else no parameter. Do nothing.
 				end if;
 
-			    when ARM_Database.Deleted | ARM_Database.Deleted_Inserted_Number =>
+			    when ARM_Database.Deleted | ARM_Database.Deleted_Inserted_Number |
+			         ARM_Database.Deleted_No_Delete_Message |
+				 ARM_Database.Deleted_Inserted_Number_No_Delete_Message =>
 
 				Ada.Text_IO.Put_Line ("  ** Attribute deleting not implemented on line " & ARM_Input.Line_String (Input_Object));
 				-- This should work very similarly to the above.
@@ -8440,7 +8764,10 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				return "@Chg{Version=[" & Format_Object.Impdef_Version &
 				    "], New=[ See @RefSecbyNum{" & Clause_String & "}.],Old=[]}";
 			    end if;
-			when ARM_Database.Deleted | ARM_Database.Deleted_Inserted_Number =>
+			when ARM_Database.Deleted |
+			     ARM_Database.Deleted_Inserted_Number |
+			     ARM_Database.Deleted_No_Delete_Message |
+			     ARM_Database.Deleted_Inserted_Number_No_Delete_Message =>
 			    if Format_Object.Number_Paragraphs then
 				return "@Chg{Version=[" & Format_Object.Impdef_Version &
 				    "], New=[],Old=[ See @RefSecbyNum{" & Clause_String & "}(" &
@@ -8689,6 +9016,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    Format_Object.Paragraph_Tab_Stops :=
 		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Old_Tab_Stops;
 		    Format_Object.In_Paragraph := False; -- End fake paragraph.
+		    Format_Object.No_Start_Paragraph := False;
 
 		when Syntax_Rule_RHS =>
 		    -- Send the production to the syntax manager.
@@ -8854,7 +9182,10 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				when ARM_Database.Inserted | ARM_Database.Inserted_Normal_Number =>
 				    return "@Chgref{Version=[" & Version &
 					"],Kind=[Added]}";
-				when ARM_Database.Deleted | ARM_Database.Deleted_Inserted_Number =>
+				when ARM_Database.Deleted |
+				     ARM_Database.Deleted_Inserted_Number |
+				     ARM_Database.Deleted_No_Delete_Message |
+				     ARM_Database.Deleted_Inserted_Number_No_Delete_Message =>
 				    return "@Chgref{Version=[" & Version &
 					"],Kind=[Deleted]}";
 				when ARM_Database.Revised | ARM_Database.Revised_Inserted_Number =>
@@ -8973,7 +9304,10 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				    end if;
 				end;
 
-			    when ARM_Database.Deleted | ARM_Database.Deleted_Inserted_Number =>
+			    when ARM_Database.Deleted |
+				 ARM_Database.Deleted_Inserted_Number |
+				 ARM_Database.Deleted_No_Delete_Message |
+				 ARM_Database.Deleted_Inserted_Number_No_Delete_Message =>
 				-- *** We don't support this yet. (It doesn't make much sense;
 				-- *** it would be unlikely that we'd stop defining
 				-- *** an attribute).
@@ -9939,15 +10273,17 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 
 	    Format_Object.Format := ARM_Output.Normal; -- The default.
 	    Format_Object.In_Paragraph := False;
+	    Format_Object.No_Start_Paragraph := False;
 	end if;
 
 	Real_Process (Format_Object, Format_State, Input_Object, Output_Object);
 
 	-- Reached end of the file/input object.
 	-- Kill any open paragraph:
-	if Format_Object.In_Paragraph then
+	if Format_Object.In_Paragraph and then (not Format_Object.No_Start_Paragraph) then
 	    ARM_Output.End_Paragraph (Output_Object);
 	    Format_Object.In_Paragraph := False;
+	    Format_Object.No_Start_Paragraph := False;
         end if;
 	Ada.Text_IO.Put_Line ("  Lines processed: " &
 		ARM_File.Line_String (Input_Object));

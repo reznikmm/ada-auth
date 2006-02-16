@@ -685,7 +685,10 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	change which gets a normal paragraph number - used for insertions at
 	the end of clauses and added to new clauses), "Deleted" (for a
 	paragraph deleted by the change), "DeletedAdded" (for an
-        added paragraph which is later deleted), or "RevisedAdded" (for an
+        added paragraph which is later deleted), "DeletedNoDelMsg" (for a
+	paragraph deleted by the change; the "This paragraph was deleted"
+        message is suppressed), "DeletedAddedNoDelMsg" (combines the last
+	two kinds), or "RevisedAdded" (for an
         added paragraph which is later revised). [These control the paragraph
 	numbering of the following paragraph.] The <DR_Number>(s) and/or
 	<AI_Number>(s) that triggered the change are given. As many references
@@ -705,19 +708,20 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
         the newest changes inside of older changes. The text may not contain
         any command that ends the paragraph. The Version is assumed to be '1'
         if that parameter is not given. Version is interpreted as for ChgRef.
-@ChgAdded{Version=[<Version>],[NoPrefix=[T|F],][Type=[Leading|Trailing|Normal],]
-        [Keepnext=[T|F],]Text=[text]}
+@ChgAdded{Version=[<Version>],[NoPrefix=[T|F],][NoParamnum=[T|F],]
+        [Type=[Leading|Trailing|Normal],][Keepnext=[T|F],]Text=[text]}
 	Marks an insertion of a complete paragraph consisting of 'text'. This
 	cannot be nested in other commands. The AARM prefix (if any) also is
 	marked as an insertion. The optional parameters (conditionally) set the
-	paragraph properties; NoPrefix and KeepNext work the same as the
-        @NoPrefix, and @KeepNext commands if set to T, except that they're
-	conditional on the paragraph text being inserted. Similarly, Type
-	works the same as @Leading and @Trailing if set to those values,
-	except that they are conditional. If omitted, NoPrefix is set to F,
-	KeepNext is set to F, and Type is set to Normal.
-@ChgDeleted{Version=[<Version>],[NoPrefix=[T|F],][Type=[Leading|Trailing|Normal],]
-        [Keepnext=[T|F],]Text=[text]}
+	paragraph properties; NoPrefix, Noparanum, and KeepNext work the same
+	as the @NoPrefix, @NoParanum, and @KeepNext commands if set to T,
+	except that they're conditional on the paragraph text being inserted.
+	Similarly, Type works the same as @Leading and @Trailing if set to
+	those values, except that they are conditional. If omitted, NoPrefix
+	is set to F, NoParanum is set to F, KeepNext is set to F, and
+	Type is set to Normal.
+@ChgDeleted{Version=[<Version>],[NoPrefix=[T|F],][NoParamnum=[T|F],]
+        [Type=[Leading|Trailing|Normal],][Keepnext=[T|F],]Text=[text]}
 	Marks a deletion of a complete paragraph consisting of 'text'. This
 	cannot be nested in other commands. The AARM prefix (if any) also is
 	marked as a deletion. The optional parameters (conditionally) set the

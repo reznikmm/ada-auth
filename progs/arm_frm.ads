@@ -277,6 +277,7 @@ private
 	Location : ARM_Output.Location_Type; -- What is the current (vertical) location?
 	Format : ARM_Output.Paragraph_Type; -- What is the current paragraph type?
 	In_Paragraph : Boolean; -- Are we currently in a paragraph?
+	No_Start_Paragraph : Boolean; -- Did we suppress "Start_Paragraph"?
 	No_Prefix : Boolean; -- Should we suppress any prefix on the next paragraph?
 	No_Para_Num : Boolean; -- Should we suppress the paragraph number on the next paragraph?
 	Keep_with_Next : Boolean; -- Should we force this paragraph to bind to the next

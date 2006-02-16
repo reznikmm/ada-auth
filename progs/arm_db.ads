@@ -7,7 +7,7 @@ package ARM_Database is
     -- appendixes.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004, 2005  AXE Consultants.
+    -- Copyright 2000, 2004, 2005, 2006  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -45,11 +45,16 @@ package ARM_Database is
     -- 11/02/04 - RLB - Added Deleted_Inserted_Number change kind.
     -- 12/06/04 - RLB - Added Revised_Inserted_Number change kind.
     --  1/19/05 - RLB - Added Added_Version.
+    --  2/15/06 - RLB - Added Deleted_No_Delete_Message and
+    --			Deleted_Inserted_Number_No_Delete_Message change kinds.
 
     type Database_Type is tagged limited private;
 
     type Paragraph_Change_Kind_Type is (None, Inserted, Inserted_Normal_Number,
-	Deleted, Deleted_Inserted_Number, Revised, Revised_Inserted_Number);
+	Deleted, Deleted_Inserted_Number,
+	Deleted_No_Delete_Message,
+	Deleted_Inserted_Number_No_Delete_Message,
+	Revised, Revised_Inserted_Number);
 
     Not_Valid_Error : exception;
 

@@ -175,6 +175,13 @@ package body ARM_Database is
 		    -- Previously inserted.
 		    return "@ChgRef{Version=[" & Item.Version &
 			"],Kind=[DeletedInserted]}";
+		when Deleted_No_Delete_Message =>
+		    return "@ChgRef{Version=[" & Item.Version &
+			"],Kind=[DeletedNoDelMsg]}";
+		when Deleted_Inserted_Number_No_Delete_Message =>
+		    -- Previously inserted.
+		    return "@ChgRef{Version=[" & Item.Version &
+			"],Kind=[DeletedInsertedNoDelMsg]}";
 	    end case;
 	end Change_if_Needed;
 

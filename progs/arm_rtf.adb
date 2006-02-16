@@ -4022,10 +4022,58 @@ package body ARM_RTF is
 	-- Alignment specifies the picture alignment.
 	-- Height and Width specify the picture size in pixels.
 	-- Border specifies the kind of border.
+	use type ARM_Output.Picture_Alignment;
+	use type ARM_Output.Border_Kind;
     begin
---**** TBD: Need to implement this!
-	Ordinary_Text (Output_Object, "[Picture: " & Name &
-	  " - " & Descr & "]");
+--**** TBD: Need to implement this for real!
+--** The following is an incredibly crappy implementation (no size or other
+--** formatting information is used.) To do this right, we'll have to inline
+--** the file contents, and deal with a mass of messy commands, especially
+--** to get the scaling right (that will have to be calculated using the
+--** base size of the image and the desired size, as it's a percentage of the
+--** file.).
+	if Alignment = ARM_Output.Inline or else
+	   Alignment = ARM_Output.Float_Left then
+	    null;
+	elsif Alignment = ARM_Output.Float_Right then
+	    Ordinary_Text (Output_Object, "{\field\fldedit{\*\fldinst { INCLUDEPICTURE "".\" & Name & """ \\* MERGEFORMAT \\d }}{\fldrslt {}}}");
+	    Ada.Text_IO.Put_Line ("** Unimplemented picture formatting: Float Right");
+	elsif Alignment = ARM_Output.Alone_Left then
+	    null;
+	else
+	    Ada.Text_IO.Put_Line ("** Unimplemented picture formatting: Alone Center or Right");
+	end if;
+        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+	    "{\field\fldedit{\*\fldinst { INCLUDEPICTURE "".\" & Name & """ \\* MERGEFORMAT \\d }}{\fldrslt {}}}");
+        Output_Object.Char_Count := Output_Object.Char_Count + 85 + Name'Length;
+	if Border /= ARM_Output.None then
+	    Ada.Text_IO.Put_Line ("** Unimplemented picture formatting: Borders");
+	end if;
+	-- We can't even tell if the height/width is correct.
+
+-- Should use:
+-- {\*\shppict {\pict - Defines a picture. (Word 97 and newer)
+-- \picscalexnn - X scaling (%).
+-- \picscaleynn - Y scaling (%).
+-- \piccroplnn - Left crop (twips). (Should be 0).
+-- \piccroprnn - Right crop (twips).
+-- \piccroptnn - Top crop (twips).
+-- \piccropbnn - Bottom crop (twips).
+-- \picwnnn - Picture width (raw - seems to be in twips).
+-- \pichnnn - Picture height (raw - seems to be in twips).
+-- \picwgoalnnn - Picture intended width (twips).
+-- \pichgoalnnn - Picture intended height (twips).
+-- \bliptagnnn - Picture ID. (How this is calculated is unclear.)
+-- \blipuid XXXX - Picture Unique ID. (How this is calculated is unclear.)
+-- Followed by the picture file data in hexadecimal.
+-- \pngblip - Specifies that the file is a PNG.
+-- \jpegblip - Specifies that the file is a JPEG.
+-- But! The file data is a PNG, not a GIF. What to do??
+-- (After web research, the answer is "use PNG, not GIF". Find out enough
+-- about the format to read the dimensions out of it, and then define the
+-- above. Use Paintshop or whatever to convert existing images.)
+-- {\*\nonshppict {\pict - Defines an old format picture. This has it in
+-- metafile format. Forget it.
     end Picture;
 
 
