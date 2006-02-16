@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.34 $ $Date: 2005/11/16 06:42:57 $ $Author: Randy $ }
+@comment{ $Revision: 1.35 $ $Date: 2006/02/11 08:00:53 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:42:57 $}
+@Comment{$Date: 2006/02/11 08:00:53 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -678,7 +678,8 @@ If there is no sign control symbol but the value of Item
 is negative, a layout error occurs and no edited output string
 is produced.
 
-@Table{Columns=<3>,
+@Table{Columns=<3>,Alignment=<AllCenter>,FirstColWidth=[1],
+NoBreak=[T],Border=[T],SmallSize=[F],
 Caption=<@b{Table F-1: Edited Output for Sign Control Symbols}>,
 Headers=<@b{Sign Control Symbol}@\@b{Edited Output for @*Non-Negative Number}@\@b{Edited Output for @*Negative Number}>,
 Body=['+'@\'+'@\'@en@;'

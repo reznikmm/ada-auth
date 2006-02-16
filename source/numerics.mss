@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.49 $ $Date: 2005/12/15 02:36:38 $ $Author: Randy $ }
+@comment{ $Revision: 1.50 $ $Date: 2006/02/11 08:00:54 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2005/12/15 02:36:38 $}
+@Comment{$Date: 2006/02/11 08:00:54 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -2084,7 +2084,8 @@ to the principal branch. This rule also takes precedence over the maximum
 relative error bounds, effectively narrowing the result interval allowed by
 them.
 
-@Table[Columns=<5>,
+@Table[Columns=<5>,Alignment=<AllCenter>,FirstColWidth=[2],
+NoBreak=[T],Border=[T],SmallSize=[F],
 Caption=<@b{@Chg{Version=[2],New=[Table G-1: ],Old=[]}Tightly Approximated Elementary Function Results}>,
 Headers=<@b{Function}@\@b{Value of X}@\@b{Value of Y}@\@b{Exact Result @*when Cycle @*Specified}@\@b{Exact Result @*when Cycle @*Omitted}>,
 Body=<Arcsin@\1.0@\n.a.@\Cycle/4.0@\@Pi/2.0
@@ -2445,7 +2446,8 @@ implementation defined.
 complex elementary functions for parameters (or components thereof) beyond
 the angle threshold.}
 
-@Table[Columns=<4>,
+@Table[Columns=<4>,Alignment=<AllCenter>,FirstColWidth=[2],
+NoBreak=[T],Border=[T],SmallSize=[F],
 Caption=<@b{@Chg{Version=[2],New=[Table G-2: ],Old=[]}Error Bounds for Particular Complex Functions}>,
 Headers=<@b{Function or Operator}@\@b{Nature of @*Result}@\@b{Nature of @*Bound}@\@b{Error Bound}>,
 Body=<Modulus@\real@\max. rel. error@\3.0
