@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2006/02/03 07:40:46 $}
+@Comment{$Date: 2006/02/16 06:48:56 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1760,14 +1760,21 @@ Addition'(Binop @key{with null record})
 The extension aggregate syntax is new.
 @end{Extend83}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00306-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  @b[Amendment Correction:] Eliminated implicit @lquotes@;truncation@rquotes
+  of a dynamically tagged value when it is used as an ancestor
+  @nt{expression}. If an @nt{aggregate} includes such an @nt{expression},
+  it is illegal in Ada 2005. Such @nt{aggregate}s are thought to be rare;
+  the problem can be fixed with a type conversion to the appropriate
+  specific type if it occurs.]}
+@end{Incompatible95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
   @ChgAdded{Version=[2],Text=[Limited @nt{extension_aggregate}s are allowed (since
   all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00306-01]}
-  @ChgAdded{Version=[2],Text=[Eliminated implicit @lquotes@;truncation@rquotes
-  of a dynamically tagged value when it is used as an ancestor @nt{expression}.]}
 @end{DiffWord95}
 
 

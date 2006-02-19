@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2006/01/17 07:20:57 $}
+@Comment{$Date: 2006/02/16 06:48:53 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.55 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -779,27 +779,58 @@ categories:]}
 
 @begin{Inconsistent95}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Defn{inconsistencies with Ada 95}
+@ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
 This heading lists all of the upward inconsistencies between Ada 95 and Ada
 2005. Upward inconsistencies are situations in which a legal Ada 95 program
-is a legal Ada 2005 program with different semantics.],Old=[]}
+is a legal Ada 2005 program with different semantics.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[This is not part of the definition of the language,
-and does not appear in the Ada 2005 RM.],Old=[]}
+@ChgAdded{Version=[2],Text=[Inconsistencies marked with
+@b[Corrigendum:]@Defn{Corrigendum} are corrections to the original Ada 95
+definition introduced by Corrigendum 1. Inconsistencies marked with
+@b[Amendment Correction:]@Defn{Amendment Correction} are corrections to the
+original Ada 95 definition added by Amendment 1. Formally, these are
+inconsistencies caused by Ada Issues classified as Binding Interpretations;
+implementations of Ada 95 are supposed to follow these corrections, not the
+original flawed language definition. Thus, these strictly speaking are not
+inconsistencies between Ada 95 and Ada 2005. Practically, however, they very
+well may be, as early Ada 95 implementations may not follow the recommendation.
+Inconsistencies so marked are not portable between Ada 95 implementations,
+while usually Ada 2005 will have more clearly defined behavior. Therefore, we
+document these for completeness.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[This is not part of the definition of the language,
+and does not appear in the Ada 2005 RM.]}
 @end{Inconsistent95}
 
 @begin{Incompatible95}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
+@ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
 This heading lists all of the upward incompatibilities between Ada 95
 and Ada 2005, except for the ones listed under @lquotes@;@Inconsistent95Title@rquotes@;
 above. These are the situations in which a legal Ada 95 program is
-illegal in Ada 2005.],Old=[]}
+illegal in Ada 2005.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[This is not part of the definition of the language,
-and does not appear in the Ada 2005 RM.],Old=[]}
+@ChgAdded{Version=[2],Text=[As with inconsistencies, incompatibilities
+marked with @b[Corrigendum:]
+are corrections to the original Ada 95 definition introduced by Corrigendum
+1. Incompatibilities marked with @b[Amendment Correction:] are corrections
+to the original Ada 95 definition added by Amendment 1. Formally, these are
+incompatibilities caused by Ada Issues classified as Binding Interpretations;
+implementations of Ada 95 are supposed to follow these corrections, not the
+original flawed language definition. Thus,
+these strictly speaking are not incompatibilities between Ada 95 and Ada 2005.
+Practically, however, they very well may be, as early Ada 95 implementations
+may not follow the recommendation. Therefore, some Ada 95 implementations
+may be able to compile the examples, while others may not. In constrast,
+Ada 2005 compilers will have consistent behavior. Therefore, we document these
+for completeness.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[This is not part of the definition of the language,
+and does not appear in the Ada 2005 RM.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -810,6 +841,21 @@ that is, language extensions.
 These are the situations in which a legal Ada 2005 program is not a
 legal Ada 95 program.
 The vast majority of language changes fall into this category.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[As with incompatibilities, extensions
+marked with @b[Corrigendum:]
+are corrections to the original Ada 95 definition introduced by Corrigendum
+1. Extensions marked with @b[Amendment Correction:] are corrections
+to the original Ada 95 definition added by Amendment 1. Formally, these are
+extensions allowed by Ada Issues classified as Binding Interpretations.
+As corrections, implementations of Ada 95 are allowed to implement these
+extensions. Thus, these strictly speaking are not extensions of Ada 95;
+they're part of Ada 95. Practically, however, they very well may be extensions,
+as early Ada 95 implementations may not implement the extension. Therefore,
+some Ada 95 implementations may be able to compile the examples, while others
+may not. In constrast, Ada 2005 compilers will always support the extensions.
+Therefore, we document these for completeness.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[This is not part of the definition of the language,

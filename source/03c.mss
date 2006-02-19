@@ -1,9 +1,9 @@
  @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/02/04 06:54:15 $}
+@Comment{$Date: 2006/02/16 06:48:54 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -559,7 +559,7 @@ the following attribute is defined:
 @end(description)
 @EndPrefixType{}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02],ARef=[AI95-00441-02]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02],ARef=[AI95-00441-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The following language-defined
 generic function exists:]}
 
@@ -852,7 +852,7 @@ Tagged types are a new concept.
 @begin{Inconsistent95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01]}
   @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
-  Added wording specifying that Internal_Tag
+  @b[Amendment Correction:] Added wording specifying that Internal_Tag
   must raise Tag_Error if the tag of a library-level type has not yet been
   created. Ada 95 gave an Implementation Permission to do this; we require
   it to avoid erroneous execution when streaming in an object of a
@@ -864,6 +864,16 @@ Tagged types are a new concept.
   Since such a program would not have been portable to a compiler that did
   take advantage of the Implementation Permission, this is not a significant
   inconsistency.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00417-01]}
+  @ChgAdded{Version=[2],Text=<We now define the lower bound of the string
+  returned from [[Wide_]Wide_]Expanded_Name and External_Name. This makes
+  working with the returned string easier, and is consistent with many other
+  string-returning functions in Ada. This is technically an inconsistency; if a
+  program depended on some other lower bound for the string returned from one
+  of these functions, it could fail when complied with Ada 2005. Such code is
+  not portable even between Ada 95 implementations, so it should be very
+  rare.>}
 @end{Inconsistent95}
 
 @begin{Incompatible95}
@@ -904,13 +914,6 @@ Tagged types are a new concept.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00400-01]}
   @ChgAdded{Version=[2],Text=[Added Wide_Expanded_Name and Wide_Wide_Expanded_Name
   because identifiers can now contain characters outside of Latin-1.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00417-01]}
-  @ChgAdded{Version=[2],Text=<We now define the lower bound of the string
-  returned from [[Wide_]Wide_]Expanded_Name and External_Name. This makes
-  working with the returned string easier, and is consistent with many other
-  string-returning functions in Ada.>}
-
 @end{DiffWord95}
 
 @LabeledSubClause{Type Extensions}
@@ -1863,7 +1866,7 @@ The concept of dispatching operations is new.
   implemented by entries and protected operations, so we have to update the
   wording to reflect that.]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00335-01]}
   @ChgAdded{Version=[2],Text=[An stream attribute of a tagged type is
   is usually a dispatching operation, even though it is not a primitive
   operation. If they weren't dispatching, T'Class'Input and T'Class'Output
@@ -3381,40 +3384,40 @@ see @RefSecNum(Storage Management) for more discussion.)
 @end{DiffWord83}
 
 @begin{Inconsistent95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
-@Chg{Version=[2],New=[@Defn{inconsistencies with Ada 95}
-Access discriminants and non-controlling access parameters no longer
-exclude null. A program which passed @key{null} to such an access
-discriminant or access parameter and expected it to raise Constraint_Error
-may fail @ChgNote{but not if the parameter is dereferenced in the subprogram or
-record }when compiled with Ada 2005. One hopes that there no such programs
-outside of the ACATS. (Of course, a program which actually wants to pass
-@key{null} will work, which is far more likely.)],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
+  Access discriminants and non-controlling access parameters no longer
+  exclude null. A program which passed @key{null} to such an access
+  discriminant or access parameter and expected it to raise Constraint_Error
+  may fail @ChgNote{but not if the parameter is dereferenced in the subprogram or
+  record }when compiled with Ada 2005. One hopes that there no such programs
+  outside of the ACATS. (Of course, a program which actually wants to pass
+  @key{null} will work, which is far more likely.)]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
-@Chg{Version=[2],New=[Most unconstrained aliased objects
-with defaulted discriminants are no longer
-constrained by their initial values. This means that a program that
-raised Constraint_Error from an attempt to change the discriminants
-will no longer do so. The change only affects programs that depended
-on the raising of Constraint_Error in this case, so the inconsistency
-is unlikely to occur outside of the ACATS. This change may however cause
-compilers to implement these objects differently, possibly taking additional
-memory or time. This is unlikely to be worse than the differences caused by
-any major compiler upgrade.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+  @ChgAdded{Version=[2],Text=[Most unconstrained aliased objects
+  with defaulted discriminants are no longer
+  constrained by their initial values. This means that a program that
+  raised Constraint_Error from an attempt to change the discriminants
+  will no longer do so. The change only affects programs that depended
+  on the raising of Constraint_Error in this case, so the inconsistency
+  is unlikely to occur outside of the ACATS. This change may however cause
+  compilers to implement these objects differently, possibly taking additional
+  memory or time. This is unlikely to be worse than the differences caused by
+  any major compiler upgrade.]}
 @end{Inconsistent95}
 
 @begin{Incompatible95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00225-01]}
-@Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
-The rule defining when a current instance of a limited type is considered to be
-aliased has been tightened to apply only to types that cannot become
-nonlimited. A program that attempts to take 'Access of the current instance
-of a limited type that can become nonlimited will be illegal in Ada 2005.
-While Ada 95 allowed the current instance of any limited type
-to be treated as aliased, this was inconsistently implemented in compilers,
-and was likely to not work as expected for types that are ultimately
-nonlimited.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00225-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  @B[Amendment Correction:] The rule defining when a current instance of a
+  limited type is considered to be aliased has been tightened to apply only to
+  types that cannot become nonlimited. A program that attempts to take 'Access
+  of the current instance of a limited type that can become nonlimited will be
+  illegal in Ada 2005. While original Ada 95 allowed the current instance of
+  any limited type to be treated as aliased, this was inconsistently
+  implemented in compilers, and was likely to not work as expected for types
+  that are ultimately nonlimited.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -5159,15 +5162,15 @@ details of the implementation of the private type visible to the client of
 the private type. See @RefSecNum{Allocators} for more on this topic.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00229-01],ARef=[AI95-00254-01]}
-@Chg{Version=[2],New=[Taking 'Access of a subprogram declared in a generic
-unit in the body of that generic is no longer allowed. Such references can
-easily be used to create dangling pointers, as @LegalityTitle are not rechecked
-in instance bodies. At the same time, the rules were loosened a bit where
-that is harmless, and also to
-allow any routine to be passed to an access parameter of an
-access-to-subprogram type. The now illegal uses of 'Access can almost always be
-moved to the private part of the generic unit, where they are still legal
-(and rechecked upon instantiation for possibly dangling pointers).],Old=[]}
+@Chg{Version=[2],New=[@b[Amendment Correction:] Taking 'Access of a subprogram
+declared in a generic unit in the body of that generic is no longer allowed.
+Such references can easily be used to create dangling pointers, as
+@LegalityTitle are not rechecked in instance bodies. At the same time, the
+rules were loosened a bit where that is harmless, and also to allow any routine
+to be passed to an access parameter of an access-to-subprogram type. The now
+illegal uses of 'Access can almost always be moved to the private part of the
+generic unit, where they are still legal (and rechecked upon instantiation for
+possibly dangling pointers).],Old=[]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -5179,9 +5182,9 @@ can be used as the controlling parameter in a dispatching calls (see
 Ada 95.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00235-01]}
-@ChgAdded{Version=[2],Text=[The type of the prefix can now be used in resolving
-Access attributes. This allows more uses of the Access attribute to resolve.
-For example:]}
+@ChgAdded{Version=[2],Text=[@b[Amendment Correction:] The type of the prefix
+can now be used in resolving Access attributes. This allows more uses of the
+Access attribute to resolve. For example:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{type} Int_Ptr @key{is access all} Integer;

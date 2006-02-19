@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.70 $ $Date: 2006/02/09 07:54:42 $ $Author: Randy $ }
+@comment{ $Revision: 1.71 $ $Date: 2006/02/16 06:49:07 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2006/02/09 07:54:42 $}
+@Comment{$Date: 2006/02/16 06:49:07 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -883,9 +883,9 @@ regardless of whether the active priority of the task actually changes.]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00333-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  It is no longer required to specify Ceiling_Locking with the language-defined
-  task dispatching policies; we only require that implementations @i<allow>
-  them to be used together.]}
+  @B[Amendment Correction:] It is no longer required to specify Ceiling_Locking
+  with the language-defined task dispatching policies; we only require that
+  implementations @i<allow> them to be used together.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
   @ChgAdded{Version=[2],Text=[@key{Pragma} Priority_Specific_Dispatching is
@@ -976,7 +976,6 @@ of the ready queue for its active priority.@Defn2{Term=[preempt],Sec=[a running 
 @end{RunTime}
 
 @begin{ImplReq}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00333-01]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00333-01]}
 @ChgAdded{Version=[2],Text=[An implementation shall allow, for a single
 partition, both the task dispatching policy to be specified as
@@ -2452,9 +2451,14 @@ affected tasks.
 @end{Notes}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00188-02]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Dynamic_Priorities is now Preelaborated,
+  @b[Amendment Correction:] Priority changes are
+  now required to be done immediately so long as the target task is not on an
+  entry queue.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
+  @ChgAdded{Version=[2],Text=[Dynamic_Priorities is now Preelaborated,
   so it can be used in preelaborated units.]}
 @end{Extend95}
 
@@ -2463,10 +2467,6 @@ affected tasks.
   @ChgAdded{Version=[2],Text=[This Ada 95 clause was turned into a subclause.
   The paragraph numbers are the same as those for
   @RefSecNum{Dynamic Priorities} in Ada 95.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00188-02]}
-  @ChgAdded{Version=[2],Text=[Priority changes are now required to be done
-  immediately so long as the target task is not on an entry queue.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
   @ChgAdded{Version=[2],Text=[There is no @lquotes@;standard@rquotes policy
@@ -2919,15 +2919,15 @@ The above Storage_Checks can be suppressed with pragma Suppress.
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  The No_Nested_Finalization is now defined in terms of types that need
-  finalization. These types include a variety of language-defined types that
-  @i<might> be implemented with a controlled type. If the
-  restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
-  applies to the partition, and one of these language-defined types does not
-  have a controlled part, it will not be allowed in local objects in Ada 2005
-  whereas it would be allowed in Ada 95. Such code is not portable, as other
-  Ada compilers may have had a controlled part, and thus would be
-  illegal under the restriction.]}
+  @b[Amendment Correction:] The No_Nested_Finalization is now defined in terms
+  of types that need finalization. These types include a variety of
+  language-defined types that @i<might> be implemented with a controlled type.
+  If the restriction No_Nested_Finalization (see
+  @RefSecNum{Tasking Restrictions}) applies to the partition, and one of these
+  language-defined types does not have a controlled part, it will not be
+  allowed in local objects in Ada 2005 whereas it would be allowed in original
+  Ada 95. Such code is not portable, as other Ada compilers may have had a
+  controlled part, and thus would be illegal under the restriction.]}
 @end{Incompatible95}
 
 @begin{Extend95}

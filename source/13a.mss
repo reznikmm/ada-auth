@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2006/02/04 06:54:18 $}
+@Comment{$Date: 2006/02/16 06:49:01 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1096,7 +1096,7 @@ Some of the more stringent requirements are moved to
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Changed operational items
   to have inheritance specified for each such aspect.]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-02]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
   @ChgAdded{Version=[2],Text=[Added wording to allow the rejection of
   types with progenitors that have conflicting representation items.]}
 
@@ -3361,7 +3361,8 @@ We have corrected that oversight.
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00133-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  The meaning of a @nt{record_representation_clause} for the nondefault
+  @b[Amendment Correction:] The meaning of a @nt{record_representation_clause}
+  for the nondefault
   bit order is now clearly defined. Thus, such clauses can be portably
   written. In order to do that though, the equivalence of bit 1 in word 1 to
   bit 9 in word 0 (for a machine with Storage_Unit = 8) had to be dropped for
@@ -3371,13 +3372,13 @@ We have corrected that oversight.
   compilers were supporting that anyway).]}
 @end{Incompatible95}
 
-@begin{DiffWord95}
+@begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00436-01]}
-  @ChgAdded{Version=[2],Text=[The undocumented (and likely unintentional)
-  incompatibility with Ada 83 caused by not allowing @nt{record_representation_clause}s
-  on limited record types is removed. (This is a Binding Interpretation, so
-  it applies to Ada 95 implementations as well.)]}
-@end{DiffWord95}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @b[Amendment Correction:] The undocumented (and
+  likely unintentional) incompatibility with Ada 83 caused by not allowing
+  @nt{record_representation_clause}s on limited record types is removed.]}
+@end{Extend95}
 
 @LabeledSubClause{Storage Place Attributes}
 
@@ -3491,11 +3492,12 @@ of its storage place attributes.]}]}
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00133-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  The meaning of the storage place attributes for the nondefault
+  @b[Amendment Correction:] The meaning of the storage place attributes for
+  the nondefault
   bit order is now clearly defined, and can be different than that given by
   strictly following the Ada 95 wording. Any code which depends on the
-  Ada 95 values for a type using the nondefault bit order where they are
-  different will break.]}
+  original Ada 95 values for a type using the nondefault bit order where
+  they are different will break.]}
 @end{Incompatible95}
 
 

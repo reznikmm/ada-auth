@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:42:50 $}
+@Comment{$Date: 2006/02/16 06:48:57 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.28 $}
+@Comment{$Revision: 1.29 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1097,7 +1097,8 @@ as a @nt<name>.
 
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00246-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95} Conversions
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  @b[Amendment Correction:] Conversions
   between unrelated array types that are limited or (for view conversions)
   might be by-reference types are now illegal. The representations of two such
   arrays may differ, making the conversions impossible. We make the check here,
@@ -1161,7 +1162,8 @@ as a @nt<name>.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00330-01]}
   @ChgAdded{Version=[2],Text=[Clarified that an untagged type conversion
   appearing as a generic actual parameter for a generic @key{in out} formal
-  parameter is not a view conversion (and thus is illegal).]}
+  parameter is not a view conversion (and thus is illegal). This confirms
+  the ACATS tests, so all implementations already follow this intepretation.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
   @ChgAdded{Version=[2],Text=[Rules added by the Corrigendum to eliminate
@@ -2338,12 +2340,13 @@ raising.
 
 @begin{Inconsistent95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00268-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}Rounding of
+  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
+  @b[Amendment Correction:] Rounding of
   static real expressions is implementation-defined in Ada 2005, while it was
-  specified as away from zero in Ada 95. This could make subtle differences
-  in programs. However, the Ada 95 rule required rounding that (probably)
-  differed from the target processor, thus creating anomalies where the
-  value of a static expression was required to be different than the
+  specified as away from zero in (original) Ada 95. This could make subtle
+  differences in programs. However, the original Ada 95 rule required rounding
+  that (probably) differed from the target processor, thus creating anomalies
+  where the value of a static expression was required to be different than the
   same expression evaluated at run-time.]}
 @end{Inconsistent95}
 

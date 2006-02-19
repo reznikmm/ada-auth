@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2006/02/04 06:54:16 $}
+@Comment{$Date: 2006/02/16 06:48:58 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.80 $}
+@Comment{$Revision: 1.81 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1945,29 +1945,35 @@ nonlimited (see below); @nt{function_call}s only are required to be
 build-in-place for @lquotes@;really@rquotes@; limited types.]}
 @end{Honest}
 
+@begin{NotIso}
+@ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 10
+through 15 were deleted.>}]}@Comment{This message should be deleted if the
+paragraphs are ever renumbered.}
+@end{NotIso}
+
 @begin{Itemize}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00287-01]}
 @ChgDeleted{Version=[2],Text=[An initialization expression is not allowed in an
 @nt{object_declaration} if the type of the object is limited.]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00287-01]}
 @ChgDeleted{Version=[2],Text=[A default expression is not allowed in a
 @nt{component_declaration} if the type of the record component is limited.]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00287-01]}
 @ChgDeleted{Version=[2],Text=[An initialized allocator is not allowed if the
 designated type is limited.]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00287-01]}
 @ChgDeleted{Version=[2],Text=[A generic formal parameter of mode @key[in] must
 not be of a limited type.]}
 @end{Itemize}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00287-01]}
 @ChgDeleted{Version=[2],Text=[@nt{Aggregate}s are not available for a limited
 composite type. Concatenation is not available for a limited array type.]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00287-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00287-01]}
 @ChgDeleted{Version=[2],Text=[The rules do not exclude a @nt{default_expression}
 for a formal parameter of a limited type; they do not exclude a deferred
 constant of a limited type if the full declaration of the constant is of a
@@ -2643,6 +2649,14 @@ Controlled types and user-defined finalization are new to Ada 95.
 (Ada 83 had finalization semantics only for masters of tasks.)
 @end{Extend83}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @b[Amendment Correction:] Types Controlled and Limited_Controlled now have
+  Preelaborable_Initialization, so that objects of types derived from these
+  types can be used in preelaborated packages.]}
+@end{Extend95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0020],ARef=[AI95-00126-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Ada.Finalization
@@ -2661,11 +2675,6 @@ Controlled types and user-defined finalization are new to Ada 95.
   @ChgAdded{Version=[2],Text=[Additional optimizations are allowed for
   nonlimited controlled types. These allow traditional dead variable
   elimination to be applied to such types.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
-  @ChgAdded{Version=[2],Text=[Types Controlled and Limited_Controlled now have
-  Preelaborable_Initialization, so that objects of types derived from these
-  types can be used in preelaborated packages.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
   @ChgAdded{Version=[2],Text=[Corrected the build-in-place requirement

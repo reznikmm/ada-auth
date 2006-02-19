@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.45 $ $Date: 2005/12/15 02:36:42 $ $Author: Randy $ }
+@comment{ $Revision: 1.46 $ $Date: 2006/02/16 06:49:08 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2005/12/15 02:36:42 $}
+@Comment{$Date: 2006/02/16 06:49:08 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -1783,25 +1783,25 @@ Free, not by a called C function.
 @begin{Inconsistent95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00242-01]}
   @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
-  Update for a String parameter is now defined to not add a nul character.
-  It did add a nul in Ada 95. This means that programs that used
-  this behavior of Update to truncate a string will no longer work (the
-  string will not be truncated). This change makes Update for a string
-  consistent with Update for a char_array (no implicit nul is added to the
-  end of a char_array).]}
+  @b[Amendment Correction:] Update for a String parameter is now defined to not
+  add a nul character. It did add a nul in Ada 95. This means that programs
+  that used this behavior of Update to truncate a string will no longer work
+  (the string will not be truncated). This change makes Update for a string
+  consistent with Update for a char_array (no implicit nul is added to the end
+  of a char_array).]}
 @end{Inconsistent95}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Added @nt{pragma} Preelaborable_Initialization to
+  @b[Amendment Correction:] Added @nt{pragma} Preelaborable_Initialization to
   type chars_ptr, so that it can be used in preelaborated units.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00276-01]}
-  @ChgAdded{Version=[2],Text=[The components of chars_ptr_array are
-  aliased so that it can be used to instantiate Interfaces.C.Pointers
-  (that is its intended purpose, which is otherwise mysterious as it
-  has no operations).]}
+  @ChgAdded{Version=[2],Text=[@b[Amendment Correction:] The components of
+  chars_ptr_array are aliased so that it can be used to instantiate
+  Interfaces.C.Pointers (that is its intended purpose, which is otherwise
+  mysterious as it has no operations).]}
 @end{Extend95}
 
 @begin{DiffWord95}

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.45 $ $Date: 2005/11/16 06:42:56 $ $Author: Randy $ }
+@comment{ $Revision: 1.46 $ $Date: 2006/02/16 06:49:04 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2005/11/16 06:42:56 $}
+@Comment{$Date: 2006/02/16 06:49:04 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -563,7 +563,8 @@ shall have user-specified Read and Write attributes]}.
   need to be specified for most limited types. It is only necessary to specify
   attributes for nonlimited types that have a part that is of any access type,
   and for extensions of limited types with available stream attributes where
-  the @nt{extension_part} includes a subcomponent of an access type.]}
+  the @nt{extension_part} includes a subcomponent of an access type,
+  where the access type does not have specified attributes.]}
 @end{Ramification}
 @end{itemize}
 
@@ -662,6 +663,32 @@ representation, and Read unmarshalling any levels of
 indirection.
 @end{Notes}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00240-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  @b[Amendment Correction:] The wording was changed from
+  @lquotes@;user-specified@rquotes to @lquotes@;available@rquotes
+  attributes. (This was then further changed, see below.) This means that
+  an access type with the attributes specified in the private part would
+  originally have been sufficient to allow the access type to be used in
+  a remote type, but that is no longer allowed. Similarly, the attributes
+  of a remote type that has access components have to be specified in the
+  visible part. These changes were made so that the rules were consistent with
+  the rules introduced for the Corrigendum for stream attributes; moreover,
+  legality should not depend on the contents of the private part.]}
+@end{Incompatible95}
+
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Remote types that cannot be streamed (that is, have no available stream
+  attributes) do not require the specification of stream attributes.
+  This is necessary so that most extensions of Limited_Controlled do not
+  need stream attributes defined (otherwise there would be a signficant
+  incompatibility, as Limited_Controlled would need stream attributes, and then
+  all extensions of it also would need stream attributes).]}
+@end{Extend95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0081],ARef=[AI95-00004-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added missing wording so that
@@ -676,7 +703,7 @@ indirection.
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added missing wording so that
   a remote access type can designate an appropriate private extension.]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00240-01],ARef=[AI95-00366-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
   @ChgAdded{Version=[2],Text=[Changed the wording to use the newly defined
   term @i<type that supports external streaming>, so that various issues
   with access types in pure units and implicitly declared attributes for
@@ -904,12 +931,26 @@ be supported as an alternative to RPC.]
 
 @end{ImplPerm}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00240-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  @b[Amendment Correction:] The wording was changed from
+  @lquotes@;user-specified@rquotes to @lquotes@;available@rquotes
+  attributes. (This was then further changed, see below.) This means that
+  a type with the attributes specified in the private part would
+  originally have been allowed as a formal parameter of an RCI subprogram,
+  but that is no longer allowed.
+  This change was made so that the rules were consistent with the rules
+  introduced for the Corrigendum for stream attributes; moreover, legality
+  should not depend on the contents of the private part.]}
+@end{Incompatible95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0078],ARef=[AI95-00048-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Changed the wording to allow
   a library subprogram to be a remote call interface unit.]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00240-01],ARef=[AI95-00366-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
   @ChgAdded{Version=[2],Text=[Changed the wording to use the newly defined
   term @i<type that supports external streaming>, so that various issues
   with access types in pure units and implicitly declared attributes for

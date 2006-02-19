@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2006/02/04 06:54:19 $}
+@Comment{$Date: 2006/02/16 06:49:03 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 
 @LabeledClause{The Package System}
 
@@ -303,15 +303,16 @@ have been moved to the Real Time Annex.
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Type Address is defined to have preelaborable initialization, so that it
+  @b[Amendment Correction:] Type Address is defined to have preelaborable
+  initialization, so that it
   can be used without restriction in preelaborated units. (If Address is
   defined to be a private type, as suggested by the @ImplAdviceTitle,
   in Ada 95 it cannot be used in some contexts in a preelaborated units.
   This is an unnecessary portability issue.)]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00221-01]}
-  @ChgAdded{Version=[2],Text=[Default_Bit_Order is now a static
-  constant.]}
+  @ChgAdded{Version=[2],Text=[@b[Amendment Correction:] Default_Bit_Order
+  is now a static constant.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
   @ChgAdded{Version=[2],Text=[Package System is now Pure, so it can be
@@ -1970,10 +1971,22 @@ RM83 states the erroneousness of reading or updating deallocated
 objects incorrectly by missing various cases.
 @end{DiffWord83}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00435-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  @b<Amendment Correction:> Storage pools (and Storage_Size)
+  are not defined for access-to-subprogram types. The original Ada 95 wording
+  defined the attributes, but said nothing about their values.
+  If a program uses attributes Storage_Pool or Storage_Size on an
+  access-to-subprogram type, it will need to be corrected for Ada 2005.
+  That's a good thing, as such uses represent a bug @em the concepts
+  never were defined for such types.]}
+@end{Incompatible95}
+
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Added @nt{pragma} Preelaborable_Initialization to
+  @b[Amendment Correction:] Added @nt{pragma} Preelaborable_Initialization to
   type Root_Storage_Pool, so that extensions of it can be used to declare
   default-initialized objects in preelaborated units.]}
 @end{Extend95}
@@ -1988,13 +2001,6 @@ objects incorrectly by missing various cases.
   @ChgAdded{Version=[2],Text=[Added wording to clarify that an @nt{allocator}
   for a coextension nested inside an outer @nt{allocator} shares
   the pool with the outer @nt{allocator}.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00435-01]}
-  @ChgAdded{Version=[2],Text=[Clarified that storage pools (and Storage_Size)
-  are not defined for access-to-subprogram types. The Ada 95 wording defined
-  the attributes, but said nothing about their values. This would be an
-  incompatible change, except that the AI declares the Ada 95 wording to have
-  been in error.]}
 @end{DiffWord95}
 
 
@@ -2786,7 +2792,8 @@ Item'First is Stream_Element_Offset'First, Read will raise Constraint_Error.]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Added @nt{pragma} Preelaborable_Initialization to type Root_Stream_Type.]}
+  @b[Amendment Correction:] Added @nt{pragma} Preelaborable_Initialization
+  to type Root_Stream_Type.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -3625,13 +3632,13 @@ class-wide types descended from S.
   would fail to work in the language as corrected by the Corrigendum.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
-  @ChgAdded{Version=[2],Text=[Explicitly provided a permission that the number
-  of calls to the underlying stream Read and Write operations may differ from
-  the number determined by the canonical operations. If Ada 95 code somehow
-  depended on the number of calls to Read or Write, it could fail with an
-  Ada 2005 implementation. Such code is likely to be very rare; moreover, such
-  code is really wrong, as the permission applies to Ada 95 as well (as it was
-  a Binding Interpretation).]}
+  @ChgAdded{Version=[2],Text=[@B[Amendment Correction:] Explicitly provided a
+  permission that the number of calls to the underlying stream Read and Write
+  operations may differ from the number determined by the canonical operations.
+  If Ada 95 code somehow depended on the number of calls to Read or Write, it
+  could fail with an Ada 2005 implementation. Such code is likely to be very
+  rare; moreover, such code is really wrong, as the permission applies to Ada
+  95 as well.]}
 @end{Inconsistent95}
 
 @begin{Extend95}
@@ -3704,8 +3711,8 @@ class-wide types descended from S.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00444-01]}
   @ChgAdded{Version=[2],Text=[Improved the wording to make it clear that
   we don't define the default implementations of attributes that cannot be
-  called (that is, aren't available). Also clarified when inheritance takes
-  place.]}
+  called (that is, aren't @lquotes@;available@rquotes@;). Also clarified when
+  inheritance takes place.]}
 @end{DiffWord95}
 
 
@@ -4506,10 +4513,10 @@ because the @nt{attribute_representation_clause} has been generalized.
   @b<Corrigendum:> Various freezing rules were added to fix holes in the rules.
   Most importantly, implicit calls are now freezing, which make some
   representation clauses illegal in Ada 2005 that were legal (but dubious) in
-  Ada 95. Similarly, Ada 2005 says that the primitive subprograms of a specific
-  tagged type are frozen when the type is frozen, preventing dubious convention
-  changes (and address clauses) after the freezing point. In both cases, the
-  code is dubious and the workaround is easy.]}
+  Ada 95. @b[Amendment Correction:] Similarly, the primitive subprograms of a
+  specific tagged type are frozen when the type is frozen, preventing dubious
+  convention changes (and address clauses) after the freezing point. In both
+  cases, the code is dubious and the workaround is easy.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}

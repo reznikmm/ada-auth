@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.36 $ $Date: 2005/10/31 17:34:23 $ $Author: Randy $ }
+@comment{ $Revision: 1.37 $ $Date: 2006/02/16 06:49:06 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2005/10/31 17:34:23 $}
+@Comment{$Date: 2006/02/16 06:49:06 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -883,13 +883,13 @@ generators in each Worker task.
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  Type Generator in Numerics.Float_Random and in an instance of
-  Numerics.Discrete_Random is defined to need finalization. If the
+  @b[Amendment Correction:] Type Generator in Numerics.Float_Random and in an
+  instance of Numerics.Discrete_Random is defined to need finalization. If the
   restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
   applies to the partition, and Generator does not have a controlled part, it
   will not be allowed in local objects in Ada 2005 whereas it would be allowed
-  in Ada 95. Such code is not portable, as another Ada compiler may have a
-  controlled part in Generator, and thus would be illegal.]}
+  in original Ada 95. Such code is not portable, as another Ada compiler may
+  have a controlled part in Generator, and thus would be illegal.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.44 $ $Date: 2005/11/16 06:43:02 $ $Author: Randy $ }
+@comment{ $Revision: 1.45 $ $Date: 2006/02/16 06:49:08 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2005/11/16 06:43:02 $}
+@Comment{$Date: 2006/02/16 06:49:08 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -636,15 +636,20 @@ a protected procedure that is an interrupt handler.
 
 @end{Notes}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00253-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  @b[Amendment Correction:] Corrected the wording so that the rules for the
+  use of Attach_Handler and Interrupt_Handler are identical. This means
+  that uses of pragma Interrupt_Handler outside of the target protected type
+  or single protected object are now illegal.]}
+@end{Incompatible95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0068],ARef=[AI95-00121-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified the meaning of
   @lquotes@;the previous handler@rquotes when finalizing protected objects
   containing interrupt handlers.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00253-01]}
-  @ChgAdded{Version=[2],Text=[Corrected the wording so that the rules for the
-  use of Attach_Handler and Interrupt_Handler are identical.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00303-01]}
   @ChgAdded{Version=[2],Text=[Dropped the requirement that an object of a

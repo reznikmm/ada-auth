@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2006/01/12 22:17:13 $}
+@Comment{$Date: 2006/02/16 06:48:59 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1411,6 +1411,14 @@ parameter name, while the procedures P would be hidden from all visibility
 in Ada 2005 and thus would not resolve.
 This case doesn't seem worth making the rules any more
 complex than they already are.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00377-01]}
+  @ChgAdded{Version=[2],Text=[@B[[Amendment Correction:] A @nt{with_clause} is
+  illegal if it would create a homograph of an implicitly declared generic
+  child (see @RefSecNum{Compilation Units - Library Units}). An Ada 95 compiler
+  could have allowed this, but which unit of the two units involved would be
+  denoted wasn't specified, so any successful use isn't portable. Removing one
+  of the two @nt{with_clause}s involved will fix the problem.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -1431,11 +1439,6 @@ defined so that it can be used by the stream attribute availability rules
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
 @Chg{Version=[2],New=[The visibility of a limited view of a library package
 is defined (see @RefSecNum{Compilation Units - Library Units}).],Old=[]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00377-01]}
-@Chg{Version=[2],New=[A @nt{with_clause} is illegal if it would create a
-homograph of an implicitly declared generic child (see
-@RefSecNum{Compilation Units - Library Units}).],Old=[]}
 @end{DiffWord95}
 
 
@@ -3404,7 +3407,7 @@ Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2005.]]}
   @ChgAdded{Version=[2],Text=[Corrected the @lquotes@;single expected
   type@rquotes@; so that it works in contexts that don't have expected types
   (like object renames and qualified expressions). This fixes a hole in Ada 95
-  that appears to prohibit using aggregates, 'Access, character literals,
-  string literals, and allocators in qualified expressions.]}
+  that appears to prohibit using @nt{aggregate}s, 'Access, character literals,
+  string literals, and @nt{allocator}s in qualified expressions.]}
 @end{DiffWord95}
 

@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2006/02/09 07:54:39 $}
+@Comment{$Date: 2006/02/16 06:49:01 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1091,15 +1091,25 @@ exception contains such a character.]}
 @begin{Inconsistent95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00241-01]}
   @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
-  Exception_Identity of an Exception_Occurrence now is
-  defined to return Null_Id for Null_Occurrence, rather than raising
+  @B[Amendment Correction:] Exception_Identity of an Exception_Occurrence
+  now is defined to return Null_Id for Null_Occurrence, rather than raising
   Constraint_Error. This provides a simple way to test for Null_Occurrence.
   We expect that programs that need Constraint_Error raised will be very rare;
   they can be easily fixed by explicitly testing for Null_Id or by using
   Exception_Name instead.]}
 
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00378-01],ARef=[AI95-00417-01]}
+  @ChgAdded{Version=[2],Text=<@B[Amendment Correction:] We now define the lower
+  bound of the string returned from [[Wide_]Wide_]Exception_Name,
+  Exception_Message, and Exception_Information. This makes working with the
+  returned string easier, and is consistent with many other string-returning
+  functions in Ada. This is technically an inconsistency; if a program
+  depended on some other lower bound for the string returned from one of
+  these functions, it could fail when complied with Ada 2005. Such code is
+  not portable even between Ada 95 implementations, so it should be very rare.>}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00446-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
+  @ChgAdded{Version=[2],Text=[@B[Amendment Correction:]
   Raise_Exception now raises Constraint_Error if passed Null_Id. This means
   that it always raises an exception, and thus we can apply pragma No_Return to
   it. We expect that programs that call Raise_Exception with Null_Id will be
@@ -1134,12 +1144,6 @@ exception contains such a character.]}
   @ChgAdded{Version=[2],Text=[The meaning of Exception_Message is reworded to
   reflect that the string can come from a @nt{raise_statement} as well as a
   call of Raise_Exception.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00378-01],ARef=[AI95-00417-01]}
-  @ChgAdded{Version=[2],Text=[We now define the lower bound of the string
-  returned from [[Wide_]Wide_]Exception_Name, Exception_Message, and
-  Exception_Information. This makes working with the returned string easier,
-  and is consistent with many other string-returning functions in Ada.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00400-01]}
   @ChgAdded{Version=[2],Text=[Added Wide_Exception_Name and

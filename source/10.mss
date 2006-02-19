@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2005/12/06 06:34:00 $}
+@Comment{$Date: 2006/02/16 06:49:00 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1484,6 +1484,16 @@ No need to define @lquotes@;apply to@rquotes@; for @nt{use_clause}s.
 Their semantics are fully covered by the @lquotes@;scope (of a @nt{use_clause})@rquotes@;
 definition in @RefSecNum{Use Clauses}.
 @end{DiffWord83}
+
+@begin{Incompatible95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00200-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
+  @b[Amendment Correction:] A subprogram body acting as a declaration cannot
+  @key[with] a private child unit. This would allow public export of types
+  declared in private child packages, and thus cannot be allowed. This was
+  allowed by mistake in Ada 95; a subprogram that does this will now be
+  illegal.]}
+@end{Incompatible95}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
@@ -3633,14 +3643,23 @@ required to appear last.
   as all of the types that are allowed in Ada 95 that would require
   explicitly defined stream attributes are limited (and thus cannot be used
   as components in a nonlimited type).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00403-01]}
+  @ChgAdded{Version=[2],Text=[@B[Amendment Correction:] Added wording
+  to cover missing cases for preelaborated generic units. This is
+  incompatible as a preelaborated unit could have used a formal
+  object to initialize a library-level object; that isn't allowed in Ada 2005. But such a unit wouldn't really
+  be preelaborable, and Ada 95 compilers can reject such units (as this
+  is a Binding Interpretation), so such units should be very rare.]}
 @end{Incompatible95}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The concept of preelaborable initialization and @nt{pragma}
-  Preelaborable_Initialization are new. These allow more types of objects to be
-  created in preelaborable units, and fix holes in the old rules.]}
+  @b[Amendment Correction:] The concept of preelaborable initialization and
+  @nt{pragma} Preelaborable_Initialization are new. These allow more types
+  of objects to be created in preelaborable units, and fix holes in the
+  old rules.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
   @ChgAdded{Version=[2],Text=[Access-to-subprogram types and access-to-object
@@ -3658,8 +3677,4 @@ required to appear last.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
   @ChgAdded{Version=[2],Text=[Disallowed pragma Elaborate and Elaborate_All
   for packages that are mentioned in a @nt{limited_with_clause}.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00403-01]}
-  @ChgAdded{Version=[2],Text=[Added wording to cover missing cases for
-  preelaborated generic units.]}
 @end{DiffWord95}

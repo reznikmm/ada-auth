@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2005/12/10 07:15:13 $}
+@Comment{$Date: 2006/02/16 06:48:57 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1347,26 +1347,27 @@ Such a @nt{pragma} applies to all of the denoted entities.
 @end{Notes}
 
 @begin{Incompatible83}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00309-01]}
-@Chg{Version=[2],New=[@Defn{incompatibilities with Ada 83}
-A pragma Inline cannot refer to a @nt{subprogram_body} outside of that
-body. The pragma can be given inside of the subprogram body. Ada 2005
-adds an @ImplPermName to allow this usage for compatibility, but
-implementations do not have to allow such @nt{pragma}s.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00309-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 83}
+  A pragma Inline cannot refer to a @nt{subprogram_body} outside of that
+  body. The pragma can be given inside of the subprogram body. Ada 2005
+  adds an @ImplPermName to allow this usage for compatibility (and
+  Ada 95 implementations also can use this permission), but
+  implementations do not have to allow such @nt{pragma}s.]}
 @end{Incompatible83}
 
 @begin{Extend83}
-@Defn{extensions to Ada 83}
-A @nt{pragma} Inline is allowed inside a @nt{subprogram_body} if there
-is no corresponding @nt{subprogram_declaration}.
-This is for uniformity with other program unit pragmas.
+  @Defn{extensions to Ada 83}
+  A @nt{pragma} Inline is allowed inside a @nt{subprogram_body} if there
+  is no corresponding @nt{subprogram_declaration}.
+  This is for uniformity with other program unit pragmas.
 @end{Extend83}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00309-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}
-Implementations are allowed to let @nt{Pragma} Inline apply to a
-@nt{subprogram_body}.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00309-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @b[Amendment Correction:] Implementations are allowed to let @nt{Pragma}
+  Inline apply to a @nt{subprogram_body}.]}
 @end{Extend95}
 
 

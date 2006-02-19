@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2006/01/17 07:20:58 $}
+@Comment{$Date: 2006/02/16 06:48:54 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.55 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -103,8 +103,8 @@ in the text of a program.],Old=[]}
 @ChgAdded{Version=[2],Text=[The semantics of an Ada program whose text is not
 in Normalization Form KC (as defined by section 24 of ISO/IEC 10646:2003)
 is implementation defined.]}
-@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
-semantics of an Ada program whose text is not in Normalization Form KC.],Old=[]}]}
+@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[The
+semantics of an Ada program whose text is not in Normalization Form KC.]}]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 The description of the

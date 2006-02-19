@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.48 $ $Date: 2005/12/15 02:36:43 $ $Author: Randy $ }
+@comment{ $Revision: 1.49 $ $Date: 2006/02/16 06:49:09 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2005/12/15 02:36:43 $}
+@Comment{$Date: 2006/02/16 06:49:09 $}
 
 @LabeledClause{String Handling}
 
@@ -358,7 +358,7 @@ itself.
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Added @nt{pragma} Preelaborable_Initialization to
+  @b[Amendment Correction:] Added @nt{pragma} Preelaborable_Initialization to
   types Character_Set and Character_Mapping, so that they can be used
   to declare default-initialized objects in preelaborated units.]}
 
@@ -1752,6 +1752,17 @@ Null_Bounded_String : @key[constant] Bounded_String :=
 @end{ImplNote}
 @end{ImplAdvice}
 
+
+@begin{Inconsistent95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00238-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
+  @B[Amendment Correction:] The bounds of the string returned from
+  Slice are now defined. This is technically an inconsistency; if a program
+  depended on some other lower bound for the string returned from Slice,
+  it could fail when complied with Ada 2005. Such code is not portable even
+  between Ada 95 implementations, so it should be very rare.]}
+@end{Inconsistent95}
+
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
@@ -1774,10 +1785,6 @@ Null_Bounded_String : @key[constant] Bounded_String :=
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified the meaning of
   transformation, selector, and constructor subprograms by describing the
   effects of procedures and functions separately.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00238-01]}
-  @ChgAdded{Version=[2],Text=[Defined the bounds of the string returned from
-  Slice.]}
 @end{DiffWord95}
 
 
@@ -2215,12 +2222,13 @@ New=[Ada 95 ],Old=[]}Rationale.
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  Type Unbounded_String is defined to need finalization. If the
-  restriction No_Nested_Finalization (see @RefSecNum{Tasking Restrictions})
-  applies to the partition, and Unbounded_String does not have a controlled
-  part, it will not be allowed in local objects in Ada 2005 whereas it would
-  be allowed in Ada 95. Such code is not portable, as most Ada compilers have
-  a controlled part in Unbounded_String, and thus would be illegal.]}
+  @b[Amendment Correction:] Type Unbounded_String is defined to need
+  finalization. If the restriction No_Nested_Finalization (see
+  @RefSecNum{Tasking Restrictions}) applies to the partition, and
+  Unbounded_String does not have a controlled part, it will not be allowed in
+  local objects in Ada 2005 whereas it would be allowed in original Ada 95.
+  Such code is not portable, as most Ada compilers have a controlled part in
+  Unbounded_String, and thus would be illegal.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
   @ChgAdded{Version=[2],Text=[
@@ -2237,7 +2245,7 @@ New=[Ada 95 ],Old=[]}Rationale.
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Added a @nt{pragma} Preelaborable_Initialization to
+  @b[Amendment Correction:] Added a @nt{pragma} Preelaborable_Initialization to
   type Unbounded_String, so that it can be used to declare default-initialized
   objects in preelaborated units.]}
 @end{Extend95}
@@ -2528,7 +2536,7 @@ any element outside the Character portion of Wide_Character.]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00161-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Added @nt{pragma} Preelaborable_Initialization to
+  @b[Amendment Correction:] Added @nt{pragma} Preelaborable_Initialization to
   types Wide_Character_Set and Wide_Character_Mapping, so that they can be
   used to declare default-initialized objects in preelaborated units.]}
 @end{Extend95}
