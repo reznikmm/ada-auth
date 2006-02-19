@@ -87,6 +87,7 @@ package ARM_HTML is
     --  2/10/06 - RLB - Added even more additional parameters to the
     --			table command.
     --		- RLB - Added picture command.
+    --  2/19/06 - RLB - Added Number_Paragraphs flag and large letter count.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -110,6 +111,7 @@ package ARM_HTML is
 		      File_Prefix : in String;
 		      HTML_Kind : in HTML_Type;
 		      Use_Unicode : in Boolean;
+		      Number_Paragraphs : in Boolean;
 	              Ref_URL : in String;
 	              Srch_URL : in String;
 	              Index_URL : in String;
@@ -139,6 +141,8 @@ package ARM_HTML is
 	-- equivalents). [Note: It's known that IE on Windows 95/98/ME cannot
 	-- display Unicode characters.] Use_Unicode has no effect if HTML_Kind
 	-- is set to HTML_3.
+	-- Number_Paragraphs means that paragraph numbers will be used;
+	-- otherwise, the Number parameter to Start_Paragraph must be "".
 	-- Ref_URL, Srch_URL, and Index_URL are the URLs (possibly relative)
 	-- for the "References", "Search", and "Index" buttons/labels,
 	-- respectively. If null, these buttons/labels link to sections named
@@ -478,6 +482,7 @@ private
 	Title : Ada.Strings.Unbounded.Unbounded_String;
         HTML_Kind : HTML_Type;
         Use_Unicode : Boolean;
+        Number_Paragraphs : Boolean;
         Ref_URL : Ada.Strings.Unbounded.Unbounded_String;
         Srch_URL : Ada.Strings.Unbounded.Unbounded_String;
         Index_URL : Ada.Strings.Unbounded.Unbounded_String;
@@ -497,6 +502,8 @@ private
 	Section_Name : String(1..3);
 	Char_Count : Natural := 0; -- Characters on current line.
 	Disp_Char_Count : Natural := 0; -- Displayed characters on current line.
+	Disp_Large_Char_Count : Natural := 0; -- Displayed large characters on current line (others are "small" characters).
+			-- Large characters are capitals, 'm', 'w', and numbers.
 	Any_Nonspace : Boolean := False; -- Have we output any non-space on this line?
 	Last_was_Space : Boolean := False; -- True if the last visible character
 				-- output was a space (any kind), or this is the

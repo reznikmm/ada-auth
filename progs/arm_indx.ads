@@ -7,7 +7,7 @@ package ARM_Index is
     -- This package contains the routines to manage and generate the index.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2005 AXE Consultants.
+    -- Copyright 2000, 2005, 2006 AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -42,6 +42,7 @@ package ARM_Index is
     --  8/11/00 - RLB - Made Clean visible.
     -- 10/28/05 - RLB - Added key reuse.
     -- 10/30/05 - RLB - Added subtype declaration.
+    --  2/17/06 - RLB - Added Remove_Soft_Hyphens flag to Clean (for output).
 
     Not_Valid_Error : exception;
 
@@ -96,8 +97,10 @@ package ARM_Index is
 	-- Raises Not_Valid_Error if Subterm, Clause, or Paragraph is not
 	-- empty when the kind does not use it.
 
-    function Clean (Item : in String) return String;
-	-- Remove any commands from Item. (Except for soft hyphens.)
+    function Clean (Item : in String;
+		    Remove_Soft_Hyphens : in Boolean) return String;
+	-- Remove any commands from Item. (Except for soft hyphens
+	-- if Remove_Soft_Hyphens is False.)
 
     procedure Generate_Index_Body (Output_Object : in out ARM_Output.Output_Type'Class;
 				   Use_Paragraphs : in Boolean := True);

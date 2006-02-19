@@ -55,6 +55,7 @@ package body ARM_Index is
     -- 10/30/05 - RLB - Added subtype declaration.
     --  1/16/06 - RLB - Fixed so a letter header is output if the first
     --			indexed item starts with a letter.
+    --  2/17/06 - RLB - Added Remove_Soft_Hyphens flag to Clean (for output).
 
     Next_Index_Key : Index_Key;
 
@@ -103,24 +104,52 @@ package body ARM_Index is
     end Destroy;
 
 
-    function Clean (Item : in String) return String is
-	-- Remove any commands from Item. (Except for soft hyphens.)
+    function Clean (Item : in String;
+		    Remove_Soft_Hyphens : in Boolean) return String is
+	-- Remove any commands from Item. (Except for soft hyphens
+	-- if Remove_Soft_Hyphens is False.)
 	Result : String (1 .. Item'Length);
 	Len : Natural := 0;
 	In_Command : Boolean := False;
+	Skip_Next_Char : Boolean := False;
 	Close_Char : Character := ' ';
     begin
 	for I in Item'Range loop
 	    if Item(I) = '@' then
-		if I < Item'Last and then Item(I+1) = '!' then
-		    -- Allow soft hyphens.
-		    Len := Len + 1;
-		    Result(Len) := Item(I);
+		if I < Item'Last and then
+		   (Item(I+1) = '!' or else -- Soft hyphen
+		    Item(I+1) = '|' or else -- Soft linebreak
+		    Item(I+1) = ';' or else -- "nothing"
+		    Item(I+1) = '\' or else -- tab
+		    Item(I+1) = ' ' or else -- hard space
+		    Item(I+1) = '*') then   -- hard return
+		    if Remove_Soft_Hyphens then
+			Skip_Next_Char := True;
+		    else
+		        -- Allow soft hyphens and other simple commands.
+		        Len := Len + 1;
+		        Result(Len) := Item(I);
+		    end if;
+		elsif I < Item'Last and then
+		   Item(I+1) = '@' then
+		    -- Literal '@' command.
+		    if Remove_Soft_Hyphens then
+		        Len := Len + 1;
+		        Result(Len) := '@';
+			Skip_Next_Char := True;
+		    else
+		        -- Leave these markers, as we'll format the
+			-- resulting string.
+		        Len := Len + 1;
+		        Result(Len) := Item(I);
+		    end if;
 		else
 		    In_Command := True;
 		    Close_Char := ' ';
 		    -- Skip it.
 		end if;
+	    elsif Skip_Next_Char then
+		Skip_Next_Char := True;
 	    elsif In_Command then
 		if Item(I) = '{' then
 		    Close_Char := '}';
@@ -134,7 +163,18 @@ package body ARM_Index is
 		elsif Item(I) = '<' then
 		    Close_Char := '>';
 		    In_Command := False;
-		-- else skip character.
+		elsif Item(I) = '`' then
+		    Close_Char := ''';
+		    In_Command := False;
+		elsif Ada.Characters.Handling.Is_Alphanumeric (Item(I)) then
+		    -- Skip character (part of the command name).
+		    null;
+		else -- End of parameterless command (note: '@' already
+		     -- was recognized).
+		    Close_Char := ' ';
+		    In_Command := False;
+		    Len := Len + 1;
+		    Result(Len) := Item(I);
 		end if;
 	    elsif Close_Char /= ' ' and then
 		Close_Char = Item(I) then
@@ -172,8 +212,8 @@ package body ARM_Index is
 	-- to refer to this index entry. Key must have previously
 	-- returned by Add or Get_Key.
 	Temp_Term : Term_Type;
-	CTerm : constant String := Clean(Term);
-	CSubterm : constant String := Clean(Subterm);
+	CTerm : constant String := Clean(Term, Remove_Soft_Hyphens => False);
+	CSubterm : constant String := Clean(Subterm, Remove_Soft_Hyphens => False);
     begin
         Temp_Term.Kind := Kind;
         Ada.Strings.Fixed.Move (Target => Temp_Term.Term,

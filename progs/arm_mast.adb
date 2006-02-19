@@ -58,6 +58,7 @@ package body ARM_Master is
     --  1/12/06 - RLB - Added more commands for additional properties.
     --  1/18/06 - RLB - Added the ExampleFont command.
     --  1/27/06 - RLB - Added HTMLTabs command.
+    --  2/19/06 - RLB - Set Number_Paragraphs for HTML.
 
     type Command_Type is (
 	-- Source commands:
@@ -998,6 +999,7 @@ package body ARM_Master is
 				     File_Prefix => +Output_File_Prefix,
 				     HTML_Kind => HTML_Kind,
 				     Use_Unicode => HTML_Use_Unicode,
+				     Number_Paragraphs => Should_Number_Paragraphs,
 				     Ref_URL => +HTML_Ref_URL,
 				     Srch_URL => +HTML_Srch_URL,
 				     Index_URL => +HTML_Index_URL,
