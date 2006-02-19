@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.71 $ $Date: 2006/02/16 06:49:07 $ $Author: Randy $ }
+@comment{ $Revision: 1.72 $ $Date: 2006/02/19 06:45:20 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2006/02/16 06:49:07 $}
+@Comment{$Date: 2006/02/19 06:45:20 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -754,19 +754,24 @@ to the new dispatching policy.]}
 @end{Ramification}
 
 @ChgNote{The following stuff is moved to the next subclause}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 7
+through 13 were moved to D.2.3.>}]}@Comment{This message should be deleted if the
+paragraphs are ever renumbered.}
+@end{NotIso}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00321-01]}
 @ChgDeleted{Version=[2],Type=[Leading],Text=[The language defines only one task
 dispatching policy, FIFO_Within_Priorities; when this policy is in effect,
 modifications to the ready queues occur only as follows:]}
 
 @begin{itemize}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00321-01]}
 @ChgDeleted{Version=[2],Text=[When a blocked task becomes ready,
 it is added at the tail of the ready queue for its active priority.]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00321-01]}
 @ChgDeleted{Version=[2],Text=[When the active priority of a ready task that is
 not running changes, or the setting of its base priority takes effect, the task
 is removed from the ready queue for its old active priority and is added at the
@@ -775,17 +780,17 @@ the active priority is lowered due to the loss of inherited priority, in which
 case the task is added at the head of the ready queue for its new active
 priority.]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00321-01]}
 @ChgDeleted{Version=[2],Text=[When the setting of the base priority of a
 running task takes effect, the task is added to the tail of the ready queue for
 its active priority.]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00321-01]}
 @ChgDeleted{Version=[2],Text=[When a task executes a @nt{delay_statement} that
 does not result in blocking, it is added to the tail of the ready queue for its
 active priority.]}
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[If the delay does result in blocking,
   the task moves to the @lquotes@;delay queue@rquotes@;,
   not to the ready queue.]}
@@ -793,13 +798,13 @@ active priority.]}
 
 @end{itemize}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00321-01]}
 @ChgDeleted{Version=[2],Text=[@PDefn{task dispatching point}
 @PDefn{dispatching point}
 Each of the events specified above is a task dispatching point
 (see @RefSecNum{The Task Dispatching Model}).]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00321-01]}
 @ChgDeleted{Version=[2],Text=[In addition, when a task is preempted, it is
 added at the head of the ready queue for its active priority.]}
 
@@ -815,17 +820,22 @@ and also one or more Priority_Specific_Dispatching pragmas to be given.]}
 
 @begin{DocReq}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 14
+through 16 were moved to D.2.3.>}]}@Comment{This message should be deleted if the
+paragraphs are ever renumbered.}
+@end{NotIso}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00321-01]}
 @ChgDeleted{Version=[2],Type=[Leading],Text=[@Defn{priority inversion}
 @i{Priority inversion} is the duration for which a task remains at the
 head of the highest priority ready queue while the processor executes
 a lower priority task. The implementation shall document:]}
 @begin{Itemize}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00321-01]}
 @ChgDeleted{Version=[2],Text=[The maximum priority inversion a user task can experience due to activity
 of the implementation (on behalf of lower priority tasks), and]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00321-01]}
 @ChgDeleted{Version=[2],Text=[whether execution of a task can be preempted by
 the implementation processing of delay
 expirations for lower priority tasks, and if so, for how long.]}
@@ -860,20 +870,26 @@ dispatching@Chg{Version=[2],New=[ policies],Old=[]}.]}
 
 @begin{Notes}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 19
+through 21 were deleted.>}]}@Comment{This message should be deleted if the
+paragraphs are ever renumbered.}
+@end{NotIso}
+
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00321-01]}
 @ChgDeleted{Version=[2],Text=[If the active priority of a running task is
 lowered due to loss of inherited priority (as it is on completion of a
 protected operation) and there is a ready task of the same active priority that
 is not running, the running task continues to run (provided that there is no
 higher priority task).]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00321-01]}
 @ChgDeleted{Version=[2],Text=[The setting of a task's base priority as a result
 of a call to Set_Priority does not always take effect immediately when
 Set_Priority is called. The effect of setting the task's base priority is
 deferred while the affected task performs a protected action.]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00321-01]}
 @ChgDeleted{Version=[2],Text=[Setting the base priority of a ready task causes
 the task to move to the end of the queue for its active priority,
 regardless of whether the active priority of the task actually changes.]}

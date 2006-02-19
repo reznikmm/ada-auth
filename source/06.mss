@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2006/02/16 06:48:57 $}
+@Comment{$Date: 2006/02/19 06:45:19 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -2135,8 +2135,15 @@ not deeper than that of the master that elaborated the function body. If
 this check fails, Program_Error is raised.@Defn2{Term=[Program_Error],
 Sec=(raised by failure of run-time check)}
 @IndexCheck{Accessibility_Check}],Old=[:]}
+
+@begin{NotIso}
+@ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 9
+through 20 were deleted.>}]}@Comment{This message should be deleted if the
+paragraphs are ever renumbered.}
+@end{NotIso}
+
 @begin(itemize)
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00318-02]}
   @ChgDeleted{Version=[2],Text=[@IndexCheck{Tag_Check}
   If it is limited, then
   a check is made that the tag of the value of the return expression
@@ -2144,7 +2151,7 @@ Sec=(raised by failure of run-time check)}
   @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
   Constraint_Error is raised if this check fails.]}
 
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00318-02]}
   @ChgDeleted{Version=[2],Text=[If it is nonlimited, then
   the tag of the result is that of the result type.]}
 @begin{Ramification}
@@ -2175,51 +2182,51 @@ Sec=(raised by failure of run-time check)}
 @end{Reason}
 @end(itemize)
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00318-02]}
 @ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],
 Text=[@Defn{return-by-reference type}
 A type is a @i(return-by-reference) type if it
 is a descendant of one of the following:]}
 @begin(itemize)
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00318-02]}
   @ChgDeleted{Version=[2],Text=[a tagged limited type;]}
 
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00318-02]}
   @ChgDeleted{Version=[2],Text=[a task or protected type;]}
 
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00318-02]}
   @ChgDeleted{Version=[2],Text=[a nonprivate type with the reserved word
   @b(limited) in its declaration;]}
 
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00318-02]}
   @ChgDeleted{Version=[2],Text=[a composite type with a subcomponent
   of a return-by-reference type;]}
 
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00318-02]}
   @ChgDeleted{Version=[2],Text=[a private type
   whose full type is a return-by-reference type.]}
 @end(itemize)
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[
   The above rules are such that there are no "Ada 83" types other than
   those containing tasks that are return-by-reference. This helps
   to minimize upward incompatibilities relating to return-by-reference.]}
 @end{Ramification}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00318-02]}
 @ChgDeleted{Version=[2],Type=[Leading],Text=[@IndexCheck{Accessibility_Check}
 If the result type is a return-by-reference type,
 then a check is made that the return expression is one of the
 following:]}
 @begin(itemize)
 
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00318-02]}
   @ChgDeleted{Version=[2],Text=[a @nt{name} that denotes an object view
   whose accessibility level is not deeper than that of the master that
   elaborated the function body; or]}
   @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00316-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00316-01]}
   @ChgNote{This really wasn't in the previous version, but we don't want it
   in a version without deletions shown...}
   @ChgDeleted{Version=[2],Text=[This rule was unnecessarily confusing, and the
@@ -2227,27 +2234,27 @@ following:]}
   was added @em and then the entire concept was deleted.]}
   @end{Discussion}
 
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00318-02]}
   @ChgDeleted{Version=[2],Text=[a parenthesized expression or
   @nt{qualified_expression} whose operand is one of these kinds of expressions.]}
 
 @end(itemize)
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00318-02]}
 @ChgDeleted{Version=[2],Text=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 The exception Program_Error is raised if this check fails.]}
 @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[Compare the definition of return-by-reference
   with that of by-reference.]}
 
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[The return-by-reference types are all limited types
   except those that are limited only because of a limited
   private type with a nonlimited untagged full type.]}
 @end{Discussion}
 @begin{Reason}
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[@PDefn{generic contract issue}
   This check can often be performed at compile time. It is
   defined to be a run-time check to avoid generic contract model
@@ -2257,9 +2264,9 @@ The exception Program_Error is raised if this check fails.]}
   except for dereferences of an access parameter.]}
 @end{Reason}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00402-01],ARef=[AI95-00416-01]}
-@ChgAdded{Version=[2],Text=[
-If the result subtype of a function has one or more unconstrained access
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00402-01],ARef=[AI95-00416-01]}
+@Chg{Version=[2],
+New=[If the result subtype of a function has one or more unconstrained access
 discriminants,
 a check is made that the accessibility level of the anonymous access type
 of each access discriminant, as determined by the @nt{expression} or the
@@ -2267,18 +2274,8 @@ of each access discriminant, as determined by the @nt{expression} or the
 is not deeper than that of the master that elaborated the
 function body. If this check fails, Program_Error is raised.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-@IndexCheck{Accessibility_Check}]}
-@begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The check prevents the returned
-  object (for a nonlimited type) from outliving the object designated by one
-  of its discriminants. The check is made on the values of the discriminants,
-  which may come from the @nt{return_subtype_indication} (if constrained),
-  or the @nt{expression}, but it is never necessary to check both.]}
-@end{Reason}
-
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00318-02]}
-@ChgDeleted{Version=[2],Text=[For a function with a return-by-reference result type
+@IndexCheck{Accessibility_Check}],
+Old=[For a function with a return-by-reference result type
 the result is returned by reference;
 that is, the function call denotes a constant view of the
 object associated
@@ -2298,6 +2295,14 @@ that object.]}
   @RefSecNum{Completion and Finalization}
   describes when the anonymous constant is finalized.]}
 @end{Ramification}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The check prevents the returned
+  object (for a nonlimited type) from outliving the object designated by one
+  of its discriminants. The check is made on the values of the discriminants,
+  which may come from the @nt{return_subtype_indication} (if constrained),
+  or the @nt{expression}, but it is never necessary to check both.]}
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @Chg{Version=[2],New=[For the execution of an

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.27 $ $Date: 2005/11/16 06:43:03 $ $Author: Randy $ }
+@comment{ $Revision: 1.28 $ $Date: 2006/02/19 06:45:20 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2005/11/16 06:43:03 $}
+@Comment{$Date: 2006/02/19 06:45:20 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -140,24 +140,29 @@ Wide_Characters or Wide_Wide_Characters.]}]}
 @Keepnext--@RI{@Chg{Version=[2],New=[ The functions Is_Character, Is_String, To_Character, To_String, To_Wide_Character,],Old=[Classifications of and conversions between Wide_Character and Character.]}}@Chg{Version=[2],New=[
 --@RI{ and To_Wide_String are obsolescent; see @RefSecnum{Character and Wide_Character Conversion Functions}.}],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00395-01]}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@roman{@Shrink{@i<Paragraphs 14 through 18 were deleted.>}}]}@Comment{This
+message should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[  @key[function] @AdaSubDefn{Is_Character} (Item : @key[in] Wide_Character) @key[return] Boolean;
   @key[function] @AdaSubDefn{Is_String}    (Item : @key[in] Wide_String)    @key[return] Boolean;]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00395-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[  @key[function] @AdaSubDefn{To_Character} (Item       : @key[in] Wide_Character;
                          Substitute : @key[in] Character := ' ')
     @key[return] Character;]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00395-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[  @key[function] @AdaSubDefn{To_String}    (Item       : @key[in] Wide_String;
                          Substitute : @key[in] Character := ' ')
     @key[return] String;]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00395-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[  @key[function] @AdaSubDefn{To_Wide_Character} (Item : @key[in] Character) @key[return] Wide_Character;]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00395-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[  @key[function] @AdaSubDefn{To_Wide_String}    (Item : @key[in] String)    @key[return] Wide_String;]}
 
 @key[end] Ada.Characters.Handling;
@@ -281,34 +286,40 @@ whose elements is given by To_ISO_646 of the corresponding element in
 Item.
 @end{description}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@roman{@Shrink{@i<Paragraphs 42
+through 48 were deleted.>}}]}@Comment{This message should be deleted if the
+paragraphs are ever renumbered.}
+@end{NotIso}
+
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[The following set of functions test
 Wide_Character values for membership in Character,
 or convert between corresponding characters of
 Wide_Character and Character.]}
 @begin{description}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[Is_Character@\Returns True if
 Wide_Character'Pos(Item) <= Character'Pos(Character'Last).]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[Is_String@\Returns True if Is_Character(Item(I))
 is True for each I in Item'Range.]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[To_Character@\Returns the Character corresponding
 to Item if Is_Character(Item), and returns the Substitute Character otherwise.]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[To_String@\Returns the String whose range is
 1..Item'Length and each of whose elements is given by To_Character of the
 corresponding element in Item.]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[To_Wide_Character@\Returns the Wide_Character X
 such that Character'Pos(Item) = Wide_Character'Pos(X).]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[To_Wide_String@\Returns the Wide_String whose
 range is 1..Item'Length and each of whose elements is given by
 To_Wide_Character of the corresponding element in Item.]}

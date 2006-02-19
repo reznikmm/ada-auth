@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2006/02/16 06:48:57 $}
+@Comment{$Date: 2006/02/19 06:45:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @LabeledClause{Type Conversions}
 
@@ -120,6 +120,11 @@ shall be a numeric type.]}
   because (for example) actual parameters of an access type are always
   copied in anyway.>}
 @end{Reason}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 9
+through 20 were reorganized and moved below.>}]}@Comment{This message should be
+deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
 @ChgAdded{Version=[2],Text=[The entire @LegalityTitle section has been
@@ -134,37 +139,37 @@ replace nearly the entire section. The text of Ada 95 paragraphs 8 through 12,
 24.1 through 24.5, 24.12, 24.13, 24.17, 24.19, 24.20, and 8.]}
 @end{Discussion}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00251-01]}
 @ChgDeleted{Version=[2],Type=[Leading],Text=[@Defn2{Term=[type conversion],sec=(array)}
 @Defn2{Term=[conversion],sec=(array)}
 If the target type is an array type, then the operand type shall
 be an array type. Further:]}
 @begin(itemize)
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00251-01]}
   @ChgDeleted{Version=[2],Text=[The types shall have the same dimensionality;]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0008],ARef=[AI95-00168-01]}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00251-01]}
   @ChgDeleted{Version=[2],Text=[Corresponding index types shall be convertible;@Chg{New=[],Old=[ and]}
   @PDefn2{Term=[convertible],Sec=(required)}]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0008],ARef=[AI95-00168-01]}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00251-01]}
   @ChgDeleted{Version=[2],Text=[The component subtypes shall statically match@Chg{New=[; and],Old=[.]}
   @PDefn2{Term=[statically matching],Sec=(required)}]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0008],ARef=[AI95-00168-01]}
-@ChgRef{Version=[2],Kind=[DeletedAdded],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[DeletedAddedNoDelMsg],ARef=[AI95-00251-01]}
 @ChgDeleted{Version=[2],Text=[@Chg{New=[In a view conversion, the target type and the operand type shall
 both or neither have aliased components.],Old=[]}]}
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added]}
-@ChgRef{Version=[2],Kind=[DeletedAdded]}
+@ChgRef{Version=[2],Kind=[DeletedAddedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[@Chg{New=[Without this rule, it is possible to violate the constrained status
 of aliased array components. Consider:],Old=[]}]}
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Added]}
-@ChgRef{Version=[2],Kind=[DeletedAdded]}
+@ChgRef{Version=[2],Kind=[DeletedAddedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[@Chg{New=[@key[package] P @key[is]
    @key[type] T @key[is private];
    A : @key[constant] T;
@@ -176,7 +181,7 @@ of aliased array components. Consider:],Old=[]}]}
 @key[end] P;],Old=[]}]}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@ChgRef{Version=[2],Kind=[DeletedAdded]}
+@ChgRef{Version=[2],Kind=[DeletedAddedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[@Chg{New=[@key[with] P;
 @key[procedure] Exam @key[is]
    X : P.A1;
@@ -192,13 +197,13 @@ of aliased array components. Consider:],Old=[]}]}
 @end{Reason}
 @end(itemize)
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00251-01]}
 @ChgDeleted{Version=[2],Type=[Leading],Text=[@Defn2{Term=[type conversion],sec=(access)}
 @Defn2{Term=[conversion],sec=(access)}
 If the target type is a general access type, then the operand type
 shall be an access-to-object type. Further:]}
 @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[The @LegalityTitle and @RunTimeTitle are worded
   so that a @nt{type_conversion} T(X) (where T is an access type) is (almost)
   equivalent to the @nt{attribute_reference} X.@key[all]'Access, where the
@@ -206,30 +211,30 @@ shall be an access-to-object type. Further:]}
   the @nt{attribute_reference} would raise Constraint_Error.]}
 @end{Discussion}
 @begin(itemize)
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00251-01]}
   @ChgDeleted{Version=[2],Text=[If the target type is an access-to-variable
   type, then the operand type shall be an access-to-variable type;]}
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[If the target type is an access-to-constant
   type, then the operand type
   can be access-to-constant or access-to-variable.]}
 @end{Ramification}
 
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00251-01]}
   @ChgDeleted{Version=[2],Text=[If the target designated type is tagged,
   then the operand designated type
   shall be convertible to the target designated type;
   @PDefn2{Term=[convertible],Sec=(required)}]}
 
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00251-01]}
   @ChgDeleted{Version=[2],Text=[If the target designated type is not tagged,
   then the designated types shall be the same,
   and either the designated subtypes shall statically match or
   the target designated subtype shall be discriminated and unconstrained; and
   @PDefn2{Term=[statically matching],Sec=(required)}]}
 @begin{Reason}
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[These rules are designed to ensure that
   aliased array objects only @i(need) "dope" if their nominal subtype is unconstrained,
   but they can always @i(have) dope if required by the run-time model
@@ -240,7 +245,7 @@ shall be an access-to-object type. Further:]}
   an access value as a single pointer.)]}
 @end{Reason}
 
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00251-01]}
   @ChgDeleted{Version=[2],Text=[@PDefn2{Term=[accessibility rule],Sec=(type conversion)}
   The accessibility level of the operand type shall not be statically
   deeper than that of the target type.
@@ -250,23 +255,23 @@ shall be an access-to-object type. Further:]}
   this rule applies also in the private part of an
   instance of a generic unit.]}
   @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[The access parameter case is handled by a run-time check.
   Run-time checks are also done in instance bodies.]}
   @end{Ramification}
 @end(itemize)
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00251-01]}
 @ChgDeleted{Version=[2],Type=[Leading],Text=[@Defn2{Term=[type conversion],sec=(access)}
 @Defn2{Term=[conversion],sec=(access)}
 If the target type is an access-to-subprogram type, then the operand
 type shall be an access-to-subprogram type. Further:]}
 @begin(itemize)
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00251-01]}
   @ChgDeleted{Version=[2],Text=[The designated profiles shall be
   subtype-conformant.@Defn2{Term=[subtype conformance],Sec=(required)}]}
 
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00251-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00251-01]}
   @ChgDeleted{Version=[2],Text=[@PDefn2{Term=[accessibility rule],Sec=(type conversion)}
   The accessibility level of the operand type shall not be statically
   deeper than that of the target type.
@@ -279,7 +284,7 @@ type shall be an access-to-subprogram type. Further:]}
   the target type shall be declared within the generic body.]}
 
 @begin{Reason}
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[The reason it is illegal to convert from
   an access-to-subprogram type
   declared in a generic body to one declared outside that body

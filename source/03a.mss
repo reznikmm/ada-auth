@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/01/12 22:17:09 $}
+@Comment{$Date: 2006/02/19 06:45:19 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -476,7 +476,11 @@ of @i(component) values.
   @ChgAdded{Version=[2],Text=[The formal definition of @i<category> and
   @i<class> is found in @RefSecNum{Derived Types and Classes}.]}
 @end{TheProof}
-@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Class@Chg{Version=[2],New=[ (of types)],Old=[]}>,
+@ChgNote<The following ought to have the Term be:
+Class@Chg{Version=[2],New=[ (of types)],Old=[]}
+but that doesn't index properly and it is too much work to fix. See if
+anyone complains.>
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Class (of types)>,
   Text=<@Defn(closed under derivation)
   A class is a set of types that is
   closed under derivation,
@@ -3731,14 +3735,20 @@ S'Pred for a modular integer subtype wraps around
      S'Wide_Image when some of the graphic characters of S'Wide_Wide_Image
      are not defined in Wide_Character.]}]}
 
-     @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 31
+through 34 were moved to Wide_Wide_Image.>}]}@Comment{This message should be
+deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
+     @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
      @ChgDeleted{Version=[2],NoPrefix=[T],Text=[The image of an integer value is
      the corresponding decimal literal,
      without underlines, leading zeros, exponent, or trailing spaces, but
      with a single leading character that is either a minus sign or
      a space.]}
      @begin{ImplNote}
-         @ChgRef{Version=[2],Kind=[Deleted]}
+         @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
          @ChgDeleted{Version=[2],Text=[
          If the machine supports negative zeros for signed integer types,
          it is not specified whether "@en@;0" or " 0" should be returned
@@ -3748,7 +3758,7 @@ S'Pred for a modular integer subtype wraps around
          consistent.]}
      @end{implnote}
 
-     @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+     @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
      @ChgDeleted{Version=[2],NoPrefix=[T],Text=[@Defn{nongraphic character}
      The image of an enumeration value is either the corresponding
      identifier in upper case or the corresponding character literal
@@ -3762,9 +3772,9 @@ S'Pred for a modular integer subtype wraps around
      of the nongraphic character identified as @i(nul) is @lquotes@;NUL@rquotes@; @em the
      quotes are not part of the image).]}
      @begin{ImplNote}
-       @ChgRef{Version=[2],Kind=[Deleted]}
-       @ChgDeleted{Version=[2],Text=[
-       For an enumeration type T that has @lquotes@;holes@rquotes@;
+       @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
+       @ChgDeleted{Version=[2],Text=[For an enumeration type T
+       that has @lquotes@;holes@rquotes@;
        (caused by an @nt{enumeration_representation_clause}),
        @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
        T'Wide_Image should raise Program_Error if the value
@@ -3773,7 +3783,7 @@ S'Pred for a modular integer subtype wraps around
        similar things.]}
      @end{ImplNote}
 
-     @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+     @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
      @ChgDeleted{Version=[2],NoPrefix=[T],Text=[The image of a
      floating point value is a decimal real literal
      best approximating the value (rounded away from zero if halfway
@@ -3790,44 +3800,43 @@ S'Pred for a modular integer subtype wraps around
      If S'Signed_Zeros is True, then the leading character is a minus
      sign for a negatively signed zero.]}
      @begin{Honest}
-       @ChgRef{Version=[2],Kind=[Deleted]}
+       @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
        @ChgDeleted{Version=[2],Text=[Leading zeros are present in the
        exponent only if necessary to make the exponent at least two digits.]}
      @end{Honest}
      @begin{Reason}
-       @ChgRef{Version=[2],Kind=[Deleted]}
+       @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
        @ChgDeleted{Version=[2],Text=[This image is intended to conform to
        that produced by
         Text_IO.Float_IO.Put in its default format.]}
      @end{reason}
      @begin{ImplNote}
-       @ChgRef{Version=[2],Kind=[Deleted]}
+       @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
        @ChgDeleted{Version=[2],Text=[The rounding direction is specified here
        to ensure portability of output results.]}
      @end{implnote}
 
-     @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+     @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
      @ChgDeleted{Version=[2],NoPrefix=[T],Text=[The image of a
      fixed point value is a decimal real literal
-     best approximating the value (rounded away from zero if halfway
-     between)
+     best approximating the value (rounded away from zero if halfway between)
      with a single leading character that is either a minus sign
      or a space, one or more digits before the decimal point
      (with no redundant leading zeros),
      a decimal point, and S'Aft (see @RefSecNum(Operations of Fixed Point Types))
      digits after the decimal point.]}
      @begin{Reason}
-       @ChgRef{Version=[2],Kind=[Deleted]}
+       @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
        @ChgDeleted{Version=[2],Text=[This image is intended to conform to
        that produced by Text_IO.Fixed_IO.Put.]}
      @end{reason}
      @begin{ImplNote}
-       @ChgRef{Version=[2],Kind=[Deleted]}
+       @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
        @ChgDeleted{Version=[2],Text=[The rounding direction is specified here
        to ensure portability of output results.]}
      @end{implnote}
      @begin{ImplNote}
-       @ChgRef{Version=[2],Kind=[Deleted]}
+       @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
        @ChgDeleted{Version=[2],Text=[For a machine that supports negative zeros,
        it is not specified whether "@en@;0.000" or " 0.000" is returned.
        See corresponding comment above about integer types with
@@ -4049,7 +4058,13 @@ S'Pred for a modular integer subtype wraps around
        the same result given the same sequence of characters.]}
     @end(Reason)
 
-    @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 44
+through 51 were moved to Wide_Wide_Value.>}]}@Comment{This message should be deleted if the
+paragraphs are ever renumbered.}
+@end{NotIso}
+
+    @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
     @ChgDeleted{Version=[2],NoPrefix=[T],Text=[@Defn2{Term=(Constraint_Error),
     Sec=(raised by failure of run-time check)}
     For the evaluation of a call on S'Wide_Value (or S'Value) for an integer
@@ -4065,7 +4080,7 @@ S'Pred for a modular integer subtype wraps around
     otherwise Constraint_Error is raised.]}
 
     @begin(Discussion)
-      @ChgRef{Version=[2],Kind=[Deleted]}
+      @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
       @ChgDeleted{Version=[2],Text=[We considered allowing 'Value
       to return a representable but out-of-range
       value without a Constraint_Error. However, we currently require
@@ -4079,30 +4094,30 @@ S'Pred for a modular integer subtype wraps around
       literals (since overflow never occurs for modular types).]}
     @end(Discussion)
 
-    @ChgRef{Version=[2],Kind=[Deleted]}
+    @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
     @ChgDeleted{Version=[2],NoPrefix=[T],Type=[Leading],Text=[For the
     evaluation of a call on S'Wide_Value (or S'Value) for a
     real subtype S, if the sequence of characters of the
     parameter (ignoring leading and trailing spaces)
     has the syntax of one of the following:]}
 @begin[itemize]
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=<@nt[numeric_literal]>}
 
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=<@nt[numeral].[@nt[exponent]]>}
 
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=<.@nt[numeral][@nt[exponent]]>}
 
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=<@nt[base]#@nt[based_numeral].#[@nt[exponent]]>}
 
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[@nt[base]#.@nt[based_numeral]#[@nt[exponent]]]}
 @end{Itemize}
 
-    @ChgRef{Version=[2],Kind=[Deleted]}
+    @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
     @ChgDeleted{Version=[2],NoPrefix=[T],Text=[@Defn2{Term=(Constraint_Error),
     Sec=(raised by failure of run-time check)}
     with an optional leading sign character (plus or minus), and if the

@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2006/02/16 06:48:54 $}
+@Comment{$Date: 2006/02/19 06:45:19 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -277,11 +277,11 @@ Old=[Any control function,
 other than a @nt<format_effector>, that is allowed in a comment; the set of
 @nt<other_control_function>s allowed in comments is implementation defined.
 @IndexSeeAlso{Term=[control character],See=(other_control_function)}]}
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@Chg{Version=[2],New=[],Old=[The
+@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],Text=[The
 control functions allowed in comments.]}]}
 
 @begin{Discussion}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Text=`We considered basing the definition of
 lexical elements on Annex A of ISO/IEC
 TR 10176 (4th edition), which lists the characters which should be supported in
@@ -290,7 +290,7 @@ option. Note that it is not our intent to diverge from ISO/IEC TR 10176,
 except to the extent that ISO/IEC TR 10176 itself diverges from ISO/IEC
 10646:2003 (which is the case at the time of this writing [January 2005]).'}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[More precisely, we intend to align
 strictly with ISO/IEC 10646:2003. It must be
 noted that ISO/IEC TR 10176 is a Technical Report while ISO/IEC 10646:2003 is a
@@ -299,19 +299,19 @@ rather than with the Technical Report. And, it turns out that one @i<must>
 make a choice because there are important differences between the two:]}
 
 @begin{Itemize}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[ISO/IEC TR 10176 is still based on
 ISO/IEC 10646:2000 while ISO/IEC 10646:2003 has already been published
 for a year. We cannot afford to delay
 the adoption of our amendment until ISO/IEC TR 10176 has been revised.]}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[There are considerable differences between the
 two editions of ISO/IEC 10646,
 notably in supporting characters beyond the BMP (this might be significant for
 some languages, e.g. Korean).]}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[ISO/IEC TR 10176 does not define case conversion
 tables, which are essential
 for a case-insensitive language like Ada. To get case conversion tables, we
@@ -319,29 +319,29 @@ would have to reference either ISO/IEC 10646:2003 or Unicode, or we would have
 to invent our own.]}
 @end{Itemize}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For the purpose of defining the
 lexical elements of the language, we need
 character properties like categorization, as well as case conversion tables.
 These are mentioned in ISO/IEC 10646:2003 as useful for implementations, with a
 reference to Unicode. Machine-readable tables are available on the web at URLs:]}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@URLLink{URL=[http://www.unicode.org/Public/4.0-Update/UnicodeData-4.0.0.txt],
 Text=[http://www.unicode.org/Public/4.0-Update/UnicodeData-4.0.0.txt]}
 @URLLink{URL=[http://www.unicode.org/Public/4.0-Update/CaseFolding-4.0.0.txt],
 Text=[http://www.unicode.org/Public/4.0-Update/CaseFolding-4.0.0.txt]}]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[with an explanatory document found at URL:]}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@URLLink{URL=[http://www.unicode.org/Public/4.0-Update/UCD-4.0.0.html],
 Text=[http://www.unicode.org/Public/4.0-Update/UCD-4.0.0.html]}]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The actual text of the standard only makes
 specific references to the
 corresponding clauses of ISO/IEC 10646:2003, not to Unicode.]}

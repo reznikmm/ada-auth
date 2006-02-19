@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2005/12/06 06:34:08 $}
+@Comment{$Date: 2006/02/19 06:45:20 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -641,7 +641,7 @@ and in any case, the value is implementation defined.
 Hence, it is always implementation defined.
 @end{Honest}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
+@NoPrefix@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @PDefn2{Term=[specifiable], Sec=(of Storage_Size for a task
 first subtype)}
 @NoPrefix@;Storage_Size may be specified for a task first subtype

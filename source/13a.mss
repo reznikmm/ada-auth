@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2006/02/16 06:49:01 $}
+@Comment{$Date: 2006/02/19 06:45:20 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1080,6 +1080,14 @@ Some of the more stringent requirements are moved to
 @RefSec{Required Representation Support}.
 @end{DiffWord83}
 
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @b[Amendment Correction:] Confirming representation items are
+  defined, and the recommended level of support is now that they always
+  be supported.]}
+@end{Extend95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added operational items
@@ -1101,13 +1109,12 @@ Some of the more stringent requirements are moved to
   types with progenitors that have conflicting representation items.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
-  @ChgAdded{Version=[2],Text=[Added wording to define confirming representation
-  items, and to suggest that they should always be supported. Clarified the
-  representation of an object (with great difficulty reaching agreement).
-  Added wording to say that representation items on aliased and by-reference
-  objects never need be supported if they would not be implementable
-  without distributed overhead even if other recommended level of support
-  says otherwise.]}
+  @ChgAdded{Version=[2],Text=[The description of the representation of an
+  object was clarified (with great difficulty reaching agreement). Added
+  wording to say that representation items on aliased and by-reference objects
+  never need be supported if they would not be implementable without
+  distributed overhead even if other recommended level of support says
+  otherwise. This wording matches the rules with reality.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00444-01]}
   @ChgAdded{Version=[2],Text=[Added wording so that inheritance depends on
