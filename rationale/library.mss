@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/library.mss,v $)
-@comment($Revision: 1.4 $ $Date: 2006/02/11 07:43:13 $)
+@comment($Revision: 1.5 $ $Date: 2006/02/19 06:45:45 $)
 
 @LabeledSection{Predefined library}
 
@@ -61,6 +61,7 @@ cover the relevant changes in other areas and are described in detail
 in this paper:
 
 @begin[Description]
+@begin[Description]@Comment{Second one to indent this}
 @AILink{AI=[AI95-00161-01],Text=[161]}@\Preelaborable initialization
 
 @AILink{AI=[AI95-00248-01],Text=[248]}@\Directory operations
@@ -100,6 +101,7 @@ in this paper:
 @AILink{AI=[AI95-00428-01],Text=[428]}@\Input@en@;output for bounded strings
 
 @AILink{AI=[AI95-00441-01],Text=[441]}@\Null streams
+@end[Description]
 @end[Description]
 
 These changes can be grouped as follows.
@@ -1470,11 +1472,11 @@ The first two, 11430 and 11729, were incorporated into the Ada 95
 core language. The elementary functions, 11430, (@exam[Sqrt], @exam[Sin],
 @exam[Cos] etc) became the package @exam[Ada.Numerics.Generic_Elementary_
 Functions] in
-@URLLink{URL=[http://www.adaic.org/standards/05rm/html/A-5-1.html],Text=[A.5.1]},
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-A-5-1.html],Text=[A.5.1]},
 and the primitive functions, 11729, became the
 various attributes such as @exam[Floor], @exam[Ceiling], @exam[Exponent]
 and @exam[Fraction] in
-@URLLink{URL=[http://www.adaic.org/standards/05rm/html/A-5-3.html],Text=[A.5.3]}.
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-A-5-3.html],Text=[A.5.3]}.
 The original standards were withdrawn long ago.
 
 The other two standards, although originally developed as Ada 83 standards
@@ -1483,7 +1485,7 @@ did not become finally approved until 1998.
 In the case of 13814, the functionality was all incorporated into
 the Numerics annex of Ada 95 as the package
 @exam[Ada.Numerics.Generic_Complex_Elementary_Functions] in
-@URLLink{URL=[http://www.adaic.org/standards/05rm/html/G-1-2.html],Text=[G.1.2]}.
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-G-1-2.html],Text=[G.1.2]}.
 Accordingly the original standard has now lapsed.
 
 @leading@;However, the situation regarding 13813 was not so clear. It covered
@@ -1501,9 +1503,9 @@ a complex input@en@;output package.
 
 The first of these was incorporated into the Numerics annex of Ada
 95 as the package @exam[Ada.Numerics.Generic_Complex_Types] in
-@URLLink{URL=[http://www.adaic.org/standards/05rm/html/G-1-1.html],Text=[G.1.1]},
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-G-1-1.html],Text=[G.1.1]},
 and the last similarly became the package @exam[Ada.Text_IO.Complex_IO] in
-@URLLink{URL=[http://www.adaic.org/standards/05rm/html/G-1-3.html],Text=[G.1.3]}.
+@URLLink{URL=[http://www.adaic.org/standards/05rm/html/RM-G-1-3.html],Text=[G.1.3]}.
 However, the array packages, both real and complex, were
 not incorporated into Ada 95.
 

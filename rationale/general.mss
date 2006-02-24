@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/general.mss,v $)
-@comment($Revision: 1.5 $ $Date: 2006/02/07 07:47:51 $)
+@comment($Revision: 1.6 $ $Date: 2006/02/19 06:45:45 $)
 
 @LabeledSection{Exceptions, generics etc}
 
@@ -39,6 +39,7 @@ other than under the request to remedy shortcomings and improve interfacing.
 in detail in this paper.
 
 @begin[Description]
+@begin[Description]@Comment{Second one to indent this}
 @AILink{AI=[AI95-00161-01],Text=[161]}@\Preelaborable initialization
 
 @AILink{AI=[AI95-00216-01],Text=[216]}@\Unchecked unions @en variants without
@@ -100,6 +101,7 @@ procedures
 @AILink{AI=[AI95-00423-01],Text=[423]}@\Renaming, null exclusion and formal
 objects
 
+@end[Description]
 @end[Description]
 
 These changes can be grouped as follows.

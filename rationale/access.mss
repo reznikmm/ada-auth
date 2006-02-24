@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/access.mss,v $)
-@comment($Revision: 1.5 $ $Date: 2006/02/07 07:47:51 $)
+@comment($Revision: 1.6 $ $Date: 2006/02/19 06:45:45 $)
 
 @LabeledSection{Access types}
 
@@ -50,6 +50,7 @@ types comes into that category in the minds of many users.
 in detail in this paper:
 
 @begin[Description]
+@begin[Description]@Comment{Second one to indent this}
 @AILink{AI=[AI95-00230-01],Text=[230]}@\Generalized use of anonymous access types
 
 @AILink{AI=[AI95-00231-01],Text=[231]}@\Access to constant parameters, null-excluding types
@@ -82,6 +83,7 @@ in detail in this paper:
 
 @AILink{AI=[AI95-00423-01],Text=[423]}@\Renaming, null exclusion and formal objects
 
+@end[Description]
 @end[Description]
 
 These changes can be grouped as follows.
@@ -1576,10 +1578,12 @@ dangerous for access to subprogram types for similar reasons.
 around the problems of accessibility anyway. Thus the double integration
 presented in the Introduction can easily be circumvented in many cases.
 We computed
-@begin{Example}@Comment{This might be better displayed as a graphic; a lot of systems won't have these characters.}
+@begin{Example}@Comment{This is better displayed as a graphic; a lot of systems won't have these characters.
 @Roman{@grow{@grow{@Unicode(8992)}@+{1}@grow{@Unicode(8992)}@+{1}
 @grow{@Unicode(9474)} @grow{@Unicode(9474)}  xy @i{dy dx}
-@grow{@Unicode(8993)}@-{0}@grow{@Unicode(8993)}@-{0}}}
+@grow{@Unicode(8993)}@-{0}@grow{@Unicode(8993)}@-{0}}}}
+@PictureInline{Alignment=[Inline],Border=[None],Height=[78],Width=[141],
+Name=[form-2.gif],Descr=[Integrate xy]}
 @end{Example}
 
 @leading@keepnext@;using the following program
@@ -1627,10 +1631,12 @@ and so it all works using the Ada 95 version of @exam[Integrate] anyway.
 the region had not been square but triangular so that the bound of
 the inner integral depended on the outer variable as in
 
-@begin{Example}@Comment{This might be better displayed as a graphic; a lot of systems won't have these characters.}
+@begin{Example}@Comment{This is better displayed as a graphic; a lot of systems won't have these characters.
 @Roman{@grow{@grow{@Unicode(8992)}@+{1}@grow{@Unicode(8992)}@+{x}
 @grow{@Unicode(9474)} @grow{@Unicode(9474)}  xy @i{dy dx}
-@grow{@Unicode(8993)}@-{0}@grow{@Unicode(8993)}@-{0}}}
+@grow{@Unicode(8993)}@-{0}@grow{@Unicode(8993)}@-{0}}}}
+@PictureInline{Alignment=[Inline],Border=[None],Height=[78],Width=[141],
+Name=[form-3.gif],Descr=[Integrate xy]}
 @end{Example}
 
 then nested functions would be vital.

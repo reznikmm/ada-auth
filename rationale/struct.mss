@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/struct.mss,v $)
-@comment($Revision: 1.3 $ $Date: 2006/02/03 07:39:46 $)
+@comment($Revision: 1.4 $ $Date: 2006/02/19 06:45:45 $)
 
 @LabeledSection{Structure and visibility}
 
@@ -47,6 +47,7 @@ The following Ada Issues cover the relevant changes and are described
 in detail in this paper:
 
 @begin[Description]
+@begin[Description]@Comment{Second one to indent this}
 @AILink{AI=[AI95-00217-06],Text=[217]}@\Mutually recursive types @en limited
 with
 
@@ -62,11 +63,11 @@ types
 
 @AILink{AI=[AI95-00412-01],Text=[412]}@\Subtypes and renamings of incomplete
 entities
+@end[Description]
+@end[Description]
 
 These changes can be grouped as follows.
 
-
-@end[Description]
 First there is the important solution to the problem of mutually dependent
 types across packages provided by the introduction of limited with clauses
 (@AILink{AI=[AI95-00217-06],Text=[217]}). Related changes are the introduction

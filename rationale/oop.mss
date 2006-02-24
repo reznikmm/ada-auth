@@ -1,7 +1,7 @@
 @Part(oop, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/oop.mss,v $)
-@comment($Revision: 1.5 $ $Date: 2006/02/07 07:47:52 $)
+@comment($Revision: 1.6 $ $Date: 2006/02/19 06:45:46 $)
 
 @LabeledSection{Object oriented model}
 
@@ -54,6 +54,7 @@ area. The following Ada Issues cover the relevant changes and are
 described in detail in this paper:
 
 @begin[Description]
+@begin[Description]@Comment{Second one to indent this}
 @AILink{AI=[AI95-00218-03],Text=[218]}@\Accidental overloading when overriding
 
 @AILink{AI=[AI95-00251-01],Text=[251]}@\Abstract interfaces to provide multiple
@@ -92,6 +93,7 @@ constructors
 
 @AILink{AI=[AI95-00430-01],Text=[430]}@\Convention of inherited subprograms
 
+@end[Description]
 @end[Description]
 
 These changes can be grouped as follows.

@@ -1,7 +1,7 @@
 @Part(intro, Root="rat.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/Rationale/intro.mss,v $}
-@comment{$Revision: 1.8 $ $Date: 2006/02/07 07:47:51 $}
+@comment{$Revision: 1.9 $ $Date: 2006/02/19 06:45:45 $}
 
 @LabeledSection{Introduction}
 
@@ -954,10 +954,12 @@ the integral of the function passed as parameter @Exam{Fn} between
 the limits @Exam{Lo} and @Exam{Hi}. This works fine in Ada 95 for simple
 cases such as where the function is declared at library
 level. Thus to evaluate
-@begin{Example}@Comment{This might be better displayed as a graphic; a lot of systems won't have these characters.}
+@begin{Example}@Comment{This is better displayed as a graphic; a lot of systems won't have these characters.
 @Roman{@grow{@grow{@Unicode(8992)}@+{1}
 @grow{@Unicode(9474)}  @Unicode(8730)x @i{dx}
-@grow{@Unicode(8993)}@-{0}}}
+@grow{@Unicode(8993)}@-{0}}}}
+@PictureInline{Alignment=[Inline],Border=[None],Height=[78],Width=[84],
+Name=[form-1.gif],Descr=[Integrate Sqrt(x)]}
 @end{Example}
 
 @leading@keepnext@;we can write

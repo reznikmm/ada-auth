@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/cannex.mss,v $)
-@comment($Revision: 1.4 $ $Date: 2006/02/11 07:43:10 $)
+@comment($Revision: 1.5 $ $Date: 2006/02/19 06:45:45 $)
 
 @LabeledClause{Summary table}
 
@@ -91,9 +91,9 @@ Body=[@exam{@key[generic]}@\@exam{Y}@\@exam{Y}@\@exam{Y}@\@exam{Y}@\@exam{Y}@\@e
 @exam{@key[procedure] Delete_First(@*@ @ @ C: @key[in out] T; Count: C_T := 1);@*@key[procedure] Delete_Last(@*@ @ @ C: @key[in out] T; Count: C_T := 1);}@\@exam{Y}@\@exam{Y}@\@\@exam{Y (no count)}@\@\@exam{Y (no count)}
 @exam{@key[procedure] Reverse_Elements(C: @key[in out] T);}@\@exam{Y}@\@exam{Y}@\@\@\@\
 @exam{@key[procedure] Swap(C: @key[in out] T; I, J: Cursor);}@\@exam{Y@*also Index}@\@exam{Y}@\@\@\@\
-@exam{@key[procedure] Swap_Links(C: @key[in out] List; I, J: Cursor);}@\@\@exam{Y}@\@\@\@\
+@exam{@key[procedure] Swap_Links(@*@ @ @ C: @key[in out] List;@*@ @ @ I, J: Cursor);}@\@\@exam{Y}@\@\@\@\
 @exam{@key[procedure] Splice(@*@ @ @ Target: @key[in out] List; Before: Cursor;@*@ @ @ Source: @key[in out] List);@*@key[procedure] Splice(@*@ @ @ Target: @key[in out] List; Before: Cursor;@*@ @ @ Source: @key[in out] List; Position: @key[in out] Cursor);@*@key[procedure] Splice(@*@ @ @ Container: @key[in out] List; Before: Cursor;@*@ @ @ Position: @key[in out] Cursor);}@\@\@exam{Y}@\@\@\@\
-@exam{@key[procedure] Union(Target: @key[in out] Set; Source: Set);@*@key[function] Union(L, R: Set) @key[return] Set;@*@key[function] "or" (L, R: Set) @key[return] Set @key[renames] Union;}@\@\@\@\@\@exam{Y}@\@exam{Y}
+@exam{@key[procedure] Union(@*@ @ @ Target: @key[in out] Set;@*@ @ @ Source: Set);@*@key[function] Union(L, R: Set) @key[return] Set;@*@key[function] "or" (L, R: Set) @key[return] Set@*@ @ @ @key[renames] Union;}@\@\@\@\@\@exam{Y}@\@exam{Y}
 @exam{@key[procedure] Intersection(@*@ @ @ Target: @key[in out] Set;@*@ @ @ Source: Set);@*@key[function] Intersection(L, R: Set) @key[return] Set;@*@key[function] "and" (L, R: Set) @key[return] Set@*@ @ @ @key[renames] Intersection;}@\@\@\@\@\@exam{Y}@\@exam{Y}
 @exam{@key[procedure] Difference(@*@ @ @ Target: @key[in out] Set;@*@ @ @  Source: Set);@*@key[function] Difference(L, R: Set) @key[return] Set;@*@key[function] "@en" (L, R: Set) @key[return] Set@*@ @ @ @key[renames] Difference;}@\@\@\@\@\@exam{Y}@\@exam{Y}
 @exam{@key[procedure] Symmetric_Difference(@*@ @ @ Target: @key[in out] Set;@*@ @ @ Source: Set);@*@key[function] Symmetric_Difference (L, R: Set)@*@ @ @ @key[return] Set;@*@key[function] "xor" (L, R: Set) @key[return] Set@*@ @ @ @key[renames] Symmetric_Difference;}@\@\@\@\@\@exam{Y}@\@exam{Y}
@@ -124,16 +124,16 @@ Body=[@exam{@key[generic]}@\@exam{Y}@\@exam{Y}@\@exam{Y}@\@exam{Y}@\@exam{Y}@\@e
 @exam{@b[generic]@*@ @ @ @key[type] Key_Type (<>) @key[is private];}@\@\@\@\@\@exam{Y}@\@exam{Y}
 @exam{@ @ @key[with function] Key(Element: E_T)@*@ @ @ @ @ @ @key[return] Key_Type;}@\@\@\@\@\@exam{Y}@\@exam{Y}
 @exam{@ @ @key[with function] Hash(Key: K_T)@*@ @ @ @ @ @ @ @key[return] Hash_Type;}@\@\@\@\@\@exam{Y}@\
-@exam{@ @ @key[with function] Equivalent_Keys (L, R: Key_Type)@*@ @ @ @ @ @ @key[return] Boolean;}@\@\@\@\@\@exam{Y}@\
+@exam{@ @ @key[with function] Equivalent_Keys (@*@ @ @ @ @ L, R: Key_Type) @key[return] Boolean;}@\@\@\@\@\@exam{Y}@\
 @exam{@ @ @key[with function] "<" (L, R: Key_Type)@*@ @ @ @ @ @ @key[return] B is <>;}@\@\@\@\@\@\@exam{Y}
 @exam{@key[package] Generic_Keys @key[is]}@\@\@\@\@\@exam{Y}@\@exam{Y}
-@exam{@key[function] Equivalent_Keys(L, R: Key_Type) @key[return] B;}@\@\@\@\@\@\@exam{Y}
+@exam{@key[function] Equivalent_Keys(L, R: Key_Type)@*@ @ @ @key[return] B;}@\@\@\@\@\@\@exam{Y}
 @exam{@key[function] Key(P: C) @key[return] Key_Type;}@\@\@\@\@\@exam{Y}@\@exam{Y}
 @exam{@key[function] Element(C: T; Key: K_T)@*@ @ @ @key[return] Element_T;}@\@\@\@\@\@exam{Y}@\@exam{Y}
 @exam{@key[procedure] Replace(C: @key[in out] T; Key: Key_Type;@*@ @ @ New_Item: E_T);@*@key[procedure] Exclude(@*@ @ @ C: @key[in out] T;@*@ @ @ Key: Key_Type);@*@key[procedure] Delete(C: @key[in out] T; Key: Key_Type);}@\@\@\@\@\@exam{Y}@\@exam{Y}
 @exam{@key[function] Find(C: T; Key: K_T) @key[return] Cursor;}@\@\@\@\@\@exam{Y}@\@exam{Y}
 @exam{@key[function] Floor(C: T; Key: K_T) @key[return] Cursor;@*@key[function] Ceiling(C: T; Key: K_T) @key[return] Cursor;}@\ @\ @\ @\ @\ @\@exam{Y}
-@exam{@key[function] Contains(C: T; Key: K_T) @key[return] Boolean;}@\ @\ @\ @\ @\@exam{Y}@\@exam{Y}
+@exam{@key[function] Contains(C: T; Key: K_T)@*@ @ @ @key[return] Boolean;}@\ @\ @\ @\ @\@exam{Y}@\@exam{Y}
 @exam{@key[procedure] Update_Element_Preserving_Key@*@ @ @ (C: @key[in out] T; P: C;@*@ @ @ Process: @key[not null acc proc] (@*@ @ @ @ @ @ Element: @key[in out] E_T) );}@\ @\ @\ @\ @\@exam{Y}@\@exam{Y}
 @exam{@key[end] Generic_Keys;}@\@\@\@\@\@exam{Y}@\@exam{Y}@last
 @exam{@key[private]@*  ... -- @i[not specified by the language]@*@key[end] Ada.Containers....;}@\@exam{Y}@\@exam{Y}@\@exam{Y}@\@exam{Y}@\@exam{Y}@\@exam{Y}]}

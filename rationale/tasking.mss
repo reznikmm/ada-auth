@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/tasking.mss,v $)
-@comment($Revision: 1.2 $ $Date: 2006/02/03 07:39:46 $)
+@comment($Revision: 1.3 $ $Date: 2006/02/19 06:45:46 $)
 
 @LabeledSection{Tasking and Real-Time}
 
@@ -56,6 +56,7 @@ following Ada Issues cover the relevant changes and are described
 in detail in this paper:
 
 @begin[Description]
+@begin[Description]@Comment{Second one to indent this}
 @AILink{AI=[AI95-00249-01],Text=[249]}@\Ravenscar profile for high-integrity
 systems
 
@@ -102,6 +103,7 @@ interfaces
 
 @AILink{AI=[AI95-00421-01],Text=[421]}@\Sequential activation and attachment
 
+@end[Description]
 @end[Description]
 
 These changes can be grouped as follows.

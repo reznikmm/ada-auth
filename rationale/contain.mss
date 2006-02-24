@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/contain.mss,v $)
-@comment($Revision: 1.3 $ $Date: 2006/02/11 07:43:11 $)
+@comment($Revision: 1.4 $ $Date: 2006/02/19 06:45:45 $)
 
 @LabeledSection{Containers}
 
@@ -433,7 +433,7 @@ a taste, here is a simple stack of floating point numbers
    @key[procedure] Push(X: @key[in] Float);
    @key[function] Pop @key[return] Float;
    @key[function] Size @key[return] Integer;
-   @key[exception] Stack_Empty;
+   Stack_Empty : @key[exception];
 @key[end];
 
 @key[with] Ada.Containers.Doubly_Linked_Lists;
@@ -2241,18 +2241,18 @@ list. Thus
 @tabset[P42]
 @key[procedure] Add_Entry(Index: @key[in out] Text_Map; Word: String; P: Place) @key[is]
    M_Cursor: Indexes.Cursor;
-   A_LIst: Places.List;@\-- @examcom[empty list of places]
+   A_List: Places.List;@\-- @examcom[empty list of places]
 @key[begin]
    M_Cursor := Index.Find(Word);
    @key[if] M_Cursor = Indexes.No_Element @key[then]
       -- @examcom[it's a new word]
-      A_LIst.Append(P);
+      A_List.Append(P);
       Index.Insert(Word, A_List);
    @key[else]
       -- @examcom[it's an old word]
-      A_LIst := Element(M_Cursor);@\-- @examcom[get old list]
+      A_List := Element(M_Cursor);@\-- @examcom[get old list]
       A_List.Append(P);@\-- @examcom[add to it]
-      Index.Replace_Element(M_Cursor, A_LIst);
+      Index.Replace_Element(M_Cursor, A_List);
    @key[end if];
 @key[end] Add_Entry;
 @end[Example]
@@ -2273,12 +2273,12 @@ new item to it, and then copies it back. Here is an alternative version
 @tabset[P42]
 @key[procedure] Add_Entry(Index: @key[in out] Text_Map; Word: String; P: Place) @key[is]
    M_Cursor: Indexes.Cursor;
-   A_LIst: Places.List;@\-- @examcom[empty list of places]
+   A_List: Places.List;@\-- @examcom[empty list of places]
 @key[begin]
    M_Cursor := Index.Find(Word);
    @key[if] M_Cursor = Indexes.No_Element @key[then]
       -- @examcom[it's a new word]
-      A_LIst.Append(P);
+      A_List.Append(P);
       Index.Insert(Word, A_List);
    @key[else]
       -- @examcom[it's an old word]
