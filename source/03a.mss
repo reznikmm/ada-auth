@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/02/19 06:45:19 $}
+@Comment{$Date: 2006/02/25 04:46:42 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -110,7 +110,7 @@ but instead defines a view of an existing entity
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<View>,
 Text=<@Chg{Version=[2],New=[A view of an entity reveals some or all of the
 properties of the entity. A single entity may have multiple views.],
-Old=[(See @b[Definition]]}.)>}
+Old=[(See @b[Definition].)]}>}
 @begin{Discussion}
   Most declarations define a view (of some entity) whose
   view-specific characteristics are unchanging for the
@@ -558,8 +558,7 @@ anyone complains.>
     The remaining properties are provided by the],Old=[whose]} full view
     @Chg{Version=[2],New=[given elsewhere. Private types can be used for
     defining abstractions that hide unnecessary details],Old=[hidden]} from
-    @Chg{Version=[2],New=[a client],Old=[its clients]}.>}@ChgNote{This was
-    changed to parallel "incomplete type"}
+    its clients.>}@ChgNote{This was changed to parallel "incomplete type"}
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<Private extension>,
   Text=<A private extension is @Chg{Version=[2],New=[a type that extends
   another type, with the additional properties],Old=[like a record extension,

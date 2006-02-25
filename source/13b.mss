@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2006/02/16 06:49:03 $}
+@Comment{$Date: 2006/02/25 04:46:50 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @LabeledClause{The Package System}
 
@@ -2950,10 +2950,10 @@ derived @Chg{Version=[2],New=[type],Old=[types]}, the Write
 Read@Chg{Version=[2],New=[) attribute is],Old=[ attributes are]}
 inherited @Chg{Version=[2],New=[according to the rules given],Old=[as specified]}
 in @RefSecNum(Operational and Representation Items)@Chg{Version=[2],
-New=[if the attribute is available for the parent type at the point
+New=[ if the attribute is available for the parent type at the point
 where @i{T} is declared. For a tagged derived type, these attributes are
 not inherited, but rather],Old=[; otherwise,]} the default
-implementations of @Chg{Version=[2],New=[],Old=[these attributes ]}are
+implementations @Chg{Version=[2],New=[],Old=[of these attributes ]}are
 used.@Chg{Version=[2],New=[],Old=[The default implementations of Write and
 Read attributes execute as follows:]}]}
 
@@ -3126,9 +3126,9 @@ is],Old=[attributes of the parent type are]}
 inherited @Chg{Version=[2],New=[according to the rules given],
 Old=[as specified]} in
 @RefSecNum(Operational and Representation Items)@Chg{Version=[2],
-New=[ if the attribute is available for the parent type at point where @i{T}
+New=[ if the attribute is available for the parent type at the point where @i{T}
 is declared. For a tagged derived type, these attributes are not
-inherited, but rather],Old=[; otherwise]}, the default
+inherited, but rather],Old=[; otherwise,]} the default
 implementations@Chg{Version=[2],New=[],Old=[ of these
 attributes]} are used.@Chg{Version=[2],New=[],Old=[ The default implementations of
 Output and Input attributes execute as follows:]}],

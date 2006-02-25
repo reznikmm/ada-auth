@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2006/02/16 06:48:59 $}
+@Comment{$Date: 2006/02/25 04:46:47 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.68 $}
+@Comment{$Revision: 1.69 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -2111,6 +2111,24 @@ If it is a generic formal object,
 then the assume-the-best or assume-the-worst rules are applied as
 appropriate.
 @end{Ramification}
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+  @ChgAdded{Version=[2],Text=[If renamed entity is a subcomponent that
+  depends on discriminants, and the subcomponent is a dereference of a
+  general access type whose designated type is unconstrained and whose
+  discriminants have defaults, the renaming is illegal. Such a
+  general access type can designate an unconstrained (stack) object.
+  Since such a type might not designate an object
+  constrained by its initial value, the renaming is illegal @em the rule
+  says @lquotes@;is@rquotes constrained by its initial value, not
+  @lquotes@;might be@rquotes constrained by its initial value.
+  No other interpretation makes sense, as we can't have legality depending
+  on something (which object is designated) that is not known at
+  compile-time, and we surely can't allow this for unconstrained objects.
+  The wording of the rule
+  should be much clearer on this point, but this was discovered after the
+  completion of Amendment 1 when it was too late to fix it.]}
+@end{Honest}
 @end{Legality}
 
 @begin{StaticSem}

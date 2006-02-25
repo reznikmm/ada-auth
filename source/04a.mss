@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2006/02/16 06:48:56 $}
+@Comment{$Date: 2006/02/25 04:46:45 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -86,7 +86,26 @@ See @RefSecNum{Type Conversions}.
   the @nt<name> (presuming the @nt<name> denotes a view of an object).
   These two uses of nominal subtype are intended to mean the same
   thing.
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+  @ChgAdded{Version=[2],Text=[If an @nt{allocator} for the access-to-object
+  type @i(T) is one that creates objects that are constrained by their
+  initial value (see @RefSecNum{Allocators}), the subtype of the dereference is
+  constrained even if the designated subtype of @i(T) is not. We don't want
+  the effect of the dereference to depend on the
+  designated object. This matters because general access-to-unconstrained
+  can designate both allocated objects (which are constrained at birth) and
+  aliased stack objects (which aren't necessarily constrained).
+  This is a wording bug that was discovered after the completion of
+  Amendment 1 when it was too late to fix it; we expect that it will
+  be corrected by an early Ada 2005 AI.]}
 @end{Honest}
+@begin{ImplNote}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+  @ChgAdded{Version=[2],Text=[Since we don't depend on whether the designated
+  object is constrained, it is not necessary to include a constrained
+  bit in every object that could be designated by a general access type.]}
+@end{ImplNote}
 
 @PDefn2{Term=[profile], Sec=(associated with a dereference)}
 If the type of the @nt<name> in a dereference is some access-to-subprogram

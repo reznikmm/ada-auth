@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.26 $ $Date: 2006/02/09 07:54:41 $ $Author: Randy $ }
+@comment{ $Revision: 1.27 $ $Date: 2006/02/25 04:46:51 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2006/02/09 07:54:41 $}
+@Comment{$Date: 2006/02/25 04:46:51 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
@@ -392,7 +392,8 @@ New_Name.]}
   is discouraged (that's what Copy_File is for). However, there is no
   requirement to detect file copying by the target system. If the target
   system has an API that gives that for @lquotes@;free@rquotes, it can be
-  used. For Windows, for instance, MoveFile can be used to implement Rename.]}
+  used. For Windows@latin1(174), for instance, MoveFile can be used to
+  implement Rename.]}
 @end{ImplNote}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}

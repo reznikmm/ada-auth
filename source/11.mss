@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2006/02/16 06:49:01 $}
+@Comment{$Date: 2006/02/25 04:46:49 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1105,7 +1105,7 @@ exception contains such a character.]}
   returned string easier, and is consistent with many other string-returning
   functions in Ada. This is technically an inconsistency; if a program
   depended on some other lower bound for the string returned from one of
-  these functions, it could fail when complied with Ada 2005. Such code is
+  these functions, it could fail when compiled with Ada 2005. Such code is
   not portable even between Ada 95 implementations, so it should be very rare.>}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00446-01]}

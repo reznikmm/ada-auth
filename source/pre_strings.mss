@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.49 $ $Date: 2006/02/16 06:49:09 $ $Author: Randy $ }
+@comment{ $Revision: 1.50 $ $Date: 2006/02/25 04:46:54 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2006/02/16 06:49:09 $}
+@Comment{$Date: 2006/02/25 04:46:54 $}
 
 @LabeledClause{String Handling}
 
@@ -1759,7 +1759,7 @@ Null_Bounded_String : @key[constant] Bounded_String :=
   @B[Amendment Correction:] The bounds of the string returned from
   Slice are now defined. This is technically an inconsistency; if a program
   depended on some other lower bound for the string returned from Slice,
-  it could fail when complied with Ada 2005. Such code is not portable even
+  it could fail when compiled with Ada 2005. Such code is not portable even
   between Ada 95 implementations, so it should be very rare.]}
 @end{Inconsistent95}
 

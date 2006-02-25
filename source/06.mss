@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2006/02/19 06:45:19 $}
+@Comment{$Date: 2006/02/25 04:46:46 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -2136,6 +2136,31 @@ this check fails, Program_Error is raised.@Defn2{Term=[Program_Error],
 Sec=(raised by failure of run-time check)}
 @IndexCheck{Accessibility_Check}],Old=[:]}
 
+@begin{Ramification}
+  @ChgNote{Moved from after paragraph 10}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+  @ChgAdded{Version=[2],Text=[The first sentence is true even if the
+  tag of the @nt{expression} is different, which
+  could happen if the @nt{expression} were a view conversion or a
+  dereference of an access value. Note that for a limited type, because
+  of the restriction to @nt{aggregate}s and function calls (and no conversions),
+  the tag will already match]}.
+@end{Ramification}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
+  @ChgAdded{Version=[2],Text=[The first rule ensures
+  that a function whose result type is
+  a specific tagged type always returns an object whose tag is that of the
+  result type. This is important for dispatching on controlling result, and
+  allows the caller to allocate the appropriate amount of space to hold
+  the value being returned (assuming there are no discriminants).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[The check prevents the returned object
+  from outliving its type. Note that this check cannot fail for a specific
+  tagged type, as the tag represents the function's type, which necessarily
+  must be declared outside of the function.]}
+@end{Reason}
 @begin{NotIso}
 @ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 9
 through 20 were deleted.>}]}@Comment{This message should be deleted if the
@@ -2155,30 +2180,20 @@ paragraphs are ever renumbered.}
   @ChgDeleted{Version=[2],Text=[If it is nonlimited, then
   the tag of the result is that of the result type.]}
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-  @Chg{Version=[2],New=[The first sentence],Old=[This]} is true even if the
-  tag of the @Chg{Version=[2],New=[@nt{expression}],
-  Old=[return expression]} is different@Chg{Version=[2],New=[, which
-  could happen if the @nt{expression} were a view conversion or a
-  dereference of an access value. Note that for a limited type, because
-  of the restriction to @nt{aggregate}s and function calls (and no conversions),
-  the tag will already match],Old=[]}.
+  @ChgNote{These two notes were revised and moved up}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00318-02]}
+  @ChgDeleted{Version=[2],Text=[This is true even if the
+  tag of the return expression is different.]}
 @end{Ramification}
 @begin{Reason}
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-  @Chg{Version=[2],New=[The first rule ensures],Old=[These rules ensure]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00318-02]}
+  @ChgDeleted{Version=[2],Text=[These rules ensure
   that a function whose result type is
   a specific tagged type always returns an object whose tag is that of the
   result type. This is important for dispatching on controlling result,
-  and@Chg{Version=[2],New=[],Old=[, if nonlimited,]}
+  and, if nonlimited,
   allows the caller to allocate the appropriate amount of space to hold
-  the value being returned (assuming there are no discriminants).
-
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The check prevents the returned object
-  from outliving its type. Note that this check cannot fail for a specific
-  tagged type, as the tag represents the function's type, which necessarily
-  must be declared outside of the function.]}
+  the value being returned (assuming there are no discriminants).]}
 @end{Reason}
 @end(itemize)
 

@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.53 $ $Date: 2006/02/03 07:40:46 $ $Author: Randy $ }
+@comment{ $Revision: 1.54 $ $Date: 2006/02/25 04:46:51 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2006/02/03 07:40:46 $}
+@Comment{$Date: 2006/02/25 04:46:51 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -2579,8 +2579,7 @@ lengths, then the function returns False.
 Otherwise, it compares each element in Left to
 the corresponding element in Right using the generic formal equality operator.
 If any such comparison returns False, the function returns False; otherwise it
-returns True. It is unspecified whether all comparisons are performed if at
-least one returns False.@PDefn{unspecified} Any exception raised during
+returns True. Any exception raised during
 evaluation of element equality is propagated.]}
 @begin{ImplNote}
 @ChgRef{Version=[2],Kind=[AddedNormal]}

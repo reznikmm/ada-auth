@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2006/02/16 06:49:00 $}
+@Comment{$Date: 2006/02/25 04:46:48 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1486,7 +1486,7 @@ definition in @RefSecNum{Use Clauses}.
 @end{DiffWord83}
 
 @begin{Incompatible95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00200-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00220-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   @b[Amendment Correction:] A subprogram body acting as a declaration cannot
   @key[with] a private child unit. This would allow public export of types
