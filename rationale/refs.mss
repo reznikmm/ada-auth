@@ -1,7 +1,7 @@
 @Part(title, Root="rat.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/Rationale/refs.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2006/02/07 07:47:52 $}
+@comment{$Revision: 1.5 $ $Date: 2006/02/24 07:08:49 $}
 
 @UnnumberedSection{References}
 
@@ -50,5 +50,14 @@ Press.
 
 @LocalTarget{Target=[R10],Text={[10]}}@\D. E. Knuth (1973). @i{The Art of
 Computer Programming, vol 3 @en Searching and Sorting}, Addison-Wesley.
+
+@LocalTarget{Target=[R11],Text={[11]}}@\ACM (1979) @i{Preliminary Ada Reference
+Manual}, Sigplan Notices, Vol. 14, No. 6.
+
+@LocalTarget{Target=[R12],Text={[12]}}@\ACM (2003) @i[Proceedings of the 12th
+International Real-Time Ada Workshop], Ada Letters, Vol 32, No 4.
+
+@LocalTarget{Target=[R13],Text={[13]}}@\J. G. P. Barnes (2006) @i[Programming
+in Ada 2005], Addison-Wesley.
 @end{Description}
 
