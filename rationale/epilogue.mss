@@ -1,7 +1,7 @@
-@Part(xxx, Root="rat.msm")
+@Part(Epilogue, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/epilogue.mss,v $)
-@comment($Revision: 1.1 $ $Date: 2006/02/24 07:08:50 $)
+@comment($Revision: 1.2 $ $Date: 2006/02/25 06:39:56 $)
 
 @LabeledSection{Epilogue}
 
@@ -682,10 +682,12 @@ In the course of the development of Ada 2005, a number of small changes
 were deemed to apply also to Ada 95 and thus were classified as binding
 interpretations rather than amendments. Accordingly they are not (generally)
 covered by the changes discussed in the previous papers. Note however,
-that @AILink{AI=[AI95-00241-01],Text=[AI-241]} and
-@AILink{AI=[AI95-00329-01],Text=[AI-329]} on exceptions were discussed in
+that @AILink{AI=[AI95-00241-01],Text=[AI-241]} on exceptions was discussed in
 paper @RefSecNum{Exceptions, generics etc} even
-though they were eventually classified as binding interpretations.
+though it was eventually classified as a binding interpretation. Moreover,
+@AILink{AI=[AI95-00329-01],Text=[AI-329]} was
+split and the part stating that Raise_Exception never returns (also applying
+to Ada 95) was formed into @AILink{AI=[AI95-00446-01],Text=[AI-446]}.
 
 @leading@AILink{AI=[AI95-00438-01],Text=[AI-438]} adds subprograms
 @exam[Read_Exception_Occurrence] and @exam[Write_Exception_Occurence]
@@ -758,6 +760,8 @@ or inconsistencies. They are
 @AILink{AI=[AI95-00403-01],Text=[403]}@\Preelaboration checks and formal objects
 
 @AILink{AI=[AI95-00435-01],Text=[435]}@\Storage pools for access-to-subprogram types
+
+@AILink{AI=[AI95-00446-01],Text=[446]}@\Raise_Exception for Null_Id
 @end{Description}
 @end{Description}
 
