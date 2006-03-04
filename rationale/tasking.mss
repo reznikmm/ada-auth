@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/tasking.mss,v $)
-@comment($Revision: 1.3 $ $Date: 2006/02/19 06:45:46 $)
+@comment($Revision: 1.4 $ $Date: 2006/03/03 19:57:45 $)
 
 @LabeledSection{Tasking and Real-Time}
 
@@ -1942,19 +1942,18 @@ in the private part so that it becomes
    @key[procedure] Boil(For_Time: @key[in] Time_Span);
 @key[private]
    @key[procedure] Is_Done(Event: @key[in out] Timing_Event);
+   Egg_Done: Timing_Event;
 @key[end] Egg;
 
 @key[protected] @key[body] Egg @key[is]
 
-   Egg_Done: Timing_Event;
-
-   @key[procedure] Boil (For_Time: @key[in] Time_Span) @key[is]
+   @key[procedure] Boil(For_Time: @key[in] Time_Span) @key[is]
    @key[begin]
       Put_Egg_In_Water;
       Set_Handler(Egg_Done, For_Time, Is_Done'Access);
    @key[end] Boil;
 
-   @key[procedure] Is_Done (Event: @key[in out] Timing_Event) @key[is]
+   @key[procedure] Is_Done(Event: @key[in out] Timing_Event) @key[is]
    @key[begin]
       Ring_The_Pinger;
    @key[end] Is_Done;

@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/access.mss,v $)
-@comment($Revision: 1.6 $ $Date: 2006/02/19 06:45:45 $)
+@comment($Revision: 1.7 $ $Date: 2006/03/03 19:57:41 $)
 
 @LabeledSection{Access types}
 
@@ -1767,7 +1767,6 @@ and the second is about type conversions.
 
 @key[type] Mutant(Sex: Gender := Neuter) @key[is]
    @key[record]
-      Birth: Date;
       @key[case] Sex @key[is]
          @key[when] Male =>
             Bearded: Boolean;
@@ -1790,11 +1789,10 @@ The_Thing: Mutant;
 @leading@;then @exam[The_Thing] is neuter by default but could have its sex
 changed by a whole record assignment thus
 @begin[Example]
-The_Thing := (Male, The_Thing.Birth, True);
+The_Thing := (Sex => Male, Bearded => True);
 @end[Example]
 
-It now is @exam[Male] and has a beard but the date of birth retains
-its previous value.
+It now is @exam[Male] and has a beard.
 
 The problem with this sort of object is that components can disappear.
 If it were changed to be @exam[Female] then the beard would vanish
@@ -1874,9 +1872,9 @@ not allowed. So far so good.
    Before, After: T;
    @key[type] Name @key[is access all] T;
    A_Name: @key[in out] Name;
-@key[procedure] Sex_Change;
+@key[package] Sex_Change @key[is end];
 
-@key[procedure] Sex_Change is
+@key[package body] Sex_Change is
    @key[type] Single @key[is array ](1..1) @key[of aliased] T;
    X: Single := (1 => Before);
 @key[begin]
@@ -1890,18 +1888,19 @@ not allowed. So far so good.
 @tabset{P42}
 A_Neuter: Mutant_Name(Neuter);@\-- @examcom[fixed neuter]
 
-@key[procedure] Surgery @key[is new] Sex_Change(
+@key[package] Surgery @key[is new] Sex_Change(
            T => Mutant,
            Before => (Sex => Neuter),
-           After => (Sex => Male, Bearded, True),
+           After => (Sex => Male, Bearded => True),
            Name => Mutant_Name,
            A_Name => A_Neuter);
 
-Surgery;@\-- @examcom[call of Surgery makes A_Neuter hairy]
+@\-- @examcom[instantiation of Surgery makes A_Neuter hairy]
 @end[Example]
 
 The problem here is that there are loopholes in the checks in the
-procedure @exam[Sex_Change]. The object @exam[A_Name] is assigned
+when the package @exam[Sex_Change] is elaborated. The object @exam[A_Name]
+is assigned
 an access to the single component of the array @exam[X] whose value
 is @exam[Before]. When this is done there is a check that the component
 of the array has the correct subtype. However the subsequent assignment
@@ -1911,8 +1910,9 @@ there is no check concerning @exam[A_Name]. The key point is that
 the generic doesn't know that the type @exam[T] is mutable; this information
 is not part of the generic contract.
 
-So when we call @exam[Surgery], the object @exam[A_Neuter] suddenly
-finds that it has grown a beard!
+So when we instantiate @exam[Surgery] (at the same level as the type
+@exam[Mutant_Name] so that accessibility succeeds), the object @exam[A_Neuter]
+suddenly finds that it has grown a beard!
 
 @leading@;A similar difficulty occurs when private types are involved because
 the partial view and full view might disagree about whether the type
@@ -1952,17 +1952,22 @@ created by an allocator is constrained. So the new object referred to by
 the value of @exam[M] with its @exam[Bearded] component to her is doomed.
 
 Attempting to fix these and related problems with a number of minimal
-rules seemed fated not to succeed. In the end the approach has been
-taken of getting to the root of the matter in Ada 2005 and disallowing
-access subtypes for general access types that have defaults for their
-discriminants. So both the explicit @exam[Things_Name] and also
-@exam[Mutant_Name(Neuter)] are forbidden in Ada 2005.
+rules seemed fated not to succeed.
+So a different approach has been taken. Rather than saying that aliased and
+allocated objects are always treated as constrained so that accessed components
+do not disappear, Ada 2005 takes the approach of preventing the @exam[Access]
+attribute from being applied in certain circumstances by disallowing
+certain access subtypes at all. In particular, general access subtypes which
+refer to types with defaults for their discriminants are forbidden.
 
-Moreover we cannot even have an access type such as @exam[Mutant_Name]
-when the access type completes a private view that has no discriminants.
+The net outcome is that the declaration of @exam[A_Neuter] is illegal because
+we cannot write @exam[Mutant_Name(Neuter)] and so the @exam[Surgery] cannot be
+applied to constrained mutants. On the other hand, Chris is allowed to change
+sex because the allocated objects are no longer automatically constrained in
+the case of private types whose partial view does not have discriminants.
 
-By removing these nasty access subtypes it is now possible to say
-that heap objects are no longer considered constrained in this situation.
+These changes introduce some minor incompatibilities which are explained with
+further examples in the Epilogue.
 
 @leading@;The other change in this area concerns type conversions. A variation
 on the gender theme is illustrated by the following
@@ -1971,7 +1976,6 @@ on the gender theme is illustrated by the following
 
 @key[type] Person(Sex: Gender) @key[is]
    @key[record]
-      Birth: Date;
       @key[case] Sex @key[is]
          @key[when] Male =>
             Bearded: Boolean;

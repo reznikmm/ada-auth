@@ -1,7 +1,7 @@
 @Part(intro, Root="rat.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/Rationale/intro.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2006/02/19 06:45:45 $}
+@comment{$Revision: 1.10 $ $Date: 2006/03/03 19:57:43 $}
 
 @LabeledSection{Introduction}
 
@@ -581,7 +581,7 @@ permitted
 @key[type] DT2 @key[is new] Int1 @key[and] Int2 @key[with]
    @key[record] ... @key[end record];
 
-@key[type] DT3 @key[is new] T1 and Int1 and Int2 @key[with] ...
+@key[type] DT3 @key[is new] T1 @key[and] Int1 @key[and] Int2 @key[with] ...
 @end{Example}
 
 @Leading@keepnext@;It is also possible to compose interfaces to create further

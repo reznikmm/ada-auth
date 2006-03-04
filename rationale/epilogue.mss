@@ -1,7 +1,7 @@
 @Part(Epilogue, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/epilogue.mss,v $)
-@comment($Revision: 1.2 $ $Date: 2006/02/25 06:39:56 $)
+@comment($Revision: 1.3 $ $Date: 2006/03/03 19:57:47 $)
 
 @LabeledSection{Epilogue}
 
@@ -988,7 +988,7 @@ There are a small number of inconsistencies between the original Ada
 @exam[Null_Occurrence] now returns @exam[Null_Id] whereas it originally raised
 @exam[Constraint_Error] in Ada 95. See @RefSecNum{Exceptions} .
 (@AILink{AI=[AI95-00241-01],Text=[AI-241]},
-@URLLink{URL=[http://www.adaic.org/standards/05aarm/html/AA-11.4.1.html],
+@URLLink{URL=[http://www.adaic.org/standards/05aarm/html/AA-11-4-1.html],
 Text=[11.4.1(19.y)]})
 
 2 @em The procedure @exam[Raise_Exception] applied
@@ -996,7 +996,7 @@ to the value @exam[Null_Id] now raises @exam[Constraint_Error] whereas
 it originally did nothing (and thus returned). See
 @RefSecNum{Pragmas and restrictions}.
 (@AILink{AI=[AI95-00446-01],Text=[AI-446]},
-@URLLink{URL=[http://www.adaic.org/standards/05aarm/html/AA-11.4.1.html],
+@URLLink{URL=[http://www.adaic.org/standards/05aarm/html/AA-11-4-1.html],
 Text=[11.4.1(19.aa)]})
 
 3 @em Rounding of static real expressions is now
