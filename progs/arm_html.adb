@@ -137,6 +137,13 @@ package body ARM_HTML is
     --			table command.
     --		- RLB - Added picture command.
     --  2/19/06 - RLB - Added Number_Paragraphs flag and large letter count.
+    --  3/01/06 - RLB - Fixed bug in Text_Format when changing fonts.
+    --  3/03/06 - RLB - Moved paragraph numbers down slightly; this looks a lot
+    --			better on Firefox, and better even on IE.
+    --		- RLB - Added Optimize_for_Firefox flag, and associated style
+    --			changes.
+    --		- RLB - Added code so that spaces after an opening tag
+    --			and before a closing tag are converted to non-breaking.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -155,6 +162,12 @@ package body ARM_HTML is
     INDENT_EMS_FOR_PARANUMS : constant := 12;
 	-- Indent *all* text (for HTML 4) this amount to leave (some) room for
 	-- the paragraph numbers. In 0.1 EMs.
+
+    OPTIMIZE_FOR_FIREFOX : constant Boolean := True;
+	-- If True, we'll optimize for Firefox; otherwise, we'll optimize for
+	-- IE 6. Note that IE generally shows the Firefox code better than
+	-- Firefox shows the IE code, so we generally recommend setting to
+	-- True unless IE must be perfect.
 
     type Tag_Kind is (DIV, UL, DL);
 
@@ -940,7 +953,17 @@ package body ARM_HTML is
 	    -- Special case for better hanging.
             Ada.Text_IO.Put (Output_Object.Output_File, "    DIV.");
             Ada.Text_IO.Put (Output_Object.Output_File, Name & "-Term {");
-            Ada.Text_IO.Put (Output_Object.Output_File, "position: absolute; top: auto; left: 0.6em; ");
+	    if OPTIMIZE_FOR_FIREFOX then
+		-- Tested on Firefox 1.5.
+                Ada.Text_IO.Put (Output_Object.Output_File, "float: left; ");
+		    -- This does not work on IE: it adds extra spaces, and leaves
+		    -- it effective after a <BR>. We could probably work around
+		    -- those, but then Firefox would look like crap again.
+	    else
+		Ada.Text_IO.Put (Output_Object.Output_File, "position: absolute; top: auto; left: 0.6em; ");
+		    -- This does not work on Firefox: the text is too high by
+		    -- about half a line and thus doesn't line up properly.
+	    end if;
 	elsif Special_Hanging_Body and then Output_Object.HTML_Kind = HTML_4_Only then
             Ada.Text_IO.Put (Output_Object.Output_File, "    DIV.");
             Ada.Text_IO.Put (Output_Object.Output_File, Name & "-Body {");
@@ -1028,7 +1051,12 @@ package body ARM_HTML is
                 end if;
 	    end if;
 	end if;
-        if Paragraph_Info(Format).Right_Indent /= 0 then
+	if Special_Hanging_Term and then Output_Object.HTML_Kind = HTML_4_Only then
+	    -- We let the body provide the necessary right margin. If we don't
+	    -- do this, the following item can end up with an inappropriate indent.
+	    null;
+	    --Ada.Text_IO.Put (Output_Object.Output_File, "; margin-bottom: 0em");
+        elsif Paragraph_Info(Format).Right_Indent /= 0 then
 	    Ada.Text_IO.Put (Output_Object.Output_File, "; margin-right: ");
 	    Put_Ems (Output_Object.Output_File, Units_to_EMs(Paragraph_Info(Format).Right_Indent));
         end if;
@@ -1039,7 +1067,11 @@ package body ARM_HTML is
 	    -- The default is non-zero.
 	    Ada.Text_IO.Put (Output_Object.Output_File, "; margin-top: 0em");
         end if;
-        if Paragraph_Info(Format).After /= 0 then
+	if Special_Hanging_Term and then Output_Object.HTML_Kind = HTML_4_Only then
+	    -- We let the body provide the necessary space below. If we don't
+	    -- do this, the next line can end up with an inappropriate indent.
+	    Ada.Text_IO.Put (Output_Object.Output_File, "; margin-bottom: 0em");
+	elsif Paragraph_Info(Format).After /= 0 then
 	    Ada.Text_IO.Put (Output_Object.Output_File, "; margin-bottom: ");
 	    Put_Ems (Output_Object.Output_File, Paragraph_Info(Format).After);
         end if;
@@ -1084,14 +1116,29 @@ package body ARM_HTML is
 	-- Basic element styles:
 	if Paranum_Used then
 	    if Output_Object.HTML_Kind = HTML_4_Compatible then
-		Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {position: absolute; font-family: Arial, Helvetica, sans-serif; left: 0.5em; top: auto}");
-	        -- Uses absolute positioning (CSS2).
-	        -- An alternative would be: "    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; width: 3em; margin-right: -3em}"
-	        -- but this offsets the first line of each paragraph by a single space. Looks ugly.
-	        -- If absolute positioning is not supported, the paragraph number will end up on a line by itself, which is fine.
+		if OPTIMIZE_FOR_FIREFOX then
+		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; width: 2.8em; " &
+								     "margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}");
+                    -- Uses floating items. These usually don't work on IE (it
+		    -- adds extra spaces for no reason). However, with the
+		    -- indents, this seems to work properly on IE, too.
+		else
+		    -- Absolute positioning (CSS2) works better on IE, but
+		    -- Firefox tends to draw these too high.
+		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {position: absolute; font-family: Arial, Helvetica, sans-serif; left: 0.5em; top: auto; margin-top: 0.2em}");
+		end if;
+		-- If these are completely ignored, the paragraph number will
+		-- end up on a line by itself. That's fine.
 	    else
-		Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {position: absolute; font-family: Arial, Helvetica, sans-serif; font-size: 64%; left: 0.5em; top: auto}");
-		-- Uses absolute positioning (CSS2); see above.
+		if OPTIMIZE_FOR_FIREFOX then
+		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; " &
+								     "margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}");
+		    -- Uses floating elements; see above.
+		else
+		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    DIV.paranum {position: absolute; font-family: Arial, Helvetica, sans-serif; font-size: 64%; " &
+								     "left: 0.5em; top: auto; margin-top: 0.2em}");
+		    -- Uses absolute positioning; see above.
+		end if;
 	    end if;
 	end if;
 
@@ -1355,6 +1402,19 @@ package body ARM_HTML is
 	     -- this decreases the minimun size of the files (by as much as
 	     -- 7K as of this writing [1/2006]), which matters when there are
 	     -- hundreds.
+	     -- We also check spaces before end tags and after opening tags;
+	     -- these should be &nbsp;. (See 9.1 in HTML 4.0: "In order to
+	     -- avoid problems with SGML line break rules and inconsistencies
+	     -- among extant implementations, authors should not rely on user
+	     -- agents to render white space immediately after a start tag or
+	     -- immediately before an end tag.") We haven't seen a problem
+	     -- with this, but why ask for trouble?
+	     -- Note that we assume that all occurrences of "<" and ">" in
+	     -- the literal text are written as "&lt;" and "&gt;"; violations
+	     -- might cause the conversion of spaces to non-breaking spaces,
+	     -- which should not cause problems in general. We also assume that
+	     -- all end tags are on one line (they are all very short), so
+	     -- any ">" is the end of a start tag unless there is a "</" preceding it.
 	    declare
 		Original_Name : constant String := Ada.Text_IO.Name (Output_Object.Output_File);
 		Reading_File : Ada.Text_IO.File_Type;
@@ -1362,6 +1422,8 @@ package body ARM_HTML is
 		    Ada.Strings.Fixed.Head (Original_Name, Original_Name'Length-3) & "html";
 		Buffer : String (1..1000);
 		Len : Natural;
+		Body_Seen : Boolean := False;
+		Loc : Natural;
 	    begin
 		Ada.Text_IO.Close (Output_Object.Output_File);
 	        Ada.Text_IO.Open (Reading_File, Ada.Text_IO.In_File,
@@ -1374,8 +1436,54 @@ package body ARM_HTML is
 			if Buffer(1..Len) = MAGIC_STYLE_MARKER then
 			    -- Output only the styles used here.
 			    Make_Paragraph_Styles (Output_Object);
-			else
+			elsif not Body_Seen then
+			    if Ada.Strings.Fixed.Index (Buffer(1..Len), "<BODY") /= 0 then
+				Body_Seen := True;
+			    end if;
 			    Ada.Text_IO.Put_Line (Output_Object.Output_File, Buffer(1..Len));
+			else
+			    -- Replace spaces before end tags:
+			    loop
+				Loc := Ada.Strings.Fixed.Index (Buffer(1..Len), " </");
+				exit when Loc = 0;
+			        Buffer(Loc+6..Len+5) := Buffer(Loc+1..Len);
+				Buffer(Loc..Loc+5) := "&nbsp;";
+				Len := Len+5;
+			    end loop;
+			    -- Replace spaces after start tags:
+			    Loc := 1;
+			    while Loc < Len loop
+				if Buffer(Loc..Loc+1) = "> " then
+				    -- Candidate; check that this isn't an end tag.
+				    for I in reverse 1..Loc-1 loop
+					if Buffer(I) = '/' then
+					    -- End tag, nothing to do.
+					    Loc := Loc + 2;
+					    exit;
+					elsif Buffer(I) = '<' or else I = 1 then
+					    -- Start tag (including reaching the
+					    -- start of the line), replace.
+				            Buffer(Loc+7..Len+5) := Buffer(Loc+2..Len);
+					    Buffer(Loc+1..Loc+6) := "&nbsp;";
+					    Len := Len+5;
+					    Loc := Loc + 7;
+					    -- If these is the *last* character on the
+					    -- line, we have to "unbreak" the line, else we'd get an extra space.
+					    if Loc > Len then
+						Ada.Text_IO.Put (Output_Object.Output_File, Buffer(1..Len));
+						goto Skip_Write;
+					    end if;
+					    exit;
+					-- else continue.
+					end if;
+				    end loop;
+				else
+				    Loc := Loc + 1;
+				end if;
+			    end loop;
+
+			    Ada.Text_IO.Put_Line (Output_Object.Output_File, Buffer(1..Len));
+			<<Skip_Write>> null;
 			end if;
 		    end loop;
 		exception
@@ -2512,7 +2620,7 @@ package body ARM_HTML is
 		     ARM_Output."=" (Format, ARM_Output.Normal) or else
 		     ARM_Output."=" (Format, ARM_Output.Wide) then -- No indent.
 		    -- We may have to make a space for the paragraph number,
-		    -- as absolute positioned items can overlap others.
+		    -- as absolute positioned or floating items can overlap others.
 		    for I in 1 .. (Number'Length+2)-(INDENT_EMS_FOR_PARANUMS/5) loop
 			-- We assume that each space is roughly equal to
 			-- 0.5em (that should be conservative).
@@ -2782,7 +2890,8 @@ package body ARM_HTML is
 		     ARM_Output."=" (Format, ARM_Output.Normal) or else
 		     ARM_Output."=" (Format, ARM_Output.Wide) then -- No indent.
 		    -- We may have to make a space for the paragraph number,
-		    -- as absolute positioned items can overlap others.
+		    -- as absolute positioned or floating items can overlap
+		    -- others.
 		    for I in 1 .. (Number'Length+2)-((INDENT_EMS_FOR_PARANUMS+5)*3/10) loop
 			-- We assume that each space is roughly equal to
 			-- 0.33em (that should be conservative). We also assume
@@ -3770,7 +3879,14 @@ package body ARM_HTML is
 	if Char = ' ' then
 	    if Output_Object.Char_Count >= LINE_LENGTH - 10 and then
 	        Output_Object.Column_Count < 4 then
-	        Ada.Text_IO.New_Line (Output_Object.Output_File);
+		if Output_Object.HTML_Kind > HTML_3 then
+		    -- Note: We leave the space here so that later code can tell
+		    -- the difference between a line broken on a space, and a
+		    -- line broken for because it's convinient.
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, " ");
+		else -- No later code.
+	            Ada.Text_IO.New_Line (Output_Object.Output_File);
+		end if;
 	        Output_Object.Char_Count := 0;
 	        Output_Object.Last_was_Space := True;
 	    else
@@ -4538,6 +4654,22 @@ package body ARM_HTML is
 		    when others =>
 		        Ada.Text_IO.Put (Output_Object.Output_File, "</DIV><DIV>");
 	        end case;
+	        -- If the prefix is too long, add a <BR>. A "unit" is 2.0 ems;
+	        -- a large character is 0.65 ems; and a small character is 0.4 ems.
+	        -- That should be quite conservative.
+--Ada.Text_IO.Put_Line("Break hang check: large chars=" & Natural'Image(Output_Object.Disp_Large_Char_Count) &
+--" small chars=" & Natural'Image(Output_Object.Disp_Char_Count - Output_Object.Disp_Large_Char_Count) &
+--" Hang_Outdent=" & Natural'Image(Paragraph_Info(Output_Object.Paragraph_Format).Hang_Outdent));
+	        if (Output_Object.Disp_Large_Char_Count*13) +
+	           ((Output_Object.Disp_Char_Count-Output_Object.Disp_Large_Char_Count)*8) >
+	           Paragraph_Info(Output_Object.Paragraph_Format).Hang_Outdent*40 then
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "<BR clear=""left"">");
+			-- We use "clear=left" so that the next line always
+			-- starts at the left margin. This shouldn't be necessary,
+			-- but I've seen cases where it was.
+	        else
+		    Ada.Text_IO.New_Line (Output_Object.Output_File);
+		end if;
 		-- Reopen any formatting (using the previously saved values):
 		Text_Format (Output_Object,
 			   Bold => Is_Bold,
@@ -4548,19 +4680,6 @@ package body ARM_HTML is
 			   Version => Version,
 			   Added_Version => Added_Version,
 			   Location => Location);
-	        -- If the prefix is too long, add a <BR>. A "unit" is 2.0 ems;
-	        -- a large character is 0.65 ems; and a small character is 0.4 ems.
-	        -- That should be quite conservative.
---Ada.Text_IO.Put_Line("Break hang check: large chars=" & Natural'Image(Output_Object.Disp_Large_Char_Count) &
---" small chars=" & Natural'Image(Output_Object.Disp_Char_Count - Output_Object.Disp_Large_Char_Count) &
---" Hang_Outdent=" & Natural'Image(Paragraph_Info(Output_Object.Paragraph_Format).Hang_Outdent));
-	        if (Output_Object.Disp_Large_Char_Count*13) +
-	           ((Output_Object.Disp_Char_Count-Output_Object.Disp_Large_Char_Count)*8) >
-	           Paragraph_Info(Output_Object.Paragraph_Format).Hang_Outdent*40 then
-	           Ada.Text_IO.Put_Line (Output_Object.Output_File, "<BR>");
-	        else
-	           Ada.Text_IO.New_Line (Output_Object.Output_File);
-	        end if;
 	    end;
 	else -- HTML 4 Compatibility
 	    -- We have to close and reopen the font info here, so that we
@@ -4647,6 +4766,67 @@ package body ARM_HTML is
 	use type ARM_Output.Change_Type;
 	use type ARM_Output.Location_Type;
 	use type ARM_Output.Size_Type;
+
+	function Change_Needs_Close return Boolean is
+	    -- Returns True if "Change" needs to close something, based
+	    -- on the current values of Output_Object.
+	begin
+	    return (Change /= Output_Object.Change or else
+		    Version /= Output_Object.Version or else
+		    Added_Version /= Output_Object.Added_Version) and then
+		    ARM_Output."/=" (Output_Object.Change, ARM_Output.None);
+	end Change_Needs_Close;
+
+	function Font_Needs_Close return Boolean is
+	    -- Returns True if "Font" needs to close something, based
+	    -- on the current values of Output_Object and the new value.
+	    -- Note that this depends on whether the Change needs to close
+	    -- something; if it does, we need to close and reopen
+	    -- the font even if it is not changing.
+	begin
+	    return (ARM_Output."/=" (Font, Output_Object.Font) or else
+		    Change_Needs_Close) and then
+		    ARM_Output."/=" (Output_Object.Font, ARM_Output.Default);
+	end Font_Needs_Close;
+
+	function Location_Needs_Close return Boolean is
+	    -- Returns True if "Location" needs to close something, based
+	    -- on the current values of Output_Object and the new value.
+	    -- Note that this depends on whether the Change or Font needs
+	    -- to close something; if they do, we need to close and reopen
+	    -- the location even if it is not changing.
+	begin
+	    return (ARM_Output."/=" (Location, Output_Object.Location) or else
+		    Change_Needs_Close or else Font_Needs_Close) and then
+		    ARM_Output."/=" (Output_Object.Location, ARM_Output.Normal);
+	end Location_Needs_Close;
+
+	function Size_Needs_Close return Boolean is
+	    -- Returns True if "Size" needs to close something, based
+	    -- on the current values of Output_Object, and the new value.
+	    -- Note that this depends on whether the Change, Font, or Location
+	    -- needs to close something; if they do, we need to close the
+	    -- size even if it is not changing.
+	begin
+	    return (Size /= Output_Object.Size or else
+		    Change_Needs_Close or else Font_Needs_Close or else
+		    Location_Needs_Close) and then
+		    Output_Object.Size /= 0;
+	end Size_Needs_Close;
+
+	function Italic_Needs_Close return Boolean is
+	    -- Returns True if "Italic" needs to close something, based
+	    -- on the current values of Output_Object, and the new value.
+	    -- Note that this depends on whether the Change, Font, Location,
+	    -- or Size needs to close something; if they do, we need to close
+	    -- the italics even if it is not changing.
+	begin
+	    return (Italic /= Output_Object.Is_Italic or else
+	    Change_Needs_Close or else Font_Needs_Close or else
+	    Location_Needs_Close or else Size_Needs_Close) and then
+	       (Output_Object.Is_Italic);
+	end Italic_Needs_Close;
+
     begin
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -4658,27 +4838,48 @@ package body ARM_HTML is
 	end if;
 	-- We do these in this order so that the changes are stacked properly.
 
-	if not Bold and Output_Object.Is_Bold then
+	if Output_Object.Is_Bold and then
+            ((not Bold) or else
+	    Change_Needs_Close or else Font_Needs_Close or else
+	    Location_Needs_Close or else Size_Needs_Close or else
+	    Italic_Needs_Close) then
+	    -- The latter so that nesting is preserved; we'll reopen
+	    -- the boldfacing on the other side if needed. Otherwise, when
+	    -- Bold remains on, we'd leave the markup open but close some outer
+	    -- item. That's wrong (even though many browsers can handle it).
 	    Output_Text (Output_Object, "</B>");
 	    Output_Object.Is_Bold := False;
 	end if;
 
-	if not Italic and Output_Object.Is_Italic then
+	if Output_Object.Is_Italic and then
+            ((not Italic) or else
+	    Change_Needs_Close or else Font_Needs_Close or else
+	    Location_Needs_Close or else Size_Needs_Close) then
+	    -- The latter so that nesting is preserved; we'll reopen
+	    -- the italics on the other side in that case.
 	    Output_Text (Output_Object, "</I>");
 	    Output_Object.Is_Italic := False;
 	end if;
 
-	if Size /= Output_Object.Size then
+	if Size /= Output_Object.Size or else
+	    Change_Needs_Close or else Font_Needs_Close or else
+	    Location_Needs_Close then
+	    -- The latter so that nesting is preserved; we'll reopen
+	    -- the size on the other side in that case.
 	    if Output_Object.Size /= 0 then
 	        if Output_Object.HTML_Kind = HTML_4_Only then
 	            Output_Text (Output_Object, "</SPAN>");
 		else
 	            Output_Text (Output_Object, "</FONT>");
 		end if;
+	        Output_Object.Size := 0; -- That's the size now.
 	    end if;
 	end if;
 
-	if Location /= Output_Object.Location then
+	if Location /= Output_Object.Location or else
+	    Font_Needs_Close or else Change_Needs_Close then
+	    -- The latter so that nesting is preserved; we'll reopen
+	    -- the location on the other side in that case.
 	    case Output_Object.Location is
 		when ARM_Output.Superscript =>
 		    if Output_Object.HTML_Kind = HTML_4_Only then
@@ -4695,9 +4896,13 @@ package body ARM_HTML is
 		when ARM_Output.Normal =>
 		    null;
 	    end case;
+	    Output_Object.Location := ARM_Output.Normal; -- That's the location now.
 	end if;
 
-	if ARM_Output."/=" (Font, Output_Object.Font) then
+	if ARM_Output."/=" (Font, Output_Object.Font) or else
+	    Change_Needs_Close then
+	    -- The latter so that nesting is preserved; we'll reopen
+	    -- the font on the other side in that case.
 	    case Output_Object.Font is
 		when ARM_Output.Default => null;
 		when ARM_Output.Fixed =>
@@ -4716,6 +4921,7 @@ package body ARM_HTML is
 		        Output_Text (Output_Object, "</FONT>");
 		    end if;
 	    end case;
+	    Output_Object.Font := ARM_Output.Default; -- We're now in the default state.
 	end if;
 
 	if Change /= Output_Object.Change or else
