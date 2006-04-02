@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2006/02/25 04:46:48 $}
+@Comment{$Date: 2006/03/21 22:47:16 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.68 $}
+@Comment{$Revision: 1.69 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -2571,8 +2571,8 @@ structure:
 
 @ChgRef{Version=[2],Kind=[Revised]}@Comment{The fonts corrected below}
 @key[task] @key[body] @RI{Environment_Task} @key[is]
-    ... (1) --@RI{ The environment @nt{declarative_part}}
-            --@RI{ (that is, the sequence of @nt{library_item}}@RI{s) goes here.}@ChgNote{Extra RI to fix bug}
+    ... (1) --@RI{ The environment }@nt{declarative_part}
+            --@RI{ (that is, the sequence of }@nt{library_item}@RI{s) goes here.}
 @key[begin]
     ... (2) --@RI{ Call the main subprogram, if there is one.}
 @key[end] @RI{Environment_Task};

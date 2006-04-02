@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.52 $ $Date: 2005/11/16 06:43:02 $}
+@comment{$Revision: 1.53 $ $Date: 2006/03/21 22:47:19 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -28,7 +28,7 @@ Corrigendum 1 was published in June 2001.]}
 @ChgAdded{Version=[2],Text=[In October 2002, WG 9 approved a schedule and
 guidelines for the preparation of an Amendment to the International Standard.
 WG 9 approved the scope of this Amendment in June 2004, with the completion
-of the Amendment expected in fall 2005 and final approval in mid-2006.]}
+of the Amendment expected in March 2006 and final approval in early 2007.]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgAdded{Version=[1],Text=[The Technical Corrigendum lists the individual

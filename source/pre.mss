@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2006/02/09 07:54:41 $}
+@Comment{$Date: 2006/03/21 22:47:18 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.31 $}
+@comment{$Revision: 1.32 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -89,10 +89,10 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Discrete_Random @em @RefSecNum{Random Number Generation}
 @\@\@\Elementary_Functions @em @RefSecNum{Elementary Functions}
 @\@\@\Float_Random @em @RefSecNum{Random Number Generation}
-@\@\@\Generic_Complex_Elementary_Functions
-@\@\@\@\@\@\@em @RefSecNum{Complex Elementary Functions}
 @Chg{Version=[2],New=(@\@\@\Generic_Complex_Arrays @em @RefSecNum{Complex Vectors and Matrices}
-), Old=()}@\@\@\Generic_Complex_Types @em @RefSecNum{Complex Types}
+), Old=()}@\@\@\Generic_Complex_Elementary_Functions
+@\@\@\@\@\@\@em @RefSecNum{Complex Elementary Functions}
+@\@\@\Generic_Complex_Types @em @RefSecNum{Complex Types}
 @\@\@\Generic_Elementary_Functions @em @RefSecNum{Elementary Functions}
 @Chg{Version=[2],New=(@\@\@\Generic_Real_Arrays @em @RefSecNum{Real Vectors and Matrices}
 @\@\@\Real_Arrays @em @RefSecNum{Real Vectors and Matrices}

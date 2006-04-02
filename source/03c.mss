@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/02/25 04:46:43 $}
+@Comment{$Date: 2006/03/21 22:47:15 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -910,10 +910,6 @@ Tagged types are a new concept.
   descendants of a tagged type must be distinct. This is needed to ensure
   that more nested type extensions will work properly. The wording does not
   require implementation changes for types that were allowed in Ada 95.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00400-01]}
-  @ChgAdded{Version=[2],Text=[Added Wide_Expanded_Name and Wide_Wide_Expanded_Name
-  because identifiers can now contain characters outside of Latin-1.]}
 @end{DiffWord95}
 
 @LabeledSubClause{Type Extensions}

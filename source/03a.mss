@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/02/25 04:46:42 $}
+@Comment{$Date: 2006/03/21 22:47:13 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.79 $}
+@Comment{$Revision: 1.80 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -437,12 +437,12 @@ a value of the type.
   Text=<Each object has a type.
   A @i(type) has an associated set of values, and a set of @i(primitive
   operations) which implement the fundamental aspects of its semantics.
-  Types are grouped into @Chg{Version=[2],New=[@i(categories)],Old=[@i(classes)]}.
-  The types of a given @Chg{Version=[2],New=[category],Old=[class]} share a set
-  of primitive operations. @Chg{Version=[2],New=[Most language-defined
-  categories of types are also @i<classes> of types],
-  Old=[@Defn(closed under derivation)
-  Classes are closed under derivation;
+  Types are grouped into @Chg{Version=[2],New=[@i(categories)],
+  Old=[@i(classes)]}.
+  @Chg{Version=[2],New=[Most language-defined
+  categories of types are also @i<classes> of types],Old=[The types of a
+  given class share a set of primitive operations.
+  @Defn(closed under derivation) Classes are closed under derivation;
   that is, if a type is in a class, then all of its derivatives
   are in that class]}.>}
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<Subtype>,

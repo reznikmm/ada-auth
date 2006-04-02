@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2006/02/19 06:45:19 $}
+@Comment{$Date: 2006/03/21 22:47:13 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.57 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -54,11 +54,16 @@ New=[],Old=[Note that our definition for
 @end{Intro}
 
 @begin{Syntax}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2 and 3
+were deleted.>}]}@Comment{This message should be
+deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
 @DeletedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<>,Old=<character>}>,
 rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{graphic_character} | @Syn2{format_effector} | @Syn2{other_control_function}>}"}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
 @DeletedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<>,Old=<graphic_character>}>,
 rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{identifier_letter} | @Syn2{digit} | @Syn2{space_character} | @Syn2{special_character}>}"}
 
@@ -137,7 +142,7 @@ literals.]}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
 @ChgDeleted{Version=[2],Text=[@Defn{identifier_letter}@nt<identifier_letter>@\@nt{upper_case_identifier_letter} | @nt{lower_case_identifier_letter}]}
 @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[We use @nt<identifier_letter>
   instead of simply @nt<letter> because
   ISO 10646 BMP includes many other characters that would generally
@@ -222,7 +227,7 @@ Old=[@Defn{special_character}@nt{special_character}]}@\Any character
 Old=[of the ISO 10646 BMP that is not reserved for a control function, and
 is not the @nt<space_character>, an @nt<identifier_letter>, or a @nt<digit>.]}
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[Note that the no break space and soft hyphen
 are @nt<special_character>s,
 and therefore @nt<graphic_character>s.
@@ -507,7 +512,7 @@ the set of characters that are considered @nt<identifier_letter>s
 can be extended
 or changed to conform to local conventions].]}
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[If an implementation supports
 other character sets,
 it defines which characters fall into each category,
@@ -628,7 +633,7 @@ any of a @Chg{Version=[2],New=[@nt{separator_space}],Old=[space character]},
 a @Chg{Version=[2],New=[@nt{format_effector}],Old=[format effector]},
 or the end of a line, as follows:
 @begin(Discussion)
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[It might be useful to define @lquotes@;white space@rquotes@;
 and use it here.]}@ChgNote{No one can figure out why, and it wouldn't match the
 Unicode def of whitespace.}
@@ -819,7 +824,7 @@ converted to upper case.
 @Defn{case insensitive}]}
 @end{Itemize}
 @begin(Discussion)
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[Two of the letters of ISO 8859-1
   appear only as lower case,
   "sharp s" and "y with diaeresis." These two letters have

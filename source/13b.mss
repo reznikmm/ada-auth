@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2006/02/25 04:46:50 $}
+@Comment{$Date: 2006/03/21 22:47:17 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @LabeledClause{The Package System}
 
@@ -1979,7 +1979,7 @@ objects incorrectly by missing various cases.
   defined the attributes, but said nothing about their values.
   If a program uses attributes Storage_Pool or Storage_Size on an
   access-to-subprogram type, it will need to be corrected for Ada 2005.
-  That's a good thing, as such uses represent a bug @em the concepts
+  That's a good thing, as such a use is a bug @em the concepts
   never were defined for such types.]}
 @end{Incompatible95}
 
