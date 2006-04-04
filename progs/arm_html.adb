@@ -144,6 +144,8 @@ package body ARM_HTML is
     --			changes.
     --		- RLB - Added code so that spaces after an opening tag
     --			and before a closing tag are converted to non-breaking.
+    --  3/28/06 - RLB - Removed unnecessary space from headers.
+    --  3/30/06 - RLB - Added a bit of space around inline pictures.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -3347,7 +3349,7 @@ package body ARM_HTML is
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>Section " &
 				      Clause_Number & ": " & Header_Text & "</H1>");
 	    when ARM_Contents.Clause | ARM_Contents.Subclause =>
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1> " &
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>" &
 				      Clause_Number & ' ' & Header_Text & "</H1>");
 	end case;
 	Output_Object.Char_Count := 0;
@@ -5374,7 +5376,7 @@ package body ARM_HTML is
 	-- Name is the (simple) file name of the picture; Descr is a
 	-- descriptive name for the picture (it will appear in some web
 	-- browsers).
-	-- We assume that it is a .GIF or .JPG and that it will be present
+	-- We assume that it is a .PNG or .JPG and that it will be present
 	-- in the same directory as the output files.
 	-- Alignment specifies the picture alignment.
 	-- Height and Width specify the picture size in pixels.
@@ -5412,26 +5414,44 @@ package body ARM_HTML is
 		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 			"Not in paragraph");
 		end if;
-		Make_Img("");
+		if Output_Object.HTML_Kind = HTML_3 then
+		    Make_Img ("");
+		else
+		    Make_Img (" style=""margin-left: 0.3em; margin-right: 0.3em""");
+		end if;
 	    when ARM_Output.Float_Left =>
 		if not Output_Object.Is_In_Paragraph then
 		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 			"Not in paragraph");
 		end if;
-		Make_Img (" align=""left""");
+		if Output_Object.HTML_Kind = HTML_3 then
+		    Make_Img (" align=""left""");
+		else
+		    Make_Img (" align=""left"" style=""margin-right: 0.3em""");
+			-- Space on right only; left should align with containing
+			-- margin.
+		end if;
 	    when ARM_Output.Float_Right =>
 		if not Output_Object.Is_In_Paragraph then
 		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 			"Not in paragraph");
 		end if;
-		Make_Img (" align=""right""");
+		if Output_Object.HTML_Kind = HTML_3 then
+		    Make_Img (" align=""right""");
+		else
+		    Make_Img (" align=""right"" style=""margin-left: 0.3em""");
+			-- Space on right only; left should align with containing
+			-- margin.
+		end if;
 	    when ARM_Output.Alone_Left =>
 		if Output_Object.Is_In_Paragraph then
 		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 			"In paragraph");
 		end if;
 		if Output_Object.HTML_Kind = HTML_4_Only then
-		    Output_Text (Output_Object, "<DIV Class=""Normal"">");
+		    Output_Text (Output_Object, "<DIV Style=""text-align: left; margin-bottom: ");
+		    Put_EMs(Output_Object.Output_File, (Paragraph_Info(ARM_Output.Normal).After * LEADING_PERCENT) / 100);
+		    Output_Text (Output_Object, """>");
 		else
 		    Output_Text (Output_Object, "<P>");
 		end if;
@@ -5441,13 +5461,22 @@ package body ARM_HTML is
 		else
 		    Output_Text (Output_Object, "</P>");
 		end if;
+		Ada.Text_IO.New_Line (Output_Object.Output_File);
+	        Output_Object.Char_Count := 0;
+	        Output_Object.Disp_Char_Count := 0;
+	        Output_Object.Disp_Large_Char_Count := 0;
+		Output_Object.Any_Nonspace := False;
+	        Output_Object.Last_Was_Space := True; -- Start of line.
+	        Output_Object.Conditional_Space := False; -- Don't need it here.
 	    when ARM_Output.Alone_Right =>
 		if Output_Object.Is_In_Paragraph then
 		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 			"In paragraph");
 		end if;
 		if Output_Object.HTML_Kind = HTML_4_Only then
-		    Output_Text (Output_Object, "<DIV Style=""text-align: right"">");
+		    Output_Text (Output_Object, "<DIV Style=""text-align: right; margin-bottom: ");
+		    Put_EMs(Output_Object.Output_File, (Paragraph_Info(ARM_Output.Normal).After * LEADING_PERCENT) / 100);
+		    Output_Text (Output_Object, """>");
 		else
 		    Output_Text (Output_Object, "<RIGHT>");
 		end if;
@@ -5457,13 +5486,22 @@ package body ARM_HTML is
 		else
 		    Output_Text (Output_Object, "</RIGHT>");
 		end if;
+		Ada.Text_IO.New_Line (Output_Object.Output_File);
+	        Output_Object.Char_Count := 0;
+	        Output_Object.Disp_Char_Count := 0;
+	        Output_Object.Disp_Large_Char_Count := 0;
+		Output_Object.Any_Nonspace := False;
+	        Output_Object.Last_Was_Space := True; -- Start of line.
+	        Output_Object.Conditional_Space := False; -- Don't need it here.
 	    when ARM_Output.Alone_Center =>
 		if Output_Object.Is_In_Paragraph then
 		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 			"In paragraph");
 		end if;
 		if Output_Object.HTML_Kind = HTML_4_Only then
-		    Output_Text (Output_Object, "<DIV Style=""text-align: center"">");
+		    Output_Text (Output_Object, "<DIV Style=""text-align: center; margin-bottom: ");
+		    Put_EMs(Output_Object.Output_File, (Paragraph_Info(ARM_Output.Normal).After * LEADING_PERCENT) / 100);
+		    Output_Text (Output_Object, """>");
 		else
 		    Output_Text (Output_Object, "<CENTER>");
 		end if;
@@ -5473,6 +5511,13 @@ package body ARM_HTML is
 		else
 		    Output_Text (Output_Object, "</CENTER>");
 		end if;
+		Ada.Text_IO.New_Line (Output_Object.Output_File);
+	        Output_Object.Char_Count := 0;
+	        Output_Object.Disp_Char_Count := 0;
+	        Output_Object.Disp_Large_Char_Count := 0;
+		Output_Object.Any_Nonspace := False;
+	        Output_Object.Last_Was_Space := True; -- Start of line.
+	        Output_Object.Conditional_Space := False; -- Don't need it here.
 	end case;
     end Picture;
 

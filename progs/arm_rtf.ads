@@ -73,6 +73,7 @@ package ARM_RTF is
     --  2/10/06 - RLB - Added even more additional parameters to the
     --			table command.
     --		- RLB - Added picture command.
+    --  3/30/06 - RLB - Added shape id counter.
 
     type RTF_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -402,7 +403,7 @@ package ARM_RTF is
 	-- Name is the (simple) file name of the picture; Descr is a
 	-- descriptive name for the picture (it will appear in some web
 	-- browsers).
-	-- We assume that it is a .GIF or .JPG and that it will be present
+	-- We assume that it is a .PNG or .JPG and that it will be present
 	-- in the same directory as the output files.
 	-- Alignment specifies the picture alignment.
 	-- Height and Width specify the picture size in pixels.
@@ -459,6 +460,8 @@ private
 	Table_No_Page_Break : Boolean := False; -- Is a page break allowed in the table?
 	Table_Has_Border : Boolean := False; -- Does the table have a border?
 	Table_Has_Small_Text : Boolean := False; -- Does the table have small text?
+	-- Pictures:
+	Last_Shape_Id : Natural := 1024; -- Shape ids.
     end record;
 
 end ARM_RTF;

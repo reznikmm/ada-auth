@@ -2,6 +2,7 @@ with ARM_Output,
      ARM_Contents,
      Ada.Text_IO,
      Ada.Exceptions,
+     Ada.Streams.Stream_IO,
      Ada.Strings.Maps,
      Ada.Strings.Fixed,
      Ada.Characters.Handling,
@@ -4017,63 +4018,480 @@ package body ARM_RTF is
 	-- Name is the (simple) file name of the picture; Descr is a
 	-- descriptive name for the picture (it will appear in some web
 	-- browsers).
-	-- We assume that it is a .GIF or .JPG and that it will be present
+	-- We assume that it is a .PNG or .JPG and that it will be present
 	-- in the same directory as the output files.
 	-- Alignment specifies the picture alignment.
 	-- Height and Width specify the picture size in pixels.
 	-- Border specifies the kind of border.
 	use type ARM_Output.Picture_Alignment;
 	use type ARM_Output.Border_Kind;
-    begin
---**** TBD: Need to implement this for real!
---** The following is an incredibly crappy implementation (no size or other
---** formatting information is used.) To do this right, we'll have to inline
---** the file contents, and deal with a mass of messy commands, especially
---** to get the scaling right (that will have to be calculated using the
---** base size of the image and the desired size, as it's a percentage of the
---** file.).
-	if Alignment = ARM_Output.Inline or else
-	   Alignment = ARM_Output.Float_Left then
-	    null;
-	elsif Alignment = ARM_Output.Float_Right then
-	    Ordinary_Text (Output_Object, "{\field\fldedit{\*\fldinst { INCLUDEPICTURE "".\" & Name & """ \\* MERGEFORMAT \\d }}{\fldrslt {}}}");
-	    Ada.Text_IO.Put_Line ("** Unimplemented picture formatting: Float Right");
-	elsif Alignment = ARM_Output.Alone_Left then
-	    null;
-	else
-	    Ada.Text_IO.Put_Line ("** Unimplemented picture formatting: Alone Center or Right");
-	end if;
-        Ada.Text_IO.Put_Line (Output_Object.Output_File,
-	    "{\field\fldedit{\*\fldinst { INCLUDEPICTURE "".\" & Name & """ \\* MERGEFORMAT \\d }}{\fldrslt {}}}");
-        Output_Object.Char_Count := Output_Object.Char_Count + 85 + Name'Length;
-	if Border /= ARM_Output.None then
-	    Ada.Text_IO.Put_Line ("** Unimplemented picture formatting: Borders");
-	end if;
-	-- We can't even tell if the height/width is correct.
 
--- Should use:
--- {\*\shppict {\pict - Defines a picture. (Word 97 and newer)
--- \picscalexnn - X scaling (%).
--- \picscaleynn - Y scaling (%).
--- \piccroplnn - Left crop (twips). (Should be 0).
--- \piccroprnn - Right crop (twips).
--- \piccroptnn - Top crop (twips).
--- \piccropbnn - Bottom crop (twips).
--- \picwnnn - Picture width (raw - seems to be in twips).
--- \pichnnn - Picture height (raw - seems to be in twips).
--- \picwgoalnnn - Picture intended width (twips).
--- \pichgoalnnn - Picture intended height (twips).
--- \bliptagnnn - Picture ID. (How this is calculated is unclear.)
--- \blipuid XXXX - Picture Unique ID. (How this is calculated is unclear.)
--- Followed by the picture file data in hexadecimal.
--- \pngblip - Specifies that the file is a PNG.
--- \jpegblip - Specifies that the file is a JPEG.
--- But! The file data is a PNG, not a GIF. What to do??
--- (After web research, the answer is "use PNG, not GIF". Find out enough
--- about the format to read the dimensions out of it, and then define the
--- above. Use Paintshop or whatever to convert existing images.)
--- {\*\nonshppict {\pict - Defines an old format picture. This has it in
--- metafile format. Forget it.
+	HORIZONTAL_TWIPS_PER_PIXEL : constant := 17; -- By experiment.
+	VERTICAL_TWIPS_PER_PIXEL : constant := 17; -- By experiment.
+
+	type Kind is (PNG, JPEG, Unknown);
+	type DWord is mod 2**32;
+	Picture_Width  : DWord;
+	Picture_Height : DWord;
+	Picture_Kind : Kind := Unknown;
+	Picture_Scaling : Natural;
+
+	procedure Get_Picture_Dimensions is
+	    -- Get the picture dimensions from the graphic file.
+	    use type Ada.Streams.Stream_Element_Offset;
+	    Fyle : Ada.Streams.Stream_IO.File_Type;
+	    type PNG_Header is record
+	        Signature_1 : DWord; -- Fixed value
+	        Signature_2 : DWord; -- Fixed value
+	        Header_Len  : DWord; -- Fixed value (13)
+	        Header_Type : DWord; -- Fixed value ("IHDR")
+	        Width       : DWord; -- In pixels.
+	        Height      : DWord; -- In pixels.
+	        -- Other stuff is not important here.
+	    end record;
+	    subtype PNG_Stream is Ada.Streams.Stream_Element_Array(1..6*4);
+	    function Convert is new Ada.Unchecked_Conversion (Source => PNG_Stream,
+							      Target => PNG_Header);
+	    Buffer : PNG_Stream;
+	    Last : Ada.Streams.Stream_Element_Offset;
+	    Temp : Ada.Streams.Stream_Element;
+	begin
+	    begin
+		Ada.Streams.Stream_IO.Open (Fyle,
+		    Mode => Ada.Streams.Stream_IO.In_File,
+		    Name => ".\Output\" & Name);
+	    exception
+		when Oops:others =>
+		    Ada.Text_IO.Put_Line ("** Unable to open picture file: " &
+			Ada.Exceptions.Exception_Message(Oops));
+		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+			"Unable to open picture file");
+	    end;
+	    -- Read a PNG header, to see if it is a PNG:
+	    Ada.Streams.Stream_IO.Read (Fyle, Buffer, Last);
+	    if Last /= 24 then
+	        Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		    "Picture file too short");
+	    end if;
+	    if Convert(Buffer).Signature_1 = 16#89_50_4e_47# and then
+	       Convert(Buffer).Signature_2 = 16#0d_0a_1a_0a# then
+		-- This is a PNG file:
+		Picture_Kind := PNG;
+		Picture_Width := Convert(Buffer).Width;
+		Picture_Height := Convert(Buffer).Height;
+	        Ada.Text_IO.Put_Line ("Forward PNG: Width=" &
+		    DWord'Image(Picture_Width) & " Height=" &
+		    DWord'Image(Picture_Height));
+	    elsif Convert(Buffer).Signature_1 = 16#47_4e_50_89# and then
+	       Convert(Buffer).Signature_2 = 16#0a_1a_0a_0d# then
+		-- This is a byte-swapped PNG file.
+		-- Swap the bytes in the buffer, then get the width and height:
+		Temp := Buffer(17);
+		Buffer(17) := Buffer(20);
+		Buffer(20) := Temp;
+		Temp := Buffer(18);
+		Buffer(18) := Buffer(19);
+		Buffer(19) := Temp;
+		Temp := Buffer(21);
+		Buffer(21) := Buffer(24);
+		Buffer(24) := Temp;
+		Temp := Buffer(22);
+		Buffer(22) := Buffer(23);
+		Buffer(23) := Temp;
+		Picture_Kind := PNG;
+		Picture_Width := Convert(Buffer).Width;
+		Picture_Height := Convert(Buffer).Height;
+	        Ada.Text_IO.Put_Line ("Reversed PNG: Width=" &
+		    DWord'Image(Picture_Width) & " Height=" &
+		    DWord'Image(Picture_Height));
+
+
+--	    elsif Name'Length > 5 and then
+--	       (Name(Name'Last-3..Name'Last) = ".JPG" or else
+--	        Name(Name'Last-3..Name'Last) = ".jpg" or else
+--	        Name(Name'Last-4..Name'Last) = ".JPEG" or else
+--	        Name(Name'Last-4..Name'Last) = ".Jpeg" or else
+--	        Name(Name'Last-4..Name'Last) = ".jpeg") then
+--		Picture_Kind := JPEG;
+
+
+	    else
+	        Ada.Text_IO.Put_Line ("** Unimplemented picture formatting: File type");
+	        Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		    "Do not recognize picture file");
+	    end if;
+	end Get_Picture_Dimensions;
+
+
+	function Format_Twips (Twips : in Natural) return String is
+	    Flab : constant String := Natural'Image(Twips);
+	begin
+	    return Flab(2..Flab'Last);
+	end Format_Twips;
+
+
+	procedure Dump_File_in_Hex is
+	    -- Read and output the graphics file to the output file
+	    -- in Hexadecimal.
+	    Fyle : Ada.Streams.Stream_IO.File_Type;
+	    Buffer : Ada.Streams.Stream_Element_Array(1..32);
+	    Last : Ada.Streams.Stream_Element_Offset;
+	    use type Ada.Streams.Stream_Element;
+	    use type Ada.Streams.Stream_Element_Offset;
+	    Temp : Ada.Streams.Stream_Element;
+	begin
+	    begin
+		Ada.Streams.Stream_IO.Open (Fyle,
+		    Mode => Ada.Streams.Stream_IO.In_File,
+		    Name => ".\Output\" & Name);
+	    exception
+		when Oops:others =>
+		    Ada.Text_IO.Put_Line ("** Unable to open picture file: " &
+			Ada.Exceptions.Exception_Message(Oops));
+		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+			"Unable to open picture file");
+	    end;
+	    loop
+		Ada.Streams.Stream_IO.Read (Fyle, Buffer, Last);
+		exit when Last = 0; -- Nothing read equals end of file.
+		for I in 1 .. Last loop
+		    Temp := Buffer(I) / 16;
+		    if Temp > 9 then
+			Ada.Text_IO.Put (Output_Object.Output_File,
+			    Character'Val(Character'Pos('A') + (Temp - 10)));
+		    else
+			Ada.Text_IO.Put (Output_Object.Output_File,
+			    Character'Val(Character'Pos('0') + Temp));
+		    end if;
+		    Temp := Buffer(I) mod 16;
+		    if Temp > 9 then
+			Ada.Text_IO.Put (Output_Object.Output_File,
+			    Character'Val(Character'Pos('A') + (Temp - 10)));
+		    else
+			Ada.Text_IO.Put (Output_Object.Output_File,
+			    Character'Val(Character'Pos('0') + Temp));
+		    end if;
+		end loop;
+		Ada.Text_IO.New_Line (Output_Object.Output_File);
+	    end loop;
+	    Ada.Streams.Stream_IO.Close (Fyle);
+	end Dump_File_in_Hex;
+
+    begin
+	Get_Picture_Dimensions;
+
+	-- Calculate scaling needed:
+	declare
+	    Width_Scale, Height_Scale : Float;
+	    Word_Scaling : constant Float := 6.0;
+		-- Scaling so that the HTML pixel and Word pixel
+		-- have the same approximate size. Word's pixels
+		-- seem to be about 6 times smaller than HTML's.
+	begin
+	    Width_Scale := Float(Width) / Float(Picture_Width) * 100.0 * Word_Scaling;
+	    Height_Scale := Float(Height) / Float(Picture_Height) * 100.0 * Word_Scaling;
+
+	    -- Then, use the smaller scale:
+	    if Width_Scale < Height_Scale then
+		Picture_Scaling := Natural(Width_Scale);
+	    else
+		Picture_Scaling := Natural(Height_Scale);
+	    end if;
+	    Ada.Text_IO.Put_Line ("Picture scaling (%):" & Natural'Image(Picture_Scaling));
+	    Ada.Text_IO.Put_Line ("Box width=" &
+	        Natural'Image(Width) & " Height=" &
+	        Natural'Image(Height));
+	end;
+
+	-- Wrap the picture in a shape, so we can set the properties:
+
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "{\shp{\*\shpinst"); -- Start a shape.
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\shpleft0\shptop0"); -- Left and top are the origin.
+	Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\shpright" & Format_Twips(Width * HORIZONTAL_TWIPS_PER_PIXEL)); -- Right edge in twips.
+        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+	    "\shpbottom" & Format_Twips(Height * VERTICAL_TWIPS_PER_PIXEL)); -- Bottom edge in twips.
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\shpfhdr0"); -- Shape is in the main document.
+
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\shpbxcolumn"); -- Shape is positioned relative to the column.
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\shpbxignore"); -- But use posrelh instead (column is the default).
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\shpbypara"); -- Shape is positioned relative to the paragraph.
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\shpbyignore"); -- But use posrelv instead (paragraph is the default).
+	case Alignment is
+	   when ARM_Output.Inline =>
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "\shpwr2\shpwrk0"); -- Wrap text around shape (rectangle), on both sides.
+	   when ARM_Output.Float_Left =>
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "\shpwr2\shpwrk2"); -- Wrap text around shape (rectangle), on right only.
+	   when ARM_Output.Float_Right =>
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "\shpwr2\shpwrk1"); -- Wrap text around shape (rectangle), on left only.
+	   when ARM_Output.Alone_Left | ARM_Output.Alone_Center |
+		ARM_Output.Alone_Right =>
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "\shpwr1"); -- Don't allow text alongside shape.
+	end case;
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\shpfblwtxt0"); -- Text is below shape.
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\shpz0"); -- Z-order for shape (these don't overlap, I hope).
+
+	Output_Object.Last_Shape_Id := Output_Object.Last_Shape_Id + 1;
+	    -- These need to be unique, but the value doesn't matter much.
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\shplid" & Format_Twips(Output_Object.Last_Shape_Id));
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "{\sp{\sn shapeType}{\sv 75}}"); -- "Picture frame" type.
+        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+	    "{\sp{\sn fFlipH}{\sv 0}}{\sp{\sn fFlipV}{\sv 0}}"); -- No flipping.
+
+        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+	    "{\sp{\sn pib}{\sv {\pict"); -- Start the picture data
+
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\picscalex" & Format_Twips(Picture_Scaling)); -- X scaling (%).
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\picscaley" & Format_Twips(Picture_Scaling)); -- Y scaling (%).
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\piccropl0"); -- Left crop (twips) [Should be zero].
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\piccropr0"); -- Right crop (twips) [Should be zero].
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\piccropt0"); -- Top crop (twips) [Should be zero].
+        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+	    "\piccropb0"); -- Bottom crop (twips) [Should be zero].
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\picw" & Format_Twips(Natural(Picture_Width) * 5)); -- Raw picture width in ???.
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\pich" & Format_Twips(Natural(Picture_Height) * 5)); -- Raw picture height in ???.
+	Ada.Text_IO.Put (Output_Object.Output_File,
+	    "\picwgoal" & Format_Twips(Width * HORIZONTAL_TWIPS_PER_PIXEL)); -- Picture width goal in twips.
+        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+	    "\pichgoal" & Format_Twips(Height * VERTICAL_TWIPS_PER_PIXEL)); -- Picture height goal in twips.
+
+	-- Figure out file type, using the correct type here:
+	if Picture_Kind = PNG then
+            Ada.Text_IO.Put_Line (Output_Object.Output_File,
+	        "\pngblip"); -- Specifies that the file is a PNG.
+	elsif Picture_Kind = JPEG then
+            Ada.Text_IO.Put_Line (Output_Object.Output_File,
+	        "\jpegblip"); -- Specifies that the file is a JPEG.
+	else
+	    null; -- We should have already bombed.
+	end if;
+
+	-- Should use:
+	-- \bliptagnnn - Picture ID.
+	-- \blipuid XXXX - Picture Unique ID.
+	-- How these are calculated is unclear (it appears to be a hash of
+	-- some kind). So I left these out.
+
+	Dump_File_in_Hex;
+
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "}}}"); -- End the picture data.
+
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "{\sp{\sn pibName}{\sv " & Name & "}}"); -- Picture file name
+        Ada.Text_IO.Put (Output_Object.Output_File,
+	    "{\sp{\sn pibFlags}{\sv 2}}"); -- No idea, a flag of "2" is not documented.
+	case Border is
+	    when ARM_Output.None =>
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "{\sp{\sn fLine}{\sv 0}}"); -- No line here.
+	    when ARM_Output.Thin =>
+		-- Default lineType of 0, solid.
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "{\sp{\sn lineWidth}{\sv 9525}}"); -- Line size (single - 0.75pt).
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "{\sp{\sn fLine}{\sv 1}}"); -- Show line here.
+	    when ARM_Output.Thick =>
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "{\sp{\sn lineWidth}{\sv 19050}}"); -- Line size (double - 1.5pt).
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "{\sp{\sn fLine}{\sv 1}}"); -- Show line here.
+	end case;
+	case Alignment is
+	   when ARM_Output.Inline =>
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "{\sp{\sn posh}{\sv 1}}"); -- Position to the left.
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "{\sp{\sn posrelh}{\sv 3}}"); -- Position to the character.
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "{\sp{\sn posh}{\sv 2}}"); -- Position to the top.
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "{\sp{\sn posrelh}{\sv 3}}"); -- Position to the line.
+	   when ARM_Output.Float_Left =>
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "{\sp{\sn posh}{\sv 1}}"); -- Position to the left.
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "{\sp{\sn posrelh}{\sv 2}}"); -- Position to the column.
+	   when ARM_Output.Float_Right =>
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "{\sp{\sn posh}{\sv 3}}"); -- Position to the right.
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "{\sp{\sn posrelh}{\sv 2}}"); -- Position to the column.
+	   when ARM_Output.Alone_Left =>
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "{\sp{\sn posh}{\sv 1}}"); -- Position to the left.
+	   when ARM_Output.Alone_Center =>
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "{\sp{\sn posh}{\sv 2}}"); -- Position to the center.
+	   when ARM_Output.Alone_Right =>
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    "{\sp{\sn posh}{\sv 3}}"); -- Position to the right.
+	end case;
+        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+	    "{\sp{\sn fLayoutInCell}{\sv 0}}"); -- No nested use.
+
+	-- Here we find {\shprslt followed by metafile junk. Not doing that.
+	---- Fake Word 95 output (it shouldn't be used, but...):
+        --Ada.Text_IO.Put_Line (Output_Object.Output_File,
+	--    "{\shprslt\par\pard \ql \pvpara\posxr\dxfrtext180\dfrmtxtx180\dfrmtxty0\nowrap\adjustright\ \par}");
+
+        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+	    "}}"); -- End the shape.
+        Output_Object.Char_Count := 0;
+
+	-- Original code:
+--
+--	case Alignment is
+--	   when ARM_Output.Inline =>
+--		null;
+--	   when ARM_Output.Float_Left =>
+--		null; --***??
+--	   when ARM_Output.Float_Right =>
+--	        Ada.Text_IO.Put_Line ("** Unimplemented picture formatting: Float Right");
+--	   when ARM_Output.Alone_Left =>
+--	        Ada.Text_IO.Put (Output_Object.Output_File,
+--		    "{\pard\plain\sb" & Format_Twips(Height * VERTICAL_TWIPS_PER_PIXEL) & " ");
+--			-- Set up a normal left-justified paragraph that is high enough for this picture.
+--	   when ARM_Output.Alone_Center =>
+--	        Ada.Text_IO.Put (Output_Object.Output_File,
+--		    "{\pard\plain\qc\sb" & Format_Twips(Height * VERTICAL_TWIPS_PER_PIXEL) & " ");
+--			-- Set up a normal centered paragraph that is high enough for this picture.
+--	   when ARM_Output.Alone_Right =>
+--	        Ada.Text_IO.Put (Output_Object.Output_File,
+--		    "{\pard\plain\qr\sb" & Format_Twips(Height * VERTICAL_TWIPS_PER_PIXEL) & " ");
+--			-- Set up a normal right-justified paragraph that is high enough for this picture.
+--	end case;
+--
+--	-- Picture setup:
+--        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+--	    "{\*\shppict {\pict "); -- Defines a picture (Word 97 and newer).
+--
+--	-- Shape Properties:
+--	Output_Object.Last_Shape_Id := Output_Object.Last_Shape_Id + 1;
+--	    -- These need to be unique, but what they are doesn't matter much.
+--        Ada.Text_IO.Put (Output_Object.Output_File,
+--	    "{\*\picprop\shplid" & Format_Twips(Output_Object.Last_Shape_Id));
+--        Ada.Text_IO.Put (Output_Object.Output_File,
+--	    "{\sp{\sn shapeType}{\sv 75}}"); -- "Picture frame" type.
+--        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+--	    "{\sp{\sn fFlipH}{\sv 0}}{\sp{\sn fFlipV}{\sv 0}}"); -- No flipping.
+--        Ada.Text_IO.Put (Output_Object.Output_File,
+--	    "{\sp{\sn pibName}{\sv " & Name & "}}"); -- Picture file name
+--        Ada.Text_IO.Put (Output_Object.Output_File,
+--	    "{\sp{\sn pibFlags}{\sv 2}}"); -- No idea, a flag of "2" is not documented.
+--        Ada.Text_IO.Put (Output_Object.Output_File,
+--	    "{\sp{\sn fLine}{\sv 0}}"); -- No line here.
+--        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+--	    "{\sp{\sn fLayoutInCell}{\sv 1}}}"); -- Allow nested use..
+--
+--
+--        Ada.Text_IO.Put (Output_Object.Output_File,
+--	    "\picscalex" & Format_Twips(Picture_Scaling)); -- X scaling (%).
+--        Ada.Text_IO.Put (Output_Object.Output_File,
+--	    "\picscaley" & Format_Twips(Picture_Scaling)); -- Y scaling (%).
+--        Ada.Text_IO.Put (Output_Object.Output_File,
+--	    "\piccropl0"); -- Left crop (twips) [Should be zero].
+--        Ada.Text_IO.Put (Output_Object.Output_File,
+--	    "\piccropr0"); -- Right crop (twips) [Should be zero].
+--        Ada.Text_IO.Put (Output_Object.Output_File,
+--	    "\piccropt0"); -- Top crop (twips) [Should be zero].
+--        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+--	    "\piccropb0"); -- Bottom crop (twips) [Should be zero].
+--        Ada.Text_IO.Put (Output_Object.Output_File,
+--	    "\picw" & Format_Twips(Width * HORIZONTAL_TWIPS_PER_PIXEL)); -- Raw picture width in twips.
+--        Ada.Text_IO.Put (Output_Object.Output_File,
+--	    "\pich" & Format_Twips(Height * VERTICAL_TWIPS_PER_PIXEL)); -- Raw picture height in twips.
+--	Ada.Text_IO.Put (Output_Object.Output_File,
+--	    "\picwgoal" & Format_Twips(Width * HORIZONTAL_TWIPS_PER_PIXEL)); -- Picture width goal in twips.
+--        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+--	    "\pichgoal" & Format_Twips(Height * VERTICAL_TWIPS_PER_PIXEL)); -- Picture height goal in twips.
+--
+--	case Border is
+--	    when ARM_Output.None =>
+--		null;
+--	    when ARM_Output.Thin =>
+--		Ada.Text_IO.Put (Output_Object.Output_File,
+--	            "\brdrs\brdrw15 "); -- Single thickness border (value is in twips).
+--	    when ARM_Output.Thick =>
+--		Ada.Text_IO.Put (Output_Object.Output_File,
+--	            "\brdrs\brdrw30 "); -- Double thickness border (value is in twips).
+--	end case;
+--
+--	-- Figure out file type, using the correct type here:
+--	if Picture_Kind = PNG then
+--            Ada.Text_IO.Put (Output_Object.Output_File,
+--	        "\pngblip "); -- Specifies that the file is a PNG.
+--	elsif Picture_Kind = JPEG then
+--            Ada.Text_IO.Put (Output_Object.Output_File,
+--	        "\jpegblip "); -- Specifies that the file is a JPEG.
+--	else
+--	    null; -- We should have already bombed.
+--	end if;
+--
+--	-- Should use:
+--	-- \bliptagnnn - Picture ID.
+--	-- \blipuid XXXX - Picture Unique ID.
+--	-- How these are calculated is unclear (it appears to be a hash of
+--	-- some kind). So I left these out.
+--
+--	Dump_File_in_Hex;
+--
+--        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+--	    "}}"); -- End the picture.
+--        Output_Object.Char_Count := 0;
+--
+--	-- This should be followed by:
+--	-- {\*\nonshppict {\pict - Defines an old format picture. This has
+--	-- the graphic in metafile format. I have no idea how to convert that;
+--	-- forget it.
+--
+--	-- An easy but incredibly crappy implementation follows. But this
+--	-- needs height information in a dedicated paragraph to work at all
+--	-- (without it, it ends up one line high). If we have the height
+--	-- information, why bother with this; just generate it correctly.
+--	-- Then we can be sure that the height and width are specified.
+--        --Ada.Text_IO.Put_Line (Output_Object.Output_File,
+--	--    "{\field\fldedit{\*\fldinst { INCLUDEPICTURE "".\" & Name & """ \\* MERGEFORMAT \\d }}{\fldrslt {}}}");
+--        --Output_Object.Char_Count := 0;
+--
+--	-- Close anything opened for alignment:
+--	case Alignment is
+--	   when ARM_Output.Inline =>
+--		null;
+--	   when ARM_Output.Float_Left =>
+--		null;
+--	   when ARM_Output.Float_Right =>
+--	        null;
+--	   when ARM_Output.Alone_Left =>
+--	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\par}");
+--	   when ARM_Output.Alone_Center =>
+--	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\par}");
+--	   when ARM_Output.Alone_Right =>
+--	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\par}");
+--	end case;
+
     end Picture;
 
 

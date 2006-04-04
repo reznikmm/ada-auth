@@ -96,6 +96,7 @@ package ARM_Output is
     --  2/10/06 - RLB - Added even more additional parameters to the
     --			table command.
     --		- RLB - Added picture command.
+    --  3/28/06 - RLB - Updated the comments on the picture command.
 
     type Output_Type is abstract tagged limited null record;
 
@@ -617,7 +618,7 @@ package ARM_Output is
 	-- Name is the (simple) file name of the picture; Descr is a
 	-- descriptive name for the picture (it will appear in some web
 	-- browsers).
-	-- We assume that it is a .GIF or .JPG and that it will be present
+	-- We assume that it is a .PNG or .JPG and that it will be present
 	-- in the same directory as the output files.
 	-- Alignment specifies the picture alignment.
 	-- Height and Width specify the picture size in pixels.

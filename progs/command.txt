@@ -1017,6 +1017,9 @@ various mathematical symbols.
 	"descr" is a description of the picture; it's used for the popups
 	in HTML. Height and Width are the picture size in pixels.
 	Border specifies the border of the picture.
+	[Note: Inline alignment is not recommended; the picture location
+	cannot be controlled, especially on RTF, it can appear in margins
+	and other bad locations.]
 
 -------------------
 

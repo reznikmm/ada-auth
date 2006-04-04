@@ -453,7 +453,7 @@ package ARM_HTML is
 	-- Name is the (simple) file name of the picture; Descr is a
 	-- descriptive name for the picture (it will appear in some web
 	-- browsers).
-	-- We assume that it is a .GIF or .JPG and that it will be present
+	-- We assume that it is a .PNG or .JPG and that it will be present
 	-- in the same directory as the output files.
 	-- Alignment specifies the picture alignment.
 	-- Height and Width specify the picture size in pixels.
