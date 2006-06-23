@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2006/03/21 22:47:16 $}
+@Comment{$Date: 2006/06/23 04:24:52 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1179,14 +1179,13 @@ so @lquotes@;@key[with] A.B.C.D;@rquotes@; is illegal in the same places as
 @lquotes@;@key[with] A.B.C;@rquotes@;.
 @end{Discussion}
 @begin{Honest}
-
-For the purposes of this rule,
-if a @nt{subprogram_body} has no preceding @nt{subprogram_declaration},
-the @nt{subprogram_body} should be considered a declaration and not a body.
-Thus, it is illegal for such a @nt{subprogram_body} to mention one of
-its siblings in a @nt{with_clause} if the sibling is a private library
-unit.
-
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00262-01]}
+  For the purposes of this rule,
+  if a @nt{subprogram_body} has no preceding @nt{subprogram_declaration},
+  the @nt{subprogram_body} should be considered a declaration and not a body.
+  Thus, it is illegal for such a @nt{subprogram_body} to mention one of
+  its siblings in a @Chg{Version=[2],New=[non-private ],Old=[]}@nt{with_clause}
+  if the sibling is a private library unit.
 @end{Honest}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}

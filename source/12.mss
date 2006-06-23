@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2006/02/04 06:54:18 $}
+@Comment{$Date: 2006/06/23 04:24:53 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1399,6 +1399,7 @@ denotes a constrained subtype]],Old=[]}.
   Sec=(corresponding to a formal object of mode @key[in])}],Old=[]}
 @Defn2{Term=[stand-alone constant],
   Sec=(corresponding to a formal object of mode @key[in])}
+@PDefn{stand-alone object}
 In an instance,
 a @nt{formal_object_declaration} of mode @key{in}
 @Chg{Version=[2],New=[is a @i<full constant declaration> and ],

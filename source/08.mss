@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2006/02/25 04:46:47 $}
+@Comment{$Date: 2006/06/23 04:24:52 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1413,7 +1413,7 @@ This case doesn't seem worth making the rules any more
 complex than they already are.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00377-01]}
-  @ChgAdded{Version=[2],Text=[@B[[Amendment Correction:] A @nt{with_clause} is
+  @ChgAdded{Version=[2],Text=[@B[Amendment Correction:] A @nt{with_clause} is
   illegal if it would create a homograph of an implicitly declared generic
   child (see @RefSecNum{Compilation Units - Library Units}). An Ada 95 compiler
   could have allowed this, but which unit of the two units involved would be
@@ -2682,7 +2682,8 @@ We'll live with the oddity.
   bounded error.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00228-01]}
-  @ChgAdded{Version=[2],Text=[Clarified that renaming a shall-be-overridden
+  @ChgAdded{Version=[2],Text=[@B[Amendment Correction:] Clarified that
+  renaming a shall-be-overridden
   subprogram is illegal, as well as renaming-as-body an abstract subprogram.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00423-01]}

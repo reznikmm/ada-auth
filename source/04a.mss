@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2006/02/25 04:46:45 $}
+@Comment{$Date: 2006/06/23 04:24:51 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.79 $}
+@Comment{$Revision: 1.80 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -761,6 +761,35 @@ as a parameterless @nt<function_call>.
   name resolution rules, but we don't do this for attributes
   because certain attributes are legal independent of the type
   or the profile of the @Chg{New=[@nt{prefix}],Old=[prefix]}.
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00114-01]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[Other than the rules given above,
+  the @ResolutionName@;s for the @nt{prefix} of each attribute are defined as
+  @ResolutionTitle for that attribute. If no such rules are defined, then no
+  context at all should be used when resolving
+  the @nt{prefix}. In particular, any knowledge about the kind of entities
+  required must not be used for resolution unless that is required by
+  @ResolutionTitle. This matters in obscure cases;
+  for instance, given the following declarations:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[  @key[function] Get_It @key[return] Integer @key[is] ... -- @RI[(1)]
+  @key[function] Get_It @key[return] Some_Record_Type @key[is] ... -- @RI[(2)]]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[the following @nt{attribute_reference} cannot be
+resolved and is illegal:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[  @key[if] Get_It'Valid @key[then]]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[even though the Valid attribute is only defined
+  for objects of scalar types, and thus cannot be applied to the result of
+  function (2). That information cannot be used to resolve the @nt{prefix}.
+  The same would be true if (2) was been a procedure; even though the
+  procedure does not denote an object, the @nt{attribute_reference} is
+  still illegal.]}
 @end{Discussion}
 
 @PDefn2{Term=[expected type],

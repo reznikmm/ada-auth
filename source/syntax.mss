@@ -1,10 +1,10 @@
 @Part(syntax, Root="ada.mss")
 
-@Comment{$Date: 2000/08/17 03:15:28 $}
+@Comment{$Date: 2006/06/23 04:24:54 $}
 @LabeledInformativeAnnex{Syntax Summary}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/syntax.mss,v $}
-@comment{$Revision: 1.17 $}
+@comment{$Revision: 1.18 $}
 
 @NoParaNum@Defn2{Term=[syntax], Sec=(complete listing)}
 @Defn2{Term=[grammar], Sec=(complete listing)}
@@ -26,4 +26,12 @@ for a description of the notation used.
 @Defn2{Term=[BNF (Backus-Naur Form)], Sec=(cross reference)}
 @Defn2{Term=[Backus-Naur Form (BNF)], Sec=(cross reference)}
 
+@ChgAdded{Version=[2],Text=[In the following syntax cross reference, each
+syntactic category is followed by the clause number where it is defined.
+In addition, each syntactic category @i{S} is followed by a list of the
+categories that use @i{S} in their definitions. For example, the first
+listing below shows that @nt{abort_statement} appears in the definition of
+@nt{simple_statement}.]}
+@Comment{This explanation is a simplified version of the Ada 83 one.}
 @SyntaxXRef
+

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.31 $ $Date: 2005/12/15 02:36:43 $ $Author: Randy $ }
+@comment{ $Revision: 1.32 $ $Date: 2006/06/23 04:24:55 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2005/12/15 02:36:43 $}
+@Comment{$Date: 2006/06/23 04:24:55 $}
 
 @LabeledClause{The Package Standard}
 
@@ -394,7 +394,7 @@ are assumed to be ordered in such a way that there are no forward
 semantic dependences.
 However, as explained in @RefSec{Visibility}, the only library units that are
 visible within a given compilation unit are
-the library units named by all @nt{with_clauses} that
+the library units named by all @nt{with_clause}s that
 apply to the given unit,
 and moreover, within the declarative region of a given library unit,
 that library unit itself.

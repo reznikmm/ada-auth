@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.53 $ $Date: 2006/03/21 22:47:19 $}
+@comment{$Revision: 1.54 $ $Date: 2006/06/23 04:24:54 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -16,7 +16,7 @@ again.}
 programming language Ada is ISO/IEC 8652:1995(E).]}
 
 @ChgRef{Version=[1],Kind=[Added]}
-@ChgAdded{Version=[1],Text=[The Ada Working Group ISO/IEC JTC1/SC 22/WG 9 is tasked by ISO with
+@ChgAdded{Version=[1],Text=[The Ada Working Group ISO/IEC JTC 1/SC 22/WG 9 is tasked by ISO with
 the work item to interpret and maintain the International Standard and to
 produce Technical Corrigenda, as appropriate. The technical work on the
 International Standard is performed by the Ada Rapporteur Group (ARG) of WG 9.
@@ -822,9 +822,9 @@ additional information in the body of the comment, for example:
 
 Formal requests for interpretations and for reporting defects in this
 International Standard may be made in accordance with the ISO/IEC
-JTC1 Directives and the ISO/IEC JTC1/SC22 policy for interpretations.
-National Bodies may submit a Defect Report to ISO/IEC JTC1/SC22 for resolution
-under the JTC1 procedures.
+JTC 1 Directives and the ISO/IEC JTC 1/SC 22 policy for interpretations.
+National Bodies may submit a Defect Report to ISO/IEC JTC 1/SC 22 for resolution
+under the JTC 1 procedures.
 A response will be provided and, if appropriate,
 a Technical Corrigendum will be issued in accordance with the procedures.
 
@@ -911,7 +911,7 @@ Analysis Team (New York University) and the Ada community-at-large.
 
 
 Special thanks go to R. Mathis,
-Convenor of ISO/IEC JTC1/SC22 Working Group 9.
+Convenor of ISO/IEC JTC 1/SC 22 Working Group 9.
 @Comment{Also XRG - U.S.}
 
 

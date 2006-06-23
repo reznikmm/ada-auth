@@ -5,6 +5,7 @@
 @HideAnnotations
 @HideISO
 @NumberParagraphs
+@LinkNonTerminals
 @Title{Version=[0],Text=[Ada Reference Manual]}@Comment{Same title for all versions}
 @FilePrefix{RM}
 @ExampleFont{Fixed}

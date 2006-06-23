@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.54 $ $Date: 2006/02/25 04:46:51 $ $Author: Randy $ }
+@comment{ $Revision: 1.55 $ $Date: 2006/06/23 04:24:53 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2006/02/25 04:46:51 $}
+@Comment{$Date: 2006/06/23 04:24:53 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -1010,7 +1010,7 @@ returned.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is No_Element, No_Index
 is returned. Otherwise, the index (within its containing vector) of the element
-designated by Cursor is returned.]}
+designated by Position is returned.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1688,8 +1688,8 @@ Otherwise, it returns the index of the first equal element encountered.]}
 does not designate an element in Container, then Program_Error is propagated.
 Otherwise Find searches the elements of Container for an element equal to Item
 (using the generic formal equality operator). The search starts at
-the first element if Cursor equals No_Element, and at the element designated by
-Cursor otherwise. It proceeds towards the last element of Container. If no
+the first element if Position equals No_Element, and at the element designated by
+Position otherwise. It proceeds towards the last element of Container. If no
 equal element is found, then Find returns No_Element. Otherwise, it returns a
 cursor designating the first equal element encountered.]}
 
@@ -1723,8 +1723,8 @@ encountered.]}
 does not designate an element in Container, then Program_Error is propagated.
 Otherwise Reverse_Find searches the elements of Container for an element equal
 to Item (using the generic formal equality operator). The search
-starts at the last element if Cursor equals No_Element, and at the element
-designated by Cursor otherwise. It proceeds towards the first element of
+starts at the last element if Position equals No_Element, and at the element
+designated by Position otherwise. It proceeds towards the first element of
 Container. If no equal element is found, then Reverse_Find returns No_Element.
 Otherwise, it returns a cursor designating the first equal element
 encountered.]}

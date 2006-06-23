@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/03/21 22:47:13 $}
+@Comment{$Date: 2006/06/23 04:24:50 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.80 $}
+@Comment{$Revision: 1.81 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -94,6 +94,7 @@ In addition, an @nt{extended_return_statement} is a declaration of its
   Completions are sometimes declarations, and sometimes not.
 @end(Discussion)
 
+@Defn(view)@Defn(definition)
 All declarations contain a @i(definition) for a @i(view) of an entity.
 A view consists of an identification of the entity
 (the entity @i(of) the view),
@@ -122,19 +123,6 @@ Old=[(See @b[Definition].)]}>}
   view of its full type.
 @end{Discussion}
 
-@Defn(view)
-All declarations contain a @i(definition) for a @i(view) of an entity.
-A view consists of an identification of the entity
-(the entity @i(of) the view),
-plus view-specific characteristics that affect the use
-of the entity through that view (such as mode of access to an object,
-formal parameter names and defaults for a subprogram, or visibility to
-components of a type).
-In most cases, a declaration also contains the definition for the
-entity itself (a @nt(renaming_declaration) is an example of a declaration
-that does not define a new entity,
-but instead defines a view of an existing entity
-(see @RefSecNum(Renaming Declarations))).
 @ChgToGlossary{Version=[2],Kind=[Deleted],Term=<Definition>,
   Text=<@ChgDeleted{Version=[2],Text=[@Defn(view)
 All declarations contain a @i(definition) for a @i(view) of an entity.
@@ -256,12 +244,12 @@ Thus, the term "action" is used only informally in the standard
 such as "protected action").
 @end(Discussion)
 @ChgToGlossary{Version=[2],Kind=[Added],Term=<Elaboration>,
-Text=<@ChgAdded{Version=[2],Text=[The process by which a declaration has its
-run-time effect is called elaboration. Elaboration is one of the forms of
+Text=<@ChgAdded{Version=[2],Text=[The process by which a declaration achieves
+its run-time effect is called elaboration. Elaboration is one of the forms of
 execution.]}>}
 @ChgToGlossary{Version=[2],Kind=[Added],Term=<Evaluation>,
-Text=<@ChgAdded{Version=[2],Text=[The process by which an expression has its
-run-time effect is called evaluation. Evaluation is one of the forms of
+Text=<@ChgAdded{Version=[2],Text=[The process by which an expression achieves
+its run-time effect is called evaluation. Evaluation is one of the forms of
 execution.]}>}
 @begin{Honest}
 @Defn{elaborable}
@@ -557,8 +545,9 @@ anyone complains.>
     of a type @Chg{Version=[2],New=[that reveals only some of its properties.
     The remaining properties are provided by the],Old=[whose]} full view
     @Chg{Version=[2],New=[given elsewhere. Private types can be used for
-    defining abstractions that hide unnecessary details],Old=[hidden]} from
-    its clients.>}@ChgNote{This was changed to parallel "incomplete type"}
+    defining abstractions that hide unnecessary details],Old=[is hidden]} from
+    @Chg{Version=[2],New=[their],Old=[its]} clients.>}@ChgNote{This was changed
+    to parallel "incomplete type"}
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<Private extension>,
   Text=<A private extension is @Chg{Version=[2],New=[a type that extends
   another type, with the additional properties],Old=[like a record extension,
@@ -1702,7 +1691,7 @@ assigning to an enclosing object.
 @LabeledSubClause{Object Declarations}
 
 @begin{Intro}
-@Defn{stand-alone object}
+@RootDefn{stand-alone object}
 @Defn{explicit initial value}
 @Defn{initialization expression}
 An @nt<object_declaration> declares a @i(stand-alone) object with a given
