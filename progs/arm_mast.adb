@@ -59,6 +59,7 @@ package body ARM_Master is
     --  1/18/06 - RLB - Added the ExampleFont command.
     --  1/27/06 - RLB - Added HTMLTabs command.
     --  2/19/06 - RLB - Set Number_Paragraphs for HTML.
+    --  6/22/06 - RLB - Added LinkNonTerminals command.
 
     type Command_Type is (
 	-- Source commands:
@@ -70,6 +71,7 @@ package body ARM_Master is
 	Hide_Annotations,
 	Show_ISO,
 	Hide_ISO,
+	Link_Non_Terminals,
 	Number_Paragraphs,
 	Title,
 	File_Prefix,
@@ -124,6 +126,7 @@ package body ARM_Master is
     Output_File_Prefix : Ada.Strings.Unbounded.Unbounded_String; -- Output file prefix.
     Include_Annotations : Boolean := False; -- Should annotations be included in the output?
     Include_ISO_Text : Boolean := False; -- Should ISO text be included in the output?
+    Should_Link_Non_Terminals : Boolean :=  False; -- Should non-terminals be linked?
     Should_Number_Paragraphs : Boolean := False; -- Should paragraphs be numbered?
     Font_of_Examples : ARM_Output.Font_Family_Type :=
 	ARM_Output.Fixed; -- Which font should be used for examples?
@@ -176,6 +179,8 @@ package body ARM_Master is
 	    return Show_ISO;
 	elsif Canonical_Name = "hideiso" then
 	    return Hide_ISO;
+	elsif Canonical_Name = "linknonterminals" then
+	    return Link_Non_Terminals;
 	elsif Canonical_Name = "numberparagraphs" then
 	    return Number_Paragraphs;
 	elsif Canonical_Name = "title" then
@@ -729,6 +734,11 @@ package body ARM_Master is
 		    Include_ISO_Text := False;
 		    Ada.Text_IO.Put_Line("Hide ISO Text");
 
+		when Link_Non_Terminals =>
+		    -- @LinkNonTerminals
+		    Should_Link_Non_Terminals := True;
+		    Ada.Text_IO.Put_Line("Link Non-Terminals");
+
 		when Number_Paragraphs =>
 		    -- @NumberParagraphs
 		    Should_Number_Paragraphs := True;
@@ -906,6 +916,7 @@ package body ARM_Master is
 		Display_Index_Entries => Display_Index_Entries,
 		Include_Annotations => Include_Annotations,
 		Include_ISO => Include_ISO_Text,
+		Link_Non_Terminals => Should_Link_Non_Terminals,
 		Number_Paragraphs => Should_Number_Paragraphs,
 		Examples_Font => Font_of_Examples);
     end Create_Format;

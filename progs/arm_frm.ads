@@ -112,6 +112,7 @@ package ARM_Format is
 		      Display_Index_Entries : in Boolean;
 		      Include_Annotations : in Boolean;
 		      Include_ISO : in Boolean;
+		      Link_Non_Terminals : in Boolean;
 		      Number_Paragraphs : in Boolean;
 		      Examples_Font : in ARM_Output.Font_Family_Type);
 	-- Initialize an input object. Changes and Change_Version determine
@@ -122,6 +123,8 @@ package ARM_Format is
 	-- text) will be included in the output; otherwise it will not be.
 	-- If Include_ISO is True, ISOOnly text will be included in the output
 	-- (and NotISO text will not); otherwise the reverse is true.
+	-- If Link_Non_Terminals is True, links will be generated for
+	-- each Non_Terminal, linking it to its definition.
 	-- If Number_Paragraphs is true, paragraphs will be numbered (per
 	-- subclause); otherwise they will not be.
 	-- Example_Font specifies the font that examples will be set in.
@@ -209,6 +212,7 @@ private
 	Display_Index_Entries : Boolean;
 	Include_Annotations : Boolean;
 	Include_ISO : Boolean;
+	Link_Non_Terminals : Boolean;
 	Number_Paragraphs : Boolean;
 	Examples_Font : ARM_Output.Font_Family_Type;
 

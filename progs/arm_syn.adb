@@ -9,7 +9,7 @@ package body ARM_Syntax is
     -- cross-reference.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004  AXE Consultants.
+    -- Copyright 2000, 2004, 2006  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftare.com
     --
@@ -51,6 +51,9 @@ package body ARM_Syntax is
     --  9/27/00 - RLB - Revised XRef to decrease white space.
     --  9/28/00 - RLB - Added code to make links in HTML version.
     --  9/09/04 - RLB - Removed unused junk noted by Stephen Leake.
+    --  6/22/06 - RLB - Added additional information to improve the links.
+    --			Changed the cross-reference table to use the Ada 83
+    --			format (which adds missing section references).
 
     type String_Ptr is access String;
     type Rule_Type;
@@ -81,8 +84,23 @@ package body ARM_Syntax is
     XRef_List : XRef_Ptr := null;
     XRef_Count : Natural := 0;
 
+    type NT_Type;
+    type NT_Ptr is access NT_Type;
+    type NT_Type is record
+	Name : String (1..40);
+	Name_Len : Natural;
+	Clause : String (1..10);
+	Clause_Len : Natural;
+	Link_Target : Target_Type;
+	Next : NT_Ptr;
+    end record;
+
+    NT_List : NT_Ptr := null;
+    NT_Count : Natural := 0;
+
     procedure Free is new Ada.Unchecked_Deallocation (Rule_Type, Rule_Ptr);
     procedure Free is new Ada.Unchecked_Deallocation (XRef_Type, XRef_Ptr);
+    procedure Free is new Ada.Unchecked_Deallocation (NT_Type, NT_Ptr);
     procedure Free is new Ada.Unchecked_Deallocation (String, String_Ptr);
 
     procedure Create is
@@ -134,6 +152,82 @@ package body ARM_Syntax is
 	    Rule_List_Tail := Rule_List_Tail.Next;
 	end if;
     end Insert_Rule;
+
+
+    procedure Add_Non_Terminal (
+	NT_Name : in String;
+	For_Clause : in String;
+	Link_Target : out ARM_Syntax.Target_Type) is
+	-- Add a non-terminal to the syntax list. Returns a new Link_Target
+	-- for the Non-Terminal.
+	Temp_NT : NT_Type;
+    begin
+	Ada.Strings.Fixed.Move (Target => Temp_NT.Clause,
+				Source => For_Clause,
+				Drop   => Ada.Strings.Error,
+			        Pad    => ' ');
+	Temp_NT.Clause_Len := For_Clause'Length;
+	Ada.Strings.Fixed.Move (Target => Temp_NT.Name,
+				Source => NT_Name,
+				Drop   => Ada.Strings.Error,
+			        Pad    => ' ');
+	Temp_NT.Name_Len := NT_Name'Length;
+
+	declare
+	    Val : constant String := Natural'Image(NT_Count);
+	begin
+	    Temp_NT.Link_Target := "S0000";
+	    if Val'Length <= 5 then
+	        Temp_NT.Link_Target (5-(Val'Length-2)..5) :=
+		    Val(2..Val'Last);
+	    else
+		raise Program_Error; -- Too many.
+	    end if;
+	    Link_Target := Temp_NT.Link_Target;
+	end;
+
+	if NT_List = null then
+	    Temp_NT.Next := null;
+	    NT_List := new NT_Type'(Temp_NT);
+	else
+	    Temp_NT.Next := NT_List;
+	    NT_List := new NT_Type'(Temp_NT);
+	end if;
+	NT_Count := NT_Count + 1;
+
+    end Add_Non_Terminal;
+
+
+    function Non_Terminal_Clause (NT_Name : in String) return String is
+	-- Return the clause where NT_Name is declared.
+	-- Returns "" if NT_Name is not a declared Non_Terminal.
+	Loc : NT_Ptr;
+    begin
+	Loc := NT_List;
+	while Loc /= null loop
+	    if NT_Name = Loc.Name(1..Loc.Name_Len) then
+		return Loc.Clause(1..Loc.Clause_Len);
+	    end if;
+	    Loc := Loc.Next;
+	end loop;
+	return ""; -- Not found.
+    end Non_Terminal_Clause;
+
+
+    function Non_Terminal_Link_Target (NT_Name : in String) return Target_Type is
+	-- Return the link target for NT_Name.
+	-- Returns "     " if NT_Name is not a declared Non_Terminal.
+	Loc : NT_Ptr;
+    begin
+	Loc := NT_List;
+	while Loc /= null loop
+	    if NT_Name = Loc.Name(1..Loc.Name_Len) then
+		return Loc.Link_Target;
+	    end if;
+	    Loc := Loc.Next;
+	end loop;
+	return Target_Type'(others => ' '); -- Not found.
+    end Non_Terminal_Link_Target;
 
 
     procedure Add_Xref (
@@ -295,9 +389,25 @@ package body ARM_Syntax is
 	    if Last = null or else
 		Last.Name (1..Last.Name_Len) /= Temp.Name (1..Temp.Name_Len) then
 		-- New header:
-	        Format_Text ("@noparanum@trailing@nt{" & Temp.Name (1..Temp.Name_Len) &
-		     "}" & Ascii.LF,
-		     Temp.Name (1..Temp.Name_Len) & " header");
+		declare
+		    Clause : constant String :=
+			Non_Terminal_Clause (Temp.Name (1..Temp.Name_Len));
+		begin
+		    if Clause /= "" then
+		        Format_Text ("@noparanum@trailing@nt{" & Temp.Name (1..Temp.Name_Len) &
+		             "}@\@RefSecbyNum{" & Clause & "}" & Ascii.LF,
+		             Temp.Name (1..Temp.Name_Len) & " header");
+		    else -- Undefined? Weird, but don't break, just use the
+			 -- Ada 83 ellipsis.
+		        Format_Text ("@noparanum@trailing@nt{" & Temp.Name (1..Temp.Name_Len) &
+		             "}@\..." & Ascii.LF,
+		             Temp.Name (1..Temp.Name_Len) & " header");
+		    end if;
+		end;
+	        -- Original:
+		--Format_Text ("@noparanum@trailing@nt{" & Temp.Name (1..Temp.Name_Len) &
+		--     "}" & Ascii.LF,
+		--     Temp.Name (1..Temp.Name_Len) & " header");
 		Last := Temp;
 	    end if;
 	    if Temp.Next = null or else

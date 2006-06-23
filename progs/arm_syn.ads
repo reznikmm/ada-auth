@@ -7,7 +7,7 @@ package ARM_Syntax is
     -- cross-reference.
     --
     -- ---------------------------------------
-    -- Copyright 2000, AXE Consultants.
+    -- Copyright 2000, 2006 AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -40,6 +40,9 @@ package ARM_Syntax is
     --
     --  5/17/00 - RLB - Created package.
     --  5/26/00 - RLB - Added a Tabset parameter.
+    --  6/22/06 - RLB - Added additional information to improve the links
+    --			and to be able to use the Ada 83 format for the
+    --			cross-reference table.
 
     procedure Create;
 	-- Initialize the syntax database.
@@ -54,6 +57,15 @@ package ARM_Syntax is
 	-- Add a rule for the syntax summary. The rule appears in For_Clause.
 	-- Tabset provides any needed tab settings.
 
+    subtype Target_Type is String (1..5);
+
+    procedure Add_Non_Terminal (
+	NT_Name : in String;
+	For_Clause : in String;
+	Link_Target : out ARM_Syntax.Target_Type);
+	-- Add a non-terminal to the syntax list. Returns a new Link_Target
+	-- for the Non-Terminal.
+
     procedure Add_Xref (
 	Name : in String;
 	Used_In : in String;
@@ -61,6 +73,14 @@ package ARM_Syntax is
 	-- Add a cross-reference entry.
 	-- The item referenced is Name, and it is referenced in the production
 	-- for Used_In, in Clause.
+
+    function Non_Terminal_Clause (NT_Name : in String) return String;
+	-- Return the clause where NT_Name is declared.
+	-- Returns "" if NT_Name is not a declared Non_Terminal.
+
+    function Non_Terminal_Link_Target (NT_Name : in String) return Target_Type;
+	-- Return the link target for NT_Name.
+	-- Returns "     " if NT_Name is not a declared Non_Terminal.
 
     generic
 	with procedure Format_Text (Text : in String;

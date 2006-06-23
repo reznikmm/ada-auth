@@ -153,6 +153,10 @@ Global properties:
      If given in the master file, or ShowISO is not given,
      "ISOOnly" text is not included in the output in any form, and "NotISO"
      text is included in the output.
+@LinkNonTerminals
+     If given in the master file, non-terminals are linked to their original
+     definition (as given in @Syn and similar commands). Otherwise,
+     non-terminals are not linked.
 @NumberParagraphs
      If given in the master file, paragraphs are numbered per subclause
      (as in the Ada Reference Manual). Otherwise, paragraphs are not numbered.
