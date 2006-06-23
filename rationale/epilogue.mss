@@ -1,19 +1,11 @@
 @Part(Epilogue, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/epilogue.mss,v $)
-@comment($Revision: 1.3 $ $Date: 2006/03/03 19:57:47 $)
+@comment($Revision: 1.4 $ $Date: 2006/04/04 05:49:10 $)
 
 @LabeledSection{Epilogue}
 
-@Subheading{Abstract}
-
-@i{This is
-the last of a number of papers describing the rationale for Ada 2005.
-In due course it is anticipated that the papers will be combined (after
-appropriate reformatting and editing) into a single volume for formal
-publication.}
-
-@i{This last paper summarizes a small number of general issues of importance
+@i{This last chapter summarizes a small number of general issues of importance
 to the user such as compatibility between Ada 2005 and Ada 95. It
 also briefly considers a few potential changes that were considered
 for Ada 2005 but rejected for various reasons.}
@@ -681,9 +673,9 @@ Text=[9.6(40.e)]})
 In the course of the development of Ada 2005, a number of small changes
 were deemed to apply also to Ada 95 and thus were classified as binding
 interpretations rather than amendments. Accordingly they are not (generally)
-covered by the changes discussed in the previous papers. Note however,
+covered by the changes discussed in the previous chapters. Note however,
 that @AILink{AI=[AI95-00241-01],Text=[AI-241]} on exceptions was discussed in
-paper @RefSecNum{Exceptions, generics etc} even
+chapter @RefSecNum{Exceptions, generics etc} even
 though it was eventually classified as a binding interpretation. Moreover,
 @AILink{AI=[AI95-00329-01],Text=[AI-329]} was
 split and the part stating that Raise_Exception never returns (also applying
@@ -1332,25 +1324,5 @@ defined scheduling (@AILink{AI=[AI95-00358-01],Text=[AI-358]}) was not.
 The reason is perhaps that it was felt desirable to see how those
 that had been included worked out before adding yet more burden for
 implementers.
-
-
-@LabeledClause{Acknowledgements}
-
-
-This is the last of the papers in this series and so this seems a
-good moment to once more thank all those who have helped by reviewing
-various drafts and pointing out where I had gone astray. I am especially
-grateful to Randy Brukardt, Pascal Leroy and Tucker Taft for their
-diligence and patience.
-
-I must also thank Ada-Europe and the Ada Resource Association and
-also the British Standards Institute for financial support for attending
-various meetings.
-
-Writing this rationale has been a learning experience for me and I
-trust that readers will also have found the material useful in learning
-about Ada 2005. An integrated description of Ada 2005 as a whole including
-some further examples will be found in a forthcoming version of the
-textbook @LocalLink{Target=[R13],Sec=[References],Text={[13]}}.
 
 

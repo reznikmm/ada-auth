@@ -1,11 +1,11 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/cannex.mss,v $)
-@comment($Revision: 1.5 $ $Date: 2006/02/19 06:45:45 $)
+@comment($Revision: 1.6 $ $Date: 2006/04/04 05:49:00 $)
 
 @LabeledClause{Summary table}
 
-This paper concludes with a table showing at a glance the
+This chapter concludes with a table showing at a glance the
 various facilities in the six main containers.
 
 @leading@;In order to save space the following abbreviations are used in the
@@ -92,7 +92,7 @@ Body=[@exam{@key[generic]}@\@exam{Y}@\@exam{Y}@\@exam{Y}@\@exam{Y}@\@exam{Y}@\@e
 @exam{@key[procedure] Reverse_Elements(C: @key[in out] T);}@\@exam{Y}@\@exam{Y}@\@\@\@\
 @exam{@key[procedure] Swap(C: @key[in out] T; I, J: Cursor);}@\@exam{Y@*also Index}@\@exam{Y}@\@\@\@\
 @exam{@key[procedure] Swap_Links(@*@ @ @ C: @key[in out] List;@*@ @ @ I, J: Cursor);}@\@\@exam{Y}@\@\@\@\
-@exam{@key[procedure] Splice(@*@ @ @ Target: @key[in out] List; Before: Cursor;@*@ @ @ Source: @key[in out] List);@*@key[procedure] Splice(@*@ @ @ Target: @key[in out] List; Before: Cursor;@*@ @ @ Source: @key[in out] List; Position: @key[in out] Cursor);@*@key[procedure] Splice(@*@ @ @ Container: @key[in out] List; Before: Cursor;@*@ @ @ Position: @key[in out] Cursor);}@\@\@exam{Y}@\@\@\@\
+@exam{@key[procedure] Splice(@*@ @ @ Target: @key[in out] List; Before: Cursor;@*@ @ @ Source: @key[in out] List);@*@key[procedure] Splice(@*@ @ @ Target: @key[in out] List; Before: Cursor;@*@ @ @ Source: @key[in out] List; Position: @key[in out] Cursor);@*@key[procedure] Splice(@*@ @ @ Container: @key[in out] List; Before: Cursor;@*@ @ @ Position: Cursor);}@\@\@exam{Y}@\@\@\@\
 @exam{@key[procedure] Union(@*@ @ @ Target: @key[in out] Set;@*@ @ @ Source: Set);@*@key[function] Union(L, R: Set) @key[return] Set;@*@key[function] "or" (L, R: Set) @key[return] Set@*@ @ @ @key[renames] Union;}@\@\@\@\@\@exam{Y}@\@exam{Y}
 @exam{@key[procedure] Intersection(@*@ @ @ Target: @key[in out] Set;@*@ @ @ Source: Set);@*@key[function] Intersection(L, R: Set) @key[return] Set;@*@key[function] "and" (L, R: Set) @key[return] Set@*@ @ @ @key[renames] Intersection;}@\@\@\@\@\@exam{Y}@\@exam{Y}
 @exam{@key[procedure] Difference(@*@ @ @ Target: @key[in out] Set;@*@ @ @  Source: Set);@*@key[function] Difference(L, R: Set) @key[return] Set;@*@key[function] "@en" (L, R: Set) @key[return] Set@*@ @ @ @key[renames] Difference;}@\@\@\@\@\@exam{Y}@\@exam{Y}

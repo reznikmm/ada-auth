@@ -1,29 +1,22 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/contain.mss,v $)
-@comment($Revision: 1.4 $ $Date: 2006/02/19 06:45:45 $)
+@comment($Revision: 1.5 $ $Date: 2006/04/04 05:49:01 $)
 
 @LabeledSection{Containers}
 
-@Subheading{Abstract}
-
-@i{This paper
+@i{This chapter
 describes the predefined container library in Ada 2005.}
 
-@i{This is one of a number of papers concerning Ada 2005 which are being
-published in the Ada User Journal. An earlier version of this paper
-appeared in the Ada User Journal, Vol. 26, Number 4, December 2005.
-Other papers in this series will be found in other issues of the Journal
-or elsewhere on this website.}
 
 @LabeledClause{Organization of containers}
 
 
 A major enhancement to the predefined library in Ada 2005 is the addition
 of a container library. This is quite extensive and merits this separate
-paper on its own. Other aspects of the predefined library and the
+chapter on its own. Other aspects of the predefined library and the
 overall rationale for extending the library were described in the
-previous paper (see @RefSecNum{Predefined library}).
+previous chapter (see @RefSecNum{Predefined library}).
 
 The main packages in the container library can be grouped in various
 ways. One set of packages concerns the manipulation of objects of
@@ -323,7 +316,7 @@ There is no analogue in the vectors package.
 @key[procedure] Splice(
       Container: @key[in out] List;
       Before: @key[in] Cursor;
-      Position: @key[in out] Cursor);
+      Position: @key[in] Cursor);
 @end[Example]
 
 These three procedures enable elements to be moved (without copying).
@@ -572,7 +565,7 @@ It is perhaps slightly messier to use the index and vector parameters
 because of questions concerning the range of values of the index but
 probably slightly faster and maybe more familiar. And sometimes of
 course using an index is the whole essence of the problem. In the
-paper on access types (see @RefSecNum{Downward closures}) we showed a use of
+chapter on access types (see @RefSecNum{Downward closures}) we showed a use of
 the procedure @exam[Update_Element] to double the values of those elements of a
 vector whose index was in the range 5 to 10. This would be tedious with
 cursors.

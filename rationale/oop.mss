@@ -1,31 +1,22 @@
 @Part(oop, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/oop.mss,v $)
-@comment($Revision: 1.6 $ $Date: 2006/02/19 06:45:46 $)
+@comment($Revision: 1.7 $ $Date: 2006/04/04 05:49:11 $)
 
 @LabeledSection{Object oriented model}
 
-@Subheading{Abstract}
-
-@i{This paper
-describes various important improvements to the object oriented model
-for Ada 2005.}
+@i{This chapter describes various important improvements to the object oriented
+model for Ada 2005.}
 
 @i{First an alternative more traditional prefixed notation for calling
 operations has been introduced. A major improvement is that Java-like
-interfaces are introduced thereby permitting simple multiple inheritance;
-null procedures have also been introduced as a category of operation.
-Greater general flexibility is provided by allowing type extension
-at a more nested level than that of the parent.}
+interfaces are introduced thereby permitting simple multiple inheritance; null
+procedures have also been introduced as a category of operation. Greater
+general flexibility is provided by allowing type extension at a more nested
+level than that of the parent.}
 
-@i{There are also explicit features for overcoming nasty bugs which arise
-from confusion between overloading and overriding.}
-
-@i{This is one of a number of papers concerning Ada 2005 which are being
-published in the Ada User Journal. An earlier version of this paper
-appeared in the Ada User Journal, Vol. 26, Number 1, March 2005. Other
-papers in this series will be found in later issues of the Journal
-or elsewhere on this website.}
+@i{There are also explicit features for overcoming nasty bugs which arise from
+confusion between overloading and overriding.}
 
 @LabeledClause{Ada Issues: Object-oriented model}
 
@@ -51,7 +42,7 @@ interface feature and improved interfacing to other OO languages.
 
 @leading@;Ada 2005 does indeed make many improvements in the object oriented
 area. The following Ada Issues cover the relevant changes and are
-described in detail in this paper:
+described in detail in this chapter:
 
 @begin[Description]
 @begin[Description]@Comment{Second one to indent this}
@@ -101,7 +92,7 @@ These changes can be grouped as follows.
 First we discuss the fact that Ada 2005 has three new reserved words,
 @key[interface], @key[overriding], and @key[synchronized]. It so happens
 that these are all used in different aspects of the OO model and so
-we discuss them in this paper (@AILink{AI=[AI95-00284-01],Text=[284]}).
+we discuss them in this chapter (@AILink{AI=[AI95-00284-01],Text=[284]}).
 
 Then there is the introduction of the @exam[Obj.Op] or prefixed notation
 used by many other languages (@AILink{AI=[AI95-00252-01],Text=[252]},
@@ -145,7 +136,7 @@ it is convenient to discuss it here (@AILink{AI=[AI95-00310-01],Text=[310]}).
 
 There are many other OO related improvements in Ada 2005 concerning
 matters such as access types, visibility, and generics. They will
-be described in later papers (see @RefSecNum{Access types} and
+be described in later chapters (see @RefSecNum{Access types} and
 @RefSecNum{Exceptions, generics etc}).
 
 
@@ -866,7 +857,7 @@ Thus if one operation is a function @exam[F] thus
 @end[Example]
 
 then in this case the type @exam[NT] must provide a concrete function
-@exam[F]. See however the discussion at the end of this paper (see
+@exam[F]. See however the discussion at the end of this chapter (see
 @RefSecNum{Overriding and overloading}) for
 the case when the type @exam[NT] has a null extension.
 
@@ -937,8 +928,8 @@ come back to this topic in a moment.
 There are other forms of interfaces, namely synchronized interfaces,
 task interfaces, and protected interfaces. These bring support for
 polymorphic, class wide object oriented programming to the real time
-programming arena. They will be described in a later paper (see
-@RefSecNum{Synchronized interfaces}.
+programming arena. They will be described in a later chapter (see
+@RefSecNum{Synchronized interfaces}).
 
 Having described the general ideas in somewhat symbolic terms, we
 will now discuss a more concrete example.
@@ -1708,7 +1699,7 @@ types to the class.
 @leading@;Ada 2005 overcomes this problem by providing a generic constructor
 function. The objective of this is to create an object given the value of its
 tag. Such functions are often called object factory functions for obvious
-reasons (the word factory is derived from the Latin facere, to make.) The
+reasons (the word factory is derived from the Latin facere, to make). The
 specification of the
 function is@Defn{object constructor}@Defn{object factory}@Defn{factory}
 @begin[Example]
@@ -2011,7 +2002,7 @@ will be returned by @exam[Decode] and this will cause @exam[Make_Object] to
 raise @exam[Tag_Error].
 
 A more elegant registration system could be easily implemented using
-the container library which will be described in a later paper (see
+the container library which will be described in a later chapter (see
 @RefSecNum{Containers}).
 
 Note that any instance of @exam[Generic_Dispatching_Constructor]
@@ -2136,7 +2127,7 @@ a parameter of type @exam[String] rather than @exam[Integer].
 
 @leading@;The overriding indicators can also be used with abstract subprograms,
 null procedures, renamings, instantiations, stubs, bodies and entries
-(we will deal with entries in the paper on tasking @en
+(we will deal with entries in the chapter on tasking @en
 @RefSecNum{Synchronized interfaces}). So we can have
 @begin[Example]
 @key[overriding]

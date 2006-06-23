@@ -1,45 +1,13 @@
 @Part(intro, Root="rat.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/Rationale/intro.mss,v $}
-@comment{$Revision: 1.10 $ $Date: 2006/03/03 19:57:43 $}
+@comment{$Revision: 1.11 $ $Date: 2006/04/04 05:49:04 $}
 
 @LabeledSection{Introduction}
 
-@Subheading{Abstract}
-
-@i{This is the first of a number of papers describing the
-rationale for Ada 2005. In due course it is anticipated that
-the papers will be combined (after appropriate reformatting
-and editing) into a single volume for formal publication.
-This first paper covers the background to the development of
-Ada 2005 and gives a brief overview of the main changes from
-Ada 95. Other papers will then look at the changes in more
-detail.}
-
-@i{These papers are being published in the Ada User Journal. An
-earlier version of this first paper appeared in the Ada User
-Journal, Vol. 25, Number 4, December 2004. Other papers in
-this series will be found in later issues of the Journal or
-elsewhere on this website. The full series is expected to be}
-
-@i{1@ @ @ Introduction}
-
-@i{2@ @ @ Object oriented model}
-
-@i{3@ @ @ Access types}
-
-@i{4@ @ @ Structure and visibility}
-
-@i{5@ @ @ Tasking and Real-Time}
-
-@i{6@ @ @ Exceptions, generics etc}
-
-@i{7@ @ @ Predefined library}
-
-@i{8@ @ @ Containers}
-
-@i{9@ @ @ Epilogue}
-
+@i{This first chapter covers the background to the development of Ada 2005 and
+gives a brief overview of the main changes from Ada 95. Other chapters will
+then look at the changes in more detail.}
 
 @LabeledClause{Revision process}
 
@@ -76,7 +44,7 @@ Rapporteur Group (the ARG) in drafting the revised standard.
 The ARG is a team of experts nominated by the national bodies
 represented on WG9 and the two liaison organizations, ACM
 SIGAda and Ada-Europe. The ARG was originally led with
-Teutonic precision by Erhard Pl”dereder and is currently led
+Teutonic precision by Erhard Pl@Latin1(246)dereder and is currently led
 with Transalpine Gallic flair by Pascal Leroy. The editor,
 who at the end of the day actually writes the words of the
 standard, is the indefatigable Randy (fingers) Brukardt.
@@ -611,7 +579,7 @@ An important rule is that a descendant of a nonlimited
 interface must be nonlimited. But the reverse is not true.
 
 Some more extensive examples of the use of interfaces will be
-given in a later paper (see @RefSecNum{Interfaces}).
+given in a later chapter (see @RefSecNum{Interfaces}).
 
 @leading@;Incidentally, the newly introduced null procedures are not
 just for interfaces. We can give a null procedure as a
@@ -641,7 +609,7 @@ change since the Ada 95 RM states that the default
 implementations have no effect. However, this neatly
 clarifies the situation and removes ad hoc semantic rules.
 (The pragma @Exam{Preelaborable_Initialization} will be explained in
-a later paper @en see @RefSecNum{Pragmas and Restrictions}.)
+a later chapter @en see @RefSecNum{Pragmas and Restrictions}.)
 
 Another important change is the ability to do type extension
 at a level more nested than that of the parent type. This
@@ -694,7 +662,7 @@ will detect the error. Note that @key{overriding} is another new
 reserved word. However, partly for reasons of compatibility,
 the use of overriding indicators is optional; there are also
 deeper reasons concerning private types and generics which
-will be discussed in a later paper @en see
+will be discussed in a later chapter @en see
 @RefSecNum{Overriding and overloading}.@Defn2{Term=[overriding],
 Sec=[keyword]}
 
@@ -930,7 +898,7 @@ function result might be in another animal function such as
 @end{Example}
 Anonymous access types can also be used in a renaming
 declaration. This and other detailed points on matters such
-as accessibility will be discussed in a later paper
+as accessibility will be discussed in a later chapter
 (see @RefSecNum{Anonymous access types}).
 
 The final important change in access types concerns access to
@@ -954,15 +922,17 @@ the integral of the function passed as parameter @Exam{Fn} between
 the limits @Exam{Lo} and @Exam{Hi}. This works fine in Ada 95 for simple
 cases such as where the function is declared at library
 level. Thus to evaluate
-@begin{Example}@Comment{This is better displayed as a graphic; a lot of systems won't have these characters.
+
+@Comment{This is better displayed as a graphic; a lot of systems won't have these characters.
+@begin{Example}
 @Roman{@grow{@grow{@Unicode(8992)}@+{1}
 @grow{@Unicode(9474)}  @Unicode(8730)x @i{dx}
-@grow{@Unicode(8993)}@-{0}}}}
-@PictureInline{Alignment=[Inline],Border=[None],Height=[78],Width=[84],
-Name=[form-1.gif],Descr=[Integrate Sqrt(x)]}
-@end{Example}
+@grow{@Unicode(8993)}@-{0}}}
+@end{Example}}
+@PictureAlone{Alignment=[Left],Border=[None],Height=[65],Width=[95],
+Name=[form-1.png],Descr=[Integrate Sqrt(x)]}
 
-@leading@keepnext@;we can write
+@leading@;we can write@Comment{No keepnext here, Word keeps the graphic with this, which can be too big.}
 @begin{Example}
 Result := Integrate(Sqrt'Access, 0.0, 1.0);
 @end{Example}
@@ -1139,7 +1109,8 @@ the declarations of @Exam{Object}, @Exam{Max}, @Exam{Index}, and so on and then
 
 The package @Exam{Geometry.Lines} is declared in a similar way. Note
 especially that we are using the anonymous access type
-facility discussed in Section 3.2 and so we do not even have
+facility discussed in Section @RefSecNum{Overview: Access types} and so we
+do not even have
 to declare named access types such as @Exam{Acc_Line} in order to
 declare @Exam{Acc_Line_Array}.
 
@@ -1194,7 +1165,7 @@ been retained but banished to
 for obsolescent features.
 
 Further examples of the use of limited with clauses will be
-given in a later paper (see @RefSecNum{Mutually dependent types}).
+given in a later chapter (see @RefSecNum{Mutually dependent types}).
 
 Another enhancement in this area is the introduction of
 private with clauses which overcome a problem with private
@@ -1356,7 +1327,7 @@ copying is not involved including as actual parameters of mode @key[in].
 There are also problems with returning results of a limited type from
 a function. This is overcome in Ada 2005 by the introduction of an
 extended form of return statement. This will be described in detail
-in a later paper (see @RefSecNum{Limited types and return statements}).
+in a later chapter (see @RefSecNum{Limited types and return statements}).
 
 @LabeledSubclause{Overview: Tasking and real-time facilities}
 
@@ -1389,7 +1360,7 @@ as @exam[No_Abort_Statements] and @exam[No_Dynamic_Priorities].
 
 The pragma @exam[Detect_Blocking] plus many of the @exam[Restrictions]
 identifiers are new to Ada 2005. Further details will be given in
-a later paper (see @RefSecNum{The Ravenscar profile}).
+a later chapter (see @RefSecNum{The Ravenscar profile}).
 
 @leading@;Ada 95 allows the priority of a task to be changed but does not
 permit the ceiling priority of a protected object to be changed. This is
@@ -1533,7 +1504,7 @@ also been added.
 There is a minor flaw in the above example. If we are interrupted
 by the telephone between putting the egg in the water and setting
 the handler then our egg will be overdone. We will see how to cure
-this in a later paper (see @RefSecNum{CPU clocks and timers}).
+this in a later chapter (see @RefSecNum{CPU clocks and timers}).
 
 Readers will recall the old problem of how tasks can have a silent
 death. If something in a task goes wrong in Ada 95 and an exception
@@ -1631,8 +1602,8 @@ the Real-Time Systems annex. Ada 2005 introduces a means whereby object
 oriented and real-time features can be closely linked together through
 inheritance.
 
-@leading@;Recall from Section 3.1 that we can declare an interface to be
-limited thus
+@leading@;Recall from Section @RefSecNum{Overview: The object oriented model}
+that we can declare an interface to be limited thus
 @begin[Example]
 @key[type] LI @key[is limited interface];
 @end[Example]
@@ -1649,7 +1620,7 @@ A task interface or protected interface has to be implemented by a
 task type or protected type respectively. However, a synchronized
 interface can be implemented by either a task type or a protected
 type. These interfaces can also be composed with certain restrictions.
-Detailed examples will be given in a later paper
+Detailed examples will be given in a later chapter
 (see @RefSecNum{Synchronized interfaces}).
 
 
@@ -1947,7 +1918,7 @@ Note that the existing form @exam[(<>)] is now deemed to be a shorthand
 for@exam[ (]@key[others]@exam[ => <>)]. As with aggregates, the form
 @exam[<>] is only permitted with named notation.
 
-Examples using this new facility will be given in a later paper
+Examples using this new facility will be given in a later chapter
 (see @RefSecNum{Generic units}).
 
 
@@ -2202,7 +2173,7 @@ types.
 
 It is hoped that the above list gives a flavour of the capability of the
 package @exam[Containers]. Some examples of the use of the facilities will be
-given in a later paper (see @RefSec{Containers}).
+given in a later chapter (see @RefSec{Containers}).
 
 Finally, there are further packages for manipulating times (that is
 of type @exam[Ada.Calendar.Time] and not @exam[Ada.Real_Time.Time]
@@ -2269,7 +2240,7 @@ subtlety regarding overload resolution, the title of Annex H,
 quirks of access subtypes, rules for pragma @Exam{Pure}, and the
 classification of various units as pure or preelaborable.
 
-Further papers will expand on the six major topics of this
+The remaining chapters will expand on the six major topics of this
 overview in more detail.
 
 It is worth briefly reviewing the guidelines (see Section
@@ -2301,20 +2272,4 @@ seen.
 
 It seems clear from this brief check that indeed Ada 2005
 does meet the objectives set for it.
-
-Finally, I need to thank all those who have helped in the
-preparation of this paper. First I must acknowledge the
-financial support of Ada-Europe and the Ada Resource
-Association. And then I must thank those who reviewed earlier
-versions. There are almost too many to name, but I must give
-special thanks to Randy Brukardt, Pascal Leroy and Tucker
-Taft of the ARG, to my colleagues on the UK Ada Panel
-(BSI/IST/5/-/9), and to James Moore of WG9. I am especially
-grateful for a brilliant suggestion of Randy Brukardt which
-must be preserved for the pleasure of future generations. He
-suggests that this document when complete be called the Ada
-Language Enhancement Guide. This means that if combined with
-the final Ada Reference Manual, the whole document can then
-be referred to as the ARM and ALEG. Thanks Randy.
-
 

@@ -1,34 +1,26 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/access.mss,v $)
-@comment($Revision: 1.7 $ $Date: 2006/03/03 19:57:41 $)
+@comment($Revision: 1.8 $ $Date: 2006/04/04 05:48:59 $)
 
 @LabeledSection{Access types}
 
-@Subheading{Abstract}
+@i{This chapter describes various improvements concerning access types for Ada
+2005.}
 
-@i{This paper
-describes various improvements concerning access types for Ada 2005.}
+@i{Ada 2005 permits all access types to be access to constant types and to
+indicate that null is not an allowed value in all contexts. Anonymous access
+types are permitted in more contexts than just as access parameters and
+discriminants; they can also be used for variables and all components of
+composite types. This further use of access types is of considerable value in
+object oriented programming by reducing the need for (unnecessary) explicit
+type conversions.}
 
-@i{Ada 2005 permits all access types to be access to constant types and
-to indicate that null is not an allowed value in all contexts. Anonymous
-access types are permitted in more contexts than just as access parameters
-and discriminants; they can also be used for variables and all components
-of composite types. This further use of access types is of considerable
-value in object oriented programming by reducing the need for (unnecessary)
-explicit type conversions.}
+@i{A further major improvement concerns access to subprogram types which are
+now allowed to be anonymous in line with access to object types. This permits
+so-called "downward closures" and allows the flexible use of procedures as
+parameters of subprograms and thereby avoids excessive use of generic units.}
 
-@i{A further major improvement concerns access to subprogram types which
-are now allowed to be anonymous in line with access to object types.
-This permits so-called "downward closures" and allows the flexible
-use of procedures as parameters of subprograms and thereby avoids
-excessive use of generic units.}
-
-@i{This is one of a number of papers concerning Ada 2005 which are being
-published in the Ada User Journal. An earlier version of this paper
-appeared in the Ada User Journal, Vol. 26, Number 2, June 2005. Other
-papers in this series will be found in later issues of the Journal
-or elsewhere on this website.}
 
 @LabeledClause{Ada Issues: Access types}
 
@@ -47,7 +39,7 @@ shortcomings in Ada". The introduction of anonymous access-to-subprogram
 types comes into that category in the minds of many users.
 
 @leading@;The following Ada Issues cover the relevant changes and are described
-in detail in this paper:
+in detail in this chapter:
 
 @begin[Description]
 @begin[Description]@Comment{Second one to indent this}
@@ -875,10 +867,10 @@ The full rules regarding the use of the predefined equality are that
 it cannot be used if there is a user-defined primitive equality operation
 for either operand type unless we use the prefix @exam[Standard].
 A similar rule applies to fixed point types as we shall see in a later
-paper (see @RefSecNum{Numerics}).
+chapter (see @RefSecNum{Numerics}).
 
 @leading@;Another example of the use of the type @exam[Cell] occurred in the
-previous paper (see @RefSecNum{Nested type extension}) when we were discussing
+previous chapter (see @RefSecNum{Nested type extension}) when we were discussing
 type extension at nested levels.
 That example also illustrated that access types have to be named in
 some circumstances such as when they provide the full type for a private
@@ -1049,7 +1041,7 @@ In this example the accessibility level of the component @exam[C]
 of the derived type is the same as that of the parent type @exam[R
 ]and so the aggregate is illegal. This somewhat surprising rule is
 necessary to prevent some very strange problems which we will not
-explore in this paper.
+explore here.
 
 @leading@;One consequence of which users should be aware is that if we assign
 the value in an access parameter to a local variable of an anonymous
@@ -1238,7 +1230,7 @@ strange concept in Ada 95 and primarily concerned limited types (including
 task and protected types) which of course could not be copied. Enabling
 us to write @key[access] explicitly and thereby tell the truth removes
 much confusion. Limited types will be discussed in detail in a later
-paper (see @RefSecNum{Limited types and return statements}).
+chapter (see @RefSecNum{Limited types and return statements}).
 
 @leading@;Access return types can be a convenient way of getting a constant
 view of an object such as a table. We might have an array in a package
@@ -1578,15 +1570,15 @@ dangerous for access to subprogram types for similar reasons.
 around the problems of accessibility anyway. Thus the double integration
 presented in the Introduction can easily be circumvented in many cases.
 We computed
-@begin{Example}@Comment{This is better displayed as a graphic; a lot of systems won't have these characters.
-@Roman{@grow{@grow{@Unicode(8992)}@+{1}@grow{@Unicode(8992)}@+{1}
+@Comment{This is better displayed as a graphic; a lot of systems won't have these characters.
+@begin{Example}@Roman{@grow{@grow{@Unicode(8992)}@+{1}@grow{@Unicode(8992)}@+{1}
 @grow{@Unicode(9474)} @grow{@Unicode(9474)}  xy @i{dy dx}
-@grow{@Unicode(8993)}@-{0}@grow{@Unicode(8993)}@-{0}}}}
-@PictureInline{Alignment=[Inline],Border=[None],Height=[78],Width=[141],
-Name=[form-2.gif],Descr=[Integrate xy]}
-@end{Example}
+@grow{@Unicode(8993)}@-{0}@grow{@Unicode(8993)}@-{0}}}
+@end{Example}}
+@PictureAlone{Alignment=[Left],Border=[None],Height=[65],Width=[130],
+Name=[form-2.png],Descr=[Integrate xy]}
 
-@leading@keepnext@;using the following program
+@leading@;using the following program@Comment{No keepnext here, Word keeps the graphic with this, which can be too big.}
 @begin[Example]
 @key[with] Integrate;
 @key[procedure] Main @key[is]
@@ -1631,13 +1623,14 @@ and so it all works using the Ada 95 version of @exam[Integrate] anyway.
 the region had not been square but triangular so that the bound of
 the inner integral depended on the outer variable as in
 
-@begin{Example}@Comment{This is better displayed as a graphic; a lot of systems won't have these characters.
+@Comment{This is better displayed as a graphic; a lot of systems won't have these characters.
+@begin{Example}
 @Roman{@grow{@grow{@Unicode(8992)}@+{1}@grow{@Unicode(8992)}@+{x}
 @grow{@Unicode(9474)} @grow{@Unicode(9474)}  xy @i{dy dx}
-@grow{@Unicode(8993)}@-{0}@grow{@Unicode(8993)}@-{0}}}}
-@PictureInline{Alignment=[Inline],Border=[None],Height=[78],Width=[141],
-Name=[form-3.gif],Descr=[Integrate xy]}
-@end{Example}
+@grow{@Unicode(8993)}@-{0}@grow{@Unicode(8993)}@-{0}}}
+@end{Example}}
+@PictureAlone{Alignment=[Left],Border=[None],Height=[65],Width=[130],
+Name=[form-3.png],Descr=[Integrate xy]}
 
 then nested functions would be vital.
 
@@ -1734,7 +1727,7 @@ to 10, then we would first declare a procedure such as
 @end[Example]
 
 Further details of the use of access to subprogram types with containers
-will be found in a later paper (see @RefSecNum{Lists and vectors}).
+will be found in a later chapter (see @RefSecNum{Lists and vectors}).
 
 Finally it should be noted that anonymous access to subprogram types
 can also be used in all those places where anonymous access to object
@@ -1898,7 +1891,7 @@ A_Neuter: Mutant_Name(Neuter);@\-- @examcom[fixed neuter]
 @\-- @examcom[instantiation of Surgery makes A_Neuter hairy]
 @end[Example]
 
-The problem here is that there are loopholes in the checks in the
+The problem here is that there are loopholes in the checks
 when the package @exam[Sex_Change] is elaborated. The object @exam[A_Name]
 is assigned
 an access to the single component of the array @exam[X] whose value

@@ -1,31 +1,24 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/tasking.mss,v $)
-@comment($Revision: 1.4 $ $Date: 2006/03/03 19:57:45 $)
+@comment($Revision: 1.5 $ $Date: 2006/04/04 05:49:08 $)
 
 @LabeledSection{Tasking and Real-Time}
 
-@Subheading{Abstract}
-
-@i{This paper
+@i{This chapter
 describes various improvements in the tasking and real-time areas
 for Ada 2005.}
 
 @i{There are only a few changes to the core tasking model itself. One
 major extension, however, is the ability to combine the interface
-feature described in an earlier paper with the tasking model; this
+feature described in an earlier chapter with the tasking model; this
 draws together the object-oriented and tasking models of Ada which
 previously were disjoint aspects of the language.}
 
 @i{There are also many additional predefined packages in the Real-Time
 Systems annex concerning matters such as scheduling and timing; these
-form the major topic of this paper.}
+form the major topic of this chapter.}
 
-@i{This is one of a number of papers concerning Ada 2005 which are being
-published in the Ada User Journal. An earlier version of this paper
-appeared in the Ada User Journal, Vol. 26, Number 3, September 2005.
-Other papers in this series will be found in later issues of the Journal
-or elsewhere on this website.}
 
 @LabeledClause{Ada Issues: Tasking and Real-Time}
 
@@ -53,7 +46,7 @@ features and improvements in the high integrity features.
 @leading@;Ada 2005 does indeed make many improvements in the real-time area
 and includes the Ravenscar profile as specifically mentioned. The
 following Ada Issues cover the relevant changes and are described
-in detail in this paper:
+in detail in this chapter:
 
 @begin[Description]
 @begin[Description]@Comment{Second one to indent this}
@@ -115,7 +108,7 @@ A major innovation in the core language is the introduction of synchronized
 interfaces which provide a high degree of unification between the
 object-oriented and real-time aspects of Ada
 (@AILink{AI=[AI95-00345-01],Text=[345]},
-@AILink{AI=[AI95-00397-01],Text=[387]},
+@AILink{AI=[AI95-00397-01],Text=[397]},
 @AILink{AI=[AI95-00399-01],Text=[399]}).
 
 There is of course the introduction of the Ravenscar profile
@@ -150,7 +143,7 @@ H]} which is now entitled High Integrity Systems
 
 Note that further operations for the manipulation of time in child packages of
 @exam[Calendar] (@AILink{AI=[AI95-00351-01],Text=[351]}) will be discussed with
-the predefined library in a later paper @en see @RefSecNum{Times and dates}}.
+the predefined library in a later chapter @en see @RefSecNum{Times and dates}.
 
 
 @LabeledClause{Task termination}
@@ -187,7 +180,7 @@ essentially@Defn{task termination handler}
 (Note that the above includes use clauses in order to simplify the
 presentation; the actual package does not have use clauses. We will
 use a similar approach for the other predefined packages described
-in this paper.)
+in this chapter.)
 
 The general idea is that we can associate a protected procedure with
 a task. The protected procedure is then invoked when the task terminates
@@ -231,19 +224,19 @@ is null, then the fallback handler is invoked unless it too is null.
 If both are null then no handler is invoked.
 
 @leading@;The body of protected procedure @exam[Last_Gasp] might then output
-various diagnostic messages
+various diagnostic messages to a log for later analysis, thus
 @begin[Example]
 @key[procedure] Last_Gasp(C: Cause_Of_Termination; T: Task_Id; X: Exception_Occurrence) @key[is]
 @key[begin]
    @key[case] C @key[is]
       @key[when] Normal => @key[null];
       @key[when] Abnormal =>
-         Put("Something nasty happened to task ");
-         Put_Line(Image(T));
+         Put_Log("Something nasty happened to task ");
+         Put_Log(Image(T));
       @key[when] Unhandled_Exception =>
-         Put("Unhandled exception occurred in task ");
-         Put_Line(Image(T));
-         Put(Exception_Information(X));
+         Put_Log("Unhandled exception occurred in task ");
+         Put_Log(Image(T));
+         Put_Log(Exception_Information(X));
    @key[end case];
 @key[end] Last_Gasp;
 @end[Example]
@@ -353,7 +346,7 @@ We now turn to the most important improvement to the core tasking
 features introduced by Ada 2005. This concerns the coupling of object
 oriented and real-time features through inheritance.
 
-@leading@;Recall from the paper on the object oriented model (see
+@leading@;Recall from the chapter on the object oriented model (see
 @RefSecNum{Interfaces}) that we can declare
 an interface thus
 @begin[Example]
@@ -935,20 +928,58 @@ or protected object without external subprograms.
 @key[end] A_Map;
 @end[Example]
 
-@leading@;There is a fairly obvious rule about private types and synchronized
+@leading@;There is an important rule about tagged private types and synchronized
 interfaces. Both partial and full view must be synchronized or not.
 Thus if we wrote
 @begin[Example]
+@tabset[P49]
 @key[type] SI @key[is synchronized interface];
-@key[type] T @key[is new] SI @key[with private];
+@key[type] T @key[is synchronized new] SI @key[with private];@\-- @examcom[Says synchronized]
 @end[Example]
 
 then the full type @exam[T] has to be a task type or protected type
 or possibly a synchronized, protected or task interface.
 
+@leading@;It is vital that the synchronized property cannot be hidden
+since this would violate privacy. This is
+largely because type extensions of synchronized interfaces and tagged
+concurrent types are not allowed. We musn't
+need to look into the private part to see whether a type extension is allowed.
+Note that the word @key[synchronized] is always given. We could also write
+
+@begin[Example]
+@tabset[P49]
+@key[type] LI @key[is limited interface];
+@key[type] T @key[is synchronized new] LI @key[with private];
+@end[Example]
+
+in which case the ancestor is not synchronized. But the fact that @exam[T]
+is synchronized is clearly visible.
+
+@leading@;It might be remembered that if a private view is untagged then the full view
+might be tagged. In this case type extension is not allowed with the private
+view anyway and so the full type might be synchronized. So we can have (in Ada
+95 as well)
+
+@begin[Example]
+@tabset[P49]
+   @key[type] T @key[is limited private];@\-- @examcom[untagged]
+@key[private]
+   @key[task type] T @key[is] ...@\-- @examcom[synchronized property is hidden]
+@end[Example]
+
+@leading@keepnext@;but we cannot have
+
+@begin[Example]
+@tabset[P49]
+   @key[type] T @key[is abstract tagged limited private];@\-- @examcom[tagged]
+@key[private]
+   @key[type] T @key[is synchronized interface];@\-- @examcom[illegal]
+@end[Example]
+
 @leading@;We conclude this discussion on interfaces by saying a few words about
-the use of the word limited. (Much of this has already been explained
-in the paper on the object oriented model (see @RefSecNum{Interfaces}) but it
+the use of the word @key[limited]. (Much of this has already been explained
+in the chapter on the object oriented model (see @RefSecNum{Interfaces}) but it
 is worth repeating
 in the context of concurrent types.) We always explicitly insert limited,
 synchronized, task, or protected in the case of a limited interface
@@ -963,7 +994,7 @@ whereas in the case of normal types we can write
 @tabset[P42]
 @key[type] LT @key[is limited] ...
 
-@key[type] LT2 @key[is new] LT @key[and] LI @key[with] ...   @\--@examcom[LT2 is limited]
+@key[type] LT2 @key[is new] LT @key[and] LI @key[with] ...@\-- @examcom[LT2 is limited]
 @end[Example]
 
 @leading@;then @exam[LT2] is limited by the normal derivation rules. Types take
@@ -1127,13 +1158,13 @@ object.@Defn2{Term=[restrictions identifier],Sec=[Max_Entry_Queue_Length]}
 
 The identifier @exam[No_Dependence] is not specific to the Real-Time
 Systems annex and is properly described in the next
-paper (see @RefSecNum{Pragmas and Restrictions}).
+chapter (see @RefSecNum{Pragmas and Restrictions}).
 In essence it indicates that the program does not depend upon the given
 language defined package. In this case it means that a program conforming to
 the Ravenscar profile cannot use any of the packages @exam[Asynchronous_Task_Control],
 @exam[Calendar], @exam[Execution_Time.Group_Budget],
 @exam[Execution_Time.Timers] and @exam[Task_Attributes].
-Some of these packages are new and are described later in this paper (see
+Some of these packages are new and are described later in this chapter (see
 @RefSecNum{CPU clocks and timers}).@Defn2{Term=[restrictions identifier],Sec=[No_Dependence]}
 
 Note that @exam[No_Dependence] cannot be used for @exam[No_Dynamic_Attachment]
@@ -1881,7 +1912,6 @@ is@Defn2{Term=[timer],Sec=[real time]}@Defn2{Term=[package],Sec=[Ada.Real_Time.T
    @key[procedure] Set_Handler(Event: @key[in out] Timing_Event; In_Time: Time_Span;
                                Handler: Timing_Event_Handler);
 
-   @key[function] Is_Handler_Set(Event: Timing_Event) @key[return] Boolean;
    @key[function] Current_Handler(Event: Timing_Event) @key[return] Timing_Event_Handler;
    @key[procedure] Cancel_Handler(Event: @key[in out] Timing_Event; Cancelled: @key[out] Boolean);
 
@@ -1909,7 +1939,7 @@ rather than @exam[CPU_Time].
 A minor difference is that this package has a function @exam[Time_Of_Event]
 rather than @exam[Time_Remaining].
 
-@leading@;A simple example was given in the introductory paper. We repeat it
+@leading@;A simple example was given in the introductory chapter. We repeat it
 here for convenience. The idea is that we wish to ring a pinger when
 our egg is boiled after four minutes. The protected procedure might
 be

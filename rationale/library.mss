@@ -1,13 +1,11 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/library.mss,v $)
-@comment($Revision: 1.5 $ $Date: 2006/02/19 06:45:45 $)
+@comment($Revision: 1.6 $ $Date: 2006/04/04 05:49:05 $)
 
 @LabeledSection{Predefined library}
 
-@Subheading{Abstract}
-
-@i{This paper
+@i{This chapter
 describes various improvements to the predefined library in Ada 2005.}
 
 @i{There are a number of important new core packages in Ada 2005. These
@@ -23,12 +21,6 @@ and text input@en@;output packages.}
 
 @i{The Numerics annex now includes vector and matrix operations including
 those previously found in the secondary standard ISO/IEC 13813.}
-
-@i{This is one of a number of papers concerning Ada 2005 which are being
-published in the Ada User Journal. An earlier version of this paper
-appeared in the Ada User Journal, Vol. 26, Number 4, December 2005.
-Other papers in this series will be found in later issues of the Journal
-or elsewhere on this website.}
 
 @LabeledClause{Ada Issues: Predefined library}
 
@@ -54,11 +46,11 @@ The reason for this exhortation is that secondary standards have proved
 themselves to be almost invisible and hence virtually useless.
 
 @leading@;We have already discussed the additional library packages in the area
-of tasking and real time in a previous paper (see @RefSecNum{Task termination},
+of tasking and real time in a previous chapter (see @RefSecNum{Task termination},
 @RefSecNum{Scheduling and dispatching}, and @RefSecNum{CPU clocks and timers}).
 The following Ada issues
 cover the relevant changes in other areas and are described in detail
-in this paper:
+in this chapter:
 
 @begin[Description]
 @begin[Description]@Comment{Second one to indent this}
@@ -106,7 +98,7 @@ in this paper:
 
 These changes can be grouped as follows.
 
-First the container library is rather extensive and merits a whole paper alone
+First the container library is rather extensive and merits a whole chapter alone
 (@AILink{AI=[AI95-00302-03],Text=[302]}). We only refer to it here for
 completeness.
 
@@ -155,7 +147,7 @@ exclusion (@AILink{AI=[AI95-00441-01],Text=[441]}).
 
 
 This is a huge addition to the language and is described in a separate
-paper (see @RefSecNum{Containers}) for convenience.
+chapter (see @RefSecNum{Containers}) for convenience.
 
 
 @LabeledClause{Times and dates}
@@ -2009,7 +2001,7 @@ predefined interface if another interface would be more appropriate
 
 
 Important improvements to the control of streams were described in
-the paper on the object oriented model where we discussed the new
+the chapter on the object oriented model where we discussed the new
 package @exam[Ada.Tags.Generic_Dispatching_Constructor] (see
 @RefSecNum{Object factory functions}) and various changes to the parent
 package @exam[Ada.Tags] itself. In this section we mention two other changes.
@@ -2072,6 +2064,6 @@ since in Ada 95 passing null raises @exam[Constraint_Error] anyway
 and so this change just clarifies the situation.
 
 On this dullish but important topic here endeth the Rationale for
-Ada 2005 apart from various exciting appendices and an extensive subpaper
+Ada 2005 apart from various exciting appendices and an extensive chapter
 on containers (see @RefSecNum{Containers}, or just press the Next button below).
 

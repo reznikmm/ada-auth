@@ -1,13 +1,11 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/general.mss,v $)
-@comment($Revision: 1.6 $ $Date: 2006/02/19 06:45:45 $)
+@comment($Revision: 1.7 $ $Date: 2006/04/04 05:49:02 $)
 
 @LabeledSection{Exceptions, generics etc}
 
-@Subheading{Abstract}
-
-@i{This paper
+@i{This chapter
 describes various improvements in a number of general areas in Ada
 2005.}
 
@@ -23,20 +21,14 @@ mostly of a safety-related nature.}
 @i{Finally there are a number of improvements in the generics area such
 as better control of partial parameters of formal packages. }
 
-@i{This is one of a number of papers concerning Ada 2005 which are being
-published in the Ada User Journal. An earlier version of this paper
-appeared in the Ada User Journal, Vol. 26, Number 3, September 2005.
-Other papers in this series will be found in later issues of the Journal
-or elsewhere on this website.}
-
 @LabeledClause{Ada Issues: Exceptions, generics, etc}
 
-The areas mentioned in this paper are not specifically mentioned in
+The areas mentioned in this chapter are not specifically mentioned in
 the WG9 guidance document @LocalLink{Target=[R1],Sec=[References],Text={[1]}}
 other than under the request to remedy shortcomings and improve interfacing.
 
 @leading@;The following Ada Issues cover the relevant changes and are described
-in detail in this paper.
+in detail in this chapter.
 
 @begin[Description]
 @begin[Description]@Comment{Second one to indent this}
@@ -138,7 +130,7 @@ These generally make for more reliable programming. The pragmas are:
 @AILink{AI=[AI95-00368-01],Text=[368]},
 @AILink{AI=[AI95-00381-01],Text=[381]}). Note that there are also other new
 pragmas and new restrictions identifiers concerned with tasking as described in
-the previous paper (see @RefSecNum{The Ravenscar profile}). However, the
+the previous chapter (see @RefSecNum{The Ravenscar profile}). However, the
 introduction of @exam[No_Dependence] means that the identifiers
 @exam[No_Asynchronous_Control], @exam[No_Unchecked_Conversion] and
 @exam[No_Unchecked_Deallocation] are now obsolescent
@@ -147,7 +139,7 @@ introduction of @exam[No_Dependence] means that the identifiers
 Finally there are changes in generic units. There are changes in generic
 parameters which are consequences of changes in other areas such as the
 introduction of interfaces and dispatching constructors as described in the
-paper on the object oriented model (parts of
+chapter on the object oriented model (parts of
 @AILink{AI=[AI95-00251-01],Text=[251]} and
 @AILink{AI=[AI95-00260-02],Text=[260]}); there are also changes to formal
 access and derived types (@AILink{AI=[AI95-00419-01],Text=[419]},
@@ -716,7 +708,7 @@ so the only relevant operations are those we have declared.
 
 It is interesting to compare this with the corresponding solution
 using floating point where we would need to make the unwanted predefined
-operations abstract as discussed in an earlier paper
+operations abstract as discussed in an earlier chapter
 (see @RefSecNum{Overriding and overloading}).
 
 It is hoped that the reader has not found this discussion to be too
@@ -726,14 +718,14 @@ the problems with Ada 95 have been resolved.
 
 There are a number of other improvements in the numerics area but
 these concern the Numerics annex and so will be discussed in a later
-paper (see @RefSecNum{Numerics annex}).
+chapter (see @RefSecNum{Numerics annex}).
 
 
 @LabeledClause{Pragmas and Restrictions}
 
 
 Ada 2005 introduces a number of new pragmas and @exam[Restrictions]
-identifiers. Many of these were described in the previous paper when
+identifiers. Many of these were described in the previous chapter when
 discussing tasking and the Real-Time and High Integrity annexes (see
 @RefSecNum{The Ravenscar profile}). For
 convenience here is a complete list giving the annex if appropriate.
@@ -773,7 +765,7 @@ Simple_Barriers@\@examcom[Real-Time]
 
 We will now discuss in detail the pragmas and @exam[Restrictions]
 identifiers in the core language and so not discussed in the previous
-paper.
+chapter.
 
 @leading@Defn{Assert pragma}@Defn2{Term=[pragma],Sec=[Assert]}@Defn{Assertion_Policy pragma}@Defn2{Term=[pragma],Sec=[Assertion_Policy]}@;First
 there is the pragma @exam[Assert] and the associated pragma
@@ -1056,7 +1048,7 @@ This pragma concerns the categorization of library units and is related
 to pragmas such as @exam[Pure] and @exam[Preelaborate]. It is used
 with a private type and promises that the full type given by the parameter
 will indeed have preelaborable initialization. The details of its
-use will be explained in the next paper (see @RefSecNum{Categorization of library units}).
+use will be explained in the next chapter (see @RefSecNum{Categorization of library units}).
 
 @leading@Defn{Unchecked_Union pragma}@Defn2{Term=[pragma],Sec=[Unchecked_Union]}Another
 new pragma is @exam[Unchecked_Union]. The syntax is
@@ -1379,7 +1371,7 @@ implementation defined.
 
 
 There are a number of improvements in the area of generics many of
-which have already been outlined in earlier papers.
+which have already been outlined in earlier chapters.
 
 @leading@;A first point concerns access types. The introduction of types that
 exclude null means that a formal access type parameter can take the
@@ -1410,7 +1402,7 @@ sorts of difficulties could arise.
 if @exam[A] excludes null and vice versa. Half of this rule is automatically
 enforced since a type derived from a type that excludes null will
 automatically exclude null. But the reverse is not true as mentioned
-in an earlier paper (see @RefSecNum{Null exclusion and constant}) when
+in an earlier chapter (see @RefSecNum{Null exclusion and constant}) when
 discussing access types. If @exam[A] has the declaration
 @begin[Example]
 @tabset[P35]
@@ -1428,7 +1420,7 @@ and then @exam[NA] matches the formal parameter @exam[FA] in the above
 generic but @exam[NNA] does not.
 
 @leading@;There is also a change to formal derived types concerning limitedness.
-In line with the changes described in the paper on the object oriented
+In line with the changes described in the chapter on the object oriented
 model (see @RefSecNum{Interfaces}), the syntax now permits @key[limited]
 to be stated explicitly thus
 @begin[Example]
@@ -1504,7 +1496,7 @@ should not be permitted.
 
 @leading@;There are some other changes to existing named formal subprogram parameters.
 The reader will recall from the discussion on interfaces in an earlier
-paper (see @RefSecNum{Interfaces}) that the concept of null procedures
+chapter (see @RefSecNum{Interfaces}) that the concept of null procedures
 has been added in Ada 2005.@Defn2{Term=[null procedure],Sec=[formal parameter default]}
 A null procedure has no body but behaves as if it has a body comprising
 a null statement. It is now possible to use a null procedure as a
@@ -1545,7 +1537,7 @@ Of course, there is no such thing as a null function and so null is
 not permitted as the default for a formal function.
 
 @leading@;A new kind of subprogram parameter was introduced in some detail
-when discussing object factory functions in the paper on the object oriented
+when discussing object factory functions in the chapter on the object oriented
 model (see @RefSecNum{Object factory functions}). This is the abstract
 formal subprogram.@Defn{abstract formal subprogram} The example given was
 the predefined generic function @exam[Generic_Dispatching_Constructor]
@@ -1640,7 +1632,7 @@ formal parameters. Also we can explicitly state @key[limited] in which
 case all of the ancestor types must also be limited.
 
 @leading@;An example of this sort of structure occurred when discussing
-printable geometric objects in the paper on the object oriented model
+printable geometric objects in the chapter on the object oriented model
 (see @RefSecNum{Interfaces}). We had
 @begin[Example]
 @key[generic]
@@ -1669,7 +1661,7 @@ package to take any of these interfaces thus
 A formal interface can also be marked as limited in which case the
 actual interface must also be limited and vice versa.
 
-@leading@;As discussed in the previous paper (see
+@leading@;As discussed in the previous chapter (see
 @RefSecNum{Synchronized interfaces}),
 interfaces can also be synchronized, task, or protected. Thus we might have
 @begin[Example]
@@ -1680,7 +1672,7 @@ interfaces can also be synchronized, task, or protected. Thus we might have
 and then the actual interface must itself be a task interface. The
 correspondence must be exact. A formal synchronized interface can
 only be matched by an actual synchronized interface and so on. Remember
-from the discussion in the previous paper (see @RefSecNum{Synchronized interfaces})
+from the discussion in the previous chapter (see @RefSecNum{Synchronized interfaces})
 that a task interface can
 be composed from a synchronized interface. This flexibility does not
 extend to matching actual and formal generic parameters.
@@ -1708,7 +1700,7 @@ assignment and so is not permitted for limited types.@Defn[limited generic forma
 
 @leading@;However, in Ada 2005, initialization of a limited object by an
 aggregate is allowed since the value is created @i[in situ] as discussed in an
-earlier paper (see @RefSecNum{Limited types and return statements}). So an
+earlier chapter (see @RefSecNum{Limited types and return statements}). So an
 instantiation is possible thus
 @begin[Example]
 @key[procedure] Q @key[is new] P(X => (A => 1, B => 2.0), ... );
@@ -1757,7 +1749,7 @@ However, the mechanism does not work very well when several parameters
 are involved as will now be illustrated with some examples.
 
 @leading@;The first example concerns using the new container library which will
-be discussed in some detail in a later paper (see @RefSecNum{Containers}).
+be discussed in some detail in a later chapter (see @RefSecNum{Containers}).
 There are generic packages such as
 @begin[Example]
 @key[generic]

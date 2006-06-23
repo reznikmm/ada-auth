@@ -1,13 +1,11 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/struct.mss,v $)
-@comment($Revision: 1.4 $ $Date: 2006/02/19 06:45:45 $)
+@comment($Revision: 1.5 $ $Date: 2006/04/04 05:49:07 $)
 
 @LabeledSection{Structure and visibility}
 
-@Subheading{Abstract}
-
-@i{This paper
+@i{This chapter
 describes various improvements in the areas of structure and visibility
 for Ada 2005.}
 
@@ -19,12 +17,6 @@ just provides access from a private part.}
 @i{There are also important improvements to limited types which make
 them much more useful; these include initialization with aggregates
 and composition using a new form of return statement.}
-
-@i{This is one of a number of papers concerning Ada 2005 which are being
-published in the Ada User Journal. An earlier version of this paper
-appeared in the Ada User Journal, Vol. 26, Number 2, June 2005. Other
-papers in this series will be found in later issues of the Journal
-or elsewhere on this website.}
 
 @LabeledClause{Ada Issues: Structure and visibility}
 
@@ -44,7 +36,7 @@ OO is largely about structure and visibility and so further improvements
 and in particular those that remedy shortcomings are desirable.
 
 The following Ada Issues cover the relevant changes and are described
-in detail in this paper:
+in detail in this chapter:
 
 @begin[Description]
 @begin[Description]@Comment{Second one to indent this}
@@ -136,7 +128,7 @@ of finite geometries, the Fano plane.)
    @key[end record];
 @end[Example]
 
-@leading@;Of course, in Ada 2005, as discussed in the previous paper
+@leading@;Of course, in Ada 2005, as discussed in the previous chapter
 (see @RefSecNum{Anonymous access types}), we can
 use anonymous access types more freely so that the second stage can
 be omitted in this example. As a consequence the complete declarations
@@ -566,7 +558,7 @@ So we can write
 around but we can introduce some subtypes in order to shorten the
 names. We can also avoid the introduction of the type @exam[Dept_Ptr]
 since we can use an anonymous access type for the function result
-as mentioned in the previous paper (see @RefSecNum{Anonymous access types}).
+as mentioned in the previous chapter (see @RefSecNum{Anonymous access types}).
 So we get
 @begin[Example]
 @key[limited with] Departments;
@@ -1776,7 +1768,7 @@ either by its subtype or by its initial value. Thus
 @end[Example]
 
 @leading@;The other important change to the result of functions which was
-discussed in the previous paper (see @RefSecNum{Anonymous access types}) is
+discussed in the previous chapter (see @RefSecNum{Anonymous access types}) is
 that the result type can be of an anonymous
 access type. So we can write a function such as
 @begin[Example]

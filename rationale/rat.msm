@@ -49,6 +49,7 @@
 
 @Comment{Source files and related items, in collating order}
 @Source{Name=<Title.MSS>,SectionName=<TTL>,SectionNumber=[0],NewSection=[T]}
+@Source{Name=<Preface.MSS>,SectionName=<00>,SectionNumber=[0],NewSection=[T]}
 @TOC @Comment{The table of contents goes here in the collating order}
 @Source{Name=<Intro.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[T]}
 @Source{Name=<Oop.MSS>,SectionName=<02>,SectionNumber=[2],NewSection=[T]}
