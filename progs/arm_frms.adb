@@ -379,6 +379,104 @@ procedure Scan (Format_Object : in out Format_Type;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
 	        end;
 
+	    when Syntax_Rule | Added_Syntax_Rule | Deleted_Syntax_Rule =>
+		-- @Syn{[Tabs=<Tabset>, ]LHS=<Non-terminal>, RHS=<Production>}
+		-- @AddedSyn{Version=[<Version>],[Tabs=<Tabset>, ]LHS=<Non-terminal>, RHS=<Production>}
+		-- @DeletedSyn{Version=[<Version>],[Tabs=<Tabset>, ]LHS=<Non-terminal>, RHS=<Production>}
+		-- We need to index the non-terminal, so we can link to it
+		-- later. (If we didn't do this here, we wouldn't be able
+		-- to handle forward references.)
+		-- We only care about the non-terminal, so we skip the other
+		-- parts.
+		declare
+		    Close_Ch, Ch : Character;
+		    Seen_First_Param : Boolean := False;
+		    Non_Terminal : String (1..120);
+		    NT_Len : Natural := 0;
+		begin
+		    if Nesting_Stack(Nesting_Stack_Ptr).Command /= Syntax_Rule then
+			-- Get and skip the Version parameter.
+			Seen_First_Param := True;
+			Get_Change_Version (Is_First => True,
+					    Version => Ch);
+		    end if;
+
+		    -- Peek to see if Tabs parmeter is present, and skip it if
+		    -- it is:
+		    ARM_File.Get_Char (Input_Object, Ch);
+		    ARM_File.Replace_Char (Input_Object);
+		    if Ch = 'T' or else Ch = 't' then
+			ARM_Input.Check_Parameter_Name (Input_Object,
+			   Param_Name => "Tabs" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+			   Is_First => (not Seen_First_Param),
+			   Param_Close_Bracket => Close_Ch);
+			Seen_First_Param := True;
+			if Close_Ch /= ' ' then
+			    -- Grab the tab string:
+			    ARM_Input.Skip_until_Close_Char (
+			        Input_Object,
+			        Close_Ch);
+			-- else no parameter. Weird.
+			end if;
+		    end if;
+
+		    -- Get the LHS parameter and save it:
+		    ARM_Input.Check_Parameter_Name (Input_Object,
+			Param_Name => "LHS" & (4..ARM_Input.Command_Name_Type'Last => ' '),
+			Is_First => (not Seen_First_Param),
+		        Param_Close_Bracket => Close_Ch);
+		    if Close_Ch /= ' ' then
+		        -- Copy over the non-terminal:
+		        ARM_Input.Copy_to_String_until_Close_Char (
+		            Input_Object,
+		            Close_Ch,
+		            Non_Terminal,
+	                    NT_Len);
+		    -- else no parameter. Weird.
+		    end if;
+
+		    -- Skip the RHS parameter:
+		    ARM_Input.Check_Parameter_Name (Input_Object,
+		       Param_Name => "RHS" & (4..ARM_Input.Command_Name_Type'Last => ' '),
+		       Is_First => False,
+		       Param_Close_Bracket => Close_Ch);
+		    Seen_First_Param := True;
+		    if Close_Ch /= ' ' then
+		        -- Grab the tab string:
+		        ARM_Input.Skip_until_Close_Char (
+			    Input_Object,
+			    Close_Ch);
+		    -- else no parameter. Weird.
+		    end if;
+
+		    declare
+			The_Non_Terminal : constant String :=
+			    Ada.Characters.Handling.To_Lower (
+				Get_Current_Item (Format_Object, Input_Object,
+				    Non_Terminal(1..NT_Len))); -- Handle embedded @Chg.
+		    begin
+			if Ada.Strings.Fixed.Index (The_Non_Terminal, "@") /= 0 then
+			    -- Still embedded commands, do not register.
+			    Ada.Text_IO.Put_Line ("** Saw Non-Terminal with embedded commands: " &
+				Non_Terminal(1..NT_Len) & " in " & Clause_String (Format_Object));
+			elsif The_Non_Terminal = "" then
+			    null; -- Delete Non-Terminal, nothing to do.
+			else
+			    -- Save the non-terminal:
+			    declare
+			        Link_Target : ARM_Syntax.Target_Type;
+			    begin
+			         ARM_Syntax.Add_Non_Terminal
+			             (NT_Name => The_Non_Terminal,
+			              For_Clause => Clause_String (Format_Object),
+			              Link_Target => Link_Target);
+			    end;
+--Ada.Text_IO.Put_Line ("%% Saw simple Non-Terminal: " & The_Non_Terminal & " in "
+--   & Clause_String (Format_Object));
+			end if;
+		    end;
+		end;
+
 	    when others =>
 	        null; -- Not in scanner.
         end case;

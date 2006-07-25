@@ -945,6 +945,134 @@ package body ARM_Format is
     end Command;
 
 
+    function Clause_String (Format_Object : in Format_Type) return String is
+        -- Returns a string for a clause reference.
+        use type ARM_Contents.Section_Number_Type;
+    begin
+        if Format_Object.Subclause /= 0 then
+	    return ARM_Contents.Make_Clause_Number (
+		    ARM_Contents.SubClause,
+		    Format_Object.Section,
+		    Format_Object.Clause,
+		    Format_Object.Subclause);
+        elsif Format_Object.Clause /= 0 then
+	    return ARM_Contents.Make_Clause_Number (
+		    ARM_Contents.Clause,
+		    Format_Object.Section,
+		    Format_Object.Clause);
+        else
+	    if Format_Object.Section = 0 then
+	        return ARM_Contents.Make_Clause_Number (
+		        ARM_Contents.Unnumbered_Section, 0);
+	    elsif Format_Object.Section <= 20 then
+	        return ARM_Contents.Make_Clause_Number (
+		        ARM_Contents.Section,
+		        Format_Object.Section);
+	    else
+	        return ARM_Contents.Make_Clause_Number (
+		        ARM_Contents.Normative_Annex,
+		        Format_Object.Section);
+	    end if;
+        end if;
+    end Clause_String;
+
+
+    function Get_Current_Item (Format_Object : in Format_Type;
+			       Input_Object : in ARM_Input.Input_Type'Class;
+			       Item : in String) return String is
+        -- Return the "current" item from Item. This is Item itself,
+	-- unless Item includes an @Chg.
+	New_Pos : Natural;
+        Close_Ch : Character;
+        Open_Cnt : Natural;
+	My_Item : constant String (1 .. Item'Length) := Item;
+		-- Just to slide the bounds.
+    begin
+        if My_Item'Length < 11 or else
+	   My_Item (1) /= '@' or else
+	   Ada.Characters.Handling.To_Lower (My_Item (2 .. 4)) /= "chg" then
+	    -- No @Chg command here.
+	    return My_Item;
+	end if;
+	if Ada.Characters.Handling.To_Lower (My_Item (6 .. 9)) = "new=" then
+	    -- No version parameter:
+	    New_Pos := 6;
+	elsif My_Item'Length > 22 and then
+	    Ada.Characters.Handling.To_Lower (My_Item (6 .. 14)) = "version=[" and then
+	    Ada.Characters.Handling.To_Lower (My_Item (16 .. 21)) = "],new=" then
+	    New_Pos := 18;
+	else
+Ada.Text_IO.Put_Line ("%% Oops, can't find either Version or New in item chg command, line " & ARM_Input.Line_String (Input_Object));
+	    return My_Item;
+	end if;
+        if Format_Object.Changes = Old_Only then
+	    -- Find the end of the "New" parameter, and return it.
+	    Close_Ch := ARM_Input.Get_Close_Char (
+	        My_Item(New_Pos+4));
+	    Open_Cnt := 1;
+	    for I in New_Pos+5 .. My_Item'Last loop
+	        if My_Item(I) = My_Item(New_Pos+4) then
+		    Open_Cnt := Open_Cnt + 1;
+	        elsif My_Item(I) = Close_Ch then
+		    if Open_Cnt <= 1 then
+		        -- OK, the end of the "New" parameter is at 'I'.
+		        if My_Item'Last < I+7 or else
+			   My_Item (I+1) /= ',' or else
+			   Ada.Characters.Handling.To_Lower (My_Item (I+2 .. I+4)) /= "old" or else
+			   My_Item (I+5) /= '=' then
+			    exit; -- Heck if I know.
+		        end if;
+		        Close_Ch := ARM_Input.Get_Close_Char (
+			    My_Item(I+6));
+		        Open_Cnt := 1;
+		        for J in I+7 .. My_Item'Last loop
+			    if My_Item(J) = My_Item(I+6) then
+			        Open_Cnt := Open_Cnt + 1;
+			    elsif My_Item(J) = Close_Ch then
+			        if Open_Cnt <= 1 then
+				    return My_Item (I + 7 .. J - 1);
+			        else
+				    Open_Cnt := Open_Cnt - 1;
+			        end if;
+			    -- else continue looking.
+			    end if;
+		        end loop;
+Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg old command, line " & ARM_Input.Line_String (Input_Object));
+		        return My_Item (I + 7 .. My_Item'Last);
+		    else
+		        Open_Cnt := Open_Cnt - 1;
+		    end if;
+	        -- else continue looking.
+	        end if;
+	    end loop;
+Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " & ARM_Input.Line_String (Input_Object));
+	    return My_Item (New_Pos+5 .. My_Item'Length);
+        else -- Some new format, use the new name.
+	    -- Note: We should really use the version here, but that gets
+	    -- really messy.
+	    -- Find the end of the "New" parameter, and
+	    -- return it.
+	    Close_Ch := ARM_Input.Get_Close_Char (My_Item(New_Pos+4));
+	    Open_Cnt := 1;
+	    for I in New_Pos+5 .. My_Item'Last loop
+	        if My_Item(I) = My_Item(New_Pos+4) then
+		    Open_Cnt := Open_Cnt + 1;
+	        elsif My_Item(I) = Close_Ch then
+		    if Open_Cnt <= 1 then
+		        return My_Item (New_Pos+5 .. I - 1);
+		    else
+		        Open_Cnt := Open_Cnt - 1;
+		    end if;
+	        -- else continue looking.
+	        end if;
+	    end loop;
+	    -- Weird if we get here, can't find end of parameter.
+Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & ARM_Input.Line_String (Input_Object));
+	    return My_Item (New_Pos+5 .. My_Item'Last);
+        end if;
+    end Get_Current_Item;
+
+
     procedure Scan (Format_Object : in out Format_Type;
 		    File_Name : in String;
 		    Section_Number : in ARM_Contents.Section_Number_Type;
@@ -1356,38 +1484,6 @@ package body ARM_Format is
 		 Prev_Old_Change_Version => '0'); -- Not used.
 --Ada.Text_IO.Put_Line (" &Stack (Parameter)");
 	end Set_Nesting_for_Parameter;
-
-
-        function Clause_String return String is
-	    -- Returns a string for a clause reference.
-	    use type ARM_Contents.Section_Number_Type;
-        begin
-	    if Format_Object.Subclause /= 0 then
-	        return ARM_Contents.Make_Clause_Number (
-		        ARM_Contents.SubClause,
-		        Format_Object.Section,
-		        Format_Object.Clause,
-		        Format_Object.Subclause);
-	    elsif Format_Object.Clause /= 0 then
-	        return ARM_Contents.Make_Clause_Number (
-		        ARM_Contents.Clause,
-		        Format_Object.Section,
-		        Format_Object.Clause);
-	    else
-		if Format_Object.Section = 0 then
-	            return ARM_Contents.Make_Clause_Number (
-		            ARM_Contents.Unnumbered_Section, 0);
-		elsif Format_Object.Section <= 20 then
-	            return ARM_Contents.Make_Clause_Number (
-		            ARM_Contents.Section,
-		            Format_Object.Section);
-		else
-	            return ARM_Contents.Make_Clause_Number (
-		            ARM_Contents.Normative_Annex,
-		            Format_Object.Section);
-		end if;
-	    end if;
-        end Clause_String;
 
 
         function Is_AARM_Paragraph (Kind : in Paragraph_Type) return Boolean is
@@ -2946,7 +3042,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		    Subterm => Entity(1..Len) & " in " &
 			      Format_Object.Unit(1..Format_Object.Unit_Len),
 	            Kind => ARM_Index.SubDeclaration_in_Package,
-		    Clause => Clause_String,
+		    Clause => Clause_String (Format_Object),
 		    Paragraph => Paragraph_String,
 		    Key => Key);
 		    -- Note that the Subdeclaration type changes the
@@ -2964,7 +3060,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	        Term => Entity(1..Len),
 	        Subterm => Format_Object.Unit(1..Format_Object.Unit_Len),
 	        Kind => ARM_Index.Declaration_in_Package,
-	        Clause => Clause_String,
+	        Clause => Clause_String (Format_Object),
 	        Paragraph => Paragraph_String,
 	        Key => Key);
 
@@ -2973,7 +3069,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		Entity => Entity(1..Len),
 		From_Unit => Format_Object.Unit(1..Format_Object.Unit_Len),
 		Kind => ARM_Subindex.In_Unit,
-		Clause => Clause_String,
+		Clause => Clause_String (Format_Object),
 		Paragraph => Paragraph_String,
 		Key => Key);
 
@@ -3037,7 +3133,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		    Term => Child(1..CLen),
 		    Subterm => Parent(1..PLen),
 		    Kind => ARM_Index.Child_Unit_Parent,
-		    Clause => Clause_String,
+		    Clause => Clause_String (Format_Object),
 		    Paragraph => Paragraph_String,
 		    Key => Key);
 
@@ -3057,7 +3153,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		    Term => "Language-Defined Library Units",
 		    Subterm => Parent(1..PLen) & '.' & Child(1..CLen),
 		    Kind => ARM_Index.Primary_Term_and_Subterm,
-		    Clause => Clause_String,
+		    Clause => Clause_String (Format_Object),
 		    Paragraph => Paragraph_String,
 		    Key => Key);
 	    elsif Disposition = ARM_Output.Deletion then
@@ -3069,7 +3165,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	    ARM_Index.Add_Reusing_Key (
 		    Term => Parent(1..PLen) & '.' & Child(1..CLen),
 		    Kind => ARM_Index.Primary_Term,
-		    Clause => Clause_String,
+		    Clause => Clause_String (Format_Object),
 		    Paragraph => Paragraph_String,
 		    Key => Key);
 
@@ -3078,7 +3174,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		    Entity => Child(1..CLen),
 		    From_Unit => Parent(1..PLen),
 		    Kind => ARM_Subindex.Child_of_Parent,
-		    Clause => Clause_String,
+		    Clause => Clause_String (Format_Object),
 		    Paragraph => Paragraph_String,
 		    Key => Key);
 
@@ -3500,92 +3596,9 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	        -- Local routine:
 	        -- Return the "current" non-terminal from
 	        -- the Syntax_NT string. Handles @Chg.
-		New_Pos : Natural;
-	        Close_Ch : Character;
-	        Open_Cnt : Natural;
 	    begin
-	        if Format_Object.Syntax_NT_Len < 11 or else
-		   Format_Object.Syntax_NT (1) /= '@' or else
-		   Ada.Characters.Handling.To_Lower (Format_Object.Syntax_NT (2 .. 4)) /= "chg" then
-		    -- No @Chg command here.
-		    return Format_Object.Syntax_NT (1 .. Format_Object.Syntax_NT_Len);
-		end if;
-		if Ada.Characters.Handling.To_Lower (Format_Object.Syntax_NT (6 .. 9)) = "new=" then
-		    -- No version parameter:
-		    New_Pos := 6;
-		elsif Format_Object.Syntax_NT_Len > 22 and then
-		    Ada.Characters.Handling.To_Lower (Format_Object.Syntax_NT (6 .. 14)) = "version=[" and then
-		    Ada.Characters.Handling.To_Lower (Format_Object.Syntax_NT (16 .. 21)) = "],new=" then
-		    New_Pos := 18;
-		else
-Ada.Text_IO.Put_Line ("%% Oops, can't either Version or New in NT chg command, line " & ARM_Input.Line_String (Input_Object));
-		    return Format_Object.Syntax_NT (1 .. Format_Object.Syntax_NT_Len);
-		end if;
-	        if Format_Object.Changes = Old_Only then
-		    -- Find the end of the "New" parameter, and
-		    -- return it.
-		    Close_Ch := ARM_Input.Get_Close_Char (
-		        Format_Object.Syntax_NT(New_Pos+4));
-		    Open_Cnt := 1;
-		    for I in New_Pos+5 .. Format_Object.Syntax_NT_Len loop
-		        if Format_Object.Syntax_NT(I) = Format_Object.Syntax_NT(New_Pos+4) then
-			    Open_Cnt := Open_Cnt + 1;
-		        elsif Format_Object.Syntax_NT(I) = Close_Ch then
-			    if Open_Cnt <= 1 then
-			        -- OK, the end of the "New" parameter is at 'I'.
-			        if Format_Object.Syntax_NT_Len < I+7 or else
-				   Format_Object.Syntax_NT (I+1) /= ',' or else
-				   Ada.Characters.Handling.To_Lower (Format_Object.Syntax_NT (I+2 .. I+4)) /= "old" or else
-				   Format_Object.Syntax_NT (I+5) /= '=' then
-				    exit; -- Heck if I know.
-			        end if;
-			        Close_Ch := ARM_Input.Get_Close_Char (
-				    Format_Object.Syntax_NT(I+6));
-			        Open_Cnt := 1;
-			        for J in I+7 .. Format_Object.Syntax_NT_Len loop
-				    if Format_Object.Syntax_NT(J) = Format_Object.Syntax_NT(I+6) then
-				        Open_Cnt := Open_Cnt + 1;
-				    elsif Format_Object.Syntax_NT(J) = Close_Ch then
-				        if Open_Cnt <= 1 then
-					    return Format_Object.Syntax_NT (I + 7 .. J - 1);
-				        else
-					    Open_Cnt := Open_Cnt - 1;
-				        end if;
-				    -- else continue looking.
-				    end if;
-			        end loop;
-Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg old command, line " & ARM_Input.Line_String (Input_Object));
-			        return Format_Object.Syntax_NT (I + 7 .. Format_Object.Syntax_NT_Len);
-			    else
-			        Open_Cnt := Open_Cnt - 1;
-			    end if;
-		        -- else continue looking.
-		        end if;
-		    end loop;
-Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & ARM_Input.Line_String (Input_Object));
-		    return Format_Object.Syntax_NT (New_Pos+5 .. Format_Object.Syntax_NT_Len);
-	        else -- Some new format, use the new name.
-		    -- Find the end of the "New" parameter, and
-		    -- return it.
-		    Close_Ch := ARM_Input.Get_Close_Char (
-		        Format_Object.Syntax_NT(New_Pos+4));
-		    Open_Cnt := 1;
-		    for I in New_Pos+5 .. Format_Object.Syntax_NT_Len loop
-		        if Format_Object.Syntax_NT(I) = Format_Object.Syntax_NT(New_Pos+4) then
-			    Open_Cnt := Open_Cnt + 1;
-		        elsif Format_Object.Syntax_NT(I) = Close_Ch then
-			    if Open_Cnt <= 1 then
-			        return Format_Object.Syntax_NT (New_Pos+5 .. I - 1);
-			    else
-			        Open_Cnt := Open_Cnt - 1;
-			    end if;
-		        -- else continue looking.
-		        end if;
-		    end loop;
-		    -- Weird if we get here, can't find end of parameter.
-Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & ARM_Input.Line_String (Input_Object));
-		    return Format_Object.Syntax_NT (New_Pos+5 .. Format_Object.Syntax_NT_Len);
-	        end if;
+		return Get_Current_Item (Format_Object, Input_Object,
+		    Format_Object.Syntax_NT (1 .. Format_Object.Syntax_NT_Len));
 	    end Get_NT;
 
 
@@ -4056,28 +4069,34 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		    -- Index the non-terminal:
 		    ARM_Index.Add (Term => Get_NT,
 				   Kind => ARM_Index.Primary_Term,
-				   Clause => Clause_String,
+				   Clause => Clause_String (Format_Object),
 				   Paragraph => Paragraph_String,
 				   Key => Key);
 		    ARM_Output.Index_Target (Output_Object, Key);
 
-		    -- Save the non-terminal:
-		    declare
-			Link_Target : ARM_Syntax.Target_Type;
-		    begin
-			-- Note: This really needs to be done in the *first*
-			-- pass; otherwise forward references don't work.
-			ARM_Syntax.Add_Non_Terminal
-			    (NT_Name => Get_NT,
-			     For_Clause => Clause_String,
-			     Link_Target => Link_Target);
-			if Format_Object.Link_Non_Terminals then
-		            ARM_Output.Local_Target (Output_Object,
-			        Text => "",
-			        Target => Link_Target);
-			-- else don't link.
-			end if;
-		    end;
+		    -- Make an anchor for the non-terminal:
+		    if Format_Object.Link_Non_Terminals then
+		        declare
+			    Lower_NT : constant String :=
+				Ada.Characters.Handling.To_Lower (Get_NT);
+			    Link_Target : ARM_Syntax.Target_Type :=
+			        ARM_Syntax.Non_Terminal_Link_Target (Lower_NT);
+		        begin
+			    if Lower_NT /= "" then
+			        if Clause_String (Format_Object) /=
+				    ARM_Syntax.Non_Terminal_Clause (Lower_NT) then
+			            Ada.Text_IO.Put_Line ("  ** Clause mismatch for non-terminal: Is=" &
+				        Clause_String (Format_Object) & "; Was=" & ARM_Syntax.Non_Terminal_Clause (Lower_NT) &
+				        "; NT=" & Lower_NT & "; on line " & ARM_Input.Line_String (Input_Object));
+			        end if;
+		                ARM_Output.Local_Target (Output_Object,
+			            Text => "",
+			            Target => Link_Target);
+			    -- else the Non-Terminal was deleted, no
+			    -- anchor is needed.
+			    end if;
+			end;
+		    end if;
 
 		    -- Set the font for the "::=". Note that we use @s{}
 		    -- above, so that any font changes in the Non-Terminal
@@ -4404,16 +4423,29 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					           No_Annotations => False);
 				Format_Object.Font := Org_Font;
 			    end;
+			    if Format_Object.Link_Non_Terminals then
+			        Ada.Text_IO.Put_Line ("  %% Non-terminal with embedded commands (" &
+				    Name(1..Len) & "), no link possible; on line " & ARM_Input.Line_String (Input_Object));
+			    end if;
 			elsif Format_Object.Link_Non_Terminals then
 			    declare
+				Lower_NT : constant String :=
+				    Ada.Characters.Handling.To_Lower (Name(1..Len));
 				Clause : constant String :=
-				    ARM_Syntax.Non_Terminal_Clause (Name(1..Len));
+				    ARM_Syntax.Non_Terminal_Clause (Lower_NT);
 				Target : constant ARM_Syntax.Target_Type :=
-				    ARM_Syntax.Non_Terminal_Link_Target (Name(1..Len));
+				    ARM_Syntax.Non_Terminal_Link_Target (Lower_NT);
 			    begin
 				if Clause = "" then -- Not found. No link, but error message:
-				    Ada.Text_IO.Put_Line ("  ?? Unknown non-terminal " &
-					Name(1..Len) & " on line " & ARM_Input.Line_String (Input_Object));
+				    if Lower_NT'Length > 3 and then
+					Lower_NT(Lower_NT'Last-2..Lower_NT'Last) = "::=" then
+					-- The syntax summary starts with "NT ::="; no error (and no
+					-- link wanted).
+					null;
+				    else
+					Ada.Text_IO.Put_Line ("  ?? Unknown non-terminal " &
+					    Name(1..Len) & " on line " & ARM_Input.Line_String (Input_Object));
+				    end if;
 				    ARM_Output.Ordinary_Text (Output_Object, Name(1..Len));
 				else
 				    ARM_Output.Local_Link (Output_Object, Text => Name(1..Len),
@@ -4982,7 +5014,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    Len);
 			ARM_Index.Add (Term => Term(1..Len),
 				       Kind => ARM_Index.Primary_Term,
-				       Clause => Clause_String,
+				       Clause => Clause_String (Format_Object),
 				       Paragraph => Paragraph_String,
 				       Key => Key);
 
@@ -5014,7 +5046,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    Len);
 			ARM_Index.Add (Term => Term(1..Len),
 				       Kind => ARM_Index.Partial_Term,
-				       Clause => Clause_String,
+				       Clause => Clause_String (Format_Object),
 				       Paragraph => Paragraph_String,
 				       Key => Key);
 
@@ -5069,7 +5101,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			ARM_Index.Add (Term => Term(1..TLen),
 				       Subterm => Subterm(1..SLen),
 				       Kind => ARM_Index.Primary_Term_and_Subterm,
-				       Clause => Clause_String,
+				       Clause => Clause_String (Format_Object),
 				       Paragraph => Paragraph_String,
 				       Key => Key);
 
@@ -5128,7 +5160,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			ARM_Index.Add (Term => Term(1..TLen),
 				       Subterm => Subterm(1..SLen),
 				       Kind => ARM_Index.Partial_Term_with_Subterm,
-				       Clause => Clause_String,
+				       Clause => Clause_String (Format_Object),
 				       Paragraph => Paragraph_String,
 				       Key => Key);
 
@@ -5182,7 +5214,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			ARM_Index.Add (Term => Term(1..TLen),
 				       Subterm => See(1..SLen),
 				       Kind => ARM_Index.See_Term,
-				       Clause => Clause_String,
+				       Clause => Clause_String (Format_Object),
 				       Paragraph => Paragraph_String,
 				       Key => Key);
 
@@ -5235,7 +5267,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			ARM_Index.Add (Term => Term(1..TLen),
 				       Subterm => See(1..SLen),
 				       Kind => ARM_Index.See_Also_Term,
-				       Clause => Clause_String,
+				       Clause => Clause_String (Format_Object),
 				       Paragraph => Paragraph_String,
 				       Key => Key);
 
@@ -5386,7 +5418,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				Term => "Language-Defined Library Units",
 				Subterm => Term(1..Len),
 			        Kind => ARM_Index.Primary_Term_and_Subterm,
-			        Clause => Clause_String,
+			        Clause => Clause_String (Format_Object),
 			        Paragraph => Paragraph_String,
 			        Key => Key);
 			elsif Disposition = ARM_Output.Deletion then
@@ -5401,7 +5433,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			ARM_Index.Add_Reusing_Key (
 				Term => Term(1..Len),
 				Kind => ARM_Index.Primary_Term,
-			        Clause => Clause_String,
+			        Clause => Clause_String (Format_Object),
 			        Paragraph => Paragraph_String,
 			        Key => Key);
 
@@ -5409,7 +5441,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				Subindex_Object => Format_Object.Package_Index,
 				Entity => Term(1..Len),
 				Kind => ARM_Subindex.Top_Level,
-				Clause => Clause_String,
+				Clause => Clause_String (Format_Object),
 				Paragraph => Paragraph_String,
 				Key => Key);
 
@@ -5505,7 +5537,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			            Type_Name(1..TLen),
 			        Subterm => Format_Object.Unit(1..Format_Object.Unit_Len),
 			        Kind => ARM_Index.Subtype_Declaration_in_Package,
-			        Clause => Clause_String,
+			        Clause => Clause_String (Format_Object),
 			        Paragraph => Paragraph_String,
 			        Key => Key);
 
@@ -5515,7 +5547,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			        Type_Name(1..TLen),
 			    From_Unit => Format_Object.Unit(1..Format_Object.Unit_Len),
 			    Kind => ARM_Subindex.Subtype_In_Unit,
-			    Clause => Clause_String,
+			    Clause => Clause_String (Format_Object),
 			    Paragraph => Paragraph_String,
 			    Key => Key);
 
@@ -5607,7 +5639,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			ARM_Index.Add (Term => Item(1..Len),
 				       Subterm => Format_Object.Unit(1..Format_Object.Unit_Len),
 				       Kind => ARM_Index.Declaration_in_Package,
-				       Clause => Clause_String,
+				       Clause => Clause_String (Format_Object),
 				       Paragraph => Paragraph_String,
 				       Key => Key);
 			Check_Paragraph;
@@ -5638,7 +5670,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 
 			ARM_Index.Add (Term => Term(1..Len),
 				       Kind => ARM_Index.Partial_Term,
-				       Clause => Clause_String,
+				       Clause => Clause_String (Format_Object),
 				       Paragraph => Paragraph_String,
 				       Key => Key);
 			Check_Paragraph;
@@ -5650,7 +5682,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			ARM_Index.Add (Term => "check, language-defined",
 				       Subterm => Term(1..Len),
 				       Kind => ARM_Index.Primary_Term_and_Subterm,
-				       Clause => Clause_String,
+				       Clause => Clause_String (Format_Object),
 				       Paragraph => Paragraph_String,
 				       Key => Key);
 			if Format_Object.Display_Index_Entries then
@@ -5682,14 +5714,14 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			ARM_Index.Add (Term => "attributes",
 				       Subterm => Param(1..Len),
 				       Kind => ARM_Index.Primary_Term_and_Subterm,
-				       Clause => Clause_String,
+				       Clause => Clause_String (Format_Object),
 				       Paragraph => Paragraph_String,
 				       Key => Key);
 			ARM_Output.Index_Target (Output_Object, Key);
 
 			ARM_Index.Add (Term => Param(1..Len) & " attribute",
 				       Kind => ARM_Index.Primary_Term,
-				       Clause => Clause_String,
+				       Clause => Clause_String (Format_Object),
 				       Paragraph => Paragraph_String,
 				       Key => Key);
 			ARM_Output.Index_Target (Output_Object, Key);
@@ -5718,14 +5750,14 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			ARM_Index.Add (Term => "pragmas",
 				       Subterm => Param(1..Len),
 				       Kind => ARM_Index.Primary_Term_and_Subterm,
-				       Clause => Clause_String,
+				       Clause => Clause_String (Format_Object),
 				       Paragraph => Paragraph_String,
 				       Key => Key);
 			ARM_Output.Index_Target (Output_Object, Key);
 
 			ARM_Index.Add (Term => Param(1..Len) & " pragma",
 				       Kind => ARM_Index.Primary_Term,
-				       Clause => Clause_String,
+				       Clause => Clause_String (Format_Object),
 				       Paragraph => Paragraph_String,
 				       Key => Key);
 			ARM_Output.Index_Target (Output_Object, Key);
@@ -5828,13 +5860,13 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    ARM_Syntax.Add_Xref (
 			         Name => Name(1..Len),
 			         Used_In => Get_NT,
-			         Clause => Clause_String);
+			         Clause => Clause_String (Format_Object));
 			end if;
 
 			-- Index the non-terminal:
 			ARM_Index.Add (Term => Name(1..Len),
 				       Kind => ARM_Index.Syntax_NT_Used,
-				       Clause => Clause_String,
+				       Clause => Clause_String (Format_Object),
 				       Paragraph => Paragraph_String,
 				       Key => Key);
 			ARM_Output.Index_Target (Output_Object, Key);
@@ -5852,10 +5884,12 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					        Location => Format_Object.Location);
 			if Format_Object.Link_Non_Terminals then
 			    declare
+				Lower_NT : constant String :=
+				    Ada.Characters.Handling.To_Lower (Name(1..Len));
 				Clause : constant String :=
-				    ARM_Syntax.Non_Terminal_Clause (Name(1..Len));
+				    ARM_Syntax.Non_Terminal_Clause (Lower_NT);
 				Target : constant ARM_Syntax.Target_Type :=
-				    ARM_Syntax.Non_Terminal_Link_Target (Name(1..Len));
+				    ARM_Syntax.Non_Terminal_Link_Target (Lower_NT);
 			    begin
 				if Clause = "" then -- Not found. No link, but error message:
 				    Ada.Text_IO.Put_Line ("  ?? Unknown non-terminal " &
@@ -5957,7 +5991,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				Check_Paragraph; -- We've got to be in a paragraph to write this.
 				ARM_Index.Add (Term => Format_Object.Glossary_Term (1..Format_Object.Glossary_Term_Len),
 					       Kind => ARM_Index.Primary_Term,
-					       Clause => Clause_String,
+					       Clause => Clause_String (Format_Object),
 					       Paragraph => Paragraph_String,
 					       Key => Key);
 				ARM_Output.Index_Target (Output_Object, Key);
@@ -6140,7 +6174,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				    Check_Paragraph; -- We've got to be in a paragraph to write this.
 				    ARM_Index.Add (Term => Format_Object.Glossary_Term (1..Format_Object.Glossary_Term_Len),
 					           Kind => ARM_Index.Primary_Term,
-					           Clause => Clause_String,
+					           Clause => Clause_String (Format_Object),
 					           Paragraph => Paragraph_String,
 					           Key => Key);
 				    ARM_Output.Index_Target (Output_Object, Key);
@@ -6342,14 +6376,14 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			ARM_Index.Add (Term => "attributes",
 				       Subterm => Format_Object.Attr_Name (1 .. Format_Object.Attr_Name_Len),
 				       Kind => ARM_Index.Primary_Term_and_Subterm,
-				       Clause => Clause_String,
+				       Clause => Clause_String (Format_Object),
 				       Paragraph => Paragraph_String,
 				       Key => Key);
 			ARM_Output.Index_Target (Output_Object, Key);
 
 			ARM_Index.Add (Term => Format_Object.Attr_Name (1 .. Format_Object.Attr_Name_Len) & " attribute",
 				       Kind => ARM_Index.Primary_Term,
-				       Clause => Clause_String,
+				       Clause => Clause_String (Format_Object),
 				       Paragraph => Paragraph_String,
 				       Key => Key);
 			ARM_Output.Index_Target (Output_Object, Key);
@@ -7955,14 +7989,14 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    ARM_Index.Add (Term => "attributes",
 					   Subterm => Format_Object.Attr_Name (1 .. Format_Object.Attr_Name_Len),
 					   Kind => ARM_Index.Primary_Term_and_Subterm,
-					   Clause => Clause_String,
+					   Clause => Clause_String (Format_Object),
 					   Paragraph => Paragraph_String,
 					   Key => Key);
 			    ARM_Output.Index_Target (Output_Object, Key);
 
 			    ARM_Index.Add (Term => Format_Object.Attr_Name (1 .. Format_Object.Attr_Name_Len) & " attribute",
 					   Kind => ARM_Index.Primary_Term,
-					   Clause => Clause_String,
+					   Clause => Clause_String (Format_Object),
 					   Paragraph => Paragraph_String,
 					   Key => Key);
 			    ARM_Output.Index_Target (Output_Object, Key);
@@ -8875,7 +8909,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		Text_Buffer : String (1..ARM_Input.MAX_RECORDING_SIZE);
 		Text_Buffer_Len : Natural;
 
-		function Clause_String return String is
+		function DB_Clause_String return String is
 		    use type ARM_Contents.Section_Number_Type;
 		begin
 		    if Format_Object.Clause = 0 then
@@ -8905,7 +8939,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				Format_Object.Clause,
 				Format_Object.Subclause);
 		    end if;
-		end Clause_String;
+		end DB_Clause_String;
 
 		function Sort_Clause_String return String is
 		    Res : String(1..9);
@@ -8931,21 +8965,21 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			when ARM_Database.None | ARM_Database.Revised |
 			     ARM_Database.Revised_Inserted_Number =>
 			    if Format_Object.Number_Paragraphs then
-				return " See @RefSecbyNum{" & Clause_String & "}(" &
+				return " See @RefSecbyNum{" & DB_Clause_String & "}(" &
 				    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
 				    ").";
 			    else -- No paragraph numbers.
-				return " See @RefSecbyNum{" & Clause_String & "}.";
+				return " See @RefSecbyNum{" & DB_Clause_String & "}.";
 			    end if;
 			when ARM_Database.Inserted | ARM_Database.Inserted_Normal_Number =>
 			    if Format_Object.Number_Paragraphs then
 				return "@Chg{Version=[" & Format_Object.Impdef_Version &
-			            "], New=[ See @RefSecbyNum{" & Clause_String & "}(" &
+			            "], New=[ See @RefSecbyNum{" & DB_Clause_String & "}(" &
 				    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
 				    ").],Old=[]}";
 			    else -- No paragraph numbers.
 				return "@Chg{Version=[" & Format_Object.Impdef_Version &
-				    "], New=[ See @RefSecbyNum{" & Clause_String & "}.],Old=[]}";
+				    "], New=[ See @RefSecbyNum{" & DB_Clause_String & "}.],Old=[]}";
 			    end if;
 			when ARM_Database.Deleted |
 			     ARM_Database.Deleted_Inserted_Number |
@@ -8953,12 +8987,12 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			     ARM_Database.Deleted_Inserted_Number_No_Delete_Message =>
 			    if Format_Object.Number_Paragraphs then
 				return "@Chg{Version=[" & Format_Object.Impdef_Version &
-				    "], New=[],Old=[ See @RefSecbyNum{" & Clause_String & "}(" &
+				    "], New=[],Old=[ See @RefSecbyNum{" & DB_Clause_String & "}(" &
 				    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
 				    ").]}";
 			    else -- No paragraph numbers.
 				return "@Chg{Version=[" & Format_Object.Impdef_Version &
-				    "], New=[],Old=[ See @RefSecbyNum{" & Clause_String & "}.]}";
+				    "], New=[],Old=[ See @RefSecbyNum{" & DB_Clause_String & "}.]}";
 			    end if;
 		    end case;
 		end See_String;
@@ -9236,21 +9270,21 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			    Text_Buffer_Len := Text_Buffer_Len - 1; -- Remove command close character.
 			    if Disposition = ARM_Output.None then
 			        -- Display the text normally.
-			        ARM_Syntax.Insert_Rule (For_Clause => Clause_String,
+			        ARM_Syntax.Insert_Rule (For_Clause => Clause_String (Format_Object),
 			            Rule => "@nt{" & Format_Object.Syntax_NT(1..Format_Object.Syntax_NT_Len) &
-				        "::=} " & Text_Buffer(1..Text_Buffer_Len),
+				        " ::=} " & Text_Buffer(1..Text_Buffer_Len),
 			            Tabset => Format_Object.Syntax_Tab(1..Format_Object.Syntax_Tab_Len));
 		            elsif Disposition = ARM_Output.Deletion then
-			        ARM_Syntax.Insert_Rule (For_Clause => Clause_String,
+			        ARM_Syntax.Insert_Rule (For_Clause => Clause_String (Format_Object),
 			            Rule => "@nt{" & Format_Object.Syntax_NT(1..Format_Object.Syntax_NT_Len) &
 				        "@Chg{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version &
-					"],New=[],Old=[::=]}} " & Text_Buffer(1..Text_Buffer_Len),
+					"],New=[],Old=[ ::=]}} " & Text_Buffer(1..Text_Buffer_Len),
 			            Tabset => Format_Object.Syntax_Tab(1..Format_Object.Syntax_Tab_Len));
 			    else -- Insertion.
-			        ARM_Syntax.Insert_Rule (For_Clause => Clause_String,
+			        ARM_Syntax.Insert_Rule (For_Clause => Clause_String (Format_Object),
 			            Rule => "@nt{" & Format_Object.Syntax_NT(1..Format_Object.Syntax_NT_Len) &
 				        "@Chg{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version &
-					"],New=[::=],Old=[]}} " & Text_Buffer(1..Text_Buffer_Len),
+					"],New=[ ::=],Old=[]}} " & Text_Buffer(1..Text_Buffer_Len),
 			            Tabset => Format_Object.Syntax_Tab(1..Format_Object.Syntax_Tab_Len));
 			    end if;
 
@@ -9393,7 +9427,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				        ":" & Ascii.LF & Ascii.LF &
 				        Chg_Command (Text_Kind, Text_Version) &
 				        "@leading@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
-				        " See @RefSecbyNum{" & Clause_String & "}.",
+				        " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
 				    Change_Kind => Prefix_Kind,
 				    Version => Prefix_Version);
 			    else -- not leading:
@@ -9406,7 +9440,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				        ":" & Ascii.LF & Ascii.LF &
 				        Chg_Command (Text_Kind, Text_Version) &
 				        "@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
-				        " See @RefSecbyNum{" & Clause_String & "}.",
+				        " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
 				    Change_Kind => Prefix_Kind,
 				    Version => Prefix_Version);
 			    end if;
@@ -9464,7 +9498,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					            ":]}" & Ascii.LF & Ascii.LF &
 					            Chg_Command (Format_Object.Attr_Change_Kind, Format_Object.Attr_Version) &
 						    "@leading@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
-					            " See @RefSecbyNum{" & Clause_String & "}.",
+					            " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
 					        Change_Kind => Format_Object.Attr_Change_Kind,
 					        Version => Format_Object.Attr_Version);
 				        else -- not leading:
@@ -9480,7 +9514,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					            ":]}" & Ascii.LF & Ascii.LF &
 					            Chg_Command (Format_Object.Attr_Change_Kind, Format_Object.Attr_Version) &
 					            "@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
-					            " See @RefSecbyNum{" & Clause_String & "}.",
+					            " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
 					        Change_Kind => Format_Object.Attr_Change_Kind,
 					        Version => Format_Object.Attr_Version);
 				        end if;
@@ -9543,7 +9577,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 			        Sort_Key => My_Sort,
 			        Hang_Item => "",
 			        Text => Text_Buffer(1..Text_Buffer_Len) &
-				    " @em See @RefSecbyNum{" & Clause_String & "}.");
+				    " @em See @RefSecbyNum{" & Clause_String(Format_Object) & "}.");
 			else -- Added_Pragma_Syn
 			    declare
 			        Disposition : ARM_Output.Change_Type;
@@ -9564,7 +9598,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 				        Text => "@ChgRef{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
 					    "],Kind=[Added]}" &
 					    Text_Buffer(1..Text_Buffer_Len) &
-					    " @em See @RefSecbyNum{" & Clause_String & "}.");
+					    " @em See @RefSecbyNum{" & Clause_String(Format_Object) & "}.");
 				    -- Note: We still need the @ChgRef in order
 				    -- to get the paragraph numbers right.
 			        elsif Disposition = ARM_Output.Deletion then
@@ -9577,7 +9611,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 					    "],Kind=[Added]}" &
 					    "@Chg`Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
 					    "],New=`" & Text_Buffer(1..Text_Buffer_Len) &
-					    " @em See @RefSecbyNum<" & Clause_String & ">.',Old=[]'");
+					    " @em See @RefSecbyNum<" & Clause_String(Format_Object) & ">.',Old=[]'");
 				    -- Careful: The text con contain [], {}, (), and <>, so we
 				    -- can only use `' for brackets.
 			        end if;
