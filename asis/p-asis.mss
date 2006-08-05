@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/07/25 04:56:43 $}
+@comment{$Revision: 1.2 $ $Date: 2006/07/25 23:43:19 $}
 
 @LabeledSection{package Asis}
 
@@ -1594,24 +1594,24 @@ Asis.Iterator. It is defined in package Asis to facilitate automatic translation
 to IDL (See @RefSecNum{Miscellaneous ASIS I/O and IDL approaches} for details).
 
 @begin{Example}
-   @Key[type] @AdaTypeDefn{Traverse_Control} @key[is] (
+@Key[type] @AdaTypeDefn{Traverse_Control} @key[is] (
 
-      Continue,               -- Continues the normal depth-first traversal.
+   Continue,               -- Continues the normal depth-first traversal.
 
-      Abandon_Children,       -- Prevents traversal of the current element's
-                              -- children.
+   Abandon_Children,       -- Prevents traversal of the current element's
+                           -- children.
 
-      Abandon_Siblings,       -- Prevents traversal of the current element's
-                              -- children and remaining siblings.
+   Abandon_Siblings,       -- Prevents traversal of the current element's
+                           -- children and remaining siblings.
 
-      Terminate_Immediately); -- Does exactly that.
+   Terminate_Immediately); -- Does exactly that.
 @end{Example}
 
 
 @LabeledClause{type Program_Text}
 
 @begin{Example}
-    @key[subtype] @AdaSubtypeDefn{Name=[Program_Text],Of=[Wide_String]} @key[is] Wide_String;
+@key[subtype] @AdaSubtypeDefn{Name=[Program_Text],Of=[Wide_String]} @key[is] Wide_String;
 @end{Example}
 
 @Comment{The private part doesn't belong in the standard!!

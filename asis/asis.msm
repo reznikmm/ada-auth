@@ -36,6 +36,8 @@
 @Source{Name=<Concepts.MSS>,SectionName=<02>,SectionNumber=[2],NewSection=[T]}
 @Source{Name=<P-ASIS.MSS>,SectionName=<03>,SectionNumber=[3],NewSection=[T]}
 @Source{Name=<Errors.MSS>,SectionName=<04>,SectionNumber=[4],NewSection=[T]}
+@Source{Name=<Except.MSS>,SectionName=<05>,SectionNumber=[5],NewSection=[T]}
+@Source{Name=<Impl.MSS>,SectionName=<06>,SectionNumber=[6],NewSection=[T]}
 
 @Comment{*** Old junk
 @Source{Name=<09.MSS>,SectionName=<09>,SectionNumber=[9],NewSection=[T]}
