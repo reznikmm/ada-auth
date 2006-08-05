@@ -1,11 +1,14 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/except.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/07/25 23:43:19 $}
+@comment{$Revision: 1.2 $ $Date: 2006/08/05 04:33:28 $}
 
 @LabeledSection{package Asis.Exceptions}
 
-Package @ChildUnit{Parent=[Asis],Child=[Exceptions]}Asis.Exceptions is defined
-with the contents described below.
+@Chg{Version=[1],New=[The library package @ChildUnit{Parent=[Asis],Child=[Exceptions]}Asis.Exceptions
+shall exist. The package
+shall provide interfaces equivalent to those described in the
+following subclauses.],
+Old=[@f{@key[package] @ChildUnit{Parent=[Asis],Child=[Exceptions]}ASIS.Exceptions @key[is]}]}
 
 @leading@;ASIS exceptions are:
 
@@ -66,3 +69,6 @@ whenever they cannot normally complete their operation. This exception
 will typically indicate a failure of the underlying ASIS implementation.
 @end{DescribeCode}
 
+@begin{Example}
+@ChgDeleted{Version=[1],Text=[@key[end] Asis.Exceptions;]}
+@end{Example}

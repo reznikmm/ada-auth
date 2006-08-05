@@ -13,7 +13,8 @@
 @Comment{RTF properties}
 @SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}
 @RTFHeaderPrefix{Version=[0],Text=[ISO/IEC 15291:1999(E) reorganized]}
-@RTFHeaderPrefix{Version=[1],Text=[ISO/IEC 15291:200Y(E)]}
+@RTFHeaderPrefix{Version=[1],Text=[ISO/IEC 15291:1999(E) new style]}
+@RTFHeaderPrefix{Version=[2],Text=[ISO/IEC 15291:200Y(E)]}
 @RTFPageSize{Letter}@Comment{Final version should be A4}
 @RTFFonts{Serif=[Times],SansSerif=[Arial]}
 
@@ -78,9 +79,9 @@
 @Source{Name=<Glossary.MSS>,SectionName=<N>,SectionNumber=[N],NewSection=[T]}
 @Comment{We don't use Annex O, as ISO requires skipping I and O}
 @Source{Name=<Syntax.MSS>,SectionName=<P>,SectionNumber=[P],NewSection=[T]}
-@Source{Name=<Langdef.MSS>,SectionName=<Q>,SectionNumber=[Q],NewSection=[T]}
 *** End old junk}
 
+@Source{Name=<Entities.MSS>,SectionName=<E>,SectionNumber=[E],NewSection=[T]}
 @Source{Name=<Refs.MSS>,SectionName=<REF>,SectionNumber=[0],NewSection=[T]}
 @Source{Name=<Index.MSS>,SectionName=<IDX>,SectionNumber=[0],NewSection=[T]}
 

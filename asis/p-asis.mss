@@ -1,11 +1,13 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/07/25 23:43:19 $}
+@comment{$Revision: 1.3 $ $Date: 2006/08/05 04:33:28 $}
 
 @LabeledSection{package Asis}
 
-Package @RootLibUnit{Asis}Asis is defined with the
-contents described below.
+@Chg{Version=[1],New=[The library package @RootLibUnit{ASIS}ASIS shall exist.
+The package shall provide interfaces equivalent to those described in the
+following subclauses.],
+Old=[@f{@key[package] @RootLibUnit{ASIS}ASIS @key[is]}]}
 
 Package Asis encapsulates implementation-specific declarations, which are
 made available to ASIS and its client applications in an
@@ -49,20 +51,21 @@ Program_Text, a subtype of Wide_String, is used to convey program text.
 The Ada type String is not used in the ASIS interface. Neither the Ada
 types Character nor Wide_Character are used in the ASIS interface.
 
-Implementation_Defined types and values
+@Comment{Private parts don't belong in a standard!}
+@ChgDeleted{Version=[1],Text=[Implementation_Defined types and values]}
 
-A number of implementation-defined types and constants are used. To make
+@ChgDeleted{Version=[1],Text=[A number of implementation-defined types and constants are used. To make
 the ASIS specification compile, the following types and constants are
-provided:
+provided:]}
 
- @b{subtype Implementation_Defined_Integer_Type is Integer;}
- @b{Implementation_Defined_Integer_Constant : constant := 2**31-1; }
+@ChgDeleted{Version=[1],Text=[@f{@key[subtype] Implementation_Defined_Integer_Type @key[is] Integer;}@*
+@f{Implementation_Defined_Integer_Constant : @key[constant] := 2**31-1;}]}
 
-In addition, there are several implementation-defined private types.
+@ChgDeleted{Version=[1],Text=[In addition, there are several implementation-defined private types.
 For compilation convenience these types have been represented as
 enumeration types with the single value of "Implementation_Defined".
 An implementation may define reasonable types and constants.
-Please refer to commentary where each is used.
+Please refer to commentary where each is used.]}
 
 
 @LabeledClause{type ASIS_Integer}
@@ -1432,7 +1435,7 @@ Unit_Classes - classification of public, private, body, and subunit.
 
 Unit_Origins - classification of possible unit origination
 
-@begin{Examples}
+@begin{Example}
   type Unit_Origins is (
 
     Not_An_Origin,        -- A nil or nonexistent unit origin
@@ -1458,19 +1461,19 @@ Unit_Origins - classification of possible unit origination
 
     An_Application_Unit); -- Neither A_Predefined_Unit or
                           -- An_Implementation_Unit }
-@end{Examples}
+@end{Example}
 
 @LabeledSubClause{type Relation_Kinds }
 
 Relation_Kinds - classification of unit relationships
 
-@begin{Examples}
+@begin{Example}
   type Relation_Kinds is (
 
     Ancestors,
 
     Descendants,
-@end{Examples}
+@end{Example}
 
 -----------------------------------------------------------------------------
 Definition:  ANCESTORS of a unit; DESCENDANTS of a unit
@@ -1589,22 +1592,23 @@ For example:
 
 @LabeledClause{type Traverse_Control}
 
-Traverse_Control - controls for the traversal generic provided in package
+@Chg{Version=[1],New=[Controls],Old=[Traverse_Control - controls]} for the
+traversal generic provided in package
 Asis.Iterator. It is defined in package Asis to facilitate automatic translation
 to IDL (See @RefSecNum{Miscellaneous ASIS I/O and IDL approaches} for details).
 
 @begin{Example}
 @Key[type] @AdaTypeDefn{Traverse_Control} @key[is] (
 
-   Continue,               -- Continues the normal depth-first traversal.
+   @AdaObjDefn{Continue},               -- Continues the normal depth-first traversal.
 
-   Abandon_Children,       -- Prevents traversal of the current element's
+   @AdaObjDefn{Abandon_Children},       -- Prevents traversal of the current element's
                            -- children.
 
-   Abandon_Siblings,       -- Prevents traversal of the current element's
+   @AdaObjDefn{Abandon_Siblings},       -- Prevents traversal of the current element's
                            -- children and remaining siblings.
 
-   Terminate_Immediately); -- Does exactly that.
+   @AdaObjDefn{Terminate_Immediately}); -- Does exactly that.
 @end{Example}
 
 
@@ -1614,22 +1618,24 @@ to IDL (See @RefSecNum{Miscellaneous ASIS I/O and IDL approaches} for details).
 @key[subtype] @AdaSubtypeDefn{Name=[Program_Text],Of=[Wide_String]} @key[is] Wide_String;
 @end{Example}
 
-@Comment{The private part doesn't belong in the standard!!
-private
+@Comment{The private part doesn't belong in the standard!!}
+@begin{Example}
+@ChgDeleted{Version=[1],Text=[@key[private]]}
 
-    type Context is (Implementation_Defined);
-    Nil_Context : constant Context := Implementation_Defined;
+@ChgDeleted{Version=[1],Text=[    @key[type] Context @key[is] (Implementation_Defined);
+    Nil_Context : @key[constant] Context := Implementation_Defined;]}
 
-    type Element is (Implementation_Defined);
-    Nil_Element : constant Element := Implementation_Defined;
-    Nil_Element_List : constant Element_List (1 .. 0) :=
-        (1 .. 0 => Nil_Element);
+@ChgDeleted{Version=[1],Text=[    @key[type] Element @key[is] (Implementation_Defined);
+    Nil_Element : @key[constant] Element := Implementation_Defined;
+    Nil_Element_List : @key[constant] Element_List (1 .. 0) :=
+        (1 .. 0 => Nil_Element);]}
 
-    type Compilation_Unit is (Implementation_Defined);
-    Nil_Compilation_Unit : constant Compilation_Unit :=
+@ChgDeleted{Version=[1],Text=[    @key[type] Compilation_Unit @key[is] (Implementation_Defined);
+    Nil_Compilation_Unit : @key[constant] Compilation_Unit :=
         Implementation_Defined;
-    Nil_Compilation_Unit_List : constant Compilation_Unit_List (1 .. 0) :=
-        (1 .. 0 => Nil_Compilation_Unit);
+    Nil_Compilation_Unit_List : @key[constant] Compilation_Unit_List (1 .. 0) :=
+        (1 .. 0 => Nil_Compilation_Unit);]}
 
-end Asis; }
+@ChgDeleted{Version=[1],Text=[@key[end] Asis;]}
+@end{Example}
 

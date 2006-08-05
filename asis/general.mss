@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/07/25 04:56:43 $}
+@comment{$Revision: 1.2 $ $Date: 2006/08/05 04:33:28 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -94,6 +94,7 @@ Annex  A:	Glossary
 Annex  B:	ASIS Application Examples
 Annex  C:	Miscellaneous ASIS I/O and IDL Approaches
 Annex  D:	Rationale
+@ChgAdded{Version=[2],Text=[Annex  E:	Summary of ASIS Entities]}
 
 The major package interfaces visible to ASIS users are identified as clauses facilitating access from the table of contents.
 

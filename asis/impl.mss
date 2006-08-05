@@ -1,11 +1,15 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/impl.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/07/25 23:43:19 $}
+@comment{$Revision: 1.2 $ $Date: 2006/08/05 04:33:28 $}
 
 @LabeledSection{package Asis.Implementation}
 
-Package @ChildUnit{Parent=[Asis],Child=[Implementation]}Asis.Implementation is
-defined with the contents described below.
+@Chg{Version=[1],New=[The library package @ChildUnit{Parent=[Asis],Child=[Implementation]}Asis.Implementation
+shall exist. The package
+shall provide interfaces equivalent to those described in the
+following subclauses.],
+Old=[@f{@key[with] Asis.Errors;@*
+@key[package] @ChildUnit{Parent=[Asis],Child=[Implementation]}Asis.Implementation @key[is]}]}
 
 Asis.Implementation provides queries to initialize, finalize, and query the
 error status of the ASIS Implementation.
@@ -18,7 +22,8 @@ error status of the ASIS Implementation.
 @key[function] @AdaSubDefn{ASIS_Version} @key[return] Wide_String;
 @end{Example}
 
-Returns a value which identifies the version of the ASIS interface, e.g., "2.1"
+@Comment{Moved from below}
+@ChgAdded{Version=[1],Text=[Returns a value which identifies the version of the ASIS interface, e.g., "2.1"]}
 
 @end{DescribeCode}
 
@@ -30,7 +35,8 @@ Returns a value which identifies the version of the ASIS interface, e.g., "2.1"
 @Key[function] @AdaSubDefn{ASIS_Implementor} @key[return] Wide_String;
 @end{Example}
 
-Returns a value which identifies the name of the implementor, e.g., "Ada Inc."
+@Comment{Moved from below}
+@ChgAdded{Version=[1],Text=[Returns a value which identifies the name of the implementor, e.g., "Ada Inc."]}
 @end{DescribeCode}
 
 
@@ -41,7 +47,8 @@ Returns a value which identifies the name of the implementor, e.g., "Ada Inc."
 @Key[function] @AdaSubDefn{ASIS_Implementor_Version} @Key[return] Wide_String;
 @end{Example}
 
-Returns a value which identifies the implementation's version, e.g., "5.2a"
+@Comment{Moved from below}
+@ChgAdded{Version=[1],Text=[Returns a value which identifies the implementation's version, e.g., "5.2a"]}
 @end{DescribeCode}
 
 
@@ -52,8 +59,14 @@ Returns a value which identifies the implementation's version, e.g., "5.2a"
 @Key[function] @AdaSubDefn{ASIS_Implementor_Information} @Key[return] Wide_String;
 @end{Example}
 
-Returns a value which identifies additional implementation
-information, e.g., "Copyright ..."
+@Comment{Moved these parts where they belong}
+@Chg{Version=[1],New=[Returns a value which identifies additional ],
+Old=[Returns values which identify:@*
+ASIS_Version - the version of the ASIS interface, e.g., "2.1"@*
+ASIS_Implementor - the name of the implementor, e.g., "Ada Inc."@*
+ASIS_Implementor_Version - the implementation's version, e.g., "5.2a"@*
+ASIS_Implementor_Information - ]}implementation information,
+e.g., "Copyright ..."
 @end{DescribeCode}
 
 
@@ -87,14 +100,14 @@ Raises ASIS_Failed if ASIS failed to initialize or if the Parameters
 argument is invalid. Status is Environment_Error or Parameter_Error.
 @end{DescribeCode}
 
-@b{APPLICATION NOTE}
-
+@begin{Notes}
 The ASIS implementation may be Initialized and Finalized any number of
 times during the operation of an ASIS program.  However, all existing
 Context, Compilation_Unit and Element values become invalid when
 ASIS Is_Finalized. Subsequent calls to ASIS queries or services using
 such invalid Compilation_Unit or Element values will cause
 ASIS_Inappropriate_Context to be raised.
+@end{Notes}
 
 @LabeledClause{function Is_Finalized}
 
@@ -178,3 +191,7 @@ a null string, if the Status parameter is Not_An_Error and the Diagnosis
 parameter is not a null string.
 
 @end{DescribeCode}
+
+@begin{Example}
+@ChgDeleted{Version=[1],Text=[@key[end] Asis.Implementation;]}
+@end{Example}
