@@ -13,7 +13,7 @@ package body ARM_Subindex is
     -- non-normative appendixes.
     --
     -- ---------------------------------------
-    -- Copyright 2005  AXE Consultants.
+    -- Copyright 2005, 2006  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -45,6 +45,7 @@ package body ARM_Subindex is
     -- Edit History:
     --
     -- 10/28/05 - RLB - Created package.
+    --  8/ 4/06 - RLB - Fixed problems if unit was missing.
 
     type String_Ptr is access String;
     type Item is record
@@ -103,7 +104,8 @@ package body ARM_Subindex is
 	-- Insert an item into the Subindex object.
 	-- The Key must be one returned by ARM_Index.Add or ARM_Index.Get_Key.
 	-- Raises Not_Valid_Error if From_Unit, Clause, or Paragraph is not
-	-- empty when the kind does not use it.
+	-- empty when the kind does not use it; or if From_Unit is empty
+	-- when the kind requires it.
 	Temp_Item : Item;
     begin
 	if not Subindex_Object.Is_Valid then
@@ -130,6 +132,15 @@ package body ARM_Subindex is
 	Temp_Item.Entity := new String'(Entity);
 	if From_Unit'Length /= 0 then
 	    Temp_Item.From_Unit := new String'(From_Unit);
+	else
+	    if Kind = In_Unit or else
+	       Kind = Child_of_Parent or else
+	       Kind = Subtype_In_Unit or else
+	       Kind = Description_In_Unit or else
+	       Kind = Raised_Belonging_to_Unit then
+		-- There must be a unit here.
+		raise Not_Valid_Error;
+	    end if;
 	end if;
 	Temp_Item.Next := Subindex_Object.List;
         Subindex_Object.List := new Item'(Temp_Item);
@@ -444,9 +455,12 @@ package body ARM_Subindex is
 		    ARM_Output.Hard_Space (Output_Object);
 		    ARM_Output.Hard_Space (Output_Object);
 		    ARM_Output.Hard_Space (Output_Object);
-		    Italic_Text ("in");
-		    ARM_Output.Ordinary_Character (Output_Object, ' ');
-		    Term_Text (Item.From_Unit.all);
+		    if Item.From_Unit /= null then
+		        Italic_Text ("in");
+		        ARM_Output.Ordinary_Character (Output_Object, ' ');
+		        Term_Text (Item.From_Unit.all);
+		    -- else shouldn't be empty, but why crash?
+		    end if;
 		    ARM_Output.Hard_Space (Output_Object);
 		    ARM_Output.Hard_Space (Output_Object);
 		    ARM_Output.Ordinary_Character (Output_Object, ' ');
@@ -462,9 +476,12 @@ package body ARM_Subindex is
 		    ARM_Output.Hard_Space (Output_Object);
 		    ARM_Output.Hard_Space (Output_Object);
 		    ARM_Output.Hard_Space (Output_Object);
-		    Italic_Text ("child of");
-		    ARM_Output.Ordinary_Character (Output_Object, ' ');
-		    Term_Text (Item.From_Unit.all);
+		    if Item.From_Unit /= null then
+		        Italic_Text ("child of");
+		        ARM_Output.Ordinary_Character (Output_Object, ' ');
+		        Term_Text (Item.From_Unit.all);
+		    -- else shouldn't be empty, but why crash?
+		    end if;
 		    ARM_Output.Hard_Space (Output_Object);
 		    ARM_Output.Hard_Space (Output_Object);
 		    ARM_Output.Ordinary_Character (Output_Object, ' ');
@@ -480,9 +497,12 @@ package body ARM_Subindex is
 		    ARM_Output.Hard_Space (Output_Object);
 		    ARM_Output.Hard_Space (Output_Object);
 		    ARM_Output.Hard_Space (Output_Object);
-		    Italic_Text ("in");
-		    ARM_Output.Ordinary_Character (Output_Object, ' ');
-		    Term_Text (Item.From_Unit.all);
+		    if Item.From_Unit /= null then
+		        Italic_Text ("in");
+		        ARM_Output.Ordinary_Character (Output_Object, ' ');
+		        Term_Text (Item.From_Unit.all);
+		    -- else shouldn't be empty, but why crash?
+		    end if;
 		    ARM_Output.Hard_Space (Output_Object);
 		    ARM_Output.Hard_Space (Output_Object);
 		    ARM_Output.Ordinary_Character (Output_Object, ' ');
@@ -494,9 +514,12 @@ package body ARM_Subindex is
 		        ARM_Output.Hard_Space (Output_Object);
 		        ARM_Output.Hard_Space (Output_Object);
 		        ARM_Output.Hard_Space (Output_Object);
-		        Italic_Text ("in");
-		        ARM_Output.Ordinary_Character (Output_Object, ' ');
-		        Term_Text (Item.From_Unit.all);
+		        if Item.From_Unit /= null then
+		            Italic_Text ("in");
+		            ARM_Output.Ordinary_Character (Output_Object, ' ');
+		            Term_Text (Item.From_Unit.all);
+		        -- else shouldn't be empty, but why crash?
+			end if;
 		        ARM_Output.Index_Line_Break (Output_Object, Clear_Keep_with_Next => False);
 		    end if;
 		    ARM_Output.Hard_Space (Output_Object);
@@ -515,9 +538,12 @@ package body ARM_Subindex is
 		        ARM_Output.Hard_Space (Output_Object);
 		        ARM_Output.Hard_Space (Output_Object);
 		        ARM_Output.Hard_Space (Output_Object);
-		        Italic_Text ("in");
-		        ARM_Output.Ordinary_Character (Output_Object, ' ');
-		        Term_Text (Item.From_Unit.all);
+		        if Item.From_Unit /= null then
+		            Italic_Text ("in");
+		            ARM_Output.Ordinary_Character (Output_Object, ' ');
+		            Term_Text (Item.From_Unit.all);
+		        -- else shouldn't be empty, but why crash?
+			end if;
 		        ARM_Output.Index_Line_Break (Output_Object, Clear_Keep_with_Next => False);
 		    end if;
 		    ARM_Output.Hard_Space (Output_Object);

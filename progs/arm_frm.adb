@@ -214,6 +214,7 @@ package body ARM_Format is
     --		- RLB - Fixed glossary entries to not display insertions if
     --			the mode would prevent that.
     --  6/22/06 - RLB - Added non-terminal linking.
+    --  8/ 4/06 - RLB - Added checking for bad unit indexing.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -3056,22 +3057,43 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	    Check_Paragraph;
 	    ARM_Output.Index_Target (Output_Object, Key);
 
-	    ARM_Index.Add_Reusing_Key (
-	        Term => Entity(1..Len),
-	        Subterm => Format_Object.Unit(1..Format_Object.Unit_Len),
-	        Kind => ARM_Index.Declaration_in_Package,
-	        Clause => Clause_String (Format_Object),
-	        Paragraph => Paragraph_String,
-	        Key => Key);
+	    if Format_Object.Unit_Len = 0 then
+	        Ada.Text_IO.Put_Line ("** No unit defined for index entry expecting one on line " & ARM_Input.Line_String (Input_Object));
 
-	    ARM_Subindex.Insert (
-		Subindex_Object => Subindex_Object,
-		Entity => Entity(1..Len),
-		From_Unit => Format_Object.Unit(1..Format_Object.Unit_Len),
-		Kind => ARM_Subindex.In_Unit,
-		Clause => Clause_String (Format_Object),
-		Paragraph => Paragraph_String,
-		Key => Key);
+	        ARM_Index.Add_Reusing_Key (
+	            Term => Entity(1..Len),
+	            Subterm => "*unknown*",
+	            Kind => ARM_Index.Declaration_in_Package,
+	            Clause => Clause_String (Format_Object),
+	            Paragraph => Paragraph_String,
+	            Key => Key);
+
+	        ARM_Subindex.Insert (
+		    Subindex_Object => Subindex_Object,
+		    Entity => Entity(1..Len),
+	            From_Unit => "*unknown*",
+		    Kind => ARM_Subindex.In_Unit,
+		    Clause => Clause_String (Format_Object),
+		    Paragraph => Paragraph_String,
+		    Key => Key);
+	    else
+	        ARM_Index.Add_Reusing_Key (
+	            Term => Entity(1..Len),
+	            Subterm => Format_Object.Unit(1..Format_Object.Unit_Len),
+	            Kind => ARM_Index.Declaration_in_Package,
+	            Clause => Clause_String (Format_Object),
+	            Paragraph => Paragraph_String,
+	            Key => Key);
+
+	        ARM_Subindex.Insert (
+		    Subindex_Object => Subindex_Object,
+		    Entity => Entity(1..Len),
+		    From_Unit => Format_Object.Unit(1..Format_Object.Unit_Len),
+		    Kind => ARM_Subindex.In_Unit,
+		    Clause => Clause_String (Format_Object),
+		    Paragraph => Paragraph_String,
+		    Key => Key);
+	    end if;
 
 	    ARM_Output.Ordinary_Text (Output_Object, Entity(1..Len));
 	    Format_Object.Last_Non_Space := True;
@@ -5532,7 +5554,29 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		        Check_Paragraph;
 		        ARM_Output.Index_Target (Output_Object, Key);
 
-			ARM_Index.Add_Reusing_Key (
+			if Format_Object.Unit_Len = 0 then
+			    Ada.Text_IO.Put_Line ("** No unit defined for index entry expecting one on line " & ARM_Input.Line_String (Input_Object));
+
+			    ARM_Index.Add_Reusing_Key (
+			        Term => Subtype_Name(1..SLen) & " subtype of " &
+			            Type_Name(1..TLen),
+			        Subterm => "*unknown*",
+			        Kind => ARM_Index.Subtype_Declaration_in_Package,
+			        Clause => Clause_String (Format_Object),
+			        Paragraph => Paragraph_String,
+			        Key => Key);
+
+		            ARM_Subindex.Insert (
+			        Subindex_Object => Format_Object.Type_Index,
+			        Entity => Subtype_Name(1..SLen) & " subtype of " &
+			            Type_Name(1..TLen),
+			        From_Unit => "*unknown*",
+			        Kind => ARM_Subindex.Subtype_In_Unit,
+			        Clause => Clause_String (Format_Object),
+			        Paragraph => Paragraph_String,
+			        Key => Key);
+			else
+			    ARM_Index.Add_Reusing_Key (
 			        Term => Subtype_Name(1..SLen) & " subtype of " &
 			            Type_Name(1..TLen),
 			        Subterm => Format_Object.Unit(1..Format_Object.Unit_Len),
@@ -5541,16 +5585,16 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			        Paragraph => Paragraph_String,
 			        Key => Key);
 
-		        ARM_Subindex.Insert (
-			    Subindex_Object => Format_Object.Type_Index,
-			    Entity => Subtype_Name(1..SLen) & " subtype of " &
-			        Type_Name(1..TLen),
-			    From_Unit => Format_Object.Unit(1..Format_Object.Unit_Len),
-			    Kind => ARM_Subindex.Subtype_In_Unit,
-			    Clause => Clause_String (Format_Object),
-			    Paragraph => Paragraph_String,
-			    Key => Key);
-
+		            ARM_Subindex.Insert (
+			        Subindex_Object => Format_Object.Type_Index,
+			        Entity => Subtype_Name(1..SLen) & " subtype of " &
+			            Type_Name(1..TLen),
+			        From_Unit => Format_Object.Unit(1..Format_Object.Unit_Len),
+			        Kind => ARM_Subindex.Subtype_In_Unit,
+			        Clause => Clause_String (Format_Object),
+			        Paragraph => Paragraph_String,
+			        Key => Key);
+			end if;
 		        ARM_Output.Ordinary_Text (Output_Object, Subtype_Name(1..SLen));
 		        Format_Object.Last_Non_Space := True;
 		        -- Leave the command end marker, let normal processing
