@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/impl.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/08/05 04:33:28 $}
+@comment{$Revision: 1.3 $ $Date: 2006/09/22 04:39:59 $}
 
 @LabeledSection{package Asis.Implementation}
 
@@ -74,7 +74,7 @@ e.g., "Copyright ..."
 
 @begin{DescribeCode}
 @begin{Example}
-@Key[function] @AdaSubDefn{Is_Initialized} @Key[return] Boolean;}
+@Key[function] @AdaSubDefn{Is_Initialized} @Key[return] Boolean;
 @end{Example}
 
 Returns True if ASIS is currently initialized.
@@ -85,7 +85,7 @@ Returns True if ASIS is currently initialized.
 
 @begin{DescribeCode}
 @begin{Example}
-@Key[procedure] @AdaSubDefn{Initialize} (Parameters : @key[in] Wide_String := ""); }
+@Key[procedure] @AdaSubDefn{Initialize} (Parameters : @key[in] Wide_String := "");
 @end{Example}
 
 Parameters  - Specifies implementation specific parameters.

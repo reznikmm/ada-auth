@@ -9,6 +9,7 @@
 @Title{Version=[0],Text=[Ada Semantic Interface Specification (ASIS)]}@Comment{Same title for all versions}
 @FilePrefix{AS}
 @ExampleFont{Fixed}
+@BodyFont{Swiss}
 
 @Comment{RTF properties}
 @SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}
@@ -39,6 +40,7 @@
 @Source{Name=<Errors.MSS>,SectionName=<04>,SectionNumber=[4],NewSection=[T]}
 @Source{Name=<Except.MSS>,SectionName=<05>,SectionNumber=[5],NewSection=[T]}
 @Source{Name=<Impl.MSS>,SectionName=<06>,SectionNumber=[6],NewSection=[T]}
+@Source{Name=<ImplPerm.MSS>,SectionName=<07>,SectionNumber=[7],NewSection=[T]}
 
 @Comment{*** Old junk
 @Source{Name=<09.MSS>,SectionName=<09>,SectionNumber=[9],NewSection=[T]}

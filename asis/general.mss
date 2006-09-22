@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/08/05 04:33:28 $}
+@comment{$Revision: 1.3 $ $Date: 2006/09/22 04:39:59 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -37,96 +37,216 @@ I probably ought to add a style just for this purpose)
 
 @LabeledClause{Scope}
 
-The Ada Semantic Interface Specification (ASIS) is an interface between an Ada environment (as defined by ISO/IEC 8652:1995) and any tool requiring information from this environment. An Ada environment includes valuable semantic and syntactic information. ASIS is an open and published callable interface which gives CASE tool and application developers access to this information. ASIS has been designed to be independent of underlying Ada environment implementations, thus supporting portability of software engineering tools while relieving tool developers from needing to understand the complexities of an Ada environment's proprietary internal representation.
+The Ada Semantic Interface Specification (ASIS) is an interface between an Ada
+environment (as defined by ISO/IEC 8652:1995) and any tool requiring
+information from this environment. An Ada environment includes valuable
+semantic and syntactic information. ASIS is an open and published callable
+interface which gives CASE tool and application developers access to this
+information. ASIS has been designed to be independent of underlying Ada
+environment implementations, thus supporting portability of software
+engineering tools while relieving tool developers from needing to understand
+the complexities of an Ada environment's proprietary internal representation.
 
-Examples of tools that benefit from the ASIS interface include: automated code monitors, browsers, call tree tools, code reformators, coding standards compliance tools, correctness verifiers, debuggers, dependency tree analysis tools, design tools, document generators, metrics tools, quality assessment tools, reverse engineering tools, re-engineering tools, safety and security tools, style checkers, test tools, timing estimators, and translators.
+Examples of tools that benefit from the ASIS interface include: automated code
+monitors, browsers, call tree tools, code reformators, coding standards
+compliance tools, correctness verifiers, debuggers, dependency tree analysis
+tools, design tools, document generators, metrics tools, quality assessment
+tools, reverse engineering tools, re-engineering tools, safety and security
+tools, style checkers, test tools, timing estimators, and translators.
 
-This International Standard specifies the form and meaning of the ASIS interface to the Ada compilation environment.
+This International Standard specifies the form and meaning of the ASIS
+interface to the Ada compilation environment.
 
-This International Standard is applicable to tools and applications needing syntactic and semantic information in the Ada compilation environment.
+This International Standard is applicable to tools and applications needing
+syntactic and semantic information in the Ada compilation environment.
+
 @LabeledSubClause{Extent}
 
 This International Standard specifies:
-* The form of the ASIS interface;
-* Sequencing of ASIS calls;
-* The permissible variations within this International Standard, and the manner in which they are to be documented;
-* Those violations of this International Standard that a conforming implementation is required to detect, and the effect of attempting to execute a program containing such violations;
+@begin{Itemize}
+The form of the ASIS interface;
+
+Sequencing of ASIS calls;
+
+The permissible variations within this International Standard, and the manner
+in which they are to be documented;
+
+Those violations of this International Standard that a conforming
+implementation is required to detect, and the effect of attempting to execute a
+program containing such violations;
+@end{Itemize}
 
 This International Standard does not specify:
-* Semantics of the interface in the face of simultaneous updates to the Ada compilation environment.
-* Semantics of the interface for more than one thread of control.
 
-@LabeledSubClause{Structure }
+@begin{Itemize}
+Semantics of the interface in the face of simultaneous updates to the Ada
+compilation environment.
+
+Semantics of the interface for more than one thread of control.
+@end{Itemize}
+
+@LabeledSubClause{Structure}
 
 This International Standard contains twenty-three clauses and four annexes.
 
-Clause 1 is general in nature providing the scope of this International Standard, normative references, and definitions.
+Clause 1 is general in nature providing the scope of this International
+Standard, normative references, and definitions.
 
-Clause 2 identifies the ASIS technical concepts. Here the Ada compilation environment to which ASIS interfaces is described. The concept of queries is presented. The ASIS package architecture is presented.
+Clause 2 identifies the ASIS technical concepts. Here the Ada compilation
+environment to which ASIS interfaces is described. The concept of queries is
+presented. The ASIS package architecture is presented.
 
-The packages that comprise the ASIS International Standard are provided in Clauses 3 through 23. These packages are provided in the correct compilation order and when presented in electronic format are compilable.
+The packages that comprise the ASIS International Standard are provided in
+Clauses 3 through 23.@Chg{Version=[1],New=[],Old=[ These packages are provided
+in the correct compilation order and when presented in electronic format are
+compilable.]}
 
-* Clause 3	package Asis
-* Clause 4	package Asis.Errors
-* Clause 5	package Asis.Exceptions
-* Clause 6	package Asis.Implementation
-* Clause 7	package Asis.Implementation.Permissions
-* Clause 8	package Asis.Ada_Environments
-* Clause 9	package Asis.Ada_Environments.Containers
-* Clause 10	package Asis.Compilation_Units
-* Clause 11	package Asis.Compilation_Units.Times
-* Clause 12	package Asis.Compilation_Units.Relations
-* Clause 13	package Asis.Elements
-* Clause 14	package Asis.Iterator
-* Clause 15	package Asis.Declarations
-* Clause 16	package Asis.Definitions
-* Clause 17	package Asis.Expressions
-* Clause 18	package Asis.Statements
-* Clause 19	package Asis.Clauses
-* Clause 20	package Asis.Text
-* Clause 21	package Asis.Ids
-* Clause 22	package Asis.Data_Decomposition (optional package)
-* Clause 23	package Asis.Data_Decomposition.Portable_Transfer
+@begin{Itemize}
+Clause  3   package Asis
+
+Clause  4   package Asis.Errors
+
+Clause  5   package Asis.Exceptions
+
+Clause  6   package Asis.Implementation
+
+Clause  7   package Asis.Implementation.Permissions
+
+Clause  8   package Asis.Ada_Environments
+
+Clause  9   package Asis.Ada_Environments.Containers
+
+Clause 10   package Asis.Compilation_Units
+
+Clause 11   package Asis.Compilation_Units.Times
+
+Clause 12   package Asis.Compilation_Units.Relations
+
+Clause 13   package Asis.Elements
+
+Clause 14   package Asis.Iterator
+
+Clause 15   package Asis.Declarations
+
+Clause 16   package Asis.Definitions
+
+Clause 17   package Asis.Expressions
+
+Clause 18   package Asis.Statements
+
+Clause 19   package Asis.Clauses
+
+Clause 20   package Asis.Text
+
+Clause 21   package Asis.Ids
+
+Clause 22   package Asis.Data_Decomposition (optional package)
+
+Clause 23   package Asis.Data_Decomposition.Portable_Transfer
+@end{Itemize}
 
 The following annexes are informative:
 
-Annex  A:	Glossary
-Annex  B:	ASIS Application Examples
-Annex  C:	Miscellaneous ASIS I/O and IDL Approaches
-Annex  D:	Rationale
+@begin{Itemize}
+Annex  A:   Glossary
+
+Annex  B:   ASIS Application Examples
+
+Annex  C:   Miscellaneous ASIS I/O and IDL Approaches
+
+Annex  D:   Rationale
+
 @ChgAdded{Version=[2],Text=[Annex  E:	Summary of ASIS Entities]}
+@end{Itemize}
 
-The major package interfaces visible to ASIS users are identified as clauses facilitating access from the table of contents.
-
-
-The ASIS interface is compilable. Consequently, Sentinels have been used to mark portions of the ASIS text with comments appropriate to an ASIS implementor and an ASIS user.
-
-The sentinels and their meanings are:
-
-  	@b{Element Reference} -- These comments mark an element kind reference which acts as a header for those queries that work on this element kind.
-  	@b{Child Reference} - These sentinel comments follow sentinel comments marking element references (--ER) and reference child element queries that decompose the element into its children.
-  	@b{Application Note} - These comments describe suggested uses, further analysis, or other notes of interest to ASIS applications.
-  	@b{Implementation Permissions} - These comments describe permissions given an implementor when implementing the associated type or query.
-  	@b{@b{Implementation Requirement}s} - These comments describe additional requirements for conforming implementations.
-@LabeledSubClause{Conformity with this International Standard }
+The major package interfaces visible to ASIS users are identified as clauses
+facilitating access from the table of contents.
 
 
-@LabeledSubClause{Implementation conformance requirements }
+@Chg{Version=[1],New=[@b{@i{This and the following is junk and needs
+to be totally rewritten to reflect the format with subheaders - RLB}}],
+Old=[The ASIS interface is compilable. Consequently, Sentinels
+have been used to mark portions of the ASIS text with comments appropriate to
+an ASIS implementor and an ASIS user.]}
+
+@Chg{Version=[1],New=[@b{@i{This is not what these look like!!}}],Old=[The sentinels and their meanings are:]}
+
+@begin{DescribeCode}
+@b{Element Reference} -- These comments mark an element kind reference which acts as a header for those queries that work on this element kind.
+
+@b{Child Reference} - These sentinel comments follow sentinel comments marking element references (--ER) and reference child element queries that decompose the element into its children.
+
+@b{Application Note} - These comments describe suggested uses, further analysis, or other notes of interest to ASIS applications.
+
+@b{Implementation Permissions} - These comments describe permissions given an implementor when implementing the associated type or query.
+
+@b{Implementation Requirements} - These comments describe additional requirements for conforming implementations.
+@end{DescribeCode}
 
 
-An ASIS implementation  includes all the hardware and software that implements the ASIS specification for a given Ada implementation and that provides the functionality required by the ASIS specification. An ASIS implementor is a company, institution, or other group (such as a vendor) who develops an ASIS implementation. A conforming ASIS implementation shall meet all of the following criteria:
+@LabeledSubClause{Conformity with this International Standard}
 
-a) The system shall support all required interfaces defined within this International Standard. These interfaces shall support the functional behavior described herein. All interfaces in the ASIS specification are required unless the interface is specifically identified as being optional. The ASIS specification defines one optional package: Asis.Data_Decomposition.  Asis.Data_Decomposition has one child package, Asis.Data_Decomposition.Portable_Transfer.
-b) The system may provide additional facilities not required by this International Standard. Extensions are non-standard facilities (e.g., other library units, non-standard children of standard ASIS library units, subprograms, etc.) which provide additional information from ASIS types, or modify the behavior of otherwise standard ASIS facilities to provide alternative or additional functionality. Nonstandard extensions shall be identified as such in the system documentation. Nonstandard extensions, when used by an application, may change the behavior of functions or facilities defined by this International Standard. The conformance document shall define an environment in which an application can be run with the behavior specified by this International Standard. In no case except package name conflicts shall such an environment require modification of a Basic Conforming or Fully Conforming ASIS Application. An implementation shall not change package specifications in this Intern
-ional Standard except by:
-* Adding “with” clauses, pragmas, representation specifications, comments, and allowable pragmas. Allowable pragmas are those which do not change the semantics of the interface (e.g., List, Optimize, Page).
-* Replacing instances of the words <implementation-defined> with appropriate value(s).
-* Adding or changing private parts.
-* Making any other changes that are lexically transparent to Ada compilers.
 
-c) An ASIS implementation shall not raise Program_Error on elaboration of an ASIS package, or on execution of an ASIS subprogram, due to elaboration order dependencies in the ASIS implementation.
-d) Except as explicitly provided for in this International Standard, Standard.Storage_Error is the only exception that should be raised by operations declared in this International Standard.
-e) When executed, an implementation of this International Standard shall not be erroneous, as defined by ISO/IEC 8652:1995.
+@LabeledSubClause{Implementation conformance requirements}
+@b{@i{Should be a Subsubclause - RLB}}
+
+An @i{ASIS implementation}@defn{ASIS implementation} includes all the hardware
+and software that implements the ASIS specification for a given Ada
+implementation and that provides the functionality required by the ASIS
+specification. An @i{ASIS implementor}@defn{ASIS implementor} is a company,
+institution, or other group (such as a vendor) who develops an ASIS
+implementation. A conforming ASIS implementation shall meet all of the
+following criteria:
+
+@begin{enumerate}
+The system shall support all required interfaces defined within this
+International Standard. These interfaces shall support the functional behavior
+described herein. All interfaces in the ASIS specification are required unless
+the interface is specifically identified as being optional. The ASIS
+specification defines one optional package: Asis.Data_Decomposition.
+Asis.Data_Decomposition has one child package,
+Asis.Data_Decomposition.Portable_Transfer.
+
+The system may provide additional facilities not required by this International
+Standard. @i{Extensions}@defn{Extension} are non-standard facilities (e.g.,
+other library units, non-standard children of standard ASIS library units,
+subprograms, etc.) which provide additional information from ASIS types, or
+modify the behavior of otherwise standard ASIS facilities to provide
+alternative or additional functionality. Nonstandard extensions shall be
+identified as such in the system documentation. Nonstandard extensions, when
+used by an application, may change the behavior of functions or facilities
+defined by this International Standard. The conformance document shall define
+an environment in which an application can be run with the behavior specified
+by this International Standard. In no case except package name conflicts shall
+such an environment require modification of a Basic Conforming or Fully
+Conforming ASIS Application. An implementation shall not change package
+specifications in this International Standard except by:
+@b{@i{No package specifications in this Standard; wording will need changing;
+that goes for the bullets below too - RLB}}
+
+@begin{InnerItemize}
+Adding @lquotes;with@rquotes; clauses, pragmas, representation specifications,
+comments, and allowable pragmas. Allowable pragmas are those which do not
+change the semantics of the interface (e.g., List, Optimize, Page).
+
+Replacing instances of the words <implementation-defined> with appropriate value(s).
+
+Adding or changing private parts.
+
+Making any other changes that are lexically transparent to Ada compilers.
+@end{InnerItemize}
+
+An ASIS implementation shall not raise Program_Error on elaboration of an ASIS
+package, or on execution of an ASIS subprogram, due to elaboration order
+dependencies in the ASIS implementation.
+
+Except as explicitly provided for in this International Standard,
+Standard.Storage_Error is the only exception that should be raised by
+operations declared in this International Standard.
+
+When executed, an implementation of this International Standard shall not be
+erroneous, as defined by ISO/IEC 8652:1995.
+@end{Enumerate}
 
 @LabeledSubClause{Implementation conformance documentation}
 
