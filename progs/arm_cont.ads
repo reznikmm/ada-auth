@@ -7,7 +7,7 @@ package ARM_Contents is
     -- references.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004  AXE Consultants.
+    -- Copyright 2000, 2004, 2006  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -47,17 +47,26 @@ package ARM_Contents is
     --  9/14/04 - RLB - Moved Change_Version_Type here, to avoid mutual
     --			dependence.
     --		- RLB - Added version to changes.
+    --  9/22/06 - RLB - Created type Clause_Number_Type and added SubSubClause.
 
     subtype Title_Type is String (1 .. 80);
 	-- The type of a title.
 
-    type Section_Number_Type is range 0 .. 47;
-	-- Values > 20 represent annex letters (21 => A, 22 => B, etc.)
+    type Section_Number_Type is range 0 .. 57;
+	-- Values > 30 represent annex letters (31 => A, 32 => B, etc.)
 	-- Value = 0 represents the preface, introduction, etc. No
 	-- number is generated if Section_Number = 0.
+    ANNEX_START : constant := 31; -- First annex section number.
 
     subtype Change_Version_Type is Character range '0' .. '9';
 	-- Defines the change version. Version 0 is the original text.
+
+    type Clause_Number_Type is record
+	Section : Section_Number_Type;
+	Clause : Natural := 0;
+	Subclause : Natural := 0;
+	Subsubclause : Natural := 0;
+    end record;
 
     Not_Found_Error : exception;
 
@@ -65,38 +74,45 @@ package ARM_Contents is
 	-- Initialize this package; make sure the contents are empty.
 
     type Level_Type is (Section, Unnumbered_Section, Normative_Annex,
-			Informative_Annex, Clause, Subclause);
+			Informative_Annex, Clause, Subclause, Subsubclause);
 	-- Defines the level of a clause header.
+	-- Clause is "xx.nn"; Subclause is "xx.nn.nn"; Subsubclause is "xx.nn.nn.nn".
+
+    function "<" (Left, Right : Clause_Number_Type) return Boolean;
+	-- True if Left comes before Right in the collating order.
+
+    function ">" (Left, Right : Clause_Number_Type) return Boolean;
+	-- True if Left comes after Right in the collating order.
+
+    function "<=" (Left, Right : Clause_Number_Type) return Boolean;
+	-- True if Left comes before or is the same as Right in the
+	-- collating order.
+
+    function ">=" (Left, Right : Clause_Number_Type) return Boolean;
+	-- True if Left comes after or is the same as Right in the
+	-- collating order.
 
     procedure Add (Title : in Title_Type;
 		   Level : in Level_Type;
-		   Section_Number : in Section_Number_Type;
-		   Clause_Number : in Natural := 0;
-		   Subclause_Number : in Natural := 0;
+		   Clause_Number : in Clause_Number_Type;
                    Version : in ARM_Contents.Change_Version_Type := '0');
 	-- Add a section or clause to the contents. It has the specified
 	-- characteristics.
 
     procedure Add_Old (Old_Title : in Title_Type;
 		       Level : in Level_Type;
-		       Section_Number : in Section_Number_Type;
-		       Clause_Number : in Natural := 0;
-		       Subclause_Number : in Natural := 0);
+		       Clause_Number : in Clause_Number_Type);
 	-- Add an old title for a section or clause to the contents. It has
 	-- the specified characteristics.
 
     function Make_Clause_Number (Level : in Level_Type;
-		   Section_Number : in Section_Number_Type;
-		   Clause_Number : in Natural := 0;
-		   Subclause_Number : in Natural := 0) return String;
+		   Clause_Number : in Clause_Number_Type) return String;
 	-- Returns a properly formatted Section or clause number reference.
 	-- Note that an unnumbered section returns a number with a
 	-- Section_Number of zero (for sorting purposes).
 
     procedure Make_Clause (Clause_String : in String;
-			   Section_Number : out Section_Number_Type;
-			   Clause_Number : out Natural;
-			   Subclause_Number : out Natural);
+			   Clause_Number : out Clause_Number_Type);
 	-- Returns the clause number for a properly formatted Section or
 	-- clause string.
 
@@ -110,17 +126,13 @@ package ARM_Contents is
 	-- exactly, except for case. Raises Not_Found_Error if not found.
 
     function Lookup_Title (Level : in Level_Type;
-		   Section_Number : in Section_Number_Type;
-		   Clause_Number : in Natural := 0;
-		   Subclause_Number : in Natural := 0) return Title_Type;
-	-- Given the level, section, and clause numbers, return the appropriate
+		           Clause_Number : in Clause_Number_Type) return Title_Type;
+	-- Given the level and clause numbers, return the appropriate
 	-- title. Raises Not_Found_Error if not found.
 
     function Lookup_Old_Title (Level : in Level_Type;
-		   Section_Number : in Section_Number_Type;
-		   Clause_Number : in Natural := 0;
-		   Subclause_Number : in Natural := 0) return Title_Type;
-	-- Given the level, section, and clause numbers, return the appropriate
+		   Clause_Number : in Clause_Number_Type) return Title_Type;
+	-- Given the level and clause numbers, return the appropriate
 	-- old title. Calls Lookup_Title if not found (thus returning the
 	-- regular (new) title.
 
@@ -137,9 +149,7 @@ package ARM_Contents is
     generic
 	with procedure Operate (Title : in Title_Type;
 		   Level : in Level_Type;
-		   Section_Number : in Section_Number_Type;
-		   Clause_Number : in Natural;
-		   Subclause_Number : in Natural;
+		   Clause_Number : in Clause_Number_Type;
                    Version : in ARM_Contents.Change_Version_Type;
 		   Quit : out Boolean) is <>;
     procedure For_Each;

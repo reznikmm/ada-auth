@@ -85,6 +85,8 @@ package ARM_Format is
     --  1/16/06 - RLB - Added "Unnumbered_Section" counter, so we can assign
     --			names without special cases.
     --  1/18/06 - RLB - Added "Example_Font".
+    --  9/22/06 - RLB - Added "Use_ISO_2004_Note_Format".
+    --		- RLB - Revised to use Clause_Number_Type.
 
     type Format_Type is tagged limited private;
 
@@ -114,7 +116,8 @@ package ARM_Format is
 		      Include_ISO : in Boolean;
 		      Link_Non_Terminals : in Boolean;
 		      Number_Paragraphs : in Boolean;
-		      Examples_Font : in ARM_Output.Font_Family_Type);
+		      Examples_Font : in ARM_Output.Font_Family_Type;
+		      Use_ISO_2004_Note_Format : in Boolean);
 	-- Initialize an input object. Changes and Change_Version determine
 	-- which changes should be displayed. If Display_Index_Entries is True,
 	-- index entries will be printed in the document; otherwise, they
@@ -128,6 +131,8 @@ package ARM_Format is
 	-- If Number_Paragraphs is true, paragraphs will be numbered (per
 	-- subclause); otherwise they will not be.
 	-- Example_Font specifies the font that examples will be set in.
+	-- If Use_ISO_2004_Note_Format is true, that format will be used;
+	-- else the Ada95 standard's format will be used.
 
     procedure Destroy (Format_Object : in out Format_Type);
 	-- Destroy a format object, releasing any resources.
@@ -181,7 +186,7 @@ private
 	Syntax, Resolution, Legality,
 	Static_Semantics, Link_Time, Run_Time, Bounded_Errors,
 	Erroneous, Requirements, Documentation, Metrics, Permissions, Advice,
-	Notes, Examples,
+	Notes, Single_Note, Examples,
 	Ada83_Inconsistencies, Ada83_Incompatibilities, -- AARM-only.
 	Ada83_Extensions, Ada83_Wording, -- AARM-only.
 	Ada95_Inconsistencies, Ada95_Incompatibilities, -- AARM-only.
@@ -215,11 +220,11 @@ private
 	Link_Non_Terminals : Boolean;
 	Number_Paragraphs : Boolean;
 	Examples_Font : ARM_Output.Font_Family_Type;
+	Use_ISO_2004_Note_Format : Boolean;
 
 	-- Clause numbers:
-	Section : ARM_Contents.Section_Number_Type; -- The current section number.
-	Clause : Natural; -- The current clause number.
-	Subclause : Natural; -- The current subclause number.
+	Clause_Number : ARM_Contents.Clause_Number_Type;
+	     -- The current clause number (Section, clause, subclause, subsubclause).
 	Unnumbered_Section : Natural; -- The current (if any) clause number
 		-- for unnumbered sections.
 

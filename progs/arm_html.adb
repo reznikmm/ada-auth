@@ -147,6 +147,7 @@ package body ARM_HTML is
     --  3/28/06 - RLB - Removed unnecessary space from headers.
     --  3/30/06 - RLB - Added a bit of space around inline pictures.
     --  9/21/06 - RLB - Added Body_Font.
+    --  9/22/06 - RLB - Added Subsubclause.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -3390,7 +3391,8 @@ package body ARM_HTML is
 	    when ARM_Contents.Section =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>Section " &
 				      Clause_Number & ": " & Header_Text & "</H1>");
-	    when ARM_Contents.Clause | ARM_Contents.Subclause =>
+	    when ARM_Contents.Clause | ARM_Contents.Subclause |
+		 ARM_Contents.Subsubclause =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>" &
 				      Clause_Number & ' ' & Header_Text & "</H1>");
 	end case;
@@ -3473,7 +3475,8 @@ package body ARM_HTML is
 	    when ARM_Contents.Section =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>Section " &
 				      Clause_Number & ": " & Header_Text & "</H1>");
-	    when ARM_Contents.Clause | ARM_Contents.Subclause =>
+	    when ARM_Contents.Clause | ARM_Contents.Subclause |
+		 ARM_Contents.Subsubclause =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1> " &
 				      Clause_Number & ' ' & Header_Text & "</H1>");
 	end case;

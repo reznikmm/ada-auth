@@ -112,6 +112,7 @@ package body ARM_RTF is
     --			table command.
     --		- RLB - Added picture command.
     --  9/21/06 - RLB - Added Body_Font; revised styles to handle that.
+    --  9/22/06 - RLB - Added Subsubclause.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -142,6 +143,7 @@ package body ARM_RTF is
     Heading_1_Info : Format_Info_Type;
     Heading_2_Info : Format_Info_Type;
     Heading_3_Info : Format_Info_Type;
+    Heading_4_Info : Format_Info_Type;
     Category_Header_Info : Format_Info_Type;
     Paragraph_Number_Info : Format_Info_Type;
     Header_Info : Format_Info_Type;
@@ -149,6 +151,7 @@ package body ARM_RTF is
     TOC_1_Info : Format_Info_Type;
     TOC_2_Info : Format_Info_Type;
     TOC_3_Info : Format_Info_Type;
+    TOC_4_Info : Format_Info_Type;
 
     Table_C_Text_Info : Format_Info_Type;
     Table_L_Text_Info : Format_Info_Type;
@@ -1095,6 +1098,17 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s54\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-160 \snext54 ");
+	    Set_Style (Heading_4_Info,
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
+		       Font_Size => 22,
+		       Style_Indent => 0,
+		       Style_Before => 210,
+		       Style_After => 90,
+		       Style_Justified => FALSE,
+		       Style_String_Prefix =>
+			 "\s55\keepn\widctlpar\outlinelevel3\adjustright",
+		       Style_String_Suffix => "\b\ql\cgrid \sbasedon0 \snext0 ");
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
                 Set_Style (TOC_1_Info,
@@ -1106,7 +1120,7 @@ package body ARM_RTF is
 		           Style_After => 45,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s55\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s56\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font => ARM_Output.Swiss,
@@ -1117,7 +1131,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s56\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s57\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font => ARM_Output.Swiss,
@@ -1128,7 +1142,18 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s57\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s58\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
+                Set_Style (TOC_4_Info,
+		           Font => ARM_Output.Swiss,
+		           Body_Font => Output_Object.Body_Font,
+		           Font_Size => 17,
+		           Style_Indent => 600,
+		           Style_Before => 0,
+		           Style_After => 0,
+		           Style_Justified => FALSE,
+		           Style_String_Prefix =>
+		             "\s59\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_C_Text_Info,
@@ -1834,6 +1859,17 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s54\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-180\slmult0 \snext54 ");
+	    Set_Style (Heading_4_Info,
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
+		       Font_Size => 27,
+		       Style_Indent => 0,
+		       Style_Before => 210,
+		       Style_After => 100,
+		       Style_Justified => FALSE,
+		       Style_String_Prefix =>
+			 "\s55\keepn\widctlpar\outlinelevel3\adjustright",
+		       Style_String_Suffix => "\b\ql\cgrid \sbasedon0 \snext0 ");
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
                 Set_Style (TOC_1_Info,
@@ -1845,7 +1881,7 @@ package body ARM_RTF is
 			   Style_After => 60,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s55\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s56\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font => ARM_Output.Swiss,
@@ -1856,7 +1892,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s56\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s57\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font => ARM_Output.Swiss,
@@ -1867,7 +1903,18 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s57\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s58\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
+                Set_Style (TOC_4_Info,
+		           Font => ARM_Output.Swiss,
+		           Body_Font => Output_Object.Body_Font,
+		           Font_Size => 22,
+		           Style_Indent => 600,
+		           Style_Before => 0,
+			   Style_After => 0,
+		           Style_Justified => FALSE,
+		           Style_String_Prefix =>
+		             "\s59\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_C_Text_Info,
@@ -2022,19 +2069,23 @@ package body ARM_RTF is
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Swiss Examples;}");
 	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Swiss_Indented_Examples));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Swiss Indented Examples;}");
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Swiss_Indented_Examples));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Swiss Indented Examples;}");
         if Output_Object.Big_Files then
-	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Swiss_Indented_Examples));
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Swiss Indented Examples;}");
+	    Write_Style (Output_Object.Output_File, Heading_4_Info);
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Heading 4;}");
 	    -- Define the TOC styles:
 	    Write_Style (Output_Object.Output_File, TOC_1_Info);
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "toc 1;}");
 	    Write_Style (Output_Object.Output_File, TOC_2_Info);
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "toc 2;}");
 	    Write_Style (Output_Object.Output_File, TOC_3_Info);
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "toc 3;}}");
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "toc 3;}");
+	    Write_Style (Output_Object.Output_File, TOC_4_Info);
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "toc 4;}}");
 	else
-	    Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Swiss_Indented_Examples));
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Swiss Indented Examples;}}");
+	    Write_Style (Output_Object.Output_File, Heading_4_Info);
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "Heading 4;}}");
 	end if;
             -- \additive means that the style inherits from the previous style.
 	    -- \basedon defines the style that the style was inherited from.
@@ -2711,7 +2762,8 @@ package body ARM_RTF is
 	    -- Start a new section:
 	    if No_Page_Break or else
 	       ARM_Contents."="(Level, ARM_Contents.Clause) or else
-	       ARM_Contents."="(Level, ARM_Contents.Subclause) then
+	       ARM_Contents."="(Level, ARM_Contents.Subclause) or else
+	       ARM_Contents."="(Level, ARM_Contents.Subsubclause) then
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\sect\sbknone\pgncont ");
 	    else
 		-- Start sections on a new page. (Should only happen in the
@@ -2841,6 +2893,11 @@ package body ARM_RTF is
 	            Heading_3_Info, Count);
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File,
 		     Clause_Number & " " & Header_Text & "\par}");
+	    when ARM_Contents.Subsubclause =>
+	        Write_Style_for_Paragraph (Output_Object.Output_File,
+	            Heading_4_Info, Count);
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+		     Clause_Number & " " & Header_Text & "\par}");
 	end case;
 	Output_Object.Char_Count := 0;
     end Clause_Header;
@@ -2914,6 +2971,11 @@ package body ARM_RTF is
 	    when ARM_Contents.Subclause =>
 	        Write_Style_for_Paragraph (Output_Object.Output_File,
 	            Heading_3_Info, Count);
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+		     Clause_Number & " " & Header_Text & "\par}");
+	    when ARM_Contents.Subsubclause =>
+	        Write_Style_for_Paragraph (Output_Object.Output_File,
+	            Heading_4_Info, Count);
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File,
 		     Clause_Number & " " & Header_Text & "\par}");
 	end case;

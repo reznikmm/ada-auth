@@ -56,6 +56,7 @@ package body ARM_Index is
     --  1/16/06 - RLB - Fixed so a letter header is output if the first
     --			indexed item starts with a letter.
     --  2/17/06 - RLB - Added Remove_Soft_Hyphens flag to Clean (for output).
+    --  9/22/06 - RLB - Changed to use Clause_Number_Type.
 
     Next_Index_Key : Index_Key;
 
@@ -64,9 +65,7 @@ package body ARM_Index is
     type Term_Type is record
 	Clause : String (1..10);
 	Clause_Len : Natural;
-	Section_Number : ARM_Contents.Section_Number_Type;
-	Clause_Number : Natural;
-	Subclause_Number : Natural;
+	Clause_Number : ARM_Contents.Clause_Number_Type;
 	Paragraph : String (1..10);
 	Paragraph_Len : Natural;
 	Term : String (1..60);
@@ -264,9 +263,7 @@ package body ARM_Index is
 				    Drop   => Ada.Strings.Error,
 			            Pad    => ' ');
 	    Temp_Term.Paragraph_Len := Paragraph'Length;
-	    ARM_Contents.Make_Clause (Clause, Temp_Term.Section_Number,
-					Temp_Term.Clause_Number,
-					Temp_Term.Subclause_Number);
+	    ARM_Contents.Make_Clause (Clause, Temp_Term.Clause_Number);
 
 	end if;
 	Temp_Term.Key := Key;
@@ -586,7 +583,7 @@ package body ARM_Index is
 	    function "<" (Left, Right : Term_Ptr) return Boolean is
 		function To_Lower (A : in String) return String renames
 		    Ada.Characters.Handling.To_Lower;
-		use type ARM_Contents.Section_Number_Type;
+		use type ARM_Contents.Clause_Number_Type;
 
 		type Compare_Result is (Less, Greater, Equal);
 		function Compare (Left, Right : in String) return Compare_Result is
@@ -630,19 +627,9 @@ package body ARM_Index is
 		end case;
 		-- Note: We use the numbers, because the references don't
 		-- sort right (11.1 comes before 2.8, etc.)
-		if Left.Section_Number < Right.Section_Number then
+		if Left.Clause_Number < Right.Clause_Number then
 		    return True;
-		elsif Left.Section_Number > Right.Section_Number then
-		    return False;
-		elsif Left.Clause_Number < Right.Clause_Number then
-		    return True;
-		elsif Left.Clause_Number > Right.Clause_Number then
-		    return False;
-		elsif Left.Subclause_Number < Right.Subclause_Number then
-		    return True;
-		elsif Left.Subclause_Number > Right.Subclause_Number then
-		    return False;
-		else
+		elsif Left.Clause_Number = Right.Clause_Number then
 		    -- Make sure that single digit paragraph numbers sort before
 		    -- multiple digit ones:
 		    if Left.Paragraph_Len <= 1 or else Left.Paragraph(2) = '.' or else Left.Paragraph(2) = '/' then
@@ -663,6 +650,8 @@ package body ARM_Index is
 			    return Left.Paragraph (1..Left.Paragraph_Len) < Right.Paragraph (1..Right.Paragraph_Len);
 			end if;
 		    end if;
+		else -- Left.Clause_Number > Right.Clause_Number
+		    return False;
 		end if;
 	    end "<";
 

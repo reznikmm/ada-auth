@@ -61,6 +61,7 @@ package body ARM_Master is
     --  2/19/06 - RLB - Set Number_Paragraphs for HTML.
     --  6/22/06 - RLB - Added LinkNonTerminals command.
     --  9/21/06 - RLB - Added the Body_Font command.
+    --  9/22/06 - RLB - Added the Note_Format command.
 
     type Command_Type is (
 	-- Source commands:
@@ -78,6 +79,8 @@ package body ARM_Master is
 	File_Prefix,
 	Example_Font,
 	Body_Font,
+	Note_Format,
+
 	-- HTML properties:
 	Single_HTML_Output_File,
 	HTML_Kind_Command,
@@ -132,9 +135,11 @@ package body ARM_Master is
     Should_Number_Paragraphs : Boolean := False; -- Should paragraphs be numbered?
     Font_of_Examples : ARM_Output.Font_Family_Type :=
 	ARM_Output.Fixed; -- Which font should be used for examples?
-
     Font_of_Body : ARM_Output.Font_Family_Type :=
 	ARM_Output.Roman; -- Which font should be used for the body?
+    Use_ISO_2004_Note_Format : Boolean := True;
+	-- Should we use the ISO 2004 note format, or the one used in the
+	-- Ada 95 standard??
 
     -- HTML properties:
     Use_Large_HTML_Files : Boolean := False; -- Use small output files by default.
@@ -196,6 +201,8 @@ package body ARM_Master is
 	    return Example_Font;
 	elsif Canonical_Name = "bodyfont" then
 	    return Body_Font;
+	elsif Canonical_Name = "noteformat" then
+	    return Note_Format;
 	elsif Canonical_Name = "singlehtmloutputfile" then
 	    return Single_HTML_Output_File;
 	elsif Canonical_Name = "htmlkind" then
@@ -662,10 +669,10 @@ package body ARM_Master is
 --Ada.Text_IO.Put_Line("  Section_Number=" & Item(1..ILen));
 			if ILen = 1 and then Item(1) in 'A'..'Z' then
 		            Source_Data(Source_Length).Section_Number :=
-				21 + Character'Pos(Item(1)) - Character'Pos('A');
+				31 + Character'Pos(Item(1)) - Character'Pos('A');
 			elsif ILen = 1 and then Item(1) in 'a'..'z' then
 		            Source_Data(Source_Length).Section_Number :=
-				21 + Character'Pos(Item(1)) - Character'Pos('a');
+				31 + Character'Pos(Item(1)) - Character'Pos('a');
 			else
 			    begin
 				Source_Data(Source_Length).Section_Number :=
@@ -798,6 +805,25 @@ package body ARM_Master is
 			    Ada.Text_IO.Put_Line("Body in roman font");
 			else
 		            Ada.Text_IO.Put_Line ("** Unknown body font name: " & Font_Name &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		    end;
+
+		when Note_Format =>
+		    -- @NoteFormat{Ada95|ISO2004}
+		    declare
+			Format_Name : constant String :=
+			    Ada.Characters.Handling.To_Lower (
+				Get_Single_String);
+		    begin
+			if Format_Name = "ada95" then
+			    Use_ISO_2004_Note_Format := False;
+			    Ada.Text_IO.Put_Line("Notes in Ada 95 standard format");
+			elsif Format_Name = "iso2004" then
+			    Use_ISO_2004_Note_Format := True;
+			    Ada.Text_IO.Put_Line("Notes in ISO 2004 standard format");
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown note format name: " & Format_Name &
 						  " on line" & ARM_Input.Line_String (Input_Object));
 			end if;
 		    end;
@@ -952,7 +978,8 @@ package body ARM_Master is
 		Include_ISO => Include_ISO_Text,
 		Link_Non_Terminals => Should_Link_Non_Terminals,
 		Number_Paragraphs => Should_Number_Paragraphs,
-		Examples_Font => Font_of_Examples);
+		Examples_Font => Font_of_Examples,
+		Use_ISO_2004_Note_Format => Use_ISO_2004_Note_Format);
     end Create_Format;
 
 

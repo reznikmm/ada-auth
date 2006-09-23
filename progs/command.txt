@@ -176,6 +176,13 @@ Global properties:
      This specifies which font is used to display the body of the document.
      This changes all styles that are not defined to use a specific font.
      By default, the Roman font is used.
+@NoteFormat{Ada95|ISO2004}
+     This specifies the format of notes sections.
+     If Ada95, the word "NOTES" is on a separate line, and each note is
+     numbered, with the numbers starting at 1 for each section.
+     If ISO2004, each note starts with the word "Note", and a number,
+     with the numbers starting from 1 for each subclause.
+     If there is only one note in a subclause, the number should be omitted.
 
 HTML Output properties:
 
@@ -371,6 +378,8 @@ Text commands:
 	The formatter assigns clause numbers.
 @LabeledSubClause{<text>} - Start a labeled subclause. The title will be "text".
 	The formatter assigns subclause numbers.
+@LabeledSubSubClause{<text>} - Start a labeled subsubclause. The title will be "text".
+	The formatter assigns subsubclause numbers.
 @LabeledRevisedNormativeAnnex{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
 	Start a labeled normative annex. The title will be "new_text". If we
         are generating an old version of the RM, the title is "old_text"
@@ -383,7 +392,13 @@ Text commands:
         instead. (Note that annex references in commands always use the
         new_text name.) The formatter assigns annex letters. Version is the
         version number of the change (see @ChgRef for details).
-@@LabeledRevisedClause{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
+@LabeledRevisedSection{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
+        Start a labeled section (chapter). The title will be "new_text". If we are
+        generating an old version of the RM, the title is "old_text" instead.
+        (Note that clause references in commands always use the new_text name.)
+        The formatter assigns clause numbers. Version is the version number of
+        the change (see @ChgRef for details).
+@LabeledRevisedClause{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
         Start a labeled clause. The title will be "new_text". If we are
         generating an old version of the RM, the title is "old_text" instead.
         (Note that clause references in commands always use the new_text name.)
@@ -395,6 +410,17 @@ Text commands:
 	(Note that clause references in commands always use the new_text name.)
         The formatter assigns subclause numbers. Version is the version number
         of the change (see @ChgRef for details).
+@LabeledRevisedSubSubClause{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
+        Start a labeled subsubclause. The title will be "new_text". If we are
+	generating an old version of the RM, the title is "old_text" instead.
+	(Note that clause references in commands always use the new_text name.)
+        The formatter assigns subsubclause numbers. Version is the version number
+        of the change (see @ChgRef for details).
+@LabeledAddedSection{Version=[<version>],Name=[<new_text>]} - Start a labeled
+        section (chapter). The title will be "new_text". If we are generating an old
+	version of the RM, this clause does not exist. (Any clause references
+	ought to be in new text.) The formatter assigns clause numbers. Version
+	is the version number of the change (see @ChgRef for details).
 @LabeledAddedClause{Version=[<version>],Name=[<new_text>]} - Start a labeled
         clause. The title will be "new_text". If we are generating an old
 	version of the RM, this clause does not exist. (Any clause references
@@ -404,6 +430,12 @@ Text commands:
         subclause. The title will be "new_text". If we are generating an old
 	version of the RM, this subclause does not exist. (Any subclause
 	references ought to be in new text.) The formatter assigns subclause
+        numbers. Version is the version number of the change (see @ChgRef for
+        details).
+@LabeledAddedSubSubClause{Version=[<version>],Name=[<new_text>]} - Start a labeled
+        subsubclause. The title will be "new_text". If we are generating an old
+	version of the RM, this subsubclause does not exist. (Any subsubclause
+	references ought to be in new text.) The formatter assigns subsubclause
         numbers. Version is the version number of the change (see @ChgRef for
         details).
 @LabeledAddedNormativeAnnex{Version=[<version>],Name=[<new_text>]]} -
@@ -881,7 +913,12 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	Metrics	  - Metrics.
 	ImplPerm  - Implementation Permissions.
 	ImplAdvice- Implementation Advice.
-	Notes	  - Notes. (Each of these is numbered and indented 1 unit.)
+	Notes	  - Notes. (Each of these is numbered and indented 1 unit.
+		    The format is controlled by the @NoteFormat command
+		    in the master file.)
+	SingleNote - A single note (it is indented 1 unit, but not numbered.
+		    The format is controlled by the @NoteFormat command
+		    in the master file.)
 	Examples  - Examples. (Do not confuse this with the text format
 		    "Example". This is a grouping with a subhead. It is in
 		    the normal font by default; often an "Example" is found

@@ -2,7 +2,8 @@ with ARM_Output,
      ARM_Contents,
      Ada.Text_IO,
      Ada.Exceptions,
-     Ada.Strings.Fixed;
+     Ada.Strings.Fixed,
+     Ada.Strings.Maps;
 package body ARM_Corr is
 
     --
@@ -52,6 +53,7 @@ package body ARM_Corr is
     --  2/10/06 - RLB - Added even more additional parameters to the
     --			table command.
     --		- RLB - Added picture command.
+    --  9/22/06 - RLB - Added missing with.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -745,7 +747,8 @@ package body ARM_Corr is
 		    Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				       Header_Text);
 	        end if;
-	    when ARM_Contents.Clause | ARM_Contents.Subclause =>
+	    when ARM_Contents.Clause | ARM_Contents.Subclause |
+		 ARM_Contents.Subsubclause =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				      Clause_Number & ' ' & Header_Text);
 	end case;
@@ -828,7 +831,8 @@ package body ARM_Corr is
 		    Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				       Header_Text);
 	        end if;
-	    when ARM_Contents.Clause | ARM_Contents.Subclause =>
+	    when ARM_Contents.Clause | ARM_Contents.Subclause |
+		 ARM_Contents.Subsubclause =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				      Clause_Number & ' ' & Header_Text);
 	end case;

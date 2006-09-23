@@ -215,6 +215,10 @@ package body ARM_Format is
     --			the mode would prevent that.
     --  6/22/06 - RLB - Added non-terminal linking.
     --  8/ 4/06 - RLB - Added checking for bad unit indexing.
+    --  9/22/06 - RLB - Added "Use_ISO_2004_Note_Format", and implemented that
+    --			format.
+    --		- RLB - Revised to use Clause_Number_Type, and to support
+    --			Subsubclauses.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -240,6 +244,7 @@ package body ARM_Format is
 	 Permissions	 => (Length => 25, Str => "Implementation Permission               "), -- ImplPermName
 	 Advice		 => (Length => 21, Str => "Implementation Advice                   "), -- ImplAdviceName
 	 Notes		 => (Length =>  4, Str => "Note                                    "), -- NotesName
+	 Single_Note	 => (Length =>  4, Str => "Note                                    "), -- SimpleNoteName
 	 Examples	 => (Length =>  7, Str => "Example                                 "), -- ExamplesName
 	 Ada83_Inconsistencies
 			 => (Length => 25, Str => "Inconsistency with Ada 83               "), -- Inconsistent83Name
@@ -295,6 +300,7 @@ package body ARM_Format is
 	 Permissions	 => (Length => 26, Str => "Implementation Permissions              "), -- ImplPermTitle
 	 Advice		 => (Length => 21, Str => "Implementation Advice                   "), -- ImplAdviceTitle
 	 Notes		 => (Length =>  5, Str => "NOTES                                   "), -- NotesTitle
+	 Single_Note	 => (Length =>  5, Str => "NOTES                                   "), -- SimpleNoteTitle
 	 Examples	 => (Length =>  8, Str => "Examples                                "), -- ExamplesTitle
 	 Ada83_Inconsistencies
 			 => (Length => 27, Str => "Inconsistencies With Ada 83             "), -- Inconsistent83Title
@@ -374,7 +380,8 @@ package body ARM_Format is
 		      Include_ISO : in Boolean;
 		      Link_Non_Terminals : in Boolean;
 		      Number_Paragraphs : in Boolean;
-		      Examples_Font : in ARM_Output.Font_Family_Type) is
+		      Examples_Font : in ARM_Output.Font_Family_Type;
+		      Use_ISO_2004_Note_Format : in Boolean) is
 	-- Initialize an input object. Changes and Change_Version determine
 	-- which changes should be displayed. If Display_Index_Entries is True,
 	-- index entries will be printed in the document; otherwise, they
@@ -388,6 +395,8 @@ package body ARM_Format is
 	-- If Number_Paragraphs is true, paragraphs will be numbered (per
 	-- subclause); otherwise they will not be.
 	-- Example_Font specifies the font that examples will be set in.
+	-- If Use_ISO_2004_Note_Format is true, that format will be used;
+	-- else the Ada95 standard's format will be used.
     begin
 	Format_Object.Changes := Changes;
 	Format_Object.Change_Version := Change_Version;
@@ -397,10 +406,10 @@ package body ARM_Format is
 	Format_Object.Link_Non_Terminals := Link_Non_Terminals;
 	Format_Object.Number_Paragraphs := Number_Paragraphs;
 	Format_Object.Examples_Font := Examples_Font;
+	Format_Object.Use_ISO_2004_Note_Format := Use_ISO_2004_Note_Format;
 
-	Format_Object.Section := 0;
-	Format_Object.Clause := 0;
-	Format_Object.Subclause := 0;
+	Format_Object.Clause_Number := (Section => 0, Clause => 0,
+				        Subclause => 0, Subsubclause => 0);
 	Format_Object.Unnumbered_Section := 0;
         Format_Object.Next_Note := 1;
         Format_Object.Next_Paragraph := 1;
@@ -469,8 +478,9 @@ package body ARM_Format is
 	Index_Other, Index_Check, Index_Attr, Index_Pragma,
 	-- Clause labels:
 	Labeled_Section, Labeled_Section_No_Break, Labeled_Clause,
-	Labeled_Subclause, Labeled_Revised_Clause, Labeled_Revised_Subclause,
-        Labeled_Added_Clause, Labeled_Added_Subclause,
+	Labeled_Subclause, Labeled_Subsubclause,
+	Labeled_Revised_Section, Labeled_Revised_Clause, Labeled_Revised_Subclause, Labeled_Revised_Subsubclause,
+        Labeled_Added_Section, Labeled_Added_Clause, Labeled_Added_Subclause, Labeled_Added_Subsubclause,
 	Preface_Section,
 	Labeled_Informative_Annex, Labeled_Revised_Informative_Annex,
         Labeled_Added_Informative_Annex,
@@ -513,12 +523,13 @@ package body ARM_Format is
 	Intro_Name, Syntax_Name, Resolution_Name, Legality_Name, Static_Name,
 	Link_Name, Run_Name, Bounded_Name, Erroneous_Name, Req_Name,
 	Doc_Name, Metrics_Name, Permission_Name, Advice_Name, Notes_Name,
-	Examples_Name, Meta_Name, Inconsistent83_Name, Incompatible83_Name,
-	Extend83_Name, Wording83_Name,
+	Single_Note_Name, Examples_Name, Meta_Name, Inconsistent83_Name,
+	Incompatible83_Name, Extend83_Name, Wording83_Name,
 	Inconsistent95_Name, Incompatible95_Name, Extend95_Name, Wording95_Name,
 	Syntax_Title, Resolution_Title, Legality_Title, Static_Title,
 	Link_Title, Run_Title, Bounded_Title, Erroneous_Title, Req_Title,
 	Doc_Title, Metrics_Title, Permission_Title, Advice_Title, Notes_Title,
+	Single_Note_Title,
 	Examples_Title, Meta_Title, Inconsistent83_Title, Incompatible83_Title,
 	Extend83_Title, Wording83_Title, Inconsistent95_Title, Incompatible95_Title,
 	Extend95_Title, Wording95_Title,
@@ -732,6 +743,8 @@ package body ARM_Format is
 	    return Labeled_Clause;
 	elsif Canonical_Name = "labeledsubclause" then
 	    return Labeled_Subclause;
+	elsif Canonical_Name = "labeledsubsubclause" then
+	    return Labeled_Subsubclause;
 	elsif Canonical_Name = "labeledinformativeannex" then
 	    return Labeled_Informative_Annex;
 	elsif Canonical_Name = "labelednormativeannex" then
@@ -746,14 +759,22 @@ package body ARM_Format is
 	    return Labeled_Added_Informative_Annex;
 	elsif Canonical_Name = "labeledaddednormativeannex" then
 	    return Labeled_Added_Normative_Annex;
+	elsif Canonical_Name = "labeledrevisedsection" then
+	    return Labeled_Revised_Section;
 	elsif Canonical_Name = "labeledrevisedclause" then
 	    return Labeled_Revised_Clause;
 	elsif Canonical_Name = "labeledrevisedsubclause" then
 	    return Labeled_Revised_Subclause;
+	elsif Canonical_Name = "labeledrevisedsubsubclause" then
+	    return Labeled_Revised_Subsubclause;
+	elsif Canonical_Name = "labeledaddedsection" then
+	    return Labeled_Added_Section;
 	elsif Canonical_Name = "labeledaddedclause" then
 	    return Labeled_Added_Clause;
 	elsif Canonical_Name = "labeledaddedsubclause" then
 	    return Labeled_Added_Subclause;
+	elsif Canonical_Name = "labeledaddedsubsubclause" then
+	    return Labeled_Added_Subsubclause;
 	elsif Canonical_Name = "subheading" then
 	    return Subheading;
 	elsif Canonical_Name = "addedsubheading" then
@@ -820,6 +841,8 @@ package body ARM_Format is
 	    return Advice_Name;
 	elsif Canonical_Name = "notesname" then
 	    return Notes_Name;
+	elsif Canonical_Name = "singlenotename" then
+	    return Single_Note_Name;
 	elsif Canonical_Name = "examplesname" then
 	    return Examples_Name;
 	elsif Canonical_Name = "metarulesname" then
@@ -868,6 +891,8 @@ package body ARM_Format is
 	    return Advice_Title;
 	elsif Canonical_Name = "notestitle" then
 	    return Notes_Title;
+	elsif Canonical_Name = "singlenotetitle" then
+	    return Single_Note_Title;
 	elsif Canonical_Name = "examplestitle" then
 	    return Examples_Title;
 	elsif Canonical_Name = "metarulestitle" then
@@ -950,29 +975,31 @@ package body ARM_Format is
         -- Returns a string for a clause reference.
         use type ARM_Contents.Section_Number_Type;
     begin
-        if Format_Object.Subclause /= 0 then
+        if Format_Object.Clause_Number.Subsubclause /= 0 then
+	    return ARM_Contents.Make_Clause_Number (
+		    ARM_Contents.SubSubClause,
+		    Format_Object.Clause_Number);
+        elsif Format_Object.Clause_Number.Subclause /= 0 then
 	    return ARM_Contents.Make_Clause_Number (
 		    ARM_Contents.SubClause,
-		    Format_Object.Section,
-		    Format_Object.Clause,
-		    Format_Object.Subclause);
-        elsif Format_Object.Clause /= 0 then
+		    Format_Object.Clause_Number);
+        elsif Format_Object.Clause_Number.Clause /= 0 then
 	    return ARM_Contents.Make_Clause_Number (
 		    ARM_Contents.Clause,
-		    Format_Object.Section,
-		    Format_Object.Clause);
+		    Format_Object.Clause_Number);
         else
-	    if Format_Object.Section = 0 then
+	    if Format_Object.Clause_Number.Section = 0 then
 	        return ARM_Contents.Make_Clause_Number (
-		        ARM_Contents.Unnumbered_Section, 0);
-	    elsif Format_Object.Section <= 20 then
+		        ARM_Contents.Unnumbered_Section,
+			Format_Object.Clause_Number);
+	    elsif Format_Object.Clause_Number.Section < ARM_Contents.ANNEX_START then
 	        return ARM_Contents.Make_Clause_Number (
 		        ARM_Contents.Section,
-		        Format_Object.Section);
+		        Format_Object.Clause_Number);
 	    else
 	        return ARM_Contents.Make_Clause_Number (
 		        ARM_Contents.Normative_Annex,
-		        Format_Object.Section);
+		        Format_Object.Clause_Number);
 	    end if;
         end if;
     end Clause_String;
@@ -1096,20 +1123,14 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 
 	procedure Write_It (Title : in ARM_Contents.Title_Type;
 		   Level : in ARM_Contents.Level_Type;
-		   Section_Number : in ARM_Contents.Section_Number_Type;
-		   Clause_Number : in Natural;
-		   Subclause_Number : in Natural;
+		   Clause_Number : in ARM_Contents.Clause_Number_Type;
                    Version : in ARM_Contents.Change_Version_Type;
 		   Quit : out Boolean) is
 	    Clause_Text : constant String :=
-		ARM_Contents.Make_Clause_Number (Level, Section_Number,
-						 Clause_Number, Subclause_Number);
+		ARM_Contents.Make_Clause_Number (Level, Clause_Number);
 	    Old_Title : ARM_Contents.Title_Type :=
 		        ARM_Contents.Lookup_Old_Title (
-			    Level, Section_Number,
-			    Clause_Number, Subclause_Number);
-
-
+			    Level, Clause_Number);
 	begin
 	    Quit := False;
 	    if Old_Title = ARM_Contents.Title_Type'(others => ' ') and then
@@ -1127,6 +1148,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 	    elsif ARM_Contents."=" (Level, ARM_Contents.Subclause) then
 		ARM_Output.Line_Break (Output_Object);
 		ARM_Output.Ordinary_Text (Output_Object, "        ");
+		ARM_Output.Ordinary_Text (Output_Object, Clause_Text);
+		ARM_Output.Hard_Space (Output_Object);
+	    elsif ARM_Contents."=" (Level, ARM_Contents.Subsubclause) then
+		ARM_Output.Line_Break (Output_Object);
+		ARM_Output.Ordinary_Text (Output_Object, "            ");
 		ARM_Output.Ordinary_Text (Output_Object, Clause_Text);
 		ARM_Output.Hard_Space (Output_Object);
 	    elsif ARM_Contents."=" (Level, ARM_Contents.Unnumbered_Section) then
@@ -1160,8 +1186,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 	        ARM_Output.Clause_Reference (Output_Object,
 		    Ada.Strings.Fixed.Trim (
 		        ARM_Contents.Lookup_Old_Title (
-			    Level, Section_Number,
-			    Clause_Number, Subclause_Number), Ada.Strings.Right),
+			    Level, Clause_Number), Ada.Strings.Right),
 		    Clause_Text);
 	    else
 	        case Format_Object.Changes is
@@ -1169,8 +1194,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		        ARM_Output.Clause_Reference (Output_Object,
 		            Ada.Strings.Fixed.Trim (
 			        ARM_Contents.Lookup_Old_Title (
-				    Level, Section_Number,
-				    Clause_Number, Subclause_Number), Ada.Strings.Right),
+				    Level, Clause_Number), Ada.Strings.Right),
 		            Clause_Text);
 	            when ARM_Format.New_Only |
 		         ARM_Format.Changes_Only |
@@ -1494,7 +1518,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		     Static_Semantics | Link_Time |
 		     Run_Time | Bounded_Errors |
 		     Erroneous | Requirements | Documentation |
-		     Metrics | Permissions | Advice | Notes | Examples =>
+		     Metrics | Permissions | Advice | Notes | Single_Note |
+		     Examples =>
 		    return False;
 	        when Language_Design | Ada83_Inconsistencies |
 		     Ada83_Incompatibilities | Ada83_Extensions |
@@ -1814,7 +1839,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		    when Syntax =>
 			Format_Object.Format := ARM_Output.Syntax_Indented;
 			Format_Object.No_Breaks := True;
-		    when Notes => -- Notes
+		    when Notes | Single_Note => -- Notes (only the numbering varies)
 			Format_Object.Format := ARM_Output.Notes;
 			Format_Object.No_Breaks := False;
 		    when Language_Design | -- "MetaRules"
@@ -1896,7 +1921,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
                         elsif Enclosing_Format = Syntax_Indented or else
 			      Enclosing_Format = Syntax then
 			   Format_Object.Format := ARM_Output.Syntax_Indented_Bulleted;
-                        elsif Enclosing_Format = Notes then
+                        elsif Enclosing_Format = Notes or else
+			      Enclosing_Format = Single_Note then
 			   Format_Object.Format := ARM_Output.Notes_Bulleted;
                         elsif Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
 			   Format_Object.Format := ARM_Output.Small_Bulleted;
@@ -1918,7 +1944,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			          Outer_Enclosing_Format = Syntax then
 Ada.Text_IO.Put_Line ("%% Oops, Nested_Bulleted in Syntax_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 			       Format_Object.Format := ARM_Output.Syntax_Indented_Bulleted;
-                            elsif Outer_Enclosing_Format = Notes then
+                            elsif Outer_Enclosing_Format = Notes or else
+				  Outer_Enclosing_Format = Single_Note then
 			       Format_Object.Format := ARM_Output.Notes_Nested_Bulleted;
                             elsif Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
 			       Format_Object.Format := ARM_Output.Small_Nested_Bulleted;
@@ -1946,7 +1973,8 @@ Ada.Text_IO.Put_Line ("%% Oops, Nested_X2_Bulleted in Indented_Bulleted paragrap
 			          Outer_Enclosing_Format = Syntax then
 Ada.Text_IO.Put_Line ("%% Oops, Nested_X2_Bulleted in Syntax_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
 			       Format_Object.Format := ARM_Output.Syntax_Indented_Bulleted;
-                            elsif Outer_Enclosing_Format = Notes then
+                            elsif Outer_Enclosing_Format = Notes or else
+				  Outer_Enclosing_Format = Single_Note then
 Ada.Text_IO.Put_Line ("%% Oops, Nested_X2_Bulleted in Notes paragraph, line " & ARM_Input.Line_String (Input_Object));
 			       Format_Object.Format := ARM_Output.Notes_Nested_Bulleted;
                             elsif Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
@@ -2331,16 +2359,21 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		         Examples =>
 			ARM_Output.Category_Header (Output_Object, Paragraph_Kind_Title(For_Type).Str(1..Paragraph_Kind_Title(For_Type).Length));
 			Format_Object.Last_Paragraph_Subhead_Type := For_Type;
-		    when Notes => -- Notes
-			-- The Notes header looks different from the others.
-		        ARM_Output.Start_Paragraph (Output_Object,
-					            Format => ARM_Output.Notes_Header,
-					            Number => "",
-						    No_Breaks => True,
-						    Keep_with_Next => True);
-			ARM_Output.Ordinary_Text (Output_Object, Paragraph_Kind_Title(For_Type).Str(1..Paragraph_Kind_Title(For_Type).Length));
-			ARM_Output.End_Paragraph (Output_Object);
-			Format_Object.Last_Paragraph_Subhead_Type := For_Type;
+		    when Notes | Single_Note => -- Notes
+			if not Format_Object.Use_ISO_2004_Note_Format then
+			    -- The Notes header looks different from the others.
+		            ARM_Output.Start_Paragraph (Output_Object,
+					                Format => ARM_Output.Notes_Header,
+					                Number => "",
+						        No_Breaks => True,
+						        Keep_with_Next => True);
+			    ARM_Output.Ordinary_Text (Output_Object, Paragraph_Kind_Title(For_Type).Str(1..Paragraph_Kind_Title(For_Type).Length));
+			    ARM_Output.End_Paragraph (Output_Object);
+			    Format_Object.Last_Paragraph_Subhead_Type := For_Type;
+			else
+			    null; -- No subheader. We don't change the last
+			        -- subheader generated, either.
+			end if;
 		    when Language_Design | -- "MetaRules"
 		         Ada83_Inconsistencies | -- Inconsistent83
 		         Ada83_Incompatibilities | -- Incompatible83
@@ -2387,7 +2420,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		         Permissions | -- ImplPerm
 		         Advice | -- ImplAdvice
 		         Examples |
-			 Notes |
+			 Notes | Single_Note |
 		         Language_Design | -- "MetaRules"
 		         Ada83_Inconsistencies | -- Inconsistent83
 		         Ada83_Incompatibilities | -- Incompatible83
@@ -2609,16 +2642,44 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		if not Format_Object.No_Prefix then
 		    if Format_Object.Next_Paragraph_Format_Type = Notes and then
 		       Show_Leading_Text_for_Paragraph then
-		        -- Output the note number.
-		        declare
-		            NNum : constant String := Integer'Image(Format_Object.Next_Note);
-		        begin
+			if not Format_Object.Use_ISO_2004_Note_Format then
+			    -- Output the note number (Ada95 format).
+		            declare
+		                NNum : constant String := Integer'Image(Format_Object.Next_Note);
+		            begin
+		                ARM_Output.Ordinary_Text (Output_Object,
+					                  NNum(2..NNum'Last));
+		                ARM_Output.Hard_Space (Output_Object);
+		                ARM_Output.Hard_Space (Output_Object);
+		                Format_Object.Next_Note := Format_Object.Next_Note + 1;
+			    end;
+			else
+			    -- Output the note header (ISO 2004 format).
+		            declare
+		                NNum : constant String := Integer'Image(Format_Object.Next_Note);
+		            begin
+		                ARM_Output.Ordinary_Text (Output_Object,
+					                  "NOTE " & NNum(2..NNum'Last));
+		                ARM_Output.Hard_Space (Output_Object);
+		                ARM_Output.Hard_Space (Output_Object);
+		                ARM_Output.Hard_Space (Output_Object);
+		                Format_Object.Next_Note := Format_Object.Next_Note + 1;
+			    end;
+			end if;
+		    elsif Format_Object.Next_Paragraph_Format_Type = Single_Note and then
+		       Show_Leading_Text_for_Paragraph then
+			if not Format_Object.Use_ISO_2004_Note_Format then
+			    -- No note number, and nothing else needed.
+			    null;
+			else
+			    -- Output the note header (ISO 2004 format)
+			    -- without a number.
 		            ARM_Output.Ordinary_Text (Output_Object,
-					              NNum(2..NNum'Last));
+					              "NOTE");
 		            ARM_Output.Hard_Space (Output_Object);
 		            ARM_Output.Hard_Space (Output_Object);
-		            Format_Object.Next_Note := Format_Object.Next_Note + 1;
-		        end;
+		            ARM_Output.Hard_Space (Output_Object);
+			end if;
 		    elsif Format_Object.Next_Paragraph_Format_Type = Enumerated and then
 		       Show_Leading_Text_for_Paragraph then
 		        -- Output the item number.
@@ -3418,6 +3479,11 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	    	= "notes" then
 		Format_Object.Next_Paragraph_Format_Type := Notes;
 		Format_Object.Next_Paragraph_Subhead_Type := Notes;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "singlenote" then
+		Format_Object.Next_Paragraph_Format_Type := Single_Note;
+		Format_Object.Next_Paragraph_Subhead_Type := Single_Note;
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "rmonly" then
@@ -6518,29 +6584,62 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		when Labeled_Section | Labeled_Section_No_Break |
 		     Labeled_Informative_Annex |
 		     Labeled_Normative_Annex | Labeled_Clause |
-		     Labeled_Subclause | Unnumbered_Section =>
+		     Labeled_Subclause | Labeled_Subsubclause |
+		     Unnumbered_Section =>
 		    -- Load the title into the Title string:
 		    declare
 			Title : ARM_Contents.Title_Type;
 			Title_Length : Natural;
+		        Level : ARM_Contents.Level_Type;
 		    begin
 		        ARM_Input.Copy_to_String_until_Close_Char (
 			    Input_Object,
 			    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char,
 			    Title, Title_Length);
 		        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Subclause then
-			    Format_Object.Subclause := Format_Object.Subclause + 1;
+			    Format_Object.Clause_Number :=
+				(Section   => Format_Object.Clause_Number.Section,
+				 Clause    => Format_Object.Clause_Number.Clause,
+				 Subclause => Format_Object.Clause_Number.Subclause + 1,
+				 Subsubclause => 0);
+			    Level := ARM_Contents.Subclause;
+		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Subsubclause then
+			    Format_Object.Clause_Number.Subsubclause :=
+				Format_Object.Clause_Number.Subsubclause + 1;
+			    Level := ARM_Contents.Subsubclause;
 		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Clause then
-			    Format_Object.Clause := Format_Object.Clause + 1;
-			    Format_Object.Subclause := 0;
+			    Format_Object.Clause_Number :=
+				(Section   => Format_Object.Clause_Number.Section,
+				 Clause    => Format_Object.Clause_Number.Clause + 1,
+				 Subclause => 0, Subsubclause => 0);
+			    Level := ARM_Contents.Clause;
 		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Unnumbered_Section then
 			    Format_Object.Unnumbered_Section :=
 				Format_Object.Unnumbered_Section + 1;
-			    Format_Object.Clause := Format_Object.Unnumbered_Section;
-			    Format_Object.Subclause := 0;
-		        else
-			    Format_Object.Clause := 0;
-			    Format_Object.Subclause := 0;
+			    Format_Object.Clause_Number :=
+			        (Section   => 0,
+				 Clause    => Format_Object.Unnumbered_Section,
+				 Subclause => 0, Subsubclause => 0);
+			    Level := ARM_Contents.Unnumbered_Section;
+		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Section or else
+			      Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Section_No_Break then
+			    Format_Object.Clause_Number :=
+				(Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				 Clause    => 0,
+				 Subclause => 0, Subsubclause => 0);
+			    Level := ARM_Contents.Section;
+			elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Normative_Annex then
+			    Format_Object.Clause_Number :=
+				(Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				 Clause    => 0,
+				 Subclause => 0, Subsubclause => 0);
+			    Level := ARM_Contents.Normative_Annex;
+			else -- Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Informative_Annex then
+			    Format_Object.Clause_Number :=
+				(Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				 Clause    => 0,
+				 Subclause => 0, Subsubclause => 0);
+			    Level := ARM_Contents.Informative_Annex;
 			end if;
 			Title(Title_Length+1 .. Title'Last) :=
 			    (others => ' ');
@@ -6550,83 +6649,24 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			        Clause_Number : constant String :=
 				    ARM_Contents.Lookup_Clause_Number (Title);
 			    begin
-			        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Subclause then
-				    Check_End_Paragraph; -- End any paragraph that we're in.
-				    ARM_Output.Clause_Header (Output_Object,
-				        Title(1..Title_Length),
-					Level => ARM_Contents.Subclause,
-					Clause_Number => Clause_Number);
-			            -- Check that the section numbers match the title:
-			            if Ada.Characters.Handling.To_Lower (Title) /=
-			               Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
-				          ARM_Contents.Subclause, Format_Object.Section,
-					  Format_Object.Clause, Format_Object.Subclause)) then
-				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
-			            end if;
-			        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Clause then
-				    Check_End_Paragraph; -- End any paragraph that we're in.
-				    ARM_Output.Clause_Header (Output_Object,
-				        Title(1..Title_Length),
-					Level => ARM_Contents.Clause,
-					Clause_Number => Clause_Number);
-			            -- Check that the section numbers match the title:
-			            if Ada.Characters.Handling.To_Lower (Title) /=
-			               Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
-				          ARM_Contents.Clause, Format_Object.Section, Format_Object.Clause)) then
-				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
-			            end if;
-			        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Section or else
-				      Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Section_No_Break then
-				    Check_End_Paragraph; -- End any paragraph that we're in.
+			        Check_End_Paragraph; -- End any paragraph that we're in.
+			        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Section_No_Break then
 				    ARM_Output.Clause_Header (Output_Object,
 				        Title(1..Title_Length),
 					Level => ARM_Contents.Section,
 					Clause_Number => Clause_Number,
-					No_Page_Break => Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Section_No_Break);
-			            -- Check that the section numbers match the title:
-			            if Ada.Characters.Handling.To_Lower (Title) /=
-			               Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
-				          ARM_Contents.Section, Format_Object.Section)) then
-				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
-			            end if;
-			        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Unnumbered_Section then
-				    -- These are numbered like a clause, with a
-				    -- section number of 0.
-				    Check_End_Paragraph; -- End any paragraph that we're in.
+					No_Page_Break => True);
+				else -- Other cases:
 				    ARM_Output.Clause_Header (Output_Object,
 				        Title(1..Title_Length),
-					Level => ARM_Contents.Unnumbered_Section,
+					Level => Level,
 					Clause_Number => Clause_Number);
-			            -- Check that the clause numbers match the title:
-			            if Ada.Characters.Handling.To_Lower (Title) /=
-			               Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
-				          ARM_Contents.Unnumbered_Section, 0, Format_Object.Clause)) then
-				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
-			            end if;
-				elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Normative_Annex then
-				    Check_End_Paragraph; -- End any paragraph that we're in.
-				    ARM_Output.Clause_Header (Output_Object,
-				        Title(1..Title_Length),
-					Level => ARM_Contents.Normative_Annex,
-					Clause_Number => Clause_Number);
-			            -- Check that the section numbers match the title:
-			            if Ada.Characters.Handling.To_Lower (Title) /=
-			               Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
-				          ARM_Contents.Normative_Annex, Format_Object.Section)) then
-				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
-			            end if;
-				else --if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Informative_Annex then
-				    Check_End_Paragraph; -- End any paragraph that we're in.
-				    ARM_Output.Clause_Header (Output_Object,
-				        Title(1..Title_Length),
-					Level => ARM_Contents.Informative_Annex,
-					Clause_Number => Clause_Number);
-			            -- Check that the section numbers match the title:
-			            if Ada.Characters.Handling.To_Lower (Title) /=
-			               Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
-				          ARM_Contents.Informative_Annex, Format_Object.Section)) then
-				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
-			            end if;
+			        end if;
+			        -- Check that the section numbers match the title:
+			        if Ada.Characters.Handling.To_Lower (Title) /=
+			           Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
+				      Level, Format_Object.Clause_Number)) then
+				    Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
 			        end if;
 			    end;
 			exception
@@ -6639,11 +6679,14 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		    Format_Object.Next_Paragraph := 1;
 		    Format_Object.Next_Insert_Para := 1;
 		    Format_Object.Next_AARM_Sub := 'a';
-		    -- Reset the note number, only for sections:
-		    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Section or else
-		       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Section_No_Break or else
-		       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Informative_Annex or else
-		       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Normative_Annex then
+		    if Format_Object.Use_ISO_2004_Note_Format then
+			-- Reset the note number:
+		        Format_Object.Next_Note := 1;
+		    elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Section or else
+		          Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Section_No_Break or else
+		          Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Informative_Annex or else
+		          Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Normative_Annex then
+		        -- Reset the note number, only for sections:
 		        Format_Object.Next_Note := 1;
 		    end if;
 		    -- Reset the subhead:
@@ -6655,8 +6698,10 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 
 		when Labeled_Revised_Informative_Annex |
 		     Labeled_Revised_Normative_Annex |
+		     Labeled_Revised_Section |
 		     Labeled_Revised_Clause |
-		     Labeled_Revised_Subclause =>
+		     Labeled_Revised_Subclause |
+		     Labeled_Revised_Subsubclause =>
 		    -- Load the title into the Title string:
 		    declare
 			New_Title : ARM_Contents.Title_Type;
@@ -6665,6 +6710,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			Old_Title_Length : Natural;
 			Ch : Character;
 			Version : ARM_Contents.Change_Version_Type := '0';
+			Level : ARM_Contents.Level_Type;
 		    begin
 			Get_Change_Version (Is_First => True,
 					    Version => Version);
@@ -6703,59 +6749,57 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		        end if;
 
 		        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Subclause then
-			    Format_Object.Subclause := Format_Object.Subclause + 1;
+			    Format_Object.Clause_Number :=
+				(Section   => Format_Object.Clause_Number.Section,
+				 Clause    => Format_Object.Clause_Number.Clause,
+				 Subclause => Format_Object.Clause_Number.Subclause + 1,
+				 Subsubclause => 0);
+			    Level := ARM_Contents.Subclause;
+		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Subsubclause then
+			    Format_Object.Clause_Number.Subsubclause :=
+				Format_Object.Clause_Number.Subsubclause + 1;
+			    Level := ARM_Contents.Subsubclause;
 		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Clause then
-			    Format_Object.Clause := Format_Object.Clause + 1;
-			    Format_Object.Subclause := 0;
-		        else
-			    Format_Object.Clause := 0;
-			    Format_Object.Subclause := 0;
+			    Format_Object.Clause_Number :=
+				(Section   => Format_Object.Clause_Number.Section,
+				 Clause    => Format_Object.Clause_Number.Clause + 1,
+				 Subclause => 0, Subsubclause => 0);
+			    Level := ARM_Contents.Clause;
+		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Section then
+			    Format_Object.Clause_Number :=
+				(Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				 Clause    => 0,
+				 Subclause => 0, Subsubclause => 0);
+			    Level := ARM_Contents.Section;
+			elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Normative_Annex then
+			    Format_Object.Clause_Number :=
+				(Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				 Clause    => 0,
+				 Subclause => 0, Subsubclause => 0);
+			    Level := ARM_Contents.Normative_Annex;
+			else -- Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Informative_Annex then
+			    Format_Object.Clause_Number :=
+				(Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				 Clause    => 0,
+				 Subclause => 0, Subsubclause => 0);
+			    Level := ARM_Contents.Informative_Annex;
 			end if;
 
 			begin
 			    declare
 			        Clause_Number : constant String :=
 				    ARM_Contents.Lookup_Clause_Number (New_Title);
-				Level : ARM_Contents.Level_Type;
 
 				Disposition : ARM_Output.Change_Type;
 				use type ARM_Output.Change_Type;
 			    begin
 			        Check_End_Paragraph; -- End any paragraph that we're in.
-			        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Subclause then
-				    Level := ARM_Contents.Subclause;
-			            -- Check that the section numbers match the title:
-			            if Ada.Characters.Handling.To_Lower (New_Title) /=
-			               Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
-				          ARM_Contents.Subclause, Format_Object.Section,
-					  Format_Object.Clause, Format_Object.Subclause)) then
-				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
-			            end if;
-			        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Clause then
-				    Level := ARM_Contents.Clause;
-			            -- Check that the section numbers match the title:
-			            if Ada.Characters.Handling.To_Lower (New_Title) /=
-			               Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
-				          ARM_Contents.Clause, Format_Object.Section, Format_Object.Clause)) then
-				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
-			            end if;
-				elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Normative_Annex then
-				    Level := ARM_Contents.Normative_Annex;
-			            -- Check that the section numbers match the title:
-			            if Ada.Characters.Handling.To_Lower (New_Title) /=
-			               Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
-				          ARM_Contents.Normative_Annex, Format_Object.Section)) then
-				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
-			            end if;
-				else -- Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Informative_Annex then
-				    Level := ARM_Contents.Informative_Annex;
-			            -- Check that the section numbers match the title:
-			            if Ada.Characters.Handling.To_Lower (New_Title) /=
-			               Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
-				          ARM_Contents.Informative_Annex, Format_Object.Section)) then
-				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
-			            end if;
-				end if;
+			        -- Check that the section numbers match the title:
+			        if Ada.Characters.Handling.To_Lower (New_Title) /=
+			           Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
+				      Level, Format_Object.Clause_Number)) then
+				    Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
+			        end if;
 
 			        Calc_Change_Disposition (
 				    Version => Version,
@@ -6816,14 +6860,17 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 
 		when Labeled_Added_Informative_Annex |
 		     Labeled_Added_Normative_Annex |
+		     Labeled_Added_Section |
 		     Labeled_Added_Clause |
-		     Labeled_Added_Subclause =>
+		     Labeled_Added_Subclause |
+		     Labeled_Added_Subsubclause =>
 		    -- Load the title into the Title string:
 		    declare
 			New_Title : ARM_Contents.Title_Type;
 			New_Title_Length : Natural;
 			Ch : Character;
 			Version : ARM_Contents.Change_Version_Type := '0';
+		        Level : ARM_Contents.Level_Type;
 		    begin
 			Get_Change_Version (Is_First => True,
 					    Version => Version);
@@ -6847,25 +6894,44 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			    ARM_Input.Replace_Char (Input_Object);
 		        end if;
 
-			declare
-			    Level : ARM_Contents.Level_Type;
+		        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Subclause then
+			    Format_Object.Clause_Number :=
+				(Section   => Format_Object.Clause_Number.Section,
+				 Clause    => Format_Object.Clause_Number.Clause,
+				 Subclause => Format_Object.Clause_Number.Subclause + 1,
+				 Subsubclause => 0);
+			    Level := ARM_Contents.Subclause;
+		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Subsubclause then
+			    Format_Object.Clause_Number.Subsubclause :=
+				Format_Object.Clause_Number.Subsubclause + 1;
+			    Level := ARM_Contents.Subsubclause;
+		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Clause then
+			    Format_Object.Clause_Number :=
+				(Section   => Format_Object.Clause_Number.Section,
+				 Clause    => Format_Object.Clause_Number.Clause + 1,
+				 Subclause => 0, Subsubclause => 0);
+			    Level := ARM_Contents.Clause;
+		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Section then
+			    Format_Object.Clause_Number :=
+				(Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				 Clause    => 0,
+				 Subclause => 0, Subsubclause => 0);
+			    Level := ARM_Contents.Section;
+			elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Normative_Annex then
+			    Format_Object.Clause_Number :=
+				(Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				 Clause    => 0,
+				 Subclause => 0, Subsubclause => 0);
+			    Level := ARM_Contents.Normative_Annex;
+			else -- Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Informative_Annex then
+			    Format_Object.Clause_Number :=
+				(Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				 Clause    => 0,
+				 Subclause => 0, Subsubclause => 0);
+			    Level := ARM_Contents.Informative_Annex;
+			end if;
+
 			begin
-		            if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Subclause then
-			        Format_Object.Subclause := Format_Object.Subclause + 1;
-				Level := ARM_Contents.Subclause;
-		            elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Clause then
-			        Format_Object.Clause := Format_Object.Clause + 1;
-			        Format_Object.Subclause := 0;
-				Level := ARM_Contents.Clause;
-		            elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Normative_Annex then
-			        Format_Object.Clause := 0;
-			        Format_Object.Subclause := 0;
-			        Level := ARM_Contents.Normative_Annex;
-		            else
-			        Format_Object.Clause := 0;
-			        Format_Object.Subclause := 0;
-			        Level := ARM_Contents.Informative_Annex;
-			    end if;
 			    declare
 			        Clause_Number : constant String :=
 				    ARM_Contents.Lookup_Clause_Number (New_Title);
@@ -6902,8 +6968,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			        -- Check that the section numbers match the title:
 			        if Ada.Characters.Handling.To_Lower (New_Title) /=
 			           Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
-				      Level, Format_Object.Section,
-				      Format_Object.Clause, Format_Object.Subclause)) then
+				      Level, Format_Object.Clause_Number)) then
 				    Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
 			        end if;
 			    end;
@@ -7131,18 +7196,15 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 				       Format_Object.Changes = ARM_Format.Old_Only then
 					-- Use original version:
 				        declare
-					    Section_Number : ARM_Contents.Section_Number_Type;
-					    Clause_Number : Natural;
-					    Subclause_Number : Natural;
+					    Clause_Number : ARM_Contents.Clause_Number_Type;
 				        begin
 					    ARM_Contents.Make_Clause (Clause_Number_Text,
-					        Section_Number, Clause_Number, Subclause_Number);
+					        Clause_Number);
 					    ARM_Output.Clause_Reference (Output_Object,
 					        Text => Ada.Strings.Fixed.Trim (
 						    ARM_Contents.Lookup_Old_Title (
 							    ARM_Contents.Lookup_Level (Title),
-							    Section_Number,
-							    Clause_Number, Subclause_Number),
+							    Clause_Number),
 							    Ada.Strings.Right),
 					        Clause_Number => Clause_Number_Text);
 				        end;
@@ -8454,7 +8516,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		     Legality_Name | Static_Name | Link_Name | Run_Name |
 		     Bounded_Name | Erroneous_Name | Req_Name |
 		     Doc_Name | Metrics_Name | Permission_Name | Advice_Name |
-		     Notes_Name | Examples_Name | Meta_Name | Inconsistent83_Name |
+		     Notes_Name | Single_Note_Name | Examples_Name |
+		     Meta_Name | Inconsistent83_Name |
 		     Incompatible83_Name | Extend83_Name | Wording83_Name |
 		     Inconsistent95_Name |
 		     Incompatible95_Name | Extend95_Name | Wording95_Name |
@@ -8462,6 +8525,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		     Static_Title | Link_Title | Run_Title | Bounded_Title |
 		     Erroneous_Title | Req_Title | Doc_Title | Metrics_Title |
 		     Permission_Title | Advice_Title | Notes_Title |
+		     Single_Note_Title |
 		     Examples_Title | Meta_Title | Inconsistent83_Title |
 		     Incompatible83_Title | Extend83_Title | Wording83_Title |
 		     Inconsistent95_Title |
@@ -8677,9 +8741,11 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		     Prefix_Type | Reset_Prefix_Type | Attribute | Attribute_Leading |
 		     Pragma_Syntax | Added_Pragma_Syntax |
 		     Labeled_Section | Labeled_Section_No_Break |
-		     Labeled_Clause | Labeled_Subclause |
-		     Labeled_Revised_Clause | Labeled_Revised_Subclause |
-		     Labeled_Added_Clause | Labeled_Added_Subclause |
+		     Labeled_Clause | Labeled_Subclause | Labeled_Subsubclause |
+		     Labeled_Revised_Section | Labeled_Revised_Clause |
+		     Labeled_Revised_Subclause | Labeled_Revised_Subsubclause |
+		     Labeled_Added_Section | Labeled_Added_Clause |
+		     Labeled_Added_Subclause | Labeled_Added_Subsubclause |
 		     Labeled_Informative_Annex | Labeled_Revised_Informative_Annex |
 		     Labeled_Added_Informative_Annex |
 		     Labeled_Normative_Annex | Labeled_Revised_Normative_Annex |
@@ -8778,6 +8844,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		    Put_Name(Advice);
 		when Notes_Name =>
 		    Put_Name(Notes);
+		when Single_Note_Name =>
+		    Put_Name(Single_Note);
 		when Examples_Name =>
 		    Put_Name(Examples);
 		when Meta_Name =>
@@ -8827,6 +8895,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		    Put_Title(Advice);
 		when Notes_Title =>
 		    Put_Title(Notes);
+		when Single_Note_Title =>
+		    Put_Title(Single_Note);
 		when Examples_Title =>
 		    Put_Title(Examples);
 		when Meta_Title =>
@@ -8956,50 +9026,58 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		function DB_Clause_String return String is
 		    use type ARM_Contents.Section_Number_Type;
 		begin
-		    if Format_Object.Clause = 0 then
-			if Format_Object.Section in 0 .. 9 then
+		    if Format_Object.Clause_Number.Clause = 0 then
+			if Format_Object.Clause_Number.Section in 0 .. 9 then
 			    return
 				Character'Val(Character'Pos('0') +
-				   Format_Object.Section) & "";
-			elsif Format_Object.Section in 10 .. 19 then
+				   Format_Object.Clause_Number.Section) & "";
+			elsif Format_Object.Clause_Number.Section in 10 .. 19 then
 			    return "1" &
 				Character'Val(Character'Pos('0') +
-				   Format_Object.Section - 10);
-			elsif Format_Object.Section = 20 then
-			    return "20";
-			else --if Format_Object.Section > 20 then
+				   Format_Object.Clause_Number.Section - 10);
+			elsif Format_Object.Clause_Number.Section in 20 .. 29 then
+			    return "2" &
+				Character'Val(Character'Pos('0') +
+				   Format_Object.Clause_Number.Section - 20);
+			elsif Format_Object.Clause_Number.Section = 30 then
+			    return "30";
+			else --if Format_Object.Clause_Number.Section >= ARM_Contents.ANNEX_START then
 			    return Character'Val (Character'Pos('A') +
-				 (Format_Object.Section - 21)) & "";
+				 (Format_Object.Clause_Number.Section -
+				    ARM_Contents.ANNEX_START)) & "";
 			end if;
-		    elsif Format_Object.Subclause = 0 then
+		    elsif Format_Object.Clause_Number.Subclause = 0 then
 			return ARM_Contents.Make_Clause_Number (
 			        ARM_Contents.Clause,
-				Format_Object.Section,
-				Format_Object.Clause);
-		    else
+				Format_Object.Clause_Number);
+		    elsif Format_Object.Clause_Number.Subsubclause = 0 then
 			return ARM_Contents.Make_Clause_Number (
 			        ARM_Contents.SubClause,
-				Format_Object.Section,
-				Format_Object.Clause,
-				Format_Object.Subclause);
+				Format_Object.Clause_Number);
+		    else
+			return ARM_Contents.Make_Clause_Number (
+			        ARM_Contents.SubsubClause,
+				Format_Object.Clause_Number);
 		    end if;
 		end DB_Clause_String;
 
 		function Sort_Clause_String return String is
-		    Res : String(1..9);
+		    Res : String(1..11);
 		    -- Always use the paragraph for sorting:
 		begin
 		    -- The funny encoding to insure proper sorting.
 		    -- (Otherwise "10" sorts before "2".
-		    Res(1) := Character'Val (Natural(Format_Object.Section) + 16#30#);
+		    Res(1) := Character'Val (Natural(Format_Object.Clause_Number.Section) + 16#30#);
 		    Res(2) := '.';
-		    Res(3) := Character'Val (Format_Object.Clause + 16#30#);
+		    Res(3) := Character'Val (Format_Object.Clause_Number.Clause + 16#30#);
 		    Res(4) := '.';
-		    Res(5) := Character'Val (Format_Object.Subclause + 16#30#);
-		    Res(6) := '(';
-		    Res(7) := Character'Val ((Format_Object.Next_Paragraph / 10) + 16#30#);
-		    Res(8) := Character'Val ((Format_Object.Next_Paragraph mod 10) + 16#30#);
-		    Res(9) := ')';
+		    Res(5) := Character'Val (Format_Object.Clause_Number.Subclause + 16#30#);
+		    Res(6) := '.';
+		    Res(7) := Character'Val (Format_Object.Clause_Number.Subsubclause + 16#30#);
+		    Res(8) := '(';
+		    Res(9) := Character'Val ((Format_Object.Next_Paragraph / 10) + 16#30#);
+		    Res(10) := Character'Val ((Format_Object.Next_Paragraph mod 10) + 16#30#);
+		    Res(11) := ')';
 		    return Res;
 		end Sort_Clause_String;
 
@@ -10276,9 +10354,11 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			Change_Documentation_Requirement |
 			Labeled_Section |
 			Labeled_Section_No_Break |
-			Labeled_Clause | Labeled_Subclause |
-			Labeled_Revised_Clause | Labeled_Revised_Subclause |
-			Labeled_Added_Clause | Labeled_Added_Subclause |
+			Labeled_Clause | Labeled_Subclause | Labeled_Subsubclause |
+			Labeled_Revised_Section | Labeled_Revised_Clause |
+			Labeled_Revised_Subclause | Labeled_Revised_Subsubclause |
+			Labeled_Added_Section | Labeled_Added_Clause |
+			Labeled_Added_Subclause | Labeled_Added_Subsubclause |
 			Preface_Section |
 			Labeled_Informative_Annex |
 			Labeled_Revised_Informative_Annex | Labeled_Added_Informative_Annex |
@@ -10477,9 +10557,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		return;
 	end;
 	if Starts_New_Section then
-	    Format_Object.Section := Section_Number;
-	    Format_Object.Clause := 0;
-	    Format_Object.Subclause := 0;
+	    Format_Object.Clause_Number := (Section => Section_Number,
+		Clause => 0, Subclause => 0, Subsubclause => 0);
 	    declare
 		use type ARM_Contents.Section_Number_Type;
 	    begin
@@ -10487,24 +10566,29 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	            ARM_Output.Section (Output_Object,
 				        Section_Title => "",
 				        Section_Name => Section_Name);
-		elsif Section_Number <= 20 then
+		elsif Section_Number < ARM_Contents.ANNEX_START then
 	            ARM_Output.Section (Output_Object,
 				        Section_Title => Ada.Strings.Fixed.Trim (
-							 ARM_Contents.Lookup_Title (ARM_Contents.Section, Section_Number), Ada.Strings.Right),
-				        Section_Name => Section_Name);
-		elsif Section_Number <= 30 then -- && Kludge here: We don't
-						-- have anyway to figure this
-						-- out so we just assume Normative
-						-- annexes go to 30.
-	            ARM_Output.Section (Output_Object,
-				        Section_Title => Ada.Strings.Fixed.Trim (
-							 ARM_Contents.Lookup_Title (ARM_Contents.Normative_Annex, Section_Number), Ada.Strings.Right),
+							 ARM_Contents.Lookup_Title (ARM_Contents.Section,
+								(Section => Section_Number, others => 0)), Ada.Strings.Right),
 				        Section_Name => Section_Name);
 		else
-	            ARM_Output.Section (Output_Object,
-				        Section_Title => Ada.Strings.Fixed.Trim (
-							 ARM_Contents.Lookup_Title (ARM_Contents.Informative_Annex, Section_Number), Ada.Strings.Right),
-				        Section_Name => Section_Name);
+		    -- We don't have a way to tell between Normative and Informative annexes, so we try both:
+		    begin
+	                ARM_Output.Section (Output_Object,
+				            Section_Title => Ada.Strings.Fixed.Trim (
+							     ARM_Contents.Lookup_Title (ARM_Contents.Normative_Annex,
+								    (Section => Section_Number, others => 0)), Ada.Strings.Right),
+				            Section_Name => Section_Name);
+		    exception
+			when ARM_Contents.Not_Found_Error =>
+	                    ARM_Output.Section (Output_Object,
+				                Section_Title => Ada.Strings.Fixed.Trim (
+							         ARM_Contents.Lookup_Title (ARM_Contents.Informative_Annex,
+									(Section => Section_Number, others => 0)), Ada.Strings.Right),
+				                Section_Name => Section_Name);
+			    -- If this fails, too, we just propagate to the outer handler.
+		    end;
 		end if;
 	    exception
 		when ARM_Contents.Not_Found_Error =>
