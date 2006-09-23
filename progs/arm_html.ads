@@ -88,6 +88,7 @@ package ARM_HTML is
     --			table command.
     --		- RLB - Added picture command.
     --  2/19/06 - RLB - Added Number_Paragraphs flag and large letter count.
+    --  9/21/06 - RLB - Added Body_Font.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -121,7 +122,8 @@ package ARM_HTML is
 		      Tab_Emulation : Tab_Emulation_Type;
 	              Header_HTML : String;
 	              Footer_HTML : String;
-		      Title : in String := "");
+		      Title : in String := "";
+		      Body_Font : ARM_Output.Font_Family_Type);
 	-- Create an Output_Object for a document.
 	-- Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
@@ -157,6 +159,7 @@ package ARM_HTML is
 	-- Header_HTML gives self-contained HTML that will appear before the
 	-- navigation bar in the header. Footer_HTML gives self-contained HTML
 	-- that will appear after the navigation bar in the footer.
+	-- Body_Font selects the default font for the document body.
 
     procedure Close (Output_Object : in out HTML_Output_Type);
 	-- Close an Output_Object. No further output to the object is
@@ -492,6 +495,7 @@ private
 	Tab_Emulation : Tab_Emulation_Type;
         Header_HTML : Ada.Strings.Unbounded.Unbounded_String;
         Footer_HTML : Ada.Strings.Unbounded.Unbounded_String;
+	Body_Font : ARM_Output.Font_Family_Type := ARM_Output.Roman;
 
 	-- Current formatting properties:
 	Is_In_Paragraph : Boolean := False;

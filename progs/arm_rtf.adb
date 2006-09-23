@@ -111,6 +111,7 @@ package body ARM_RTF is
     --  2/10/06 - RLB - Added even more additional parameters to the
     --			table command.
     --		- RLB - Added picture command.
+    --  9/21/06 - RLB - Added Body_Font; revised styles to handle that.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -130,7 +131,8 @@ package body ARM_RTF is
 	Hang_Width : Natural; -- In Twips (.1 pt = 1/120th pica = 1/1440th inch).
 	Before : Natural; -- Vertical space before in Twips. (\sb)
 	After : Natural; -- Vertical space after in Twips. (\sa)
-	Is_Justified : Boolean; -- True if the format is justified.
+	Is_Justified : Boolean; -- True if the format is justified. (\qj vs. \qc or \ql)
+	Number : Natural; -- Style number.
 	Format_String : String(1 .. 200);
 	Format_Len : Natural := 0;
     end record;
@@ -154,25 +156,71 @@ package body ARM_RTF is
     Table_L_Sml_Text_Info : Format_Info_Type;
 
     procedure Set_Style (Into : in out Format_Info_Type;
+			 Font : in ARM_Output.Font_Family_Type; -- Default means use Body_Font.
+			 Body_Font : in ARM_Output.Font_Family_Type;
 			 Font_Size : in Natural;
 			 Style_Indent : in Natural;
 			 Style_Hang_Width : in Natural := 0;
 			 Style_Before : in Natural;
 			 Style_After : in Natural;
 			 Style_Justified : in Boolean;
-			 Style_String : in String) is
+			 Style_String_Prefix : in String;
+			 Style_String_Suffix : in String) is
 	-- Internal routine.
 	-- Set the indicated style information.
+	-- The two part of the Style String includes all of the information
+	-- except Font (\fn), Font_Size (\fsnn), Indent (\linn), Hang (\fi-nn),
+	-- Before (\sbnn), and After (\sann) -- these are added appropriately
+	-- between the halves of the string.
+	Font_String : String(1..3) := "\f0";
+
+	function Make (Code : in String; Value : in Natural) return String is
+	    Val : constant String := Natural'Image(Value);
+	begin
+	    if Value /= 0 then
+		return '\' & Code & Val(2..Val'Last);
+	    else
+		return ""; -- Make nothing.
+	    end if;
+	end Make;
+
     begin
 	Into.Size := Font_Size;
+	case Font is
+	    when ARM_Output.Default =>
+		if ARM_Output."=" (Body_Font, ARM_Output.Swiss) then
+		    Font_String(3) := '1';
+		    Into.Size := Into.Size - 1;
+		else -- Roman.
+		    Font_String(3) := '0';
+		end if;
+	    when ARM_Output.Roman =>
+		Font_String(3) := '0';
+	    when ARM_Output.Swiss =>
+		Font_String(3) := '1';
+	    when ARM_Output.Fixed =>
+		Font_String(3) := '2';
+	end case;
 	Into.Indent := Style_Indent;
 	Into.Hang_Width := Style_Hang_Width;
 	Into.Before := Style_Before;
 	Into.After  := Style_After;
 	Into.Is_Justified := Style_Justified;
-	Ada.Strings.Fixed.Move (Source => Style_String,
-				Target => Into.Format_String);
-        Into.Format_Len := Style_String'Length;
+	declare
+	    Style : constant String :=
+			Style_String_Prefix & " " &
+			Font_String &
+			Make ("fs", Into.Size) &
+			Make ("li", Into.Indent) &
+			Make ("fi-", Into.Hang_Width) &
+			Make ("sb", Into.Before) &
+			Make ("sa", Into.After) &
+			Style_String_Suffix;
+	begin
+	    Ada.Strings.Fixed.Move (Source => Style,
+				    Target => Into.Format_String);
+            Into.Format_Len := Style'Length;
+	end;
     end Set_Style;
 
 
@@ -379,12 +427,15 @@ package body ARM_RTF is
 	-- to set one:
 	for I in ARM_Output.Paragraph_Type loop
 	    Set_Style (Paragraph_Info(I),
+		       Font => ARM_Output.Swiss,
+		       Body_Font => ARM_Output.Swiss,
 		       Font_Size => 32,
 		       Style_Indent => 0,
 		       Style_Before => 0,
 		       Style_After => 0,
 		       Style_Justified => FALSE,
-		       Style_String => "\fs32\f0\qc ");
+		       Style_String_Prefix => "",
+		       Style_String_Suffix => "\qc ");
 	end loop;
 
 	-- Style sheet:
@@ -396,607 +447,801 @@ package body ARM_RTF is
 	    -- ** TBD: Consider putting this into a separate parameter (there is
 	    -- ** little reason for the font size to depend on the page size).
 	    Set_Style (Paragraph_Info(ARM_Output.Normal),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 0,
 		       Style_Before => 0,
 		       Style_After => 120,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s0\widctlpar\adjustright \fs18\f0\cgrid\sa120\qj\sl-220\slmult0 \snext0 ");
+		       Style_String_Prefix =>
+			 "\s0\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-220\slmult0 \snext0 ");
 	    Set_Style (Heading_1_Info,
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 28,
 		       Style_Indent => 0,
 		       Style_Before => 0,
 		       Style_After => 210,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s1\sa210\keepn\widctlpar\outlinelevel0\adjustright \b\f1\fs28\kerning28\qc\cgrid \sbasedon0 \snext0 ");
+		       Style_String_Prefix =>
+			 "\s1\keepn\widctlpar\outlinelevel0\adjustright",
+		       Style_String_Suffix => "\b\kerning28\qc\cgrid \sbasedon0 \snext0 ");
 	    Set_Style (Heading_2_Info,
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 24,
 		       Style_Indent => 0,
 		       Style_Before => 240,
 		       Style_After => 120,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s2\sb240\sa120\keepn\widctlpar\outlinelevel1\adjustright \b\f1\fs24\ql\cgrid \sbasedon0 \snext0 ");
+		       Style_String_Prefix =>
+			 "\s2\keepn\widctlpar\outlinelevel1\adjustright",
+		       Style_String_Suffix => "\b\ql\cgrid \sbasedon0 \snext0 ");
 	    Set_Style (Heading_3_Info,
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 23,
 		       Style_Indent => 0,
 		       Style_Before => 210,
 		       Style_After => 90,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s3\sb210\sa90\keepn\widctlpar\outlinelevel2\adjustright \b\f1\fs23\ql\cgrid \sbasedon0 \snext0 ");
+		       Style_String_Prefix =>
+			 "\s3\keepn\widctlpar\outlinelevel2\adjustright",
+		       Style_String_Suffix => "\b\ql\cgrid \sbasedon0 \snext0 ");
 	    Set_Style (Category_Header_Info,
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 14,
 		       Style_Indent => 0,
 		       Style_Before => 100,
 		       Style_After => 60,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s4\sb100\sa60\keepn\adjustright \f0\fs14\cgrid\qc\i \snext0 ");
+		       Style_String_Prefix =>
+			 "\s4\keepn\adjustright",
+		       Style_String_Suffix => "\cgrid\qc\i \snext0 ");
 	    Set_Style (Paragraph_Number_Info,
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 12,
 		       Style_Indent => 0,
 		       Style_Before => 0,
 		       Style_After =>  0,
 		       Style_Justified => FALSE,
-		       Style_String =>
+		       Style_String_Prefix =>
 			 "\s5\keepn\widctlpar\adjustright " &
 			 "\pvpara\phpg\posxo\posy0\absw450\dxfrtext100\dfrmtxtx120\dfrmtxty120"&
-			 "\f1\fs12\cgrid\qc \snext0 "); -- Note: We adjust the space before on use.
+			 "\cgrid\qc",
+		       Style_String_Suffix => "\snext0 "); -- Note: We adjust the space before on use.
 	    Set_Style (Paragraph_Info(ARM_Output.Notes),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 360,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s6\widctlpar\adjustright \li360\fs15\f0\cgrid\sa90\qj\sl-180\slmult0 \snext6 ");
+		       Style_String_Prefix =>
+			 "\s6\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-180\slmult0 \snext6 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Annotations),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 720,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s7\widctlpar\adjustright \li720\fs15\f0\cgrid\sa90\qj\sl-180\slmult0 \snext7 ");
+		       Style_String_Prefix =>
+			 "\s7\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-180\slmult0 \snext7 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Examples),
+		       Font => ARM_Output.Fixed,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
 		       Style_Indent => 360,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s8\widctlpar\adjustright \li360\fs16\f2\cgrid\sa80\sl-160\ql \snext8 ");
+		       Style_String_Prefix =>
+			 "\s8\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\sl-160\ql \snext8 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Examples),
+		       Font => ARM_Output.Fixed,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 14,
 		       Style_Indent => 1080,
 		       Style_Before => 0,
 		       Style_After => 70,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s9\widctlpar\adjustright \li1080\fs14\f2\cgrid\sa70\sl-140\ql \snext9 ");
+		       Style_String_Prefix =>
+			 "\s9\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\sl-140\ql \snext9 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Syntax_Indented),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 360,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s10\widctlpar\adjustright \li360\fs18\f0\cgrid\sa80\ql\sl-200 \snext10 ");
+		       Style_String_Prefix =>
+			 "\s10\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-200 \snext10 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Indented),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1080,
 		       Style_Before => 0,
 		       Style_After => 120,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s11\widctlpar\adjustright \li1080\fs18\f0\cgrid\sa120\qj\sl-220\slmult0 \snext11 ");
+		       Style_String_Prefix =>
+			 "\s11\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-220\slmult0 \snext11 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Indented),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1800,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s12\widctlpar\adjustright \li1800\fs15\f0\cgrid\sa90\qj\sl-180\slmult0 \snext12 ");
+		       Style_String_Prefix =>
+			 "\s12\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-180\slmult0 \snext12 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Hanging),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1080,
 		       Style_Hang_Width => 1080,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s13\widctlpar\adjustright \li1080\fi-1080\fs18\f0\cgrid\sa100\qj\sl-200\slmult0 \snext13 ");
+		       Style_String_Prefix =>
+			 "\s13\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext13 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Indented_Hanging),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1080,
 		       Style_Hang_Width => 360,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s14\widctlpar\adjustright \li1080\fi-360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0 \snext14 ");
+		       Style_String_Prefix =>
+			 "\s14\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext14 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Hanging),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1800,
 		       Style_Hang_Width => 1080,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s15\widctlpar\adjustright \li1800\fi-1080\fs15\f0\cgrid\sa80\qj\sl-170\slmult0 \snext15 ");
+		       Style_String_Prefix =>
+			 "\s15\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-170\slmult0 \snext15 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Indented_Hanging),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1800,
 		       Style_Hang_Width => 360,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s16\widctlpar\adjustright \li1800\fi-360\fs15\f0\cgrid\sa80\qj\sl-170\slmult0 \snext16 ");
+		       Style_String_Prefix =>
+			 "\s16\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-170\slmult0 \snext16 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 360,
 		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s17\widctlpar\adjustright \li360\fi-220\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx360 \snext17 ");
+		       Style_String_Prefix =>
+			 "\s17\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx360 \snext17 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Nested_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 720,
 		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s18\widctlpar\adjustright \li720\fi-200\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx720 \snext18 ");
+		       Style_String_Prefix =>
+			 "\s18\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx720 \snext18 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1080,
 		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s19\widctlpar\adjustright \li1080\fi-200\ri360\fs15\f0\cgrid\sa80\qj\sl-170\slmult0\tx1080 \snext19 ");
+		       Style_String_Prefix =>
+			 "\s19\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0\tx1080 \snext19 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1440,
 		       Style_Hang_Width => 180,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s20\widctlpar\adjustright \li1440\fi-180\ri360\fs15\f0\cgrid\sa80\qj\sl-170\slmult0\tx1440 \snext20 ");
+		       Style_String_Prefix =>
+			 "\s20\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0\tx1440 \snext20 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Indented_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1440,
 		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s21\widctlpar\adjustright \li1440\fi-220\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx1080 \snext21 ");
+		       Style_String_Prefix =>
+			 "\s21\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx1080 \snext21 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Syntax_Indented_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 720,
 		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s22\widctlpar\adjustright \li720\fi-220\ri360\fs18\f0\cgrid\sa80\qj\sl-200\slmult0\tx720 \snext22 ");
+		       Style_String_Prefix =>
+			 "\s22\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx720 \snext22 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Code_Indented_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1080,
 		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s23\widctlpar\adjustright \li1080\fi-220\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx1080 \snext23 ");
+		       Style_String_Prefix =>
+			 "\s23\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx1080 \snext23 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Code_Indented),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 720,
 		       Style_Before => 0,
 		       Style_After => 120,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s24\widctlpar\adjustright \li720\fs18\f0\cgrid\sa120\qj\sl-220\slmult0 \snext24 ");
+		       Style_String_Prefix =>
+			 "\s24\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-220\slmult0 \snext24 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Code_Indented),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1440,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s25\widctlpar\adjustright \li1440\fs15\f0\cgrid\sa90\qj\sl-180\slmult0 \snext25 ");
+		       Style_String_Prefix =>
+			 "\s25\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-180\slmult0 \snext25 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Indented_Examples),
+		       Font => ARM_Output.Fixed,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
 		       Style_Indent => 1440,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s26\widctlpar\adjustright \li1440\fs16\f2\cgrid\sa80\ql\sl-160 \snext26 ");
+		       Style_String_Prefix =>
+			 "\s26\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-160 \snext26 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Indented_Examples),
+		       Font => ARM_Output.Fixed,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 14,
 		       Style_Indent => 2160,
 		       Style_Before => 0,
 		       Style_After => 70,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s27\widctlpar\adjustright \li2160\fs14\f2\cgrid\sa70\ql\sl-140 \snext27 ");
+		       Style_String_Prefix =>
+			 "\s27\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-140 \snext27 ");
 
             Set_Style (Header_Info,
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 17,
 		       Style_Indent => 0,
 		       Style_Before => 0,
 		       Style_After => 0,
 		       Style_Justified => FALSE,
-		       Style_String =>
+		       Style_String_Prefix =>
 		         "\s28\widctlpar\tqc\tx" & Half_Paper_Width &
-			 "\tqr\tx" & Paper_Width & "\adjustright \fs17\cgrid \sbasedon0 \snext28 ");
+			 "\tqr\tx" & Paper_Width & "\adjustright",
+		       Style_String_Suffix => "\cgrid \sbasedon0 \snext28 ");
             Set_Style (Footer_Info,
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 17,
 		       Style_Indent => 0,
 		       Style_Before => 0,
 		       Style_After => 0,
 		       Style_Justified => FALSE,
-		       Style_String =>
+		       Style_String_Prefix =>
 		         "\s29\widctlpar" & -- "\tqc\tx" & Half_Paper_Width & -- We don't use or define the center tab; it causes problems with very long titles.
-			 "\tqr\tx" & Paper_Width & "\adjustright \fs17\cgrid \sbasedon0 \snext29 ");
+			 "\tqr\tx" & Paper_Width & "\adjustright",
+		       Style_String_Suffix => "\cgrid \sbasedon0 \snext29 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Index),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 225,
 		       Style_Hang_Width => 225,
 		       Style_Before => 0,
 		       Style_After => 0,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s31\widctlpar\adjustright \fs15\f0\cgrid\ql\li225\fi-225\sl-180\slmult0 \snext31 ");
+		       Style_String_Prefix =>
+			 "\s31\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-180\slmult0 \snext31 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Wide),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 0,
 		       Style_Before => 120,
 		       Style_After => 120,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s32\widctlpar\adjustright \fs18\f0\cgrid\sa120\sb120\qj\sl-220\slmult0 \snext0 ");
+		       Style_String_Prefix =>
+			 "\s32\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-220\slmult0 \snext0 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Wide_Annotations),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 720,
 		       Style_Before => 90,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s33\widctlpar\adjustright \li720\fs15\f0\cgrid\sa90\sb90\qj\sl-180\slmult0 \snext7 ");
+		       Style_String_Prefix =>
+			 "\s33\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-180\slmult0 \snext7 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Notes_Header),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 360,
 		       Style_Before => 0,
 		       Style_After => 0,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s34\widctlpar\adjustright \li360\fs15\f0\cgrid\sa0\qj\sl-180\slmult0 \snext6 ");
+		       Style_String_Prefix =>
+			 "\s34\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-180\slmult0 \snext6 ");
 			  -- Note: No extra space afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Notes_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 720,
 		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 60,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s35\widctlpar\adjustright \li720\fi-220\ri360\fs15\f0\cgrid\sa60\qj\sl-170\slmult0\tx720 \snext35 ");
+		       Style_String_Prefix =>
+			 "\s35\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0\tx720 \snext35 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Notes_Nested_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1080,
 		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 60,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s36\widctlpar\adjustright \li1080\fi-200\ri360\fs15\f0\cgrid\sa60\qj\sl-170\slmult0\tx1080 \snext36 ");
+		       Style_String_Prefix =>
+			 "\s36\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0\tx1080 \snext36 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Hanging_in_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1080,
 		       Style_Hang_Width => 720,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s37\widctlpar\adjustright \li1080\fi-720\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0 \snext14 ");
+		       Style_String_Prefix =>
+			 "\s37\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0 \snext14 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Hanging_in_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1800,
 		       Style_Hang_Width => 720,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s38\widctlpar\adjustright \li1800\fi-720\ri360\fs15\f0\cgrid\sa80\qj\sl-170\slmult0 \snext16 ");
+		       Style_String_Prefix =>
+			 "\s38\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0 \snext16 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Code_Indented_Nested_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1440,
 		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s39\widctlpar\adjustright \li1440\fi-200\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx1440 \snext39 ");
+		       Style_String_Prefix =>
+			 "\s39\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx1440 \snext39 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Syntax_Summary),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 360,
 		       Style_Before => 0,
 		       Style_After => 65,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s40\widctlpar\adjustright \fs15\f0\cgrid\ql\li360\sa65\sl-170\slmult0 \snext40 ");
+		       Style_String_Prefix =>
+			 "\s40\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-170\slmult0 \snext40 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Enumerated),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 360,
 		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s41\widctlpar\adjustright \li360\fi-220\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx360 \snext41 ");
+		       Style_String_Prefix =>
+			 "\s41\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx360 \snext41 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Enumerated),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1080,
 		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s42\widctlpar\adjustright \li1080\fi-200\ri360\fs15\f0\cgrid\sa80\qj\sl-170\slmult0\tx1080 \snext42 ");
+		       Style_String_Prefix =>
+			 "\s42\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0\tx1080 \snext42 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Nested_Enumerated),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 720,
 		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s43\widctlpar\adjustright \li720\fi-220\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx360 \snext43 ");
+		       Style_String_Prefix =>
+			 "\s43\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx360 \snext43 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Enumerated),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1440,
 		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s44\widctlpar\adjustright \li1440\fi-200\ri360\fs15\f0\cgrid\sa80\qj\sl-170\slmult0\tx1080 \snext44 ");
+		       Style_String_Prefix =>
+			 "\s44\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0\tx1080 \snext44 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Nested_X2_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1080,
 		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s45\widctlpar\adjustright \li1080\fi-200\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx720 \snext45 ");
+		       Style_String_Prefix =>
+			 "\s45\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx720 \snext45 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_X2_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1800,
 		       Style_Hang_Width => 180,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s46\widctlpar\adjustright \li1800\fi-180\ri360\fs15\f0\cgrid\sa80\qj\sl-170\slmult0\tx1440 \snext46 ");
+		       Style_String_Prefix =>
+			 "\s46\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0\tx1440 \snext46 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Indented_Nested_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1800,
 		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s47\widctlpar\adjustright \li1800\fi-220\ri360\fs18\f0\cgrid\sa100\qj\sl-200\slmult0\tx1080 \snext47 ");
+		       Style_String_Prefix =>
+			 "\s47\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx1080 \snext47 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Inner_Indented),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1440,
 		       Style_Before => 0,
 		       Style_After => 120,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s48\widctlpar\adjustright \li1440\fs18\f0\cgrid\sa120\qj\sl-220\slmult0 \snext48 ");
+		       Style_String_Prefix =>
+			 "\s48\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-220\slmult0 \snext48 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Inner_Indented),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 2160,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s49\widctlpar\adjustright \li2160\fs15\f0\cgrid\sa90\qj\sl-180\slmult0 \snext49 ");
+		       Style_String_Prefix =>
+			 "\s49\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-180\slmult0 \snext49 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Syntax_Indented),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1080,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s50\widctlpar\adjustright \li1080\fs15\f0\cgrid\sa90\qj\sl-180\slmult0 \snext50 ");
+		       Style_String_Prefix =>
+			 "\s50\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-180\slmult0 \snext50 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Examples),
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
 		       Style_Indent => 360,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s51\widctlpar\adjustright \li360\fs16\f1\cgrid\sa80\sl-180\ql \snext51 ");
+		       Style_String_Prefix =>
+			 "\s51\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\sl-180\ql \snext51 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Examples),
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 14,
 		       Style_Indent => 1080,
 		       Style_Before => 0,
 		       Style_After => 70,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s52\widctlpar\adjustright \li1080\fs14\f1\cgrid\sa70\sl-160\ql \snext52 ");
+		       Style_String_Prefix =>
+			 "\s52\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\sl-160\ql \snext52 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Indented_Examples),
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
 		       Style_Indent => 1440,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s53\widctlpar\adjustright \li1440\fs16\f1\cgrid\sa80\ql\sl-180 \snext53 ");
+		       Style_String_Prefix =>
+			 "\s53\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-180 \snext53 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Indented_Examples),
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 14,
 		       Style_Indent => 2160,
 		       Style_Before => 0,
 		       Style_After => 70,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s54\widctlpar\adjustright \li2160\fs14\f1\cgrid\sa70\ql\sl-160 \snext54 ");
+		       Style_String_Prefix =>
+			 "\s54\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-160 \snext54 ");
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
                 Set_Style (TOC_1_Info,
+		           Font => ARM_Output.Swiss,
+		           Body_Font => Output_Object.Body_Font,
 		           Font_Size => 20,
 		           Style_Indent => 0,
 		           Style_Before => 45,
 		           Style_After => 45,
 		           Style_Justified => FALSE,
-		           Style_String =>
-		             "\s55\sa45\sb45\widctlpar\tqr\tldot\tx" & Paper_Width &
-				"\adjustright \b\f1\fs20\cgrid \sbasedon0 \snext0 ");
+		           Style_String_Prefix =>
+		             "\s55\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
+		           Font => ARM_Output.Swiss,
+		           Body_Font => Output_Object.Body_Font,
 		           Font_Size => 17,
 		           Style_Indent => 200,
 		           Style_Before => 0,
 		           Style_After => 0,
 		           Style_Justified => FALSE,
-		           Style_String =>
-		             "\s56\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
-				"\adjustright \b\f1\fs17\cgrid \sbasedon0 \snext0 ");
+		           Style_String_Prefix =>
+		             "\s56\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
+		           Font => ARM_Output.Swiss,
+		           Body_Font => Output_Object.Body_Font,
 		           Font_Size => 17,
 		           Style_Indent => 400,
 		           Style_Before => 0,
 		           Style_After => 0,
 		           Style_Justified => FALSE,
-		           Style_String =>
-		             "\s57\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
-				"\adjustright \b\f1\fs17\cgrid \sbasedon0 \snext0 ");
+		           Style_String_Prefix =>
+		             "\s57\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_C_Text_Info,
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 0,
 		       Style_Before => 20,
 		       Style_After => 20,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\fs18\f0\sa20\sb20\qc ");
+		       Style_String_Prefix => "",
+		       Style_String_Suffix => "\qc");
 		-- We use a bit of space above and below to avoid overrunning
 		-- the borders of the cells.
 	    Set_Style (Table_L_Text_Info,
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 0,
 		       Style_Before => 20,
 		       Style_After => 20,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\fs18\f0\sa20\sb20\ql ");
+		       Style_String_Prefix => "",
+		       Style_String_Suffix => "\ql");
 	    Set_Style (Table_C_Sml_Text_Info,
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 0,
 		       Style_Before => 20,
 		       Style_After => 20,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\fs15\f0\sa20\sb20\qc ");
+		       Style_String_Prefix => "",
+		       Style_String_Suffix => "\qc");
 	    Set_Style (Table_L_Sml_Text_Info,
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 0,
 		       Style_Before => 20,
 		       Style_After => 20,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\fs15\f0\sa20\sb20\ql ");
+		       Style_String_Prefix => "",
+		       Style_String_Suffix => "\ql");
 	else
 	    Set_Style (Paragraph_Info(ARM_Output.Normal),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 0,
 		       Style_Before => 0,
 		       Style_After => 120,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s0\widctlpar\adjustright \fs22\f0\cgrid\sa120\qj\sl-260\slmult0 \snext0 ");
+		       Style_String_Prefix =>
+			 "\s0\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-260\slmult0 \snext0 ");
 	    Set_Style (Heading_1_Info,
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 36,
 		       Style_Indent => 0,
 		       Style_Before => 0,
 		       Style_After => 210,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s1\sa210\keepn\widctlpar\outlinelevel0\adjustright \b\f1\fs36\kerning36\qc\cgrid \sbasedon0 \snext0 ");
+		       Style_String_Prefix =>
+			 "\s1\keepn\widctlpar\outlinelevel0\adjustright",
+		       Style_String_Suffix => "\b\kerning36\qc\cgrid \sbasedon0 \snext0 ");
 	    Set_Style (Heading_2_Info,
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 28,
 		       Style_Indent => 0,
 		       Style_Before => 240,
 		       Style_After => 120,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s2\sb240\sa120\keepn\widctlpar\outlinelevel1\adjustright \b\f1\fs28\ql\cgrid \sbasedon0 \snext0 ");
+		       Style_String_Prefix =>
+			 "\s2\keepn\widctlpar\outlinelevel1\adjustright",
+		       Style_String_Suffix => "\b\ql\cgrid \sbasedon0 \snext0 ");
 	    Set_Style (Heading_3_Info,
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 28,
 		       Style_Indent => 0,
 		       Style_Before => 210,
 		       Style_After => 100,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s3\sb210\sa100\keepn\widctlpar\outlinelevel2\adjustright \b\f1\fs26\ql\cgrid \sbasedon0 \snext0 ");
+		       Style_String_Prefix =>
+			 "\s3\keepn\widctlpar\outlinelevel2\adjustright",
+		       Style_String_Suffix => "\b\ql\cgrid \sbasedon0 \snext0 ");
 	    Set_Style (Category_Header_Info,
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
 		       Style_Indent => 0,
 		       Style_Before => 120,
 		       Style_After => 120,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s4\sb120\sa120\keepn\adjustright \f0\fs16\cgrid\qc\i \snext0 ");
+		       Style_String_Prefix =>
+			 "\s4\keepn\adjustright",
+		       Style_String_Suffix => "\cgrid\qc\i \snext0 ");
 	    Set_Style (Paragraph_Number_Info,
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 14,
 		       Style_Indent => 0,
 		       Style_Before => 0,
 		       Style_After => 0,
 		       Style_Justified => FALSE,
-		       Style_String =>
+		       Style_String_Prefix =>
 			 "\s5\keepn\widctlpar\adjustright " &
 			 "\pvpara\phpg\posxo\posy0\absw580\dxfrtext100\dfrmtxtx150\dfrmtxty150"&
-			 "\f1\fs14\cgrid\qc \snext0 "); -- We adjust the space before for each number.
+			 "\cgrid\qc",
+		       Style_String_Suffix => "\snext0 "); -- We adjust the space before for each number.
 		-- Frame commands:
 		-- \pvpara - positions the frame vertically with the next paragraph;
 		-- \phpg - positions the frame horizonatally within the page;
@@ -1009,506 +1254,664 @@ package body ARM_RTF is
 
 
 	    Set_Style (Paragraph_Info(ARM_Output.Notes),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 360,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s6\widctlpar\adjustright \li360\fs18\f0\cgrid\sa90\qj\sl-200\slmult0 \snext6 ");
+		       Style_String_Prefix =>
+			 "\s6\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext6 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Annotations),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 720,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s7\widctlpar\adjustright \li720\fs18\f0\cgrid\sa90\qj\sl-200\slmult0 \snext7 ");
+		       Style_String_Prefix =>
+			 "\s7\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext7 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Examples),
+		       Font => ARM_Output.Fixed,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 360,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s8\widctlpar\adjustright \li360\fs18\f2\cgrid\sa100\ql\sl-190\slmult0 \snext8 ");
+		       Style_String_Prefix =>
+			 "\s8\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-190\slmult0 \snext8 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Examples),
+		       Font => ARM_Output.Fixed,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
 		       Style_Indent => 1080,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s9\widctlpar\adjustright \li1080\fs16\f2\cgrid\sa80\ql\sl-170\slmult0 \snext9 ");
+		       Style_String_Prefix =>
+			 "\s9\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-170\slmult0 \snext9 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Syntax_Indented),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 360,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s10\widctlpar\adjustright \li360\fs22\f0\cgrid\sa100\ql\sl-240 \snext10 ");
+		       Style_String_Prefix =>
+			 "\s10\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-240 \snext10 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Indented),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 1080,
 		       Style_Before => 0,
 		       Style_After => 120,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s11\widctlpar\adjustright \li1080\fs22\f0\cgrid\sa120\qj\sl-260\slmult0 \snext11 ");
+		       Style_String_Prefix =>
+			 "\s11\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-260\slmult0 \snext11 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Indented),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1800,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s12\widctlpar\adjustright \li1800\fs18\f0\cgrid\sa90\qj\sl-200\slmult0 \snext12 ");
+		       Style_String_Prefix =>
+			 "\s12\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext12 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Hanging),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 1080,
 		       Style_Hang_Width => 1080,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s13\widctlpar\adjustright \li1080\fi-1080\fs22\f0\cgrid\sa110\qj\sl-240\slmult0 \snext13 ");
+		       Style_String_Prefix =>
+			 "\s13\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-240\slmult0 \snext13 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Indented_Hanging),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 1080,
 		       Style_Hang_Width => 360,
 		       Style_Before => 0,
 		       Style_After => 120,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s14\widctlpar\adjustright \li1080\fi-360\fs22\f0\cgrid\sa110\qj\sl-240\slmult0 \snext14 ");
+		       Style_String_Prefix =>
+			 "\s14\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-240\slmult0 \snext14 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Hanging),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1800,
 		       Style_Hang_Width => 1080,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s15\widctlpar\adjustright \li1800\fi-1080\fs18\f0\cgrid\sa90\qj\sl-190\slmult0 \snext15 ");
+		       Style_String_Prefix =>
+			 "\s15\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-190\slmult0 \snext15 ");
 			  -- Note: Narrower space between.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Indented_Hanging),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1800,
 		       Style_Hang_Width => 360,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s16\widctlpar\adjustright \li1800\fi-360\fs18\f0\cgrid\sa90\qj\sl-190\slmult0 \snext16 ");
+		       Style_String_Prefix =>
+			 "\s16\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-190\slmult0 \snext16 ");
 			  -- Note: Narrower space between.
 	    Set_Style (Paragraph_Info(ARM_Output.Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 360,
 		       Style_Hang_Width => 230,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s17\widctlpar\adjustright \li360\fi-230\ri360\fs22\f0\cgrid\sa110\qj\sl-240\slmult0\tx360 \snext17 ");
+		       Style_String_Prefix =>
+			 "\s17\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx360 \snext17 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Nested_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 720,
 		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s18\widctlpar\adjustright \li720\fi-200\ri360\fs22\f0\cgrid\sa110\qj\sl-240\slmult0\tx720 \snext18 ");
+		       Style_String_Prefix =>
+			 "\s18\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx720 \snext18 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1080,
 		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s19\widctlpar\adjustright \li1080\fi-200\ri360\fs18\f0\cgrid\sa90\qj\sl-190\slmult0\tx1080 \snext19 ");
+		       Style_String_Prefix =>
+			 "\s19\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0\tx1080 \snext19 ");
 			  -- Note: Narrower space between.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1440,
 		       Style_Hang_Width => 180,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s20\widctlpar\adjustright \li1440\fi-180\ri360\fs18\f0\cgrid\sa90\qj\sl-190\slmult0\tx1440 \snext20 ");
+		       Style_String_Prefix =>
+			 "\s20\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0\tx1440 \snext20 ");
 			  -- Note: Narrower space between.
 	    Set_Style (Paragraph_Info(ARM_Output.Indented_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 1440,
 		       Style_Hang_Width => 230,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s21\widctlpar\adjustright \li1440\fi-230\ri360\fs22\f0\cgrid\sa120\qj\sl-240\slmult0\tx1080 \snext21 ");
+		       Style_String_Prefix =>
+			 "\s21\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx1080 \snext21 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Syntax_Indented_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 720,
 		       Style_Hang_Width => 230,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s22\widctlpar\adjustright \li720\fi-230\ri360\fs22\f0\cgrid\sa110\qj\sl-240\slmult0\tx720 \snext22 ");
+		       Style_String_Prefix =>
+			 "\s22\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx720 \snext22 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Code_Indented_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 1080,
 		       Style_Hang_Width => 230,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s23\widctlpar\adjustright \li1080\fi-230\ri360\fs22\f0\cgrid\sa110\qj\sl-240\slmult0\tx1080 \snext23 ");
+		       Style_String_Prefix =>
+			 "\s23\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx1080 \snext23 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Code_Indented),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 720,
 		       Style_Before => 0,
 		       Style_After => 120,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s24\widctlpar\adjustright \li720\fs22\f0\cgrid\sa120\qj\sl-260\slmult0 \snext24 ");
+		       Style_String_Prefix =>
+			 "\s24\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-260\slmult0 \snext24 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Code_Indented),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1440,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s25\widctlpar\adjustright \li1440\fs18\f0\cgrid\sa90\qj\sl-200\slmult0 \snext25 ");
+		       Style_String_Prefix =>
+			 "\s25\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext25 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Indented_Examples),
+		       Font => ARM_Output.Fixed,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1440,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s26\widctlpar\adjustright \li1440\fs18\f2\cgrid\sa100\ql\sl-190\slmult0 \snext26 ");
+		       Style_String_Prefix =>
+			 "\s26\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-190\slmult0 \snext26 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Indented_Examples),
+		       Font => ARM_Output.Fixed,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
 		       Style_Indent => 2160,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s27\widctlpar\adjustright \li2160\fs16\f2\cgrid\sa80\ql\sl-170\slmult0 \snext27 ");
+		       Style_String_Prefix =>
+			 "\s27\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-170\slmult0 \snext27 ");
 
             Set_Style (Header_Info,
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 20,
 		       Style_Indent => 0,
 		       Style_Before => 0,
 		       Style_After => 0,
 		       Style_Justified => FALSE,
-		       Style_String =>
+		       Style_String_Prefix =>
 		         "\s28\widctlpar\tqc\tx" & Half_Paper_Width &
-			 "\tqr\tx" & Paper_Width & "\adjustright \fs20\cgrid \sbasedon0 \snext28 ");
+			 "\tqr\tx" & Paper_Width & "\adjustright",
+		       Style_String_Suffix => "\cgrid \sbasedon0 \snext28 ");
             Set_Style (Footer_Info,
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 20,
 		       Style_Indent => 0,
 		       Style_Before => 0,
 		       Style_After => 0,
 		       Style_Justified => FALSE,
-		       Style_String =>
+		       Style_String_Prefix =>
 		         "\s29\widctlpar" & -- "\tqc\tx" & Half_Paper_Width & -- We don't use or define the center tab; it causes problems with very long titles.
-			 "\tqr\tx" & Paper_Width & "\adjustright \fs20\cgrid \sbasedon0 \snext29 ");
+			 "\tqr\tx" & Paper_Width & "\adjustright",
+		       Style_String_Suffix => "\cgrid \sbasedon0 \snext29 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Index),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 270,
 		       Style_Hang_Width => 270,
 		       Style_Before => 0,
 		       Style_After => 0,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s31\widctlpar\adjustright \fs18\f0\cgrid\li270\fi-270\ql\sl-200\slmult0 \snext31 ");
+		       Style_String_Prefix =>
+			 "\s31\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-200\slmult0 \snext31 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Wide),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 0,
 		       Style_Before => 120,
 		       Style_After => 120,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s32\widctlpar\adjustright \fs22\f0\cgrid\sa120\sb120\qj\sl-260\slmult0 \snext0 ");
+		       Style_String_Prefix =>
+			 "\s32\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-260\slmult0 \snext0 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Wide_Annotations),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 720,
 		       Style_Before => 90,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s33\widctlpar\adjustright \li720\fs18\f0\cgrid\sa90\sb90\qj\sl-200\slmult0 \snext7 ");
+		       Style_String_Prefix =>
+			 "\s33\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext7 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Notes_Header),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 360,
 		       Style_Before => 0,
 		       Style_After => 0,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s34\widctlpar\adjustright \li360\fs18\f0\cgrid\sa0\qj\sl-200\slmult0 \snext6 ");
+		       Style_String_Prefix =>
+			 "\s34\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext6 ");
 		      -- Note: No space afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Notes_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 720,
 		       Style_Hang_Width => 230,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s35\widctlpar\adjustright \li720\fi-230\ri360\fs18\f0\cgrid\sa90\qj\sl-190\slmult0\tx720 \snext35 ");
+		       Style_String_Prefix =>
+			 "\s35\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0\tx720 \snext35 ");
 			  -- Note: Narrower space between.
 	    Set_Style (Paragraph_Info(ARM_Output.Notes_Nested_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1080,
 		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s36\widctlpar\adjustright \li1080\fi-200\ri360\fs18\f0\cgrid\sa90\qj\sl-190\slmult0\tx1080 \snext36 ");
+		       Style_String_Prefix =>
+			 "\s36\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0\tx1080 \snext36 ");
 			  -- Note: Narrower space between.
 	    Set_Style (Paragraph_Info(ARM_Output.Hanging_in_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 1080,
 		       Style_Hang_Width => 720,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s37\widctlpar\adjustright \li1080\fi-720\ri360\fs22\f0\cgrid\sa110\qj\sl-240\slmult0 \snext14 ");
+		       Style_String_Prefix =>
+			 "\s37\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0 \snext14 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Hanging_in_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1800,
 		       Style_Hang_Width => 720,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s38\widctlpar\adjustright \li1800\fi-720\ri360\fs18\f0\cgrid\sa90\qj\sl-190\slmult0 \snext16 ");
+		       Style_String_Prefix =>
+			 "\s38\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0 \snext16 ");
 			  -- Note: Narrower space between.
 	    Set_Style (Paragraph_Info(ARM_Output.Code_Indented_Nested_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 1440,
 		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s39\widctlpar\adjustright \li1440\fi-200\ri360\fs22\f0\cgrid\sa110\qj\sl-240\slmult0\tx1440 \snext39 ");
+		       Style_String_Prefix =>
+			 "\s39\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx1440 \snext39 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Syntax_Summary),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 360,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s40\widctlpar\adjustright \fs18\f0\cgrid\ql\li360\sa90\sl-200\slmult0 \snext40 ");
+		       Style_String_Prefix =>
+			 "\s40\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-200\slmult0 \snext40 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Enumerated),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 360,
 		       Style_Hang_Width => 230,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s41\widctlpar\adjustright \li360\fi-230\ri360\fs22\f0\cgrid\sa110\qj\sl-240\slmult0\tx360 \snext41 ");
+		       Style_String_Prefix =>
+			 "\s41\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx360 \snext41 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Enumerated),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1080,
 		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s42\widctlpar\adjustright \li1080\fi-200\ri360\fs18\f0\cgrid\sa90\qj\sl-190\slmult0\tx1080 \snext42 ");
+		       Style_String_Prefix =>
+			 "\s42\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0\tx1080 \snext42 ");
 			  -- Note: Narrower space between.
 	    Set_Style (Paragraph_Info(ARM_Output.Nested_Enumerated),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 720,
 		       Style_Hang_Width => 230,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s43\widctlpar\adjustright \li720\fi-230\ri360\fs22\f0\cgrid\sa110\qj\sl-240\slmult0\tx360 \snext43 ");
+		       Style_String_Prefix =>
+			 "\s43\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx360 \snext43 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Enumerated),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1440,
 		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s44\widctlpar\adjustright \li1440\fi-200\ri360\fs18\f0\cgrid\sa90\qj\sl-190\slmult0\tx1080 \snext44 ");
+		       Style_String_Prefix =>
+			 "\s44\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0\tx1080 \snext44 ");
 			  -- Note: Narrower space between.
 	    Set_Style (Paragraph_Info(ARM_Output.Nested_X2_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 1080,
 		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s45\widctlpar\adjustright \li1080\fi-200\ri360\fs22\f0\cgrid\sa110\qj\sl-240\slmult0\tx720 \snext45 ");
+		       Style_String_Prefix =>
+			 "\s45\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx720 \snext45 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_X2_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1800,
 		       Style_Hang_Width => 180,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s46\widctlpar\adjustright \li1800\fi-180\ri360\fs18\f0\cgrid\sa90\qj\sl-190\slmult0\tx1440 \snext46 ");
+		       Style_String_Prefix =>
+			 "\s46\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0\tx1440 \snext46 ");
 			  -- Note: Narrower space between.
 	    Set_Style (Paragraph_Info(ARM_Output.Indented_Nested_Bulleted),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 1800,
 		       Style_Hang_Width => 230,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s47\widctlpar\adjustright \li1800\fi-230\ri360\fs22\f0\cgrid\sa120\qj\sl-240\slmult0\tx1080 \snext47 ");
+		       Style_String_Prefix =>
+			 "\s47\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx1080 \snext47 ");
 			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Paragraph_Info(ARM_Output.Inner_Indented),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 1440,
 		       Style_Before => 0,
 		       Style_After => 120,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s48\widctlpar\adjustright \li1440\fs22\f0\cgrid\sa120\qj\sl-260\slmult0 \snext48 ");
+		       Style_String_Prefix =>
+			 "\s48\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-260\slmult0 \snext48 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Inner_Indented),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
-		       Style_Indent => 21600,
+		       Style_Indent => 2160,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s49\widctlpar\adjustright \li1800\fs18\f0\cgrid\sa90\qj\sl-200\slmult0 \snext49 ");
+		       Style_String_Prefix =>
+			 "\s49\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext49 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Syntax_Indented),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
-		       Style_Indent => 1080,
+		       Style_Indent => 1440,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
-		       Style_String =>
-			 "\s50\widctlpar\adjustright \li1440\fs18\f0\cgrid\sa90\qj\sl-200\slmult0 \snext50 ");
+		       Style_String_Prefix =>
+			 "\s50\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext50 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Examples),
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 20,
 		       Style_Indent => 360,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s51\widctlpar\adjustright \li360\fs20\f1\cgrid\sa110\ql\sl-240\slmult0 \snext51 ");
+		       Style_String_Prefix =>
+			 "\s51\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-240\slmult0 \snext51 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Examples),
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
 		       Style_Indent => 1080,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s52\widctlpar\adjustright \li1080\fs16\f1\cgrid\sa80\ql\sl-180\slmult0 \snext52 ");
+		       Style_String_Prefix =>
+			 "\s52\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-180\slmult0 \snext52 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Indented_Examples),
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 20,
 		       Style_Indent => 1440,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s53\widctlpar\adjustright \li1440\fs20\f1\cgrid\sa110\ql\sl-240\slmult0 \snext53 ");
+		       Style_String_Prefix =>
+			 "\s53\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-240\slmult0 \snext53 ");
 	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Indented_Examples),
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
 		       Style_Indent => 2160,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\s54\widctlpar\adjustright \li2160\fs16\f1\cgrid\sa80\ql\sl-180\slmult0 \snext54 ");
+		       Style_String_Prefix =>
+			 "\s54\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-180\slmult0 \snext54 ");
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
                 Set_Style (TOC_1_Info,
+		           Font => ARM_Output.Swiss,
+		           Body_Font => Output_Object.Body_Font,
 		           Font_Size => 24,
 		           Style_Indent => 0,
 		           Style_Before => 60,
 			   Style_After => 60,
 		           Style_Justified => FALSE,
-		           Style_String =>
-		             "\s55\sb60\sa60\widctlpar\tqr\tldot\tx" & Paper_Width &
-				"\adjustright \b\f1\fs24\cgrid \sbasedon0 \snext0 ");
+		           Style_String_Prefix =>
+		             "\s55\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
+		           Font => ARM_Output.Swiss,
+		           Body_Font => Output_Object.Body_Font,
 		           Font_Size => 22,
 		           Style_Indent => 200,
 		           Style_Before => 0,
 			   Style_After => 0,
 		           Style_Justified => FALSE,
-		           Style_String =>
-		             "\s56\li200\widctlpar\tqr\tldot\tx" & Paper_Width &
-				"\adjustright \b\f1\fs22\cgrid \sbasedon0 \snext0 ");
+		           Style_String_Prefix =>
+		             "\s56\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
+		           Font => ARM_Output.Swiss,
+		           Body_Font => Output_Object.Body_Font,
 		           Font_Size => 22,
 		           Style_Indent => 400,
 		           Style_Before => 0,
 			   Style_After => 0,
 		           Style_Justified => FALSE,
-		           Style_String =>
-		             "\s57\li400\widctlpar\tqr\tldot\tx" & Paper_Width &
-				"\adjustright \b\f1\fs22\cgrid \sbasedon0 \snext0 ");
+		           Style_String_Prefix =>
+		             "\s57\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_C_Text_Info,
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 0,
 		       Style_Before => 10,
 		       Style_After => 10,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\fs22\f0\sa10\sb10\qc ");
+		       Style_String_Prefix => "",
+		       Style_String_Suffix => "\qc");
 		-- We use a bit of space above and below to avoid overrunning
 		-- the borders of the cells.
 	    Set_Style (Table_L_Text_Info,
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 0,
 		       Style_Before => 20,
 		       Style_After => 20,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\fs22\f0\sa20\sb20\ql ");
+		       Style_String_Prefix => "",
+		       Style_String_Suffix => "\ql");
 	    Set_Style (Table_C_Sml_Text_Info,
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 0,
 		       Style_Before => 20,
 		       Style_After => 20,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\fs18\f0\sa20\sb20\qc ");
+		       Style_String_Prefix => "",
+		       Style_String_Suffix => "\qc");
 	    Set_Style (Table_L_Sml_Text_Info,
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 0,
 		       Style_Before => 20,
 		       Style_After => 20,
 		       Style_Justified => FALSE,
-		       Style_String =>
-			 "\fs18\f0\sa20\sb20\ql ");
+		       Style_String_Prefix => "",
+		       Style_String_Suffix => "\ql");
 	end if;
 
 	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Normal));
@@ -1760,6 +2163,7 @@ package body ARM_RTF is
 		      Big_Files : in Boolean;
 		      Primary_Sans_Serif_Font : in Sans_Serif_Fonts := Arial;
 		      Primary_Serif_Font : in Serif_Fonts := Times_New_Roman;
+		      Body_Font : in ARM_Output.Font_Family_Type := ARM_Output.Roman;
 		      File_Prefix : in String;
 		      Header_Prefix : in String := "";
 		      Title : in String := "") is
@@ -1775,6 +2179,7 @@ package body ARM_RTF is
 	-- separated by a dash.
 	-- The primary font used for the Sans_Serif text, and for the Serif
 	-- text, is as specified.
+	-- Which font is used for the body is specified by Body_Font.
     begin
 	if Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -1786,6 +2191,7 @@ package body ARM_RTF is
 	Output_Object.Big_Files := Big_Files;
 	Output_Object.Primary_Sans_Serif_Font := Primary_Sans_Serif_Font;
 	Output_Object.Primary_Serif_Font := Primary_Serif_Font;
+	Output_Object.Body_Font := Body_Font;
 	Ada.Strings.Fixed.Move (Target => Output_Object.File_Prefix,
 			        Source => File_Prefix);
 	Output_Object.Title := Ada.Strings.Unbounded.To_Unbounded_String (Title);

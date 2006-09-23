@@ -172,6 +172,10 @@ Global properties:
      This specifies which font is used to display examples.
      This changes the @Exam{<text>} and @begin{Example} formats.
      By default, the Fixed font is used.
+@BodyFont{Swiss|Roman}
+     This specifies which font is used to display the body of the document.
+     This changes all styles that are not defined to use a specific font.
+     By default, the Roman font is used.
 
 HTML Output properties:
 

@@ -74,6 +74,7 @@ package ARM_RTF is
     --			table command.
     --		- RLB - Added picture command.
     --  3/30/06 - RLB - Added shape id counter.
+    --  9/21/06 - RLB - Added Body_Font.
 
     type RTF_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -92,6 +93,7 @@ package ARM_RTF is
 		      Big_Files : in Boolean;
 		      Primary_Sans_Serif_Font : in Sans_Serif_Fonts := Arial;
 		      Primary_Serif_Font : in Serif_Fonts := Times_New_Roman;
+		      Body_Font : in ARM_Output.Font_Family_Type := ARM_Output.Roman;
 		      File_Prefix : in String;
 		      Header_Prefix : in String := "";
 		      Title : in String := "");
@@ -107,6 +109,7 @@ package ARM_RTF is
 	-- separated by a dash.
 	-- The primary font used for the Sans_Serif text, and for the Serif
 	-- text, is as specified.
+	-- Which font is used for the body is specified by Body_Font.
 
     procedure Close (Output_Object : in out RTF_Output_Type);
 	-- Close an Output_Object. No further output to the object is
@@ -429,6 +432,7 @@ private
 	Big_Files : Boolean; -- For RTF, this means to generate a single monster file.
 	Primary_Sans_Serif_Font : Sans_Serif_Fonts;
 	Primary_Serif_Font : Serif_Fonts;
+	Body_Font : ARM_Output.Font_Family_Type;
 	For_ISO : Boolean;
 	Char_Count : Natural := 0; -- Characters on current line.
 	Saw_Hang_End : Boolean := False; -- If we are in a hanging paragraph,

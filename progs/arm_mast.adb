@@ -60,6 +60,7 @@ package body ARM_Master is
     --  1/27/06 - RLB - Added HTMLTabs command.
     --  2/19/06 - RLB - Set Number_Paragraphs for HTML.
     --  6/22/06 - RLB - Added LinkNonTerminals command.
+    --  9/21/06 - RLB - Added the Body_Font command.
 
     type Command_Type is (
 	-- Source commands:
@@ -76,6 +77,7 @@ package body ARM_Master is
 	Title,
 	File_Prefix,
 	Example_Font,
+	Body_Font,
 	-- HTML properties:
 	Single_HTML_Output_File,
 	HTML_Kind_Command,
@@ -130,6 +132,9 @@ package body ARM_Master is
     Should_Number_Paragraphs : Boolean := False; -- Should paragraphs be numbered?
     Font_of_Examples : ARM_Output.Font_Family_Type :=
 	ARM_Output.Fixed; -- Which font should be used for examples?
+
+    Font_of_Body : ARM_Output.Font_Family_Type :=
+	ARM_Output.Roman; -- Which font should be used for the body?
 
     -- HTML properties:
     Use_Large_HTML_Files : Boolean := False; -- Use small output files by default.
@@ -189,6 +194,8 @@ package body ARM_Master is
 	    return File_Prefix;
 	elsif Canonical_Name = "examplefont" then
 	    return Example_Font;
+	elsif Canonical_Name = "bodyfont" then
+	    return Body_Font;
 	elsif Canonical_Name = "singlehtmloutputfile" then
 	    return Single_HTML_Output_File;
 	elsif Canonical_Name = "htmlkind" then
@@ -776,6 +783,25 @@ package body ARM_Master is
 			end if;
 		    end;
 
+		when Body_Font =>
+		    -- @BodyFont{Swiss|Roman}
+		    declare
+			Font_Name : constant String :=
+			    Ada.Characters.Handling.To_Lower (
+				Get_Single_String);
+		    begin
+			if Font_Name = "swiss" then
+			    Font_of_Body := ARM_Output.Swiss;
+			    Ada.Text_IO.Put_Line("Body in swiss font");
+			elsif Font_Name = "roman" then
+			    Font_of_Body := ARM_Output.Roman;
+			    Ada.Text_IO.Put_Line("Body in roman font");
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown body font name: " & Font_Name &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		    end;
+
 		-- HTML properties:
 
 		when Single_HTML_Output_File =>
@@ -906,6 +932,14 @@ package body ARM_Master is
 	        end case;
 	    end;
         end loop Reading_Loop;
+
+	-- Check for bad combinations:
+	if ARM_Output."="(Font_of_Examples, ARM_Output.Roman) and then
+	   ARM_Output."="(Font_of_Body, ARM_Output.Swiss) then
+	    -- This doesn't work, since "Roman" examples use the
+	    -- body styles, and if they are Swiss...
+	    Ada.Text_IO.Put_Line ("  ** Examples cannot be Roman if Body is Swiss!! (They will appear in the Swiss font)");
+	end if;
     end Read_Master_File;
 
 
@@ -1020,7 +1054,8 @@ package body ARM_Master is
 				     Tab_Emulation => HTML_Tab_Emulation,
 			             Header_HTML => +HTML_Header_Text,
 			             Footer_HTML => +HTML_Footer_Text,
-				     Title => Get_Versioned_Item(Document_Title,Change_Version));
+				     Title => Get_Versioned_Item(Document_Title,Change_Version),
+				     Body_Font => Font_of_Body);
 		    Generate_Sources (Output);
 		    ARM_HTML.Close (Output);
 	        end;
@@ -1038,7 +1073,8 @@ package body ARM_Master is
 				        Primary_Sans_Serif_Font => Sans_Serif_Font,
 				        File_Prefix => +Output_File_Prefix,
 				        Title => Get_Versioned_Item(Document_Title,Change_Version),
-				        Header_Prefix => Get_Versioned_Item(Header_Prefix,Change_Version));
+				        Header_Prefix => Get_Versioned_Item(Header_Prefix,Change_Version),
+				        Body_Font => Font_of_Body);
 		    else
 		        ARM_RTF.Create (Output,
 				        Page_Size => Page_Size,
@@ -1048,7 +1084,8 @@ package body ARM_Master is
 				        Primary_Sans_Serif_Font => Sans_Serif_Font,
 				        File_Prefix => +Output_File_Prefix,
 				        Title => Get_Versioned_Item(Document_Title,Change_Version),
-				        Header_Prefix => Get_Versioned_Item(Header_Prefix,Change_Version));
+				        Header_Prefix => Get_Versioned_Item(Header_Prefix,Change_Version),
+				        Body_Font => Font_of_Body);
 		    end if;
 		    Generate_Sources (Output);
 		    ARM_RTF.Close (Output);

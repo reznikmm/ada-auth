@@ -146,6 +146,7 @@ package body ARM_HTML is
     --			and before a closing tag are converted to non-breaking.
     --  3/28/06 - RLB - Removed unnecessary space from headers.
     --  3/30/06 - RLB - Added a bit of space around inline pictures.
+    --  9/21/06 - RLB - Added Body_Font.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -186,12 +187,13 @@ package body ARM_HTML is
 	After : Natural; -- Vertical space after in 0.1 EM.
     end record;
 
+    -- In the following, "Default" means the Body_Font.
     Paragraph_Info : constant array (ARM_Output.Paragraph_Type) of
 	Format_Info_Type := (
 	    ARM_Output.Normal =>
 		(Tag  => DIV,
 		 Size => 0, -- 18
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 0,
 		 Right_Indent => 0,
 		 Hang_Outdent => 0,
@@ -200,7 +202,7 @@ package body ARM_HTML is
 	    ARM_Output.Wide =>
 		(Tag  => DIV,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 0,
 		 Right_Indent => 0,
 		 Hang_Outdent => 0,
@@ -209,7 +211,7 @@ package body ARM_HTML is
 	    ARM_Output.Index =>
 		(Tag  => DIV,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 0,
 		 Right_Indent => 0,
 		 Hang_Outdent => 0,
@@ -218,7 +220,7 @@ package body ARM_HTML is
 	    ARM_Output.Syntax_Summary =>
 		(Tag  => DIV,
 		 Size => -1,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 1,
 		 Right_Indent => 0,
 		 Hang_Outdent => 0,
@@ -227,7 +229,7 @@ package body ARM_HTML is
 	    ARM_Output.Notes =>
 		(Tag  => DIV,
 		 Size => -1, -- 15
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 1,
 		 Right_Indent => 0,
 		 Hang_Outdent => 0,
@@ -236,7 +238,7 @@ package body ARM_HTML is
 	    ARM_Output.Notes_Header =>
 		(Tag  => DIV,
 		 Size => -1, -- 15
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 1,
 		 Right_Indent => 0,
 		 Hang_Outdent => 0,
@@ -245,7 +247,7 @@ package body ARM_HTML is
 	    ARM_Output.Annotations =>
 		(Tag  => DIV,
 		 Size => -1, -- 15
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 2,
 		 Right_Indent => 0,
 		 Hang_Outdent => 0,
@@ -254,7 +256,7 @@ package body ARM_HTML is
 	    ARM_Output.Wide_Annotations =>
 		(Tag  => DIV,
 		 Size => -1, -- 15
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 2,
 		 Right_Indent => 0,
 		 Hang_Outdent => 0,
@@ -335,7 +337,7 @@ package body ARM_HTML is
 	    ARM_Output.Syntax_Indented =>
 		(Tag  => DIV,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 1,
 		 Right_Indent => 0,
 		 Hang_Outdent => 0,
@@ -344,7 +346,7 @@ package body ARM_HTML is
 	    ARM_Output.Small_Syntax_Indented =>
 		(Tag  => DIV,
 		 Size => -1,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 3,
 		 Right_Indent => 0,
 		 Hang_Outdent => 0,
@@ -353,7 +355,7 @@ package body ARM_HTML is
 	    ARM_Output.Indented =>
 		(Tag  => DIV,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 3,
 		 Right_Indent => 0,
 		 Hang_Outdent => 0,
@@ -362,7 +364,7 @@ package body ARM_HTML is
 	    ARM_Output.Small_Indented =>
 		(Tag  => DIV,
 		 Size => -1,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 5,
 		 Right_Indent => 0,
 		 Hang_Outdent => 0,
@@ -371,7 +373,7 @@ package body ARM_HTML is
 	    ARM_Output.Inner_Indented =>
 		(Tag  => DIV,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 4,
 		 Right_Indent => 0,
 		 Hang_Outdent => 0,
@@ -380,7 +382,7 @@ package body ARM_HTML is
 	    ARM_Output.Small_Inner_Indented =>
 		(Tag  => DIV,
 		 Size => -1,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 6,
 		 Right_Indent => 0,
 		 Hang_Outdent => 0,
@@ -389,7 +391,7 @@ package body ARM_HTML is
 	    ARM_Output.Code_Indented =>
 		(Tag  => DIV,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 2,
 		 Right_Indent => 0,
 		 Hang_Outdent => 0,
@@ -398,7 +400,7 @@ package body ARM_HTML is
 	    ARM_Output.Small_Code_Indented =>
 		(Tag  => DIV,
 		 Size => -1,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 4,
 		 Right_Indent => 0,
 		 Hang_Outdent => 0,
@@ -407,7 +409,7 @@ package body ARM_HTML is
 	    ARM_Output.Hanging =>
 		(Tag  => DL,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 0, -- Total = 3.
 		 Right_Indent => 0,
 		 Hang_Outdent => 3,
@@ -416,7 +418,7 @@ package body ARM_HTML is
 	    ARM_Output.Indented_Hanging =>
 		(Tag  => DL,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 2, -- Total = 3.
 		 Right_Indent => 0,
 		 Hang_Outdent => 1,
@@ -425,7 +427,7 @@ package body ARM_HTML is
 	    ARM_Output.Small_Hanging =>
 		(Tag  => DL,
 		 Size => -1,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 2, -- Total = 5.
 		 Right_Indent => 0,
 		 Hang_Outdent => 3,
@@ -434,7 +436,7 @@ package body ARM_HTML is
 	    ARM_Output.Small_Indented_Hanging =>
 		(Tag  => DL,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 4, -- Total = 5.
 		 Right_Indent => 0,
 		 Hang_Outdent => 1,
@@ -443,7 +445,7 @@ package body ARM_HTML is
 	    ARM_Output.Hanging_in_Bulleted =>
 		(Tag  => DL,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 1, -- Total = 3.
 		 Right_Indent => 1,
 		 Hang_Outdent => 2,
@@ -452,7 +454,7 @@ package body ARM_HTML is
 	    ARM_Output.Small_Hanging_in_Bulleted =>
 		(Tag  => DL,
 		 Size => -1,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 3, -- Total = 5.
 		 Right_Indent => 1,
 		 Hang_Outdent => 2,
@@ -461,7 +463,7 @@ package body ARM_HTML is
 	    ARM_Output.Bulleted =>
 		(Tag  => UL,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 1,
 		 Right_Indent => 1,
 		 Hang_Outdent => 0,
@@ -470,7 +472,7 @@ package body ARM_HTML is
 	    ARM_Output.Nested_Bulleted =>
 		(Tag  => UL,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 2,
 		 Right_Indent => 1,
 		 Hang_Outdent => 0,
@@ -479,7 +481,7 @@ package body ARM_HTML is
 	    ARM_Output.Nested_X2_Bulleted =>
 		(Tag  => UL,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 3,
 		 Right_Indent => 1,
 		 Hang_Outdent => 0,
@@ -488,7 +490,7 @@ package body ARM_HTML is
 	    ARM_Output.Small_Bulleted =>
 		(Tag  => UL,
 		 Size => -1,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 3,
 		 Right_Indent => 1,
 		 Hang_Outdent => 0,
@@ -497,7 +499,7 @@ package body ARM_HTML is
 	    ARM_Output.Small_Nested_Bulleted =>
 		(Tag  => UL,
 		 Size => -1,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 4,
 		 Right_Indent => 1,
 		 Hang_Outdent => 0,
@@ -506,7 +508,7 @@ package body ARM_HTML is
 	    ARM_Output.Small_Nested_X2_Bulleted =>
 		(Tag  => UL,
 		 Size => -1,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 5,
 		 Right_Indent => 1,
 		 Hang_Outdent => 0,
@@ -515,7 +517,7 @@ package body ARM_HTML is
 	    ARM_Output.Indented_Bulleted =>
 		(Tag  => UL,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 4,
 		 Right_Indent => 1,
 		 Hang_Outdent => 0,
@@ -524,7 +526,7 @@ package body ARM_HTML is
 	    ARM_Output.Indented_Nested_Bulleted =>
 		(Tag  => UL,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 5,
 		 Right_Indent => 1,
 		 Hang_Outdent => 0,
@@ -533,7 +535,7 @@ package body ARM_HTML is
 	    ARM_Output.Syntax_Indented_Bulleted =>
 		(Tag  => UL,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 2,
 		 Right_Indent => 1,
 		 Hang_Outdent => 0,
@@ -542,7 +544,7 @@ package body ARM_HTML is
 	    ARM_Output.Code_Indented_Bulleted =>
 		(Tag  => UL,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 3,
 		 Right_Indent => 1,
 		 Hang_Outdent => 0,
@@ -551,7 +553,7 @@ package body ARM_HTML is
 	    ARM_Output.Code_Indented_Nested_Bulleted =>
 		(Tag  => UL,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 4,
 		 Right_Indent => 1,
 		 Hang_Outdent => 0,
@@ -560,7 +562,7 @@ package body ARM_HTML is
 	    ARM_Output.Notes_Bulleted =>
 		(Tag  => UL,
 		 Size => -1,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 2,
 		 Right_Indent => 1,
 		 Hang_Outdent => 0,
@@ -569,7 +571,7 @@ package body ARM_HTML is
 	    ARM_Output.Notes_Nested_Bulleted =>
 		(Tag  => UL,
 		 Size => -1,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 3,
 		 Right_Indent => 1,
 		 Hang_Outdent => 0,
@@ -578,7 +580,7 @@ package body ARM_HTML is
 	    ARM_Output.Enumerated =>
 		(Tag  => DL,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 0,
 		 Right_Indent => 1,
 		 Hang_Outdent => 1,
@@ -587,7 +589,7 @@ package body ARM_HTML is
 	    ARM_Output.Small_Enumerated =>
 		(Tag  => DL,
 		 Size => -1,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 2,
 		 Right_Indent => 1,
 		 Hang_Outdent => 1,
@@ -596,7 +598,7 @@ package body ARM_HTML is
 	    ARM_Output.Nested_Enumerated =>
 		(Tag  => DL,
 		 Size => 0,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 1,
 		 Right_Indent => 1,
 		 Hang_Outdent => 1,
@@ -605,7 +607,7 @@ package body ARM_HTML is
 	    ARM_Output.Small_Nested_Enumerated =>
 		(Tag  => DL,
 		 Size => -1,
-		 Font => ARM_Output.Roman,
+		 Font => ARM_Output.Default,
 		 Indent => 3,
 		 Right_Indent => 1,
 		 Hang_Outdent => 1,
@@ -907,30 +909,38 @@ package body ARM_HTML is
 
         function Units_to_EMs (Value : in Natural) return Natural is
 	    -- Convert Value from indentation units to EMs. (0.1 EMs, really).
+	    Normal : Boolean;
         begin
 	    if Output_Object.HTML_Kind = HTML_4_Only then
 	        case Paragraph_Info(Format).Font is
-		    when ARM_Output.Default | ARM_Output.Roman =>
-		        case Paragraph_Info(Format).Size is
-			    when 0 => return Value * 20;
-			    when 1 => return Value * 16; -- 20/1.25.
-			    when 2 => return Value * 13; -- 20/1.56.
-			    when -1 => return Value * 25; -- 20/0.80.
-			    when -2 => return Value * 31; -- 20/0.64.
-			    when -3 => return Value * 40; -- 20/0.50.
-			    when others => return Value; -- Out of range.
-		        end case;
+		    when ARM_Output.Default =>
+			Normal := ARM_Output."=" (Output_Object.Body_Font, ARM_Output.Roman);
+		    when ARM_Output.Roman =>
+			Normal := True;
 		    when ARM_Output.Fixed | ARM_Output.Swiss => -- Start at 90% (otherwise they are huge!)
-		        case Paragraph_Info(Format).Size is
-			    when 0 => return Value * 22; -- 20/0.90
-			    when 1 => return Value * 18; -- 20/1.13.
-			    when 2 => return Value * 14; -- 20/1.40.
-			    when -1 => return Value * 28; -- 20/0.72.
-			    when -2 => return Value * 34; -- 20/0.58.
-			    when -3 => return Value * 44; -- 20/0.45.
-			    when others => return Value; -- Out of range.
-		        end case;
-	        end case;
+			Normal := False;
+		end case;
+		if Normal then
+		    case Paragraph_Info(Format).Size is
+		        when 0 => return Value * 20;
+		        when 1 => return Value * 16; -- 20/1.25.
+		        when 2 => return Value * 13; -- 20/1.56.
+		        when -1 => return Value * 25; -- 20/0.80.
+		        when -2 => return Value * 31; -- 20/0.64.
+		        when -3 => return Value * 40; -- 20/0.50.
+		        when others => return Value; -- Out of range.
+		    end case;
+		else -- Start at 90% (otherwise they are huge!)
+		    case Paragraph_Info(Format).Size is
+		        when 0 => return Value * 22; -- 20/0.90
+		        when 1 => return Value * 18; -- 20/1.13.
+		        when 2 => return Value * 14; -- 20/1.40.
+		        when -1 => return Value * 28; -- 20/0.72.
+		        when -2 => return Value * 34; -- 20/0.58.
+		        when -3 => return Value * 44; -- 20/0.45.
+		        when others => return Value; -- Out of range.
+		    end case;
+	        end if;
 	    elsif ARM_Output."=" (Paragraph_Info(Format).Font, ARM_Output.Fixed) then
 	        -- Special case, see below.
 	        case Paragraph_Info(Format).Size is
@@ -981,35 +991,53 @@ package body ARM_HTML is
             Ada.Text_IO.Put (Output_Object.Output_File, Name & " {");
 	end if;
         case Paragraph_Info(Format).Font is
-	    when ARM_Output.Default => null; -- Shouldn't happen.
+	    when ARM_Output.Default =>
+		if ARM_Output."=" (Output_Object.Body_Font, ARM_Output.Roman) then
+		    Ada.Text_IO.Put (Output_Object.Output_File, "font-family: ""Times New Roman"", Times, serif");
+		else
+		    Ada.Text_IO.Put (Output_Object.Output_File, "font-family: Arial, Helvetica, sans-serif");
+		end if;
 	    when ARM_Output.Roman => Ada.Text_IO.Put (Output_Object.Output_File, "font-family: ""Times New Roman"", Times, serif");
 	    when ARM_Output.Swiss => Ada.Text_IO.Put (Output_Object.Output_File, "font-family: Arial, Helvetica, sans-serif");
 	    when ARM_Output.Fixed => Ada.Text_IO.Put (Output_Object.Output_File, "font-family: ""Courier New"", monospace");
         end case;
         if Output_Object.HTML_Kind = HTML_4_Only then
-	    case Paragraph_Info(Format).Font is
-	        when ARM_Output.Default | ARM_Output.Roman =>
-		    case Paragraph_Info(Format).Size is
-		        when 0 => null; -- Default.
-		        when 1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 125%");
-		        when 2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 156%");
-		        when -1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 80%");
-		        when -2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 64%");
-		        when -3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 50%");
-		        when others => null; -- Out of range.
+	    declare
+	        Normal : Boolean;
+            begin
+	        if Output_Object.HTML_Kind = HTML_4_Only then
+	            case Paragraph_Info(Format).Font is
+		        when ARM_Output.Default =>
+			    Normal := ARM_Output."=" (Output_Object.Body_Font, ARM_Output.Roman);
+		        when ARM_Output.Roman =>
+			    Normal := True;
+		        when ARM_Output.Fixed | ARM_Output.Swiss => -- Start at 90% (otherwise they are huge!)
+			    Normal := False;
 		    end case;
-	        when ARM_Output.Fixed | ARM_Output.Swiss => -- Start at 90% (otherwise they are huge!)
-		    -- Note: This size adjustment is for sections of text, not for in-line text.
-		    case Paragraph_Info(Format).Size is
-		        when 0 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 90%");
-		        when 1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 113%");
-		        when 2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 140%");
-		        when -1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 72%");
-		        when -2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 58%");
-		        when -3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 45%");
-		        when others => null; -- Out of range.
-		    end case;
-	    end case;
+		    if Normal then
+		        case Paragraph_Info(Format).Size is
+		            when 0 => null; -- Default.
+		            when 1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 125%");
+		            when 2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 156%");
+		            when -1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 80%");
+		            when -2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 64%");
+		            when -3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 50%");
+		            when others => null; -- Out of range.
+		        end case;
+		    else -- Start at 90% (otherwise they are huge!)
+		        -- Note: This size adjustment is for sections of text, not for in-line text.
+		        case Paragraph_Info(Format).Size is
+		            when 0 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 90%");
+		            when 1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 113%");
+		            when 2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 140%");
+		            when -1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 72%");
+		            when -2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 58%");
+		            when -3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 45%");
+		            when others => null; -- Out of range.
+		        end case;
+	            end if;
+		end if;
+	    end;
 	    -- Set the leading, because otherwise the lines are too close on IE.
 	    Ada.Text_IO.Put (Output_Object.Output_File, "; line-height: 122%");
         elsif ARM_Output."=" (Paragraph_Info(Format).Font, ARM_Output.Fixed) then
@@ -1513,7 +1541,8 @@ package body ARM_HTML is
 		      Tab_Emulation : Tab_Emulation_Type;
 	              Header_HTML : String;
 	              Footer_HTML : String;
-		      Title : in String := "") is
+		      Title : in String := "";
+		      Body_Font : ARM_Output.Font_Family_Type) is
 	-- Create an Output_Object for a document.
 	-- Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
@@ -1549,6 +1578,7 @@ package body ARM_HTML is
 	-- Header_HTML gives self-contained HTML that will appear before the
 	-- navigation bar in the header. Footer_HTML gives self-contained HTML
 	-- that will appear after the navigation bar in the footer.
+	-- Body_Font selects the default font for the document body.
     begin
 	if Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -1571,6 +1601,7 @@ package body ARM_HTML is
 	Output_Object.Tab_Emulation := Tab_Emulation;
 	Output_Object.Header_HTML := Ada.Strings.Unbounded.To_Unbounded_String(Header_HTML);
 	Output_Object.Footer_HTML := Ada.Strings.Unbounded.To_Unbounded_String(Footer_HTML);
+	Output_Object.Body_Font := Body_Font;
 
 	if Output_Object.Big_Files then
 	    Start_HTML_File (Output_Object,
@@ -1734,7 +1765,13 @@ package body ARM_HTML is
     begin
         if Output_Object.HTML_Kind = HTML_4_Compatible then
 	    case Paragraph_Info(Format).Font is
-	        when ARM_Output.Default | ARM_Output.Roman =>
+	        when ARM_Output.Default =>
+		    if ARM_Output."=" (Output_Object.Body_Font, ARM_Output.Swiss) then
+		        Ada.Text_IO.Put (Output_Object.Output_File, SWISS_FONT_CODE);
+		        Output_Object.Char_Count := Output_Object.Char_Count + SWISS_FONT_CODE'Length;
+		    -- else nothing for Roman.
+		    end if;
+		when ARM_Output.Roman =>
 		    null;
 	        when ARM_Output.Swiss =>
 		    Ada.Text_IO.Put (Output_Object.Output_File, SWISS_FONT_CODE);
@@ -1795,7 +1832,12 @@ package body ARM_HTML is
 	        end case;
 	    end if;
 	    case Paragraph_Info(Format).Font is
-	        when ARM_Output.Default | ARM_Output.Roman =>
+	        when ARM_Output.Default =>
+		    if ARM_Output."=" (Output_Object.Body_Font, ARM_Output.Swiss) then
+		        Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
+		    -- else nothing for Roman.
+		    end if;
+		when ARM_Output.Roman =>
 		    null;
 	        when ARM_Output.Swiss =>
 		    Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
