@@ -42,14 +42,14 @@
 @Source{Name=<Except.MSS>,SectionName=<05>,SectionNumber=[5],NewSection=[T]}
 @Source{Name=<Impl.MSS>,SectionName=<06>,SectionNumber=[6],NewSection=[T]}
 @Source{Name=<ImplPerm.MSS>,SectionName=<07>,SectionNumber=[7],NewSection=[T]}
+@Source{Name=<Environ.MSS>,SectionName=<08>,SectionNumber=[8],NewSection=[T]}
+@Source{Name=<Env-Cont.MSS>,SectionName=<09>,SectionNumber=[9],NewSection=[T]}
+@Source{Name=<CompUnit.MSS>,SectionName=<10>,SectionNumber=[10],NewSection=[T]}
 
 @Comment{*** Old junk
 @Source{Name=<09.MSS>,SectionName=<09>,SectionNumber=[9],NewSection=[T]}
 @Source{Name=<10.MSS>,SectionName=<10>,SectionNumber=[10],NewSection=[T]}
 @Source{Name=<11.MSS>,SectionName=<11>,SectionNumber=[11],NewSection=[T]}
-@Source{Name=<12.MSS>,SectionName=<12>,SectionNumber=[12],NewSection=[T]}
-@Source{Name=<13A.MSS>,SectionName=<13>,SectionNumber=[13],NewSection=[T]}
-@Source{Name=<13B.MSS>,SectionName=<13>,SectionNumber=[13],NewSection=[F]}
 @Comment{Now, the "Standard Libraries" separator page}
 @Source{Name=<LIBRARY.MSS>,SectionName=<Lib>,SectionNumber=[0],NewSection=[T]}
 @Comment{Annex A; all of the files starting with "Pre_" are part of Annex A.}
@@ -57,23 +57,12 @@
 @Source{Name=<PRE_Standard.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
 @Source{Name=<PRE_Ada.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
 @Source{Name=<PRE_Chars.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
-@Source{Name=<PRE_Strings.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
-@Source{Name=<PRE_Math.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
-@Source{Name=<Real_Attribs.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
-@Source{Name=<PRE_IO.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
-@Source{Name=<PRE_Cmdln.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
-@Source{Name=<PRE_Dirs.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
 @Source{Name=<PRE_Environ.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
 @Source{Name=<PRE_Containers.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
 @Comment{Other normative annexes:}
 @Source{Name=<Interface.MSS>,SectionName=<B>,SectionNumber=[B],NewSection=[T]}
 @Source{Name=<SP.MSS>,SectionName=<C>,SectionNumber=[C],NewSection=[T]}
 @Source{Name=<RT.MSS>,SectionName=<D>,SectionNumber=[D],NewSection=[T]}
-@Source{Name=<DS.MSS>,SectionName=<E>,SectionNumber=[E],NewSection=[T]}
-@Source{Name=<InfoSys.MSS>,SectionName=<F>,SectionNumber=[F],NewSection=[T]}
-@Source{Name=<Numerics.MSS>,SectionName=<G>,SectionNumber=[G],NewSection=[T]}
-@Source{Name=<Safety.MSS>,SectionName=<H>,SectionNumber=[H],NewSection=[T]}
-@Comment{We don't use Annex I, as ISO requires skipping I and O}
 @Source{Name=<Obsolescent.MSS>,SectionName=<J>,SectionNumber=[J],NewSection=[T]}
 @Comment{Informative annexes:}
 @Source{Name=<Attribs.MSS>,SectionName=<K>,SectionNumber=[K],NewSection=[T]}
@@ -84,7 +73,10 @@
 @Source{Name=<Syntax.MSS>,SectionName=<P>,SectionNumber=[P],NewSection=[T]}
 *** End old junk}
 
+@Comment{Informative annexes:}
+@Source{Name=<Rat.MSS>,SectionName=<D>,SectionNumber=[D],NewSection=[T]}
 @Source{Name=<Entities.MSS>,SectionName=<E>,SectionNumber=[E],NewSection=[T]}
+@Comment{We don't use Annex I, as ISO requires skipping I and O}
 @Source{Name=<Refs.MSS>,SectionName=<REF>,SectionNumber=[0],NewSection=[T]}
 @Source{Name=<Index.MSS>,SectionName=<IDX>,SectionNumber=[0],NewSection=[T]}
 

@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2006/09/23 05:24:02 $}
+@comment{$Revision: 1.5 $ $Date: 2006/09/24 02:39:34 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -460,42 +460,75 @@ the interface that had not been preprogrammed by a tool.
 @LabeledSubClause{Classification of errors}
 
 
-ASIS reports all operational errors by raising an exception. Whenever an ASIS implementation raises one of the exceptions declared in package Asis.Exceptions, it will previously have set the values returned by the Status and Diagnosis
-queries to indicate the cause of the error. The possible values for Status are indicated here along with suggestions for the associated contents of the Diagnosis string.
+ASIS reports all operational errors by raising an exception. Whenever an ASIS
+implementation raises one of the exceptions declared in package
+Asis.Exceptions, it will previously have set the values returned by the Status
+and Diagnosis queries to indicate the cause of the error. The possible values
+for Status are indicated here along with suggestions for the associated
+contents of the Diagnosis string.
 
-ASIS applications are encouraged to follow this same convention whenever they explicitly raise any ASIS exception to always record a Status and Diagnosis prior to raising the exception. Values of errors along with their general meanings are:
+@leading@;ASIS applications are encouraged to follow this same convention
+whenever they explicitly raise any ASIS exception to always record a Status and
+Diagnosis prior to raising the exception. Values of errors along with their
+general meanings are:
 
-	Not_An_Error					-- No error is presently recorded
-	Value_Error						-- Routine argument value invalid
-	Initialization_Error				-- ASIS is uninitialized
-	Environment_Error				-- ASIS could not initialize
-	Parameter_Error				-- Bad Parameter given to Initialize
-	Capacity_Error					-- Implementation overloaded
-	Name_Error					-- Context/unit not found
-	Use_Error						-- Context/unit not use/open-able
-	Data_Error						-- Context/unit bad/invalid/corrupt
-	Text_Error						-- The program text cannot be located
-	Storage_Error					-- Storage_Error suppressed
-	Obsolete_Reference_Error		-- Semantic reference is obsolete
-	Unhandled_Exception_Error		-- Unexpected exception suppressed
-	Not_Implemented_Error			-- Functionality not implemented
-	Internal_Error					-- Implementation internal failure
+@table{Columns=[2],Alignment=[Allleft],FirstColWidth=[1],NoBreak=[F],Border=[F],
+SmallSize=[F],Caption=[],Headers=[],
+Body=[Not_An_Error@Defn{Not_An_Error}@\-- No error is presently recorded
+Value_Error@Defn{Value_Error}@\-- Routine argument value invalid
+Initialization_Error@Defn{Initialization_Error}@\-- ASIS is uninitialized
+Environment_Error@Defn{Environment_Error}@\-- ASIS could not initialize
+Parameter_Error@Defn{Parameter_Error}@\-- Bad Parameter given to Initialize
+Capacity_Error@Defn{Capacity_Error}@\-- Implementation overloaded
+Name_Error@Defn{Name_Error}@\-- Context/unit not found
+Use_Error@Defn{Use_Error}@\-- Context/unit not use/open-able
+Data_Error@Defn{Data_Error}@\-- Context/unit bad/invalid/corrupt
+Text_Error@Defn{Text_Error}@\-- The program text cannot be located
+Storage_Error@Defn{Storage_Error}@\-- Storage_Error suppressed
+Obsolete_Reference_Error@Defn{Obsolete_Reference_Error}@\-- Semantic reference is obsolete
+Unhandled_Exception_Error@Defn{Unhandled_Exception_Error}@\-- Unexpected exception suppressed
+Not_Implemented_Error@Defn{Not_Implemented_Error}@\-- Functionality not implemented@Last
+Internal_Error@Defn{Internal_Error}@\-- Implementation internal failure]}
 
 Diagnostic messages may be more specific.
 
-A set of exceptions shall be raised for the following circumstances:
+@leading@;A set of exceptions shall be raised for the following
+circumstances:@b{@i{This wording is bad, you can only raise one exception at a
+time; it should be fixed since it uses "shall". - RLB}}
 
-* @b{ASIS_Inappropriate_Context} - Raised when ASIS is passed a Context value that is not appropriate for the operation. This exception typically indicates that a user error has occurred within the application.
-* @b{ASIS_Inappropriate_Compilation_Unit} - Raised when ASIS is passed a Compilation_Unit value that is not appropriate. This exception typically indicates that a user error has occurred within the application.
-* @b{ASIS_Inappropriate_Element} - Raised when ASIS is given an Element value that is not appropriate. This exception typically indicates that a user error has occurred within the application.
-* @b{ASIS_Inappropriate_Line} - Raised when ASIS is given a Line value that is not appropriate.
-* @b{ASIS_Inappropriate_Line_Number} - Raised when ASIS is given a Line_Number value that is not appropriate. This exception typically indicates that a user error has occurred within the application.
-* @b{ASIS_Failed} - All ASIS routines may raise ASIS_Failed whenever they cannot normally complete their operation. This exception typically indicates a failure of the underlying ASIS implementation.
-  This is a catch-all exception that is raised for different reasons in different ASIS implementations.
+@begin{Itemize}
+@b{ASIS_Inappropriate_Context}@Defn{ASIS_Inappropriate_Context} @en Raised when
+ASIS is passed a Context value that is not appropriate for the operation. This
+exception typically indicates that a user error has occurred within the
+application.
+
+@b{ASIS_Inappropriate_Compilation_Unit}@Defn{ASIS_Inappropriate_Compilation_Uni
+t} @en Raised when ASIS is passed a Compilation_Unit value that is not
+appropriate. This exception typically indicates that a user error has occurred
+within the application.
+
+@b{ASIS_Inappropriate_Element}@Defn{ASIS_Inappropriate_Element} @en Raised when
+ASIS is given an Element value that is not appropriate. This exception
+typically indicates that a user error has occurred within the application.
+
+@b{ASIS_Inappropriate_Line}@Defn{ASIS_Inappropriate_Line} @en Raised when ASIS
+is given a Line value that is not appropriate.
+
+@b{ASIS_Inappropriate_Line_Number}@Defn{ASIS_Inappropriate_Line_Number} @en
+Raised when ASIS is given a Line_Number value that is not appropriate. This
+exception typically indicates that a user error has occurred within the
+application.
+
+@b{ASIS_Failed}@Defn{ASIS_Failed} @en All ASIS routines may raise ASIS_Failed
+whenever they cannot normally complete their operation. This exception
+typically indicates a failure of the underlying ASIS implementation. This is a
+catch-all exception that is raised for different reasons in different ASIS
+implementations.
+
+@end{Itemize}
 
 
 @LabeledClause{Normative reference}
-
 
 The following standard contains provisions which, through reference in this
 text, constitute provisions of this International Standard. At the time of
@@ -507,8 +540,8 @@ registers of currently valid International Standards.
 
 ISO/IEC 8652:1995, @i{Information technology @em Programming languages @em Ada}.
 
-@LabeledClause{Terms and definitions}
 
+@LabeledClause{Terms and definitions}
 
 For the purposes of this International Standard, the terms and definitions
 given in ISO/IEC 8652:1995 and the following apply.

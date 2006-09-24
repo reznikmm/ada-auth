@@ -1,6 +1,6 @@
-@Part(frontmatter, root="asis.msm")
+@Part(implperm, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/implperm.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/09/23 05:24:02 $}
+@comment{$Revision: 1.3 $ $Date: 2006/09/24 02:39:33 $}
 
 
 @LabeledSection{package Asis.Implementation.Permissions}

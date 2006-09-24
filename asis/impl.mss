@@ -1,6 +1,6 @@
-@Part(frontmatter, root="asis.msm")
+@Part(impl, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/impl.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2006/09/23 05:24:02 $}
+@comment{$Revision: 1.5 $ $Date: 2006/09/24 02:39:34 $}
 
 @LabeledSection{package Asis.Implementation}
 
@@ -102,7 +102,7 @@ argument is invalid. Status is Environment_Error or Parameter_Error.
 
 @begin{SingleNote}
 The ASIS implementation may be Initialized and Finalized any number of
-times during the operation of an ASIS program.  However, all existing
+times during the operation of an ASIS program. However, all existing
 Context, Compilation_Unit and Element values become invalid when
 ASIS Is_Finalized. Subsequent calls to ASIS queries or services using
 such invalid Compilation_Unit or Element values will cause
