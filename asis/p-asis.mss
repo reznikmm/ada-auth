@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2006/08/05 04:33:28 $}
+@comment{$Revision: 1.4 $ $Date: 2006/09/23 05:24:02 $}
 
 @LabeledSection{package Asis}
 
@@ -1271,227 +1271,234 @@ Compilation_Unit shall be an undiscriminated private type.
                   Return Boolean is abstract;
 @end{Example}
 
+
 @LabeledClause{type Compilation_Unit_List}
 
-
 @begin{Example}
-    type Compilation_Unit_List is
-           array (List_Index range <>) of Compilation_Unit;
+@key[type] @AdaTypeDefn{Compilation_Unit_List} @key[is]
+       @key[array] (List_Index @key[range] <>) @key[of] Compilation_Unit;
 
-    Nil_Compilation_Unit_List : constant Compilation_Unit_List;
+@AdaObjDefn{Nil_Compilation_Unit_Lis}t : @key[constant] Compilation_Unit_List;
 @end{Example}
 
-@LabeledClause{Unit Kinds }
 
-Unit Kinds are enumeration types describing the various kinds of units.
+@LabeledClause{Unit Kinds}
+
+Unit Kinds@Defn{Unit kinds} are enumeration types describing the various kinds of units.
 These element kinds are only used by package Asis.Compilation_Units.
 
-@LabeledSubClause{type Unit_Kinds }
 
-Unit_Kinds - the varieties of compilation units of compilations,
+@LabeledSubClause{type Unit_Kinds}
+
+Unit_Kinds @Chg{Version=[1],New=[defines],Old=[@en]} the varieties of compilation units of compilations,
 including compilations having no compilation units but consisting of
 configuration pragmas or comments.
 
 @begin{Example}
-  type Unit_Kinds is (
+@key[type] @AdaTypeDefn{Unit_Kinds} @key[is] (
 
-    Not_A_Unit,                  -- A Nil_Compilation_Unit
+   @AdaObjDefn{Not_A_Unit},                  -- A Nil_Compilation_Unit
 
-    A_Procedure,
-    A_Function,
-    A_Package,
+   @AdaObjDefn{A_Procedure},
+   @AdaObjDefn{A_Function},
+   @AdaObjDefn{A_Package},
 
-    A_Generic_Procedure,
-    A_Generic_Function,
-    A_Generic_Package,
+   @AdaObjDefn{A_Generic_Procedure},
+   @AdaObjDefn{A_Generic_Function},
+   @AdaObjDefn{A_Generic_Package},
 
-    A_Procedure_Instance,
-    A_Function_Instance,
-    A_Package_Instance,
+   @AdaObjDefn{A_Procedure_Instance},
+   @AdaObjDefn{A_Function_Instance},
+   @AdaObjDefn{A_Package_Instance},
 
-    A_Procedure_Renaming,
-    A_Function_Renaming,
-    A_Package_Renaming,
+   @AdaObjDefn{A_Procedure_Renaming},
+   @AdaObjDefn{A_Function_Renaming},
+   @AdaObjDefn{A_Package_Renaming},
 
-    A_Generic_Procedure_Renaming,
-    A_Generic_Function_Renaming,
-    A_Generic_Package_Renaming,
+   @AdaObjDefn{A_Generic_Procedure_Renaming},
+   @AdaObjDefn{A_Generic_Function_Renaming},
+   @AdaObjDefn{A_Generic_Package_Renaming},
 
-    A_Procedure_Body,    -- A unit interpreted only as the completion
-                         -- of a procedure, or a unit interpreted as
-                         -- both the declaration and body of a library
-                         -- procedure. Reference Manual 10.1.4(4)
+   @AdaObjDefn{A_Procedure_Body},    -- A unit interpreted only as the completion
+                        -- of a procedure, or a unit interpreted as
+                        -- both the declaration and body of a library
+                        -- procedure. Reference Manual 10.1.4(4)
 
-    A_Function_Body,     -- A unit interpreted only as the completion
-                         -- of a function, or a unit interpreted as
-                         -- both the declaration and body of a library
-                         -- function. Reference Manual 10.1.4(4)
+   @AdaObjDefn{A_Function_Body},     -- A unit interpreted only as the completion
+                        -- of a function, or a unit interpreted as
+                        -- both the declaration and body of a library
+                        -- function. Reference Manual 10.1.4(4)
 
-    A_Package_Body,
+   @AdaObjDefn{A_Package_Body},
 
-    A_Procedure_Body_Subunit,
-    A_Function_Body_Subunit,
-    A_Package_Body_Subunit,
-    A_Task_Body_Subunit,
-    A_Protected_Body_Subunit,
+   @AdaObjDefn{A_Procedure_Body_Subunit},
+   @AdaObjDefn{A_Function_Body_Subunit},
+   @AdaObjDefn{A_Package_Body_Subunit},
+   @AdaObjDefn{A_Task_Body_Subunit},
+   @AdaObjDefn{A_Protected_Body_Subunit},
 
-    A_Nonexistent_Declaration,   -- A unit that does not exist but is:
-                                 -- 1) mentioned in a with clause of
-                                 --    another unit or,
-                                 -- 2) a required corresponding
-                                 --    library_unit_declaration
+   @AdaObjDefn{A_Nonexistent_Declaration},   -- A unit that does not exist but is:
+                                -- 1) mentioned in a with clause of
+                                --    another unit or,
+                                -- 2) a required corresponding
+                                --    library_unit_declaration
 
-    A_Nonexistent_Body,          -- A unit that does not exist but is:
-                                 -- 1) known to be a corresponding
-                                 --    subunit or,
-                                 -- 2) a required corresponding
-                                 --    library_unit_body
+   @AdaObjDefn{A_Nonexistent_Body},          -- A unit that does not exist but is:
+                                -- 1) known to be a corresponding
+                                --    subunit or,
+                                -- 2) a required corresponding
+                                --    library_unit_body
 
-    A_Configuration_Compilation, -- Corresponds to the whole content of a
-                                 -- compilation with no compilation_unit,
-                                 -- but possibly containing comments,
-                                 -- configuration pragmas, or both.
-                                 -- A Context is not limited to the number of
-                                 -- units of A_Configuration_Compilation kind.
-                                 -- A unit of A_Configuration_Compilation
-                                 -- does not have a name. This unit
-                                 -- represents configuration pragmas that
-                                 -- are “in effect”. The only interface that
-                                 -- returns this unit kind is
-                                 -- Enclosing_Compilation_Unit when given
-                                 -- A_Pragma element obtained from
-Configuration_Pragmas.
+   @AdaObjDefn{A_Configuration_Compilation}, -- Corresponds to the whole content of a
+                                -- compilation with no compilation_unit,
+                                -- but possibly containing comments,
+                                -- configuration pragmas}, or both.
+                                -- A Context is not limited to the number of
+                                -- units of A_Configuration_Compilation kind.
+                                -- A unit of A_Configuration_Compilation
+                                -- does not have a name. This unit
+                                -- represents configuration pragmas that
+                                -- are "in effect". The only interface that
+                                -- returns this unit kind is
+                                -- Enclosing_Compilation_Unit when given
+                                -- A_Pragma element obtained from Configuration_Pragmas.
 
-    An_Unknown_Unit);            -- An indeterminable or proprietary unit
+   @AdaObjDefn{An_Unknown_Unit});            -- An indeterminable or proprietary unit
 
-  subtype A_Subprogram_Declaration is Unit_Kinds range
-              A_Procedure ..
-              A_Function;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Subprogram_Declaration],Of=[Unit_Kinds]} @key[is] Unit_Kinds @key[range]
+            A_Procedure ..
+            A_Function;
 
-  subtype A_Subprogram_Renaming is Unit_Kinds range
-              A_Procedure_Renaming ..
-              A_Function_Renaming;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Subprogram_Renaming],Of=[Unit_Kinds]} @key[is] Unit_Kinds @key[range]
+            A_Procedure_Renaming ..
+            A_Function_Renaming;
 
-  subtype A_Generic_Unit_Declaration is Unit_Kinds range
-              A_Generic_Procedure ..
-              A_Generic_Package;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Generic_Unit_Declaration],Of=[Unit_Kinds]} @key[is] Unit_Kinds @key[range]
+            A_Generic_Procedure ..
+            A_Generic_Package;
 
-  subtype A_Generic_Unit_Instance is Unit_Kinds range
-              A_Procedure_Instance ..
-              A_Package_Instance;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Generic_Unit_Instance],Of=[Unit_Kinds]} @key[is] Unit_Kinds @key[range]
+            A_Procedure_Instance ..
+            A_Package_Instance;
 
-  subtype A_Subprogram_Body is Unit_Kinds range
-              A_Procedure_Body ..
-              A_Function_Body;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Subprogram_Body],Of=[Unit_Kinds]} @key[is] Unit_Kinds @key[range]
+            A_Procedure_Body ..
+            A_Function_Body;
 
-  subtype A_Library_Unit_Body is Unit_Kinds range
-              A_Procedure_Body ..
-              A_Package_Body;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Library_Unit_Body],Of=[Unit_Kinds]} @key[is] Unit_Kinds @key[range]
+            A_Procedure_Body ..
+            A_Package_Body;
 
-  subtype A_Generic_Renaming is Unit_Kinds range
-              A_Generic_Procedure_Renaming ..
-              A_Generic_Package_Renaming;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Generic_Renaming],Of=[Unit_Kinds]} @key[is] Unit_Kinds @key[range]
+            A_Generic_Procedure_Renaming ..
+            A_Generic_Package_Renaming;
 
-  subtype A_Renaming is Unit_Kinds range
-              A_Procedure_Renaming ..
-              A_Generic_Package_Renaming;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Renaming],Of=[Unit_Kinds]} @key[is] Unit_Kinds @key[range]
+            A_Procedure_Renaming ..
+            A_Generic_Package_Renaming;
 
-  subtype A_Subunit is Unit_Kinds range
-              A_Procedure_Body_Subunit ..
-              A_Protected_Body_Subunit;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Subunit],Of=[Unit_Kinds]} @key[is] Unit_Kinds @key[range]
+            A_Procedure_Body_Subunit ..
+            A_Protected_Body_Subunit;
 @end{Example}
 
-@LabeledSubClause{type Unit_Classes }
 
-Unit_Classes - classification of public, private, body, and subunit.
+@LabeledSubClause{type Unit_Classes}
+
+Unit_Classes @Chg{Version=[1],New=[defines],Old=[@en]} classification of public, private, body, and subunit.
 
 @begin{Example}
-  type Unit_Classes is (  -- Reference Manual 10.1.1(12), 10.1.3
+@key[type] @AdaTypeDefn{Unit_Classes} @key[is] (  -- Reference Manual 10.1.1(12), 10.1.3
 
-    Not_A_Class,              -- A nil, nonexistent, unknown,
-                              -- or configuration compilation unit class.
+   @AdaObjDefn{Not_A_Class},              -- A nil, nonexistent, unknown,
+                             -- or configuration compilation unit class.
 
-    A_Public_Declaration,     -- library_unit_declaration or
-                              -- library_unit_renaming_declaration.
+   @AdaObjDefn{A_Public_Declaration},     -- library_unit_declaration or
+                             -- library_unit_renaming_declaration.
 
-    A_Public_Body,            -- library_unit_body interpreted only as a
-                              -- completion. Its declaration is public.
+   @AdaObjDefn{A_Public_Body},            -- library_unit_body interpreted only as a
+                             -- completion. Its declaration is public.
 
-    A_Public_Declaration_And_Body,
-                              -- subprogram_body interpreted as both a
-                              -- declaration and body of a library
-                              -- subprogram - Reference Manual 10.1.4(4).
+   @AdaObjDefn{A_Public_Declaration_And_Body},
+                             -- subprogram_body interpreted as both a
+                             -- declaration and body of a library
+                             -- subprogram - Reference Manual 10.1.4(4).
 
-    A_Private_Declaration,    -- private library_unit_declaration or
-                              -- private library_unit_renaming_declaration.
+   @AdaObjDefn{A_Private_Declaration},    -- private library_unit_declaration or
+                             -- private library_unit_renaming_declaration.
 
-    A_Private_Body,           -- library_unit_body interpreted only as a
-                              -- completion. Its declaration is private.
+   @AdaObjDefn{A_Private_Body},           -- library_unit_body interpreted only as a
+                             -- completion. Its declaration is private.
 
-    A_Separate_Body);         -- separate (parent_unit_name) proper_body.
+   @AdaObjDefn{A_Separate_Body});         -- separate (parent_unit_name) proper_body.
 @end{Example}
 
-@LabeledSubClause{type Unit_Origins }
 
-Unit_Origins - classification of possible unit origination
+@LabeledSubClause{type Unit_Origins}
+
+Unit_Origins @Chg{Version=[1],New=[defines],Old=[@en]} classification of possible unit origination@Chg{Version=[1],New=[.],Old=[]}
 
 @begin{Example}
-  type Unit_Origins is (
+@key[type] @AdaTypeDefn{Unit_Origins} @key[is] (
 
-    Not_An_Origin,        -- A nil or nonexistent unit origin
-                          -- An_Unknown_Unit can be any origin
+   @AdaObjDefn{Not_An_Origin},        -- A nil or nonexistent unit origin
+                         -- An_Unknown_Unit can be any origin
 
-    A_Predefined_Unit,    -- Ada predefined language environment units
-                          -- listed in Annex A(2). These include
-                          -- Standard and the three root library
-                          -- units: Ada, Interfaces, and System,
-                          -- and their descendants. i.e., Ada.Text_Io,
-                          -- Ada.Calendar, Interfaces.C, etc.
+   @AdaObjDefn{A_Predefined_Unit},    -- Ada predefined language environment units
+                         -- listed in Annex A(2). These include
+                         -- Standard and the three root library
+                         -- units: Ada, Interfaces, and System,
+                         -- and their descendants. i.e., Ada.Text_Io,
+                         -- Ada.Calendar, Interfaces.C, etc.
 
-    An_Implementation_Unit,
-                          -- Implementation specific library units,
-                          -- e.g., runtime support packages, utility
-                          -- libraries, etc. It is not required
-                          -- that any implementation supplied units
-                          -- have this origin. This is a suggestion.
-                          -- Implementations might provide, for
-                          -- example, precompiled versions of public
-                          -- domain software that could have
-                          -- An_Application_Unit origin.
+   @AdaObjDefn{An_Implementation_Unit},
+                         -- Implementation specific library units,
+                         -- e.g., runtime support packages, utility
+                         -- libraries, etc. It is not required
+                         -- that any implementation supplied units
+                         -- have this origin. This is a suggestion.
+                         -- Implementations might provide, for
+                         -- example, precompiled versions of public
+                         -- domain software that could have
+                         -- An_Application_Unit origin.
 
-    An_Application_Unit); -- Neither A_Predefined_Unit or
-                          -- An_Implementation_Unit }
+   @AdaObjDefn{An_Application_Unit}); -- Neither A_Predefined_Unit or
+                         -- An_Implementation_Unit
 @end{Example}
 
-@LabeledSubClause{type Relation_Kinds }
+@LabeledSubClause{type Relation_Kinds}
 
-Relation_Kinds - classification of unit relationships
+Relation_Kinds @Chg{Version=[1],New=[defines],Old=[@en]} classification of unit
+relationships@Chg{Version=[1],New=[.],Old=[]}
 
+@begin{DescribeCode}
 @begin{Example}
-  type Relation_Kinds is (
-
-    Ancestors,
-
-    Descendants,
+@key[type] @AdaTypeDefn{Relation_Kinds} @key[is] (
+   @AdaObjDefn{Ancestors},
+   @AdaObjDefn{Descendants},
 @end{Example}
 
------------------------------------------------------------------------------
-Definition:  ANCESTORS of a unit; DESCENDANTS of a unit
+@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------
+Definition:  ANCESTORS of a unit; DESCENDANTS of a unit]}
 
-Ancestors of a library unit are itself, its parent, its parent's
+@i{Ancestors}@Defn2{Term=[Ancestor],Sec=[of a library unit]} of a library unit
+are itself, its parent, its parent's
 parent, and so on. (Standard is an ancestor of every library unit).
 
-The Descendants relation is the inverse of the ancestor relation.
-Reference Manual 10.1.1(11).
------------------------------------------------------------------------------
+The @i{Descendants} relation is the inverse of the ancestor relation.
+Reference Manual 10.1.1(11).@Defn2{Term=[Ancestor],Sec=[of a library unit]}
 
-    @b{Supporters, }
+@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------]}
 
------------------------------------------------------------------------------
-Definition:  SUPPORTERS of a unit
+@begin{Example}
+   @AdaObjDefn{Supporters},
+@end{Example}
 
-Supporters of a compilation unit are units on which it semantically
-depends. Reference Manual 10.1.1(26).
+@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------
+Definition:  SUPPORTERS of a unit]}
+
+@i{Supporters} of a compilation unit are units on which it semantically
+depends. Reference Manual 10.1.1(26).@Defn2{Term=[Supporter],Sec=[of a compilation unit]}
 
 The Supporters relation is transitive; units that are supporters of library
 units mentioned in a with clause of a compilation unit are also supporters
@@ -1509,15 +1516,17 @@ library_unit_declaration, if any.
 
 The parent body of a subunit is a Supporter of the subunit.
 
------------------------------------------------------------------------------
+@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------]}
 
-    @b{Dependents, }
+@begin{Example}
+   @AdaObjDefn{Dependents},
+@end{Example}
 
------------------------------------------------------------------------------
-Definition:  DEPENDENTS of a unit
+@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------
+Definition:  DEPENDENTS of a unit]}
 
-Dependents of a compilation unit are all the compilation units that
-depend semantically on it.
+@i{Dependents} of a compilation unit are all the compilation units that
+depend semantically on it.@Defn2{Term=[Dependents],Sec=[of a compilation unit]}
 
 The Dependents relation is transitive; Dependents of a unit include the
 unit's Dependents, each dependent unit's Dependents, and so on. A unit
@@ -1539,60 +1548,72 @@ in another compilation unit is a Dependent of the other unit.
 
 For example:
 
-     If A withs B and B withs C
-     then A directly depends on A, B directly depends on C,
-          A indirectly depends on C, and
-          both A and B are dependents of C.
+@begin{Display}
+If A withs B and B withs C
+then A directly depends on A, B directly depends on C,
+    A indirectly depends on C, and
+    both A and B are dependents of C.
+@end{Display}
 
 Dependencies between compilation units may also be introduced by
 inline inclusions (Reference Manual 10.1.4(7)) and for certain other compiler
 optimizations. These relations are intended to reflect all of these
 considerations.
 
------------------------------------------------------------------------------
+@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------]}
 
-    @b{Family, }
+@begin{Example}
+   @AdaObjDefn{Family},
+@end{Example}
 
------------------------------------------------------------------------------
-Definition:  FAMILY of a unit
+@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------
+Definition:  FAMILY of a unit]}
 
-The family of a given unit is defined as the set of compilation
+The @i{family} of a given unit is defined as the set of compilation
 units that comprise the given unit's declaration, body, descendants,
-and subunits (and subunits of subunits and descendants, etc.).
------------------------------------------------------------------------------
+and subunits (and subunits of subunits and descendants,
+etc.).@Defn2{Term=[Family],Sec=[of a compilation unit]}
 
-    @b{Needed_Units); }
+@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------]}
 
------------------------------------------------------------------------------
-Definition:  NEEDED UNITS of a unit; CLOSURE of a unit
+@begin{Example}
+   @AdaObjDefn{Needed_Units});
+@end{Example}
 
-The needed units of a given unit is defined as the set of all
+@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------
+Definition:  NEEDED UNITS of a unit; CLOSURE of a unit]}
+
+The @i{needed units} of a given unit is defined as the set of all
 the Ada units ultimately needed by that unit to form a partition.
-Reference Manual 10.2(2-7).
+Reference Manual 10.2(2-7).@Defn2{Term=[Needed units],Sec=[of a compilation unit]}
 
-The term closure is commonly used with similar meaning.
+The term @i{closure} is commonly used with similar
+meaning.@Defn2{Term=[Closure],Sec=[of a compilation unit]}
 
 For example:
- Assume the body of C has a subunit C.S and the declaration of C has
- child units C.Y and C.Z.
 
-     If A withs B, B withs C, B withs C.Y, and C does not with a library
-     unit. Then the needed units of A are:
-       library unit declaration C
-       child library unit declaration C.Y
-       child library unit body C.Y, if any
-       library unit body C
-       subunit C.S
-       library unit declaration B
-       library unit body B, if any
-       library unit declaration A
-       library unit body A, if any
+Assume the body of C has a subunit C.S and the declaration of C has child units C.Y and C.Z.
 
-     Child unit C.Z is only part of the Needed_Units if it is needed.
+@begin{Display}
+If A withs B, B withs C, B withs C.Y, and C does not with a library
+unit. Then the needed units of A are:
+    library unit declaration C
+    child library unit declaration C.Y
+    child library unit body C.Y, if any
+    library unit body C
+    subunit C.S
+    library unit declaration B
+    library unit body B, if any
+    library unit declaration A
+    library unit body A, if any
+
+Child unit C.Z is only part of the Needed_Units if it is needed.
+@end{Display}
+@end{DescribeCode}
 
 @LabeledClause{type Traverse_Control}
 
-@Chg{Version=[1],New=[Controls],Old=[Traverse_Control - controls]} for the
+Traverse_Control @Chg{Version=[1],New=[defines],Old=[@en]} controls for the
 traversal generic provided in package
 Asis.Iterator. It is defined in package Asis to facilitate automatic translation
 to IDL (See @RefSecNum{Miscellaneous ASIS I/O and IDL approaches} for details).

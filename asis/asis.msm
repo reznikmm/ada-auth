@@ -9,7 +9,8 @@
 @Title{Version=[0],Text=[Ada Semantic Interface Specification (ASIS)]}@Comment{Same title for all versions}
 @FilePrefix{AS}
 @ExampleFont{Fixed}
-@BodyFont{Swiss}
+@BodyFont{Swiss}@Comment{Following the current ISO drafting style}
+@NoteFormat{ISO2004}@Comment{Ditto}
 
 @Comment{RTF properties}
 @SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}

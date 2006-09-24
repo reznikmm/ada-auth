@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/impl.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2006/09/22 04:39:59 $}
+@comment{$Revision: 1.4 $ $Date: 2006/09/23 05:24:02 $}
 
 @LabeledSection{package Asis.Implementation}
 
@@ -88,7 +88,7 @@ Returns True if ASIS is currently initialized.
 @Key[procedure] @AdaSubDefn{Initialize} (Parameters : @key[in] Wide_String := "");
 @end{Example}
 
-Parameters  - Specifies implementation specific parameters.
+Parameters @Chg{Version=[1],New=[specify],Old=[ - Specifies]} implementation specific parameters.
 
 Performs any necessary initialization activities. This shall be invoked
 at least once before any other ASIS services are used. Parameter values
@@ -100,14 +100,14 @@ Raises ASIS_Failed if ASIS failed to initialize or if the Parameters
 argument is invalid. Status is Environment_Error or Parameter_Error.
 @end{DescribeCode}
 
-@begin{Notes}
+@begin{SingleNote}
 The ASIS implementation may be Initialized and Finalized any number of
 times during the operation of an ASIS program.  However, all existing
 Context, Compilation_Unit and Element values become invalid when
 ASIS Is_Finalized. Subsequent calls to ASIS queries or services using
 such invalid Compilation_Unit or Element values will cause
 ASIS_Inappropriate_Context to be raised.
-@end{Notes}
+@end{SingleNote}
 
 @LabeledClause{function Is_Finalized}
 
@@ -127,7 +127,7 @@ initialized.
 @Key[procedure] @AdaSubDefn{Finalize} (Parameters : @Key[in] Wide_String := "");
 @end{Example}
 
-Parameters  - Specifies any implementation required parameter values.
+Parameters @Chg{Version=[1],New=[specify],Old=[ - Specifies]} any implementation required parameter values.
 
 Performs any necessary ASIS termination activities. This should be invoked
 once following the last use of other ASIS queries. Parameter values are

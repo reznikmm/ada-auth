@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2006/09/22 04:39:59 $}
+@comment{$Revision: 1.4 $ $Date: 2006/09/23 05:24:02 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -187,8 +187,7 @@ an ASIS implementor and an ASIS user.]}
 @LabeledSubClause{Conformity with this International Standard}
 
 
-@LabeledSubClause{Implementation conformance requirements}
-@b{@i{Should be a Subsubclause - RLB}}
+@LabeledSubSubClause{Implementation conformance requirements}
 
 An @i{ASIS implementation}@defn{ASIS implementation} includes all the hardware
 and software that implements the ASIS specification for a given Ada
@@ -204,8 +203,8 @@ International Standard. These interfaces shall support the functional behavior
 described herein. All interfaces in the ASIS specification are required unless
 the interface is specifically identified as being optional. The ASIS
 specification defines one optional package: Asis.Data_Decomposition.
-Asis.Data_Decomposition has one child package,
-Asis.Data_Decomposition.Portable_Transfer.
+Asis.@!Data_Decomposition has one child package,
+Asis.@!Data_Decomposition.@!Portable_Transfer.
 
 The system may provide additional facilities not required by this International
 Standard. @i{Extensions}@defn{Extension} are non-standard facilities (e.g.,
@@ -248,79 +247,123 @@ When executed, an implementation of this International Standard shall not be
 erroneous, as defined by ISO/IEC 8652:1995.
 @end{Enumerate}
 
-@LabeledSubClause{Implementation conformance documentation}
+@LabeledSubSubClause{Implementation conformance documentation}
 
-A conformance document shall be available for an implementation claiming conformance to this International Standard. The conformance document shall have the same structure as this International Standard, with the information presented in the equivalently numbered clauses, and subclauses. The conformance document shall not contain information about extended facilities or capabilities outside the scope of this International Standard.
+A conformance document shall be available for an implementation claiming
+conformance to this International Standard. The conformance document shall have
+the same structure as this International Standard, with the information
+presented in the equivalently numbered clauses, and subclauses. The conformance
+document shall not contain information about extended facilities or
+capabilities outside the scope of this International Standard.
 
-The conformance document shall contain a statement that indicates the full name, number, and date of the International Standard that applies. The conformance document may also list software standards approved by ISO/IEC or any ISO/IEC member body that are available for use by a Basic or Fully Conforming ASIS Application. Applicable characteristics whose documentation is required by one of these standards, or by standards of government bodies, may also be included.
+The conformance document shall contain a statement that indicates the full
+name, number, and date of the International Standard that applies. The
+conformance document may also list software standards approved by ISO/IEC or
+any ISO/IEC member body that are available for use by a Basic or Fully
+Conforming ASIS Application. Applicable characteristics whose documentation is
+required by one of these standards, or by standards of government bodies, may
+also be included.
 
-The conformance document shall describe the behavior of the implementation for all implementation-defined features defined in this International Standard. This requirement shall be met by listing these features and providing either a specific reference to the system documentation or providing full syntax and semantics of these features. The conformance document shall specify the behavior of the implementation for those features where this International Standard states that implementations may vary.
+The conformance document shall describe the behavior of the implementation for
+all implementation-defined features defined in this International Standard.
+This requirement shall be met by listing these features and providing either a
+specific reference to the system documentation or providing full syntax and
+semantics of these features. The conformance document shall specify the
+behavior of the implementation for those features where this International
+Standard states that implementations may vary.
 
-No specifications other than those described in this subclause shall be present in the conformance document.
+No specifications other than those described in this subclause shall be present
+in the conformance document.
 
-The phrase “shall be documented” in this International Standard means that documentation of the feature shall appear in the conformance document, as described previously, unless the system documentation is explicitly mentioned.
+The phrase @ldquote@;shall be documented@rdquote@; in this International
+Standard means that documentation of the feature shall appear in the
+conformance document, as described previously, unless the system documentation
+is explicitly mentioned.@Defn{shall be documented}
 
-The system documentation should also contain the information found in the conformance document.
-@LabeledSubClause{Implementation conformance categories }
+The system documentation should also contain the information found in the
+conformance document.
 
 
-An implementation is required to define all of the subprograms for all of the operations defined in this International Standard, including those whose implementation is optional. Required functionality is the subset of ASIS facilities which are not explicitly identified in the ASIS standard as optional. Optional functionality is the subset of ASIS facilities which are explicitly identified in the ASIS standard as optional which may legitimately be omitted from a Basic Conforming ASIS implementation. Optional interfaces shall be included in any Fully Conforming ASIS implementation, unless stated otherwise in the ASIS specification. An application that accesses an Ada environment’s semantic tree (e.g., Diana Tree) directly using work-arounds is not considered to be a conformant application. All Conforming Applications fall within one of the categories defined below.
+@LabeledSubSubClause{Implementation conformance categories}
 
-If an unimplemented feature is used, the exception Asis.ASIS_Failed shall be raised and Asis.Implementation_Status shall return the value for Error_Kinds of Not_Implemented_Error.
+An implementation is required to define all of the subprograms for all of the
+operations defined in this International Standard, including those whose
+implementation is optional. @i{Required functionality} is the subset of ASIS
+facilities which are not explicitly identified in the ASIS standard as
+optional.@Defn{Required functionality} @i{Optional functionality} is the subset of ASIS facilities which are
+explicitly identified in the ASIS standard as optional which may legitimately
+be omitted from a Basic Conforming ASIS implementation.@Defn{Optional functionality}
+Optional interfaces
+shall be included in any Fully Conforming ASIS implementation, unless stated
+otherwise in the ASIS specification. An application that accesses an Ada
+environment’s semantic tree (e.g., Diana Tree) directly using work-arounds is
+not considered to be a conformant application. All Conforming Applications fall
+within one of the categories defined below.
 
-There are four categories of conforming ASIS implementations:
+If an unimplemented feature is used, the exception Asis.ASIS_Failed shall be
+raised and Asis.Implementation_Status shall return the value for Error_Kinds of
+Not_Implemented_Error.@Defn2{Term=[ASIS_Failed],Sec=[cause]}@Defn2{Term=[Not_Implemented_Error],Sec=[cause]}
 
-@LabeledSubClause{Basic conforming ASIS implementation}
+@leading@;There are four categories of conforming ASIS implementations:
+
+@Subheading{Basic conforming ASIS implementation}
 
 A Basic Conforming ASIS Implementation is an ASIS implementation supporting all
-required interfaces defined within this International Standard.
+required interfaces defined within this International Standard.@Defn{Basic conforming ASIS implementation}
 
-@LabeledSubClause{Fully conforming ASIS implementation}
+@Subheading{Fully conforming ASIS implementation}
 
 A Fully Conforming ASIS Implementation is an ASIS implementation supporting all
 required and all optional interfaces defined within this International
-Standard.
+Standard.@Defn{Fully conforming ASIS implementation}
 
-@LabeledSubClause{Basic conforming ASIS implementation using extensions}
+
+@Subheading{Basic conforming ASIS implementation using extensions}
 
 A Basic Conforming ASIS Implementation Using Extensions is an ASIS
 implementation that differs from a Basic Conforming ASIS Implementation only in
 that it uses nonstandard extensions that are consistent with this International
 Standard. Such an implementation shall fully document its extended facilities,
 in addition to the documentation required for a Basic Conforming ASIS
-Implementation.
+Implementation.@Defn2{Term=[Basic conforming ASIS implementation],Sec=[using extensions]}
 
-@LabeledSubClause{Fully conforming ASIS implementation using extensions}
+
+@Subheading{Fully conforming ASIS implementation using extensions}
 
 A Fully Conforming ASIS Implementation Using Extensions is an ASIS
 implementation that differs from a Fully Conforming ASIS Implementation only in
 that it uses nonstandard extensions that are consistent with this International
 Standard. Such an implementation shall fully document its extended facilities,
 in addition to the documentation required for a Fully Conforming ASIS
-Implementation.
-
-@LabeledSubClause{Application conformance categories}
+Implementation.@Defn2{Term=[Fully conforming ASIS implementation],Sec=[using extensions]}
 
 
-An ASIS application is any programming system or any set of software components
-making use of ASIS queries to obtain information about any set of Ada
-components. All ASIS applications claiming conformance to this International
-Standard shall use a Conforming ASIS Implementation with or without extensions.
 
-@LabeledSubClause{Basic conforming ASIS application}
+@LabeledSubSubClause{Application conformance categories}
+
+An @i{ASIS application} is any programming system or any set of software
+components making use of ASIS queries to obtain information about any set of
+Ada components. All ASIS applications claiming conformance to this
+International Standard shall use a Conforming ASIS Implementation with or
+without extensions.@Defn{ASIS application}
+
+
+@Subheading{Basic conforming ASIS application}
 
 A Basic Conforming ASIS Application is an application that only uses the
 required facilities defined within this International Standard. It shall be
-portable to any Conforming ASIS Implementation.
+portable to any Conforming ASIS Implementation.@Defn{Basic conforming ASIS application}
 
-@LabeledSubClause{Fully conforming ASIS application}
+
+@Subheading{Fully conforming ASIS application}
 
 A Fully Conforming ASIS Application is an application that only uses the
 required facilities and the optional facilities defined within this
 International Standard. It shall be portable to any Fully Conforming ASIS
-Implementation.
+Implementation.@Defn{Fully conforming ASIS application}
 
-@LabeledSubClause{Basic conforming ASIS application using extensions}
+
+@Subheading{Basic conforming ASIS application using extensions}
 
 A Basic Conforming ASIS Application Using Extensions is an application that
 differs from a Basic Conforming ASIS Application only in that it uses
@@ -328,9 +371,10 @@ nonstandard, implementation provided, extended facilities that are consistent
 with this International Standard. Such an application should fully document its
 requirements for these extended facilities. A Basic Conforming ASIS Application
 Using Extensions may or may not be portable to other Basic or Fully Conforming
-ASIS Implementation Using Extensions.
+ASIS Implementation Using Extensions.@Defn2{Term=[Basic conforming ASIS application],Sec=[using extensions]}
 
-@LabeledSubClause{Fully conforming ASIS application using extensions}
+
+@Subheading{Fully conforming ASIS application using extensions}
 
 A Fully Conforming ASIS Application Using Extensions is an application that
 differs from a Fully Conforming ASIS Application only in that it uses
@@ -338,7 +382,8 @@ nonstandard, implementation provided, extended facilities that are consistent
 with this International Standard. Such an application should fully document its
 requirements for these extended facilities. A Fully Conforming ASIS Application
 Using Extensions may or may not be portable to other Fully Conforming ASIS
-Implementation Using Extensions.
+Implementation Using Extensions.@Defn2{Term=[Fully conforming ASIS application],Sec=[using extensions]}
+
 
 @LabeledSubClause{Implementation permissions}
 
@@ -347,23 +392,61 @@ variety of approaches. Approaches permitted by this International Standard are
 based on the traditional approach and the client /server approach. These
 implementation permissions are depicted in Figure 1 and described below:
 
-@LabeledSubClause{Traditional approach (permission 1) }
+
+@LabeledSubSubClause{Traditional approach (permission 1)}
+
+Traditionally, the ASIS API implementation is intended to execute on the node
+containing the implementor's Ada software engineering environment and the
+desired Ada compilation environment. Because the ASIS API interfaces directly,
+ASIS performs at its best. It is expected that most ASIS implementors will
+support this approach as it requires little additional effort when alternative
+approaches are supported. In Figure 1, the client tool using Permission 1 uses
+the ASIS specification exactly as specified in this International Standard.
+ASIS tools and applications are compiled in the implementor's environment.
 
 
-Traditionally, the ASIS API implementation is intended to execute on the node containing the implementor’s Ada software engineering environment and the desired Ada compilation environment. Because the ASIS API interfaces directly, ASIS performs at its best. It is expected that most ASIS implementors will support this approach as it requires little additional effort when alternative approaches are supported. In Figure 1, the client tool using Permission 1 uses the ASIS specification exactly as specified in this International Standard. ASIS tools and applications are compiled in the implementor's environment.
-@LabeledSubClause{Client / server approach (permission 2) }
+@LabeledSubSubClause{Client / server approach (permission 2)}
+
+As an alternative, a client / server approach can be used to implement the ASIS
+API. Here the ASIS API is supported by a server; ASIS client tools can request
+ASIS services within the supported network.
+
+Figure 1 identifies four ASIS client tools using permission 2 capable of
+interfacing with an ASIS Object Request Broker (ORB) server. One client tool is
+written in Ada, one in Java, one in C++, and one in Smalltalk. The ORB serves
+as a broker between the client and server on a network consisting of many
+nodes. Server location and services are registered with the ORB. A client
+needing the services interfaces with the ORB, who brokers the needed server
+interface information. The interface between a client and server is written as
+an interface specification in the Interface Definition Language (IDL). IDL is
+very different from most computer languages; when IDL is compiled, the
+interface specification is produced in either Ada, Java, C++, or Smalltalk. In
+addition, the necessary artifacts are produced to register the client or server
+interface with the ORB. }
 
 
-As an alternative, a client / server approach can be used to implement the ASIS API. Here the ASIS API is supported by a server; ASIS client tools can request ASIS services within the supported network.
+@LabeledSubSubClause{Distributed traditional approach (permission 3)}
 
-Figure 1 identifies four ASIS client tools using permission 2 capable of interfacing with an ASIS Object Request Broker (ORB) server. One client tool is written in Ada, one in Java, one in C++, and one in Smalltalk. The ORB serves as a broker between the client and server on a network consisting of many nodes. Server location and services are registered with the ORB. A client needing the services interfaces with the ORB, who brokers the needed server interface information. The interface between a client and server is written as an interface specification in the Interface Definition Language (IDL). IDL is very different from most computer languages; when IDL is compiled, the interface specification is produced in either Ada, Java, C++, or Smalltalk. In addition, the necessary artifacts are produced to register the client or server interface with the ORB. }
-@LabeledSubClause{Distributed traditional approach (permission 3)}
+The Ada specification created by the compilation of this ASIS API in IDL is
+semantically equivalent to this ASIS standard, but not syntactically identical.
+An ASIS Client tool written in Ada interfaces to the ASIS API as specified in
+this International Standard. As shown in Figure 1, the ASIS API encapsulates
+the ASIS ORB client as generated from the compilation of the ASIS IDL into Ada.
+Client tools using either permission 1 or permission 3 are, most likely,
+identical. Client tools developed using permission 3 can be developed as plug
+and play.
 
-The Ada specification created by the compilation of this ASIS API in IDL is semantically equivalent to this ASIS standard, but not syntactically identical. An ASIS Client tool written in Ada interfaces to the ASIS API as specified in this International Standard. As shown in Figure 1, the ASIS API encapsulates the ASIS ORB client as generated from the compilation of the ASIS IDL into Ada. Client tools using either permission 1 or permission 3 are, most likely, identical. Client tools developed using permission 3 can be developed as plug and play. }
-@LabeledSubClause{ASIS dynamic client approach (permission 4)}
 
+@LabeledSubSubClause{ASIS dynamic client approach (permission 4)}
 
-In addition to using traditional compiled tools through the client / server interface, ORBs can provide a Dynamic Interface Invocation (DII) capability where rather general purpose tools can access the interface dynamically. Shown in Figure 1, such a tool behaves more like a browser. It accesses the ASIS IDL as registered with the server and browses through the services provided by the ASIS interface. Use of this capability with ASIS is extremely cumbersome and manually intensive. However, this provides a user access to information across the interface that had not been preprogrammed by a tool.
+In addition to using traditional compiled tools through the client / server
+interface, ORBs can provide a Dynamic Interface Invocation (DII) capability
+where rather general purpose tools can access the interface dynamically. Shown
+in Figure 1, such a tool behaves more like a browser. It accesses the ASIS IDL
+as registered with the server and browses through the services provided by the
+ASIS interface. Use of this capability with ASIS is extremely cumbersome and
+manually intensive. However, this provides a user access to information across
+the interface that had not been preprogrammed by a tool.
 
 @PictureAlone(Alignment=[Center], Border=[None],
          Height=[596], Width=[492],
@@ -377,7 +460,8 @@ In addition to using traditional compiled tools through the client / server inte
 @LabeledSubClause{Classification of errors}
 
 
-ASIS reports all operational errors by raising an exception. Whenever an ASIS implementation raises one of the exceptions declared in package Asis.Exceptions, it will previously have set the values returned by the Status and Diagnosis queries to indicate the cause of the error. The possible values for Status are indicated here along with suggestions for the associated contents of the Diagnosis string.
+ASIS reports all operational errors by raising an exception. Whenever an ASIS implementation raises one of the exceptions declared in package Asis.Exceptions, it will previously have set the values returned by the Status and Diagnosis
+queries to indicate the cause of the error. The possible values for Status are indicated here along with suggestions for the associated contents of the Diagnosis string.
 
 ASIS applications are encouraged to follow this same convention whenever they explicitly raise any ASIS exception to always record a Status and Diagnosis prior to raising the exception. Values of errors along with their general meanings are:
 
@@ -406,7 +490,8 @@ A set of exceptions shall be raised for the following circumstances:
 * @b{ASIS_Inappropriate_Element} - Raised when ASIS is given an Element value that is not appropriate. This exception typically indicates that a user error has occurred within the application.
 * @b{ASIS_Inappropriate_Line} - Raised when ASIS is given a Line value that is not appropriate.
 * @b{ASIS_Inappropriate_Line_Number} - Raised when ASIS is given a Line_Number value that is not appropriate. This exception typically indicates that a user error has occurred within the application.
-* @b{ASIS_Failed} - All ASIS routines may raise ASIS_Failed whenever they cannot normally complete their operation. This exception typically indicates a failure of the underlying ASIS implementation. This is a catch-all exception that is raised for different reasons in different ASIS implementations.
+* @b{ASIS_Failed} - All ASIS routines may raise ASIS_Failed whenever they cannot normally complete their operation. This exception typically indicates a failure of the underlying ASIS implementation.
+  This is a catch-all exception that is raised for different reasons in different ASIS implementations.
 
 
 @LabeledClause{Normative reference}

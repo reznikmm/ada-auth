@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/implperm.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/09/22 04:39:58 $}
+@comment{$Revision: 1.2 $ $Date: 2006/09/23 05:24:02 $}
 
 
 @LabeledSection{package Asis.Implementation.Permissions}
@@ -116,13 +116,13 @@ If Call_Statement_Parameters_Normalized then the query
 Call_Statement_Parameters will always behave as if called with
 Normalized => True.
 
-@begin{Notes}
+@begin{SingleNote}
 It is not possible to obtain either a normalized or
 unnormalized Discriminant_Association list for an unconstrained record
 or derived subtype_indication where the discriminant_association is
 supplied by default; there is no constraint to query, and a Nil_Element
 is returned from the query Subtype_Constraint.
-@end{Notes}
+@end{SingleNote}
 @end{DescribeCode}
 
 @LabeledClause{function Discriminant_Associations_Normalized}
