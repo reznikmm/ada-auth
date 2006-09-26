@@ -97,6 +97,7 @@ package ARM_Output is
     --			table command.
     --		- RLB - Added picture command.
     --  3/28/06 - RLB - Updated the comments on the picture command.
+    --  9/25/06 - RLB - Added Last_Column_Width to Start_Table.
 
     type Output_Type is abstract tagged limited null record;
 
@@ -383,13 +384,15 @@ package ARM_Output is
     procedure Start_Table (Output_Object : in out Output_Type;
 			   Columns : in ARM_Output.Column_Count;
 			   First_Column_Width : in ARM_Output.Column_Count;
+			   Last_Column_Width : in ARM_Output.Column_Count;
 			   Alignment : in ARM_Output.Column_Text_Alignment;
 			   No_Page_Break : in Boolean;
 			   Has_Border : in Boolean;
 			   Small_Text_Size : in Boolean;
 			   Header_Kind : in ARM_Output.Header_Kind_Type) is abstract;
 	-- Starts a table. The number of columns is Columns; the first
-	-- column has First_Column_Width times the normal column width.
+	-- column has First_Column_Width times the normal column width, and
+	-- the last column has Last_Column_Width times the normal column width.
 	-- Alignment is the horizontal text alignment within the columns.
 	-- No_Page_Break should be True to keep the table intact on a single
 	-- page; False to allow it to be split across pages.

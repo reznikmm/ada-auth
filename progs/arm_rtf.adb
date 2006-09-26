@@ -113,6 +113,8 @@ package body ARM_RTF is
     --		- RLB - Added picture command.
     --  9/21/06 - RLB - Added Body_Font; revised styles to handle that.
     --  9/22/06 - RLB - Added Subsubclause.
+    --  9/25/06 - RLB - Handled optional renaming of TOC.
+    --		- RLB - Added Last_Column_Width to Start_Table.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -2851,8 +2853,14 @@ package body ARM_RTF is
 	Clause_Footer (Output_Object, Header_Text, Level, Clause_Number, No_Page_Break);
 
 	-- Special for table of contents:
-	if Clause_Number = "" and then Header_Text = "Table of Contents" then
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\pard\plain \s1\sb240\sa60\keepn\widctlpar\outlinelevel0\adjustright \b\f1\fs36\kerning36\qc\cgrid Table of Contents\par}");
+	if Clause_Number = "" and then
+		(Header_Text = "Table of Contents" or else -- Ada 95 format
+		 Header_Text = "Contents") then -- ISO 2004 format.
+	    if Header_Text = "Table of Contents" then
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\pard\plain \s1\sb240\sa60\keepn\widctlpar\outlinelevel0\adjustright \b\f1\fs36\kerning36\qc\cgrid Table of Contents\par}");
+	    else
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\pard\plain \s1\sb240\sa60\keepn\widctlpar\outlinelevel0\adjustright \b\f1\fs36\kerning36\qc\cgrid Contents\par}");
+	    end if;
 	    Output_Object.Char_Count := 0;
 	    return;
 	end if;
@@ -3211,10 +3219,15 @@ package body ARM_RTF is
 --Ada.Text_IO.Put_Line("Header:");
 --Ada.Text_IO.Put_Line("Indent:" & Natural'Image(Output_Object.Table_Indent) &
 --	" Count:" & Natural'Image(I+Output_Object.Table_First_Column_Mult-1));
-		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
-		        Format_Value(Output_Object.Table_Indent +
-			    Output_Object.Table_Column_Width*(Integer(I+Output_Object.Table_First_Column_Mult-1))) & " ");
-		end loop;
+		    if I /= Output_Object.Column_Count then
+		        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
+		            Format_Value(Output_Object.Table_Indent +
+			        Output_Object.Table_Column_Width*(Integer(I+Output_Object.Table_First_Column_Mult-1))) & " ");
+		    else -- Last cell, full width.
+		        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
+			    Format_Value(Output_Object.Table_Indent + Output_Object.Table_Width) & " ");
+		    end if;
+	        end loop;
 
 		-- Now, define text format:
 		if Output_Object.Table_Alignment = ARM_Output.Center_All then
@@ -3282,9 +3295,14 @@ package body ARM_RTF is
 		            "\clvertalc ");
 		    end if;
 
-		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
-		        Format_Value(Output_Object.Table_Indent +
-			    Output_Object.Table_Column_Width*(Integer(I+Output_Object.Table_First_Column_Mult-1))) & " ");
+		    if I /= Output_Object.Column_Count then
+		        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
+		            Format_Value(Output_Object.Table_Indent +
+			        Output_Object.Table_Column_Width*(Integer(I+Output_Object.Table_First_Column_Mult-1))) & " ");
+		    else -- Last cell, full width.
+		        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\cltxlrtb\cellx" &
+			    Format_Value(Output_Object.Table_Indent + Output_Object.Table_Width) & " ");
+		    end if;
 		end loop;
 
 		-- Now, define text format:
@@ -3357,13 +3375,15 @@ package body ARM_RTF is
     procedure Start_Table (Output_Object : in out RTF_Output_Type;
 			   Columns : in ARM_Output.Column_Count;
 			   First_Column_Width : in ARM_Output.Column_Count;
+			   Last_Column_Width : in ARM_Output.Column_Count;
 			   Alignment : in ARM_Output.Column_Text_Alignment;
 			   No_Page_Break : in Boolean;
 			   Has_Border : in Boolean;
 			   Small_Text_Size : in Boolean;
 			   Header_Kind : in ARM_Output.Header_Kind_Type) is
 	-- Starts a table. The number of columns is Columns; the first
-	-- column has First_Column_Width times the normal column width.
+	-- column has First_Column_Width times the normal column width, and
+	-- the last column has Last_Column_Width times the normal column width.
 	-- Alignment is the horizontal text alignment within the columns.
 	-- No_Page_Break should be True to keep the table intact on a single
 	-- page; False to allow it to be split across pages.
@@ -3376,6 +3396,9 @@ package body ARM_RTF is
 	-- next table marker call.
 	-- Raises Not_Valid_Error if in a paragraph.
 	Page_Width : Natural;
+	Column_Units : constant ARM_Output.Column_Count :=
+	    Columns+First_Column_Width+Last_Column_Width-2;
+	    -- The number of column units (a unit being a regular width column).
     begin
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -3391,6 +3414,7 @@ package body ARM_RTF is
 	Output_Object.Table_No_Page_Break := No_Page_Break;
 	Output_Object.Table_Alignment := Alignment;
 	Output_Object.Table_First_Column_Mult := First_Column_Width;
+	Output_Object.Table_Last_Column_Mult := Last_Column_Width;
 	Output_Object.Table_Has_Border := Has_Border;
 	Output_Object.Table_Has_Small_Text := Small_Text_Size;
 
@@ -3404,19 +3428,20 @@ package body ARM_RTF is
 	    when ARM_RTF.Ada95 =>
 	        Page_Width := 7740;
         end case;
-	if Columns+First_Column_Width-1 <= 3 then
+	if Column_Units <= 3 then
 	    Output_Object.Table_Indent := Page_Width / 6;
-	elsif Columns+First_Column_Width-1 <= 8 then
+	elsif Column_Units <= 8 then
 	    Output_Object.Table_Indent := Page_Width / 16;
 	else
 	    Output_Object.Table_Indent := 0;
 	end if;
         Output_Object.Table_Width  := Page_Width - Output_Object.Table_Indent*2;
-        Output_Object.Table_Column_Width  := Output_Object.Table_Width / (Columns+First_Column_Width-1);
+        Output_Object.Table_Column_Width  := Output_Object.Table_Width / (Column_Units);
 	Output_Object.Column_Count := Columns;
 --Ada.Text_IO.Put_Line("Table information");
 --Ada.Text_IO.Put_Line("Columns:" & Natural'Image(Columns) &
---	" 1st column mult:" & Natural'Image(First_Column_Width));
+--	" 1st column mult:" & Natural'Image(First_Column_Width) &
+--	" last column mult:" & Natural'Image(Last_Column_Width));
 --Ada.Text_IO.Put_Line("Width (twips):" & Natural'Image(Output_Object.Table_Width) &
 --	" Column width:" & Natural'Image(Output_Object.Table_Column_Width));
 

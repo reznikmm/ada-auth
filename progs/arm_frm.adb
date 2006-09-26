@@ -219,6 +219,9 @@ package body ARM_Format is
     --			format.
     --		- RLB - Revised to use Clause_Number_Type, and to support
     --			Subsubclauses.
+    --  9/25/06 - RLB - Added "Use_ISO_2004_Contents_Format".
+    --		- RLB - Added LastColWidth to @Table.
+    --		- RLB - Fixed Enumerated in Notes styles.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -381,7 +384,8 @@ package body ARM_Format is
 		      Link_Non_Terminals : in Boolean;
 		      Number_Paragraphs : in Boolean;
 		      Examples_Font : in ARM_Output.Font_Family_Type;
-		      Use_ISO_2004_Note_Format : in Boolean) is
+		      Use_ISO_2004_Note_Format : in Boolean;
+		      Use_ISO_2004_Contents_Format : in Boolean) is
 	-- Initialize an input object. Changes and Change_Version determine
 	-- which changes should be displayed. If Display_Index_Entries is True,
 	-- index entries will be printed in the document; otherwise, they
@@ -396,7 +400,9 @@ package body ARM_Format is
 	-- subclause); otherwise they will not be.
 	-- Example_Font specifies the font that examples will be set in.
 	-- If Use_ISO_2004_Note_Format is true, that format will be used;
-	-- else the Ada95 standard's format will be used.
+	-- else the Ada95 standard's format will be used for notes.
+	-- If Use_ISO_2004_Contents_Format is true, that format will be used;
+	-- else the Ada95 standard's format will be used for the table of contents.
     begin
 	Format_Object.Changes := Changes;
 	Format_Object.Change_Version := Change_Version;
@@ -407,6 +413,7 @@ package body ARM_Format is
 	Format_Object.Number_Paragraphs := Number_Paragraphs;
 	Format_Object.Examples_Font := Examples_Font;
 	Format_Object.Use_ISO_2004_Note_Format := Use_ISO_2004_Note_Format;
+	Format_Object.Use_ISO_2004_Contents_Format := Use_ISO_2004_Contents_Format;
 
 	Format_Object.Clause_Number := (Section => 0, Clause => 0,
 				        Subclause => 0, Subsubclause => 0);
@@ -1212,14 +1219,25 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
     begin
 	-- Note: For .RTF version, the result of this call will not be used,
 	-- preferring to let Word make the TOC (it can include page numbers).
-        ARM_Output.Section (Output_Object,
-			    Section_Title => "Table of Contents",
-			    Section_Name => "TOC");
+	if Format_Object.Use_ISO_2004_Contents_Format then
+            ARM_Output.Section (Output_Object,
+			        Section_Title => "Contents",
+			        Section_Name => "TOC");
 
-	ARM_Output.Clause_Header (Output_Object,
-				  Header_Text => "Table of Contents",
-				  Level => ARM_Contents.Section,
-				  Clause_Number => "");
+	    ARM_Output.Clause_Header (Output_Object,
+				      Header_Text => "Contents",
+				      Level => ARM_Contents.Section,
+				      Clause_Number => "");
+	else
+            ARM_Output.Section (Output_Object,
+			        Section_Title => "Table of Contents",
+			        Section_Name => "TOC");
+
+	    ARM_Output.Clause_Header (Output_Object,
+				      Header_Text => "Table of Contents",
+				      Level => ARM_Contents.Section,
+				      Clause_Number => "");
+	end if;
 
 	ARM_Output.TOC_Marker (Output_Object, For_Start => True);
 
@@ -2276,6 +2294,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			Format_Object.Format := ARM_Output.Syntax_Summary;
 			Format_Object.No_Breaks := True;
         	    when Enumerated =>
+--Ada.Text_IO.Put_Line ("Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format));
         		if Enclosing_Format = Enumerated then
 			    -- Nesting of enumerated lists should be discouraged,
 			    -- so we assume this is ourselves.
@@ -2287,6 +2306,11 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			   else
 			       Format_Object.Format := ARM_Output.Nested_Enumerated;
 			   end if;
+			elsif Enclosing_Format = Notes or else
+			      Enclosing_Format = Single_Note then
+			    -- This might be a bit too nested, but we don't
+			    -- have anything else.
+			    Format_Object.Format := ARM_Output.Small_Nested_Enumerated;
 			else
                             if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
 			       Format_Object.Format := ARM_Output.Small_Enumerated;
@@ -4562,6 +4586,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			-- @table(Columns=<number>,
 			--       Alignment=<AllLeft|AllCenter|CenterExceptFirst>,
 			--       FirstColWidth=<number>,
+			--       LastColWidth=<number>,
 			--       NoBreak=<T|F>,
 			--       Border=<T|F>,
 			--       SmallSize=<T|F>,
@@ -4577,7 +4602,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		    declare
 			Close_Ch, Ch : Character;
 			Align_Name : ARM_Input.Command_Name_Type;
-			Cols, FirstWidth : Character;
+			Cols, FirstWidth, LastWidth : Character;
 			No_Page_Break : Boolean;
 			Has_Border : Boolean;
 			Small_Text : Boolean;
@@ -4645,6 +4670,22 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			    end if;
 			end if;
 
+		        ARM_Input.Check_Parameter_Name (Input_Object,
+			    Param_Name => "LastColWidth" & (13..ARM_Input.Command_Name_Type'Last => ' '),
+			    Is_First => False,
+			    Param_Close_Bracket => Close_Ch);
+		        if Close_Ch /= ' ' then
+			    ARM_Input.Get_Char (Input_Object, LastWidth);
+			    ARM_Input.Get_Char (Input_Object, Ch);
+			    if Ch /= Close_Ch then
+				Ada.Text_IO.Put_Line ("  ** Bad close for Table FirstColWidth on line " & ARM_Input.Line_String (Input_Object));
+				ARM_Input.Replace_Char (Input_Object);
+			    end if;
+			    if FirstWidth not in '1'..'9' then
+				Ada.Text_IO.Put_Line ("  ** Bad table last column width on line " & ARM_Input.Line_String (Input_Object));
+			    end if;
+			end if;
+
 			Get_Boolean ("NoBreak" & (8..ARM_Input.Command_Name_Type'Last => ' '), No_Page_Break);
 			Get_Boolean ("Border" & (7..ARM_Input.Command_Name_Type'Last => ' '), Has_Border);
 			Get_Boolean ("SmallSize" & (10..ARM_Input.Command_Name_Type'Last => ' '), Small_Text);
@@ -4675,6 +4716,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 					Output_Object,
 					Columns => Character'Pos(Cols) - Character'Pos('0'),
 				        First_Column_Width => Character'Pos(FirstWidth) - Character'Pos('0'),
+				        Last_Column_Width => Character'Pos(LastWidth) - Character'Pos('0'),
 					Alignment => Alignment,
 					No_Page_Break => No_Page_Break,
 					Has_Border => Has_Border,
@@ -4706,6 +4748,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 						Output_Object,
 						Columns => Character'Pos(Cols) - Character'Pos('0'),
 					        First_Column_Width => Character'Pos(FirstWidth) - Character'Pos('0'),
+					        Last_Column_Width => Character'Pos(LastWidth) - Character'Pos('0'),
 						Alignment => Alignment,
 						No_Page_Break => No_Page_Break,
 						Has_Border => Has_Border,
@@ -4731,6 +4774,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 						    Output_Object,
 						    Columns => Character'Pos(Cols) - Character'Pos('0'),
 					            First_Column_Width => Character'Pos(FirstWidth) - Character'Pos('0'),
+					            Last_Column_Width => Character'Pos(LastWidth) - Character'Pos('0'),
 						    Alignment => Alignment,
 						    No_Page_Break => No_Page_Break,
 						    Has_Border => Has_Border,

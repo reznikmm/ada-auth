@@ -54,6 +54,8 @@ package body ARM_Corr is
     --			table command.
     --		- RLB - Added picture command.
     --  9/22/06 - RLB - Added missing with.
+    --  9/25/06 - RLB - Handled optional renaming of TOC.
+    --		- RLB - Added Last_Column_Width to Start_Table.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -709,7 +711,9 @@ package body ARM_Corr is
 	Output_Object.Clause_Num(1..Output_Object.Clause_Len) :=
 	    Clause_Number;
 	-- Special for table of contents:
-	if Clause_Number = "" and then Header_Text = "Table of Contents" then
+	if Clause_Number = "" and then
+		(Header_Text = "Table of Contents" or else
+		 Header_Text = "Contents") then
 	    Ada.Text_IO.Put (Output_Object.Output_File,
 			       "!clause ");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File,
@@ -793,7 +797,9 @@ package body ARM_Corr is
 	Output_Object.Clause_Num(1..Output_Object.Clause_Len) :=
 	    Clause_Number;
 	-- Special for table of contents:
-	if Clause_Number = "" and then Header_Text = "Table of Contents" then
+	if Clause_Number = "" and then
+		(Header_Text = "Table of Contents" or else -- Ada 95 format
+		 Header_Text = "Contents") then -- ISO 2004 format.
             Ada.Text_IO.Put (Output_Object.Output_File,
 			     "!clause ");
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File,
@@ -912,13 +918,15 @@ package body ARM_Corr is
     procedure Start_Table (Output_Object : in out Corr_Output_Type;
 			   Columns : in ARM_Output.Column_Count;
 			   First_Column_Width : in ARM_Output.Column_Count;
+			   Last_Column_Width : in ARM_Output.Column_Count;
 			   Alignment : in ARM_Output.Column_Text_Alignment;
 			   No_Page_Break : in Boolean;
 			   Has_Border : in Boolean;
 			   Small_Text_Size : in Boolean;
 			   Header_Kind : in ARM_Output.Header_Kind_Type) is
 	-- Starts a table. The number of columns is Columns; the first
-	-- column has First_Column_Width times the normal column width.
+	-- column has First_Column_Width times the normal column width, and
+	-- the last column has Last_Column_Width times the normal column width.
 	-- Alignment is the horizontal text alignment within the columns.
 	-- No_Page_Break should be True to keep the table intact on a single
 	-- page; False to allow it to be split across pages.
@@ -944,10 +952,12 @@ package body ARM_Corr is
 
 	Output_Object.Tab_Stops.Number := Columns;
 	declare
+	     Column_Units : constant ARM_Output.Column_Count :=
+		Columns+First_Column_Width+Last_Column_Width-2;
 	     Width : Natural :=
-		(72/(Columns+First_Column_Width-1));
+		(72/(Column_Units));
 	begin
-	    if Columns+First_Column_Width-1 <= 3 then -- Keep it from getting too wide.
+	    if Column_Units <= 3 then -- Keep it from getting too wide.
 		Width := 22;
 	    end if;
 	    for I in 1 .. Columns loop

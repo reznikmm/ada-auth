@@ -149,6 +149,9 @@ package body ARM_HTML is
     --  9/21/06 - RLB - Added Body_Font.
     --  9/22/06 - RLB - Added Subsubclause.
     --  9/23/06 - RLB - Fixed bug in borderless tables.
+    --  9/25/06 - RLB - Handled optional renaming of TOC.
+    --		- RLB - Added Last_Column_Width to Start_Table.
+    --		- RLB - Fixed broken enumerated style.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -184,7 +187,7 @@ package body ARM_HTML is
 	Right_Indent : Natural; -- In "units". (A unit is = 2EM of the full sized font).
 	Hang_Outdent : Natural; -- In "units". (A unit is = 2EM of the full sized font).
 		-- This is the amount that the hanging text hangs out. Normal
-		-- text starts at Hang_Outdent + Index "units".
+		-- text starts at Hang_Outdent + Indent "units".
 	Before : Integer; -- Vertical space before in 0.1 EM.
 	After : Natural; -- Vertical space after in 0.1 EM.
     end record;
@@ -719,7 +722,7 @@ package body ARM_HTML is
 		    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
 		       "-TOC.html");
 	    end if;
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""cont.gif"" ALT=""Table of Contents"" BORDER=0></A>&nbsp;");
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""cont.gif"" ALT=""Contents"" BORDER=0></A>&nbsp;");
 		-- Border=0 prevents the link highlight from being applied.
 	    if Ada.Strings.Unbounded.Length(Output_Object.Index_URL) /= 0 then
 	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A HREF=""");
@@ -1296,12 +1299,12 @@ package body ARM_HTML is
 	end if;
 	if Paragraph_Used (ARM_Output.Nested_Enumerated) then
             Make_Style (Output_Object, "NestedEnumerated", ARM_Output.Nested_Enumerated, Special_Hanging_Body => True);
-            Make_Hung_Text_Style (Output_Object, "NestedEnumerated", ARM_Output.Enumerated);
+            Make_Hung_Text_Style (Output_Object, "NestedEnumerated", ARM_Output.Nested_Enumerated);
 	-- else not used.
 	end if;
 	if Paragraph_Used (ARM_Output.Small_Nested_Enumerated) then
             Make_Style (Output_Object, "SmallNestedEnumerated", ARM_Output.Small_Nested_Enumerated, Special_Hanging_Body => True);
-            Make_Hung_Text_Style (Output_Object, "SmallNestedEnumerated", ARM_Output.Small_Enumerated);
+            Make_Hung_Text_Style (Output_Object, "SmallNestedEnumerated", ARM_Output.Small_Nested_Enumerated);
 	-- else not used.
 	end if;
     end Make_Paragraph_Styles;
@@ -3336,11 +3339,17 @@ package body ARM_HTML is
 	    end if;
 
 	    -- Special for table of contents:
-	    if Clause_Number = "" and then Header_Text = "Table of Contents" then
+	    if Clause_Number = "" and then
+		(Header_Text = "Table of Contents" or else -- Ada 95 format
+		 Header_Text = "Contents") then -- ISO 2004 format.
                 Start_HTML_File (Output_Object,
 		    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
 			"-TOC", Header_Text, "");
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>Table of Contents</H1>");
+		if Header_Text = "Table of Contents" then -- Ada 95 format
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>Table of Contents</H1>");
+		else
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>Contents</H1>");
+		end if;
 	        Output_Object.Char_Count := 0;
 	        Output_Object.Disp_Char_Count := 0;
 	        Output_Object.Disp_Large_Char_Count := 0;
@@ -3354,10 +3363,16 @@ package body ARM_HTML is
 		    Make_Clause_File_Name (Output_Object, Clause_Number),
 		    Header_Text, Clause_Number);
 	else -- Big Files:
-	    if Clause_Number = "" and then Header_Text = "Table of Contents" then
+	    if Clause_Number = "" and then
+		(Header_Text = "Table of Contents" or else -- Ada 95 format
+		 Header_Text = "Contents") then -- ISO 2004 format.
 	        -- Insert an anchor:
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<A NAME=""TOC""></A>");
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>Table of Contents</H1>");
+		if Header_Text = "Table of Contents" then -- Ada 95 format
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>Table of Contents</H1>");
+		else
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>Contents</H1>");
+		end if;
 	        Output_Object.Char_Count := 0;
 	        Output_Object.Disp_Char_Count := 0;
 	        Output_Object.Disp_Large_Char_Count := 0;
@@ -3567,13 +3582,15 @@ package body ARM_HTML is
     procedure Start_Table (Output_Object : in out HTML_Output_Type;
 			   Columns : in ARM_Output.Column_Count;
 			   First_Column_Width : in ARM_Output.Column_Count;
+			   Last_Column_Width : in ARM_Output.Column_Count;
 			   Alignment : in ARM_Output.Column_Text_Alignment;
 			   No_Page_Break : in Boolean;
 			   Has_Border : in Boolean;
 			   Small_Text_Size : in Boolean;
 			   Header_Kind : in ARM_Output.Header_Kind_Type) is
 	-- Starts a table. The number of columns is Columns; the first
-	-- column has First_Column_Width times the normal column width.
+	-- column has First_Column_Width times the normal column width, and
+	-- the last column has Last_Column_Width times the normal column width.
 	-- Alignment is the horizontal text alignment within the columns.
 	-- No_Page_Break should be True to keep the table intact on a single
 	-- page; False to allow it to be split across pages.
@@ -3588,7 +3605,9 @@ package body ARM_HTML is
 	use type ARM_Output.Header_Kind_Type;
 	use type ARM_Output.Column_Text_Alignment;
     begin
-	-- No_Page_Break and First_Column_Width not used.
+	-- No_Page_Break, First_Column_Width, and Last_Column_Width not used,
+	-- the latter two because column width is calculated based on the
+	-- contents.
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not valid object");

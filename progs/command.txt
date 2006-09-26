@@ -180,9 +180,13 @@ Global properties:
      This specifies the format of notes sections.
      If Ada95, the word "NOTES" is on a separate line, and each note is
      numbered, with the numbers starting at 1 for each section.
-     If ISO2004, each note starts with the word "Note", and a number,
+     If ISO2004, each note starts with the word "NOTE", and a number,
      with the numbers starting from 1 for each subclause.
      If there is only one note in a subclause, the number should be omitted.
+@ContentsFormat{Ada95|ISO2004}
+     This specifies the format of contents sections.
+     If Ada95, the title is "Table of Contents".
+     If ISO2004, the title is "Contents".
 
 HTML Output properties:
 
@@ -1005,6 +1009,7 @@ various mathematical symbols.
 @table(Columns=<number>,
        Alignment=<AllLeft|AllCenter|CenterExceptFirst>,
        FirstColWidth=<number>,
+       LastColWidth=<number>,
        NoBreak=<T|F>,
        Border=<T|F>,
        SmallSize=<T|F>,
@@ -1016,6 +1021,10 @@ various mathematical symbols.
 	- Columns must be a single digit (2-9).
 	- Alignment defines the column text alignment (centered or left edge).
 	- FirstColWidth defines the width of the first column compared to
+	  the rest - it's in multiples of the standard column width.
+          Note that some target formats with self-sizing columns (i.e. HTML)
+          ignore this value. It must be a single digit from 1 to 9.
+	- LastColWidth defines the width of the last column compared to
 	  the rest - it's in multiples of the standard column width.
           Note that some target formats with self-sizing columns (i.e. HTML)
           ignore this value. It must be a single digit from 1 to 9.

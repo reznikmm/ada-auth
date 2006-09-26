@@ -62,6 +62,7 @@ package body ARM_Master is
     --  6/22/06 - RLB - Added LinkNonTerminals command.
     --  9/21/06 - RLB - Added the Body_Font command.
     --  9/22/06 - RLB - Added the Note_Format command.
+    --  9/25/06 - RLB - Added the Contents_Format command.
 
     type Command_Type is (
 	-- Source commands:
@@ -80,6 +81,7 @@ package body ARM_Master is
 	Example_Font,
 	Body_Font,
 	Note_Format,
+	Contents_Format,
 
 	-- HTML properties:
 	Single_HTML_Output_File,
@@ -139,6 +141,9 @@ package body ARM_Master is
 	ARM_Output.Roman; -- Which font should be used for the body?
     Use_ISO_2004_Note_Format : Boolean := True;
 	-- Should we use the ISO 2004 note format, or the one used in the
+	-- Ada 95 standard??
+    Use_ISO_2004_Contents_Format : Boolean := True;
+	-- Should we use the ISO 2004 contents format, or the one used in the
 	-- Ada 95 standard??
 
     -- HTML properties:
@@ -203,6 +208,8 @@ package body ARM_Master is
 	    return Body_Font;
 	elsif Canonical_Name = "noteformat" then
 	    return Note_Format;
+	elsif Canonical_Name = "contentsformat" then
+	    return Contents_Format;
 	elsif Canonical_Name = "singlehtmloutputfile" then
 	    return Single_HTML_Output_File;
 	elsif Canonical_Name = "htmlkind" then
@@ -828,6 +835,25 @@ package body ARM_Master is
 			end if;
 		    end;
 
+		when Contents_Format =>
+		    -- @ContentsFormat{Ada95|ISO2004}
+		    declare
+			Format_Name : constant String :=
+			    Ada.Characters.Handling.To_Lower (
+				Get_Single_String);
+		    begin
+			if Format_Name = "ada95" then
+			    Use_ISO_2004_Contents_Format := False;
+			    Ada.Text_IO.Put_Line("Table of Contents in Ada 95 standard format");
+			elsif Format_Name = "iso2004" then
+			    Use_ISO_2004_Contents_Format := True;
+			    Ada.Text_IO.Put_Line("Table of Contents in ISO 2004 standard format");
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown contents format name: " & Format_Name &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		    end;
+
 		-- HTML properties:
 
 		when Single_HTML_Output_File =>
@@ -979,7 +1005,8 @@ package body ARM_Master is
 		Link_Non_Terminals => Should_Link_Non_Terminals,
 		Number_Paragraphs => Should_Number_Paragraphs,
 		Examples_Font => Font_of_Examples,
-		Use_ISO_2004_Note_Format => Use_ISO_2004_Note_Format);
+		Use_ISO_2004_Note_Format => Use_ISO_2004_Note_Format,
+		Use_ISO_2004_Contents_Format => Use_ISO_2004_Contents_Format);
     end Create_Format;
 
 

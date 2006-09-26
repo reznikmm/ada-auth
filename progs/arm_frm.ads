@@ -87,6 +87,7 @@ package ARM_Format is
     --  1/18/06 - RLB - Added "Example_Font".
     --  9/22/06 - RLB - Added "Use_ISO_2004_Note_Format".
     --		- RLB - Revised to use Clause_Number_Type.
+    --  9/25/06 - RLB - Added "Use_ISO_2004_Contents_Format".
 
     type Format_Type is tagged limited private;
 
@@ -117,7 +118,8 @@ package ARM_Format is
 		      Link_Non_Terminals : in Boolean;
 		      Number_Paragraphs : in Boolean;
 		      Examples_Font : in ARM_Output.Font_Family_Type;
-		      Use_ISO_2004_Note_Format : in Boolean);
+		      Use_ISO_2004_Note_Format : in Boolean;
+		      Use_ISO_2004_Contents_Format : in Boolean);
 	-- Initialize an input object. Changes and Change_Version determine
 	-- which changes should be displayed. If Display_Index_Entries is True,
 	-- index entries will be printed in the document; otherwise, they
@@ -132,7 +134,9 @@ package ARM_Format is
 	-- subclause); otherwise they will not be.
 	-- Example_Font specifies the font that examples will be set in.
 	-- If Use_ISO_2004_Note_Format is true, that format will be used;
-	-- else the Ada95 standard's format will be used.
+	-- else the Ada95 standard's format will be used for notes.
+	-- If Use_ISO_2004_Contents_Format is true, that format will be used;
+	-- else the Ada95 standard's format will be used for the table of contents.
 
     procedure Destroy (Format_Object : in out Format_Type);
 	-- Destroy a format object, releasing any resources.
@@ -221,6 +225,7 @@ private
 	Number_Paragraphs : Boolean;
 	Examples_Font : ARM_Output.Font_Family_Type;
 	Use_ISO_2004_Note_Format : Boolean;
+	Use_ISO_2004_Contents_Format : Boolean;
 
 	-- Clause numbers:
 	Clause_Number : ARM_Contents.Clause_Number_Type;
