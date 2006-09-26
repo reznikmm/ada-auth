@@ -231,9 +231,15 @@ package body ARM_Contents is
 		    elsif Clause_Number.Clause < 20 then
 		        return Character'Val (Character'Pos('0') + Clause_Number.Section) &
 		            ".1" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 10);
-		    else
+		    elsif Clause_Number.Clause < 30 then
 		        return Character'Val (Character'Pos('0') + Clause_Number.Section) &
 		            ".2" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 20);
+		    elsif Clause_Number.Clause < 40 then
+		        return Character'Val (Character'Pos('0') + Clause_Number.Section) &
+		            ".3" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 30);
+		    else
+		        return Character'Val (Character'Pos('0') + Clause_Number.Section) &
+		            ".4" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 40);
 		    end if;
 		elsif Clause_Number.Section < 20 then
 		    if Clause_Number.Clause < 10 then
@@ -242,9 +248,15 @@ package body ARM_Contents is
 		    elsif Clause_Number.Clause < 20 then
 		        return "1" & Character'Val (Character'Pos('0') + Clause_Number.Section - 10) &
 		            ".1" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 10);
-		    else
+		    elsif Clause_Number.Clause < 30 then
 		        return "1" & Character'Val (Character'Pos('0') + Clause_Number.Section - 10) &
 		            ".2" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 20);
+		    elsif Clause_Number.Clause < 40 then
+		        return "1" & Character'Val (Character'Pos('0') + Clause_Number.Section - 10) &
+		            ".3" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 30);
+		    else
+		        return "1" & Character'Val (Character'Pos('0') + Clause_Number.Section - 10) &
+		            ".4" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 40);
 		    end if;
 		elsif Clause_Number.Section < 30 then
 		    if Clause_Number.Clause < 10 then
@@ -253,17 +265,27 @@ package body ARM_Contents is
 		    elsif Clause_Number.Clause < 20 then
 		        return "2" & Character'Val (Character'Pos('0') + Clause_Number.Section - 20) &
 		            ".1" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 10);
-		    else
+		    elsif Clause_Number.Clause < 30 then
 		        return "2" & Character'Val (Character'Pos('0') + Clause_Number.Section - 20) &
 		            ".2" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 20);
+		    elsif Clause_Number.Clause < 40 then
+		        return "2" & Character'Val (Character'Pos('0') + Clause_Number.Section - 20) &
+		            ".3" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 30);
+		    else
+		        return "2" & Character'Val (Character'Pos('0') + Clause_Number.Section - 20) &
+		            ".4" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 40);
 		    end if;
 		elsif Clause_Number.Section = 30 then
 		    if Clause_Number.Clause < 10 then
 		        return "30." & Character'Val (Character'Pos('0') + Clause_Number.Clause);
 		    elsif Clause_Number.Clause < 20 then
 		        return "30.1" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 10);
-		    else
+		    elsif Clause_Number.Clause < 30 then
 		        return "30.2" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 20);
+		    elsif Clause_Number.Clause < 40 then
+		        return "30.3" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 30);
+		    else
+		        return "30.4" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 40);
 		    end if;
 		else
 		    if Clause_Number.Clause < 10 then
@@ -272,9 +294,15 @@ package body ARM_Contents is
 		    elsif Clause_Number.Clause < 20 then
 			return Character'Val (Character'Pos('A') + (Clause_Number.Section - ANNEX_START)) &
 		            ".1" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 10);
-		    else
+		    elsif Clause_Number.Clause < 30 then
 			return Character'Val (Character'Pos('A') + (Clause_Number.Section - ANNEX_START)) &
 		            ".2" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 20);
+		    elsif Clause_Number.Clause < 40 then
+			return Character'Val (Character'Pos('A') + (Clause_Number.Section - ANNEX_START)) &
+		            ".3" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 30);
+		    else
+			return Character'Val (Character'Pos('A') + (Clause_Number.Section - ANNEX_START)) &
+		            ".4" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 40);
 		    end if;
 		end if;
 	    when Subclause =>
@@ -284,9 +312,12 @@ package body ARM_Contents is
 		elsif Clause_Number.Subclause < 20 then
 		    return Make_Clause_Number (Clause, (Clause_Number.Section, Clause_Number.Clause, 0, 0)) &
 		        ".1" & Character'Val (Character'Pos('0') + Clause_Number.Subclause - 10);
-		else
+		elsif Clause_Number.Subclause < 30 then
 		    return Make_Clause_Number (Clause, (Clause_Number.Section, Clause_Number.Clause, 0, 0)) &
 		        ".2" & Character'Val (Character'Pos('0') + Clause_Number.Subclause - 20);
+		else
+		    return Make_Clause_Number (Clause, (Clause_Number.Section, Clause_Number.Clause, 0, 0)) &
+		        ".3" & Character'Val (Character'Pos('0') + Clause_Number.Subclause - 30);
 		end if;
 	    when Subsubclause =>
 		if Clause_Number.Subsubclause < 10 then
@@ -295,9 +326,12 @@ package body ARM_Contents is
 		elsif Clause_Number.Subclause < 20 then
 		    return Make_Clause_Number (Subclause, (Clause_Number.Section, Clause_Number.Clause, Clause_Number.Subclause, 0)) &
 		        ".1" & Character'Val (Character'Pos('0') + Clause_Number.Subsubclause - 10);
-		else
+		elsif Clause_Number.Subclause < 30 then
 		    return Make_Clause_Number (Subclause, (Clause_Number.Section, Clause_Number.Clause, Clause_Number.Subclause, 0)) &
 		        ".2" & Character'Val (Character'Pos('0') + Clause_Number.Subsubclause - 20);
+		else
+		    return Make_Clause_Number (Subclause, (Clause_Number.Section, Clause_Number.Clause, Clause_Number.Subclause, 0)) &
+		        ".3" & Character'Val (Character'Pos('0') + Clause_Number.Subsubclause - 30);
 		end if;
 	end case;
     end Make_Clause_Number;

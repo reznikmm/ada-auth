@@ -148,6 +148,7 @@ package body ARM_HTML is
     --  3/30/06 - RLB - Added a bit of space around inline pictures.
     --  9/21/06 - RLB - Added Body_Font.
     --  9/22/06 - RLB - Added Subsubclause.
+    --  9/23/06 - RLB - Fixed bug in borderless tables.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -3604,7 +3605,7 @@ package body ARM_HTML is
 	if Has_Border then
             Ada.Text_IO.Put (Output_Object.Output_File, "<TABLE frame=""border"" rules=""all"" border=""2"" cellpadding=""4"">");
 	else
-            Ada.Text_IO.Put (Output_Object.Output_File, "<TABLE frame=""void"" rules=""all"" border=""0"" cellpadding=""2"">");
+            Ada.Text_IO.Put (Output_Object.Output_File, "<TABLE frame=""void"" rules=""none"" border=""0"" cellpadding=""2"">");
 	end if;
 	if Header_Kind = ARM_Output.Both_Caption_and_Header then
             Ada.Text_IO.Put (Output_Object.Output_File, "<CAPTION>");
