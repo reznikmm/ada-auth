@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2006/09/24 02:39:34 $}
+@comment{$Revision: 1.6 $ $Date: 2006/09/26 05:12:35 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -169,19 +169,29 @@ Old=[The ASIS interface is compilable. Consequently, Sentinels
 have been used to mark portions of the ASIS text with comments appropriate to
 an ASIS implementor and an ASIS user.]}
 
-@Chg{Version=[1],New=[@b{@i{This is not what these look like!!}}],Old=[The sentinels and their meanings are:]}
+@Chg{Version=[1],New=[@b{@i{These aren't sentinels OR comments...}}],Old=[The sentinels and their meanings are:]}
 
-@begin{DescribeCode}
-@b{Element Reference} -- These comments mark an element kind reference which acts as a header for those queries that work on this element kind.
+@Chg{Version=[1],New=[@b{@i{Greg seems to have deleted these...}}],
+Old=[@b{Element Reference} -- These comments mark an element kind reference which acts as a header for those queries that work on this element kind.]}
 
-@b{Child Reference} - These sentinel comments follow sentinel comments marking element references (--ER) and reference child element queries that decompose the element into its children.
+@Chg{Version=[1],New=[@b{@i{...amd these too.}}],
+Old=[@b{Child Reference} - These sentinel comments follow sentinel comments marking element references (--ER) and reference child element queries that decompose the element into its children.]}
 
-@b{Application Note} - These comments describe suggested uses, further analysis, or other notes of interest to ASIS applications.
+@begin{SingleNote}
+@Chg{Version=[1],New=[These items],Old=[@b{Application Note} - These comments]}These comments describe suggested uses, further
+analysis, or other notes of interest to ASIS applications.
+@end{SingleNote}
 
-@b{Implementation Permissions} - These comments describe permissions given an implementor when implementing the associated type or query.
+@begin{ImplPerm}
+@Chg{Version=[1],New=[These items],Old=[@b{Implementatopm Permissions} - These comments]}
+describe permissions given an implementor when implementing the associated type
+or query.
+@end{ImplPerm}
 
-@b{Implementation Requirements} - These comments describe additional requirements for conforming implementations.
-@end{DescribeCode}
+@begin{ImplReq}
+@Chg{Version=[1],New=[These items],Old=[@b{Implementatopm Requirements} - These comments]}
+describe additional requirements for conforming implementations.
+@end{ImplReq}
 
 
 @LabeledSubClause{Conformity with this International Standard}
@@ -472,8 +482,8 @@ whenever they explicitly raise any ASIS exception to always record a Status and
 Diagnosis prior to raising the exception. Values of errors along with their
 general meanings are:
 
-@table{Columns=[2],Alignment=[Allleft],FirstColWidth=[1],NoBreak=[F],Border=[F],
-SmallSize=[F],Caption=[],Headers=[],
+@table{Columns=[2],Alignment=[Allleft],FirstColWidth=[2],LastColWidth=[3],
+NoBreak=[F],Border=[F],SmallSize=[F],Caption=[],Headers=[],
 Body=[Not_An_Error@Defn{Not_An_Error}@\-- No error is presently recorded
 Value_Error@Defn{Value_Error}@\-- Routine argument value invalid
 Initialization_Error@Defn{Initialization_Error}@\-- ASIS is uninitialized
