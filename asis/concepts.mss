@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/concepts.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/09/26 05:13:08 $}
+@comment{$Revision: 1.2 $ $Date: 2006/09/27 00:17:20 $}
 
 
 @LabeledSection{ASIS technical concepts}
@@ -546,7 +546,7 @@ Portable_Constrained_Subtype, Portable_Unconstrained_Record_Type,
 Portable_Array_Type_1 (for one dimensional arrays), Portable_Array_Type_2 (for
 two dimensional arrays), and Portable_Array_Type_3 (for three dimensional
 arrays) (see Clause
-@RefSecNum{package @RefSecNum{package Asis.Data_Decomposition.Portable_Transfer}).
+@RefSecNum{package Asis.Data_Decomposition.Portable_Transfer}).
 
 @end{Itemize}
 
@@ -633,10 +633,10 @@ restrictions check for each of our safety-critical guidelines above.
 
 @key[begin]
 
-    Check_Short_Circuit (Elem);
-    Check_Library_Level_Task (Elem);
+   Check_Short_Circuit (Elem);
+   Check_Library_Level_Task (Elem);
 
-    -- Additional guidelines can be checked here.
+   -- Additional guidelines can be checked here.
 
 @key[end] Process_Element;
 @end{Example}
@@ -654,29 +654,29 @@ Otherwise, there is no processing for this Element.
 
 @begin{Example}
 @key[procedure] Check_Short_Circuit (Elem : @key[in] Asis.Element) @key[is]        --  @RefSecNum{type Element}
-       Op_Kind : Asis.Operator_Kinds :=                          --  @RefSecNum{type Operator_Kinds}
-                     Asis.Elements.Operator_Kind (Elem);         -- @RefSecNum{function Operator_Kind}
+   Op_Kind : Asis.Operator_Kinds :=                              --  @RefSecNum{type Operator_Kinds}
+                 Asis.Elements.Operator_Kind (Elem);             -- @RefSecNum{function Operator_Kind}
 
 @key[begin]
-    @key[case] Op_Kind @key[is]
+   @key[case] Op_Kind @key[is]
 
-    @key[when] Asis.An_And_Operator =>                                 --  @RefSecNum{type Operator_Kinds}
-        Put_Line ("Violation of Short Circuit Operator guideline:");
-        Put ("-- Use of AND Operator at line ");
-        Put (Asis.Text.Line_Number'Wide_Image                    -- @RefSecNum{type Line_Number}
-                        (Asis.Text.First_Line_Number (Elem)));   -- @RefSecNum{function First_Line_Number}
-        New_Line;
+      @key[when] Asis.An_And_Operator =>                               --  @RefSecNum{type Operator_Kinds}
+         Put_Line ("Violation of Short Circuit Operator guideline:");
+         Put ("-- Use of AND Operator at line ");
+         Put (Asis.Text.Line_Number'Wide_Image                   -- @RefSecNum{type Line_Number}
+                      (Asis.Text.First_Line_Number (Elem)));     -- @RefSecNum{function First_Line_Number}
+         New_Line;
 
-    @key[when] Asis.An_Or_Operator =>                                  --  @RefSecNum{type Operator_Kinds}
-        Put_Line ("Violation of Short Circuit Operator guideline:");
-        Put ("-- Use of OR Operator at line ");
-        Put (Asis.Text.Line_Number'Wide_Image                    -- @RefSecNum{type Line_Number}
-                  (Asis.Text.First_Line_Number (Elem)));         -- @RefSecNum{function First_Line_Number}
-        New_Line;
+      @key[when] Asis.An_Or_Operator =>                                --  @RefSecNum{type Operator_Kinds}
+         Put_Line ("Violation of Short Circuit Operator guideline:");
+         Put ("-- Use of OR Operator at line ");
+         Put (Asis.Text.Line_Number'Wide_Image                   -- @RefSecNum{type Line_Number}
+                (Asis.Text.First_Line_Number (Elem)));           -- @RefSecNum{function First_Line_Number}
+         New_Line;
 
-    @key[when others] =>
-               @key[null];
-    @key[end case];
+      @key[when others] =>
+         @key[null];
+   @key[end case];
 
 @key[end] Check_Short_Circuit;
 @end{Example}
@@ -689,45 +689,47 @@ not at the Library level, then a violation is reported along with its line
 number.
 
 @begin{Example}
-@key[procedure] Check_Library_Level_Task (Elem : Asis.Element) @key[is]               --  @RefSecNum{type Element}
+@key[procedure] Check_Library_Level_Task (Elem : Asis.Element) @key[is]           --  @RefSecNum{type Element}
 @key[begin]
-    @key[case] Asis.Elements.Declaration_Kind (Elem) @key[is]                         -- @RefSecNum{function Declaration_Kind}
+   @key[case] Asis.Elements.Declaration_Kind (Elem) @key[is]                      -- @RefSecNum{function Declaration_Kind}
 
-        @key[when] Asis.A_Task_Type_Declaration |                               --  @RefSecNum{type Declaration_Kinds}
-             Asis.A_Protected_Type_Declaration |                          --  @RefSecNum{type Declaration_Kinds}
-             Asis.A_Single_Task_Declaration |                             --  @RefSecNum{type Declaration_Kinds}
-             Asis.A_Single_Protected_Declaration =>                       --  @RefSecNum{type Declaration_Kinds}
+      @key[when] Asis.A_Task_Type_Declaration |                             --  @RefSecNum{type Declaration_Kinds}
+            Asis.A_Protected_Type_Declaration |                       --  @RefSecNum{type Declaration_Kinds}
+            Asis.A_Single_Task_Declaration |                          --  @RefSecNum{type Declaration_Kinds}
+            Asis.A_Single_Protected_Declaration =>                    --  @RefSecNum{type Declaration_Kinds}
 
-                @key[if not] Is_Library_Level
-                    (Asis.Elements.Enclosing_Compilation_Unit(Elem)) @key[then] -- @RefSecNum{function Enclosing_Compilation_Unit}
-                    Put_Line ("Violation of Tasking guideline:");
-                    Put ("-- Non-Library Level Task at Line:");
-                    Put (Asis.Text.Line_Number'Wide_Image                 -- @RefSecNum{type Line_Number}
-                        (Asis.Text.First_Line_Number (Elem)));            -- @RefSecNum{function First_Line_Number}
-                    New_Line;
-                @key[end if];
+          @key[if not] Is_Library_Level
+             (Asis.Elements.Enclosing_Compilation_Unit(Elem)) @key[then]    -- @RefSecNum{function Enclosing_Compilation_Unit}
+             Put_Line ("Violation of Tasking guideline:");
+             Put ("-- Non-Library Level Task at Line:");
+             Put (Asis.Text.Line_Number'Wide_Image                    -- @RefSecNum{type Line_Number}
+                 (Asis.Text.First_Line_Number (Elem)));               -- @RefSecNum{function First_Line_Number}
+             New_Line;
+          @key[end if];
 
-        @key[when others] =>
-            @key[null];
-     @key[end case];
+       @key[when others] =>
+          @key[null];
+    @key[end case];
 @key[end] Check_Library_Level_Task;
 @end{Example}
 
 The function Is_Library_Level returns true when the Unit_Class of the
 Compilation_Unit is A_Public_Declaration.
 
-function Is_Library_Level ( CU : Asis.Compilation_Unit )          --  3.10
-    return boolean is
-begin
+@begin{Example}
+@key[function] Is_Library_Level (CU : Asis.Compilation_Unit)          --  @RefSecNum{type Compilation_Unit}
+   @key[return] Boolean @key[is]
+@key[begin]
 
-    Case Asis.Compilation_Units.Unit_Class (CU) is                -- 10.2
-        when Asis.A_Public_Declaration =>                         --  3.12.2
-            return true;
-        when others =>
-            return false;
-    end case;
+   @key[case] Asis.Compilation_Units.Unit_Class (CU) @key[is]               -- @RefSecNum{function Unit_Class}
+      @key[when] Asis.A_Public_Declaration =>                         --  @RefSecNum{type Unit_Classes}
+          @key[return] True;
+      @key[when others] =>
+          @key[return] False;
+   @key[end case];
 
-end Is_Library_Level;
+@key[end] Is_Library_Level;
+@end{Example}
 
 So far the procedure Process_Element has been created to check restrictions on
 an Element in a Compilation_Unit. The next step is to traverse all the Elements
@@ -748,38 +750,40 @@ procedure Find_Violations for the selected Compilation_Unit. It traverses the
 logical syntax tree, finding and reporting the short circuit violations and
 task library level violations.
 
-with Asis;
-package Check_Compilation_Unit is
+@begin{Example}
+@key[with] Asis;
+@key[package] Check_Compilation_Unit @key[is]
 
-    procedure Find_Violations (CU : in Asis.Compilation_Unit);         --  3.10
+   @key[procedure] Find_Violations (CU : @key[in] Asis.Compilation_Unit);         --  @RefSecNum{type Compilation_Unit}
 
-end Check_Compilation_Unit;
+@key[end] Check_Compilation_Unit;
 
-with Asis; with Asis.Elements; with Asis.Iterator; with Asis.Text;
-with Ada.Wide_Text_Io; use Ada.Wide_Text_Io;
-package body Check_Compilation_Unit is
+@key[with] Asis; @key[with] Asis.Elements; @key[with] Asis.Iterator; @key[with] Asis.Text;
+@key[with] Ada.Wide_Text_Io; @key[use] Ada.Wide_Text_Io;
+@key[package body] Check_Compilation_Unit @key[is]
 
-    procedure Process_Element (Elem    : in Asis.Element;              --  3.6
-                               Control : in out Asis.Traverse_Control; --  3.13
-                               Dummy   : in out boolean);
+   @key[procedure] Process_Element (Elem    : @key[in] Asis.Element;              --  @RefSecNum{type Element}
+                              Control : @key[in out] Asis.Traverse_Control; --  @RefSecNum{type Traverse_Control}
+                              Dummy   : @key[in out] Boolean);
 
-    procedure No_Op (Elem    : in Asis.Element;                        --  3.6
-                     Control : in out Asis.Traverse_Control;           --  3.13
-                     Dummy   : in out boolean);
+   @key[procedure] No_Op (Elem    : @key[in] Asis.Element;                        --  @RefSecNum{type Element}
+                    Control : @key[in out] Asis.Traverse_Control;           --  @RefSecNum{type Traverse_Control}
+                    Dummy   : @key[in out] Boolean);
 
-    procedure Check is new Asis.Iterator.Traverse_Element              -- 14.1
-                               (boolean, Process_Element, No_Op);
+   @key[procedure] Check @key[is new] Asis.Iterator.Traverse_Element              -- @RefSecNum{procedure Traverse_Element}
+                              (Boolean, Process_Element, No_Op);
 
-    Procedure Find_Violations (CU : Asis.Compilation_Unit) is          --  3.10
-        Control : Asis.Traverse_Control := Asis.Continue;              --  3.13
-        Dummy   : boolean;
-    begin
-        Put_Line ("Processing " &
-            Asis.Unit_Kinds'Wide_Image                                 --  3.12.1
-               (Asis.Compilation_Units.Unit_Kind (CU))                 -- 10.1
-            & ": " &  (Asis.Compilation_Units.Unit_Full_Name (CU)));   -- 10.19
-        Check (Asis.Elements.Unit_Declaration (CU), Control, Dummy);
-    end Check_Compilation_Unit;
+   @key[procedure] Find_Violations (CU : Asis.Compilation_Unit) @key[is]          --  @RefSecNum{type Compilation_Unit}
+      Control : Asis.Traverse_Control := Asis.Continue;               --  @RefSecNum{type Traverse_Control}
+      Dummy   : Boolean;
+   @key[begin]
+      Put_Line ("Processing " &
+         Asis.Unit_Kinds'Wide_Image                                   --  @RefSecNum{type Unit_Kinds}
+            (Asis.Compilation_Units.Unit_Kind (CU))                   -- @RefSecNum{function Unit_Kind}
+         & ": " &  (Asis.Compilation_Units.Unit_Full_Name (CU)));     -- @RefSecNum{function Unit_Full_Name}
+      Check (Asis.Elements.Unit_Declaration (CU), Control, Dummy);
+   @key[end] Check_Compilation_Unit;
+@end{Example}
 
 The ASIS application is almost complete. A main program is needed which
 contains the required sequencing of calls to initialize the ASIS interface,
@@ -789,50 +793,64 @@ closing/releasing all ASIS resources. The Compilation_Units in the Context are
 placed into the Unit_List. This is achieved with the following main program,
 called My_Application.
 
-with Asis;                                                              --  3.0
-with Asis.Implementation;                                               --  6.0
-with Asis.Ada_Environments;                                             --  8.0
-with Asis.Compilation_Units;                                            -- 10.0
-with Check_Compilation_Unit;
+@begin{Example}
+@key[with] Asis;                                                             --  @RefSecNum{package Asis}
+@key[with] Asis.Implementation;                                              --  @RefSecNum{package Asis.Implementation}
+@key[with] Asis.Ada_Environments;                                            --  @RefSecNum{package Asis.Ada_Environments}
+@key[with] Asis.Compilation_Units;                                           -- @RefSecNum{package Asis.Compilation_Units}
+@key[with] Check_Compilation_Unit;
 
-procedure My_Application is
-    My_Context : Asis.Context;                                          --  3.5
+@key[procedure] My_Application @key[is]
+   My_Context : Asis.Context;                                          --  @RefSecNum{type Context}
 
-begin
-    Asis.Implementation.Initialize;                                     --  6.6
-    Asis.Ada_Environments.Associate (My_Context, "My Context");         --  8.3
-    Asis.Ada_Environments.Open (My_Context);                            --  8.4
+@key[begin]
+   Asis.Implementation.Initialize;                                     --  @RefSecNum{procedure Initialize}
+   Asis.Ada_Environments.Associate (My_Context, "My Context");         --  @RefSecNum{procedure Associate}
+   Asis.Ada_Environments.Open (My_Context);                            --  @RefSecNum{procedure Open}
 
-    declare
-        Unit_List :  Asis.Compilation_Unit_List :=                      --  3.11
-              Asis.Compilation_Units.Compilation_Units (My_Context);    -- 10.10
-    begin
-        for I in Unit_List'Range loop
-            case Asis.Compilation_Units.Unit_Origin (Unit_List (I)) is  -- 10.3
-                when Asis.An_Application_Unit =>                        --  3.12.3
-                    Check_Compilation_Unit.Find_Violations (Unit_List (I));
-                when others => null;
-            end case;
-        end loop;
-    end;
+   @key[declare]
+      Unit_List :  Asis.Compilation_Unit_List :=                       --  @RefSecNum{type Compilation_Unit_List}
+         Asis.Compilation_Units.Compilation_Units (My_Context);        -- @RefSecNum{function Compilation_Units (context)}
+   @key[begin]
+      @key[for] I @key[in] Unit_List'Range @key[loop]
+         @key[case] Asis.Compilation_Units.Unit_Origin (Unit_List (I)) @key[is]    -- @RefSecNum{function Unit_Origin}
+            @key[when] Asis.An_Application_Unit =>                           --  @RefSecNum{type Unit_Origins}
+               Check_Compilation_Unit.Find_Violations (Unit_List (I));
+            @key[when others] => @key[null];
+         @key[end case];
+      @key[end loop];
+   @key[end];
 
-    Asis.Ada_Environments.Close (My_Context);                           --  8.5
-    Asis.Ada_Environments.Dissociate (My_Context);                      --  8.6
-    Asis.Implementation.Finalize;                                       --  6.8
-end My_Application;
+   Asis.Ada_Environments.Close (My_Context);                           --  @RefSecNum{procedure Close}
+   Asis.Ada_Environments.Dissociate (My_Context);                      --  @RefSecNum{procedure Dissociate}
+   Asis.Implementation.Finalize;                                       --  @RefSecNum{procedure Finalize}
+@key[end] My_Application;
+@end{Example}
 
-@LabeledSubClause{Erroneous applications }
 
+@LabeledSubClause{Erroneous applications}
 
-An ASIS application is erroneous if:
-* It uses any ASIS query, other than those exported by Asis.Implementation, while Asis.Implementation.Is_Initialized = False.
-* It attempts to use a Context before opening it (exceptions to this are Asis.Ada_Environments: Associate, Dissociate, and the Context query functions; these are the only ones that shall be used before opening a Context).
-* It attempts to use a Context after closing it (exceptions to this are Asis.Ada_Environments: Associate, Dissociate, and the Context query functions; these are the only ones that shall be used after closing a Context).
-* It attempts to Dissociate or Associate an open Context.
-* It attempts to manipulate a Compilation_Unit whose Context has been closed.
-* It attempts to obtain Compilation_Unit information from an unopened Context.
-* It attempts to manipulate an Element from a Closed Context.
+@leading@;An ASIS application is @i{erroneous} if:@Defn2{Term=[Erroneous],Sec=[ASIS Application]}
+@begin{Itemize}
+It uses any ASIS query, other than those exported by Asis.Implementation, while
+Asis.Implementation.Is_Initialized = False.
 
+It attempts to use a Context before opening it (exceptions to this are
+Asis.Ada_Environments: Associate, Dissociate, and the Context query functions;
+these are the only ones that shall be used before opening a Context).
+
+It attempts to use a Context after closing it (exceptions to this are
+Asis.Ada_Environments: Associate, Dissociate, and the Context query functions;
+these are the only ones that shall be used after closing a Context).
+
+It attempts to Dissociate or Associate an open Context.
+
+It attempts to manipulate a Compilation_Unit whose Context has been closed.
+
+It attempts to obtain Compilation_Unit information from an unopened Context.
+
+It attempts to manipulate an Element from a Closed Context.
+@end{Itemize}
 
 
 @LabeledSubClause{Usage rules}

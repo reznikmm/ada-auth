@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2006/09/23 05:24:02 $}
+@comment{$Revision: 1.5 $ $Date: 2006/09/27 00:17:21 $}
 
 @LabeledSection{package Asis}
 
@@ -15,7 +15,7 @@ implementation-independent manner.
 
 Package Asis is the root of the ASIS interface.
 
-Abstract
+@ChgDeleted{Version=[1],Text=[Abstract]}@Comment{This whole section is intro material}
 
 The Ada Semantic Interface Specification (ASIS) is an interface between an
 Ada environment as defined by ISO/IEC 8652:1995 (the Ada Reference Manual)
@@ -27,23 +27,26 @@ independent of underlying Ada environment implementations, thus supporting
 portability of software engineering tools while relieving tool developers
 from having to understand the complexities of an Ada environment's
 proprietary internal representation.
-Package ASIS Types:
 
-The following types are made visible directly through package Asis:
-      type ASIS_Integer
-      type ASIS_Natural
-      type ASIS_Positive
-      type List_Index
-      type Context
-      type Element
-      type Element_List
-      Element subtypes
-      Element Kinds (set of enumeration types)
-      type Compilation_Unit
-      type Compilation_Unit_List
-      Unit Kinds (set of enumeration types)
-      type Traverse_Control
-      subtype Program_Text
+@ChgDeleted{Version=[1],Text=[Package ASIS Types:]}@Comment{The next line says the same thing}
+
+@leading@;The following types are made visible directly through package Asis:
+@begin{Example}
+type ASIS_Integer
+type ASIS_Natural
+type ASIS_Positive
+type List_Index
+type Context
+type Element
+type Element_List
+Element subtypes
+Element Kinds (set of enumeration types)
+type Compilation_Unit
+type Compilation_Unit_List
+Unit Kinds (set of enumeration types)
+type Traverse_Control
+subtype Program_Text
+@end{Example}
 
 The ASIS interface uses string parameters for many procedure and function
 calls. Wide_String is used to convey ASIS environment information.
@@ -70,37 +73,53 @@ Please refer to commentary where each is used.]}
 
 @LabeledClause{type ASIS_Integer}
 
-
-    @b{subtype ASIS_Integer is Implementation_Defined_Integer_Type; }
+@begin{DescribeCode}
+@begin{Example}
+@key[subtype] @AdaSubtypeDefn{Name=[ASIS_Integer],Of=[Implementation_Defined_Integer_Type]} @key[is] @i{Implementation_Defined_Integer_Type};
+@end{Example}
 
 A numeric subtype that allows each ASIS implementation to place constraints
 on the lower and upper bounds. Whenever possible, the range of this type
 should meet or exceed -(2**31-1) .. 2**31-1.
+@end{DescribeCode}
 
 @LabeledClause{type ASIS_Natural}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[subtype] @AdaSubtypeDefn{Name=[ASIS_Natural],Of=[ASIS_Integer]} @key[is] ASIS_Integer @key[range] 0 .. ASIS_Integer'Last;
+@end{Example}
+@end{DescribeCode}
 
-    @b{subtype ASIS_Natural is ASIS_Integer range 0 .. ASIS_Integer'Last; }
 
 @LabeledClause{type ASIS_Positive}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[subtype] @AdaSubtypeDefn{Name=[ASIS_Positive],Of=[ASIS_Integer]} @key[is] ASIS_Integer @key[range] 1 .. ASIS_Integer'Last;
+@end{Example}
+@end{DescribeCode}
 
-    @b{subtype ASIS_Positive is ASIS_Integer range 1 .. ASIS_Integer'Last; }
 
-@LabeledClause{type List_Index }
+@LabeledClause{type List_Index}
 
-
-    @b{List_Index_Implementation_Upper :
-        constant ASIS_Positive := Implementation_Defined_Integer_Constant;
-    subtype List_Index is ASIS_Positive
-        range 1 .. List_Index_Implementation_Upper;}
+@begin{DescribeCode}
+@begin{Example}
+@AdaObjDefn{List_Index_Implementation_Upper} :
+   @key[constant] ASIS_Positive := @i{Implementation_Defined_Integer_Constant};
+    @key[subtype] @AdaSubtypeDefn{Name=[List_Index],Of=[ASIS_Positive]} @key[is] ASIS_Positive
+        @key[range] 1 .. List_Index_Implementation_Upper;
+@end{Example}
 
 List_Index is a numeric subtype used to establish the upper bound for list
 size.
-@LabeledClause{type Context }
+@end{DescribeCode}
 
-The ASIS Context is a view of a particular implementation of an Ada
-environment. ASIS requires an application to identify that view of
+
+@LabeledClause{type Context}
+
+The ASIS @i{Context}@Defn{Context} is a view of a particular implementation
+of an Ada environment. ASIS requires an application to identify that view of
 the Ada environment. An ASIS Context identifies an Ada environment
 as defined by ISO/IEC 8652:1995. The Ada environment is well
 defined for Ada implementations. ISO/IEC 8652:1995 provides for an
@@ -146,133 +165,150 @@ name and parameters values might simply supply the Name, Form, and any other
 values needed to open such a file.
 Context shall be an undiscriminated limited private.
 
+@begin{DescribeCode}
 @begin{Example}
-    @key[type] Context is limited private;
-    Nil_Context : constant Context;}
+@key[type] @AdaTypeDefn{Context} @key[is limited private];
+@AdaObjDefn{Nil_Context} : @key[constant] Context;
 
-    @key[function] "=" (Left  : in Context;
-                  Right : in Context)
-                  return Boolean is abstract;
+@key[function] "=" (Left  : @key[in] Context;
+              Right : @key[in] Context)
+              @key[return] Boolean @key[is abstract];
 @end{Example}
+@end{DescribeCode}
 
-@b{Implementation Requirement}
-
-The concrete mechanism of this association is implementation-specific:
+@begin{ImplReq}
+@leading@;The concrete mechanism of this association is implementation-specific:
 
 Each ASIS implementation provides the means to construct an ASIS
 Context value that defines the environment declarative_part or
 "context" from which ASIS can obtain library units.
+@end{ImplReq}
+
 
 @LabeledClause{type Element}
 
-The Ada lexical element abstraction (a private type).
+@ChgDeleted{Version=[1],Text=[The Ada lexical element abstraction (a private type).]}
 
-The Element type is a distinct abstract type representing handles for the
-lexical elements that form the text of compilation units. Elements deal
-with the internal or "textual" view of compilation units.
+The @i{Element}@Defn{Element} type is a distinct abstract type representing
+handles for the lexical elements that form the text of compilation units.
+Elements deal with the internal or "textual" view of compilation units.
 
-Operations are provided that split a Compilation_Unit object into one
+@leading@;Operations are provided that split a Compilation_Unit object into one
 Element and two Element lists:
 
-a) A context clause represented by an Element_List containing
-   with clauses, use clauses, and pragmas.
+@begin{Enumerate}
+A context clause represented by an Element_List containing
+with clauses, use clauses, and pragmas.
 
-b) An Element associated with the declaration.
+An Element associated with the declaration.
 
-c) A list of pragmas, that are not part of the context clause but which
-   nonetheless affect the compilation of the unit.
+A list of pragmas, that are not part of the context clause but which
+nonetheless affect the compilation of the unit.
+@end{Enumerate}
+
 ASIS Elements are representations of the syntactic and semantic information
 available from most Ada environments.
 
 The ASIS Element type shall be an undiscriminated private type.
 
+@begin{DescribeCode}
 @begin{Example}
-    @key[type] Element is private;
-    Nil_Element : constant Element;
+@key[type] @AdaTypeDefn{Element} @key[is private];
+@AdaObjDefn{Nil_Element} : @key[constant] Element;
 
-    function "=" (Left  : in Element;
-                  Right : in Element)
-                  Return Boolean is abstract;
+@key[function] "=" (Left  : @key[in] Element;
+              Right : @key[in] Element)
+              @key[return] Boolean @key[is abstract];
 @end{Example}
+@end{DescribeCode}
+
 
 @LabeledClause{type Element_List}
 
+@begin{DescribeCode}
 @begin{Example}
-    @key[type] Element_List is array (List_Index range <>) of Element;
+@key[type] @AdaTypeDefn{Element_List} @key[is array] (List_Index @key[range] <>) @key[of] Element;
 
-    Nil_Element_List : constant Element_List;
+@AdaObjDefn{Nil_Element_List} : @key[constant] Element_List;
 @end{Example}
+@end{DescribeCode}
 
-@LabeledClause{subtypes of Element and Element_List }
+
+@LabeledClause{subtypes of Element and Element_List}
+
+@begin{DescribeCode}
+@begin{Example}
+    @key[subtype] @AdaSubtypeDefn{Name=[Access_Type_Definition],Of=[Element]}          @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Association],Of=[Element]}                     @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Association_List],Of=[Element_List]}                @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Case_Statement_Alternative],Of=[Element]}      @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Clause],Of=[Element]}                          @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Component_Clause],Of=[Element]}                @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Component_Clause_List],Of=[Element_List]}           @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Component_Declaration],Of=[Element]}           @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Component_Definition],Of=[Element]}            @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Constraint],Of=[Element]}                      @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Context_Clause],Of=[Element]}                  @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Context_Clause_List],Of=[Element_List]}             @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Declaration],Of=[Element]}                     @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Declaration_List],Of=[Element_List]}                @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Declarative_Item_List],Of=[Element_List]}           @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Definition],Of=[Element]}                      @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Definition_List],Of=[Element_List]}                 @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Discrete_Range],Of=[Element]}                  @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Discrete_Range_List],Of=[Element_List]}             @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Discrete_Subtype_Definition],Of=[Element]}     @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Discriminant_Association],Of=[Element]}        @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Discriminant_Association_List],Of=[Element_List]}   @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Discriminant_Specification_List],Of=[Element_List]} @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Defining_Name],Of=[Element]}                   @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Defining_Name_List],Of=[Element_List]}              @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Exception_Handler],Of=[Element]}               @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Exception_Handler_List],Of=[Element_List]}          @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Expression],Of=[Element]}                      @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Expression_List],Of=[Element_List]}                 @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Formal_Type_Definition],Of=[Element]}          @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Generic_Formal_Parameter],Of=[Element]}        @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Generic_Formal_Parameter_List],Of=[Element_List]}   @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Identifier],Of=[Element]}                      @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Identifier_List],Of=[Element_List]}                 @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Name],Of=[Element]}                            @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Name_List],Of=[Element_List]}                       @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Parameter_Specification],Of=[Element]}         @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Parameter_Specification_List],Of=[Element_List]}    @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Path],Of=[Element]}                            @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Path_List],Of=[Element_List]}                       @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Pragma_Element],Of=[Element]}                  @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Pragma_Element_List],Of=[Element_List]}             @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Range_Constraint],Of=[Element]}                @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Record_Component],Of=[Element]}                @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Record_Component_List],Of=[Element_List]}           @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Record_Definition],Of=[Element]}               @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Representation_Clause],Of=[Element]}           @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Representation_Clause_List],Of=[Element_List]}      @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Root_Type_Definition],Of=[Element]}            @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Select_Alternative],Of=[Element]}              @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Statement],Of=[Element]}                       @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Statement_List],Of=[Element_List]}                  @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Subtype_Indication],Of=[Element]}              @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Subtype_Mark],Of=[Element]}                    @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Type_Definition],Of=[Element]}                 @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Variant],Of=[Element]}                         @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Variant_Component_List],Of=[Element_List]}          @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Variant_List],Of=[Element_List]}                    @key[is] Element_List;
+@end{Example}
+@end{DescribeCode}
 
 
-    @b{subtype Access_Type_Definition          is Element;
-    subtype Association                     is Element;
-    subtype Association_List                is Element_List;
-    subtype Case_Statement_Alternative      is Element;
-    subtype Clause                          is Element;
-    subtype Component_Clause                is Element;
-    subtype Component_Clause_List           is Element_List;
-    subtype Component_Declaration           is Element;
-    subtype Component_Definition            is Element;
-    subtype Constraint                      is Element;
-    subtype Context_Clause                  is Element;
-    subtype Context_Clause_List             is Element_List;
-    subtype Declaration                     is Element;
-    subtype Declaration_List                is Element_List;
-    subtype Declarative_Item_List           is Element_List;
-    subtype Definition                      is Element;
-    subtype Definition_List                 is Element_List;
-    subtype Discrete_Range                  is Element;
-    subtype Discrete_Range_List             is Element_List;
-    subtype Discrete_Subtype_Definition     is Element;
-    subtype Discriminant_Association        is Element;
-    subtype Discriminant_Association_List   is Element_List;
-    subtype Discriminant_Specification_List is Element_List;
-    subtype Defining_Name                   is Element;
-    subtype Defining_Name_List              is Element_List;
-    subtype Exception_Handler               is Element;
-    subtype Exception_Handler_List          is Element_List;
-    subtype Expression                      is Element;
-    subtype Expression_List                 is Element_List;
-    subtype Formal_Type_Definition          is Element;
-    subtype Generic_Formal_Parameter        is Element;
-    subtype Generic_Formal_Parameter_List   is Element_List;
-    subtype Identifier                      is Element;
-    subtype Identifier_List                 is Element_List;
-    subtype Name                            is Element;
-    subtype Name_List                       is Element_List;
-    subtype Parameter_Specification         is Element;
-    subtype Parameter_Specification_List    is Element_List;
-    subtype Path                            is Element;
-    subtype Path_List                       is Element_List;
-    subtype Pragma_Element                  is Element;
-    subtype Pragma_Element_List             is Element_List;
-    subtype Range_Constraint                is Element;
-    subtype Record_Component                is Element;
-    subtype Record_Component_List           is Element_List;
-    subtype Record_Definition               is Element;
-    subtype Representation_Clause           is Element;
-    subtype Representation_Clause_List      is Element_List;
-    subtype Root_Type_Definition            is Element;
-    subtype Select_Alternative              is Element;
-    subtype Statement                       is Element;
-    subtype Statement_List                  is Element_List;
-    subtype Subtype_Indication              is Element;
-    subtype Subtype_Mark                    is Element;
-    subtype Type_Definition                 is Element;
-    subtype Variant                         is Element;
-    subtype Variant_Component_List          is Element_List;
-    subtype Variant_List                    is Element_List;}
-
-@LabeledClause{Element Kinds }
+@LabeledClause{Element Kinds}
 
 Element Kinds are enumeration types describing various kinds of elements.
 These element kinds are only used by package Asis.Elements.
 
-@LabeledSubClause{type Element_Kinds }
 
-Element_Kinds Hierarchy
+@LabeledSubClause{type Element_Kinds}
+
+@ChgDeleted{Version=[1],Text=[Element_Kinds Hierarchy]}@Comment{Adds nothing}
 
 ASIS offers hierarchical classification of elements. At the highest
 level, the Element_Kinds type provides literals that define "kinds" or
@@ -287,7 +323,9 @@ Declaration_Kinds'A_Parameter_Specification which might be further
 classified into Trait_Kinds'An_Access_Definition_Trait.
 This fully identifies the syntax of an element such as:
 
-      (Who : access Person)
+@begin{Example}
+   (Who : @key[access] Person)
+@end{Example}
 
 All Element_Kinds and subordinate kinds Queries are in Asis.Elements.
 
@@ -296,6 +334,7 @@ classified by any subordinate kind from any level. However, meaningful
 results will only be obtained from subordinate kinds that are appropriate.
 These are designated within the hierarchy shown below:
 
+@begin{Example}@Comment{This could be a table, but it would be messy}
        Element_Kinds         -> Subordinate Kinds
 
   Key: Read "->" as "is further classified by its"
@@ -336,76 +375,90 @@ These are designated within the hierarchy shown below:
                                         -> Representation_Clause_Kinds
 
        An_Exception_Handler
-Element_Kinds - general element classifications
-Literals                   -- ASIS package with queries for these kinds
+@end{Example}
 
-  @b{type Element_Kinds is (
-    Not_An_Element,            -- Nil_Element
-    A_Pragma,                  -- Asis.Elements
-    A_Defining_Name,           -- Asis.Declarations
-    A_Declaration,             -- Asis.Declarations
-    A_Definition,              -- Asis.Definitions
-    An_Expression,             -- Asis.Expressions
-    An_Association,            -- Asis.Expressions
-    A_Statement,               -- Asis.Statements
-    A_Path,                    -- Asis.Statements
-    A_Clause,                  -- Asis.Clauses
-    An_Exception_Handler);     -- Asis.Statements}
+@begin{DescribeCode}
+@ChgDeleted{Version=[1],Text=[Element_Kinds - general element classifications
+Literals                   -- ASIS package with queries for these kinds.]}@Comment{Moved below}
+
+@begin{Example}
+@key[type] @AdaTypeDefn{Element_Kinds} @key[is] (
+   @AdaObjDefn{Not_An_Element},            -- Nil_Element
+   @AdaObjDefn{A_Pragma},                  -- Asis.Elements
+   @AdaObjDefn{A_Defining_Name},           -- Asis.Declarations
+   @AdaObjDefn{A_Declaration},             -- Asis.Declarations
+   @AdaObjDefn{A_Definition},              -- Asis.Definitions
+   @AdaObjDefn{An_Expression},             -- Asis.Expressions
+   @AdaObjDefn{An_Association},            -- Asis.Expressions
+   @AdaObjDefn{A_Statement},               -- Asis.Statements
+   @AdaObjDefn{A_Path},                    -- Asis.Statements
+   @AdaObjDefn{A_Clause},                  -- Asis.Clauses
+   @AdaObjDefn{An_Exception_Handler});     -- Asis.Statements
+@end{Example}
+@ChgAdded{Version=[1],Text=[The comments list the ASIS package with queries for
+each kind.]}
+@end{DescribeCode}
+
 
 @LabeledSubClause{type Pragma_Kinds}
 
-Pragma_Kinds - classifications for pragmas
-Literals                          -- Reference Manual
+@ChgDeleted{Version=[1],Text=[Pragma_Kinds - classifications for pragmas
+Literals                          -- Reference Manual]}@Comment{Moved below}
 
+@begin{DescribeCode}
 @begin{Example}
-  @key[type] Pragma_Kinds is (
+@key[type] @AdaTypeDefn{Pragma_Kinds} @key[is] (
 
-    Not_A_Pragma,                     -- An unexpected element
-    An_All_Calls_Remote_Pragma,       -- E.2.3(5)
-    An_Asynchronous_Pragma,           -- E.4.1(3)
-    An_Atomic_Pragma,                 -- C.6(3)
-    An_Atomic_Components_Pragma,      -- C.6(5)
-    An_Attach_Handler_Pragma,         -- C.3.1(4)
-    A_Controlled_Pragma,              -- 13.11.3(3)
-    A_Convention_Pragma,              -- B.1(7), M.1(5)
-    A_Discard_Names_Pragma,           -- C.5(3)
-    An_Elaborate_Pragma,              -- 10.2.1(20)
-    An_Elaborate_All_Pragma,          -- 10.2.1(21)
-    An_Elaborate_Body_Pragma,         -- 10.2.1(22)
-    An_Export_Pragma,                 -- B.1(5), M.1(5)
-    An_Import_Pragma,                 -- B.1(6), M.1(5)
-    An_Inline_Pragma,                 -- 6.3.2(3)
-    An_Inspection_Point_Pragma,       -- H.3.2(3)
-    An_Interrupt_Handler_Pragma,      -- C.3.1(2)
-    An_Interrupt_Priority_Pragma,     -- D.1(5)
-    A_Linker_Options_Pragma,          -- B.1(8)
-    A_List_Pragma,                    -- 2.8(21)
-    A_Locking_Policy_Pragma,          -- D.3(3)
-    A_Normalize_Scalars_Pragma,       -- H.1(3)
-    An_Optimize_Pragma,               -- 2.8(23)
-    A_Pack_Pragma,                    -- 13.2(3)
-    A_Page_Pragma,                    -- 2.8(22)
-    A_Preelaborate_Pragma,            -- 10.2.1(3)
-    A_Priority_Pragma,                -- D.1(3)
-    A_Pure_Pragma,                    -- 10.2.1(14)
-    A_Queuing_Policy_Pragma,          -- D.4(3)
-    A_Remote_Call_Interface_Pragma,   -- E.2.3(3)
-    A_Remote_Types_Pragma,            -- E.2.2(3)
-    A_Restrictions_Pragma,            -- 13.12(3)
-    A_Reviewable_Pragma,              -- H.3.1(3)
-    A_Shared_Passive_Pragma,          -- E.2.1(3)
-    A_Storage_Size_Pragma,            -- 13.3(63)
-    A_Suppress_Pragma,                -- 11.5(4)
-    A_Task_Dispatching_Policy_Pragma, -- D.2.2(2)
-    A_Volatile_Pragma,                -- C.6(4)
-    A_Volatile_Components_Pragma,     -- C.6(6)
+   @AdaObjDefn{Not_A_Pragma},                     -- An unexpected element
+   @AdaObjDefn{An_All_Calls_Remote_Pragma},       -- E.2.3(5)
+   @AdaObjDefn{An_Asynchronous_Pragma},           -- E.4.1(3)
+   @AdaObjDefn{An_Atomic_Pragma},                 -- C.6(3)
+   @AdaObjDefn{An_Atomic_Components_Pragma},      -- C.6(5)
+   @AdaObjDefn{An_Attach_Handler_Pragma},         -- C.3.1(4)
+   @AdaObjDefn{A_Controlled_Pragma},              -- 13.11.3(3)
+   @AdaObjDefn{A_Convention_Pragma},              -- B.1(7)}, M.1(5)
+   @AdaObjDefn{A_Discard_Names_Pragma},           -- C.5(3)
+   @AdaObjDefn{An_Elaborate_Pragma},              -- 10.2.1(20)
+   @AdaObjDefn{An_Elaborate_All_Pragma},          -- 10.2.1(21)
+   @AdaObjDefn{An_Elaborate_Body_Pragma},         -- 10.2.1(22)
+   @AdaObjDefn{An_Export_Pragma},                 -- B.1(5)}, M.1(5)
+   @AdaObjDefn{An_Import_Pragma},                 -- B.1(6)}, M.1(5)
+   @AdaObjDefn{An_Inline_Pragma},                 -- 6.3.2(3)
+   @AdaObjDefn{An_Inspection_Point_Pragma},       -- H.3.2(3)
+   @AdaObjDefn{An_Interrupt_Handler_Pragma},      -- C.3.1(2)
+   @AdaObjDefn{An_Interrupt_Priority_Pragma},     -- D.1(5)
+   @AdaObjDefn{A_Linker_Options_Pragma},          -- B.1(8)
+   @AdaObjDefn{A_List_Pragma},                    -- 2.8(21)
+   @AdaObjDefn{A_Locking_Policy_Pragma},          -- D.3(3)
+   @AdaObjDefn{A_Normalize_Scalars_Pragma},       -- H.1(3)
+   @AdaObjDefn{An_Optimize_Pragma},               -- 2.8(23)
+   @AdaObjDefn{A_Pack_Pragma},                    -- 13.2(3)
+   @AdaObjDefn{A_Page_Pragma},                    -- 2.8(22)
+   @AdaObjDefn{A_Preelaborate_Pragma},            -- 10.2.1(3)
+   @AdaObjDefn{A_Priority_Pragma},                -- D.1(3)
+   @AdaObjDefn{A_Pure_Pragma},                    -- 10.2.1(14)
+   @AdaObjDefn{A_Queuing_Policy_Pragma},          -- D.4(3)
+   @AdaObjDefn{A_Remote_Call_Interface_Pragma},   -- E.2.3(3)
+   @AdaObjDefn{A_Remote_Types_Pragma},            -- E.2.2(3)
+   @AdaObjDefn{A_Restrictions_Pragma},            -- 13.12(3)
+   @AdaObjDefn{A_Reviewable_Pragma},              -- H.3.1(3)
+   @AdaObjDefn{A_Shared_Passive_Pragma},          -- E.2.1(3)
+   @AdaObjDefn{A_Storage_Size_Pragma},            -- 13.3(63)
+   @AdaObjDefn{A_Suppress_Pragma},                -- 11.5(4)
+   @AdaObjDefn{A_Task_Dispatching_Policy_Pragma}, -- D.2.2(2)
+   @AdaObjDefn{A_Volatile_Pragma},                -- C.6(4)
+   @AdaObjDefn{A_Volatile_Components_Pragma},     -- C.6(6)
 
-    An_Implementation_Defined_Pragma, -- 2.8(14)
+   @AdaObjDefn{An_Implementation_Defined_Pragma}, -- 2.8(14)
 
-    An_Unknown_Pragma);               -- Unknown to ASIS
+   @AdaObjDefn{An_Unknown_Pragma});               -- Unknown to ASIS
 @end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each pragma.]}
+@end{DescribeCode}
 
-@LabeledSubClause{type Defining_Name_Kinds }
+
+@LabeledSubClause{type Defining_Name_Kinds}
 
 Defining_Name_Kinds - names defined by declarations and specifications.
 Literals                                   -- Reference Manual
@@ -519,38 +572,38 @@ The following Declaration_Kinds subtypes are not used by ASIS but are
 provided for the convenience of the ASIS implementor:
 
 @begin{Example}
-  subtype A_Type_Declaration is Declaration_Kinds range
+  @key[subtype] @AdaSubtypeDefn{Name=[A_Type_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
               An_Ordinary_Type_Declaration .. A_Private_Extension_Declaration;
 
-  subtype A_Full_Type_Declaration is Declaration_Kinds range
+  @key[subtype] @AdaSubtypeDefn{Name=[A_Full_Type_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
               An_Ordinary_Type_Declaration .. A_Protected_Type_Declaration;
 
-  subtype An_Object_Declaration is Declaration_Kinds range
+  @key[subtype] @AdaSubtypeDefn{Name=[An_Object_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
               A_Variable_Declaration .. A_Single_Protected_Declaration;
 
-  subtype A_Number_Declaration is Declaration_Kinds range
+  @key[subtype] @AdaSubtypeDefn{Name=[A_Number_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
               An_Integer_Number_Declaration .. A_Real_Number_Declaration;
 
-  subtype A_Renaming_Declaration is Declaration_Kinds range
+  @key[subtype] @AdaSubtypeDefn{Name=[A_Renaming_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
               An_Object_Renaming_Declaration ..
               A_Generic_Function_Renaming_Declaration;
 
-  subtype A_Body_Stub is Declaration_Kinds range
+  @key[subtype] @AdaSubtypeDefn{Name=[A_Body_Stub],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
               A_Procedure_Body_Stub .. A_Protected_Body_Stub;
 
-  subtype A_Generic_Declaration is Declaration_Kinds range
+  @key[subtype] @AdaSubtypeDefn{Name=[A_Generic_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
               A_Generic_Procedure_Declaration .. A_Generic_Package_Declaration;
 
-  subtype A_Generic_Instantiation is Declaration_Kinds range
+  @key[subtype] @AdaSubtypeDefn{Name=[A_Generic_Instantiation],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
               A_Package_Instantiation .. A_Function_Instantiation;
 
-  subtype A_Formal_Declaration is Declaration_Kinds range
+  @key[subtype] @AdaSubtypeDefn{Name=[A_Formal_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
               A_Formal_Object_Declaration ..
               A_Formal_Package_Declaration_With_Box;
 @end{Example}
 
-@LabeledSubClause{type Trait_Kinds }
 
+@LabeledSubClause{type Trait_Kinds }
 
 Trait_Kinds provide a means of further classifying the syntactic structure
 or "trait" of certain A_Declaration and A_Definition elements.
@@ -808,10 +861,10 @@ The following Access_Type_Kinds subtypes are not used by ASIS but are
 provided for the convenience of the ASIS implementor:
 
 @begin{Example}
-  subtype Access_To_Object_Definition is Access_Type_Kinds range
+  @key[subtype] @AdaSubtypeDefn{Name=[Access_To_Object_Definition],Of=[]} @key[is] Access_Type_Kinds range
             A_Pool_Specific_Access_To_Variable .. An_Access_To_Constant;
 
-  subtype Access_To_Subprogram_Definition is Access_Type_Kinds range
+  @key[subtype] @AdaSubtypeDefn{Name=[Access_To_Subprogram_Definition],Of=[]} @key[is] Access_Type_Kinds range
             An_Access_To_Procedure .. An_Access_To_Protected_Function;
 @end{Example}
 
@@ -1278,7 +1331,7 @@ Compilation_Unit shall be an undiscriminated private type.
 @key[type] @AdaTypeDefn{Compilation_Unit_List} @key[is]
        @key[array] (List_Index @key[range] <>) @key[of] Compilation_Unit;
 
-@AdaObjDefn{Nil_Compilation_Unit_Lis}t : @key[constant] Compilation_Unit_List;
+@AdaObjDefn{Nil_Compilation_Unit_List} : @key[constant] Compilation_Unit_List;
 @end{Example}
 
 

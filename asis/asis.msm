@@ -46,6 +46,10 @@
 @Source{Name=<Environ.MSS>,SectionName=<08>,SectionNumber=[8],NewSection=[T]}
 @Source{Name=<Env-Cont.MSS>,SectionName=<09>,SectionNumber=[9],NewSection=[T]}
 @Source{Name=<CompUnit.MSS>,SectionName=<10>,SectionNumber=[10],NewSection=[T]}
+@Source{Name=<CompTime.MSS>,SectionName=<11>,SectionNumber=[11],NewSection=[T]}
+@Source{Name=<Comp-Rel.MSS>,SectionName=<12>,SectionNumber=[12],NewSection=[T]}
+@Source{Name=<Elements.MSS>,SectionName=<13>,SectionNumber=[13],NewSection=[T]}
+@Source{Name=<Iterator.MSS>,SectionName=<14>,SectionNumber=[14],NewSection=[T]}
 
 @Comment{*** Old junk
 @Source{Name=<09.MSS>,SectionName=<09>,SectionNumber=[9],NewSection=[T]}
