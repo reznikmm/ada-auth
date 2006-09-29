@@ -1,6 +1,6 @@
 @Part(env-cont, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/env-cont.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/09/24 02:39:33 $}
+@comment{$Revision: 1.2 $ $Date: 2006/09/28 05:11:59 $}
 
 
 @LabeledSection{package Asis.Ada_Environments.Containers}
@@ -50,14 +50,13 @@ one ASIS Container whose Name is that of the Asis.Context Name.
 
 @begin{DescribeCode}
 @begin{Example}
-@key[type] Container_List @key[is]
+@key[type] @AdaTypeDefn{Container_List} @key[is]
    @key[array] (List_Index @key[range] <>) @key[of] Container;
 @end{Example}
 @end{DescribeCode}
 
 
 @LabeledClause{function Defining_Containers}
-
 
 @begin{DescribeCode}
 @begin{Example}
@@ -83,10 +82,13 @@ Raises ASIS_Inappropriate_Context if The_Context is not open.
 @LabeledClause{function Enclosing_Context (container)}
 
 
-    @b{function Enclosing_Context (The_Container : @key[in] Container)
-       return Asis.Context; }
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Enclosing_Context} (The_Container : @key[in] Container)
+    @key[return] Asis.Context;
+@end{Example}
 
-The_Container - Specifies the Container to query
+The_Container @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Container to query
 
 Returns the Context value associated with the Container.
 
@@ -98,14 +100,18 @@ Because Context is limited private, this function is only intended to be
 used to supply a Context parameter for other queries.
 
 Raises ASIS_Inappropriate_Container if the Container is a Nil_Container.
+@end{DescribeCode}
+
 
 @LabeledClause{function Library_Unit_Declarations (container)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Library_Unit_Declarations} (The_Container : @key[in] Container)
+                                   @key[return] Asis.Compilation_Unit_List;
+@end{Example}
 
-    @b{function Library_Unit_Declarations (The_Container : @key[in] Container)
-                                       return Asis.Compilation_Unit_List; }
-
-The_Container - Specifies the Container to query
+The_Container @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Container to query
 
 Returns a list of all library_unit_declaration and
 library_unit_renaming_declaration  elements contained in the Container. Individual
@@ -125,15 +131,18 @@ Is_Identical to the Container.
 
 Raises ASIS_Inappropriate_Context if the Enclosing_Context(Container)
 is not open.
+@end{DescribeCode}
 
 
 @LabeledClause{function Compilation_Unit_Bodies (container)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Compilation_Unit_Bodies} (The_Container : @key[in] Container)
+                                 @key[return] Asis.Compilation_Unit_List;
+@end{Example}
 
-    @b{function Compilation_Unit_Bodies (The_Container : @key[in] Container)
-                                     return Asis.Compilation_Unit_List; }
-
-The_Container - Specifies the Container to query
+The_Container @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Container to query
 
 Returns a list of all library_unit_body and subunit elements contained in the
 Container. Individual units will appear only once in an order that is not
@@ -150,14 +159,18 @@ Is_Identical to the Container.
 
 Raises ASIS_Inappropriate_Context if the Enclosing_Context(Container)
 is not open.
+@end{DescribeCode}
+
 
 @LabeledClause{function Compilation_Units (container)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Compilation_Units} (The_Container : @key[in] Container)
+                           @key[return] Asis.Compilation_Unit_List;
+@end{Example}
 
-    @b{function Compilation_Units (The_Container : @key[in] Container)
-                               return Asis.Compilation_Unit_List; }
-
-The_Container - Specifies the Container to query
+The_Container @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Container to query
 
 Returns a list of all compilation units contained in the Container.
 Individual units will appear only once in an order that is not defined.
@@ -173,43 +186,56 @@ Is_Identical to the Container.
 
 Raises ASIS_Inappropriate_Context if the Enclosing_Context(Container)
 is not open.
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Equal (containers)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Equal} (Left  : @key[in] Container;
+                   Right : @key[in] Container) @key[return] Boolean;
+@end{Example}
 
-    @b{function Is_Equal (Left  : @key[in] Container;
-                       Right : @key[in] Container) return Boolean; }
-
-Left    - Specifies the first Container
-Right   - Specifies the second Container
+Left @chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the first Container
+Right @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the second Container
 
 Returns True if Left and Right designate Container values that contain the
 same set of compilation units. The Container values may have been defined
 from different Context values.
+@end{DescribeCode}
 
 
 @LabeledClause{function Is_Identical (containers)}
 
 
-    @b{function Is_Identical (Left  : @key[in] Container;
-                           Right : @key[in] Container) return Boolean; }
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Identical} (Left  : @key[in] Container;
+                       Right : @key[in] Container) @key[return] Boolean;
+@end{Example}
 
-Left    - Specifies the first Container
-Right   - Specifies the second Container
+Left @chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the first Container
+Right @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the second Container
 
 Returns True if Is_Equal(Left, Right) and the Container values have been
 defined from Is_Equal Context values.
+@end{DescribeCode}
 
 
 @LabeledClause{function Name (container)}
 
-    @b{function Name (The_Container : @key[in] Container) return Wide_String; }
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Name} (The_Container : @key[in] Container) @key[return] Wide_String;
+@end{Example}
 
-The_Container - Specifies the Container to name
+The_Container@chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Container to name
 
 Returns the Name value associated with the Container.
 
 Returns a null string if the Container is a Nil_Container.
+@end{DescribeCode}
 
 @begin{Example}
 @ChgDeleted{Version=[1],Text=[@key[private]]}

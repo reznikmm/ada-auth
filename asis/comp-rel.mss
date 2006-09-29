@@ -1,6 +1,6 @@
 @Part(comp-rel, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/comp-rel.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/09/27 00:17:20 $}
+@comment{$Revision: 1.2 $ $Date: 2006/09/28 05:11:58 $}
 
 
 @LabeledSection{package Asis.Compilation_Units.Relations}
@@ -37,6 +37,7 @@ ordered lists.
       Circular     : Asis.Compilation_Unit_List (1 .. Circular_Length);
    @key[end record];
 @end{Example}
+@end{DescribeCode}
 
 The following describes the semantics of the unit lists returned by the
 queries Semantic_Dependence_Order and Elaboration_Order:
@@ -86,7 +87,7 @@ which they semantically depend.
    if D is replaced, the inconsistent list contains six units with the
    three pairs:
 @begin{Example}
-                   DC  CB  BA
+             DC  CB  BA
 @end{Example}
 
    @noprefix@;The list indicates that units C, B, and A are inconsistent (the rightmost
@@ -103,7 +104,7 @@ which they semantically depend.
 @end{InnerItemize}
 
 @begin{ImplPerm}
-@begin{InnerInnerItemize}
+@begin{InnerItemize}
 @noprefix@;An implementation is allowed to use Nil_Compilation_Unit value for
 the first unit of each pair if it cannot determine the supporting unit
 causing the inconsistent semantic dependence.
@@ -111,17 +112,17 @@ causing the inconsistent semantic dependence.
 @leading@noprefix@;For the above example, the list returned is:
 
 @begin{Example}
-                  DC DB DA CB CA BA
+            DC DB DA CB CA BA
 @end{Example}
 
 @leading@noprefix@;This list reports all dependencies:
 
 @begin{Example}
-                  D withed by C withed by B withed by A => DC DB DA
-                              C withed by B withed by A => CB CA
-                                          B withed by A => BA
+            D withed by C withed by B withed by A => DC DB DA
+                        C withed by B withed by A => CB CA
+                                    B withed by A => BA
 @end{Example}
-@end{InnerInnerItemize}
+@end{InnerItemize}
 @end{ImplPerm}
 
 @leading@;Missing dependence list:
@@ -136,15 +137,13 @@ causing the inconsistent semantic dependence.
    @noprefix@;Given a list containing the units:  AB AC
 
 @begin{Example}
-                  If Unit_Kind(B) = A_Nonexistent_Declaration and
-                     Unit_Kind(C) = A_Nonexistent_Body then
+            If Unit_Kind(B) = A_Nonexistent_Declaration and
+               Unit_Kind(C) = A_Nonexistent_Body then
 
-                  It can be deduced that:
-                     A is missing a needed supporter B (A depends semantically
-                     on B).
-                     A is missing a needed related unit body C (depending on
-                     the kind for A, C can be A's required body or some subunit
-                     of A).
+            It can be deduced that:
+               A is missing a needed supporter B (A depends semantically on B).
+               A is missing a needed related unit body C (depending on
+               the kind for A, C can be A's required body or some subunit of A).
 @end{Example}
 
    @noprefix@;A unit is reported as missing only if the Post-Compilation Rules of Ada
@@ -172,21 +171,18 @@ causing the inconsistent semantic dependence.
    @noprefix@;Given a list containing the units:  AC CB BA DG GF FE ED
 
 @begin{Example}
-                 It can be determined that there are two sets of circularly
-                 dependent units:
-                     {A, B, C} and {D, E, F, G}
+           It can be determined that there are two sets of circularly
+           dependent units:
+               {A, B, C} and {D, E, F, G}
 
-                 The dependencies are:  A depends on B, B depends on C,
-                        C depends on A.
-                        D depends on E, E depends on F, F depends on G,
-                        G depends on D.
+           The dependencies are:  A depends on B, B depends on C, C depends on A.
+                  D depends on E, E depends on F, F depends on G, G depends on D.
 @end{Example}
 
    @noprefix@;Each circle of dependence is reported exactly once. It is not reported
    once for each unit in the circle.
 @end{InnerItemize}
 @end{Itemize}
-@end{DescribeCode}
 
 
 @LabeledClause{constant Nil_Relationship}
@@ -194,7 +190,7 @@ causing the inconsistent semantic dependence.
 
 @begin{DescribeCode}
 @begin{Example}
-@AdaObjDefn{Nil_Relationship} : constant Relationship :=
+@AdaObjDefn{Nil_Relationship} : @key[constant] Relationship :=
         (Consistent_Length   => 0,
          Inconsistent_Length => 0,
          Missing_Length      => 0,

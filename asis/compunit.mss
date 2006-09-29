@@ -1,6 +1,6 @@
 @Part(compunit, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/compunit.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/09/24 02:39:33 $}
+@comment{$Revision: 1.2 $ $Date: 2006/09/28 05:11:58 $}
 
 
 @LabeledSection{package Asis.Compilation_Units}
@@ -88,7 +88,7 @@ All Unit_Kinds are expected.
 @begin{DescribeCode}
 @begin{Example}
 @key[function] @AdaSubDefn{Unit_Origin} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-           @key[return] Asis.Unit_Origins; }
+           @key[return] Asis.Unit_Origins;
 @end{Example}
 
 Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the compilation unit to query
@@ -138,7 +138,7 @@ Nil_Compilation_Unit.
 @begin{DescribeCode}
 @begin{Example}
 @key[function] @AdaSubDefn{Enclosing_Container} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-           @key[return] Asis.Ada_Environments.Containers.Container; }
+           @key[return] Asis.Ada_Environments.Containers.Container;
 @end{Example}
 
 Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the unit whose Container is required.
@@ -157,7 +157,7 @@ Nil_Compilation_Unit.
 
     @key[function] @AdaSubDefn{Library_Unit_Declaration} (Name        : @key[in] Wide_String;
                                        The_Context : @key[in] Asis.Context)
-                                       @key[return] Asis.Compilation_Unit; }
+                                       @key[return] Asis.Compilation_Unit;
 
 Name       @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the defining program unit name
 The_Context@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
@@ -181,7 +181,7 @@ to the Context. Never returns a unit with a nonexistent unit kind.
 
     @key[function] @AdaSubDefn{Compilation_Unit_Body} (Name        : @key[in] Wide_String;
                                     The_Context : @key[in] Asis.Context)
-                                    @key[return] Asis.Compilation_Unit; }
+                                    @key[return] Asis.Compilation_Unit;
 
 Name       @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the defining_program_unit_name
 The_Context@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
@@ -198,7 +198,7 @@ to The_Context. Never returns a unit with a nonexistent unit kind.
 
 
     @key[function] @AdaSubDefn{Library_Unit_Declarations} (The_Context : @key[in] Asis.Context)
-                                       @key[return] Asis.Compilation_Unit_List; }
+                                       @key[return] Asis.Compilation_Unit_List;
 
 The_Context@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
 
@@ -222,7 +222,7 @@ Is_Identical to The_Context.
 
 
     @key[function] @AdaSubDefn{Compilation_Unit_Bodies} (The_Context : @key[in] Asis.Context)
-                                     @key[return] Asis.Compilation_Unit_List; }
+                                     @key[return] Asis.Compilation_Unit_List;
 
 The_Context@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
 
@@ -244,7 +244,7 @@ Is_Identical to The_Context.
 
 
     @key[function] @AdaSubDefn{Compilation_Units} (The_Context : @key[in] Asis.Context)
-                               @key[return] Asis.Compilation_Unit_List; }
+                               @key[return] Asis.Compilation_Unit_List;
 
 The_Context@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
 
@@ -268,7 +268,7 @@ Is_Identical to The_Context.
 
     @key[function] @AdaSubDefn{Corresponding_Children} (Library_Unit : @key[in] Asis.Compilation_Unit;
                                      The_Context  : @key[in] Asis.Context)
-                      @key[return] Asis.Compilation_Unit_List; }
+                      @key[return] Asis.Compilation_Unit_List;
 
 Library_Unit@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the library unit whose children are desired
 The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
@@ -342,7 +342,7 @@ the Corresponding_Body query applied to the declaration is returned.
     @key[function] @AdaSubDefn{Corresponding_Parent_Declaration}
                 (Library_Unit : @key[in] Asis.Compilation_Unit;
                  The_Context  : @key[in] Asis.Context)
-                @key[return] Asis.Compilation_Unit; }
+                @key[return] Asis.Compilation_Unit;
 
 Library_Unit@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit whose parent is desired
 The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
@@ -496,7 +496,7 @@ starting with An_Unknown_Unit. Some implementors may choose to simply
 return the An_Unknown_Unit argument in all cases.
 
 
-@LabeledClause{function Corresponding_Body}
+@LabeledClause{function Corresponding_Body (unit)}
 
 
     @key[function] @AdaSubDefn{Corresponding_Body}
@@ -632,7 +632,7 @@ Two nonexistent units are Is_Equal if they have the same Name and Unit_Kind.
 
 
     @key[function] @AdaSubDefn{Is_Identical} (Left  : @key[in] Asis.Compilation_Unit;
-                           Right : @key[in] Asis.Compilation_Unit) @key[return] Boolean; }
+                           Right : @key[in] Asis.Compilation_Unit) @key[return] Boolean;
 
 Left   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the first unit to compare
 Right  @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the second unit to compare
@@ -650,7 +650,7 @@ Unique_Name and the same Enclosing_Context.
 
 
     @key[function] @AdaSubDefn{Unit_Full_Name} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                            @key[return] Wide_String; }
+                            @key[return] Wide_String;
 
 Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit whose name is desired
 
@@ -673,7 +673,7 @@ All Unit_Kinds are appropriate.
 
     @key[function] @AdaSubDefn{Unique_Name}
           (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                @key[return] Wide_String; }
+                @key[return] Wide_String;
 
 Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit whose name is desired
 
@@ -726,7 +726,7 @@ All Unit_Kinds are expected.
 
 
     @key[function] @AdaSubDefn{Is_Body_Required} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                                 @key[return] Boolean; }
+                                 @key[return] Boolean;
 
 Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to test
 
@@ -739,7 +739,7 @@ All Unit_Kinds are expected.
 
 
      @key[function] @AdaSubDefn{Text_Name} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                       @key[return] Wide_String; }
+                       @key[return] Wide_String;
 
 Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit whose text name is desired
 
@@ -758,7 +758,7 @@ All Unit_Kinds are appropriate.
 
 
     @key[function] @AdaSubDefn{Text_Form} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                            @key[return] Wide_String; }
+                            @key[return] Wide_String;
 
 Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit whose text form is desired
 
@@ -778,7 +778,7 @@ All Unit_Kinds are appropriate.
 
 
       @key[function] @AdaSubDefn{Object_Name} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                              @key[return] Wide_String; }
+                              @key[return] Wide_String;
 
 Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit whose object name is desired
 
@@ -793,7 +793,7 @@ All Unit_Kinds are appropriate.
 
 
     @key[function] @AdaSubDefn{Object_Form} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                              @key[return] Wide_String; }
+                              @key[return] Wide_String;
 
 Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit whose object form is desired
 
@@ -811,7 +811,7 @@ All Unit_Kinds are appropriate.
 
     @key[function] @AdaSubDefn{Compilation_Command_Line_Options}
                 (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                @key[return] Wide_String; }
+                @key[return] Wide_String;
 
 Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to query
 
@@ -825,7 +825,7 @@ All Unit_Kinds are appropriate.
 
 
     @key[function] @AdaSubDefn{Has_Attribute} (Compilation_Unit : @key[in] Asis.Compilation_Unit;
-                            Attribute        : @key[in] Wide_String) @key[return] Boolean; }
+                            Attribute        : @key[in] Wide_String) @key[return] Boolean;
 
 Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to query
 Attribute          @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the name of the attribute to query
@@ -842,7 +842,7 @@ Results of this query may vary across ASIS implementations.
 @LabeledClause{function Attribute_Value_Delimiter}
 
 
-    @key[function] @AdaSubDefn{Attribute_Value_Delimiter} @key[return] Wide_String; }
+    @key[function] @AdaSubDefn{Attribute_Value_Delimiter} @key[return] Wide_String;
 
 Returns the string used as a delimiter separating individual values
 within the string Attribute_Values of a compilation unit.
@@ -976,7 +976,7 @@ is not a subunit is returned.
 
 
      @key[function] @AdaSubDefn{Debug_Image} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                          @key[return] Wide_String; }
+                          @key[return] Wide_String;
 
 Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a unit to convert
 

@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2006/09/26 05:12:35 $}
+@comment{$Revision: 1.7 $ $Date: 2006/09/28 05:12:00 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -432,7 +432,7 @@ an interface specification in the Interface Definition Language (IDL). IDL is
 very different from most computer languages; when IDL is compiled, the
 interface specification is produced in either Ada, Java, C++, or Smalltalk. In
 addition, the necessary artifacts are produced to register the client or server
-interface with the ORB. }
+interface with the ORB.
 
 
 @LabeledSubSubClause{Distributed traditional approach (permission 3)}

@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/concepts.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/09/27 00:17:20 $}
+@comment{$Revision: 1.3 $ $Date: 2006/09/28 05:11:59 $}
 
 
 @LabeledSection{ASIS technical concepts}
@@ -328,7 +328,7 @@ the last line number in which the text of the element resides.
 Asis.Text.Element_Span (@RefSecNum{function Element_Span}) @en Returns the span
 for the element.
 
-Asis.Text.Lines (@RefSecNum{function Lines}) @en Returns a list of lines for
+Asis.Text.Lines (@RefSecNum{function Lines (element)}) @en Returns a list of lines for
 the element.
 
 Asis.Text.Element_Image (@RefSecNum{function Element_Image}) @en Returns the
@@ -340,10 +340,11 @@ for an object of type Asis.Element.
 Asis.Ids.Create_Id (@RefSecNum{function Create_Id}) @en Returns a unique Id
 value corresponding to this element.
 
-Asis.Elements.Is_Nil (@RefSecNum{function Is_Nil}) @en Determines whether an
-element is nil. Some functions return a Nil_Element when a potential element
-does not exist in the program. This is true for the Initialization_Expression
-function above when no initial value is present in the declaration.
+Asis.Elements.Is_Nil (@RefSecNum{function Is_Nil (element)}) @en Determines
+whether an element is nil. Some functions return a Nil_Element when a potential
+element does not exist in the program. This is true for the
+Initialization_Expression function above when no initial value is present in
+the declaration.
 
 @end{Itemize}
 
@@ -502,7 +503,7 @@ operate on the A_Clause element (see Clause @RefSecNum{package Asis.Clauses}).
 
 @b{Asis.Declarations} @en This child package encapsulates a set of queries that
 operate on A_Defining_Name and A_Declaration elements (see Clause
-@RefSecNum{package Declarations}).
+@RefSecNum{package Asis.Declarations}).
 
 @b{Asis.Definitions} @en This child package encapsulates a set of queries that
 operate on A_Definition elements (see Clause @RefSecNum{package Asis.Definitions}).

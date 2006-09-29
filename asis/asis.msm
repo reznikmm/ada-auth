@@ -50,35 +50,18 @@
 @Source{Name=<Comp-Rel.MSS>,SectionName=<12>,SectionNumber=[12],NewSection=[T]}
 @Source{Name=<Elements.MSS>,SectionName=<13>,SectionNumber=[13],NewSection=[T]}
 @Source{Name=<Iterator.MSS>,SectionName=<14>,SectionNumber=[14],NewSection=[T]}
-
-@Comment{*** Old junk
-@Source{Name=<09.MSS>,SectionName=<09>,SectionNumber=[9],NewSection=[T]}
-@Source{Name=<10.MSS>,SectionName=<10>,SectionNumber=[10],NewSection=[T]}
-@Source{Name=<11.MSS>,SectionName=<11>,SectionNumber=[11],NewSection=[T]}
-@Comment{Now, the "Standard Libraries" separator page}
-@Source{Name=<LIBRARY.MSS>,SectionName=<Lib>,SectionNumber=[0],NewSection=[T]}
-@Comment{Annex A; all of the files starting with "Pre_" are part of Annex A.}
-@Source{Name=<PRE.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[T]}
-@Source{Name=<PRE_Standard.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
-@Source{Name=<PRE_Ada.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
-@Source{Name=<PRE_Chars.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
-@Source{Name=<PRE_Environ.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
-@Source{Name=<PRE_Containers.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
-@Comment{Other normative annexes:}
-@Source{Name=<Interface.MSS>,SectionName=<B>,SectionNumber=[B],NewSection=[T]}
-@Source{Name=<SP.MSS>,SectionName=<C>,SectionNumber=[C],NewSection=[T]}
-@Source{Name=<RT.MSS>,SectionName=<D>,SectionNumber=[D],NewSection=[T]}
-@Source{Name=<Obsolescent.MSS>,SectionName=<J>,SectionNumber=[J],NewSection=[T]}
-@Comment{Informative annexes:}
-@Source{Name=<Attribs.MSS>,SectionName=<K>,SectionNumber=[K],NewSection=[T]}
-@Source{Name=<Pragmas.MSS>,SectionName=<L>,SectionNumber=[L],NewSection=[T]}
-@Source{Name=<Impldef.MSS>,SectionName=<M>,SectionNumber=[M],NewSection=[T]}
-@Source{Name=<Glossary.MSS>,SectionName=<N>,SectionNumber=[N],NewSection=[T]}
-@Comment{We don't use Annex O, as ISO requires skipping I and O}
-@Source{Name=<Syntax.MSS>,SectionName=<P>,SectionNumber=[P],NewSection=[T]}
-*** End old junk}
+@Source{Name=<Declarations.MSS>,SectionName=<15>,SectionNumber=[15],NewSection=[T]}
+@Source{Name=<Definitions.MSS>,SectionName=<16>,SectionNumber=[16],NewSection=[T]}
+@Source{Name=<Expressions.MSS>,SectionName=<17>,SectionNumber=[17],NewSection=[T]}
+@Source{Name=<Statements.MSS>,SectionName=<18>,SectionNumber=[18],NewSection=[T]}
+@Source{Name=<Clauses.MSS>,SectionName=<19>,SectionNumber=[19],NewSection=[T]}
+@Source{Name=<Text.MSS>,SectionName=<20>,SectionNumber=[20],NewSection=[T]}
+@Source{Name=<Ids.MSS>,SectionName=<21>,SectionNumber=[21],NewSection=[T]}
 
 @Comment{Informative annexes:}
+@Source{Name=<Glossary.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[T]}
+@Source{Name=<Examples.MSS>,SectionName=<B>,SectionNumber=[B],NewSection=[T]}
+@Source{Name=<IO-IDL.MSS>,SectionName=<C>,SectionNumber=[C],NewSection=[T]}
 @Source{Name=<Rat.MSS>,SectionName=<D>,SectionNumber=[D],NewSection=[T]}
 @Source{Name=<Entities.MSS>,SectionName=<E>,SectionNumber=[E],NewSection=[T]}
 @Comment{We don't use Annex I, as ISO requires skipping I and O}

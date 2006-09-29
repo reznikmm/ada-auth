@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/09/27 00:17:21 $}
+@comment{$Revision: 1.2 $ $Date: 2006/09/28 05:11:59 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -69,7 +69,7 @@ A_Protected_Body_Declaration
                                     @key[return] Asis.Compilation_Unit;
 @end{Example}
 
-Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} an Element whose Compilation_Unit is desired
+Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} an Element whose Compilation_Unit is desired.
 
 Returns the Compilation_Unit that contains the given Element.
 
@@ -79,14 +79,16 @@ Raises ASIS_Inappropriate_Element if the Element is a Nil_Element.
 
 @LabeledClause{function Context_Clause_Elements}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Context_Clause_Elements}
+            (Compilation_Unit : @key[in] Asis.Compilation_Unit;
+             Include_Pragmas  : @key[in] Boolean := False)
+            @key[return] Asis.Context_Clause_List;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Context_Clause_Elements}
-                (Compilation_Unit : @key[in] Asis.Compilation_Unit;
-                 Include_Pragmas  : @key[in] Boolean := False)
-                @key[return] Asis.Context_Clause_List;
-
-Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to query
-Include_Pragmas @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} whether pragmas are to be returned
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to query.
+Include_Pragmas @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} whether pragmas are to be returned.
 
 Returns a list of with clauses, use clauses, and pragmas that explicitly
 appear in the context clause of the compilation unit, in their order of
@@ -95,20 +97,24 @@ appearance.
 Returns a Nil_Element_List if the unit has A_Nonexistent_Declaration,
 A_Nonexistent_Body, or An_Unknown_Unit Unit_Kind.
 
-@b{@b{Implementation Requirement}:}
+@begin{ImplReq}
+@begin{Itemize}
+@noprefix@;All pragma Elaborate elements for this unit will appear in this
+list. Other pragmas will appear in this list, or in the Compilation_Pragmas
+list, or both.
+@end{Itemize}
+@end{ImplReq}
 
-All pragma Elaborate elements for this unit will appear in this list. Other
-pragmas will appear in this list, or in the Compilation_Pragmas list, or
-both.
-
-@b{Implementation Permissions}
-
-Implementors are encouraged to use this list to return all pragmas whose
+@begin{ImplPerm}
+@begin{Itemize}
+@noprefix@;Implementors are encouraged to use this list to return all pragmas whose
 full effect is determined by their exact textual position. Pragmas that
 do not have placement dependencies may be returned in either list. Only
 pragmas that appear in the unit's context clause are returned
 by this query. All other pragmas, affecting the compilation of this
 unit, are available from the Compilation_Pragmas query.
+@end{Itemize}
+@end{ImplPerm}
 
 Ada predefined packages, such as package Standard, may or may not have
 context-clause elements available for processing by applications. The
@@ -117,9 +123,9 @@ The same is true for other Ada predefined packages, such as Ada.Text_Io and
 Ada.Direct_Io. The Origin query can be used to determine whether or not
 a particular unit is an Ada Predefined unit.
 
-@b{Implementation Permissions}
-
-Results of this query may vary across ASIS implementations. Some
+@begin{ImplPerm}
+@begin{Itemize}
+@noprefix@;Results of this query may vary across ASIS implementations. Some
 implementations normalize all multi-name with clauses and use clauses
 into an equivalent sequence of single-name with clause and use clauses.
 Similarly, an implementation may retain only a single reference to a name
@@ -127,24 +133,34 @@ that appeared more than once in the original context clause.
 Some implementors will return only pragma
 Elaborate elements in this list and return all other pragmas via the
 Compilation_Pragmas query.
+@end{Itemize}
+@end{ImplPerm}
 
 All Unit_Kinds are appropriate except Not_A_Unit.
 
-Returns Element_Kinds:
-     A_Pragma
-     A_Clause
+@leading@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma
+A_Clause
+@end{Display}
 
-Returns Clause_Kinds:
-     A_With_Clause
-     A_Use_Package_Clause
+@leading@;Returns Clause_Kinds:
+@begin{Display}
+A_With_Clause
+A_Use_Package_Clause
+@end{Display}
+@end{DescribeCode}
 
-@LabeledClause{function Configuration_Pragmas }
 
+@LabeledClause{function Configuration_Pragmas}
 
- @key[function] @AdaSubDefn{Configuration_Pragmas} (The_Context : @key[in] Asis.Context)
-                                 @key[return] Asis.Pragma_Element_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Configuration_Pragmas} (The_Context : @key[in] Asis.Context)
+                             @key[return] Asis.Pragma_Element_List;
+@end{Example}
 
-The_Context   @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Context to query
+The_Context @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the Context to query.
 
 Returns a list of pragmas that apply to all future compilation_unit elements
 compiled into The_Context. Pragmas returned by this query should
@@ -155,16 +171,23 @@ dependent, many pragmas have the same effect regardless of order.)
 
 Returns a Nil_Element_List if there are no such configuration pragmas.
 
-Returns Element_Kinds:
-     A_Pragma
+@leading@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma
+@end{Display}
+@end{DescribeCode}
 
-@LabeledClause{function Compilation_Pragmas }
+
+@LabeledClause{function Compilation_Pragmas}
 
 
-  @key[function] @AdaSubDefn{Compilation_Pragmas} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                                 @key[return] Asis.Pragma_Element_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Compilation_Pragmas} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
+                             @key[return] Asis.Pragma_Element_List;
+@end{Example}
 
-Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the unit to query
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the unit to query.
 
 Returns a list of pragmas that apply to the compilation of the unit.
 To the extent that order is meaningful, the pragmas should be in
@@ -173,11 +196,13 @@ dependent, many pragmas have the same effect regardless of order.)
 
 There are two sources for the pragmas that appear in this list:
 
-- Program unit pragmas appearing at the place of a compilation_unit.
-  See Reference Manual 10.1.5(4).
+@begin{Itemize}
+Program unit pragmas appearing at the place of a compilation_unit.
+See Reference Manual 10.1.5(4).
 
-- Configuration pragmas appearing before the first
-  compilation_unit of a compilation. See Reference Manual 10.1.5(8).
+Configuration pragmas appearing before the first
+compilation_unit of a compilation. See Reference Manual 10.1.5(8).
+@end{Itemize}
 
 This query does not return Elaborate pragmas from the unit context
 clause of the compilation unit; they do not apply to the compilation,
@@ -200,108 +225,137 @@ is true for other Ada predefined packages, such as Ada.Text_Io and
 Ada.Direct_Io. The Origin query can be used to determine whether or
 not a particular unit is an Ada Predefined unit.
 
-Returns a Nil_Element_List if the compilation unit:
+@leading@;Returns a Nil_Element_List if the compilation unit:
 
-- has no such applicable pragmas.
+@begin{Itemize}
+has no such applicable pragmas.
 
-- is an An_Unknown_Unit, A_Nonexistent_Declaration, or A_Nonexistent_Body.
+is an An_Unknown_Unit, A_Nonexistent_Declaration, or A_Nonexistent_Body.
+@end{Itemize}
 
 All Unit_Kinds are appropriate except Not_A_Unit.
 
-Returns Element_Kinds:
-     A_Pragma
+@leading@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma
+@end{Display}
+@end{DescribeCode}
+
+@Comment{This does not belong here at all.}
+
+@begin{Example}
+@ChgDeleted{Version=[1],Text=[Element_Kinds Hierarchy]}
+
+@ChgDeleted{Version=[1],Text=[   Element_Kinds Value      Subordinate Kinds
+Key: Read "->" as "can be further categorized by its"]}
+
+@ChgDeleted{Version=[1],Text=[   A_Pragma            -> Pragma_Kinds]}
+
+@ChgDeleted{Version=[1],Text=[   A_Defining_Name     -> Defining_Name_Kinds
+                                 -> Operator_Kinds]}
+
+@ChgDeleted{Version=[1],Text=[   A_Declaration       -> Declaration_Kinds
+                                 -> Declaration_Origin
+                                 -> Mode_Kinds
+                                 -> Subprogram_Default_Kinds]}
+
+@ChgDeleted{Version=[1],Text=[   A_Definition        -> Definition_Kinds
+                                 -> Trait_Kinds
+                                 -> Type_Kinds
+                                 -> Formal_Type_Kinds
+                                 -> Access_Type_Kinds
+                                 -> Root_Type_Kinds
+                                 -> Constraint_Kinds
+                                 -> Discrete_Range_Kinds]}
+
+@ChgDeleted{Version=[1],Text=[   An_Expression       -> Expression_Kinds
+                                 -> Operator_Kinds
+                                 -> Attribute_Kinds]}
+
+@ChgDeleted{Version=[1],Text=[   An_Association      -> Association_Kinds]}
+
+@ChgDeleted{Version=[1],Text=[   A_Statement         -> Statement_Kinds]}
+
+@ChgDeleted{Version=[1],Text=[   A_Path              -> Path_Kinds]}
+
+@ChgDeleted{Version=[1],Text=[   A_Clause            -> Clause_Kinds
+                                 -> Representation_Clause_Kinds]}
+
+@ChgDeleted{Version=[1],Text=[   An_Exception_Handler]}
+@end{Example}
 
 
-
-Element_Kinds Hierarchy
-
-       Element_Kinds Value      Subordinate Kinds
-  Key: Read "->" as "can be further categorized by its"
-
-       A_Pragma              -> Pragma_Kinds
-
-       A_Defining_Name       -> Defining_Name_Kinds
-                                        -> Operator_Kinds
-
-       A_Declaration         -> Declaration_Kinds
-                                        -> Declaration_Origin
-                                        -> Mode_Kinds
-                                        -> Subprogram_Default_Kinds
-
-       A_Definition          -> Definition_Kinds
-                                        -> Trait_Kinds
-                                        -> Type_Kinds
-                                        -> Formal_Type_Kinds
-                                        -> Access_Type_Kinds
-                                        -> Root_Type_Kinds
-                                        -> Constraint_Kinds
-                                        -> Discrete_Range_Kinds
-
-       An_Expression         -> Expression_Kinds
-                                        -> Operator_Kinds
-                                        -> Attribute_Kinds
-
-       An_Association        -> Association_Kinds
-
-       A_Statement           -> Statement_Kinds
-
-       A_Path                -> Path_Kinds
-
-       A_Clause              -> Clause_Kinds
-                                        -> Representation_Clause_Kinds
-
-       An_Exception_Handler
-
-@LabeledClause{function Element_Kind }
+@LabeledClause{function Element_Kind}
 
 
-  @key[function] @AdaSubDefn{Element_Kind} (Element : @key[in] Asis.Element)
-                           @key[return] Asis.Element_Kinds;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Element_Kind} (Element : @key[in] Asis.Element)
+                       @key[return] Asis.Element_Kinds;
+@end{Example}
 
-Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query
+Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
+
+@ChgAdded{Version=[1],Text=[The hierarchy of Element_Kinds is shown in
+@RefSecNum{type Element_Kinds}.]}
 
 Returns the Element_Kinds value of Element.
 Returns Not_An_Element for a Nil_Element.
 
 All element kinds are expected.
+@end{DescribeCode}
 
-@LabeledClause{function Pragma_Kind }
 
-  @key[function] @AdaSubDefn{Pragma_Kind} (Pragma_Element : @key[in] Asis.Pragma_Element)
-                         @key[return] Asis.Pragma_Kinds;
+@LabeledClause{function Pragma_Kind}
 
-Pragma_Element @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Pragma_Kind} (Pragma_Element : @key[in] Asis.Pragma_Element)
+                     @key[return] Asis.Pragma_Kinds;
+@end{Example}
+
+Pragma_Element @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
 
 Returns the Pragma_Kinds value of Pragma_Element.
 Returns Not_A_Pragma for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-Expected Element_Kinds:
-     A_Pragma
+@leading@;Expected Element_Kinds:
+@begin{Display}
+A_Pragma
+@end{Display}
+@end{DescribeCode}
 
-@LabeledClause{function Defining_Name_Kind }
+
+@LabeledClause{function Defining_Name_Kind}
 
 
-  @key[function] @AdaSubDefn{Defining_Name_Kind} (Defining_Name : @key[in] Asis.Defining_Name)
-                                @key[return] Asis.Defining_Name_Kinds;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Defining_Name_Kind} (Defining_Name : @key[in] Asis.Defining_Name)
+                            @key[return] Asis.Defining_Name_Kinds;
+@end{Example}
 
-Defining_Name  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query
+Defining_Name @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the element to query.
 
 Returns the Defining_Name_Kinds value of the Defining_Name.
 
 Returns Not_A_Defining_Name for any unexpected element such as a
 Nil_Element, A_Clause, or A_Statement.
 
-Expected Element_Kinds:
-     A_Defining_Name
+@leading@;Expected Element_Kinds:
+@begin{Display}
+A_Defining_Name
+@end{Display}
+@end{DescribeCode}
 
-@LabeledClause{function Declaration_Kind }
 
+@LabeledClause{function Declaration_Kind}
 
   @key[function] @AdaSubDefn{Declaration_Kind} (Declaration : @key[in] Asis.Declaration)
                               @key[return] Asis.Declaration_Kinds;
 
-Declaration  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query
+Declaration  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
 
 Returns the Declaration_Kinds value of the Declaration.
 
@@ -311,13 +365,13 @@ Nil_Element, A_Definition, or A_Statement.
 Expected Element_Kinds:
      A_Declaration
 
-@LabeledClause{0	function Trait_Kind }
+@LabeledClause{function Trait_Kind}
 
 
   @key[function] @AdaSubDefn{Trait_Kind} (Element : @key[in] Asis.Element)
                         @key[return] Asis.Trait_Kinds;
 
-Element  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Element to query
+Element  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Element to query.
 
 Returns the Trait_Kinds value of the Element.
 
@@ -354,13 +408,13 @@ Expected Formal_Type_Kinds:
     A_Formal_Tagged_Private_Type_Definition
     A_Formal_Derived_Type_Definition
 
-@LabeledClause{1	function Declaration_Origin }
+@LabeledClause{function Declaration_Origin}
 
 
   @key[function] @AdaSubDefn{Declaration_Origin} (Declaration : @key[in] Asis.Declaration)
                                 @key[return] Asis.Declaration_Origins;
 
-Declaration  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Declaration to query
+Declaration  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Declaration to query.
 
 Returns the Declaration_Origins value of the Declaration.
 
@@ -370,13 +424,13 @@ Nil_Element, A_Definition, or A_Clause.
 Expected Element_Kinds:
      A_Declaration
 
-@LabeledClause{2	function Mode_Kind }
+@LabeledClause{function Mode_Kind}
 
 
   @key[function] @AdaSubDefn{Mode_Kind} (Declaration : @key[in] Asis.Declaration)
                                  @key[return] Asis.Mode_Kinds;
 
-Declaration  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query
+Declaration  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
 
 Returns the Mode_Kinds value of the Declaration.
 
@@ -389,13 +443,13 @@ Expected Declaration_Kinds:
      A_Parameter_Specification
      A_Formal_Object_Declaration
 
-@LabeledClause{3	function Default_Kind }
+@LabeledClause{function Default_Kind}
 
 
   @key[function] @AdaSubDefn{Default_Kind} (Declaration : @key[in] Asis.Generic_Formal_Parameter)
                           @key[return] Asis.Subprogram_Default_Kinds;
 
-Declaration  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query
+Declaration  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
 
 Returns the Subprogram_Default_Kinds value of the Declaration.
 
@@ -407,13 +461,13 @@ Expected Declaration_Kinds:
      A_Formal_Procedure_Declaration
 
 
-@LabeledClause{4	function Definition_Kind }
+@LabeledClause{function Definition_Kind}
 
 
   @key[function] @AdaSubDefn{Definition_Kind} (Definition : @key[in] Asis.Definition)
                              @key[return] Asis.Definition_Kinds;
 
-Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Definition to query
+Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Definition to query.
 
 Returns the Definition_Kinds value of the Definition.
 
@@ -423,13 +477,13 @@ Nil_Element, A_Statement, or A_Declaration.
 Expected Element_Kinds:
      A_Definition
 
-@LabeledClause{5	function Type_Kind }
+@LabeledClause{function Type_Kind}
 
 
   @key[function] @AdaSubDefn{Type_Kind} (Definition : @key[in] Asis.Type_Definition)
                                   @key[return] Asis.Type_Kinds;
 
-Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Type_Definition to query
+Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Type_Definition to query.
 
 Returns the Type_Kinds value of the Definition.
 
@@ -439,14 +493,14 @@ Nil_Element, A_Statement, or A_Declaration.
 Expected Definition_Kinds:
      A_Type_Definition
 
-@LabeledClause{6	function Formal_Type_Kind }
+@LabeledClause{function Formal_Type_Kind}
 
 
   @key[function] @AdaSubDefn{Formal_Type_Kind}
                  (Definition : @key[in] Asis.Formal_Type_Definition)
                   @key[return] Asis.Formal_Type_Kinds;
 
-Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Formal_Type_Definition to query
+Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Formal_Type_Definition to query.
 
 Returns the Formal_Type_Kinds value of the Definition.
 
@@ -456,14 +510,14 @@ Nil_Element, A_Statement, or A_Declaration.
 Expected Definition_Kinds:
      A_Formal_Type_Definition
 
-@LabeledClause{7	function Access_Type_Kind }
+@LabeledClause{function Access_Type_Kind}
 
 
   @key[function] @AdaSubDefn{Access_Type_Kind}
                  (Definition : @key[in] Asis.Access_Type_Definition)
                   @key[return] Asis.Access_Type_Kinds;
 
-Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Access_Type_Definition to query
+Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Access_Type_Definition to query.
 
 Returns the Access_Type_Kinds value of the Definition.
 
@@ -473,14 +527,14 @@ Nil_Element, A_Statement, or A_Declaration.
 Expected Type_Kinds:
      An_Access_Type_Definition
 
-@LabeledClause{8	function Root_Type_Kind }
+@LabeledClause{function Root_Type_Kind}
 
 
   @key[function] @AdaSubDefn{Root_Type_Kind}
                  (Definition : @key[in] Asis.Root_Type_Definition)
                   @key[return] Asis.Root_Type_Kinds;
 
-Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Root_Type_Definition to query
+Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Root_Type_Definition to query.
 
 Returns the Root_Type_Kinds value of the Definition.
 
@@ -490,14 +544,14 @@ Nil_Element, A_Statement, or A_Declaration.
 Expected Type_Kinds:
      A_Root_Type_Definition
 
-@LabeledClause{9	function Constraint_Kind }
+@LabeledClause{function Constraint_Kind}
 
 
   @key[function] @AdaSubDefn{Constraint_Kind}
                  (Definition : @key[in] Asis.Constraint)
                   @key[return] Asis.Constraint_Kinds;
 
-Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the constraint to query
+Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the constraint to query.
 
 Returns the Constraint_Kinds value of the Definition.
 
@@ -507,14 +561,14 @@ Nil_Element, A_Statement, or A_Declaration.
 Expected Definition_Kinds:
      A_Constraint
 
-@LabeledClause{0	function Discrete_Range_Kind }
+@LabeledClause{function Discrete_Range_Kind}
 
 
   @key[function] @AdaSubDefn{Discrete_Range_Kind}
                  (Definition : @key[in] Asis.Discrete_Range)
                   @key[return] Asis.Discrete_Range_Kinds;
 
-Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the discrete_range to query
+Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the discrete_range to query.
 
 Returns the Discrete_Range_Kinds value of the Definition.
 
@@ -526,13 +580,13 @@ Expected Definition_Kinds:
      A_Discrete_Range
 
 
-@LabeledClause{1	function Expression_Kind }
+@LabeledClause{function Expression_Kind}
 
 
   @key[function] @AdaSubDefn{Expression_Kind} (Expression : @key[in] Asis.Expression)
                              @key[return] Asis.Expression_Kinds;
 
-Expression  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Expression to query
+Expression  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Expression to query.
 
 Returns the Expression_Kinds value of the Expression.
 
@@ -542,13 +596,13 @@ Nil_Element, A_Statement, or A_Declaration.
 Expected Element_Kinds:
      An_Expression
 
-@LabeledClause{2	function Operator_Kind }
+@LabeledClause{function Operator_Kind}
 
 
   @key[function] @AdaSubDefn{Operator_Kind} (Element : @key[in] Asis.Element)
                            @key[return] Asis.Operator_Kinds;
 
-Element  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Element to query
+Element  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Element to query.
 
 Returns the Operator_Kinds value of the A_Defining_Name or An_Expression
 element.
@@ -562,13 +616,13 @@ Expected Defining_Name_Kinds:
 Expected Expression_Kinds:
      An_Operator_Symbol
 
-@LabeledClause{3	function Attribute_Kind }
+@LabeledClause{function Attribute_Kind}
 
 
   @key[function] @AdaSubDefn{Attribute_Kind} (Expression : @key[in] Asis.Expression)
                             @key[return] Asis.Attribute_Kinds;
 
-Expression  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Expression to query
+Expression  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Expression to query.
 
 Returns the Attribute_Kinds value of the Expression.
 
@@ -578,13 +632,13 @@ Nil_Element, A_Statement, or A_Declaration.
 Expected Expression_Kinds:
      An_Attribute_Reference
 
-@LabeledClause{4	function Association_Kind }
+@LabeledClause{function Association_Kind}
 
 
   @key[function] @AdaSubDefn{Association_Kind} (Association : @key[in] Asis.Association)
                               @key[return] Asis.Association_Kinds;
 
-Association  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Association to query
+Association  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Association to query.
 
 Returns the Association_Kinds value of the Association.
 
@@ -595,13 +649,13 @@ Nil_Element, A_Statement, or A_Declaration.
 Expected Element_Kinds:
      An_Association
 
-@LabeledClause{5	function Statement_Kind }
+@LabeledClause{function Statement_Kind}
 
 
   @key[function] @AdaSubDefn{Statement_Kind} (Statement : @key[in] Asis.Statement)
                             @key[return] Asis.Statement_Kinds;
 
-Statement  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query
+Statement  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
 
 Returns the Statement_Kinds value of the statement.
 
@@ -611,12 +665,12 @@ Nil_Element, A_Definition, or A_Declaration.
 Expected Element_Kinds:
      A_Statement
 
-@LabeledClause{6	function Path_Kind }
+@LabeledClause{function Path_Kind}
 
 
   @key[function] @AdaSubDefn{Path_Kind} (Path : @key[in] Asis.Path) @key[return] Asis.Path_Kinds;
 
-Path  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Path to query
+Path  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Path to query.
 
 Returns the Path_Kinds value of the Path.
 
@@ -626,13 +680,13 @@ Nil_Element, A_Statement, or A_Declaration.
 Expected Element_Kinds:
      A_Path
 
-@LabeledClause{7	function Clause_Kind }
+@LabeledClause{function Clause_Kind}
 
 
   @key[function] @AdaSubDefn{Clause_Kind} (Clause : @key[in] Asis.Clause)
                          @key[return] Asis.Clause_Kinds;
 
-Clause  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query
+Clause  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
 
 Returns the Clause_Kinds value of the Clause.
 
@@ -642,14 +696,14 @@ Nil_Element, A_Definition, or A_Declaration.
 Expected Element_Kinds:
      A_Clause
 
-@LabeledClause{8	function Representation_Clause_Kind }
+@LabeledClause{function Representation_Clause_Kind}
 
 
   @key[function] @AdaSubDefn{Representation_Clause_Kind}
                  (Clause : @key[in] Asis.Representation_Clause)
                   @key[return] Asis.Representation_Clause_Kinds;
 
-Clause  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query
+Clause  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
 
 Returns the Representation_Clause_Kinds value of the Clause.
 
@@ -659,21 +713,21 @@ Nil_Element, A_Definition, or A_Declaration.
 Expected Clause_Kinds:
      A_Representation_Clause
 
-@LabeledClause{9	function Is_Nil }
+@LabeledClause{function Is_Nil (element)}
 
 
   @key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Asis.Element) @key[return] Boolean;
 
-Right  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to check
+Right  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to check.
 
 Returns True if the program element is the Nil_Element.
 
-@LabeledClause{0	function Is_Nil }
+@LabeledClause{function Is_Nil (element list)}
 
 
   @key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Asis.Element_List) @key[return] Boolean;
 
-Right  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element list to check
+Right  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element list to check.
 
 Returns True if the element list has a length of zero.
 
@@ -683,8 +737,8 @@ Returns True if the element list has a length of zero.
   @key[function] @AdaSubDefn{Is_Equal} (Left  : @key[in] Asis.Element;
                        Right : @key[in] Asis.Element) @key[return] Boolean;
 
-Left   @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the left element to compare
-Right  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the right element to compare
+Left   @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the left element to compare.
+Right  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the right element to compare.
 
 Returns True if Left and Right represent the same physical element,
 from the same physical compilation unit. The two elements may or
@@ -701,8 +755,8 @@ Implies:
   @key[function] @AdaSubDefn{Is_Identical} (Left  : @key[in] Asis.Element;
                            Right : @key[in] Asis.Element) @key[return] Boolean;
 
-Left   @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the left element
-Right  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the right element
+Left   @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the left element.
+Right  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the right element.
 
 Returns True if Left and Right represent the same physical element,
 from the same physical compilation unit, from the same open ASIS
@@ -719,7 +773,7 @@ Implies:
 
   @key[function] @AdaSubDefn{Is_Part_Of_Implicit} (Element : @key[in] Asis.Element) @key[return] Boolean;
 
-Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query
+Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
 
 Returns True for any Element that is, or that forms part of, any
 implicitly declared or specified program Element structure.
@@ -791,19 +845,19 @@ language:
 
   @key[function] @AdaSubDefn{Is_Part_Of_Inherited} (Element : @key[in] Asis.Element) @key[return] Boolean;
 
-Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query
+Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
 
 Returns True for any Element that is, or that forms part of, an
 inherited primitive subprogram declaration.
 
 Returns False for any other Element including a Nil_Element.
 
-@LabeledClause{5	function Is_Part_Of_Instance }
+@LabeledClause{function Is_Part_Of_Instance}
 
 
   @key[function] @AdaSubDefn{Is_Part_Of_Instance} (Element : @key[in] Asis.Element) @key[return] Boolean;
 
-Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to test
+Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to test.
 
 Returns True if the Element is part of an implicit generic specification
 instance or an implicit generic body instance.
@@ -819,7 +873,7 @@ Returns False for a Nil_Element.
 Instantiations are not themselves Is_Part_Of_Instance unless they are
 encountered while traversing a generic instance.
 
-@LabeledClause{6	function Enclosing_Element }
+@LabeledClause{function Enclosing_Element}
 
 
   @key[function] @AdaSubDefn{Enclosing_Element} (Element : @key[in] Asis.Element) @key[return] Asis.Element;
@@ -908,7 +962,7 @@ implementation that may utilize it, can lead to an unexpected
 Nil_Element result.
 
 
-@LabeledClause{7	function Pragmas }
+@LabeledClause{function Pragmas}
 
 
   @key[function] @AdaSubDefn{Pragmas} (The_Element : @key[in] Asis.Element)
@@ -978,7 +1032,7 @@ Returns Element_Kinds:
       A_Pragma
 
 
-@LabeledClause{8	function Corresponding_Pragmas }
+@LabeledClause{function Corresponding_Pragmas}
 
 
   @key[function] @AdaSubDefn{Corresponding_Pragmas} (Element : @key[in] Asis.Element)
@@ -1007,13 +1061,13 @@ Appropriate Element_Kinds:
 Returns Element_Kinds:
      A_Pragma
 
-@LabeledClause{9	function Pragma_Name_Image }
+@LabeledClause{function Pragma_Name_Image}
 
 
   @key[function] @AdaSubDefn{Pragma_Name_Image}
             (Pragma_Element : @key[in] Asis.Pragma_Element) @key[return] Program_Text;
 
-Pragma_Element @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query
+Pragma_Element @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
 
 Returns the program text image of the simple name of the pragma.
 
@@ -1024,7 +1078,7 @@ same case as was used in the original compilation text.
 Appropriate Element_Kinds:
      A_Pragma
 
-@LabeledClause{0	function Pragma_Argument_Associations }
+@LabeledClause{function Pragma_Argument_Associations}
 
 
   @key[function] @AdaSubDefn{Pragma_Argument_Associations}

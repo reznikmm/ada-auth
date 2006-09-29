@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2006/09/27 00:17:21 $}
+@comment{$Revision: 1.6 $ $Date: 2006/09/28 05:12:01 $}
 
 @LabeledSection{package Asis}
 
@@ -378,7 +378,9 @@ These are designated within the hierarchy shown below:
 @end{Example}
 
 @begin{DescribeCode}
-@ChgDeleted{Version=[1],Text=[Element_Kinds - general element classifications
+@Chg{Version=[1],New=[Type ],Old=[]}Element_Kinds
+@Chg{Version=[1],New=[provides],Old=[@en]} general element
+classifications@Chg{Version=[1],New=[.],Old=[
 Literals                   -- ASIS package with queries for these kinds.]}@Comment{Moved below}
 
 @begin{Example}
@@ -402,7 +404,9 @@ each kind.]}
 
 @LabeledSubClause{type Pragma_Kinds}
 
-@ChgDeleted{Version=[1],Text=[Pragma_Kinds - classifications for pragmas
+@Chg{Version=[1],New=[Type ],Old=[]}Pragma_Kinds
+@Chg{Version=[1],New=[provides],Old=[@en]} classifications for
+pragmas@Chg{Version=[1],New=[.],Old=[
 Literals                          -- Reference Manual]}@Comment{Moved below}
 
 @begin{DescribeCode}
@@ -1247,55 +1251,71 @@ Literals                      -- Reference Manual
                                         -- then abort sequence_of_statements
 @end{Example}
 
-@LabeledSubClause{type Clause_Kinds }
 
-Clause_Kinds
-Literals                      -- Reference Manual    -> Subordinate Kinds
+@LabeledSubClause{type Clause_Kinds}
 
+@Chg{Version=[1],New=[Type ],Old=[]}Clause_Kinds
+@Chg{Version=[1],New=[describes kinds of clauses.],Old=[
+Literals                      -- Reference Manual    -> Subordinate Kinds]}
+
+@begin{DescribeCode}
 @begin{Example}
-  type Clause_Kinds is (
+@key[type] @AdaTypeDefn{Clause_Kinds} is (
 
-    Not_A_Clause,                 -- An unexpected element
+   @AdaObjDefn{Not_A_Clause},               -- An unexpected element
 
-    A_Use_Package_Clause,         -- 8.4
-    A_Use_Type_Clause,            -- 8.4
+   @AdaObjDefn{A_Use_Package_Clause},       -- 8.4
+   @AdaObjDefn{A_Use_Type_Clause},          -- 8.4
 
-    A_With_Clause,                -- 10.1.2
+   @AdaObjDefn{A_With_Clause},              -- 10.1.2
 
-    A_Representation_Clause,      -- 13.1     -> Representation_Clause_Kinds
-    A_Component_Clause);          -- 13.5.1
+   @AdaObjDefn{A_Representation_Clause},    -- 13.1     -> Representation_Clause_Kinds
+   @AdaObjDefn{A_Component_Clause});        -- 13.5.1
 @end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each clause, and any subordinate kinds.]}
+@end{DescribeCode}
 
-@LabeledSubClause{type Representation_Clause_Kinds }
 
-Representation_Clause_Kinds - varieties of representation clauses
-Literals                                  -- Reference Manual
+@LabeledSubClause{type Representation_Clause_Kinds}
 
+@Chg{Version=[1],New=[Type ],Old=[]}Representation_Clause_Kinds
+@Chg{Version=[1],New=[describes],Old=[@en]} varieties of representation
+clauses@Chg{Version=[1],New=[.],Old=[
+Literals                                  -- Reference Manual]}
+
+@begin{DescribeCode}
 @begin{Example}
-  type Representation_Clause_Kinds is (
+@key[type] @AdaTypeDefn{Representation_Clause_Kinds} is (
 
-    Not_A_Representation_Clause,              -- An unexpected element
+   @AdaObjDefn{Not_A_Representation_Clause},            -- An unexpected element
 
-    An_Attribute_Definition_Clause,           -- 13.3
-    An_Enumeration_Representation_Clause,     -- 13.4
-    A_Record_Representation_Clause,           -- 13.5.1
-    An_At_Clause);                            -- J.7
+   @AdaObjDefn{An_Attribute_Definition_Clause},         -- 13.3
+   @AdaObjDefn{An_Enumeration_Representation_Clause},   -- 13.4
+   @AdaObjDefn{A_Record_Representation_Clause},         -- 13.5.1
+   @AdaObjDefn{An_At_Clause});                          -- J.7
 @end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each representation clause.]}
+@end{DescribeCode}
+
 
 @LabeledClause{type Compilation_Unit}
 
-The Ada Compilation Unit abstraction:
+The Ada @i{Compilation Unit} abstraction:@Defn{Compilation Unit}
 
 The text of a program is submitted to the compiler in one or more
 compilations. Each compilation is a succession of compilation units.
 
 Compilation units are composed of three distinct parts:
 
-a) A context clause.
+@begin{Enumerate}
+A context clause.
 
-b) The declaration of a library_item or unit.
+The declaration of a library_item or unit.
 
-c) Pragmas that apply to the compilation, of which the unit is a part.
+Pragmas that apply to the compilation, of which the unit is a part.
+@end{Enumerate}
 
 The context clause contains zero or more with clauses, use clauses,
 pragma elaborates, and possibly other pragmas.
@@ -1315,24 +1335,28 @@ compilation attributes.
 
 Compilation_Unit shall be an undiscriminated private type.
 
+@begin{DescribeCode}
 @begin{Example}
-    type Compilation_Unit is private;
-    Nil_Compilation_Unit : constant Compilation_Unit;
+@key[type] @AdaTypeDefn{Compilation_Unit} @key[is private];
+@AdaObjDefn{Nil_Compilation_Unit} : @key[constant] Compilation_Unit;
 
-    function "=" (Left  : in Compilation_Unit;
-                  Right : in Compilation_Unit)
-                  Return Boolean is abstract;
+@key[function] "=" (Left  : @key[in] Compilation_Unit;
+              Right : @key[in] Compilation_Unit)
+              @key[return] Boolean @key[is abstract];
 @end{Example}
+@end{DescribeCode}
 
 
 @LabeledClause{type Compilation_Unit_List}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Compilation_Unit_List} @key[is]
        @key[array] (List_Index @key[range] <>) @key[of] Compilation_Unit;
 
 @AdaObjDefn{Nil_Compilation_Unit_List} : @key[constant] Compilation_Unit_List;
 @end{Example}
+@end{DescribeCode}
 
 
 @LabeledClause{Unit Kinds}
@@ -1347,6 +1371,7 @@ Unit_Kinds @Chg{Version=[1],New=[defines],Old=[@en]} the varieties of compilatio
 including compilations having no compilation units but consisting of
 configuration pragmas or comments.
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Unit_Kinds} @key[is] (
 
@@ -1454,12 +1479,14 @@ configuration pragmas or comments.
             A_Procedure_Body_Subunit ..
             A_Protected_Body_Subunit;
 @end{Example}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Unit_Classes}
 
 Unit_Classes @Chg{Version=[1],New=[defines],Old=[@en]} classification of public, private, body, and subunit.
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Unit_Classes} @key[is] (  -- Reference Manual 10.1.1(12), 10.1.3
 
@@ -1485,12 +1512,14 @@ Unit_Classes @Chg{Version=[1],New=[defines],Old=[@en]} classification of public,
 
    @AdaObjDefn{A_Separate_Body});         -- separate (parent_unit_name) proper_body.
 @end{Example}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Unit_Origins}
 
 Unit_Origins @Chg{Version=[1],New=[defines],Old=[@en]} classification of possible unit origination@Chg{Version=[1],New=[.],Old=[]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Unit_Origins} @key[is] (
 
@@ -1518,6 +1547,8 @@ Unit_Origins @Chg{Version=[1],New=[defines],Old=[@en]} classification of possibl
    @AdaObjDefn{An_Application_Unit}); -- Neither A_Predefined_Unit or
                          -- An_Implementation_Unit
 @end{Example}
+@end{DescribeCode}
+
 
 @LabeledSubClause{type Relation_Kinds}
 

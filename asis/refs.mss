@@ -1,7 +1,7 @@
-@Part(title, Root="asis.msm")
+@Part(refs, Root="asis.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/refs.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/07/25 04:56:43 $}
+@comment{$Revision: 1.2 $ $Date: 2006/09/28 05:12:01 $}
 
 @UnnumberedSection{Bibliography}
 
