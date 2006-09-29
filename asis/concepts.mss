@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/concepts.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2006/09/28 05:11:59 $}
+@comment{$Revision: 1.4 $ $Date: 2006/09/29 05:55:23 $}
 
 
 @LabeledSection{ASIS technical concepts}
@@ -539,7 +539,7 @@ and persistent as long as the environment is not recompiled (see Clause
 @b{Asis.Data_Decomposition} @en This optional child package encapsulates a set
 of operations to decompose data values using the ASIS type information and a
 portable data stream, representing a data value of that type (see Clause
-@RefSecNum{package Asis.Data_Decomposition}). Its child package
+@RefSecNum{package Asis.Data_Decomposition (optional)}). Its child package
 @b{Asis.Data_Decomposition.Portable_Transfer} provides support for logging and
 delogging of application data using ASIS. Internal packages of
 Asis.Data_Decomposition.Portable_Transfer include:

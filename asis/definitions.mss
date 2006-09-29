@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/09/28 05:11:59 $}
+@comment{$Revision: 1.2 $ $Date: 2006/09/29 05:55:24 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -940,7 +940,7 @@ Child Elements returned by
    function Record_Components
    function Implicit_Components
 
-@LabeledClause{function Record_Components}
+@LabeledClause{function Record_Components (definition)}
 
 
 @key[function] @AdaSubDefn{Record_Components} (Definition : @key[in] Asis.Definition;

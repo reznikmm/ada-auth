@@ -57,7 +57,8 @@
 @Source{Name=<Clauses.MSS>,SectionName=<19>,SectionNumber=[19],NewSection=[T]}
 @Source{Name=<Text.MSS>,SectionName=<20>,SectionNumber=[20],NewSection=[T]}
 @Source{Name=<Ids.MSS>,SectionName=<21>,SectionNumber=[21],NewSection=[T]}
-
+@Source{Name=<Data.MSS>,SectionName=<22>,SectionNumber=[22],NewSection=[T]}
+@Source{Name=<DataPort.MSS>,SectionName=<23>,SectionNumber=[23],NewSection=[T]}
 @Comment{Informative annexes:}
 @Source{Name=<Glossary.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[T]}
 @Source{Name=<Examples.MSS>,SectionName=<B>,SectionNumber=[B],NewSection=[T]}
