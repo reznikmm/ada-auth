@@ -2761,7 +2761,7 @@ package body ARM_HTML is
 			Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
 	        when ARM_Output.Nested_X2_Bulleted =>
-		    Put_Style ("NestedBulleted");
+		    Put_Style ("NestedX2Bulleted");
 		    if No_Prefix then
 			null;
 		    else

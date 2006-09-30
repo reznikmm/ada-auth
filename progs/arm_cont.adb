@@ -101,7 +101,7 @@ package body ARM_Contents is
         Version : ARM_Contents.Change_Version_Type := '0';
     end record;
 
-    Title_List : array (1 .. 500) of Title_Record;
+    Title_List : array (1 .. 750) of Title_Record;
     Last_Title : Natural;
 
     Old_Title_List : array (1 .. 100) of Title_Record;
