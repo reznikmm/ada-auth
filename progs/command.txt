@@ -932,6 +932,9 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	RMOnly    - Text that is not included in the AARM (that is, it is only
 		    included in the output if HideAnnotations is used). No
 		    format is implied.
+	ElementRef - (For ASIS) Marks an Element Reference.
+	ChildRef  - (For ASIS) Marks child references for the preceding
+		    Element Reference.
 
     AARM-only groupings: (not shown if HideAnnotations is used)
 	MetaRules - Language Design Principles.

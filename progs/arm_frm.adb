@@ -222,6 +222,7 @@ package body ARM_Format is
     --  9/25/06 - RLB - Added "Use_ISO_2004_Contents_Format".
     --		- RLB - Added LastColWidth to @Table.
     --		- RLB - Fixed Enumerated in Notes styles.
+    --  9/29/06 - RLB - Added Element_Ref and Child_Ref for ASIS.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -261,6 +262,8 @@ package body ARM_Format is
 			 => (Length => 27, Str => "Incompatibility with Ada 95             "), -- Incompatible95Name
 	 Ada95_Extensions=> (Length => 19, Str => "Extension to Ada 95                     "), -- Extend95Name
 	 Ada95_Wording	 => (Length => 26, Str => "Wording Change from Ada 95              "), -- DiffWord95Name
+	 Element_Ref	 => (Length =>  0, Str => (others => ' ')), -- Not used.
+	 Child_Ref	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Reason		 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Ramification	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Proof		 => (Length =>  0, Str => (others => ' ')), -- Not used.
@@ -317,6 +320,8 @@ package body ARM_Format is
 			 => (Length => 29, Str => "Incompatibilities With Ada 95           "), -- Incompatible95Title
 	 Ada95_Extensions=> (Length => 20, Str => "Extensions to Ada 95                    "), -- Extend95Title
 	 Ada95_Wording	 => (Length => 27, Str => "Wording Changes from Ada 95             "), -- DiffWord95Title
+	 Element_Ref	 => (Length => 19, Str => "Element Reference:                      "), -- Paragraph start.
+	 Child_Ref	 => (Length => 28, Str => "Child Elements returned by:             "), -- Paragraph start.
 	 Reason		 => (Length =>  8, Str => "Reason:                                 "), -- Paragraph start.
 	 Ramification	 => (Length => 14, Str => "Ramification:                           "), -- Paragraph start.
 	 Proof		 => (Length =>  7, Str => "Proof:                                  "), -- Paragraph start.
@@ -1537,7 +1542,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		     Run_Time | Bounded_Errors |
 		     Erroneous | Requirements | Documentation |
 		     Metrics | Permissions | Advice | Notes | Single_Note |
-		     Examples =>
+		     Examples | Element_Ref | Child_Ref =>
 		    return False;
 	        when Language_Design | Ada83_Inconsistencies |
 		     Ada83_Incompatibilities | Ada83_Extensions |
@@ -1860,6 +1865,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		    when Notes | Single_Note => -- Notes (only the numbering varies)
 			Format_Object.Format := ARM_Output.Notes;
 			Format_Object.No_Breaks := False;
+		    when Element_Ref | Child_Ref => -- Similar to an AARM note.
+			Format_Object.Format := ARM_Output.Annotations;
+			Format_Object.No_Breaks := False;
 		    when Language_Design | -- "MetaRules"
 		         Ada83_Inconsistencies | -- Inconsistent83
 		         Ada83_Incompatibilities | -- Incompatible83
@@ -1879,19 +1887,25 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
         	    when Example_Text =>
 			case Format_Object.Examples_Font is
 			    when ARM_Output.Fixed | ARM_Output.Default =>
-			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) or else
+			           Format_Object.Last_Paragraph_Subhead_Type = Element_Ref or else
+			           Format_Object.Last_Paragraph_Subhead_Type = Child_Ref then
 			           Format_Object.Format := ARM_Output.Small_Examples;
 			        else
 			           Format_Object.Format := ARM_Output.Examples;
 			        end if;
 			    when ARM_Output.Roman =>
-			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) or else
+			           Format_Object.Last_Paragraph_Subhead_Type = Element_Ref or else
+			           Format_Object.Last_Paragraph_Subhead_Type = Child_Ref then
 				   Format_Object.Format := ARM_Output.Small_Syntax_Indented;
 			        else
 				   Format_Object.Format := ARM_Output.Syntax_Indented;
 			        end if;
 			    when ARM_Output.Swiss =>
-			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) or else
+			           Format_Object.Last_Paragraph_Subhead_Type = Element_Ref or else
+			           Format_Object.Last_Paragraph_Subhead_Type = Child_Ref then
 				   Format_Object.Format := ARM_Output.Small_Swiss_Examples;
 			        else
 				   Format_Object.Format := ARM_Output.Swiss_Examples;
@@ -1902,19 +1916,25 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
         	    when Indented_Example_Text =>
 			case Format_Object.Examples_Font is
 			    when ARM_Output.Fixed | ARM_Output.Default =>
-				if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+				if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) or else
+			           Format_Object.Last_Paragraph_Subhead_Type = Element_Ref or else
+			           Format_Object.Last_Paragraph_Subhead_Type = Child_Ref then
 				   Format_Object.Format := ARM_Output.Small_Indented_Examples;
 				else
 				   Format_Object.Format := ARM_Output.Indented_Examples;
 				end if;
 			    when ARM_Output.Roman =>
-			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) or else
+			           Format_Object.Last_Paragraph_Subhead_Type = Element_Ref or else
+			           Format_Object.Last_Paragraph_Subhead_Type = Child_Ref then
 				   Format_Object.Format := ARM_Output.Small_Inner_Indented;
 			        else
 				   Format_Object.Format := ARM_Output.Inner_Indented;
 			        end if;
-			    when ARM_Output.Swiss => --??
-			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			    when ARM_Output.Swiss =>
+			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) or else
+			           Format_Object.Last_Paragraph_Subhead_Type = Element_Ref or else
+			           Format_Object.Last_Paragraph_Subhead_Type = Child_Ref then
 				   Format_Object.Format := ARM_Output.Small_Swiss_Indented_Examples;
 				else
 				   Format_Object.Format := ARM_Output.Swiss_Indented_Examples;
@@ -2409,7 +2429,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		         Ada95_Wording => -- DiffWord95
 			ARM_Output.Category_Header (Output_Object, Paragraph_Kind_Title(For_Type).Str(1..Paragraph_Kind_Title(For_Type).Length));
 			Format_Object.Last_Paragraph_Subhead_Type := For_Type;
-        	    when Plain | Introduction =>
+        	    when Plain | Introduction | Element_Ref | Child_Ref =>
 			null; -- No subheader. We don't change the last
 			    -- subheader generated, either.
         	    when Reason | Ramification | Proof |
@@ -2455,6 +2475,29 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		         Ada95_Extensions | -- Extend95
 		         Ada95_Wording => -- DiffWord95
 			null; -- Not an annotation.
+        	    when Element_Ref | Child_Ref =>
+		        ARM_Output.Text_Format (Output_Object,
+				    Bold => True,
+				    Italic => Format_Object.Is_Italic,
+				    Font => Format_Object.Font,
+				    Change => Format_Object.Change,
+				    Version => Format_Object.Current_Change_Version,
+				    Added_Version => Format_Object.Current_Old_Change_Version,
+				    Size => Format_Object.Size,
+				    Location => Format_Object.Location);
+		        ARM_Output.Ordinary_Text (Output_Object,
+			     Text => Paragraph_Kind_Title(For_Type).Str(
+					1..Paragraph_Kind_Title(For_Type).Length));
+		        ARM_Output.Text_Format (Output_Object,
+				    Bold => Format_Object.Is_Bold,
+				    Italic => Format_Object.Is_Italic,
+				    Font => Format_Object.Font,
+				    Change => Format_Object.Change,
+				    Version => Format_Object.Current_Change_Version,
+				    Added_Version => Format_Object.Current_Old_Change_Version,
+				    Size => Format_Object.Size,
+				    Location => Format_Object.Location);
+			Format_Object.Last_Paragraph_Subhead_Type := For_Type;
         	    when Reason | Ramification | Proof |
 			 Imp_Note | Corr_Change | Discussion |
 			 Honest | Glossary_Marker =>
@@ -3619,6 +3662,17 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		else -- Don't show annotations.
 		    Toss_for_RM ("diffword95");
 		end if;
+	    -- ASIS groupings:
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "elementref" then
+	        Format_Object.Next_Paragraph_Format_Type := Element_Ref;
+	        Format_Object.Next_Paragraph_Subhead_Type := Element_Ref;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "childref" then
+	        Format_Object.Next_Paragraph_Format_Type := Child_Ref;
+	        Format_Object.Next_Paragraph_Subhead_Type := Child_Ref;
 	    -- AARM annotations:
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))

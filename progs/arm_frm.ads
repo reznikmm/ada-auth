@@ -195,6 +195,7 @@ private
 	Ada83_Extensions, Ada83_Wording, -- AARM-only.
 	Ada95_Inconsistencies, Ada95_Incompatibilities, -- AARM-only.
 	Ada95_Extensions, Ada95_Wording, -- AARM-only.
+	Element_Ref, Child_Ref, -- For ASIS.
 	-- AARM annotations (no headers)
 	Reason, Ramification, Proof, Imp_Note, Corr_Change, Discussion,
 	Honest, Glossary_Marker, Bare_Annotation,
