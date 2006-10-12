@@ -1,6 +1,6 @@
 @Part(data, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/data.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/09/29 05:55:24 $}
+@comment{$Revision: 1.2 $ $Date: 2006/10/10 05:10:37 $}
 
 @LabeledSection{package Asis.Data_Decomposition (optional)}
 
@@ -43,104 +43,117 @@ Array_Component value is used to describe all array components. The value
 encapsulates the information needed, by the implementation, to efficiently
 extract any of the array components.
 
-Assumptions and Limitations of this Interface:
+@leading@;Assumptions and Limitations of this Interface:
+@begin{Enumerate}
+The data stream is appropriate for the ASIS host machine. For example,
+the implementation of this interface will not need to worry about
+byte flipping or reordering of bits caused by movement of data between
+machine architectures.
 
-a) The data stream is appropriate for the ASIS host machine. For example,
-   the implementation of this interface will not need to worry about
-   byte flipping or reordering of bits caused by movement of data between
-   machine architectures.
+Records, arrays, and their components may be packed.
 
-b) Records, arrays, and their components may be packed.
+Records, array components, enumerations, and scalar types may have
+representation and length clauses applied to them. This includes scalar
+types used as record discriminants and array indices.
 
-c) Records, array components, enumerations, and scalar types may have
-   representation and length clauses applied to them. This includes scalar
-   types used as record discriminants and array indices.
+This specification supports two of the three type models discussed
+below. Models @Chg{Version=[1],New=[1 and 2],Old=[A and B]} are
+supported. Model @Chg{Version=[1],New=[3],Old=[C]} is not
+supported.@ChgNote{Fix to match actual numbering}
 
-d) This specification supports two of the three type models discussed
-   below. Models A and B are supported. Model C is not supported.
-
-   1) Simple "static" types contain no variants, have a single fixed 'Size,
+@begin{InnerEnumerate}
+@leading@;Simple "static" types contain no variants, have a single fixed 'Size,
       and all components and attributes are themselves static and/or fully
       constrained. The size and position for any component of the type can be
       determined without regard to constraints. For example:
 
-          type Static_Record is
-              record
-                  F1, F2 : Natural;
-                  C1     : Wide_Character;
-                  A1     : Wide_String (1..5);
-              end record;
+@begin{Example}
+      @key[type] Static_Record @key[is]
+          @key[record]
+              F1, F2 : Natural;
+              C1     : Wide_Character;
+              A1     : Wide_String (1..5);
+          @key[end record];
 
-          type Static_Discriminated (X : Boolean) is
-              record
-                  F1, F2 : Natural;
-                  C1     : Wide_Character;
-              end record;
+      @key[type] Static_Discriminated (X : Boolean) @key[is]
+          @key[record]
+              F1, F2 : Natural;
+              C1     : Wide_Character;
+          @key[end record];
 
-          type Static_Array   is array (Integer @key[range] 1 .. 100) of Boolean;
-          type Static_Enum    is (One, Two, Three);
-          type Static_Integer is @key[range] 1 .. 512;
-          type Static_Float   is digits 15 @key[range] -100.0 .. 100.0;
-          type Static_Fixed   is delta 0.1 @key[range] -100.0 .. 100.0;
+      @key[type] Static_Array   @key[is array] (Integer @key[range] 1 .. 100) @key[of] Boolean;
+      @key[type] Static_Enum    @key[is] (One, Two, Three);
+      @key[type] Static_Integer @key[is range] 1 .. 512;
+      @key[type] Static_Float   @key[is digits] 15 @key[range] -100.0 .. 100.0;
+      @key[type] Static_Fixed   @key[is delta] 0.1 @key[range] -100.0 .. 100.0;
+@end{Example}
 
-   2) Simple "dynamic" types contain one or more components or attributes
-      whose size, position, or value depends on the value of one or more
-      constraints computed at execution time. This means that the size,
-      position, or number of components within the data type cannot be
-      determined without reference to constraint values.
+@Comment{Start item 2}Simple "dynamic" types contain one or more components or
+attributes whose size, position, or value depends on the value of one or more
+constraints computed at execution time. This means that the size, position, or
+number of components within the data type cannot be determined without
+reference to constraint values.
 
-      Records containing components, whose size depends on discriminants
+@noprefix@leading@;Records containing components, whose size depends on discriminants
       of the record, can be handled because the discriminants for a record
       value are fully specified by the data stream form of the record value.
       For example:
 
-          type Dynamic_Length (Length : Natural) is
-              record
-                  S1 : Wide_String (1 .. Length);
-              end record;
+@begin{Example}
+      @key[type] Dynamic_Length (Length : Natural) @key[is]
+          @key[record]
+              S1 : Wide_String (1 .. Length);
+          @key[end record];
 
-          type Dynamic_Variant (When : Boolean) is
-              record
-                  case When is
-                      when True =>
-                          C1 : Wide_Character;
-                      when False =>
-                          null;
-                  end case;
-              end record;
+      @key[type] Dynamic_Variant (When : Boolean) @key[is]
+          @key[record]
+              @key[case] When @key[is]
+                  @key[when] True =>
+                      C1 : Wide_Character;
+                  @key[when] False =>
+                      @key[null];
+              @key[end case];
+          @key[end record];
+@end{Example}
 
-      Arrays with an unconstrained subtype, whose 'Length, 'First, and 'Last
-      depend on dynamic index constraints, can be handled because these
-      attributes can be queried and stored when the data stream is written.
-      For example:
+@noprefix@leading@;Arrays with an unconstrained subtype, whose 'Length, 'First,
+and 'Last depend on dynamic index constraints, can be handled because these
+attributes can be queried and stored when the data stream is written. For
+example:
 
-           I : @key[in]teger := Some_Function;
-           type Dynamic_Array is
-               array (Integer @key[range] I .. I + 10) of Boolean;
+@begin{Example}
+      I : Integer := Some_Function;
+      @key[type] Dynamic_Array @key[is]
+          @key[array] (Integer @key[range] I .. I + 10) @key[of] Boolean;
 
-           type Heap_Array   is array (Integer @key[range] <>) of Boolean;
-           type Access_Array is access Heap_Array;
-           X : Access_Array := new Heap_Array (1 .. 100);
+      @key[type] Heap_Array   @key[is array] (Integer @key[range] <>) @key[of] Boolean;
+      @key[type] Access_Array @key[is access] Heap_Array;
+      X : Access_Array := @key[new] Heap_Array (1 .. 100);
+@end{Example}
 
-   3) Complex, externally "discriminated" records, contain one or more
-      components whose size or position depends on the value of one or more
-      non-static external values (values not stored within instances of the
-      type) at execution time. The size for a value of the type cannot be
-      determined without reference to these external values, whose runtime
-      values are not known to the ASIS Context and cannot be automatically
-      recorded by the Asis.Data_Decomposition.Portable_Transfer generics.
-      For example:
+@Comment{Start item 3}@leading@;Complex, externally "discriminated" records,
+contain one or more components whose size or position depends on the value of
+one or more non-static external values (values not stored within instances of
+the type) at execution time. The size for a value of the type cannot be
+determined without reference to these external values, whose runtime values are
+not known to the ASIS Context and cannot be automatically recorded by the
+Asis.Data_Decomposition.Portable_Transfer generics. For example:
 
-          N : Natural := Function_Call();
+@begin{Example}
+      N : Natural := Function_Call();
+      ....
+      @key[declare]
+          @key[type] Complex @key[is]
+              @key[record]
+                  S1 : Wide_String (1 .. N);
+              @key[end record];
+      @key[begin]
           ....
-          declare
-              type Complex is
-                  record
-                      S1 : Wide_String (1 .. N);
-                  end record;
-          begin
-              ....
-          end;
+      @key[end];
+@end{Example}
+@end{InnerEnumerate}
+@end{Enumerate}
+
 General Usage Rules:
 
 All operations in this package will attempt to detect the use of invalid
@@ -154,6 +167,7 @@ Diagnosis string will indicate the kind of error detected.
 All implementations will handle arrays with a minimum of 16 dimensions,
 or the number of dimensions allowed by their compiler, whichever is
 smaller.
+
 
 @LabeledClause{type Record_Component}
 
@@ -199,15 +213,17 @@ or c) an Array_Component. Ultimately, all component values originate from
 a A_Type_Definition Element; that Element determines their Context of
 origin.
 
-    @key[type] @AdaTypeDefn{Record_Component} @key[is private];
-    @AdaObjDefn{Nil_Record_Component} : constant Record_Component;
+@begin{Example}
+@key[type] @AdaTypeDefn{Record_Component} @key[is private];
+@AdaObjDefn{Nil_Record_Component} : constant Record_Component;
 
-    @key[function] "=" (Left  : @key[in] Record_Component;
-                  Right : @key[in] Record_Component)
-                  @key[return] Boolean @key[is abstract];
+@key[function] "=" (Left  : @key[in] Record_Component;
+              Right : @key[in] Record_Component)
+              @key[return] Boolean @key[is abstract];
+@end{Example}
+
 
 @LabeledClause{type Record_Component_List}
-
 
     @key[type] @AdaTypeDefn{Record_Component_List} @key[is]
        @key[array] (Asis.List_Index @key[range] <>) @key[of] Record_Component;
@@ -330,58 +346,64 @@ constraints. Some of the problems encountered when changing runtime
 systems or implementations are: type representation, optimization,
 record padding, and other I/O subsystem implementation variations.
 
-The nature of these data values is deliberately unspecified. An
+@leading@;The nature of these data values is deliberately unspecified. An
 implementor will choose a data value type that is suitable for the
 expected uses of these arrays and data values. Arrays and data
 values have these uses:
 
-a) Array values are used in conjunction with the
+@begin{Enumerate}
+Array values are used in conjunction with the
    Asis.Data_Decomposition interface. The data value type should be
    readily decomposable, by that package, so that array and record
    components can be efficiently extracted from a data stream represented
    by this array type. The efficiency of that interface is a priority.
 
-b) The data value type is read and written by applications. It
+@leading@;The data value type is read and written by applications. It
    should have a size that makes efficient I/O possible. Applications can
    be expected to perform I/O in any or all of these ways:
 
-   1) Ada.Sequential_Io or Ada.Direct_Io could be used to read or write
+@begin{InnerEnumerate}
+Ada.Sequential_Io or Ada.Direct_Io could be used to read or write
       these values.
 
-   2) Individual values may be placed inside other types and those types
+Individual values may be placed inside other types and those types
       may be read or written.
 
-   3) The 'Address of a data value, plus the 'Size of the data value
+The 'Address of a data value, plus the 'Size of the data value
       type, may be used to perform low level system I/O. Note: This
       requires the 'Size of the type and the 'Size of a variable of that
       type to be the same for some implementations.
 
-   4) Individual values may be passed through Unchecked_Conversion in
+Individual values may be passed through Unchecked_Conversion in
       order to obtain a different value type, of the same 'Size, suitable
       for use with some user I/O facility. This usage is non-portable
       across implementations.
+@end{InnerEnumerate}
 
-c) Array values are read and written by applications. The data value
+@leading@;Array values are read and written by applications. The data value
    type should have a size that makes efficient I/O possible.
    Applications can be expected to perform I/O in any or all of these ways:
 
-   1) Ada.Sequential_Io or Ada.Direct_Io could be used to read or write a
+@begin{InnerEnumerate}
+Ada.Sequential_Io or Ada.Direct_Io could be used to read or write a
       constrained array subtype.
 
-   2) Array values may be placed inside other types and those types may
+Array values may be placed inside other types and those types may
       be read and written.
 
-   3) The 'Address of the first array value, plus the 'Length of the
+The 'Address of the first array value, plus the 'Length of the
       array times the 'Size of the values, may be used to perform low
       level system I/O. Note: This implies that the array type is
       unpacked, or, that the packed array type has no "padding" (e.g.,
       groups of five 6-bit values packed into 32-bit words with 2 bits
       of padding every 5 elements).
 
-   4) Array values may be passed through Unchecked_Conversion in order to
+Array values may be passed through Unchecked_Conversion in order to
       obtain an array value, with a different value type, suitable for
       use with some user I/O facility. This usage is non-portable across
       implementations.
+@end{InnerEnumerate}
+@end{Enumerate}
 
 The data value type should be chosen so that the 'Address of the first
 array data value is also the 'Address of the first storage unit containing

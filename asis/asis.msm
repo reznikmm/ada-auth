@@ -12,6 +12,7 @@
 @BodyFont{Swiss}@Comment{Following the current ISO drafting style}
 @NoteFormat{ISO2004}@Comment{Ditto}
 @ContentsFormat{ISO2004}@Comment{Ditto}
+@ListFormat{ISO2004}@Comment{Ditto}
 
 @Comment{RTF properties}
 @SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}

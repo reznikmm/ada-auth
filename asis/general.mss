@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2006/09/28 05:12:00 $}
+@comment{$Revision: 1.8 $ $Date: 2006/10/10 05:10:37 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -171,11 +171,24 @@ an ASIS implementor and an ASIS user.]}
 
 @Chg{Version=[1],New=[@b{@i{These aren't sentinels OR comments...}}],Old=[The sentinels and their meanings are:]}
 
-@Chg{Version=[1],New=[@b{@i{Greg seems to have deleted these...}}],
-Old=[@b{Element Reference} -- These comments mark an element kind reference which acts as a header for those queries that work on this element kind.]}
+@begin{ElementRef}
+@Chg{Version=[1],New=[These items],Old=[@b{Element Reference} - These comments]}
+mark an element kind reference which acts as a header for those queries that
+work on this element kind.@Chg{Version=[1],New=[ The reference includes the
+name of a query that can produce the appropriate element kind and the
+subclause in the Ada Standard (ISO/IEC 8652:1995) where it is defined.],Old=[]}
+@end{ElementRef}
 
-@Chg{Version=[1],New=[@b{@i{...amd these too.}}],
-Old=[@b{Child Reference} - These sentinel comments follow sentinel comments marking element references (--ER) and reference child element queries that decompose the element into its children.]}
+@begin{ChildRef}
+@Chg{Version=[1],New=[These items],Old=[@b{Child Reference} - These sentinel comments]}
+follow @Chg{Version=[1],New=[],Old=[sentinel comments marking ]}element
+references @Chg{Version=[1],New=[],Old=[(--ER) ]}and reference child
+element queries that decompose the element @Chg{Version=[1],New=[kind(s)
+of the element reference],Old=[(--ER)]} into its children.@Chg{Version=[1],
+New=[ Typically, the definitions of these queries immediately follow these
+items.],Old=[]}@Comment{Just trying to explain what these are for; they're
+mysterious to me.}
+@end{ChildRef}
 
 @begin{SingleNote}
 @Chg{Version=[1],New=[These items],Old=[@b{Application Note} - These comments]}These comments describe suggested uses, further

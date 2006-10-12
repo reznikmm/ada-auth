@@ -1,6 +1,6 @@
 @Part(clauses, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/clauses.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/09/28 05:11:58 $}
+@comment{$Revision: 1.2 $ $Date: 2006/10/10 05:10:36 $}
 
 @LabeledSection{package Asis.Clauses}
 
@@ -14,19 +14,26 @@ Old=[@f{@key[package] @ChildUnit{Parent=[Asis],Child=[Clauses]}Asis.Clauses @key
 
 This package encapsulates a set of queries that operate on A_Clause
 elements.
-Element Reference -A_Use_Package_Clause - 8.4
-Element Reference -A_Use_Type_Clause    - 8.4
-Element Reference -A_With_Clause        - 10.1.2
-
-Child Elements returned by
-   function Clause_Names
 
 
 @LabeledClause{function Clause_Names}
 
+@begin{ElementRef}
+A_Use_Package_Clause @em 8.4@*
+A_Use_Type_Clause @em 8.4@*
+A_With_Clause @em 10.1.2
+@end{ElementRef}
+@begin{ChildRef}@ @;
+@begin{Display}
+function Clause_Names
+@end{Display}
+@end{ChildRef}
 
-    @key[function] @AdaSubDefn{Clause_Names} (Clause : @key[in] Asis.Element)
-                           @key[return] Asis.Name_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Clause_Names} (Clause : @key[in] Asis.Element)
+                       @key[return] Asis.Name_List;
+@end{Example}
 
 Clause @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the with_clause or use_clause to query.
 
@@ -40,94 +47,139 @@ into an equivalent sequence of corresponding single clauses.
 Similarly, an implementation may keep a name only once even though that
 name can appear more than once in a clause.
 
-Appropriate Element_Kinds:
-     A_Use_Package_Clause
-     A_Use_Type_Clause
-     A_With_Clause
+@leading@;Appropriate Element_Kinds:
+@begin{Display}
+A_Use_Package_Clause
+A_Use_Type_Clause
+A_With_Clause
+@end{Display}
 
-Returns Expression_Kinds:
-     An_Identifier
-     A_Selected_Component
-     An_Attribute_Reference
-Element Reference -A_Representation_Clause - 13.1
+@leading@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
+A_Selected_Component
+An_Attribute_Reference
+@end{Display}
+@end{DescribeCode}
 
-Element Reference -An_Attribute_Definition_Clause - 13.3
-Element Reference -An_Enumeration_Representation_Clause - 13.4
-Element Reference -An_At_Clause - J.7
-
-Child Elements returned by
-   function Representation_Clause_Name
-   function Representation_Clause_Expression
 
 @LabeledClause{function Representation_Clause_Name}
 
+@begin{ElementRef}
+A_Representation_Clause @em 13.1@*
+@*
+An_Attribute_Definition_Clause @em 13.3@*
+An_Enumeration_Representation_Clause @em 13.4@*
+An_At_Clause @em J.7
+@end{ElementRef}
 
-    @key[function] @AdaSubDefn{Representation_Clause_Name} (Clause : @key[in] Asis.Clause)
-                                         @key[return] Asis.Name;
+@begin{ChildRef}@ @;
+@begin{Display}
+function Representation_Clause_Name
+function Representation_Clause_Expression
+@end{Display}
+@end{ChildRef}
 
-Clause  @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the representation_clause to query.
 
-Returns the direct_name expression following the reserved word "for".
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Representation_Clause_Name} (Clause : @key[in] Asis.Clause)
+                                     @key[return] Asis.Name;
+@end{Example}
 
-Appropriate Clause_Kinds:
-     A_Representation_Clause
-     A_Component_Clause
+Clause @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the representation_clause to query.
 
-Returns Expression_Kinds:
-     An_Identifier
-     An_Attribute_Reference
+Returns the direct_name expression following the reserved word @key[for].
+
+@leading@;Appropriate Clause_Kinds:
+@begin{Display}
+A_Representation_Clause
+A_Component_Clause
+@end{Display}
+
+@leading@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
+An_Attribute_Reference
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Representation_Clause_Expression}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Representation_Clause_Expression}
+            (Clause : @key[in] Asis.Representation_Clause)
+             @key[return] Asis.Expression;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Representation_Clause_Expression}
-                (Clause : @key[in] Asis.Representation_Clause)
-                 @key[return] Asis.Expression;
+Clause @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the representation_clause to query.
 
-Clause  @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the representation_clause to query.
+Returns the expression following the reserved word @key[use] or the reserved
+words @key[use at].
 
-Returns the expression following the reserved word “use” or the reserved
-words “use at”.
+@leading@;Appropriate Representation_Clause_Kinds:
+@begin{Display}
+An_Attribute_Definition_Clause
+An_Enumeration_Representation_Clause
+An_At_Clause
+@end{Display}
 
-Appropriate Representation_Clause_Kinds:
-     An_Attribute_Definition_Clause
-     An_Enumeration_Representation_Clause
-     An_At_Clause
+@leading@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
-Returns Element_Kinds:
-     An_Expression
-Element Reference -A_Record_Representation_Clause - 13.5.1
-
-Child Elements returned by
-   function Representation_Clause_Name
-   function Mod_Clause_Expression
-   function Component_Clauses
 
 @LabeledClause{function Mod_Clause_Expression}
 
 
-    @key[function] @AdaSubDefn{Mod_Clause_Expression} (Clause : @key[in] Asis.Representation_Clause)
-                                 @key[return] Asis.Expression;
+@begin{ElementRef}
+A_Record_Representation_Clause @em 13.5.1
+@end{ElementRef}
+@begin{ChildRef}@ @;
+@begin{Display}
+function Representation_Clause_Name
+function Mod_Clause_Expression
+function Component_Clauses
+@end{Display}
+@end{ChildRef}
 
-Clause  @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record representation clause to query.
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Mod_Clause_Expression} (Clause : @key[in] Asis.Representation_Clause)
+                             @key[return] Asis.Expression;
+@end{Example}
 
-Returns the static_expression appearing after the reserved words "at mod".
+Clause @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the record representation clause to query.
+
+Returns the static_expression appearing after the reserved words @key[at mod].
 
 Returns a Nil_Element if a mod_clause is not present.
 
-Appropriate Representation_Clause_Kinds:
-     A_Record_Representation_Clause
+@leading@;Appropriate Representation_Clause_Kinds:
+@begin{Display}
+A_Record_Representation_Clause
+@end{Display}
 
-Returns Element_Kinds:
-     Not_An_Element
-     An_Expression
+@leading@;Returns Element_Kinds:
+@begin{Display}
+Not_An_Element
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Component_Clauses}
 
-
-    @key[function] @AdaSubDefn{Component_Clauses} (Clause : @key[in] Asis.Representation_Clause;
-                                Include_Pragmas : @key[in] Boolean := False)
-                                @key[return] Asis.Component_Clause_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Component_Clauses} (Clause : @key[in] Asis.Representation_Clause;
+                            Include_Pragmas : @key[in] Boolean := False)
+                            @key[return] Asis.Component_Clause_List;
+@end{Example}
 
 Clause          @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record representation clause to query.
 Include_Pragmas @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned.
@@ -138,53 +190,81 @@ record_representation_clause, in their order of appearance.
 Returns a Nil_Element_List if the record_representation_clause has no
 component_clause or pragma elements.
 
-Appropriate Representation_Clause_Kinds:
-     A_Record_Representation_Clause
+@leading@;Appropriate Representation_Clause_Kinds:
+@begin{Display}
+A_Record_Representation_Clause
+@end{Display}
 
-Returns Element_Kinds:
-     A_Clause
-     A_Pragma
+@leading@;Returns Element_Kinds:
+@begin{Display}
+A_Clause
+A_Pragma
+@end{Display}
 
-Returns Clause_Kinds:
-     A_Component_Clause
-Element Reference -A_Component_Clause - 13.5.1
+@leading@;Returns Clause_Kinds:
+@begin{Display}
+A_Component_Clause
+@end{Display}
+@end{DescribeCode}
 
-Child Elements returned by
-   function Representation_Clause_Name
-   function Component_Clause_Position
-   function Component_Clause_Range
 
 @LabeledClause{function Component_Clause_Position}
 
+@begin{ElementRef}
+A_Component_Clause @em 13.5.1
+@end{ElementRef}
+@begin{ChildRef}@ @;
+@begin{Display}
+function Representation_Clause_Name
+function Component_Clause_Position
+function Component_Clause_Range
+@end{Display}
+@end{ChildRef}
 
-    @key[function] @AdaSubDefn{Component_Clause_Position} (Clause : @key[in] Asis.Component_Clause)
-                                        @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Component_Clause_Position} (Clause : @key[in] Asis.Component_Clause)
+                                    @key[return] Asis.Expression;
+@end{Example}
 
-Clause  @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component_clause to query.
+Clause @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the component_clause to query.
 
 Returns the position expression for the component_clause.
 
-Appropriate Clause_Kinds:
-     A_Component_Clause
+@leading@;Appropriate Clause_Kinds:
+@begin{Display}
+A_Component_Clause
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Component_Clause_Range}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Component_Clause_Range} (Clause : @key[in] Asis.Component_Clause)
+                                 @key[return] Asis.Discrete_Range;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Component_Clause_Range} (Clause : @key[in] Asis.Component_Clause)
-                                     @key[return] Asis.Discrete_Range;
-
-Clause  @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component_clause to query.
+Clause @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the component_clause to query.
 
 Returns the first_bit .. last_bit range for the component_clause.
 
-Appropriate Clause_Kinds:
-     A_Component_Clause
+@leading@;Appropriate Clause_Kinds:
+@begin{Display}
+A_Component_Clause
+@end{Display}
 
-Returns Discrete_Range_Kinds:
-     A_Discrete_Simple_Expression_Range
+@leading@;Returns Discrete_Range_Kinds:
+@begin{Display}
+A_Discrete_Simple_Expression_Range
+@end{Display}
+@end{DescribeCode}
 
 @begin{Example}
 @ChgDeleted{Version=[1],Text=[@key[end] Asis.Clauses;]}

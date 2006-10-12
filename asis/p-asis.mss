@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2006/09/28 05:12:01 $}
+@comment{$Revision: 1.7 $ $Date: 2006/10/10 05:10:37 $}
 
 @LabeledSection{package Asis}
 
@@ -464,185 +464,203 @@ ISO/IEC 8652:1995 for each pragma.]}
 
 @LabeledSubClause{type Defining_Name_Kinds}
 
-Defining_Name_Kinds - names defined by declarations and specifications.
-Literals                                   -- Reference Manual
+@Chg{Version=[1],New=[Type ],Old=[]}Defining_Name_Kinds
+@Chg{Version=[1],New=[classifies],Old=[@en]}
+names defined by declarations and
+specifications.@Chg{Version=[1],New=[],Old=[Literals                                   -- Reference Manual]}
 
 @begin{Example}
-  type Defining_Name_Kinds is (
+@key[type] @AdaTypeDefn{Defining_Name_Kinds} @key[is] (
 
-    Not_A_Defining_Name,                       -- An unexpected element
+   @AdaObjDefn{Not_A_Defining_Name},              -- An unexpected element
 
-    A_Defining_Identifier,                     -- 3.1(4)
-    A_Defining_Character_Literal,              -- 3.5.1(4)
-    A_Defining_Enumeration_Literal,            -- 3.5.1(3)
-    A_Defining_Operator_Symbol,                -- 6.1(9)
-    A_Defining_Expanded_Name);                 -- 6.1(7)
-                                               -- program unit name defining_identifier
+   @AdaObjDefn{A_Defining_Identifier},            -- 3.1(4)
+   @AdaObjDefn{A_Defining_Character_Literal},     -- 3.5.1(4)
+   @AdaObjDefn{A_Defining_Enumeration_Literal},   -- 3.5.1(3)
+   @AdaObjDefn{A_Defining_Operator_Symbol},       -- 6.1(9)
+   @AdaObjDefn{A_Defining_Expanded_Name});        -- 6.1(7)
+                                     -- program unit name defining_identifier
 @end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each kind of defining name.]}
 
-@LabeledSubClause{type Declaration_Kinds }
 
-Declaration_Kinds - declarations and specifications having defining name literals.
-Literals                                 -- Reference Manual -> Subordinate Kinds
+@LabeledSubClause{type Declaration_Kinds}
+
+@Chg{Version=[1],New=[Type ],Old=[]}Declaration_Kinds
+@Chg{Version=[1],New=[classifies],Old=[@en]}
+declarations and specifications having defining name
+literals.@Chg{Version=[1],New=[],Old=[Literals                                 -- Reference Manual -> Subordinate Kinds]}
+
+@Chg{Version=[1],New=[Type ],Old=[]}Expression_Kinds
+@Chg{Version=[1],New=[describes],Old=[@en]} general expression
+classifications@Chg{Version=[1],New=[.],Old=[
+Literals                                   -- Reference Manual -> Subordinate Kinds]}
 
 @begin{Example}
-  type Declaration_Kinds is (
+@key[type] @AdaTypeDefn{Declaration_Kinds} @key[is] (
 
-    Not_A_Declaration,                       -- An unexpected element
+   @AdaObjDefn{Not_A_Declaration},                       -- An unexpected element
 
-    An_Ordinary_Type_Declaration,            -- 3.2.1(3)}
+   @AdaObjDefn{An_Ordinary_Type_Declaration},            -- 3.2.1(3)
+      -- a full_type_declaration of the form:
+      -- @key[type] defining_identifier [known_discriminant_part] @key[is] type_definition;
+
+   @AdaObjDefn{A_Task_Type_Declaration},                 -- 9.1(2)
+   @AdaObjDefn{A_Protected_Type_Declaration},            -- 9.4(2)
+   @AdaObjDefn{An_Incomplete_Type_Declaration},          -- 3.2.1(2), 3.10(2)
+   @AdaObjDefn{A_Private_Type_Declaration},              -- 3.2.1(2), 7.3(2) -> Trait_Kinds
+   @AdaObjDefn{A_Private_Extension_Declaration},         -- 3.2.1(2), 7.3(3) -> Trait_Kinds
+
+   @AdaObjDefn{A_Subtype_Declaration},                   -- 3.2.2(2)
+
+   @AdaObjDefn{A_Variable_Declaration},                  -- 3.3.1(2) -> Trait_Kinds
+   @AdaObjDefn{A_Constant_Declaration},                  -- 3.3.1(4) -> Trait_Kinds
+   @AdaObjDefn{A_Deferred_Constant_Declaration},         -- 3.3.1(6), 7.4(2) -> Trait_Kinds
+   @AdaObjDefn{A_Single_Task_Declaration},               -- 3.3.1(2), 9.1(3)
+   @AdaObjDefn{A_Single_Protected_Declaration},          -- 3.3.1(2), 9.4(2)
+
+   @AdaObjDefn{An_Integer_Number_Declaration},           -- 3.3.2(2)
+   @AdaObjDefn{A_Real_Number_Declaration},               -- 3.5.6(2)
+
+   @AdaObjDefn{An_Enumeration_Literal_Specification},    -- 3.5.1(3)
+
+   @AdaObjDefn{A_Discriminant_Specification},            -- 3.7(5)   -> Trait_Kinds
+   @AdaObjDefn{A_Component_Declaration},                 -- 3.8(6)
+
+   @AdaObjDefn{A_Loop_Parameter_Specification},          -- 5.5(4)   -> Trait_Kinds
+
+   @AdaObjDefn{A_Procedure_Declaration},                 -- 6.1(4)   -> Trait_Kinds
+   @AdaObjDefn{A_Function_Declaration},                  -- 6.1(4)   -> Trait_Kinds
+
+   @AdaObjDefn{A_Parameter_Specification},               -- 6.1(15)  -> Trait_Kinds
+                                            --          -> Mode_Kinds
+   @AdaObjDefn{A_Procedure_Body_Declaration},            -- 6.3(2)
+   @AdaObjDefn{A_Function_Body_Declaration},             -- 6.3(2)
+
+   @AdaObjDefn{A_Package_Declaration},                   -- 7.1(2)
+   @AdaObjDefn{A_Package_Body_Declaration},              -- 7.2(2)
+
+   @AdaObjDefn{An_Object_Renaming_Declaration},          -- 8.5.1(2)
+   @AdaObjDefn{An_Exception_Renaming_Declaration},       -- 8.5.2(2)
+   @AdaObjDefn{A_Package_Renaming_Declaration},          -- 8.5.3(2)
+   @AdaObjDefn{A_Procedure_Renaming_Declaration},        -- 8.5.4(2)
+   @AdaObjDefn{A_Function_Renaming_Declaration},         -- 8.5.4(2)
+   @AdaObjDefn{A_Generic_Package_Renaming_Declaration},  -- 8.5.5(2)
+   @AdaObjDefn{A_Generic_Procedure_Renaming_Declaration},-- 8.5.5(2)
+   @AdaObjDefn{A_Generic_Function_Renaming_Declaration}, -- 8.5.5(2)
+
+   @AdaObjDefn{A_Task_Body_Declaration},                 -- 9.1(6)
+   @AdaObjDefn{A_Protected_Body_Declaration},            -- 9.4(7)
+   @AdaObjDefn{An_Entry_Declaration},                    -- 9.5.2(2)
+   @AdaObjDefn{An_Entry_Body_Declaration},               -- 9.5.2(5)
+   @AdaObjDefn{An_Entry_Index_Specification},            -- 9.5.2(2)
+
+   @AdaObjDefn{A_Procedure_Body_Stub},                   -- 10.1.3(3)
+   @AdaObjDefn{A_Function_Body_Stub},                    -- 10.1.3(3)
+   @AdaObjDefn{A_Package_Body_Stub},                     -- 10.1.3(4)
+   @AdaObjDefn{A_Task_Body_Stub},                        -- 10.1.3(5)
+   @AdaObjDefn{A_Protected_Body_Stub},                   -- 10.1.3(6)
+
+   @AdaObjDefn{An_Exception_Declaration},                -- 11.1(2)
+   @AdaObjDefn{A_Choice_Parameter_Specification},        -- 11.2(4)
+
+   @AdaObjDefn{A_Generic_Procedure_Declaration},         -- 12.1(2)
+   @AdaObjDefn{A_Generic_Function_Declaration},          -- 12.1(2)
+   @AdaObjDefn{A_Generic_Package_Declaration},           -- 12.1(2)
+
+   @AdaObjDefn{A_Package_Instantiation},                 -- 12.3(2)
+   @AdaObjDefn{A_Procedure_Instantiation},               -- 12.3(2)
+   @AdaObjDefn{A_Function_Instantiation},                -- 12.3(2)
+
+   @AdaObjDefn{A_Formal_Object_Declaration},             -- 12.4(2)  -> Mode_Kinds
+   @AdaObjDefn{A_Formal_Type_Declaration},               -- 12.5(2)
+   @AdaObjDefn{A_Formal_Procedure_Declaration},          -- 12.6(2)  -> Subprogram_Default_Kinds
+   @AdaObjDefn{A_Formal_Function_Declaration},           -- 12.6(2)  -> Subprogram_Default_Kinds
+   @AdaObjDefn{A_Formal_Package_Declaration},            -- 12.7(2)
+   @AdaObjDefn{A_Formal_Package_Declaration_With_Box});  -- 12.7(3)
 @end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each kind of declaration; the subordinate kind (if any)
+is given as well.]}
 
-a full_type_declaration of the form:
-type defining_identifier [known_discriminant_part] is type_definition;
-
-@begin{Example}
-    A_Task_Type_Declaration,                 -- 9.1(2)
-    A_Protected_Type_Declaration,            -- 9.4(2)
-    An_Incomplete_Type_Declaration,          -- 3.2.1(2),3.10(2)
-    A_Private_Type_Declaration,              -- 3.2.1(2),7.3(2) -> Trait_Kinds
-    A_Private_Extension_Declaration,         -- 3.2.1(2),7.3(3) -> Trait_Kinds
-
-    A_Subtype_Declaration,                   -- 3.2.2(2)
-
-    A_Variable_Declaration,                  -- 3.3.1(2) -> Trait_Kinds
-    A_Constant_Declaration,                  -- 3.3.1(4) -> Trait_Kinds
-    A_Deferred_Constant_Declaration,         -- 3.3.1(6),7.4(2) -> Trait_Kinds
-    A_Single_Task_Declaration,               -- 3.3.1(2),9.1(3)
-    A_Single_Protected_Declaration,          -- 3.3.1(2),9.4(2)
-
-    An_Integer_Number_Declaration,           -- 3.3.2(2)
-    A_Real_Number_Declaration,               -- 3.5.6(2)
-
-    An_Enumeration_Literal_Specification,    -- 3.5.1(3)
-
-    A_Discriminant_Specification,            -- 3.7(5)   -> Trait_Kinds
-    A_Component_Declaration,                 -- 3.8(6)
-
-    A_Loop_Parameter_Specification,          -- 5.5(4)   -> Trait_Kinds
-
-    A_Procedure_Declaration,                 -- 6.1(4)   -> Trait_Kinds
-    A_Function_Declaration,                  -- 6.1(4)   -> Trait_Kinds
-
-    A_Parameter_Specification,               -- 6.1(15)  -> Trait_Kinds
-                                             --          -> Mode_Kinds
-    A_Procedure_Body_Declaration,            -- 6.3(2)
-    A_Function_Body_Declaration,             -- 6.3(2)
-
-    A_Package_Declaration,                   -- 7.1(2)
-    A_Package_Body_Declaration,              -- 7.2(2)
-
-    An_Object_Renaming_Declaration,          -- 8.5.1(2)
-    An_Exception_Renaming_Declaration,       -- 8.5.2(2)
-    A_Package_Renaming_Declaration,          -- 8.5.3(2)
-    A_Procedure_Renaming_Declaration,        -- 8.5.4(2)
-    A_Function_Renaming_Declaration,         -- 8.5.4(2)
-    A_Generic_Package_Renaming_Declaration,  -- 8.5.5(2)
-    A_Generic_Procedure_Renaming_Declaration,-- 8.5.5(2)
-    A_Generic_Function_Renaming_Declaration, -- 8.5.5(2)
-
-    A_Task_Body_Declaration,                 -- 9.1(6)
-    A_Protected_Body_Declaration,            -- 9.4(7)
-    An_Entry_Declaration,                    -- 9.5.2(2)
-    An_Entry_Body_Declaration,               -- 9.5.2(5)
-    An_Entry_Index_Specification,            -- 9.5.2(2)
-
-    A_Procedure_Body_Stub,                   -- 10.1.3(3)
-    A_Function_Body_Stub,                    -- 10.1.3(3)
-    A_Package_Body_Stub,                     -- 10.1.3(4)
-    A_Task_Body_Stub,                        -- 10.1.3(5)
-    A_Protected_Body_Stub,                   -- 10.1.3(6)
-
-    An_Exception_Declaration,                -- 11.1(2)
-    A_Choice_Parameter_Specification,        -- 11.2(4)
-
-    A_Generic_Procedure_Declaration,         -- 12.1(2)
-    A_Generic_Function_Declaration,          -- 12.1(2)
-    A_Generic_Package_Declaration,           -- 12.1(2)
-
-    A_Package_Instantiation,                 -- 12.3(2)
-    A_Procedure_Instantiation,               -- 12.3(2)
-    A_Function_Instantiation,                -- 12.3(2)
-
-    A_Formal_Object_Declaration,             -- 12.4(2)  -> Mode_Kinds
-    A_Formal_Type_Declaration,               -- 12.5(2)
-    A_Formal_Procedure_Declaration,          -- 12.6(2)  -> Subprogram_Default_Kinds
-    A_Formal_Function_Declaration,           -- 12.6(2)  -> Subprogram_Default_Kinds
-    A_Formal_Package_Declaration,            -- 12.7(2)
-    A_Formal_Package_Declaration_With_Box);  -- 12.7(3)}
-@end{Example}
-
-The following Declaration_Kinds subtypes are not used by ASIS but are
+@leading@;The following Declaration_Kinds subtypes are not used by ASIS but are
 provided for the convenience of the ASIS implementor:
 
 @begin{Example}
-  @key[subtype] @AdaSubtypeDefn{Name=[A_Type_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
-              An_Ordinary_Type_Declaration .. A_Private_Extension_Declaration;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Type_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds @key[range]
+            An_Ordinary_Type_Declaration .. A_Private_Extension_Declaration;
 
-  @key[subtype] @AdaSubtypeDefn{Name=[A_Full_Type_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
-              An_Ordinary_Type_Declaration .. A_Protected_Type_Declaration;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Full_Type_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds @key[range]
+            An_Ordinary_Type_Declaration .. A_Protected_Type_Declaration;
 
-  @key[subtype] @AdaSubtypeDefn{Name=[An_Object_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
-              A_Variable_Declaration .. A_Single_Protected_Declaration;
+@key[subtype] @AdaSubtypeDefn{Name=[An_Object_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds @key[range]
+            A_Variable_Declaration .. A_Single_Protected_Declaration;
 
-  @key[subtype] @AdaSubtypeDefn{Name=[A_Number_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
-              An_Integer_Number_Declaration .. A_Real_Number_Declaration;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Number_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds @key[range]
+            An_Integer_Number_Declaration .. A_Real_Number_Declaration;
 
-  @key[subtype] @AdaSubtypeDefn{Name=[A_Renaming_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
-              An_Object_Renaming_Declaration ..
-              A_Generic_Function_Renaming_Declaration;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Renaming_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds @key[range]
+            An_Object_Renaming_Declaration ..
+            A_Generic_Function_Renaming_Declaration;
 
-  @key[subtype] @AdaSubtypeDefn{Name=[A_Body_Stub],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
-              A_Procedure_Body_Stub .. A_Protected_Body_Stub;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Body_Stub],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds @key[range]
+            A_Procedure_Body_Stub .. A_Protected_Body_Stub;
 
-  @key[subtype] @AdaSubtypeDefn{Name=[A_Generic_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
-              A_Generic_Procedure_Declaration .. A_Generic_Package_Declaration;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Generic_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds @key[range]
+            A_Generic_Procedure_Declaration .. A_Generic_Package_Declaration;
 
-  @key[subtype] @AdaSubtypeDefn{Name=[A_Generic_Instantiation],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
-              A_Package_Instantiation .. A_Function_Instantiation;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Generic_Instantiation],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds @key[range]
+            A_Package_Instantiation .. A_Function_Instantiation;
 
-  @key[subtype] @AdaSubtypeDefn{Name=[A_Formal_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds range
-              A_Formal_Object_Declaration ..
-              A_Formal_Package_Declaration_With_Box;
+@key[subtype] @AdaSubtypeDefn{Name=[A_Formal_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds @key[range]
+            A_Formal_Object_Declaration ..
+            A_Formal_Package_Declaration_With_Box;
 @end{Example}
 
 
-@LabeledSubClause{type Trait_Kinds }
+@LabeledSubClause{type Trait_Kinds}
 
-Trait_Kinds provide a means of further classifying the syntactic structure
-or "trait" of certain A_Declaration and A_Definition elements.
-Trait_Kinds are determined only by the presence (or absence) of certain
-reserved words. The semantics of an element are not considered.
-The reserved words of interest here are "abstract", "aliased", "limited",
-"private", "reverse", and "access" when it appears in an access_definition.
-Trait_Kinds enumerates all combinations useful in this classification.
+Trait_Kinds provide a means of further classifying the syntactic structure or
+"trait" of certain A_Declaration and A_Definition elements.@Defn{Trait}
+Trait_Kinds are
+determined only by the presence (or absence) of certain reserved words. The
+semantics of an element are not considered. The reserved words of interest here
+are @key[abstract], @key[aliased], @key[limited], ]private], @key[reverse], and
+@key[access] when it appears in an access_definition. Trait_Kinds enumerates
+all combinations useful in this classification.
 
 For example, A_Variable_Declaration element that is semantically a
 limited type because its components are of a limited type is
 An_Ordinary_Trait, not A_Limited_Trait, since the reserved word "limited"
 does not appear in its declaration or definition.
 
-The subordinate Trait_Kinds allow Declaration_Kinds and Definition_Kinds
-to enumerate fewer higher level elements, and be less cluttered by all
-possible permutations of syntactic possibilities. For example, in the case
-of a record_type_definition, Definition_Kinds can provide just two literals
-that differentiate between ordinary record types and tagged record types:
+@leading@;The subordinate Trait_Kinds allow Declaration_Kinds and
+Definition_Kinds to enumerate fewer higher level elements, and be less
+cluttered by all possible permutations of syntactic possibilities. For example,
+in the case of a record_type_definition, Definition_Kinds can provide just two
+literals that differentiate between ordinary record types and tagged record
+types:
 
-    A_Record_Type_Definition,              -- 3.8(2)    -> Trait_Kinds
-    A_Tagged_Record_Type_Definition,       -- 3.8(2)    -> Trait_Kinds
+@begin{Example}
+   A_Record_Type_Definition,              -- 3.8(2)    -> Trait_Kinds
+   A_Tagged_Record_Type_Definition,       -- 3.8(2)    -> Trait_Kinds
+@end{Example}
 
 The remaining classification can be accomplished, if desired, using
 Trait_Kinds to determine if the definition is abstract, or limited, or both.
 Without Trait_Kinds, Definition_Kinds needs six literals to identify
 all the syntactic combinations for a record_type_definition.
 
-Elements expected by the Trait_Kind query are any Declaration_Kinds or
+@leading@;Elements expected by the Trait_Kind query are any Declaration_Kinds or
 Definition_Kinds for which Trait_Kinds is a subordinate kind: the literal
 definition has "-> Trait_Kinds" following it. For example, the
 definitions of:
 
-    A_Discriminant_Specification,              -- 3.7(5)   -> Trait_Kinds
-    A_Component_Declaration,                   -- 3.8(6)
+@begin{Example}
+   A_Discriminant_Specification,              -- 3.7(5)   -> Trait_Kinds
+   A_Component_Declaration,                   -- 3.8(6)
+@end{Example}
 
 indicate A_Discriminant_Specification is an expected kind while
 A_Component_Declaration is unexpected.
@@ -655,525 +673,573 @@ An_Ordinary_Trait is any expected element whose syntax does not explicitly
 contain any of the reserved words listed above.
 
 
-
-Trait_Kinds
-Literals
-
-@begin{Example}
-  type Trait_Kinds is (
-
-    Not_A_Trait,                         -- An unexpected element
-
-    An_Ordinary_Trait,                   -- The declaration or definition does
-                                         -- not contain the reserved words
-                                         -- "aliased", "reverse", "private",
-                                         -- "limited", "abstract", or
-                                         -- "access" in an access_definition
-
-    An_Aliased_Trait,                    -- "aliased" is present
-    An_Access_Definition_Trait,          -- "access" in an access_definition is present
-    A_Reverse_Trait,                     -- "reverse" is present
-    A_Private_Trait,                     -- Only "private" is present
-    A_Limited_Trait,                     -- Only "limited" is present
-    A_Limited_Private_Trait,             -- "limited" and "private" are present
-
-    An_Abstract_Trait,                   -- Only "abstract" is present
-    An_Abstract_Private_Trait,           -- "abstract" and "private" are present
-    An_Abstract_Limited_Trait,           -- "abstract" and "limited" are present
-    An_Abstract_Limited_Private_Trait);  -- "abstract", "limited", and "private" are
-                                         -- present
-@end{Example}
-
-@LabeledSubClause{type Declaration_Origins }
-
-Declaration_Origins
-Literals                             -- Reference Manual
+@Chg{Version=[1],New=[],Old=[Trait_Kinds
+Literals]}
 
 @begin{Example}
-  type Declaration_Origins is (
+@key[type] @AdaTypeDefn{Trait_Kinds} @key[is] (
 
-    Not_A_Declaration_Origin,            -- An unexpected element
+   @AdaObjDefn{Not_A_Trait},                         -- An unexpected element
 
-    An_Explicit_Declaration,             -- 3.1(5) explicitly declared in
-                                         -- the text of a program, or within
-                                         -- an expanded generic template
-    An_Implicit_Predefined_Declaration,  -- 3.1(5), 3.2.3(1), A.1(2)
-    An_Implicit_Inherited_Declaration);  -- 3.1(5), 3.4(6-35)
+   @AdaObjDefn{An_Ordinary_Trait},                   -- The declaration or definition does
+                                        -- not contain the reserved words
+                                        -- @key[aliased], @key[reverse], @key[private],
+                                        -- @key[limited], @key[abstract], or
+                                        -- @key[access] in an access_definition
+
+   @AdaObjDefn{An_Aliased_Trait},                    -- @key[aliased] is present
+   @AdaObjDefn{An_Access_Definition_Trait},          -- @key[access] in an access_definition is present
+   @AdaObjDefn{A_Reverse_Trait},                     -- @key[reverse] is present
+   @AdaObjDefn{A_Private_Trait},                     -- Only @key[private] is present
+   @AdaObjDefn{A_Limited_Trait},                     -- Only @key[limited] is present
+   @AdaObjDefn{A_Limited_Private_Trait},             -- @key[limited] and @key[private] are present
+
+   @AdaObjDefn{An_Abstract_Trait},                   -- Only @key[abstract] is present
+   @AdaObjDefn{An_Abstract_Private_Trait},           -- @key[abstract] and @key[private] are present
+   @AdaObjDefn{An_Abstract_Limited_Trait},           -- @key[abstract] and @key[limited] are present
+   @AdaObjDefn{An_Abstract_Limited_Private_Trait});  -- @key[abstract], @key[limited], and @key[private] are
+                                        -- present
 @end{Example}
+
+
+@LabeledSubClause{type Declaration_Origins}
+
+@Chg{Version=[1],New=[],Old=[Declaration_Origins
+Literals                             -- Reference Manual]}
+
+@begin{Example}
+@key[type] @AdaTypeDefn{Declaration_Origins} @key[is] (
+
+   @AdaObjDefn{Not_A_Declaration_Origin},            -- An unexpected element
+
+   @AdaObjDefn{An_Explicit_Declaration},             -- 3.1(5) explicitly declared in
+                                        -- the text of a program, or within
+                                        -- an expanded generic template
+   @AdaObjDefn{An_Implicit_Predefined_Declaration},  -- 3.1(5), 3.2.3(1), A.1(2)
+   @AdaObjDefn{An_Implicit_Inherited_Declaration});  -- 3.1(5), 3.4(6-35)
+@end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each declaration origin.]}
 
 @LabeledSubClause{type Mode_Kinds }
 
-Mode_Kinds
-Literals                 -- Reference Manual
+@Chg{Version=[1],New=[],Old=[Mode_Kinds
+Literals                 -- Reference Manual]}
 
 @begin{Example}
-  type Mode_Kinds is (       -- 6.1
+@key[type] @AdaTypeDefn{Mode_Kinds} @key[is] (        -- 6.1@Chg{Version=[1],New=[ in 8652:1995],Old=[]}
 
-    Not_A_Mode,              -- An unexpected element
+   @AdaObjDefn{Not_A_Mode},              -- An unexpected element
 
-    A_Default_In_Mode,       -- procedure A(B :        C);
-    An_In_Mode,              -- procedure A(B : IN     C);
-    An_Out_Mode,             -- procedure A(B :    OUT C);
-    An_In_Out_Mode);         -- procedure A(B : IN OUT C);
-@end{Example}
-
-@LabeledSubClause{type Subprogram_Default_Kinds }
-
-Subprogram_Default_Kinds
-Literals                 -- Reference Manual
-
-@begin{Example}
-  type Subprogram_Default_Kinds is (    -- 12.6
-
-    Not_A_Default,           -- An unexpected element
-
-    A_Name_Default,          -- with subprogram_specification is default_name;
-    A_Box_Default,           -- with subprogram_specification is <>;
-    A_Nil_Default);          -- with subprogram_specification;
+   @AdaObjDefn{A_Default_In_Mode},       -- @key[procedure] A(B :        C);
+   @AdaObjDefn{An_In_Mode},              -- @Key[procedure] A(B : @key[in]     C);
+   @AdaObjDefn{An_Out_Mode},             -- @key[procedure] A(B :    @key[out] C);
+   @AdaObjDefn{An_In_Out_Mode});         -- @key[procedure] A(B : @key[in out] C);
 @end{Example}
 
 
-@LabeledSubClause{type Definition_Kinds }
+@LabeledSubClause{type Subprogram_Default_Kinds}
 
-Definition_Kinds
-Literals                          -- Reference Manual   -> Subordinate Kinds
+@Chg{Version=[1],New=[],Old=[Subprogram_Default_Kinds
+Literals                 -- Reference Manual]}
 
 @begin{Example}
-  type Definition_Kinds is (
+@key[type] @AdaTypeDefn{Subprogram_Default_Kinds} @key[is] (   -- 12.6@Chg{Version=[1],New=[ in 8652:1995],Old=[]}
 
-    Not_A_Definition,                 -- An unexpected element
+   @AdaObjDefn{Not_A_Default},           -- An unexpected element
 
-    A_Type_Definition,                -- 3.2.1(4)    -> Type_Kinds
-
-    A_Subtype_Indication,             -- 3.2.2(3)
-    A_Constraint,                     -- 3.2.2(5)    -> Constraint_Kinds
-
-    A_Component_Definition,           -- 3.6(7)      -> Trait_Kinds
-
-    A_Discrete_Subtype_Definition,    -- 3.6(6)      -> Discrete_Range_Kinds
-    A_Discrete_Range,                 -- 3.6.1(3)    -> Discrete_Range_Kinds
-
-    An_Unknown_Discriminant_Part,     -- 3.7(3)
-    A_Known_Discriminant_Part,        -- 3.7(2)
-
-    A_Record_Definition,              -- 3.8(3)
-    A_Null_Record_Definition,         -- 3.8(3)
-
-    A_Null_Component,                 -- 3.8(4)
-    A_Variant_Part,                   -- 3.8.1(2)
-    A_Variant,                        -- 3.8.1(3)
-
-    An_Others_Choice,                 -- 3.8.1(5), 4.3.1(5), 4.3.3(5), 11.2(5)
-
-    A_Private_Type_Definition,        -- 7.3(2)      -> Trait_Kinds
-    A_Tagged_Private_Type_Definition, -- 7.3(2)      -> Trait_Kinds
-    A_Private_Extension_Definition,   -- 7.3(3)      -> Trait_Kinds
-
-    A_Task_Definition,                -- 9.1(4)
-    A_Protected_Definition,           -- 9.4(4)
-
-    A_Formal_Type_Definition);        -- 12.5(3)     -> Formal_Type_Kinds
+   @AdaObjDefn{A_Name_Default},          -- @key[with] subprogram_specification @key[is] default_name;
+   @AdaObjDefn{A_Box_Default},           -- @key[with] subprogram_specification @key[is] <>;
+   @AdaObjDefn{A_Nil_Default});          -- @key[with] subprogram_specification;
 @end{Example}
+
+
+@LabeledSubClause{type Definition_Kinds}
+
+@Chg{Version=[1],New=[],Old=[Definition_Kinds
+Literals                          -- Reference Manual   -> Subordinate Kinds]}
+
+@begin{Example}
+@key[type] @AdaTypeDefn{Definition_Kinds} @key[is] (
+
+   @AdaObjDefn{Not_A_Definition},                 -- An unexpected element
+
+   @AdaObjDefn{A_Type_Definition},                -- 3.2.1(4)    -> Type_Kinds
+
+   @AdaObjDefn{A_Subtype_Indication},             -- 3.2.2(3)
+   @AdaObjDefn{A_Constraint},                     -- 3.2.2(5)    -> Constraint_Kinds
+
+   @AdaObjDefn{A_Component_Definition},           -- 3.6(7)      -> Trait_Kinds
+
+   @AdaObjDefn{A_Discrete_Subtype_Definition},    -- 3.6(6)      -> Discrete_Range_Kinds
+   @AdaObjDefn{A_Discrete_Range},                 -- 3.6.1(3)    -> Discrete_Range_Kinds
+
+   @AdaObjDefn{An_Unknown_Discriminant_Part},     -- 3.7(3)
+   @AdaObjDefn{A_Known_Discriminant_Part},        -- 3.7(2)
+
+   @AdaObjDefn{A_Record_Definition},              -- 3.8(3)
+   @AdaObjDefn{A_Null_Record_Definition},         -- 3.8(3)
+
+   @AdaObjDefn{A_Null_Component},                 -- 3.8(4)
+   @AdaObjDefn{A_Variant_Part},                   -- 3.8.1(2)
+   @AdaObjDefn{A_Variant},                        -- 3.8.1(3)
+
+   @AdaObjDefn{An_Others_Choice},                 -- 3.8.1(5), 4.3.1(5), 4.3.3(5), 11.2(5)
+
+   @AdaObjDefn{A_Private_Type_Definition},        -- 7.3(2)      -> Trait_Kinds
+   @AdaObjDefn{A_Tagged_Private_Type_Definition}, -- 7.3(2)      -> Trait_Kinds
+   @AdaObjDefn{A_Private_Extension_Definition},   -- 7.3(3)      -> Trait_Kinds
+
+   @AdaObjDefn{A_Task_Definition},                -- 9.1(4)
+   @AdaObjDefn{A_Protected_Definition},           -- 9.4(4)
+
+   @AdaObjDefn{A_Formal_Type_Definition});        -- 12.5(3)     -> Formal_Type_Kinds
+@end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each kind of definition; the subordinate kind (if any)
+is given as well.]}
+
 
 @LabeledSubClause{type Type_Kinds}
 
-Type_Kinds
-Literals                               -- Reference Manual  -> Subordinate Kinds
+@Chg{Version=[1],New=[],Old=[Type_Kinds
+Literals                               -- Reference Manual  -> Subordinate Kinds]}
 
 @begin{Example}
-  type Type_Kinds is (
+@key[type] @AdaTypeDefn{Type_Kinds} @key[is] (
 
-    Not_A_Type_Definition,                 -- An unexpected element
+   @AdaObjDefn{Not_A_Type_Definition},                 -- An unexpected element
 
-    A_Derived_Type_Definition,             -- 3.4(2)     -> Trait_Kinds
-    A_Derived_Record_Extension_Definition, -- 3.4(2)     -> Trait_Kinds
+   @AdaObjDefn{A_Derived_Type_Definition},             -- 3.4(2)     -> Trait_Kinds
+   @AdaObjDefn{A_Derived_Record_Extension_Definition}, -- 3.4(2)     -> Trait_Kinds
 
-    An_Enumeration_Type_Definition,        -- 3.5.1(2)
+   @AdaObjDefn{An_Enumeration_Type_Definition},        -- 3.5.1(2)
 
-    A_Signed_Integer_Type_Definition,      -- 3.5.4(3)
-    A_Modular_Type_Definition,             -- 3.5.4(4)
+   @AdaObjDefn{A_Signed_Integer_Type_Definition},      -- 3.5.4(3)
+   @AdaObjDefn{A_Modular_Type_Definition},             -- 3.5.4(4)
 
-    A_Root_Type_Definition,                -- 3.5.4(14), 3.5.6(3)
-                                           --        -> Root_Type_Kinds
-    A_Floating_Point_Definition,           -- 3.5.7(2)
+   @AdaObjDefn{A_Root_Type_Definition},                -- 3.5.4(14), 3.5.6(3)
+                                          --        -> Root_Type_Kinds
+   @AdaObjDefn{A_Floating_Point_Definition},           -- 3.5.7(2)
 
-    An_Ordinary_Fixed_Point_Definition,    -- 3.5.9(3)
-    A_Decimal_Fixed_Point_Definition,      -- 3.5.9(6)
+   @AdaObjDefn{An_Ordinary_Fixed_Point_Definition},    -- 3.5.9(3)
+   @AdaObjDefn{A_Decimal_Fixed_Point_Definition},      -- 3.5.9(6)
 
-    An_Unconstrained_Array_Definition,     -- 3.6(2)
-    A_Constrained_Array_Definition,        -- 3.6(2)
+   @AdaObjDefn{An_Unconstrained_Array_Definition},     -- 3.6(2)
+   @AdaObjDefn{A_Constrained_Array_Definition},        -- 3.6(2)
 
-    A_Record_Type_Definition,              -- 3.8(2)     -> Trait_Kinds
-    A_Tagged_Record_Type_Definition,       -- 3.8(2)     -> Trait_Kinds
+   @AdaObjDefn{A_Record_Type_Definition},              -- 3.8(2)     -> Trait_Kinds
+   @AdaObjDefn{A_Tagged_Record_Type_Definition},       -- 3.8(2)     -> Trait_Kinds
 
-    An_Access_Type_Definition);            -- 3.10(2)    -> Access_Type_Kinds
+   @AdaObjDefn{An_Access_Type_Definition});            -- 3.10(2)    -> Access_Type_Kinds
 @end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each kind of type; the subordinate kind (if any)
+is given as well.]}
 
-@LabeledSubClause{type Formal_Type_Kinds }
 
-Formal_Type_Kinds
-Literals                                  -- Reference Manual  -> Subordinate Kinds
+@LabeledSubClause{type Formal_Type_Kinds}
+
+@Chg{Version=[1],New=[],Old=[Formal_Type_Kinds
+Literals                                  -- Reference Manual  -> Subordinate Kinds]}
 
 @begin{Example}
-  type Formal_Type_Kinds is (
+@key[type] @AdaTypeDefn{Formal_Type_Kinds} @key[is] (
 
-    Not_A_Formal_Type_Definition,             -- An unexpected element
+   @AdaObjDefn{Not_A_Formal_Type_Definition},             -- An unexpected element
 
-    A_Formal_Private_Type_Definition,         -- 12.5.1(2)   -> Trait_Kinds
-    A_Formal_Tagged_Private_Type_Definition,  -- 12.5.1(2)   -> Trait_Kinds
+   @AdaObjDefn{A_Formal_Private_Type_Definition},         -- 12.5.1(2)   -> Trait_Kinds
+   @AdaObjDefn{A_Formal_Tagged_Private_Type_Definition},  -- 12.5.1(2)   -> Trait_Kinds
 
-    A_Formal_Derived_Type_Definition,         -- 12.5.1(3)   -> Trait_Kinds
+   @AdaObjDefn{A_Formal_Derived_Type_Definition},         -- 12.5.1(3)   -> Trait_Kinds
 
-    A_Formal_Discrete_Type_Definition,        -- 12.5.2(2)
+   @AdaObjDefn{A_Formal_Discrete_Type_Definition},        -- 12.5.2(2)
 
-    A_Formal_Signed_Integer_Type_Definition,  -- 12.5.2(3)
-    A_Formal_Modular_Type_Definition,         -- 12.5.2(4)
+   @AdaObjDefn{A_Formal_Signed_Integer_Type_Definition},  -- 12.5.2(3)
+   @AdaObjDefn{A_Formal_Modular_Type_Definition},         -- 12.5.2(4)
 
-    A_Formal_Floating_Point_Definition,       -- 12.5.2(5)
+   @AdaObjDefn{A_Formal_Floating_Point_Definition},       -- 12.5.2(5)
 
-    A_Formal_Ordinary_Fixed_Point_Definition, -- 12.5.2(6)
-    A_Formal_Decimal_Fixed_Point_Definition,  -- 12.5.2(7)
+   @AdaObjDefn{A_Formal_Ordinary_Fixed_Point_Definition}, -- 12.5.2(6)
+   @AdaObjDefn{A_Formal_Decimal_Fixed_Point_Definition},  -- 12.5.2(7)
 
-    A_Formal_Unconstrained_Array_Definition,  -- 3.6(3)
-    A_Formal_Constrained_Array_Definition,    -- 3.6(5)
+   @AdaObjDefn{A_Formal_Unconstrained_Array_Definition},  -- 3.6(3)
+   @AdaObjDefn{A_Formal_Constrained_Array_Definition},    -- 3.6(5)
 
-    A_Formal_Access_Type_Definition);         -- 3.10(3),3.10(5)
-                                              --         -> Access_Type_Kinds
+   @AdaObjDefn{A_Formal_Access_Type_Definition});         -- 3.10(3),3.10(5)
+                                             --         -> Access_Type_Kinds
 @end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each kind of formal type; the subordinate kind (if any)
+is given as well.]}
 
-@LabeledSubClause{type Access_Type_Kinds }
 
-Access_Type_Kinds
-Literals                             -- Reference Manual
+@LabeledSubClause{type Access_Type_Kinds}
+
+@Chg{Version=[1],New=[],Old=[Access_Type_Kinds
+Literals                             -- Reference Manual]}
 
 @begin{Example}
-  type Access_Type_Kinds is ( 3.10
+@key[type] @AdaTypeDefn{Access_Type_Kinds} @key[is] (             -- 3.10@Chg{Version=[1],New=[ in 8652:1995],Old=[]}
 
-    Not_An_Access_Type_Definition,       -- An unexpected element
+   @AdaObjDefn{Not_An_Access_Type_Definition},       -- An unexpected element
 
-    A_Pool_Specific_Access_To_Variable,  -- access subtype_indication
-    An_Access_To_Variable,               -- access all subtype_indication
-    An_Access_To_Constant,               -- access constant subtype_indication
+   @AdaObjDefn{A_Pool_Specific_Access_To_Variable},  -- @key[access] subtype_indication
+   @AdaObjDefn{An_Access_To_Variable},               -- @key[access all] subtype_indication
+   @AdaObjDefn{An_Access_To_Constant},               -- @key[access constant] subtype_indication
 
-    An_Access_To_Procedure,              -- access procedure
-    An_Access_To_Protected_Procedure,    -- access protected procedure
-    An_Access_To_Function,               -- access function
-    An_Access_To_Protected_Function);    -- access protected function
+   @AdaObjDefn{An_Access_To_Procedure},              -- @key[access procedure]
+   @AdaObjDefn{An_Access_To_Protected_Procedure},    -- @key[access protected procedure]
+   @AdaObjDefn{An_Access_To_Function},               -- @key[access function]
+   @AdaObjDefn{An_Access_To_Protected_Function});    -- @key[access protected function]
 @end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each kind of access type.]}
 
-The following Access_Type_Kinds subtypes are not used by ASIS but are
+@leading@;The following Access_Type_Kinds subtypes are not used by ASIS but are
 provided for the convenience of the ASIS implementor:
 
 @begin{Example}
-  @key[subtype] @AdaSubtypeDefn{Name=[Access_To_Object_Definition],Of=[]} @key[is] Access_Type_Kinds range
-            A_Pool_Specific_Access_To_Variable .. An_Access_To_Constant;
+@key[subtype] @AdaSubtypeDefn{Name=[Access_To_Object_Definition],Of=[]} @key[is] Access_Type_Kinds @key[range]
+          A_Pool_Specific_Access_To_Variable .. An_Access_To_Constant;
 
-  @key[subtype] @AdaSubtypeDefn{Name=[Access_To_Subprogram_Definition],Of=[]} @key[is] Access_Type_Kinds range
-            An_Access_To_Procedure .. An_Access_To_Protected_Function;
+@key[subtype] @AdaSubtypeDefn{Name=[Access_To_Subprogram_Definition],Of=[]} @key[is] Access_Type_Kinds @key[range]
+          An_Access_To_Procedure .. An_Access_To_Protected_Function;
 @end{Example}
+
 
 @LabeledSubClause{type Root_Type_Kinds}
 
-Root_Type_Kinds
-Literals                               -- Reference Manual
+@Chg{Version=[1],New=[],Old=[Root_Type_Kinds
+Literals                               -- Reference Manual]}
 
 @begin{Example}
-  type Root_Type_Kinds is (
+@key[type] @AdaTypeDefn{Root_Type_Kinds} @key[is] (
 
-    Not_A_Root_Type_Definition,            -- An unexpected element
+   @AdaObjDefn{Not_A_Root_Type_Definition},            -- An unexpected element
 
-    A_Root_Integer_Definition,             -- 3.4.1(8)
-    A_Root_Real_Definition,                -- 3.4.1(8)
+   @AdaObjDefn{A_Root_Integer_Definition},             -- 3.4.1(8)
+   @AdaObjDefn{A_Root_Real_Definition},                -- 3.4.1(8)
 
-    A_Universal_Integer_Definition,        -- 3.4.1(6)
-    A_Universal_Real_Definition,           -- 3.4.1(6)
-    A_Universal_Fixed_Definition);         -- 3.4.1(6)
+   @AdaObjDefn{A_Universal_Integer_Definition},        -- 3.4.1(6)
+   @AdaObjDefn{A_Universal_Real_Definition},           -- 3.4.1(6)
+   @AdaObjDefn{A_Universal_Fixed_Definition});         -- 3.4.1(6)
 @end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each kind of root type.]}
+
 
 @LabeledSubClause{type Constraint_Kinds}
 
-Constraint_Kinds
-Literals                               -- Reference Manual
+@Chg{Version=[1],New=[],Old=[Constraint_Kinds
+Literals                               -- Reference Manual]}
 
 @begin{Example}
-  type Constraint_Kinds is (
+@key[type] @AdaTypeDefn{Constraint_Kinds} @key[is] (
 
-    Not_A_Constraint,                      -- An unexpected element
+   @AdaObjDefn{Not_A_Constraint},                      -- An unexpected element
 
-    A_Range_Attribute_Reference,           -- 3.5(2)
-    A_Simple_Expression_Range,             -- 3.2.2, 3.5(3)
-    A_Digits_Constraint,                   -- 3.2.2, 3.5.9
-    A_Delta_Constraint,                    -- 3.2.2, J.3
-    An_Index_Constraint,                   -- 3.2.2, 3.6.1
-    A_Discriminant_Constraint);            -- 3.2.2
+   @AdaObjDefn{A_Range_Attribute_Reference},           -- 3.5(2)
+   @AdaObjDefn{A_Simple_Expression_Range},             -- 3.2.2, 3.5(3)
+   @AdaObjDefn{A_Digits_Constraint},                   -- 3.2.2, 3.5.9
+   @AdaObjDefn{A_Delta_Constraint},                    -- 3.2.2, J.3
+   @AdaObjDefn{An_Index_Constraint},                   -- 3.2.2, 3.6.1
+   @AdaObjDefn{A_Discriminant_Constraint});            -- 3.2.2
 @end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each kind of constraint.]}
+
 
 @LabeledSubClause{type Discrete_Range_Kinds}
 
-Discrete_Range_Kinds
-Literals                               -- Reference Manual
+@Chg{Version=[1],New=[],Old=[Discrete_Range_Kinds
+Literals                               -- Reference Manual]}
 
 @begin{Example}
-  type Discrete_Range_Kinds is (
+@key[type] @AdaTypeDefn{Discrete_Range_Kinds} @key[is] (
 
-    Not_A_Discrete_Range,                  -- An unexpected element
+   @AdaObjDefn{Not_A_Discrete_Range},                  -- An unexpected element
 
-    A_Discrete_Subtype_Indication,         -- 3.6.1(6), 3.2.2
-    A_Discrete_Range_Attribute_Reference,  -- 3.6.1, 3.5
-    A_Discrete_Simple_Expression_Range);   -- 3.6.1, 3.5
+   @AdaObjDefn{A_Discrete_Subtype_Indication},         -- 3.6.1(6), 3.2.2
+   @AdaObjDefn{A_Discrete_Range_Attribute_Reference},  -- 3.6.1, 3.5
+   @AdaObjDefn{A_Discrete_Simple_Expression_Range});   -- 3.6.1, 3.5
 @end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each kind of discrete range.]}
+
 
 @LabeledSubClause{type Association_Kinds}
 
-Association_Kinds
-Literals                               -- Reference Manual
+@Chg{Version=[1],New=[],Old=[Association_Kinds
+Literals                               -- Reference Manual]}
 
 @begin{Example}
-  type Association_Kinds is (
+@key[type] @AdaTypeDefn{Association_Kinds} @key[is] (
 
-    Not_An_Association,                    -- An unexpected element
+   @AdaObjDefn{Not_An_Association},                    -- An unexpected element
 
-    A_Pragma_Argument_Association,         -- 2.8
-    A_Discriminant_Association,            -- 3.7.1
-    A_Record_Component_Association,        -- 4.3.1
-    An_Array_Component_Association,        -- 4.3.3
-    A_Parameter_Association,               -- 6.4
-    A_Generic_Association);                -- 12.3
+   @AdaObjDefn{A_Pragma_Argument_Association},         -- 2.8
+   @AdaObjDefn{A_Discriminant_Association},            -- 3.7.1
+   @AdaObjDefn{A_Record_Component_Association},        -- 4.3.1
+   @AdaObjDefn{An_Array_Component_Association},        -- 4.3.3
+   @AdaObjDefn{A_Parameter_Association},               -- 6.4
+   @AdaObjDefn{A_Generic_Association});                -- 12.3
 @end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each kind of association.]}
+
 
 @LabeledSubClause{type Expression_Kinds}
 
-
-Expression_Kinds - general expression classifications
-Literals                                   -- Reference Manual -> Subordinate Kinds
+@Chg{Version=[1],New=[Type ],Old=[]}Expression_Kinds
+@Chg{Version=[1],New=[describes],Old=[@en]} general expression
+classifications@Chg{Version=[1],New=[.],Old=[
+Literals                                   -- Reference Manual -> Subordinate Kinds]}
 
 @begin{Example}
-  type Expression_Kinds is (
+@key[type] @AdaTypeDefn{Expression_Kinds} @key[is] (
 
-    Not_An_Expression,                         -- An unexpected element
+   @AdaObjDefn{Not_An_Expression},                         -- An unexpected element
 
-    An_Integer_Literal,                        -- 2.4
-    A_Real_Literal,                            -- 2.4.1
-    A_String_Literal,                          -- 2.6
+   @AdaObjDefn{An_Integer_Literal},                        -- 2.4
+   @AdaObjDefn{A_Real_Literal},                            -- 2.4.1
+   @AdaObjDefn{A_String_Literal},                          -- 2.6
 
-    An_Identifier,                             -- 4.1
-    An_Operator_Symbol,                        -- 4.1
-    A_Character_Literal,                       -- 4.1
-    An_Enumeration_Literal,                    -- 4.1
-    An_Explicit_Dereference,                   -- 4.1
-    A_Function_Call,                           -- 4.1
+   @AdaObjDefn{An_Identifier},                             -- 4.1
+   @AdaObjDefn{An_Operator_Symbol},                        -- 4.1
+   @AdaObjDefn{A_Character_Literal},                       -- 4.1
+   @AdaObjDefn{An_Enumeration_Literal},                    -- 4.1
+   @AdaObjDefn{An_Explicit_Dereference},                   -- 4.1
+   @AdaObjDefn{A_Function_Call},                           -- 4.1
 
-    An_Indexed_Component,                      -- 4.1.1
-    A_Slice,                                   -- 4.1.2
-    A_Selected_Component,                      -- 4.1.3
-    An_Attribute_Reference,                    -- 4.1.4  -> Attribute_Kinds
+   @AdaObjDefn{An_Indexed_Component},                      -- 4.1.1
+   @AdaObjDefn{A_Slice},                                   -- 4.1.2
+   @AdaObjDefn{A_Selected_Component},                      -- 4.1.3
+   @AdaObjDefn{An_Attribute_Reference},                    -- 4.1.4  -> Attribute_Kinds
 
-    A_Record_Aggregate,                        -- 4.3
-    An_Extension_Aggregate,                    -- 4.3
-    A_Positional_Array_Aggregate,              -- 4.3
-    A_Named_Array_Aggregate,                   -- 4.3
+   @AdaObjDefn{A_Record_Aggregate},                        -- 4.3
+   @AdaObjDefn{An_Extension_Aggregate},                    -- 4.3
+   @AdaObjDefn{A_Positional_Array_Aggregate},              -- 4.3
+   @AdaObjDefn{A_Named_Array_Aggregate},                   -- 4.3
 
-    An_And_Then_Short_Circuit,                 -- 4.4
-    An_Or_Else_Short_Circuit,                  -- 4.4
+   @AdaObjDefn{An_And_Then_Short_Circuit},                 -- 4.4
+   @AdaObjDefn{An_Or_Else_Short_Circuit},                  -- 4.4
 
-    An_In_Range_Membership_Test,               -- 4.4
-    A_Not_In_Range_Membership_Test,            -- 4.4
-    An_In_Type_Membership_Test,                -- 4.4
-    A_Not_In_Type_Membership_Test,             -- 4.4
+   @AdaObjDefn{An_In_Range_Membership_Test},               -- 4.4
+   @AdaObjDefn{A_Not_In_Range_Membership_Test},            -- 4.4
+   @AdaObjDefn{An_In_Type_Membership_Test},                -- 4.4
+   @AdaObjDefn{A_Not_In_Type_Membership_Test},             -- 4.4
 
-    A_Null_Literal,                            -- 4.4
-    A_Parenthesized_Expression,                -- 4.4
+   @AdaObjDefn{A_Null_Literal},                            -- 4.4
+   @AdaObjDefn{A_Parenthesized_Expression},                -- 4.4
 
-    A_Type_Conversion,                         -- 4.6
-    A_Qualified_Expression,                    -- 4.7
+   @AdaObjDefn{A_Type_Conversion},                         -- 4.6
+   @AdaObjDefn{A_Qualified_Expression},                    -- 4.7
 
-    An_Allocation_From_Subtype,                -- 4.8
-    An_Allocation_From_Qualified_Expression);  -- 4.8
+   @AdaObjDefn{An_Allocation_From_Subtype},                -- 4.8
+   @AdaObjDefn{An_Allocation_From_Qualified_Expression});  -- 4.8
 @end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each kind of expression; the subordinate kind (if any)
+is given as well.]}
+
 
 @LabeledSubClause{type Operator_Kinds}
 
-Operator_Kinds - classification of the various Ada predefined operators
-Literals                           -- Reference Manual
+@Chg{Version=[1],New=[Type ],Old=[]}Operator_Kinds
+@Chg{Version=[1],New=[describes],Old=[@en]} classification of
+the various Ada predefined operators@Chg{Version=[1],New=[.],Old=[
+Literals                           -- Reference Manual]}
 
 @begin{Example}
-  type Operator_Kinds is (             -- 4.5
+@key[type] @AdaTypeDefn{Operator_Kinds} @key[is] (             -- 4.5@Chg{Version=[1],New=[ in 8652:1995],Old=[]}
 
-    Not_An_Operator,                   -- An unexpected element
+   @AdaObjDefn{Not_An_Operator},                   -- An unexpected element
 
-    An_And_Operator,                   -- and
-    An_Or_Operator,                    -- or
-    An_Xor_Operator,                   -- xor
-    An_Equal_Operator,                 -- =
-    A_Not_Equal_Operator,              -- /=
-    A_Less_Than_Operator,              -- <
-    A_Less_Than_Or_Equal_Operator,     -- <=
-    A_Greater_Than_Operator,           -- >
-    A_Greater_Than_Or_Equal_Operator,  -- >=
-    A_Plus_Operator,                   -- +
-    A_Minus_Operator,                  -- -
-    A_Concatenate_Operator,            -- &
-    A_Unary_Plus_Operator,             -- +
-    A_Unary_Minus_Operator,            -- -
-    A_Multiply_Operator,               -- *
-    A_Divide_Operator,                 -- /
-    A_Mod_Operator,                    -- mod
-    A_Rem_Operator,                    -- rem
-    An_Exponentiate_Operator,          -- **
-    An_Abs_Operator,                   -- abs
-    A_Not_Operator);                   -- not
+   @AdaObjDefn{An_And_Operator},                   -- @key[and]
+   @AdaObjDefn{An_Or_Operator},                    -- @key[or]
+   @AdaObjDefn{An_Xor_Operator},                   -- @key[xor]
+   @AdaObjDefn{An_Equal_Operator},                 -- =
+   @AdaObjDefn{A_Not_Equal_Operator},              -- /=
+   @AdaObjDefn{A_Less_Than_Operator},              -- <
+   @AdaObjDefn{A_Less_Than_Or_Equal_Operator},     -- <=
+   @AdaObjDefn{A_Greater_Than_Operator},           -- >
+   @AdaObjDefn{A_Greater_Than_Or_Equal_Operator},  -- >=
+   @AdaObjDefn{A_Plus_Operator},                   -- +
+   @AdaObjDefn{A_Minus_Operator},                  -- -
+   @AdaObjDefn{A_Concatenate_Operator},            -- &
+   @AdaObjDefn{A_Unary_Plus_Operator},             -- +
+   @AdaObjDefn{A_Unary_Minus_Operator},            -- -
+   @AdaObjDefn{A_Multiply_Operator},               -- *
+   @AdaObjDefn{A_Divide_Operator},                 -- /
+   @AdaObjDefn{A_Mod_Operator},                    -- @key[mod]
+   @AdaObjDefn{A_Rem_Operator},                    -- @key[rem]
+   @AdaObjDefn{An_Exponentiate_Operator},          -- **
+   @AdaObjDefn{An_Abs_Operator},                   -- @key[abs]
+   @AdaObjDefn{A_Not_Operator});                   -- @key[not]
 @end{Example}
 
-@LabeledSubClause{type Attribute_Kinds }
 
-Attribute_Kinds - classifications for all known Ada attributes
-Literals                       -- Reference Manual
+@LabeledSubClause{type Attribute_Kinds}
+
+@Chg{Version=[1],New=[Type ],Old=[]}Attribute_Kinds
+@Chg{Version=[1],New=[describes],Old=[@en]} classifications of all known
+Ada attributes@Chg{Version=[1],New=[.],Old=[
+Literals                       -- Reference Manual]}
 
 @begin{Example}
-  type Attribute_Kinds is (
+@key[type] @AdaTypeDefn{Attribute_Kinds} @key[is] (
 
-    Not_An_Attribute,              -- An unexpected element
+   @AdaObjDefn{Not_An_Attribute},              -- An unexpected element
 
-    An_Access_Attribute,           -- 3.10.2(24), 3.10.2(32), K(2), K(4)
-    An_Address_Attribute,          -- 13.3(11), J.7.1(5), K(6)
-    An_Adjacent_Attribute,         -- A.5.3(48), K(8)
-    An_Aft_Attribute,              -- 3.5.10(5), K(12)
-    An_Alignment_Attribute,        -- 13.3(23), K(14)
-    A_Base_Attribute,              -- 3.5(15), K(17)
-    A_Bit_Order_Attribute,         -- 13.5.3(4), K(19)
-    A_Body_Version_Attribute,      -- E.3(4), K(21)
-    A_Callable_Attribute,          -- 9.9(2), K(23)
-    A_Caller_Attribute,            -- C.7.1(14), K(25)
-    A_Ceiling_Attribute,           -- A.5.3(33), K(27)
-    A_Class_Attribute,             -- 3.9(14), 7.3.1(9), K(31), K(34)
-    A_Component_Size_Attribute,    -- 13.3(69), K(36)
-    A_Compose_Attribute,           -- A.5.3(24), K(38)
-    A_Constrained_Attribute,       -- 3.7.2(3), J.4(2), K(42)
-    A_Copy_Sign_Attribute,         -- A.5.3(51), K(44)
-    A_Count_Attribute,             -- 9.9(5), K(48)
-    A_Definite_Attribute,          -- 12.5.1(23), K(50)
-    A_Delta_Attribute,             -- 3.5.10(3), K(52)
-    A_Denorm_Attribute,            -- A.5.3(9), K(54)
-    A_Digits_Attribute,            -- 3.5.8(2), 3.5.10(7), K(56), K(58)
-    An_Exponent_Attribute,         -- A.5.3(18), K(60)
-    An_External_Tag_Attribute,     -- 13.3(75), K(64)
-    A_First_Attribute,             -- 3.5(12), 3.6.2(3), K(68), K(70)
-    A_First_Bit_Attribute,         -- 13.5.2(3), K(72)
-    A_Floor_Attribute,             -- A.5.3(30), K(74)
-    A_Fore_Attribute,              -- 3.5.10(4), K(78)
-    A_Fraction_Attribute,          -- A.5.3(21), K(80)
-    An_Identity_Attribute,         -- 11.4.1(9), C.7.1(12), K(84), K(86)
-    An_Image_Attribute,            -- 3.5(35), K(88)
-    An_Input_Attribute,            -- 13.13.2(22), 13.13.2(32), K(92), K(96)
-    A_Last_Attribute,              -- 3.5(13), 3.6.2(5), K(102), K(104)
-    A_Last_Bit_Attribute,          -- 13.5.2(4), K(106)
-    A_Leading_Part_Attribute,      -- A.5.3(54), K(108)
-    A_Length_Attribute,            -- 3.6.2(9), K(117)
-    A_Machine_Attribute,           -- A.5.3(60), K(119)
-    A_Machine_Emax_Attribute,      -- A.5.3(8), K(123)
-    A_Machine_Emin_Attribute,      -- A.5.3(7), K(125)
-    A_Machine_Mantissa_Attribute,  -- A.5.3(6), K(127)
-    A_Machine_Overflows_Attribute, -- A.5.3(12), A.5.4(4), K(129), K(131)
-    A_Machine_Radix_Attribute,     -- A.5.3(2), A.5.4(2), K(133), K(135)
-    A_Machine_Rounds_Attribute,    -- A.5.3(11), A.5.4(3), K(137), K(139)
-    A_Max_Attribute,               -- 3.5(19), K(141)
-    A_Max_Size_In_Storage_Elements_Attribute,--  13.11.1(3), K(145)
-    A_Min_Attribute,               -- 3.5(16), K(147)
-    A_Model_Attribute,             -- A.5.3(68), G.2.2(7), K(151)
-    A_Model_Emin_Attribute,        -- A.5.3(65), G.2.2(4), K(155)
-    A_Model_Epsilon_Attribute,     -- A.5.3(66), K(157)
-    A_Model_Mantissa_Attribute,    -- A.5.3(64), G.2.2(3), K(159)
-    A_Model_Small_Attribute,       -- A.5.3(67), K(161)
-    A_Modulus_Attribute,           -- 3.5.4(17), K(163)
-    An_Output_Attribute,           -- 13.13.2(19), 13.13.2(29), K(165), K(169)
-    A_Partition_ID_Attribute,      -- E.1(9), K(173)
-    A_Pos_Attribute,               -- 3.5.5(2), K(175)
-    A_Position_Attribute,          -- 13.5.2(2), K(179)
-    A_Pred_Attribute,              -- 3.5(25), K(181)
-    A_Range_Attribute,             -- 3.5(14), 3.6.2(7), K(187), K(189)
-    A_Read_Attribute,              -- 13.13.2(6), 13.13.2(14), K(191), K(195)
-    A_Remainder_Attribute,         -- A.5.3(45), K(199)
-    A_Round_Attribute,             -- 3.5.10(12), K(203)
-    A_Rounding_Attribute,          -- A.5.3(36), K(207)
-    A_Safe_First_Attribute,        -- A.5.3(71), G.2.2(5), K(211)
-    A_Safe_Last_Attribute,         -- A.5.3(72), G.2.2(6), K(213)
-    A_Scale_Attribute,             -- 3.5.10(11), K(215)
-    A_Scaling_Attribute,           -- A.5.3(27), K(217)
-    A_Signed_Zeros_Attribute,      -- A.5.3(13), K(221)
-    A_Size_Attribute,              -- 13.3(40), 13.3(45), K(223), K(228)
-    A_Small_Attribute,             -- 3.5.10(2), K(230)
-    A_Storage_Pool_Attribute,      -- 13.11(13), K(232)
-    A_Storage_Size_Attribute,      -- 13.3(60), 13.11(14), J.9(2), K(234),
-                                      -- K(236)
-    A_Succ_Attribute,              -- 3.5(22), K(238)
-    A_Tag_Attribute,               -- 3.9(16), 3.9(18), K(242), K(244)
-    A_Terminated_Attribute,        -- 9.9(3), K(246)
-    A_Truncation_Attribute,        -- A.5.3(42), K(248)
-    An_Unbiased_Rounding_Attribute,-- A.5.3(39), K(252)
-    An_Unchecked_Access_Attribute, -- 13.10(3), H.4(18), K(256)
-    A_Val_Attribute,               -- 3.5.5(5), K(258)
-    A_Valid_Attribute,             -- 13.9.2(3), H(6), K(262)
-    A_Value_Attribute,             -- 3.5(52), K(264)
-    A_Version_Attribute,           -- E.3(3), K(268)
-    A_Wide_Image_Attribute,        -- 3.5(28), K(270)
-    A_Wide_Value_Attribute,        -- 3.5(40), K(274)
-    A_Wide_Width_Attribute,        -- 3.5(38), K(278)
-    A_Width_Attribute,             -- 3.5(39), K(280)
-    A_Write_Attribute,             -- 13.13.2(3), 13.13.2(11), K(282), K(286)
+   @AdaObjDefn{An_Access_Attribute},           -- 3.10.2(24), 3.10.2(32), K(2), K(4)
+   @AdaObjDefn{An_Address_Attribute},          -- 13.3(11), J.7.1(5), K(6)
+   @AdaObjDefn{An_Adjacent_Attribute},         -- A.5.3(48), K(8)
+   @AdaObjDefn{An_Aft_Attribute},              -- 3.5.10(5), K(12)
+   @AdaObjDefn{An_Alignment_Attribute},        -- 13.3(23), K(14)
+   @AdaObjDefn{A_Base_Attribute},              -- 3.5(15), K(17)
+   @AdaObjDefn{A_Bit_Order_Attribute},         -- 13.5.3(4), K(19)
+   @AdaObjDefn{A_Body_Version_Attribute},      -- E.3(4), K(21)
+   @AdaObjDefn{A_Callable_Attribute},          -- 9.9(2), K(23)
+   @AdaObjDefn{A_Caller_Attribute},            -- C.7.1(14), K(25)
+   @AdaObjDefn{A_Ceiling_Attribute},           -- A.5.3(33), K(27)
+   @AdaObjDefn{A_Class_Attribute},             -- 3.9(14), 7.3.1(9), K(31), K(34)
+   @AdaObjDefn{A_Component_Size_Attribute},    -- 13.3(69), K(36)
+   @AdaObjDefn{A_Compose_Attribute},           -- A.5.3(24), K(38)
+   @AdaObjDefn{A_Constrained_Attribute},       -- 3.7.2(3), J.4(2), K(42)
+   @AdaObjDefn{A_Copy_Sign_Attribute},         -- A.5.3(51), K(44)
+   @AdaObjDefn{A_Count_Attribute},             -- 9.9(5), K(48)
+   @AdaObjDefn{A_Definite_Attribute},          -- 12.5.1(23), K(50)
+   @AdaObjDefn{A_Delta_Attribute},             -- 3.5.10(3), K(52)
+   @AdaObjDefn{A_Denorm_Attribute},            -- A.5.3(9), K(54)
+   @AdaObjDefn{A_Digits_Attribute},            -- 3.5.8(2), 3.5.10(7), K(56), K(58)
+   @AdaObjDefn{An_Exponent_Attribute},         -- A.5.3(18), K(60)
+   @AdaObjDefn{An_External_Tag_Attribute},     -- 13.3(75), K(64)
+   @AdaObjDefn{A_First_Attribute},             -- 3.5(12), 3.6.2(3), K(68), K(70)
+   @AdaObjDefn{A_First_Bit_Attribute},         -- 13.5.2(3), K(72)
+   @AdaObjDefn{A_Floor_Attribute},             -- A.5.3(30), K(74)
+   @AdaObjDefn{A_Fore_Attribute},              -- 3.5.10(4), K(78)
+   @AdaObjDefn{A_Fraction_Attribute},          -- A.5.3(21), K(80)
+   @AdaObjDefn{An_Identity_Attribute},         -- 11.4.1(9), C.7.1(12), K(84), K(86)
+   @AdaObjDefn{An_Image_Attribute},            -- 3.5(35), K(88)
+   @AdaObjDefn{An_Input_Attribute},            -- 13.13.2(22), 13.13.2(32), K(92), K(96)
+   @AdaObjDefn{A_Last_Attribute},              -- 3.5(13), 3.6.2(5), K(102), K(104)
+   @AdaObjDefn{A_Last_Bit_Attribute},          -- 13.5.2(4), K(106)
+   @AdaObjDefn{A_Leading_Part_Attribute},      -- A.5.3(54), K(108)
+   @AdaObjDefn{A_Length_Attribute},            -- 3.6.2(9), K(117)
+   @AdaObjDefn{A_Machine_Attribute},           -- A.5.3(60), K(119)
+   @AdaObjDefn{A_Machine_Emax_Attribute},      -- A.5.3(8), K(123)
+   @AdaObjDefn{A_Machine_Emin_Attribute},      -- A.5.3(7), K(125)
+   @AdaObjDefn{A_Machine_Mantissa_Attribute},  -- A.5.3(6), K(127)
+   @AdaObjDefn{A_Machine_Overflows_Attribute}, -- A.5.3(12), A.5.4(4), K(129), K(131)
+   @AdaObjDefn{A_Machine_Radix_Attribute},     -- A.5.3(2), A.5.4(2), K(133), K(135)
+   @AdaObjDefn{A_Machine_Rounds_Attribute},    -- A.5.3(11), A.5.4(3), K(137), K(139)
+   @AdaObjDefn{A_Max_Attribute},               -- 3.5(19), K(141)
+   @AdaObjDefn{A_Max_Size_In_Storage_Elements_Attribute},--  13.11.1(3), K(145)
+   @AdaObjDefn{A_Min_Attribute},               -- 3.5(16), K(147)
+   @AdaObjDefn{A_Model_Attribute},             -- A.5.3(68), G.2.2(7), K(151)
+   @AdaObjDefn{A_Model_Emin_Attribute},        -- A.5.3(65), G.2.2(4), K(155)
+   @AdaObjDefn{A_Model_Epsilon_Attribute},     -- A.5.3(66), K(157)
+   @AdaObjDefn{A_Model_Mantissa_Attribute},    -- A.5.3(64), G.2.2(3), K(159)
+   @AdaObjDefn{A_Model_Small_Attribute},       -- A.5.3(67), K(161)
+   @AdaObjDefn{A_Modulus_Attribute},           -- 3.5.4(17), K(163)
+   @AdaObjDefn{An_Output_Attribute},           -- 13.13.2(19), 13.13.2(29), K(165), K(169)
+   @AdaObjDefn{A_Partition_ID_Attribute},      -- E.1(9), K(173)
+   @AdaObjDefn{A_Pos_Attribute},               -- 3.5.5(2), K(175)
+   @AdaObjDefn{A_Position_Attribute},          -- 13.5.2(2), K(179)
+   @AdaObjDefn{A_Pred_Attribute},              -- 3.5(25), K(181)
+   @AdaObjDefn{A_Range_Attribute},             -- 3.5(14), 3.6.2(7), K(187), K(189)
+   @AdaObjDefn{A_Read_Attribute},              -- 13.13.2(6), 13.13.2(14), K(191), K(195)
+   @AdaObjDefn{A_Remainder_Attribute},         -- A.5.3(45), K(199)
+   @AdaObjDefn{A_Round_Attribute},             -- 3.5.10(12), K(203)
+   @AdaObjDefn{A_Rounding_Attribute},          -- A.5.3(36), K(207)
+   @AdaObjDefn{A_Safe_First_Attribute},        -- A.5.3(71), G.2.2(5), K(211)
+   @AdaObjDefn{A_Safe_Last_Attribute},         -- A.5.3(72), G.2.2(6), K(213)
+   @AdaObjDefn{A_Scale_Attribute},             -- 3.5.10(11), K(215)
+   @AdaObjDefn{A_Scaling_Attribute},           -- A.5.3(27), K(217)
+   @AdaObjDefn{A_Signed_Zeros_Attribute},      -- A.5.3(13), K(221)
+   @AdaObjDefn{A_Size_Attribute},              -- 13.3(40), 13.3(45), K(223), K(228)
+   @AdaObjDefn{A_Small_Attribute},             -- 3.5.10(2), K(230)
+   @AdaObjDefn{A_Storage_Pool_Attribute},      -- 13.11(13), K(232)
+   @AdaObjDefn{A_Storage_Size_Attribute},      -- 13.3(60), 13.11(14), J.9(2), K(234),
+                                     -- K(236)
+   @AdaObjDefn{A_Succ_Attribute},              -- 3.5(22), K(238)
+   @AdaObjDefn{A_Tag_Attribute},               -- 3.9(16), 3.9(18), K(242), K(244)
+   @AdaObjDefn{A_Terminated_Attribute},        -- 9.9(3), K(246)
+   @AdaObjDefn{A_Truncation_Attribute},        -- A.5.3(42), K(248)
+   @AdaObjDefn{An_Unbiased_Rounding_Attribute},-- A.5.3(39), K(252)
+   @AdaObjDefn{An_Unchecked_Access_Attribute}, -- 13.10(3), H.4(18), K(256)
+   @AdaObjDefn{A_Val_Attribute},               -- 3.5.5(5), K(258)
+   @AdaObjDefn{A_Valid_Attribute},             -- 13.9.2(3), H(6), K(262)
+   @AdaObjDefn{A_Value_Attribute},             -- 3.5(52), K(264)
+   @AdaObjDefn{A_Version_Attribute},           -- E.3(3), K(268)
+   @AdaObjDefn{A_Wide_Image_Attribute},        -- 3.5(28), K(270)
+   @AdaObjDefn{A_Wide_Value_Attribute},        -- 3.5(40), K(274)
+   @AdaObjDefn{A_Wide_Width_Attribute},        -- 3.5(38), K(278)
+   @AdaObjDefn{A_Width_Attribute},             -- 3.5(39), K(280)
+   @AdaObjDefn{A_Write_Attribute},             -- 13.13.2(3), 13.13.2(11), K(282), K(286)
 
-    An_Implementation_Defined_Attribute,  -- Reference Manual, Annex M
-    An_Unknown_Attribute);         -- Unknown to ASIS
+   @AdaObjDefn{An_Implementation_Defined_Attribute},  -- Reference Manual, Annex M
+   @AdaObjDefn{An_Unknown_Attribute});         -- Unknown to ASIS
 @end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each attribute.]}
 
-@LabeledSubClause{type Statement_Kinds }
 
-Statement_Kinds - classifications of Ada statements
-Literals                             -- Reference Manual
+@LabeledSubClause{type Statement_Kinds}
+
+@Chg{Version=[1],New=[Type ],Old=[]}Statement_Kinds
+@Chg{Version=[1],New=[describes],Old=[@en]} classifications of Ada
+statements@Chg{Version=[1],New=[.],Old=[
+Literals                             -- Reference Manual]}
 
 @begin{Example}
-  type Statement_Kinds is (
+@key[type] @AdaTypeDefn{Statement_Kinds} @key[is] (
 
-    Not_A_Statement,                     -- An unexpected element
+   @AdaObjDefn{Not_A_Statement},                     -- An unexpected element
 
-    A_Null_Statement,                    -- 5.1
-    An_Assignment_Statement,             -- 5.2
-    An_If_Statement,                     -- 5.3
-    A_Case_Statement,                    -- 5.4
+   @AdaObjDefn{A_Null_Statement},                    -- 5.1
+   @AdaObjDefn{An_Assignment_Statement},             -- 5.2
+   @AdaObjDefn{An_If_Statement},                     -- 5.3
+   @AdaObjDefn{A_Case_Statement},                    -- 5.4
 
-    A_Loop_Statement,                    -- 5.5
-    A_While_Loop_Statement,              -- 5.5
-    A_For_Loop_Statement,                -- 5.5
-    A_Block_Statement,                   -- 5.6
-    An_Exit_Statement,                   -- 5.7
-    A_Goto_Statement,                    -- 5.8
+   @AdaObjDefn{A_Loop_Statement},                    -- 5.5
+   @AdaObjDefn{A_While_Loop_Statement},              -- 5.5
+   @AdaObjDefn{A_For_Loop_Statement},                -- 5.5
+   @AdaObjDefn{A_Block_Statement},                   -- 5.6
+   @AdaObjDefn{An_Exit_Statement},                   -- 5.7
+   @AdaObjDefn{A_Goto_Statement},                    -- 5.8
 
-    A_Procedure_Call_Statement,          -- 6.4
-    A_Return_Statement,                  -- 6.5
+   @AdaObjDefn{A_Procedure_Call_Statement},          -- 6.4
+   @AdaObjDefn{A_Return_Statement},                  -- 6.5
 
-    An_Accept_Statement,                 -- 9.5.2
-    An_Entry_Call_Statement,             -- 9.5.3
+   @AdaObjDefn{An_Accept_Statement},                 -- 9.5.2
+   @AdaObjDefn{An_Entry_Call_Statement},             -- 9.5.3
 
-    A_Requeue_Statement,                 -- 9.5.4
-    A_Requeue_Statement_With_Abort,      -- 9.5.4
+   @AdaObjDefn{A_Requeue_Statement},                 -- 9.5.4
+   @AdaObjDefn{A_Requeue_Statement_With_Abort},      -- 9.5.4
 
-    A_Delay_Until_Statement,             -- 9.6
-    A_Delay_Relative_Statement,          -- 9.6
+   @AdaObjDefn{A_Delay_Until_Statement},             -- 9.6
+   @AdaObjDefn{A_Delay_Relative_Statement},          -- 9.6
 
-    A_Terminate_Alternative_Statement,   -- 9.7.1
-    A_Selective_Accept_Statement,        -- 9.7.1
-    A_Timed_Entry_Call_Statement,        -- 9.7.2
-    A_Conditional_Entry_Call_Statement,  -- 9.7.3
-    An_Asynchronous_Select_Statement,    -- 9.7.4
+   @AdaObjDefn{A_Terminate_Alternative_Statement},   -- 9.7.1
+   @AdaObjDefn{A_Selective_Accept_Statement},        -- 9.7.1
+   @AdaObjDefn{A_Timed_Entry_Call_Statement},        -- 9.7.2
+   @AdaObjDefn{A_Conditional_Entry_Call_Statement},  -- 9.7.3
+   @AdaObjDefn{An_Asynchronous_Select_Statement},    -- 9.7.4
 
-    An_Abort_Statement,                  -- 9.8
-    A_Raise_Statement,                   -- 11.3
-    A_Code_Statement);                   -- 13.8
+   @AdaObjDefn{An_Abort_Statement},                  -- 9.8
+   @AdaObjDefn{A_Raise_Statement},                   -- 11.3
+   @AdaObjDefn{A_Code_Statement});                   -- 13.8
 @end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each statement.]}
+
 
 @LabeledSubClause{type Path_Kinds}
 
-
-A_Path elements represent execution path alternatives presented by the
+A_Path elements represent execution path alternatives@Defn{Path alternatives}
+presented by the
 if_statement, case_statement, and the four forms of select_statement.
 Each statement path alternative encloses component elements that
 represent a sequence_of_statements. Some forms of A_Path elements also
@@ -1189,67 +1255,71 @@ This allows queries to directly provide the sequence_of_statements enclosed
 by A_Path elements, avoiding the extra step of returning an element
 representing such an alternative.
 
-For example,
-
+@leading@;For example,
 @begin{Example}
-    select   -- A_Select_Path enclosing a sequence of two statements
+   @key[select]   -- A_Select_Path enclosing a sequence of two statements
 
-      accept Next_Work_Item(WI : in Work_Item) do
-        Current_Work_Item := WI;
-      end;
+      @key[accept] Next_Work_Item(WI : @key[in] Work_Item) @key[do]
+         Current_Work_Item := WI;
+      @key[end];
       Process_Work_Item(Current_Work_Item);
 
-    or       -- An_Or_Path enclosing a guard and a sequence of two statements
+   @key[or]       -- An_Or_Path enclosing a guard and a sequence of two statements
 
-      when Done_Early =>
-        accept Shut_Down;
-        exit;
+      @key[when] Done_Early =>
+         @key[accept] Shut_Down;
+         @key[exit];
 
-    or       -- An_Or_Path enclosing a sequence with only a single statement
+   @key[or]       -- An_Or_Path enclosing a sequence with only a single statement
 
-      terminate;
+      @key[terminate];
 
-    end select;
+   @key[end select];
 @end{Example}
 
-Path_Kinds
-Literals                      -- Reference Manual
+@Chg{Version=[1],New=[],Old=[Path_Kinds
+Literals                      -- Reference Manual]}
+@ChgAdded{Version=[2],Text=[@b{@i{We need some kind of separator between the example
+and the definition; they look the same and the type definition looks like part
+of the example. I don't have a good idea - RLB}}]}
 
 @begin{Example}
-  type Path_Kinds is (
+@key[type] @AdaTypeDefn{Path_Kinds} @key[is] (
 
-    Not_A_Path,                   -- An unexpected element
+   @AdaObjDefn{Not_A_Path},                   -- An unexpected element
 
-    An_If_Path,                   -- 5.3:
-                                        -- if condition then
-                                        --   sequence_of_statements
+   @AdaObjDefn{An_If_Path},                   -- 5.3:
+                                       -- @key[if] condition @key[then]
+                                       --   sequence_of_statements
 
-    An_Elsif_Path,                -- 5.3:
-                                        -- elsif condition then
-                                        --   sequence_of_statements
+   @AdaObjDefn{An_Elsif_Path},                -- 5.3:
+                                       -- @key[elsif] condition @key[then]
+                                       --   sequence_of_statements
 
-    An_Else_Path,                 -- 5.3, 9.7.1, 9.7.3:
-                                        -- else sequence_of_statements
+   @AdaObjDefn{An_Else_Path},                 -- 5.3, 9.7.1, 9.7.3:
+                                       -- @key[else] sequence_of_statements
 
-    A_Case_Path,                  -- 5.4:
-                                        -- when discrete_choice_list =>
-                                        --   sequence_of_statements
+   @AdaObjDefn{A_Case_Path},                  -- 5.4:
+                                       -- @key[when] discrete_choice_list =>
+                                       --   sequence_of_statements
 
-    A_Select_Path,                -- 9.7.1:
-                                        -- select [guard] select_alternative
-                                        -- 9.7.2, 9.7.3:
-                                        -- select entry_call_alternative
-                                        -- 9.7.4:
-                                        -- select triggering_alternative
+   @AdaObjDefn{A_Select_Path},                -- 9.7.1:
+                                       -- @key[select] [guard] select_alternative
+                                       -- 9.7.2, 9.7.3:
+                                       -- @key[select] entry_call_alternative
+                                       -- 9.7.4:
+                                       -- @key[select] triggering_alternative
 
-    An_Or_Path,                   -- 9.7.1:
-                                        -- or [guard] select_alternative
-                                  -- 9.7.2:
-                                        -- or delay_alternative
+   @AdaObjDefn{An_Or_Path},                   -- 9.7.1:
+                                       -- @key[or] [guard] select_alternative
+                                 -- 9.7.2:
+                                       -- @key[or] delay_alternative
 
-    A_Then_Abort_Path);           -- 9.7.4
-                                        -- then abort sequence_of_statements
+   @AdaObjDefn{A_Then_Abort_Path});           -- 9.7.4
+                                       -- @key[then abort] sequence_of_statements
 @end{Example}
+@ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
+ISO/IEC 8652:1995 for each path, and the path represented.]}
 
 
 @LabeledSubClause{type Clause_Kinds}
@@ -1260,7 +1330,7 @@ Literals                      -- Reference Manual    -> Subordinate Kinds]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[type] @AdaTypeDefn{Clause_Kinds} is (
+@key[type] @AdaTypeDefn{Clause_Kinds} @key[is] (
 
    @AdaObjDefn{Not_A_Clause},               -- An unexpected element
 
@@ -1286,7 +1356,7 @@ Literals                                  -- Reference Manual]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[type] @AdaTypeDefn{Representation_Clause_Kinds} is (
+@key[type] @AdaTypeDefn{Representation_Clause_Kinds} @key[is] (
 
    @AdaObjDefn{Not_A_Representation_Clause},            -- An unexpected element
 
