@@ -1,6 +1,6 @@
 @Part(data, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/data.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/10/10 05:10:37 $}
+@comment{$Revision: 1.3 $ $Date: 2006/10/13 00:06:37 $}
 
 @LabeledSection{package Asis.Data_Decomposition (optional)}
 
@@ -213,20 +213,26 @@ or c) an Array_Component. Ultimately, all component values originate from
 a A_Type_Definition Element; that Element determines their Context of
 origin.
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Record_Component} @key[is private];
-@AdaObjDefn{Nil_Record_Component} : constant Record_Component;
+@AdaObjDefn{Nil_Record_Component} : @key[constant] Record_Component;
 
 @key[function] "=" (Left  : @key[in] Record_Component;
               Right : @key[in] Record_Component)
               @key[return] Boolean @key[is abstract];
 @end{Example}
+@end{DescribeCode}
 
 
 @LabeledClause{type Record_Component_List}
 
-    @key[type] @AdaTypeDefn{Record_Component_List} @key[is]
-       @key[array] (Asis.List_Index @key[range] <>) @key[of] Record_Component;
+@begin{DescribeCode}
+@begin{Example}
+@key[type] @AdaTypeDefn{Record_Component_List} @key[is]
+   @key[array] (Asis.List_Index @key[range] <>) @key[of] Record_Component;
+@end{Example}
+@end{DescribeCode}
 
 
 @LabeledClause{type Array_Component}
@@ -273,25 +279,40 @@ an Element, which has an associated Context, b) a Record_Component, or c)
 another Array_Component. Ultimately, all component values originate from a
 A_Type_Definition Element; that Element determines their Context of origin.
 
-    @key[type] @AdaTypeDefn{Array_Component} @key[is private];
-    @AdaObjDefn{Nil_Array_Component} : @key[constant] Array_Component;
+@begin{DescribeCode}
+@begin{Example}
+@key[type] @AdaTypeDefn{Array_Component} @key[is private];
+@AdaObjDefn{Nil_Array_Component} : @key[constant] Array_Component;
 
-    @key[function] "=" (Left  : @key[in] Array_Component;
-                  Right : @key[in] Array_Component)
-                  @key[return] Boolean @key[is abstract];
+@key[function] "=" (Left  : @key[in] Array_Component;
+              Right : @key[in] Array_Component)
+              @key[return] Boolean @key[is abstract];
+@end{Example}
+@end{DescribeCode}
+
 
 @LabeledClause{type Array_Component_List}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[type] @AdaTypeDefn{Array_Component_List} @key[is]
+   @key[array] (Asis.List_Index @key[range] <>) @key[of] Array_Component;
+@end{Example}
+@end{DescribeCode}
 
-    @key[type] @AdaTypeDefn{Array_Component_List} @key[is]
-       @key[array] (Asis.List_Index @key[range] <>) @key[of] Array_Component;
 
 @LabeledClause{type Dimension_Indexes}
 
-Dimension_Indexes - an array of index values used to access an array stream
+@Chg{Version=[1],New=[Type ],Old=[]}Dimension_Indexes
+@Chg{Version=[1],New=[is],Old=[@en]} an array of index values used to access an
+array stream.
 
-    @key[type] @AdaTypeDefn{Dimension_Indexes} @key[is]
-       @key[array] (Asis.ASIS_Positive @key[range] <>) @key[of] Asis.ASIS_Positive;
+@begin{DescribeCode}
+@begin{Example}
+@key[type] @AdaTypeDefn{Dimension_Indexes} @key[is]
+   @key[array] (Asis.ASIS_Positive @key[range] <>) @key[of] Asis.ASIS_Positive;
+@end{Example}
+@end{DescribeCode}
 
 
 @LabeledClause{type Array_Component_Iterator}
@@ -898,27 +919,37 @@ Returns Declaration_Kinds:
      A_Component_Declaration
      A_Discriminant_Specification
 
+
 @LabeledClause{function Component_Indication}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Component_Indication} (Component : @key[in] Array_Component)
+                              @key[return] Asis.Subtype_Indication;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Component_Indication} (Component : @key[in] Array_Component)
-                                  @key[return] Asis.Subtype_Indication;
-
-Component   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component to be queried
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component
+to be queried.
 
 Returns an Asis.Subtype_Indication. These values can be used to determine
 the subtype, type, and base type of the array components.
 
 All non-Nil component values are appropriate.
 
-Returns Element_Kinds:
-     A_Subtype_Indication
+@leading@;Returns Element_Kinds:
+@begin{Display}
+A_Subtype_Indication
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function All_Named_Components}
 
-
-    @key[function] @AdaSubDefn{All_Named_Components} (Type_Definition : @key[in] Asis.Type_Definition)
-                                  @key[return] Asis.Defining_Name_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{All_Named_Components} (Type_Definition : @key[in] Asis.Type_Definition)
+                              @key[return] Asis.Defining_Name_List;
+@end{Example}
 
 Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition to query
 
@@ -930,28 +961,39 @@ type. This list does not include the names of implementation-defined
 components (Reference Manual 13.5.1 (15)); those name have the form of
 An_Attribute_Reference expression.
 
-Appropriate Element_Kinds:
-     A_Type_Definition
+@leading@;Appropriate Element_Kinds:
+@begin{Display}
+A_Type_Definition
+@end{Display}
 
-Appropriate Type_Kinds:
-     A_Derived_Type_Definition       (derived from a record type)
-     A_Record_Type_Definition
+@leading@;Appropriate Type_Kinds:
+@begin{Display}
+A_Derived_Type_Definition       (derived from a record type)
+A_Record_Type_Definition
+@end{Display}
 
-Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
-     A_Simple_Static_Model
-     A_Simple_Dynamic_Model
-     A_Complex_Dynamic_Model
+@leading@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@begin{Display}
+A_Simple_Static_Model
+A_Simple_Dynamic_Model
+A_Complex_Dynamic_Model
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Array_Length}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Array_Length} (Component : @key[in] Record_Component)
+                      @key[return] Asis.ASIS_Natural;
 
-    @key[function] @AdaSubDefn{Array_Length} (Component : @key[in] Record_Component)
-                          @key[return] Asis.ASIS_Natural;
+@key[function] @AdaSubDefn{Array_Length} (Component : @key[in] Array_Component)
+                      @key[return] Asis.ASIS_Natural;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Array_Length} (Component : @key[in] Array_Component)
-                          @key[return] Asis.ASIS_Natural;
-
-Component   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component to query
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component
+to query.
 
 Returns the number of components within an array valued component. The
 array subtype may be multidimensional. The result treats the array as if
@@ -959,43 +1001,65 @@ it were unidimensional. It is the product of the 'Lengths of the
 individual array dimensions.
 
 All Is_Array(Component) = True values are appropriate.
+@end{DescribeCode}
+
 
 @LabeledClause{function Array_Length (with dimension)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Array_Length} (Component : @key[in] Record_Component;
+                       Dimension : @key[in] Asis.ASIS_Natural)
+                      @key[return] Asis.ASIS_Natural;
 
-    @key[function] @AdaSubDefn{Array_Length} (Component : @key[in] Record_Component;
-                           Dimension : @key[in] Asis.ASIS_Natural)
-                          @key[return] Asis.ASIS_Natural;
+@key[function] @AdaSubDefn{Array_Length} (Component : @key[in] Array_Component;
+                       Dimension : @key[in] Asis.ASIS_Natural)
+                       @key[return] Asis.ASIS_Natural;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Array_Length} (Component : @key[in] Array_Component;
-                           Dimension : @key[in] Asis.ASIS_Natural)
-                          @key[return] Asis.ASIS_Natural;
-
-Component   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component to query
-Dimension   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the array dimension to query
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component
+to query. Dimension @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+array dimension to query.
 
 Returns the number of components within an array valued component. The
 array subtype may be unidimensional. The result is the 'Length(Dimension)
 of the array.
 
 All Is_Array(Component) = True values are appropriate.
+@end{DescribeCode}
+
 
 @LabeledClause{function Size}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Size} (Type_Definition : @key[in] Asis.Type_Definition)
+              @key[return] Asis.ASIS_Natural;
 
-    @key[function] @AdaSubDefn{Size} (Type_Definition : @key[in] Asis.Type_Definition)
-                  @key[return] Asis.ASIS_Natural;
+@key[function] @AdaSubDefn{Size} (Component : @key[in] Record_Component) @key[return] Asis.ASIS_Natural;
 
-    @key[function] @AdaSubDefn{Size} (Component : @key[in] Record_Component) @key[return] Asis.ASIS_Natural;
+@key[function] @AdaSubDefn{Size} (Component : @key[in] Array_Component)  @key[return] Asis.ASIS_Natural;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Size} (Component : @key[in] Array_Component)  @key[return] Asis.ASIS_Natural;
-
-Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a type definition, whose 'Size is desired
-Component       @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a component, whose 'Size is desired
+Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a type definition, whose 'Size is desired.
+Component @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a component, whose 'Size is desired.
 
 Returns the minimum number of bits required to hold a simple static type,
 the number of bits allocated to hold a record field, or the number of bits
 allocated to hold each array component.
+
+All non-Nil component values are appropriate.
+
+@leading@;Appropriate Element_Kinds:
+@begin{Display}
+A_Type_Definition
+@end{Display}
+
+@leading@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@begin{Display}
+A_Simple_Static_Model
+@end{Display}
+@end{DescribeCode}
 
 @begin{SingleNote}
 For components, this is the number of bits allocated
@@ -1006,24 +1070,19 @@ minimally required, may be preceded, followed, or surrounded by
 padding bits which are necessary to fully occupy the space allotted.
 @end{SingleNote}
 
-All non-Nil component values are appropriate.
-
-Appropriate Element_Kinds:
-     A_Type_Definition
-
-Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
-     A_Simple_Static_Model
 
 @LabeledClause{function Size (stream)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Size} (Type_Definition : @key[in] Asis.Type_Definition;
+               Data_Stream     : @key[in] Portable_Data)
+              @key[return] Asis.ASIS_Natural;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Size} (Type_Definition : @key[in] Asis.Type_Definition;
-                   Data_Stream     : @key[in] Portable_Data)
-                  @key[return] Asis.ASIS_Natural;
-
-Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the type definition to query
-Data_Stream     @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a data stream containing, at least, the complete
-                  set of discriminant or index constraints for the type
+Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the type definition to query.
+Data_Stream @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} a data stream containing, at least, the complete
+set of discriminant or index constraints for the type.
 
 Returns the 'Size of a value of this type, with these constraints. This is
 the minimum number of bits that is needed to hold any possible value of the
@@ -1033,37 +1092,46 @@ Data_Stream is checked.
 The Data_Stream may be a data stream or it may be an artificial
 data stream created by the Construct_Artificial_Data_Stream operation.
 
-Appropriate Element_Kinds:
-     A_Type_Definition
+@leading@;Appropriate Element_Kinds:
+@begin{Display}
+A_Type_Definition
+@end{Display}
 
-Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
-     A_Simple_Static_Model
-     A_Simple_Dynamic_Model
+@leading@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@begin{Display}
+A_Simple_Static_Model
+A_Simple_Dynamic_Model
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Position}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Position} (Component : @key[in] Record_Component)
+                  @key[return] Asis.ASIS_Natural;
 
-    @key[function] @AdaSubDefn{Position} (Component : @key[in] Record_Component)
-                      @key[return] Asis.ASIS_Natural;
+@key[function] @AdaSubDefn{Position} (Component : @key[in] Array_Component;
+                   Index     : @key[in] Asis.ASIS_Positive)
+                  @key[return] Asis.ASIS_Natural;
 
-    @key[function] @AdaSubDefn{Position} (Component : @key[in] Array_Component;
-                       Index     : @key[in] Asis.ASIS_Positive)
-                      @key[return] Asis.ASIS_Natural;
+@key[function] @AdaSubDefn{Position} (Component : @key[in] Array_Component;
+                   Indexes   : @key[in] Dimension_Indexes)
+                  @key[return] Asis.ASIS_Natural;
 
-    @key[function] @AdaSubDefn{Position} (Component : @key[in] Array_Component;
-                       Indexes   : @key[in] Dimension_Indexes)
-                      @key[return] Asis.ASIS_Natural;
+@key[function] @AdaSubDefn{Position} (Iterator : @key[in] Array_Component_Iterator)
+                  @key[return] Asis.ASIS_Natural;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Position} (Iterator : @key[in] Array_Component_Iterator)
-                      @key[return] Asis.ASIS_Natural;
-
-Component   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component to query
-Index       @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a value in the range 1..Array_Length (Component),
-              the index of the component to query
-Indexes     @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a list of index values, there is one value for
-              each dimension of the array type, each index N is in the
-              range 1..Array_Length (Component, N);
-Iterator    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a particular array component to query
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component to query.
+Index @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a value in the range 1..Array_Length (Component),
+the index of the component to query.
+Indexes @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} a list of index values, there is one value for
+each dimension of the array type, each index N is in the
+range 1..Array_Length (Component, N);.
+Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} a particular
+array component to query.
 
 Returns the System.Storage_Unit offset, from the start of the first storage
 unit occupied by the enclosing composite type, of the first of the storage
@@ -1074,31 +1142,36 @@ ASIS_Inappropriate_Element with a Status of Data_Error if any index is not
 in the expected range or if Done (Iterator) = True. The Status value will
 be Data_Error. The Diagnosis string will indicate the kind of error
 detected.
+@end{DescribeCode}
+
 
 @LabeledClause{function First_Bit}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{First_Bit} (Component : @key[in] Record_Component)
+                   @key[return] Asis.ASIS_Natural;
 
-    @key[function] @AdaSubDefn{First_Bit} (Component : @key[in] Record_Component)
-                       @key[return] Asis.ASIS_Natural;
+@key[function] @AdaSubDefn{First_Bit} (Component : @key[in] Array_Component;
+                    Index     : @key[in] Asis.ASIS_Positive)
+                   @key[return] Asis.ASIS_Natural;
 
-    @key[function] @AdaSubDefn{First_Bit} (Component : @key[in] Array_Component;
-                        Index     : @key[in] Asis.ASIS_Positive)
-                       @key[return] Asis.ASIS_Natural;
+@key[function] @AdaSubDefn{First_Bit} (Component : @key[in] Array_Component;
+                    Indexes   : @key[in] Dimension_Indexes)
+                   @key[return] Asis.ASIS_Natural;
 
-    @key[function] @AdaSubDefn{First_Bit} (Component : @key[in] Array_Component;
-                        Indexes   : @key[in] Dimension_Indexes)
-                       @key[return] Asis.ASIS_Natural;
+@key[function] @AdaSubDefn{First_Bit} (Iterator : @key[in] Array_Component_Iterator)
+                   @key[return] Asis.ASIS_Natural;
+@end{Example}
 
-    @key[function] @AdaSubDefn{First_Bit} (Iterator : @key[in] Array_Component_Iterator)
-                       @key[return] Asis.ASIS_Natural;
-
-Component   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component to query
-Index       @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a value in the range 1..Array_Length (Component),
-              the index of the component to query
-Indexes     @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a list of index values, there is one value for
-              each dimension of the array type, each index N is in the
-              range 1..Array_Length (Component, N);
-Iterator    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a particular array component to query
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component to query.
+Index @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a value in the range
+1..Array_Length (Component), the index of the component to query.
+Indexes @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} a list of index values, there is one value for
+each dimension of the array type, each index N is in the
+range 1..Array_Length (Component, N);.
+Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} a particular
+array component to query.
 
 Returns the bit offset, from the start of the first of the storage units
 occupied by the Component, of the first bit occupied by the Component. The
@@ -1109,31 +1182,35 @@ ASIS_Inappropriate_Element with a Status of Data_Error if any index is not
 in the expected range or if Done (Iterator) = True. The Status value will
 be Data_Error. The Diagnosis string will indicate the kind of error
 detected.
+@end{DescribeCode}
+
 
 @LabeledClause{function Last_Bit}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Last_Bit} (Component : @key[in] Record_Component)
+                  @key[return] Asis.ASIS_Natural;
 
-    @key[function] @AdaSubDefn{Last_Bit} (Component : @key[in] Record_Component)
-                      @key[return] Asis.ASIS_Natural;
+@key[function] @AdaSubDefn{Last_Bit} (Component : @key[in] Array_Component;
+                   Index     : @key[in] Asis.ASIS_Positive)
+                  @key[return] Asis.ASIS_Natural;
 
-    @key[function] @AdaSubDefn{Last_Bit} (Component : @key[in] Array_Component;
-                       Index     : @key[in] Asis.ASIS_Positive)
-                      @key[return] Asis.ASIS_Natural;
+@key[function] @AdaSubDefn{Last_Bit} (Component : @key[in] Array_Component;
+                   Indexes   : @key[in] Dimension_Indexes)
+                  @key[return] Asis.ASIS_Natural;
 
-    @key[function] @AdaSubDefn{Last_Bit} (Component : @key[in] Array_Component;
-                       Indexes   : @key[in] Dimension_Indexes)
-                      @key[return] Asis.ASIS_Natural;
+@key[function] @AdaSubDefn{Last_Bit} (Iterator : @key[in] Array_Component_Iterator)
+                  @key[return] Asis.ASIS_Natural;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Last_Bit} (Iterator : @key[in] Array_Component_Iterator)
-                      @key[return] Asis.ASIS_Natural;
-
-Component   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component to query
-Index       @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a value in the range 1..Array_Length (Component),
-              the index of the component to query
-Indexes     @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a list of index values, there is one value for
-              each dimension of the array type, each index N is in the
-              range 1..Array_Length (Component, N);
-Iterator    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a particular array component to query
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component to query.
+Index @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a value in the range 1..Array_Length (Component),
+the index of the component to query.
+Indexes @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} a list of index values, there is one value for
+each dimension of the array type, each index N is in the
+range 1..Array_Length (Component, N);.
+Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} a particular array component to query.
 
 Returns the bit offset, from the start of the first of the storage units
 occupied by the Index'th Element, of the last bit occupied by the Element.
@@ -1143,20 +1220,26 @@ All non-Nil component values are appropriate. Raises
 ASIS_Inappropriate_Element with a Status of Data_Error if any index is not
 in the expected range or if Done (Iterator) = True. The Status value will
 be Data_Error. The Diagnosis string will indicate the kind of error detected.
+@end{DescribeCode}
+
 
 @LabeledClause{function Portable_Constrained_Subtype}
 
-Generic for Data Stream Conversions
+Generic for Data Stream Conversions.
 
-    @key[generic]
-        -- Ada notation for a constrained subtype.
-        -- type Constrained_Subtype (<>) is private;
-        @key[type] Constrained_Subtype @key[is private];
-    @key[function] @AdaSubDefn{Portable_Constrained_Subtype}
-                (Data_Stream : @key[in] Portable_Data)
-                @key[return] Constrained_Subtype;
+@begin{DescribeCode}
+@begin{Example}
+@key[generic]
+    -- Ada notation for a constrained subtype.
+    -- @key[type] Constrained_Subtype (<>) @key[is private];
+    @key[type] Constrained_Subtype @key[is private];
+@key[function] @AdaSubDefn{Portable_Constrained_Subtype}
+            (Data_Stream : @key[in] Portable_Data)
+            @key[return] Constrained_Subtype;
+@end{Example}
 
-Data_Stream @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} an extracted component of a record
+Data_Stream @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} an extracted
+component of a record.
 
 Instantiated with an appropriate scalar type, (e.g., System.Integer, can be
 used to convert a data stream to a value that can be directly examined).
@@ -1170,16 +1253,20 @@ Portable_Array_Type_2, or Portable_Array_Type_3 interfaces.
 
 May raise Constraint_Error if the subtype is a scalar and the converted
 value is not in the subtype's range.
+@end{DescribeCode}
+
 
 @LabeledClause{function Construct_Artificial_Data_Stream}
 
-
-    @key[function] @AdaSubDefn{Construct_Artificial_Data_Stream}
-                (Type_Definition : @key[in] Asis.Type_Definition;
-                 Data_Stream     : @key[in] Portable_Data;
-                 Discriminant    : @key[in] Record_Component;
-                 Value           : @key[in] Portable_Data)
-                @key[return] Portable_Data;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Construct_Artificial_Data_Stream}
+            (Type_Definition : @key[in] Asis.Type_Definition;
+             Data_Stream     : @key[in] Portable_Data;
+             Discriminant    : @key[in] Record_Component;
+             Value           : @key[in] Portable_Data)
+            @key[return] Portable_Data;
+@end{Example}
 
 Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition for the record
 valued data stream being constructed.
@@ -1204,15 +1291,20 @@ component values may then be used for any purpose. In particular, they may
 be used to determine First_Bit, Last_Bit, and Size values for all record
 discriminants and components.
 
-Appropriate Element_Kinds:
-     A_Type_Definition
+@leading@;Appropriate Element_Kinds:
+@begin{Display}
+A_Type_Definition
+@end{Display}
 
-Appropriate Type_Kinds:
-     A_Derived_Type_Definition       (derived from a record type)
-     A_Record_Type_Definition
+@leading@;Appropriate Type_Kinds:
+@begin{Display}
+A_Derived_Type_Definition       (derived from a record type)
+A_Record_Type_Definition
+@end{Display}
 
 Raises ASIS_Inappropriate_Element, with a Status of Data_Error, if the
 discriminant Value is inappropriate for the specified Discriminant.
+@end{DescribeCode}
 
 
 @begin{Example}

@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2006/10/10 05:10:37 $}
+@comment{$Revision: 1.8 $ $Date: 2006/10/13 00:06:38 $}
 
 @LabeledSection{package Asis}
 
@@ -469,6 +469,7 @@ ISO/IEC 8652:1995 for each pragma.]}
 names defined by declarations and
 specifications.@Chg{Version=[1],New=[],Old=[Literals                                   -- Reference Manual]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Defining_Name_Kinds} @key[is] (
 
@@ -483,6 +484,7 @@ specifications.@Chg{Version=[1],New=[],Old=[Literals                            
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of defining name.]}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Declaration_Kinds}
@@ -497,6 +499,7 @@ literals.@Chg{Version=[1],New=[],Old=[Literals                                 -
 classifications@Chg{Version=[1],New=[.],Old=[
 Literals                                   -- Reference Manual -> Subordinate Kinds]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Declaration_Kinds} @key[is] (
 
@@ -617,6 +620,7 @@ provided for the convenience of the ASIS implementor:
             A_Formal_Object_Declaration ..
             A_Formal_Package_Declaration_With_Box;
 @end{Example}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Trait_Kinds}
@@ -676,6 +680,7 @@ contain any of the reserved words listed above.
 @Chg{Version=[1],New=[],Old=[Trait_Kinds
 Literals]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Trait_Kinds} @key[is] (
 
@@ -700,6 +705,7 @@ Literals]}
    @AdaObjDefn{An_Abstract_Limited_Private_Trait});  -- @key[abstract], @key[limited], and @key[private] are
                                         -- present
 @end{Example}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Declaration_Origins}
@@ -707,6 +713,7 @@ Literals]}
 @Chg{Version=[1],New=[],Old=[Declaration_Origins
 Literals                             -- Reference Manual]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Declaration_Origins} @key[is] (
 
@@ -720,12 +727,15 @@ Literals                             -- Reference Manual]}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each declaration origin.]}
+@end{DescribeCode}
 
-@LabeledSubClause{type Mode_Kinds }
+
+@LabeledSubClause{type Mode_Kinds}
 
 @Chg{Version=[1],New=[],Old=[Mode_Kinds
 Literals                 -- Reference Manual]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Mode_Kinds} @key[is] (        -- 6.1@Chg{Version=[1],New=[ in 8652:1995],Old=[]}
 
@@ -736,6 +746,7 @@ Literals                 -- Reference Manual]}
    @AdaObjDefn{An_Out_Mode},             -- @key[procedure] A(B :    @key[out] C);
    @AdaObjDefn{An_In_Out_Mode});         -- @key[procedure] A(B : @key[in out] C);
 @end{Example}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Subprogram_Default_Kinds}
@@ -743,6 +754,7 @@ Literals                 -- Reference Manual]}
 @Chg{Version=[1],New=[],Old=[Subprogram_Default_Kinds
 Literals                 -- Reference Manual]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Subprogram_Default_Kinds} @key[is] (   -- 12.6@Chg{Version=[1],New=[ in 8652:1995],Old=[]}
 
@@ -752,6 +764,7 @@ Literals                 -- Reference Manual]}
    @AdaObjDefn{A_Box_Default},           -- @key[with] subprogram_specification @key[is] <>;
    @AdaObjDefn{A_Nil_Default});          -- @key[with] subprogram_specification;
 @end{Example}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Definition_Kinds}
@@ -759,6 +772,7 @@ Literals                 -- Reference Manual]}
 @Chg{Version=[1],New=[],Old=[Definition_Kinds
 Literals                          -- Reference Manual   -> Subordinate Kinds]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Definition_Kinds} @key[is] (
 
@@ -798,6 +812,7 @@ Literals                          -- Reference Manual   -> Subordinate Kinds]}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of definition; the subordinate kind (if any)
 is given as well.]}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Type_Kinds}
@@ -805,6 +820,7 @@ is given as well.]}
 @Chg{Version=[1],New=[],Old=[Type_Kinds
 Literals                               -- Reference Manual  -> Subordinate Kinds]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Type_Kinds} @key[is] (
 
@@ -836,6 +852,7 @@ Literals                               -- Reference Manual  -> Subordinate Kinds
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of type; the subordinate kind (if any)
 is given as well.]}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Formal_Type_Kinds}
@@ -843,6 +860,7 @@ is given as well.]}
 @Chg{Version=[1],New=[],Old=[Formal_Type_Kinds
 Literals                                  -- Reference Manual  -> Subordinate Kinds]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Formal_Type_Kinds} @key[is] (
 
@@ -872,6 +890,7 @@ Literals                                  -- Reference Manual  -> Subordinate Ki
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of formal type; the subordinate kind (if any)
 is given as well.]}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Access_Type_Kinds}
@@ -879,6 +898,7 @@ is given as well.]}
 @Chg{Version=[1],New=[],Old=[Access_Type_Kinds
 Literals                             -- Reference Manual]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Access_Type_Kinds} @key[is] (             -- 3.10@Chg{Version=[1],New=[ in 8652:1995],Old=[]}
 
@@ -906,6 +926,7 @@ provided for the convenience of the ASIS implementor:
 @key[subtype] @AdaSubtypeDefn{Name=[Access_To_Subprogram_Definition],Of=[]} @key[is] Access_Type_Kinds @key[range]
           An_Access_To_Procedure .. An_Access_To_Protected_Function;
 @end{Example}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Root_Type_Kinds}
@@ -913,6 +934,7 @@ provided for the convenience of the ASIS implementor:
 @Chg{Version=[1],New=[],Old=[Root_Type_Kinds
 Literals                               -- Reference Manual]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Root_Type_Kinds} @key[is] (
 
@@ -927,6 +949,7 @@ Literals                               -- Reference Manual]}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of root type.]}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Constraint_Kinds}
@@ -934,6 +957,7 @@ ISO/IEC 8652:1995 for each kind of root type.]}
 @Chg{Version=[1],New=[],Old=[Constraint_Kinds
 Literals                               -- Reference Manual]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Constraint_Kinds} @key[is] (
 
@@ -948,6 +972,7 @@ Literals                               -- Reference Manual]}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of constraint.]}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Discrete_Range_Kinds}
@@ -955,6 +980,7 @@ ISO/IEC 8652:1995 for each kind of constraint.]}
 @Chg{Version=[1],New=[],Old=[Discrete_Range_Kinds
 Literals                               -- Reference Manual]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Discrete_Range_Kinds} @key[is] (
 
@@ -966,6 +992,7 @@ Literals                               -- Reference Manual]}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of discrete range.]}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Association_Kinds}
@@ -973,6 +1000,7 @@ ISO/IEC 8652:1995 for each kind of discrete range.]}
 @Chg{Version=[1],New=[],Old=[Association_Kinds
 Literals                               -- Reference Manual]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Association_Kinds} @key[is] (
 
@@ -987,6 +1015,7 @@ Literals                               -- Reference Manual]}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of association.]}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Expression_Kinds}
@@ -996,6 +1025,7 @@ ISO/IEC 8652:1995 for each kind of association.]}
 classifications@Chg{Version=[1],New=[.],Old=[
 Literals                                   -- Reference Manual -> Subordinate Kinds]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Expression_Kinds} @key[is] (
 
@@ -1042,6 +1072,7 @@ Literals                                   -- Reference Manual -> Subordinate Ki
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of expression; the subordinate kind (if any)
 is given as well.]}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Operator_Kinds}
@@ -1051,6 +1082,7 @@ is given as well.]}
 the various Ada predefined operators@Chg{Version=[1],New=[.],Old=[
 Literals                           -- Reference Manual]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Operator_Kinds} @key[is] (             -- 4.5@Chg{Version=[1],New=[ in 8652:1995],Old=[]}
 
@@ -1078,6 +1110,7 @@ Literals                           -- Reference Manual]}
    @AdaObjDefn{An_Abs_Operator},                   -- @key[abs]
    @AdaObjDefn{A_Not_Operator});                   -- @key[not]
 @end{Example}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Attribute_Kinds}
@@ -1087,6 +1120,7 @@ Literals                           -- Reference Manual]}
 Ada attributes@Chg{Version=[1],New=[.],Old=[
 Literals                       -- Reference Manual]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Attribute_Kinds} @key[is] (
 
@@ -1184,6 +1218,7 @@ Literals                       -- Reference Manual]}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each attribute.]}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Statement_Kinds}
@@ -1193,6 +1228,7 @@ ISO/IEC 8652:1995 for each attribute.]}
 statements@Chg{Version=[1],New=[.],Old=[
 Literals                             -- Reference Manual]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Statement_Kinds} @key[is] (
 
@@ -1234,6 +1270,7 @@ Literals                             -- Reference Manual]}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each statement.]}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Path_Kinds}
@@ -1283,6 +1320,7 @@ Literals                      -- Reference Manual]}
 and the definition; they look the same and the type definition looks like part
 of the example. I don't have a good idea - RLB}}]}
 
+@begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Path_Kinds} @key[is] (
 
@@ -1320,6 +1358,7 @@ of the example. I don't have a good idea - RLB}}]}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each path, and the path represented.]}
+@end{DescribeCode}
 
 
 @LabeledSubClause{type Clause_Kinds}

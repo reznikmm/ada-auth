@@ -1,6 +1,6 @@
 @Part(text, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/text.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/09/28 05:12:00 $}
+@comment{$Revision: 1.2 $ $Date: 2006/10/13 00:06:37 $}
 
 @LabeledSection{package Asis.Text}
 
@@ -165,7 +165,7 @@ the text of a compilation unit has any particular lifetime.
       Last_Column  : Character_Position          := 0;
    @key[end record];
 
-Nil_Span : @key[constant Span] := (First_Line   => 1,
+@AdaObjDefn{Nil_Span} : @key[constant Span] := (First_Line   => 1,
                              First_Column => 1,
                              Last_Line    => 0,
                              Last_Column  => 0);
@@ -225,130 +225,176 @@ Returns 0 if not Is_Text_Available(Element).
 @LabeledClause{function Element_Span}
 
 
-    @key[function] @AdaSubDefn{Element_Span} (Element : @key[in] Asis.Element)
-                           @key[return] Span;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Element_Span} (Element : @key[in] Asis.Element)
+                       @key[return] Span;
+@end{Example}
 
-Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
+Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to
+query.
 
 Returns the span of the given element.
 
 Returns a Nil_Span if the text of a Compilation_Unit (Compilation) cannot be
 located for any reason.
+@end{DescribeCode}
 
-@b{APPLICATION NOTE}
-
+@begin{SingleNote}
 For this query, Element is only a means to access the
 Compilation_Unit (Compilation), the availability of the text of this Element
 itself is irrelevant to the result of the query.
+@end{SingleNote}
+
 
 @LabeledClause{function Compilation_Unit_Span}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Compilation_Unit_Span} (Element : @key[in] Asis.Element)
+                                @key[return] Span;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Compilation_Unit_Span} (Element : @key[in] Asis.Element)
-                                    @key[return] Span;
-
-Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
+Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to
+query.
 
 Returns the span of the text comprising the enclosing compilation unit of
 the given element.
 
 Returns a Nil_Span if the text of a Compilation_Unit (Compilation) cannot be
 located for any reason.
+@end{DescribeCode}
 
-@b{APPLICATION NOTE}
-
+@begin{SingleNote}
 For this query, Element is only a means to access the
 Compilation_Unit (Compilation), the availability of the text of this Element
 itself is irrelevant to the result of the query.
+@end{SingleNote}
+
 
 @LabeledClause{function Compilation_Span}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Compilation_Span} (Element : @key[in] Asis.Element)
+                           @key[return] Span;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Compilation_Span} (Element : @key[in] Asis.Element)
-                               @key[return] Span;
-
-Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
+Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to
+query.
 
 Returns the span of the text comprising the compilation to which the
 element belongs. The text span may include one or more compilation units.
 
 Returns a Nil_Span if not Is_Text_Available(Element).
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Nil (line)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Line)
+                 @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Line)
-                     @key[return] Boolean;
-
-Right   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the line to check.
+Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the line to
+check.
 
 Returns True if the argument is the Nil_Line.
 
 A Line from a Line_List obtained from any of the Lines functions
 will not be Is_Nil even if it has a length of zero.
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Nil (line list)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Line_List)
+                 @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Line_List)
-                     @key[return] Boolean;
-
-Right   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the line list to check.
+Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the line list to
+check.
 
 Returns True if the argument has a 'Length of zero.
+@end{DescribeCode}
 
 
 @LabeledClause{function Is_Nil (span)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Span)
+                 @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Span)
-                     @key[return] Boolean;
-
-Right   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Span to check.
+Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the Span to
+check.
 
 Returns True if the argument has a Nil_Span.
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Equal (lines)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Equal} (Left  : @key[in] Line;
+                   Right : @key[in] Line) @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Is_Equal} (Left  : @key[in] Line;
-                       Right : @key[in] Line) @key[return] Boolean;
-
-Left    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the first of the two lines.
-Right   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the second of the two lines.
+Left @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the first of the two lines.
+Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the second of the two lines.
 
 Returns True if the two lines encompass the same text (have the same Span
 and are from the same compilation).
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Identical (lines)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Identical} (Left  : @key[in] Line;
+                       Right : @key[in] Line) @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Is_Identical} (Left  : @key[in] Line;
-                           Right : @key[in] Line) @key[return] Boolean;
-
-Left    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the first of the two lines.
-Right   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the second of the two lines.
+Left @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the first of the
+two lines. Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+second of the two lines.
 
 Returns True if the two lines encompass the same text (have the same Span
 and are from the same compilation) and are from the same Context.
+@end{DescribeCode}
+
 
 @LabeledClause{function Length}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Length} (The_Line : @key[in] Line) @key[return] Character_Position;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Length} (The_Line : @key[in] Line) @key[return] Character_Position;
-
-The_Line    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the line to query.
+The_Line @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the line to query.
 
 Returns the length of the line.
 
 Raises ASIS_Inappropriate_Line if Is_Nil (The_Line).
+@end{DescribeCode}
+
 
 @LabeledClause{function Lines (element)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Lines} (Element : @key[in] Asis.Element) @key[return] Line_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Lines} (Element : @key[in] Asis.Element) @key[return] Line_List;
-
-Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
+Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to
+query.
 
 Returns a list of lines covering the span of the given program element.
 
@@ -364,21 +410,27 @@ the First_Line/First_Column of Element's Span. The last Line of the result
 contains text from the compilation ending at the Last_Line/Last_Column of
 the Element's Span. Text before or after those limits is not reflected
 in the returned list.
+@end{DescribeCode}
 
-@b{APPLICATION NOTE}
-
+@begin{SingleNote}
 For this query, Element is only a means to access the
 Compilation_Unit (Compilation), the availability of the text of this Element
 itself is irrelevant to the result of the query.
+@end{SingleNote}
+
+
 
 @LabeledClause{function Lines (element with span)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Lines} (Element  : @key[in] Asis.Element;
+                The_Span : @key[in] Span) @key[return] Line_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Lines} (Element  : @key[in] Asis.Element;
-                    The_Span : @key[in] Span) @key[return] Line_List;
-
-Element @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
-The_Span @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the textual span to return.
+Element @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to
+query. The_Span @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+textual span to return.
 
 Returns a list of lines covering the given span from the compilation
 containing the given program element.
@@ -404,20 +456,23 @@ Raises ASIS_Inappropriate_Line_Number if Is_Nil (The_Span). If The_Span defines
 a line whose number is outside the range of text lines that can be accessed
 through the Element, the implementation is encouraged, but not required to
 raise ASIS_Inappropriate_Line_Number.
+@end{DescribeCode}
 
-@b{APPLICATION NOTE}
-
+@begin{SingleNote}
 For this query, Element is only a means to access the
 Compilation_Unit (Compilation), the availability of the text of this Element
 itself is irrelevant to the result of the query.
+@end{SingleNote}
 
 
 @LabeledClause{function Lines (element with lines)}
 
-
-    @key[function] @AdaSubDefn{Lines} (Element    : @key[in] Asis.Element;
-                    First_Line : @key[in] Line_Number_Positive;
-                    Last_Line  : @key[in] Line_Number) @key[return] Line_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Lines} (Element    : @key[in] Asis.Element;
+                First_Line : @key[in] Line_Number_Positive;
+                Last_Line  : @key[in] Line_Number) @key[return] Line_List;
+@end{Example}
 
 Element @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the element to query.
 First_Line @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the first line to return.
@@ -438,28 +493,37 @@ Raises ASIS_Inappropriate_Line_Number if the span is nil. If the span defines
 a line whose number is outside the range of text lines that can be accessed
 through the Element, the implementation is encouraged, but not required to
 raise ASIS_Inappropriate_Line_Number.
+@end{DescribeCode}
 
-@b{APPLICATION NOTE}
-
+@begin{SingleNote}
 For this query, Element is only a means to access the
 Compilation_Unit (Compilation), the availability of the text of this Element
 itself is irrelevant to the result of the query.
+@end{SingleNote}
+
 
 @LabeledClause{function Delimiter_Image}
 
-
-    @key[function] @AdaSubDefn{Delimiter_Image} @key[return] Wide_String;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Delimiter_Image} @key[return] Wide_String;
+@end{Example}
 
 Returns the string used as the delimiter separating individual lines of
 text within the program text image of an element. It is also used as the
 delimiter separating individual lines of strings returned by Debug_Image.
+@end{DescribeCode}
+
 
 @LabeledClause{function Element_Image}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Element_Image} (Element : @key[in] Asis.Element) @key[return] Program_Text;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Element_Image} (Element : @key[in] Asis.Element) @key[return] Program_Text;
-
-Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
+Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to
+query.
 
 Returns a program text image of the element. The image of an element can
 span more than one line, in which case the program text returned by the
@@ -474,6 +538,7 @@ The first character of the Element's image will thus begin at character P of the
 returned program text. Due to the possible presence of Ascii.Ht characters, the
 "column" position of characters within the image might not be the same as their
 print-column positions when the image is displayed on a screen or printed.
+@end{DescribeCode}
 
 @begin{SingleNote}
 The image of a large element can exceed the range of Program_Text. In this
@@ -481,12 +546,16 @@ case, the exception ASIS_Failed is raised with a Status of Capacity_Error.
 Use the Lines function to operate on the image of large elements.
 @end{SingleNote}
 
+
 @LabeledClause{function Line_Image}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Line_Image} (The_Line : @key[in] Line) @key[return] Program_Text;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Line_Image} (The_Line : @key[in] Line) @key[return] Program_Text;
-
-The_Line    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the line to query.
+The_Line @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the line to
+query.
 
 Returns a program text image of the line. The image of a single lexical
 element can be sliced from the returned value using the first and last
@@ -510,13 +579,17 @@ line from compilation and will contain only the initial portion of
 that line.
 
 Raises ASIS_Inappropriate_Line if Is_Nil (The_Line).
+@end{DescribeCode}
+
 
 @LabeledClause{function Non_Comment_Image}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Non_Comment_Image} (The_Line : @key[in] Line) @key[return] Program_Text;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Non_Comment_Image} (The_Line : @key[in] Line) @key[return] Program_Text;
-
-The_Line    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the line to query.
+The_Line @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the line to query.
 
 Returns a program text image of a Line up to, but excluding, any comment
 appearing in that Line.
@@ -529,13 +602,18 @@ The bounds on the returned program text are 1..N, where N is one less than the
 column of any hyphens ("--") that start a comment on the line.
 
 Raises ASIS_Inappropriate_Line if Is_Nil (The_Line).
+@end{DescribeCode}
+
 
 @LabeledClause{function Comment_Image}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Comment_Image} (The_Line : @key[in] Line) @key[return] Program_Text;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Comment_Image} (The_Line : @key[in] Line) @key[return] Program_Text;
-
-The_Line    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the line to query.
+The_Line @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the line to
+query.
 
 Returns a program text image of any comment on that line, excluding any
 lexical elements preceding the comment.
@@ -551,6 +629,7 @@ A null string is returned if the line has no comment.
 The bounds of the program text are 1..N, where N is as large as necessary.
 
 Raises ASIS_Inappropriate_Line if Is_Nil (The_Line).
+@end{DescribeCode}
 
 
 @LabeledClause{function Is_Text_Available}
