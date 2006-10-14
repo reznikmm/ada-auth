@@ -101,6 +101,8 @@ package body ARM_Text is
     --  9/22/06 - RLB - Added Subsubclause.
     --  9/25/06 - RLB - Handled optional renaming of TOC.
     --		- RLB - Added Last_Column_Width to Start_Table.
+    -- 10/13/06 - RLB - Added Local_Link_Start and Local_Link_End to allow
+    --			formatting in the linked text.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -1499,6 +1501,31 @@ package body ARM_Text is
     begin
 	Ordinary_Text (Output_Object, Text); -- Nothing special in this format.
     end Local_Link;
+
+
+    procedure Local_Link_Start (Output_Object : in out Text_Output_Type;
+				Target : in String;
+				Clause_Number : in String) is
+	-- Generate a local link to the target and clause given.
+	-- The link will surround text until Local_Link_End is called.
+	-- Local_Link_End must be called before this routine can be used again.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+    begin
+	null; -- No link, nothing to do.
+    end Local_Link_Start;
+
+
+    procedure Local_Link_End (Output_Object : in out Text_Output_Type;
+			      Target : in String;
+			      Clause_Number : in String) is
+	-- End a local link for the target and clause given.
+	-- This must be in the same paragraph as the Local_Link_Start.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+    begin
+	null; -- No link, nothing to do.
+    end Local_Link_End;
 
 
     procedure URL_Link (Output_Object : in out Text_Output_Type;

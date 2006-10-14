@@ -152,6 +152,9 @@ package body ARM_HTML is
     --  9/25/06 - RLB - Handled optional renaming of TOC.
     --		- RLB - Added Last_Column_Width to Start_Table.
     --		- RLB - Fixed broken enumerated style.
+    -- 10/13/06 - RLB - Added specifiable colors.
+    --          - RLB - Added Local_Link_Start and Local_Link_End to allow
+    --			formatting in the linked text.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -1387,7 +1390,12 @@ package body ARM_HTML is
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    </STYLE>");
 	end if;
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "</HEAD>");
-        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<BODY TEXT=""#000000"" BGCOLOR=""#FFFFF0"" LINK=""#0000FF"" VLINK=""#800080"" ALINK=""#FF0000"">");
+        Ada.Text_IO.Put_Line (Output_Object.Output_File,
+	    "<BODY TEXT=""" & Output_Object.Text_Color &
+	    """ BGCOLOR=""" & Output_Object.Background_Color &
+	    """ LINK=""" & Output_Object.Link_Color &
+	    """ VLINK=""" & Output_Object.VLink_Color &
+	    """ ALINK=""" & Output_Object.ALink_Color & """>");
 
  	if Ada.Strings.Unbounded.Length(Output_Object.Header_HTML) /= 0 then
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File,
@@ -1433,10 +1441,10 @@ package body ARM_HTML is
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "</HTML>");
 	if Output_Object.HTML_Kind <= HTML_3 then
 	    Ada.Text_IO.Close (Output_Object.Output_File);
-	else -- Close and reread the file to add JUST the styles by the file;
-	     -- this decreases the minimun size of the files (by as much as
-	     -- 7K as of this writing [1/2006]), which matters when there are
-	     -- hundreds.
+	else -- Close and reread the file to add JUST the styles used by the
+	     -- file; this decreases the minimun size of the files (by as
+	     -- much as 7K as of this writing [1/2006]), which matters when
+	     -- there are hundreds.
 	     -- We also check spaces before end tags and after opening tags;
 	     -- these should be &nbsp;. (See 9.1 in HTML 4.0: "In order to
 	     -- avoid problems with SGML line break rules and inconsistencies
@@ -1547,7 +1555,12 @@ package body ARM_HTML is
 	              Header_HTML : String;
 	              Footer_HTML : String;
 		      Title : in String := "";
-		      Body_Font : ARM_Output.Font_Family_Type) is
+		      Body_Font : ARM_Output.Font_Family_Type;
+		      Text_Color : Color_String;
+		      Background_Color : Color_String;
+		      Link_Color : Color_String;
+		      VLink_Color : Color_String;
+		      ALink_Color : Color_String) is
 	-- Create an Output_Object for a document.
 	-- Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
@@ -1584,6 +1597,11 @@ package body ARM_HTML is
 	-- navigation bar in the header. Footer_HTML gives self-contained HTML
 	-- that will appear after the navigation bar in the footer.
 	-- Body_Font selects the default font for the document body.
+	-- Text_Color specifies the default text color; Background_Color
+	-- specifies the default background color; Link_Color specifies the
+	-- default color of normal links; VLink_Color specifies the
+	-- default color of visited links; and ALink_Color specifies the
+	-- default color of active (in the act of clinking) links.
     begin
 	if Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -1607,6 +1625,11 @@ package body ARM_HTML is
 	Output_Object.Header_HTML := Ada.Strings.Unbounded.To_Unbounded_String(Header_HTML);
 	Output_Object.Footer_HTML := Ada.Strings.Unbounded.To_Unbounded_String(Footer_HTML);
 	Output_Object.Body_Font := Body_Font;
+	Output_Object.Text_Color := Text_Color;
+	Output_Object.Background_Color := Background_Color;
+	Output_Object.Link_Color := Link_Color;
+	Output_Object.VLink_Color := VLink_Color;
+	Output_Object.ALink_Color := ALink_Color;
 
 	if Output_Object.Big_Files then
 	    Start_HTML_File (Output_Object,
@@ -1960,6 +1983,7 @@ package body ARM_HTML is
 	Output_Object.Last_Was_Space := True; -- Start of line
 	Output_Object.Conditional_Space := False;
 	Output_Object.Saw_Hang_End := False;
+        Output_Object.In_Local_Link := False;
 	Check_Clause_File (Output_Object);
 	-- Note: We only support Justification for the Normal and Wide styles.
 	if Output_Object.Column_Count >= 4 then
@@ -2994,6 +3018,11 @@ package body ARM_HTML is
 		"Not in paragraph");
 	end if;
 	Output_Object.Is_In_Paragraph := False;
+	if Output_Object.In_Local_Link then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Unclosed Local_Link");
+	    Output_Object.In_Local_Link := False;
+	end if;
 	if Output_Object.Column_Count >= 4 then
 	    -- Formatting is deferred; only a few formats are supported.
 	    if Output_Object.Column_Text (Output_Object.Current_Column) /= null and then
@@ -4649,7 +4678,7 @@ package body ARM_HTML is
 	if Output_Object.Paragraph_Format not in ARM_Output.Hanging ..
 	        ARM_Output.Small_Nested_Enumerated then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
-		"Not a hanging paragraph");
+		"Not a hanging paragraph - " & ARM_Output.Paragraph_Type'Image(Output_Object.Paragraph_Format));
 	end if;
 	if Output_Object.Saw_Hang_End then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -5404,6 +5433,70 @@ package body ARM_HTML is
 	Ordinary_Text (Output_Object, Text);
 	Output_Text (Output_Object, "</A>");
     end Local_Link;
+
+
+    procedure Local_Link_Start (Output_Object : in out HTML_Output_Type;
+				Target : in String;
+				Clause_Number : in String) is
+	-- Generate a local link to the target and clause given.
+	-- The link will surround text until Local_Link_End is called.
+	-- Local_Link_End must be called before this routine can be used again.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+    begin
+	if not Output_Object.Is_Valid then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not valid object");
+	end if;
+	if not Output_Object.Is_In_Paragraph then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not in paragraph");
+	end if;
+	if Output_Object.In_Local_Link then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Already in a local link");
+	end if;
+        Output_Object.In_Local_Link := True;
+	-- Insert an anchor:
+	Output_Text (Output_Object, "<A HREF=""");
+	if Output_Object.Big_Files then
+	    null; -- No file name needed, this is a self-reference.
+	else
+	    declare
+	        Name : constant String :=
+		    Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
+	    begin
+	        Output_Text (Output_Object, Name);
+	    end;
+	end if;
+	Output_Text (Output_Object, "#" & Target);
+	Output_Text (Output_Object, """>");
+    end Local_Link_Start;
+
+
+    procedure Local_Link_End (Output_Object : in out HTML_Output_Type;
+			      Target : in String;
+			      Clause_Number : in String) is
+	-- End a local link for the target and clause given.
+	-- This must be in the same paragraph as the Local_Link_Start.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+    begin
+	if not Output_Object.Is_Valid then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not valid object");
+	end if;
+	if not Output_Object.Is_In_Paragraph then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not in paragraph");
+	end if;
+	if not Output_Object.In_Local_Link then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Not in a local link");
+	end if;
+	Output_Text (Output_Object, "</A>");
+        Output_Object.In_Local_Link := False;
+    end Local_Link_End;
 
 
     procedure URL_Link (Output_Object : in out HTML_Output_Type;

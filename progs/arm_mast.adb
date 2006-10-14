@@ -63,6 +63,8 @@ package body ARM_Master is
     --  9/21/06 - RLB - Added the Body_Font command.
     --  9/22/06 - RLB - Added the Note_Format command.
     --  9/25/06 - RLB - Added the Contents_Format command.
+    -- 10/04/06 - RLB - Added the List_Format command.
+    -- 10/13/06 - RLB - Added specifiable default HTML colors.
 
     type Command_Type is (
 	-- Source commands:
@@ -82,6 +84,7 @@ package body ARM_Master is
 	Body_Font,
 	Note_Format,
 	Contents_Format,
+	List_Format,
 
 	-- HTML properties:
 	Single_HTML_Output_File,
@@ -90,6 +93,7 @@ package body ARM_Master is
 	HTML_Tabs,
 	HTML_Header,
 	HTML_Footer,
+	HTML_Color,
 	-- RTF properties:
 	Single_RTF_Output_File,
 	RTF_Header_Prefix,
@@ -145,6 +149,9 @@ package body ARM_Master is
     Use_ISO_2004_Contents_Format : Boolean := True;
 	-- Should we use the ISO 2004 contents format, or the one used in the
 	-- Ada 95 standard??
+    Use_ISO_2004_List_Format : Boolean := True;
+	-- Should we use the ISO 2004 list format, or the one used in the
+	-- Ada 95 standard??
 
     -- HTML properties:
     Use_Large_HTML_Files : Boolean := False; -- Use small output files by default.
@@ -159,6 +166,11 @@ package body ARM_Master is
     HTML_Tab_Emulation : ARM_HTML.Tab_Emulation_Type := ARM_HTML.Emulate_Fixed_Only;
     HTML_Header_Text : Ada.Strings.Unbounded.Unbounded_String; -- Empty by default.
     HTML_Footer_Text : Ada.Strings.Unbounded.Unbounded_String; -- Empty by default.
+    HTML_Text_Color : ARM_HTML.Color_String := "#000000";
+    HTML_Background_Color : ARM_HTML.Color_String := "#FFFFF0";
+    HTML_Link_Color : ARM_HTML.Color_String := "#0000FF";
+    HTML_VLink_Color : ARM_HTML.Color_String := "#800080";
+    HTML_ALink_Color : ARM_HTML.Color_String := "#FF0000";
 
     -- RTF properties:
     Use_Large_RTF_Files : Boolean := False; -- Use small output files by default.
@@ -210,6 +222,8 @@ package body ARM_Master is
 	    return Note_Format;
 	elsif Canonical_Name = "contentsformat" then
 	    return Contents_Format;
+	elsif Canonical_Name = "listformat" then
+	    return List_Format;
 	elsif Canonical_Name = "singlehtmloutputfile" then
 	    return Single_HTML_Output_File;
 	elsif Canonical_Name = "htmlkind" then
@@ -222,6 +236,8 @@ package body ARM_Master is
 	    return HTML_Header;
 	elsif Canonical_Name = "htmlfooter" then
 	    return HTML_Footer;
+	elsif Canonical_Name = "htmlcolor" then
+	    return HTML_Color;
 	elsif Canonical_Name = "singlertfoutputfile" then
 	    return Single_RTF_Output_File;
 	elsif Canonical_Name = "rtfheaderprefix" then
@@ -596,6 +612,79 @@ package body ARM_Master is
 	        end if;
 	    end Process_HTML_Nav_Bar;
 
+	    procedure Process_HTML_Color is
+	        --@HTMLColor{Text=[<Color]>,Background=[<Color>],
+	        --  Link=[<Color>],VLink=[<Color>],ALink=[<Color>]}
+
+	        procedure Get_Color (Param_Name : in ARM_Input.Command_Name_Type;
+				     Is_First : in Boolean;
+				     Result : out ARM_HTML.Color_String) is
+		    -- Get a color value from a parameter named Param_Name.
+		    Ch, Close_Ch : Character;
+		    Color : ARM_HTML.Color_String := (others => ' ');
+	        begin
+		    ARM_Input.Check_Parameter_Name (Input_Object,
+		        Param_Name => Param_Name,
+		        Is_First => Is_First,
+		        Param_Close_Bracket => Close_Ch);
+		    if Close_Ch /= ' ' then
+		        -- Get the color characters:
+		        for I in ARM_HTML.Color_String'range loop
+			    ARM_Input.Get_Char (Input_Object, Ch);
+			    if Ch = Close_Ch then
+			        Ada.Text_IO.Put_Line ("  ** HTML color too short for " &
+				    Ada.Strings.Fixed.Trim (Param_Name, Ada.Strings.Right) &
+				    " on line " & ARM_Input.Line_String (Input_Object));
+				ARM_Input.Replace_Char (Input_Object);
+				exit;
+			    end if;
+			    Color(I) := Ch;
+			end loop;
+--Ada.Text_IO.Put_Line("  Color=" & Color);
+			Result := Color;
+		        ARM_Input.Get_Char (Input_Object, Ch);
+		        if Ch /= Close_Ch then
+		            Ada.Text_IO.Put_Line ("  ** Bad close for color parameter " &
+			        Ada.Strings.Fixed.Trim (Param_Name, Ada.Strings.Right) &
+			        " on line " & ARM_Input.Line_String (Input_Object));
+			    ARM_Input.Replace_Char (Input_Object);
+		        end if;
+		    -- else no parameter. Weird.
+		    end if;
+	        end Get_Color;
+
+	    begin
+		Get_Open_Char;
+--Ada.Text_IO.Put_Line("Process HTML Color");
+	        Get_Color ("Text" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+			     Is_First => True, Result => HTML_Text_Color);
+	        Ada.Text_IO.Put_Line("HTML text color is " & HTML_Text_Color);
+
+	        Get_Color ("Background" & (11..ARM_Input.Command_Name_Type'Last => ' '),
+			     Is_First => False, Result => HTML_Background_Color);
+	        Ada.Text_IO.Put_Line("HTML background color is " & HTML_Background_Color);
+
+	        Get_Color ("Link" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+			     Is_First => False, Result => HTML_Link_Color);
+	        Ada.Text_IO.Put_Line("HTML link color is " & HTML_Link_Color);
+
+	        Get_Color ("VLink" & (6..ARM_Input.Command_Name_Type'Last => ' '),
+			     Is_First => False, Result => HTML_VLink_Color);
+	        Ada.Text_IO.Put_Line("HTML visited link color is " & HTML_VLink_Color);
+
+	        Get_Color ("ALink" & (6..ARM_Input.Command_Name_Type'Last => ' '),
+			     Is_First => False, Result => HTML_ALink_Color);
+	        Ada.Text_IO.Put_Line("HTML active link color is " & HTML_ALink_Color);
+
+	        ARM_Input.Get_Char (Input_Object, Ch);
+	        if Ch = Close_Ch then
+		    null;
+	        else
+		    Ada.Text_IO.Put_Line ("** Missing closing character for command on line" & ARM_Input.Line_String (Input_Object));
+	            ARM_Input.Replace_Char (Input_Object);
+	        end if;
+	    end Process_HTML_Color;
+
 	    procedure Process_Source_Command is
 	        -- @Source{Name=<File Name>,SectionName=<Name>,
 		-- SectionNumber=<AlphaNum>,NewSection=[T|F]}
@@ -854,6 +943,25 @@ package body ARM_Master is
 			end if;
 		    end;
 
+		when List_Format =>
+		    -- @ListFormat{Ada95|ISO2004}
+		    declare
+			Format_Name : constant String :=
+			    Ada.Characters.Handling.To_Lower (
+				Get_Single_String);
+		    begin
+			if Format_Name = "ada95" then
+			    Use_ISO_2004_List_Format := False;
+			    Ada.Text_IO.Put_Line("Lists in Ada 95 standard format");
+			elsif Format_Name = "iso2004" then
+			    Use_ISO_2004_List_Format := True;
+			    Ada.Text_IO.Put_Line("Lists in ISO 2004 standard format");
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown list format name: " & Format_Name &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		    end;
+
 		-- HTML properties:
 
 		when Single_HTML_Output_File =>
@@ -900,6 +1008,11 @@ package body ARM_Master is
 		when HTML_Footer =>
 		    --@HTMLFooter{<HTML_for_Footer>}
 		    HTML_Footer_Text := +Get_Single_String;
+
+		when HTML_Color =>
+		    --@HTMLColor{Text=[<Color]>,Background=[<Color>],
+		    --  Link=[<Color>],VLink=[<Color>],ALink=[<Color>]}
+		    Process_HTML_Color;
 
 		-- RTF properties:
 
@@ -1006,7 +1119,8 @@ package body ARM_Master is
 		Number_Paragraphs => Should_Number_Paragraphs,
 		Examples_Font => Font_of_Examples,
 		Use_ISO_2004_Note_Format => Use_ISO_2004_Note_Format,
-		Use_ISO_2004_Contents_Format => Use_ISO_2004_Contents_Format);
+		Use_ISO_2004_Contents_Format => Use_ISO_2004_Contents_Format,
+		Use_ISO_2004_List_Format => Use_ISO_2004_List_Format);
     end Create_Format;
 
 
@@ -1109,7 +1223,12 @@ package body ARM_Master is
 			             Header_HTML => +HTML_Header_Text,
 			             Footer_HTML => +HTML_Footer_Text,
 				     Title => Get_Versioned_Item(Document_Title,Change_Version),
-				     Body_Font => Font_of_Body);
+				     Body_Font => Font_of_Body,
+				     Text_Color => HTML_Text_Color,
+				     Background_Color => HTML_Background_Color,
+				     Link_Color => HTML_Link_Color,
+				     VLink_Color => HTML_VLink_Color,
+				     ALink_Color => HTML_ALink_Color);
 		    Generate_Sources (Output);
 		    ARM_HTML.Close (Output);
 	        end;

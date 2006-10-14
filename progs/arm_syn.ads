@@ -43,6 +43,8 @@ package ARM_Syntax is
     --  6/22/06 - RLB - Added additional information to improve the links
     --			and to be able to use the Ada 83 format for the
     --			cross-reference table.
+    -- 10/13/06 - RLB - Added Defined flag to cross-references to eliminate
+    --			junk errors from not-quite-non-terminals.
 
     procedure Create;
 	-- Initialize the syntax database.
@@ -69,10 +71,12 @@ package ARM_Syntax is
     procedure Add_Xref (
 	Name : in String;
 	Used_In : in String;
-	Clause : in String);
+	Clause : in String;
+	Defined : in Boolean);
 	-- Add a cross-reference entry.
 	-- The item referenced is Name, and it is referenced in the production
-	-- for Used_In, in Clause.
+	-- for Used_In, in Clause. It is a defined non-terminal if Defined
+	-- is True (thus it can be linked).
 
     function Non_Terminal_Clause (NT_Name : in String) return String;
 	-- Return the clause where NT_Name is declared.

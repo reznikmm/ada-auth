@@ -115,6 +115,10 @@ package body ARM_RTF is
     --  9/22/06 - RLB - Added Subsubclause.
     --  9/25/06 - RLB - Handled optional renaming of TOC.
     --		- RLB - Added Last_Column_Width to Start_Table.
+    -- 10/10/06 - RLB - Widened bulleted and enumerated hanging a bit to make
+    --			room for wider numbers for ISO 2004 format.
+    -- 10/13/06 - RLB - Added Local_Link_Start and Local_Link_End to allow
+    --			formatting in the linked text.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -654,7 +658,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 360,
-		       Style_Hang_Width => 220,
+		       Style_Hang_Width => 240,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
@@ -667,7 +671,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 720,
-		       Style_Hang_Width => 200,
+		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
@@ -680,7 +684,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1080,
-		       Style_Hang_Width => 200,
+		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => TRUE,
@@ -693,7 +697,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1440,
-		       Style_Hang_Width => 180,
+		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => TRUE,
@@ -706,7 +710,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1440,
-		       Style_Hang_Width => 220,
+		       Style_Hang_Width => 240,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
@@ -719,7 +723,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 720,
-		       Style_Hang_Width => 220,
+		       Style_Hang_Width => 240,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => TRUE,
@@ -732,7 +736,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1080,
-		       Style_Hang_Width => 220,
+		       Style_Hang_Width => 240,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
@@ -860,7 +864,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 720,
-		       Style_Hang_Width => 220,
+		       Style_Hang_Width => 240,
 		       Style_Before => 0,
 		       Style_After => 60,
 		       Style_Justified => TRUE,
@@ -873,7 +877,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1080,
-		       Style_Hang_Width => 200,
+		       Style_Hang_Width => 230,
 		       Style_Before => 0,
 		       Style_After => 60,
 		       Style_Justified => TRUE,
@@ -912,7 +916,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1440,
-		       Style_Hang_Width => 200,
+		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
@@ -937,7 +941,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 360,
-		       Style_Hang_Width => 220,
+		       Style_Hang_Width => 240,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
@@ -950,7 +954,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1080,
-		       Style_Hang_Width => 200,
+		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => TRUE,
@@ -963,7 +967,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 720,
-		       Style_Hang_Width => 220,
+		       Style_Hang_Width => 260,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
@@ -976,7 +980,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1440,
-		       Style_Hang_Width => 200,
+		       Style_Hang_Width => 240,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => TRUE,
@@ -989,7 +993,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1080,
-		       Style_Hang_Width => 200,
+		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
@@ -1002,7 +1006,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
 		       Style_Indent => 1800,
-		       Style_Hang_Width => 180,
+		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 80,
 		       Style_Justified => TRUE,
@@ -1015,7 +1019,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1800,
-		       Style_Hang_Width => 220,
+		       Style_Hang_Width => 240,
 		       Style_Before => 0,
 		       Style_After => 100,
 		       Style_Justified => TRUE,
@@ -1415,7 +1419,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 360,
-		       Style_Hang_Width => 230,
+		       Style_Hang_Width => 250,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
@@ -1428,7 +1432,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 720,
-		       Style_Hang_Width => 200,
+		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
@@ -1441,7 +1445,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1080,
-		       Style_Hang_Width => 200,
+		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
@@ -1454,7 +1458,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1440,
-		       Style_Hang_Width => 180,
+		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
@@ -1467,7 +1471,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 1440,
-		       Style_Hang_Width => 230,
+		       Style_Hang_Width => 250,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
@@ -1480,7 +1484,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 720,
-		       Style_Hang_Width => 230,
+		       Style_Hang_Width => 250,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
@@ -1493,7 +1497,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 1080,
-		       Style_Hang_Width => 230,
+		       Style_Hang_Width => 250,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
@@ -1621,7 +1625,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 720,
-		       Style_Hang_Width => 230,
+		       Style_Hang_Width => 250,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
@@ -1634,7 +1638,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1080,
-		       Style_Hang_Width => 200,
+		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
@@ -1673,7 +1677,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 1440,
-		       Style_Hang_Width => 200,
+		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
@@ -1698,7 +1702,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 360,
-		       Style_Hang_Width => 230,
+		       Style_Hang_Width => 250,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
@@ -1711,7 +1715,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1080,
-		       Style_Hang_Width => 200,
+		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
@@ -1724,7 +1728,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 720,
-		       Style_Hang_Width => 230,
+		       Style_Hang_Width => 270,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
@@ -1737,7 +1741,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1440,
-		       Style_Hang_Width => 200,
+		       Style_Hang_Width => 240,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
@@ -1750,7 +1754,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 1080,
-		       Style_Hang_Width => 200,
+		       Style_Hang_Width => 220,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
@@ -1763,7 +1767,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
 		       Style_Indent => 1800,
-		       Style_Hang_Width => 180,
+		       Style_Hang_Width => 200,
 		       Style_Before => 0,
 		       Style_After => 90,
 		       Style_Justified => TRUE,
@@ -1776,7 +1780,7 @@ package body ARM_RTF is
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
 		       Style_Indent => 1800,
-		       Style_Hang_Width => 230,
+		       Style_Hang_Width => 250,
 		       Style_Before => 0,
 		       Style_After => 110,
 		       Style_Justified => TRUE,
@@ -4487,6 +4491,31 @@ package body ARM_RTF is
     begin
 	Ordinary_Text (Output_Object, Text); -- Nothing special in this format.
     end Local_Link;
+
+
+    procedure Local_Link_Start (Output_Object : in out RTF_Output_Type;
+				Target : in String;
+				Clause_Number : in String) is
+	-- Generate a local link to the target and clause given.
+	-- The link will surround text until Local_Link_End is called.
+	-- Local_Link_End must be called before this routine can be used again.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+    begin
+	null; -- No link, nothing to do.
+    end Local_Link_Start;
+
+
+    procedure Local_Link_End (Output_Object : in out RTF_Output_Type;
+			      Target : in String;
+			      Clause_Number : in String) is
+	-- End a local link for the target and clause given.
+	-- This must be in the same paragraph as the Local_Link_Start.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+    begin
+	null; -- No link, nothing to do.
+    end Local_Link_End;
 
 
     procedure URL_Link (Output_Object : in out RTF_Output_Type;

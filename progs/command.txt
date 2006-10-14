@@ -187,6 +187,10 @@ Global properties:
      This specifies the format of contents sections.
      If Ada95, the title is "Table of Contents".
      If ISO2004, the title is "Contents".
+@ListFormat{Ada95|ISO2004}
+     This specifies the format of numbered lists ("enumerate").
+     If Ada95, they're numbered "1.";
+     If ISO2004, they're lettered "a)"; inner lists are numbered "1)".
 
 HTML Output properties:
 
@@ -266,6 +270,18 @@ HTML Output properties:
      Specifies HTML markup for the footer of the the document. This will be
      repeated on every page, and needs to be a self-contained HTML fragment.
      By default, this is empty.
+@HTMLColor{Text=[<Color]>,Background=[<Color>],Link=[<Color>],VLink=[<Color>],
+   ALink=[<Color>]}
+     Specifies the default text, background and link colors for the document.
+     <Color> is a color in standard HTML format ("#rrggbb", with each letter
+     replaced by a hex digit).
+     VLink is the color for visited links; ALink is the color for links
+     being clicked. The default is:
+     @HTMLColor{Text=[#000000],Background=[#FFFFF0],Link=[#0000FF],
+       VLink=[#800080],ALink=[#FF0000]}
+     That is, black text, cream background, blue links, purple visited links,
+     and red active links.
+
 
 RTF Output properties:
 
@@ -504,7 +520,11 @@ Text commands:
 
 -- Ada specific commands:
 @nt{<text>} - A non-terminal in normal text. This will be set in a Swiss
-	      (sans-serif) font.
+	      (sans-serif) font. Also, for HTML, this will linked to the
+              definition text; use @ntf instead if this is not a real
+              non-terminal.
+@ntf{<text>} - Format as a non-terminal in normal text. This will be set
+              in a Swiss (sans-serif) font.
 @key{<text>} - A keyword in normal text. This will be set in boldface.
 @exam{<text>} - Example text occurring in normal text. This will be set
         in the example font (which is selected in the master file).
@@ -518,7 +538,7 @@ Text commands:
 
 @syn{[Tabs=<Tabset>, ]LHS=<Non-terminal>, RHS=<Production>}
        - Marks a syntax production.
-	<Production> contains @syn2 commands for RHS non-terminals.
+	<Production> contains @syn2 (and @synf) commands for RHS non-terminals.
 	<Tabset> defines any tabs needed by the <Production>.
 	The <Non-terminal> is indexed. The <Non-Terminal> and <Production>
 	(and the clause number) are sent to the syntax manager. Also, saves
@@ -533,6 +553,14 @@ Text commands:
 	entry for the item: @Defn2(Term=<Name>,Sec=@i{used}). (For the purposes
 	of the index, all of Annex P is a single paragraph). Otherwise, is the
 	same as @nt.
+@synf{<name>} - Marks a non-terminal name in the production of a syntax rule,
+	for which there is no formal definition in the document. (Character
+	set names in Ada fall into this category).
+	If the current non-terminal is not null, generates a cross reference
+	entry: <Name> in <Non-Terminal> at <ClauseNum>. Also, generate an index
+	entry for the item: @Defn2(Term=<Name>,Sec=@i{used}). (For the purposes
+	of the index, all of Annex P is a single paragraph). Otherwise, is the
+	same as @ntf.
 @syntaxsummary -- Generate the syntax summary at this point. *No paragraph
 	numbers*!
 @syntaxxref -- Generate the syntax cross-reference at this point. *No paragraph
@@ -877,7 +905,15 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 		  paragraph, and bulleted (with [smaller] solid circle bullets).
 	Enumerate - The text is indented and numbered (that is, each paragraph
 		  has a prefix number). The text preserves the size and
-		  indenting of its parent (if any).
+		  indenting of its parent (if any). The format of the number
+		  depends on the ListFormat master setting: for RM,
+		  a number followed by a period is used ["1."], for
+		  ISO2004 a letter followed by a paren is used for the main
+		  list ["a)"]; nested lists use a number ["1)"].
+	InnerEnumerate - The text is indented to fit inside an Itemize or
+		  Enumerate paragraph, and numbered as for Enumerate.
+		  (These should only be used inside of regular Enumerate
+		  blocks if ISO 2004 formatting is desired.)
 	Display - A normal paragraph indented one level from its parent, except
 		  that spaces and breaks are preserved. The text preserves the
 		  size of its parent (if any). No page breaks are allowed

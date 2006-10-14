@@ -88,6 +88,7 @@ package ARM_Format is
     --  9/22/06 - RLB - Added "Use_ISO_2004_Note_Format".
     --		- RLB - Revised to use Clause_Number_Type.
     --  9/25/06 - RLB - Added "Use_ISO_2004_Contents_Format".
+    -- 10/04/06 - RLB - Added "Use_ISO_2004_List_Format".
 
     type Format_Type is tagged limited private;
 
@@ -119,7 +120,8 @@ package ARM_Format is
 		      Number_Paragraphs : in Boolean;
 		      Examples_Font : in ARM_Output.Font_Family_Type;
 		      Use_ISO_2004_Note_Format : in Boolean;
-		      Use_ISO_2004_Contents_Format : in Boolean);
+		      Use_ISO_2004_Contents_Format : in Boolean;
+		      Use_ISO_2004_List_Format : in Boolean);
 	-- Initialize an input object. Changes and Change_Version determine
 	-- which changes should be displayed. If Display_Index_Entries is True,
 	-- index entries will be printed in the document; otherwise, they
@@ -137,6 +139,9 @@ package ARM_Format is
 	-- else the Ada95 standard's format will be used for notes.
 	-- If Use_ISO_2004_Contents_Format is true, that format will be used;
 	-- else the Ada95 standard's format will be used for the table of contents.
+	-- If Use_ISO_2004_List_Format is true, then lists will be lettered;
+	-- else the Ada95 standard's numbering format will be used for
+	-- enumerated lists.
 
     procedure Destroy (Format_Object : in out Format_Type);
 	-- Destroy a format object, releasing any resources.
@@ -204,7 +209,7 @@ private
 	Indented_Example_Text, Code_Indented, Bulleted, Nested_Bulleted,
         Nested_X2_Bulleted,
 	Display, Syntax_Display, Syntax_Indented, Syntax_Production,
-	Enumerated, Hanging_Indented, In_Table);
+	Enumerated, Nested_Enumerated, Hanging_Indented, In_Table);
 
     type Reference;
     type Reference_Ptr is access Reference;
@@ -227,6 +232,7 @@ private
 	Examples_Font : ARM_Output.Font_Family_Type;
 	Use_ISO_2004_Note_Format : Boolean;
 	Use_ISO_2004_Contents_Format : Boolean;
+	Use_ISO_2004_List_Format : Boolean;
 
 	-- Clause numbers:
 	Clause_Number : ARM_Contents.Clause_Number_Type;
@@ -276,6 +282,8 @@ private
 	Next_Enumerated_Num : Positive;
 			     -- If the format is enumerated, this is the
 			     -- number of the next paragraph.
+	Enumerated_Level : Natural;
+			     -- Number of enumerated formats that we're in.
 	Current_Paragraph_String : String (1 .. 10);
 			     -- The current paragraph number string (only
 			     -- valid if In_Paragraph is True).

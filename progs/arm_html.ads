@@ -90,6 +90,9 @@ package ARM_HTML is
     --  2/19/06 - RLB - Added Number_Paragraphs flag and large letter count.
     --  9/21/06 - RLB - Added Body_Font.
     --  9/25/06 - RLB - Added Last_Column_Width to Start_Table.
+    -- 10/13/06 - RLB - Added specifiable colors.
+    --          - RLB - Added Local_Link_Start and Local_Link_End to allow
+    --			formatting in the linked text.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -108,6 +111,8 @@ package ARM_HTML is
 					-- it is unlikely that they will line
 					-- up perfectly for non-fixed fonts.
 
+    subtype Color_String is String (1..7); -- "#hhhhhh" to specify a color.
+
     procedure Create (Output_Object : in out HTML_Output_Type;
 		      Big_Files : in Boolean;
 		      File_Prefix : in String;
@@ -124,7 +129,12 @@ package ARM_HTML is
 	              Header_HTML : String;
 	              Footer_HTML : String;
 		      Title : in String := "";
-		      Body_Font : ARM_Output.Font_Family_Type);
+		      Body_Font : ARM_Output.Font_Family_Type;
+		      Text_Color : Color_String;
+		      Background_Color : Color_String;
+		      Link_Color : Color_String;
+		      VLink_Color : Color_String;
+		      ALink_Color : Color_String);
 	-- Create an Output_Object for a document.
 	-- Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
@@ -161,6 +171,12 @@ package ARM_HTML is
 	-- navigation bar in the header. Footer_HTML gives self-contained HTML
 	-- that will appear after the navigation bar in the footer.
 	-- Body_Font selects the default font for the document body.
+	-- Text_Color specifies the default text color; Background_Color
+	-- specifies the default background color; Link_Color specifies the
+	-- default color of normal links; VLink_Color specifies the
+	-- default color of visited links; and ALink_Color specifies the
+	-- default color of active (in the act of clinking) links.
+
 
     procedure Close (Output_Object : in out HTML_Output_Type);
 	-- Close an Output_Object. No further output to the object is
@@ -441,6 +457,23 @@ package ARM_HTML is
 	-- For hyperlinked formats, this should generate a link;
 	-- for other formats, only the text is generated.
 
+    procedure Local_Link_Start (Output_Object : in out HTML_Output_Type;
+				Target : in String;
+				Clause_Number : in String);
+	-- Generate a local link to the target and clause given.
+	-- The link will surround text until Local_Link_End is called.
+	-- Local_Link_End must be called before this routine can be used again.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+
+    procedure Local_Link_End (Output_Object : in out HTML_Output_Type;
+			      Target : in String;
+			      Clause_Number : in String);
+	-- End a local link for the target and clause given.
+	-- This must be in the same paragraph as the Local_Link_Start.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+
     procedure URL_Link (Output_Object : in out HTML_Output_Type;
 			Text : in String;
 			URL : in String);
@@ -499,6 +532,11 @@ private
         Header_HTML : Ada.Strings.Unbounded.Unbounded_String;
         Footer_HTML : Ada.Strings.Unbounded.Unbounded_String;
 	Body_Font : ARM_Output.Font_Family_Type := ARM_Output.Roman;
+	Text_Color : Color_String;
+	Background_Color : Color_String;
+	Link_Color : Color_String;
+	VLink_Color : Color_String;
+	ALink_Color : Color_String;
 
 	-- Current formatting properties:
 	Is_In_Paragraph : Boolean := False;
@@ -540,6 +578,8 @@ private
 	Current_Item : Natural := 0; -- When processing 4-column+ text, the current item within the column.
 	Column_Text : Column_Text_Ptrs_Type := (others => null);
 		-- If we are processing 4-column+ text, the text for the columns.
+
+	In_Local_Link : Boolean := False;
 
 	Current_Clause : Ada.Strings.Unbounded.Unbounded_String;
 		-- The name of the clause of the currently open file (for

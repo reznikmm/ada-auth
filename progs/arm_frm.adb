@@ -223,6 +223,13 @@ package body ARM_Format is
     --		- RLB - Added LastColWidth to @Table.
     --		- RLB - Fixed Enumerated in Notes styles.
     --  9/29/06 - RLB - Added Element_Ref and Child_Ref for ASIS.
+    -- 10/04/06 - RLB - Added and implemented "Use_ISO_2004_List_Format".
+    --		- RLB - Added "InnerEnumerate" text block.
+    -- 10/13/06 - RLB - Added the @ntf command to handle cases where the
+    --			text needs to look like a non-terminal but it isn't
+    --			a real non-terminal.
+    --		- RLB - Added code to handle simple embedded commands in
+    --			@nt{} to generate links.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -285,6 +292,7 @@ package body ARM_Format is
 	 Syntax_Indented => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Syntax_Production=>(Length =>  0, Str => (others => ' ')), -- Not used.
 	 Enumerated	 => (Length =>  0, Str => (others => ' ')), -- Not used.
+	 Nested_Enumerated=>(Length =>  0, Str => (others => ' ')), -- Not used.
 	 Hanging_Indented=> (Length =>  0, Str => (others => ' ')), -- Not used.
 	 In_Table	 => (Length =>  0, Str => (others => ' '))); -- Not used.
 
@@ -343,6 +351,7 @@ package body ARM_Format is
 	 Syntax_Indented => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Syntax_Production=>(Length =>  0, Str => (others => ' ')), -- Not used.
 	 Enumerated	 => (Length =>  0, Str => (others => ' ')), -- Not used.
+	 Nested_Enumerated=>(Length =>  0, Str => (others => ' ')), -- Not used.
 	 Hanging_Indented=> (Length =>  0, Str => (others => ' ')), -- Not used.
 	 In_Table	 => (Length =>  0, Str => (others => ' '))); -- Not used.
 
@@ -390,7 +399,8 @@ package body ARM_Format is
 		      Number_Paragraphs : in Boolean;
 		      Examples_Font : in ARM_Output.Font_Family_Type;
 		      Use_ISO_2004_Note_Format : in Boolean;
-		      Use_ISO_2004_Contents_Format : in Boolean) is
+		      Use_ISO_2004_Contents_Format : in Boolean;
+		      Use_ISO_2004_List_Format : in Boolean) is
 	-- Initialize an input object. Changes and Change_Version determine
 	-- which changes should be displayed. If Display_Index_Entries is True,
 	-- index entries will be printed in the document; otherwise, they
@@ -408,6 +418,9 @@ package body ARM_Format is
 	-- else the Ada95 standard's format will be used for notes.
 	-- If Use_ISO_2004_Contents_Format is true, that format will be used;
 	-- else the Ada95 standard's format will be used for the table of contents.
+	-- If Use_ISO_2004_List_Format is true, then lists will be lettered;
+	-- else the Ada95 standard's numbering format will be used for
+	-- enumerated lists.
     begin
 	Format_Object.Changes := Changes;
 	Format_Object.Change_Version := Change_Version;
@@ -419,6 +432,7 @@ package body ARM_Format is
 	Format_Object.Examples_Font := Examples_Font;
 	Format_Object.Use_ISO_2004_Note_Format := Use_ISO_2004_Note_Format;
 	Format_Object.Use_ISO_2004_Contents_Format := Use_ISO_2004_Contents_Format;
+	Format_Object.Use_ISO_2004_List_Format := Use_ISO_2004_List_Format;
 
 	Format_Object.Clause_Number := (Section => 0, Clause => 0,
 				        Subclause => 0, Subsubclause => 0);
@@ -429,6 +443,7 @@ package body ARM_Format is
         Format_Object.Next_AARM_Sub := 'a';
         Format_Object.Next_AARM_Insert_Para := 1;
         Format_Object.Next_Enumerated_Num := 1;
+        Format_Object.Enumerated_Level := 0;
         Format_Object.Last_Paragraph_Subhead_Type := Plain;
         Format_Object.Next_Paragraph_Subhead_Type := Plain;
         Format_Object.Next_Paragraph_Format_Type := Plain;
@@ -473,7 +488,8 @@ package body ARM_Format is
 	New_Column, RM_New_Page,
 	-- Basic text formatting:
 	Bold, Italic, Roman, Swiss, Fixed, Roman_Italic, Shrink, Grow,
-	Keyword, Non_Terminal, Example_Text, Example_Comment,
+	Keyword, Non_Terminal, Non_Terminal_Format,
+	Example_Text, Example_Comment,
 	No_Prefix, No_Para_Num, Keep_with_Next,
         Leading, Trailing, Up, Down, Thin_Line, Thick_Line, Tab_Clear, Tab_Set,
 	-- Tables:
@@ -505,8 +521,8 @@ package body ARM_Format is
 	-- Links:
 	Local_Target, Local_Link, URL_Link, AI_Link,
 	-- Information:
-	Syntax_Rule, Syntax_Rule_RHS, Syntax_Term, Syntax_Prefix,
-	Syntax_Summary, Syntax_Xref,
+	Syntax_Rule, Syntax_Rule_RHS, Syntax_Term, Syntax_Term_Undefined,
+	Syntax_Prefix, Syntax_Summary, Syntax_Xref,
 	Added_Syntax_Rule, Deleted_Syntax_Rule,
 	Implementation_Defined,	Implementation_Defined_List,
 	To_Glossary, To_Glossary_Also,
@@ -627,6 +643,8 @@ package body ARM_Format is
 	    return Keyword;
 	elsif Canonical_Name = "nt" then
 	    return Non_Terminal;
+	elsif Canonical_Name = "ntf" then
+	    return Non_Terminal_Format;
 	elsif Canonical_Name = "exam" then
 	    return Example_Text;
 	elsif Canonical_Name = "examcom" then
@@ -683,6 +701,8 @@ package body ARM_Format is
 	    return Syntax_Rule;
 	elsif Canonical_Name = "syn2" then
 	    return Syntax_Term;
+	elsif Canonical_Name = "synf" then
+	    return Syntax_Term_Undefined;
 	elsif Canonical_Name = "syni" then
 	    return Syntax_Prefix;
 	elsif Canonical_Name = "syntaxsummary" then
@@ -1434,6 +1454,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
         Old_Next_Subhead_Paragraph : Paragraph_Type;
         Old_Next_Paragraph_Format : Paragraph_Type;
 	Old_Tab_Stops : ARM_Output.Tab_Info;
+	Old_Next_Enum_Num : Positive;
 	Is_Formatting : Boolean; -- Only used if Kind=Begin_Word.
 				 -- The command changes the PARAGRAPH format.
 				 -- Otherwise, it should be ignored when
@@ -1489,6 +1510,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		 Old_Next_Subhead_Paragraph => Plain, -- Not used.
 		 Old_Next_Paragraph_Format => Plain, -- Not used.
 		 Old_Tab_Stops => ARM_Output.NO_TABS, -- Not used.
+		 Old_Next_Enum_Num => 1, -- Not used.
 		 Is_Formatting => False, -- Not used.
 		 Change_Version => '0', -- Not used.
 		 Was_Text => False, -- Not used.
@@ -1524,6 +1546,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		 Old_Next_Subhead_Paragraph => Plain, -- Not used.
 		 Old_Next_Paragraph_Format => Plain, -- Not used.
 		 Old_Tab_Stops => ARM_Output.NO_TABS, -- Not used.
+		 Old_Next_Enum_Num => 1, -- Not used.
 		 Is_Formatting => False, -- Not used.
 		 Change_Version => '0', -- Not used.
 		 Was_Text => False, -- Not used.
@@ -1560,7 +1583,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		     Nested_Bulleted | Nested_X2_Bulleted |
 		     Display | Syntax_Display |
 		     Syntax_Indented | Syntax_Production |
-		     Enumerated | Hanging_Indented =>
+		     Enumerated | Nested_Enumerated | Hanging_Indented =>
 		    -- This depends on the containing paragraph kind;
 		    -- Last_Paragraph_Subhead_Type should contain that.
 		    if Format_Object.Last_Paragraph_Subhead_Type = Wide or else
@@ -1575,6 +1598,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 		       Format_Object.Last_Paragraph_Subhead_Type = Syntax_Indented or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Syntax_Production or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Enumerated or else
+		       Format_Object.Last_Paragraph_Subhead_Type = Nested_Enumerated or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Hanging_Indented or else
 		       Format_Object.Last_Paragraph_Subhead_Type = In_Table then
 Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_Input.Line_String (Input_Object));
@@ -2318,7 +2342,19 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
         		if Enclosing_Format = Enumerated then
 			    -- Nesting of enumerated lists should be discouraged,
 			    -- so we assume this is ourselves.
-			    null;
+			    -- But if the format isn't an enumerated one,
+			    -- we've probably just exited some nested item.
+			    if Format_Object.Format in ARM_Output.Enumerated .. ARM_Output.Small_Nested_Enumerated then
+				-- An enumerated format.
+--Ada.Text_IO.Put_Line ("%% Enumerated paragraph seems to be nested or ourselves, nothing done.");
+			        null;
+			    else -- ** Ugh, don't know the nesting; we assume none.
+                                if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			           Format_Object.Format := ARM_Output.Small_Enumerated;
+			        else
+			           Format_Object.Format := ARM_Output.Enumerated;
+			        end if;
+			    end if;
         		elsif Enclosing_Format = Code_Indented or else
 			   Enclosing_Format = Bulleted then
 			   if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
@@ -2338,6 +2374,15 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			       Format_Object.Format := ARM_Output.Enumerated;
 			    end if;
 			end if;
+		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
+			Format_Object.No_Breaks := False;
+        	    when Nested_Enumerated =>
+--Ada.Text_IO.Put_Line ("Nested Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format));
+		        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			    Format_Object.Format := ARM_Output.Small_Nested_Enumerated;
+		        else
+			    Format_Object.Format := ARM_Output.Nested_Enumerated;
+		        end if;
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 			Format_Object.No_Breaks := False;
         	    when Syntax_Indented =>
@@ -2439,7 +2484,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			 Indented_Example_Text | Code_Indented | Bulleted |
 			 Nested_Bulleted | Nested_X2_Bulleted | Display |
 			 Syntax_Display | Syntax_Indented | Syntax_Production |
-			 Hanging_Indented | Enumerated | In_Table =>
+			 Hanging_Indented | Enumerated | Nested_Enumerated |
+			 In_Table =>
 			null; -- No subheader. We don't change the last
 			    -- subheader generated, either.
 		end case;
@@ -2530,7 +2576,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			 Code_Indented | Bulleted | Nested_Bulleted | Nested_X2_Bulleted |
 			 Display | Syntax_Display |
 			 Syntax_Indented | Syntax_Production |
-			 Hanging_Indented | Enumerated | In_Table =>
+			 Hanging_Indented | Enumerated | Nested_Enumerated |
+			 In_Table =>
 			null; -- Just a format.
 		end case;
 	    end Make_Annotation_Preface;
@@ -2691,7 +2738,9 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 
 		else -- No paragraph numbers (or if the paragraph
 		     -- number has been suppressed with @NoParaNum):
---Ada.Text_IO.Put_Line ("Check_Paragraph, no number: format= " & Paragraph_Type'Image(Format_Object.Next_Paragraph_Format_Type));
+
+--Ada.Text_IO.Put_Line ("Check_Paragraph, no number: format= " & Paragraph_Type'Image(Format_Object.Next_Paragraph_Format_Type) &
+--   " output format= " & ARM_Output.Paragraph_Type'Image(Format_Object.Format));
 		    ARM_Output.Start_Paragraph (Output_Object,
 				                Format => Format_Object.Format,
 						Number => "",
@@ -2747,17 +2796,39 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		            ARM_Output.Hard_Space (Output_Object);
 		            ARM_Output.Hard_Space (Output_Object);
 			end if;
-		    elsif Format_Object.Next_Paragraph_Format_Type = Enumerated and then
+		    elsif (Format_Object.Next_Paragraph_Format_Type = Enumerated or else
+		        Format_Object.Next_Paragraph_Format_Type = Nested_Enumerated) and then
 		       Show_Leading_Text_for_Paragraph then
 		        -- Output the item number.
-		        declare
-		            NNum : constant String := Integer'Image(Format_Object.Next_Enumerated_Num);
-		        begin
-		            ARM_Output.Ordinary_Text (Output_Object,
-					              NNum(2..NNum'Last) & '.');
-		            ARM_Output.End_Hang_Item (Output_Object);
-		            Format_Object.Next_Enumerated_Num := Format_Object.Next_Enumerated_Num + 1;
-		        end;
+			if Format_Object.Use_ISO_2004_Note_Format then
+			    if Format_Object.Enumerated_Level <= 1 then -- Outer list.
+				-- Lower case letters for list:
+		                ARM_Output.Ordinary_Text (Output_Object,
+				   Character'Val ((Format_Object.Next_Enumerated_Num - 1) +
+					Character'Pos ('a'))
+					                   & ')');
+		                ARM_Output.End_Hang_Item (Output_Object);
+		                Format_Object.Next_Enumerated_Num := Format_Object.Next_Enumerated_Num + 1;
+			    else -- numbered.
+		                declare
+		                    NNum : constant String := Integer'Image(Format_Object.Next_Enumerated_Num);
+		                begin
+		                    ARM_Output.Ordinary_Text (Output_Object,
+					                      NNum(2..NNum'Last) & ')');
+		                    ARM_Output.End_Hang_Item (Output_Object);
+		                    Format_Object.Next_Enumerated_Num := Format_Object.Next_Enumerated_Num + 1;
+		                end;
+			    end if;
+			else -- Ada 95 lists.
+		            declare
+		                NNum : constant String := Integer'Image(Format_Object.Next_Enumerated_Num);
+		            begin
+		                ARM_Output.Ordinary_Text (Output_Object,
+					                  NNum(2..NNum'Last) & '.');
+		                ARM_Output.End_Hang_Item (Output_Object);
+		                Format_Object.Next_Enumerated_Num := Format_Object.Next_Enumerated_Num + 1;
+		            end;
+			end if;
 		    end if;
 		else -- No prefix marked, meaning no number.
 		    Format_Object.No_Prefix := False; -- Reset.
@@ -3442,6 +3513,13 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	    	= "enumerate" then
 		Format_Object.Next_Paragraph_Format_Type := Enumerated;
 		Format_Object.Next_Enumerated_Num := 1;
+		Format_Object.Enumerated_Level := Format_Object.Enumerated_Level + 1;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "innerenumerate" then
+		Format_Object.Next_Paragraph_Format_Type := Nested_Enumerated;
+		Format_Object.Next_Enumerated_Num := 1;
+		Format_Object.Enumerated_Level := Format_Object.Enumerated_Level + 1;
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "bundle" then
@@ -4490,6 +4568,20 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 					    Location => Format_Object.Location);
 		    Format_Object.Is_Bold := True;
 
+		when Non_Terminal_Format =>
+		    -- No linking here.
+		    Check_Paragraph;
+		    ARM_Output.Text_Format (Output_Object,
+					    Bold => Format_Object.Is_Bold,
+					    Italic => Format_Object.Is_Italic,
+					    Font => ARM_Output.Swiss,
+					    Size => Format_Object.Size,
+					    Change => Format_Object.Change,
+				            Version => Format_Object.Current_Change_Version,
+				            Added_Version => Format_Object.Current_Old_Change_Version,
+					    Location => Format_Object.Location);
+		    Format_Object.Font := ARM_Output.Swiss;
+
 		when Example_Text =>
 		    Check_Paragraph;
 		    ARM_Output.Text_Format (Output_Object,
@@ -4525,6 +4617,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		       Format_Object.Next_Paragraph_Format_Type = Nested_Bulleted or else
 		       Format_Object.Next_Paragraph_Format_Type = Nested_X2_Bulleted or else
 		       Format_Object.Next_Paragraph_Format_Type = Enumerated or else
+		       Format_Object.Next_Paragraph_Format_Type = Nested_Enumerated or else
 		       Format_Object.Next_Paragraph_Format_Type = Hanging_Indented then
 		        Ada.Text_IO.Put_Line ("  ** Tab set in hang or bulleted format: " &
 			    Paragraph_Type'Image(Format_Object.Next_Paragraph_Format_Type) &
@@ -4573,53 +4666,115 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 				                Version => Format_Object.Current_Change_Version,
 				                Added_Version => Format_Object.Current_Old_Change_Version,
 					        Location => Format_Object.Location);
-			if Ada.Strings.Fixed.Index (Name(1..Len), "@") /= 0 then
-			    -- Embedded commands. Can't make a link here.
-			    -- (Might want to try to handle some of the
-			    -- cases someday, especially @Chg{New=[xxx],....)
-			    declare
-				Org_Font : ARM_Output.Font_Family_Type :=
-				    Format_Object.Font;
-			    begin
-				Format_Object.Font := ARM_Output.Swiss;
-			        ARM_Format.Format (Format_Object,
-					           Name(1..Len),
-					           Output_Object,
-					           Text_Name => "@nt{}",
-					           No_Annotations => False);
-				Format_Object.Font := Org_Font;
-			    end;
-			    if Format_Object.Link_Non_Terminals then
-			        Ada.Text_IO.Put_Line ("  %% Non-terminal with embedded commands (" &
-				    Name(1..Len) & "), no link possible; on line " & ARM_Input.Line_String (Input_Object));
-			    end if;
-			elsif Format_Object.Link_Non_Terminals then
-			    declare
-				Lower_NT : constant String :=
-				    Ada.Characters.Handling.To_Lower (Name(1..Len));
-				Clause : constant String :=
-				    ARM_Syntax.Non_Terminal_Clause (Lower_NT);
-				Target : constant ARM_Syntax.Target_Type :=
-				    ARM_Syntax.Non_Terminal_Link_Target (Lower_NT);
-			    begin
-				if Clause = "" then -- Not found. No link, but error message:
-				    if Lower_NT'Length > 3 and then
-					Lower_NT(Lower_NT'Last-2..Lower_NT'Last) = "::=" then
-					-- The syntax summary starts with "NT ::="; no error (and no
-					-- link wanted).
-					null;
+			if Format_Object.Link_Non_Terminals then
+			    if Ada.Strings.Fixed.Index (Name(1..Len), "@") /= 0 then
+			        -- Embedded commands. We have to clean the
+				-- string of the commands (if we can) before
+				-- making a link.
+				declare
+				    Lower_NT : String :=
+				        Ada.Characters.Handling.To_Lower (Name(1..Len));
+				    Lower_NT_Len : Natural := Lower_NT'Length;
+				    Loc : Natural := Lower_NT'First;
+				begin
+				    while Loc <= Lower_NT_Len loop
+					-- Check for simple commands and remove them:
+					if Lower_NT(Loc) = '@' then -- Start of a command.
+					    if Loc < Lower_NT_Len and then
+						(Lower_NT(Loc+1) = '!' or else
+						 Lower_NT(Loc+1) = ';') then
+						-- Soft hyphen or no-op, remove.
+						Lower_NT(Loc .. Lower_NT_Len-2) :=
+						    Lower_NT(Loc+2 .. Lower_NT_Len);
+						Lower_NT_Len := Lower_NT_Len - 2;
+					    else -- Unknown.
+						exit;
+					    end if;
+					else -- nothing to do, move to next character
+					    Loc := Loc + 1;
+					end if;
+				    end loop;
+
+				    declare
+				        Clause : constant String :=
+				            ARM_Syntax.Non_Terminal_Clause (Lower_NT(1..Lower_NT_Len));
+				        Target : constant ARM_Syntax.Target_Type :=
+				            ARM_Syntax.Non_Terminal_Link_Target (Lower_NT(1..Lower_NT_Len));
+				        Org_Font : ARM_Output.Font_Family_Type :=
+				            Format_Object.Font;
+				    begin
+				        Format_Object.Font := ARM_Output.Swiss;
+				        if Clause = "" then -- Not found. No link, but error message:
+					    if Ada.Strings.Fixed.Index (Lower_NT(1..Lower_NT_Len), "@") /= 0 then
+					        Ada.Text_IO.Put_Line ("  %% Non-terminal with complex embedded commands " &
+					            Lower_NT(1..Lower_NT_Len) & " on line " & ARM_Input.Line_String (Input_Object));
+					    else
+					        Ada.Text_IO.Put_Line ("  ?? Unknown non-terminal " &
+					            Lower_NT(1..Lower_NT_Len) & " on line " & ARM_Input.Line_String (Input_Object));
+					    end if;
+			                    ARM_Format.Format (Format_Object,
+					                       Name(1..Len),
+					                       Output_Object,
+					                       Text_Name => "@nt{}",
+					                       No_Annotations => False);
+				        else
+				            ARM_Output.Local_Link_Start (Output_Object,
+					        Target => Target, Clause_Number => Clause);
+			                    ARM_Format.Format (Format_Object,
+					                       Name(1..Len),
+					                       Output_Object,
+					                       Text_Name => "@nt{}",
+					                       No_Annotations => False);
+				            ARM_Output.Local_Link_End (Output_Object,
+					        Target => Target, Clause_Number => Clause);
+				        end if;
+				        Format_Object.Font := Org_Font;
+				    end;
+				end;
+			    else -- Ordinary link.
+			        declare
+				    Lower_NT : constant String :=
+				        Ada.Characters.Handling.To_Lower (Name(1..Len));
+				    Clause : constant String :=
+				        ARM_Syntax.Non_Terminal_Clause (Lower_NT);
+				    Target : constant ARM_Syntax.Target_Type :=
+				        ARM_Syntax.Non_Terminal_Link_Target (Lower_NT);
+			        begin
+				    if Clause = "" then -- Not found. No link, but error message:
+				        if Lower_NT'Length > 3 and then
+					    Lower_NT(Lower_NT'Last-2..Lower_NT'Last) = "::=" then
+					    -- The syntax summary starts with "NT ::="; no error (and no
+					    -- link wanted).
+					    null;
+				        else
+					    Ada.Text_IO.Put_Line ("  ?? Unknown non-terminal " &
+					        Name(1..Len) & " on line " & ARM_Input.Line_String (Input_Object));
+				        end if;
+				        ARM_Output.Ordinary_Text (Output_Object, Name(1..Len));
 				    else
-					Ada.Text_IO.Put_Line ("  ?? Unknown non-terminal " &
-					    Name(1..Len) & " on line " & ARM_Input.Line_String (Input_Object));
+				        ARM_Output.Local_Link (Output_Object, Text => Name(1..Len),
+					    Target => Target, Clause_Number => Clause);
 				    end if;
-				    ARM_Output.Ordinary_Text (Output_Object, Name(1..Len));
-				else
-				    ARM_Output.Local_Link (Output_Object, Text => Name(1..Len),
-					Target => Target, Clause_Number => Clause);
-				end if;
-			    end;
-			else
-			    ARM_Output.Ordinary_Text (Output_Object, Name(1..Len));
+			        end;
+			    end if;
+		        else
+			    if Ada.Strings.Fixed.Index (Name(1..Len), "@") /= 0 then
+			        -- Embedded commands, better execute them.
+			        declare
+				    Org_Font : ARM_Output.Font_Family_Type :=
+				        Format_Object.Font;
+			        begin
+				    Format_Object.Font := ARM_Output.Swiss;
+			            ARM_Format.Format (Format_Object,
+					               Name(1..Len),
+					               Output_Object,
+					               Text_Name => "@nt{}",
+					               No_Annotations => False);
+				    Format_Object.Font := Org_Font;
+			        end;
+			    else
+				ARM_Output.Ordinary_Text (Output_Object, Name(1..Len));
+			    end if;
 			end if;
 		        ARM_Output.Text_Format (Output_Object,
 					        Bold => Format_Object.Is_Bold,
@@ -5105,6 +5260,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 				 Old_Next_Subhead_Paragraph => Format_Object.Next_Paragraph_Subhead_Type,
 				 Old_Next_Paragraph_Format => Format_Object.Next_Paragraph_Format_Type,
 				 Old_Tab_Stops => Format_Object.Paragraph_Tab_Stops,
+				 Old_Next_Enum_Num => Format_Object.Next_Enumerated_Num,
 				 Is_Formatting => True, -- Reset if needed later.
 				 Change_Version => '0', -- Not used.
 				 Was_Text => False, -- Not used.
@@ -5153,27 +5309,37 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			        Format_Object.Next_Paragraph_Subhead_Type := Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph;
 			        Format_Object.Next_Paragraph_Format_Type := Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Paragraph_Format;
 			        Format_Object.Paragraph_Tab_Stops := Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops;
+			        Format_Object.Next_Enumerated_Num := Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Enum_Num;
 			        Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (End)");
 			    end if;
 
 			    Check_End_Paragraph; -- End any paragraph that we're in.
 
-			    -- Check if number of columns is changing:
-			    if Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
-				Type_Name, Ada.Strings.Right)) = "twocol" then
-				-- Leaving two column region, reset to one:
-				ARM_Output.Set_Columns (Output_Object, Number_of_Columns => 1);
-			    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
-				Type_Name, Ada.Strings.Right)) = "fourcol" then
-				-- Leaving four column region, reset to one:
-				ARM_Output.Set_Columns (Output_Object, Number_of_Columns => 1);
-			    end if;
-			    -- Check if we're leaving a bundle:
-			    if Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
-				Type_Name, Ada.Strings.Right)) = "bundle" then
-				Format_Object.In_Bundle := False;
-			    end if;
+			    declare
+				Lower_Type_Name : constant String :=
+				    Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+					Type_Name, Ada.Strings.Right));
+			    begin
+			        -- Check if number of columns is changing:
+			        if Lower_Type_Name = "twocol" then
+				    -- Leaving two column region, reset to one:
+				    ARM_Output.Set_Columns (Output_Object, Number_of_Columns => 1);
+			        elsif Lower_Type_Name = "fourcol" then
+				    -- Leaving four column region, reset to one:
+				    ARM_Output.Set_Columns (Output_Object, Number_of_Columns => 1);
+			        end if;
+			        -- Check if we're leaving a bundle:
+			        if Lower_Type_Name = "bundle" then
+				    Format_Object.In_Bundle := False;
+			        end if;
+			        -- Check if we're leaving an enumerated list:
+			        if Lower_Type_Name = "enumerate" or else
+			           Lower_Type_Name = "innerenumerate" then
+				    Format_Object.Enumerated_Level :=
+				        Format_Object.Enumerated_Level - 1;
+			        end if;
+			    end;
 		        else
 			    ARM_Input.Replace_Char (Input_Object);
 			    Ada.Text_IO.Put_Line ("  ** Failed to find close for parameter to end, line " & ARM_Input.Line_String (Input_Object));
@@ -6044,10 +6210,12 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			Gen_Syntax_Rule (Disposition, RHS_Close_Ch);
 		    end;
 
-		when Syntax_Term =>
+		when Syntax_Term | Syntax_Term_Undefined =>
 		    -- Marks a non-terminal name in the production of a syntax
 		    -- rule. Generates the term in the same style as
-		    -- @nt (Non_Terminal).
+		    -- @nt (Non_Terminal). "Undefined" means the term is
+		    -- not formally defined (like the character class names in
+		    -- the Ada standard).
 		    -- If the current LHS non-terminal is not null, generates
 		    -- a syntax cross reference entry:
 		    -- <Name> in <Non-Terminal> at <ClauseNum>. Also,
@@ -6058,6 +6226,9 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			Name : String(1..40);
 			Len : Natural;
 			Key : ARM_Index.Index_Key;
+			Defined : constant Boolean :=
+			   Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command =
+			       Syntax_Term;
 		    begin
 		        ARM_Input.Copy_to_String_until_Close_Char (
 			    Input_Object,
@@ -6068,7 +6239,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			    ARM_Syntax.Add_Xref (
 			         Name => Name(1..Len),
 			         Used_In => Get_NT,
-			         Clause => Clause_String (Format_Object));
+			         Clause => Clause_String (Format_Object),
+				 Defined => Defined);
 			end if;
 
 			-- Index the non-terminal:
@@ -6090,7 +6262,10 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 				                Version => Format_Object.Current_Change_Version,
 				                Added_Version => Format_Object.Current_Old_Change_Version,
 					        Location => Format_Object.Location);
-			if Format_Object.Link_Non_Terminals then
+			if not Defined then
+			    -- No linking to do.
+			    ARM_Output.Ordinary_Text (Output_Object, Name(1..Len));
+			elsif Format_Object.Link_Non_Terminals then
 			    declare
 				Lower_NT : constant String :=
 				    Ada.Characters.Handling.To_Lower (Name(1..Len));
@@ -6100,7 +6275,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 				    ARM_Syntax.Non_Terminal_Link_Target (Lower_NT);
 			    begin
 				if Clause = "" then -- Not found. No link, but error message:
-				    Ada.Text_IO.Put_Line ("  ?? Unknown non-terminal " &
+				    Ada.Text_IO.Put_Line ("  ** Unknown non-terminal in syntax production " &
 					Name(1..Len) & " on line " & ARM_Input.Line_String (Input_Object));
 				    ARM_Output.Ordinary_Text (Output_Object, Name(1..Len));
 				else
@@ -6124,7 +6299,6 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		    end;
 		    Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Syntax Term)");
-
 
 		when Syntax_Prefix =>
 		    -- Marks the prefix of a non-terminal. Writes italized
@@ -8821,7 +8995,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 
 		when Text_Begin | Text_End | Redundant | Part | Bold | Italic |
 		     Roman | Swiss | Fixed | Roman_Italic | Shrink | Grow |
-		     Keyword | Non_Terminal | Example_Text | Example_Comment |
+		     Keyword | Non_Terminal | Non_Terminal_Format |
+		     Example_Text | Example_Comment |
 		     Up | Down | Tab_Clear | Tab_Set | Table |
 		     Picture_Alone | Picture_Inline |
 		     Defn | RootDefn | PDefn | Defn2 | RootDefn2 | PDefn2 |
@@ -8831,7 +9006,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		     Index_Subprogram | Index_Exception | Index_Object |
 		     Index_Package | Index_Other | Index_Check |
 		     Index_Attr | Index_Pragma |
-		     Syntax_Rule | Syntax_Term | Syntax_Prefix |
+		     Syntax_Rule | Syntax_Term | Syntax_Term_Undefined | Syntax_Prefix |
 		     Added_Syntax_Rule | Deleted_Syntax_Rule |
 		     To_Glossary | To_Glossary_Also |
 		     Change_To_Glossary | Change_To_Glossary_Also |
@@ -9261,7 +9436,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 
 		when Bold | Italic | Roman | Swiss | Fixed | Roman_Italic |
 		     Shrink | Grow | Up | Down |
-		     Keyword | Non_Terminal | Example_Text | Example_Comment =>
+		     Keyword | Non_Terminal | Non_Terminal_Format |
+		     Example_Text | Example_Comment =>
 		    -- Formatting commands; revert to the previous (saved)
 		    -- version:
 		    declare
@@ -10628,6 +10804,10 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	        end case;
 	    end;
         end loop Reading_Loop;
+    exception
+	when ARM_Output.Not_Valid_Error =>
+	    Ada.Text_IO.Put_Line ("** Output validity error processing line " & ARM_Input.Line_String (Input_Object));
+	    raise;
     end Real_Process;
 
 
@@ -10697,6 +10877,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	    Format_Object.Next_Insert_Para := 1;
 	    Format_Object.Next_AARM_Sub := 'a';
 	    Format_Object.Next_Enumerated_Num := 1;
+	    Format_Object.Enumerated_Level := 0;
 
 	    Format_Object.Is_Bold := False;
 	    Format_Object.Is_Italic := False;

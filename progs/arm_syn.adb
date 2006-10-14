@@ -54,6 +54,8 @@ package body ARM_Syntax is
     --  6/22/06 - RLB - Added additional information to improve the links.
     --			Changed the cross-reference table to use the Ada 83
     --			format (which adds missing section references).
+    -- 10/13/06 - RLB - Added Defined flag to cross-references to eliminate
+    --			junk errors from not-quite-non-terminals.
 
     type String_Ptr is access String;
     type Rule_Type;
@@ -78,6 +80,7 @@ package body ARM_Syntax is
 	Name_Len : Natural;
 	Used_In : String (1..40);
 	Used_In_Len : Natural;
+	Defined : Boolean;
 	Next : XRef_Ptr;
     end record;
 
@@ -233,10 +236,12 @@ package body ARM_Syntax is
     procedure Add_Xref (
 	Name : in String;
 	Used_In : in String;
-	Clause : in String) is
+	Clause : in String;
+	Defined : in Boolean) is
 	-- Add a cross-reference entry.
 	-- The item referenced is Name, and it is referenced in the production
-	-- for Used_In, in Clause.
+	-- for Used_In, in Clause. It is a defined non-terminal if Defined
+	-- is True (thus it can be linked).
 	Temp_XRef : XRef_Type;
     begin
 	Ada.Strings.Fixed.Move (Target => Temp_XRef.Clause,
@@ -254,6 +259,7 @@ package body ARM_Syntax is
 				Drop   => Ada.Strings.Error,
 			        Pad    => ' ');
 	Temp_XRef.Used_In_Len := Used_In'Length;
+	Temp_XRef.Defined := Defined;
 
 	-- Check for an identical record already loaded:
 	declare
@@ -393,15 +399,28 @@ package body ARM_Syntax is
 		    Clause : constant String :=
 			Non_Terminal_Clause (Temp.Name (1..Temp.Name_Len));
 		begin
-		    if Clause /= "" then
-		        Format_Text ("@noparanum@trailing@nt{" & Temp.Name (1..Temp.Name_Len) &
-		             "}@\@RefSecbyNum{" & Clause & "}" & Ascii.LF,
-		             Temp.Name (1..Temp.Name_Len) & " header");
-		    else -- Undefined? Weird, but don't break, just use the
-			 -- Ada 83 ellipsis.
-		        Format_Text ("@noparanum@trailing@nt{" & Temp.Name (1..Temp.Name_Len) &
-		             "}@\..." & Ascii.LF,
-		             Temp.Name (1..Temp.Name_Len) & " header");
+		    if Temp.Defined then
+		        if Clause /= "" then
+		            Format_Text ("@noparanum@trailing@nt{" & Temp.Name (1..Temp.Name_Len) &
+		                 "}@\@RefSecbyNum{" & Clause & "}" & Ascii.LF,
+		                 Temp.Name (1..Temp.Name_Len) & " header");
+		        else -- Undefined? Weird, but don't break, just use the
+			     -- Ada 83 ellipsis.
+		            Format_Text ("@noparanum@trailing@nt{" & Temp.Name (1..Temp.Name_Len) &
+		                 "}@\..." & Ascii.LF,
+		                 Temp.Name (1..Temp.Name_Len) & " header");
+		        end if;
+		    else
+		        if Clause /= "" then
+		            Format_Text ("@noparanum@trailing@ntf{" & Temp.Name (1..Temp.Name_Len) &
+		                 "}@\@RefSecbyNum{" & Clause & "}" & Ascii.LF,
+		                 Temp.Name (1..Temp.Name_Len) & " header");
+		        else -- Undefined? Weird, but don't break, just use the
+			     -- Ada 83 ellipsis.
+		            Format_Text ("@noparanum@trailing@ntf{" & Temp.Name (1..Temp.Name_Len) &
+		                 "}@\..." & Ascii.LF,
+		                 Temp.Name (1..Temp.Name_Len) & " header");
+		        end if;
 		    end if;
 		end;
 	        -- Original:

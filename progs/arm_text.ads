@@ -81,6 +81,8 @@ package ARM_Text is
     --			table command.
     --		- RLB - Added picture command.
     --  9/25/06 - RLB - Added Last_Column_Width to Start_Table.
+    -- 10/13/06 - RLB - Added Local_Link_Start and Local_Link_End to allow
+    --			formatting in the linked text.
 
     type Text_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -366,6 +368,23 @@ package ARM_Text is
 			  Clause_Number : in String);
 	-- Generate a local link to the target and clause given.
 	-- Text is the text of the link.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+
+    procedure Local_Link_Start (Output_Object : in out Text_Output_Type;
+				Target : in String;
+				Clause_Number : in String);
+	-- Generate a local link to the target and clause given.
+	-- The link will surround text until Local_Link_End is called.
+	-- Local_Link_End must be called before this routine can be used again.
+	-- For hyperlinked formats, this should generate a link;
+	-- for other formats, only the text is generated.
+
+    procedure Local_Link_End (Output_Object : in out Text_Output_Type;
+			      Target : in String;
+			      Clause_Number : in String);
+	-- End a local link for the target and clause given.
+	-- This must be in the same paragraph as the Local_Link_Start.
 	-- For hyperlinked formats, this should generate a link;
 	-- for other formats, only the text is generated.
 
