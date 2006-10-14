@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.35 $ $Date: 2006/02/11 08:00:53 $ $Author: Randy $ }
+@comment{ $Revision: 1.36 $ $Date: 2006/10/14 06:05:20 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2006/02/11 08:00:53 $}
+@Comment{$Date: 2006/10/14 06:05:20 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -292,7 +292,7 @@ or the digits group separator character (if '_'). In some contexts it
 is treated as part of a floating sign, floating currency, or zero
 suppression string.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00434-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 An example of a picture String is "<###Z_ZZ9.99>". If the currency string
 is "@Chg{Version=[2],New=[kr],Old=[FF]}", the separator character is ',', and
 the radix mark is '.' then the edited output string values for the decimal
@@ -337,221 +337,221 @@ conventions specified in this clause.
 @ChgRef{Version=[1], Kind=[Deleted]}
 @Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 @begin{Display}
-@nt{picture_string} ::=
-   @nt{fixed_$_picture_string}
- | @nt{fixed_#_picture_string}
- | @nt{floating_currency_picture_string}
- | @nt{non_currency_picture_string}
+@ntf{picture_string} ::=
+   @ntf{fixed_$_picture_string}
+ | @ntf{fixed_#_picture_string}
+ | @ntf{floating_currency_picture_string}
+ | @ntf{non_currency_picture_string}
 @comment{Blank Line}
 @end{Display}
 @begin{display}
-@nt{fixed_$_picture_string} ::=
-   [@nt{fixed_LHS_sign}] @nt{fixed_$_char} {@nt{direct_insertion}} [@nt{zero_suppression}]
-     @nt{number} [@nt{RHS_sign}]
+@ntf{fixed_$_picture_string} ::=
+   [@ntf{fixed_LHS_sign}] @ntf{fixed_$_char} {@ntf{direct_insertion}} [@ntf{zero_suppression}]
+     @ntf{number} [@ntf{RHS_sign}]
 @comment{Blank Line}
- | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] [@nt{zero_suppression}]
-     @nt{number} @nt{fixed_$_char} {@nt{direct_insertion}} [@nt{RHS_sign}]
+ | [@ntf{fixed_LHS_sign} {@ntf{direct_insertion}}] [@ntf{zero_suppression}]
+     @ntf{number} @ntf{fixed_$_char} {@ntf{direct_insertion}} [@ntf{RHS_sign}]
 @comment{Blank Line}
- | @nt{floating_LHS_sign} @nt{number} @nt{fixed_$_char} {@nt{direct_insertion}} [@nt{RHS_sign}]
+ | @ntf{floating_LHS_sign} @ntf{number} @ntf{fixed_$_char} {@ntf{direct_insertion}} [@ntf{RHS_sign}]
 @comment{Blank Line}
- | [@nt{fixed_LHS_sign}] @nt{fixed_$_char} {@nt{direct_insertion}}
-     @nt{all_zero_suppression_number} {@nt{direct_insertion}}  [@nt{RHS_sign}]
+ | [@ntf{fixed_LHS_sign}] @ntf{fixed_$_char} {@ntf{direct_insertion}}
+     @ntf{all_zero_suppression_number} {@ntf{direct_insertion}}  [@ntf{RHS_sign}]
 @comment{Blank Line}
- | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] @nt{all_zero_suppression_number} {@nt{direct_insertion}}
-     @nt{fixed_$_char} {@nt{direct_insertion}} [@nt{RHS_sign}]
+ | [@ntf{fixed_LHS_sign} {@ntf{direct_insertion}}] @ntf{all_zero_suppression_number} {@ntf{direct_insertion}}
+     @ntf{fixed_$_char} {@ntf{direct_insertion}} [@ntf{RHS_sign}]
 @comment{Blank Line}
- | @nt{all_sign_number} {@nt{direct_insertion}} @nt{fixed_$_char} {@nt{direct_insertion}} [@nt{RHS_sign}]
-@comment{Blank Line}
-@end{display}
-@begin{display}
-@nt{fixed_#_picture_string} ::=
-   [@nt{fixed_LHS_sign}] @nt{single_#_currency} {@nt{direct_insertion}}
-     [@nt{zero_suppression}] @nt{number} [@nt{RHS_sign}]
-@comment{Blank Line}
- | [@nt{fixed_LHS_sign}] @nt{multiple_#_currency} {@nt{direct_insertion}}
-     @nt{zero_suppression} @nt{number} [@nt{RHS_sign}]
-@comment{Blank Line}
- | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] [@nt{zero_suppression}]
-     @nt{number} @nt{fixed_#_currency} {@nt{direct_insertion}} [@nt{RHS_sign}]
-@comment{Blank Line}
- | @nt{floating_LHS_sign} @nt{number} @nt{fixed_#_currency} {@nt{direct_insertion}} [@nt{RHS_sign}]
-@comment{Blank Line}
- | [@nt{fixed_LHS_sign}] @nt{single_#_currency} {@nt{direct_insertion}}
-     @nt{all_zero_suppression_number} {@nt{direct_insertion}} [@nt{RHS_sign}]
-@comment{Blank Line}
- | [@nt{fixed_LHS_sign}] @nt{multiple_#_currency} {@nt{direct_insertion}}
-     @nt{all_zero_suppression_number} {@nt{direct_insertion}} [@nt{RHS_sign}]
-@comment{Blank Line}
- | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] @nt{all_zero_suppression_number} {@nt{direct_insertion}}
-     @nt{fixed_#_currency} {@nt{direct_insertion}} [@nt{RHS_sign}]
-@comment{Blank Line}
- | @nt{all_sign_number} {@nt{direct_insertion}} @nt{fixed_#_currency} {@nt{direct_insertion}} [@nt{RHS_sign}]
+ | @ntf{all_sign_number} {@ntf{direct_insertion}} @ntf{fixed_$_char} {@ntf{direct_insertion}} [@ntf{RHS_sign}]
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{floating_currency_picture_string} ::=
-   [@nt{fixed_LHS_sign}] {@nt{direct_insertion}} @nt{floating_$_currency} @nt{number} [@nt{RHS_sign}]
- | [@nt{fixed_LHS_sign}] {@nt{direct_insertion}} @nt{floating_#_currency} @nt{number} [@nt{RHS_sign}]
- | [@nt{fixed_LHS_sign}] {@nt{direct_insertion}} @nt{all_currency_number} {@nt{direct_insertion}} [@nt{RHS_sign}]
+@ntf{fixed_#_picture_string} ::=
+   [@ntf{fixed_LHS_sign}] @ntf{single_#_currency} {@ntf{direct_insertion}}
+     [@ntf{zero_suppression}] @ntf{number} [@ntf{RHS_sign}]
+@comment{Blank Line}
+ | [@ntf{fixed_LHS_sign}] @ntf{multiple_#_currency} {@ntf{direct_insertion}}
+     @ntf{zero_suppression} @ntf{number} [@ntf{RHS_sign}]
+@comment{Blank Line}
+ | [@ntf{fixed_LHS_sign} {@ntf{direct_insertion}}] [@ntf{zero_suppression}]
+     @ntf{number} @ntf{fixed_#_currency} {@ntf{direct_insertion}} [@ntf{RHS_sign}]
+@comment{Blank Line}
+ | @ntf{floating_LHS_sign} @ntf{number} @ntf{fixed_#_currency} {@ntf{direct_insertion}} [@ntf{RHS_sign}]
+@comment{Blank Line}
+ | [@ntf{fixed_LHS_sign}] @ntf{single_#_currency} {@ntf{direct_insertion}}
+     @ntf{all_zero_suppression_number} {@ntf{direct_insertion}} [@ntf{RHS_sign}]
+@comment{Blank Line}
+ | [@ntf{fixed_LHS_sign}] @ntf{multiple_#_currency} {@ntf{direct_insertion}}
+     @ntf{all_zero_suppression_number} {@ntf{direct_insertion}} [@ntf{RHS_sign}]
+@comment{Blank Line}
+ | [@ntf{fixed_LHS_sign} {@ntf{direct_insertion}}] @ntf{all_zero_suppression_number} {@ntf{direct_insertion}}
+     @ntf{fixed_#_currency} {@ntf{direct_insertion}} [@ntf{RHS_sign}]
+@comment{Blank Line}
+ | @ntf{all_sign_number} {@ntf{direct_insertion}} @ntf{fixed_#_currency} {@ntf{direct_insertion}} [@ntf{RHS_sign}]
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{non_currency_picture_string} ::=
-   [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] @nt{zero_suppression} @nt{number} [@nt{RHS_sign}]
- | [@nt{floating_LHS_sign}] @nt{number} [@nt{RHS_sign}]
- | [@nt{fixed_LHS_sign} {@nt{direct_insertion}}] @nt{all_zero_suppression_number} {@nt{direct_insertion}}
-     [@nt{RHS_sign}]
- | @nt{all_sign_number} {@nt{direct_insertion}}
- | @nt{fixed_LHS_sign} @nt{direct_insertion} {@nt{direct_insertion}} @nt{number} [@nt{RHS_sign}]
+@ntf{floating_currency_picture_string} ::=
+   [@ntf{fixed_LHS_sign}] {@ntf{direct_insertion}} @ntf{floating_$_currency} @ntf{number} [@ntf{RHS_sign}]
+ | [@ntf{fixed_LHS_sign}] {@ntf{direct_insertion}} @ntf{floating_#_currency} @ntf{number} [@ntf{RHS_sign}]
+ | [@ntf{fixed_LHS_sign}] {@ntf{direct_insertion}} @ntf{all_currency_number} {@ntf{direct_insertion}} [@ntf{RHS_sign}]
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{fixed_LHS_sign} ::=  @nt{LHS_Sign}
-@end{display}
-@begin{display}
-@nt{LHS_Sign} ::=  + | @en | <
+@ntf{non_currency_picture_string} ::=
+   [@ntf{fixed_LHS_sign} {@ntf{direct_insertion}}] @ntf{zero_suppression} @ntf{number} [@ntf{RHS_sign}]
+ | [@ntf{floating_LHS_sign}] @ntf{number} [@ntf{RHS_sign}]
+ | [@ntf{fixed_LHS_sign} {@ntf{direct_insertion}}] @ntf{all_zero_suppression_number} {@ntf{direct_insertion}}
+     [@ntf{RHS_sign}]
+ | @ntf{all_sign_number} {@ntf{direct_insertion}}
+ | @ntf{fixed_LHS_sign} @ntf{direct_insertion} {@ntf{direct_insertion}} @ntf{number} [@ntf{RHS_sign}]
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{fixed_$_char} ::= $
+@ntf{fixed_LHS_sign} ::=  @ntf{LHS_Sign}
+@end{display}
+@begin{display}
+@ntf{LHS_Sign} ::=  + | @en | <
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{direct_insertion} ::=  @nt{simple_insertion}
-@end{display}
-@begin{display}
-@nt{simple_insertion} ::=  _ | B | 0 | /
+@ntf{fixed_$_char} ::= $
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{zero_suppression} ::=  Z {Z | @nt{context_sensitive_insertion}} | @nt{fill_string}
+@ntf{direct_insertion} ::=  @ntf{simple_insertion}
 @end{display}
 @begin{display}
-@nt{context_sensitive_insertion} ::=  @nt{simple_insertion}
+@ntf{simple_insertion} ::=  _ | B | 0 | /
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{fill_string} ::=  * {* | @nt{context_sensitive_insertion}}
+@ntf{zero_suppression} ::=  Z {Z | @ntf{context_sensitive_insertion}} | @ntf{fill_string}
+@end{display}
+@begin{display}
+@ntf{context_sensitive_insertion} ::=  @ntf{simple_insertion}
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{number} ::=
-   @nt{fore_digits} [@nt{radix} [@nt{aft_digits}] {@nt{direct_insertion}}]
- | @nt{radix} @nt{aft_digits} {@nt{direct_insertion}}
-@end{display}
-@begin{display}
-@nt{fore_digits} ::= 9 {9 | @nt{direct_insertion}}
-@end{display}
-@begin{display}
-@nt{aft_digits} ::=  {9 | @nt{direct_insertion}} 9
-@end{display}
-@begin{display}
-@nt{radix} ::= . | V
+@ntf{fill_string} ::=  * {* | @ntf{context_sensitive_insertion}}
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{RHS_sign} ::= + | @en | > | CR | DB
+@ntf{number} ::=
+   @ntf{fore_digits} [@ntf{radix} [@ntf{aft_digits}] {@ntf{direct_insertion}}]
+ | @ntf{radix} @ntf{aft_digits} {@ntf{direct_insertion}}
+@end{display}
+@begin{display}
+@ntf{fore_digits} ::= 9 {9 | @ntf{direct_insertion}}
+@end{display}
+@begin{display}
+@ntf{aft_digits} ::=  {9 | @ntf{direct_insertion}} 9
+@end{display}
+@begin{display}
+@ntf{radix} ::= . | V
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{floating_LHS_sign} ::=
-   @nt{LHS_Sign} {@nt{context_sensitive_insertion}} @nt{LHS_Sign} {@nt{LHS_Sign} | @nt{context_sensitive_insertion}}
+@ntf{RHS_sign} ::= + | @en | > | CR | DB
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{single_#_currency} ::= #
-@end{display}
-@begin{display}
-@nt{multiple_#_currency} ::= ## {#}
+@ntf{floating_LHS_sign} ::=
+   @ntf{LHS_Sign} {@ntf{context_sensitive_insertion}} @ntf{LHS_Sign} {@ntf{LHS_Sign} | @ntf{context_sensitive_insertion}}
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{fixed_#_currency} ::= @nt{single_#_currency} | @nt{multiple_#_currency}
+@ntf{single_#_currency} ::= #
+@end{display}
+@begin{display}
+@ntf{multiple_#_currency} ::= ## {#}
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{floating_$_currency} ::=
-   $ {@nt{context_sensitive_insertion}} $ {$ | @nt{context_sensitive_insertion}}
+@ntf{fixed_#_currency} ::= @ntf{single_#_currency} | @ntf{multiple_#_currency}
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{floating_#_currency} ::=
-   # {@nt{context_sensitive_insertion}} # {# | @nt{context_sensitive_insertion}}
+@ntf{floating_$_currency} ::=
+   $ {@ntf{context_sensitive_insertion}} $ {$ | @ntf{context_sensitive_insertion}}
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{all_sign_number} ::=  @nt{all_sign_fore} [@nt{radix} [@nt{all_sign_aft}]] [>]
-@end{display}
-@begin{display}
-@nt{all_sign_fore} ::=
-   @nt{sign_char} {@nt{context_sensitive_insertion}} @nt{sign_char} {@nt{sign_char} | @nt{context_sensitive_insertion}}
-@end{display}
-@begin{display}
-@nt{all_sign_aft} ::= {@nt{all_sign_aft_char}} @nt{sign_char}
-@comment{Blank Line}
-@nt{all_sign_aft_char} ::=  @nt{sign_char} | @nt{context_sensitive_insertion}
-@end{display}
-@begin{display}
-@nt{sign_char} ::= + | @en | <
+@ntf{floating_#_currency} ::=
+   # {@ntf{context_sensitive_insertion}} # {# | @ntf{context_sensitive_insertion}}
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{all_currency_number} ::=  @nt{all_currency_fore} [@nt{radix} [@nt{all_currency_aft}]]
+@ntf{all_sign_number} ::=  @ntf{all_sign_fore} [@ntf{radix} [@ntf{all_sign_aft}]] [>]
 @end{display}
 @begin{display}
-@nt{all_currency_fore} ::=
-   @nt{currency_char} {@nt{context_sensitive_insertion}}
-     @nt{currency_char} {@nt{currency_char} | @nt{context_sensitive_insertion}}
+@ntf{all_sign_fore} ::=
+   @ntf{sign_char} {@ntf{context_sensitive_insertion}} @ntf{sign_char} {@ntf{sign_char} | @ntf{context_sensitive_insertion}}
 @end{display}
 @begin{display}
-@nt{all_currency_aft} ::= {@nt{all_currency_aft_char}} @nt{currency_char}
+@ntf{all_sign_aft} ::= {@ntf{all_sign_aft_char}} @ntf{sign_char}
 @comment{Blank Line}
-@nt{all_currency_aft_char} ::= @nt{currency_char} | @nt{context_sensitive_insertion}
+@ntf{all_sign_aft_char} ::=  @ntf{sign_char} | @ntf{context_sensitive_insertion}
 @end{display}
 @begin{display}
-@nt{currency_char} ::= $ | #
+@ntf{sign_char} ::= + | @en | <
 @comment{Blank Line}
 @end{display}
 @begin{display}
-@nt{all_zero_suppression_number} ::=  @nt{all_zero_suppression_fore} [ @nt{radix} [@nt{all_zero_suppression_aft}]]
+@ntf{all_currency_number} ::=  @ntf{all_currency_fore} [@ntf{radix} [@ntf{all_currency_aft}]]
 @end{display}
 @begin{display}
-@nt{all_zero_suppression_fore} ::=
-   @nt{zero_suppression_char} {@nt{zero_suppression_char} | @nt{context_sensitive_insertion}}
+@ntf{all_currency_fore} ::=
+   @ntf{currency_char} {@ntf{context_sensitive_insertion}}
+     @ntf{currency_char} {@ntf{currency_char} | @ntf{context_sensitive_insertion}}
 @end{display}
 @begin{display}
-@nt{all_zero_suppression_aft} ::= {@nt{all_zero_suppression_aft_char}} @nt{zero_suppression_char}
+@ntf{all_currency_aft} ::= {@ntf{all_currency_aft_char}} @ntf{currency_char}
 @comment{Blank Line}
-@nt{all_zero_suppression_aft_char} ::=  @nt{zero_suppression_char} | @nt{context_sensitive_insertion}
+@ntf{all_currency_aft_char} ::= @ntf{currency_char} | @ntf{context_sensitive_insertion}
 @end{display}
 @begin{display}
-@trailing@nt{zero_suppression_char} ::= Z | *
+@ntf{currency_char} ::= $ | #
+@comment{Blank Line}
+@end{display}
+@begin{display}
+@ntf{all_zero_suppression_number} ::=  @ntf{all_zero_suppression_fore} [ @ntf{radix} [@ntf{all_zero_suppression_aft}]]
+@end{display}
+@begin{display}
+@ntf{all_zero_suppression_fore} ::=
+   @ntf{zero_suppression_char} {@ntf{zero_suppression_char} | @ntf{context_sensitive_insertion}}
+@end{display}
+@begin{display}
+@ntf{all_zero_suppression_aft} ::= {@ntf{all_zero_suppression_aft_char}} @ntf{zero_suppression_char}
+@comment{Blank Line}
+@ntf{all_zero_suppression_aft_char} ::=  @ntf{zero_suppression_char} | @ntf{context_sensitive_insertion}
+@end{display}
+@begin{display}
+@trailing@ntf{zero_suppression_char} ::= Z | *
 @end{Display}
 
 @Leading@;The following composition constraints apply to a picture String:
 @begin{Itemize}
-A @nt{floating_LHS_sign} does not have occurrences of different @nt{LHS_Sign}
+A @ntf{floating_LHS_sign} does not have occurrences of different @ntf{LHS_Sign}
 Character values.
 
-If a picture String has '<' as @nt{fixed_LHS_sign}, then it has '>' as
-@nt{RHS_sign}.
+If a picture String has '<' as @ntf{fixed_LHS_sign}, then it has '>' as
+@ntf{RHS_sign}.
 
-If a picture String has '<' in a @nt{floating_LHS_sign} or in an
-@nt{all_sign_number}, then it has an occurrence of '>'.
+If a picture String has '<' in a @ntf{floating_LHS_sign} or in an
+@ntf{all_sign_number}, then it has an occurrence of '>'.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0088],ARef=[AI95-00153]}
-If a picture String has '+' or '@en@;' as @nt{fixed_LHS_sign}, in a
-@nt{floating_LHS_sign}, or in an @nt{all_sign_number}, then it has no
-@nt{RHS_sign}@Chg{New=[ or '>' character],Old=[]}.
+If a picture String has '+' or '@en@;' as @ntf{fixed_LHS_sign}, in a
+@ntf{floating_LHS_sign}, or in an @ntf{all_sign_number}, then it has no
+@ntf{RHS_sign}@Chg{New=[ or '>' character],Old=[]}.
 
-An instance of @nt{all_sign_number} does not have occurrences of
-different @nt{sign_char} Character values.
+An instance of @ntf{all_sign_number} does not have occurrences of
+different @ntf{sign_char} Character values.
 
-An instance of @nt{all_currency_number} does not have occurrences of
-different @nt{currency_@!char} Character values.
+An instance of @ntf{all_currency_number} does not have occurrences of
+different @ntf{currency_@!char} Character values.
 
-An instance of @nt{all_zero_suppression_number} does not have occurrences
-of different @nt{zero_@!suppression_@!char} Character values, except for possible
+An instance of @ntf{all_zero_suppression_number} does not have occurrences
+of different @ntf{zero_@!suppression_@!char} Character values, except for possible
 case differences between 'Z' and 'z'.
 @end{Itemize}
 
@@ -646,13 +646,13 @@ called the @i{displayed} @i{magnitude} of Item,
 where:
 @begin{Itemize}
      q = Min(Max(Num'Scale, 0), n) where n is 0 if Pic_String
-         has no @nt{radix} and is otherwise the number of digit
-         positions following @nt{radix} in Pic_String,
+         has no @ntf{radix} and is otherwise the number of digit
+         positions following @ntf{radix} in Pic_String,
          where a digit position corresponds to an occurrence of
-         '9', a @nt{zero_suppression_char} (for an
-         @nt{all_zero_suppression_number}), a @nt{currency_char}
-         (for an @nt{all_currency_number}), or a @nt{sign_char}
-         (for an @nt{all_sign_number}).
+         '9', a @ntf{zero_suppression_char} (for an
+         @ntf{all_zero_suppression_number}), a @ntf{currency_char}
+         (for an @ntf{all_currency_number}), or a @ntf{sign_char}
+         (for an @ntf{all_sign_number}).
 
      I@-(p) /= 0 if p>0.
 @end{Itemize}
@@ -678,7 +678,7 @@ If there is no sign control symbol but the value of Item
 is negative, a layout error occurs and no edited output string
 is produced.
 
-@Table{Columns=<3>,Alignment=<AllCenter>,FirstColWidth=[1],
+@Table{Columns=<3>,Alignment=<AllCenter>,FirstColWidth=[1],LastColWidth=[1],
 NoBreak=[T],Border=[T],SmallSize=[F],
 Caption=<@b{Table F-1: Edited Output for Sign Control Symbols}>,
 Headers=<@b{Sign Control Symbol}@\@b{Edited Output for @*Non-Negative Number}@\@b{Edited Output for @*Negative Number}>,
@@ -689,73 +689,73 @@ Body=['+'@\'+'@\'@en@;'
 "CR"@\"bb"@\"CR"@Last
 "DB"@\"bb"@\"DB"]}
 
-An instance of @nt{fixed_LHS_sign} maps to a character as shown in
+An instance of @ntf{fixed_LHS_sign} maps to a character as shown in
 Table F-1.
 
-An instance of @nt{fixed_$_char} maps to Currency.
+An instance of @ntf{fixed_$_char} maps to Currency.
 
-An instance of @nt{direct_insertion} maps to
-Separator if @nt{direct_insertion} = '_', and to
-the @nt{direct_insertion} Character otherwise.
+An instance of @ntf{direct_insertion} maps to
+Separator if @ntf{direct_insertion} = '_', and to
+the @ntf{direct_insertion} Character otherwise.
 
 
-@Leading@;An instance of @nt{number} maps to a string
+@Leading@;An instance of @ntf{number} maps to a string
    @i{integer_part} & @i{radix_part} & @i{fraction_part}
 where:
 @begin{Itemize}
    The string for @i{integer_part} is obtained as follows:
 @begin{Enumerate}
-     Occurrences of '9' in @nt{fore_digits} of @nt{number} are replaced
+     Occurrences of '9' in @ntf{fore_digits} of @ntf{number} are replaced
      from right to left with the decimal digit character values for
      I@-(1), ..., I@-(p), respectively.
 
-     Each occurrence of '9' in @nt{fore_digits}
+     Each occurrence of '9' in @ntf{fore_digits}
      to the left of the leftmost '9' replaced according
      to rule 1 is replaced with '0'.
 
      If p exceeds the number of occurrences of '9' in
-     @nt{fore_digits} of @nt{number}, then the excess leftmost
+     @ntf{fore_digits} of @ntf{number}, then the excess leftmost
      digits are eligible for use in the mapping of
-     an instance of @nt{zero_suppression}, @nt{floating_LHS_sign},
-     @nt{floating_$_currency},
-     or @nt{floating_#_currency} to the left of @nt{number};
+     an instance of @ntf{zero_suppression}, @ntf{floating_LHS_sign},
+     @ntf{floating_$_currency},
+     or @ntf{floating_#_currency} to the left of @ntf{number};
      if there is no such instance, then a layout error
      occurs and no edited output string is produced.
 @end{Enumerate}
 
    @leading@;The @i{radix_part} is:
 @begin{InnerItemize}
-        "" if @nt{number} does not include a @nt{radix}, if @nt{radix} = 'V',
-        or if @nt{radix} = 'v'
+        "" if @ntf{number} does not include a @ntf{radix}, if @ntf{radix} = 'V',
+        or if @ntf{radix} = 'v'
 
-        Radix_Mark if @nt{number} includes '.' as @nt{radix}
+        Radix_Mark if @ntf{number} includes '.' as @ntf{radix}
 @end{InnerItemize}
 
 @leading@;The string for @i{fraction_part} is obtained as follows:
 @begin{Enumerate}
         Occurrences of '9'
-        in @nt{aft_digits} of @nt{number} are replaced
+        in @ntf{aft_digits} of @ntf{number} are replaced
         from left to right with the decimal digit character values for F@-(1),
         ... F@-(q).
 
-        Each occurrence of '9' in @nt{aft_digits}
+        Each occurrence of '9' in @ntf{aft_digits}
         to the right of the rightmost '9' replaced according to rule 1
         is replaced by '0'.
 @end{Enumerate}
 @end{Itemize}
 
-@leading@;An instance of @nt{zero_suppression} maps to the string obtained as follows:
+@leading@;An instance of @ntf{zero_suppression} maps to the string obtained as follows:
 @begin{Enumerate}
                   The rightmost 'Z', 'z', or '*' Character values
                   are replaced
                    with the excess digits (if any)
-                   from the @i{integer_part} of the mapping of the @nt{number}
-                   to the right of the @nt{zero_suppression} instance,
+                   from the @i{integer_part} of the mapping of the @ntf{number}
+                   to the right of the @ntf{zero_suppression} instance,
 
-                  A @nt{context_sensitive_insertion} Character is replaced
-                   as though it were a @nt{direct_insertion} Character, if
+                  A @ntf{context_sensitive_insertion} Character is replaced
+                   as though it were a @ntf{direct_insertion} Character, if
                    it occurs to the right of some 'Z', 'z', or '*' in
-                   @nt{zero_suppression} that has been mapped to an excess
+                   @ntf{zero_suppression} that has been mapped to an excess
                    digit,
 
                   @leading@;Each Character to the left of the
@@ -770,28 +770,28 @@ where:
 
                    A layout error occurs if some excess digits remain
                    after all 'Z', 'z', and '*' Character values in
-                   @nt{zero_suppression} have been replaced via rule 1; no
+                   @ntf{zero_suppression} have been replaced via rule 1; no
                    edited output string is produced.
 @end{Enumerate}
 
-An instance of @nt{RHS_sign} maps to a character or string
+An instance of @ntf{RHS_sign} maps to a character or string
 as shown in Table F-1.
 
 
-An instance of @nt{floating_LHS_sign} maps to the string obtained as follows.
+An instance of @ntf{floating_LHS_sign} maps to the string obtained as follows.
 @begin{Enumerate}
-                   Up to all but one of the rightmost @nt{LHS_Sign}
+                   Up to all but one of the rightmost @ntf{LHS_Sign}
                    Character values are replaced by the excess digits (if any)
-                   from the @i{integer_part} of the mapping of the @nt{number}
-                   to the right of the @nt{floating_LHS_sign} instance.
+                   from the @i{integer_part} of the mapping of the @ntf{number}
+                   to the right of the @ntf{floating_LHS_sign} instance.
 
                   The next Character to the left is replaced
                    with the character given by the entry in Table F-1
-                   corresponding to the @nt{LHS_Sign} Character.
+                   corresponding to the @ntf{LHS_Sign} Character.
 
-                  A @nt{context_sensitive_insertion} Character is replaced
-                   as though it were a @nt{direct_insertion} Character, if
-                   it occurs to the right of the leftmost @nt{LHS_Sign}
+                  A @ntf{context_sensitive_insertion} Character is replaced
+                   as though it were a @ntf{direct_insertion} Character, if
+                   it occurs to the right of the leftmost @ntf{LHS_Sign}
                    character replaced according to rule 1.
 
                   Any other Character is replaced by the space character..
@@ -801,29 +801,29 @@ An instance of @nt{floating_LHS_sign} maps to the string obtained as follows.
                    produced.
 @end{Enumerate}
 
-An instance of @nt{fixed_#_currency} maps to the Currency string with n
+An instance of @ntf{fixed_#_currency} maps to the Currency string with n
 space character values concatenated on the left (if the instance does
-not follow a @nt{radix}) or on the right (if the instance does follow a
-@nt{radix}), where n is the difference between the length of the
-@nt{fixed_#_currency} instance and Currency'Length. A layout error
+not follow a @ntf{radix}) or on the right (if the instance does follow a
+@ntf{radix}), where n is the difference between the length of the
+@ntf{fixed_#_currency} instance and Currency'Length. A layout error
 occurs if Currency'Length exceeds the length of the
-@nt{fixed_#_currency} instance; no edited output string is produced.
+@ntf{fixed_#_currency} instance; no edited output string is produced.
 
 
-@Leading@;An instance of @nt{floating_$_currency} maps to the string
+@Leading@;An instance of @ntf{floating_$_currency} maps to the string
 obtained as follows:
 @begin{Enumerate}
                   Up to all but one of the rightmost '$'
                    Character values are replaced
                  with the excess digits (if any)
-                   from the @i{integer_part} of the mapping of the @nt{number}
-                   to the right of the @nt{floating_$_currency} instance.
+                   from the @i{integer_part} of the mapping of the @ntf{number}
+                   to the right of the @ntf{floating_$_currency} instance.
 
                   The next Character to the left is replaced
                    by the Currency string.
 
-                  A @nt{context_sensitive_insertion} Character is replaced
-                   as though it were a @nt{direct_insertion} Character, if
+                  A @ntf{context_sensitive_insertion} Character is replaced
+                   as though it were a @ntf{direct_insertion} Character, if
                    it occurs to the right of the leftmost '$' Character
                    replaced via rule 1.
 
@@ -834,22 +834,22 @@ obtained as follows:
                    produced.
 @end{Enumerate}
 
-@leading@;An instance of @nt{floating_#_currency} maps to the string obtained
+@leading@;An instance of @ntf{floating_#_currency} maps to the string obtained
 as follows:
 @begin{Enumerate}
                   Up to all but one of the rightmost '#'
                    Character values are replaced
                   with the excess digits (if any)
-                   from the @i{integer_part} of the mapping of the @nt{number}
+                   from the @i{integer_part} of the mapping of the @ntf{number}
                    to the right of the
-                   @nt{floating_#_currency} instance.
+                   @ntf{floating_#_currency} instance.
 
   The substring whose last Character occurs at the position immediately
    preceding the leftmost Character replaced via rule 1, and whose
    length is Currency'Length, is replaced by the Currency string.
 
-                  A @nt{context_sensitive_insertion} Character is replaced
-                   as though it were a @nt{direct_insertion} Character, if
+                  A @ntf{context_sensitive_insertion} Character is replaced
+                   as though it were a @ntf{direct_insertion} Character, if
                    it occurs to the right of the leftmost '#'
                    replaced via rule 1.
 
@@ -861,61 +861,61 @@ as follows:
                    output string is produced.
 @end{Enumerate}
 
-@leading@;An instance of @nt{all_zero_suppression_number} maps to:
+@leading@;An instance of @ntf{all_zero_suppression_number} maps to:
 @begin{Itemize}
               a string of all spaces if
               the displayed magnitude of Item is zero,
-              the @nt{zero_suppression_char}
+              the @ntf{zero_suppression_char}
               is 'Z' or 'z', and the instance of
-              @nt{all_zero_suppression_number} does not have
-              a @nt{radix} at its last character position;
+              @ntf{all_zero_suppression_number} does not have
+              a @ntf{radix} at its last character position;
 
               a string containing the Fill character in each position except
-              for the character (if any) corresponding to @nt{radix}, if
-              @nt{zero_suppression_char} = '*' and the
+              for the character (if any) corresponding to @ntf{radix}, if
+              @ntf{zero_suppression_char} = '*' and the
               displayed magnitude of Item is zero;
 
               otherwise,
-              the same result as if each @nt{zero_suppression_char} in
-              @nt{all_zero_suppression_aft} were '9', interpreting
-              the instance of @nt{all_zero_suppression_number} as
-              either @nt{zero_suppression} @nt{number} (if a @nt{radix}
-              and @nt{all_zero_suppression_aft} are present), or
-              as @nt{zero_suppression} otherwise.
+              the same result as if each @ntf{zero_suppression_char} in
+              @ntf{all_zero_suppression_aft} were '9', interpreting
+              the instance of @ntf{all_zero_suppression_number} as
+              either @ntf{zero_suppression} @ntf{number} (if a @ntf{radix}
+              and @ntf{all_zero_suppression_aft} are present), or
+              as @ntf{zero_suppression} otherwise.
 @end{Itemize}
 
-@leading@;An instance of @nt{all_sign_number} maps to:
+@leading@;An instance of @ntf{all_sign_number} maps to:
 @begin{Itemize}
               a string of all spaces if
         the displayed magnitude of Item is zero and the
-        instance of @nt{all_sign_number} does not have a @nt{radix}
+        instance of @ntf{all_sign_number} does not have a @ntf{radix}
         at its last character position;
 
               otherwise,
-              the same result as if each @nt{sign_char} in
-              @nt{all_sign_number_aft} were '9', interpreting
-              the instance of @nt{all_sign_number} as
-              either @nt{floating_LHS_sign} @nt{number} (if a @nt{radix}
-              and @nt{all_sign_number_aft} are present), or
-              as @nt{floating_LHS_sign} otherwise.
+              the same result as if each @ntf{sign_char} in
+              @ntf{all_sign_number_aft} were '9', interpreting
+              the instance of @ntf{all_sign_number} as
+              either @ntf{floating_LHS_sign} @ntf{number} (if a @ntf{radix}
+              and @ntf{all_sign_number_aft} are present), or
+              as @ntf{floating_LHS_sign} otherwise.
 @end{Itemize}
 
-@leading@;An instance of @nt{all_currency_number} maps to:
+@leading@;An instance of @ntf{all_currency_number} maps to:
 @begin{Itemize}
               a string of all spaces if
         the displayed magnitude of Item is zero and the
-        instance of @nt{all_currency_number} does not have a @nt{radix}
+        instance of @ntf{all_currency_number} does not have a @ntf{radix}
         at its last character position;
 
               otherwise,
-              the same result as if each @nt{currency_char} in
-              @nt{all_currency_number_aft} were '9', interpreting
-              the instance of @nt{all_currency_number} as
-               @nt{floating_$_currency} @nt{number} or
-               @nt{floating_#_currency} @nt{number}
-              (if a @nt{radix}
-              and @nt{all_currency_number_aft} are present), or
-              as @nt{floating_$_currency} or @nt{floating_#_currency}
+              the same result as if each @ntf{currency_char} in
+              @ntf{all_currency_number_aft} were '9', interpreting
+              the instance of @ntf{all_currency_number} as
+               @ntf{floating_$_currency} @ntf{number} or
+               @ntf{floating_#_currency} @ntf{number}
+              (if a @ntf{radix}
+              and @ntf{all_currency_number_aft} are present), or
+              as @ntf{floating_$_currency} or @ntf{floating_#_currency}
               otherwise.
 @end{Itemize}
 @end{RunTime}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.51 $ $Date: 2006/02/16 06:49:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.52 $ $Date: 2006/10/14 06:05:20 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2006/02/16 06:49:04 $}
+@Comment{$Date: 2006/10/14 06:05:20 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -2052,7 +2052,7 @@ angle threshold.}
    implementation has to maintain during argument reduction.
 @end{ImplNote}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00434-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 The prescribed results specified in @RefSecNum{Elementary Functions} for certain
 functions at particular parameter values take precedence over the maximum
 relative error bounds; effectively, they narrow to a single value the result
@@ -2084,7 +2084,7 @@ to the principal branch. This rule also takes precedence over the maximum
 relative error bounds, effectively narrowing the result interval allowed by
 them.
 
-@Table[Columns=<5>,Alignment=<AllCenter>,FirstColWidth=[2],
+@Table[Columns=<5>,Alignment=<AllCenter>,FirstColWidth=[2],LastColWidth=[1],
 NoBreak=[T],Border=[T],SmallSize=[F],
 Caption=<@b{@Chg{Version=[2],New=[Table G-1: ],Old=[]}Tightly Approximated Elementary Function Results}>,
 Headers=<@b{Function}@\@b{Value of X}@\@b{Value of Y}@\@b{Exact Result @*when Cycle @*Specified}@\@b{Exact Result @*when Cycle @*Omitted}>,
@@ -2422,7 +2422,7 @@ otherwise,
    False.}
 @end{itemize}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00434-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 The error bounds for particular complex functions are tabulated @Chg{Version=[2],New=[in table G-2],Old=[below]}.
 In the table, the error bound is given as the coefficient of
 @i{CT}.Real'Model_Epsilon.
@@ -2446,7 +2446,7 @@ implementation defined.
 complex elementary functions for parameters (or components thereof) beyond
 the angle threshold.}
 
-@Table[Columns=<4>,Alignment=<AllCenter>,FirstColWidth=[2],
+@Table[Columns=<4>,Alignment=<AllCenter>,FirstColWidth=[2],LastColWidth=[1],
 NoBreak=[T],Border=[T],SmallSize=[F],
 Caption=<@b{@Chg{Version=[2],New=[Table G-2: ],Old=[]}Error Bounds for Particular Complex Functions}>,
 Headers=<@b{Function or Operator}@\@b{Nature of @*Result}@\@b{Nature of @*Bound}@\@b{Error Bound}>,

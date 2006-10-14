@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2006/02/16 06:48:53 $}
+@Comment{$Date: 2006/10/14 06:05:17 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1316,7 +1316,7 @@ denote syntactic categories, for example:
 @leading@keepnext@;Square brackets enclose optional items. Thus the two following
 rules are equivalent.
 @begin(Display)
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}@Chg{Version=[2],New=[@nt<simple_return_statement>],Old=[@nt<return_statement>]} ::= @key(return) [@nt<expression>];
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}@Chg{Version=[2],New=[@nt<simple_return_statement>],Old=[@nt<return_statement>]} ::= @key(return) [@nt<expression>];
 @Chg{Version=[2],New=[@nt<simple_return_statement>],Old=[@nt<return_statement>]} ::= @key(return); | @key(return) @nt<expression>;
 @end(Display)
 
@@ -1417,7 +1417,7 @@ of ISO/IEC 10646:2003.]}
 A @i{syntactic category} is
 a nonterminal in the grammar defined in BNF under @lquotes@;@SyntaxTitle.@rquotes@;
 Names of syntactic categories are set in a different font,
-@nt{like_this}.
+@ntf{like_this}.
 @end{Wide}
 
 @ToGlossaryAlso{Term=<Construct>,
@@ -1522,7 +1522,7 @@ The preferred places for other line breaks are after semicolons.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
   @ChgAdded{Version=[2],Text=[The example for square brackets has been changed
-  as there is no longer a @nt{return_statement} syntax rule.]}
+  as there is no longer a @ntf{return_statement} syntax rule.]}
 @end{DiffWord95}
 
 

@@ -1,16 +1,16 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2005/07/28 04:44:05 $}
+@Comment{$Date: 2006/10/14 06:05:18 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.29 $}
+@Comment{$Revision: 1.30 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
 its execution.]
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @Redundant[This section describes the general rules applicable to all
 @nt{statement}s.
 Some @nt{statement}s are discussed in later sections:
@@ -29,7 +29,7 @@ section.]
 @end{Intro}
 
 @begin{DiffWord83}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 The description of
 @Chg{Version=[2],New=[return statements],Old=[@nt{return_@!statement}s]}
 has been moved to
@@ -53,7 +53,7 @@ no other @nt<statement>. A @nt<compound_statement> can enclose
 @Syn{lhs=<statement>,rhs="
    {@Syn2{label}} @Syn2{simple_statement} | {@Syn2{label}} @Syn2{compound_statement}"}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @Syn{tabs=[P31], lhs=<simple_statement>,rhs="@Syn2{null_statement}
    | @Syn2{assignment_statement}@\| @Syn2{exit_statement}
    | @Syn2{goto_statement}@\| @Syn2{procedure_call_statement}
@@ -62,7 +62,7 @@ no other @nt<statement>. A @nt<compound_statement> can enclose
    | @Syn2{abort_statement}@\| @Syn2{raise_statement}
    | @Syn2{code_statement}"}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @Syn{tabs=[P31], lhs=<compound_statement>,rhs="
      @Syn2{if_statement}@\| @Syn2{case_statement}
    | @Syn2{loop_statement}@\| @Syn2{block_statement}@Chg{Version=[2],New=[
@@ -87,7 +87,7 @@ denote its corresponding implicit declaration (see below).
 @end{Resolution}
 
 @begin{Legality}
-Distinct @nt{identifiers} shall be used for all
+Distinct @nt{identifier}s shall be used for all
 @nt<statement_identifier>s that
 appear in the same body, including
 inner @nt{block_statement}s
@@ -106,7 +106,7 @@ If a usage name denotes such an implicit declaration, the entity it
 denotes is the @nt<label>, @nt<loop_statement>,
 or @nt<block_statement> with the given @nt<statement_identifier>.
 @begin{Reason}
-  We talk in terms of individual @nt<statement_identifiers> here
+  We talk in terms of individual @nt<statement_identifier>s here
   rather than in terms of the corresponding statements, since
   a given @nt{statement} may have multiple @nt<statement_identifier>s.
 
@@ -163,7 +163,7 @@ or @nt<block_statement> with the given @nt<statement_identifier>.
 @PDefn2{Term=[execution], Sec=(null_statement)}
 The execution of a @nt{null_statement} has no effect.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @Defn{transfer of control}
 A @i{transfer of control} is
 the run-time action of an @nt{exit_statement},
@@ -185,7 +185,7 @@ which may trigger finalization.]
 @PDefn2{Term=[execution], Sec=(sequence_of_statements)}
 The execution of a @nt{sequence_of_statements} consists of the execution
 of the individual @nt{statement}s in succession
-until the @nt{sequence_} is completed.
+until the @ntf{sequence_} is completed.
 @begin{Ramification}
 It could be completed by reaching the end of it,
 or by a transfer of control.
@@ -577,7 +577,7 @@ calls.]}
 
 @begin{Intro}
 @Redundant[An @nt{if_statement} selects for execution at most one of
-the enclosed @nt{sequences_of_statements}, depending on the (truth)
+the enclosed @ntf{sequences_of_statements}, depending on the (truth)
 value of one or more corresponding @nt{condition}s.]
 @end{Intro}
 
@@ -646,7 +646,7 @@ them is executed.
 
 @begin{Intro}
 @Redundant[A @nt{case_statement} selects for execution one of a
-number of alternative @nt{sequences_of_statements}; the chosen
+number of alternative @ntf{sequences_of_statements}; the chosen
 alternative is defined by the value of an expression.]
 @end{Intro}
 
@@ -775,7 +775,7 @@ For the execution of a @nt{case_statement} the
 If the value of the @nt{expression} is covered by the
 @nt{discrete_@!choice_@!list} of some
 @nt{case_@!statement_@!alternative}, then the
-@nt{sequence_of_@!statements} of the @nt{_alternative} is
+@nt{sequence_of_@!statements} of the @ntf{_alternative} is
 executed.
 
 @IndexCheck{Overflow_Check}
@@ -1233,7 +1233,7 @@ Furthermore, if a @nt{goto_statement} is enclosed by an
 statement shall not be outside this enclosing construct.
 @begin{Ramification}
 The @nt{goto_statement} can be a @nt{statement} of an inner
-@nt{sequence_}.
+@ntf{sequence_}.
 
 It follows from the second rule that if the target @nt{statement}
 is enclosed by such a construct, then the @nt{goto_statement}

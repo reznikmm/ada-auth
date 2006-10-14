@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/03/21 22:47:15 $}
+@Comment{$Date: 2006/10/14 06:05:17 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -104,7 +104,7 @@ Given that Ada has overloading, determining whether a given
 subprogram overrides another is based both on the names and the type
 profiles of the operations.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00401-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
 When a type extension is declared, if there is any place within its
 immediate scope where a certain subprogram of the parent
 @Chg{Version=[2],New=[or progenitor ],Old=[]}is visible,
@@ -1096,7 +1096,7 @@ generic units obviate the need for extension in the body somewhat.]}
 @end{Reason}
 
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00344]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344]}
 @ChgAdded{Version=[2],Text=[This rule applies to types with ancestors (directly
 or indirectly) of formal interface types
 (see @RefSecNum{Formal Interface Types}), formal tagged private types
@@ -1557,7 +1557,7 @@ type declared in a
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}@ChgNote{Interfaces cause this too}
 A consequence is that for a @Chg{Version=[2],New=[tagged type declaration],
-Old=[@nt{derived_type_declaration}]} in a
+Old=[@ntf{derived_type_declaration}]} in a
 @nt{declarative_part}, only the @Chg{Version=[2],New=[last (overriding)],Old=[first]}
 primitive subprogram can be
 declared by a @nt{subprogram_body}.@Chg{Version=[2],New=[ (Other overridings
@@ -1863,8 +1863,8 @@ The concept of dispatching operations is new.
   wording to reflect that.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00335-01]}
-  @ChgAdded{Version=[2],Text=[An stream attribute of a tagged type is
-  is usually a dispatching operation, even though it is not a primitive
+  @ChgAdded{Version=[2],Text=[A stream attribute of a tagged type is
+  usually a dispatching operation, even though it is not a primitive
   operation. If they weren't dispatching, T'Class'Input and T'Class'Output
   wouldn't work.]}
 @end{Diffword95}
@@ -2106,7 +2106,7 @@ function with a controlling result, then:
     @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00391-01]}
     @ChgAdded{Version=[2],Text=[For a null extension, the result of a function
     with a controlling result is defined in terms of an @nt{extension_aggregate}
-    with a @key{null record} @nt{extension_part}
+    with a @key{null record} extension part
     (see @RefSecNum{Derived Types and Classes}). This means that these
     restrictions on functions with a controlling result do not have to apply to
     null extensions.]}
@@ -3228,7 +3228,7 @@ otherwise it is constrained.
   (see @RefSecNum(Index Constraints and Discrete Ranges)) and
   @nt<discriminant_constraint>s (see @RefSecNum(Discriminant Constraints))
   both permit access-to-composite types in a @nt<subtype_indication>
-  with such @nt<_constraint>s. Note that an access-to-access-to-composite
+  with such _@nt<constraint>s. Note that an access-to-access-to-composite
   is never permitted in a @nt<subtype_indication> with a @nt<constraint>.
 @end(TheProof)
 @begin(Reason)
@@ -4228,7 +4228,7 @@ the associated value (or library level if the value is null);]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[If the value of the access discriminant is
-determined by a @nt{component_association} in an @nt{aggregate}, the
+determined by a @nt{record_component_association} in an @nt{aggregate}, the
 accessibility level of the object or subprogram designated by the associated
 value (or library level if the value is null);]}
 
@@ -4366,7 +4366,7 @@ the accessibility level of the inner master is statically deeper than
 that of the outer master.
 @begin{Honest}
 Strictly speaking, this should talk about the @i{constructs}
-(such as @nt{subprogram_bodi}es)
+(such as @ntf{subprogram_bodies})
 being statically nested within one another;
 the masters are really the @i{executions} of those constructs.
 @end{Honest}
@@ -5363,14 +5363,15 @@ The exception Program_Error is raised if any of these checks fails.
 @end{RunTime}
 
 @begin{Extend83}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 @Defn{extensions to Ada 83}
 The syntax for @nt{declarative_part} is modified to remove the ordering
 restrictions of Ada 83; that is, the distinction between
-@nt{basic_declarative_item}s and @nt{later_declarative_item}s
+@nt{basic_declarative_item}s and @ntf{later_declarative_item}s
 within @nt{declarative_part}s is removed.
 This means that things like @nt{use_clause}s and
-@nt{variable_declaration}s can be freely intermixed with things like
-bodies.
+@Chg{Version=[2],New=[@nt{object_declaration}s],Old=[@ntf{variable_declaration}s]}
+can be freely intermixed with things like bodies.
 
 The syntax rule for @nt{proper_body} now allows a @nt{protected_body},
 and the rules for elaboration checks now cover calls on
@@ -5378,7 +5379,7 @@ protected operations.
 @end{Extend83}
 
 @begin{DiffWord83}
-The syntax rule for @nt{later_declarative_item} is removed;
+The syntax rule for @ntf{later_declarative_item} is removed;
 the syntax rule for @nt{declarative_item} is new.
 
 RM83 defines @lquotes@;elaborated@rquotes@; and @lquotes@;not yet elaborated@rquotes@; for

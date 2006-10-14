@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2006/06/23 04:24:52 $}
+@Comment{$Date: 2006/10/14 06:05:19 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -148,7 +148,7 @@ but protected entries cannot be separately compiled.
 @begin{ImplPerm}
 An implementation may impose implementation-defined restrictions
 on @nt{compilation}s that contain multiple @nt<compilation_unit>s.
-@ImplDef{Any restrictions on @nt<compilations> that contain
+@ImplDef{Any restrictions on @nt<compilation>s that contain
 multiple @nt<compilation_unit>s.}
 @begin{Discussion}
 For example, an implementation might disallow a @nt{compilation} that
@@ -280,7 +280,7 @@ and @lquotes@;item@rquotes@; for declaration or body separately (as in
 The terms @lquotes@;@nt{compilation_unit},@rquotes@; @lquotes@;compilation unit,@rquotes@;
 and @lquotes@;@nt{subunit}@rquotes@; are exceptions to this rule.
 We considered changing @lquotes@;@nt{compilation_unit},@rquotes@; @lquotes@;compilation unit@rquotes@;
-to @lquotes@;@nt{compilation_item},@rquotes@; @lquotes@;compilation item,@rquotes@;
+to @lquotes@;@ntf{compilation_item},@rquotes@; @lquotes@;compilation item,@rquotes@;
 respectively, but we decided not to.
 @end{Discussion}
 
@@ -1080,13 +1080,20 @@ directly visible. Mentioning a non-root library unit
 makes its declaration visible.
 See Section 8 for details.
 
-Note that this rule implies that @lquotes@;@key{with} A.B.C;@rquotes@; is equivalent to
-@lquotes@;@key{with} A, A.B, A.B.C;@rquotes@;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+Note that this rule implies that @lquotes@;@key{with} A.B.C;@rquotes@; is
+@chg{Version=[2],New=[almost ],Old=[]}equivalent to
+@lquotes@;@key{with} A, A.B, A.B.C;@rquotes@;@Chg{Version=[2],New=[.],Old=[]}
 The reason for making a @nt{with_clause} apply to all the ancestor
 units is to avoid @lquotes@;visibility holes@rquotes@; @em situations in which an inner
 program unit is visible while an outer one is not.
 Visibility holes would cause semantic complexity and implementation
-difficulty.
+difficulty.@Chg{Version=[2],New=[ (This
+is not exactly equivalent because the latter @nt{with_clause} names
+A and A.B, while the previous one does not. Whether a unit is
+@ldquote@;named@rdquote does not have any effect on visibility, however,
+so it is equivalent for visibility purposes.))],Old=[]}
+
 @end{Discussion}
 
 @redundant[Outside its own declarative region,
@@ -1396,17 +1403,17 @@ above.
 @begin{Examples}
 
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Text=[@key(package) Office @key(is)
 @key{end} Office;]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Text=[@key(with) Ada.Strings.Unbounded;
 @key(package) Office.Locations @key(is)
    @key(type) Location @key(is new) Ada.Strings.Unbounded.Unbounded_String;
 @key(end) Office.Locations;]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Text=[@key(limited with) Office.Departments;  --@RI[ types are incomplete]
 @key(private with) Office.Locations;    --@RI[ only visible in private part]
 @key(package) Office.Employees @key(is)
@@ -1441,7 +1448,7 @@ above.
 @key(end) Office.Departments;]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Text=[The @nt{limited_with_clause} may be used to support
 mutually dependent abstractions that are split across multiple packages. In
 this case, an employee is assigned to a department, and a department has a
@@ -1575,30 +1582,31 @@ This can't be a @ResolutionName, because a @nt{subunit} is not a
 complete context.
 @end{Discussion}
 
+@ChgRef{Version=[2],Kind=[Revised]}
 A @nt{package_body_stub} shall be the completion of a
 @nt{package_@!declaration} or @nt{generic_@!package_@!declaration};
 a @nt{task_@!body_@!stub} shall be the completion of a
-@nt{task_@!declaration};
+@Chg{Version=[2],New=[task declaration],Old=[@ntf{task_@!declaration}]};
 a @nt{protected_@!body_stub} shall be the completion of a
-@nt{protected_@!declaration}.
+@Chg{Version=[2],New=[protected declaration],Old=[@ntf{protected_@!declaration}]}.
 
 In contrast,
 a @nt{subprogram_body_stub} need not be the completion of a previous
 declaration,
-@Redundant[in which case the @nt{_stub} declares the subprogram].
-If the @nt{_stub} is a completion, it shall be the completion of a
+@Redundant[in which case the @ntf{_stub} declares the subprogram].
+If the @ntf{_stub} is a completion, it shall be the completion of a
 @nt{subprogram_declaration} or @nt{generic_subprogram_declaration}.
 The profile of a @nt{subprogram_body_stub} that completes a declaration
 shall conform fully to that of the declaration.
 @Defn2{Term=[full conformance],Sec=(required)}
 @begin{Discussion}
 The part about @nt{subprogram_body_stub}s echoes the corresponding rule
-for @nt{subprogram_bodies} in @RefSec{Subprogram Bodies}.
+for @ntf{subprogram_bodies} in @RefSec{Subprogram Bodies}.
 @end{Discussion}
 
 A subunit that corresponds to a @nt{body_stub} shall be of
 the same kind
-(@nt{package_}, @nt{subprogram_}, @nt{task_}, or @nt{protected_})
+(@ntf{package_}, @ntf{subprogram_}, @ntf{task_}, or @ntf{protected_})
 as the @nt{body_stub}.
 The profile of a @nt{subprogram_body}
 subunit shall be fully conformant to
@@ -2451,7 +2459,7 @@ then so are any corresponding subunits@Chg{Version=[2],New=[;],Old=[.]}
 
 @begin{Discussion}
 Note that in the environment, the stubs are replaced with the
-corresponding @nt{proper_bodies}.
+corresponding @ntf{proper_bodies}.
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
@@ -2685,7 +2693,7 @@ would violate the @MetaRulesName labeled
 @lquotes@;legality determinable via semantic dependences.@rquotes@;
 @end{Reason}
 
-@leading@;The @nt{sequence_of_statement}s of the environment task (see (2)
+@leading@;The @nt{sequence_of_statements} of the environment task (see (2)
 above) consists of either:
 @begin{Itemize}
   A call to the main subprogram,
@@ -3567,7 +3575,7 @@ Elaboration_Check are those that occur in the library unit itself,
 between the declaration and body of the called subprogram;
 if there are no such calls
 (which can easily be detected at compile time
-if there are no @nt{stub}s),
+if there are no @ntf{stub}s),
 then no Elaboration_Checks are needed for that subprogram.
 The same is true for Elaboration_Checks on task activations and
 instantiations, and for library subprograms and generic units.

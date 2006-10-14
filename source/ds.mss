@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.46 $ $Date: 2006/02/16 06:49:04 $ $Author: Randy $ }
+@comment{ $Revision: 1.47 $ $Date: 2006/10/14 06:05:20 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2006/02/16 06:49:04 $}
+@Comment{$Date: 2006/10/14 06:05:20 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -563,7 +563,7 @@ shall have user-specified Read and Write attributes]}.
   need to be specified for most limited types. It is only necessary to specify
   attributes for nonlimited types that have a part that is of any access type,
   and for extensions of limited types with available stream attributes where
-  the @nt{extension_part} includes a subcomponent of an access type,
+  the @nt{record_extension_part} includes a subcomponent of an access type,
   where the access type does not have specified attributes.]}
 @end{Ramification}
 @end{itemize}

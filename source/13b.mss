@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2006/03/21 22:47:17 $}
+@Comment{$Date: 2006/10/14 06:05:20 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 
 @LabeledClause{The Package System}
 
@@ -640,7 +640,7 @@ An implementation is not required to provide package System.Machine_Code.
 An implementation may provide implementation-defined pragmas
 specifying register conventions and calling conventions.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 Machine code functions are exempt from the rule that a
 @Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]}
 is required. In fact,
@@ -2129,7 +2129,7 @@ or it might deallocate @i{y} and then @i{x}.
 @IndexSee{Term=[freed],See=(nonexistent)}
 @Defn{nonexistent}
 @PDefn2{Term=[exist],Sec=[cease to]}
-@PDefn2{Term=[ceast to exist],Sec=[object]}
+@PDefn2{Term=[cease to exist],Sec=[object]}
 After Free(X), the object designated by X, and any
 subcomponents @Chg{Version=[2],New=[(and coextensions) ],Old=[]}thereof, no
 longer exist; their storage can be reused for other purposes.
@@ -2428,10 +2428,10 @@ and its value shall be nonnegative.
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00394-01]}
-The set of @Chg{Version=[2],New=[restrictions],Old=[@nt{restrictions}]} is
+The set of @Chg{Version=[2],New=[restrictions],Old=[@ntf{restrictions}]} is
 implementation defined.
 @ChgImplDef{Version=[2],Kind=[Revised],Text=[The set of
-@Chg{Version=[2],New=[restrictions],Old=[@nt{restrictions}]}
+@Chg{Version=[2],New=[restrictions],Old=[@ntf{restrictions}]}
 allowed in a @nt{pragma} Restrictions.]}
 @end{StaticSem}
 
@@ -2494,7 +2494,7 @@ provided that every execution of the partition would violate the restriction.]}
 @end{ImplPerm}
 
 @begin{Notes}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00347-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00347-01]}
 Restrictions intended to facilitate the construction of
 efficient tasking run-time systems are defined
 in @RefSecNum{Tasking Restrictions}.
@@ -2920,7 +2920,7 @@ the following attributes are defined.
 @AttributeLeading{Prefix=<S>, AttrName=<Write>,
   Text=<S'Write denotes a procedure with the following specification:
 @begin{DescExample}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00441-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key(procedure) S'Write(
    @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
    @RI{Item} : @key{in} @RI(T))
@@ -2931,7 +2931,7 @@ the following attributes are defined.
 @AttributeLeading{Prefix=<S>, AttrName=<Read>,
   Text=<S'Read denotes a procedure with the following specification:
 @begin{DescExample}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00441-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key(procedure) S'Read(
    @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
    @RI{Item} : @key{out} @RI(T))
@@ -3039,7 +3039,7 @@ Stream_Size bits; otherwise the range is signed.]}
   Text=<S'Class'Write denotes a procedure with the following
 specification:
 @begin{DescExample}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00441-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key(procedure) S'Class'Write(
    @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
    @RI{Item}   : @key{in} @RI(T)'Class)
@@ -3051,7 +3051,7 @@ the specific type identified by the tag of Item.>}
 @AttributeLeading{Prefix=<S'Class>, AttrName=<Read>,
   Text=<S'Class'Read denotes a procedure with the following specification:
 @begin{DescExample}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00441-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key(procedure) S'Class'Read(
    @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
    @RI{Item} : @key{out} @RI(T)'Class)
@@ -3089,7 +3089,7 @@ the following attributes are defined.
 @AttributeLeading{Prefix=<S>, AttrName=<Output>,
   Text=<S'Output denotes a procedure with the following specification:
 @begin{DescExample}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00441-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key(procedure) S'Output(
    @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
    @RI{Item} : @key{in} @RI(T))
@@ -3105,7 +3105,7 @@ first subtype is constrained.
 @AttributeLeading{Prefix=<S>, AttrName=<Input>,
   Text=<S'Input denotes a function with the following specification:
 @begin{DescExample}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00441-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key(function) S'Input(
    @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class)
    @key(return) @RI(T)
@@ -3182,7 +3182,7 @@ an abstract function.]}
   Text=<S'Class'Output denotes a procedure with the following
 specification:
 @begin{DescExample}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00441-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key(procedure) S'Class'Output(
    @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class;
    @RI{Item}   : @key{in} @RI(T)'Class)
@@ -3206,7 +3206,7 @@ level deeper than that of S.],Old=[]}>}@Comment{End of S'Class'Output attribute}
 @AttributeLeading{Prefix=<S'Class>, AttrName=<Input>,
   Text=<S'Class'Input denotes a function with the following specification:
 @begin{DescExample}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00441-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00441-01]}
 @key(function) S'Class'Input(
    @RI{Stream} : @key{@Chg{Version=[2],New=[not null ],Old=[]}access} Ada.Streams.Root_Stream_Type'Class)
    @key{return} @RI(T)'Class
@@ -3939,7 +3939,7 @@ freezing of each entity declared before it within the same
 @end{Ramification}
 @begin{Reason}
   The reason bodies cause freezing is because we want
-  @nt{proper_bodies} and @nt{body_stub}s to be interchangeable @em one
+  @ntf{proper_bodies} and @nt{body_stub}s to be interchangeable @em one
   should be able to move a @nt{proper_body} to a @nt{subunit}, and
   vice-versa, without changing the semantics.
   Clearly, anything that should cause freezing should do so even if
@@ -3948,7 +3948,7 @@ freezing of each entity declared before it within the same
   see that thing that should cause freezing.
   So we make @nt{body_stub}s cause freezing, just in case they
   contain something that should cause freezing.
-  But that means we need to do the same for @nt{proper_bodies}.
+  But that means we need to do the same for @ntf{proper_bodies}.
 
   Another reason for bodies to cause freezing,
   there could be an added implementation burden if an entity
@@ -4106,10 +4106,11 @@ the @nt<name> is a @nt<prefix> of an expanded name;
 at the place where an object @nt{name} causes freezing, the
 nominal subtype associated with the @nt<name> is frozen.
 @begin{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 This only matters in the presence of deferred constants or
 access types; an @nt{object_declaration} other than a
-@nt{deferred_constant_declaration} causes freezing of the nominal
-subtype, plus all component junk.
+@Chg{Version=[2],New=[deferred constant declaration],Old=[@ntf{deferred_constant_declaration}]}
+causes freezing of the nominal subtype, plus all component junk.
 
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0046],ARef=[AI95-00106-01]}
 @ChgDeleted{Version=[1],Text=[@nt{Implicit_dereference}s are covered by
@@ -4297,7 +4298,7 @@ itself, which was not true of the Ada 83 wording.
 The wording of this rule is carefully written to
 work properly for type-related representation items.
 For example, an @nt{enumeration_@!representation_@!clause} is illegal after the
-type is frozen, even though the @nt{_clause} refers to the first subtype.
+type is frozen, even though the @ntf{_clause} refers to the first subtype.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00114-01]}
 @ChgAdded{Version=[2],Text=[The above @LegalityName is stated
@@ -4406,7 +4407,7 @@ RM83 defines a forcing occurrence of a type as follows:
 subtypes of the type, or types or subtypes with subcomponents of the type]
 other than in a type or subtype
 declaration, a subprogram specification, an entry declaration, a deferred
-constant declaration, a @nt{pragma}, or a @nt{representation_clause} for the type
+constant declaration, a @nt{pragma}, or a @ntf{representation_clause} for the type
 itself. In any case, an occurrence within an expression is always forcing.@rquotes@;
 
 @Leading@;It seems like the wording allows things like this:
@@ -4469,7 +4470,7 @@ Instead, we refer to @lquotes@;uses@rquotes@; of an entity,
 which are sometimes implicit.
 
 In Ada 83, forcing occurrences were used only in rules about
-@nt{representation_clause}s.
+@ntf{representation_clause}s.
 We have expanded the concept to cover private types,
 because the rules stated in RM83-7.4.1(4) are almost identical to the
 forcing occurrence rules.
@@ -4499,11 +4500,14 @@ harmless,
 and certain kinds of @nt{generic_declaration}s that are both harmless
 and very useful.
 
-Ada 83 had a case where a @nt{representation_clause} had a strong
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+Ada 83 had a case where a @Chg{Version=[2],New=[@nt{aspect_clause}],
+Old=[@nt{representation_clause}]} had a strong
 effect on the semantics of the program @em 'Small.
 This caused certain semantic anomalies.
 There are more cases in Ada 95,
-because the @nt{attribute_representation_clause} has been generalized.
+because the @Chg{Version=[2],New=[@nt{attribute_definition_clause}],
+Old=[@ntf{attribute_representation_clause}]} has been generalized.
 @end{Itemize}
 @end{DiffWord83}
 

@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2006/01/12 22:17:14 $}
+@Comment{$Date: 2006/10/14 06:05:18 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 
 @begin{Intro}
 
@@ -240,7 +240,7 @@ task declaration.]}
 @end(Honest)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00399-01]}
-@ChgAdded{Version=[2],Text=[@Redundant[Each @nt{interface_subtype_mark} of an
+@ChgAdded{Version=[2],Text=[@Redundant[Each @i{interface_}@nt{subtype_mark} of an
 @nt{interface_list} appearing within a task declaration shall denote
 a limited interface type that is not a protected interface.]]}
 @begin(TheProof)
@@ -482,7 +482,7 @@ They are also modified to allow @nt{entry_declaration}s and
 The syntax rules for tasks have been split up according to task types and
 single tasks.
 In particular:
-The syntax rules for @nt{task_declaration} and @nt{task_specification} are
+The syntax rules for @ntf{task_declaration} and @ntf{task_specification} are
 removed. The syntax rules for
 @nt{task_type_declaration}, @nt{single_task_declaration}, @nt{task_definition}
 and @nt{task_item} are new.
@@ -585,7 +585,7 @@ within the context of the @nt<handled_@!sequence_of_@!statements>
 (and its associated @nt<exception_@!handler>s if any @em
 see @RefSecNum{Exception Handlers}), just prior to executing the
 statements of the @Chg{Version=[2],New=[@nt{handled_sequence_of_statements}],
-Old=[@nt<_sequence>]}.
+Old=[@ntf<_sequence>]}.
 @Redundant[For a package without an explicit body or an explicit
 @nt<handled_@!sequence_of_@!statements>,
 an implicit body or an implicit @nt<null_@!statement> is assumed,
@@ -1039,7 +1039,7 @@ protected declaration.]}
 @end(Honest)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00399-01]}
-@ChgAdded{Version=[2],Text=[@Redundant[Each @nt{interface_subtype_mark} of an
+@ChgAdded{Version=[2],Text=[@Redundant[Each @i{interface_}@nt{subtype_mark} of an
 @nt{interface_list} appearing within a protected declaration shall denote a
 limited interface type that is not a task interface.]]}
 @begin(TheProof)
@@ -1367,7 +1367,7 @@ The declarations in the private part are only
 visible within the private part and the body of the
 protected unit.
 @begin{Reason}
-@nt{Component_declarations} are disallowed in a @nt{protected_body}
+@nt{Component_declaration}s are disallowed in a @nt{protected_body}
 because, for efficiency, we wish to allow the compiler to
 determine the size of protected objects (when not dynamic);
 the compiler cannot necessarily see the body.
@@ -1852,7 +1852,7 @@ Control.Release;
 @LabeledSubClause{Entries and Accept Statements}
 
 @begin{Intro}
-@nt<Entry_declaration>s, with the corresponding @nt<entry_bodies>
+@nt<Entry_declaration>s, with the corresponding @ntf<entry_bodies>
 or @nt<accept_statement>s,
 are used to define potentially queued operations on
 tasks and protected objects.
@@ -1996,7 +1996,7 @@ the designated object is not sufficient to determine whether the
 Accessibility_Check should pass or fail.
 
 Note that such problems do not arise with protected entries, because
-@nt<entry_bodies> are always nested immediately within the
+@ntf<entry_bodies> are always nested immediately within the
 @nt<protected_body>; they cannot be further nested as can
 @nt<accept_statement>s, nor can they be called from within the
 @nt<protected_body> (since no entry calls are permitted inside
@@ -2101,9 +2101,9 @@ cannot be completed with a @nt<renaming_@!declaration>.
 @end(Honest)
 @begin{Discussion}
 The above applies only to protected entries,
-which are the only ones completed with @nt{entry_bodies}.
-Task entries have corresponding @nt{accept_statements}
-instead of having @nt{entry_bodies}, and
+which are the only ones completed with @ntf{entry_bodies}.
+Task entries have corresponding @nt{accept_statement}s
+instead of having @ntf{entry_bodies}, and
 we do not consider an @nt{accept_statement} to be a @lquotes@;completion,@rquotes@;
 because a task @nt{entry_declaration} is allowed to have zero, one, or more
 than one corresponding @nt{accept_statement}s.
@@ -2168,7 +2168,7 @@ is per-object.
 
 @begin{RunTime}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002],ARef=[AI-00171-01]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002],ARef=[AI95-00171-01]}
 @PDefn2{Term=[elaboration], Sec=(entry_declaration)}
 @Chg{New=[The elaboration of an @nt<entry_declaration> for an entry family
 consists of the elaboration of the @nt<discrete_@!subtype_@!definition>, as
@@ -2269,7 +2269,7 @@ A consequence of the rule regarding the allowed placements of
 @nt{accept_statement}s is that a task can execute @nt{accept_statement}s
 only for its own entries.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 A @Chg{Version=[2],New=[return statement],Old=[@nt{return_statement}]}
 (see @RefSecNum(Return Statements))
 or a @nt<requeue_statement> (see @RefSecNum(Requeue Statements))
@@ -3138,7 +3138,7 @@ If an attempt is made to @i(cancel) the @nt<delay_statement>
 @Redundant[(as part of an @nt<asynchronous_@!select> or abort @em
 see @RefSecNum{Asynchronous Transfer of Control} and
 @RefSecNum{Abort of a Task - Abort of a Sequence of Statements})],
-the @nt<_statement> is cancelled if
+the @ntf<_statement> is cancelled if
 the expiration time has not yet passed,
 thereby completing the @nt<delay_statement>.
 @begin(Reason)
@@ -4282,10 +4282,10 @@ to have several open
 @end{Examples}
 
 @begin{DiffWord83}
-The name of @nt{selective_wait} was changed to @nt{selective_accept} to
+The name of @ntf{selective_wait} was changed to @nt{selective_accept} to
 better describe what is being waited for.
 We kept @nt{select_alternative} as is, because
-@nt<selective_accept_alternative> was too easily confused
+@ntf<selective_accept_alternative> was too easily confused
 with @nt<accept_alternative>.
 @end{DiffWord83}
 
@@ -4391,7 +4391,7 @@ executed; if the entry call completes normally, the optional
 @nt<sequence_of_statements> of the @nt<entry_call_alternative> is
 executed.
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI-00345-01]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00345-01]}
 @ChgDeleted{Version=[2],Text=[The fact that the syntax calls for
 an @nt{entry_call_statement} means
 that this fact is used in overload resolution.
@@ -4951,7 +4951,7 @@ family can be either a @nt<direct_name> or an expanded name.
 Within task units, algorithms interrogating the attribute E'Count should
 take precautions to allow for the increase of the value of this attribute
 for incoming entry calls, and its decrease, for example with
-@nt{timed_entry_calls}. Also, a @nt{conditional_entry_call} may briefly
+@nt{timed_entry_call}s. Also, a @nt{conditional_entry_call} may briefly
 increase this value, even if the conditional call is not accepted.
 
 Within protected units, algorithms interrogating the attribute E'Count

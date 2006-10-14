@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2006/02/19 06:45:20 $}
+@Comment{$Date: 2006/10/14 06:05:21 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -175,7 +175,7 @@ attribute.
 @begin(Discussion)
   It might be more direct to make these attributes
   specifiable via an @nt<attribute_definition_clause>, and eliminate the
-  syntax for these @nt<_constraint>s.
+  syntax for these @ntf<_constraint>s.
 @end(Discussion)
 @end{Intro}
 
@@ -203,7 +203,7 @@ or a floating point subtype
 (notwithstanding the rule given in @RefSecNum(Fixed Point Types)
 that only allows a decimal fixed point subtype).
 @begin(Discussion)
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI-00114-01]}
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00114-01]}
   @ChgDeleted{Version=[2],Text=[We may need a better way to deal with
   obsolescent features with rules that contradict those of the non-obsolescent
   parts of the standard.]}
@@ -253,7 +253,7 @@ applies to it. The only effect of a @nt<digits_constraint> or a
 @nt<delta_constraint> without a @nt<range_constraint> is to specify
 the value of the corresponding Digits or Delta attribute in
 the new subtype. The set of values of the subtype is not @lquotes@;constrained@rquotes@;
-in any way by such @nt<_constraint>s.
+in any way by such @ntf<_constraint>s.
 @end{Reason}
 @end{RunTime}
 
@@ -417,7 +417,7 @@ remember: programmers often tend to write @lquotes@;for X'Address use...;@rquote
 @end{Extend83}
 
 @begin{DiffWord83}
-Ada 83's @nt{address_clause} is now called an @nt{at_clause} to avoid
+Ada 83's @ntf{address_clause} is now called an @nt{at_clause} to avoid
 confusion with the new term @lquotes@;Address clause@rquotes@; (that is, an
 @nt{attribute_definition_clause} for the Address attribute).
 @end{DiffWord83}
@@ -616,7 +616,7 @@ for the same type.
 @end{StaticSem}
 
 @begin{DiffWord83}
-Ada 83's @nt{alignment_clause} is now called a @nt{mod_clause} to avoid
+Ada 83's @ntf{alignment_clause} is now called a @nt{mod_clause} to avoid
 confusion with the new term @lquotes@;Alignment clause@rquotes@; (that is, an
 @nt{attribute_definition_clause} for the Alignment attribute).
 @end{DiffWord83}
@@ -821,7 +821,7 @@ on specific language-defined units. The more general restriction No_Dependence
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Type=[Leading],
-Text=[The following @Syni<restriction_>@nt<identifiers> exist:]}
+Text=[The following @Syni<restriction_>@nt<identifier>s exist:]}
 
 @begin{Description}
 
@@ -847,7 +847,7 @@ not allowed.]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
-  @ChgAdded{Version=[2],Text=[This clause is new. These @nt{restrictions}
+  @ChgAdded{Version=[2],Text=[This clause is new. These restrictions
   are replaced by the more general No_Dependence
   (see @RefSecNum{Language-Defined Restrictions}).]}
 @end{DiffWord95}

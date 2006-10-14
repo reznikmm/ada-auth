@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/06/23 04:24:50 $}
+@Comment{$Date: 2006/10/14 06:05:17 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -263,11 +263,13 @@ A construct is @i(executable) if execution is defined for it.
   Don't confuse @lquotes@;elaborable@rquotes@; with @lquotes@;preelaborable@rquotes@; (defined
   in @RefSecNum(Elaboration Control)).
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
   Evaluation of an evaluable construct produces a result that is
   either a value, a denotation, or a range.
   The following are evaluable:
   expression; @nt{name}
-  @nt{prefix}; @nt{range}; @nt{entry_list_iterator};
+  @nt{prefix}; @nt{range};
+  @Chg{Version=[2],New=[@nt{entry_index_specification}],Old=[@ntf{entry_list_iterator}]};
   and possibly @nt{discrete_range}.
   The last one is curious @em RM83 uses the term @lquotes@;evaluation of a
   @nt{discrete_range},@rquotes@; but never defines it.
@@ -294,8 +296,8 @@ At compile time, the declaration of an entity @i(declares) the entity.
 At run time, the elaboration of the declaration @i(creates) the entity.
 @begin{Ramification}
 Syntactic categories for declarations are named either
-@i(entity_)@nt<declaration> (if they include a trailing semicolon)
-or @i(entity_)@nt<specification> (if not).
+@i(entity_)@ntf<declaration> (if they include a trailing semicolon)
+or @i(entity_)@ntf<specification> (if not).
 
 @Defn{entity}
 The various kinds of named entities that can be declared are as
@@ -317,13 +319,13 @@ The syntax rule for @nt{defining_identifier} is new.
 It is used for the defining occurrence of an @nt{identifier}.
 Usage occurrences use the @nt{direct_name} or @nt{selector_name}
 syntactic categories.
-@Leading@;Each occurrence of an @nt{identifier} (or @nt{simple_name}), @nt{character_literal}, or
+@Leading@;Each occurrence of an @nt{identifier} (or @ntf{simple_name}), @nt{character_literal}, or
 @nt{operator_symbol} in the Ada 83 syntax rules is handled as follows in Ada
 95:
 @begin{itemize}
 It becomes a @nt{defining_identifier}, @nt{defining_character_literal}, or
-@nt{defining_operator_symbol} (or some syntactic category composed of these), to
-indicate a defining occurrence;
+@nt{defining_operator_symbol} (or some syntactic category composed of these),
+to indicate a defining occurrence;
 
 It becomes a @nt{direct_name}, in usage occurrences where
 the usage is required (in Section 8) to be directly visible;
@@ -363,7 +365,7 @@ Thus, the places where a declaration is directly visible are a
 subset of the places where it is visible.
 See Section 8 for details.)
 
-We use the term @lquotes@;declaration@rquotes@; to cover @nt<_specification>s that declare
+We use the term @lquotes@;declaration@rquotes@; to cover @ntf<_specification>s that declare
 (views of) objects, such as @nt<parameter_specification>s. In Ada 83,
 these are referred to as a @lquotes@;form of declaration,@rquotes@; but it is not
 entirely clear that they are considered simply @lquotes@;declarations.@rquotes@;
@@ -1179,7 +1181,7 @@ Note that @nt{name} includes @nt{attribute_reference};
 thus, S'Base can be used as a @nt{subtype_mark}.
 @end{Ramification}
 @begin{Reason}
-We considered changing @nt{subtype_mark} to @nt{subtype_name}.
+We considered changing @nt{subtype_mark} to @ntf{subtype_name}.
 However, existing users are used to the word "mark,"
 so we're keeping it.
 @end{Reason}
@@ -1267,7 +1269,7 @@ only if the composite subtype is unconstrained
 @begin{Examples}
 @Leading@keepnext@i(Examples of subtype declarations:)
 @begin(Example)
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(subtype) Rainbow   @key(is) Color @key(range) Red .. Blue;        --@RI[  see @RefSecNum(Type Declarations)]
 @key(subtype) Red_Blue  @key(is) Rainbow;
 @key(subtype) Int       @key(is) Integer;
@@ -1295,7 +1297,7 @@ There is no need for RM83-3.3.2(3), which says a
 in Ada 95, you denote an unconstrained (base) subtype if you want,
 but never the type.
 
-The syntactic category @nt{type_mark} is now called @nt{subtype_mark},
+The syntactic category @ntf{type_mark} is now called @nt{subtype_mark},
 since it always denotes a subtype.
 @end{DiffWord83}
 
@@ -2093,12 +2095,12 @@ be abstract (see @RefSecNum{Abstract Types and Subprograms}).
 @begin(Example)
 --@RI[  the multiple object declaration ]
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 John, Paul : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M);  --@RI[  see @RefSecNum(Incomplete Type Declarations)]
 
 --@RI[  is equivalent to the two single object declarations in the order given]
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 John : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M);
 Paul : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M);
 @end(Example)
@@ -2107,7 +2109,7 @@ Paul : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Pe
 @leading@keepnext@i(Examples of variable declarations:)
 @end{Wide}
 @begin(Example)
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 Count, Sum  : Integer;
 Size        : Integer @key(range) 0 .. 10_000 := 0;
 Sorted      : Boolean := False;
@@ -2121,7 +2123,7 @@ Hello       : @Chg{Version=[2],New=[@key(aliased)],Old=[@key(constant)]} String 
 @leading@keepnext@i(Examples of constant declarations:)
 @end{Wide}
 @begin(Example)
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 Limit     : @key(constant) Integer := 10_000;
 Low_Limit : @key(constant) Integer := Limit/10;
 Tolerance : @key(constant) Real := Dispersion(1.15);@Chg{Version=[2],New=[
@@ -2269,7 +2271,7 @@ The elaboration of a @nt<number_declaration> has no effect.
 @begin(Example)
 Two_Pi        : @key(constant) := 2.0*Ada.Numerics.Pi;   --@RI[ a real number (see @RefSecNum{The Numerics Packages})]
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 Max           : @key(constant) := 500;                   --@RI[ an integer number]
 Max_Line_Size : @key(constant) := Max/6@Chg{Version=[2],New=[;],Old=[ ]}                 --@RI[ the integer 83]
 Power_16      : @key(constant) := 2**16;                 --@RI[ the integer 65_536]
@@ -2520,7 +2522,7 @@ For a scalar type, the base range of the derived type is the same
 as that of the parent type.
 @begin{Discussion}
   The base range of a type defined by an @nt<integer_type_definition>
-  or a @nt<real_type_definition> is determined by the @nt<_definition>,
+  or a @nt<real_type_definition> is determined by the @ntf<_definition>,
   and is not necessarily the same as that of the corresponding
   root numeric type from which the newly defined type is implicitly
   derived. Treating numerics types as implicitly derived from one of
@@ -2680,7 +2682,7 @@ the implementation of the predefined equality operator of the record extension
   equality operator to take its place.
 @end{Reason}
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00114-01]}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
   Because user-defined equality operators are not inherited
   by @Chg{Version=[2],New=[nonlimited ],Old=[]}record extensions, the
   formal parameter names of = and /=
@@ -2688,7 +2690,7 @@ the implementation of the predefined equality operator of the record extension
   were used in the user-defined equality operators of the parent type.
 @end{Ramification}
 @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00401-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00401-01]}
   @ChgAdded{Version=[2],Text=[This rule only describes what operations
   are inherited; the rules that describe what happens when there are
   conflicting inherited subprograms are found in @RefSecNum{Visibility}.]}
@@ -2897,7 +2899,7 @@ A @nt{derived_type_definition}, however, never defines an interface type.]}
   extensions whose parent type is a synchronized tagged type, and this clause
   requires tagged types to have a record extension. Thus there are no legal
   derivations. Note that a synchronized interface can be used as a progenitor
-  in an @nt{interface_definition} as well as in task and protected types,
+  in an @nt{interface_type_definition} as well as in task and protected types,
   but we do not allow concrete extensions of any synchronized tagged type.]}
 @end{TheProof}
 
@@ -3357,7 +3359,7 @@ are expected to be of the type of the @nt<range>.
   In Ada 95, @nt<constraint>s
   only appear within @nt<subtype_indication>s; things that look
   like constraints that appear in type declarations are called
-  something else like @nt<range_specification>s.
+  something else like @nt<real_range_specification>s.
 
   We say "the expected type is ..." or "the type is expected to be ..."
   depending on which reads better. They are fundamentally equivalent,
@@ -3440,7 +3442,7 @@ its range is compatible with the subtype.
 @begin(Ramification)
   Only @nt<range_constraint>s (explicit or implicit) impose conditions
   on the values of a scalar subtype. The other @nt<scalar_constraint>s,
-  @nt<digit_constraint>s and @nt<delta_constraint>s impose conditions
+  @nt<digits_constraint>s and @nt<delta_constraint>s impose conditions
   on the subtype denoted by the @nt<subtype_mark> in a @nt<subtype_indication>,
   but don't impose a condition on the values of the subtype being
   defined. Therefore, a scalar subtype is not called @i(constrained)
@@ -4481,7 +4483,7 @@ a corresponding @nt<character_literal> in Wide_Character.
 The first 256 values of Wide_Character
 have the same @nt<character_literal> or language-defined
 name as defined for Character. @Chg{Version=[2],New=[Each of the
-@nt{graphic_character}s has],Old=[The last 2 values
+@ntf{graphic_character}s has],Old=[The last 2 values
 of Wide_Character correspond to the nongraphic
 positions FFFE and FFFF of the BMP,
 and are assigned
@@ -4499,7 +4501,7 @@ and have]} a corresponding @nt<character_literal>.
 @Chg{Version=[2],New=[@Defn{ISO/IEC 10646:2003}],Old=[@Defn{ISO 10646}]}
 The predefined type Wide_Wide_Character is a character type whose values
 correspond to the 2147483648 code positions of the ISO/IEC 10646:2003 character
-set. Each of the @nt{graphic_character}s has a corresponding
+set. Each of the @ntf{graphic_character}s has a corresponding
 @nt{character_literal} in
 Wide_Wide_Character. The first 65536 values of Wide_Wide_Character have the
 same @nt{character_literal} or language-defined name as defined for
@@ -4507,7 +4509,7 @@ Wide_Character.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Text=[The characters whose code position is larger
-than 16#FF# and which are not @nt{graphic_character}s have language-defined
+than 16#FF# and which are not @ntf{graphic_character}s have language-defined
 names which are formed by appending to the string "Hex_" the
 representation of their code position in hexadecimal as eight extended digits.
 As with other language-defined names, these names are usable only with the
@@ -4554,7 +4556,7 @@ the subprograms defined in the language-defined package Characters.Handling
 (see @RefSecNum{Character Handling}) available in such a mode.
 In a mode with an alternative interpretation of Character, the
 implementation should also support a corresponding change in what is
-a legal @nt<identifier_letter>.]}
+a legal @ntf<identifier_letter>.]}
 @ChgNote{We won't add an ChgImplAdvice here, because we would need to add
 and remove it in the same command.}
 @end{ImplAdvice}
@@ -4738,11 +4740,11 @@ rhs="@key(range) @SynI{static_}@Syn2{simple_expression} .. @SynI{static_}@Syn2{s
   it required to be static, but the associated overload resolution rules are
   different than for normal range constraints. A similar comment applies to
   @nt{real_range_specification}.
-  This used to be @nt<integer_range_specification> but when we
+  This used to be @ntf<integer_range_specification> but when we
   added support for modular types, it seemed overkill to have three levels
   of syntax rules, and just calling these
-  @nt<signed_integer_range_specification>
-  and @nt<modular_range_specification> loses the fact that they
+  @ntf<signed_integer_range_specification>
+  and @ntf<modular_range_specification> loses the fact that they
   are defining different classes of types, which is important for
   the generic type matching rules.
 @end{Discussion}
@@ -5453,8 +5455,8 @@ whenever a real type is expected.
 The syntax rule for @nt{real_type_definition} is modified to use
 the new syntactic categories
 @nt{floating_point_definition} and @nt{fixed_point_definition},
-instead of @nt{floating_point_constraint} and
-@nt{fixed_point_constraint}, because the semantics of a type
+instead of @ntf{floating_point_constraint} and
+@ntf{fixed_point_constraint}, because the semantics of a type
 definition are significantly different than the semantics of a
 constraint.
 
@@ -5518,7 +5520,7 @@ the requested decimal precision shall be no greater than System.Max_Digits.
   @i(root_real). System.Max_Digits
   corresponds to the maximum value for Digits that may be specified
   in the absence of a @nt<real_range_specification>, for upward
-  compatibility. These might not be the same if @nt<root_real>
+  compatibility. These might not be the same if @i<root_real>
   has a base range that does not include @PorM 10.0**(4*Max_Base_Digits).
 @end(Reason)
 
@@ -5716,8 +5718,8 @@ the value of the variable (or parameter).
 @end{Inconsistent83}
 
 @begin{DiffWord83}
-The syntax rules for @nt{floating_point_constraint} and
-@nt{floating_accuracy_definition} are removed. The syntax rules for
+The syntax rules for @ntf{floating_point_constraint} and
+@ntf{floating_accuracy_definition} are removed. The syntax rules for
 @nt{floating_point_definition} and
 @nt{real_range_specification} are new.
 
@@ -5725,7 +5727,7 @@ A syntax rule for @nt<digits_constraint> is given in
 @RefSec{Fixed Point Types}. In @RefSecNum{Reduced Accuracy Subtypes}
 we indicate that a @nt<digits_constraint>
 may be applied to a floating point @nt<subtype_mark> as well
-(to be compatible with Ada 83's @nt<floating_point_constraint>).
+(to be compatible with Ada 83's @ntf<floating_point_constraint>).
 
 Discussion of model numbers is postponed to
 @RefSecNum{Operations of Floating Point Types} and
@@ -5748,7 +5750,7 @@ the definition of Succ and Pred for floating point numbers.
 
 @begin(description)
 @ChgAttribute{Version=[1], Kind=[Revised], ChginAnnex=[F], Leading=[F],
-  Prefix=<S>, AttrName=<Digits>, Ref=[8652/0004], ARef=[AI-00203-01],
+  Prefix=<S>, AttrName=<Digits>, Ref=[8652/0004], ARef=[AI95-00203-01],
   Text=[S'Digits denotes the requested decimal precision
   for the subtype S. The value of this attribute
   is of the type @i(universal_integer).]}
@@ -6091,12 +6093,12 @@ requirements are placed on the support of decimal fixed point types
 @end{Extend83}
 
 @begin{DiffWord83}
-The syntax rules for @nt{fixed_point_constraint} and
-@nt{fixed_accuracy_definition} are removed. The syntax rule for
+The syntax rules for @ntf{fixed_point_constraint} and
+@ntf{fixed_accuracy_definition} are removed. The syntax rule for
 @nt{fixed_point_definition} is new.
 A syntax rule for @nt<delta_constraint> is included in the
 Obsolescent features (to be compatible with Ada 83's
-@nt<fixed_point_constraint>).
+@ntf<fixed_point_constraint>).
 @end{DiffWord83}
 
 @begin{DiffWord95}
@@ -6114,7 +6116,7 @@ evaluation rules.]}
 @PrefixType{every fixed point subtype S}:
 @begin(description)
 @ChgAttribute{Version=[1], Kind=[Revised], ChginAnnex=[F], Leading=[F],
-  Prefix=<S>, AttrName=<Small>, Ref=[8652/0005], ARef=[AI-00054-01],
+  Prefix=<S>, AttrName=<Small>, Ref=[8652/0005], ARef=[AI95-00054-01],
   Text=[S'Small
      denotes the @i(small) of the type of S.
      The value of this attribute is of the type @i(universal_real).]}

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.45 $ $Date: 2006/02/16 06:49:08 $ $Author: Randy $ }
+@comment{ $Revision: 1.46 $ $Date: 2006/10/14 06:05:21 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2006/02/16 06:49:08 $}
+@Comment{$Date: 2006/10/14 06:05:21 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -874,7 +874,7 @@ requirements for the Preelaborate pragma (see @RefSecNum{Elaboration Control}).]
 @begin{ImplReq}
 
 The implementation shall not incur any run-time overhead for the elaboration
-checks of subprograms and @nt{protected_bodies} declared in preelaborated
+checks of subprograms and @ntf{protected_bodies} declared in preelaborated
 library units.
 
 The implementation shall not execute any memory write operations after
@@ -920,7 +920,7 @@ any @nt<allocator> is for an access-to-constant type;
 
 any uses of predefined operators appear only within static expressions;
 
-any @nt<primari>es that are @nt<name>s, other than @nt<attribute_reference>s
+any @ntf<primaries> that are @nt<name>s, other than @nt<attribute_reference>s
 for the Access or Address attributes, appear only within static expressions;
 @begin{ramification}
 This cuts out @nt<attribute_reference>s that are not static, except for
@@ -1033,7 +1033,7 @@ If a @nt{local_name} is given, then
 a @nt{pragma} Discard_Names is a representation pragma.
 
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI-00400-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00400-01]}
 If the pragma applies to an enumeration type,
 then the semantics of the @Chg{Version=[2],New=[Wide_Wide_Image],Old=[Wide_Image]}
 and @Chg{Version=[2],New=[Wide_Wide_Value],Old=[Wide_Value]} attributes
@@ -1510,6 +1510,12 @@ New=[, or finalization of a task attribute],Old=[]}.]}
 This value could be Null_Task_Id, or the ID of some user task, or that of
 an internal task created by the implementation.
 @end{ImplNote}
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00237-01]}@Comment{This really should reference AI05-0004, but we don't have that yet. And that hasn't been approved, either}
+@ChgAdded{Version=[2],Text=[An entry barrier is syntactically part of an
+@nt{entry_body}, so a call to Current_Task from an entry barrier is also
+covered by this rule.]}
+@end{Ramification}
 
 @end{Bounded}
 

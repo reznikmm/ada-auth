@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.54 $ $Date: 2006/06/23 04:24:54 $}
+@comment{$Revision: 1.55 $ $Date: 2006/10/14 06:05:21 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -27,8 +27,9 @@ Corrigendum 1 was published in June 2001.]}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[In October 2002, WG 9 approved a schedule and
 guidelines for the preparation of an Amendment to the International Standard.
-WG 9 approved the scope of this Amendment in June 2004, with the completion
-of the Amendment expected in March 2006 and final approval in early 2007.]}
+WG 9 approved the scope of the Amendment in June 2004. In April 2006, WG 9
+approved and forwarded the Amendment to SC 22 for approval, which was granted
+in August 2006. Final ISO/IEC approval is expected by early 2007.]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgAdded{Version=[1],Text=[The Technical Corrigendum lists the individual
@@ -130,7 +131,7 @@ section also would be replaced by the current ISO boilerplate.]}
 @end{Discussion}
 
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00440-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00440-01]}
 Annexes A to J form an integral part of this
 International Standard.
 Annexes K to @Chg{Version=[2],New=[Q],Old=[P]} are for information only.
@@ -373,7 +374,7 @@ execution on a single processor. A task unit may define
 either a single executing task or a task type permitting the
 creation of any number of similar tasks.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00114-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 A protected unit is the basic unit for defining protected
 operations for the coordinated use of data shared between
 tasks. Simple mutual exclusion is provided automatically,

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2006/02/19 06:45:20 $}
+@Comment{$Date: 2006/10/14 06:05:19 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -110,13 +110,13 @@ if the @nt<local_name> is a @nt<direct_name>, then it shall
 resolve to denote a declaration
 (or, in the case of a @nt{pragma}, one or more declarations)
 that occurs immediately within the same
-@nt{declarative_region} as the @Chg{New=[],Old=[representation ]}item.
+declarative region as the @Chg{New=[],Old=[representation ]}item.
 If the @nt<local_name> has an @nt<attribute_designator>, then it shall
 resolve to denote an implementation-defined
 component (see @RefSecNum{Record Representation Clauses})
 or a class-wide
 type implicitly declared immediately within the same
-@nt<declarative_region> as the @Chg{New=[],Old=[representation ]}item.
+declarative region as the @Chg{New=[],Old=[representation ]}item.
 A @nt<local_name> that is a @i{library_unit_}@nt<name> (only
 permitted in a representation pragma) shall resolve
 to denote the @nt<library_item> that immediately precedes
@@ -144,8 +144,8 @@ applied only to stand-alone objects.
 
 @begin{Legality}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
-The @nt{local_name} of @Chg{New=[@nt<an aspect_clause>],
-Old=[@nt<a representation_clause>]} or representation pragma shall
+The @nt{local_name} of @Chg{New=[an @nt<aspect_clause>],
+Old=[a @nt<representation_clause>]} or representation pragma shall
 statically denote an entity (or, in the case of a @nt{pragma},
 one or more entities) declared immediately preceding it in a @nt<compilation>,
 or within the same @nt{declarative_@!part}, @nt{package_@!specification},
@@ -714,7 +714,7 @@ it is inherited by the record extension.
 @end{Honest}
 @begin{Ramification}
 If a representation item for the parent appears after the
-@nt{derived_@!type_@!declaration},
+@nt{derived_@!type_@!definition},
 then inheritance does not happen for that representation item.
 @end{Ramification}
 
@@ -736,7 +736,7 @@ that specifies the same aspect of the type.]}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgAdded{Version=[1],Text=[As with representation items, if an operational
-item for the parent appears after the @nt{derived_@!type_@!declaration}, then
+item for the parent appears after the @nt{derived_@!type_@!definition}, then
 inheritance does not happen for that operational item.]}
 @end{Ramification}
 @begin{Discussion}
@@ -1036,17 +1036,17 @@ Old=[@nt{representation_clause}s]} for objects.
 
 @begin{DiffWord83}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
-The syntax rule for @nt{type_representation_clause} is removed;
+The syntax rule for @ntf{type_representation_clause} is removed;
 the right-hand side of that rule is moved up to where it was used,
 in @Chg{New=[@nt{aspect_clause}],Old=[@nt{representation_clause}]}.
 There are two references to @lquotes@;type representation clause@rquotes@; in RM83,
 both in Section 13; these have been reworded.
-@Chg{New=[Also, the @nt{representation_clause} has been renamed the
+@Chg{New=[Also, the @ntf{representation_clause} has been renamed the
 @nt{aspect_clause} to reflect that it can be used to control more than just
 representation aspects.],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00114-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 We have defined a new term @lquotes@;representation item,@rquotes@;
 which includes @Chg{New=[all representation clauses],
 Old=[@nt{representation_clause}s]} and representation pragmas, as well as
@@ -1070,7 +1070,7 @@ clearly going to be a run-time error.
 It seems silly to call that @lquotes@;semantics@rquotes@; rather than
 @lquotes@;a restriction.@rquotes@;
 
-RM83-13.1(10) tries to pretend that @nt{representation_clause}s don't affect
+RM83-13.1(10) tries to pretend that @ntf{representation_clause}s don't affect
 the semantics of the program.
 One counter-example is the Small clause.
 Ada 95 has more counter-examples.
@@ -1092,7 +1092,7 @@ Some of the more stringent requirements are moved to
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added operational items
   in order to eliminate unnecessary restrictions and permissions on
-  stream attributes. As part of this, @nt{representation_clause} was
+  stream attributes. As part of this, @ntf{representation_clause} was
   renamed to @nt{aspect_clause}.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01],ARef=[AI95-00326-01]}
@@ -1596,7 +1596,7 @@ The intended meaning of the various attributes,
 and their @nt{attribute_definition_clause}s,
 is more explicit.
 
-The @nt{address_clause} has been renamed to @nt{at_clause} and moved
+The @ntf{address_clause} has been renamed to @nt{at_clause} and moved
 to @RefSec{Obsolescent Features}.
 One can use an Address clause
 (@lquotes@;for T'Address @key[use] ...;@rquotes@;)
@@ -1933,7 +1933,7 @@ we would expect an Alignment of 1 to be supported for any Size.
 
 @begin{DiffWord83}
 The nonnegative part is missing from RM83
-(for @nt{mod_clause}s, nee @nt{alignment_clause}s,
+(for @nt{mod_clause}s, nee @ntf{alignment_clause}s,
 which are an obsolete version of Alignment clauses).
 @end{DiffWord83}
 
@@ -1964,13 +1964,13 @@ the expression of such a clause shall be static and its value nonnegative.
 
 @begin{ImplAdvice}
 @ChgNote{Moved from 13.9}
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI-00051-02]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00051-02]}
 @ChgAdded{Version=[2],Text=[The size of an array object should not include
 its bounds.]}
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[The Size of an array object should not include its bounds.]}]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00051-02],ARef=[AI-00291-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00051-02],ARef=[AI95-00291-02]}
 @ChgDeleted{Version=[2],Type=[Leading],Text=[]}@Comment{A fake to get a conditional Leading}
 @PDefn2{Term=[recommended level of support], Sec=(Size attribute)}
 The recommended level of support for the Size attribute
@@ -1978,7 +1978,7 @@ of objects is@Chg{Version=[2],New=[ the same as for subtypes (see below),
 except that only a confirming Size clause need be supported for an aliased
 elementary object.],Old=[:]}
 @begin{Itemize}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI-00051-02]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00051-02]}
 @ChgDeleted{Version=[2],Text=[A Size clause should be supported for an object
 if the specified Size is at least as large as its subtype's Size, and
 corresponds to a size in storage elements that is a multiple of the object's
@@ -2085,7 +2085,7 @@ In an implementation, Boolean'Size shall be 1.
 @end{ImplReq}
 
 @begin{ImplAdvice}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00051-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00051-02]}
 @Leading@;If the Size of a subtype @Chg{Version=[2],New=[],Old=[is specified,
 and ]}allows for efficient independent addressability
 (see @RefSecNum{Shared Variables}) on the target architecture,
@@ -2332,13 +2332,13 @@ The Storage_Size, on the other hand,
 should include the size of the stack.
 @end{Ramification}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI-00051-02]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00051-02]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[An implementation should support a
 Size clause for a discrete type, fixed point type, record type, or array type,
 subject to the following:]}
 @begin{InnerItemize}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI-00051-02]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00051-02]}
 @ChgAdded{Version=[2],Text=[An implementation need not support a Size clause
 for a signed integer type specifying a Size greater than that of the largest
 signed integer type supported by the implementation in the absence of a size
@@ -2347,7 +2347,7 @@ limitation may be imposed for modular integer types, fixed point types,
 enumeration types, record types, and array types.]}
 
 @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00051-02]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00051-02]}
   @ChgAdded{Version=[2],Text=[Note that the @lquotes@;corresponding
   limitation@rquotes for a record or array type implies that an implementation
   may impose some reasonable maximum size for records and arrays (e.g. 2**32
@@ -2357,7 +2357,7 @@ enumeration types, record types, and array types.]}
   size supported for arrays.]}
 @end{Discussion}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI-00291-02]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
 @ChgAdded{Version=[2],Text=[A nonconfirming size clause for the first subtype
 of a derived untagged by-reference type need not be supported.]}
 @end{InnerItemize}
@@ -2692,17 +2692,18 @@ since the type definition requires Short'Small <= 2**(@en@;7).
 
 @begin{Extend83}
 @Defn{extensions to Ada 83}
-The syntax rule for @nt{length_clause} is replaced with the new syntax rule
+The syntax rule for @ntf{length_clause} is replaced with the new syntax rule
 for @nt{attribute_definition_clause}, and it is modified to allow a
 @nt{name} (as well as an expression).
 @end{Extend83}
 
 @begin{DiffWord83}
 The syntax rule for @nt{attribute_definition_clause} now requires that the
-prefix of the @nt{attribute} be a @nt{local_name};
+prefix of the attribute be a @nt{local_name};
 in Ada 83 this rule was stated in the text.
 
-In Ada 83, the relationship between a @nt{representation_clause}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+In Ada 83, the relationship between a @Chg{Version=[2],New=[@nt{aspect_clause}],Old=[@nt{representation_clause}]}
 specifying a certain aspect and an attribute that queried that
 aspect was unclear.
 In Ada 95, they are the same,
@@ -2874,11 +2875,11 @@ Text=[The recommended level of support for
 Unchecked_Conversion may be used to query the internal codes used
 for an enumeration type.
 The attributes of the type, such as Succ, Pred, and Pos,
-are unaffected by the @nt{@Chg{New=[enumeration_representation_clause],Old=[representation_clause]}}.
+are unaffected by the @Chg{New=[@nt{enumeration_representation_clause}],Old=[@nt{representation_clause}]}.
 For example, Pos always returns the position number, @i{not} the
 internal integer code that might have been specified in
-@nt{@Chg{New=[an enumeration_representation_clause],
-Old=[a representation_clause]}}.
+@Chg{New=[an @nt{enumeration_representation_clause}],
+Old=[a @nt{representation_clause}]}}.
 @begin{Discussion}
 @Leading@;Suppose the enumeration type in question is derived:
 @begin{Example}
@@ -2889,7 +2890,7 @@ Old=[a representation_clause]}}.
 @end{Example}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
-@Leading@;The @nt{@Chg{New=[enumeration_representation_clause],Old=[representation_clause]}}
+@Leading@;The @Chg{New=[@nt{enumeration_representation_clause}],Old=[@nt{representation_clause}]}
 has to specify values for all enumerals, even ones that are not in S2 (such as
 Blue). The Base attribute can be used to get at these values.
 For example:
@@ -2931,7 +2932,7 @@ This is satisfied by all known implementations.
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Updated to reflect that we
-  no longer have something called @nt{representation_clause}.]}
+  no longer have something called @ntf{representation_clause}.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
   @ChgAdded{Version=[2],Text=[Added wording to prevent the use of <> in a
@@ -3061,7 +3062,7 @@ nondefault bit ordering applies to the type, then either:]}
 
 At most one @nt{component_clause} is allowed for each component of
 the type, including for each discriminant
-(@nt{component_clauses} may be given for some, all, or none of the
+(@nt{component_clause}s may be given for some, all, or none of the
 components).
 Storage places within a @nt{component_list} shall not overlap,
 unless they are for components in distinct @nt{variant}s of the same
@@ -3166,7 +3167,7 @@ An implementation may generate names that denote
 such implementation-defined components;
 such names shall be implementation-defined @nt{attribute_reference}s.
 An implemen@!tation may allow such implementation-defined names to be
-used in @nt{record_@!representation_@!clauses}.
+used in @nt{record_@!representation_@!clause}s.
 An implementation can restrict such @nt{component_@!clause}s in any
 manner it sees fit.
 @ImplDef{Implementation-defined components.}
@@ -3290,7 +3291,7 @@ much dope in a protected type @em entry queues,
 bit maps for barrier values, etc.
 In order to control the representation of the user-defined components, simply
 declare a record type, give it a
-@nt{@Chg{New=[record_@!representation_@!clause],Old=[representation_clause]}},
+@Chg{New=[@nt{record_@!representation_@!clause}],Old=[@nt{representation_clause}]},
 and give the protected type one component whose type is the record type.
 Alternatively, if the protected object is protecting something like a
 device register, it makes more sense to keep the thing being
@@ -3352,7 +3353,7 @@ addresses divisible by eight.
 
 
 @begin{DiffWord83}
-The @nt{alignment_clause} has been renamed to @nt{mod_clause} and moved
+The @ntf{alignment_clause} has been renamed to @nt{mod_clause} and moved
 to @RefSec{Obsolescent Features}.
 
 We have clarified that implementation-defined component names have to be

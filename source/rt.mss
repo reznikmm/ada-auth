@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.72 $ $Date: 2006/02/19 06:45:20 $ $Author: Randy $ }
+@comment{ $Revision: 1.73 $ $Date: 2006/10/14 06:05:21 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2006/02/19 06:45:20 $}
+@Comment{$Date: 2006/10/14 06:05:21 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -3442,10 +3442,12 @@ expiration time does not cause the calling task to be blocked; it is
 nevertheless a potentially blocking operation
 (see @RefSecNum{Protected Subprograms and Protected Actions}).
 
+@ChgRef{Version=[2],Kind=[Revised]}
 When a @nt{delay_statement} appears in a @nt{delay_alternative} of a
 @nt{timed_entry_call} the selection of the entry call is attempted,
 regardless of the specified expiration time.
-When a @nt{delay_statement} appears in a @nt{selective_accept_alternative},
+When a @nt{delay_statement} appears in a
+@Chg{Version=[2],New=[@nt{select_alternative}],Old=[@ntf{selective_accept_alternative}]},
 and a call is queued on one of the open entries, the selection of that
 entry call proceeds, regardless of the value of the delay expression.
 @begin{Ramification}

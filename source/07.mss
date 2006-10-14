@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2006/02/16 06:48:58 $}
+@Comment{$Date: 2006/10/14 06:05:18 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -50,7 +50,7 @@ then this sequence of lexical elements shall repeat the
 @end{Syntax}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00434-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 @PDefn2{Term=[requires a completion], Sec=(@nt{package_declaration})}
 @PDefn2{Term=[requires a completion], Sec=(@nt{generic_package_declaration})}
 A @nt{package_declaration} or @nt{generic_package_declaration}
@@ -65,7 +65,7 @@ but whose completion is not in its @nt{package_specification}.
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00420-01],ARef=[AI-00434-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00420-01],ARef=[AI95-00434-01]}
 @PDefn2{Term=[visible part], Sec=<of a package
 (other than a generic formal package)>}
 The first list of @Chg{Version=[2],New=[@nt{basic_declarative_item}s],
@@ -127,7 +127,7 @@ the package.
 This follows from the fact that the declaration and completion are
 required to occur
 immediately within the same declarative region,
-and the fact that @nt{bodies} are disallowed (by the @SyntaxName@;s)
+and the fact that @ntf{bodies} are disallowed (by the @SyntaxName@;s)
 in @nt{package_specification}s.
 This does not apply to instances of generic units,
 whose bodies can occur in @nt{package_specification}s.
@@ -259,7 +259,7 @@ this body occurs at the end of the
 @nt{declarative_@!part} of the innermost enclosing program unit or
 @nt{block_@!statement};
 if there are several such packages,
-the order of the implicit @nt{package_@!bodies} is unspecified.
+the order of the implicit @ntf{package_@!bodies} is unspecified.
 @PDefn{unspecified}
 @Redundant[(For an instance, the implicit @nt{package_@!body}
 occurs at the place of the instantiation
@@ -358,7 +358,7 @@ stand alone, without a previous declaration.
 We state that rule here.
 
 RM83 forgot to restrict the definition of elaboration of
-@nt{package_bodies} to nongeneric ones.
+@ntf{package_bodies} to nongeneric ones.
 We have corrected that omission.
 
 The rule about implicit bodies (from RM83-9.3(5))
@@ -432,7 +432,7 @@ generic formal private extension is also a partial view.
   full view.
 @end{Reason}
 @begin{TheProof}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00326-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
   @ChgAdded{Version=[2],Text=[Full view is now defined in
   @RefSec{Type Declarations}, as all types now have them.]}
 @end{TheProof}
@@ -610,7 +610,7 @@ can get one's hands on it via a @nt{type_conversion}.
 
 @end{Ramification}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI-00396-01]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00396-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[If a full type has a partial view
 that is tagged, then:]}
 @begin{Itemize}
@@ -815,7 +815,7 @@ if and only if the ancestor subtype is constrained.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
 @ChgAdded{Version=[2],Text=[If the @nt{full_type_declaration} for a private
-extension is a @nt{derived_type_declaration}, then the reserved word
+extension is defined by a @nt{derived_type_definition}, then the reserved word
 @key{limited} shall appear in the @nt{full_type_declaration} if and only if it
 also appears in the @nt{private_extension_declaration}.]}
 @begin{Reason}
@@ -823,8 +823,8 @@ also appears in the @nt{private_extension_declaration}.]}
   @ChgAdded{Version=[2],Text=[The word @key{limited} is optional (unless the
   ancestor is an interface), but it should be used consistently. Otherwise
   things would be too confusing for the reader. Of course, we only require
-  that if the full type is a @nt{derived_type_declaration}, as we want to
-  allow task and protected types to complete extensions of synchronized
+  that if the full type is defined by a @nt{derived_type_definition}, as we
+  want to allow task and protected types to complete extensions of synchronized
   interfaces.]}
 @end{Reason}
 
@@ -2053,7 +2053,7 @@ structure of the type. They also implement the notion of an
 encapsulated data type where the only operations on the type are
 those given in the package specification.
 
-@NoPrefix@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+@NoPrefix@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 The fact that the full view of File_Name is explicitly declared
 @key[limited] means that parameter passing @Chg{Version=[2],New=[],
 Old=[and function return ]}will always be by reference@Chg{Version=[2],New=[
@@ -2716,7 +2716,7 @@ Other constructs and entities are left immediately upon completion.
 @end{Intro}
 
 @begin{RunTime}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @Defn{completion and leaving (completed and left)}
 @Defn2{Term=[completion], Sec=(run-time concept)}
 The execution of a construct or entity
@@ -2731,7 +2731,7 @@ causes it to be abandoned.
 Completion due to reaching the end of execution,
 or due to the transfer of control of an @Chg{Version=[2],
 New=[@nt{exit_statement}, return statement, @nt{goto_statement}],
-Old=[@nt{exit_}, @nt{return_}, @nt{goto_}]},
+Old=[@ntf{exit_}, @ntf{return_}, @ntf{goto_}]},
 or @nt{requeue_statement} or of the
 selection of a @nt{terminate_alternative}
 is @i{normal completion}.
@@ -2850,9 +2850,9 @@ entities.
 However, the standard sometimes (informally) refers
 to the constructs or entities whose executions are being completed.
 Thus, for example,
-@lquotes@;the @nt{subprogram_call} or task is complete@rquotes@;
+@lquotes@;the subprogram call or task is complete@rquotes@;
 really means
-@lquotes@;@i{the execution of} the @nt{subprogram_call} or task is complete.@rquotes@;
+@lquotes@;@i{the execution of} the subprogram call or task is complete.@rquotes@;
 @end{Honest}
 
 @leading@keepnext@RootDefn2{Term=[finalization], Sec=(of an object)}
@@ -2984,7 +2984,7 @@ in @RefSecNum{User-Defined Assignment and Finalization}.
 @Chg{Version=[2],New=[The master of an object is the master enclosing its
 creation whose accessibility level (see @RefSecNum{Operations of Access Types})
 is equal to that of the object.],
-Old=[@Chg{New=[If the @nt{object_name} in an @nt{object_renaming_declaration}, or
+Old=[@Chg{New=[If the @i{object_}@nt{name} in an @nt{object_renaming_declaration}, or
 the actual parameter for a generic formal @key[in out] parameter in a
 @nt{generic_instantiation}, denotes any part of an anonymous object created by
 a function call, the anonymous object is not finalized until after it is no
@@ -3142,7 +3142,7 @@ Program_Error is raised immediately after leaving the master.],Old=[]}
 For a Finalize invoked by the transfer of control of
 an @Chg{Version=[2],
 New=[@nt{exit_statement}, return statement, @nt{goto_statement}],
-Old=[@nt{exit_}, @nt{return_}, @nt{goto_}]},
+Old=[@ntf{exit_}, @ntf{return_}, @ntf{goto_}]},
 or @nt{requeue_@!statement},
 Program_Error is raised no earlier than after the finalization of the
 master being finalized when the exception occurred,
@@ -3338,7 +3338,7 @@ concatenation; see @RefSecNum{Binary Adding Operators});
 
 generic formal objects of mode @key{in}
 (see @RefSecNum{Formal Objects});
-these are defined in terms of @nt{constant_declaration}s; and
+these are defined in terms of constant declarations; and
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 @nt{aggregate}s (see @RefSecNum{Aggregates})@Chg{Version=[2],New=[, when
@@ -3372,7 +3372,7 @@ nothing interesting happens there, either.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[2],Text=[Objects initialized by function results and
-@nt{aggregates} that are built-in-place. In this case, the assignment
+@nt{aggregate}s that are built-in-place. In this case, the assignment
 operation is never executed, and no adjustment takes place. While
 built-in-place
 is always allowed, it is required for some types @em see

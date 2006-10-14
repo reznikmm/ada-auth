@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2006/06/23 04:24:53 $}
+@Comment{$Date: 2006/10/14 06:05:19 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -215,7 +215,7 @@ The syntax for @nt{generic_formal_parameter_declaration} and
 The rules for these categories are moved to the appropriate clauses and
 subclauses.
 The names of the categories are changed to be more intuitive and uniform.
-For example, we changed @nt{generic_parameter_declaration} to
+For example, we changed @ntf{generic_parameter_declaration} to
 @nt{generic_formal_parameter_declaration}, because the thing it declares
 is a generic formal, not a generic.
 In the others, we abbreviate @lquotes@;generic_formal@rquotes@; to just @lquotes@;formal@rquotes@;.
@@ -376,14 +376,17 @@ named associations.
 @end{Syntax}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised]}
 @Defn{generic actual parameter}
 @Defn{generic actual}
 @Defn{actual}
 The @i{generic actual parameter} is either the
 @nt{explicit_generic_actual_parameter} given in a
-@nt{generic_@!parameter_@!association} for each formal,
-or the corresponding @nt{default_@!expression} or @nt{default_@!name} if
-no @nt{generic_@!parameter_@!association} is given for the formal.
+@Chg{Version=[2],New=[@nt{generic_@!association}],Old=[@ntf{generic_@!parameter_@!association}]}
+for each formal,
+or the corresponding @nt{default_@!expression} or @nt{default_@!name} if no
+@Chg{Version=[2],New=[@nt{generic_@!association}],Old=[@ntf{generic_@!parameter_@!association}]}
+is given for the formal.
 When the meaning is clear from context,
 the term @lquotes@;generic actual,@rquotes@; or simply @lquotes@;actual,@rquotes@; is used as a synonym for
 @lquotes@;generic actual parameter@rquotes@;
@@ -424,12 +427,14 @@ are not enforced;
 this rule does not apply when a given rule
 explicitly specifies otherwise.
 @begin{Reason}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 Since rules are checked using the properties of the formals,
 and since these properties do not always carry over to the actuals,
 we need to check the rules again in the visible part of the instance.
 For example, only if a tagged type is limited may
 an extension of it have limited components in
-the @nt<extension_part>. A formal tagged limited type
+the @Chg{Version=[2],New=[@nt{record_extension_part}],Old=[@ntf<extension_part>]}.
+A formal tagged limited type
 is limited, but the actual might be nonlimited. Hence
 any rule that requires a tagged type to be limited
 runs into this problem.
@@ -762,9 +767,9 @@ rule in @RefSec{The Context of Overload Resolution}.
 Note that that rule doesn't cover the @nt{generic_formal_part}.
 
 Although the overloading rules are not observed in the instance,
-they are, of course, observed in the @nt{_instantiation} in order to
+they are, of course, observed in the @ntf{_instantiation} in order to
 determine the interpretation of the constituents of the
-@nt{_instantiation}.
+@ntf{_instantiation}.
 
 Since children are considered to occur within their parent's
 declarative region, the above rule applies to a name that denotes a
@@ -809,10 +814,11 @@ declaration of the actual.
   For example, one could pass an object declared in the instance
   specification to one of the additional operations of the deeper type.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
   A @nt{formal_type_declaration} can contain
   @nt{discriminant_specification}s,
   a @nt{formal_subprogram_declaration} can contain
-  @nt{formal_parameter_specification}s, and
+  @Chg{Version=[2],New=[@nt{parameter_specification}s],Old=[@ntf{formal_parameter_specification}s]}, and
   a @nt{formal_package_declaration} can contain many kinds of
   declarations.
   These are all inside the generic unit, and have corresponding
@@ -966,7 +972,7 @@ the type descriptor.
 @end{Ramification}
 @begin{Reason}
 The reason for this rule is so a programmer writing an
-@nt{_instantiation} need not look at the private part of the generic in
+@ntf{_instantiation} need not look at the private part of the generic in
 order to determine which subprograms will be overridden.
 @end{Reason}
 @end{StaticSem}
@@ -1176,9 +1182,11 @@ subprograms with the same defining name is moved to AARM-only material,
 because it is a ramification of other rules, and because it is not of
 interest to the average user.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 The rule that
 @lquotes@;An explicit @nt{explicit_generic_actual_parameter} shall not be supplied more
-than once for a given @nt{generic_formal_parameter}@rquotes@;
+than once for a given @Chg{Version=[2],New=[generic formal parameter],
+Old=[@ntf{generic_formal_parameter}]}@rquotes@;
 seems to be missing from RM83, although it was clearly the intent.
 
 In the explanation that the instance is a copy of the template,
@@ -1531,9 +1539,9 @@ a subtype whose type is in a certain @Chg{Version=[2],New=[category],
 Old=[class]} of types.]
 @begin{Reason}
 We considered having intermediate syntactic categories
-@nt{formal_integer_type_definition},
-@nt{formal_real_type_definition}, and
-@nt{formal_fixed_point_definition},
+@ntf{formal_integer_type_definition},
+@ntf{formal_real_type_definition}, and
+@ntf{formal_fixed_point_definition},
 to be more uniform with the syntax rules for non-generic-formal
 types.
 However, that would make the rules for formal types slightly more
@@ -1614,7 +1622,7 @@ and so on.
 @begin{Reason}
 This rule is clearer with the flat syntax rule for
 @nt{formal_type_definition} given above.
-Adding @nt{formal_integer_type_definition} and others would make this
+Adding @ntf{formal_integer_type_definition} and others would make this
 rule harder to state clearly.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
@@ -1658,7 +1666,7 @@ We don't want this rule to apply to @i{those}
 but @lquotes@;nonlimited@rquotes@; is;
 it is legal to pass a nonlimited type to a limited formal type,
 but not the other way around.
-The reserved word @nt{limited} really represents a
+The reserved word @Chg{Version=[2],New=[@key[limited]],Old=[@ntf{limited}]} really represents a
 @Chg{Version=[2],New=[category],Old=[class]} containing
 both limited and nonlimited types.
 @lquotes@;Private@rquotes@; is not a @Chg{Version=[2],New=[category for this purpose],
@@ -1998,9 +2006,9 @@ discriminant of the formal type.
 @PDefn2{Term=[statically matching],Sec=(required)}
 @begin{Reason}
 We considered defining the first and third rule to be called
-@lquotes@;subtype conformance@rquotes@; for @nt{discriminant_parts}.
+@lquotes@;subtype conformance@rquotes@; for @nt{discriminant_part}s.
 We rejected that idea, because it would require implicit (inherited)
-@nt{discriminant_parts}, which seemed like too much mechanism.
+@nt{discriminant_part}s, which seemed like too much mechanism.
 @end{Reason}
 @end{Itemize}
 
@@ -2480,7 +2488,7 @@ formal, then the actual shall be a general access-to-variable type
 (see @RefSecNum{Access Types}).@Chg{Version=[2],New=[ If and only
 if the formal subtype excludes null, the actual subtype shall exclude null.],Old=[]}
 @begin{Ramification}
-If no @nt{_modifier} applies to the formal, then
+If no @ntf{_modifier} applies to the formal, then
 the actual type may be either a pool-specific or a general
 access-to-variable type.
 @end{Ramification}
@@ -2958,7 +2966,7 @@ correspond.
 The constraints that apply to a parameter of a formal subprogram are
 those of the corresponding formal parameter of the matching actual
 subprogram (not those implied by the corresponding @nt{subtype_mark} in
-the @nt{_specification} of the formal subprogram). A similar remark
+the @ntf{_specification} of the formal subprogram). A similar remark
 applies to the result of a function. Therefore, to avoid confusion, it
 is recommended that the @nt{name} of a first subtype
 be used in any declaration of a formal subprogram.
@@ -2976,7 +2984,7 @@ A @nt{default_name} denotes an entity that is visible or directly
 visible at the place of the @nt{generic_declaration};
 a box used as a default is equivalent to a name that denotes an
 entity that is directly visible at the place of the
-@nt{_instantiation}.
+@ntf{_instantiation}.
 @begin{TheProof}
 Visibility and name resolution are applied to the equivalent explicit
 actual parameter.

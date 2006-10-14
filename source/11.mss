@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2006/02/25 04:46:49 $}
+@Comment{$Date: 2006/10/14 06:05:19 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -222,7 +222,7 @@ Two choices in different @nt<exception_handler>s of the same
 @nt{handled_@!sequence_of_@!statements} shall not cover the same
 exception.
 @begin{Ramification}
-  Two @nt<choice>s of the same @nt<exception_handler> may cover
+  Two @nt<exception_choice>s of the same @nt<exception_handler> may cover
   the same exception. For example, given two renaming declarations in
   separate packages for the same exception, one may nevertheless
   write, for example,
@@ -263,7 +263,7 @@ represents the exception occurrence that is being handled.
 The execution of a @nt<handled_sequence_of_statements> consists
 of the execution of the @nt<sequence_of_@!statements>.
 @Redundant[The optional handlers are used to handle any exceptions
-that are propagated by the @nt{sequence_of_@!statement}s.]
+that are propagated by the @nt{sequence_of_@!statements}.]
 @end{RunTime}
 
 @begin{Examples}
@@ -285,7 +285,9 @@ that are propagated by the @nt{sequence_of_@!statement}s.]
 The syntax rule for @nt{exception_handler} is modified to
 allow a @nt{choice_parameter_specification}.
 
-Different @nt<choice>s of the same @nt<exception_handler> may
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+Different @Chg{Version=[2],New=[@nt{exception_choice}s],Old=[@ntf<choice>s]}
+of the same @nt<exception_handler> may
 cover the same exception. This allows for
 @lquotes@;when Numeric_Error | Constraint_Error =>@rquotes@; even though
 Numeric_Error is a rename of Constraint_Error.
@@ -454,7 +456,7 @@ dynamically encloses the evaluation of the @nt{condition} after the
 (Recall that @lquotes@;execution@rquotes@; includes both @lquotes@;elaboration@rquotes@; and
 @lquotes@;evaluation@rquotes@;, as well as other executions.)
 The evaluation of a function call dynamically encloses the execution
-of the @nt{sequence_of_statement}s of the @nt{function_body}
+of the @nt{sequence_of_statements} of the function @nt{body}
 (during that execution). Note that, due to recursion, several
 simultaneous executions of the same construct can be occurring at once
 during the execution of a particular task.
@@ -464,7 +466,7 @@ a task's execution does not include the execution of any other tasks.
 
 Dynamically enclosing is only defined for executions that are occurring
 at a given moment in time; if an @nt{if_statement} is currently
-executing the @nt{sequence_of_statement}s after @key{then}, then
+executing the @nt{sequence_of_statements} after @key{then}, then
 the evaluation of the @nt{condition} is no longer dynamically
 enclosed by the execution of the @nt{if_statement} (or anything else).
 @end{Ramification}
@@ -526,7 +528,7 @@ handler is executed;
 this execution replaces the abandoned portion of the execution of
 the @nt{sequence_of_statements}.
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
   This @lquotes@;replacement@rquotes@; semantics implies that the handler can
   do pretty much anything the abandoned sequence could do; for example, in a
   function, the handler can execute a @Chg{Version=[2],New=[return statement],
@@ -1801,7 +1803,7 @@ and removing it would have a serious impact on optimizers.
 Under Access_Check,
 dereferences cover the cases of
 @nt{selected_component}, @nt{indexed_component}, @nt{slice},
-and @nt{attribute} that are listed in RM83,
+and attribute that are listed in RM83,
 as well as the new @nt{explicit_dereference},
 which was included in @nt{selected_component} in RM83.
 @end{DiffWord83}

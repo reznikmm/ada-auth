@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/01/17 07:20:58 $}
+@Comment{$Date: 2006/10/14 06:05:17 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 
 @LabeledClause{Array Types}
 
@@ -73,7 +73,7 @@ a definite subtype.
   This applies to all uses of @nt<component_definition>,
   including in @nt<record_type_definition>s and @nt<protected_definition>s.@end{ramification}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI-00363-01]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00363-01]}
 @ChgDeleted{Version=[2],Text=[Within the definition of a
 nonlimited composite type
 (or a limited composite type that later in its immediate
@@ -248,7 +248,7 @@ If the reserved word @key(aliased) appears in the @nt{component_definition},
 then each component of the array is aliased
 (see @RefSecNum{Access Types}).
 @begin(Ramification)
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI-00363-01]}
+  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00363-01]}
   @ChgDeleted{Version=[2],Text=[In this case, the nominal subtype cannot be an
   unconstrained discriminated subtype. See @RefSecNum{Record Types}.]}
 @end(Ramification)
@@ -262,8 +262,8 @@ creates the array type and its first subtype,
 and consists of the elaboration of any @nt{discrete_@!subtype_@!definition}s
 and the @nt{component_@!definition}.
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002],ARef=[AI-00171-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00230-01]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0002],ARef=[AI95-00171-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
 @PDefn2{Term=[elaboration], Sec=(discrete_subtype_definition)}
 The elaboration of a @nt{discrete_subtype_definition}
 @Chg{New=[that does not contain any per-object expressions],Old=[]}
@@ -314,7 +314,7 @@ is of its own unique type.
 @leading@keepnext@i(Examples of object declarations with array type definitions: )
 @end{Wide}
 @begin(Example)
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 Grid @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(1 .. 80, 1 .. 100) @key(of) Boolean;
 Mix  @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(Color @key(range) Red .. Green) @key(of) Boolean;@Chg{Version=[2],New=[
 Msg_Table : @key(constant array)(Error_Code) @key(of access constant) String :=
@@ -360,7 +360,7 @@ have been moved to their own subclause, since they are no
 longer used here.
 
 The syntax rule for @nt{component_definition} (formerly
-@nt<component_subtype_definition>) is moved here from
+@ntf<component_subtype_definition>) is moved here from
 RM83-3.7.
 @end{DiffWord83}
 
@@ -1412,7 +1412,7 @@ used only for discriminants defined by an @nt<access_definition>.
       Right : Square(Number);
    @key(end) @key(record);
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @Chg{Version=[2],New=[@key(task type) Worker(Prio : System.Priority; Buf : @key(access) Buffer) @key(is)
    --@RI[ discriminants used to parameterize the task type (see @RefSecNum{Task Units and Task Objects})]
    @key(pragma) Priority(Prio);  --@RI[ see @RefSecNum{Task Priorities}]
@@ -1945,7 +1945,7 @@ and the @nt{attribute_reference} shall appear alone.
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[2],Text=[@Defn{explicitly limited record}
 @Defn2{Term=[record],Sec=(explicitly limited)}
-If a @nt{record_type_declaration} includes the
+If a @nt{record_type_definition} includes the
 reserved word @key{limited}, the type is called an
 @i<explicitly limited record> type.]}
 
@@ -2123,9 +2123,9 @@ A, B, C : Complex;
 @Defn{extensions to Ada 83}
 The syntax rule for @nt<component_declaration> is modified
 to use @nt<component_definition> (instead of
-@nt<component_subtype_definition>). The effect of this change
+@ntf<component_subtype_definition>). The effect of this change
 is to allow the reserved word @key(aliased) before the
-@nt<component_subtype_definition>.
+@ntf<component_subtype_definition>.
 
 A short-hand is provided for defining a null record type
 (and a null record extension), as these will be more common
@@ -2389,7 +2389,7 @@ is required in this case.
 @end{Extend83}
 
 @begin{DiffWord83}
-The syntactic category @nt{choice} is removed.
+The syntactic category @ntf{choice} is removed.
 The syntax rules for @nt{variant}, @nt{array_aggregate}, and
 @nt{case_statement} now use @nt{discrete_choice_list}
 or @nt{discrete_choice} instead.

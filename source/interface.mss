@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.46 $ $Date: 2006/02/16 06:49:08 $ $Author: Randy $ }
+@comment{ $Revision: 1.47 $ $Date: 2006/10/14 06:05:21 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2006/02/16 06:49:08 $}
+@Comment{$Date: 2006/10/14 06:05:21 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -105,7 +105,8 @@ A @nt[pragma] Linker_Options is allowed only at the place of a
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0058],ARef=[AI95-00036-01]}
 @ChgAdded{Version=[1],Text=[For @nt{pragma}s Import and Export, the argument
-for Link_Name shall not be given without the @nt{pragma_@!argument_@!identifier}
+for Link_Name shall not be given without the
+@i{pragma_@!argument_}@!@nt{identifier}
 unless the argument for External_Name is given.]}
 @end{SyntaxText}
 @end{Syntax}

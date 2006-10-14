@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.37 $ $Date: 2005/12/10 07:15:24 $ $Author: Randy $ }
+@Comment{ $Revision: 1.38 $ $Date: 2006/10/14 06:05:21 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2005/12/10 07:15:24 $}
+@Comment{$Date: 2006/10/14 06:05:21 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -696,12 +696,15 @@ The following @Chg{Version=[2],New=[@SynI{restriction_}@nt{identifier}s are
 language defined:],Old=[additional restrictions apply in this Annex.]}
 
 @leading@keepnext@b{Tasking-related restriction:}
+
 @begin{Description}
 @Trailing@;@Defn2{Term=[Restrictions],Sec=(No_Protected_Types)}No_Protected_Types @\There
 are no declarations of protected types or protected objects.
+@end{Description}
 
 @leading@keepnext@b{Memory-management related restrictions:}
 
+@begin{Description}
 @Defn2{Term=[Restrictions],Sec=(No_Allocators)}No_Allocators @\There are no
 occurrences of an @nt{allocator}.
 
@@ -749,9 +752,11 @@ Immediate reclamation would apply to storage created by the compiler, such
 as for a return value from a function whose size is not known at the
 call site.
 @end{Discussion}
+@end{Description}
 
 @leading@keepnext@b{Exception-related restriction:}
 
+@begin{Description}
 @Trailing@Defn2{Term=[Restrictions],Sec=(No_Exceptions)}No_Exceptions @\@nt{Raise_statement}s
 and @nt{exception_handler}s are not allowed.
 No language-defined run-time checks are generated;
@@ -769,9 +774,11 @@ There are obvious dangers in this approach, but it is similar to
 programming at the assembler level.
 
 @end{Discussion}
+@end{Description}
 
 @leading@keepnext@b{Other restrictions:}
 
+@begin{Description}
 @Defn2{Term=[Restrictions],Sec=(No_Floating_Point)}No_Floating_Point @\Uses of predefined floating point types and
 operations, and declarations of new floating point types, are
 not allowed.

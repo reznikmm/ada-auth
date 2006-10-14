@@ -8,6 +8,10 @@
 @Title{Version=[0],Text=[Ada Reference Manual]}@Comment{Same title for all versions}
 @FilePrefix{8652}
 @ExampleFont{Fixed}
+@BodyFont{Roman}
+@NoteFormat{Ada95}
+@ContentsFormat{Ada95}
+@ListFormat{Ada95}
 
 @Comment{RTF properties}
 @SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}
@@ -27,6 +31,7 @@
 @HTMLHeader{<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="8652-TTL.html"><B>Legal Information</B></A></DIV>}
 @HTMLFooter{<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
 <SPAN Style="vertical-align: middle">Sponsored by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>}
+@HTMLColor{Text=[#000000],Background=[#FFFFF0],Link=[#000080],VLink=[#330033],ALink=[#0000FF]}
 
 @Comment{Source files and related items, in collating order}
 @Source{Name=<Title.MSS>,SectionName=<Ttl>,SectionNumber=[0],NewSection=[T]}

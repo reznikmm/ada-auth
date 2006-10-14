@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2006/06/23 04:24:52 $}
+@Comment{$Date: 2006/10/14 06:05:18 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -254,7 +254,7 @@ The semantics of such cases was unclear in RM83.
   within themselves.
 @end{Honest}
 
-Note that we can't generalize this to @nt{entry_bodies},
+Note that we can't generalize this to @ntf{entry_bodies},
 or other bodies, because the @nt{declarative_part} of a
 body is not supposed to contain (explicit) homographs of
 things in the declaration.
@@ -304,7 +304,7 @@ The immediate scope starts at the beginning of the declaration,
 except in the case of an overloadable declaration,
 in which case the immediate scope starts just after the place
 where the profile of the callable entity is determined
-(which is at the end of the @nt<_specification> for the callable entity,
+(which is at the end of the @ntf<_specification> for the callable entity,
 or at the end of the @nt<generic_instantiation> if an instance).
 The immediate scope extends to the end of the declarative region,
 with the following exceptions:
@@ -314,7 +314,7 @@ special is to simplify compilation:
 until the compiler has determined the profile,
 it doesn't know which other declarations are homographs of this one,
 so it doesn't know which ones this one should hide.
-Without this rule, two passes over the @nt<_specification> or
+Without this rule, two passes over the @ntf<_specification> or
 @nt<generic_instantiation> would be required to
 resolve names that denote things with the same name as this one.
 @end{Reason}
@@ -378,7 +378,7 @@ For a public child subprogram,
 this means that the parent's private part is not visible in the
 @Chg{Version=[2],New=[profile],Old=[@nt{formal_part}s]} of the declaration
 and of the body.
-This is true even for @nt{subprogram_bodies} that are not
+This is true even for @ntf{subprogram_bodies} that are not
 completions.
 For a public child generic unit,
 it means that the parent's private part is not visible in the
@@ -762,8 +762,10 @@ However, this seemed like too much mechanism.
 Therefore, a type can have a predefined "+" as well as an inherited "+".
 The above rule says the inherited one wins.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 The @lquotes@;regardless of which declaration occurs first@rquotes@; applies here
-as well, in the case where @nt{derived_type_declaration} in the visible
+as well, in the case where @Chg{Version=[2],New=[@nt{derived_type_definition}],
+Old=[@ntf{derived_type_declaration}]} in the visible
 part of a public library unit derives from a private type declared in
 the parent unit, and the full view of the parent type has additional
 predefined operators, as explained in @RefSec{Private Operations}.
@@ -906,7 +908,7 @@ declaration, except:
   the declaration is hidden from all visibility only
   until the reserved word @b(record);
 
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00345-01]}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
   For a @nt{package_declaration}, @Chg{Version=[2],New=[],Old=[task declaration,
   protected declaration, ]}@nt{generic_@!package_@!declaration},
   or @nt{subprogram_@!body}, the declaration is
@@ -918,7 +920,7 @@ declaration, except:
     @nt{generic_formal_part}.
   @end{Ramification}
 
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI-00345-01]}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
   @ChgAdded{Version=[2],Text=[For a task declaration or protected declaration,
   the declaration is hidden from all visibility only
   until the reserved word @key(with) of the declaration if there is one, or the
@@ -970,7 +972,7 @@ The declaration of a library unit
 is hidden from all visibility @Chg{Version=[2],New=[],Old=[except ]}at
 places @Chg{Version=[2],New=[outside],Old=[that are within]} its declarative
 region @Chg{Version=[2],New=[that are not],Old=[or]} within the scope
-of a @nt{@Chg{Version=[2],New=[nonlimited_],Old=[]}with_clause} that
+of a @Chg{Version=[2],New=[@nt{nonlimited_with_clause}],Old=[@nt{with_clause}]} that
 mentions it.@Chg{Version=[2],New=[ The limited view of a library package
 is hidden from all visibility at places that are not within the scope
 of a @nt{limited_with_clause} that mentions it; in addition, the limited view
@@ -1141,7 +1143,7 @@ homographs, which is something compilers have never before been
 required to do.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0026],Ref=[8652/0102],ARef=[AI95-00150-01],ARef=[AI95-00157-01]}
-@ChgAdded{Version=[1],Type=[Leading],Text=[If a @nt{type_extension} contains a
+@ChgAdded{Version=[1],Type=[Leading],Text=[If a type extension contains a
 component with
 the same name as a component in an ancestor type, there must be no place
 where both components are visible. For instance:]}
@@ -1319,9 +1321,9 @@ it is possible for a usage name to denote a @nt{subprogram_body}, either
 within that body, or (for a non-library unit) after it
 (since the body hides the corresponding declaration, if any).
 Other bodies do not work that way.
-Completions of @nt{type_} and @nt{deferred_constant_declaration}s do
-work that way.
-@nt{Accept_statements} are never denoted, although the
+Completions of @nt{type_declaration}s and
+deferred constant declarations do work that way.
+@nt{Accept_statement}s are never denoted, although the
 @nt{parameter_specification}s in their profiles can be.
 
 @leading@;The scope of a subprogram does not start until after its profile.
@@ -2561,7 +2563,7 @@ of T, whereas a call on User_Defined_Equal will execute the body of the
 overriding declaration in the private part of P.
 
 Thus a renaming allows one to squirrel away a copy of an inherited or
-predefined subprogram before later overriding it.
+predefined subprogram before later overriding it.@Defn{squirrel away}
 @end{Discussion}
 @end{RunTime}
 
@@ -2606,7 +2608,7 @@ cannot be written; the same holds for certain attributes, such as Pos.
 Calls with the new @nt{name} of a renamed entry are
 @nt{procedure_call_statement}s and are not allowed at places
 where the syntax requires an @nt{entry_call_statement} in
-@nt{conditional_} and @nt{timed_entry_call}s,
+@ntf{conditional_} and @nt{timed_entry_call}s,
 nor in an @nt{asynchronous_select}; similarly, the Count
 attribute is not available for the new @nt{name}.
 
@@ -2619,10 +2621,10 @@ the subprogram name has to denote a primitive subprogram,
 not a non-primitive renaming of a primitive subprogram.
 @begin{Reason}
 A @nt{subprogram_renaming_declaration} could more properly be called
-@nt{renaming_@!as_@!subprogram_@!declaration}, since you're renaming something
+@ntf{renaming_@!as_@!subprogram_@!declaration}, since you're renaming something
 as a subprogram, but you're not necessarily renaming a subprogram.
 But that's too much of a mouthful. Or, alternatively, we could call it a
-@nt{callable_@!entity_@!renaming_@!declaration}, but that's even worse.
+@ntf{callable_@!entity_@!renaming_@!declaration}, but that's even worse.
 Not only is it a mouthful, it emphasizes the entity being renamed,
 rather than the new view, which we think is a bad idea.
 We'll live with the oddity.
@@ -3298,7 +3300,7 @@ This clause attempts to clarify what is meant by @lquotes@;interpretation.@rquot
 
 @NoPrefix@;For example,
 RM83 does not make it clear that overload resolution is required in
-order to match @nt{subprogram_bodies} with their corresponding
+order to match @ntf{subprogram_bodies} with their corresponding
 declarations (and even to tell whether a given @nt{subprogram_body}
 is the completion of a previous declaration).
 Clearly, the information needed to do this is part of the
@@ -3360,10 +3362,12 @@ It should also eliminate interpretation shifts due to the
 addition or removal of a @nt{use_clause}
 (the so called @i{Beaujolais} effect).
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 RM83-8.7 seems to be missing some complete contexts,
 such as @nt{pragma_argument_association}s,
 @nt{declarative_item}s that are not
-declarations or @nt{representation_clause}s,
+declarations or @Chg{Version=[2],New=[@nt{aspect_clause}s],
+Old=[@nt{representation_clause}s]},
 and @nt{context_item}s.
 We have added these, and also replaced the @lquotes@;must be determinable@rquotes@;
 wording of RM83-5.4(3) with the notion that the expression of a

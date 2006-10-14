@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2006/06/23 04:24:51 $}
+@Comment{$Date: 2006/10/14 06:05:18 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -122,7 +122,7 @@ is not significant)]}.
   lexical elements are @lquotes@;formed@rquotes from a sequence of characters.
   Spaces are not allowed, and upper and lower case is not significant. See
   @RefSecNum{Lexical Elements, Separators, and Delimiters} and
-  @RefSecNum{Reserved Words} for rules related to the use of @nt{other_format}
+  @RefSecNum{Reserved Words} for rules related to the use of @ntf{other_format}
   characters in delimiters and reserved words.]}
 @end{Reason}
 
@@ -428,7 +428,7 @@ The syntax rules for @nt{defining_designator} and
   subprograms similar.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
-  @ChgAdded{Version=[2],Text=[Revised to allow @nt{other_format} characters
+  @ChgAdded{Version=[2],Text=[Revised to allow @ntf{other_format} characters
   in @nt{operator_symbol}s in the same way as the underlying constructs.]}
 @end{DiffWord95}
 
@@ -509,7 +509,7 @@ However, this would cause problems for untagged types.
 In particular, we would have to do a constraint check on every read of a
 type conversion (or a renaming thereof) in certain cases.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 We do not want this definition to depend on the view of the type;
 privateness is essentially ignored for this definition.
 Otherwise, things would be confusing (does the rule apply at the call
@@ -749,7 +749,7 @@ that the subprogram can from then on be called without
 failing the Elaboration_Check.
 @begin{Ramification}
 See @RefSecNum{Generic Bodies} for elaboration of a generic body.
-Note that protected @nt{subprogram_bodies} never get elaborated;
+Note that protected @ntf{subprogram_bodies} never get elaborated;
 the elaboration of the containing @nt{protected_body}
 allows them to be called without failing the Elaboration_Check.
 @end{Ramification}
@@ -956,7 +956,7 @@ for Intrinsic subprograms.]
   if there is really no body, and the implementation of the subprogram
   is built into the code generator.
 
-  Subprograms declared in @nt{protected_bodies} will generally have a
+  Subprograms declared in @ntf{protected_bodies} will generally have a
   special calling
   convention so as to pass along the identification of the
   current instance of the protected type.
@@ -1509,7 +1509,7 @@ first actual parameter being provided by the @nt{prefix} of the prefixed view
 an access parameter), and the remaining actual parameters given by the
 @nt{actual_parameter_part}, if any.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 The exception Program_Error is raised at the point of a
 @nt{function_call} if the function
@@ -2418,12 +2418,12 @@ A function now creates an anonymous object.
 This is necessary so that controlled types
 will work.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 We have clarified that a
 @Chg{Version=[2],New=[return statement],Old=[@nt{return_statement}]}
 applies to a callable construct, not to a callable entity.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 There is no need to mention generics in the rules about where a
 @Chg{Version=[2],New=[return statement],Old=[@nt{return_statement}]}
 can appear and what it applies to;
@@ -2538,7 +2538,7 @@ null procedure nor an instance of a generic unit.]}
   @ChgAdded{Version=[2],Text=[The procedure can be abstract. The denoted
   declaration can be a @nt{renaming_declaration} if it obeys the usual rules
   for representation pragmas: the renaming has to occur immediately within the
-  same @nt{declarative_region} as the renamed subprogram. If a non-returning
+  same declarative region as the renamed subprogram. If a non-returning
   procedure is renamed (anywhere) calls through the new name still have the
   non-returning semantics.]}
 @end{Ramification}

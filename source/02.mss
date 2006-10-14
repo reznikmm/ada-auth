@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2006/03/21 22:47:13 $}
+@Comment{$Date: 2006/10/14 06:05:17 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -27,12 +27,12 @@ Multiple-Octet Coded Character Set. This coding space is organized in
 @i<planes>, each plane comprising 65536 characters.@Defn2{Term=[plane],Sec=[character]}
 @Defn{character plane}],Old=[only characters
 allowed outside of @nt{comment}s are the @nt{graphic_character}s and
-@nt{format_effector}s.]}
+@ntf{format_effector}s.]}
 
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
 @ChgDeleted{Version=[2],Text=[Any character, including an
-@nt<other_control_function>, is allowed in a comment.]}
+@ntf<other_control_function>, is allowed in a comment.]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}@ChgNote{Moved below}
 @ChgDeleted{Version=[2],Text=[Note that this rule doesn't really have much
@@ -61,15 +61,15 @@ deleted if the paragraphs are ever renumbered.}
 @end{NotIso}
 @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
 @DeletedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<>,Old=<character>}>,
-rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{graphic_character} | @Syn2{format_effector} | @Syn2{other_control_function}>}"}
+rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{graphic_character} | @Synf{format_effector} | @Synf{other_control_function}>}"}
 
 @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
 @DeletedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<>,Old=<graphic_character>}>,
-rhs="@Chg{Version=[2],New=<>,Old=<@Syn2{identifier_letter} | @Syn2{digit} | @Syn2{space_character} | @Syn2{special_character}>}"}
+rhs="@Chg{Version=[2],New=<>,Old=<@Synf{identifier_letter} | @Synf{digit} | @Synf{space_character} | @Synf{special_character}>}"}
 
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
-@ChgAdded{Version=[2],Text=[A @nt{character} is defined by this International
+@ChgAdded{Version=[2],Text=[A @ntf{character} is defined by this International
 Standard for each cell in the coding space described by ISO/IEC 10646:2003,
 regardless of whether or not ISO/IEC 10646:2003 allocates a character to that
 cell.]}
@@ -84,8 +84,8 @@ collection of characters
 @Chg{Version=[2],New=[described by the ISO/IEC 10646:2003],
 Old=[called the Basic Multilingual Plane (BMP) of the
 ISO 10646]} Universal Multiple-Octet Coded Character Set, plus a set
-of @nt<format_effector>s and, in comments only,
-a set of @nt<other_control_function>s; the]} coded representation for
+of @ntf<format_effector>s and, in comments only,
+a set of @ntf<other_control_function>s; the]} coded representation for
 @Chg{Version=[2],New=[],Old=[these ]}characters is implementation defined
 @Redundant[(it need not be a
 representation defined within @Chg{Version=[2],New=[ISO/IEC 10646:2003],
@@ -100,7 +100,7 @@ in the text of a program.],Old=[]}
   much force, since the implementation can represent characters in the
   source in any way it sees fit.
   For example, an implementation could simply define that what seems to be
-  an @nt{other_private_use} character is actually a
+  an @ntf{other_private_use} character is actually a
   representation of the space character.]}
 @end{Ramification}
 
@@ -140,26 +140,26 @@ literals.]}
 @end{Discussion}
 @begin{Description}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
-@ChgDeleted{Version=[2],Text=[@Defn{identifier_letter}@nt<identifier_letter>@\@nt{upper_case_identifier_letter} | @nt{lower_case_identifier_letter}]}
+@ChgDeleted{Version=[2],Text=[@Defn{identifier_letter}@ntf<identifier_letter>@\@ntf{upper_case_identifier_letter} | @ntf{lower_case_identifier_letter}]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
-  @ChgDeleted{Version=[2],Text=[We use @nt<identifier_letter>
-  instead of simply @nt<letter> because
+  @ChgDeleted{Version=[2],Text=[We use @ntf<identifier_letter>
+  instead of simply @ntf<letter> because
   ISO 10646 BMP includes many other characters that would generally
   be considered "letters."]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@Chg{Version=[2],New=[@Defn{letter_uppercase}@nt{letter_uppercase}],
-Old=[@Defn{upper_case_identifier_letter}@nt<upper_case_identifier_letter>]}@\Any
+@Chg{Version=[2],New=[@Defn{letter_uppercase}@ntf{letter_uppercase}],
+Old=[@Defn{upper_case_identifier_letter}@ntf<upper_case_identifier_letter>]}@\Any
 character @Chg{Version=[2],New=[whose General Category is defined
 to be @lquotes@;Letter, Uppercase@rquotes@;],
 Old=[of Row 00 of ISO 10646 BMP whose name begins
 @lquotes@;Latin Capital Letter@rquotes@;]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@Chg{Version=[2],New=[@Defn{letter_lowercase}@nt{letter_lowercase}],
-Old=[@Defn{lower_case_identifier_letter}@nt<lower_case_identifier_letter>]}@\Any
+@Chg{Version=[2],New=[@Defn{letter_lowercase}@ntf{letter_lowercase}],
+Old=[@Defn{lower_case_identifier_letter}@ntf<lower_case_identifier_letter>]}@\Any
 character @Chg{Version=[2],New=[whose General Category is defined
 to be @lquotes@;Letter, Lowercase@rquotes@;],
 Old=[of Row 00 of ISO 10646 BMP whose name begins
@@ -174,77 +174,77 @@ This problem was pointed out by a comment from the Netherlands.]}
 @end{Honest}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{letter_titlecase}@nt{letter_titlecase}@\Any
+@ChgAdded{Version=[2],Text=[@Defn{letter_titlecase}@ntf{letter_titlecase}@\Any
 character whose General Category is defined to be @lquotes@;Letter, Titlecase@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{letter_modifier}@nt{letter_modifier}@\Any
+@ChgAdded{Version=[2],Text=[@Defn{letter_modifier}@ntf{letter_modifier}@\Any
 character whose General Category is defined to be @lquotes@;Letter, Modifier@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{letter_other}@nt{letter_other}@\Any
+@ChgAdded{Version=[2],Text=[@Defn{letter_other}@ntf{letter_other}@\Any
 character whose General Category is defined to be @lquotes@;Letter, Other@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{mark_non_spacing}@nt{mark_non_spacing}@\Any
+@ChgAdded{Version=[2],Text=[@Defn{mark_non_spacing}@ntf{mark_non_spacing}@\Any
 character whose General Category is defined to be @lquotes@;Mark, Non-Spacing@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{mark_non_spacing}@nt{mark_spacing_combining}@\Any
+@ChgAdded{Version=[2],Text=[@Defn{mark_non_spacing}@ntf{mark_spacing_combining}@\Any
 character whose General Category is defined to be @lquotes@;Mark, Spacing Combining@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@Chg{Version=[2],New=[@Defn{number_decimal}@nt{number_decimal}],
+@Chg{Version=[2],New=[@Defn{number_decimal}@ntf{number_decimal}],
 Old=[@Defn{digit}@nt{digit}]}@\@Chg{Version=[2],New=[Any
 character whose General Category is defined
 to be @lquotes@;Number, Decimal@rquotes@;],
 Old=[One of the characters 0, 1, 2, 3, 4, 5, 6, 7, 8, or 9]}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{number_letter}@nt{number_letter}@\Any
+@ChgAdded{Version=[2],Text=[@Defn{number_letter}@ntf{number_letter}@\Any
 character whose General Category is defined to be @lquotes@;Number, Letter@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{punctuation_connector}@nt{punctuation_connector}@\Any
+@ChgAdded{Version=[2],Text=[@Defn{punctuation_connector}@ntf{punctuation_connector}@\Any
 character whose General Category is defined to be @lquotes@;Punctuation, Connector@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{other_format}@nt{other_format}@\Any
+@ChgAdded{Version=[2],Text=[@Defn{other_format}@ntf{other_format}@\Any
 character whose General Category is defined to be @lquotes@;Other, Format@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@Chg{Version=[2],New=[@Defn{separator_space}@nt<separator_space>],
-Old=[@Defn{space_character}@nt{space_character}]}@\@Chg{Version=[2],New=[Any
+@Chg{Version=[2],New=[@Defn{separator_space}@ntf<separator_space>],
+Old=[@Defn{space_character}@ntf{space_character}]}@\@Chg{Version=[2],New=[Any
 character whose General Category is defined to be @lquotes@;Separator,
 Space@rquotes@;.],Old=[The character of ISO 10646 BMP named
 @lquotes@;Space@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@Chg{Version=[2],New=[@Defn{separator_line}@nt{separator_line}],
-Old=[@Defn{special_character}@nt{special_character}]}@\Any character
+@Chg{Version=[2],New=[@Defn{separator_line}@ntf{separator_line}],
+Old=[@Defn{special_character}@ntf{special_character}]}@\Any character
 @Chg{Version=[2],New=[whose General Category is defined to be
 @lquotes@;Separator, Line@rquotes@;.],
 Old=[of the ISO 10646 BMP that is not reserved for a control function, and
-is not the @nt<space_character>, an @nt<identifier_letter>, or a @nt<digit>.]}
+is not the @ntf<space_character>, an @ntf<identifier_letter>, or a @ntf<digit>.]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[Note that the no break space and soft hyphen
-are @nt<special_character>s,
+are @ntf<special_character>s,
 and therefore @nt<graphic_character>s.
 They are not the same characters as space and hyphen-minus.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{separator_paragraph}@nt{separator_paragraph}@\Any
+@ChgAdded{Version=[2],Text=[@Defn{separator_paragraph}@ntf{separator_paragraph}@\Any
 character whose General Category is defined to be @lquotes@;Separator, Paragraph@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@Defn{format_effector}@nt<format_effector>@\The
+@Defn{format_effector}@ntf<format_effector>@\The
 @Chg{Version=[2],New=[characters whose code positions are
 16#09# (CHARACTER TABULATION), 16#0A# (LINE FEED), 16#0B# (LINE TABULATION),
 16#0C# (FORM FEED), 16#0D# (CARRIAGE RETURN), 16#85# (NEXT LINE),
-and the characters in categories @nt{separator_line} and
-@nt{separator_paragraph}],
+and the characters in categories @ntf{separator_line} and
+@ntf{separator_paragraph}],
 Old=[control functions of ISO 6429 called
   character tabulation (HT), line tabulation (VT), carriage return (CR),
   line feed (LF), and form feed (FF)]}.
@@ -258,29 +258,29 @@ Old=[control functions of ISO 6429 called
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{other_control}@nt{other_control}@\Any
+@ChgAdded{Version=[2],Text=[@Defn{other_control}@ntf{other_control}@\Any
 character whose General Category is defined
 to be @lquotes@;Other, Control@rquotes@;, and which is not defined to be a
-@nt<format_effector>.]}
+@ntf<format_effector>.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{other_private_use}@nt{other_private_use}@\Any
+@ChgAdded{Version=[2],Text=[@Defn{other_private_use}@ntf{other_private_use}@\Any
 character whose General Category is defined to be @lquotes@;Other, Private Use@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn{other_surrogate}@nt{other_surrogate}@\Any
+@ChgAdded{Version=[2],Text=[@Defn{other_surrogate}@ntf{other_surrogate}@\Any
 character whose General Category is defined to be @lquotes@;Other, Surrogate@rquotes@;.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
-@Chg{Version=[2],New=[@Defn{graphic_character}@nt{graphic_character}],
-Old=[@Defn{other_control_function}@nt<other_control_function>]}@\@Chg{Version=[2],
-New=[Any character that is not in the categories @nt{other_control},
-@nt{other_private_use}, @nt{other_surrogate},
-@nt{format_effector}, and whose relative code position in its plane is neither
+@Chg{Version=[2],New=[@Defn{graphic_character}@ntf{graphic_character}],
+Old=[@Defn{other_control_function}@ntf<other_control_function>]}@\@Chg{Version=[2],
+New=[Any character that is not in the categories @ntf{other_control},
+@ntf{other_private_use}, @ntf{other_surrogate},
+@ntf{format_effector}, and whose relative code position in its plane is neither
 16#FFFE# nor 16#FFFF#.],
 Old=[Any control function,
-other than a @nt<format_effector>, that is allowed in a comment; the set of
-@nt<other_control_function>s allowed in comments is implementation defined.
+other than a @ntf<format_effector>, that is allowed in a comment; the set of
+@ntf<other_control_function>s allowed in comments is implementation defined.
 @IndexSeeAlso{Term=[control character],See=(other_control_function)}]}
 @ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],Text=[The
 control functions allowed in comments.]}]}
@@ -355,11 +355,11 @@ corresponding clauses of ISO/IEC 10646:2003, not to Unicode.]}
 @end{Description}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@Leading@Chg{Version=[2],New=[],Old=[@Defn{names of @nt{special_character}s}
+@Leading@Chg{Version=[2],New=[],Old=[@Defn{names of @ntf{special_character}s}
 @Defn2{Term=[special_character],Sec=(names)}]}The
 following names are used when referring to certain
 @Chg{Version=[2],New=[characters (the first name is that given in
-ISO/IEC 10646:2003)],Old=[@nt{special_character}s]}:
+ISO/IEC 10646:2003)],Old=[@ntf{special_character}s]}:
 @Defn{quotation mark}
 @Defn{number sign}
 @Defn{ampersand}
@@ -508,7 +508,7 @@ vertical line@*
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
 @ChgDeleted{Version=[2],Text=[In a nonstandard mode, the implementation
 may support a different character repertoire@Redundant[; in particular,
-the set of characters that are considered @nt<identifier_letter>s
+the set of characters that are considered @ntf<identifier_letter>s
 can be extended
 or changed to conform to local conventions].]}
 @begin{Ramification}
@@ -516,7 +516,7 @@ or changed to conform to local conventions].]}
 @ChgDeleted{Version=[2],Text=[If an implementation supports
 other character sets,
 it defines which characters fall into each category,
-such as @lquotes@;@nt{identifier_letter},@rquotes@;
+such as @lquotes@;@ntf{identifier_letter},@rquotes@;
 and what the corresponding rules of this section are,
 such as which characters are allowed in the text of a program.]}
 @end{Ramification}
@@ -524,8 +524,8 @@ such as which characters are allowed in the text of a program.]}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@Chg{Version=[2],New=[The characters in categories @nt{other_control},
-@nt{other_private_use}, and @nt{other_surrogate} are only allowed in comments],
+@Chg{Version=[2],New=[The characters in categories @ntf{other_control},
+@ntf{other_private_use}, and @ntf{other_surrogate} are only allowed in comments],
 Old=[Every code position of ISO 10646 BMP that is not reserved for a control
 function is defined to be a @nt<graphic_character> by this International Standard.
 This includes all code positions other than 0000 - 001F, 007F - 009F,
@@ -563,14 +563,14 @@ The syntax rules in this clause are modified to remove the emphasis
 on basic characters vs. others.
 (In this day and age, there is no need to point out that you can write
 programs without using (for example) lower case letters.)
-In particular, @nt{character} (representing all characters usable outside
-comments) is added, and @nt{basic_graphic_character},
-@nt{other_special_character},
-and @nt{basic_character} are removed.
-@nt{Special_character} is expanded to include Ada 83's
-@nt{other_special_character}, as well as new 8-bit characters not
+In particular, @ntf{character} (representing all characters usable outside
+comments) is added, and @ntf{basic_graphic_character},
+@ntf{other_special_character},
+and @ntf{basic_character} are removed.
+@ntf{Special_character} is expanded to include Ada 83's
+@ntf{other_special_character}, as well as new 8-bit characters not
 present in Ada 83.@Chg{Version=[2],New=[ Ada 2005 removes
-@nt{special_character} altogether; we want to stick to ISO/IEC 10646:2003
+@ntf{special_character} altogether; we want to stick to ISO/IEC 10646:2003
 character classifications.],Old=[]}
 Note that the term @lquotes@;basic letter@rquotes@; is used
 in @RefSec{Character Handling}
@@ -581,8 +581,8 @@ Character names now come from
 @Chg{Version=[2],New=[ISO/IEC 10646:2003],Old=[ISO 10646]}.
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
-@ChgDeleted{Version=[2],Text=[We use @nt<identifier_letter> rather than
-@nt<letter> since ISO 10646 BMP includes many "letters' that are not
+@ChgDeleted{Version=[2],Text=[We use @ntf<identifier_letter> rather than
+@ntf<letter> since ISO 10646 BMP includes many "letters' that are not
 permitted in identifiers (in the standard mode).]}
 @end{DiffWord83}
 
@@ -618,7 +618,7 @@ lexical elements that form its @nt{compilation}s, excluding
 The text of a @nt<compilation> is divided into @Defn{line}@i{lines}.
 @Defn{end of a line}
 In general, the representation for an end of line is implementation defined.
-However, a sequence of one or more @nt<format_effector>s other
+However, a sequence of one or more @ntf<format_effector>s other
 than @Chg{Version=[2],New=[the character whose code position
 is 16#09# (CHARACTER TABULATION)],Old=[character tabulation (HT)]}
 signifies at least one end of line.
@@ -629,8 +629,8 @@ signifies at least one end of line.
 @Redundant[In some cases an explicit @i(separator) is required
 to separate adjacent lexical elements.]
 A separator is
-any of a @Chg{Version=[2],New=[@nt{separator_space}],Old=[space character]},
-a @Chg{Version=[2],New=[@nt{format_effector}],Old=[format effector]},
+any of a @Chg{Version=[2],New=[@ntf{separator_space}],Old=[space character]},
+a @Chg{Version=[2],New=[@ntf{format_effector}],Old=[format effector]},
 or the end of a line, as follows:
 @begin(Discussion)
 @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
@@ -640,7 +640,7 @@ Unicode def of whitespace.}
 @end(Discussion)
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-A @Chg{Version=[2],New=[@nt{separator_space}],Old=[space character]} is
+A @Chg{Version=[2],New=[@ntf{separator_space}],Old=[space character]} is
 a separator except within a @nt{comment}, a @nt{string_literal},
 or a @nt{character_literal}.
 
@@ -681,58 +681,20 @@ of a compound delimiter, or as a character of a @nt{comment},
 @nt{numeric_literal}.
 
 @Leading@keepnext@;The following names are used when referring to compound
-delimiters:
-@Comment{The original version follows here (commented out)
-@begin{Display}
-@TabClear()@TabSet(P11)delimiter @\name
-@comment{Blank line}
-   => @\arrow
-   .. @\double dot
-   ** @\double star, exponentiate
-   := @\assignment (pronounced: @lquotes@;becomes@rquotes@;)
-   /= @\inequality (pronounced: @lquotes@;not equal@rquotes@;)
-   >= @\greater than or equal
-   <= @\less than or equal
-   << @\left label bracket
-   >> @\right label bracket
-   <> @\box
-@end{Display}}
-@Comment{We use this (weird) four column version to make the HTML look much better.
-WARNING: The items that go together are in separate columns!!}
-@begin(FourCol)
-@Noparanum@ @ @ @ @ @ delimiter
-
-@Noparanum@ @ @ @ @ @ @ @ @ =>@*
-@ @ @ @ @ @ @ @ @ ..@*
-@ @ @ @ @ @ @ @ @ **@*
-@ @ @ @ @ @ @ @ @ :=@*
-@*
-@ @ @ @ @ @ @ @ @ /=@*
-@*
-@ @ @ @ @ @ @ @ @ >=@*
-@ @ @ @ @ @ @ @ @ <=@*
-@ @ @ @ @ @ @ @ @ <<@*
-@ @ @ @ @ @ @ @ @ >>@*
-@ @ @ @ @ @ @ @ @ <>
-@NewColumn
-@Noparanum@;name
-
-@Noparanum@;arrow@*
-double dot@*
-double star, exponentiate@*
-assignment (pronounced:@*
-@ @ @ @lquotes@;becomes@rquotes@;)@*
-inequality (pronounced:@*
-@ @ @ @lquotes@;not equal@rquotes@;)@*
-greater than or equal@*
-less than or equal@*
-left label bracket@*
-right label bracket@*
-box
-@NewColumn
-@Comment{Last two columns are empty.}
-@NewColumn
-@end(FourCol)
+delimiters:@table{Columns=[2],
+Alignment=[Allleft],FirstColWidth=[1],LastColWidth=[4],
+NoBreak=[F],Border=[F],SmallSize=[F],Caption=[],
+Headers=[delimiter@ @\name],
+Body=[=>@\arrow
+..@\double dot
+**@\double star, exponentiate
+:=@\assignment (pronounced: @lquotes@;becomes@rquotes@;)
+/=@\inequality (pronounced: @lquotes@;not equal@rquotes@;)
+>=@\greater than or equal
+<=@\less than or equal
+<<@\left label bracket
+>>@\right label bracket
+<>@\box]}
 @end{StaticSem}
 
 @begin{ImplReq}
@@ -766,37 +728,37 @@ From URG recommendation.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @Syn{lhs=<identifier>,rhs="
    @Chg{Version=[2],New=<@Syn2{identifier_start} {@Syn2{identifier_start} | @Syn2{identifier_extend}}>,
-   Old=<@Syn2{identifier_letter} {[@Syn2{underline}] @Syn2{letter_or_digit}}>}"}
+   Old=<@Synf{identifier_letter} {[@Synf{underline}] @Syn2{letter_or_digit}}>}"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @Syn{lhs=<@Chg{Version=[2],New=<identifier_start>,Old=<letter_or_digit>}>,
 rhs="@Chg{Version=[2],New=<
-     @Syn2{letter_uppercase}
-   | @Syn2{letter_lowercase}
-   | @Syn2{letter_titlecase}
-   | @Syn2{letter_modifier}
-   | @Syn2{letter_other}
-   | @Syn2{number_letter}>,Old=<@Syn2{identifier_letter} | @Syn2{digit}>}"}
+     @Synf{letter_uppercase}
+   | @Synf{letter_lowercase}
+   | @Synf{letter_titlecase}
+   | @Synf{letter_modifier}
+   | @Synf{letter_other}
+   | @Synf{number_letter}>,Old=<@Synf{identifier_letter} | @Synf{digit}>}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<identifier_extend>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<
-     @Syn2{mark_non_spacing}
-   | @Syn2{mark_spacing_combining}
-   | @Syn2{number_decimal}
-   | @Syn2{punctuation_connector}
-   | @Syn2{other_format}>,Old=<>}"}
+     @Synf{mark_non_spacing}
+   | @Synf{mark_spacing_combining}
+   | @Synf{number_decimal}
+   | @Synf{punctuation_connector}
+   | @Synf{other_format}>,Old=<>}"}
 
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00395-01]}
 @Chg{Version=[2],New=[After eliminating the characters in category
-@nt{other_format}, an @nt{identifier} shall not contain two consecutive
+@ntf{other_format}, an @nt{identifier} shall not contain two consecutive
 characters in category punctuation_connector, or end with a character
 in that category.],Old=[An @nt{identifier} shall not be a reserved word.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This rule was stated in the syntax in Ada 95,
-  but that has gotten too complex in Ada 2005. Since @nt{other_format}
+  but that has gotten too complex in Ada 2005. Since @ntf{other_format}
   characters usually do not display, we do not want to count them as separating
   two underscores.]}
 @end{Reason}
@@ -815,7 +777,7 @@ underline character.
 corresponding upper and lower case letters are considered the same.]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[The characters in category @nt{other_format}
+@ChgAdded{Version=[2],Text=[The characters in category @ntf{other_format}
 are eliminated.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
@@ -838,7 +800,7 @@ converted to upper case.
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[We match the reserved words after doing these
   transformations so that the rules for @nt{identifier}s and reserved words are
-  the same. (This allows @nt{other_format} characters, which usually don't
+  the same. (This allows @ntf{other_format} characters, which usually don't
   display, in a reserved word without changing it to an @nt{identifier}.) Since
   a compiler usually will lexically process @nt{identifier}s and reserved words the
   same way (often with the same code), this will prevent a lot of headaches.]}
@@ -1002,7 +964,7 @@ decimal notation (that is, the base is ten).
 @Syn{lhs=<decimal_literal>,rhs="@Syn2{numeral} [.@Syn2{numeral}] [@Syn2{exponent}]"}
 
 
-@Syn{lhs=<numeral>,rhs="@Syn2{digit} {[@Syn2{underline}] @Syn2{digit}}"}
+@Syn{lhs=<numeral>,rhs="@Syn2{digit} {[@Synf{underline}] @Syn2{digit}}"}
 
 @Syn{lhs=<exponent>,rhs="E [+] @Syn2{numeral} | E @en@; @Syn2{numeral}"}
 
@@ -1050,7 +1012,7 @@ obtain the value of the @nt{decimal_literal} with the @nt{exponent}.
 @end{Examples}
 
 @begin{DiffWord83}
-We have changed the syntactic category name @nt{integer} to be @nt{numeral}.
+We have changed the syntactic category name @ntf{integer} to be @nt{numeral}.
 We got this idea from ACID.
 It avoids the confusion between this and integers.
 (Other places don't offer similar confusions.
@@ -1083,7 +1045,7 @@ that specifies the base explicitly.]
 @Syn{lhs=<base>,rhs="@Syn2{numeral}"}
 
 @Syn{lhs=<based_numeral>,rhs="
-   @Syn2{extended_digit} {[@Syn2{underline}] @Syn2{extended_digit}}"}
+   @Syn2{extended_digit} {[@Synf{underline}] @Syn2{extended_digit}}"}
 
 @Syn{lhs=<extended_digit>,rhs="@Syn2{digit} | A | B | C | D | E | F"}
 
@@ -1140,8 +1102,8 @@ character between two apostrophe characters.]
 @end{Intro}
 
 @begin{Syntax}
-@Syn{lhs=<character_literal>,rhs="@SingleQuote@Syn2{graphic_character}@SingleQuote"}
-@end{Syntax}
+@Syn{lhs=<character_literal>,rhs="@SingleQuote@Synf{graphic_character}@SingleQuote"}
+@end{Syntax}@Comment{graphic_character is defined syntactically in Ada 95, but not in Ada 2007}
 
 @begin{Notes}
 A @nt{character_literal} is an enumeration literal
@@ -1183,11 +1145,11 @@ string brackets. They are used to represent @nt<operator_symbol>s
 @Syn{lhs=<string_literal>,rhs=<"{@Syn2{string_element}}">}
 
 @Syn{lhs=<string_element>,
-  rhs=<"" | @SynI{non_quotation_mark_}@Syn2{graphic_character}>}
+  rhs=<"" | @SynI{non_quotation_mark_}@Synf{graphic_character}>}
 
 @begin{SyntaxText}
 A @nt{string_element} is either a pair of quotation marks (""),
-or a single @nt{graphic_character} other than a quotation mark.
+or a single @ntf{graphic_character} other than a quotation mark.
 @end{SyntaxText}
 @end{Syntax}
 
@@ -1265,7 +1227,8 @@ of the line.
 
 @begin{Syntax}
 @Syn{lhs=<comment>,
-  rhs=<--{@SynI{non_end_of_line_}@Syn2{character}}>}
+  rhs=<--{@SynI{non_end_of_line_}@Synf{character}}>}@Comment{character is defined syntactically in Ada 95,
+but not in Ada 2007. We assume the worst here.}
 
 @begin{SyntaxText}
 A @nt{comment} may appear on any line of a program.
@@ -1336,8 +1299,8 @@ or @nt{discriminant_part}.
 
 
 At any place where the syntax rules allow a construct defined by a
-syntactic category whose name ends with "@nt{declaration}", "@nt{statement}",
-"@nt{clause}", or "@nt{alternative}", or one of the syntactic categories
+syntactic category whose name ends with "@ntf{declaration}", "@ntf{statement}",
+"@ntf{clause}", or "@ntf{alternative}", or one of the syntactic categories
 @nt{variant} or @nt{exception_handler};
 but not in place of such a construct.
 Also at any place where a @nt{compilation_unit} would be allowed.
@@ -1674,7 +1637,7 @@ Some compilers might even ignore the pragma altogether.
 @begin{Examples}
 @Leading@keepnext@i{Examples of pragmas:}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00433-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key[pragma] List(Off); --@RI{ turn off listing generation}
 @key[pragma] Optimize(Off); --@RI{ turn off optional optimizations}
 @key[pragma] Inline(Set_Mask); --@RI{ generate code for Set_Mask inline}
@@ -1699,7 +1662,7 @@ informative annex.
 @end{DiffWord83}
 
 @begin{DiffWord95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
   @ChgAdded{Version=[2],Text=[Updated the example of named pragma parameters,
   because the second parameter of @nt{pragma} Suppress is obsolescent.]}
 @end{DiffWord95}
@@ -1720,7 +1683,7 @@ change here}
 @Defn{reserved word}
 The following are the @i{reserved words}@Chg{Version=[2],New=[. Within a program,
 some or all of the letters of a reserved word may be in upper case, and one or
-more characters in category @nt{other_format} may be inserted within or at the
+more characters in category @ntf{other_format} may be inserted within or at the
 end of the reserved word.],Old=[ (ignoring upper/lower case distinctions):]}
 @begin{Discussion}
   Reserved words have special meaning in the syntax.

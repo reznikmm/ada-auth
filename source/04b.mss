@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2006/02/19 06:45:19 $}
+@Comment{$Date: 2006/10/14 06:05:18 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 
 @LabeledClause{Type Conversions}
 
@@ -51,8 +51,8 @@ Two types are convertible if each is convertible to the other.
   at run time is irrelevant to this definition.
 @end{Ramification}
 
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017],ARef=[AI-00184-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00330-01]}
+@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017],ARef=[AI95-00184-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00330-01]}
 @Defn{view conversion}
 @Defn2{Term=[conversion],Sec=(view)}
 A @nt{type_conversion} whose operand is the
@@ -74,7 +74,7 @@ other @nt<type_conversion>s are called @i(value conversions).
   occur as actual parameters. Allowing view conversions of untagged
   types in all contexts seemed to incur an undue implementation burden.
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00330-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00330-01]}
   @ChgAdded{Version=[2],Text=[A type conversion appearing as an @key{in out}
   parameter in a generic instantiation is not a view conversion; the second
   part of the rule only applies to subprogram calls, not instantiations.]}

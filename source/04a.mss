@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2006/06/23 04:24:51 $}
+@Comment{$Date: 2006/10/14 06:05:18 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.80 $}
+@Comment{$Revision: 1.81 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -36,9 +36,12 @@ Finally, @nt<name>s can denote attributes of any of the foregoing.]
 @Syn{lhs=<direct_name>,
 rhs="@Syn2{identifier} | @Syn2{operator_symbol}"}
 @begin{Discussion}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
   @nt<character_literal> is no longer a @nt<direct_name>.
   @nt<character_literal>s are usable even when the corresponding
-  @nt<enumeration_type_declaration> is not visible. See @RefSecNum(Literals).
+  @Chg{Version=[2],New=[enumeration type
+  declaration],Old=[@ntf<enumeration_type_declaration>]} is not visible. See
+  @RefSecNum(Literals).
 @end{Discussion}
 
 @Syn{lhs=<prefix>,rhs="@Syn2{name} | @Syn2{implicit_dereference}"}
@@ -50,8 +53,10 @@ rhs="@Syn2{identifier} | @Syn2{operator_symbol}"}
 @end{Syntax}
 
 @begin{Intro}
+@ChgRef{Version=[2],Kind=[Revised]}
 @Redundant[Certain forms of @nt<name> (@nt<indexed_component>s,
-@nt<selected_component>s, @nt<slice>s, and @nt<attribute>s)
+@nt<selected_component>s, @nt<slice>s, and
+@Chg{Version=[2],New=[@nt<attribute_reference>s],Old=[@ntf<attribute>s]})
 include a @nt<prefix> that is either itself a @nt<name> that denotes
 some related entity, or an @nt<implicit_dereference> of an access
 value that designates some related entity.]
@@ -220,10 +225,10 @@ partly an extension of functionality (see Extensions heading above).
 
 The syntax rule for @nt{direct_name} is new. It is used in places where
 direct visibility is required.
-It's kind of like Ada 83's @nt{simple_name}, but @nt{simple_name} applied
+It's kind of like Ada 83's @ntf{simple_name}, but @ntf{simple_name} applied
 to both direct visibility and visibility by selection,
 and furthermore, it didn't work right for @nt{operator_symbol}s.
-The syntax rule for @nt{simple_name} is removed,
+The syntax rule for @ntf{simple_name} is removed,
 since its use is covered by a combination of @nt{direct_name} and
 @nt{selector_name}.
 The syntactic categories @nt{direct_name} and @nt{selector_name} are similar;
@@ -926,7 +931,7 @@ the thing itself.
 
 The syntax rule for @nt{attribute_reference}
 now uses @nt{identifier} instead of
-@nt{simple_name}, because attribute @nt{identifier}s are not required to
+@ntf{simple_name}, because attribute @nt{identifier}s are not required to
 follow the normal visibility rules.
 
 We now separate @nt{attribute_reference}
@@ -979,7 +984,7 @@ the literal @key(null), or a @nt<string_literal>.
   rather than a @nt<character_literal> is not considered a @i(literal)
   in the above sense, because it involves no special notation
   @lquotes@;suited to its kind.@rquotes@;
-  It might more properly be called an @nt<enumeration_identifier>,
+  It might more properly be called an @ntf<enumeration_identifier>,
   except for historical reasons.
 @end(Discussion)
 @end{Intro}
@@ -1032,7 +1037,9 @@ a corresponding @nt<defining_character_literal> of
 the component type of the expected string type.
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00230-01],ARef=[AI95-00231-01]}
-@ChgDeleted{Version=[2],Text=[A literal @nt<null> shall not be of an anonymous
+@ChgDeleted{Version=[2],Text=[A literal @s<null>@ChgNote{We use @S since this
+isn't a non-terminal, and since it is deleted we don't want to fix it.} shall
+not be of an anonymous
 access type@Redundant[, since such types do not have a null value
 (see @RefSecNum{Access Types})].]}
 @begin{Reason}
@@ -1963,7 +1970,7 @@ to determine the bounds of the array value specified by the aggregate.]
 Each of the following contexts (and none other)
 defines an applicable index constraint:
 @begin(itemize)
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI-00318-02]}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
   For an @nt{explicit_actual_parameter},
   an @nt{explicit_generic_actual_parameter},
   the @nt{expression} of a
@@ -2169,9 +2176,11 @@ checks fail.
 @end{RunTime}
 
 @begin{Notes}
+@ChgRef{Version=[2],Kind=[Revised]}
 In an @nt<array_aggregate>, positional notation may only be used
 with two or more @nt<expression>s; a single @nt<expression>
-in parentheses is interpreted as a @nt<parenthesized_expression>.
+in parentheses is interpreted as a
+@Chg{Version=[2],New=[parenthesized expression],Old=[@ntf{parenthesized_expression}]}.
 A @nt<named_array_aggregate>, such as (1 => X), may be used to specify
 an array with a single component.
 @end{Notes}
@@ -2220,7 +2229,7 @@ E : Bit_Vector(M .. N) := (@key(others) => True);
 F : String(1 .. 1) := (1 => 'F');  --@RI[ a one component aggregate: same as "F"]
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00433-01]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Type=[Leading],KeepNext=[T],Text=[@i{Example of an array
 aggregate with defaulted others choice and with an applicable index constraint
 provided by an enclosing record aggregate:}]}
@@ -2296,7 +2305,7 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
   @ChgAdded{Version=[2],Text=[Limited @nt{array_aggregate}s are allowed (since
   all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI-00318-02]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
   @ChgAdded{Version=[2],Text=[Fixed @nt{aggregate}s to use the subtype of
   the return object of a function, rather than the result subtype, because
   they can be different for an @nt{extended_return_statement}, and we want
@@ -2483,7 +2492,7 @@ A**(B**C)                   --@RI[ expression (parentheses are required)]
 @begin{Extend83}
 @Defn{extensions to Ada 83}
 In Ada 83, @key{out} parameters and their nondiscriminant
-subcomponents are not allowed as @nt{primaries}.
+subcomponents are not allowed as @ntf{primaries}.
 These restrictions are eliminated in Ada 95.
 
 In various contexts throughout the language where Ada 83 syntax rules
