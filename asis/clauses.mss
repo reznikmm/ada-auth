@@ -1,6 +1,6 @@
 @Part(clauses, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/clauses.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/10/10 05:10:36 $}
+@comment{$Revision: 1.3 $ $Date: 2006/10/13 02:11:59 $}
 
 @LabeledSection{package Asis.Clauses}
 
@@ -87,7 +87,8 @@ function Representation_Clause_Expression
                                      @key[return] Asis.Name;
 @end{Example}
 
-Clause @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the representation_clause to query.
+Clause @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+representation_clause to query.
 
 Returns the direct_name expression following the reserved word @key[for].
 
@@ -181,8 +182,10 @@ An_Expression
                             @key[return] Asis.Component_Clause_List;
 @end{Example}
 
-Clause          @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record representation clause to query.
-Include_Pragmas @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned.
+Clause @Chg{Version=[1],New=[specifies],Old=[         @en Specifies]} the
+record representation clause to query.
+Include_Pragmas @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
+pragmas are to be returned.
 
 Returns the component_clause and pragma elements from the
 record_representation_clause, in their order of appearance.
