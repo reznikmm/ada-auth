@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/09/28 05:11:59 $}
+@comment{$Revision: 1.3 $ $Date: 2006/10/14 06:06:28 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -352,85 +352,115 @@ A_Defining_Name
 
 @LabeledClause{function Declaration_Kind}
 
-  @key[function] @AdaSubDefn{Declaration_Kind} (Declaration : @key[in] Asis.Declaration)
-                              @key[return] Asis.Declaration_Kinds;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Declaration_Kind} (Declaration : @key[in] Asis.Declaration)
+                            @key[return] Asis.Declaration_Kinds;
+@end{Example}
 
-Declaration  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
+Declaration @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the element
+to query.
 
 Returns the Declaration_Kinds value of the Declaration.
 
 Returns Not_A_Declaration for any unexpected element such as a
 Nil_Element, A_Definition, or A_Statement.
 
-Expected Element_Kinds:
-     A_Declaration
+@leading@;Expected Element_Kinds:
+@begin{Display}
+A_Declaration
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Trait_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Trait_Kind} (Element : @key[in] Asis.Element)
+                      @key[return] Asis.Trait_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Trait_Kind} (Element : @key[in] Asis.Element)
-                        @key[return] Asis.Trait_Kinds;
-
-Element  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Element to query.
+Element @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the Element to
+query.
 
 Returns the Trait_Kinds value of the Element.
 
 Returns Not_A_Trait for any unexpected element such as a
 Nil_Element, A_Statement, or An_Expression.
 
-Expected Declaration_Kinds:
-    A_Private_Type_Declaration
-    A_Private_Extension_Declaration
-    A_Variable_Declaration
-    A_Constant_Declaration
-    A_Deferred_Constant_Declaration
-    A_Discriminant_Specification
-    A_Loop_Parameter_Specification
-    A_Procedure_Declaration
-    A_Function_Declaration
-    A_Parameter_Specification
+@leading@;Expected Declaration_Kinds:
+@begin{Display}
+A_Private_Type_Declaration
+A_Private_Extension_Declaration
+A_Variable_Declaration
+A_Constant_Declaration
+A_Deferred_Constant_Declaration
+A_Discriminant_Specification
+A_Loop_Parameter_Specification
+A_Procedure_Declaration
+A_Function_Declaration
+A_Parameter_Specification
+@end{Display}
 
-Expected Definition_Kinds:
-    A_Component_Definition
-    A_Private_Type_Definition
-    A_Tagged_Private_Type_Definition
-    A_Private_Extension_Definition
+@leading@;Expected Definition_Kinds:
+@begin{Display}
+A_Component_Definition
+A_Private_Type_Definition
+A_Tagged_Private_Type_Definition
+A_Private_Extension_Definition
+@end{Display}
 
+@leading@;Expected Type_Kinds:
+@begin{Display}
+A_Derived_Type_Definition
+A_Derived_Record_Extension_Definition
+A_Record_Type_Definition
+A_Tagged_Record_Type_Definition
+@end{Display}
 
--- Expected Type_Kinds:
-    A_Derived_Type_Definition
-    A_Derived_Record_Extension_Definition
-    A_Record_Type_Definition
-    A_Tagged_Record_Type_Definition
+@leading@;Expected Formal_Type_Kinds:
+@begin{Display}
+A_Formal_Private_Type_Definition
+A_Formal_Tagged_Private_Type_Definition
+A_Formal_Derived_Type_Definition
+@end{Display}
+@end{DescribeCode}
 
-Expected Formal_Type_Kinds:
-    A_Formal_Private_Type_Definition
-    A_Formal_Tagged_Private_Type_Definition
-    A_Formal_Derived_Type_Definition
 
 @LabeledClause{function Declaration_Origin}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Declaration_Origin} (Declaration : @key[in] Asis.Declaration)
+                              @key[return] Asis.Declaration_Origins;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Declaration_Origin} (Declaration : @key[in] Asis.Declaration)
-                                @key[return] Asis.Declaration_Origins;
-
-Declaration  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Declaration to query.
+Declaration @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+Declaration to query.
 
 Returns the Declaration_Origins value of the Declaration.
 
 Returns Not_A_Declaration_Origin for any unexpected element such as a
 Nil_Element, A_Definition, or A_Clause.
 
-Expected Element_Kinds:
-     A_Declaration
+@leading@;Expected Element_Kinds:
+@begin{Display}
+A_Declaration
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Mode_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Mode_Kind} (Declaration : @key[in] Asis.Declaration)
+                               @key[return] Asis.Mode_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Mode_Kind} (Declaration : @key[in] Asis.Declaration)
-                                 @key[return] Asis.Mode_Kinds;
-
-Declaration  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
+Declaration @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the element
+to query.
 
 Returns the Mode_Kinds value of the Declaration.
 
@@ -439,170 +469,238 @@ Returns A_Default_In_Mode for an access parameter.
 Returns Not_A_Mode for any unexpected element such as a
 Nil_Element, A_Definition, or A_Statement.
 
-Expected Declaration_Kinds:
-     A_Parameter_Specification
-     A_Formal_Object_Declaration
+@leading@;Expected Declaration_Kinds:
+@begin{Display}
+A_Parameter_Specification
+A_Formal_Object_Declaration
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Default_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Default_Kind} (Declaration : @key[in] Asis.Generic_Formal_Parameter)
+                        @key[return] Asis.Subprogram_Default_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Default_Kind} (Declaration : @key[in] Asis.Generic_Formal_Parameter)
-                          @key[return] Asis.Subprogram_Default_Kinds;
-
-Declaration  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
+Declaration @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the element
+to query.
 
 Returns the Subprogram_Default_Kinds value of the Declaration.
 
 Returns Not_A_Declaration for any unexpected element such as a
 Nil_Element, A_Definition, or A_Statement.
 
-Expected Declaration_Kinds:
-     A_Formal_Function_Declaration
-     A_Formal_Procedure_Declaration
+@leading@;Expected Declaration_Kinds:
+@begin{Display}
+A_Formal_Function_Declaration
+A_Formal_Procedure_Declaration
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Definition_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Definition_Kind} (Definition : @key[in] Asis.Definition)
+                           @key[return] Asis.Definition_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Definition_Kind} (Definition : @key[in] Asis.Definition)
-                             @key[return] Asis.Definition_Kinds;
-
-Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Definition to query.
+Definition @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+Definition to query.
 
 Returns the Definition_Kinds value of the Definition.
 
 Returns Not_A_Definition for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-Expected Element_Kinds:
-     A_Definition
+@leading@;Expected Element_Kinds:
+@begin{Display}
+A_Definition
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Type_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Type_Kind} (Definition : @key[in] Asis.Type_Definition)
+                                @key[return] Asis.Type_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Type_Kind} (Definition : @key[in] Asis.Type_Definition)
-                                  @key[return] Asis.Type_Kinds;
-
-Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Type_Definition to query.
+Definition @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+Type_Definition to query.
 
 Returns the Type_Kinds value of the Definition.
 
 Returns Not_A_Type_Definition for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-Expected Definition_Kinds:
-     A_Type_Definition
+@leading@;Expected Definition_Kinds:
+@begin{Display}
+A_Type_Definition
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Formal_Type_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Formal_Type_Kind}
+               (Definition : @key[in] Asis.Formal_Type_Definition)
+                @key[return] Asis.Formal_Type_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Formal_Type_Kind}
-                 (Definition : @key[in] Asis.Formal_Type_Definition)
-                  @key[return] Asis.Formal_Type_Kinds;
-
-Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Formal_Type_Definition to query.
+Definition @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+Formal_Type_Definition to query.
 
 Returns the Formal_Type_Kinds value of the Definition.
 
 Returns Not_A_Formal_Type_Definition for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-Expected Definition_Kinds:
-     A_Formal_Type_Definition
+@leading@;Expected Definition_Kinds:
+@begin{Display}
+A_Formal_Type_Definition
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Access_Type_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Access_Type_Kind}
+               (Definition : @key[in] Asis.Access_Type_Definition)
+                @key[return] Asis.Access_Type_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Access_Type_Kind}
-                 (Definition : @key[in] Asis.Access_Type_Definition)
-                  @key[return] Asis.Access_Type_Kinds;
-
-Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Access_Type_Definition to query.
+Definition @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+Access_Type_Definition to query.
 
 Returns the Access_Type_Kinds value of the Definition.
 
 Returns Not_An_Access_Type_Definition for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-Expected Type_Kinds:
-     An_Access_Type_Definition
+@leading@;Expected Type_Kinds:
+@begin{Display}
+An_Access_Type_Definition
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Root_Type_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Root_Type_Kind}
+               (Definition : @key[in] Asis.Root_Type_Definition)
+                @key[return] Asis.Root_Type_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Root_Type_Kind}
-                 (Definition : @key[in] Asis.Root_Type_Definition)
-                  @key[return] Asis.Root_Type_Kinds;
-
-Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Root_Type_Definition to query.
+Definition @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+Root_Type_Definition to query.
 
 Returns the Root_Type_Kinds value of the Definition.
 
 Returns Not_A_Root_Type_Definition for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-Expected Type_Kinds:
-     A_Root_Type_Definition
+@leading@;Expected Type_Kinds:
+@begin{Display}
+A_Root_Type_Definition
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Constraint_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Constraint_Kind}
+               (Definition : @key[in] Asis.Constraint)
+                @key[return] Asis.Constraint_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Constraint_Kind}
-                 (Definition : @key[in] Asis.Constraint)
-                  @key[return] Asis.Constraint_Kinds;
-
-Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the constraint to query.
+Definition @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+constraint to query.
 
 Returns the Constraint_Kinds value of the Definition.
 
 Returns Not_A_Constraint for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-Expected Definition_Kinds:
-     A_Constraint
+@leading@;Expected Definition_Kinds:
+@begin{Display}
+A_Constraint
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Discrete_Range_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Discrete_Range_Kind}
+               (Definition : @key[in] Asis.Discrete_Range)
+                @key[return] Asis.Discrete_Range_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Discrete_Range_Kind}
-                 (Definition : @key[in] Asis.Discrete_Range)
-                  @key[return] Asis.Discrete_Range_Kinds;
-
-Definition  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the discrete_range to query.
+Definition @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+discrete_range to query.
 
 Returns the Discrete_Range_Kinds value of the Definition.
 
 Returns Not_A_Discrete_Range for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-Expected Definition_Kinds:
-     A_Discrete_Subtype_Definition
-     A_Discrete_Range
+@leading@;Expected Definition_Kinds:
+@begin{Display}
+A_Discrete_Subtype_Definition
+A_Discrete_Range
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Expression_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Expression_Kind} (Expression : @key[in] Asis.Expression)
+                           @key[return] Asis.Expression_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Expression_Kind} (Expression : @key[in] Asis.Expression)
-                             @key[return] Asis.Expression_Kinds;
-
-Expression  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Expression to query.
+Expression @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+Expression to query.
 
 Returns the Expression_Kinds value of the Expression.
 
 Returns Not_An_Expression for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-Expected Element_Kinds:
-     An_Expression
+@leading@;Expected Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Operator_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Operator_Kind} (Element : @key[in] Asis.Element)
+                         @key[return] Asis.Operator_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Operator_Kind} (Element : @key[in] Asis.Element)
-                           @key[return] Asis.Operator_Kinds;
-
-Element  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Element to query.
+Element @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the Element to
+query.
 
 Returns the Operator_Kinds value of the A_Defining_Name or An_Expression
 element.
@@ -610,27 +708,41 @@ element.
 Returns Not_An_Operator for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-Expected Defining_Name_Kinds:
-     A_Defining_Operator_Symbol
+@leading@;Expected Defining_Name_Kinds:
+@begin{Display}
+A_Defining_Operator_Symbol
+@end{Display}
 
-Expected Expression_Kinds:
-     An_Operator_Symbol
+@leading@;Expected Expression_Kinds:
+@begin{Display}
+An_Operator_Symbol
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Attribute_Kind}
 
 
-  @key[function] @AdaSubDefn{Attribute_Kind} (Expression : @key[in] Asis.Expression)
-                            @key[return] Asis.Attribute_Kinds;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Attribute_Kind} (Expression : @key[in] Asis.Expression)
+                          @key[return] Asis.Attribute_Kinds;
+@end{Example}
 
-Expression  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Expression to query.
+Expression @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+Expression to query.
 
 Returns the Attribute_Kinds value of the Expression.
 
 Returns Not_An_Attribute for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-Expected Expression_Kinds:
-     An_Attribute_Reference
+@leading@;Expected Expression_Kinds:
+@begin{Display}
+An_Attribute_Reference
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Association_Kind}
 
@@ -643,7 +755,7 @@ Association  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Associat
 Returns the Association_Kinds value of the Association.
 
 
--- Returns Not_An_Association for any unexpected element such as a
+Returns Not_An_Association for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
 Expected Element_Kinds:
