@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:18 $}
+@Comment{$Date: 2006/10/17 05:29:45 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 
 @LabeledClause{Type Conversions}
 
@@ -469,8 +469,8 @@ operand type shall be an access type.],Old=[]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01],ARef=[AI95-00251-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[type conversion],sec=(access)}
 @Defn2{Term=[conversion],sec=(access)}If the target type is a general access-to-object type, then
-the operand type shall be @i<universal_access> or an access-to-object type.
-Further, if the operand type is not @i<universal_access>:]}
+the operand type shall be @i<universal_@!access> or an access-to-object type.
+Further, if the operand type is not @i<universal_@!access>:]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -581,8 +581,8 @@ the operand type shall be @i<universal_access>.]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[type conversion],sec=(access)}
 @Defn2{Term=[conversion],sec=(access)}
 If the target type is an access-to-subprogram type, then the operand type
-shall be @i<universal_access> or an access-to-subprogram type. Further, if
-the operand type is not @i<universal_access>:]}
+shall be @i<universal_@!access> or an access-to-subprogram type. Further, if
+the operand type is not @i<universal_@!access>:]}
 
 @begin(inneritemize)
 
@@ -1279,8 +1279,8 @@ an access value that designates the object.
 The expected type for an @nt<allocator> shall be a single access-to-object
 type @Chg{New=[with],Old=[whose]} designated type
 @Chg{New=[@i<D> such that either @i<D>],Old=[]} covers the type determined
-by the @nt<subtype_mark> of the @nt<subtype_indication> or
-@nt<qualified_expression>@Chg{New=[, or the expected type is anonymous and
+by the @nt<subtype_mark> of the @nt<subtype_@!indication> or
+@nt<qualified_@!expression>@Chg{New=[, or the expected type is anonymous and
 the determined type is @i<D>'Class],Old=[]}.
 @begin{Discussion}
   See @RefSec(The Context of Overload Resolution) for the meaning

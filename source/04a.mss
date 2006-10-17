@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:18 $}
+@Comment{$Date: 2006/10/17 05:29:44 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -707,6 +707,7 @@ My_Object.Do_Something_Else (Flag => True);]}
 @end{Extend95}
 
 
+@RMNewPage@ChgNote{Only needed for Ada 2005 version}
 @LabeledSubClause{Attributes}
 
 @begin{Intro}
@@ -1665,6 +1666,7 @@ a record aggregate. Now we do.
 @end{DiffWord95}
 
 
+@RmNewPage
 @LabeledSubClause{Extension Aggregates}
 
 @begin{Intro}

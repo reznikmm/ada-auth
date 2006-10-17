@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:17 $}
+@Comment{$Date: 2006/10/17 05:29:42 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 
 @LabeledClause{Array Types}
 
@@ -83,7 +83,7 @@ if a @nt{component_definition} contains the reserved word
 @key[aliased] and the type of the component is discriminated,
 then the nominal subtype of the component shall be constrained.]}
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgNote{The rule's gone, we might as well clobber all the notes.}
 @ChgDeleted{Version=[2],Text=[If we allowed the subtype to be unconstrained,
 then the discriminants might change because of
@@ -91,13 +91,13 @@ an assignment to the containing (nonlimited) object,
 thus causing a potential violation of an access subtype constraint
 of an access value designating the aliased component.]}
 
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[Note that the rule elsewhere defining all aliased
 discriminated objects to be constrained does not help @em that rule prevents
 assignments to the component itself from doing any harm, but not assignments to
 the containing object.]}
 
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Type=[Leading],Text=[We allow this
 for components within limited types since assignment to
 the enclosing object is not a problem. Furthermore, it is
@@ -106,7 +106,7 @@ in arrays of limited components, since that is the only way
 to give the components different values for their discriminants.
 For example:]}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[@key[protected] @key[type] Counter_Type(Initial_Value : Integer := 1) @key[is]
    @key[procedure] Get_Next(Next_Value : @key[out] Integer);
      --@RI{ Returns the next value on each call, bumping Count}
@@ -116,7 +116,7 @@ For example:]}
 @key[end] Counter_Type;
 @key[protected] @key[body] Counter_Type @key[is] ...]}
 
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[@key[function] Next_Id(Counter : @key[access] Counter_Type) @key[return] Integer @key[is]
     Result : Integer;
 @key[begin]
@@ -124,12 +124,12 @@ For example:]}
     @key[return] Result;
 @key[end] Next_Id;]}
 
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[C : @key[aliased] Counter_Type;
 @key[task] @key[type] T(Who_Am_I : Integer := Next_Id(C'Access));
 @key[task] @key[body] T @key[is] ...]}
 
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[Task_Array : @key[array](1..100) @key[of] @key[aliased] T;
   --@RI{ Array of task elements, each with its own unique ID.}
   --@RI{ We specify "aliased" so we can use Task_Array(I)'Access.}
@@ -139,7 +139,7 @@ For example:]}
 @end{Example}
 @end{Reason}
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[Note that this rule applies to array components
 and record components, but not to protected type components (since
 they are always limited).]}
@@ -248,7 +248,7 @@ If the reserved word @key(aliased) appears in the @nt{component_definition},
 then each component of the array is aliased
 (see @RefSecNum{Access Types}).
 @begin(Ramification)
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00363-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00363-01]}
   @ChgDeleted{Version=[2],Text=[In this case, the nominal subtype cannot be an
   unconstrained discriminated subtype. See @RefSecNum{Record Types}.]}
 @end(Ramification)
@@ -1051,7 +1051,7 @@ No @nt<default_@!expression>s are permitted in a
 @nt<known_@!discriminant_@!part> in a declaration of a tagged
 type @Redundant[or a generic formal type].]}
 @begin(Reason)
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[The all-or-none rule
   is related to the rule that a discriminant constraint shall specify
   values for all discriminants. One could imagine a different rule
@@ -1061,7 +1061,7 @@ type @Redundant[or a generic formal type].]}
   be unconstrained, with the discriminants alterable as part of
   assigning to the object.]}
 
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[Defaults for discriminants of tagged types
   are disallowed so that every object of a
   tagged type is constrained,
@@ -1955,7 +1955,7 @@ defines the (nominal) subtype of the component.
 If the reserved word @key(aliased) appears in the @nt{component_definition},
 then the component is aliased (see @RefSecNum{Access Types}).
 @begin(Ramification)
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00363-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00363-01]}
   @ChgDeleted{Version=[2],Text=[In this case, the nominal subtype cannot be
   an unconstrained discriminated subtype.
   See @RefSecNum{Array Types}.]}

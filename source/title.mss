@@ -1,7 +1,7 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.30 $ $Date: 2006/03/21 22:47:19 $}
+@comment{$Revision: 1.31 $ $Date: 2006/10/17 05:29:47 $}
 
 @begin{ISOOnly}
 @Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[2],New=[200y(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}}}}
@@ -57,7 +57,7 @@
 
 @Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:1995(E)}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[1], New=[@Grow{with Technical Corrigendum 1}], Old=[]}}}
-@Noparanum@Center{@Swiss{@Chg{Version=[2], New=[@Grow{and Amendment 1 (Draft 16)}], Old=[]}}}
+@Noparanum@Center{@Swiss{@Chg{Version=[2], New=[@Grow{and Amendment 1}], Old=[]}}}
 @end{NotISO}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
@@ -71,7 +71,7 @@
 
 @Noparanum@;@Chg{Version=[1], New=[Copyright @Latin1(169) 2000  The MITRE Corporation, Inc.], Old=[]}
 
-@Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2004, 2005  AXE Consultants], Old=[]}
+@Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2004, 2005, 2006  AXE Consultants], Old=[]}
 
 @Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2004, 2005, 2006  Ada-Europe], Old=[]}
 

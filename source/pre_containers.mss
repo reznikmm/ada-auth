@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.55 $ $Date: 2006/06/23 04:24:53 $ $Author: Randy $ }
+@comment{ $Revision: 1.56 $ $Date: 2006/10/17 05:29:46 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2006/06/23 04:24:53 $}
+@Comment{$Date: 2006/10/17 05:29:46 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -6401,7 +6401,7 @@ Text=[The average time complexity of the Insert, Include, Replace, Delete, Exclu
 Find operations of Containers.Hashed_Sets that take an element parameter
 should be @i{O}(log @i<N>). The average time complexity of the subprograms
 of Containers.Hashed_Sets that take a cursor parameter should be @i{O}(1). The
-average time complexity of Containers.Hashed_Sets.Reserve_Capacity should be
+average time complexity of Containers.@!Hashed_Sets.@!Reserve_Capacity should be
 @i{O}(@i<N>).]}]}
 @end{ImplAdvice}
 

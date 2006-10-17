@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.52 $ $Date: 2006/10/14 06:05:20 $ $Author: Randy $ }
+@comment{ $Revision: 1.53 $ $Date: 2006/10/17 05:29:45 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:20 $}
+@Comment{$Date: 2006/10/17 05:29:45 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -539,7 +539,7 @@ component of the Compose_@!From_@!Polar function should be the same as (resp., t
 opposite of) that of the Argument parameter when that parameter has a value of
 zero and the Modulus parameter has a nonnegative (resp., negative) value.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[If Real'Signed_Zeros is true for Numerics.Generic_Complex_Types,
+Text=[If Real'Signed_Zeros is true for Numerics.@!Generic_@!Complex_@!Types,
 a rational treatment of the signs of
 zero results and result components should be provided.]}]}
 @end{ImplAdvice}

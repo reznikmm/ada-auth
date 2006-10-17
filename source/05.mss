@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:18 $}
+@Comment{$Date: 2006/10/17 05:29:45 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.30 $}
+@Comment{$Revision: 1.31 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1072,6 +1072,7 @@ The constant-ness of loop parameters is specified in
 @RefSec{Objects and Named Numbers}.
 @end{DiffWord83}
 
+@RMNewPage
 @LabeledClause{Block Statements}
 
 @begin{Intro}

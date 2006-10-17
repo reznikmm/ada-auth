@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:17 $}
+@Comment{$Date: 2006/10/17 05:29:43 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.74 $}
+@Comment{$Revision: 1.75 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1248,7 +1248,7 @@ Type extension is a new concept.
 @Defn{run-time polymorphism}
 @Defn2{Term=[controlling tag], Sec=(for a call on a dispatching operation)}
 The primitive subprograms of a tagged type@Chg{Version=[2],New=[, the
-subprograms declared by @nt{formal_abstract_subprogram_declaration}s,
+subprograms declared by @nt{formal_@!abstract_@!subprogram_@!declaration}s,
 and the stream attributes of a specific tagged type that are available (see
 @RefSecNum{Stream-Oriented Attributes}) at the end of the declaration list
 where the type is declared],Old=[]}
@@ -1953,9 +1953,9 @@ Static Semantics paragraph, but I won't move them, as it's not worth the time.}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02],ARef=[AI95-00348-01]}
 @Defn{abstract subprogram}
 @Defn2{Term=[subprogram], Sec=(abstract)}
-A subprogram declared by an @nt{abstract_subprogram_declaration}
+A subprogram declared by an @nt{abstract_@!subprogram_@!declaration}
 @Chg{Version=[2],New=[or a
-@nt{formal_abstract_subprogram_declaration} (see @RefSecNum{Formal Subprograms})],
+@nt{formal_@!abstract_@!subprogram_@!declaration} (see @RefSecNum{Formal Subprograms})],
 Old=[(see @RefSecNum{Subprogram Declarations})]}
 is an @i{abstract subprogram}.
 If it is a primitive subprogram of a tagged type,
@@ -3126,10 +3126,10 @@ general @Chg{Version=[2],New=[access type or an
 anonymous access-to-subprogram type. For a general access type,],
 Old=[access-to-variable type;]} the @nt<subtype_mark> denotes
 its @i(designated subtype)@Chg{Version=[2],New=[; if the
-@nt{general_access_modifier} @key{constant} appears, the type is an
+@nt{general_@!access_@!modifier} @key{constant} appears, the type is an
 access-to-constant type; otherwise it is
 an access-to-variable type. For an access-to-subprogram type, the
-@nt{parameter_profile} or @nt{parameter_and_result_profile} denotes its
+@nt{parameter_@!profile} or @nt{parameter_@!and_@!result_@!profile} denotes its
 @i{designated profile}.@Defn2{Term=[designated profile], Sec=(of an anonymous access type)}],
 Old=[. @Redundant[An @nt<access_definition> is used in the
 specification of an access discriminant
@@ -3256,10 +3256,10 @@ otherwise it is constrained.
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
 @ChgAdded{Version=[2],Text=[If a
-@nt{subtype_indication}, @nt{discriminant_specification},
-@nt{parameter_specification}, @nt{parameter_and_result_profile},
-@nt{object_renaming_declaration}, or @nt{formal_object_declaration}
-has a @nt{null_exclusion}, the @nt{subtype_mark} in that construct
+@nt{subtype_@!indication}, @nt{discriminant_@!specification},
+@nt{parameter_@!specification}, @nt{parameter_@!and_@!result_@!profile},
+@nt{object_@!renaming_@!declaration}, or @nt{formal_@!object_@!declaration}
+has a @nt{null_@!exclusion}, the @nt{subtype_@!mark} in that construct
 shall denote an access subtype that does not exclude null.]}
 @begin(Honest)
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
@@ -3480,7 +3480,7 @@ An @nt{incomplete_type_declaration} declares
 an @i{incomplete view} of a
 type and its first subtype; the first subtype is unconstrained if
 a @nt<discriminant_part> appears. If the
-@nt{incomplete_type_declaration} includes the reserved word @key{tagged}, it
+@nt{incomplete_@!type_@!declaration} includes the reserved word @key{tagged}, it
 declares a @i{tagged incomplete view}.@Defn2{Term=[incomplete view],Sec=[tagged]}@Defn{tagged incomplete view}
 An incomplete view of a type is a limited view of the type (see @RefSecNum{Limited Types}).]}
 
@@ -3574,15 +3574,15 @@ visible part.
 @end(Honest)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
-@Chg{Version=[2],New=[If an @nt{incomplete_type_declaration} includes the
-reserved word @key{tagged}, then a @nt{full_type_declaration} that completes
-it shall declare a tagged type. ],Old=[]}If an @nt{incomplete_type_declaration}
-has a @nt{known_discriminant_part},
+@Chg{Version=[2],New=[If an @nt{incomplete_@!type_@!declaration} includes the
+reserved word @key{tagged}, then a @nt{full_@!type_@!declaration} that completes
+it shall declare a tagged type. ],Old=[]}If an @nt{incomplete_@!type_@!declaration}
+has a @nt{known_@!discriminant_@!part},
 then a @nt{full_@!type_@!declaration} that completes it shall have a fully
 conforming (explicit) @nt{known_@!discriminant_@!part}
 (see @RefSecNum(Conformance Rules)).
 @Defn2{Term=[full conformance],Sec=(required)}
-@Redundant[If an @nt{incomplete_type_@!declaration} has no @nt<discriminant_part>
+@Redundant[If an @nt{incomplete_@!type_@!declaration} has no @nt<discriminant_part>
 (or an @nt<unknown_@!discriminant_@!part>),
 then a corresponding @nt{full_@!type_@!declaration} is nevertheless allowed
 to have discriminants,
@@ -3604,7 +3604,7 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
 @end(Discussion)
 @begin(itemize)
   as the @nt{subtype_mark} in the @nt{subtype_indication}
-  of an @nt{access_to_object_definition};
+  of an @nt{access_to_@!object_@!definition};
   @Redundant[the only form of @nt{constraint} allowed in this
   @nt{subtype_indication} is a @nt{discriminant_constraint};]
   @begin(ImplNote)
@@ -3617,9 +3617,9 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01],ARef=[AI95-00412-01]}@ChgNote{The old rule is moved}
   as the @nt{subtype_mark} @Chg{Version=[2],New=[in the @nt{subtype_indication}
-  of a @nt{subtype_declaration}; the @nt{subtype_indication} shall not have a
-  @nt{null_exclusion} or a @nt{constraint};],Old=[defining the subtype
-  of a parameter or result of an @nt{access_to_@!subprogram_definition};]}
+  of a @nt{subtype_declaration}; the @nt{subtype_@!indication} shall not have a
+  @nt{null_@!exclusion} or a @nt{constraint};],Old=[defining the subtype
+  of a parameter or result of an @nt{access_to_@!subprogram_@!definition};]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}@ChgNote{Really moved}
     @ChgDeleted{Version=[2],Text=[This allows, for example, a record to have a
@@ -3668,7 +3668,7 @@ incomplete view, it may also be used:]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}@ChgNote{Really moved}
 @ChgAdded{Version=[2],Text=[as the @nt{subtype_mark} defining the subtype of a
-parameter or result of an @nt{access_to_subprogram_definition}.]}
+parameter or result of an @nt{access_to_@!subprogram_@!definition}.]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[Added]}
     @ChgAdded{Version=[2],Text=[This allows, for example, a record to have a
@@ -4057,7 +4057,7 @@ Run-time accessibility checks are also used,
 since the @LegalityTitle do not cover
 certain cases involving access parameters and generic packages.]
 
-@Leading@;Each master, and each entity and view created by it,
+@Leading@keepnext@;Each master, and each entity and view created by it,
 has an accessibility level:
 @begin{Itemize}
 The accessibility level of a given master is deeper than
@@ -4195,7 +4195,7 @@ type defined by an @nt{access_definition} of an
 of the anonymous access type of an access discriminant
 @Chg{Version=[2],New=[in the @nt{subtype_indication} or
 @nt{qualified_expression} of an @nt{allocator}, or in the @nt{expression} or
-@nt{return_subtype_indication} of a return statement is determined as
+@nt{return_@!subtype_@!indication} of a return statement is determined as
 follows:],Old=[is the same as that of the containing object or associated
 constrained subtype.]}
 

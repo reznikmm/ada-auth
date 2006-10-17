@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:17 $}
+@Comment{$Date: 2006/10/17 05:29:41 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -455,8 +455,7 @@ WARNING: The items that go together are in separate columns!!}
 @ @ @ @ @ @ @ @ @ +@*
 @ @ @ @ @ @ @ @ @ ,@*
 @ @ @ @ @ @ @ @ @ @en@;@*
-@ @ @ @ @ @ @ @ @ .@*@ChgNote{We'd like to remove this line end, but it doesn't work}
-@Chg{Version=[2],New=[],Old=[@ @ @ @ @ @ @ @ @ /]}
+@ @ @ @ @ @ @ @ @ .@Chg{Version=[2],New=[],Old=[@*@ @ @ @ @ @ @ @ @ /]}@ChgNote{We'd like to remove this line end, but it doesn't work}
 @NewColumn
 @NoParanum@;name
 
@@ -470,8 +469,7 @@ asterisk, multiply@*
 plus sign@*
 comma@*
 hyphen-minus, minus@*
-full stop, dot, point@*@ChgNote{We'd like to remove this line end, but it doesn't work}
-@Chg{Version=[2],New=[],Old=[solidus, divide]}
+full stop, dot, point@Chg{Version=[2],New=[],Old=[@*solidus, divide]}@ChgNote{We'd like to remove this line end, but it doesn't work}
 
 @NewColumn
 @NoParanum@;@ @ @Chg{Version=[2],New=[graphic ],Old=[@ @ @ @ ]}symbol
@@ -680,6 +678,7 @@ of a compound delimiter, or as a character of a @nt{comment},
 @nt{string_literal}, @nt{character_literal}, or
 @nt{numeric_literal}.
 
+@rmnewpage@ChgNote{Ada 2005 only}
 @Leading@keepnext@;The following names are used when referring to compound
 delimiters:@table{Columns=[2],
 Alignment=[Allleft],FirstColWidth=[1],LastColWidth=[4],
@@ -1668,7 +1667,6 @@ informative annex.
 @end{DiffWord95}
 
 
-@NewPage
 @LabeledClause{Reserved Words}
 
 @begin{Syntax}

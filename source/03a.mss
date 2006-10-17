@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:17 $}
+@Comment{$Date: 2006/10/17 05:29:41 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1587,7 +1587,7 @@ The following (and no others) represent constants:
   a @nt<selected_component>, @nt<indexed_component>,
   @nt<slice>, or view conversion of a constant.
   @begin{Honest}
-    @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00114-01]}
+    @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00114-01]}
     @ChgNote{This is just wrong, even for Ada 95.}
     @ChgDeleted{Version=[2],Text=[A noninvertible view conversion to a
     general access type
@@ -2605,7 +2605,7 @@ only if the parent type is limited.]}
 @ChgNote{This rule is normatively in 7.5, and we don't want it scattered
 everywhere.}
 @begin{Honest}
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00419-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00419-01]}
   @ChgDeleted{Version=[2],Text=[The derived type can become nonlimited if
   the derivation takes place in the visible part of a child package,
   and the parent type is nonlimited as viewed from the
@@ -4526,7 +4526,7 @@ enumeration literals.]}
   as enumeration literals, they would hide other nonoverloadable declarations
   with the same names in @key[use]-d packages.]}
 
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
   @ChgDeleted{Version=[2],Text=[ISO 10646 has not defined the meaning of
   all of the code positions
   from 0100 through FFFD, but they are all considered graphic characters by
@@ -5267,7 +5267,7 @@ then the implementation should raise Program_Error.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 This is particularly important for enumeration types with
 noncontiguous internal codes specified by an
-@nt<enumeration_representation_clause>.
+@nt<enumeration_@!representation_@!clause>.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Program_Error should be raised for the evaluation of S'Pos for an
 enumeration type, if the value of the operand does not correspond
