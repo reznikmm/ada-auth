@@ -42,6 +42,7 @@
     --  2/10/06 - RLB - Split from base package.
     --  9/22/06 - RLB - Revised to use Clause_Number_Type, and to support
     --			Subsubclauses.
+    -- 10/16/06 - RLB - Added definition of old non-terminals for NT linking.
 
 separate(ARM_Format)
 procedure Scan (Format_Object : in out Format_Type;
@@ -521,13 +522,17 @@ procedure Scan (Format_Object : in out Format_Type;
 			    Ada.Characters.Handling.To_Lower (
 				Get_Current_Item (Format_Object, Input_Object,
 				    Non_Terminal(1..NT_Len))); -- Handle embedded @Chg.
+			The_Old_Non_Terminal : constant String :=
+			    Ada.Characters.Handling.To_Lower (
+				Get_Old_Item (Format_Object, Input_Object,
+				    Non_Terminal(1..NT_Len))); -- Handle embedded @Chg.
 		    begin
 			if Ada.Strings.Fixed.Index (The_Non_Terminal, "@") /= 0 then
 			    -- Still embedded commands, do not register.
 			    Ada.Text_IO.Put_Line ("** Saw Non-Terminal with embedded commands: " &
 				Non_Terminal(1..NT_Len) & " in " & Clause_String (Format_Object));
 			elsif The_Non_Terminal = "" then
-			    null; -- Delete Non-Terminal, nothing to do.
+			    null; -- Deleted Non-Terminal, nothing to do.
 			else
 			    -- Save the non-terminal:
 			    declare
@@ -539,6 +544,25 @@ procedure Scan (Format_Object : in out Format_Type;
 			              Link_Target => Link_Target);
 			    end;
 --Ada.Text_IO.Put_Line ("%% Saw simple Non-Terminal: " & The_Non_Terminal & " in "
+--   & Clause_String (Format_Object));
+			end if;
+			if The_Old_Non_Terminal = "" then
+			    null; -- No old Non-Terminal, nothing to do.
+			elsif ARM_Syntax.Non_Terminal_Clause (The_Old_Non_Terminal) /= "" then
+			    null; -- This non-terminal is already defined;
+				-- that presumably is a *new* definition,
+				-- we'll use that instead of this one.
+			else
+			    -- Save the non-terminal:
+			    declare
+			        Link_Target : ARM_Syntax.Target_Type;
+			    begin
+			         ARM_Syntax.Add_Non_Terminal
+			             (NT_Name => The_Old_Non_Terminal,
+			              For_Clause => Clause_String (Format_Object),
+			              Link_Target => Link_Target);
+			    end;
+--Ada.Text_IO.Put_Line ("%% Saw simple old Non-Terminal: " & The_Old_Non_Terminal & " in "
 --   & Clause_String (Format_Object));
 			end if;
 		    end;

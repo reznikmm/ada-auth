@@ -230,6 +230,8 @@ package body ARM_Format is
     --			a real non-terminal.
     --		- RLB - Added code to handle simple embedded commands in
     --			@nt{} to generate links.
+    -- 10/16/06 - RLB - Added code to register deleted non-terminals (so
+    --			that they can be linked).
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -1037,6 +1039,139 @@ package body ARM_Format is
     end Clause_String;
 
 
+    Do_Not_Display_Text : constant ARM_Output.Change_Type := ARM_Output.Both;
+        -- Special meaning for Calc_Change_Disposition, below.
+    procedure Calc_Change_Disposition
+	        (Format_Object : in Format_Type;
+		 Version       : in ARM_Contents.Change_Version_Type;
+		 Operation     : in ARM_Output.Change_Type;
+		 Text_Kind     : out ARM_Output.Change_Type) is
+        -- Determine the appropriate disposition for text.
+        -- The text is to be inserted if Operation is Insertion;
+        -- and deleted if Text_Kind is Operation.
+        -- The appropriate Change_Type to use is returned in Text_Kind.
+        -- If Text_Kind is None, the text should be displayed normally.
+        -- If Text_Kind is Insertion, the text should be displayed as inserted.
+        -- If Text_Kind is Deletion, the text should be displayed as deletion.
+        -- If Text_Kind is Do_Not_Display_Text (same as Both), the
+        --   text should not be shown at all.
+        -- Program_Error is raised if Operation is None or Both.
+        -- This routine assumes that we are not nested
+        -- in some other change item.
+        use type ARM_Output.Change_Type;
+    begin
+        if Operation = ARM_Output.None or else
+	   Operation = ARM_Output.Both then
+	    raise Program_Error;
+        end if;
+        -- We can't check for nesting, because in some cases it happens
+        -- harmlessly (i.e. Added_Pragma_Syn).
+
+        case Format_Object.Changes is
+	    when ARM_Format.Old_Only =>
+	        -- Display only the original version ('0').
+	        if Operation = ARM_Output.Insertion then
+		    if Version > '0' then
+		        Text_Kind := Do_Not_Display_Text; -- Newer than original.
+		    else
+		        Text_Kind := ARM_Output.None; -- Display normally.
+		    end if;
+	        else -- Deletion
+		    if Version > '0' then
+		        Text_Kind := ARM_Output.None; -- Display normally, not deleted in original code.
+		    else
+		        Text_Kind := Do_Not_Display_Text; -- Deleted in original.
+		    end if;
+	        end if;
+	    when ARM_Format.New_Only =>
+	        -- Display only the version
+	        -- Format_Object.Change_Version, no insertions or deletions.
+	        if Operation = ARM_Output.Insertion then
+		    if Version > Format_Object.Change_Version then
+		        -- Change version newer than we're displaying;
+		        -- ignore the item.
+		        Text_Kind := Do_Not_Display_Text;
+		    else
+		        -- Display the change normally.
+		        Text_Kind := ARM_Output.None;
+		    end if;
+	        else -- Deletion
+		    if Version > Format_Object.Change_Version then
+		        -- Change version newer than we're displaying;
+		        -- leave the item in and display normally.
+		        Text_Kind := ARM_Output.None;
+		    else
+		        -- Delete the item.
+		        Text_Kind := Do_Not_Display_Text;
+		    end if;
+	        end if;
+	    when ARM_Format.Changes_Only =>
+	        -- Display only the the changes for version
+	        -- Format_Object.Change_Version, older changes
+	        -- are applied and newer changes are ignored.
+	        if Operation = ARM_Output.Insertion then
+		    if Version > Format_Object.Change_Version then
+		        -- Change version is newer than we're displaying;
+		        -- ignore the item.
+		        Text_Kind := Do_Not_Display_Text;
+		    elsif Version < Format_Object.Change_Version then
+		        -- Change version is older than we're displaying;
+		        -- display the change normally.
+		        Text_Kind := ARM_Output.None;
+		    else
+		        -- The correct version, display the change
+		        -- as an insertion.
+		        Text_Kind := ARM_Output.Insertion;
+		    end if;
+	        else -- Deletion.
+		    if Version > Format_Object.Change_Version then
+		        -- Change version is newer than we're displaying;
+		        -- the item isn't deleted yet, display the change
+		        -- normally.
+		        Text_Kind := ARM_Output.None;
+		    elsif Version < Format_Object.Change_Version then
+		        -- Change version is older than we're displaying;
+		        -- the item is deleted, so ignore the item.
+		        Text_Kind := Do_Not_Display_Text;
+		    else
+		        -- The correct version, display the change
+		        -- as a deletion.
+		        Text_Kind := ARM_Output.Deletion;
+		    end if;
+	        end if;
+	    when ARM_Format.Show_Changes |
+		 ARM_Format.New_Changes =>
+	        -- Display all of the changes up to version
+	        -- Format_Object.Change_Version, newer changes are
+	        -- ignored. (New_Changes shows deletions as a single
+	        -- character for older versions of Word, but otherwise
+	        -- is the same.)
+	        if Operation = ARM_Output.Insertion then
+		    if Version > Format_Object.Change_Version then
+		        -- Change version is newer than we're displaying;
+		        -- ignore the item.
+		        Text_Kind := Do_Not_Display_Text;
+		    else
+		        -- This version or older, display the change
+		        -- as an insertion.
+		        Text_Kind := ARM_Output.Insertion;
+		    end if;
+	        else -- Deletion.
+		    if Version > Format_Object.Change_Version then
+		        -- Change version is newer than we're displaying;
+		        -- the item isn't deleted yet, display the change
+		        -- normally.
+		        Text_Kind := ARM_Output.None;
+		    else
+		        -- The correct version, display the change
+		        -- as a deletion.
+		        Text_Kind := ARM_Output.Deletion;
+		    end if;
+	        end if;
+        end case;
+    end Calc_Change_Disposition;
+
+
     function Get_Current_Item (Format_Object : in Format_Type;
 			       Input_Object : in ARM_Input.Input_Type'Class;
 			       Item : in String) return String is
@@ -1047,6 +1182,9 @@ package body ARM_Format is
         Open_Cnt : Natural;
 	My_Item : constant String (1 .. Item'Length) := Item;
 		-- Just to slide the bounds.
+	Version : ARM_Contents.Change_Version_Type := '0';
+	Disposition : ARM_Output.Change_Type;
+        use type ARM_Output.Change_Type;
     begin
         if My_Item'Length < 11 or else
 	   My_Item (1) /= '@' or else
@@ -1057,16 +1195,25 @@ package body ARM_Format is
 	if Ada.Characters.Handling.To_Lower (My_Item (6 .. 9)) = "new=" then
 	    -- No version parameter:
 	    New_Pos := 6;
+	    Version := '1';
 	elsif My_Item'Length > 22 and then
 	    Ada.Characters.Handling.To_Lower (My_Item (6 .. 14)) = "version=[" and then
 	    Ada.Characters.Handling.To_Lower (My_Item (16 .. 21)) = "],new=" then
 	    New_Pos := 18;
+	    Version := My_Item(15);
 	else
 Ada.Text_IO.Put_Line ("%% Oops, can't find either Version or New in item chg command, line " & ARM_Input.Line_String (Input_Object));
 	    return My_Item;
 	end if;
-        if Format_Object.Changes = Old_Only then
-	    -- Find the end of the "New" parameter, and return it.
+
+	Calc_Change_Disposition (Format_Object => Format_Object,
+		 Version => Version,
+		 Operation => ARM_Output.Insertion,
+		 Text_Kind => Disposition);
+
+	if Disposition = Do_Not_Display_Text then
+	    -- Find the end of the "New" parameter, and return the "Old"
+	    -- parameter.
 	    Close_Ch := ARM_Input.Get_Close_Char (
 	        My_Item(New_Pos+4));
 	    Open_Cnt := 1;
@@ -1108,8 +1255,6 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg old command, line " &
 Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " & ARM_Input.Line_String (Input_Object));
 	    return My_Item (New_Pos+5 .. My_Item'Length);
         else -- Some new format, use the new name.
-	    -- Note: We should really use the version here, but that gets
-	    -- really messy.
 	    -- Find the end of the "New" parameter, and
 	    -- return it.
 	    Close_Ch := ARM_Input.Get_Close_Char (My_Item(New_Pos+4));
@@ -1131,6 +1276,97 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of NT chg new command, line " & A
 	    return My_Item (New_Pos+5 .. My_Item'Last);
         end if;
     end Get_Current_Item;
+
+
+    function Get_Old_Item (Format_Object : in Format_Type;
+		           Input_Object : in ARM_Input.Input_Type'Class;
+		           Item : in String) return String is
+        -- Return the "old" item from Item, or nothing if there is no
+	-- old item. This is nothing unless Item includes an @Chg,
+	-- *and* the new item in the @Chg is displayed.
+	New_Pos : Natural;
+        Close_Ch : Character;
+        Open_Cnt : Natural;
+	My_Item : constant String (1 .. Item'Length) := Item;
+		-- Just to slide the bounds.
+	Version : ARM_Contents.Change_Version_Type := '0';
+	Disposition : ARM_Output.Change_Type;
+        use type ARM_Output.Change_Type;
+    begin
+        if My_Item'Length < 11 or else
+	   My_Item (1) /= '@' or else
+	   Ada.Characters.Handling.To_Lower (My_Item (2 .. 4)) /= "chg" then
+	    -- No @Chg command here.
+	    return "";
+	end if;
+	if Ada.Characters.Handling.To_Lower (My_Item (6 .. 9)) = "new=" then
+	    -- No version parameter:
+	    New_Pos := 6;
+	    Version := '1';
+	elsif My_Item'Length > 22 and then
+	    Ada.Characters.Handling.To_Lower (My_Item (6 .. 14)) = "version=[" and then
+	    Ada.Characters.Handling.To_Lower (My_Item (16 .. 21)) = "],new=" then
+	    New_Pos := 18;
+	    Version := My_Item(15);
+	else
+Ada.Text_IO.Put_Line ("%% Oops, can't find either Version or New in item chg command, line " & ARM_Input.Line_String (Input_Object));
+	    return "";
+	end if;
+
+	Calc_Change_Disposition (Format_Object => Format_Object,
+		 Version => Version,
+		 Operation => ARM_Output.Insertion,
+		 Text_Kind => Disposition);
+
+	if Disposition /= Do_Not_Display_Text then
+	    -- Some new item was shown.
+	    -- Find the end of the "New" parameter, and return the "Old"
+	    -- parameter.
+	    Close_Ch := ARM_Input.Get_Close_Char (
+	        My_Item(New_Pos+4));
+	    Open_Cnt := 1;
+	    for I in New_Pos+5 .. My_Item'Last loop
+	        if My_Item(I) = My_Item(New_Pos+4) then
+		    Open_Cnt := Open_Cnt + 1;
+	        elsif My_Item(I) = Close_Ch then
+		    if Open_Cnt <= 1 then
+		        -- OK, the end of the "New" parameter is at 'I'.
+		        if My_Item'Last < I+7 or else
+			   My_Item (I+1) /= ',' or else
+			   Ada.Characters.Handling.To_Lower (My_Item (I+2 .. I+4)) /= "old" or else
+			   My_Item (I+5) /= '=' then
+			    exit; -- Heck if I know.
+		        end if;
+		        Close_Ch := ARM_Input.Get_Close_Char (
+			    My_Item(I+6));
+		        Open_Cnt := 1;
+		        for J in I+7 .. My_Item'Last loop
+			    if My_Item(J) = My_Item(I+6) then
+			        Open_Cnt := Open_Cnt + 1;
+			    elsif My_Item(J) = Close_Ch then
+			        if Open_Cnt <= 1 then
+				    return My_Item (I + 7 .. J - 1);
+			        else
+				    Open_Cnt := Open_Cnt - 1;
+			        end if;
+			    -- else continue looking.
+			    end if;
+		        end loop;
+Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg old command, line " & ARM_Input.Line_String (Input_Object));
+		        return My_Item (I + 7 .. My_Item'Last);
+		    else
+		        Open_Cnt := Open_Cnt - 1;
+		    end if;
+	        -- else continue looking.
+	        end if;
+	    end loop;
+Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " & ARM_Input.Line_String (Input_Object));
+	    return "";
+        else -- The new item wasn't displayed, so we already have used the
+	     -- old item.
+	    return "";
+        end if;
+    end Get_Old_Item;
 
 
     procedure Scan (Format_Object : in out Format_Type;
@@ -3038,138 +3274,6 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	end Parse_Tab_Stops;
 
 
-	Do_Not_Display_Text : constant ARM_Output.Change_Type := ARM_Output.Both;
-	    -- Special meaning for Calc_Change_Disposition, below.
-	procedure Calc_Change_Disposition
-		    (Version : in ARM_Contents.Change_Version_Type;
-		     Operation : in ARM_Output.Change_Type;
-		     Text_Kind : out ARM_Output.Change_Type) is
-	    -- Determine the appropriate disposition for text.
-	    -- The text is to be inserted if Operation is Insertion;
-	    -- and deleted if Text_Kind is Operation.
-	    -- The appropriate Change_Type to use is returned in Text_Kind.
-	    -- If Text_Kind is None, the text should be displayed normally.
-	    -- If Text_Kind is Insertion, the text should be displayed as inserted.
-	    -- If Text_Kind is Deletion, the text should be displayed as deletion.
-	    -- If Text_Kind is Do_Not_Display_Text (same as Both), the
-	    --   text should not be shown at all.
-	    -- Program_Error is raised if Operation is None or Both.
-	    -- This routine assumes that we are not nested
-	    -- in some other change item.
-	    use type ARM_Output.Change_Type;
-	begin
-	    if Operation = ARM_Output.None or else
-	       Operation = ARM_Output.Both then
-		raise Program_Error;
-	    end if;
-	    -- We can't check for nesting, because in some cases it happens
-	    -- harmlessly (i.e. Added_Pragma_Syn).
-
-	    case Format_Object.Changes is
-		when ARM_Format.Old_Only =>
-		    -- Display only the original version ('0').
-		    if Operation = ARM_Output.Insertion then
-			if Version > '0' then
-			    Text_Kind := Do_Not_Display_Text; -- Newer than original.
-			else
-			    Text_Kind := ARM_Output.None; -- Display normally.
-			end if;
-		    else -- Deletion
-			if Version > '0' then
-			    Text_Kind := ARM_Output.None; -- Display normally, not deleted in original code.
-			else
-			    Text_Kind := Do_Not_Display_Text; -- Deleted in original.
-			end if;
-		    end if;
-		when ARM_Format.New_Only =>
-		    -- Display only the version
-		    -- Format_Object.Change_Version, no insertions or deletions.
-		    if Operation = ARM_Output.Insertion then
-			if Version > Format_Object.Change_Version then
-			    -- Change version newer than we're displaying;
-			    -- ignore the item.
-			    Text_Kind := Do_Not_Display_Text;
-			else
-			    -- Display the change normally.
-			    Text_Kind := ARM_Output.None;
-			end if;
-		    else -- Deletion
-			if Version > Format_Object.Change_Version then
-			    -- Change version newer than we're displaying;
-			    -- leave the item in and display normally.
-			    Text_Kind := ARM_Output.None;
-			else
-			    -- Delete the item.
-			    Text_Kind := Do_Not_Display_Text;
-			end if;
-		    end if;
-		when ARM_Format.Changes_Only =>
-		    -- Display only the the changes for version
-		    -- Format_Object.Change_Version, older changes
-		    -- are applied and newer changes are ignored.
-		    if Operation = ARM_Output.Insertion then
-			if Version > Format_Object.Change_Version then
-			    -- Change version is newer than we're displaying;
-			    -- ignore the item.
-			    Text_Kind := Do_Not_Display_Text;
-			elsif Version < Format_Object.Change_Version then
-			    -- Change version is older than we're displaying;
-			    -- display the change normally.
-			    Text_Kind := ARM_Output.None;
-			else
-			    -- The correct version, display the change
-			    -- as an insertion.
-			    Text_Kind := ARM_Output.Insertion;
-			end if;
-		    else -- Deletion.
-			if Version > Format_Object.Change_Version then
-			    -- Change version is newer than we're displaying;
-			    -- the item isn't deleted yet, display the change
-			    -- normally.
-			    Text_Kind := ARM_Output.None;
-			elsif Version < Format_Object.Change_Version then
-			    -- Change version is older than we're displaying;
-			    -- the item is deleted, so ignore the item.
-			    Text_Kind := Do_Not_Display_Text;
-			else
-			    -- The correct version, display the change
-			    -- as a deletion.
-			    Text_Kind := ARM_Output.Deletion;
-			end if;
-		    end if;
-		when ARM_Format.Show_Changes |
-		     ARM_Format.New_Changes =>
-		    -- Display all of the changes up to version
-		    -- Format_Object.Change_Version, newer changes are
-		    -- ignored. (New_Changes shows deletions as a single
-		    -- character for older versions of Word, but otherwise
-		    -- is the same.)
-		    if Operation = ARM_Output.Insertion then
-			if Version > Format_Object.Change_Version then
-			    -- Change version is newer than we're displaying;
-			    -- ignore the item.
-			    Text_Kind := Do_Not_Display_Text;
-			else
-			    -- This version or older, display the change
-			    -- as an insertion.
-			    Text_Kind := ARM_Output.Insertion;
-			end if;
-		    else -- Deletion.
-			if Version > Format_Object.Change_Version then
-			    -- Change version is newer than we're displaying;
-			    -- the item isn't deleted yet, display the change
-			    -- normally.
-			    Text_Kind := ARM_Output.None;
-			else
-			    -- The correct version, display the change
-			    -- as a deletion.
-			    Text_Kind := ARM_Output.Deletion;
-			end if;
-		    end if;
-	    end case;
-	end Calc_Change_Disposition;
-
-
         procedure Write_Subindex (
 		            Subindex_Object : in out ARM_Subindex.Subindex_Type;
 		            Format_Object : in out Format_Type;
@@ -3229,7 +3333,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 
 	    -- Determine what to do with the "Language-Defined" entry:
 	    Calc_Change_Disposition (
-	        Version => '2',
+	        Format_Object => Format_Object,
+		Version => '2',
 	        Operation => ARM_Output.Deletion,
 	        Text_Kind => Disposition);
 	    if Entity_Kind_Name'Length = 0 or else
@@ -3363,6 +3468,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 
 	    -- Determine what to do with the "Language-Defined" entry:
 	    Calc_Change_Disposition (
+	        Format_Object => Format_Object,
 	        Version => '2',
 	        Operation => ARM_Output.Deletion,
 	        Text_Kind => Disposition);
@@ -3846,6 +3952,16 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	    end Get_NT;
 
 
+	    function Get_Old_NT return String is
+	        -- Local routine:
+	        -- Return the "current" non-terminal from
+	        -- the Syntax_NT string. Handles @Chg.
+	    begin
+		return Get_Old_Item (Format_Object, Input_Object,
+		    Format_Object.Syntax_NT (1 .. Format_Object.Syntax_NT_Len));
+	    end Get_Old_NT;
+
+
 	    procedure Get_Change_Version (Is_First : in Boolean;
 					  Version : out Character) is
 		-- Get a parameter named "Version", containing a character
@@ -4049,7 +4165,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	        if (Kind = ARM_Database.Inserted or else
 		    Kind = ARM_Database.Inserted_Normal_Number) then
 		    Calc_Change_Disposition
-		        (Version => Version,
+		        (Format_Object => Format_Object,
+		         Version => Version,
 			 Operation => ARM_Output.Insertion,
 			 Text_Kind => Local_Change);
 --Ada.Text_IO.Put_Line ("  Insert, Local_Change=" &
@@ -4071,7 +4188,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		      Kind = ARM_Database.Deleted_No_Delete_Message or else
 		      Kind = ARM_Database.Deleted_Inserted_Number_No_Delete_Message then
 		    Calc_Change_Disposition
-		        (Version => Version,
+		        (Format_Object => Format_Object,
+		         Version => Version,
 			 Operation => ARM_Output.Deletion,
 			 Text_Kind => Local_Change);
 --Ada.Text_IO.Put_Line ("  Delete, Local_Change=" &
@@ -4325,6 +4443,10 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 				Ada.Characters.Handling.To_Lower (Get_NT);
 			    Link_Target : ARM_Syntax.Target_Type :=
 			        ARM_Syntax.Non_Terminal_Link_Target (Lower_NT);
+			    Lower_Old_NT : constant String :=
+				Ada.Characters.Handling.To_Lower (Get_Old_NT);
+			    Old_Link_Target : ARM_Syntax.Target_Type :=
+			        ARM_Syntax.Non_Terminal_Link_Target (Lower_Old_NT);
 		        begin
 			    if Lower_NT /= "" then
 			        if Clause_String (Format_Object) /=
@@ -4338,6 +4460,24 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			            Target => Link_Target);
 			    -- else the Non-Terminal was deleted, no
 			    -- anchor is needed.
+			    end if;
+			    if Lower_Old_NT /= "" then
+			        if Clause_String (Format_Object) /=
+				    ARM_Syntax.Non_Terminal_Clause (Lower_Old_NT) then
+				    -- This can happen if an item is inserted
+				    -- on one place and deleted in another.
+				    -- We'll assume this isn't an error and just
+				    -- do nothing here.
+			            --Ada.Text_IO.Put_Line ("  %% Clause mismatch for old non-terminal: Is=" &
+				    --    Clause_String (Format_Object) & "; Was=" & ARM_Syntax.Non_Terminal_Clause (Lower_Old_NT) &
+				    --    "; NT=" & Lower_Old_NT & "; on line " & ARM_Input.Line_String (Input_Object));
+				    null;
+				else
+		                    ARM_Output.Local_Target (Output_Object,
+			                Text => "",
+			                Target => Old_Link_Target);
+			        end if;
+			    -- else there was no old Non-Terminal.
 			    end if;
 			end;
 		    end if;
@@ -4741,15 +4881,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 				        ARM_Syntax.Non_Terminal_Link_Target (Lower_NT);
 			        begin
 				    if Clause = "" then -- Not found. No link, but error message:
-				        if Lower_NT'Length > 3 and then
-					    Lower_NT(Lower_NT'Last-2..Lower_NT'Last) = "::=" then
-					    -- The syntax summary starts with "NT ::="; no error (and no
-					    -- link wanted).
-					    null;
-				        else
-					    Ada.Text_IO.Put_Line ("  ?? Unknown non-terminal " &
-					        Name(1..Len) & " on line " & ARM_Input.Line_String (Input_Object));
-				        end if;
+				        Ada.Text_IO.Put_Line ("  ?? Unknown non-terminal " &
+					    Name(1..Len) & " on line " & ARM_Input.Line_String (Input_Object));
 				        ARM_Output.Ordinary_Text (Output_Object, Name(1..Len));
 				    else
 				        ARM_Output.Local_Link (Output_Object, Text => Name(1..Len),
@@ -5759,6 +5892,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 
 		        -- Determine what to do with the "Language-Defined" entry:
 		        Calc_Change_Disposition (
+		            Format_Object => Format_Object,
 			    Version => '2',
 			    Operation => ARM_Output.Deletion,
 			    Text_Kind => Disposition);
@@ -6179,6 +6313,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			end if;
 
 		        Calc_Change_Disposition (
+		            Format_Object => Format_Object,
 			    Version => Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version,
 			    Operation => ARM_Output.Insertion,
 			    Text_Kind => Disposition);
@@ -6203,6 +6338,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			end if;
 
 		        Calc_Change_Disposition (
+		            Format_Object => Format_Object,
 			    Version => Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version,
 			    Operation => ARM_Output.Deletion,
 			    Text_Kind => Disposition);
@@ -6236,11 +6372,19 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			    Name, Len);
 			if Format_Object.Syntax_NT_Len /= 0 then
 			    -- Generate a syntax cross-reference entry.
-			    ARM_Syntax.Add_Xref (
-			         Name => Name(1..Len),
-			         Used_In => Get_NT,
-			         Clause => Clause_String (Format_Object),
-				 Defined => Defined);
+			    declare
+				NT : constant String := Get_NT;
+			    begin
+				if NT /= "" then
+			            ARM_Syntax.Add_Xref (
+			                 Name => Name(1..Len),
+			                 Used_In => Get_NT,
+			                 Clause => Clause_String (Format_Object),
+				         Defined => Defined);
+				-- else this is a deleted production that is
+				-- still displayed; forget the XRef.
+				end if;
+			    end;
 			end if;
 
 			-- Index the non-terminal:
@@ -6470,7 +6614,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			        Format_Object.Glossary_Change_Kind = ARM_Database.Inserted_Normal_Number) then
 				Format_Object.Glossary_Change_Kind := ARM_Database.Inserted;
 				Calc_Change_Disposition
-				    (Version => Format_Object.Glossary_Version,
+			            (Format_Object => Format_Object,
+				     Version => Format_Object.Glossary_Version,
 				     Operation => ARM_Output.Insertion,
 				     Text_Kind => Local_Change);
 				case Local_Change is
@@ -6491,7 +6636,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_Inserted_Number_No_Delete_Message) then
 				Format_Object.Glossary_Change_Kind := ARM_Database.Deleted;
 				Calc_Change_Disposition
-				    (Version => Format_Object.Glossary_Version,
+			            (Format_Object => Format_Object,
+				     Version => Format_Object.Glossary_Version,
 				     Operation => ARM_Output.Deletion,
 				     Text_Kind => Local_Change);
 				case Local_Change is
@@ -6830,6 +6976,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version := Version;
 
 		        Calc_Change_Disposition (
+		            Format_Object => Format_Object,
 			    Version => Version,
 			    Operation => ARM_Output.Insertion,
 			    Text_Kind => Disposition);
@@ -7074,6 +7221,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			        end if;
 
 			        Calc_Change_Disposition (
+		            	    Format_Object => Format_Object,
 				    Version => Version,
 				    Operation => ARM_Output.Insertion,
 				    Text_Kind => Disposition);
@@ -7212,6 +7360,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 				use type ARM_Output.Change_Type;
 			    begin
 			        Calc_Change_Disposition (
+		            	    Format_Object => Format_Object,
 				    Version => Version,
 				    Operation => ARM_Output.Insertion,
 				    Text_Kind => Disposition);
@@ -7318,6 +7467,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version := Version;
 
 		        Calc_Change_Disposition (
+	            	    Format_Object => Format_Object,
 			    Version => Version,
 			    Operation => ARM_Output.Insertion,
 			    Text_Kind => Disposition);
@@ -8031,6 +8181,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			    -- Generate an insertion, there is a Text parameter.
 
 			    Calc_Change_Disposition (
+				Format_Object => Format_Object,
 				Version => Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version,
 				Operation => ARM_Output.Insertion,
 				Text_Kind => Disposition);
@@ -8084,6 +8235,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			    -- Generate a deletion.
 
 			    Calc_Change_Disposition (
+				Format_Object => Format_Object,
 				Version => Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version,
 				Operation => ARM_Output.Deletion,
 				Text_Kind => Disposition);
@@ -8555,6 +8707,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 				    begin
 
 				        Calc_Change_Disposition (
+					    Format_Object => Format_Object,
 					    Version => Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version,
 					    Operation => ARM_Output.Insertion,
 					    Text_Kind => Disposition);
@@ -8938,9 +9091,11 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		    ARM_Output.Set_Columns (Output_Object, Number_of_Columns => 1);
 
 		when Syntax_Summary =>
+--Ada.Text_IO.Put_Line ("%% Generate Syntax summary");
 		    Syn_Report;
 
 		when Syntax_XRef =>
+--Ada.Text_IO.Put_Line ("%% Generate Syntax xref");
 		    Syn_XRef;
 
 		when Glossary_List =>
@@ -9493,6 +9648,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			use type ARM_Output.Change_Type;
 		    begin
 		        Calc_Change_Disposition (
+			    Format_Object => Format_Object,
 			    Version => Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version,
 			    Operation => ARM_Output.Insertion,
 			    Text_Kind => Disposition);
@@ -9645,11 +9801,13 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			    Disposition := ARM_Output.None; -- Normal text.
 			elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Command = Added_Syntax_Rule then
 		            Calc_Change_Disposition (
+				Format_Object => Format_Object,
 			        Version => Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version,
 			        Operation => ARM_Output.Insertion,
 			        Text_Kind => Disposition);
 			else -- Deleted_Syntax_Rule
 		            Calc_Change_Disposition (
+				Format_Object => Format_Object,
 			        Version => Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version,
 			        Operation => ARM_Output.Deletion,
 			        Text_Kind => Disposition);
@@ -9667,22 +9825,23 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			    if Disposition = ARM_Output.None then
 			        -- Display the text normally.
 			        ARM_Syntax.Insert_Rule (For_Clause => Clause_String (Format_Object),
-			            Rule => "@nt{" & Format_Object.Syntax_NT(1..Format_Object.Syntax_NT_Len) &
+			            Rule => "@ntf{" & Format_Object.Syntax_NT(1..Format_Object.Syntax_NT_Len) &
 				        " ::=} " & Text_Buffer(1..Text_Buffer_Len),
 			            Tabset => Format_Object.Syntax_Tab(1..Format_Object.Syntax_Tab_Len));
 		            elsif Disposition = ARM_Output.Deletion then
 			        ARM_Syntax.Insert_Rule (For_Clause => Clause_String (Format_Object),
-			            Rule => "@nt{" & Format_Object.Syntax_NT(1..Format_Object.Syntax_NT_Len) &
+			            Rule => "@ntf{" & Format_Object.Syntax_NT(1..Format_Object.Syntax_NT_Len) &
 				        "@Chg{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version &
 					"],New=[],Old=[ ::=]}} " & Text_Buffer(1..Text_Buffer_Len),
 			            Tabset => Format_Object.Syntax_Tab(1..Format_Object.Syntax_Tab_Len));
 			    else -- Insertion.
 			        ARM_Syntax.Insert_Rule (For_Clause => Clause_String (Format_Object),
-			            Rule => "@nt{" & Format_Object.Syntax_NT(1..Format_Object.Syntax_NT_Len) &
+			            Rule => "@ntf{" & Format_Object.Syntax_NT(1..Format_Object.Syntax_NT_Len) &
 				        "@Chg{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version &
 					"],New=[ ::=],Old=[]}} " & Text_Buffer(1..Text_Buffer_Len),
 			            Tabset => Format_Object.Syntax_Tab(1..Format_Object.Syntax_Tab_Len));
 			    end if;
+			    -- Note: The LHS non-terminals aren't linked as usual.
 
 			    Check_End_Paragraph; -- End the paragraph, so the
 					         -- next rule gets its own.
@@ -9860,6 +10019,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 				    use type ARM_Output.Change_Type;
 			        begin
 			            Calc_Change_Disposition (
+					Format_Object => Format_Object,
 				        Version => Format_Object.Attr_Version,
 				        Operation => ARM_Output.Insertion,
 				        Text_Kind => Disposition);
@@ -9980,6 +10140,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			        use type ARM_Output.Change_Type;
 			    begin
 			        Calc_Change_Disposition (
+				    Format_Object => Format_Object,
 				    Version => Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version,
 				    Operation => ARM_Output.Insertion,
 				    Text_Kind => Disposition);
@@ -10274,6 +10435,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		        Format_Object.In_Change := False;
 
 		        Calc_Change_Disposition (
+			    Format_Object => Format_Object,
 			    Version => Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version,
 			    Operation => ARM_Output.Insertion,
 			    Text_Kind => Disposition);
@@ -10316,6 +10478,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		        Format_Object.In_Change := False;
 
 		        Calc_Change_Disposition (
+			    Format_Object => Format_Object,
 			    Version => Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version,
 			    Operation => ARM_Output.Deletion,
 			    Text_Kind => Disposition);
