@@ -1192,9 +1192,9 @@ package body ARM_HTML is
 	-- else not used, don't generate it.
 	end if;
 	if Revision_Used ('1') then
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert1 {text-decoration: underline; color: rgb(102,51,0) }"); -- Dark brown.
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete1 {text-decoration: line-through; color: rgb(102,51,0) }");
-            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both1 {text-decoration: underline, line-through; color: rgb(102,51,0) }");
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }"); -- Dark turquoise.
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }");
+            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both1 {text-decoration: underline, line-through; color: rgb(0,51,51) }");
 		-- Both doesn't seem to work, so forget it.
 	-- else not used, don't generate it.
 	end if;
@@ -1206,9 +1206,9 @@ package body ARM_HTML is
 	-- else not used, don't generate it.
 	end if;
 	if Revision_Used ('3') then
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert3 {text-decoration: underline; color: rgb(0,51,51) }"); -- Dark turquoise.
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete3 {text-decoration: line-through; color: rgb(0,51,51) }");
-            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both3 {text-decoration: underline, line-through; color: rgb(0,51,51) }");
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }"); -- Dark brown.
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }");
+            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both3 {text-decoration: underline, line-through; color: rgb(102,51,0) }");
 		-- Both doesn't seem to work, so forget it.
 	-- else not used, don't generate it.
 	end if;

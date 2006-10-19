@@ -47,6 +47,7 @@ package ARM_Database is
     --  1/19/05 - RLB - Added Added_Version.
     --  2/15/06 - RLB - Added Deleted_No_Delete_Message and
     --			Deleted_Inserted_Number_No_Delete_Message change kinds.
+    -- 10/18/06 - RLB - Added No_Deleted_Paragraph_Messages to Report.
 
     type Database_Type is tagged limited private;
 
@@ -86,7 +87,8 @@ package ARM_Database is
     procedure Report (Database_Object : in out Database_Type;
 		      In_Format : in Format_Type;
 		      Sorted : in Boolean;
-		      Added_Version : Character := '0');
+		      Added_Version : Character := '0';
+		      No_Deleted_Paragraph_Messages : in Boolean := False);
 	-- Output the items with the appropriate format to the
 	-- "Format_Text" routine. "Format_Text" allows all commands
 	-- for the full formatter. (Text_Name is an identifying name
@@ -97,7 +99,8 @@ package ARM_Database is
 	-- appropriate Format and Output objects; but we can't do that
 	-- directly because that would make this unit recursive with
 	-- ARM_Format.
-
+	-- No paragraphs will be have deleted paragraph messages if
+	-- No_Deleted_Paragraph_Messages is True.
 private
 
     type Item;

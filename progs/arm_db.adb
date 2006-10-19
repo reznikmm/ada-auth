@@ -1,4 +1,4 @@
---with Ada.Text_IO; -- Debug.
+with Ada.Text_IO; -- Debug.
 with Ada.Unchecked_Deallocation,
      Ada.Strings.Fixed,
      Ada.Characters.Handling;
@@ -11,7 +11,7 @@ package body ARM_Database is
     -- appendixes.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004, 2005  AXE Consultants.
+    -- Copyright 2000, 2004, 2005, 2006  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -50,6 +50,7 @@ package body ARM_Database is
     -- 12/14/04 - RLB - Made the hang item bigger.
     --  1/19/05 - RLB - Added Added_Version.
     -- 10/17/05 - RLB - Fixed indexing of the Glossary.
+    -- 10/18/06 - RLB - Added No_Deleted_Paragraph_Messages to Report.
 
     type String_Ptr is access String;
     type Item is record
@@ -134,7 +135,8 @@ package body ARM_Database is
     procedure Report (Database_Object : in out Database_Type;
 		      In_Format : in Format_Type;
 		      Sorted : in Boolean;
-		      Added_Version : Character := '0') is
+		      Added_Version : Character := '0';
+		      No_Deleted_Paragraph_Messages : in Boolean := False) is
 	-- Output the items with the appropriate format to the
 	-- "Format_Text" routine. "Format_Text" allows all commands
 	-- for the full formatter. (Text_Name is an identifying name
@@ -145,6 +147,8 @@ package body ARM_Database is
 	-- appropriate Format and Output objects; but we can't do that
 	-- directly because that would make this unit recursive with
 	-- ARM_Format.
+	-- No paragraphs will be have deleted paragraph messages if
+	-- No_Deleted_Paragraph_Messages is True.
 	Temp : Item_List;
 
 	function Change_if_Needed (Item : in Item_List) return String is
@@ -169,15 +173,25 @@ package body ARM_Database is
 		    return "@ChgRef{Version=[" & Item.Version &
 			"],Kind=[RevisedInserted]}";
 		when Deleted =>
-		    return "@ChgRef{Version=[" & Item.Version &
-			"],Kind=[Deleted]}";
+		    if No_Deleted_Paragraph_Messages then
+		        return "@ChgRef{Version=[" & Item.Version &
+			    "],Kind=[DeletedNoDelMsg]}";
+		    else
+		        return "@ChgRef{Version=[" & Item.Version &
+			    "],Kind=[Deleted]}";
+		    end if;
 		when Deleted_Inserted_Number =>
 		    -- Previously inserted.
-		    return "@ChgRef{Version=[" & Item.Version &
-			"],Kind=[DeletedInserted]}";
+		    if No_Deleted_Paragraph_Messages then
+		        return "@ChgRef{Version=[" & Item.Version &
+			    "],Kind=[DeletedInsertedNoDelMsg]}";
+		    else
+		        return "@ChgRef{Version=[" & Item.Version &
+			    "],Kind=[DeletedInserted]}";
+		    end if;
 		when Deleted_No_Delete_Message =>
 		    return "@ChgRef{Version=[" & Item.Version &
-			"],Kind=[DeletedNoDelMsg]}";
+		        "],Kind=[DeletedNoDelMsg]}";
 		when Deleted_Inserted_Number_No_Delete_Message =>
 		    -- Previously inserted.
 		    return "@ChgRef{Version=[" & Item.Version &
@@ -233,6 +247,11 @@ package body ARM_Database is
 		Format_Text ("@begin(description)" & Ascii.LF, "Prefix");
 		Temp := Database_Object.List;
 		while Temp /= null loop
+--Ada.Text_IO.Put_Line ("^^ " & Paragraph_Change_Kind_Type'Image(Temp.Change_Kind) &
+--   " for " & Temp.Hang(1..Temp.Hang_Len) & " ref=" & Change_if_Needed (Temp));
+--Ada.Text_IO.Put_Line ("   " & Change_if_Needed (Temp) &
+--Temp.Hang(1..Temp.Hang_Len) & "@\" &
+--Temp.Text.all & Ascii.LF & Ascii.LF);
 		    Format_Text (Change_if_Needed (Temp) &
 			Temp.Hang(1..Temp.Hang_Len) & "@\" &
 			Temp.Text.all & Ascii.LF & Ascii.LF, Temp.Sort_Key);

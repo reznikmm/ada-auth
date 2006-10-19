@@ -232,6 +232,8 @@ package body ARM_Format is
     --			@nt{} to generate links.
     -- 10/16/06 - RLB - Added code to register deleted non-terminals (so
     --			that they can be linked).
+    -- 10/18/06 - RLB - Fixed so that deleted glossary items still get
+    --			deleted paragraph numbers.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -2918,7 +2920,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			-- Nothing at all should be showm.
 			-- ** Warning ** If we lie here, the program will crash!
 		        Format_Object.No_Start_Paragraph := True;
---Ada.Text_IO.Put_Line("No Start Paragraph");
+Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 		    else
 		        ARM_Output.Start_Paragraph (Output_Object,
 					            Format => Format_Object.Format,
@@ -5039,7 +5041,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops := Format_Object.Paragraph_Tab_Stops;
 		        Format_Object.Next_Paragraph_Format_Type := In_Table;
 		        Format_Object.In_Paragraph := True; -- A fake, but we cannot have any format.
-		        Format_Object.No_Start_Paragraph := True; -- Fits with the fake.
+		        Format_Object.No_Start_Paragraph := False; -- For most purposes, being in a table is like being in a paragraph.
 
 			-- OK, we've started the table. Now, get the caption:
 			ARM_Input.Check_Parameter_Name (Input_Object,
@@ -6643,7 +6645,9 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 				case Local_Change is
 				    when Do_Not_Display_Text =>
 				        Format_Object.Glossary_Displayed := False;
-				        Format_Object.Add_to_Glossary := False;
+				        Format_Object.Add_to_Glossary := True;
+					-- We still add this to the glossary so that
+					-- the deleted paragraph message can be displayed for it.
 				        Local_Change := ARM_Output.None;
 				    when ARM_Output.None|ARM_Output.Deletion =>
 			                Format_Object.Glossary_Displayed :=
@@ -9106,7 +9110,8 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 		when Attribute_List =>
 		    DB_Report  (Format_Object.Attr_DB,
 				ARM_Database.Hanging_List,
-				Sorted => True);
+				Sorted => True,
+				No_Deleted_Paragraph_Messages => True);
 
 		when Pragma_List =>
 		    DB_Report  (Format_Object.Pragma_DB,
@@ -10005,6 +10010,9 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			Arm_Input.Stop_Recording_and_Read_Result
 			    (Input_Object, Text_Buffer, Text_Buffer_Len);
 			Text_Buffer_Len := Text_Buffer_Len - 1; -- Remove command close character.
+--Ada.Text_IO.Put_Line ("&& Attr: " & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) &
+--   " Prefix kind=" & ARM_Database.Paragraph_Change_Kind_Type'Image(Format_Object.Attr_Prefix_Change_Kind) &
+--   " Attr chg kind=" & ARM_Database.Paragraph_Change_Kind_Type'Image(Format_Object.Attr_Change_Kind));
 			case Format_Object.Attr_Change_Kind is
 			    when ARM_Database.None | ARM_Database.Revised |
 				 ARM_Database.Revised_Inserted_Number =>
@@ -10026,21 +10034,28 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 
 			            if Disposition = Do_Not_Display_Text then
 				        null; -- Do *not* put this into the DB.
+--Ada.Text_IO.Put_Line ("   Inserted: Ignore");
 			            elsif Disposition = ARM_Output.None then
+--Ada.Text_IO.Put_Line ("   Inserted: Normal");
 					-- Normal reference:
-				        Write_to_DB (Prefix_Kind => ARM_Database.None,
-		 				     Text_Kind => ARM_Database.None,
-						     Prefix_Version => '0',
-						     Text_Version => '0');
-				        -- Nothing special to do for the text.
+				        Write_to_DB (Prefix_Kind => Format_Object.Attr_Change_Kind,
+		 				     Text_Kind => Format_Object.Attr_Change_Kind,
+						     Prefix_Version => Format_Object.Attr_Version,
+						     Text_Version => Format_Object.Attr_Version);
+				        -- We could get away without any
+					-- insert, except that then the paragraph
+					-- numbers would be wrong. Note (as below),
+					-- the whole thing is an insertion, so
+					-- we ignore the prefix kind and version.
 			            elsif Disposition = ARM_Output.Deletion then
 			                raise Program_Error; -- A deletion inside of an insertion command!
-			            else -- Insertion.
+			            else -- Insertion or Normal.
 					-- Write inserted text:
 					-- We need to mark everything with
 					-- the kind and version of the *entire* insertion,
 					-- because the entire thing is an
 					-- insertion. (So we ignore the prefix kind and version).
+--Ada.Text_IO.Put_Line ("   Inserted: Inserted version:" & Format_Object.Attr_Version);
 				        if Format_Object.Attr_Leading then
 				            ARM_Database.Insert (Format_Object.Attr_DB,
 					        Sort_Key => Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
@@ -10746,6 +10761,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	    end if;
 	    ARM_Input.Replace_Char (Input_Object);
 	    ARM_Input.Get_Name (Input_Object, Command_Name);
+--Ada.Text_IO.Put_Line("!!Command=" & Ada.Strings.Fixed.Trim(Command_Name, Ada.Strings.Both));
 
 	    ARM_Input.Get_Char (Input_Object, Ch);
 	    if ARM_Input.Is_Open_Char (Ch) then -- Start parameter:
@@ -10832,7 +10848,7 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 	        Char : Character;
 	    begin
 	        ARM_Input.Get_Char (Input_Object, Char);
---Ada.Text_IO.Put_Line("Char=" & Char & " Nesting=" & Natural'Image(Format_State.Nesting_Stack_Ptr));
+--Ada.Text_IO.Put_Line("!!Char=" & Char & " Nesting=" & Natural'Image(Format_State.Nesting_Stack_Ptr));
 	        case Char is
 		    when '@' =>
 		        Process_Special;
@@ -10944,7 +10960,14 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			    ARM_Output.Hard_Space (Output_Object);
 		        else
 			    if Format_Object.In_Paragraph then
-			        ARM_Output.Ordinary_Character (Output_Object, ' ');
+				if Format_Object.No_Start_Paragraph then
+				    -- Not really in a paragraph.
+Ada.Text_IO.Put_Line ("Attempt to write into a deleted paragraph, on line " & ARM_Input.Line_String (Input_Object));
+				    -- We'll probably crash soon.
+				    null;
+				else
+			            ARM_Output.Ordinary_Character (Output_Object, ' ');
+				end if;
 			    -- else we never want to start a paragraph with a space.
 			    end if;
 		        end if;
