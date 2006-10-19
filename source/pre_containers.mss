@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.58 $ $Date: 2006/10/19 06:40:30 $ $Author: Randy $ }
+@comment{ $Revision: 1.59 $ $Date: 2006/10/19 20:44:19 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2006/10/19 06:40:30 $}
+@Comment{$Date: 2006/10/19 20:44:19 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -4317,7 +4317,7 @@ unspecified.@PDefn{unspecified}]}
 @ChgAdded{Version=[2],Text=[If the value of a key stored in a node of a map is
 changed other than by an operation in this package such that at least one of
 Hash or Equivalent_Keys give different results, the behavior of this package is
-unspecified.@PDefn{unspecified}]}]}
+unspecified.@PDefn{unspecified}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}

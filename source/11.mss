@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:19 $}
+@Comment{$Date: 2006/10/19 20:44:13 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -614,7 +614,7 @@ are not handled by the handlers of the
         Item   : @key[out] Exception_Occurrence);
     @key[procedure] Write_Exception_Occurrence
        (Stream : @key[not null access] Ada.Streams.Root_Stream_Type'Class;
-        Item : @key[in] Exception_Occurrence);]}
+        Item   : @key[in] Exception_Occurrence);]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00438-01]}
 @ChgAdded{Version=[2],Text=[    @key[for] Exception_Occurrence'Read @key[use] Read_Exception_Occurrence;
