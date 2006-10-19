@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:25 $}
+@Comment{$Date: 2006/10/19 06:40:29 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.68 $}
+@Comment{$Revision: 1.69 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1664,6 +1664,9 @@ Old=[a subtype or]} object]}:
     an integral multiple of its Alignment.
     The implementation shall not assume a stricter alignment.]}
 
+@Comment{Deleted below causes trouble in the generated text for attributes,
+but no fix appears to be possible. And the trouble is much worse in the
+RTF version than the HTML version, so for now we're making a hand fix.}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00291-02]}
 @ChgDeleted{Version=[2],NoPrefix=[T],Text=[The value of this attribute
     is of type @i{universal_integer}, and nonnegative;
@@ -1707,7 +1710,7 @@ multiple thereof.]}
 @ChgAdded{Version=[2],Type=[Leading],KeepNext=[T],
 Text=[For @PrefixType{every subtype S}:]}
 @begin{Description}
-@ChgAttribute{Version=[2], Kind=[Added], ChginAnnex=[F], Leading=[F],
+@ChgAttribute{Version=[2], Kind=[Added], ChginAnnex=[T], Leading=[F],
   Prefix=<S>, AttrName=<Alignment>, ARef=[AI95-00291-02],
   Text=[@Chg{Version=[2],New=[The value of this attribute is of type
   @i{universal_integer}, and nonnegative.],Old=[]}

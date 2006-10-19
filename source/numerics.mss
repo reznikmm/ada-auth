@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.53 $ $Date: 2006/10/17 05:29:45 $ $Author: Randy $ }
+@comment{ $Revision: 1.54 $ $Date: 2006/10/19 06:40:29 $ $Author: Randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2006/10/17 05:29:45 $}
+@Comment{$Date: 2006/10/19 06:40:29 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -940,7 +940,7 @@ is opposite that of a parameter component at the origin, or is always positive
 or always negative.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[If Complex_Types.Real'Signed_Zeros is true for
-Numerics.Generic_Complex_Elementary_Functions,
+Numerics.@!Generic_@!Complex_@!Elementary_@!Functions,
 a rational treatment of the signs of
 zero results and result components should be provided.]}]}
 @end{ImplAdvice}
@@ -1362,6 +1362,7 @@ Ada 83.
 @end{Extend83}
 
 
+@RMNewPage@Comment{For printed version of Ada 2007 RM}
 @LabeledSubClause{Model of Floating Point Arithmetic}
 
 @begin{Intro}
@@ -2075,15 +2076,6 @@ The last line of the table is meant to apply when
 @i{EF}.Float_Type'Signed_Zeros is True and the parameter Y has a zero value
 with the indicated sign.
 
-The amount by which the result of an inverse trigonometric function is allowed
-to spill over into a quadrant adjacent to the one corresponding to the
-principal branch, as given in @RefSecNum{Elementary Functions}, is limited.
-The rule is that the result belongs to the smallest model interval of
-@i{EF}.Float_Type that contains both boundaries of the quadrant corresponding
-to the principal branch. This rule also takes precedence over the maximum
-relative error bounds, effectively narrowing the result interval allowed by
-them.
-
 @Table[Columns=<5>,Alignment=<AllCenter>,FirstColWidth=[2],LastColWidth=[1],
 NoBreak=[T],Border=[T],SmallSize=[F],
 Caption=<@b{@Chg{Version=[2],New=[Table G-1: ],Old=[]}Tightly Approximated Elementary Function Results}>,
@@ -2097,6 +2089,16 @@ Arctan and Arccot@\0.0@\negative@\@en@R[Cycle]/4.0@\@en@Pi/2.0
 Arctan and Arccot@\negative@\+0.0@\Cycle/2.0@\@Pi
 Arctan and Arccot@\negative@\@en@;0.0@\@en@R[Cycle]/2.0@\@en@Pi@Last
 Arctan and Arccot@\negative@\0.0@\Cycle/2.0@\@Pi>]
+The amount by which the result of an inverse trigonometric function is allowed
+to spill over into a quadrant adjacent to the one corresponding to the
+principal branch, as given in @RefSecNum{Elementary Functions}, is limited.
+The rule is that the result belongs to the smallest model interval of
+@i{EF}.Float_Type that contains both boundaries of the quadrant corresponding
+to the principal branch. This rule also takes precedence over the maximum
+relative error bounds, effectively narrowing the result interval allowed by
+them.
+
+@Comment{For Ada 95 with Corr, table G-1 appears here}
 
 @Leading@;Finally, the following specifications also take precedence over the maximum
 relative error bounds:
@@ -2428,23 +2430,7 @@ In the table, the error bound is given as the coefficient of
 @i{CT}.Real'Model_Epsilon.
 
 @ChgRef{Version=[1], Kind=[Deleted]}
-@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number (12) from original RM}>]
-
-The maximum relative error given above applies throughout the domain of the
-Compose_From_Polar function when the Cycle parameter is specified. When the
-Cycle parameter is omitted, the maximum relative error applies only when the
-absolute value of the parameter Argument is less than or equal to the angle
-threshold (see @RefSecNum{Accuracy Requirements for the Elementary Functions}).
-For the Exp function, and for the forward hyperbolic (resp., trigonometric)
-functions, the maximum relative error given above likewise applies only when
-the absolute value of the imaginary (resp., real) component of the parameter X
-(or the absolute value of the parameter itself, in the case of the Exp function
-with a parameter of pure-imaginary type) is less than or equal to the angle
-threshold. For larger angles, the accuracy is
-implementation defined.
-@ImplDef{The accuracy of certain complex arithmetic operations and certain
-complex elementary functions for parameters (or components thereof) beyond
-the angle threshold.}
+@Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number (7) from original RM}>]
 
 @Table[Columns=<4>,Alignment=<AllCenter>,FirstColWidth=[2],LastColWidth=[1],
 NoBreak=[T],Border=[T],SmallSize=[F],
@@ -2463,6 +2449,24 @@ Sin, Cos, Sinh, and Cosh@\complex@\max. rel. error@\11.0
 Tan, Cot, Tanh, and Coth@\complex@\max. rel. error@\35.0
 inverse trigonometric@\complex@\max. rel. error@\14.0@Last
 inverse hyperbolic@\complex@\max. rel. error@\14.0>]
+
+The maximum relative error given above applies throughout the domain of the
+Compose_From_Polar function when the Cycle parameter is specified. When the
+Cycle parameter is omitted, the maximum relative error applies only when the
+absolute value of the parameter Argument is less than or equal to the angle
+threshold (see @RefSecNum{Accuracy Requirements for the Elementary Functions}).
+For the Exp function, and for the forward hyperbolic (resp., trigonometric)
+functions, the maximum relative error given above likewise applies only when
+the absolute value of the imaginary (resp., real) component of the parameter X
+(or the absolute value of the parameter itself, in the case of the Exp function
+with a parameter of pure-imaginary type) is less than or equal to the angle
+threshold. For larger angles, the accuracy is
+implementation defined.
+@ImplDef{The accuracy of certain complex arithmetic operations and certain
+complex elementary functions for parameters (or components thereof) beyond
+the angle threshold.}
+
+@Comment{For Ada 95 with Corr, table G-2 appears here}
 
 @Leading@;The prescribed results specified in
 @RefSecNum{Complex Elementary Functions} for certain functions at particular
@@ -3520,8 +3524,10 @@ Im'Length.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Compose_From_Cartesian (Re     : Real_Vector) @key{return} Complex_Vector;
-@key{function} Compose_From_Cartesian (Re, Im : Real_Vector) @key{return} Complex_Vector;]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Compose_From_Cartesian (Re     : Real_Vector)
+   @key{return} Complex_Vector;
+@key{function} Compose_From_Cartesian (Re, Im : Real_Vector)
+   @key{return} Complex_Vector;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
@@ -3544,7 +3550,7 @@ is raised if Re'Length is not equal to Im'Length.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each function calculates and returns a vector of
 the specified polar components of X or Right using the corresponding function
-in Numerics.Generic_Complex_Types. The index range of the result is X'Range or
+in numerics.@!generic_complex_types. The index range of the result is X'Range or
 Right'Range.]}
 
 @begin{Example}
@@ -3559,7 +3565,7 @@ Right'Range.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each function constructs a vector of Complex
 results (in Cartesian representation) formed from given vectors of polar
-components using the corresponding function in Numerics.Generic_Complex_Types
+components using the corresponding function in numerics.@!generic_complex_types
 on matching components of Modulus and Argument. The index range of the result
 is Modulus'Range. Constraint_Error is raised if Modulus'Length is not equal to
 Argument'Length.]}
@@ -3572,7 +3578,7 @@ Argument'Length.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
-corresponding operation in Numerics.Generic_Complex_Types to each component of
+corresponding operation in numerics.@!generic_complex_types to each component of
 Right. The index range of the result is Right'Range.]}
 
 @begin{Example}
@@ -3582,7 +3588,7 @@ Right. The index range of the result is Right'Range.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[This function returns the result of applying the
-appropriate function Conjugate in Numerics.Generic_Complex_Types to each
+appropriate function Conjugate in numerics.@!generic_complex_types to each
 component of X. The index range of the result is X'Range.]}
 
 @begin{Example}
@@ -3593,7 +3599,7 @@ component of X. The index range of the result is X'Range.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
-corresponding operation in Numerics.Generic_Complex_Types to each component of
+corresponding operation in numerics.@!generic_complex_types to each component of
 Left and the matching component of Right. The index range of the result is
 Left'Range. Constraint_Error is raised if Left'Length is not equal to
 Right'Length.]}
@@ -3642,7 +3648,7 @@ conjugate).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
-corresponding operation in Numerics.Generic_Complex_Types to each component of
+corresponding operation in numerics.@!generic_complex_types to each component of
 Left and the matching component of Right. The index range of the result is
 Left'Range. Constraint_Error is raised if Left'Length is not equal to
 Right'Length.]}
@@ -3666,7 +3672,7 @@ Right'Length. These operations involve an inner product.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[This operation returns the result of multiplying
 each component of Right by the complex number Left using the appropriate
-operation "*" in Numerics.Generic_Complex_Types. The index range of the result
+operation "*" in numerics.@!generic_complex_types. The index range of the result
 is Right'Range.]}
 
 @begin{Example}
@@ -3677,7 +3683,7 @@ is Right'Range.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
-corresponding operation in Numerics.Generic_Complex_Types to each component of
+corresponding operation in numerics.@!generic_complex_types to each component of
 the vector Left and the complex number Right. The index range of the result is
 Left'Range.]}
 
@@ -3690,7 +3696,7 @@ Left'Range.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[This operation returns the result of multiplying
 each component of Right by the real number Left using the appropriate operation
-"*" in Numerics.Generic_Complex_Types. The index range of the result is
+"*" in numerics.@!generic_complex_types. The index range of the result is
 Right'Range.]}
 
 @begin{Example}
@@ -3703,7 +3709,7 @@ Right'Range.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
-corresponding operation in Numerics.Generic_Complex_Types to each component of
+corresponding operation in numerics.@!generic_complex_types to each component of
 the vector Left and the real number Right. The index range of the result is
 Left'Range.]}
 
@@ -3747,8 +3753,10 @@ Im'Length(2).]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Compose_From_Cartesian (Re     : Real_Matrix) @key{return} Complex_Matrix;
-@key{function} Compose_From_Cartesian (Re, Im : Real_Matrix) @key{return} Complex_Matrix;]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Compose_From_Cartesian (Re     : Real_Matrix)
+   @key{return} Complex_Matrix;
+@key{function} Compose_From_Cartesian (Re, Im : Real_Matrix)
+   @key{return} Complex_Matrix;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
@@ -3772,7 +3780,7 @@ Re'Length(2) is not equal to Im'Length(2).]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each function calculates and returns a matrix of
 the specified polar components of X or Right using the corresponding function
-in Numerics.Generic_Complex_Types. The index ranges of the result are those of
+in numerics.@!generic_complex_types. The index ranges of the result are those of
 X or Right.]}
 
 @begin{Example}
@@ -3787,7 +3795,7 @@ X or Right.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each function constructs a matrix of Complex
 results (in Cartesian representation) formed from given matrices of polar
-components using the corresponding function in Numerics.Generic_Complex_Types
+components using the corresponding function in numerics.@!generic_complex_types
 on matching components of Modulus and Argument. The index ranges of the result
 are those of Modulus. Constraint_Error is raised if Modulus'Length(1) is not
 equal to Argument'Length(1) or Modulus'Length(2) is not equal to
@@ -3801,7 +3809,7 @@ Argument'Length(2).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
-corresponding operation in Numerics.Generic_Complex_Types to each component of
+corresponding operation in numerics.@!generic_complex_types to each component of
 Right. The index ranges of the result are those of Right.]}
 
 @begin{Example}
@@ -3811,7 +3819,7 @@ Right. The index ranges of the result are those of Right.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[This function returns the result of applying the
-appropriate function Conjugate in Numerics.Generic_Complex_Types to each
+appropriate function Conjugate in numerics.@!generic_complex_types to each
 component of X. The index ranges of the result are those of X.]}
 
 @begin{Example}
@@ -3832,7 +3840,7 @@ respectively.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
-corresponding operation in Numerics.Generic_Complex_Types to each component of
+corresponding operation in numerics.@!generic_complex_types to each component of
 Left and the matching component of Right. The index ranges of the result are
 those of Left. Constraint_Error is raised if Left'Length(1) is not equal to
 Right'Length(1) or Left'Length(2) is not equal to Right'Length(2).]}
@@ -3857,7 +3865,7 @@ involves inner products.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[This operation returns the outer product of a
 (column) vector Left by a (row) vector Right using the appropriate operation
-"*" in Numerics.Generic_Complex_Types for computing the individual components.
+"*" in numerics.@!generic_complex_types for computing the individual components.
 The first and second index ranges of the result are Left'Range and
 Right'Range respectively.]}
 
@@ -3901,7 +3909,7 @@ inner products.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
-corresponding operation in Numerics.Generic_Complex_Types to each component of
+corresponding operation in numerics.@!generic_complex_types to each component of
 Left and the matching component of Right. The index ranges of the result are
 those of Left. Constraint_Error is raised if Left'Length(1) is
 not equal to Right'Length(1) or Left'Length(2) is not equal to
@@ -3933,7 +3941,7 @@ involve inner products.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each operation returns the outer product of a
 (column) vector Left by a (row) vector Right using the appropriate operation
-"*" in Numerics.Generic_Complex_Types for computing the individual components.
+"*" in numerics.@!generic_complex_types for computing the individual components.
 The first and second index ranges of the result are Left'Range and
 Right'Range respectively.]}
 
@@ -3975,7 +3983,7 @@ inner products.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[This operation returns the result of multiplying
 each component of Right by the complex number Left using the appropriate
-operation "*" in Numerics.Generic_Complex_Types. The index ranges of the result
+operation "*" in numerics.@!generic_complex_types. The index ranges of the result
 are those of Right.]}
 
 @begin{Example}
@@ -3986,7 +3994,7 @@ are those of Right.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
-corresponding operation in Numerics.Generic_Complex_Types to each component of
+corresponding operation in numerics.@!generic_complex_types to each component of
 the matrix Left and the complex number Right. The index ranges of the result
 are those of Left.]}
 
@@ -3999,7 +4007,7 @@ are those of Left.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[This operation returns the result of multiplying
 each component of Right by the real number Left using the appropriate operation
-"*" in Numerics.Generic_Complex_Types. The index ranges of the result are those
+"*" in numerics.@!generic_complex_types. The index ranges of the result are those
 of Right.]}
 
 @begin{Example}
@@ -4012,7 +4020,7 @@ of Right.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Each operation returns the result of applying the
-corresponding operation in Numerics.Generic_Complex_Types to each component of
+corresponding operation in numerics.@!generic_complex_types to each component of
 the matrix Left and the real number Right. The index ranges of the result are
 those of Left.]}
 
@@ -4211,7 +4219,7 @@ predefined type.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Although many operations are defined in terms of
-operations from Numerics.Generic_Complex_Types, they need not be implemented by
+operations from numerics.@!generic_complex_types, they need not be implemented by
 calling those operations provided that the effect is the same.]}
 @end{ImplPerm}
 

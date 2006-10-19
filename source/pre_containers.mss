@@ -1,10 +1,11 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.57 $ $Date: 2006/10/18 00:25:26 $ $Author: Randy $ }
+@comment{ $Revision: 1.58 $ $Date: 2006/10/19 06:40:30 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:26 $}
+@Comment{$Date: 2006/10/19 06:40:30 $}
 
+@RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
 @begin{Intro}
@@ -6989,7 +6990,7 @@ has the same contents as Containers.Vectors except:]}
 the profiles:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Noprefix=[T],Keepnext=[T],Type=[Leading],Text=[@key{procedure} Insert (Container : @key{in out} Vector;
+@ChgAdded{Version=[2],Noprefix=[T],Keepnext=[F],Type=[Leading],Text=[@key{procedure} Insert (Container : @key{in out} Vector;
                   Before    : @key{in}     Extended_Index;
                   Count     : @key{in}     Count_Type := 1);]}
 
@@ -7241,7 +7242,7 @@ Containers.Hashed_Sets except:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
-of Update_Element_Preserving_Key may be constrained even if Element_Type is
+of Update_@!Element_@!Preserving_Key may be constrained even if Element_Type is
 unconstrained.]}
 @end{Itemize}
 @end{StaticSem}
@@ -7278,7 +7279,7 @@ has the same contents as Containers.Ordered_Sets except:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
-of Update_Element_Preserving_Key may be constrained even if Element_Type is
+of Update_@!Element_@!Preserving_Key may be constrained even if Element_Type is
 unconstrained.]}
 @end{Itemize}
 @end{StaticSem}
@@ -7352,7 +7353,7 @@ many times Generic_Array_Sort calls "<" is unspecified.@PDefn{unspecified}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The generic library
-procedure Containers.Generic_@!Constrained_@!Array_Sort has the following
+procedure Containers.@!Generic_@!Constrained_@!Array_Sort has the following
 declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}

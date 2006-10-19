@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.29 $ $Date: 2006/10/18 00:25:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.30 $ $Date: 2006/10/19 06:40:32 $ $Author: Randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:28 $}
+@Comment{$Date: 2006/10/19 06:40:32 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -686,7 +686,7 @@ Ada.Characters, to declare names for the symbols of the local character set
 or other character sets.
 @end{ImplPerm}
 
-@LabeledAddedSubClause{Version=[2],Name=[The Package Characters.Conversions]}
+@RMNewPage@LabeledAddedSubClause{Version=[2],Name=[The Package Characters.Conversions]}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
@@ -879,7 +879,7 @@ with the given Substitute Wide_Character.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] To_Wide_Wide_String (Item : @key[in] String) @key[return] Wide_Wide_String;
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key[function] To_Wide_Wide_String (Item : @key[in] String) @key[return] Wide_Wide_String;
 @key[function] To_Wide_Wide_String (Item : @key[in] Wide_String)
    @key[return] Wide_Wide_String;]}
 @end{Example}

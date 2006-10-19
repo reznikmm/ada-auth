@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.38 $ $Date: 2006/10/14 06:05:21 $ $Author: Randy $ }
+@Comment{ $Revision: 1.39 $ $Date: 2006/10/19 06:40:32 $ $Author: Randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:21 $}
+@Comment{$Date: 2006/10/19 06:40:32 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -1019,8 +1019,8 @@ Text=[Any restrictions on pragma Restrictions.]}]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Text=[Uses of @Syni{restriction_parameter_}@nt{identifier}
 No_Dependence defined in @RefSecNum{Language-Defined Restrictions}:
-No_Dependence => Ada.Unchecked_Deallocation and No_Dependence =>
-Ada.Unchecked_Conversion may be appropriate for high-integrity systems.
+No_Dependence => Ada.@!Unchecked_@!Deallocation and No_Dependence =>
+Ada.@!Unchecked_@!Conversion may be appropriate for high-integrity systems.
 Other uses of No_Dependence can also be appropriate for high-integrity
 systems.]}
 @begin{Discussion}
@@ -1149,6 +1149,7 @@ and need not be detected.]}
   Pragma Detect_Blocking is new.]}
 @end{Extend95}
 
+@RMNewPage@Comment{For printed version of Ada 2007 RM}
 @LabeledAddedClause{Version=[2],Name=[Pragma Partition_Elaboration_Policy]}
 
 @begin{Intro}

@@ -1,9 +1,10 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.27 $ $Date: 2006/02/25 04:46:51 $ $Author: Randy $ }
+@comment{ $Revision: 1.28 $ $Date: 2006/10/19 06:40:30 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2006/02/25 04:46:51 $}
+@Comment{$Date: 2006/10/19 06:40:30 $}
 
+@RMNewPage@Comment{For printed RM Ada 2007}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
 @begin{Intro}

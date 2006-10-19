@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.51 $ $Date: 2006/10/18 00:25:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.52 $ $Date: 2006/10/19 06:40:33 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2006/10/18 00:25:28 $}
+@Comment{$Date: 2006/10/19 06:40:33 $}
 
 @LabeledClause{String Handling}
 
@@ -2324,8 +2324,8 @@ Facilities for handling strings of Wide_Character elements are
 found in the packages Strings.@!Wide_Maps, Strings.@!Wide_Fixed,
 Strings.@!Wide_@!Bounded, Strings.@!Wide_@!Unbounded,
 and Strings.@!Wide_Maps.@!Wide_@!Constants@Chg{Version=[2],New=[, and in the
-functions Strings.Wide_Hash, Strings.Wide_Fixed.Wide_Hash,
-Strings.Wide_Bounded.Wide_Hash, and Strings.Wide_Unbounded.Wide_Hash],Old=[]}.
+functions Strings.@!Wide_Hash, Strings.@!Wide_Fixed.@!Wide_Hash,
+Strings.@!Wide_Bounded.@!Wide_Hash, and Strings.@!Wide_Unbounded.@!Wide_Hash],Old=[]}.
 They provide the same string-handling operations
 as the corresponding packages@Chg{Version=[2],New=[ and functions],Old=[]}
 for strings of Character elements.
@@ -2579,11 +2579,11 @@ for strings of Character elements.
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_Fixed]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_Bounded]}
 @ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_Unbounded]}
-@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_Hash]}
-@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_Fixed],Child=[Wide_Wide_Hash]}
-@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_Bounded],Child=[Wide_Wide_Hash]}
-@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_Unbounded],Child=[Wide_Wide_Hash]}
-@ChildUnit{Parent=[Ada.Strings.Wide_Wide_Maps],Child=[Wide_Wide_Constants]}]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Hash]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Fixed],Child=[Wide_Wide_@!Hash]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Bounded],Child=[Wide_Wide_@!Hash]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Unbounded],Child=[Wide_Wide_@!Hash]}
+@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Maps],Child=[Wide_Wide_@!Constants]}]}
 
 @begin{StaticSem}
 

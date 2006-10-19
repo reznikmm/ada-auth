@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:21 $}
+@Comment{$Date: 2006/10/19 06:40:32 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.39 $}
+@Comment{$Revision: 1.40 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -14,7 +14,7 @@ language whose functionality is largely redundant with other features
 defined by this International Standard.
 Use of these features is not recommended in newly written programs.
 @Chg{Version=[2],New=[Use of these features can be prevented by using pragma
-Restrictions(No_Obsolescent_Features), see @RefSecNum{Language-Defined Restrictions}.],
+Restrictions (No_Obsolescent_Features), see @RefSecNum{Language-Defined Restrictions}.],
 Old=[]}]
 @begin{Ramification}
 These features are still part of the language,
@@ -265,6 +265,7 @@ primarily to decimal fixed point types now (they apply to
 floating point types only as an obsolescent feature).
 @end{DiffWord83}
 
+@RMNewPage@Comment{For printed Ada 2007 RM}
 @LabeledClause{The Constrained Attribute}
 
 @begin{StaticSem}
@@ -579,6 +580,7 @@ interrupt model as specified in the Systems Programming Annex.
 was replaced by @nt{accept_statement}.], Old=[]}
 @end{DiffWord95}
 
+@RMNewPage@Comment{For printed RM Ada 2007}
 @LabeledClause{Mod Clauses}
 
 @begin{Syntax}
@@ -688,7 +690,7 @@ statically denote some entity.]}
 @ChgAdded{Version=[2],Text=[For a specific Suppress @nt{pragma} that is
 immediately within a @nt{package_specification}, the @nt{name} shall denote an
 entity (or several overloaded subprograms) declared immediately within the
-@nt{package_specification}.]}
+@nt{package_@!specification}.]}
 @end{Legality}
 
 @begin{StaticSem}
@@ -852,6 +854,7 @@ not allowed.]}
   (see @RefSecNum{Language-Defined Restrictions}).]}
 @end{DiffWord95}
 
+@RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Character and Wide_Character Conversion Functions]}
 
 @begin{StaticSem}

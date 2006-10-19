@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:24 $}
+@Comment{$Date: 2006/10/19 06:40:28 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -2155,9 +2155,11 @@ to use the nominal subtype of the renamed object
 when writing an @nt{object_renaming_declaration}.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00409-01]}
-@ChgAdded{Version=[2],Text=[Explicit null_exclusion is not permitted.
-Null exclusiveness need not match, in the same way that constraints need not
-match, and @key{constant} is not specified. The renaming defines a view of the
+@ChgAdded{Version=[2],Text=[If no @nt{null_exclusion} is given in the
+renaming, the
+object may or may not exclude null. This is similar to the way that
+constraints need not match, and @key{constant} is not specified. The
+renaming defines a view of the
 renamed entity, inheriting the original properties.]}
 @end{Discussion}
 @end{StaticSem}

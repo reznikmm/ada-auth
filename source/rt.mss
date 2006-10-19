@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.74 $ $Date: 2006/10/18 00:25:27 $ $Author: Randy $ }
+@comment{ $Revision: 1.75 $ $Date: 2006/10/19 06:40:31 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2006/10/18 00:25:27 $}
+@Comment{$Date: 2006/10/19 06:40:31 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -862,7 +862,6 @@ in an implementation defined manner.
 However, a @nt{delay_statement} always corresponds to at least one task
 dispatching point.]}
 
-@ImplDef{Implementation defined task dispatching.}
 @ChgImplDef{Version=[2],Kind=[Revised],Text=[Implementation defined task
 dispatching@Chg{Version=[2],New=[ policies],Old=[]}.]}
 
@@ -3888,7 +3887,7 @@ The overhead associated with obtaining
 a mutual-exclusive access to an entry-less protected object. This shall be
 measured in the following way:
 
-@NoPrefix@Leading@;For a protected object of the form:
+@NoPrefix@Leading@keepnext@;For a protected object of the form:
 @begin{example}
 @key{protected} Lock @key{is}
    @key{procedure} Set;
@@ -3979,6 +3978,7 @@ There may be more than one @nt{pragma} Profile for a partition.]}
 @end{Extend95}
 
 
+@RMNewPage
 @LabeledAddedSubClause{Version=[2],Name=[The Ravenscar Profile]}
 
 @begin{Intro}
@@ -4060,6 +4060,7 @@ Max_Task_Entries => 0.]}
 @end{Extend95}
 
 
+@RMNewPage@Comment{For printed Ada 2007 RM}
 @LabeledAddedClause{Version=[2],Name=[Execution Time]}
 
 @begin{Intro}
@@ -4507,6 +4508,7 @@ Timer objects.]}
 @end{Extend95}
 
 
+@RMNewPage@Comment{For printed Ada 2007 RM}
 @LabeledAddedSubclause{Version=[2],Name=[Group Execution Time Budgets]}
 
 @begin{Intro}
