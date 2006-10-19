@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.36 $ $Date: 2006/10/14 06:05:20 $ $Author: Randy $ }
+@comment{ $Revision: 1.37 $ $Date: 2006/10/18 00:25:26 $ $Author: Randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:20 $}
+@Comment{$Date: 2006/10/18 00:25:26 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -220,9 +220,9 @@ some decimal type. The locale elements are:
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 For Text_IO.Editing the edited output and currency strings are of
 type String, and the locale characters are of type Character.
-For Wide_Text_IO.Editing their types are Wide_String and Wide_Character,
-respectively.@Chg{Version=[2],New=[ For Wide_Wide_Text_IO.Editing
-their types are Wide_Wide_String and Wide_Wide_Character, respectively.],Old=[]}
+For Wide_@!Text_IO.@!Editing their types are Wide_@!String and Wide_@!Character,
+respectively.@Chg{Version=[2],New=[ For Wide_Wide_@!Text_IO.@!Editing
+their types are Wide_Wide_@!String and Wide_Wide_@!Character, respectively.],Old=[]}
 
 Each of the locale elements has a default value that can be replaced or
 explicitly overridden.

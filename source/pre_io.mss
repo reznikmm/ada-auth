@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2006/02/16 06:49:05 $}
+@Comment{$Date: 2006/10/18 00:25:26 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -186,7 +186,7 @@ be associated with a given external file.
 @end{Diffword95}
 
 
-@RMNewPage@Comment{Break here so printed RM looks better.}
+@Comment{@RMNewPage Break here so printed Ada 95 w/ corrigendum RM looks better.}
 @LabeledClause{Sequential and Direct Files}
 
 @begin{StaticSem}
@@ -3171,12 +3171,12 @@ occurrence of String is replaced by Wide_Wide_String.
 @ChildUnit{Parent=[Ada],Child=[Integer_@!Wide_Wide_@!Text_IO]}
 @ChildUnit{Parent=[Ada],Child=[Float_@!Wide_Wide_@!Text_IO]}
 Nongeneric equivalents of Wide_Wide_Text_IO.Integer_IO
-and Wide_Wide_Text_IO.@!Float_IO are provided (as for Text_IO)
+and Wide_Wide_@!Text_IO.@!Float_IO are provided (as for Text_IO)
 for each predefined numeric type,
-with names such as Ada.Integer_@!Wide_Wide_Text_IO,
-Ada.Long_@!Integer_@!Wide_Wide_Text_IO,
-Ada.Float_@!Wide_Wide_Text_IO,
-Ada.Long_@!Float_@!Wide_Wide_Text_IO.],
+with names such as Ada.Integer_@!Wide_Wide_@!Text_IO,
+Ada.Long_@!Integer_@!Wide_Wide_@!Text_IO,
+Ada.Float_@!Wide_Wide_@!Text_IO,
+Ada.Long_@!Float_@!Wide_Wide_@!Text_IO.],
 Old=[
 @ChildUnit{Parent=[Ada],Child=[Integer_@!Wide_@!Text_IO]}
 @ChildUnit{Parent=[Ada],Child=[Float_@!Wide_@!Text_IO]}
@@ -3192,27 +3192,27 @@ Ada.Long_@!Float_@!Wide_Text_IO.]}
 @ChgAdded{Version=[2],Text=[
 @ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Bounded_IO]}
 @ChildUnit{Parent=[Ada.Wide_Wide_@!Text_IO],Child=[Bounded_IO]}
-The specification of package Wide_Text_IO.Wide_Bounded_IO is the same as that
+The specification of package Wide_Text_IO.Wide_@!Bounded_IO is the same as that
 for Text_IO.Bounded_IO, except that any occurrence of Bounded_String is
-replaced by Wide_Bounded_String, and any occurrence of package Bounded is
+replaced by Wide_@!Bounded_@!String, and any occurrence of package Bounded is
 replaced by Wide_Bounded. The specification of package
-Wide_Wide_Text_IO.Wide_Bounded_IO is the same as that for
-Text_IO.Bounded_IO, except that any occurrence of Bounded_String is
-replaced by Wide_Wide_Bounded_String, and any occurrence of package Bounded
-is replaced by Wide_Wide_Bounded.]}
+Wide_Wide_@!Text_IO.Wide_Wide_@!Bounded_IO is the same as that for
+Text_IO.@!Bounded_IO, except that any occurrence of Bounded_@!String is
+replaced by Wide_Wide_@!Bounded_String, and any occurrence of package Bounded
+is replaced by Wide_Wide_@!Bounded.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00301-01]}
 @ChgAdded{Version=[2],Text=[
 @ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Unbounded_IO]}
 @ChildUnit{Parent=[Ada.Wide_Wide_@!Text_IO],Child=[Unbounded_IO]}
-The specification of package Wide_Text_IO.Wide_Unbounded_IO is the same as that
-for Text_IO.Unbounded_IO, except that any occurrence of Unbounded_String is
-replaced by Wide_Unbounded_String, and any occurrence of package Unbounded is
-replaced by Wide_Unbounded. The specification of package
-Wide_Wide_Text_IO.Wide_Wide_Unbounded_IO is the same as that for
+The specification of package Wide_Text_IO.@!Wide_Unbounded_IO is the same as that
+for Text_IO.@!Unbounded_IO, except that any occurrence of Unbounded_@!String is
+replaced by Wide_@!Unbounded_@!String, and any occurrence of package Unbounded is
+replaced by Wide_@!Unbounded. The specification of package
+Wide_Wide_Text_IO.Wide_Wide_@!Unbounded_IO is the same as that for
 Text_IO.Unbounded_IO, except that any occurrence of Unbounded_String is
-replaced by Wide_Wide_Unbounded_String, and any occurrence of package Unbounded
-is replaced by Wide_Wide_Unbounded.]}
+replaced by Wide_Wide_@!Unbounded_@!String, and any occurrence of package Unbounded
+is replaced by Wide_Wide_@!Unbounded.]}
 @end{StaticSem}
 
 @begin{Extend83}
@@ -3508,16 +3508,21 @@ always write at the end, even when explicitly commanded to write somewhere
 else).]}
 @end{ImplNote}
 
-@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0055],ARef=[AI95-00026-01]}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 34 through 36
+were deleted.>}]}@Comment{This message should be
+deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+@ChgRef{Version=[1],Kind=[DeletedNoDelMsg],Ref=[8652/0055],ARef=[AI95-00026-01]}
 @ChgDeleted{Version=[1],Text=[The Size function returns the current size of
 the file, in stream elements.]}
 
-@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0055],ARef=[AI95-00026-01]}
+@ChgRef{Version=[1],Kind=[DeletedNoDelMsg],Ref=[8652/0055],ARef=[AI95-00026-01]}
 @ChgDeleted{Version=[1],Text=[The Set_Mode procedure changes the mode of the
 file. If the new mode is Append_File, the file is positioned to its end;
 otherwise, the position in the file is unchanged.]}
 
-@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0055],ARef=[AI95-00026-01]}
+@ChgRef{Version=[1],Kind=[DeletedNoDelMsg],Ref=[8652/0055],ARef=[AI95-00026-01]}
 @ChgDeleted{Version=[1],Text=[The Flush procedure synchronizes the external
 file with the internal file (by flushing any internal buffers) without closing
 the file or changing the position.

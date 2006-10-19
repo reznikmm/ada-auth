@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:18 $}
+@Comment{$Date: 2006/10/18 00:25:24 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2507,7 +2507,7 @@ used by the implementation).],Old=[]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[An @nt{aggregate} used in the return expression
-of a @nt{simple_return_statement} has to be built-in-place in the anonymous
+of a @nt{simple_@!return_@!statement} has to be built-in-place in the anonymous
 return object, as this is similar to an object declaration. (This is a change
 from Ada 95, but it is not an inconsistency as it only serves to restrict
 implementation choices.) But this only covers the @nt{aggregate}; a separate
@@ -2759,9 +2759,9 @@ a @Chg{Version=[2],New=[body other than a @nt{package_body};
 the execution of a @nt{statement};
 or the evaluation of an @nt{expression}, @nt{function_call}, or @nt{range} that
 is not part of an enclosing @nt{expression}, @nt{function_call}, @nt{range}, or
-@nt{simple_statement} other than a @nt{simple_return_statement}],
-Old=[@nt{task_body}, a @nt{block_statement},
-a @nt{subprogram_body}, an @nt{entry_body}, or an @nt{accept_statement}]}.
+@nt{simple_@!statement} other than a @nt{simple_@!return_@!statement}],
+Old=[@nt{task_body}, a @nt{block_@!statement},
+a @nt{subprogram_body}, an @nt{entry_body}, or an @nt{accept_@!statement}]}.
 A master is finalized after it is
 complete, and before it is left.
 
@@ -2774,7 +2774,7 @@ complete, and before it is left.
   @nt{statement}s are left. Note that @nt{expression}s like the @nt{condition}
   of an @nt{if_statement} are masters, because they are not enclosed by a
   @nt{simple_statement}. Similarly, a @nt{function_call} which is renamed
-  is a master, as it is not in a @nt{simple_statement}.],
+  is a master, as it is not in a @nt{simple_@!statement}.],
   Old=[Note that although an @nt{accept_statement} has no
   @nt{declarative_part}, it can call functions and evaluate @nt{aggregate}s,
   possibly causing anonymous controlled objects to be created,

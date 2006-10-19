@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:19 $}
+@Comment{$Date: 2006/10/18 00:25:25 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1530,6 +1530,7 @@ important benefit, and any change has some cost.
 @end{DiffWord95}
 
 
+@RMNewPage@Comment{For printed RM Ada 2005}
 @LabeledClause{Formal Types}
 
 @begin{Intro}
@@ -2453,6 +2454,7 @@ the same is subsumed.
 @end{DiffWord95}
 
 
+@RMNewPage@Comment{For printed RM Ada 2005}
 @LabeledSubClause{Formal Access Types}
 
 @begin{Intro}
@@ -3255,6 +3257,7 @@ package with formal package parameters:}]}
 @key[end] Ordered_Join;]}
 @end{Example}
 
+@RMNewPage@Comment{For printed Ada 2005 RM only}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[@i{Example of
 an instantiation of a package with formal packages:}]}

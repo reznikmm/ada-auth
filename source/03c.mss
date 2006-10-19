@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/10/17 05:29:43 $}
+@Comment{$Date: 2006/10/18 00:25:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -196,7 +196,7 @@ get an error message when they made a mistake. The use of
 @nt{overriding_indicator}s is highly recommended in new code that does not
 need to be compatible with Ada 95.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00344-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00344-01]}
 @ChgDeleted{Version=[2],Text=[Note that the accessibility rules imply that a
 tagged type declared in a library @nt{package_specification} cannot be
 extended in a nested subprogram or task body.]}
@@ -1477,7 +1477,7 @@ shall not have a @nt<default_expression>.]}
   a dispatching call; if it were dynamically tagged, the default
   would be useless for a nondispatching call.
 
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00416-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00416-01]}
   @ChgDeleted{Version=[2],Text=[The second part is consistent with the
   first part, since designated objects are never tag-indeterminate.]}
 @end(Reason)
@@ -3594,7 +3594,7 @@ either explicitly, or inherited via derivation.]
 denotes an @Chg{Version=[2],New=[incomplete view of a type may be used],
 Old=[@nt{incomplete_type_declaration} are]} as follows:
 @begin(Discussion)
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00326-01]}
   @ChgDeleted{Version=[2],Text=[No need to say "prior to the end of the
   @nt{full_type_declaration}" since the name would not denote the
   @nt{incomplete_type_declaration} after the end of the
@@ -3621,7 +3621,7 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
   @nt{null_@!exclusion} or a @nt{constraint};],Old=[defining the subtype
   of a parameter or result of an @nt{access_to_@!subprogram_@!definition};]}
   @begin{Reason}
-    @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}@ChgNote{Really moved}
+    @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00326-01]}@ChgNote{Really moved}
     @ChgDeleted{Version=[2],Text=[This allows, for example, a record to have a
     component designating a subprogram that takes that same record
     type as a parameter.]}
@@ -3731,7 +3731,7 @@ an incomplete
 type and its first subtype; the first subtype is unconstrained if
 a @nt<known_discriminant_part> appears.]}
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[If an @nt<unknown_discriminant_part> or
 no @nt{discriminant_part}
 appears, then the constrainedness of the first subtype doesn't matter

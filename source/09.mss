@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:18 $}
+@Comment{$Date: 2006/10/18 00:25:25 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 
 @begin{Intro}
 
@@ -436,7 +436,7 @@ Old=[@RefSecNum(Task Information)]}).
 @key(end) Keyboard_Driver;
 @end{Example}
 
-@i{Examples of declarations of single tasks:}
+@leading@keepnext@i{Examples of declarations of single tasks:}
 @begin{Example}
 @key(task) Controller @key(is)
    @key(entry) Request(Level)(D : Item);  --@RI[  a family of entries]
@@ -885,6 +885,7 @@ selecting the @nt<terminate_alternative>, but before termination.
 @end{DiffWord95}
 
 
+@RMNewPage@Comment{For printed RM Ada 2005}
 @LabeledClause{Protected Units and Protected Objects}
 
 @begin{Intro}
@@ -4199,9 +4200,9 @@ entry queuing policy in effect (see @RefSecNum(Entry Calls) and
 @RefSecNum(Entry Queuing Policies)).
 When such an
 alternative is selected, the selected call is
-removed from its entry queue and the @nt<handled_sequence_of_statements>
+removed from its entry queue and the @nt<handled_sequence_of_@!statements>
 (if any) of the corresponding @nt{accept_statement} is executed; after the
-rendezvous completes any subsequent @nt<sequence_of_statements>
+rendezvous completes any subsequent @nt<sequence_of_@!statements>
 of the alternative is executed.
 @PDefn2{Term=[blocked], Sec=(execution of a @nt<selective_accept>)}
 If no selection is immediately possible (in the above sense)
@@ -4222,7 +4223,7 @@ effect (see @RefSecNum{Entry Queuing Policies}); the default queuing
 policy chooses arbitrarily among the @nt<delay_@!alternative>s
 whose expiration time has passed.
 
-The else part is selected and its @nt<sequence_of_statements> is executed
+The else part is selected and its @nt<sequence_of_@!statements> is executed
 if no @nt{accept_alternative} can immediately be selected;
 in particular, if all alternatives are closed.
 
@@ -4378,17 +4379,17 @@ the @i(delay_)@nt<expression> of the
 a call on a procedure implemented by an entry,],Old=[;]}
 the entry call is then issued.@Chg{Version=[2],New=[ Otherwise, the call
 proceeds as described in @RefSecNum{Subprogram Calls} for a procedure call,
-followed by the @nt{sequence_of_statements} of the @nt{entry_call_alternative};
-the @nt{sequence_of_statements} of the @nt{delay_alternative} is ignored.],Old=[]}
+followed by the @nt{sequence_of_@!statements} of the @nt{entry_call_@!alternative};
+the @nt{sequence_of_@!statements} of the @nt{delay_@!alternative} is ignored.],Old=[]}
 
 
 If the call is queued (including due to a requeue-with-abort),
 and not selected before the expiration
 time is reached, an attempt to cancel the call is made.
 If the call completes due to the cancellation, the optional
-@nt<sequence_of_statements> of the @nt<delay_alternative> is
+@nt<sequence_of_@!statements> of the @nt<delay_@!alternative> is
 executed; if the entry call completes normally, the optional
-@nt<sequence_of_statements> of the @nt<entry_call_alternative> is
+@nt<sequence_of_@!statements> of the @nt<entry_call_@!alternative> is
 executed.
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00345-01]}
@@ -4506,6 +4507,7 @@ a requeue-with-abort.
 @end{DiffWord83}
 
 
+@RMNewPage@Comment{For printed Ada 2005 RM}
 @LabeledSubClause{Asynchronous Transfer of Control}
 
 @begin{Intro}
@@ -4539,7 +4541,7 @@ upon completion of an entry call or the expiration of a delay.]
 @Chg{Version=[2],New=[@PDefn2{Term=[execution],
   Sec=(asynchronous_select with a procedure call trigger)}],Old=[]}
 For the execution of an @nt{asynchronous_select}
-whose @nt<triggering_statement> is @Chg{Version=[2],
+whose @nt<triggering_@!statement> is @Chg{Version=[2],
 New=[a @nt<procedure_or_entry_call>],Old=[an @nt<entry_call_statement>]},
 the @Syni(entry_)@nt<name>@Chg{Version=[2],New=[, @Syni{procedure_}@nt{name},
 or @Syni{procedure_}@nt{prefix},],Old=[]} and actual parameters are evaluated
@@ -4554,14 +4556,14 @@ and never requeued-with-abort,
 then the @nt<abortable_part> is never started.]@Chg{Version=[2],New=[ If the
 call is on a procedure that is not implemented by an entry, the call proceeds
 as described in @RefSecNum{Subprogram Calls}, followed by the
-@nt{sequence_of_statements} of the @nt{triggering_alternative}@Redundant[;
+@nt{sequence_of_@!statements} of the @nt{triggering_@!alternative}@Redundant[;
 the @nt{abortable_part} is never started].],Old=[]}
 
 
 @PDefn2{Term=[execution],
   Sec=(asynchronous_select with a delay_statement trigger)}
 For the execution of an @nt<asynchronous_select> whose
-@nt<triggering_statement> is a @nt<delay_statement>,
+@nt<triggering_@!statement> is a @nt<delay_statement>,
 the @i(delay_)@nt<expression> is evaluated
 and the expiration time is determined,
 as for a normal @nt<delay_statement>.
@@ -4569,19 +4571,19 @@ If the expiration time has not already passed, the @nt<abortable_part>
 is executed.
 
 If the @nt<abortable_part> completes and is left prior to completion of the
-@nt<triggering_statement>,
-an attempt to cancel the @nt<triggering_statement> is made.
+@nt<triggering_@!statement>,
+an attempt to cancel the @nt<triggering_@!statement> is made.
 If the attempt to cancel succeeds (see @RefSecNum(Entry Calls) and
 @RefSecNum(Delay Statements, Duration, and Time)), the
 @nt<asynchronous_select> is complete.
 
-If the @nt<triggering_statement> completes other than
+If the @nt<triggering_@!statement> completes other than
 due to cancellation,
 the @nt<abortable_part>
 is aborted (if started but not yet completed @em
 see @RefSecNum(Abort of a Task - Abort of a Sequence of Statements)).
-If the @nt<triggering_statement> completes normally, the optional
-@nt<sequence_of_statements> of the @nt<triggering_alternative> is
+If the @nt<triggering_@!statement> completes normally, the optional
+@nt<sequence_of_@!statements> of the @nt<triggering_@!alternative> is
 executed after the @nt<abortable_part> is left.
 @begin(Discussion)
   We currently don't specify when the by-copy [@key(in)] @key(out)
@@ -4591,8 +4593,8 @@ executed after the @nt<abortable_part> is left.
   to justify possibly overspecifying the implementation approach,
   since some of the parameters are passed by reference anyway.
 
-  In an earlier description, we required that the @nt<sequence_of_statements>
-  of the @nt<triggering_alternative> execute after aborting
+  In an earlier description, we required that the @nt<sequence_of_@!statements>
+  of the @nt<triggering_@!alternative> execute after aborting
   the @nt<abortable_part>, but before waiting for it to complete
   and finalize, to provide more rapid response to the triggering event
   in case the finalization was unbounded. However, various reviewers felt
@@ -4605,7 +4607,7 @@ executed after the @nt<abortable_part> is left.
   One possibility is to leave this area implementation defined,
   so as to encourage experimentation. The user would then have
   to assume the worst about what kinds of actions are appropriate
-  for the @nt<sequence_of_statements> of the @nt<triggering_alternative>
+  for the @nt<sequence_of_@!statements> of the @nt<triggering_@!alternative>
   to achieve portability.
 @end(Discussion)
 
@@ -4660,7 +4662,7 @@ executed after the @nt<abortable_part> is left.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   A procedure can be used as the
-  @nt{triggering_statement} of an @nt<asynchronous_select>, if the procedure
+  @nt{triggering_@!statement} of an @nt<asynchronous_select>, if the procedure
   might actually be an entry]}
 @end{Extend95}
 
@@ -4670,8 +4672,8 @@ executed after the @nt<abortable_part> is left.
 @begin{Intro}
 @redundant[An @nt{abort_statement} causes one or more tasks to become abnormal, thus
 preventing any further interaction with such tasks. The completion
-of the @nt<triggering_statement> of an @nt<asynchronous_select>
-causes a @nt{sequence_of_statements} to be aborted.]
+of the @nt<triggering_@!statement> of an @nt<asynchronous_select>
+causes a @nt{sequence_of_@!statements} to be aborted.]
 @end{Intro}
 
 @begin{Syntax}
@@ -4775,7 +4777,7 @@ that depend on that master are aborted.
 
 @PDefn{unspecified}
 The order in which tasks become abnormal as the result
-of an @nt<abort_statement> or the abort of a @nt<sequence_of_statements>
+of an @nt<abort_statement> or the abort of a @nt<sequence_of_@!statements>
 is not specified by the language.
 
 @leading@;If the execution of an entry call is aborted,
@@ -4811,7 +4813,7 @@ the following are abort completion points for an execution:
   @end(Ramification)
 
   the start of the execution of a @nt<select_statement>,
-  or of the @nt<sequence_of_statements> of an @nt<exception_handler>.
+  or of the @nt<sequence_of_@!statements> of an @nt<exception_handler>.
   @begin(Reason)
     The start of an @nt<exception_handler> is considered an abort completion
     point simply because it is easy for an implementation to check

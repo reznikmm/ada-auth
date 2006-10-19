@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:18 $}
+@Comment{$Date: 2006/10/18 00:25:24 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1371,6 +1371,7 @@ Such a @nt{pragma} applies to all of the denoted entities.
 @end{Extend95}
 
 
+@RMNewPage@Comment{For printed RM Ada 2005 only}
 @LabeledClause{Subprogram Calls}
 
 @begin{Intro}
@@ -1913,7 +1914,7 @@ rhs="@Chg{Version=[2],New=<@Syn2{subtype_indication} | @Syn2{access_definition}>
 The @i<result subtype> of a function is the subtype denoted by the
 @nt<subtype_mark>, or defined by the @nt<access_definition>, after the reserved
 word @key<return> in the profile of the function.@PDefn2{Term=[expected type],
-Sec=(@nt{expression} of @nt<simple_return_statement>)}],Old=[@Defn{return expression}
+Sec=(@nt{expression} of @nt<simple_@!return_@!statement>)}],Old=[@Defn{return expression}
 The @nt{expression}, if any, of a @nt{return_statement} is called the
 @i{return expression}.
 @Defn2{Term=[result subtype], Sec=(of a function)}
@@ -1921,12 +1922,12 @@ The @i(result subtype) of a function is the subtype denoted by the
 @nt{subtype_mark} after the reserved word @key(return) in the profile
 of the function.@PDefn2{Term=[expected type], Sec=(return expression)}]}
 The expected type for @Chg{Version=[2],New=[the @nt{expression}, if any, of a
-@nt{simple_return_statement}],Old=[a return expression]} is the result type of
+@nt{simple_@!return_@!statement}],Old=[a return expression]} is the result type of
 the corresponding function.@Chg{Version=[2],New=[
 @PDefn2{Term=[expected type], Sec=(@nt{expression} of @nt{extended_return_statement})}
 The expected type for the
 @nt{expression} of an @nt{extended_return_statement} is that of the
-@nt{return_subtype_indication}.],Old=[]}
+@nt{return_@!subtype_@!indication}.],Old=[]}
 @begin{Honest}
 The same applies to generic functions.
 @end{Honest}
@@ -1969,9 +1970,9 @@ a function body.],Old=[]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
   @ChgAdded{Version=[2],Text=[A return statement can apply to an
-  @nt{extended_return_statement}, so a @nt{simple_return_statement} without
+  @nt{extended_return_statement}, so a @nt{simple_@!return_@!statement} without
   an @nt{expression} can be given in one. However, neither
-  @nt{simple_return_statement} with an @nt{expression} nor an
+  @nt{simple_@!return_@!statement} with an @nt{expression} nor an
   @nt{extended_return_statement} can be given inside an
   @nt{extended_return_statement}, as they must apply (directly) to a
   function body.]}
@@ -1985,7 +1986,7 @@ a function body.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[2],Text=[If the result subtype of the function is defined by a
-@nt{subtype_mark}, the @nt{return_subtype_indication} shall be a
+@nt{subtype_mark}, the @nt{return_@!subtype_@!indication} shall be a
 @nt{subtype_indication}. The type of the @nt{subtype_indication} shall be the
 result type of the function. If the result subtype of the function is
 constrained, then the subtype defined by the @nt{subtype_indication} shall also
@@ -1997,7 +1998,7 @@ shall be an @nt{expression}.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[2],Text=[If the result subtype of the function is defined
-by an @nt{access_definition}, the @nt{return_subtype_indication} shall be an
+by an @nt{access_definition}, the @nt{return_@!subtype_@!indication} shall be an
 @nt{access_definition}. The subtype defined by the @nt{access_definition} shall
 statically match the result subtype of the function. The accessibility level of
 this anonymous access subtype is that of the result subtype.]}
@@ -2030,8 +2031,8 @@ statement shall not be statically deeper than that of the master that
 elaborated the function body. If the result subtype has one or more
 unconstrained access discriminants, the accessibility level of the anonymous
 access type of each access discriminant, as determined by the
-@nt{expression} of the @nt{simple_return_statement} or the
-@nt{return_subtype_indication}, shall not be
+@nt{expression} of the @nt{simple_@!return_@!statement} or the
+@nt{return_@!subtype_@!indication}, shall not be
 statically deeper than that of the master that elaborated the function body.]}
 
 @begin{Discussion}
@@ -2039,7 +2040,7 @@ statically deeper than that of the master that elaborated the function body.]}
   @ChgAdded{Version=[2],Text=[We know that if the result type is class wide,
   then there must be an @nt{expression} of the return statement. Similarly, if
   the result subtype is unconstrained, then either the
-  @nt{return_subtype_indication} (if any) is constrained, or there must be an
+  @nt{return_@!subtype_@!indication} (if any) is constrained, or there must be an
   @nt{expression}.]}
 @end{Discussion}
 
@@ -2052,7 +2053,7 @@ statically deeper than that of the master that elaborated the function body.]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=[return object], Sec=(extended_return_statement)}
 Within an @nt{extended_return_statement}, the @i{return object} is declared
 with the given @nt{defining_identifier}, with the nominal subtype defined by
-the @nt{return_subtype_indication}.]}
+the @nt{return_@!subtype_@!indication}.]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -2086,14 +2087,14 @@ return object is constrained by its initial value.@PDefn2{Term=[creation],Sec=[o
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=[@PDefn2{Term=[execution], Sec=(simple_return_statement)}],
+@Chg{Version=[2],New=[@PDefn2{Term=[execution], Sec=(simple_@!return_@!statement)}],
 Old=[@PDefn2{Term=[execution], Sec=(return_statement)}]}
-For the execution of a @Chg{Version=[2],New=[@nt{simple_return_statement}],
+For the execution of a @Chg{Version=[2],New=[@nt{simple_@!return_@!statement}],
 Old=[@nt{return_statement}]}, the @nt{expression}
 (if any) is first evaluated@Chg{Version=[2],New=[,],Old=[ and]} converted to
 the result subtype@Chg{Version=[2],
 New=[, and then is assigned to the anonymous @i{return object}.
-@PDefn2{Term=[return object], Sec=(simple_return_statement)}],Old=[.]}
+@PDefn2{Term=[return object], Sec=(simple_@!return_@!statement)}],Old=[.]}
 @PDefn2{Term=[implicit subtype conversion],Sec=(function return)}
 @begin{Ramification}
 The conversion might raise
@@ -2285,7 +2286,7 @@ New=[If the result subtype of a function has one or more unconstrained access
 discriminants,
 a check is made that the accessibility level of the anonymous access type
 of each access discriminant, as determined by the @nt{expression} or the
-@nt{return_subtype_indication} of the function,
+@nt{return_@!subtype_@!indication} of the function,
 is not deeper than that of the master that elaborated the
 function body. If this check fails, Program_Error is raised.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
@@ -2315,7 +2316,7 @@ that object.]}
   @ChgAdded{Version=[2],Text=[The check prevents the returned
   object (for a nonlimited type) from outliving the object designated by one
   of its discriminants. The check is made on the values of the discriminants,
-  which may come from the @nt{return_subtype_indication} (if constrained),
+  which may come from the @nt{return_@!subtype_@!indication} (if constrained),
   or the @nt{expression}, but it is never necessary to check both.]}
 @end{Reason}
 
@@ -2343,7 +2344,7 @@ denotes a constant view of the return object.]}
 unconstrained, and a call on the function is used to provide the initial value
 of an object with a constrained nominal subtype, Constraint_Error may be raised
 at the point of the call (after abandoning the execution of the function body)
-if, while elaborating the @nt{return_subtype_indication} or
+if, while elaborating the @nt{return_@!subtype_@!indication} or
 evaluating the @nt{expression} of a return statement that applies to the
 function body, it
 is determined that the value of the result will violate the constraint of the
@@ -2365,7 +2366,7 @@ subtype of this object.]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This permission is allowed during the evaluation
   of the @nt{expression} of an @nt{extended_return_statement}, because the
-  @nt{return_subtype_indication} may be unconstrained and the @nt{expression}
+  @nt{return_@!subtype_@!indication} may be unconstrained and the @nt{expression}
   then would provide the constraints.]}
 @end{Ramification}
 @end{ImplPerm}
@@ -2714,6 +2715,7 @@ as the result type is not Boolean.
 @end{Extend83}
 
 
+@RMNewPage@Comment{For printed RM Ada 2005}
 @LabeledAddedClause{Version=[2],Name=[Null Procedures]}
 
 @begin{Intro}

@@ -1,9 +1,10 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.32 $ $Date: 2006/06/23 04:24:55 $ $Author: Randy $ }
+@comment{ $Revision: 1.33 $ $Date: 2006/10/18 00:25:28 $ $Author: Randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2006/06/23 04:24:55 $}
+@Comment{$Date: 2006/10/18 00:25:28 $}
 
+@RMNewPage@Comment{For printed RM Ada 2005}
 @LabeledClause{The Package Standard}
 
 @begin{Intro}
@@ -235,7 +236,7 @@ the visible part of package Standard.}
       '@latin1(232)',@\'@latin1(233)',@\'@latin1(234)',@\'@latin1(235)',@\'@latin1(236)',@\'@latin1(237)',@\'@latin1(238)',@\'@latin1(239)',@\--@RI{232 (16#E8#) .. 239 (16#EF#)}
 @comment{blank line}
       '@latin1(240)',@\'@latin1(241)',@\'@latin1(242)',@\'@latin1(243)',@\'@latin1(244)',@\'@latin1(245)',@\'@latin1(246)',@\'@latin1(247)',@\--@RI{240 (16#F0#) .. 247 (16#F7#)}
-      '@latin1(248)',@\'@latin1(249)',@\'@latin1(250)',@\'@latin1(251)',@\'@latin1(252)',@\'@latin1(253)',@\'@latin1(254)',@\'@latin1(255)'@Chg{Version=[2],New=[);],Old=[,]}@\--@RI{248 (16#F8#) .. 255 (16#FF#)}
+      '@latin1(248)',@\'@latin1(249)',@\'@latin1(250)',@\'@latin1(251)',@\'@latin1(252)',@\'@latin1(253)',@\'@latin1(254)',@\'@latin1(255)'@Chg{Version=[2],New=[);],Old=[,@\]}--@RI{248 (16#F8#) .. 255 (16#FF#)}
 
 
    --@RI{ The predefined operators for the type Character are the same as for}

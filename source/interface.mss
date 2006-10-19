@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.47 $ $Date: 2006/10/14 06:05:21 $ $Author: Randy $ }
+@comment{ $Revision: 1.48 $ $Date: 2006/10/18 00:25:28 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:21 $}
+@Comment{$Date: 2006/10/18 00:25:28 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -2303,6 +2303,7 @@ Y : Integer := X.F2; -- @RI[erroneous]]}
 
 
 
+@RMNewPage@Comment{For printed RM Ada 2005}
 @LabeledClause{Interfacing with COBOL}
 @begin{Intro}
 @Defn{interface to COBOL}

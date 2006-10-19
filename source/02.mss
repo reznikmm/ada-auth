@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2006/10/17 05:29:41 $}
+@Comment{$Date: 2006/10/18 00:25:23 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.60 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -455,7 +455,7 @@ WARNING: The items that go together are in separate columns!!}
 @ @ @ @ @ @ @ @ @ +@*
 @ @ @ @ @ @ @ @ @ ,@*
 @ @ @ @ @ @ @ @ @ @en@;@*
-@ @ @ @ @ @ @ @ @ .@Chg{Version=[2],New=[],Old=[@*@ @ @ @ @ @ @ @ @ /]}@ChgNote{We'd like to remove this line end, but it doesn't work}
+@ @ @ @ @ @ @ @ @ .@Chg{Version=[2],New=[],Old=[@*]}@Chg{Version=[2],New=[],Old=[@ @ @ @ @ @ @ @ @ /]}@ChgNote{Funny layout so HTML and RTF look right}
 @NewColumn
 @NoParanum@;name
 
@@ -469,7 +469,7 @@ asterisk, multiply@*
 plus sign@*
 comma@*
 hyphen-minus, minus@*
-full stop, dot, point@Chg{Version=[2],New=[],Old=[@*solidus, divide]}@ChgNote{We'd like to remove this line end, but it doesn't work}
+full stop, dot, point@Chg{Version=[2],New=[],Old=[@*]}@Chg{Version=[2],New=[],Old=[solidus, divide]}@ChgNote{Funny layout so HTML and RTF look right}
 
 @NewColumn
 @NoParanum@;@ @ @Chg{Version=[2],New=[graphic ],Old=[@ @ @ @ ]}symbol

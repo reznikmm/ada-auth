@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:19 $}
+@Comment{$Date: 2006/10/18 00:25:25 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -341,7 +341,7 @@ We use the unadorned term @lquotes@;ancestors@rquotes@; here to concisely define
 @Defn{private library unit}
 @Defn{private declaration of a library unit}
 A @nt<library_unit_declaration>
-or a @nt<library_unit_renaming_declaration> is @i{private}
+or a @nt<library_@!unit_@!renaming_@!declaration> is @i{private}
 if the declaration is immediately preceded
 by the reserved word @key{private};
 it is otherwise @i{public}. A library unit is private or public
@@ -483,7 +483,7 @@ declaration or body has a @nt{parent_unit_name},
 then the given declaration or body shall be a @nt<library_item>.
 The body of a program unit shall be a @nt{library_item} if and only
 if the declaration of the program unit is a @nt<library_item>.
-In a @nt{library_unit_renaming_declaration},
+In a @nt{library_@!unit_@!renaming_@!declaration},
 the @Redundant[(old)] @nt{name}
 shall denote a @nt<library_item>.
 @begin{Discussion}
@@ -501,7 +501,7 @@ and in the @key[separate] clause of a @nt<subunit>)],
 and each of its @nt{prefix}es,
 shall not denote a @nt{renaming_declaration}.
 @Redundant[On the other hand,
-a name that denotes a @nt{library_unit_renaming_declaration} is allowed
+a name that denotes a @nt{library_@!unit_@!renaming_@!declaration} is allowed
 in a @Chg{Version=[2],New=[@nt{nonlimited_with_clause}],Old=[@nt{with_clause}]}
 and other places where the name of a library unit is allowed.]
 
@@ -607,7 +607,7 @@ shall not be an @nt{operator_symbol}.
 @begin{StaticSem}
 
 A @nt<subprogram_renaming_declaration>
-that is a @nt{library_unit_renaming_declaration} is a
+that is a @nt{library_@!unit_@!renaming_@!declaration} is a
 renaming-as-declaration, not a renaming-as-body.
 
 
@@ -770,12 +770,12 @@ library unit@rquotes@;, which includes
 @nt{library_@!unit_@!renaming_@!declaration}s.
 
 The visibility rules generally imply that the renamed view of a
-@nt{library_unit_renaming_declaration} has to be mentioned in a
+@nt{library_@!unit_@!renaming_@!declaration} has to be mentioned in a
 @nt{with_@!clause} of the @nt{library_@!unit_@!renaming_@!declaration}.
 @end{Ramification}
 @begin{Honest}
 The real rule is that the renamed library unit
-has to be visible in the @nt{library_unit_renaming_declaration}.
+has to be visible in the @nt{library_@!unit_@!renaming_@!declaration}.
 @end{Honest}
 @begin{Reason}
 In most cases, @lquotes@;has to be visible@rquotes@; means there has to be a
@@ -1281,12 +1281,12 @@ generic instance, or a renaming.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06],ARef=[AI95-00412-01]}
 @ChgAdded{Version=[2],Text=[A @nt{limited_with_clause} shall not appear on a
-@nt{library_unit_body}, @nt{subunit}, or @nt{library_unit_renaming_declaration}.]}
+@nt{library_unit_body}, @nt{subunit}, or @nt{library_@!unit_@!renaming_@!declaration}.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00412-01]}
   @ChgAdded{Version=[2],Text=[We don't allow a @nt{limited_with_clause} on a
-  @nt{library_unit_renaming_declaration} because it would be useless and
+  @nt{library_@!unit_@!renaming_@!declaration} because it would be useless and
   therefore probably is a mistake. A
   renaming cannot appear in a @nt{limited_with_clause} (by the rule prior
   to this one), and a renaming of a limited view cannot appear in a
@@ -1387,7 +1387,7 @@ more than once by the applicable @nt{with_clause}s, or even within a
 given @nt{with_clause}.
 
 If a @nt{with_clause} mentions a
-@nt{library_unit_renaming_declaration},
+@nt{library_@!unit_@!renaming_@!declaration},
 it only @lquotes@;mentions@rquotes@; the @nt<prefix>es appearing explicitly
 in the @nt<with_clause>
 (and the renamed view itself);

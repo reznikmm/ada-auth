@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.50 $ $Date: 2006/02/25 04:46:54 $ $Author: Randy $ }
+@comment{ $Revision: 1.51 $ $Date: 2006/10/18 00:25:28 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2006/02/25 04:46:54 $}
+@Comment{$Date: 2006/10/18 00:25:28 $}
 
 @LabeledClause{String Handling}
 
@@ -72,7 +72,7 @@ common to the string handling packages.
 
 
 
-@RmNewPage@Comment{Insert page break so printed RM's look better.}
+@Comment{@RmNewPage  Insert page break so printed Ada 95 w/ Corr RM looks better.}
 @LabeledSubClause{The Package Strings.Maps}
 @begin{Intro}
 The package Strings.Maps defines the types, operations, and other
@@ -617,7 +617,7 @@ procedures.
                    Justify : @key[in] Alignment := Left;
                    Pad     : @key[in] Character := Space);
 
---@RI{String constructor functions}
+@keepnext@;--@RI{String constructor functions}
 
    @key[function] "*" (Left  : @key[in] Natural;
                  Right : @key[in] Character) @key[return] String;
@@ -2515,7 +2515,7 @@ If a null Wide_Character_Mapping_Function is passed to any of the
 Wide_String handling subprograms, Constraint_Error is propagated.
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00395-01]}
-@ChgAdded{Version=[2],Text=[Each Wide_Character_Set constant in the package
+@ChgDeleted{Version=[2],Text=[Each Wide_Character_Set constant in the package
 Strings.Wide_Maps.Wide_Constants contains no values outside the Character
 portion of Wide_Character. Similarly, each Wide_Character_Mapping
 constant in this package is the identity mapping when applied to
@@ -2567,23 +2567,23 @@ any element outside the Character portion of Wide_Character.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgAdded{Version=[2],Text=[Facilities for handling strings of
 Wide_Wide_Character elements are found in
-the packages Strings.Wide_Wide_Maps, Strings.Wide_Wide_Fixed,
-Strings.Wide_Wide_Bounded, Strings.Wide_Wide_Unbounded, and
-Strings.Wide_Wide_Maps.Wide_Wide_Constants, and in the
-functions Strings.Wide_Wide_Hash, Strings.Wide_Wide_Fixed.Wide_Wide_Hash,
-Strings.Wide_Wide_Bounded.Wide_Wide_Hash, and
-Strings.Wide_Wide_Unbounded.Wide_Wide_Hash.
+the packages Strings.@!Wide_Wide_@!Maps, Strings.@!Wide_Wide_@!Fixed,
+Strings.@!Wide_Wide_@!Bounded, Strings.@!Wide_Wide_@!Unbounded, and
+Strings.@!Wide_Wide_@!Maps.@!Wide_Wide_@!Constants, and in the
+functions Strings.@!Wide_Wide_@!Hash, Strings.@!Wide_Wide_@!Fixed.@!Wide_Wide_@!Hash,
+Strings.@!Wide_Wide_@!Bounded.@!Wide_@!Wide_@!Hash, and
+Strings.@!Wide_Wide_@!Unbounded.@!Wide_@!Wide_@!Hash.
 They provide the same
 string-handling operations as the corresponding packages and functions
 for strings of Character elements.
-@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Fixed]}
-@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Bounded]}
-@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Unbounded]}
-@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Hash]}
-@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Fixed],Child=[Wide_Wide_@!Hash]}
-@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Bounded],Child=[Wide_Wide_@!Hash]}
-@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Unbounded],Child=[Wide_Wide_@!Hash]}
-@ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Maps],Child=[Wide_Wide_@!Constants]}]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_Fixed]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_Bounded]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_Unbounded]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_Hash]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_Fixed],Child=[Wide_Wide_Hash]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_Bounded],Child=[Wide_Wide_Hash]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_Unbounded],Child=[Wide_Wide_Hash]}
+@ChildUnit{Parent=[Ada.Strings.Wide_Wide_Maps],Child=[Wide_Wide_Constants]}]}
 
 @begin{StaticSem}
 
@@ -2592,7 +2592,7 @@ for strings of Character elements.
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key<package> Ada.Strings.Wide_Wide_Maps @key<is>@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Maps]}
+@ChgAdded{Version=[2],Text=[@key<package> Ada.Strings.Wide_Wide_Maps @key<is>@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_Maps]}
    @key<pragma> Preelaborate(Wide_Wide_Maps);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2718,9 +2718,9 @@ Strings.Wide_Wide_Maps instead of Strings.Maps.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For each of the packages
-Strings.Fixed, Strings.Bounded, Strings.Unbounded, and Strings.Maps.Constants,
-and for functions Strings.Hash, Strings.Fixed.Hash, Strings.Bounded.Hash,
-and Strings.Unbounded.Hash,
+Strings.@!Fixed, Strings.@!Bounded, Strings.@!Unbounded, and Strings.@!Maps.Constants,
+and for functions Strings.@!Hash, Strings.@!Fixed.Hash, Strings.@!Bounded.Hash,
+and Strings.@!Unbounded.Hash,
 the corresponding wide wide string package or function has the same contents
 except that]}
 
@@ -2795,8 +2795,8 @@ Strings.Wide_Wide_Maps.Wide_Wide_Constants:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
 @ChgAdded{Version=[2],Text=[Each Wide_Wide_Character_Set constant in the package
-Strings.Wide_Wide_Maps.Wide_Wide_Constants contains no values outside the Character
-portion of Wide_Wide_Character. Similarly, each Wide_Wide_Character_Mapping constant in
+Strings.@!Wide_Wide_@!Maps.@!Wide_Wide_@!Constants contains no values outside the Character
+portion of Wide_Wide_@!Character. Similarly, each Wide_Wide_@!Character_@!Mapping constant in
 this package is the identity mapping when applied to any element outside the
 Character portion of Wide_Wide_Character.]}
 

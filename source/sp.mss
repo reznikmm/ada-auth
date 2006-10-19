@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.46 $ $Date: 2006/10/14 06:05:21 $ $Author: Randy $ }
+@comment{ $Revision: 1.47 $ $Date: 2006/10/18 00:25:28 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2006/10/14 06:05:21 $}
+@Comment{$Date: 2006/10/18 00:25:28 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -433,8 +433,8 @@ The Interrupt_Handler pragma is only allowed immediately within
 @Chg{Version=[2],New=[the],Old=[a]}
 @nt{protected_definition}@Chg{Version=[2],New=[ where the
 corresponding subprogram is declared],Old=[]}.
-The cor@!responding @nt{protected_type_declaration} @Chg{Version=[2],New=[or
-@nt{single_protected_declaration} ],Old=[]}shall
+The cor@!responding @nt{protected_@!type_declaration} @Chg{Version=[2],New=[or
+@nt{single_@!protected_@!declaration} ],Old=[]}shall
 be a library@Chg{Version=[2],New=[-],Old=[]}level
 declaration.@Chg{Version=[2],New=[],Old=[ In addition, any
 @nt{object_@!declaration} of such a type shall be a library level declaration.]}
@@ -467,7 +467,7 @@ in effect@Chg{Version=[2],New=[,],Old=[]} then upon the initialization of a
 protected object @Chg{Version=[2],New=[for which],Old=[that]} either an
 Attach_Handler or Interrupt_Handler pragma applies to one of its procedures,
 a check is made that the ceiling priority defined in the
-@nt{protected_definition} is in the range of System.Interrupt_Priority.
+@nt{protected_definition} is in the range of System.@!Interrupt_Priority.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 If the check fails, Program_Error is raised.
 

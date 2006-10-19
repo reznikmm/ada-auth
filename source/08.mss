@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:18 $}
+@Comment{$Date: 2006/10/18 00:25:24 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1444,6 +1444,7 @@ is defined (see @RefSecNum{Compilation Units - Library Units}).],Old=[]}
 @end{DiffWord95}
 
 
+@RMNewPage@Comment{For printed Ada 2005 only}
 @LabeledAddedSubClause{Version=[2],Name=[Overriding Indicators]}
 
 @begin{Intro}
@@ -1462,11 +1463,11 @@ rhs="@Chg{Version=[2],New=<[@key{not}] @key{overriding}>,Old=<>}"}
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03],ARef=[AI95-00348-01],ARef=[AI95-00397-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[If an
-@nt{abstract_subprogram_declaration}, @nt{null_procedure_declaration},
-@nt{subprogram_body}, @nt{subprogram_body_stub},
-@nt{subprogram_renaming_declaration}, @nt{generic_instantiation} of a
-subprogram, or @nt{subprogram_declaration}
-other than a protected subprogram has an @nt{overriding_indicator}, then:]}
+@nt{abstract_@!subprogram_@!declaration}, @nt{null_@!procedure_@!declaration},
+@nt{subprogram_body}, @nt{subprogram_@!body_stub},
+@nt{subprogram_@!renaming_@!declaration}, @nt{generic_@!instantiation} of a
+subprogram, or @nt{subprogram_@!declaration}
+other than a protected subprogram has an @nt{overriding_@!indicator}, then:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1577,6 +1578,7 @@ this is a new operation.]}
 @end{Extend95}
 
 
+@RMNewPage@Comment{For printed RM Ada 2005}
 @LabeledClause{Use Clauses}
 
 @begin{Intro}
@@ -1964,7 +1966,7 @@ That makes the rule different for @key[in] vs. @key[in out].
 The renamed entity shall be an object.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01],ARef=[AI95-00409-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[In the case
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[In the case
 where the type is defined by an @nt{access_definition},
 the type of the renamed object and the type defined by the
 @nt{access_definition}:]}

@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.56 $ $Date: 2006/10/17 05:29:46 $ $Author: Randy $ }
+@comment{ $Revision: 1.57 $ $Date: 2006/10/18 00:25:26 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2006/10/17 05:29:46 $}
+@Comment{$Date: 2006/10/18 00:25:26 $}
 
 @LabeledAddedClause{Version=[2],Name=[Containers]}
 
@@ -5239,7 +5239,7 @@ object @i<S> if:]}
   @ChgAdded{Version=[2],Text=[Complete replacement of an element can cause its
   memory to be deallocated while another operation is holding onto a reference
   to it. That can't be allowed. However, a simple modification of (part of) an
-  element is not a problem, so Update_Element_Preserving_Key does not cause a
+  element is not a problem, so Update_@!Element_@!Preserving_@!Key does not cause a
   problem.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5820,12 +5820,12 @@ Key parameter is used to locate an element in the set.]}
 @ChgAdded{Version=[2],Text=[If Position equals No_Element, then
 Constraint_Error is propagated; if Position does not designate an element in
 Container, then Program_Error is propagated. Otherwise,
-Update_Element_Preserving_Key uses Key to save the key value @i<K> of the
-element designated by Position. Update_Element_Preserving_Key then calls
+Update_@!Element_@!Preserving_Key uses Key to save the key value @i<K> of the
+element designated by Position. Update_@!Element_@!Preserving_Key then calls
 Process.@key{all} with that element as the argument. Program_Error is
 propagated if Process.@key{all} tampers with the elements of Container. Any
 exception raised by Process.@key{all} is propagated. After Process.@key{all}
-returns, Update_Element_Preserving_Key checks if @i<K> determines the same
+returns, Update_@!Element_@!Preserving_Key checks if @i<K> determines the same
 equivalence class as that for the new element; if not, the element is removed
 from the set and Program_Error is propagated.]}
 

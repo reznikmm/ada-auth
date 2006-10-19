@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2006/10/17 05:29:44 $}
+@Comment{$Date: 2006/10/18 00:25:24 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -298,7 +298,7 @@ array with the specified index value(s).
 The nominal subtype of the @nt<indexed_component> is the
 component subtype of the array type.
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00363-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00363-01]}
 @ChgDeleted{Version=[2],Text=[In the case of an array whose components are
 aliased, and
 of an unconstrained discriminated subtype, the components
@@ -996,7 +996,7 @@ the literal @key(null), or a @nt<string_literal>.
 The expected type for a literal @key(null) shall be a single
 access type.]}
 @begin{Discussion}
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[This new wording ("expected type ... shall be a
 single ... type") replaces the old "shall be determinable" stuff. It reflects
 an attempt to simplify and unify the description of the rules for resolving
@@ -1044,7 +1044,7 @@ not be of an anonymous
 access type@Redundant[, since such types do not have a null value
 (see @RefSecNum{Access Types})].]}
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[This is a legality rule rather than an overloading
 rule, to simplify implementations.]}
 @end{Reason}
@@ -3753,7 +3753,7 @@ is itself @i(universal_fixed) @em @Redundant[the context has to
 identify some other numeric type to which the result is to be converted,
 either explicitly or implicitly].]}
 @begin(Discussion)
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[The @i(small) of @i(universal_fixed) is infinitesimal; no loss
 of precision is permitted.
 However, fixed-fixed division is impractical to implement when
@@ -3764,7 +3764,7 @@ so we require an explicit conversion to be inserted in
 expressions like A * B * C if A, B, and C are each of some fixed point
 type.]}
 
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[On the other hand, X := A * B; is permitted by this rule, even if X, A, and B
 are all of different fixed point types, since the expected type
 for the result of the multiplication is the type of X, which is necessarily

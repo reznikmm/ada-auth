@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2006/10/17 05:29:45 $}
+@Comment{$Date: 2006/10/18 00:25:24 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 
 @LabeledClause{Type Conversions}
 
@@ -368,7 +368,7 @@ target type and the operand type, and they are not both class-wide types, one
 of the following rules shall apply:], Old=[In a view conversion for
 an untagged type, the target type shall be convertible (back) to the operand type.]}
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=<Untagged view conversions appear only as [in] out
   parameters. Hence, the reverse conversion must be legal as well.
   The forward conversion must be legal even if an out parameter,
@@ -846,7 +846,7 @@ Access Type Conversion
     Old=[an access discriminant or access parameter]}.
   @end{Ramification}
   @begin{Reason}
-    @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00231-01]}
+    @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00231-01]}
     @ChgDeleted{Version=[2],Text=[As explained in @RefSec{Access Types},
     it is important that a value of an anonymous access type
     can never be null.]}
@@ -2094,7 +2094,7 @@ X is a static constant equal to True.
 
 @end{Discussion}
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00269-01]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00269-01]}
   @ChgDeleted{Version=[2],Text=[There is no requirement to recheck these rules
   in an instance; the base range check will generally be performed at run time
   anyway.]}

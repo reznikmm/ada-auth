@@ -1,10 +1,11 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:20 $}
+@Comment{$Date: 2006/10/18 00:25:26 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
+@RMNewPage
 @LabeledClause{The Package System}
 
 @begin{Intro}
@@ -2046,6 +2047,7 @@ S'Max_Size_In_Storage_Elements might be very large.
 
 
 
+@RMNewPage@Comment{For printed Ada 2005 RM only}
 @LabeledSubClause{Unchecked Storage Deallocation}
 
 @begin{Intro}
@@ -2912,6 +2914,7 @@ followed.]}]}
 @end{Itemize}
 @end{ImplAdvice}
 
+@RMNewPage@Comment{For printed Ada 2005 RM}
 @begin{StaticSem}
 
 For @PrefixType{every subtype S of a specific type @i(T)},

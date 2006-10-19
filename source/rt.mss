@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.73 $ $Date: 2006/10/14 06:05:21 $ $Author: Randy $ }
+@comment{ $Revision: 1.74 $ $Date: 2006/10/18 00:25:27 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2006/10/14 06:05:21 $}
+@Comment{$Date: 2006/10/18 00:25:27 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1347,6 +1347,7 @@ priority will not be subject to round robin dispatching.]}
 @end{Extend95}
 
 
+@RMNewPage@Comment{For printed Ada 2005 RM}
 @LabeledAddedSubClause{Version=[2],Name=[Earliest Deadline First Dispatching]}
 
 @begin{Intro}
@@ -1975,7 +1976,7 @@ calls another protected operation on the same protected object).
 @end{DiffWord95}
 
 
-@RMNewPage@Comment{Break here so printed RM looks better.}
+@Comment{@RMNewPage  Break here so printed Ada 95 RM looks better.}
 @LabeledClause{Entry Queuing Policies}
 
 @begin{Intro}
@@ -2497,6 +2498,7 @@ affected tasks.
 @end{DiffWord95}
 
 
+@RMNewPage@Comment{For printed Ada 2005 RM}
 @LabeledAddedSubClause{Version=[2],Name=[Dynamic Priorities for Protected Objects]}
 
 @begin{Intro}
@@ -2596,6 +2598,7 @@ completion of the protected action in which it is executed.]}
 
 
 
+@RMNewPage@Comment{For printed RM Ada 2005 only}
 @LabeledClause{Preemptive Abort}
 
 @begin{Intro}

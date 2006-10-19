@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2006/10/14 06:05:19 $}
+@Comment{$Date: 2006/10/18 00:25:25 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1717,7 +1717,7 @@ Text=[For @PrefixType{every subtype S}:]}
   if S'Alignment is not zero, then X'Alignment is a nonzero integral multiple
   of S'Alignment unless specified otherwise by a representation item.]}]}@Comment{End S'Alignment}
 
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
   @ChgAdded{Version=[2],NoPrefix=[T], Text=[@PDefn2{Term=[specifiable], Sec=(of Alignment for first subtypes)}
   @Defn{Alignment clause}
   Alignment may be specified for first subtypes via an
@@ -3656,6 +3656,7 @@ The Bit_Order attribute is new to Ada 95.
 
 
 
+@RMNewPage@Comment{For printed RM Ada 2005}
 @LabeledClause{Change of Representation}
 
 @begin{Intro}
