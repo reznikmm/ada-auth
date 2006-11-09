@@ -1,6 +1,6 @@
 @Part(clauses, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/clauses.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2006/10/13 02:11:59 $}
+@comment{$Revision: 1.4 $ $Date: 2006/10/19 22:29:17 $}
 
 @LabeledSection{package Asis.Clauses}
 
@@ -47,14 +47,14 @@ into an equivalent sequence of corresponding single clauses.
 Similarly, an implementation may keep a name only once even though that
 name can appear more than once in a clause.
 
-@leading@;Appropriate Element_Kinds:
+@leading@keepnext@;Appropriate Element_Kinds:
 @begin{Display}
 A_Use_Package_Clause
 A_Use_Type_Clause
 A_With_Clause
 @end{Display}
 
-@leading@;Returns Expression_Kinds:
+@leading@keepnext@;Returns Expression_Kinds:
 @begin{Display}
 An_Identifier
 A_Selected_Component
@@ -92,13 +92,13 @@ representation_clause to query.
 
 Returns the direct_name expression following the reserved word @key[for].
 
-@leading@;Appropriate Clause_Kinds:
+@leading@keepnext@;Appropriate Clause_Kinds:
 @begin{Display}
 A_Representation_Clause
 A_Component_Clause
 @end{Display}
 
-@leading@;Returns Expression_Kinds:
+@leading@keepnext@;Returns Expression_Kinds:
 @begin{Display}
 An_Identifier
 An_Attribute_Reference
@@ -120,14 +120,14 @@ Clause @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the representation
 Returns the expression following the reserved word @key[use] or the reserved
 words @key[use at].
 
-@leading@;Appropriate Representation_Clause_Kinds:
+@leading@keepnext@;Appropriate Representation_Clause_Kinds:
 @begin{Display}
 An_Attribute_Definition_Clause
 An_Enumeration_Representation_Clause
 An_At_Clause
 @end{Display}
 
-@leading@;Returns Element_Kinds:
+@leading@keepnext@;Returns Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -160,12 +160,12 @@ Returns the static_expression appearing after the reserved words @key[at mod].
 
 Returns a Nil_Element if a mod_clause is not present.
 
-@leading@;Appropriate Representation_Clause_Kinds:
+@leading@keepnext@;Appropriate Representation_Clause_Kinds:
 @begin{Display}
 A_Record_Representation_Clause
 @end{Display}
 
-@leading@;Returns Element_Kinds:
+@leading@keepnext@;Returns Element_Kinds:
 @begin{Display}
 Not_An_Element
 An_Expression
@@ -193,18 +193,18 @@ record_representation_clause, in their order of appearance.
 Returns a Nil_Element_List if the record_representation_clause has no
 component_clause or pragma elements.
 
-@leading@;Appropriate Representation_Clause_Kinds:
+@leading@keepnext@;Appropriate Representation_Clause_Kinds:
 @begin{Display}
 A_Record_Representation_Clause
 @end{Display}
 
-@leading@;Returns Element_Kinds:
+@leading@keepnext@;Returns Element_Kinds:
 @begin{Display}
 A_Clause
 A_Pragma
 @end{Display}
 
-@leading@;Returns Clause_Kinds:
+@leading@keepnext@;Returns Clause_Kinds:
 @begin{Display}
 A_Component_Clause
 @end{Display}
@@ -234,12 +234,12 @@ Clause @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the component_clau
 
 Returns the position expression for the component_clause.
 
-@leading@;Appropriate Clause_Kinds:
+@leading@keepnext@;Appropriate Clause_Kinds:
 @begin{Display}
 A_Component_Clause
 @end{Display}
 
-@leading@;Returns Element_Kinds:
+@leading@keepnext@;Returns Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -258,12 +258,12 @@ Clause @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the component_clau
 
 Returns the first_bit .. last_bit range for the component_clause.
 
-@leading@;Appropriate Clause_Kinds:
+@leading@keepnext@;Appropriate Clause_Kinds:
 @begin{Display}
 A_Component_Clause
 @end{Display}
 
-@leading@;Returns Discrete_Range_Kinds:
+@leading@keepnext@;Returns Discrete_Range_Kinds:
 @begin{Display}
 A_Discrete_Simple_Expression_Range
 @end{Display}

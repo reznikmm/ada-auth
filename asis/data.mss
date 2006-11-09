@@ -1,6 +1,6 @@
 @Part(data, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/data.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2006/10/13 00:06:37 $}
+@comment{$Revision: 1.4 $ $Date: 2006/10/19 22:29:18 $}
 
 @LabeledSection{package Asis.Data_Decomposition (optional)}
 
@@ -43,7 +43,7 @@ Array_Component value is used to describe all array components. The value
 encapsulates the information needed, by the implementation, to efficiently
 extract any of the array components.
 
-@leading@;Assumptions and Limitations of this Interface:
+@leading@keepnext@;Assumptions and Limitations of this Interface:
 @begin{Enumerate}
 The data stream is appropriate for the ASIS host machine. For example,
 the implementation of this interface will not need to worry about
@@ -237,8 +237,8 @@ origin.
 
 @LabeledClause{type Array_Component}
 
-Type Array_Component describes the components of an array valued field for a record
-type.
+Type Array_Component describes the components of an array valued field for a
+record type.
 
 Implementation is highly implementor dependent. The "=" operator is not
 meaningful between Array_Component values unless one of them is the
@@ -317,35 +317,40 @@ array stream.
 
 @LabeledClause{type Array_Component_Iterator}
 
-Type Array_Component_Iterator is used to iterate over successive components of an
-array. This can be more efficient than using individual index values when
+Type Array_Component_Iterator is used to iterate over successive components of
+an array. This can be more efficient than using individual index values when
 extracting array components from a data stream because it substitutes two
-subroutine calls (Next and Done) for the multiplications and divisions
-implicit in indexing an N dimensional array with a single index value.
+subroutine calls (Next and Done) for the multiplications and divisions implicit
+in indexing an N dimensional array with a single index value.
 
 Iterators can be copied. The copies operate independently (have separate
 state).
 
-An example:
+@leading@keepnext@;An example:
+@begin{Example}
+@key[declare]
+   Component        : Array_Component := ...;
+   Iter             : Array_Component_Iterator;
+   Array_Stream     : Portable_Data (...) := ...;
+   Component_Stream : Portable_Data (...);
+@key[begin]
+   Iter := Array_Iterator (Component);
+   @key[while not] Done (Iter) @key[loop]
+      Component_Stream := Component_Data_Stream (Iter, Array_Stream);
+      Next (Iter);
+   @key[end loop];
+@key[end];
+@end{Example}
 
-    declare
-        Component        : Array_Component := ...;
-        Iter             : Array_Component_Iterator;
-        Array_Stream     : Portable_Data (...) := ...;
-        Component_Stream : Portable_Data (...);
-    begin
-        Iter := Array_Iterator (Component);
-        while not Done (Iter) loop
-            Component_Stream := Component_Data_Stream (Iter, Array_Stream);
-            Next (Iter);
-        end loop;
-    end;
+@ChgAdded{Version=[2],Text=[@b{@i{We need some separator between the example and the definition - RLB}}]}
 
---** TBD: Example ends here.
+@begin{DescribeCode}
+@begin{Example}
+@key[type] @AdaTypeDefn{Array_Component_Iterator} @key[is] private;
 
-    @key[type] @AdaTypeDefn{Array_Component_Iterator} @key[is] private;
-
-    @AdaObjDefn{Nil_Array_Component_Iterator} : @key[constant] Array_Component_Iterator;
+@AdaObjDefn{Nil_Array_Component_Iterator} : @key[constant] Array_Component_Iterator;
+@end{Example}
+@end{DescribeCode}
 
 
 @LabeledClause{type Portable_Data}
@@ -449,14 +454,18 @@ All conversion interfaces always return Portable_Data array values with a
 The Portable_Value type may be implemented in any way
 whatsoever. It need not be a numeric type.
 
-    @key[type] @AdaTypeDefn{Portable_Value} @key[is] @i{(Implementation_Defined)};
+@begin{DescribeCode}
+@begin{Example}
+@key[type] @AdaTypeDefn{Portable_Value} @key[is] @i{(Implementation_Defined)};
 
-    @key[subtype] @AdaSubTypeDefn{Name=[Portable_Positive],Of=[Asis.ASIS_Positive]} @key[is] Asis.ASIS_Positive
-       @key[range] 1 .. @i{Implementation_Defined_Integer_Constant};
+@key[subtype] @AdaSubTypeDefn{Name=[Portable_Positive],Of=[Asis.ASIS_Positive]} @key[is] Asis.ASIS_Positive
+   @key[range] 1 .. @i{Implementation_Defined_Integer_Constant};
 
-    @key[type] @AdaTypeDefn{Portable_Data} @key[is array] (Portable_Positive @key[range] <>) @key[of] Portable_Value;
+@key[type] @AdaTypeDefn{Portable_Data} @key[is array] (Portable_Positive @key[range] <>) @key[of] Portable_Value;
 
-    @AdaObjDefn{Nil_Portable_Data} : Portable_Data (1 .. 0);
+@AdaObjDefn{Nil_Portable_Data} : Portable_Data (1 .. 0);
+@end{Example}
+@end{DescribeCode}
 
 
 @LabeledClause{type Type_Model_Kinds}
@@ -465,161 +474,208 @@ whatsoever. It need not be a numeric type.
 
 Each Type_Definition fits into one of three type models.
 
-    @key[type] @AdaTypeDefn{Type_Model_Kinds} @key[is] (A_Simple_Static_Model,
-                              A_Simple_Dynamic_Model,
-                              A_Complex_Dynamic_Model,
-                              Not_A_Type_Model);           -- Nil arguments}
+@begin{DescribeCode}
+@begin{Example}
+@key[type] @AdaTypeDefn{Type_Model_Kinds} @key[is] (A_Simple_Static_Model,
+                          A_Simple_Dynamic_Model,
+                          A_Complex_Dynamic_Model,
+                          Not_A_Type_Model);           -- Nil arguments
+@end{Example}
+@end{DescribeCode}
+
 
 @LabeledClause{function Type_Model_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Type_Model_Kind} (Type_Definition : @key[in] Asis.Type_Definition)
+                         @key[return] Type_Model_Kinds;
 
-    @key[function] @AdaSubDefn{Type_Model_Kind} (Type_Definition : @key[in] Asis.Type_Definition)
-                             @key[return] Type_Model_Kinds;
+@key[function] @AdaSubDefn{Type_Model_Kind} (Component : @key[in] Record_Component)
+                         @key[return] Type_Model_Kinds;
 
-    @key[function] @AdaSubDefn{Type_Model_Kind} (Component : @key[in] Record_Component)
-                             @key[return] Type_Model_Kinds;
+@key[function] @AdaSubDefn{Type_Model_Kind} (Component : @key[in] Array_Component)
+                         @key[return] Type_Model_Kinds;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Type_Model_Kind} (Component : @key[in] Array_Component)
-                             @key[return] Type_Model_Kinds;
-
-Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the type definition to query
-Component       @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a record field with a record or array type
+Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the type definition to query.
+Component @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a record field with a record or array type.
 
 Returns the model that best describes the type indicated by the argument.
 Returns Not_A_Type_Model for any unexpected argument such as a Nil value.
 
-Expected Element_Kinds:
-     A_Type_Definition
+@leading@keepnext@;Expected Element_Kinds:
+@begin{Display}
+A_Type_Definition
+@end{Display}
+@end{DescribeCode}
 
-@LabeledClause{function Is_Nil}
 
+@LabeledClause{function Is_Nil (component)}
 
-    @key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Record_Component) @key[return] Boolean;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Record_Component) @key[return] Boolean;
 
-    @key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Array_Component)  @key[return] Boolean;
+@key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Array_Component)  @key[return] Boolean;
+@end{Example}
 
-Right   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component to check
+Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component to
+check.
 
 Returns True if Right is a Nil (or uninitialized) component value.
 
 Returns False for all other values.
 
 All component values are appropriate.
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Equal (component)}
 
-
+@begin{DescribeCode}
+@begin{Example}
     @key[function] @AdaSubDefn{Is_Equal} (Left  : @key[in] Record_Component;
                        Right : @key[in] Record_Component) @key[return] Boolean;
 
     @key[function] @AdaSubDefn{Is_Equal} (Left  : @key[in] Array_Component;
                        Right : @key[in] Array_Component)  @key[return] Boolean;
+@end{Example}
 
-Left    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the left component to compare
-Right   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the right component to compare
+Left @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the left component to compare.
+Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the right component to compare.
 
 Returns True if Left and Right represent the same physical component of the
 same record or array type, from the same physical compilation unit. The
 two components may or may not be from the same open ASIS Context variable.
 
-Implies:
-
-    Is_Equal (Enclosing_Compilation_Unit (Component_Declaration (Left)),
-              Enclosing_Compilation_Unit (Component_Declaration (Right)))
-    = True
+@leading@keepnext@;Implies:
+@begin{Display}
+@exam{Is_Equal (Enclosing_Compilation_Unit (Component_Declaration (Left)),
+          Enclosing_Compilation_Unit (Component_Declaration (Right))) = True}
+@end{Display}
 
 All component values are appropriate.
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Identical (component)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Identical} (Left  : @key[in] Record_Component;
+                       Right : @key[in] Record_Component) @key[return] Boolean;
 
-    @key[function] @AdaSubDefn{Is_Identical} (Left  : @key[in] Record_Component;
-                           Right : @key[in] Record_Component) @key[return] Boolean;
+@key[function] @AdaSubDefn{Is_Identical} (Left  : @key[in] Array_Component;
+                       Right : @key[in] Array_Component)  @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Is_Identical} (Left  : @key[in] Array_Component;
-                           Right : @key[in] Array_Component)  @key[return] Boolean;
-
-Left    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the left component to compare
-Right   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the right component to compare
+Left @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the left component to compare.
+Right @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the right component to compare.
 
 Returns True if Left and Right represent the same physical component of the
 same record or array type, from the same physical compilation unit and the
 same open ASIS Context variable.
 
-Implies:
-
-     Is_Identical (Enclosing_Compilation_Unit (Component_Declaration (Left)),
-                   Enclosing_Compilation_Unit (Component_Declaration (Right)))
-     = True
+@leading@keepnext@;Implies:
+@begin{Display}
+@exam{Is_Identical (Enclosing_Compilation_Unit (Component_Declaration (Left)),
+              Enclosing_Compilation_Unit (Component_Declaration (Right))) = True}
+@end{Display}
 
 All component values are appropriate.
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Array}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Array} (Component : @key[in] Record_Component) @key[return] Boolean;
 
-    @key[function] @AdaSubDefn{Is_Array} (Component : @key[in] Record_Component) @key[return] Boolean;
+@key[function] @AdaSubDefn{Is_Array} (Component : @key[in] Array_Component)  @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Is_Array} (Component : @key[in] Array_Component)  @key[return] Boolean;
-
-Component   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} any component
+Component @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} any component.
 
 Returns True if the component has an array subtype (contains an array
 value).
 
 Returns False for Nil components and any component that is not an embedded
 array.
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Record}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Record} (Component : @key[in] Record_Component) @key[return] Boolean;
 
-    @key[function] @AdaSubDefn{Is_Record} (Component : @key[in] Record_Component) @key[return] Boolean;
+@key[function] @AdaSubDefn{Is_Record} (Component : @key[in] Array_Component)  @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Is_Record} (Component : @key[in] Array_Component)  @key[return] Boolean;
-
-Component   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} any component
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} any
+component.
 
 Returns True if the component has a record subtype.
 Returns False for Nil components and any component that is not an embedded
 record.
+@end{DescribeCode}
 
 
 @LabeledClause{function Done}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Done} (Iterator : @key[in] Array_Component_Iterator) @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Done} (Iterator : @key[in] Array_Component_Iterator) @key[return] Boolean;
-
-Iterator    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the iterator to query
+Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the iterator
+to query.
 
 Returns True if the iterator has been advanced past the last array
 component. Returns True for a Nil_Array_Component_Iterator.
+@end{DescribeCode}
+
 
 @LabeledClause{procedure Next}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[procedure] @AdaSubDefn{Next} (Iterator : @key[in out] Array_Component_Iterator);
+@end{Example}
 
-    @key[procedure] @AdaSubDefn{Next} (Iterator : @key[in out] Array_Component_Iterator);
-
-Iterator    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the iterator to advance
+Iterator @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} the iterator to advance.
 
 Advances the iterator to the next array component. Use Done to test the
 iterator to see if it has passed the last component. Does nothing if the
 iterator is already past the last component.
+@end{DescribeCode}
+
 
 @LabeledClause{procedure Reset}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[procedure] @AdaSubDefn{Reset} (Iterator : @key[in out] Array_Component_Iterator);
+@end{Example}
 
-    @key[procedure] @AdaSubDefn{Reset} (Iterator : @key[in out] Array_Component_Iterator);
-
-Iterator    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the iterator to reset
+Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the iterator to reset
 
 Resets the iterator to the first array component.
+@end{DescribeCode}
+
 
 @LabeledClause{function Array_Index}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Array_Index} (Iterator : @key[in] Array_Component_Iterator)
+                     @key[return] Asis.ASIS_Natural;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Array_Index} (Iterator : @key[in] Array_Component_Iterator)
-                         @key[return] Asis.ASIS_Natural;
-
-Iterator    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the iterator to query
+Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the iterator to query.
 
 Returns the Index value which, when used in conjunction with the
 Array_Component value used to create the Iterator, indexes the same array
@@ -628,14 +684,18 @@ component as that presently addressed by the Iterator.
 Raises ASIS_Inappropriate_Element if given a Nil_Array_Component_Iterator
 or one where Done(Iterator) = True. The Status value is Data_Error.
 The Diagnosis string will indicate the kind of error detected.
+@end{DescribeCode}
+
 
 @LabeledClause{function Array_Indexes}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Array_Indexes} (Iterator : @key[in] Array_Component_Iterator)
+                        @key[return] Dimension_Indexes;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Array_Indexes} (Iterator : @key[in] Array_Component_Iterator)
-                           @key[return] Dimension_Indexes;
-
-Iterator    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the iterator to query
+Iterator @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the iterator to query.
 
 Returns the index values which, when used in conjunction with the
 Array_Component value used to create the Iterator, indexes the same array
@@ -644,22 +704,26 @@ component as that presently addressed by the Iterator.
 Raises ASIS_Inappropriate_Element if given a Nil_Array_Component_Iterator
 or one where Done(Iterator) = True. The Status value is Data_Error.
 The Diagnosis string will indicate the kind of error detected.
+@end{DescribeCode}
+
 
 @LabeledClause{function Discriminant_Components}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Discriminant_Components} (Type_Definition : @key[in] Asis.Type_Definition)
+                                 @key[return] Record_Component_List;
 
-    @key[function] @AdaSubDefn{Discriminant_Components} (Type_Definition : @key[in] Asis.Type_Definition)
-                                     @key[return] Record_Component_List;
+@key[function] @AdaSubDefn{Discriminant_Components} (Component : @key[in] Record_Component)
+                                 @key[return] Record_Component_List;
 
-    @key[function] @AdaSubDefn{Discriminant_Components} (Component : @key[in] Record_Component)
-                                     @key[return] Record_Component_List;
+@key[function] @AdaSubDefn{Discriminant_Components} (Component : @key[in] Array_Component)
+                                 @key[return] Record_Component_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Discriminant_Components} (Component : @key[in] Array_Component)
-                                     @key[return] Record_Component_List;
-
-Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition to query
-Component       @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a component which has a record subtype,
-                  Is_Record(Component) = True
+Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition to query.
+Component @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a component which has a record subtype,
+                  Is_Record(Component) = True.
 
 Returns a list of the discriminant components for records of the indicated
 record type.
@@ -672,33 +736,43 @@ a value of the indicated record type.
 All Is_Record(Component) = True arguments are appropriate. All return
 values are valid parameters for all query operations.
 
-Appropriate Element_Kinds:
-     A_Type_Definition
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Type_Definition
+@end{Display}
 
-Appropriate Type_Kinds:
-     A_Derived_Type_Definition       (derived from a record type)
-     A_Record_Type_Definition
+@leading@keepnext@;Appropriate Type_Kinds:
+@begin{Display}
+A_Derived_Type_Definition       (derived from a record type)
+A_Record_Type_Definition
+@end{Display}
 
-Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
-     A_Simple_Static_Model
-     A_Simple_Dynamic_Model
-     A_Complex_Dynamic_Model
+@leading@keepnext@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@begin{Display}
+A_Simple_Static_Model
+A_Simple_Dynamic_Model
+A_Complex_Dynamic_Model
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Record_Components (data decomposition)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Record_Components} (Type_Definition : @key[in] Asis.Type_Definition)
+                           @key[return] Record_Component_List;
 
-    @key[function] @AdaSubDefn{Record_Components} (Type_Definition : @key[in] Asis.Type_Definition)
-                               @key[return] Record_Component_List;
+@key[function] @AdaSubDefn{Record_Components} (Component : @key[in] Record_Component)
+                           @key[return] Record_Component_List;
 
-    @key[function] @AdaSubDefn{Record_Components} (Component : @key[in] Record_Component)
-                               @key[return] Record_Component_List;
+@key[function] @AdaSubDefn{Record_Components} (Component : @key[in] Array_Component)
+                           @key[return] Record_Component_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Record_Components} (Component : @key[in] Array_Component)
-                               @key[return] Record_Component_List;
-
-Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition to query
-Component       @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a component which has a record subtype,
-                  Is_Record(Component) = True
+Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition to query.
+Component @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a component
+which has a record subtype, Is_Record(Component) = True.
 
 Returns a list of the discriminants and components for the indicated simple
 static record type. (See rule 6.A above.)
@@ -710,43 +784,55 @@ representing a value of the indicated record type.
 All Is_Record (Component) = True values, having simple static types, are
 appropriate. All return values are valid parameters for all query operations.
 
-Note: If an Ada implementation uses implementation-dependent record
+@begin{SingleNote}
+If an Ada implementation uses implementation-dependent record
 components (Reference Manual 13.5.1 (15)), then each such component of
 the record type is included in the result.
+@end{SingleNote}
 
-Appropriate Element_Kinds:
-     A_Type_Definition
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Type_Definition
+@end{Display}
 
-Appropriate Type_Kinds:
-     A_Derived_Type_Definition       (derived from a record type)
-     A_Record_Type_Definition
+@leading@keepnext@;Appropriate Type_Kinds:
+@begin{Display}
+A_Derived_Type_Definition       (derived from a record type)
+A_Record_Type_Definition
+@end{Display}
 
-Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
-     A_Simple_Static_Model
+@leading@keepnext@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@begin{Display}
+A_Simple_Static_Model
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Record_Components (stream)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Record_Components}
+            (Type_Definition : @key[in] Asis.Type_Definition;
+             Data_Stream     : @key[in] Portable_Data)
+            @key[return] Record_Component_List;
 
-    @key[function] @AdaSubDefn{Record_Components}
-                (Type_Definition : @key[in] Asis.Type_Definition;
-                 Data_Stream     : @key[in] Portable_Data)
-                @key[return] Record_Component_List;
+@key[function] @AdaSubDefn{Record_Components}
+            (Component   : @key[in] Record_Component;
+             Data_Stream : @key[in] Portable_Data)
+            @key[return] Record_Component_List;
 
-    @key[function] @AdaSubDefn{Record_Components}
-                (Component   : @key[in] Record_Component;
-                 Data_Stream : @key[in] Portable_Data)
-                @key[return] Record_Component_List;
+@key[function] @AdaSubDefn{Record_Components}
+            (Component   : @key[in] Array_Component;
+             Data_Stream : @key[in] Portable_Data)
+            @key[return] Record_Component_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Record_Components}
-                (Component   : @key[in] Array_Component;
-                 Data_Stream : @key[in] Portable_Data)
-                @key[return] Record_Component_List;
-
-Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition to query
-Component       @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a component which has a record subtype,
-                  Is_Record(Component) = True
-Data_Stream     @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a data stream containing, at least, the
-                  complete set of discriminant or index constraints for the type
+Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition to query.
+Component @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a component which has a record subtype,
+                  Is_Record(Component) = True.
+Data_Stream @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} a data stream containing, at least, the
+                  complete set of discriminant or index constraints for the type.
 
 Returns a list of the discriminants and components for the indicated record
 type, using the data stream argument as a guide. The record type shall be
@@ -780,36 +866,48 @@ for non-discriminant fields.
 All Is_Record(Component) = True values are appropriate. All return values
 are valid parameters for all query operations.
 
-Note: If an Ada implementation uses implementation-dependent record
+@begin{SingleNote}
+If an Ada implementation uses implementation-dependent record
 components (Reference Manual 13.5.1 (15)), then each such component of the
 record type is included in the result.
+@end{SingleNote}
 
-Appropriate Element_Kinds:
-     A_Type_Definition
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Type_Definition
+@end{Display}
 
-Appropriate Type_Kinds:
-     A_Derived_Type_Definition       (derived from a record type)
-     A_Record_Type_Definition
+@leading@keepnext@;Appropriate Type_Kinds:
+@begin{Display}
+A_Derived_Type_Definition       (derived from a record type)
+A_Record_Type_Definition
+@end{Display}
 
-Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
-     A_Simple_Static_Model
-     A_Simple_Dynamic_Model
+@leading@keepnext@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@begin{Display}
+A_Simple_Static_Model
+A_Simple_Dynamic_Model
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Array_Components}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Array_Components} (Type_Definition : @key[in] Asis.Type_Definition)
+                          @key[return] Array_Component;
 
-    @key[function] @AdaSubDefn{Array_Components} (Type_Definition : @key[in] Asis.Type_Definition)
-                              @key[return] Array_Component;
+@key[function] @AdaSubDefn{Array_Components} (Component : @key[in] Record_Component)
+                          @key[return] Array_Component;
 
-    @key[function] @AdaSubDefn{Array_Components} (Component : @key[in] Record_Component)
-                              @key[return] Array_Component;
+@key[function] @AdaSubDefn{Array_Components} (Component : @key[in] Array_Component)
+                          @key[return] Array_Component;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Array_Components} (Component : @key[in] Array_Component)
-                              @key[return] Array_Component;
-
-Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the array type definition to query
-Component       @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a component which has an array subtype,
-                  Is_Array(Component) = True
+Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the array type definition to query.
+Component @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a
+component which has an array subtype, Is_Array(Component) = True.
 
 Returns a single component, describing all components of the indicated
 array type. The array type shall be a simple static, or a simple dynamic
@@ -822,61 +920,74 @@ type.
 All Is_Array (Component) = True values are appropriate. All return values
 are valid parameters for all query operations.
 
-Appropriate Element_Kinds:
-     A_Type_Definition
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Type_Definition
+@end{Display}
 
-Appropriate Type_Kinds:
-     A_Derived_Type_Definition       (derived from an array type)
-     An_Unconstrained_Array_Definition
-     A_Constrained_Array_Definition
+@leading@keepnext@;Appropriate Type_Kinds:
+@begin{Display}
+A_Derived_Type_Definition       (derived from an array type)
+An_Unconstrained_Array_Definition
+A_Constrained_Array_Definition
+@end{Display}
 
-Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
-     A_Simple_Static_Model
-     A_Simple_Dynamic_Model
+@leading@keepnext@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@begin{Display}
+A_Simple_Static_Model
+A_Simple_Dynamic_Model
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Array_Iterator}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Array_Iterator} (Component : @key[in] Array_Component)
+                        @key[return] Array_Component_Iterator;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Array_Iterator} (Component : @key[in] Array_Component)
-                            @key[return] Array_Component_Iterator;
-
-Component   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} an array component to be used for iteration
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} an array component to be used for iteration
 
 Returns an iterator poised to fetch the 1st component of an array.
+@end{DescribeCode}
 
 
 @LabeledClause{function Component_Data_Stream}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Component_Data_Stream}
+            (Component   : @key[in] Record_Component;
+             Data_Stream : @key[in] Portable_Data)
+            @key[return] Portable_Data;
 
-    @key[function] @AdaSubDefn{Component_Data_Stream}
-                (Component   : @key[in] Record_Component;
-                 Data_Stream : @key[in] Portable_Data)
-                @key[return] Portable_Data;
+@key[function] @AdaSubDefn{Component_Data_Stream}
+            (Component   : @key[in] Array_Component;
+             Index       : @key[in] Asis.ASIS_Positive;
+             Data_Stream : @key[in] Portable_Data)
+            @key[return] Portable_Data;
 
-    @key[function] @AdaSubDefn{Component_Data_Stream}
-                (Component   : @key[in] Array_Component;
-                 Index       : @key[in] Asis.ASIS_Positive;
-                 Data_Stream : @key[in] Portable_Data)
-                @key[return] Portable_Data;
+@key[function] @AdaSubDefn{Component_Data_Stream}
+            (Component   : @key[in] Array_Component;
+             Indexes     : @key[in] Dimension_Indexes;
+             Data_Stream : @key[in] Portable_Data)
+            @key[return] Portable_Data;
 
-    @key[function] @AdaSubDefn{Component_Data_Stream}
-                (Component   : @key[in] Array_Component;
-                 Indexes     : @key[in] Dimension_Indexes;
-                 Data_Stream : @key[in] Portable_Data)
-                @key[return] Portable_Data;
+@key[function] @AdaSubDefn{Component_Data_Stream}
+            (Iterator    : @key[in] Array_Component_Iterator;
+             Data_Stream : @key[in] Portable_Data)
+            @key[return] Portable_Data;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Component_Data_Stream}
-                (Iterator    : @key[in] Array_Component_Iterator;
-                 Data_Stream : @key[in] Portable_Data)
-                @key[return] Portable_Data;
-
-Component   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component or discriminant to be extracted
-Index       @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} an index, 1..Array_Length, within an array
-Indexes     @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a list of index values, there is one value for
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component or discriminant to be extracted.
+Index @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} an index, 1..Array_Length, within an array.
+Indexes @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} a list of index values, there is one value for
               each dimension of the array type, each index N is in the
-              range 1..Array_Length (Component, N);
-Iterator    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the array component to extract
-Data_Stream @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the data stream from which to extract the result
+              range 1..Array_Length (Component, N);.
+Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the array component to extract.
+Data_Stream @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the data stream from which to extract the result.
 
 Returns a data stream representing just the value of the chosen Component.
 The return value is sliced from the data stream. The Data_Stream shall
@@ -894,14 +1005,18 @@ or one where Done(Iterator) = True. The Status value is Data_Error.
 The Diagnosis string will indicate the kind of error detected.
 
 All non-Nil component values are appropriate.
+@end{DescribeCode}
+
 
 @LabeledClause{function Component_Declaration}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Component_Declaration} (Component : @key[in] Record_Component)
+                               @key[return] Asis.Declaration;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Component_Declaration} (Component : @key[in] Record_Component)
-                                   @key[return] Asis.Declaration;
-
-Component   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component to be queried
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component to be queried
 
 Returns an Asis.Declaration, which is either A_Component_Declaration
 or A_Discriminant_Specification. These values can be used to determine the
@@ -912,12 +1027,17 @@ component declaration for an implementation-defined component (Reference Manual
 
 All non-Nil component values are appropriate.
 
-Returns Element_Kinds:
-     A_Declaration
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Declaration
+@end{Display}
 
-Returns Declaration_Kinds:
-     A_Component_Declaration
-     A_Discriminant_Specification
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+A_Component_Declaration
+A_Discriminant_Specification
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Component_Indication}
@@ -936,7 +1056,7 @@ the subtype, type, and base type of the array components.
 
 All non-Nil component values are appropriate.
 
-@leading@;Returns Element_Kinds:
+@leading@keepnext@;Returns Element_Kinds:
 @begin{Display}
 A_Subtype_Indication
 @end{Display}
@@ -951,7 +1071,7 @@ A_Subtype_Indication
                               @key[return] Asis.Defining_Name_List;
 @end{Example}
 
-Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition to query
+Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition to query.
 
 Returns a list of all discriminant and component entity names defined by
 the record type. All record type definitions are appropriate for this
@@ -961,18 +1081,18 @@ type. This list does not include the names of implementation-defined
 components (Reference Manual 13.5.1 (15)); those name have the form of
 An_Attribute_Reference expression.
 
-@leading@;Appropriate Element_Kinds:
+@leading@keepnext@;Appropriate Element_Kinds:
 @begin{Display}
 A_Type_Definition
 @end{Display}
 
-@leading@;Appropriate Type_Kinds:
+@leading@keepnext@;Appropriate Type_Kinds:
 @begin{Display}
 A_Derived_Type_Definition       (derived from a record type)
 A_Record_Type_Definition
 @end{Display}
 
-@leading@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@leading@keepnext@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 A_Simple_Dynamic_Model
@@ -1050,12 +1170,12 @@ allocated to hold each array component.
 
 All non-Nil component values are appropriate.
 
-@leading@;Appropriate Element_Kinds:
+@leading@keepnext@;Appropriate Element_Kinds:
 @begin{Display}
 A_Type_Definition
 @end{Display}
 
-@leading@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@leading@keepnext@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 @end{Display}
@@ -1092,12 +1212,12 @@ Data_Stream is checked.
 The Data_Stream may be a data stream or it may be an artificial
 data stream created by the Construct_Artificial_Data_Stream operation.
 
-@leading@;Appropriate Element_Kinds:
+@leading@keepnext@;Appropriate Element_Kinds:
 @begin{Display}
 A_Type_Definition
 @end{Display}
 
-@leading@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@leading@keepnext@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 A_Simple_Dynamic_Model
@@ -1291,12 +1411,12 @@ component values may then be used for any purpose. In particular, they may
 be used to determine First_Bit, Last_Bit, and Size values for all record
 discriminants and components.
 
-@leading@;Appropriate Element_Kinds:
+@leading@keepnext@;Appropriate Element_Kinds:
 @begin{Display}
 A_Type_Definition
 @end{Display}
 
-@leading@;Appropriate Type_Kinds:
+@leading@keepnext@;Appropriate Type_Kinds:
 @begin{Display}
 A_Derived_Type_Definition       (derived from a record type)
 A_Record_Type_Definition

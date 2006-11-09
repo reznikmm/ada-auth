@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.8 $ $Date: 2006/10/13 00:06:38 $}
+@comment{$Revision: 1.9 $ $Date: 2006/10/19 22:29:18 $}
 
 @LabeledSection{package Asis}
 
@@ -1292,7 +1292,7 @@ This allows queries to directly provide the sequence_of_statements enclosed
 by A_Path elements, avoiding the extra step of returning an element
 representing such an alternative.
 
-@leading@;For example,
+@leading@keepnext@;For example,
 @begin{Example}
    @key[select]   -- A_Select_Path enclosing a sequence of two statements
 

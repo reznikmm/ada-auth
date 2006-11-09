@@ -1,6 +1,6 @@
 @Part(comp-rel, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/comp-rel.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/09/28 05:11:58 $}
+@comment{$Revision: 1.3 $ $Date: 2006/10/19 22:29:17 $}
 
 
 @LabeledSection{package Asis.Compilation_Units.Relations}
@@ -55,10 +55,10 @@ which they semantically depend.
 @b{Circular}: A list of circular semantic dependencies between units.
 @end{Itemize}
 
-@leading@;These lists are further described as:
+@leading@keepnext@;These lists are further described as:
 
 @begin{Itemize}
-@leading@;Consistent units list:
+@leading@keepnext@;Consistent units list:
 @begin{InnerItemize}
    @noprefix@;The semantics for the ordering of units in the first list are
    defined by the individual queries.
@@ -67,7 +67,7 @@ which they semantically depend.
    two units in the list are Is_Equal or Is_Identical.
 @end{InnerItemize}
 
-@leading@;Inconsistent units list:
+@leading@keepnext@;Inconsistent units list:
 @begin{InnerItemize}
    @noprefix@;The second list is made up of unit pairs.
 
@@ -109,13 +109,13 @@ which they semantically depend.
 the first unit of each pair if it cannot determine the supporting unit
 causing the inconsistent semantic dependence.
 
-@leading@noprefix@;For the above example, the list returned is:
+@leading@keepnext@noprefix@;For the above example, the list returned is:
 
 @begin{Example}
             DC DB DA CB CA BA
 @end{Example}
 
-@leading@noprefix@;This list reports all dependencies:
+@leading@keepnext@noprefix@;This list reports all dependencies:
 
 @begin{Example}
             D withed by C withed by B withed by A => DC DB DA
@@ -125,14 +125,14 @@ causing the inconsistent semantic dependence.
 @end{InnerItemize}
 @end{ImplPerm}
 
-@leading@;Missing dependence list:
+@leading@keepnext@;Missing dependence list:
 @begin{InnerItemize}
    @noprefix@;The third list is made up of unit pairs.  Each pairing consists of a
    unit followed by a missing related unit needed by the first unit.
    A missing unit is a required Compilation_Unit, with a known name, with a
    Unit_Kind that is either A_Nonexistent_Declaration or A_Nonexistent_Body.
 
-   @leading@noprefix@;For example:
+   @leading@keepnext@noprefix@;For example:
 
    @noprefix@;Given a list containing the units:  AB AC
 
@@ -150,7 +150,7 @@ causing the inconsistent semantic dependence.
    determine it to be needed. Reference Manual 10.2.
 @end{InnerItemize}
 
-@leading@;Circular dependence list:
+@leading@keepnext@;Circular dependence list:
 @begin{InnerItemize}
 
    @noprefix@;Circular dependencies between compilation units are provided in the
@@ -256,7 +256,7 @@ list of Dependents for the Compilation_Units.
 -- All units in the result will have an Enclosing_Context value that
 Is_Identical to The_Context.
 
-@leading@;Appropriate Unit_Kinds:
+@leading@keepnext@;Appropriate Unit_Kinds:
 @begin{Display}
 A_Procedure
 A_Function
@@ -340,7 +340,7 @@ required to elaborate the arguments.
 Use the Context_Clause_Elements query to get pragma Elaborate elements
 for a compilation unit.
 
-@leading@;Appropriate Unit_Kinds:
+@leading@keepnext@;Appropriate Unit_Kinds:
 @begin{Display}
 A_Procedure
 A_Function

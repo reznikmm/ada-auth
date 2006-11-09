@@ -31,7 +31,7 @@
 @HTMLTabs{EmulateFixedOnly}
 @HTMLHeader{<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Semantic Interface Specification (ASIS)</B></SPAN> &mdash; <A HREF="AS-TTL.html"><B>Legal Information</B></A></DIV>}
 @HTMLFooter{}
-@HTMLColor{Text=[#000000],Background=[#F0FFF0],Link=[#0000FF],VLink=[#800080],ALink=[#FF0000]}
+@HTMLColor{Text=[#000000],Background=[#FFF0E8],Link=[#0000FF],VLink=[#800080],ALink=[#FF0000]}
 
 @Comment{Source files and related items, in collating order}
 @Source{Name=<Title.MSS>,SectionName=<Ttl>,SectionNumber=[0],NewSection=[T]}

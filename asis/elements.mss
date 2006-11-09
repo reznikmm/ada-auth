@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2006/10/14 06:06:28 $}
+@comment{$Revision: 1.4 $ $Date: 2006/10/19 22:29:18 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -34,7 +34,7 @@ A_Nonexistent_Body, A_Configuration_Compilation, or An_Unknown_Unit.
 
 All Unit_Kinds are appropriate except Not_A_Unit.
 
-@leading@;Returns Declaration_Kinds:
+@leading@keepnext@;Returns Declaration_Kinds:
 @begin{Display}
 Not_A_Declaration
 A_Function_Body_Declaration
@@ -138,13 +138,13 @@ Compilation_Pragmas query.
 
 All Unit_Kinds are appropriate except Not_A_Unit.
 
-@leading@;Returns Element_Kinds:
+@leading@keepnext@;Returns Element_Kinds:
 @begin{Display}
 A_Pragma
 A_Clause
 @end{Display}
 
-@leading@;Returns Clause_Kinds:
+@leading@keepnext@;Returns Clause_Kinds:
 @begin{Display}
 A_With_Clause
 A_Use_Package_Clause
@@ -171,7 +171,7 @@ dependent, many pragmas have the same effect regardless of order.)
 
 Returns a Nil_Element_List if there are no such configuration pragmas.
 
-@leading@;Returns Element_Kinds:
+@leading@keepnext@;Returns Element_Kinds:
 @begin{Display}
 A_Pragma
 @end{Display}
@@ -225,7 +225,7 @@ is true for other Ada predefined packages, such as Ada.Text_Io and
 Ada.Direct_Io. The Origin query can be used to determine whether or
 not a particular unit is an Ada Predefined unit.
 
-@leading@;Returns a Nil_Element_List if the compilation unit:
+@leading@keepnext@;Returns a Nil_Element_List if the compilation unit:
 
 @begin{Itemize}
 has no such applicable pragmas.
@@ -235,7 +235,7 @@ is an An_Unknown_Unit, A_Nonexistent_Declaration, or A_Nonexistent_Body.
 
 All Unit_Kinds are appropriate except Not_A_Unit.
 
-@leading@;Returns Element_Kinds:
+@leading@keepnext@;Returns Element_Kinds:
 @begin{Display}
 A_Pragma
 @end{Display}
@@ -320,7 +320,7 @@ Returns the Pragma_Kinds value of Pragma_Element.
 Returns Not_A_Pragma for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-@leading@;Expected Element_Kinds:
+@leading@keepnext@;Expected Element_Kinds:
 @begin{Display}
 A_Pragma
 @end{Display}
@@ -343,7 +343,7 @@ Returns the Defining_Name_Kinds value of the Defining_Name.
 Returns Not_A_Defining_Name for any unexpected element such as a
 Nil_Element, A_Clause, or A_Statement.
 
-@leading@;Expected Element_Kinds:
+@leading@keepnext@;Expected Element_Kinds:
 @begin{Display}
 A_Defining_Name
 @end{Display}
@@ -366,7 +366,7 @@ Returns the Declaration_Kinds value of the Declaration.
 Returns Not_A_Declaration for any unexpected element such as a
 Nil_Element, A_Definition, or A_Statement.
 
-@leading@;Expected Element_Kinds:
+@leading@keepnext@;Expected Element_Kinds:
 @begin{Display}
 A_Declaration
 @end{Display}
@@ -389,7 +389,7 @@ Returns the Trait_Kinds value of the Element.
 Returns Not_A_Trait for any unexpected element such as a
 Nil_Element, A_Statement, or An_Expression.
 
-@leading@;Expected Declaration_Kinds:
+@leading@keepnext@;Expected Declaration_Kinds:
 @begin{Display}
 A_Private_Type_Declaration
 A_Private_Extension_Declaration
@@ -403,7 +403,7 @@ A_Function_Declaration
 A_Parameter_Specification
 @end{Display}
 
-@leading@;Expected Definition_Kinds:
+@leading@keepnext@;Expected Definition_Kinds:
 @begin{Display}
 A_Component_Definition
 A_Private_Type_Definition
@@ -411,7 +411,7 @@ A_Tagged_Private_Type_Definition
 A_Private_Extension_Definition
 @end{Display}
 
-@leading@;Expected Type_Kinds:
+@leading@keepnext@;Expected Type_Kinds:
 @begin{Display}
 A_Derived_Type_Definition
 A_Derived_Record_Extension_Definition
@@ -419,7 +419,7 @@ A_Record_Type_Definition
 A_Tagged_Record_Type_Definition
 @end{Display}
 
-@leading@;Expected Formal_Type_Kinds:
+@leading@keepnext@;Expected Formal_Type_Kinds:
 @begin{Display}
 A_Formal_Private_Type_Definition
 A_Formal_Tagged_Private_Type_Definition
@@ -444,7 +444,7 @@ Returns the Declaration_Origins value of the Declaration.
 Returns Not_A_Declaration_Origin for any unexpected element such as a
 Nil_Element, A_Definition, or A_Clause.
 
-@leading@;Expected Element_Kinds:
+@leading@keepnext@;Expected Element_Kinds:
 @begin{Display}
 A_Declaration
 @end{Display}
@@ -469,7 +469,7 @@ Returns A_Default_In_Mode for an access parameter.
 Returns Not_A_Mode for any unexpected element such as a
 Nil_Element, A_Definition, or A_Statement.
 
-@leading@;Expected Declaration_Kinds:
+@leading@keepnext@;Expected Declaration_Kinds:
 @begin{Display}
 A_Parameter_Specification
 A_Formal_Object_Declaration
@@ -493,7 +493,7 @@ Returns the Subprogram_Default_Kinds value of the Declaration.
 Returns Not_A_Declaration for any unexpected element such as a
 Nil_Element, A_Definition, or A_Statement.
 
-@leading@;Expected Declaration_Kinds:
+@leading@keepnext@;Expected Declaration_Kinds:
 @begin{Display}
 A_Formal_Function_Declaration
 A_Formal_Procedure_Declaration
@@ -517,7 +517,7 @@ Returns the Definition_Kinds value of the Definition.
 Returns Not_A_Definition for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-@leading@;Expected Element_Kinds:
+@leading@keepnext@;Expected Element_Kinds:
 @begin{Display}
 A_Definition
 @end{Display}
@@ -540,7 +540,7 @@ Returns the Type_Kinds value of the Definition.
 Returns Not_A_Type_Definition for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-@leading@;Expected Definition_Kinds:
+@leading@keepnext@;Expected Definition_Kinds:
 @begin{Display}
 A_Type_Definition
 @end{Display}
@@ -564,7 +564,7 @@ Returns the Formal_Type_Kinds value of the Definition.
 Returns Not_A_Formal_Type_Definition for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-@leading@;Expected Definition_Kinds:
+@leading@keepnext@;Expected Definition_Kinds:
 @begin{Display}
 A_Formal_Type_Definition
 @end{Display}
@@ -588,7 +588,7 @@ Returns the Access_Type_Kinds value of the Definition.
 Returns Not_An_Access_Type_Definition for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-@leading@;Expected Type_Kinds:
+@leading@keepnext@;Expected Type_Kinds:
 @begin{Display}
 An_Access_Type_Definition
 @end{Display}
@@ -612,7 +612,7 @@ Returns the Root_Type_Kinds value of the Definition.
 Returns Not_A_Root_Type_Definition for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-@leading@;Expected Type_Kinds:
+@leading@keepnext@;Expected Type_Kinds:
 @begin{Display}
 A_Root_Type_Definition
 @end{Display}
@@ -636,7 +636,7 @@ Returns the Constraint_Kinds value of the Definition.
 Returns Not_A_Constraint for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-@leading@;Expected Definition_Kinds:
+@leading@keepnext@;Expected Definition_Kinds:
 @begin{Display}
 A_Constraint
 @end{Display}
@@ -660,7 +660,7 @@ Returns the Discrete_Range_Kinds value of the Definition.
 Returns Not_A_Discrete_Range for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-@leading@;Expected Definition_Kinds:
+@leading@keepnext@;Expected Definition_Kinds:
 @begin{Display}
 A_Discrete_Subtype_Definition
 A_Discrete_Range
@@ -684,7 +684,7 @@ Returns the Expression_Kinds value of the Expression.
 Returns Not_An_Expression for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-@leading@;Expected Element_Kinds:
+@leading@keepnext@;Expected Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -708,12 +708,12 @@ element.
 Returns Not_An_Operator for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-@leading@;Expected Defining_Name_Kinds:
+@leading@keepnext@;Expected Defining_Name_Kinds:
 @begin{Display}
 A_Defining_Operator_Symbol
 @end{Display}
 
-@leading@;Expected Expression_Kinds:
+@leading@keepnext@;Expected Expression_Kinds:
 @begin{Display}
 An_Operator_Symbol
 @end{Display}
@@ -737,7 +737,7 @@ Returns the Attribute_Kinds value of the Expression.
 Returns Not_An_Attribute for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-@leading@;Expected Expression_Kinds:
+@leading@keepnext@;Expected Expression_Kinds:
 @begin{Display}
 An_Attribute_Reference
 @end{Display}

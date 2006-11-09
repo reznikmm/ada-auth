@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/09/28 05:11:59 $}
+@comment{$Revision: 1.2 $ $Date: 2006/10/19 22:29:18 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -924,7 +924,7 @@ Expected Declaration_Kinds:
      A_Protected_Body_Declaration
      An_Entry_Body_Declaration
 
-@LabeledClause{function Corresponding_Declaration}
+@LabeledClause{function Corresponding_Declaration (declaration)}
 
 
     @key[function] @AdaSubDefn{Corresponding_Declaration}

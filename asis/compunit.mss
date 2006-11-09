@@ -1,6 +1,6 @@
 @Part(compunit, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/compunit.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/09/28 05:11:58 $}
+@comment{$Revision: 1.3 $ $Date: 2006/10/19 22:29:17 $}
 
 
 @LabeledSection{package Asis.Compilation_Units}
@@ -74,7 +74,7 @@ result of some sort of failure.
            @key[return] Asis.Unit_Classes;
 @end{Example}
 
-Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the compilation unit to query
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the compilation unit to query.
 
 Returns the Unit_Classes value of the compilation unit.
 Returns Not_A_Class for a Nil_Compilation_Unit.
@@ -91,7 +91,7 @@ All Unit_Kinds are expected.
            @key[return] Asis.Unit_Origins;
 @end{Example}
 
-Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the compilation unit to query
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the compilation unit to query.
 
 Returns the Unit_Origins value of the unit.
 Returns Not_An_Origin for a compilation_unit whose Unit_Kind is
@@ -111,7 +111,7 @@ All Unit_Kinds are expected.
            @key[return] Asis.Context;
 @end{Example}
 
-Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the unit whose Context is required
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the unit whose Context is required.
 
 Returns the Context containing the compilation unit.
 
@@ -141,7 +141,7 @@ Nil_Compilation_Unit.
            @key[return] Asis.Ada_Environments.Containers.Container;
 @end{Example}
 
-Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the unit whose Container is required.
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the unit whose Container is required..
 
 Returns the Container of the Context containing the compilation unit.
 Compilation units always remember the ASIS Context and Container from
@@ -155,12 +155,15 @@ Nil_Compilation_Unit.
 @LabeledClause{function Library_Unit_Declaration}
 
 
-    @key[function] @AdaSubDefn{Library_Unit_Declaration} (Name        : @key[in] Wide_String;
-                                       The_Context : @key[in] Asis.Context)
-                                       @key[return] Asis.Compilation_Unit;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Library_Unit_Declaration} (Name        : @key[in] Wide_String;
+                                   The_Context : @key[in] Asis.Context)
+                                    @key[return] Asis.Compilation_Unit;
+@end{Example}
 
-Name       @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the defining program unit name
-The_Context@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
+Name @Chg{Version=[1],New=[specifies],Old=[       @en Specifies]} the defining program unit name.
+The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment.
 
 Returns the library_unit_declaration or library_unit_renaming_declaration
 with the name, contained in The_Context.
@@ -175,15 +178,19 @@ A Nil_Compilation_Unit is returned if no such declaration exists.
 
 Any non-Nil result will have an Enclosing_Context value that Is_Identical
 to the Context. Never returns a unit with a nonexistent unit kind.
+@end{DescribeCode}
+
 
 @LabeledClause{function Compilation_Unit_Body}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Compilation_Unit_Body} (Name        : @key[in] Wide_String;
+                                The_Context : @key[in] Asis.Context)
+                                @key[return] Asis.Compilation_Unit;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Compilation_Unit_Body} (Name        : @key[in] Wide_String;
-                                    The_Context : @key[in] Asis.Context)
-                                    @key[return] Asis.Compilation_Unit;
-
-Name       @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the defining_program_unit_name
+Name @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} the defining_program_unit_name
 The_Context@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
 
 Returns the library_unit_body or subunit with the name, contained
@@ -193,14 +200,18 @@ A Nil_Compilation_Unit is returned if no such body exists.
 
 Any non-Nil result will have an Enclosing_Context value that Is_Identical
 to The_Context. Never returns a unit with a nonexistent unit kind.
+@end{DescribeCode}
+
 
 @LabeledClause{function Library_Unit_Declarations (context)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Library_Unit_Declarations} (The_Context : @key[in] Asis.Context)
+                                   @key[return] Asis.Compilation_Unit_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Library_Unit_Declarations} (The_Context : @key[in] Asis.Context)
-                                       @key[return] Asis.Compilation_Unit_List;
-
-The_Context@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
+The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
 
 Returns a list of all library_unit_declaration and
 library_unit_renaming_declaration elements contained in The_Context. Individual
@@ -217,14 +228,18 @@ Manual 10.1.4(4).
 
 All units in the result will have an Enclosing_Context value that
 Is_Identical to The_Context.
+@end{DescribeCode}
+
 
 @LabeledClause{function Compilation_Unit_Bodies (context)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Compilation_Unit_Bodies} (The_Context : @key[in] Asis.Context)
+                                 @key[return] Asis.Compilation_Unit_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Compilation_Unit_Bodies} (The_Context : @key[in] Asis.Context)
-                                     @key[return] Asis.Compilation_Unit_List;
-
-The_Context@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
+The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
 
 Returns a list of all library_unit_body and subunit elements contained in
 The_Context. Individual units will appear only once in an order that is not
@@ -238,15 +253,18 @@ a nonexistent unit kind.
 
 All units in the result will have an Enclosing_Context value that
 Is_Identical to The_Context.
+@end{DescribeCode}
 
 
 @LabeledClause{function Compilation_Units (context)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Compilation_Units} (The_Context : @key[in] Asis.Context)
+                           @key[return] Asis.Compilation_Unit_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Compilation_Units} (The_Context : @key[in] Asis.Context)
-                               @key[return] Asis.Compilation_Unit_List;
-
-The_Context@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
+The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
 
 Returns a list of all compilation units contained in The_Context.
 Individual units will appear only once in an order that is not defined.
@@ -259,19 +277,23 @@ a nonexistent unit kind.
 
 All units in the result will have an Enclosing_Context value that
 Is_Identical to The_Context.
+@end{DescribeCode}
+
 
 @LabeledClause{function Corresponding_Children}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Children} (Library_Unit : @key[in] Asis.Compilation_Unit)
+                  @key[return] Asis.Compilation_Unit_List;
 
-    @key[function] @AdaSubDefn{Corresponding_Children} (Library_Unit : @key[in] Asis.Compilation_Unit)
-                      @key[return] Asis.Compilation_Unit_List;
+@key[function] @AdaSubDefn{Corresponding_Children} (Library_Unit : @key[in] Asis.Compilation_Unit;
+                                 The_Context  : @key[in] Asis.Context)
+                  @key[return] Asis.Compilation_Unit_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Corresponding_Children} (Library_Unit : @key[in] Asis.Compilation_Unit;
-                                     The_Context  : @key[in] Asis.Context)
-                      @key[return] Asis.Compilation_Unit_List;
-
-Library_Unit@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the library unit whose children are desired
-The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
+Library_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the library unit whose children are desired.
+The_Context @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} a program Context environment.
 
 Returns a list of the child units for the given parent library unit.
 
@@ -286,11 +308,12 @@ of children, and so on.
 Returns a Nil_Compilation_Unit_List for all library unit arguments that
 do not have any child units contained in The_Context.
 
-These two function calls will always produce identical results:
+@leading@;These two function calls will always produce identical results:
 
-    Units := Corresponding_Children ( Unit );
-    Units := Corresponding_Children ( Unit, Enclosing_Context ( Unit ));
-
+@begin{Display}
+@exam{Units := Corresponding_Children (Unit);
+Units := Corresponding_Children (Unit, Enclosing_Context (Unit));}
+@end{Display}
 Any non-Nil result will have an Enclosing_Context value that Is_Identical
 to The_Context.
 
@@ -300,52 +323,60 @@ This query is one means of obtaining (Is_Equal) child units
 from separate ASIS Context values whose underlying implementations
 overlap.
 
-Appropriate Unit_Kinds:
-     A_Package
-     A_Generic_Package
-     A_Package_Instance
+@leading@keepnext@;Appropriate Unit_Kinds:
+@begin{Display}
+A_Package
+A_Generic_Package
+A_Package_Instance
+@end{Display}
 
-Returns Unit_Kinds:
-     A_Procedure
-     A_Function
-     A_Package
-     A_Generic_Procedure
-     A_Generic_Function
-     A_Generic_Package
-     A_Procedure_Instance
-     A_Function_Instance
-     A_Package_Instance
-     A_Procedure_Renaming
-     A_Function_Renaming
-     A_Package_Renaming
-     A_Generic_Procedure_Renaming
-     A_Generic_Function_Renaming
-     A_Generic_Package_Renaming
-     A_Procedure_Body
-     A_Function_Body
-     A_Package_Body
-     An_Unknown_Unit
+@leading@keepnext@;Returns Unit_Kinds:
+@begin{Display}
+A_Procedure
+A_Function
+A_Package
+A_Generic_Procedure
+A_Generic_Function
+A_Generic_Package
+A_Procedure_Instance
+A_Function_Instance
+A_Package_Instance
+A_Procedure_Renaming
+A_Function_Renaming
+A_Package_Renaming
+A_Generic_Procedure_Renaming
+A_Generic_Function_Renaming
+A_Generic_Package_Renaming
+A_Procedure_Body
+A_Function_Body
+A_Package_Body
+An_Unknown_Unit
+@end{Display}
 
 If the declaration of a child is inconsistent with the argument of the
 query, neither the declaration nor the body is returned. If the
 declaration of a child is consistent with the argument, but the body
 is not, the declaration is returned, and for the body, the result of
 the Corresponding_Body query applied to the declaration is returned.
+@end{DescribeCode}
+
 
 @LabeledClause{function Corresponding_Parent_Declaration}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Parent_Declaration}
+            (Library_Unit : @key[in] Asis.Compilation_Unit)
+            @key[return] Asis.Compilation_Unit;
 
-    @key[function] @AdaSubDefn{Corresponding_Parent_Declaration}
-                (Library_Unit : @key[in] Asis.Compilation_Unit)
-                @key[return] Asis.Compilation_Unit;
+@key[function] @AdaSubDefn{Corresponding_Parent_Declaration}
+            (Library_Unit : @key[in] Asis.Compilation_Unit;
+             The_Context  : @key[in] Asis.Context)
+            @key[return] Asis.Compilation_Unit;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Corresponding_Parent_Declaration}
-                (Library_Unit : @key[in] Asis.Compilation_Unit;
-                 The_Context  : @key[in] Asis.Context)
-                @key[return] Asis.Compilation_Unit;
-
-Library_Unit@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit whose parent is desired
-The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
+Library_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit whose parent is desired.
+The_Context @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} a program Context environment.
 
 Returns the parent unit of the given library unit.
 
@@ -356,10 +387,12 @@ Returns A_Nonexistent_Declaration when the Library_Unit has a
 parent_unit_name denoted in the defining_program_unit_name but the parent
 unit is not contained in The_Context.
 
-These two function calls will always produce identical results:
+@leading@;These two function calls will always produce identical results:
 
-    Unit := Corresponding_Parent_Declaration ( Unit );
-    Unit := Corresponding_Parent_Declaration ( Unit, Enclosing_Context ( Unit ));
+@begin{Display}
+@exam{Unit := Corresponding_Parent_Declaration (Unit);
+Unit := Corresponding_Parent_Declaration (Unit, Enclosing_Context (Unit));}
+@end{Display}
 
 Any non-Nil result will have an Enclosing_Context value that Is_Identical
 to The_Context.
@@ -370,97 +403,110 @@ argument. This query is one means of obtaining (Is_Equal) parent units
 from separate ASIS Context values whose underlying implementations
 overlap.
 
-Appropriate Unit_Kinds:
-     A_Procedure
-     A_Function
-     A_Package
-     A_Generic_Procedure
-     A_Generic_Function
-     A_Generic_Package
-     A_Procedure_Instance
-     A_Function_Instance
-     A_Package_Instance
-     A_Procedure_Renaming
-     A_Function_Renaming
-     A_Package_Renaming
-     A_Generic_Procedure_Renaming
-     A_Generic_Function_Renaming
-     A_Generic_Package_Renaming
-     A_Procedure_Body
-     A_Function_Body
-     A_Package_Body
+@leading@keepnext@;Appropriate Unit_Kinds:
+@begin{Display}
+A_Procedure
+A_Function
+A_Package
+A_Generic_Procedure
+A_Generic_Function
+A_Generic_Package
+A_Procedure_Instance
+A_Function_Instance
+A_Package_Instance
+A_Procedure_Renaming
+A_Function_Renaming
+A_Package_Renaming
+A_Generic_Procedure_Renaming
+A_Generic_Function_Renaming
+A_Generic_Package_Renaming
+A_Procedure_Body
+A_Function_Body
+A_Package_Body
+@end{Display}
 
-Returns Unit_Kinds:
-     Not_A_Unit
-     A_Package
-     A_Generic_Package
-     A_Package_Instance
-     A_Nonexistent_Declaration
-     An_Unknown_Unit
+@leading@keepnext@;Returns Unit_Kinds:
+@begin{Display}
+Not_A_Unit
+A_Package
+A_Generic_Package
+A_Package_Instance
+A_Nonexistent_Declaration
+An_Unknown_Unit
+@end{Display}
 
 If a parent is inconsistent with a child passed as the argument,
 A_Nonexistent_Declaration shall be returned.
+@end{DescribeCode}
 
-@LabeledClause{function Corresponding_Declaration}
 
+@LabeledClause{function Corresponding_Declaration (unit)}
 
-    @key[function] @AdaSubDefn{Corresponding_Declaration}
-                (Library_Item : @key[in] Asis.Compilation_Unit)
-                @key[return] Asis.Compilation_Unit;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Declaration}
+            (Library_Item : @key[in] Asis.Compilation_Unit)
+            @key[return] Asis.Compilation_Unit;
 
-    @key[function] @AdaSubDefn{Corresponding_Declaration}
-                (Library_Item : @key[in] Asis.Compilation_Unit;
-                 The_Context  : @key[in] Asis.Context)
-                @key[return] Asis.Compilation_Unit;
+@key[function] @AdaSubDefn{Corresponding_Declaration}
+            (Library_Item : @key[in] Asis.Compilation_Unit;
+             The_Context  : @key[in] Asis.Context)
+            @key[return] Asis.Compilation_Unit;
+@end{Example}
 
-Library_Item@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the library_item whose declaration is desired
-The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
+Library_Item @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the library_item whose declaration is desired.
+The_Context @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} a program Context environment.
 
 Returns the corresponding library_unit_declaration, if any, for the
 library_unit_body. The corresponding library unit is the unit upon which
 the library_unit_body depends semantically.
 
-Returns a unit that Is_Equal to the argument if:
+@leading@;Returns a unit that Is_Equal to the argument if:
+@begin{Itemize}
+the argument is a library_unit_declaration,
+a library_unit_renaming_declaration, or a subunit.
 
-- the argument is a library_unit_declaration,
-  a library_unit_renaming_declaration, or a subunit.
-
-- the argument is A_Nonexistent_Declaration or A_Nonexistent_Body.
+the argument is A_Nonexistent_Declaration or A_Nonexistent_Body.
+@end{Itemize}
 
 Returns a Nil_Compilation_Unit for library_unit_body arguments that do
 not have a corresponding library unit contained in The_Context.
 
 All Unit_Kinds are appropriate except Not_A_Unit.
 
-Appropriate Unit_Kinds:
-     A_Procedure_Body
-     A_Function_Body
-     A_Package_Body
-     An_Unknown_Unit            -- See Implementation Permissions
+@leading@keepnext@;Appropriate Unit_Kinds:
+@begin{Display}
+A_Procedure_Body
+A_Function_Body
+A_Package_Body
+An_Unknown_Unit            -- See Implementation Permissions
+@end{Display}
 
-Appropriate Unit_Kinds returning the argument Library_Item:
-     A_Procedure
-     A_Function
-     A_Package
-     A_Generic_Procedure
-     A_Generic_Function
-     A_Generic_Package
-     A_Procedure_Instance
-     A_Function_Instance
-     A_Package_Instance
-     A_Procedure_Renaming
-     A_Function_Renaming
-     A_Package_Renaming
-     A_Generic_Procedure_Renaming
-     A_Generic_Function_Renaming
-     A_Generic_Package_Renaming
-     A_Procedure_Body_Subunit
-     A_Function_Body_Subunit
-     A_Package_Body_Subunit
-     A_Task_Body_Subunit
-     A_Protected_Body_Subunit
-     A_Nonexistent_Declaration
-     A_Nonexistent_Body
+@leading@keepnext@;Appropriate Unit_Kinds returning the argument Library_Item:
+@begin{Display}
+A_Procedure
+A_Function
+A_Package
+A_Generic_Procedure
+A_Generic_Function
+A_Generic_Package
+A_Procedure_Instance
+A_Function_Instance
+A_Package_Instance
+A_Procedure_Renaming
+A_Function_Renaming
+A_Package_Renaming
+A_Generic_Procedure_Renaming
+A_Generic_Function_Renaming
+A_Generic_Package_Renaming
+A_Procedure_Body_Subunit
+A_Function_Body_Subunit
+A_Package_Body_Subunit
+A_Task_Body_Subunit
+A_Protected_Body_Subunit
+A_Nonexistent_Declaration
+A_Nonexistent_Body
+@end{Display}
 
 Returns all Unit Kinds.
 
@@ -469,44 +515,48 @@ argument, A_Nonexistent_Declaration shall be returned. (For a unit
 A_Procedure_Body or A_Function_Body kind, the solution may be in any
 case, to return Nil_Compilation_Unit if the unit is of
 A_Public_Declaration_And_Body kind.)
+@end{DescribeCode}
 
-@b{Implementation Requirement}s
-
+@begin{ImplReq}
 Any non-Nil result will have an Enclosing_Context value that
 Is_Identical to The_Context.
 
-These two function calls will always produce identical results:
-
-   Unit := Corresponding_Declaration( Unit );
-   Unit := Corresponding_Declaration( Unit, Enclosing_Context( Unit ));
+@leading@;These two function calls will always produce identical results:
+@begin{Display}
+@exam{Unit := Corresponding_Declaration (Unit);
+Unit := Corresponding_Declaration (Unit, Enclosing_Context (Unit));}
+@end{Display}
 
 The Enclosing_Context for any non-Nil result will always be The_Context,
 regardless of the Enclosing_Context value for the Library_Item
 argument. This query is one means of obtaining corresponding
 (Is_Equal) units from separate ASIS Context values whose underlying
 implementations overlap.
+@end{ImplReq}
 
-Implementation Permissions
-
+@begin{ImplPerm}
 The handling of An_Unknown_Unit is implementation specific. The
 expected use for An_Unknown_Unit is to hide proprietary implementation
 details contained within unit bodies. In these cases, it should be
 possible to obtain an appropriate library_unit_declaration when
 starting with An_Unknown_Unit. Some implementors may choose to simply
 return the An_Unknown_Unit argument in all cases.
+@end{ImplPerm}
 
 
 @LabeledClause{function Corresponding_Body (unit)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Body}
+            (Library_Item : @key[in] Asis.Compilation_Unit)
+            @key[return] Asis.Compilation_Unit;
 
-    @key[function] @AdaSubDefn{Corresponding_Body}
-                (Library_Item : @key[in] Asis.Compilation_Unit)
-                @key[return] Asis.Compilation_Unit;
-
-    @key[function] @AdaSubDefn{Corresponding_Body}
-                (Library_Item : @key[in] Asis.Compilation_Unit;
-                 The_Context  : @key[in] Asis.Context)
-                @key[return] Asis.Compilation_Unit;
+@key[function] @AdaSubDefn{Corresponding_Body}
+            (Library_Item : @key[in] Asis.Compilation_Unit;
+             The_Context  : @key[in] Asis.Context)
+            @key[return] Asis.Compilation_Unit;
+@end{Example}
 
 Library_Item@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the library_item whose body is desired
 The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
@@ -515,47 +565,53 @@ Returns the corresponding library_unit_body, if any, for the
 library_unit_declaration. The corresponding library_unit_body is the unit
 that depends semantically on the library_unit_declaration.
 
-Returns a unit that Is_Equal to the argument if:
+@leading@;Returns a unit that Is_Equal to the argument if:
 
-- the argument is a an instance of a library_unit_declaration,
-  a library_unit_body, a library_unit_renaming_declaration, or a subunit.
+@begin{Itemize}
+the argument is a an instance of a library_unit_declaration,
+a library_unit_body, a library_unit_renaming_declaration, or a subunit.
 
-- the argument is A_Nonexistent_Declaration or A_Nonexistent_Body.
+the argument is A_Nonexistent_Declaration or A_Nonexistent_Body.
+@end{Itemize}
 
 Returns a Nil_Compilation_Unit for library_unit_declaration arguments that
 do not have a corresponding library_unit_body contained in The_Context.
 
 All Unit_Kinds are appropriate except Not_A_Unit.
 
-Appropriate Unit_Kinds:
-     A_Procedure
-     A_Function
-     A_Package
-     A_Generic_Procedure
-     A_Generic_Function
-     A_Generic_Package
-     An_Unknown_Unit            -- See Implementation Permissions
+@leading@keepnext@;Appropriate Unit_Kinds:
+@begin{Display}
+A_Procedure
+A_Function
+A_Package
+A_Generic_Procedure
+A_Generic_Function
+A_Generic_Package
+An_Unknown_Unit            -- See Implementation Permissions
+@end{Display}
 
-Appropriate Unit_Kinds returning the argument Library_Item:
-     A_Procedure_Body
-     A_Function_Body
-     A_Package_Body
-     A_Procedure_Instance
-     A_Function_Instance
-     A_Package_Instance
-     A_Procedure_Renaming
-     A_Function_Renaming
-     A_Package_Renaming
-     A_Generic_Procedure_Renaming
-     A_Generic_Function_Renaming
-     A_Generic_Package_Renaming
-     A_Procedure_Body_Subunit
-     A_Function_Body_Subunit
-     A_Package_Body_Subunit
-     A_Task_Body_Subunit
-     A_Protected_Body_Subunit
-     A_Nonexistent_Declaration
-     A_Nonexistent_Body
+@leading@keepnext@;Appropriate Unit_Kinds returning the argument Library_Item:
+@begin{Display}
+A_Procedure_Body
+A_Function_Body
+A_Package_Body
+A_Procedure_Instance
+A_Function_Instance
+A_Package_Instance
+A_Procedure_Renaming
+A_Function_Renaming
+A_Package_Renaming
+A_Generic_Procedure_Renaming
+A_Generic_Function_Renaming
+A_Generic_Package_Renaming
+A_Procedure_Body_Subunit
+A_Function_Body_Subunit
+A_Package_Body_Subunit
+A_Task_Body_Subunit
+A_Protected_Body_Subunit
+A_Nonexistent_Declaration
+A_Nonexistent_Body
+@end{Display}
 
 Returns all Unit Kinds.
 
@@ -564,95 +620,116 @@ complete partition containing this Element, but The_Context  does not
 contain the corresponding body, or the body contained in The_Context
 is inconsistent with the argument Element, A_Nonexistent_Body shall
 be returned.
+@end{DescribeCode}
 
-@b{Implementation Requirement}s
-
+@begin{ImplReq}
 Any non-Nil result will have an Enclosing_Context value that
 Is_Identical to The_Context.
 
-These two function calls will always produce identical results:
-
-    Unit := Corresponding_Body( Unit );
-    Unit := Corresponding_Body( Unit, Enclosing_Context ( Unit ));
+@leading@;These two function calls will always produce identical results:
+@begin{Display}
+@exam{Unit := Corresponding_Body (Unit);
+Unit := Corresponding_Body (Unit, Enclosing_Context (Unit));}
+@end{Display}
 
 The Enclosing_Context for any non-Nil result will always be The_Context,
 regardless of the Enclosing_Context value for the Library_Item
 argument. This query is one means of obtaining corresponding
 (Is_Equal) units from separate ASIS Context values whose underlying
 implementations overlap.
+@end{ImplReq}
 
-Implementation Permissions
-
+@begin{ImplPerm}
 The handling of An_Unknown_Unit is implementation specific. The
 expected use for An_Unknown_Unit is to hide proprietary implementation
 details contained within unit bodies. In some cases, it could be possible
 to obtain an appropriate library_unit_body when starting with
 An_Unknown_Unit. Some implementors may choose to simply return the
 An_Unknown_Unit argument in all cases.
+@end{ImplPerm}
+
 
 @LabeledClause{function Is_Nil (unit)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Asis.Compilation_Unit)
+                 @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Asis.Compilation_Unit)
-                    @key[return] Boolean;
-
-Right @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to test
+Right @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to test.
 
 Returns True if the compilation_unit is a Nil_Compilation_Unit.
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Nil (unit list)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Asis.Compilation_Unit_List)
+                @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Asis.Compilation_Unit_List)
-                    @key[return] Boolean;
-
-Right @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit list to test
+Right @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit list to test.
 
 Returns True if the compilation_unit list has a length of zero.
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Equal (unit)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Equal} (Left  : @key[in] Asis.Compilation_Unit;
+                   Right : @key[in] Asis.Compilation_Unit) @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Is_Equal} (Left  : @key[in] Asis.Compilation_Unit;
-                       Right : @key[in] Asis.Compilation_Unit) @key[return] Boolean;
-
-Left @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the first unit to compare
-Right @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the second unit to compare
+Left @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the first unit to compare.
+Right @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the second unit to compare.
 
 Returns True if Left and Right represent the same physical compilation unit
 or if both are Nil_Compilation_Unit values. The two units may or may not
-be from the same ASIS Context variable. (“The same physical compilation
-unit” have the same version, as defined by Reference Manual E.3(5)
+be from the same ASIS Context variable. (@ldquote@;The same physical compilation
+unit@rdquote@; have the same version, as defined by Reference Manual E.3(5)
 and the same program text.)
 
 Two nonexistent units are Is_Equal if they have the same Name and Unit_Kind.
+@end{DescribeCode}
 
 
 @LabeledClause{function Is_Identical}
 
 
-    @key[function] @AdaSubDefn{Is_Identical} (Left  : @key[in] Asis.Compilation_Unit;
-                           Right : @key[in] Asis.Compilation_Unit) @key[return] Boolean;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Identical} (Left  : @key[in] Asis.Compilation_Unit;
+                       Right : @key[in] Asis.Compilation_Unit) @key[return] Boolean;
+@end{Example}
 
-Left   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the first unit to compare
-Right  @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the second unit to compare
+Left @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the first unit to compare.
+Right @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the second unit to compare.
 
 Returns True if Left and Right represent the same physical compilation
 unit, from the same open ASIS Context variable, or, if both are
-Nil_Compilation_Unit values. (“The same physical compilation
-unit” have the same version, as defined by Reference Manual E.3(5)
+Nil_Compilation_Unit values. (@ldquote@;The same physical compilation
+unit@rdquote@; have the same version, as defined by Reference Manual E.3(5)
 and the same program text.)
 
 Two nonexistent units are Is_Identical if they have the same
 Unique_Name and the same Enclosing_Context.
+@end{DescribeCode}
+
 
 @LabeledClause{function Unit_Full_Name}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Unit_Full_Name} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
+                         @key[return] Wide_String;
 
-    @key[function] @AdaSubDefn{Unit_Full_Name} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                            @key[return] Wide_String;
-
-Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit whose name is desired
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit whose name is desired.
+@end{Example}
 
 Returns the string image of the fully expanded Ada name of the given
 compilation unit. This may be a simple name ("A") of a root library
@@ -667,15 +744,20 @@ Implementors are encouraged, but not required, to return names in the
 same case as was used in the original compilation text.
 
 All Unit_Kinds are appropriate.
+@end{DescribeCode}
+
 
 @LabeledClause{function Unique_Name}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Unique_Name}
+      (Compilation_Unit : @key[in] Asis.Compilation_Unit)
+            @key[return] Wide_String;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Unique_Name}
-          (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                @key[return] Wide_String;
-
-Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit whose name is desired
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the unit
+whose name is desired.
 
 Returns a string that uniquely identifies the given compilation unit
 within the underlying Ada Context implementation. The result may vary
@@ -687,28 +769,36 @@ to uniquely identify the compilation unit.
 Returns a null string only if a Nil_Compilation_Unit is given.
 
 All Unit_Kinds are appropriate.
+@end{DescribeCode}
 
 
 @LabeledClause{function Exists (unit)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Exists} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
+                @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Exists} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                    @key[return] Boolean;
-
-Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to test
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+unit to test.
 
 Returns False for any unit with Not_A_Unit or nonexistent kind.
 Returns True for all other unit kinds.
 
 All Unit_Kinds are expected.
+@end{DescribeCode}
+
 
 @LabeledClause{function Can_Be_Main_Program}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Can_Be_Main_Program} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
+                             @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Can_Be_Main_Program} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                                 @key[return] Boolean;
-
-Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to test
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to test.
 
 Returns True if the Compilation_Unit exists and is a subprogram
 library_unit_declaration, library_unit_renaming_declaration, or
@@ -721,27 +811,37 @@ Results of this function may vary according to the requirements an Ada
 implementation may impose on a main subprogram.
 
 All Unit_Kinds are expected.
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Body_Required}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Body_Required} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
+                             @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Is_Body_Required} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                                 @key[return] Boolean;
-
-Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to test
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the unit to test.
 
 Returns True if the Compilation_Unit exists and is a library
 package_declaration that requires a body. See Reference Manual 7.2(4).
 
 All Unit_Kinds are expected.
+@end{DescribeCode}
+
+
 
 @LabeledClause{function Text_Name}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Text_Name} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
+                   @key[return] Wide_String;
+@end{Example}
 
-     @key[function] @AdaSubDefn{Text_Name} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                       @key[return] Wide_String;
-
-Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit whose text name is desired
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+unit whose text name is desired.
 
 Returns the name of the text, or other structure, that was the source
 of the compilation that resulted in this Compilation_Unit. Returns a
@@ -753,6 +853,8 @@ Text_Name availability is a required feature of ASIS.
 Results of this function may vary among implementations.
 
 All Unit_Kinds are appropriate.
+@end{DescribeCode}
+
 
 @LabeledClause{function Text_Form}
 
@@ -892,10 +994,12 @@ Nil_Compilation_Unit_List if the parent unit does not contain any body
 stubs. Every unit in the result will have an Enclosing_Context that
 Is_Identical to The_Context.
 
-These two function calls will always produce identical results:
+@leading@;These two function calls will always produce identical results:
 
-    SUnits := Subunits ( PUnit );
-    SUnits := Subunits ( PUnit, Enclosing_Context ( PUnit ));
+@begin{Display}
+@exam{SUnits := Subunits (PUnit);
+SUnits := Subunits (PUnit, Enclosing_Context (PUnit));}
+@end{Display}
 
 The result may include unit values with a nonexistent unit kind. It
 includes values for subunits that exist in The_Context as
@@ -942,20 +1046,22 @@ Returns a Nil_Compilation_Unit if the subunit parent is not contained in
 The_Context. Any non-Nil result will have an Enclosing_Context value that
 Is_Identical to The_Context.
 
-These two function calls will always produce identical results:
+@leading@;These two function calls will always produce identical results:
 
-    PUnit := Corresponding_Subunit_Parent_Body ( SUnit );
-    PUnit := Corresponding_Subunit_Parent_Body ( SUnit,
-                                       Enclosing_Context ( SUnit ));
+@begin{Display}
+@exam{PUnit := Corresponding_Subunit_Parent_Body (SUnit);
+PUnit := Corresponding_Subunit_Parent_Body (SUnit,
+                                   Enclosing_Context (SUnit));}
+@end{Display}
 
-Appropriate Unit_Kinds:
+@leading@keepnext@;Appropriate Unit_Kinds:
      A_Procedure_Body_Subunit
      A_Function_Body_Subunit
      A_Package_Body_Subunit
      A_Task_Body_Subunit
      A_Protected_Body_Subunit
 
-Returns Unit_Kinds:
+@leading@keepnext@;Returns Unit_Kinds:
      A_Procedure_Body
      A_Function_Body
      A_Package_Body

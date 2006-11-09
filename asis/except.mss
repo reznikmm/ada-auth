@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/except.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/08/05 04:33:28 $}
+@comment{$Revision: 1.3 $ $Date: 2006/10/19 22:29:18 $}
 
 @LabeledSection{package Asis.Exceptions}
 
@@ -10,7 +10,7 @@ shall provide interfaces equivalent to those described in the
 following subclauses.],
 Old=[@f{@key[package] @ChildUnit{Parent=[Asis],Child=[Exceptions]}ASIS.Exceptions @key[is]}]}
 
-@leading@;ASIS exceptions are:
+@leading@keepnext@;ASIS exceptions are:
 
 @begin{DescribeCode}
 @begin{Example}
