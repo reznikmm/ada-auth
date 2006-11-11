@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.56 $ $Date: 2006/10/19 20:44:23 $}
+@comment{$Revision: 1.57 $ $Date: 2006/11/09 06:29:49 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -72,9 +72,12 @@ decide to reprint the International Standard incorporating an approved Technical
 Corrigendum@Chg{Version=[2],New=[ and Amendment],Old=[]}. It is nevertheless a
 best effort to be as close as possible to the
 technical content of such an updated document. In the case of a conflict between this
-document and @Chg{Version=[2],New=[Amendment 1 or ],Old=[]}Technical
-Corrigendum 1 as approved by ISO (or between this document
-and the original 8652:1995 in the case of paragraphs not changed by Technical
+document and @Chg{Version=[2],New=[Amendment],Old=[Technical Corrigendum]}
+1 as approved by ISO (or between this document
+and @Chg{Version=[2],New=[Technical Corrigendum 1 in the case of paragraphs
+not changed by Amendment 1; or between this document and ],Old=[]}the
+original 8652:1995 in the case of paragraphs not changed by @Chg{Version=[2],
+New=[either Amendment 1 or ],Old=[]}Technical
 Corrigendum 1), the other documents contain the official text of the
 International Standard ISO/IEC 8652:1995(E)@Chg{Version=[2],New=[ and
 its Amendment],Old=[]}.],Old=[]}
@@ -966,7 +969,7 @@ Michell (Canada), E. Ploedereder (Germany), J.P. Rosen (France), E. Schonberg
 (USA), J. Tokar (USA), and T. Vardanega (Italy).]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[Special thanks go to Ada Europe and the Ada Resource
+@Chg{Version=[2],New=[Special thanks go to Ada-Europe and the Ada Resource
 Association, without whose help and support the Amendment and this consolidated
 reference manual would not have been possible. M. Heaney (USA) requires special
 thanks for his tireless work on the containers packages. Finally, special

@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:25 $}
+@Comment{$Date: 2006/11/09 06:29:48 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 
 @begin{Intro}
 
@@ -4027,6 +4027,21 @@ and Time_Of should raise Time_Error if Leap_Second is True.]}
 Text=[Leap seconds should be supported if the target system supports them.
 Otherwise, operations in Calendar.Formatting should return results
 consistent with no leap seconds.]}]}
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[An implementation can always support leap seconds
+when the target system does not; indeed, this isn't particularly
+hard (all that is required is a table of when leap seconds were inserted). As
+such, leap second support isn't @lquotes@;impossible or impractical@rquotes
+in the sense of @RefSecNum{Conformity of an Implementation with the Standard}.
+However, for some purposes, it may be important to follow the target system's
+lack of leap second support (if the target is a GPS satellite, which does not
+use leap seconds, leap second support would be a handicap to work around).
+Thus, this @ImplAdviceTitle should be read as giving permission to not support
+leap seconds on target systems that don't support leap seconds. Implementers
+should use the needs of their customers to determine whether or not support
+leap seconds on such targets.]}
+@end{Discussion}
 @end{ImplAdvice}
 
 @begin{Notes}
