@@ -155,6 +155,8 @@ package body ARM_HTML is
     -- 10/13/06 - RLB - Added specifiable colors.
     --          - RLB - Added Local_Link_Start and Local_Link_End to allow
     --			formatting in the linked text.
+    -- 11/10/06 - RLB - Fixed nesting of text formatting *again*. (AARM 13.11
+    --			failed WC 3 validation.)
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -4863,65 +4865,60 @@ package body ARM_HTML is
 	use type ARM_Output.Location_Type;
 	use type ARM_Output.Size_Type;
 
-	function Change_Needs_Close return Boolean is
-	    -- Returns True if "Change" needs to close something, based
+	function Change_Needs_Close_or_Open return Boolean is
+	    -- Returns True if "Change" needs to open or close something, based
 	    -- on the current values of Output_Object.
 	begin
 	    return (Change /= Output_Object.Change or else
 		    Version /= Output_Object.Version or else
-		    Added_Version /= Output_Object.Added_Version) and then
-		    ARM_Output."/=" (Output_Object.Change, ARM_Output.None);
-	end Change_Needs_Close;
+		    Added_Version /= Output_Object.Added_Version);
+	end Change_Needs_Close_or_Open;
 
-	function Font_Needs_Close return Boolean is
+	function Font_Needs_Close_or_Open return Boolean is
 	    -- Returns True if "Font" needs to close something, based
 	    -- on the current values of Output_Object and the new value.
-	    -- Note that this depends on whether the Change needs to close
-	    -- something; if it does, we need to close and reopen
+	    -- Note that this depends on whether the Change needs to open
+	    -- or close something; if it does, we need to close and reopen
 	    -- the font even if it is not changing.
 	begin
 	    return (ARM_Output."/=" (Font, Output_Object.Font) or else
-		    Change_Needs_Close) and then
-		    ARM_Output."/=" (Output_Object.Font, ARM_Output.Default);
-	end Font_Needs_Close;
+		    Change_Needs_Close_or_Open);
+	end Font_Needs_Close_or_Open;
 
-	function Location_Needs_Close return Boolean is
+	function Location_Needs_Close_or_Open return Boolean is
 	    -- Returns True if "Location" needs to close something, based
 	    -- on the current values of Output_Object and the new value.
 	    -- Note that this depends on whether the Change or Font needs
-	    -- to close something; if they do, we need to close and reopen
-	    -- the location even if it is not changing.
+	    -- to open or close something; if they do, we need to close and
+	    -- reopen the location even if it is not changing.
 	begin
 	    return (ARM_Output."/=" (Location, Output_Object.Location) or else
-		    Change_Needs_Close or else Font_Needs_Close) and then
-		    ARM_Output."/=" (Output_Object.Location, ARM_Output.Normal);
-	end Location_Needs_Close;
+		    Change_Needs_Close_or_Open or else Font_Needs_Close_or_Open);
+	end Location_Needs_Close_or_Open;
 
-	function Size_Needs_Close return Boolean is
+	function Size_Needs_Close_or_Open return Boolean is
 	    -- Returns True if "Size" needs to close something, based
 	    -- on the current values of Output_Object, and the new value.
 	    -- Note that this depends on whether the Change, Font, or Location
-	    -- needs to close something; if they do, we need to close the
-	    -- size even if it is not changing.
+	    -- needs to open or close something; if they do, we need to
+	    -- close the size even if it is not changing.
 	begin
 	    return (Size /= Output_Object.Size or else
-		    Change_Needs_Close or else Font_Needs_Close or else
-		    Location_Needs_Close) and then
-		    Output_Object.Size /= 0;
-	end Size_Needs_Close;
+		    Change_Needs_Close_or_Open or else Font_Needs_Close_or_Open or else
+		    Location_Needs_Close_or_Open);
+	end Size_Needs_Close_or_Open;
 
-	function Italic_Needs_Close return Boolean is
+	function Italic_Needs_Close_or_Open return Boolean is
 	    -- Returns True if "Italic" needs to close something, based
 	    -- on the current values of Output_Object, and the new value.
 	    -- Note that this depends on whether the Change, Font, Location,
-	    -- or Size needs to close something; if they do, we need to close
-	    -- the italics even if it is not changing.
+	    -- or Size needs to open or close something; if they do, we need
+	    -- to close the italics even if it is not changing.
 	begin
 	    return (Italic /= Output_Object.Is_Italic or else
-	    Change_Needs_Close or else Font_Needs_Close or else
-	    Location_Needs_Close or else Size_Needs_Close) and then
-	       (Output_Object.Is_Italic);
-	end Italic_Needs_Close;
+	    Change_Needs_Close_or_Open or else Font_Needs_Close_or_Open or else
+	    Location_Needs_Close_or_Open or else Size_Needs_Close_or_Open);
+	end Italic_Needs_Close_or_Open;
 
     begin
 	if not Output_Object.Is_Valid then
@@ -4933,12 +4930,15 @@ package body ARM_HTML is
 		"Not in paragraph");
 	end if;
 	-- We do these in this order so that the changes are stacked properly.
+	-- Note that we have to open and close stuff that is not changing
+	-- in order to get proper nesting in all cases.
 
 	if Output_Object.Is_Bold and then
             ((not Bold) or else
-	    Change_Needs_Close or else Font_Needs_Close or else
-	    Location_Needs_Close or else Size_Needs_Close or else
-	    Italic_Needs_Close) then
+	    --Change_Needs_Close_or_Open or else Font_Needs_Close_or_Open or else
+	    --Location_Needs_Close_or_Open or else Size_Needs_Close_or_Open or else
+	    --The below includes the above.
+	    Italic_Needs_Close_or_Open) then
 	    -- The latter so that nesting is preserved; we'll reopen
 	    -- the boldfacing on the other side if needed. Otherwise, when
 	    -- Bold remains on, we'd leave the markup open but close some outer
@@ -4949,8 +4949,10 @@ package body ARM_HTML is
 
 	if Output_Object.Is_Italic and then
             ((not Italic) or else
-	    Change_Needs_Close or else Font_Needs_Close or else
-	    Location_Needs_Close or else Size_Needs_Close) then
+	    --Change_Needs_Close_or_Open or else Font_Needs_Close_or_Open or else
+	    --Location_Needs_Close_or_Open or else
+	    --The below includes the above.
+	    Size_Needs_Close_or_Open) then
 	    -- The latter so that nesting is preserved; we'll reopen
 	    -- the italics on the other side in that case.
 	    Output_Text (Output_Object, "</I>");
@@ -4958,8 +4960,9 @@ package body ARM_HTML is
 	end if;
 
 	if Size /= Output_Object.Size or else
-	    Change_Needs_Close or else Font_Needs_Close or else
-	    Location_Needs_Close then
+	    --Change_Needs_Close_or_Open or else Font_Needs_Close_or_Open or else
+	    --The below includes the above.
+	    Location_Needs_Close_or_Open then
 	    -- The latter so that nesting is preserved; we'll reopen
 	    -- the size on the other side in that case.
 	    if Output_Object.Size /= 0 then
@@ -4973,7 +4976,9 @@ package body ARM_HTML is
 	end if;
 
 	if Location /= Output_Object.Location or else
-	    Font_Needs_Close or else Change_Needs_Close then
+	    --Font_Needs_Close_or_Open or else
+	    --The below includes the above.
+	    Change_Needs_Close_or_Open then
 	    -- The latter so that nesting is preserved; we'll reopen
 	    -- the location on the other side in that case.
 	    case Output_Object.Location is
@@ -4996,7 +5001,7 @@ package body ARM_HTML is
 	end if;
 
 	if ARM_Output."/=" (Font, Output_Object.Font) or else
-	    Change_Needs_Close then
+	    Change_Needs_Close_or_Open then
 	    -- The latter so that nesting is preserved; we'll reopen
 	    -- the font on the other side in that case.
 	    case Output_Object.Font is
