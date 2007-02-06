@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/library.mss,v $)
-@comment($Revision: 1.6 $ $Date: 2006/04/04 05:49:05 $)
+@comment($Revision: 1.7 $ $Date: 2006/12/23 06:01:56 $)
 
 @LabeledSection{Predefined library}
 
@@ -46,8 +46,8 @@ The reason for this exhortation is that secondary standards have proved
 themselves to be almost invisible and hence virtually useless.
 
 @leading@;We have already discussed the additional library packages in the area
-of tasking and real time in a previous chapter (see @RefSecNum{Task termination},
-@RefSecNum{Scheduling and dispatching}, and @RefSecNum{CPU clocks and timers}).
+of tasking and real time in Sections @RefSecNum{Task termination},
+@RefSecNum{Scheduling and dispatching}, and @RefSecNum{CPU clocks and timers}.
 The following Ada issues
 cover the relevant changes in other areas and are described in detail
 in this chapter:
@@ -146,8 +146,8 @@ exclusion (@AILink{AI=[AI95-00441-01],Text=[441]}).
 @LabeledClause{The container library}
 
 
-This is a huge addition to the language and is described in a separate
-chapter (see @RefSecNum{Containers}) for convenience.
+This is a huge addition to the language and is described separately
+in Chapter @RefSecNum{Containers} for convenience.
 
 
 @LabeledClause{Times and dates}
@@ -953,8 +953,13 @@ part of the parameter. We can even write
 Containing_Directory_Name("..\rat\library.doc")
 @end[Example]
 
-and this returns @exam["..\rat"]; note that it also removes the separator
-@exam["\"].
+@leading@;and this returns @exam["..\rat"]; note that it also removes the
+separator @exam["\"]. "\". We can apply it again
+@begin[Example]
+Containing_Directory_Name("..\rat")
+@end[Example]
+
+and this returns ".." on its own.
 
 @leading@;The functions @exam[Extension] and @exam[Base_Name] return the
 corresponding parts of a file name thus@Defn2{Term=[base name],Sec=[of a file]}@Defn2{Term=[extension],Sec=[of a file]}
@@ -1102,8 +1107,8 @@ oop.doc@\    179 KB@\2005-02-25  18:34:55
 structure.doc@\    151 KB@\2005-04-05  09:09:25
 tasking.doc@\    174 KB@\2005-03-31  11:16:40
 @end[Example]
-}@table{Columns=[4],Alignment=[AllLeft],FirstColWidth=[1],NoBreak=[T],
-Border=[F],SmallSize=[F],
+}@table{Columns=[4],Alignment=[AllLeft],FirstColWidth=[1],LastColWidth=[1],
+NoBreak=[T],Border=[F],SmallSize=[F],
 Caption=[],
 Headers=[],
 Body=[@exam{access.doc}@\@exam{152 KB}@ @ @\@exam{2005-04-05}@ @ @\@exam{09:03:10}
@@ -2059,11 +2064,11 @@ atttributes now has a null exclusion so that @exam[S'Write] is in fact
 @key[procedure] S'Write(Stream: @key[not null access] Root_Stream_Type'Class; Item: @key[in] @examcom[T]);
 @end[Example]
 
-Perhaps surprisingly this does not introduce any incompatibilities
+This does not introduce any incompatibilities
 since in Ada 95 passing null raises @exam[Constraint_Error] anyway
 and so this change just clarifies the situation.
 
 On this dullish but important topic here endeth the Rationale for
-Ada 2005 apart from various exciting appendices and an extensive chapter
-on containers (see @RefSecNum{Containers}, or just press the Next button below).
+Ada 2005 apart from various exciting appendices and the extensive Chapter
+@RefSecNum{Containers} on containers.
 

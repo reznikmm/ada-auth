@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/access.mss,v $)
-@comment($Revision: 1.8 $ $Date: 2006/04/04 05:48:59 $)
+@comment($Revision: 1.9 $ $Date: 2006/12/23 06:01:50 $)
 
 @LabeledSection{Access types}
 
@@ -182,7 +182,7 @@ we have to indicate this in the same way
    X: Integer;
 @key[begin]
    X := A.Component;@\-- @examcom[read a component of A]
-@\-- @examcom[no check for null in 2005]
+@\-- @examcom[no check for null in Ada 2005]
    ...
 @key[end] PNN;
 @end[Example]
@@ -194,7 +194,7 @@ we have to indicate this in the same way
    X: Integer;
 @key[begin]
    X := A.Component;@\-- @examcom[read a component of A]
-@\-- @examcom[check for null in 2005]
+@\-- @examcom[check for null in Ada 2005]
    ...
 @key[end] P;
 @end[Example]
@@ -462,7 +462,7 @@ parameters is not permitted. Ada 2005 rectifies this by permitting
 @key[constant] with access parameters. So we can write
 @begin[Example]
 @tabset[P42]
-@key[procedure] P(X: @key[access constant] T);@\-- @examcom[legal 2005]
+@key[procedure] P(X: @key[access constant] T);@\-- @examcom[legal Ada 2005]
 @key[procedure] P(X: @key[access ]T);
 @end[Example]
 
@@ -866,11 +866,11 @@ want to call the predefined @exam["="] in these cases.
 The full rules regarding the use of the predefined equality are that
 it cannot be used if there is a user-defined primitive equality operation
 for either operand type unless we use the prefix @exam[Standard].
-A similar rule applies to fixed point types as we shall see in a later
-chapter (see @RefSecNum{Numerics}).
+A similar rule applies to fixed point types as we shall see in Section
+@RefSecNum{Numerics}.
 
-@leading@;Another example of the use of the type @exam[Cell] occurred in the
-previous chapter (see @RefSecNum{Nested type extension}) when we were discussing
+@leading@;Another example of the use of the type @exam[Cell] occurred in
+Section @RefSecNum{Nested type extension} when we were discussing
 type extension at nested levels.
 That example also illustrated that access types have to be named in
 some circumstances such as when they provide the full type for a private
@@ -1394,7 +1394,7 @@ such as @exam[Exp(X**2)]. We can try
    Result, L, H: Float;
 @key[begin]
    ...        -- @examcom[set bounds in L and H say]
-   Result := Integrate(F'Access, L, H);@\-- @examcom[illegal in 95]
+   Result := Integrate(F'Access, L, H);@\-- @examcom[illegal in Ada 95]
    ...
 @key[end] Main;
 @end[Example]
@@ -1435,7 +1435,8 @@ the implementation problems for those who were using display vectors
 rather than static links were considered a hurdle. And secondly, a
 crafty technique was available using the newly introduced tagged types.
 And of course one could continue to use generics. But further thought
-showed that the implementation burden was not so great after all and
+showed that the implementation burden was not so great provided the uses
+were kept simple @em and anyway
 nobody understood the tagged type technique which was really incredibly
 contorted. Moreover, the continued use of generics when other languages
 forty years ago had included a more natural mechanism was tiresome.
@@ -1608,6 +1609,8 @@ at library level thus
 @key[begin]
    @key[return] Y;
 @key[end] F;
+
+...
 
 @key[function] G(X: Float) @key[return] Float @key[is]
 @key[begin]

@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/tasking.mss,v $)
-@comment($Revision: 1.5 $ $Date: 2006/04/04 05:49:08 $)
+@comment($Revision: 1.6 $ $Date: 2006/12/23 06:01:58 $)
 
 @LabeledSection{Tasking and Real-Time}
 
@@ -96,6 +96,10 @@ interfaces
 
 @AILink{AI=[AI95-00421-01],Text=[421]}@\Sequential activation and attachment
 
+@AILink{AI=[AI95-00443-01],Text=[443]}@\Synchronized private extensions
+
+@AILink{AI=[AI95-00445-01],Text=[445]}@\Dynamic ceilings and interrupt handlers
+
 @end[Description]
 @end[Description]
 
@@ -109,7 +113,8 @@ interfaces which provide a high degree of unification between the
 object-oriented and real-time aspects of Ada
 (@AILink{AI=[AI95-00345-01],Text=[345]},
 @AILink{AI=[AI95-00397-01],Text=[397]},
-@AILink{AI=[AI95-00399-01],Text=[399]}).
+@AILink{AI=[AI95-00399-01],Text=[399]},
+@AILink{AI=[AI95-00443-01],Text=[443]}).
 
 There is of course the introduction of the Ravenscar profile
 (@AILink{AI=[AI95-00249-01],Text=[249]}) plus associated restrictions
@@ -123,7 +128,8 @@ with the addition of further standard policies
 @AILink{AI=[AI95-00321-01],Text=[321]},
 @AILink{AI=[AI95-00327-01],Text=[327]},
 @AILink{AI=[AI95-00355-01],Text=[355]},
-@AILink{AI=[AI95-00357-01],Text=[357]}). These are also in Annex D.
+@AILink{AI=[AI95-00357-01],Text=[357]},
+@AILink{AI=[AI95-00445-01],Text=[445]}). These are also in Annex D.
 
 A number of timing mechanisms are now provided. These concern stand-alone
 timers, timers for monitoring the CPU time of a single task, and timers
@@ -143,12 +149,14 @@ H]} which is now entitled High Integrity Systems
 
 Note that further operations for the manipulation of time in child packages of
 @exam[Calendar] (@AILink{AI=[AI95-00351-01],Text=[351]}) will be discussed with
-the predefined library in a later chapter @en see @RefSecNum{Times and dates}.
+the predefined library in Section @RefSecNum{Times and dates}.
 
 
 @LabeledClause{Task termination}
 
-@leading@;In the Introduction we mentioned the problem of how tasks can have
+@leading@;In the Introduction (in Section
+@RefSecNum{Overview: Tasking and real-time facilities})
+we mentioned the problem of how tasks can have
 a silent death in Ada 95. This happens if a task raises an exception
 which is not handled by the task itself. Tasks may also terminate
 because of going abnormal as well as terminating normally. The detection
@@ -177,10 +185,9 @@ essentially@Defn{task termination handler}
 @key[end] Ada.Task_Termination;
 @end[Example]
 
-(Note that the above includes use clauses in order to simplify the
-presentation; the actual package does not have use clauses. We will
-use a similar approach for the other predefined packages described
-in this chapter.)
+(The above includes use clauses in order to simplify the presentation;
+the actual package does not have use clauses. The other predefined packages
+described in this chapter are treated similarly.)
 
 The general idea is that we can associate a protected procedure with
 a task. The protected procedure is then invoked when the task terminates
@@ -256,7 +263,6 @@ born with a fallback handler already in place.
 If a new handler is set then it replaces any existing handler of the
 appropriate kind. Calling either setting procedure with null for the
 handler naturally sets the appropriate handler to null.
-
 The current handlers can be found by calling the functions
 @exam[Current_Task_Fallback_Handler] or @exam[Specific_Handler]; they return
 null if the handler is null.
@@ -270,14 +276,14 @@ the determination of the current fallback handler of a task is in
 fact done by searching recursively the tasks on which it depends.
 
 Note that we cannot directly interrogate the fallback handler of a
-specific task but only that of the current task. Moreover, if a task
+specific task but only that of the current task. Also, if a task
 sets a fallback handler for its dependents and then enquires of its
-own fallback handler it will not in general get the same answer because
+own fallback handler it will not in general get the same answer since
 it is not one of its own dependents.
 
-It is important to understand the situation regarding the environment
+Remember the situation regarding the environment
 task. This unnamed task is the task that elaborates the library units
-and then calls the main subprogram. Remember that library tasks (that
+and then calls the main subprogram. Library tasks (that
 is tasks declared at library level) are activated by the environment
 task before it calls the main subprogram.
 
@@ -347,7 +353,7 @@ features introduced by Ada 2005. This concerns the coupling of object
 oriented and real-time features through inheritance.
 
 @leading@;Recall from the chapter on the object oriented model (see
-@RefSecNum{Interfaces}) that we can declare
+Section @RefSecNum{Interfaces}) that we can declare
 an interface thus
 @begin[Example]
 @key[type] Int @key[is interface];
@@ -388,7 +394,7 @@ limited to refer to those actually marked as limited.
 @leading@keepnext@;So we can write
 @begin[Example]
 @tabset[P49]
-@key[type] LI @key[is limited interface];@\-- @examcom[similarly type LI2]
+@key[type] LI @key[is limited interface];@\-- @examcom[similarly a type LI2]
 
 @key[type] SI@key[ is synchronized interface];
 
@@ -546,7 +552,7 @@ that is not part of the task or protected type itself @en it seems
 as if it might not be task safe in some way. But a common paradigm
 is where an operation as an abstraction has to be implemented by two
 or more entry calls. An example occurs in some implementations of
-the classic readers and writers problem as we shall see later.
+the classic readers and writers problem as we shall see in a moment.
 
 Of course a task or protected type which implements an interface can
 have additional entries and operations as well just as a derived tagged
@@ -730,8 +736,8 @@ by the use of overriding indicators.
 
 Finally, here is a tasking implementation which allows multiple readers
 and ensures that an initial value is set by only allowing a call of
-@exam[Write] first. It is based on an example in that textbook
-@LocalLink{Target=[R6],Sec=[References],Text={[6]}}.
+@exam[Write] first. It is based on an example in @i{Programming in Ada 95}
+by the author @LocalLink{Target=[R6],Sec=[References],Text={[6]}}.
 @begin[Example]
 @key[task type] Multi_Task_RW(V: @key[access] Item) @key[is] @key[new] Sync_RW @key[with]
    @key[overriding]
@@ -956,10 +962,10 @@ Note that the word @key[synchronized] is always given. We could also write
 in which case the ancestor is not synchronized. But the fact that @exam[T]
 is synchronized is clearly visible.
 
-@leading@;It might be remembered that if a private view is untagged then the full view
-might be tagged. In this case type extension is not allowed with the private
-view anyway and so the full type might be synchronized. So we can have (in Ada
-95 as well)
+@leading@;It might be remembered that if a private view is untagged then the
+full view might be tagged. In this case type extension is not allowed with the
+private view anyway and so the full type might be synchronized. So we can have
+(in Ada 95 as well)
 
 @begin[Example]
 @tabset[P49]
@@ -981,8 +987,9 @@ view anyway and so the full type might be synchronized. So we can have (in Ada
 the use of the word @key[limited]. (Much of this has already been explained
 in the chapter on the object oriented model (see @RefSecNum{Interfaces}) but it
 is worth repeating
-in the context of concurrent types.) We always explicitly insert limited,
-synchronized, task, or protected in the case of a limited interface
+in the context of concurrent types.) We always explicitly insert @key[limited],
+@key[synchronized], @key[task], or @key[protected] in the case of a
+limited interface
 in order to avoid confusion. So to derive a new explicitly limited
 interface from an existing limited interface @exam[LI] we write
 @begin[Example]
@@ -999,7 +1006,7 @@ whereas in the case of normal types we can write
 
 @leading@;then @exam[LT2] is limited by the normal derivation rules. Types take
 their limitedness from their parent (the first one in the list, provided
-it is not a progenitor) and it does not have to be given explicitly
+it is not an interface) and it does not have to be given explicitly
 on type derivation @en although it can be in Ada 2005 thus
 @begin[Example]
 @key[type] LT2 @key[is limited new] LT @key[and] LI @key[with] ...
@@ -1157,15 +1164,15 @@ at a time on an entry queue of a protected
 object.@Defn2{Term=[restrictions identifier],Sec=[Max_Entry_Queue_Length]}
 
 The identifier @exam[No_Dependence] is not specific to the Real-Time
-Systems annex and is properly described in the next
-chapter (see @RefSecNum{Pragmas and Restrictions}).
+Systems annex and is properly described in Section
+@RefSecNum{Pragmas and Restrictions}.
 In essence it indicates that the program does not depend upon the given
 language defined package. In this case it means that a program conforming to
 the Ravenscar profile cannot use any of the packages @exam[Asynchronous_Task_Control],
 @exam[Calendar], @exam[Execution_Time.Group_Budget],
 @exam[Execution_Time.Timers] and @exam[Task_Attributes].
-Some of these packages are new and are described later in this chapter (see
-@RefSecNum{CPU clocks and timers}).@Defn2{Term=[restrictions identifier],Sec=[No_Dependence]}
+Some of these packages are new and are described later in this chapter (in
+Section @RefSecNum{CPU clocks and timers}).@Defn2{Term=[restrictions identifier],Sec=[No_Dependence]}
 
 Note that @exam[No_Dependence] cannot be used for @exam[No_Dynamic_Attachment]
 because that would prevent use of the child package @exam[Ada.Interrupts.Names].
@@ -1247,7 +1254,8 @@ new policy and has mathematically provable advantages with respect
 to efficiency.@Defn2{Term=[policy],Sec=[EDF_Across_Priorities]}
 @end[Description]
 
-For further details of these policies consult the forthcoming book
+For further details of these policies consult
+@i{Concurrent and Real-Time Programming in Ada 2005}
 by Alan Burns and Andy Wellings @LocalLink{Target=[R8],Sec=[References],Text={[8]}}.
 
 @leading@;These various policies are controlled by the package
@@ -1366,6 +1374,7 @@ of the fact that EDF scheduling and timers (see @RefSecNum{CPU clocks and timers
 would be likely to require longer times the functions @exam[Seconds] and
 @exam[Minutes] are added in Ada 2005. There is no function @exam[Hours] because
 the range of time spans is only guaranteed to be 3600 seconds anyway.
+(The numerate will recall that 3600 seconds is one hour.)
 
 If a task is created and it does not have a pragma @exam[Priority] then its
 initial priority is that of the task that created it. If a task does not have a
@@ -1456,7 +1465,6 @@ This is because in the first case any task in the 6 to 10 range will
 take precedence over any task in the 2 to 5 range whatever the deadlines.
 If there is just one range then only the deadlines count in deciding
 which tasks are scheduled.
-
 This is emphasized by the fact that the policy name uses @exam[Across] rather
 than @exam[Within]. For other policies such as
 @exam[Round_Robin_Within_Priority] two contiguous ranges would be the same as a
@@ -1464,9 +1472,9 @@ single range.
 
 We conclude this section with a few words about ceiling priorities.
 
-@leading@;In Ada 95, the priority of a task can be changed but the
-ceiling priority
-of a protected object cannot be changed. It is permanently set when
+@leading@;In Ada 95, the priority of a task can be changed during
+execution but the ceiling priority
+of a protected object cannot be so changed. It is permanently set when
 the object is created using the pragma @exam[Priority]. This is often
 done using a discriminant so that at least different objects of a
 given protected type can have different priorities. Thus we might
@@ -1526,6 +1534,10 @@ is in force. Although the value of the attribute itself is changed
 immediately when the assignment is made, the actual ceiling priority of
 the protected object is only changed when the protected operation
 (in this case the call of @exam[Change_Priority]) is finished.
+Note that if any of the procedures of the protected object is an interrupt
+handler (through pragma Attach_Handler or Interrupt_Handler) then a check is
+made that the value is in the range of System.Interrupt_Priority; Program_Error
+is raised if the check fails.
 
 Note the unusual syntax. Here we permit an attribute as the destination
 of an assignment statement. This happens nowhere else in the language.

@@ -1,7 +1,7 @@
 @Part(oop, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/oop.mss,v $)
-@comment($Revision: 1.7 $ $Date: 2006/04/04 05:49:11 $)
+@comment($Revision: 1.8 $ $Date: 2006/12/23 06:02:01 $)
 
 @LabeledSection{Object oriented model}
 
@@ -66,9 +66,7 @@ constructors
 
 @AILink{AI=[AI95-00391-01],Text=[391]}@\Functions with controlling results on null extension
 
-@AILink{AI=[AI95-00396-01],Text=[396]}@\The "no hidden interfaces" rule
-
-@AILink{AI=[AI95-00400-01],Text=[400]}@\Wide and wide-wide images
+@AILink{AI=[AI95-00396-01],Text=[396]}@\The "no hidden interfaces" rule will be found in Chapter @RefSecNum{Tasking and Real-Time}
 
 @AILink{AI=[AI95-00401-01],Text=[401]}@\Terminology for interfaces
 
@@ -136,8 +134,8 @@ it is convenient to discuss it here (@AILink{AI=[AI95-00310-01],Text=[310]}).
 
 There are many other OO related improvements in Ada 2005 concerning
 matters such as access types, visibility, and generics. They will
-be described in later chapters (see @RefSecNum{Access types} and
-@RefSecNum{Exceptions, generics etc}).
+be described in Chapters @RefSecNum{Access types} and
+@RefSecNum{Exceptions, generics etc}.
 
 
 @LabeledClause{Reserved words}
@@ -180,7 +178,7 @@ are less likely to have been used as identifiers.
 @LabeledClause{The prefixed notation}
 
 @leading@;As mentioned in the Introduction
-(see @RefSecNum{Overview: The object oriented model}), the Ada 95
+(see Section @RefSecNum{Overview: The object oriented model}), the Ada 95
 object oriented model
 has been criticized for not being really OO since the notation for
 applying a subprogram (method) to an object emphasizes the subprogram
@@ -276,6 +274,9 @@ by starting from the object, we can identify its type and thus the
 primitive operations of the type. Note that a class wide operation
 can be called in this way only if it is declared at the same place
 as the primitive operations of @exam[T] (or one of its ancestors).
+The parameter @exam[Y] need not be simply the name of an object.
+It can be anything allowed as a parameter such as a dereference or
+a function call. But the type @exam[T] must be tagged.
 
 There are many advantages of the prefixed notation as we shall see
 but perhaps the most important is ease of maintenance from not having
@@ -569,6 +570,10 @@ One was that the mechanism should apply to untagged types as well
 but this was rejected on the grounds that it might add to rather than
 reduce confusion in some cases. In any event, untagged types do not
 have class wide types so they are intrinsically simpler.
+It would have been particularly confusing to permit the notation to apply to
+access types especially an access type @exam[A] referring to a tagged
+type @exam[T]. If the access type and the tagged type both had the same or
+similar operations @exam[Op] then ambiguities or errors could easily arise.
 
 @leading@;It is of course important to note that the first parameter of an
 operation plays a special role since in order to take advantage of the prefixed
@@ -617,8 +622,9 @@ since there are no controlling parameters. If a subprogram has just
 one parameter (which is controlling) such as @exam[Size] then the
 call just becomes @exam[X.Size] and no parentheses are necessary.
 
-@leading@;Note that the prefix does not have to be simply the name of an object
-such as @exam[X], it could be a function call so we might write
+@leading@;Remember that the prefix does not have to be simply the name
+of an object such as @exam[A_Circle] or an implicit dereference such as
+@exam[This_One], it could be a function call so we might write
 @begin[Example]
 @tabset{P35}
 N := Sets.Empty.Size;@\-- @examcom[N = 0]
@@ -857,7 +863,7 @@ Thus if one operation is a function @exam[F] thus
 @end[Example]
 
 then in this case the type @exam[NT] must provide a concrete function
-@exam[F]. See however the discussion at the end of this chapter (see
+@exam[F]. See however the discussion in Section
 @RefSecNum{Overriding and overloading}) for
 the case when the type @exam[NT] has a null extension.
 
@@ -928,8 +934,8 @@ come back to this topic in a moment.
 There are other forms of interfaces, namely synchronized interfaces,
 task interfaces, and protected interfaces. These bring support for
 polymorphic, class wide object oriented programming to the real time
-programming arena. They will be described in a later chapter (see
-@RefSecNum{Synchronized interfaces}).
+programming arena. They are described in Section
+@RefSecNum{Synchronized interfaces}.
 
 Having described the general ideas in somewhat symbolic terms, we
 will now discuss a more concrete example.
@@ -1791,9 +1797,7 @@ and not just the magician implementing stream input@en@;output.
 @leading@keepnext@;We can now do our abstract problem as follows
 @begin[Example]
 @tabset(P42)
-@key[function] Make_T @key[is]
-   @key[new] Generic_Dispatching_Constructor(Root, Params, Get_T);
-
+@key[function] Make_T @key[is] @key[new] Generic_Dispatching_Constructor(Root, Params, Get_T);
 ...
 @key[declare]
    Aux: @key[aliased] Params := ... ;
@@ -1930,11 +1934,7 @@ Object_Ptr := @key[new] Object'(Make_Object(Internal_Tag(S), Aux'Access));
 @leading@;but this is very tedious because
 the user now has to type the external tag which will be an implementation
 defined mess of characters. Observe that the string produced by a
-call of @exam[Expanded_Name] such as
-@begin[Example]
-OBJECTS.CIRCLE
-@end[Example]
-
+call of @exam[Expanded_Name] such as "@exam[OBJECTS.CIRCLE]"
 cannot be used because it will not
 in general be unique and so there is no reverse function. (It is not
 generally unique because of tasking and recursion.) But @exam[Expanded_Name]
@@ -2002,8 +2002,7 @@ will be returned by @exam[Decode] and this will cause @exam[Make_Object] to
 raise @exam[Tag_Error].
 
 A more elegant registration system could be easily implemented using
-the container library which will be described in a later chapter (see
-@RefSecNum{Containers}).
+the container library which is described in Chapter @RefSecNum{Containers}.
 
 Note that any instance of @exam[Generic_Dispatching_Constructor]
 checks that the tag passed as parameter is indeed that of a type descended
@@ -2380,7 +2379,8 @@ that the function "goes abstract" and so has to be overridden if the
 extended type is concrete. The irritating thing about the rule in
 Ada 95 is that it applies even if there are no additional components.@Defn{goes abstract}@Defn{shall be overridden}
 
-@leading@keepnext@;Thus consider a generic version of the set package of Section 3
+@leading@keepnext@;Thus consider a generic version of the set package of
+Section @RefSecNum{The prefixed notation}
 @begin[Example]
 @key[generic]
    @key[type] Element @key[is private];
@@ -2474,7 +2474,7 @@ might declare a couple of functions delivering a string image thus
 @tabset(P42)
 X: Length := 2.5;
 ...
-Put_Line(Image(X * X));@\-- @examcom[ambiguous in 95]
+Put_Line(Image(X * X));@\-- @examcom[ambiguous in Ada 95]
 @end[Example]
 
 This fails to compile in Ada 95 since it is ambiguous because both

@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/contain.mss,v $)
-@comment($Revision: 1.5 $ $Date: 2006/04/04 05:49:01 $)
+@comment($Revision: 1.6 $ $Date: 2006/12/23 06:01:51 $)
 
 @LabeledSection{Containers}
 
@@ -1811,7 +1811,9 @@ that the call of @exam[Find] is more natural and only involves the
 part number (the key) @en note that this is a call of the function
 @exam[Find] in the instantiation of @exam[Generic_Keys] and takes
 just the part number. And the other is that the update only involves
-the component being changed. We mentioned earlier that there was no
+the component being changed.
+
+We mentioned earlier that there was no
 @exam[Update_Element] for sets because of the danger of creating a
 value that was in the wrong place. In the case of the richly named
 @exam[Update_Element_Preserving_Key] it also checks to ensure that

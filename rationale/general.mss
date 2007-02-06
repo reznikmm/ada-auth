@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/general.mss,v $)
-@comment($Revision: 1.7 $ $Date: 2006/04/04 05:49:02 $)
+@comment($Revision: 1.8 $ $Date: 2006/12/23 06:01:53 $)
 
 @LabeledSection{Exceptions, generics etc}
 
@@ -226,9 +226,10 @@ three functions @exam[Exception_Name], @exam[Exception_Message], or
 so the similar behaviour with @exam[Exception_Identity] in Ada 95
 is perhaps understandable at first sight. However, it is believed
 that it was not the intention of the language designers but got in
-by mistake. Actually the change described here was originally classified
-as a correction to Ada 95 but later reclassified as an amendment in
-order to draw more attention to it because of the potential incompatibility.
+by mistake. Actually the change described here was later deemed to
+apply to Ada 95 as well (see Section
+@RefSecNum{Retrospective changes to Ada 95} which
+covers a number of retrospective changes to Ada 95).
 
 @leading@;The other change in the exception area concerns the raise statement.
 It is now possible (optionally of course) to supply a message thus@Defn{raise with message}
@@ -261,8 +262,9 @@ implementation defined information about the error whereas in the
 second case it simply returns the given message which in this example
 is a null string.
 
-Some minor changes to the procedure @exam[Raise_Exception] are mentioned
-in Section @RefSecNum{Pragmas and Restrictions} below.
+A minor change to the procedure @exam[Raise_Exception] is that it now
+raises Constraint_Error if the identity parameter is @exam[Null_Id].
+This is explained further in Section @RefSecNum{Pragmas and Restrictions} below.
 
 There are also additional functions in the package @exam[Ada.Exceptions] to
 return the name of an exception as a @exam[Wide_String] or
@@ -274,7 +276,8 @@ strings returned by these functions and by the existing functions
 @exam[Exception_Information] is @exam[1] (Ada 95 forgot to state this for the
 existing functions). The reader will recall that similar additional functions
 (and forgetfulness) in the package @exam[Ada.Tags] were mentioned in
-@RefSecNum{Object factory functions}.
+Section @RefSecNum{Object factory functions} of the chapter on the
+object-oriented model.
 
 
 @LabeledClause{Numerics}
@@ -717,17 +720,17 @@ is important to those who find it useful and it is good to know that
 the problems with Ada 95 have been resolved.
 
 There are a number of other improvements in the numerics area but
-these concern the Numerics annex and so will be discussed in a later
-chapter (see @RefSecNum{Numerics annex}).
+these concern the Numerics annex and are discussed in Section
+@RefSecNum{Numerics annex}.
 
 
 @LabeledClause{Pragmas and Restrictions}
 
 
 Ada 2005 introduces a number of new pragmas and @exam[Restrictions]
-identifiers. Many of these were described in the previous chapter when
-discussing tasking and the Real-Time and High Integrity annexes (see
-@RefSecNum{The Ravenscar profile}). For
+identifiers. Many of these were described in Section
+@RefSecNum{The Ravenscar profile} when
+discussing tasking and the Real-Time and High Integrity annexes. For
 convenience here is a complete list giving the annex if appropriate.
 
 @leading@keepnext@;The new pragmas are
@@ -829,13 +832,13 @@ the above pragmas are equivalent to
 @key[end if];
 @end[Example]
 
-Remember from Section 2 that a raise statement without any explicit
-message is not the same as one with an explicit null message. In the
-former case a subsequent call of @exam[Exception_Message ]returns
-implementation defined information whereas in the latter case it returns
-a null string. This same behaviour thus occurs with the @exam[Assert]
-pragma as well @en providing no message is not the same as providing
-a null message.
+Remember from Section @RefSecNum{Exceptions} that a raise statement
+without any explicit message is not the same as one with an explicit
+null message. In the former case a subsequent call of @exam[Exception_Message]
+returns implementation defined information whereas in the latter case
+it returns a null string. This same behaviour thus occurs with
+the @exam[Assert] pragma as well @en providing no message is not the
+same as providing a null message.
 
 If the policy set by @exam[Assertion_Policy] is @exam[Ignore] then
 the @exam[Assert] pragma is ignored at execution time @en but of course
@@ -1402,7 +1405,7 @@ sorts of difficulties could arise.
 if @exam[A] excludes null and vice versa. Half of this rule is automatically
 enforced since a type derived from a type that excludes null will
 automatically exclude null. But the reverse is not true as mentioned
-in an earlier chapter (see @RefSecNum{Null exclusion and constant}) when
+in Section @RefSecNum{Null exclusion and constant} when
 discussing access types. If @exam[A] has the declaration
 @begin[Example]
 @tabset[P35]
@@ -1537,10 +1540,11 @@ Of course, there is no such thing as a null function and so null is
 not permitted as the default for a formal function.
 
 @leading@;A new kind of subprogram parameter was introduced in some detail
-when discussing object factory functions in the chapter on the object oriented
-model (see @RefSecNum{Object factory functions}). This is the abstract
+when discussing object factory functions in Section
+@RefSecNum{Object factory functions} of the chapter on the object oriented
+model. This is the abstract
 formal subprogram.@Defn{abstract formal subprogram} The example given was
-the predefined generic function @exam[Generic_Dispatching_Constructor]
+the predefined generic function @exam[Generic_@!Dispatching_@!Constructor]
 thus
 @begin[Example]
 @key[generic]
@@ -1632,8 +1636,8 @@ formal parameters. Also we can explicitly state @key[limited] in which
 case all of the ancestor types must also be limited.
 
 @leading@;An example of this sort of structure occurred when discussing
-printable geometric objects in the chapter on the object oriented model
-(see @RefSecNum{Interfaces}). We had
+printable geometric objects in Section @RefSecNum{Interfaces}
+of the chapter on the object oriented model. We had
 @begin[Example]
 @key[generic]
    @key[type] T @key[is abstract tagged private];
@@ -1646,8 +1650,8 @@ printable geometric objects in the chapter on the object oriented model
 @leading@;It might be that we have various interfaces all derived from
 @exam[Printable]
 which serve different purposes (perhaps for different output devices,
-laser printer, card punch and so on). We would then want the generic
-package to take any of these interfaces thus
+laser printer, video display, historic card punch and so on). We would
+then want the generic package to take any of these interfaces thus
 @begin[Example]
 @key[generic]
    @key[type] T @key[is abstract tagged private];
@@ -1672,7 +1676,7 @@ interfaces can also be synchronized, task, or protected. Thus we might have
 and then the actual interface must itself be a task interface. The
 correspondence must be exact. A formal synchronized interface can
 only be matched by an actual synchronized interface and so on. Remember
-from the discussion in the previous chapter (see @RefSecNum{Synchronized interfaces})
+from the discussion in Section @RefSecNum{Synchronized interfaces}
 that a task interface can
 be composed from a synchronized interface. This flexibility does not
 extend to matching actual and formal generic parameters.
@@ -1699,8 +1703,8 @@ of the formal object parameter by the actual and this is treated as
 assignment and so is not permitted for limited types.@Defn[limited generic formal object]
 
 @leading@;However, in Ada 2005, initialization of a limited object by an
-aggregate is allowed since the value is created @i[in situ] as discussed in an
-earlier chapter (see @RefSecNum{Limited types and return statements}). So an
+aggregate is allowed since the value is created @i[in situ] as discussed in
+Section @RefSecNum{Limited types and return statements}. So an
 instantiation is possible thus
 @begin[Example]
 @key[procedure] Q @key[is new] P(X => (A => 1, B => 2.0), ... );
@@ -1749,7 +1753,7 @@ However, the mechanism does not work very well when several parameters
 are involved as will now be illustrated with some examples.
 
 @leading@;The first example concerns using the new container library which will
-be discussed in some detail in a later chapter (see @RefSecNum{Containers}).
+be discussed in some detail in Chapter @RefSecNum{Containers}.
 There are generic packages such as
 @begin[Example]
 @key[generic]

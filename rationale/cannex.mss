@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/cannex.mss,v $)
-@comment($Revision: 1.6 $ $Date: 2006/04/04 05:49:00 $)
+@comment($Revision: 1.7 $ $Date: 2006/12/23 06:01:51 $)
 
 @LabeledClause{Summary table}
 
@@ -20,7 +20,7 @@ L, R@\Left, Right@\Ex_Index@\Extended_Index
 C_T@\Count_Type@\B@\Boolean@last
 E_T@\Element_Type
 @end[Example]}
-@table{Columns=[4],Alignment=[AllLeft],FirstColWidth=[1],
+@table{Columns=[4],Alignment=[AllLeft],FirstColWidth=[1],LastColWidth=[1],
 NoBreak=[T],Border=[T],SmallSize=[F],
 Caption=[],
 Headers=[Abbrv.@\Meaning@\Abbrv.@\Meaning],
@@ -37,7 +37,7 @@ except that the first parameters are of type Vector and Index_Type
 
 also Key and also Element similarly apply to maps and sets respectively.
 
-@table{Columns=[7],Alignment=[CenterExceptFirst],FirstColWidth=[4],
+@table{Columns=[7],Alignment=[CenterExceptFirst],FirstColWidth=[4],LastColWidth=[1],
 NoBreak=[F],Border=[T],SmallSize=[T],
 Caption=[],
 Headers=[@\@exam{vectors}@\@exam{lists}@\@exam{hashed maps}@\@exam{ordered maps}@\@exam{hashed sets}@\@exam{ordered sets}],

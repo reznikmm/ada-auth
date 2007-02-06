@@ -1,7 +1,7 @@
 @Part(preface, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/preface.mss,v $)
-@comment($Revision: 1.1 $ $Date: 2006/04/04 05:49:07 $)
+@comment($Revision: 1.2 $ $Date: 2006/12/23 06:01:57 $)
 
 @UnNumberedSection(Preface)
 
@@ -40,6 +40,7 @@ incorporated here.
 Writing this rationale has been a learning experience for me and I trust that
 readers will also find the material useful in learning about Ada 2005. An
 integrated description of Ada 2005 as a whole including some further examples
-will be found in a forthcoming version of the textbook @LocalLink{Target=[R13],Sec=[References],Text={[13]}}.
+will be found in the latest version of my textbook which is entitled
+@i{Programming in Ada 2005} @LocalLink{Target=[R13],Sec=[References],Text={[13]}}.
 
-@right{@*John Barnes@*Caversham@*England@*March 2006}
+@right{@*John Barnes@*Caversham@*England@*September 2006}

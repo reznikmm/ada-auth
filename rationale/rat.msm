@@ -8,6 +8,10 @@
 @Title{Version=[0],Text=[Rationale for Ada 2005]}@Comment{Same title for all versions}
 @FilePrefix{Rat}
 @ExampleFont{Swiss}
+@BodyFont{Roman}
+@NoteFormat{ISO2004}@Comment{Not used}
+@ContentsFormat{Ada95}
+@ListFormat{Ada95}
 
 @Comment{RTF properties}
 @SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}
@@ -46,6 +50,7 @@
 <SPAN Style="font-family: Arial, Helvetica, sans-serif; font-size: 92%">and &nbsp; <A HREF="http://www.ada-europe.org">Ada-Europe</A>:<BR>
 <A HREF="http://www.ada-europe.org"><IMG SRC="AE_logo.gif" ALT="Ada-Europe" Height="200" Border="0"></A></SPAN>
 </TABLE>}
+@HTMLColor{Text=[#000000],Background=[#FFFFF0],Link=[#0000FF],VLink=[#800080],ALink=[#FF0000]}
 
 @Comment{Source files and related items, in collating order}
 @Source{Name=<Title.MSS>,SectionName=<TTL>,SectionNumber=[0],NewSection=[T]}

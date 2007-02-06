@@ -1,7 +1,7 @@
 @Part(Epilogue, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/epilogue.mss,v $)
-@comment($Revision: 1.4 $ $Date: 2006/04/04 05:49:10 $)
+@comment($Revision: 1.5 $ $Date: 2006/12/23 06:02:00 $)
 
 @LabeledSection{Epilogue}
 
@@ -290,9 +290,9 @@ type is in fact the discriminated type above thus
    @key[function] Evil @key[return] T_Ptr @key[is]
    @key[begin]
       @key[if] ... @key[then]
-         @key[return] T_Ptr(TTP);@\-- @examcom[OK in 95, not in 2005]
+         @key[return] T_Ptr(TTP);@\-- @examcom[OK in 95, not in Ada 2005]
       @key[elsif] ... @key[then]
-         @key[return] True_Obj'Access;@\-- @examcom[OK in 95, not in 2005]
+         @key[return] True_Obj'Access;@\-- @examcom[OK in 95, not in Ada 2005]
       @key[else]
         @key[return] STTP;
       @key[end if];
@@ -511,8 +511,8 @@ Text=[4.8(20.g)]})
 
 12 @em The requirement that a partial view with
 available stream attributes be externally streamable can cause an
-incompatibility in extremely rare cases. This also relates to pragma
-@exam[Pure].
+incompatibility in extremely rare cases. This incompatibility only
+applies to units with pragma @exam[Pure].
 (@AILink{AI=[AI95-00366-01],Text=[AI-366]},
 @URLLink{URL=[http://www.adaic.org/standards/05aarm/html/AA-10-2-1.html],
 Text=[10.2.1(28.e)]})
@@ -584,7 +584,7 @@ by an earlier example where we had
    C: T_Ptr := Evil;
 @key[begin]
    A := Flip(A);
-   B.@key[all] := Flip(B.@key[all]);@\-- @examcom[Constraint_Error in Ada 95, not in 2005]
+   B.@key[all] := Flip(B.@key[all]);@\-- @examcom[Constraint_Error in Ada 95, not in Ada 2005]
    C.@key[all] := Flip(C.@key[all]);
 @key[end] Do_It;
 @end[Example]
@@ -657,8 +657,8 @@ program might behave differently.
 (@AILink{AI=[AI95-00417-01],Text=[AI-417]},
 @URLLink{URL=[http://www.adaic.org/standards/05aarm/html/AA-3-9.html],
 Text=[3.9(33.c)]}) See also
-@RefSecNum{Inconsistencies with original Ada 95}
-@LocalLink{Target=[Item2-4],Sec=[Epilogue],Text=[item 4]} below.
+@LocalLink{Target=[Item2-4],Sec=[Epilogue],Text=[item 4]} in
+Section @RefSecNum{Inconsistencies with original Ada 95} below.
 
 6 @em The upper bound of the range of @exam[Year_Number]
 in Ada 2005 is @exam[2399] whereas it was @exam[2099] in Ada 95. See
@@ -675,7 +675,7 @@ were deemed to apply also to Ada 95 and thus were classified as binding
 interpretations rather than amendments. Accordingly they are not (generally)
 covered by the changes discussed in the previous chapters. Note however,
 that @AILink{AI=[AI95-00241-01],Text=[AI-241]} on exceptions was discussed in
-chapter @RefSecNum{Exceptions, generics etc} even
+Chapter @RefSecNum{Exceptions, generics etc} even
 though it was eventually classified as a binding interpretation. Moreover,
 @AILink{AI=[AI95-00329-01],Text=[AI-329]} was
 split and the part stating that Raise_Exception never returns (also applying
@@ -1250,7 +1250,9 @@ This proposal was abandoned for the same reasons as
 
 
 This AI originally arose out of a workshop organized by Ada-Europe.
-The proposal was quite complex and considered far too radical a change
+The proposal was quite complex and
+had awkward interactions with existing facilities. It was
+considered far too radical a change
 and probably expensive to implement. As a consequence it was slimmed
 down considerably (see @AILink{AI=[AI95-00264-01],Text=[AI-264]}).
 But having been slimmed down it seemed pointless

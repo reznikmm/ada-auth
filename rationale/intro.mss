@@ -1,12 +1,12 @@
 @Part(intro, Root="rat.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/Rationale/intro.mss,v $}
-@comment{$Revision: 1.11 $ $Date: 2006/04/04 05:49:04 $}
+@comment{$Revision: 1.12 $ $Date: 2006/12/23 06:01:54 $}
 
 @LabeledSection{Introduction}
 
 @i{This first chapter covers the background to the development of Ada 2005 and
-gives a brief overview of the main changes from Ada 95. Other chapters will
+gives a brief overview of the main changes from Ada 95. Other chapters
 then look at the changes in more detail.}
 
 @LabeledClause{Revision process}
@@ -23,13 +23,13 @@ course, the process was also monitored by the ISO committee
 concerned and the new language finally became an ISO standard
 in 1995.
 
-The development of Ada 2005 from Ada 95 has been (and
-continues to be) on a more modest scale. The work has almost
+The development of Ada 2005 from Ada 95 has been
+on a more modest scale. The work has almost
 entirely been by voluntary effort with support from within
 the industry itself through bodies such as the Ada Resource
 Association and Ada-Europe.
 
-The development is being performed under the guidance of
+The development was performed under the guidance of
 ISO/IEC JTC1/SC22 WG9 (hereinafter just called WG9) chaired
 adroitly by James Moore whose deep knowledge leads us safely
 through the minefield of ISO procedures. This committee has
@@ -53,14 +53,13 @@ Suggestions for the revised standard have come from a number
 of sources such as individuals on the ARG, national bodies on
 WG9, users via email discussions on Ada-Comment and so on.
 
-At the time of writing (June 2005), the revision process is
-essentially finished. The details of all individual changes
-are now clear and they have been integrated to form a new
-version of the Annotated Ada Reference Manual. This is
-currently being reviewed and the final approved standard
-should emerge in the first half of 2006.
+At the time of writing (September 2006), the revision process is
+finished apart from final formal approval. The various changes
+have been integrated to form new versions of both the Annotated
+Ada Reference Manual and the standard Ada Reference Manual. Final
+approval of the new standard should occur around the end of 2006.
 
-There has been much discussion on whether the language should
+There was much discussion on whether the language should
 be called Ada 2005 or Ada 2006. For various reasons the WG9
 meeting in York in June 2005 decided that the vernacular name
 should be Ada 2005.
@@ -579,7 +578,7 @@ An important rule is that a descendant of a nonlimited
 interface must be nonlimited. But the reverse is not true.
 
 Some more extensive examples of the use of interfaces will be
-given in a later chapter (see @RefSecNum{Interfaces}).
+found in Section @RefSecNum{Interfaces}.
 
 @leading@;Incidentally, the newly introduced null procedures are not
 just for interfaces. We can give a null procedure as a
@@ -608,8 +607,8 @@ explicitly given as null procedures. This is only a cosmetic
 change since the Ada 95 RM states that the default
 implementations have no effect. However, this neatly
 clarifies the situation and removes ad hoc semantic rules.
-(The pragma @Exam{Preelaborable_Initialization} will be explained in
-a later chapter @en see @RefSecNum{Pragmas and Restrictions}.)
+(The pragma @Exam{Preelaborable_Initialization} is explained in
+Section @RefSecNum{Pragmas and Restrictions}.)
 
 Another important change is the ability to do type extension
 at a level more nested than that of the parent type. This
@@ -662,7 +661,7 @@ will detect the error. Note that @key{overriding} is another new
 reserved word. However, partly for reasons of compatibility,
 the use of overriding indicators is optional; there are also
 deeper reasons concerning private types and generics which
-will be discussed in a later chapter @en see
+are discussed in Section
 @RefSecNum{Overriding and overloading}.@Defn2{Term=[overriding],
 Sec=[keyword]}
 
@@ -898,8 +897,7 @@ function result might be in another animal function such as
 @end{Example}
 Anonymous access types can also be used in a renaming
 declaration. This and other detailed points on matters such
-as accessibility will be discussed in a later chapter
-(see @RefSecNum{Anonymous access types}).
+as accessibility are discussed in Section @RefSecNum{Anonymous access types}.
 
 The final important change in access types concerns access to
 subprogram types. Access to subprogram types were introduced
@@ -1165,7 +1163,7 @@ been retained but banished to
 for obsolescent features.
 
 Further examples of the use of limited with clauses will be
-given in a later chapter (see @RefSecNum{Mutually dependent types}).
+found in Section @RefSecNum{Mutually dependent types}.
 
 Another enhancement in this area is the introduction of
 private with clauses which overcome a problem with private
@@ -1326,8 +1324,8 @@ copying is not involved including as actual parameters of mode @key[in].
 
 There are also problems with returning results of a limited type from
 a function. This is overcome in Ada 2005 by the introduction of an
-extended form of return statement. This will be described in detail
-in a later chapter (see @RefSecNum{Limited types and return statements}).
+extended form of return statement. This is described in detail
+in Section @RefSecNum{Limited types and return statements}.
 
 @LabeledSubclause{Overview: Tasking and real-time facilities}
 
@@ -1359,8 +1357,8 @@ plus a @key[pragma] @exam[Restrictions] with a host of arguments such
 as @exam[No_Abort_Statements] and @exam[No_Dynamic_Priorities].
 
 The pragma @exam[Detect_Blocking] plus many of the @exam[Restrictions]
-identifiers are new to Ada 2005. Further details will be given in
-a later chapter (see @RefSecNum{The Ravenscar profile}).
+identifiers are new to Ada 2005. Further details will be found in Section
+@RefSecNum{The Ravenscar profile}.
 
 @leading@;Ada 95 allows the priority of a task to be changed but does not
 permit the ceiling priority of a protected object to be changed. This is
@@ -1504,7 +1502,7 @@ also been added.
 There is a minor flaw in the above example. If we are interrupted
 by the telephone between putting the egg in the water and setting
 the handler then our egg will be overdone. We will see how to cure
-this in a later chapter (see @RefSecNum{CPU clocks and timers}).
+this in Section @RefSecNum{CPU clocks and timers}.
 
 Readers will recall the old problem of how tasks can have a silent
 death. If something in a task goes wrong in Ada 95 and an exception
@@ -1533,7 +1531,7 @@ Set_Specific_Handler(T'Identity, Grim_Reaper.Last_Gasp'Access);
 @end[Example]
 
 @leading@;The body of the protected procedure @exam[Last_Gasp] might then
-output various diagnostic messages
+log various diagnostic messages
 
 @begin[Example]
 @key[procedure] Last_Gasp(C: Cause_Of_Termination; T: Task_Id; X: Exception_Occurrence) @key[is]
@@ -1541,12 +1539,16 @@ output various diagnostic messages
    @key[case] C @key[is]
       @key[when] Normal => @key[null];
       @key[when] Abnormal =>
-         Put("Something nasty happened"); ...
+         Put_Log("Something nasty happened"); ...
       @key[when] Unhandled_Exception =>
-         Put("Unhandled exception occurred"); ...
+         Put_Log("Unhandled exception occurred"); ...
    @key[end case];
 @key[end] Last_Gasp;
 @end[Example]
+
+Remember that we should not call potentially blocking operations such as Put
+to a file within a protected operation so we call some procedure Put_Log
+which buffers the messages for later analysis.
 
 There are three possible reasons for termination, it could be normal,
 abnormal, or caused by an unhandled exception. In the last case the
@@ -1566,7 +1568,7 @@ plus two child packages
 
 @begin[Description]
 @exam[Ada.Dispatching] @en@\This is the root package
-and simply declares an exception @exam[Dispatching_Policy_Error].
+and simply declares an exception @exam[Dispatching_@!Policy_Error].
 
 @exam[Ada.Dispatching.Round_Robin] @en@\This enables
 the setting of the time quanta for time slicing within one or more
@@ -1620,8 +1622,7 @@ A task interface or protected interface has to be implemented by a
 task type or protected type respectively. However, a synchronized
 interface can be implemented by either a task type or a protected
 type. These interfaces can also be composed with certain restrictions.
-Detailed examples will be given in a later chapter
-(see @RefSecNum{Synchronized interfaces}).
+Detailed examples will be found in Section @RefSecNum{Synchronized interfaces}.
 
 
 @LabeledSubclause{Overview: Exceptions, numerics, generics etc}
@@ -1939,8 +1940,8 @@ predefined library and Ada 2005 adds more.
 First, there are packages for manipulating vectors and matrices already
 mentioned in Section @RefSecNum{Overview: Exceptions, numerics, generics etc}
 when discussing formal package parameters.
-There are two packages, @exam[Ada.Numerics.Generic_Real_Arrays] for
-real vectors and matrices and @exam[Ada.Numerics.Generic_Complex_Arrays]
+There are two packages, @exam[Ada.Numerics.@!Generic_Real_Arrays] for
+real vectors and matrices and @exam[Ada.Numerics.@!Generic_Complex_Arrays]
 for complex vectors and matrices. They can be instantiated according
 to the underlying floating point type used. There are also nongeneric
 versions as usual.@Defn{vector}@Defn{matrix}
@@ -2173,7 +2174,7 @@ types.
 
 It is hoped that the above list gives a flavour of the capability of the
 package @exam[Containers]. Some examples of the use of the facilities will be
-given in a later chapter (see @RefSec{Containers}).
+found in Chapter @RefSecNum{Containers}.
 
 Finally, there are further packages for manipulating times (that is
 of type @exam[Ada.Calendar.Time] and not @exam[Ada.Real_Time.Time]
@@ -2208,8 +2209,7 @@ that this is a tricky area. However, a feature that all will
 appreciate is that the package @Exam{Ada.Calendar.Formatting}
 includes the following declarations
 @begin{Example}
-@key[type] Day_Name @key[is] (Monday, Tuesday, Wednesday,
-                  Thursday, Friday, Saturday, Sunday);
+@key[type] Day_Name @key[is] (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday);
 @key[function] Day_Of_Week(Date: Time) @key[return] Day_Name;
 @end{Example}
 
@@ -2253,7 +2253,7 @@ The group A items were about real-time and high-integrity,
 static error checking and interfacing. Clearly there are
 major improvements in the real-time area. And high-integrity
 and static error checking are addressed by features such as
-the @key[overriding prefix], various pragmas such as @Exam{Unsuppress} and
+the @key[overriding] prefix, various pragmas such as @Exam{Unsuppress} and
 @Exam{Assert} and additional @Exam{Restrictions} identifiers. Better
 interfacing is provided by the pragma @Exam{Unchecked_Union} and the
 @Exam{Mod} attribute.

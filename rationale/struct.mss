@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/struct.mss,v $)
-@comment($Revision: 1.5 $ $Date: 2006/04/04 05:49:07 $)
+@comment($Revision: 1.6 $ $Date: 2006/12/23 06:01:57 $)
 
 @LabeledSection{Structure and visibility}
 
@@ -662,9 +662,9 @@ prevents us from writing a private child thus
 @end[Example]
 
 and the procedure @exam[Naughty] can call the dispatching operation
-@exam[Op]. The problem is that we are required to compile this call
-before the type @exam[T] is completed and thus before the location
-of its tag is known.
+@exam[Op]. The problem is that we are required to be able to compile
+this call before the type @exam[T] is completed and thus before the
+location of its tag is known.
 
 This problem is prevented in Ada 2005 by a rule that if an incomplete
 type declared in a private part has primitive operations then the
@@ -1164,7 +1164,8 @@ as components. Consider
 @leading@;As explained in the next section, we can now use an aggregate to
 initialize an object of a limited type. Although we cannot give an explicit
 initial value for a @exam[Semaphore] we would still like to use an aggregate to
-get a coverage check. So we can write
+get a coverage check as mentioned in Section
+@RefSecNum{Overview: Structure, visibility, and limited types}. So we can write
 @begin[Example]
 X: PT := (Guard => <>, Count => 0, Finished => <>);
 @end[Example]
@@ -1590,7 +1591,8 @@ In the latter case the address of the component of @exam[An_Outer]
 is passed as the hidden parameter to the function @exam[Make_Inner].
 
 Being able to use a function in this way provides much flexibility
-but sometimes even more flexibility is required. New syntax permits
+but sometimes even more flexibility is required. A new form of return
+statement, the extended return statement, permits
 the final returned object to be declared and then manipulated in a
 general way before finally returning from the function. @Defn{extended return statement}
 
@@ -1768,7 +1770,7 @@ either by its subtype or by its initial value. Thus
 @end[Example]
 
 @leading@;The other important change to the result of functions which was
-discussed in the previous chapter (see @RefSecNum{Anonymous access types}) is
+discussed in Section @RefSecNum{Anonymous access types} is
 that the result type can be of an anonymous
 access type. So we can write a function such as
 @begin[Example]
