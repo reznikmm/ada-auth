@@ -119,6 +119,7 @@ package body ARM_RTF is
     --			room for wider numbers for ISO 2004 format.
     -- 10/13/06 - RLB - Added Local_Link_Start and Local_Link_End to allow
     --			formatting in the linked text.
+    -- 12/22/06 - RLB - Fixed glitch in number of column units.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -3400,8 +3401,8 @@ package body ARM_RTF is
 	-- next table marker call.
 	-- Raises Not_Valid_Error if in a paragraph.
 	Page_Width : Natural;
-	Column_Units : constant ARM_Output.Column_Count :=
-	    Columns+First_Column_Width+Last_Column_Width-2;
+	Column_Units : constant Natural :=
+	    Natural(Columns+First_Column_Width+Last_Column_Width-2);
 	    -- The number of column units (a unit being a regular width column).
     begin
 	if not Output_Object.Is_Valid then

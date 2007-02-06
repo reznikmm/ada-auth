@@ -1,6 +1,6 @@
 Ada formatting tool.
 
-Copyright 2000, 2002, 2004, 2005, 2006 AXE Consultants.
+Copyright 2000, 2002, 2004, 2005, 2006, 2007 AXE Consultants.
 P.O. Box 1512, Madison WI  53701
 E-Mail: randy@rrsoftware.com
 
@@ -883,7 +883,7 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 
     Pure formatting:
 	Comment - The text is never output into the document.
-	Wide    - The paragraph has wider than usual space above, but is
+	WideAbove- The paragraph has wider than usual space above, but is
 		  otherwise normal.
 	DescribeCode -
 		  The text is indented 2 units.
@@ -968,9 +968,6 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	RMOnly    - Text that is not included in the AARM (that is, it is only
 		    included in the output if HideAnnotations is used). No
 		    format is implied.
-	ElementRef - (For ASIS) Marks an Element Reference.
-	ChildRef  - (For ASIS) Marks child references for the preceding
-		    Element Reference.
 
     AARM-only groupings: (not shown if HideAnnotations is used)
 	MetaRules - Language Design Principles.
@@ -995,6 +992,10 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	GlossaryMarker - Looks like a glossary entry in the AARM (but isn't
 		    really one). (Also internally used by the formatter for
 		    real glossary entries.)
+	ElementRef - (For ASIS) Marks an Element Reference.
+	ChildRef  - (For ASIS) Marks child references for the preceding
+		    Element Reference.
+	UsageNote - (For ASIS) Marks a Usage Note.
 
 -- Text Macros:
 
@@ -1134,6 +1135,6 @@ Versions:
    0-Original Ada 95 (equivalent to No-Changes)
    1-Technical Corrigendum 1
    2-Amendment 1
-
+   3-??? (post Amendment 1 changes)
 
 

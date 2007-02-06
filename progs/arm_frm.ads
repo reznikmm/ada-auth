@@ -13,7 +13,7 @@ package ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -89,6 +89,8 @@ package ARM_Format is
     --		- RLB - Revised to use Clause_Number_Type.
     --  9/25/06 - RLB - Added "Use_ISO_2004_Contents_Format".
     -- 10/04/06 - RLB - Added "Use_ISO_2004_List_Format".
+    --  2/ 5/07 - RLB - Added Usage_Note for ASIS, and renamed Wide paragraph
+    --			kinds.
 
     type Format_Type is tagged limited private;
 
@@ -200,12 +202,12 @@ private
 	Ada83_Extensions, Ada83_Wording, -- AARM-only.
 	Ada95_Inconsistencies, Ada95_Incompatibilities, -- AARM-only.
 	Ada95_Extensions, Ada95_Wording, -- AARM-only.
-	Element_Ref, Child_Ref, -- For ASIS.
+	Element_Ref, Child_Ref, Usage_Note, -- For ASIS (AASIS-only).
 	-- AARM annotations (no headers)
 	Reason, Ramification, Proof, Imp_Note, Corr_Change, Discussion,
 	Honest, Glossary_Marker, Bare_Annotation,
 	-- Format only:
-	Wide, Example_Text,
+	Wide_Above, Example_Text,
 	Indented_Example_Text, Code_Indented, Bulleted, Nested_Bulleted,
         Nested_X2_Bulleted,
 	Display, Syntax_Display, Syntax_Indented, Syntax_Production,
