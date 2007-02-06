@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:26 $}
+@Comment{$Date: 2007/02/06 04:48:49 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1909,9 +1909,9 @@ Pool_Object : Some_Storage_Pool_Type;
 @key[for] T'Storage_Pool @key[use] Pool_Object;
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@;Another access type may be added to an existing storage pool, via:
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[for] T2'Storage_Pool @key[use] T'Storage_Pool;
 @end{Example}
@@ -2087,9 +2087,9 @@ declared as follows:
         @RI[object_subtype_name], @RI[access_to_variable_subtype_name]);
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@Keepnext@;Procedure Free has the following effect:
-@end{Wide}
+@end{WideAbove}
 @begin{Enumerate}
 After executing Free(X), the value of X is @key{null}.
 

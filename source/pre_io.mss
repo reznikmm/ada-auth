@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:26 $}
+@Comment{$Date: 2007/02/06 04:48:50 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -2087,9 +2087,9 @@ Get(N);
 @RI[--  @\bb12_535e; @\12_535e @\(none) Data_Error raised]
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@;Example of overridden width parameter:
-@end{Wide}
+@end{WideAbove}
 
 @begin{Example}
 Put(Item => -23, Width => 2);  --@RI{  "@en@|23"}

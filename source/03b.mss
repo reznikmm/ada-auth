@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/10/17 05:29:42 $}
+@Comment{$Date: 2007/02/06 04:48:34 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @LabeledClause{Array Types}
 
@@ -301,18 +301,18 @@ is of its own unique type.
 @key(type) Roman      @key(is) @key(array)(Positive @key(range) <>) @key(of) Roman_Digit; --@RI[ see @RefSecNum(Character Types)]
 @end(Example)
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Examples of type declarations with constrained array definitions: )
-@end{Wide}
+@end{WideAbove}
 @begin(Example)
 @key(type) Table    @key(is) @key(array)(1 .. 10) @key(of) Integer;
 @key(type) Schedule @key(is) @key(array)(Day) @key(of) Boolean;
 @key(type) Line     @key(is) @key(array)(1 .. Max_Line_Size) @key(of) Character;
 @end(Example)
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Examples of object declarations with array type definitions: )
-@end{Wide}
+@end{WideAbove}
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 Grid @Chg{Version=[2],New=[     ],Old=[]}: @key(array)(1 .. 80, 1 .. 100) @key(of) Boolean;
@@ -480,16 +480,16 @@ Inverse   : Matrix(1 .. N,  1 .. N);  --@RI[  N need not be static ]
 Filter    : Bit_Vector(0 .. 31);
 @end(Example)
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Example of array declaration with a constrained array subtype: )
-@end{Wide}
+@end{WideAbove}
 @begin(Example)
 My_Schedule : Schedule;  --@RI[  all arrays of type Schedule have the same bounds]
 @end(Example)
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Example of record type with a component that is an array: )
-@end{Wide}
+@end{WideAbove}
 @begin(Example)
 @key(type) Var_Line(Length : Natural) @key(is)
    @key(record)
@@ -2108,9 +2108,9 @@ New=[],Old=[, unless the record type is limited]}.
    @key(end) @key(record);
 @end(Example)
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Examples of record variables: )
-@end{Wide}
+@end{WideAbove}
 @begin(Example)
 Tomorrow, Yesterday : Date;
 A, B, C : Complex;
@@ -2363,17 +2363,17 @@ of the elaboration of the @nt{component_list} of each
       @key(end) @key(record);
 @end(Example)
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Examples of record subtypes:)
-@end{Wide}
+@end{WideAbove}
 @begin(Example)
 @key(subtype) Drum_Unit @key(is) Peripheral(Drum);
 @key(subtype) Disk_Unit @key(is) Peripheral(Disk);
 @end(Example)
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Examples of constrained record variables:)
-@end{Wide}
+@end{WideAbove}
 @begin(Example)
 Writer   : Peripheral(Unit  => Printer);
 Archive  : Disk_Unit;

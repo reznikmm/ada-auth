@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:25 $}
+@Comment{$Date: 2007/02/06 04:48:47 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -866,9 +866,9 @@ separately.
 @key[end] Generic_Bags.Generic_Iterators;
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@;A package that instantiates the above generic units:
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[with] Generic_Bags;
 @key[with] Generic_Bags.Generic_Iterators;
@@ -1694,11 +1694,11 @@ The body of a protected unit can be a subunit.
 @key[end] Parent;
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@;The body of procedure Inner may be turned into a subunit by rewriting
 the package body as follows (with the declaration of Parent remaining
 the same):
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[package] @key[body] Parent @key[is]
     Variable : String := "Hello, there.";

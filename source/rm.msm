@@ -18,8 +18,8 @@
 @SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}
 @RTFHeaderPrefix{Version=[0],Text=[ISO/IEC 8652:1995(E)]}
 @RTFHeaderPrefix{Version=[1],Text=[ISO/IEC 8652:1995(E) with COR.1:2001]}
-@Comment{PDFs: @RTFHeaderPrefix{Version=[2],Text=[ISO/IEC 8652:2007(E) Ed. 3]}}
-@Comment{Springer:}@RTFHeaderPrefix{Version=[2],Text=[Consolidated Ada Reference Manual - 2005 Edition]}
+@Comment{PDFs: }@RTFHeaderPrefix{Version=[2],Text=[ISO/IEC 8652:2007(E) Ed. 3]}
+@Comment{Springer: @RTFHeaderPrefix{Version=[2],Text=[Consolidated Ada Reference Manual - 2005 Edition]}}
 @RTFPageSize{Ada95}
 @RTFFonts{Serif=[Times],SansSerif=[Arial]}
 

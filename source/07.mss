@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:24 $}
+@Comment{$Date: 2007/02/06 04:48:44 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1044,9 +1044,9 @@ record extension be descended from the same set of interfaces.]}
 @key[type] File_Name @key[is] @key[limited] @key[private];
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Example of a private extension declaration:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[type] List @key[is] @key[new] Ada.Finalization.Controlled @key[with] @key[private];
 @end{Example}

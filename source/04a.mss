@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:24 $}
+@Comment{$Date: 2007/02/06 04:48:40 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -170,9 +170,9 @@ Random @\@RI(-- the direct name of a function) @\(see @RefSecNum(Subprogram Decl
 Error @\@RI(-- the direct name of an exception) @\(see @RefSecNum(Exception Declarations))
 @end(Example)
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Examples of dereferences:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}@tabclear()@tabset(P19)
 Next_Car.@key[all]@\--@RI[  explicit dereference denoting the object designated by]
                @\--@RI[  the access variable Next_Car (see @RefSecNum{Incomplete Type Declarations})]
@@ -633,9 +633,9 @@ The exception Constraint_Error is raised if this check fails.
   Pool(K).Write      --@RI[  an entry of the task Pool(K) @\(see @RefSecNum{Protected Units and Protected Objects})]
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Examples of expanded names:)
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @tabclear()@tabset(P67)
   Key_Manager."<"      --@RI[  an operator of the visible part of a package @\(see @RefSecNum{Private Operations})]
@@ -1479,7 +1479,7 @@ shall be of the same type.
   These rules apply to an association with an @key(others)
   choice@Chg{Version=[2],New=[ with an expression. An @key(others) choice with
   a <> can match zero components or several components with different
-  types.],Old=[]}.
+  types],Old=[]}.
 @end{Ramification}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
@@ -1595,9 +1595,9 @@ be in the same order as in the @nt<known_discriminant_part>.
 (4, July, 1776)                                       --@RI[  see @RefSecNum{Record Types} ]
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Examples of record aggregates with named associations:)
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 (Day => 4, Month => July, Year => 1776)
 (Month => July, Day => 4, Year => 1776)
@@ -1606,12 +1606,12 @@ be in the same order as in the @nt<known_discriminant_part>.
 (Unit => Disk, Status => Closed, Cylinder => 9, Track => 1)
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 @i(@Chg{Version=[2],New=[Examples],Old=[Example]} of component
 @Chg{Version=[2],New=[associations],Old=[association]} with
 several choices:)
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @tabclear()@tabset(P50)
 (Value => 0, Succ|Pred => @key(new) Cell'(0, @key(null), @key(null))) @\--@RI[  see @RefSecNum{Incomplete Type Declarations}]
@@ -1626,11 +1626,11 @@ several choices:)
 
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Examples of record aggregates for tagged types
 (see @RefSecNum(Tagged Types and Type Extensions)
 and @RefSecNum{Type Extensions}):}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 Expression'(@key{null record})
 Literal'(Value => 0.0)
@@ -2194,9 +2194,9 @@ an array with a single component.
 Table'(5, 8, 4, 1, @key(others) => 0)  --@RI[  see @RefSecNum{Array Types} ]
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Examples of array aggregates with named associations:)
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 (1 .. 5 => (1 .. 8 => 0.0))      --@RI[  two-dimensional]
 (1 .. N => @key(new) Cell)             --@RI[  N new cells, in particular for N = 0]
@@ -2207,9 +2207,9 @@ Schedule'(Wed | Sun  => False, @key(others) => True)
 Vector'(1 => 2.5)                                --@RI[  single-component vector]
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Examples of two-dimensional array aggregates:)
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 --@RI[ Three aggregates for the same value of subtype Matrix(1..2,1..3) (see @RefSecNum{Array Types}):]
 
@@ -2218,9 +2218,9 @@ Vector'(1 => 2.5)                                --@RI[  single-component vector
 (1 => (1 => 1.1, 2 => 1.2, 3 => 1.3), 2 => (1 => 2.1, 2 => 2.2, 3 => 2.3))
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Examples of aggregates as initial values:)
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 A : Table := (7, 9, 5, 1, 3, 2, 4, 8, 6, 0);        --@RI[ A(1)=7, A(10)=0]
 B : Table := (2 | 4 | 10 => 1, @key(others) => 0);        --@RI[ B(1)=0, B(10)=1]
@@ -2826,9 +2826,9 @@ Sunny @key(or) Warm
 Filter(1 .. 10) @key(and) Filter(15 .. 24)   --@RI[   see @RefSecNum{Index Constraints and Discrete Ranges} ]
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Examples of short-circuit control forms:)
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 Next_Car.Owner /= @key(null) @key(and) @key(then) Next_Car.Owner.Age > 25   --@RI[   see @RefSecNum{Incomplete Type Declarations}]
 N = 0 @key(or) @key(else) A(N) = Hit_Value
@@ -3610,7 +3610,7 @@ the absolute value of B. Signed integer division satisfies the identity:
 (-A)/B = -(A/B) = A/(-B)
 @end(example)
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@;The signed integer modulus operator is defined such
 that the result of A @key(mod) B has
 the sign of B and an absolute value less than the absolute value
@@ -3630,7 +3630,7 @@ The above identity satisfied by signed integer
 division is not satisfied by modular division
 because of the difference in effect of negation.
 @end{Ramification}
-@end{Wide}
+@end{WideAbove}
 
 @Leading@;Multiplication and division operators are predefined for
 every specific floating point type @i(T):

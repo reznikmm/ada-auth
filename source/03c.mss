@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:23 $}
+@Comment{$Date: 2007/02/06 04:48:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3336,16 +3336,16 @@ can be applied to access types
                                            --@RI[ general access-to-class-wide, see @RefSecNum{Type Extensions}]
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Example of an access subtype:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[subtype] Drum_Ref @key[is] Peripheral_Ref(Drum);  --@RI[  see @RefSecNum{Variant Parts and Discrete Choices}]
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Example of an access-to-subprogram type:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[type] Message_Procedure @key[is] @key[access] @key[procedure] (M : @key[in] String := "Error!");
 @key[procedure] Default_Message_Procedure(M : @key[in] String);
@@ -4354,12 +4354,12 @@ expression or @nt{qualified_expression} is considered to be used in a context
 if the view conversion, parenthesized expression or @nt{qualified_expression}
 itself is used in that context.]}
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@Defn{statically deeper}
 @Defn2{Term=[deeper],Sec=(statically)}
 One accessibility level is defined to be
 @i{statically deeper} than another in the following cases:
-@end{Wide}
+@end{WideAbove}
 @begin{Itemize}
 For a master that is statically nested within another master,
 the accessibility level of the inner master is statically deeper than
@@ -4762,10 +4762,10 @@ Furthermore, the problems might occur within a task or protected body,
 which the compiler can't see while compiling an object creation.
 @end{Discussion}
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@;The following attribute is defined for @PrefixType{a @nt{prefix} X that
 denotes an aliased view of an object}:
-@end{Wide}
+@end{WideAbove}
 @begin(description)
 @ChgAttribute{Version=[1], Kind=[Revised], ChginAnnex=[F], Leading=[F],
   Prefix=<X>, AttrName=<Access>, Ref=[8652/0010], ARef=[AI95-00127-01],

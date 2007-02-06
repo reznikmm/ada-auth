@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2006/11/09 06:29:48 $}
+@Comment{$Date: 2007/02/06 04:48:46 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 
 @begin{Intro}
 
@@ -450,18 +450,18 @@ Old=[@RefSecNum(Task Information)]}).
 @key(task) User;  --@RI[  has no entries]
 @end{Example}
 
-@begin{wide}
+@begin{WideAbove}
 @leading@keepnext@i{Examples of task objects:}
-@end{wide}
+@end{WideAbove}
 @begin{Example}
 Agent    : Server;
 Teletype : Keyboard_Driver(TTY_ID);
 Pool     : @key(array)(1 .. 10) @key(of) Keyboard_Driver;
 @end{Example}
 
-@begin{wide}
+@begin{WideAbove}
 @leading@keepnext@i{Example of access type designating task objects:}
-@end{wide}
+@end{WideAbove}
 @begin{Example}
 @key(type) Keyboard @key(is) @key(access) Keyboard_Driver;
 Terminal : Keyboard := @key(new) Keyboard_Driver(Term_ID);
@@ -1405,9 +1405,9 @@ since an entry involves an implicit component @em the entry queue.
 @key(end) Resource;
 @end{Example}
 
-@begin{wide}
+@begin{WideAbove}
 @leading@keepnext@i{Example of a single protected declaration and corresponding body:}
-@end{wide}
+@end{WideAbove}
 @begin{Example}
 @key(protected) Shared_Array @key(is)
    --@RI[  Index, Item, and Item_Array are global types]
@@ -1430,9 +1430,9 @@ since an entry involves an implicit component @em the entry queue.
 @key(end) Shared_Array;
 @end{Example}
 
-@begin{wide}
+@begin{WideAbove}
 @leading@keepnext@i{Examples of protected objects:}
-@end{wide}
+@end{WideAbove}
 @begin{Example}
 Control  : Resource;
 Flags    : @key(array)(1 .. 100) @key(of) Resource;
@@ -2316,9 +2316,9 @@ when its parameters indicate that it cannot be handled immediately.
 @key(entry) Request(Level)(D : Item);  --@RI[  a family of entries]
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Examples of accept statements:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key(accept) Shut_Down;
 
@@ -3308,11 +3308,11 @@ are given in @RefSec(Delay Accuracy).
 @key(delay) 3.0;  --@RI[ delay 3.0 seconds]
 @end{example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@Defn2{Term=[periodic task],Sec=(example)}
 @IndexSee{Term=[periodic task],See=(delay_until_statement)}
 @i{Example of a periodic task:}
-@end{Wide}
+@end{WideAbove}
 @begin{example}
 @key(declare)
    @key(use) Ada.Calendar;
@@ -4647,14 +4647,14 @@ executed after the @nt<abortable_part> is left.
 @key(end) @key(loop);
 @end(Example)
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Example of a time-limited calculation:)
 @IndexSee{Term=[time-out],See=(asynchronous_select)}
 @Defn2{Term=[time-out],Sec=(example)}
 @Defn2{Term=[time limit],Sec=(example)}
 @Defn2{Term=[interrupt],Sec=(example using @nt<asynchronous_select>)}
 @Defn2{Term=[timer interrupt],Sec=(example)}
-@end{Wide}
+@end{WideAbove}
 @begin(Example)
 @key(select)
    @key(delay) 5.0;

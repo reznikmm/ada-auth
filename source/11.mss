@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2006/10/19 20:44:13 $}
+@Comment{$Date: 2007/02/06 04:48:48 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -716,9 +716,9 @@ occurrence.]}
     @key[raise];
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@keepnext@;is equivalent to this one:
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[when] X : @key[others] =>
     Cleanup;

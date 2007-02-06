@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2006/10/17 05:29:41 $}
+@Comment{$Date: 2007/02/06 04:48:32 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1098,9 +1098,9 @@ creates a distinct type and its first subtype.
 @key(array)(1 .. 10) @key(of) Integer
 @end(Example)
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Examples of type declarations:)
-@end{Wide}
+@end{WideAbove}
 @begin(Example)
 @key(type) Color  @key(is) (White, Red, Yellow, Green, Blue, Brown, Black);
 @key(type) Column @key(is) @key(range) 1 .. 72;
@@ -2105,9 +2105,9 @@ John : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Pe
 Paul : @Chg{Version=[2],New=[@key{not null} ],Old=[]}Person_Name := @key(new) Person(Sex => M);
 @end(Example)
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Examples of variable declarations:)
-@end{Wide}
+@end{WideAbove}
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 Count, Sum  : Integer;
@@ -2119,9 +2119,9 @@ Hello       : @Chg{Version=[2],New=[@key(aliased)],Old=[@key(constant)]} String 
 @unicode(952), @unicode(966)        : Float @b<range> -@pi .. +@pi;],Old=[]}
 @end(Example)
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Examples of constant declarations:)
-@end{Wide}
+@end{WideAbove}
 @begin(Example)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 Limit     : @key(constant) Integer := 10_000;
@@ -4916,11 +4916,11 @@ the operations of any integer type.]
 @PDefn2{Term=[position number], Sec=(of an integer value)}
 The @i(position number) of an integer value is equal to the value.
 
-@begin{Wide}
+@begin{WideAbove}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00340-01]}
 @Leading@keepnext@;For @PrefixType{every modular subtype S},
 the following @Chg{Version=[2],New=[attributes are],Old=[attribute is]} defined:
-@end{Wide}
+@end{WideAbove}
 @begin(description)
 @ChgAttribute{Version=[2],Kind=[Added],ChginAnnex=[T],
   Leading=<T>, Prefix=<S>, AttrName=<Mod>, ARef=[AI95-00340-01],
@@ -6159,10 +6159,10 @@ evaluation rules.]}
 @end(description)
 @EndPrefixType{}
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@;The following additional attributes are defined for
 @PrefixType{every decimal fixed point subtype S}:
-@end{Wide}
+@end{WideAbove}
 @begin(description)
 @Attribute{Prefix=<S>, AttrName=<Digits>,
   Text=[S'Digits denotes the @i(digits) of the decimal

@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:24 $}
+@Comment{$Date: 2007/02/06 04:48:43 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1009,9 +1009,9 @@ Integer(1.6)   @RI[--  value is 2]
 Integer(-0.4)  @RI[--  value is 0]
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Example of conversion between derived types:)
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key(type) A_Form @key(is) @key(new) B_Form;
 
@@ -1022,9 +1022,9 @@ X := A_Form(Y);
 Y := B_Form(X);  @RI[--  the reverse conversion ]
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i(Examples of conversions between array types:)
-@end{Wide}
+@end{WideAbove}
 
 @begin{Example}
 @key(type) Sequence @key(is) @key(array) (Integer @key(range) <>) @key(of) Integer;

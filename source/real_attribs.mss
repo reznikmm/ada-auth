@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2005/08/17 00:07:41 $}
+@Comment{$Date: 2007/02/06 04:48:51 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.25 $}
+@comment{$Revision: 1.26 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -167,11 +167,11 @@ For every value @RI{x} of a floating point type @i{T}, the
    @i{T}'Machine_Emin.
 @end{Ramification}
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@Defn{primitive function}
 The following @i{primitive function attributes} are defined for any subtype
 S of a floating point type @i{T}.
-@end{Wide}
+@end{WideAbove}
 @begin(Description)
 @AttributeLeading{Prefix=<S>, AttrName=<Exponent>,
   Text=[S'Exponent denotes a function with the following
@@ -523,12 +523,12 @@ truncating @i{X} to the precision
 @end{ImplNote}
 @end(Description)
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@Defn2{Term=[model-oriented attributes],
                 Sec=[of a floating point subtype]}
 The following @i{model-oriented attributes} are defined for any subtype S of
 a floating point type @i{T}.
-@end{Wide}
+@end{WideAbove}
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Model_Mantissa>,
   Text=[If the Numerics Annex is not supported,

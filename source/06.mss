@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:24 $}
+@Comment{$Date: 2007/02/06 04:48:44 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -355,9 +355,9 @@ concurrently from multiple tasks.
 @key[function] "*"(Left, Right : Matrix) @key[return] Matrix;        --@RI{  see @RefSecNum{Array Types}}
 @end{Example}
 
-@begin{wide}
+@begin{WideAbove}
 @leading@keepnext@i{Examples of @key[in] parameters with default expressions:}
-@end{wide}
+@end{WideAbove}
 @begin{Example}
 @key[procedure] Print_Header(Pages  : @key[in] Natural;
             Header : @key[in] Line    :=  (1 .. Line'Last => ' ');  --@RI{  see @RefSecNum{Array Types}}
@@ -775,9 +775,9 @@ For this execution the @nt{declarative_part} is elaborated, and the
 @key[end] Push;
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Example of a function body:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[function] Dot_Product(Left, Right : Vector) @key[return] Real @key[is]
    Sum : Real := 0.0;
@@ -1547,18 +1547,18 @@ Print_Header(128, Header => Title, Center => True);          --@RI{  see @RefSec
 Print_Header(Header => Title, Center => True, Pages => 128); --@RI{  see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Examples of function calls:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 Dot_Product(U, V)   --@RI{  see @RefSecNum{Subprogram Declarations} and @RefSecNum{Subprogram Bodies}}
 Clock               --@RI{  see @RefSecNum{Delay Statements, Duration, and Time}}
 F.@key[all]               --@RI{  presuming F is of an access-to-subprogram type @em see @RefSecNum{Access Types}}
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Examples of procedures with default expressions:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[procedure] Activate(Process : @key[in] Process_Name;
                    After   : @key[in] Process_Name := No_Process;
@@ -1568,9 +1568,9 @@ F.@key[all]               --@RI{  presuming F is of an access-to-subprogram type
 @key[procedure] Pair(Left, Right : @key[in] Person_Name := @key[new] Person);   --@RI{  see @RefSecNum{Incomplete Type Declarations}}
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Examples of their calls:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 Activate(X);
 Activate(X, After => Y);
@@ -1599,9 +1599,9 @@ examples, the two calls of Pair are equivalent.
 @key[procedure] Set(Signal : @key[in] Light);
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Examples of their calls:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 Put(28);
 Put("no possible ambiguity here");

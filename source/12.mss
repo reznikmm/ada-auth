@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:25 $}
+@Comment{$Date: 2007/02/06 04:48:48 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -166,10 +166,10 @@ expression.)
    @key[with] @key[function] "<"(X, Y : Item) @key[return] Boolean;    --@RI{ formal subprogram }
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Examples of generic declarations declaring generic subprograms
 Exchange and Squaring:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[generic]
    @key[type] Elem @key[is] @key[private];
@@ -181,9 +181,9 @@ Exchange and Squaring:}
 @key[function] Squaring(X : Item) @key[return] Item;
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Example of a generic declaration declaring a generic package:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[generic]
    @key[type] Item   @key[is] @key[private];
@@ -268,9 +268,9 @@ is always the completion of a declaration.
 @key[end] Exchange;
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Example of a generic function body:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[function] Squaring(X : Item) @key[return] Item @key[is]  --@RI{  see @RefSecNum{Generic Declarations}}
 @key[begin]
@@ -278,9 +278,9 @@ is always the completion of a declaration.
 @key[end] Squaring;
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Example of a generic package body:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[package] @key[body] On_Vectors @key[is]  --@RI{  see @RefSecNum{Generic Declarations}}
 
@@ -1136,9 +1136,9 @@ but the declaration of Bool_4 calls "="@-{5}.
 @key[package] Int_Vectors @key[is] @key[new] On_Vectors(Integer, Table, "+");
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Examples of uses of instantiated units:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 Swap(A, B);
 A := Square(A);
@@ -1759,10 +1759,10 @@ Similar terminology applies to the other kinds of
 @key[type] Table @key[is] @key[array] (Enum) @key[of] Item;
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Example of a generic formal part declaring a
 formal integer type:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[generic]
    @key[type] Rank @key[is] @key[range] <>;
@@ -3374,27 +3374,27 @@ as generic formal parameters.
 @key[end] Stack;
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@Keepnext@;Instances of this generic package can be obtained as follows:
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[package] Stack_Int  @key[is] @key[new] Stack(Size => 200, Item => Integer);
 @key[package] Stack_Bool @key[is] @key[new] Stack(100, Boolean);
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@Keepnext@;Thereafter, the procedures of the instantiated packages can be called as
 follows:
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 Stack_Int.Push(N);
 Stack_Bool.Push(True);
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@Keepnext@;Alternatively, a generic formulation of the type Stack can be given as
 follows (package body omitted):
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[generic]
    @key[type] Item @key[is] @key[private];
@@ -3413,10 +3413,10 @@ follows (package body omitted):
 @key[end] On_Stacks;
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@Keepnext@;In order to use such a package, an instance has to be created and
 thereafter stacks of the corresponding type can be declared:
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[declare]
    @key[package] Stack_Real @key[is] @key[new] On_Stacks(Real); @key[use] Stack_Real;

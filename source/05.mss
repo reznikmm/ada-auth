@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2006/10/17 05:29:45 $}
+@Comment{$Date: 2007/02/06 04:48:43 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.31 $}
+@Comment{$Revision: 1.32 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -487,9 +487,9 @@ Writer := (Status => Open, Unit => Printer, Line_Count => 60);  --@RI{ see @RefS
 Next_Car.@key[all] := (72074, @key[null]);    --@RI{  see @RefSecNum{Incomplete Type Declarations}}
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@keepnext@i{Examples involving scalar subtype conversions:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 I, J : Integer @key[range] 1 .. 10 := 5;
 K    : Integer @key[range] 1 .. 20 := 15;
@@ -500,9 +500,9 @@ K := J;  --@RI{  compatible ranges}
 J := K;  --@RI{  will raise Constraint_Error if K > 10}
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Examples involving array subtype conversions:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 A : String(1 .. 31);
 B : String(3 .. 33);
@@ -1034,9 +1034,9 @@ the subtype of the loop parameter is static.
 @key[end] @key[loop];
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Example of a loop statement with a @key[while] iteration scheme:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[while] Bid(N).Price < Cut_Off.Price @key[loop]
    Record_Bid(Bid(N).Price);
@@ -1044,9 +1044,9 @@ the subtype of the loop parameter is static.
 @key[end] @key[loop];
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Example of a loop statement with a @key[for] iteration scheme:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[for] J @key[in] Buffer'Range @key[loop]     --@RI{  works even with a null range}
    @key[if] Buffer(J) /= Space @key[then]
@@ -1055,9 +1055,9 @@ the subtype of the loop parameter is static.
 @key[end] @key[loop];
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Example of a loop statement with a name:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 Summation:
    @key[while] Next /= Head @key[loop]       --@RI{ see @RefSecNum{Incomplete Type Declarations}}

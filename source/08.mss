@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2006/10/19 06:40:28 $}
+@Comment{$Date: 2007/02/06 04:48:45 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -71,11 +71,11 @@ called its @i{declarative region},
   an @nt{exception_handler}.
 @end(itemize)
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@;The declarative region includes the text of the construct
 together with additional text determined @Redundant[(recursively)],
 as follows:
-@end{Wide}
+@end{WideAbove}
 @begin{Itemize}
 If a declaration is included, so is its completion, if any.
 
@@ -1761,9 +1761,9 @@ The elaboration of a @nt{use_clause} has no effect.
 @key[with] Ada.Calendar; @key[use] Ada;
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Example of a use type clause:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[use type] Rational_Numbers.Rational; --@RI{ see @RefSecNum{Package Specifications and Declarations}}
 Two_Thirds: Rational_Numbers.Rational := 2/3;
@@ -2481,10 +2481,10 @@ is not allowed within the @Syni{callable_entity_}@nt{name}.
 @key[function] F(X : Integer) @key[return] Integer @key[renames] Table(X).@key[all];
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@;A similar rule in @RefSecNum{Subprogram Declarations}
 forbids things like this:
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[function] F(X : Integer; Y : Integer := X) @key[return] Integer;
 @end{Example}
@@ -2650,16 +2650,16 @@ We'll live with the oddity.
 @key[function] Next(X : Color) @key[return] Color @key[renames] Color'Succ; --@RI{ see @RefSecNum{Enumeration Types}}
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Example of a subprogram renaming declaration with new parameter names:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[function] "*" (X,Y : Vector) @key[return] Real @key[renames] Dot_Product; --@RI{ see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 
-@begin{Wide}
+@begin{WideAbove}
 @leading@keepnext@i{Example of a subprogram renaming declaration with a new default expression:}
-@end{Wide}
+@end{WideAbove}
 @begin{Example}
 @key[function] Minimum(L : Link := Head) @key[return] Cell @key[renames] Min_Cell; --@RI{ see @RefSecNum{Subprogram Declarations}}
 @end{Example}

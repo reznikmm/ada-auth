@@ -10,10 +10,10 @@ I probably ought to add a style just for this purpose)
 
 @thickline
 
-@begin{Wide}
+@begin{WideAbove}
 @noparanum@leading@tabclear()@tabset(P45)
 @Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:@Chg{Version=[2],New=[2007(E), Ed. 3],Old=[@Chg{Version=[1], New=[1995(E) with COR.1:2001], Old=[]}]}}]>
-@end{Wide}
+@end{WideAbove}
 
 @thickline
 
@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2006/10/19 20:44:08 $}
+@Comment{$Date: 2007/02/06 04:48:32 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -270,9 +270,9 @@ of data processing systems.
      is not required to detect.
 @end(Itemize)
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@keepnext@;This International Standard does not specify:
-@end{Wide}
+@end{WideAbove}
 @begin(Itemize)
      The means whereby a program written in Ada is transformed into
      object code executable by a processor;
@@ -312,14 +312,14 @@ Sections 1 through 13
 @RefSec{Obsolescent Features}
 @end{Itemize}
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@Defn{Specialized Needs Annexes}
 @Defn2{Term=[Annex],Sec=(Specialized Needs)}
 @Defn{application areas}
 The following @i{Specialized Needs Annexes}
 define features that are needed by certain
 application areas:
-@end{Wide}
+@end{WideAbove}
 @begin{Itemize}
 @RefSec{Systems Programming}
 
@@ -334,13 +334,13 @@ application areas:
 @RefSec{High Integrity Systems}
 @end{Itemize}
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@Defn{normative}
 @Defn2{Term=[Annex],Sec=(normative)}
 The core language and the Specialized Needs Annexes are normative,
 except that the material in each of the items listed below
 is informative:
-@end{Wide}
+@end{WideAbove}
 @begin(Itemize)
     Text under a NOTES or Examples heading.
 
@@ -352,12 +352,12 @@ All implementations shall conform to the core language.
 In addition, an implementation may conform separately to one or more
 Specialized Needs Annexes.
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@Keepnext@Defn{informative}
 @IndexSee{Term=[non-normative],See=(informative)}
 @Defn2{Term=[Annex],Sec=(informative)}
 The following Annexes are informative:
-@end{Wide}
+@end{WideAbove}
 @begin{Itemize}
 @RefSec{Language-Defined Attributes}
 
@@ -433,13 +433,13 @@ other; it is the intent that a single implementation can conform
 to all of them.
 @end(Discussion)
 
-@begin{Wide}
+@begin{WideAbove}
 Each section is divided into clauses and subclauses that have a
 common structure.
 Each section, clause, and subclause first introduces its subject.
 After the introductory text,
 text is labeled with the following headings:
-@end{Wide}
+@end{WideAbove}
 @end{Intro}
 
 @begin{MetaRules}
@@ -993,7 +993,7 @@ the Specialized Needs Annexes.
      by this International Standard.
 @end(Itemize)
 
-@begin{Wide}
+@begin{WideAbove}
 @Leading@keepnext@Defn2{Term=[external effect], Sec=(of the execution of an Ada program)}
 @Defn2{Term=[effect], Sec=(external)}
 The @i(external effect) of the execution of an Ada program is
@@ -1001,7 +1001,7 @@ defined in terms of its interactions
 with its external environment.
 @Defn{external interaction}
 The following are defined as @i(external interactions):
-@end{Wide}
+@end{WideAbove}
 @begin(Itemize)
   Any interaction with an external file
   (see @RefSecNum(External Files and File Objects));
@@ -1044,14 +1044,14 @@ The following are defined as @i(external interactions):
     @end{Honest}
 @end(Itemize)
 
-@begin{Wide}
+@begin{WideAbove}
 A conforming implementation
 of this International Standard shall produce for the
 execution of a given Ada program
 a set of interactions with the external environment whose
 order and timing are consistent with the definitions and requirements of this
 International Standard for the semantics of the given program.
-@end{Wide}
+@end{WideAbove}
 @begin{Ramification}
   There is no need to produce any of the @lquotes@;internal effects@rquotes@;
   defined for the semantics of the program @em all of these
@@ -1382,7 +1382,7 @@ type Duration that is declared in Standard, not some type
 Duration the user might have declared.
 @end(Discussion)
 
-@begin{Wide}
+@begin{WideAbove}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Text=[The delimiters, compound delimiters, reserved words, and
 @nt{numeric_literal}s are exclusively made of the
@@ -1410,15 +1410,15 @@ of ISO/IEC 10646:2003.]}
   characters, case folding is applied to the sequence, not to individual
   characters. It sometimes can make a difference.]}
 @end{Discussion}
-@end{Wide}
+@end{WideAbove}
 
-@begin{Wide}
+@begin{WideAbove}
 @Defn{syntactic category}
 A @i{syntactic category} is
 a nonterminal in the grammar defined in BNF under @lquotes@;@SyntaxTitle.@rquotes@;
 Names of syntactic categories are set in a different font,
 @ntf{like_this}.
-@end{Wide}
+@end{WideAbove}
 
 @ToGlossaryAlso{Term=<Construct>,
   Text=<A @i(construct) is a piece of text
