@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.8 $ $Date: 2006/10/10 05:10:37 $}
+@comment{$Revision: 1.9 $ $Date: 2007/02/06 06:21:06 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -12,10 +12,10 @@ I probably ought to add a style just for this purpose)
 
 @thickline
 
-@begin{Wide}
+@begin{WideAbove}
 @noparanum@leading@tabclear()@tabset(P45)
 @Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 15291:@Chg{Version=[1],New=[200x(E)],Old=[1999(E)]}}]>
-@end{Wide}
+@end{WideAbove}
 
 @thickline
 
@@ -84,6 +84,13 @@ compilation environment.
 
 Semantics of the interface for more than one thread of control.
 @end{Itemize}
+
+@begin{AARMOnly}
+@ChgAdded{Version=[1],Text=[This annotated version of this
+International Standard includes additional information useful to
+ASIS implementers and standards writers.]}
+@end{AARMOnly}
+
 
 @LabeledSubClause{Structure}
 
@@ -159,17 +166,52 @@ Annex  D:   Rationale
 @ChgAdded{Version=[2],Text=[Annex  E:	Summary of ASIS Entities]}
 @end{Itemize}
 
+@ChgAdded{Version=[2],Text=[The following annexes are normative:]}
+
+@begin{Itemize}
+@ChgAdded{Version=[2],Text=[Annex  F:	Obsolescent Features]}
+@end{Itemize}
+
 The major package interfaces visible to ASIS users are identified as clauses
 facilitating access from the table of contents.
 
 
-@Chg{Version=[1],New=[@b{@i{This and the following is junk and needs
-to be totally rewritten to reflect the format with subheaders - RLB}}],
+@Chg{Version=[1],New=[@b{@i{This and the following was totally rewritten to reflect the
+format with subheaders; it also was reordered. We might want to include this
+in an SI somwhere. - RLB}}In addition to the basic description of each entity that
+makes up the ASIS interface, text of various types is labeled with headers.
+],
 Old=[The ASIS interface is compilable. Consequently, Sentinels
 have been used to mark portions of the ASIS text with comments appropriate to
 an ASIS implementor and an ASIS user.]}
 
-@Chg{Version=[1],New=[@b{@i{These aren't sentinels OR comments...}}],Old=[The sentinels and their meanings are:]}
+@Chg{Version=[1],New=[The
+various headers and their meaning are:],Old=[The sentinels and their meanings are:]}
+
+@begin{ImplPerm}
+@Chg{Version=[1],New=[These items],Old=[@b{Implementatiom Permissions} - These comments]}
+describe permissions given an implementor when implementing the associated type
+or query.
+@end{ImplPerm}
+
+@begin{ImplReq}
+@Chg{Version=[1],New=[These items],Old=[@b{Implementatiom Requirements} - These comments]}
+describe additional requirements for conforming implementations.
+@end{ImplReq}
+
+@begin{SingleNote}
+@Chg{Version=[1],New=[These items],Old=[@b{Application Note} - These comments]}These
+notes describe notes of interest to ASIS applications.
+@end{SingleNote}
+
+@begin{Examples}
+@ChgAdded{Version=[1],Text=[These items give examples of use of ASIS interfaces.]}
+@end{Examples}
+
+@begin{AARMOnly}
+@ChgAdded{Version=[1],Type=[Leading],Text=[The Annotated ASIS standard also
+includes the following headers:]}
+@end{AARMOnly}
 
 @begin{ElementRef}
 @Chg{Version=[1],New=[These items],Old=[@b{Element Reference} - These comments]}
@@ -190,21 +232,11 @@ items.],Old=[]}@Comment{Just trying to explain what these are for; they're
 mysterious to me.}
 @end{ChildRef}
 
-@begin{SingleNote}
-@Chg{Version=[1],New=[These items],Old=[@b{Application Note} - These comments]}These comments describe suggested uses, further
+@begin{UsageNote}
+@Chg{Version=[1],New=[These items],Old=[@b{Application Note} - These comments]}These
+notes describe suggested uses, further
 analysis, or other notes of interest to ASIS applications.
-@end{SingleNote}
-
-@begin{ImplPerm}
-@Chg{Version=[1],New=[These items],Old=[@b{Implementatopm Permissions} - These comments]}
-describe permissions given an implementor when implementing the associated type
-or query.
-@end{ImplPerm}
-
-@begin{ImplReq}
-@Chg{Version=[1],New=[These items],Old=[@b{Implementatopm Requirements} - These comments]}
-describe additional requirements for conforming implementations.
-@end{ImplReq}
+@end{UsageNote}
 
 
 @LabeledSubClause{Conformity with this International Standard}

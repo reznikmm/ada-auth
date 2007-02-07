@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/10/19 22:29:18 $}
+@comment{$Revision: 1.3 $ $Date: 2007/02/06 06:21:04 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -891,11 +891,11 @@ Appropriate Declaration_Kinds:
 Returns Statement_Kinds:
      A_Block_Statement
 
-@b{APPLICATION NOTE}
-
+@begin{SingleNote}
 This function is an obsolescent feature retained for compatibility with
 ASIS 83. It is never called by Traverse_Element. Use of this query is
 not recommended in new programs.
+@end{SingleNote}
 
 @LabeledClause{function Is_Name_Repeated (declaration)}
 

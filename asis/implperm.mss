@@ -1,6 +1,6 @@
 @Part(implperm, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/implperm.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2006/09/24 02:39:33 $}
+@comment{$Revision: 1.4 $ $Date: 2007/02/06 06:21:05 $}
 
 
 @LabeledSection{package Asis.Implementation.Permissions}
@@ -267,7 +267,7 @@ subprograms.
 @end{Example}
 
 Returns True if the implementation expands generics using macros to
-supports queries.
+@Chg{Version=[1],New=[support],Old=[supports]} queries.
 @end{DescribeCode}
 
 @begin{Example}

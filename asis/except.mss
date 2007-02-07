@@ -1,13 +1,12 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/except.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2006/10/19 22:29:18 $}
+@comment{$Revision: 1.4 $ $Date: 2007/02/06 06:21:06 $}
 
 @LabeledSection{package Asis.Exceptions}
 
 @Chg{Version=[1],New=[The library package @ChildUnit{Parent=[Asis],Child=[Exceptions]}Asis.Exceptions
 shall exist. The package
-shall provide interfaces equivalent to those described in the
-following subclauses.],
+shall provide interfaces equivalent to those described in this clause.],
 Old=[@f{@key[package] @ChildUnit{Parent=[Asis],Child=[Exceptions]}ASIS.Exceptions @key[is]}]}
 
 @leading@keepnext@;ASIS exceptions are:

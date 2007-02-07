@@ -1,6 +1,6 @@
 @Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/09/28 05:12:00 $}
+@comment{$Revision: 1.2 $ $Date: 2007/02/06 06:21:05 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -44,9 +44,9 @@ expression having an Ada type, including the following classes:
   Corresponding_Name_Declaration. Although task objects do have
   a type, this query is limited, on purpose. Thus, when a naming
   expression is given to this query (for packages, subprograms,
-  tasks, etc.), this query will return Nil_Element. As the
-  @b{APPLICATION NOTE} below indicates, if any further information
-  is needed, the element should be queried by
+  tasks, etc.), this query will return Nil_Element. @Chg{Version=[1],
+  New=[If],Old=[As the @b{APPLICATION NOTE} below indicates, if]}
+  any further information is needed, the element should be queried by
   Corresponding_Name_Definition or Corresponding_Name_Declaration,
   which should eventually return an A_Task_Type_Declaration element.
 
@@ -65,8 +65,7 @@ Returns a Nil_Element, if the statically determinable type of Expression is a
 class-wide type, or the Expression corresponds to an inner sub-aggregate in
 multi-dimensional array aggregates.
 
-@b{APPLICATION NOTE}
-
+@begin{UsageNote}
 If the returned declaration is Nil, an application should make its own
 analysis based on Corresponding_Name_Definition or
 Corresponding_Name_Declaration to get more information about the argument,
@@ -76,10 +75,11 @@ association. If for such an expression, Corresponding_Name_Definition
 raises ASIS_Failed (with a Status of Value_Error), this An_Expression
 element does not represent a normal Ada expression at all and does not
 follow normal Ada semantic rules.
-For example, "pragma Private_Part (Open => Yes);", the "Yes" expression
-may simply be a "keyword" that is specially recognized by the
+For example, @f{@key[pragma] Private_Part (Open => Yes);}, the @f{Yes}
+expression may simply be a keyword that is specially recognized by the
 implementor's compilation system and may not refer to any
 declared object.
+@end{UsageNote}
 
 Appropriate Element_Kinds:
      An_Expression
@@ -651,14 +651,15 @@ Appropriate Expression_Kinds:
 Returns Association_Kinds:
      An_Array_Component_Association
 
-@b{APPLICATION NOTE}
-
+@begin{SingleNote}
+@b{@i{Shouldn't this be normative?? - RLB}}
 While positional_array_aggregate elements do not have
 array_component_association elements defined by Ada syntax, ASIS treats
 A_Positional_Array_Aggregate as if it were A_Named_Array_Aggregate.
 The An_Array_Component_Association elements returned will have
 Array_Component_Choices that are a Nil_Element_List for all positional
 expressions except an others choice.
+@end{SingleNote}
 
 
 @LabeledClause{function Array_Component_Choices}
@@ -1024,14 +1025,15 @@ Expected Association_Kinds:
      A_Parameter_Association
      A_Generic_Association
 
-@b{APPLICATION NOTE}
-
+@begin{UsageNote}
 Always returns False for discriminant associations. Defaulted
 discriminant associations occur only when the discriminant constraint is
 completely missing from a subtype indication. Consequently, it is not
 possible to obtain a (normalized) discriminant constraint list for such
 subtype indications. Always returns False for component associations.
 Aggregates cannot have defaulted components.
+@end{UsageNote}
+
 
 @LabeledClause{function Expression_Parenthesized}
 

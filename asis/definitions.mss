@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/09/29 05:55:24 $}
+@comment{$Revision: 1.3 $ $Date: 2007/02/06 06:21:04 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -175,8 +175,7 @@ declarations such that elements representing them can be easily
 provided. An implementation can choose whether or not to construct
 and provide artificial declarations for implicitly declared elements.
 
-@b{APPLICATION NOTE}
-
+@begin{UsageNote}
 This query returns only implicit inherited entry declarations for
 derived task types. All representation clauses and pragmas associated
 with the entries of the original task type (the root type of the
@@ -184,6 +183,7 @@ derived task type) apply to the inherited entries. Those are available
 by examining the original type or by calling Corresponding_Pragmas and
 Corresponding_Representation_Clauses. These functions will return the
 pragmas and clauses from the original type.
+@end{UsageNote}
 
 @LabeledClause{function Implicit_Inherited_Subprograms}
 
@@ -691,22 +691,26 @@ Returns Definition_Kinds:
      Not_A_Definition
      A_Constraint
 
-@b{APPLICATION NOTE}
-
+@begin{UsageNote}
 When an unconstrained subtype indication for a type having
 discriminants with default values is used, a Nil_Element is
 returned by this function. Use the queries Subtype_Mark, and
 Corresponding_Name_Declaration [, and Corresponding_First_Subtype]
 to obtain the declaration defining the defaults.
-Element Reference -A_Constraint - 3.2.2
-
-Element Reference -A_Simple_Expression_Range - 3.5
-
-Child Elements returned by
-   function Lower_Bound
-   function Upper_Bound
+@end{UsageNote}
 
 @LabeledClause{function Lower_Bound}
+
+@begin{ElementRef}
+A_Constraint @em 3.2.2@*
+A_Simple_Expression_Range @em 3.5
+@end{ElementRef}
+@begin{ChildRef}@ @;
+@begin{Display}
+function Lower_Bound
+function Upper_Bound
+@end{Display}
+@end{ChildRef}
 
     @key[function] @AdaSubDefn{Lower_Bound} (Constraint : @key[in] Asis.Range_Constraint)
                          @key[return] Asis.Expression;
@@ -743,12 +747,18 @@ Appropriate Discrete_Range_Kinds:
 
 Returns Element_Kinds:
      An_Expression
-Element Reference -A_Range_Attribute_Reference - 3.5
 
-Child Elements returned by
-   function Range_Attribute
 
 @LabeledClause{function Range_Attribute}
+
+@begin{ElementRef}
+A_Range_Attribute_Reference @em 3.5
+@end{ElementRef}
+@begin{ChildRef}@ @;
+@begin{Display}
+function Range_Attribute
+@end{Display}
+@end{ChildRef}
 
 
     @key[function] @AdaSubDefn{Range_Attribute} (Constraint : @key[in] Asis.Range_Constraint)
@@ -859,13 +869,14 @@ If so, this query will return Is_Normalized associations even if
 Normalized is False, and the query Discriminant_Associations_Normalized
 will return True.
 
-@b{APPLICATION NOTE}
-
+@begin{UsageNote}
 It is not possible to obtain either a normalized or unnormalized
 Discriminant_Association list for an unconstrained record or derived
 subtype_indication where the discriminant_association elements are supplied
 by default; there is no constraint to query, and a Nil_Element is
 returned from the query Subtype_Constraint.
+@end{UsageNote}
+
 Element Reference -A_Component_Definition - 3.6
 
 Child Elements returned by

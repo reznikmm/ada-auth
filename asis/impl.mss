@@ -1,6 +1,6 @@
 @Part(impl, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/impl.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2006/09/24 02:39:34 $}
+@comment{$Revision: 1.6 $ $Date: 2007/02/06 06:21:06 $}
 
 @LabeledSection{package Asis.Implementation}
 
@@ -88,7 +88,7 @@ Returns True if ASIS is currently initialized.
 @Key[procedure] @AdaSubDefn{Initialize} (Parameters : @key[in] Wide_String := "");
 @end{Example}
 
-Parameters @Chg{Version=[1],New=[specify],Old=[ - Specifies]} implementation specific parameters.
+Parameters @Chg{Version=[1],New=[specify],Old=[ @en Specifies]} implementation specific parameters.
 
 Performs any necessary initialization activities. This shall be invoked
 at least once before any other ASIS services are used. Parameter values
@@ -127,7 +127,7 @@ initialized.
 @Key[procedure] @AdaSubDefn{Finalize} (Parameters : @Key[in] Wide_String := "");
 @end{Example}
 
-Parameters @Chg{Version=[1],New=[specify],Old=[ - Specifies]} any implementation required parameter values.
+Parameters @Chg{Version=[1],New=[specify],Old=[ @en Specifies]} any implementation required parameter values.
 
 Performs any necessary ASIS termination activities. This should be invoked
 once following the last use of other ASIS queries. Parameter values are
@@ -179,8 +179,9 @@ Will typically return a null string if Status = Not_An_Error.
      Diagnosis : @Key[in] Wide_String        := "");
 @end{Example}
 
-Status      - Specifies the new status to be recorded
-Diagnosis   - Specifies the new diagnosis to be recorded
+Status @Chg{Version=[1],New=[specifies],Old=[     @en Specifies]} the new
+status to be recorded.
+Diagnosis @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the new diagnosis to be recorded
 
 Sets (clears, if the defaults are used) the Status and Diagnosis
 information. Future calls to Status will return this Status (Not_An_Error)

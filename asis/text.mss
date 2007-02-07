@@ -1,6 +1,6 @@
 @Part(text, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/text.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/10/13 00:06:37 $}
+@comment{$Revision: 1.3 $ $Date: 2007/02/06 06:21:05 $}
 
 @LabeledSection{package Asis.Text}
 
@@ -188,7 +188,7 @@ Returns the first line number on which the text of the element resides.
 Returns 0 if not Is_Text_Available(Element).
 @end{DescribeCode}
 
-@begin{SingleNote}
+@begin{UsageNote}
 The line number recorded for a particular element may or may not match the
 "true" line number of the program text for that element if the Ada environment
 and the local text editors do not agree on the definition of "line". For
@@ -203,7 +203,7 @@ end-of-line occurrences. Be warned, if the Ada environment and the
 system editor (or any other line-counting program) do not use the same
 end-of-line conventions, then the line numbers reported by ASIS may not
 match those reported by those other programs.
-@end{SingleNote}
+@end{UsageNote}
 
 
 @LabeledClause{function Last_Line_Number}
@@ -240,11 +240,11 @@ Returns a Nil_Span if the text of a Compilation_Unit (Compilation) cannot be
 located for any reason.
 @end{DescribeCode}
 
-@begin{SingleNote}
+@begin{UsageNote}
 For this query, Element is only a means to access the
 Compilation_Unit (Compilation), the availability of the text of this Element
 itself is irrelevant to the result of the query.
-@end{SingleNote}
+@end{UsageNote}
 
 
 @LabeledClause{function Compilation_Unit_Span}
@@ -265,11 +265,11 @@ Returns a Nil_Span if the text of a Compilation_Unit (Compilation) cannot be
 located for any reason.
 @end{DescribeCode}
 
-@begin{SingleNote}
+@begin{UsageNote}
 For this query, Element is only a means to access the
 Compilation_Unit (Compilation), the availability of the text of this Element
 itself is irrelevant to the result of the query.
-@end{SingleNote}
+@end{UsageNote}
 
 
 @LabeledClause{function Compilation_Span}
@@ -412,11 +412,11 @@ the Element's Span. Text before or after those limits is not reflected
 in the returned list.
 @end{DescribeCode}
 
-@begin{SingleNote}
+@begin{UsageNote}
 For this query, Element is only a means to access the
 Compilation_Unit (Compilation), the availability of the text of this Element
 itself is irrelevant to the result of the query.
-@end{SingleNote}
+@end{UsageNote}
 
 
 
@@ -458,11 +458,11 @@ through the Element, the implementation is encouraged, but not required to
 raise ASIS_Inappropriate_Line_Number.
 @end{DescribeCode}
 
-@begin{SingleNote}
+@begin{UsageNote}
 For this query, Element is only a means to access the
 Compilation_Unit (Compilation), the availability of the text of this Element
 itself is irrelevant to the result of the query.
-@end{SingleNote}
+@end{UsageNote}
 
 
 @LabeledClause{function Lines (element with lines)}
@@ -495,11 +495,11 @@ through the Element, the implementation is encouraged, but not required to
 raise ASIS_Inappropriate_Line_Number.
 @end{DescribeCode}
 
-@begin{SingleNote}
+@begin{UsageNote}
 For this query, Element is only a means to access the
 Compilation_Unit (Compilation), the availability of the text of this Element
 itself is irrelevant to the result of the query.
-@end{SingleNote}
+@end{UsageNote}
 
 
 @LabeledClause{function Delimiter_Image}

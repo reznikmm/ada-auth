@@ -1,13 +1,13 @@
 @Comment{Master file for the ASIS Standard}
 
 @Comment{Global properties}
-@HideIndexEntries
-@HideAnnotations
+@ShowIndexEntries @Comment{To match the Ada 95 AARM}
+@ShowAnnotations
 @ShowISO@Comment{only ISO versions of this document}
 @Comment{No paragraph numbers - no @NumberParagraphs command}
 @comment{Do not link Non-Terminals [no grammar here]}
-@Title{Version=[0],Text=[Ada Semantic Interface Specification (ASIS)]}@Comment{Same title for all versions}
-@FilePrefix{AS}
+@Title{Version=[0],Text=[Annotated Ada Semantic Interface Specification (AASIS)]}@Comment{Same title for all versions}
+@FilePrefix{AM}
 @ExampleFont{Fixed}
 @BodyFont{Swiss}@Comment{Following the current ISO drafting style}
 @NoteFormat{ISO2004}@Comment{Ditto}
@@ -25,11 +25,11 @@
 @Comment{HTML properties}
 @Comment{Many small files are used, thus no @SingleHTMLOutputFile command}
 @HTMLKind{Version=[4],Unicode=[T]}
-@HTMLNavBar{RefName=[],SrchName=[AS-SRCH.html],IndexName=[],
+@HTMLNavBar{RefName=[],SrchName=[AM-SRCH.html],IndexName=[],
    UseButtons=[T],OnTop=[T],OnBottom=[T]}
 @Comment{We let the program generate the links to "References" and "Index"}
 @HTMLTabs{EmulateFixedOnly}
-@HTMLHeader{<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Semantic Interface Specification (ASIS)</B></SPAN> &mdash; <A HREF="AS-TTL.html"><B>Legal Information</B></A></DIV>}
+@HTMLHeader{<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Annotated Ada Semantic Interface Specification (ASIS)</B></SPAN> &mdash; <A HREF="AS-TTL.html"><B>Legal Information</B></A></DIV>}
 @HTMLFooter{}
 @HTMLColor{Text=[#000000],Background=[#FFF0E8],Link=[#0000FF],VLink=[#800080],ALink=[#FF0000]}
 

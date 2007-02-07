@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2006/10/19 22:29:18 $}
+@comment{$Revision: 1.5 $ $Date: 2007/02/06 06:21:04 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -988,11 +988,11 @@ encountered while traversing a generic instance.
 @LabeledClause{function Enclosing_Element}
 
 
-  @key[function] @AdaSubDefn{Enclosing_Element} (Element : @key[in] Asis.Element) @key[return] Asis.Element;
+@key[function] @AdaSubDefn{Enclosing_Element} (Element : @key[in] Asis.Element) @key[return] Asis.Element;
 
-    function Enclosing_Element (Element                    : @key[in] Asis.Element;
-                                Expected_Enclosing_Element : @key[in] Asis.Element)
-                            @key[return] Asis.Element;
+@key[function] @AdaSubDefn{Enclosing_Element} (Element                    : @key[in] Asis.Element;
+                            Expected_Enclosing_Element : @key[in] Asis.Element)
+                        @key[return] Asis.Element;
 
 Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
 Expected_Enclosing_Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} an enclosing element expected to
@@ -1004,11 +1004,11 @@ traversal. For any structural query that returns a subcomponent of an
 element (or that returns a list of subcomponent elements), the original element
 can be determined by passing the subcomponent element to this query.
 
-@b{APPLICATION NOTE}
-
+@begin{UsageNote}
 Semantic queries (queries that test the meaning of a program rather
 than its structure) return Elements that usually do not have the original
 argument Element as their parent.
+@end{UsageNote}
 
 Returns a Nil_Element if:
 
@@ -1045,7 +1045,7 @@ Examples:
   corresponding to any implicit generic child unit specification given as
   an argument. Reference Manual 10.1.1(19).
 
-@b{APPLICATION NOTE}
+@begin{UsageNote}
 
 The optional Expected_Enclosing_Element parameter is used only to optimize
 this query. This speed up is only present for ASIS implementations
@@ -1072,6 +1072,8 @@ Expected_Enclosing_Element to an implementation that ignores it, is
 harmless. Passing a "wrong" Expected_Enclosing_Element to an
 implementation that may utilize it, can lead to an unexpected
 Nil_Element result.
+
+@end{UsageNote}
 
 
 @LabeledClause{function Pragmas}
@@ -1159,12 +1161,12 @@ given element. For example, a pragma Pack affects the type it names.
 
 Returns a Nil_Element_List if there are no semantically associated pragmas.
 
-@b{APPLICATION NOTE}
-
+@begin{UsageNote}
 If the argument is a inherited entry declaration from a derived task
 type, all pragmas returned are elements taken from the original task
 type's declarative item list. Their Enclosing_Element is the original
 type definition and not the derived type definition.
+@end{UsageNote}
 
 Appropriate Element_Kinds:
      A_Declaration

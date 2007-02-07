@@ -1,6 +1,6 @@
 @Part(comp-rel, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/comp-rel.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2006/10/19 22:29:17 $}
+@comment{$Revision: 1.4 $ $Date: 2007/02/06 06:21:04 $}
 
 
 @LabeledSection{package Asis.Compilation_Units.Relations}
@@ -205,22 +205,26 @@ causing the inconsistent semantic dependence.
 
 @LabeledClause{function Semantic_Dependence_Order}
 
+@begin{UsageNote}
 Semantic Dependence Relationships @em Reference Manual 10.1.1(24).
-laboration Dependence Relationships @em Reference Manual 10.1.1(25).
+Elaboration Dependence Relationships @em Reference Manual 10.1.1(25).
+@end{UsageNote}
 
-@begin{Notes}
+@begin{Intro}
 To properly determine unit consistency, use one of the two semantic
 dependence queries: Elaboration_Order or Semantic_Dependence_Order.
 These queries return a value of the type Relationship, which contains
 lists of consistent, inconsistent, missing and circular units.
 
-@noprefix@;For these two queries, the existence of units in one or more of the
+@begin{UsageNote}
+For these two queries, the existence of units in one or more of the
 inconsistent, missing, or circular units list means that the consistent
 unit list may not be complete.
 
-@noprefix@;Applications that do not check for inconsistent, missing, or circular
+Applications that do not check for inconsistent, missing, or circular
 units before using the consistent list might not operate as expected.
-@end{Notes}
+@end{UsageNote}
+@end{Intro}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -253,7 +257,7 @@ entire Context. The result of such a query is the full (unlimited)
 list of Dependents for the Compilation_Units.
 
 
--- All units in the result will have an Enclosing_Context value that
+All units in the result will have an Enclosing_Context value that
 Is_Identical to The_Context.
 
 @leading@keepnext@;Appropriate Unit_Kinds:
@@ -298,10 +302,12 @@ with a list containing one or more units that are An_Unknown_Unit.
 However, results may vary across ASIS implementations.
 @end{ImplPerm}
 
-@begin{Notes}
-Semantic_Dependence_Order defines consistent units to be ordered such
-that there are no forward semantic dependencies.
-@end{Notes}
+@begin{UsageNote}
+@ChgDeleted{Version=[1],Text=[Semantic_Dependence_Order defines
+consistent units to be ordered such that there are no forward semantic
+dependencies. @b{@i{The normative part says exactly the same thing;
+why repeat it?? - RLB}}]}
+@end{UsageNote}
 
 
 @LabeledClause{function Elaboration_Order}

@@ -1,6 +1,6 @@
 @Part(data, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/data.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2006/10/19 22:29:18 $}
+@comment{$Revision: 1.5 $ $Date: 2007/02/06 06:21:06 $}
 
 @LabeledSection{package Asis.Data_Decomposition (optional)}
 
@@ -1181,14 +1181,14 @@ A_Simple_Static_Model
 @end{Display}
 @end{DescribeCode}
 
-@begin{SingleNote}
+@begin{UsageNote}
 For components, this is the number of bits allocated
 within the composite value. It may be greater than the number
 of bits occupied by data values of this component type.
 Also, the data value, when occupying more space than is
 minimally required, may be preceded, followed, or surrounded by
 padding bits which are necessary to fully occupy the space allotted.
-@end{SingleNote}
+@end{UsageNote}
 
 
 @LabeledClause{function Size (stream)}

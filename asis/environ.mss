@@ -1,6 +1,6 @@
 @Part(environ, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/environ.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/09/26 05:12:35 $}
+@comment{$Revision: 1.3 $ $Date: 2007/02/06 06:21:06 $}
 
 @LabeledSection{package Asis.Ada_Environments}
 
@@ -168,7 +168,7 @@ set comparison and returns True if both sets contain the same units (all
 unit versions are included in the comparison).
 @end{DescribeCode}
 
-@begin{SingleNote}
+@begin{UsageNote}
 @leading@;With some implementations, Is_Equal may be True before the Contexts
 are opened, but may be False after the Contexts are open.
 One possible cause for this is a sequence of events such as:
@@ -181,7 +181,7 @@ version of the implementor Context,
 
 ASIS program A opens the Right Context for READ, and gets the new version.
 @end{Enumerate}
-@end{SingleNote}
+@end{UsageNote}
 
 
 @LabeledClause{function Is_Identical (context)}
@@ -201,7 +201,7 @@ one specific ASIS Context variable.
 Returns False otherwise or if either Context is not open.
 @end{DescribeCode}
 
-@begin{SingleNote}
+@begin{UsageNote}
 No two physically separate open Context variables are ever Is_Identical.
 The value associated with an open ASIS Context variable is also directly
 associated with every Compilation_Unit or Element derived from that
@@ -211,7 +211,7 @@ Context values can be tested for identity with each other or with
 specific Context variables. An open ASIS Context variable and an
 Enclosing_Context value are only Is_Identical if the Compilation_Unit in
 question was derived specifically from that open ASIS Context variable.
-@end{SingleNote}
+@end{UsageNote}
 
 
 @LabeledClause{function Exists (context)}

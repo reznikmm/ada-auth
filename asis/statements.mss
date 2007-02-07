@@ -1,6 +1,6 @@
 @Part(statements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/statements.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/09/28 05:12:00 $}
+@comment{$Revision: 1.2 $ $Date: 2007/02/06 06:21:05 $}
 
 
 @LabeledSection{package Asis.Statements}
@@ -484,14 +484,15 @@ Appropriate Statement_Kinds:
 Returns Element_Kinds:
      A_Statement
 
-@b{APPLICATION NOTE}
-
+@begin{UsageNote}
 The Reference Manual allows a pragma between a statement and a label attached
 to it. If so, when the label is passed as an actual parameter to
 this query, the query returns the statement, but not the label. The only way
 for an application to know that there are any pragmas between a statement
 and its label is to get the spans of these program elements and analyze the
 corresponding positions in the source text.
+@end{UsageNote}
+
 
 @LabeledClause{function Called_Name}
 
