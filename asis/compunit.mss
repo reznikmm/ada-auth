@@ -1,6 +1,6 @@
 @Part(compunit, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/compunit.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2006/10/19 22:29:17 $}
+@comment{$Revision: 1.4 $ $Date: 2007/02/07 01:12:25 $}
 
 
 @LabeledSection{package Asis.Compilation_Units}
@@ -752,8 +752,7 @@ All Unit_Kinds are appropriate.
 @begin{DescribeCode}
 @begin{Example}
 @key[function] @AdaSubDefn{Unique_Name}
-      (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-            @key[return] Wide_String;
+     (Compilation_Unit : @key[in] Asis.Compilation_Unit) @key[return] Wide_String;
 @end{Example}
 
 Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the unit
@@ -777,7 +776,7 @@ All Unit_Kinds are appropriate.
 @begin{DescribeCode}
 @begin{Example}
 @key[function] @AdaSubDefn{Exists} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                @key[return] Boolean;
+        @key[return] Boolean;
 @end{Example}
 
 Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
@@ -822,7 +821,8 @@ All Unit_Kinds are expected.
                              @key[return] Boolean;
 @end{Example}
 
-Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the unit to test.
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+unit to test.
 
 Returns True if the Compilation_Unit exists and is a library
 package_declaration that requires a body. See Reference Manual 7.2(4).
@@ -837,7 +837,7 @@ All Unit_Kinds are expected.
 @begin{DescribeCode}
 @begin{Example}
 @key[function] @AdaSubDefn{Text_Name} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                   @key[return] Wide_String;
+         @key[return] Wide_String;
 @end{Example}
 
 Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
@@ -859,10 +859,14 @@ All Unit_Kinds are appropriate.
 @LabeledClause{function Text_Form}
 
 
-    @key[function] @AdaSubDefn{Text_Form} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                            @key[return] Wide_String;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Text_Form} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
+         @key[return] Wide_String;
+@end{Example}
 
-Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit whose text form is desired
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+unit whose text form is desired.
 
 Returns the Form parameter (as for Text_Io.Open) for the text, or
 other structure, that was the source of the compilation that resulted in
@@ -875,14 +879,19 @@ Text_Form availability is a required feature of ASIS.
 Results of this function may vary among implementations.
 
 All Unit_Kinds are appropriate.
+@end{DescribeCode}
+
 
 @LabeledClause{function Object_Name}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Object_Name} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
+         @key[return] Wide_String;
+@end{Example}
 
-      @key[function] @AdaSubDefn{Object_Name} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                              @key[return] Wide_String;
-
-Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit whose object name is desired
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+unit whose object name is desired.
 
 Returns the name of the object, or other structure, that contains the
 binary result of the compilation for this Compilation_Unit. Returns
@@ -890,14 +899,19 @@ a null string if the unit has a Nil or nonexistent kind, or if the
 object name is not available for any reason.
 
 All Unit_Kinds are appropriate.
+@end{DescribeCode}
+
 
 @LabeledClause{function Object_Form}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Object_Form} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
+         @key[return] Wide_String;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Object_Form} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                              @key[return] Wide_String;
-
-Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit whose object form is desired
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+unit whose object form is desired.
 
 Returns the Form parameter (as for Text_Io.Open) for the object, or
 other structure, that was the machine-code result of the compilation of
@@ -906,31 +920,41 @@ nonexistent kind, if the object was created with an empty Form parameter,
 or if the object Form parameter value is not available for any reason.
 
 All Unit_Kinds are appropriate.
+@end{DescribeCode}
 
 
 @LabeledClause{function Compilation_Command_Line_Options}
 
 
-    @key[function] @AdaSubDefn{Compilation_Command_Line_Options}
-                (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                @key[return] Wide_String;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Compilation_Command_Line_Options}
+         (Compilation_Unit : @key[in] Asis.Compilation_Unit)
+          @key[return] Wide_String;
+@end{Example}
 
-Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to query
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+unit to query.
 
 Returns the command line options used to compile the Compilation_Unit.
 Returns null string if the unit has a Nil or nonexistent unit kind, or
 if the command line options are not available for any reason.
 
 All Unit_Kinds are appropriate.
+@end{DescribeCode}
+
 
 @LabeledClause{function Has_Attribute}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Has_Attribute} (Compilation_Unit : @key[in] Asis.Compilation_Unit;
+                        Attribute        : @key[in] Wide_String) @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Has_Attribute} (Compilation_Unit : @key[in] Asis.Compilation_Unit;
-                            Attribute        : @key[in] Wide_String) @key[return] Boolean;
-
-Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to query
-Attribute          @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the name of the attribute to query
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+unit to query. Attribute @Chg{Version=[1],New=[specifies],Old=[         @en
+Specifies]} the name of the attribute to query.
 
 Returns True if the compilation unit has the given attribute.
 
@@ -940,11 +964,15 @@ Attribute does not exist, or the implementation does not support attributes.
 All Unit_Kinds are expected.
 
 Results of this query may vary across ASIS implementations.
+@end{DescribeCode}
+
 
 @LabeledClause{function Attribute_Value_Delimiter}
 
-
-    @key[function] @AdaSubDefn{Attribute_Value_Delimiter} @key[return] Wide_String;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Attribute_Value_Delimiter} @key[return] Wide_String;
+@end{Example}
 
 Returns the string used as a delimiter separating individual values
 within the string Attribute_Values of a compilation unit.
@@ -952,17 +980,22 @@ within the string Attribute_Values of a compilation unit.
 Results of this query may vary across ASIS implementations. The result
 can be a null string for implementations that do not support attributes,
 or that do not support more than one attribute.
+@end{DescribeCode}
+
 
 @LabeledClause{function Attribute_Values}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Attribute_Values}
+         (Compilation_Unit : @key[in] Asis.Compilation_Unit;
+          Attribute        : @key[in] Wide_String)
+          @key[return] Wide_String;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Attribute_Values}
-                (Compilation_Unit : @key[in] Asis.Compilation_Unit;
-                 Attribute        : @key[in] Wide_String)
-                @key[return] Wide_String;
-
-Compilation_Unit   @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to query
-Attribute          @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the name of the attribute to query
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+unit to query. Attribute @Chg{Version=[1],New=[specifies],Old=[         @en
+Specifies]} the name of the attribute to query.
 
 Returns a string containing zero or more images of values that are
 associated with the given attribute. When more than one value is returned,
@@ -974,19 +1007,24 @@ does not support attributes.
 All Unit_Kinds are appropriate.
 
 Results of this query may vary across ASIS implementations.
+@end{DescribeCode}
+
 
 @LabeledClause{function Subunits}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Subunits} (Parent_Body : @key[in] Asis.Compilation_Unit)
+         @key[return] Asis.Compilation_Unit_List;
 
-    @key[function] @AdaSubDefn{Subunits} (Parent_Body : @key[in] Asis.Compilation_Unit)
-                      @key[return] Asis.Compilation_Unit_List;
+@key[function] @AdaSubDefn{Subunits} (Parent_Body : @key[in] Asis.Compilation_Unit;
+                   The_Context : @key[in] Asis.Context)
+         @key[return] Asis.Compilation_Unit_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Subunits} (Parent_Body : @key[in] Asis.Compilation_Unit;
-                       The_Context : @key[in] Asis.Context)
-                      @key[return] Asis.Compilation_Unit_List;
-
-Parent_Body@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the parent unit to query
-The_Context@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the program Context to use for context
+Parent_Body @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the parent
+unit to query. The_Context @Chg{Version=[1],New=[specifies],Old=[@en
+Specifies]} the program Context to use for context.
 
 Returns a complete list of subunit values, with one value for each body
 stub that appears in the given Parent_Body. Returns a
@@ -1017,31 +1055,38 @@ Nil_Compilation_Unit.
 If a subunit is absent or if it is inconsistent with the argument Element,
 A_Nonexistent_Body shall be returned for it.
 
-Returns Unit_Kinds:
-     A_Nonexistent_Body
-     A_Procedure_Body_Subunit
-     A_Function_Body_Subunit
-     A_Package_Body_Subunit
-     A_Task_Body_Subunit
-     A_Protected_Body_Subunit
+@leading@keepnext@;Returns Unit_Kinds:
+@begin{Display}
+A_Nonexistent_Body
+A_Procedure_Body_Subunit
+A_Function_Body_Subunit
+A_Package_Body_Subunit
+A_Task_Body_Subunit
+A_Protected_Body_Subunit
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Corresponding_Subunit_Parent_Body}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Subunit_Parent_Body}
+           (Subunit : @key[in] Asis.Compilation_Unit)
+            @key[return] Asis.Compilation_Unit;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Corresponding_Subunit_Parent_Body}
-               (Subunit : @key[in] Asis.Compilation_Unit)
-                @key[return] Asis.Compilation_Unit;
+@key[function] @AdaSubDefn{Corresponding_Subunit_Parent_Body}
+           (Subunit     : @key[in] Asis.Compilation_Unit;
+            The_Context : @key[in] Asis.Context)
+            @key[return] Asis.Compilation_Unit;
 
-    @key[function] @AdaSubDefn{Corresponding_Subunit_Parent_Body}
-               (Subunit     : @key[in] Asis.Compilation_Unit;
-                The_Context : @key[in] Asis.Context)
-                @key[return] Asis.Compilation_Unit;
-
-Subunit    @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the subunit to query
-The_Context@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the program Context to use for context
+Subunit @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} the subunit
+to query. The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+program Context to use for context.
 
 
--- Returns the Compilation_Unit containing the body stub of the given Subunit.
+Returns the Compilation_Unit containing the body stub of the given Subunit.
 Returns a Nil_Compilation_Unit if the subunit parent is not contained in
 The_Context. Any non-Nil result will have an Enclosing_Context value that
 Is_Identical to The_Context.
@@ -1055,21 +1100,25 @@ PUnit := Corresponding_Subunit_Parent_Body (SUnit,
 @end{Display}
 
 @leading@keepnext@;Appropriate Unit_Kinds:
-     A_Procedure_Body_Subunit
-     A_Function_Body_Subunit
-     A_Package_Body_Subunit
-     A_Task_Body_Subunit
-     A_Protected_Body_Subunit
+@begin{Display}
+A_Procedure_Body_Subunit
+A_Function_Body_Subunit
+A_Package_Body_Subunit
+A_Task_Body_Subunit
+A_Protected_Body_Subunit
+@end{Display}
 
 @leading@keepnext@;Returns Unit_Kinds:
-     A_Procedure_Body
-     A_Function_Body
-     A_Package_Body
-     A_Procedure_Body_Subunit
-     A_Function_Body_Subunit
-     A_Package_Body_Subunit
-     A_Task_Body_Subunit
-     A_Protected_Body_Subunit
+@begin{Display}
+A_Procedure_Body
+A_Function_Body
+A_Package_Body
+A_Procedure_Body_Subunit
+A_Function_Body_Subunit
+A_Package_Body_Subunit
+A_Task_Body_Subunit
+A_Protected_Body_Subunit
+@end{Display}
 
 If the corresponding body does not exist in The_Context, or if it exists,
 but is inconsistent with the argument Element, then A_Nonexistent_Body
@@ -1077,14 +1126,19 @@ shall be returned.
 To locate the parent of a subunit that is not itself a subunit,
 repeatedly call Corresponding_Subunit_Parent_Body until a unit that
 is not a subunit is returned.
+@end{DescribeCode}
+
 
 @LabeledClause{function Debug_Image (unit)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Debug_Image} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
+         @key[return] Wide_String;
+@end{Example}
 
-     @key[function] @AdaSubDefn{Debug_Image} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-                          @key[return] Wide_String;
-
-Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a unit to convert
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a unit
+to convert.
 
 Returns a string value containing implementation-defined debug
 information associated with the compilation unit.
@@ -1100,6 +1154,7 @@ itself. They are also suitable for use by the ASIS application when
 printing simple application debugging messages during application
 development. They are intended to be, to some worthwhile degree,
 intelligible to the user.
+@end{DescribeCode}
 
 @begin{Example}
 @ChgDeleted{Version=[1],Text=[@key[end] Asis.Compilation_Units;]}

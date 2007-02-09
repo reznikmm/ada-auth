@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2007/02/06 06:21:04 $}
+@comment{$Revision: 1.6 $ $Date: 2007/02/07 01:12:25 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -722,7 +722,6 @@ An_Operator_Symbol
 
 @LabeledClause{function Attribute_Kind}
 
-
 @begin{DescribeCode}
 @begin{Example}
 @key[function] @AdaSubDefn{Attribute_Kind} (Expression : @key[in] Asis.Expression)
@@ -746,146 +745,202 @@ An_Attribute_Reference
 
 @LabeledClause{function Association_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Association_Kind} (Association : @key[in] Asis.Association)
+                            @key[return] Asis.Association_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Association_Kind} (Association : @key[in] Asis.Association)
-                              @key[return] Asis.Association_Kinds;
-
-Association  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Association to query.
+Association @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+Association to query.
 
 Returns the Association_Kinds value of the Association.
-
 
 Returns Not_An_Association for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-Expected Element_Kinds:
-     An_Association
+@leading@keepnext@;Expected Element_Kinds:
+@begin{Display}
+An_Association
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Statement_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Statement_Kind} (Statement : @key[in] Asis.Statement)
+                          @key[return] Asis.Statement_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Statement_Kind} (Statement : @key[in] Asis.Statement)
-                            @key[return] Asis.Statement_Kinds;
-
-Statement  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
+Statement @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the element
+to query.
 
 Returns the Statement_Kinds value of the statement.
 
 Returns Not_A_Statement for any unexpected element such as a
 Nil_Element, A_Definition, or A_Declaration.
 
-Expected Element_Kinds:
-     A_Statement
+@leading@keepnext@;Expected Element_Kinds:
+@begin{Display}
+A_Statement
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Path_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Path_Kind} (Path : @key[in] Asis.Path) @key[return] Asis.Path_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Path_Kind} (Path : @key[in] Asis.Path) @key[return] Asis.Path_Kinds;
-
-Path  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Path to query.
+Path @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the Path to query.
 
 Returns the Path_Kinds value of the Path.
 
 Returns Not_A_Path for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
 
-Expected Element_Kinds:
-     A_Path
+@leading@keepnext@;Expected Element_Kinds:
+@begin{Display}
+A_Path
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Clause_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Clause_Kind} (Clause : @key[in] Asis.Clause) @key[return] Asis.Clause_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Clause_Kind} (Clause : @key[in] Asis.Clause)
-                         @key[return] Asis.Clause_Kinds;
-
-Clause  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
+Clause @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the element to
+query.
 
 Returns the Clause_Kinds value of the Clause.
 
 Returns Not_A_Clause for any unexpected element such as a
 Nil_Element, A_Definition, or A_Declaration.
 
-Expected Element_Kinds:
-     A_Clause
+@leading@keepnext@;Expected Element_Kinds:
+@begin{Display}
+A_Clause
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Representation_Clause_Kind}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Representation_Clause_Kind}
+               (Clause : @key[in] Asis.Representation_Clause)
+                @key[return] Asis.Representation_Clause_Kinds;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Representation_Clause_Kind}
-                 (Clause : @key[in] Asis.Representation_Clause)
-                  @key[return] Asis.Representation_Clause_Kinds;
-
-Clause  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
+Clause @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the element to
+query.
 
 Returns the Representation_Clause_Kinds value of the Clause.
 
 Returns Not_A_Representation_Clause for any unexpected element such as a
 Nil_Element, A_Definition, or A_Declaration.
 
-Expected Clause_Kinds:
-     A_Representation_Clause
+@leading@keepnext@;Expected Clause_Kinds:
+@begin{Display}
+A_Representation_Clause
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Nil (element)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Asis.Element) @key[return] Boolean;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Asis.Element) @key[return] Boolean;
-
-Right  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to check.
+Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the element to
+check.
 
 Returns True if the program element is the Nil_Element.
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Nil (element list)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Asis.Element_List) @key[return] Boolean;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Asis.Element_List) @key[return] Boolean;
-
-Right  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element list to check.
+Right @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element list
+to check.
 
 Returns True if the element list has a length of zero.
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Equal (element)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Equal} (Left  : @key[in] Asis.Element;
+                     Right : @key[in] Asis.Element) @key[return] Boolean;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Is_Equal} (Left  : @key[in] Asis.Element;
-                       Right : @key[in] Asis.Element) @key[return] Boolean;
-
-Left   @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the left element to compare.
-Right  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the right element to compare.
+Left @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the left element
+to compare. Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+right element to compare.
 
 Returns True if Left and Right represent the same physical element,
 from the same physical compilation unit. The two elements may or
 may not be from the same open ASIS Context variable.
 
-Implies:
+@leading@keepnext@Chg{Version=[1],New=[A True result implies],Old=[Implies]}:
+@begin{Display}
+@exam{Is_Equal (Enclosing_Compilation_Unit (Left),
+          Enclosing_Compilation_Unit (Right)) = True}
+@end{Display}
+@end{DescribeCode}
 
-     Is_Equal (Enclosing_Compilation_Unit (Left),
-               Enclosing_Compilation_Unit (Right)) = True
 
 @LabeledClause{function Is_Identical (element)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Identical} (Left  : @key[in] Asis.Element;
+                         Right : @key[in] Asis.Element) @key[return] Boolean;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Is_Identical} (Left  : @key[in] Asis.Element;
-                           Right : @key[in] Asis.Element) @key[return] Boolean;
-
-Left   @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the left element.
-Right  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the right element.
+Left @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the left element.
+Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the right
+element.
 
 Returns True if Left and Right represent the same physical element,
 from the same physical compilation unit, from the same open ASIS
 Context variable.
 
-Implies:
-
-     Is_Identical (Enclosing_Compilation_Unit (Left),
-                   Enclosing_Compilation_Unit (Right)) = True
+@leading@keepnext@Chg{Version=[1],New=[A True result implies],Old=[Implies]}:
+@begin{Display}
+@exam{Is_Identical (Enclosing_Compilation_Unit (Left),
+              Enclosing_Compilation_Unit (Right)) = True}
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Is_Part_Of_Implicit}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Part_Of_Implicit} (Element : @key[in] Asis.Element) @key[return] Boolean;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Is_Part_Of_Implicit} (Element : @key[in] Asis.Element) @key[return] Boolean;
-
-Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
+Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to
+query.
 
 Returns True for any Element that is, or that forms part of, any
 implicitly declared or specified program Element structure.
@@ -904,58 +959,78 @@ done so that it is possible to determine whether a declaration, which
 happens to occur within an instance, is an implicit result of
 another declaration which occurs explicitly within the generic template.
 
-Implicit Elements are those that represent these portions of the Ada
+@leading@;Implicit Elements are those that represent these portions of the Ada
 language:
 
-- Reference Manual 4.5.(9)
+@begin{Itemize}
+Reference Manual 4.5.(9)
 
-  o All predefined operator declarations and their component elements are
-    Is_Part_Of_Implicit
+@begin{InnerItemize}
+All predefined operator declarations and their component elements are
+Is_Part_Of_Implicit
+@end{InnerItemize}
 
-- Reference Manual 3.4(16)
+Reference Manual 3.4(16)
 
-  o Implicit predefined operators of the derived type.
+@begin{InnerItemize}
+Implicit predefined operators of the derived type.
+@end{InnerItemize}
 
-- Reference Manual 3.4(17-22)
+Reference Manual 3.4(17-22)
 
-  o Implicit inherited subprogram declarations and their component elements are
-    Is_Part_Of_Implicit
+@begin{InnerItemize}
+Implicit inherited subprogram declarations and their component elements are
+ Is_Part_Of_Implicit
+@end{InnerItemize}
 
-- Reference Manual 6.4(9) and 12.3(7)
+Reference Manual 6.4(9) and 12.3(7)
 
-  o Implicit actual parameter expressions (defaults).
+@begin{InnerItemize}
+Implicit actual parameter expressions (defaults).
 
-  o The A_Parameter_Association that includes a defaulted parameter value Is_Normalized
-    and also Is_Part_Of_Implicit. The Formal_Parameter and the Actual_Parameter values
-    from such Associations are not Is_Part_Of_Implicit unless they are from default
-    initializations for an inherited subprogram declaration and have an
-    Enclosing_Element that is the parameter specification of the subprogram
-    declaration. (Those elements are shared with (were created by) the original
-    subprogram declaration, or they are naming expressions representing the actual
-    generic subprogram selected at the place of an instantiation for A_Box_Default.)
+The A_Parameter_Association that includes a defaulted parameter value
+Is_Normalized and also Is_Part_Of_Implicit. The Formal_Parameter and the
+Actual_Parameter values from such Associations are not Is_Part_Of_Implicit
+unless they are from default initializations for an inherited subprogram
+declaration and have an Enclosing_Element that is the parameter specification
+of the subprogram declaration. (Those elements are shared with (were created
+by) the original subprogram declaration, or they are naming expressions
+representing the actual generic subprogram selected at the place of an
+instantiation for A_Box_Default.)
 
-  o All A_Parameter_Association Kinds from a Normalized list are Is_Part_Of_Implicit.
+All A_Parameter_Association Kinds from a Normalized list are
+Is_Part_Of_Implicit.
+@end{InnerItemize}
 
-- Reference Manual 6.6 (6)
+Reference Manual 6.6 (6)
 
-  o Inequality operator declarations for limited private types are Is_Part_Of_Implicit.
+@begin{InnerItemize}
+Inequality operator declarations for limited private types are
+Is_Part_Of_Implicit.
 
-  o Depending on the ASIS implementation, a "/=" appearing in the compilation may
-    result in a "NOT" and an "=" in the internal representation. These two elements
-    test as Is_Part_Of_Implicit because they do not represent text from the original
-    compilation text.
+Depending on the ASIS implementation, a "/=" appearing in the compilation may
+result in a @key[not] and an "=" in the internal representation. These two elements
+test as Is_Part_Of_Implicit because they do not represent text from the
+original compilation text.
+@end{InnerItemize}
 
-- Reference Manual 12.3 (16)
+Reference Manual 12.3 (16)
 
-  o implicit generic instance specifications and bodies are not Is_Part_Of_Implicit;
-    they are Is_Part_Of_Instance and are only implicit if some other rule makes them
-    so.
+@begin{InnerItemize}
+implicit generic instance specifications and bodies are not
+Is_Part_Of_Implicit; they are Is_Part_Of_Instance and are only implicit if some
+other rule makes them so.
+@end{InnerItemize}
+@end{Itemize}
+@end{DescribeCode}
 
 
 @LabeledClause{function Is_Part_Of_Inherited}
 
-
-  @key[function] @AdaSubDefn{Is_Part_Of_Inherited} (Element : @key[in] Asis.Element) @key[return] Boolean;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Part_Of_Inherited} (Element : @key[in] Asis.Element) @key[return] Boolean;
+@end{Example}
 
 Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
 
@@ -963,13 +1038,18 @@ Returns True for any Element that is, or that forms part of, an
 inherited primitive subprogram declaration.
 
 Returns False for any other Element including a Nil_Element.
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Part_Of_Instance}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Part_Of_Instance} (Element : @key[in] Asis.Element) @key[return] Boolean;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Is_Part_Of_Instance} (Element : @key[in] Asis.Element) @key[return] Boolean;
-
-Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to test.
+Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to
+test.
 
 Returns True if the Element is part of an implicit generic specification
 instance or an implicit generic body instance.
@@ -984,15 +1064,19 @@ Returns False for a Nil_Element.
 
 Instantiations are not themselves Is_Part_Of_Instance unless they are
 encountered while traversing a generic instance.
+@end{DescribeCode}
+
 
 @LabeledClause{function Enclosing_Element}
 
-
+@begin{DescribeCode}
+@begin{Example}
 @key[function] @AdaSubDefn{Enclosing_Element} (Element : @key[in] Asis.Element) @key[return] Asis.Element;
 
 @key[function] @AdaSubDefn{Enclosing_Element} (Element                    : @key[in] Asis.Element;
                             Expected_Enclosing_Element : @key[in] Asis.Element)
                         @key[return] Asis.Element;
+@end{Example}
 
 Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
 Expected_Enclosing_Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} an enclosing element expected to
@@ -1010,43 +1094,46 @@ than its structure) return Elements that usually do not have the original
 argument Element as their parent.
 @end{UsageNote}
 
-Returns a Nil_Element if:
+@leading@keepnext@;Returns a Nil_Element if:
+@begin{Itemize}
+the element is the declaration part of a compilation unit
+(Unit_Declaration).
 
-- the element is the declaration part of a compilation unit
-  (Unit_Declaration).
+the element is with clause or use clause of a context clause
+(Context_Clause_Elements).
 
-- the element is with clause or use clause of a context clause
-  (Context_Clause_Elements).
-
-- the element is a pragma for a compilation unit
-  (Compilation_Pragmas and Context_Clause_Elements).
+the element is a pragma for a compilation unit
+(Compilation_Pragmas and Context_Clause_Elements).
+@end{Itemize}
 
 Use Enclosing_Compilation_Unit to get the enclosing compilation unit for
 any element value other than Nil_Element.
 
 Raises ASIS_Inappropriate_Element if the Element is a Nil_Element.
+@end{DescribeCode}
 
-Examples:
+@begin{Examples}
+@begin{Itemize}
+Given a A_Declaration/A_Full_Type_Declaration in the declarative region
+of a block statement, returns the A_Statement/A_Block_Statement Element
+that encloses the type declaration.
 
-- Given a A_Declaration/A_Full_Type_Declaration in the declarative region
-  of a block statement, returns the A_Statement/A_Block_Statement Element
-  that encloses the type declaration.
+Given A_Statement, from the sequence of statements within a loop
+statement, returns the enclosing A_Statement/A_Loop_Statement.
 
-- Given A_Statement, from the sequence of statements within a loop
-  statement, returns the enclosing A_Statement/A_Loop_Statement.
+Given the An_Expression/An_Identifier selector from an expanded name,
+returns the An_Expression/A_Selected_Component that represents the
+combination of the prefix, the dot, and the selector.
 
-- Given the An_Expression/An_Identifier selector from an expanded name,
-  returns the An_Expression/A_Selected_Component that represents the
-  combination of the prefix, the dot, and the selector.
-
-- Given the A_Declaration corresponding to the implicit redeclaration of
-  a child generic for an instantiated parent generic, returns the expanded
-  generic specific template from the parent generic instantiation
-  corresponding to any implicit generic child unit specification given as
-  an argument. Reference Manual 10.1.1(19).
+Given the A_Declaration corresponding to the implicit redeclaration of
+a child generic for an instantiated parent generic, returns the expanded
+generic specific template from the parent generic instantiation
+corresponding to any implicit generic child unit specification given as
+an argument. Reference Manual 10.1.1(19).
+@end{Itemize}
+@end{Examples}
 
 @begin{UsageNote}
-
 The optional Expected_Enclosing_Element parameter is used only to optimize
 this query. This speed up is only present for ASIS implementations
 where the underlying implementor's environment does not have "parent
@@ -1072,17 +1159,19 @@ Expected_Enclosing_Element to an implementation that ignores it, is
 harmless. Passing a "wrong" Expected_Enclosing_Element to an
 implementation that may utilize it, can lead to an unexpected
 Nil_Element result.
-
 @end{UsageNote}
 
 
 @LabeledClause{function Pragmas}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Pragmas} (The_Element : @key[in] Asis.Element)
+                   @key[return] Asis.Pragma_Element_List;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Pragmas} (The_Element : @key[in] Asis.Element)
-                     @key[return] Asis.Pragma_Element_List;
-
-The_Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
+The_Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element
+to query.
 
 Returns the list of pragmas, in their order of appearance, that appear
 directly within the given The_Element. Returns only those pragmas that are
@@ -1098,61 +1187,68 @@ Pragmas is controlled by an Include_Pragmas parameter.
 
 Returns a Nil_Element_List if there are no pragmas.
 
-Appropriate Element_Kinds:
-      A_Path                          (pragmas from the statement list +
-                                       pragmas immediately preceding the
-                                       reserved word "when" of the first
-                                       alternative)
-      An_Exception_Handler            (pragmas from the statement list + pragmas
-                                       immediately preceding the reserved word
-                                       "when" of the first exception handler)
+@b{@i{We need to get rid of the two column format here, because it
+formats horribly, especially in HTML. Any ideas?? - RLB}}
+@leading@keepnext@;Appropriate Element_Kinds:
+@table{Columns=[2],Alignment=[Allleft],FirstColWidth=[1],LastColWidth=[2],
+NoBreak=[F],Border=[F],SmallSize=[F],Caption=[],Headers=[],
+Body=[A_Path@\(pragmas from the statement list + pragmas immediately preceding the reserved word @key[when] of the first alternative)
+An_Exception_Handler@\(pragmas from the statement list + pragmas immediately preceding the reserved word @key[when] of the first exception handler)]}
 
-Appropriate Declaration_Kinds:
-      A_Procedure_Body_Declaration    (pragmas from declarative region + statements)
-      A_Function_Body_Declaration     (pragmas from declarative region + statements)
-      A_Package_Declaration           (pragmas from visible + private declarative
-                                       regions)
-      A_Package_Body_Declaration      (pragmas from declarative region + statements)
-      A_Task_Body_Declaration         (pragmas from declarative region + statements)
-      A_Protected_Body_Declaration    (pragmas from declarative region)
-      An_Entry_Body_Declaration       (pragmas from declarative region + statements)
-      A_Generic_Procedure_Declaration (pragmas from formal declarative region)
-      A_Generic_Function_Declaration  (pragmas from formal declarative region)
-      A_Generic_Package_Declaration   (pragmas from formal + visible +
-                                         private declarative regions)
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@table{Columns=[2],Alignment=[Allleft],FirstColWidth=[1],LastColWidth=[2],
+NoBreak=[F],Border=[F],SmallSize=[F],Caption=[],Headers=[],
+Body=[A_Procedure_Body_Declaration@\(pragmas from declarative region + statements)
+A_Function_Body_Declaration@\(pragmas from declarative region + statements)
+A_Package_Declaration@\(pragmas from visible + private declarative regions)
+A_Package_Body_Declaration@\(pragmas from declarative region + statements)
+A_Task_Body_Declaration@\(pragmas from declarative region + statements)
+A_Protected_Body_Declaration@\(pragmas from declarative region)
+An_Entry_Body_Declaration@\(pragmas from declarative region + statements)
+A_Generic_Procedure_Declaration@\(pragmas from formal declarative region)
+A_Generic_Function_Declaration@\(pragmas from formal declarative region)
+A_Generic_Package_Declaration@\(pragmas from formal + visible + private declarative regions)]}
 
-Appropriate Definition_Kinds:
-      A_Record_Definition             (pragmas from the component list)
-      A_Variant_Part                  (pragmas immediately preceding the
-                                       first reserved word "when" + between
-                                       variants)
-      A_Variant                       (pragmas from the component list)
-      A_Task_Definition               (pragmas from visible + private
-                                       declarative regions)
-      A_Protected_Definition          (pragmas from visible + private
-                                       declarative regions)
+@leading@keepnext@;Appropriate Definition_Kinds:
+@table{Columns=[2],Alignment=[Allleft],FirstColWidth=[1],LastColWidth=[2],
+NoBreak=[F],Border=[F],SmallSize=[F],Caption=[],Headers=[],
+Body=[A_Record_Definition@\(pragmas from the component list)
+A_Variant_Part@\(pragmas immediately preceding the first reserved word @key[when] + between variants)
+A_Variant@\(pragmas from the component list)
+A_Task_Definition@\(pragmas from visible + private declarative regions)
+A_Protected_Definition@\(pragmas from visible + private declarative regions)]}
 
-Appropriate Statement_Kinds:
-      A_Loop_Statement                (pragmas from statement list)
-      A_While_Loop_Statement          (pragmas from statement list)
-      A_For_Loop_Statement            (pragmas from statement list)
-      A_Block_Statement               (pragmas from declarative region + statements)
-      An_Accept_Statement             (pragmas from statement list +
+@leading@keepnext@;Appropriate Statement_Kinds:
+@table{Columns=[2],Alignment=[Allleft],FirstColWidth=[1],LastColWidth=[2],
+NoBreak=[F],Border=[F],SmallSize=[F],Caption=[],Headers=[],
+Body=[A_Loop_Statement@\(pragmas from statement list)
+A_While_Loop_Statement@\(pragmas from statement list)
+A_For_Loop_Statement@\(pragmas from statement list)
+A_Block_Statement@\(pragmas from declarative region + statements)
+An_Accept_Statement@\(pragmas from statement list)]}
 
-Appropriate Representation_Clause_Kinds:
-      A_Record_Representation_Clause  (pragmas from component specifications)
+@leading@keepnext@;Appropriate Representation_Clause_Kinds:
+@table{Columns=[2],Alignment=[Allleft],FirstColWidth=[1],LastColWidth=[2],
+NoBreak=[F],Border=[F],SmallSize=[F],Caption=[],Headers=[],
+Body=[A_Record_Representation_Clause@\(pragmas from component specifications)]}
 
-Returns Element_Kinds:
-      A_Pragma
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Corresponding_Pragmas}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Pragmas} (Element : @key[in] Asis.Element)
+                                 @key[return] Asis.Pragma_Element_List;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Corresponding_Pragmas} (Element : @key[in] Asis.Element)
-                                   @key[return] Asis.Pragma_Element_List;
-
-Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
+Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to
+query.
 
 Returns the list of pragmas semantically associated with the given element,
 in their order of appearance, or, in any order that does not affect their
@@ -1168,20 +1264,29 @@ type's declarative item list. Their Enclosing_Element is the original
 type definition and not the derived type definition.
 @end{UsageNote}
 
-Appropriate Element_Kinds:
-     A_Declaration
-     A_Statement
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Declaration
+A_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     A_Pragma
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Pragma_Name_Image}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Pragma_Name_Image}
+          (Pragma_Element : @key[in] Asis.Pragma_Element) @key[return] Program_Text;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Pragma_Name_Image}
-            (Pragma_Element : @key[in] Asis.Pragma_Element) @key[return] Program_Text;
-
-Pragma_Element @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
+Pragma_Element @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+element to query.
 
 Returns the program text image of the simple name of the pragma.
 
@@ -1189,34 +1294,49 @@ The case of names returned by this query may vary between implementors.
 Implementors are encouraged, but not required, to return names in the
 same case as was used in the original compilation text.
 
-Appropriate Element_Kinds:
-     A_Pragma
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Pragma
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Pragma_Argument_Associations}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Pragma_Argument_Associations}
+          (Pragma_Element : @key[in] Asis.Pragma_Element)
+              @key[return] Asis.Association_List;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Pragma_Argument_Associations}
-            (Pragma_Element : @key[in] Asis.Pragma_Element)
-                @key[return] Asis.Association_List;
-
-Pragma_Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
+Pragma_Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+element to query.
 
 Returns a list of the Pragma_Argument_Associations of the pragma, in their
 order of appearance.
 
-Appropriate Element_Kinds:
-     A_Pragma
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Pragma
+@end{Display}
 
-Returns Element_Kinds:
-     A_Pragma_Argument_Association
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma_Argument_Association
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Debug_Image (element)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Debug_Image} (Element : @key[in] Asis.Element) @key[return] Wide_String;
+@end{Example}
 
-  @key[function] @AdaSubDefn{Debug_Image} (Element : @key[in] Asis.Element) @key[return] Wide_String;
-
-Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the program element to convert.
+Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the program
+element to convert.
 
 Returns a string value containing implementation-defined debug
 information associated with the element.
@@ -1232,12 +1352,15 @@ itself. They are also suitable for use by the ASIS application when
 printing simple application debugging messages during application
 development. They are intended to be, to some worthwhile degree,
 intelligible to the user.
+@end{DescribeCode}
+
 
 @LabeledClause{function Hash}
 
-
-   @key[function] @AdaSubDefn{Hash} (Element : @key[in] Asis.Element) @key[return] Asis.ASIS_Integer;
-
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Hash} (Element : @key[in] Asis.Element) @key[return] Asis.ASIS_Integer;
+@end{Example}
 
 The purpose of the hash function is to provide a convenient name for an
 object of type Asis.Element in order to facilitate application defined I/O
@@ -1256,11 +1379,12 @@ not unique for each hashed Asis.Element. The application is responsible for
 handling name collisions of the hashed value.
 
 The hash function returns a hashed value of type ASIS_Integer. If desired,
-a user could easily map ASIS_Integer’Range to any smaller range for the
+a user could easily map ASIS_Integer'Range to any smaller range for the
 hash based on application constraints (i.e., the application implementor
 can tune the time-space tradeoffs by choosing a small table, implying
 slower lookups within each "bucket", or a large table, implying faster
 lookups within each "bucket").
+@end{DescribeCode}
 
 @begin{Example}
 @ChgDeleted{Version=[1],Text=[@key[end] Asis.Elements;]}
