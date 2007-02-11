@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2007/02/06 06:21:06 $}
+@comment{$Revision: 1.10 $ $Date: 2007/02/09 07:10:54 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -218,7 +218,7 @@ includes the following headers:]}
 mark an element kind reference which acts as a header for those queries that
 work on this element kind.@Chg{Version=[1],New=[ The reference includes the
 name of a query that can produce the appropriate element kind and the
-subclause in the Ada Standard (ISO/IEC 8652:1995) where it is defined.],Old=[]}
+subclause in the Ada Standard (ISO/IEC 8652:1995) where the kind is defined.],Old=[]}
 @end{ElementRef}
 
 @begin{ChildRef}

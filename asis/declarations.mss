@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2007/02/06 06:21:04 $}
+@comment{$Revision: 1.4 $ $Date: 2007/02/09 07:10:53 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -15,18 +15,26 @@ Old=[@f{@key[package] @ChildUnit{Parent=[Asis],Child=[Declarations]}Asis.Declara
 Asis.Declarations encapsulates a set of queries that operate on
 A_Defining_Name and A_Declaration elements.
 
-Element Reference -A_Declaration - 3.1
-
-Child Elements returned by
-   function Names
 
 @LabeledClause{function Names}
 
+@begin{ElementRef}
+A_Declaration @em 3.1
+@end{ElementRef}
+@begin{ChildRef}@ @;
+@begin{Display}
+function Names
+@end{Display}
+@end{ChildRef}
 
-    @key[function] @AdaSubDefn{Names} (Declaration : @key[in] Asis.Declaration)
-                   @key[return] Asis.Defining_Name_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Names} (Declaration : @key[in] Asis.Declaration)
+               @key[return] Asis.Defining_Name_List;
+@end{Example}
 
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element
+to query.
 
 Returns a list of names defined by the declaration, in their order of
 appearance. Declarations that define a single name will return a list of
@@ -36,14 +44,6 @@ Returns Nil_Element_List for A_Declaration Elements representing the (implicit)
 declarations of universal and root numeric type (that is, if Type_Kind
 (Type_Declaration_View (Declaration) = A_Root_Type_Definition.
 
-Examples:
-
-    type Foo is (Pooh, Baah);
-       -- Returns a list containing one A_Defining_Name: Foo.
-
-    One, Uno : constant Integer := 1;
-       -- Returns a list of two A_Defining_Name elements: One and Uno.
-
 Function designators that define operators are A_Defining_Operator_Symbol.
 
 Results of this query may vary across ASIS implementations. Some
@@ -52,28 +52,48 @@ equivalent series of corresponding single name declarations. For those
 implementations, this query will always return a list containing a single
 name. See Reference Manual 3.3.1(7).
 
-Appropriate Element_Kinds:
-      A_Declaration
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Declaration
+@end{Display}
 
-Returns Element_Kinds:
-      A_Defining_Name
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Defining_Name
+@end{Display}
+@end{DescribeCode}
 
-Element Reference -A_Defining_Name - 3.1
+@begin{Examples}
+@begin{Example}
+@key[type] Foo @key[is] (Pooh, Baah);
+   -- Returns a list containing one A_Defining_Name: Foo.
 
-A_Defining_Identifier      - 3.1 - no child elements
-A_Defining_Operator_Symbol - 6.1 - no child elements
-
-A string image returned by:
-   function Defining_Name_Image
+One, Uno : @key[constant] Integer := 1;
+   -- Returns a list of two A_Defining_Name elements: One and Uno.
+@end{Example}
+@end{Examples}
 
 
 @LabeledClause{function Defining_Name_Image}
 
+@begin{ElementRef}
+A_Defining_Name @em 3.1@*
+@*
+A_Defining_Identifier @em 3.1 @em no child elements@*
+A_Defining_Operator_Symbol @em 6.1 @em no child elements@*
+@*
+A string image returned by:@*
+   function Defining_Name_Image
+@end{ElementRef}
 
-    @key[function] @AdaSubDefn{Defining_Name_Image}
-            (Defining_Name : @key[in] Asis.Defining_Name) @key[return] Program_Text;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Defining_Name_Image}
+        (Defining_Name : @key[in] Asis.Defining_Name) @key[return] Program_Text;
+@end{Example}
 
-Defining_Name  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query
+Defining_Name @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+element to query.
 
 Returns the program text image of the name. Embedded quotes (for operator
 designator strings) are doubled.
@@ -81,7 +101,7 @@ designator strings) are doubled.
 A_Defining_Identifier elements are simple identifier names "Abc" (name Abc).
 
 A_Defining_Operator_Symbol elements have names with embedded quotes
-"""abs""" (function "abs").
+"""abs""" (function "@key[abs]").
 
 A_Defining_Character_Literal elements have names with embedded apostrophes
 "'x'" (literal 'x').
@@ -105,26 +125,35 @@ does not include the trailing colon that forms the loop name syntax.
 Use Asis.Text.Element_Image or Asis.Text.Lines queries to obtain these
 syntactic constructs and any comments associated with them.
 
-Appropriate Element_Kinds:
-     A_Defining_Name
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Defining_Name
+@end{Display}
+@end{DescribeCode}
 
-Element Reference -A_Defining_Character_Literal   - 3.5.1 - no child elements
-Element Reference -A_Defining_Enumeration_Literal - 3.5.1 - no child elements
-
-A program text image returned by:
-   function Defining_Name_Image
-
-A program text image of the enumeration literal value returned by:
-   function Position_Number_Image
-   function Representation_Value_Image
 
 @LabeledClause{function Position_Number_Image}
 
+@begin{ElementRef}
+A_Defining_Character_Literal @em 3.5.1 @em no child elements@*
+A_Defining_Enumeration_Literal @em 3.5.1 @em no child elements@*
+@*
+A program text image returned by:@*
+   function Defining_Name_Image@*
+@*
+A program text image of the enumeration literal value returned by:@*
+   function Position_Number_Image@*
+   function Representation_Value_Image
+@end{ElementRef}
 
-    @key[function] @AdaSubDefn{Position_Number_Image}
-            (Defining_Name : @key[in] Asis.Defining_Name) @key[return] Wide_String;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Position_Number_Image}
+        (Defining_Name : @key[in] Asis.Defining_Name) @key[return] Wide_String;
+@end{Example}
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the literal expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the literal
+expression to query.
 
 Returns the program text image of the position number of the value of the
 enumeration literal.
@@ -133,17 +162,24 @@ The program text returned is the image of the universal_integer value that is
 returned by the attribute 'Pos if it were applied to the value.
 For example: Integer'Image(Color'Pos(Blue)).
 
-Appropriate Defining_Name_Kinds:
-     A_Defining_Character_Literal
-     A_Defining_Enumeration_Literal
+@leading@keepnext@;Appropriate Defining_Name_Kinds:
+@begin{Display}
+A_Defining_Character_Literal
+A_Defining_Enumeration_Literal
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Representation_Value_Image}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Representation_Value_Image}
+        (Defining_Name : @key[in] Asis.Defining_Name) @key[return] Wide_String;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Representation_Value_Image}
-            (Defining_Name : @key[in] Asis.Defining_Name) @key[return] Wide_String;
-
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the literal expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the literal
+expression to query.
 
 Returns the string image of the internal code for the enumeration literal.
 
@@ -152,103 +188,148 @@ string returned is the Integer'Wide_Image of the corresponding value given in
 the enumeration_aggregate. Otherwise, the string returned is the same as
 the Position_Number_Image.
 
-Appropriate Defining_Name_Kinds:
-     A_Defining_Character_Literal
-     A_Defining_Enumeration_Literal
-Element Reference -A_Defining_Expanded_Name - 6.1
+@leading@keepnext@;Appropriate Defining_Name_Kinds:
+@begin{Display}
+A_Defining_Character_Literal
+A_Defining_Enumeration_Literal
+@end{Display}
+@end{DescribeCode}
 
-A string image returned by:
-   function Defining_Name_Image
-
-Child Elements returned by
-   function Defining_Prefix
-   function Defining_Selector
 
 @LabeledClause{function Defining_Prefix}
 
+@begin{ElementRef}
+A_Defining_Expanded_Name @em 6.1@*
+@*
+A string image returned by:@*
+   function Defining_Name_Image
+@end{ElementRef}
 
-    @key[function] @AdaSubDefn{Defining_Prefix} (Defining_Name : @key[in] Asis.Defining_Name)
-                       @key[return] Asis.Name;
+@begin{ChildRef}@ @;
+@begin{Display}
+function Defining_Prefix
+function Defining_Selector
+@end{Display}
+@end{ChildRef}
 
-Defining_Name  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Defining_Prefix} (Defining_Name : @key[in] Asis.Defining_Name)
+                   @key[return] Asis.Name;
+@end{Example}
+
+Defining_Name @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element
+to query.
 
 Returns the element that forms the prefix of the name. The prefix is the
 name to the left of the rightmost 'dot' in the expanded name.
 The Defining_Prefix of A.B is A, and of A.B.C is A.B.
 
-Appropriate Defining_Name_Kinds:
-     A_Defining_Expanded_Name
+@leading@keepnext@;Appropriate Defining_Name_Kinds:
+@begin{Display}
+A_Defining_Expanded_Name
+@end{Display}
 
-Returns Expression_Kinds:
-     An_Identifier
-     A_Selected_Component
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
+A_Selected_Component
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Defining_Selector}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Defining_Selector} (Defining_Name : @key[in] Asis.Defining_Name)
+                     @key[return] Asis.Defining_Name;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Defining_Selector} (Defining_Name : @key[in] Asis.Defining_Name)
-                         @key[return] Asis.Defining_Name;
-
-Defining_Name  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query
+Defining_Name @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+element to query.
 
 Returns the element that forms the selector of the name. The selector is
 the name to the right of the rightmost 'dot' in the expanded name.
 The Defining_Selector of A.B is B, and of A.B.C is C.
 
-Appropriate Defining_Name_Kinds:
-     A_Defining_Expanded_Name
+@leading@keepnext@;Appropriate Defining_Name_Kinds:
+@begin{Display}
+A_Defining_Expanded_Name
+@end{Display}
 
-Returns Defining_Name_Kinds:
-     A_Defining_Identifier
-Element Reference -An_Ordinary_Type_Declaration - 3.2.1
+@leading@keepnext@;Returns Defining_Name_Kinds:
+@begin{Display}
+A_Defining_Identifier
+@end{Display}
+@end{DescribeCode}
 
-Child Elements returned by
-   function Names
-   function Discriminant_Part
-   function Type_Declaration_View
 
 @LabeledClause{function Discriminant_Part}
 
+@begin{ElementRef}
+An_Ordinary_Type_Declaration @em 3.2.1
+@end{ElementRef}
 
-    @key[function] @AdaSubDefn{Discriminant_Part} (Declaration : @key[in] Asis.Declaration)
-                           @key[return] Asis.Definition;
+@begin{ChildRef}@ @;
+@begin{Display}
+function Names
+function Discriminant_Part
+function Type_Declaration_View
+@end{Display}
+@end{ChildRef}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Discriminant_Part} (Declaration : @key[in] Asis.Declaration)
+                       @key[return] Asis.Definition;
+@end{Example}
 
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the type declaration to query
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the type
+declaration to query.
 
 Returns the discriminant_part, if any, from the type_declaration or
 formal_type_declaration.
 
 Returns a Nil_Element if the Declaration has no explicit discriminant_part.
 
-Appropriate Declaration_Kinds:
-     An_Ordinary_Type_Declaration
-     A_Task_Type_Declaration
-     A_Protected_Type_Declaration
-     An_Incomplete_Type_Declaration
-     A_Private_Type_Declaration
-     A_Private_Extension_Declaration
-     A_Formal_Type_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+An_Ordinary_Type_Declaration
+A_Task_Type_Declaration
+A_Protected_Type_Declaration
+An_Incomplete_Type_Declaration
+A_Private_Type_Declaration
+A_Private_Extension_Declaration
+A_Formal_Type_Declaration
+@end{Display}
 
-Returns Definition_Kinds:
-     Not_A_Definition
-     An_Unknown_Discriminant_Part
-     A_Known_Discriminant_Part
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+Not_A_Definition
+An_Unknown_Discriminant_Part
+A_Known_Discriminant_Part
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Type_Declaration_View}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Type_Declaration_View} (Declaration : @key[in] Asis.Declaration)
+              @key[return] Asis.Definition;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Type_Declaration_View} (Declaration : @key[in] Asis.Declaration)
-                  @key[return] Asis.Definition;
-
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the declaration element to query
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+declaration element to query.
 
 Returns the definition characteristics that form the view of the
 type_declaration. The view is the remainder of the declaration following
-the reserved word "is".
+the reserved word @key[is].
 
 For a full_type_declaration, returns the type_definition, task_definition,
-or protected_definition following the reserved word "is" in the declaration.
+or protected_definition following the reserved word @key[is] in the declaration.
 
 Returns a Nil_Element for a task_type_declaration that has no explicit
 task_definition.
@@ -260,53 +341,74 @@ For a subtype_declaration, returns the subtype_indication.
 
 For a formal_type_declaration, returns the formal_type_definition.
 
-Appropriate Declaration_Kinds:
-      An_Ordinary_Type_Declaration
-      A_Task_Type_Declaration
-      A_Protected_Type_Declaration
-      A_Private_Type_Declaration
-      A_Private_Extension_Declaration
-      A_Subtype_Declaration
-      A_Formal_Type_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+An_Ordinary_Type_Declaration
+A_Task_Type_Declaration
+A_Protected_Type_Declaration
+A_Private_Type_Declaration
+A_Private_Extension_Declaration
+A_Subtype_Declaration
+A_Formal_Type_Declaration
+@end{Display}
 
-Returns Definition_Kinds:
-      Not_A_Definition
-      A_Type_Definition
-      A_Subtype_Indication
-      A_Private_Type_Definition
-      A_Tagged_Private_Type_Definition
-      A_Private_Extension_Definition
-      A_Task_Definition
-      A_Protected_Definition
-      A_Formal_Type_Definition
-Element Reference -A_Subtype_Declaration - 3.2.2
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+Not_A_Definition
+A_Type_Definition
+A_Subtype_Indication
+A_Private_Type_Definition
+A_Tagged_Private_Type_Definition
+A_Private_Extension_Definition
+A_Task_Definition
+A_Protected_Definition
+A_Formal_Type_Definition
+@end{Display}
+@end{DescribeCode}
 
-Child Elements returned by
-   function Names
-   function Type_Declaration_View
-
-Element Reference -A_Variable_Declaration          - 3.3.1
-
-Child elements:
-   function Names
-   function Object_Declaration_View
-   function Initialization_Expression
 
 @LabeledClause{function Object_Declaration_View}
 
+@begin{ElementRef}
+A_Subtype_Declaration @em 3.2.2
+@end{ElementRef}
 
-    @key[function] @AdaSubDefn{Object_Declaration_View} (Declaration : @key[in] Asis.Declaration)
-                  @key[return] Asis.Definition;
+@begin{ChildRef}@ @;
+@begin{Display}
+function Names
+function Type_Declaration_View
+@end{Display}
+@end{ChildRef}
 
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the declaration element to query
+@begin{ElementRef}
+A_Variable_Declaration @em 3.3.1
+@end{ElementRef}
+
+@begin{ChildRef}@ @;
+@begin{Display}
+function Names
+function Object_Declaration_View
+function Initialization_Expression
+@end{Display}
+@end{ChildRef}
+
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Object_Declaration_View} (Declaration : @key[in] Asis.Declaration)
+              @key[return] Asis.Definition;
+@end{Example}
+
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+declaration element to query.
 
 Returns the definition characteristics that form the view of the
 object_declaration. The view is the subtype_indication or full type
 definition of the object_declaration. An initial value, if any, is not
 part of this view.
 
-For a single_task_declaration or single_protected_declaration, returns
-the task_definition or protected_definition following the reserved word "is".
+For a single_task_declaration or single_protected_declaration, returns the
+task_definition or protected_definition following the reserved word @key[is].
 
 Returns a Nil_Element for a single_task_declaration that has no explicit
 task_definition.
@@ -317,69 +419,93 @@ the colon.
 For all other object_declaration variables or constants, returns the
 subtype_indication or array_type_definition following the colon.
 
-Appropriate Declaration_Kinds:
-      A_Variable_Declaration
-      A_Constant_Declaration
-      A_Deferred_Constant_Declaration
-      A_Single_Protected_Declaration
-      A_Single_Task_Declaration
-      A_Component_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Variable_Declaration
+A_Constant_Declaration
+A_Deferred_Constant_Declaration
+A_Single_Protected_Declaration
+A_Single_Task_Declaration
+A_Component_Declaration
+@end{Display}
 
-Returns Definition_Kinds:
-      Not_A_Definition
-      A_Type_Definition
-          Returns Type_Kinds:
-                A_Constrained_Array_Definition
-      A_Subtype_Indication
-      A_Task_Definition
-      A_Protected_Definition
-      A_Component_Definition
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+Not_A_Definition
+A_Type_Definition
+    Returns Type_Kinds:
+        A_Constrained_Array_Definition
+A_Subtype_Indication
+A_Task_Definition
+A_Protected_Definition
+A_Component_Definition
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Initialization_Expression}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Initialization_Expression} (Declaration : @key[in] Asis.Declaration)
+                       @key[return] Asis.Expression;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Initialization_Expression} (Declaration : @key[in] Asis.Declaration)
-                           @key[return] Asis.Expression;
-
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the object declaration to query
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the object
+declaration to query.
 
 Returns the initialization expression [:= expression] of the declaration.
 
 Returns a Nil_Element if the declaration does not include an explicit
 initialization.
 
-Appropriate Declaration_Kinds:
-     A_Variable_Declaration
-     A_Constant_Declaration
-     An_Integer_Number_Declaration
-     A_Real_Number_Declaration
-     A_Discriminant_Specification
-     A_Component_Declaration
-     A_Parameter_Specification
-     A_Formal_Object_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Variable_Declaration
+A_Constant_Declaration
+An_Integer_Number_Declaration
+A_Real_Number_Declaration
+A_Discriminant_Specification
+A_Component_Declaration
+A_Parameter_Specification
+A_Formal_Object_Declaration
+@end{Display}
 
-Returns Element_Kinds:
-     Not_An_Element
-     An_Expression
-Element Reference -A_Constant_Declaration          - 3.3.1
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+Not_An_Element
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
-Child elements:
-   function Names
-   function Object_Declaration_View
-   function Initialization_Expression
-
-Element queries that provide semantically related elements:
-   function Corresponding_Constant_Declaration
 
 @LabeledClause{function Corresponding_Constant_Declaration}
 
+@begin{ElementRef}
+A_Constant_Declaration @em 3.3.1
+@end{ElementRef}
 
-    @key[function] @AdaSubDefn{Corresponding_Constant_Declaration}
-                (Name : @key[in] Asis.Defining_Name)
-                @key[return] Asis.Declaration;
+@begin{ChildRef}@ @;
+@begin{Display}
+function Names
+function Object_Declaration_View
+function Initialization_Expression
+@end{Display}
+@leading@keepnext@;Element queries that provide semantically related elements:
+@begin{Display}
+function Corresponding_Constant_Declaration
+@end{Display}
+@end{ChildRef}
 
-Name    @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the name of a constant declaration to query
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Constant_Declaration}
+            (Name : @key[in] Asis.Defining_Name)
+            @key[return] Asis.Declaration;
+@end{Example}
+
+Name @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the name of a
+constant declaration to query.
 
 Returns the corresponding full constant declaration when given the name
 from a deferred constant declaration.
@@ -399,92 +525,141 @@ argument is not the name of a constant or a deferred constant.
 The name of a constant declaration is available from both the Names and the
 Corresponding_Name_Definition queries.
 
-Appropriate Element_Kinds:
-     A_Defining_Name
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Defining_Name
+@end{Display}
 
-Returns Declaration_Kinds:
-     Not_A_Declaration
-     A_Constant_Declaration
-     A_Deferred_Constant_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+Not_A_Declaration
+A_Constant_Declaration
+A_Deferred_Constant_Declaration
+@end{Display}
 
-Returns Element_Kinds:
-     Not_An_Element
-     A_Declaration
-     A_Pragma
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+Not_An_Element
+A_Declaration
+A_Pragma
+@end{Display}
+@end{DescribeCode}
 
-Element Reference -A_Deferred_Constant_Declaration          - 3.3.1
-
-Child Elements returned by
-   function Names
-   function Object_Declaration_View
-
-Element Reference -An_Integer_Number_Declaration - 3.3.2
-Element Reference -A_Real_Number_Declaration     - 3.3.2
-
-Child Elements returned by
-   function Names
-   function Initialization_Expression
-
-Element Reference -An_Enumeration_Literal_Specification - 3.5.1
-
-Child Elements returned by
-   function Names
-
-Element Reference -A_Discriminant_Specification         - 3.7
-
-Child Elements returned by
-   function Names
-   function Declaration_Subtype_Mark
-   function Initialization_Expression
 
 @LabeledClause{function Declaration_Subtype_Mark}
 
+@begin{ElementRef}
+A_Deferred_Constant_Declaration @em 3.3.1
+@end{ElementRef}
 
-    @key[function] @AdaSubDefn{Declaration_Subtype_Mark} (Declaration : @key[in] Asis.Declaration)
-                                      @key[return] Asis.Expression;
+@begin{ChildRef}@ @;
+@begin{Display}
+function Names
+function Object_Declaration_View
+@end{Display}
+@end{ChildRef}
 
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the declaration element to query
+@begin{ElementRef}
+An_Integer_Number_Declaration @em 3.3.2@*
+A_Real_Number_Declaration @em 3.3.2
+@end{ElementRef}
+
+@begin{ChildRef}@ @;
+@begin{Display}
+function Names
+function Initialization_Expression
+@end{Display}
+@end{ChildRef}
+
+@begin{ElementRef}
+An_Enumeration_Literal_Specification @em 3.5.1
+@end{ElementRef}
+
+@begin{ChildRef}@ @;
+@begin{Display}
+function Names
+@end{Display}
+@end{ChildRef}
+
+@begin{ElementRef}
+A_Discriminant_Specification @em 3.7
+@end{ElementRef}
+
+@begin{ChildRef}@ @;
+@begin{Display}
+function Names
+function Declaration_Subtype_Mark
+function Initialization_Expression
+@end{Display}
+@end{ChildRef}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Declaration_Subtype_Mark} (Declaration : @key[in] Asis.Declaration)
+                                  @key[return] Asis.Expression;
+@end{Example}
+
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+declaration element to query.
 
 Returns the expression element that names the subtype_mark of the
 declaration.
 
-Appropriate Declaration_Kinds:
-     A_Discriminant_Specification
-     A_Parameter_Specification
-     A_Formal_Object_Declaration
-     An_Object_Renaming_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Discriminant_Specification
+A_Parameter_Specification
+A_Formal_Object_Declaration
+An_Object_Renaming_Declaration
+@end{Display}
 
-Returns Expression_Kinds:
-     An_Identifier
-     A_Selected_Component
-     An_Attribute_Reference
-Element Reference -A_Component_Declaration - 3.8
-
-Child Elements returned by
-   function Names
-   function Object_Declaration_View
-   function Initialization_Expression
-
-Element Reference -An_Incomplete_Type_Declaration - 3.10.1
-
-Child Elements returned by
-   function Names
-   function Discriminant_Part
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
+A_Selected_Component
+An_Attribute_Reference
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Corresponding_Type_Declaration}
 
+@begin{ElementRef}
+A_Component_Declaration @em 3.8
+@end{ElementRef}
 
-    @key[function] @AdaSubDefn{Corresponding_Type_Declaration}
-                (Declaration : @key[in] Asis.Declaration) @key[return] Asis.Declaration;
+@begin{ChildRef}@ @;
+@begin{Display}
+function Names
+function Object_Declaration_View
+function Initialization_Expression
+@end{Display}
+@end{ChildRef}
 
-    @key[function] @AdaSubDefn{Corresponding_Type_Declaration}
-                (Declaration : @key[in] Asis.Declaration;
-                 The_Context : @key[in] Asis.Context) @key[return] Asis.Declaration;
+@begin{ElementRef}
+An_Incomplete_Type_Declaration @em 3.10.1
+@end{ElementRef}
 
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the type declaration to query
-The_Context @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the program Context to use for obtaining package
-              body information
+@begin{ChildRef}@ @;
+@begin{Display}
+function Names
+function Discriminant_Part
+@end{Display}
+@end{ChildRef}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Type_Declaration}
+            (Declaration : @key[in] Asis.Declaration) @key[return] Asis.Declaration;
+
+@key[function] @AdaSubDefn{Corresponding_Type_Declaration}
+            (Declaration : @key[in] Asis.Declaration;
+             The_Context : @key[in] Asis.Context) @key[return] Asis.Declaration;
+@end{Example}
+
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the type
+declaration to query. The_Context @chg{Version=[1],New=[specifies],Old=[@en
+Specifies]} the program Context to use for obtaining package body information.
 
 Returns the corresponding full type declaration when given a private or
 incomplete type declaration. Returns the corresponding private or
@@ -492,12 +667,12 @@ incomplete type declaration when given a full type declaration.
 
 @leading@;These two function calls will always produce identical results:
 
-@begin{Example}
-Decl2 := Corresponding_Type_Declaration ( Decl1 );
+@begin{Display}
+@exam{Decl2 := Corresponding_Type_Declaration (Decl1);
 Decl2 := Corresponding_Type_Declaration
-         ( Decl1,
-           Enclosing_Context ( Enclosing_Compilation_Unit ( Decl1 )));
-@end{Example}
+         (Decl1,
+          Enclosing_Context (Enclosing_Compilation_Unit (Decl1)));}
+@end{Display}
 
 Returns a Nil_Element when a full type declaration is given that has no
 corresponding private or incomplete type declaration, or when a
@@ -508,31 +683,40 @@ an incomplete type is in a corresponding package body. See
 Reference Manual 3.10.1(3). Any non-Nil result will always have the given
 Context as its Enclosing_Context.
 
-Appropriate Declaration_Kinds:
-     An_Ordinary_Type_Declaration
-     A_Task_Type_Declaration
-     A_Protected_Type_Declaration
-     An_Incomplete_Type_Declaration
-     A_Private_Type_Declaration
-     A_Private_Extension_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+An_Ordinary_Type_Declaration
+A_Task_Type_Declaration
+A_Protected_Type_Declaration
+An_Incomplete_Type_Declaration
+A_Private_Type_Declaration
+A_Private_Extension_Declaration
+@end{Display}
 
-Returns Declaration_Kinds:
-     Not_A_Declaration
-     An_Ordinary_Type_Declaration
-     A_Task_Type_Declaration
-     A_Protected_Type_Declaration
-     An_Incomplete_Type_Declaration
-     A_Private_Type_Declaration
-     A_Private_Extension_Declaration
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+Not_A_Declaration
+An_Ordinary_Type_Declaration
+A_Task_Type_Declaration
+A_Protected_Type_Declaration
+An_Incomplete_Type_Declaration
+A_Private_Type_Declaration
+A_Private_Extension_Declaration
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Corresponding_First_Subtype}
 
-    @key[function] @AdaSubDefn{Corresponding_First_Subtype}
-                  (Declaration : @key[in] Asis.Declaration)
-                      @key[return] Asis.Declaration;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_First_Subtype}
+              (Declaration : @key[in] Asis.Declaration)
+                  @key[return] Asis.Declaration;
+@end{Example}
 
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the subtype_declaration to query
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+subtype_declaration to query.
 
 This function recursively unwinds subtyping to return at a type_declaration
 that defines the first subtype of the argument.
@@ -540,31 +724,40 @@ that defines the first subtype of the argument.
 Returns a declaration that Is_Identical to the argument if the argument is
 already the first subtype.
 
-Appropriate Declaration_Kinds:
-     An_Ordinary_Type_Declaration
-     A_Task_Type_Declaration
-     A_Protected_Type_Declaration
-     A_Private_Type_Declaration
-     A_Private_Extension_Declaration
-     A_Subtype_Declaration
-     A_Formal_Type_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+An_Ordinary_Type_Declaration
+A_Task_Type_Declaration
+A_Protected_Type_Declaration
+A_Private_Type_Declaration
+A_Private_Extension_Declaration
+A_Subtype_Declaration
+A_Formal_Type_Declaration
+@end{Display}
 
-Returns Declaration_Kinds:
-     An_Ordinary_Type_Declaration
-     A_Task_Type_Declaration
-     A_Protected_Type_Declaration
-     A_Private_Type_Declaration
-     A_Private_Extension_Declaration
-     A_Formal_Type_Declaration
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+An_Ordinary_Type_Declaration
+A_Task_Type_Declaration
+A_Protected_Type_Declaration
+A_Private_Type_Declaration
+A_Private_Extension_Declaration
+A_Formal_Type_Declaration
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Corresponding_Last_Constraint}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Last_Constraint}
+              (Declaration : @key[in] Asis.Declaration)
+                  @key[return] Asis.Declaration;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Corresponding_Last_Constraint}
-                  (Declaration : @key[in] Asis.Declaration)
-                      @key[return] Asis.Declaration;
-
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the subtype_declaration or type_declaration to query.
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+subtype_declaration or type_declaration to query.
 
 This function recursively unwinds subtyping to return at a declaration
 that is either a type_declaration or subtype_declaration that imposes
@@ -576,32 +769,41 @@ itself has a constraint.
 Returns a declaration that Is_Identical to the argument if the argument is
 a type_declaration, i.e. the first subtype.
 
-Appropriate Declaration_Kinds:
-     An_Ordinary_Type_Declaration
-     A_Task_Type_Declaration
-     A_Protected_Type_Declaration
-     A_Private_Type_Declaration
-     A_Private_Extension_Declaration
-     A_Subtype_Declaration
-     A_Formal_Type_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+An_Ordinary_Type_Declaration
+A_Task_Type_Declaration
+A_Protected_Type_Declaration
+A_Private_Type_Declaration
+A_Private_Extension_Declaration
+A_Subtype_Declaration
+A_Formal_Type_Declaration
+@end{Display}
 
-Returns Declaration_Kinds:
-     An_Ordinary_Type_Declaration
-     A_Task_Type_Declaration
-     A_Protected_Type_Declaration
-     A_Private_Type_Declaration
-     A_Private_Extension_Declaration
-     A_Subtype_Declaration
-     A_Formal_Type_Declaration
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+An_Ordinary_Type_Declaration
+A_Task_Type_Declaration
+A_Protected_Type_Declaration
+A_Private_Type_Declaration
+A_Private_Extension_Declaration
+A_Subtype_Declaration
+A_Formal_Type_Declaration
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Corresponding_Last_Subtype}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Last_Subtype}
+              (Declaration : @key[in] Asis.Declaration)
+                  @key[return] Asis.Declaration;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Corresponding_Last_Subtype}
-                  (Declaration : @key[in] Asis.Declaration)
-                      @key[return] Asis.Declaration;
-
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the subtype_declaration or type_declaration to query.
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+subtype_declaration or type_declaration to query.
 
 This function unwinds subtyping a single level to arrive at a declaration
 that is either a type_declaration or subtype_declaration.
@@ -609,32 +811,42 @@ that is either a type_declaration or subtype_declaration.
 Returns a declaration that Is_Identical to the argument if the argument is
 a type_declaration (i.e., the first subtype).
 
-Appropriate Declaration_Kinds:
-     An_Ordinary_Type_Declaration
-     A_Task_Type_Declaration
-     A_Protected_Type_Declaration
-     A_Private_Type_Declaration
-     A_Private_Extension_Declaration
-     A_Subtype_Declaration
-     A_Formal_Type_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+An_Ordinary_Type_Declaration
+A_Task_Type_Declaration
+A_Protected_Type_Declaration
+A_Private_Type_Declaration
+A_Private_Extension_Declaration
+A_Subtype_Declaration
+A_Formal_Type_Declaration
+@end{Display}
 
-Returns Declaration_Kinds:
-     An_Ordinary_Type_Declaration
-     A_Task_Type_Declaration
-     A_Protected_Type_Declaration
-     A_Private_Type_Declaration
-     A_Private_Extension_Declaration
-     A_Subtype_Declaration
-     A_Formal_Type_Declaration
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+An_Ordinary_Type_Declaration
+A_Task_Type_Declaration
+A_Protected_Type_Declaration
+A_Private_Type_Declaration
+A_Private_Extension_Declaration
+A_Subtype_Declaration
+A_Formal_Type_Declaration
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Corresponding_Representation_Clauses}
 
 
-    @key[function] @AdaSubDefn{Corresponding_Representation_Clauses}
-                (Declaration : @key[in] Asis.Declaration)
-                @key[return] Asis.Representation_Clause_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Representation_Clauses}
+            (Declaration : @key[in] Asis.Declaration)
+            @key[return] Asis.Representation_Clause_List;
+@end{Example}
 
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the declaration to query
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+declaration to query.
 
 Returns all representation_clause elements that apply to the declaration.
 
@@ -647,16 +859,22 @@ specified in conjunction with the declaration of the parent type.
 
 All Declaration_Kinds are appropriate except Not_A_Declaration.
 
-Returns Clause_Kinds:
-     A_Representation_Clause
+@leading@keepnext@;Returns Clause_Kinds:
+@begin{Display}
+A_Representation_Clause
+@end{Display}
+@end{DescribeCode}
 
-Element Reference -A_Loop_Parameter_Specification         - 5.5
+
+@LabeledClause{function Specification_Subtype_Definition}
+
+@begin{ElementRef}
+A_Loop_Parameter_Specification @em 5.5
+@end{ElementRef}
 
 Child Elements returned by
    function Names
    function Specification_Subtype_Definition
-
-@LabeledClause{function Specification_Subtype_Definition}
 
 
     @key[function] @AdaSubDefn{Specification_Subtype_Definition}
@@ -668,13 +886,19 @@ Specification @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the loop_par
 
 Returns the Discrete_Subtype_Definition of the specification.
 
-Appropriate Declaration_Kinds:
-     A_Loop_Parameter_Specification
-     An_Entry_Index_Specification
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Loop_Parameter_Specification
+An_Entry_Index_Specification
+@end{Display}
 
 Returns Definition_Kinds:
      A_Discrete_Subtype_Definition
-Element Reference -A_Procedure_Declaration           - 6.1
+
+
+@begin{ElementRef}
+A_Procedure_Declaration @em 6.1
+@end{ElementRef}
 
 Child Elements returned by
    function Names
@@ -699,25 +923,30 @@ implementations normalize all multiple name parameter specifications into
 an equivalent sequence of corresponding single name parameter
 specifications. See Reference Manual 3.3.1(7).
 
-Appropriate Declaration_Kinds:
-     A_Procedure_Declaration
-     A_Function_Declaration
-     A_Procedure_Body_Declaration
-     A_Function_Body_Declaration
-     A_Procedure_Renaming_Declaration
-     A_Function_Renaming_Declaration
-     An_Entry_Declaration
-     An_Entry_Body_Declaration
-     A_Procedure_Body_Stub
-     A_Function_Body_Stub
-     A_Generic_Function_Declaration
-     A_Generic_Procedure_Declaration
-     A_Formal_Function_Declaration
-     A_Formal_Procedure_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Procedure_Declaration
+A_Function_Declaration
+A_Procedure_Body_Declaration
+A_Function_Body_Declaration
+A_Procedure_Renaming_Declaration
+A_Function_Renaming_Declaration
+An_Entry_Declaration
+An_Entry_Body_Declaration
+A_Procedure_Body_Stub
+A_Function_Body_Stub
+A_Generic_Function_Declaration
+A_Generic_Procedure_Declaration
+A_Formal_Function_Declaration
+A_Formal_Procedure_Declaration
+@end{Display}
 
 Returns Declaration_Kinds:
      A_Parameter_Specification
-Element Reference -A_Function_Declaration           - 6.1
+
+@begin{ElementRef}
+A_Function_Declaration @em 6.1
+@end{ElementRef}
 
 Child Elements returned by
    function Names
@@ -735,26 +964,33 @@ Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the function d
 Returns the subtype mark expression for the return type for any function
 declaration.
 
-Appropriate Declaration_Kinds:
-     A_Function_Declaration
-     A_Function_Body_Declaration
-     A_Function_Body_Stub
-     A_Function_Renaming_Declaration
-     A_Generic_Function_Declaration
-     A_Formal_Function_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Function_Declaration
+A_Function_Body_Declaration
+A_Function_Body_Stub
+A_Function_Renaming_Declaration
+A_Generic_Function_Declaration
+A_Formal_Function_Declaration
+@end{Display}
 
 Returns Expression_Kinds:
      An_Identifier
      A_Selected_Component
      An_Attribute_Reference
-Element Reference -A_Parameter_Specification         - 6.1
+
+@begin{ElementRef}
+A_Parameter_Specification @em 6.1
+@end{ElementRef}
 
 Child Elements returned by
    function Names
    function Declaration_Subtype_Mark
    function Initialization_Expression
 
-Element Reference -A_Procedure_Body_Declaration - 6.3
+@begin{ElementRef}
+A_Procedure_Body_Declaration @em 6.3
+@end{ElementRef}
 
 Child Elements returned by
    function Names
@@ -785,12 +1021,14 @@ implementations normalize all multi-name declarations into an
 equivalent sequence of corresponding single name object declarations.
 See Reference Manual 3.3.1(7).
 
-Appropriate Declaration_Kinds:
-     A_Function_Body_Declaration
-     A_Procedure_Body_Declaration
-     A_Package_Body_Declaration
-     A_Task_Body_Declaration
-     An_Entry_Body_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Function_Body_Declaration
+A_Procedure_Body_Declaration
+A_Package_Body_Declaration
+A_Task_Body_Declaration
+An_Entry_Body_Declaration
+@end{Display}
 
 Returns Element_Kinds:
      A_Pragma
@@ -812,12 +1050,14 @@ their order of appearance.
 
 Returns a Nil_Element_List if there are no statements or pragmas.
 
-Appropriate Declaration_Kinds:
-     A_Function_Body_Declaration
-     A_Procedure_Body_Declaration
-     A_Package_Body_Declaration
-     A_Task_Body_Declaration
-     An_Entry_Body_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Function_Body_Declaration
+A_Procedure_Body_Declaration
+A_Package_Body_Declaration
+A_Task_Body_Declaration
+An_Entry_Body_Declaration
+@end{Display}
 
 Returns Element_Kinds:
      A_Pragma
@@ -836,22 +1076,27 @@ Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pr
 Returns a list of the exception_handler elements of the body, in their order of
 appearance.
 
-The only pragmas returned are those following the reserved word "exception"
-and preceding the reserved word "when" of first exception handler.
+The only pragmas returned are those following the reserved word @key[exception]
+and preceding the reserved word @key[when] of first exception handler.
 
 Returns a Nil_Element_List if there are no exception_handler or pragma elements.
 
-Appropriate Declaration_Kinds:
-     A_Function_Body_Declaration
-     A_Procedure_Body_Declaration
-     A_Package_Body_Declaration
-     A_Task_Body_Declaration
-     An_Entry_Body_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Function_Body_Declaration
+A_Procedure_Body_Declaration
+A_Package_Body_Declaration
+A_Task_Body_Declaration
+An_Entry_Body_Declaration
+@end{Display}
 
 Returns Element_Kinds:
      An_Exception_Handler
      A_Pragma
-Element Reference -A_Function_Body_Declaration  - 6.3
+
+@begin{ElementRef}
+A_Function_Body_Declaration @em 6.3
+@end{ElementRef}
 
 Child Elements returned by
    function Names
@@ -881,12 +1126,14 @@ The block statement is not Is_Part_Of_Implicit. The block includes
 the declarative part, the sequence of statements, and any exception
 handlers.
 
-Appropriate Declaration_Kinds:
-     A_Function_Body_Declaration
-     A_Procedure_Body_Declaration
-     A_Package_Body_Declaration
-     A_Task_Body_Declaration
-     An_Entry_Body_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Function_Body_Declaration
+A_Procedure_Body_Declaration
+A_Package_Body_Declaration
+A_Task_Body_Declaration
+An_Entry_Body_Declaration
+@end{Display}
 
 Returns Statement_Kinds:
      A_Block_Statement
@@ -991,47 +1238,51 @@ If an inherited subprogram declaration is given, the specification
 returned is the one for the user-defined subprogram from which the
 argument was ultimately inherited.
 
-Appropriate Declaration_Kinds returning a specification:
-     A_Function_Body_Declaration
-     A_Function_Renaming_Declaration (renaming-as-body)
-     A_Function_Body_Stub
-     A_Function_Instantiation
-     A_Package_Body_Declaration
-     A_Package_Body_Stub
-     A_Package_Instantiation
-     A_Procedure_Body_Declaration
-     A_Procedure_Renaming_Declaration (renaming-as-body)
-     A_Procedure_Body_Stub
-     A_Procedure_Instantiation
-     A_Task_Body_Declaration
-     A_Task_Body_Stub
-     A_Protected_Body_Declaration
-     A_Protected_Body_Stub
-     A_Formal_Package_Declaration
-     A_Formal_Package_Declaration_With_Box
-     A_Generic_Package_Renaming_Declaration
-     A_Generic_Procedure_Renaming_Declaration
-     A_Generic_Function_Renaming_Declaration
-     An_Entry_Body_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds returning a specification:
+@begin{Display}
+A_Function_Body_Declaration
+A_Function_Renaming_Declaration (renaming-as-body)
+A_Function_Body_Stub
+A_Function_Instantiation
+A_Package_Body_Declaration
+A_Package_Body_Stub
+A_Package_Instantiation
+A_Procedure_Body_Declaration
+A_Procedure_Renaming_Declaration (renaming-as-body)
+A_Procedure_Body_Stub
+A_Procedure_Instantiation
+A_Task_Body_Declaration
+A_Task_Body_Stub
+A_Protected_Body_Declaration
+A_Protected_Body_Stub
+A_Formal_Package_Declaration
+A_Formal_Package_Declaration_With_Box
+A_Generic_Package_Renaming_Declaration
+A_Generic_Procedure_Renaming_Declaration
+A_Generic_Function_Renaming_Declaration
+An_Entry_Body_Declaration
+@end{Display}
 
-Appropriate Declaration_Kinds returning the argument Declaration:
-     A_Function_Declaration
-     A_Function_Renaming_Declaration (renaming-as-declaration)
-     A_Generic_Function_Declaration
-     A_Generic_Package_Declaration
-     A_Generic_Procedure_Declaration
-     A_Package_Declaration
-     A_Package_Renaming_Declaration
-     A_Procedure_Declaration
-     A_Procedure_Renaming_Declaration (renaming-as-declaration)
-     A_Single_Task_Declaration
-     A_Task_Type_Declaration
-     A_Protected_Type_Declaration
-     A_Single_Protected_Declaration
-     A_Generic_Package_Renaming_Declaration
-     A_Generic_Procedure_Renaming_Declaration
-     A_Generic_Function_Renaming_Declaration
-     An_Entry_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds returning the argument Declaration:
+@begin{Display}
+A_Function_Declaration
+A_Function_Renaming_Declaration (renaming-as-declaration)
+A_Generic_Function_Declaration
+A_Generic_Package_Declaration
+A_Generic_Procedure_Declaration
+A_Package_Declaration
+A_Package_Renaming_Declaration
+A_Procedure_Declaration
+A_Procedure_Renaming_Declaration (renaming-as-declaration)
+A_Single_Task_Declaration
+A_Task_Type_Declaration
+A_Protected_Type_Declaration
+A_Single_Protected_Declaration
+A_Generic_Package_Renaming_Declaration
+A_Generic_Procedure_Renaming_Declaration
+A_Generic_Function_Renaming_Declaration
+An_Entry_Declaration
+@end{Display}
 
 Returns Declaration_Kinds:
      Not_A_Declaration
@@ -1110,42 +1361,46 @@ Reference Manual 10.1.1(19).
 
 Returns A_Pragma if the Declaration is completed by pragma Import.
 
-Appropriate Declaration_Kinds returning a body:
-     A_Function_Declaration
-     A_Function_Instantiation
-     A_Generic_Package_Declaration
-     A_Generic_Procedure_Declaration
-     A_Generic_Function_Declaration
-     A_Package_Declaration
-     A_Package_Instantiation
-     A_Procedure_Declaration
-     A_Procedure_Instantiation
-     A_Single_Task_Declaration
-     A_Task_Type_Declaration
-     A_Protected_Type_Declaration
-     A_Single_Protected_Declaration
-     A_Formal_Package_Declaration
-     A_Formal_Package_Declaration_With_Box
-     An_Entry_Declaration (restricted to protected entry)
+@leading@keepnext@;Appropriate Declaration_Kinds returning a body:
+@begin{Display}
+A_Function_Declaration
+A_Function_Instantiation
+A_Generic_Package_Declaration
+A_Generic_Procedure_Declaration
+A_Generic_Function_Declaration
+A_Package_Declaration
+A_Package_Instantiation
+A_Procedure_Declaration
+A_Procedure_Instantiation
+A_Single_Task_Declaration
+A_Task_Type_Declaration
+A_Protected_Type_Declaration
+A_Single_Protected_Declaration
+A_Formal_Package_Declaration
+A_Formal_Package_Declaration_With_Box
+An_Entry_Declaration (restricted to protected entry)
+@end{Display}
 
-Appropriate Declaration_Kinds returning the argument Declaration:
-     A_Function_Body_Declaration
-     A_Function_Body_Stub
-     A_Function_Renaming_Declaration
-     A_Package_Body_Declaration
-     A_Package_Body_Stub
-     A_Package_Renaming_Declaration
-     A_Procedure_Body_Declaration
-     A_Procedure_Renaming_Declaration
-     A_Procedure_Body_Stub
-     A_Task_Body_Declaration
-     A_Task_Body_Stub
-     A_Protected_Body_Declaration
-     A_Protected_Body_Stub
-     A_Generic_Package_Renaming_Declaration
-     A_Generic_Procedure_Renaming_Declaration
-     A_Generic_Function_Renaming_Declaration
-     An_Entry_Body_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds returning the argument Declaration:
+@begin{Display}
+A_Function_Body_Declaration
+A_Function_Body_Stub
+A_Function_Renaming_Declaration
+A_Package_Body_Declaration
+A_Package_Body_Stub
+A_Package_Renaming_Declaration
+A_Procedure_Body_Declaration
+A_Procedure_Renaming_Declaration
+A_Procedure_Body_Stub
+A_Task_Body_Declaration
+A_Task_Body_Stub
+A_Protected_Body_Declaration
+A_Protected_Body_Stub
+A_Generic_Package_Renaming_Declaration
+A_Generic_Procedure_Renaming_Declaration
+A_Generic_Function_Renaming_Declaration
+An_Entry_Body_Declaration
+@end{Display}
 
 Returns Declaration_Kinds:
      Not_A_Declaration
@@ -1185,9 +1440,11 @@ inherited subprogram.
 Appropriate Element_Kinds:
      A_Declaration
 
-Appropriate Declaration_Kinds:
-     A_Function_Declaration
-     A_Procedure_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Function_Declaration
+A_Procedure_Declaration
+@end{Display}
 
 Returns Element_Kinds:
      A_Declaration
@@ -1220,9 +1477,11 @@ declaration resulting from the declaration of a type.
 Appropriate Element_Kinds:
      A_Declaration
 
-Appropriate Declaration_Kinds:
-     A_Function_Declaration
-     A_Procedure_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Function_Declaration
+A_Procedure_Declaration
+@end{Display}
 
 Returns Definition_Kinds:
      A_Type_Definition
@@ -1252,12 +1511,17 @@ If given an implicit Declaration of "/=" whose result type is Boolean:
 
 Returns a Nil_Element for any other function declaration.
 
-Appropriate Declaration_Kinds:
-     A_Function_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Function_Declaration
+@end{Display}
 
 Returns Declaration_Kinds:
      A_Function_Declaration
-Element Reference -A_Package_Declaration - 7.1
+
+@begin{ElementRef}
+A_Package_Declaration @em 7.1
+@end{ElementRef}
 
 Child Elements returned by
    function Names
@@ -1284,9 +1548,11 @@ implementations normalize all multi-name object declarations into an
 equivalent sequence of corresponding single name object declarations.
 See Reference Manual 3.3.1(7).
 
-Appropriate Declaration_Kinds:
-     A_Generic_Package_Declaration
-     A_Package_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Generic_Package_Declaration
+A_Package_Declaration
+@end{Display}
 
 Returns Element_Kinds:
      A_Declaration
@@ -1303,7 +1569,7 @@ Returns Element_Kinds:
 Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the declaration to query
 
 Returns True if the argument is a package specification which has a reserved
-word "private" which marks the beginning of a (possibly empty) private part.
+word @key[private] which marks the beginning of a (possibly empty) private part.
 
 Returns False for any package specification without a private part.
 Returns False for any unexpected Element.
@@ -1311,9 +1577,12 @@ Returns False for any unexpected Element.
 Expected Element_Kinds:
      A_Declaration
 
-Expected Declaration_Kinds:
-     A_Generic_Package_Declaration
-     A_Package_Declaration
+@leading@keepnext@;Expected Declaration_Kinds:
+@begin{Display}
+A_Generic_Package_Declaration
+A_Package_Declaration
+@end{Display}
+
 
 @LabeledClause{function Private_Part_Declarative_Items}
 
@@ -1335,15 +1604,20 @@ implementations normalize all multi-name object declarations into an
 equivalent sequence of corresponding single name object declarations.
 See Reference Manual 3.3.1(7).
 
-Appropriate Declaration_Kinds:
-     A_Generic_Package_Declaration
-     A_Package_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Generic_Package_Declaration
+A_Package_Declaration
+@end{Display}
 
 Returns Element_Kinds:
      A_Declaration
      A_Pragma
      A_Clause
-Element Reference -A_Package_Body_Declaration - 7.2
+
+@begin{ElementRef}
+A_Package_Body_Declaration @em 7.2
+@end{ElementRef}
 
 Child Elements returned by
    function Names
@@ -1352,15 +1626,19 @@ Child Elements returned by
    function Body_Exception_Handlers
    function Body_Block_Statement    - obsolescent, not recommended
 
-Element Reference -A_Private_Type_Declaration      - 7.3
-Element Reference -A_Private_Extension_Declaration - 7.3
+@begin{ElementRef}
+A_Private_Type_Declaration @em 7.3@*
+A_Private_Extension_Declaration @em 7.3
+@end{ElementRef}
 
 Child Elements returned by
    function Names
    function Discriminant_Part
    function Type_Declaration_View
 
-Element Reference -An_Object_Renaming_Declaration - 8.5.1
+@begin{ElementRef}
+An_Object_Renaming_Declaration @em 8.5.1
+@end{ElementRef}
 
 Child Elements returned by
    function Names
@@ -1375,36 +1653,45 @@ Child Elements returned by
 
 Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the rename declaration to query
 
-Returns the name expression that follows the reserved word "renames" in the
+Returns the name expression that follows the reserved word @key[renames] in the
 renaming declaration.
 
-Appropriate Declaration_Kinds:
-     An_Exception_Renaming_Declaration
-     A_Function_Renaming_Declaration
-     An_Object_Renaming_Declaration
-     A_Package_Renaming_Declaration
-     A_Procedure_Renaming_Declaration
-     A_Generic_Package_Renaming_Declaration
-     A_Generic_Procedure_Renaming_Declaration
-     A_Generic_Function_Renaming_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+An_Exception_Renaming_Declaration
+A_Function_Renaming_Declaration
+An_Object_Renaming_Declaration
+A_Package_Renaming_Declaration
+A_Procedure_Renaming_Declaration
+A_Generic_Package_Renaming_Declaration
+A_Generic_Procedure_Renaming_Declaration
+A_Generic_Function_Renaming_Declaration
+@end{Display}
 
 Returns Element_Kinds:
      An_Expression
-Element Reference -An_Exception_Renaming_Declaration - 8.5.2
-Element Reference -A_Package_Renaming_Declaration    - 8.5.3
+
+@begin{ElementRef}
+An_Exception_Renaming_Declaration @em 8.5.2@*
+A_Package_Renaming_Declaration @em 8.5.3
+@end{ElementRef}
 
 Child Elements returned by
    function Names
    function Renamed_Entity
 
-Element Reference -A_Procedure_Renaming_Declaration - 8.5.4
+@begin{ElementRef}
+A_Procedure_Renaming_Declaration @em 8.5.4
+@end{ElementRef}
 
 Child Elements returned by
    function Names
    function Parameter_Profile
    function Renamed_Entity
 
-Element Reference -A_Function_Renaming_Declaration  - 8.5.4
+@begin{ElementRef}
+A_Function_Renaming_Declaration @em 8.5.4
+@end{ElementRef}
 
 Child Elements returned by
    function Names
@@ -1412,9 +1699,11 @@ Child Elements returned by
    function Result_Profile
    function Renamed_Entity
 
-Element Reference -A_Generic_Package_Renaming_Declaration   - 8.5.5
-Element Reference -A_Generic_Procedure_Renaming_Declaration - 8.5.5
-Element Reference -A_Generic_Function_Renaming_Declaration  - 8.5.5
+@begin{ElementRef}
+A_Generic_Package_Renaming_Declaration @em 8.5.5@*
+A_Generic_Procedure_Renaming_Declaration @em 8.5.5@*
+A_Generic_Function_Renaming_Declaration @em 8.5.5
+@end{ElementRef}
 
 Child Elements returned by
    function Names
@@ -1431,38 +1720,47 @@ Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the rename dec
 The base entity is defined to be the renamed entity that is not itself
 defined by another renaming declaration.
 
-If the name following the reserved word “renames” is itself declared
+If the name following the reserved word @key[renames] is itself declared
 by a previous renaming_declaration, then this query unwinds the renamings
 by recursively operating on the previous renaming_declaration.
 
-Otherwise, the name following the reserved word “renames” is returned.
+Otherwise, the name following the reserved word @key[renames] is returned.
 
-Appropriate Declaration_Kinds:
-     An_Object_Renaming_Declaration
-     An_Exception_Renaming_Declaration
-     A_Procedure_Renaming_Declaration
-     A_Function_Renaming_Declaration
-     A_Package_Renaming_Declaration
-     A_Generic_Package_Renaming_Declaration
-     A_Generic_Procedure_Renaming_Declaration
-     A_Generic_Function_Renaming_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+An_Object_Renaming_Declaration
+An_Exception_Renaming_Declaration
+A_Procedure_Renaming_Declaration
+A_Function_Renaming_Declaration
+A_Package_Renaming_Declaration
+A_Generic_Package_Renaming_Declaration
+A_Generic_Procedure_Renaming_Declaration
+A_Generic_Function_Renaming_Declaration
+@end{Display}
 
 Returns Element_Kinds:
      An_Expression
-Element Reference -A_Task_Type_Declaration - 9.1
+
+@begin{ElementRef}
+A_Task_Type_Declaration @em 9.1
+@end{ElementRef}
 
 Child Elements returned by
    function Names
    function Discriminant_Part
    function Type_Declaration_View
 
-Element Reference -A_Single_Task_Declaration - 9.1
+@begin{ElementRef}
+A_Single_Task_Declaration @em 9.1
+@end{ElementRef}
 
 Child Elements returned by
    function Names
    function Object_Declaration_View
 
-Element Reference -A_Task_Body_Declaration - 9.1
+@begin{ElementRef}
+A_Task_Body_Declaration @em 9.1
+@end{ElementRef}
 
 Child Elements returned by
    function Names
@@ -1471,20 +1769,26 @@ Child Elements returned by
    function Body_Exception_Handlers
    function Body_Block_Statement    - obsolescent, not recommended
 
-Element Reference -A_Protected_Type_Declaration - 9.4
+@begin{ElementRef}
+A_Protected_Type_Declaration @em 9.4
+@end{ElementRef}
 
 Child Elements returned by
    function Names
    function Discriminant_Part
    function Type_Declaration_View
 
-Element Reference -A_Single_Protected_Declaration - 9.4
+@begin{ElementRef}
+A_Single_Protected_Declaration @em 9.4
+@end{ElementRef}
 
 Child Elements returned by
    function Names
    function Object_Declaration_View
 
-Element Reference -A_Protected_Body_Declaration - 9.4
+@begin{ElementRef}
+A_Protected_Body_Declaration @em 9.4
+@end{ElementRef}
 
 Child Elements returned by
    function Names
@@ -1506,8 +1810,10 @@ protected_body, in order of appearance.
 
 Returns a Nil_Element_List if there are no items or pragmas.
 
-Appropriate Declaration_Kinds:
-     A_Protected_Body_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Protected_Body_Declaration
+@end{Display}
 
 Returns Element_Kinds:
      A_Pragma
@@ -1523,7 +1829,10 @@ Returns Declaration_Kinds:
 
 Returns Clause_Kinds:
      A_Representation_Clause
-Element Reference -An_Entry_Declaration - 9.5.2
+
+@begin{ElementRef}
+An_Entry_Declaration @em 9.5.2
+@end{ElementRef}
 
 Child Elements returned by
    function Names
@@ -1544,13 +1853,18 @@ an entry_declaration.
 Returns a Nil_Element if the entry_declaration does not define a family
 of entries.
 
-Appropriate Declaration_Kinds:
-     An_Entry_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+An_Entry_Declaration
+@end{Display}
 
 Returns Definition_Kinds:
      Not_A_Definition
      A_Discrete_Subtype_Definition
-Element Reference -An_Entry_Body_Declaration - 9.5.2
+
+@begin{ElementRef}
+An_Entry_Body_Declaration @em 9.5.2
+@end{ElementRef}
 
 Child Elements returned by
    function Names
@@ -1577,8 +1891,10 @@ declaration.
 Returns a Nil_Element if the entry does not declare any
 An_Entry_Index_Specification element.
 
-Appropriate Declaration_Kinds:
-     An_Entry_Body_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+An_Entry_Body_Declaration
+@end{Display}
 
 Returns Declaration_Kinds:
      Not_A_Declaration
@@ -1590,31 +1906,42 @@ Returns Declaration_Kinds:
     @key[function] @AdaSubDefn{Entry_Barrier} (Declaration : @key[in] Asis.Declaration)
                            @key[return] Asis.Expression;
 
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the entry body declaration to query
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the entry
+body declaration to query.
 
-Returns the expression following the reserved word "when" in an entry body declaration.
+Returns the expression following the reserved word @key[when] in an entry body
+declaration.
 
-Appropriate Declaration_Kinds:
-     An_Entry_Body_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+An_Entry_Body_Declaration
+@end{Display}
 
 Returns Element_Kinds:
      An_Expression
-Element Reference -A_Procedure_Body_Stub - 10.1.3
+
+@begin{ElementRef}
+A_Procedure_Body_Stub @em 10.1.3
+@end{ElementRef}
 
 Child Elements returned by
    function Names
    function Parameter_Profile
 
-Element Reference -A_Function_Body_Stub - 10.1.3
+@begin{ElementRef}
+A_Function_Body_Stub @em 10.1.3
+@end{ElementRef}
 
 Child Elements returned by
    function Names
    function Parameter_Profile
    function Result_Profile
 
-Element Reference -A_Package_Body_Stub   - 10.1.3
-Element Reference -A_Task_Body_Stub      - 10.1.3
-Element Reference -A_Protected_Body_Stub - 10.1.3
+@begin{ElementRef}
+A_Package_Body_Stub @em 10.1.3@*
+A_Task_Body_Stub @em 10.1.3@*
+A_Protected_Body_Stub @em 10.1.3
+@end{ElementRef}
 
 Child Elements returned by
    function Names
@@ -1647,12 +1974,14 @@ These two function calls will always produce identical results:
 The parameter The_Context is used to locate the corresponding subunit body.
 Any non-Nil result will always have The_Context as its Enclosing_Context.
 
-Appropriate Declaration_Kinds:
-     A_Function_Body_Stub
-     A_Package_Body_Stub
-     A_Procedure_Body_Stub
-     A_Task_Body_Stub
-     A_Protected_Body_Stub
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Function_Body_Stub
+A_Package_Body_Stub
+A_Procedure_Body_Stub
+A_Task_Body_Stub
+A_Protected_Body_Stub
+@end{Display}
 
 Returns Declaration_Kinds:
      Not_A_Declaration
@@ -1711,13 +2040,15 @@ These two function calls will always produce identical results:
 The parameter The_Context is used to locate the corresponding parent body.
 Any non-Nil result will always have The_Context as its Enclosing_Context.
 
-Appropriate Declaration Kinds:
-     (Is_Subunit(Declaration) shall also be True)
-     A_Function_Body_Declaration
-     A_Package_Body_Declaration
-     A_Procedure_Body_Declaration
-     A_Task_Body_Declaration
-     A_Protected_Body_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+(Is_Subunit(Declaration) shall also be True)
+A_Function_Body_Declaration
+A_Package_Body_Declaration
+A_Procedure_Body_Declaration
+A_Task_Body_Declaration
+A_Protected_Body_Declaration
+@end{Display}
 
 Returns Declaration_Kinds:
      Not_A_Declaration
@@ -1726,17 +2057,24 @@ Returns Declaration_Kinds:
      A_Procedure_Body_Stub
      A_Task_Body_Stub
      A_Protected_Body_Stub
-Element Reference -An_Exception_Declaration - 11.1
+
+@begin{ElementRef}
+An_Exception_Declaration @em 11.1
+@end{ElementRef}
 
 Child Elements returned by
    function Names
 
-Element Reference -A_Choice_Parameter_Specification - 11.2
+@begin{ElementRef}
+A_Choice_Parameter_Specification @em 11.2
+@end{ElementRef}
 
 Child Elements returned by
    function Names
 
-Element Reference -A_Generic_Procedure_Declaration - 12.1
+@begin{ElementRef}
+A_Generic_Procedure_Declaration @em 12.1
+@end{ElementRef}
 
 Child Elements returned by
    function Generic_Formal_Part
@@ -1762,10 +2100,12 @@ implementations normalize all multi-name object declarations into an
 equivalent sequence of corresponding single name object declarations.
 See Reference Manual 3.3.1(7).
 
-Appropriate Declaration_Kinds:
-     A_Generic_Package_Declaration
-     A_Generic_Procedure_Declaration
-     A_Generic_Function_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Generic_Package_Declaration
+A_Generic_Procedure_Declaration
+A_Generic_Function_Declaration
+@end{Display}
 
 Returns Element_Kinds:
      A_Pragma
@@ -1783,7 +2123,10 @@ Returns Declaration_Kinds:
 Returns Clause_Kinds:
      A_Use_Package_Clause
      A_Use_Type_Clause
-Element Reference -A_Generic_Function_Declaration - 12.1
+
+@begin{ElementRef}
+A_Generic_Function_Declaration @em 12.1
+@end{ElementRef}
 
 Child Elements returned by
    function Generic_Formal_Part
@@ -1791,7 +2134,9 @@ Child Elements returned by
    function Parameter_Profile
    function Result_Profile
 
-Element Reference -A_Generic_Package_Declaration - 12.1
+@begin{ElementRef}
+A_Generic_Package_Declaration @em 12.1
+@end{ElementRef}
 
 Child Elements returned by
    function Generic_Formal_Part
@@ -1799,9 +2144,11 @@ Child Elements returned by
    function Visible_Part_Declarative_Items
    function Private_Part_Declarative_Items
 
-Element Reference -A_Package_Instantiation   - 12.3
-Element Reference -A_Procedure_Instantiation - 12.3
-Element Reference -A_Function_Instantiation  - 12.3
+@begin{ElementRef}
+A_Package_Instantiation @em 12.3@*
+A_Procedure_Instantiation @em 12.3@*
+A_Function_Instantiation  @em 12.3
+@end{ElementRef}
 
 Child Elements returned by
    function Names
@@ -1841,16 +2188,18 @@ generic instantiation:
 
 Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the generic instantiation to query
 
-Returns the name following the reserved word "new” in the generic
+Returns the name following the reserved word @key[new] in the generic
 instantiation. The name denotes the generic package, generic procedure, or
 generic function that is the template for this generic instance.
 
-Appropriate Declaration_Kinds:
-     A_Function_Instantiation
-     A_Package_Instantiation
-     A_Procedure_Instantiation
-     A_Formal_Package_Declaration
-     A_Formal_Package_Declaration_With_Box
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Function_Instantiation
+A_Package_Instantiation
+A_Procedure_Instantiation
+A_Formal_Package_Declaration
+A_Formal_Package_Declaration_With_Box
+@end{Display}
 
 Returns Expression_Kinds:
      An_Identifier
@@ -1897,11 +2246,13 @@ or name. A normalized association has:
        selected at the place of instantiation for a formal subprogram
        having A_Box_Default.
 
-Appropriate Declaration_Kinds:
-     A_Function_Instantiation
-     A_Package_Instantiation
-     A_Procedure_Instantiation
-     A_Formal_Package_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Function_Instantiation
+A_Package_Instantiation
+A_Procedure_Instantiation
+A_Formal_Package_Declaration
+@end{Display}
 
 Returns Association_Kinds:
      A_Generic_Association
@@ -1924,20 +2275,31 @@ generic_formal_parameter_selector_name elements.
 In either case, this query will return Is_Normalized associations even if
 Normalized is False, and the query Generic_Actual_Part_Normalized will
 return True.
-Element Reference -A_Formal_Object_Declaration - 12.4
+
+@begin{ElementRef}
+A_Formal_Object_Declaration @em 12.4
+@end{ElementRef}
 
 Child Elements returned by
    functions Names, Declaration_Subtype_Mark, Initialization_Expression
 
-Element Reference -A_Formal_Type_Declaration - 12.5
+@begin{ElementRef}
+A_Formal_Type_Declaration @em 12.5
+@end{ElementRef}
 
 Child Elements returned by
-   functions Names, Discriminant_Part, Type_Declaration_View
+   function Names
+   function Discriminant_Part
+   function Type_Declaration_View
 
-Element Reference -A_Formal_Procedure_Declaration - 12.6
+@begin{ElementRef}
+A_Formal_Procedure_Declaration @em 12.6
+@end{ElementRef}
 
 Child Elements returned by
-   functions Names, function Parameter_Profile, function Formal_Subprogram_Default
+   functions Names
+   function Parameter_Profile
+   function Formal_Subprogram_Default
 
 
 @LabeledClause{function Formal_Subprogram_Default}
@@ -1949,32 +2311,47 @@ Child Elements returned by
 
 Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the generic formal subprogram declaration to query
 
-Returns the name appearing after the reserved word "is" in the given generic
+Returns the name appearing after the reserved word @key[is] in the given generic
 formal subprogram declaration.
 
-Appropriate Declaration_Kinds:
-     A_Formal_Function_Declaration
-     A_Formal_Procedure_Declaration
+@leading@keepnext@;Appropriate Declaration_Kinds:
+@begin{Display}
+A_Formal_Function_Declaration
+A_Formal_Procedure_Declaration
+@end{Display}
 
 Appropriate Subprogram_Default_Kinds:
      A_Name_Default
 
 Returns Element_Kinds:
      An_Expression
-Element Reference -A_Formal_Function_Declaration - 12.6
+
+@begin{ElementRef}
+A_Formal_Function_Declaration @em 12.6
+@end{ElementRef}
 
 Child Elements returned by
-   functions Names, function Parameter_Profile, Result_Profile,
-   and Formal_Subprogram_Default
-Element Reference -A_Formal_Package_Declaration - 12.7
+   function Names
+   function Parameter_Profile
+   function Result_Profile
+   function Formal_Subprogram_Default
+
+@begin{ElementRef}
+A_Formal_Package_Declaration @em 12.7
+@end{ElementRef}
 
 Child Elements returned by
-   functions Names, Generic_Unit_Name, and Generic_Actual_Part
+   function Names
+   function Generic_Unit_Name
+   function Generic_Actual_Part
 
-Element Reference -A_Formal_Package_Declaration_With_Box - 12.7
+@begin{ElementRef}
+A_Formal_Package_Declaration_With_Box @em 12.7
+@end{ElementRef}
 
 Child Elements returned by
-   functions Names and Generic_Unit_Name
+   function Names
+   function Generic_Unit_Name
 
 
 @LabeledClause{function Corresponding_Generic_Element}

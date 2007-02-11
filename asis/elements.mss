@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2007/02/07 01:12:25 $}
+@comment{$Revision: 1.7 $ $Date: 2007/02/09 07:10:54 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -1187,18 +1187,20 @@ Pragmas is controlled by an Include_Pragmas parameter.
 
 Returns a Nil_Element_List if there are no pragmas.
 
-@b{@i{We need to get rid of the two column format here, because it
-formats horribly, especially in HTML. Any ideas?? - RLB}}
+@b{@i{We ought to get rid of the two column format here, because it
+formats horribly, especially in HTML. Any ideas?? (I tried a table, but
+that was worse; tabs don't appear in HTML) - RLB}}@*
 @leading@keepnext@;Appropriate Element_Kinds:
-@table{Columns=[2],Alignment=[Allleft],FirstColWidth=[1],LastColWidth=[2],
-NoBreak=[F],Border=[F],SmallSize=[F],Caption=[],Headers=[],
-Body=[A_Path@\(pragmas from the statement list + pragmas immediately preceding the reserved word @key[when] of the first alternative)
-An_Exception_Handler@\(pragmas from the statement list + pragmas immediately preceding the reserved word @key[when] of the first exception handler)]}
+@begin{Display}
+@tabset{P34}
+A_Path@\(pragmas from the statement list + pragmas immediately preceding the reserved word @key[when] of the first alternative)
+An_Exception_Handler@\(pragmas from the statement list + pragmas immediately preceding the reserved word @key[when] of the first exception handler)
+@end{Display}
 
 @leading@keepnext@;Appropriate Declaration_Kinds:
-@table{Columns=[2],Alignment=[Allleft],FirstColWidth=[1],LastColWidth=[2],
-NoBreak=[F],Border=[F],SmallSize=[F],Caption=[],Headers=[],
-Body=[A_Procedure_Body_Declaration@\(pragmas from declarative region + statements)
+@begin{Display}
+@tabset{P34}
+A_Procedure_Body_Declaration@\(pragmas from declarative region + statements)
 A_Function_Body_Declaration@\(pragmas from declarative region + statements)
 A_Package_Declaration@\(pragmas from visible + private declarative regions)
 A_Package_Body_Declaration@\(pragmas from declarative region + statements)
@@ -1207,30 +1209,37 @@ A_Protected_Body_Declaration@\(pragmas from declarative region)
 An_Entry_Body_Declaration@\(pragmas from declarative region + statements)
 A_Generic_Procedure_Declaration@\(pragmas from formal declarative region)
 A_Generic_Function_Declaration@\(pragmas from formal declarative region)
-A_Generic_Package_Declaration@\(pragmas from formal + visible + private declarative regions)]}
+A_Generic_Package_Declaration@\(pragmas from formal + visible + private declarative regions)
+@end{Display}
 
 @leading@keepnext@;Appropriate Definition_Kinds:
-@table{Columns=[2],Alignment=[Allleft],FirstColWidth=[1],LastColWidth=[2],
-NoBreak=[F],Border=[F],SmallSize=[F],Caption=[],Headers=[],
-Body=[A_Record_Definition@\(pragmas from the component list)
+@begin{Display}
+@tabset{P34}
+A_Record_Definition@\(pragmas from the component list)
 A_Variant_Part@\(pragmas immediately preceding the first reserved word @key[when] + between variants)
 A_Variant@\(pragmas from the component list)
 A_Task_Definition@\(pragmas from visible + private declarative regions)
-A_Protected_Definition@\(pragmas from visible + private declarative regions)]}
+A_Protected_Definition@\(pragmas from visible + private declarative regions)
+@end{Display}
 
 @leading@keepnext@;Appropriate Statement_Kinds:
-@table{Columns=[2],Alignment=[Allleft],FirstColWidth=[1],LastColWidth=[2],
-NoBreak=[F],Border=[F],SmallSize=[F],Caption=[],Headers=[],
-Body=[A_Loop_Statement@\(pragmas from statement list)
+@begin{Display}
+@tabset{P34}
+A_Loop_Statement@\(pragmas from statement list)
 A_While_Loop_Statement@\(pragmas from statement list)
 A_For_Loop_Statement@\(pragmas from statement list)
 A_Block_Statement@\(pragmas from declarative region + statements)
-An_Accept_Statement@\(pragmas from statement list)]}
+An_Accept_Statement@\(pragmas from statement list)
+@end{Display}
 
 @leading@keepnext@;Appropriate Representation_Clause_Kinds:
-@table{Columns=[2],Alignment=[Allleft],FirstColWidth=[1],LastColWidth=[2],
+@comment{@table{Columns=[2],Alignment=[Allleft],FirstColWidth=[1],LastColWidth=[2],
 NoBreak=[F],Border=[F],SmallSize=[F],Caption=[],Headers=[],
-Body=[A_Record_Representation_Clause@\(pragmas from component specifications)]}
+Body=[]}}
+@begin{Display}
+@tabset{P34}
+A_Record_Representation_Clause@\(pragmas from component specifications)
+@end{Display}
 
 @leading@keepnext@;Returns Element_Kinds:
 @begin{Display}

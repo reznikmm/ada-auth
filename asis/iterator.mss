@@ -1,6 +1,6 @@
 @Part(iterator, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/iterator.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/09/27 00:17:21 $}
+@comment{$Revision: 1.2 $ $Date: 2007/02/09 07:10:54 $}
 
 @LabeledSection{package Asis.Iterator}
 
@@ -25,28 +25,31 @@ iteration capability and to facilitate the translation of ASIS to IDL.
 @LabeledClause{procedure Traverse_Element}
 
 
-    generic
+@begin{DescribeCode}
+@begin{Example}
+@key[generic]
 
-        type State_Information is limited private;
+   @key[type] State_Information @key[is limited private];
 
-        with procedure Pre_Operation
-                          (Element : @key[in]     Asis.Element;
-                           Control : @key[in out] Traverse_Control;
-                           State   : @key[in out] State_Information) is <>;
+   @key[with procedure] Pre_Operation
+                    (Element : @key[in]     Asis.Element;
+                     Control : @key[in out] Traverse_Control;
+                     State   : @key[in out] State_Information) @key[is] <>;
 
-        with procedure Post_Operation
-                          (Element : @key[in]     Asis.Element;
-                           Control : @key[in out] Traverse_Control;
-                           State   : @key[in out] State_Information) is <>;
+   @key[with procedure] Post_Operation
+                    (Element : @key[in]     Asis.Element;
+                     Control : @key[in out] Traverse_Control;
+                     State   : @key[in out] State_Information) @key[is] <>;
 
-    procedure Traverse_Element
-                 (Element : @key[in]     Asis.Element;
-                  Control : @key[in out] Traverse_Control;
-                  State   : @key[in out] State_Information);
+@key[procedure] @AdaSubDefn{Traverse_Element}
+            (Element : @key[in]     Asis.Element;
+             Control : @key[in out] Traverse_Control;
+             State   : @key[in out] State_Information);
+@end{Example}
 
-Element            @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the initial element in the traversal
-Control            @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} what next to do with the traversal
-State_Information  @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} other information for the traversal
+Element @Chg{Version=[1],New=[specifies],Old=[            @en Specifies]} the initial element in the traversal.
+Control @Chg{Version=[1],New=[specifies],Old=[            @en Specifies]} what next to do with the traversal.
+State_Information @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} other information for the traversal.
 
 Traverses the element and all its component elements, if any.
 Component elements are all elements that can be obtained by a combination
@@ -65,7 +68,7 @@ The order of Element traversal is in terms of the textual representation of
 the Elements. Elements are traversed in left-to-right and top-to-bottom
 order.
 
-Traversal of Implicit Elements:
+@leading@keepnext@;Traversal of Implicit Elements:
 
 Implicit elements are not traversed by default. However, they may be
 explicitly queried and then passed to the traversal instance. Implicit
@@ -81,13 +84,13 @@ by ASIS do not cover all possible Ada implicit constructs. For example,
 implicit initializations for variables of an access type are not provided
 by ASIS.)
 
-Traversal of Association lists:
+@leading@keepnext@;Traversal of Association lists:
 
 Argument and association lists for procedure calls, function calls, entry
 calls, generic instantiations, and aggregates are traversed in their
 unnormalized forms, as if the Normalized parameter was False for those
 queries. Implementations that always normalize certain associations may
-return Is_Normalized associations. See the @b{Implementation Permissions}
+return Is_Normalized associations. See the @ImplPermTitle
 for the queries Discriminant_Associations, Generic_Actual_Part,
 Call_Statement_Parameters, Record_Component_Associations, or
 Function_Call_Parameters.
@@ -146,6 +149,7 @@ Terminate_Immediately
 @end{Itemize}
 
 Raises ASIS_Inappropriate_Element if the element is a Nil_Element.
+@end{DescribeCode}
 
 @begin{Example}
 @ChgDeleted{Version=[1],Text=[@key[end] Asis.Iterator;]}
