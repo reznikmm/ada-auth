@@ -15,7 +15,7 @@ package body ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006  AXE Consultants.
+    -- Copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -157,6 +157,7 @@ package body ARM_HTML is
     --			formatting in the linked text.
     -- 11/10/06 - RLB - Fixed nesting of text formatting *again*. (AARM 13.11
     --			failed WC 3 validation.)
+    --  2/ 9/07 - RLB - Changed comments on AI_Reference.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -5355,13 +5356,101 @@ package body ARM_HTML is
     end DR_Reference;
 
 
+    function Folded_AI95_Number (AI_String : in String) return String is
+	-- Internal routine.
+	-- Calculate the "folded" AI number from the full version.
+	-- AI_String should be in the form "AIzz-00xxx-yy", where -yy, 00,
+	-- and zz are optional, and 'zz' = 95 if given.
+	Result : String(1..5);
+	Hyphen_1 : Natural := Ada.Strings.Fixed.Index (AI_String, "-");
+	Hyphen_2 : Natural;
+    begin
+        if Hyphen_1 = 0 or else AI_String'Last < Hyphen_1+3 then
+	    Result := "00001";
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+	        "Bad AI reference " & AI_String);
+	elsif Hyphen_1 = AI_String'First+4 and then
+	    AI_String(AI_String'First..Hyphen_1-1) /= "AI95" then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Unknown AI reference " & AI_String);
+	    Result := "00001";
+	elsif Hyphen_1 = AI_String'First+2 and then
+	    AI_String(AI_String'First..Hyphen_1-1) /= "AI" then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Unknown short AI reference " & AI_String);
+	    Result := "00001";
+	else
+	    Hyphen_2 := Ada.Strings.Fixed.Index (AI_String(Hyphen_1+1..AI_String'Last), "-");
+	    if Hyphen_2 = 0 then
+	        if AI_String'Last = Hyphen_1+5 then
+		    Result := AI_String(Hyphen_1+1 .. Hyphen_1+5);
+	        elsif AI_String'Last = Hyphen_1+4 then
+		    Result(2..5) := AI_String(Hyphen_1+1 .. Hyphen_1+4);
+		    Result(1) := '0';
+	        elsif AI_String'Last = Hyphen_1+3 then
+		    Result(3..5) := AI_String(Hyphen_1+1 .. Hyphen_1+3);
+		    Result(1) := '0';
+		    Result(2) := '0';
+	        else
+		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+	                "AI reference too wrong length " & AI_String);
+	            Result := "00001";
+	        end if;
+	    else
+		if (Hyphen_2-1) - (Hyphen_1+1) = 5-1 then
+		    Result := AI_String (Hyphen_1+1 .. Hyphen_2-1);
+		elsif (Hyphen_2-1) - (Hyphen_1+1) = 4-1 then
+		    Result(2..5) := AI_String (Hyphen_1+1 .. Hyphen_2-1);
+		    Result(1) := '0';
+		elsif (Hyphen_2-1) - (Hyphen_1+1) = 3-1 then
+		    Result(3..5) := AI_String (Hyphen_1+1 .. Hyphen_2-1);
+		    Result(1) := '0';
+		    Result(2) := '0';
+		else
+		    Result := "00001";
+		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		        "Bad AI reference (hyphen dist) " & AI_String);
+		end if;
+		if AI_String'Last < Hyphen_2+1 or else
+		   AI_String'Last > Hyphen_2+2 then
+		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+			"Bad AI alternative reference " & AI_String);
+		elsif  AI_String'Last = Hyphen_2+1 then
+		    Result(1) := Character'Pred(AI_String(Hyphen_2+1));
+		elsif AI_String'Last = Hyphen_2+2 and then AI_String(Hyphen_2+1) = '0' then
+		    Result(1) := Character'Pred(AI_String(Hyphen_2+2));
+		elsif AI_String'Last = Hyphen_2+2 and then AI_String(Hyphen_2+1) = '1' then
+		    if AI_String(Hyphen_2+2) = '0' then
+		        Result(1) := '9';
+		    else
+		        Result(1) := Character'Val(Character'Pos(AI_String(Hyphen_2+2)) - Character'Pos('1') + Character'Pos('A'));
+		    end if;
+		elsif AI_String'Last = Hyphen_2+2 and then AI_String(Hyphen_2+1) = '2' then
+		    Result(1) := Character'Val(Character'Pos(AI_String(Hyphen_2+2)) - Character'Pos('1') + Character'Pos('A') + 10);
+	        else
+		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+			"Bad AI alternative reference " & AI_String);
+	        end if;
+	    end if;
+	end if;
+	return Result;
+    end Folded_AI95_Number;
+
+
     procedure AI_Reference (Output_Object : in out HTML_Output_Type;
 			    Text : in String;
 			    AI_Number : in String) is
 	-- Generate a reference to an AI from the standard. The text
 	-- of the reference is "Text", and AI_Number denotes
-	-- the target (in folded format). For hyperlinked formats, this should
+	-- the target (in unfolded format). For hyperlinked formats, this should
 	-- generate a link; for other formats, the text alone is generated.
+	--
+	-- We assume AI number is of the form:
+	-- ZZZZ-nnnn-m whre ZZZZ=AI05 or SI99, nnnn is a four digit number,
+	-- and -m is an optional number (-1 is used if it is omitted); or
+	-- AIzz-nnnnn-mm where AIzz=AI95 or AI (meaning AI95);
+	-- nnnnn is a five digit number, and -mm is an optional two digit number.
+	-- We raise Not_Valid_Error otherwise.
     begin
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -5371,11 +5460,72 @@ package body ARM_HTML is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-        Output_Text (Output_Object, "<A HREF=""http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-");
-        Output_Text (Output_Object, AI_Number);
+	if AI_Number'Length > 5 and then
+	    AI_Number(AI_Number'First..AI_Number'First+4) = "AI05-" then
+	    -- AI05:
+	    if AI_Number'Length >= 9 then
+		if AI_Number(AI_Number'First+5) not in '0'..'9' or else
+		   AI_Number(AI_Number'First+6) not in '0'..'9' or else
+		   AI_Number(AI_Number'First+7) not in '0'..'9' or else
+	           AI_Number(AI_Number'First+8) not in '0'..'9' then
+	            Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		        "Bad number in AI05 number: " & AI_Number);
+		end if;
+	    end if;
+	    if AI_Number'Length = 9 then
+                Output_Text (Output_Object, "<A HREF=""http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/");
+                Output_Text (Output_Object, AI_Number & "-1");
+	    elsif AI_Number'Length = 11 then
+		if AI_Number(AI_Number'Last-1) /= '-' or else
+	           AI_Number(AI_Number'Last) not in '0'..'9' then
+	            Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		        "Bad sequence number in AI05 number: " & AI_Number);
+		end if;
+                Output_Text (Output_Object, "<A HREF=""http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/");
+                Output_Text (Output_Object, AI_Number);
+	    else
+	        Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		    "Bad AI05 number: " & AI_Number);
+	    end if;
+	elsif AI_Number'Length > 5 and then
+	    AI_Number(AI_Number'First..AI_Number'First+4) = "SI99-" then
+	    if AI_Number'Length >= 9 then
+		if AI_Number(AI_Number'First+5) not in '0'..'9' or else
+		   AI_Number(AI_Number'First+6) not in '0'..'9' or else
+		   AI_Number(AI_Number'First+7) not in '0'..'9' or else
+	           AI_Number(AI_Number'First+8) not in '0'..'9' then
+	            Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		        "Bad number in SI99 number: " & AI_Number);
+		end if;
+	    end if;
+	    if AI_Number'Length = 9 then
+                Output_Text (Output_Object, "<A HREF=""http://www.ada-auth.org/cgi-bin/cvsweb.cgi/SI99s/");
+                Output_Text (Output_Object, AI_Number & "-1");
+	    elsif AI_Number'Length = 11 then
+		if AI_Number(AI_Number'Last-1) /= '-' or else
+	           AI_Number(AI_Number'Last) not in '0'..'9' then
+	            Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		        "Bad sequence number in SI99 number: " & AI_Number);
+		end if;
+                Output_Text (Output_Object, "<A HREF=""http://www.ada-auth.org/cgi-bin/cvsweb.cgi/SI99s/");
+                Output_Text (Output_Object, AI_Number);
+	    else
+	        Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		    "Bad SI99 number: " & AI_Number);
+	    end if;
+	else -- Must be AI95:
+	    declare
+		Folded : constant String :=
+		    Folded_AI95_Number(AI_Number); -- We don't want to have written anything if we raise an exception.
+	    begin
+                Output_Text (Output_Object, "<A HREF=""http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-");
+                Output_Text (Output_Object, Folded);
+	    end;
+	end if;
         Output_Text (Output_Object, ".TXT"">");
         Ordinary_Text (Output_Object, Text);
         Output_Text (Output_Object, "</A>");
+
     end AI_Reference;
 
 

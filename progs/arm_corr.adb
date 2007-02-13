@@ -14,7 +14,7 @@ package body ARM_Corr is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -58,6 +58,7 @@ package body ARM_Corr is
     --		- RLB - Added Last_Column_Width to Start_Table.
     -- 10/13/06 - RLB - Added Local_Link_Start and Local_Link_End to allow
     --			formatting in the linked text.
+    --  2/ 9/07 - RLB - Changed comments on AI_Reference.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -1638,8 +1639,9 @@ package body ARM_Corr is
 			    AI_Number : in String) is
 	-- Generate a reference to an AI from the standard. The text
 	-- of the reference is "Text", and AI_Number denotes
-	-- the target (in folded format). For hyperlinked formats, this should
-	-- generate a link; for other formats, the text alone is generated.
+	-- the target (in unfolded format). For hyperlinked formats, this
+	-- should generate a link; for other formats, the text alone is
+	-- generated.
     begin
 	Ordinary_Text (Output_Object, Text); -- Nothing special in this format.
     end AI_Reference;

@@ -237,6 +237,9 @@ package body ARM_Format is
     --  2/ 5/07 - RLB - Added a paragraph kind, and changed ones that
     --			appear in ASIS. Also renamed "Wide" to "Wide_Above"
     --			so the purpose is more obvious.
+    --  2/ 9/07 - RLB - Moved AI interpretation and folding to the HTML
+    --			driver, as constructing the link should be its
+    --			responsibility. This also allows new kinds of AI here.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -1520,80 +1523,6 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
     end Write_Table_of_Contents;
 
 
-    function Folded_AI95_Number (AI_String : in String) return String is
-	-- Internal routine.
-	-- Calculate the "folded" AI number from the full version.
-	-- AI_String should be in the form "AIzz-00xxx-yy", where -yy, 00,
-	-- and zz are optional, and 'zz' = 95 if given.
-	Result : String(1..5);
-	Hyphen_1 : Natural := Ada.Strings.Fixed.Index (AI_String, "-");
-	Hyphen_2 : Natural;
-    begin
-        if Hyphen_1 = 0 or else AI_String'Last < Hyphen_1+3 then
-	    Result := "00001";
-	    Ada.Text_IO.Put_Line ("** Bad AI reference " & AI_String);
-	elsif Hyphen_1 = AI_String'First+4 and then
-	    AI_String(AI_String'First..Hyphen_1-1) /= "AI95" then
-	    Ada.Text_IO.Put_Line ("** AI reference for other than AI95 " & AI_String);
-	    Result := "00001";
-	elsif Hyphen_1 = AI_String'First+2 and then
-	    AI_String(AI_String'First..Hyphen_1-1) /= "AI" then
-	    Ada.Text_IO.Put_Line ("** AI reference not AI " & AI_String);
-	    Result := "00001";
-	else
-	    Hyphen_2 := Ada.Strings.Fixed.Index (AI_String(Hyphen_1+1..AI_String'Last), "-");
-	    if Hyphen_2 = 0 then
-	        if AI_String'Last = Hyphen_1+5 then
-		    Result := AI_String(Hyphen_1+1 .. Hyphen_1+5);
-	        elsif AI_String'Last = Hyphen_1+4 then
-		    Result(2..5) := AI_String(Hyphen_1+1 .. Hyphen_1+4);
-		    Result(1) := '0';
-	        elsif AI_String'Last = Hyphen_1+3 then
-		    Result(3..5) := AI_String(Hyphen_1+1 .. Hyphen_1+3);
-		    Result(1) := '0';
-		    Result(2) := '0';
-	        else
-	            Ada.Text_IO.Put_Line ("** AI reference too wrong length " & AI_String);
-	            Result := "00001";
-	        end if;
-	    else
-		if (Hyphen_2-1) - (Hyphen_1+1) = 5-1 then
-		    Result := AI_String (Hyphen_1+1 .. Hyphen_2-1);
-		elsif (Hyphen_2-1) - (Hyphen_1+1) = 4-1 then
-		    Result(2..5) := AI_String (Hyphen_1+1 .. Hyphen_2-1);
-		    Result(1) := '0';
-		elsif (Hyphen_2-1) - (Hyphen_1+1) = 3-1 then
-		    Result(3..5) := AI_String (Hyphen_1+1 .. Hyphen_2-1);
-		    Result(1) := '0';
-		    Result(2) := '0';
-		else
-		    Result := "00001";
-		    Ada.Text_IO.Put_Line ("** Bad AI reference (hyphen dist) " & AI_String);
-		end if;
-		if AI_String'Last < Hyphen_2+1 or else
-		   AI_String'Last > Hyphen_2+2 then
-	            Ada.Text_IO.Put_Line ("** Bad AI alternative reference " & AI_String);
-		elsif  AI_String'Last = Hyphen_2+1 then
-		    Result(1) := Character'Pred(AI_String(Hyphen_2+1));
-		elsif AI_String'Last = Hyphen_2+2 and then AI_String(Hyphen_2+1) = '0' then
-		    Result(1) := Character'Pred(AI_String(Hyphen_2+2));
-		elsif AI_String'Last = Hyphen_2+2 and then AI_String(Hyphen_2+1) = '1' then
-		    if AI_String(Hyphen_2+2) = '0' then
-		        Result(1) := '9';
-		    else
-		        Result(1) := Character'Val(Character'Pos(AI_String(Hyphen_2+2)) - Character'Pos('1') + Character'Pos('A'));
-		    end if;
-		elsif AI_String'Last = Hyphen_2+2 and then AI_String(Hyphen_2+1) = '2' then
-		    Result(1) := Character'Val(Character'Pos(AI_String(Hyphen_2+2)) - Character'Pos('1') + Character'Pos('A') + 10);
-	        else
-		    Ada.Text_IO.Put_Line ("** Bad AI alternative reference " & AI_String);
-	        end if;
-	    end if;
-	end if;
-	return Result;
-    end Folded_AI95_Number;
-
-
     procedure Make_References (List : in out Reference_Ptr;
 			       Format_Object : in out Format_Type;
 			       Output_Object : in out ARM_Output.Output_Type'Class) is
@@ -1632,8 +1561,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 	        -- Output an AI reference.
 	        ARM_Output.AI_Reference (Output_Object,
 					 Text => List.Ref_Name(1..List.Ref_Len),
-					 AI_Number =>
-					     Folded_AI95_Number(List.Ref_Name(1..List.Ref_Len)));
+					 AI_Number => List.Ref_Name(1..List.Ref_Len));
 	    end if;
 	    ARM_Output.Text_Format (Output_Object,
 				    Bold => Format_Object.Is_Bold,
@@ -2578,9 +2506,10 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			    -- we've probably just exited some nested item.
 			    if Format_Object.Format in ARM_Output.Enumerated .. ARM_Output.Small_Nested_Enumerated then
 				-- An enumerated format.
---Ada.Text_IO.Put_Line ("%% Enumerated paragraph seems to be nested or ourselves, nothing done.");
+Ada.Text_IO.Put_Line ("%% Enumerated paragraph seems to be nested or ourselves, nothing done.");
 			        null;
 			    else -- ** Ugh, don't know the nesting; we assume none.
+Ada.Text_IO.Put_Line ("%% Unknown nesting for enumerated paragraph, assume none.");
                                 if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
 			           Format_Object.Format := ARM_Output.Small_Enumerated;
 			        else
@@ -2589,6 +2518,16 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			    end if;
         		elsif Enclosing_Format = Code_Indented or else
 			   Enclosing_Format = Bulleted then
+Ada.Text_IO.Put_Line ("%% Enumerated paragraph in code indented or bulleted, not nested enough");
+--Should be something like Nested_X2_Enumerated.
+			   if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			       Format_Object.Format := ARM_Output.Small_Nested_Enumerated;
+			   else
+			       Format_Object.Format := ARM_Output.Nested_Enumerated;
+			   end if;
+                        elsif Enclosing_Format = Syntax_Indented or else
+			      Enclosing_Format = Syntax then
+			   -- Correct indent.
 			   if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
 			       Format_Object.Format := ARM_Output.Small_Nested_Enumerated;
 			   else
@@ -2598,8 +2537,10 @@ Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Ne
 			      Enclosing_Format = Single_Note then
 			    -- This might be a bit too nested, but we don't
 			    -- have anything else.
+--Ada.Text_IO.Put_Line ("-- Enumerated paragraph, in notes");
 			    Format_Object.Format := ARM_Output.Small_Nested_Enumerated;
 			else
+--Ada.Text_IO.Put_Line ("%% Enumerated paragraph, in other format:" & Paragraph_Type'Image(Enclosing_Format));
                             if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
 			       Format_Object.Format := ARM_Output.Small_Enumerated;
 			    else
@@ -7894,7 +7835,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 		        Check_Paragraph;
 		        ARM_Output.AI_Reference (Output_Object,
 			    Text => Text(1..Text_Len),
-			    AI_Number => Folded_AI95_Number(AI(1..AI_Len)));
+			    AI_Number => AI(1..AI_Len));
 			if Text_Len /= 0 and then Text(Text_Len) /= ' ' then
 		            Format_Object.Last_Non_Space := True;
 			end if;

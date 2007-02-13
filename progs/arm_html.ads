@@ -13,7 +13,7 @@ package ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2001, 2002, 2004, 2005, 2006  AXE Consultants.
+    -- Copyright 2000, 2001, 2002, 2004, 2005, 2006, 2007  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -93,6 +93,7 @@ package ARM_HTML is
     -- 10/13/06 - RLB - Added specifiable colors.
     --          - RLB - Added Local_Link_Start and Local_Link_End to allow
     --			formatting in the linked text.
+    --  2/ 9/07 - RLB - Changed comments on AI_Reference.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
