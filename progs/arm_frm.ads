@@ -91,6 +91,9 @@ package ARM_Format is
     -- 10/04/06 - RLB - Added "Use_ISO_2004_List_Format".
     --  2/ 5/07 - RLB - Added Usage_Note for ASIS, and renamed Wide paragraph
     --			kinds.
+    --  2/13/07 - RLB - Redid output formating to use an explict indent;
+    --			added ChildExample.
+    --  2/16/07 - RLB - Added Indent.
 
     type Format_Type is tagged limited private;
 
@@ -207,8 +210,8 @@ private
 	Reason, Ramification, Proof, Imp_Note, Corr_Change, Discussion,
 	Honest, Glossary_Marker, Bare_Annotation,
 	-- Format only:
-	Wide_Above, Example_Text,
-	Indented_Example_Text, Code_Indented, Bulleted, Nested_Bulleted,
+	Wide_Above, Example_Text, Child_Example_Text,
+	Indented_Example_Text, Code_Indented, Indent, Bulleted, Nested_Bulleted,
         Nested_X2_Bulleted,
 	Display, Syntax_Display, Syntax_Indented, Syntax_Production,
 	Enumerated, Nested_Enumerated, Hanging_Indented, In_Table);
@@ -300,7 +303,8 @@ private
 	Current_Change_Version : ARM_Contents.Change_Version_Type; -- What is the current version of change?
 	Current_Old_Change_Version : ARM_Contents.Change_Version_Type; -- What is the current old version of change? (Only used if Change is Both).
 	Location : ARM_Output.Location_Type; -- What is the current (vertical) location?
-	Format : ARM_Output.Paragraph_Type; -- What is the current paragraph type?
+	Style : ARM_Output.Paragraph_Style_Type; -- What is the current paragraph style?
+	Indent : ARM_Output.Paragraph_Indent_Type; -- What is the current paragraph indent?
 	In_Paragraph : Boolean; -- Are we currently in a paragraph?
 	No_Start_Paragraph : Boolean; -- Did we suppress "Start_Paragraph"?
 	No_Prefix : Boolean; -- Should we suppress any prefix on the next paragraph?

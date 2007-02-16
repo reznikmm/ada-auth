@@ -14,7 +14,7 @@ package body ARM_Index is
     -- This package contains the routines to manage and generate the index.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2003, 2004, 2005, 2006 AXE Consultants.
+    -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -57,6 +57,7 @@ package body ARM_Index is
     --			indexed item starts with a letter.
     --  2/17/06 - RLB - Added Remove_Soft_Hyphens flag to Clean (for output).
     --  9/22/06 - RLB - Changed to use Clause_Number_Type.
+    --  2/13/07 - RLB - Changed Start_Paragraph to use explicit indents.
 
     Next_Index_Key : Index_Key;
 
@@ -813,7 +814,8 @@ package body ARM_Index is
 	Ada.Text_IO.Put_Line ("  -- Finish index sorting - " & Duration'Image (
 	    Ada.Calendar."-" (Ada.Calendar.Clock, Start)) & " secs.");
 
-	ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index, Number => "", No_Breaks => True);
+	ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index, Indent => 0,
+				    Number => "", No_Breaks => True);
 	Keep_Set := False;
 
 	Temp := Index_List;
@@ -826,7 +828,8 @@ package body ARM_Index is
 		-- We only generate letters, so we try not to come here for
 		-- non-letters.
 		ARM_Output.End_Paragraph (Output_Object);
-		ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index, Number => "");
+		ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index,
+					    Indent => 0, Number => "");
 		Keep_Set := False;
 		if To_Lower(Temp.Term(1)) in 'a' .. 'z' then
 		    ARM_Output.Index_Line_Break (Output_Object, Clear_Keep_with_Next => False);
@@ -853,11 +856,13 @@ package body ARM_Index is
 		if Last /= null then
 		    ARM_Output.End_Paragraph (Output_Object);
 		    if Temp.Kind = Primary_Term then
-		        ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index, Number => "",
+		        ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index,
+						    Indent => 0, Number => "",
 					            No_Breaks => True);
 			Keep_Set := False;
 		    else -- The item has at least two lines; keep them together.
-		        ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index, Number => "",
+		        ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index,
+						    Indent => 0, Number => "",
 					            No_Breaks => True, Keep_with_Next => True);
 			Keep_Set := True;
 		    end if;

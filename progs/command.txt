@@ -896,6 +896,12 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 		  used. No page breaks are allowed within a paragraph.
 		  Do not confuse this with "Examples", which is a text
 		  grouping.
+	ChildExample - The text is formatted in the example font (which is
+		  selected in the master file); spaces and breaks are
+		  preserved. This format preserves size and
+		  indenting characteristics of its parent (if any);
+		  with the exception that the text here is indented one
+		  additional unit.
 	Itemize - The text is indented and bulleted (with solid circle bullets).
 		  The text preserves the size and indenting of its parent (if
 		  any).
@@ -919,6 +925,8 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 		  that spaces and breaks are preserved. The text preserves the
 		  size of its parent (if any). No page breaks are allowed
 		  within a paragraph.
+	Indent  - A normal paragraph indented one level from its parent.
+		  The text preserves the size of its parent (if any).
 	SyntaxDisplay - The text is in a smaller font, is indented one level,
 		  and spaces and breaks are preserved. No page breaks are
 		  allowed within a paragraph.

@@ -13,7 +13,7 @@ package body ARM_Subindex is
     -- non-normative appendixes.
     --
     -- ---------------------------------------
-    -- Copyright 2005, 2006  AXE Consultants.
+    -- Copyright 2005, 2006, 2007  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -47,6 +47,7 @@ package body ARM_Subindex is
     -- 10/28/05 - RLB - Created package.
     --  8/ 4/06 - RLB - Fixed problems if unit was missing.
     --  9/22/06 - RLB - Changed to use Clause_Number_Type.
+    --  2/13/07 - RLB - Changed Start_Paragraph to use explicit indents.
 
     type String_Ptr is access String;
     type Item is record
@@ -606,7 +607,8 @@ package body ARM_Subindex is
 	    Subindex_Object.List := null;
         end if;
 
-	ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index, Number => "", No_Breaks => True);
+	ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index,
+		Indent => 0, Number => "", No_Breaks => True);
 
 	Temp := Subindex_Object.List;
 	while Temp /= null loop
@@ -618,7 +620,8 @@ package body ARM_Subindex is
 		if Last /= null then
 		    ARM_Output.End_Paragraph (Output_Object);
 		    if Temp.Kind = Top_Level then
-		        ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index, Number => "",
+		        ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index,
+						    Indent => 0, Number => "",
 					            No_Breaks => True);
 			Keep_Set := False;
 --Ada.Text_IO.Put_Line("New Item: Entity=" & Temp.Entity.all &
@@ -628,14 +631,16 @@ package body ARM_Subindex is
 		          Temp.Kind = In_Unit and then
 		          Temp.Entity'Length + 4 + Temp.From_Unit'Length < CHARS_ON_SINGLE_LINE then
 			-- Write as a single line.
-		        ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index, Number => "",
+		        ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index,
+						    Indent => 0, Number => "",
 					            No_Breaks => True);
 			Keep_Set := False;
 --Ada.Text_IO.Put_Line("New Item: Entity=" & Temp.Entity.all &
 --" Kind=" & Subindex_Item_Kind_Type'Image(Temp.Kind) &
 --" From_Unit=" & Temp.From_Unit.all & " Keep_Set=" & Boolean'Image(Keep_Set));
 		    else -- The item has at least two lines; keep them together.
-		        ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index, Number => "",
+		        ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Index,
+						    Indent => 0, Number => "",
 					            No_Breaks => True, Keep_with_Next => True);
 			Keep_Set := True;
 --Ada.Text_IO.Put_Line("New Item: Entity=" & Temp.Entity.all &

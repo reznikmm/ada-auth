@@ -121,6 +121,8 @@ package body ARM_RTF is
     --			formatting in the linked text.
     -- 12/22/06 - RLB - Fixed glitch in number of column units.
     --  2/ 9/07 - RLB - Changed comments on AI_Reference.
+    --  2/14/07 - RLB - Revised to separate style and indent information
+    --			for paragraphs.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -135,6 +137,7 @@ package body ARM_RTF is
 	-- Leading is 150% of normal height.
 
     type Format_Info_Type is record
+	Defined : Boolean := False;
 	Size : Natural; -- In 1/2 pts.
 	Indent : Natural; -- In Twips (.1 pt = 1/120th pica = 1/1440th inch).
 	Hang_Width : Natural; -- In Twips (.1 pt = 1/120th pica = 1/1440th inch).
@@ -146,7 +149,8 @@ package body ARM_RTF is
 	Format_Len : Natural := 0;
     end record;
 
-    Paragraph_Info : array (ARM_Output.Paragraph_Type) of Format_Info_Type;
+    Paragraph_Info : array (ARM_Output.Paragraph_Style_Type,
+			    ARM_Output.Paragraph_Indent_Type) of Format_Info_Type;
 	-- Set by Start_RTF_File.
     Heading_1_Info : Format_Info_Type;
     Heading_2_Info : Format_Info_Type;
@@ -196,6 +200,7 @@ package body ARM_RTF is
 	end Make;
 
     begin
+	Into.Defined := True;
 	Into.Size := Font_Size;
 	case Font is
 	    when ARM_Output.Default =>
@@ -240,6 +245,10 @@ package body ARM_RTF is
 	-- Internal routine.
 	-- Write a header to start a style definition for Style.
     begin
+	if not Style.Defined then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Undefined Style in style table");
+	end if;
         Ada.Text_IO.Put (Fyle, "{" &
 	    Style.Format_String(1 .. Style.Format_Len));
     end Write_Style;
@@ -252,6 +261,10 @@ package body ARM_RTF is
 	-- Write a header to start a paragraph in Style. Count is set to
 	-- the characters written.
     begin
+	if not Style.Defined then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Undefined Style in paragraph");
+	end if;
         Ada.Text_IO.Put (Fyle, "{\pard\plain " &
 	    Style.Format_String(1 .. Style.Format_Len));
 	Count := Style.Format_Len + 13;
@@ -434,21 +447,6 @@ package body ARM_RTF is
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "\red128\green128\blue128;"); -- Color 15
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "\red192\green192\blue192;}"); -- Color 16
 
-	-- Set all of the styles to a (junk) default, so we can tell if we forget
-	-- to set one:
-	for I in ARM_Output.Paragraph_Type loop
-	    Set_Style (Paragraph_Info(I),
-		       Font => ARM_Output.Swiss,
-		       Body_Font => ARM_Output.Swiss,
-		       Font_Size => 32,
-		       Style_Indent => 0,
-		       Style_Before => 0,
-		       Style_After => 0,
-		       Style_Justified => FALSE,
-		       Style_String_Prefix => "",
-		       Style_String_Suffix => "\qc ");
-	end loop;
-
 	-- Style sheet:
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\stylesheet");
 
@@ -457,7 +455,7 @@ package body ARM_RTF is
 	    -- These are smaller page sizes than the other sizes.
 	    -- ** TBD: Consider putting this into a separate parameter (there is
 	    -- ** little reason for the font size to depend on the page size).
-	    Set_Style (Paragraph_Info(ARM_Output.Normal),
+	    Set_Style (Paragraph_Info(ARM_Output.Normal, 0),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -525,7 +523,7 @@ package body ARM_RTF is
 			 "\pvpara\phpg\posxo\posy0\absw450\dxfrtext100\dfrmtxtx120\dfrmtxty120"&
 			 "\cgrid\qc",
 		       Style_String_Suffix => "\snext0 "); -- Note: We adjust the space before on use.
-	    Set_Style (Paragraph_Info(ARM_Output.Notes),
+	    Set_Style (Paragraph_Info(ARM_Output.Small, 1), -- Notes
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -536,7 +534,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s6\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-180\slmult0 \snext6 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Annotations),
+	    Set_Style (Paragraph_Info(ARM_Output.Small, 2), -- Annotations
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -547,7 +545,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s7\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-180\slmult0 \snext7 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Examples),
+	    Set_Style (Paragraph_Info(ARM_Output.Examples, 1),
 		       Font => ARM_Output.Fixed,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
@@ -558,7 +556,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s8\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\sl-160\ql \snext8 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Examples),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Examples, 3),
 		       Font => ARM_Output.Fixed,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 14,
@@ -569,7 +567,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s9\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\sl-140\ql \snext9 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Syntax_Indented),
+	    Set_Style (Paragraph_Info(ARM_Output.Normal, 1), -- Syntax indent
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -581,7 +579,7 @@ package body ARM_RTF is
 			 "\s10\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-200 \snext10 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Indented),
+	    Set_Style (Paragraph_Info(ARM_Output.Normal, 3), -- Regular indent
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -592,7 +590,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s11\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-220\slmult0 \snext11 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Indented),
+	    Set_Style (Paragraph_Info(ARM_Output.Small, 5), -- Regular annotation indent
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -603,7 +601,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s12\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-180\slmult0 \snext12 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Hanging),
+	    Set_Style (Paragraph_Info(ARM_Output.Wide_Hanging, 3),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -616,7 +614,7 @@ package body ARM_RTF is
 			 "\s13\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext13 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Indented_Hanging),
+	    Set_Style (Paragraph_Info(ARM_Output.Narrow_Hanging, 3), -- Hanging in indents
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -629,7 +627,7 @@ package body ARM_RTF is
 			 "\s14\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext14 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Hanging),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Wide_Hanging, 5),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -642,7 +640,7 @@ package body ARM_RTF is
 			 "\s15\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-170\slmult0 \snext15 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Indented_Hanging),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Narrow_Hanging, 5),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -655,7 +653,7 @@ package body ARM_RTF is
 			 "\s16\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-170\slmult0 \snext16 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Bulleted, 1),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -668,7 +666,7 @@ package body ARM_RTF is
 			 "\s17\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx360 \snext17 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Nested_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Nested_Bulleted, 2),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -681,7 +679,7 @@ package body ARM_RTF is
 			 "\s18\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx720 \snext18 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Bulleted, 3),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -694,7 +692,7 @@ package body ARM_RTF is
 			 "\s19\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0\tx1080 \snext19 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Bulleted, 4),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -707,7 +705,7 @@ package body ARM_RTF is
 			 "\s20\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0\tx1440 \snext20 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Indented_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Bulleted, 4), -- Indented bullets
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -720,7 +718,7 @@ package body ARM_RTF is
 			 "\s21\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx1080 \snext21 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Syntax_Indented_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Bulleted, 2), -- Syntax indent bullets
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -733,7 +731,7 @@ package body ARM_RTF is
 			 "\s22\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx720 \snext22 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Code_Indented_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Bulleted, 3), -- Code indented bullets
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -746,7 +744,7 @@ package body ARM_RTF is
 			 "\s23\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx1080 \snext23 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Code_Indented),
+	    Set_Style (Paragraph_Info(ARM_Output.Normal, 2), -- Code indented
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -757,7 +755,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s24\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-220\slmult0 \snext24 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Code_Indented),
+	    Set_Style (Paragraph_Info(ARM_Output.Small, 4), -- Code indented annotations.
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -768,7 +766,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s25\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-180\slmult0 \snext25 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Indented_Examples),
+	    Set_Style (Paragraph_Info(ARM_Output.Examples, 4), -- Indented examples
 		       Font => ARM_Output.Fixed,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
@@ -779,7 +777,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s26\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-160 \snext26 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Indented_Examples),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Examples, 6), -- Indented annotation examples.
 		       Font => ARM_Output.Fixed,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 14,
@@ -815,7 +813,7 @@ package body ARM_RTF is
 		         "\s29\widctlpar" & -- "\tqc\tx" & Half_Paper_Width & -- We don't use or define the center tab; it causes problems with very long titles.
 			 "\tqr\tx" & Paper_Width & "\adjustright",
 		       Style_String_Suffix => "\cgrid \sbasedon0 \snext29 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Index),
+	    Set_Style (Paragraph_Info(ARM_Output.Index, 0),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -827,7 +825,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s31\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-180\slmult0 \snext31 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Wide),
+	    Set_Style (Paragraph_Info(ARM_Output.Wide_Above, 0),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -838,7 +836,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s32\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-220\slmult0 \snext0 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Wide_Annotations),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Wide_Above, 2), -- Wide above annotations.
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -849,7 +847,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s33\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-180\slmult0 \snext7 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Notes_Header),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Header, 1), -- Notes header
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -861,7 +859,7 @@ package body ARM_RTF is
 			 "\s34\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-180\slmult0 \snext6 ");
 			  -- Note: No extra space afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Notes_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Bulleted, 2), -- Bullets in notes
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -874,7 +872,7 @@ package body ARM_RTF is
 			 "\s35\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0\tx720 \snext35 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Notes_Nested_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Bulleted, 3), -- Nested bullets in notes
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -887,7 +885,7 @@ package body ARM_RTF is
 			 "\s36\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0\tx1080 \snext36 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Hanging_in_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Hanging_in_Bulleted, 3),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -900,7 +898,7 @@ package body ARM_RTF is
 			 "\s37\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0 \snext14 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Hanging_in_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Hanging_in_Bulleted, 5),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -913,7 +911,7 @@ package body ARM_RTF is
 			 "\s38\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0 \snext16 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Code_Indented_Nested_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Nested_Bulleted, 4), -- Code indent nested bullets
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -926,7 +924,7 @@ package body ARM_RTF is
 			 "\s39\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx1440 \snext39 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Syntax_Summary),
+	    Set_Style (Paragraph_Info(ARM_Output.Syntax_Summary, 1),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -938,7 +936,7 @@ package body ARM_RTF is
 			 "\s40\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-170\slmult0 \snext40 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Enumerated),
+	    Set_Style (Paragraph_Info(ARM_Output.Enumerated, 1),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -951,7 +949,7 @@ package body ARM_RTF is
 			 "\s41\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx360 \snext41 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Enumerated),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Enumerated, 3),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -964,7 +962,7 @@ package body ARM_RTF is
 			 "\s42\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0\tx1080 \snext42 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Nested_Enumerated),
+	    Set_Style (Paragraph_Info(ARM_Output.Enumerated, 2),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -977,7 +975,7 @@ package body ARM_RTF is
 			 "\s43\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx360 \snext43 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Enumerated),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Enumerated, 4),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -990,7 +988,7 @@ package body ARM_RTF is
 			 "\s44\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0\tx1080 \snext44 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Nested_X2_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Nested_Bulleted, 3), -- Doubly nested bullets
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1003,7 +1001,7 @@ package body ARM_RTF is
 			 "\s45\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx720 \snext45 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_X2_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Bulleted, 5), -- Doubly nested bullets
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -1016,7 +1014,7 @@ package body ARM_RTF is
 			 "\s46\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0\tx1440 \snext46 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Indented_Nested_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Nested_Bulleted, 5), -- Indented nested bullets.
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1029,7 +1027,7 @@ package body ARM_RTF is
 			 "\s47\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx1080 \snext47 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Inner_Indented),
+	    Set_Style (Paragraph_Info(ARM_Output.Normal, 4), -- Inner indented
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1040,7 +1038,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s48\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-220\slmult0 \snext48 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Inner_Indented),
+	    Set_Style (Paragraph_Info(ARM_Output.Small, 6), -- Inner indented
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -1051,7 +1049,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s49\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-180\slmult0 \snext49 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Syntax_Indented),
+	    Set_Style (Paragraph_Info(ARM_Output.Small, 3), -- Annotations in syntax indentation
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 15,
@@ -1062,7 +1060,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s50\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-180\slmult0 \snext50 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Examples),
+	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Examples, 1),
 		       Font => ARM_Output.Swiss,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
@@ -1073,7 +1071,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s51\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\sl-180\ql \snext51 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Examples),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Examples, 3),
 		       Font => ARM_Output.Swiss,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 14,
@@ -1084,7 +1082,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s52\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\sl-160\ql \snext52 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Indented_Examples),
+	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Examples, 4), -- Indented
 		       Font => ARM_Output.Swiss,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
@@ -1095,7 +1093,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s53\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-180 \snext53 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Indented_Examples),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Examples, 6), -- Indented
 		       Font => ARM_Output.Swiss,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 14,
@@ -1106,6 +1104,32 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s54\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-160 \snext54 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Enumerated, 3), -- Doubly nested enumerations
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
+		       Font_Size => 18,
+		       Style_Indent => 1080,
+		       Style_Hang_Width => 260,
+		       Style_Before => 0,
+		       Style_After => 100,
+		       Style_Justified => TRUE,
+		       Style_String_Prefix =>
+			 "\s55\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-200\slmult0\tx360 \snext43 ");
+			  -- Note: Narrower space between and afterwards.
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Enumerated, 5), -- Doubly nested enumerations
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
+		       Font_Size => 15,
+		       Style_Indent => 1800,
+		       Style_Hang_Width => 240,
+		       Style_Before => 0,
+		       Style_After => 80,
+		       Style_Justified => TRUE,
+		       Style_String_Prefix =>
+			 "\s56\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-170\slmult0\tx1080 \snext56 ");
+			  -- Note: Narrower space between and afterwards.
 	    Set_Style (Heading_4_Info,
 		       Font => ARM_Output.Swiss,
 		       Body_Font => Output_Object.Body_Font,
@@ -1115,7 +1139,7 @@ package body ARM_RTF is
 		       Style_After => 90,
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
-			 "\s55\keepn\widctlpar\outlinelevel3\adjustright",
+			 "\s57\keepn\widctlpar\outlinelevel3\adjustright",
 		       Style_String_Suffix => "\b\ql\cgrid \sbasedon0 \snext0 ");
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
@@ -1128,7 +1152,7 @@ package body ARM_RTF is
 		           Style_After => 45,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s56\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s58\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font => ARM_Output.Swiss,
@@ -1139,7 +1163,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s57\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s59\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font => ARM_Output.Swiss,
@@ -1150,7 +1174,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s58\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s60\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_4_Info,
 		           Font => ARM_Output.Swiss,
@@ -1161,7 +1185,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s59\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s61\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_C_Text_Info,
@@ -1207,7 +1231,7 @@ package body ARM_RTF is
 		       Style_String_Prefix => "",
 		       Style_String_Suffix => "\ql");
 	else
-	    Set_Style (Paragraph_Info(ARM_Output.Normal),
+	    Set_Style (Paragraph_Info(ARM_Output.Normal, 0),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1286,7 +1310,7 @@ package body ARM_RTF is
 		-- \dfrmtxty - vertical distance of text from frame (twips).
 
 
-	    Set_Style (Paragraph_Info(ARM_Output.Notes),
+	    Set_Style (Paragraph_Info(ARM_Output.Small, 1), -- Notes
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1297,7 +1321,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s6\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext6 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Annotations),
+	    Set_Style (Paragraph_Info(ARM_Output.Small, 2), -- Annotations
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1308,7 +1332,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s7\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext7 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Examples),
+	    Set_Style (Paragraph_Info(ARM_Output.Examples, 1),
 		       Font => ARM_Output.Fixed,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1319,7 +1343,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s8\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-190\slmult0 \snext8 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Examples),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Examples, 3),
 		       Font => ARM_Output.Fixed,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
@@ -1330,7 +1354,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s9\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-170\slmult0 \snext9 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Syntax_Indented),
+	    Set_Style (Paragraph_Info(ARM_Output.Normal, 1), -- Syntax indented
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1342,7 +1366,7 @@ package body ARM_RTF is
 			 "\s10\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-240 \snext10 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Indented),
+	    Set_Style (Paragraph_Info(ARM_Output.Normal, 3), -- Indented
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1353,7 +1377,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s11\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-260\slmult0 \snext11 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Indented),
+	    Set_Style (Paragraph_Info(ARM_Output.Small, 5), -- Indented annotations
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1364,7 +1388,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s12\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext12 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Hanging),
+	    Set_Style (Paragraph_Info(ARM_Output.Wide_Hanging, 3),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1377,7 +1401,7 @@ package body ARM_RTF is
 			 "\s13\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-240\slmult0 \snext13 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Indented_Hanging),
+	    Set_Style (Paragraph_Info(ARM_Output.Narrow_Hanging, 3),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1390,7 +1414,7 @@ package body ARM_RTF is
 			 "\s14\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-240\slmult0 \snext14 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Hanging),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Wide_Hanging, 5),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1403,7 +1427,7 @@ package body ARM_RTF is
 			 "\s15\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-190\slmult0 \snext15 ");
 			  -- Note: Narrower space between.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Indented_Hanging),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Narrow_Hanging, 5),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1416,7 +1440,7 @@ package body ARM_RTF is
 			 "\s16\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-190\slmult0 \snext16 ");
 			  -- Note: Narrower space between.
-	    Set_Style (Paragraph_Info(ARM_Output.Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Bulleted, 1),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1429,7 +1453,7 @@ package body ARM_RTF is
 			 "\s17\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx360 \snext17 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Nested_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Nested_Bulleted, 2),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1442,7 +1466,7 @@ package body ARM_RTF is
 			 "\s18\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx720 \snext18 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Bulleted, 3),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1455,7 +1479,7 @@ package body ARM_RTF is
 			 "\s19\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0\tx1080 \snext19 ");
 			  -- Note: Narrower space between.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Bulleted, 4),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1468,7 +1492,7 @@ package body ARM_RTF is
 			 "\s20\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0\tx1440 \snext20 ");
 			  -- Note: Narrower space between.
-	    Set_Style (Paragraph_Info(ARM_Output.Indented_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Bulleted, 4), -- Indented bulleted
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1481,7 +1505,7 @@ package body ARM_RTF is
 			 "\s21\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx1080 \snext21 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Syntax_Indented_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Bulleted, 2), -- Bullets in syntax indenting
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1494,7 +1518,7 @@ package body ARM_RTF is
 			 "\s22\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx720 \snext22 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Code_Indented_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Bulleted, 3), -- Bullets in syntax indenting
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1507,7 +1531,7 @@ package body ARM_RTF is
 			 "\s23\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx1080 \snext23 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Code_Indented),
+	    Set_Style (Paragraph_Info(ARM_Output.Normal, 2), -- Code indenting
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1518,7 +1542,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s24\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-260\slmult0 \snext24 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Code_Indented),
+	    Set_Style (Paragraph_Info(ARM_Output.Small, 4), -- Annotations in code indenting
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1529,7 +1553,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s25\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext25 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Indented_Examples),
+	    Set_Style (Paragraph_Info(ARM_Output.Examples, 4), -- Indented examples
 		       Font => ARM_Output.Fixed,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1540,7 +1564,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s26\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-190\slmult0 \snext26 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Indented_Examples),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Examples, 6), -- Indented examples in annotations.
 		       Font => ARM_Output.Fixed,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
@@ -1576,7 +1600,7 @@ package body ARM_RTF is
 		         "\s29\widctlpar" & -- "\tqc\tx" & Half_Paper_Width & -- We don't use or define the center tab; it causes problems with very long titles.
 			 "\tqr\tx" & Paper_Width & "\adjustright",
 		       Style_String_Suffix => "\cgrid \sbasedon0 \snext29 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Index),
+	    Set_Style (Paragraph_Info(ARM_Output.Index, 0),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1588,7 +1612,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s31\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-200\slmult0 \snext31 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Wide),
+	    Set_Style (Paragraph_Info(ARM_Output.Wide_Above, 0),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1599,7 +1623,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s32\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-260\slmult0 \snext0 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Wide_Annotations),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Wide_Above, 2), -- Wide above annotations.
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1610,7 +1634,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s33\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext7 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Notes_Header),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Header, 1), -- Notes header
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1622,7 +1646,7 @@ package body ARM_RTF is
 			 "\s34\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext6 ");
 		      -- Note: No space afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Notes_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Bulleted, 2), -- Bullets in notes
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1635,7 +1659,7 @@ package body ARM_RTF is
 			 "\s35\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0\tx720 \snext35 ");
 			  -- Note: Narrower space between.
-	    Set_Style (Paragraph_Info(ARM_Output.Notes_Nested_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Bulleted, 3), -- Nested bullets in notes
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1648,7 +1672,7 @@ package body ARM_RTF is
 			 "\s36\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0\tx1080 \snext36 ");
 			  -- Note: Narrower space between.
-	    Set_Style (Paragraph_Info(ARM_Output.Hanging_in_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Hanging_in_Bulleted, 3),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1661,7 +1685,7 @@ package body ARM_RTF is
 			 "\s37\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0 \snext14 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Hanging_in_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Hanging_in_Bulleted, 5),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1674,7 +1698,7 @@ package body ARM_RTF is
 			 "\s38\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0 \snext16 ");
 			  -- Note: Narrower space between.
-	    Set_Style (Paragraph_Info(ARM_Output.Code_Indented_Nested_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Nested_Bulleted, 4), -- Nested bullets in code indenting
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1687,7 +1711,7 @@ package body ARM_RTF is
 			 "\s39\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx1440 \snext39 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Syntax_Summary),
+	    Set_Style (Paragraph_Info(ARM_Output.Syntax_Summary, 1),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1699,7 +1723,7 @@ package body ARM_RTF is
 			 "\s40\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-200\slmult0 \snext40 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Enumerated),
+	    Set_Style (Paragraph_Info(ARM_Output.Enumerated, 1),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1712,7 +1736,7 @@ package body ARM_RTF is
 			 "\s41\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx360 \snext41 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Enumerated),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Enumerated, 3),
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1725,7 +1749,7 @@ package body ARM_RTF is
 			 "\s42\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0\tx1080 \snext42 ");
 			  -- Note: Narrower space between.
-	    Set_Style (Paragraph_Info(ARM_Output.Nested_Enumerated),
+	    Set_Style (Paragraph_Info(ARM_Output.Enumerated, 2), -- Nested enumerations.
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1738,7 +1762,7 @@ package body ARM_RTF is
 			 "\s43\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx360 \snext43 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Enumerated),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Enumerated, 4), -- Small nested enumerations.
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1751,7 +1775,7 @@ package body ARM_RTF is
 			 "\s44\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0\tx1080 \snext44 ");
 			  -- Note: Narrower space between.
-	    Set_Style (Paragraph_Info(ARM_Output.Nested_X2_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Nested_Bulleted, 3), -- Doubly nested bullets
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1764,7 +1788,7 @@ package body ARM_RTF is
 			 "\s45\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx720 \snext45 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_X2_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Nested_Bulleted, 5), -- Doubly nested bullets
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1777,7 +1801,7 @@ package body ARM_RTF is
 			 "\s46\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0\tx1440 \snext46 ");
 			  -- Note: Narrower space between.
-	    Set_Style (Paragraph_Info(ARM_Output.Indented_Nested_Bulleted),
+	    Set_Style (Paragraph_Info(ARM_Output.Nested_Bulleted, 5), -- Indented nested bullets
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1790,7 +1814,7 @@ package body ARM_RTF is
 			 "\s47\widctlpar\adjustright",
 		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx1080 \snext47 ");
 			  -- Note: Narrower space between and afterwards.
-	    Set_Style (Paragraph_Info(ARM_Output.Inner_Indented),
+	    Set_Style (Paragraph_Info(ARM_Output.Normal, 4), -- Inner indented
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 22,
@@ -1801,7 +1825,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s48\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-260\slmult0 \snext48 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Inner_Indented),
+	    Set_Style (Paragraph_Info(ARM_Output.Small, 6), -- Inner indented
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1812,7 +1836,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s49\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext49 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Syntax_Indented),
+	    Set_Style (Paragraph_Info(ARM_Output.Small, 3), -- Annotations in syntax indenting
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 18,
@@ -1823,7 +1847,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s50\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext50 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Examples),
+	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Examples, 1),
 		       Font => ARM_Output.Swiss,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 20,
@@ -1834,7 +1858,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s51\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-240\slmult0 \snext51 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Examples),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Examples, 3),
 		       Font => ARM_Output.Swiss,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
@@ -1845,7 +1869,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s52\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-180\slmult0 \snext52 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Indented_Examples),
+	    Set_Style (Paragraph_Info(ARM_Output.Swiss_Examples, 4), -- Indented examples
 		       Font => ARM_Output.Swiss,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 20,
@@ -1856,7 +1880,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s53\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-240\slmult0 \snext53 ");
-	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Indented_Examples),
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Swiss_Examples, 6), -- Indented examples
 		       Font => ARM_Output.Swiss,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 16,
@@ -1867,6 +1891,32 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s54\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-180\slmult0 \snext54 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Enumerated, 3), -- Doubly nested enumerations.
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
+		       Font_Size => 22,
+		       Style_Indent => 1080,
+		       Style_Hang_Width => 270,
+		       Style_Before => 0,
+		       Style_After => 110,
+		       Style_Justified => TRUE,
+		       Style_String_Prefix =>
+			 "\s55\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-240\slmult0\tx360 \snext55 ");
+			  -- Note: Narrower space between and afterwards.
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Enumerated, 5), -- Small doubly nested enumerations.
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
+		       Font_Size => 18,
+		       Style_Indent => 1800,
+		       Style_Hang_Width => 240,
+		       Style_Before => 0,
+		       Style_After => 90,
+		       Style_Justified => TRUE,
+		       Style_String_Prefix =>
+			 "\s56\widctlpar\adjustright",
+		       Style_String_Suffix => "\ri360\cgrid\qj\sl-190\slmult0\tx1080 \snext56 ");
+			  -- Note: Narrower space between.
 	    Set_Style (Heading_4_Info,
 		       Font => ARM_Output.Swiss,
 		       Body_Font => Output_Object.Body_Font,
@@ -1876,7 +1926,7 @@ package body ARM_RTF is
 		       Style_After => 100,
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
-			 "\s55\keepn\widctlpar\outlinelevel3\adjustright",
+			 "\s57\keepn\widctlpar\outlinelevel3\adjustright",
 		       Style_String_Suffix => "\b\ql\cgrid \sbasedon0 \snext0 ");
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
@@ -1889,7 +1939,7 @@ package body ARM_RTF is
 			   Style_After => 60,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s56\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s58\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font => ARM_Output.Swiss,
@@ -1900,7 +1950,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s57\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s59\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font => ARM_Output.Swiss,
@@ -1911,7 +1961,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s58\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s60\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_4_Info,
 		           Font => ARM_Output.Swiss,
@@ -1922,7 +1972,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s59\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s61\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_C_Text_Info,
@@ -1969,7 +2019,7 @@ package body ARM_RTF is
 		       Style_String_Suffix => "\ql");
 	end if;
 
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Normal));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Normal, 0));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Normal;}");
 	    -- Normal style.
 	Write_Style (Output_Object.Output_File, Heading_1_Info);
@@ -1982,103 +2032,107 @@ package body ARM_RTF is
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Category Header;}");
 	Write_Style (Output_Object.Output_File, Paragraph_Number_Info);
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Paragraph Number;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Notes));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small, 1));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Notes;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Annotations));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small, 2));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Annotations;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Examples));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Examples, 1));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Examples;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Examples));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Examples, 3));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Examples;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Syntax_Indented));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Normal, 1));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Syntax Indented;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Indented));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Normal, 3));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Normal Indented;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Indented));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small, 5));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Indented;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Hanging));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Wide_Hanging, 3));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Hanging;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Indented_Hanging));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Narrow_Hanging, 3));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Indented Hanging;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Hanging));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Wide_Hanging, 5));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Hanging;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Indented_Hanging));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Narrow_Hanging, 5));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Indented Hanging;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Bulleted));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Bulleted, 1));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Bulleted;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Nested_Bulleted));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Nested_Bulleted, 2));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Nested Bulleted;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Bulleted));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Bulleted, 3));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Bulleted;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Nested_Bulleted));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Nested_Bulleted, 4));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Nested Bulleted;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Indented_Bulleted));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Bulleted, 4));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Indented Bulleted;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Syntax_Indented_Bulleted));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Bulleted, 2));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Syntax Indented Bulleted;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Code_Indented_Bulleted));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Bulleted, 3));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Code Indented Bulleted;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Code_Indented));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Normal, 2));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Code Indented;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Code_Indented));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small, 4));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Code Indented;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Indented_Examples));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Examples, 4));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Indented Examples;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Indented_Examples));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Examples, 6));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Indented Examples;}");
 	Write_Style (Output_Object.Output_File, Header_Info);
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "header;}");
 	Write_Style (Output_Object.Output_File, Footer_Info);
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "footer;}");
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\*\cs30 \additive \sbasedon30 page number;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Index));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Index, 0));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Index;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Wide));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Wide_Above, 0));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Wide;}");
-        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Wide_Annotations));
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Wide_Above, 2));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Wide Annotations;}");
-        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Notes_Header));
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Header, 1));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Notes Header;}");
-        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Notes_Bulleted));
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Bulleted, 2));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Notes Bulleted;}");
-        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Notes_Nested_Bulleted));
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Nested_Bulleted, 3));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Notes Nested Bulleted;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Hanging_in_Bulleted));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Hanging_in_Bulleted, 3));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Hanging in Bulleted;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Hanging_in_Bulleted));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Hanging_in_Bulleted, 5));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Hanging in Bulleted;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Code_Indented_Nested_Bulleted));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Nested_Bulleted, 4));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Code Indented Bulleted;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Syntax_Summary));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Syntax_Summary, 1));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Syntax Summary;}");
-        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Enumerated));
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Enumerated, 1));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Enumerated;}");
-        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Enumerated));
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Enumerated, 3));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Enumerated;}");
-        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Nested_Enumerated));
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Enumerated, 2));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Nested Enumerated;}");
-        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Nested_Enumerated));
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Enumerated, 4));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Nested Enumerated;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Nested_X2_Bulleted));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Nested_Bulleted, 3));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Nested X2 Bulleted;}");
-        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Nested_X2_Bulleted));
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Nested_Bulleted, 5));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Nested X2 Bulleted;}");
-        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Indented_Nested_Bulleted));
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Nested_Bulleted, 5));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Indented Nested Bulleted;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Inner_Indented));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Normal, 4));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Inner Indented;}");
-        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Inner_Indented));
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small, 6));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Inner Indented;}");
-        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Syntax_Indented));
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small, 3));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Syntax Indented;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Swiss_Examples));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Swiss_Examples, 1));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Swiss Examples;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Swiss_Examples));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Swiss_Examples, 3));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Swiss Examples;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Swiss_Indented_Examples));
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Swiss_Examples, 4));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Swiss Indented Examples;}");
-        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Swiss_Indented_Examples));
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Swiss_Examples, 6));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Swiss Indented Examples;}");
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Enumerated, 3));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Nested X2 Enumerated;}");
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Enumerated, 5));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Nested X2 Enumerated;}");
         if Output_Object.Big_Files then
 	    Write_Style (Output_Object.Output_File, Heading_4_Info);
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "Heading 4;}");
@@ -2370,22 +2424,17 @@ package body ARM_RTF is
 
 
     procedure Set_Tabs (Output_Object : in out RTF_Output_Type;
-			Format : in ARM_Output.Paragraph_Type) is
+			Style         : in ARM_Output.Paragraph_Style_Type;
+			Indent        : in ARM_Output.Paragraph_Indent_Type) is
 	-- Set tabs in the current (just started) paragraph.
     begin
-	case Format is
-	    when ARM_Output.Normal | ARM_Output.Wide |
-		 ARM_Output.Notes | ARM_Output.Notes_Header |
-		 ARM_Output.Annotations | ARM_Output.Wide_Annotations |
+	case Style is
+	    when ARM_Output.Normal | ARM_Output.Wide_Above |
+		 ARM_Output.Small | ARM_Output.Small_Wide_Above |
+		 ARM_Output.Header | ARM_Output.Small_Header |
 		 ARM_Output.Index | ARM_Output.Syntax_Summary |
 		 ARM_Output.Examples | ARM_Output.Small_Examples |
-		 ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples |
-		 ARM_Output.Swiss_Examples | ARM_Output.Small_Swiss_Examples |
-		 ARM_Output.Swiss_Indented_Examples | ARM_Output.Small_Swiss_Indented_Examples |
-		 ARM_Output.Syntax_Indented | ARM_Output.Small_Syntax_Indented |
-		 ARM_Output.Indented | ARM_Output.Small_Indented |
-		 ARM_Output.Inner_Indented | ARM_Output.Small_Inner_Indented |
-		 ARM_Output.Code_Indented | ARM_Output.Small_Code_Indented =>
+		 ARM_Output.Swiss_Examples | ARM_Output.Small_Swiss_Examples =>
 		if Output_Object.Tab_Stops.Number /= 0 then
 		    if (Output_Object.Tab_Stops.Number * 8) + Output_Object.Char_Count >
 			LINE_LENGTH then
@@ -2398,7 +2447,7 @@ package body ARM_RTF is
 			begin
 			    if ARM_Output."="(Stop.Kind, ARM_Output.Left_Fixed) then
 			        return Stop.Stop*120 +
-			            Paragraph_Info(Format).Indent;
+			            Paragraph_Info(Style, Indent).Indent;
 			            -- *120 is to convert picas to Twips.
 			    else
 				-- Scale with font size. (Stop assumes 12 pt
@@ -2408,8 +2457,8 @@ package body ARM_RTF is
 				-- * (Paragraph_Info(Format).Size / 24) -- Font scale.
 				-- After rearranging, we get:
 				return
-			            Stop.Stop * Paragraph_Info(Format).Size * 5 +
-			            Paragraph_Info(Format).Indent;
+			            Stop.Stop * Paragraph_Info(Style, Indent).Size * 5 +
+			            Paragraph_Info(Style, Indent).Indent;
 			    end if;
 			end Stop_in_Twips;
 
@@ -2430,18 +2479,13 @@ package body ARM_RTF is
 		-- else no tabs defined.
 		end if;
 
-	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted | ARM_Output.Nested_X2_Bulleted |
-		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted | ARM_Output.Small_Nested_X2_Bulleted |
-		 ARM_Output.Indented_Bulleted | ARM_Output.Indented_Nested_Bulleted |
-		 ARM_Output.Code_Indented_Bulleted |
-		 ARM_Output.Code_Indented_Nested_Bulleted |
-		 ARM_Output.Syntax_Indented_Bulleted |
-		 ARM_Output.Notes_Bulleted | ARM_Output.Notes_Nested_Bulleted |
-		 ARM_Output.Hanging | ARM_Output.Indented_Hanging |
-		 ARM_Output.Small_Hanging | ARM_Output.Small_Indented_Hanging |
-		 ARM_Output.Hanging_in_Bulleted | ARM_Output.Small_Hanging_in_Bulleted |
-		 ARM_Output.Enumerated | ARM_Output.Small_Enumerated |
-		 ARM_Output.Nested_Enumerated | ARM_Output.Small_Nested_Enumerated =>
+	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted |
+		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted |
+		 ARM_Output.Wide_Hanging | ARM_Output.Narrow_Hanging |
+		 ARM_Output.Hanging_in_Bulleted |
+		 ARM_Output.Small_Wide_Hanging | ARM_Output.Small_Narrow_Hanging |
+		 ARM_Output.Small_Hanging_in_Bulleted |
+		 ARM_Output.Enumerated | ARM_Output.Small_Enumerated =>
 		if Output_Object.Tab_Stops.Number /= 0 then
 	            Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		        "Tabs in hanging/bulleted paragraph");
@@ -2451,8 +2495,9 @@ package body ARM_RTF is
 
 
     procedure Start_Paragraph (Output_Object : in out RTF_Output_Type;
-			       Format : in ARM_Output.Paragraph_Type;
-			       Number : in String;
+			       Style     : in ARM_Output.Paragraph_Style_Type;
+			       Indent    : in ARM_Output.Paragraph_Indent_Type;
+			       Number    : in String;
 			       No_Prefix : in Boolean := False;
 			       Tab_Stops : in ARM_Output.Tab_Info := ARM_Output.NO_TABS;
 			       No_Breaks : in Boolean := False;
@@ -2461,12 +2506,12 @@ package body ARM_RTF is
 				   := ARM_Output.Normal;
 			       Justification : in ARM_Output.Justification_Type
 				   := ARM_Output.Default) is
-	-- Start a new paragraph. The format of the paragraph is as specified.
-	-- The (AA)RM paragraph number (which might include update and version
-	-- numbers as well: [12.1/1]) is Number. If the format is a type with
-	-- a prefix (bullets, hangining items), the prefix is omitted if
-	-- No_Prefix is true. Tab_Stops defines the tab stops for the
-	-- paragraph. If No_Breaks is True, we will try to avoid page breaks
+	-- Start a new paragraph. The style and indent of the paragraph is as
+	-- specified. The (AA)RM paragraph number (which might include update
+	-- and version numbers as well: [12.1/1]) is Number. If the format is
+	-- a type with a prefix (bullets, hangining items), the prefix is
+	-- omitted if No_Prefix is true. Tab_Stops defines the tab stops for
+	-- the paragraph. If No_Breaks is True, we will try to avoid page breaks
 	-- in the paragraph. If Keep_with_Next is true, we will try to avoid
 	-- separating this paragraph and the next one. (These may have no
 	-- effect in formats that don't have page breaks). Space_After
@@ -2482,6 +2527,11 @@ package body ARM_RTF is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Already in paragraph");
 	end if;
+	if not Paragraph_Info(Style, Indent).Defined then
+	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		"Undefined Style " & ARM_Output.Paragraph_Style_Type'Image(Style) &
+		" and Indent:" & ARM_Output.Paragraph_Indent_Type'Image(Indent));
+	end if;
 	Output_Object.Is_In_Paragraph := True;
 	Output_Object.Had_Prefix := not No_Prefix;
 	Output_Object.Char_Count := 0;
@@ -2495,9 +2545,9 @@ package body ARM_RTF is
 	    -- Figure the space above: (We use a variable space above so the
 	    -- numbers align with the bottom of the text, not the top).
 	    declare
-		Diff : Natural := (Paragraph_Info(Format).Size -
+		Diff : Natural := (Paragraph_Info(Style, Indent).Size -
 				   Paragraph_Number_Info.Size) +
-				  (Paragraph_Info(Format).Before/10);
+				  (Paragraph_Info(Style, Indent).Before/10);
 		-- This would seem to be double the required adjustment for the
 		-- size, but it works. So why question it?
 	    begin
@@ -2520,52 +2570,37 @@ package body ARM_RTF is
 	    Output_Object.Char_Count := 0;
 	end if;
 	-- Now, write the paragraph header:
-	case Format is
-	    when ARM_Output.Normal | ARM_Output.Wide |
-		 ARM_Output.Notes | ARM_Output.Notes_Header |
-		 ARM_Output.Annotations | ARM_Output.Wide_Annotations |
+	case Style is
+	    when ARM_Output.Normal | ARM_Output.Wide_Above |
+		 ARM_Output.Small | ARM_Output.Small_Wide_Above |
+		 ARM_Output.Header | ARM_Output.Small_Header |
 		 ARM_Output.Index | ARM_Output.Syntax_Summary |
 		 ARM_Output.Examples | ARM_Output.Small_Examples |
-		 ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples |
-		 ARM_Output.Swiss_Examples | ARM_Output.Small_Swiss_Examples |
-		 ARM_Output.Swiss_Indented_Examples | ARM_Output.Small_Swiss_Indented_Examples |
-		 ARM_Output.Syntax_Indented | ARM_Output.Small_Syntax_Indented |
-		 ARM_Output.Indented | ARM_Output.Small_Indented |
-		 ARM_Output.Inner_Indented | ARM_Output.Small_Inner_Indented |
-		 ARM_Output.Code_Indented | ARM_Output.Small_Code_Indented =>
+		 ARM_Output.Swiss_Examples | ARM_Output.Small_Swiss_Examples =>
 		Write_Style_for_Paragraph (Output_Object.Output_File,
-		    Paragraph_Info(Format),
+		    Paragraph_Info(Style, Indent),
 		    Output_Object.Char_Count);
-	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted | ARM_Output.Nested_X2_Bulleted |
-		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted | ARM_Output.Small_Nested_X2_Bulleted |
-		 ARM_Output.Indented_Bulleted | ARM_Output.Indented_Nested_Bulleted |
-		 ARM_Output.Code_Indented_Bulleted |
-		 ARM_Output.Code_Indented_Nested_Bulleted |
-		 ARM_Output.Syntax_Indented_Bulleted |
-		 ARM_Output.Notes_Bulleted | ARM_Output.Notes_Nested_Bulleted =>
+	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted |
+		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted =>
 		Write_Style_for_Paragraph (Output_Object.Output_File,
-		    Paragraph_Info(Format),
+		    Paragraph_Info(Style, Indent),
 		    Output_Object.Char_Count);
 		if No_Prefix then
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "\tab ");
 		    Output_Object.Char_Count := Output_Object.Char_Count + 5;
 		else
-		    if ARM_Output."=" (Format, ARM_Output.Nested_Bulleted) or else
-		       ARM_Output."=" (Format, ARM_Output.Nested_X2_Bulleted) or else
-		       ARM_Output."=" (Format, ARM_Output.Code_Indented_Nested_Bulleted) or else
-		       ARM_Output."=" (Format, ARM_Output.Notes_Nested_Bulleted) or else
-		       ARM_Output."=" (Format, ARM_Output.Small_Nested_Bulleted) or else
-		       ARM_Output."=" (Format, ARM_Output.Small_Nested_X2_Bulleted) then
+		    if ARM_Output."=" (Style, ARM_Output.Nested_Bulleted) or else
+		       ARM_Output."=" (Style, ARM_Output.Small_Nested_Bulleted) then
 			-- Make a smaller bullet.
-		        if Paragraph_Info(Format).Size = 15 then
+		        if Paragraph_Info(Style, Indent).Size = 15 then
 	    	            Ada.Text_IO.Put (Output_Object.Output_File, "{\f3\fs12\'b7}\tab ");
-		        elsif Paragraph_Info(Format).Size = 16 then
+		        elsif Paragraph_Info(Style, Indent).Size = 16 then
 	    	            Ada.Text_IO.Put (Output_Object.Output_File, "{\f3\fs12\'b7}\tab ");
-		        elsif Paragraph_Info(Format).Size = 18 then
+		        elsif Paragraph_Info(Style, Indent).Size = 18 then
 	    	            Ada.Text_IO.Put (Output_Object.Output_File, "{\f3\fs14\'b7}\tab ");
-		        elsif Paragraph_Info(Format).Size = 20 then
+		        elsif Paragraph_Info(Style, Indent).Size = 20 then
 	    	            Ada.Text_IO.Put (Output_Object.Output_File, "{\f3\fs16\'b7}\tab ");
-		        else --if Paragraph_Info(Format).Size = 22 then
+		        else --if Paragraph_Info(Style, Indent).Size = 22 then
 	    	            Ada.Text_IO.Put (Output_Object.Output_File, "{\f3\fs18\'b7}\tab ");
 			end if;
 		        Output_Object.Char_Count := Output_Object.Char_Count + 19;
@@ -2574,13 +2609,14 @@ package body ARM_RTF is
 		        Output_Object.Char_Count := Output_Object.Char_Count + 14;
 		    end if;
 		end if;
-	    when ARM_Output.Hanging | ARM_Output.Indented_Hanging |
-		 ARM_Output.Small_Hanging | ARM_Output.Small_Indented_Hanging |
-		 ARM_Output.Hanging_in_Bulleted | ARM_Output.Small_Hanging_in_Bulleted |
-		 ARM_Output.Enumerated | ARM_Output.Small_Enumerated |
-		 ARM_Output.Nested_Enumerated | ARM_Output.Small_Nested_Enumerated =>
+
+	    when ARM_Output.Wide_Hanging | ARM_Output.Narrow_Hanging |
+		 ARM_Output.Hanging_in_Bulleted |
+		 ARM_Output.Small_Wide_Hanging | ARM_Output.Small_Narrow_Hanging |
+		 ARM_Output.Small_Hanging_in_Bulleted |
+		 ARM_Output.Enumerated | ARM_Output.Small_Enumerated =>
 		Write_Style_for_Paragraph (Output_Object.Output_File,
-		    Paragraph_Info(Format),
+		    Paragraph_Info(Style, Indent),
 		    Output_Object.Char_Count);
 		if No_Prefix then
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "\tab ");
@@ -2592,16 +2628,17 @@ package body ARM_RTF is
 		end if;
 	end case;
 
-	Output_Object.Paragraph_Format := Format;
+	Output_Object.Paragraph_Style := Style;
+	Output_Object.Paragraph_Indent := Indent;
 	Output_Object.Font := ARM_Output.Default;
 	Output_Object.Is_Bold := False;
 	Output_Object.Is_Italic := False;
 	Output_Object.Size := 0;
-	Output_Object.Real_Size := Paragraph_Info(Format).Size;
+	Output_Object.Real_Size := Paragraph_Info(Style,Indent).Size;
 	Output_Object.Tab_Stops := Tab_Stops;
 	Output_Object.Current_Space_After := Space_After;
 
-	Set_Tabs (Output_Object, Format);
+	Set_Tabs (Output_Object, Style, Indent);
 
 	if No_Breaks or Keep_with_Next then
 	    if Output_Object.Char_Count + 13 >
@@ -2621,7 +2658,7 @@ package body ARM_RTF is
 	if ARM_Output."=" (Space_After, ARM_Output.Narrow) then
 	    -- Reduce the following space by 30%:
 	    declare
-		SA : constant String := Natural'Image((Paragraph_Info(Format).After*(LEADING_PERCENT/10))/10);
+		SA : constant String := Natural'Image((Paragraph_Info(Style, Indent).After*(LEADING_PERCENT/10))/10);
 	    begin
 	        if Output_Object.Char_Count + 4 + SA'Length - 1 >
 		    LINE_LENGTH then
@@ -2636,7 +2673,7 @@ package body ARM_RTF is
 	elsif ARM_Output."=" (Space_After, ARM_Output.Wide) then
 	    -- Increase the following space by 50%:
 	    declare
-		SA : constant String := Natural'Image((Paragraph_Info(Format).After*(TRAILING_PERCENT/10))/10);
+		SA : constant String := Natural'Image((Paragraph_Info(Style, Indent).After*(TRAILING_PERCENT/10))/10);
 	    begin
 	        if Output_Object.Char_Count + 4 + SA'Length - 1 >
 		    LINE_LENGTH then
@@ -2672,12 +2709,11 @@ package body ARM_RTF is
 	    end case;
 	end if;
 	-- Start hang (last), so we get a clean count of prefix characters:
-	case Format is
-	    when ARM_Output.Hanging | ARM_Output.Indented_Hanging |
-		 ARM_Output.Small_Hanging | ARM_Output.Small_Indented_Hanging |
+	case Style is
+	    when ARM_Output.Wide_Hanging | ARM_Output.Narrow_Hanging |
+		 ARM_Output.Small_Wide_Hanging | ARM_Output.Small_Narrow_Hanging |
 		 ARM_Output.Hanging_in_Bulleted | ARM_Output.Small_Hanging_in_Bulleted |
-		 ARM_Output.Enumerated | ARM_Output.Small_Enumerated |
-		 ARM_Output.Nested_Enumerated | ARM_Output.Small_Nested_Enumerated =>
+		 ARM_Output.Enumerated | ARM_Output.Small_Enumerated =>
 		if not No_Prefix then
     	            Ada.Text_IO.New_Line (Output_Object.Output_File);
 	            Output_Object.Char_Count := 0;
@@ -3016,7 +3052,7 @@ package body ARM_RTF is
 	    if For_Start then
 		-- Create a Table of contents field:
 		Write_Style_for_Paragraph (Output_Object.Output_File,
-		    Paragraph_Info(ARM_Output.Normal),
+		    Paragraph_Info(ARM_Output.Normal, 0),
 		    Output_Object.Char_Count);
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File,
 		    "{\field\fldedit{\*\fldinst  TOC \\o ""1-3"" }{\fldrslt ");
@@ -3098,7 +3134,9 @@ package body ARM_RTF is
 	-- Set the font size to the most recently used one, because
 	-- otherwise this takes a 12 pt. space, much too large in some cases:
 	declare
-	    FS : constant String := Natural'Image(Paragraph_Info(Output_Object.Paragraph_Format).Size);
+	    FS : constant String := Natural'Image(
+		Paragraph_Info(Output_Object.Paragraph_Style,
+			       Output_Object.Paragraph_Indent).Size);
 	begin
             Ada.Text_IO.Put (Output_Object.Output_File, "\fs");
             Ada.Text_IO.Put (Output_Object.Output_File, FS(2..FS'Last));
@@ -3154,7 +3192,7 @@ package body ARM_RTF is
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "\trowd \trgaph108 ");
 
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "\trrh" &
-	    Format_Value(Paragraph_Info(ARM_Output.Normal).Size * 16) &
+	    Format_Value(Paragraph_Info(ARM_Output.Normal,0).Size * 16) &
 	    "\trleft" & Format_Value(Output_Object.Table_Indent) & " ");
 
 	if Output_Object.Table_Has_Border then
@@ -3588,9 +3626,9 @@ package body ARM_RTF is
 		"Not in paragraph");
 	end if;
 	if Ada.Strings.Fixed.Count (Text, Special_Set) = 0 and then
-	   (Output_Object.Paragraph_Format not in ARM_Output.Hanging ..
-	        ARM_Output.Small_Nested_Enumerated and then
-	        (not Output_Object.Saw_Hang_End)) then
+	   (Output_Object.Paragraph_Style not in
+	      ARM_Output.Text_Prefixed_Style_Subtype or else
+	        Output_Object.Saw_Hang_End) then
 		-- The second condition so that prefixes have their
 		-- characters counted properly...
 	    if Output_Object.Char_Count + Text'Length > LINE_LENGTH then
@@ -3665,8 +3703,8 @@ package body ARM_RTF is
 		    end if;
 	            Output_Object.Char_Count := Output_Object.Char_Count + 5;
 		end;
-		if Output_Object.Paragraph_Format in ARM_Output.Hanging ..
-		        ARM_Output.Small_Nested_Enumerated and then
+		if Output_Object.Paragraph_Style in
+		      ARM_Output.Text_Prefixed_Style_Subtype and then
 		   (not Output_Object.Saw_Hang_End) then
 		    if not Ada.Characters.Handling.Is_Lower (Char) then
 		        Output_Object.Prefix_Large_Char_Count :=
@@ -3678,8 +3716,8 @@ package body ARM_RTF is
 	    else
 	        Ada.Text_IO.Put (Output_Object.Output_File, Char);
 	        Output_Object.Char_Count := Output_Object.Char_Count + 1;
-		if Output_Object.Paragraph_Format in ARM_Output.Hanging ..
-		        ARM_Output.Small_Nested_Enumerated and then
+		if Output_Object.Paragraph_Style not in
+			ARM_Output.Text_Prefixed_Style_Subtype and then
 		   (not Output_Object.Saw_Hang_End) then
 --Ada.Text_Io.Put (Char);
 		    if Char in 'A' .. 'H' or else Char in 'J' .. 'Z' or else -- Capital 'I' is narrow.
@@ -3716,8 +3754,8 @@ package body ARM_RTF is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-	if Output_Object.Paragraph_Format in ARM_Output.Examples ..
-	        ARM_Output.Small_Indented_Examples then
+	if Output_Object.Paragraph_Style in ARM_Output.Examples ..
+	        ARM_Output.Small_Examples then
 	    -- Fixed width fonts; hard spaces seem to be a different width
 	    -- than regular ones. So use regular spaces.
             Ada.Text_IO.Put (Output_Object.Output_File, " ");
@@ -3745,7 +3783,7 @@ package body ARM_RTF is
 	    -- We can't use \Par in a table, or Word deadlocks.
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "\line ");
             Output_Object.Char_Count := 0;
-	elsif not Paragraph_Info(Output_Object.Paragraph_Format).Is_Justified then
+	elsif not Paragraph_Info(Output_Object.Paragraph_Style, Output_Object.Paragraph_Indent).Is_Justified then
 	    -- We can't use \Par, as that inserts paragraph spacing.
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "\line ");
             Output_Object.Char_Count := 0;
@@ -3755,7 +3793,7 @@ package body ARM_RTF is
 	        -- We have to turn off the inter-paragraph spacing.
 		-- Now, reset the \sa setting.
 	    declare
-		SA_Width : Natural := Paragraph_Info(Output_Object.Paragraph_Format).After;
+		SA_Width : Natural := Paragraph_Info(Output_Object.Paragraph_Style, Output_Object.Paragraph_Indent).After;
 	    begin
 		if ARM_Output."="(Output_Object.Current_Space_After,
 		   ARM_Output.Narrow) then
@@ -3773,8 +3811,8 @@ package body ARM_RTF is
                     Output_Object.Char_Count := 4 + SA'Length - 1;
 	        end;
 	    end;
-	    if (Output_Object.Paragraph_Format in ARM_Output.Bulleted ..
-	            ARM_Output.Small_Nested_Enumerated) then -- Always "NoPrefix" here.
+	    if (Output_Object.Paragraph_Style in ARM_Output.Bulleted ..
+	            ARM_Output.Small_Hanging_in_Bulleted) then -- Always "NoPrefix" here.
                 Ada.Text_IO.Put (Output_Object.Output_File, "\tab ");
                 Output_Object.Char_Count := Output_Object.Char_Count + 5;
 	    end if;
@@ -3798,7 +3836,8 @@ package body ARM_RTF is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-	if ARM_Output."/=" (Output_Object.Paragraph_Format, ARM_Output.Index) then
+	if ARM_Output."/=" (Output_Object.Paragraph_Style, ARM_Output.Index) or else
+	   ARM_Output."/=" (Output_Object.Paragraph_Indent, 0) then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in index paragraph");
 	end if;
@@ -3809,7 +3848,7 @@ package body ARM_RTF is
 	    -- Note: We need this special routine, because ending the paragraph
 	    -- would add blank lines to the HTML.
 	    End_Paragraph (Output_Object);
-	    Start_Paragraph (Output_Object, ARM_Output.Index,
+	    Start_Paragraph (Output_Object, ARM_Output.Index, Indent => 0,
 		Number => "", No_Breaks => True, Keep_with_Next => False,
 		Tab_Stops => Output_Object.Tab_Stops);
 	else
@@ -3982,8 +4021,8 @@ package body ARM_RTF is
 	        Ada.Text_IO.Put (Output_Object.Output_File, "\uc1\u304 I");
 	        Output_Object.Char_Count := Output_Object.Char_Count + 11;
 	end case;
-	if Output_Object.Paragraph_Format in ARM_Output.Hanging ..
-	        ARM_Output.Small_Nested_Enumerated and then
+	if Output_Object.Paragraph_Style in
+	      ARM_Output.Text_Prefixed_Style_Subtype and then
 	   (not Output_Object.Saw_Hang_End) then
 	        Output_Object.Prefix_Large_Char_Count :=
 	           Output_Object.Prefix_Large_Char_Count + 1;
@@ -4011,8 +4050,8 @@ package body ARM_RTF is
 	   Char_Code(2..Char_Code'Last) & ">");
         Output_Object.Char_Count := Output_Object.Char_Count + 9 + Len'Last-1 +
 	   (Char_Code'Last-1)*2;
-	if Output_Object.Paragraph_Format in ARM_Output.Hanging ..
-	        ARM_Output.Small_Nested_Enumerated and then
+	if Output_Object.Paragraph_Style in
+		ARM_Output.Text_Prefixed_Style_Subtype and then
 	   (not Output_Object.Saw_Hang_End) then
 	        Output_Object.Prefix_Large_Char_Count :=
 	           Output_Object.Prefix_Large_Char_Count + 1;
@@ -4022,8 +4061,8 @@ package body ARM_RTF is
 
     procedure End_Hang_Item (Output_Object : in out RTF_Output_Type) is
 	-- Marks the end of a hanging item. Call only once per paragraph.
-	-- Raises Not_Valid_Error if the paragraph format is not
-	-- Hanging .. Small_Nested_Enumerated, or if this has already been
+	-- Raises Not_Valid_Error if the paragraph style is not in
+	-- Text_Prefixed_Style_Subtype, or if this has already been
 	-- called for the current paragraph, or if the paragraph was started
 	-- with No_Prefix = True.
     begin
@@ -4035,8 +4074,7 @@ package body ARM_RTF is
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-	if Output_Object.Paragraph_Format not in ARM_Output.Hanging ..
-	        ARM_Output.Small_Nested_Enumerated then
+	if Output_Object.Paragraph_Style not in ARM_Output.Text_Prefixed_Style_Subtype then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not a hanging paragraph");
 	end if;
@@ -4048,16 +4086,17 @@ package body ARM_RTF is
 
 --Ada.Text_Io.Put (": Cnt=" & Natural'Image(Output_Object.Char_Count) & " Lrg=" &
 --   Natural'Image(Output_Object.Prefix_Large_Char_Count));
---Ada.Text_Io.Put (" Format=" & ARM_Output.Paragraph_Type'Image(Output_Object.Paragraph_Format));
+--Ada.Text_Io.Put (" Style=" & ARM_Output.Paragraph_Style_Type'Image(Output_Object.Paragraph_Style));
+--Ada.Text_Io.Put (" Indent=" & ARM_Output.Paragraph_Indent_Type'Image(Output_Object.Paragraph_Indent));
 --Ada.Text_Io.Put (" Count=" & Natural'Image(
---      ((Paragraph_Info(Output_Object.Paragraph_Format).Hang_Width * 6 * 2) /
---       (Paragraph_Info(Output_Object.Paragraph_Format).Size * 5   * 5)) - 1));
---Ada.Text_Io.Put (" Hang_Width=" & Natural'Image(Paragraph_Info(Output_Object.Paragraph_Format).Hang_Width));
---Ada.Text_Io.Put (" Size=" & Natural'Image(Paragraph_Info(Output_Object.Paragraph_Format).Size));
+--      ((Paragraph_Info(Output_Object.Paragraph_Style, Output_Object.Paragraph_Indent).Hang_Width * 6 * 2) /
+--       (Paragraph_Info(Output_Object.Paragraph_Style, Output_Object.Paragraph_Indent).Size * 5   * 5)) - 1));
+--Ada.Text_Io.Put (" Hang_Width=" & Natural'Image(Paragraph_Info(Output_Object.Paragraph_Style, Output_Object.Paragraph_Indent).Hang_Width));
+--Ada.Text_Io.Put (" Size=" & Natural'Image(Paragraph_Info(Output_Object.Paragraph_Style, Output_Object.Paragraph_Indent).Size));
 
         if Output_Object.Char_Count*2 + Output_Object.Prefix_Large_Char_Count
-	    <= ((Paragraph_Info(Output_Object.Paragraph_Format).Hang_Width * 6 * 2) /
-		(Paragraph_Info(Output_Object.Paragraph_Format).Size * 5   * 5)) - 1 then
+	    <= ((Paragraph_Info(Output_Object.Paragraph_Style, Output_Object.Paragraph_Indent).Hang_Width * 6 * 2) /
+		(Paragraph_Info(Output_Object.Paragraph_Style, Output_Object.Paragraph_Indent).Size * 5   * 5)) - 1 then
 	    -- No line break needed. (I can't find a way to get Word to do
 	    -- this properly, so we have to do it. We assume large characters
 	    -- are about 1 1/2 times normal characters, and that normal
@@ -4075,14 +4114,16 @@ package body ARM_RTF is
 	    --break cannot be used if the text is justified.
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\sa0\keepn\par }");
 	    Write_Style_for_Paragraph (Output_Object.Output_File,
-	        Paragraph_Info(Output_Object.Paragraph_Format),
+	        Paragraph_Info(Output_Object.Paragraph_Style, Output_Object.Paragraph_Indent),
 	        Output_Object.Char_Count);
-	    Set_Tabs (Output_Object, Output_Object.Paragraph_Format);
+	    Set_Tabs (Output_Object, Output_Object.Paragraph_Style,
+				Output_Object.Paragraph_Indent);
+
 	    -- Reset after spacing:
 	    if ARM_Output."="(Output_Object.Current_Space_After,
 	       ARM_Output.Narrow) then
 	        declare
-		    SA_Width : Natural := Paragraph_Info(Output_Object.Paragraph_Format).After*(LEADING_PERCENT/10)/10;
+		    SA_Width : Natural := Paragraph_Info(Output_Object.Paragraph_Style, Output_Object.Paragraph_Indent).After*(LEADING_PERCENT/10)/10;
 		    SA : constant String := Natural'Image(SA_Width);
 	        begin
                     Ada.Text_IO.Put (Output_Object.Output_File, "\sa");
@@ -4093,7 +4134,7 @@ package body ARM_RTF is
 	    elsif ARM_Output."="(Output_Object.Current_Space_After,
 	          ARM_Output.Wide) then
 	        declare
-		    SA_Width : Natural := Paragraph_Info(Output_Object.Paragraph_Format).After*(TRAILING_PERCENT/10)/10;
+		    SA_Width : Natural := Paragraph_Info(Output_Object.Paragraph_Style, Output_Object.Paragraph_Indent).After*(TRAILING_PERCENT/10)/10;
 		    SA : constant String := Natural'Image(SA_Width);
 	        begin
                     Ada.Text_IO.Put (Output_Object.Output_File, "\sa");

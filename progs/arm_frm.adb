@@ -240,6 +240,8 @@ package body ARM_Format is
     --  2/ 9/07 - RLB - Moved AI interpretation and folding to the HTML
     --			driver, as constructing the link should be its
     --			responsibility. This also allows new kinds of AI here.
+    --  2/13/07 - RLB - Redid output formating to use an explict indent;
+    --                  added ChildExample.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -293,8 +295,10 @@ package body ARM_Format is
 	 Bare_Annotation => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Wide_Above	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Example_Text	 => (Length =>  0, Str => (others => ' ')), -- Not used.
+	 Child_Example_Text => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Indented_Example_Text=>(Length =>  0, Str => (others => ' ')), -- Not used.
 	 Code_Indented	 => (Length =>  0, Str => (others => ' ')), -- Not used.
+	 Indent		 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Bulleted	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Nested_Bulleted => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Nested_X2_Bulleted=>(Length=>  0, Str => (others => ' ')), -- Not used.
@@ -353,8 +357,10 @@ package body ARM_Format is
 	 Bare_Annotation => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Wide_Above	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Example_Text	 => (Length =>  0, Str => (others => ' ')), -- Not used.
+	 Child_Example_Text => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Indented_Example_Text=>(Length =>  0, Str => (others => ' ')), -- Not used.
 	 Code_Indented	 => (Length =>  0, Str => (others => ' ')), -- Not used.
+	 Indent		 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Bulleted	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Nested_Bulleted => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Nested_X2_Bulleted=>(Length=>  0, Str => (others => ' ')), -- Not used.
@@ -1439,7 +1445,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 	        end if;
 	        ARM_Output.Start_Paragraph (Output_Object,
 				            ARM_Output.Normal,
-				            "",
+				            Indent => 0, Number => "",
 					    Justification => ARM_Output.Left);
 	        In_Paragraph := True;
 	    else
@@ -1448,7 +1454,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 		end if;
 	        ARM_Output.Start_Paragraph (Output_Object,
 				            ARM_Output.Normal,
-				            "",
+				            Indent => 0, Number => "",
 					    Justification => ARM_Output.Left);
 		In_Paragraph := True;
 	        if ARM_Contents."=" (Level, ARM_Contents.Section) then
@@ -1751,7 +1757,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 		    return False; -- Tables are never considered part of the
 			    -- AARM for formatting purposes, even when they are.
 	        when Wide_Above | Example_Text | Indented_Example_Text |
-		     Bulleted | Code_Indented |
+		     Child_Example_Text | Code_Indented | Indent |
+		     Bulleted |
 		     Nested_Bulleted | Nested_X2_Bulleted |
 		     Display | Syntax_Display |
 		     Syntax_Indented | Syntax_Production |
@@ -1760,9 +1767,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 		    -- Last_Paragraph_Subhead_Type should contain that.
 		    if Format_Object.Last_Paragraph_Subhead_Type = Wide_Above or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Example_Text or else
+		       Format_Object.Last_Paragraph_Subhead_Type = Child_Example_Text or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Indented_Example_Text or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Bulleted or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Code_Indented or else
+		       Format_Object.Last_Paragraph_Subhead_Type = Indent or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Nested_Bulleted or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Nested_X2_Bulleted or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Display or else
@@ -2000,6 +2009,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 
 	    procedure Set_Format (For_Type : Paragraph_Type) is
 
+		use type ARM_Output.Paragraph_Indent_Type;
+
 		function Enclosing_Format return Paragraph_Type is
 		begin
 		    for I in reverse 1 .. Format_State.Nesting_Stack_Ptr loop
@@ -2011,24 +2022,106 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		    return Plain; -- The default format.
 		end Enclosing_Format;
 
-		function Outer_Enclosing_Format return Paragraph_Type is
-		    -- Returns the second enclosing format:
+		function Enclosing_Indent return ARM_Output.Paragraph_Indent_Type is
+		    function Nested_Indent (Start_Nesting : in Natural) return ARM_Output.Paragraph_Indent_Type is
+		    begin
+		        for I in reverse 1 .. Start_Nesting loop
+			    if Format_State.Nesting_Stack(I).Command = Text_Begin and then
+			       (Format_State.Nesting_Stack(I).Is_Formatting) then
+				case Format_State.Nesting_Stack(I).Old_Next_Paragraph_Format is
+			       	    when Plain | Introduction |
+				         Resolution |
+				         Legality |
+				         Static_Semantics |
+				         Link_Time |
+				         Run_Time |
+				         Bounded_Errors |
+				         Erroneous |
+				         Requirements | -- ImplReq
+				         Documentation | -- DocReq
+				         Metrics |
+				         Permissions | -- ImplPerm
+				         Advice | -- ImplAdvice
+				         Examples =>
+					return 0; -- No indent.
+				    when Wide_Above =>
+					if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+					    return 2; -- Normal indent for annotations.
+					else
+					    return 0; -- No indent.
+					end if;
+				    when Syntax =>
+				        return 1; -- One unit.
+				    when Notes | Single_Note => -- Notes (only the numbering varies)
+				        return 1; -- One unit.
+				    when Element_Ref | Child_Ref | Usage_Note => -- Similar to an AARM note.
+				        return 2; -- Normal indent for annotations.
+				    when Language_Design | -- "MetaRules"
+				         Ada83_Inconsistencies | -- Inconsistent83
+				         Ada83_Incompatibilities | -- Incompatible83
+				         Ada83_Extensions | -- Extend83
+				         Ada83_Wording | -- DiffWord83
+				         Ada95_Inconsistencies | -- Inconsistent95
+				         Ada95_Incompatibilities | -- Incompatible95
+				         Ada95_Extensions | -- Extend95
+				         Ada95_Wording => -- DiffWord95
+				        return 2; -- Normal indent for annotations.
+		        	    when Reason | Ramification | Proof |
+					 Imp_Note | Corr_Change | Discussion |
+					 Honest | Glossary_Marker | Bare_Annotation =>
+				        return 2; -- Normal indent for annotations.
+				    when Example_Text =>
+					if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+					    return 3; -- Three units.
+					else
+					    return 1; -- One unit.
+					end if;
+				    when Child_Example_Text =>
+					return 1 + Nested_Indent(I-1); -- Depends on enclosing.
+		        	    when Indented_Example_Text =>
+				        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+				            return 6; -- Six units.
+				        else
+				            return 4; -- Four units.
+				        end if;
+		        	    when Code_Indented =>
+					if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+				            return 4; -- Four units.
+				        else
+				            return 2; -- Two units.
+				        end if;
+		        	    when Indent =>
+					return 1 + Nested_Indent(I-1); -- Depends on enclosing.
+				    when Bulleted | Nested_Bulleted | Nested_X2_Bulleted =>
+					return 1 + Nested_Indent(I-1); -- Depends on enclosing.
+		        	    when Display =>
+					return 1 + Nested_Indent(I-1); -- Depends on enclosing.
+		        	    when Syntax_Display =>
+					return 1; -- One unit.
+		        	    when Enumerated | Nested_Enumerated =>
+					return 1 + Nested_Indent(I-1); -- Depends on enclosing.
+		        	    when Syntax_Indented =>
+					return 1; -- One unit.
+		        	    when Syntax_Production =>
+					return Nested_Indent(I-1); -- Depends on enclosing.
+		        	    when Hanging_Indented =>
+		                        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+					    return 5; -- Five units.
+					else
+					    return 3; -- Three units.
+					end if;
+		        	    when In_Table =>
+		                        -- Shouldn't get here.
+					return 0; -- No indent.
+				end case;
+			    end if;
+		        end loop;
+		        return 0; -- No indent.
+		    end Nested_Indent;
+
 		begin
-		    for I in reverse 1 .. Format_State.Nesting_Stack_Ptr loop
-			if Format_State.Nesting_Stack(I).Command = Text_Begin and then
-			   (Format_State.Nesting_Stack(I).Is_Formatting) then
-			    -- OK, this is the FIRST enclosing format, now
-			    -- look for the next one:
-			    for J in reverse 1 .. I - 1 loop
-				if Format_State.Nesting_Stack(J).Command = Text_Begin and then
-				   (Format_State.Nesting_Stack(J).Is_Formatting) then
-				    return Format_State.Nesting_Stack(J).Old_Next_Paragraph_Format;
-				end if;
-			    end loop;
-			end if;
-		    end loop;
-		    return Plain; -- The default format.
-		end Outer_Enclosing_Format;
+		    return Nested_Indent (Format_State.Nesting_Stack_Ptr);
+		end Enclosing_Indent;
 
 	    begin
 		case For_Type is
@@ -2046,23 +2139,29 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		         Permissions | -- ImplPerm
 		         Advice | -- ImplAdvice
 		         Examples =>
-			Format_Object.Format := ARM_Output.Normal;
+			Format_Object.Style := ARM_Output.Normal;
+			Format_Object.Indent := 0; -- No indent.
 			Format_Object.No_Breaks := False;
 		    when Wide_Above =>
 			if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-			   Format_Object.Format := ARM_Output.Wide_Annotations;
+			    Format_Object.Style  := ARM_Output.Small_Wide_Above;
+			    Format_Object.Indent := 2; -- Two units.
 			else
-			   Format_Object.Format := ARM_Output.Wide;
+			    Format_Object.Style  := ARM_Output.Wide_Above;
+			    Format_Object.Indent := 0; -- No indent.
 			end if;
 			Format_Object.No_Breaks := False;
 		    when Syntax =>
-			Format_Object.Format := ARM_Output.Syntax_Indented;
+			Format_Object.Style  := ARM_Output.Normal;
+			Format_Object.Indent := 1; -- One unit.
 			Format_Object.No_Breaks := True;
 		    when Notes | Single_Note => -- Notes (only the numbering varies)
-			Format_Object.Format := ARM_Output.Notes;
+			Format_Object.Style  := ARM_Output.Small;
+			Format_Object.Indent := 1; -- One unit.
 			Format_Object.No_Breaks := False;
 		    when Element_Ref | Child_Ref | Usage_Note => -- Similar to an AARM note.
-			Format_Object.Format := ARM_Output.Annotations;
+			Format_Object.Style  := ARM_Output.Small;
+			Format_Object.Indent := 2; -- Two units.
 			Format_Object.No_Breaks := False;
 		    when Language_Design | -- "MetaRules"
 		         Ada83_Inconsistencies | -- Inconsistent83
@@ -2073,519 +2172,196 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		         Ada95_Incompatibilities | -- Incompatible95
 		         Ada95_Extensions | -- Extend95
 		         Ada95_Wording => -- DiffWord95
-			Format_Object.Format := ARM_Output.Annotations;
+			Format_Object.Style  := ARM_Output.Small;
+			Format_Object.Indent := 2; -- Two units.
 			Format_Object.No_Breaks := False;
         	    when Reason | Ramification | Proof |
 			 Imp_Note | Corr_Change | Discussion |
 			 Honest | Glossary_Marker | Bare_Annotation =>
-			Format_Object.Format := ARM_Output.Annotations;
+			Format_Object.Style  := ARM_Output.Small;
+			Format_Object.Indent := 2; -- Two units.
 			Format_Object.No_Breaks := False;
-        	    when Example_Text =>
-			case Format_Object.Examples_Font is
-			    when ARM_Output.Fixed | ARM_Output.Default =>
-			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-			           Format_Object.Format := ARM_Output.Small_Examples;
-			        else
-			           Format_Object.Format := ARM_Output.Examples;
-			        end if;
-			    when ARM_Output.Roman =>
-			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-				   Format_Object.Format := ARM_Output.Small_Syntax_Indented;
-			        else
-				   Format_Object.Format := ARM_Output.Syntax_Indented;
-			        end if;
-			    when ARM_Output.Swiss =>
-			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-				   Format_Object.Format := ARM_Output.Small_Swiss_Examples;
-			        else
-				   Format_Object.Format := ARM_Output.Swiss_Examples;
-			        end if;
-			end case;
-			Format_Object.No_Breaks := True;
 
-        	    when Indented_Example_Text =>
+        	    when Example_Text | Child_Example_Text |
+			Indented_Example_Text =>
 			case Format_Object.Examples_Font is
 			    when ARM_Output.Fixed | ARM_Output.Default =>
-				if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-				   Format_Object.Format := ARM_Output.Small_Indented_Examples;
-				else
-				   Format_Object.Format := ARM_Output.Indented_Examples;
-				end if;
+			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			           Format_Object.Style := ARM_Output.Small_Examples;
+			        else
+			           Format_Object.Style := ARM_Output.Examples;
+			        end if;
 			    when ARM_Output.Roman =>
 			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-				   Format_Object.Format := ARM_Output.Small_Inner_Indented;
+				   Format_Object.Style := ARM_Output.Small;
 			        else
-				   Format_Object.Format := ARM_Output.Inner_Indented;
+				   Format_Object.Style := ARM_Output.Normal;
 			        end if;
 			    when ARM_Output.Swiss =>
 			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-				   Format_Object.Format := ARM_Output.Small_Swiss_Indented_Examples;
-				else
-				   Format_Object.Format := ARM_Output.Swiss_Indented_Examples;
+				   Format_Object.Style := ARM_Output.Small_Swiss_Examples;
+			        else
+				   Format_Object.Style := ARM_Output.Swiss_Examples;
 			        end if;
 			end case;
 			Format_Object.No_Breaks := True;
+			if For_Type = Child_Example_Text then
+			    Format_Object.Indent := 1 + Enclosing_Indent;
+Ada.Text_IO.Put_Line ("&& Child example paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
+   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
+			elsif For_Type = Indented_Example_Text then
+			    if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			        Format_Object.Indent := 6; -- Fixed indent.
+			    else
+			        Format_Object.Indent := 4; -- Fixed indent.
+			    end if;
+			else
+			    if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			        Format_Object.Indent := 3; -- Fixed indent.
+			    else
+			        Format_Object.Indent := 1; -- Fixed indent.
+			    end if;
+			end if;
+
         	    when Code_Indented =>
 			if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-			   Format_Object.Format := ARM_Output.Small_Code_Indented;
+			    Format_Object.Style  := ARM_Output.Small;
+			    Format_Object.Indent := 4; -- Four units.
 			else
-			   Format_Object.Format := ARM_Output.Code_Indented;
+			    Format_Object.Style  := ARM_Output.Normal;
+			    Format_Object.Indent := 2; -- Two indent.
 			end if;
 			Format_Object.No_Breaks := False;
+
+        	    when Indent =>
+			if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			    Format_Object.Style  := ARM_Output.Small;
+			else
+			    Format_Object.Style  := ARM_Output.Normal;
+			end if;
+		        Format_Object.Indent := 1 + Enclosing_Indent;
+Ada.Text_IO.Put_Line ("&& Child Indented paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
+   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
+			Format_Object.No_Breaks := False;
+
         	    when Bulleted =>
-        		if Enclosing_Format = Code_Indented or else
-			   Enclosing_Format = Bulleted then
-			   -- We also have the Nested_Bulleted style for
-			   -- bullets nested inside of other bullets.
-			   Format_Object.Format := ARM_Output.Code_Indented_Bulleted;
-        		elsif Enclosing_Format = Hanging_Indented then
-			   Format_Object.Format := ARM_Output.Indented_Bulleted;
-                        elsif Enclosing_Format = Syntax_Indented or else
-			      Enclosing_Format = Syntax then
-			   Format_Object.Format := ARM_Output.Syntax_Indented_Bulleted;
-                        elsif Enclosing_Format = Notes or else
-			      Enclosing_Format = Single_Note then
-			   Format_Object.Format := ARM_Output.Notes_Bulleted;
-                        elsif Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-			   Format_Object.Format := ARM_Output.Small_Bulleted;
+			if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			    Format_Object.Style  := ARM_Output.Small_Bulleted;
 			else
-			   Format_Object.Format := ARM_Output.Bulleted;
+			    Format_Object.Style  := ARM_Output.Bulleted;
 			end if;
+		        Format_Object.Indent := 1 + Enclosing_Indent;
+Ada.Text_IO.Put_Line ("&& Regular bulleted paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
+   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 			Format_Object.No_Breaks := False;
+
         	    when Nested_Bulleted =>
-			if Enclosing_Format = Bulleted then
-			    -- The normal case. The format depends on the
-			    -- outer format:
-        		    if Outer_Enclosing_Format = Code_Indented or else
-			       Outer_Enclosing_Format = Bulleted then
-			       Format_Object.Format := ARM_Output.Code_Indented_Nested_Bulleted;
-        		    elsif Outer_Enclosing_Format = Hanging_Indented then
-			       Format_Object.Format := ARM_Output.Indented_Nested_Bulleted;
-                            elsif Outer_Enclosing_Format = Syntax_Indented or else
-			          Outer_Enclosing_Format = Syntax then
-Ada.Text_IO.Put_Line ("%% Oops, Nested_Bulleted in Syntax_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-			       Format_Object.Format := ARM_Output.Syntax_Indented_Bulleted;
-                            elsif Outer_Enclosing_Format = Notes or else
-				  Outer_Enclosing_Format = Single_Note then
-			       Format_Object.Format := ARM_Output.Notes_Nested_Bulleted;
-                            elsif Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-			       Format_Object.Format := ARM_Output.Small_Nested_Bulleted;
-			    else
-			       Format_Object.Format := ARM_Output.Nested_Bulleted;
-			    end if;
-			elsif Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-			   Format_Object.Format := ARM_Output.Small_Nested_Bulleted;
+			if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			    Format_Object.Style  := ARM_Output.Small_Nested_Bulleted;
 			else
-			   Format_Object.Format := ARM_Output.Nested_Bulleted;
+			    Format_Object.Style  := ARM_Output.Nested_Bulleted;
 			end if;
+		        Format_Object.Indent := 1 + Enclosing_Indent;
+Ada.Text_IO.Put_Line ("&& Nested bulleted paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
+   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 			Format_Object.No_Breaks := False;
+
         	    when Nested_X2_Bulleted =>
-			if Enclosing_Format = Nested_Bulleted then
-			    -- The normal case. The format depends on the
-			    -- outer format:
-        		    if Outer_Enclosing_Format = Code_Indented then
-Ada.Text_IO.Put_Line ("%% Oops, Nested_X2_Bulleted in Code_Indented paragraph, line " & ARM_Input.Line_String (Input_Object));
-			       Format_Object.Format := ARM_Output.Code_Indented_Nested_Bulleted;
-        		    elsif Outer_Enclosing_Format = Hanging_Indented then
-Ada.Text_IO.Put_Line ("%% Oops, Nested_X2_Bulleted in Indented_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-			       Format_Object.Format := ARM_Output.Indented_Bulleted;
-                            elsif Outer_Enclosing_Format = Syntax_Indented or else
-			          Outer_Enclosing_Format = Syntax then
-Ada.Text_IO.Put_Line ("%% Oops, Nested_X2_Bulleted in Syntax_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-			       Format_Object.Format := ARM_Output.Syntax_Indented_Bulleted;
-                            elsif Outer_Enclosing_Format = Notes or else
-				  Outer_Enclosing_Format = Single_Note then
-Ada.Text_IO.Put_Line ("%% Oops, Nested_X2_Bulleted in Notes paragraph, line " & ARM_Input.Line_String (Input_Object));
-			       Format_Object.Format := ARM_Output.Notes_Nested_Bulleted;
-                            elsif Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-			       Format_Object.Format := ARM_Output.Small_Nested_X2_Bulleted;
-			    else
-			       Format_Object.Format := ARM_Output.Nested_X2_Bulleted;
-			    end if;
-			elsif Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-			   Format_Object.Format := ARM_Output.Small_Nested_X2_Bulleted;
+			if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			    Format_Object.Style  := ARM_Output.Small_Nested_Bulleted;
 			else
-			   Format_Object.Format := ARM_Output.Nested_X2_Bulleted;
+			    Format_Object.Style  := ARM_Output.Nested_Bulleted;
 			end if;
+		        Format_Object.Indent := 1 + Enclosing_Indent;
+Ada.Text_IO.Put_Line ("&& Nested X2 bulleted paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
+   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 			Format_Object.No_Breaks := False;
+
         	    when Display =>
-			declare
-			    EF : Paragraph_Type := Enclosing_Format;
-			    use type ARM_Output.Paragraph_Type;
-			begin
-			    if EF = Display then
-				null; -- The existing format ought to be correct.
-				    -- But we'll go infinitely recursive in any
-				    -- case, so forget it.
-			    elsif EF = Bulleted or else EF = Nested_Bulleted or else
-				  EF = Nested_X2_Bulleted then
-				-- Formats that depend on Enclosing_Format can't
-				-- be recursively call Set_Format. However,
-				-- Display is never bulleted, so we can tell between
-				-- the original format, and ourselves.
-				if Format_Object.Format = ARM_Output.Indented_Bulleted then
-				    Format_Object.Format := ARM_Output.Inner_Indented;
-				        -- %%%% No additional indent and no right indent.
-Ada.Text_IO.Put_Line ("%% Oops, Display in Indented_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				elsif Format_Object.Format = ARM_Output.Indented_Nested_Bulleted then
-				    Format_Object.Format := ARM_Output.Inner_Indented;
-				        -- %%%% No additional indent and no right indent.
-Ada.Text_IO.Put_Line ("%% Oops, Display in Indented_Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				elsif Format_Object.Format = ARM_Output.Code_Indented_Bulleted then
-				    Format_Object.Format := ARM_Output.Inner_Indented;
-				elsif Format_Object.Format = ARM_Output.Syntax_Indented_Bulleted then
-				    Format_Object.Format := ARM_Output.Indented;
-				elsif Format_Object.Format = ARM_Output.Bulleted then
-				    Format_Object.Format := ARM_Output.Code_Indented;
-					-- No right indent, but usually Display is
-					-- not used for wrapping text. So we ignore that.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				elsif Format_Object.Format = ARM_Output.Small_Bulleted then
-				    Format_Object.Format := ARM_Output.Small_Code_Indented;
-					-- No right indent, but usually Display is
-					-- not used for wrapping text. So we ignore that.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Small_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				elsif Format_Object.Format = ARM_Output.Nested_Bulleted then
-				    Format_Object.Format := ARM_Output.Indented;
-					-- No right indent, but usually Display is
-					-- used with hard returns and short lines.
-					-- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				elsif Format_Object.Format = ARM_Output.Nested_X2_Bulleted then
-				    Format_Object.Format := ARM_Output.Inner_Indented;
-					-- No right indent, but usually Display is
-					-- used with hard returns and short lines.
-					-- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Nested_X2_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				elsif Format_Object.Format = ARM_Output.Code_Indented_Nested_Bulleted then
-				    Format_Object.Format := ARM_Output.Inner_Indented;
-				        -- %%%% No additional indent and no right indent).
-Ada.Text_IO.Put_Line ("%% Oops, Display in Code_Indented_Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				elsif Format_Object.Format = ARM_Output.Small_Nested_Bulleted then
-				    Format_Object.Format := ARM_Output.Small_Indented;
-					-- No right indent, but usually Display is
-					-- used with hard returns and short lines.
-					-- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Small_Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				elsif Format_Object.Format = ARM_Output.Small_Nested_X2_Bulleted then
-					-- No right indent, but usually Display is
-					-- used with hard returns and short lines.
-					-- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Small_Nested_X2_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				    Format_Object.Format := ARM_Output.Small_Inner_Indented;
-				else
-				    null; -- Probably ourselves.
-				end if;
-			    elsif EF = Hanging_Indented then
-				-- Formats that depend on Enclosing_Format can't
-				-- be recursively call Set_Format. However,
-				-- Display is never hanging, so we can tell between
-				-- the original format, and ourselves.
-				if Format_Object.Format = ARM_Output.Indented_Hanging then
-				    Format_Object.Format := ARM_Output.Inner_Indented;
-				elsif Format_Object.Format = ARM_Output.Hanging then
-				    Format_Object.Format := ARM_Output.Inner_Indented;
-				elsif Format_Object.Format = ARM_Output.Hanging_in_Bulleted then
-				    Format_Object.Format := ARM_Output.Inner_Indented;
-					-- No right indent, but usually Display is
-					-- used with hard returns and short lines.
-					-- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Hanging Bulleted), line " & ARM_Input.Line_String (Input_Object));
-				elsif Format_Object.Format = ARM_Output.Small_Hanging then
-				    Format_Object.Format := ARM_Output.Small_Inner_Indented;
-				elsif Format_Object.Format = ARM_Output.Small_Hanging_in_Bulleted then
-				    Format_Object.Format := ARM_Output.Small_Inner_Indented;
-					-- No right indent, but usually Display is
-					-- used with hard returns and short lines.
-					-- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Small Hanging Bulleted), line " & ARM_Input.Line_String (Input_Object));
-				else
-				    null; -- Probably ourselves.
-				end if;
-			    elsif EF = Enumerated then
-				-- Formats that depend on Enclosing_Format can't
-				-- be recursively call Set_Format. However,
-				-- Display is never hanging, so we can tell between
-				-- the original format, and ourselves.
-				if Format_Object.Format = ARM_Output.Enumerated then
-				    Format_Object.Format := ARM_Output.Code_Indented;
-					-- No right indent, but usually Display is
-					-- used with hard returns and short lines.
-					-- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object));
-				elsif Format_Object.Format = ARM_Output.Small_Enumerated then
-				    Format_Object.Format := ARM_Output.Small_Code_Indented;
-					-- No right indent, but usually Display is
-					-- used with hard returns and short lines.
-					-- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Small Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object));
-				elsif Format_Object.Format = ARM_Output.Nested_Enumerated then
-				    Format_Object.Format := ARM_Output.Indented;
-					-- No right indent, but usually Display is
-					-- used with hard returns and short lines.
-					-- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Nested Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object));
-				elsif Format_Object.Format = ARM_Output.Small_Nested_Enumerated then
-				    Format_Object.Format := ARM_Output.Small_Indented;
-					-- No right indent, but usually Display is
-					-- used with hard returns and short lines.
-					-- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Small Nested Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object));
-				else
-				    null; -- Probably ourselves.
-				end if;
-			    else
-			        Set_Format (EF); -- Get the enclosing format, if any.
-				    -- We have to do this because we can't
-				    -- read the current format: if this was
-				    -- a previous Display paragraph (as might
-				    -- happen if another format intervened),
-				    -- we'll get the wrong answer.
-				case Format_Object.Format is
-				    when ARM_Output.Normal =>
-				        Format_Object.Format := ARM_Output.Syntax_Indented;
-				    when ARM_Output.Wide =>
-				        Format_Object.Format := ARM_Output.Syntax_Indented;
-Ada.Text_IO.Put_Line ("%% Oops, Display in Wide paragraph, line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Notes | ARM_Output.Notes_Header =>
-				        Format_Object.Format := ARM_Output.Annotations;
-				    when ARM_Output.Annotations =>
-					Format_Object.Format := ARM_Output.Small_Syntax_Indented;
-				    when ARM_Output.Wide_Annotations =>
-					Format_Object.Format := ARM_Output.Small_Syntax_Indented;
-Ada.Text_IO.Put_Line ("%% Oops, Display in Wide_Annotated paragraph, line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Index =>
-					Format_Object.Format := ARM_Output.Index;
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph in Index, line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Syntax_Summary =>
-					Format_Object.Format := ARM_Output.Syntax_Summary;
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph in Syntax Summary, line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Examples | ARM_Output.Swiss_Examples =>
-					Format_Object.Format := ARM_Output.Code_Indented;
-				    when ARM_Output.Small_Examples | ARM_Output.Small_Swiss_Examples =>
-					Format_Object.Format := ARM_Output.Small_Code_Indented;
-				    when ARM_Output.Indented_Examples | ARM_Output.Swiss_Indented_Examples =>
-				        Format_Object.Format := ARM_Output.Inner_Indented;
-				        -- %%%% No additional indent.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Indented Examples), line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Small_Indented_Examples | ARM_Output.Small_Swiss_Indented_Examples =>
-				        Format_Object.Format := ARM_Output.Small_Inner_Indented;
-				        -- %%%% No additional indent.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Small Indented Examples), line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Syntax_Indented =>
-				        Format_Object.Format := ARM_Output.Code_Indented;
-				    when ARM_Output.Small_Syntax_Indented =>
-				        Format_Object.Format := ARM_Output.Small_Code_Indented;
-				    when ARM_Output.Code_Indented =>
-				        Format_Object.Format := ARM_Output.Indented;
-				    when ARM_Output.Small_Code_Indented =>
-				        Format_Object.Format := ARM_Output.Small_Indented;
-				    when ARM_Output.Indented =>
-				        Format_Object.Format := ARM_Output.Inner_Indented;
-				    when ARM_Output.Small_Indented =>
-				        Format_Object.Format := ARM_Output.Small_Inner_Indented;
-				    when ARM_Output.Inner_Indented | ARM_Output.Small_Inner_Indented =>
-				        null; -- %%%% Not Indented further.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Inner Indented), line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Bulleted =>
-				        Format_Object.Format := ARM_Output.Code_Indented;
-					    -- No right indent, but usually Display is
-					    -- used with hard returns and short lines.
-					    -- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Nested_Bulleted =>
-				        Format_Object.Format := ARM_Output.Indented;
-					    -- No right indent, but usually Display is
-					    -- used with hard returns and short lines.
-					    -- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Nested_X2_Bulleted =>
-				        Format_Object.Format := ARM_Output.Inner_Indented;
-					    -- No right indent, but usually Display is
-					    -- used with hard returns and short lines.
-					    -- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Nested_X2_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Indented_Bulleted =>
-				        Format_Object.Format := ARM_Output.Inner_Indented;
-					    -- %%%% Not indented further and no right indent!
-Ada.Text_IO.Put_Line ("%% Oops, Display in Indented_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Indented_Nested_Bulleted =>
-				        Format_Object.Format := ARM_Output.Inner_Indented;
-					    -- %%%% Not Indented enough and no right indent!
-Ada.Text_IO.Put_Line ("%% Oops, Display in Indented_Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Code_Indented_Bulleted =>
-				        Format_Object.Format := ARM_Output.Inner_Indented;
-				    when ARM_Output.Code_Indented_Nested_Bulleted =>
-				        Format_Object.Format := ARM_Output.Inner_Indented;
-				            -- %%%% No additional indent.
-Ada.Text_IO.Put_Line ("%% No indentation for Display paragraph (Code Indented Nested Bulleted), line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Syntax_Indented_Bulleted =>
-				        Format_Object.Format := ARM_Output.Indented;
-				    when ARM_Output.Notes_Bulleted =>
-				        Format_Object.Format := ARM_Output.Small_Indented;
-				    when ARM_Output.Notes_Nested_Bulleted =>
-				        Format_Object.Format := ARM_Output.Small_Inner_Indented;
-				    when ARM_Output.Small_Bulleted =>
-				        Format_Object.Format := ARM_Output.Small_Code_Indented;
-					    -- No right indent, but usually Display is
-					    -- used with hard returns and short lines.
-					    -- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Small_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Small_Nested_Bulleted =>
-				        Format_Object.Format := ARM_Output.Small_Indented;
-					    -- No right indent, but usually Display is
-					    -- used with hard returns and short lines.
-					    -- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Small_Nested_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Small_Nested_X2_Bulleted =>
-				        Format_Object.Format := ARM_Output.Small_Inner_Indented;
-					    -- No right indent, but usually Display is
-					    -- used with hard returns and short lines.
-					    -- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Small_Nested_X2_Bulleted paragraph, line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Hanging =>
-				        Format_Object.Format := ARM_Output.Inner_Indented;
-				    when ARM_Output.Small_Hanging =>
-				        Format_Object.Format := ARM_Output.Small_Inner_Indented;
-				    when ARM_Output.Indented_Hanging =>
-				        Format_Object.Format := ARM_Output.Inner_Indented;
-				    when ARM_Output.Small_Indented_Hanging =>
-				        Format_Object.Format := ARM_Output.Small_Inner_Indented;
-				    when ARM_Output.Hanging_in_Bulleted =>
-				        Format_Object.Format := ARM_Output.Inner_Indented;
-					    -- No right indent, but usually Display is
-					    -- used with hard returns and short lines.
-					    -- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indentation for Display paragraph (Hanging in Bulleted), line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Small_Hanging_in_Bulleted =>
-				        Format_Object.Format := ARM_Output.Small_Inner_Indented;
-					    -- No right indent, but usually Display is
-					    -- used with hard returns and short lines.
-					    -- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indentation for Display paragraph (Small Hanging in Bulleted), line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Enumerated =>
-				        Format_Object.Format := ARM_Output.Code_Indented;
-					    -- No right indent, but usually Display is
-					    -- used with hard returns and short lines.
-					    -- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Small_Enumerated =>
-				        Format_Object.Format := ARM_Output.Small_Code_Indented;
-					    -- No right indent, but usually Display is
-					    -- used with hard returns and short lines.
-					    -- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Small Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Nested_Enumerated =>
-				        Format_Object.Format := ARM_Output.Indented;
-					    -- No right indent, but usually Display is
-					    -- used with hard returns and short lines.
-					    -- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for in Nested Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object));
-				    when ARM_Output.Small_Nested_Enumerated =>
-				        Format_Object.Format := ARM_Output.Small_Indented;
-					    -- No right indent, but usually Display is
-					    -- used with hard returns and short lines.
-					    -- So we ignore the right indent.
---Ada.Text_IO.Put_Line ("%% No right indent for Display in Small Nested Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object));
-				end case;
-			    end if;
-			    Format_Object.No_Breaks := True;
-			end;
-        	    when Syntax_Display =>
-			Format_Object.Format := ARM_Output.Syntax_Summary;
-			Format_Object.No_Breaks := True;
-        	    when Enumerated =>
---Ada.Text_IO.Put_Line ("Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format));
-        		if Enclosing_Format = Enumerated then
-			    -- Nesting of enumerated lists should be discouraged,
-			    -- so we assume this is ourselves.
-			    -- But if the format isn't an enumerated one,
-			    -- we've probably just exited some nested item.
-			    if Format_Object.Format in ARM_Output.Enumerated .. ARM_Output.Small_Nested_Enumerated then
-				-- An enumerated format.
-Ada.Text_IO.Put_Line ("%% Enumerated paragraph seems to be nested or ourselves, nothing done.");
-			        null;
-			    else -- ** Ugh, don't know the nesting; we assume none.
-Ada.Text_IO.Put_Line ("%% Unknown nesting for enumerated paragraph, assume none.");
-                                if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-			           Format_Object.Format := ARM_Output.Small_Enumerated;
-			        else
-			           Format_Object.Format := ARM_Output.Enumerated;
-			        end if;
-			    end if;
-        		elsif Enclosing_Format = Code_Indented or else
-			   Enclosing_Format = Bulleted then
-Ada.Text_IO.Put_Line ("%% Enumerated paragraph in code indented or bulleted, not nested enough");
---Should be something like Nested_X2_Enumerated.
-			   if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-			       Format_Object.Format := ARM_Output.Small_Nested_Enumerated;
-			   else
-			       Format_Object.Format := ARM_Output.Nested_Enumerated;
-			   end if;
-                        elsif Enclosing_Format = Syntax_Indented or else
-			      Enclosing_Format = Syntax then
-			   -- Correct indent.
-			   if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-			       Format_Object.Format := ARM_Output.Small_Nested_Enumerated;
-			   else
-			       Format_Object.Format := ARM_Output.Nested_Enumerated;
-			   end if;
-			elsif Enclosing_Format = Notes or else
-			      Enclosing_Format = Single_Note then
-			    -- This might be a bit too nested, but we don't
-			    -- have anything else.
---Ada.Text_IO.Put_Line ("-- Enumerated paragraph, in notes");
-			    Format_Object.Format := ARM_Output.Small_Nested_Enumerated;
+			if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			    Format_Object.Style  := ARM_Output.Small;
 			else
---Ada.Text_IO.Put_Line ("%% Enumerated paragraph, in other format:" & Paragraph_Type'Image(Enclosing_Format));
-                            if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-			       Format_Object.Format := ARM_Output.Small_Enumerated;
-			    else
-			       Format_Object.Format := ARM_Output.Enumerated;
-			    end if;
+			    Format_Object.Style  := ARM_Output.Normal;
 			end if;
+		        Format_Object.Indent := 1 + Enclosing_Indent;
+Ada.Text_IO.Put_Line ("&& Display paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
+   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
+			Format_Object.No_Breaks := True;
+
+        	    when Syntax_Display =>
+			Format_Object.Style := ARM_Output.Small;
+		        Format_Object.Indent := 1;
+			Format_Object.No_Breaks := True;
+
+        	    when Enumerated =>
+			if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			    Format_Object.Style  := ARM_Output.Small_Enumerated;
+			else
+			    Format_Object.Style  := ARM_Output.Enumerated;
+			end if;
+		        Format_Object.Indent := 1 + Enclosing_Indent;
+Ada.Text_IO.Put_Line ("&& Regular enumerated paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
+   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 			Format_Object.No_Breaks := False;
+
         	    when Nested_Enumerated =>
---Ada.Text_IO.Put_Line ("Nested Enumerated paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format));
-		        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-			    Format_Object.Format := ARM_Output.Small_Nested_Enumerated;
-		        else
-			    Format_Object.Format := ARM_Output.Nested_Enumerated;
-		        end if;
+			if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			    Format_Object.Style  := ARM_Output.Small_Enumerated;
+			else
+			    Format_Object.Style  := ARM_Output.Enumerated;
+			end if;
+		        Format_Object.Indent := 1 + Enclosing_Indent;
+Ada.Text_IO.Put_Line ("&& Nested enumerated paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
+   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
+			-- Note: The difference here is the numbering, not the
+			-- layout.
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 			Format_Object.No_Breaks := False;
+
         	    when Syntax_Indented =>
-			Format_Object.Format := ARM_Output.Syntax_Indented;
+			Format_Object.Style := ARM_Output.Normal;
+			Format_Object.Indent := 1; -- One unit.
 			Format_Object.No_Breaks := False;
         	    when Syntax_Production =>
 			null; -- Leave format alone (but line-breaks are preserved).
 			Format_Object.No_Breaks := True;
+
         	    when Hanging_Indented =>
                         if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
         		    if Enclosing_Format = Code_Indented or else
+        		       Enclosing_Format = Indent or else
         		       Enclosing_Format = Hanging_Indented or else
                                Enclosing_Format = Syntax_Indented or else
 			       Enclosing_Format = Syntax then
-			       Format_Object.Format := ARM_Output.Small_Indented_Hanging;
-        		    elsif Enclosing_Format = Bulleted then
-			       Format_Object.Format := ARM_Output.Small_Hanging_in_Bulleted;
+			        Format_Object.Style  := ARM_Output.Small_Narrow_Hanging;
+			        Format_Object.Indent := 5; -- Five units.
+        		    elsif Enclosing_Format = Bulleted or else
+        		          Enclosing_Format = Enumerated then
+			        Format_Object.Style  := ARM_Output.Small_Hanging_in_Bulleted;
+			        Format_Object.Indent := 5; -- Five units.
 			    else
-			       Format_Object.Format := ARM_Output.Small_Hanging;
+			        Format_Object.Style  := ARM_Output.Small_Wide_Hanging;
+			        Format_Object.Indent := 5; -- Five units.
 			    end if;
 			else -- Normal:
         		    if Enclosing_Format = Code_Indented or else
+        		       Enclosing_Format = Indent or else
         		       Enclosing_Format = Hanging_Indented or else
                                Enclosing_Format = Syntax_Indented or else
 			       Enclosing_Format = Syntax then
-			       Format_Object.Format := ARM_Output.Indented_Hanging;
-        		    elsif Enclosing_Format = Bulleted then
-			       Format_Object.Format := ARM_Output.Hanging_in_Bulleted;
+			        Format_Object.Style  := ARM_Output.Narrow_Hanging;
+			        Format_Object.Indent := 3; -- Three units.
+        		    elsif Enclosing_Format = Bulleted or else
+        		          Enclosing_Format = Enumerated then
+			        Format_Object.Style  := ARM_Output.Hanging_in_Bulleted;
+			        Format_Object.Indent := 3; -- Three units.
 			    else
-			       Format_Object.Format := ARM_Output.Hanging;
+			        Format_Object.Style  := ARM_Output.Wide_Hanging;
+			        Format_Object.Indent := 3; -- Three units.
 			    end if;
 			end if;
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
@@ -2593,10 +2369,11 @@ Ada.Text_IO.Put_Line ("%% Enumerated paragraph in code indented or bulleted, not
         	    when In_Table =>
                         -- Shouldn't get here.
 			if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-			    Format_Object.Format := ARM_Output.Annotations;
+			    Format_Object.Style := ARM_Output.Small;
 			else
-			    Format_Object.Format := ARM_Output.Normal;
+			    Format_Object.Style := ARM_Output.Normal;
 			end if;
+			Format_Object.Indent := 0; -- No indent.
 			Format_Object.No_Breaks := False;
 		end case;
 	    end Set_Format;
@@ -2625,8 +2402,9 @@ Ada.Text_IO.Put_Line ("%% Enumerated paragraph in code indented or bulleted, not
 			if not Format_Object.Use_ISO_2004_Note_Format then
 			    -- The Notes header looks different from the others.
 		            ARM_Output.Start_Paragraph (Output_Object,
-					                Format => ARM_Output.Notes_Header,
-					                Number => "",
+					                Style  => ARM_Output.Small_Header,
+					                Indent => 1,
+							Number => "",
 						        No_Breaks => True,
 						        Keep_with_Next => True);
 			    ARM_Output.Ordinary_Text (Output_Object, Paragraph_Kind_Title(For_Type).Str(1..Paragraph_Kind_Title(For_Type).Length));
@@ -2653,9 +2431,10 @@ Ada.Text_IO.Put_Line ("%% Enumerated paragraph in code indented or bulleted, not
         	    when Reason | Ramification | Proof |
 			 Imp_Note | Corr_Change | Discussion |
 			 Honest | Glossary_Marker | Bare_Annotation |
-			 Wide_Above | Example_Text |
-			 Indented_Example_Text | Code_Indented | Bulleted |
-			 Nested_Bulleted | Nested_X2_Bulleted | Display |
+			 Wide_Above | Example_Text | Child_Example_Text |
+			 Indented_Example_Text | Code_Indented | Indent |
+			 Bulleted | Nested_Bulleted | Nested_X2_Bulleted |
+			 Display |
 			 Syntax_Display | Syntax_Indented | Syntax_Production |
 			 Hanging_Indented | Enumerated | Nested_Enumerated |
 			 In_Table =>
@@ -2723,8 +2502,9 @@ Ada.Text_IO.Put_Line ("%% Enumerated paragraph in code indented or bulleted, not
 		    when Bare_Annotation =>
 			null; -- Header (if any) is generated elsewhere.
 		    when Wide_Above |
-			 Example_Text | Indented_Example_Text |
-			 Code_Indented | Bulleted | Nested_Bulleted | Nested_X2_Bulleted |
+			 Example_Text | Child_Example_Text | Indented_Example_Text |
+			 Code_Indented | Indent |
+			 Bulleted | Nested_Bulleted | Nested_X2_Bulleted |
 			 Display | Syntax_Display |
 			 Syntax_Indented | Syntax_Production |
 			 Hanging_Indented | Enumerated | Nested_Enumerated |
@@ -2836,8 +2616,9 @@ Ada.Text_IO.Put_Line ("%% Enumerated paragraph in code indented or bulleted, not
 Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 		    else
 		        ARM_Output.Start_Paragraph (Output_Object,
-					            Format => Format_Object.Format,
-					            Number => Format_Object.Current_Paragraph_String (1 .. Format_Object.Current_Paragraph_Len),
+					            Style     => Format_Object.Style,
+					            Indent    => Format_Object.Indent,
+					            Number    => Format_Object.Current_Paragraph_String (1 .. Format_Object.Current_Paragraph_Len),
 					            No_Prefix => Format_Object.No_Prefix,
 					            Tab_Stops => Format_Object.Paragraph_Tab_Stops,
 					            No_Breaks => Format_Object.No_Breaks or Format_Object.In_Bundle,
@@ -2863,6 +2644,18 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 			        -- so that complete paragraph deletions are obvious,
 			        -- and also so that we can use revision bars rather than
 			        -- displaying the changes in the RM version.
+				if ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) and then
+				    (Format_Object.Next_Paragraph_Format_Type = Enumerated or else
+				     Format_Object.Next_Paragraph_Format_Type = Nested_Enumerated or else
+				     Format_Object.Next_Paragraph_Format_Type = Hanging_Indented) then
+				    -- We're in a hanging style, we need to end hanging first.
+				    -- Nothing else will be displayed; if we didn't end the hang this
+				    -- would end up on the same line as the next paragraph.
+				    -- It's possible that we could have a problem with
+				    -- hanging in one of the other cases if no text will be
+				    -- displayed, but there is no way to know that here.
+				    ARM_Output.End_Hang_Item (Output_Object);
+				end if;
 			        ARM_Output.Text_Format (Output_Object,
 					    Bold => Format_Object.Is_Bold,
 					    Italic => True,
@@ -2893,8 +2686,9 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 --Ada.Text_IO.Put_Line ("Check_Paragraph, no number: format= " & Paragraph_Type'Image(Format_Object.Next_Paragraph_Format_Type) &
 --   " output format= " & ARM_Output.Paragraph_Type'Image(Format_Object.Format));
 		    ARM_Output.Start_Paragraph (Output_Object,
-				                Format => Format_Object.Format,
-						Number => "",
+				                Style     => Format_Object.Style,
+				                Indent    => Format_Object.Indent,
+						Number    => "",
 						No_Prefix => Format_Object.No_Prefix,
 						Tab_Stops => Format_Object.Paragraph_Tab_Stops,
 						No_Breaks => Format_Object.No_Breaks or Format_Object.In_Bundle,
@@ -3199,7 +2993,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 	    Check_End_Paragraph;
 
 	    -- Insert a blank paragraph:
-            ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Normal, Number => "");
+            ARM_Output.Start_Paragraph (Output_Object, ARM_Output.Normal,
+					Indent => 0, Number => "");
 	    ARM_Output.Hard_Space (Output_Object);
             ARM_Output.End_Paragraph (Output_Object);
 
@@ -3495,12 +3290,20 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 		Format_Object.Next_Paragraph_Format_Type := Example_Text;
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "childexample" then
+		Format_Object.Next_Paragraph_Format_Type := Child_Example_Text;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "descexample" then
 		Format_Object.Next_Paragraph_Format_Type := Indented_Example_Text;
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "describecode" then
 		Format_Object.Next_Paragraph_Format_Type := Code_Indented;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "indent" then
+		Format_Object.Next_Paragraph_Format_Type := Indent;
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "itemize" then
@@ -7357,8 +7160,9 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 		    -- contents are desired.
 		    Check_End_Paragraph; -- End any paragraph that we're in.
 		    ARM_Output.Start_Paragraph (Output_Object,
-			     Format => ARM_Output.Wide,
-			     Number => "",
+			     Style     => ARM_Output.Wide_Above,
+			     Indent    => 0,
+			     Number    => "",
 			     No_Breaks => True, Keep_with_Next => True);
 		    Format_Object.In_Paragraph := True;
 		    Format_Object.No_Start_Paragraph := False;
@@ -7414,7 +7218,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 		        elsif Disposition = ARM_Output.None then
 			    -- Normal text:
 		            ARM_Output.Start_Paragraph (Output_Object,
-		                 Format => ARM_Output.Wide,
+		                 Style  => ARM_Output.Wide_Above,
+				 Indent => 0,
 		                 Number => "",
 		                 No_Breaks => True, Keep_with_Next => True);
 		            Format_Object.In_Paragraph := True;
@@ -7440,7 +7245,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 		            raise Program_Error; -- A deletion inside of an insertion command!
 		        else -- Insertion.
 		            ARM_Output.Start_Paragraph (Output_Object,
-		                 Format => ARM_Output.Wide,
+		                 Style  => ARM_Output.Wide_Above,
+				 Indent => 0,
 		                 Number => "",
 		                 No_Breaks => True, Keep_with_Next => True);
 		            Format_Object.In_Paragraph := True;
@@ -7472,7 +7278,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 		    -- contents are desired.
 		    Check_End_Paragraph; -- End any paragraph that we're in.
 		    ARM_Output.Start_Paragraph (Output_Object,
-			     Format => ARM_Output.Wide,
+			     Style  => ARM_Output.Wide_Above,
+			     Indent => 0,
 			     Number => "",
 			     No_Breaks => True, Keep_with_Next => True,
 			     Justification => ARM_Output.Center);
@@ -7499,7 +7306,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 		when Center =>
 		    Check_End_Paragraph; -- End any paragraph that we're in.
 		    ARM_Output.Start_Paragraph (Output_Object,
-			     Format => ARM_Output.Normal,
+			     Style  => ARM_Output.Normal,
+			     Indent => 0,
 			     Number => "",
 			     No_Breaks => True, Keep_with_Next => False,
 			     Justification => ARM_Output.Center);
@@ -7509,7 +7317,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 		when Right =>
 		    Check_End_Paragraph; -- End any paragraph that we're in.
 		    ARM_Output.Start_Paragraph (Output_Object,
-			     Format => ARM_Output.Normal,
+			     Style  => ARM_Output.Normal,
+			     Indent => 0,
 			     Number => "",
 			     No_Breaks => True, Keep_with_Next => False,
 			     Justification => ARM_Output.Right);
@@ -10787,6 +10596,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 		        if Char /= Ascii.LF then
 			    -- Soft line break.
 			    if Format_Object.Next_Paragraph_Format_Type = Example_Text or else
+			       Format_Object.Next_Paragraph_Format_Type = Child_Example_Text or else
 			       Format_Object.Next_Paragraph_Format_Type = Indented_Example_Text or else
 			       Format_Object.Next_Paragraph_Format_Type = Display or else
 			       Format_Object.Next_Paragraph_Format_Type = Syntax_Display or else
@@ -10864,6 +10674,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 			        ARM_Input.Get_Char (Input_Object, Char);
 			    end loop;
 			    if Format_Object.Next_Paragraph_Format_Type = Example_Text or else
+			       Format_Object.Next_Paragraph_Format_Type = Child_Example_Text or else
 			       Format_Object.Next_Paragraph_Format_Type = Indented_Example_Text or else
 			       Format_Object.Next_Paragraph_Format_Type = Display or else
 			       Format_Object.Next_Paragraph_Format_Type = Syntax_Display or else
@@ -10881,6 +10692,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 		        end if;
 		    when ' ' =>
 		        if Format_Object.Next_Paragraph_Format_Type = Example_Text or else
+			   Format_Object.Next_Paragraph_Format_Type = Child_Example_Text or else
 			   Format_Object.Next_Paragraph_Format_Type = Indented_Example_Text or else
 			   Format_Object.Next_Paragraph_Format_Type = Display or else
 			   Format_Object.Next_Paragraph_Format_Type = Syntax_Display or else
@@ -11011,7 +10823,8 @@ Ada.Text_IO.Put_Line ("Attempt to write into a deleted paragraph, on line " & AR
 
 	    Format_Object.Next_Paragraph_Change_Kind := ARM_Database.None;
 
-	    Format_Object.Format := ARM_Output.Normal; -- The default.
+	    Format_Object.Style := ARM_Output.Normal; -- The default.
+	    Format_Object.Indent := 0; -- No indent to start.
 	    Format_Object.In_Paragraph := False;
 	    Format_Object.No_Start_Paragraph := False;
 	end if;

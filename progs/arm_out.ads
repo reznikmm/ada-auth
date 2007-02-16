@@ -101,6 +101,8 @@ package ARM_Output is
     -- 10/13/06 - RLB - Added Local_Link_Start and Local_Link_End to allow
     --			formatting in the linked text.
     --  2/ 9/07 - RLB - Changed comments on AI_Reference.
+    --  2/13/07 - RLB - Revised to separate style and indent information
+    --			for paragraphs.
 
     type Output_Type is abstract tagged limited null record;
 
@@ -126,142 +128,79 @@ package ARM_Output is
 	-- Set the number of columns.
 	-- Raises Not_Valid_Error if in a paragraph.
 
-    type Paragraph_Type is (Normal, Wide,
-	Notes, Notes_Header, Annotations, Wide_Annotations, Index, Syntax_Summary,
-	Examples, Small_Examples,
-	Indented_Examples, Small_Indented_Examples,
-	Swiss_Examples, Small_Swiss_Examples,
-	Swiss_Indented_Examples, Small_Swiss_Indented_Examples,
-	Syntax_Indented, Small_Syntax_Indented, Code_Indented,
-	Small_Code_Indented, Indented, Small_Indented,
-	Inner_Indented, Small_Inner_Indented,
-	Bulleted, Nested_Bulleted, Nested_X2_Bulleted,
-        Small_Bulleted, Small_Nested_Bulleted, Small_Nested_X2_Bulleted,
-	Indented_Bulleted, Indented_Nested_Bulleted,
-	Code_Indented_Bulleted, Code_Indented_Nested_Bulleted,
-        Syntax_Indented_Bulleted, Notes_Bulleted, Notes_Nested_Bulleted,
-	Hanging, Small_Hanging, Indented_Hanging, Small_Indented_Hanging,
-	Hanging_in_Bulleted, Small_Hanging_in_Bulleted,
-	Enumerated, Small_Enumerated, Nested_Enumerated, Small_Nested_Enumerated);
-	-- The type of paragraph (this controls the formatting).
-	-- Normal paragraphs have the style of the body text for the
-	--     Reference Manual.
-	-- Notes paragraphs are indented one unit, and are in a smaller font.
-	-- Notes_Header paragraphs are indented one unit, and are in a
-	--     smaller font, and have much less space than normal following.
-	-- Annotations are indented two units, and are in a smaller font (same
-	--     as Notes).
-	-- Index paragraphs are not indented, and are in a smaller font. If
-	--     possible, lines that wrap are indented.
-	-- Syntax_Summary paragraphs are indented one unit, and are in a
-	--     smaller font.
-	-- Examples are indented one unit, and are in a fixed font.
-	-- Small_Examples are indented three units, and are in a smaller
-	--     fixed font.
-	-- Indented_Examples are indented four units, and are in a fixed font.
-	-- Small_Indented_Examples are indented six units, and are in a smaller
-	--     fixed font.
-	-- Swiss_Examples are indented one unit, and are in a swiss
-	--     (sans-serif) font.
-	-- Small_Swiss_Examples are indented three units, and are in a smaller
-	--     swiss (sans-serif) font.
-	-- Swiss_Indented_Examples are indented four units, and are in a
-	--     swiss (sans-serif) font.
-	-- Small_Swiss_Indented_Examples are indented six units, and are in
-	--     a smaller swiss (sans-serif) font.
-	-- Syntax_Indented paragraphs are indented one unit, and are in the
-	--     normal font.
-	-- Small_Syntax_Indented paragraphs are indented three units, and are in
-	--     a smaller normal font.
-	-- Code_Indented paragraphs are indented two units, and are in the
-	--     normal font.
-	-- Small_Code_Indented paragraphs are indented four units, and are in a
-	--     smaller font.
-	-- Indented paragraphs are indented three units, and are in the normal
-	--     font.
-	-- Small_Indented paragraphs are indented five units, and are in a
-	--     smaller font.
-	-- Inner_Indented paragraphs are indented four units, and are in the
-	--     normal font.
-	-- Small_Inner_Indented paragraphs are indented six units, and are in a
-	--     smaller font.
-	-- Bulleted paragraphs are indented one unit, with a right indent of
-	--     one unit, and each paragraph is preceeded by a bullet (a solid circle).
-	-- Nested Bulleted paragraphs are indented two units, with a right
-	--     indent of one unit, and each paragraph is preceeded by a small
-	--     bullet (a solid circle). [These are intended to be used inside
-	--     of an outer bulleted or enumerated list.]
-	-- Nested X2 Bulleted paragraphs are indented three units, with a right
-	--     indent of one unit, and each paragraph is preceeded by a small
-	--     bullet (a solid circle). [These are intended to be used inside
-	--     of an outer nested bulleted or enumerated list.]
-	-- Small_Bulleted paragraphs are indented three units, with a right
-	--     indent of one unit, each paragraph is preceeded by a bullet,
-	--     and are in a smaller font (same as Notes).
-	-- Small Nested Bulleted paragraphs are indented four units, with a
-	--     right indent of one unit, each paragraph is preceeded by a
-	--     small bullet, and are in a smaller font (same as Notes).
-	-- Small Nested X2 Bulleted paragraphs are indented five units, with a
-	--     right indent of one unit, each paragraph is preceeded by a
-	--     small bullet, and are in a smaller font (same as Notes).
-	-- Indented_Bulleted paragraphs are indented four units, with a right
-	--     indent of one unit, and each paragraph is preceeded by a bullet.
-	-- Indented_Nested_Bulleted paragraphs are indented five units, with a
-	--     right indent of one unit, and each paragraph is preceeded by a
-	--     bullet.
-	-- Code_Indented_Bulleted paragraphs are indented three units, and each
-	--     paragraph is preceeded by a bullet.
-	-- Code_Indented_Nested_Bulleted paragraphs are indented four units,
-	--     and each paragraph is preceeded by a small bullet.
-	-- Syntax_Indented_Bulleted paragraphs are indented two units, and each
-	--     paragraph is preceeded by a bullet.
-	-- Notes_Bulleted paragraphs are indented two units, are in a
-	--     smaller font, and each paragraph is preceeded by a bullet.
-	-- Notes_Nested_Bulleted paragraphs are indented three units, are in a
-	--     smaller font, and each paragraph is preceeded by a small bullet.
-	-- Hanging paragraphs are indented three units, but the first part
-	--     of each paragraph (up to the call of End_Hang_Item) hangs out to
-	--     the margin.
-	-- Indented_Hanging paragraphs are indented three units, but the first
-	--     part of each paragraph (up to the call of End_Hang_Item) hangs
-	--     out to an indent of two units.
-	-- Small_Hanging paragraphs are indented five units, but the first part
-	--     of each paragraph (up to the call of End_Hang_Item) hangs out to
-	--     an indent of two units, and are in a smaller font (same as
-	--     Notes).
-	-- Small_Indented_Hanging paragraphs are indented five units, but the
-	--     first part of each paragraph (up to the call of End_Hang_Item)
-	--     hangs out to an indent of four units, and are in a smaller font
-	--     (same as Notes).
-	-- Hanging_in_Bulleted paragraphs are indented three units, but the first
-	--     part of each paragraph (up to the call of End_Hang_Item) hangs
-	--     out to an indent of one unit; there is a right indent of one unit.
-	--     This is used in a bulleted list.
-	-- Small_Hanging_in_Bulleted paragraphs are indented five units, but the first part
-	--     of each paragraph (up to the call of End_Hang_Item) hangs out to
-	--     an indent of three units, and are in a smaller font (same as
-	--     Notes). This is used in a bulleted list.
-	-- Small_Indented_Hanging paragraphs are indented five units, but the
-	--     first part of each paragraph (up to the call of End_Hang_Item)
-	--     hangs out to an indent of four units, and are in a smaller font
-	--     (same as Notes).
-	-- Enumerated paragraphs are indented one unit, with a right indent of
-	--     one unit, but the first part of each paragraph (up to the call of
-	--     End_Hang_Item) hangs out as would a bullet.
-	-- Small_Enumerated paragraphs are indented three units, with a right
-	--     indent of one unit, but the first part of each paragraph (up to
-	--     the call of End_Hang_Item) hangs out as would a bullet, and
-	--     are in a smaller font (same as Notes).
-	-- Nested_Enumerated paragraphs are indented two units, with a right
-	--     indent of one unit, but the first part of each paragraph (up to
-	--     the call of End_Hang_Item) hangs out as would a bullet.
-	-- Small_Nested_Enumerated paragraphs are indented four units, with a
-	--     right indent of one unit, but the first part of each paragraph
-	--     (up to the call of End_Hang_Item) hangs out as would a bullet,
-	--     and are in a smaller font (same as Notes).
-
+    type Paragraph_Indent_Type is range 0 .. 7;
+	-- The number of units that the text is indented.
 	-- The indentation of paragraphs is described in "units", a mostly
 	-- fixed amount from the left margin.
+
+    type Paragraph_Style_Type is (
+	-- Styles without prefixes:
+	Normal,		-- Normal paragraphs have the style of the body text
+			-- for the Reference Manual.
+	Wide_Above, 	-- Same as Normal, except that there is additional space
+			-- before the paragraph.
+	Small,		-- Like Normal, except for a smaller font. (Use for
+			-- notes and annotations, for instance.)
+	Small_Wide_Above, -- Like Small, except that there is additional space
+			-- before the paragraph.
+	Header,		-- Like Normal, but with no empty space following.
+	Small_Header,   -- Like Small, but with no empty space following. (Use
+			-- for the header to Notes, for instance).
+	Syntax_Summary, -- The text is in a smaller font, and there is less
+			-- space than normal between lines.
+	Index,		-- The text is in a smaller font, and if possible,
+			-- lines that wrap are indented one (additional) unit.
+	Examples,	-- The text is in a fixed font.
+	Small_Examples,	-- The text is in a smaller fixed font.
+	Swiss_Examples, -- The text is in a swiss (sans-serif) font.
+	Small_Swiss_Examples, -- The text is in a smaller swiss (sans-serif) font.
+	-- Styles with prefixes:
+	Bulleted,	-- The text is normal other than that it has a right
+			-- indent of one unit, and each paragraph is preceeded
+			-- by a bullet (a solid circle). Indent must be at least
+			-- one.
+	Small_Bulleted, -- Same as Bulleted, except that a smaller font (same as
+			-- for Small) is used.
+	Nested_Bulleted,-- Same as Bulleted, except that a small bullet is used.
+	Small_Nested_Bulleted, -- Same as Small_Bulleted, except that a small
+			-- bullet is used.
+	-- Styles with text prefixes:
+	Enumerated,	-- The text is normal other than it has a right indent
+			-- of one unit, but the first part of each paragraph (up
+			-- to the call of End_Hang_Item) hangs out as would a
+			-- bullet. Indent must be at least one.
+	Small_Enumerated, -- Same as Enumerated, except that a smaller font
+			-- (same as for Small) is used.
+	Wide_Hanging,	-- The text is normal, but the first part of each
+			-- paragraph (up to the call of End_Hang_Item) hangs
+			-- out three units. Indent must be at least three.
+	Small_Wide_Hanging, -- Same as Wide_Hanging, except that the text is
+			-- in a smaller font (same as Small).
+	Narrow_Hanging,	-- The text is normal, but the first part of each
+			-- paragraph (up to the call of End_Hang_Item) hangs
+			-- out one unit. Indent must be at least one.
+	Small_Narrow_Hanging, -- Same as Narrow_Hanging, except that the text is
+			-- in a smaller font (same as Small).
+	Hanging_in_Bulleted, -- The text is normal, but it has a right indent
+			-- of one unit, and the first part of each
+			-- paragraph (up to the call of End_Hang_Item) hangs
+			-- out two units. Indent must be at least two.
+	Small_Hanging_in_Bulleted); -- Same as Hanging_in_Bulleted, except that
+			-- the text is in a smaller font (same as Small).
+
+    subtype Unprefixed_Style_Subtype is
+	Paragraph_Style_Type range Normal .. Small_Swiss_Examples;
+	-- These styles have no prefix at all.
+    subtype Prefixed_Style_Subtype is
+	Paragraph_Style_Type range Bulleted .. Small_Hanging_in_Bulleted;
+	-- These styles have some sort of prefix.
+    subtype Text_Prefixed_Style_Subtype is
+	Paragraph_Style_Type range Enumerated .. Small_Hanging_in_Bulleted;
+	-- These styles have a text prefix.
+    subtype Bullet_Prefixed_Style_Subtype is
+	Paragraph_Style_Type range Bulleted .. Small_Nested_Bulleted;
+	-- These styles have a bullet prefix.
+
 
     subtype Tab_Location is Natural range 0 .. 200; -- Location of tab stops, in picas.
     type Tab_Kind_Type is (Left_Fixed, Left_Proportional);
@@ -290,8 +229,9 @@ package ARM_Output is
 	-- Defines the change state. Both means both an Insertion and Deletion.
 
     procedure Start_Paragraph (Output_Object : in out Output_Type;
-			       Format : in ARM_Output.Paragraph_Type;
-			       Number : in String;
+			       Style     : in ARM_Output.Paragraph_Style_Type;
+			       Indent    : in ARM_Output.Paragraph_Indent_Type;
+			       Number    : in String;
 			       No_Prefix : in Boolean := False;
 			       Tab_Stops : in ARM_Output.Tab_Info := ARM_Output.NO_TABS;
 			       No_Breaks : in Boolean := False;
@@ -300,12 +240,12 @@ package ARM_Output is
 				   := ARM_Output.Normal;
 			       Justification : in ARM_Output.Justification_Type
 				   := ARM_Output.Default) is abstract;
-	-- Start a new paragraph. The format of the paragraph is as specified.
-	-- The (AA)RM paragraph number (which might include update and version
-	-- numbers as well: [12.1/1]) is Number. If the format is a type with
-	-- a prefix (bullets, hangining items), the prefix is omitted if
-	-- No_Prefix is true. Tab_Stops defines the tab stops for the
-	-- paragraph. If No_Breaks is True, we will try to avoid page breaks
+	-- Start a new paragraph. The style and indent of the paragraph is as
+	-- specified. The (AA)RM paragraph number (which might include update
+	-- and version numbers as well: [12.1/1]) is Number. If the format is
+	-- a type with a prefix (bullets, hangining items), the prefix is
+	-- omitted if No_Prefix is true. Tab_Stops defines the tab stops for
+	-- the paragraph. If No_Breaks is True, we will try to avoid page breaks
 	-- in the paragraph. If Keep_with_Next is true, we will try to avoid
 	-- separating this paragraph and the next one. (These may have no
 	-- effect in formats that don't have page breaks). Space_After
@@ -500,13 +440,11 @@ package ARM_Output is
 
     procedure End_Hang_Item (Output_Object : in out Output_Type) is abstract;
 	-- Marks the end of a hanging item. Call only once per paragraph.
-	-- Raises Not_Valid_Error if the paragraph format is not
-	-- Hanging .. Small_Nested_Enumerated, or if this has already been
+	-- Raises Not_Valid_Error if the paragraph style is not in
+	-- Text_Prefixed_Style_Subtype, or if this has already been
 	-- called for the current paragraph, or if the paragraph was started
 	-- with No_Prefix = True.
 
-	-- Note that this has no effect on non-printing formats.
-	-- Raises Not_Valid_Error if in a paragraph.
 
     type Font_Family_Type is (Roman, Swiss, Fixed, Default);
 	-- Determines the font family. "Default" is the font family

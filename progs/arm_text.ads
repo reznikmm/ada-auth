@@ -84,6 +84,8 @@ package ARM_Text is
     -- 10/13/06 - RLB - Added Local_Link_Start and Local_Link_End to allow
     --			formatting in the linked text.
     --  2/ 9/07 - RLB - Changed comments on AI_Reference.
+    --  2/13/07 - RLB - Revised to separate style and indent information
+    --			for paragraphs.
 
     type Text_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -113,8 +115,9 @@ package ARM_Text is
 	-- Raises Not_Valid_Error if in a paragraph.
 
     procedure Start_Paragraph (Output_Object : in out Text_Output_Type;
-			       Format : in ARM_Output.Paragraph_Type;
-			       Number : in String;
+			       Style     : in ARM_Output.Paragraph_Style_Type;
+			       Indent    : in ARM_Output.Paragraph_Indent_Type;
+			       Number    : in String;
 			       No_Prefix : in Boolean := False;
 			       Tab_Stops : in ARM_Output.Tab_Info := ARM_Output.NO_TABS;
 			       No_Breaks : in Boolean := False;
@@ -123,12 +126,12 @@ package ARM_Text is
 				   := ARM_Output.Normal;
 			       Justification : in ARM_Output.Justification_Type
 				   := ARM_Output.Default);
-	-- Start a new paragraph. The format of the paragraph is as specified.
-	-- The (AA)RM paragraph number (which might include update and version
-	-- numbers as well: [12.1/1]) is Number. If the format is a type with
-	-- a prefix (bullets, hangining items), the prefix is omitted if
-	-- No_Prefix is true. Tab_Stops defines the tab stops for the
-	-- paragraph. If No_Breaks is True, we will try to avoid page breaks
+	-- Start a new paragraph. The style and indent of the paragraph is as
+	-- specified. The (AA)RM paragraph number (which might include update
+	-- and version numbers as well: [12.1/1]) is Number. If the format is
+	-- a type with a prefix (bullets, hangining items), the prefix is
+	-- omitted if No_Prefix is true. Tab_Stops defines the tab stops for
+	-- the paragraph. If No_Breaks is True, we will try to avoid page breaks
 	-- in the paragraph. If Keep_with_Next is true, we will try to avoid
 	-- separating this paragraph and the next one. (These may have no
 	-- effect in formats that don't have page breaks). Space_After
@@ -292,8 +295,8 @@ package ARM_Text is
 
     procedure End_Hang_Item (Output_Object : in out Text_Output_Type);
 	-- Marks the end of a hanging item. Call only once per paragraph.
-	-- Raises Not_Valid_Error if the paragraph format is not
-	-- Hanging .. Small_Nested_Enumerated, or if this has already been
+	-- Raises Not_Valid_Error if the paragraph style is not in
+	-- Text_Prefixed_Style_Subtype, or if this has already been
 	-- called for the current paragraph, or if the paragraph was started
 	-- with No_Prefix = True.
 

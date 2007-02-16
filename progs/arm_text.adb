@@ -104,6 +104,8 @@ package body ARM_Text is
     -- 10/13/06 - RLB - Added Local_Link_Start and Local_Link_End to allow
     --			formatting in the linked text.
     --  2/ 9/07 - RLB - Changed comments on AI_Reference.
+    --  2/13/07 - RLB - Revised to separate style and indent information
+    --			for paragraphs.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -255,8 +257,9 @@ package body ARM_Text is
 
 
     procedure Start_Paragraph (Output_Object : in out Text_Output_Type;
-			       Format : in ARM_Output.Paragraph_Type;
-			       Number : in String;
+			       Style     : in ARM_Output.Paragraph_Style_Type;
+			       Indent    : in ARM_Output.Paragraph_Indent_Type;
+			       Number    : in String;
 			       No_Prefix : in Boolean := False;
 			       Tab_Stops : in ARM_Output.Tab_Info := ARM_Output.NO_TABS;
 			       No_Breaks : in Boolean := False;
@@ -265,18 +268,19 @@ package body ARM_Text is
 				   := ARM_Output.Normal;
 			       Justification : in ARM_Output.Justification_Type
 				   := ARM_Output.Default) is
-	-- Start a new paragraph. The format of the paragraph is as specified.
-	-- The (AA)RM paragraph number (which might include update and version
-	-- numbers as well: [12.1/1]) is Number. If the format is a type with
-	-- a prefix (bullets, hangining items), the prefix is omitted if
-	-- No_Prefix is true. Tab_Stops defines the tab stops for the
-	-- paragraph. If No_Breaks is True, we will try to avoid page breaks
+	-- Start a new paragraph. The style and indent of the paragraph is as
+	-- specified. The (AA)RM paragraph number (which might include update
+	-- and version numbers as well: [12.1/1]) is Number. If the format is
+	-- a type with a prefix (bullets, hangining items), the prefix is
+	-- omitted if No_Prefix is true. Tab_Stops defines the tab stops for
+	-- the paragraph. If No_Breaks is True, we will try to avoid page breaks
 	-- in the paragraph. If Keep_with_Next is true, we will try to avoid
 	-- separating this paragraph and the next one. (These may have no
 	-- effect in formats that don't have page breaks). Space_After
 	-- specifies the amount of space following the paragraph. Justification
 	-- specifies the text justification for the paragraph. Not_Valid_Error
 	-- is raised if Tab_Stops /= NO_TABS for a hanging or bulleted format.
+	Start_Indent : Natural;
     begin
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -293,218 +297,70 @@ package body ARM_Text is
 	Output_Object.Out_Char_Count := 0;
 	Output_Object.Output_Buffer_Space_Before := False; -- Nothing in it or on the line.
 	Output_Object.Output_Buffer_Len := 0;
-	case Format is
-	    when ARM_Output.Normal => Output_Object.Indent_Amount := 0;
-	    when ARM_Output.Wide => Output_Object.Indent_Amount := 0;
-	    when ARM_Output.Notes => Output_Object.Indent_Amount := 6;
-	    when ARM_Output.Notes_Header => Output_Object.Indent_Amount := 6;
-	    when ARM_Output.Annotations => Output_Object.Indent_Amount := 10;
-		Ada.Text_IO.Put (Output_Object.Output_File, "    ");
-		Output_Object.Char_Count := 4;
-	    when ARM_Output.Wide_Annotations => Output_Object.Indent_Amount := 10;
-		Ada.Text_IO.Put (Output_Object.Output_File, "    ");
-		Output_Object.Char_Count := 4;
-	    when ARM_Output.Index => Output_Object.Indent_Amount := 0;
-	    when ARM_Output.Syntax_Summary => Output_Object.Indent_Amount := 6;
-	    when ARM_Output.Examples => Output_Object.Indent_Amount := 6;
-	    when ARM_Output.Small_Examples => Output_Object.Indent_Amount := 10;
-                Ada.Text_IO.Put (Output_Object.Output_File, "    ");
-		Output_Object.Char_Count := 4;
-	    when ARM_Output.Indented_Examples => Output_Object.Indent_Amount := 18;
-                Ada.Text_IO.Put (Output_Object.Output_File, "            ");
-		Output_Object.Char_Count := 12;
-	    when ARM_Output.Small_Indented_Examples => Output_Object.Indent_Amount := 26;
-	        Ada.Text_IO.Put (Output_Object.Output_File, "                    "); -- Six units.
-	        Output_Object.Char_Count := 20;
-	    when ARM_Output.Swiss_Examples => Output_Object.Indent_Amount := 6;
-	    when ARM_Output.Small_Swiss_Examples => Output_Object.Indent_Amount := 10;
-                Ada.Text_IO.Put (Output_Object.Output_File, "    ");
-		Output_Object.Char_Count := 4;
-	    when ARM_Output.Swiss_Indented_Examples => Output_Object.Indent_Amount := 18;
-                Ada.Text_IO.Put (Output_Object.Output_File, "            ");
-		Output_Object.Char_Count := 12;
-	    when ARM_Output.Small_Swiss_Indented_Examples => Output_Object.Indent_Amount := 26;
-	        Ada.Text_IO.Put (Output_Object.Output_File, "                    "); -- Six units.
-	        Output_Object.Char_Count := 20;
-	    when ARM_Output.Syntax_Indented => Output_Object.Indent_Amount := 6;
-	    when ARM_Output.Small_Syntax_Indented => Output_Object.Indent_Amount := 10;
-                Ada.Text_IO.Put (Output_Object.Output_File, "    ");
-		Output_Object.Char_Count := 4;
-	    when ARM_Output.Code_Indented => Output_Object.Indent_Amount := 10;
-                Ada.Text_IO.Put (Output_Object.Output_File, "    ");
-		Output_Object.Char_Count := 4;
-	    when ARM_Output.Small_Code_Indented => Output_Object.Indent_Amount := 14;
-                Ada.Text_IO.Put (Output_Object.Output_File, "        ");
-		Output_Object.Char_Count := 8;
-	    when ARM_Output.Indented => Output_Object.Indent_Amount := 14;
-                Ada.Text_IO.Put (Output_Object.Output_File, "        ");
-		Output_Object.Char_Count := 8;
-	    when ARM_Output.Small_Indented => Output_Object.Indent_Amount := 18;
-                Ada.Text_IO.Put (Output_Object.Output_File, "            ");
-		Output_Object.Char_Count := 12;
-	    when ARM_Output.Inner_Indented => Output_Object.Indent_Amount := 18;
-                Ada.Text_IO.Put (Output_Object.Output_File, "            ");
-		Output_Object.Char_Count := 8;
-	    when ARM_Output.Small_Inner_Indented => Output_Object.Indent_Amount := 22;
-                Ada.Text_IO.Put (Output_Object.Output_File, "                ");
-		Output_Object.Char_Count := 12;
-	    when ARM_Output.Bulleted => Output_Object.Indent_Amount := 6;
-		-- No prefix in text mode.
-	    when ARM_Output.Nested_Bulleted => Output_Object.Indent_Amount := 10;
-                Ada.Text_IO.Put (Output_Object.Output_File, "    ");
-		-- No prefix in text mode.
-		Output_Object.Char_Count := 4;
-	    when ARM_Output.Nested_X2_Bulleted => Output_Object.Indent_Amount := 14;
-                Ada.Text_IO.Put (Output_Object.Output_File, "        ");
-		-- No prefix in text mode.
-		Output_Object.Char_Count := 8;
-	    when ARM_Output.Small_Bulleted => Output_Object.Indent_Amount := 10;
-                Ada.Text_IO.Put (Output_Object.Output_File, "    ");
-		-- No prefix in text mode.
-		Output_Object.Char_Count := 4;
-	    when ARM_Output.Small_Nested_Bulleted => Output_Object.Indent_Amount := 14;
-                Ada.Text_IO.Put (Output_Object.Output_File, "        ");
-		-- No prefix in text mode.
-		Output_Object.Char_Count := 8;
-	    when ARM_Output.Small_Nested_X2_Bulleted => Output_Object.Indent_Amount := 18;
-                Ada.Text_IO.Put (Output_Object.Output_File, "            ");
-		-- No prefix in text mode.
-		Output_Object.Char_Count := 12;
-	    when ARM_Output.Indented_Bulleted => Output_Object.Indent_Amount := 18;
-                Ada.Text_IO.Put (Output_Object.Output_File, "            ");
-		-- No prefix in text mode.
-		Output_Object.Char_Count := 12;
-	    when ARM_Output.Indented_Nested_Bulleted => Output_Object.Indent_Amount := 22;
-                Ada.Text_IO.Put (Output_Object.Output_File, "                ");
-		-- No prefix in text mode.
-		Output_Object.Char_Count := 16;
-	    when ARM_Output.Code_Indented_Bulleted => Output_Object.Indent_Amount := 14;
-                Ada.Text_IO.Put (Output_Object.Output_File, "        ");
-		-- No prefix in text mode.
-		Output_Object.Char_Count := 8;
-	    when ARM_Output.Code_Indented_Nested_Bulleted => Output_Object.Indent_Amount := 18;
-                Ada.Text_IO.Put (Output_Object.Output_File, "            ");
-		-- No prefix in text mode.
-		Output_Object.Char_Count := 12;
-	    when ARM_Output.Syntax_Indented_Bulleted => Output_Object.Indent_Amount := 10;
-                Ada.Text_IO.Put (Output_Object.Output_File, "    ");
-		-- No prefix in text mode.
-		Output_Object.Char_Count := 4;
-	    when ARM_Output.Notes_Bulleted => Output_Object.Indent_Amount := 10;
-                Ada.Text_IO.Put (Output_Object.Output_File, "    ");
-		-- No prefix in text mode.
-		Output_Object.Char_Count := 4;
-	    when ARM_Output.Notes_Nested_Bulleted => Output_Object.Indent_Amount := 14;
-                Ada.Text_IO.Put (Output_Object.Output_File, "        ");
-		-- No prefix in text mode.
-		Output_Object.Char_Count := 8;
-	    when ARM_Output.Hanging => Output_Object.Indent_Amount := 14;
-		Output_Object.Is_Hanging := True;
+
+	if ARM_Output."/=" (Indent, 0) then
+	    Output_Object.Indent_Amount := Natural(Indent)*4 + 2;
+	else
+	    Output_Object.Indent_Amount := 0;
+	end if;
+	Start_Indent := Output_Object.Indent_Amount;
+
+	case Style is
+	    when ARM_Output.Normal => null;
+	    when ARM_Output.Wide_Above => null;
+	    when ARM_Output.Small => null;
+	    when ARM_Output.Small_Wide_Above => null;
+	    when ARM_Output.Header => null;
+	    when ARM_Output.Small_Header => null;
+	    when ARM_Output.Index => null;
+	    when ARM_Output.Syntax_Summary => null;
+	    when ARM_Output.Examples => null;
+	    when ARM_Output.Small_Examples => null;
+	    when ARM_Output.Swiss_Examples => null;
+	    when ARM_Output.Small_Swiss_Examples => null;
+	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted |
+	         ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted =>
 		if No_Prefix then
-		    Ada.Text_IO.Put (Output_Object.Output_File, "        ");
+		    null;
+		else -- Has prefix (added later)
+		    Start_Indent := Start_Indent - 4;
+		end if;
+
+	    when ARM_Output.Wide_Hanging | ARM_Output.Small_Wide_Hanging =>
+		Output_Object.Is_Hanging := True;
+		if No_Prefix then -- Three units for prefix.
 		    Output_Object.Saw_Hang_End := True;
-		    Output_Object.Char_Count := 8;
 		else -- Has prefix
-		    -- No units on first line.
 		    Output_Object.Saw_Hang_End := False;
-		end if;
-	    when ARM_Output.Indented_Hanging => Output_Object.Indent_Amount := 14;
-		Output_Object.Is_Hanging := True;
-		if No_Prefix then
-		    Ada.Text_IO.Put (Output_Object.Output_File, "        ");
-		    Output_Object.Saw_Hang_End := True;
-		    Output_Object.Char_Count := 8;
-		else -- Has prefix.
-                    Ada.Text_IO.Put (Output_Object.Output_File, "    "); -- Two units on first line.
-		    Output_Object.Char_Count := 4;
-		    Output_Object.Saw_Hang_End := False;
-		end if;
-	    when ARM_Output.Small_Hanging => Output_Object.Indent_Amount := 22;
-		Output_Object.Is_Hanging := True;
-		if No_Prefix then
-		    Ada.Text_IO.Put (Output_Object.Output_File, "                "); -- Five units.
-		    Output_Object.Saw_Hang_End := True;
-		    Output_Object.Char_Count := 16;
-		else -- Has prefix.
-                    Ada.Text_IO.Put (Output_Object.Output_File, "    "); -- Two units on first line.
-		    Output_Object.Char_Count := 4;
-		    Output_Object.Saw_Hang_End := False;
-		end if;
-	    when ARM_Output.Small_Indented_Hanging => Output_Object.Indent_Amount := 22;
-		Output_Object.Is_Hanging := True;
-		if No_Prefix then
-		    Ada.Text_IO.Put (Output_Object.Output_File, "                "); -- Five units.
-		    Output_Object.Saw_Hang_End := True;
-		    Output_Object.Char_Count := 16;
-		else -- Has prefix.
-                    Ada.Text_IO.Put (Output_Object.Output_File, "            "); -- Four units on first line.
-		    Output_Object.Char_Count := 12;
-		    Output_Object.Saw_Hang_End := False;
+		    Start_Indent := Start_Indent - 12; -- Leave space for prefix.
 		end if;
 
-	    when ARM_Output.Hanging_in_Bulleted => Output_Object.Indent_Amount := 14;
+	    when ARM_Output.Narrow_Hanging | ARM_Output.Small_Narrow_Hanging => null;
 		Output_Object.Is_Hanging := True;
-		if No_Prefix then
-		    Ada.Text_IO.Put (Output_Object.Output_File, "        ");
+		if No_Prefix then -- One unit for prefix.
 		    Output_Object.Saw_Hang_End := True;
-		    Output_Object.Char_Count := 8;
 		else -- Has prefix.
-		    Output_Object.Char_Count := 0;
 		    Output_Object.Saw_Hang_End := False;
-		end if;
-	    when ARM_Output.Small_Hanging_in_Bulleted => Output_Object.Indent_Amount := 22;
-		Output_Object.Is_Hanging := True;
-		if No_Prefix then
-		    Ada.Text_IO.Put (Output_Object.Output_File, "                "); -- Five units.
-		    Output_Object.Saw_Hang_End := True;
-		    Output_Object.Char_Count := 16;
-		else -- Has prefix.
-                    Ada.Text_IO.Put (Output_Object.Output_File, "    "); -- Two units on first line.
-		    Output_Object.Char_Count := 4;
-		    Output_Object.Saw_Hang_End := False;
+		    Start_Indent := Start_Indent - 4; -- Leave space for prefix.
 		end if;
 
-	    when ARM_Output.Enumerated => Output_Object.Indent_Amount := 10;
+	    when ARM_Output.Hanging_in_Bulleted |
+		 ARM_Output.Small_Hanging_in_Bulleted =>
 		Output_Object.Is_Hanging := True;
-		if No_Prefix then
-		    Ada.Text_IO.Put (Output_Object.Output_File, "    ");
+		if No_Prefix then -- Two units for prefix.
 		    Output_Object.Saw_Hang_End := True;
-		    Output_Object.Char_Count := 4;
 		else -- Has prefix.
 		    Output_Object.Saw_Hang_End := False;
+		    Start_Indent := Start_Indent - 8; -- Leave space for prefix.
 		end if;
-	    when ARM_Output.Small_Enumerated => Output_Object.Indent_Amount := 14;
+
+	    when ARM_Output.Enumerated | ARM_Output.Small_Enumerated =>
 		Output_Object.Is_Hanging := True;
-		if No_Prefix then
-		    Ada.Text_IO.Put (Output_Object.Output_File, "        ");
+		if No_Prefix then -- One unit for prefix.
 		    Output_Object.Saw_Hang_End := True;
-		    Output_Object.Char_Count := 8;
 		else -- Has prefix.
 		    Output_Object.Saw_Hang_End := False;
-		    Ada.Text_IO.Put (Output_Object.Output_File, "    ");
-		    Output_Object.Char_Count := 4;
-		end if;
-	    when ARM_Output.Nested_Enumerated => Output_Object.Indent_Amount := 14;
-		Output_Object.Is_Hanging := True;
-		if No_Prefix then
-		    Ada.Text_IO.Put (Output_Object.Output_File, "        ");
-		    Output_Object.Saw_Hang_End := True;
-		    Output_Object.Char_Count := 8;
-		else -- Has prefix.
-		    Output_Object.Saw_Hang_End := False;
-		    Ada.Text_IO.Put (Output_Object.Output_File, "    ");
-		    Output_Object.Char_Count := 4;
-		end if;
-	    when ARM_Output.Small_Nested_Enumerated => Output_Object.Indent_Amount := 18;
-		Output_Object.Is_Hanging := True;
-		if No_Prefix then
-		    Ada.Text_IO.Put (Output_Object.Output_File, "            ");
-		    Output_Object.Saw_Hang_End := True;
-		    Output_Object.Char_Count := 12;
-		else -- Has prefix.
-		    Output_Object.Saw_Hang_End := False;
-		    Ada.Text_IO.Put (Output_Object.Output_File, "        ");
-		    Output_Object.Char_Count := 8;
+		    Start_Indent := Start_Indent - 4; -- Leave space for prefix.
 		end if;
 	end case;
 	if Number /= "" then
@@ -514,26 +370,44 @@ package body ARM_Text is
 		Ada.Text_IO.Put (Output_Object.Output_File, ' ');
 	        Output_Object.Char_Count := Output_Object.Char_Count + 1;
 	    end loop;
+	    if Start_Indent > 6 then -- Add any remaining indent.
+	        for I in 1 .. (Start_Indent-6)/4 loop
+	            Ada.Text_IO.Put (Output_Object.Output_File, "    ");
+	            Output_Object.Char_Count := Output_Object.Char_Count + 4;
+	        end loop;
+	    end if;
 	else -- No paragraph number:
-	    -- Fill in the indent portion alloted to the paragraph number:
-	    while Output_Object.Char_Count < Output_Object.Indent_Amount loop
-		Ada.Text_IO.Put (Output_Object.Output_File, ' ');
-	        Output_Object.Char_Count := Output_Object.Char_Count + 1;
-	    end loop;
+	    if Start_Indent /= 0 then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "  ");
+	        Output_Object.Char_Count := Output_Object.Char_Count + 2;
+	        for I in 1 .. (Start_Indent-2)/4 loop
+		    Ada.Text_IO.Put (Output_Object.Output_File, "    ");
+	            Output_Object.Char_Count := Output_Object.Char_Count + 4;
+	        end loop;
+	    end if;
         end if;
-	case Format is
-	    when ARM_Output.Normal | ARM_Output.Wide |
-		 ARM_Output.Notes | ARM_Output.Notes_Header |
-		 ARM_Output.Annotations | ARM_Output.Wide_Annotations |
+
+	-- Add bullets if needed:
+	case Style is
+	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted |
+	         ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted =>
+		if No_Prefix then
+		    null;
+		else -- Has prefix (added later)
+		    Ada.Text_IO.Put (Output_Object.Output_File, "  * ");
+	            Output_Object.Char_Count := Output_Object.Char_Count + 4;
+		end if;
+	    when others =>
+		null;
+	end case;
+
+	case Style is
+	    when ARM_Output.Normal | ARM_Output.Wide_Above |
+		 ARM_Output.Small | ARM_Output.Small_Wide_Above |
+		 ARM_Output.Header | ARM_Output.Small_Header |
 		 ARM_Output.Index | ARM_Output.Syntax_Summary |
 		 ARM_Output.Examples | ARM_Output.Small_Examples |
-		 ARM_Output.Indented_Examples | ARM_Output.Small_Indented_Examples |
-		 ARM_Output.Swiss_Examples | ARM_Output.Small_Swiss_Examples |
-		 ARM_Output.Swiss_Indented_Examples | ARM_Output.Small_Swiss_Indented_Examples |
-		 ARM_Output.Syntax_Indented | ARM_Output.Small_Syntax_Indented |
-		 ARM_Output.Indented | ARM_Output.Small_Indented |
-		 ARM_Output.Inner_Indented | ARM_Output.Small_Inner_Indented |
-		 ARM_Output.Code_Indented | ARM_Output.Small_Code_Indented =>
+		 ARM_Output.Swiss_Examples | ARM_Output.Small_Swiss_Examples =>
 		Output_Object.Tab_Stops := Tab_Stops;
 		    -- We'll expand proportional stops here (text characters
 		    -- are larger than the variable ones these are set up for).
@@ -547,17 +421,13 @@ package body ARM_Text is
 				Tab_Stops.Stops(I).Stop + Output_Object.Indent_Amount;
 		    end if;
 		end loop;
-	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted | ARM_Output.Nested_X2_Bulleted |
-		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted | ARM_Output.Small_Nested_X2_Bulleted |
-		 ARM_Output.Indented_Bulleted | ARM_Output.Indented_Nested_Bulleted |
-		 ARM_Output.Code_Indented_Bulleted | ARM_Output.Code_Indented_Nested_Bulleted |
-		 ARM_Output.Syntax_Indented_Bulleted |
-		 ARM_Output.Notes_Bulleted | ARM_Output.Notes_Nested_Bulleted |
-		 ARM_Output.Hanging | ARM_Output.Indented_Hanging |
-		 ARM_Output.Small_Hanging | ARM_Output.Small_Indented_Hanging |
-		 ARM_Output.Hanging_in_Bulleted | ARM_Output.Small_Hanging_in_Bulleted |
-		 ARM_Output.Enumerated | ARM_Output.Small_Enumerated |
-		 ARM_Output.Nested_Enumerated | ARM_Output.Small_Nested_Enumerated =>
+	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted |
+		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted |
+		 ARM_Output.Wide_Hanging | ARM_Output.Narrow_Hanging |
+		 ARM_Output.Hanging_in_Bulleted |
+		 ARM_Output.Small_Wide_Hanging | ARM_Output.Small_Narrow_Hanging |
+		 ARM_Output.Small_Hanging_in_Bulleted |
+		 ARM_Output.Enumerated | ARM_Output.Small_Enumerated =>
 		if Tab_Stops.Number /= 0 then
 	            Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		        "Tabs in hanging/bulleted paragraph");
@@ -920,13 +790,13 @@ package body ARM_Text is
 	    when ARM_Output.End_Item =>
 		-- Just tab over one row:
 		Spill (Output_Object);
-		Ada.Text_IO.Put_Line (Output_Object.Output_File, " ");
+		Ada.Text_IO.Put (Output_Object.Output_File, " ");
 	        Output_Object.Char_Count := Output_Object.Char_Count + 1;
 	        Output_Object.Out_Char_Count := Output_Object.Out_Char_Count + 1;
 		for I in 1 .. Output_Object.Tab_Stops.Number loop
 		    if Output_Object.Tab_Stops.Stops(I).Stop > Output_Object.Char_Count then
 			for J in Output_Object.Char_Count+1 .. Output_Object.Tab_Stops.Stops(I).Stop-1 loop
-		            Ada.Text_IO.Put_Line (Output_Object.Output_File, " ");
+		            Ada.Text_IO.Put (Output_Object.Output_File, " ");
 		            Output_Object.Char_Count := Output_Object.Char_Count + 1;
 		            Output_Object.Out_Char_Count := Output_Object.Out_Char_Count + 1;
 			end loop;
@@ -1266,8 +1136,8 @@ package body ARM_Text is
 
     procedure End_Hang_Item (Output_Object : in out Text_Output_Type) is
 	-- Marks the end of a hanging item. Call only once per paragraph.
-	-- Raises Not_Valid_Error if the paragraph format is not
-	-- Hanging .. Small_Nested_Enumerated, or if this has already been
+	-- Raises Not_Valid_Error if the paragraph style is not in
+	-- Text_Prefixed_Style_Subtype, or if this has already been
 	-- called for the current paragraph, or if the paragraph was started
 	-- with No_Prefix = True.
     begin
@@ -1558,8 +1428,20 @@ package body ARM_Text is
 	-- Height and Width specify the picture size in pixels.
 	-- Border specifies the kind of border.
     begin
-	Ordinary_Text (Output_Object, "[Picture: " & Name &
-	  " - " & Descr & "]");
+	case Alignment is
+	    when ARM_Output.Inline |
+		 ARM_Output.Float_Left | ARM_Output.Float_Right =>
+		-- Inside a paragraph:
+		Ordinary_Text (Output_Object, "[Picture: " & Name &
+		  " - " & Descr & "]");
+	    when ARM_Output.Alone_Left | ARM_Output.Alone_Right |
+		 ARM_Output.Alone_Center =>
+		-- Not in a paragraph:
+		Ada.Text_IO.New_Line (Output_Object.Output_File);
+		Ada.Text_IO.Put_Line (Output_Object.Output_File, "[Picture: " & Name &
+		  " - " & Descr & "]");
+		Ada.Text_IO.New_Line (Output_Object.Output_File);
+	end case;
     end Picture;
 
 end ARM_Text;
