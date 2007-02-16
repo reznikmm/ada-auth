@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2007/02/11 07:19:09 $}
+@comment{$Revision: 1.6 $ $Date: 2007/02/13 07:10:30 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -1594,8 +1594,10 @@ also works for declarations of predefined operators such as "+" and "=".
 Raises ASIS_Inappropriate_Element if the argument is not an implicit
 declaration resulting from the declaration of a type.
 
-Appropriate Element_Kinds:
-     A_Declaration
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Declaration
+@end{Display}
 
 @leading@keepnext@;Appropriate Declaration_Kinds:
 @begin{Display}
@@ -1667,14 +1669,18 @@ function Private_Part_Declarative_Items
 @end{Display}
 @end{ChildRef}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Visible_Part_Declarative_Items}
+            (Declaration     : @key[in] Asis.Declaration;
+             Include_Pragmas : @key[in] Boolean := False)
+            @key[return] Asis.Declarative_Item_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Visible_Part_Declarative_Items}
-                (Declaration     : @key[in] Asis.Declaration;
-                 Include_Pragmas : @key[in] Boolean := False)
-                @key[return] Asis.Declarative_Item_List;
-
-Declaration     @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the package to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
+Declaration @chg{Version=[1],New=[specifies],Old=[    @en Specifies]} the
+package to query.
+Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
+pragmas are to be returned.
 
 Returns a list of all basic declarations, representation specifications,
 use clauses, and pragmas in the visible part of a package, in their order
@@ -1691,19 +1697,25 @@ A_Generic_Package_Declaration
 A_Package_Declaration
 @end{Display}
 
-Returns Element_Kinds:
-     A_Declaration
-     A_Pragma
-     A_Clause
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Declaration
+A_Pragma
+A_Clause
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Is_Private_Present (declaration)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Private_Present}
+             (Declaration : @key[in] Asis.Declaration) @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Is_Private_Present}
-                (Declaration : @key[in] Asis.Declaration) @key[return] Boolean;
-
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the declaration to query
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+declaration to query.
 
 Returns True if the argument is a package specification which has a reserved
 word @key[private] which marks the beginning of a (possibly empty) private part.
@@ -1711,26 +1723,33 @@ word @key[private] which marks the beginning of a (possibly empty) private part.
 Returns False for any package specification without a private part.
 Returns False for any unexpected Element.
 
-Expected Element_Kinds:
-     A_Declaration
+@leading@keepnext@;Expected Element_Kinds:
+@begin{Display}
+A_Declaration
+@end{Display}
 
 @leading@keepnext@;Expected Declaration_Kinds:
 @begin{Display}
 A_Generic_Package_Declaration
 A_Package_Declaration
 @end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Private_Part_Declarative_Items}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Private_Part_Declarative_Items}
+            (Declaration     : @key[in] Asis.Declaration;
+             Include_Pragmas : @key[in] Boolean := False)
+            @key[return] Asis.Declarative_Item_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Private_Part_Declarative_Items}
-                (Declaration     : @key[in] Asis.Declaration;
-                 Include_Pragmas : @key[in] Boolean := False)
-                @key[return] Asis.Declarative_Item_List;
-
-Declaration     @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the package to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
+Declaration @chg{Version=[1],New=[specifies],Old=[    @en Specifies]} the
+package to query.
+Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
+pragmas are to be returned.
 
 Returns a list of all basic declarations, representation specifications,
 use clauses, and pragmas in the private part of a package in their order of
@@ -1747,10 +1766,13 @@ A_Generic_Package_Declaration
 A_Package_Declaration
 @end{Display}
 
-Returns Element_Kinds:
-     A_Declaration
-     A_Pragma
-     A_Clause
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Declaration
+A_Pragma
+A_Clause
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Renamed_Entity}
@@ -1794,10 +1816,14 @@ function Renamed_Entity
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Renamed_Entity} (Declaration : @key[in] Asis.Declaration)
-                            @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Renamed_Entity} (Declaration : @key[in] Asis.Declaration)
+                        @key[return] Asis.Expression;
+@end{Example}
 
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the rename declaration to query
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the rename
+declaration to query.
 
 Returns the name expression that follows the reserved word @key[renames] in the
 renaming declaration.
@@ -1814,8 +1840,11 @@ A_Generic_Procedure_Renaming_Declaration
 A_Generic_Function_Renaming_Declaration
 @end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Corresponding_Base_Entity}
@@ -1870,10 +1899,14 @@ function Renamed_Entity
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Corresponding_Base_Entity} (Declaration : @key[in] Asis.Declaration)
-                                 @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Base_Entity} (Declaration : @key[in] Asis.Declaration)
+                             @key[return] Asis.Expression;
+@end{Example}
 
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the rename declaration to query
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the rename
+declaration to query.
 
 The base entity is defined to be the renamed entity that is not itself
 defined by another renaming declaration.
@@ -1896,8 +1929,11 @@ A_Generic_Procedure_Renaming_Declaration
 A_Generic_Function_Renaming_Declaration
 @end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Protected_Operation_Items}
@@ -1973,13 +2009,18 @@ function Protected_Operation_Items
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Protected_Operation_Items}
-               (Declaration     : @key[in] Asis.Declaration;
-                   Include_Pragmas : @key[in] Boolean := False)
-                   @key[return] Asis.Declaration_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Protected_Operation_Items}
+              (Declaration     : @key[in] Asis.Declaration;
+               Include_Pragmas : @key[in] Boolean := False)
+              @key[return] Asis.Declaration_List;
+@end{Example}
 
-Declaration     @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the protected_body declaration to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
+Declaration @chg{Version=[1],New=[specifies],Old=[    @en Specifies]} the
+protected_body declaration to query.
+Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
+pragmas are to be returned.
 
 Returns a list of protected_operation_item and pragma elements of the
 protected_body, in order of appearance.
@@ -1991,20 +2032,27 @@ Returns a Nil_Element_List if there are no items or pragmas.
 A_Protected_Body_Declaration
 @end{Display}
 
-Returns Element_Kinds:
-     A_Pragma
-     A_Declaration
-     A_Clause
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma
+A_Declaration
+A_Clause
+@end{Display}
 
-Returns Declaration_Kinds:
-     A_Procedure_Declaration
-     A_Function_Declaration
-     A_Procedure_Body_Declaration
-     A_Function_Body_Declaration
-     An_Entry_Body_Declaration
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+A_Procedure_Declaration
+A_Function_Declaration
+A_Procedure_Body_Declaration
+A_Function_Body_Declaration
+An_Entry_Body_Declaration
+@end{Display}
 
-Returns Clause_Kinds:
-     A_Representation_Clause
+@leading@keepnext@;Returns Clause_Kinds:
+@begin{Display}
+A_Representation_Clause
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Entry_Family_Definition}
@@ -2021,10 +2069,14 @@ function Parameter_Profile
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Entry_Family_Definition} (Declaration : @key[in] Asis.Declaration)
-                                     @key[return] Asis.Discrete_Subtype_Definition;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Entry_Family_Definition} (Declaration : @key[in] Asis.Declaration)
+                                 @key[return] Asis.Discrete_Subtype_Definition;
+@end{Example}
 
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the entry declaration to query
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the entry
+declaration to query.
 
 Returns the Discrete_Subtype_Definition element for the entry family of
 an entry_declaration.
@@ -2037,9 +2089,12 @@ of entries.
 An_Entry_Declaration
 @end{Display}
 
-Returns Definition_Kinds:
-     Not_A_Definition
-     A_Discrete_Subtype_Definition
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+Not_A_Definition
+A_Discrete_Subtype_Definition
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Entry_Index_Specification}
@@ -2061,11 +2116,14 @@ function Body_Block_Statement @em obsolescent, not recommended
 @end{Display}
 @end{ChildRef}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Entry_Index_Specification} (Declaration : @key[in] Asis.Declaration)
+                                   @key[return] Asis.Declaration;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Entry_Index_Specification} (Declaration : @key[in] Asis.Declaration)
-                                       @key[return] Asis.Declaration;
-
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the entry body declaration to query
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the entry
+body declaration to query.
 
 Returns the An_Entry_Index_Specification element of an entry body
 declaration.
@@ -2078,15 +2136,21 @@ An_Entry_Index_Specification element.
 An_Entry_Body_Declaration
 @end{Display}
 
-Returns Declaration_Kinds:
-     Not_A_Declaration
-     An_Entry_Index_Specification
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+Not_A_Declaration
+An_Entry_Index_Specification
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Entry_Barrier}
 
-
-    @key[function] @AdaSubDefn{Entry_Barrier} (Declaration : @key[in] Asis.Declaration)
-                           @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Entry_Barrier} (Declaration : @key[in] Asis.Declaration)
+                       @key[return] Asis.Expression;
+@end{Example}
 
 Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the entry
 body declaration to query.
@@ -2099,8 +2163,11 @@ declaration.
 An_Entry_Body_Declaration
 @end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Corresponding_Subunit}
@@ -2140,27 +2207,31 @@ function Names
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Corresponding_Subunit} (Body_Stub : @key[in] Asis.Declaration)
-                     @key[return] Asis.Declaration;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Subunit} (Body_Stub : @key[in] Asis.Declaration)
+                 @key[return] Asis.Declaration;
 
-    function Corresponding_Subunit (Body_Stub   : @key[in] Asis.Declaration;
-                                    The_Context : @key[in] Asis.Context)
-                      @key[return] Asis.Declaration;
+@key[function] @AdaSubDefn{Corresponding_Subunit} (Body_Stub   : @key[in] Asis.Declaration;
+                                The_Context : @key[in] Asis.Context)
+                 @key[return] Asis.Declaration;
+@end{Example}
 
-
-Body_Stub   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the stub to query
-The_Context @chg{Version=[1],New=[specifies],Old=[@en Specifies]} a Context to use to locate the subunit
+Body_Stub @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the stub to
+query. The_Context @chg{Version=[1],New=[specifies],Old=[@en Specifies]} a
+Context to use to locate the subunit.
 
 Returns the Unit_Declaration of the subunit compilation unit corresponding
 to the body stub.
 
 Returns a Nil_Element if the subunit does not exist in The_Context.
 
-These two function calls will always produce identical results:
-
-    Decl2 := Corresponding_Subunit (Decl1);
-    Decl2 := Corresponding_Subunit
-             (Decl1, Enclosing_Context ( Enclosing_Compilation_Unit( Decl1 )));
+@leading@;These two function calls will always produce identical results:
+@begin{Display}
+@exam{Decl2 := Corresponding_Subunit (Decl1);
+Decl2 := Corresponding_Subunit
+         (Decl1, Enclosing_Context (Enclosing_Compilation_Unit (Decl1));}
+@end{Display}
 
 The parameter The_Context is used to locate the corresponding subunit body.
 Any non-Nil result will always have The_Context as its Enclosing_Context.
@@ -2174,59 +2245,76 @@ A_Task_Body_Stub
 A_Protected_Body_Stub
 @end{Display}
 
-Returns Declaration_Kinds:
-     Not_A_Declaration
-     A_Function_Body_Declaration
-     A_Package_Body_Declaration
-     A_Procedure_Body_Declaration
-     A_Task_Body_Declaration
-     A_Protected_Body_Declaration
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+Not_A_Declaration
+A_Function_Body_Declaration
+A_Package_Body_Declaration
+A_Procedure_Body_Declaration
+A_Task_Body_Declaration
+A_Protected_Body_Declaration
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Subunit}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Subunit} (Declaration : @key[in] Asis.Declaration) @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Is_Subunit} (Declaration : @key[in] Asis.Declaration) @key[return] Boolean;
-
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the declaration to query
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+declaration to query.
 
 Returns True if the declaration is the proper_body of a subunit.
 
 Returns False for any unexpected Element.
 
-Equivalent to:
+@leading@keepnext@;Equivalent to:
+@begin{Display}
+@exam{Declaration = Unit_Declaration (Enclosing_Compilation_Unit (Declaration))
+@key[and] Unit_Kind (Enclosing_Compilation_Unit (Declaration)) @key[in] A_Subunit}
+@end{Display}
 
-    Declaration = Unit_Declaration(Enclosing_Compilation_Unit (Declaration))
-    and Unit_Kind(Enclosing_Compilation_Unit (Declaration)) in A_Subunit.
+@leading@keepnext@;Expected Declaration_Kinds:
+@begin{Display}
+A_Procedure_Body_Declaration
+A_Function_Body_Declaration
+A_Package_Body_Declaration
+A_Task_Body_Declaration
+A_Protected_Body_Declaration
+@end{Display}
+@end{DescribeCode}
 
-Expected Declaration_Kinds:
-     A_Procedure_Body_Declaration
-     A_Function_Body_Declaration
-     A_Package_Body_Declaration
-     A_Task_Body_Declaration
-     A_Protected_Body_Declaration
 
 @LabeledClause{function Corresponding_Body_Stub}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Body_Stub} (Subunit : @key[in] Asis.Declaration)
+                   @key[return] Asis.Declaration;
 
-    @key[function] @AdaSubDefn{Corresponding_Body_Stub} (Subunit : @key[in] Asis.Declaration)
-                       @key[return] Asis.Declaration;
+@key[function] @AdaSubDefn{Corresponding_Body_Stub} (Subunit     : @key[in] Asis.Declaration;
+                                  The_Context : @key[in] Asis.Context)
+                   @key[return] Asis.Declaration;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Corresponding_Body_Stub} (Subunit     : @key[in] Asis.Declaration;
-                                      The_Context : @key[in] Asis.Context)
-                       @key[return] Asis.Declaration;
-
-Subunit     @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Is_Subunit declaration to query
-The_Context @chg{Version=[1],New=[specifies],Old=[@en Specifies]} a Context to use to locate the parent unit
+Subunit @chg{Version=[1],New=[specifies],Old=[    @en Specifies]} the
+Is_Subunit declaration to query. The_Context
+@chg{Version=[1],New=[specifies],Old=[@en Specifies]} a Context to use to
+locate the parent unit.
 
 Returns the body stub declaration located in the subunit's parent unit.
 
 Returns a Nil_Element if the parent unit does not exist in The_Context.
 
-These two function calls will always produce identical results:
-
-    Decl2 := Corresponding_Body_Stub (Decl1);
-    Decl2 := Corresponding_Body_Stub
-             (Decl1, Enclosing_Context ( Enclosing_Compilation_Unit( Decl1 )));
+@leading@;These two function calls will always produce identical results:
+@begin{Display}
+@exam{Decl2 := Corresponding_Body_Stub (Decl1);
+Decl2 := Corresponding_Body_Stub
+         (Decl1, Enclosing_Context (Enclosing_Compilation_Unit (Decl1)));}
+@end{Display}
 
 The parameter The_Context is used to locate the corresponding parent body.
 Any non-Nil result will always have The_Context as its Enclosing_Context.
@@ -2241,13 +2329,16 @@ A_Task_Body_Declaration
 A_Protected_Body_Declaration
 @end{Display}
 
-Returns Declaration_Kinds:
-     Not_A_Declaration
-     A_Function_Body_Stub
-     A_Package_Body_Stub
-     A_Procedure_Body_Stub
-     A_Task_Body_Stub
-     A_Protected_Body_Stub
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+Not_A_Declaration
+A_Function_Body_Stub
+A_Package_Body_Stub
+A_Procedure_Body_Stub
+A_Task_Body_Stub
+A_Protected_Body_Stub
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Generic_Formal_Part}
@@ -2284,13 +2375,17 @@ function Parameter_Profile
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Generic_Formal_Part}
-                (Declaration     : @key[in] Asis.Declaration;
-                 Include_Pragmas : @key[in] Boolean := False)
-                @key[return] Asis.Element_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Generic_Formal_Part}
+            (Declaration     : @key[in] Asis.Declaration;
+             Include_Pragmas : @key[in] Boolean := False)
+            @key[return] Asis.Element_List;
+@end{Example}
 
-Declaration     @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the generic declaration to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the generic
+declaration to query. Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en
+Specifies]} whether pragmas are to be returned.
 
 Returns a list of generic formal parameter declarations, use clauses,
 and pragmas, in their order of appearance.
@@ -2307,22 +2402,29 @@ A_Generic_Procedure_Declaration
 A_Generic_Function_Declaration
 @end{Display}
 
-Returns Element_Kinds:
-     A_Pragma
-     A_Declaration
-     A_Clause
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma
+A_Declaration
+A_Clause
+@end{Display}
 
-Returns Declaration_Kinds:
-     A_Formal_Object_Declaration
-     A_Formal_Type_Declaration
-     A_Formal_Procedure_Declaration
-     A_Formal_Function_Declaration
-     A_Formal_Package_Declaration
-     A_Formal_Package_Declaration_With_Box
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+A_Formal_Object_Declaration
+A_Formal_Type_Declaration
+A_Formal_Procedure_Declaration
+A_Formal_Function_Declaration
+A_Formal_Package_Declaration
+A_Formal_Package_Declaration_With_Box
+@end{Display}
 
-Returns Clause_Kinds:
-     A_Use_Package_Clause
-     A_Use_Type_Clause
+@leading@keepnext@;Returns Clause_Kinds:
+@begin{Display}
+A_Use_Package_Clause
+A_Use_Type_Clause
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Generic_Unit_Name}
@@ -2367,38 +2469,45 @@ function Generic_Actual_Part
 @end{Display}
 @end{ChildRef}
 
+@begin{Intro}
 @b{@i{I don't know where this goes; it doesn't seem to relate very closely to
-any of the routines near here. - RLB}}
+any of the routines near here. - RLB@*}}
 Instantiations can always be analyzed in terms of the generic actual
 parameters supplied with the instantiation. A generic instance is a copy
 of the generic unit, and while there is no explicit (textual) specification
 in the program text, an implicit specification and body, if there is one,
 with the generic actual parameters is implied.
 
-To analyze the implicit instance specification or body of a generic
+@leading@;To analyze the implicit instance specification or body of a generic
 instantiation:
+@begin{Itemize}
+Use Corresponding_Declaration to return the implicit expanded
+specification of an instantiation.
 
-- Use Corresponding_Declaration to return the implicit expanded
-  specification of an instantiation.
+Use Corresponding_Body to return the implicit body of an instantiation.
 
-- Use Corresponding_Body to return the implicit body of an instantiation.
+Then analyze the specification or body with any appropriate queries.
+@end{Itemize}
 
-- Then analyze the specification or body with any appropriate queries.
-
-To analyze the explicit generic specification or body referenced by a
+@leading@;To analyze the explicit generic specification or body referenced by a
 generic instantiation:
+@begin{Itemize}
+Use Generic_Unit_Name to obtain the name of the generic unit.
 
-- Use Generic_Unit_Name to obtain the name of the generic unit.
+Then use Corresponding_Name_Declaration to get to the generic declaration.
 
-- Then use Corresponding_Name_Declaration to get to the generic declaration.
+Then use Corresponding_Body to get to the body of the generic declaration.
+@end{Itemize}
+@end{Intro}
 
-- Then use Corresponding_Body to get to the body of the generic declaration.
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Generic_Unit_Name} (Declaration : @key[in] Asis.Declaration)
+                           @key[return] Asis.Expression;
+@end{Example}
 
-
-    @key[function] @AdaSubDefn{Generic_Unit_Name} (Declaration : @key[in] Asis.Declaration)
-                               @key[return] Asis.Expression;
-
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the generic instantiation to query
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the generic
+instantiation to query.
 
 Returns the name following the reserved word @key[new] in the generic
 instantiation. The name denotes the generic package, generic procedure, or
@@ -2413,20 +2522,28 @@ A_Formal_Package_Declaration
 A_Formal_Package_Declaration_With_Box
 @end{Display}
 
-Returns Expression_Kinds:
-     An_Identifier
-     An_Operator_Symbol
-     A_Selected_Component
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
+An_Operator_Symbol
+A_Selected_Component
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Generic_Actual_Part}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Generic_Actual_Part} (Declaration : @key[in] Asis.Declaration;
+                              Normalized  : @key[in] Boolean := False)
+                             @key[return] Asis.Association_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Generic_Actual_Part} (Declaration : @key[in] Asis.Declaration;
-                                  Normalized  : @key[in] Boolean := False)
-                                 @key[return] Asis.Association_List;
-
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the generic_instantiation to query
-Normalized  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether the normalized form is desired
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+generic_instantiation to query.
+Normalized @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} whether the
+normalized form is desired.
 
 Returns a list of the generic_association elements of the instantiation.
 
@@ -2443,20 +2560,24 @@ generic_formal_parameter_declaration elements of the generic_formal_part of the
 template. The order of normalized associations matches the order of the
 generic_formal_parameter_declaration elements.
 
-Each normalized association represents a one-on-one mapping of a
+@leading@;Each normalized association represents a one-on-one mapping of a
 generic_formal_parameter_declaration to the explicit or default expression
 or name. A normalized association has:
+@begin{Itemize}
+one A_Defining_Name component that denotes the
+generic_formal_parameter_declaration, and
 
-- one A_Defining_Name component that denotes the
-  generic_formal_parameter_declaration, and
+@leading@;one An_Expression component that is either:
+@begin{InnerItemize}
+the explicit_generic_actual_parameter,
 
-- one An_Expression component that is either:
-    the explicit_generic_actual_parameter,
-    a default_expression, or
-    a default_name from the generic_formal_parameter_declaration or
-       an implicit naming expression which denotes the actual subprogram
-       selected at the place of instantiation for a formal subprogram
-       having A_Box_Default.
+a default_expression, or
+
+a default_name from the generic_formal_parameter_declaration or an implicit
+naming expression which denotes the actual subprogram selected at the place of
+instantiation for a formal subprogram having A_Box_Default.
+@end{InnerItemize}
+@end{Itemize}
 
 @leading@keepnext@;Appropriate Declaration_Kinds:
 @begin{Display}
@@ -2466,17 +2587,19 @@ A_Procedure_Instantiation
 A_Formal_Package_Declaration
 @end{Display}
 
-Returns Association_Kinds:
-     A_Generic_Association
+@leading@keepnext@;Returns Association_Kinds:
+@begin{Display}
+A_Generic_Association
+@end{Display}
+@end{DescribeCode}
 
-@b{Implementation Requirement}s
-
+@begin{ImplReq}
 Normalized associations are Is_Normalized and Is_Part_Of_Implicit.
 Normalized associations provided by default are Is_Defaulted_Association.
 Normalized associations are never Is_Equal to unnormalized associations.
+@end{ImplReq}
 
-@b{Implementation Permissions}
-
+@begin{ImplPerm}
 An implementation may choose to always include default parameters in its
 internal representation.
 
@@ -2487,6 +2610,7 @@ generic_formal_parameter_selector_name elements.
 In either case, this query will return Is_Normalized associations even if
 Normalized is False, and the query Generic_Actual_Part_Normalized will
 return True.
+@end{ImplPerm}
 
 
 @LabeledClause{function Formal_Subprogram_Default}
@@ -2527,15 +2651,18 @@ function Formal_Subprogram_Default
 @end{Display}
 @end{ChildRef}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Formal_Subprogram_Default}
+            (Declaration : @key[in] Asis.Generic_Formal_Parameter)
+           @key[return] Asis.Expression;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Formal_Subprogram_Default}
-                (Declaration : @key[in] Asis.Generic_Formal_Parameter)
-                @key[return] Asis.Expression;
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the generic
+formal subprogram declaration to query.
 
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the generic formal subprogram declaration to query
-
-Returns the name appearing after the reserved word @key[is] in the given generic
-formal subprogram declaration.
+Returns the name appearing after the reserved word @key[is] in the given
+generic formal subprogram declaration.
 
 @leading@keepnext@;Appropriate Declaration_Kinds:
 @begin{Display}
@@ -2543,11 +2670,16 @@ A_Formal_Function_Declaration
 A_Formal_Procedure_Declaration
 @end{Display}
 
-Appropriate Subprogram_Default_Kinds:
-     A_Name_Default
+@leading@keepnext@;Appropriate Subprogram_Default_Kinds:
+@begin{Display}
+A_Name_Default
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Corresponding_Generic_Element}
@@ -2588,13 +2720,15 @@ function Generic_Unit_Name
 @end{Display}
 @end{ChildRef}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Generic_Element} (Reference : @key[in] Asis.Element)
+                                       @key[return] Asis.Defining_Name;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Corresponding_Generic_Element} (Reference : @key[in] Asis.Element)
-                                           @key[return] Asis.Defining_Name;
-
-Reference @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} an expression that references an entity declared
-              within the implicit specification of a generic instantiation,
-              or, specifies the defining name of such an entity.
+Reference @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} an expression
+that references an entity declared within the implicit specification of a
+generic instantiation, or, specifies the defining name of such an entity.
 
 Given a reference to some implicit entity, whose declaration occurs within
 an implicit generic instance, returns the corresponding entity name
@@ -2609,40 +2743,53 @@ as a component of a generic package instantiation. The entity name can
 refer to an ordinary declaration, an inherited subprogram declaration, or a
 predefined operator declaration.
 
-Appropriate Element_Kinds:
-     A_Defining_Name
-     An_Expression
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Defining_Name
+An_Expression
+@end{Display}
 
-Appropriate Expression_Kinds:
-     An_Identifier
-     An_Operator_Symbol
-     A_Character_Literal
-     An_Enumeration_Literal
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_Identifier
+An_Operator_Symbol
+A_Character_Literal
+An_Enumeration_Literal
+@end{Display}
 
-Returns Element_Kinds:
-     Not_An_Element
-     A_Defining_Name
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+Not_An_Element
+A_Defining_Name
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Dispatching_Operation}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Dispatching_Operation} (Declaration : @key[in] Asis.Element)
+                                      @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Is_Dispatching_Operation} (Declaration : @key[in] Asis.Element)
-                                          @key[return] Boolean;
-
-Declaration   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the declaration to query.
+Declaration @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+declaration to query.
 
 Returns True if the declaration is a primitive subprogram of a tagged type.
 
 Returns False for any unexpected argument.
 
-Expected Element_Kinds:
-     A_Procedure_Declaration
-     A_Function_Declaration
-     A_Procedure_Renaming_Declaration
-     A_Function_Renaming_Declaration
+@leading@keepnext@;Expected Element_Kinds:
+@begin{Display}
+A_Procedure_Declaration
+A_Function_Declaration
+A_Procedure_Renaming_Declaration
+A_Function_Renaming_Declaration
+@end{Display}
+@end{DescribeCode}
 
 @begin{Example}
 @ChgDeleted{Version=[1],Text=[@key[end] Asis.Declarations;]}
 @end{Example}
-
 

@@ -1,6 +1,6 @@
 @Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2007/02/06 06:21:05 $}
+@comment{$Revision: 1.3 $ $Date: 2007/02/13 07:10:31 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -15,51 +15,59 @@ Old=[@f{@key[package] @ChildUnit{Parent=[Asis],Child=[Expressions]}Asis.Expressi
 Asis.Expressions encapsulates a set of queries that operate on
 An_Expression and An_Association elements.
 
+
 @LabeledClause{function Corresponding_Expression_Type}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Expression_Type} (Expression : @key[in] Asis.Expression)
+                         @key[return] Asis.Declaration;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Corresponding_Expression_Type} (Expression : @key[in] Asis.Expression)
-                             @key[return] Asis.Declaration;
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+expression to query.
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the expression to query
-
-Returns the type declaration for the type or subtype of the expression.
+@leading@;Returns the type declaration for the type or subtype of the expression.
 This query does not "unwind" subtypes or derived types to get to the
 Corresponding_First_Subtype or Corresponding_Parent_Subtype declarations.
 For example, for the following program text:
 
-    type Int is range -5_000 .. 5_000;
-    type My_Int is new Int;
-    type Good_Int is new My_Int;
-    Var: Good_Int;
+@begin{Display}
+@key[type] Int @key[is range] -5_000 .. 5_000;
+@key[type] My_Int @key[is new] Int;
+@key[type] Good_Int @key[is new] My_Int;
+Var: Good_Int;
+@end{Display}
 
 The type declaration for Good_Int should be returned. The "unwinding" should
 not occur. The type declaration for either My_Int or Int should not be returned.
 
-Returns a Nil_Element if the argument Expression does not represent an Ada
-expression having an Ada type, including the following classes:
+@leading@;Returns a Nil_Element if the argument Expression does not represent
+an Ada expression having an Ada type, including the following classes:
 
-- Naming expressions that name packages, subprograms, tasks, etc. These
-  expressions do have a Corresponding_Name_Definition and a
-  Corresponding_Name_Declaration. Although task objects do have
-  a type, this query is limited, on purpose. Thus, when a naming
-  expression is given to this query (for packages, subprograms,
-  tasks, etc.), this query will return Nil_Element. @Chg{Version=[1],
-  New=[If],Old=[As the @b{APPLICATION NOTE} below indicates, if]}
-  any further information is needed, the element should be queried by
-  Corresponding_Name_Definition or Corresponding_Name_Declaration,
-  which should eventually return an A_Task_Type_Declaration element.
+@begin{Itemize}
+Naming expressions that name packages, subprograms, tasks, etc. These
+expressions do have a Corresponding_Name_Definition and a
+Corresponding_Name_Declaration. Although task objects do have
+a type, this query is limited, on purpose. Thus, when a naming
+expression is given to this query (for packages, subprograms,
+tasks, etc.), this query will return Nil_Element. @Chg{Version=[1],
+New=[If],Old=[As the @b{APPLICATION NOTE} below indicates, if]}
+any further information is needed, the element should be queried by
+Corresponding_Name_Definition or Corresponding_Name_Declaration,
+which should eventually return an A_Task_Type_Declaration element.
 
-- When An_Identifier Element representing an attribute designator is passed
-  as the actual to this query.
+When An_Identifier Element representing an attribute designator is passed
+as the actual to this query.
 
-- The Actual_Parameter Expression from A_Pragma_Argument_Association for a
-  Pragma may or may not have a Corresponding_Expression_Type.
+The Actual_Parameter Expression from A_Pragma_Argument_Association for a
+Pragma may or may not have a Corresponding_Expression_Type.
 
-- An_Attribute_Reference Element also may or may not have a
-  Corresponding_Expression_Type;
+An_Attribute_Reference Element also may or may not have a
+Corresponding_Expression_Type;
 
-- An enumeration_aggregate which is a part of enumeration_representation_clause.
+An enumeration_aggregate which is a part of enumeration_representation_clause.
+@end{Itemize}
 
 Returns a Nil_Element, if the statically determinable type of Expression is a
 class-wide type, or the Expression corresponds to an inner sub-aggregate in
@@ -81,26 +89,44 @@ implementor's compilation system and may not refer to any
 declared object.
 @end{UsageNote}
 
-Appropriate Element_Kinds:
-     An_Expression
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
 
-Returns Element_Kinds:
-     Not_An_Element
-     A_Declaration
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+Not_An_Element
+A_Declaration
+@end{Display}
+@end{DescribeCode}
 
-Element Reference -An_Integer_Literal - 2.4 - No child elements
-Element Reference -A_Real_Literal     - 2.4 - No child elements
-Element Reference -A_String_Literal   - 2.6 - No child elements
-
-A string image returned by:
-   function Value_Image
 
 @LabeledClause{function Value_Image}
 
+@begin{ElementRef}
+An_Integer_Literal @em 2.4 @em No child elements@*
+A_Real_Literal @em 2.4 @em No child elements@*
+A_String_Literal @em 2.6 @em No child elements
+@end{ElementRef}
 
-    @key[function] @AdaSubDefn{Value_Image} (Expression : @key[in] Asis.Expression) @key[return] Wide_String;
+@begin{ChildRef}@ @;
+@begin{Display}
+@ChgAdded{Version=[1],Text=[No child elements]}
+@end{Display}
+@leading@;A string image returned by:
+@begin{Display}
+function Value_Image
+@end{Display}
+@end{ChildRef}
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the expression to query
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Value_Image} (Expression : @key[in] Asis.Expression) @key[return] Wide_String;
+@end{Example}
+
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+expression to query.
 
 Returns the string image of the value of the string, integer, or real
 literal.
@@ -113,42 +139,60 @@ The form of numbers returned by this query may vary between implementors.
 Implementors are encouraged, but not required, to return numeric literals
 using the same based or exponent form used in the original compilation text.
 
-Appropriate Expression_Kinds:
-     An_Integer_Literal
-     A_Real_Literal
-     A_String_Literal
-Element Reference -An_Identifier          - 4.1 - No child elements
-Element Reference -An_Operator_Symbol     - 4.1 - No child elements
-Element Reference -A_Character_Literal    - 4.1 - No child elements
-Element Reference -An_Enumeration_Literal - 4.1 - No child elements
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_Integer_Literal
+A_Real_Literal
+A_String_Literal
+@end{Display}
+@end{DescribeCode}
 
-A string image returned by:
-   function Name_Image
-
-Semantic elements returned by:
-   function Corresponding_Name_Definition
-   function Corresponding_Name_Definition_List
-   function Corresponding_Name_Declaration
 
 @LabeledClause{function Name_Image}
 
+@begin{ElementRef}
+An_Identifier @em 4.1 @em No child elements@*
+An_Operator_Symbol @em 4.1 @em No child elements@*
+A_Character_Literal @em 4.1 @em No child elements@*
+An_Enumeration_Literal @em 4.1 @em No child elements
+@end{ElementRef}
 
-    @key[function] @AdaSubDefn{Name_Image} (Expression : @key[in] Asis.Expression) @key[return] Program_Text;
+@begin{ChildRef}@ @;
+@begin{Display}
+@ChgAdded{Version=[1],Text=[No child elements]}
+@end{Display}
+@leading@;A string image returned by:
+@begin{Display}
+function Name_Image
+@end{Display}
+@leading@;Semantic elements returned by:
+@begin{Display}
+function Corresponding_Name_Definition
+function Corresponding_Name_Definition_List
+function Corresponding_Name_Declaration
+@end{Display}
+@end{ChildRef}
 
-Name  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the name to query
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Name_Image} (Expression : @key[in] Asis.Expression) @key[return] Program_Text;
+@end{Example}
+
+Name @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the name to query.
 
 Returns the program text image of the name.
 
-An_Operator_Symbol elements have names with embedded quotes """abs"""
-  (function "abs").
+An_Operator_Symbol elements have names with embedded quotes ""abs""
+(function "@key[abs]").
 
 A_Character_Literal elements have names with embedded apostrophes "'x'"
-  (literal 'x').
+(literal 'x').
 
 An_Enumeration_Literal and An_Identifier elements have identifier names
-  "Blue" (literal Blue) "Abc" (identifier Abc).
+"Blue" (literal Blue) "Abc" (identifier Abc).
 
-Note: Implicit subtypes that can be encountered while traversing the
+@begin{SingleNote}
+Implicit subtypes that can be encountered while traversing the
 semantic information embedded in implicit inherited subprogram declarations
 (Reference Manual 3.4 (17-22)) could have names that are unique in a
 particular scope. This is because these subtypes are Is_Part_Of_Implicit
@@ -156,16 +200,21 @@ declarations that do not form part of the physical text of the original
 compilation units. Some applications may wish to carefully separate the names
 of declarations from the names of Is_Part_Of_Implicit declaration when
 creating symbol tables and other name-specific lookup mechanisms.
+@end{SingleNote}
 
 The case of names returned by this query may vary between implementors.
 Implementors are encouraged, but not required, to return names in the
 same case as was used in the original compilation text.
 
-Appropriate Expression_Kinds:
-     An_Identifier
-     An_Operator_Symbol
-     A_Character_Literal
-     An_Enumeration_Literal
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_Identifier
+An_Operator_Symbol
+A_Character_Literal
+An_Enumeration_Literal
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function References}
 
@@ -175,9 +224,9 @@ Appropriate Expression_Kinds:
                          Implicitly     : @key[in] Boolean := False)
                         @key[return] Asis.Name_List;
 
-Name    @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the entity to query
-Within_Element @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the limits for the query which is limited
-                 to the Element and its children.
+Name @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the entity to query.
+Within_Element @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the limits
+for the query which is limited to the Element and its children.
 
 If the Implicitly argument is True:
   Returns all usage references of the given entity made by both explicit
@@ -205,9 +254,9 @@ argument is part of an inconsistent compilation unit.
                             Implicitly     : @key[in] Boolean := False)
                            @key[return] Boolean;
 
-Name    @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the entity to query
-Within_Element @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the limits for the query which is limited
-                 to the Element and its children.
+Name @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the entity to query.
+Within_Element @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the limits
+for the query which is limited to the Element and its children.
 
 If the Implicitly argument is True:
   Returns True if the Name is referenced by either implicit or explicit
@@ -230,7 +279,8 @@ argument is part of an inconsistent compilation unit.
     @key[function] @AdaSubDefn{Corresponding_Name_Definition} (Reference : @key[in] Asis.Expression)
                              @key[return] Asis.Defining_Name;
 
-Reference   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} an expression to query
+Reference @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} an expression
+to query.
 
 Returns the defining_identifier, defining_character_literal,
 defining_operator_symbol, or defining_program_unit_name from the
@@ -411,17 +461,24 @@ Returns Element_Kinds:
 
 Predefined types, exceptions, operators in package Standard can be
 checked by testing that the enclosing Compilation_Unit is standard.
-Element Reference -An_Explicit_Dereference - 4.1
-
-Child Elements returned by function Prefix
 
 
 @LabeledClause{function Prefix}
 
+@begin{ElementRef}
+An_Explicit_Dereference @em 4.1
+@end{ElementRef}
+
+@begin{ChildRef}@ @;
+@begin{Display}
+function Prefix
+@end{Display}
+@end{ChildRef}
+
 
     @key[function] @AdaSubDefn{Prefix} (Expression : @key[in] Asis.Expression) @key[return] Asis.Expression;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the name expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the name expression to query
 
 Returns the prefix (the construct to the left of: the rightmost unnested
 left parenthesis in function_call elements and indexed_component elements or slice
@@ -441,19 +498,25 @@ Appropriate Expression_Kinds:
 
 Returns Expression_Kinds:
      An_Expression
-Element Reference -An_Indexed_Component - 4.1.1
-Child Elements returned by
-   function Prefix
-   function Index_Expressions
 
 
 @LabeledClause{function Index_Expressions}
 
+@begin{ElementRef}
+An_Indexed_Component @em 4.1.1
+@end{ElementRef}
+
+@begin{ChildRef}@ @;
+@begin{Display}
+function Prefix
+function Index_Expressions
+@end{Display}
+@end{ChildRef}
 
     @key[function] @AdaSubDefn{Index_Expressions} (Expression : @key[in] Asis.Expression)
                                @key[return] Asis.Expression_List;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} an indexed_component to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an indexed_component to query
 
 Returns the list of expressions (possibly only one) within the parenthesis,
 in their order of appearance.
@@ -463,19 +526,26 @@ Appropriate Expression_Kinds:
 
 Returns Element_Kinds:
      An_Expression
-Element Reference -A_Slice - 4.1.2
 
-Child Elements returned by
-   function Prefix
-   function Slice_Range
 
 @LabeledClause{function Slice_Range}
 
+@begin{ElementRef}
+A_Slice @em 4.1.2
+@end{ElementRef}
+
+@begin{ChildRef}@ @;
+@begin{Display}
+function Prefix
+function Slice_Range
+@end{Display}
+@end{ChildRef}
 
     @key[function] @AdaSubDefn{Slice_Range} (Expression : @key[in] Asis.Expression)
                          @key[return] Asis.Discrete_Range;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the slice to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the slice to
+query.
 
 Returns the discrete range of the slice.
 
@@ -491,7 +561,7 @@ Returns Definition_Kinds:
     @key[function] @AdaSubDefn{Selector} (Expression : @key[in] Asis.Expression)
                       @key[return] Asis.Expression;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the selected_component to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the selected_component to query
 
 Returns the selector (the construct to the right of the rightmost 'dot' in
 the selected_component).
@@ -512,7 +582,7 @@ Returns Expression_Kinds:
             (Expression : @key[in] Asis.Expression)
                 @key[return] Asis.Expression;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} an attribute_reference expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an attribute_reference expression to query
 
 Returns the identifier of the attribute_designator (the construct to the
 right of the rightmost tick of the attribute_reference). The Prefix of
@@ -537,7 +607,7 @@ Returns Expression_Kinds:
             (Expression : @key[in] Asis.Expression)
                 @key[return] Asis.Expression_List;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} an attribute expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an attribute expression to query
 
 Returns the static expressions associated with the optional argument of the
 attribute_designator. Expected predefined attributes are A'First(N),
@@ -571,7 +641,7 @@ that may have more than one static_expression.
                          Normalized : @key[in] Boolean := False)
                         @key[return] Asis.Association_List;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} an aggregate expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an aggregate expression to query
 Normalized  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether the normalized form is desired
 
 Returns a list of the record_component_association elements of a record_aggregate
@@ -622,7 +692,7 @@ Record_Component_Associations_Normalized will return True.
                               (Expression : @key[in] Asis.Expression)
                                        @key[return] Asis.Expression;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} an extension_aggregate expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an extension_aggregate expression to query
 
 Returns the ancestor_part expression preceding the reserved word with in
 the extension_aggregate.
@@ -640,7 +710,7 @@ Returns Element_Kinds:
                   (Expression : @key[in] Asis.Expression)
                         @key[return] Asis.Association_List;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} an array aggregate expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an array aggregate expression to query
 
 Returns a list of the Array_Component_Associations in an array aggregate.
 
@@ -1041,7 +1111,7 @@ Aggregates cannot have defaulted components.
     @key[function] @AdaSubDefn{Expression_Parenthesized} (Expression : @key[in] Asis.Expression)
                                       @key[return] Asis.Expression;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the parenthesized expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the parenthesized expression to query
 
 Returns the expression within the parenthesis. This operation unwinds only
 one set of parenthesis at a time, so the result may itself be
@@ -1065,7 +1135,7 @@ Returns Element_Kinds:
 
     @key[function] @AdaSubDefn{Is_Prefix_Call} (Expression : @key[in] Asis.Expression) @key[return] Boolean;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the function call expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the function call expression to query
 
 Returns True if the function call is in prefix form.
 
@@ -1087,7 +1157,7 @@ Expected Expression_Kinds:
             (Expression : @key[in] Asis.Expression)
                 @key[return] Asis.Declaration;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the function_call to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the function_call to query
 
 Returns the declaration of the called function.
 
@@ -1149,7 +1219,7 @@ artificial implicit declarations for predefined operators.
                                        Normalized : @key[in] Boolean := False)
                                       @key[return] Asis.Association_List;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the function call expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the function call expression to query
 Normalized  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether the normalized form is desired
 
 Returns a list of parameter_association elements of the call.
@@ -1216,7 +1286,7 @@ will return True.
                 (Expression : @key[in] Asis.Expression)
                 @key[return] Asis.Expression;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the short circuit operation to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the short circuit operation to query
 
 Returns the expression preceding the reserved words “and then” or “or else”
 in the short circuit expression.
@@ -1235,7 +1305,7 @@ Returns Element_Kinds:
                 (Expression : @key[in] Asis.Expression)
                 @key[return] Asis.Expression;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the short circuit operation to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the short circuit operation to query
 
 Returns the expression following the reserved words "or else" or "and then"
 in the short circuit expression.
@@ -1253,7 +1323,7 @@ Returns Element_Kinds:
     @key[function] @AdaSubDefn{Membership_Test_Expression} (Expression : @key[in] Asis.Expression)
                                         @key[return] Asis.Expression;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the membership test operation to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the membership test operation to query
 
 Returns the expression on the left hand side of the membership test.
 
@@ -1273,7 +1343,7 @@ Returns Element_Kinds:
                 (Expression : @key[in] Asis.Expression)
                 @key[return] Asis.Range_Constraint;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the membership test operation to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the membership test operation to query
 
 Returns the range following the reserved words "in" or "not in" from the
 membership test.
@@ -1293,7 +1363,7 @@ Returns Constraint_Kinds:
                 (Expression : @key[in] Asis.Expression)
                 @key[return] Asis.Expression;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the membership test operation to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the membership test operation to query
 
 Returns the subtype_mark expression following the reserved words "in" or
 "not in" from the membership test.
@@ -1314,7 +1384,7 @@ Returns Expression_Kinds:
                    (Expression : @key[in] Asis.Expression)
                        @key[return] Asis.Expression;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the type conversion or qualified expression to query.
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the type conversion or qualified expression to query.
 
 Returns the subtype_mark expression that converts or qualifies the
 expression.
@@ -1336,7 +1406,7 @@ Returns Expression_Kinds:
                    (Expression : @key[in] Asis.Expression)
                        @key[return] Asis.Expression;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the type conversion or qualified expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the type conversion or qualified expression to query
 
 Returns the expression being converted or qualified.
 
@@ -1353,7 +1423,8 @@ Returns Element_Kinds:
     @key[function] @AdaSubDefn{Allocator_Subtype_Indication} (Expression : @key[in] Asis.Expression)
                                            @key[return] Asis.Subtype_Indication;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the allocator expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the allocator
+expression to query.
 
 Returns the subtype indication for the object being allocated.
 
@@ -1369,7 +1440,8 @@ Returns Definition_Kinds:
     @key[function] @AdaSubDefn{Allocator_Qualified_Expression} (Expression : @key[in] Asis.Expression)
                                              @key[return] Asis.Expression;
 
-Expression  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the allocator expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the allocator
+expression to query.
 
 Returns the qualified expression for the object being allocated.
 
