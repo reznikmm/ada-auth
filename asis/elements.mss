@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2007/02/09 07:10:54 $}
+@comment{$Revision: 1.8 $ $Date: 2007/02/16 07:25:33 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -901,10 +901,10 @@ from the same physical compilation unit. The two elements may or
 may not be from the same open ASIS Context variable.
 
 @leading@keepnext@Chg{Version=[1],New=[A True result implies],Old=[Implies]}:
-@begin{Display}
-@exam{Is_Equal (Enclosing_Compilation_Unit (Left),
-          Enclosing_Compilation_Unit (Right)) = True}
-@end{Display}
+@begin{ChildExample}
+Is_Equal (Enclosing_Compilation_Unit (Left),
+          Enclosing_Compilation_Unit (Right)) = True
+@end{ChildExample}
 @end{DescribeCode}
 
 
@@ -925,10 +925,10 @@ from the same physical compilation unit, from the same open ASIS
 Context variable.
 
 @leading@keepnext@Chg{Version=[1],New=[A True result implies],Old=[Implies]}:
-@begin{Display}
-@exam{Is_Identical (Enclosing_Compilation_Unit (Left),
-              Enclosing_Compilation_Unit (Right)) = True}
-@end{Display}
+@begin{ChildExample}
+Is_Identical (Enclosing_Compilation_Unit (Left),
+              Enclosing_Compilation_Unit (Right)) = True
+@end{ChildExample}
 @end{DescribeCode}
 
 

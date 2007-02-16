@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2007/02/13 07:10:30 $}
+@comment{$Revision: 1.7 $ $Date: 2007/02/16 07:25:33 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -667,12 +667,12 @@ incomplete type declaration when given a full type declaration.
 
 @leading@;These two function calls will always produce identical results:
 
-@begin{Display}
-@exam{Decl2 := Corresponding_Type_Declaration (Decl1);
+@begin{ChildExample}
+Decl2 := Corresponding_Type_Declaration (Decl1);
 Decl2 := Corresponding_Type_Declaration
          (Decl1,
-          Enclosing_Context (Enclosing_Compilation_Unit (Decl1)));}
-@end{Display}
+          Enclosing_Context (Enclosing_Compilation_Unit (Decl1)));
+@end{ChildExample}
 
 Returns a Nil_Element when a full type declaration is given that has no
 corresponding private or incomplete type declaration, or when a
@@ -1283,11 +1283,11 @@ declarative context.
 
 @leading@keepnext@;These two function calls will always produce identical
 results:
-@begin{Display}
-@exam{Decl2 := Corresponding_Declaration (Decl1);
+@begin{ChildExample}
+Decl2 := Corresponding_Declaration (Decl1);
 Decl2 := Corresponding_Declaration
-         (Decl1, Enclosing_Context (Enclosing_Compilation_Unit (Decl1)));}
-@end{Display}
+         (Decl1, Enclosing_Context (Enclosing_Compilation_Unit (Decl1)));
+@end{ChildExample}
 
 If a specification declaration is given, the same element is returned,
 unless it is a generic instantiation or an inherited subprogram declaration
@@ -1421,11 +1421,11 @@ from any declarative context.
 
 @leading@keepnext@;These two function calls will always produce identical
 results:
-@begin{Display}
-@exam{Decl2 := Corresponding_Body (Decl1);
+@begin{ChildExample}
+Decl2 := Corresponding_Body (Decl1);
 Decl2 := Corresponding_Body
-         (Decl1, Enclosing_Context (Enclosing_Compilation_Unit (Decl1)));}
-@end{Display}
+         (Decl1, Enclosing_Context (Enclosing_Compilation_Unit (Decl1)));
+@end{ChildExample}
 
 If a body declaration is given, the same element is returned.
 
@@ -2227,11 +2227,11 @@ to the body stub.
 Returns a Nil_Element if the subunit does not exist in The_Context.
 
 @leading@;These two function calls will always produce identical results:
-@begin{Display}
-@exam{Decl2 := Corresponding_Subunit (Decl1);
+@begin{ChildExample}
+Decl2 := Corresponding_Subunit (Decl1);
 Decl2 := Corresponding_Subunit
-         (Decl1, Enclosing_Context (Enclosing_Compilation_Unit (Decl1));}
-@end{Display}
+         (Decl1, Enclosing_Context (Enclosing_Compilation_Unit (Decl1));
+@end{ChildExample}
 
 The parameter The_Context is used to locate the corresponding subunit body.
 Any non-Nil result will always have The_Context as its Enclosing_Context.
@@ -2272,10 +2272,10 @@ Returns True if the declaration is the proper_body of a subunit.
 Returns False for any unexpected Element.
 
 @leading@keepnext@;Equivalent to:
-@begin{Display}
-@exam{Declaration = Unit_Declaration (Enclosing_Compilation_Unit (Declaration))
-@key[and] Unit_Kind (Enclosing_Compilation_Unit (Declaration)) @key[in] A_Subunit}
-@end{Display}
+@begin{ChildExample}
+Declaration = Unit_Declaration (Enclosing_Compilation_Unit (Declaration))
+@key[and] Unit_Kind (Enclosing_Compilation_Unit (Declaration)) @key[in] A_Subunit
+@end{ChildExample}
 
 @leading@keepnext@;Expected Declaration_Kinds:
 @begin{Display}
@@ -2310,11 +2310,11 @@ Returns the body stub declaration located in the subunit's parent unit.
 Returns a Nil_Element if the parent unit does not exist in The_Context.
 
 @leading@;These two function calls will always produce identical results:
-@begin{Display}
-@exam{Decl2 := Corresponding_Body_Stub (Decl1);
+@begin{ChildExample}
+Decl2 := Corresponding_Body_Stub (Decl1);
 Decl2 := Corresponding_Body_Stub
-         (Decl1, Enclosing_Context (Enclosing_Compilation_Unit (Decl1)));}
-@end{Display}
+         (Decl1, Enclosing_Context (Enclosing_Compilation_Unit (Decl1)));
+@end{ChildExample}
 
 The parameter The_Context is used to locate the corresponding parent body.
 Any non-Nil result will always have The_Context as its Enclosing_Context.

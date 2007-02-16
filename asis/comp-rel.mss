@@ -1,6 +1,6 @@
 @Part(comp-rel, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/comp-rel.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2007/02/06 06:21:04 $}
+@comment{$Revision: 1.5 $ $Date: 2007/02/16 07:25:32 $}
 
 
 @LabeledSection{package Asis.Compilation_Units.Relations}
@@ -59,19 +59,19 @@ which they semantically depend.
 
 @begin{Itemize}
 @leading@keepnext@;Consistent units list:
-@begin{InnerItemize}
-   @noprefix@;The semantics for the ordering of units in the first list are
+@begin{Indent}
+   The semantics for the ordering of units in the first list are
    defined by the individual queries.
 
-   @noprefix@;Every unit in this list is unique. No duplicates are returned; no
+   Every unit in this list is unique. No duplicates are returned; no
    two units in the list are Is_Equal or Is_Identical.
-@end{InnerItemize}
+@end{Indent}
 
 @leading@keepnext@;Inconsistent units list:
-@begin{InnerItemize}
-   @noprefix@;The second list is made up of unit pairs.
+@begin{Indent}
+   The second list is made up of unit pairs.
 
-   @noprefix@;Each pairing defines an inconsistent semantic dependence relationship.
+   Each pairing defines an inconsistent semantic dependence relationship.
    The right unit of each pair semantically depends on the preceding left
    unit. All rightmost units of each pair are always inconsistent, and will
    not appear in the consistent units list. The leftmost unit can be either
@@ -79,86 +79,92 @@ which they semantically depend.
    also appears in the consistent units list; otherwise the unit is part of
    an inconsistent transitive relationship.
 
-   @noprefix@;The unit pairs are ordered such that there are no forward semantic
+   The unit pairs are ordered such that there are no forward semantic
    dependencies between the inconsistent units. Each inconsistent unit's
    supporters always precede it in the list.
 
-   @noprefix@;As an example, given four units, A withs B, B withs C, and C withs D;
+   As an example, given four units, A withs B, B withs C, and C withs D;
    if D is replaced, the inconsistent list contains six units with the
    three pairs:
-@begin{Example}
-             DC  CB  BA
-@end{Example}
+@begin{ChildExample}
+DC  CB  BA
+@end{ChildExample}
 
-   @noprefix@;The list indicates that units C, B, and A are inconsistent (the rightmost
+   The list indicates that units C, B, and A are inconsistent (the rightmost
    units of each pair). Semantic dependencies such as B depends on C
    also are indicated. The units C, B, and A are in an order that could be
    submitted to the compiler (a possible recompilation order).
 
-   @noprefix@;If a unit is inconsistent because the source for the unit has been
+   If a unit is inconsistent because the source for the unit has been
    edited (or otherwise been made inconsistent by some action of the user
    or implementation) then the unit references Nil_Compilation_Unit as the
    cause of the inconsistency (e.g., (Nil A Nil B) is a list of two
    inconsistent units, neither of which can point to a third unit as the
    cause for their being inconsistent).
-@end{InnerItemize}
+@end{Indent}
 
 @begin{ImplPerm}
-@begin{InnerItemize}
-@noprefix@;An implementation is allowed to use Nil_Compilation_Unit value for
+@begin{Indent}
+@begin{Indent}
+@begin{Indent}
+An implementation is allowed to use Nil_Compilation_Unit value for
 the first unit of each pair if it cannot determine the supporting unit
 causing the inconsistent semantic dependence.
-
-@leading@keepnext@noprefix@;For the above example, the list returned is:
-
-@begin{Example}
-            DC DB DA CB CA BA
-@end{Example}
-
-@leading@keepnext@noprefix@;This list reports all dependencies:
-
-@begin{Example}
-            D withed by C withed by B withed by A => DC DB DA
-                        C withed by B withed by A => CB CA
-                                    B withed by A => BA
-@end{Example}
-@end{InnerItemize}
+@end{Indent}
+@end{Indent}
+@end{Indent}
 @end{ImplPerm}
 
+@begin{Indent}
+@leading@keepnext@;For the above example, the list returned is:
+
+@begin{ChildExample}
+DC DB DA CB CA BA
+@end{ChildExample}
+
+@leading@keepnext@;This list reports all dependencies:
+
+@begin{ChildExample}
+D withed by C withed by B withed by A => DC DB DA
+            C withed by B withed by A => CB CA
+                        B withed by A => BA
+@end{ChildExample}
+@end{Indent}
+
 @leading@keepnext@;Missing dependence list:
-@begin{InnerItemize}
-   @noprefix@;The third list is made up of unit pairs.  Each pairing consists of a
+@begin{Indent}
+   The third list is made up of unit pairs.  Each pairing consists of a
    unit followed by a missing related unit needed by the first unit.
    A missing unit is a required Compilation_Unit, with a known name, with a
    Unit_Kind that is either A_Nonexistent_Declaration or A_Nonexistent_Body.
 
-   @leading@keepnext@noprefix@;For example:
+   @leading@keepnext@;For example:
 
-   @noprefix@;Given a list containing the units:  AB AC
+   Given a list containing the units:  AB AC
 
-@begin{Example}
-            If Unit_Kind(B) = A_Nonexistent_Declaration and
-               Unit_Kind(C) = A_Nonexistent_Body then
+@begin{ChildExample}
+If Unit_Kind(B) = A_Nonexistent_Declaration and
+   Unit_Kind(C) = A_Nonexistent_Body then
 
-            It can be deduced that:
-               A is missing a needed supporter B (A depends semantically on B).
-               A is missing a needed related unit body C (depending on
-               the kind for A, C can be A's required body or some subunit of A).
-@end{Example}
+It can be deduced that:
+   A is missing a needed supporter B (A depends semantically on B).
+   A is missing a needed related unit body C (depending on
+   the kind for A, C can be A's required body or some subunit of A).
+@end{ChildExample}
 
-   @noprefix@;A unit is reported as missing only if the Post-Compilation Rules of Ada
+   A unit is reported as missing only if the Post-Compilation Rules of Ada
    determine it to be needed. Reference Manual 10.2.
-@end{InnerItemize}
+@end{Indent}
 
 @leading@keepnext@;Circular dependence list:
-@begin{InnerItemize}
+@begin{Indent}
 
-   @noprefix@;Circular dependencies between compilation units are provided in the
+   Circular dependencies between compilation units are provided in the
    fourth list. There may be more than one set of circular dependencies.
    The ordering of distinct sets in the list is implementation-defined.
    This list will never contain nonexistent units.
 
-   @noprefix@;The list is made up of unit pairs. The second unit of each pair depends
+   The list is made up of unit pairs. The second unit of each pair depends
    semantically on the first unit. A circularity is established when the
    first unit of a pair also appears as the second unit of a later pair.
    (See the unit A in the example below; it is the first unit of the first
@@ -166,22 +172,22 @@ causing the inconsistent semantic dependence.
    dependent units, if any, starts with the next unit in the list (the unit
    D in the example below).
 
-   @noprefix@;For example:
+   For example:
 
-   @noprefix@;Given a list containing the units:  AC CB BA DG GF FE ED
+   Given a list containing the units:  AC CB BA DG GF FE ED
 
-@begin{Example}
-           It can be determined that there are two sets of circularly
-           dependent units:
-               {A, B, C} and {D, E, F, G}
+@begin{ChildExample}
+It can be determined that there are two sets of circularly
+dependent units:
+    {A, B, C} and {D, E, F, G}
 
-           The dependencies are:  A depends on B, B depends on C, C depends on A.
-                  D depends on E, E depends on F, F depends on G, G depends on D.
-@end{Example}
+The dependencies are:  A depends on B, B depends on C, C depends on A.
+       D depends on E, E depends on F, F depends on G, G depends on D.
+@end{ChildExample}
 
-   @noprefix@;Each circle of dependence is reported exactly once. It is not reported
+   Each circle of dependence is reported exactly once. It is not reported
    once for each unit in the circle.
-@end{InnerItemize}
+@end{Indent}
 @end{Itemize}
 
 
@@ -333,10 +339,14 @@ missing, and circular lists are empty, the consistent list will contain
 all units required to elaborate the arguments.
 
 @begin{ImplPerm}
-@begin{InnerItemize}@Comment{Only way to get indenting and justification}
+@begin{Indent}
+@begin{Indent}
+@begin{Indent}
 @noprefix@;The Relationship value may include any number of implementation-specific
 runtime support packages.
-@end{InnerItemize}
+@end{Indent}
+@end{Indent}
+@end{Indent}
 @end{ImplPerm}
 
 The first unit in the Consistent units list will always be the

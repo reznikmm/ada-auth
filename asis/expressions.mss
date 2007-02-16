@@ -1,6 +1,6 @@
 @Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2007/02/13 07:10:31 $}
+@comment{$Revision: 1.4 $ $Date: 2007/02/16 07:25:33 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -32,12 +32,12 @@ This query does not "unwind" subtypes or derived types to get to the
 Corresponding_First_Subtype or Corresponding_Parent_Subtype declarations.
 For example, for the following program text:
 
-@begin{Display}
+@begin{ChildExample}
 @key[type] Int @key[is range] -5_000 .. 5_000;
 @key[type] My_Int @key[is new] Int;
 @key[type] Good_Int @key[is new] My_Int;
 Var: Good_Int;
-@end{Display}
+@end{ChildExample}
 
 The type declaration for Good_Int should be returned. The "unwinding" should
 not occur. The type declaration for either My_Int or Int should not be returned.
@@ -191,17 +191,6 @@ A_Character_Literal elements have names with embedded apostrophes "'x'"
 An_Enumeration_Literal and An_Identifier elements have identifier names
 "Blue" (literal Blue) "Abc" (identifier Abc).
 
-@begin{SingleNote}
-Implicit subtypes that can be encountered while traversing the
-semantic information embedded in implicit inherited subprogram declarations
-(Reference Manual 3.4 (17-22)) could have names that are unique in a
-particular scope. This is because these subtypes are Is_Part_Of_Implicit
-declarations that do not form part of the physical text of the original
-compilation units. Some applications may wish to carefully separate the names
-of declarations from the names of Is_Part_Of_Implicit declaration when
-creating symbol tables and other name-specific lookup mechanisms.
-@end{SingleNote}
-
 The case of names returned by this query may vary between implementors.
 Implementors are encouraged, but not required, to return names in the
 same case as was used in the original compilation text.
@@ -215,69 +204,108 @@ An_Enumeration_Literal
 @end{Display}
 @end{DescribeCode}
 
+@begin{SingleNote}
+Implicit subtypes that can be encountered while traversing the
+semantic information embedded in implicit inherited subprogram declarations
+(Reference Manual 3.4 (17-22)) could have names that are unique in a
+particular scope. This is because these subtypes are Is_Part_Of_Implicit
+declarations that do not form part of the physical text of the original
+compilation units. Some applications may wish to carefully separate the names
+of declarations from the names of Is_Part_Of_Implicit declaration when
+creating symbol tables and other name-specific lookup mechanisms.
+@end{SingleNote}
+
 
 @LabeledClause{function References}
 
 
-    @key[function] @AdaSubDefn{References} (Name           : @key[in] Asis.Element;
-                         Within_Element : @key[in] Asis.Element;
-                         Implicitly     : @key[in] Boolean := False)
-                        @key[return] Asis.Name_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{References} (Name           : @key[in] Asis.Element;
+                     Within_Element : @key[in] Asis.Element;
+                     Implicitly     : @key[in] Boolean := False)
+                    @key[return] Asis.Name_List;
+@end{Example}
 
 Name @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the entity to query.
 Within_Element @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the limits
 for the query which is limited to the Element and its children.
 
-If the Implicitly argument is True:
-  Returns all usage references of the given entity made by both explicit
-  and implicit elements within the given limits.
+@leading@;If the Implicitly argument is True:
+@begin{Description}
+@noprefix@;Returns all usage references of the given entity made by both
+explicit and implicit elements within the given limits.
+@end{Description}
 
-If the Implicitly argument is False:
-  Returns all usage references of the given entity made only by explicit
-  elements within the given limits.
+@leading@;If the Implicitly argument is False:
+@begin{Description}
+@noprefix@;Returns all usage references of the given entity made only by
+explicit elements within the given limits.
+@end{Description}
 
 Returned references are in their order of appearance.
 
-Appropriate Element_Kinds:
-     A_Defining_Name
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Defining_Name
+@end{Display}
+
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
 
 May raise ASIS_Failed with a Status of Obsolete_Reference_Error if the
 argument is part of an inconsistent compilation unit.
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Referenced}
 
 
-    @key[function] @AdaSubDefn{Is_Referenced} (Name           : @key[in] Asis.Element;
-                            Within_Element : @key[in] Asis.Element;
-                            Implicitly     : @key[in] Boolean := False)
-                           @key[return] Boolean;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Referenced} (Name           : @key[in] Asis.Element;
+                        Within_Element : @key[in] Asis.Element;
+                        Implicitly     : @key[in] Boolean := False)
+                       @key[return] Boolean;
+@end{Example}
 
 Name @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the entity to query.
 Within_Element @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the limits
 for the query which is limited to the Element and its children.
 
-If the Implicitly argument is True:
-  Returns True if the Name is referenced by either implicit or explicit
-  elements within the given limits.
+@leading@;If the Implicitly argument is True:
+@begin{Description}
+@noprefix@;Returns True if the Name is referenced by either implicit or
+explicit elements within the given limits.
+@end{Description}
 
-If the Implicitly argument is False:
-  Returns True only if the Name is referenced by explicit elements.
+@leading@;If the Implicitly argument is False:
+@begin{Description}
+@noprefix@;Returns True only if the Name is referenced by explicit elements.
+@end{Description}
 
 Returns False for any unexpected Element.
 
-Expected Element_Kinds:
-     A_Defining_Name
+@leading@keepnext@;Expected Element_Kinds:
+@begin{Display}
+A_Defining_Name
+@end{Display}
 
 May raise ASIS_Failed with a Status of Obsolete_Reference_Error if the
 argument is part of an inconsistent compilation unit.
+@end{DescribeCode}
+
 
 @LabeledClause{function Corresponding_Name_Definition}
 
 
-    @key[function] @AdaSubDefn{Corresponding_Name_Definition} (Reference : @key[in] Asis.Expression)
-                             @key[return] Asis.Defining_Name;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Name_Definition} (Reference : @key[in] Asis.Expression)
+                         @key[return] Asis.Defining_Name;
+@end{Example}
 
 Reference @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} an expression
 to query.
@@ -286,28 +314,30 @@ Returns the defining_identifier, defining_character_literal,
 defining_operator_symbol, or defining_program_unit_name from the
 declaration of the referenced entity.
 
-- Record component references return the defining name of the
+@begin{Itemize}
+Record component references return the defining name of the
   record discriminant or component_declaration. For references to inherited
   declarations of derived types, the Corresponding_Name_Definition returns
   the defining name of the implicit inherited declaration.
 
-- References to implicit operators and inherited subprograms will return
+References to implicit operators and inherited subprograms will return
   an Is_Part_Of_Implicit defining name for the operation. The
   Enclosing_Element of the name is an implicit declaration for the
   operation. The Enclosing_Element of the declaration is the associated
   derived_type_definition.
 
-- References to formal parameters given in calls to inherited subprograms
+References to formal parameters given in calls to inherited subprograms
   will return an Is_Part_Of_Implicit defining name for the
   Parameter_Specification from the inherited subprogram specification.
 
-- References to visible components of instantiated generic packages will
+References to visible components of instantiated generic packages will
   return a name from the expanded generic specification instance.
 
-- References, within expanded generic instances, that refer to other
+References, within expanded generic instances, that refer to other
   components of the same, or an enclosing, expanded generic instance,
   return a name from the appropriate expanded specification or body
   instance.
+@end{Itemize}
 
 In case of renaming, the function returns the new name for the entity.
 
@@ -320,32 +350,39 @@ Returns a Nil_Element if the argument is a dispatching call.
 The Enclosing_Element of a non-Nil result is either a Declaration or a
 Statement.
 
-Appropriate Expression_Kinds:
-     An_Identifier
-     An_Operator_Symbol
-     A_Character_Literal
-     An_Enumeration_Literal
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_Identifier
+An_Operator_Symbol
+A_Character_Literal
+An_Enumeration_Literal
+@end{Display}
 
-Returns Element_Kinds:
-     Not_An_Element
-     A_Defining_Name
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+Not_An_Element
+A_Defining_Name
+@end{Display}
+@end{DescribeCode}
 
-@b{Implementation Permissions}
+@begin{ImplPerm}
 
-An implementation may choose to return any part of multi-part
+@leading@;An implementation may choose to return any part of multi-part
 declarations and definitions. Multi-part declaration/definitions
 can occur for:
 
-- Subprogram specification in package specification, package body,
-  and subunits (is separate);
+@begin{Itemize}
+Subprogram specification in package specification, package body,
+  and subunits (@key[is separate]);
 
-- Entries in package specification, package body, and subunits (is separate);
+Entries in package specification, package body, and subunits (@key[is separate]);
 
-- Private type and full type declarations;
+Private type and full type declarations;
 
-- Incomplete type and full type declarations; and
+Incomplete type and full type declarations; and
 
-- Deferred constant and full constant declarations.
+Deferred constant and full constant declarations.
+@end{Itemize}
 
 No guarantee is made that the element will be the first part or
 that the determination will be made due to any visibility rules.
@@ -356,46 +393,58 @@ Some implementations do not represent all forms of implicit
 declarations such that elements representing them can be easily
 provided. An implementation can choose whether or not to construct
 and provide artificial declarations for implicitly declared elements.
+@end{ImplPerm}
 
-@b{Implementation Requirement}s
+@begin{ImplReq}
 
-Raises ASIS_Inappropriate_Element, with a Status of Value_Error, if passed
-a reference that does not have a declaration:
+@leading@;Raises ASIS_Inappropriate_Element, with a Status of Value_Error, if
+passed a reference that does not have a declaration:
 
-- a reference to an attribute_designator. Attributes are defined, but
-  have no implicit or explicit declarations;
+@begin{Itemize}
+a reference to an attribute_designator. Attributes are defined, but
+have no implicit or explicit declarations;
 
-- an identifier which syntactically is placed before "=>" in a
-  pragma_argument_association which has the form of a named association;
-  such an identifier can never have a declaration;
+an identifier which syntactically is placed before "=>" in a
+pragma_argument_association which has the form of a named association;
+such an identifier can never have a declaration;
 
-- an identifier specific to a pragma (Reference Manual, 2.8(10));
+an identifier specific to a pragma (Reference Manual, 2.8(10)).
+@end{Itemize}
 
-    pragma Should_I_Check ( Really => Yes );
+@ChgAdded{Version=[1],Type=[Leading],Text=[For example:]}
+
+@begin{ChildExample}
+@key[pragma] Should_I_Check (Really => Yes);
+@end{ChildExample}
 
 In this example, both the names Really and Yes have no declaration.
 
-Raises ASIS_Inappropriate_Element, with a Status of Value_Error, if passed
-a portion of a pragma that was "ignored" by the compiler and which does
-not have (sufficient) semantic information for a proper return result
-to be computed. For example,
+@leading@;Raises ASIS_Inappropriate_Element, with a Status of Value_Error, if
+passed a portion of a pragma that was "ignored" by the compiler and which does
+not have (sufficient) semantic information for a proper return result to be
+computed. For example:
 
-    pragma I_Am_Ignored (Foof);
+@begin{ChildExample}
+@key[pragma] I_Am_Ignored (Foof);
+@end{ChildExample}
 
 The "Foof" expression is An_Identifier but raises this exception
 if passed to Corresponding_Name_Definition if the pragma was ignored
 or unprocessed.
 
-Raises ASIS_Inappropriate_Element, with a Status of Value_Error, if passed
-a portion of a pragma that is an ambiguous reference to more than one
-entity. For example,
+@leading@;Raises ASIS_Inappropriate_Element, with a Status of Value_Error, if
+passed a portion of a pragma that is an ambiguous reference to more than one
+entity. For example:
 
-    pragma Inline ("+");        -- Inlines all "+" operators
+@begin{ChildExample}
+@key[pragma] Inline ("+");  -- @examcom{Inlines all "+" operators}
+@end{ChildExample}
 
 The "+" expression is An_Operator_Symbol but raises this
 exception if it referenced more than one "+" operator. In this
 case, the Corresponding_Name_Definition_List query can be used to obtain a
 list of referenced entities.
+@end{ImplReq}
 
 
 @LabeledClause{function Corresponding_Name_Definition_List}
@@ -416,14 +465,20 @@ more than one entity. For example,
 The "+" expression is An_Operator_Symbol but could reference more than one "+"
 operator. In this case, the resulting list includes all referenced entities.
 
-Appropriate Expression_Kinds:
-     An_Identifier
-     An_Operator_Symbol
-     A_Character_Literal
-     An_Enumeration_Literal
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_Identifier
+An_Operator_Symbol
+A_Character_Literal
+An_Enumeration_Literal
+@end{Display}
 
-Returns Element_Kinds:
-     A_Defining_Name
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Defining_Name
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Corresponding_Name_Declaration}
 
@@ -446,18 +501,25 @@ See the comments for Corresponding_Name_Definition for details.
 The result is either a Declaration or a Statement. Statements result
 from references to statement labels, loop identifiers, and block identifiers.
 
-Appropriate Element_Kinds:
-     An_Expression
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
 
-Appropriate Expression_Kinds:
-     An_Identifier
-     An_Operator_Symbol
-     A_Character_Literal
-     An_Enumeration_Literal
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_Identifier
+An_Operator_Symbol
+A_Character_Literal
+An_Enumeration_Literal
+@end{Display}
 
-Returns Element_Kinds:
-     A_Declaration
-     A_Statement
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Declaration
+A_Statement
+@end{Display}
+@end{DescribeCode}
 
 Predefined types, exceptions, operators in package Standard can be
 checked by testing that the enclosing Compilation_Unit is standard.
@@ -488,16 +550,21 @@ tick for attribute_reference elements).
 Returns the operator_symbol for infix operator function calls. The infix
 form A + B is equivalent to the prefix form "+"(A, B).
 
-Appropriate Expression_Kinds:
-     An_Explicit_Dereference       P.ALL
-     An_Attribute_Reference        Priv'Base'First
-     A_Function_Call               Abc(...) or Integer'Image(...)
-     An_Indexed_Component          An_Array(3)
-     A_Selected_Component          A.B.C
-     A_Slice                       An_Array(3 .. 5)
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_Explicit_Dereference @em P.ALL
+An_Attribute_Reference @em Priv'Base'First
+A_Function_Call @em Abc(...) or Integer'Image(...)
+An_Indexed_Component @em An_Array(3)
+A_Selected_Component @em A.B.C
+A_Slice @em An_Array(3 .. 5)
+@end{Display}
 
-Returns Expression_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Index_Expressions}
@@ -521,11 +588,16 @@ Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an indexed_com
 Returns the list of expressions (possibly only one) within the parenthesis,
 in their order of appearance.
 
-Appropriate Expression_Kinds:
-     An_Indexed_Component
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_Indexed_Component
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Slice_Range}
@@ -549,11 +621,17 @@ query.
 
 Returns the discrete range of the slice.
 
-Appropriate Expression_Kinds:
-     A_Slice
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+A_Slice
+@end{Display}
 
-Returns Definition_Kinds:
-     A_Discrete_Range
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+A_Discrete_Range
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Selector}
 
@@ -566,14 +644,20 @@ Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the selected_c
 Returns the selector (the construct to the right of the rightmost 'dot' in
 the selected_component).
 
-Appropriate Expression_Kinds:
-     A_Selected_Component
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+A_Selected_Component
+@end{Display}
 
-Returns Expression_Kinds:
-     An_Identifier
-     An_Operator_Symbol
-     A_Character_Literal
-     An_Enumeration_Literal
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
+An_Operator_Symbol
+A_Character_Literal
+An_Enumeration_Literal
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Attribute_Designator_Identifier}
 
@@ -590,14 +674,19 @@ the attribute_reference can itself be an attribute_reference as in
 T'BASE'FIRST where the prefix is T'BASE and the attribute_designator name
 is FIRST.
 
-Attribute_designator reserved words "access", "delta", and "digits" are treated
-as An_Identifier.
+Attribute_designator reserved words @key[access], @key[delta], and @key[digits]
+are treated as An_Identifier.
 
-Appropriate Expression_Kinds:
-     An_Attribute_Reference
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_Attribute_Reference
+@end{Display}
 
-Returns Expression_Kinds:
-     An_Identifier
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Attribute_Designator_Expressions}
@@ -615,18 +704,23 @@ A'Last(N), A'Length(N), and A'Range(N).
 
 Returns a Nil_Element_List if there are no arguments.
 
-Appropriate Expression_Kinds:
-     An_Attribute_Reference
-         Appropriate Attribute_Kinds:
-              A_First_Attribute
-              A_Last_Attribute
-              A_Length_Attribute
-              A_Range_Attribute
-              An_Implementation_Defined_Attribute
-              An_Unknown_Attribute
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_Attribute_Reference
+  Appropriate Attribute_Kinds:
+    A_First_Attribute
+    A_Last_Attribute
+    A_Length_Attribute
+    A_Range_Attribute
+    An_Implementation_Defined_Attribute
+    An_Unknown_Attribute
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 @b{Implementation Permissions}
 
@@ -663,12 +757,16 @@ A_Defining_Name component that denotes the discriminant_specification or
 component_declaration, and one An_Expression component that is the
 expression.
 
-Appropriate Expression_Kinds:
-     A_Record_Aggregate
-     An_Extension_Aggregate
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+A_Record_Aggregate
+An_Extension_Aggregate
+@end{Display}
 
-Returns Association_Kinds:
-     A_Record_Component_Association
+@leading@keepnext@;Appropriate Association_Kinds:
+@begin{Display}
+A_Record_Component_Association
+@end{Display}
 
 @b{Implementation Requirement}s
 
@@ -694,14 +792,19 @@ Record_Component_Associations_Normalized will return True.
 
 Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an extension_aggregate expression to query
 
-Returns the ancestor_part expression preceding the reserved word with in
+Returns the ancestor_part expression preceding the reserved word @key[with] in
 the extension_aggregate.
 
-Appropriate Expression_Kinds:
-     An_Extension_Aggregate
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_Extension_Aggregate
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 @LabeledClause{function Array_Component_Associations}
 
@@ -714,9 +817,11 @@ Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an array aggre
 
 Returns a list of the Array_Component_Associations in an array aggregate.
 
-Appropriate Expression_Kinds:
-     A_Positional_Array_Aggregate
-     A_Named_Array_Aggregate
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+A_Positional_Array_Aggregate
+A_Named_Array_Aggregate
+@end{Display}
 
 Returns Association_Kinds:
      An_Array_Component_Association
@@ -754,16 +859,24 @@ If the Association is from a positional_array_aggregate:
 
 - Returns a Nil_Element_List otherwise.
 
-Appropriate Association_Kinds:
-     An_Array_Component_Association
+@leading@keepnext@;Appropriate Association_Kinds:
+@begin{Display}
+An_Array_Component_Association
+@end{Display}
 
-Returns Element_Kinds:
-     A_Definition
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Definition
+An_Expression
+@end{Display}
 
-Returns Definition_Kinds:
-     A_Discrete_Range
-     An_Others_Choice
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+A_Discrete_Range
+An_Others_Choice
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Record_Component_Choices}
 
@@ -802,17 +915,23 @@ provide one formal A_Defining_Name => An_Expression pair per
 association. These artificial associations are Is_Normalized. Their
 component A_Defining_Name is not Is_Normalized.
 
-Appropriate Association_Kinds:
-     A_Record_Component_Association
+@leading@keepnext@;Appropriate Association_Kinds:
+@begin{Display}
+A_Record_Component_Association
+@end{Display}
 
-Returns Element_Kinds:
-     A_Defining_Name             -- Is_Normalized(Association)
-     An_Expression               -- not Is_Normalized(Association)
-          Returns Expression_Kinds:
-               An_Identifier
-     A_Definition
-          Returns Definition_Kinds:
-               An_Others_Choice
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Defining_Name @em Is_Normalized(Association)
+An_Expression @em @key[not] Is_Normalized(Association)
+  Returns Expression_Kinds:
+    An_Identifier
+A_Definition
+  Returns Definition_Kinds:
+    An_Others_Choice
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Component_Expression}
 
@@ -832,12 +951,17 @@ provide one formal A_Defining_Name => An_Expression pair per
 association. These artificial associations are Is_Normalized. Their
 component An_Expression elements are not Is_Normalized.
 
-Appropriate Association_Kinds:
-     A_Record_Component_Association
-     An_Array_Component_Association
+@leading@keepnext@;Appropriate Association_Kinds:
+@begin{Display}
+A_Record_Component_Association
+An_Array_Component_Association
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 @LabeledClause{function Formal_Parameter}
 
@@ -875,18 +999,24 @@ provide one formal A_Defining_Name => An_Expression pair per
 association. These artificial associations are Is_Normalized. Their
 component A_Defining_Name elements are not Is_Normalized.
 
-Appropriate Association_Kinds:
-     A_Parameter_Association
-     A_Generic_Association
-     A_Pragma_Argument_Association
+@leading@keepnext@;Appropriate Association_Kinds:
+@begin{Display}
+A_Parameter_Association
+A_Generic_Association
+A_Pragma_Argument_Association
+@end{Display}
 
-Returns Element_Kinds:
-     Not_An_Element
-     An_Operator_Symbol
-     A_Defining_Name             -- Is_Normalized(Association)
-     An_Expression               -- not Is_Normalized(Association)
-          Returns Expression_Kinds:
-                An_Identifier
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+Not_An_Element
+An_Operator_Symbol
+A_Defining_Name @em Is_Normalized(Association)
+An_Expression @em @key[not] Is_Normalized(Association)
+  Returns Expression_Kinds:
+    An_Identifier
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Actual_Parameter}
 
@@ -948,13 +1078,19 @@ If the Association argument is from a Normalized list:
 If the argument is A_Pragma_Argument_Association, then this function may
 return any expression to support implementation-defined pragmas.
 
-Appropriate Association_Kinds:
-     A_Parameter_Association
-     A_Generic_Association
-     A_Pragma_Argument_Association
+@leading@keepnext@;Appropriate Association_Kinds:
+@begin{Display}
+A_Parameter_Association
+A_Generic_Association
+A_Pragma_Argument_Association
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Discriminant_Selector_Names}
 
@@ -991,14 +1127,19 @@ If the Association argument is from a Normalized list:
   association. These artificial associations are Is_Normalized. Their
   component A_Defining_Name elements are not Is_Normalized.
 
-Appropriate Association_Kinds:
-     A_Discriminant_Association
+@leading@keepnext@;Appropriate Association_Kinds:
+@begin{Display}
+A_Discriminant_Association
+@end{Display}
 
-Returns Element_Kinds:
-     A_Defining_Name             -- Is_Normalized(Association)
-     An_Expression               -- not Is_Normalized(Association)
-          Returns Expression_Kinds:
-               An_Identifier
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Defining_Name @em Is_Normalized (Association)
+An_Expression @em @key[not] Is_Normalized (Association)
+  Returns Expression_Kinds:
+    An_Identifier
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Discriminant_Expression}
@@ -1043,11 +1184,17 @@ If the Association argument is from a Normalized list:
   Is_Defaulted_Association. Their component An_Expression elements are
   not Is_Normalized and are not Is_Defaulted_Association.
 
-Appropriate Association_Kinds:
-     A_Discriminant_Association
+@leading@keepnext@;Appropriate Association_Kinds:
+@begin{Display}
+A_Discriminant_Association
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Normalized}
 
@@ -1123,11 +1270,16 @@ example, an expression of a type_conversion is A_Parenthesized_Expression only
 if it is similar to the form subtype_mark((expression)) where it has at least
 one set of its own parenthesis.
 
-Appropriate Expression_Kinds:
-     A_Parenthesized_Expression
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+A_Parenthesized_Expression
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Is_Prefix_Call}
@@ -1178,31 +1330,40 @@ clause. If an implementation cannot return such a subprogram definition, a
 Nil_Element should be returned. For an attribute reference which is not
 (re)defined by an attribute definition clause, a Nil_Element should be returned.
 
-Appropriate Expression_Kinds:
-     A_Function_Call
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+A_Function_Call
+@end{Display}
 
-Returns Declaration_Kinds:
-     Not_A_Declaration
-     A_Function_Declaration
-     A_Function_Body_Declaration
-     A_Function_Body_Stub
-     A_Function_Renaming_Declaration
-     A_Function_Instantiation
-     A_Formal_Function_Declaration
-     A_Generic_Function_Declaration
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+Not_A_Declaration
+A_Function_Declaration
+A_Function_Body_Declaration
+A_Function_Body_Stub
+A_Function_Renaming_Declaration
+A_Function_Instantiation
+A_Formal_Function_Declaration
+A_Generic_Function_Declaration
+@end{Display}
+@end{DescribeCode}
 
-@b{Implementation Permissions}
+@begin{ImplPerm}
+@leading@;An implementation may choose to return any part of multi-part
+declarations and definitions. Multi-part declaration/definitions can occur for:
+@begin{Itemize}
+Subprogram specification in package specification, package body,
+and subunits (@key[is separate]);
 
-An implementation may choose to return any part of multi-part declarations
-and definitions. Multi-part declaration/definitions can occur for:
+Entries in package specification, package body, and subunits
+(@key[is separate]);
 
-   - Subprogram specification in package specification, package body,
-     and subunits (is separate);
-   - Entries in package specification, package body, and subunits
-     (is separate);
-   - Private type and full type declarations;
-   - Incomplete type and full type declarations; and
-   - Deferred constant and full constant declarations.
+Private type and full type declarations;
+
+Incomplete type and full type declarations; and
+
+Deferred constant and full constant declarations.
+@end{Itemize}
 
 No guarantee is made that the element will be the first part or
 that the determination will be made due to any visibility rules.
@@ -1211,6 +1372,8 @@ on which part is returned.
 
 An implementation can choose whether or not to construct and provide
 artificial implicit declarations for predefined operators.
+@end{ImplPerm}
+
 
 @LabeledClause{function Function_Call_Parameters}
 
@@ -1254,11 +1417,16 @@ calls). ASIS cannot produce any meaningful result in this case.
 The exception ASIS_Inappropriate_Element is raised when the function
 call is an attribute reference and Is_Normalized is True.
 
-Appropriate Expression_Kinds:
-     A_Function_Call
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+A_Function_Call
+@end{Display}
 
-Returns Element_Kinds:
-     A_Parameter_Association
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Parameter_Association
+@end{Display}
+@end{DescribeCode}
 
 @b{Implementation Requirement}s
 
@@ -1288,15 +1456,21 @@ will return True.
 
 Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the short circuit operation to query
 
-Returns the expression preceding the reserved words “and then” or “or else”
-in the short circuit expression.
+Returns the expression preceding the reserved words @key[and then] or
+@key[or else] in the short circuit expression.
 
-Appropriate Expression_Kinds:
-     An_And_Then_Short_Circuit
-     An_Or_Else_Short_Circuit
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_And_Then_Short_Circuit
+An_Or_Else_Short_Circuit
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Short_Circuit_Operation_Right_Expression}
 
@@ -1307,15 +1481,21 @@ Returns Element_Kinds:
 
 Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the short circuit operation to query
 
-Returns the expression following the reserved words "or else" or "and then"
-in the short circuit expression.
+Returns the expression following the reserved words @key[or else] or
+@key[and then] in the short circuit expression.
 
-Appropriate Expression_Kinds:
-     An_And_Then_Short_Circuit
-     An_Or_Else_Short_Circuit
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_And_Then_Short_Circuit
+An_Or_Else_Short_Circuit
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Membership_Test_Expression}
 
@@ -1327,14 +1507,20 @@ Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the membership
 
 Returns the expression on the left hand side of the membership test.
 
-Appropriate Expression_Kinds:
-     An_In_Range_Membership_Test
-     A_Not_In_Range_Membership_Test
-     An_In_Type_Membership_Test
-     A_Not_In_Type_Membership_Test
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_In_Range_Membership_Test
+A_Not_In_Range_Membership_Test
+An_In_Type_Membership_Test
+A_Not_In_Type_Membership_Test
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Membership_Test_Range}
 
@@ -1345,12 +1531,14 @@ Returns Element_Kinds:
 
 Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the membership test operation to query
 
-Returns the range following the reserved words "in" or "not in" from the
-membership test.
+Returns the range following the reserved words @key[in] or @key[not in] from
+the membership test.
 
-Appropriate Expression_Kinds:
-     An_In_Range_Membership_Test
-     A_Not_In_Range_Membership_Test
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_In_Range_Membership_Test
+A_Not_In_Range_Membership_Test
+@end{Display}
 
 Returns Constraint_Kinds:
      A_Range_Attribute_Reference
@@ -1365,17 +1553,23 @@ Returns Constraint_Kinds:
 
 Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the membership test operation to query
 
-Returns the subtype_mark expression following the reserved words "in" or
-"not in" from the membership test.
+Returns the subtype_mark expression following the reserved words @key[in] or
+@key[not in] from the membership test.
 
-Appropriate Expression_Kinds:
-     An_In_Type_Membership_Test
-     A_Not_In_Type_Membership_Test
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_In_Type_Membership_Test
+A_Not_In_Type_Membership_Test
+@end{Display}
 
-Returns Expression_Kinds:
-     An_Identifier
-     A_Selected_Component
-     An_Attribute_Reference
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
+A_Selected_Component
+An_Attribute_Reference
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Converted_Or_Qualified_Subtype_Mark}
 
@@ -1389,14 +1583,19 @@ Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the type conve
 Returns the subtype_mark expression that converts or qualifies the
 expression.
 
-Appropriate Expression_Kinds:
-     A_Type_Conversion
-     A_Qualified_Expression
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+A_Type_Conversion
+A_Qualified_Expression
+@end{Display}
 
-Returns Expression_Kinds:
-     An_Identifier
-     A_Selected_Component
-     An_Attribute_Reference
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
+A_Selected_Component
+An_Attribute_Reference
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Converted_Or_Qualified_Expression}
@@ -1410,12 +1609,18 @@ Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the type conve
 
 Returns the expression being converted or qualified.
 
-Appropriate Expression_Kinds:
-     A_Type_Conversion
-     A_Qualified_Expression
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+A_Type_Conversion
+A_Qualified_Expression
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Allocator_Subtype_Indication}
 
@@ -1428,28 +1633,41 @@ expression to query.
 
 Returns the subtype indication for the object being allocated.
 
-Appropriate Expression_Kinds:
-     An_Allocation_From_Subtype
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_Allocation_From_Subtype
+@end{Display}
 
-Returns Definition_Kinds:
-     A_Subtype_Indication
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+A_Subtype_Indication
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Allocator_Qualified_Expression}
 
-
-    @key[function] @AdaSubDefn{Allocator_Qualified_Expression} (Expression : @key[in] Asis.Expression)
-                                             @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Allocator_Qualified_Expression} (Expression : @key[in] Asis.Expression)
+                                         @key[return] Asis.Expression;
+@end{Example}
 
 Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the allocator
 expression to query.
 
 Returns the qualified expression for the object being allocated.
 
-Appropriate Expression_Kinds:
-     An_Allocation_From_Qualified_Expression
+@leading@keepnext@;Appropriate Expression_Kinds:
+@begin{Display}
+An_Allocation_From_Qualified_Expression
+@end{Display}
 
-Returns Expression_Kinds:
-     A_Qualified_Expression
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+A_Qualified_Expression
+@end{Display}
+@end{DescribeCode}
 
 @begin{Example}
 @ChgDeleted{Version=[1],Text=[@key[end] Asis.Expressions;]}

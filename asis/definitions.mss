@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2007/02/13 07:10:31 $}
+@comment{$Revision: 1.5 $ $Date: 2007/02/16 07:25:33 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -37,9 +37,9 @@ all user-defined operator overloads, that have been implicitly or
 explicitly declared for the type. (Reference Manual 7.3.1(2))
 
 @leading@;This list includes only operators appropriate for the type, from the set:
-@begin{Display}
-@exam{@key[and or xor] = /= < <= > >= + - & * / @key[mod rem] ** @key[abs not]}
-@end{Display}
+@begin{ChildExample}
+@key[and or xor] = /= < <= > >= + - & * / @key[mod rem] ** @key[abs not]
+@end{ChildExample}
 
 Returns a Nil_Element_List if there are no predefined or overloaded
 operators for the type.
@@ -125,7 +125,7 @@ function Record_Definition
 Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
 derived_type_definition to query.
 
-Returns the parent_subtype_indication following the reserved word "new".
+Returns the parent_subtype_indication following the reserved word @key[new].
 
 @leading@keepnext@;Appropriate Type_Kinds:
 @begin{Display}
@@ -424,12 +424,15 @@ function Enumeration_Literal_Declarations
 @end{Display}
 @end{ChildRef}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Enumeration_Literal_Declarations}
+           (Type_Definition : @key[in] Asis.Type_Definition)
+            @key[return] Asis.Declaration_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Enumeration_Literal_Declarations}
-                (Type_Definition : @key[in] Asis.Type_Definition)
-                @key[return] Asis.Declaration_List;
-
-Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the enumeration type definition to query
+Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+enumeration type definition to query.
 
 Returns a list of the literals declared in an enumeration_type_definition,
 in their order of appearance.
@@ -439,8 +442,11 @@ in their order of appearance.
 An_Enumeration_Type_Definition
 @end{Display}
 
-Returns Declaration_Kinds:
-     An_Enumeration_Literal_Specification
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+An_Enumeration_Literal_Specification
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Integer_Constraint}
@@ -456,11 +462,15 @@ function Integer_Constraint
 @end{ChildRef}
 
 
-    @key[function] @AdaSubDefn{Integer_Constraint}
-                (Type_Definition : @key[in] Asis.Type_Definition)
-                @key[return] Asis.Range_Constraint;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Integer_Constraint}
+            (Type_Definition : @key[in] Asis.Type_Definition)
+            @key[return] Asis.Range_Constraint;
+@end{Example}
 
-Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the signed_integer_type_definition to query
+Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+signed_integer_type_definition to query.
 
 Returns the range_constraint of the signed_integer_type_definition.
 
@@ -469,11 +479,14 @@ Returns the range_constraint of the signed_integer_type_definition.
 A_Signed_Integer_Type_Definition
 @end{Display}
 
-Returns Constraint_Kinds:
-     A_Simple_Expression_Range
+@leading@keepnext@;Returns Constraint_Kinds:
+@begin{Display}
+A_Simple_Expression_Range
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Mod_Static_Expression}
-
 
 @begin{ElementRef}
 A_Modular_Type_Definition @em 3.5.4
@@ -486,21 +499,28 @@ function Mod_Static_Expression
 @end{ChildRef}
 
 
-    @key[function] @AdaSubDefn{Mod_Static_Expression}
-                (Type_Definition : @key[in] Asis.Type_Definition)
-                @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Mod_Static_Expression}
+            (Type_Definition : @key[in] Asis.Type_Definition)
+            @key[return] Asis.Expression;
+@end{Example}
 
-Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the modular_type_definition to query
+Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+modular_type_definition to query.
 
-Returns the static_expression following the reserved word "mod".
+Returns the static_expression following the reserved word @key[mod].
 
 @leading@keepnext@;Appropriate Type_Kinds:
 @begin{Display}
 A_Modular_Type_Definition
 @end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Digits_Expression}
@@ -528,12 +548,16 @@ function Real_Range_Constraint
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Digits_Expression} (Definition : @key[in] Asis.Definition)
-                               @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Digits_Expression} (Definition : @key[in] Asis.Definition)
+                           @key[return] Asis.Expression;
+@end{Example}
 
-Definition  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the definition to query
+Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the definition
+to query.
 
-Returns the static_expression following the reserved word "digits".
+Returns the static_expression following the reserved word @key[digits].
 
 @leading@keepnext@;Appropriate Type_Kinds:
 @begin{Display}
@@ -548,8 +572,11 @@ A_Constraint
     A_Digits_Constraint
 @end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Delta_Expression}
@@ -564,12 +591,16 @@ function Delta_Expression
 @end{Display}
 @end{ChildRef}
 
+@begin{DescribeCode}
+@begin{Example}
     @key[function] @AdaSubDefn{Delta_Expression} (Definition : @key[in] Asis.Definition)
                               @key[return] Asis.Expression;
+@end{Example}
 
-Definition  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the definition to query
+Definition @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+definition to query.
 
-Returns the static_expression following the reserved word "delta".
+Returns the static_expression following the reserved word @key[delta].
 
 @leading@keepnext@;Appropriate Type_Kinds:
 @begin{Display}
@@ -584,16 +615,23 @@ A_Constraint
     A_Delta_Constraint
 @end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Real_Range_Constraint}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Real_Range_Constraint}
+         (Definition : @key[in] Asis.Definition) @key[return] Asis.Range_Constraint;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Real_Range_Constraint}
-             (Definition : @key[in] Asis.Definition) @key[return] Asis.Range_Constraint;
-
-Definition  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the definition to query
+Definition @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+definition to query.
 
 Returns the real_range_specification range_constraint of the definition.
 
@@ -614,9 +652,12 @@ A_Constraint
     A_Delta_Constraint
 @end{Display}
 
-Returns Constraint_Kinds:
-     Not_A_Constraint
-     A_Simple_Expression_Range
+@leading@keepnext@;Returns Constraint_Kinds:
+@begin{Display}
+Not_A_Constraint
+A_Simple_Expression_Range
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Index_Subtype_Definitions}
@@ -632,12 +673,15 @@ function Array_Component_Definition
 @end{Display}
 @end{ChildRef}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Index_Subtype_Definitions}
+            (Type_Definition : @key[in] Asis.Type_Definition)
+            @key[return] Asis.Expression_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Index_Subtype_Definitions}
-                (Type_Definition : @key[in] Asis.Type_Definition)
-                @key[return] Asis.Expression_List;
-
-Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the array_type_definition to query
+Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+array_type_definition to query.
 
 Returns a list of the index_subtype_definition subtype mark names for
 an unconstrained_array_definition, in their order of appearance.
@@ -647,12 +691,17 @@ an unconstrained_array_definition, in their order of appearance.
 An_Unconstrained_Array_Definition
 @end{Display}
 
-Appropriate Formal_Type_Kinds:
-     A_Formal_Unconstrained_Array_Definition
+@leading@keepnext@;Appropriate Formal_Type_Kinds:
+@begin{Display}
+A_Formal_Unconstrained_Array_Definition
+@end{Display}
 
-Returns Expression_Kinds:
-     An_Identifier
-     A_Selected_Component
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
+A_Selected_Component
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Discrete_Subtype_Definitions}
@@ -668,11 +717,15 @@ function Array_Component_Definition
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Discrete_Subtype_Definitions}
-                        (Type_Definition : @key[in] Asis.Type_Definition)
-                              @key[return] Asis.Definition_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Discrete_Subtype_Definitions}
+                    (Type_Definition : @key[in] Asis.Type_Definition)
+                          @key[return] Asis.Definition_List;
+@end{Example}
 
-Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the array_type_definition to query
+Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+array_type_definition to query.
 
 Returns the list of Discrete_Subtype_Definition elements of a
 constrained_array_definition, in their order of appearance.
@@ -682,20 +735,29 @@ constrained_array_definition, in their order of appearance.
 A_Constrained_Array_Definition
 @end{Display}
 
-Appropriate Formal_Type_Kinds:
-     A_Formal_Constrained_Array_Definition
+@leading@keepnext@;Appropriate Formal_Type_Kinds:
+@begin{Display}
+A_Formal_Constrained_Array_Definition
+@end{Display}
 
-Returns Definition_Kinds:
-     A_Discrete_Subtype_Definition
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+A_Discrete_Subtype_Definition
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Array_Component_Definition}
 
-
+@begin{DescribeCode}
+@begin{Example}
     @key[function] @AdaSubDefn{Array_Component_Definition}
                 (Type_Definition : @key[in] Asis.Type_Definition)
                 @key[return] Asis.Component_Definition;
+@end{Example}
 
-Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the array_type_definition to query
+Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+array_type_definition to query.
 
 Returns the Component_Definition of the array_type_definition.
 
@@ -705,12 +767,17 @@ An_Unconstrained_Array_Definition
 A_Constrained_Array_Definition
 @end{Display}
 
-Appropriate Formal_Type_Kinds:
-     A_Formal_Unconstrained_Array_Definition
-     A_Formal_Constrained_Array_Definition
+@leading@keepnext@;Appropriate Formal_Type_Kinds:
+@begin{Display}
+A_Formal_Unconstrained_Array_Definition
+A_Formal_Constrained_Array_Definition
+@end{Display}
 
-Returns Definition_Kinds:
-     A_Component_Definition
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+A_Component_Definition
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Access_To_Object_Definition}
@@ -738,37 +805,53 @@ function Access_To_Function_Result_Profile
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Access_To_Object_Definition}
-                   (Type_Definition : @key[in] Asis.Type_Definition)
-                         @key[return] Asis.Subtype_Indication;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Access_To_Object_Definition}
+               (Type_Definition : @key[in] Asis.Type_Definition)
+                     @key[return] Asis.Subtype_Indication;
+@end{Example}
 
-Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Access_Type_Definition to query
+Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+Access_Type_Definition to query.
 
-Returns the subtype_indication following the reserved word "access".
+Returns the subtype_indication following the reserved word @key[access].
 
 @leading@keepnext@;Appropriate Type_Kinds:
 @begin{Display}
 An_Access_Type_Definition
 @end{Display}
 
-Appropriate Formal_Type_Kinds:
-     A_Formal_Access_Type_Definition
+@leading@keepnext@;Appropriate Formal_Type_Kinds:
+@begin{Display}
+A_Formal_Access_Type_Definition
+@end{Display}
 
-Appropriate Access_Type_Kinds:
-     A_Pool_Specific_Access_To_Variable
-     An_Access_To_Variable
-     An_Access_To_Constant
+@leading@keepnext@;Appropriate Access_Type_Kinds:
+@begin{Display}
+A_Pool_Specific_Access_To_Variable
+An_Access_To_Variable
+An_Access_To_Constant
+@end{Display}
 
-Returns Element_Kinds:
-     A_Subtype_Indication
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Subtype_Indication
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Access_To_Subprogram_Parameter_Profile}
 
-    @key[function] @AdaSubDefn{Access_To_Subprogram_Parameter_Profile}
-                   (Type_Definition : @key[in] Asis.Type_Definition)
-                         @key[return] Asis.Parameter_Specification_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Access_To_Subprogram_Parameter_Profile}
+               (Type_Definition : @key[in] Asis.Type_Definition)
+                     @key[return] Asis.Parameter_Specification_List;
+@end{Example}
 
-Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Access_Type_Definition to query
+Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+Access_Type_Definition to query.
 
 Returns a list of parameter_specification elements in the formal part of the
 parameter_profile in the access_to_subprogram_definition.
@@ -776,8 +859,8 @@ parameter_profile in the access_to_subprogram_definition.
 Returns a Nil_Element_List if the parameter_profile has no formal part.
 
 Results of this query may vary across ASIS implementations. Some
-implementations normalize all multiple name parameter_specification elements into
-an equivalent sequence of corresponding single name
+implementations normalize all multiple name parameter_specification elements
+into an equivalent sequence of corresponding single name
 parameter_specification elements. See Reference Manual 3.3.1(7).
 
 @leading@keepnext@;Appropriate Type_Kinds:
@@ -786,23 +869,32 @@ An_Access_Type_Definition
 A_Formal_Access_Type_Definition
 @end{Display}
 
-Appropriate Access_Type_Kinds:
-     An_Access_To_Procedure
-     An_Access_To_Protected_Procedure
-     An_Access_To_Function
-     An_Access_To_Protected_Function
+@leading@keepnext@;Appropriate Access_Type_Kinds:
+@begin{Display}
+An_Access_To_Procedure
+An_Access_To_Protected_Procedure
+An_Access_To_Function
+An_Access_To_Protected_Function
+@end{Display}
 
-Returns Declaration_Kinds:
-     A_Parameter_Specification
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+A_Parameter_Specification
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Access_To_Function_Result_Profile}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Access_To_Function_Result_Profile}
+               (Type_Definition : @key[in] Asis.Type_Definition)
+                      @key[return] Asis.Expression;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Access_To_Function_Result_Profile}
-                   (Type_Definition : @key[in] Asis.Type_Definition)
-                         @key[return] Asis.Expression;
-
-Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Access_Type_Definition to query
+Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+Access_Type_Definition to query.
 
 Returns the subtype_mark expression for the return type for the access
 function.
@@ -813,13 +905,18 @@ An_Access_Type_Definition
 A_Formal_Access_Type_Definition
 @end{Display}
 
-Appropriate Access_Type_Kinds:
-     An_Access_To_Function
-     An_Access_To_Protected_Function
+@leading@keepnext@;Appropriate Access_Type_Kinds:
+@begin{Display}
+An_Access_To_Function
+An_Access_To_Protected_Function
+@end{Display}
 
-Returns Expression_Kinds:
-     An_Identifier
-     A_Selected_Component
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
+A_Selected_Component
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Subtype_Mark}
@@ -839,11 +936,14 @@ function Subtype_Constraint
 @end{Display}
 @end{ChildRef}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Subtype_Mark} (Definition : @key[in] Asis.Definition)
+                       @key[return] Asis.Expression;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Subtype_Mark} (Definition : @key[in] Asis.Definition)
-                          @key[return] Asis.Expression;
-
-Definition  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the definition to query
+Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the definition
+to query.
 
 Returns the subtype_mark expression of the definition.
 
@@ -861,19 +961,25 @@ A_Formal_Type_Definition
     A_Formal_Derived_Type_Definition
 @end{Display}
 
-Returns Expression_Kinds:
-     An_Identifier
-     A_Selected_Component
-     An_Attribute_Reference
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
+A_Selected_Component
+An_Attribute_Reference
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Subtype_Constraint}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Subtype_Constraint} (Definition : @key[in] Asis.Definition)
+                            @key[return] Asis.Constraint;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Subtype_Constraint} (Definition : @key[in] Asis.Definition)
-                                @key[return] Asis.Constraint;
-
-Definition  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the definition to query
+Definition @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+definition to query.
 
 Returns the constraint of the subtype_indication.
 
@@ -890,9 +996,12 @@ A_Discrete_Range
     A_Discrete_Subtype_Indication
 @end{Display}
 
-Returns Definition_Kinds:
-     Not_A_Definition
-     A_Constraint
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+Not_A_Definition
+A_Constraint
+@end{Display}
+@end{DescribeCode}
 
 @begin{UsageNote}
 When an unconstrained subtype indication for a type having
@@ -915,41 +1024,62 @@ function Upper_Bound
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Lower_Bound} (Constraint : @key[in] Asis.Range_Constraint)
-                         @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Lower_Bound} (Constraint : @key[in] Asis.Range_Constraint)
+                     @key[return] Asis.Expression;
+@end{Example}
 
-Constraint  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the range_constraint or discrete_range to query
+Constraint @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+range_constraint or discrete_range to query.
 
 Returns the simple_expression for the lower bound of the range.
 
-Appropriate Constraint_Kinds:
-     A_Simple_Expression_Range
+@leading@keepnext@;Appropriate Constraint_Kinds:
+@begin{Display}
+A_Simple_Expression_Range
+@end{Display}
 
-Appropriate Discrete_Range_Kinds:
-     A_Discrete_Simple_Expression_Range
+@leading@keepnext@;Appropriate Discrete_Range_Kinds:
+@begin{Display}
+A_Discrete_Simple_Expression_Range
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Upper_Bound}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Upper_Bound} (Constraint : @key[in] Asis.Range_Constraint)
+                     @key[return] Asis.Expression;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Upper_Bound} (Constraint : @key[in] Asis.Range_Constraint)
-                         @key[return] Asis.Expression;
-
-Constraint  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the range_constraint or discrete_range to query
+Constraint @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+range_constraint or discrete_range to query.
 
 Returns the simple_expression for the upper bound of the range.
 
-Appropriate Constraint_Kinds:
-     A_Simple_Expression_Range
+@leading@keepnext@;Appropriate Constraint_Kinds:
+@begin{Display}
+A_Simple_Expression_Range
+@end{Display}
 
-Appropriate Discrete_Range_Kinds:
-     A_Discrete_Simple_Expression_Range
+@leading@keepnext@;Appropriate Discrete_Range_Kinds:
+@begin{Display}
+A_Discrete_Simple_Expression_Range
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Range_Attribute}
@@ -963,23 +1093,32 @@ function Range_Attribute
 @end{Display}
 @end{ChildRef}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Range_Attribute} (Constraint : @key[in] Asis.Range_Constraint)
+                         @key[return] Asis.Expression;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Range_Attribute} (Constraint : @key[in] Asis.Range_Constraint)
-                             @key[return] Asis.Expression;
-
-Constraint  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the range_attribute_reference or
-              discrete_range attribute_reference to query
+Constraint @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+range_attribute_reference or discrete_range attribute_reference to query.
 
 Returns the range_attribute_reference expression of the range.
 
-Appropriate Constraint_Kinds:
-     A_Range_Attribute_Reference
+@leading@keepnext@;Appropriate Constraint_Kinds:
+@begin{Display}
+A_Range_Attribute_Reference
+@end{Display}
 
-Appropriate Discrete_Range_Kinds:
-     A_Discrete_Range_Attribute_Reference
+@leading@keepnext@;Appropriate Discrete_Range_Kinds:
+@begin{Display}
+A_Discrete_Range_Attribute_Reference
+@end{Display}
 
-Returns Expression_Kinds:
-     An_Attribute_Reference
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Attribute_Reference
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Discrete_Ranges}
@@ -1016,19 +1155,28 @@ function Discrete_Ranges
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Discrete_Ranges} (Constraint : @key[in] Asis.Constraint)
-                             @key[return] Asis.Discrete_Range_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Discrete_Ranges} (Constraint : @key[in] Asis.Constraint)
+                         @key[return] Asis.Discrete_Range_List;
+@end{Example}
 
-Constraint  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the array index_constraint to query
+Constraint @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the array
+index_constraint to query.
 
 Returns the list of discrete_range components for an index_constraint,
 in their order of appearance.
 
-Appropriate Constraint_Kinds:
-     An_Index_Constraint
+@leading@keepnext@;Appropriate Constraint_Kinds:
+@begin{Display}
+An_Index_Constraint
+@end{Display}
 
-Returns Definition_Kinds:
-     A_Discrete_Range
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+A_Discrete_Range
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Discriminant_Associations}
@@ -1043,13 +1191,18 @@ function Discriminant_Associations
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Discriminant_Associations}
-                (Constraint : @key[in] Asis.Constraint;
-                 Normalized : @key[in] Boolean := False)
-                @key[return] Asis.Discriminant_Association_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Discriminant_Associations}
+            (Constraint : @key[in] Asis.Constraint;
+             Normalized : @key[in] Boolean := False)
+            @key[return] Asis.Discriminant_Association_List;
+@end{Example}
 
-Constraint  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the discriminant_constraint to query
-Normalized  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether the normalized form is desired
+Constraint @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+discriminant_constraint to query. Normalized
+@chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether the normalized
+form is desired
 
 Returns a list of the discriminant_association elements of the
 discriminant_constraint.
@@ -1071,20 +1224,23 @@ association has one A_Defining_Name component that denotes the
 discriminant_specification, and one An_Expression component that is the
 explicit expression.
 
-Appropriate Constraint_Kinds:
-     A_Discriminant_Constraint
+@leading@keepnext@;Appropriate Constraint_Kinds:
+@begin{Display}
+A_Discriminant_Constraint
+@end{Display}
 
-Returns Association_Kinds:
-     A_Discriminant_Association
+@leading@keepnext@;Returns Association_Kinds:
+@begin{Display}
+A_Discriminant_Association
+@end{Display}
+@end{DescribeCode}
 
-@b{Implementation Requirement}s
-
+@begin{ImplReq}
 Normalized associations are Is_Normalized and Is_Part_Of_Implicit.
 Normalized associations are never Is_Equal to unnormalized associations.
+@end{ImplReq}
 
-
-@b{Implementation Permissions}
-
+@begin{ImplPerm}
 An implementation may choose to normalize its internal representation
 to use the defining_identifier element instead of the
 discriminant_selector_name element.
@@ -1092,6 +1248,7 @@ discriminant_selector_name element.
 If so, this query will return Is_Normalized associations even if
 Normalized is False, and the query Discriminant_Associations_Normalized
 will return True.
+@end{ImplPerm}
 
 @begin{UsageNote}
 It is not possible to obtain either a normalized or unnormalized
@@ -1114,11 +1271,15 @@ function Component_Subtype_Indication
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Component_Subtype_Indication}
-            (Component_Definition : @key[in] Asis.Component_Definition)
-                @key[return] Asis.Subtype_Indication;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Component_Subtype_Indication}
+        (Component_Definition : @key[in] Asis.Component_Definition)
+            @key[return] Asis.Subtype_Indication;
+@end{Example}
 
-Component_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Component_Definition to query
+Component_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+Component_Definition to query.
 
 Returns the subtype_indication of the Component_Definition.
 
@@ -1127,8 +1288,11 @@ Returns the subtype_indication of the Component_Definition.
 A_Component_Definition
 @end{Display}
 
-Returns Definition_Kinds:
-     A_Subtype_Indication
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+A_Subtype_Indication
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Discriminants}
@@ -1181,16 +1345,21 @@ function Discriminants
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Discriminants} (Definition : @key[in] Asis.Definition)
-                           @key[return] Asis.Discriminant_Specification_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Discriminants} (Definition : @key[in] Asis.Definition)
+                       @key[return] Asis.Discriminant_Specification_List;
+@end{Example}
 
-Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the known_discriminant_part to query
+Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+known_discriminant_part to query.
 
-Returns a list of discriminant_specification elements, in their order of appearance.
+Returns a list of discriminant_specification elements, in their order of
+appearance.
 
 Results of this query may vary across ASIS implementations. Some
-implementations normalize all multi-name discriminant_specification elements into
-an equivalent sequence of single name discriminant_specification elements.
+implementations normalize all multi-name discriminant_specification elements
+into an equivalent sequence of single name discriminant_specification elements.
 See Reference Manual 3.3.1(7).
 
 @leading@keepnext@;Appropriate Definition_Kinds:
@@ -1198,8 +1367,11 @@ See Reference Manual 3.3.1(7).
 A_Known_Discriminant_Part
 @end{Display}
 
-Returns Declaration_Kinds:
-     A_Discriminant_Specification
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+A_Discriminant_Specification
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Record_Components (definition)}
@@ -1215,12 +1387,17 @@ function Implicit_Components
 @end{Display}
 @end{ChildRef}
 
+@begin{DescribeCode}
+@begin{Example}
 @key[function] @AdaSubDefn{Record_Components} (Definition : @key[in] Asis.Definition;
                                 Include_Pragmas : @key[in] Boolean := False)
                                 @key[return] Asis.Record_Component_List;
+@end{Example}
 
-Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record_definition or variant to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
+Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+record_definition or variant to query.
+Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
+pragmas are to be returned.
 
 Returns a list of the components and pragmas of the record_definition or
 variant, in their order of appearance.
@@ -1236,31 +1413,43 @@ A_Record_Definition
 A_Variant
 @end{Display}
 
-Returns Element_Kinds:
-     A_Pragma
-     A_Declaration
-     A_Definition
-     A_Clause
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma
+A_Declaration
+A_Definition
+A_Clause
+@end{Display}
 
-Returns Declaration_Kinds:
-     A_Component_Declaration
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+A_Component_Declaration
+@end{Display}
 
-Returns Definition_Kinds:
-     A_Null_Component
-     A_Variant_Part
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+A_Null_Component
+A_Variant_Part
+@end{Display}
 
-Returns Representation_Clause_Kinds:
-     An_Attribute_Definition_Clause
+@leading@keepnext@;Returns Representation_Clause_Kinds:
+@begin{Display}
+An_Attribute_Definition_Clause
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Implicit_Components}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Implicit_Components}
+                (Definition : @key[in] Asis.Definition)
+                    @key[return] Asis.Record_Component_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Implicit_Components}
-                    (Definition : @key[in] Asis.Definition)
-                        @key[return] Asis.Record_Component_List;
-
-Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record_definition or variant to query
+Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+record_definition or variant to query.
 
 Returns a list of all implicit implementation-defined components of the
 record_definition or variant. The Enclosing_Element of each component is
@@ -1276,11 +1465,16 @@ A_Record_Definition
 A_Variant
 @end{Display}
 
-Returns Element_Kinds:
-     A_Declaration
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Declaration
+@end{Display}
 
-Returns Declaration_Kinds:
-     A_Component_Declaration
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+A_Component_Declaration
+@end{Display}
+@end{DescribeCode}
 
 @begin{ImplPerm}
 Some implementations do not represent all forms of implicit
@@ -1310,9 +1504,12 @@ function Variants
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Discriminant_Direct_Name}
-                (Variant_Part : @key[in] Asis.Record_Component)
-                @key[return] Asis.Name;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Discriminant_Direct_Name}
+            (Variant_Part : @key[in] Asis.Record_Component)
+            @key[return] Asis.Name;
+@end{Example}
 
 Variant_Part @chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the
 variant_part to query.
@@ -1324,25 +1521,32 @@ Returns the Discriminant_Direct_Name of the variant_part.
 A_Variant_Part
 @end{Display}
 
-Returns Expression_Kinds:
-     An_Identifier
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Variants}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Variants} (Variant_Part    : @key[in] Asis.Record_Component;
+                   Include_Pragmas : @key[in] Boolean := False)
+                   @key[return] Asis.Variant_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Variants} (Variant_Part    : @key[in] Asis.Record_Component;
-                       Include_Pragmas : @key[in] Boolean := False)
-                       @key[return] Asis.Variant_List;
-
-Variant_Part    @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the variant_part to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
+Variant_Part @chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the
+variant_part to query.
+Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
+pragmas are to be returned.
 
 Returns a list of variants that make up the record component, in their
 order of appearance.
 
-The only pragmas returned are those following the reserved word "is"
-and preceding the reserved word "when" of first variant, and those between
+The only pragmas returned are those following the reserved word @key[is]
+and preceding the reserved word @key[when] of first variant, and those between
 following variants.
 
 @leading@keepnext@;Appropriate Definition_Kinds:
@@ -1350,12 +1554,17 @@ following variants.
 A_Variant_Part
 @end{Display}
 
-Returns Element_Kinds:
-     A_Pragma
-     A_Definition
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma
+A_Definition
+@end{Display}
 
-Returns Definition_Kinds:
-     A_Variant
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+A_Variant
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Variant_Choices}
@@ -1372,10 +1581,14 @@ function Implicit_Components
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Variant_Choices} (Variant : @key[in] Asis.Variant)
-                             @key[return] Asis.Element_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Variant_Choices} (Variant : @key[in] Asis.Variant)
+                         @key[return] Asis.Element_List;
+@end{Example}
 
-Variant @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the variant to query
+Variant @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the variant to
+query.
 
 Returns the discrete_choice_list elements, in their order of appearance.
 Choices are either an expression, a discrete range, or an others choice.
@@ -1385,13 +1598,18 @@ Choices are either an expression, a discrete range, or an others choice.
 A_Variant
 @end{Display}
 
-Returns Element_Kinds:
-     An_Expression
-     A_Definition
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+A_Definition
+@end{Display}
 
-Returns Definition_Kinds:
-     A_Discrete_Range
-     An_Others_Choice
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+A_Discrete_Range
+An_Others_Choice
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Ancestor_Subtype_Indication}
@@ -1411,13 +1629,17 @@ function Ancestor_Subtype_Indication
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Ancestor_Subtype_Indication}
-                   (Definition : @key[in] Asis.Definition)
-                         @key[return] Asis.Subtype_Indication;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Ancestor_Subtype_Indication}
+               (Definition : @key[in] Asis.Definition)
+                     @key[return] Asis.Subtype_Indication;
+@end{Example}
 
-Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the definition to query
+Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the definition
+to query.
 
-Returns the ancestor_subtype_indication following the reserved word "new"
+Returns the ancestor_subtype_indication following the reserved word @key[new]
 in the private_extension_declaration.
 
 @leading@keepnext@;Appropriate Definition_Kinds:
@@ -1425,8 +1647,11 @@ in the private_extension_declaration.
 A_Private_Extension_Definition
 @end{Display}
 
-Returns Definition_Kinds:
-     A_Subtype_Indication
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+A_Subtype_Indication
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Visible_Part_Items}
@@ -1443,13 +1668,18 @@ function Private_Part_Items
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Visible_Part_Items}
-                (Definition : @key[in] Asis.Definition;
-                 Include_Pragmas : @key[in] Boolean := False)
-                @key[return] Asis.Declarative_Item_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Visible_Part_Items}
+            (Definition : @key[in] Asis.Definition;
+             Include_Pragmas : @key[in] Boolean := False)
+            @key[return] Asis.Declarative_Item_List;
+@end{Example}
 
-Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the type_definition to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
+Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+type_definition to query. Include_Pragmas
+@chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be
+returned,
 
 Returns a list of declarations, representation clauses, and pragmas
 in the visible part of the task or protected definition, in their order
@@ -1465,24 +1695,32 @@ A_Task_Definition
 A_Protected_Definition
 @end{Display}
 
-Returns Element_Kinds:
-     A_Pragma
-     A_Declaration
-     A_Clause
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma
+A_Declaration
+A_Clause
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Private_Part_Items}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Private_Part_Items}
+            (Definition : @key[in] Asis.Definition;
+             Include_Pragmas : @key[in] Boolean := False)
+             @key[return] Asis.Declarative_Item_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Private_Part_Items}
-                (Definition : @key[in] Asis.Definition;
-                 Include_Pragmas : @key[in] Boolean := False)
-                 @key[return] Asis.Declarative_Item_List;
+Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the task
+type definition to query.
+Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
+pragmas are to be returned.
 
-Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the task type definition to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
-
-Returns a list of declarations, representation clauses, and pragmas in the private
-part of the task or protected definition, in their order of appearance.
+Returns a list of declarations, representation clauses, and pragmas in the
+private part of the task or protected definition, in their order of appearance.
 
 Returns a Nil_Element_List if there are no items.
 
@@ -1492,29 +1730,39 @@ A_Task_Definition
 A_Protected_Definition
 @end{Display}
 
-Returns Element_Kinds:
-     A_Pragma
-     A_Declaration
-     A_Clause
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma
+A_Declaration
+A_Clause
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Private_Present (definition)}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Private_Present}
+            (Definition : @key[in] Asis.Definition) @key[return] Boolean;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Is_Private_Present}
-                (Definition : @key[in] Asis.Definition) @key[return] Boolean;
-
-Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the definition to query
+Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the definition
+to query.
 
 Returns True if the argument is a task_definition or a protected_definition
-that has a reserved word "private" marking the beginning of a (possibly empty)
-private part.
+that has a reserved word @key[private] marking the beginning of a (possibly
+empty) private part.
 
 Returns False for any definition without a private part.
 Returns False for any unexpected Element.
 
-Expected Definition_Kinds:
-     A_Task_Definition
-     A_Protected_Definition
+@leading@keepnext@;Expected Definition_Kinds:
+@begin{Display}
+A_Task_Definition
+A_Protected_Definition
+@end{Display}
+@end{DescribeCode}
 
 @begin{ElementRef}
 A_Formal_Type_Definition @em 12.5

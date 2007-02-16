@@ -1,6 +1,6 @@
 @Part(statements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/statements.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2007/02/06 06:21:05 $}
+@comment{$Revision: 1.3 $ $Date: 2007/02/16 07:25:34 $}
 
 
 @LabeledSection{package Asis.Statements}
@@ -15,13 +15,17 @@ Old=[@f{@key[package] @ChildUnit{Parent=[Asis],Child=[Statements]}Asis.Statement
 Asis.Statements encapsulates a set of queries that operate on A_Statement,
 A_Path, and An_Exception_Handler elements.
 
+
 @LabeledClause{function Label_Names}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Label_Names} (Statement : @key[in] Asis.Statement)
+                     @key[return] Asis.Defining_Name_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Label_Names} (Statement : @key[in] Asis.Statement)
-                         @key[return] Asis.Defining_Name_List;
-
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the statement
+to query.
 
 Returns label_statement_identifier elements (A_Defining_Name elements) that
 define the labels attached to the statement, in their order of appearance.
@@ -30,59 +34,91 @@ Returns a Nil_Element_List if there are no labels attached to the statement.
 
 The Enclosing_Element of the A_Defining_Name elements is the statement.
 
-Appropriate Element_Kinds:
-     A_Statement
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Statement
+@end{Display}
 
-Returns Defining_Name_Kinds:
-     A_Defining_Identifier
+@leading@keepnext@;Returns Defining_Name_Kinds:
+@begin{Display}
+A_Defining_Identifier
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Assignment_Variable_Name}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Assignment_Variable_Name} (Statement : @key[in] Asis.Statement)
+                                  @key[return] Asis.Expression;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Assignment_Variable_Name} (Statement : @key[in] Asis.Statement)
-                                      @key[return] Asis.Expression;
-
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the assignment statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+assignment statement to query.
 
 Returns the expression that names the left hand side of the assignment.
 
-Appropriate Element_Kinds:
-     A_Statement
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Statement
+@end{Display}
 
-Appropriate Statement_Kinds:
-     An_Assignment_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+An_Assignment_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Assignment_Expression}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Assignment_Expression} (Statement : @key[in] Asis.Statement)
+                               @key[return] Asis.Expression;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Assignment_Expression} (Statement : @key[in] Asis.Statement)
-                                   @key[return] Asis.Expression;
-
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the assignment statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+assignment statement to query
 
 Returns the expression from the right hand side of the assignment.
 
-Appropriate Element_Kinds:
-     A_Statement
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Statement
+@end{Display}
 
-Appropriate Statement_Kinds:
-     An_Assignment_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+An_Assignment_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Statement_Paths}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Statement_Paths} (Statement : @key[in] Asis.Statement;
+                          Include_Pragmas : @key[in] Boolean := False)
+                           @key[return] Asis.Path_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Statement_Paths} (Statement : @key[in] Asis.Statement;
-                              Include_Pragmas : @key[in] Boolean := False)
-                              @key[return] Asis.Path_List;
-
-Statement       @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the statement to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
+Statement @chg{Version=[1],New=[specifies],Old=[      @en Specifies]} the
+statement to query.
+Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
+pragmas are to be returned.
 
 Returns a list of the execution paths of the statement, in
 their order of appearance.
@@ -90,17 +126,23 @@ their order of appearance.
 The only pragmas returned are those preceding the first alternative in
 a case statement.
 
-Appropriate Statement_Kinds:
-     An_If_Statement
-     A_Case_Statement
-     A_Selective_Accept_Statement
-     A_Timed_Entry_Call_Statement
-     A_Conditional_Entry_Call_Statement
-     An_Asynchronous_Select_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+An_If_Statement
+A_Case_Statement
+A_Selective_Accept_Statement
+A_Timed_Entry_Call_Statement
+A_Conditional_Entry_Call_Statement
+An_Asynchronous_Select_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     A_Path
-     A_Pragma
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Path
+A_Pragma
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Condition_Expression}
 
@@ -112,12 +154,18 @@ Path @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the execution path to
 
 Returns the condition expression for an IF path or an ELSIF path.
 
-Appropriate Path_Kinds:
-     An_If_Path
-     An_Elsif_Path
+@leading@keepnext@;Appropriate Path_Kinds:
+@begin{Display}
+An_If_Path
+An_Elsif_Path
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Sequence_Of_Statements}
 
@@ -132,12 +180,18 @@ Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pr
 Returns a list of the statements and pragmas from an execution path,
 in their order of appearance.
 
-Appropriate Element_Kinds:
-     A_Path
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Path
+@end{Display}
 
-Returns Element_Kinds:
-     A_Statement
-     A_Pragma
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Statement
+A_Pragma
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Case_Expression}
 
@@ -145,19 +199,27 @@ Returns Element_Kinds:
     @key[function] @AdaSubDefn{Case_Expression} (Statement : @key[in] Asis.Statement)
                               @key[return] Asis.Expression;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the case statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the case statement to query
 
 Returns the expression of the case statement that determines which
 execution path is taken.
 
-Appropriate Element_Kinds:
-     A_Statement
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Statement
+@end{Display}
 
-Appropriate Statement_Kinds:
-     A_Case_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+A_Case_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Case_Statement_Alternative_Choices}
 
@@ -170,16 +232,25 @@ Path @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the case_statement_al
 Returns a list of the ‘when <choice> | <choice>' elements, in their
 order of appearance.
 
-Appropriate Path_Kinds:
-     A_Case_Path
+@leading@keepnext@;Appropriate Path_Kinds:
+@begin{Display}
+A_Case_Path
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
-     A_Definition
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+A_Definition
+@end{Display}
+@end{DescribeCode}
 
-Returns Definition_Kinds:
-     A_Discrete_Range
-     An_Others_Choice
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+A_Discrete_Range
+An_Others_Choice
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Statement_Identifier}
 
@@ -187,7 +258,7 @@ Returns Definition_Kinds:
     @key[function] @AdaSubDefn{Statement_Identifier} (Statement : @key[in] Asis.Statement)
                                    @key[return] Asis.Defining_Name;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the statement to query
 
 Returns the identifier for the loop_statement or block_statement.
 
@@ -195,22 +266,28 @@ Returns a Nil_Element if the loop has no identifier.
 
 The Enclosing_Element of the name is the statement.
 
-Appropriate Statement_Kinds:
-     A_Loop_Statement
-     A_While_Loop_Statement
-     A_For_Loop_Statement
-     A_Block_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+A_Loop_Statement
+A_While_Loop_Statement
+A_For_Loop_Statement
+A_Block_Statement
+@end{Display}
 
-Returns Defining_Name_Kinds:
-     Not_A_Defining_Name
-     A_Defining_Identifier
+@leading@keepnext@;Returns Defining_Name_Kinds:
+@begin{Display}
+Not_A_Defining_Name
+A_Defining_Identifier
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Name_Repeated (statement)}
 
 
     @key[function] @AdaSubDefn{Is_Name_Repeated} (Statement : @key[in] Asis.Statement) @key[return] Boolean;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the statement to query
 
 Returns True if the name of the accept, loop, or block is repeated after
 the end of the statement. Always returns True for loop or block
@@ -229,18 +306,27 @@ Expected Statement_Kinds:
     @key[function] @AdaSubDefn{While_Condition} (Statement : @key[in] Asis.Statement)
                               @key[return] Asis.Expression;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the loop statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the loop statement to query
 
 Returns the condition expression associated with the while loop.
 
-Appropriate Element_Kinds:
-     A_Statement
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+A_Statement
+@end{Display}
 
-Appropriate Statement_Kinds:
-     A_While_Loop_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+A_While_Loop_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
+
 
 @LabeledClause{function For_Loop_Parameter_Specification}
 
@@ -248,15 +334,20 @@ Returns Element_Kinds:
     @key[function] @AdaSubDefn{For_Loop_Parameter_Specification} (Statement : @key[in] Asis.Statement)
                                                @key[return] Asis.Declaration;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the loop statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the loop statement to query
 
 Returns the declaration of the A_Loop_Parameter_Specification.
 
-Appropriate Statement_Kinds:
-     A_For_Loop_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+A_For_Loop_Statement
+@end{Display}
 
-Returns Declaration_Kinds:
-     A_Loop_Parameter_Specification
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+A_Loop_Parameter_Specification
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Loop_Statements}
@@ -272,27 +363,33 @@ Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pr
 Returns the sequence_of_statements and any pragmas from the loop_statement,
 in their order of appearance.
 
-Appropriate Statement_Kinds:
-     A_Loop_Statement
-     A_While_Loop_Statement
-     A_For_Loop_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+A_Loop_Statement
+A_While_Loop_Statement
+A_For_Loop_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     A_Pragma
-     A_Statement
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma
+A_Statement
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Declare_Block}
 
 
     @key[function] @AdaSubDefn{Is_Declare_Block} (Statement : @key[in] Asis.Statement) @key[return] Boolean;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the statement to query
 
 Returns True if the statement is a block_statement and it was created with
-the use of the "declare" reserved word. The presence or absence of any
+the use of the @key[declare] reserved word. The presence or absence of any
 declarative_item elements is not relevant.
 
-Returns False if the "declare" reserved word does not appear in the
+Returns False if the @key[declare] reserved word does not appear in the
 block_statement, or for any unexpected Element.
 
 Expected Statement_Kinds::
@@ -315,13 +412,18 @@ order of appearance.
 
 Returns a Nil_Element_List if there are no declarative items.
 
-Appropriate Statement_Kinds:
-     A_Block_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+A_Block_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     A_Declaration
-     A_Pragma
-     A_Clause
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Declaration
+A_Pragma
+A_Clause
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Block_Statements}
@@ -342,12 +444,18 @@ can only occur for a block_statement obtained from the obsolescent query
 Body_Block_Statement when its argument is a package_body
 that has no sequence_of_statements.
 
-Appropriate Statement_Kinds:
-     A_Block_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+A_Block_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     A_Pragma
-     A_Statement
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma
+A_Statement
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Block_Exception_Handlers}
 
@@ -362,17 +470,23 @@ Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pr
 Returns a list of the exception_handler elements of the block_statement, in their
 order of appearance.
 
-The only pragmas returned are those following the reserved word "exception"
-and preceding the reserved word “when” of first exception handler.
+The only pragmas returned are those following the reserved word @key[exception]
+and preceding the reserved word @key[when] of first exception handler.
 
 Returns a Nil_Element_List if there are no exception_handler elements.
 
-Appropriate Statement_Kinds:
-     A_Block_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+A_Block_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     An_Exception_Handler
-     A_Pragma
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Exception_Handler
+A_Pragma
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Exit_Loop_Name}
 
@@ -380,19 +494,25 @@ Returns Element_Kinds:
     @key[function] @AdaSubDefn{Exit_Loop_Name} (Statement : @key[in] Asis.Statement)
                              @key[return] Asis.Expression;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the exit statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the exit statement to query
 
 Returns the name of the exited loop.
 
 Returns a Nil_Element if no loop name is present.
 
-Appropriate Statement_Kinds:
-     An_Exit_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+An_Exit_Statement
+@end{Display}
 
-Returns Expression_Kinds:
-     Not_An_Expression
-     An_Identifier
-     A_Selected_Component
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+Not_An_Expression
+An_Identifier
+A_Selected_Component
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Exit_Condition}
 
@@ -400,18 +520,24 @@ Returns Expression_Kinds:
     @key[function] @AdaSubDefn{Exit_Condition} (Statement : @key[in] Asis.Statement)
                              @key[return] Asis.Expression;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the exit statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the exit statement to query
 
-Returns the "when" condition of the exit statement.
+Returns the @key[when] condition of the exit statement.
 
 Returns a Nil_Element if no condition is present.
 
-Appropriate Statement_Kinds:
-     An_Exit_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+An_Exit_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     Not_An_Element
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+Not_An_Element
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Corresponding_Loop_Exited}
 
@@ -419,35 +545,46 @@ Returns Element_Kinds:
     @key[function] @AdaSubDefn{Corresponding_Loop_Exited} (Statement : @key[in] Asis.Statement)
                                         @key[return] Asis.Statement;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the exit statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the exit statement to query
 
 Returns the loop statement exited by the exit statement.
 
-Appropriate Statement_Kinds:
-     An_Exit_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+An_Exit_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     A_Loop_Statement
-     A_While_Loop_Statement
-     A_For_Loop_Statement
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Loop_Statement
+A_While_Loop_Statement
+A_For_Loop_Statement
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Return_Expression}
 
     @key[function] @AdaSubDefn{Return_Expression} (Statement : @key[in] Asis.Statement)
                                 @key[return] Asis.Expression;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the return statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the return statement to query
 
 Returns the expression in the return statement.
 
 Returns a Nil_Element if no expression is present.
 
-Appropriate Statement_Kinds:
-     A_Return_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+A_Return_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     Not_An_Element
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+Not_An_Element
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Goto_Label}
@@ -456,16 +593,22 @@ Returns Element_Kinds:
     @key[function] @AdaSubDefn{Goto_Label} (Statement : @key[in] Asis.Statement)
                          @key[return] Asis.Expression;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the goto statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the goto statement to query
 
 Returns the expression reference for the label, as specified by the goto
 statement.
 
-Appropriate Statement_Kinds:
-     A_Goto_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+A_Goto_Statement
+@end{Display}
 
-Returns Expression_Kinds:
-     An_Identifier
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Corresponding_Destination_Statement}
 
@@ -474,15 +617,21 @@ Returns Expression_Kinds:
        (Statement : @key[in] Asis.Statement)
         @key[return] Asis.Statement;
 
-Statement  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the goto statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the goto statement to query
 
 Returns the target statement specified by the goto statement.
 
-Appropriate Statement_Kinds:
-     A_Goto_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+A_Goto_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     A_Statement
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Statement
+@end{Display}
+@end{DescribeCode}
+
 
 @begin{UsageNote}
 The Reference Manual allows a pragma between a statement and a label attached
@@ -500,17 +649,22 @@ corresponding positions in the source text.
     @key[function] @AdaSubDefn{Called_Name} (Statement : @key[in] Asis.Statement)
                           @key[return] Asis.Expression;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the procedure call or entry call statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the procedure call or entry call statement to query
 
 Returns the name of the called procedure or entry. The name of an entry
 family takes the form of An_Indexed_Component.
 
-Appropriate Statement_Kinds:
-     An_Entry_Call_Statement
-     A_Procedure_Call_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+An_Entry_Call_Statement
+A_Procedure_Call_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Corresponding_Called_Entity}
@@ -519,7 +673,7 @@ Returns Element_Kinds:
     @key[function] @AdaSubDefn{Corresponding_Called_Entity} (Statement : @key[in] Asis.Statement)
                                           @key[return] Asis.Declaration;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the procedure_call_statement or
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the procedure_call_statement or
               entry_call_statement to query
 
 Returns the declaration of the procedure or entry denoted by the call.
@@ -542,39 +696,49 @@ clause. If an implementation cannot return such a subprogram definition, a
 Nil_Element should be returned. For an attribute reference which is not
 (re)defined by an attribute definition clause, a Nil_Element should be returned.
 
-Appropriate Statement_Kinds:
-     An_Entry_Call_Statement
-     A_Procedure_Call_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+An_Entry_Call_Statement
+A_Procedure_Call_Statement
+@end{Display}
 
-Returns Declaration_Kinds:
-     Not_A_Declaration
-     A_Procedure_Declaration
-     A_Procedure_Body_Declaration
-     A_Procedure_Body_Stub
-     A_Procedure_Renaming_Declaration
-     A_Procedure_Instantiation
-     A_Formal_Procedure_Declaration
-     An_Entry_Declaration
-     A_Generic_Procedure_Declaration
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+Not_A_Declaration
+A_Procedure_Declaration
+A_Procedure_Body_Declaration
+A_Procedure_Body_Stub
+A_Procedure_Renaming_Declaration
+A_Procedure_Instantiation
+A_Formal_Procedure_Declaration
+An_Entry_Declaration
+A_Generic_Procedure_Declaration
+@end{Display}
+@end{DescribeCode}
 
-@b{Implementation Permissions}
-
-An implementation may choose to return any part of multi-part
+@begin{ImplPerm}
+@leading@;An implementation may choose to return any part of multi-part
 declarations and definitions. Multi-part declaration/definitions
 can occur for:
+@begin{Itemize}
+Subprogram specification in package specification, package body,
+and subunits (@key[is separate]);
 
-   - Subprogram specification in package specification, package body,
-     and subunits (is separate);
-   - Entries in package specification, package body, and subunits
-     (is separate);
-   - Private type and full type declarations;
-   - Incomplete type and full type declarations; and
-   - Deferred constant and full constant declarations.
+Entries in package specification, package body, and subunits
+(@key[is separate]);
+
+Private type and full type declarations;
+
+Incomplete type and full type declarations; and
+
+Deferred constant and full constant declarations.
+@end{Itemize}
 
 No guarantee is made that the element will be the first part or
 that the determination will be made due to any visibility rules.
 An application should make its own analysis for each case based
 on which part is returned.
+@end{ImplPerm}
 
 
 @LabeledClause{function Call_Statement_Parameters}
@@ -584,7 +748,7 @@ on which part is returned.
                                         Normalized : @key[in] Boolean := False)
                                         @key[return] Asis.Association_List;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the procedure_call_statement or
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the procedure_call_statement or
               entry_call_statement to query
 Normalized  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether the normalized form is desired
 
@@ -620,12 +784,17 @@ calls). ASIS cannot produce any meaningful result in this case.
 The exception ASIS_Inappropriate_Element is raised when the procedure
 call is an attribute reference and Is_Normalized is True.
 
-Appropriate Statement_Kinds:
-     An_Entry_Call_Statement
-     A_Procedure_Call_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+An_Entry_Call_Statement
+A_Procedure_Call_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     A_Parameter_Association
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Parameter_Association
+@end{Display}
+@end{DescribeCode}
 
 @b{Implementation Requirement}s
 
@@ -653,18 +822,24 @@ will return True.
     @key[function] @AdaSubDefn{Accept_Entry_Index} (Statement : @key[in] Asis.Statement)
                                  @key[return] Asis.Expression;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the accept statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the accept statement to query
 
 Returns the entry index expression in the accept statement.
 
 Returns a Nil_Element if the statement has no explicit entry index,
 
-Appropriate Statement_Kinds:
-     An_Accept_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+An_Accept_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     Not_An_Element
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+Not_An_Element
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Accept_Entry_Direct_Name}
 
@@ -672,15 +847,22 @@ Returns Element_Kinds:
     @key[function] @AdaSubDefn{Accept_Entry_Direct_Name} (Statement : @key[in] Asis.Statement)
                                        @key[return] Asis.Name;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the accept statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the accept statement to query
 
-Returns the direct name of the entry. The name follows the reserved word "accept".
+Returns the direct name of the entry. The name follows the reserved word
+@key[accept].
 
-Appropriate Statement_Kinds:
-     An_Accept_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+An_Accept_Statement
+@end{Display}
 
-Returns Expression_Kinds:
-     An_Identifier
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Accept_Parameters}
 
@@ -688,7 +870,7 @@ Returns Expression_Kinds:
     @key[function] @AdaSubDefn{Accept_Parameters} (Statement : @key[in] Asis.Statement)
                                 @key[return] Asis.Parameter_Specification_List;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the accept statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the accept statement to query
 
 Returns a list of parameter specifications in the formal part of the accept
 statement, in their order of appearance.
@@ -700,11 +882,16 @@ implementations normalize all multiple name parameter specifications into an
 equivalent sequence of corresponding single name parameter specifications.
 See Reference Manual 3.3.1(7).
 
-Appropriate Statement_Kinds:
-     An_Accept_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+An_Accept_Statement
+@end{Display}
 
-Returns Declaration_Kinds:
-     A_Parameter_Specification
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+A_Parameter_Specification
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Accept_Body_Statements}
@@ -713,18 +900,24 @@ Returns Declaration_Kinds:
                                      Include_Pragmas : @key[in] Boolean := False)
                                      @key[return] Asis.Statement_List;
 
-Statement       @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the accept statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[      @en Specifies]} the accept statement to query
 Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
 
 Returns the list of statements and pragmas from the body of the accept
 statement, in their order of appearance.
 
-Appropriate Statement_Kinds:
-     An_Accept_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+An_Accept_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     A_Pragma
-     A_Statement
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma
+A_Statement
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Accept_Body_Exception_Handlers}
 
@@ -740,12 +933,18 @@ Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pr
 Returns the list of exception handlers and pragmas from the body of the
 accept statement, in their order of appearance.
 
-Appropriate Statement_Kinds:
-     An_Accept_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+An_Accept_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     A_Pragma
-     An_Exception_Handler
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma
+An_Exception_Handler
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Corresponding_Entry}
 
@@ -753,15 +952,20 @@ Returns Element_Kinds:
     @key[function] @AdaSubDefn{Corresponding_Entry} (Statement : @key[in] Asis.Statement)
                                   @key[return] Asis.Declaration;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the accept statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the accept statement to query
 
 Returns the declaration of the entry accepted in this statement.
 
-Appropriate Statement_Kinds:
-     An_Accept_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+An_Accept_Statement
+@end{Display}
 
-Returns Declaration_Kinds:
-     An_Entry_Declaration
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+An_Entry_Declaration
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Requeue_Entry_Name}
@@ -770,17 +974,23 @@ Returns Declaration_Kinds:
     @key[function] @AdaSubDefn{Requeue_Entry_Name} (Statement : @key[in] Asis.Statement)
                                  @key[return] Asis.Name;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the requeue statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the requeue statement to query
 
 Returns the name of the entry requeued by the statement.
-The name follows the reserved word "requeue".
+The name follows the reserved word @key[requeue].
 
-Appropriate Statement_Kinds:
-     A_Requeue_Statement
-     A_Requeue_Statement_With_Abort
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+A_Requeue_Statement
+A_Requeue_Statement_With_Abort
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Delay_Expression}
 
@@ -788,16 +998,22 @@ Returns Element_Kinds:
     @key[function] @AdaSubDefn{Delay_Expression} (Statement : @key[in] Asis.Statement)
                                @key[return] Asis.Expression;
 
-Statement   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the delay statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the delay statement to query
 
 Returns the expression for the duration of the delay.
 
-Appropriate Statement_Kinds:
-     A_Delay_Until_Statement
-     A_Delay_Relative_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+A_Delay_Until_Statement
+A_Delay_Relative_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Guard}
 
@@ -813,13 +1029,18 @@ Returns a Nil_Element if there is no guard, or if the path is from a
 timed_entry_call, a conditional_entry_call, or an asynchronous_select
 statement where a guard is not legal.
 
-Appropriate Path_Kinds:
-     A_Select_Path
-     An_Or_Path
+@leading@keepnext@;Appropriate Path_Kinds:
+@begin{Display}
+A_Select_Path
+An_Or_Path
+@end{Display}
 
-Returns Element_Kinds:
-     Not_An_Element
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+Not_An_Element
+An_Expression
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Aborted_Tasks}
@@ -828,16 +1049,22 @@ Returns Element_Kinds:
     @key[function] @AdaSubDefn{Aborted_Tasks} (Statement : @key[in] Asis.Statement)
                             @key[return] Asis.Expression_List;
 
-Statement    @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the abort statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the abort statement to query
 
 Returns a list of the task names from the ABORT statement, in their order
 of appearance.
 
-Appropriate Statement_Kinds:
-     An_Abort_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+An_Abort_Statement
+@end{Display}
 
-Returns Element_Kinds:
-     An_Expression
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+An_Expression
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Choice_Parameter_Specification}
 
@@ -848,17 +1075,23 @@ Returns Element_Kinds:
 
 Handler @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the exception handler to query
 
-Returns the choice parameter specification following the reserved word "when"
-in the exception handler.
+Returns the choice parameter specification following the reserved word
+@key[when] in the exception handler.
 
 Returns a Nil_Element if there is no explicit choice parameter.
 
-Appropriate Element_Kinds:
-   An_Exception_Handler
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+An_Exception_Handler
+@end{Display}
 
-Returns Declaration_Kinds:
-     Not_A_Declaration
-     A_Choice_Parameter_Specification
+@leading@keepnext@;Returns Declaration_Kinds:
+@begin{Display}
+Not_A_Declaration
+A_Choice_Parameter_Specification
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Exception_Choices}
 
@@ -872,15 +1105,22 @@ Returns a list of the 'when <choice> | <choice>' elements, in their
 order of appearance. Choices are either the exception name expression or
 an others choice.
 
-Appropriate Element_Kinds:
-   An_Exception_Handler
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+An_Exception_Handler
+@end{Display}
 
-Returns Expression_Kinds:
-     An_Identifier
-     A_Selected_Component
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
+A_Selected_Component
+@end{Display}
 
-Returns Definition_Kinds:
-     An_Others_Choice
+@leading@keepnext@;Returns Definition_Kinds:
+@begin{Display}
+An_Others_Choice
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Handler_Statements}
@@ -896,12 +1136,18 @@ Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pr
 Returns the list of statements and pragmas from the body of the
 exception handler, in their order of appearance.
 
-Appropriate Element_Kinds:
-   An_Exception_Handler
+@leading@keepnext@;Appropriate Element_Kinds:
+@begin{Display}
+An_Exception_Handler
+@end{Display}
 
-Returns Element_Kinds:
-     A_Pragma
-     A_Statement
+@leading@keepnext@;Returns Element_Kinds:
+@begin{Display}
+A_Pragma
+A_Statement
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Raised_Exception}
 
@@ -909,19 +1155,25 @@ Returns Element_Kinds:
     @key[function] @AdaSubDefn{Raised_Exception} (Statement : @key[in] Asis.Statement)
                                @key[return] Asis.Expression;
 
-Statement @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the raise statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the raise statement to query
 
 Returns the expression that names the raised exception.
 
 Returns a Nil_Element if there is no explicitly named exception.
 
-Appropriate Statement_Kinds:
-     A_Raise_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+A_Raise_Statement
+@end{Display}
 
-Returns Expression_Kinds:
-     Not_An_Expression
-     An_Identifier
-     A_Selected_Component
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+Not_An_Expression
+An_Identifier
+A_Selected_Component
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Qualified_Expression}
 
@@ -929,15 +1181,20 @@ Returns Expression_Kinds:
     @key[function] @AdaSubDefn{Qualified_Expression} (Statement : @key[in] Asis.Statement)
                                    @key[return] Asis.Expression;
 
-Statement  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the code statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the code statement to query
 
 Returns the qualified aggregate expression representing the code statement.
 
-Appropriate Statement_Kinds:
-     A_Code_Statement
+@leading@keepnext@;Appropriate Statement_Kinds:
+@begin{Display}
+A_Code_Statement
+@end{Display}
 
-Returns Expression_Kinds:
-     A_Qualified_Expression
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+A_Qualified_Expression
+@end{Display}
+@end{DescribeCode}
 
 
 @LabeledClause{function Is_Dispatching_Call}

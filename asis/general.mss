@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.10 $ $Date: 2007/02/09 07:10:54 $}
+@comment{$Revision: 1.11 $ $Date: 2007/02/16 07:25:34 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -579,7 +579,6 @@ whenever they cannot normally complete their operation. This exception
 typically indicates a failure of the underlying ASIS implementation. This is a
 catch-all exception that is raised for different reasons in different ASIS
 implementations.
-
 @end{Itemize}
 
 
