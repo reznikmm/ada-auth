@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2006/03/21 22:47:18 $}
+@Comment{$Date: 2007/02/18 03:22:28 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.32 $}
+@comment{$Revision: 1.33 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -242,7 +242,7 @@ the following declarations: ...@rquotes@;.
 Many of Ada 83's language-defined library units are now children of Ada
 or System.
 For upward compatibility, these are renamed as root library units
-(see @RefSecNum{Renamings of Ada 83 Library Units}).
+(see @RefSecNum{Renamings of Library Units}).
 
 The order and lettering of the annexes has been changed.
 @end{DiffWord83}

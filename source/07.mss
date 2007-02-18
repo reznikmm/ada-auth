@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2007/02/06 04:48:44 $}
+@Comment{$Date: 2007/02/18 03:22:25 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -814,8 +814,10 @@ if and only if the ancestor subtype is constrained.
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0004-1]}
 @ChgAdded{Version=[2],Text=[If the @nt{full_type_declaration} for a private
-extension is defined by a @nt{derived_type_definition}, then the reserved word
+extension is @Chg{Version=[3],New=[defined by ],Old=[]}a @nt{derived_type_definition},
+then the reserved word
 @key{limited} shall appear in the @nt{full_type_declaration} if and only if it
 also appears in the @nt{private_extension_declaration}.]}
 @begin{Reason}
@@ -2246,8 +2248,9 @@ a protected type; or]}
 @ChgAdded{Version=[2],Text=[it has a component that needs finalization; or]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[it is a limited type that has an access discriminant
-whose designated type needs finalization; or]}
+@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0013-1]}
+@ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[it is a limited type that
+has an access discriminant whose designated type needs finalization; or],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[it is one of a number of language-defined types
@@ -2697,6 +2700,16 @@ Controlled types and user-defined finalization are new to Ada 95.
   have Initialize called for them to say that it is done for all objects that
   are initialized by default. This is needed so that all of the new cases
   are covered.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Eliminated coextensions
+  from the @ldquote@;needs finalization@rdquote rules, as this cannot be
+  determined in general in the compilation unit that declares the type.
+  (The designated type of the coextension may have been imported as a
+  limited view.) Uses of @ldquote@;needs finalization@rdquote need to
+  ensure that coextensions are handled by other means (such as
+  in No_Nested_Finalization @en see @RefSecNum{Tasking Restrictions})
+  or that they cannot happen.]}
 @end{DiffWord95}
 
 

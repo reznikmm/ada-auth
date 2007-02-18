@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.59 $ $Date: 2006/10/19 20:44:19 $ $Author: Randy $ }
+@comment{ $Revision: 1.60 $ $Date: 2007/02/18 03:22:30 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2006/10/19 20:44:19 $}
+@Comment{$Date: 2007/02/18 03:22:30 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -5575,7 +5575,8 @@ element of Left.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Union deletes from Target the
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[3],New=[Intersection],Old=[Union]} deletes from Target the
 elements of Target that are not equivalent to some element of Source.]}
 
 @begin{ImplNote}
@@ -5701,7 +5702,8 @@ returned.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Position := Next (Position).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Find (Container, Item) /= No_Element.]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0004-1]}
+@ChgDeleted{Version=[3],Type=[Trailing],Text=[@Chg{Version=[2],New=[Equivalent to Find (Container, Item) /= No_Element.],Old=[]}]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5720,6 +5722,9 @@ matching element is returned; otherwise, No_Element is returned.]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Contains (Container : Set;
                    Item      : Element_Type) @key{return} Boolean;]}
 @end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0004-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to Find (Container, Item) /= No_Element.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}

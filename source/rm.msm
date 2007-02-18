@@ -20,6 +20,7 @@
 @RTFHeaderPrefix{Version=[1],Text=[ISO/IEC 8652:1995(E) with COR.1:2001]}
 @Comment{PDFs: }@RTFHeaderPrefix{Version=[2],Text=[ISO/IEC 8652:2007(E) Ed. 3]}
 @Comment{Springer: @RTFHeaderPrefix{Version=[2],Text=[Consolidated Ada Reference Manual - 2005 Edition]}}
+@RTFHeaderPrefix{Version=[3],Text=[ISO/IEC 8652:20zz(E) Ed. 4]}
 @RTFPageSize{Ada95}
 @RTFFonts{Serif=[Times],SansSerif=[Arial]}
 

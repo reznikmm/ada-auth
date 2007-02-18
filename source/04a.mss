@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2007/02/06 04:48:40 $}
+@Comment{$Date: 2007/02/18 03:22:24 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -53,10 +53,10 @@ rhs="@Syn2{identifier} | @Syn2{operator_symbol}"}
 @end{Syntax}
 
 @begin{Intro}
-@ChgRef{Version=[2],Kind=[Revised]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
 @Redundant[Certain forms of @nt<name> (@nt<indexed_component>s,
 @nt<selected_component>s, @nt<slice>s, and
-@Chg{Version=[2],New=[@nt<attribute_reference>s],Old=[@ntf<attribute>s]})
+@Chg{Version=[3],New=[@nt<attribute_reference>s],Old=[@ntf<attribute>s]})
 include a @nt<prefix> that is either itself a @nt<name> that denotes
 some related entity, or an @nt<implicit_dereference> of an access
 value that designates some related entity.]
@@ -1171,6 +1171,14 @@ type, record type, or record extension.
 See @RefSec{The Context of Overload Resolution}
 for the meaning of @lquotes@;shall be a single ... type.@rquotes@;
 @end{Discussion}
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+@ChgAdded{Version=[3],Text=[There are additional rules for each kind of
+aggregate. These aggregate rules are additive; a legal expression needs to
+satisfy all of the applicable rules. That means the rule given here must be
+satisfied even when it is syntactally possible to tell which specific kind of
+aggregate is being used.]}
+@end{Ramification}
 @end{Resolution}
 
 @begin{Legality}
@@ -1454,15 +1462,24 @@ If the type of a @nt{record_aggregate} is a record extension,
 then it shall be a descendant of a record type, through one
 or more record extensions (and no private extensions).
 
-If there are no components needed in a given
-@nt<record_@!component_@!association_@!list>,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0016-1]}
+@Chg{Version=[3],New=[The reserved words @key[null record] may appear only if],
+Old=[If]} there are no components needed in a given
+@nt<record_@!component_@!association_@!list>@Chg{Version=[3],New=[],Old=[,
 then the reserved words @key(null record) shall appear rather
-than a list of @nt<record_@!component_@!association>s.
+than a list of @nt<record_@!component_@!association>s]}.
 @begin{Ramification}
   For example, "(@key(null record))" is a @nt<record_aggregate>
   for a null record type. Similarly, "(T'(A) @key(with null record))" is
   an @nt<extension_aggregate> for a type defined as a null
   record extension of T.
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0016-1]}
+@ChgAdded{Version=[3],Text=[If no components are needed and @key[null record]
+  is not used, the @nt{record_@!component_@!association} must necessarily be
+  @key[others] => <>, as that is the only
+  @nt{record_@!component_@!association} that does not require an associated
+  component.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
@@ -1579,6 +1596,16 @@ stand-alone object of the component subtype
 The @nt<expression> of a @nt{record_component_association}
 is evaluated (and converted) once for each associated component.
 
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+@ChgAdded{Version=[3],Text=[We don't need similar language for <>,
+as we're considering the value of <> for each individual component.
+Each component has its own default expression or its own
+default initialization (they can be different for each component;
+the components even could have different types), and each one
+has to be evaluated. So there is no need to repeat that.]}
+@end{Ramification}
+
 @end{RunTime}
 
 @begin{Notes}
@@ -1663,6 +1690,13 @@ a record aggregate. Now we do.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
   @ChgAdded{Version=[2],Text=[Limited @nt{record_aggregate}s are allowed (since
   all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0016-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Fixed the wording so that
+  @key[others] => <> can be used in place of @key[null record].
+  This is needed to avoid a generic contract issue for generic bodies:
+  we do not want to have to assume the worst to disallow others => <>
+  if the record type @i{might} be a null record.]}
 @end{DiffWord95}
 
 
@@ -1715,6 +1749,17 @@ specific than that. However, if the overload resolution rules
 get too complicated, the implementation gets more difficult and
 it becomes harder to produce good error messages.
 @end{Reason}
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI005-0005-1]}
+@ChgAdded{Version=[3],Text=[This rule is additive with the rule given in
+@RefSecNum{Aggregates}. That means that rule must be satisfied even though it
+is alway syntactally possible to tell that something is an extension aggregate
+rather than another kind of aggregate. Specifically, that means that an
+extension aggregate is ambiguous if the context is overloaded on array and/or
+untagged record types, even though those are never legal contexts for an
+extension aggregate. Thus, this rule acts more like a legality rule than a
+name resolution rule.]}
+@end{Ramification}
 @end{Resolution}
 
 @begin{Legality}
@@ -2090,6 +2135,16 @@ proceeds in two steps:
   Subaggregates are not separately evaluated.
   The conversion of the value of the component expressions
   to the component subtype might raise Constraint_Error.
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+@ChgAdded{Version=[3],Text=[We don't need to say that <> is
+  evaluated once for each component, as it means that each component
+  is @i{initialized by default}. That means that the actions defined
+  for default initialization are applied to each component individually.
+  Initializing one component by default and copying
+  that to the others would be an incorrect implementation in general
+  (although it might be OK if the default initialization is known
+  to be constant).]}
 @end(Ramification)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01]}
@@ -2178,11 +2233,11 @@ checks fail.
 @end{RunTime}
 
 @begin{Notes}
-@ChgRef{Version=[2],Kind=[Revised]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
 In an @nt<array_aggregate>, positional notation may only be used
 with two or more @nt<expression>s; a single @nt<expression>
 in parentheses is interpreted as a
-@Chg{Version=[2],New=[parenthesized expression],Old=[@ntf{parenthesized_expression}]}.
+@Chg{Version=[3],New=[parenthesized expression],Old=[@ntf{parenthesized_expression}]}.
 A @nt<named_array_aggregate>, such as (1 => X), may be used to specify
 an array with a single component.
 @end{Notes}
@@ -2977,8 +3032,10 @@ access-to-object type whose designated type is @i<D> or @i<D>'Class, where
   @ChgAdded{Version=[2],Text=[its result type is Boolean;]}
 
   @ChgRef{Version=[2],Kind=[Added]}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0020-1]}
   @ChgAdded{Version=[2],Text=[it is declared immediately within the same
-  declaration list as @i<D>; and]}
+  declaration list as @i<D>@Chg{Version=[3],New=[ or any partial or incomplete
+  view of @i<D>],Old=[]}; and]}
 
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[at least one of its operands is an
@@ -3396,6 +3453,13 @@ language-defined types.],Old=[]}
 @Chg{Version=[2],New=[Memberships were adjusted to allow interfaces which don't
 cover the tested type, in order to be consistent with type
 conversions.],Old=[]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0020-1]}
+@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Wording was added to clarify
+that @i{universal_access} "=" does not apply if an appropriate operator is
+declared for a partial or incomplete view of the designated type.
+Otherwise, adding a partial or incomplete view could made some "=" operators
+ambiguous.]}
 @end{DiffWord95}
 
 
@@ -3706,8 +3770,10 @@ multiplication operator if either operand is of a type having a user-defined
 primitive multiplication operator such that:]}
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0020-1]}
   @ChgAdded{Version=[2],Text=[it is declared immediately within the same
-  declaration list as the type; and]}
+  declaration list as the type@Chg{Version=[3],New=[ or any partial
+  view thereof],Old=[]}; and]}
 
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[both of its formal parameters are of a
@@ -3903,6 +3969,15 @@ fixed-fixed multiply operator. This change is likely to catch as many bugs as
 it causes, since it is unlikely that the user wanted to use predefined
 operators when they had defined user-defined versions.],Old=[]}
 @end{Incompatible95}
+
+@begin{DiffWord95}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0020-1]}
+@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Wording was added to clarify
+that @i{universal_fixed} "*" and "/" does not apply if an appropriate
+operator is declared for a partial view of the designated type.
+Otherwise, adding a partial view could made some "*" and "/" operators
+ambiguous.]}
+@end{DiffWord95}
 
 
 @LabeledSubClause{Highest Precedence Operators}

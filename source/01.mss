@@ -31,10 +31,10 @@ I probably ought to add a style just for this purpose)
 @ @*
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2007/02/06 04:48:32 $}
+@Comment{$Date: 2007/02/18 03:22:22 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1384,12 +1384,14 @@ Duration the user might have declared.
 
 @begin{WideAbove}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0004-1]}
 @ChgAdded{Version=[2],Text=[The delimiters, compound delimiters, reserved words, and
 @nt{numeric_literal}s are exclusively made of the
 characters whose code position is between 16#20# and 16#7E#, inclusively.
 The special characters for which names are defined in this
 International Standard (see @RefSecNum{Character Set}) belong to the same range.
-@Redundant[For example, the character E in the definition of exponent is the
+@Redundant[For example, the character E in the definition of @Chg{Version=[3],
+New=[@nt{exponent}],Old=[exponent]} is the
 character whose name is @lquotes@;LATIN CAPITAL LETTER E@rquotes@;, not
 @lquotes@;GREEK CAPITAL LETTER EPSILON@rquotes@;.]]}
 @begin{Discussion}

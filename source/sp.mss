@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.47 $ $Date: 2006/10/18 00:25:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.48 $ $Date: 2007/02/18 03:22:32 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2006/10/18 00:25:28 $}
+@Comment{$Date: 2007/02/18 03:22:32 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1496,10 +1496,11 @@ Abort_Task is a potentially blocking operation
 
 @begin{Bounded}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00237-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
 @PDefn2{Term=(bounded error),Sec=(cause)}
 It is a bounded error to call the Current_Task function from
-an entry body@Chg{Version=[2],New=[,],Old=[ or an]} interrupt handler@Chg{Version=[2],
-New=[, or finalization of a task attribute],Old=[]}.
+an @Chg{Version=[3],New=[@nt{entry_body}],Old=[entry body]}@Chg{Version=[2],New=[,],Old=[ or an]}
+interrupt handler@Chg{Version=[2],New=[, or finalization of a task attribute],Old=[]}.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised, or an implementation-defined value of the type
 Task_Id is returned.

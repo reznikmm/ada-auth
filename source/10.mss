@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2007/02/06 04:48:47 $}
+@Comment{$Date: 2007/02/18 03:22:26 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -531,10 +531,11 @@ semantics of children of generic packages.
 @end(Enumerate)
 @end{Reason}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
 A child of a generic library package shall either be itself a generic unit
-or be a renaming of some other child of the same generic unit.
-The renaming of a child of a generic package shall occur
-only within the declarative region of the generic package.
+or be a renaming of some other child of the same generic unit.@Chg{Version=[3],
+New=[],Old=[ The renaming of a child of a generic package shall occur
+only within the declarative region of the generic package.]}
 
 
 A child of a parent generic package shall be
@@ -1582,13 +1583,13 @@ This can't be a @ResolutionName, because a @nt{subunit} is not a
 complete context.
 @end{Discussion}
 
-@ChgRef{Version=[2],Kind=[Revised]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
 A @nt{package_body_stub} shall be the completion of a
 @nt{package_@!declaration} or @nt{generic_@!package_@!declaration};
 a @nt{task_@!body_@!stub} shall be the completion of a
-@Chg{Version=[2],New=[task declaration],Old=[@ntf{task_@!declaration}]};
+@Chg{Version=[3],New=[task declaration],Old=[@ntf{task_@!declaration}]};
 a @nt{protected_@!body_stub} shall be the completion of a
-@Chg{Version=[2],New=[protected declaration],Old=[@ntf{protected_@!declaration}]}.
+@Chg{Version=[3],New=[protected declaration],Old=[@ntf{protected_@!declaration}]}.
 
 In contrast,
 a @nt{subprogram_body_stub} need not be the completion of a previous
@@ -1868,7 +1869,9 @@ seeing the body of that subprogram @em inlining would not be
 achieved in this case, but the call is still legal.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@ChgAdded{Version=[2],Text=[The second rule applies to limited views as well
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+@ChgAdded{Version=[2],Text=[The @Chg{Version=[2],New=[consistency],
+Old=[second]} rule applies to limited views as well
 as the full view of a compilation unit. That means that an implementation needs
 a way to enforce consistency of limited views, not just of full views.]}
 @end{Ramification}
@@ -3316,13 +3319,37 @@ type is presumed to have non-visible components whose default initialization
 evaluates such an @nt{allocator};]}
 
 @begin{Reason}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0004-1]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[Such an @nt{allocator} would
+  provide a backdoor way to get a global variable into a pure unit, so it is
+  prohibited. Most such @nt{allocator}s are illegal anyway, as their type is
+  required to have Storage_Size = 0 (see the next two rules). But access
+  parameters and access discriminants don't necessarily disallow @nt{allocator}s.
+  However, a call is also illegal here (by the preelaboration rules), so access
+  parameters cannot cause trouble. So this rule is really about prohibiting
+  allocators in discriminant constraints:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@key[type] Rec (Acc : @key[access] Integer) @key[is record]
+    C : Character;
+@key[end record];]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Not_Const : @key[constant] Rec (Acc => @key[new] Integer'(2)); -- @RI{Illegal in a pure unit}.]}
+@end{Example}
+
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This rule is needed because aggregates can
-  specify the default initialization of a private type or extension using <> or
-  the ancestor subtype of an extension aggregate. The subtype of a component
-  could use an @nt{allocator} to initialize an access discriminant. Ada 95 did
-  not allow such private types to have preelaborable initialization, so they
-  could not have occurred. Thus this rule is not incompatible with Ada 95.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[The second half of the],Old=[This]}
+  rule is needed because aggregates can specify the default initialization
+  of a private type or extension using <> or the ancestor subtype of an
+  extension aggregate. The
+  subtype of a component could use an @nt{allocator} to initialize an access
+  discriminant; the type still could have a pragma Preelaborable_Initialization
+  given. Ada 95 did not allow such private types to have preelaborable
+  initialization, so such a default initialization could not have occurred.
+  Thus this rule is not incompatible with Ada 95.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added]}

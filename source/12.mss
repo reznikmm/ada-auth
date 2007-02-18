@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2007/02/06 04:48:48 $}
+@Comment{$Date: 2007/02/18 03:22:27 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -376,16 +376,16 @@ named associations.
 @end{Syntax}
 
 @begin{Intro}
-@ChgRef{Version=[2],Kind=[Revised]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
 @Defn{generic actual parameter}
 @Defn{generic actual}
 @Defn{actual}
 The @i{generic actual parameter} is either the
 @nt{explicit_generic_actual_parameter} given in a
-@Chg{Version=[2],New=[@nt{generic_@!association}],Old=[@ntf{generic_@!parameter_@!association}]}
+@Chg{Version=[3],New=[@nt{generic_@!association}],Old=[@ntf{generic_@!parameter_@!association}]}
 for each formal,
 or the corresponding @nt{default_@!expression} or @nt{default_@!name} if no
-@Chg{Version=[2],New=[@nt{generic_@!association}],Old=[@ntf{generic_@!parameter_@!association}]}
+@Chg{Version=[3],New=[@nt{generic_@!association}],Old=[@ntf{generic_@!parameter_@!association}]}
 is given for the formal.
 When the meaning is clear from context,
 the term @lquotes@;generic actual,@rquotes@; or simply @lquotes@;actual,@rquotes@; is used as a synonym for
@@ -3106,6 +3106,13 @@ The @i(generic_package_)@nt<name> shall denote a generic package
 (the @i(template) for the formal package);
 the formal package is an instance of the template.
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0025-1]}
+@ChgAdded{Version=[3],Text=[The @i(generic_formal_parameter_)@nt{selector_name}
+of a @nt{formal_package_association} shall
+denote a @nt{generic_formal_parameter_declaration} of the template. If two or
+more formal subprograms of the template have the same defining name, then named
+associations are not allowed for the corresponding actuals.]}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00398-01]}
 @ChgAdded{Version=[2],Text=[A @nt<formal_package_actual_part> shall contain
 at most one @nt<formal_package_association> for each formal parameter. If the
@@ -3321,6 +3328,11 @@ an instantiation of a package with formal packages:}]}
   @ChgAdded{Version=[2],Text=[The description of which operations are
   visible in a formal package has been clarified. We also specify how matching
   is done when the actual is a formal package.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0025-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Missing rules for generic
+  parameters to parallel those in @RefSecNum{Generic Instantiation}
+  were added.]}
 @end{DiffWord95}
 
 

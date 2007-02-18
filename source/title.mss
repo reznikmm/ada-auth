@@ -1,13 +1,13 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.33 $ $Date: 2006/11/09 06:29:49 $}
+@comment{$Revision: 1.34 $ $Date: 2007/02/18 03:22:32 $}
 
 @begin{ISOOnly}
-@Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}}}}
+@Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[3],New=[20zz Ed. 4],Old=[@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
 @end{ISOOnly}
 @begin{NotISO}
-@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}}}}
+@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:@Chg{Version=[3],New=[20zz Ed. 4],Old=[@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
 @end{NotISO}
 
 @Noparanum@ @*
@@ -58,6 +58,7 @@
 @Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:1995(E)}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[1], New=[@Grow{with Technical Corrigendum 1}], Old=[]}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[2], New=[@Grow{and Amendment 1}], Old=[]}}}
+@Noparanum@Center{@Swiss{@Chg{Version=[3], New=[@Grow{and Technical Corrigendum 2?? (Draft 1)}], Old=[]}}}
 @end{NotISO}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
@@ -74,6 +75,8 @@
 @Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2004, 2005, 2006  AXE Consultants], Old=[]}
 
 @Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2004, 2005, 2006  Ada-Europe], Old=[]}
+
+@Noparanum@;@Chg{Version=[3], New=[Copyright @Latin1(169) 2007  AXE Consultants], Old=[]}
 
 @NewPage
 @Comment{For ISO version, the back of the title page is blank, and the
@@ -127,7 +130,7 @@ EVEN IF MITRE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.], Old=[]}
 
 @Noparanum@;@Chg{Version=[2], New=[@b{Amendment 1}], Old=[]}
 
-@Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2004, 2005, 2006, AXE Consultants.  All Rights Reserved.], Old=[]}
+@Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2004, 2005, 2006@Chg{Version=[3], New=[, 2007],Old=[]}, AXE Consultants.  All Rights Reserved.], Old=[]}
 
 @Noparanum@;@Chg{Version=[2], New=[This document may be copied, in whole or in part, in any form or by any means,
 as is, or with alterations, provided that (1) alterations are clearly marked as

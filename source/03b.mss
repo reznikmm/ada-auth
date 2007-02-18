@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/02/06 04:48:34 $}
+@Comment{$Date: 2007/02/18 03:22:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 
 @LabeledClause{Array Types}
 
@@ -1943,10 +1943,11 @@ and the @nt{attribute_reference} shall appear alone.
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0004-1]}
 @ChgAdded{Version=[2],Text=[@Defn{explicitly limited record}
 @Defn2{Term=[record],Sec=(explicitly limited)}
-If a @nt{record_type_definition} includes the
-reserved word @key{limited}, the type is called an
+If a @Chg{Version=[3],New=[@nt{record_type_definition}],Old=[@ntf{record_type_declaration}]}
+includes the reserved word @key{limited}, the type is called an
 @i<explicitly limited record> type.]}
 
 @PDefn2{Term=[nominal subtype], Sec=(of a record component)}

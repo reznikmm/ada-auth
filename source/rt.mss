@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.75 $ $Date: 2006/10/19 06:40:31 $ $Author: Randy $ }
+@comment{ $Revision: 1.76 $ $Date: 2007/02/18 03:22:31 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2006/10/19 06:40:31 $}
+@Comment{$Date: 2007/02/18 03:22:31 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2717,19 +2717,32 @@ construction of highly efficient tasking run-time systems.]
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0042],ARef=[AI95-00130-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00360-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
 @Defn2{Term=[Restrictions],Sec=(No_Nested_Finalization)}No_Nested_Finalization @\Objects
   @Chg{Version=[2],New=[of a type that needs finalization (see
   @RefSecNum{User-Defined Assignment and Finalization})],Old=[with
-  controlled@Chg{New=[, protected, or task],Old=[]} parts]} and
+  controlled@Chg{New=[, protected, or task],Old=[]} parts]}
+  @Chg{Version=[3],New=[],Old=[and
   access types that designate @Chg{Version=[2],New=[a type that needs
-  finalization],Old=[such objects@Chg{New=[,],Old=[]}]} shall be
-  declared only at library level.
+  finalization],Old=[such objects@Chg{New=[,],Old=[]}]} ]}shall be
+  declared only at library level.@Chg{Version=[3],New=[ There are
+  no @nt{allocator}s for an access type whose designated type needs
+  finalization if the access type does not have library-level
+  accessibility.],Old=[]}
     @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0042],ARef=[AI95-00130-01]}
     @ChgNote{This is no longer true.}
     @ChgDeleted{Version=[1],Text=[Note that protected types with entries and
     interrupt-handling protected types have nontrivial finalization actions.
     However, this restriction does not restrict those things.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
+    @ChgAdded{Version=[3],Text=[The second sentence prevents the declaration
+    objects of access types which would require nested finalization. It
+    also prevents the declarations of coextensions that need
+    finalization in a nested scope. The latter cannot be done by preventing
+    the declaration of the objects, as it is not necessarily known if the
+    coextension type needs finalization (it could be a limited view).]}
     @end{Ramification}
 
 @Defn2{Term=[Restrictions],Sec=(No_Abort_Statements)}No_Abort_Statements @\There are no @nt{abort_statement}s, and there are no
@@ -2975,6 +2988,12 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
   @ChgAdded{Version=[2],Text=[Restriction No_Asynchronous_Control is now
   obsolescent.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Changed so that
+  coextensions of types that require nested finalization are also
+  prohibited; this is done by prohibiting @nt{allocator}s rather than
+  objects of specific access types.]}
 @end{DiffWord95}
 
 
@@ -3444,12 +3463,12 @@ expiration time does not cause the calling task to be blocked; it is
 nevertheless a potentially blocking operation
 (see @RefSecNum{Protected Subprograms and Protected Actions}).
 
-@ChgRef{Version=[2],Kind=[Revised]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
 When a @nt{delay_statement} appears in a @nt{delay_alternative} of a
 @nt{timed_entry_call} the selection of the entry call is attempted,
 regardless of the specified expiration time.
 When a @nt{delay_statement} appears in a
-@Chg{Version=[2],New=[@nt{select_alternative}],Old=[@ntf{selective_accept_alternative}]},
+@Chg{Version=[3],New=[@nt{select_alternative}],Old=[@ntf{selective_accept_alternative}]},
 and a call is queued on one of the open entries, the selection of that
 entry call proceeds, regardless of the value of the delay expression.
 @begin{Ramification}

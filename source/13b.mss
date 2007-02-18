@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2007/02/06 04:48:49 $}
+@Comment{$Date: 2007/02/18 03:22:28 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.55 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1347,6 +1347,18 @@ it is as if X were declared immediately within a library package.>}
 @IndexSeeAlso{Term=[Access attribute],See=(Unchecked_Access attribute)}
 @end{Description}
 @EndPrefixType{}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+@ChgAdded{Version=[3],Text=[We say @ldquote@;rules and semantics@rdquote@;
+here so that library-level accessibility applies to the value created by
+X'Unchecked_Access as well as to the checks needed for the attribute itself.
+This means that any anonymous access values that inherit the accessibility of
+this attribute (such as access parameters) also act as if they have
+library-level accessibility. We don't want the "real" accessibility of the
+created value re-emerging at a later point @en that would create
+hard-to-understand bugs.]}
+@end{Ramification}
 @end{StaticSem}
 
 @begin{Notes}
@@ -2578,7 +2590,7 @@ restrictions are defined in the Specialized Needs Annexes):]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Obsolescent_Features)}No_Obsolescent_Features @\There
    is no use of language features defined in Annex J. It is
    implementation-defined if uses of the renamings of
-   @RefSecNum{Renamings of Ada 83 Library Units} are detected by this
+   @RefSecNum{Renamings of Library Units} are detected by this
    restriction. This restriction applies only to the current compilation or
    environment, not the entire partition.]}
 @begin{Reason}
@@ -2594,7 +2606,7 @@ restrictions are defined in the Specialized Needs Annexes):]}
   @ChgAdded{Version=[2],Text=[Such a rename must not be disallowed
   by this restriction, nor should the compilation of such a rename be
   restricted by an implementation. Many implementations implement the renames
-  of @RefSecNum{Renamings of Ada 83 Library Units}
+  of @RefSecNum{Renamings of Library Units}
   by compiling them normally; we do not want to require implementations to use
   a special mechanism to implement these renames.]}
 @end{Reason}
@@ -3477,10 +3489,13 @@ subtype of @i<T> if @i<T> is a scalar type, and the first subtype otherwise.
 The same rule applies to the result of the Input attribute.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0007-1]}
 @ChgAdded{Version=[2],Text=[For an @nt{attribute_definition_clause} specifying
-one of these attributes, the subtype of the Item parameter shall be the base
-subtype if scalar, and the first subtype otherwise. The same rule applies to
-the result of the Input function.]}
+one of these attributes, the subtype of the Item parameter shall be the
+@Chg{Version=[3],New=[first subtype or the ],Old=[]}base
+subtype if scalar, and the first subtype
+@Chg{Version=[3],New=[if not scalar],Old=[otherwise]}. The same rule
+applies to the result of the Input function.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3488,10 +3503,14 @@ the result of the Input function.]}
 @end{Reason}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The view of the type at the point of the
-  @nt{attribute_definition_clause} determines whether the first subtype or base
-  subtype is required. Thus, for a scalar type with a partial view (which is
-  never scalar), whether the first subtype or the base subtype is required is
+  @nt{attribute_definition_clause} determines whether the @Chg{Version=[3],
+  New=[],Old=[first subtype or ]}base subtype is
+  @Chg{Version=[3],New=[allowed],Old=[required]}. Thus, for a scalar
+  type with a partial view (which is never scalar), whether the
+  @Chg{Version=[3], New=[],Old=[first subtype or ]} the base subtype is
+  @Chg{Version=[3], New=[allowed],Old=[required]} is
   determined by whether the @nt{attribute_definition_clause} occurs before or
   after the full definition of the scalar type.]}
 @end{Ramification}
@@ -3716,6 +3735,14 @@ class-wide types descended from S.
   we don't define the default implementations of attributes that cannot be
   called (that is, aren't @lquotes@;available@rquotes@;). Also clarified when
   inheritance takes place.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0007-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Stream attributes
+  for scalar types can be specified with subprograms that take the first
+  subtype as well as the base type. This eliminates confusion about which
+  subtype is appropriate for attributes specified for partial views whose
+  full type is a scalar type. It also eliminates a common user error
+  (forgetting 'Base).]}
 @end{DiffWord95}
 
 

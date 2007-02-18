@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/02/06 04:48:37 $}
+@Comment{$Date: 2007/02/18 03:22:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2650,9 +2650,10 @@ interface and a synchronized interface extending it:}]}
 -- @RI[See @RefSecNum{Incomplete Type Declarations} for Person_Name.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1]}
 @ChgAdded{Version=[2],Text=[Queue_Error : @key{exception};
---@RI[ Append raises Queue_Error if Count(Q) = Max_Count(Q)]
---@RI[ Remove_First raises Queue_Error if Count(Q) = 0]]}
+--@RI[ Append raises Queue_Error if @Chg{Version=[3],New=[Cur_Count],Old=[Count]}(Q) = Max_Count(Q)]
+--@RI[ Remove_First raises Queue_Error if @Chg{Version=[3],New=[Cur_Count],Old=[Count]}(Q) = 0]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{type} Synchronized_Queue @key{is synchronized interface and} Queue; --@RI[ see @RefSecNum{Example of Tasking and Synchronization}]
@@ -3521,10 +3522,11 @@ of @i{T}.]}
 @Key{end} P.C;],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
 @Chg{Version=[2],New=[@Key{with} P.C;
 @Key{package body} P @Key{is}
-    -- @RI{Ptr.all'Size is not legal here, but it is in the scope of a}
-    -- @nt{nonlimited_with_clause} @RI{for P.}
+    -- @RI{Ptr.all'Size is not legal here@Chg{Version=[3],New=[.],Old=[, but it is in the scope of a]}}@Chg{Version=[3],New=[],Old=[
+    -- @nt{nonlimited_with_clause} @RI{for P.}]}
     @Key{type} T @Key{is} ...
     --  @RI{Ptr.all'Size is legal here.}
 @Key{end} P;],Old=[]}
@@ -4045,6 +4047,13 @@ designate an object that no longer exists.
 The Unchecked_Access attribute may be used to circumvent the
 accessibility rules.]
 
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+@ChgAdded{Version=[3],Text=[The Unchecked_Access attribute acts as if the
+object was declared at library-level; this applies even when it is used as the
+value of anonymous access type.
+See @RefSecNum{Unchecked Access Value Creation}.]}
+@end{Discussion}
 
 @Defn{statically deeper}
 @Defn2{Term=[deeper],Sec=(statically)}
@@ -4225,10 +4234,19 @@ the associated value (or library level if the value is null);]}
     access-to-constrained subtype, etc.]}
   @end{InnerItemize}
 @end{Discussion}
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+@ChgAdded{Version=[3],Text=[If the value for this rule and the next one is
+derived from an Unchecked_Access attribute, the accessibility is library-level
+no matter what the accessibility level of the object is  (see
+@RefSecNum{Unchecked Access Value Creation}).]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0004-1]}
 @ChgAdded{Version=[2],Text=[If the value of the access discriminant is
-determined by a @nt{record_component_association} in an @nt{aggregate}, the
+determined by a @Chg{Version=[3],New=[@nt{record_component_association}],
+Old=[@ntf{component_association}]} in an @nt{aggregate}, the
 accessibility level of the object or subprogram designated by the associated
 value (or library level if the value is null);]}
 
@@ -4270,6 +4288,13 @@ the view designated by the actual.@Chg{Version=[2],New=[],Old=[ If the
 actual is an @nt{allocator},
 this is the accessibility level of the execution of the called
 subprogram.]}
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+@ChgAdded{Version=[3],Text=[If the value of the actual is derived from an
+Unchecked_Access attribute, the accessibility is always library-level (see
+@RefSecNum{Unchecked Access Value Creation}).]}
+@end{Ramification}
+
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01]}
 @ChgAdded{Version=[2],Text=[The accessibility level of the anonymous access type
@@ -4335,10 +4360,17 @@ when the object is finalized (see @RefSecNum{Completion and Finalization}).]}
   storage pool (or stack frame, in the case of a declared object).]}
 @end{Ramification}
 
-The accessibility level of
-a view of an object or subprogram denoted by a dereference of an access value
-is the same as that of
-the access type.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0014-1]}
+The accessibility level of a view of an object or subprogram
+@Chg{Version=[3],New=[designated by],Old=[denoted by a dereference of]} an
+access value is the same as that of the access type.
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0014-1]}
+@ChgAdded{Version=[3],Text=[This rule applies even when no dereference exists,
+for example when an access value is passed as an access parameter.
+This rule ensures that implementations are not required to include dynamic
+accessibility values with access values.]}
+@end{Discussion}
 
 The accessibility level of
 a component, protected subprogram, or entry
@@ -5228,6 +5260,12 @@ and function calls are masters.],Old=[]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00254-01],ARef=[AI95-00318-02],ARef=[AI95-00385-01],ARef=[AI95-00416-01]}
 @Chg{Version=[2],New=[Defined the accessibility of the various new kinds and
 uses of anonymous access types.],Old=[]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0014-1]}
+@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the rules so that
+the accessibility of the object designated by an access object is that
+of the access type, even when no dereference is given. This correction
+applies to both Ada 95 and Ada 2005.]}
 @end{DiffWord95}
 
 
