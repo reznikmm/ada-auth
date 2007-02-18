@@ -2207,8 +2207,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			Format_Object.No_Breaks := True;
 			if For_Type = Child_Example_Text then
 			    Format_Object.Indent := 1 + Enclosing_Indent;
-Ada.Text_IO.Put_Line ("&& Child example paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
-   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
+--Ada.Text_IO.Put_Line ("&& Child example paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
+--   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
 			elsif For_Type = Indented_Example_Text then
 			    if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
 			        Format_Object.Indent := 6; -- Fixed indent.
@@ -2240,8 +2240,8 @@ Ada.Text_IO.Put_Line ("&& Child example paragraph, line " & ARM_Input.Line_Strin
 			    Format_Object.Style  := ARM_Output.Normal;
 			end if;
 		        Format_Object.Indent := 1 + Enclosing_Indent;
-Ada.Text_IO.Put_Line ("&& Child Indented paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
-   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
+--Ada.Text_IO.Put_Line ("&& Child Indented paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
+--   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
 			Format_Object.No_Breaks := False;
 
         	    when Bulleted =>
@@ -2251,8 +2251,8 @@ Ada.Text_IO.Put_Line ("&& Child Indented paragraph, line " & ARM_Input.Line_Stri
 			    Format_Object.Style  := ARM_Output.Bulleted;
 			end if;
 		        Format_Object.Indent := 1 + Enclosing_Indent;
-Ada.Text_IO.Put_Line ("&& Regular bulleted paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
-   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
+--Ada.Text_IO.Put_Line ("&& Regular bulleted paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
+--   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 			Format_Object.No_Breaks := False;
 
@@ -2263,8 +2263,8 @@ Ada.Text_IO.Put_Line ("&& Regular bulleted paragraph, line " & ARM_Input.Line_St
 			    Format_Object.Style  := ARM_Output.Nested_Bulleted;
 			end if;
 		        Format_Object.Indent := 1 + Enclosing_Indent;
-Ada.Text_IO.Put_Line ("&& Nested bulleted paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
-   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
+--Ada.Text_IO.Put_Line ("&& Nested bulleted paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
+--   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 			Format_Object.No_Breaks := False;
 
@@ -2275,8 +2275,8 @@ Ada.Text_IO.Put_Line ("&& Nested bulleted paragraph, line " & ARM_Input.Line_Str
 			    Format_Object.Style  := ARM_Output.Nested_Bulleted;
 			end if;
 		        Format_Object.Indent := 1 + Enclosing_Indent;
-Ada.Text_IO.Put_Line ("&& Nested X2 bulleted paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
-   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
+--Ada.Text_IO.Put_Line ("&& Nested X2 bulleted paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
+--   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 			Format_Object.No_Breaks := False;
 
@@ -2287,8 +2287,8 @@ Ada.Text_IO.Put_Line ("&& Nested X2 bulleted paragraph, line " & ARM_Input.Line_
 			    Format_Object.Style  := ARM_Output.Normal;
 			end if;
 		        Format_Object.Indent := 1 + Enclosing_Indent;
-Ada.Text_IO.Put_Line ("&& Display paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
-   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
+--Ada.Text_IO.Put_Line ("&& Display paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
+--   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
 			Format_Object.No_Breaks := True;
 
         	    when Syntax_Display =>
@@ -2303,8 +2303,8 @@ Ada.Text_IO.Put_Line ("&& Display paragraph, line " & ARM_Input.Line_String (Inp
 			    Format_Object.Style  := ARM_Output.Enumerated;
 			end if;
 		        Format_Object.Indent := 1 + Enclosing_Indent;
-Ada.Text_IO.Put_Line ("&& Regular enumerated paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
-   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
+--Ada.Text_IO.Put_Line ("&& Regular enumerated paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
+--   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 			Format_Object.No_Breaks := False;
 
@@ -2315,8 +2315,8 @@ Ada.Text_IO.Put_Line ("&& Regular enumerated paragraph, line " & ARM_Input.Line_
 			    Format_Object.Style  := ARM_Output.Enumerated;
 			end if;
 		        Format_Object.Indent := 1 + Enclosing_Indent;
-Ada.Text_IO.Put_Line ("&& Nested enumerated paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
-   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
+--Ada.Text_IO.Put_Line ("&& Nested enumerated paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
+--   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
 			-- Note: The difference here is the numbering, not the
 			-- layout.
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
