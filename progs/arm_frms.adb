@@ -8,7 +8,7 @@
     -- determines the details of the text.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -43,6 +43,7 @@
     --  9/22/06 - RLB - Revised to use Clause_Number_Type, and to support
     --			Subsubclauses.
     -- 10/16/06 - RLB - Added definition of old non-terminals for NT linking.
+    --  2/16/07 - RLB - Added missing code to handle comments here.
 
 separate(ARM_Format)
 procedure Scan (Format_Object : in out Format_Type;
@@ -567,6 +568,12 @@ procedure Scan (Format_Object : in out Format_Type;
 			end if;
 		    end;
 		end;
+
+	    when Comment =>
+	        -- Skip the contents of this command.
+	        ARM_Input.Skip_until_Close_Char (Input_Object,
+		    Nesting_Stack(Nesting_Stack_Ptr).Close_Char);
+		ARM_File.Replace_Char (Input_Object); -- Put the close character back.
 
 	    when others =>
 	        null; -- Not in scanner.
