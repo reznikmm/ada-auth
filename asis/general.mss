@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.11 $ $Date: 2007/02/16 07:25:34 $}
+@comment{$Revision: 1.12 $ $Date: 2007/02/19 23:57:41 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -19,19 +19,15 @@ I probably ought to add a style just for this purpose)
 
 @thickline
 
+@begin{Title}
 @noparanum@ @*@comment{Some vertical whitespace}
-@ @*
-@ @*
 
-@noparanum@Swiss{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@b{Information technology @Em}}}}}}}}
-
-@noparanum@Swiss{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@b{Programming languages @Em}}}}}}}}
-
-@noparanum@Swiss{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@b{Ada Semantic Interface Specification (ASIS)}}}}}}}}
+@noparanum@Swiss{@b{Information technology @Em}}@*
+@Swiss{@b{Programming languages @Em}}@*
+@Swiss{@b{Ada Semantic Interface Specification (ASIS)}}
 
 @noparanum@ @*@comment{Some vertical whitespace}
-@ @*
-@ @*
+@end{Title}
 
 @LabeledSectionNoBreak{General}
 

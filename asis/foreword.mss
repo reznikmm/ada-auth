@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/foreword.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/07/25 04:56:43 $}
+@comment{$Revision: 1.2 $ $Date: 2007/02/19 23:57:41 $}
 
 @UnNumberedSection(Foreword)
 
@@ -23,4 +23,5 @@ International Standard ISO/IEC 15291 was prepared by Joint Technical Committee
 ISO/IEC JTC 1, @i{Information technology}, Subcommittee 22, @i{Programming
 languages, their environments and system software interfaces}.
 
-Annexes A, B, C, and D of this International Standard are for information only.
+Annexes A, B, C, @Chg{Version=[2],New=[D, and E],Old=[and D]} of
+this International Standard are for information only.

@@ -34,7 +34,7 @@
 @HTMLColor{Text=[#000000],Background=[#FFF0E8],Link=[#0000FF],VLink=[#800080],ALink=[#FF0000]}
 
 @Comment{Source files and related items, in collating order}
-@Source{Name=<Title.MSS>,SectionName=<Ttl>,SectionNumber=[0],NewSection=[T]}
+@Source{Name=<Title.MSS>,SectionName=<TTL>,SectionNumber=[0],NewSection=[T]}
 @TOC @Comment{The table of contents goes here in the collating order}
 @Source{Name=<Foreword.MSS>,SectionName=<00>,SectionNumber=[0],NewSection=[T]}
 @Source{Name=<Intro.MSS>,SectionName=<00>,SectionNumber=[0],NewSection=[F]}

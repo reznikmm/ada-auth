@@ -1,7 +1,7 @@
 @Part(title, Root="asis.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/title.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/07/25 04:56:43 $}
+@comment{$Revision: 1.2 $ $Date: 2007/02/19 23:57:41 $}
 
 @begin{ISOOnly}
 @Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 15291:@Chg{Version=[1],New=[200y(E)],Old=[1999(E)]}}}}
@@ -24,7 +24,9 @@
 @ @*
 
 @begin{ISOOnly}
-@Noparanum@Swiss{@Grow{@Grow{@Grow{@Grow{@Grow{@b{Information technology @Em Programming languages @Em Ada Semantic Interface Specification (ASIS)}}}}}}}
+@begin{Title}
+@Noparanum@Swiss{@b{Information technology @Em@*Programming languages @Em@*Ada Semantic Interface Specification (ASIS)}}
+@end{Title}
 @end{ISOOnly}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
@@ -46,10 +48,10 @@
 
 @begin{NotISO}
 @begin{RMOnly}
-@Noparanum@Heading{@Grow{@Grow{@Grow{Ada Semantic Interface Specification (ASIS)}}}}
+@Noparanum@Heading{Ada Semantic Interface Specification (ASIS)}
 @end{RMOnly}
 @begin{AARMOnly}
-@Noparanum@Heading{@Grow{@Grow{@Grow{Annotated Ada Semantic Interface Specification (ASIS)}}}}
+@Noparanum@Heading{Annotated Ada Semantic Interface Specification (ASIS)}
 @end{AARMOnly}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
