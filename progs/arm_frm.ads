@@ -94,6 +94,7 @@ package ARM_Format is
     --  2/13/07 - RLB - Redid output formating to use an explict indent;
     --			added ChildExample.
     --  2/16/07 - RLB - Added Indent.
+    --  2/19/07 - RLB - Added Title format.
 
     type Format_Type is tagged limited private;
 
@@ -214,7 +215,7 @@ private
 	Indented_Example_Text, Code_Indented, Indent, Bulleted, Nested_Bulleted,
         Nested_X2_Bulleted,
 	Display, Syntax_Display, Syntax_Indented, Syntax_Production,
-	Enumerated, Nested_Enumerated, Hanging_Indented, In_Table);
+	Enumerated, Nested_Enumerated, Hanging_Indented, Title, In_Table);
 
     type Reference;
     type Reference_Ptr is access Reference;

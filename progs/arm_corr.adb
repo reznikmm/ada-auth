@@ -333,6 +333,9 @@ package body ARM_Corr is
 
 	    when ARM_Output.Index => null; --** TBD.
 	    when ARM_Output.Syntax_Summary => null; --** TBD.
+	    when ARM_Output.Title =>
+		null; -- ** TBD (Unknown cases).
+
 	    when ARM_Output.Examples =>
 		if Indent = 1 then
 	            Ada.Text_IO.Put (Output_Object.Output_File, "@xcode<");
@@ -422,6 +425,7 @@ package body ARM_Corr is
 		 ARM_Output.Small | ARM_Output.Small_Wide_Above |
 		 ARM_Output.Header | ARM_Output.Small_Header |
 		 ARM_Output.Index | ARM_Output.Syntax_Summary |
+		 ARM_Output.Title |
 		 ARM_Output.Examples | ARM_Output.Small_Examples |
 		 ARM_Output.Swiss_Examples | ARM_Output.Small_Swiss_Examples =>
 		Output_Object.Tab_Stops := Tab_Stops;
@@ -507,6 +511,7 @@ package body ARM_Corr is
 
 	    when ARM_Output.Index => null; --** TBD.
 	    when ARM_Output.Syntax_Summary => null; --** TBD.
+	    when ARM_Output.Title => null; --** TBD.
 	    when ARM_Output.Examples =>
 		if Output_Object.Para_Indent = 1 then
 		    Buffer (Output_Object, '>');

@@ -162,6 +162,7 @@ package body ARM_HTML is
     --			for paragraphs.
     --  2/15/07 - RLB - Redid enumeration and bullet indenting to make the
     --			formats work consistently on Firefox and IE.
+    --  2/19/07 - RLB - Added Title style.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -529,6 +530,7 @@ package body ARM_HTML is
 		        when 0 => return Value * 20;
 		        when 1 => return Value * 16; -- 20/1.25.
 		        when 2 => return Value * 13; -- 20/1.56.
+		        when 3 => return Value * 10; -- 20/1.93.
 		        when -1 => return Value * 25; -- 20/0.80.
 		        when -2 => return Value * 31; -- 20/0.64.
 		        when -3 => return Value * 40; -- 20/0.50.
@@ -539,6 +541,7 @@ package body ARM_HTML is
 		        when 0 => return Value * 22; -- 20/0.90
 		        when 1 => return Value * 18; -- 20/1.13.
 		        when 2 => return Value * 14; -- 20/1.40.
+		        when 3 => return Value * 11; -- 20/1.75.
 		        when -1 => return Value * 28; -- 20/0.72.
 		        when -2 => return Value * 34; -- 20/0.58.
 		        when -3 => return Value * 44; -- 20/0.45.
@@ -551,6 +554,7 @@ package body ARM_HTML is
 		    when 0 => return Value * 20;
 		    when 1 => return Value * 16; -- 20/1.25.
 		    when 2 => return Value * 13; -- 20/1.56.
+		    when 3 => return Value * 10; -- 20/1.93.
 		    when -1 => return Value * 25; -- 20/0.80.
 		    when -2 => return Value * 31; -- 20/0.64.
 		    when -3 => return Value * 40; -- 20/0.50.
@@ -627,6 +631,7 @@ package body ARM_HTML is
 		        when 0 => null; -- Default.
 		        when 1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 125%");
 		        when 2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 156%");
+		        when 3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 195%");
 		        when -1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 80%");
 		        when -2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 64%");
 		        when -3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 50%");
@@ -638,6 +643,7 @@ package body ARM_HTML is
 		        when 0 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 90%");
 		        when 1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 113%");
 		        when 2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 140%");
+		        when 3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 175%");
 		        when -1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 72%");
 		        when -2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 58%");
 		        when -3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 45%");
@@ -654,6 +660,7 @@ package body ARM_HTML is
 	        when 0 => null; -- Default.
 	        when 1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 125%");
 	        when 2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 156%");
+	        when 3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 195%");
 	        when -1 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 80%");
 	        when -2 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 64%");
 	        when -3 => Ada.Text_IO.Put (Output_Object.Output_File, "; font-size: 50%");
@@ -842,6 +849,12 @@ package body ARM_HTML is
 		    return "SyntaxSummary";
 	    	else -- Should be not used.
 		    return "SynSumInd" & Character'Val(Character'Pos('0') + Indent);
+		end if;
+	    when ARM_Output.Title =>
+                if Indent = 0 then
+		    return "Title";
+	    	else -- Should be not used.
+		    return "TitleIndented" & Character'Val(Character'Pos('0') + Indent);
 		end if;
 	    when ARM_Output.Examples =>
                 if Indent = 1 then
@@ -1561,6 +1574,9 @@ package body ARM_HTML is
 		    when 2 =>
 		        Ada.Text_IO.Put (Output_Object.Output_File, "<font size=""+2"">");
 		        Output_Object.Char_Count := Output_Object.Char_Count + 16;
+		    when 3 =>
+		        Ada.Text_IO.Put (Output_Object.Output_File, "<font size=""+3"">");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 16;
 		    when -1 =>
 		        Ada.Text_IO.Put (Output_Object.Output_File, "<font size=""-1"">");
 		        Output_Object.Char_Count := Output_Object.Char_Count + 16;
@@ -1761,6 +1777,7 @@ package body ARM_HTML is
 		 ARM_Output.Small | ARM_Output.Small_Wide_Above |
 		 ARM_Output.Header | ARM_Output.Small_Header |
 		 ARM_Output.Index | ARM_Output.Syntax_Summary |
+		 ARM_Output.Title |
 		 ARM_Output.Examples | ARM_Output.Small_Examples |
 		 ARM_Output.Swiss_Examples | ARM_Output.Small_Swiss_Examples =>
 		Output_Object.Tab_Stops := Tab_Stops;
@@ -1843,6 +1860,10 @@ package body ARM_HTML is
 	        when ARM_Output.Syntax_Summary =>
 		    -- Note: We don't put this in a smaller font.
 	    	    null;
+
+	        when ARM_Output.Title =>
+	    	    Ada.Text_IO.Put (Output_Object.Output_File, "<FONT SIZE=+3>");
+		    Output_Object.Char_Count := Output_Object.Char_Count + 14;
 
 	        when ARM_Output.Examples =>
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "<TT>");
@@ -1938,6 +1959,7 @@ package body ARM_HTML is
 		     ARM_Output.Small  | ARM_Output.Small_Wide_Above |
 		     ARM_Output.Small_Header |
 	             ARM_Output.Index | ARM_Output.Syntax_Summary |
+		     ARM_Output.Title |
 	             ARM_Output.Examples | ARM_Output.Swiss_Examples |
 	             ARM_Output.Small_Examples | ARM_Output.Small_Swiss_Examples =>
 		    Put_Style (Paragraph_Name (Style, Indent));
@@ -2023,6 +2045,7 @@ package body ARM_HTML is
 		     ARM_Output.Small  | ARM_Output.Small_Wide_Above |
 		     ARM_Output.Small_Header |
 	             ARM_Output.Index | ARM_Output.Syntax_Summary |
+		     ARM_Output.Title |
 	             ARM_Output.Examples | ARM_Output.Swiss_Examples |
 	             ARM_Output.Small_Examples | ARM_Output.Small_Swiss_Examples =>
 		    Put_Style (Paragraph_Name (Style, Indent));
@@ -2155,6 +2178,8 @@ package body ARM_HTML is
 	        when ARM_Output.Small | ARM_Output.Small_Wide_Above |
 		     ARM_Output.Small_Header =>
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
+	        when ARM_Output.Title =>
+	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
 
 	        when ARM_Output.Examples =>
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</TT>");
@@ -2201,6 +2226,7 @@ package body ARM_HTML is
 		     ARM_Output.Small  | ARM_Output.Small_Wide_Above |
 		     ARM_Output.Small_Header |
 	             ARM_Output.Index | ARM_Output.Syntax_Summary |
+		     ARM_Output.Title |
 	             ARM_Output.Examples | ARM_Output.Swiss_Examples |
 	             ARM_Output.Small_Examples | ARM_Output.Small_Swiss_Examples =>
 		    Put_End_Style (Output_Object.Paragraph_Style,
@@ -2226,6 +2252,7 @@ package body ARM_HTML is
 		     ARM_Output.Small  | ARM_Output.Small_Wide_Above |
 		     ARM_Output.Small_Header |
 	             ARM_Output.Index | ARM_Output.Syntax_Summary |
+		     ARM_Output.Title |
 	             ARM_Output.Examples | ARM_Output.Swiss_Examples |
 	             ARM_Output.Small_Examples | ARM_Output.Small_Swiss_Examples =>
 		    Put_End_Style (Output_Object.Paragraph_Style,
@@ -5073,5 +5100,17 @@ begin
 		 Hang_Outdent => 0,
 		 Before => 0,
 		 After => 4);
+
+    -- Title. Only define the form that we'll use.
+    Paragraph_Info(ARM_Output.Title, 0) :=
+	    (Defined => True,
+	     Tag  => DIV,
+	     Size => 3, -- 36
+	     Font => ARM_Output.Default,
+	     Indent => 0,
+	     Right_Indent => 0,
+	     Hang_Outdent => 0,
+	     Before => 6,
+	     After => 6);
 
 end ARM_HTML;

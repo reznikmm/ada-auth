@@ -242,6 +242,8 @@ package body ARM_Format is
     --			responsibility. This also allows new kinds of AI here.
     --  2/13/07 - RLB - Redid output formating to use an explict indent;
     --                  added ChildExample.
+    --  2/16/07 - RLB - Added Indent format.
+    --  2/19/07 - RLB - Added Title format.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -309,6 +311,7 @@ package body ARM_Format is
 	 Enumerated	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Nested_Enumerated=>(Length =>  0, Str => (others => ' ')), -- Not used.
 	 Hanging_Indented=> (Length =>  0, Str => (others => ' ')), -- Not used.
+	 Title		 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 In_Table	 => (Length =>  0, Str => (others => ' '))); -- Not used.
 
     Paragraph_Kind_Title : constant array (Paragraph_Type) of LString :=
@@ -371,6 +374,7 @@ package body ARM_Format is
 	 Enumerated	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Nested_Enumerated=>(Length =>  0, Str => (others => ' ')), -- Not used.
 	 Hanging_Indented=> (Length =>  0, Str => (others => ' ')), -- Not used.
+	 Title		 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 In_Table	 => (Length =>  0, Str => (others => ' '))); -- Not used.
 
     Free_References : Reference_Ptr := null; -- Unused reference objects.
@@ -1762,7 +1766,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 		     Nested_Bulleted | Nested_X2_Bulleted |
 		     Display | Syntax_Display |
 		     Syntax_Indented | Syntax_Production |
-		     Enumerated | Nested_Enumerated | Hanging_Indented =>
+		     Enumerated | Nested_Enumerated | Hanging_Indented |
+		     Title =>
 		    -- This depends on the containing paragraph kind;
 		    -- Last_Paragraph_Subhead_Type should contain that.
 		    if Format_Object.Last_Paragraph_Subhead_Type = Wide_Above or else
@@ -1781,6 +1786,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 		       Format_Object.Last_Paragraph_Subhead_Type = Enumerated or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Nested_Enumerated or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Hanging_Indented or else
+		       Format_Object.Last_Paragraph_Subhead_Type = Title or else
 		       Format_Object.Last_Paragraph_Subhead_Type = In_Table then
 Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_Input.Line_String (Input_Object));
 		        return False; -- Oops, can't tell (double nesting).
@@ -2110,6 +2116,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 					else
 					    return 3; -- Three units.
 					end if;
+		        	    when Title =>
+					return 0; -- No indent.
 		        	    when In_Table =>
 		                        -- Shouldn't get here.
 					return 0; -- No indent.
@@ -2366,6 +2374,10 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			end if;
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 			Format_Object.No_Breaks := False;
+        	    when Title =>
+		        Format_Object.Style := ARM_Output.Title;
+			Format_Object.Indent := 0; -- No indent.
+			Format_Object.No_Breaks := False;
         	    when In_Table =>
                         -- Shouldn't get here.
 			if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
@@ -2436,7 +2448,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			 Bulleted | Nested_Bulleted | Nested_X2_Bulleted |
 			 Display |
 			 Syntax_Display | Syntax_Indented | Syntax_Production |
-			 Hanging_Indented | Enumerated | Nested_Enumerated |
+			 Hanging_Indented | Title |
+			 Enumerated | Nested_Enumerated |
 			 In_Table =>
 			null; -- No subheader. We don't change the last
 			    -- subheader generated, either.
@@ -2507,7 +2520,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			 Bulleted | Nested_Bulleted | Nested_X2_Bulleted |
 			 Display | Syntax_Display |
 			 Syntax_Indented | Syntax_Production |
-			 Hanging_Indented | Enumerated | Nested_Enumerated |
+			 Hanging_Indented | Title |
+			 Enumerated | Nested_Enumerated |
 			 In_Table =>
 			null; -- Just a format.
 		end case;
@@ -3344,6 +3358,10 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 		Format_Object.Next_Paragraph_Format_Type := Nested_Enumerated;
 		Format_Object.Next_Enumerated_Num := 1;
 		Format_Object.Enumerated_Level := Format_Object.Enumerated_Level + 1;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "title" then
+		Format_Object.Next_Paragraph_Format_Type := Title;
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "bundle" then
@@ -7278,7 +7296,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 		    -- contents are desired.
 		    Check_End_Paragraph; -- End any paragraph that we're in.
 		    ARM_Output.Start_Paragraph (Output_Object,
-			     Style  => ARM_Output.Wide_Above,
+			     Style  => ARM_Output.Title,
 			     Indent => 0,
 			     Number => "",
 			     No_Breaks => True, Keep_with_Next => True,
@@ -7291,14 +7309,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 			   Size => 0,
 			   Change => ARM_Output.None,
 			   Location => ARM_Output.Normal);
-		    ARM_Output.Text_Format (Output_Object,
-			   Bold => True, Italic => False,
-			   Font => ARM_Output.Swiss,
-			   Size => 3,
-			   Change => ARM_Output.None,
-			   Location => ARM_Output.Normal);
-			-- Separate calls to Text_Format so we can use "Grow"
-			-- in here.
+			-- Note that the size is +3 from the Title format.
 		    Format_Object.Is_Bold := True;
 		    Format_Object.Font := ARM_Output.Swiss;
 		    Format_Object.Size := 3;

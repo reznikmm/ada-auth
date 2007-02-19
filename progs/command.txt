@@ -940,6 +940,8 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 		  The text is indented 1 unit. This is intended to match the
 		  indentation of syntax and is usually used in the syntax
 		  grouping; however syntax is usually in the swiss font.
+	Title -   The text is 5 size units (usually 5 points) larger than
+		  normal.
 	Bundle -  The text in the 'bundle' should never be page-breaked.
 		  The format is unchanged.
 	TwoCol -  Sets the text to a two-column format. The text format

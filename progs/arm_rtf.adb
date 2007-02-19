@@ -124,6 +124,7 @@ package body ARM_RTF is
     --  2/14/07 - RLB - Revised to separate style and indent information
     --			for paragraphs.
     --  2/16/07 - RLB - Added example styles for additional nesting levels.
+    --  2/19/07 - RLB - Added Standard Title style.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -1221,6 +1222,17 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s64\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-160 \snext64 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Title, 0),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
+		       Font_Size => 34, -- Slightly less than double.
+		       Style_Indent => 0,
+		       Style_Before => 120,
+		       Style_After => 120,
+		       Style_Justified => TRUE,
+		       Style_String_Prefix =>
+			 "\s65\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-360\slmult0 \snext0 ");
 
 	    -- New styles should be added here, following numbers will need adjustments.
 	    Set_Style (Heading_4_Info,
@@ -1232,7 +1244,7 @@ package body ARM_RTF is
 		       Style_After => 90,
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
-			 "\s65\keepn\widctlpar\outlinelevel3\adjustright",
+			 "\s66\keepn\widctlpar\outlinelevel3\adjustright",
 		       Style_String_Suffix => "\b\ql\cgrid \sbasedon0 \snext0 ");
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
@@ -1245,7 +1257,7 @@ package body ARM_RTF is
 		           Style_After => 45,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s66\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s67\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font => ARM_Output.Swiss,
@@ -1256,7 +1268,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s67\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s68\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font => ARM_Output.Swiss,
@@ -1267,7 +1279,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s68\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s69\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_4_Info,
 		           Font => ARM_Output.Swiss,
@@ -1278,7 +1290,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s69\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s70\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_C_Text_Info,
@@ -2098,6 +2110,17 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s64\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-180\slmult0 \snext64 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Title, 0),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
+		       Font_Size => 42, -- Slight less than double (3 pts larger than Heading_1).
+		       Style_Indent => 0,
+		       Style_Before => 120,
+		       Style_After => 120,
+		       Style_Justified => TRUE,
+		       Style_String_Prefix =>
+			 "\s65\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-440\slmult0 \snext0 ");
 
 	    -- New styles should be added here, following numbers will need adjustments.
 	    Set_Style (Heading_4_Info,
@@ -2109,7 +2132,7 @@ package body ARM_RTF is
 		       Style_After => 100,
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
-			 "\s65\keepn\widctlpar\outlinelevel3\adjustright",
+			 "\s66\keepn\widctlpar\outlinelevel3\adjustright",
 		       Style_String_Suffix => "\b\ql\cgrid \sbasedon0 \snext0 ");
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
@@ -2122,7 +2145,7 @@ package body ARM_RTF is
 			   Style_After => 60,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s66\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s67\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font => ARM_Output.Swiss,
@@ -2133,7 +2156,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s67\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s68\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font => ARM_Output.Swiss,
@@ -2144,7 +2167,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s68\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s69\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_4_Info,
 		           Font => ARM_Output.Swiss,
@@ -2155,7 +2178,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s69\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s70\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_C_Text_Info,
@@ -2332,6 +2355,8 @@ package body ARM_RTF is
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Swiss Code Indented Examples;}");
         Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Swiss_Examples, 5));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Swiss Code Indented Examples;}");
+        Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Title, 0));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Standard Title;}");
         if Output_Object.Big_Files then
 	    Write_Style (Output_Object.Output_File, Heading_4_Info);
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "Heading 4;}");
@@ -2632,6 +2657,7 @@ package body ARM_RTF is
 		 ARM_Output.Small | ARM_Output.Small_Wide_Above |
 		 ARM_Output.Header | ARM_Output.Small_Header |
 		 ARM_Output.Index | ARM_Output.Syntax_Summary |
+		 ARM_Output.Title |
 		 ARM_Output.Examples | ARM_Output.Small_Examples |
 		 ARM_Output.Swiss_Examples | ARM_Output.Small_Swiss_Examples =>
 		if Output_Object.Tab_Stops.Number /= 0 then
@@ -2774,6 +2800,7 @@ package body ARM_RTF is
 		 ARM_Output.Small | ARM_Output.Small_Wide_Above |
 		 ARM_Output.Header | ARM_Output.Small_Header |
 		 ARM_Output.Index | ARM_Output.Syntax_Summary |
+		 ARM_Output.Title |
 		 ARM_Output.Examples | ARM_Output.Small_Examples |
 		 ARM_Output.Swiss_Examples | ARM_Output.Small_Swiss_Examples =>
 		Write_Style_for_Paragraph (Output_Object.Output_File,

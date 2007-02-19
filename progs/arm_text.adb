@@ -312,6 +312,7 @@ package body ARM_Text is
 	    when ARM_Output.Small_Wide_Above => null;
 	    when ARM_Output.Header => null;
 	    when ARM_Output.Small_Header => null;
+	    when ARM_Output.Title => null;
 	    when ARM_Output.Index => null;
 	    when ARM_Output.Syntax_Summary => null;
 	    when ARM_Output.Examples => null;
@@ -406,6 +407,7 @@ package body ARM_Text is
 		 ARM_Output.Small | ARM_Output.Small_Wide_Above |
 		 ARM_Output.Header | ARM_Output.Small_Header |
 		 ARM_Output.Index | ARM_Output.Syntax_Summary |
+		 ARM_Output.Title |
 		 ARM_Output.Examples | ARM_Output.Small_Examples |
 		 ARM_Output.Swiss_Examples | ARM_Output.Small_Swiss_Examples =>
 		Output_Object.Tab_Stops := Tab_Stops;

@@ -103,6 +103,8 @@ package ARM_Output is
     --  2/ 9/07 - RLB - Changed comments on AI_Reference.
     --  2/13/07 - RLB - Revised to separate style and indent information
     --			for paragraphs.
+    --  2/19/07 - RLB - Added Title style to eliminate issues with title
+    --			pages.
 
     type Output_Type is abstract tagged limited null record;
 
@@ -150,6 +152,9 @@ package ARM_Output is
 			-- space than normal between lines.
 	Index,		-- The text is in a smaller font, and if possible,
 			-- lines that wrap are indented one (additional) unit.
+	Title,		-- The text is in a much larger font (+3 in terms
+			-- of size units, nearly double the normal size),
+			-- and with additional space before as in Wide_Above.
 	Examples,	-- The text is in a fixed font.
 	Small_Examples,	-- The text is in a smaller fixed font.
 	Swiss_Examples, -- The text is in a swiss (sans-serif) font.
