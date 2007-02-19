@@ -1,6 +1,6 @@
 @Part(data, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/data.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2007/02/06 06:21:06 $}
+@comment{$Revision: 1.6 $ $Date: 2007/02/18 03:23:57 $}
 
 @LabeledSection{package Asis.Data_Decomposition (optional)}
 
@@ -67,26 +67,26 @@ supported.@ChgNote{Fix to match actual numbering}
       constrained. The size and position for any component of the type can be
       determined without regard to constraints. For example:
 
-@begin{Example}
-      @key[type] Static_Record @key[is]
-          @key[record]
-              F1, F2 : Natural;
-              C1     : Wide_Character;
-              A1     : Wide_String (1..5);
-          @key[end record];
+@begin{ChildExample}
+@key[type] Static_Record @key[is]
+    @key[record]
+        F1, F2 : Natural;
+        C1     : Wide_Character;
+        A1     : Wide_String (1..5);
+    @key[end record];
 
-      @key[type] Static_Discriminated (X : Boolean) @key[is]
-          @key[record]
-              F1, F2 : Natural;
-              C1     : Wide_Character;
-          @key[end record];
+@key[type] Static_Discriminated (X : Boolean) @key[is]
+    @key[record]
+        F1, F2 : Natural;
+        C1     : Wide_Character;
+    @key[end record];
 
-      @key[type] Static_Array   @key[is array] (Integer @key[range] 1 .. 100) @key[of] Boolean;
-      @key[type] Static_Enum    @key[is] (One, Two, Three);
-      @key[type] Static_Integer @key[is range] 1 .. 512;
-      @key[type] Static_Float   @key[is digits] 15 @key[range] -100.0 .. 100.0;
-      @key[type] Static_Fixed   @key[is delta] 0.1 @key[range] -100.0 .. 100.0;
-@end{Example}
+@key[type] Static_Array   @key[is array] (Integer @key[range] 1 .. 100) @key[of] Boolean;
+@key[type] Static_Enum    @key[is] (One, Two, Three);
+@key[type] Static_Integer @key[is range] 1 .. 512;
+@key[type] Static_Float   @key[is digits] 15 @key[range] -100.0 .. 100.0;
+@key[type] Static_Fixed   @key[is delta] 0.1 @key[range] -100.0 .. 100.0;
+@end{ChildExample}
 
 @Comment{Start item 2}Simple "dynamic" types contain one or more components or
 attributes whose size, position, or value depends on the value of one or more
@@ -99,37 +99,37 @@ reference to constraint values.
       value are fully specified by the data stream form of the record value.
       For example:
 
-@begin{Example}
-      @key[type] Dynamic_Length (Length : Natural) @key[is]
-          @key[record]
-              S1 : Wide_String (1 .. Length);
-          @key[end record];
+@begin{ChildExample}
+@key[type] Dynamic_Length (Length : Natural) @key[is]
+    @key[record]
+        S1 : Wide_String (1 .. Length);
+    @key[end record];
 
-      @key[type] Dynamic_Variant (When : Boolean) @key[is]
-          @key[record]
-              @key[case] When @key[is]
-                  @key[when] True =>
-                      C1 : Wide_Character;
-                  @key[when] False =>
-                      @key[null];
-              @key[end case];
-          @key[end record];
-@end{Example}
+@key[type] Dynamic_Variant (When : Boolean) @key[is]
+    @key[record]
+        @key[case] When @key[is]
+            @key[when] True =>
+                C1 : Wide_Character;
+            @key[when] False =>
+                @key[null];
+        @key[end case];
+    @key[end record];
+@end{ChildExample}
 
 @noprefix@leading@;Arrays with an unconstrained subtype, whose 'Length, 'First,
 and 'Last depend on dynamic index constraints, can be handled because these
 attributes can be queried and stored when the data stream is written. For
 example:
 
-@begin{Example}
-      I : Integer := Some_Function;
-      @key[type] Dynamic_Array @key[is]
-          @key[array] (Integer @key[range] I .. I + 10) @key[of] Boolean;
+@begin{ChildExample}
+I : Integer := Some_Function;
+@key[type] Dynamic_Array @key[is]
+    @key[array] (Integer @key[range] I .. I + 10) @key[of] Boolean;
 
-      @key[type] Heap_Array   @key[is array] (Integer @key[range] <>) @key[of] Boolean;
-      @key[type] Access_Array @key[is access] Heap_Array;
-      X : Access_Array := @key[new] Heap_Array (1 .. 100);
-@end{Example}
+@key[type] Heap_Array   @key[is array] (Integer @key[range] <>) @key[of] Boolean;
+@key[type] Access_Array @key[is access] Heap_Array;
+X : Access_Array := @key[new] Heap_Array (1 .. 100);
+@end{ChildExample}
 
 @Comment{Start item 3}@leading@;Complex, externally "discriminated" records,
 contain one or more components whose size or position depends on the value of
@@ -139,18 +139,18 @@ determined without reference to these external values, whose runtime values are
 not known to the ASIS Context and cannot be automatically recorded by the
 Asis.Data_Decomposition.Portable_Transfer generics. For example:
 
-@begin{Example}
-      N : Natural := Function_Call();
-      ....
-      @key[declare]
-          @key[type] Complex @key[is]
-              @key[record]
-                  S1 : Wide_String (1 .. N);
-              @key[end record];
-      @key[begin]
-          ....
-      @key[end];
-@end{Example}
+@begin{ChildExample}
+N : Natural := Function_Call();
+....
+@key[declare]
+    @key[type] Complex @key[is]
+        @key[record]
+            S1 : Wide_String (1 .. N);
+        @key[end record];
+@key[begin]
+    ....
+@key[end];
+@end{ChildExample}
 @end{InnerEnumerate}
 @end{Enumerate}
 
@@ -479,7 +479,7 @@ Each Type_Definition fits into one of three type models.
 @key[type] @AdaTypeDefn{Type_Model_Kinds} @key[is] (A_Simple_Static_Model,
                           A_Simple_Dynamic_Model,
                           A_Complex_Dynamic_Model,
-                          Not_A_Type_Model);           -- Nil arguments
+                          Not_A_Type_Model);           -- @examcom{Nil arguments}
 @end{Example}
 @end{DescribeCode}
 
@@ -550,10 +550,10 @@ same record or array type, from the same physical compilation unit. The
 two components may or may not be from the same open ASIS Context variable.
 
 @leading@keepnext@;Implies:
-@begin{Display}
-@exam{Is_Equal (Enclosing_Compilation_Unit (Component_Declaration (Left)),
-          Enclosing_Compilation_Unit (Component_Declaration (Right))) = True}
-@end{Display}
+@begin{ChildExample}
+Is_Equal (Enclosing_Compilation_Unit (Component_Declaration (Left)),
+          Enclosing_Compilation_Unit (Component_Declaration (Right))) = True
+@end{ChildExample}
 
 All component values are appropriate.
 @end{DescribeCode}
@@ -578,10 +578,10 @@ same record or array type, from the same physical compilation unit and the
 same open ASIS Context variable.
 
 @leading@keepnext@;Implies:
-@begin{Display}
-@exam{Is_Identical (Enclosing_Compilation_Unit (Component_Declaration (Left)),
-              Enclosing_Compilation_Unit (Component_Declaration (Right))) = True}
-@end{Display}
+@begin{ChildExample}
+Is_Identical (Enclosing_Compilation_Unit (Component_Declaration (Left)),
+              Enclosing_Compilation_Unit (Component_Declaration (Right))) = True
+@end{ChildExample}
 
 All component values are appropriate.
 @end{DescribeCode}
@@ -1350,8 +1350,8 @@ Generic for Data Stream Conversions.
 @begin{DescribeCode}
 @begin{Example}
 @key[generic]
-    -- Ada notation for a constrained subtype.
-    -- @key[type] Constrained_Subtype (<>) @key[is private];
+    -- @examcom{Ada notation for a constrained subtype.}
+    -- @examcom{@key[type] Constrained_Subtype (<>) @key[is private];}
     @key[type] Constrained_Subtype @key[is private];
 @key[function] @AdaSubDefn{Portable_Constrained_Subtype}
             (Data_Stream : @key[in] Portable_Data)

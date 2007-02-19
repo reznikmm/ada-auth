@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2006/10/19 22:29:18 $}
+@comment{$Revision: 1.10 $ $Date: 2007/02/18 03:23:57 $}
 
 @LabeledSection{package Asis}
 
@@ -381,21 +381,21 @@ These are designated within the hierarchy shown below:
 @Chg{Version=[1],New=[Type ],Old=[]}Element_Kinds
 @Chg{Version=[1],New=[provides],Old=[@en]} general element
 classifications@Chg{Version=[1],New=[.],Old=[
-Literals                   -- ASIS package with queries for these kinds.]}@Comment{Moved below}
+Literals                   -- @examcom{ASIS package with queries for these kinds.}]}@Comment{Moved below}
 
 @begin{Example}
 @key[type] @AdaTypeDefn{Element_Kinds} @key[is] (
-   @AdaObjDefn{Not_An_Element},            -- Nil_Element
-   @AdaObjDefn{A_Pragma},                  -- Asis.Elements
-   @AdaObjDefn{A_Defining_Name},           -- Asis.Declarations
-   @AdaObjDefn{A_Declaration},             -- Asis.Declarations
-   @AdaObjDefn{A_Definition},              -- Asis.Definitions
-   @AdaObjDefn{An_Expression},             -- Asis.Expressions
-   @AdaObjDefn{An_Association},            -- Asis.Expressions
-   @AdaObjDefn{A_Statement},               -- Asis.Statements
-   @AdaObjDefn{A_Path},                    -- Asis.Statements
-   @AdaObjDefn{A_Clause},                  -- Asis.Clauses
-   @AdaObjDefn{An_Exception_Handler});     -- Asis.Statements
+   @AdaObjDefn{Not_An_Element},            -- @examcom{Nil_Element}
+   @AdaObjDefn{A_Pragma},                  -- @examcom{Asis.Elements}
+   @AdaObjDefn{A_Defining_Name},           -- @examcom{Asis.Declarations}
+   @AdaObjDefn{A_Declaration},             -- @examcom{Asis.Declarations}
+   @AdaObjDefn{A_Definition},              -- @examcom{Asis.Definitions}
+   @AdaObjDefn{An_Expression},             -- @examcom{Asis.Expressions}
+   @AdaObjDefn{An_Association},            -- @examcom{Asis.Expressions}
+   @AdaObjDefn{A_Statement},               -- @examcom{Asis.Statements}
+   @AdaObjDefn{A_Path},                    -- @examcom{Asis.Statements}
+   @AdaObjDefn{A_Clause},                  -- @examcom{Asis.Clauses}
+   @AdaObjDefn{An_Exception_Handler});     -- @examcom{Asis.Statements}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list the ASIS package with queries for
 each kind.]}
@@ -407,55 +407,55 @@ each kind.]}
 @Chg{Version=[1],New=[Type ],Old=[]}Pragma_Kinds
 @Chg{Version=[1],New=[provides],Old=[@en]} classifications for
 pragmas@Chg{Version=[1],New=[.],Old=[
-Literals                          -- Reference Manual]}@Comment{Moved below}
+Literals                          -- @examcom{Reference Manual}]}@Comment{Moved below}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Pragma_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_A_Pragma},                     -- An unexpected element
-   @AdaObjDefn{An_All_Calls_Remote_Pragma},       -- E.2.3(5)
-   @AdaObjDefn{An_Asynchronous_Pragma},           -- E.4.1(3)
-   @AdaObjDefn{An_Atomic_Pragma},                 -- C.6(3)
-   @AdaObjDefn{An_Atomic_Components_Pragma},      -- C.6(5)
-   @AdaObjDefn{An_Attach_Handler_Pragma},         -- C.3.1(4)
-   @AdaObjDefn{A_Controlled_Pragma},              -- 13.11.3(3)
-   @AdaObjDefn{A_Convention_Pragma},              -- B.1(7)}, M.1(5)
-   @AdaObjDefn{A_Discard_Names_Pragma},           -- C.5(3)
-   @AdaObjDefn{An_Elaborate_Pragma},              -- 10.2.1(20)
-   @AdaObjDefn{An_Elaborate_All_Pragma},          -- 10.2.1(21)
-   @AdaObjDefn{An_Elaborate_Body_Pragma},         -- 10.2.1(22)
-   @AdaObjDefn{An_Export_Pragma},                 -- B.1(5)}, M.1(5)
-   @AdaObjDefn{An_Import_Pragma},                 -- B.1(6)}, M.1(5)
-   @AdaObjDefn{An_Inline_Pragma},                 -- 6.3.2(3)
-   @AdaObjDefn{An_Inspection_Point_Pragma},       -- H.3.2(3)
-   @AdaObjDefn{An_Interrupt_Handler_Pragma},      -- C.3.1(2)
-   @AdaObjDefn{An_Interrupt_Priority_Pragma},     -- D.1(5)
-   @AdaObjDefn{A_Linker_Options_Pragma},          -- B.1(8)
-   @AdaObjDefn{A_List_Pragma},                    -- 2.8(21)
-   @AdaObjDefn{A_Locking_Policy_Pragma},          -- D.3(3)
-   @AdaObjDefn{A_Normalize_Scalars_Pragma},       -- H.1(3)
-   @AdaObjDefn{An_Optimize_Pragma},               -- 2.8(23)
-   @AdaObjDefn{A_Pack_Pragma},                    -- 13.2(3)
-   @AdaObjDefn{A_Page_Pragma},                    -- 2.8(22)
-   @AdaObjDefn{A_Preelaborate_Pragma},            -- 10.2.1(3)
-   @AdaObjDefn{A_Priority_Pragma},                -- D.1(3)
-   @AdaObjDefn{A_Pure_Pragma},                    -- 10.2.1(14)
-   @AdaObjDefn{A_Queuing_Policy_Pragma},          -- D.4(3)
-   @AdaObjDefn{A_Remote_Call_Interface_Pragma},   -- E.2.3(3)
-   @AdaObjDefn{A_Remote_Types_Pragma},            -- E.2.2(3)
-   @AdaObjDefn{A_Restrictions_Pragma},            -- 13.12(3)
-   @AdaObjDefn{A_Reviewable_Pragma},              -- H.3.1(3)
-   @AdaObjDefn{A_Shared_Passive_Pragma},          -- E.2.1(3)
-   @AdaObjDefn{A_Storage_Size_Pragma},            -- 13.3(63)
-   @AdaObjDefn{A_Suppress_Pragma},                -- 11.5(4)
-   @AdaObjDefn{A_Task_Dispatching_Policy_Pragma}, -- D.2.2(2)
-   @AdaObjDefn{A_Volatile_Pragma},                -- C.6(4)
-   @AdaObjDefn{A_Volatile_Components_Pragma},     -- C.6(6)
+   @AdaObjDefn{Not_A_Pragma},                     -- @examcom{An unexpected element}
+   @AdaObjDefn{An_All_Calls_Remote_Pragma},       -- @examcom{E.2.3(5)}
+   @AdaObjDefn{An_Asynchronous_Pragma},           -- @examcom{E.4.1(3)}
+   @AdaObjDefn{An_Atomic_Pragma},                 -- @examcom{C.6(3)}
+   @AdaObjDefn{An_Atomic_Components_Pragma},      -- @examcom{C.6(5)}
+   @AdaObjDefn{An_Attach_Handler_Pragma},         -- @examcom{C.3.1(4)}
+   @AdaObjDefn{A_Controlled_Pragma},              -- @examcom{13.11.3(3)}
+   @AdaObjDefn{A_Convention_Pragma},              -- @examcom{B.1(7)}, M.1(5)}
+   @AdaObjDefn{A_Discard_Names_Pragma},           -- @examcom{C.5(3)}
+   @AdaObjDefn{An_Elaborate_Pragma},              -- @examcom{10.2.1(20)}
+   @AdaObjDefn{An_Elaborate_All_Pragma},          -- @examcom{10.2.1(21)}
+   @AdaObjDefn{An_Elaborate_Body_Pragma},         -- @examcom{10.2.1(22)}
+   @AdaObjDefn{An_Export_Pragma},                 -- @examcom{B.1(5)}, M.1(5)}
+   @AdaObjDefn{An_Import_Pragma},                 -- @examcom{B.1(6)}, M.1(5)}
+   @AdaObjDefn{An_Inline_Pragma},                 -- @examcom{6.3.2(3)}
+   @AdaObjDefn{An_Inspection_Point_Pragma},       -- @examcom{H.3.2(3)}
+   @AdaObjDefn{An_Interrupt_Handler_Pragma},      -- @examcom{C.3.1(2)}
+   @AdaObjDefn{An_Interrupt_Priority_Pragma},     -- @examcom{D.1(5)}
+   @AdaObjDefn{A_Linker_Options_Pragma},          -- @examcom{B.1(8)}
+   @AdaObjDefn{A_List_Pragma},                    -- @examcom{2.8(21)}
+   @AdaObjDefn{A_Locking_Policy_Pragma},          -- @examcom{D.3(3)}
+   @AdaObjDefn{A_Normalize_Scalars_Pragma},       -- @examcom{H.1(3)}
+   @AdaObjDefn{An_Optimize_Pragma},               -- @examcom{2.8(23)}
+   @AdaObjDefn{A_Pack_Pragma},                    -- @examcom{13.2(3)}
+   @AdaObjDefn{A_Page_Pragma},                    -- @examcom{2.8(22)}
+   @AdaObjDefn{A_Preelaborate_Pragma},            -- @examcom{10.2.1(3)}
+   @AdaObjDefn{A_Priority_Pragma},                -- @examcom{D.1(3)}
+   @AdaObjDefn{A_Pure_Pragma},                    -- @examcom{10.2.1(14)}
+   @AdaObjDefn{A_Queuing_Policy_Pragma},          -- @examcom{D.4(3)}
+   @AdaObjDefn{A_Remote_Call_Interface_Pragma},   -- @examcom{E.2.3(3)}
+   @AdaObjDefn{A_Remote_Types_Pragma},            -- @examcom{E.2.2(3)}
+   @AdaObjDefn{A_Restrictions_Pragma},            -- @examcom{13.12(3)}
+   @AdaObjDefn{A_Reviewable_Pragma},              -- @examcom{H.3.1(3)}
+   @AdaObjDefn{A_Shared_Passive_Pragma},          -- @examcom{E.2.1(3)}
+   @AdaObjDefn{A_Storage_Size_Pragma},            -- @examcom{13.3(63)}
+   @AdaObjDefn{A_Suppress_Pragma},                -- @examcom{11.5(4)}
+   @AdaObjDefn{A_Task_Dispatching_Policy_Pragma}, -- @examcom{D.2.2(2)}
+   @AdaObjDefn{A_Volatile_Pragma},                -- @examcom{C.6(4)}
+   @AdaObjDefn{A_Volatile_Components_Pragma},     -- @examcom{C.6(6)}
 
-   @AdaObjDefn{An_Implementation_Defined_Pragma}, -- 2.8(14)
+   @AdaObjDefn{An_Implementation_Defined_Pragma}, -- @examcom{2.8(14)}
 
-   @AdaObjDefn{An_Unknown_Pragma});               -- Unknown to ASIS
+   @AdaObjDefn{An_Unknown_Pragma});               -- @examcom{Unknown to ASIS}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each pragma.]}
@@ -467,20 +467,20 @@ ISO/IEC 8652:1995 for each pragma.]}
 @Chg{Version=[1],New=[Type ],Old=[]}Defining_Name_Kinds
 @Chg{Version=[1],New=[classifies],Old=[@en]}
 names defined by declarations and
-specifications.@Chg{Version=[1],New=[],Old=[Literals                                   -- Reference Manual]}
+specifications.@Chg{Version=[1],New=[],Old=[Literals                                   -- @examcom{Reference Manual}]}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Defining_Name_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_A_Defining_Name},              -- An unexpected element
+   @AdaObjDefn{Not_A_Defining_Name},              -- @examcom{An unexpected element}
 
-   @AdaObjDefn{A_Defining_Identifier},            -- 3.1(4)
-   @AdaObjDefn{A_Defining_Character_Literal},     -- 3.5.1(4)
-   @AdaObjDefn{A_Defining_Enumeration_Literal},   -- 3.5.1(3)
-   @AdaObjDefn{A_Defining_Operator_Symbol},       -- 6.1(9)
-   @AdaObjDefn{A_Defining_Expanded_Name});        -- 6.1(7)
-                                     -- program unit name defining_identifier
+   @AdaObjDefn{A_Defining_Identifier},            -- @examcom{3.1(4)}
+   @AdaObjDefn{A_Defining_Character_Literal},     -- @examcom{3.5.1(4)}
+   @AdaObjDefn{A_Defining_Enumeration_Literal},   -- @examcom{3.5.1(3)}
+   @AdaObjDefn{A_Defining_Operator_Symbol},       -- @examcom{6.1(9)}
+   @AdaObjDefn{A_Defining_Expanded_Name});        -- @examcom{6.1(7)}
+                                     -- @examcom{program unit name defining_identifier}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of defining name.]}
@@ -492,96 +492,96 @@ ISO/IEC 8652:1995 for each kind of defining name.]}
 @Chg{Version=[1],New=[Type ],Old=[]}Declaration_Kinds
 @Chg{Version=[1],New=[classifies],Old=[@en]}
 declarations and specifications having defining name
-literals.@Chg{Version=[1],New=[],Old=[Literals                                 -- Reference Manual -> Subordinate Kinds]}
+literals.@Chg{Version=[1],New=[],Old=[Literals                                 -- @examcom{Reference Manual -> Subordinate Kinds}]}
 
 @Chg{Version=[1],New=[Type ],Old=[]}Expression_Kinds
 @Chg{Version=[1],New=[describes],Old=[@en]} general expression
 classifications@Chg{Version=[1],New=[.],Old=[
-Literals                                   -- Reference Manual -> Subordinate Kinds]}
+Literals                                   -- @examcom{Reference Manual -> Subordinate Kinds}]}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Declaration_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_A_Declaration},                       -- An unexpected element
+   @AdaObjDefn{Not_A_Declaration},                       -- @examcom{An unexpected element}
 
-   @AdaObjDefn{An_Ordinary_Type_Declaration},            -- 3.2.1(3)
-      -- a full_type_declaration of the form:
-      -- @key[type] defining_identifier [known_discriminant_part] @key[is] type_definition;
+   @AdaObjDefn{An_Ordinary_Type_Declaration},            -- @examcom{3.2.1(3)}
+      -- @examcom{a full_type_declaration of the form:}
+      -- @examcom{@key[type] defining_identifier [known_discriminant_part] @key[is] type_definition;}
 
-   @AdaObjDefn{A_Task_Type_Declaration},                 -- 9.1(2)
-   @AdaObjDefn{A_Protected_Type_Declaration},            -- 9.4(2)
-   @AdaObjDefn{An_Incomplete_Type_Declaration},          -- 3.2.1(2), 3.10(2)
-   @AdaObjDefn{A_Private_Type_Declaration},              -- 3.2.1(2), 7.3(2) -> Trait_Kinds
-   @AdaObjDefn{A_Private_Extension_Declaration},         -- 3.2.1(2), 7.3(3) -> Trait_Kinds
+   @AdaObjDefn{A_Task_Type_Declaration},                 -- @examcom{9.1(2)}
+   @AdaObjDefn{A_Protected_Type_Declaration},            -- @examcom{9.4(2)}
+   @AdaObjDefn{An_Incomplete_Type_Declaration},          -- @examcom{3.2.1(2), 3.10(2)}
+   @AdaObjDefn{A_Private_Type_Declaration},              -- @examcom{3.2.1(2), 7.3(2) -> Trait_Kinds}
+   @AdaObjDefn{A_Private_Extension_Declaration},         -- @examcom{3.2.1(2), 7.3(3) -> Trait_Kinds}
 
-   @AdaObjDefn{A_Subtype_Declaration},                   -- 3.2.2(2)
+   @AdaObjDefn{A_Subtype_Declaration},                   -- @examcom{3.2.2(2)}
 
-   @AdaObjDefn{A_Variable_Declaration},                  -- 3.3.1(2) -> Trait_Kinds
-   @AdaObjDefn{A_Constant_Declaration},                  -- 3.3.1(4) -> Trait_Kinds
-   @AdaObjDefn{A_Deferred_Constant_Declaration},         -- 3.3.1(6), 7.4(2) -> Trait_Kinds
-   @AdaObjDefn{A_Single_Task_Declaration},               -- 3.3.1(2), 9.1(3)
-   @AdaObjDefn{A_Single_Protected_Declaration},          -- 3.3.1(2), 9.4(2)
+   @AdaObjDefn{A_Variable_Declaration},                  -- @examcom{3.3.1(2) -> Trait_Kinds}
+   @AdaObjDefn{A_Constant_Declaration},                  -- @examcom{3.3.1(4) -> Trait_Kinds}
+   @AdaObjDefn{A_Deferred_Constant_Declaration},         -- @examcom{3.3.1(6), 7.4(2) -> Trait_Kinds}
+   @AdaObjDefn{A_Single_Task_Declaration},               -- @examcom{3.3.1(2), 9.1(3)}
+   @AdaObjDefn{A_Single_Protected_Declaration},          -- @examcom{3.3.1(2), 9.4(2)}
 
-   @AdaObjDefn{An_Integer_Number_Declaration},           -- 3.3.2(2)
-   @AdaObjDefn{A_Real_Number_Declaration},               -- 3.5.6(2)
+   @AdaObjDefn{An_Integer_Number_Declaration},           -- @examcom{3.3.2(2)}
+   @AdaObjDefn{A_Real_Number_Declaration},               -- @examcom{3.5.6(2)}
 
-   @AdaObjDefn{An_Enumeration_Literal_Specification},    -- 3.5.1(3)
+   @AdaObjDefn{An_Enumeration_Literal_Specification},    -- @examcom{3.5.1(3)}
 
-   @AdaObjDefn{A_Discriminant_Specification},            -- 3.7(5)   -> Trait_Kinds
-   @AdaObjDefn{A_Component_Declaration},                 -- 3.8(6)
+   @AdaObjDefn{A_Discriminant_Specification},            -- @examcom{3.7(5)   -> Trait_Kinds}
+   @AdaObjDefn{A_Component_Declaration},                 -- @examcom{3.8(6)}
 
-   @AdaObjDefn{A_Loop_Parameter_Specification},          -- 5.5(4)   -> Trait_Kinds
+   @AdaObjDefn{A_Loop_Parameter_Specification},          -- @examcom{5.5(4)   -> Trait_Kinds}
 
-   @AdaObjDefn{A_Procedure_Declaration},                 -- 6.1(4)   -> Trait_Kinds
-   @AdaObjDefn{A_Function_Declaration},                  -- 6.1(4)   -> Trait_Kinds
+   @AdaObjDefn{A_Procedure_Declaration},                 -- @examcom{6.1(4)   -> Trait_Kinds}
+   @AdaObjDefn{A_Function_Declaration},                  -- @examcom{6.1(4)   -> Trait_Kinds}
 
-   @AdaObjDefn{A_Parameter_Specification},               -- 6.1(15)  -> Trait_Kinds
-                                            --          -> Mode_Kinds
-   @AdaObjDefn{A_Procedure_Body_Declaration},            -- 6.3(2)
-   @AdaObjDefn{A_Function_Body_Declaration},             -- 6.3(2)
+   @AdaObjDefn{A_Parameter_Specification},               -- @examcom{6.1(15)  -> Trait_Kinds}
+                                            -- @examcom{         -> Mode_Kinds}
+   @AdaObjDefn{A_Procedure_Body_Declaration},            -- @examcom{6.3(2)}
+   @AdaObjDefn{A_Function_Body_Declaration},             -- @examcom{6.3(2)}
 
-   @AdaObjDefn{A_Package_Declaration},                   -- 7.1(2)
-   @AdaObjDefn{A_Package_Body_Declaration},              -- 7.2(2)
+   @AdaObjDefn{A_Package_Declaration},                   -- @examcom{7.1(2)}
+   @AdaObjDefn{A_Package_Body_Declaration},              -- @examcom{7.2(2)}
 
-   @AdaObjDefn{An_Object_Renaming_Declaration},          -- 8.5.1(2)
-   @AdaObjDefn{An_Exception_Renaming_Declaration},       -- 8.5.2(2)
-   @AdaObjDefn{A_Package_Renaming_Declaration},          -- 8.5.3(2)
-   @AdaObjDefn{A_Procedure_Renaming_Declaration},        -- 8.5.4(2)
-   @AdaObjDefn{A_Function_Renaming_Declaration},         -- 8.5.4(2)
-   @AdaObjDefn{A_Generic_Package_Renaming_Declaration},  -- 8.5.5(2)
-   @AdaObjDefn{A_Generic_Procedure_Renaming_Declaration},-- 8.5.5(2)
-   @AdaObjDefn{A_Generic_Function_Renaming_Declaration}, -- 8.5.5(2)
+   @AdaObjDefn{An_Object_Renaming_Declaration},          -- @examcom{8.5.1(2)}
+   @AdaObjDefn{An_Exception_Renaming_Declaration},       -- @examcom{8.5.2(2)}
+   @AdaObjDefn{A_Package_Renaming_Declaration},          -- @examcom{8.5.3(2)}
+   @AdaObjDefn{A_Procedure_Renaming_Declaration},        -- @examcom{8.5.4(2)}
+   @AdaObjDefn{A_Function_Renaming_Declaration},         -- @examcom{8.5.4(2)}
+   @AdaObjDefn{A_Generic_Package_Renaming_Declaration},  -- @examcom{8.5.5(2)}
+   @AdaObjDefn{A_Generic_Procedure_Renaming_Declaration},-- @examcom{8.5.5(2)}
+   @AdaObjDefn{A_Generic_Function_Renaming_Declaration}, -- @examcom{8.5.5(2)}
 
-   @AdaObjDefn{A_Task_Body_Declaration},                 -- 9.1(6)
-   @AdaObjDefn{A_Protected_Body_Declaration},            -- 9.4(7)
-   @AdaObjDefn{An_Entry_Declaration},                    -- 9.5.2(2)
-   @AdaObjDefn{An_Entry_Body_Declaration},               -- 9.5.2(5)
-   @AdaObjDefn{An_Entry_Index_Specification},            -- 9.5.2(2)
+   @AdaObjDefn{A_Task_Body_Declaration},                 -- @examcom{9.1(6)}
+   @AdaObjDefn{A_Protected_Body_Declaration},            -- @examcom{9.4(7)}
+   @AdaObjDefn{An_Entry_Declaration},                    -- @examcom{9.5.2(2)}
+   @AdaObjDefn{An_Entry_Body_Declaration},               -- @examcom{9.5.2(5)}
+   @AdaObjDefn{An_Entry_Index_Specification},            -- @examcom{9.5.2(2)}
 
-   @AdaObjDefn{A_Procedure_Body_Stub},                   -- 10.1.3(3)
-   @AdaObjDefn{A_Function_Body_Stub},                    -- 10.1.3(3)
-   @AdaObjDefn{A_Package_Body_Stub},                     -- 10.1.3(4)
-   @AdaObjDefn{A_Task_Body_Stub},                        -- 10.1.3(5)
-   @AdaObjDefn{A_Protected_Body_Stub},                   -- 10.1.3(6)
+   @AdaObjDefn{A_Procedure_Body_Stub},                   -- @examcom{10.1.3(3)}
+   @AdaObjDefn{A_Function_Body_Stub},                    -- @examcom{10.1.3(3)}
+   @AdaObjDefn{A_Package_Body_Stub},                     -- @examcom{10.1.3(4)}
+   @AdaObjDefn{A_Task_Body_Stub},                        -- @examcom{10.1.3(5)}
+   @AdaObjDefn{A_Protected_Body_Stub},                   -- @examcom{10.1.3(6)}
 
-   @AdaObjDefn{An_Exception_Declaration},                -- 11.1(2)
-   @AdaObjDefn{A_Choice_Parameter_Specification},        -- 11.2(4)
+   @AdaObjDefn{An_Exception_Declaration},                -- @examcom{11.1(2)}
+   @AdaObjDefn{A_Choice_Parameter_Specification},        -- @examcom{11.2(4)}
 
-   @AdaObjDefn{A_Generic_Procedure_Declaration},         -- 12.1(2)
-   @AdaObjDefn{A_Generic_Function_Declaration},          -- 12.1(2)
-   @AdaObjDefn{A_Generic_Package_Declaration},           -- 12.1(2)
+   @AdaObjDefn{A_Generic_Procedure_Declaration},         -- @examcom{12.1(2)}
+   @AdaObjDefn{A_Generic_Function_Declaration},          -- @examcom{12.1(2)}
+   @AdaObjDefn{A_Generic_Package_Declaration},           -- @examcom{12.1(2)}
 
-   @AdaObjDefn{A_Package_Instantiation},                 -- 12.3(2)
-   @AdaObjDefn{A_Procedure_Instantiation},               -- 12.3(2)
-   @AdaObjDefn{A_Function_Instantiation},                -- 12.3(2)
+   @AdaObjDefn{A_Package_Instantiation},                 -- @examcom{12.3(2)}
+   @AdaObjDefn{A_Procedure_Instantiation},               -- @examcom{12.3(2)}
+   @AdaObjDefn{A_Function_Instantiation},                -- @examcom{12.3(2)}
 
-   @AdaObjDefn{A_Formal_Object_Declaration},             -- 12.4(2)  -> Mode_Kinds
-   @AdaObjDefn{A_Formal_Type_Declaration},               -- 12.5(2)
-   @AdaObjDefn{A_Formal_Procedure_Declaration},          -- 12.6(2)  -> Subprogram_Default_Kinds
-   @AdaObjDefn{A_Formal_Function_Declaration},           -- 12.6(2)  -> Subprogram_Default_Kinds
-   @AdaObjDefn{A_Formal_Package_Declaration},            -- 12.7(2)
-   @AdaObjDefn{A_Formal_Package_Declaration_With_Box});  -- 12.7(3)
+   @AdaObjDefn{A_Formal_Object_Declaration},             -- @examcom{12.4(2)  -> Mode_Kinds}
+   @AdaObjDefn{A_Formal_Type_Declaration},               -- @examcom{12.5(2)}
+   @AdaObjDefn{A_Formal_Procedure_Declaration},          -- @examcom{12.6(2)  -> Subprogram_Default_Kinds}
+   @AdaObjDefn{A_Formal_Function_Declaration},           -- @examcom{12.6(2)  -> Subprogram_Default_Kinds}
+   @AdaObjDefn{A_Formal_Package_Declaration},            -- @examcom{12.7(2)}
+   @AdaObjDefn{A_Formal_Package_Declaration_With_Box});  -- @examcom{12.7(3)}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of declaration; the subordinate kind (if any)
@@ -630,7 +630,7 @@ Trait_Kinds provide a means of further classifying the syntactic structure or
 Trait_Kinds are
 determined only by the presence (or absence) of certain reserved words. The
 semantics of an element are not considered. The reserved words of interest here
-are @key[abstract], @key[aliased], @key[limited], ]private], @key[reverse], and
+are @key[abstract], @key[aliased], @key[limited], @key[private], @key[reverse], and
 @key[access] when it appears in an access_definition. Trait_Kinds enumerates
 all combinations useful in this classification.
 
@@ -647,8 +647,8 @@ literals that differentiate between ordinary record types and tagged record
 types:
 
 @begin{Example}
-   A_Record_Type_Definition,              -- 3.8(2)    -> Trait_Kinds
-   A_Tagged_Record_Type_Definition,       -- 3.8(2)    -> Trait_Kinds
+   A_Record_Type_Definition,              -- @examcom{3.8(2)    -> Trait_Kinds}
+   A_Tagged_Record_Type_Definition,       -- @examcom{3.8(2)    -> Trait_Kinds}
 @end{Example}
 
 The remaining classification can be accomplished, if desired, using
@@ -662,8 +662,8 @@ definition has "-> Trait_Kinds" following it. For example, the
 definitions of:
 
 @begin{Example}
-   A_Discriminant_Specification,              -- 3.7(5)   -> Trait_Kinds
-   A_Component_Declaration,                   -- 3.8(6)
+   A_Discriminant_Specification,              -- @examcom{3.7(5)   -> Trait_Kinds}
+   A_Component_Declaration,                   -- @examcom{3.8(6)}
 @end{Example}
 
 indicate A_Discriminant_Specification is an expected kind while
@@ -684,26 +684,26 @@ Literals]}
 @begin{Example}
 @key[type] @AdaTypeDefn{Trait_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_A_Trait},                         -- An unexpected element
+   @AdaObjDefn{Not_A_Trait},                         -- @examcom{An unexpected element}
 
-   @AdaObjDefn{An_Ordinary_Trait},                   -- The declaration or definition does
-                                        -- not contain the reserved words
-                                        -- @key[aliased], @key[reverse], @key[private],
-                                        -- @key[limited], @key[abstract], or
-                                        -- @key[access] in an access_definition
+   @AdaObjDefn{An_Ordinary_Trait},                   -- @examcom{The declaration or definition does}
+                                        -- @examcom{not contain the reserved words}
+                                        -- @examcom{@key[aliased], @key[reverse], @key[private],}
+                                        -- @examcom{@key[limited], @key[abstract], or}
+                                        -- @examcom{@key[access] in an access_definition}
 
-   @AdaObjDefn{An_Aliased_Trait},                    -- @key[aliased] is present
-   @AdaObjDefn{An_Access_Definition_Trait},          -- @key[access] in an access_definition is present
-   @AdaObjDefn{A_Reverse_Trait},                     -- @key[reverse] is present
-   @AdaObjDefn{A_Private_Trait},                     -- Only @key[private] is present
-   @AdaObjDefn{A_Limited_Trait},                     -- Only @key[limited] is present
-   @AdaObjDefn{A_Limited_Private_Trait},             -- @key[limited] and @key[private] are present
+   @AdaObjDefn{An_Aliased_Trait},                    -- @examcom{@key[aliased] is present}
+   @AdaObjDefn{An_Access_Definition_Trait},          -- @examcom{@key[access] in an access_definition is present}
+   @AdaObjDefn{A_Reverse_Trait},                     -- @examcom{@key[reverse] is present}
+   @AdaObjDefn{A_Private_Trait},                     -- @examcom{Only @key[private] is present}
+   @AdaObjDefn{A_Limited_Trait},                     -- @examcom{Only @key[limited] is present}
+   @AdaObjDefn{A_Limited_Private_Trait},             -- @examcom{@key[limited] and @key[private] are present}
 
-   @AdaObjDefn{An_Abstract_Trait},                   -- Only @key[abstract] is present
-   @AdaObjDefn{An_Abstract_Private_Trait},           -- @key[abstract] and @key[private] are present
-   @AdaObjDefn{An_Abstract_Limited_Trait},           -- @key[abstract] and @key[limited] are present
-   @AdaObjDefn{An_Abstract_Limited_Private_Trait});  -- @key[abstract], @key[limited], and @key[private] are
-                                        -- present
+   @AdaObjDefn{An_Abstract_Trait},                   -- @examcom{Only @key[abstract] is present}
+   @AdaObjDefn{An_Abstract_Private_Trait},           -- @examcom{@key[abstract] and @key[private] are present}
+   @AdaObjDefn{An_Abstract_Limited_Trait},           -- @examcom{@key[abstract] and @key[limited] are present}
+   @AdaObjDefn{An_Abstract_Limited_Private_Trait});  -- @examcom{@key[abstract], @key[limited], and @key[private] are}
+                                        -- @examcom{present}
 @end{Example}
 @end{DescribeCode}
 
@@ -711,19 +711,19 @@ Literals]}
 @LabeledSubClause{type Declaration_Origins}
 
 @Chg{Version=[1],New=[],Old=[Declaration_Origins
-Literals                             -- Reference Manual]}
+Literals                             -- @examcom{Reference Manual}]}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Declaration_Origins} @key[is] (
 
-   @AdaObjDefn{Not_A_Declaration_Origin},            -- An unexpected element
+   @AdaObjDefn{Not_A_Declaration_Origin},            -- @examcom{An unexpected element}
 
-   @AdaObjDefn{An_Explicit_Declaration},             -- 3.1(5) explicitly declared in
-                                        -- the text of a program, or within
-                                        -- an expanded generic template
-   @AdaObjDefn{An_Implicit_Predefined_Declaration},  -- 3.1(5), 3.2.3(1), A.1(2)
-   @AdaObjDefn{An_Implicit_Inherited_Declaration});  -- 3.1(5), 3.4(6-35)
+   @AdaObjDefn{An_Explicit_Declaration},             -- @examcom{3.1(5) explicitly declared in}
+                                        -- @examcom{the text of a program, or within}
+                                        -- @examcom{an expanded generic template}
+   @AdaObjDefn{An_Implicit_Predefined_Declaration},  -- @examcom{3.1(5), 3.2.3(1), A.1(2)}
+   @AdaObjDefn{An_Implicit_Inherited_Declaration});  -- @examcom{3.1(5), 3.4(6-35)}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each declaration origin.]}
@@ -733,18 +733,18 @@ ISO/IEC 8652:1995 for each declaration origin.]}
 @LabeledSubClause{type Mode_Kinds}
 
 @Chg{Version=[1],New=[],Old=[Mode_Kinds
-Literals                 -- Reference Manual]}
+Literals                 -- @examcom{Reference Manual}]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[type] @AdaTypeDefn{Mode_Kinds} @key[is] (        -- 6.1@Chg{Version=[1],New=[ in 8652:1995],Old=[]}
+@key[type] @AdaTypeDefn{Mode_Kinds} @key[is] (        -- @examcom{6.1@Chg{Version=[1],New=[ in 8652:1995],Old=[]}}
 
-   @AdaObjDefn{Not_A_Mode},              -- An unexpected element
+   @AdaObjDefn{Not_A_Mode},              -- @examcom{An unexpected element}
 
-   @AdaObjDefn{A_Default_In_Mode},       -- @key[procedure] A(B :        C);
-   @AdaObjDefn{An_In_Mode},              -- @Key[procedure] A(B : @key[in]     C);
-   @AdaObjDefn{An_Out_Mode},             -- @key[procedure] A(B :    @key[out] C);
-   @AdaObjDefn{An_In_Out_Mode});         -- @key[procedure] A(B : @key[in out] C);
+   @AdaObjDefn{A_Default_In_Mode},       -- @examcom{@key[procedure] A(B :        C);}
+   @AdaObjDefn{An_In_Mode},              -- @examcom{@Key[procedure] A(B : @key[in]     C);}
+   @AdaObjDefn{An_Out_Mode},             -- @examcom{@key[procedure] A(B :    @key[out] C);}
+   @AdaObjDefn{An_In_Out_Mode});         -- @examcom{@key[procedure] A(B : @key[in out] C);}
 @end{Example}
 @end{DescribeCode}
 
@@ -752,17 +752,17 @@ Literals                 -- Reference Manual]}
 @LabeledSubClause{type Subprogram_Default_Kinds}
 
 @Chg{Version=[1],New=[],Old=[Subprogram_Default_Kinds
-Literals                 -- Reference Manual]}
+Literals                 -- @examcom{Reference Manual}]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[type] @AdaTypeDefn{Subprogram_Default_Kinds} @key[is] (   -- 12.6@Chg{Version=[1],New=[ in 8652:1995],Old=[]}
+@key[type] @AdaTypeDefn{Subprogram_Default_Kinds} @key[is] (   -- @examcom{12.6@Chg{Version=[1],New=[ in 8652:1995],Old=[]}}
 
-   @AdaObjDefn{Not_A_Default},           -- An unexpected element
+   @AdaObjDefn{Not_A_Default},           -- @examcom{An unexpected element}
 
-   @AdaObjDefn{A_Name_Default},          -- @key[with] subprogram_specification @key[is] default_name;
-   @AdaObjDefn{A_Box_Default},           -- @key[with] subprogram_specification @key[is] <>;
-   @AdaObjDefn{A_Nil_Default});          -- @key[with] subprogram_specification;
+   @AdaObjDefn{A_Name_Default},          -- @examcom{@key[with] subprogram_specification @key[is] default_name;}
+   @AdaObjDefn{A_Box_Default},           -- @examcom{@key[with] subprogram_specification @key[is] <>;}
+   @AdaObjDefn{A_Nil_Default});          -- @examcom{@key[with] subprogram_specification;}
 @end{Example}
 @end{DescribeCode}
 
@@ -770,44 +770,44 @@ Literals                 -- Reference Manual]}
 @LabeledSubClause{type Definition_Kinds}
 
 @Chg{Version=[1],New=[],Old=[Definition_Kinds
-Literals                          -- Reference Manual   -> Subordinate Kinds]}
+Literals                          -- @examcom{Reference Manual   -> Subordinate Kinds}]}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Definition_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_A_Definition},                 -- An unexpected element
+   @AdaObjDefn{Not_A_Definition},                 -- @examcom{An unexpected element}
 
-   @AdaObjDefn{A_Type_Definition},                -- 3.2.1(4)    -> Type_Kinds
+   @AdaObjDefn{A_Type_Definition},                -- @examcom{3.2.1(4)    -> Type_Kinds}
 
-   @AdaObjDefn{A_Subtype_Indication},             -- 3.2.2(3)
-   @AdaObjDefn{A_Constraint},                     -- 3.2.2(5)    -> Constraint_Kinds
+   @AdaObjDefn{A_Subtype_Indication},             -- @examcom{3.2.2(3)}
+   @AdaObjDefn{A_Constraint},                     -- @examcom{3.2.2(5)    -> Constraint_Kinds}
 
-   @AdaObjDefn{A_Component_Definition},           -- 3.6(7)      -> Trait_Kinds
+   @AdaObjDefn{A_Component_Definition},           -- @examcom{3.6(7)      -> Trait_Kinds}
 
-   @AdaObjDefn{A_Discrete_Subtype_Definition},    -- 3.6(6)      -> Discrete_Range_Kinds
-   @AdaObjDefn{A_Discrete_Range},                 -- 3.6.1(3)    -> Discrete_Range_Kinds
+   @AdaObjDefn{A_Discrete_Subtype_Definition},    -- @examcom{3.6(6)      -> Discrete_Range_Kinds}
+   @AdaObjDefn{A_Discrete_Range},                 -- @examcom{3.6.1(3)    -> Discrete_Range_Kinds}
 
-   @AdaObjDefn{An_Unknown_Discriminant_Part},     -- 3.7(3)
-   @AdaObjDefn{A_Known_Discriminant_Part},        -- 3.7(2)
+   @AdaObjDefn{An_Unknown_Discriminant_Part},     -- @examcom{3.7(3)}
+   @AdaObjDefn{A_Known_Discriminant_Part},        -- @examcom{3.7(2)}
 
-   @AdaObjDefn{A_Record_Definition},              -- 3.8(3)
-   @AdaObjDefn{A_Null_Record_Definition},         -- 3.8(3)
+   @AdaObjDefn{A_Record_Definition},              -- @examcom{3.8(3)}
+   @AdaObjDefn{A_Null_Record_Definition},         -- @examcom{3.8(3)}
 
-   @AdaObjDefn{A_Null_Component},                 -- 3.8(4)
-   @AdaObjDefn{A_Variant_Part},                   -- 3.8.1(2)
-   @AdaObjDefn{A_Variant},                        -- 3.8.1(3)
+   @AdaObjDefn{A_Null_Component},                 -- @examcom{3.8(4)}
+   @AdaObjDefn{A_Variant_Part},                   -- @examcom{3.8.1(2)}
+   @AdaObjDefn{A_Variant},                        -- @examcom{3.8.1(3)}
 
-   @AdaObjDefn{An_Others_Choice},                 -- 3.8.1(5), 4.3.1(5), 4.3.3(5), 11.2(5)
+   @AdaObjDefn{An_Others_Choice},                 -- @examcom{3.8.1(5), 4.3.1(5), 4.3.3(5), 11.2(5)}
 
-   @AdaObjDefn{A_Private_Type_Definition},        -- 7.3(2)      -> Trait_Kinds
-   @AdaObjDefn{A_Tagged_Private_Type_Definition}, -- 7.3(2)      -> Trait_Kinds
-   @AdaObjDefn{A_Private_Extension_Definition},   -- 7.3(3)      -> Trait_Kinds
+   @AdaObjDefn{A_Private_Type_Definition},        -- @examcom{7.3(2)      -> Trait_Kinds}
+   @AdaObjDefn{A_Tagged_Private_Type_Definition}, -- @examcom{7.3(2)      -> Trait_Kinds}
+   @AdaObjDefn{A_Private_Extension_Definition},   -- @examcom{7.3(3)      -> Trait_Kinds}
 
-   @AdaObjDefn{A_Task_Definition},                -- 9.1(4)
-   @AdaObjDefn{A_Protected_Definition},           -- 9.4(4)
+   @AdaObjDefn{A_Task_Definition},                -- @examcom{9.1(4)}
+   @AdaObjDefn{A_Protected_Definition},           -- @examcom{9.4(4)}
 
-   @AdaObjDefn{A_Formal_Type_Definition});        -- 12.5(3)     -> Formal_Type_Kinds
+   @AdaObjDefn{A_Formal_Type_Definition});        -- @examcom{12.5(3)     -> Formal_Type_Kinds}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of definition; the subordinate kind (if any)
@@ -818,36 +818,36 @@ is given as well.]}
 @LabeledSubClause{type Type_Kinds}
 
 @Chg{Version=[1],New=[],Old=[Type_Kinds
-Literals                               -- Reference Manual  -> Subordinate Kinds]}
+Literals                               -- @examcom{Reference Manual  -> Subordinate Kinds}]}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Type_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_A_Type_Definition},                 -- An unexpected element
+   @AdaObjDefn{Not_A_Type_Definition},                 -- @examcom{An unexpected element}
 
-   @AdaObjDefn{A_Derived_Type_Definition},             -- 3.4(2)     -> Trait_Kinds
-   @AdaObjDefn{A_Derived_Record_Extension_Definition}, -- 3.4(2)     -> Trait_Kinds
+   @AdaObjDefn{A_Derived_Type_Definition},             -- @examcom{3.4(2)     -> Trait_Kinds}
+   @AdaObjDefn{A_Derived_Record_Extension_Definition}, -- @examcom{3.4(2)     -> Trait_Kinds}
 
-   @AdaObjDefn{An_Enumeration_Type_Definition},        -- 3.5.1(2)
+   @AdaObjDefn{An_Enumeration_Type_Definition},        -- @examcom{3.5.1(2)}
 
-   @AdaObjDefn{A_Signed_Integer_Type_Definition},      -- 3.5.4(3)
-   @AdaObjDefn{A_Modular_Type_Definition},             -- 3.5.4(4)
+   @AdaObjDefn{A_Signed_Integer_Type_Definition},      -- @examcom{3.5.4(3)}
+   @AdaObjDefn{A_Modular_Type_Definition},             -- @examcom{3.5.4(4)}
 
-   @AdaObjDefn{A_Root_Type_Definition},                -- 3.5.4(14), 3.5.6(3)
-                                          --        -> Root_Type_Kinds
-   @AdaObjDefn{A_Floating_Point_Definition},           -- 3.5.7(2)
+   @AdaObjDefn{A_Root_Type_Definition},                -- @examcom{3.5.4(14), 3.5.6(3)}
+                                          -- @examcom{       -> Root_Type_Kinds}
+   @AdaObjDefn{A_Floating_Point_Definition},           -- @examcom{3.5.7(2)}
 
-   @AdaObjDefn{An_Ordinary_Fixed_Point_Definition},    -- 3.5.9(3)
-   @AdaObjDefn{A_Decimal_Fixed_Point_Definition},      -- 3.5.9(6)
+   @AdaObjDefn{An_Ordinary_Fixed_Point_Definition},    -- @examcom{3.5.9(3)}
+   @AdaObjDefn{A_Decimal_Fixed_Point_Definition},      -- @examcom{3.5.9(6)}
 
-   @AdaObjDefn{An_Unconstrained_Array_Definition},     -- 3.6(2)
-   @AdaObjDefn{A_Constrained_Array_Definition},        -- 3.6(2)
+   @AdaObjDefn{An_Unconstrained_Array_Definition},     -- @examcom{3.6(2)}
+   @AdaObjDefn{A_Constrained_Array_Definition},        -- @examcom{3.6(2)}
 
-   @AdaObjDefn{A_Record_Type_Definition},              -- 3.8(2)     -> Trait_Kinds
-   @AdaObjDefn{A_Tagged_Record_Type_Definition},       -- 3.8(2)     -> Trait_Kinds
+   @AdaObjDefn{A_Record_Type_Definition},              -- @examcom{3.8(2)     -> Trait_Kinds}
+   @AdaObjDefn{A_Tagged_Record_Type_Definition},       -- @examcom{3.8(2)     -> Trait_Kinds}
 
-   @AdaObjDefn{An_Access_Type_Definition});            -- 3.10(2)    -> Access_Type_Kinds
+   @AdaObjDefn{An_Access_Type_Definition});            -- @examcom{3.10(2)    -> Access_Type_Kinds}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of type; the subordinate kind (if any)
@@ -858,34 +858,34 @@ is given as well.]}
 @LabeledSubClause{type Formal_Type_Kinds}
 
 @Chg{Version=[1],New=[],Old=[Formal_Type_Kinds
-Literals                                  -- Reference Manual  -> Subordinate Kinds]}
+Literals                                  -- @examcom{Reference Manual  -> Subordinate Kinds}]}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Formal_Type_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_A_Formal_Type_Definition},             -- An unexpected element
+   @AdaObjDefn{Not_A_Formal_Type_Definition},             -- @examcom{An unexpected element}
 
-   @AdaObjDefn{A_Formal_Private_Type_Definition},         -- 12.5.1(2)   -> Trait_Kinds
-   @AdaObjDefn{A_Formal_Tagged_Private_Type_Definition},  -- 12.5.1(2)   -> Trait_Kinds
+   @AdaObjDefn{A_Formal_Private_Type_Definition},         -- @examcom{12.5.1(2)   -> Trait_Kinds}
+   @AdaObjDefn{A_Formal_Tagged_Private_Type_Definition},  -- @examcom{12.5.1(2)   -> Trait_Kinds}
 
-   @AdaObjDefn{A_Formal_Derived_Type_Definition},         -- 12.5.1(3)   -> Trait_Kinds
+   @AdaObjDefn{A_Formal_Derived_Type_Definition},         -- @examcom{12.5.1(3)   -> Trait_Kinds}
 
-   @AdaObjDefn{A_Formal_Discrete_Type_Definition},        -- 12.5.2(2)
+   @AdaObjDefn{A_Formal_Discrete_Type_Definition},        -- @examcom{12.5.2(2)}
 
-   @AdaObjDefn{A_Formal_Signed_Integer_Type_Definition},  -- 12.5.2(3)
-   @AdaObjDefn{A_Formal_Modular_Type_Definition},         -- 12.5.2(4)
+   @AdaObjDefn{A_Formal_Signed_Integer_Type_Definition},  -- @examcom{12.5.2(3)}
+   @AdaObjDefn{A_Formal_Modular_Type_Definition},         -- @examcom{12.5.2(4)}
 
-   @AdaObjDefn{A_Formal_Floating_Point_Definition},       -- 12.5.2(5)
+   @AdaObjDefn{A_Formal_Floating_Point_Definition},       -- @examcom{12.5.2(5)}
 
-   @AdaObjDefn{A_Formal_Ordinary_Fixed_Point_Definition}, -- 12.5.2(6)
-   @AdaObjDefn{A_Formal_Decimal_Fixed_Point_Definition},  -- 12.5.2(7)
+   @AdaObjDefn{A_Formal_Ordinary_Fixed_Point_Definition}, -- @examcom{12.5.2(6)}
+   @AdaObjDefn{A_Formal_Decimal_Fixed_Point_Definition},  -- @examcom{12.5.2(7)}
 
-   @AdaObjDefn{A_Formal_Unconstrained_Array_Definition},  -- 3.6(3)
-   @AdaObjDefn{A_Formal_Constrained_Array_Definition},    -- 3.6(5)
+   @AdaObjDefn{A_Formal_Unconstrained_Array_Definition},  -- @examcom{3.6(3)}
+   @AdaObjDefn{A_Formal_Constrained_Array_Definition},    -- @examcom{3.6(5)}
 
-   @AdaObjDefn{A_Formal_Access_Type_Definition});         -- 3.10(3),3.10(5)
-                                             --         -> Access_Type_Kinds
+   @AdaObjDefn{A_Formal_Access_Type_Definition});         -- @examcom{3.10(3),3.10(5)}
+                                             -- @examcom{        -> Access_Type_Kinds}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of formal type; the subordinate kind (if any)
@@ -896,22 +896,22 @@ is given as well.]}
 @LabeledSubClause{type Access_Type_Kinds}
 
 @Chg{Version=[1],New=[],Old=[Access_Type_Kinds
-Literals                             -- Reference Manual]}
+Literals                             -- @examcom{Reference Manual}]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[type] @AdaTypeDefn{Access_Type_Kinds} @key[is] (             -- 3.10@Chg{Version=[1],New=[ in 8652:1995],Old=[]}
+@key[type] @AdaTypeDefn{Access_Type_Kinds} @key[is] (             -- @examcom{3.10@Chg{Version=[1],New=[ in 8652:1995],Old=[]}}
 
-   @AdaObjDefn{Not_An_Access_Type_Definition},       -- An unexpected element
+   @AdaObjDefn{Not_An_Access_Type_Definition},       -- @examcom{An unexpected element}
 
-   @AdaObjDefn{A_Pool_Specific_Access_To_Variable},  -- @key[access] subtype_indication
-   @AdaObjDefn{An_Access_To_Variable},               -- @key[access all] subtype_indication
-   @AdaObjDefn{An_Access_To_Constant},               -- @key[access constant] subtype_indication
+   @AdaObjDefn{A_Pool_Specific_Access_To_Variable},  -- @examcom{@key[access] subtype_indication}
+   @AdaObjDefn{An_Access_To_Variable},               -- @examcom{@key[access all] subtype_indication}
+   @AdaObjDefn{An_Access_To_Constant},               -- @examcom{@key[access constant] subtype_indication}
 
-   @AdaObjDefn{An_Access_To_Procedure},              -- @key[access procedure]
-   @AdaObjDefn{An_Access_To_Protected_Procedure},    -- @key[access protected procedure]
-   @AdaObjDefn{An_Access_To_Function},               -- @key[access function]
-   @AdaObjDefn{An_Access_To_Protected_Function});    -- @key[access protected function]
+   @AdaObjDefn{An_Access_To_Procedure},              -- @examcom{@key[access procedure]}
+   @AdaObjDefn{An_Access_To_Protected_Procedure},    -- @examcom{@key[access protected procedure]}
+   @AdaObjDefn{An_Access_To_Function},               -- @examcom{@key[access function]}
+   @AdaObjDefn{An_Access_To_Protected_Function});    -- @examcom{@key[access protected function]}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of access type.]}
@@ -932,20 +932,20 @@ provided for the convenience of the ASIS implementor:
 @LabeledSubClause{type Root_Type_Kinds}
 
 @Chg{Version=[1],New=[],Old=[Root_Type_Kinds
-Literals                               -- Reference Manual]}
+Literals                               -- @examcom{Reference Manual}]}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Root_Type_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_A_Root_Type_Definition},            -- An unexpected element
+   @AdaObjDefn{Not_A_Root_Type_Definition},            -- @examcom{An unexpected element}
 
-   @AdaObjDefn{A_Root_Integer_Definition},             -- 3.4.1(8)
-   @AdaObjDefn{A_Root_Real_Definition},                -- 3.4.1(8)
+   @AdaObjDefn{A_Root_Integer_Definition},             -- @examcom{3.4.1(8)}
+   @AdaObjDefn{A_Root_Real_Definition},                -- @examcom{3.4.1(8)}
 
-   @AdaObjDefn{A_Universal_Integer_Definition},        -- 3.4.1(6)
-   @AdaObjDefn{A_Universal_Real_Definition},           -- 3.4.1(6)
-   @AdaObjDefn{A_Universal_Fixed_Definition});         -- 3.4.1(6)
+   @AdaObjDefn{A_Universal_Integer_Definition},        -- @examcom{3.4.1(6)}
+   @AdaObjDefn{A_Universal_Real_Definition},           -- @examcom{3.4.1(6)}
+   @AdaObjDefn{A_Universal_Fixed_Definition});         -- @examcom{3.4.1(6)}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of root type.]}
@@ -955,20 +955,20 @@ ISO/IEC 8652:1995 for each kind of root type.]}
 @LabeledSubClause{type Constraint_Kinds}
 
 @Chg{Version=[1],New=[],Old=[Constraint_Kinds
-Literals                               -- Reference Manual]}
+Literals                               -- @examcom{Reference Manual}]}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Constraint_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_A_Constraint},                      -- An unexpected element
+   @AdaObjDefn{Not_A_Constraint},                      -- @examcom{An unexpected element}
 
-   @AdaObjDefn{A_Range_Attribute_Reference},           -- 3.5(2)
-   @AdaObjDefn{A_Simple_Expression_Range},             -- 3.2.2, 3.5(3)
-   @AdaObjDefn{A_Digits_Constraint},                   -- 3.2.2, 3.5.9
-   @AdaObjDefn{A_Delta_Constraint},                    -- 3.2.2, J.3
-   @AdaObjDefn{An_Index_Constraint},                   -- 3.2.2, 3.6.1
-   @AdaObjDefn{A_Discriminant_Constraint});            -- 3.2.2
+   @AdaObjDefn{A_Range_Attribute_Reference},           -- @examcom{3.5(2)}
+   @AdaObjDefn{A_Simple_Expression_Range},             -- @examcom{3.2.2, 3.5(3)}
+   @AdaObjDefn{A_Digits_Constraint},                   -- @examcom{3.2.2, 3.5.9}
+   @AdaObjDefn{A_Delta_Constraint},                    -- @examcom{3.2.2, J.3}
+   @AdaObjDefn{An_Index_Constraint},                   -- @examcom{3.2.2, 3.6.1}
+   @AdaObjDefn{A_Discriminant_Constraint});            -- @examcom{3.2.2}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of constraint.]}
@@ -978,17 +978,17 @@ ISO/IEC 8652:1995 for each kind of constraint.]}
 @LabeledSubClause{type Discrete_Range_Kinds}
 
 @Chg{Version=[1],New=[],Old=[Discrete_Range_Kinds
-Literals                               -- Reference Manual]}
+Literals                               -- @examcom{Reference Manual}]}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Discrete_Range_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_A_Discrete_Range},                  -- An unexpected element
+   @AdaObjDefn{Not_A_Discrete_Range},                  -- @examcom{An unexpected element}
 
-   @AdaObjDefn{A_Discrete_Subtype_Indication},         -- 3.6.1(6), 3.2.2
-   @AdaObjDefn{A_Discrete_Range_Attribute_Reference},  -- 3.6.1, 3.5
-   @AdaObjDefn{A_Discrete_Simple_Expression_Range});   -- 3.6.1, 3.5
+   @AdaObjDefn{A_Discrete_Subtype_Indication},         -- @examcom{3.6.1(6), 3.2.2}
+   @AdaObjDefn{A_Discrete_Range_Attribute_Reference},  -- @examcom{3.6.1, 3.5}
+   @AdaObjDefn{A_Discrete_Simple_Expression_Range});   -- @examcom{3.6.1, 3.5}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of discrete range.]}
@@ -998,20 +998,20 @@ ISO/IEC 8652:1995 for each kind of discrete range.]}
 @LabeledSubClause{type Association_Kinds}
 
 @Chg{Version=[1],New=[],Old=[Association_Kinds
-Literals                               -- Reference Manual]}
+Literals                               -- @examcom{Reference Manual}]}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Association_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_An_Association},                    -- An unexpected element
+   @AdaObjDefn{Not_An_Association},                    -- @examcom{An unexpected element}
 
-   @AdaObjDefn{A_Pragma_Argument_Association},         -- 2.8
-   @AdaObjDefn{A_Discriminant_Association},            -- 3.7.1
-   @AdaObjDefn{A_Record_Component_Association},        -- 4.3.1
-   @AdaObjDefn{An_Array_Component_Association},        -- 4.3.3
-   @AdaObjDefn{A_Parameter_Association},               -- 6.4
-   @AdaObjDefn{A_Generic_Association});                -- 12.3
+   @AdaObjDefn{A_Pragma_Argument_Association},         -- @examcom{2.8}
+   @AdaObjDefn{A_Discriminant_Association},            -- @examcom{3.7.1}
+   @AdaObjDefn{A_Record_Component_Association},        -- @examcom{4.3.1}
+   @AdaObjDefn{An_Array_Component_Association},        -- @examcom{4.3.3}
+   @AdaObjDefn{A_Parameter_Association},               -- @examcom{6.4}
+   @AdaObjDefn{A_Generic_Association});                -- @examcom{12.3}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of association.]}
@@ -1023,51 +1023,51 @@ ISO/IEC 8652:1995 for each kind of association.]}
 @Chg{Version=[1],New=[Type ],Old=[]}Expression_Kinds
 @Chg{Version=[1],New=[describes],Old=[@en]} general expression
 classifications@Chg{Version=[1],New=[.],Old=[
-Literals                                   -- Reference Manual -> Subordinate Kinds]}
+Literals                                   -- @examcom{Reference Manual -> Subordinate Kinds}]}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Expression_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_An_Expression},                         -- An unexpected element
+   @AdaObjDefn{Not_An_Expression},                         -- @examcom{An unexpected element}
 
-   @AdaObjDefn{An_Integer_Literal},                        -- 2.4
-   @AdaObjDefn{A_Real_Literal},                            -- 2.4.1
-   @AdaObjDefn{A_String_Literal},                          -- 2.6
+   @AdaObjDefn{An_Integer_Literal},                        -- @examcom{2.4}
+   @AdaObjDefn{A_Real_Literal},                            -- @examcom{2.4.1}
+   @AdaObjDefn{A_String_Literal},                          -- @examcom{2.6}
 
-   @AdaObjDefn{An_Identifier},                             -- 4.1
-   @AdaObjDefn{An_Operator_Symbol},                        -- 4.1
-   @AdaObjDefn{A_Character_Literal},                       -- 4.1
-   @AdaObjDefn{An_Enumeration_Literal},                    -- 4.1
-   @AdaObjDefn{An_Explicit_Dereference},                   -- 4.1
-   @AdaObjDefn{A_Function_Call},                           -- 4.1
+   @AdaObjDefn{An_Identifier},                             -- @examcom{4.1}
+   @AdaObjDefn{An_Operator_Symbol},                        -- @examcom{4.1}
+   @AdaObjDefn{A_Character_Literal},                       -- @examcom{4.1}
+   @AdaObjDefn{An_Enumeration_Literal},                    -- @examcom{4.1}
+   @AdaObjDefn{An_Explicit_Dereference},                   -- @examcom{4.1}
+   @AdaObjDefn{A_Function_Call},                           -- @examcom{4.1}
 
-   @AdaObjDefn{An_Indexed_Component},                      -- 4.1.1
-   @AdaObjDefn{A_Slice},                                   -- 4.1.2
-   @AdaObjDefn{A_Selected_Component},                      -- 4.1.3
-   @AdaObjDefn{An_Attribute_Reference},                    -- 4.1.4  -> Attribute_Kinds
+   @AdaObjDefn{An_Indexed_Component},                      -- @examcom{4.1.1}
+   @AdaObjDefn{A_Slice},                                   -- @examcom{4.1.2}
+   @AdaObjDefn{A_Selected_Component},                      -- @examcom{4.1.3}
+   @AdaObjDefn{An_Attribute_Reference},                    -- @examcom{4.1.4  -> Attribute_Kinds}
 
-   @AdaObjDefn{A_Record_Aggregate},                        -- 4.3
-   @AdaObjDefn{An_Extension_Aggregate},                    -- 4.3
-   @AdaObjDefn{A_Positional_Array_Aggregate},              -- 4.3
-   @AdaObjDefn{A_Named_Array_Aggregate},                   -- 4.3
+   @AdaObjDefn{A_Record_Aggregate},                        -- @examcom{4.3}
+   @AdaObjDefn{An_Extension_Aggregate},                    -- @examcom{4.3}
+   @AdaObjDefn{A_Positional_Array_Aggregate},              -- @examcom{4.3}
+   @AdaObjDefn{A_Named_Array_Aggregate},                   -- @examcom{4.3}
 
-   @AdaObjDefn{An_And_Then_Short_Circuit},                 -- 4.4
-   @AdaObjDefn{An_Or_Else_Short_Circuit},                  -- 4.4
+   @AdaObjDefn{An_And_Then_Short_Circuit},                 -- @examcom{4.4}
+   @AdaObjDefn{An_Or_Else_Short_Circuit},                  -- @examcom{4.4}
 
-   @AdaObjDefn{An_In_Range_Membership_Test},               -- 4.4
-   @AdaObjDefn{A_Not_In_Range_Membership_Test},            -- 4.4
-   @AdaObjDefn{An_In_Type_Membership_Test},                -- 4.4
-   @AdaObjDefn{A_Not_In_Type_Membership_Test},             -- 4.4
+   @AdaObjDefn{An_In_Range_Membership_Test},               -- @examcom{4.4}
+   @AdaObjDefn{A_Not_In_Range_Membership_Test},            -- @examcom{4.4}
+   @AdaObjDefn{An_In_Type_Membership_Test},                -- @examcom{4.4}
+   @AdaObjDefn{A_Not_In_Type_Membership_Test},             -- @examcom{4.4}
 
-   @AdaObjDefn{A_Null_Literal},                            -- 4.4
-   @AdaObjDefn{A_Parenthesized_Expression},                -- 4.4
+   @AdaObjDefn{A_Null_Literal},                            -- @examcom{4.4}
+   @AdaObjDefn{A_Parenthesized_Expression},                -- @examcom{4.4}
 
-   @AdaObjDefn{A_Type_Conversion},                         -- 4.6
-   @AdaObjDefn{A_Qualified_Expression},                    -- 4.7
+   @AdaObjDefn{A_Type_Conversion},                         -- @examcom{4.6}
+   @AdaObjDefn{A_Qualified_Expression},                    -- @examcom{4.7}
 
-   @AdaObjDefn{An_Allocation_From_Subtype},                -- 4.8
-   @AdaObjDefn{An_Allocation_From_Qualified_Expression});  -- 4.8
+   @AdaObjDefn{An_Allocation_From_Subtype},                -- @examcom{4.8}
+   @AdaObjDefn{An_Allocation_From_Qualified_Expression});  -- @examcom{4.8}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each kind of expression; the subordinate kind (if any)
@@ -1080,35 +1080,35 @@ is given as well.]}
 @Chg{Version=[1],New=[Type ],Old=[]}Operator_Kinds
 @Chg{Version=[1],New=[describes],Old=[@en]} classification of
 the various Ada predefined operators@Chg{Version=[1],New=[.],Old=[
-Literals                           -- Reference Manual]}
+Literals                           -- @examcom{Reference Manual}]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[type] @AdaTypeDefn{Operator_Kinds} @key[is] (             -- 4.5@Chg{Version=[1],New=[ in 8652:1995],Old=[]}
+@key[type] @AdaTypeDefn{Operator_Kinds} @key[is] (             -- @examcom{4.5@Chg{Version=[1],New=[ in 8652:1995],Old=[]}}
 
-   @AdaObjDefn{Not_An_Operator},                   -- An unexpected element
+   @AdaObjDefn{Not_An_Operator},                   -- @examcom{An unexpected element}
 
-   @AdaObjDefn{An_And_Operator},                   -- @key[and]
-   @AdaObjDefn{An_Or_Operator},                    -- @key[or]
-   @AdaObjDefn{An_Xor_Operator},                   -- @key[xor]
-   @AdaObjDefn{An_Equal_Operator},                 -- =
-   @AdaObjDefn{A_Not_Equal_Operator},              -- /=
-   @AdaObjDefn{A_Less_Than_Operator},              -- <
-   @AdaObjDefn{A_Less_Than_Or_Equal_Operator},     -- <=
-   @AdaObjDefn{A_Greater_Than_Operator},           -- >
-   @AdaObjDefn{A_Greater_Than_Or_Equal_Operator},  -- >=
-   @AdaObjDefn{A_Plus_Operator},                   -- +
-   @AdaObjDefn{A_Minus_Operator},                  -- -
-   @AdaObjDefn{A_Concatenate_Operator},            -- &
-   @AdaObjDefn{A_Unary_Plus_Operator},             -- +
-   @AdaObjDefn{A_Unary_Minus_Operator},            -- -
-   @AdaObjDefn{A_Multiply_Operator},               -- *
-   @AdaObjDefn{A_Divide_Operator},                 -- /
-   @AdaObjDefn{A_Mod_Operator},                    -- @key[mod]
-   @AdaObjDefn{A_Rem_Operator},                    -- @key[rem]
-   @AdaObjDefn{An_Exponentiate_Operator},          -- **
-   @AdaObjDefn{An_Abs_Operator},                   -- @key[abs]
-   @AdaObjDefn{A_Not_Operator});                   -- @key[not]
+   @AdaObjDefn{An_And_Operator},                   -- @examcom{@key[and]}
+   @AdaObjDefn{An_Or_Operator},                    -- @examcom{@key[or]}
+   @AdaObjDefn{An_Xor_Operator},                   -- @examcom{@key[xor]}
+   @AdaObjDefn{An_Equal_Operator},                 -- @examcom{=}
+   @AdaObjDefn{A_Not_Equal_Operator},              -- @examcom{/=}
+   @AdaObjDefn{A_Less_Than_Operator},              -- @examcom{<}
+   @AdaObjDefn{A_Less_Than_Or_Equal_Operator},     -- @examcom{<=}
+   @AdaObjDefn{A_Greater_Than_Operator},           -- @examcom{>}
+   @AdaObjDefn{A_Greater_Than_Or_Equal_Operator},  -- @examcom{>=}
+   @AdaObjDefn{A_Plus_Operator},                   -- @examcom{+}
+   @AdaObjDefn{A_Minus_Operator},                  -- @examcom{-}
+   @AdaObjDefn{A_Concatenate_Operator},            -- @examcom{&}
+   @AdaObjDefn{A_Unary_Plus_Operator},             -- @examcom{+}
+   @AdaObjDefn{A_Unary_Minus_Operator},            -- @examcom{-}
+   @AdaObjDefn{A_Multiply_Operator},               -- @examcom{*}
+   @AdaObjDefn{A_Divide_Operator},                 -- @examcom{/}
+   @AdaObjDefn{A_Mod_Operator},                    -- @examcom{@key[mod]}
+   @AdaObjDefn{A_Rem_Operator},                    -- @examcom{@key[rem]}
+   @AdaObjDefn{An_Exponentiate_Operator},          -- @examcom{**}
+   @AdaObjDefn{An_Abs_Operator},                   -- @examcom{@key[abs]}
+   @AdaObjDefn{A_Not_Operator});                   -- @examcom{@key[not]}
 @end{Example}
 @end{DescribeCode}
 
@@ -1118,106 +1118,115 @@ Literals                           -- Reference Manual]}
 @Chg{Version=[1],New=[Type ],Old=[]}Attribute_Kinds
 @Chg{Version=[1],New=[describes],Old=[@en]} classifications of all known
 Ada attributes@Chg{Version=[1],New=[.],Old=[
-Literals                       -- Reference Manual]}
+Literals                       -- @examcom{Reference Manual}]}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Attribute_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_An_Attribute},              -- An unexpected element
+   @AdaObjDefn{Not_An_Attribute},              -- @examcom{An unexpected element}
 
-   @AdaObjDefn{An_Access_Attribute},           -- 3.10.2(24), 3.10.2(32), K(2), K(4)
-   @AdaObjDefn{An_Address_Attribute},          -- 13.3(11), J.7.1(5), K(6)
-   @AdaObjDefn{An_Adjacent_Attribute},         -- A.5.3(48), K(8)
-   @AdaObjDefn{An_Aft_Attribute},              -- 3.5.10(5), K(12)
-   @AdaObjDefn{An_Alignment_Attribute},        -- 13.3(23), K(14)
-   @AdaObjDefn{A_Base_Attribute},              -- 3.5(15), K(17)
-   @AdaObjDefn{A_Bit_Order_Attribute},         -- 13.5.3(4), K(19)
-   @AdaObjDefn{A_Body_Version_Attribute},      -- E.3(4), K(21)
-   @AdaObjDefn{A_Callable_Attribute},          -- 9.9(2), K(23)
-   @AdaObjDefn{A_Caller_Attribute},            -- C.7.1(14), K(25)
-   @AdaObjDefn{A_Ceiling_Attribute},           -- A.5.3(33), K(27)
-   @AdaObjDefn{A_Class_Attribute},             -- 3.9(14), 7.3.1(9), K(31), K(34)
-   @AdaObjDefn{A_Component_Size_Attribute},    -- 13.3(69), K(36)
-   @AdaObjDefn{A_Compose_Attribute},           -- A.5.3(24), K(38)
-   @AdaObjDefn{A_Constrained_Attribute},       -- 3.7.2(3), J.4(2), K(42)
-   @AdaObjDefn{A_Copy_Sign_Attribute},         -- A.5.3(51), K(44)
-   @AdaObjDefn{A_Count_Attribute},             -- 9.9(5), K(48)
-   @AdaObjDefn{A_Definite_Attribute},          -- 12.5.1(23), K(50)
-   @AdaObjDefn{A_Delta_Attribute},             -- 3.5.10(3), K(52)
-   @AdaObjDefn{A_Denorm_Attribute},            -- A.5.3(9), K(54)
-   @AdaObjDefn{A_Digits_Attribute},            -- 3.5.8(2), 3.5.10(7), K(56), K(58)
-   @AdaObjDefn{An_Exponent_Attribute},         -- A.5.3(18), K(60)
-   @AdaObjDefn{An_External_Tag_Attribute},     -- 13.3(75), K(64)
-   @AdaObjDefn{A_First_Attribute},             -- 3.5(12), 3.6.2(3), K(68), K(70)
-   @AdaObjDefn{A_First_Bit_Attribute},         -- 13.5.2(3), K(72)
-   @AdaObjDefn{A_Floor_Attribute},             -- A.5.3(30), K(74)
-   @AdaObjDefn{A_Fore_Attribute},              -- 3.5.10(4), K(78)
-   @AdaObjDefn{A_Fraction_Attribute},          -- A.5.3(21), K(80)
-   @AdaObjDefn{An_Identity_Attribute},         -- 11.4.1(9), C.7.1(12), K(84), K(86)
-   @AdaObjDefn{An_Image_Attribute},            -- 3.5(35), K(88)
-   @AdaObjDefn{An_Input_Attribute},            -- 13.13.2(22), 13.13.2(32), K(92), K(96)
-   @AdaObjDefn{A_Last_Attribute},              -- 3.5(13), 3.6.2(5), K(102), K(104)
-   @AdaObjDefn{A_Last_Bit_Attribute},          -- 13.5.2(4), K(106)
-   @AdaObjDefn{A_Leading_Part_Attribute},      -- A.5.3(54), K(108)
-   @AdaObjDefn{A_Length_Attribute},            -- 3.6.2(9), K(117)
-   @AdaObjDefn{A_Machine_Attribute},           -- A.5.3(60), K(119)
-   @AdaObjDefn{A_Machine_Emax_Attribute},      -- A.5.3(8), K(123)
-   @AdaObjDefn{A_Machine_Emin_Attribute},      -- A.5.3(7), K(125)
-   @AdaObjDefn{A_Machine_Mantissa_Attribute},  -- A.5.3(6), K(127)
-   @AdaObjDefn{A_Machine_Overflows_Attribute}, -- A.5.3(12), A.5.4(4), K(129), K(131)
-   @AdaObjDefn{A_Machine_Radix_Attribute},     -- A.5.3(2), A.5.4(2), K(133), K(135)
-   @AdaObjDefn{A_Machine_Rounds_Attribute},    -- A.5.3(11), A.5.4(3), K(137), K(139)
-   @AdaObjDefn{A_Max_Attribute},               -- 3.5(19), K(141)
-   @AdaObjDefn{A_Max_Size_In_Storage_Elements_Attribute},--  13.11.1(3), K(145)
-   @AdaObjDefn{A_Min_Attribute},               -- 3.5(16), K(147)
-   @AdaObjDefn{A_Model_Attribute},             -- A.5.3(68), G.2.2(7), K(151)
-   @AdaObjDefn{A_Model_Emin_Attribute},        -- A.5.3(65), G.2.2(4), K(155)
-   @AdaObjDefn{A_Model_Epsilon_Attribute},     -- A.5.3(66), K(157)
-   @AdaObjDefn{A_Model_Mantissa_Attribute},    -- A.5.3(64), G.2.2(3), K(159)
-   @AdaObjDefn{A_Model_Small_Attribute},       -- A.5.3(67), K(161)
-   @AdaObjDefn{A_Modulus_Attribute},           -- 3.5.4(17), K(163)
-   @AdaObjDefn{An_Output_Attribute},           -- 13.13.2(19), 13.13.2(29), K(165), K(169)
-   @AdaObjDefn{A_Partition_ID_Attribute},      -- E.1(9), K(173)
-   @AdaObjDefn{A_Pos_Attribute},               -- 3.5.5(2), K(175)
-   @AdaObjDefn{A_Position_Attribute},          -- 13.5.2(2), K(179)
-   @AdaObjDefn{A_Pred_Attribute},              -- 3.5(25), K(181)
-   @AdaObjDefn{A_Range_Attribute},             -- 3.5(14), 3.6.2(7), K(187), K(189)
-   @AdaObjDefn{A_Read_Attribute},              -- 13.13.2(6), 13.13.2(14), K(191), K(195)
-   @AdaObjDefn{A_Remainder_Attribute},         -- A.5.3(45), K(199)
-   @AdaObjDefn{A_Round_Attribute},             -- 3.5.10(12), K(203)
-   @AdaObjDefn{A_Rounding_Attribute},          -- A.5.3(36), K(207)
-   @AdaObjDefn{A_Safe_First_Attribute},        -- A.5.3(71), G.2.2(5), K(211)
-   @AdaObjDefn{A_Safe_Last_Attribute},         -- A.5.3(72), G.2.2(6), K(213)
-   @AdaObjDefn{A_Scale_Attribute},             -- 3.5.10(11), K(215)
-   @AdaObjDefn{A_Scaling_Attribute},           -- A.5.3(27), K(217)
-   @AdaObjDefn{A_Signed_Zeros_Attribute},      -- A.5.3(13), K(221)
-   @AdaObjDefn{A_Size_Attribute},              -- 13.3(40), 13.3(45), K(223), K(228)
-   @AdaObjDefn{A_Small_Attribute},             -- 3.5.10(2), K(230)
-   @AdaObjDefn{A_Storage_Pool_Attribute},      -- 13.11(13), K(232)
-   @AdaObjDefn{A_Storage_Size_Attribute},      -- 13.3(60), 13.11(14), J.9(2), K(234),
-                                     -- K(236)
-   @AdaObjDefn{A_Succ_Attribute},              -- 3.5(22), K(238)
-   @AdaObjDefn{A_Tag_Attribute},               -- 3.9(16), 3.9(18), K(242), K(244)
-   @AdaObjDefn{A_Terminated_Attribute},        -- 9.9(3), K(246)
-   @AdaObjDefn{A_Truncation_Attribute},        -- A.5.3(42), K(248)
-   @AdaObjDefn{An_Unbiased_Rounding_Attribute},-- A.5.3(39), K(252)
-   @AdaObjDefn{An_Unchecked_Access_Attribute}, -- 13.10(3), H.4(18), K(256)
-   @AdaObjDefn{A_Val_Attribute},               -- 3.5.5(5), K(258)
-   @AdaObjDefn{A_Valid_Attribute},             -- 13.9.2(3), H(6), K(262)
-   @AdaObjDefn{A_Value_Attribute},             -- 3.5(52), K(264)
-   @AdaObjDefn{A_Version_Attribute},           -- E.3(3), K(268)
-   @AdaObjDefn{A_Wide_Image_Attribute},        -- 3.5(28), K(270)
-   @AdaObjDefn{A_Wide_Value_Attribute},        -- 3.5(40), K(274)
-   @AdaObjDefn{A_Wide_Width_Attribute},        -- 3.5(38), K(278)
-   @AdaObjDefn{A_Width_Attribute},             -- 3.5(39), K(280)
-   @AdaObjDefn{A_Write_Attribute},             -- 13.13.2(3), 13.13.2(11), K(282), K(286)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0018-1]}
+   @AdaObjDefn{An_Access_Attribute},           -- @examcom{3.10.2(24), 3.10.2(32), K(2), K(4)}
+   @AdaObjDefn{An_Address_Attribute},          -- @examcom{13.3(11), J.7.1(5), K(6)}
+   @AdaObjDefn{An_Adjacent_Attribute},         -- @examcom{A.5.3(48), K(8)}
+   @AdaObjDefn{An_Aft_Attribute},              -- @examcom{3.5.10(5), K(12)}
+   @AdaObjDefn{An_Alignment_Attribute},        -- @examcom{13.3(23), K(14)}
+   @AdaObjDefn{A_Base_Attribute},              -- @examcom{3.5(15), K(17)}
+   @AdaObjDefn{A_Bit_Order_Attribute},         -- @examcom{13.5.3(4), K(19)}
+   @AdaObjDefn{A_Body_Version_Attribute},      -- @examcom{E.3(4), K(21)}
+   @AdaObjDefn{A_Callable_Attribute},          -- @examcom{9.9(2), K(23)}
+   @AdaObjDefn{A_Caller_Attribute},            -- @examcom{C.7.1(14), K(25)}
+   @AdaObjDefn{A_Ceiling_Attribute},           -- @examcom{A.5.3(33), K(27)}
+   @AdaObjDefn{A_Class_Attribute},             -- @examcom{3.9(14), 7.3.1(9), K(31), K(34)}
+   @AdaObjDefn{A_Component_Size_Attribute},    -- @examcom{13.3(69), K(36)}
+   @AdaObjDefn{A_Compose_Attribute},           -- @examcom{A.5.3(24), K(38)}
+   @AdaObjDefn{A_Constrained_Attribute},       -- @examcom{3.7.2(3), J.4(2), K(42)}
+   @AdaObjDefn{A_Copy_Sign_Attribute},         -- @examcom{A.5.3(51), K(44)}
+   @AdaObjDefn{A_Count_Attribute},             -- @examcom{9.9(5), K(48)}
+   @AdaObjDefn{A_Definite_Attribute},          -- @examcom{12.5.1(23), K(50)}
+   @AdaObjDefn{A_Delta_Attribute},             -- @examcom{3.5.10(3), K(52)}
+   @AdaObjDefn{A_Denorm_Attribute},            -- @examcom{A.5.3(9), K(54)}
+   @AdaObjDefn{A_Digits_Attribute},            -- @examcom{3.5.8(2), 3.5.10(7), K(56), K(58)}
+   @AdaObjDefn{An_Exponent_Attribute},         -- @examcom{A.5.3(18), K(60)}
+   @AdaObjDefn{An_External_Tag_Attribute},     -- @examcom{13.3(75), K(64)}
+   @AdaObjDefn{A_First_Attribute},             -- @examcom{3.5(12), 3.6.2(3), K(68), K(70)}
+   @AdaObjDefn{A_First_Bit_Attribute},         -- @examcom{13.5.2(3), K(72)}
+   @AdaObjDefn{A_Floor_Attribute},             -- @examcom{A.5.3(30), K(74)}
+   @AdaObjDefn{A_Fore_Attribute},              -- @examcom{3.5.10(4), K(78)}
+   @AdaObjDefn{A_Fraction_Attribute},          -- @examcom{A.5.3(21), K(80)}
+   @AdaObjDefn{An_Identity_Attribute},         -- @examcom{11.4.1(9), C.7.1(12), K(84), K(86)}
+   @AdaObjDefn{An_Image_Attribute},            -- @examcom{3.5(35), K(88)}
+   @AdaObjDefn{An_Input_Attribute},            -- @examcom{13.13.2(22), 13.13.2(32), K(92), K(96)}
+   @AdaObjDefn{A_Last_Attribute},              -- @examcom{3.5(13), 3.6.2(5), K(102), K(104)}
+   @AdaObjDefn{A_Last_Bit_Attribute},          -- @examcom{13.5.2(4), K(106)}
+   @AdaObjDefn{A_Leading_Part_Attribute},      -- @examcom{A.5.3(54), K(108)}
+   @AdaObjDefn{A_Length_Attribute},            -- @examcom{3.6.2(9), K(117)}
+   @AdaObjDefn{A_Machine_Attribute},           -- @examcom{A.5.3(60), K(119)}
+   @AdaObjDefn{A_Machine_Emax_Attribute},      -- @examcom{A.5.3(8), K(123)}
+   @AdaObjDefn{A_Machine_Emin_Attribute},      -- @examcom{A.5.3(7), K(125)}
+   @AdaObjDefn{A_Machine_Mantissa_Attribute},  -- @examcom{A.5.3(6), K(127)}
+   @AdaObjDefn{A_Machine_Overflows_Attribute}, -- @examcom{A.5.3(12), A.5.4(4), K(129), K(131)}
+   @AdaObjDefn{A_Machine_Radix_Attribute},     -- @examcom{A.5.3(2), A.5.4(2), K(133), K(135)}@Chg{Version=[2],New=[
+   @AdaObjDefn{A_Machine_Rounding_Attribute},  -- @examcom{A.5.3(41.1/2)), K(135.1/2)}],Old=[]}
+   @AdaObjDefn{A_Machine_Rounds_Attribute},    -- @examcom{A.5.3(11), A.5.4(3), K(137), K(139)}
+   @AdaObjDefn{A_Max_Attribute},               -- @examcom{3.5(19), K(141)}
+   @AdaObjDefn{A_Max_Size_In_Storage_Elements_Attribute},-- @examcom{ 13.11.1(3), K(145)}
+   @AdaObjDefn{A_Min_Attribute},               -- @examcom{3.5(16), K(147)}@Chg{Version=[2],New=[
+   @AdaObjDefn{A_Mod_Attribute},               -- @examcom{3.5.4(16.3/2)), K(150.1/2)}],Old=[]}
+   @AdaObjDefn{A_Model_Attribute},             -- @examcom{A.5.3(68), G.2.2(7), K(151)}
+   @AdaObjDefn{A_Model_Emin_Attribute},        -- @examcom{A.5.3(65), G.2.2(4), K(155)}
+   @AdaObjDefn{A_Model_Epsilon_Attribute},     -- @examcom{A.5.3(66), K(157)}
+   @AdaObjDefn{A_Model_Mantissa_Attribute},    -- @examcom{A.5.3(64), G.2.2(3), K(159)}
+   @AdaObjDefn{A_Model_Small_Attribute},       -- @examcom{A.5.3(67), K(161)}
+   @AdaObjDefn{A_Modulus_Attribute},           -- @examcom{3.5.4(17), K(163)}
+   @AdaObjDefn{An_Output_Attribute},           -- @examcom{13.13.2(19), 13.13.2(29), K(165), K(169)}
+   @AdaObjDefn{A_Partition_ID_Attribute},      -- @examcom{E.1(9), K(173)}
+   @AdaObjDefn{A_Pos_Attribute},               -- @examcom{3.5.5(2), K(175)}
+   @AdaObjDefn{A_Position_Attribute},          -- @examcom{13.5.2(2), K(179)}
+   @AdaObjDefn{A_Pred_Attribute},              -- @examcom{3.5(25), K(181)}@Chg{Version=[2],New=[
+   @AdaObjDefn{A_Priority_Attribute},          -- @examcom{D.2.6(27/2)), K(184.1/2)}],Old=[]}
+   @AdaObjDefn{A_Range_Attribute},             -- @examcom{3.5(14), 3.6.2(7), K(187), K(189)}
+   @AdaObjDefn{A_Read_Attribute},              -- @examcom{13.13.2(6), 13.13.2(14), K(191), K(195)}
+   @AdaObjDefn{A_Remainder_Attribute},         -- @examcom{A.5.3(45), K(199)}
+   @AdaObjDefn{A_Round_Attribute},             -- @examcom{3.5.10(12), K(203)}
+   @AdaObjDefn{A_Rounding_Attribute},          -- @examcom{A.5.3(36), K(207)}
+   @AdaObjDefn{A_Safe_First_Attribute},        -- @examcom{A.5.3(71), G.2.2(5), K(211)}
+   @AdaObjDefn{A_Safe_Last_Attribute},         -- @examcom{A.5.3(72), G.2.2(6), K(213)}
+   @AdaObjDefn{A_Scale_Attribute},             -- @examcom{3.5.10(11), K(215)}
+   @AdaObjDefn{A_Scaling_Attribute},           -- @examcom{A.5.3(27), K(217)}
+   @AdaObjDefn{A_Signed_Zeros_Attribute},      -- @examcom{A.5.3(13), K(221)}
+   @AdaObjDefn{A_Size_Attribute},              -- @examcom{13.3(40), 13.3(45), K(223), K(228)}
+   @AdaObjDefn{A_Small_Attribute},             -- @examcom{3.5.10(2), K(230)}@Chg{Version=[2],New=[
+   @AdaObjDefn{A_Stream_Size_Attribute},       -- @examcom{13.13.2(1.2/2)), K(237.1/2)}],Old=[]}
+   @AdaObjDefn{A_Storage_Pool_Attribute},      -- @examcom{13.11(13), K(232)}
+   @AdaObjDefn{A_Storage_Size_Attribute},      -- @examcom{13.3(60), 13.11(14), J.9(2), K(234),}
+                                     -- @examcom{K(236)}
+   @AdaObjDefn{A_Succ_Attribute},              -- @examcom{3.5(22), K(238)}
+   @AdaObjDefn{A_Tag_Attribute},               -- @examcom{3.9(16), 3.9(18), K(242), K(244)}
+   @AdaObjDefn{A_Terminated_Attribute},        -- @examcom{9.9(3), K(246)}
+   @AdaObjDefn{A_Truncation_Attribute},        -- @examcom{A.5.3(42), K(248)}
+   @AdaObjDefn{An_Unbiased_Rounding_Attribute},-- @examcom{A.5.3(39), K(252)}
+   @AdaObjDefn{An_Unchecked_Access_Attribute}, -- @examcom{13.10(3), H.4(18), K(256)}
+   @AdaObjDefn{A_Val_Attribute},               -- @examcom{3.5.5(5), K(258)}
+   @AdaObjDefn{A_Valid_Attribute},             -- @examcom{13.9.2(3), H(6), K(262)}
+   @AdaObjDefn{A_Value_Attribute},             -- @examcom{3.5(52), K(264)}
+   @AdaObjDefn{A_Version_Attribute},           -- @examcom{E.3(3), K(268)}
+   @AdaObjDefn{A_Wide_Image_Attribute},        -- @examcom{3.5(28), K(270)}
+   @AdaObjDefn{A_Wide_Value_Attribute},        -- @examcom{3.5(40), K(274)}@Chg{Version=[2],New=[
+   @AdaObjDefn{A_Wide_Wide_Image_Attribute},   -- @examcom{3.5(27.1/2)), K(277.1/2)}
+   @AdaObjDefn{A_Wide_Wide_Value_Attribute},   -- @examcom{3.5(39.1/2)), K(277.5/2)}
+   @AdaObjDefn{A_Wide_Wide_Width_Attribute},   -- @examcom{3.5(37.1/2)), K(277.9/2)}],Old=[]}
+   @AdaObjDefn{A_Wide_Width_Attribute},        -- @examcom{3.5(38), K(278)}
+   @AdaObjDefn{A_Width_Attribute},             -- @examcom{3.5(39), K(280)}
+   @AdaObjDefn{A_Write_Attribute},             -- @examcom{13.13.2(3), 13.13.2(11), K(282), K(286)}
 
-   @AdaObjDefn{An_Implementation_Defined_Attribute},  -- Reference Manual, Annex M
-   @AdaObjDefn{An_Unknown_Attribute});         -- Unknown to ASIS
+   @AdaObjDefn{An_Implementation_Defined_Attribute},  -- @examcom{Reference Manual, Annex M}
+   @AdaObjDefn{An_Unknown_Attribute});         -- @examcom{Unknown to ASIS}
 @end{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0018-1]}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each attribute.]}
+ISO/IEC @Chg{Version=[2],New=[8652:2007 ed. 3],Old=[8652:1995]} for each attribute.]}
 @end{DescribeCode}
 
 
@@ -1226,47 +1235,47 @@ ISO/IEC 8652:1995 for each attribute.]}
 @Chg{Version=[1],New=[Type ],Old=[]}Statement_Kinds
 @Chg{Version=[1],New=[describes],Old=[@en]} classifications of Ada
 statements@Chg{Version=[1],New=[.],Old=[
-Literals                             -- Reference Manual]}
+Literals                             -- @examcom{Reference Manual}]}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Statement_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_A_Statement},                     -- An unexpected element
+   @AdaObjDefn{Not_A_Statement},                     -- @examcom{An unexpected element}
 
-   @AdaObjDefn{A_Null_Statement},                    -- 5.1
-   @AdaObjDefn{An_Assignment_Statement},             -- 5.2
-   @AdaObjDefn{An_If_Statement},                     -- 5.3
-   @AdaObjDefn{A_Case_Statement},                    -- 5.4
+   @AdaObjDefn{A_Null_Statement},                    -- @examcom{5.1}
+   @AdaObjDefn{An_Assignment_Statement},             -- @examcom{5.2}
+   @AdaObjDefn{An_If_Statement},                     -- @examcom{5.3}
+   @AdaObjDefn{A_Case_Statement},                    -- @examcom{5.4}
 
-   @AdaObjDefn{A_Loop_Statement},                    -- 5.5
-   @AdaObjDefn{A_While_Loop_Statement},              -- 5.5
-   @AdaObjDefn{A_For_Loop_Statement},                -- 5.5
-   @AdaObjDefn{A_Block_Statement},                   -- 5.6
-   @AdaObjDefn{An_Exit_Statement},                   -- 5.7
-   @AdaObjDefn{A_Goto_Statement},                    -- 5.8
+   @AdaObjDefn{A_Loop_Statement},                    -- @examcom{5.5}
+   @AdaObjDefn{A_While_Loop_Statement},              -- @examcom{5.5}
+   @AdaObjDefn{A_For_Loop_Statement},                -- @examcom{5.5}
+   @AdaObjDefn{A_Block_Statement},                   -- @examcom{5.6}
+   @AdaObjDefn{An_Exit_Statement},                   -- @examcom{5.7}
+   @AdaObjDefn{A_Goto_Statement},                    -- @examcom{5.8}
 
-   @AdaObjDefn{A_Procedure_Call_Statement},          -- 6.4
-   @AdaObjDefn{A_Return_Statement},                  -- 6.5
+   @AdaObjDefn{A_Procedure_Call_Statement},          -- @examcom{6.4}
+   @AdaObjDefn{A_Return_Statement},                  -- @examcom{6.5}
 
-   @AdaObjDefn{An_Accept_Statement},                 -- 9.5.2
-   @AdaObjDefn{An_Entry_Call_Statement},             -- 9.5.3
+   @AdaObjDefn{An_Accept_Statement},                 -- @examcom{9.5.2}
+   @AdaObjDefn{An_Entry_Call_Statement},             -- @examcom{9.5.3}
 
-   @AdaObjDefn{A_Requeue_Statement},                 -- 9.5.4
-   @AdaObjDefn{A_Requeue_Statement_With_Abort},      -- 9.5.4
+   @AdaObjDefn{A_Requeue_Statement},                 -- @examcom{9.5.4}
+   @AdaObjDefn{A_Requeue_Statement_With_Abort},      -- @examcom{9.5.4}
 
-   @AdaObjDefn{A_Delay_Until_Statement},             -- 9.6
-   @AdaObjDefn{A_Delay_Relative_Statement},          -- 9.6
+   @AdaObjDefn{A_Delay_Until_Statement},             -- @examcom{9.6}
+   @AdaObjDefn{A_Delay_Relative_Statement},          -- @examcom{9.6}
 
-   @AdaObjDefn{A_Terminate_Alternative_Statement},   -- 9.7.1
-   @AdaObjDefn{A_Selective_Accept_Statement},        -- 9.7.1
-   @AdaObjDefn{A_Timed_Entry_Call_Statement},        -- 9.7.2
-   @AdaObjDefn{A_Conditional_Entry_Call_Statement},  -- 9.7.3
-   @AdaObjDefn{An_Asynchronous_Select_Statement},    -- 9.7.4
+   @AdaObjDefn{A_Terminate_Alternative_Statement},   -- @examcom{9.7.1}
+   @AdaObjDefn{A_Selective_Accept_Statement},        -- @examcom{9.7.1}
+   @AdaObjDefn{A_Timed_Entry_Call_Statement},        -- @examcom{9.7.2}
+   @AdaObjDefn{A_Conditional_Entry_Call_Statement},  -- @examcom{9.7.3}
+   @AdaObjDefn{An_Asynchronous_Select_Statement},    -- @examcom{9.7.4}
 
-   @AdaObjDefn{An_Abort_Statement},                  -- 9.8
-   @AdaObjDefn{A_Raise_Statement},                   -- 11.3
-   @AdaObjDefn{A_Code_Statement});                   -- 13.8
+   @AdaObjDefn{An_Abort_Statement},                  -- @examcom{9.8}
+   @AdaObjDefn{A_Raise_Statement},                   -- @examcom{11.3}
+   @AdaObjDefn{A_Code_Statement});                   -- @examcom{13.8}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each statement.]}
@@ -1294,20 +1303,20 @@ representing such an alternative.
 
 @leading@keepnext@;For example,
 @begin{Example}
-   @key[select]   -- A_Select_Path enclosing a sequence of two statements
+   @key[select]   -- @examcom{A_Select_Path enclosing a sequence of two statements}
 
       @key[accept] Next_Work_Item(WI : @key[in] Work_Item) @key[do]
          Current_Work_Item := WI;
       @key[end];
       Process_Work_Item(Current_Work_Item);
 
-   @key[or]       -- An_Or_Path enclosing a guard and a sequence of two statements
+   @key[or]       -- @examcom{An_Or_Path enclosing a guard and a sequence of two statements}
 
       @key[when] Done_Early =>
          @key[accept] Shut_Down;
          @key[exit];
 
-   @key[or]       -- An_Or_Path enclosing a sequence with only a single statement
+   @key[or]       -- @examcom{An_Or_Path enclosing a sequence with only a single statement}
 
       @key[terminate];
 
@@ -1315,7 +1324,7 @@ representing such an alternative.
 @end{Example}
 
 @Chg{Version=[1],New=[],Old=[Path_Kinds
-Literals                      -- Reference Manual]}
+Literals                      -- @examcom{Reference Manual}]}
 @ChgAdded{Version=[2],Text=[@b{@i{We need some kind of separator between the example
 and the definition; they look the same and the type definition looks like part
 of the example. I don't have a good idea - RLB}}]}
@@ -1324,37 +1333,37 @@ of the example. I don't have a good idea - RLB}}]}
 @begin{Example}
 @key[type] @AdaTypeDefn{Path_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_A_Path},                   -- An unexpected element
+   @AdaObjDefn{Not_A_Path},                   -- @examcom{An unexpected element}
 
-   @AdaObjDefn{An_If_Path},                   -- 5.3:
-                                       -- @key[if] condition @key[then]
-                                       --   sequence_of_statements
+   @AdaObjDefn{An_If_Path},                   -- @examcom{5.3:}
+                                       -- @examcom{@key[if] condition @key[then]}
+                                       -- @examcom{  sequence_of_statements}
 
-   @AdaObjDefn{An_Elsif_Path},                -- 5.3:
-                                       -- @key[elsif] condition @key[then]
-                                       --   sequence_of_statements
+   @AdaObjDefn{An_Elsif_Path},                -- @examcom{5.3:}
+                                       -- @examcom{@key[elsif] condition @key[then]}
+                                       -- @examcom{  sequence_of_statements}
 
-   @AdaObjDefn{An_Else_Path},                 -- 5.3, 9.7.1, 9.7.3:
-                                       -- @key[else] sequence_of_statements
+   @AdaObjDefn{An_Else_Path},                 -- @examcom{5.3, 9.7.1, 9.7.3:}
+                                       -- @examcom{@key[else] sequence_of_statements}
 
-   @AdaObjDefn{A_Case_Path},                  -- 5.4:
-                                       -- @key[when] discrete_choice_list =>
-                                       --   sequence_of_statements
+   @AdaObjDefn{A_Case_Path},                  -- @examcom{5.4:}
+                                       -- @examcom{@key[when] discrete_choice_list =>}
+                                       -- @examcom{  sequence_of_statements}
 
-   @AdaObjDefn{A_Select_Path},                -- 9.7.1:
-                                       -- @key[select] [guard] select_alternative
-                                       -- 9.7.2, 9.7.3:
-                                       -- @key[select] entry_call_alternative
-                                       -- 9.7.4:
-                                       -- @key[select] triggering_alternative
+   @AdaObjDefn{A_Select_Path},                -- @examcom{9.7.1:}
+                                       -- @examcom{@key[select] [guard] select_alternative}
+                                       -- @examcom{9.7.2, 9.7.3:}
+                                       -- @examcom{@key[select] entry_call_alternative}
+                                       -- @examcom{9.7.4:}
+                                       -- @examcom{@key[select] triggering_alternative}
 
-   @AdaObjDefn{An_Or_Path},                   -- 9.7.1:
-                                       -- @key[or] [guard] select_alternative
-                                 -- 9.7.2:
-                                       -- @key[or] delay_alternative
+   @AdaObjDefn{An_Or_Path},                   -- @examcom{9.7.1:}
+                                       -- @examcom{@key[or] [guard] select_alternative}
+                                 -- @examcom{9.7.2:}
+                                       -- @examcom{@key[or] delay_alternative}
 
-   @AdaObjDefn{A_Then_Abort_Path});           -- 9.7.4
-                                       -- @key[then abort] sequence_of_statements
+   @AdaObjDefn{A_Then_Abort_Path});           -- @examcom{9.7.4}
+                                       -- @examcom{@key[then abort] sequence_of_statements}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each path, and the path represented.]}
@@ -1365,21 +1374,21 @@ ISO/IEC 8652:1995 for each path, and the path represented.]}
 
 @Chg{Version=[1],New=[Type ],Old=[]}Clause_Kinds
 @Chg{Version=[1],New=[describes kinds of clauses.],Old=[
-Literals                      -- Reference Manual    -> Subordinate Kinds]}
+Literals                      -- @examcom{Reference Manual    -> Subordinate Kinds}]}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Clause_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_A_Clause},               -- An unexpected element
+   @AdaObjDefn{Not_A_Clause},               -- @examcom{An unexpected element}
 
-   @AdaObjDefn{A_Use_Package_Clause},       -- 8.4
-   @AdaObjDefn{A_Use_Type_Clause},          -- 8.4
+   @AdaObjDefn{A_Use_Package_Clause},       -- @examcom{8.4}
+   @AdaObjDefn{A_Use_Type_Clause},          -- @examcom{8.4}
 
-   @AdaObjDefn{A_With_Clause},              -- 10.1.2
+   @AdaObjDefn{A_With_Clause},              -- @examcom{10.1.2}
 
-   @AdaObjDefn{A_Representation_Clause},    -- 13.1     -> Representation_Clause_Kinds
-   @AdaObjDefn{A_Component_Clause});        -- 13.5.1
+   @AdaObjDefn{A_Representation_Clause},    -- @examcom{13.1     -> Representation_Clause_Kinds}
+   @AdaObjDefn{A_Component_Clause});        -- @examcom{13.5.1}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each clause, and any subordinate kinds.]}
@@ -1391,18 +1400,18 @@ ISO/IEC 8652:1995 for each clause, and any subordinate kinds.]}
 @Chg{Version=[1],New=[Type ],Old=[]}Representation_Clause_Kinds
 @Chg{Version=[1],New=[describes],Old=[@en]} varieties of representation
 clauses@Chg{Version=[1],New=[.],Old=[
-Literals                                  -- Reference Manual]}
+Literals                                  -- @examcom{Reference Manual}]}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Representation_Clause_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_A_Representation_Clause},            -- An unexpected element
+   @AdaObjDefn{Not_A_Representation_Clause},            -- @examcom{An unexpected element}
 
-   @AdaObjDefn{An_Attribute_Definition_Clause},         -- 13.3
-   @AdaObjDefn{An_Enumeration_Representation_Clause},   -- 13.4
-   @AdaObjDefn{A_Record_Representation_Clause},         -- 13.5.1
-   @AdaObjDefn{An_At_Clause});                          -- J.7
+   @AdaObjDefn{An_Attribute_Definition_Clause},         -- @examcom{13.3}
+   @AdaObjDefn{An_Enumeration_Representation_Clause},   -- @examcom{13.4}
+   @AdaObjDefn{A_Record_Representation_Clause},         -- @examcom{13.5.1}
+   @AdaObjDefn{An_At_Clause});                          -- @examcom{J.7}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 ISO/IEC 8652:1995 for each representation clause.]}
@@ -1484,7 +1493,7 @@ configuration pragmas or comments.
 @begin{Example}
 @key[type] @AdaTypeDefn{Unit_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_A_Unit},                  -- A Nil_Compilation_Unit
+   @AdaObjDefn{Not_A_Unit},                  -- @examcom{A Nil_Compilation_Unit}
 
    @AdaObjDefn{A_Procedure},
    @AdaObjDefn{A_Function},
@@ -1506,15 +1515,15 @@ configuration pragmas or comments.
    @AdaObjDefn{A_Generic_Function_Renaming},
    @AdaObjDefn{A_Generic_Package_Renaming},
 
-   @AdaObjDefn{A_Procedure_Body},    -- A unit interpreted only as the completion
-                        -- of a procedure, or a unit interpreted as
-                        -- both the declaration and body of a library
-                        -- procedure. Reference Manual 10.1.4(4)
+   @AdaObjDefn{A_Procedure_Body},    -- @examcom{A unit interpreted only as the completion}
+                        -- @examcom{of a procedure, or a unit interpreted as}
+                        -- @examcom{both the declaration and body of a library}
+                        -- @examcom{procedure. Reference Manual 10.1.4(4)}
 
-   @AdaObjDefn{A_Function_Body},     -- A unit interpreted only as the completion
-                        -- of a function, or a unit interpreted as
-                        -- both the declaration and body of a library
-                        -- function. Reference Manual 10.1.4(4)
+   @AdaObjDefn{A_Function_Body},     -- @examcom{A unit interpreted only as the completion}
+                        -- @examcom{of a function, or a unit interpreted as}
+                        -- @examcom{both the declaration and body of a library}
+                        -- @examcom{function. Reference Manual 10.1.4(4)}
 
    @AdaObjDefn{A_Package_Body},
 
@@ -1524,33 +1533,33 @@ configuration pragmas or comments.
    @AdaObjDefn{A_Task_Body_Subunit},
    @AdaObjDefn{A_Protected_Body_Subunit},
 
-   @AdaObjDefn{A_Nonexistent_Declaration},   -- A unit that does not exist but is:
-                                -- 1) mentioned in a with clause of
-                                --    another unit or,
-                                -- 2) a required corresponding
-                                --    library_unit_declaration
+   @AdaObjDefn{A_Nonexistent_Declaration},   -- @examcom{A unit that does not exist but is:}
+                                -- @examcom{1) mentioned in a with clause of}
+                                -- @examcom{   another unit or,}
+                                -- @examcom{2) a required corresponding}
+                                -- @examcom{   library_unit_declaration}
 
-   @AdaObjDefn{A_Nonexistent_Body},          -- A unit that does not exist but is:
-                                -- 1) known to be a corresponding
-                                --    subunit or,
-                                -- 2) a required corresponding
-                                --    library_unit_body
+   @AdaObjDefn{A_Nonexistent_Body},          -- @examcom{A unit that does not exist but is:}
+                                -- @examcom{1) known to be a corresponding}
+                                -- @examcom{   subunit or,}
+                                -- @examcom{2) a required corresponding}
+                                -- @examcom{   library_unit_body}
 
-   @AdaObjDefn{A_Configuration_Compilation}, -- Corresponds to the whole content of a
-                                -- compilation with no compilation_unit,
-                                -- but possibly containing comments,
-                                -- configuration pragmas}, or both.
-                                -- A Context is not limited to the number of
-                                -- units of A_Configuration_Compilation kind.
-                                -- A unit of A_Configuration_Compilation
-                                -- does not have a name. This unit
-                                -- represents configuration pragmas that
-                                -- are "in effect". The only interface that
-                                -- returns this unit kind is
-                                -- Enclosing_Compilation_Unit when given
-                                -- A_Pragma element obtained from Configuration_Pragmas.
+   @AdaObjDefn{A_Configuration_Compilation}, -- @examcom{Corresponds to the whole content of a}
+                                -- @examcom{compilation with no compilation_unit,}
+                                -- @examcom{but possibly containing comments,}
+                                -- @examcom{configuration pragmas}, or both.}
+                                -- @examcom{A Context is not limited to the number of}
+                                -- @examcom{units of A_Configuration_Compilation kind.}
+                                -- @examcom{A unit of A_Configuration_Compilation}
+                                -- @examcom{does not have a name. This unit}
+                                -- @examcom{represents configuration pragmas that}
+                                -- @examcom{are "in effect". The only interface that}
+                                -- @examcom{returns this unit kind is}
+                                -- @examcom{Enclosing_Compilation_Unit when given}
+                                -- @examcom{A_Pragma element obtained from Configuration_Pragmas.}
 
-   @AdaObjDefn{An_Unknown_Unit});            -- An indeterminable or proprietary unit
+   @AdaObjDefn{An_Unknown_Unit});            -- @examcom{An indeterminable or proprietary unit}
 
 @key[subtype] @AdaSubtypeDefn{Name=[A_Subprogram_Declaration],Of=[Unit_Kinds]} @key[is] Unit_Kinds @key[range]
             A_Procedure ..
@@ -1597,29 +1606,29 @@ Unit_Classes @Chg{Version=[1],New=[defines],Old=[@en]} classification of public,
 
 @begin{DescribeCode}
 @begin{Example}
-@key[type] @AdaTypeDefn{Unit_Classes} @key[is] (  -- Reference Manual 10.1.1(12), 10.1.3
+@key[type] @AdaTypeDefn{Unit_Classes} @key[is] (  -- @examcom{Reference Manual 10.1.1(12), 10.1.3}
 
-   @AdaObjDefn{Not_A_Class},              -- A nil, nonexistent, unknown,
-                             -- or configuration compilation unit class.
+   @AdaObjDefn{Not_A_Class},              -- @examcom{A nil, nonexistent, unknown,}
+                             -- @examcom{or configuration compilation unit class.}
 
-   @AdaObjDefn{A_Public_Declaration},     -- library_unit_declaration or
-                             -- library_unit_renaming_declaration.
+   @AdaObjDefn{A_Public_Declaration},     -- @examcom{library_unit_declaration or}
+                             -- @examcom{library_unit_renaming_declaration.}
 
-   @AdaObjDefn{A_Public_Body},            -- library_unit_body interpreted only as a
-                             -- completion. Its declaration is public.
+   @AdaObjDefn{A_Public_Body},            -- @examcom{library_unit_body interpreted only as a}
+                             -- @examcom{completion. Its declaration is public.}
 
    @AdaObjDefn{A_Public_Declaration_And_Body},
-                             -- subprogram_body interpreted as both a
-                             -- declaration and body of a library
-                             -- subprogram - Reference Manual 10.1.4(4).
+                             -- @examcom{subprogram_body interpreted as both a}
+                             -- @examcom{declaration and body of a library}
+                             -- @examcom{subprogram - Reference Manual 10.1.4(4).}
 
-   @AdaObjDefn{A_Private_Declaration},    -- private library_unit_declaration or
-                             -- private library_unit_renaming_declaration.
+   @AdaObjDefn{A_Private_Declaration},    -- @examcom{private library_unit_declaration or}
+                             -- @examcom{private library_unit_renaming_declaration.}
 
-   @AdaObjDefn{A_Private_Body},           -- library_unit_body interpreted only as a
-                             -- completion. Its declaration is private.
+   @AdaObjDefn{A_Private_Body},           -- @examcom{library_unit_body interpreted only as a}
+                             -- @examcom{completion. Its declaration is private.}
 
-   @AdaObjDefn{A_Separate_Body});         -- separate (parent_unit_name) proper_body.
+   @AdaObjDefn{A_Separate_Body});         -- @examcom{separate (parent_unit_name) proper_body.}
 @end{Example}
 @end{DescribeCode}
 
@@ -1632,29 +1641,29 @@ Unit_Origins @Chg{Version=[1],New=[defines],Old=[@en]} classification of possibl
 @begin{Example}
 @key[type] @AdaTypeDefn{Unit_Origins} @key[is] (
 
-   @AdaObjDefn{Not_An_Origin},        -- A nil or nonexistent unit origin
-                         -- An_Unknown_Unit can be any origin
+   @AdaObjDefn{Not_An_Origin},        -- @examcom{A nil or nonexistent unit origin}
+                         -- @examcom{An_Unknown_Unit can be any origin}
 
-   @AdaObjDefn{A_Predefined_Unit},    -- Ada predefined language environment units
-                         -- listed in Annex A(2). These include
-                         -- Standard and the three root library
-                         -- units: Ada, Interfaces, and System,
-                         -- and their descendants. i.e., Ada.Text_Io,
-                         -- Ada.Calendar, Interfaces.C, etc.
+   @AdaObjDefn{A_Predefined_Unit},    -- @examcom{Ada predefined language environment units}
+                         -- @examcom{listed in Annex A(2). These include}
+                         -- @examcom{Standard and the three root library}
+                         -- @examcom{units: Ada, Interfaces, and System,}
+                         -- @examcom{and their descendants. i.e., Ada.Text_Io,}
+                         -- @examcom{Ada.Calendar, Interfaces.C, etc.}
 
    @AdaObjDefn{An_Implementation_Unit},
-                         -- Implementation specific library units,
-                         -- e.g., runtime support packages, utility
-                         -- libraries, etc. It is not required
-                         -- that any implementation supplied units
-                         -- have this origin. This is a suggestion.
-                         -- Implementations might provide, for
-                         -- example, precompiled versions of public
-                         -- domain software that could have
-                         -- An_Application_Unit origin.
+                         -- @examcom{Implementation specific library units,}
+                         -- @examcom{e.g., runtime support packages, utility}
+                         -- @examcom{libraries, etc. It is not required}
+                         -- @examcom{that any implementation supplied units}
+                         -- @examcom{have this origin. This is a suggestion.}
+                         -- @examcom{Implementations might provide, for}
+                         -- @examcom{example, precompiled versions of public}
+                         -- @examcom{domain software that could have}
+                         -- @examcom{An_Application_Unit origin.}
 
-   @AdaObjDefn{An_Application_Unit}); -- Neither A_Predefined_Unit or
-                         -- An_Implementation_Unit
+   @AdaObjDefn{An_Application_Unit}); -- @examcom{Neither A_Predefined_Unit or}
+                         -- @examcom{An_Implementation_Unit}
 @end{Example}
 @end{DescribeCode}
 
@@ -1814,15 +1823,15 @@ to IDL (See @RefSecNum{Miscellaneous ASIS I/O and IDL approaches} for details).
 @begin{Example}
 @Key[type] @AdaTypeDefn{Traverse_Control} @key[is] (
 
-   @AdaObjDefn{Continue},               -- Continues the normal depth-first traversal.
+   @AdaObjDefn{Continue},               -- @examcom{Continues the normal depth-first traversal.}
 
-   @AdaObjDefn{Abandon_Children},       -- Prevents traversal of the current element's
-                           -- children.
+   @AdaObjDefn{Abandon_Children},       -- @examcom{Prevents traversal of the current element's}
+                           -- @examcom{children.}
 
-   @AdaObjDefn{Abandon_Siblings},       -- Prevents traversal of the current element's
-                           -- children and remaining siblings.
+   @AdaObjDefn{Abandon_Siblings},       -- @examcom{Prevents traversal of the current element's}
+                           -- @examcom{children and remaining siblings.}
 
-   @AdaObjDefn{Terminate_Immediately}); -- Does exactly that.
+   @AdaObjDefn{Terminate_Immediately}); -- @examcom{Does exactly that.}
 @end{Example}
 
 

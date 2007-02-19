@@ -1,6 +1,6 @@
 @Part(comp-rel, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/comp-rel.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2007/02/16 07:25:32 $}
+@comment{$Revision: 1.6 $ $Date: 2007/02/18 03:23:55 $}
 
 
 @LabeledSection{package Asis.Compilation_Units.Relations}
@@ -291,7 +291,7 @@ A_Function_Body_Subunit
 A_Package_Body_Subunit
 A_Task_Body_Subunit
 A_Protected_Body_Subunit
-An_Unknown_Unit            -- See @ImplPermTitle
+An_Unknown_Unit            -- @examcom{See @ImplPermTitle}
 @end{Display}
 
 The Semantic_Dependence_Order query should never raise an exception
@@ -381,7 +381,7 @@ A_Function_Body_Subunit
 A_Package_Body_Subunit
 A_Task_Body_Subunit
 A_Protected_Body_Subunit
-An_Unknown_Unit            -- See @ImplPermTitle
+An_Unknown_Unit            -- @examcom{See @ImplPermTitle}
 @end{Display}
 @end{DescribeCode}
 

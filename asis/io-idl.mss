@@ -1,9 +1,9 @@
 @Part(io-idl, Root="asis.msm")
 
-@Comment{$Date: 2006/09/28 05:12:00 $}
+@Comment{$Date: 2007/02/18 03:23:56 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/io-idl.mss,v $}
-@comment{$Revision: 1.1 $}
+@comment{$Revision: 1.2 $}
 
 @LabeledInformativeAnnex{Miscellaneous ASIS I/O and IDL approaches}
 
@@ -137,7 +137,7 @@ Annex C.1.11  function Is_Open
 Annex C.1.12  function Read
 ----------------------------------------------------------------------------
 
-    --  Read operations for single value and array values:
+    -- @examcom{ Read operations for single value and array values:}
 
     @key[function] Read (File              : @key[in] File_Type)
         @key[return] Asis.Data_Decomposition.Portable_Value;
@@ -165,15 +165,15 @@ Annex C.1.14  generic package Write_Data_Type
         @key[type] Data_Type @key[is private];
         @key[with function] Convert (Value : @key[in] Data_Type)
             @key[return] Asis.Data_Decomposition.Portable_Data;
-        -- Instantiated from Asis.Data_Decomposition.Portable_Transfer.Convert
+        -- @examcom{Instantiated from Asis.Data_Decomposition.Portable_Transfer.Convert}
     @key[package] Write_Data_Type @key[is]
         @key[procedure] Write (File        : @key[in] File_Type;
                          Value       : @key[in] Data_Type);
 
-        --  Convenience interface. Can be more efficient, but is
-        --  exactly equivalent to:
+        -- @examcom{ Convenience interface. Can be more efficient, but is}
+        -- @examcom{ exactly equivalent to:}
         --
-        --      Write (File, Convert(Value));
+        -- @examcom{     Write (File, Convert(Value));}
         --
     end Write_Data_Type;
 
@@ -246,10 +246,10 @@ Annex C.2.2  type File_Mode
                        Inout_File,
                        Out_File);
 
-    --  Count has an ASIS implementation-defined upper bound.
-    --  Note: An Id can take up more than one "slot" in an Id file.
-    --  The 1st Id in a file will probably be at From => 1, but, the 2nd
-    --  Id in a file is not necessarily at From => 2.
+    -- @examcom{ Count has an ASIS implementation-defined upper bound.}
+    -- @examcom{ Note: An Id can take up more than one "slot" in an Id file.}
+    -- @examcom{ The 1st Id in a file will probably be at From => 1, but, the 2nd}
+    -- @examcom{ Id in a file is not necessarily at From => 2.}
 
 ----------------------------------------------------------------------------
 Annex C.2.3  type Count
@@ -388,7 +388,7 @@ Annex C.2.19 function End_Of_File
 Annex C.2.20 Exceptions
 ----------------------------------------------------------------------------
 
-    -- Exceptions
+    -- @examcom{Exceptions}
 
     Status_Error : @key[exception renames] Ada.Io_Exceptions.Status_Error;
     Mode_Error   : @key[exception renames] Ada.Io_Exceptions.Mode_Error;
@@ -399,7 +399,7 @@ Annex C.2.20 Exceptions
     Data_Error   : @key[exception renames] Ada.Io_Exceptions.Data_Error;
 
 @key[private]
-    --  ASIS implementation dependent.
+    -- @examcom{ ASIS implementation dependent.}
     @key[package] Ids_Id_Io @key[is new] Ada.Direct_Io (Asis.Ids.Id);
     @key[type] File_Type @key[is new] Ids_Id_Io.File_Type;
 
@@ -574,31 +574,31 @@ output.
 @begin{Example}
 @key[with] CORBA.Object;
 @key[package] ASIS_CORBA is
-    -- ...
-    @key[type] Traverse_Control @key[is]      -- This type is found in package Asis
-        (Continue,                -- Continues the normal depth-first traversal.
-          Abandon_Children,       -- Prevents traversal of the current element's
-                                  -- children.
-          Abandon_Siblings,       -- Prevents traversal of the current element's
-                                  -- children and remaining siblings.
-          Terminate_Immediately); -- Does exactly that.
-    -- ...
-    @key[package] Element @key[is]            -- This is the private type Asis.Element
+    -- @examcom{...}
+    @key[type] Traverse_Control @key[is]      -- @examcom{This type is found in package Asis}
+        (Continue,                -- @examcom{Continues the normal depth-first traversal.}
+          Abandon_Children,       -- @examcom{Prevents traversal of the current element's}
+                                  -- @examcom{children.}
+          Abandon_Siblings,       -- @examcom{Prevents traversal of the current element's}
+                                  -- @examcom{children and remaining siblings.}
+          Terminate_Immediately); -- @examcom{Does exactly that.}
+    -- @examcom{...}
+    @key[package] Element @key[is]            -- @examcom{This is the private type Asis.Element}
 
         @key[type] Ref @key[is new] CORBA.Object.Ref @key[with null record];
-        -- Narrow/Widen functions
+        -- @examcom{Narrow/Widen functions}
         @key[function] To_Ref (From : CORBA.Any) @key[return] Ref;
         @key[function] To_Ref (From : CORBA.Object.Ref'CLASS) @key[return] Ref;
 
     @key[end]Element;
-    -- ...
+    -- @examcom{...}
 @key[end ]ASIS_CORBA;
 
 @key[with] CORBA.Object; @key[with] ASIS_CORBA.Element;
-@key[package] ASIS_CORBA.Generics @key[is] -- generic portion of Asis.Iterator.Traverse_Control
+@key[package] ASIS_CORBA.Generics @key[is] -- @examcom{generic portion of Asis.Iterator.Traverse_Control}
 
-    @key[type] Ref @key[is new] CORBA.Object.Ref @key[with null record];	-- abstract
-    -- Narrow/Widen functions
+    @key[type] Ref @key[is new] CORBA.Object.Ref @key[with null record];	-- @examcom{abstract}
+    -- @examcom{Narrow/Widen functions}
     @key[function] To_Ref (From : CORBA.Any) @key[return] Ref;
     @key[function] To_Ref (From : CORBA.Object.Ref'CLASS) @key[return] Ref;
 
@@ -611,14 +611,14 @@ output.
          (Self          : Ref;
           This_Element  : @key[in]     ASIS_CORBA.Element.Ref;
           What_Next     : @key[in out] ASIS_CORBA.Traverse_Control);
-          -- no state info needed, children will add state
-@key[end ]ASIS_CORBA.Generics
+          -- @examcom{no state info needed, children will add state}
+@key[end] ASIS_CORBA.Generics
 
 @key[with] CORBA.Object; @key[with] ASIS_CORBA.Element; @key[with] ASIS_CORBA.Generics;
 @key[package] ASIS_CORBA.Iterator @key[is]
 
     @key[type] Ref @key[is new] CORBA.Object.Ref @key[with null record];
-    -- Narrow/Widen functions
+    -- @examcom{Narrow/Widen functions}
     @key[function] To_Ref (From : CORBA.Any) @key[return] Ref;
     @key[function] To_Ref (From : CORBA.Object.Ref'CLASS) @key[return] Ref;
 
@@ -627,8 +627,8 @@ output.
         Starting_From : @key[in]     ASIS_CORBA.Element.Ref;
         What_Next     : @key[in out] ASIS_CORBA.Traverse_Control;
         Using         : @key[in]     ASIS_CORBA.Generics.Ref);
-        -- Using contains state and implementations of My_Pre_Operation and
-        -- My_Post_Operation.
+        -- @examcom{Using contains state and implementations of My_Pre_Operation and}
+        -- @examcom{My_Post_Operation.}
 @key[end] ASIS_CORBA.Iterator;
 @end{Example}
 

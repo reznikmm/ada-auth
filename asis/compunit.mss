@@ -1,6 +1,6 @@
 @Part(compunit, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/compunit.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2007/02/07 01:12:25 $}
+@comment{$Revision: 1.5 $ $Date: 2007/02/18 03:23:55 $}
 
 
 @LabeledSection{package Asis.Compilation_Units}
@@ -479,7 +479,7 @@ All Unit_Kinds are appropriate except Not_A_Unit.
 A_Procedure_Body
 A_Function_Body
 A_Package_Body
-An_Unknown_Unit            -- See Implementation Permissions
+An_Unknown_Unit            -- @examcom{See @ImplPermTitle}
 @end{Display}
 
 @leading@keepnext@;Appropriate Unit_Kinds returning the argument Library_Item:
@@ -587,7 +587,7 @@ A_Package
 A_Generic_Procedure
 A_Generic_Function
 A_Generic_Package
-An_Unknown_Unit            -- See Implementation Permissions
+An_Unknown_Unit            -- @examcom{See @ImplPermTitle}
 @end{Display}
 
 @leading@keepnext@;Appropriate Unit_Kinds returning the argument Library_Item:

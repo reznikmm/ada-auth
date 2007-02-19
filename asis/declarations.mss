@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2007/02/16 07:25:33 $}
+@comment{$Revision: 1.8 $ $Date: 2007/02/18 03:23:55 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -66,10 +66,10 @@ A_Defining_Name
 @begin{Examples}
 @begin{Example}
 @key[type] Foo @key[is] (Pooh, Baah);
-   -- Returns a list containing one A_Defining_Name: Foo.
+   -- @examcom{Returns a list containing one A_Defining_Name: Foo.}
 
 One, Uno : @key[constant] Integer := 1;
-   -- Returns a list of two A_Defining_Name elements: One and Uno.
+   -- @examcom{Returns a list of two A_Defining_Name elements: One and Uno.}
 @end{Example}
 @end{Examples}
 
@@ -2470,8 +2470,9 @@ function Generic_Actual_Part
 @end{ChildRef}
 
 @begin{Intro}
-@b{@i{I don't know where this goes; it doesn't seem to relate very closely to
-any of the routines near here. - RLB@*}}
+@b{@i{I don't know where this introductory text goes; it doesn't seem to
+relate very closely to any of the routines near here. It surely does not
+belong here, however. - RLB@*}}
 Instantiations can always be analyzed in terms of the generic actual
 parameters supplied with the instantiation. A generic instance is a copy
 of the generic unit, and while there is no explicit (textual) specification

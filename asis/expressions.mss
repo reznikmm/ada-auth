@@ -1,6 +1,6 @@
 @Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2007/02/16 07:25:33 $}
+@comment{$Revision: 1.5 $ $Date: 2007/02/18 03:23:56 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -449,18 +449,23 @@ list of referenced entities.
 
 @LabeledClause{function Corresponding_Name_Definition_List}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Name_Definition_List} (Reference : @key[in] Asis.Element)
+                               @key[return] Asis.Defining_Name_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Corresponding_Name_Definition_List} (Reference : @key[in] Asis.Element)
-                                   @key[return] Asis.Defining_Name_List;
+Reference @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} an entity
+reference to query.
 
-Reference   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} an entity reference to query
-
-Exactly like Corresponding_Name_Definition except it returns a list.
+@leading@;Exactly like Corresponding_Name_Definition except it returns a list.
 The list will almost always have a length of one. The exception to this
 is the case where an expression in a pragma is ambiguous and reference
-more than one entity. For example,
+more than one entity. For example:
 
-     pragma Inline ("+");        -- Inlines all "+" operators
+@begin{ChildExample}
+@key[pragma] Inline ("+");        -- @examcom{Inlines all "+" operators}
+@end{ChildExample}
 
 The "+" expression is An_Operator_Symbol but could reference more than one "+"
 operator. In this case, the resulting list includes all referenced entities.
@@ -483,19 +488,25 @@ A_Defining_Name
 @LabeledClause{function Corresponding_Name_Declaration}
 
 
-    @key[function] @AdaSubDefn{Corresponding_Name_Declaration} (Reference : @key[in] Asis.Expression)
-                              @key[return] Asis.Element;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Name_Declaration} (Reference : @key[in] Asis.Expression)
+                          @key[return] Asis.Element;
+@end{Example}
 
-Reference   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the entity reference to query
+Reference @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the entity
+reference to query.
 
-Returns the declaration that declared the entity named by the given
+@leading@;Returns the declaration that declared the entity named by the given
 reference. The result is exactly the same as:
 
-     Result := Corresponding_Name_Definition (Reference);
-     if not Is_Nil (Result) then
-         Result := Enclosing_Element (Result);
-     end if;
-     @key[return] Result;
+@begin{ChildExample}
+Result := Corresponding_Name_Definition (Reference);
+@key[if not] Is_Nil (Result) @key[then]
+   Result := Enclosing_Element (Result);
+@key[end if];
+@key[return] Result;
+@end{ChildExample}
 
 See the comments for Corresponding_Name_Definition for details.
 The result is either a Declaration or a Statement. Statements result
@@ -538,12 +549,16 @@ function Prefix
 @end{ChildRef}
 
 
-    @key[function] @AdaSubDefn{Prefix} (Expression : @key[in] Asis.Expression) @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Prefix} (Expression : @key[in] Asis.Expression) @key[return] Asis.Expression;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the name expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the name
+expression to query.
 
-Returns the prefix (the construct to the left of: the rightmost unnested
-left parenthesis in function_call elements and indexed_component elements or slice
+Returns the prefix (the construct to the left of: the rightmost unnested left
+parenthesis in function_call elements and indexed_component elements or slice
 elements, the rightmost 'dot' for selected_component elements, or the rightmost
 tick for attribute_reference elements).
 
@@ -580,10 +595,14 @@ function Index_Expressions
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Index_Expressions} (Expression : @key[in] Asis.Expression)
-                               @key[return] Asis.Expression_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Index_Expressions} (Expression : @key[in] Asis.Expression)
+                            @key[return] Asis.Expression_List;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an indexed_component to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an
+indexed_component to query.
 
 Returns the list of expressions (possibly only one) within the parenthesis,
 in their order of appearance.
@@ -613,8 +632,11 @@ function Slice_Range
 @end{Display}
 @end{ChildRef}
 
-    @key[function] @AdaSubDefn{Slice_Range} (Expression : @key[in] Asis.Expression)
-                         @key[return] Asis.Discrete_Range;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Slice_Range} (Expression : @key[in] Asis.Expression)
+                      @key[return] Asis.Discrete_Range;
+@end{Example}
 
 Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the slice to
 query.
@@ -636,10 +658,14 @@ A_Discrete_Range
 @LabeledClause{function Selector}
 
 
-    @key[function] @AdaSubDefn{Selector} (Expression : @key[in] Asis.Expression)
-                      @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Selector} (Expression : @key[in] Asis.Expression)
+                   @key[return] Asis.Expression;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the selected_component to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+selected_component to query.
 
 Returns the selector (the construct to the right of the rightmost 'dot' in
 the selected_component).
@@ -662,17 +688,21 @@ An_Enumeration_Literal
 @LabeledClause{function Attribute_Designator_Identifier}
 
 
-    @key[function] @AdaSubDefn{Attribute_Designator_Identifier}
-            (Expression : @key[in] Asis.Expression)
-                @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Attribute_Designator_Identifier}
+        (Expression : @key[in] Asis.Expression)
+            @key[return] Asis.Expression;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an attribute_reference expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an
+attribute_reference expression to query.
 
 Returns the identifier of the attribute_designator (the construct to the
 right of the rightmost tick of the attribute_reference). The Prefix of
 the attribute_reference can itself be an attribute_reference as in
-T'BASE'FIRST where the prefix is T'BASE and the attribute_designator name
-is FIRST.
+T'Base'First where the prefix is T'Base and the attribute_designator name
+is First.
 
 Attribute_designator reserved words @key[access], @key[delta], and @key[digits]
 are treated as An_Identifier.
@@ -692,11 +722,15 @@ An_Identifier
 @LabeledClause{function Attribute_Designator_Expressions}
 
 
-    @key[function] @AdaSubDefn{Attribute_Designator_Expressions}
-            (Expression : @key[in] Asis.Expression)
-                @key[return] Asis.Expression_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Attribute_Designator_Expressions}
+        (Expression : @key[in] Asis.Expression)
+            @key[return] Asis.Expression_List;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an attribute expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an attribute
+expression to query.
 
 Returns the static expressions associated with the optional argument of the
 attribute_designator. Expected predefined attributes are A'First(N),
@@ -727,19 +761,25 @@ An_Expression
 This query returns a list to support implementation-defined attributes
 that may have more than one static_expression.
 
+
 @LabeledClause{function Record_Component_Associations}
 
 
-    @key[function] @AdaSubDefn{Record_Component_Associations}
-                  (Expression : @key[in] Asis.Expression;
-                         Normalized : @key[in] Boolean := False)
-                        @key[return] Asis.Association_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Record_Component_Associations}
+              (Expression : @key[in] Asis.Expression;
+                     Normalized : @key[in] Boolean := False)
+                    @key[return] Asis.Association_List;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an aggregate expression to query
-Normalized  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether the normalized form is desired
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an aggregate
+expression to query.
+Normalized @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} whether the
+normalized form is desired.
 
-Returns a list of the record_component_association elements of a record_aggregate
-or an extension_aggregate.
+Returns a list of the record_component_association elements of a
+record_aggregate or an extension_aggregate.
 
 Returns a Nil_Element_List if the aggregate is of the form (null record).
 
@@ -767,14 +807,14 @@ An_Extension_Aggregate
 @begin{Display}
 A_Record_Component_Association
 @end{Display}
+@end{DescribeCode}
 
-@b{Implementation Requirement}s
-
+@begin{ImplReq}
 Normalized associations are Is_Normalized and Is_Part_Of_Implicit.
 Normalized associations are never Is_Equal to unnormalized associations.
+@end{ImplReq}
 
-@b{Implementation Permissions}
-
+@begin{ImplPerm}
 An implementation may choose to normalize its internal representation
 to use the defining_identifier element instead of the component_selector_name
 element.
@@ -782,15 +822,21 @@ element.
 If so, this query will return Is_Normalized associations even if
 Normalized is False, and the query
 Record_Component_Associations_Normalized will return True.
+@end{ImplPerm}
+
 
 @LabeledClause{function Extension_Aggregate_Expression}
 
 
-    @key[function] @AdaSubDefn{Extension_Aggregate_Expression}
-                              (Expression : @key[in] Asis.Expression)
-                                       @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Extension_Aggregate_Expression}
+                          (Expression : @key[in] Asis.Expression)
+                                   @key[return] Asis.Expression;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an extension_aggregate expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an
+extension_aggregate expression to query.
 
 Returns the ancestor_part expression preceding the reserved word @key[with] in
 the extension_aggregate.
@@ -806,14 +852,19 @@ An_Expression
 @end{Display}
 @end{DescribeCode}
 
+
 @LabeledClause{function Array_Component_Associations}
 
 
-    @key[function] @AdaSubDefn{Array_Component_Associations}
-                  (Expression : @key[in] Asis.Expression)
-                        @key[return] Asis.Association_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Array_Component_Associations}
+              (Expression : @key[in] Asis.Expression)
+                    @key[return] Asis.Association_List;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an array aggregate expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an array
+aggregate expression to query.
 
 Returns a list of the Array_Component_Associations in an array aggregate.
 
@@ -823,8 +874,11 @@ A_Positional_Array_Aggregate
 A_Named_Array_Aggregate
 @end{Display}
 
-Returns Association_Kinds:
-     An_Array_Component_Association
+@leading@keepnext@;Returns Association_Kinds:
+@begin{Display}
+An_Array_Component_Association
+@end{Display}
+@end{DescribeCode}
 
 @begin{SingleNote}
 @b{@i{Shouldn't this be normative?? - RLB}}
@@ -840,24 +894,30 @@ expressions except an others choice.
 @LabeledClause{function Array_Component_Choices}
 
 
-    @key[function] @AdaSubDefn{Array_Component_Choices}
-            (Association : @key[in] Asis.Association)
-                @key[return] Asis.Expression_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Array_Component_Choices}
+        (Association : @key[in] Asis.Association)
+            @key[return] Asis.Expression_List;
+@end{Example}
 
-Association @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component association to query
+Association @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component
+association to query.
 
-If the Association is from a named_array_aggregate:
-
-- Returns the discrete_choice_list order of appearance. The choices are
+@leading@;If the Association is from a named_array_aggregate:
+@begin{Itemize}
+Returns the discrete_choice_list order of appearance. The choices are
   either An_Expression or A_Discrete_Range elements, or a single
   An_Others_Choice element.
+@end{Itemize}
 
-If the Association is from a positional_array_aggregate:
+@leading@;If the Association is from a positional_array_aggregate:
+@begin{Itemize}
+Returns a single An_Others_Choice if the association is an others
+choice (@key[others] => expression).
 
-- Returns a single An_Others_Choice if the association is an others
-  choice (others => expression).
-
-- Returns a Nil_Element_List otherwise.
+Returns a Nil_Element_List otherwise.
+@end{Itemize}
 
 @leading@keepnext@;Appropriate Association_Kinds:
 @begin{Display}
@@ -881,34 +941,47 @@ An_Others_Choice
 @LabeledClause{function Record_Component_Choices}
 
 
-    @key[function] @AdaSubDefn{Record_Component_Choices}
-            (Association : @key[in] Asis.Association)
-                @key[return] Asis.Expression_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Record_Component_Choices}
+        (Association : @key[in] Asis.Association)
+            @key[return] Asis.Expression_List;
+@end{Example}
 
-Association @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component association to query
+Association @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component
+association to query.
 
-If the Association argument is from an unnormalized list:
+@leading@;If the Association argument is from an unnormalized list:
 
-- If the Association is a named component association:
+@begin{Itemize}
+@leading@;If the Association is a named component association:
 
-  o Returns the component_choice_list order of appearance. The choices are
+@begin{InnerItemize}
+Returns the component_choice_list order of appearance. The choices are
     either An_Identifier elements representing component_selector_name elements, or
     a single An_Others_Choice element.
 
-  o The Enclosing_Element of the choices is the Association argument.
+The Enclosing_Element of the choices is the Association argument.
+@end{InnerItemize}
 
-- If the Association is a positional component association:
+@leading@;If the Association is a positional component association:
 
-  o Returns a Nil_Element_List.
+@begin{InnerItemize}
+Returns a Nil_Element_List.
+@end{InnerItemize}
+@end{Itemize}
 
-If the Association argument is from a Normalized list:
+@leading@;If the Association argument is from a Normalized list:
+@begin{Itemize}
+@leading@;Returns a list containing a single choice:
 
-- Returns a list containing a single choice:
+@begin{InnerItemize}
+A_Defining_Name element representing the defining_identifier of
+the component_declaration.
 
-  o A_Defining_Name element representing the defining_identifier of
-    the component_declaration.
-
-  o The Enclosing_Element of the A_Defining_Name is the component_declaration.
+The Enclosing_Element of the A_Defining_Name is the component_declaration.
+@end{InnerItemize}
+@end{Itemize}
 
 Normalized lists contain artificial ASIS An_Association elements that
 provide one formal A_Defining_Name => An_Expression pair per
@@ -936,10 +1009,14 @@ A_Definition
 @LabeledClause{function Component_Expression}
 
 
-    @key[function] @AdaSubDefn{Component_Expression} (Association : @key[in] Asis.Association)
-                                  @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Component_Expression} (Association : @key[in] Asis.Association)
+                              @key[return] Asis.Expression;
+@end{Example}
 
-Association @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component association to query
+Association @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the component
+association to query.
 
 Returns the expression of the record_component_association or
 array_component_association.
@@ -963,36 +1040,49 @@ An_Expression
 @end{Display}
 @end{DescribeCode}
 
+
 @LabeledClause{function Formal_Parameter}
 
 
-    @key[function] @AdaSubDefn{Formal_Parameter} (Association : @key[in] Asis.Association)
-                              @key[return] Asis.Element;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Formal_Parameter} (Association : @key[in] Asis.Association)
+                          @key[return] Asis.Element;
+@end{Example}
 
-Association @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the association to query
+Association @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+association to query.
 
-If the Association argument is from an unnormalized list:
+@leading@;If the Association argument is from an unnormalized list:
 
-- If the Association is given in named notation:
+@begin{Itemize}
+@leading@;If the Association is given in named notation:
 
-  Returns An_Identifier representing the formal_parameter_selector_name,
-  generic_formal_parameter_selector_name, or pragma_argument_identifier.
+@begin{Indent}
+Returns An_Identifier representing the formal_parameter_selector_name,
+generic_formal_parameter_selector_name, or pragma_argument_identifier.
 
-  The Enclosing_Element of the An_Identifier element is the Association
-  argument.
+The Enclosing_Element of the An_Identifier element is the Association
+argument.
+@end{Indent}
 
-- If the Association is given in positional notation:
+@leading@;If the Association is given in positional notation:
 
-  Returns a Nil_Element.
+@begin{Indent}
+Returns a Nil_Element.
+@end{Indent}
+@end{Itemize}
 
-If the Association argument is from a Normalized list:
+@leading@;If the Association argument is from a Normalized list:
 
-- Returns A_Defining_Name representing the defining_identifier of the
-  parameter_specification or generic_formal_parameter_declaration.
-  Pragma_argument_association elements are not available in normalized form.
+@begin{Itemize}
+Returns A_Defining_Name representing the defining_identifier of the
+parameter_specification or generic_formal_parameter_declaration.
+Pragma_argument_association elements are not available in normalized form.
 
-- The Enclosing_Element of the A_Defining_Name is the
-  parameter_specification or generic_formal_parameter_declaration element.
+The Enclosing_Element of the A_Defining_Name is the
+parameter_specification or generic_formal_parameter_declaration element.
+@end{Itemize}
 
 Normalized lists contain artificial ASIS An_Association elements that
 provide one formal A_Defining_Name => An_Expression pair per
@@ -1021,46 +1111,61 @@ An_Expression @em @key[not] Is_Normalized(Association)
 @LabeledClause{function Actual_Parameter}
 
 
-    @key[function] @AdaSubDefn{Actual_Parameter} (Association : @key[in] Asis.Association)
-                              @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Actual_Parameter} (Association : @key[in] Asis.Association)
+                          @key[return] Asis.Expression;
+@end{Example}
 
 Association   @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the association to query
 
-If the Association argument is from an unnormalized list:
+@leading@;If the Association argument is from an unnormalized list:
 
-- Returns An_Expression representing:
+@begin{Itemize}
+@leading@;Returns An_Expression representing:
 
-  o the explicit_actual_parameter of a parameter_association.
+@begin{InnerItemize}
+the explicit_actual_parameter of a parameter_association.
 
-  o the explicit_generic_actual_parameter of a generic_association.
+the explicit_generic_actual_parameter of a generic_association.
 
-  o the name or expression of a pragma_argument_association.
+the name or expression of a pragma_argument_association.
+@end{InnerItemize}
 
-- The Enclosing_Element of An_Expression is the Association argument.
+@noprefix@;The Enclosing_Element of An_Expression is the Association argument.
+@end{Itemize}
 
-If the Association argument is from a Normalized list:
+@leading@;If the Association argument is from a Normalized list:
 
-- If the Association is given explicitly:
+@begin{Itemize}
+@leading@;If the Association is given explicitly:
 
-  o Returns An_Expression representing:
+@begin{InnerItemize}
+Returns An_Expression representing:
 
-    + the explicit_actual_parameter of a parameter_association.
+@begin{InnerInnerItemize}
+the explicit_actual_parameter of a parameter_association.
 
-    + the explicit_generic_actual_parameter of a generic_association.
+the explicit_generic_actual_parameter of a generic_association.
+@end{InnerInnerItemize}
 
-  o The Enclosing_Element of An_Expression is the Association argument.
+@noprefix@;The Enclosing_Element of An_Expression is the Association argument.
+@end{InnerItemize}
 
-- If the Association is given by default:
+@leading@;If the Association is given by default:
 
-  o Returns An_Expression representing:
+@begin{InnerItemize}
+Returns An_Expression representing:
 
-    + the corresponding default_expression of the Is_Normalized
-      A_Parameter_Association.
+@begin{InnerInnerItemize}
+the corresponding default_expression of the Is_Normalized
+A_Parameter_Association.
 
-    + the corresponding default_expression or default_name of the
-      Is_Normalized A_Generic_Association.
+the corresponding default_expression or default_name of the
+Is_Normalized A_Generic_Association.
+@end{InnerInnerItemize}
 
-  o The Enclosing_Element of the An_Expression element is the
+The Enclosing_Element of the An_Expression element is the
     parameter_specification or generic_formal_parameter_declaration that
     contains the default_expression or default_name, except for the case when
     this An_Expression element is an implicit naming expression
@@ -1068,12 +1173,14 @@ If the Association argument is from a Normalized list:
     instantiation for A_Box_Default. In the latter case, the Enclosing_Element
     for such An_Expression is the instantiation.
 
-  o Normalized lists contain artificial ASIS An_Association elements that
+Normalized lists contain artificial ASIS An_Association elements that
     provide one formal A_Defining_Name => An_Expression pair per
     association. These artificial associations are Is_Normalized.
     Artificial associations of default associations are
     Is_Defaulted_Association. Their component An_Expression elements are
     not Is_Normalized and are not Is_Defaulted_Association.
+@end{InnerItemize}
+@end{Itemize}
 
 If the argument is A_Pragma_Argument_Association, then this function may
 return any expression to support implementation-defined pragmas.
@@ -1095,37 +1202,50 @@ An_Expression
 @LabeledClause{function Discriminant_Selector_Names}
 
 
-    @key[function] @AdaSubDefn{Discriminant_Selector_Names}
-                (Association : @key[in] Asis.Discriminant_Association)
-                @key[return] Asis.Expression_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Discriminant_Selector_Names}
+            (Association : @key[in] Asis.Discriminant_Association)
+            @key[return] Asis.Expression_List;
+@end{Example}
 
-Association @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the discriminant association to query
+Association @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+discriminant association to query.
 
-If the Association argument is from an unnormalized list:
+@leading@;If the Association argument is from an unnormalized list:
 
-- If the Association is a named discriminant_association:
+@begin{Itemize}
+@leading@;If the Association is a named discriminant_association:
 
-  o Returns a list of the An_Identifier discriminant_selector_name elements in order
+@begin{InnerItemize}
+Returns a list of the An_Identifier discriminant_selector_name elements in order
     of appearance.
 
-  o The Enclosing_Element of the names is the Association argument.
+The Enclosing_Element of the names is the Association argument.
+@end{InnerItemize}
 
-- If the Association is a positional discriminant_association:
+@leading@;If the Association is a positional discriminant_association:
 
-  o Returns a Nil_Element_List.
+@begin{InnerItemize}
+Returns a Nil_Element_List.
+@end{InnerItemize}
 
-If the Association argument is from a Normalized list:
+@end{Itemize}
 
-- Returns a list containing a single A_Defining_Name element representing
+@leading@;If the Association argument is from a Normalized list:
+
+@begin{Itemize}
+Returns a list containing a single A_Defining_Name element representing
   the defining_identifier of the discriminant_specification.
 
-- The Enclosing_Element of the A_Defining_Name is the
+The Enclosing_Element of the A_Defining_Name is the
   discriminant_specification.
 
-- Normalized lists contain artificial ASIS An_Association elements that
+Normalized lists contain artificial ASIS An_Association elements that
   provide one formal A_Defining_Name => An_Expression pair per
   association. These artificial associations are Is_Normalized. Their
   component A_Defining_Name elements are not Is_Normalized.
+@end{Itemize}
 
 @leading@keepnext@;Appropriate Association_Kinds:
 @begin{Display}
@@ -1145,44 +1265,58 @@ An_Expression @em @key[not] Is_Normalized (Association)
 @LabeledClause{function Discriminant_Expression}
 
 
-    @key[function] @AdaSubDefn{Discriminant_Expression}
-                (Association : @key[in] Asis.Discriminant_Association)
-                @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Discriminant_Expression}
+            (Association : @key[in] Asis.Discriminant_Association)
+            @key[return] Asis.Expression;
+@end{Example}
 
-Association @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the discriminant_association to query
+Association @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+discriminant_association to query.
 
-If the Association argument is from an unnormalized list:
+@leading@;If the Association argument is from an unnormalized list:
 
-- Returns An_Expression representing the expression of the
+@begin{Itemize}
+Returns An_Expression representing the expression of the
   discriminant_association.
 
-- The Enclosing_Element of An_Expression is the Association argument.
+@noprefix@;The Enclosing_Element of An_Expression is the Association argument.
+@end{Itemize}
 
-If the Association argument is from a Normalized list:
+@leading@;If the Association argument is from a Normalized list:
 
-- If the Association is given explicitly:
+@begin{Itemize}
+@leading@;If the Association is given explicitly:
 
-  o Returns An_Expression representing the expression of the
+@begin{InnerItemize}
+Returns An_Expression representing the expression of the
     discriminant_association.
 
-  o The Enclosing_Element of An_Expression is the Association argument.
+The Enclosing_Element of An_Expression is the Association argument.
+@end{InnerItemize}
 
-- If the Association is given by default:
+@leading@;If the Association is given by default:
 
-  o Returns An_Expression representing:
+@begin{InnerItemize}
+@leading@;Returns An_Expression representing:
 
-    + the corresponding default_expression of the Is_Normalized
-      A_Discriminant_Association.
+@begin{InnerInnerItemize}
+the corresponding default_expression of the Is_Normalized
+A_Discriminant_Association.
+@end{InnerInnerItemize}
 
-  o The Enclosing_Element of the An_Expression element is the
+@noprefix@;The Enclosing_Element of the An_Expression element is the
     discriminant_specification that contains the default_expression.
+@end{InnerItemize}
 
-- Normalized lists contain artificial ASIS An_Association elements that
+Normalized lists contain artificial ASIS An_Association elements that
   provide one formal A_Defining_Name => An_Expression pair per
   association. These artificial associations are Is_Normalized.
   Artificial associations of default associations are
   Is_Defaulted_Association. Their component An_Expression elements are
   not Is_Normalized and are not Is_Defaulted_Association.
+@end{Itemize}
 
 @leading@keepnext@;Appropriate Association_Kinds:
 @begin{Display}
@@ -1199,9 +1333,13 @@ An_Expression
 @LabeledClause{function Is_Normalized}
 
 
-    @key[function] @AdaSubDefn{Is_Normalized} (Association : @key[in] Asis.Association) @key[return] Boolean;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Normalized} (Association : @key[in] Asis.Association) @key[return] Boolean;
+@end{Example}
 
-Association @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the association to query
+Association @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+association to query.
 
 Returns True if the association is a normalized, artificially created
 association returned by the queries Discriminant_Associations,
@@ -1213,19 +1351,27 @@ these queries.
 
 Returns False for any unexpected Element.
 
-Expected Association_Kinds:
-     A_Discriminant_Association
-     A_Record_Component_Association
-     A_Parameter_Association
-     A_Generic_Association
+@leading@keepnext@;Expected Association_Kinds:
+@begin{Display}
+A_Discriminant_Association
+A_Record_Component_Association
+A_Parameter_Association
+A_Generic_Association
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Is_Defaulted_Association}
 
 
-    @key[function] @AdaSubDefn{Is_Defaulted_Association}
-        (Association : @key[in] Asis.Association) @key[return] Boolean;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Defaulted_Association}
+    (Association : @key[in] Asis.Association) @key[return] Boolean;
+@end{Example}
 
-Association @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the association to query
+Association @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+association to query.
 
 Returns True if the association is a normalized, artificially created
 association returned by the queries Discriminant_Associations,
@@ -1238,9 +1384,12 @@ semantics and that was not explicitly supplied (typed) by the user.
 
 Returns False for any unexpected Element.
 
-Expected Association_Kinds:
-     A_Parameter_Association
-     A_Generic_Association
+@leading@keepnext@;Expected Association_Kinds:
+@begin{Display}
+A_Parameter_Association
+A_Generic_Association
+@end{Display}
+@end{DescribeCode}
 
 @begin{UsageNote}
 Always returns False for discriminant associations. Defaulted
@@ -1255,10 +1404,14 @@ Aggregates cannot have defaulted components.
 @LabeledClause{function Expression_Parenthesized}
 
 
-    @key[function] @AdaSubDefn{Expression_Parenthesized} (Expression : @key[in] Asis.Expression)
-                                      @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Expression_Parenthesized} (Expression : @key[in] Asis.Expression)
+                                  @key[return] Asis.Expression;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the parenthesized expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+parenthesized expression to query.
 
 Returns the expression within the parenthesis. This operation unwinds only
 one set of parenthesis at a time, so the result may itself be
@@ -1285,50 +1438,68 @@ An_Expression
 @LabeledClause{function Is_Prefix_Call}
 
 
-    @key[function] @AdaSubDefn{Is_Prefix_Call} (Expression : @key[in] Asis.Expression) @key[return] Boolean;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Prefix_Call} (Expression : @key[in] Asis.Expression) @key[return] Boolean;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the function call expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the function
+call expression to query.
 
 Returns True if the function call is in prefix form.
 
 Returns False for any unexpected Element.
 
-For example,
+@leading@;For example:
 
-      Foo (A, B);   -- Returns TRUE
-      "<" (A, B);   -- Returns TRUE
-      ... A < B ... -- Returns FALSE
+@begin{ChildExample}
+Foo (A, B);   -- @examcom{Returns True}
+"<" (A, B);   -- @examcom{Returns True}
+... A < B ... -- @examcom{Returns False}
+@end{ChildExample}
 
-Expected Expression_Kinds:
-     A_Function_Call
+@leading@keepnext@;Expected Expression_Kinds:
+@begin{Display}
+A_Function_Call
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Corresponding_Called_Function}
 
 
-    @key[function] @AdaSubDefn{Corresponding_Called_Function}
-            (Expression : @key[in] Asis.Expression)
-                @key[return] Asis.Declaration;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Called_Function}
+        (Expression : @key[in] Asis.Expression)
+            @key[return] Asis.Declaration;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the function_call to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+function_call to query.
 
 Returns the declaration of the called function.
 
-Returns a Nil_Element if the:
+@leading@;Returns a Nil_Element if the:
 
-- function_prefix denotes a predefined operator for which the implementation
+@begin{Itemize}
+function_prefix denotes a predefined operator for which the implementation
   does not provide an artificial function declaration,
 
-- prefix of the call denotes an access to a function implicit or explicit dereference,
+prefix of the call denotes an access to a function implicit or explicit
+  dereference,
 
-- argument is a dispatching call.
+argument is a dispatching call.
+@end{Itemize}
 
 If function_prefix denotes an attribute_reference, and if the corresponding
 attribute is (re)defined by an attribute definition clause, an implementation
 is encouraged, but not required, to return the definition of the corresponding
-subprogram whose name is used after “use” in this attribute definition
+subprogram whose name is used after @key[use] in this attribute definition
 clause. If an implementation cannot return such a subprogram definition, a
 Nil_Element should be returned. For an attribute reference which is not
-(re)defined by an attribute definition clause, a Nil_Element should be returned.
+(re)defined by an attribute definition clause, a Nil_Element should be
+returned.
 
 @leading@keepnext@;Appropriate Expression_Kinds:
 @begin{Display}
@@ -1378,12 +1549,17 @@ artificial implicit declarations for predefined operators.
 @LabeledClause{function Function_Call_Parameters}
 
 
-    @key[function] @AdaSubDefn{Function_Call_Parameters} (Expression : @key[in] Asis.Expression;
-                                       Normalized : @key[in] Boolean := False)
-                                      @key[return] Asis.Association_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Function_Call_Parameters} (Expression : @key[in] Asis.Expression;
+                                   Normalized : @key[in] Boolean := False)
+                                  @key[return] Asis.Association_List;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the function call expression to query
-Normalized  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether the normalized form is desired
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the function
+call expression to query.
+Normalized @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} whether the
+normalized form is desired.
 
 Returns a list of parameter_association elements of the call.
 
@@ -1428,13 +1604,13 @@ A_Parameter_Association
 @end{Display}
 @end{DescribeCode}
 
-@b{Implementation Requirement}s
-
+@begin{ImplReq}
 Normalized associations are Is_Normalized and Is_Part_Of_Implicit.
 Normalized associations provided by default are Is_Defaulted_Association.
 Normalized associations are never Is_Equal to unnormalized associations.
+@end{ImplReq}
 
-@b{Implementation Permissions}
+@begin{ImplPerm}
 
 An implementation may choose to always include default parameters in its
 internal representation.
@@ -1446,15 +1622,20 @@ elements.
 In either case, this query will return Is_Normalized associations even if
 Normalized is False, and the query Function_Call_Parameters_Normalized
 will return True.
+@end{ImplPerm}
+
 
 @LabeledClause{function Short_Circuit_Operation_Left_Expression}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Short_Circuit_Operation_Left_Expression}
+            (Expression : @key[in] Asis.Expression)
+            @key[return] Asis.Expression;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Short_Circuit_Operation_Left_Expression}
-                (Expression : @key[in] Asis.Expression)
-                @key[return] Asis.Expression;
-
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the short circuit operation to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the short
+circuit operation to query.
 
 Returns the expression preceding the reserved words @key[and then] or
 @key[or else] in the short circuit expression.
@@ -1475,11 +1656,15 @@ An_Expression
 @LabeledClause{function Short_Circuit_Operation_Right_Expression}
 
 
-    @key[function] @AdaSubDefn{Short_Circuit_Operation_Right_Expression}
-                (Expression : @key[in] Asis.Expression)
-                @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Short_Circuit_Operation_Right_Expression}
+            (Expression : @key[in] Asis.Expression)
+            @key[return] Asis.Expression;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the short circuit operation to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the short
+circuit operation to query.
 
 Returns the expression following the reserved words @key[or else] or
 @key[and then] in the short circuit expression.
@@ -1500,10 +1685,14 @@ An_Expression
 @LabeledClause{function Membership_Test_Expression}
 
 
-    @key[function] @AdaSubDefn{Membership_Test_Expression} (Expression : @key[in] Asis.Expression)
-                                        @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Membership_Test_Expression} (Expression : @key[in] Asis.Expression)
+                                    @key[return] Asis.Expression;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the membership test operation to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+membership test operation to query.
 
 Returns the expression on the left hand side of the membership test.
 
@@ -1525,11 +1714,15 @@ An_Expression
 @LabeledClause{function Membership_Test_Range}
 
 
-    @key[function] @AdaSubDefn{Membership_Test_Range}
-                (Expression : @key[in] Asis.Expression)
-                @key[return] Asis.Range_Constraint;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Membership_Test_Range}
+            (Expression : @key[in] Asis.Expression)
+            @key[return] Asis.Range_Constraint;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the membership test operation to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+membership test operation to query.
 
 Returns the range following the reserved words @key[in] or @key[not in] from
 the membership test.
@@ -1540,18 +1733,26 @@ An_In_Range_Membership_Test
 A_Not_In_Range_Membership_Test
 @end{Display}
 
-Returns Constraint_Kinds:
-     A_Range_Attribute_Reference
-     A_Simple_Expression_Range
+@leading@keepnext@;Returns Constraint_Kinds:
+@begin{Display}
+A_Range_Attribute_Reference
+A_Simple_Expression_Range
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Membership_Test_Subtype_Mark}
 
 
-    @key[function] @AdaSubDefn{Membership_Test_Subtype_Mark}
-                (Expression : @key[in] Asis.Expression)
-                @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Membership_Test_Subtype_Mark}
+            (Expression : @key[in] Asis.Expression)
+            @key[return] Asis.Expression;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the membership test operation to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+membership test operation to query.
 
 Returns the subtype_mark expression following the reserved words @key[in] or
 @key[not in] from the membership test.
@@ -1574,11 +1775,15 @@ An_Attribute_Reference
 @LabeledClause{function Converted_Or_Qualified_Subtype_Mark}
 
 
-    @key[function] @AdaSubDefn{Converted_Or_Qualified_Subtype_Mark}
-                   (Expression : @key[in] Asis.Expression)
-                       @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Converted_Or_Qualified_Subtype_Mark}
+               (Expression : @key[in] Asis.Expression)
+                   @key[return] Asis.Expression;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the type conversion or qualified expression to query.
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the type
+conversion or qualified expression to query.
 
 Returns the subtype_mark expression that converts or qualifies the
 expression.
@@ -1601,11 +1806,15 @@ An_Attribute_Reference
 @LabeledClause{function Converted_Or_Qualified_Expression}
 
 
-    @key[function] @AdaSubDefn{Converted_Or_Qualified_Expression}
-                   (Expression : @key[in] Asis.Expression)
-                       @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Converted_Or_Qualified_Expression}
+               (Expression : @key[in] Asis.Expression)
+                   @key[return] Asis.Expression;
+@end{Example}
 
-Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the type conversion or qualified expression to query
+Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the type
+conversion or qualified expression to query.
 
 Returns the expression being converted or qualified.
 
@@ -1625,8 +1834,11 @@ An_Expression
 @LabeledClause{function Allocator_Subtype_Indication}
 
 
-    @key[function] @AdaSubDefn{Allocator_Subtype_Indication} (Expression : @key[in] Asis.Expression)
-                                           @key[return] Asis.Subtype_Indication;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Allocator_Subtype_Indication} (Expression : @key[in] Asis.Expression)
+                                       @key[return] Asis.Subtype_Indication;
+@end{Example}
 
 Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the allocator
 expression to query.

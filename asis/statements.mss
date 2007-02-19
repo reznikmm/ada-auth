@@ -1,6 +1,6 @@
 @Part(statements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/statements.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2007/02/16 07:25:34 $}
+@comment{$Revision: 1.4 $ $Date: 2007/02/18 03:23:56 $}
 
 
 @LabeledSection{package Asis.Statements}
@@ -146,13 +146,16 @@ A_Pragma
 
 @LabeledClause{function Condition_Expression}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Condition_Expression} (Path : @key[in] Asis.Path)
+                              @key[return] Asis.Expression;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Condition_Expression} (Path : @key[in] Asis.Path)
-                                  @key[return] Asis.Expression;
+Path @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the execution path
+to query.
 
-Path @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the execution path to query
-
-Returns the condition expression for an IF path or an ELSIF path.
+Returns the condition expression for an @key[if] path or an @key[elsif] path.
 
 @leading@keepnext@;Appropriate Path_Kinds:
 @begin{Display}
@@ -169,13 +172,17 @@ An_Expression
 
 @LabeledClause{function Sequence_Of_Statements}
 
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Sequence_Of_Statements} (Path            : @key[in] Asis.Path;
+                                 Include_Pragmas : @key[in] Boolean := False)
+                                 @key[return] Asis.Statement_List;
+@end{Example}
 
-    @key[function] @AdaSubDefn{Sequence_Of_Statements} (Path            : @key[in] Asis.Path;
-                                     Include_Pragmas : @key[in] Boolean := False)
-                                     @key[return] Asis.Statement_List;
-
-Path            @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the execution path to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
+Path @chg{Version=[1],New=[specifies],Old=[           @en Specifies]} the
+execution path to query.
+Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
+pragmas are to be returned.
 
 Returns a list of the statements and pragmas from an execution path,
 in their order of appearance.
@@ -196,10 +203,14 @@ A_Pragma
 @LabeledClause{function Case_Expression}
 
 
-    @key[function] @AdaSubDefn{Case_Expression} (Statement : @key[in] Asis.Statement)
-                              @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Case_Expression} (Statement : @key[in] Asis.Statement)
+                          @key[return] Asis.Expression;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the case statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the case
+statement to query.
 
 Returns the expression of the case statement that determines which
 execution path is taken.
@@ -224,12 +235,16 @@ An_Expression
 @LabeledClause{function Case_Statement_Alternative_Choices}
 
 
-    @key[function] @AdaSubDefn{Case_Statement_Alternative_Choices} (Path : @key[in] Asis.Path)
-                                                 @key[return] Asis.Element_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Case_Statement_Alternative_Choices} (Path : @key[in] Asis.Path)
+                                             @key[return] Asis.Element_List;
+@end{Example}
 
-Path @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the case_statement_alternative execution path to query
+Path @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+case_statement_alternative execution path to query.
 
-Returns a list of the ‘when <choice> | <choice>' elements, in their
+Returns a list of the "@key[when] <choice> | <choice>" elements, in their
 order of appearance.
 
 @leading@keepnext@;Appropriate Path_Kinds:
@@ -242,7 +257,6 @@ A_Case_Path
 An_Expression
 A_Definition
 @end{Display}
-@end{DescribeCode}
 
 @leading@keepnext@;Returns Definition_Kinds:
 @begin{Display}
@@ -255,10 +269,14 @@ An_Others_Choice
 @LabeledClause{function Statement_Identifier}
 
 
-    @key[function] @AdaSubDefn{Statement_Identifier} (Statement : @key[in] Asis.Statement)
-                                   @key[return] Asis.Defining_Name;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Statement_Identifier} (Statement : @key[in] Asis.Statement)
+                               @key[return] Asis.Defining_Name;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the statement
+to query.
 
 Returns the identifier for the loop_statement or block_statement.
 
@@ -285,9 +303,13 @@ A_Defining_Identifier
 @LabeledClause{function Is_Name_Repeated (statement)}
 
 
-    @key[function] @AdaSubDefn{Is_Name_Repeated} (Statement : @key[in] Asis.Statement) @key[return] Boolean;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Name_Repeated} (Statement : @key[in] Asis.Statement) @key[return] Boolean;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the statement
+to query.
 
 Returns True if the name of the accept, loop, or block is repeated after
 the end of the statement. Always returns True for loop or block
@@ -295,18 +317,26 @@ statements since the name is required.
 
 Returns False for any unexpected Element.
 
-Expected Statement_Kinds:
-     A_Block_Statement
-     A_Loop_Statement
-     An_Accept_Statement
+@leading@keepnext@;Expected Statement_Kinds:
+@begin{Display}
+A_Block_Statement
+A_Loop_Statement
+An_Accept_Statement
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function While_Condition}
 
 
-    @key[function] @AdaSubDefn{While_Condition} (Statement : @key[in] Asis.Statement)
-                              @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{While_Condition} (Statement : @key[in] Asis.Statement)
+                          @key[return] Asis.Expression;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the loop statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the loop
+statement to query.
 
 Returns the condition expression associated with the while loop.
 
@@ -331,10 +361,14 @@ An_Expression
 @LabeledClause{function For_Loop_Parameter_Specification}
 
 
-    @key[function] @AdaSubDefn{For_Loop_Parameter_Specification} (Statement : @key[in] Asis.Statement)
-                                               @key[return] Asis.Declaration;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{For_Loop_Parameter_Specification} (Statement : @key[in] Asis.Statement)
+                                           @key[return] Asis.Declaration;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the loop statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the loop
+statement to query.
 
 Returns the declaration of the A_Loop_Parameter_Specification.
 
@@ -353,12 +387,17 @@ A_Loop_Parameter_Specification
 @LabeledClause{function Loop_Statements}
 
 
-    @key[function] @AdaSubDefn{Loop_Statements} (Statement       : @key[in] Asis.Statement;
-                              Include_Pragmas : @key[in] Boolean := False)
-                              @key[return] Asis.Statement_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Loop_Statements} (Statement       : @key[in] Asis.Statement;
+                          Include_Pragmas : @key[in] Boolean := False)
+                          @key[return] Asis.Statement_List;
+@end{Example}
 
-Statement       @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the loop statement to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
+Statement @chg{Version=[1],New=[specifies],Old=[      @en Specifies]} the loop
+statement to query.
+Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
+pragmas are to be returned.
 
 Returns the sequence_of_statements and any pragmas from the loop_statement,
 in their order of appearance.
@@ -381,9 +420,13 @@ A_Statement
 @LabeledClause{function Is_Declare_Block}
 
 
-    @key[function] @AdaSubDefn{Is_Declare_Block} (Statement : @key[in] Asis.Statement) @key[return] Boolean;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Declare_Block} (Statement : @key[in] Asis.Statement) @key[return] Boolean;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the statement
+to query.
 
 Returns True if the statement is a block_statement and it was created with
 the use of the @key[declare] reserved word. The presence or absence of any
@@ -392,19 +435,28 @@ declarative_item elements is not relevant.
 Returns False if the @key[declare] reserved word does not appear in the
 block_statement, or for any unexpected Element.
 
-Expected Statement_Kinds::
-     A_Block_Statement
+@leading@keepnext@;Expected Statement_Kinds:
+@begin{Display}
+A_Block_Statement
+@end{Display}
+@end{DescribeCode}
+
 
 @LabeledClause{function Block_Declarative_Items}
 
 
-    @key[function] @AdaSubDefn{Block_Declarative_Items}
-            (Statement       : @key[in] Asis.Statement;
-                Include_Pragmas : @key[in] Boolean := False)
-                @key[return] Asis.Declarative_Item_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Block_Declarative_Items}
+        (Statement       : @key[in] Asis.Statement;
+            Include_Pragmas : @key[in] Boolean := False)
+            @key[return] Asis.Declarative_Item_List;
+@end{Example}
 
-Statement       @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the block statement to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
+Statement @chg{Version=[1],New=[specifies],Old=[      @en Specifies]} the block
+statement to query.
+Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
+pragmas are to be returned.
 
 Returns a list of the declarations, representation_clause elements, pragmas,
 and use_clause elements in the declarative_part of the block_statement, in their
@@ -429,12 +481,17 @@ A_Clause
 @LabeledClause{function Block_Statements}
 
 
-    @key[function] @AdaSubDefn{Block_Statements} (Statement       : @key[in] Asis.Statement;
-                               Include_Pragmas : @key[in] Boolean := False)
-                               @key[return] Asis.Statement_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Block_Statements} (Statement       : @key[in] Asis.Statement;
+                           Include_Pragmas : @key[in] Boolean := False)
+                           @key[return] Asis.Statement_List;
+@end{Example}
 
-Statement       @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the block statement to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
+Statement @chg{Version=[1],New=[specifies],Old=[      @en Specifies]} the block
+statement to query.
+Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
+pragmas are to be returned.
 
 Returns a list of the statements and pragmas for the block_statement, in
 their order of appearance.
@@ -460,15 +517,20 @@ A_Statement
 @LabeledClause{function Block_Exception_Handlers}
 
 
-    @key[function] @AdaSubDefn{Block_Exception_Handlers} (Statement : @key[in] Asis.Statement;
-                                       Include_Pragmas : @key[in] Boolean := False)
-                                       @key[return] Asis.Exception_Handler_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Block_Exception_Handlers} (Statement : @key[in] Asis.Statement;
+                                   Include_Pragmas : @key[in] Boolean := False)
+                                   @key[return] Asis.Exception_Handler_List;
+@end{Example}
 
-Statement       @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the block statement to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
+Statement @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the block
+statement to query.
+Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
+pragmas are to be returned.
 
-Returns a list of the exception_handler elements of the block_statement, in their
-order of appearance.
+Returns a list of the exception_handler elements of the block_statement, in
+their order of appearance.
 
 The only pragmas returned are those following the reserved word @key[exception]
 and preceding the reserved word @key[when] of first exception handler.
@@ -491,10 +553,14 @@ A_Pragma
 @LabeledClause{function Exit_Loop_Name}
 
 
-    @key[function] @AdaSubDefn{Exit_Loop_Name} (Statement : @key[in] Asis.Statement)
-                             @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Exit_Loop_Name} (Statement : @key[in] Asis.Statement)
+                         @key[return] Asis.Expression;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the exit statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the exit
+statement to query.
 
 Returns the name of the exited loop.
 
@@ -517,10 +583,14 @@ A_Selected_Component
 @LabeledClause{function Exit_Condition}
 
 
-    @key[function] @AdaSubDefn{Exit_Condition} (Statement : @key[in] Asis.Statement)
-                             @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Exit_Condition} (Statement : @key[in] Asis.Statement)
+                         @key[return] Asis.Expression;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the exit statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the exit
+statement to query.
 
 Returns the @key[when] condition of the exit statement.
 
@@ -542,10 +612,14 @@ An_Expression
 @LabeledClause{function Corresponding_Loop_Exited}
 
 
-    @key[function] @AdaSubDefn{Corresponding_Loop_Exited} (Statement : @key[in] Asis.Statement)
-                                        @key[return] Asis.Statement;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Loop_Exited} (Statement : @key[in] Asis.Statement)
+                                    @key[return] Asis.Statement;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the exit statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the exit
+statement to query.
 
 Returns the loop statement exited by the exit statement.
 
@@ -565,10 +639,14 @@ A_For_Loop_Statement
 
 @LabeledClause{function Return_Expression}
 
-    @key[function] @AdaSubDefn{Return_Expression} (Statement : @key[in] Asis.Statement)
-                                @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Return_Expression} (Statement : @key[in] Asis.Statement)
+                            @key[return] Asis.Expression;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the return statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the return
+statement to query.
 
 Returns the expression in the return statement.
 
@@ -590,10 +668,14 @@ An_Expression
 @LabeledClause{function Goto_Label}
 
 
-    @key[function] @AdaSubDefn{Goto_Label} (Statement : @key[in] Asis.Statement)
-                         @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Goto_Label} (Statement : @key[in] Asis.Statement)
+                     @key[return] Asis.Expression;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the goto statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the goto
+statement to query.
 
 Returns the expression reference for the label, as specified by the goto
 statement.
@@ -613,11 +695,15 @@ An_Identifier
 @LabeledClause{function Corresponding_Destination_Statement}
 
 
-    @key[function] @AdaSubDefn{Corresponding_Destination_Statement}
-       (Statement : @key[in] Asis.Statement)
-        @key[return] Asis.Statement;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Destination_Statement}
+   (Statement : @key[in] Asis.Statement)
+    @key[return] Asis.Statement;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the goto statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the goto
+statement to query.
 
 Returns the target statement specified by the goto statement.
 
@@ -646,10 +732,14 @@ corresponding positions in the source text.
 @LabeledClause{function Called_Name}
 
 
-    @key[function] @AdaSubDefn{Called_Name} (Statement : @key[in] Asis.Statement)
-                          @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Called_Name} (Statement : @key[in] Asis.Statement)
+                     @key[return] Asis.Expression;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the procedure call or entry call statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the procedure
+call or entry call statement to query.
 
 Returns the name of the called procedure or entry. The name of an entry
 family takes the form of An_Indexed_Component.
@@ -670,28 +760,33 @@ An_Expression
 @LabeledClause{function Corresponding_Called_Entity}
 
 
-    @key[function] @AdaSubDefn{Corresponding_Called_Entity} (Statement : @key[in] Asis.Statement)
-                                          @key[return] Asis.Declaration;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Called_Entity} (Statement : @key[in] Asis.Statement)
+                                      @key[return] Asis.Declaration;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the procedure_call_statement or
-              entry_call_statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+procedure_call_statement or entry_call_statement to query.
 
 Returns the declaration of the procedure or entry denoted by the call.
 
-Returns a Nil_Element if the:
+@leading@keepnext@;Returns a Nil_Element if the:
 
-- prefix of the call denotes an access to a procedure implicit
-  or explicit dereference,
+@begin{Itemize}
+prefix of the call denotes an access to a procedure implicit
+or explicit dereference,
 
-- argument is a dispatching call,
+argument is a dispatching call,
 
-- argument is a call to a dispatching operation of a tagged type which
-  is not statically determined.
+argument is a call to a dispatching operation of a tagged type which
+is not statically determined.
+@end{Itemize}
 
 If procedure_prefix denotes an attribute_reference, and if the corresponding
 attribute is (re)defined by an attribute definition clause, an implementation
 is encouraged, but not required, to return the definition of the corresponding
-subprogram whose name is used after “use” in this attribute definition
+subprogram whose name is used after @key[use] in this attribute definition
 clause. If an implementation cannot return such a subprogram definition, a
 Nil_Element should be returned. For an attribute reference which is not
 (re)defined by an attribute definition clause, a Nil_Element should be returned.
@@ -744,13 +839,17 @@ on which part is returned.
 @LabeledClause{function Call_Statement_Parameters}
 
 
-    @key[function] @AdaSubDefn{Call_Statement_Parameters} (Statement  : @key[in] Asis.Statement;
-                                        Normalized : @key[in] Boolean := False)
-                                        @key[return] Asis.Association_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Call_Statement_Parameters} (Statement  : @key[in] Asis.Statement;
+                                    Normalized : @key[in] Boolean := False)
+                                    @key[return] Asis.Association_List;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the procedure_call_statement or
-              entry_call_statement to query
-Normalized  @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether the normalized form is desired
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+procedure_call_statement or entry_call_statement to query.
+Normalized @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} whether the
+normalized form is desired.
 
 Returns a list of parameter_association elements of the call.
 
@@ -796,14 +895,13 @@ A_Parameter_Association
 @end{Display}
 @end{DescribeCode}
 
-@b{Implementation Requirement}s
-
+@begin{ImplReq}
 Normalized associations are Is_Normalized and Is_Part_Of_Implicit.
 Normalized associations provided by default are Is_Defaulted_Association.
 Normalized associations are never Is_Equal to unnormalized associations.
+@end{ImplReq}
 
-@b{Implementation Permissions}
-
+@begin{ImplPerm}
 An implementation may choose to always include default parameters in its
 internal representation.
 
@@ -814,15 +912,20 @@ elements.
 In either case, this query will return Is_Normalized associations even if
 Normalized is False, and the query Call_Statement_Parameters_Normalized
 will return True.
+@end{ImplPerm}
 
 
 @LabeledClause{function Accept_Entry_Index}
 
 
-    @key[function] @AdaSubDefn{Accept_Entry_Index} (Statement : @key[in] Asis.Statement)
-                                 @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Accept_Entry_Index} (Statement : @key[in] Asis.Statement)
+                             @key[return] Asis.Expression;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the accept statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the accept
+statement to query.
 
 Returns the entry index expression in the accept statement.
 
@@ -844,10 +947,14 @@ An_Expression
 @LabeledClause{function Accept_Entry_Direct_Name}
 
 
-    @key[function] @AdaSubDefn{Accept_Entry_Direct_Name} (Statement : @key[in] Asis.Statement)
-                                       @key[return] Asis.Name;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Accept_Entry_Direct_Name} (Statement : @key[in] Asis.Statement)
+                                   @key[return] Asis.Name;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the accept statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the accept
+statement to query.
 
 Returns the direct name of the entry. The name follows the reserved word
 @key[accept].
@@ -867,10 +974,14 @@ An_Identifier
 @LabeledClause{function Accept_Parameters}
 
 
-    @key[function] @AdaSubDefn{Accept_Parameters} (Statement : @key[in] Asis.Statement)
-                                @key[return] Asis.Parameter_Specification_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Accept_Parameters} (Statement : @key[in] Asis.Statement)
+                            @key[return] Asis.Parameter_Specification_List;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the accept statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the accept
+statement to query.
 
 Returns a list of parameter specifications in the formal part of the accept
 statement, in their order of appearance.
@@ -896,12 +1007,17 @@ A_Parameter_Specification
 
 @LabeledClause{function Accept_Body_Statements}
 
-    @key[function] @AdaSubDefn{Accept_Body_Statements} (Statement       : @key[in] Asis.Statement;
-                                     Include_Pragmas : @key[in] Boolean := False)
-                                     @key[return] Asis.Statement_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Accept_Body_Statements} (Statement       : @key[in] Asis.Statement;
+                                 Include_Pragmas : @key[in] Boolean := False)
+                                 @key[return] Asis.Statement_List;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[      @en Specifies]} the accept statement to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
+Statement @chg{Version=[1],New=[specifies],Old=[      @en Specifies]} the
+accept statement to query.
+Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
+pragmas are to be returned.
 
 Returns the list of statements and pragmas from the body of the accept
 statement, in their order of appearance.
@@ -922,13 +1038,18 @@ A_Statement
 @LabeledClause{function Accept_Body_Exception_Handlers}
 
 
-    @key[function] @AdaSubDefn{Accept_Body_Exception_Handlers}
-                 (Statement       : @key[in] Asis.Statement;
-                  Include_Pragmas : @key[in] Boolean := False)
-                  @key[return] Asis.Statement_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Accept_Body_Exception_Handlers}
+             (Statement       : @key[in] Asis.Statement;
+              Include_Pragmas : @key[in] Boolean := False)
+              @key[return] Asis.Statement_List;
+@end{Example}
 
-Statement       @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the accept statement to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
+Statement @chg{Version=[1],New=[specifies],Old=[      @en Specifies]} the
+accept statement to query.
+Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
+pragmas are to be returned.
 
 Returns the list of exception handlers and pragmas from the body of the
 accept statement, in their order of appearance.
@@ -949,10 +1070,14 @@ An_Exception_Handler
 @LabeledClause{function Corresponding_Entry}
 
 
-    @key[function] @AdaSubDefn{Corresponding_Entry} (Statement : @key[in] Asis.Statement)
-                                  @key[return] Asis.Declaration;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Corresponding_Entry} (Statement : @key[in] Asis.Statement)
+                              @key[return] Asis.Declaration;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the accept statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the accept
+statement to query.
 
 Returns the declaration of the entry accepted in this statement.
 
@@ -971,10 +1096,14 @@ An_Entry_Declaration
 @LabeledClause{function Requeue_Entry_Name}
 
 
-    @key[function] @AdaSubDefn{Requeue_Entry_Name} (Statement : @key[in] Asis.Statement)
-                                 @key[return] Asis.Name;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Requeue_Entry_Name} (Statement : @key[in] Asis.Statement)
+                             @key[return] Asis.Name;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the requeue statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the requeue
+statement to query.
 
 Returns the name of the entry requeued by the statement.
 The name follows the reserved word @key[requeue].
@@ -995,10 +1124,14 @@ An_Expression
 @LabeledClause{function Delay_Expression}
 
 
-    @key[function] @AdaSubDefn{Delay_Expression} (Statement : @key[in] Asis.Statement)
-                               @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Delay_Expression} (Statement : @key[in] Asis.Statement)
+                           @key[return] Asis.Expression;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the delay statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the delay
+statement to query.
 
 Returns the expression for the duration of the delay.
 
@@ -1018,10 +1151,14 @@ An_Expression
 @LabeledClause{function Guard}
 
 
-    @key[function] @AdaSubDefn{Guard} (Path : @key[in] Asis.Path)
-                    @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Guard} (Path : @key[in] Asis.Path)
+                @key[return] Asis.Expression;
+@end{Example}
 
-Path @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the select statement execution path to query
+Path @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the select statement
+execution path to query.
 
 Returns the conditional expression guard for the path.
 
@@ -1046,12 +1183,16 @@ An_Expression
 @LabeledClause{function Aborted_Tasks}
 
 
-    @key[function] @AdaSubDefn{Aborted_Tasks} (Statement : @key[in] Asis.Statement)
-                            @key[return] Asis.Expression_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Aborted_Tasks} (Statement : @key[in] Asis.Statement)
+                        @key[return] Asis.Expression_List;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the abort statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the abort
+statement to query.
 
-Returns a list of the task names from the ABORT statement, in their order
+Returns a list of the task names from the @key[abort] statement, in their order
 of appearance.
 
 @leading@keepnext@;Appropriate Statement_Kinds:
@@ -1069,11 +1210,15 @@ An_Expression
 @LabeledClause{function Choice_Parameter_Specification}
 
 
-    @key[function] @AdaSubDefn{Choice_Parameter_Specification}
-       (Handler : @key[in] Asis.Exception_Handler)
-        @key[return] Asis.Declaration;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Choice_Parameter_Specification}
+   (Handler : @key[in] Asis.Exception_Handler)
+    @key[return] Asis.Declaration;
+@end{Example}
 
-Handler @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the exception handler to query
+Handler @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the exception
+handler to query.
 
 Returns the choice parameter specification following the reserved word
 @key[when] in the exception handler.
@@ -1096,12 +1241,16 @@ A_Choice_Parameter_Specification
 @LabeledClause{function Exception_Choices}
 
 
-    @key[function] @AdaSubDefn{Exception_Choices} (Handler : @key[in] Asis.Exception_Handler)
-                                @key[return] Asis.Element_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Exception_Choices} (Handler : @key[in] Asis.Exception_Handler)
+                            @key[return] Asis.Element_List;
+@end{Example}
 
-Handler @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the exception handler to query
+Handler @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the exception
+handler to query.
 
-Returns a list of the 'when <choice> | <choice>' elements, in their
+Returns a list of the "@key[when] <choice> | <choice>" elements, in their
 order of appearance. Choices are either the exception name expression or
 an others choice.
 
@@ -1126,12 +1275,17 @@ An_Others_Choice
 @LabeledClause{function Handler_Statements}
 
 
-    @key[function] @AdaSubDefn{Handler_Statements} (Handler         : @key[in] Asis.Exception_Handler;
-                                 Include_Pragmas : @key[in] Boolean := False)
-                                 @key[return] Asis.Statement_List;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Handler_Statements} (Handler         : @key[in] Asis.Exception_Handler;
+                             Include_Pragmas : @key[in] Boolean := False)
+                             @key[return] Asis.Statement_List;
+@end{Example}
 
-Handler         @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the exception handler to query
-Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be returned
+Handler @chg{Version=[1],New=[specifies],Old=[        @en Specifies]} the
+exception handler to query.
+Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
+pragmas are to be returned.
 
 Returns the list of statements and pragmas from the body of the
 exception handler, in their order of appearance.
@@ -1152,10 +1306,14 @@ A_Statement
 @LabeledClause{function Raised_Exception}
 
 
-    @key[function] @AdaSubDefn{Raised_Exception} (Statement : @key[in] Asis.Statement)
-                               @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Raised_Exception} (Statement : @key[in] Asis.Statement)
+                           @key[return] Asis.Expression;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the raise statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the raise
+statement to query.
 
 Returns the expression that names the raised exception.
 
@@ -1175,13 +1333,57 @@ A_Selected_Component
 @end{DescribeCode}
 
 
+@ChgAdded{Version=[2],Text=[@b{@Grow{@Grow{18.xx  function Raise_Statement_Message}}}]}
+@Comment{@LabeledAddedClause{Version=[2],Name=[function Raise_Statement_Message]}}
+@b{@i{Inserted clause, but not inserted now to avoid changing clause numbers. - RLB}}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Raise_Statement_Message} (Statement : @key[in] Asis.Statement)
+                           @key[return] Asis.Expression;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1]}
+@ChgAdded{Version=[2],Text=[Statement specifies the raise statement to query.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1]}
+@ChgAdded{Version=[2],Text=[Returns the string expression that is associated
+with the raised exception and follows the @key[with] keyword in the raise
+statement.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1]}
+@ChgAdded{Version=[2],Text=[Returns a Nil_Element if there is no string
+expression.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Appropriate Statement_Kinds:]}
+@begin{Display}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[A_Raise_Statement]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns Element_Kinds:]}
+@begin{Display}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Not_An_Element
+An_Expression]}
+@end{Display}
+@end{DescribeCode}
+
+
 @LabeledClause{function Qualified_Expression}
 
 
-    @key[function] @AdaSubDefn{Qualified_Expression} (Statement : @key[in] Asis.Statement)
-                                   @key[return] Asis.Expression;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Qualified_Expression} (Statement : @key[in] Asis.Statement)
+                               @key[return] Asis.Expression;
+@end{Example}
 
-Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the code statement to query
+Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the code
+statement to query.
 
 Returns the qualified aggregate expression representing the code statement.
 
@@ -1200,9 +1402,13 @@ A_Qualified_Expression
 @LabeledClause{function Is_Dispatching_Call}
 
 
-    @key[function] @AdaSubDefn{Is_Dispatching_Call} (Call : @key[in] Asis.Element) @key[return] Boolean;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Dispatching_Call} (Call : @key[in] Asis.Element) @key[return] Boolean;
+@end{Example}
 
-Call @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
+Call @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to
+query.
 
 Returns True if the controlling tag of Call is dynamically determined.
 
@@ -1211,28 +1417,40 @@ applies.
 
 Returns False for any unexpected Element.
 
-Expected Expression_Kinds:
-   A_Function_Call
+@leading@keepnext@;Expected Expression_Kinds:
+@begin{Display}
+A_Function_Call
+@end{Display}
 
-Expected Statement_Kinds:
-   A_Procedure_Call_Statement
+@leading@keepnext@;Expected Statement_Kinds:
+@begin{Display}
+A_Procedure_Call_Statement
+@end{Display}
+@end{DescribeCode}
 
 @LabeledClause{function Is_Call_On_Dispatching_Operation}
 
 
-    @key[function] @AdaSubDefn{Is_Call_On_Dispatching_Operation} (Call : @key[in] Asis.Element)
-                                              @key[return] Boolean;
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Is_Call_On_Dispatching_Operation} (Call : @key[in] Asis.Element)
+                                          @key[return] Boolean;
+@end{Example}
 
-Call @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
+Call @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to
+query.
 
 Returns True if the name or prefix of Call denotes the declaration of a
 primitive operation of a tagged type.
 
 Returns False for any unexpected Element.
 
-Expected Element_Kinds:
-   A_Function_Call
-   A_Procedure_Call_Statement
+@leading@keepnext@;Expected Element_Kinds:
+@begin{Display}
+A_Function_Call
+A_Procedure_Call_Statement
+@end{Display}
+@end{DescribeCode}
 
 @begin{Example}
 @ChgDeleted{Version=[1],Text=[@key[end] Asis.Statements;]}

@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2007/02/16 07:25:33 $}
+@comment{$Revision: 1.6 $ $Date: 2007/02/18 03:23:55 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -50,7 +50,9 @@ such implicit declarations.
 The Enclosing_Element for each implicit declaration is the declaration (type
 or object) that declared the type.
 
-For limited private types, if a user-defined equality operator has
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0015-1]}
+@Chg{Version=[2],New=[If],Old=[For limited private types, if]} a
+user-defined equality operator has
 been defined, an Ada implementation has two choices when dealing with an
 instance of the "/=" operator. a) treat A/=B as @key[not](A=B), b) implicitly
 create a "/=" operator. Implementations that take the second alternative
@@ -64,7 +66,13 @@ implementation-specific A/=B transformation.
 
 @leading@keepnext@;Appropriate Definition_Kinds:
 @begin{Display}
-A_Type_Definition
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0015-1]}
+A_Type_Definition@Chg{Version=[2],New=[
+A_Private_Type_Definition
+A_Tagged_Private_Type_Definition
+A_Private_Extension_Definition
+A_Task_Definition
+A_Protected_Definition],Old=[]}
 A_Formal_Type_Definition
 @end{Display}
 

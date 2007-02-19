@@ -1,6 +1,6 @@
 @Part(text, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/text.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2007/02/06 06:21:05 $}
+@comment{$Revision: 1.4 $ $Date: 2007/02/18 03:23:56 $}
 
 @LabeledSection{package Asis.Text}
 
@@ -157,10 +157,10 @@ the text of a compilation unit has any particular lifetime.
 
 @begin{DescribeCode}
 @begin{Example}
-@key[type] @AdaTypeDefn{Span} @key[is]                                       -- Default is Nil_Span
+@key[type] @AdaTypeDefn{Span} @key[is]                                       -- @examcom{Default is Nil_Span}
    @key[record]
-      First_Line   : Line_Number_Positive        := 1; -- 1..0 - empty
-      First_Column : Character_Position_Positive := 1; -- 1..0 - empty
+      First_Line   : Line_Number_Positive        := 1; -- @examcom{1..0 - empty}
+      First_Column : Character_Position_Positive := 1; -- @examcom{1..0 - empty}
       Last_Line    : Line_Number                 := 0;
       Last_Column  : Character_Position          := 0;
    @key[end record];
