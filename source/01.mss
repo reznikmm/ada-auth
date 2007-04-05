@@ -12,29 +12,25 @@ I probably ought to add a style just for this purpose)
 
 @begin{WideAbove}
 @noparanum@leading@tabclear()@tabset(P45)
-@Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:@Chg{Version=[2],New=[2007(E), Ed. 3],Old=[@Chg{Version=[1], New=[1995(E) with COR.1:2001], Old=[]}]}}]>
+@Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:@Chg{Version=[2],New=[@Chg{Version=[3],New=[20zz(E), Ed. 4],Old=[2007(E), Ed. 3]}],Old=[@Chg{Version=[1], New=[1995(E) with COR.1:2001], Old=[]}]}}]>
 @end{WideAbove}
 
 @thickline
 
+@begin{Title}
 @noparanum@ @*@comment{Some vertical whitespace}
-@ @*
-@ @*
 
-@noparanum@Swiss{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@b{Information technology
-@Em Programming}}}}}}}}}}
-
-@noparanum@Swiss{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@b{Languages @Em Ada}}}}}}}}}}
+@noparanum@Swiss{@b{Information technology @Em Programming}}@*
+@noparanum@Swiss{@b{Languages @Em Ada}}
 
 @noparanum@ @*@comment{Some vertical whitespace}
-@ @*
-@ @*
+@end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2007/02/18 03:22:22 $}
+@Comment{$Date: 2007/02/20 00:01:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.60 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of

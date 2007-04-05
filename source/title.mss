@@ -1,7 +1,7 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.34 $ $Date: 2007/02/18 03:22:32 $}
+@comment{$Revision: 1.35 $ $Date: 2007/02/20 00:01:25 $}
 
 @begin{ISOOnly}
 @Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[3],New=[20zz Ed. 4],Old=[@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
@@ -24,7 +24,9 @@
 @ @*
 
 @begin{ISOOnly}
-@Noparanum@Swiss{@Grow{@Grow{@Grow{@Grow{@Grow{@b{Information technology @Em Programming languages @Em Ada}}}}}}}
+@begin{Title}
+@Noparanum@Swiss{@b{Information technology @Em Programming languages @Em Ada}}
+@end{Title}
 @end{ISOOnly}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
@@ -47,10 +49,10 @@
 
 @begin{NotISO}
 @begin{RMOnly}
-@Noparanum@Heading{@Grow{@Grow{@Grow{Ada Reference Manual}}}}
+@Noparanum@Heading{Ada Reference Manual}
 @end{RMOnly}
 @begin{AARMOnly}
-@Noparanum@Heading{@Grow{@Grow{@Grow{Annotated Ada Reference Manual}}}}
+@Noparanum@Heading{Annotated Ada Reference Manual}
 @end{AARMOnly}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
