@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2007/02/06 04:48:46 $}
+@Comment{$Date: 2007/04/05 02:57:50 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 
 @begin{Intro}
 
@@ -658,8 +658,8 @@ whether to raise Tasking_Error.
 
 Should the task that created
 the new tasks never reach the point
-where it would initiate the activations (due to an abort or the
-raising of an exception),
+where it would initiate the activations (due to an abort or
+the raising of an exception),
 the newly created tasks become terminated and are never activated.
 @end{RunTime}
 

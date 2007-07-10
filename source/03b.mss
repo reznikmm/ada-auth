@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/02/18 03:22:23 $}
+@Comment{$Date: 2007/04/05 02:57:49 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.68 $}
+@Comment{$Revision: 1.69 $}
 
 @LabeledClause{Array Types}
 
@@ -1869,8 +1869,9 @@ a @nt{name} that denotes a component, protected subprogram,
 or entry of the type is allowed only in the following cases:
 
 @begin{Itemize}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
 A @nt{name} that denotes any component, protected subprogram,
-or entry is allowed within a
+or entry is allowed within @Chg{Version=[3],New=[an operational or],Old=[a]}
 representation item that occurs within the declaration of the composite type.
 
 A @nt{name} that denotes a noninherited discriminant

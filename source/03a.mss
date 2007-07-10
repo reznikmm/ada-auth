@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/02/06 04:48:32 $}
+@Comment{$Date: 2007/04/05 02:57:48 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1503,9 +1503,11 @@ All of the following are objects:
   access-to-object value (see @RefSecNum{Names});
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
-  the @Chg{Version=[2],New=[return object created as the ],Old=[]}result
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0015-1]}
+  the @Chg{Version=[2],New=[return object ],Old=[]}@Chg{Version=[3],
+  New=[of a function],Old=[@Chg{Version=[2],New=[created as the ],Old=[]}result
   of evaluating a @nt<function_call> (or the equivalent
-  operator invocation @em see @RefSecNum{Overloading of Operators});
+  operator invocation @em see @RefSecNum{Overloading of Operators})]};
 
   the result of evaluating an @nt<aggregate>;
 
@@ -1582,7 +1584,13 @@ The following (and no others) represent constants:
 
   the dereference of an access-to-constant value;
 
-  the result of evaluating a @nt<function_call> or an @nt<aggregate>;
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0015-1]}
+  @ChgAdded{Version=[3],Text=[the return object declared by an
+  @nt{extended_return_statement} with the reserved word @key[constant];]}
+
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0015-1]}
+  the @Chg{Version=[3],New=[object denoted by],Old=[result of evaluating]}
+  a @nt<function_call> or an @nt<aggregate>;
 
   a @nt<selected_component>, @nt<indexed_component>,
   @nt<slice>, or view conversion of a constant.

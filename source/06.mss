@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2007/02/06 04:48:44 $}
+@Comment{$Date: 2007/04/05 02:57:50 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1896,9 +1896,10 @@ innermost enclosing @nt{subprogram_@!body},
 @Syn{lhs=<@Chg{Version=[2],New=[simple_return_statement],Old=[return_statement]}>,rhs="@key{return} [@Syn2{expression}];"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0015-1]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=[extended_return_statement],Old=[]}>,
 rhs="@Chg{Version=[2],New=<
-    @key{return} @Syn2{defining_identifier} : [@Key{aliased}] @Syn2{return_subtype_indication} [:= @Syn2{expression}] [@Key{do}
+    @key{return} @Syn2{defining_identifier} : [@Key{aliased}] @Chg{Version=[3],New=<[@Key{constant}] >,Old=[]}@Syn2{return_subtype_indication} [:= @Syn2{expression}] [@Key{do}
         @Syn2{handled_sequence_of_statements}
     @key{end} @key{return}];>,Old=[]}"}
 
@@ -1947,6 +1948,7 @@ not be within a body that is within the construct to which the
 @Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]} applies.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0015-1]}
 A function body shall contain at least one
 @Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]} that
 applies to the function body,
@@ -1955,7 +1957,9 @@ A @Chg{Version=[2],New=[@nt{simple_@!return_@!statement}],Old=[@nt{return_@!stat
 include @Chg{Version=[2],New=[an @nt{expression}],Old=[a return expression]}
 if and only if it applies to a function
 body.@Chg{Version=[2],New=[ An @nt<extended_return_statement> shall apply to
-a function body.],Old=[]}
+a function body.],Old=[]}@Chg{Version=[3],New=[ An @nt{extended_return_statement}
+with the reserved word @key[constant] shall include an @nt{expression}.],Old=[]}
+
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
   The requirement that a function body has to have at least one
@@ -2050,10 +2054,13 @@ statically deeper than that of the master that elaborated the function body.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0015-1]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=[return object], Sec=(extended_return_statement)}
 Within an @nt{extended_return_statement}, the @i{return object} is declared
 with the given @nt{defining_identifier}, with the nominal subtype defined by
-the @nt{return_@!subtype_@!indication}.]}
+the @nt{return_@!subtype_@!indication}.@Chg{Version=[3],New=[ An
+@nt{extended_return_statement} with the reserved word @key[constant]
+is a full constant declaration for the return object.],Old=[]}]}
 @end{StaticSem}
 
 @begin{RunTime}

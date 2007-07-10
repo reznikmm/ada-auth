@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2007/02/18 03:22:26 $}
+@Comment{$Date: 2007/04/05 02:57:51 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.74 $}
+@Comment{$Revision: 1.75 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1187,13 +1187,14 @@ so @lquotes@;@key[with] A.B.C.D;@rquotes@; is illegal in the same places as
 @lquotes@;@key[with] A.B.C;@rquotes@;.
 @end{Discussion}
 @begin{Honest}
+  @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0005-1]}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00262-01]}
-  For the purposes of this rule,
+  @ChgDeleted{Version=[3],Text=[For the purposes of this rule,
   if a @nt{subprogram_body} has no preceding @nt{subprogram_declaration},
   the @nt{subprogram_body} should be considered a declaration and not a body.
   Thus, it is illegal for such a @nt{subprogram_body} to mention one of
   its siblings in a @Chg{Version=[2],New=[non-private ],Old=[]}@nt{with_clause}
-  if the sibling is a private library unit.
+  if the sibling is a private library unit.]}
 @end{Honest}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}

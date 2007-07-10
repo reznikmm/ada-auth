@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/02/18 03:22:23 $}
+@Comment{$Date: 2007/04/05 02:57:49 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1011,7 +1011,8 @@ about generic bodies. So we drop the extra text.}
 @Chg{Version=[2],New=[This rule],Old=[The part about generic bodies]} is
 necessary in order to preserve the contract model.
 
-@Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
+@Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0005-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00344-01]}
 @Chg{Version=[2],New=[If an ancestor],Old=[Since a generic unit can be instantiated at a
 deeper accessibility level than the generic unit, it is necessary to prevent
 type extensions whose parent is declared outside the generic unit.
@@ -1022,7 +1023,8 @@ If the parent is declared in the @nt{generic_declaration}
 because we know that the instance declaration and body will be at the
 same accessibility level.
 However, we still have a problem in that case,]} because
-it might have an unknown number of abstract subprograms,
+it might have an unknown number of@Chg{Version=[3],New=[],Old=[ abstract]}
+subprograms@Chg{Version=[3],New=[ that require overriding],Old=[]},
 as in the following example:
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised]}
