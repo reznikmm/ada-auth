@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2007/02/18 03:22:28 $}
+@Comment{$Date: 2007/07/10 05:00:52 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -3941,26 +3941,50 @@ freezing point to the end of the program text
   address if a link-name is used to reference the body.
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0019-1]}
+@ChgAdded{Version=[3],Text=[@Defn2{Term=[freezing], Sec=(profile)}This clause
+also defines a place in the program text where the profile of each declared
+callable entity becomes @i{frozen}. A use of a callable entity causes freezing
+of its profile in some contexts, as described below. At the place where the
+profile of a callable entity becomes frozen, the entity itself becomes
+frozen.]}
+
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0014]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0017-1],ARef=[AI05-0019-1]}
 @Defn2{Term=[freezing],
   Sec=(entity caused by the end of an enclosing construct)}
 The end of a @nt{declarative_part}, @nt{protected_body},
 or a declaration of a library package or generic library package,
-causes @i(freezing) of each entity declared within it,
+causes @i(freezing) of each
+entity @Chg{Version=[3],New=[and profile ],Old=[]}declared within it,
 except for incomplete types.
 @Defn2{Term=[freezing], Sec=(entity caused by a body)}
 A noninstance body@Chg{New=[ other than a renames-as-body],Old=[]} causes
-freezing of each entity declared before it within the same
-@nt{declarative_part}.
+freezing of each entity @Chg{Version=[3],New=[and profile ],Old=[]}declared
+before it within the same @nt{declarative_part}@Chg{Version=[3],
+New=[ that is not an incomplete type; it only causes
+freezing of an incomplete type if the body is within the immediate scope of the
+incomplete type],Old=[]}.
 @begin{Discussion}
-  This is worded carefully to handle nested packages
-  and private types.
+  This is worded carefully to handle nested packages and private types.
   Entities declared in a nested @nt{package_specification}
   will be frozen by some containing construct.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0017-1]}
   An incomplete type declared in the private part of
   a library @nt{package_specification}
-  can be completed in the body.
+  can be completed in the body.@Chg{Version=[3],New=[ For other
+  incomplete types (and in the bodies of library packages),
+  the completion of the type will be frozen at the end of
+  the package or @nt{declarative_part}, and that will freeze the
+  incomplete view as well.],Old=[]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0017-1]}
+@ChgAdded{Version=[3],Text=[The reason we have to worry about
+  freezing of incomplete types is to prevent premature uses of
+  the types in dispatching calls. Such uses may need access to
+  the tag of the type, and the type has to be frozen to know
+  where the tag is stored.]}
 @end{Discussion}
 @begin{Ramification}
   The part about bodies does not say @i{immediately} within.
@@ -4068,8 +4092,10 @@ of a component's @nt<constraint>, in which case,
 the freezing occurs later as part of another construct.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046],ARef=[AI95-00106-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0019-1]}
 @ChgAdded{Version=[1],Text=[@PDefn2{Term=[freezing], Sec=(by an implicit call)}
-An implicit call freezes the same entities that would be frozen by an
+An implicit call freezes the same
+entities @Chg{Version=[3],New=[and profiles ],Old=[]}that would be frozen by an
 explicit call. This is true even if the implicit call is removed via
 implementation permissions.]}
 
@@ -4127,6 +4153,38 @@ is frozen.
 In Ada 83, on the other hand, there is no occurrence of the name T,
 hence no forcing occurrence of T.
 @end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0019-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[@PDefn2{Term=[freezing], Sec=(profile of a function call)}
+At the place where a function call causes freezing, the profile of the function is
+frozen. Furthermore, if a parameter of the call is defaulted, the
+@nt{default_expression} for that parameter causes freezing.]}
+
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[ This is the important rule for profile freezing: a
+call freezes the profile. That's because generating the call will need to know
+how the parameters are passed, and that will require knowing details of the
+types. Other uses of subprograms do not need to know about the parameters, and
+thus only freeze the subprogram, and not the profile.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Note that we don't
+need to consider procedure or entry calls, since a body freezes
+everything that precedes it, and the end of a declarative part freezes
+everything in the declarative part.]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0019-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[@PDefn2{Term=[freezing], Sec=(profile of a callable entity by an instantiation)}
+At the place where a @nt{generic_instantiation} causes freezing of a callable
+entity, the profile of that entity is frozen.]}
+
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The generic might call the actual for one of its formal subprograms, so we need
+to know the profile.]}
+@end{Reason}
 
 @Leading@PDefn2{Term=[freezing], Sec=(entity caused by a name)}
 At the place where a @nt<name> causes freezing,
@@ -4197,20 +4255,22 @@ then all ancestor types are also frozen.
   This is necessary because derived access types share their parent's pool.
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0019-1]}
 @Leading@PDefn2{Term=[freezing], Sec=(subtypes of the profile of a callable entity)}
-At the place where a callable entity is frozen,
-each subtype of its profile is frozen.
-If the callable entity is a member of an entry family, the
-index subtype of the family is frozen.
+At the place where a @Chg{Version=[3],New=[profile],Old=[callable entity]}
+is frozen, each subtype of @Chg{Version=[3],New=[the],Old=[its]} profile is frozen.
+If the @Chg{Version=[3],New=[corresponding ],Old=[]}callable entity is
+a member of an entry family, the index subtype of the family is
+frozen.@Chg{Version=[3],New=[],Old=[
 @PDefn2{Term=[freezing], Sec=(function call)}
 At the place where a function call
 causes freezing, if a parameter of the call is defaulted,
-the @nt{default_@!expression} for that parameter causes freezing.
+the @nt{default_@!expression} for that parameter causes freezing.]}
 @begin{Discussion}
-  We don't worry about freezing for procedure calls or entry calls, since
-  a body freezes everything that precedes it, and
-  the end of a declarative part freezes everything in the declarative
-  part.
+@ChgRef{Version=[3],Kind=[Deleted]}@Comment{Moved above with rule}
+@ChgDeleted{Version=[3],Text=[We don't worry about freezing for procedure calls
+  or entry calls, since a body freezes everything that precedes it, and the end
+  of a declarative part freezes everything in the declarative part.]}
 @end{Discussion}
 
 @Leading@PDefn2{Term=[freezing],
@@ -4243,8 +4303,12 @@ the corresponding specific type is frozen as well.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00341-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0019-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[At the place where a specific
-tagged type is frozen, the primitive subprograms of the type are frozen.]}
+tagged type is frozen, the primitive subprograms of the type are
+frozen.@Chg{Version=[3],New=[],Old=[ At the place where a type is frozen,
+any subprogram named in an @nt{attribute_definition_clause} for the type
+is frozen.]}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[We have a language design principle that all of
@@ -4259,7 +4323,12 @@ tagged type is frozen, the primitive subprograms of the type are frozen.]}
   Initialize or Adjust can freeze a subprogram (the type and thus subprograms
   would have been frozen at worst at the same point).]}
 @end{ImplNote}
-
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0019-1]}
+  @ChgAdded{Version=[3],Text=[The second sentence is the rule that makes
+  it possible to check that only subprograms with convention Ada are
+  specified in @nt{attribute_definition_clause}s without going through hoops.]}
+@end{Discussion}
 @end{Itemize}
 
 @end{Intro}
@@ -4567,5 +4636,15 @@ Old=[@ntf{attribute_representation_clause}]} has been generalized.
   @ChgAdded{Version=[2],Text=[Added wording that defines when a tag is created
   for a type (at the freezing point of the type). This is used to specify
   checking for uncreated tags (see @RefSecNum{Tagged Types and Type Extensions}).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0017-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Reworded so that
+  incomplete types with a deferred completion aren't prematurely
+  frozen.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0019-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Separated the freezing of
+  the profile from the rest of a subprogram, in order to fix an unexpectedly
+  severe incompatibility with Ada 95 introduced by AI95-00341-01.]}
 @end{DiffWord95}
 

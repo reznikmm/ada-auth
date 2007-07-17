@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2007/04/05 02:57:50 $}
+@Comment{$Date: 2007/07/10 05:00:48 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.79 $}
+@Comment{$Revision: 1.80 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1069,18 +1069,27 @@ with any other profile.
 @PDefn{generic contract issue}
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0046-1]}
 @Defn2{Term=[full conformance], Sec=(for profiles)}
 @Defn2{Term=[profile],Sec=(fully conformant)}
 Two profiles are @i{fully conformant} if they
 are subtype-conformant, and corresponding parameters
-have the same names and have @nt<default_expression>s that
-are fully conformant with one another.
+have the same names and @Chg{Version=[3],New=[both or neither
+have @nt{null_exclusion}s and they ],Old=[]}have @nt<default_expression>s
+that are fully conformant with one another.
 @begin{Ramification}
 Full conformance requires subtype conformance,
 which requires the same calling conventions.
 However, the calling convention of the declaration and body of a
 subprogram or entry are always the same by definition.
 @end{Ramification}
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0046-1]}
+@ChgAdded{Version=[3],Text=[The part about @nt{null_exclusion}s is
+  necessary to prevent controlling parameters from having different
+  exclusions, as such a parameter is defined to exclude
+  null whether or not an exclusion is given.]}
+@end{Reason}
 
 @leading@Defn2{Term=[full conformance], Sec=(for expressions)}
 Two expressions are @i(fully conformant) if,
@@ -1244,6 +1253,10 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00409-01]}
   @ChgAdded{Version=[2],Text=[Defined the conformance of anonymous
   access-to-subprogram parameters.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0046-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected to require
+  @nt{null_exclusion}s to match for full conformance.]}
 @end{DiffWord95}
 
 
@@ -2075,7 +2088,8 @@ the return object is created and the converted value is assigned to
 the return object. Otherwise, the return object is created and initialized
 by default as for a stand-alone object of its nominal subtype (see
 @RefSecNum{Object Declarations}). If the nominal subtype is indefinite, the
-return object is constrained by its initial value.@PDefn2{Term=[creation],Sec=[of a return object]}]}
+return object is constrained by its initial
+value.@PDefn2{Term=[creation],Sec=[of a return object]}@PDefn{constrained by its initial value}]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2132,14 +2146,17 @@ of the @nt<expression>.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00344-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0024-1]}
 @ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[]}@ChgNote{A dummy
 ChgDeleted to get conditional "Leading".}If
 the result type @Chg{Version=[2],New=[of a function ],Old=[]}is a specific
 tagged type@Chg{Version=[2],New=[, the tag of the return object is that
 of the result type. If the result type is class-wide, the tag of the
 return object is that of the value of the expression. A check is made that
-the accessibility level of the type identified by the tag of the result is
-not deeper than that of the master that elaborated the function body. If
+the @Chg{Version=[3],New=[master],Old=[accessibility level]} of the type
+identified by the tag of the result @Chg{Version=[3],New=[includes the
+elaboration],Old=[is not deeper than that]} of the master that elaborated
+the function body. If
 this check fails, Program_Error is raised.@Defn2{Term=[Program_Error],
 Sec=(raised by failure of run-time check)}
 @IndexCheck{Accessibility_Check}],Old=[:]}
@@ -2164,10 +2181,22 @@ Sec=(raised by failure of run-time check)}
   the value being returned (assuming there are no discriminants).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The check prevents the returned object
+  @ChgRef{Version=[3],Kind=[Revised]}
+  @ChgAdded{Version=[2],Text=[The @Chg{Version=[3],New=[master ],Old=[]}check
+  prevents the returned object
   from outliving its type. Note that this check cannot fail for a specific
   tagged type, as the tag represents the function's type, which necessarily
   must be declared outside of the function.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We can't use the normal accessibility level
+    @lquotes@;deeper than@rquotes@; check
+    here because we may have @lquotes@;incomparable@rquotes@; levels if
+    the masters belong to two different tasks. This can happen when an
+    accept statement calls a function declared in the enclosing task body, and
+    the function returns an object passed to it from the accept statement, and
+    this object was itself a parameter to the accept statement.]}
+
 @end{Reason}
 @begin{NotIso}
 @ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 9
@@ -2498,6 +2527,15 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   object. This gives implementations more flexibility to do built-in-place
   returns, and is essential for limited types (which cannot be built in a
   temporary).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0015-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> The unintentionally omitted
+  keyword @key[constant] and associated rules were added to
+  @nt{extended_return_statement}s.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0024-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the master check
+  for tags since the masters may be for different tasks and thus incomparable.]}
 @end{DiffWord95}
 
 

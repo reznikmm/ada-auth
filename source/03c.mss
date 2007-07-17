@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/04/05 02:57:49 $}
+@Comment{$Date: 2007/07/10 05:00:46 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.79 $}
+@Comment{$Revision: 1.80 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4332,26 +4332,35 @@ follows:],Old=[.]}
 @begin{InnerItemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
-@ChgAdded{Version=[2],Text=[for an @nt{allocator} used to define the constraint
-in a @nt{subtype_declaration}, the level of the @nt{subtype_declaration};]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
-@ChgAdded{Version=[2],Text=[for an @nt{allocator} used to define the constraint
-in a @nt{component_definition}, the level of the enclosing type;]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0024-1]}
 @ChgAdded{Version=[2],Text=[for an @nt{allocator} used to define the
-discriminant of an object, the level of the object.]}
+@Chg{Version=[3],New=[discriminant of an object,
+the level of the object],Old=[constraint in a
+@nt{subtype_declaration}, the level of the @nt{subtype_declaration}]};]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0024-1]}
+@ChgAdded{Version=[2],Text=[for an @nt{allocator} used to define the constraint
+in a @Chg{Version=[3],New=[@nt{subtype_indication} in any other context, the
+level of the master that elaborates the
+@nt{subtype_indication}.],Old=[@nt{component_definition}, the level of the
+enclosing type;]}]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0024-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[for an @nt{allocator}
+used to define the discriminant of an object, the level of the object.]}]}
 
 @end{InnerItemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0024-1]}
 @ChgAdded{Version=[2],NoPrefix=[T],Text=[@Defn2{Term=[coextension],Sec=(of an object)}
-In this last case, the allocated object is said to
-be a @i{coextension} of the object whose discriminant designates it, as well as of any
-object of which the discriminated object is itself a coextension or
-subcomponent. All coextensions of an object are finalized
-when the object is finalized (see @RefSecNum{Completion and Finalization}).]}
+In @Chg{Version=[3],New=[the first],Old=[this last]} case, the allocated object
+is said to be a @i{coextension} of the object whose discriminant designates it,
+as well as of any object of which the discriminated object is itself a
+coextension or subcomponent. All coextensions of an object are finalized when
+the object is finalized (see @RefSecNum{Completion and Finalization}).]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Added]}
@@ -4982,6 +4991,14 @@ denotes an aliased view of an object}:
     @ChgRef{Version=[2],Kind=[Revised]}
     The check is needed for access parameters @Chg{Version=[2],New=[ of
     an access-to-object type],Old=[]} and in instance bodies.
+
+    @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0024-1]}
+    @ChgAdded{Version=[3],Text=[Because there are no access parameters permitted for task
+    entries, the accessibility levels are always comparable. We would have to
+    switch to the terminology used in @RefSecNum{Allocators} and
+    @RefSecNum{Return Statements} based on inclusion within
+    masters if we relax this restriction. That might introduce unacceptable
+    distributed overhead.]}
   @end{Ramification}
   @begin(ImplNote)
     @ChgRef{Version=[2],Kind=[Revised]}
@@ -5268,6 +5285,10 @@ uses of anonymous access types.],Old=[]}
 the accessibility of the object designated by an access object is that
 of the access type, even when no dereference is given. This correction
 applies to both Ada 95 and Ada 2005.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0024-1]}
+@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected accessibility
+rules for access discriminants so that no cases are omitted.]}
 @end{DiffWord95}
 
 

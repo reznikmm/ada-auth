@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.52 $ $Date: 2006/10/19 06:40:33 $ $Author: Randy $ }
+@comment{ $Revision: 1.53 $ $Date: 2007/07/10 05:00:55 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2006/10/19 06:40:33 $}
+@Comment{$Date: 2007/07/10 05:00:55 $}
 
 @LabeledClause{String Handling}
 
@@ -705,9 +705,12 @@ the order in COBOL's MOVE verb.@end{reason}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0056-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Each Index function searches, starting from From, for a slice of
 Source, with length Pattern'Length, that matches Pattern with respect to
-Mapping; the parameter Going indicates the direction of the lookup. If
+Mapping; the parameter Going indicates the direction of the lookup.
+@Chg{Version=[3],New=[If Source is the null string, Index returns 0;
+otherwise, if],Old=[If]}
 From is not in Source'Range, then Index_Error is propagated. If Going =
 Forward, then Index returns the smallest index I which is greater than or equal
 to From such that the slice of Source starting at I matches Pattern. If Going =
@@ -728,6 +731,15 @@ string, then Pattern_Error is propagated.]}
    parameter that is a Character_Mapping_Function; if there were, a call would
    be ambiguous since there is also a default for the Mapping parameter that is
    a Character_Mapping.]}
+
+   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0056-1]}
+   @ChgAdded{Version=[3],Text=[The language does not define when the
+   Pattern_Error check is made. (That's because many common searching
+   implementations require a non-empty pattern) That means that the result for
+   a call like @f{Index ("", "")} could be 0 or could raise Pattern_Error.
+   Similarly, in the call @f{Index ("", "", From => 2)}, the language does not
+   define whether Pattern_Error or Index_Error is raised.]}
+
 @end{Discussion}
 
 @begin{Example}@Keepnext
@@ -788,9 +800,12 @@ the parameter Going indicates the direction of the lookup.
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0056-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Index searches for the first or
 last occurrence of any of a set of characters (when Test=Inside), or any of the
-complement of a set of characters (when Test=Outside). If From is not in
+complement of a set of characters (when Test=Outside).
+@Chg{Version=[3],New=[If Source is the null string, Index returns 0;
+otherwise, if],Old=[If]} From is not in
 Source'Range, then Index_Error is propagated. Otherwise, it returns the
 smallest index I >= From (if Going=Forward) or the largest index I <= From (if
 Going=Backward) such that Source(I) satisfies the Test condition with respect
@@ -1140,6 +1155,10 @@ string handling subprograms, Constraint_Error is propagated.
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0049],ARef=[AI95-00128-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Replace_Slice,
   Delete, and "*" always return a string with lower bound 1.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0056-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Clarified that Index
+  never raises Index_Error if the source string is null.]}
 @end{DiffWord95}
 
 

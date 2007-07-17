@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2007/02/06 04:48:48 $}
+@Comment{$Date: 2007/07/10 05:00:51 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -43,8 +43,11 @@ we sometimes use @lquotes@;@i{occurrence}@rquotes@; as a
 short-hand for @lquotes@;exception occurrence.@rquotes@;
 @end{Honest}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0043-1]}
 @redundant[An @nt{exception_declaration} declares a name for an exception.
-An exception is raised initially either by a @nt{raise_statement}
+An exception is raised initially either by a
+@nt{raise_statement}@Chg{Version=[3],New=[, by a call to
+Raise_Exception,],Old=[]}
 or by the failure of a language-defined check.
 When an exception arises, control can be transferred to a
 user-provided @nt{exception_handler} at the end of a
@@ -65,6 +68,12 @@ The same issue applies to a re-raise statement.
 In order to understand these semantics,
 we have to make this distinction.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0043-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a missing Ada 95
+  case to the list of ways that an exception can be initially raised.]}
+@end{DiffWord95}
 
 @LabeledClause{Exception Declarations}
 
@@ -663,6 +672,7 @@ about the exception occurrence.
 Reraise_Occurrence reraises the specified exception occurrence.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01],ARef=[AI95-00378-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0043-1]}
 @ChgAdded{Version=[2],Text=[Exception_Message returns the message associated
 with the given Exception_Occurrence. For an occurrence raised by a call to
 Raise_Exception, the message is the Message parameter passed to Raise_Exception.
@@ -672,10 +682,17 @@ the @Syni{string_}@nt{expression}. For the occurrence raised by a
 @nt{raise_statement} with
 an @Syni{exception_}@nt{name} but without a @Syni{string_}@nt{expression},
 the message is a string giving implementation-defined information about the
-exception occurrence. In all cases, Exception_Message returns a string with
-lower bound 1.]}
+exception occurrence. @Chg{Version=[3],New=[For an occurrence originally raised
+for some other reason, the message is an unspecified
+string.@PDefn{unspecified} ],Old=[]}In all cases, Exception_Message
+returns a string with lower bound 1.]}
 @ImplDef{The information returned by Exception_Message.}
 
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0043-1]}
+  @ChgAdded{Version=[3],Text=[There is @ImplAdviceName about the contents
+  of this string for language-defined checks.]}
+@end{Discussion}
 @begin{Ramification}
 @Leading@Keepnext@;Given an exception E, the @nt{raise_statement}:
 @begin{Example}
@@ -1151,6 +1168,11 @@ exception contains such a character.]}
   @ChgAdded{Version=[2],Text=[Added Wide_Exception_Name and
   Wide_Wide_Exception_Name
   because identifiers can now contain characters outside of Latin-1.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0043-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added explicit wording
+  that the exception message for language-defined checks is unspecified.
+  The old wording appeared inclusive, but it was not.]}
 @end{DiffWord95}
 
 

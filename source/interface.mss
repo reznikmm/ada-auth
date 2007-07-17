@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.48 $ $Date: 2006/10/18 00:25:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.49 $ $Date: 2007/07/10 05:00:54 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:28 $}
+@Comment{$Date: 2007/07/10 05:00:54 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -181,7 +181,10 @@ T is a record type that has no discriminants and that only has
 components with statically-constrained subtypes, and
 each component type is @i[L]-compatible,
 
-T is an access-to-object type, and its designated type is @i[L]-compatible,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0002-1]}
+T is an access-to-object type, @Chg{Version=[3],New=[],Old=[and ]}its
+designated type is @i[L]-compatible,@Chg{Version=[3],New=[ and
+its designated subtype is not an unconstrained array subtype,],Old=[]}
 
 T is an access-to-subprogram type,
 and its designated profile's parameter and result types are all @i[L]-compatible.
@@ -567,6 +570,14 @@ upward compatibility.
   @ChgAdded{Version=[2],Text=[Added wording to say all bets are off if
   foreign code doesn't follow the semantics promised by the Ada
   specifications.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0002-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Access types that
+  designate unconstrained arrays are no longer defined to be
+  @i[L]-compatible. Such access-to-arrays require bounds information,
+  which is likely to be incompatible with a foreign language. Note
+  that implementations can still support any type that it wants
+  as @i[L]-compatible; such uses will not be portable, however.]}
 @end{DiffWord95}
 
 
@@ -1320,6 +1331,34 @@ implementation shall support pragma Convention with a C_Pass_By_Copy
 @begin{ImplPerm}
 An implementation may provide additional declarations in the C
 interface packages.
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0002-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[An implementation need not support
+an interfacing pragma specifying convention C or C_Pass_By_Copy in the
+following cases:]}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[an Export or Convention pragma applied to a
+subprogram which has a parameter of an unconstrained array subtype;]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[an interfacing pragma applied to a function with an
+unconstrained array result subtype;]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[an interfacing pragma applied to an object whose
+nominal subtype is an unconstrained array subtype.]}
+@end{Itemize}
+@begin{ImplNote}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0002-1]}
+@ChgAdded{Version=[3],Text=[These rules ensure that an implementation never
+needs to create bounds for an unconstrained array that originates in C (and
+thus does not have bounds). An implementation can do so if it wishes, of
+course. Note that these permissions do not extend to passing an unconstrained
+array as a parameter to a C function; in this case, the bounds can simply be
+dropped and thus support is required.]}
+@end{ImplNote}
 @end{ImplPerm}
 
 @begin{ImplAdvice}
@@ -1383,11 +1422,21 @@ An Ada parameter of an access-to-subprogram type
 is passed as a pointer to a
 C function whose prototype corresponds to the designated subprogram's
 specification.
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0002-1]}
+@ChgAdded{Version=[3],Text=[An Ada parameter of a
+private type is passed as specified for the full view of the type.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0002-1]}
+@ChgAdded{Version=[3],Text=[The rules of correspondence given above for
+parameters of mode @key[in] also apply to the return object of a function.]}
+
 @end[itemize]
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00337-01]}
-@ChgAdded{Version=[2],Text=[An Ada parameter of a private type is passed
-as specified for the full view of the type.]}
+@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0002-1]}
+@ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[An Ada parameter of a
+private type is passed as specified for the full view of the type.],Old=[]}]}
 
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[If C interfacing is supported, the interface correspondences between Ada
@@ -1493,6 +1542,12 @@ specific numbers and types of parameters.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00376-01]}
   @ChgAdded{Version=[2],Text=[Added wording to make it clear that these
   facilities can also be used with C++.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0002-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a definition
+  of correspondences for function results. Also added wording to make
+  it clear that we do not expect the implementation to conjure bounds
+  for unconstrained arrays out of thin air.]}
 @end{DiffWord95}
 
 

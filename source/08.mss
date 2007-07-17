@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2007/02/06 04:48:45 $}
+@Comment{$Date: 2007/07/10 05:00:50 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.74 $}
+@Comment{$Revision: 1.75 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1478,6 +1478,15 @@ type;]}
 @ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is
 @key{overriding}, then the operation shall override a homograph at the place of
 the declaration or body;]}
+
+@begin{Honest}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+@ChgAdded{Version=[3],Text=[This doesn't require that the overriding happen
+at precisely the place of the declaration or body; it only requires that the
+region in  which the overriding is known to have happened includes this
+place. That is, the overriding can happen at or before the place of the
+declaration or body.]}
+@end{Honest}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[if the @nt{overriding_indicator} is

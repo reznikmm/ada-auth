@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.57 $ $Date: 2006/11/09 06:29:49 $}
+@comment{$Revision: 1.58 $ $Date: 2007/07/10 05:00:54 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -29,7 +29,9 @@ Corrigendum 1 was published in June 2001.]}
 guidelines for the preparation of an Amendment to the International Standard.
 WG 9 approved the scope of the Amendment in June 2004. In April 2006, WG 9
 approved and forwarded the Amendment to SC 22 for approval, which was granted
-in August 2006. Final ISO/IEC approval is expected by early 2007.]}
+in August 2006. Final ISO/IEC approval @Chg{Version=[3],New=[occurred in
+January 2007, and Amendment 1 was published in March],Old=[is expected
+by early]} 2007.]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgAdded{Version=[1],Text=[The Technical Corrigendum lists the individual
@@ -45,11 +47,14 @@ as well as correct errors.]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgRef{Version=[2],Kind=[RevisedAdded]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}
 @Chg{New=[When ISO published Technical Corrigendum 1, it did not also publish
 a document that merges the @Chg{Version=[2],New=[changes from the ],Old=[]}Technical
 Corrigendum @Chg{Version=[2],New=[],Old=[changes ]}into
-the text of the International Standard.@Chg{Version=[2],New=[ It is not
-known whether ISO will publish a document that merges the changes from
+the text of the International Standard.@Chg{Version=[2],New=[ @Chg{Version=[3],
+New=[Similarly,],Old=[It is not
+known whether]} ISO @Chg{Version=[3],New=[did not],Old=[will]} publish a
+document that merges the changes from
 Technical Corrigendum and Amendment 1 into the text of the International
 Standard.],Old=[]}
 However, ISO rules require that the

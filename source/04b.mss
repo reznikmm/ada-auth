@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2007/02/06 04:48:43 $}
+@Comment{$Date: 2007/07/10 05:00:48 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1480,12 +1480,14 @@ AI83-00150.
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01],ARef=[AI95-00416-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0024-1]}
 @ChgAdded{Version=[2],Text=[For any @nt{allocator}, if the designated type of
 the type of the @nt{allocator}
-is class-wide, then a check is made that the accessibility level of the type
+is class-wide, then a check is made that the @Chg{Version=[3],New=[master],
+Old=[accessibility level]} of the type
 determined by the @nt{subtype_indication}, or by the tag of the value of the
-@nt{qualified_expression}, is not
-deeper than that of the type of the @nt{allocator}. If the
+@nt{qualified_expression}, @Chg{Version=[3],New=[includes the elaboration],
+Old=[is not deeper than that]} of the type of the @nt{allocator}. If the
 designated subtype of the @nt{allocator} has one or more unconstrained
 access discriminants, then a check is made that the accessibility
 level of the anonymous access type of each access discriminant is
@@ -1495,14 +1497,42 @@ if either such check fails.@IndexCheck{Accessibility_Check}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
-  @ChgAdded{Version=[2],Text=[The accessibility check on class-wide types
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0024-1]}
+  @ChgAdded{Version=[2],Text=[The
+  @Chg{Version=[3],New=[master],Old=[accessibility check]} on class-wide types
   prevents the allocated object from outliving its type. We need the run-time
   check in instance bodies, or when the type of the @nt{qualified_expression}
   is class-wide (other cases are statically detected).]}
 
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0024-1]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[We can't use the normal
+    accessibility level @lquotes@;deeper than@rquotes@; check
+    here because we may have @lquotes@;incomparable@rquotes@; levels if
+    the appropriate master and the type declaration belong to two different
+    tasks. This can happen when
+    checking the master of the tag for an allocator initialized by
+    a parameter passed in to an accept statement, if the type of the allocator
+    is an access type declared in the enclosing task body. For example:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@key[task body] TT @key[is]
+   @key[type] Acc_TC @key[is access] T'Class;
+   P : Acc_TC;
+@key[begin]
+   @key[accept] E(X : T'Class) @key[do]
+      P := @key[new] T'Class'(X);
+         @RI[--  Master check on tag of X.]
+         @RI[--  Can't use "accessibility levels" since they might be incomparable.]
+         @RI[--  Must revert to checking that the master of the type identified by]
+         @RI[--  X'tag includes the elaboration of Acc_TC, so it is sure to outlive it.]
+   @key[end] E;]}
+@end{Example}
+
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[The accessibility check on access discriminants
   prevents the allocated object from outliving its discriminants.]}
+
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280-01]}
@@ -1705,6 +1735,10 @@ has been moved to @RefSec{Storage Management}.
   @ChgAdded{Version=[2],Text=[Added accessibility checks to access
   discriminants of @nt{allocator}s. These checks could not fail in Ada 95
   as the discriminants always have the accessibility of the object.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0024-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the master check
+  for tags since the masters may be for different tasks and thus incomparable.]}
 @end{DiffWord95}
 
 

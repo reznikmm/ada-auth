@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2007/02/18 03:22:25 $}
+@Comment{$Date: 2007/07/10 05:00:49 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1584,9 +1584,11 @@ Old=[@RefSecNum{Deferred Constants}]}).
 @end{Legality}
 
 @begin{RunTime}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
 @PDefn2{Term=[elaboration], Sec=(deferred constant declaration)}
 The elaboration of a deferred constant declaration
-elaborates the @nt<subtype_indication> or (only allowed in the case of an
+elaborates the @nt<subtype_indication>@Chg{Version=[3],New=[,
+@nt<access_definition>,],Old=[]} or (only allowed in the case of an
 imported constant) the @nt<array_type_definition>.
 @end{RunTime}
 
@@ -1898,7 +1900,8 @@ is @Chg{Version=[2],New=[],Old=[a descendant of ]}one of the following:
   @ChgAdded{Version=[2],Text=[The rules for interfaces are asymmetrical, but
   the language is not: if the parent interface is limited, the presence of the
   word @key{limited} determines the limitedness, and nonlimited progenitors are
-  illegal by the rules in @RefSecNum{Interface Types}. If the parent interface
+  illegal by the rules in @RefSecNum{Interface Types} if @key{limited} is
+  present. If the parent interface
   is nonlimited, the word @key{limited} is illegal by the rules in
   @RefSecNum{Derived Types and Classes}. The net effect is that the order of
   the interfaces doesn't matter.]}

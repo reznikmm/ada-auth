@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2007/02/18 03:22:24 $}
+@Comment{$Date: 2007/07/10 05:00:47 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2200,10 +2200,11 @@ take advantage of that definition.
   a subtype. See AI83-00313.
 @end(Ramification)
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0037-1]}
 @IndexCheck{Index_Check}
 For an @nt{array_aggregate} with an @key(others) choice,
-a check is made that no @nt<expression> is specified
-for an index value outside the bounds determined by the
+a check is made that no @nt<expression>@Chg{Version=[3],New=[ or <>],Old=[]}
+is specified for an index value outside the bounds determined by the
 applicable index constraint.
 @begin{Discussion}
 RM83 omitted this case,
@@ -2368,6 +2369,11 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
   they can be different for an @nt{extended_return_statement}, and we want
   to use the subtype that's explicitly in the code at the point of the
   @nt{expression}.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0037-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Fixed so the check
+  for components outside of the array applies to both @nt<expression>s and
+  <>s.]}
 @end{DiffWord95}
 
 

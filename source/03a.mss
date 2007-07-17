@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/04/05 02:57:48 $}
+@Comment{$Date: 2007/07/10 05:00:45 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1696,6 +1696,11 @@ assigning to an enclosing object.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Clarified that the return object is the object
   created by a function call.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0015-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added wording to allow
+  return objects to be declared as constants, and corrected the definition
+  of return objects as objects.]}
 @end{DiffWord95}
 
 @LabeledSubClause{Object Declarations}

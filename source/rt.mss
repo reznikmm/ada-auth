@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.76 $ $Date: 2007/02/18 03:22:31 $ $Author: Randy $ }
+@comment{ $Revision: 1.77 $ $Date: 2007/07/10 05:00:53 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2007/02/18 03:22:31 $}
+@Comment{$Date: 2007/07/10 05:00:53 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1564,10 +1564,14 @@ EDF_Across_Priorities that includes the base priority of @i<T>;]}
 @i<T>;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised], ARef=[AI05-0055-1]}
 @ChgAdded{Version=[2],Text=[the highest priority @i<P>, if any, less than the
 base priority of @i<T> such that one or more tasks are executing within a
 protected object with ceiling priority @i<P> and task @i<T>
-has an earlier deadline than all such tasks.]}
+has an earlier deadline than all such tasks@Chg{Version=[3],New=[;
+and furthermore @i<T> has an an earlier deadline than all other tasks on
+ready queues with priorities in the given EDF_Across_Priorities range that
+are strictly less than @i<P>],Old=[]}.]}
 @end{Itemize}
 
 @begin{Ramification}
@@ -1666,6 +1670,12 @@ follows the existing rules for ceiling locking.]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Policy EDF_Across_Priorities and package Dispatching.EDF are new.]}
 @end{Extend95}
+
+@begin{Diffword95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0055-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected definition
+  of active priority to avoid deadline inversion in an unusual case.]}
+@end{Diffword95}
 
 
 @LabeledClause{Priority Ceiling Locking}

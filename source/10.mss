@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2007/04/05 02:57:51 $}
+@Comment{$Date: 2007/07/10 05:00:51 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1305,8 +1305,10 @@ generic instance, or a renaming.]]}
 
 @begin(Itemize)
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0040-1]}
 @ChgAdded{Version=[2],Text=[in the @nt{context_clause} for the
-explicit declaration of the named library package;]}
+explicit declaration of the named library package@Chg{Version=[3],New=[ or
+any of its descendants],Old=[]};]}
 
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1330,6 +1332,14 @@ explicit declaration of the named library package;]}
   the private part of P and the private child P.Child, which occurs in
   interfacing and other problems. Since the child always semantically depends
   on the parent, this is the only way such a dependence can be broken.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0040-1]}
+  @ChgAdded{Version=[3],Text=[The part about descendants catches examples like]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{limited} @key{with} P;
+@key{package} P.Child @key{is} ...]}
+@end{Example}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
@@ -1518,6 +1528,11 @@ definition in @RefSecNum{Use Clauses}.
   allow using private units in more locations than in Ada 95.]}
 @end{Extend95}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0040-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added missing rule that
+  a limited with clause cannot name an ancestor unit.]}
+@end{DiffWord95}
 
 @LabeledSubClause{Subunits of Compilation Units}
 
@@ -3096,9 +3111,12 @@ units.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
-The creation of a@Chg{Version=[2],New=[n object @Redundant[(including a component)] of
-a type that does not have preelaborable initialization. Similarly,],
-Old=[ default-initialized object @Redundant[(including
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0028-1]}
+The creation of @Chg{Version=[2],New=[an object @Redundant[(including a
+component)] @Chg{Version=[3],New=[that is initialized by default, if
+its],Old=[of a]} type @Chg{Version=[3],New=[],Old=[that ]}does not have
+preelaborable initialization. Similarly,],
+Old=[a default-initialized object @Redundant[(including
 a component)] of a descendant of a private type,
 private extension, controlled type,
 task type, or protected type with
@@ -3135,9 +3153,15 @@ formal subprogram is a user-defined subprogram.]}
 @Defn{generic contract issue}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00403-01]}
-@ChgAdded{Version=[2],Text=[the actual for each formal private type (or
-extension) declared within the formal part of the generic unit is a private
-type (or extension) that does not have preelaborable initialization;]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI95-0028-1]}
+@ChgAdded{Version=[2],Text=[the actual for each@Chg{Version=[3],
+New=[ discriminated formal derived type,],Old=[]} formal private
+type@Chg{Version=[3],New=[, ],Old=[ (]}or
+@Chg{Version=[3],New=[formal private ],Old=[]}extension@Chg{Version=[3],New=[],Old=[)]}
+declared within the formal part of the generic unit is a private
+type (or extension) that does not have preelaborable initialization@Chg{Version=[3],
+New=[, unless @nt<pragma>
+Preelaborable_Initialization has been applied to the formal type],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00403-01]}
 @ChgAdded{Version=[2],Text=[the actual for each formal type is nonstatic;]}
@@ -3209,12 +3233,14 @@ specify which entities have @i{preelaborable initialization}:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[The partial view of a private type or private extension, a protected
-type without @nt<entry_declaration>s, a generic formal private type, or a
-generic formal derived type, have preelaborable initialization if and only if
-the @nt<pragma> Preelaborable_Initialization has been applied to them.
-@Redundant[A protected type with @nt{entry_declaration}s or a task type never
-has preelaborable initialization.]]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0028-1]}
+@ChgAdded{Version=[2],Text=[The partial view
+of a private type or private extension, a protected type without
+@nt<entry_declaration>s, a generic formal private type, or a generic formal
+derived type, @Chg{Version=[3],New=[has],Old=[have]} preelaborable
+initialization if and only if the @nt<pragma> Preelaborable_Initialization has
+been applied to them. @Redundant[A protected type with @nt{entry_declaration}s
+or a task type never has preelaborable initialization.]]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[A component (including a discriminant) of a record or
@@ -3225,12 +3251,15 @@ include a default expression and its type has preelaborable
 initialization.]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[A derived type has preelaborable initialization if its
-parent type has preelaborable initialization and (in the case of a derived
-record extension) if the non-inherited components all have
-preelaborable initialization. However, a user-defined controlled type with an
-overriding Initialize procedure does not have preelaborable
-initialization.]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0028-1]}
+@ChgAdded{Version=[2],Text=[A derived type has preelaborable initialization
+if its parent type has preelaborable initialization and (in the case of a
+derived record extension) if the non-inherited components all have
+preelaborable initialization. However, a @Chg{Version=[3],New=[],
+Old=[user-defined ]}controlled type with an
+@Chg{Version=[3],New=[],Old=[overriding ]}Initialize procedure
+@Chg{Version=[3],New=[that is not a null procedure ],Old=[]}does not
+have preelaborable initialization.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01],ARef=[AI95-00345-01]}
 @ChgAdded{Version=[2],Text=[A view of a type has preelaborable initialization if it
@@ -3245,19 +3274,40 @@ preelaborable initialization. This pragma shall appear in the visible part
 of a package or generic package.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01],ARef=[AI95-00345-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0028-1]}
 @ChgAdded{Version=[2],Text=[If the pragma appears in the first list of
 @nt{basic_declarative_item}s of a
 @nt<package_specification>, then the @nt<direct_name> shall denote the first
-subtype of a private type, private extension, or protected type that is not
+subtype of a @Chg{Version=[3],New=[composite],Old=[private]}
+type@Chg{Version=[3],New=[],Old=[, private extension, or protected type that is not
 an interface type and is without
-@nt<entry_declaration>s, and the type shall be declared immediately within
+@nt<entry_declaration>s]}, and the type shall be declared immediately within
 the same package
 as the @nt<pragma>. If the @nt<pragma> is applied to a private type or a
 private extension, the full view of the type shall have preelaborable
-initialization. If the @nt<pragma> is applied to a protected type, each
-component of the protected type shall have preelaborable initialization. In
-addition to the places where Legality Rules normally apply, these rules apply
+initialization. If the @nt<pragma> is applied to a protected type,
+@Chg{Version=[3],New=[the protected type shall not have
+entries, and ],Old=[]}each
+component of the protected type shall have preelaborable initialization.
+@Chg{Version=[3],New=[For any other composite type, the type shall have
+preelaborable initialization. ],Old=[]}@PDefn{generic contract issue}In
+addition to the places where @LegalityTitle normally apply
+(see @RefSecNum{Generic Instantiation}), these rules apply
 also in the private part of an instance of a generic unit.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0028-1]}
+  @ChgAdded{Version=[3],Text=[The reason why we need the pragma for private
+  types, private extensions, and protected types is fairly clear: the
+  properties of the full view determine whether the type has preelaborable
+  initialization or not; in order to preserve privacy we need a way to express
+  on the partial view that the full view is well-behaved. The reason why we
+  need the pragma for other composite types is more subtle: a non-null override
+  for Initialize might occur in the private part, even for a nonprivate type;
+  in order to preserve privacy, we need a way to express on a type declared in
+  a visible part that the private part does not contain any nasty override of
+  Initialize.]}
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
 @ChgAdded{Version=[2],Text=[If the @nt<pragma> appears in a @nt<generic_formal_part>, then the
@@ -3305,8 +3355,10 @@ A @nt{pragma} Pure is a library unit pragma.
 @begin{StaticSem}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00366-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0035-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn{pure}
-A @i{pure} @nt{library_item} is a preelaborable @nt{library_item} whose
+A @i{pure} @Chg{Version=[3],New=[compilation unit],Old=[@nt{library_item}]}
+is a preelaborable @Chg{Version=[3],New=[compilation unit],Old=[@nt{library_item}]} whose
 elaboration does not perform any of the following actions:]}
 
 @begin{Itemize}
@@ -3354,7 +3406,9 @@ evaluates such an @nt{allocator};]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[the elaboration of the declaration of a named
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0035-1]}
+@ChgAdded{Version=[2],Text=[the elaboration of the declaration of a
+@Chg{Version=[3],New=[non-derived ],Old=[]}named
 access-to-variable type unless the Storage_Size of the type
 has been specified by a static expression with value zero or
 is defined by the language to be zero;]}
@@ -3378,7 +3432,9 @@ is defined by the language to be zero;]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[the elaboration of the declaration of a named
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0035-1]}
+@ChgAdded{Version=[2],Text=[the elaboration of the declaration of a
+@Chg{Version=[3],New=[non-derived ],Old=[]}named
 access-to-constant type for which the Storage_Size has been specified by an
 expression other than a static expression with value zero.]}
 
@@ -3394,10 +3450,16 @@ expression other than a static expression with value zero.]}
 
 @end{Itemize}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0035-1]}
+@ChgAdded{Version=[3],Text=[A generic body is pure only if elaboration of a
+corresponding instance body would not perform any such actions presuming any
+composite formal types have non-visible components whose default initialization
+evaluates an @nt{allocator} of an access-to-variable type.]}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00366-01]}
-@ChgAdded{Version=[2],Text=[
-The Storage_Size for an anonymous access-to-variable type declared at
-library level in a library unit that is declared pure is defined to be zero.]}
+@ChgAdded{Version=[2],Text=[The Storage_Size for an anonymous
+access-to-variable type declared at library level in a library unit that is
+declared pure is defined to be zero.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3426,13 +3488,21 @@ subprogram,
 task unit, or protected unit.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0035-1]}
 @Defn{declared pure}
 A @nt{pragma} Pure is used to declare that a library unit is pure.
-If a @nt{pragma} Pure applies to a library unit,
-then its compilation units shall be pure,
-and they shall depend semantically only on
-compilation units of other library units that are
-declared pure.@Chg{Version=[2],New=[ Furthermore, the full view of any
+@Chg{Version=[3],New=[The declaration and
+body of a declared pure library unit, and all subunits that are
+elaborated as part of elaborating the library unit, shall be pure.
+In addition, all],Old=[If a @nt{pragma} Pure applies to a library unit,
+then its]} compilation units @Chg{Version=[3],New=[of a declared pure
+library unit],Old=[shall be pure, and they]} shall depend semantically
+only on compilation units of other library units that are
+declared pure.@Chg{Version=[3],New=[ @PDefn{generic contract issue}
+In addition to the places where @LegalityTitle normally apply
+(see @RefSecNum{Generic Instantiation}), this rule also
+applies in the private part of an instance of a generic unit.],
+Old=[]}@Chg{Version=[2],New=[ Furthermore, the full view of any
 partial view declared in the visible part of the library unit that has
 any available stream attributes shall support external streaming
 (see @RefSecNum{Stream-Oriented Attributes}).],Old=[]}
@@ -3712,4 +3782,36 @@ required to appear last.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
   @ChgAdded{Version=[2],Text=[Disallowed pragma Elaborate and Elaborate_All
   for packages that are mentioned in a @nt{limited_with_clause}.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0035-1]}
+  @ChgAdded{Version=[3],Text=[@B<Corrigendum 2:> Adjusted wording so that
+  subunits can be pure (they are not a @nt<library_item>, but they
+  are a compilation unit).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0035-1]}
+  @ChgAdded{Version=[3],Text=[@B<Corrigendum 2:> Adjusted wording so
+  that the rules for access types only apply to non-derived types
+  (derived types share their storage pool with their parent, so if
+  the parent access type is legal, so is any derived type.)]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0035-1]}
+  @ChgAdded{Version=[3],Text=[@B<Corrigendum 2:> Added an assume-the-worst
+  rule for generic bodies (else they would never be checked for purity)
+  and added the boilerplate so that the entire generic specification is
+  rechecked. Also fixed wording to have consistent handling for subunits
+  for Pure and Preelaborate.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0028-1]}
+  @ChgAdded{Version=[3],Text=[@B<Corrigendum 2:> Corrected a serious
+  unintended incompatibility in the new preelaboration wording @em
+  explicit initialization of objects of types that don't have
+  preelaborable initialization was not allowed.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0028-1]}
+  @ChgAdded{Version=[3],Text=[@B<Corrigendum 2:> Fixed minor issues with
+  preelaborable initialization (PI): null Initialize procedures do not make
+  a type non-PI; formal types with pragma PI can be assumed to have PI;
+  formal extensions are assumed to not have PI; all composite types
+  can have pragma PI (so that the possibility of hidden Initialize routines
+  can be handled).]}
 @end{DiffWord95}
