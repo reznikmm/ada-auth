@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2007/07/10 05:00:47 $}
+@Comment{$Date: 2007/07/17 02:11:48 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.86 $}
+@Comment{$Revision: 1.87 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -72,17 +72,24 @@ is expected to be of any access type.
 @end{Resolution}
 
 @begin{StaticSem}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0008-1]}
 @PDefn2{Term=[nominal subtype], Sec=(associated with a dereference)}
 If the type of the @nt{name} in a dereference is some access-to-object
 type @i(T), then the dereference denotes a view of an object, the
-@i(nominal subtype) of the view being the designated subtype of @i(T).
+@i(nominal subtype) of the view being the designated subtype
+of @i(T).@Chg{Version=[3],New=[ If the designated subtype has
+unconstrained discriminants, the (actual) subtype of the view is constrained
+by the values of the discriminants of the designated object, except when
+there is a partial view of the type of the designated subtype that does not
+have discriminants, in which case the dereference is not constrained by its
+discriminant values.],Old=[]}
 @begin{Ramification}
-If the
-value of the @nt<name> is the result of an access type conversion, the
-dereference denotes a view created as part of the conversion.
-The nominal subtype of the view is not necessarily
-the same as that used to create the designated object.
-See @RefSecNum{Type Conversions}.
+  If the
+  value of the @nt<name> is the result of an access type conversion, the
+  dereference denotes a view created as part of the conversion.
+  The nominal subtype of the view is not necessarily
+  the same as that used to create the designated object.
+  See @RefSecNum{Type Conversions}.
 @end{Ramification}
 @begin{Honest}
   @PDefn2{Term=[nominal subtype], Sec=(of a @nt<name>)}
@@ -91,23 +98,27 @@ See @RefSecNum{Type Conversions}.
   the @nt<name> (presuming the @nt<name> denotes a view of an object).
   These two uses of nominal subtype are intended to mean the same
   thing.
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
-  @ChgAdded{Version=[2],Text=[If an @nt{allocator} for the access-to-object
-  type @i(T) is one that creates objects that are constrained by their
-  initial value (see @RefSecNum{Allocators}), the subtype of the dereference is
-  constrained even if the designated subtype of @i(T) is not. We don't want
-  the effect of the dereference to depend on the
-  designated object. This matters because general access-to-unconstrained
-  can designate both allocated objects (which are constrained at birth) and
-  aliased stack objects (which aren't necessarily constrained).
-  This is a wording bug that was discovered after the completion of
-  Amendment 1 when it was too late to fix it; we expect that it will
-  be corrected by an early Ada 2005 AI.]}
 @end{Honest}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
+  @ChgAdded{Version=[3],Text=[The last sentence was not present in Ada 95;
+    it is necessary in Ada 2005 because general access types can designate
+    unconstrained objects (that was not possible in Ada 95). Thus, the rules
+    that had this effect in Ada 95 (the object being constrained by its initial
+    value) don't work in Ada 2005 and we have to say this explicitly.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
+  @ChgAdded{Version=[3],Text=[The @ldquote@;except@rdquote@; part of the
+   last sentence prevents privacy
+    @ldquote@;breaking@rdquote@;, so that
+    if a private type has discriminants only in the full view, they don't
+    interfere with freely interassigning values between objects of the type,
+    even when the objects live in the heap.]}
+@end{Reason}
 @begin{ImplNote}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
-  @ChgAdded{Version=[2],Text=[Since we don't depend on whether the designated
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
+  @ChgAdded{Version=[3],Text=[Since we don't depend on whether the designated
   object is constrained, it is not necessary to include a constrained
   bit in every object that could be designated by a general access type.]}
 @end{ImplNote}
@@ -262,6 +273,13 @@ We no longer use the term @i(appropriate for a type)
 since we now describe the semantics of a prefix in terms
 of implicit dereference.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
+@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a missing rule so
+that most dereferences are assumed constrained (without determining whether the
+designated object is.]}
+@end{DiffWord95}
 
 @LabeledSubClause{Indexed Components}
 

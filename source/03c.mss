@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/07/10 05:00:46 $}
+@Comment{$Date: 2007/07/17 02:11:47 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.80 $}
+@Comment{$Revision: 1.81 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4837,12 +4837,17 @@ denotes an aliased view of an object}:
   @end{discussion}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00363-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0008-1]}
   The view shall not be a subcomponent that
-  depends on discriminants of a variable whose
-  nominal subtype is unconstrained,
+  depends on discriminants of @Chg{Version=[3],New=[an object unless
+  the object is known to be constrained],Old=[a
+  variable whose nominal subtype is unconstrained,
   unless this subtype is indefinite,
   or the variable is @Chg{Version=[2],New=[constrained by its initial value],
-  Old=[aliased]}.
+  Old=[aliased]}]}.@Chg{Version=[3],New=[ @PDefn{generic contract issue}In
+  addition to the places where @LegalityTitle normally apply
+  (see @RefSecNum{Generic Instantiation}), this rule applies also in the
+  private part of an instance of a generic unit.],Old=[]}
 
   @begin(Discussion)
     @comment{The following is a "fix" to keep consistent with v. 5.95;
@@ -4892,24 +4897,6 @@ denotes an aliased view of an object}:
      constraint is defined in terms of a discriminant of the derived type
      (see @RefSecNum(Discriminants)).
   @end{ImplNote}
-  @begin{Honest}
-    @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
-    @ChgAdded{Version=[2],Text=[If X is a subcomponent that depends on
-    discriminants, and the subcomponent is a dereference of a general access
-    type whose designated type is unconstrained and whose discriminants
-    have defaults, the attribute is illegal. Such a
-    general access type can designate an unconstrained (stack) object.
-    Since such a type might not designate an object
-    constrained by its initial value, the 'Access is illegal @em the rule
-    says @lquotes@;is@rquotes constrained by its initial value, not
-    @lquotes@;might be@rquotes constrained by its initial value.
-    No other interpretation makes sense, as we can't have legality depending
-    on something (which object is designated) that is not known at
-    compile-time, and we surely can't allow this for unconstrained objects.
-    The wording of the rule
-    should be much clearer on this point, but this was discovered after the
-    completion of Amendment 1 when it was too late to fix it.]}
-  @end{Honest}
 
   @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010],ARef=[AI95-00127-01]}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00363-01]}
@@ -5236,6 +5223,18 @@ to be passed to an access parameter of an access-to-subprogram type. The now
 illegal uses of 'Access can almost always be moved to the private part of the
 generic unit, where they are still legal (and rechecked upon instantiation for
 possibly dangling pointers).],Old=[]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
+@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Simplified the description
+of when a discriminant-dependent component is allowed as the prefix of
+'Access to when the object is known to be constrained. This fixes
+a confusion as to whether a subcomponent of an object that is not certain
+to be constrained can be used as a prefix of 'Access. The fix introduces
+an incompatibility, as the rule did not apply in Ada 95 if the prefix was
+a constant; but it now applies no matter what kind of object is involved.
+The incompatibility is not too bad, since most kinds of constants are
+known to be constrained.]}
+
 @end{Incompatible95}
 
 @begin{Extend95}

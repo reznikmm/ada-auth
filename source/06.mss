@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2007/07/10 05:00:48 $}
+@Comment{$Date: 2007/07/17 02:11:49 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.80 $}
+@Comment{$Revision: 1.81 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1877,6 +1877,16 @@ S1.
 @end{Discussion}
 @end{RunTime}
 
+@begin{Erron}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1]}
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}If
+the nominal subtype of a formal parameter with discriminants is constrained or
+indefinite, and the parameter is passed by reference, then the execution of the
+call is erroneous if the value of any discriminant of the actual is changed
+while the formal parameter exists (that is, before leaving the corresponding
+callable construct).]}
+@end{Erron}
+
 @begin{Extend83}
 @Defn{extensions to Ada 83}
 In Ada 95, a program can rely on the fact that passing an object as
@@ -1890,6 +1900,17 @@ were discriminants or of an access type.)
 We have eliminated the subclause on Default Parameters,
 as it is subsumed by earlier clauses and subclauses.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> A missing rule was added
+  to cover cases that were missed in Ada 95 and Ada 2005; specifically, that
+  an @key[in] parameter passed by reference might have its discriminants
+  changed via another path. Such cases are erroneous as requiring compilers
+  to detect such errors would be expensive, and requiring such cases to
+  work would be a major change of the user model (@key[in] parameters
+  would no longer could be assumed constant).]}
+@end{DiffWord95}
 
 
 @LabeledClause{Return Statements}

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2007/07/10 05:00:50 $}
+@Comment{$Date: 2007/07/17 02:11:49 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -2057,18 +2057,22 @@ Obj : Acc_I := @key{null};]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017],ARef=[AI95-00184-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00363-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0008-1]}
 The renamed entity shall not be a subcomponent that depends on
-discriminants of a variable whose nominal subtype is unconstrained,
-unless this subtype is indefinite, or the variable is @Chg{Version=[2],
-New=[constrained by its initial value],Old=[aliased]}.
+discriminants of @Chg{Version=[3],New=[an object],Old=[a variable]}
+whose nominal subtype is unconstrained@Chg{Version=[3],New=[],Old=[,]}
+unless @Chg{Version=[3],New=[the object is known to be constrained],
+Old=[this subtype is indefinite, or the variable is @Chg{Version=[2],
+New=[constrained by its initial value],Old=[aliased]}]}.
 A @nt{slice} of an array shall not be renamed if
 this restriction disallows renaming of the array.
-@Chg{New=[In addition to the places where Legality Rules normally apply, these
-rules apply also in the private part of an instance of a generic unit. These
-rules also apply for a renaming that appears in the body of a generic unit,
-with the additional requirement that even if the nominal subtype of the
-variable is indefinite, its type shall not be a descendant of an untagged
-generic formal derived type.],Old=[]}
+@Chg{New=[@PDefn{generic contract issue}In addition to the places where
+Legality Rules normally apply, these rules apply also in the private part of an
+instance of a generic unit.@Chg{Version=[3],New=[],Old=[ These rules also apply for a renaming that appears
+in the body of a generic unit, with the additional requirement that even if the
+nominal subtype of the variable is indefinite, its type shall not be a
+descendant of an untagged generic formal derived type.]}],Old=[]}
+
 @begin{Reason}
 This prevents renaming of subcomponents that might
 disappear, which might leave dangling references.
@@ -2124,24 +2128,6 @@ If it is a generic formal object,
 then the assume-the-best or assume-the-worst rules are applied as
 appropriate.
 @end{Ramification}
-@begin{Honest}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
-  @ChgAdded{Version=[2],Text=[If renamed entity is a subcomponent that
-  depends on discriminants, and the subcomponent is a dereference of a
-  general access type whose designated type is unconstrained and whose
-  discriminants have defaults, the renaming is illegal. Such a
-  general access type can designate an unconstrained (stack) object.
-  Since such a type might not designate an object
-  constrained by its initial value, the renaming is illegal @em the rule
-  says @lquotes@;is@rquotes constrained by its initial value, not
-  @lquotes@;might be@rquotes constrained by its initial value.
-  No other interpretation makes sense, as we can't have legality depending
-  on something (which object is designated) that is not known at
-  compile-time, and we surely can't allow this for unconstrained objects.
-  The wording of the rule
-  should be much clearer on this point, but this was discovered after the
-  completion of Amendment 1 when it was too late to fix it.]}
-@end{Honest}
 @end{Legality}
 
 @begin{StaticSem}
@@ -2212,6 +2198,18 @@ using the type T2 of the previous example:]}
                                     -- @RI[but does not in Ada 2005, so C1_Ren becomes]
                                     -- @RI[invalid when this is assigned.]]}
 @end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
+@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Simplified the description
+of when a discriminant-dependent component is allowed to be renamed
+to when the object is known to be constrained. This fixes
+a confusion as to whether a subcomponent of an object that is not certain
+to be constrained can be renamed. The fix introduces
+an incompatibility, as the rule did not apply in Ada 95 if the prefix was
+a constant; but it now applies no matter what kind of object is involved.
+The incompatibility is not too bad, since most kinds of constants are
+known to be constrained.]}
+
 @end{Incompatible95}
 
 @begin{Extend95}

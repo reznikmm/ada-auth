@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/07/10 05:00:45 $}
+@Comment{$Date: 2007/07/17 02:11:46 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.86 $}
+@Comment{$Revision: 1.87 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1630,6 +1630,68 @@ explicit initialization @nt<expression>
 is necessary (see @RefSecNum(Object Declarations)).
 A component cannot have an indefinite nominal subtype.]
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[A view of a composite object is
+@i<known to be constrained> if:]}
+
+@begin{Itemize}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[its nominal subtype is constrained, and is not an
+untagged partial view; or]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[its nominal subtype is indefinite; or]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[its type is a protected type, a task type, or an
+explicitly limited record type; or]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[it is part of a stand-alone constant (including a
+generic formal object of mode @key[in]); or]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[it is part of a formal parameter of mode @key[in]; or]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[it is part of the object denoted by a
+@nt{function_call} or @nt{aggregate}; or]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[it is part of a constant return object of an
+@nt{extended_return_statement}; or]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[it is a dereference of a pool-specific access type,
+and there is no partial view of its type that is constrained.]}
+
+@end{Itemize}
+
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[We do not include dereferences of general access
+types because they might denote stand-alone aliased unconstrained variables.
+That's true even for access-to-constant types (the denoted object does not
+have to be a constant).]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[There are other cases that could have been
+included in this definition (view conversions, the current instance of
+a type, implementation-defined attributes, objects of a formal discriminated
+private type), but these are not relevant to the places this term is
+used, so there were not included. If this term is used in additional places,
+the definition should be checked to see if any of these additional cases
+are relevant and appropriate wording added if necessary.]}
+@end{Discussion}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1]}
+@ChgAdded{Version=[3],Text=[For the purposes of determining within a generic
+body whether an object is known to be constrained, a subtype is not considered
+indefinite if it is a descendant of an untagged generic formal derived type,
+nor is an access type considered pool-specific if it is a descendant of a
+formal access type.]}
+
 @Defn{named number}
 A @i(named number) provides a name for a numeric value known
 at compile time. It is declared by a @nt<number_declaration>.
@@ -1701,6 +1763,10 @@ assigning to an enclosing object.
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added wording to allow
   return objects to be declared as constants, and corrected the definition
   of return objects as objects.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a definition of
+  @i<known to be constrained>, for use in other rules.]}
 @end{DiffWord95}
 
 @LabeledSubClause{Object Declarations}
