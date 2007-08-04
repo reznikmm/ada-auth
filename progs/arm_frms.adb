@@ -44,6 +44,7 @@
     --			Subsubclauses.
     -- 10/16/06 - RLB - Added definition of old non-terminals for NT linking.
     --  2/16/07 - RLB - Added missing code to handle comments here.
+    --  7/31/07 - RLB - Added code to detect duplicated titles.
 
 separate(ARM_Format)
 procedure Scan (Format_Object : in out Format_Type;
@@ -155,27 +156,42 @@ procedure Scan (Format_Object : in out Format_Type;
 			 Subclause => 0, Subsubclause => 0);
 	        end if;
 
-	        -- Load the title into the contents package:
-	        if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Subclause then
-		    ARM_Contents.Add (Title, ARM_Contents.Subclause,
-				      Format_Object.Clause_Number);
-	        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Subsubclause then
-		    ARM_Contents.Add (Title, ARM_Contents.Subsubclause,
-				      Format_Object.Clause_Number);
-	        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Clause then
-		    ARM_Contents.Add (Title, ARM_Contents.Clause,
-				      Format_Object.Clause_Number);
-	        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Section or else
-		      Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Section_No_Break then
-		    ARM_Contents.Add (Title, ARM_Contents.Section,
-				      Format_Object.Clause_Number);
-	        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Normative_Annex then
-		    ARM_Contents.Add (Title, ARM_Contents.Normative_Annex,
-				      Format_Object.Clause_Number);
-	        else
-		    ARM_Contents.Add (Title, ARM_Contents.Informative_Annex,
-				      Format_Object.Clause_Number);
-	        end if;
+		begin
+		    declare
+			Ref : constant String := ARM_Contents.Lookup_Clause_Number (Title);
+		    begin
+			-- If we get here, this title is already defined. Oops.
+			Ada.Text_IO.Put_Line ("  ** Title """ &
+			    Title(1..Title_Length) & """ is multiply defined on line " &
+			    ARM_File.Line_String (Input_Object));
+			Ada.Text_IO.Put_Line ("     Initial use is for clause " & Ref);
+		    end;
+		exception
+		    when ARM_Contents.Not_Found_Error =>
+			-- OK, not previously defined.
+
+		        -- Load the title into the contents package:
+		        if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Subclause then
+			    ARM_Contents.Add (Title, ARM_Contents.Subclause,
+					      Format_Object.Clause_Number);
+		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Subsubclause then
+			    ARM_Contents.Add (Title, ARM_Contents.Subsubclause,
+					      Format_Object.Clause_Number);
+		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Clause then
+			    ARM_Contents.Add (Title, ARM_Contents.Clause,
+					      Format_Object.Clause_Number);
+		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Section or else
+			      Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Section_No_Break then
+			    ARM_Contents.Add (Title, ARM_Contents.Section,
+					      Format_Object.Clause_Number);
+		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Normative_Annex then
+			    ARM_Contents.Add (Title, ARM_Contents.Normative_Annex,
+					      Format_Object.Clause_Number);
+		        else
+			    ARM_Contents.Add (Title, ARM_Contents.Informative_Annex,
+					      Format_Object.Clause_Number);
+		        end if;
+		end;
 
 	        Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
@@ -195,9 +211,25 @@ procedure Scan (Format_Object : in out Format_Type;
 		    (Section   => 0,
 		     Clause    => Format_Object.Unnumbered_Section,
 		     Subclause => 0, Subsubclause => 0);
-	        -- Load the title into the contents package:
-	        ARM_Contents.Add (Title, ARM_Contents.Unnumbered_Section,
-				  Format_Object.Clause_Number);
+
+		begin
+		    declare
+			Ref : constant String := ARM_Contents.Lookup_Clause_Number (Title);
+		    begin
+			-- If we get here, this title is already defined. Oops.
+			Ada.Text_IO.Put_Line ("  ** Title """ &
+			    Title(1..Title_Length) & """ is multiply defined on line " &
+			    ARM_File.Line_String (Input_Object));
+			Ada.Text_IO.Put_Line ("     Initial use is for clause " & Ref);
+		    end;
+		exception
+		    when ARM_Contents.Not_Found_Error =>
+			-- OK, not previously defined.
+
+		        -- Load the title into the contents package:
+		        ARM_Contents.Add (Title, ARM_Contents.Unnumbered_Section,
+					  Format_Object.Clause_Number);
+		end;
 
 	        Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
@@ -275,52 +307,67 @@ procedure Scan (Format_Object : in out Format_Type;
 			     Subclause => 0, Subsubclause => 0);
 		    end if;
 
-		    -- Load the title into the contents package:
-		    if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Subclause then
-		        ARM_Contents.Add (Title, ARM_Contents.Subclause,
-					  Format_Object.Clause_Number,
-					  Version => Version);
-		        ARM_Contents.Add_Old (Old_Title,
-					  ARM_Contents.Subclause,
-					  Format_Object.Clause_Number);
-		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Subsubclause then
-		        ARM_Contents.Add (Title, ARM_Contents.Subsubclause,
-					  Format_Object.Clause_Number,
-					  Version => Version);
-		        ARM_Contents.Add_Old (Old_Title,
-					  ARM_Contents.Subsubclause,
-					  Format_Object.Clause_Number);
-		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Clause then
-		        ARM_Contents.Add (Title, ARM_Contents.Clause,
-					  Format_Object.Clause_Number,
-					  Version => Version);
-		        ARM_Contents.Add_Old (Old_Title,
-					  ARM_Contents.Clause,
-					  Format_Object.Clause_Number);
-		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Section then
-		        ARM_Contents.Add (Title, ARM_Contents.Section,
-					  Format_Object.Clause_Number,
-					  Version => Version);
-		        ARM_Contents.Add_Old (Old_Title,
-					  ARM_Contents.Section,
-					  Format_Object.Clause_Number);
-		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Normative_Annex then
-		        ARM_Contents.Add (Title,
-					  ARM_Contents.Normative_Annex,
-					  Format_Object.Clause_Number,
-					  Version => Version);
-		        ARM_Contents.Add_Old (Old_Title,
-					  ARM_Contents.Normative_Annex,
-					  Format_Object.Clause_Number);
-		    else -- Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Informative_Annex then
-		        ARM_Contents.Add (Title,
-					  ARM_Contents.Informative_Annex,
-					  Format_Object.Clause_Number,
-					  Version => Version);
-		        ARM_Contents.Add_Old (Old_Title,
-					  ARM_Contents.Informative_Annex,
-					  Format_Object.Clause_Number);
-		    end if;
+		    begin
+		        declare
+			    Ref : constant String := ARM_Contents.Lookup_Clause_Number (Title);
+		        begin
+			    -- If we get here, this title is already defined. Oops.
+			    Ada.Text_IO.Put_Line ("  ** Title """ &
+			        Title(1..Title_Length) & """ is multiply defined on line " &
+			        ARM_File.Line_String (Input_Object));
+			    Ada.Text_IO.Put_Line ("     Initial use is for clause " & Ref);
+		        end;
+		    exception
+		        when ARM_Contents.Not_Found_Error =>
+			    -- OK, not previously defined.
+
+			    -- Load the title into the contents package:
+			    if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Subclause then
+			        ARM_Contents.Add (Title, ARM_Contents.Subclause,
+						  Format_Object.Clause_Number,
+						  Version => Version);
+			        ARM_Contents.Add_Old (Old_Title,
+						  ARM_Contents.Subclause,
+						  Format_Object.Clause_Number);
+			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Subsubclause then
+			        ARM_Contents.Add (Title, ARM_Contents.Subsubclause,
+						  Format_Object.Clause_Number,
+						  Version => Version);
+			        ARM_Contents.Add_Old (Old_Title,
+						  ARM_Contents.Subsubclause,
+						  Format_Object.Clause_Number);
+			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Clause then
+			        ARM_Contents.Add (Title, ARM_Contents.Clause,
+						  Format_Object.Clause_Number,
+						  Version => Version);
+			        ARM_Contents.Add_Old (Old_Title,
+						  ARM_Contents.Clause,
+						  Format_Object.Clause_Number);
+			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Section then
+			        ARM_Contents.Add (Title, ARM_Contents.Section,
+						  Format_Object.Clause_Number,
+						  Version => Version);
+			        ARM_Contents.Add_Old (Old_Title,
+						  ARM_Contents.Section,
+						  Format_Object.Clause_Number);
+			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Normative_Annex then
+			        ARM_Contents.Add (Title,
+						  ARM_Contents.Normative_Annex,
+						  Format_Object.Clause_Number,
+						  Version => Version);
+			        ARM_Contents.Add_Old (Old_Title,
+						  ARM_Contents.Normative_Annex,
+						  Format_Object.Clause_Number);
+			    else -- Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Informative_Annex then
+			        ARM_Contents.Add (Title,
+						  ARM_Contents.Informative_Annex,
+						  Format_Object.Clause_Number,
+						  Version => Version);
+			        ARM_Contents.Add_Old (Old_Title,
+						  ARM_Contents.Informative_Annex,
+						  Format_Object.Clause_Number);
+			    end if;
+		    end;
 
 		    Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
@@ -358,91 +405,106 @@ procedure Scan (Format_Object : in out Format_Type;
 		        ARM_File.Replace_Char (Input_Object);
 		    end if;
 
-		    -- Load the title into the contents package:
-		    if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Subclause then
-		        Format_Object.Clause_Number :=
-			    (Section   => Format_Object.Clause_Number.Section,
-			     Clause    => Format_Object.Clause_Number.Clause,
-			     Subclause => Format_Object.Clause_Number.Subclause + 1,
-			     Subsubclause => 0);
-		        ARM_Contents.Add (Title, ARM_Contents.Subclause,
-					  Format_Object.Clause_Number,
-					  Version => Version);
-		        ARM_Contents.Add_Old ((others => ' '),
-					  ARM_Contents.Subclause,
-					  Format_Object.Clause_Number);
-		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Subsubclause then
-		        Format_Object.Clause_Number.Subsubclause :=
-			    Format_Object.Clause_Number.Subsubclause + 1;
-		        ARM_Contents.Add (Title, ARM_Contents.Subsubclause,
-					  Format_Object.Clause_Number,
-					  Version => Version);
-		        ARM_Contents.Add_Old ((others => ' '),
-					  ARM_Contents.Subsubclause,
-					  Format_Object.Clause_Number);
-		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Clause then
-		        Format_Object.Clause_Number :=
-			    (Section   => Format_Object.Clause_Number.Section,
-			     Clause    => Format_Object.Clause_Number.Clause + 1,
-			     Subclause => 0, Subsubclause => 0);
-		        ARM_Contents.Add (Title, ARM_Contents.Clause,
-					  Format_Object.Clause_Number,
-					  Version => Version);
-		        ARM_Contents.Add_Old ((others => ' '),
-					  ARM_Contents.Clause,
-					  Format_Object.Clause_Number);
-		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Section then
-		        if Saw_a_Section_Header then
-			    Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
-				    ARM_File.Line_String (Input_Object));
-		        end if;
-		        Saw_a_Section_Header := True;
-		        Format_Object.Clause_Number :=
-			    (Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
-			     Clause    => 0,
-			     Subclause => 0, Subsubclause => 0);
-		        ARM_Contents.Add (Title,
-					  ARM_Contents.Section,
-					  Format_Object.Clause_Number,
-					  Version => Version);
-		        ARM_Contents.Add_Old ((others => ' '),
-					  ARM_Contents.Section,
-					  Format_Object.Clause_Number);
-		    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Normative_Annex then
-		        if Saw_a_Section_Header then
-			    Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
-				    ARM_File.Line_String (Input_Object));
-		        end if;
-		        Saw_a_Section_Header := True;
-		        Format_Object.Clause_Number :=
-			    (Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
-			     Clause    => 0,
-			     Subclause => 0, Subsubclause => 0);
-		        ARM_Contents.Add (Title,
-					  ARM_Contents.Normative_Annex,
-					  Format_Object.Clause_Number,
-					  Version => Version);
-		        ARM_Contents.Add_Old ((others => ' '),
-					  ARM_Contents.Normative_Annex,
-					  Format_Object.Clause_Number);
-		    else -- Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Informative_Annex then
-		        if Saw_a_Section_Header then
-			    Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
-				    ARM_File.Line_String (Input_Object));
-		        end if;
-		        Saw_a_Section_Header := True;
-		        Format_Object.Clause_Number :=
-			    (Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
-			     Clause    => 0,
-			     Subclause => 0, Subsubclause => 0);
-		        ARM_Contents.Add (Title,
-					  ARM_Contents.Informative_Annex,
-					  Format_Object.Clause_Number,
-					  Version => Version);
-		        ARM_Contents.Add_Old ((others => ' '),
-					  ARM_Contents.Informative_Annex,
-					  Format_Object.Clause_Number);
-		    end if;
+		    begin
+		        declare
+			    Ref : constant String := ARM_Contents.Lookup_Clause_Number (Title);
+		        begin
+			    -- If we get here, this title is already defined. Oops.
+			    Ada.Text_IO.Put_Line ("  ** Title """ &
+			        Title(1..Title_Length) & """ is multiply defined on line " &
+			        ARM_File.Line_String (Input_Object));
+			    Ada.Text_IO.Put_Line ("     Initial use is for clause " & Ref);
+		        end;
+		    exception
+		        when ARM_Contents.Not_Found_Error =>
+			    -- OK, not previously defined.
+
+			    -- Load the title into the contents package:
+			    if Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Subclause then
+			        Format_Object.Clause_Number :=
+				    (Section   => Format_Object.Clause_Number.Section,
+				     Clause    => Format_Object.Clause_Number.Clause,
+				     Subclause => Format_Object.Clause_Number.Subclause + 1,
+				     Subsubclause => 0);
+			        ARM_Contents.Add (Title, ARM_Contents.Subclause,
+						  Format_Object.Clause_Number,
+						  Version => Version);
+			        ARM_Contents.Add_Old ((others => ' '),
+						  ARM_Contents.Subclause,
+						  Format_Object.Clause_Number);
+			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Subsubclause then
+			        Format_Object.Clause_Number.Subsubclause :=
+				    Format_Object.Clause_Number.Subsubclause + 1;
+			        ARM_Contents.Add (Title, ARM_Contents.Subsubclause,
+						  Format_Object.Clause_Number,
+						  Version => Version);
+			        ARM_Contents.Add_Old ((others => ' '),
+						  ARM_Contents.Subsubclause,
+						  Format_Object.Clause_Number);
+			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Clause then
+			        Format_Object.Clause_Number :=
+				    (Section   => Format_Object.Clause_Number.Section,
+				     Clause    => Format_Object.Clause_Number.Clause + 1,
+				     Subclause => 0, Subsubclause => 0);
+			        ARM_Contents.Add (Title, ARM_Contents.Clause,
+						  Format_Object.Clause_Number,
+						  Version => Version);
+			        ARM_Contents.Add_Old ((others => ' '),
+						  ARM_Contents.Clause,
+						  Format_Object.Clause_Number);
+			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Section then
+			        if Saw_a_Section_Header then
+				    Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
+					    ARM_File.Line_String (Input_Object));
+			        end if;
+			        Saw_a_Section_Header := True;
+			        Format_Object.Clause_Number :=
+				    (Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				     Clause    => 0,
+				     Subclause => 0, Subsubclause => 0);
+			        ARM_Contents.Add (Title,
+						  ARM_Contents.Section,
+						  Format_Object.Clause_Number,
+						  Version => Version);
+			        ARM_Contents.Add_Old ((others => ' '),
+						  ARM_Contents.Section,
+						  Format_Object.Clause_Number);
+			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Normative_Annex then
+			        if Saw_a_Section_Header then
+				    Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
+					    ARM_File.Line_String (Input_Object));
+			        end if;
+			        Saw_a_Section_Header := True;
+			        Format_Object.Clause_Number :=
+				    (Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				     Clause    => 0,
+				     Subclause => 0, Subsubclause => 0);
+			        ARM_Contents.Add (Title,
+						  ARM_Contents.Normative_Annex,
+						  Format_Object.Clause_Number,
+						  Version => Version);
+			        ARM_Contents.Add_Old ((others => ' '),
+						  ARM_Contents.Normative_Annex,
+						  Format_Object.Clause_Number);
+			    else -- Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Informative_Annex then
+			        if Saw_a_Section_Header then
+				    Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
+					    ARM_File.Line_String (Input_Object));
+			        end if;
+			        Saw_a_Section_Header := True;
+			        Format_Object.Clause_Number :=
+				    (Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				     Clause    => 0,
+				     Subclause => 0, Subsubclause => 0);
+			        ARM_Contents.Add (Title,
+						  ARM_Contents.Informative_Annex,
+						  Format_Object.Clause_Number,
+						  Version => Version);
+			        ARM_Contents.Add_Old ((others => ' '),
+						  ARM_Contents.Informative_Annex,
+						  Format_Object.Clause_Number);
+			    end if;
+		    end;
 
 		    Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
