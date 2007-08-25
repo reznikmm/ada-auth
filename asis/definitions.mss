@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2007/02/18 03:23:55 $}
+@comment{$Revision: 1.7 $ $Date: 2007/08/05 01:46:38 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -1772,6 +1772,51 @@ A_Protected_Definition
 @end{Display}
 @end{DescribeCode}
 
+@ChgNote{ SI99-0006-1 }
+@LabeledAddedClause{Version=[2],Name=[function Progenitor_List (definition)]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Progenitor_List}
+      (Type_Definition : @key[in] Asis.Definition)
+       @key[return] Asis.Name_List;]}
+@end{Example}
+
+@ChgAdded{Version=[2],Text=[
+Type_Definition specifies the definition to query.
+]}
+
+@ChgAdded{Version=[2],Text=[
+Returns a list of subtype marks making up the interface_list in the
+argument definition, in their order of appearance.
+]}
+
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
+Appropriate Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Derived_Record_Extension_Definition
+An_Interface_Type_Definition]}
+@end{Display}
+
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
+Appropriate Formal_Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Formal_Derived_Type_Definition
+A_Formal_Interface_Type_Definition]}
+@end{Display}
+
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
+Returns Expression_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[An_Identifier
+A_Selected_Component]}
+@end{Display}
+@end{DescribeCode}
+
+
+
+
 @begin{ElementRef}
 A_Formal_Type_Definition @em 12.5
 @end{ElementRef}
@@ -1837,5 +1882,8 @@ function Access_To_Function_Result_Profile
 @begin{Example}
 @ChgDeleted{Version=[1],Text=[@key[end] Asis.Definitions;]}
 @end{Example}
+
+
+
 
 

@@ -1,10 +1,10 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2007/02/11 07:19:09 $}
+@Comment{$Date: 2007/08/05 01:46:39 $}
 @LabeledAddedNormativeAnnex{Version=[2],Name=[Obsolescent Features]}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/obsolescent.mss,v $}
-@comment{$Revision: 1.2 $}
+@comment{$Revision: 1.3 $}
 
 @LabeledAddedClause{Version=[2],Name=[Annex Contents]}
 
@@ -29,12 +29,10 @@ following subclauses.]}
 @LabeledAddedSubclause{Version=[2],Name=[function Body_Block_Statement]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0027-1]}
-@ChgAdded{Version=[2],Text=[Function Body_Block_Statement is a query that
-supplies the equivalent combined functionality of the replaced queries from an
-earlier edition of this standard: Subprogram_Body_Block, Package_Body_Block,
-and Task_Body_Block. Use of the query Body_Block_Statement is not recommended
-in new programs. This functionality is redundant with the queries
-Body_Declarative_Items, Body_Statements, and Body_Exception_Handlers.]}
+@ChgAdded{Version=[2],Text=[This function is redundant with the queries
+Body_Declarative_Items, Body_Statements, and Body_Exception_Handlers.
+Use of the query Body_Block_Statement is not recommended in new
+programs.]}
 
 @begin{DescribeCode}
 @begin{Example}

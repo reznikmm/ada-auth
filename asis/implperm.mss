@@ -1,6 +1,6 @@
 @Part(implperm, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/implperm.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2007/02/06 06:21:05 $}
+@comment{$Revision: 1.5 $ $Date: 2007/08/05 01:46:38 $}
 
 
 @LabeledSection{package Asis.Implementation.Permissions}
@@ -164,7 +164,7 @@ this function returns False.
 @key[function] @AdaSubDefn{Is_Span_Column_Position_Supported} @key[return] Boolean;
 @end{Example}
 
-Returns True if the implementation can} @key[return] valid character positions for
+Returns True if the implementation can return valid character positions for
 elements.
 
 An implementation may choose to ignore column character position values
@@ -195,7 +195,7 @@ the function Is_Commentary_Supported returns False.
 @end{Example}
 
 Returns True if an implementation supports compilation unit attributes.
-Returns False if all attributes will} @key[return] Has_Attribute() = False.
+Returns False if all attributes will return Has_Attribute() = False.
 @end{DescribeCode}
 
 

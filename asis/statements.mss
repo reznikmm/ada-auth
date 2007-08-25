@@ -1,6 +1,6 @@
 @Part(statements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/statements.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2007/02/18 03:23:56 $}
+@comment{$Revision: 1.5 $ $Date: 2007/08/05 01:46:39 $}
 
 
 @LabeledSection{package Asis.Statements}
@@ -663,6 +663,145 @@ Not_An_Element
 An_Expression
 @end{Display}
 @end{DescribeCode}
+
+
+@ChgNote{ SI99-0010-1 }
+@Comment{@LabeledAddedClause{Version=[2],Name=[function Return_Object_Specification]}}
+@*@thickline@*
+@ChgAdded{Version=[2],Text=[@b{@grow{@grow{18.xx function Return_Object_Specification}}}]}
+@begin{Discussion}
+@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
+change all of the following clause numbers]}
+@end{Discussion}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Return_Object_Specification}
+     (Statement : @key[in] Asis.Statement)
+     @key[return] Asis.Declaration;]}
+@end{Example}
+
+@ChgAdded{Version=[2],Text=[
+Statement specifies the extended return statement to query.
+]}
+
+@ChgAdded{Version=[2],Text=[
+Returns the specification of the return object.
+]}
+
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
+Appropriate Statement_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[An_Extended_Return_Statement]}
+@end{Display}
+
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
+Returns Declaration_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Return_Object_Specification]}
+@end{Display}
+@end{DescribeCode}
+
+
+@ChgNote{ SI99-0010-1 }
+@Comment{@LabeledAddedClause{Version=[2],Name=[function Extended_Return_Statements]}
+We can't use this now, as it would change the clause numbers}
+@*@thickline@*
+@ChgAdded{Version=[2],Text=[@b{@grow{@grow{18.xx function Extended_Return_Statements}}}]}
+@begin{Discussion}
+@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
+change all of the following clause numbers]}
+@end{Discussion}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Extended_Return_Statements}
+     (Statement       : @key[in] Asis.Statement;
+      Include_Pragmas : @key[in] Boolean := False)
+      @key[return] Asis.Statement_List;]}
+@end{Example}
+
+@ChgAdded{Version=[2],Text=[
+Statement specifies the extended return statement to query.
+Include_Pragmas specifies whether pragmas are to be returned.
+]}
+
+@ChgAdded{Version=[2],Text=[
+Returns a list of the statements and pragmas from the extended return
+statement, in their order of appearance.
+]}
+
+@ChgAdded{Version=[2],Text=[
+Returns a Nil_Element_List if the argument extended return statement does
+not include handled_sequence_of_statements.
+]}
+
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
+Appropriate Statement_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[An_Extended_Return_Statement]}
+@end{Display}
+
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
+Returns Element_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Statement
+A_Pragma]}
+@end{Display}
+@end{DescribeCode}
+
+
+
+@ChgNote{ SI99-0010-1 }
+@Comment{@LabeledAddedClause{Version=[2],Name=[function Extended_Return_Exception_Handlers]}
+We can't use this now, as it would change the clause numbers}
+@*@thickline@*
+@ChgAdded{Version=[2],Text=[@b{@grow{@grow{18.xx function Extended_Return_Exception_Handlers}}}]}
+@begin{Discussion}
+@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
+change all of the following clause numbers]}
+@end{Discussion}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Extended_Return_Exception_Handlers}
+     (Statement       : @key[in] Asis.Statement;
+      Include_Pragmas : @key[in] Boolean := False)
+      @key[return] Asis.Exception_Handler_List;]}
+@end{Example}
+@ChgAdded{Version=[2],Text=[
+Statement specifies the extended return statement to query.
+Include_Pragmas specifies whether pragmas are to be returned.]}
+
+@ChgAdded{Version=[2],Text=[
+Returns a list of the exception_handler elements of the extended return
+statement, in their order of appearance.]}
+
+@ChgAdded{Version=[2],Text=[
+The only pragmas returned are those following the reserved word "exception"
+and preceding the reserved word "when" of first exception handler.]}
+
+@ChgAdded{Version=[2],Text=[
+Returns a Nil_Element_List if there are no exception_handler elements.]}
+
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
+Appropriate Statement_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[An_Extended_Return_Statement]}
+@end{Display}
+
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
+Returns Element_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[An_Exception_Handler
+A_Pragma]}
+@end{Display}
+@end{DescribeCode}
+
+
 
 
 @LabeledClause{function Goto_Label}
@@ -1333,9 +1472,13 @@ A_Selected_Component
 @end{DescribeCode}
 
 
-@ChgAdded{Version=[2],Text=[@b{@Grow{@Grow{18.xx  function Raise_Statement_Message}}}]}
 @Comment{@LabeledAddedClause{Version=[2],Name=[function Raise_Statement_Message]}}
-@b{@i{Inserted clause, but not inserted now to avoid changing clause numbers. - RLB}}
+@*@thickline@*
+@ChgAdded{Version=[2],Text=[@b{@grow{@grow{18.xx function Raise_Statement_Message}}}]}
+@begin{Discussion}
+@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
+change all of the following clause numbers]}
+@end{Discussion}
 
 @begin{DescribeCode}
 @begin{Example}

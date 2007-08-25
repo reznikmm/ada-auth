@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.8 $ $Date: 2007/02/18 03:23:55 $}
+@comment{$Revision: 1.9 $ $Date: 2007/08/05 01:46:37 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -337,10 +337,17 @@ task_definition.
 For a private_type_declaration or private_extension_declaration, returns
 the definition element representing the private declaration view.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0011-1]}
+@ChgAdded{Version=[2],Text=[
+For an incomplete_type_declaration, returns the definition element
+representing the incomplete declaration view.
+]}
+
 For a subtype_declaration, returns the subtype_indication.
 
 For a formal_type_declaration, returns the formal_type_definition.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0011-1]}
 @leading@keepnext@;Appropriate Declaration_Kinds:
 @begin{Display}
 An_Ordinary_Type_Declaration
@@ -349,14 +356,18 @@ A_Protected_Type_Declaration
 A_Private_Type_Declaration
 A_Private_Extension_Declaration
 A_Subtype_Declaration
-A_Formal_Type_Declaration
+A_Formal_Type_Declaration@ChgAdded{Version=[2],Text=[
+An_Incomplete_Type_Declaration]}
 @end{Display}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0011-1]}
 @leading@keepnext@;Returns Definition_Kinds:
 @begin{Display}
 Not_A_Definition
 A_Type_Definition
-A_Subtype_Indication
+A_Subtype_Indication@ChgAdded{Version=[2],Text=[
+An_Incomplete_Type_Definition
+A_Tagged_Incomplete_Type_Definition]}
 A_Private_Type_Definition
 A_Tagged_Private_Type_Definition
 A_Private_Extension_Definition
@@ -419,6 +430,7 @@ the colon.
 For all other object_declaration variables or constants, returns the
 subtype_indication or array_type_definition following the colon.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0010-1]}
 @leading@keepnext@;Appropriate Declaration_Kinds:
 @begin{Display}
 A_Variable_Declaration
@@ -426,7 +438,8 @@ A_Constant_Declaration
 A_Deferred_Constant_Declaration
 A_Single_Protected_Declaration
 A_Single_Task_Declaration
-A_Component_Declaration
+A_Component_Declaration@ChgAdded{Version=[2],Text=[
+A_Return_Object_Specification]}
 @end{Display}
 
 @leading@keepnext@;Returns Definition_Kinds:
@@ -459,6 +472,7 @@ Returns the initialization expression [:= expression] of the declaration.
 Returns a Nil_Element if the declaration does not include an explicit
 initialization.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0010-1]}
 @leading@keepnext@;Appropriate Declaration_Kinds:
 @begin{Display}
 A_Variable_Declaration
@@ -468,7 +482,8 @@ A_Real_Number_Declaration
 A_Discriminant_Specification
 A_Component_Declaration
 A_Parameter_Specification
-A_Formal_Object_Declaration
+A_Formal_Object_Declaration@ChgAdded{Version=[2],Text=[
+A_Return_Object_Specification]}
 @end{Display}
 
 @leading@keepnext@;Returns Element_Kinds:
@@ -2793,4 +2808,47 @@ A_Function_Renaming_Declaration
 @begin{Example}
 @ChgDeleted{Version=[1],Text=[@key[end] Asis.Declarations;]}
 @end{Example}
+
+
+@ChgNote{ SI99-006-1 }
+@LabeledAddedClause{Version=[2],Name=[function Progenitor_List (declaration)]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Progenitor_List}
+     (Declaration : @key[in] Asis.Definition)
+      @key[return] Asis.Name_List;]}
+@end{Example}
+
+@ChgAdded{Version=[2],Text=[
+Declaration specifies the declaration to query.
+]}
+
+@ChgAdded{Version=[2],Text=[
+Returns a list of subtype marks making up the interface_list in the
+argument declaration, in their order of appearance.
+]}
+
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
+Appropriate Declaration_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Private_Extension_Declaration
+A_Private_Type_Declaration
+A_Task_Type_Declaration
+A_Protected_Type_Declaration
+A_Single_Task_Declaration
+A_Single_Protected_Declaration]}
+@end{Display}
+
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
+@leading@keepnext@;Returns Expression_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[An_Identifier
+A_Selected_Component]}
+@end{Display}
+@end{DescribeCode}
+
+
+
 

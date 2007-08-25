@@ -1,6 +1,6 @@
 @Part(text, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/text.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2007/02/18 03:23:56 $}
+@comment{$Revision: 1.5 $ $Date: 2007/08/05 01:46:39 $}
 
 @LabeledSection{package Asis.Text}
 
@@ -53,6 +53,10 @@ This shall be supported by all ASIS implementations.
                   @key[return] Boolean @key[is abstract];
 @end{Example}
 
+@ChgAdded{Version=[1],Text=[Line shall be an undiscriminated private type,
+or, shall be derived from an undiscriminated private type. It can be declared
+as a new type or as a subtype of an existing type.]}
+
 Nil_Line is the value of an uninitialized Line object.
 @end{DescribeCode}
 
@@ -68,9 +72,9 @@ allowed variation for these declarations.
 Line_Number = 0 is reserved to act as an "invalid" Line_Number value. No
 unit text line will ever have a Line_Number of zero.
 
-Line shall be an undiscriminated private type, or, shall be derived from an
-undiscriminated private type. It can be declared as a new type or as a
-subtype of an existing type.
+@ChgDeleted{Version=[1],Text=[Line shall be an undiscriminated private type,
+or, shall be derived from an undiscriminated private type. It can be declared
+as a new type or as a subtype of an existing type.]}@ChgNote{Moved up}
 
 @begin{DescribeCode}
 @begin{Example}

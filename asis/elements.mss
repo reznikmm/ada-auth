@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.8 $ $Date: 2007/02/16 07:25:33 $}
+@comment{$Revision: 1.9 $ $Date: 2007/08/05 01:46:38 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -593,6 +593,59 @@ Nil_Element, A_Statement, or A_Declaration.
 An_Access_Type_Definition
 @end{Display}
 @end{DescribeCode}
+
+
+@ChgNote{ SI99-006-1 }
+@Comment{@LabeledAddedClause{Version=[2],Name=[function Interface_Kind]}}
+@*@thickline@*
+@ChgAdded{Version=[2],Text=[@b{@grow{@grow{13.xx function Interface_Kind}}}]}
+@begin{Discussion}
+@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
+change all of the following clause numbers]}
+@end{Discussion}
+
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Interface_Kind}
+     (Definition : @key[in] Asis.Definition)
+      @key[return] Asis.Interface_Kinds;]}
+@end{Example}
+
+@ChgAdded{Version=[2],Text=[
+Definition specifies the Definition to query.
+]}
+
+@ChgAdded{Version=[2],Text=[
+Returns the Interface_Kinds value of the Definition.
+]}
+
+@ChgAdded{Version=[2],Text=[
+Returns Not_An_Interface for any unexpected element such as a
+Nil_Element, A_Statement, or A_Declaration.
+]}
+
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[
+Expected Definition_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Type_Definition
+A_Formal_Type_Definition]}
+@end{Display}
+
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[
+Expected Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[     An_Interface_Type_Definition]}
+@end{Display}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[
+Expected Formal_Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[     A_Formal_Interface_Type_Definition]}
+@end{Display}
+@end{DescribeCode}
+
+
 
 
 @LabeledClause{function Root_Type_Kind}

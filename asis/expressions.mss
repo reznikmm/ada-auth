@@ -1,6 +1,6 @@
 @Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2007/02/18 03:23:56 $}
+@comment{$Revision: 1.6 $ $Date: 2007/08/05 01:46:38 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -769,7 +769,7 @@ that may have more than one static_expression.
 @begin{Example}
 @key[function] @AdaSubDefn{Record_Component_Associations}
               (Expression : @key[in] Asis.Expression;
-                     Normalized : @key[in] Boolean := False)
+               Normalized : @key[in] Boolean := False)
                     @key[return] Asis.Association_List;
 @end{Example}
 
@@ -1089,6 +1089,20 @@ provide one formal A_Defining_Name => An_Expression pair per
 association. These artificial associations are Is_Normalized. Their
 component A_Defining_Name elements are not Is_Normalized.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0014-1]}
+@ChgAdded{Version=[2],Text=[Asis.Expressions.Formal_Parameter
+may return An_Others_Choice for a
+non-normalized A_Generic_Association argument;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0014-1]}
+@ChgAdded{Version=[2],Text=[
+If a formal_package_association contains a box, then the corresponding
+non-normalized A_Generic_Association element contains an Expression_Element
+with expression kind A_Box_Expression as its
+Actual_Parameter part. The normalized A_Generic_Association contains either
+a default parameter or an Expression_Element with expression kind
+A_Box_Expression;]}
+
 @leading@keepnext@;Appropriate Association_Kinds:
 @begin{Display}
 A_Parameter_Association
@@ -1102,8 +1116,10 @@ Not_An_Element
 An_Operator_Symbol
 A_Defining_Name @em Is_Normalized(Association)
 An_Expression @em @key[not] Is_Normalized(Association)
-  Returns Expression_Kinds:
-    An_Identifier
+@end{Display}
+@leading@keepnext@;Returns Expression_Kinds:
+@begin{Display}
+An_Identifier
 @end{Display}
 @end{DescribeCode}
 
