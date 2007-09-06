@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2007/07/10 05:00:51 $}
+@Comment{$Date: 2007/08/25 03:53:25 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3111,7 +3111,7 @@ units.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0028-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0028-1]}
 The creation of @Chg{Version=[2],New=[an object @Redundant[(including a
 component)] @Chg{Version=[3],New=[that is initialized by default, if
 its],Old=[of a]} type @Chg{Version=[3],New=[],Old=[that ]}does not have

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/07/17 02:11:47 $}
+@Comment{$Date: 2007/08/25 03:53:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2703,9 +2703,10 @@ protected type, and as such ensures safe concurrent access.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
 @ChgAdded{Version=[2],Text=[@key{type} Fast_Food_Queue @key{is new} Queue @key{with record} ...;
 @key{procedure} Append(Q : @key{in out} Fast_Food_Queue; Person : @key{in} Person_Name);
-@key{procedure} Remove_First(Q : @key{in out} Fast_Food_Queue; Person : @key{in} Person_Name);
+@key{procedure} Remove_First(Q : @key{in out} Fast_Food_Queue; Person : @Chg{Version=[3],New=[@key{out}],Old=[@key{in}]} Person_Name);
 @key{function} Cur_Count(Q : @key{in} Fast_Food_Queue) @key{return} Natural;
 @key{function} Max_Count(Q : @key{in} Fast_Food_Queue) @key{return} Natural;]}
 

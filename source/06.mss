@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2007/07/17 02:11:49 $}
+@Comment{$Date: 2007/08/25 03:53:24 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1406,6 +1406,13 @@ with formal parameters of the subprogram.]
     @SynI{function_}@Syn2{name}
   | @SynI{function_}@Syn2{prefix} @Syn2{actual_parameter_part}"}
 
+@begin{Honest}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+@ChgAdded{Version=[3],Text=[For the purpose of non-syntax rules,
+infix operator calls are considered @nt{function_call}s.
+See @RefSecNum{Overloading of Operators}.]}
+@end{Honest}
+
 @Syn{lhs=<actual_parameter_part>,rhs="
     (@Syn2{parameter_association} {, @Syn2{parameter_association}})"}
 
@@ -2121,11 +2128,15 @@ value.@PDefn2{Term=[creation],Sec=[of a return object]}@PDefn{constrained by its
   with no call on Adjust).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[If the return statement is left without resulting
   in a return (for example, due to an exception propagated from the
   @nt{expression} or the @nt{handled_sequence_of_statements}, or a goto out of
-  the @nt{handled_sequence_of_statements}), the return object is finalized
-  prior to leaving the return statement.]}
+  the @nt{handled_sequence_of_statements}), @Chg{Version=[3],New=[if ],Old=[]}the
+  return object @Chg{Version=[3],New=[has been created, it ],Old=[]}is
+  finalized prior to leaving the return statement.@Chg{Version=[3],New=[ If
+  it has not been created when the return statement is left, it is not
+  created or finalized.],Old=[]}]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
@@ -2729,6 +2740,18 @@ whose names end with @lquotes@;_operator:@rquotes@;
 @nt<multiplying_@!operator>, and
 @nt<highest_@!precedence_@!operator>.
 @end{Honest}
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+@ChgAdded{Version=[3],Text=[This equivalence extends to uses of
+@nt{function_call} in most other language rules. However, as
+often happens, the equivalence is not perfect, as operator
+calls are not a @nt{name}, while a @nt{function_call} is a
+@nt{name}. Thus, operator calls cannot be used in contexts
+that require a @nt{name} (such as a rename of an object).
+A fix for this problem would be very disruptive, and thus
+we recommend it be delayed until the next major revision of
+the Ada standard.]}
+@end{Discussion}
 @end{Resolution}
 
 @begin{Legality}

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2007/07/10 05:00:49 $}
+@Comment{$Date: 2007/08/25 03:53:25 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.86 $}
+@Comment{$Revision: 1.87 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2578,12 +2578,20 @@ created, the implementation may move its value to the target object as part of
 the assignment without re-adjusting so long as the
 anonymous object has no aliased subcomponents.]}
 @begin{Ramification}
-In the @nt{aggregate} case, only one value adjustment is necessary,
-and there is no anonymous object to be finalized.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
+@Chg{Version=[3],New=[If the anonymous object is eliminated by this permission, ],
+Old=[In the @nt{aggregate} case, only one
+value adjustment is necessary, and]} there is no anonymous object to be
+finalized@Chg{Version=[3],New=[ and thus the Finalize call is on it is
+eliminated. In addition, if the value is created directly in the target
+object, then no Adjust call is needed on the target object.],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00147-01]}
-@Chg{Version=[2],New=[Similarly, in the function call case, the
-anonymous object can be eliminated. Note, however, that Adjust
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
+@Chg{Version=[2],New=[@Chg{Version=[3],New=[Note that if the anonymous
+object is eliminated but the new value is not created directly
+in the target object],Old=[Similarly, in the function call case, the
+anonymous object can be eliminated. Note, however]}, that Adjust
 must be called],Old=[In the @nt{assignment_statement} case as well,
 no finalization of the anonymous object is needed.
 On the other hand, if the target has aliased subcomponents,
@@ -2591,8 +2599,15 @@ then an adjustment takes place]} directly on the target object
 as the last step of the assignment, since some of the
 subcomponents may be self-referential or otherwise
 position-dependent.@Chg{Version=[2],New=[ This Adjust can be eliminated only
-by using one of the following permissions.],Old=[]}
+by using one of the following permissions.],Old=[]}]}
 @end{Ramification}
+@begin{ImplNote}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+@ChgAdded{Version=[3],Text=[We sometimes require that an @nt{aggregate} or
+function call not use an anonymous object and be constructed directly in
+the target object. Not using an anonymous object in this way means
+the target object is @i{built-in-place}.@PDefn{build-in-place}]}
+@end{ImplNote}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00147-01]}
