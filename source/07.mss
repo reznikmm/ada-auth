@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2007/08/25 03:53:25 $}
+@Comment{$Date: 2007/09/06 04:58:39 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.87 $}
+@Comment{$Revision: 1.88 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2388,27 +2388,34 @@ the @i{assignment operation} proceeds as follows:
     abort is deferred during the assignment operation.
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
 @Defn{adjusting the value of an object}
 @Defn{adjustment}
-To adjust the value of a @Redundant[(nonlimited)] composite object,
+To adjust the value of a
+@Chg{Version=[3],New=[],Old=[@Redundant[(nonlimited)] ]}composite object,
 the values of the components of the object are first
 adjusted in an arbitrary order,
-and then, if the object is controlled,
+and then, if the object is
+@Chg{Version=[3],New=[nonlimited ],Old=[]}controlled,
 Adjust is called.
 Adjusting the value of an elementary object has no effect@Redundant[,
 nor does adjusting the value of a composite object with no
 controlled parts.]
 @begin{Ramification}
-Adjustment is never performed for values of
-  a by-reference limited type, since these
-  types do not support copying.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
+Adjustment is never @Chg{Version=[3],New=[actually ],Old=[]}performed for
+  values of a by-reference limited type, since @Chg{Version=[3],New=[all
+  assignment operations for such types are required to be built-in-place.
+  Even so, we still define adjustment for all types in order that the
+  canonical semantics is well-defined],Old=[these
+  types do not support copying]}.
 @end{Ramification}
 @begin{Reason}
   The verbiage in the Initialize rule about access discriminants
     constrained by per-object expressions is not necessary here,
     since such types are limited,
     and therefore are never adjusted.
-@end{Reason}
+@end{Reason}@Comment{The above is complete BS}
 
 @PDefn2{Term=[execution], Sec=(assignment_statement)}
 For an @nt{assignment_statement},
@@ -2523,16 +2530,29 @@ built-in-place (see @RefSecNum{Limited Types}).]}
 @end{ImplReq}
 
 @begin{ImplPerm}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
 An implementation is allowed to relax the above rules
-@Redundant[(for nonlimited controlled types)]
+@Redundant[(for @Chg{Version=[3],New=[],Old=[nonlimited ]}controlled types)]
 in the following ways:
 @begin{TheProof}
-The phrase @lquotes@;for nonlimited controlled types@rquotes@; follows from the fact
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0004-1]}
+@ChgDeleted{Version=[3],Text=[The phrase @lquotes@;for nonlimited controlled
+types@rquotes@; follows from the fact
 that all of the following permissions apply to cases involving
 assignment.
 It is important because the programmer can count on a stricter semantics
-for limited controlled types.
+for limited controlled types.]}
 @end{TheProof}
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1]}
+@ChgAdded{Version=[3],Text=[The rules below about @nt{assignment_statement}s
+apply only to nonlimited controlled types, as @nt{assignment_statement}s
+are not allowed for limited types. The other rule applies to both limited and
+nonlimited types, and in fact is required for all assignment operations
+involving @nt{aggregate}s and function calls of @lquotes;really@rquotes
+limited types. This is important because the programmer can count on a
+stricter semantics for limited controlled types.]}
+@end{Ramification}
 @begin{Itemize}
 For an @nt{assignment_statement} that assigns to an object the value
 of that same object,
@@ -2728,6 +2748,10 @@ Controlled types and user-defined finalization are new to Ada 95.
   ensure that coextensions are handled by other means (such as
   in No_Nested_Finalization @en see @RefSecNum{Tasking Restrictions})
   or that they cannot happen.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected wording to
+  reflect that limited types also have assignment operations.]}
 @end{DiffWord95}
 
 
