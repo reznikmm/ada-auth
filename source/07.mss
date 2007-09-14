@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2007/09/07 02:57:42 $}
+@Comment{$Date: 2007/09/14 03:34:28 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -3187,16 +3187,25 @@ finalized).]}
 @end{Discussion}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023],ARef=[AI95-00169-01]}
-@Chg{New=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0064-1]}
+@ChgDeleted{Version=[3],Text=[@Chg{New=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 For a Finalize invoked as part of the finalization of the anonymous
 object created by a function call or @nt{aggregate}, any other finalizations
-due to be performed are performed, and then Program_Error is raised.],Old=[]}
+due to be performed are performed, and then Program_Error is raised.],Old=[]}]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023],ARef=[AI95-00169-01]}
 @Chg{New=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 For a Finalize invoked due to reaching the end of the execution of a
 master, any other finalizations associated with the master are performed, and
 Program_Error is raised immediately after leaving the master.],Old=[]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0064-1]}
+@begin{Discussion}
+@ChgAdded{Version=[3],Text=[This rule covers both ordinary objects created
+by a declaration, and anonymous objects created as part of evaluating an
+@nt{expression}. All contexts that create objects that need finalization
+are defined to be masters.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
