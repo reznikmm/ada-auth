@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2007/09/06 04:58:39 $}
+@Comment{$Date: 2007/09/07 02:57:42 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.88 $}
+@Comment{$Revision: 1.89 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2411,11 +2411,17 @@ Adjustment is never @Chg{Version=[3],New=[actually ],Old=[]}performed for
   types do not support copying]}.
 @end{Ramification}
 @begin{Reason}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   The verbiage in the Initialize rule about access discriminants
-    constrained by per-object expressions is not necessary here,
-    since such types are limited,
-    and therefore are never adjusted.
-@end{Reason}@Comment{The above is complete BS}
+  constrained by per-object expressions is not necessary here,
+  since such types are
+  @Chg{Version=[3],New=[either ],Old=[]}limited@Chg{Version=[3],New=[ or
+  do not have defaults, so the discriminant can only be changed by
+  an assignment to an outer object. Such an assignment could
+  happen only before any adjustments or (if part of an outer Adjust)
+  only after any inner (component) adjustments have completed.],
+  Old=[, and therefore are never adjusted.]}
+@end{Reason}
 
 @PDefn2{Term=[execution], Sec=(assignment_statement)}
 For an @nt{assignment_statement},
