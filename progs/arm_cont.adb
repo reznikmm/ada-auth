@@ -9,7 +9,7 @@ package body ARM_Contents is
     -- references.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004, 2005, 2006  AXE Consultants.
+    -- Copyright 2000, 2004, 2005, 2006, 2007  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -49,6 +49,7 @@ package body ARM_Contents is
     --  2/ 2/05 - RLB - Allowed more old titles.
     --  1/16/06 - RLB - Added debugging.
     --  9/22/06 - RLB - Created type Clause_Number_Type and added SubSubClause.
+    -- 10/12/07 - RLB - Extended the range of properly formatted clause numbers.
 
     function "<" (Left, Right : Clause_Number_Type) return Boolean is
 	-- True if Left comes before Right in the collating order.
@@ -237,9 +238,14 @@ package body ARM_Contents is
 		    elsif Clause_Number.Clause < 40 then
 		        return Character'Val (Character'Pos('0') + Clause_Number.Section) &
 		            ".3" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 30);
-		    else
+		    elsif Clause_Number.Clause < 50 then
 		        return Character'Val (Character'Pos('0') + Clause_Number.Section) &
 		            ".4" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 40);
+		    elsif Clause_Number.Clause < 60 then
+		        return Character'Val (Character'Pos('0') + Clause_Number.Section) &
+		            ".5" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 50);
+		    else
+			raise Program_Error; -- Out of range.
 		    end if;
 		elsif Clause_Number.Section < 20 then
 		    if Clause_Number.Clause < 10 then
@@ -254,9 +260,14 @@ package body ARM_Contents is
 		    elsif Clause_Number.Clause < 40 then
 		        return "1" & Character'Val (Character'Pos('0') + Clause_Number.Section - 10) &
 		            ".3" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 30);
-		    else
+		    elsif Clause_Number.Clause < 50 then
 		        return "1" & Character'Val (Character'Pos('0') + Clause_Number.Section - 10) &
 		            ".4" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 40);
+		    elsif Clause_Number.Clause < 60 then
+		        return "1" & Character'Val (Character'Pos('0') + Clause_Number.Section - 10) &
+		            ".5" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 50);
+		    else
+			raise Program_Error; -- Out of range.
 		    end if;
 		elsif Clause_Number.Section < 30 then
 		    if Clause_Number.Clause < 10 then
@@ -271,9 +282,14 @@ package body ARM_Contents is
 		    elsif Clause_Number.Clause < 40 then
 		        return "2" & Character'Val (Character'Pos('0') + Clause_Number.Section - 20) &
 		            ".3" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 30);
-		    else
+		    elsif Clause_Number.Clause < 50 then
 		        return "2" & Character'Val (Character'Pos('0') + Clause_Number.Section - 20) &
 		            ".4" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 40);
+		    elsif Clause_Number.Clause < 60 then
+		        return "2" & Character'Val (Character'Pos('0') + Clause_Number.Section - 20) &
+		            ".5" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 50);
+		    else
+			raise Program_Error; -- Out of range.
 		    end if;
 		elsif Clause_Number.Section = 30 then
 		    if Clause_Number.Clause < 10 then
@@ -284,8 +300,12 @@ package body ARM_Contents is
 		        return "30.2" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 20);
 		    elsif Clause_Number.Clause < 40 then
 		        return "30.3" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 30);
-		    else
+		    elsif Clause_Number.Clause < 50 then
 		        return "30.4" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 40);
+		    elsif Clause_Number.Clause < 60 then
+		        return "30.5" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 50);
+		    else
+			raise Program_Error; -- Out of range.
 		    end if;
 		else
 		    if Clause_Number.Clause < 10 then
@@ -300,9 +320,14 @@ package body ARM_Contents is
 		    elsif Clause_Number.Clause < 40 then
 			return Character'Val (Character'Pos('A') + (Clause_Number.Section - ANNEX_START)) &
 		            ".3" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 30);
-		    else
+		    elsif Clause_Number.Clause < 50 then
 			return Character'Val (Character'Pos('A') + (Clause_Number.Section - ANNEX_START)) &
 		            ".4" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 40);
+		    elsif Clause_Number.Clause < 60 then
+			return Character'Val (Character'Pos('A') + (Clause_Number.Section - ANNEX_START)) &
+		            ".4" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 50);
+		    else
+			raise Program_Error; -- Out of range.
 		    end if;
 		end if;
 	    when Subclause =>
@@ -315,9 +340,14 @@ package body ARM_Contents is
 		elsif Clause_Number.Subclause < 30 then
 		    return Make_Clause_Number (Clause, (Clause_Number.Section, Clause_Number.Clause, 0, 0)) &
 		        ".2" & Character'Val (Character'Pos('0') + Clause_Number.Subclause - 20);
-		else
+		elsif Clause_Number.Subclause < 40 then
 		    return Make_Clause_Number (Clause, (Clause_Number.Section, Clause_Number.Clause, 0, 0)) &
 		        ".3" & Character'Val (Character'Pos('0') + Clause_Number.Subclause - 30);
+		elsif Clause_Number.Subclause < 50 then
+		    return Make_Clause_Number (Clause, (Clause_Number.Section, Clause_Number.Clause, 0, 0)) &
+		        ".4" & Character'Val (Character'Pos('0') + Clause_Number.Subclause - 40);
+	        else
+		    raise Program_Error; -- Out of range.
 		end if;
 	    when Subsubclause =>
 		if Clause_Number.Subsubclause < 10 then
@@ -329,9 +359,14 @@ package body ARM_Contents is
 		elsif Clause_Number.Subclause < 30 then
 		    return Make_Clause_Number (Subclause, (Clause_Number.Section, Clause_Number.Clause, Clause_Number.Subclause, 0)) &
 		        ".2" & Character'Val (Character'Pos('0') + Clause_Number.Subsubclause - 20);
-		else
+		elsif Clause_Number.Subclause < 40 then
 		    return Make_Clause_Number (Subclause, (Clause_Number.Section, Clause_Number.Clause, Clause_Number.Subclause, 0)) &
 		        ".3" & Character'Val (Character'Pos('0') + Clause_Number.Subsubclause - 30);
+		elsif Clause_Number.Subclause < 50 then
+		    return Make_Clause_Number (Subclause, (Clause_Number.Section, Clause_Number.Clause, Clause_Number.Subclause, 0)) &
+		        ".4" & Character'Val (Character'Pos('0') + Clause_Number.Subsubclause - 40);
+	        else
+		    raise Program_Error; -- Out of range.
 		end if;
 	end case;
     end Make_Clause_Number;
