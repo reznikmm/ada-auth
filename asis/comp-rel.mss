@@ -1,6 +1,6 @@
 @Part(comp-rel, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/comp-rel.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2007/02/18 03:23:55 $}
+@comment{$Revision: 1.7 $ $Date: 2007/10/13 05:33:32 $}
 
 
 @LabeledSection{package Asis.Compilation_Units.Relations}
@@ -266,7 +266,9 @@ list of Dependents for the Compilation_Units.
 All units in the result will have an Enclosing_Context value that
 Is_Identical to The_Context.
 
-@leading@keepnext@;Appropriate Unit_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Compilation_Units and Dependent_Units
+expect all units in the list to have],Old=[Appropriate]} Unit_Kinds:
 @begin{Display}
 A_Procedure
 A_Function
@@ -293,6 +295,11 @@ A_Task_Body_Subunit
 A_Protected_Body_Subunit
 An_Unknown_Unit            -- @examcom{See @ImplPermTitle}
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Compilation_Unit
+with a Status of Value_Error for any unit that does not have one of these expected
+kinds.]}
 
 The Semantic_Dependence_Order query should never raise an exception
 when processing inconsistent unit (sub)sets. This query is the only
@@ -356,7 +363,9 @@ required to elaborate the arguments.
 Use the Context_Clause_Elements query to get pragma Elaborate elements
 for a compilation unit.
 
-@leading@keepnext@;Appropriate Unit_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Compilation_Units expects all units
+in the list to have],Old=[Appropriate]} Unit_Kinds:
 @begin{Display}
 A_Procedure
 A_Function
@@ -383,6 +392,11 @@ A_Task_Body_Subunit
 A_Protected_Body_Subunit
 An_Unknown_Unit            -- @examcom{See @ImplPermTitle}
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Compilation_Unit with
+a Status of Value_Error for any unit that does not have one of these expected
+kinds.]}
 @end{DescribeCode}
 
 @begin{ImplPerm}

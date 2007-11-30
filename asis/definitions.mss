@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2007/08/05 01:46:38 $}
+@comment{$Revision: 1.8 $ $Date: 2007/10/13 05:33:33 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -64,7 +64,9 @@ operation, must have Is_Part_Of_Implicit = True so that an ASIS application
 can tell the difference between a user-specified @key[not](A=B) and an
 implementation-specific A/=B transformation.
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0015-1]}
 A_Type_Definition@Chg{Version=[2],New=[
@@ -76,7 +78,14 @@ A_Protected_Definition],Old=[]}
 A_Formal_Type_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Declaration_Kinds:
 @begin{Display}
 A_Function_Declaration
 A_Function_Body_Declaration
@@ -135,13 +144,22 @@ derived_type_definition to query.
 
 Returns the parent_subtype_indication following the reserved word @key[new].
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 A_Derived_Type_Definition
 A_Derived_Record_Extension_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Subtype_Indication
 @end{Display}
@@ -161,14 +179,23 @@ definition to query.
 
 Returns the record definition of the type_definition.
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 A_Derived_Record_Extension_Definition
 A_Record_Type_Definition
 A_Tagged_Record_Type_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Record_Definition
 A_Null_Record_Definition
@@ -202,25 +229,42 @@ such implicit declarations.
 The Enclosing_Element for each of the implicit declarations is the
 Declaration argument.
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
+of],Old=[Appropriate]} Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised]}
 @begin{Display}
-A_Type_Definition
+A_Type_Definition@Chg{Version=[2],New=[ that has one of Type_Kinds:
+    A_Derived_Type_Definition
+    A_Derived_Record_Extension_Definition],Old=[]}
 A_Private_Extension_Definition
-A_Formal_Type_Definition
+A_Formal_Type_Definition@Chg{Version=[2],New=[ that has one of Formal_Type_Kinds:
+    A_Formal_Derived_Type_Definition],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Type_Kinds:]}
 @begin{Display}
-A_Derived_Type_Definition
-A_Derived_Record_Extension_Definition
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Derived_Type_Definition
+A_Derived_Record_Extension_Definition]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Formal_Type_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Formal_Type_Kinds:]}
 @begin{Display}
-A_Formal_Derived_Type_Definition
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Formal_Derived_Type_Definition]}
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Declaration_Kinds:
 @begin{Display}
 An_Enumeration_Literal_Specification
 A_Discriminant_Specification
@@ -276,25 +320,42 @@ such implicit declarations.
 The Enclosing_Element for each of the subprogram declarations is the
 Definition argument.
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
-A_Type_Definition
+@ChgRef{Version=[2],Kind=[Revised]}
+A_Type_Definition@Chg{Version=[2],New=[ that has one of Type_Kinds:
+    A_Derived_Type_Definition
+    A_Derived_Record_Extension_Definition],Old=[]}
 A_Private_Extension_Definition
-A_Formal_Type_Definition
+A_Formal_Type_Definition@Chg{Version=[2],New=[ that has one of Formal_Type_Kinds:
+    A_Formal_Derived_Type_Definition],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Type_Kinds:]}
 @begin{Display}
-A_Derived_Type_Definition
-A_Derived_Record_Extension_Definition
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Derived_Type_Definition
+A_Derived_Record_Extension_Definition]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Formal_Type_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Formal_Type_Kinds:]}
 @begin{Display}
-A_Formal_Derived_Type_Definition
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Formal_Derived_Type_Definition]}
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Declaration_Kinds:
 @begin{Display}
 A_Function_Declaration
 A_Procedure_Declaration
@@ -324,13 +385,17 @@ derived_type_definition to query.
 Returns the parent subtype declaration of the derived_type_definition.
 The parent subtype is defined by the parent_subtype_indication.
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 A_Derived_Type_Definition
 A_Derived_Record_Extension_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Declaration_Kinds:
 @begin{Display}
 An_Ordinary_Type_Declaration
 A_Task_Type_Declaration
@@ -367,13 +432,22 @@ root or universal types are to ask for the type of a universal expression
 or from the parameter and result profile of a predefined operation working
 with numeric types.
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 A_Derived_Type_Definition
 A_Derived_Record_Extension_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Declaration_Kinds:
 @begin{Display}
 An_Ordinary_Type_Declaration
 A_Task_Type_Declaration
@@ -402,13 +476,22 @@ been derived. This function will recursively unwind derivations and
 subtyping until the type_declaration derives a change of representation or
 is no longer derived. See Reference Manual 13.6.
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 A_Derived_Type_Definition
 A_Derived_Record_Extension_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Declaration_Kinds:
 @begin{Display}
 An_Ordinary_Type_Declaration
 A_Task_Type_Declaration
@@ -445,12 +528,21 @@ enumeration type definition to query.
 Returns a list of the literals declared in an enumeration_type_definition,
 in their order of appearance.
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 An_Enumeration_Type_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Declaration_Kinds:
 @begin{Display}
 An_Enumeration_Literal_Specification
 @end{Display}
@@ -482,12 +574,21 @@ signed_integer_type_definition to query.
 
 Returns the range_constraint of the signed_integer_type_definition.
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 A_Signed_Integer_Type_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Constraint_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Constraint_Kinds:
 @begin{Display}
 A_Simple_Expression_Range
 @end{Display}
@@ -519,12 +620,21 @@ modular_type_definition to query.
 
 Returns the static_expression following the reserved word @key[mod].
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 A_Modular_Type_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -567,20 +677,32 @@ to query.
 
 Returns the static_expression following the reserved word @key[digits].
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 A_Floating_Point_Definition
 A_Decimal_Fixed_Point_Definition
 @end{Display}
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[or Definition expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
-A_Constraint
-  Appropriate Constraint_Kinds:
+@ChgRef{Version=[2],Kind=[Revised]}
+A_Constraint@Chg{Version=[2],New=[ that has],Old=[
+  Appropriate]} Constraint_Kinds:
     A_Digits_Constraint
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -610,20 +732,32 @@ definition to query.
 
 Returns the static_expression following the reserved word @key[delta].
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 An_Ordinary_Fixed_Point_Definition
 A_Decimal_Fixed_Point_Definition
 @end{Display}
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[or Definition expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
-A_Constraint
-  Appropriate Constraint_Kinds:
+@ChgRef{Version=[2],Kind=[Revised]}
+A_Constraint@Chg{Version=[2],New=[ that has],Old=[
+  Appropriate]} Constraint_Kinds:
     A_Delta_Constraint
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -645,22 +779,34 @@ Returns the real_range_specification range_constraint of the definition.
 
 Returns a Nil_Element if there is no explicit range_constraint.
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 A_Floating_Point_Definition
 An_Ordinary_Fixed_Point_Definition
 A_Decimal_Fixed_Point_Definition
 @end{Display}
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[or Definition expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
-A_Constraint
-  Appropriate Constraint_Kinds:
+@ChgRef{Version=[2],Kind=[Revised]}
+A_Constraint@Chg{Version=[2],New=[ that has one of],Old=[
+  Appropriate]} Constraint_Kinds:
     A_Digits_Constraint
     A_Delta_Constraint
 @end{Display}
 
-@leading@keepnext@;Returns Constraint_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Constraint_Kinds:
 @begin{Display}
 Not_A_Constraint
 A_Simple_Expression_Range
@@ -694,17 +840,28 @@ array_type_definition to query.
 Returns a list of the index_subtype_definition subtype mark names for
 an unconstrained_array_definition, in their order of appearance.
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 An_Unconstrained_Array_Definition
 @end{Display}
 
-@leading@keepnext@;Appropriate Formal_Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[or Type_Definition expects an element
+of],Old=[Appropriate]} Formal_Type_Kinds:
 @begin{Display}
 A_Formal_Unconstrained_Array_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 A_Selected_Component
@@ -738,17 +895,28 @@ array_type_definition to query.
 Returns the list of Discrete_Subtype_Definition elements of a
 constrained_array_definition, in their order of appearance.
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 A_Constrained_Array_Definition
 @end{Display}
 
-@leading@keepnext@;Appropriate Formal_Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[or Type_Definition expects an element
+of],Old=[Appropriate]} Formal_Type_Kinds:
 @begin{Display}
 A_Formal_Constrained_Array_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Discrete_Subtype_Definition
 @end{Display}
@@ -769,19 +937,30 @@ array_type_definition to query.
 
 Returns the Component_Definition of the array_type_definition.
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 An_Unconstrained_Array_Definition
 A_Constrained_Array_Definition
 @end{Display}
 
-@leading@keepnext@;Appropriate Formal_Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[or Type_Definition expects an element
+of],Old=[Appropriate]} Formal_Type_Kinds:
 @begin{Display}
 A_Formal_Unconstrained_Array_Definition
 A_Formal_Constrained_Array_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Component_Definition
 @end{Display}
@@ -825,24 +1004,37 @@ Access_Type_Definition to query.
 
 Returns the subtype_indication following the reserved word @key[access].
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 An_Access_Type_Definition
 @end{Display}
 
-@leading@keepnext@;Appropriate Formal_Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Formal_Type_Kinds:
 @begin{Display}
 A_Formal_Access_Type_Definition
 @end{Display}
 
-@leading@keepnext@;Appropriate Access_Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[or Type_Definition expects an element
+of],Old=[Appropriate]} Access_Type_Kinds:
 @begin{Display}
 A_Pool_Specific_Access_To_Variable
 An_Access_To_Variable
 An_Access_To_Constant
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Subtype_Indication
 @end{Display}
@@ -871,13 +1063,17 @@ implementations normalize all multiple name parameter_specification elements
 into an equivalent sequence of corresponding single name
 parameter_specification elements. See Reference Manual 3.3.1(7).
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 An_Access_Type_Definition
 A_Formal_Access_Type_Definition
 @end{Display}
 
-@leading@keepnext@;Appropriate Access_Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[or Type_Definition expects an element
+of],Old=[Appropriate]} Access_Type_Kinds:
 @begin{Display}
 An_Access_To_Procedure
 An_Access_To_Protected_Procedure
@@ -885,7 +1081,14 @@ An_Access_To_Function
 An_Access_To_Protected_Function
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Declaration_Kinds:
 @begin{Display}
 A_Parameter_Specification
 @end{Display}
@@ -907,19 +1110,30 @@ Access_Type_Definition to query.
 Returns the subtype_mark expression for the return type for the access
 function.
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 An_Access_Type_Definition
 A_Formal_Access_Type_Definition
 @end{Display}
 
-@leading@keepnext@;Appropriate Access_Type_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Access_Type_Kinds:
 @begin{Display}
 An_Access_To_Function
 An_Access_To_Protected_Function
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 A_Selected_Component
@@ -955,21 +1169,31 @@ to query.
 
 Returns the subtype_mark expression of the definition.
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
+@ChgRef{Version=[2],Kind=[Revised]}
 A_Subtype_Indication
-A_Discrete_Subtype_Definition
-  Appropriate Discrete_Range_Kinds:
+A_Discrete_Subtype_Definition@Chg{Version=[2],New=[that has ],Old=[
+  Appropriate]} Discrete_Range_Kinds:
     A_Discrete_Subtype_Indication
-A_Discrete_Range
-  Appropriate Discrete_Range_Kinds:
+A_Discrete_Range@Chg{Version=[2],New=[that has ],Old=[
+  Appropriate]} Discrete_Range_Kinds:
     A_Discrete_Subtype_Indication
-A_Formal_Type_Definition
-  Appropriate Formal_Type_Kinds:
+A_Formal_Type_Definition@Chg{Version=[2],New=[that has ],Old=[
+  Appropriate]} Formal_Type_Kinds:
     A_Formal_Derived_Type_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 A_Selected_Component
@@ -993,18 +1217,28 @@ Returns the constraint of the subtype_indication.
 
 Returns a Nil_Element if no explicit constraint is present.
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
+@ChgRef{Version=[2],Kind=[Revised]}
 A_Subtype_Indication
-A_Discrete_Subtype_Definition
-  Appropriate Discrete_Range_Kinds:
+A_Discrete_Subtype_Definition@Chg{Version=[2],New=[ that has ],Old=[
+  Appropriate]} Discrete_Range_Kinds:
     A_Discrete_Subtype_Indication
-A_Discrete_Range
-  Appropriate Discrete_Range_Kinds:
+A_Discrete_Range@Chg{Version=[2],New=[ that has ],Old=[
+  Appropriate]} Discrete_Range_Kinds:
     A_Discrete_Subtype_Indication
 @end{Display}
 
-@leading@keepnext@;Returns Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Definition_Kinds:
 @begin{Display}
 Not_A_Definition
 A_Constraint
@@ -1043,17 +1277,28 @@ range_constraint or discrete_range to query.
 
 Returns the simple_expression for the lower bound of the range.
 
-@leading@keepnext@;Appropriate Constraint_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Constraint expects an element
+of],Old=[Appropriate]} Constraint_Kinds:
 @begin{Display}
 A_Simple_Expression_Range
 @end{Display}
 
-@leading@keepnext@;Appropriate Discrete_Range_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[or Constraint expects an element
+of],Old=[Appropriate]} Discrete_Range_Kinds:
 @begin{Display}
 A_Discrete_Simple_Expression_Range
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1073,17 +1318,28 @@ range_constraint or discrete_range to query.
 
 Returns the simple_expression for the upper bound of the range.
 
-@leading@keepnext@;Appropriate Constraint_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Constraint expects an element
+of],Old=[Appropriate]} Constraint_Kinds:
 @begin{Display}
 A_Simple_Expression_Range
 @end{Display}
 
-@leading@keepnext@;Appropriate Discrete_Range_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[or Constraint expects an element
+of],Old=[Appropriate]} Discrete_Range_Kinds:
 @begin{Display}
 A_Discrete_Simple_Expression_Range
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1112,17 +1368,28 @@ range_attribute_reference or discrete_range attribute_reference to query.
 
 Returns the range_attribute_reference expression of the range.
 
-@leading@keepnext@;Appropriate Constraint_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Constraint expects an element
+of],Old=[Appropriate]} Constraint_Kinds:
 @begin{Display}
 A_Range_Attribute_Reference
 @end{Display}
 
-@leading@keepnext@;Appropriate Discrete_Range_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[or Constraint expects an element
+of],Old=[Appropriate]} Discrete_Range_Kinds:
 @begin{Display}
 A_Discrete_Range_Attribute_Reference
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Attribute_Reference
 @end{Display}
@@ -1175,12 +1442,21 @@ index_constraint to query.
 Returns the list of discrete_range components for an index_constraint,
 in their order of appearance.
 
-@leading@keepnext@;Appropriate Constraint_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Constraint expects an element
+of],Old=[Appropriate]} Constraint_Kinds:
 @begin{Display}
 An_Index_Constraint
 @end{Display}
 
-@leading@keepnext@;Returns Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Discrete_Range
 @end{Display}
@@ -1232,12 +1508,21 @@ association has one A_Defining_Name component that denotes the
 discriminant_specification, and one An_Expression component that is the
 explicit expression.
 
-@leading@keepnext@;Appropriate Constraint_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Constraint expects an element
+of],Old=[Appropriate]} Constraint_Kinds:
 @begin{Display}
 A_Discriminant_Constraint
 @end{Display}
 
-@leading@keepnext@;Returns Association_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Association_Kinds:
 @begin{Display}
 A_Discriminant_Association
 @end{Display}
@@ -1291,12 +1576,21 @@ Component_Definition to query.
 
 Returns the subtype_indication of the Component_Definition.
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Component_Definition expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 A_Component_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Subtype_Indication
 @end{Display}
@@ -1370,12 +1664,21 @@ implementations normalize all multi-name discriminant_specification elements
 into an equivalent sequence of single name discriminant_specification elements.
 See Reference Manual 3.3.1(7).
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 A_Known_Discriminant_Part
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Declaration_Kinds:
 @begin{Display}
 A_Discriminant_Specification
 @end{Display}
@@ -1415,34 +1718,53 @@ record_definition. See Reference Manual 13.5.1 (15). These components are not
 normally visible to the ASIS application. However, they can be obtained
 with the query Implicit_Components.
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 A_Record_Definition
 A_Variant
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Pragma
-A_Declaration
-A_Definition
-A_Clause
+A_Declaration@Chg{Version=[2],New=[ that has one of Declaration_Kinds:
+    A_Component_Declaration],Old=[]}
+A_Definition@Chg{Version=[2],New=[ that has one of Definition_Kinds:
+    A_Null_Component
+    A_Variant_Part],Old=[]}
+A_Clause@Chg{Version=[2],New=[ that has one of Definition_Kinds:
+    An_Attribute_Definition_Clause],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns Declaration_Kinds:]}
 @begin{Display}
-A_Component_Declaration
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Component_Declaration]}
 @end{Display}
 
-@leading@keepnext@;Returns Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns Definition_Kinds:]}
 @begin{Display}
-A_Null_Component
-A_Variant_Part
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Null_Component
+A_Variant_Part]}
 @end{Display}
 
-@leading@keepnext@;Returns Representation_Clause_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns Representation_Clause_Kinds:]}
 @begin{Display}
-An_Attribute_Definition_Clause
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[An_Attribute_Definition_Clause]}
 @end{Display}
 @end{DescribeCode}
 
@@ -1467,20 +1789,33 @@ Returns a Nil_Element_List if there are no implicit implementation-defined
 components or if the ASIS implementation does not support such
 implicit declarations.
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 A_Record_Definition
 A_Variant
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
-A_Declaration
+@ChgRef{Version=[2],Kind=[Revised]}
+A_Declaration@Chg{Version=[2],New=[ that has Declaration_Kinds:
+  A_Component_Declaration],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns Declaration_Kinds:]}
 @begin{Display}
-A_Component_Declaration
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Component_Declaration]}
 @end{Display}
 @end{DescribeCode}
 
@@ -1524,12 +1859,21 @@ variant_part to query.
 
 Returns the Discriminant_Direct_Name of the variant_part.
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Variant_Part expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 A_Variant_Part
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 @end{Display}
@@ -1557,20 +1901,33 @@ The only pragmas returned are those following the reserved word @key[is]
 and preceding the reserved word @key[when] of first variant, and those between
 following variants.
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Variant_Part expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 A_Variant_Part
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
+@ChgRef{Version=[2],Kind=[Revised]}
 A_Pragma
-A_Definition
+A_Definition@Chg{Version=[2],New=[ that has Definition_Kinds:
+  A_Variant],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Returns Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns Definition_Kinds:]}
 @begin{Display}
-A_Variant
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Variant]}
 @end{Display}
 @end{DescribeCode}
 
@@ -1601,21 +1958,35 @@ query.
 Returns the discrete_choice_list elements, in their order of appearance.
 Choices are either an expression, a discrete range, or an others choice.
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Variant expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 A_Variant
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
+@ChgRef{Version=[2],Kind=[Revised]}
 An_Expression
-A_Definition
+A_Definition@Chg{Version=[2],New=[ that has one of Definition_Kinds:
+  A_Discrete_Range
+  An_Others_Choice],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Returns Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns Definition_Kinds:]}
 @begin{Display}
-A_Discrete_Range
-An_Others_Choice
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Discrete_Range
+An_Others_Choice]}
 @end{Display}
 @end{DescribeCode}
 
@@ -1650,12 +2021,21 @@ to query.
 Returns the ancestor_subtype_indication following the reserved word @key[new]
 in the private_extension_declaration.
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 A_Private_Extension_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Subtype_Indication
 @end{Display}
@@ -1697,13 +2077,22 @@ declaration.
 
 Returns a Nil_Element_List if there are no items.
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 A_Task_Definition
 A_Protected_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Pragma
 A_Declaration
@@ -1732,13 +2121,22 @@ private part of the task or protected definition, in their order of appearance.
 
 Returns a Nil_Element_List if there are no items.
 
-@leading@keepnext@;Appropriate Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
+of],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 A_Task_Definition
 A_Protected_Definition
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Pragma
 A_Declaration
@@ -1765,11 +2163,18 @@ empty) private part.
 Returns False for any definition without a private part.
 Returns False for any unexpected Element.
 
-@leading@keepnext@;Expected Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
+of],Old=[Expected]} Definition_Kinds:
 @begin{Display}
 A_Task_Definition
 A_Protected_Definition
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
 @end{DescribeCode}
 
 @ChgNote{ SI99-0006-1 }
@@ -1783,37 +2188,46 @@ A_Protected_Definition
        @key[return] Asis.Name_List;]}
 @end{Example}
 
-@ChgAdded{Version=[2],Text=[
-Type_Definition specifies the definition to query.
-]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1]}
+@ChgAdded{Version=[2],Text=[Type_Definition specifies the definition to
+query.]}
 
-@ChgAdded{Version=[2],Text=[
-Returns a list of subtype marks making up the interface_list in the
-argument definition, in their order of appearance.
-]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1]}
+@ChgAdded{Version=[2],Text=[Returns a list of subtype marks making up the
+interface_list in the argument definition, in their order of appearance.]}
 
-@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Appropriate Type_Kinds:]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[Type_Definition
+expects an element of Type_Kinds:]}
 @begin{Display}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[A_Derived_Record_Extension_Definition
 An_Interface_Type_Definition]}
 @end{Display}
 
-@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Appropriate Formal_Type_Kinds:]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[or Type_Definition
+expects an element of Formal_Type_Kinds:]}
 @begin{Display}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[A_Formal_Derived_Type_Definition
 A_Formal_Interface_Type_Definition]}
 @end{Display}
 
-@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Returns Expression_Kinds:]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns a list
+of elements that each have one of Expression_Kinds:]}
 @begin{Display}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[An_Identifier
 A_Selected_Component]}
 @end{Display}
 @end{DescribeCode}
-
 
 
 

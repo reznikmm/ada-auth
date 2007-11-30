@@ -1,6 +1,6 @@
 @Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2007/08/05 01:46:38 $}
+@comment{$Revision: 1.7 $ $Date: 2007/10/13 05:33:34 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -66,7 +66,22 @@ Pragma may or may not have a Corresponding_Expression_Type.
 An_Attribute_Reference Element also may or may not have a
 Corresponding_Expression_Type;
 
-An enumeration_aggregate which is a part of enumeration_representation_clause.
+An enumeration_aggregate which is a part of enumeration_representation_clause;
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0009-1]}
+@ChgAdded{Version=[2],Text=[A_Box_Expression
+returned by Component_Expression applied to an unnormalized
+record association.]}
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0009-1]}
+@ChgAdded{Version=[2],Text=[AASIS Note:
+This is necessary as the <> of an unnnormalized record association
+may represent several components of different types. If the record association
+is normalized, it has a single component and the type of A_Box_Expression is
+that of the component. Similarly, the type of A_Box_Expression for an array
+association is that of the component type.]}
+@end{Discussion}
 @end{Itemize}
 
 Returns a Nil_Element, if the statically determinable type of Expression is a
@@ -89,12 +104,21 @@ implementor's compilation system and may not refer to any
 declared object.
 @end{UsageNote}
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 Not_An_Element
 A_Declaration
@@ -139,12 +163,19 @@ The form of numbers returned by this query may vary between implementors.
 Implementors are encouraged, but not required, to return numeric literals
 using the same based or exponent form used in the original compilation text.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Integer_Literal
 A_Real_Literal
 A_String_Literal
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
 @end{DescribeCode}
 
 
@@ -195,13 +226,20 @@ The case of names returned by this query may vary between implementors.
 Implementors are encouraged, but not required, to return names in the
 same case as was used in the original compilation text.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Identifier
 An_Operator_Symbol
 A_Character_Literal
 An_Enumeration_Literal
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
 @end{DescribeCode}
 
 @begin{SingleNote}
@@ -245,12 +283,21 @@ explicit elements within the given limits.
 
 Returned references are in their order of appearance.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Name expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Defining_Name
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -288,9 +335,18 @@ explicit elements within the given limits.
 
 Returns False for any unexpected Element.
 
-@leading@keepnext@;Expected Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Name expects an element
+of],Old=[Expected]} Element_Kinds:
 @begin{Display}
 A_Defining_Name
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Within_Element expects an element
+of Element_Kinds: ]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Defining_Name]}
 @end{Display}
 
 May raise ASIS_Failed with a Status of Obsolete_Reference_Error if the
@@ -350,7 +406,9 @@ Returns a Nil_Element if the argument is a dispatching call.
 The Enclosing_Element of a non-Nil result is either a Declaration or a
 Statement.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Reference expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Identifier
 An_Operator_Symbol
@@ -358,7 +416,14 @@ A_Character_Literal
 An_Enumeration_Literal
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 Not_An_Element
 A_Defining_Name
@@ -470,7 +535,9 @@ more than one entity. For example:
 The "+" expression is An_Operator_Symbol but could reference more than one "+"
 operator. In this case, the resulting list includes all referenced entities.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Reference expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Identifier
 An_Operator_Symbol
@@ -478,7 +545,14 @@ A_Character_Literal
 An_Enumeration_Literal
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Defining_Name
 @end{Display}
@@ -512,12 +586,21 @@ See the comments for Corresponding_Name_Definition for details.
 The result is either a Declaration or a Statement. Statements result
 from references to statement labels, loop identifiers, and block identifiers.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Reference expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Reference expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Identifier
 An_Operator_Symbol
@@ -525,7 +608,14 @@ A_Character_Literal
 An_Enumeration_Literal
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Declaration
 A_Statement
@@ -565,7 +655,9 @@ tick for attribute_reference elements).
 Returns the operator_symbol for infix operator function calls. The infix
 form A + B is equivalent to the prefix form "+"(A, B).
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Explicit_Dereference @em P.ALL
 An_Attribute_Reference @em Priv'Base'First
@@ -575,7 +667,14 @@ A_Selected_Component @em A.B.C
 A_Slice @em An_Array(3 .. 5)
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -607,12 +706,21 @@ indexed_component to query.
 Returns the list of expressions (possibly only one) within the parenthesis,
 in their order of appearance.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Indexed_Component
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -643,12 +751,21 @@ query.
 
 Returns the discrete range of the slice.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Slice
 @end{Display}
 
-@leading@keepnext@;Returns Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Discrete_Range
 @end{Display}
@@ -670,12 +787,21 @@ selected_component to query.
 Returns the selector (the construct to the right of the rightmost 'dot' in
 the selected_component).
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Selected_Component
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 An_Operator_Symbol
@@ -707,12 +833,21 @@ is First.
 Attribute_designator reserved words @key[access], @key[delta], and @key[digits]
 are treated as An_Identifier.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Attribute_Reference
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 @end{Display}
@@ -738,7 +873,9 @@ A'Last(N), A'Length(N), and A'Range(N).
 
 Returns a Nil_Element_List if there are no arguments.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Attribute_Reference
   Appropriate Attribute_Kinds:
@@ -750,7 +887,14 @@ An_Attribute_Reference
     An_Unknown_Attribute
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -797,13 +941,22 @@ A_Defining_Name component that denotes the discriminant_specification or
 component_declaration, and one An_Expression component that is the
 expression.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Record_Aggregate
 An_Extension_Aggregate
 @end{Display}
 
-@leading@keepnext@;Appropriate Association_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Association_Kinds:
 @begin{Display}
 A_Record_Component_Association
 @end{Display}
@@ -841,12 +994,21 @@ extension_aggregate expression to query.
 Returns the ancestor_part expression preceding the reserved word @key[with] in
 the extension_aggregate.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Extension_Aggregate
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -868,13 +1030,22 @@ aggregate expression to query.
 
 Returns a list of the Array_Component_Associations in an array aggregate.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Positional_Array_Aggregate
 A_Named_Array_Aggregate
 @end{Display}
 
-@leading@keepnext@;Returns Association_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Association_Kinds:
 @begin{Display}
 An_Array_Component_Association
 @end{Display}
@@ -919,18 +1090,29 @@ choice (@key[others] => expression).
 Returns a Nil_Element_List otherwise.
 @end{Itemize}
 
-@leading@keepnext@;Appropriate Association_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
+of],Old=[Appropriate]} Association_Kinds:
 @begin{Display}
 An_Array_Component_Association
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Definition
 An_Expression
 @end{Display}
 
-@leading@keepnext@;Returns Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Discrete_Range
 An_Others_Choice
@@ -988,12 +1170,21 @@ provide one formal A_Defining_Name => An_Expression pair per
 association. These artificial associations are Is_Normalized. Their
 component A_Defining_Name is not Is_Normalized.
 
-@leading@keepnext@;Appropriate Association_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
+of],Old=[Appropriate]} Association_Kinds:
 @begin{Display}
 A_Record_Component_Association
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Defining_Name @em Is_Normalized(Association)
 An_Expression @em @key[not] Is_Normalized(Association)
@@ -1028,13 +1219,37 @@ provide one formal A_Defining_Name => An_Expression pair per
 association. These artificial associations are Is_Normalized. Their
 component An_Expression elements are not Is_Normalized.
 
-@leading@keepnext@;Appropriate Association_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0009-1]}
+@ChgAdded{Version=[2],Text=[For An_Array_Component_Association and non-normalized
+A_Record_Component_Association where the association contains a
+box expression, Asis.Expressions.Component_Expression
+returns A_Box_Expression. ]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0009-1]}
+@ChgAdded{Version=[2],Text=[
+For a normalized A_Record_Component_Association, where the association
+contains a a box expression, if the corresponding record type that
+contains this component contains a default expression,
+Asis.Expressions.Component_Expression returns this default
+expression, otherwise Asis.Expressions.Component_Expression
+returns A_Box_Expression. ]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
+of],Old=[Appropriate]} Association_Kinds:
 @begin{Display}
 A_Record_Component_Association
 An_Array_Component_Association
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1103,21 +1318,33 @@ Actual_Parameter part. The normalized A_Generic_Association contains either
 a default parameter or an Expression_Element with expression kind
 A_Box_Expression;]}
 
-@leading@keepnext@;Appropriate Association_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
+of],Old=[Appropriate]} Association_Kinds:
 @begin{Display}
 A_Parameter_Association
 A_Generic_Association
 A_Pragma_Argument_Association
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 Not_An_Element
 An_Operator_Symbol
 A_Defining_Name @em Is_Normalized(Association)
 An_Expression @em @key[not] Is_Normalized(Association)
 @end{Display}
-@leading@keepnext@;Returns Expression_Kinds:
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 @end{Display}
@@ -1201,14 +1428,23 @@ Normalized lists contain artificial ASIS An_Association elements that
 If the argument is A_Pragma_Argument_Association, then this function may
 return any expression to support implementation-defined pragmas.
 
-@leading@keepnext@;Appropriate Association_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
+of],Old=[Appropriate]} Association_Kinds:
 @begin{Display}
 A_Parameter_Association
 A_Generic_Association
 A_Pragma_Argument_Association
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1263,12 +1499,21 @@ Normalized lists contain artificial ASIS An_Association elements that
   component A_Defining_Name elements are not Is_Normalized.
 @end{Itemize}
 
-@leading@keepnext@;Appropriate Association_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
+of],Old=[Appropriate]} Association_Kinds:
 @begin{Display}
 A_Discriminant_Association
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Defining_Name @em Is_Normalized (Association)
 An_Expression @em @key[not] Is_Normalized (Association)
@@ -1334,12 +1579,21 @@ Normalized lists contain artificial ASIS An_Association elements that
   not Is_Normalized and are not Is_Defaulted_Association.
 @end{Itemize}
 
-@leading@keepnext@;Appropriate Association_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
+of],Old=[Appropriate]} Association_Kinds:
 @begin{Display}
 A_Discriminant_Association
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1367,13 +1621,20 @@ these queries.
 
 Returns False for any unexpected Element.
 
-@leading@keepnext@;Expected Association_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
+of],Old=[Expected]} Association_Kinds:
 @begin{Display}
 A_Discriminant_Association
 A_Record_Component_Association
 A_Parameter_Association
 A_Generic_Association
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
 @end{DescribeCode}
 
 
@@ -1400,11 +1661,18 @@ semantics and that was not explicitly supplied (typed) by the user.
 
 Returns False for any unexpected Element.
 
-@leading@keepnext@;Expected Association_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
+of],Old=[Expected]} Association_Kinds:
 @begin{Display}
 A_Parameter_Association
 A_Generic_Association
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
 @end{DescribeCode}
 
 @begin{UsageNote}
@@ -1439,12 +1707,21 @@ example, an expression of a type_conversion is A_Parenthesized_Expression only
 if it is similar to the form subtype_mark((expression)) where it has at least
 one set of its own parenthesis.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Parenthesized_Expression
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1474,10 +1751,17 @@ Foo (A, B);   -- @examcom{Returns True}
 ... A < B ... -- @examcom{Returns False}
 @end{ChildExample}
 
-@leading@keepnext@;Expected Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Expected]} Expression_Kinds:
 @begin{Display}
 A_Function_Call
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
 @end{DescribeCode}
 
 
@@ -1517,12 +1801,21 @@ Nil_Element should be returned. For an attribute reference which is not
 (re)defined by an attribute definition clause, a Nil_Element should be
 returned.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Function_Call
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Declaration_Kinds:
 @begin{Display}
 Not_A_Declaration
 A_Function_Declaration
@@ -1609,12 +1902,21 @@ calls). ASIS cannot produce any meaningful result in this case.
 The exception ASIS_Inappropriate_Element is raised when the function
 call is an attribute reference and Is_Normalized is True.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Function_Call
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Parameter_Association
 @end{Display}
@@ -1656,13 +1958,22 @@ circuit operation to query.
 Returns the expression preceding the reserved words @key[and then] or
 @key[or else] in the short circuit expression.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_And_Then_Short_Circuit
 An_Or_Else_Short_Circuit
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1685,13 +1996,22 @@ circuit operation to query.
 Returns the expression following the reserved words @key[or else] or
 @key[and then] in the short circuit expression.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_And_Then_Short_Circuit
 An_Or_Else_Short_Circuit
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1712,7 +2032,9 @@ membership test operation to query.
 
 Returns the expression on the left hand side of the membership test.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_In_Range_Membership_Test
 A_Not_In_Range_Membership_Test
@@ -1720,7 +2042,14 @@ An_In_Type_Membership_Test
 A_Not_In_Type_Membership_Test
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1743,13 +2072,22 @@ membership test operation to query.
 Returns the range following the reserved words @key[in] or @key[not in] from
 the membership test.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_In_Range_Membership_Test
 A_Not_In_Range_Membership_Test
 @end{Display}
 
-@leading@keepnext@;Returns Constraint_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Constraint_Kinds:
 @begin{Display}
 A_Range_Attribute_Reference
 A_Simple_Expression_Range
@@ -1773,13 +2111,22 @@ membership test operation to query.
 Returns the subtype_mark expression following the reserved words @key[in] or
 @key[not in] from the membership test.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_In_Type_Membership_Test
 A_Not_In_Type_Membership_Test
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 A_Selected_Component
@@ -1804,13 +2151,22 @@ conversion or qualified expression to query.
 Returns the subtype_mark expression that converts or qualifies the
 expression.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Type_Conversion
 A_Qualified_Expression
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 A_Selected_Component
@@ -1834,13 +2190,22 @@ conversion or qualified expression to query.
 
 Returns the expression being converted or qualified.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Type_Conversion
 A_Qualified_Expression
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1861,12 +2226,21 @@ expression to query.
 
 Returns the subtype indication for the object being allocated.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Allocation_From_Subtype
 @end{Display}
 
-@leading@keepnext@;Returns Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Subtype_Indication
 @end{Display}
@@ -1886,12 +2260,21 @@ expression to query.
 
 Returns the qualified expression for the object being allocated.
 
-@leading@keepnext@;Appropriate Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
+of],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Allocation_From_Qualified_Expression
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 A_Qualified_Expression
 @end{Display}

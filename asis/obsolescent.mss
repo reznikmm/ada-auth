@@ -1,10 +1,10 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2007/08/05 01:46:39 $}
+@Comment{$Date: 2007/10/13 05:33:34 $}
 @LabeledAddedNormativeAnnex{Version=[2],Name=[Obsolescent Features]}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/obsolescent.mss,v $}
-@comment{$Revision: 1.3 $}
+@comment{$Revision: 1.4 $}
 
 @LabeledAddedClause{Version=[2],Name=[Annex Contents]}
 
@@ -50,8 +50,9 @@ equivalent of the body. The block statement is not Is_Part_Of_Implicit. The
 block includes the declarative part, the sequence of statements, and any
 exception handlers.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0027-1]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Expected Declaration_Kinds:]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0027-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Declaration expects an
+element of Declaration_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[A_Function_Body_Declaration
@@ -61,8 +62,14 @@ A_Task_Body_Declaration
 An_Entry_Body_Declaration]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0027-1]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns Statement_Kinds:]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0027-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns an element with
+one of Statement_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[A_Block_Statement]}

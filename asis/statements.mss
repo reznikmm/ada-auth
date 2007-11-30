@@ -1,6 +1,6 @@
 @Part(statements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/statements.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2007/08/05 01:46:39 $}
+@comment{$Revision: 1.6 $ $Date: 2007/10/13 05:33:34 $}
 
 
 @LabeledSection{package Asis.Statements}
@@ -34,12 +34,21 @@ Returns a Nil_Element_List if there are no labels attached to the statement.
 
 The Enclosing_Element of the A_Defining_Name elements is the statement.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Defining_Name_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Defining_Name_Kinds:
 @begin{Display}
 A_Defining_Identifier
 @end{Display}
@@ -59,17 +68,29 @@ assignment statement to query.
 
 Returns the expression that names the left hand side of the assignment.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
-A_Statement
+A_Statement@Chg{Version=[2],New=[ that has Statement_Kinds:
+    An_Assignment_Statement],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Statement_Kinds:]}
 @begin{Display}
-An_Assignment_Statement
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[An_Assignment_Statement]}
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -89,17 +110,30 @@ assignment statement to query
 
 Returns the expression from the right hand side of the assignment.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
-A_Statement
+A_Statement@Chg{Version=[2],New=[ that has Statement_Kinds:
+    An_Assignment_Statement],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Statement_Kinds:]}
 @begin{Display}
-An_Assignment_Statement
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[An_Assignment_Statement]}
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @begin{Display}
 An_Expression
 @end{Display}
@@ -126,7 +160,9 @@ their order of appearance.
 The only pragmas returned are those preceding the first alternative in
 a case statement.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_If_Statement
 A_Case_Statement
@@ -136,7 +172,14 @@ A_Conditional_Entry_Call_Statement
 An_Asynchronous_Select_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Path
 A_Pragma
@@ -157,13 +200,22 @@ to query.
 
 Returns the condition expression for an @key[if] path or an @key[elsif] path.
 
-@leading@keepnext@;Appropriate Path_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Path expects an element
+of],Old=[Appropriate]} Path_Kinds:
 @begin{Display}
 An_If_Path
 An_Elsif_Path
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -187,12 +239,21 @@ pragmas are to be returned.
 Returns a list of the statements and pragmas from an execution path,
 in their order of appearance.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Path expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Path
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Statement
 A_Pragma
@@ -215,17 +276,29 @@ statement to query.
 Returns the expression of the case statement that determines which
 execution path is taken.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
-A_Statement
+A_Statement@Chg{Version=[2],New=[ that has Statement_Kinds:
+    A_Case_Statement],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Statement_Kinds:]}
 @begin{Display}
-A_Case_Statement
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Case_Statement]}
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -247,21 +320,34 @@ case_statement_alternative execution path to query.
 Returns a list of the "@key[when] <choice> | <choice>" elements, in their
 order of appearance.
 
-@leading@keepnext@;Appropriate Path_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Path expects an element
+of],Old=[Appropriate]} Path_Kinds:
 @begin{Display}
 A_Case_Path
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
-A_Definition
+A_Definition@Chg{Version=[2],New=[ that has one of Definition_Kinds:
+    A_Discrete_Range
+    An_Others_Choice],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Returns Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns Definition_Kinds:]}
 @begin{Display}
-A_Discrete_Range
-An_Others_Choice
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Discrete_Range
+An_Others_Choice]}
 @end{Display}
 @end{DescribeCode}
 
@@ -284,7 +370,9 @@ Returns a Nil_Element if the loop has no identifier.
 
 The Enclosing_Element of the name is the statement.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Loop_Statement
 A_While_Loop_Statement
@@ -292,7 +380,14 @@ A_For_Loop_Statement
 A_Block_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Defining_Name_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Defining_Name_Kinds:
 @begin{Display}
 Not_A_Defining_Name
 A_Defining_Identifier
@@ -317,7 +412,9 @@ statements since the name is required.
 
 Returns False for any unexpected Element.
 
-@leading@keepnext@;Expected Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Expected]} Statement_Kinds:
 @begin{Display}
 A_Block_Statement
 A_Loop_Statement
@@ -340,17 +437,29 @@ statement to query.
 
 Returns the condition expression associated with the while loop.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
-A_Statement
+A_Statement@Chg{Version=[2],New=[ that has Statement_Kinds:
+    A_While_Loop_Statement],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Statement_Kinds:]}
 @begin{Display}
-A_While_Loop_Statement
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_While_Loop_Statement]}
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -372,12 +481,21 @@ statement to query.
 
 Returns the declaration of the A_Loop_Parameter_Specification.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_For_Loop_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Declaration_Kinds:
 @begin{Display}
 A_Loop_Parameter_Specification
 @end{Display}
@@ -402,14 +520,23 @@ pragmas are to be returned.
 Returns the sequence_of_statements and any pragmas from the loop_statement,
 in their order of appearance.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Loop_Statement
 A_While_Loop_Statement
 A_For_Loop_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Pragma
 A_Statement
@@ -435,7 +562,9 @@ declarative_item elements is not relevant.
 Returns False if the @key[declare] reserved word does not appear in the
 block_statement, or for any unexpected Element.
 
-@leading@keepnext@;Expected Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Expected]} Statement_Kinds:
 @begin{Display}
 A_Block_Statement
 @end{Display}
@@ -464,12 +593,21 @@ order of appearance.
 
 Returns a Nil_Element_List if there are no declarative items.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Block_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Declaration
 A_Pragma
@@ -501,12 +639,21 @@ can only occur for a block_statement obtained from the obsolescent query
 Body_Block_Statement when its argument is a package_body
 that has no sequence_of_statements.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Block_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Pragma
 A_Statement
@@ -537,12 +684,21 @@ and preceding the reserved word @key[when] of first exception handler.
 
 Returns a Nil_Element_List if there are no exception_handler elements.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Block_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Exception_Handler
 A_Pragma
@@ -566,12 +722,21 @@ Returns the name of the exited loop.
 
 Returns a Nil_Element if no loop name is present.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Exit_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 Not_An_Expression
 An_Identifier
@@ -596,12 +761,21 @@ Returns the @key[when] condition of the exit statement.
 
 Returns a Nil_Element if no condition is present.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Exit_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 Not_An_Element
 An_Expression
@@ -623,12 +797,21 @@ statement to query.
 
 Returns the loop statement exited by the exit statement.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Exit_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Loop_Statement
 A_While_Loop_Statement
@@ -652,12 +835,21 @@ Returns the expression in the return statement.
 
 Returns a Nil_Element if no expression is present.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Return_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 Not_An_Element
 An_Expression
@@ -682,22 +874,26 @@ change all of the following clause numbers]}
      @key[return] Asis.Declaration;]}
 @end{Example}
 
-@ChgAdded{Version=[2],Text=[
-Statement specifies the extended return statement to query.
-]}
+@ChgAdded{Version=[2],Text=[Statement specifies the extended return statement
+to query.]}
 
-@ChgAdded{Version=[2],Text=[
-Returns the specification of the return object.
-]}
+@ChgAdded{Version=[2],Text=[Returns the specification of the return object.]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Appropriate Statement_Kinds:]}
+Statement expects an element of Statement_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[An_Extended_Return_Statement]}
 @end{Display}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Returns Declaration_Kinds:]}
+Returns an element with one of Declaration_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Return_Object_Specification]}
 @end{Display}
@@ -738,14 +934,21 @@ Returns a Nil_Element_List if the argument extended return statement does
 not include handled_sequence_of_statements.
 ]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Appropriate Statement_Kinds:]}
+Statement expects an element of Statement_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[An_Extended_Return_Statement]}
 @end{Display}
 
-@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Returns Element_Kinds:]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns a list of
+elements that wach have one of Element_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Statement
 A_Pragma]}
@@ -787,21 +990,26 @@ and preceding the reserved word "when" of first exception handler.]}
 @ChgAdded{Version=[2],Text=[
 Returns a Nil_Element_List if there are no exception_handler elements.]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Appropriate Statement_Kinds:]}
+Statement expects an element of Statement_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[An_Extended_Return_Statement]}
 @end{Display}
 
-@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Returns Element_Kinds:]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns a list of
+elements that each have one of Element_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[An_Exception_Handler
 A_Pragma]}
 @end{Display}
 @end{DescribeCode}
-
-
 
 
 @LabeledClause{function Goto_Label}
@@ -819,12 +1027,21 @@ statement to query.
 Returns the expression reference for the label, as specified by the goto
 statement.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Goto_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 @end{Display}
@@ -846,12 +1063,21 @@ statement to query.
 
 Returns the target statement specified by the goto statement.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Goto_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Statement
 @end{Display}
@@ -859,7 +1085,8 @@ A_Statement
 
 
 @begin{UsageNote}
-The Reference Manual allows a pragma between a statement and a label attached
+The @Chg{New=[Ada Standard],Old=[Reference Manual]} allows a pragma between
+a statement and a label attached
 to it. If so, when the label is passed as an actual parameter to
 this query, the query returns the statement, but not the label. The only way
 for an application to know that there are any pragmas between a statement
@@ -883,13 +1110,22 @@ call or entry call statement to query.
 Returns the name of the called procedure or entry. The name of an entry
 family takes the form of An_Indexed_Component.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Entry_Call_Statement
 A_Procedure_Call_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -930,13 +1166,22 @@ clause. If an implementation cannot return such a subprogram definition, a
 Nil_Element should be returned. For an attribute reference which is not
 (re)defined by an attribute definition clause, a Nil_Element should be returned.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Entry_Call_Statement
 A_Procedure_Call_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Declaration_Kinds:
 @begin{Display}
 Not_A_Declaration
 A_Procedure_Declaration
@@ -1022,13 +1267,22 @@ calls). ASIS cannot produce any meaningful result in this case.
 The exception ASIS_Inappropriate_Element is raised when the procedure
 call is an attribute reference and Is_Normalized is True.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Entry_Call_Statement
 A_Procedure_Call_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Parameter_Association
 @end{Display}
@@ -1070,12 +1324,21 @@ Returns the entry index expression in the accept statement.
 
 Returns a Nil_Element if the statement has no explicit entry index,
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 Not_An_Element
 An_Expression
@@ -1098,12 +1361,21 @@ statement to query.
 Returns the direct name of the entry. The name follows the reserved word
 @key[accept].
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 @end{Display}
@@ -1132,12 +1404,21 @@ implementations normalize all multiple name parameter specifications into an
 equivalent sequence of corresponding single name parameter specifications.
 See Reference Manual 3.3.1(7).
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Declaration_Kinds:
 @begin{Display}
 A_Parameter_Specification
 @end{Display}
@@ -1161,12 +1442,21 @@ pragmas are to be returned.
 Returns the list of statements and pragmas from the body of the accept
 statement, in their order of appearance.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Pragma
 A_Statement
@@ -1193,12 +1483,21 @@ pragmas are to be returned.
 Returns the list of exception handlers and pragmas from the body of the
 accept statement, in their order of appearance.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Pragma
 An_Exception_Handler
@@ -1220,12 +1519,21 @@ statement to query.
 
 Returns the declaration of the entry accepted in this statement.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Entry_Declaration
 @end{Display}
@@ -1247,13 +1555,22 @@ statement to query.
 Returns the name of the entry requeued by the statement.
 The name follows the reserved word @key[requeue].
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Requeue_Statement
 A_Requeue_Statement_With_Abort
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1274,13 +1591,22 @@ statement to query.
 
 Returns the expression for the duration of the delay.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Delay_Until_Statement
 A_Delay_Relative_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1305,13 +1631,22 @@ Returns a Nil_Element if there is no guard, or if the path is from a
 timed_entry_call, a conditional_entry_call, or an asynchronous_select
 statement where a guard is not legal.
 
-@leading@keepnext@;Appropriate Path_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Path expects an element
+of],Old=[Appropriate]} Path_Kinds:
 @begin{Display}
 A_Select_Path
 An_Or_Path
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 Not_An_Element
 An_Expression
@@ -1334,12 +1669,21 @@ statement to query.
 Returns a list of the task names from the @key[abort] statement, in their order
 of appearance.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Abort_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1364,12 +1708,21 @@ Returns the choice parameter specification following the reserved word
 
 Returns a Nil_Element if there is no explicit choice parameter.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Handler expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 An_Exception_Handler
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Declaration_Kinds:
 @begin{Display}
 Not_A_Declaration
 A_Choice_Parameter_Specification
@@ -1393,18 +1746,29 @@ Returns a list of the "@key[when] <choice> | <choice>" elements, in their
 order of appearance. Choices are either the exception name expression or
 an others choice.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Handler expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 An_Exception_Handler
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 A_Selected_Component
 @end{Display}
 
-@leading@keepnext@;Returns Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[or an element with
+one of ],Old=[Returns ]}Definition_Kinds:
 @begin{Display}
 An_Others_Choice
 @end{Display}
@@ -1429,12 +1793,21 @@ pragmas are to be returned.
 Returns the list of statements and pragmas from the body of the
 exception handler, in their order of appearance.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Handler expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 An_Exception_Handler
 @end{Display}
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Pragma
 A_Statement
@@ -1458,12 +1831,21 @@ Returns the expression that names the raised exception.
 
 Returns a Nil_Element if there is no explicitly named exception.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Raise_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 Not_An_Expression
 An_Identifier
@@ -1499,15 +1881,22 @@ statement.]}
 @ChgAdded{Version=[2],Text=[Returns a Nil_Element if there is no string
 expression.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Appropriate Statement_Kinds:]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Statement
+expects an element of Statement_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[A_Raise_Statement]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns Element_Kinds:]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns an element
+with one of Element_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Not_An_Element
@@ -1530,12 +1919,21 @@ statement to query.
 
 Returns the qualified aggregate expression representing the code statement.
 
-@leading@keepnext@;Appropriate Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+of],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Code_Statement
 @end{Display}
 
-@leading@keepnext@;Returns Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 A_Qualified_Expression
 @end{Display}
@@ -1560,12 +1958,16 @@ applies.
 
 Returns False for any unexpected Element.
 
-@leading@keepnext@;Expected Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Call expects an element
+of],Old=[Expected]} Expression_Kinds:
 @begin{Display}
 A_Function_Call
 @end{Display}
 
-@leading@keepnext@;Expected Statement_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[or Call expects an element
+of],Old=[Expected]} Statement_Kinds:
 @begin{Display}
 A_Procedure_Call_Statement
 @end{Display}
@@ -1588,7 +1990,9 @@ primitive operation of a tagged type.
 
 Returns False for any unexpected Element.
 
-@leading@keepnext@;Expected Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Call expects an element
+of],Old=[Expected]} Element_Kinds:
 @begin{Display}
 A_Function_Call
 A_Procedure_Call_Statement

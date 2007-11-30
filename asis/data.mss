@@ -1,6 +1,6 @@
 @Part(data, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/data.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2007/02/18 03:23:57 $}
+@comment{$Revision: 1.7 $ $Date: 2007/10/13 05:33:35 $}
 
 @LabeledSection{package Asis.Data_Decomposition (optional)}
 
@@ -504,7 +504,9 @@ Component @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a record f
 Returns the model that best describes the type indicated by the argument.
 Returns Not_A_Type_Model for any unexpected argument such as a Nil value.
 
-@leading@keepnext@;Expected Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Expected]} Element_Kinds:
 @begin{Display}
 A_Type_Definition
 @end{Display}
@@ -736,23 +738,36 @@ a value of the indicated record type.
 All Is_Record(Component) = True arguments are appropriate. All return
 values are valid parameters for all query operations.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
-A_Type_Definition
+A_Type_Definition@Chg{Version=[2],New=[ that has one of Type_Kinds:
+   A_Derived_Type_Definition       (derived from a record type)
+   A_Record_Type_Definition],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Type_Kinds:]}
 @begin{Display}
-A_Derived_Type_Definition       (derived from a record type)
-A_Record_Type_Definition
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Derived_Type_Definition       (derived from a record type)
+A_Record_Type_Definition]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Component expects an element
+of],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 A_Simple_Dynamic_Model
 A_Complex_Dynamic_Model
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
 @end{DescribeCode}
 
 
@@ -790,21 +805,34 @@ components (Reference Manual 13.5.1 (15)), then each such component of
 the record type is included in the result.
 @end{SingleNote}
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
-A_Type_Definition
+A_Type_Definition@Chg{Version=[2],New=[ that has one of Type_Kinds:
+   A_Derived_Type_Definition       (derived from a record type)
+   A_Record_Type_Definition],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Type_Kinds:]}
 @begin{Display}
-A_Derived_Type_Definition       (derived from a record type)
-A_Record_Type_Definition
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Derived_Type_Definition       (derived from a record type)
+A_Record_Type_Definition]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Component expects an element
+of],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
 @end{DescribeCode}
 
 
@@ -872,22 +900,35 @@ components (Reference Manual 13.5.1 (15)), then each such component of the
 record type is included in the result.
 @end{SingleNote}
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
-A_Type_Definition
+A_Type_Definition@Chg{Version=[2],New=[ that has one of Type_Kinds:
+   A_Derived_Type_Definition       (derived from a record type)
+   A_Record_Type_Definition],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Type_Kinds:]}
 @begin{Display}
-A_Derived_Type_Definition       (derived from a record type)
-A_Record_Type_Definition
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Derived_Type_Definition       (derived from a record type)
+A_Record_Type_Definition]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Component expects an element
+of],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 A_Simple_Dynamic_Model
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
 @end{DescribeCode}
 
 
@@ -920,23 +961,37 @@ type.
 All Is_Array (Component) = True values are appropriate. All return values
 are valid parameters for all query operations.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
-A_Type_Definition
+A_Type_Definition@Chg{Version=[2],New=[ that has one of Type_Kinds:
+   A_Derived_Type_Definition       (derived from an array type)
+   An_Unconstrained_Array_Definition
+   A_Constrained_Array_Definition],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Type_Kinds:]}
 @begin{Display}
-A_Derived_Type_Definition       (derived from an array type)
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Derived_Type_Definition       (derived from an array type)
 An_Unconstrained_Array_Definition
-A_Constrained_Array_Definition
+A_Constrained_Array_Definition]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Component expects an element
+of],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 A_Simple_Dynamic_Model
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
 @end{DescribeCode}
 
 
@@ -1027,15 +1082,21 @@ component declaration for an implementation-defined component (Reference Manual
 
 All non-Nil component values are appropriate.
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
-A_Declaration
+A_Declaration@Chg{Version=[2],New=[ that has one of Declaration_Kinds:
+    A_Component_Declaration
+    A_Discriminant_Specification],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Returns Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns Declaration_Kinds:]}
 @begin{Display}
-A_Component_Declaration
-A_Discriminant_Specification
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Component_Declaration
+A_Discriminant_Specification]}
 @end{Display}
 @end{DescribeCode}
 
@@ -1056,7 +1117,9 @@ the subtype, type, and base type of the array components.
 
 All non-Nil component values are appropriate.
 
-@leading@keepnext@;Returns Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Subtype_Indication
 @end{Display}
@@ -1081,23 +1144,36 @@ type. This list does not include the names of implementation-defined
 components (Reference Manual 13.5.1 (15)); those name have the form of
 An_Attribute_Reference expression.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
-A_Type_Definition
+A_Type_Definition@Chg{Version=[2],New=[ that has one of Type_Kinds:
+   A_Derived_Type_Definition       (derived from a record type)
+   A_Record_Type_Definition],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Type_Kinds:]}
 @begin{Display}
-A_Derived_Type_Definition       (derived from a record type)
-A_Record_Type_Definition
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Derived_Type_Definition       (derived from a record type)
+A_Record_Type_Definition]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[and Type_Definition expects an element
+of],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 A_Simple_Dynamic_Model
 A_Complex_Dynamic_Model
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
 @end{DescribeCode}
 
 
@@ -1170,15 +1246,24 @@ allocated to hold each array component.
 
 All non-Nil component values are appropriate.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Type_Definition
 @end{Display}
 
-@leading@keepnext@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Component expects an element
+of],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
 @end{DescribeCode}
 
 @begin{UsageNote}
@@ -1212,16 +1297,25 @@ Data_Stream is checked.
 The Data_Stream may be a data stream or it may be an artificial
 data stream created by the Construct_Artificial_Data_Stream operation.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Type_Definition
 @end{Display}
 
-@leading@keepnext@;Appropriate Asis.Data_Decomposition.Type_Model_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[and Type_Definition expects an element
+of],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 A_Simple_Dynamic_Model
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
 @end{DescribeCode}
 
 
@@ -1411,16 +1505,27 @@ component values may then be used for any purpose. In particular, they may
 be used to determine First_Bit, Last_Bit, and Size values for all record
 discriminants and components.
 
-@leading@keepnext@;Appropriate Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
-A_Type_Definition
+A_Type_Definition@Chg{Version=[2],New=[ that has one of Type_Kinds:
+   A_Derived_Type_Definition       (derived from a record type)
+   A_Record_Type_Definition],Old=[]}
 @end{Display}
 
-@leading@keepnext@;Appropriate Type_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Type_Kinds:]}
 @begin{Display}
-A_Derived_Type_Definition       (derived from a record type)
-A_Record_Type_Definition
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Derived_Type_Definition       (derived from a record type)
+A_Record_Type_Definition]}
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
 
 Raises ASIS_Inappropriate_Element, with a Status of Data_Error, if the
 discriminant Value is inappropriate for the specified Discriminant.

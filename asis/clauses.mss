@@ -1,6 +1,6 @@
 @Part(clauses, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/clauses.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2007/09/14 23:46:22 $}
+@comment{$Revision: 1.6 $ $Date: 2007/10/13 05:33:32 $}
 
 @LabeledSection{package Asis.Clauses}
 
@@ -62,7 +62,7 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
 one of ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
@@ -242,7 +242,7 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
 one of ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Clause@Chg{Version=[2],New=[ @em the returned element also has one of Clause_Kinds:],Old=[]}

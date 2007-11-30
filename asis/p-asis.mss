@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.11 $ $Date: 2007/08/05 01:46:39 $}
+@comment{$Revision: 1.12 $ $Date: 2007/10/13 05:33:35 $}
 
 @LabeledSection{package Asis}
 
@@ -638,6 +638,34 @@ provided for the convenience of the ASIS implementor:
 @end{DescribeCode}
 
 
+
+@ChgNote{ SI99-0003-1 }
+@Comment{@LabeledAddedClause{Version=[2],Name=[type Overriding_Indicator_Kinds]}}
+@*@thickline@*
+@ChgAdded{Version=[2],Text=[@b{@grow{@grow{3.9.x type Overriding_Indicator_Kinds}}}]}
+@begin{Discussion}
+@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
+change all of the following clause numbers]}
+@end{Discussion}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0003-1]}
+@ChgAdded{Version=[2],Text=[Type Overriding_Indicator_Kinds classifies declarations
+and specifications having an overrriding indicator.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0003-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Overriding_Indicator_Kinds} @key[is] (]}
+
+@ChgAdded{Version=[2],Text=[  @AdaObjDefn{Not_An_Overriding_Indicator},]}
+
+@ChgAdded{Version=[2],Text=[  @AdaObjDefn{No_Overriding_Indicator},          -- @examcom{8.3.1 (2)}
+  @AdaObjDefn{An_Indicator_of_Overriding},       -- @examcom{8.3.1 (2)}
+  @AdaObjDefn{An_Indicator_of_Not_Overriding});  -- @examcom{8.3.1 (2)}]}
+@end{Example}
+@end{DescribeCode}
+
+
 @LabeledSubClause{type Trait_Kinds}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0017-1]}
@@ -713,8 +741,8 @@ Literals]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0017-1]}
    @AdaObjDefn{Not_A_Trait},                         -- @examcom{An unexpected element}
-   @AdaObjDefn{An_Ordinary_Trait},                   -- @examcom{The declaration or definition does not @Chg{Version=[2],New=[have any of the following traits],Old=[contain the reserved words]}}@Chg{Version=[2],New=[],Old=[
-                                        -- @examcom{not contain the reserved words}
+   @AdaObjDefn{An_Ordinary_Trait},                   -- @examcom{The declaration or definition does}
+                                        -- @examcom{@Chg{Version=[2],New=[have any of the following traits],Old=[contain the reserved words]}}@Chg{Version=[2],New=[],Old=[
                                         -- @examcom{@key[aliased], @key[reverse], @key[private],}
                                         -- @examcom{@key[limited], @key[abstract], or}
                                         -- @examcom{@key[access] in an access_definition}]}
@@ -1086,6 +1114,9 @@ Literals                                   -- @examcom{Reference Manual -> Subor
 @key[type] @AdaTypeDefn{Expression_Kinds} @key[is] (
 
    @AdaObjDefn{Not_An_Expression},                         -- @examcom{An unexpected element}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0009-1]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{A_Box_Expression},                          -- @examcom{4.3.1(4), 4.3.3(3,6)} ]}
 
    @AdaObjDefn{An_Integer_Literal},                        -- @examcom{2.4}
    @AdaObjDefn{A_Real_Literal},                            -- @examcom{2.4.1}
