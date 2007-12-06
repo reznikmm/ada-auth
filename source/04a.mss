@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2007/07/17 02:11:48 $}
+@Comment{$Date: 2007/11/30 03:34:21 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.87 $}
+@Comment{$Revision: 1.88 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -831,14 +831,48 @@ or @nt{range_attribute_designator} shall be static.
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0006-1]}
 An @nt{attribute_reference} denotes a
 value, an object, a subprogram, or some
-other kind of program entity.
+other kind of program entity.@Chg{Version=[3],New=[ For an
+@nt{attribute_reference} that denotes a value or an object, if
+its type is scalar, then its nominal subtype is the base subtype of
+the type; otherwise, its nominal subtype is the first subtype of
+the type. Similarly, unless explicitly specified otherwise, for an
+@nt{attribute_reference} that denotes a function, when its result
+type is scalar, its result subtype is the base subtype of the type,
+and when non-scalar, the result subtype is the first subtype of the
+type.],Old=[]}
 @begin{Ramification}
-The attributes defined by the language are summarized in
-@RefSecNum{Language-Defined Attributes}.
-Implementations can define additional attributes.
+  The attributes defined by the language are summarized in
+  @RefSecNum{Language-Defined Attributes}.
+  Implementations can define additional attributes.
 @end{Ramification}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0006-1]}
+  @ChgAdded{Version=[3],Text=[The nominal subtype is primarily
+  a concern when an @nt{attribute_reference}, or
+  a call on an @nt{attribute_reference}, is used as the @nt{expression}
+  of a case statement, due to the full coverage requirement based on
+  the nominal subtype. For non-discrete cases, we define the
+  nominal subtype mainly for completeness. Implementations may
+  specify otherwise for implementation-defined attribute functions.]}
+@end{Discussion}
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0006-1]}
+  @ChgAdded{Version=[3],Text=[We don't worry about the fact that
+  @ldquote@;base subtype@rdquote or @ldquote@;first subtype@rdquote
+  is not explicitly defined for the universal types. Since it is
+  not possible to constrain a universal numeric type, all subtypes
+  are unconstrained, and hence can be considered base subtypes.
+  Similarly, since it is not possible to define a subtype of the
+  universal access type, all subtypes are considered first subtypes.
+  The wording above could be altered to bypass this issue, but it
+  doesn't seem necessary, since universal integer is handled
+  specially in the rules for case expression full coverage, and
+  we don't allow user-defined functions for attribute functions
+  whose result type is universal.]}
+@end{Honest}
 
 @Redundant[A @nt{range_attribute_reference}
 X'Range(N) is equivalent to the @nt<range> X'First(N) ..
@@ -986,6 +1020,10 @@ The Ada 83 rule said that the
   @ChgAdded{Version=[2],Text=[The note about resolving prefixes of attributes
   was updated to reflect that the prefix of an Access attribute now has an
   expected type (see @RefSecNum{Operations of Access Types}).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0006-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Defined the nominal
+  subtype of an @nt{attribute_reference} to close a minor language hole.]}
 @end{DiffWord95}
 
 

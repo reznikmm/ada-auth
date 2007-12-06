@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.53 $ $Date: 2007/07/10 05:00:55 $ $Author: Randy $ }
+@comment{ $Revision: 1.54 $ $Date: 2007/11/30 03:34:28 $ $Author: Randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2007/07/10 05:00:55 $}
+@Comment{$Date: 2007/11/30 03:34:28 $}
 
 @LabeledClause{String Handling}
 
@@ -2143,7 +2143,8 @@ as the length does not exceed the allocated length.
 @end{example}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00360-01]}
-@ChgAdded{Version=[2],Text=[The type Unbounded_String needs finalization
+@ChgAdded{Version=[2],Text=[The type Unbounded_String
+needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
 (see @RefSecNum{User-Defined Assignment and Finalization}).]}
 
 Null_Unbounded_String represents the null String.

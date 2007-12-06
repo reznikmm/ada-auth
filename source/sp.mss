@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.48 $ $Date: 2007/02/18 03:22:32 $ $Author: Randy $ }
+@comment{ $Revision: 1.49 $ $Date: 2007/11/30 03:34:27 $ $Author: Randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2007/02/18 03:22:32 $}
+@Comment{$Date: 2007/11/30 03:34:27 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -416,28 +416,46 @@ For the Attach_Handler pragma, the expected type for the
 @begin{Legality}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
-The Attach_Handler pragma is only allowed immediately within the
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0033-1]}
+The Attach_Handler @Chg{Version=[3],New=[and Interrupt_Handler pragmas are],
+Old=[pragma is]} only allowed immediately within the
 @nt{protected_definition}
 where the corresponding subprogram is declared.
 The corresponding @nt{protected_@!type_@!declaration}
 or @nt{single_@!protected_@!declaration}
-shall be a library@Chg{Version=[2],New=[-],Old=[]}level declaration.
+shall be a library@Chg{Version=[2],New=[-],Old=[]}level
+declaration@Chg{Version=[3],New=[, and
+shall not be declared within a
+generic body. @PDefn{generic contract issue}In addition
+to the places where @LegalityTitle normally apply
+(see @RefSecNum{Generic Instantiation}), these rules also apply
+in the private part of an instance of a generic unit],Old=[]}.
 @begin{Discussion}
 In the case of a @nt{protected_type_declaration},
 an @nt{object_declaration} of an object of that type
 need not be at library level.
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1]}
+@ChgAdded{Version=[3],Text=[We cannot allow these pragmas in a generic body,
+because legality rules are not checked for instance bodies, and these should
+not be allowed if the instance is not at the library level. The protected types
+can be declared in the private part if this is desired. Note that while the 'Access to
+use the handler would provide the check in the case of Interrupt_Handler, there
+is no other check for Attach_Handler. Since these pragmas are so similar, we
+want the rules to be the same.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00253-01],ARef=[AI95-00303-01]}
-The Interrupt_Handler pragma is only allowed immediately within
-@Chg{Version=[2],New=[the],Old=[a]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0033-1]}
+@ChgDeleted{Version=[3],Text=[The Interrupt_Handler pragma is only
+allowed immediately within @Chg{Version=[2],New=[the],Old=[a]}
 @nt{protected_definition}@Chg{Version=[2],New=[ where the
 corresponding subprogram is declared],Old=[]}.
 The cor@!responding @nt{protected_@!type_declaration} @Chg{Version=[2],New=[or
 @nt{single_@!protected_@!declaration} ],Old=[]}shall
 be a library@Chg{Version=[2],New=[-],Old=[]}level
 declaration.@Chg{Version=[2],New=[],Old=[ In addition, any
-@nt{object_@!declaration} of such a type shall be a library level declaration.]}
+@nt{object_@!declaration} of such a type shall be a library level declaration.]}]}
 @end{Legality}
 
 @begin{RunTime}
@@ -660,6 +678,11 @@ a protected procedure that is an interrupt handler.
   implementations can retain the rule as an implementation-defined
   restriction on the use of the type, as permitted by the @ImplPermTitle
   above.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added missing generic
+  contract wording for the pragma Attach_Handler and Interrupt_Handler.]}
+
 @end{Diffword95}
 
 

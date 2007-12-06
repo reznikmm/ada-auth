@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.37 $ $Date: 2006/02/16 06:49:06 $ $Author: Randy $ }
+@comment{ $Revision: 1.38 $ $Date: 2007/11/30 03:34:26 $ $Author: Randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2006/02/16 06:49:06 $}
+@Comment{$Date: 2007/11/30 03:34:26 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -474,7 +474,8 @@ sequences (for debugging) to unique sequences in each execution of a program.
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00360-01]}
-@ChgAdded{Version=[2],Text=[The type Generator needs finalization
+@ChgAdded{Version=[2],Text=[The type Generator
+needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
 (see @RefSecNum{User-Defined Assignment and Finalization}).]}
 
 The generic library package Numerics.Discrete_Random has the following
@@ -556,7 +557,8 @@ cannot be declared pure.
 @end{ImplNote}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00360-01]}
-@ChgAdded{Version=[2],Text=[The type Generator needs finalization
+@ChgAdded{Version=[2],Text=[The type Generator
+needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
 (see @RefSecNum{User-Defined Assignment and Finalization})
 in every instantiation of Numerics.Discrete_Random.]}
 

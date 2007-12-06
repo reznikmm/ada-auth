@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2007/02/18 03:22:29 $}
+@Comment{$Date: 2007/11/30 03:34:26 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -320,7 +320,8 @@ a property of a file object, not of an external file.
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
-@ChgAdded{Version=[2],Text=[The type File_Type needs finalization
+@ChgAdded{Version=[2],Text=[The type File_Type
+needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
 (see @RefSecNum{User-Defined Assignment and Finalization})
 in every instantiation of Sequential_IO.]}
 
@@ -703,7 +704,8 @@ uninitialized variables of the type.
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
-@ChgAdded{Version=[2],Text=[The type File_Type needs finalization
+@ChgAdded{Version=[2],Text=[The type File_Type
+needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
 (see @RefSecNum{User-Defined Assignment and Finalization})
 in every instantiation of Direct_IO.]}
 
@@ -1408,7 +1410,8 @@ Append_File is new in Ada 95.
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
-@ChgAdded{Version=[2],Text=[The type File_Type needs finalization
+@ChgAdded{Version=[2],Text=[The type File_Type
+needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
 (see @RefSecNum{User-Defined Assignment and Finalization}).]}
 
 @end{StaticSem}
@@ -1890,6 +1893,7 @@ file is the current output file.
 
   @Leading@;If the file mode is Out_File or Append_File:
 @begin{itemize}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0038-1]}
                If the value specified by To is greater than the current
                line number, has the effect of repeatedly calling
                New_Line (with a spacing of one), until the current line
@@ -1897,7 +1901,8 @@ file is the current output file.
                specified by To is equal to the current line number,
                there is no effect. If the value specified by To is less
                than the current line number, has the effect of calling
-               New_Page followed by a call of New_Line with a spacing
+               New_Page followed@Chg{Version=[3],New=[, if To is greater
+               than 1,],Old=[]} by a call of New_Line with a spacing
                equal to (To @en 1).
 
                The exception Layout_Error is propagated if the value
@@ -1963,6 +1968,13 @@ terminator is skipped. An implementation may represent the combination
 of these terminators by a single character, provided that it is properly
 recognized on input.
 @end{Notes}
+
+@begin{DiffWord95}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0038-1]}
+@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Fixed a glitch in Set_Line
+   such that we could have called New_Line(0).]}
+@end{DiffWord95}
+
 
 @LabeledSubClause{Get and Put Procedures}
 
@@ -2137,7 +2149,10 @@ provided:
 @key[procedure] Look_Ahead (Item        : @key[out] Character;
                       End_Of_Line : @key[out] Boolean);
 @end{Example}
-  @Trailing@ChgRef{Version=[1],Kind=[Revised]}Mode_Error is propagated if
+  @Trailing@ChgRef{Version=[1],Kind=[Revised]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0038-1]}@Chg{Version=[3],
+  New=[Status_Error is propagated if the file is not open.],Old=[]}Mode_Error
+  is propagated if
   the mode of the file is not In_File. Sets End_Of_Line to True if at end of
   line, including if at end of page or at end of file; in each of these cases
   the value of Item is not specified.
@@ -2151,8 +2166,11 @@ provided:
                         Item : @key[out] Character);
 @key[procedure] Get_Immediate(Item : @key[out] Character);
 @end{Example}
-@Trailing@;Reads the next character, either control or graphic, from the specified
-File or the default input file. Mode_Error is propagated if the mode of the
+@Trailing@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0038-1]}Reads
+the next character, either control or graphic, from the specified
+File or the default input file. @Chg{Version=[3],New=[Status_Error is
+propagated if the file is not open.],Old=[]}Mode_Error is propagated
+if the mode of the
 file is not In_File. End_Error is propagated if at the end of the file.
 The current column, line and page numbers for the file are not affected.
 
@@ -2163,13 +2181,15 @@ The current column, line and page numbers for the file are not affected.
 @key[procedure] Get_Immediate(Item      : @key[out] Character;
                         Available : @key[out] Boolean);
 @end{Example}
-@Trailing@;If a character, either control or graphic, is available from the
+@Trailing@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0038-1]}If
+a character, either control or graphic, is available from the
 specified File or the default input file, then the character is read;
 Available is True and Item contains the value of this character. If a character
 is not available, then Available is False and the value of
 Item is not specified.
 @PDefn{unspecified}
-Mode_Error is propagated if the mode of the
+@Chg{Version=[3],New=[Status_Error is propagated if the file is
+not open.],Old=[]}Mode_Error is propagated if the mode of the
 file is not In_File. End_Error is propagated if at the end of the file.
 The current column, line and page numbers for the file are not affected.
 
@@ -2304,6 +2324,13 @@ return as soon as a line terminator is read.
   The Text_IO.Get_Line functions are new.]}
 @end{Extend95}
 
+@begin{DiffWord95}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0038-1]}
+@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added missing wording about
+  raising Status_Error to Look_Ahead and Get_Immediate.]}
+@end{DiffWord95}
+
+
 
 @LabeledSubClause{Input-Output for Integer Types}
 
@@ -2354,10 +2381,11 @@ Default_Base  : Number_Base := 10;
       Returns, in the parameter Item, the value of type Num
       that corresponds to the sequence input.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0038-1]}
       @Trailing@;The exception Data_Error is propagated if the sequence of characters
       read does not form a legal integer literal or if the value obtained is
-      not of the subtype Num (for Integer_IO) or is not in the base
-      range of Num (for Modular_IO).
+      not of the subtype Num@Chg{Version=[3],New=[],Old=[ (for Integer_IO) or
+      is not in the base range of Num (for Modular_IO)]}.
 
 @begin{Example}@Keepnext
 @key[procedure] Put(File  : @key[in] File_Type;
@@ -2431,10 +2459,11 @@ predefined type.
 @end{ImplPerm}
 
 @begin{Notes}
-For Modular_IO, execution of Get propagates
- Data_Error if the sequence of
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0038-1]}
+@ChgDeleted{Version=[3],Text=[For Modular_IO, execution of Get propagates
+Data_Error if the sequence of
 characters read forms an integer literal outside the range
-0..Num'Last.
+0..Num'Last.]}
 @end{Notes}
 
 @begin{Examples}
@@ -2451,6 +2480,16 @@ Put(-126, 7);                        --@RI{ "bbb@en@|126"}
 Put(126, Width => 13, Base => 2);    --@RI{ "bbb2#1111110#"}
 @end{Example}
 @end{Examples}
+
+@begin{Diffword95}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0038-1]}
+@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Changed wording to make
+  Integer_IO and Modular_IO raise Data_Error in the same way when the
+  bounds of the subtype are exceeded. There is no value to different
+  behavior, and all surveyed compilers already treat integer and modular
+  values the same way.]}
+@end{Diffword95}
+
 
 @LabeledSubClause{Input-Output for Real Types}
 
@@ -2755,6 +2794,12 @@ Default_Setting : Type_Set := Upper_Case;
   or a control character.
   Whatever Image does for these things is appropriate here,
   too.
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0036-1]}
+@ChgAdded{Version=[3],Text=[The @ldquote@;characters produced@rdquote@;
+defines the @ldquote@;characters to be output@rdquote in the sense of
+@RefSecNum{Get and Put Procedures}, so a result that cannot fit on any
+bounded line will raise Layout_Error.]}
 @end{Discussion}
 
 @begin{Example}@Keepnext
@@ -3379,7 +3424,8 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
 @end(example)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00360-01]}
-@ChgAdded{Version=[2],Text=[The type File_Type needs finalization
+@ChgAdded{Version=[2],Text=[The type File_Type
+needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
 (see @RefSecNum{User-Defined Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00283-01]}

@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.58 $ $Date: 2007/07/10 05:00:54 $}
+@comment{$Revision: 1.59 $ $Date: 2007/11/30 03:34:28 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -29,8 +29,8 @@ Corrigendum 1 was published in June 2001.]}
 guidelines for the preparation of an Amendment to the International Standard.
 WG 9 approved the scope of the Amendment in June 2004. In April 2006, WG 9
 approved and forwarded the Amendment to SC 22 for approval, which was granted
-in August 2006. Final ISO/IEC approval @Chg{Version=[3],New=[occurred in
-January 2007, and Amendment 1 was published in March],Old=[is expected
+in August 2006. Final ISO/IEC approval @Chg{Version=[3],New=[came in January 2007,
+and the Amendment was published as ISO/IEC 8652:1995/Amd 1:2007(E) in March],Old=[is expected
 by early]} 2007.]}
 
 @ChgRef{Version=[1],Kind=[Added]}

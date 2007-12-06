@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2007/09/14 03:34:28 $}
+@Comment{$Date: 2007/11/30 03:34:22 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.90 $}
+@Comment{$Revision: 1.91 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -745,7 +745,7 @@ The full view of a private extension shall be derived
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
 the requirement that the ancestor be specific applies also in the
-private part of an instance of a generic unit.
+private part of an instance of a generic unit.@PDefn{generic contract issue}
 @begin{Reason}
   This rule allows the full view to be defined
   through several intermediate derivations,
@@ -1536,10 +1536,12 @@ corresponding full declaration:
   @end{Ramification}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00385-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0062-1]}
   If the @Chg{Version=[2],New=[deferred constant declaration includes
   a],Old=[subtype defined by the]} @nt<subtype_indication> @Chg{Version=[2],
   New=[that defines a],Old=[in the deferred declaration is]}
-  constrained@Chg{Version=[2],New=[ subtype],Old=[]}, then the subtype defined
+  constrained@Chg{Version=[2],New=[ subtype],Old=[]}, then the
+  @Chg{Version=[3],New=[constraint],Old=[subtype]} defined
   by the @nt<subtype_indication> in the full declaration shall match it
   statically.@Redundant[ On the other hand,
   if the subtype of the deferred constant is unconstrained,
@@ -1690,6 +1692,11 @@ they are simply a special case of @nt<object_declaration>s.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
   @ChgAdded{Version=[2],Text=[Added matching rules for subtypes that
   exclude null.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0062-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected rules so
+  that the intent that a full constant may have a null exclusion even
+  if the deferred constant does not is actually met.]}
 @end{DiffWord95}
 
 
@@ -2251,9 +2258,13 @@ a protected type; or]}
 @ChgAdded{Version=[2],Text=[it has a component that needs finalization; or]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0013-1]}
-@ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[it is a limited type that
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0013-1]}
+@Chg{Version=[3],New=[it is a class-wide type; or],
+Old=[@Chg{Version=[2],New=[it is a limited type that
 has an access discriminant whose designated type needs finalization; or],Old=[]}]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0026-1]}
+@ChgAdded{Version=[3],Text=[it is a partial view whose full view needs finalization; or]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[it is one of a number of language-defined types
@@ -2525,7 +2536,8 @@ used by the implementation).],Old=[]}
 @end{Reason}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[An @nt{aggregate} used in the return expression
+@ChgAdded{Version=[2],Text=[An @nt{aggregate} of a controlled type
+used in the return expression
 of a @nt{simple_@!return_@!statement} has to be built-in-place in the anonymous
 return object, as this is similar to an object declaration. (This is a change
 from Ada 95, but it is not an inconsistency as it only serves to restrict
@@ -2754,6 +2766,16 @@ Controlled types and user-defined finalization are new to Ada 95.
   ensure that coextensions are handled by other means (such as
   in No_Nested_Finalization @en see @RefSecNum{Tasking Restrictions})
   or that they cannot happen.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the
+  @ldquote@;needs finalization@rdquote rules to include class-wide types,
+  as a future extension can include a part that needs finalization.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0026-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the
+  @ldquote@;needs finalization@rdquote rules to clearly say that they
+  ignore privacy.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected wording to
@@ -3547,4 +3569,7 @@ the rules here refer to the task-waiting rules of Section 9.
   the same time as the outer object. (This was intended for Ada 95, but since
   the concept did not have a name, it was overlooked.)]}
 
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0064-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Removed a redundant rule,
+  which is now covered by the additional places where masters are defined.]}
 @end{DiffWord95}

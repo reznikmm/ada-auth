@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/07/17 02:11:46 $}
+@Comment{$Date: 2007/11/30 03:34:20 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.87 $}
+@Comment{$Revision: 1.88 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -4424,13 +4424,15 @@ This is a ramification of the normal disallowance
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0006-1]}
 @Defn{enumeration literal}
 Each @nt<enumeration_literal_specification> is the explicit declaration
 of the corresponding @i(enumeration literal): it declares
 a parameterless function,
 whose defining name is the @nt<defining_@!identifier>
-or @nt<defining_@!character_@!literal>, and whose result type
-is the enumeration type.
+or @nt<defining_@!character_@!literal>, and whose result
+@Chg{Version=[3],New=[subtype is the base subtype of],Old=[type
+is]} the enumeration type.
 @begin{Reason}
   This rule defines the profile of the enumeration literal,
   which is used in the various types of conformance.
@@ -4441,6 +4443,13 @@ is the enumeration type.
   a body is not permitted for it,
   and it never fails the Elaboration_Check when called.
 @end{Ramification}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0006-1]}
+  @ChgAdded{Version=[3],Text=[The result subtype is primarily a concern
+  when an enumeration literal is used as the @nt{expression} of a
+  case statement, due to the full coverage requirement based on the
+  nominal subtype.]}
+@end{Discussion}
 
 Each enumeration literal corresponds to a distinct value
 of the enumeration type, and to a distinct position number.
@@ -4519,6 +4528,11 @@ We emphasize the fact that an enumeration literal denotes
 a function, which is called to produce a value.
 @end{DiffWord83}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0006-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Defined the result
+  subtype of an enumeration literal to close a minor language hole.]}
+@end{DiffWord95}
 
 @LabeledSubClause{Character Types}
 

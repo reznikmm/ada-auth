@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2007/07/10 05:00:52 $}
+@Comment{$Date: 2007/11/30 03:34:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.57 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -2187,11 +2187,21 @@ is not reclaimed prior to task termination.
 @end{Bounded}
 
 @begin{Erron}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0033-1]}
 @Defn{nonexistent}@PDefn2{Term=(erroneous execution),Sec=(cause)}
-Evaluating a name that denotes a nonexistent object is erroneous.
+Evaluating a name that denotes a nonexistent object @Chg{Version=[3],
+New=[or a protected subprogram whose
+associated object is nonexistent ],Old=[]}is erroneous.
 The execution of a call to an instance of Unchecked_Deallocation is
 erroneous if the object was created other than by an @nt<allocator> for
 an access type whose pool is Name'Storage_Pool.
+
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1]}
+@ChgAdded{Version=[3],Text=[The part about a protected subprogram is
+intended to cover the case of an access-to-protected-subprogram where
+the associated object has been deallocated.]}
+@end{Reason}
 @end{Erron}
 
 @begin{ImplAdvice}
@@ -2223,6 +2233,11 @@ This is implied by the rules of @RefSecNum{Formal Access Types}.
   @ChgAdded{Version=[2],Text=[The rules for coextensions are clarified
   (mainly by adding that term). In theory, this reflects no change from
   Ada 95 (coextensions existed in Ada 95, they just didn't have a name).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a rule that using
+  a access-to-protected-subprogram is erroneous if the associated
+  object no longer exists.]}
 @end{DiffWord95}
 
 
@@ -3277,6 +3292,7 @@ the type is completed.]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01],ARef=[AI95-00251-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0039-1]}
 @PDefn2{Term=[specifiable], Sec=(of Read for a type)}
 @PDefn2{Term=[specifiable], Sec=(of Write for a type)}
 @PDefn2{Term=[specifiable], Sec=(of Input for a type)}
@@ -3288,7 +3304,8 @@ the type is completed.]}
 The stream-oriented attributes may be specified
 for any type via an @nt{attribute_definition_clause}.
 @Chg{Version=[2],New=[The subprogram name given in such a
-clause shall not denote an abstract subprogram. Furthermore, if a
+clause shall @Chg{Version=[3],New=[statically denote a subprogram that
+is not],Old=[not denote]} an abstract subprogram. Furthermore, if a
 stream-oriented attribute is specified for an interface type by an
 @nt{attribute_definition_clause}, the subprogram name given in the clause shall
 statically denote a null procedure.],
@@ -3743,6 +3760,13 @@ class-wide types descended from S.
   subtype is appropriate for attributes specified for partial views whose
   full type is a scalar type. It also eliminates a common user error
   (forgetting 'Base).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0039-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Required that stream
+  attributes be specified by a static subprogram name rather than a
+  dynamic expression. Expressions cannot provide any useful functionality
+  because of the freezing rules, and the possibility of them complicates
+  implementations.]}
 @end{DiffWord95}
 
 

@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2007/04/05 02:57:50 $}
+@Comment{$Date: 2007/11/30 03:34:24 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.86 $}
+@Comment{$Revision: 1.87 $}
 
 @begin{Intro}
 
@@ -206,6 +206,7 @@ Private part is defined in Section 8.
 @nt{task_definition} without @nt{task_item}s is assumed.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00399-01],ARef=[AI95-00419-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0042-1]}
 @ChgAdded{Version=[2],Text=[For a task declaration
 with an @nt{interface_list}, the task type
 inherits user-defined primitive subprograms from each progenitor
@@ -217,13 +218,28 @@ parameter designating the task type, and there is an @nt{entry_declaration} for
 a single entry with the same identifier within the task declaration,
 whose profile is type conformant with the
 prefixed view profile of the inherited subprogram, the inherited subprogram is
-said to be @i{implemented} by the conforming task entry.@PDefn2{Term=[implemented],
+said to be @i{implemented} by the conforming task entry@Chg{Version=[3],
+New=[using an implicitly declared non-abstract subprogram which
+has the same profile as the inherited subprogram and that
+overrides it@PDefn2{Term=[override],Sec=[when implemented by]}],
+Old=[]}.@PDefn2{Term=[implemented],
 Sec=[by a task entry]}@Defn2{Term=[type conformance],Sec=(required)}]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The inherited subprograms can only come from an
   interface given as part of the task declaration.]}
 @end{Ramification}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[Added],Aref=[AI05-0042-1]}
+  @ChgAdded{Version=[3],Text=[The part about the implicitly declared
+  subprogram is needed so that a subprogram implemented by an entry is
+  considered to be overridden for the purpose of the other rules of the
+  language. Without it, it would for instance be illegal for an abstract
+  subprogram to be implemented by an entry, because the abstract subprogram
+  would not be overridden. The @LegalityTitle below
+  ensure that there is no conflict between the implicit overriding subprogram
+  and a user-defined overriding subprogram.]}
+@end{Reason}
 @end{StaticSem}
 
 @begin{Legality}
@@ -523,6 +539,11 @@ because a @nt{declarative_part} can be empty.
   @ChgAdded{Version=[2],Text=[Revised the note on use of the name of
   a task type within itself to reflect the exception for anonymous
   access types.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0042-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Clarified that an
+  inherited procedure of a progenitor is overridden when it is
+  implemented by an entry.]}
 @end{DiffWord95}
 
 
@@ -656,11 +677,35 @@ whether to raise Tasking_Error.
   many of these rules.]}
 @end{Honest}
 
-Should the task that created
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0045-1]}
+@Chg{Version=[3],New=[If the master that directly encloses the point where the
+activation of a task @i<T> would be initiated, completes before the activation
+of @i<T> is initiated, @i<T> becomes terminated and is never activated.
+Furthermore, if a return statement is left such that the return object is not
+returned to the caller, any task that was created as a part of the return
+object or one of its coextensions immediately becomes],
+Old=[Should the task that created
 the new tasks never reach the point
 where it would initiate the activations (due to an abort or
 the raising of an exception),
-the newly created tasks become terminated and are never activated.
+the newly created tasks become]}
+terminated @Chg{Version=[3],New=[is],Old=[are]}
+never activated.
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0045-1]}
+@ChgAdded{Version=[3],Text=[The first case can only happen if the activation
+   point of T is not reached due to an exception being raised or a task or
+   statement being aborted. Note that this is exclusive; if the master
+   completes normally and starts finalization, we're already past the
+   activation point.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0045-1]}
+@ChgAdded{Version=[3],Text=[The second case can happen with an exception being
+   raised in a return statement, by an exit or goto from an
+   @nt{extended_return_statement}, or by a return statement being aborted. Any
+   tasks created for the return object of such a return statement are never
+   activated.]}
+@end{Ramification}
 @end{RunTime}
 
 @begin{Notes}
@@ -707,6 +752,12 @@ This clause has been rewritten in an attempt to improve presentation.
   handle the case of anonymous function return objects. This is critical;
   we don't want to be waiting for the tasks in a return object when we exit
   the function normally.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0045-1]}
+  @ChgAdded{Version=[3],Text=[Corrected the wording that handles tasks
+  that are never activated to ensure that no lookahead is implied and
+  to make it clear that tasks created by return statements that never
+  return are never activated.]}
 @end{DiffWord95}
 
 
@@ -1000,6 +1051,7 @@ Private part is defined in Section 8.
 @end{theproof}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00399-01],ARef=[AI95-00419-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0042-1]}
 @ChgAdded{Version=[2],Text=[For a protected declaration
 with an @nt{interface_list}, the protected type inherits user-defined primitive
 subprograms from each progenitor type (see @RefSecNum{Interface Types}), in the
@@ -1012,7 +1064,10 @@ with the same identifier within the protected declaration, whose
 profile is type conformant with the prefixed view profile of the
 inherited subprogram, the inherited subprogram is said to be
 @i{implemented} by the conforming protected subprogram or
-entry.@PDefn2{Term=[implemented],
+entry@Chg{Version=[3],New=[using an implicitly declared non-abstract subprogram
+which has the same profile as the inherited subprogram and that
+overrides it@PDefn2{Term=[override],Sec=[when implemented by]}],
+Old=[]}.@PDefn2{Term=[implemented],
 Sec=[by a protected subprogram]}@PDefn2{Term=[implemented],
 Sec=[by a protected entry]}
 @Defn2{Term=[type conformance],Sec=(required)}]}
@@ -1022,7 +1077,17 @@ Sec=[by a protected entry]}
   @ChgAdded{Version=[2],Text=[The inherited subprograms can only come from an
   interface given as part of the protected declaration.]}
 @end{Ramification}
-
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[Added],Aref=[AI05-0042-1]}
+  @ChgAdded{Version=[3],Text=[The part about the implicitly declared
+  subprogram is needed so that a subprogram implemented by an entry or
+  subprogram is considered to be overridden for the purpose of the
+  other rules of the language. Without it, it would for instance be illegal
+  for an abstract subprogram to be implemented by an entry, because the
+  abstract subprogram would not be overridden. The @LegalityTitle below
+  ensure that there is no conflict between the implicit overriding subprogram
+  and a user-defined overriding subprogram.]}
+@end{Reason}
 
 @end{StaticSem}
 
@@ -1475,6 +1540,11 @@ protected units do not exist in Ada 83.
   @ChgAdded{Version=[2],Text=[Revised the note on use of the name of
   a protected type within itself to reflect the exception for anonymous
   access types.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0042-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Clarified that an
+  inherited subprogram of a progenitor is overridden when it is
+  implemented by an entry or subprogram.]}
 @end{DiffWord95}
 
 
@@ -5047,10 +5117,13 @@ circumstances:
   the action of waiting for the termination of the task;
 
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0031],ARef=[AI95-00118-01]}
+  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0072-1]}
   @ChgAdded{Version=[1],Text=[If A1 is the termination of a task T, and A2 is
-  either the evaluation of the expression T'Terminated or a call to
-  Ada.Task_Identification.Is_Terminated with an actual parameter that
-  identifies T (see @RefSecNum(The Package Task_Identification));]}
+  either @Chg{Version=[3],New=[an],Old=[the]} evaluation of the expression
+  T'Terminated@Chg{Version=[3],New=[ that results in True,],Old=[]} or
+  a call to Ada.Task_Identification.Is_Terminated with an actual parameter that
+  identifies T @Chg{Version=[3],New=[and a result of True ],Old=[]}(see
+  @RefSecNum(The Package Task_Identification));]}
 
   If A1 is the action of issuing an entry call, and A2 is
   part of the corresponding execution of the appropriate
@@ -5174,6 +5247,10 @@ see @RefSecNum(Shared Variable Control).
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that a task T2 can rely on
   values of variables that are updated by another task T1, if task T2 first
   verifies that T1'Terminated is True.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0072-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the wording of
+  AI95-00118-01 to actually say what was intended (as described above).]}
 @end{DiffWord95}
 
 

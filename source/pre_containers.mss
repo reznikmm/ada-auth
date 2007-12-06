@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.60 $ $Date: 2007/02/18 03:22:30 $ $Author: Randy $ }
+@comment{ $Revision: 1.61 $ $Date: 2007/11/30 03:34:26 $ $Author: Randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2007/02/18 03:22:30 $}
+@Comment{$Date: 2007/11/30 03:34:26 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -58,6 +58,16 @@ t(N)/f(N) < A. @Defn{Landau symbol @i{O}(X)}@Defn{@i{O}(f(N))}]}
 less than @i{O}(f(N)), then for any arbitrarily small positive real D, there
 should exist a positive integer M such that for all N > M,
 t(N)/f(N) < D.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0044-1]}
+@ChgAdded{Version=[3],Text=[When a formal operator "<" is used to provide an
+ordering for a container, it is generally required to define
+a strict weak ordering. An operator "<" defines
+a @i<strict weak ordering>@Defn{strict weak ordering} if it is irreflexive,
+asymmetric, transitive, and in addition, if @i<x> < @i<y> for any values
+@i<x> and @i<y>, then for all other
+values @i<z>, (@i<x> < @i<z>) or (@i<z> < @i<y>).]}
+
 @end{Intro}
 
 @begin{Metarules}
@@ -149,12 +159,17 @@ These include:]}
   partitions of a program.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Equality of language-defined types
-  must compose @lquotes@;properly@rquotes@;. This means that the version of
-  "=" directly used by users is the same one that will be used in generics and in
-  predefined equality operators of types with components of the containers and/or
-  cursors. This prevents the abstraction from breaking unexpectedly.]}
+  @ChgAdded{Version=[2],Text=[Equality of language-defined types must compose
+  @lquotes@;properly@rquotes@;. This means that the version of "=" directly
+  used by users is the same one that will be used in generics and in predefined
+  equality operators of types with components of the containers and/or cursors.
+  This prevents the abstraction from breaking unexpectedly.]}
 
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0048-1]}
+  @ChgAdded{Version=[3],Text=[Redispatching is not allowed (unless it is
+  required. That means that overriding a container operation will not change
+  the behavior of any other predefined container operation. This provides
+  a stable base for extensions.]}
 @end{Itemize}
 
 
@@ -178,7 +193,7 @@ managing storage, the types already have to manage arbitrary copies.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The use of controlled type also brings up the
 possibility of failure of finalization (and thus deallocation) of an element.
-This is a @lquotes@;serious bug@rquotes@;, as AI-179 puts it, so we don't try
+This is a @ldquote@;serious bug@rdquote@;, as AI95-179 puts it, so we don't try
 to specify what happens in that case. The implementation should propagate
 the exception.]}
 @end{Metarules}
@@ -218,6 +233,12 @@ implementations that are unstable if given buggy hash functions, et al.]}
   This clause is new. It just provides an introduction to the following
   subclauses.]}
 @end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a definition of
+  strict weak ordering.]}
+@end{DiffWord95}
 
 
 @LabeledAddedSubclause{Version=[2],Name=[The Package Containers]}
@@ -696,7 +717,9 @@ unspecified.@PDefn{unspecified}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The type Vector is used to represent vectors.
-The type Vector needs finalization (see @RefSecNum{User-Defined Assignment and Finalization}).]}
+The type Vector needs finalization@PDefn2{Term=<needs finalization>,
+Sec=<language-defined type>}
+(see @RefSecNum{User-Defined Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Empty_Vector represents the empty vector object. It
@@ -1807,10 +1830,13 @@ order.]}
 @end{DescribeCode}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0044-1]}
 @ChgAdded{Version=[2],Text=[The actual function for the generic formal function
 "<" of Generic_Sorting is expected to return the same value each time it is
 called with a particular pair of element values. It should define a strict
-ordering relationship, that is, be irreflexive, asymmetric, and transitive;
+@Chg{Version=[3],New=[weak ],Old=[]}ordering relationship@Chg{Version=[3],
+New=[ (see @RefSecNum{Containers})],Old=[, that is, be irreflexive, asymmetric,
+and transitive]};
 it should not modify Container. If the actual for "<" behaves in some other
 manner, the behavior of the subprograms of Generic_Sorting are unspecified. How
 many times the subprograms of Generic_Sorting call "<" is
@@ -1930,6 +1956,22 @@ with either Source or Target not ordered smallest first using the provided
 generic formal "<" operator is a bounded error. Either Program_Error is raised
 after Target is updated as described for Merge, or the operation works as
 defined.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error for the actual function
+associated with a generic formal subprogram, when called as part of an
+operation of this package, to tamper with elements of any Vector parameter to
+the operation. Either Program_Error is raised, or the operation works as
+defined on the value of the Vector either prior to, or subsequent to, some or
+all of the modifications to the Vector.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0027-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error to call any subprogram
+declared in the visible part of Containers.Vectors
+when the associated container has been finalized. If the operation takes
+Container as an @key[in out] parameter, then it raises Constraint_Error or
+Program_Error. Otherwise, the operation either proceeds as it would
+for an empty container, or it raises Constraint_Error or Program_Error.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[
@@ -2197,6 +2239,22 @@ value of Last_Index.]}
   The package Containers.Vectors is new.]}
 @end{Extend95}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a @BoundedTitle
+  to cover tampering by generic actual subprograms.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a @BoundedTitle
+  to cover access to finalized Vector containers.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Redefined "<" actuals
+  to require a strict weak ordering; the old definition allowed
+  indeterminant comparisons that would not have worked in a container.]}
+@end{DiffWord95}
+
+
 @LabeledAddedSubclause{Version=[2],
 Name=[The Package Containers.Doubly_Linked_Lists]}
 
@@ -2462,8 +2520,8 @@ unspecified.@PDefn{unspecified}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The type List is used to represent lists. The type
-List needs finalization (see
-@RefSecNum{User-Defined Assignment and Finalization}).]}
+List needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
+(see @RefSecNum{User-Defined Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Empty_List represents the empty List object. It has
@@ -3130,10 +3188,13 @@ function.]}
 @end{DescribeCode}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0044-1]}
 @ChgAdded{Version=[2],Text=[The actual function for the generic formal function
 "<" of Generic_Sorting is expected to return the same value each time it is
 called with a particular pair of element values. It should define a strict
-ordering relationship, that is, be irreflexive, asymmetric, and transitive; it
+@Chg{Version=[3],New=[weak ],Old=[]}ordering relationship@Chg{Version=[3],
+New=[ (see @RefSecNum{Containers})],Old=[, that is, be irreflexive, asymmetric,
+and transitive]}; it
 should not modify Container. If the actual for "<" behaves in some other
 manner, the behavior of the subprograms of Generic_Sorting are unspecified. How
 many times the subprograms of Generic_Sorting call "<" is
@@ -3210,6 +3271,22 @@ with either Source or Target not ordered smallest first using the provided
 generic formal "<" operator is a bounded error. Either Program_Error is raised
 after Target is updated as described for Merge, or the operation works as
 defined.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error for the actual function
+associated with a generic formal subprogram, when called as part of an
+operation of this package, to tamper with elements of any List parameter to
+the operation. Either Program_Error is raised, or the operation works as
+defined on the value of the List either prior to, or subsequent to, some or
+all of the modifications to the List.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0027-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error to call any subprogram
+declared in the visible part of Containers.Doubly_Linked_List
+when the associated container has been finalized. If the operation takes
+Container as an @key[in out] parameter, then it raises Constraint_Error or
+Program_Error. Otherwise, the operation either proceeds as it would
+for an empty container, or it raises Constraint_Error or Program_Error.]}
 @end{Bounded}
 
 @begin{Erron}
@@ -3364,6 +3441,21 @@ probably not a stable sort.]}
   The generic package Containers.Doubly_Linked_Lists is new.]}
 @end{Extend95}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a @BoundedTitle
+  to cover tampering by generic actual subprograms.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a @BoundedTitle
+  to cover access to finalized list containers.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Redefined "<" actuals
+  to require a strict weak ordering; the old definition allowed
+  indeterminant comparisons that would not have worked in a container.]}
+@end{DiffWord95}
+
 
 @LabeledAddedSubclause{Version=[2],Name=[Maps]}
 
@@ -3410,7 +3502,7 @@ function "=" on map values are unspecified.@PDefn{unspecified}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The type Map is used to represent maps. The type
-Map needs finalization
+Map needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
 (see @RefSecNum{User-Defined Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3960,6 +4052,24 @@ exception raised by Process.@key{all} is propagated.]}
 @end{DescribeCode}
 @end{StaticSem}
 
+@begin{Bounded}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error for the actual function
+associated with a generic formal subprogram, when called as part of an
+operation of a map package, to tamper with elements of any Map parameter to
+the operation. Either Program_Error is raised, or the operation works as
+defined on the value of the map either prior to, or subsequent to, some or
+all of the modifications to the map.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0027-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error to call any subprogram
+declared in the visible part of a map package
+when the associated container has been finalized. If the operation takes
+Container as an @key[in out] parameter, then it raises Constraint_Error or
+Program_Error. Otherwise, the operation either proceeds as it would
+for an empty container, or it raises Constraint_Error or Program_Error.]}
+@end{Bounded}
+
 @begin{Erron}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[
@@ -4060,6 +4170,14 @@ unless specified by the operation.]}]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[This description of maps is new; the
   extensions are documented with the specific packages.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a @BoundedTitle
+  to cover tampering by generic actual subprograms.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a @BoundedTitle
+  to cover access to finalized map containers.]}
 @end{DiffWord95}
 
 
@@ -4830,10 +4948,13 @@ Function Equivalent_Keys returns True if Left and Right are equivalent, and
 False otherwise.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0044-1]}
 @ChgAdded{Version=[2],Text=[The actual function for the generic formal function
 "<" on Key_Type values is expected to return the same value each time it is
-called with a particular pair of key values. It should define a strict ordering
-relationship, that is, be irreflexive, asymmetric, and transitive. If the
+called with a particular pair of key values. It should define a strict
+@Chg{Version=[3],New=[weak ],Old=[]}ordering relationship@Chg{Version=[3],
+New=[ (see @RefSecNum{Containers})],Old=[, that is, be irreflexive, asymmetric,
+and transitive]}. If the
 actual for "<" behaves in some other manner, the behavior of this package is
 unspecified. Which subprograms of this package call "<" and how many times they
 call it, is unspecified.@PDefn{unspecified}]}
@@ -5108,6 +5229,13 @@ a cursor parameter should be @i{O}(1).]}]}
   The generic package Containers.Ordered_Maps is new.]}
 @end{Extend95}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Redefined "<" actuals
+  to require a strict weak ordering; the old definition allowed
+  indeterminant comparisons that would not have worked in a container.]}
+@end{DiffWord95}
+
 
 @LabeledAddedSubclause{Version=[2],Name=[Sets]}
 
@@ -5155,7 +5283,8 @@ function "=" on set values are unspecified.@PDefn{unspecified}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The type Set is used to represent sets. The type
-Set needs finalization (see @RefSecNum{User-Defined Assignment and Finalization}).]}
+Set needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
+(see @RefSecNum{User-Defined Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[A set contains elements. Set cursors designate
@@ -5859,6 +5988,24 @@ unconstrained.]}
 
 @end{StaticSem}
 
+@begin{Bounded}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error for the actual function
+associated with a generic formal subprogram, when called as part of an
+operation of a set package, to tamper with elements of any Set parameter to
+the operation. Either Program_Error is raised, or the operation works as
+defined on the value of the set either prior to, or subsequent to, some or
+all of the modifications to the set.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0027-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error to call any subprogram
+declared in the visible part of a set package
+when the associated container has been finalized. If the operation takes
+Container as an @key[in out] parameter, then it raises Constraint_Error or
+Program_Error. Otherwise, the operation either proceeds as it would
+for an empty container, or it raises Constraint_Error or Program_Error.]}
+@end{Bounded}
+
 @begin{Erron}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[
@@ -5966,7 +6113,17 @@ unless specified by the operation.]}]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[This description of sets is new; the
   extensions are documented with the specific packages.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a @BoundedTitle
+  to cover tampering by generic actual subprograms.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a @BoundedTitle
+  to cover access to finalized set containers.]}
 @end{DiffWord95}
+
+
 
 @LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Hashed_Sets]}
 
@@ -6251,6 +6408,11 @@ package is unspecified. Which subprograms of this package call
 Equivalent_Elements, and how many times they call it, is
 unspecified.@PDefn{unspecified}]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0044-1]}
+@ChgAdded{Version=[3],Text=[If the actual function for the generic formal
+function "=" returns True for any pair of non-equivalent elements, then the
+behavior of the container function "=" is unspecified.@PDefn{unspecified}]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[If the value of an element stored in a set is
 changed other than by an operation in this package such that at least one of
@@ -6422,6 +6584,13 @@ average time complexity of Containers.@!Hashed_Sets.@!Reserve_Capacity should be
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The generic package Containers.Hashed_Sets is new.]}
 @end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added wording to require
+  the formal function be such that that equal elements are also equivalent.]}
+@end{DiffWord95}
+
 
 @LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Ordered_Sets]}
 
@@ -6733,13 +6902,21 @@ Function Equivalent_Elements returns True if Left and Right are equivalent,
 and False otherwise.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0044-1]}
 @ChgAdded{Version=[2],Text=[The actual function for the generic formal function
 "<" on Element_Type values is expected to return the same value each time it is
-called with a particular pair of key values. It should define a strict ordering
-relationship, that is, be irreflexive, asymmetric, and transitive. If the
+called with a particular pair of key values. It should define a strict
+@Chg{Version=[3],New=[weak ],Old=[]}ordering relationship@Chg{Version=[3],
+New=[ (see @RefSecNum{Containers})],Old=[, that is, be irreflexive, asymmetric,
+and transitive]}. If the
 actual for "<" behaves in some other manner, the behavior of this package is
 unspecified. Which subprograms of this package call "<" and how many times they
 call it, is unspecified.@PDefn{unspecified}]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0044-1]}
+@ChgAdded{Version=[3],Text=[If the actual function for the generic formal
+function "=" returns True for any pair of non-equivalent elements, then the
+behavior of the container function "=" is unspecified.@PDefn{unspecified}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[If the value of an element stored in a set is changed
@@ -6965,6 +7142,17 @@ of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The generic package Containers.Ordered_Sets is new.]}
 @end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added wording to require
+  the formal function be such that that equal elements are also equivalent.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Redefined "<" actuals
+  to require a strict weak ordering; the old definition allowed
+  indeterminant comparisons that would not have worked in a container.]}
+@end{DiffWord95}
 
 
 @LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Vectors]}
@@ -7329,10 +7517,13 @@ sorted smallest first as determined by the generic formal "<" operator
 provided. Any exception raised during evaluation of "<" is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0044-1]}
 @ChgAdded{Version=[2],Text=[The actual function for the generic formal function
 "<" of Generic_Array_Sort is expected to return the same value each time it is
 called with a particular pair of element values. It should define a strict
-ordering relationship, that is, be irreflexive, asymmetric, and transitive; it
+@Chg{Version=[3],New=[weak ],Old=[]}ordering relationship@Chg{Version=[3],
+New=[ (see @RefSecNum{Containers})],Old=[, that is, be irreflexive, asymmetric,
+and transitive]}; it
 should not modify Container. If the actual for "<" behaves in some other
 manner, the behavior of the instance of Generic_Array_Sort is unspecified. How
 many times Generic_Array_Sort calls "<" is unspecified.@PDefn{unspecified}]}
@@ -7381,11 +7572,13 @@ operator provided. Any exception raised during evaluation of "<" is
 propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0044-1]}
 @ChgAdded{Version=[2],Text=[The actual function for the generic formal function
 "<" of Generic_Constrained_Array_Sort is expected to return the same value each
 time it is called with a particular pair of element values. It should define a
-strict ordering relationship, that is, be irreflexive, asymmetric, and
-transitive; it should not modify Container. If the actual for "<" behaves in
+strict @Chg{Version=[3],New=[weak ],Old=[]}ordering relationship@Chg{Version=[3],
+New=[ (see @RefSecNum{Containers})],Old=[, that is, be irreflexive, asymmetric,
+and transitive]}; it should not modify Container. If the actual for "<" behaves in
 some other manner, the behavior of the instance of
 Generic_Constrained_Array_Sort is unspecified. How many times
 Generic_Constrained_Array_Sort calls "<" is unspecified.@PDefn{unspecified}]}
@@ -7433,9 +7626,364 @@ should minimize copying of elements.]}]}
 @end{ImplAdvice}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The generic packages Containers.Generic_Array_Sort and
-Containers.Generic_Constrained_Array_Sort are new.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  The generic packages Containers.Generic_Array_Sort and
+  Containers.Generic_Constrained_Array_Sort are new.]}
+@end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Redefined "<" actuals
+  to require a strict weak ordering; the old definition allowed
+  indeterminant comparisons that would not have worked in a container.]}
+@end{DiffWord95}
+
+
+@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Indefinite_Holders]}
+
+@begin{Intro}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Text=[The language-defined generic package
+Containers.Indefinite_Holders provides private type Holder and a set of
+operations for that type. A holder container holds a single element of an
+indefinite type.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Text=[A holder containers allows the declaration of an
+object that can be used like an uninitialized variable or component of an
+indefinite type.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Text=[A holder container may be @i{empty}.
+An empty holder does not contain an element.@Defn{empty holder}]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The generic library
+package Containers.Indefinite_Holders has the following declaration:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[generic]
+   @key[type] Element_Type (<>) @key[is private];
+   @key[with function] "=" (Left, Right : Element_Type) @key[return] Boolean @key[is] <>;
+@key[package] Ada.Containers.Indefinite_Holders @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Holders]}
+   @key[pragma] Preelaborate (Indefinite_Holders);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Holder} @key[is tagged private];
+   @key[pragma] Preelaborable_Initialization (Holder);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{Empty_Holder} : @key[constant] Holder;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] "=" (Left, Right : Holder) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{To_Holder} (New_Item : Element_Type) @key[return] Holder;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Empty} (Container : Holder) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Clear} (Container : @key[in out] Holder);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Element} (Container : Holder) @key[return] Element_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Replace_Element} (Container : @key[in out] Holder;
+                              New_Item  : @key[in]     Element_Type);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Query_Element} (Container : @key[in] Holder;
+                            Process   : @key[not null access procedure] (Element : @key[in] Element_Type));]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Update_Element} (Container : @key[in] Holder;
+                             Process   : @key[not null access procedure] (Element : @key[in out] Element_Type));]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Move} (Target : @key[in out] Holder; Source : @key[in out] Holder);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{private}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   ... -- @RI[not specified by the language]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{end} Ada.Containers.Indefinite_Holders;]}
+
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Text=[The actual function for the generic formal
+function "=" on Element_Type values is expected to define a reflexive and
+symmetric relationship and return the same result value each time it is called
+with a particular pair of values. If it behaves in some other manner, the
+function "=" on holder values returns an unspecified value. The exact arguments
+and number of calls of this generic formal function by the function "=" on
+holder values are unspecified.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If the actual function for "=" is not symmetric
+  and consistent, the result returned by any of the functions defined to use
+  "=" cannot be predicted. The implementation is not required to protect
+  against "=" raising an exception, or returning random results, or any other
+  "bad" behavior. And it can call "=" in whatever manner makes sense. But
+  note that only the results of the function "=" is unspecified; other
+  subprograms are not allowed to break if "=" is bad.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Text=[The type Holder is used to represent holder
+containers. The type Holder needs finalization@PDefn2{Term=<needs finalization>,
+Sec=<language-defined type>}
+(see @RefSecNum{User-Defined Assignment and Finalization}).]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Text=[Empty_Holder represents an empty holder object. If
+an object of type Holder is not otherwise initialized, it is initialized to the
+same value as Empty_Holder.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[Some operations of this generic package
+have access-to-subprogram parameters. To ensure such operations are
+well-defined, they guard against certain actions by the designated subprogram.
+in particular, some operations check for @ldquote@;tampering with
+elements@rdquote of a container because they depend on elements of the
+container not being replaced.]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a holder]}
+A subprogram is said to @i{tamper with elements} of a holder object @i<H> if:]}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[It clears the element contained by @i<H>, that is,
+it calls the Clear procedure with @i<H> as a parameter;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[It replaces the element contained by @i<H>, that is,
+it calls the Replace_Element procedure with H as a parameter;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[It calls the Move procedure with @i<H> as a parameter;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[It finalizes @i<H>.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Complete replacement of an element can cause its
+  memory to be deallocated while another operation is holding onto a reference
+  to it. That can't be allowed. However, a simple modification of (part of) an
+  element is not a problem, so Update_Element does not cause a problem.]}
+@end{Reason}
+@end{Itemize}
+
+@begin{DescribeCode}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} "=" (Left, Right : Holder) @key{return} Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[If Left and Right denote the same
+holder object, then the function returns True. Otherwise, it compares the
+element contained in Left to the element contained in Right using the
+generic formal equality operator, returning the result of that operation. Any
+exception raised during the evaluation of element equality is propagated.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This wording describes the canonical semantics.
+  However, the order and number of calls on the formal equality @key[function]
+  is unspecified, so an implementation does not need to call so an
+  implementation need not call the equality function if the correct answer
+  can be determined without doing so.]}
+@end{ImplNote}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] To_Holder (New_Item : Element_Type) @key[return] Holder;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns a non-empty holder
+containing an element initialized to New_Item.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Is_Empty (Container : Holder) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the holder is
+empty, and False if it contains an element.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Clear (Container : @key[in out] Holder);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Removes the element from Container.
+Container is empty after a successful Clear operation.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Element (Container : Holder) @key[return] Element_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[If Container is empty,
+Constraint_Error is propagated. Otherwise, returns the element stored in
+Container.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Replace_Element (Container : @key[in out] Holder;
+                           New_Item  : @key[in]     Element_Type);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Replace_Element assigns the value
+New_Item into Container, replacing any preexisting content of Container.
+Container is not empty after a successful call to Replace_Element.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Query_Element (Container : @key[in] Holder;
+                         Process   : @key[not null access procedure] (Element : @key[in] Element_Type));]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[If Container is empty,
+Constraint_Error is propagated. Otherwise, Query_Element calls
+Process.@key[all] with the contained element as the argument. Program_Error is
+raised if Process.@key[all] tampers with the elements of Container. Any
+exception raised by Process.@key[all] is propagated.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The @ldquote@;tamper with the elements@rdquote
+  check is intended to prevent the Element parameter of Process from being
+  modified or deleted outside of Process. The check prevents data loss (if
+  Element_Type is passed by copy) or erroneous execution (if Element_Type is an
+  unconstrained type).]}
+@end{ImplNote}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Update_Element (Container : @key[in] Holder;
+                          Process   : @key[not null access procedure] (Element : @key[in out] Element_Type));]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[If Container is empty,
+Constraint_Error is propagated. Otherwise, Query_Element calls
+Process.@key[all] with the contained element as the argument. Program_Error is
+raised if Process.@key[all] tampers with the elements of Container. Any
+exception raised by Process.@key[all] is propagated.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The Element parameter of Process.@key[all] may be
+  constrained even if Element_Type is unconstrained.]}
+@end{ImplNote}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Move (Target : @key[in out] Holder; Source : @key[in out] Holder);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object
+as Source, then Move has no effect. Otherwise, the element contained by Source
+(if any) is removed from Source and inserted into Target, replacing any
+preexisting content. Source is empty after a successful call to Move.]}
+
+@end{DescribeCode}
+
+@end{StaticSem}
+
+@begin{Bounded}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error for the actual function associated with a
+generic formal subprogram, when called as part of an operation of
+this package, to tamper with elements of any Holder parameter to the
+operation. Either Program_Error is raised, or the operation works as
+defined on the value of the Holder either prior to, or subsequent to,
+some or all of the modifications to the Holder.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error to call any subprogram declared in the visible part
+of Containers.Indefinite_Holders when the associated container has been
+finalized. If the operation takes Container as an @key[in out] parameter,
+then it raises Constraint_Error or Program_Error. Otherwise, the operation
+either proceeds as it would for an empty container, or it raises
+Constraint_Error or Program_Error.]}
+@end{Bounded}
+
+@begin{ImplReq}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Text=[No storage associated with a holder object shall be
+lost upon assignment or scope exit.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Text=[The execution of an @nt{assignment_statement}
+for a holder shall have the effect of copying the element (if any) from the
+source holder object to the target holder object.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[An assignment of a holder is a
+  @ldquote@;deep@rdquote copy; that is the elements are copied as well as the
+  data structures. We say @ldquote@;effect of@rdquote in order to allow the
+  implementation to avoid copying elements immediately if it wishes. For
+  instance, an implementation that avoided copying until one of the containers
+  is modified would be allowed.]}
+@end{ImplNote}
+@end{ImplReq}
+
+@begin{ImplAdvice}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Text=[Move should not copy elements, and should minimize
+copying of internal data structures.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Usually that can be accomplished simply by moving
+  the pointer(s) to the internal data structures from the Source holder to the
+  Target holder.]}
+@end{ImplNote}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgAdded{Version=[3],Text=[If an exception is propagated from a holder
+operation, no storage should be lost, nor should the element be removed from a
+holder unless specified by the operation.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is important so that programs can recover
+  from errors. But we don't want to require heroic efforts, so we just require
+  documentation of cases where this can't be accomplished.]}
+@end{Reason}
+@end{ImplAdvice}
+
+@begin{Extend95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
+  @b<Corrigendum 2:> The generic package Containers.Indefinite_Holders is new.]}
 @end{Extend95}
 

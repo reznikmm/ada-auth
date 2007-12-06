@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.77 $ $Date: 2007/07/10 05:00:53 $ $Author: Randy $ }
+@comment{ $Revision: 1.78 $ $Date: 2007/11/30 03:34:27 $ $Author: Randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2007/07/10 05:00:53 $}
+@Comment{$Date: 2007/11/30 03:34:27 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2736,9 +2736,10 @@ construction of highly efficient tasking run-time systems.]
   access types that designate @Chg{Version=[2],New=[a type that needs
   finalization],Old=[such objects@Chg{New=[,],Old=[]}]} ]}shall be
   declared only at library level.@Chg{Version=[3],New=[ There are
-  no @nt{allocator}s for an access type whose designated type needs
-  finalization if the access type does not have library-level
-  accessibility.],Old=[]}
+  no @nt{allocator}s where the type determined by the @nt{subtype_mark}
+  of the @nt{subtype_indication} or @nt{qualified_expression} needs
+  finalization where the type of the @nt{allocator}
+  does not have library-level accessibility.],Old=[]}
     @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0042],ARef=[AI95-00130-01]}
     @ChgNote{This is no longer true.}
@@ -4607,7 +4608,8 @@ language-defined library package exists:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
 @ChgAdded{Version=[2],Text=[The type Group_Budget represents an execution time
-budget to be used by a group of tasks. The type Group_Budget needs finalization
+budget to be used by a group of tasks. The type Group_Budget
+needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
 (see @RefSecNum{User-Defined Assignment and Finalization}). A task can belong
 to at most one group. Tasks of any priority can be added to a group.]}
 
@@ -4834,7 +4836,8 @@ language-defined library package exists:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],Text=[The type Timing_Event represents a time in the future
-when an event is to occur. The type Timing_Event needs finalization (see
+when an event is to occur. The type Timing_Event
+needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
 @RefSecNum{User-Defined Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}

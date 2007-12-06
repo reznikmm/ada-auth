@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2007/02/20 00:01:25 $}
+@Comment{$Date: 2007/11/30 03:34:20 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -359,7 +359,8 @@ The following Annexes are informative:
 
 @RefSec{Language-Defined Pragmas}
 
-@RefSec{Implementation-Defined Characteristics}
+@Chgref{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
+@Chg{Version=[3],New=[@RefSec{Summary of Documentation Requirements}],Old=[@RefSec{Implementation-Defined Characteristics}]}
 
 @RefSec{Glossary}
 

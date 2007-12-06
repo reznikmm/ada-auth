@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/04/05 02:57:49 $}
+@Comment{$Date: 2007/11/30 03:34:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 
 @LabeledClause{Array Types}
 
@@ -952,7 +952,7 @@ instance of a generic unit.@PDefn{generic contract issue}
   but not if the only reason it's limited is because of a limited component.
   Compare with the definition of limited type in
   @RefSecNum{Limited Types}.@Chg{Version=[2],New=[ Also, recall that a
-  @lquotes@;descendant@rquote includes the type itself, so an explicitly
+  @ldquote@;descendant@rdquote includes the type itself, so an explicitly
   limited record type can have defaults.],Old=[]}
 @end{Discussion}
 @begin{Ramification}

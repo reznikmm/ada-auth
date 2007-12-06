@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.28 $ $Date: 2006/10/19 06:40:30 $ $Author: Randy $ }
+@comment{ $Revision: 1.29 $ $Date: 2007/11/30 03:34:26 $ $Author: Randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2006/10/19 06:40:30 $}
+@Comment{$Date: 2007/11/30 03:34:26 $}
 
 @RMNewPage@Comment{For printed RM Ada 2007}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -671,7 +671,8 @@ component is True, directory entries representing special files are provided.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[The type Search_Type contains the
 state of a directory search. A
 default-initialized Search_Type object has no entries available (function
-More_Entries returns False). Type Search_Type needs finalization
+More_Entries returns False). Type Search_Type
+needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
 (see @RefSecNum{User-Defined Assignment and Finalization}).]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}

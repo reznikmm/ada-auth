@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2007/02/18 03:22:28 $}
+@Comment{$Date: 2007/11/30 03:34:26 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.33 $}
+@comment{$Revision: 1.34 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -50,7 +50,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\@\@\@\@em @RefSecNum{The Package Containers.Indefinite_Doubly_Linked_Lists}
 @\@\@\Indefinite_Hashed_Maps @em @RefSecNum{The Package Containers.Indefinite_Hashed_Maps}
 @\@\@\Indefinite_Hashed_Sets @em @RefSecNum{The Package Containers.Indefinite_Hashed_Sets}
-@\@\@\Indefinite_Ordered_Maps @em @RefSecNum{The Package Containers.Indefinite_Ordered_Maps}
+@Chg{Version=[3],New=(@\@\@\Indefinite_Holders @em @RefSecNum{The Package Containers.Indefinite_Holders}
+), Old=()}@\@\@\Indefinite_Ordered_Maps @em @RefSecNum{The Package Containers.Indefinite_Ordered_Maps}
 @\@\@\Indefinite_Ordered_Sets @em @RefSecNum{The Package Containers.Indefinite_Ordered_Sets}
 @\@\@\Indefinite_Vectors @em @RefSecNum{The Package Containers.Indefinite_Vectors}
 @\@\@\Ordered_Maps @em @RefSecNum{The Package Containers.Ordered_Maps}
@@ -221,6 +222,23 @@ denote nonoverlapping objects.
   body of the package has to be somehow protected against
   simultaneous access.
 @end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0048-1]}
+@ChgAdded{Version=[3],Text=[For a descendant of a language-defined
+tagged type, the implementation
+shall ensure that each inherited language-defined subprogram behaves as
+described in this International Standard. In particular, overriding
+a language-defined subprogram shall
+not alter the effect of any inherited language-defined subprogram.]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This means that internally the implementation
+  must not do redispatching unless it is required by the Standard.
+  So when we say that some subprogram Bar is equivalent to
+  Foo, overriding Foo for a derived type doesn't change the semantics of
+  Bar, and in particular it means that Bar may no longer be equivalent to
+  Foo. The word @ldquote@;equivalent@rdquote is always a bit of a lie anyway.]}
+@end{Reason}
 @end{ImplReq}
 
 @begin{ImplPerm}
@@ -251,4 +269,17 @@ The order and lettering of the annexes has been changed.
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0047],ARef=[AI95-00081-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Units missing from the list of
   predefined units were added.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00424-01]}
+  @ChgAdded{Version=[2],Text=[Added new units to the list of
+  predefined units.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0048-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added wording to ban
+  redispatching unless it is explicitly required, in order to safeguard
+  portability when overriding language-defined routines.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added the generic package
+  Containers.Indefinite_Holders to the list of predefined units.]}
 @end{DiffWord95}

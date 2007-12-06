@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.49 $ $Date: 2007/07/10 05:00:54 $ $Author: Randy $ }
+@comment{ $Revision: 1.50 $ $Date: 2007/11/30 03:34:28 $ $Author: Randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2007/07/10 05:00:54 $}
+@Comment{$Date: 2007/11/30 03:34:28 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -2184,13 +2184,35 @@ is subject to a per-object constraint, then the component subtype shall be an
 unchecked union subtype.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0026-1]}
 @ChgAdded{Version=[2],Text=[Any name that denotes a discriminant of an object
 of an unchecked union type shall occur within the declarative region of the
-type.]}
+type@Chg{Version=[2],New=[, and shall not
+occur within a @nt{record_representation_clause}],Old=[]}.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
-@ChgAdded{Version=[2],Text=[A component declared in a @nt{variant_part} of an
-unchecked union type shall not have a controlled, protected, or task part.]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0026-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[The type of a],Old=[A]}
+component declared in a @nt{variant_part} of an
+unchecked union type shall not @Chg{Version=[3],New=[need finalization.
+In addition to the places where @LegalityTitle normally apply
+(see @RefSecNum{Generic Instantiation}),
+this rule also applies in the private part of an instance of a generic unit.@PDefn{generic contract issue}
+For an unchecked union type declared within the body of a generic unit, or
+within the body of any of its descendant library units, no part of the type
+of a component declared in a @nt{variant_part} of the unchecked union type shall
+be of a formal private type or formal private extension declared within the
+formal part of the generic unit],Old=[have a controlled, protected, or
+task part]}.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0026-1]}
+  @ChgAdded{Version=[3],Text=[The last part is a classic assume-the-worst
+  rule that avoids dependence on the actuals in a generic body. We did
+  not include this in the definition of @ldquote@;needs finalization@rdquote
+  as it has a bad interaction with the use of that term for the
+  No_Nested_Finalization restriction.]}
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
 @ChgAdded{Version=[2],Text=[The completion of an incomplete or private type
@@ -2356,7 +2378,15 @@ Y : Integer := X.F2; -- @RI[erroneous]]}
   @nt{Pragma} Unchecked_Union is new.]}
 @end{Extend95}
 
-
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0026-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Revised the rules
+  to use the @ldquote@;needs finalization@rdquote definition,
+  and eliminated generic contract issies. We also made the
+  use of discriminants on Unchecked_Union types illegal in
+  @nt{record_representation_clause}s, as it makes no sense to
+  specify a position for something that it not supposed to exist.]}
+@end{DiffWord95}
 
 @RMNewPage@Comment{For printed RM Ada 2005}
 @LabeledClause{Interfacing with COBOL}

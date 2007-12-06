@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2007/08/25 03:53:25 $}
+@Comment{$Date: 2007/11/30 03:34:25 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3193,26 +3193,36 @@ user-defined subprogram.]}
 @end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035],ARef=[AI95-00002-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0034-1]}
 @PDefn{preelaborated}
 If a @nt{pragma} Preelaborate (or @nt<pragma> Pure @em see below)
 applies to a library unit, then it is @i{preelaborated}.
-@Redundant[
+@Chg{Version=[3],New=[],Old=[@Redundant[
 @RootDefn{preelaborated}
 If a library unit is preelaborated, then its declaration, if any,
 and body, if any, are elaborated
 prior to all non-preelaborated @nt{library_item}s of the partition.]
-@Chg{New=[The declaration and body of a preelaborated library
+]}@Chg{New=[The declaration and body of a preelaborated library
 unit, and all subunits that are elaborated as part of elaborating the library
 unit,], Old=[All compilation units of a preelaborated
-library unit]} shall be preelaborable.
+library unit]} shall be preelaborable.@Chg{Version=[3],New=[
+In addition, the
+limited view of a library package is preelaborated. All
+compilation units of a preelaborated library unit shall depend semantically only
+on compilation units of other preelaborated library units.],Old=[]}
 @PDefn{generic contract issue}
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
-this rule applies also in the private part of an
-instance of a generic unit.
-In addition, all compilation units of a preelaborated library unit
+@Chg{Version=[3],New=[these rules also apply],Old=[this rule applies also]}
+in the private part of an instance of a generic unit.
+@Chg{Version=[3],New=[@Redundant[
+@RootDefn{preelaborated}
+If a library unit is preelaborated, then its declaration, if any,
+and body, if any, are elaborated
+prior to all non-preelaborated @nt{library_item}s of the partition.]],
+Old=[In addition, all compilation units of a preelaborated library unit
 shall depend semantically only on
-compilation units of other preelaborated library units.
+compilation units of other preelaborated library units.]}
 @begin{Ramification}
 In a generic body, we assume the worst about
 formal private types and extensions.
@@ -3488,13 +3498,14 @@ subprogram,
 task unit, or protected unit.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0035-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0034-1],ARef=[AI05-0035-1]}
 @Defn{declared pure}
 A @nt{pragma} Pure is used to declare that a library unit is pure.
 @Chg{Version=[3],New=[The declaration and
 body of a declared pure library unit, and all subunits that are
 elaborated as part of elaborating the library unit, shall be pure.
-In addition, all],Old=[If a @nt{pragma} Pure applies to a library unit,
+In addition, the limited view of a library package is declared pure.
+All],Old=[If a @nt{pragma} Pure applies to a library unit,
 then its]} compilation units @Chg{Version=[3],New=[of a declared pure
 library unit],Old=[shall be pure, and they]} shall depend semantically
 only on compilation units of other library units that are
@@ -3782,6 +3793,11 @@ required to appear last.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
   @ChgAdded{Version=[2],Text=[Disallowed pragma Elaborate and Elaborate_All
   for packages that are mentioned in a @nt{limited_with_clause}.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0034-1]}
+  @ChgAdded{Version=[3],Text=[@B<Corrigendum 2:> Added wording so that
+  a limited view is always treated as pure, no matter what categorization
+  is used for the originating unit.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0035-1]}
   @ChgAdded{Version=[3],Text=[@B<Corrigendum 2:> Adjusted wording so that

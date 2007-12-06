@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2007/07/10 05:00:51 $}
+@Comment{$Date: 2007/11/30 03:34:25 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -45,7 +45,7 @@ short-hand for @lquotes@;exception occurrence.@rquotes@;
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0043-1]}
 @redundant[An @nt{exception_declaration} declares a name for an exception.
-An exception is raised initially either by a
+An exception is raised initially @Chg{Version=[3],New=[],Old=[either ]}by a
 @nt{raise_statement}@Chg{Version=[3],New=[, by a call to
 Raise_Exception,],Old=[]}
 or by the failure of a language-defined check.

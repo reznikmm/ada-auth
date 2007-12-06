@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2007/08/25 03:53:24 $}
+@Comment{$Date: 2007/11/30 03:34:22 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -542,16 +542,17 @@ For parameters of other types,
 it is unspecified whether the parameter
 is passed by copy or by reference.
 @begin{Discussion}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   There is no need to incorporate the discussion of AI83-00178,
   which requires pass-by-copy for certain kinds of actual parameters,
   while allowing pass-by-reference for others.
   This is because we explicitly indicate that a function
-  creates an anonymous constant object for its result,
-  unless the type is a return-by-reference type
+  creates an anonymous constant object for its result@Chg{Version=[3],New=[],Old=[,
+  unless the type is a return-by-reference type]}
   (see @RefSecNum{Return Statements}).
   We also provide a special dispensation for
-  instances of Unchecked_Conversion to return by reference, even
-  if the result type is not a return-by-reference type
+  instances of Unchecked_Conversion to return by reference@Chg{Version=[3],New=[],Old=[, even
+  if the result type is not a return-by-reference type]}
   (see @RefSecNum{Unchecked Type Conversions}).
 @end{Discussion}
 @end{StaticSem}
@@ -2389,6 +2390,7 @@ that object.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0058-1]}
 @Chg{Version=[2],New=[For the execution of an
 @nt{extended_@!return_@!statement}, the
 @nt{handled_@!sequence_@!of_@!statements} is executed. Within this
@@ -2396,10 +2398,25 @@ that object.]}
 @nt{simple_@!return_@!statement} that applies to the
 @nt{extended_@!return_@!statement} causes a transfer of control that completes
 the @nt{extended_@!return_@!statement}. Upon completion
-of a return statement that applies to a callable construct],Old=[Finally]}, a
+of a return statement that applies to a callable construct@Chg{Version=[3],
+New=[by the normal completion of a @nt{simple_return_statement} or
+by reaching the @key[end return] of an @nt{extended_return_statement}],
+Old=[]}],Old=[Finally]}, a
 transfer of control is performed which completes the execution of the callable
 construct@Chg{Version=[2],New=[], Old=[ to which the @nt{return_@!statement}
 applies]}, and returns to the caller.
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0058-1]}
+  @ChgAdded{Version=[3],Text=[A transfer of control that completes an
+  @nt{extended_return_statement} (such as an exit or goto) does not cause
+  a return to the caller unless it is caused by @nt{simple_return_statement}
+  (that is, triggers the second sentence of this paragraph). The return to
+  the caller occurs for the @nt{simple_return_statement} that applies to an
+  @nt{extended_return_statement} because the last sentence says
+  @ldquote@;the normal completion of a @nt{simple_return_statement}@rdquote@;,
+  which includes the one nested in the @nt{extended_return_statement}.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[2],Text=[In the case of a function, the @nt{function_call}
@@ -2568,6 +2585,12 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0024-1]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the master check
   for tags since the masters may be for different tasks and thus incomparable.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0058-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the wording
+  defining returns for @nt{extended_return_statement}s, since leaving by
+  an exit or goto is considered @ldquote@;normal@rdquote completion of the
+  statement.]}
 @end{DiffWord95}
 
 

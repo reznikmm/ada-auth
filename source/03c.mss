@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/08/25 03:53:23 $}
+@Comment{$Date: 2007/11/30 03:34:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2029,6 +2029,49 @@ the parent or ancestor type
 result, or if a type other than a null extension inherits a],
 Old=[has an abstract primitive subprogram, or a primitive]}
 function with a controlling result, then:
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0068-1]}
+  @ChgAdded{Version=[3],Text=[These rules apply to each view of the type
+  individually. That is necessary preserve privacy. For instance, in the
+  following example:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[package] P @key[is]
+   @key[type] I @key[is interface];
+   @key[procedure] Op (X : I) @key[is abstract];
+@key[end] P;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] P;
+@key[package] Q @key[is]
+   @key[type] T @key[is abstract new] P.I @key[with private];
+   -- @RI[Op inherited here.]
+@key[private]
+   @key[type] T @key[is abstract new] P.I @key[with null record];
+   @key[procedure] Op (X : T) @key[is null];
+@key[end] Q;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] Q;
+@key[package] R @key[is]
+   @key[type] T2 @key[is new] Q.T @key[with null record];
+   -- @RI[Illegal. Op inherited here, but requires overriding.]
+@key[end] R;]}
+@end{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[If this did not depend on the view,
+this would be legal. But in that case, the fact that Op is overridden
+in the private part would be visible; package R would have to be
+illegal if no overridding was in the private part.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Note that this means that whether an inherited
+subprogram is abstract or concrete depends on where it inherited.
+In the case of Q, Q.Op in the visible part is abstract,
+while Q.Op in the private part is concrete. That is, R is illegal since
+it is an unrelated unit (and thus it cannot see the private part), but if
+R had been a private child of Q, it would have been legal.]}
+@end{Ramification}
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00334-01]}
   If the @Chg{Version=[2],New=[],Old=[derived ]}type is abstract or untagged,
@@ -2407,7 +2450,7 @@ ancestors.]]}
 @ChgAdded{Version=[2],Text=[@key{type} Con1 @key{is new} Int1 @key{and} Int2 @key{with null record};
 @key{type} Con2 @key{is new} Int2 @key{and} Int1 @key{with null record};]}
 @end{Example}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00345-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Type=[Trailing],Text=[to mean exactly the same thing.]}
 @end{MetaRules}
 
@@ -2616,8 +2659,10 @@ unit.@PDefn{generic contract issue}]}
 
 @begin{Runtime}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0070-1]}
 @ChgAdded{Version=[2],Text=[The elaboration of an
-@nt{interface_type_definition} has no effect.]}
+@nt{interface_type_definition} @Chg{Version=[3],New=[creates
+the interface type and its first subtype],Old=[has no effect]}.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[An @nt{interface_list} is made up of
@@ -2755,6 +2800,13 @@ operations which are intended to be implemented by task entries (see 9.1).]}
   are new. They provide multiple inheritance of interfaces, similar to the
   facility provided in Java and other recent language designs.]}
 @end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0070-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the definition
+  of elaboration for an @nt{interface_type_definition} to match that
+  of other type definitions.]}
+@end{DiffWord95}
 
 
 @LabeledClause{Access Types}

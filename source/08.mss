@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2007/07/17 02:11:49 $}
+@Comment{$Date: 2007/11/30 03:34:23 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -880,6 +880,13 @@ In addition, this is also stated redundantly (again),
 and is repeated, in @RefSec{Generic Instantiation}.
 The rationale for the rule is explained there.
 @end{Discussion}
+@begin{Honest}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0042-1]}
+@ChgAdded{Version=[3],Text=[The implicit subprograms declared when an
+operation of a progenitor is implemented by an entry or subprogram also
+override the appropriate implicitly declared inherited operations of the
+progenitor.@PDefn2{Term=[override],Sec=[when implemented by]}]}
+@end{Honest}
 @end{Itemize}
 
 @leading@Defn{visible}
