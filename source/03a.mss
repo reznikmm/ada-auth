@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/11/30 03:34:20 $}
+@Comment{$Date: 2007/12/06 06:53:16 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.88 $}
+@Comment{$Revision: 1.89 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -3189,7 +3189,8 @@ New=[, and access],Old=[]} classes,
 and are referred to in this standard as respectively,
 @i(universal_integer), @i(universal_real), @Chg{Version=[2],New=[],
 Old=[and ]}@i(universal_fixed)@Chg{Version=[2],
-New=[, and @i(universal_access)],Old=[]}.
+New=[, and @i(universal_access)@Chg{Version=[3],
+New=[@PDefn{universal_integer}@PDefn{universal_real}@PDefn{universal_fixed}@PDefn{universal_access}],Old=[]}],Old=[]}.
 These are analogous to class-wide types for these language-defined
 @Chg{Version=[2],New=[elementary],Old=[numeric]} classes.
 As with class-wide types, if a formal parameter is of a universal type,
@@ -5198,7 +5199,7 @@ to Integer'Last should be supported.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}
-@Defn{universal_integer}
+@PDefn{universal_integer}
 @Defn{integer literals}
 Integer literals are of the anonymous predefined
 integer type @i(universal_integer). Other integer types

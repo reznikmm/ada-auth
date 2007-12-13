@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2007/11/30 03:34:25 $}
+@Comment{$Date: 2007/12/06 06:53:17 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -3533,23 +3533,29 @@ applies to the result of the Input function.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0065-1]}
 @ChgAdded{Version=[2],Text=[@Defn{support external streaming}
 @Defn2{Term=[external streaming],Sec={type supports}}
 @Redundant[A type is said to @i{support external streaming} if Read and Write attributes
 are provided for sending values of such a type between active
 partitions, with Write marshalling the representation, and Read unmarshalling
 the representation.] A limited type supports external streaming only if
-it has available Read and Write attributes. A type with a part that is of an
+it has available Read and Write attributes. A type with a part that is of
+@Chg{Version=[3],New=[a non-remote],Old=[an]}
 access type supports external streaming only if that access type or the type of
 some part that includes the access type component, has Read and Write
 attributes that have been specified via an @nt{attribute_definition_clause},
 and that @nt{attribute_definition_clause} is visible. @Redundant[An anonymous
-access type does not support external streaming. ]All other types support
+access type does not support external streaming. ]All other types
+@Chg{Version=[3],New=[ (including remote access types,
+see @RefSecNum{Remote Types Library Units})],Old=[]}support
 external streaming.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[A limited type with a part that is of an access
+  @ChgRef{Version=[3],Kind=[Revised]}
+  @ChgAdded{Version=[2],Text=[A limited type with a part that is of
+  @Chg{Version=[3],New=[a non-remote],Old=[an]} access
   type needs to satisfy both rules.]}
 @end{Ramification}
 
@@ -3767,6 +3773,10 @@ class-wide types descended from S.
   dynamic expression. Expressions cannot provide any useful functionality
   because of the freezing rules, and the possibility of them complicates
   implementations.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0065-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Defined remote access
+  types to support external streaming, since that is their purpose.]}
 @end{DiffWord95}
 
 

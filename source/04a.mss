@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2007/11/30 03:34:21 $}
+@Comment{$Date: 2007/12/06 06:53:16 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.88 $}
+@Comment{$Revision: 1.89 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1110,7 +1110,8 @@ rule, to simplify implementations.]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
 An integer literal is of type @i{universal_integer}.
 A real literal is of type @i{universal_real}.@Chg{Version=[2],New=[ The literal
-@key<null> is of type @i<universal_access>.],Old=[]}
+@key<null> is of type @i<universal_access>.@Chg{Version=[3],
+New=[@PDefn{universal_integer}@PDefn{universal_real}@PDefn{universal_access}],Old=[]}],Old=[]}
 @end{StaticSem}
 
 @begin{RunTime}

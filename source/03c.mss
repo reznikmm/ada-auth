@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/11/30 03:34:21 $}
+@Comment{$Date: 2007/12/06 06:53:16 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2179,6 +2179,7 @@ allowed.]
   even considered by name resolution (see @RefSecNum{Subprogram Calls}).],Old=[]}
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0073-1]}
 The type of an @nt{aggregate}, or of an object created by an
 @nt{object_declaration} or an @nt{allocator},
 or a generic formal object of mode @key[in],
@@ -2188,7 +2189,11 @@ operation (see @RefSecNum{Assignment Statements}) shall not
 be abstract.
 The type of a component shall not be abstract.
 If the result type of a function is abstract,
-then the function shall be abstract.
+then the function shall be abstract.@Chg{Version=[3],New=[
+If a function has an access result type
+designating an abstract type, then the function shall be abstract.
+A generic function shall not have an abstract result type or
+an access result type designating an abstract type.],Old=[]}
 @begin{Reason}
   This ensures that values of an abstract type cannot be created,
   which ensures that a dispatching call to an abstract subprogram
@@ -2198,6 +2203,15 @@ then the function shall be abstract.
   therefore they should be forbidden for abstract types. Generic formal
   objects of mode @key[in out] are like renamings; therefore, abstract
   types are OK for them, though probably not terribly useful.
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0073-1]}
+  @ChgAdded{Version=[3],Text=[Generic functions returning a formal
+  abstract type are illegal because any instance would have to be
+  instantiated with a non-abstract type in order to avoid violating
+  the function rule (generic functions cannot be declared abstract).
+  But that would be an implied contract; it would be better for the
+  contract to be explicit by the formal type not being declared
+  abstract. Moreover, the implied contract does not add any capability.]}
 @end{Reason}
 
 If a partial view is not abstract, the corresponding
@@ -2257,15 +2271,16 @@ is not overridden, that is, P (3): the overridden operation P (2) does not
 @lquotes@;reemerge@rquotes@;. Therefore, the instantiation is illegal.],Old=[]}
 @end{Honest}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0073-1]}
 For an abstract type declared in a visible part,
 an abstract primitive subprogram
 shall not be declared in the private part,
 unless it is overriding an abstract subprogram
 implicitly declared in the visible part.
 For a tagged type declared in a visible part,
-a primitive function with a controlling result
-shall not be declared in the private part,
-unless it is overriding a function
+a primitive function with a controlling result@Chg{Version=[3],New=[
+or a controlling access result],Old=[]}shall not be declared
+in the private part, unless it is overriding a function
 implicitly declared in the visible part.
 @begin{Reason}
 @Leading@;The @lquotes@;visible part@rquotes@; could be that of a package
@@ -2418,6 +2433,11 @@ but then clients of the package would not have visibility to T.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00391-01]}
   @ChgAdded{Version=[2],Text=[We define the term @i<require overriding>
   to make other wording easier to understand.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0073-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added rules to eliminate
+  holes with controlling access results and generic functions that return
+  abstract types.]}
 @end{Diffword95}
 
 

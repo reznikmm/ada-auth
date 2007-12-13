@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2007/11/30 03:34:22 $}
+@Comment{$Date: 2007/12/06 06:53:16 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -2031,9 +2031,11 @@ with the reserved word @key[constant] shall include an @nt{expression}.],Old=[]}
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0032-1]}
 @ChgAdded{Version=[2],Text=[If the result subtype of the function is defined by a
 @nt{subtype_mark}, the @nt{return_@!subtype_@!indication} shall be a
-@nt{subtype_indication}. The type of the @nt{subtype_indication} shall be the
+@nt{subtype_indication}. The type of the @nt{subtype_indication}
+shall be@Chg{Version=[3],New=[covered by ],Old=[]} the
 result type of the function. If the result subtype of the function is
 constrained, then the subtype defined by the @nt{subtype_indication} shall also
 be constrained and shall statically match this result subtype.
@@ -2049,6 +2051,18 @@ by an @nt{access_definition}, the @nt{return_@!subtype_@!indication} shall be an
 statically match the result subtype of the function. The accessibility level of
 this anonymous access subtype is that of the result subtype.]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0032-1]}
+@ChgAdded{Version=[3],Text=[If the result subtype of the function is class-wide,
+the accessibility level of the type of the subtype defined by the
+@nt{return_subtype_indication}
+shall not be statically deeper than that of the master that elaborated
+the function body.]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[In this case, the @nt{return_subtype_indication}
+  could be a specific type initialized by default; in that case there is no
+  @nt{expression} to check.]}
+@end{Reason}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
@@ -2071,8 +2085,10 @@ these.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0032-1]}
 @ChgAdded{Version=[2],Text=[If the result subtype of the function is class-wide,
-the accessibility level of the type of the @nt{expression} of the return
+the accessibility level of the type of the @nt{expression}
+@Chg{Version=[3],New=[(if any) ],Old=[]}of the return
 statement shall not be statically deeper than that of the master that
 elaborated the function body. If the result subtype has one or more
 unconstrained access discriminants, the accessibility level of the anonymous
@@ -2083,11 +2099,17 @@ statically deeper than that of the master that elaborated the function body.]}
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[We know that if the result type is class wide,
-  then there must be an @nt{expression} of the return statement. Similarly, if
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0032-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[If],Old=[We know that if]}
+  the result type is class wide, then there must be an @nt{expression} of the
+  return statement@Chg{Version=[3],New=[ unless this is
+  an @nt{extended_return_statement} whose @nt{return_subtype_indication} is
+  a specific type. We have a separate rule to cover that case. Note that
+  if an @nt{extended_return_statement} has an @nt{expression}, then both rules
+  must be satisfied. For the second sentence],Old=[. Similarly]}, if
   the result subtype is unconstrained, then either the
-  @nt{return_@!subtype_@!indication} (if any) is constrained, or there must be an
-  @nt{expression}.]}
+  @nt{return_@!subtype_@!indication} (if any) is constrained, or
+  there must be an @nt{expression}.]}
 @end{Discussion}
 
 @end{Itemize}
@@ -2107,6 +2129,7 @@ is a full constant declaration for the return object.],Old=[]}]}
 
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02],ARef=[AI95-00416-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0032-1]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=[execution], Sec=(extended_return_statement)}
 For the execution of an @nt{extended_return_statement}, the
 @nt{subtype_indication} or @nt{access_definition} is elaborated. This creates
@@ -2118,7 +2141,12 @@ the return object. Otherwise, the return object is created and initialized
 by default as for a stand-alone object of its nominal subtype (see
 @RefSecNum{Object Declarations}). If the nominal subtype is indefinite, the
 return object is constrained by its initial
-value.@PDefn2{Term=[creation],Sec=[of a return object]}@PDefn{constrained by its initial value}]}
+value.@PDefn2{Term=[creation],Sec=[of a return object]}@PDefn{constrained by its initial value}@Chg{Version=[3],New=[
+A check is made that the value of the return object belongs to the function
+result subtype. Constraint_Error is raised if this
+check fails.@Defn2{Term=[Constraint_Error],
+Sec=(raised by failure of run-time check)}
+@IndexCheck{Discriminant_Check}],Old=[]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2138,6 +2166,13 @@ value.@PDefn2{Term=[creation],Sec=[of a return object]}@PDefn{constrained by its
   finalized prior to leaving the return statement.@Chg{Version=[3],New=[ If
   it has not been created when the return statement is left, it is not
   created or finalized.],Old=[]}]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0032-1]}
+  @ChgAdded{Version=[3],Text=[Other rules ensure that the check required by
+  this rule cannot fail unless the function has a class-wide result subtype
+  where the associated specific subtype is constrained. In other cases,
+  either the subtypes have to match or the function's subtype is
+  unconstrained and needs no checking.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
@@ -2179,13 +2214,16 @@ of the @nt<expression>.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00344-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0024-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0024-1],ARef=[AI05-0032-1]}
 @ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[]}@ChgNote{A dummy
 ChgDeleted to get conditional "Leading".}If
 the result type @Chg{Version=[2],New=[of a function ],Old=[]}is a specific
 tagged type@Chg{Version=[2],New=[, the tag of the return object is that
 of the result type. If the result type is class-wide, the tag of the
-return object is that of the value of the expression. A check is made that
+return object is that of @Chg{Version=[3],New=[the type of the
+@nt{subtype_indication} if it is specific, or otherwise that of ],Old=[]}the
+value of the @Chg{Version=[3],New=[@nt{expression}],Old=[expression]}.
+A check is made that
 the @Chg{Version=[3],New=[master],Old=[accessibility level]} of the type
 identified by the tag of the result @Chg{Version=[3],New=[includes the
 elaboration],Old=[is not deeper than that]} of the master that elaborated
@@ -2231,6 +2269,25 @@ Sec=(raised by failure of run-time check)}
     this object was itself a parameter to the accept statement.]}
 
 @end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0073-1]}
+@ChgAdded{Version=[3],Text=[@IndexCheck{Tag_Check}If the result subtype
+of the function is defined by
+an @nt{access_definition} designating a specific tagged type @i<T>, a check
+is made that the result value is null or the tag of the object designated
+by the result value identifies @i<T>.
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+Constraint_Error is raised if this check fails.]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This check is needed so that dispatching
+  on controlling access results works for tag-indeterminant functions.
+  If it was not made, it would be possible for such functions to return
+  an access to a decendant type, meaning the function could return
+  an object with a tag different than the one assumed by the
+  dispatching rules.]}
+@end{Reason}
+
 @begin{NotIso}
 @ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 9
 through 20 were deleted.>}]}@Comment{This message should be deleted if the
@@ -2586,11 +2643,23 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the master check
   for tags since the masters may be for different tasks and thus incomparable.]}
 
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0032-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added wording to allow
+  the @nt{return_subtype_indication} to have a specific type if the return
+  subtype of the function is class-wide. Specifying the (specific) type of
+  the return object is awkward without this change, and this is consistent
+  with the way @nt{allocator}s work.]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0058-1]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the wording
   defining returns for @nt{extended_return_statement}s, since leaving by
   an exit or goto is considered @ldquote@;normal@rdquote completion of the
   statement.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0073-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a tag check for
+  functions returning anonymous access-to-tagged types, so that
+  dispatching of tag-indeterminant function works as expected.]}
 @end{DiffWord95}
 
 
