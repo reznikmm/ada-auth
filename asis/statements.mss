@@ -1,6 +1,6 @@
 @Part(statements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/statements.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2007/10/13 05:33:34 $}
+@comment{$Revision: 1.7 $ $Date: 2007/12/13 05:00:57 $}
 
 
 @LabeledSection{package Asis.Statements}
@@ -948,7 +948,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns a list of
-elements that wach have one of Element_Kinds:]}
+elements that each have one of Element_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Statement
 A_Pragma]}

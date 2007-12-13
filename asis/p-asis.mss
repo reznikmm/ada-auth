@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.12 $ $Date: 2007/10/13 05:33:35 $}
+@comment{$Revision: 1.13 $ $Date: 2007/12/13 05:00:57 $}
 
 @LabeledSection{package Asis}
 
@@ -506,11 +506,6 @@ ISO/IEC 8652:1995 for each kind of defining name.]}
 @Chg{Version=[1],New=[classifies],Old=[@en]}
 declarations and specifications having defining name
 literals.@Chg{Version=[1],New=[],Old=[Literals                                 -- @examcom{Reference Manual -> Subordinate Kinds}]}
-
-@Chg{Version=[1],New=[Type ],Old=[]}Expression_Kinds
-@Chg{Version=[1],New=[describes],Old=[@en]} general expression
-classifications@Chg{Version=[1],New=[.],Old=[
-Literals                                   -- @examcom{Reference Manual -> Subordinate Kinds}]}
 
 @begin{DescribeCode}
 @begin{Example}
