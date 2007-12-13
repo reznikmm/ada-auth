@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2007/12/06 06:53:16 $}
+@Comment{$Date: 2007/12/13 05:28:27 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1807,7 +1807,7 @@ get too complicated, the implementation gets more difficult and
 it becomes harder to produce good error messages.
 @end{Reason}
 @begin{Ramification}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI005-0005-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
 @ChgAdded{Version=[3],Text=[This rule is additive with the rule given in
 @RefSecNum{Aggregates}. That means that rule must be satisfied even though it
 is alway syntactally possible to tell that something is an extension aggregate
