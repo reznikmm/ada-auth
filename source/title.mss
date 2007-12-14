@@ -1,7 +1,7 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.36 $ $Date: 2007/07/10 05:00:54 $}
+@comment{$Revision: 1.37 $ $Date: 2007/12/13 05:30:05 $}
 
 @begin{ISOOnly}
 @Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[3],New=[20zz Ed. 4],Old=[@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
@@ -60,7 +60,7 @@
 @Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:1995(E)}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[1], New=[@Grow{with Technical Corrigendum 1}], Old=[]}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[2], New=[@Grow{and Amendment 1}], Old=[]}}}
-@Noparanum@Center{@Swiss{@Chg{Version=[3], New=[@Grow{and Technical Corrigendum 2?? (Draft 2)}], Old=[]}}}
+@Noparanum@Center{@Swiss{@Chg{Version=[3], New=[@Grow{and Technical Corrigendum 2?? (Draft 3)}], Old=[]}}}
 @end{NotISO}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
