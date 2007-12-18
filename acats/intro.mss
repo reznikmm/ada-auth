@@ -1,7 +1,7 @@
 @Part(intro, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/intro.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2007/12/14 06:19:01 $}
+@comment{$Revision: 1.2 $ $Date: 2007/12/15 08:04:01 $}
 
 @LabeledSection{Introduction}
 
@@ -121,8 +121,9 @@ The ACATS needs to test as many rules as possible in order to meet the goal of
 enhancing Ada software portability. After all, a rule that is not tested is far
 more likely to be incorrectly implemented than one that is tested.
 
-Therefore the ACATS strives for complete coverage of the standard. Complete
-coverage means that every rule in the Ada standard has one or more associated
+Therefore the ACATS strives for complete coverage of the standard. @i{Complete
+coverage}@Defn{Complete coverage} means that every rule in the Ada standard has
+one or more associated
 tests that ensure that the rule is implemented properly. By rule, we mean
 whatever set of sentences makes up a testable statement. A rule may be as small
 as a single line, or spread across multiple paragraphs.

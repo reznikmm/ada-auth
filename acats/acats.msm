@@ -6,7 +6,7 @@
 @HideISO
 @Comment{No paragraph numbers - no @NumberParagraphs command}
 @comment{Do not link Non-Terminals [no grammar here]}
-@Title{Version=[0],Text=[Ada Conformity Assessment Test Suite (ACATS) User's Guide]}@Comment{Same title for all versions}
+@Title{Version=[0],Text=[ACATS 3.0 User's Guide]}@Comment{Same title for all versions}
 @FilePrefix{UG}
 @ExampleFont{Fixed}
 @BodyFont{Roman}
@@ -16,9 +16,8 @@
 
 @Comment{RTF properties}
 @SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}
-@RTFHeaderPrefix{Version=[0],Text=[ACATS 3.0 User's Guide]}
-@RTFHeaderPrefix{Version=[1],Text=[ACATS 3.0 User's Guide]}
-@RTFPageSize{Letter}@Comment{Final version should be A4}
+@RTFHeaderPrefix{Version=[0],Text=[]}
+@RTFPageSize{Letter}
 @RTFFonts{Serif=[Times],SansSerif=[Arial]}
 
 @Comment{HTML properties}
@@ -39,8 +38,6 @@
 @Source{Name=<Intro.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[T]}
 
 @Comment{Rest TBD.
-@Source{Name=<Foreword.MSS>,SectionName=<00>,SectionNumber=[0],NewSection=[T]}
-@Source{Name=<General.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[T]}
 @Source{Name=<Concepts.MSS>,SectionName=<02>,SectionNumber=[2],NewSection=[T]}
 @Source{Name=<P-ASIS.MSS>,SectionName=<03>,SectionNumber=[3],NewSection=[T]}
 @Source{Name=<Errors.MSS>,SectionName=<04>,SectionNumber=[4],NewSection=[T]}
@@ -54,25 +51,12 @@
 @Source{Name=<Comp-Rel.MSS>,SectionName=<12>,SectionNumber=[12],NewSection=[T]}
 @Source{Name=<Elements.MSS>,SectionName=<13>,SectionNumber=[13],NewSection=[T]}
 @Source{Name=<Iterator.MSS>,SectionName=<14>,SectionNumber=[14],NewSection=[T]}
-@Source{Name=<Declarations.MSS>,SectionName=<15>,SectionNumber=[15],NewSection=[T]}
-@Source{Name=<Definitions.MSS>,SectionName=<16>,SectionNumber=[16],NewSection=[T]}
-@Source{Name=<Expressions.MSS>,SectionName=<17>,SectionNumber=[17],NewSection=[T]}
-@Source{Name=<Statements.MSS>,SectionName=<18>,SectionNumber=[18],NewSection=[T]}
-@Source{Name=<Clauses.MSS>,SectionName=<19>,SectionNumber=[19],NewSection=[T]}
-@Source{Name=<Text.MSS>,SectionName=<20>,SectionNumber=[20],NewSection=[T]}
-@Source{Name=<Ids.MSS>,SectionName=<21>,SectionNumber=[21],NewSection=[T]}
-@Source{Name=<Data.MSS>,SectionName=<22>,SectionNumber=[22],NewSection=[T]}
-@Source{Name=<DataPort.MSS>,SectionName=<23>,SectionNumber=[23],NewSection=[T]}
-@Comment{Informative annexes:}
-@Source{Name=<Glossary.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[T]}
-@Source{Name=<Examples.MSS>,SectionName=<B>,SectionNumber=[B],NewSection=[T]}
-@Source{Name=<IO-IDL.MSS>,SectionName=<C>,SectionNumber=[C],NewSection=[T]}
-@Source{Name=<Rat.MSS>,SectionName=<D>,SectionNumber=[D],NewSection=[T]}
-@Source{Name=<Entities.MSS>,SectionName=<E>,SectionNumber=[E],NewSection=[T]}
-@Source{Name=<Obsolescent.MSS>,SectionName=<F>,SectionNumber=[F],NewSection=[T]}
 }
 
-@Source{Name=<Defs.MSS>,SectionName=<H>,SectionNumber=[H],NewSection=[T]}
+@Source{Name=<Applic.MSS>,SectionName=<D>,SectionNumber=[D],NewSection=[T]}
+@Source{Name=<TDev.MSS>,SectionName=<E>,SectionNumber=[E],NewSection=[T]}
+@Source{Name=<CRules.MSS>,SectionName=<F>,SectionNumber=[F],NewSection=[T]}
+@Source{Name=<Defs.MSS>,SectionName=<G>,SectionNumber=[G],NewSection=[T]}
 @Source{Name=<Refs.MSS>,SectionName=<REF>,SectionNumber=[0],NewSection=[T]}
 @Source{Name=<Index.MSS>,SectionName=<IDX>,SectionNumber=[0],NewSection=[T]}
 
