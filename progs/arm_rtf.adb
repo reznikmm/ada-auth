@@ -125,6 +125,7 @@ package body ARM_RTF is
     --			for paragraphs.
     --  2/16/07 - RLB - Added example styles for additional nesting levels.
     --  2/19/07 - RLB - Added Standard Title style.
+    -- 12/18/07 - RLB - Fixed silly table bug.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -1302,7 +1303,7 @@ package body ARM_RTF is
 		       Style_After => 20,
 		       Style_Justified => FALSE,
 		       Style_String_Prefix => "",
-		       Style_String_Suffix => "\qc");
+		       Style_String_Suffix => "\qc ");
 		-- We use a bit of space above and below to avoid overrunning
 		-- the borders of the cells.
 	    Set_Style (Table_L_Text_Info,
@@ -1314,7 +1315,7 @@ package body ARM_RTF is
 		       Style_After => 20,
 		       Style_Justified => FALSE,
 		       Style_String_Prefix => "",
-		       Style_String_Suffix => "\ql");
+		       Style_String_Suffix => "\ql ");
 	    Set_Style (Table_C_Sml_Text_Info,
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
@@ -1324,7 +1325,7 @@ package body ARM_RTF is
 		       Style_After => 20,
 		       Style_Justified => FALSE,
 		       Style_String_Prefix => "",
-		       Style_String_Suffix => "\qc");
+		       Style_String_Suffix => "\qc ");
 	    Set_Style (Table_L_Sml_Text_Info,
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
@@ -1334,7 +1335,7 @@ package body ARM_RTF is
 		       Style_After => 20,
 		       Style_Justified => FALSE,
 		       Style_String_Prefix => "",
-		       Style_String_Suffix => "\ql");
+		       Style_String_Suffix => "\ql ");
 	else
 	    Set_Style (Paragraph_Info(ARM_Output.Normal, 0),
 		       Font => ARM_Output.Default,
@@ -2190,7 +2191,7 @@ package body ARM_RTF is
 		       Style_After => 10,
 		       Style_Justified => FALSE,
 		       Style_String_Prefix => "",
-		       Style_String_Suffix => "\qc");
+		       Style_String_Suffix => "\qc ");
 		-- We use a bit of space above and below to avoid overrunning
 		-- the borders of the cells.
 	    Set_Style (Table_L_Text_Info,
@@ -2202,7 +2203,7 @@ package body ARM_RTF is
 		       Style_After => 20,
 		       Style_Justified => FALSE,
 		       Style_String_Prefix => "",
-		       Style_String_Suffix => "\ql");
+		       Style_String_Suffix => "\ql ");
 	    Set_Style (Table_C_Sml_Text_Info,
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
@@ -2212,7 +2213,7 @@ package body ARM_RTF is
 		       Style_After => 20,
 		       Style_Justified => FALSE,
 		       Style_String_Prefix => "",
-		       Style_String_Suffix => "\qc");
+		       Style_String_Suffix => "\qc ");
 	    Set_Style (Table_L_Sml_Text_Info,
 		       Font => ARM_Output.Default,
 		       Body_Font => Output_Object.Body_Font,
@@ -2222,7 +2223,7 @@ package body ARM_RTF is
 		       Style_After => 20,
 		       Style_Justified => FALSE,
 		       Style_String_Prefix => "",
-		       Style_String_Suffix => "\ql");
+		       Style_String_Suffix => "\ql ");
 	end if;
 
 	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Normal, 0));

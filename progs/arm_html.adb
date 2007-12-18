@@ -163,6 +163,8 @@ package body ARM_HTML is
     --  2/15/07 - RLB - Redid enumeration and bullet indenting to make the
     --			formats work consistently on Firefox and IE.
     --  2/19/07 - RLB - Added Title style.
+    -- 12/14/07 - RLB - Added code to support multi-column text without
+    --			requiring New_Column calls.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -1451,12 +1453,56 @@ package body ARM_HTML is
 	end if;
 	if Number_of_Columns >= 4 then
 	    -- We have special processing for 4 or more columns. Note that we
-	    -- assume such items are formated with explicit New_Column calls,
-	    -- and do not contain any nested paragraph formats.
+	    -- assume do not contain any nested paragraph formats.
 	    Output_Object.Current_Column := 1;
 	    Output_Object.Current_Item := 1;
 	elsif Output_Object.Column_Count >= 4 and then Number_of_Columns = 1 then
 	    -- Finished processing columns, output the columns as a table.
+	    if Output_Object.Current_Column = 1 then
+		-- No New_Column calls; break this into columns ourselves.
+		-- Current_Item represents the total number of items + 2
+		-- (there is a double count for the end of the paragraph).
+		declare
+		    Col_Count : Natural := Output_Object.Current_Item - 2;
+		    Where : Column_Text_Ptr;
+		begin
+		    Col_Count := (Col_Count + Output_Object.Column_Count - 1) /
+			Output_Object.Column_Count;
+Ada.Text_IO.Put_Line("@@ Calc columns for" & Natural'Image(Output_Object.Column_Count) &
+  " columns;" & Natural'Image(Output_Object.Current_Item - 1) & " total items;" &
+  Natural'Image(Col_Count) & " per column.");
+
+		    -- Split the item list into the appropriate columns.
+		    -- Note that this list is stored in reverse order.
+		    for I in reverse 2 .. Output_Object.Column_Count loop
+Ada.Text_IO.Put_Line("@@   For column" & Natural'Image(I) & " split at item" &
+Natural'Image(Col_Count*(I-1)));
+			Where := Output_Object.Column_Text(1);
+			exit when Where = null; -- No columns to look at.
+			if Where.Item <= Col_Count*(I-1) then
+			    -- This column is empty.
+			    null;
+			else
+			    Output_Object.Column_Text(I) := Where;
+			    while Where.Next /= null and then
+			        Where.Next.Item > Col_Count*(I-1) loop
+				Where.Item := Where.Item - Col_Count*(I-1);
+			        Where := Where.Next;
+			    end loop;
+			    if Where = null then
+			        Output_Object.Column_Text(1) := null;
+			    else
+			        Output_Object.Column_Text(1) := Where.Next;
+				Where.Next := null;
+--Ada.Text_IO.Put_Line("    split item=" & Natural'Image(Where.Item));
+				Where.Item := Where.Item - Col_Count*(I-1);
+			    end if;
+			end if;
+		    end loop;
+		end;
+	    --else there were explicit New_Column calls; no need to
+	    --do anything here.
+	    end if;
 	    if Output_Object.HTML_Kind = HTML_3 then
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<UL><UL><TABLE Width=""70%"">"); -- Table with no border or caption, takes up 70% of the screen.
 	    else
@@ -1927,6 +1973,9 @@ package body ARM_HTML is
 	    Output_Object.Is_Bold := False;
 	    Output_Object.Is_Italic := False;
 	    Output_Object.Size := 0;
+	    Output_Object.Change := ARM_Output.None;
+	    Output_Object.Version := '0';
+	    Output_Object.Added_Version := '0';
 	    if Number /= "" then -- Has paragraph number.
 	        Ada.Text_IO.Put (Output_Object.Output_File, TINY_SWISS_FONT_CODE);
 	        Ada.Text_IO.Put (Output_Object.Output_File, Number);
@@ -2005,6 +2054,9 @@ package body ARM_HTML is
 	    Output_Object.Is_Bold := False;
 	    Output_Object.Is_Italic := False;
 	    Output_Object.Size := 0;
+	    Output_Object.Change := ARM_Output.None;
+	    Output_Object.Version := '0';
+	    Output_Object.Added_Version := '0';
 	    if Number /= "" then -- Has paragraph number.
 		if Paragraph_Info(Style, Indent).Indent = 0 and then
 		   ((not No_Prefix) or else
@@ -2081,6 +2133,9 @@ package body ARM_HTML is
 	    Output_Object.Is_Bold := False;
 	    Output_Object.Is_Italic := False;
 	    Output_Object.Size := 0;
+	    Output_Object.Change := ARM_Output.None;
+	    Output_Object.Version := '0';
+	    Output_Object.Added_Version := '0';
 	    if Number /= "" then -- Has paragraph number.
 		if Paragraph_Info(Style, Indent).Indent = 0 and then
 		   ((not No_Prefix) or else

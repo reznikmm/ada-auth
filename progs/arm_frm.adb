@@ -244,6 +244,7 @@ package body ARM_Format is
     --                  added ChildExample.
     --  2/16/07 - RLB - Added Indent format.
     --  2/19/07 - RLB - Added Title format.
+    -- 12/18/07 - RLB - Initialized Version in some cases.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -10823,6 +10824,8 @@ Ada.Text_IO.Put_Line ("Attempt to write into a deleted paragraph, on line " & AR
 	    Format_Object.Font := ARM_Output.Default;
 	    Format_Object.Size := 0;
 	    Format_Object.Change := ARM_Output.None;
+	    Format_Object.Current_Change_Version := '0';
+	    Format_Object.Current_Old_Change_Version := '0';
 	    Format_Object.Location := ARM_Output.Normal;
 	    Format_Object.No_Prefix := False;
 	    Format_Object.No_Para_Num := False;

@@ -28,9 +28,9 @@ POSSIBILITY OF SUCH DAMAGES.
 
 
 
-Running the formmating tool:
+Running the formating tool:
 
-The formmating tool reads the source text input files (.MSS files) in a
+The formating tool reads the source text input files (.MSS files) in a
 Scribe-like format. The files to read, and general formatting parameters,
 are controlled by a master input file (.MSM file). The tool allows determining
 the output document, format, and other properties.
@@ -1117,7 +1117,7 @@ various mathematical symbols.
 	or floats to the appropriate margin; it must appear inside of a
 	paragraph. Otherwise, these are the same.
 	The picture file's simple name is
-	"name"; the file is assumed to be a .GIF or .JPG, found in the output
+	"name"; the file is assumed to be a .PNG or .JPG, found in the output
 	directory. (It needs to be included with the HTML output.)
 	"descr" is a description of the picture; it's used for the popups
 	in HTML. Height and Width are the picture size in pixels.
