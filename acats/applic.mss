@@ -1,7 +1,7 @@
-@Part(tdev, Root="acats.msm")
+@Part(applic, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/applic.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2007/12/15 08:04:00 $}
+@comment{$Revision: 1.2 $ $Date: 2007/12/18 07:46:42 $}
 
 @LabeledNormativeAnnex{Test Applicability Criteria}
 

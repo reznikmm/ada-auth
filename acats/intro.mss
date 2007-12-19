@@ -1,7 +1,7 @@
 @Part(intro, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/intro.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2007/12/15 08:04:01 $}
+@comment{$Revision: 1.3 $ $Date: 2007/12/18 07:46:43 $}
 
 @LabeledSection{Introduction}
 
@@ -67,14 +67,17 @@ Laboratories).
 
 Section @RefSecNum{Changes for ACATS 3.0} of the User's Guide for ACATS 3.0
 summarizes the changes between
-ACATS 2.6 and ACATS 3.0. Section @RefSecNum{Configuration Information}
+ACATS 2.6 and ACATS 3.0. Section @RefSecNum{Test Objectives and Coverage}
+describes test objectives and their relationship to ACATS tests and
+to the rules of the
+Ada Standards documents. Section @RefSecNum{Configuration Information}
 describes the configuration of the ACATS,
 including a description of the ACATS software and delivery files. Section
 @RefSecNum{Using the ACATS}
 provides step-by-step instructions for installing and using the test programs
 and test support packages, and for grading test results. The appendices include
 other information that characterizes the ACATS 3.0 release, along with
-information on test construction and coverage.
+information on test construction.
 
 Refer to @RefSecNum{Definitions} and Section @RefSecNum{Grading Test Results}
 for the definition of an acceptable result and the rules for grading ACATS 3.0
@@ -86,6 +89,7 @@ acceptable results for a given test program is in fact conforming behavior.
 The ACATS test suite is available from any ACAL and from the Ada Information
 Clearinghouse (sponsored by the ARA). See
 @URLLink{URL=[http://www.adaic.org/compilers/testing.html],Text=[http://www.adaic.org/compilers/testing.html]}.
+
 
 @LabeledClause{ACATS Purpose}
 
@@ -115,6 +119,7 @@ characteristics such as the presence and effectiveness of compiler
 optimization. They do not investigate or report compiler or implementation
 choices in cases where the standard allows options.
 
+
 @LabeledClause{ACATS coverage of Ada}
 
 The ACATS needs to test as many rules as possible in order to meet the goal of
@@ -124,9 +129,7 @@ more likely to be incorrectly implemented than one that is tested.
 Therefore the ACATS strives for complete coverage of the standard. @i{Complete
 coverage}@Defn{Complete coverage} means that every rule in the Ada standard has
 one or more associated
-tests that ensure that the rule is implemented properly. By rule, we mean
-whatever set of sentences makes up a testable statement. A rule may be as small
-as a single line, or spread across multiple paragraphs.
+tests that ensure that the rule is implemented properly.
 
 Complete coverage is especially important for legality rules and runtime
 checks. It is easy for implementers to miss these rules, as their compiler may
@@ -158,76 +161,6 @@ combinations of features, and ensure that common idioms are implemented
 properly.
 
 A detailed description of how coverage is determined for the Ada standard
-can be found in @RefSec{Determining coverage of rules}.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+can be found in Section @RefSecNum{Coverage of the Ada Standard}.
 
 

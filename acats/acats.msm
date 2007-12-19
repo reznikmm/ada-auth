@@ -23,40 +23,32 @@
 @Comment{HTML properties}
 @Comment{Many small files are used, thus no @SingleHTMLOutputFile command}
 @HTMLKind{Version=[4],Unicode=[T]}
-@HTMLNavBar{RefName=[],SrchName=[UG-SRCH.html],IndexName=[],
+@HTMLNavBar{RefName=[],SrchName=[],IndexName=[],
    UseButtons=[T],OnTop=[T],OnBottom=[T]}
-@Comment{We let the program generate the links to "References" and "Index"}
+@Comment{We let the program generate the links to "References" and "Index";
+we have no search box.}
 @HTMLTabs{EmulateFixedOnly}
 @HTMLHeader{<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>ACATS 3.0 User's Guide</B></SPAN></DIV>
-<DIV Class="Normal"><I><A HREF="UG-TTL.html">Title Page</A></I></DIV>}
+<DIV Class="Normal"><I><B><A HREF="UG-TTL.html">Title Page</A></B></I></DIV>}
 @HTMLFooter{}
 @HTMLColor{Text=[#000000],Background=[#FFFFE8],Link=[#0000FF],VLink=[#800080],ALink=[#FF0000]}
 
 @Comment{Source files and related items, in collating order}
 @Source{Name=<Title.MSS>,SectionName=<TTL>,SectionNumber=[0],NewSection=[T]}
 @TOC @Comment{The table of contents goes here in the collating order}
-@Source{Name=<Intro.MSS>,SectionName=<01>,SectionNumber=[1],NewSection=[T]}
+@Source{Name=<Intro.MSS>,SectionName=<1>,SectionNumber=[1],NewSection=[T]}
+@Source{Name=<Changes.MSS>,SectionName=<2>,SectionNumber=[2],NewSection=[T]}
+@Source{Name=<TObj.MSS>,SectionName=<3>,SectionNumber=[3],NewSection=[T]}
+@Source{Name=<Config.MSS>,SectionName=<4>,SectionNumber=[4],NewSection=[T]}
 
-@Comment{Rest TBD.
-@Source{Name=<Concepts.MSS>,SectionName=<02>,SectionNumber=[2],NewSection=[T]}
-@Source{Name=<P-ASIS.MSS>,SectionName=<03>,SectionNumber=[3],NewSection=[T]}
-@Source{Name=<Errors.MSS>,SectionName=<04>,SectionNumber=[4],NewSection=[T]}
-@Source{Name=<Except.MSS>,SectionName=<05>,SectionNumber=[5],NewSection=[T]}
-@Source{Name=<Impl.MSS>,SectionName=<06>,SectionNumber=[6],NewSection=[T]}
-@Source{Name=<ImplPerm.MSS>,SectionName=<07>,SectionNumber=[7],NewSection=[T]}
-@Source{Name=<Environ.MSS>,SectionName=<08>,SectionNumber=[8],NewSection=[T]}
-@Source{Name=<Env-Cont.MSS>,SectionName=<09>,SectionNumber=[9],NewSection=[T]}
-@Source{Name=<CompUnit.MSS>,SectionName=<10>,SectionNumber=[10],NewSection=[T]}
-@Source{Name=<CompTime.MSS>,SectionName=<11>,SectionNumber=[11],NewSection=[T]}
-@Source{Name=<Comp-Rel.MSS>,SectionName=<12>,SectionNumber=[12],NewSection=[T]}
-@Source{Name=<Elements.MSS>,SectionName=<13>,SectionNumber=[13],NewSection=[T]}
-@Source{Name=<Iterator.MSS>,SectionName=<14>,SectionNumber=[14],NewSection=[T]}
-}
+@Comment{Rest TBD.}
 
+@Source{Name=<Version.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[T]}
+@Source{Name=<Params.MSS>,SectionName=<B>,SectionNumber=[B],NewSection=[T]}
+@Source{Name=<CZRes.MSS>,SectionName=<C>,SectionNumber=[C],NewSection=[T]}
 @Source{Name=<Applic.MSS>,SectionName=<D>,SectionNumber=[D],NewSection=[T]}
 @Source{Name=<TDev.MSS>,SectionName=<E>,SectionNumber=[E],NewSection=[T]}
-@Source{Name=<CRules.MSS>,SectionName=<F>,SectionNumber=[F],NewSection=[T]}
-@Source{Name=<Defs.MSS>,SectionName=<G>,SectionNumber=[G],NewSection=[T]}
+@Source{Name=<Defs.MSS>,SectionName=<F>,SectionNumber=[F],NewSection=[T]}
 @Source{Name=<Refs.MSS>,SectionName=<REF>,SectionNumber=[0],NewSection=[T]}
 @Source{Name=<Index.MSS>,SectionName=<IDX>,SectionNumber=[0],NewSection=[T]}
 

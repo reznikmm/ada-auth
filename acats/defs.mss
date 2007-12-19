@@ -1,9 +1,12 @@
 @Part(defs, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/defs.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2007/12/14 06:19:00 $}
+@comment{$Revision: 1.2 $ $Date: 2007/12/18 07:46:43 $}
 
 @LabeledNormativeAnnex{Definitions}
+
+@Comment{Some additional definitions are given in the appropriate sections
+of this document.}
 
 @ToGlossary{Term=[Acceptable result],Text=[The result of processing an ACATS
 test program that meets the explicit grading criteria for a grade of "passed"
@@ -80,7 +83,9 @@ of @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}}. All implementatio
 The tests for core language features are required of all implementations.]}
 
 @ToGlossary{Term=[Coverage documents],Text=[Documents containing an analysis of
-every paragraph of the Ada Standards documents (@LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}}, [TC1], and [Amend1]).
+every paragraph of the Ada Standards documents (@LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}},
+@LocalLink{Target=[TC1],Sec=[References],Text={[TC1]}}, and
+@LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}}).
 Each paragraph has an indication of whether it contains a testable Ada
 requirement, and if so, suggested test objectives to cover the requirements of
 the paragraphs. Paragraphs that include objectives also indicate what ACATS
@@ -89,31 +94,11 @@ test(s) specifically test those objectives.]}
 @ToGlossary{Term=[Deviation],Text=[Failure of an Ada implementation to produce
 an acceptable result when processing an ACATS test program.]}
 
-@ToGlossary{Term=[Foundation Code],Text=[Packages used by multiple tests;
-foundation code is designed to be reusable. Generally a foundation is a package
-containing types, variables, and subprograms that are applicable and useful to
-a series of related tests. Foundation code is never expected to cause compile
-time errors. It may be compiled once for all tests that use it or recompiled
-for each test that uses it; it must be bound with each test that uses it.]}
-
-@ToGlossary{Term=[Legacy Tests],Text=[Tests that were included in ACVC 1.12
-that have been incorporated into later ACVC and ACATS versions. The vast
-majority of these tests check for language features that are upwardly
-compatible from @LocalLink{Target=[Ada83],Sec=[References],Text={[Ada83]}}
-to later versions of Ada. Some of these tests have been
-modified from the ACVC 1.12 versions to ensure that Ada rules are properly
-implemented in cases where there were extensions or incompatibilities from
-@LocalLink{Target=[Ada83],Sec=[References],Text={[Ada83]}} to later versions of Ada.]}
-
-@ToGlossary{Term=[Specialized Needs Annex],Text=[One of annexes C through H of
+@ToGlossary{Term=[Specialized Needs Annex (SNA)],Text=[One of annexes C through H of
 @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}}. Conformity testing against one or more Specialized Needs Annexes is
 optional. There are tests that apply to each of the Specialized Needs Annexes.
 Results of processing these tests (if processed during a conformity assessment)
 are reported on the certificate and in the Validated Compilers List.]}
-
-@ToGlossary{Term=[Test Objectives Document (TOD)],Text=[A document containing
-the test objectives used for newer ACATS tests. Information on Legacy tests is
-not included.]}
 
 @ToGlossary{Term=[Validated Compilers List (VCL)],Text=[Former designation of
 the Certified Processors List (which see).]}
