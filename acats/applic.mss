@@ -1,9 +1,9 @@
 @Part(applic, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/applic.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2007/12/18 07:46:42 $}
+@comment{$Revision: 1.3 $ $Date: 2007/12/19 01:09:29 $}
 
-@LabeledNormativeAnnex{Test Applicability Criteria}
+@LabeledAnnex{Test Applicability Criteria}
 
 Certain tests in the suite may be considered inapplicable to an implementation
 depending on the way the implementation treats the implementation-dependent

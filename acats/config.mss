@@ -1,7 +1,7 @@
 @Part(config, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/config.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2007/12/18 07:46:42 $}
+@comment{$Revision: 1.2 $ $Date: 2007/12/19 01:09:29 $}
 
 @LabeledSection{Configuration Information}
 
@@ -454,7 +454,7 @@ Body=[1@\Letter@\Test class (see Section @RefSecNum{Test Classes})
 The convention is illustrated below.
 
 @PictureAlone{Alignment=[Center],
-Border=[None], Height=[180],Width=[345],Name=[Leg-Name.PNG],
+Border=[None], Height=[180],Width=[345],Name=[Leg-Name.png],
 Descr=[Legacy File Name Convention]}
 @Center{@Shrink{Legacy File Name Convention}}
 
@@ -637,7 +637,7 @@ Body=[1@\Letter@\Test class; foundations are marked 'F'
 The convention is illustrated below.
 
 @PictureAlone{Alignment=[Center],
-Border=[None], Height=[192],Width=[342],Name=[Mod-Name.PNG],
+Border=[None], Height=[192],Width=[342],Name=[Mod-Name.png],
 Descr=[Modern File Name Convention]}
 @Center{@Shrink{Modern File Name Convention}}
 
@@ -822,3 +822,130 @@ executed. To distinguish between constructs (types, objects, etc.) that are
 part of the test code and those that are artifacts of the testing process
 (e.g., pre-, post-conditions), the latter have @exam{TC_} prefixed to the
 identifier name. This prefix is shorthand for @exam{Test_Control}.
+
+
+@LabeledClause{Test Structure}
+
+@leading@;Executable tests (class A, C, D, and E) generally use the following
+format:
+@begin{Example}
+@key[with] Report;
+@key[procedure] Testname @key[is]
+   @Examcom{<declarations>}
+@key[begin]
+   Report.Test ("Testname", "Description ...");
+   @examcom{...}
+   @Examcom{<test situation yielding result>}
+   @key[if] Post_Condition /= Correct_Value @key[then]
+      Report.Failed ("Reason");
+   @key[end if];
+   @examcom{...}
+   Report.Result;
+@key[end] Testname;
+@end{Example}
+
+The initial call to Report.Test prints the test objective using Text_IO output
+(unless the body of Report has been modified to do something else).
+After each section of test code, there is normally a check of post conditions.
+The if statement in this skeleton is such a check; unexpected results produce a
+call to Report.Failed. The sequence of test code / check of results may be
+repeated several times in a single test. Finally, there is a call to
+Report.Result that will print the test result to Text_IO output. Often, but not
+always, this structure in enclosed in a declare block.
+
+One or more calls to Report.Failed will report a result of "FAILED" and a brief
+suggestion of the likely reason for that result.
+
+@leading@;More complex tests may include calls to Report.Failed in the code
+other than in the main program, and therefore exhibit the following format for
+the main procedure:
+@begin{Example}
+@key[with] Report;
+@key[procedure] Testname @key[is]
+   @examcom{<declarations>}
+begin
+   Report.Test ("Testname", "Description ...");
+   @examcom{...}
+   Subtest_Call;
+   @examcom{...}
+   Report.Result;
+@key[end] Testname;
+@end{Example}
+
+Fail conditions are detected in subprograms (or tasks) and Report.Failed is
+called within them.
+
+Occasionally, as a test is running, it will determine that it is not
+applicable. In such a case, it will call Report.Not_Applicable that will report
+a result of "NOT_APPLICABLE" (unless there is also a call to Report.Failed).
+
+Often, a test calls one of the functions Report.Ident_Int or Report.Ident_Bool
+to obtain a value that could be provided as a literal. These functions are
+intended to prevent optimizers from eliminating certain sections of test code.
+The ACATS suite has no intention of trying to discourage the application of
+optimizer technology, however satisfactory testing of language features often
+requires the presence and execution of specific lines of test code.
+Report.Ident_Int and Report.Ident_Bool are structured so that they can be
+modified when needed to defeat optimizer advances.
+
+Class B tests may be structured differently. Since they are not executable,
+they normally do not include calls to Report.Test or Report.Result (since those
+lines of code would have no output effect). Instead, intentional errors are
+coded that invoke specific legality rules. The source code includes comments
+that document expected compiler results. Legal constructs may also be included
+in B class tests. Constructs that are allowed by the legality rules are marked
+@Exam{-- OK}; constructs that are disallowed are marked @Exam{-- ERROR:}.
+There is usually a brief indication of the nature of an intentional error on
+the same line or the line following a comment. The indications of expected
+results are approximately right justified to the code file margin, about column
+79, for quick visual identification.
+
+Class L tests are multifile tests with illegalities that should be detected at
+bind time. They are generally structured like class C tests, often with calls
+to Report.Test and Report.Result, but they are not expected to execute.
+
+
+@LabeledClause{Delivery Directory Structure}
+
+The delivery of ACATS tests is structured into a directory tree that reflects
+the organization of the test suite and support code.
+
+The top-level directory contains the support subdirectory, the docs
+subdirectory, and a subdirectory for each major grouping of tests. The support
+subdirectory contains all support packages (Report, ImpDef, TCTouch) and the
+source code for all test processing tools (Macro expander, Wide Character
+processor). Each of the other subdirectories contains all tests that begin with
+the indicated prefix. For example, all of the B2* tests are in the b2
+subdirectory; all of the CXH* tests are in the cxh subdirectory. Note that all
+of the A* tests are in the a directory, all of the D* tests are included in the
+d subdirectory, and all of the E* tests are included in the e subdirectory. The
+l directory contains the L tests for the core; other L tests are in directories
+named with three letters, indicating the class (l) and the Specialized Needs
+Annex to which the tests apply.
+
+Subdirectories that would be empty are not stubbed.
+
+The following figure sketches this scheme, but does not show complete detail. A
+list of all subdirectories is included in
+Section @RefSecNum{Guide to Decompressing Files}.
+
+@PictureAlone{Alignment=[Center],
+Border=[None], Height=[175],Width=[541],Name=[Dirs.png],
+Descr=[Delivery Directory Structure]}
+@Center{@Shrink{Delivery Directory Structure}}
+
+
+@LabeledClause{File Format}
+
+To conserve space and ease downloading, all files in the delivered ACATS 3.0
+(including test files, foundation files, and support files) have been
+compressed. Except as noted, decompressed files
+(see Section @RefSecNum{Guide to Decompressing Files}) use only
+ASCII characters. A few tests use Unicode characters. Some of the documentation
+files are provided in PDF and/or HTML form for greater readability. Other than
+the documentation files, no formatting control characters, rulers or other
+information intended for editors or display programs are included in the files.
+
+Files with the .zip extension have been compressed using a DOS zip utility;
+files with the .Z extension have been first put in Unix tar format and then
+compressed with Unix compress.

@@ -1,9 +1,9 @@
 @Part(params, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/params.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2007/12/18 07:46:42 $}
+@comment{$Revision: 1.2 $ $Date: 2007/12/19 01:09:29 $}
 
-@LabeledNormativeAnnex{Parameterization Files}
+@LabeledAnnex{Parameterization Files}
 
 In ACATS 3.0, two methods are used to account for the use of
 implementation-dependent values in the tests.@Defn{implementation-dependent values}

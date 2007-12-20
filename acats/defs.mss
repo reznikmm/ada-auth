@@ -1,9 +1,9 @@
 @Part(defs, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/defs.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2007/12/18 07:46:43 $}
+@comment{$Revision: 1.3 $ $Date: 2007/12/19 01:09:30 $}
 
-@LabeledNormativeAnnex{Definitions}
+@LabeledAnnex{Definitions}
 
 @Comment{Some additional definitions are given in the appropriate sections
 of this document.}

@@ -1,9 +1,9 @@
 @Part(czres, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/czres.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2007/12/18 07:46:42 $}
+@comment{$Revision: 1.2 $ $Date: 2007/12/19 01:09:29 $}
 
-@LabeledNormativeAnnex{Results of CZ Tests}
+@LabeledAnnex{Results of CZ Tests}
 
 The "CZ" tests are executed before any other ACATS tests to ensure that the
 ImpDef packages have been properly customized and that certain support units
