@@ -7,7 +7,7 @@ package ARM_Contents is
     -- references.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004, 2006  AXE Consultants.
+    -- Copyright 2000, 2004, 2006, 2007  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -48,6 +48,7 @@ package ARM_Contents is
     --			dependence.
     --		- RLB - Added version to changes.
     --  9/22/06 - RLB - Created type Clause_Number_Type and added SubSubClause.
+    -- 12/18/07 - RLB - Added Plain_Annex.
 
     subtype Title_Type is String (1 .. 80);
 	-- The type of a title.
@@ -73,8 +74,9 @@ package ARM_Contents is
     procedure Initialize;
 	-- Initialize this package; make sure the contents are empty.
 
-    type Level_Type is (Section, Unnumbered_Section, Normative_Annex,
-			Informative_Annex, Clause, Subclause, Subsubclause);
+    type Level_Type is (Section, Unnumbered_Section, Plain_Annex,
+			Normative_Annex, Informative_Annex,
+			Clause, Subclause, Subsubclause);
 	-- Defines the level of a clause header.
 	-- Clause is "xx.nn"; Subclause is "xx.nn.nn"; Subsubclause is "xx.nn.nn.nn".
 

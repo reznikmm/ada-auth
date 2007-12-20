@@ -45,6 +45,7 @@
     -- 10/16/06 - RLB - Added definition of old non-terminals for NT linking.
     --  2/16/07 - RLB - Added missing code to handle comments here.
     --  7/31/07 - RLB - Added code to detect duplicated titles.
+    -- 12/18/07 - RLB - Added Plain_Annex and associated commands.
 
 separate(ARM_Format)
 procedure Scan (Format_Object : in out Format_Type;
@@ -121,7 +122,7 @@ procedure Scan (Format_Object : in out Format_Type;
     begin
         case Nesting_Stack(Nesting_Stack_Ptr).Command is
 	    when Labeled_Section | Labeled_Section_No_Break |
-		 Labeled_Informative_Annex |
+		 Labeled_Annex | Labeled_Informative_Annex |
 		 Labeled_Normative_Annex | Labeled_Clause |
 		 Labeled_Subclause | Labeled_Subsubclause =>
 	        -- Load the title into the Title string:
@@ -184,6 +185,9 @@ procedure Scan (Format_Object : in out Format_Type;
 			      Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Section_No_Break then
 			    ARM_Contents.Add (Title, ARM_Contents.Section,
 					      Format_Object.Clause_Number);
+		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Annex then
+			    ARM_Contents.Add (Title, ARM_Contents.Plain_Annex,
+					      Format_Object.Clause_Number);
 		        elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Normative_Annex then
 			    ARM_Contents.Add (Title, ARM_Contents.Normative_Annex,
 					      Format_Object.Clause_Number);
@@ -234,7 +238,8 @@ procedure Scan (Format_Object : in out Format_Type;
 	        Nesting_Stack_Ptr := Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
 
-	    when Labeled_Revised_Informative_Annex |
+	    when Labeled_Revised_Annex |
+		 Labeled_Revised_Informative_Annex |
 		 Labeled_Revised_Normative_Annex |
 		 Labeled_Revised_Section |
 		 Labeled_Revised_Clause |
@@ -350,6 +355,14 @@ procedure Scan (Format_Object : in out Format_Type;
 			        ARM_Contents.Add_Old (Old_Title,
 						  ARM_Contents.Section,
 						  Format_Object.Clause_Number);
+			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Annex then
+			        ARM_Contents.Add (Title,
+						  ARM_Contents.Plain_Annex,
+						  Format_Object.Clause_Number,
+						  Version => Version);
+			        ARM_Contents.Add_Old (Old_Title,
+						  ARM_Contents.Plain_Annex,
+						  Format_Object.Clause_Number);
 			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Normative_Annex then
 			        ARM_Contents.Add (Title,
 						  ARM_Contents.Normative_Annex,
@@ -373,7 +386,8 @@ procedure Scan (Format_Object : in out Format_Type;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
 	        end;
 
-	    when Labeled_Added_Informative_Annex |
+	    when Labeled_Added_Annex |
+		 Labeled_Added_Informative_Annex |
 		 Labeled_Added_Normative_Annex |
 		 Labeled_Added_Section |
 		 Labeled_Added_Clause |
@@ -468,6 +482,23 @@ procedure Scan (Format_Object : in out Format_Type;
 						  Version => Version);
 			        ARM_Contents.Add_Old ((others => ' '),
 						  ARM_Contents.Section,
+						  Format_Object.Clause_Number);
+			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Annex then
+			        if Saw_a_Section_Header then
+				    Ada.Text_IO.Put_Line ("  ** Multiple section headers in a file, line " &
+					    ARM_File.Line_String (Input_Object));
+			        end if;
+			        Saw_a_Section_Header := True;
+			        Format_Object.Clause_Number :=
+				    (Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				     Clause    => 0,
+				     Subclause => 0, Subsubclause => 0);
+			        ARM_Contents.Add (Title,
+						  ARM_Contents.Plain_Annex,
+						  Format_Object.Clause_Number,
+						  Version => Version);
+			        ARM_Contents.Add_Old ((others => ' '),
+						  ARM_Contents.Plain_Annex,
 						  Format_Object.Clause_Number);
 			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Added_Normative_Annex then
 			        if Saw_a_Section_Header then

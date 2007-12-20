@@ -165,6 +165,10 @@ package body ARM_HTML is
     --  2/19/07 - RLB - Added Title style.
     -- 12/14/07 - RLB - Added code to support multi-column text without
     --			requiring New_Column calls.
+    -- 12/18/07 - RLB - Added Plain_Annex.
+    -- 12/19/07 - RLB - Added DOS_Filename flag.
+    --		- RLB - Added limited colors to Text_Format.
+
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -226,7 +230,7 @@ package body ARM_HTML is
 	-- Internal routine.
 	-- Returns the Clause anchor name for the current output object and
 	-- Clause_Number.
-        Clause_Name : String(1..7);
+        Clause_Name : String(1..10);
         Clause_Name_Len : Natural;
     begin
         if Clause_Number'Length >= 7 and then
@@ -244,6 +248,163 @@ package body ARM_HTML is
 	        end if;
 	    end loop;
         end if;
+        if Output_Object.DOS_Filenames and (not Output_Object.Big_Files) then
+	    -- If the section number is a single character, then
+	    -- prefix it with '-':
+	    if Clause_Name_Len = 1 then
+	        Clause_Name(2) := Clause_Name(1);
+		Clause_Name(1) := '-';
+		Clause_Name_Len := 2;
+	    elsif Clause_Name_Len = 2 then
+		null;
+	    else
+		if Clause_Name(2) = '-' then
+		    Clause_Name(2..Clause_Name_Len+1) :=
+			Clause_Name(1..Clause_Name_Len);
+		    Clause_Name(1) := '-';
+		    Clause_Name_Len := Clause_Name_Len + 1;
+		end if;
+		-- OK, the section name is exactly two characters.
+		-- Figure out the Clause name.
+		if Clause_Name_Len < 4 or else
+		   Clause_Name(3) /= '-' or else
+		   Clause_Name(4) not in '0'..'9' or else
+                   (Clause_Name_Len >= 5 and then
+		    Clause_Name(5) /= '-' and then Clause_Name(5) not in '0'..'9') or else
+                   (Clause_Name_Len >= 6 and then
+		    Clause_Name(5) /= '-' and then Clause_Name(6) /= '-') then
+		    -- The clause number is 1 or 2 digits following a '-',
+		    -- and is either the end of the string or followed by a '-'.
+		    Ada.Exceptions.Raise_Exception (Program_Error'Identity,
+		       "Weird clause number:" & Clause_Number);
+		elsif Clause_Name_Len = 4 or else Clause_Name(5) = '-' then
+		    -- Clause is a single digit.
+		    Clause_Name(3..Clause_Name_Len-1) :=
+			Clause_Name(4..Clause_Name_Len);
+		    Clause_Name_Len := Clause_Name_Len - 1;
+		elsif Clause_Name(4) = '1' then
+		    -- Clause is 10..19
+		    Clause_Name(3) := Character'Val(
+			Character'Pos(Clause_Name(5))-Character'Pos('0')+Character'Pos('A'));
+		    Clause_Name(4..Clause_Name_Len-2) :=
+			Clause_Name(6..Clause_Name_Len);
+		    Clause_Name_Len := Clause_Name_Len - 2;
+		elsif Clause_Name(4) = '2' then
+		    -- Clause is 20..29
+		    Clause_Name(3) := Character'Val(
+			Character'Pos(Clause_Name(5))-Character'Pos('0')+Character'Pos('A')+10);
+		    Clause_Name(4..Clause_Name_Len-2) :=
+			Clause_Name(6..Clause_Name_Len);
+		    Clause_Name_Len := Clause_Name_Len - 2;
+		elsif Clause_Name(4) = '3' then
+		    -- Clause is 30..39
+		    if Clause_Name(5) > '5' then
+		        Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		           "MS-DOS filename: Clause too large=" & Clause_Number);
+		    end if;
+		    Clause_Name(3) := Character'Val(
+			Character'Pos(Clause_Name(5))-Character'Pos('0')+Character'Pos('A')+20);
+		    Clause_Name(4..Clause_Name_Len-2) :=
+			Clause_Name(6..Clause_Name_Len);
+		    Clause_Name_Len := Clause_Name_Len - 2;
+		else
+		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		       "MS-DOS filename: Clause too large=" & Clause_Number);
+		end if;
+		-- OK, the section number is exactly two characters, and the
+		-- clause number is exactly one. Figure out the subclause
+		-- name:
+		if Clause_Name_Len = 3 then
+		    null; -- We're done, no subclause.
+		elsif Clause_Name_Len < 5 or else
+		   Clause_Name(4) /= '-' or else
+		   Clause_Name(5) not in '0'..'9' or else
+                   (Clause_Name_Len >= 6 and then
+		    Clause_Name(6) /= '-' and then Clause_Name(6) not in '0'..'9') or else
+                   (Clause_Name_Len >= 7 and then
+		    Clause_Name(6) /= '-' and then Clause_Name(7) /= '-') then
+		    -- The subclause number is 1 or 2 digits following a '-',
+		    -- and is either the end of the string or followed by a '-'.
+		    Ada.Exceptions.Raise_Exception (Program_Error'Identity,
+		       "Weird subclause number:" & Clause_Number);
+		elsif Clause_Name_Len = 5 or else Clause_Name(6) = '-' then
+		    -- SubClause is a single digit.
+		    Clause_Name(4..Clause_Name_Len-1) :=
+			Clause_Name(5..Clause_Name_Len);
+		    Clause_Name_Len := Clause_Name_Len - 1;
+		elsif Clause_Name(5) = '1' then
+		    -- SubClause is 10..19
+		    Clause_Name(4) := Character'Val(
+			Character'Pos(Clause_Name(6))-Character'Pos('0')+Character'Pos('A'));
+		    Clause_Name(5..Clause_Name_Len-2) :=
+			Clause_Name(7..Clause_Name_Len);
+		    Clause_Name_Len := Clause_Name_Len - 2;
+		elsif Clause_Name(5) = '2' then
+		    -- SubClause is 20..29
+		    Clause_Name(4) := Character'Val(
+			Character'Pos(Clause_Name(6))-Character'Pos('0')+Character'Pos('A')+10);
+		    Clause_Name(5..Clause_Name_Len-2) :=
+			Clause_Name(7..Clause_Name_Len);
+		    Clause_Name_Len := Clause_Name_Len - 2;
+		elsif Clause_Name(5) = '3' then
+		    -- SubClause is 30..39
+		    if Clause_Name(6) > '5' then
+		        Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		           "MS-DOS filename: Subclause too large=" & Clause_Number);
+		    end if;
+		    Clause_Name(4) := Character'Val(
+			Character'Pos(Clause_Name(6))-Character'Pos('0')+Character'Pos('A')+20);
+		    Clause_Name(5..Clause_Name_Len-2) :=
+			Clause_Name(7..Clause_Name_Len);
+		    Clause_Name_Len := Clause_Name_Len - 2;
+		else
+		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		       "MS-DOS filename: Subclause too large=" & Clause_Number);
+		end if;
+		-- OK, the section number is exactly two characters, and the
+		-- clause number is one, and the subclause number is one or zero.
+		-- Figure out the subsubclause name:
+		if Clause_Name_Len < 5 then
+		    null; -- We're done, no subsubclause.
+		elsif Clause_Name_Len < 6 or else
+		   Clause_Name(5) /= '-' or else
+		   Clause_Name(6) not in '0'..'9' or else
+                   (Clause_Name_Len >= 7 and then
+		    Clause_Name(7) not in '0'..'9') or else
+                   (Clause_Name_Len >= 8) then
+		    -- The subsubclause number is 1 or 2 digits following a '-',
+		    -- and is the end of the string
+		    Ada.Exceptions.Raise_Exception (Program_Error'Identity,
+		       "Weird subclause number:" & Clause_Number);
+		elsif Clause_Name_Len = 6 then
+		    -- SubSubClause is a single digit.
+		    Clause_Name(5) := Clause_Name(6);
+		    Clause_Name_Len := 5;
+		elsif Clause_Name(6) = '1' then
+		    -- SubSubClause is 10..19
+		    Clause_Name(5) := Character'Val(
+			Character'Pos(Clause_Name(7))-Character'Pos('0')+Character'Pos('A'));
+		    Clause_Name_Len := 5;
+		elsif Clause_Name(5) = '2' then
+		    -- SubSubClause is 20..29
+		    Clause_Name(5) := Character'Val(
+			Character'Pos(Clause_Name(7))-Character'Pos('0')+Character'Pos('A')+10);
+		    Clause_Name_Len := 5;
+		elsif Clause_Name(5) = '3' then
+		    -- SubSubClause is 30..39
+		    if Clause_Name(6) > '5' then
+		        Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		           "MS-DOS filename: Subsubclause too large=" & Clause_Number);
+		    end if;
+		    Clause_Name(5) := Character'Val(
+			Character'Pos(Clause_Name(7))-Character'Pos('0')+Character'Pos('A')+20);
+		    Clause_Name_Len := 5;
+		else
+		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		       "MS-DOS filename: Subsubclause too large=" & Clause_Number);
+		end if;
+	    end if;
+	end if;
 	return Clause_Name(1..Clause_Name_Len);
     end Make_Clause_Anchor_Name;
 
@@ -257,8 +418,13 @@ package body ARM_HTML is
 	if Output_Object.Big_Files then -- One big file.
 	    return Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right);
 	else -- Clause files.
-	    return Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
-	        "-" &Make_Clause_Anchor_Name (Output_Object, Clause_Number);
+	    if Output_Object.DOS_Filenames then
+	        return Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+	            Make_Clause_Anchor_Name (Output_Object, Clause_Number);
+	    else
+	        return Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+	            "-" & Make_Clause_Anchor_Name (Output_Object, Clause_Number);
+	    end if;
 	end if;
     end Make_Clause_File_Name;
 
@@ -272,7 +438,11 @@ package body ARM_HTML is
 	    -- Note this is a self-reference, so the file name is not needed.
 	    return "#" & Make_Clause_Anchor_Name (Output_Object, Clause_Number);
 	else -- Clause files.
-	    return Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
+	    if Output_Object.DOS_Filenames then
+	        return Make_Clause_File_Name (Output_Object, Clause_Number) & ".htm";
+	    else
+	        return Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
+	    end if;
 	end if;
     end Make_Clause_Link_Name;
 
@@ -312,6 +482,10 @@ package body ARM_HTML is
 	    Ada.Text_IO.Put (Output_Object.Output_File, "<A HREF=""");
 	    if Output_Object.Big_Files then
 	        Ada.Text_IO.Put (Output_Object.Output_File, "#TOC");
+	    elsif Output_Object.DOS_Filenames then
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+		       "-TOC.htm");
 	    else
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 		    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
@@ -329,7 +503,7 @@ package body ARM_HTML is
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
 	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A HREF=""" &
-			Make_Clause_Link_Name(Output_Object,
+			Make_Clause_Link_Name (Output_Object,
 			    ARM_Contents.Lookup_Clause_Number ("Index" & (6 .. ARM_Contents.Title_Type'Last => ' '))) &
 	                """><IMG SRC=""index.gif"" ALT=""Index"" BORDER=0></A>&nbsp;");
 	        exception
@@ -347,7 +521,7 @@ package body ARM_HTML is
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
 	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A HREF=""" &
-		        Make_Clause_Link_Name(Output_Object,
+		        Make_Clause_Link_Name (Output_Object,
 			    ARM_Contents.Lookup_Clause_Number ("References" & (11 .. ARM_Contents.Title_Type'Last => ' '))) &
 	                """><IMG SRC=""lib.gif"" ALT=""References"" BORDER=0></A>&nbsp;");
 	        exception
@@ -365,7 +539,7 @@ package body ARM_HTML is
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
 	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A HREF=""" &
-			Make_Clause_Link_Name(Output_Object,
+			Make_Clause_Link_Name (Output_Object,
 			    ARM_Contents.Lookup_Clause_Number ("Search" & (7 .. ARM_Contents.Title_Type'Last => ' '))) &
 	                """><IMG SRC=""find.gif"" ALT=""Search"" BORDER=0></A>&nbsp;");
 	        exception
@@ -406,6 +580,10 @@ package body ARM_HTML is
 	    Ada.Text_IO.Put (Output_Object.Output_File, "<P><A HREF=""");
 	    if Output_Object.Big_Files then
 	        Ada.Text_IO.Put (Output_Object.Output_File, "#TOC");
+	    elsif Output_Object.DOS_Filenames then
+	        Ada.Text_IO.Put (Output_Object.Output_File,
+		    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+		       "-TOC.htm");
 	    else
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 		    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
@@ -423,7 +601,7 @@ package body ARM_HTML is
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
 	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
-			Make_Clause_Link_Name(Output_Object,
+			Make_Clause_Link_Name (Output_Object,
 			    ARM_Contents.Lookup_Clause_Number ("Index" & (6 .. ARM_Contents.Title_Type'Last => ' '))) &
 	                """>Index</A>");
 	        exception
@@ -442,7 +620,7 @@ package body ARM_HTML is
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
 	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
-			Make_Clause_Link_Name(Output_Object,
+			Make_Clause_Link_Name (Output_Object,
 			    ARM_Contents.Lookup_Clause_Number ("Search" & (7 .. ARM_Contents.Title_Type'Last => ' '))) &
 	                """>Search</A>");
 	        exception
@@ -461,7 +639,7 @@ package body ARM_HTML is
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
 	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;&nbsp;&nbsp;<A HREF=""" &
-			Make_Clause_Link_Name(Output_Object,
+			Make_Clause_Link_Name (Output_Object,
 			    ARM_Contents.Lookup_Clause_Number ("References" & (11 .. ARM_Contents.Title_Type'Last => ' '))) &
 	                """>Reference Documents</A>");
 	        exception
@@ -1079,10 +1257,13 @@ package body ARM_HTML is
 	-- extension. Clause is the properly formatted Clause number for
 	-- this file, if known.
     begin
+--Ada.Text_IO.Put_Line ("--Creating " & File_Name & ".html");
 	if Output_Object.HTML_Kind > HTML_3 then
 	    Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
 	        ".\Output\" & File_Name & ".$$$");
---Ada.Text_IO.Put_Line ("--Creating " & File_Name & ".html");
+	elsif Output_Object.DOS_Filenames then
+	    Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
+	        ".\Output\" & File_Name & ".htm");
 	else
 	    Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
 	        ".\Output\" & File_Name & ".html");
@@ -1197,7 +1378,7 @@ package body ARM_HTML is
 	if Output_Object.HTML_Kind <= HTML_3 then
 	    Ada.Text_IO.Close (Output_Object.Output_File);
 	else -- Close and reread the file to add JUST the styles used by the
-	     -- file; this decreases the minimun size of the files (by as
+	     -- file; this decreases the minimum size of the files (by as
 	     -- much as 7K as of this writing [1/2006]), which matters when
 	     -- there are hundreds.
 	     -- We also check spaces before end tags and after opening tags;
@@ -1226,8 +1407,13 @@ package body ARM_HTML is
 		Ada.Text_IO.Close (Output_Object.Output_File);
 	        Ada.Text_IO.Open (Reading_File, Ada.Text_IO.In_File,
 	            Original_Name);
-	        Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
-	            Real_Name);
+		if Output_Object.DOS_Filenames then
+	            Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
+	                Real_Name(1..Real_Name'Length-1)); --".htm" is the extension here.
+		else
+	            Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
+	                Real_Name);
+		end if;
 		begin
 		    loop
 			Ada.Text_IO.Get_Line (Reading_File, Buffer, Len);
@@ -1297,6 +1483,7 @@ package body ARM_HTML is
     procedure Create (Output_Object : in out HTML_Output_Type;
 		      Big_Files : in Boolean;
 		      File_Prefix : in String;
+		      DOS_Filenames : in Boolean;
 		      HTML_Kind : in HTML_Type;
 		      Use_Unicode : in Boolean;
 		      Number_Paragraphs : in Boolean;
@@ -1320,7 +1507,10 @@ package body ARM_HTML is
 	-- Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
 	-- The prefix of the output file names is File_Prefix - this
-	-- should be no more then 4 characters allowed in file names.
+	-- should be no more than 4 characters allowed in file names.
+	-- If DOS_Filename is true, use 8.3 file names;
+	-- in that case, File_Prefix must be less than 4 characters in length;
+	-- and no clause or subclause number may exceed 35 if Big_Files is False.
 	-- The title of the document is Title.
 	-- HTML_Kind determines the kind of HTML generated; HTML_3 works on
 	-- every browser but has little control over formatting;
@@ -1367,6 +1557,7 @@ package body ARM_HTML is
 			        Source => File_Prefix);
 	Output_Object.Title := Ada.Strings.Unbounded.To_Unbounded_String (Title);
 	Output_Object.Big_Files := Big_Files;
+	Output_Object.DOS_Filenames := DOS_Filenames;
 	Output_Object.HTML_Kind := HTML_Kind;
 	Output_Object.Use_Unicode := Use_Unicode;
 	Output_Object.Number_Paragraphs := Number_Paragraphs;
@@ -1385,6 +1576,18 @@ package body ARM_HTML is
 	Output_Object.Link_Color := Link_Color;
 	Output_Object.VLink_Color := VLink_Color;
 	Output_Object.ALink_Color := ALink_Color;
+
+	if DOS_Filenames then
+	    if File_Prefix'Length > 3 then
+	        Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		    "HTML File Prefix too long - MS-DOS mode");
+	    end if;
+	else
+	    if File_Prefix'Length > 4 then
+	        Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		    "HTML File Prefix too long");
+	    end if;
+	end if;
 
 	if Output_Object.Big_Files then
 	    Start_HTML_File (Output_Object,
@@ -1579,9 +1782,17 @@ Natural'Image(Col_Count*(I-1)));
 	-- create one.
     begin
 	if not Ada.Text_IO.Is_Open (Output_Object.Output_File) then
-	    Start_HTML_File (Output_Object,
-		Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
-	            "-" & Output_Object.Section_Name, "", Clause => "");
+	    if (not Output_Object.Big_Files) and then
+		  Output_Object.DOS_Filenames and then
+		  Output_Object.Section_Name(1) = '-' then
+		    Start_HTML_File (Output_Object,
+		        Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+	                    Make_Clause_Anchor_Name (Output_Object, Output_Object.Section_Name(2..3)), "", Clause => "");
+	    else
+		Start_HTML_File (Output_Object,
+		    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+	                "-" & Output_Object.Section_Name, "", Clause => "");
+	    end if;
 	end if;
     end Check_Clause_File;
 
@@ -1973,6 +2184,7 @@ Natural'Image(Col_Count*(I-1)));
 	    Output_Object.Is_Bold := False;
 	    Output_Object.Is_Italic := False;
 	    Output_Object.Size := 0;
+	    Output_Object.Color := ARM_Output.Default;
 	    Output_Object.Change := ARM_Output.None;
 	    Output_Object.Version := '0';
 	    Output_Object.Added_Version := '0';
@@ -2054,6 +2266,7 @@ Natural'Image(Col_Count*(I-1)));
 	    Output_Object.Is_Bold := False;
 	    Output_Object.Is_Italic := False;
 	    Output_Object.Size := 0;
+	    Output_Object.Color := ARM_Output.Default;
 	    Output_Object.Change := ARM_Output.None;
 	    Output_Object.Version := '0';
 	    Output_Object.Added_Version := '0';
@@ -2133,6 +2346,7 @@ Natural'Image(Col_Count*(I-1)));
 	    Output_Object.Is_Bold := False;
 	    Output_Object.Is_Italic := False;
 	    Output_Object.Size := 0;
+	    Output_Object.Color := ARM_Output.Default;
 	    Output_Object.Change := ARM_Output.None;
 	    Output_Object.Version := '0';
 	    Output_Object.Added_Version := '0';
@@ -2452,6 +2666,10 @@ Natural'Image(Col_Count*(I-1)));
 	end if;
 
 	case Level is
+	    when ARM_Contents.Plain_Annex =>
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>" & Clause_Number &
+		    "<BR>"); -- Note: Clause_Number includes "Annex"
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, Header_Text & "</H1>");
 	    when ARM_Contents.Normative_Annex =>
 		Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>" & Clause_Number & "</H1>");
 				-- Note: Clause_Number includes "Annex"
@@ -2536,6 +2754,10 @@ Natural'Image(Col_Count*(I-1)));
 	end if;
 
 	case Level is
+	    when ARM_Contents.Plain_Annex =>
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>" & Clause_Number &
+		    "<BR>"); -- Note: Clause_Number includes "Annex"
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, Header_Text & "</H1>");
 	    when ARM_Contents.Normative_Annex =>
 		Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>" & Clause_Number & "</H1>");
 				-- Note: Clause_Number includes "Annex"
@@ -2918,7 +3140,8 @@ Natural'Image(Col_Count*(I-1)));
 	    if Output_Object.Column_Text(Output_Object.Current_Column).Length +
 		Text'Length > Output_Object.Column_Text(Output_Object.Current_Column).Text'Length then
 		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
-			"Column item full, but more text!");
+			"Column item full, but more text! - " &
+			Output_Object.Column_Text(Output_Object.Current_Column).Text(1..Output_Object.Column_Text(Output_Object.Current_Column).Length) & Text);
 	    else
 		Output_Object.Column_Text(Output_Object.Current_Column).Text(
 		   Output_Object.Column_Text(Output_Object.Current_Column).Length+1..
@@ -3732,34 +3955,31 @@ Natural'Image(Col_Count*(I-1)));
 	    end case;
 	elsif Output_Object.HTML_Kind = HTML_4_Only then
 	    declare
-		Is_Bold : Boolean; -- Is the text currently bold?
-		Is_Italic : Boolean; -- Is the text current italics?
-		Font : ARM_Output.Font_Family_Type; -- What is the current font family?
-		Size : ARM_Output.Size_Type; -- What is the current relative size?
-		Change : ARM_Output.Change_Type := ARM_Output.None;
-		Version : ARM_Contents.Change_Version_Type := '0';
-		Added_Version : ARM_Contents.Change_Version_Type := '0';
-		Location : ARM_Output.Location_Type := ARM_Output.Normal;
+		Saved_Format : ARM_Output.Format_Type;
 	    begin
 		-- Save original format:
-		Is_Bold := Output_Object.Is_Bold;
-		Is_Italic := Output_Object.Is_Italic;
-		Font := Output_Object.Font;
-		Size := Output_Object.Size;
-		Change := Output_Object.Change;
-		Version := Output_Object.Version;
-		Added_Version := Output_Object.Added_Version;
-		Location := Output_Object.Location;
+		Saved_Format :=
+		      (Bold => Output_Object.Is_Bold,
+		       Italic => Output_Object.Is_Italic,
+		       Font => Output_Object.Font,
+		       Size => Output_Object.Size,
+		       Color => Output_Object.Color,
+		       Change => Output_Object.Change,
+		       Version => Output_Object.Version,
+		       Added_Version => Output_Object.Added_Version,
+		       Location => Output_Object.Location);
+
 		-- Close any open formatting (can't leave it open across a DIV):
 		Text_Format (Output_Object,
-			   Bold => False,
-			   Italic => False,
-			   Font => ARM_Output.Default,
-			   Size => 0,
-			   Change => ARM_Output.None,
-			   Version => '0',
-			   Added_Version => '0',
-			   Location => ARM_Output.Normal);
+			     Format => (Bold => False,
+				        Italic => False,
+				        Font => ARM_Output.Default,
+				        Size => 0,
+				        Color => ARM_Output.Default,
+				        Change => ARM_Output.None,
+				        Version => '0',
+				        Added_Version => '0',
+				        Location => ARM_Output.Normal));
 		-- This has to be a hanging style, so we ignore other cases:
 	        Ada.Text_IO.Put (Output_Object.Output_File, "</div><div class=""" &
 		    Paragraph_Name (Output_Object.Paragraph_Style, Output_Object.Paragraph_Indent) & "-Body"">");
@@ -3780,15 +4000,7 @@ Natural'Image(Col_Count*(I-1)));
 		    Ada.Text_IO.New_Line (Output_Object.Output_File);
 		end if;
 		-- Reopen any formatting (using the previously saved values):
-		Text_Format (Output_Object,
-			   Bold => Is_Bold,
-			   Italic => Is_Italic,
-			   Font => Font,
-			   Size => Size,
-			   Change => Change,
-			   Version => Version,
-			   Added_Version => Added_Version,
-			   Location => Location);
+		Text_Format (Output_Object, Format => Saved_Format);
 	    end;
 	else -- HTML 4 Compatibility
 	    -- We have to close and reopen the font info here, so that we
@@ -3839,33 +4051,23 @@ Natural'Image(Col_Count*(I-1)));
 
 
     procedure Text_Format (Output_Object : in out HTML_Output_Type;
-			   Bold : in Boolean;
-			   Italic : in Boolean;
-			   Font : in ARM_Output.Font_Family_Type;
-			   Size : in ARM_Output.Size_Type;
-			   Change : in ARM_Output.Change_Type;
-			   Version : in ARM_Contents.Change_Version_Type := '0';
-			   Added_Version : in ARM_Contents.Change_Version_Type := '0';
-			   Location : in ARM_Output.Location_Type) is
-	-- Change the text format so that Bold, Italics, the font family,
-	-- the text size, and the change state are as specified.
-	-- Added_Version is only used when the change state is "Both"; it's
-	-- the version of the insertion; Version is the version of the (newer)
-	-- deletion.
+			   Format : in ARM_Output.Format_Type) is
+	-- Change the text format so that all of the properties are as specified.
 	-- Note: Changes to these properties ought be stack-like; that is,
 	-- Bold on, Italic on, Italic off, Bold off is OK; Bold on, Italic on,
 	-- Bold off, Italic off should be avoided (as separate commands).
 	use type ARM_Output.Change_Type;
 	use type ARM_Output.Location_Type;
 	use type ARM_Output.Size_Type;
+	use type ARM_Output.Color_Type;
 
 	function Change_Needs_Close_or_Open return Boolean is
 	    -- Returns True if "Change" needs to open or close something, based
 	    -- on the current values of Output_Object.
 	begin
-	    return (Change /= Output_Object.Change or else
-		    Version /= Output_Object.Version or else
-		    Added_Version /= Output_Object.Added_Version);
+	    return (Format.Change /= Output_Object.Change or else
+		    Format.Version /= Output_Object.Version or else
+		    Format.Added_Version /= Output_Object.Added_Version);
 	end Change_Needs_Close_or_Open;
 
 	function Font_Needs_Close_or_Open return Boolean is
@@ -3875,7 +4077,7 @@ Natural'Image(Col_Count*(I-1)));
 	    -- or close something; if it does, we need to close and reopen
 	    -- the font even if it is not changing.
 	begin
-	    return (ARM_Output."/=" (Font, Output_Object.Font) or else
+	    return (ARM_Output."/=" (Format.Font, Output_Object.Font) or else
 		    Change_Needs_Close_or_Open);
 	end Font_Needs_Close_or_Open;
 
@@ -3886,32 +4088,45 @@ Natural'Image(Col_Count*(I-1)));
 	    -- to open or close something; if they do, we need to close and
 	    -- reopen the location even if it is not changing.
 	begin
-	    return (ARM_Output."/=" (Location, Output_Object.Location) or else
-		    Change_Needs_Close_or_Open or else Font_Needs_Close_or_Open);
+	    return Format.Location /= Output_Object.Location or else
+		   Change_Needs_Close_or_Open or else Font_Needs_Close_or_Open;
 	end Location_Needs_Close_or_Open;
+
+	function Color_Needs_Close_or_Open return Boolean is
+	    -- Returns True if "Color" needs to close something, based
+	    -- on the current values of Output_Object, and the new value.
+	    -- Note that this depends on whether the Change, Font,
+	    -- or Location needs to open or close something; if they do,
+	    -- we need to close the size even if it is not changing.
+	begin
+	    return (Format.Color /= Output_Object.Color or else
+		    Change_Needs_Close_or_Open or else Font_Needs_Close_or_Open or else
+		    Location_Needs_Close_or_Open);
+	end Color_Needs_Close_or_Open;
 
 	function Size_Needs_Close_or_Open return Boolean is
 	    -- Returns True if "Size" needs to close something, based
 	    -- on the current values of Output_Object, and the new value.
-	    -- Note that this depends on whether the Change, Font, or Location
-	    -- needs to open or close something; if they do, we need to
-	    -- close the size even if it is not changing.
+	    -- Note that this depends on whether the Change, Color, Font,
+	    -- or Location needs to open or close something; if they do,
+	    -- we need to close the size even if it is not changing.
 	begin
-	    return (Size /= Output_Object.Size or else
+	    return (Format.Size /= Output_Object.Size or else
 		    Change_Needs_Close_or_Open or else Font_Needs_Close_or_Open or else
-		    Location_Needs_Close_or_Open);
+		    Location_Needs_Close_or_Open or else Color_Needs_Close_or_Open);
 	end Size_Needs_Close_or_Open;
 
 	function Italic_Needs_Close_or_Open return Boolean is
 	    -- Returns True if "Italic" needs to close something, based
 	    -- on the current values of Output_Object, and the new value.
-	    -- Note that this depends on whether the Change, Font, Location,
-	    -- or Size needs to open or close something; if they do, we need
-	    -- to close the italics even if it is not changing.
+	    -- Note that this depends on whether the Change, Font, Color,
+	    -- Location, or Size needs to open or close something; if they do,
+	    -- we need to close the italics even if it is not changing.
 	begin
-	    return (Italic /= Output_Object.Is_Italic or else
+	    return (Format.Italic /= Output_Object.Is_Italic or else
 	    Change_Needs_Close_or_Open or else Font_Needs_Close_or_Open or else
-	    Location_Needs_Close_or_Open or else Size_Needs_Close_or_Open);
+	    Location_Needs_Close_or_Open or else Size_Needs_Close_or_Open or else
+	    Color_Needs_Close_or_Open);
 	end Italic_Needs_Close_or_Open;
 
     begin
@@ -3928,10 +4143,7 @@ Natural'Image(Col_Count*(I-1)));
 	-- in order to get proper nesting in all cases.
 
 	if Output_Object.Is_Bold and then
-            ((not Bold) or else
-	    --Change_Needs_Close_or_Open or else Font_Needs_Close_or_Open or else
-	    --Location_Needs_Close_or_Open or else Size_Needs_Close_or_Open or else
-	    --The below includes the above.
+            ((not Format.Bold) or else
 	    Italic_Needs_Close_or_Open) then
 	    -- The latter so that nesting is preserved; we'll reopen
 	    -- the boldfacing on the other side if needed. Otherwise, when
@@ -3942,10 +4154,7 @@ Natural'Image(Col_Count*(I-1)));
 	end if;
 
 	if Output_Object.Is_Italic and then
-            ((not Italic) or else
-	    --Change_Needs_Close_or_Open or else Font_Needs_Close_or_Open or else
-	    --Location_Needs_Close_or_Open or else
-	    --The below includes the above.
+            ((not Format.Italic) or else
 	    Size_Needs_Close_or_Open) then
 	    -- The latter so that nesting is preserved; we'll reopen
 	    -- the italics on the other side in that case.
@@ -3953,10 +4162,8 @@ Natural'Image(Col_Count*(I-1)));
 	    Output_Object.Is_Italic := False;
 	end if;
 
-	if Size /= Output_Object.Size or else
-	    --Change_Needs_Close_or_Open or else Font_Needs_Close_or_Open or else
-	    --The below includes the above.
-	    Location_Needs_Close_or_Open then
+	if Format.Size /= Output_Object.Size or else
+	    Color_Needs_Close_or_Open then
 	    -- The latter so that nesting is preserved; we'll reopen
 	    -- the size on the other side in that case.
 	    if Output_Object.Size /= 0 then
@@ -3969,9 +4176,21 @@ Natural'Image(Col_Count*(I-1)));
 	    end if;
 	end if;
 
-	if Location /= Output_Object.Location or else
-	    --Font_Needs_Close_or_Open or else
-	    --The below includes the above.
+	if Format.Color /= Output_Object.Color or else
+	    Location_Needs_Close_or_Open then
+	    -- The latter so that nesting is preserved; we'll reopen
+	    -- the size on the other side in that case.
+	    if Output_Object.Color /= ARM_Output.Default then
+	        if Output_Object.HTML_Kind = HTML_4_Only then
+	            Output_Text (Output_Object, "</SPAN>");
+		else
+	            Output_Text (Output_Object, "</FONT>");
+		end if;
+	        Output_Object.Color := ARM_Output.Default; -- That's the color now.
+	    end if;
+	end if;
+
+	if Format.Location /= Output_Object.Location or else
 	    Change_Needs_Close_or_Open then
 	    -- The latter so that nesting is preserved; we'll reopen
 	    -- the location on the other side in that case.
@@ -3994,7 +4213,7 @@ Natural'Image(Col_Count*(I-1)));
 	    Output_Object.Location := ARM_Output.Normal; -- That's the location now.
 	end if;
 
-	if ARM_Output."/=" (Font, Output_Object.Font) or else
+	if ARM_Output."/=" (Format.Font, Output_Object.Font) or else
 	    Change_Needs_Close_or_Open then
 	    -- The latter so that nesting is preserved; we'll reopen
 	    -- the font on the other side in that case.
@@ -4019,9 +4238,9 @@ Natural'Image(Col_Count*(I-1)));
 	    Output_Object.Font := ARM_Output.Default; -- We're now in the default state.
 	end if;
 
-	if Change /= Output_Object.Change or else
-	   Version /= Output_Object.Version or else
-	   Added_Version /= Output_Object.Added_Version then
+	if Format.Change /= Output_Object.Change or else
+	   Format.Version /= Output_Object.Version or else
+	   Format.Added_Version /= Output_Object.Added_Version then
 	    case Output_Object.Change is
 		when ARM_Output.Insertion =>
 		    if Output_Object.HTML_Kind = HTML_3 then
@@ -4080,45 +4299,46 @@ Natural'Image(Col_Count*(I-1)));
 		when ARM_Output.None =>
 		    null;
 	    end case;
-	    case Change is
+	    case Format.Change is
 		when ARM_Output.Insertion =>
 		    if Output_Object.HTML_Kind = HTML_3 then
 		        Output_Text (Output_Object, "<U>");
 		    else
 		        --Output_Text (Output_Object, "<ins>");
-		        Output_Text (Output_Object, "<span class=""insert" & Version & """>");
-			Revision_Used(Version) := True;
+		        Output_Text (Output_Object, "<span class=""insert" & Format.Version & """>");
+			Revision_Used(Format.Version) := True;
 		    end if;
 		when ARM_Output.Deletion =>
 		    if Output_Object.HTML_Kind = HTML_3 then
 		        Output_Text (Output_Object, "<S>");
 		    else
 		        --Output_Text (Output_Object, "<del>");
-		        Output_Text (Output_Object, "<span class=""delete" & Version & """>");
-			Revision_Used(Version) := True;
+		        Output_Text (Output_Object, "<span class=""delete" & Format.Version & """>");
+			Revision_Used(Format.Version) := True;
 		    end if;
 		when ARM_Output.Both =>
 		    if Output_Object.HTML_Kind = HTML_3 then
 		        Output_Text (Output_Object, "<U><S>");
 		    else
 		        --Output_Text (Output_Object, "<ins><del>");
-		        --Output_Text (Output_Object, "<span class=""both" & Version & """>");
+		        --Output_Text (Output_Object, "<span class=""both" & Format.Version & """>");
 			-- CSS2 doesn't allow multiple decorations in a single definition, so we have
 			-- to nest them. But that might not be right, either (it works on IE).
-		        Output_Text (Output_Object, "<span class=""insert" & Added_Version & """>");
-		        Output_Text (Output_Object, "<span class=""delete" & Version & """>");
-			Revision_Used(Version) := True;
+		        Output_Text (Output_Object, "<span class=""insert" & Format.Added_Version & """>");
+		        Output_Text (Output_Object, "<span class=""delete" & Format.Version & """>");
+			Revision_Used(Format.Added_Version) := True;
+			Revision_Used(Format.Version) := True;
 		    end if;
 		when ARM_Output.None =>
 		    null;
 	    end case;
-	    Output_Object.Change := Change;
-	    Output_Object.Version := Version;
-	    Output_Object.Added_Version := Added_Version;
+	    Output_Object.Change := Format.Change;
+	    Output_Object.Version := Format.Version;
+	    Output_Object.Added_Version := Format.Added_Version;
 	end if;
 
-	if ARM_Output."/=" (Font, Output_Object.Font) then
-	    case Font is
+	if ARM_Output."/=" (Format.Font, Output_Object.Font) then
+	    case Format.Font is
 		when ARM_Output.Default => null;
 		when ARM_Output.Fixed =>
 		    Output_Text (Output_Object, "<TT>");
@@ -4136,14 +4356,14 @@ Natural'Image(Col_Count*(I-1)));
 		        Output_Text (Output_Object, SWISS_FONT_CODE);
 		    end if;
 	    end case;
-	    Output_Object.Font := Font;
+	    Output_Object.Font := Format.Font;
 	end if;
 
-	if Location /= Output_Object.Location then
+	if Format.Location /= Output_Object.Location then
 	    -- Note: Location needs to be changed before size, as they
 	    -- typically are changed together, and <SUP> and <SUB> reset the
 	    -- size.
-	    case Location is
+	    case Format.Location is
 		when ARM_Output.Superscript =>
 		    if Output_Object.HTML_Kind = HTML_4_Only then
 		        Output_Text (Output_Object, "<SUP><SPAN STYLE=""font-size: 140%"">");
@@ -4161,12 +4381,41 @@ Natural'Image(Col_Count*(I-1)));
 		when ARM_Output.Normal =>
 		    null;
 	    end case;
-	    Output_Object.Location := Location;
+	    Output_Object.Location := Format.Location;
 	end if;
 
-	if Size /= Output_Object.Size then
+	if Format.Color /= Output_Object.Color then
 	    if Output_Object.HTML_Kind = HTML_4_Only then
-		case Size is
+		case Format.Color is
+		    when ARM_Output.Default => null;
+		    when ARM_Output.Black =>
+			Output_Text (Output_Object, "<SPAN STYLE=""color: rgb(0,0,0)"">");
+		    when ARM_Output.Red   =>
+			Output_Text (Output_Object, "<SPAN STYLE=""color: rgb(153,0,0)"">");
+		    when ARM_Output.Green =>
+			Output_Text (Output_Object, "<SPAN STYLE=""color: rgb(0,153,0)"">");
+		    when ARM_Output.Blue  =>
+			Output_Text (Output_Object, "<SPAN STYLE=""color: rgb(0,0,153)"">");
+		end case;
+	    else
+		case Format.Color is
+		    when ARM_Output.Default => null;
+		    when ARM_Output.Black =>
+	                Output_Text (Output_Object, "<FONT COLOR=""#000000"">");
+		    when ARM_Output.Red   =>
+	                Output_Text (Output_Object, "<FONT COLOR=""#990000"">");
+		    when ARM_Output.Green =>
+	                Output_Text (Output_Object, "<FONT COLOR=""#009900"">");
+		    when ARM_Output.Blue  =>
+	                Output_Text (Output_Object, "<FONT COLOR=""#000099"">");
+		end case;
+	    end if;
+	    Output_Object.Color := Format.Color;
+	end if;
+
+	if Format.Size /= Output_Object.Size then
+	    if Output_Object.HTML_Kind = HTML_4_Only then
+		case Format.Size is
 		    when 0 => null; -- Do nothing.
 		    when 1 => Output_Text (Output_Object, "<SPAN STYLE=""font-size: 125%"">");
 		    when 2 => Output_Text (Output_Object, "<SPAN STYLE=""font-size: 156%"">");
@@ -4180,7 +4429,7 @@ Natural'Image(Col_Count*(I-1)));
 		    when -5 => Output_Text (Output_Object, "<SPAN STYLE=""font-size: 33%"">");
 		    when others =>
 			-- Too much change:
-			if Size > 0 then
+			if Format.Size > 0 then
 			    Output_Text (Output_Object, "<SPAN STYLE=""font-size: 305%"">");
 			else
 			    Output_Text (Output_Object, "<SPAN STYLE=""font-size: 33%"">");
@@ -4188,31 +4437,31 @@ Natural'Image(Col_Count*(I-1)));
 		end case;
 	    else
 	        -- HTML sizes are 1..7, with a default of 3. So we limit the changes.
-	        if Size > 0 then
-		    if Size > 5 then
+	        if Format.Size > 0 then
+		    if Format.Size > 5 then
 	                Output_Text (Output_Object, "<FONT SIZE=""+5"">");
 		    else
 	                Output_Text (Output_Object, "<FONT SIZE=""+" &
-		            Character'Val(Size + Character'Pos('0')) & """>");
+		            Character'Val(Format.Size + Character'Pos('0')) & """>");
 		    end if;
-	        elsif Size < 0 then
-		    if Size < -4 then
+	        elsif Format.Size < 0 then
+		    if Format.Size < -4 then
 	                Output_Text (Output_Object, "<FONT SIZE=""-4"">");
 		    else
 	                Output_Text (Output_Object, "<FONT SIZE=""-" &
-		            Character'Val(abs Size + Character'Pos('0')) & """>");
+		            Character'Val(abs Format.Size + Character'Pos('0')) & """>");
 		    end if;
-	        -- else Size=0, nothing to do.
+	        -- else Format.Size=0, nothing to do.
 	        end if;
 	    end if;
-	    Output_Object.Size := Size;
+	    Output_Object.Size := Format.Size;
 	end if;
 
-	if Italic and (not Output_Object.Is_Italic) then
+	if Format.Italic and (not Output_Object.Is_Italic) then
 	    Output_Text (Output_Object, "<I>");
 	    Output_Object.Is_Italic := True;
 	end if;
-	if Bold and (not Output_Object.Is_Bold) then
+	if Format.Bold and (not Output_Object.Is_Bold) then
 	    Output_Text (Output_Object, "<B>");
 	    Output_Object.Is_Bold := True;
 	end if;
@@ -4300,7 +4549,11 @@ Natural'Image(Col_Count*(I-1)));
 	        Name : constant String :=
 		    Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
 	    begin
-	        Output_Text (Output_Object, Name);
+		if Output_Object.DOS_Filenames then
+		    Output_Text (Output_Object, Name(1..Name'Length-1)); --".htm" is the extension.
+		else
+		    Output_Text (Output_Object, Name);
+		end if;
 	    end;
 	end if;
 	Output_Text (Output_Object, "#I");
@@ -4573,7 +4826,11 @@ Natural'Image(Col_Count*(I-1)));
 	        Name : constant String :=
 		    Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
 	    begin
-	        Output_Text (Output_Object, Name);
+		if Output_Object.DOS_Filenames then
+		    Output_Text (Output_Object, Name(1..Name'Length-1)); --".htm" is the extension.
+		else
+		    Output_Text (Output_Object, Name);
+		end if;
 	    end;
 	end if;
 	Output_Text (Output_Object, "#" & Target);
@@ -4614,7 +4871,11 @@ Natural'Image(Col_Count*(I-1)));
 	        Name : constant String :=
 		    Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
 	    begin
-	        Output_Text (Output_Object, Name);
+		if Output_Object.DOS_Filenames then
+		    Output_Text (Output_Object, Name(1..Name'Length-1)); --".htm" is the extension.
+		else
+		    Output_Text (Output_Object, Name);
+		end if;
 	    end;
 	end if;
 	Output_Text (Output_Object, "#" & Target);

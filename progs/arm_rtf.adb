@@ -126,6 +126,9 @@ package body ARM_RTF is
     --  2/16/07 - RLB - Added example styles for additional nesting levels.
     --  2/19/07 - RLB - Added Standard Title style.
     -- 12/18/07 - RLB - Fixed silly table bug.
+    --		- RLB - Added Plain_Annex.
+    -- 12/19/07 - RLB - Added limited colors to Text_Format.
+
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -3063,8 +3066,7 @@ package body ARM_RTF is
 	    Ada.Text_IO.Put (Output_Object.Output_File, "{\footerl ");
 	    Write_Style_for_Paragraph (Output_Object.Output_File, Footer_Info, Count);
             Ada.Text_IO.Put (Output_Object.Output_File, "{\b\f1 ");
-	    if ARM_Contents."="(Level, ARM_Contents.Normative_Annex) or else
-	       ARM_Contents."="(Level, ARM_Contents.Informative_Annex) then
+	    if Level in ARM_Contents.Plain_Annex .. ARM_Contents.Normative_Annex then
 		-- Clause Number includes "Annex". Just use the letter.
 		Ada.Text_IO.Put (Output_Object.Output_File, Clause_Number(Clause_Number'Last));
 	    else
@@ -3082,8 +3084,7 @@ package body ARM_RTF is
 	    Ada.Text_IO.Put (Output_Object.Output_File, "\tab ");
             Ada.Text_IO.Put (Output_Object.Output_File, Header_Text);
 	    Ada.Text_IO.Put (Output_Object.Output_File, "\~\~\~\b\f1 ");
-	    if ARM_Contents."="(Level, ARM_Contents.Normative_Annex) or else
-	       ARM_Contents."="(Level, ARM_Contents.Informative_Annex) then
+	    if Level in ARM_Contents.Plain_Annex .. ARM_Contents.Normative_Annex then
 		-- Clause Number includes "Annex". Just use the letter.
 		Ada.Text_IO.Put (Output_Object.Output_File, Clause_Number(Clause_Number'Last));
 	    else
@@ -3135,6 +3136,12 @@ package body ARM_RTF is
 	end if;
 
 	case Level is
+	    when ARM_Contents.Plain_Annex =>
+		Write_Style_for_Paragraph (Output_Object.Output_File,
+		    Heading_1_Info, Count);
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
+		    Clause_Number & ": " & Header_Text & "\par}");
+				-- Note: Clause_Number includes "Annex"
 	    when ARM_Contents.Normative_Annex =>
 		Write_Style_for_Paragraph (Output_Object.Output_File,
 		    Heading_1_Info, Count);
@@ -3215,6 +3222,12 @@ package body ARM_RTF is
 		       Clause_Number, No_Page_Break);
 
 	case Level is
+	    when ARM_Contents.Plain_Annex =>
+		Write_Style_for_Paragraph (Output_Object.Output_File,
+		    Heading_1_Info, Count);
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
+		    Clause_Number & ": " & Header_Text & "\par}");
+				-- Note: Clause_Number includes "Annex"
 	    when ARM_Contents.Normative_Annex =>
 		Write_Style_for_Paragraph (Output_Object.Output_File,
 		    Heading_1_Info, Count);
@@ -4378,19 +4391,8 @@ package body ARM_RTF is
 
 
     procedure Text_Format (Output_Object : in out RTF_Output_Type;
-			   Bold : in Boolean;
-			   Italic : in Boolean;
-			   Font : in ARM_Output.Font_Family_Type;
-			   Size : in ARM_Output.Size_Type;
-			   Change : in ARM_Output.Change_Type;
-			   Version : in ARM_Contents.Change_Version_Type := '0';
-			   Added_Version : in ARM_Contents.Change_Version_Type := '0';
-			   Location : in ARM_Output.Location_Type) is
-	-- Change the text format so that Bold, Italics, the font family,
-	-- the text size, and the change state are as specified.
-	-- Added_Version is only used when the change state is "Both"; it's
-	-- the version of the insertion; Version is the version of the (newer)
-	-- deletion.
+			   Format : in ARM_Output.Format_Type) is
+	-- Change the text format so that all of the properties are as specified.
 	-- Note: Changes to these properties ought be stack-like; that is,
 	-- Bold on, Italic on, Italic off, Bold off is OK; Bold on, Italic on,
 	-- Bold off, Italic off should be avoided (as separate commands).
@@ -4398,6 +4400,7 @@ package body ARM_RTF is
 	use type ARM_Contents.Change_Version_Type;
 	use type ARM_Output.Location_Type;
 	use type ARM_Output.Size_Type;
+	use type ARM_Output.Color_Type;
 
 	procedure Make_Size_Command (Size : in Natural) is
 	    -- Write a \fs command to the file for Size.
@@ -4430,6 +4433,7 @@ package body ARM_RTF is
 	begin
 	    if (not Output_Object.Is_Bold) and (not Output_Object.Is_Italic) and
 		ARM_Output."=" (Output_Object.Font, ARM_Output.Default) and
+		Output_Object.Color =  ARM_Output.Default and
 	        Output_Object.Size = 0 then
 		-- No format was, so none to close (default).
 		return;
@@ -4442,6 +4446,7 @@ package body ARM_RTF is
 	    Output_Object.Size := 0;
 	    Output_Object.Is_Bold := False;
 	    Output_Object.Is_Italic := False;
+	    Output_Object.Color := ARM_Output.Default;
 	    case Output_Object.Font is
 		when ARM_Output.Default => null;
 		when ARM_Output.Fixed => null;
@@ -4457,9 +4462,10 @@ package body ARM_RTF is
 	procedure Make_Basic_Format is
 	    -- Make any needed Bold/Italic/Size/Font command.
 	begin
-	    if (not Bold) and (not Italic) and
-		ARM_Output."=" (Font, ARM_Output.Default) and
-		Size = 0 then
+	    if (not Format.Bold) and (not Format.Italic) and
+		ARM_Output."=" (Format.Font, ARM_Output.Default) and
+		Format.Color = ARM_Output.Default and
+	        Format.Size = 0 then
 		-- No format needed (default).
 		return;
 	    end if;
@@ -4467,32 +4473,53 @@ package body ARM_RTF is
 	    Output_Object.Char_Count := Output_Object.Char_Count + 1;
 
 	    -- Bold:
-	    if Bold then
+	    if Format.Bold then
 --Ada.Text_Io.Put (" Change bold");
 	        Ada.Text_IO.Put (Output_Object.Output_File, "\b");
 	        Output_Object.Char_Count := Output_Object.Char_Count + 2;
 	        Output_Object.Is_Bold := True;
 	    end if;
 	    -- Italic:
-	    if Italic then
+	    if Format.Italic then
 --Ada.Text_Io.Put (" Change italics");
 	        Ada.Text_IO.Put (Output_Object.Output_File, "\i");
 	        Output_Object.Char_Count := Output_Object.Char_Count + 2;
 	        Output_Object.Is_Italic := True;
 	    end if;
 	    -- Size:
-	    if Size /= 0 then
+	    if Format.Size /= 0 then
 --Ada.Text_Io.Put (" Change size " & ARM_Output.Size_Type'Image(Size));
 	        Output_Object.Real_Size := Output_Object.Real_Size +
-						    Integer(Size)*2;
-		if ARM_Output."/=" (Font, ARM_Output.Swiss) then
+						    Integer(Format.Size)*2;
+		if ARM_Output."/=" (Format.Font, ARM_Output.Swiss) then
 	            Make_Size_Command (Output_Object.Real_Size);
 		-- else it will be done by the Font, below.
 		end if;
 	    end if;
-	    Output_Object.Size := Size;
+	    Output_Object.Size := Format.Size;
+	    -- Color:
+	    if Format.Color /= ARM_Output.Default then
+--Ada.Text_Io.Put (" Change color " & ARM_Output.Color_Type'Image(Format.Color));
+	        case Format.Color is
+		    when ARM_Output.Default => null;
+		    when ARM_Output.Black => -- Color 1
+		        Ada.Text_IO.Put (Output_Object.Output_File, "\cf1");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 4;
+		    when ARM_Output.Red   => -- Color 13
+		        Ada.Text_IO.Put (Output_Object.Output_File, "\cf13");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 5;
+		    when ARM_Output.Green => -- Color 11
+		        Ada.Text_IO.Put (Output_Object.Output_File, "\cf11");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 5;
+		    when ARM_Output.Blue  => -- Color 9
+		        Ada.Text_IO.Put (Output_Object.Output_File, "\cf9");
+		        Output_Object.Char_Count := Output_Object.Char_Count + 4;
+		end case;
+	    end if;
+	    Output_Object.Color := Format.Color;
+
 	    -- Font:
-	    case Font is
+	    case Format.Font is
 		when ARM_Output.Default => null;
 		when ARM_Output.Fixed =>
 --Ada.Text_Io.Put (" Change font fixed");
@@ -4512,7 +4539,7 @@ package body ARM_RTF is
 	    end case;
 	    Ada.Text_IO.Put (Output_Object.Output_File, " ");
 	    Output_Object.Char_Count := Output_Object.Char_Count + 1;
-	    Output_Object.Font := Font;
+	    Output_Object.Font := Format.Font;
 	end Make_Basic_Format;
 
 
@@ -4522,39 +4549,36 @@ package body ARM_RTF is
 	    -- We could "improve" this by keeping similar changes together,
 	    -- especially for changes to/from Both, but its a lot more work
 	    -- and unnecessary.
-	    case Change is
+	    case Format.Change is
 		when ARM_Output.Insertion =>
 --Ada.Text_Io.Put (" Change ins");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth" & Version & ' ');
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth" & Format.Version & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 18;
 			-- Note: \revauthN indicates the author. Each version
 			-- that we'll use needs an entry in the \revtbl.
 			-- We could include a date with \revddtm??, but that's messy.
-			-- (And we don't know the date of the revision yet.)
 		when ARM_Output.Deletion =>
 --Ada.Text_Io.Put (" Change del");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel" & Version & ' ');
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel" & Format.Version & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 21;
 			-- Note: \revauthdelN indicates the author. Each version
 			-- that we'll use needs an entry in the \revtbl.
 			-- We could include a date with \revddtmdel??, but that's messy.
-			-- (And we don't know the date of the revision yet.)
 		when ARM_Output.Both =>
 --Ada.Text_Io.Put (" Change both");
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth" & Added_Version & ' ');
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth" & Format.Added_Version & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 18;
-		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel" & Version & ' ');
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel" & Format.Version & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 21;
 			-- Note: \revauthdelN indicates the author. Each version
 			-- that we'll use needs an entry in the \revtbl.
 			-- We could include a date with \revddtmdel??, but that's messy.
-			-- (And we don't know the date of the revision yet.)
 		when ARM_Output.None =>
 		    null;
 	    end case;
-	    Output_Object.Change := Change;
-	    Output_Object.Version := Version;
-	    Output_Object.Added_Version := Added_Version;
+	    Output_Object.Change := Format.Change;
+	    Output_Object.Version := Format.Version;
+	    Output_Object.Added_Version := Format.Added_Version;
 	end Make_Revision;
 
 
@@ -4586,7 +4610,7 @@ package body ARM_RTF is
 	procedure Make_Location is
 	    -- Make any needed location:
 	begin
-	    case Location is
+	    case Format.Location is
 		when ARM_Output.Subscript =>
 --Ada.Text_Io.Put (" Change sub");
 		    Ada.Text_IO.Put (Output_Object.Output_File, "{\sub ");
@@ -4598,7 +4622,7 @@ package body ARM_RTF is
 		when ARM_Output.Normal =>
 		    null;
 	    end case;
-	    Output_Object.Location := Location;
+	    Output_Object.Location := Format.Location;
 	end Make_Location;
 
 
@@ -4633,31 +4657,32 @@ package body ARM_RTF is
 	-- We always make changes in the order:
 	-- Revision;
 	-- Location;
-	-- Basic_Format (Bold, Italic, Font, Size).
+	-- Basic_Format (Bold, Italic, Font, Size, Color).
 	-- Thus, we have to unstack them in the reverse order. And, if we want
 	-- to change an outer one, we have to close and redo any inner
 	-- ones.
 
 	-- We do these in this order so that the changes are stacked properly.
-	if Change /= Output_Object.Change or else
-	    Version /= Output_Object.Version or else
-	    Added_Version /= Output_Object.Added_Version then
+	if Format.Change /= Output_Object.Change or else
+	    Format.Version /= Output_Object.Version or else
+	    Format.Added_Version /= Output_Object.Added_Version then
 	    Close_Basic_Format;
 	    Close_Location;
 	    Close_Revision;
 	    Make_Revision;
 	    Make_Location;
 	    Make_Basic_Format;
-	elsif Location /= Output_Object.Location then
+	elsif Format.Location /= Output_Object.Location then
 	    -- We don't need to change the revision, leave it alone.
 	    Close_Basic_Format;
 	    Close_Location;
 	    Make_Location;
 	    Make_Basic_Format;
-	elsif Size /= Output_Object.Size or else
-	   ARM_Output."/=" (Font, Output_Object.Font) or else
-	   Bold /= Output_Object.Is_Bold or else
-	   Italic /= Output_Object.Is_Italic then
+	elsif Format.Color /= Output_Object.Color or else
+	   Format.Size /= Output_Object.Size or else
+	   ARM_Output."/=" (Format.Font, Output_Object.Font) or else
+	   Format.Bold /= Output_Object.Is_Bold or else
+	   Format.Italic /= Output_Object.Is_Italic then
 	    Close_Basic_Format;
 	    Make_Basic_Format;
 	-- else no change at all.

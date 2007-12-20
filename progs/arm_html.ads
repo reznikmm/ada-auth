@@ -96,6 +96,8 @@ package ARM_HTML is
     --  2/ 9/07 - RLB - Changed comments on AI_Reference.
     --  2/13/07 - RLB - Revised to separate style and indent information
     --			for paragraphs.
+    -- 12/19/07 - RLB - Added DOS_Filename flag.
+    --		- RLB - Added limited colors to Text_Format.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -119,6 +121,7 @@ package ARM_HTML is
     procedure Create (Output_Object : in out HTML_Output_Type;
 		      Big_Files : in Boolean;
 		      File_Prefix : in String;
+		      DOS_Filenames : in Boolean;
 		      HTML_Kind : in HTML_Type;
 		      Use_Unicode : in Boolean;
 		      Number_Paragraphs : in Boolean;
@@ -142,7 +145,10 @@ package ARM_HTML is
 	-- Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
 	-- The prefix of the output file names is File_Prefix - this
-	-- should be no more then 4 characters allowed in file names.
+	-- should be no more than 4 characters allowed in file names.
+	-- If DOS_Filename is true, use 8.3 file names;
+	-- in that case, File_Prefix must be less than 4 characters in length;
+	-- and no clause or subclause number may exceed 35 if Big_Files is False.
 	-- The title of the document is Title.
 	-- HTML_Kind determines the kind of HTML generated; HTML_3 works on
 	-- every browser but has little control over formatting;
@@ -387,19 +393,8 @@ package ARM_HTML is
 	-- with No_Prefix = True.
 
     procedure Text_Format (Output_Object : in out HTML_Output_Type;
-			   Bold : in Boolean;
-			   Italic : in Boolean;
-			   Font : in ARM_Output.Font_Family_Type;
-			   Size : in ARM_Output.Size_Type;
-			   Change : in ARM_Output.Change_Type;
-			   Version : in ARM_Contents.Change_Version_Type := '0';
-			   Added_Version : in ARM_Contents.Change_Version_Type := '0';
-			   Location : in ARM_Output.Location_Type);
-	-- Change the text format so that Bold, Italics, the font family,
-	-- the text size, and the change state are as specified.
-	-- Added_Version is only used when the change state is "Both"; it's
-	-- the version of the insertion; Version is the version of the (newer)
-	-- deletion.
+			   Format : in ARM_Output.Format_Type);
+	-- Change the text format so that all of the properties are as specified.
 	-- Note: Changes to these properties ought be stack-like; that is,
 	-- Bold on, Italic on, Italic off, Bold off is OK; Bold on, Italic on,
 	-- Bold off, Italic off should be avoided (as separate commands).
@@ -522,6 +517,7 @@ private
 	-- Global properties:
 	File_Prefix : Prefix_String; -- Blank padded.
 	Big_Files : Boolean; -- For HTML, this means to generate a single monster file.
+	DOS_Filenames : Boolean; -- Generate 8.3 MS-DOS filenames.
 	Title : Ada.Strings.Unbounded.Unbounded_String;
         HTML_Kind : HTML_Type;
         Use_Unicode : Boolean;
@@ -567,6 +563,7 @@ private
 	Is_Italic : Boolean; -- Is the text current italics?
 	Font : ARM_Output.Font_Family_Type; -- What is the current font family?
 	Size : ARM_Output.Size_Type; -- What is the current relative size?
+	Color : ARM_Output.Color_Type := ARM_Output.Default;
 	Change : ARM_Output.Change_Type := ARM_Output.None;
 	Version : ARM_Contents.Change_Version_Type := '0';
 	Added_Version : ARM_Contents.Change_Version_Type := '0';

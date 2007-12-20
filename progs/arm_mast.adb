@@ -21,7 +21,7 @@ package body ARM_Master is
     -- execute it.
     --
     -- ---------------------------------------
-    -- Copyright 2006  AXE Consultants.
+    -- Copyright 2006, 2007  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -65,6 +65,7 @@ package body ARM_Master is
     --  9/25/06 - RLB - Added the Contents_Format command.
     -- 10/04/06 - RLB - Added the List_Format command.
     -- 10/13/06 - RLB - Added specifiable default HTML colors.
+    -- 12/19/07 - RLB - Added MS-DOS file names.
 
     type Command_Type is (
 	-- Source commands:
@@ -88,6 +89,7 @@ package body ARM_Master is
 
 	-- HTML properties:
 	Single_HTML_Output_File,
+	Use_MS_DOS_Names,
 	HTML_Kind_Command,
 	HTML_Nav_Bar,
 	HTML_Tabs,
@@ -155,6 +157,7 @@ package body ARM_Master is
 
     -- HTML properties:
     Use_Large_HTML_Files : Boolean := False; -- Use small output files by default.
+    Use_MS_DOS_Filenames : Boolean := False; -- Use long file names by default.
     HTML_Kind : ARM_HTML.HTML_Type := ARM_HTML.HTML_4_Compatible;
     HTML_Use_Unicode : Boolean := False;
     HTML_Index_URL : Ada.Strings.Unbounded.Unbounded_String;
@@ -226,6 +229,8 @@ package body ARM_Master is
 	    return List_Format;
 	elsif Canonical_Name = "singlehtmloutputfile" then
 	    return Single_HTML_Output_File;
+	elsif Canonical_Name = "usemsdosfilenames" then
+	    return Use_MS_DOS_Names;
 	elsif Canonical_Name = "htmlkind" then
 	    return HTML_Kind_Command;
 	elsif Canonical_Name = "htmlnavbar" then
@@ -969,6 +974,11 @@ package body ARM_Master is
 		    Use_Large_HTML_Files := True;
 		    Ada.Text_IO.Put_Line("Single HTML Output File");
 
+		when Use_MS_DOS_Names =>
+		    -- @Single_HTML_Output_File
+		    Use_MS_DOS_Filenames := True;
+		    Ada.Text_IO.Put_Line("Use MS-DOS (8.3) file names for HTML output files");
+
 		when HTML_Kind_Command =>
 		    --@HTMLKind{Version=[3|4Comp|4],Unicode=[T|F]}
 		    Process_HTML_Kind;
@@ -1210,6 +1220,7 @@ package body ARM_Master is
 		    ARM_HTML.Create (Output,
 				     Big_Files => Use_Large_HTML_Files,
 				     File_Prefix => +Output_File_Prefix,
+				     DOS_Filenames => Use_MS_DOS_Filenames,
 				     HTML_Kind => HTML_Kind,
 				     Use_Unicode => HTML_Use_Unicode,
 				     Number_Paragraphs => Should_Number_Paragraphs,

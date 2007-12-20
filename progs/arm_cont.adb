@@ -50,6 +50,7 @@ package body ARM_Contents is
     --  1/16/06 - RLB - Added debugging.
     --  9/22/06 - RLB - Created type Clause_Number_Type and added SubSubClause.
     -- 10/12/07 - RLB - Extended the range of properly formatted clause numbers.
+    -- 12/18/07 - RLB - Added Plain_Annex.
 
     function "<" (Left, Right : Clause_Number_Type) return Boolean is
 	-- True if Left comes before Right in the collating order.
@@ -187,7 +188,7 @@ package body ARM_Contents is
 	-- Returns a properly formatted Section or clause number reference.
     begin
 	case Level is
-	    when Normative_Annex | Informative_Annex =>
+	    when Plain_Annex | Normative_Annex | Informative_Annex =>
 		if Clause_Number.Clause /= 0 or else Clause_Number.Subclause /= 0 or else
 		   Clause_Number.Subsubclause /= 0 or else Clause_Number.Section <= 30 then
 		    raise Program_Error; -- Illegal numbers.

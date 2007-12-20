@@ -296,14 +296,8 @@ private
 	Current_Paragraph_Len : Natural;
 
 	-- Text format info:
-	Is_Bold : Boolean; -- Is the text currently bold?
-	Is_Italic : Boolean; -- Is the text currently italic?
-	Font : ARM_Output.Font_Family_Type; -- What is the current font family?
-	Size : ARM_Output.Size_Type; -- What is the current font size?
-	Change : ARM_Output.Change_Type; -- What is the current kind of change?
-	Current_Change_Version : ARM_Contents.Change_Version_Type; -- What is the current version of change?
-	Current_Old_Change_Version : ARM_Contents.Change_Version_Type; -- What is the current old version of change? (Only used if Change is Both).
-	Location : ARM_Output.Location_Type; -- What is the current (vertical) location?
+	Text_Format : ARM_Output.Format_Type; -- Holds the current text format.
+
 	Style : ARM_Output.Paragraph_Style_Type; -- What is the current paragraph style?
 	Indent : ARM_Output.Paragraph_Indent_Type; -- What is the current paragraph indent?
 	In_Paragraph : Boolean; -- Are we currently in a paragraph?

@@ -56,6 +56,7 @@ package ARM_Corr is
     --  2/ 9/07 - RLB - Changed comments on AI_Reference.
     --  2/13/07 - RLB - Revised to separate style and indent information
     --			for paragraphs.
+    -- 12/19/07 - RLB - Added limited colors to Text_Format.
 
     type Corr_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -271,19 +272,8 @@ package ARM_Corr is
 	-- with No_Prefix = True.
 
     procedure Text_Format (Output_Object : in out Corr_Output_Type;
-			   Bold : in Boolean;
-			   Italic : in Boolean;
-			   Font : in ARM_Output.Font_Family_Type;
-			   Size : in ARM_Output.Size_Type;
-			   Change : in ARM_Output.Change_Type;
-			   Version : in ARM_Contents.Change_Version_Type := '0';
-			   Added_Version : in ARM_Contents.Change_Version_Type := '0';
-			   Location : in ARM_Output.Location_Type);
-	-- Change the text format so that Bold, Italics, the font family,
-	-- the text size, and the change state are as specified.
-	-- Added_Version is only used when the change state is "Both"; it's
-	-- the version of the insertion; Version is the version of the (newer)
-	-- deletion.
+			   Format : in ARM_Output.Format_Type);
+	-- Change the text format so that all of the properties are as specified.
 	-- Note: Changes to these properties ought be stack-like; that is,
 	-- Bold on, Italic on, Italic off, Bold off is OK; Bold on, Italic on,
 	-- Bold off, Italic off should be avoided (as separate commands).

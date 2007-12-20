@@ -58,6 +58,7 @@ package body ARM_Index is
     --  2/17/06 - RLB - Added Remove_Soft_Hyphens flag to Clean (for output).
     --  9/22/06 - RLB - Changed to use Clause_Number_Type.
     --  2/13/07 - RLB - Changed Start_Paragraph to use explicit indents.
+    -- 12/19/07 - RLB - Revised Text_Format calls.
 
     Next_Index_Key : Index_Key;
 
@@ -348,12 +349,20 @@ package body ARM_Index is
 	procedure Italic_Text (Text : in String) is
 	begin
 	    ARM_Output.Text_Format (Output_Object,
-		   Bold => False, Italic => True, Font => ARM_Output.Default,
-		   Size => 0, Change => ARM_Output.None, Location => ARM_Output.Normal);
+		   Format => (Bold => False, Italic => True,
+			      Font => ARM_Output.Default,
+		   	      Size => 0, Color => ARM_Output.Default,
+			      Change => ARM_Output.None,
+			      Version | Added_Version => '0',
+			      Location => ARM_Output.Normal));
             ARM_Output.Ordinary_Text (Output_Object, Text);
 	    ARM_Output.Text_Format (Output_Object,
-		   Bold => False, Italic => False, Font => ARM_Output.Default,
-		   Size => 0, Change => ARM_Output.None, Location => ARM_Output.Normal);
+		   Format => (Bold => False, Italic => False,
+			      Font => ARM_Output.Default,
+		   	      Size => 0, Color => ARM_Output.Default,
+			      Change => ARM_Output.None,
+			      Version | Added_Version => '0',
+			      Location => ARM_Output.Normal));
 	end Italic_Text;
 
 	procedure Term_Text (Text : in String) is
@@ -834,13 +843,21 @@ package body ARM_Index is
 		if To_Lower(Temp.Term(1)) in 'a' .. 'z' then
 		    ARM_Output.Index_Line_Break (Output_Object, Clear_Keep_with_Next => False);
 		    ARM_Output.Text_Format (Output_Object,
-			   Bold => True, Italic => False, Font => ARM_Output.Default,
-			   Size => 2, Change => ARM_Output.None, Location => ARM_Output.Normal);
+			   Format => (Bold => True, Italic => False,
+				      Font => ARM_Output.Default,
+			   	      Size => 2, Color => ARM_Output.Default,
+				      Change => ARM_Output.None,
+				      Version | Added_Version => '0',
+				      Location => ARM_Output.Normal));
 		    ARM_Output.Ordinary_Character (Output_Object,
 			Ada.Characters.Handling.To_Upper(Temp.Term(1)));
 		    ARM_Output.Text_Format (Output_Object,
-			   Bold => False, Italic => False, Font => ARM_Output.Default,
-			   Size => 0, Change => ARM_Output.None, Location => ARM_Output.Normal);
+			   Format => (Bold => False, Italic => False,
+				      Font => ARM_Output.Default,
+			   	      Size => 0, Color => ARM_Output.Default,
+				      Change => ARM_Output.None,
+				      Version | Added_Version => '0',
+				      Location => ARM_Output.Normal));
 		    ARM_Output.Index_Line_Break (Output_Object, Clear_Keep_with_Next => False);
 		else
 		    ARM_Output.Hard_Space (Output_Object);

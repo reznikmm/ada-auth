@@ -105,6 +105,8 @@ package ARM_Output is
     --			for paragraphs.
     --  2/19/07 - RLB - Added Title style to eliminate issues with title
     --			pages.
+    -- 12/19/07 - RLB - Added limited colors to Text_Format.
+
 
     type Output_Type is abstract tagged limited null record;
 
@@ -460,25 +462,39 @@ package ARM_Output is
 	-- formats that allow it, this is the change in size in points.
 	-- Otherwise, this is a relative change.
 
+    type Color_Type is (Default, Black, Red, Green, Blue);
+	-- Determines the text color. "Default" is usually black,
+	-- although some formats may use color to indicate changes.
+
     type Location_Type is (Normal, Subscript, Superscript);
 	-- Determines the location (vertical position) of the text: in the
 	-- normal position, subscripted (below the normal position), or
 	-- superscripted (above the normal position).
 
+    type Format_Type is record
+	-- A grouping of all of the format parameters.
+	Bold    : Boolean;
+	Italic  : Boolean;
+	Font    : ARM_Output.Font_Family_Type;
+	Size    : ARM_Output.Size_Type;
+	Color   : ARM_Output.Color_Type;
+        Change  : ARM_Output.Change_Type;
+        Version : ARM_Contents.Change_Version_Type;
+        Added_Version : ARM_Contents.Change_Version_Type;
+	    -- Only used when Change = Both; this is then the version
+	    -- of the insertion, and Version is then the version of the deletion.
+        Location : ARM_Output.Location_Type;
+    end record;
+    NORMAL_FORMAT : constant Format_Type :=
+	(Bold => False, Italic => False, Font => Default,
+	 Size => 0, Color => Default, Change => None, Version => '0',
+	 Added_Version => '0', Location => Normal);
+	-- The format of utterly normal text. Usually used to reset
+	-- the format or for initialization.
+
     procedure Text_Format (Output_Object : in out Output_Type;
-			   Bold : in Boolean;
-			   Italic : in Boolean;
-			   Font : in ARM_Output.Font_Family_Type;
-			   Size : in ARM_Output.Size_Type;
-			   Change : in ARM_Output.Change_Type;
-			   Version : in ARM_Contents.Change_Version_Type := '0';
-			   Added_Version : in ARM_Contents.Change_Version_Type := '0';
-			   Location : in ARM_Output.Location_Type) is abstract;
-	-- Change the text format so that Bold, Italics, the font family,
-	-- the text size, and the change state are as specified.
-	-- Added_Version is only used when the change state is "Both"; it's
-	-- the version of the insertion; Version is the version of the (newer)
-	-- deletion.
+			   Format : in ARM_Output.Format_Type) is abstract;
+	-- Change the text format so that all of the properties are as specified.
 	-- Note: Changes to these properties ought be stack-like; that is,
 	-- Bold on, Italic on, Italic off, Bold off is OK; Bold on, Italic on,
 	-- Bold off, Italic off should be avoided (as separate commands).

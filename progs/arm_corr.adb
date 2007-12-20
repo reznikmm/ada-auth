@@ -61,6 +61,8 @@ package body ARM_Corr is
     --  2/ 9/07 - RLB - Changed comments on AI_Reference.
     --  2/13/07 - RLB - Revised to separate style and indent information
     --			for paragraphs.
+    -- 12/18/07 - RLB - Added Plain_Annex.
+    -- 12/19/07 - RLB - Added limited colors to Text_Format.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -655,6 +657,11 @@ package body ARM_Corr is
         Ada.Text_IO.Put (Output_Object.Output_File,
 			 "!clause ");
 	case Level is
+	    when ARM_Contents.Plain_Annex =>
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
+				   Clause_Number); -- Note: Clause_Number includes "Annex"
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
+				   Header_Text);
 	    when ARM_Contents.Normative_Annex =>
 		Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				   Clause_Number); -- Note: Clause_Number includes "Annex"
@@ -741,6 +748,11 @@ package body ARM_Corr is
         Ada.Text_IO.Put (Output_Object.Output_File,
 			 "!clause ");
 	case Level is
+	    when ARM_Contents.Plain_Annex =>
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
+				   Clause_Number); -- Note: Clause_Number includes "Annex"
+		Ada.Text_IO.Put_Line (Output_Object.Output_File,
+				   Header_Text);
 	    when ARM_Contents.Normative_Annex =>
 		Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				   Clause_Number); -- Note: Clause_Number includes "Annex"
@@ -1330,25 +1342,15 @@ package body ARM_Corr is
 
 
     procedure Text_Format (Output_Object : in out Corr_Output_Type;
-			   Bold : in Boolean;
-			   Italic : in Boolean;
-			   Font : in ARM_Output.Font_Family_Type;
-			   Size : in ARM_Output.Size_Type;
-			   Change : in ARM_Output.Change_Type;
-			   Version : in ARM_Contents.Change_Version_Type := '0';
-			   Added_Version : in ARM_Contents.Change_Version_Type := '0';
-			   Location : in ARM_Output.Location_Type) is
-	-- Change the text format so that Bold, Italics, the font family,
-	-- the text size, and the change state are as specified.
-	-- Added_Version is only used when the change state is "Both"; it's
-	-- the version of the insertion; Version is the version of the (newer)
-	-- deletion.
+			   Format : in ARM_Output.Format_Type) is
+	-- Change the text format so that all of the properties are as specified.
 	-- Note: Changes to these properties ought be stack-like; that is,
 	-- Bold on, Italic on, Italic off, Bold off is OK; Bold on, Italic on,
 	-- Bold off, Italic off should be avoided (as separate commands).
 	use type ARM_Output.Change_Type;
 	use type ARM_Output.Location_Type;
 	use type ARM_Output.Size_Type;
+	-- Note: We ignore colors here, no colors in !Corrigendum markup.
     begin
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -1359,30 +1361,30 @@ package body ARM_Corr is
 		"Not in paragraph");
 	end if;
 
-	if not Bold and Output_Object.Is_Bold then
+	if not Format.Bold and Output_Object.Is_Bold then
 	    Buffer (Output_Object, '>');
 	    Output_Object.Is_Bold := False;
 	end if;
 
-	if not Italic and Output_Object.Is_Italic then
+	if not Format.Italic and Output_Object.Is_Italic then
 	    Buffer (Output_Object, '>');
 	    Output_Object.Is_Italic := False;
 	end if;
 
-	if Size /= Output_Object.Size then
+	if Format.Size /= Output_Object.Size then
 	    if Output_Object.Size /= 0 then
 	        Buffer (Output_Object, '>');
 	    end if;
 	end if;
 
-	if Location /= Output_Object.Location then
+	if Format.Location /= Output_Object.Location then
 	    if Output_Object.Location /= ARM_Output.Normal then
 	        --Buffer (Output_Object, '>');
 		null; -- Corrigendum doesn't support this.
 	    end if;
 	end if;
 
-	if ARM_Output."/=" (Font, Output_Object.Font) then
+	if ARM_Output."/=" (Format.Font, Output_Object.Font) then
 	    case Output_Object.Font is
 		when ARM_Output.Default => null;
 		when ARM_Output.Fixed =>
@@ -1395,8 +1397,8 @@ package body ARM_Corr is
 	end if;
 
 	-- For the intended purpose, there should be no Change commands.
-	if Change /= Output_Object.Change then
-	    if Change = ARM_Output.Both then
+	if Format.Change /= Output_Object.Change then
+	    if Format.Change = ARM_Output.Both then
 		-- Open only the one(s) needed:
 	        case Output_Object.Change is
 		    -- Note: Version is not used.
@@ -1414,7 +1416,7 @@ package body ARM_Corr is
 	        end case;
 	    elsif Output_Object.Change = ARM_Output.Both then
 		-- Close only the one(s) needed:
-	        case Change is
+	        case Format.Change is
 		    -- Note: Version is not used.
 		    when ARM_Output.Insertion =>
 			-- Close the deletion:
@@ -1440,7 +1442,7 @@ package body ARM_Corr is
 		        Buffer(Output_Object, ']');
 		        Buffer(Output_Object, '}');
 	        end case;
-	        case Change is
+	        case Format.Change is
 		    -- Note: Version is not used.
 		    when ARM_Output.Insertion =>
 		        Buffer(Output_Object, '{');
@@ -1453,10 +1455,10 @@ package body ARM_Corr is
 		        Buffer(Output_Object, '[');
 	        end case;
 	    end if;
-	    Output_Object.Change := Change;
+	    Output_Object.Change := Format.Change;
 	end if;
-	if ARM_Output."/=" (Font, Output_Object.Font) then
-	    case Font is
+	if ARM_Output."/=" (Format.Font, Output_Object.Font) then
+	    case Format.Font is
 		when ARM_Output.Default => null;
 		when ARM_Output.Fixed =>
 		    Buffer (Output_Object, "@fc<");
@@ -1465,11 +1467,11 @@ package body ARM_Corr is
 		when ARM_Output.Swiss =>
 		    Buffer (Output_Object, "@fa<");
 	    end case;
-	    Output_Object.Font := Font;
+	    Output_Object.Font := Format.Font;
 	end if;
 
-	if Location /= Output_Object.Location then
-	    case Location is
+	if Format.Location /= Output_Object.Location then
+	    case Format.Location is
 		when ARM_Output.Superscript =>
 		    --Buffer (Output_Object, "@+<");
 		    null; -- Corrigendum doesn't support this.
@@ -1479,23 +1481,23 @@ package body ARM_Corr is
 		when ARM_Output.Normal =>
 		    null;
 	    end case;
-	    Output_Object.Location := Location;
+	    Output_Object.Location := Format.Location;
 	end if;
 
-	if Size /= Output_Object.Size then
-	    if Size < 0 then
-		Buffer (Output_Object, "@s" & Character'Val(10+Size+Character'Pos('0')) & '<');
+	if Format.Size /= Output_Object.Size then
+	    if Format.Size < 0 then
+		Buffer (Output_Object, "@s" & Character'Val(10+Format.Size+Character'Pos('0')) & '<');
 	    else
-		Buffer (Output_Object, "@s1" & Character'Val(Size+Character'Pos('0')) & '<');
+		Buffer (Output_Object, "@s1" & Character'Val(Format.Size+Character'Pos('0')) & '<');
 	    end if;
-	    Output_Object.Size := Size;
+	    Output_Object.Size := Format.Size;
 	end if;
 
-	if Italic and (not Output_Object.Is_Italic) then
+	if Format.Italic and (not Output_Object.Is_Italic) then
 	    Buffer (Output_Object, "@i<");
 	    Output_Object.Is_Italic := True;
 	end if;
-	if Bold and (not Output_Object.Is_Bold) then
+	if Format.Bold and (not Output_Object.Is_Bold) then
 	    Buffer (Output_Object, "@b<");
 	    Output_Object.Is_Bold := True;
 	end if;

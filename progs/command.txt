@@ -198,6 +198,11 @@ HTML Output properties:
      If given in the master file, generate a single large file for
      the output, rather than one file per clause. If this is not given,
      smaller files are generated.
+@UseMSDOSFilenames
+     If given in the master file, use 8.3 MS-DOS style filenames.
+     In this case, the @FilePrefix must be less than 4 characters in size,
+     and no clause or subclause number should exceed 35
+     if @SingleHTMLOutputFile isn't given.
 @HTMLKind{Version=[3|4Comp|4],Unicode=[T|F]}
      Specifies the kind of HTML that will be output.
      If Version=3, HTML compatible with (virtually) all browsers will be
@@ -352,6 +357,10 @@ Text commands:
 @f{<text>} - Fixed-width font text.
 @shrink{<text>} - Text is one size smaller. (Typically 1 point smaller).
 @grow{<text>} - Text is one size larger. (Typically 1 point larger).
+@black{<text>} - Text is in a black color.
+@red{<text>} - Text is in a red color.
+@green{<text>} - Text is in a green color.
+@blue{<text>} - Text is in a blue color.
 @comment{<text>} - The text is a comment to the input files, and is ignored
 	     on output.
 @newpage   - Insert a page break. Ends a paragraph.
@@ -390,6 +399,8 @@ Text commands:
 @LabeledSectionNoBreak{<text>} - Start a labeled section (chapter). The
 	title will be "text". The formatter assigns section numbers. No page
 	break before it.
+@LabeledAnnex{<text>} - Start a labeled (unqualified) annex. The title
+	will be "text". The formatter assigns annex letters.
 @LabeledInformativeAnnex{<text>} - Start a labeled informative annex. The title
 	will be "text". The formatter assigns annex letters.
 @LabeledNormativeAnnex{<text>} - Start a labeled normative annex. The title
@@ -400,73 +411,85 @@ Text commands:
 	The formatter assigns subclause numbers.
 @LabeledSubSubClause{<text>} - Start a labeled subsubclause. The title will be "text".
 	The formatter assigns subsubclause numbers.
+@LabeledRevisedAnnex{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
+	Start a labeled (unqualified) annex. The title will be "new_text". If
+        we are generating an old version of the document, the title is "old_text"
+        instead. (Note that annex references in commands always use the
+        new_text name.) The formatter assigns annex letters. Version is the
+        version number of the change (see @ChgRef for details).
 @LabeledRevisedNormativeAnnex{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
 	Start a labeled normative annex. The title will be "new_text". If we
-        are generating an old version of the RM, the title is "old_text"
+        are generating an old version of the document, the title is "old_text"
         instead. (Note that annex references in commands always use the
         new_text name.) The formatter assigns annex letters. Version is the
         version number of the change (see @ChgRef for details).
 @LabeledRevisedInformativeAnnex{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
 	Start a labeled informative annex. The title will be "new_text". If we
-        are generating an old version of the RM, the title is "old_text"
+        are generating an old version of the document, the title is "old_text"
         instead. (Note that annex references in commands always use the
         new_text name.) The formatter assigns annex letters. Version is the
         version number of the change (see @ChgRef for details).
 @LabeledRevisedSection{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
         Start a labeled section (chapter). The title will be "new_text". If we are
-        generating an old version of the RM, the title is "old_text" instead.
+        generating an old version of the document, the title is "old_text" instead.
         (Note that clause references in commands always use the new_text name.)
         The formatter assigns clause numbers. Version is the version number of
         the change (see @ChgRef for details).
 @LabeledRevisedClause{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
         Start a labeled clause. The title will be "new_text". If we are
-        generating an old version of the RM, the title is "old_text" instead.
+        generating an old version of the document, the title is "old_text" instead.
         (Note that clause references in commands always use the new_text name.)
         The formatter assigns clause numbers. Version is the version number of
         the change (see @ChgRef for details).
 @LabeledRevisedSubClause{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
         Start a labeled subclause. The title will be "new_text". If we are
-	generating an old version of the RM, the title is "old_text" instead.
+	generating an old version of the document, the title is "old_text" instead.
 	(Note that clause references in commands always use the new_text name.)
         The formatter assigns subclause numbers. Version is the version number
         of the change (see @ChgRef for details).
 @LabeledRevisedSubSubClause{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
         Start a labeled subsubclause. The title will be "new_text". If we are
-	generating an old version of the RM, the title is "old_text" instead.
+	generating an old version of the document, the title is "old_text" instead.
 	(Note that clause references in commands always use the new_text name.)
         The formatter assigns subsubclause numbers. Version is the version number
         of the change (see @ChgRef for details).
 @LabeledAddedSection{Version=[<version>],Name=[<new_text>]} - Start a labeled
         section (chapter). The title will be "new_text". If we are generating an old
-	version of the RM, this clause does not exist. (Any clause references
+	version of the document, this clause does not exist. (Any clause references
 	ought to be in new text.) The formatter assigns clause numbers. Version
 	is the version number of the change (see @ChgRef for details).
 @LabeledAddedClause{Version=[<version>],Name=[<new_text>]} - Start a labeled
         clause. The title will be "new_text". If we are generating an old
-	version of the RM, this clause does not exist. (Any clause references
+	version of the document, this clause does not exist. (Any clause references
 	ought to be in new text.) The formatter assigns clause numbers. Version
 	is the version number of the change (see @ChgRef for details).
 @LabeledAddedSubClause{Version=[<version>],Name=[<new_text>]} - Start a labeled
         subclause. The title will be "new_text". If we are generating an old
-	version of the RM, this subclause does not exist. (Any subclause
+	version of the document, this subclause does not exist. (Any subclause
 	references ought to be in new text.) The formatter assigns subclause
         numbers. Version is the version number of the change (see @ChgRef for
         details).
 @LabeledAddedSubSubClause{Version=[<version>],Name=[<new_text>]} - Start a labeled
         subsubclause. The title will be "new_text". If we are generating an old
-	version of the RM, this subsubclause does not exist. (Any subsubclause
+	version of the document, this subsubclause does not exist. (Any subsubclause
 	references ought to be in new text.) The formatter assigns subsubclause
         numbers. Version is the version number of the change (see @ChgRef for
         details).
+@LabeledAddedAnnex{Version=[<version>],Name=[<new_text>]]} -
+	Start a labeled (unqualified) annex. The title will be "new_text". If we
+        are generating an old version of the document, this annex does not appear.
+        (Any annex references in commands ought to be "new text".) The
+        formatter assigns annex letters. Version is the
+        version number of the change (see @ChgRef for details).
 @LabeledAddedNormativeAnnex{Version=[<version>],Name=[<new_text>]]} -
 	Start a labeled normative annex. The title will be "new_text". If we
-        are generating an old version of the RM, this annex does not appear.
+        are generating an old version of the document, this annex does not appear.
         (Any annex references in commands ought to be "new text".) The
         formatter assigns annex letters. Version is the
         version number of the change (see @ChgRef for details).
 @LabeledAddedInformativeAnnex{Version=[<version>],Name=[<new_text>]} -
 	Start a labeled informative annex. The title will be "new_text". If we
-        are generating an old version of the RM, this annex does not appear.
+        are generating an old version of the document, this annex does not appear.
         (Any annex references in commands ought to be "new text".) The
         formatter assigns annex letters. Version is the
         version number of the change (see @ChgRef for details).
