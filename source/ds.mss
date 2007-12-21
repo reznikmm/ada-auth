@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.47 $ $Date: 2006/10/14 06:05:20 $ $Author: Randy $ }
+@comment{ $Revision: 1.48 $ $Date: 2007/12/21 06:19:12 $ $Author: Randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2006/10/14 06:05:20 $}
+@Comment{$Date: 2007/12/21 06:19:12 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -176,6 +176,7 @@ the following attribute is defined:
 @end{RunTime}
 
 @begin{Bounded}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00226-01]}
 @PDefn2{Term=(bounded error),Sec=(cause)}
 It is a bounded error for there to be cyclic elaboration dependences
 between the active partitions of a single distributed
