@@ -10,9 +10,9 @@
 @FilePrefix{UG}
 @ExampleFont{Fixed}
 @BodyFont{Roman}
-@NoteFormat{ISO2004}@Comment{Ditto}
-@ContentsFormat{ISO2004}@Comment{Ditto}
-@ListFormat{ISO2004}@Comment{Ditto}
+@NoteFormat{Ada95}@Comment{Not used}
+@ContentsFormat{Ada95}
+@ListFormat{Ada95}
 
 @Comment{RTF properties}
 @SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}
@@ -22,6 +22,7 @@
 
 @Comment{HTML properties}
 @Comment{Many small files are used, thus no @SingleHTMLOutputFile command}
+@UseMSDOSFileNames @Comment{Required by ACATS files}
 @HTMLKind{Version=[4],Unicode=[T]}
 @HTMLNavBar{RefName=[],SrchName=[],IndexName=[],
    UseButtons=[T],OnTop=[T],OnBottom=[T]}
@@ -29,7 +30,7 @@
 we have no search box.}
 @HTMLTabs{EmulateFixedOnly}
 @HTMLHeader{<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>ACATS 3.0 User's Guide</B></SPAN></DIV>
-<DIV Class="Normal"><I><B><A HREF="UG-TTL.html">Title Page</A></B></I></DIV>}
+<DIV Class="Normal"><I><B><A HREF="UG-TTL.htm">Title Page</A></B></I></DIV>}
 @HTMLFooter{}
 @HTMLColor{Text=[#000000],Background=[#FFFFE8],Link=[#0000FF],VLink=[#800080],ALink=[#FF0000]}
 

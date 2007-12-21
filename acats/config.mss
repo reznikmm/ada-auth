@@ -1,7 +1,7 @@
 @Part(config, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/config.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2007/12/19 01:09:29 $}
+@comment{$Revision: 1.3 $ $Date: 2007/12/20 07:43:55 $}
 
 @LabeledSection{Configuration Information}
 
@@ -442,7 +442,7 @@ gives the corresponding meaning:
 @table{Columns=[3],Alignment=[AllLeft],FirstColWidth=[1],LastColWidth=[3],
 NoBreak=[T],Border=[F],SmallSize=[F],
 Caption=[],
-Headers=[Position@\@\],
+Headers=[@b{Position}@\@b{Kind}@\@b{Meaning}],
 Body=[1@\Letter@\Test class (see Section @RefSecNum{Test Classes})
 2@\Hexadecimal@\AIG chapter containing the test objective
 3@\Hexadecimal@\Section within the above AIG chapter
@@ -603,13 +603,13 @@ Modern tests use different file name extensions (see @RefSecNum{Modern Naming}).
 
 
 @begin{Itemize}
-@Noprefix@;**RED**Note that legacy tests have not been renamed for ACATS 3.0. Since
-@LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}} includes some
+@Noprefix@red{@i{Note that legacy tests have not been renamed for ACATS 3.0.
+Since @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}} includes some
 organizational differences from
 @LocalLink{Target=[Ada83],Sec=[References],Text={[Ada83]}}, this means that the
 name of a legacy test sometimes will not correspond to the clause of
 @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}} in which the tested
-feature is described.**Unred**
+feature is described.}}
 @end{Itemize}
 
 
@@ -625,11 +625,11 @@ meaning:
 @table{Columns=[3],Alignment=[AllLeft],FirstColWidth=[1],LastColWidth=[3],
 NoBreak=[T],Border=[F],SmallSize=[F],
 Caption=[],
-Headers=[Position@\@\],
+Headers=[@b{Position}@\@b{Kind}@\@b{Meaning}],
 Body=[1@\Letter@\Test class; foundations are marked 'F'
 2@\Alphanumeric@\If other than an 'x', the section of @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}} describing the feature under test. An 'x' indicates that the test includes one or more features from an annex of @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}}
-3@\Alpha-numeric@\Core clause or annex letter identifier (either core or Specialized Needs Annex)
-4@\Hexadecimal@\Sub-clause (if a core test), or clause (if an annex test)
+3@\Alphanumeric@\Core clause or annex letter identifier (either core or Specialized Needs Annex); clauses are a hexidecimal value
+4@\Alphanumeric@\Sub-clause (if a core test), or clause (if an annex test); a number if less than 10, otherwise a letter with 10='A', 11='B', and so on
 5@\Alphanumeric@\Foundation identifier (alphabetic, unless no foundation is required, in which case a '0')
 6-7@\Decimal@\Sequence number of this test in a series of tests for the same clause; foundation code will have "00".
 8@\Alphanumeric@\@i{optional} @en Compilation sequence identifier @em indicates the suggested or required compilation order of multiple files that make up a single test (0 is compiled first). This position is used only if the test comprises multiple files.]}
