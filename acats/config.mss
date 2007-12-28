@@ -1,7 +1,7 @@
 @Part(config, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/config.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2007/12/20 07:43:55 $}
+@comment{$Revision: 1.4 $ $Date: 2007/12/21 07:17:59 $}
 
 @LabeledSection{Configuration Information}
 
@@ -942,7 +942,8 @@ To conserve space and ease downloading, all files in the delivered ACATS 3.0
 compressed. Except as noted, decompressed files
 (see Section @RefSecNum{Guide to Decompressing Files}) use only
 ASCII characters. A few tests use Unicode characters. Some of the documentation
-files are provided in PDF and/or HTML form for greater readability. Other than
+files are provided in PDF and/or HTML form for greater readability. (The HTML
+documentation files include GIF and PNG graphics files.) Other than
 the documentation files, no formatting control characters, rulers or other
 information intended for editors or display programs are included in the files.
 

@@ -1,7 +1,7 @@
-@Part(using, Root="acats.msm")
+1@Part(using, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/using.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2007/12/20 07:43:55 $}
+@comment{$Revision: 1.3 $ $Date: 2007/12/21 07:17:59 $}
 
 @LabeledSection{Using the ACATS}
 
@@ -462,3 +462,731 @@ Report.
 
 Modifications to Report must receive advance approval from the ACAL (and, if
 necessary, the ACAA) before use in a conformity assessment.
+
+
+@LabeledSubClause{Allowed Test Modifications}
+
+Class B tests have one or more errors that implementations must identify. These
+tests are structured such that, normally, implementations can report all
+included errors. Occasionally, an implementation will fail to find all errors
+in a B-test because it encounters a limit (e.g., error cascading, resulting in
+too many error reports) or is unable to recover from an error. In such cases, a
+user may split a single B-test into two or more tests. The resulting tests must
+contain all of the errors included in the original test, and they must adhere
+as closely as possible to the style and content of the original test. Very
+often, the only modification needed is to comment out earlier errors so that
+later errors can be identified. In some cases, code insertion will be required.
+An implementation @i{must} be able to demonstrate that it can detect and report
+@i{all} intended B-test errors.
+
+Splits may also be required in executable tests, if, for example, an
+implementation capacity limitations is encountered (e.g., a number of generic
+instantiations too large for the implementation). In very exceptional cases,
+tests may be modified by the addition of a length clause (to alter the default
+size of a collection), or by the addition of an elaboration Pragma (to force an
+elaboration order).
+
+Tests that use configuration pragmas (see @RefSecNum{Tests that use Configuration Pragmas})
+may require modification since the method of processing configuration pragmas
+is implementation dependent.
+
+Some tests include foreign language code (Fortran, C, or COBOL). While the
+features used should be acceptable to all Fortran, C, and COBOL
+implementations, respectively, some implementations may require modification to
+the non-Ada code. Modifications must, of course, preserve the input-output
+semantics of the (foreign language) subprogram; otherwise, the ACATS test will
+report a failure.
+
+All splits and modifications must be approved in advance by the ACAL (and, if
+necessary, the ACAA) before they are used in a conformity assessment. It is the
+responsibility of the user to propose a B-test split that satisfies the
+intention of the original test. Modified tests should be named by appending an
+alphanumeric character to the name of the original test. When possible, line
+numbers of the original test should be preserved in the modification.
+
+All tests must be submitted to the compiler as distributed (and customized, if
+required). If a test is executable (class A, C, D, E) and compiles
+successfully, then it must be run. Modified tests or split tests may be
+processed next. Only the results of the modified tests will be graded.
+
+If the ACAA has issued an ACATS Modification List (see
+Section @RefSecNum{Contents of the ACATS Delivery}), then the
+required modifications must be made. The permitted modifications may be made if
+desired (or if necessary for the particular implementation).
+
+
+@LabeledClause{Processing the Support Files}
+
+After all the files identified in
+Section @RefSecNum{Tailoring the ACATS Test Suite}
+have been customized as needed and required, the support files can be processed
+and the reporting mechanism can be verified.
+
+
+@LabeledSubClause{Support Files}
+
+@Leading@;The following files are necessary to many of the
+@Defn{Support Files}ACATS tests.
+Implementations that maintain program libraries may wish to compile them into
+the program library used for conformity assessment:
+
+@table{Columns=[2],Alignment=[AllLeft],FirstColWidth=[1],LastColWidth=[2],
+NoBreak=[T],Border=[F],SmallSize=[F],
+Caption=[],
+Headers=[],
+Body=[@exam{repspec.ada}@\@exam{repbody.ada}
+@exam{impdef.a}@\@exam{impdefc.a} @i{(if testing Annex C)}
+@exam{fcndecl.ada}@\@exam{impdefd.a} @i{(if testing Annex D)}
+@exam{checkfil.ada}@\@exam{impdefe.a} @i{(if testing Annex E)}
+@exam{lencheck.ada}@\@exam{impdefg.a} @i{(if testing Annex G)}
+@exam{enumchek.ada}@\@exam{impdefh.a} @i{(if testing Annex H)}
+@exam{tctouch.ada}@\@exam{spprt13s.adt} @i{(after macro substitution)}]}
+
+Depending on local requirements and strategy, it may also be convenient to
+compile all foundation code into the program library as well.
+
+
+@LabeledSubClause{"CZ" Acceptance Tests}
+
+Four tests having names beginning "CZ" are part of the ACATS suite. Unlike
+other tests in the suite, they do not focus on Ada language features. Instead,
+they are intended primarily to verify that software needed for the correct
+execution of the test suite works as expected and required. They check, for
+example, to see that package Report and package TCTouch work correctly.
+
+All CZ tests must execute correctly and exhibit the prescribed behavior for a
+successful conformity assessment. CZ tests must be processed and run as the
+first step of a conformity assessment to ensure correct operation of the
+support software.
+
+The acceptance test CZ1101A tests the correct operation of package Report's
+reporting facilities, including checks that Not_Applicable and Failed calls are
+reported properly, and that premature calls cause failure. Therefore, CZ1101A
+will print some failure messages when it is executed. The presence of these
+messages does @i{not} necessarily mean the test has failed. A listing of the
+expected output for CZ1101A is included in @RefSec{Results of CZ Tests}
+(times and dates in the actual output will differ).
+
+The acceptance test CZ1102A tests the correct operation of the dynamic value
+routines in Report. This test should report "PASSED"; any other result
+constitutes a test failure.
+
+The acceptance test CZ1103A ensures the correct operation of procedure
+Checkfile. (Some of the executable file I/O tests use a file checking procedure
+named Checkfile that determines an implementation's text file characteristics.
+The source code for this procedure is in the file checkfil.ada.) CZ1103A
+checks whether errors in text files are properly detected, therefore, CZ1103A
+will print some failure messages when it is executed. The presence of these
+messages does @i{not} necessarily mean the test has failed. A listing of the
+expected output for CZ1103A is included in @RefSec{Results of CZ Tests} (times
+and dates in the actual output will differ).
+
+The acceptance test CZ00004 produces output that verifies the intent of the
+conformity assessment. It relies on ImpDef having been correctly updated for
+the conformity assessment and produces output identifying the annexes (if any)
+that will be included as part of the conformity assessment. This test also
+checks for the proper operation of the TCTouch package, includes checks that
+assertion failures are reported properly, therefore CZ00004 will print some
+failure messages when it is executed. The presence of these messages does
+@i{not} necessarily mean the test has failed. A listing of the expected output
+for CZ00004 is included in @RefSec{Results of CZ Tests}; since this output
+includes values from the customized impdef, non-failure lines may vary from
+those in the expected output. However, the number of lines and their relative
+positions may not change.
+
+
+@LabeledClause{Establishing Command Scripts}
+
+Users will often find it convenient to run large numbers of ACATS tests with
+command scripts. This section discusses some of the issues to be considered in
+developing a script.
+
+
+@LabeledSubClause{Command Scripts}
+
+All compiler options and switches that are appropriate and necessary to run the
+ACATS tests must be identified and included in commands that invoke the
+compiler. The same is true for the binder or any other post-compilation tools.
+Any implementation dependent processing of partitions, configuration pragmas,
+and strict mode processing must be part of the scripts for running tests that
+rely on these features.@Defn{command script}@Defn{batch file}
+
+A script should compile (only) all class B tests. It should compile and bind
+all class L tests; if link errors are not explicitly given, the script should
+attempt to execute the L tests. It should compile all class F files. It should
+compile, bind, and execute all class A, C, D, and E tests.
+
+Sample commands for processing the ACATS are a required part of a formal Ada
+Comformity Assessment Report. If a test report is available for the
+implementation being tested, these commands can be used as a guideline for
+developing command scripts.
+
+
+@LabeledSubClause{Dependencies}
+
+A command script must take account of all required dependencies. As noted
+earlier, some tests are composed of multiple test files. Also, some tests
+include foundation code, which may be used by other tests. If a foundation is
+not already in the environment, it must be compiled as part of building the
+test. All files that are used in a test must be compiled in the proper order,
+as indicated by the file name. For implementations that require the extraction
+individual compilation units from test files before submission to the compiler,
+the individual units must be submitted to the compiler in the same order in
+which they appear in the file.
+
+
+@LabeledClause{Processing ACATS Tests}
+
+After the ACATS tests and support code has been installed and all required
+modifications and preliminary processing have been completed, the suite can be
+processed by an implementation. This section describes the tests required for
+conformity assessment, required partitioning, how tests may be bundled for
+efficiency, and certain processing that may be streamlined. It also describes
+how the suite has been organized to allow a user to focus on specific
+development needs.
+
+
+@LabeledSubClause{Required Tests}
+
+An implementation may be tested against the core language only or the core
+language plus one or more Specialized Needs Annexes. All core tests (except as
+noted in @RefSecNum{Processing that may be Omitted}) must be processed with
+acceptable results for conformity assessment of the core language. All legacy
+tests, as well as all newer tests for clauses 2-13 and annexes A and B are core
+tests. Conformity assessment including one or more Specialized Needs Annexes
+requires that all tests for the annex(es) in question be correctly processed in
+addition to all core tests
+
+Tests that are not applicable to an implementation (e.g., because of size
+limitations) and tests that report "NOT APPLICABLE" when run by an
+implementation must nevertheless be processed and demonstrate appropriate
+results.
+
+Tests that are withdrawn on the current ACATS Modification List as maintained
+by the ACAA need not be processed.
+
+
+@LabeledSubClause{Test Partitions}
+
+Unless otherwise directed by the Special Requirements section of a test, all
+tests are to be configured and run in a single partition. The method of
+specifying such a partition is implementation dependent and not determined by
+the ACATS. The only tests that must be run in multiple partitions are those
+that test Annex E, Distributed Systems.
+
+
+@LabeledSubClause{Bundling Test Programs}
+
+In some situations, the usual test processing sequence may require an
+unacceptable amount of time. For example, running tests on an embedded target
+may impose significant overhead time to download individual tests. In these
+cases, executable tests may be bundled into aggregates of multiple tests. A set
+of bundled tests will have a driver that calls each test in turn; ACATS tests
+will then be called procedures rather than main procedures. No source changes
+in the tests are allowed when bundling; that is, the only allowed change is the
+method of calling the test.
+
+All bundles must be approved by the ACAL (and, if necessary, the ACAA) to
+qualify for a conformity assessment. It is the responsibility of the user to
+identify the tests to be bundled and to write a driver for them.
+
+
+@LabeledSubClause{Processing that may be Omitted}
+
+A user may streamline processing of the ACATS tests to the greatest degree
+possible consistent with complete processing of all tests.
+
+Many Ada95 tests rely on foundation code. A foundation need not be compiled
+anew each time a different test uses it. In a processing model based on a
+program library, it is reasonable to compile the code into the library only
+once and allow the binder to use the processed results for each test that
+@b{with}s the foundation.
+
+A user may determine, with ACAL concurrence, that some tests require support
+that is impossible for the implementation under test to provide. For example,
+there are tests that assume the availability of file I/O whereas some (embedded
+target) implementations do not support file I/O. Those tests need not be
+processed during witness testing; however, the implementer must demonstrate
+that they are handled in accordance with the language standard. This
+demonstration may be performed before witness testing, in which case it need
+not be repeated.
+
+Annex B tests that require foreign language code (Fortran, C, COBOL) to be
+compiled and bound with Ada code need not be processed if an implementation
+does not support a foreign language interface to the respective language.
+
+Tests for the Specialized Needs Annexes of Ada need not be processed except
+by implementations that wish to have Annex results documented. In that case,
+only the tests for the annex in question (in addition to all core tests) need
+be processed. If any tests for a particular Annex are processed, then all tests
+for that Annex must be processed. If an implementation does not support a
+feature in a Specialized Needs Annex test, then it must indicate the
+non-support by rejecting the test at compile time or by raising an appropriate
+exception at run time.
+(See @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}} 1.1.3(17).)
+
+No withdrawn test need be processed. Tests classified as Pending New in the
+current ACATS Modification List also do not need to be processed. (Pending New
+tests are new tests included with the ACATS for review purposes, and are not
+yet required for conformity assessment).
+
+@LabeledSubClause{Tests with Special Processing Requirements}
+
+Some tests may require special handling. These are primarily SNA tests, but
+some core tests are affected. For example, distributed processing tests may
+require an executable image in multiple partitions, where partitions are
+constructed in an implementation specific manner. Real-time processing tests
+may have configuration pragmas that have to be handled in an implementation
+specific way. Numeric Processing tests require strict mode processing to be
+selected. Each such test has a Special Requirements section in the test header
+describing any implementation specific handling that is required for the test.
+
+A list of all such tests is provided in @RefSec{Tests With Special Requirements}.
+
+
+@LabeledSubSubClause{Tests Involving Limited Views}
+
+@LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}} added the
+concept of limited views to Ada. For most ACATS tests, the possibility of
+limited views can be ignored, as either they are not used at all, or they
+need not be separated from the full view in the environment. (It is presumed
+that adding the full view to the environment also adds the corresponding
+limited view.)
+
+However, a few tests require that the limited view of a unit
+be added to the environment separately from the full view of the unit. Such
+tests have dependencies in the full views on units that have not yet been
+compiled (added to the environment). For these tests, any extra steps needed
+to add the limited view to the environment separately from the full view
+will need to be accomplished.
+
+The tests identified below need to add the limited view of one or more units
+to the environment separately from the full view of the units.
+
+@begin{FourCol}
+ca11023@*
+ca12001
+@end{FourCol}
+
+
+@LabeledSubSubClause{Foreign Language Interface Tests}
+
+Annex B, Interface to Other Languages, is part of the Ada95 core language. Any
+implementation that provides one or more of the packages Interfaces.C,
+Interfaces.COBOL, or Interfaces.Fortran @i{must} correctly process, and pass,
+the tests for interfaces to C, COBOL, and/or Fortran code respectively, with
+the possible exception of tests containing actual foreign code.
+
+An implementation that provides one or more of these Interfaces child packages
+must successfully compile the Ada units of tests with actual foreign language
+code. If the implementation does not support the actual binding of the foreign
+language code to Ada, these tests may report binding errors, or may reject the
+pragma Import, in which case they may be graded as inapplicable. If the
+implementation supports the binding and an appropriate compiler is available,
+the tests must execute and report "Passed". If the implementation supports the
+binding, but it is not feasible to have an appropriate compiler available, then
+the tests may be graded as inapplicable by demonstrating that they fail to
+bind.
+
+If one of the Interfaces child packages is not provided, then the corresponding
+tests may be graded as inapplicable, provided they reject the corresponding
+@key[with] clause.
+
+The tests involving interfaces to foreign code are listed below.
+
+The foreign language code included in ACATS tests uses no special or unique
+features, and should be accepted by any standard (C, COBOL, or Fortran)
+compiler. However, there may be dialect problems that prevent the code from
+compiling correctly. Modifications to the foreign language code are allowable;
+the modifications must follow the code as supplied as closely as possible and
+the result must satisfy the requirements stated in the file header. Such
+modifications must be approved in advance by the ACAL (and, if necessary, the
+ACAA).
+
+The method for compiling foreign code is implementation dependent and not
+specified as part of the ACATS. Ada code in these tests must be compiled as
+usual. The Ada code includes Pragma Import that references the foreign language
+code. The link name of foreign language object code must be provided in ImpDef.
+When all code has been compiled, the test must be bound (including the foreign
+language object code) and run. The method for binding Ada and foreign language
+code is implementation dependent and not specified as part of the ACATS. The
+test must report "PASSED" when executed.
+
+
+@Subheading{@Shrink{C Language Interface}}
+
+If the implementation provides the package Interfaces.C, the tests identified
+below must be satisfactorily processed as described above.
+
+The starred tests contain C code that must be compiled and linked if possible,
+as described above. The C code is easily identifiable because the file has the
+extension @Exam{.C}. The C code may be modified to satisfy dialect requirements of
+the C compiler. The C code files must be compiled through a C compiler, and the
+resulting object code must be bound with the compiled Ada code. Pragma Import
+will take the name of the C code from ImpDef.
+
+@begin{FourCol}
+CD30005*@*
+cxb3001@*
+cxb3002@*
+cxb3003@*
+cxb3004*@*
+cxb3005@*
+cxb3006*@*
+cxb3007@*
+cxb3008@*
+cxb3009@*
+cxb3010@*
+cxb3011@*
+cxb3012@*
+cxb3013*@*
+cxb3014@*
+cxb3015@*
+cxb3016
+@end{FourCol}
+
+
+@Subheading{@Shrink{COBOL Language Interface}}
+
+If the implementation provides the package Interfaces.COBOL, the tests
+identified below must be processed satisfactorily, as described above.
+
+The starred test contains COBOL code that must be compiled and linked if
+possible, as described above. The COBOL code is easily identifiable because the
+file has the extension @exam{.CBL}. The COBOL code may be modified to satisfy
+dialect requirements of the COBOL compiler. The COBOL code files must be
+compiled through a COBOL compiler, and the resulting object code must be bound
+with the compiled Ada code. Pragma Import will take the name of the COBOL code
+from ImpDef.
+
+@begin{FourCol}
+cxb4001@*
+cxb4002@*
+cxb4003@*
+cxb4004@*
+cxb4005@*
+cxb4006@*
+cxb4007@*
+cxb4008@*
+cxb4009*
+@end{FourCol}
+
+
+@Subheading{@Shrink{Fortran Language Interface}}
+
+If the implementation has a Fortran language interface, the tests identified
+below must be processed satisfactorily, as described above.
+
+The starred tests contain Fortran code that must be compiled and linked if
+possible, as described above. The Fortran code is easily identifiable because
+the file has the extension @exam{.FTN}. The Fortran code may be modified to
+satisfy dialect requirements of the Fortran compiler. The Fortran code files
+must be compiled through a Fortran compiler, and the resulting object code must
+be bound with the compiled Ada code. Pragma Import will take the name of the
+Fortran code from ImpDef.
+
+@begin{FourCol}
+cxb5001@*
+cxb5002@*
+cxb5003@*
+cxb5004*@*
+cxb5005*
+@end{FourCol}
+
+
+@LabeledSubSubClause{Tests for the Distributed Processing Annex}
+
+The ACATS tests for the Distribution Annex are applicable only to
+implementations that wish to test this SNA. Not all of these tests apply to all
+implementations, since the annex includes some implementation permissions that
+affect the applicability of some tests.
+
+@leading@;The principal factors affecting test applicability are:
+@begin{enumerate}
+whether the Remote_Call_Interface pragma is supported;
+
+whether a Partition Communication System (PCS) is provided (i.e., whether a
+body for System.RPC is provided by the implementation);
+
+whether the implementation has taken advantage of the permission to change
+the specification of System.RPC;
+
+whether the Real-Time Annex is also supported.
+@end{enumerate}
+
+An implementation may test for the annex without providing a PCS. In order to
+test for the Distribution Annex, an implementation must allow a body for
+System.RPC to be compiled.
+
+
+@Subheading{@Shrink{Remote_Call_Interface pragma}}
+
+@leading@;Ada allows explicit message-based communication between
+active partitions as an alternative to RPC
+[see @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}} E.2.3(20)].
+If an implementation does not support the
+Remote_Call_Interface pragma then the following tests are not applicable:
+
+@begin{FourCol}
+bxe2009@*
+bxe2010@*
+bxe2011@*
+bxe2013@*
+bxe4001@*
+cxe2001@*
+cxe2002@*
+cxe4001@*
+cxe4002@*
+cxe4003@*
+cxe4004@*
+cxe4005@*
+cxe4006@*
+cxe5002@*
+cxe5003@*
+lxe3001
+@end{FourCol}
+
+
+@Subheading{@Shrink{Partition Communication System}}
+
+@leading@;An implementation is not required to provide a PCS
+[see @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}} E.5(27)] in
+order to test the Distribution Annex. If no PCS is provided then the following
+tests are not applicable:
+
+@begin{FourCol}
+cxe1001@*
+cxe2001@*
+cxe4001@*
+cxe4002@*
+cxe4003@*
+cxe4004@*
+cxe4005@*
+cxe4006@*
+cxe5001
+@end{FourCol}
+
+
+@Subheading{@Shrink{System.RPC}}
+
+@leading@;Two tests provide a body for System.RPC, and a third test
+checks the specification of System.RPC. An alternative declaration
+is allowed
+for package System.RPC [see @LocalLink{Target=[Amend1],Sec=[References],
+Text={[Amend1]}} E.5(27.1/2)]. If an alternative declaration is used
+for System.RPC, the following tests are not applicable:
+
+@begin{FourCol}
+cxe5001@*
+cxe5002@*
+cxe5003
+@end{FourCol}
+
+
+@Subheading{@Shrink{Real-Time Annex Support}}
+
+Many implementations that support the Distribution Annex will also support the
+Real-Time Annex. Test cxe4003 is designed to take advantage of Real-Time Annex
+features in order to better test the Distribution Annex.
+
+For implementations that do not support the Real-Time Annex, test cxe4003 must
+be modified. This modification consists of deleting all lines that end with the
+comment @exam{--RT}.
+
+
+@Subheading{@Shrink{Configuring Multi-Partition Tests}}
+
+Some Distribution Annex tests require multiple partitions to run the test, but
+no more than two partitions are required for running any of them. All
+multi-partition tests contain a main procedure for each of the two partitions.
+The two partitions are referred to as "A" and "B" and the main procedures for
+these partitions are named <test_name>_A and <test_name>_B respectively. Each
+test contains instructions naming the compilation units to be included in each
+partition. Most implementations will be primarily concerned with the main
+procedure and RCI packages that are to be assigned to each partition; the
+remainder of the partition contents will be determined by the normal dependency
+rules. The naming convention used in multi-partition tests aid in making the
+partition assignments. If the name of a compilation unit ends in
+"_A<optional_digit]>" then it should be assigned to partition A. Compilation
+units with names ending in "_B<optional_digit>" should be assigned to partition
+B.
+
+@leading@;The following tests require that two partitions be available to run
+the test:
+
+@begin{FourCol}
+cxe1001@*
+cxe2001*@*
+cxe2002@*
+cxe4001@*
+cxe4002@*
+cxe4003@*
+cxe4004@*
+cxe4005@*
+cxe4006@*
+cxe5002@*
+cxe5003@*
+lxe3001@*
+lxe3002*
+@end{FourCol}
+
+(*) Tests cxe2001 and lxe3002 contain a Shared_Passive package and two active
+partitions. They may be configured with either two or three partitions. The
+two-partition configuration must have two active partitions and the
+Shared_Passive package may be assigned to either one of the active partitions.
+The three-partition configuration consists of two active partitions and a
+single passive partition, and the passive partition will contain the single
+Shared_Passive package.
+
+
+@Subheading{@Shrink{Running Multi-Partition Tests}}
+
+All of the multi-partition tests include the package Report in both of the
+active partitions. In order for the test to pass, both partitions must produce
+a passed message (except for lxe3002 - see special instructions for that test).
+If either partition produces a failed message, or if one or both partitions do
+not produce a passed message, the test is graded "failed".
+
+When running the multi-partition tests it is not important which partition is
+started first. Generally, partition A acts as a server and partition B is a
+client, so starting partition A first is usually best.
+
+In the event a test fails due to the exception Communication_Error being
+raised, it is permissible to rerun the test.
+
+
+@LabeledSubSubClause{Tests for the Numerics Annex}
+
+@leading@;Many of the tests for Annex G, Numerics, @i{must} be run in strict
+mode. The method for selecting strict mode is implementation dependent and not
+specified by the ACATS. (Note that the tests for numerical functions specified
+in Annex A may, @i{but need not}, be run in strict mode.) The following tests
+must be run in strict mode:
+
+@begin{FourCol}
+cxg2003@*
+cxg2004@*
+cxg2006@*
+cxg2007@*
+cxg2008@*
+cxg2009@*
+cxg2010@*
+cxg2011@*
+cxg2012@*
+cxg2013@*
+cxg2014@*
+cxg2015@*
+cxg2016@*
+cxg2017@*
+cxg2018@*
+cxg2019@*
+cxg2020@*
+cxg2021
+@end{FourCol}
+
+
+@LabeledSubSubClause{Tests that use Configuration Pragmas}
+
+@leading@;Several of the tests in Annex D, Real Time Processing, Annex E,
+Distributed Processing, and Annex H, High Integrity Systems, use configuration
+pragmas. The technique for applying a configuration pragma to a test composed
+of multiple compilation units is implementation dependent and not specified by
+the ACATS. Every implementation that uses any such test in a conformity
+assessment must therefore take the appropriate steps, which may include
+modifications to the test code and/or post-compilation processing, to ensure
+that such a pragma is correctly applied. The following tests require special
+processing of the configuration pragma:
+
+@begin{FourCol}
+ba15001@*
+bxc5001@*
+bxh4001@*
+bxh4002@*
+bxh4003@*
+bxh4004@*
+bxh4005@*
+bxh4006@*
+bxh4007@*
+bxh4008@*
+bxh4009@*
+bxh4010@*
+bxh4011@*
+bxh4012@*
+bxh4013@*
+cxd1004@*
+cxd1005@*
+cxd2001@*
+cxd2002@*
+cxd2003@*
+cxd2004@*
+cxd2005@*
+cxd2006@*
+cxd2007@*
+cxd2008@*
+cxd3001@*
+cxd3002@*
+cxd3003@*
+cxd4001@*
+cxd4003@*
+cxd4004@*
+cxd4005@*
+cxd4006@*
+cxd4007@*
+cxd4008@*
+cxd4009@*
+cxd4010@*
+cxd5002@*
+cxd6002@*
+cxd6003@*
+cxda003@*
+cxdb005@*
+cxh1001@*
+cxh3001@*
+cxh3003@*
+lxd7001@*
+lxd7003@*
+lxd7004@*
+lxd7005@*
+lxd7006@*
+lxd7007@*
+lxd7008@*
+lxd7009@*
+lxh4001@*
+lxh4002@*
+lxh4003@*
+lxh4004@*
+lxh4005@*
+lxh4006@*
+lxh4007@*
+lxh4008@*
+lxh4009@*
+lxh4010@*
+lxh4011@*
+lxh4012@*
+lxh4013
+@end{FourCol}
+
+
+@LabeledSubClause{Focus on Specific Areas}
+
+The ACATS test suite is structured to allow compiler developers and testers to
+use parts of the suite to focus on specific compiler feature areas.
+
+Both the legacy tests and the newer tests tend to focus on specific language
+features in individual tests. The name of the test is generally a good
+indicator of the primary feature content of the test, as explained in the
+discussion of naming conventions. Beware that legacy test names have not
+changed, but the Ada Reference Manual organization has changed from
+@LocalLink{Target=[Ada83],Sec=[References],Text={[Ada83]}} to
+@LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}}, so some legacy
+test names point to the wrong clause of the Ada Standard.
+Further, note that the general style and approach of the newer tests creates
+user-oriented test situations by including a variety of features and
+interactions. Only the primary test focus can be indicated in the test name.
+
+ACATS 3.0 tests are divided into core tests and Specialized Needs Annex tests.
+Recall that annexes A and B are part of the core language. All annex tests
+(including those for annexes A and B) have an 'X' as the second character of
+their name; Specialized Needs Annex tests have a letter between 'C' and 'H'
+(inclusive) corresponding to the annex designation, as the third character of
+the test name.

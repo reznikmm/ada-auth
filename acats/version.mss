@@ -1,40 +1,191 @@
 @Part(version, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/version.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2007/12/19 01:09:30 $}
+@comment{$Revision: 1.3 $ $Date: 2007/12/21 07:17:59 $}
 
 @LabeledAnnex{Version Description}
 
 
 *** TBD ***
 
-ACATS 2.6 includes 3709 tests in 4247 files, not including foundation and other
+ACATS 3.0 includes 3771 tests in 4387 files, not including foundation and other
 support units. From Version 2.6 to 3.0, 79 tests were added, comprising 162
-files (including five foundation files). 28 tests (28 files) were modified. Two
-support files also were modified. Three tests (3 files) were removed.
+files (including five foundation files). 73 tests (78 files) were modified. Two
+support files also were modified, and one was removed.
+17 tests (19 files) were removed. 15 documentation files were replaced by
+@b{xxx!!} new documentation files.
 
 The following sections present a detailed description of ACATS 3.0, as follows:
 
 *** TBD RefSec ***
 
-@RefSec{Test files added since ACATS 2.6}
+@RefSec{Tests With Special Requirements}
 
-@RefSec{Documentation files added since ACATS 2.6}
+@RefSec{Test Files Added Since ACATS 2.6}
 
-@RefSec{Test files modified since ACATS 2.6}
+@RefSec{Documentation Files Added Since ACATS 2.6}
 
-@RefSec{Support files modified since ACATS 2.6}
+@RefSec{Test Files Modified Since ACATS 2.6}
 
-@RefSec{Test files deleted since ACATS 2.6}
+@RefSec{Support Files Modified Since ACATS 2.6}
 
-@RefSec{Other files deleted since ACATS 2.6}
+@RefSec{Test Files Deleted Since ACATS 2.6}
+
+@RefSec{Other Files Deleted Since ACATS 2.6}
 
 *** TBD: Complete lists of tests ***
 
 
-@LabeledClause{Test files added since ACATS 2.6}
+@LabeledClause{Tests With Special Requirements}
 
-The following test files are new in ACATS 3.0:
+The tests listed in this section have special processing requirements that are
+described in the internal test commentary.
+
+@begin{FourCol}
+ba15001@*
+bxc5001@*
+bxh4001@*
+bxh4002@*
+bxh4003@*
+bxh4004@*
+bxh4005@*
+bxh4006@*
+bxh4007@*
+bxh4008@*
+bxh4009@*
+bxh4010@*
+bxh4011@*
+bxh4012@*
+bxh4013@*
+ca11023@*
+ca12001@*
+cd30005@*
+cxb3004@*
+cxb3006@*
+cxb3008@*
+cxb3013@*
+cxb4009@*
+cxb5004@*
+cxb5005@*
+cxc3001@*
+cxc3003@*
+cxc3004@*
+cxc3006@*
+cxc3008@*
+cxd1004@*
+cxd1005@*
+cxd2001@*
+cxd2002@*
+cxd2003@*
+cxd2004@*
+cxd2006@*
+cxd2007@*
+cxd2008@*
+cxd3001@*
+cxd3002@*
+cxd3003@*
+cxd4001@*
+cxd4003@*
+cxd4004@*
+cxd4005@*
+cxd4006@*
+cxd4007@*
+cxd4008@*
+cxd4009@*
+cxd4010@*
+cxda003@*
+cxda004@*
+cxe1001@*
+cxe2001@*
+cxe2002@*
+cxe4001@*
+cxe4002@*
+cxe4003@*
+cxe4004@*
+cxe4005@*
+cxe4006@*
+cxe5002@*
+cxe5003@*
+cxg1002@*
+cxg1005@*
+cxg2002@*
+cxg2003@*
+cxg2004@*
+cxg2006@*
+cxg2007@*
+cxg2008@*
+cxg2009@*
+cxg2010@*
+cxg2011@*
+cxg2012@*
+cxg2013@*
+cxg2014@*
+cxg2015@*
+cxg2016@*
+cxg2017@*
+cxg2018@*
+cxg2019@*
+cxg2020@*
+cxg2021@*
+cxg2022@*
+cxg2023@*
+cxg2024@*
+cxh1001@*
+cxh3001@*
+cxh3003@*
+la14001@*
+la14002@*
+la14003@*
+la14004@*
+la14005@*
+la14006@*
+la14007@*
+la14008@*
+la14009@*
+la14010@*
+la14011@*
+la14012@*
+la14013@*
+la14014@*
+la14015@*
+la14016@*
+la14017@*
+la14018@*
+la14019@*
+la14020@*
+la14021@*
+la14022@*
+la14024@*
+la14025@*
+la14026@*
+la14027@*
+la20001@*
+lc30001@*
+lc30002@*
+lc30003@*
+lxd7009@*
+lxe3001@*
+lxe3002@*
+lxh4001@*
+lxh4002@*
+lxh4003@*
+lxh4004@*
+lxh4005@*
+lxh4006@*
+lxh4007@*
+lxh4008@*
+lxh4009@*
+lxh4010@*
+lxh4011@*
+lxh4012@*
+lxh4013@*
+lxh4014
+@end{FourCol}
+
+
+@LabeledClause{Test Files Added Since ACATS 2.6}
+
+@leading@;The following test files are new in ACATS 3.0:
 
 @begin{FourCol}
 b393008.a@*
@@ -204,18 +355,18 @@ la200033.am
 @end{FourCol}
 
 
-@LabeledClause{Documentation files added since ACATS 2.6}
+@LabeledClause{Documentation Files Added Since ACATS 2.6}
 
-The following documentation files are new in ACATS 3.0:
+@leading@;The following documentation files are new in ACATS 3.0:
 
 @begin{FourCol}
 *** TBD ***
 @end{FourCol}
 
 
-@LabeledClause{Test files modified since ACATS 2.6}
+@LabeledClause{Test Files Modified Since ACATS 2.6}
 
-The following test files have been modified from their ACATS 2.6 versions:
+@leading@;The following test files have been modified from their ACATS 2.6 versions:
 
 @begin{FourCol}
 b34005q.ada@*
@@ -292,13 +443,16 @@ cdd2a03.a@*
 cxac005.a@*
 cxb3012.a@*
 cxc7001.a@*
+cxe5001.a@*
+cxe5002.a@*
+cxe5003.a@*
 fa21a00.a
 @end{FourCol}
 
 
-@LabeledClause{Support files modified since ACATS 2.6}
+@LabeledClause{Support Files Modified Since ACATS 2.6}
 
-The following support files have been modified from their ACATS 2.6 versions:
+@leading@;The following support files have been modified from their ACATS 2.6 versions:
 
 @begin{FourCol}
 repbody.ada@*
@@ -306,7 +460,7 @@ tctouch.ada
 @end{FourCol}
 
 
-@LabeledClause{Test files deleted since ACATS 2.6}
+@LabeledClause{Test Files Deleted Since ACATS 2.6}
 
 The following test files were present in ACATS 2.6 but do not appear in ACATS
 3.0:
@@ -334,10 +488,10 @@ c99004a.ada
 @end{FourCol}
 
 
-@LabeledClause{Other files deleted since ACATS 2.6}
+@LabeledClause{Other Files Deleted Since ACATS 2.6}
 
-The following support and documentation files were present in ACATS 2.6 but
-do not appear in ACATS 3.0:
+@leading@;The following support and documentation files were present in ACATS
+2.6 but do not appear in ACATS 3.0:
 
 @begin{FourCol}
 ug-apxa.doc@*

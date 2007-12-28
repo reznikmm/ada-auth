@@ -1,7 +1,7 @@
 @Part(defs, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/defs.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2007/12/19 01:09:30 $}
+@comment{$Revision: 1.4 $ $Date: 2007/12/21 07:17:59 $}
 
 @LabeledAnnex{Definitions}
 
@@ -37,6 +37,16 @@ Ada certification system]}
 @ToGlossary{Term=[Ada Conformity Assessment Laboratory (ACAL)],Text=[The part
 of the certification body that carries out the procedures required to perform
 conformity assessment of an Ada implementation. (Formerly AVF)]}
+
+@ToGlossary{Term=[Ada Conformity Assessment Test Report (ACATR)],Text=[A
+report summarizing the results of formal ACATS testing. Test Reports are
+issued only after witness testing is completed, and contain a summary
+of the testing (including which Specialized Needs Annexes were tested, any
+test modifications needed, and the values used in customizing the support
+files). Recent test reports can be found on-line at
+@URLLink{URL=[http://www.adaic.org/compilers/ada95.html],
+Text=[http://www.adaic.org/compilers/ada95.html]}, linked from the
+Certified Processors List.]}
 
 @ToGlossary{Term=[Ada implementation],Text=[An Ada compilation system,
 including any required run-time support software, together with its host  and
