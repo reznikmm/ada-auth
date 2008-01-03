@@ -1,7 +1,7 @@
 @Part(intro, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/intro.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2007/12/18 07:46:43 $}
+@comment{$Revision: 1.4 $ $Date: 2007/12/28 07:00:42 $}
 
 @LabeledSection{Introduction}
 
@@ -127,7 +127,7 @@ enhancing Ada software portability. After all, a rule that is not tested is far
 more likely to be incorrectly implemented than one that is tested.
 
 Therefore the ACATS strives for complete coverage of the standard. @i{Complete
-coverage}@Defn{Complete coverage} means that every rule in the Ada standard has
+coverage}@Defn{complete coverage} means that every rule in the Ada standard has
 one or more associated
 tests that ensure that the rule is implemented properly.
 

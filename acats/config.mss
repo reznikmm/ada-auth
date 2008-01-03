@@ -1,7 +1,7 @@
 @Part(config, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/config.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2007/12/21 07:17:59 $}
+@comment{$Revision: 1.5 $ $Date: 2007/12/28 07:00:42 $}
 
 @LabeledSection{Configuration Information}
 
@@ -31,7 +31,7 @@ number of tests and files in the ACATS suite.
 NoBreak=[T],Border=[T],SmallSize=[F],
 Caption=[],
 Headers=[@\Total@\Core Tests@\SNA Tests@\Found@!ations@\Docs@\Other],
-Body=[Number of Files@\4493+?@\4139@\248@\50@\2+?@\22
+Body=[Number of Files@\4660@\4139@\248@\50@\169@\22
 Number of Tests@\3771@\3581@\190@\0@\0@\0]}
 
 @leading@;Others consists of:
@@ -129,7 +129,7 @@ process is described in Section @RefSecNum{Tailoring the ACATS Test Suite}.
 @LabeledSubClause{Legacy Tests}
 
 @i{Legacy tests} are tests that were included in ACVC 1.12
-that have been incorporated into later ACVC and ACATS versions.@Defn{Legacy tests}
+that have been incorporated into later ACVC and ACATS versions.@Defn{legacy tests}
 These tests check only language features that are common to all versions of Ada.
 The vast majority of these tests came unmodified from the ACVC 1.12 suite. Some
 tests were modified to check for the correct implementation of Ada rules in
@@ -197,7 +197,7 @@ implementations not claiming support of certain Specialized Needs Annexes.
 
 @i{Annex C Requirements}
 
-Section 13 of @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}}
+Section 13 of the Ada Standard
 includes implementation advice paragraphs. The ACATS does not require
 implementations to conform to those paragraphs unless they claim support for
 Annex C, Systems Programming (because of C.2(2): "The implementation shall
@@ -408,7 +408,7 @@ depend on it cannot be compiled, and therefore will be graded as failed.
 
 Specialized Needs Annex tests have no separate classifications and are
 classified in the same way as all other tests. There are Class B, Class C, and
-Class L SNA tests.
+Class L SNA tests.@SeeOther{Primary=[SNA],Other=[specialized needs annex]}
 
 
 @LabeledClause{Naming Convention}
@@ -574,8 +574,10 @@ LA5008F1.ADA@*
 LA5008G1.ADA
 @end{FourCol}
 
+@begin{WideAbove}
 @leading@;The file name extension is three characters long. There are four
 extensions:
+@end{WideAbove}
 
 @begin{Description}
 .ada@\A file that contains only Ada code. It does not require any
@@ -627,7 +629,7 @@ NoBreak=[T],Border=[F],SmallSize=[F],
 Caption=[],
 Headers=[@b{Position}@\@b{Kind}@\@b{Meaning}],
 Body=[1@\Letter@\Test class; foundations are marked 'F'
-2@\Alphanumeric@\If other than an 'x', the section of @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}} describing the feature under test. An 'x' indicates that the test includes one or more features from an annex of @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}}
+2@\Alphanumeric@\If other than an 'x', the section of the Ada Standard describing the feature under test. An 'x' indicates that the test includes one or more features from an annex of the Ada Standard
 3@\Alphanumeric@\Core clause or annex letter identifier (either core or Specialized Needs Annex); clauses are a hexidecimal value
 4@\Alphanumeric@\Sub-clause (if a core test), or clause (if an annex test); a number if less than 10, otherwise a letter with 10='A', 11='B', and so on
 5@\Alphanumeric@\Foundation identifier (alphabetic, unless no foundation is required, in which case a '0')

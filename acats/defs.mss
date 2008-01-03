@@ -1,7 +1,7 @@
 @Part(defs, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/defs.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2007/12/21 07:17:59 $}
+@comment{$Revision: 1.5 $ $Date: 2007/12/28 07:00:42 $}
 
 @LabeledAnnex{Definitions}
 
@@ -24,7 +24,7 @@ the test objectives used to produce test programs for @LocalLink{Target=[Ada83],
 (1.1-1.11). AIG section references are embedded in @LocalLink{Target=[Ada83],Sec=[References],Text={[Ada83]}} test naming
 conventions.]}
 
-@ToGlossary{Term=[Ada],Text=[Short for @b{Ada programming language} (see). The term
+@ToGlossary{Term=[Ada],Text=[Short for @b{Ada programming language}. The term
 Ada by itself always refers to the most current ISO/IEC standard document(s);
 if a specific version of the language standards is meant it will always be
 referred to explicitly (for instance, as @LocalLink{Target=[Ada83],Sec=[References],Text={[Ada83]}}
@@ -63,11 +63,10 @@ reference [Ada95], its corrigendum [TC1], and its Amendment [Amend1].]}
 that sponsors the Ada conformity assessment system.]}
 
 @ToGlossary{Term=[Ada Validation Facility (AVF)],Text=[Former designation of an
-Ada Conformity Assessment Laboratory (which see).]}
+Ada Conformity Assessment Laboratory.]}
 
 @ToGlossary{Term=[Ada Validation Organization (AVO)],Text=[Organization that
-formerly performed the functions of the Ada Conformity Assessment Authority
-(which see).]}
+formerly performed the functions of the Ada Conformity Assessment Authority.]}
 
 @ToGlossary{Term=[Certification Body],Text=[The organizations (ACAA and ACALs)
 collectively responsible for defining and implementing Ada conformity
@@ -108,13 +107,13 @@ an acceptable result when processing an ACATS test program.]}
 @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}}. Conformity testing against one or more Specialized Needs Annexes is
 optional. There are tests that apply to each of the Specialized Needs Annexes.
 Results of processing these tests (if processed during a conformity assessment)
-are reported on the certificate and in the Validated Compilers List.]}
+are reported on the certificate and in the Certified Processors List.]}
 
 @ToGlossary{Term=[Validated Compilers List (VCL)],Text=[Former designation of
-the Certified Processors List (which see).]}
+the Certified Processors List.]}
 
 @ToGlossary{Term=[Validated Implementation],Text=[Informally used to mean
-Conforming Implementation (see).]}
+Conforming Implementation.]}
 
 @ToGlossary{Term=[Validation],Text=[ Informally used to mean conformity
 assessment.]}

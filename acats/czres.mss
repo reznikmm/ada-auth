@@ -1,7 +1,7 @@
 @Part(czres, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/czres.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2007/12/19 01:09:29 $}
+@comment{$Revision: 1.3 $ $Date: 2007/12/28 07:00:42 $}
 
 @LabeledAnnex{Results of CZ Tests}
 
@@ -135,8 +135,8 @@ format of the output lines should be as described in the output text.
 
 @LabeledClause{Sample Output From CZ1102A}
 
-Test CZ1102A should execute and report PASSED as illustrated below. Only the
-time-stamp should differ.
+@Keepnext@;Test CZ1102A should execute and report PASSED as illustrated below.
+Only the time-stamp should differ.
 
 @begin{Example}
 ,.,. CZ1102A ACATS 3.0 07-12-14 14:47:57
@@ -196,8 +196,8 @@ differences in the time stamp). Note that failure messages are expected.
 
 @LabeledSubClause{Output When External Files Are Not Supported}
 
-If the implementation under test does not support external text files, then
-CZ1103A produces different output, as illustrated below.
+@keepnext@;If the implementation under test does not support external text
+files, then CZ1103A produces different output, as illustrated below.
 
 @begin{Example}
 ,.,. CZ1103A ACATS 3.0 07-12-14 14:49:00

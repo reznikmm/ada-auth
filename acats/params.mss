@@ -1,19 +1,19 @@
 @Part(params, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/params.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2007/12/19 01:09:29 $}
+@comment{$Revision: 1.3 $ $Date: 2007/12/28 07:00:42 $}
 
 @LabeledAnnex{Parameterization Files}
 
 In ACATS 3.0, two methods are used to account for the use of
 implementation-dependent values in the tests.@Defn{implementation-dependent values}
 
-For legacy tests, a "macro" substitution technique is used.  Legacy tests
+For legacy tests, a "macro" substitution technique is used. Legacy tests
 requiring implementation-specific values contain symbols beginning with the '$'
 character; for example, the symbol @Exam{$INTEGER_LAST} is used where the code
 expects the implementation-specific integer literal representing the largest
 integer. For each implementation, these symbols must be systematically replaced
-with the appropriate values.  A data file, @Exam{MACRO.DFS}, and an Ada
+with the appropriate values. A data file, @Exam{MACRO.DFS}, and an Ada
 program, @Exam{Macrosub}, are provided to facilitate this
 substitution.@Defn{macro substitition}
 

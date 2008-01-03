@@ -1,7 +1,7 @@
-1@Part(using, Root="acats.msm")
+@Part(using, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/using.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2007/12/21 07:17:59 $}
+@comment{$Revision: 1.4 $ $Date: 2007/12/28 07:00:42 $}
 
 @LabeledSection{Using the ACATS}
 
@@ -54,7 +54,7 @@ tests must be available for a period of time before they are required in
 conformity assessments.
 
 These changes to the issued ACATS are documented in the ACATS Modification List
-(AML).@Defn{ACATS Modification List}@Defn{AML} This list includes a list of all
+(AML).@Defn{acats modification list}@Defn{AML} This list includes a list of all
 new tests, all modified tests, and all withdrawn tests, and an indication as to
 when each will be (or is) required for conformity assessments. Each version of
 the modification list is given a suffix letter. An ZIP archive and tar file
@@ -143,8 +143,10 @@ have been created and populated with test files after all decompression:
 @exam{@shrink{./acats3_0/support}}@Comment{This one is too long for RTF otherwise}
 @end{Fourcol}
 
+@begin{Wideabove}
 Note that the names are given here in all lowercase; some systems may create
-lowercase names. The path separator, shown here as '/', may also differ.
+uppercase names. The path separator, shown here as '/', may also differ.
+@end{Wideabove}
 
 
 @LabeledSubSubClause{Decompressing Zipped Files}
@@ -343,7 +345,7 @@ default values and subprograms, so no customization would be necessary.
 Some implementations may choose to provide bodies for procedures and/or
 functions. Bodies so provided must satisfy requirements stated in ImpDef.
 
-Tested depending on Impdef do not need customization (macro expansion).
+Tests depending on Impdef do not need customization (macro substitution).
 Instead, ImpDef must be available at compile time (i.e., included in the
 environment) for tests that rely upon it. This simplifies the customization
 process and management and also is similar to the way that Ada projects
@@ -385,7 +387,8 @@ version of @exam{macro.dfs} that was tailored for ACATS 2.6 should be valid for 
 Tests in files with the extension @exam{.tst} contain symbols that represent
 implementation dependent values. The symbols are identifiers with a initial
 dollar sign ('$'). Each symbol must be replaced with an appropriate textual
-value to make the tests compilable.
+value to make the tests compilable. This process is sometime known as
+@i{macro substitution}.@Defn{macro substitution}
 
 The Macrosub program distributed with the ACATS can automatically perform the
 required substitutions. This program reads the replacement values for the
@@ -511,8 +514,10 @@ processed next. Only the results of the modified tests will be graded.
 
 If the ACAA has issued an ACATS Modification List (see
 Section @RefSecNum{Contents of the ACATS Delivery}), then the
-required modifications must be made. The permitted modifications may be made if
-desired (or if necessary for the particular implementation).
+modified versions of tests with modifications @i{must} be
+used.@Defn2{Term=[test],Sec=[modified AML classification]}
+Either the original version or the modified version of a test with an
+allowed modification may be used.@Defn2{Term=[test],Sec=[allowed modification AML classification]}
 
 
 @LabeledClause{Processing the Support Files}
@@ -526,7 +531,7 @@ and the reporting mechanism can be verified.
 @LabeledSubClause{Support Files}
 
 @Leading@;The following files are necessary to many of the
-@Defn{Support Files}ACATS tests.
+@Defn{support files}ACATS tests.
 Implementations that maintain program libraries may wish to compile them into
 the program library used for conformity assessment:
 
@@ -655,15 +660,15 @@ acceptable results for conformity assessment of the core language. All legacy
 tests, as well as all newer tests for clauses 2-13 and annexes A and B are core
 tests. Conformity assessment including one or more Specialized Needs Annexes
 requires that all tests for the annex(es) in question be correctly processed in
-addition to all core tests
+addition to all core tests.@Defn{core language}
 
 Tests that are not applicable to an implementation (e.g., because of size
 limitations) and tests that report "NOT APPLICABLE" when run by an
 implementation must nevertheless be processed and demonstrate appropriate
-results.
+results.@Defn2{Term=[processing],Sec=[inapplicable tests]}
 
 Tests that are withdrawn on the current ACATS Modification List as maintained
-by the ACAA need not be processed.
+by the ACAA need not be processed.@Defn2{Term=[processing],Sec=[withdrawn tests]}
 
 
 @LabeledSubClause{Test Partitions}
@@ -713,7 +718,8 @@ not be repeated.
 
 Annex B tests that require foreign language code (Fortran, C, COBOL) to be
 compiled and bound with Ada code need not be processed if an implementation
-does not support a foreign language interface to the respective language.
+does not support a foreign language interface to the respective
+language.@Defn2{Term=[processing],Sec=[foreign language tests]}
 
 Tests for the Specialized Needs Annexes of Ada need not be processed except
 by implementations that wish to have Annex results documented. In that case,
@@ -722,13 +728,17 @@ be processed. If any tests for a particular Annex are processed, then all tests
 for that Annex must be processed. If an implementation does not support a
 feature in a Specialized Needs Annex test, then it must indicate the
 non-support by rejecting the test at compile time or by raising an appropriate
-exception at run time.
-(See @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}} 1.1.3(17).)
+exception at run time.@Defn2{Term=[processing],Sec=[SNA tests]}
+(See Ada 1.1.3(17).)
 
 No withdrawn test need be processed. Tests classified as Pending New in the
-current ACATS Modification List also do not need to be processed. (Pending New
+current ACATS Modification List also do not need to be processed. Pending New
 tests are new tests included with the ACATS for review purposes, and are not
-yet required for conformity assessment).
+yet required for conformity assessment. (Tests classified as New in the
+current ACATS Modification List @i{do} need to be processed; these are
+required for
+conformity assessments.)@Defn2{Term=[test],Sec=[new AML classification]}@Defn2{Term=[test],Sec=[pending new AML classification]}
+
 
 @LabeledSubClause{Tests with Special Processing Requirements}
 
@@ -739,7 +749,8 @@ constructed in an implementation specific manner. Real-time processing tests
 may have configuration pragmas that have to be handled in an implementation
 specific way. Numeric Processing tests require strict mode processing to be
 selected. Each such test has a Special Requirements section in the test header
-describing any implementation specific handling that is required for the test.
+describing any implementation specific handling that is required for
+the test.@Defn{special handling test}@Defn2{Term=[test],Sec=[special handling]}@Defn2{Term=[processing],Sec=[special handling tests]}
 
 A list of all such tests is provided in @RefSec{Tests With Special Requirements}.
 
@@ -826,7 +837,7 @@ resulting object code must be bound with the compiled Ada code. Pragma Import
 will take the name of the C code from ImpDef.
 
 @begin{FourCol}
-CD30005*@*
+cd30005*@*
 cxb3001@*
 cxb3002@*
 cxb3003@*
@@ -923,7 +934,7 @@ System.RPC to be compiled.
 
 @leading@;Ada allows explicit message-based communication between
 active partitions as an alternative to RPC
-[see @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}} E.2.3(20)].
+[see Ada E.2.3(20)].
 If an implementation does not support the
 Remote_Call_Interface pragma then the following tests are not applicable:
 
@@ -950,7 +961,7 @@ lxe3001
 @Subheading{@Shrink{Partition Communication System}}
 
 @leading@;An implementation is not required to provide a PCS
-[see @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}} E.5(27)] in
+[see Ada E.5(27)] in
 order to test the Distribution Annex. If no PCS is provided then the following
 tests are not applicable:
 
@@ -1190,3 +1201,279 @@ Recall that annexes A and B are part of the core language. All annex tests
 their name; Specialized Needs Annex tests have a letter between 'C' and 'H'
 (inclusive) corresponding to the annex designation, as the third character of
 the test name.
+
+
+@LabeledClause{Grading Test Results}
+
+Although a single test may examine multiple language issues, ACATS test results
+are graded "passed", "failed", or "not applicable" as a whole.
+
+All customized, applicable tests must be processed by an implementation.
+Results must be evaluated against the expected results for each class of test.
+Results that do not conform to expectations constitute failures. The only
+exceptions allowed are discussed in @RefSecNum{Allowed Test Modifications};
+in such cases, processing the approved modified test(s) must produce the
+expected behavior. Any differences from the general discussion of expected
+results below for executable or non-executable tests are included as explicit
+test conditions in test prologues.
+
+Warning or other informational messages do not affect the pass/fail status of
+tests.
+
+Expected results for executable and non-executable tests are discussed in
+Sections @RefSecNum{Expected results for Executable Tests},
+@RefSecNum{Expected Results for Class B Tests}, and
+@RefSecNum{Expected Results for Class L Tests}.
+Tests that are non-applicable for an implementation are
+discussed in @RefSecNum{Inapplicable Tests}.
+Withdrawn tests are discussed in @RefSecNum{Withdrawn Tests}.
+
+
+@LabeledSubClause{Expected Results for Executable Tests}
+
+Executable tests (classes A, C, D, E) must be processed by the compiler and any
+post-compilation steps (e.g., binder, partitioner) without any errors. They
+must be loaded into an execution target and run. Normal execution of tests
+results in an introductory message that summarizes the test objective, possibly
+some informative comments about the test progress, a final message giving pass
+/ fail status, and graceful, silent termination. They may report "PASSED",
+"TENTATIVELY PASSED", "FAILED", OR "NOT APPLICABLE".
+
+A test that fails to compile and bind, including compiling and binding any
+foundation code on which it depends is graded as "failed", unless the test
+includes features that need not be supported by all implementations. For
+example, an implementation may reject the declaration of a numeric type that it
+does not support. Allowable cases are clearly stated in the Applicability
+Criteria of tests. Annex M of the Ada Standard
+requires implementations to document such implementation-defined
+characteristics.
+
+A test that reports "FAILED" is graded as "failed" unless the ACAL, and
+possibly the ACAA, determine that the test is not applicable for the
+implementation.
+
+A test that reports "PASSED" is graded as "passed" unless the test produces the
+pass message but fails to terminate gracefully (e.g., crashes, hangs, raises an
+unexpected exception, produces an earlier or later "FAILED" message). This kind
+of aberrant behavior may occur, for example, in certain tasking tests, where
+there are multiple threads of control. A pass status message may be produced by
+one thread, but another thread may  asynchronously crash or fail to terminate
+properly.
+
+A test that reports "NOT APPLICABLE" must be run by the implementation and is
+graded as "not applicable" unless it produces the not-applicable message and
+then fails to terminate gracefully.
+
+A test that reports "TENTATIVELY PASSED" is graded as "passed" if the test
+results satisfy the pass/fail criteria in the test. Normally, verification
+requires manual inspection of the test output.
+
+A test that fails to report, or produces only a partial report, will be graded
+as "failed" unless the ACAL, and possibly the ACAA, determine that the test is
+not applicable for the implementation.
+
+
+@LabeledSubClause{Expected Results for Class B Tests}
+
+Class B tests are expected to be compiled but are not subject to further
+processing and are not intended to be executable. An implementation must
+correctly report each clearly marked error (the notation @Exam{-- ERROR:}
+occurs at the right hand side of the source). A multiple unit B test file
+generally will have errors only in one compilation unit per source file.
+Error messages must provide some
+means of specifying the location of an error, but they are not required to be
+in direct proximity with the @Exam{-- ERROR:} marking of the errors.
+
+Some B-tests also include the notation @Exam{-- OK} to indicate constructs that
+@i{must not} be identified as errors. This is especially important since some
+constructs were errors in @LocalLink{Target=[Ada83],Sec=[References],Text={[Ada83]}}
+are now legal in later versions of Ada.
+
+Some B-tests exercise constructs whose correctness depends on source code that
+is textually separated (e.g., a deferred constant and its full declaration). In
+these cases, it may be reasonable to report an error at both locations. Such
+cases are marked with @Exam{-- OPTIONAL ERROR}. These lines may be flagged as
+errors by some, but not all, implementations. Unless an optional error is
+marked as an error for the wrong reason, an error report (or lack of it) does
+not affect the pass/fail status of the test.
+
+Some B-tests contain constructs where it would be reasonable for a compiler
+to report an error at one of several source locations. When it would not be
+appropriate for the ACATS to insist on a particular source location, all such
+source locations are marked with @exam{-- POSSIBLE ERROR:} and an indication of
+which error set (if the test contains several) the location belongs to.
+In such cases, an implementation is considered to have properly reported the
+error if it reports an error at
+any of the places marked @exam{-- POSSIBLE ERROR:} for a particular set.
+The implementation may
+flag more than one such place; this does not affect the pass/fail status
+of the test. However, the test is graded "failed" if no error is reported
+at any of the places marked @exam{-- POSSIBLE ERROR:} for an error set.
+
+A test is graded as "passed" if it reports each error in the test. The content
+of error messages is considered only to determine that they are indeed
+indications of errors (as opposed to warnings, e.g.) and that they refer to the
+expected errors. The Reference Manual does not specify the form or content of
+error messages. In particular, a test with just one expected error is graded as
+"passed" if the test is rejected at compile time for any reason.
+
+A test is graded as "failed" if it fails to report on each error in the test or
+if it marks legal code as incorrect.
+
+
+@LabeledSubClause{Expected Results for Class L Tests}
+
+Class L tests are expected to be rejected before execution begins. They must be
+submitted to the compiler and to the linker/binder. If an executable is
+generated, then it must be submitted for execution. Unless otherwise
+documented, the test is graded as "failed" if it begins execution, regardless
+of whether any output is produced.. (Twenty-eight L tests contain documentation
+indicating that they may execute. See below.)
+
+In general, an L test is expected to be rejected at link/bind time. Some tests
+contain @exam{-- ERROR:} indications; an implementation that reports an error
+associated with one of these lines is judged to have passed the test (provided,
+of course, that the link attempt fails).
+
+@leading@;The following tests are exceptions to the general rule that an L test
+must not execute:
+
+@begin{indent}
+@shrink{Test LXE3002, for the Distributed Systems Annex, is a test that
+has two partitions, each of which may execute. As documented in the source
+code, this test is graded "failed" if both partitions report "TENTATIVELY
+PASSED". Other outcomes are graded as appropriate for Class L tests.}
+
+@shrink{Tests LA14001..27 and LA20002 (twenty-seven core language
+tests), as documented in the source code, may execute if automatic
+recompilation is supported. These tests are graded as "passed" if they execute
+and report "PASSED". Other outcomes are graded as appropriate for Class L
+tests.}
+@end{indent}
+
+
+@LabeledSubClause{Inapplicable Tests}
+
+Each ACATS test has a test objective that is described in the test prologue.
+Some objectives address Ada language features that need not be supported by
+every Ada implementation (e.g., "check floating-point operations for digits
+18"). These test programs generally also contain an explicit indication of
+their applicability and the expected behavior of an implementation for which
+they do not apply. @RefSec{Test Applicability Criteria} lists common reasons
+for a test to be inapplicable, and lists the
+tests affected.@Defn{inapplicable test}@Defn2{Term=[test],Sec=[inapplicable]}
+
+@leading@;A test may be inapplicable for an implementation given:
+@begin{itemize}
+appropriate ACATS grading criteria; or
+
+an ACAA ruling on a petition to accept a deviation from expected results.
+@end{itemize}
+
+@leading@;Appropriate grading criteria include:
+@begin{enumerate}
+whether a test completes execution and reports "NOT APPLICABLE";
+
+whether a test is rejected at compile or bind time for a reason that satisfies
+grading criteria stated in the test program.
+@end{enumerate}
+
+All applicable test programs must be processed and passed.
+
+
+@LabeledSubClause{Withdrawn Tests}
+
+From time to time, the ACAA determines that one or more tests included in a
+release of the ACATS should be withdrawn from the test suite. Tests that are
+withdrawn are not processed during a conformity assessment and are not
+considered when grading
+an implementation.@Defn{withdrawn test}@Defn2{Term=[test],Sec=[withdrawn]}
+
+Usually, a test is withdrawn because an error has been discovered in it. A
+withdrawn test will not be reissued as a modified test, although it may be
+revised and reissued as a new test in the future.
+
+Withdrawn tests are listed in the ACATS Modification List, which is maintained
+by the ACAA.
+
+
+@LabeledClause{Addressing Problems or Issues}
+
+After all tests have been processed and graded, any remaining problems should
+be addressed. Test failures must be identified and resolved. This section
+discusses issues that are not due to implementation errors (bugs).
+
+
+@LabeledSubClause{Typical Issues}
+
+@leading@;Here are some typical causes of unexpected ACATS test failures (often
+resulting from clerical errors):
+@begin{Itemize}
+Processing a test that is withdrawn;
+
+Processing the original version of a test that has been modified by the ACAA to
+correct a test error;
+
+Processing a test that is not applicable to the implementation (as explained in
+Section @RefSecNum{Inapplicable Tests});
+
+Processing files (or tests, see Section @RefSecNum{Dependencies}) in an incorrect order;
+
+Processing tests when units required in the environment are not present.
+@end{Itemize}
+
+@leading@;Test result failures resulting from technical errors may include:
+@begin{Itemize}
+Incorrect values in ImpDef, which provide inappropriate values to tests at
+run-time (refer to @RefSecNum{ImpDef Customization});
+
+Incorrect values in @exam{macro.dfs}, which result in incorrectly customized
+tests (refer to @RefSecNum{Macro Defs Customization});
+
+Need to modify a test (e.g., split a B-test).
+@end{Itemize}
+
+Finally, occasionally a user discovers an error in a new ACATS test. More
+rarely, errors are uncovered by compiler advances in tests that are apparently
+stable. In either case, if users believe that a test is in error, they may file
+a dispute with the ACAL. The dispute process is described in the next section.
+
+
+@LabeledSubClause{Deviation from Expected Results - Petition & Review}
+
+Each test indicates in its prologue what it expects from a conforming
+implementation. The result of processing a test is acceptable if and only if
+the result is explicitly allowed by the grading criteria for the test.
+
+A user may challenge an ACATS test on the grounds of applicability or
+correctness. A challenger should submit a petition against the test program to
+an ACAL or to the ACAA, following the procedure and the format presented in
+@LocalLink{Target=[Pro01],Sec=[References],Text={[Pro01]}}. A petition must
+clearly state whether it is a claim that the test does not apply to the
+implementation or that the test is incorrect. The petition must indicate the
+specific section of code that is disputed and provide a full explanation of the
+reason for the dispute.
+
+@leading@;ACALs will forward petitions from their customers to the ACAA for
+decisions. The ACAA will evaluate the petitioner's claims and decide whether:
+@begin{itemize}
+the test is applicable to the implementation (i.e., deviation @i{is not}
+allowed);
+
+the test is not applicable to the implementation (i.e., deviation @i{is} allowed);
+
+the test should be repaired (deviation is allowed, and the modified test should
+be used for determining conformity assessment results);
+
+the test should be withdrawn (deviation is allowed and the test is not
+considered in determining conformity assessment results).
+@end{itemize}
+
+A deviation is considered to be a test failure unless a petition to allow the
+deviation has been accepted by the ACAA.
+
+
+@LabeledClause{Reprocessing and Regrading}
+
+After all problems have been resolved, tests that failed can be reprocessed and
+regraded. This step completes the ACATS testing process.

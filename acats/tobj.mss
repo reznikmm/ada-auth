@@ -1,7 +1,7 @@
 @Part(crules, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/tobj.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2007/12/18 07:46:43 $}
+@comment{$Revision: 1.2 $ $Date: 2007/12/28 07:00:42 $}
 
 @LabeledSection{Test Objectives and Coverage}
 
@@ -27,7 +27,7 @@ and how the adequacy of objectives is checked.
 
 @LabeledClause{Test Objectives and Rules}
 
-@leading@;A test objective should relate a directly as possible to the rules
+@leading@;A test objective should relate as directly as possible to the rules
 of Ada. Ideally, a test objective will test an individual rule of Ada.
 @i{Rule} means
 whatever set of sentences makes up a testable statement. A rule may be as small
@@ -107,8 +107,7 @@ any untested cases), and any additional notes needed.
 There is also a summary document that summarizes totals for important metrics
 for the coverage documents as a whole.
 
-These documents are currently provided in Microsoft Excel 2000 (or newer)
-format.
+These documents are provided in Adobe Portable Document Format (PDF).
 
 @leading@;For ACATS 3.0, the following clauses of the Ada Standards are
 included in the new coverage documents:
@@ -124,8 +123,9 @@ These clauses were selected because of their importance in rule changes
 in @LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}}
 
 The original coverage document is also included with the ACATS for those
-portions of the Ada Standards that have not yet have new coverage documents
-constructed. This document is of primary use for features of @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}},
+portions of the Ada Standards that have not yet had new coverage documents
+constructed. This document is of primary use for features
+of @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}},
 as it does not cover Legacy tests nor any features
 added or modified by @LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}}.
 As noted above, it is being replaced, so it will disappear completely in a
@@ -209,8 +209,8 @@ check that legal cases are allowed; again, this is often handled by tests for
 other test objectives. (They also can be covered in the B-Test with "OK"
 cases.)
 
-Static Semantics:@\Many Static Semantic rules are definitions, and such be
-handled as described at the end of this Annex.
+Static Semantics:@\Many Static Semantic rules are definitions, and as such be
+handled as described in @RefSec{General Coverage Guidelines}.
 
 @\Many other static semantic rules are miscategorized by the standard. For
 instance, most of the library packages are defined as static semantics, even
@@ -227,10 +227,10 @@ provided to show where it is covered).
 
 Dynamic Semantics:@\Dynamic semantics rules can be divided into two sub-categories.
 
-@\First, these rules can define run-time checks. These checks should have C-Tests
-that check that the check is made and the appropriate exception is raised.
-Careful: tests like this have to be carefully constructed to avoid running
-afoul of 11.6 permissions.
+@\First, these rules can define run-time checks. These checks should have
+C-Tests that verify that the check is made and the appropriate exception is
+raised. Careful: tests like this have to be carefully constructed to avoid
+running afoul of 11.6 permissions.
 
 @\Otherwise, these rules can define the normal operation of a construct. These
 should have user-oriented C-Tests. By making these tests user-oriented, the
@@ -245,37 +245,37 @@ any such test would have a very low value.
 Bounded (Run-Time) Errors:@\These usually require C-Tests, but not always. If
 the bound includes "work normally", then the bounded error is not usefully
 testable, since the ACATS does not test implementation
-choices). Whether something works or raises Program_Error is not interesting.
+choices. Whether something works or raises Program_Error is not interesting.
 In other cases, however, since there is a bound on the behavior, it can be
 useful to ensure that one of the prescribed results happens rather than havoc.
 
 Erroneous Execution:@\This is not testable. Since the language allows anything
 to happen, there is no useful information to be gained from including this in a
-test. Indeed, it's important to avoid any such case in a test.
+test. Indeed, it's important to avoid any such case in an executable test.
 
 Implementation Requirements:@\These usually are dynamic requirements that
 should be tested like the appropriate dynamic semantics rules. Otherwise, they
 should be tested like a legality rule.
 
 Implementation Permissions:@\Usually permissions are not testable. Since the
-ACATS is not testing the quality of implementations, which implementation
-choices are made are not appropriate things to test. So a test should be
-created only if there is value in testing for going further than the
-permission.
+ACATS is not testing the quality of implementations, the choices made by
+an implementation are not appropriate things to test. So a test should be
+created only if there is value in testing for implementations exceeding
+the permission.
 
 Implementation Advice:@\Advice is usually not testable. Again, since the ACATS
-is not testing quality of implementations, which implementation choices are
-made are not appropriate things to test. Moreover, advice need not be followed,
-and other implementation choices can be made. Usually, if there are bounds to
-what is acceptable, they are covered by other rules, and thus the tests would
-be there.
+is not testing quality of implementations, the choices made by an
+implementation are not appropriate things to test. Moreover, advice need not be
+followed, and other implementation choices can be made. Usually, if there are
+bounds to what is acceptable, they are covered by other rules, and thus the
+tests would be there.
 
 Documentation Requirements and Metrics:@\No tests are required for
 documentation requirements. Documentation existence could be part of the
 conformity assessment process, but in any case it is outside of the scope of
 the ACATS (which is testing the implementation, not the documentation).
 
-@Trailing@;Notes and Examples:@\These are non-normative text, and do not
+Notes and Examples:@\These are non-normative text, and do not
 require any testing.
 
 @end{Description}

@@ -1,7 +1,7 @@
 @Part(applic, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/applic.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2007/12/19 01:09:29 $}
+@comment{$Revision: 1.4 $ $Date: 2007/12/28 07:00:42 $}
 
 @LabeledAnnex{Test Applicability Criteria}
 
@@ -51,7 +51,7 @@ The behavior is consistent with the implementation's documentation.
 
 @LabeledSubClause{Type Short_Integer}
 
-@leading@;If there is no predefined type @exam{Short_Integer}, then the tests
+@leading@keepnext@;If there is no predefined type @exam{Short_Integer}, then the tests
 contained in the following files are not applicable:
 
 @begin{FourCol}
@@ -76,7 +76,7 @@ CD7101E.DEP
 
 @LabeledSubClause{Type Long_Integer}
 
-@leading@;If there is no predefined type @exam{Long_Integer}, then the tests
+@leading@keepnext@;If there is no predefined type @exam{Long_Integer}, then the tests
 contained in the following files are not applicable:
 
 @begin{FourCol}
@@ -100,7 +100,7 @@ CD7101F.DEP
 
 @LabeledSubClause{Other Predefined Integer Types}
 
-@leading@;If there are no predefined integer types with names other than
+@leading@keepnext@;If there are no predefined integer types with names other than
 @exam{Integer}, @exam{Short_Integer}, and @exam{Long_Integer},
 then the tests contained in the following files are not applicable.
 
@@ -111,7 +111,7 @@ CD7101G.TST
 
 @LabeledSubClause{Fixed Point Restrictions}
 
-@leading@;If @Exam{System.Max_Mantissa} is less than 47 or
+@leading@keepnext@;If @Exam{System.Max_Mantissa} is less than 47 or
 @Exam{System.Fine_Delta} is greater than 2.0**-47, then the tests
 contained in the following files are not applicable:
 
@@ -129,7 +129,7 @@ C45532P.DEP
 
 @LabeledSubClause{Non-binary Values of 'Small}
 
-@Leading@;If @Exam{'Small} representation clauses which are not powers of two
+@leading@keepnext@;If @Exam{'Small} representation clauses which are not powers of two
 are not supported, then the tests contained in the following files are not
 applicable:
 
@@ -141,7 +141,7 @@ CD2A53A.ADA
 
 @LabeledSubClause{Compiler Rejection of Supposedly Static Expression}
 
-@Leading@;Consider the following declarations:
+@leading@keepnext@;Consider the following declarations:
 @begin{Example}
 @Key[type] F @Key[is digits] System.Max_Digits;
 N : @key[constant] := 2.0 * F'Machine_Radix ** F'Machine_EMax;
@@ -158,7 +158,7 @@ C4A013B.ADA
 
 @LabeledSubClause{Machine Code Insertions}
 
-@Leading@;If machine code insertions are not supported, then the tests
+@leading@keepnext@;If machine code insertions are not supported, then the tests
 contained in the following files are not applicable:
 
 @begin{FourCol}
@@ -174,7 +174,7 @@ BD8004C.TST
 
 @LabeledSubClause{Illegal External File Names}
 
-@Leading@;If there are no strings which are illegal as external file names,
+@leading@keepnext@;If there are no strings which are illegal as external file names,
 then the tests contained in the following files are not applicable:
 
 @begin{FourCol}
@@ -187,7 +187,7 @@ CE3107A.TST
 
 @LabeledSubClause{Decimal Types}
 
-@Leading@;If decimal types are not supported, then the tests contained in the
+@leading@keepnext@;If decimal types are not supported, then the tests contained in the
 following files are not applicable: (Note that implementations testing Annex F
 must support decimal types).
 
@@ -199,7 +199,7 @@ CXAA010.A
 
 @LabeledSubClause{Instantiation of Sequential_IO with indefinite types}
 
-@Leading@;If Sequential_IO does not support indefinite types, then the test
+@leading@keepnext@;If Sequential_IO does not support indefinite types, then the test
 contained in the following files are not applicable:
 
 @begin{FourCol}
@@ -210,7 +210,7 @@ CE2201E.DEP
 
 @LabeledSubClause{Special Handling Tests}
 
-@Leading@;Test requiring special handling may also be not applicable. See
+@leading@keepnext@;Test requiring special handling may also be not applicable. See
 section @RefSec{Tests with Special Processing Requirements}, for details.
 
 
@@ -224,7 +224,7 @@ tests for related objective and with the implementation's documentation.
 
 @LabeledSubClause{Value of Machine_Overflows is False}
 
-@Leading@;If @Exam{Machine_Overflows} is @Exam{False} for floating point types,
+@leading@keepnext@;If @Exam{Machine_Overflows} is @Exam{False} for floating point types,
 then the tests contained in the following files should report NOT_APPLICABLE:
 
 @begin{FourCol}
@@ -236,7 +236,7 @@ C4A012B.ADA
 
 @LabeledSubClause{System.Max_Digits}
 
-@Leading@;If the value of @Exam{System.Max_Digits} is greater than 35,
+@leading@keepnext@;If the value of @Exam{System.Max_Digits} is greater than 35,
 then the test contained in the following file should report NOT_APPLICABLE:
 
 @begin{FourCol}
@@ -246,12 +246,12 @@ C4A011A.ADA
 
 @LabeledSubClause{Floating Point Overflow}
 
-@Leading@;Consider the declaration
+@leading@keepnext@;Consider the declaration
 @begin{Example}
 @Key[type] F @key[is digits] System.Max_Digits;
 @end{Example}
 
-@Leading@;If @Exam{F'Machine_Overflows = False} and
+@leading@keepnext@;If @Exam{F'Machine_Overflows = False} and
 @Exam{2.0*F'Machine_Radix**F'Machine_EMax <= F'Base'Last}
 then the test contained in the following file should report NOT_APPLICABLE (if
 it compiles without error):
@@ -263,7 +263,7 @@ C4A013B.ADA
 
 @LabeledSubClause{Type Duration}
 
-@Leading@;If @Exam{Duration'First = Duration'Base'First} or
+@leading@keepnext@;If @Exam{Duration'First = Duration'Base'First} or
 @Exam{Duration'Last = Duration'Base'Last} then
 the tests contained in the following file should report NOT_APPLICABLE:
 
@@ -274,7 +274,7 @@ C96005B.TST
 
 @LabeledSubClause{Text Files (Non-supported Features)}
 
-@Leading@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
+@leading@keepnext@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
 to create or open a text file (this is the appropriate behavior for an
 implementation which does not support text files other than standard input and
 output), then the tests contained in the following files should report
@@ -442,7 +442,7 @@ EE3412C.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
+@leading@keepnext@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
 to create or open a text file with mode @Exam{In_File}, then the tests
 contained in the following files should report NOT_APPLICABLE:
 @end{WideAbove}
@@ -535,7 +535,7 @@ EE3412C.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@Leading@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
+@leading@keepnext@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
 to create or open a text file with mode @Exam{Out_File}, then the tests
 contained in the following files should report NOT_APPLICABLE:
 @end{WideAbove}
@@ -695,7 +695,7 @@ EE3412C.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@Leading@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
+@leading@keepnext@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
 to create or open a text file with mode @Exam{Append_File}, then the tests
 contained in the following files should report NOT_APPLICABLE:
 @end{WideAbove}
@@ -711,7 +711,7 @@ CXAA015.A
 @end{FourCol}
 
 @begin{WideAbove}
-@Leading@;If @Exam{Reset} is not supported for text files, then the following
+@leading@keepnext@;If @Exam{Reset} is not supported for text files, then the following
 tests should report NOT_APPLICABLE:
 @end{WideAbove}
 
@@ -721,7 +721,7 @@ CE3115A.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@Leading@;If @Exam{Delete} is not supported for text files, then the following
+@leading@keepnext@;If @Exam{Delete} is not supported for text files, then the following
 tests should report NOT_APPLICABLE:
 @end{WideAbove}
 
@@ -731,7 +731,7 @@ CE3114A.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If association of multiple internal text files (opened for reading
+@leading@keepnext@;If association of multiple internal text files (opened for reading
 and writing) to a single external file is not supported, then the test
 contained in the following file should report NOT_APPLICABLE:
 @end{WideAbove}
@@ -741,7 +741,7 @@ CE3115A.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If there are no inappropriate values for either line length or page
+@leading@keepnext@;If there are no inappropriate values for either line length or page
 length, then the test contained in the following file should report
 NOT_APPLICABLE:
 @end{WideAbove}
@@ -751,7 +751,7 @@ CE3304A.TST
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If the value of @Exam{Count'Last} is greater than 150_000, then the
+@leading@keepnext@;If the value of @Exam{Count'Last} is greater than 150_000, then the
 following test should report NOT_APPLICABLE:
 @end{WideAbove}
 
@@ -761,9 +761,10 @@ CE3413B.ADA
 
 
 
+@Newpage@Comment{To avoid nasty page break}
 @LabeledSubClause{Text Files (Supported Features)}
 
-@leading@;If @Exam{Create} with mode @Exam{In_File} is supported for text files, then
+@leading@keepnext@;If @Exam{Create} with mode @Exam{In_File} is supported for text files, then
 the test contained in the following file should report NOT_APPLICABLE:
 
 @begin{FourCol}
@@ -771,7 +772,7 @@ CE3102E.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Open} with mode @Exam{In_File} is supported for text files, then
+@leading@keepnext@;If @Exam{Open} with mode @Exam{In_File} is supported for text files, then
 the test contained in the following file should report NOT_APPLICABLE:
 @end{WideAbove}
 
@@ -780,7 +781,7 @@ CE3102J.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@Leading@;If @Exam{Create} with mode @Exam{Out_File} is supported for text
+@leading@keepnext@;If @Exam{Create} with mode @Exam{Out_File} is supported for text
 files, then the test contained in the following file should report
 NOT_APPLICABLE:
 @end{WideAbove}
@@ -790,7 +791,7 @@ CE3102I.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Open} with mode @Exam{Out_File} is supported for text files,
+@leading@keepnext@;If @Exam{Open} with mode @Exam{Out_File} is supported for text files,
 then the following test should report NOT_APPLICABLE:
 @end{WideAbove}
 
@@ -799,7 +800,7 @@ CE3102K.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@Leading@;If @Exam{Reset} is supported for text files, then the test contained
+@leading@keepnext@;If @Exam{Reset} is supported for text files, then the test contained
 in the following file should report NOT_APPLICABLE:
 @end{WideAbove}
 
@@ -808,7 +809,7 @@ CE3102F.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@Leading@;If @Exam{Delete} for text files is supported, then the test contained
+@leading@keepnext@;If @Exam{Delete} for text files is supported, then the test contained
 in the following file should report NOT_APPLICABLE:
 @end{WideAbove}
 
@@ -818,7 +819,7 @@ CE3102G.ADA
 
 @LabeledSubClause{Sequential Files (Non-supported Features)}
 
-@leading@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
+@leading@keepnext@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
 to create or open a sequential file (this is appropriate behavior for an
 implementation which does not support sequential files), then the tests
 contained in the following files should report NOT_APPLICABLE:
@@ -872,7 +873,7 @@ CXA8002.A
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
+@leading@keepnext@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
 to create or open a sequential file with mode @Exam{In_File},
 then the tests contained in the following files should report NOT_APPLICABLE:
 @end{WideAbove}
@@ -905,7 +906,7 @@ CE2208B.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
+@leading@keepnext@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
 to create or open a sequential file with mode @Exam{Out_File}, then the tests
 contained in the following files should report NOT_APPLICABLE:
 @end{WideAbove}
@@ -958,7 +959,7 @@ CXA8001.A
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
+@leading@keepnext@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
 to create or open a sequential file with mode APPEND_FILE, then
 the tests contained in the following files should report NOT_APPLICABLE:
 @end{WideAbove}
@@ -968,7 +969,7 @@ CXA8001.A
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If reset to mode @Exam{Out_File} is not supported for sequential
+@leading@keepnext@;If reset to mode @Exam{Out_File} is not supported for sequential
 files, then the tests contained in the following files should report
 NOT_APPLICABLE:
 @end{WideAbove}
@@ -980,7 +981,7 @@ CE2111I.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If reset to mode @Exam{In_File} is not supported for sequential files, then the tests contained in the following files should report NOT_APPLICABLE:
+@leading@keepnext@;If reset to mode @Exam{In_File} is not supported for sequential files, then the tests contained in the following files should report NOT_APPLICABLE:
 @end{WideAbove}
 
 @begin{FourCol}
@@ -990,7 +991,7 @@ CE2204C.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Delete} for sequential files is not supported, then the tests contained in the following files should report NOT_APPLICABLE:
+@leading@keepnext@;If @Exam{Delete} for sequential files is not supported, then the tests contained in the following files should report NOT_APPLICABLE:
 @end{WideAbove}
 
 @begin{FourCol}
@@ -999,7 +1000,7 @@ CE2110A.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If the implementation cannot restrict the file capacity for a sequential file, then the test contained in the following file should report NOT_APPLICABLE:
+@leading@keepnext@;If the implementation cannot restrict the file capacity for a sequential file, then the test contained in the following file should report NOT_APPLICABLE:
 @end{WideAbove}
 
 @begin{FourCol}
@@ -1009,7 +1010,7 @@ CE2203A.TST
 
 @LabeledSubClause{Sequential Files (Supported Features)}
 
-@leading@;If @Exam{Create} with mode @Exam{In_File} is supported for sequential files,
+@leading@keepnext@;If @Exam{Create} with mode @Exam{In_File} is supported for sequential files,
 then the test contained in the following file should report NOT_APPLICABLE:
 
 @begin{FourCol}
@@ -1017,7 +1018,7 @@ CE2102D.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Open} with mode @Exam{In_File} is supported for sequential
+@leading@keepnext@;If @Exam{Open} with mode @Exam{In_File} is supported for sequential
 files, then the test contained in the following file should report
 NOT_APPLICABLE:
 @end{WideAbove}
@@ -1027,7 +1028,7 @@ CE2102N.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Reset} to mode @Exam{In_File} is supported for sequential
+@leading@keepnext@;If @Exam{Reset} to mode @Exam{In_File} is supported for sequential
 files, then the test contained in the following file should report
 NOT_APPLICABLE:
 @end{WideAbove}
@@ -1037,7 +1038,7 @@ CE2102O.ADA@*
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Create} with mode @Exam{Out_File} is supported, then the
+@leading@keepnext@;If @Exam{Create} with mode @Exam{Out_File} is supported, then the
 test contained in the following file should report NOT_APPLICABLE:
 @end{WideAbove}
 
@@ -1046,7 +1047,7 @@ CE2102E.ADA@*
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Open} with mode @Exam{Out_File} is supported, then the test
+@leading@keepnext@;If @Exam{Open} with mode @Exam{Out_File} is supported, then the test
 contained in the following file should report NOT_APPLICABLE:
 @end{WideAbove}
 
@@ -1055,7 +1056,7 @@ CE2102P.ADA@*
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Reset} to mode @Exam{Out_File} is supported for sequential
+@leading@keepnext@;If @Exam{Reset} to mode @Exam{Out_File} is supported for sequential
 files, then the test contained in the following file should report
 NOT_APPLICABLE:
 @end{WideAbove}
@@ -1067,7 +1068,7 @@ CE2102Q.ADA@*
 
 @LabeledSubClause{Direct Files (Non-supported Features)}
 
-@Leading@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
+@leading@keepnext@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
 to create or open a direct access file (this is appropriate behavior for an
 implementation which does not support direct access files), then the tests
 contained in the following files should report NOT_APPLICABLE:
@@ -1125,7 +1126,7 @@ CXA9002.A
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
+@leading@keepnext@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
 to create or open a direct access file with mode @Exam{In_File}, then the tests
 contained in the following files should report NOT_APPLICABLE:
 @end{WideAbove}
@@ -1152,7 +1153,7 @@ CE2411A.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
+@leading@keepnext@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
 to create or open a direct access file with mode @Exam{Out_File}, then the
 tests contained in the following files should report NOT_APPLICABLE:
 @end{WideAbove}
@@ -1190,7 +1191,7 @@ CXA9002.A
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
+@leading@keepnext@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
 to create or open a direct access file with mode @exam{InOut_File}, then the
 tests contained in the following files should report NOT_APPLICABLE:
 @end{WideAbove}
@@ -1224,7 +1225,7 @@ CE2411A.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Delete} for direct access files is not supported, then the
+@leading@keepnext@;If @Exam{Delete} for direct access files is not supported, then the
 following tests should report NOT_APPLICABLE:
 @end{WideAbove}
 
@@ -1234,7 +1235,7 @@ CE2110C.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If the implementation cannot restrict the file capacity for a direct
+@leading@keepnext@;If the implementation cannot restrict the file capacity for a direct
 file, then the test contained in the following file should report
 NOT_APPLICABLE:
 @end{WideAbove}
@@ -1245,7 +1246,7 @@ CE2403A.TST
 
 @LabeledSubClause{Direct Files (Supported Features)}
 
-@leading@;If @Exam{Create} with mode @Exam{In_File} is supported for direct
+@leading@keepnext@;If @Exam{Create} with mode @Exam{In_File} is supported for direct
 access files, then the test contained in the following file should report
 NOT_APPLICABLE:
 
@@ -1254,7 +1255,7 @@ CE2102I.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Open} with mode @Exam{In_File} is supported for direct access files, then the test contained in the following file should report NOT_APPLICABLE:
+@leading@keepnext@;If @Exam{Open} with mode @Exam{In_File} is supported for direct access files, then the test contained in the following file should report NOT_APPLICABLE:
 @end{WideAbove}
 
 @begin{FourCol}
@@ -1262,7 +1263,7 @@ CE2102T.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Reset} with mode @Exam{In_File} is supported for direct access files, then the test contained in the following file should report NOT_APPLICABLE:
+@leading@keepnext@;If @Exam{Reset} with mode @Exam{In_File} is supported for direct access files, then the test contained in the following file should report NOT_APPLICABLE:
 @end{WideAbove}
 
 @begin{FourCol}
@@ -1270,7 +1271,7 @@ CE2102U.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Create} with mode @Exam{Out_File} is supported for direct access files, then the test contained in the following file should report NOT_APPLICABLE:
+@leading@keepnext@;If @Exam{Create} with mode @Exam{Out_File} is supported for direct access files, then the test contained in the following file should report NOT_APPLICABLE:
 @end{WideAbove}
 
 @begin{FourCol}
@@ -1278,7 +1279,7 @@ CE2102J.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Open} with mode @Exam{Out_File} is supported for direct
+@leading@keepnext@;If @Exam{Open} with mode @Exam{Out_File} is supported for direct
 access files, then the test contained in the following file should report
 NOT_APPLICABLE:
 @end{WideAbove}
@@ -1288,7 +1289,7 @@ CE2102V.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Reset} with mode @Exam{Out_File} is supported for direct
+@leading@keepnext@;If @Exam{Reset} with mode @Exam{Out_File} is supported for direct
 access files, then the test contained in the following file should report
 NOT_APPLICABLE:
 @end{WideAbove}
@@ -1298,7 +1299,7 @@ CE2102W.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Create} with mode @exam{InOut_File} is supported for direct
+@leading@keepnext@;If @Exam{Create} with mode @exam{InOut_File} is supported for direct
 access files, then the test contained in the following file should report
 NOT_APPLICABLE:
 @end{WideAbove}
@@ -1308,7 +1309,7 @@ CE2102F.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Open} with mode @exam{InOut_File} is supported for direct
+@leading@keepnext@;If @Exam{Open} with mode @exam{InOut_File} is supported for direct
 access files, then the test contained in the following file should report
 NOT_APPLICABLE:
 @end{WideAbove}
@@ -1318,7 +1319,7 @@ CE2102R.ADA
 @end{FourCol}
 
 @begin{WideAbove}
-@leading@;If @Exam{Reset} to mode @exam{InOut_File} is supported for direct access
+@leading@keepnext@;If @Exam{Reset} to mode @exam{InOut_File} is supported for direct access
 files, then the test contained in the following file should report
 NOT_APPLICABLE:
 @end{WideAbove}
@@ -1330,7 +1331,7 @@ CE2102S.ADA
 
 @LabeledSubClause{Stream Files (Non-supported Features)}
 
-@Leading@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
+@leading@keepnext@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt
 to create or open a stream file (this is the appropriate behavior for an
 implementation which does not support stream files), then the tests contained
 in the following files should report NOT_APPLICABLE:
@@ -1640,7 +1641,7 @@ EE3412C.ADA
 
 @LabeledSubClause{Memory for Allocated Objects}
 
-@Leading@;If a large amount of memory (more than 32 megabytes for a typical
+@leading@keepnext@;If a large amount of memory (more than 32 megabytes for a typical
 implementation) is available for allocated objects (those created by
 @Key[new]), then the test contained in the following file should report
 NOT_APPLICABLE:
@@ -1663,7 +1664,7 @@ CXC7003.A
 
 @LabeledSubClause{Reserved Interrupts}
 
-@Leading@;If Annex C (Systems Programming) is tested and no interrupts are
+@leading@keepnext@;If Annex C (Systems Programming) is tested and no interrupts are
 reserved, then the tests contained in the following files should report
 NOT_APPLICABLE:
 
@@ -1675,7 +1676,7 @@ CXC3005.A
 
 @LabeledSubClause{Multiprocessor Systems}
 
-@Leading@;If Annex D (Real-time Systems) is tested and the target is a
+@leading@keepnext@;If Annex D (Real-time Systems) is tested and the target is a
 multiprocessor, then the tests contained in the following files should report
 NOT_APPLICABLE:
 
@@ -1694,7 +1695,7 @@ CXD6003.A
 
 @LabeledSubClause{Non-binary Machine Radix}
 
-@Leading@;If Annex G (Numerics) is tested and the machine radix is not a power
+@leading@keepnext@;If Annex G (Numerics) is tested and the machine radix is not a power
 of two, then the test contained in the following file should report
 NOT_APPLICABLE:
 
