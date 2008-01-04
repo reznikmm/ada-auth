@@ -128,7 +128,8 @@ package body ARM_RTF is
     -- 12/18/07 - RLB - Fixed silly table bug.
     --		- RLB - Added Plain_Annex.
     -- 12/19/07 - RLB - Added limited colors to Text_Format.
-
+    -- 12/21/07 - RLB - Removed extra "not" from "large" character counter
+    --			in Ordinary_Character.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -3956,7 +3957,7 @@ package body ARM_RTF is
 	    else
 	        Ada.Text_IO.Put (Output_Object.Output_File, Char);
 	        Output_Object.Char_Count := Output_Object.Char_Count + 1;
-		if Output_Object.Paragraph_Style not in
+		if Output_Object.Paragraph_Style in
 			ARM_Output.Text_Prefixed_Style_Subtype and then
 		   (not Output_Object.Saw_Hang_End) then
 --Ada.Text_Io.Put (Char);

@@ -15,7 +15,7 @@ package body ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007  AXE Consultants.
+    -- Copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -168,6 +168,7 @@ package body ARM_HTML is
     -- 12/18/07 - RLB - Added Plain_Annex.
     -- 12/19/07 - RLB - Added DOS_Filename flag.
     --		- RLB - Added limited colors to Text_Format.
+    --  1/02/08 - RLB - Made DOS filenames into all CAPS.
 
 
     LINE_LENGTH : constant := 78;
@@ -439,7 +440,7 @@ package body ARM_HTML is
 	    return "#" & Make_Clause_Anchor_Name (Output_Object, Clause_Number);
 	else -- Clause files.
 	    if Output_Object.DOS_Filenames then
-	        return Make_Clause_File_Name (Output_Object, Clause_Number) & ".htm";
+	        return Make_Clause_File_Name (Output_Object, Clause_Number) & ".HTM";
 	    else
 	        return Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
 	    end if;
@@ -485,27 +486,43 @@ package body ARM_HTML is
 	    elsif Output_Object.DOS_Filenames then
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 		    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
-		       "-TOC.htm");
+		       "-TOC.HTM");
 	    else
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 		    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
 		       "-TOC.html");
 	    end if;
-	    Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""cont.gif"" ALT=""Contents"" BORDER=0></A>&nbsp;");
-		-- Border=0 prevents the link highlight from being applied.
+	    if Output_Object.DOS_Filenames then
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""CONT.GIF"" ALT=""Contents"" BORDER=0></A>&nbsp;");
+		    -- Border=0 prevents the link highlight from being applied.
+	    else
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""cont.gif"" ALT=""Contents"" BORDER=0></A>&nbsp;");
+		    -- Border=0 prevents the link highlight from being applied.
+	    end if;
 	    if Ada.Strings.Unbounded.Length(Output_Object.Index_URL) /= 0 then
 	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A HREF=""");
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 	            Ada.Strings.Unbounded.To_String(Output_Object.Index_URL));
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""index.gif"" ALT=""Index"" BORDER=0></A>&nbsp;");
+	        if Output_Object.DOS_Filenames then
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""INDEX.GIF"" ALT=""Index"" BORDER=0></A>&nbsp;");
+		else
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""index.gif"" ALT=""Index"" BORDER=0></A>&nbsp;");
+		end if;
 	    else -- Link to the section named "Index".
 	        begin
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
-	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A HREF=""" &
-			Make_Clause_Link_Name (Output_Object,
-			    ARM_Contents.Lookup_Clause_Number ("Index" & (6 .. ARM_Contents.Title_Type'Last => ' '))) &
-	                """><IMG SRC=""index.gif"" ALT=""Index"" BORDER=0></A>&nbsp;");
+		    if Output_Object.DOS_Filenames then
+	                Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A HREF=""" &
+			    Make_Clause_Link_Name (Output_Object,
+			        ARM_Contents.Lookup_Clause_Number ("Index" & (6 .. ARM_Contents.Title_Type'Last => ' '))) &
+	                    """><IMG SRC=""INDEX.GIF"" ALT=""Index"" BORDER=0></A>&nbsp;");
+		    else
+	                Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A HREF=""" &
+			    Make_Clause_Link_Name (Output_Object,
+			        ARM_Contents.Lookup_Clause_Number ("Index" & (6 .. ARM_Contents.Title_Type'Last => ' '))) &
+	                    """><IMG SRC=""index.gif"" ALT=""Index"" BORDER=0></A>&nbsp;");
+		    end if;
 	        exception
 		    when ARM_Contents.Not_Found_Error =>
 		        null; -- No section named "Index".
@@ -515,15 +532,26 @@ package body ARM_HTML is
 	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A HREF=""");
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 	            Ada.Strings.Unbounded.To_String(Output_Object.Ref_URL));
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""lib.gif"" ALT=""References"" BORDER=0></A>&nbsp;");
+	        if Output_Object.DOS_Filenames then
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""LIB.GIF"" ALT=""References"" BORDER=0></A>&nbsp;");
+		else
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""lib.gif"" ALT=""References"" BORDER=0></A>&nbsp;");
+		end if;
 	    else -- Link to the section named "References".
 	        begin
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
-	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A HREF=""" &
-		        Make_Clause_Link_Name (Output_Object,
-			    ARM_Contents.Lookup_Clause_Number ("References" & (11 .. ARM_Contents.Title_Type'Last => ' '))) &
-	                """><IMG SRC=""lib.gif"" ALT=""References"" BORDER=0></A>&nbsp;");
+	            if Output_Object.DOS_Filenames then
+	                Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A HREF=""" &
+		            Make_Clause_Link_Name (Output_Object,
+			        ARM_Contents.Lookup_Clause_Number ("References" & (11 .. ARM_Contents.Title_Type'Last => ' '))) &
+	                    """><IMG SRC=""LIB.GIF"" ALT=""References"" BORDER=0></A>&nbsp;");
+		    else
+	                Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A HREF=""" &
+		            Make_Clause_Link_Name (Output_Object,
+			        ARM_Contents.Lookup_Clause_Number ("References" & (11 .. ARM_Contents.Title_Type'Last => ' '))) &
+	                    """><IMG SRC=""lib.gif"" ALT=""References"" BORDER=0></A>&nbsp;");
+		    end if;
 	        exception
 		    when ARM_Contents.Not_Found_Error =>
 		        null; -- No section named "References".
@@ -533,15 +561,26 @@ package body ARM_HTML is
 	        Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A HREF=""");
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 	            Ada.Strings.Unbounded.To_String(Output_Object.Srch_URL));
-	        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""find.gif"" ALT=""Search"" BORDER=0></A>&nbsp;");
+	        if Output_Object.DOS_Filenames then
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""FIND.GIF"" ALT=""Search"" BORDER=0></A>&nbsp;");
+		else
+	            Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""find.gif"" ALT=""Search"" BORDER=0></A>&nbsp;");
+		end if;
 	    else -- Link to the section named "References".
 	        begin
 		    -- Note: We do the following in one big glup so that if
 		    -- Not_Found_Error is raised, nothing is output.
-	            Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A HREF=""" &
-			Make_Clause_Link_Name (Output_Object,
-			    ARM_Contents.Lookup_Clause_Number ("Search" & (7 .. ARM_Contents.Title_Type'Last => ' '))) &
-	                """><IMG SRC=""find.gif"" ALT=""Search"" BORDER=0></A>&nbsp;");
+	            if Output_Object.DOS_Filenames then
+	                Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A HREF=""" &
+			    Make_Clause_Link_Name (Output_Object,
+			        ARM_Contents.Lookup_Clause_Number ("Search" & (7 .. ARM_Contents.Title_Type'Last => ' '))) &
+	                    """><IMG SRC=""FIND.GIF"" ALT=""Search"" BORDER=0></A>&nbsp;");
+		    else
+	                Ada.Text_IO.Put_Line (Output_Object.Output_File, "&nbsp;<A HREF=""" &
+			    Make_Clause_Link_Name (Output_Object,
+			        ARM_Contents.Lookup_Clause_Number ("Search" & (7 .. ARM_Contents.Title_Type'Last => ' '))) &
+	                    """><IMG SRC=""find.gif"" ALT=""Search"" BORDER=0></A>&nbsp;");
+		    end if;
 	        exception
 		    when ARM_Contents.Not_Found_Error =>
 		        null; -- No section named "Index".
@@ -554,7 +593,11 @@ package body ARM_HTML is
 		    Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A HREF=""" &
 		        Make_Clause_Link_Name (Output_Object,
 			    ARM_Contents.Previous_Clause(Clause)));
-		    Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""prev.gif"" ALT=""Previous"" BORDER=0></A>&nbsp;");
+	            if Output_Object.DOS_Filenames then
+		        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""PREV.GIF"" ALT=""Previous"" BORDER=0></A>&nbsp;");
+		    else
+		        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""prev.gif"" ALT=""Previous"" BORDER=0></A>&nbsp;");
+		    end if;
 	        exception
 		    when ARM_Contents.Not_Found_Error =>
 		        null; -- Probably the first section.
@@ -565,7 +608,11 @@ package body ARM_HTML is
 		    Ada.Text_IO.Put (Output_Object.Output_File, "&nbsp;<A HREF=""" &
 		        Make_Clause_Link_Name (Output_Object,
 			    ARM_Contents.Next_Clause(Clause)));
-		    Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""next.gif"" ALT=""Next"" BORDER=0></A>&nbsp;");
+	            if Output_Object.DOS_Filenames then
+		        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""NEXT.GIF"" ALT=""Next"" BORDER=0></A>&nbsp;");
+		    else
+		        Ada.Text_IO.Put_Line (Output_Object.Output_File, """><IMG SRC=""next.gif"" ALT=""Next"" BORDER=0></A>&nbsp;");
+		    end if;
 	        exception
 		    when ARM_Contents.Not_Found_Error =>
 		        null; -- Probably the last section.
@@ -583,7 +630,7 @@ package body ARM_HTML is
 	    elsif Output_Object.DOS_Filenames then
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 		    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
-		       "-TOC.htm");
+		       "-TOC.HTM");
 	    else
 	        Ada.Text_IO.Put (Output_Object.Output_File,
 		    Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
@@ -1263,7 +1310,7 @@ package body ARM_HTML is
 	        ".\Output\" & File_Name & ".$$$");
 	elsif Output_Object.DOS_Filenames then
 	    Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
-	        ".\Output\" & File_Name & ".htm");
+	        ".\Output\" & File_Name & ".HTM");
 	else
 	    Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
 	        ".\Output\" & File_Name & ".html");
@@ -1398,7 +1445,7 @@ package body ARM_HTML is
 		Original_Name : constant String := Ada.Text_IO.Name (Output_Object.Output_File);
 		Reading_File : Ada.Text_IO.File_Type;
 		Real_Name : constant String :=
-		    Ada.Strings.Fixed.Head (Original_Name, Original_Name'Length-3) & "html";
+		    Ada.Strings.Fixed.Head (Original_Name, Original_Name'Length-3);
 		Buffer : String (1..1000);
 		Len : Natural;
 		Body_Seen : Boolean := False;
@@ -1409,10 +1456,10 @@ package body ARM_HTML is
 	            Original_Name);
 		if Output_Object.DOS_Filenames then
 	            Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
-	                Real_Name(1..Real_Name'Length-1)); --".htm" is the extension here.
+	                Real_Name & "HTM");
 		else
 	            Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
-	                Real_Name);
+	                Real_Name & "html");
 		end if;
 		begin
 		    loop
@@ -1671,15 +1718,15 @@ package body ARM_HTML is
 		begin
 		    Col_Count := (Col_Count + Output_Object.Column_Count - 1) /
 			Output_Object.Column_Count;
-Ada.Text_IO.Put_Line("@@ Calc columns for" & Natural'Image(Output_Object.Column_Count) &
+Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Column_Count) &
   " columns;" & Natural'Image(Output_Object.Current_Item - 1) & " total items;" &
   Natural'Image(Col_Count) & " per column.");
 
 		    -- Split the item list into the appropriate columns.
 		    -- Note that this list is stored in reverse order.
 		    for I in reverse 2 .. Output_Object.Column_Count loop
-Ada.Text_IO.Put_Line("@@   For column" & Natural'Image(I) & " split at item" &
-Natural'Image(Col_Count*(I-1)));
+--Ada.Text_IO.Put_Line("  @@   For column" & Natural'Image(I) & " split at item" &
+--Natural'Image(Col_Count*(I-1)));
 			Where := Output_Object.Column_Text(1);
 			exit when Where = null; -- No columns to look at.
 			if Where.Item <= Col_Count*(I-1) then
@@ -4545,16 +4592,15 @@ Natural'Image(Col_Count*(I-1)));
 	if Output_Object.Big_Files then
 	    null; -- No file name needed, this is a self-reference.
 	else
-	    declare
-	        Name : constant String :=
-		    Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
-	    begin
-		if Output_Object.DOS_Filenames then
-		    Output_Text (Output_Object, Name(1..Name'Length-1)); --".htm" is the extension.
-		else
-		    Output_Text (Output_Object, Name);
-		end if;
-	    end;
+	    if Output_Object.DOS_Filenames then
+	        Output_Text (Output_Object,
+			     Make_Clause_File_Name (Output_Object, Clause_Number)
+				 & ".HTM");
+	    else
+	        Output_Text (Output_Object,
+			     Make_Clause_File_Name (Output_Object, Clause_Number)
+				 & ".html");
+	    end if;
 	end if;
 	Output_Text (Output_Object, "#I");
 	declare
@@ -4822,16 +4868,15 @@ Natural'Image(Col_Count*(I-1)));
 	if Output_Object.Big_Files then
 	    null; -- No file name needed, this is a self-reference.
 	else
-	    declare
-	        Name : constant String :=
-		    Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
-	    begin
-		if Output_Object.DOS_Filenames then
-		    Output_Text (Output_Object, Name(1..Name'Length-1)); --".htm" is the extension.
-		else
-		    Output_Text (Output_Object, Name);
-		end if;
-	    end;
+	    if Output_Object.DOS_Filenames then
+	        Output_Text (Output_Object,
+			     Make_Clause_File_Name (Output_Object, Clause_Number)
+				 & ".HTM");
+	    else
+	        Output_Text (Output_Object,
+			     Make_Clause_File_Name (Output_Object, Clause_Number)
+				 & ".html");
+	    end if;
 	end if;
 	Output_Text (Output_Object, "#" & Target);
 	Output_Text (Output_Object, """>");
@@ -4867,16 +4912,15 @@ Natural'Image(Col_Count*(I-1)));
 	if Output_Object.Big_Files then
 	    null; -- No file name needed, this is a self-reference.
 	else
-	    declare
-	        Name : constant String :=
-		    Make_Clause_File_Name (Output_Object, Clause_Number) & ".html";
-	    begin
-		if Output_Object.DOS_Filenames then
-		    Output_Text (Output_Object, Name(1..Name'Length-1)); --".htm" is the extension.
-		else
-		    Output_Text (Output_Object, Name);
-		end if;
-	    end;
+	    if Output_Object.DOS_Filenames then
+	        Output_Text (Output_Object,
+			     Make_Clause_File_Name (Output_Object, Clause_Number)
+				 & ".HTM");
+	    else
+	        Output_Text (Output_Object,
+			     Make_Clause_File_Name (Output_Object, Clause_Number)
+				 & ".html");
+	    end if;
 	end if;
 	Output_Text (Output_Object, "#" & Target);
 	Output_Text (Output_Object, """>");
