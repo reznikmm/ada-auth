@@ -1,7 +1,7 @@
 @Part(applic, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/applic.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2007/12/28 07:00:42 $}
+@comment{$Revision: 1.5 $ $Date: 2008/01/04 05:29:12 $}
 
 @LabeledAnnex{Test Applicability Criteria}
 
@@ -189,7 +189,7 @@ CE3107A.TST
 
 @leading@keepnext@;If decimal types are not supported, then the tests contained in the
 following files are not applicable: (Note that implementations testing Annex F
-must support decimal types).
+must support decimal types.)
 
 @begin{FourCol}
 C460011.A@*
@@ -1676,7 +1676,7 @@ CXC3005.A
 
 @LabeledSubClause{Multiprocessor Systems}
 
-@leading@keepnext@;If Annex D (Real-time Systems) is tested and the target is a
+@leading@keepnext@;If Annex D (Real-Time Systems) is tested and the target is a
 multiprocessor, then the tests contained in the following files should report
 NOT_APPLICABLE:
 

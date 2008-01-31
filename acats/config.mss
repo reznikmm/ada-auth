@@ -1,7 +1,7 @@
 @Part(config, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/config.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2007/12/28 07:00:42 $}
+@comment{$Revision: 1.6 $ $Date: 2008/01/04 05:29:12 $}
 
 @LabeledSection{Configuration Information}
 
@@ -12,7 +12,7 @@ program format, test structure, delivery structure, and file format.
 ACATS 3.0 is a revision of ACATS 2.6, and has a similar delivery
 structure. The support tools are unchanged, except for updating
 header comments and version identification, and the removal of an
-obsolete tool.
+obsolete character-set processing tool.
 
 The test suite does not provide tools or scripts that can be used to manage
 complete test processing, since such tools are normally specific to
@@ -98,8 +98,8 @@ depends on the implementation of any other annex, except possibly in cases
 where one annex specifically depends on another in Ada (e.g., no test for the
 Information Processing Annex uses features from any other annex, however Real
 Time Annex and Distributed Processing tests may depend on Systems Programming
-Annex features). [There is a single exception to this rule: see Section
-@RefSecNum{Tests for the Distributed Processing Annex}.] Annex tests
+Annex features). (There is a single exception to this rule: see Section
+@RefSecNum{Tests for the Distributed Systems Annex}.) Annex tests
 may use any core feature.
 
 Tests may be created from one or more compilation units. If a test consists of
@@ -320,7 +320,7 @@ and report "PASSED" or "NOT-APPLICABLE". Each class C test reports "PASSED",
 "NOT-APPLICABLE", or "FAILED" based on the results of the conditions tested.
 
 An implementation passes a class C test if it compiles, binds, executes, and
-reports"PASSED". It fails if it does not successfully compile or bind, if it
+reports "PASSED". It fails if it does not successfully compile or bind, if it
 fails to complete execution (hangs or crashes), if the reported result is
 "FAILED", or if it does not produce a complete output report.
 
@@ -368,7 +368,7 @@ Only legacy tests are included in this class.
 
 @LabeledSubClause{Class L}
 
-Class L tests check that all library unit dependencies within a program are
+Class L tests check that all library unit dependences within a program are
 satisfied before the program can be bound and executed, that circularity
 among units is
 detected, or that pragmas that apply to an entire partition are correctly
@@ -454,7 +454,7 @@ Body=[1@\Letter@\Test class (see Section @RefSecNum{Test Classes})
 The convention is illustrated below.
 
 @PictureAlone{Alignment=[Center],
-Border=[None], Height=[180],Width=[345],Name=[Leg-Name.png],
+Border=[None], Height=[180],Width=[345],Name=[LEG-NAME.PNG],
 Descr=[Legacy File Name Convention]}
 @Center{@Shrink{Legacy File Name Convention}}
 
@@ -462,8 +462,10 @@ In multiple file tests, the intended order of compilation is indicated by a
 numeral at position 8. The first file to be compiled has '0', the second has
 '1', and so forth.
 
-The chapter and section numbers of the AIG correspond to those in
+The chapter and section numbers of the AIG (ACVC Implementer's Guide)
+correspond to those in
 @LocalLink{Target=[Ada83],Sec=[References],Text={[Ada83]}}.
+@Defn{ACVC Implementer's Guide}
 
 Note: The use of a ninth character ('m') to indicate the file containing the
 main subprogram has been discontinued. The following table lists the files
@@ -630,7 +632,7 @@ Caption=[],
 Headers=[@b{Position}@\@b{Kind}@\@b{Meaning}],
 Body=[1@\Letter@\Test class; foundations are marked 'F'
 2@\Alphanumeric@\If other than an 'x', the section of the Ada Standard describing the feature under test. An 'x' indicates that the test includes one or more features from an annex of the Ada Standard
-3@\Alphanumeric@\Core clause or annex letter identifier (either core or Specialized Needs Annex); clauses are a hexidecimal value
+3@\Alphanumeric@\Core clause or annex letter identifier (either core or Specialized Needs Annex); clauses are a hexadecimal value
 4@\Alphanumeric@\Sub-clause (if a core test), or clause (if an annex test); a number if less than 10, otherwise a letter with 10='A', 11='B', and so on
 5@\Alphanumeric@\Foundation identifier (alphabetic, unless no foundation is required, in which case a '0')
 6-7@\Decimal@\Sequence number of this test in a series of tests for the same clause; foundation code will have "00".
@@ -639,7 +641,7 @@ Body=[1@\Letter@\Test class; foundations are marked 'F'
 The convention is illustrated below.
 
 @PictureAlone{Alignment=[Center],
-Border=[None], Height=[192],Width=[342],Name=[Mod-Name.png],
+Border=[None], Height=[192],Width=[342],Name=[MOD-NAME.PNG],
 Descr=[Modern File Name Convention]}
 @Center{@Shrink{Modern File Name Convention}}
 
@@ -690,15 +692,15 @@ contained in different files), the file names are related. The first seven
 positions of the names of all the files (other than foundation files) comprised
 by a single test will be identical. The eighth position will provide a
 distinguishing alphanumeric which indicates the required compilation order. In
-legacy tests, the main program is not indicated (see the table in section
+legacy tests, the main subprogram is not indicated (see the table in section
 @RefSecNum{Legacy Naming} for files containing main subprograms). For newer
-(modern) tests, the extension ".am" indicates the file with the main program.
+(modern) tests, the extension ".am" indicates the file with the main subprogram.
 
 All tests apply the convention of naming the main subprogram the same as the
 file (excluding the file extension) plus, for legacy tests only, the
 letter 'm'. For example, the legacy test, C39006F, is contained in four files,
 named c39006f0.ada, c39006f1.ada, c39006f2.ada, and c39006f3.ada. The main
-sub-program of the test is contained in c39006f3.ada and is named @exam{C390006F3M}.
+subprogram of the test is contained in c39006f3.ada and is named @exam{C390006F3M}.
 The test C390006 is also contained in four files, named c3900060.a, c3900061.a,
 c3900062.a, and c3900063.am. The main subprogram of the test is contained in
 c3900063.am and is named @exam{C3900063}.
@@ -853,7 +855,7 @@ The if statement in this skeleton is such a check; unexpected results produce a
 call to Report.Failed. The sequence of test code / check of results may be
 repeated several times in a single test. Finally, there is a call to
 Report.Result that will print the test result to Text_IO output. Often, but not
-always, this structure in enclosed in a declare block.
+always, this structure is enclosed in a declare block.
 
 One or more calls to Report.Failed will report a result of "FAILED" and a brief
 suggestion of the likely reason for that result.
@@ -917,13 +919,14 @@ subdirectory, and a subdirectory for each major grouping of tests. The support
 subdirectory contains all support packages (Report, ImpDef, TCTouch) and the
 source code for all test processing tools (Macro expander, Wide Character
 processor). Each of the other subdirectories contains all tests that begin with
-the indicated prefix. For example, all of the B2* tests are in the b2
-subdirectory; all of the CXH* tests are in the cxh subdirectory. Note that all
-of the A* tests are in the a directory, all of the D* tests are included in the
-d subdirectory, and all of the E* tests are included in the e subdirectory. The
-l directory contains the L tests for the core; other L tests are in directories
-named with three letters, indicating the class (l) and the Specialized Needs
-Annex to which the tests apply.
+the indicated prefix. For example, all of the B2* tests are in the @exam{b2}
+subdirectory; all of the CXH* tests are in the @exam{cxh} subdirectory. Note
+that all of the A* tests are in the @exam{a} directory, all of the D* tests
+are included in the @exam{d} subdirectory, and all of the E* tests
+are included in the @exam{e} subdirectory. The
+@exam{l} directory contains the L tests for the core; other L tests are in
+directories named with three letters, indicating the class (l) and the
+Specialized Needs Annex to which the tests apply.
 
 Subdirectories that would be empty are not stubbed.
 
@@ -932,7 +935,7 @@ list of all subdirectories is included in
 Section @RefSecNum{Guide to Decompressing Files}.
 
 @PictureAlone{Alignment=[Center],
-Border=[None], Height=[175],Width=[541],Name=[Dirs.png],
+Border=[None], Height=[175],Width=[541],Name=[DIRS.PNG],
 Descr=[Delivery Directory Structure]}
 @Center{@Shrink{Delivery Directory Structure}}
 
@@ -941,10 +944,11 @@ Descr=[Delivery Directory Structure]}
 
 To conserve space and ease downloading, all files in the delivered ACATS 3.0
 (including test files, foundation files, and support files) have been
-compressed. Except as noted, decompressed files
+compressed. Except as noted below, decompressed files
 (see Section @RefSecNum{Guide to Decompressing Files}) use only
-ASCII characters. A few tests use Unicode characters. Some of the documentation
-files are provided in PDF and/or HTML form for greater readability. (The HTML
+ASCII characters. A few tests use Unicode characters; these are indicated
+by an @exam{.au} extension. Some of the documentation
+files are provided in PDF and/or HTML forms for greater readability. (The HTML
 documentation files include GIF and PNG graphics files.) Other than
 the documentation files, no formatting control characters, rulers or other
 information intended for editors or display programs are included in the files.

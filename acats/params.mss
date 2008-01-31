@@ -1,7 +1,7 @@
 @Part(params, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/params.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2007/12/28 07:00:42 $}
+@comment{$Revision: 1.4 $ $Date: 2008/01/04 05:29:12 $}
 
 @LabeledAnnex{Parameterization Files}
 
@@ -17,7 +17,9 @@ with the appropriate values. A data file, @Exam{MACRO.DFS}, and an Ada
 program, @Exam{Macrosub}, are provided to facilitate this
 substitution.@Defn{macro substitition}
 
-For tests written since the introduction of Ada 95, a hierearchy of packages is
+For tests written since the standardization of
+@LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}},
+a hierearchy of packages is
 provided that contain constants and functions that provide the desired
 implementation-specific values. These packages ("ImpDef" and its children)
 should be modified for each implementation to provide the needed values.

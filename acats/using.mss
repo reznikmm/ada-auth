@@ -1,7 +1,7 @@
 @Part(using, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/using.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2007/12/28 07:00:42 $}
+@comment{$Revision: 1.5 $ $Date: 2008/01/04 05:29:12 $}
 
 @LabeledSection{Using the ACATS}
 
@@ -13,15 +13,15 @@ necessary), and reprocessing problem tests (if necessary). The first six of
 these tasks must be completed successfully to accomplish a test run. The first
 four normally need be completed only once for each ACATS release. Each step is
 explained in the following sections. The flow from one to the next is
-illustrated in following figures.@*@Comment{Extra blank line to provide some space above the picture}
+illustrated in the following figures.@*@Comment{Extra blank line to provide some space above the picture}
 
 @PictureAlone{Alignment=[Center],
-Border=[None], Height=[508],Width=[363],Name=[Usage-1.png],
+Border=[None], Height=[508],Width=[363],Name=[USAGE-1.PNG],
 Descr=[Using the ACATS, part 1]}
 @Center{@Shrink{Using the ACATS}}
 
 @PictureAlone{Alignment=[Center],
-Border=[None], Height=[372],Width=[313],Name=[Usage-2.png],
+Border=[None], Height=[372],Width=[313],Name=[USAGE-2.PNG],
 Descr=[Using the ACATS, part 2]}
 @Center{@Shrink{Using the ACATS (cont.)}}
 
@@ -54,10 +54,10 @@ tests must be available for a period of time before they are required in
 conformity assessments.
 
 These changes to the issued ACATS are documented in the ACATS Modification List
-(AML).@Defn{acats modification list}@Defn{AML} This list includes a list of all
+(AML).@Defn{ACATS Modification List}@Defn{AML} This list includes a list of all
 new tests, all modified tests, and all withdrawn tests, and an indication as to
 when each will be (or is) required for conformity assessments. Each version of
-the modification list is given a suffix letter. An ZIP archive and tar file
+the modification list is given a suffix letter. A ZIP archive and tar file
 containing the new and/or modified tests is available. The files are named
 MOD_3_0x, where 'x' represents the suffix letter for the AML version.
 
@@ -214,7 +214,7 @@ a hard drive. Uncompress the file with the Unix command
 @begin{example}
 uncompress acats_30.tar.Z
 @end{example}
-@leading@;(note that particular Unix implementations may have different formats
+@leading@;(Note that particular Unix implementations may have different formats
 or require specific qualifiers.)  After the ACATS file has been uncompressed,
 it must be untarred. Move to the directory where you want the acats3_0
 directory to be created and then untar the ACATS files
@@ -419,7 +419,7 @@ The program will replace all symbols in the @exam{.tst} files with values from
 will not be modified.
 
 
-@LabeledSubClause{Package SPPRT13 and Function FcnDecl}
+@LabeledSubClause{Packages SPPRT13 and FCNDECL}
 
 Package SPPRT13 declares six constants of type System.Address that are
 primarily used by tests of Section 13 features. It is in the file @exam{spprt13s.tst}.
@@ -483,11 +483,11 @@ An implementation @i{must} be able to demonstrate that it can detect and report
 @i{all} intended B-test errors.
 
 Splits may also be required in executable tests, if, for example, an
-implementation capacity limitations is encountered (e.g., a number of generic
+implementation capacity limitation is encountered (e.g., a number of generic
 instantiations too large for the implementation). In very exceptional cases,
-tests may be modified by the addition of a length clause (to alter the default
-size of a collection), or by the addition of an elaboration Pragma (to force an
-elaboration order).
+tests may be modified by the addition of an attribute definition clause (to
+alter the default size of a collection), or by the addition of an elaboration
+Pragma (to force an elaboration order).
 
 Tests that use configuration pragmas (see @RefSecNum{Tests that use Configuration Pragmas})
 may require modification since the method of processing configuration pragmas
@@ -564,8 +564,9 @@ successful conformity assessment. CZ tests must be processed and run as the
 first step of a conformity assessment to ensure correct operation of the
 support software.
 
-The acceptance test CZ1101A tests the correct operation of package Report's
-reporting facilities, including checks that Not_Applicable and Failed calls are
+The acceptance test CZ1101A tests the correct operation of the
+reporting facilities of package Report,
+including checks that Not_Applicable and Failed calls are
 reported properly, and that premature calls cause failure. Therefore, CZ1101A
 will print some failure messages when it is executed. The presence of these
 messages does @i{not} necessarily mean the test has failed. A listing of the
@@ -597,7 +598,7 @@ failure messages when it is executed. The presence of these messages does
 for CZ00004 is included in @RefSec{Results of CZ Tests}; since this output
 includes values from the customized impdef, non-failure lines may vary from
 those in the expected output. However, the number of lines and their relative
-positions may not change.
+positions should not change (only the contents of the lines can change).
 
 
 @LabeledClause{Establishing Command Scripts}
@@ -622,9 +623,9 @@ attempt to execute the L tests. It should compile all class F files. It should
 compile, bind, and execute all class A, C, D, and E tests.
 
 Sample commands for processing the ACATS are a required part of a formal Ada
-Comformity Assessment Report. If a test report is available for the
+Comformity Assessment Test Report. If a test report is available for the
 implementation being tested, these commands can be used as a guideline for
-developing command scripts.
+developing command scripts.@Defn{Ada Conformity Assessment Test Report}
 
 
 @LabeledSubClause{Dependencies}
@@ -701,7 +702,7 @@ identify the tests to be bundled and to write a driver for them.
 A user may streamline processing of the ACATS tests to the greatest degree
 possible consistent with complete processing of all tests.
 
-Many Ada95 tests rely on foundation code. A foundation need not be compiled
+Many modern tests rely on foundation code. A foundation need not be compiled
 anew each time a different test uses it. In a processing model based on a
 program library, it is reasonable to compile the code into the library only
 once and allow the binder to use the processed results for each test that
@@ -723,7 +724,7 @@ language.@Defn2{Term=[processing],Sec=[foreign language tests]}
 
 Tests for the Specialized Needs Annexes of Ada need not be processed except
 by implementations that wish to have Annex results documented. In that case,
-only the tests for the annex in question (in addition to all core tests) need
+only the tests for the annex(es) in question (in addition to all core tests) need
 be processed. If any tests for a particular Annex are processed, then all tests
 for that Annex must be processed. If an implementation does not support a
 feature in a Specialized Needs Annex test, then it must indicate the
@@ -747,7 +748,7 @@ some core tests are affected. For example, distributed processing tests may
 require an executable image in multiple partitions, where partitions are
 constructed in an implementation specific manner. Real-time processing tests
 may have configuration pragmas that have to be handled in an implementation
-specific way. Numeric Processing tests require strict mode processing to be
+specific way. Numeric processing tests require strict mode processing to be
 selected. Each such test has a Special Requirements section in the test header
 describing any implementation specific handling that is required for
 the test.@Defn{special handling test}@Defn2{Term=[test],Sec=[special handling]}@Defn2{Term=[processing],Sec=[special handling tests]}
@@ -782,7 +783,7 @@ ca12001
 
 @LabeledSubSubClause{Foreign Language Interface Tests}
 
-Annex B, Interface to Other Languages, is part of the Ada95 core language. Any
+Annex B, Interface to Other Languages, is part of the Ada core language. Any
 implementation that provides one or more of the packages Interfaces.C,
 Interfaces.COBOL, or Interfaces.Fortran @i{must} correctly process, and pass,
 the tests for interfaces to C, COBOL, and/or Fortran code respectively, with
@@ -905,9 +906,9 @@ cxb5005*
 @end{FourCol}
 
 
-@LabeledSubSubClause{Tests for the Distributed Processing Annex}
+@LabeledSubSubClause{Tests for the Distributed Systems Annex}
 
-The ACATS tests for the Distribution Annex are applicable only to
+The ACATS tests for the Distributed Systems Annex are applicable only to
 implementations that wish to test this SNA. Not all of these tests apply to all
 implementations, since the annex includes some implementation permissions that
 affect the applicability of some tests.
@@ -926,7 +927,7 @@ whether the Real-Time Annex is also supported.
 @end{enumerate}
 
 An implementation may test for the annex without providing a PCS. In order to
-test for the Distribution Annex, an implementation must allow a body for
+test for the Distributed Systems Annex, an implementation must allow a body for
 System.RPC to be compiled.
 
 
@@ -962,8 +963,8 @@ lxe3001
 
 @leading@;An implementation is not required to provide a PCS
 [see Ada E.5(27)] in
-order to test the Distribution Annex. If no PCS is provided then the following
-tests are not applicable:
+order to test the Distributed Systems Annex. If no PCS is provided then the
+following tests are not applicable:
 
 @begin{FourCol}
 cxe1001@*
@@ -996,9 +997,9 @@ cxe5003
 
 @Subheading{@Shrink{Real-Time Annex Support}}
 
-Many implementations that support the Distribution Annex will also support the
-Real-Time Annex. Test cxe4003 is designed to take advantage of Real-Time Annex
-features in order to better test the Distribution Annex.
+Many implementations that support the Distributed Systems Annex will also
+support the Real-Time Annex. Test cxe4003 is designed to take advantage of
+Real-Time Annex features in order to better test the Distributed Systems Annex.
 
 For implementations that do not support the Real-Time Annex, test cxe4003 must
 be modified. This modification consists of deleting all lines that end with the
@@ -1007,7 +1008,8 @@ comment @exam{--RT}.
 
 @Subheading{@Shrink{Configuring Multi-Partition Tests}}
 
-Some Distribution Annex tests require multiple partitions to run the test, but
+Some Distributed Systems Annex tests require multiple partitions to run the
+test, but
 no more than two partitions are required for running any of them. All
 multi-partition tests contain a main procedure for each of the two partitions.
 The two partitions are referred to as "A" and "B" and the main procedures for
@@ -1098,8 +1100,8 @@ cxg2021
 
 @LabeledSubSubClause{Tests that use Configuration Pragmas}
 
-@leading@;Several of the tests in Annex D, Real Time Processing, Annex E,
-Distributed Processing, and Annex H, High Integrity Systems, use configuration
+@leading@;Several of the tests in Annex D, Real Time Systems, Annex E,
+Distributed Systems, and Annex H, High Integrity Systems, use configuration
 pragmas. The technique for applying a configuration pragma to a test composed
 of multiple compilation units is implementation dependent and not specified by
 the ACATS. Every implementation that uses any such test in a conformity
@@ -1286,11 +1288,12 @@ in direct proximity with the @Exam{-- ERROR:} marking of the errors.
 
 Some B-tests also include the notation @Exam{-- OK} to indicate constructs that
 @i{must not} be identified as errors. This is especially important since some
-constructs were errors in @LocalLink{Target=[Ada83],Sec=[References],Text={[Ada83]}}
+constructs that were errors
+in @LocalLink{Target=[Ada83],Sec=[References],Text={[Ada83]}}
 are now legal in later versions of Ada.
 
 Some B-tests exercise constructs whose correctness depends on source code that
-is textually separated (e.g., a deferred constant and its full declaration). In
+is textually separated (for example, a deferred constant and its full declaration). In
 these cases, it may be reasonable to report an error at both locations. Such
 cases are marked with @Exam{-- OPTIONAL ERROR}. These lines may be flagged as
 errors by some, but not all, implementations. Unless an optional error is
@@ -1312,7 +1315,7 @@ at any of the places marked @exam{-- POSSIBLE ERROR:} for an error set.
 
 A test is graded as "passed" if it reports each error in the test. The content
 of error messages is considered only to determine that they are indeed
-indications of errors (as opposed to warnings, e.g.) and that they refer to the
+indications of errors (as opposed to warnings) and that they refer to the
 expected errors. The Reference Manual does not specify the form or content of
 error messages. In particular, a test with just one expected error is graded as
 "passed" if the test is rejected at compile time for any reason.

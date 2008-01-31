@@ -1,34 +1,37 @@
 @Part(intro, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/intro.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2007/12/28 07:00:42 $}
+@comment{$Revision: 1.5 $ $Date: 2008/01/04 05:29:12 $}
 
 @LabeledSection{Introduction}
 
-The Ada Conformity Assessment Test Suite (ACATS) is the official test method
-used to check conformity of an Ada implementation with the Ada programming
+The Ada Conformity Assessment Test Suite (ACATS) provides the official
+tests used to check conformity of an Ada implementation with the
+Ada programming
 language standard (@LocalLink{Target=[Ada95],Sec=[References],
-Text=[ANSI/ISO/IEC 8652:1995]} and later corrigendums and
+Text=[ANSI/ISO/IEC 8652:1995]} and later corrigenda and
 amendments). The ACATS User's Guide is part of the ACATS and is distributed
 with the test programs and testing support packages. It explains the contents
-and use of the test suite.
+and use of the
+test suite.@Defn{Ada Conformity Assessment Test Suite}@SeeOther{Primary=[ACATS],Other=[Ada Conformity Assessment Test Suite]}@Defn{Ada implementation}@Defn{Ada}@Defn{Ada programming language}
 
 The ACATS is an important part of the conformity assessment process described
 in ISO/IEC-18009, Ada: Conformity of a Language Processor @LocalLink{Target=[ISO99],
 Sec=[References],Text={[ISO99]}}. This
 standard provides a framework for testing language processors, providing a
-stable and reproducible basis for testing. The Ada Resource Association has
+stable and reproducible basis for testing. The Ada Resource Association (ARA) has
 sponsored an instantiation of that process since October 1998. The process is
-managed by the Ada Conformity Assessment Authority (ACAA).
+managed by the Ada Conformity Assessment Authority (ACAA).@Defn{Ada Conformity Assessment Authority}@Defn{Ada Resource Association}@Defn{Ada Validation Organization}
 
 Prior to the ISO standard, the U.S. Department of Defense sponsored a similar
 conformity assessment process under the Ada Joint Program Office (AJPO). The
 test suite for that process was known as the Ada Compiler Validation Capability
-(ACVC). The AJPO developed ACVC versions based on @LocalLink{Target=[Ada83],
+(ACVC).@Defn{Ada Compiler Validation Capability}@Defn{Ada Joint Program Office}@SeeOther{Primary=[ACVC],Other=[Ada Compiler Validation Capability (ACVC)]}
+The AJPO developed ACVC versions based on @LocalLink{Target=[Ada83],
 Sec=[References],Text=[ANSI/MIL-STD-1815A-1983, ISO/8652:1987]}
 (Ada 83), which were numbered 1.x where x ranged from 1 to 11. It
-later developed ACVC versions based on @LocalLink{Target=[Ada95],
-Sec=[References],Text=[ANSI/ISO/IEC 8652:1995]} (Ada 95), numbered
+later developed ACVC versions based on ANSI/ISO/IEC 8652:1995
+(@LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}}), numbered
 2.0, 2.0.1, 2.1, and 2.2.
 
 When the ACAA took over Ada conformity assessment, it adopted the ACVC as the
@@ -42,7 +45,7 @@ the already developed but unreleased ACVC 2.2 was released and used as ACATS
 This version of the ACATS is version 3.0. As with ACATS 2.3 and later, this
 version was completely developed under the auspices of the ACAA. ACATS 3.0
 contains test programs to check for conformity to new language features defined
-in @LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}}, as well
+in ISO/IEC 8652:1995/AMD 1:2007 (@LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}}), as well
 as test programs to check for conformity to language
 features defined in earlier versions of Ada, including @LocalLink{Target=[Ada95],
 Sec=[References],Text={[Ada95]}} and @LocalLink{Target=[Ada83],
@@ -58,7 +61,7 @@ govern all conformity assessments, notwithstanding anything in this document
 that may be interpreted differently. Moreover, this guide does not discuss
 specific requirements on processing of the ACATS test suite, or submission and
 grading of results that an Ada Conformity Assessment Laboratory (ACAL) may
-impose.
+impose.@Defn{Ada Conformity Assessment Laboratory}@Defn{Ada Validation Facility}
 
 The User's Guide is intended to be used by compiler implementers, software
 developers who maintain a version of the ACATS as a quality control or software
@@ -102,7 +105,7 @@ software portability by ensuring consistent processing of Ada language features
 as prescribed by the Ada Standard documents (@LocalLink{Target=[Ada95],
 Sec=[References],Text={[Ada95]}}, @LocalLink{Target=[TC1],
 Sec=[References],Text={[TC1]}}, and @LocalLink{Target=[Amend1],
-Sec=[References],Text={[Amend1]}}). ACATS
+Sec=[References],Text={[Amend1]}}@Defn{Ada Standard documents}). ACATS
 tests use language features in contexts and idioms expected in production
 software. While they exercise a wide range of language feature uses, they do
 not and cannot include examples of all possible feature uses and interactions.
@@ -120,7 +123,7 @@ optimization. They do not investigate or report compiler or implementation
 choices in cases where the standard allows options.
 
 
-@LabeledClause{ACATS coverage of Ada}
+@LabeledClause{ACATS Coverage of Ada}
 
 The ACATS needs to test as many rules as possible in order to meet the goal of
 enhancing Ada software portability. After all, a rule that is not tested is far
@@ -152,7 +155,7 @@ documents, which will be updated with new information and tests with each new
 ACATS version.
 
 Coverage testing will generally not test combinations of features, so problems
-that only manifest themselves in such combinations will not be detected. Test
+that only manifest themselves in such combinations will not be detected. Tests
 designed primarily to cover language rules are most useful to prevent gross
 errors in implementations (such as forgetting to implement checks or features).
 As such, the ACATS also supplements those tests with tests written to emulate

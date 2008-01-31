@@ -30,7 +30,7 @@
 we have no search box.}
 @HTMLTabs{EmulateFixedOnly}
 @HTMLHeader{<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>ACATS 3.0 User's Guide</B></SPAN></DIV>
-<DIV Class="Normal"><I><B><A HREF="UG-TTL.htm">Title Page</A></B></I></DIV>}
+<DIV Class="Normal"><I><B><A HREF="UG-TTL.HTM">Title Page</A></B></I></DIV>}
 @HTMLFooter{}
 @HTMLColor{Text=[#000000],Background=[#FFFFE8],Link=[#0000FF],VLink=[#800080],ALink=[#FF0000]}
 

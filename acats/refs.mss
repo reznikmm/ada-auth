@@ -1,7 +1,7 @@
 @Part(refs, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/refs.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2007/12/14 06:19:01 $}
+@comment{$Revision: 1.2 $ $Date: 2008/01/04 05:29:12 $}
 
 
 @UnnumberedSection{References}
@@ -24,7 +24,14 @@ Text=[http://archive.adaic.com/standards/ada95.html]}.)}}
 Information technology @em Programming languages @em Ada @em
 Amendment 1, March 2007. @Shrink{@i{(An unofficial
 version can be found at @URLLink{URL=[http://www.ada-auth.org/amendment.html],
-Text=[http://www.ada-auth.org/amendment.html]}.)}}
+Text=[http://www.ada-auth.org/amendment.html]}. An unofficial document
+(@ldquote@;Ada 2005 Reference Manual@rdquote) that
+merges @LocalLink{Target=[Amend1],
+Sec=[References],Text={[Amend1]}} with @LocalLink{Target=[Ada95],
+Sec=[References],Text={[Ada95]}} and @LocalLink{Target=[TC1],
+Sec=[References],Text={[TC1]}} can be found at
+@URLLink{URL=[http://www.adaic.org/standards/ada05.html],
+Text=[http://www.adaic.org/standards/ada05.html]}.)}}
 
 @LocalTarget{Target=[ISO99],Text={[ISO99]}}@\ISO/IEC 18009:1999,
 Information technology @em Programming languages @em Ada: Conformity Assessment of a Language Processor, December 1999
