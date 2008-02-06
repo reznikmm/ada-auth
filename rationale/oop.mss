@@ -1,7 +1,7 @@
 @Part(oop, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/oop.mss,v $)
-@comment($Revision: 1.8 $ $Date: 2006/12/23 06:02:01 $)
+@comment($Revision: 1.9 $ $Date: 2008/01/31 05:06:19 $)
 
 @LabeledSection{Object oriented model}
 
@@ -66,7 +66,7 @@ constructors
 
 @AILink{AI=[AI95-00391-01],Text=[391]}@\Functions with controlling results on null extension
 
-@AILink{AI=[AI95-00396-01],Text=[396]}@\The "no hidden interfaces" rule will be found in Chapter @RefSecNum{Tasking and Real-Time}
+@AILink{AI=[AI95-00396-01],Text=[396]}@\The "no hidden interfaces" rule (this is discussed in Section @RefSecNum{Synchronized interfaces})
 
 @AILink{AI=[AI95-00401-01],Text=[401]}@\Terminology for interfaces
 
@@ -959,7 +959,7 @@ We will assume that the root type is declared as
 @begin[Example]
 @key[package] Geometry @key[is]
    @key[type] Object @key[is abstract tagged private];
-   @key[procedure] Move(O: @key[in out] Object'Class; X, Y: Float);
+   @key[procedure] Move(O: @key[in out] Object'Class; X, Y: @key[in] Float);
    ...
 @key[private]
    @key[type] Object @key[is abstract tagged]
@@ -1423,7 +1423,7 @@ because the root types @exam[Controlled] and @exam[Limited_Controlled]
 are declared in the library level package @exam[Ada.Finalization].
 The same applies to storage pools and streams because again the root
 types @exam[Root_Storage_Pool ]and @exam[Root_Stream_Type] are declared
-in library packages.
+in library packages.@Defn{nested type extension}
 
 This has a cumulative effect since if we write a generic unit using
 any of these types then that package can itself only be instantiated
@@ -1586,7 +1586,7 @@ the return from a function with a class wide result that the value
 being returned does not have the tag of a type at a deeper level than
 that of the function itself. So in this example there is a check on
 the return from the function @exam[Dodgy]; this fails and raises
-@exam[Program_Error] so all is well.
+@exam[Program_Error] so all is well.@Defn{accessibility checks}
 
 There are similar checks on class wide allocators and when using
 @exam[T'Class'Input] or @exam[T'Class'Output]. Some of these can be carried out
@@ -1707,7 +1707,7 @@ function. The objective of this is to create an object given the value of its
 tag. Such functions are often called object factory functions for obvious
 reasons (the word factory is derived from the Latin facere, to make). The
 specification of the
-function is@Defn{object constructor}@Defn{object factory}@Defn{factory}
+function is@Defn{object constructor}@Defn{object factory}@Defn{factory}@Defn{constructor function}
 @begin[Example]
 @key[generic]
    @key[type] T (<>) @key[is abstract tagged limited private];
@@ -1776,7 +1776,7 @@ can be passed to the function @exam[Constructor].
 The generic function @exam[Generic_Dispatching_Constructor] takes
 two parameters, one is the tag of the type of the object to be created
 and the other is the auxiliary information to be passed to the dispatching
-function @exam[Constructor].@Defn2{Term=[function],Sec=[Generic_Dispatching_Constructor]}@Defn{Generic_Dispatching_Constructor function}@Defn{Ada.Generic_Dispatching_Constructor function}
+function @exam[Constructor].@Defn2{Term=[function],Sec=[Ada.Tags.Generic_Dispatching_Constructor]}@Defn{Generic_Dispatching_Constructor function}@Defn{Ada.Tags.Generic_Dispatching_Constructor function}@Defn{Generic_Dispatching_Constructor function}
 
 @leading@;Note that the type @exam[Parameters] is used as an access parameter
 in both the generic function and the formal function @exam[Constructor].
@@ -2023,7 +2023,7 @@ by writing something like
 further items in the package @exam[Ada.Tags] whose specification in
 Ada 2005 is
 @begin[Example]
-@tabset{P28}@key[package] Ada.Tags @key[is]
+@tabset{P28}@key[package] Ada.Tags @key[is]@Defn{Tags package}@Defn{Ada.Tags package}@Defn2{Term=[package],Sec=[Ada.Tags]}
    @key[pragma] Preelaborate(Tags);
 
    @key[type] Tag @key[is private];
@@ -2175,7 +2175,7 @@ with private types and generics.
 @begin[Example]
 @key[package] P @key[is]
    @key[type] NT@key[ is new] T @key[with private];
-   @key[procedure] Op(X: T);
+   @key[procedure] Op(X: NT);
 @key[private]
 @end[Example]
 
@@ -2186,7 +2186,7 @@ Then clearly it would be wrong to write
 @key[package] P @key[is]
    @key[type] NT@key[ is new] T @key[with private];  @\-- @examcom[T has no Op]
    @key[overriding@\--]@examcom[ illegal]
-   @key[procedure] Op(X: T);
+   @key[procedure] Op(X: NT);
 @key[private]
 @end[Example]
 
@@ -2372,12 +2372,14 @@ with controlling results.
 
 The reader may recall the general rule in Ada 95 that a function that
 is a primitive operation of a tagged type and returns a value of the
-type, must always be overridden when the type is extended. This is
+type, always requires overriding when the type is extended. This is
 because the function for the extended type must create values for
-the additional components. This rule is sometimes phrased as saying
-that the function "goes abstract" and so has to be overridden if the
-extended type is concrete. The irritating thing about the rule in
-Ada 95 is that it applies even if there are no additional components.@Defn{goes abstract}@Defn{shall be overridden}
+the additional components. (This rule is sometimes incorrectly phrased
+as saying that the function "goes abstract" if the extended type is concrete;
+this is incorrect as the rules for abstract functions and functions that
+"require overriding" are quite different.) The irritating thing about the rule
+in Ada 95 is that it applies even if there are no additional
+components.@Defn{goes abstract}@Defn{requires overriding}
 
 @leading@keepnext@;Thus consider a generic version of the set package of
 Section @RefSecNum{The prefixed notation}
@@ -2482,7 +2484,7 @@ This fails to compile in Ada 95 since it is ambiguous because both
 the function @exam["*"] returning a length is abstract it nevertheless
 is still there and is considered for overload resolution. So we don't
 know whether we are calling @exam[Image] on a length or on an area
-because we don't know which @exam["*"] is involved.
+because we don't know which @exam["*"] is involved.@Defn2{Term=[overload resolution],Sec=[abstract subprograms ignored]}
 
 So declaring the operation as abstract does not really get rid of
 the operation at all, it just prevents it from being called but its

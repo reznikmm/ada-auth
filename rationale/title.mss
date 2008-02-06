@@ -1,7 +1,7 @@
 @Part(title, Root="rat.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/Rationale/title.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/01/22 05:07:41 $}
+@comment{$Revision: 1.3 $ $Date: 2008/01/31 05:06:19 $}
 
 @Center{@Swiss{@Grow{@Grow{@Grow{@Grow{@Grow{@Grow{@B[Rationale]}}}}}}}}@*
 
@@ -23,4 +23,4 @@
 Tel: +44 118 947 4125@*
 email: @URLLink{URL=[mailto:jgpb@jbinfo.demon.co.uk],Text=[jgpb@jbinfo.demon.co.uk]}}}
 
-@Grow{@Latin1(169) 2005, 2006 John Barnes Informatics.}
+@Grow{@Latin1(169) 2005, 2006, 2007 John Barnes Informatics.}

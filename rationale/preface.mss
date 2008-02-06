@@ -1,7 +1,7 @@
 @Part(preface, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/preface.mss,v $)
-@comment($Revision: 1.2 $ $Date: 2006/12/23 06:01:57 $)
+@comment($Revision: 1.3 $ $Date: 2008/01/31 05:06:18 $)
 
 @UnNumberedSection(Preface)
 
@@ -43,4 +43,11 @@ integrated description of Ada 2005 as a whole including some further examples
 will be found in the latest version of my textbook which is entitled
 @i{Programming in Ada 2005} @LocalLink{Target=[R13],Sec=[References],Text={[13]}}.
 
-@right{@*John Barnes@*Caversham@*England@*September 2006}
+Finally, for the full details, please consult the Ada 2005 Reference Manual
+which is also published in the LNCS series
+@LocalLink{Target=[R14],Sec=[References],Text={[14]}}. There is also a version
+known as the Annotated Ada Reference Manual which contains much additional
+commentary. This will be found online
+@LocalLink{Target=[R15],Sec=[References],Text={[15]}}.
+
+@right{@*John Barnes@*Caversham@*England@*December 2007}

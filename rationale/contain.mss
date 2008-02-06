@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/contain.mss,v $)
-@comment($Revision: 1.6 $ $Date: 2006/12/23 06:01:51 $)
+@comment($Revision: 1.7 $ $Date: 2008/01/31 05:06:18 $)
 
 @LabeledSection{Containers}
 
@@ -16,7 +16,7 @@ A major enhancement to the predefined library in Ada 2005 is the addition
 of a container library. This is quite extensive and merits this separate
 chapter on its own. Other aspects of the predefined library and the
 overall rationale for extending the library were described in the
-previous chapter (see @RefSecNum{Predefined library}).
+previous chapter (see @RefSecNum{Predefined library}).@Defn{containers}
 
 The main packages in the container library can be grouped in various
 ways. One set of packages concerns the manipulation of objects of
@@ -408,7 +408,7 @@ that no copying is involved since it is only the links that are moved.
 The procedure @exam[Merge] takes the elements from @exam[Source] and
 adds them to @exam[Target]. After the merge @exam[Length(Source)]
 is zero. If both lists were sorted before the merge then the result
-is also sorted.
+is also sorted.@Defn2{Term=[sorting],Sec=[list and vector containers]}
 
 @leading@;And finally we have
 @begin[Example]
@@ -1221,8 +1221,8 @@ themselves prime. Mersenne gave a list of those up to 257 which he
 said were prime (namely 2, 3, 5, 7, 13, 17, 19, 31, 67, 127, 257).
 It was not until 1947 that it was finally settled that he got some
 of them wrong (61, 89, and 107 are also prime but 67 and 257 are not).
-At the time of writing there are 42 known Mersenne primes and the
-largest which is also the largest known prime number is @i[M]@-{25964951}
+At the time of writing there are 44 known Mersenne primes and the
+largest which is also the largest known prime number is @i[M]@-{32582657}
 @en see @URLLink{URL=[http://www.mersenne.org],Text=[www.mersenne.org]}.
 
 The specification of the hashed maps package is very similar to that
@@ -2104,7 +2104,7 @@ ourselves.
 
 
 There are versions of the six container packages we have just been
-discussing for indefinite types.
+discussing for indefinite types.@Defn2{Term=[containers],Sec=[indefinite]}
 
 As mentioned in Section @RefSecNum{Organization of containers}, an
 indefinite (sub)type is one for which
@@ -2426,7 +2426,8 @@ we do not have to copy the list in order to scan it.
 
 @leading@Defn2{Term=[sorting],Sec=[array]}The final facilities in the
 container library are generic procedures
-for array sorting. There are two versions, one for unconstrained arrays
+for array sorting.@Defn{array sorting}
+There are two versions, one for unconstrained arrays
 and one for constrained arrays. Their specifications are@Defn2{Term=[package],Sec=[Ada.Containers.Generic_Array_Sort]}@Defn{Ada.Containers.Generic_Array_Sort package}@Defn{Generic_Array_Sort package}
 @begin[Example]
 @key[generic]

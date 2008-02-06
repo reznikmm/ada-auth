@@ -1,7 +1,7 @@
 @Part(intro, Root="rat.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/Rationale/intro.mss,v $}
-@comment{$Revision: 1.12 $ $Date: 2006/12/23 06:01:54 $}
+@comment{$Revision: 1.13 $ $Date: 2008/01/31 05:06:18 $}
 
 @LabeledSection{Introduction}
 
@@ -31,7 +31,7 @@ Association and Ada-Europe.
 
 The development was performed under the guidance of
 ISO/IEC JTC1/SC22 WG9 (hereinafter just called WG9) chaired
-adroitly by James Moore whose deep knowledge leads us safely
+adroitly by James Moore whose deep knowledge led us safely
 through the minefield of ISO procedures. This committee has
 included national representatives of many nations including
 Belgium, Canada, France, Germany, Italy, Japan, Sweden,
@@ -44,27 +44,33 @@ Rapporteur Group (the ARG) in drafting the revised standard.
 The ARG is a team of experts nominated by the national bodies
 represented on WG9 and the two liaison organizations, ACM
 SIGAda and Ada-Europe. The ARG was originally led with
-Teutonic precision by Erhard Pl@Latin1(246)dereder and is currently led
+Teutonic precision by Erhard Pl@Latin1(246)dereder and then
 with Transalpine Gallic flair by Pascal Leroy. The editor,
 who at the end of the day actually writes the words of the
-standard, is the indefatigable Randy (fingers) Brukardt.
+standard, was and is the indefatigable Randy (fingers) Brukardt.
 
-Suggestions for the revised standard have come from a number
+Suggestions for the revised standard came from a number
 of sources such as individuals on the ARG, national bodies on
 WG9, users via email discussions on Ada-Comment and so on.
 
-At the time of writing (September 2006), the revision process is
-finished apart from final formal approval. The various changes
-have been integrated to form new versions of both the Annotated
-Ada Reference Manual and the standard Ada Reference Manual. Final
-approval of the new standard should occur around the end of 2006.
+Ada 2005 is formally defined as Ada 95 as corrected by the Corrigendum
+@LocalLink{Target=[R2],Sec=[References],Text={[2]}} and
+then amended by the Amendment @LocalLink{Target=[R16],Sec=[References],Text={[16]}}
+and published by ISO in March 2007. It is almost
+impossible to read these three documents in parallel and so they been
+integrated to form new versions of both the Annotated Ada Reference Manual
+@LocalLink{Target=[R15],Sec=[References],Text={[15]}} and
+the standard Ada Reference
+Manual @LocalLink{Target=[R14],Sec=[References],Text={[14]}}.
 
 There was much discussion on whether the language should
-be called Ada 2005 or Ada 2006. For various reasons the WG9
+be called Ada 2005 or Ada 2006 or indeed Ada 2007. For various reasons the WG9
 meeting in York in June 2005 decided that the vernacular name
 should be Ada 2005.
 
+
 @LabeledClause{Scope of revision}
+
 @leading@;The changes from Ada 83 to Ada 95 were large. They included
 several major new items such as
 @begin{Itemize}
@@ -516,7 +522,7 @@ a null statement. So we might have
    @key[procedure] N(X: Int1) @key[is null];
 end P1;
 @end{Example}
-@leading@;Note carefully that @key[interface] is a new reserved word.@Defn2{Term=[interface],Sec=[keyword]}
+@leading@;Note carefully that @key[interface] is a new reserved word.@Defn2{Term=[interface],Sec=[reserved word]}
 We could now derive a concrete type from the interface @Exam{Int1} by
 @begin{Example}
    @key[type] DT @key[is new] Int1 @key[with record] ... @key[end record];
@@ -585,7 +591,7 @@ just for interfaces. We can give a null procedure as a
 specification whatever its profile and no body is then
 required or allowed. But they are clearly of most value with
 tagged types and inheritance. Note in particular that the
-package @Exam{Ada.Finalization} in Ada 2005 is
+package @Exam{Ada.Finalization} in Ada 2005 is@Defn{Ada.Finalization package}@Defn2{Term=[package],Sec=[Finalization]}
 @begin{Example}
 @key[package] Ada.Finalization @key[is]
    @key[pragma] Preelaborate(Finalization);
@@ -623,7 +629,7 @@ The final change in the OO area to be described here is the
 ability to (optionally) state explicitly whether a new
 operation overrides an existing one or not.
 
-@leading@;At the moment, in Ada 95, small careless errors in subprogram
+@leading@;In Ada 95, small careless errors in subprogram
 profiles can result in unfortunate consequences whose cause
 is often difficult to determine. This is very much against
 the design goal of Ada to encourage the writing of correct
@@ -663,7 +669,7 @@ the use of overriding indicators is optional; there are also
 deeper reasons concerning private types and generics which
 are discussed in Section
 @RefSecNum{Overriding and overloading}.@Defn2{Term=[overriding],
-Sec=[keyword]}
+Sec=[reserved word]}
 
 @Leading@;Similar problems can arise if we get the profile wrong.
 Suppose we derive a new type from @Exam{T} and attempt to override
@@ -706,7 +712,7 @@ lead to disaster. In order to avoid disasters, Ada 95 takes a
 stern view regarding the naming of access types and their
 conversion. However, experience has shown that the Ada 95
 view is perhaps unnecessarily stern and leads to tedious
-programming.
+programming.@Defn{access types}
 
 @leading@;We will first consider the question of giving names to access
 types. In Ada 95 all access types are named except for access
@@ -1025,7 +1031,7 @@ in a symmetric way. Each line contains a list or array of the
 points on it and similarly each point contains a list or
 array of the lines through it. We can imagine that they are
 both derived from some root type containing printing
-information such as color. In Ada 95 we might write
+information such as color. In Ada 95 we might write@Defn{incomplete type}
 @begin{Example}
 @key[type] Object @key[is abstract tagged]
    @key[record]
@@ -1070,7 +1076,7 @@ completion have to be in the same package.
 The net outcome is that we end up with giant cumbersome
 packages.
 
-What we need therefore is some way of logically enabling the
+What we need therefore is some way of logically enabling the@Defn{incomplete view}
 incomplete view and the completion to be in different
 packages. The elderly might remember that in the 1980 version
 of Ada the situation was even worse @en the completion had to
@@ -1167,7 +1173,7 @@ found in Section @RefSecNum{Mutually dependent types}.
 
 Another enhancement in this area is the introduction of
 private with clauses which overcome a problem with private
-child packages.
+child packages.@Defn{private with clause}@Defn2{Term=[with clause],Sec=[private]}
 
 @leading@;Private child packages were introduced to enable the details
 of the implementation of part of a system to be decomposed
@@ -1212,7 +1218,7 @@ Note that the public child and private child might have
 mutually declared types as well in which case they might also
 wish to use the limited with facility. In this case the
 public child would have a limited private with clause for the
-private child written thus
+private child written thus@Defn{limited private with clause}@Defn2{Term=[with clause],Sec=[limited private]}
 @begin{Example}
 @key[limited private with] App.Secret_Details;
 @key[package] App.User_View @key[is] ...
@@ -1249,7 +1255,7 @@ initialization of limited types because of the view that
 initialization requires assignment and thus copying. A
 consequence is that we cannot declare constants of a limited
 type either. Ada 2005 overcomes this problem by allowing
-initialization by aggregates.
+initialization by aggregates.@Defn2{Term=[initialization],Sec=[of limited objects]}
 
 @leading@keepnext@;As a simple example, consider
 @begin{Example}
@@ -1274,7 +1280,7 @@ Not only is this annoying but it is prone to errors as well. If we
 add a further component @exam[D] to the record type @exam[T] then
 we might forget to initialize it. One of the advantages of aggregates
 is that we have to supply all the components (allowing automatic so-called
-full coverage analysis, a key benefit of Ada).
+full coverage analysis, a key benefit of Ada).@Defn{coverage analysis}
 
 @leading@keepnext@;Ada 2005 allows the initialization with aggregates thus
 
@@ -1309,7 +1315,7 @@ illustration. Now we cannot give an explicit initial value for a
 @exam[Semaphore]  but we would still like to use an aggregate to
 get the coverage check.
 In such cases we can use the box symbol @exam[<>] to mean use the
-default value for the type (if any). So we can write
+default value for the type (if any). So we can write@Defn2{Term=[default value],Sec=[in aggregate]}@Defn2{Term=[box],Sec=[in aggregate]}
 @begin[Example]
 X: PT := (Guard => <>, Count => 0, Finished => <>);
 @end[Example]
@@ -1364,7 +1370,7 @@ identifiers are new to Ada 2005. Further details will be found in Section
 permit the ceiling priority of a protected object to be changed. This is
 rectified in Ada 2005 by the introduction of an attribute @exam[Priority]
 for protected objects and the ability to change it by a simple assignment
-such as@Defn{priority attribute}@Defn2{Term=[attribute],Sec=[Priority]}
+such as@Defn{Priority attribute}@Defn2{Term=[attribute],Sec=[Priority]}
 
 @begin[Example]
 My_PO'Priority := P;
@@ -1647,7 +1653,7 @@ The problem is that exception occurrences are of a limited private type and so
 we cannot compare an occurrence with @exam[Null_Occurrence] to see if they are
 equal. In Ada 95 applying the function @exam[Exception_Identity] to a null
 occurrence unhelpfully raises @exam[Constraint_Error]. This has been changed in
-Ada 2005 to return @exam[Null_Id] so that we can now write
+Ada 2005 to return @exam[Null_Id] so that we can now write@Defn{Null_Occurrence object}
 @begin[Example]
 @key[procedure] Process_Ex(X: Exception_Occurrence) @key[is]
 @key[begin]
@@ -1678,14 +1684,14 @@ type then we might get @exam[Constraint_Error] and so on. The solution
 in Ada 2005 is to use a new functional attribute @exam[S'Mod] which
 applies to any modular subtype @exam[S] and converts a universal integer
 value to the modular type using the corresponding mathematical mod
-operation. So we can now write@Defn{mod attribute}@Defn2{Term=[attribute],Sec=[Mod]}
+operation. So we can now write@Defn{Mod attribute}@Defn2{Term=[attribute],Sec=[Mod]}
 @begin[Example]
 Address := Address + Address_Type'Mod(Offset);
 @end[Example]
 
 Another new attribute is @exam[Machine_Rounding]. This enables high-performance
 conversions from floating point types to integer types when the exact
-rounding does not matter.@Defn{machine_rounding attribute}@Defn2{Term=[attribute],Sec=[Machine_Rounding]}
+rounding does not matter.@Defn{Machine_Rounding attribute}@Defn2{Term=[attribute],Sec=[Machine_Rounding]}
 
 The third numeric change concerns fixed point types. It was common
 practice for some Ada 83 programs to define their own multiply and
@@ -1693,14 +1699,14 @@ divide operations, perhaps to obtain saturation arithmetic. These
 programs ran afoul of the Ada 95 rules that introduced universal fixed
 operations and resulted in ambiguities. Without going into details,
 this problem has been fixed in Ada 2005 so that user-defined operations
-can now be used.
+can now be used.@Defn{fixed point}
 
 @leading@;Ada 2005 has several new pragmas. The first is
 @begin[Example]
 @key[pragma] Unsuppress(Identifier);
 @end[Example]
 @leading@;where the identifier is that of a check such as
-@exam[Range_Check].@Defn{unsuppress pragma}@Defn2{Term=[pragma],Sec=[Unsuppress]}
+@exam[Range_Check].@Defn{Unsuppress pragma}@Defn2{Term=[pragma],Sec=[Unsuppress]}
 The general idea is to ensure that checks are performed in a declarative
 region irrespective of the use of a corresponding pragma @exam[Suppress].
 Thus we might have a type @exam[My_Int] that behaves as a saturated
@@ -1727,7 +1733,7 @@ to Annex J.
 
 @leading@;Many implementations of Ada 95 support a pragma @exam[Assert] and
 this is now consolidated into Ada 2005. The general idea is that we
-can write pragmas such as@Defn{assert pragma}@Defn2{Term=[pragma],Sec=[Assert]}
+can write pragmas such as@Defn{Assert pragma}@Defn2{Term=[pragma],Sec=[Assert]}
 @begin[Example]
 @key[pragma] Assert(X >50);
 
@@ -1844,7 +1850,7 @@ in the above example but it can also be used with any library unit.
 The final new general feature concerns formal generic package parameters.
 Ada 95 introduced the ability to have formal packages as parameters
 of generic units. This greatly reduced the need for long generic parameter
-lists since the formal package encapsulated them.
+lists since the formal package encapsulated them.@Defn2{Term=[generic formal parameters],Sec=[package]}
 
 @leading@;Sometimes it is necessary for a generic unit to have two (or more)
 formal packages. When this happens it is often the case that some
@@ -1944,7 +1950,7 @@ There are two packages, @exam[Ada.Numerics.@!Generic_Real_Arrays] for
 real vectors and matrices and @exam[Ada.Numerics.@!Generic_Complex_Arrays]
 for complex vectors and matrices. They can be instantiated according
 to the underlying floating point type used. There are also nongeneric
-versions as usual.@Defn{vector}@Defn{matrix}
+versions as usual.@Defn{vectors and matrices}@Defn{matrix}
 
 @leading@;These packages export types for declaring vectors and matrices and
 many operations for manipulating them. Thus if we have an expression
@@ -2110,7 +2116,7 @@ and its children plus some auxiliary child functions of @exam[Ada.Strings].
 These are very important and considerable additions to the predefined
 capability of Ada and bring the best in standard data structure manipulation
 to the fingers of every Ada programmer. The scope is perhaps best
-illustrated by listing the units involved.@Defn{containers}
+illustrated by listing the units involved.@Defn{containers}@Defn{Ada.Containers}
 
 @begin[Description]
 @exam[Ada.Containers] @en@\This
@@ -2165,7 +2171,7 @@ names such as @exam[Ada.Containers.Indefinite_Vectors].
 @exam[Ada.Containers.Generic_Array_Sort] @en@\This is a generic procedure for
 sorting arrays. The generic parameters give the index type, the element type,
 the array type and @exam["<"] for the element type. The array type is
-unconstrained.@Defn{array sorting}
+unconstrained.@Defn{array sorting}@Defn2{Term=[sorting],Sec=[array]}
 @end[Description]
 
 Finally there is a very similar generic procedure
@@ -2207,14 +2213,14 @@ and related matters.
 chronological addict but the need for them does illustrate
 that this is a tricky area. However, a feature that all will
 appreciate is that the package @Exam{Ada.Calendar.Formatting}
-includes the following declarations
+includes the following declarations@defn{Day_Name type}@defn{Day_Of_Week function}@defn2{Term=[function], Sec=[Day_Name]}
 @begin{Example}
 @key[type] Day_Name @key[is] (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday);
 @key[function] Day_Of_Week(Date: Time) @key[return] Day_Name;
 @end{Example}
 
 @leading@;There is also a small change in the parent package
-@Exam{Ada.Calendar} itself. The subtype @Exam{Year_Number} is now
+@Exam{Ada.Calendar} itself. The subtype @Exam{Year_Number} is now@Defn{Year_Number subtype}
 
 @begin{Example}
 @key[subtype] Year_Number @key[is] Integer @key[range] 1901 .. 2399;

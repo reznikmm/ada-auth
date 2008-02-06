@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/general.mss,v $)
-@comment($Revision: 1.8 $ $Date: 2006/12/23 06:01:53 $)
+@comment($Revision: 1.9 $ $Date: 2008/01/31 05:06:18 $)
 
 @LabeledSection{Exceptions, generics etc}
 
@@ -159,7 +159,7 @@ be useful in a routine for analysing a log of exceptions. This is
 tricky because although a constant @exam[Null_Occurrence] is declared
 in the package @exam[Ada.Exceptions], the type @exam[Exception_Occurrence]
 is limited and no equality is provided. So the obvious test cannot
-be performed.
+be performed.@Defn{Null_Occurence object}
 
 @leading@;We can however apply the function @exam[Exception_Identity] to a
 value of the type @exam[Exception_Occurrence] and this returns the
@@ -203,7 +203,7 @@ is clearly bad practice since it would be all too easy to mask some
 other error by mistake. Accordingly, in Ada 2005, the behaviour of
 @exam[Exception_Identity] is changed to return @exam[Null_Id] when
 applied to @exam[Null_Occurrence]. So we can now dispense with the
-dodgy function @exam[Is_Null_Occurrence] and just write@Defn{Exception_Identity}
+dodgy function @exam[Is_Null_Occurrence] and just write@Defn{Exception_Identity function}
 @begin[Example]
 @tabset[P42]
 @key[procedure] Process_Ex(X: @key[in] Exception_Occurrence) @key[is]
@@ -477,7 +477,7 @@ fast code.
 
 The third improvement to the core language in the numerics area concerns
 fixed point arithmetic. This is a topic that concerns few people but
-those who do use it probably feel passionately about it.
+those who do use it probably feel passionately about it.@Defn{fixed point}
 
 The trouble with floating point is that it is rather machine dependent
 and of course integers are just integers. Many application areas have
@@ -504,7 +504,7 @@ that representation clauses are now known as aspect clauses.)
 
 A more far reaching change introduced in Ada 95 concerns the introduction
 of operations on the type @examcom{universal_fixed} and type
-conversion.
+conversion.@Defn2{Term=[universal types],Sec=[fixed point]}@Defn{universal_fixed}
 
 @leading@;A minor problem in Ada 83 was that explicit type conversion was
 required in places where it might have been considered quite unnecessary. Thus
@@ -603,7 +603,7 @@ is ambiguous because both the predefined operation and our own operation
 are possible interpretations of @exam["*"] in this context. There
 is no cure for this in Ada 95 except for changing our own multiplying
 operations to be functions with identifiers such as @exam[mul] and
-@exam[div]. This is a very tedious chore and prone to errors.
+@exam[div]. This is a very tedious chore and prone to errors.@Defn2{Term=[overload resolution],Sec=[with fixed point operators]}
 
 It has been reported that because of this difficulty many projects
 using fixed point have not moved from Ada 83 to Ada 95.
@@ -1543,7 +1543,8 @@ not permitted as the default for a formal function.
 when discussing object factory functions in Section
 @RefSecNum{Object factory functions} of the chapter on the object oriented
 model. This is the abstract
-formal subprogram.@Defn{abstract formal subprogram} The example given was
+formal subprogram.@Defn{abstract formal subprogram}@Defn2{Term=[generic formal parameters],Sec=[abstract subprogram]}
+The example given was
 the predefined generic function @exam[Generic_@!Dispatching_@!Constructor]
 thus
 @begin[Example]
@@ -1824,14 +1825,14 @@ and @exam[Hashed_Maps] is artificially made asymmetric. (Life would
 have been a bit easier if we had made @exam[Hashed_Maps] the first
 package parameter but that just illustrates the asymmetry.) Of course
 we could more or less overcome the asymmetry by passing all the parameters
-of @exam[Vectors] as well but then @exam[HMV ]would have even more
+of @exam[Vectors] as well but then @exam[HMV] would have even more
 parameters. This rather defeats the point of package parameters which
 were introduced into Ada 95 in order to avoid the huge parameter lists
-that had occurred in Ada 83.
+that had occurred in Ada 83.@Defn2{Term=[generic formal parameters],Sec=[package]}
 
 @leading@;Ada 2005 overcomes this problem by permitting just some of the actual
 parameters to be specified. Any omitted parameters are indicated using
-the @exam[<>] notation thus@Defn2{Term=[actual parameter],Sec=[for formal package]}
+the @exam[<>] notation thus@Defn2{Term=[actual parameter],Sec=[for formal package]}@Defn2{Term=[box],Sec=[for formal package parameters]}
 @begin[Example]
 @key[generic]
    @key[with package] S @key[is new] Q(P1, F2 => <>, F3 => <>);

@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/access.mss,v $)
-@comment($Revision: 1.9 $ $Date: 2006/12/23 06:01:50 $)
+@comment($Revision: 1.10 $ $Date: 2008/01/31 05:06:18 $)
 
 @LabeledSection{Access types}
 
@@ -14,7 +14,7 @@ types are permitted in more contexts than just as access parameters and
 discriminants; they can also be used for variables and all components of
 composite types. This further use of access types is of considerable value in
 object oriented programming by reducing the need for (unnecessary) explicit
-type conversions.}
+type conversions.}@Defn{access types}
 
 @i{A further major improvement concerns access to subprogram types which are
 now allowed to be anonymous in line with access to object types. This permits
@@ -161,7 +161,7 @@ of just one check when the procedure is called. Such an access parameter
 we now refer to as being of a subtype that excludes null.
 
 @leading@;Ada 2005 extends this idea of access types that exclude null to named
-access types as well. Thus we can write@Defn{exclude null}@Defn{null exclusion}
+access types as well. Thus we can write@Defn{excludes null}@Defn{null exclusion}
 @begin[Example]
 @key[type] Ref_NNT @key[is not null access] T;
 @end[Example]
@@ -344,7 +344,7 @@ A null exclusion can also be used in object and subprogram renamings.
 We will consider subprogram renamings here and object renamings in
 the next section when we discuss anonymous access types. This is an
 area where there is a significant difference between null exclusions
-and constraints.
+and constraints.@Defn{renaming}
 
 @leading@;Remember that if an entity is renamed then any constraints are
 unchanged. We might have
@@ -430,7 +430,7 @@ because the parameter of @exam[Trois] does exclude null.
 
 @leading@;The other area that needed unification concerned @key[constant]. In
 Ada 95 a named access type can be an access to constant type rather
-than an access to variable type thus
+than an access to variable type thus@Defn2{Term=[constant],Sec=[with access types]}@Defn{access-to-constant type}
 @begin[Example]
 @key[type] Ref_CT @key[is access constant] T;
 @end[Example]
@@ -501,7 +501,7 @@ null and/or be access to constant.
 As just mentioned, Ada 95 permits anonymous access types only as access
 parameters and access discriminants. And in the latter case only for
 limited types. Ada 2005 sweeps away these restrictions and permits
-anonymous access types quite freely.@Defn{anonymous access type}
+anonymous access types quite freely.@Defn{anonymous access type}@Defn2{Term=[access types],Sec=[anonymous]}
 
 @leading@;The main motivation for this change concerns type conversion.
 It often happens that we have a type @exam[T] somewhere in a program and later
@@ -625,7 +625,7 @@ and give us a friendly warning.
 
 Note that we never never write @key[all] with anonymous access types.
 
-@leading@;We can of course also use @key[constant]
+@leading@;We can of course also use @key[constant]@Defn2{Term=[constant],Sec=[with access types]}@Defn{access-to-constant type}
 with anonymous access types. Note carefully the difference between
 the following
 @begin[Example]
@@ -731,7 +731,7 @@ of the Sieve of Eratosthenes. Each task of the type is associated
 with a prime number and is responsible for removing multiples of that
 number and for creating the next task when a new prime number is discovered.
 It is thus quite natural that the task should need to make a clone
-of itself.
+of itself.@Defn{current instance rule}
 
 @begin[Example]
 @tabset[P42]
@@ -815,7 +815,7 @@ of anonymous access types requires some revision to the rules concerning
 type comparisons and conversions. This is achieved by the introduction
 of a type @examcom{universal_access} by analogy with the types
 @examcom{universal_integer} and @examcom{universal_real}. Two new equality
-operators are defined in the package @exam[Standard] thus
+operators are defined in the package @exam[Standard] thus@Defn2{Term=[universal types],Sec=[access]}@Defn{universal_access}
 @begin[Example]
 @key[function] "=" (Left, Right: @examcom[universal_access]) @key[return] Boolean;
 
@@ -867,7 +867,7 @@ The full rules regarding the use of the predefined equality are that
 it cannot be used if there is a user-defined primitive equality operation
 for either operand type unless we use the prefix @exam[Standard].
 A similar rule applies to fixed point types as we shall see in Section
-@RefSecNum{Numerics}.
+@RefSecNum{Numerics}.@Defn2{Term=[overload resolution],Sec=[with access equality]}
 
 @leading@;Another example of the use of the type @exam[Cell] occurred in
 Section @RefSecNum{Nested type extension} when we were discussing
@@ -927,7 +927,7 @@ matters.
 An important matter in the case of access types is accessibility.
 The accessibility rules are designed to prevent dangling references.
 The basic rule is that we cannot create an access value if the object
-referred to has a lesser lifetime than the access type.
+referred to has a lesser lifetime than the access type.@Defn{accessibility checks}
 
 @leading@;However there are circumstances where the rule is unnecessarily
 severe and that was one reason for the introduction of access parameters.
@@ -1143,7 +1143,7 @@ to @exam[Dodgy] always fails and raises @exam[Program_Error] irrespective
 of whether @exam[P1] was called with @exam[X] or @exam[Global].
 
 @leading@;If we just want to use another name for some reason then we can avoid
-the loss of the accessibility level by using renaming. Thus we could have
+the loss of the accessibility level by using renaming. Thus we could have@Defn{renaming}
 @begin[Example]
 @tabset[P42]
 @key[procedure] P2(Ptr: @key[access] T) @key[is]
@@ -1230,7 +1230,7 @@ strange concept in Ada 95 and primarily concerned limited types (including
 task and protected types) which of course could not be copied. Enabling
 us to write @key[access] explicitly and thereby tell the truth removes
 much confusion. Limited types will be discussed in detail in a later
-chapter (see @RefSecNum{Limited types and return statements}).
+chapter (see @RefSecNum{Limited types and return statements}).@Defn{return by reference}
 
 @leading@;Access return types can be a convenient way of getting a constant
 view of an object such as a table. We might have an array in a package
@@ -1322,6 +1322,7 @@ difficulty when returning such objects from functions.@Defn{coextension}
 
 This section is really about access to subprogram types in general
 but the title downward closures has come to epitomize the topic.
+@Defn2{Term=[access types],Sec=[to subprogram]}@Defn{downward closure}
 
 The requirements for Ada 83, (Strawman .. Steelman) were strangely
 silent about whether parameters of subprograms could themselves be
@@ -1372,7 +1373,7 @@ with languages such as C that do not have nested subprograms) but
 the accessibility rules which followed those for general access to
 object types were restrictive. For example, suppose we have a general
 library level function for integration using a named access to subprogram
-type to pass the function to be integrated thus
+type to pass the function to be integrated thus@Defn{accessibility checks}
 @begin[Example]
 @key[type] Integrand @key[is access function] (X: Float) @key[return] Float;
 
@@ -1756,6 +1757,7 @@ lead to madness.
 This final topic concerns two matters. The first is about accessing
 components of discriminated types that might vanish or change mysteriously
 and the second is about type conversions.
+@Defn2{Term=[access types],Sec=[and discriminants]}@Defn{discriminants and access types]}
 
 @leading@keepnext@;Recall that we can have a mutable variant record such as
 @begin[Example]

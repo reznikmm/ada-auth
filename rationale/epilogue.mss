@@ -1,14 +1,16 @@
 @Part(Epilogue, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/epilogue.mss,v $)
-@comment($Revision: 1.5 $ $Date: 2006/12/23 06:02:00 $)
+@comment($Revision: 1.6 $ $Date: 2008/01/31 05:06:19 $)
 
 @LabeledSection{Epilogue}
 
 @i{This last chapter summarizes a small number of general issues of importance
 to the user such as compatibility between Ada 2005 and Ada 95. It
 also briefly considers a few potential changes that were considered
-for Ada 2005 but rejected for various reasons.}
+for Ada 2005 but rejected for various reasons. It further mentions a few minor
+corrections to Ada 2005 that have been found to be necessary since the standard
+was approved.}
 
 @LabeledClause{Compatibility}
 
@@ -42,7 +44,7 @@ Each incompatibility listed below gives the AI concerned and the paragraph
 in the AARM which in some cases will give more information. Where
 relevant, the section in this rationale where the topic is discussed
 is also given. Where appropriate the incompatibilities are grouped
-together.
+together.@Defn2{Term=[incompatibility],Sec=[with Ada 95]}
 
 1 @em The words @key[interface], @key[overriding]
 and @key[synchronized] are now reserved. Programs using them as identifiers
@@ -151,6 +153,7 @@ don't look constrained but actually are constrained. The consequence
 is that it is difficult to prevent some constrained objects from having
 their constraints changed and this can cause components to change
 or disappear even though they might be accessed or renamed.
+@Defn2{Term=[access types],Sec=[and discriminants]}@Defn{discriminants and access types]}
 
 A key rule in Ada 95 was that aliased variables were always constrained
 with the intent that that would solve the problems. But loopholes
@@ -538,10 +541,11 @@ Text=[E.5(30.a)]})
 @LabeledSubClause{Inconsistencies with Ada 95}
 
 
-1 @em The awkward situations regarding access types,
+1 @em The awkward situations regarding access types,@Defn2{Term=[inconsistency],Sec=[with Ada 95]}
 discriminants and constraints discussed in
 @RefSecNum{Access types and discriminants}, can also give rise to obscure
 inconsistencies.
+@Defn2{Term=[access types],Sec=[and discriminants]}@Defn{discriminants and access types]}
 
 Unconstrained aliased objects of types with discriminants with defaults
 are no longer constrained by their initial values. This means that
@@ -764,7 +768,7 @@ These are briefly discussed in the following subsections.
 
 
 There are a small number of incompatibilities between the original
-Ada 95 and that resulting from various corrections.
+Ada 95 and that resulting from various corrections.@Defn2{Term=[incompatibility],Sec=[with Ada 95]}
 
 1 @em A limited type can become nonlimited. Applying
 the @exam[Access] or @exam[Unchecked_Access] attribute to the current
@@ -974,7 +978,7 @@ Text=[E.2.3(20.b)]})
 
 
 There are a small number of inconsistencies between the original Ada
-95 and that resulting from various corrections.
+95 and that resulting from various corrections.@Defn2{Term=[inconsistency],Sec=[with Ada 95]}
 
 1 @em The function @exam[Exception_Identity] applied to the value
 @exam[Null_Occurrence] now returns @exam[Null_Id] whereas it originally raised
@@ -1002,7 +1006,7 @@ Text=[4.9(44.s)]})
 
 4 @em The @LocalTarget{Target=[Item2-4],Text={lower}} bounds of strings
 returned by functions @exam[Exception_Name], @exam[Exception_Message], and
-@exam[Exception_ Information] (and wide versions) are now defined to be
+@exam[Exception_@!Information] (and wide versions) are now defined to be
 @exam[1]. (@AILink{AI=[AI95-00378-01],Text=[AI-378]},
 @AILink{AI=[AI95-00417-01],Text=[AI-417]},
 @URLLink{URL=[http://www.adaic.org/standards/05aarm/html/AA-11-4-1.html],
@@ -1066,7 +1070,7 @@ a fuller discussion, consult the text of the Ada Issue concerned.
 
 @leading@;The @exam[<>] notation was introduced for aggregates to mean the
 default value if any. See @RefSecNum{Aggregates}. A curiosity is that we can
-write
+write@Defn2{Term=[default value],Sec=[in aggregate]}@Defn2{Term=[box],Sec=[in aggregate]}
 @begin[Example]
 @key[type] Secret@key[ is private];
 
@@ -1328,3 +1332,156 @@ that had been included worked out before adding yet more burden for
 implementers.
 
 
+@LabeledClause{Postscript}
+
+Nothing is ever perfect and a number of small imperfections have been found in
+Ada 2005 since the Amendment was completed. We will briefly look at the more
+obvious of these.
+
+@leading@;Perhaps the most noticeable since it affects the syntax is described
+by two Ada Issues namely @AILink{AI=[AI05-0015-1],Text=[AI05-15]} and
+@AILink{AI=[AI05-0053-1],Text=[AI05-53]}. The former points out that
+in an extended return statement@Defn{extended return statement}
+it is useful to be able to mark a return
+object as @key[constant] whereas the latter concludes that it is unwise
+to be able to mark the object as @key[aliased]. So the syntax which reads
+@begin[Example]
+@key[return] defining_identifer: [@key[aliased]] return_subtype_indication [:= expression} {@key[do]
+@end[Example]
+@leading@;should read
+@begin[Example]
+@key[return] defining_identifer: [@key[constant]] return_subtype_indication [:= expression} {@key[do]
+@end[Example]
+
+@key[Aliased] is unwise on the return object (the object in the
+extended return statement) because the result object (remember that the
+result of a function is itself an object and might indeed be providing the
+initial value of a limited object) need not be aliased and this can lead to
+some curious anomalies.
+
+** Formatting stopped here **
+
+@leading@;Another issue concerning the extended return statement is
+@AILink{AI=[AI05-0032-1],Text=[AI05-32]} regarding class wide functions.
+In Section @RefSecNum{Limited types and return statements} we saw that a
+function could return an indefinite type but nevertheless the return object
+could be declared to be constrained thus
+@begin[Example]
+@key[function] Make( ... ) @key[return] UA @key[is]
+@key[begin]
+   ...
+   @key[return] R: UA(1 .. N) @key[do]
+      ...
+   @key[end return];
+@key[end] Make;
+@end[Example]
+
+@leading@;The same rule should apply to class wide types. Thus if the return
+type is class wide such as Device'Class then we should be allowed to write
+@begin[Example]
+@key[function] Make( ... ) @key[return] Device'Class @key[is]
+@key[begin]
+   ...
+   @key[return] R: My_Device @key[do]
+      ...
+   @key[end return];
+@key[end] Make;
+@end[Example]
+
+where My_Device is covered by Device'Class. This is now permitted
+by @AILink{AI=[AI05-0032-1],Text=[AI05-32]}.
+
+Another issue regarding functions is that a function that returns an abstract
+type must be abstract (this was true in Ada 95 of course). However,
+@AILink{AI=[AI05-0073-1],Text=[AI05-73]} points out that a function that
+returns an access to an abstract type must also be abstract in order to avoid
+dispatching problems.
+
+A trivial point is that a child package may not have a limited with clause@Defn{limited with clause}
+for its parent (@AILink{AI=[AI05-0040-1],Text=[AI05-40]}). Limited with clauses
+are forbidden in a number of situations in order to avoid confusion. One such
+rule is that a package cannot have both a with clause and a limited with clause
+for the same unit. In the case of a child it effectively has an implicit with
+clause for its parent so disallowing a limited with clause is really the same
+rule.
+
+A further trivial point mentioned by @AILink{AI=[AI05-0016-1],Text=[AI05-16]}
+is that @exam{(@key[others] => <>)} is permitted as an aggregate for a null
+record.@Defn2{Term=[default value],Sec=[in aggregate]}@Defn2{Term=[box],Sec=[in aggregate]}
+
+There are a number of corrections and clarifications regarding categorization.
+One is that a limited view is always considered pure
+(@AILink{AI=[AI05-0034-1],Text=[AI05-34]}). Another is that
+Preelaborable_Initialization@Defn{Preelaborable_Initialization pragma}@Defn2{Term=[pragma],Sec=[Preelaborable_Initialization]}
+should not be
+restricted to just private types (@AILink{AI=[AI05-0028-1],Text=[AI05-28]}).@Defn{categories of units}
+
+Two pragmas have been added by @AILink{AI=[AI05-0009-1],Text=[AI05-9]}.
+These are Independent and Independent_Components (much like Atomic and
+Atomic_Components).@Defn{Independent pragma}@Defn2{Term=[pragma],Sec=[Independent]}@Defn{Independent_Components pragma}@Defn2{Term=[pragma],Sec=[Independent_Components]}
+They stipulate that the objects concerned are independently addressable and
+so can be manipulated independently without explicit synchronization in a
+multitasking program. This arose from consideration of confirming
+representation clauses.
+
+@leading@;There are a number of issues concerning null exclusions. One is that
+null exclusions must textually match for full conformance. Thus we cannot write
+@begin[Example]
+@key[package] P @key[is]
+   @key[type] T @key[is tagged null record];
+   @key[procedure] Q(X: @key[access] T);
+@key[end] P;
+@key[package body] P @key[is]
+   @key[procedure] Q(X: @key[not null access] T); -- @examcom[illegal, doesn't match]
+@key[end] P;
+@end[Example]
+
+The standard as written doesn't cover this case since it can be argued that in
+the specification @exam{Q} excludes null since it is controlling whereas in the
+body it excludes null because it says so. But @AILink{AI=[AI05-0045-1],Text=[AI05-45]}
+concludes that the intent was to require lexical matching to avoid confusion.
+
+Another issue concerning null exclusions is addressed by @AILink{AI=[AI05-0062-1],Text=[AI05-62]}.
+If a deferred constant has a null exclusion then the full declaration must also
+have a null exclusion. But the reverse is not true. If a deferred constant does
+not have a null exclusion then the full declaration might still have a null
+exclusion. This follows the same pattern as for constraints. If a deferred
+constant has a constraint then the full declaration must have a matching
+constraint but the reverse is not true.
+
+@leading@;It will recalled that the issue of null exclusions causes a potential
+inconsistency between Ada 95 and Ada 2005.@Defn{null exclusion}
+See @RefSecNum{Inconsistencies with Ada 95}, item 4 and Section @RefSecNum{Null exclusion and constant}.
+It was therefore proposed that Ada 95 should permit @key[not null] in the
+specification of an access parameter thus
+@begin[Example]
+@key[procedure] P(X: @key[not null access] T);
+@end[Example]
+
+The idea was that for Ada 95 this was merely a comment but on transition to Ada
+2005 it would give identical behaviour in all cases so that the inconsistency
+would be avoided. This was written up as @AILink{AI=[AI95-00447-01],Text=[AI95-447]}
+and approved by the ARG. However, when it came to ratification by WG9 a
+difficulty arose. From the point of view of ISO there is only ever one Ada
+standard and the current incarnation is what we call Ada 2005. Thus WG9 can no
+longer talk about Ada 95. Nevertheless compiler writers are encouraged to
+permit this "comment" in Ada 95 code (and a test has been added to the test
+suite).
+
+There are a number of other AIs regarding Ada 2005 which cover matters such as
+corner cases in accessibility rules. These are too obscure to discuss here and
+are unlikely to impact on the typical programmer.
+
+However, it is hard to avoid the temptation to mention just one more AI with
+which to finish this brief survey. This concerns an error in the description of
+the procedure Set_Line. The idea of Set_Line is to move down the page and of
+course if the required line number is the current line number then do nothing.
+But if the current position is beyond the required position first do New_Page
+and then move down the page the required number of lines. Unfortunately, if the
+new position required is at the beginning of the page (that is the parameter of
+Set_Line is one) and New_Page is called then, according to the wording, this
+results in New_Line(0) being called and this does not do nothing as hoped but
+raises Constraint_Error because the parameter of New_Line is of the subtype
+Positive_Count which excludes zero! This error has been there since Ada 83.
+Clearly all implementers have been doing the correct thing and just ignored the
+foolish wording. This is now corrected by @AILink{AI=[AI05-0038-1],Text=[AI05-38]}.

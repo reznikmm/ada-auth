@@ -1,7 +1,7 @@
 @Part(title, Root="rat.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/Rationale/refs.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2006/02/24 07:08:49 $}
+@comment{$Revision: 1.6 $ $Date: 2008/01/31 05:06:19 $}
 
 @UnnumberedSection{References}
 
@@ -13,8 +13,9 @@ Amendment}. @Shrink{@i{(This can be found online at
 @URLLink{URL=[http://www.open-std.org/jtc1/sc22/WG9/n412.pdf],
 Text=[http://www.open-std.org/jtc1/sc22/WG9/n412.pdf]}.)}}
 
-@LocalTarget{Target=[R2],Text={[2]}}@\ISO/IEC 8652:1995/COR 1:2001, @i{Ada
-Reference Manual @em Technical Corrigendum 1}. @Shrink{@i{(An unofficial
+@LocalTarget{Target=[R2],Text={[2]}}@\ISO/IEC 8652:1995/COR 1:2001,
+@i{Information technology @em Programming languages @em Ada @em
+Technical Corrigendum 1}. @Shrink{@i{(An unofficial
 version can be found at @URLLink{URL=[http://www.ada-auth.org/grab-bag.html],
 Text=[http://www.ada-auth.org/grab-bag.html]}.)}}
 
@@ -59,5 +60,19 @@ International Real-Time Ada Workshop], Ada Letters, Vol 32, No 4.
 
 @LocalTarget{Target=[R13],Text={[13]}}@\J. G. P. Barnes (2006) @i[Programming
 in Ada 2005], Addison-Wesley.
-@end{Description}
 
+@LocalTarget{Target=[R14],Text={[14]}}@\S. T. Taft et al (eds) (2006)
+@i{Ada 2005 Reference Manual}, LNCS 4348, Springer-Verlag. @Shrink{@i{(Online versions
+can be found at @URLLink{URL=[http://www.adaic.org/standards/ada05.html],
+Text=[http://www.adaic.org/standards/ada05.html]}.)}}
+
+@LocalTarget{Target=[R15],Text={[15]}}@\The @i{Annotated Ada Reference Manual}
+can be found online at @URLLink{URL=[http://www.adaic.org/standards/ada05.html],
+Text=[http://www.adaic.org/standards/ada05.html]}.
+
+@LocalTarget{Target=[R16],Text={[16]}}@\ISO/IEC 8652:1995/AMD.1:2007,
+@i{Information technology @em Programming languages @em Ada @em Amendment 1}.
+@Shrink{@i{(An unofficial
+version can be found at @URLLink{URL=[http://www.ada-auth.org/amendment.html],
+Text=[http://www.ada-auth.org/amendment.html]}.)}}
+@end{Description}

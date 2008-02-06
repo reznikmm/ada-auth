@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/library.mss,v $)
-@comment($Revision: 1.7 $ $Date: 2006/12/23 06:01:56 $)
+@comment($Revision: 1.8 $ $Date: 2008/01/31 05:06:18 $)
 
 @LabeledSection{Predefined library}
 
@@ -154,7 +154,7 @@ in Chapter @RefSecNum{Containers} for convenience.
 
 
 @leading@;The first change to note is that the subtype @exam[Year_Number] in
-the package @exam[Ada.Calendar] in Ada 2005 is
+the package @exam[Ada.Calendar] in Ada 2005 is@Defn{Year_Number subtype}
 @begin[Example]
 @key[subtype] Year_Number @key[is] Integer @key[range] 1901 .. 2399;
 @end[Example]
@@ -178,7 +178,7 @@ There are three new child packages @exam[Calendar.Time_Zones],
 @exam[Calendar.Arithmetic] and @exam[Calendar.Formatting]. We will look at
 these in turn.
 
-@leading@;The specification of the first is@Defn2{Term=[package],Sec=[Ada.Calendar.Time_Zones]}@Defn{Ada.Calendar.Time_Zones package}@Defn{Time_Zones package}
+@leading@;The specification of the first is@Defn2{Term=[package],Sec=[Ada.Calendar.Time_Zones]}@Defn{Ada.Calendar.Time_Zones package}@Defn{Calendar.Time_Zones package}@Defn{Time_Zones package}
 
 @begin[Example]
 @key[package] Ada.Calendar.Time_Zones @key[is]
@@ -618,7 +618,7 @@ be additional versions of @exam[Split].
 @exam[Value].
 The first pair works with values of type @exam[Time]. A call of @exam[Image]
 returns a date and time value in the standard ISO 8601 format. Thus
-taking the @exam[Normal_Moment] above
+taking the @exam[Normal_Moment] above@Defn{ISO 8601}
 @begin[Example]
 Image(Normal_Moment)
 @end[Example]
@@ -764,7 +764,7 @@ A particular point is that we must not call the procedures @exam[Set]
 or @exam[Clear] within a procedure passed as a parameter to @exam[Iterate].
 
 @leading@;The other environment package is @exam[Ada.Directories]. Its specification
-is@Defn2{Term=[package],Sec=[Ada.Directories]}@Defn{Ada.Directories package}@Defn{Directories package}
+is@Defn2{Term=[package],Sec=[Ada.Directories]}@Defn{Ada.Directories package}@Defn{Directories package}@Defn{directory operations}
 @begin[Example]
 @key[with] Ada.IO_Exceptions;
 @key[with] Ada.Calendar;
@@ -1145,13 +1145,13 @@ or @exam[Device_Error] from the package @exam[IO_Exceptions].
 
 An important improvement in Ada 2005 is the ability to deal with 16-
 and 32-bit characters both in the program text and in the executing
-program.
+program.@Defn{characters}@Defn{strings}
 
 The fine detail of the changes to the program text are perhaps for
 the language lawyer. The purpose is to permit the use of all relevant
 characters of the entire ISO/IEC 10646:2003 repertoire. The most important
 effect is that we can write programs using Cyrillic, Greek and other
-character sets.
+character sets.@Defn{ISO/IEC 10646:2003}@Defn{ISO 10646 characters}
 
 @leading@;A good example is provided by the addition of the constant
 @begin[Example]
@@ -1173,7 +1173,7 @@ R: Float := Sqrt(X*X + Y*Y);
 @end[Example]
 
 @leading@;and of course in France we can now declare a decent set of ingredients
-for breakfast
+for breakfast@Defn{breakfast}
 @begin[Example]
 @key[type] Breakfast_Stuff @key[is] (Croissant, Caf@latin1(233), @unicode(338)uf, Beurre);
 @end[Example]
@@ -1193,11 +1193,11 @@ Put("Deux @unicode(339)ufs easy-over avec jambon");@\ -- @examcom[wide string]
 @exam[Standard] and the appropriate operations to manipulate them
 in packages such as@Defn{Wide_Wide_Character}@Defn{Wide_Wide_String}
 @begin[Example]
-Ada.Strings.Wide_Wide_Bounded
+Ada.Strings.Wide_Wide_Bounded@Defn2{Term=[package],Sec=[Ada.Strings.Wide_Wide_Bounded]}@Defn{Ada.Strings.Wide_Wide_Bounded package}@Defn{Strings.Wide_Wide_Bounded package}
 Ada.Strings.Wide_Wide_Fixed@Defn2{Term=[package],Sec=[Ada.Strings.Wide_Wide_Fixed]}@Defn{Ada.Strings.Wide_Wide_Fixed package}@Defn{Strings.Wide_Wide_Fixed package}
-Ada.Strings.Wide_Wide_Maps
+Ada.Strings.Wide_Wide_Maps@Defn2{Term=[package],Sec=[Ada.Strings.Wide_Wide_Maps]}@Defn{Ada.Strings.Wide_Wide_Maps package}@Defn{Strings.Wide_Wide_Maps package}
 Ada.Strings.Wide_Wide_Maps.Wide_Wide_Constants
-Ada.Strings.Wide_Wide_Unbounded
+Ada.Strings.Wide_Wide_Unbounded@Defn2{Term=[package],Sec=[Ada.Strings.Wide_Wide_Unbounded]}@Defn{Ada.Strings.Wide_Wide_Unbounded package}@Defn{Strings.Wide_Wide_Unbounded package}
 Ada.Wide_Wide_Text_IO@Defn2{Term=[package],Sec=[Ada.Wide_Wide_Text_IO]}@Defn{Ada.Wide_Wide_Text_IO package}@Defn{Wide_Wide_Text_IO package}
 Ada.Wide_Wide_Text_IO.Text_Streams
 Ada.Wide_Wide_Text_IO.Complex_IO
@@ -1211,7 +1211,8 @@ The addition of wide-wide characters and strings introduces many additional
 possibilities for conversions. Just adding these directly to the existing
 package @exam[Ada.Characters.Handling] could cause ambiguities in
 existing programs when using literals. So a new package @exam[Ada.Characters.
-Conversions] has been added. This contains conversions in all combinations
+Conversions] has been added.@Defn{Ada.Characters.Conversions package}@Defn{character conversion package}@Defn2{Term=[package],Sec=[Ada.Characters.Conversion]}
+This contains conversions in all combinations
 between @exam[Character], @exam[Wide_Character] and @exam[Wide_Wide_Character]
 and similarly for strings. The existing functions from @exam[Is_Character]
 to @exam[To_Wide_String] in @exam[Ada.Characters.Handling] have been
@@ -1250,7 +1251,7 @@ Tempest by William Shakespeare.)
 The definition chosen for Ada 2005 closely follows those provided
 by ISO/IEC 10646:2003 and by the Unicode Consortium; this hopefully
 means that all users should find that the case insensitivity of identifiers
-works as expected in their own language.
+works as expected in their own language.@Defn{Unicode}
 
 Of interest to all users whatever their language is the addition of
 a few more subprograms in the string handling packages. As explained
@@ -1261,7 +1262,7 @@ moreover, multiple searching is inconvenient.
 @leading@;The additional subprograms in the packages are as follows.
 
 In the package @exam[Ada.Strings.Fixed] (assuming @key[use] @exam[Maps;]
-for brevity)
+for brevity)@Defn2{Term=[function],Sec=[Index]}@Defn{Index function}
 @begin[Example]
 @key[function] Index(
       Source: String; Pattern: String;
@@ -1434,7 +1435,7 @@ string (the history of this behaviour goes back to early Ada 83 days
 and is best left dormant).
 
 @leading@;Ada 2005 accordingly adds corresponding functions @exam[Get_Line]
-to the package @exam[Ada.Text_IO] itself thus
+to the package @exam[Ada.Text_IO] itself thus@Defn{Get_Line function}@Defn{Ada.Text_IO.Get_Line function}@Defn2{Term=[function],Sec=[Get_Line]}
 @begin[Example]
 @key[function] Get_Line(File: File_Type) @key[return] String;
 @key[function] Get_Line @key[return] String;
@@ -1777,7 +1778,7 @@ their omission from Ada 95 was probably an oversight.
 
 
 @leading@;It will be recalled that library units in Ada 95 are categorized into
-a hierarchy by a number of pragmas thus
+a hierarchy by a number of pragmas thus@Defn{categories of units}
 @begin[Example]
 @key[pragma] Pure( ... );
 @key[pragma] Shared_Passive( ... );
@@ -2059,7 +2060,7 @@ is 8 anyway and that the implementation accepts the attribute definition
 clause (which it should).
 
 @leading@;A minor change is that the parameter @exam[Stream] of the various
-atttributes now has a null exclusion so that @exam[S'Write] is in fact
+attributes now has a null exclusion so that @exam[S'Write] is in fact
 @begin[Example]
 @key[procedure] S'Write(Stream: @key[not null access] Root_Stream_Type'Class; Item: @key[in] @examcom[T]);
 @end[Example]

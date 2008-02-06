@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/struct.mss,v $)
-@comment($Revision: 1.6 $ $Date: 2006/12/23 06:01:57 $)
+@comment($Revision: 1.7 $ $Date: 2008/01/31 05:06:19 $)
 
 @LabeledSection{Structure and visibility}
 
@@ -150,7 +150,7 @@ This has the important advantage that we do not have to invent irritating
 identifiers such as @exam[Point_Ptr].
 
 @leading@;But we will stick to Ada 95 for the moment. In Ada 95 there are two
-rules
+rules@Defn{incomplete type}
 @begin[Itemize]
 the incomplete type can only be used in the definition
 of access types;
@@ -267,7 +267,7 @@ and so are not protected from each other's operations.
 
 Ada 2005 solves this by introducing a variation of the with clause
 @en the limited with clause. A limited with clause enables a library
-unit to have an incomplete view of all the visible types in another
+unit to have an incomplete view of all the visible types in another@Defn{incomplete view}
 package. We can now write@Defn{limited with clause}@Defn2{Term=[with clause],Sec=[limited]}
 @begin[Example]
 @key[limited with] Departments;
@@ -1165,7 +1165,8 @@ as components. Consider
 initialize an object of a limited type. Although we cannot give an explicit
 initial value for a @exam[Semaphore] we would still like to use an aggregate to
 get a coverage check as mentioned in Section
-@RefSecNum{Overview: Structure, visibility, and limited types}. So we can write
+@RefSecNum{Overview: Structure, visibility, and limited types}. So we can
+write@Defn2{Term=[aggregate],Sec=[for limited types]}
 @begin[Example]
 X: PT := (Guard => <>, Count => 0, Finished => <>);
 @end[Example]
@@ -1241,7 +1242,7 @@ matter. But then programmers should not use nasty side effects anyway.
 The general idea of a limited type is to restrict the operations that
 a user can do on the type to just those provided by the author of
 the type and in particular to prevent the user from doing assignment
-and thus making copies of objects of the type.
+and thus making copies of objects of the type.@Defn{limited type}
 
 However, limited types have always been a problem. In Ada 83 the concept
 of limitedness was confused with that of private types. Thus in Ada
@@ -1270,7 +1271,7 @@ use of @exam[:=] unlike some Algol based languages which use @exam[=]
 for initialization and @exam[:=] for assignment). And since initialization
 is treated as assignment it is forbidden for limited types. This means
 that we cannot initialize objects of a limited type nor can we declare
-constants  of a limited type. We cannot declare constants because
+constants of a limited type. We cannot declare constants because
 they have to be initialized and yet initialization is forbidden. This
 is more annoying in Ada 95 since we can make a type limited but not
 private.@Defn2{Term=[initialization],Sec=[of limited objects]}@Defn{limited object initialization}
@@ -1299,7 +1300,7 @@ Not only is this annoying but it is prone to errors as well. If we
 add a further component @exam[D] to the type @exam[T] then we might
 forget to initialize it. One of the advantages of aggregates is that
 we have to supply all the components which automatically provides
-full coverage analysis.
+full coverage analysis.@Defn{coverage analysis}
 
 This problem did not arise in Ada 83 because we could not make a type
 limited without making it also private and so the individual components
@@ -1307,7 +1308,7 @@ were not visible anyway.
 
 @leading@;Ada 2005 overcomes the difficulty by stating that initialization by
 an aggregate is not actually assignment even though depicted by the
-same symbol. This permits
+same symbol. This permits@Defn2{Term=[aggregate],Sec=[for limited types]}
 @begin[Example]
    X: T := (A => 10,  B => True,  C => 45.7);
 @end[Example]
@@ -1375,7 +1376,7 @@ as the expression for the ancestor part of an extension aggregate,
       D: Integer;
    @key[end record];
 ...
-XTT: TTplus := ((1, True, 1.0) @key[with] 2);
+XTT: TTplus := (TT'(1, True, 1.0) @key[with] 2);
 @end[Example]
 
 as the expression in an initialized allocator,
@@ -1594,7 +1595,7 @@ Being able to use a function in this way provides much flexibility
 but sometimes even more flexibility is required. A new form of return
 statement, the extended return statement, permits
 the final returned object to be declared and then manipulated in a
-general way before finally returning from the function. @Defn{extended return statement}
+general way before finally returning from the function. @Defn{extended return statement}@Defn{return statement}
 
 @leading@keepnext@;The basic structure is
 @begin[Example]

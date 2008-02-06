@@ -1,7 +1,7 @@
 @Part(xxx, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/tasking.mss,v $)
-@comment($Revision: 1.6 $ $Date: 2006/12/23 06:01:58 $)
+@comment($Revision: 1.7 $ $Date: 2008/01/31 05:06:19 $)
 
 @LabeledSection{Tasking and Real-Time}
 
@@ -167,7 +167,7 @@ essentially@Defn{task termination handler}
 @begin[Example]
 @key[with] Ada.Task_Identification; @key[use] Ada.Task_Identification;
 @key[with] Ada.Exceptions; @key[use] Ada.Exceptions;
-@key[package] Ada.Task_Termination @key[is]
+@key[package] Ada.Task_Termination @key[is]@Defn2{Term=[package],Sec=[Ada.Task_Termination]}@Defn{Ada.Task_Termination package}@Defn{Task_Termination package}
    @key[pragma] Preelaborable(Task_Termination);
 
    @key[type] Cause_Of_Termination @key[is] (Normal, Abnormal, Unhandled_Exception);
@@ -404,7 +404,7 @@ limited to refer to those actually marked as limited.
 @end[Example]
 
 and we can of course provide operations which must be abstract or
-null. (Remember that @key[synchronized] is a new reserved word.)@Defn2{Term=[synchronized],Sec=[keyword]}
+null. (Remember that @key[synchronized] is a new reserved word.)@Defn2{Term=[synchronized],Sec=[reserved word]}
 
 @leading@;We can compose these interfaces provided that no conflict arises.
 The following are all permitted:
@@ -1150,7 +1150,7 @@ the function @exam[Specific_Handler] in the package @exam[Task_Termination]
 and the identifier @exam[No_Task_Termination] means that all tasks
 should run for ever. Note that we are permitted to set a fallback
 handler so that if any task does attempt to terminate then it will
-be detected.@Defn2{Term=[restrictions identifier],Sec=[No_Specific_Termination_Handlers]}
+be detected.@Defn2{Term=[restrictions identifier],Sec=[No_Specific_Termination_Handlers]}@Defn2{Term=[restrictions identifier],Sec=[No_Task_Termination]}
 
 The identifier @exam[Simple_Barriers] means that the Boolean expression
 in a barrier of an entry of a protected object shall be either a static
@@ -1193,7 +1193,7 @@ provides further pragmas, policies and packages which facilitate many different
 mechanisms such as non-preemption within priorities, the familiar Round Robin
 using timeslicing, and the more recently acclaimed Earliest Deadline First
 (EDF) policy. Moreover it is possible to mix different policies according to
-priority level within a partition.@Defn{task dispatching policy}@Defn2{Term=[policy],Sec=[task dispatching]}
+priority level within a partition.@Defn{task dispatching policy}@Defn2{Term=[policy],Sec=[task dispatching]}@Defn{scheduling}
 
 @leading@;In order to accommodate these many changes, Section D.2 (Priority
 Scheduling) of the Reference Manual has been reorganized as follows
@@ -1301,7 +1301,7 @@ level to which the round robin policy does not apply then the exception
 
 @leading@;The other new policy concerns deadlines and is controlled by a new
 pragma @exam[Relative_Deadline] and the child package @exam[Dispatching.EDF].
-The syntax of the pragma is@Defn2{Term=[pragma],Sec=[Relative_Deadline]}@Defn{Relative_Deadline pragma}
+The syntax of the pragma is@Defn2{Term=[pragma],Sec=[Relative_Deadline]}@Defn{Relative_Deadline pragma}@Defn{deadline}
 @begin[Example]
 @key[pragma] Relative_Deadline(@examcom[relative_deadline_]expression);
 @end[Example]
@@ -1506,7 +1506,8 @@ when it should not).
 This difficulty is overcome in Ada 2005 by allowing protected objects
 to change their priority. This is done through the introduction of
 an attribute @exam[Priority] which applies just to protected objects.
-It can only be accessed within the body of the protected object concerned.
+It can only be accessed within the body of the protected object
+concerned.@Defn{Priority attribute}@Defn2{Term=[attribute],Sec=[Priority]}
 
 @leading@;As an example a protected object might have a procedure to change
 its ceiling priority by a given amount. This could be written as follows
@@ -1554,7 +1555,7 @@ at specific real times. We will look first at the CPU timers because
 that introduces more new concepts.@Defn{timer}@Defn{CPU timer}
 
 The execution time of one or more tasks can be monitored and controlled
-by the new package @exam[Ada.Execution_Time] plus two child packages.
+by the new package @exam[Ada.Execution_Time] plus two child packages.@defn{execution time}
 @begin[Description]
 @exam[Ada.Execution_Time] @en@\This is the root
 package and enables the monitoring of execution time of individual
@@ -2177,12 +2178,14 @@ the accepted general term for systems such as safety-critical systems
 and security-critical systems.
 
 There are some small changes to reflect the introduction of the Ravenscar
-profile. It is clarified that tasking is permitted in a high-integrity
+profile (see Section @RefSecNum{The Ravenscar profile}).
+It is clarified that tasking is permitted in a high-integrity
 system provided that it is well controlled through, for example, the
-use of the Ravenscar profile.
+use of the Ravenscar profile. Also the new pragma @exam{Detect_Blocking}
+used by the Ravenscar profile is defined in this annex.@Defn{Detect_Blocking pragma}@Defn2{Term=[pragma],Sec=[Detect_Blocking]}
 
-A new pragma @exam[Partition_Elaboration_Policy] is introduced. Its
-syntax is@Defn{Partition elaboration policy}@Defn2{Term=[policy],Sec=[partition elaboration]}
+Another new pragma is @exam[Partition_Elaboration_Policy]. Its
+syntax is@Defn2{Term=[policy],Sec=[partition elaboration]}@Defn{Partition_Elaboration_Policy pragma}@Defn2{Term=[pragma],Sec=[Partition_Elaboration_Policy]}
 @begin[Example]
 @key[pragma] Partition_Elaboration_Policy(@examcom[policy]_identifier);
 @end[Example]
