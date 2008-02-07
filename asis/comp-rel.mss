@@ -1,6 +1,6 @@
 @Part(comp-rel, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/comp-rel.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2007/10/13 05:33:32 $}
+@comment{$Revision: 1.8 $ $Date: 2008/02/06 06:23:46 $}
 
 
 @LabeledSection{package Asis.Compilation_Units.Relations}
@@ -268,7 +268,7 @@ Is_Identical to The_Context.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Compilation_Units and Dependent_Units
-expect all units in the list to have],Old=[Appropriate]} Unit_Kinds:
+expect a list of elements that each have one of the following],Old=[Appropriate]} Unit_Kinds:
 @begin{Display}
 A_Procedure
 A_Function
@@ -364,8 +364,8 @@ Use the Context_Clause_Elements query to get pragma Elaborate elements
 for a compilation unit.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Compilation_Units expects all units
-in the list to have],Old=[Appropriate]} Unit_Kinds:
+@leading@keepnext@;@Chg{Version=[2],New=[Compilation_Units expects a list of
+elements that each have one of the following],Old=[Appropriate]} Unit_Kinds:
 @begin{Display}
 A_Procedure
 A_Function

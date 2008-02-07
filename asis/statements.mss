@@ -1,6 +1,6 @@
 @Part(statements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/statements.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2007/12/13 05:00:57 $}
+@comment{$Revision: 1.8 $ $Date: 2008/02/06 06:23:47 $}
 
 
 @LabeledSection{package Asis.Statements}
@@ -36,7 +36,7 @@ The Enclosing_Element of the A_Defining_Name elements is the statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following ],Old=[Appropriate]}Element_Kinds:
 @begin{Display}
 A_Statement
 @end{Display}
@@ -47,8 +47,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Defining_Name_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have one of the following ],Old=[]}Defining_Name_Kinds:
 @begin{Display}
 A_Defining_Identifier
 @end{Display}
@@ -70,9 +70,9 @@ Returns the expression that names the left hand side of the assignment.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following ],Old=[Appropriate]}Element_Kinds:
 @begin{Display}
-A_Statement@Chg{Version=[2],New=[ that has Statement_Kinds:
+A_Statement@Chg{Version=[2],New=[ that has one of the following Statement_Kinds:
     An_Assignment_Statement],Old=[]}
 @end{Display}
 
@@ -89,8 +89,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -112,9 +112,9 @@ Returns the expression from the right hand side of the assignment.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following ],Old=[Appropriate]}Element_Kinds:
 @begin{Display}
-A_Statement@Chg{Version=[2],New=[ that has Statement_Kinds:
+A_Statement@Chg{Version=[2],New=[ that has one of the following Statement_Kinds:
     An_Assignment_Statement],Old=[]}
 @end{Display}
 
@@ -131,8 +131,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Element_Kinds:
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @begin{Display}
 An_Expression
@@ -162,7 +162,7 @@ a case statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 An_If_Statement
 A_Case_Statement
@@ -178,8 +178,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Path
 A_Pragma
@@ -202,7 +202,7 @@ Returns the condition expression for an @key[if] path or an @key[elsif] path.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Path expects an element
-of],Old=[Appropriate]} Path_Kinds:
+that has one of the following ],Old=[Appropriate]}Path_Kinds:
 @begin{Display}
 An_If_Path
 An_Elsif_Path
@@ -214,8 +214,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -241,7 +241,7 @@ in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Path expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following ],Old=[Appropriate]}Element_Kinds:
 @begin{Display}
 A_Path
 @end{Display}
@@ -252,8 +252,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Statement
 A_Pragma
@@ -278,9 +278,9 @@ execution path is taken.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following ],Old=[Appropriate]}Element_Kinds:
 @begin{Display}
-A_Statement@Chg{Version=[2],New=[ that has Statement_Kinds:
+A_Statement@Chg{Version=[2],New=[ that has one of the following Statement_Kinds:
     A_Case_Statement],Old=[]}
 @end{Display}
 
@@ -297,8 +297,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -322,7 +322,7 @@ order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Path expects an element
-of],Old=[Appropriate]} Path_Kinds:
+that has one of the following ],Old=[Appropriate]}Path_Kinds:
 @begin{Display}
 A_Case_Path
 @end{Display}
@@ -333,11 +333,11 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have one of of the follwing ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
-A_Definition@Chg{Version=[2],New=[ that has one of Definition_Kinds:
+A_Definition@Chg{Version=[2],New=[ that has one of the following Definition_Kinds:
     A_Discrete_Range
     An_Others_Choice],Old=[]}
 @end{Display}
@@ -372,7 +372,7 @@ The Enclosing_Element of the name is the statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 A_Loop_Statement
 A_While_Loop_Statement
@@ -386,8 +386,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Defining_Name_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Defining_Name_Kinds:
 @begin{Display}
 Not_A_Defining_Name
 A_Defining_Identifier
@@ -414,7 +414,7 @@ Returns False for any unexpected Element.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Expected]} Statement_Kinds:
+that of one of the following],Old=[Expected]} Statement_Kinds:
 @begin{Display}
 A_Block_Statement
 A_Loop_Statement
@@ -439,9 +439,9 @@ Returns the condition expression associated with the while loop.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following ],Old=[Appropriate]}Element_Kinds:
 @begin{Display}
-A_Statement@Chg{Version=[2],New=[ that has Statement_Kinds:
+A_Statement@Chg{Version=[2],New=[ that has one of the following Statement_Kinds:
     A_While_Loop_Statement],Old=[]}
 @end{Display}
 
@@ -458,8 +458,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -483,7 +483,7 @@ Returns the declaration of the A_Loop_Parameter_Specification.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 A_For_Loop_Statement
 @end{Display}
@@ -494,8 +494,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Declaration_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Declaration_Kinds:
 @begin{Display}
 A_Loop_Parameter_Specification
 @end{Display}
@@ -522,7 +522,7 @@ in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 A_Loop_Statement
 A_While_Loop_Statement
@@ -535,8 +535,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Pragma
 A_Statement
@@ -564,7 +564,7 @@ block_statement, or for any unexpected Element.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Expected]} Statement_Kinds:
+that has one of the following],Old=[Expected]} Statement_Kinds:
 @begin{Display}
 A_Block_Statement
 @end{Display}
@@ -595,7 +595,7 @@ Returns a Nil_Element_List if there are no declarative items.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 A_Block_Statement
 @end{Display}
@@ -606,8 +606,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Declaration
 A_Pragma
@@ -641,7 +641,7 @@ that has no sequence_of_statements.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 A_Block_Statement
 @end{Display}
@@ -652,8 +652,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have one of following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Pragma
 A_Statement
@@ -686,7 +686,7 @@ Returns a Nil_Element_List if there are no exception_handler elements.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 A_Block_Statement
 @end{Display}
@@ -697,8 +697,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Exception_Handler
 A_Pragma
@@ -724,7 +724,7 @@ Returns a Nil_Element if no loop name is present.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 An_Exit_Statement
 @end{Display}
@@ -735,8 +735,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Expression_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 Not_An_Expression
 An_Identifier
@@ -763,7 +763,7 @@ Returns a Nil_Element if no condition is present.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 An_Exit_Statement
 @end{Display}
@@ -774,8 +774,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 Not_An_Element
 An_Expression
@@ -799,7 +799,7 @@ Returns the loop statement exited by the exit statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 An_Exit_Statement
 @end{Display}
@@ -810,8 +810,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Loop_Statement
 A_While_Loop_Statement
@@ -837,7 +837,7 @@ Returns a Nil_Element if no expression is present.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 A_Return_Statement
 @end{Display}
@@ -848,8 +848,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 Not_An_Element
 An_Expression
@@ -881,7 +881,7 @@ to query.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Statement expects an element of Statement_Kinds:]}
+Statement expects an element that has one of the following Statement_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[An_Extended_Return_Statement]}
 @end{Display}
@@ -893,7 +893,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Returns an element with one of Declaration_Kinds:]}
+Returns an element that has one of the following Declaration_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Return_Object_Specification]}
 @end{Display}
@@ -936,7 +936,7 @@ not include handled_sequence_of_statements.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Statement expects an element of Statement_Kinds:]}
+Statement expects an element that has one of the following Statement_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[An_Extended_Return_Statement]}
 @end{Display}
@@ -948,7 +948,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns a list of
-elements that each have one of Element_Kinds:]}
+elements that each is one of the following Element_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Statement
 A_Pragma]}
@@ -992,7 +992,7 @@ Returns a Nil_Element_List if there are no exception_handler elements.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Statement expects an element of Statement_Kinds:]}
+Statement expects an element that has one of the following Statement_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[An_Extended_Return_Statement]}
 @end{Display}
@@ -1004,7 +1004,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns a list of
-elements that each have one of Element_Kinds:]}
+elements that each have one of the following Element_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[An_Exception_Handler
 A_Pragma]}
@@ -1029,7 +1029,7 @@ statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 A_Goto_Statement
 @end{Display}
@@ -1040,8 +1040,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Expression_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 @end{Display}
@@ -1065,7 +1065,7 @@ Returns the target statement specified by the goto statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 A_Goto_Statement
 @end{Display}
@@ -1076,8 +1076,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Statement
 @end{Display}
@@ -1112,7 +1112,7 @@ family takes the form of An_Indexed_Component.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 An_Entry_Call_Statement
 A_Procedure_Call_Statement
@@ -1124,8 +1124,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1168,7 +1168,7 @@ Nil_Element should be returned. For an attribute reference which is not
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 An_Entry_Call_Statement
 A_Procedure_Call_Statement
@@ -1180,8 +1180,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Declaration_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Declaration_Kinds:
 @begin{Display}
 Not_A_Declaration
 A_Procedure_Declaration
@@ -1269,7 +1269,7 @@ call is an attribute reference and Is_Normalized is True.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 An_Entry_Call_Statement
 A_Procedure_Call_Statement
@@ -1281,8 +1281,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Parameter_Association
 @end{Display}
@@ -1295,16 +1295,19 @@ Normalized associations are never Is_Equal to unnormalized associations.
 @end{ImplReq}
 
 @begin{ImplPerm}
-An implementation may choose to always include default parameters in its
-internal representation.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0025-1]}
+@ChgDeleted{Version=[2],Text=[An implementation may choose to always include
+default parameters in its internal representation.]}
 
-An implementation may also choose to normalize its representation
-to use defining_identifier elements rather than formal_parameter_selector_name
-elements.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0025-1]}
+@ChgDeleted{Version=[2],Text=[An implementation may also choose to normalize
+its representation to use defining_identifier elements rather than
+formal_parameter_selector_name elements.]}
 
-In either case, this query will return Is_Normalized associations even if
-Normalized is False, and the query Call_Statement_Parameters_Normalized
-will return True.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0025-1]}
+@ChgDeleted{Version=[2],Text=[In either case, this query will return
+Is_Normalized associations even if Normalized is False, and the query
+Call_Statement_Parameters_Normalized will return True.]}
 @end{ImplPerm}
 
 
@@ -1326,7 +1329,7 @@ Returns a Nil_Element if the statement has no explicit entry index,
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
@@ -1337,8 +1340,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 Not_An_Element
 An_Expression
@@ -1363,7 +1366,7 @@ Returns the direct name of the entry. The name follows the reserved word
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
@@ -1374,8 +1377,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Expression_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 @end{Display}
@@ -1406,7 +1409,7 @@ See Reference Manual 3.3.1(7).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
@@ -1417,8 +1420,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Declaration_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have one of the following ],Old=[]}Declaration_Kinds:
 @begin{Display}
 A_Parameter_Specification
 @end{Display}
@@ -1444,7 +1447,7 @@ statement, in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
@@ -1455,8 +1458,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Pragma
 A_Statement
@@ -1485,7 +1488,7 @@ accept statement, in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
@@ -1496,8 +1499,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Pragma
 An_Exception_Handler
@@ -1521,7 +1524,7 @@ Returns the declaration of the entry accepted in this statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
@@ -1532,8 +1535,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Entry_Declaration
 @end{Display}
@@ -1557,7 +1560,7 @@ The name follows the reserved word @key[requeue].
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 A_Requeue_Statement
 A_Requeue_Statement_With_Abort
@@ -1569,8 +1572,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1593,7 +1596,7 @@ Returns the expression for the duration of the delay.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 A_Delay_Until_Statement
 A_Delay_Relative_Statement
@@ -1605,8 +1608,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1633,7 +1636,7 @@ statement where a guard is not legal.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Path expects an element
-of],Old=[Appropriate]} Path_Kinds:
+that has one of the following ],Old=[Appropriate]}Path_Kinds:
 @begin{Display}
 A_Select_Path
 An_Or_Path
@@ -1645,8 +1648,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 Not_An_Element
 An_Expression
@@ -1671,7 +1674,7 @@ of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 An_Abort_Statement
 @end{Display}
@@ -1682,8 +1685,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1710,7 +1713,7 @@ Returns a Nil_Element if there is no explicit choice parameter.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Handler expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following ],Old=[Appropriate]}Element_Kinds:
 @begin{Display}
 An_Exception_Handler
 @end{Display}
@@ -1721,8 +1724,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Declaration_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Declaration_Kinds:
 @begin{Display}
 Not_A_Declaration
 A_Choice_Parameter_Specification
@@ -1748,7 +1751,7 @@ an others choice.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Handler expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following ],Old=[Appropriate]}Element_Kinds:
 @begin{Display}
 An_Exception_Handler
 @end{Display}
@@ -1759,16 +1762,16 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Expression_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have one of the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 A_Selected_Component
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[or an element with
-one of ],Old=[Returns ]}Definition_Kinds:
+@leading@keepnext@;@Chg{Version=[2],New=[or an element that has
+one of the following ],Old=[Returns ]}Definition_Kinds:
 @begin{Display}
 An_Others_Choice
 @end{Display}
@@ -1795,7 +1798,7 @@ exception handler, in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Handler expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following ],Old=[Appropriate]}Element_Kinds:
 @begin{Display}
 An_Exception_Handler
 @end{Display}
@@ -1806,8 +1809,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Pragma
 A_Statement
@@ -1833,7 +1836,7 @@ Returns a Nil_Element if there is no explicitly named exception.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 A_Raise_Statement
 @end{Display}
@@ -1844,8 +1847,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Expression_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 Not_An_Expression
 An_Identifier
@@ -1883,7 +1886,7 @@ expression.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Statement
-expects an element of Statement_Kinds:]}
+expects an element that has one of the following Statement_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[A_Raise_Statement]}
@@ -1896,7 +1899,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns an element
-with one of Element_Kinds:]}
+that has one of the following Element_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Not_An_Element
@@ -1921,7 +1924,7 @@ Returns the qualified aggregate expression representing the code statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-of],Old=[Appropriate]} Statement_Kinds:
+that has one of the following ],Old=[Appropriate]}Statement_Kinds:
 @begin{Display}
 A_Code_Statement
 @end{Display}
@@ -1932,8 +1935,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Expression_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element
+that has one of the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 A_Qualified_Expression
 @end{Display}
@@ -1960,14 +1963,14 @@ Returns False for any unexpected Element.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Call expects an element
-of],Old=[Expected]} Expression_Kinds:
+that has one of the following],Old=[Expected]} Expression_Kinds:
 @begin{Display}
 A_Function_Call
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[or Call expects an element
-of],Old=[Expected]} Statement_Kinds:
+that has one of the following],Old=[Expected]} Statement_Kinds:
 @begin{Display}
 A_Procedure_Call_Statement
 @end{Display}
@@ -1992,7 +1995,7 @@ Returns False for any unexpected Element.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Call expects an element
-of],Old=[Expected]} Element_Kinds:
+that has one of the following],Old=[Expected]} Element_Kinds:
 @begin{Display}
 A_Function_Call
 A_Procedure_Call_Statement

@@ -1,10 +1,10 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.13 $ $Date: 2007/12/13 05:00:57 $}
+@comment{$Revision: 1.14 $ $Date: 2008/02/06 06:23:47 $}
 
 @LabeledSection{package Asis}
 
-@Chg{Version=[1],New=[The library package @RootLibUnit{ASIS}ASIS shall exist.
+@Chg{Version=[1],New=[The library package @RootLibUnit{Asis}Asis shall exist.
 The package shall provide interfaces equivalent to those described in the
 following subclauses.],
 Old=[@f{@key[package] @RootLibUnit{ASIS}ASIS @key[is]}]}
@@ -413,7 +413,6 @@ Literals                          -- @examcom{Reference Manual}]}@Comment{Moved 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0001-1]}@ChgNote{SI99-0001-1 added new pragmas}
 @key[type] @AdaTypeDefn{Pragma_Kinds} @key[is] (
-
    @AdaObjDefn{Not_A_Pragma},                     -- @examcom{An unexpected element}
    @AdaObjDefn{An_All_Calls_Remote_Pragma},       -- @examcom{E.2.3(5)}@ChgAdded{Version=[2],Text=[
    @AdaObjDefn{An_Assert_Pragma} ,                -- @examcom{11.4.2 (3)}
@@ -849,8 +848,10 @@ Literals                          -- @examcom{Reference Manual   -> Subordinate 
    @AdaObjDefn{A_Variant_Part},                   -- @examcom{3.8.1(2)}
    @AdaObjDefn{A_Variant},                        -- @examcom{3.8.1(3)}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0011-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0011-1],ARef=[SI99-0004-1]}
    @AdaObjDefn{An_Others_Choice},                 -- @examcom{3.8.1(5), 4.3.1(5), 4.3.3(5), 11.2(5)}@Chg{Version=[2],New=[
+   @AdaObjDefn{An_Access_Definition},             -- @examcom{3.3.1(2), 3.6(7), 3.10(6), 6.1(13),}
+                                     -- @examcom{6.5(2), 8.5.1(2), 12.4(2)}
    @AdaObjDefn{An_Incomplete_Type_Definition},    -- @examcom{3.10.1(1)}
    @AdaObjDefn{A_Tagged_Incomplete_Type_Definition}, -- @examcom{3.10.1(2)}],Old=[]}
 
@@ -983,6 +984,44 @@ provided for the convenience of the ASIS implementor:
           An_Access_To_Procedure .. An_Access_To_Protected_Function;
 @end{Example}
 @end{DescribeCode}
+
+
+@ChgNote{SI99-0004-1 added new section}
+@Comment{@LabeledAddedClause{Version=[2],Name=[type Access_Definition_Kinds]}}
+@*@thickline@*
+@ChgAdded{Version=[2],Text=[@b{@grow{@grow{3.9.xx type Access_Definition_Kinds}}}]}
+@begin{Discussion}
+@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
+change all of the following clause numbers]}
+@end{Discussion}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Access_Definition_Kinds} @key[is] (   -- @examcom{3.3.1(2) / 3.10(6)}
+      @AdaObjDefn{Not_An_Access_Definition},                   -- @examcom{An unexpected element}
+      @AdaObjDefn{An_Anonymous_Access_To_Variable},            -- @examcom{3.3.1(2) [...] access subtype_mark}
+      @AdaObjDefn{An_Anonymous_Access_To_Constant},            -- @examcom{3.3.1(2) / 3.10(6) }
+                                                  -- @examcom{[...] access constant subtype_mark}
+      @AdaObjDefn{An_Anonymous_Access_To_Procedure},           -- @examcom{3.10(6) access procedure}
+      @AdaObjDefn{An_Anonymous_Access_To_Protected_Procedure}, -- @examcom{3.10(6) access protected procedure}
+      @AdaObjDefn{An_Anonymous_Access_To_Function},            -- @examcom{3.10(6) access function}
+      @AdaObjDefn{An_Anonymous_Access_To_Protected_Function}); -- @examcom{3.10(6) access protected function}]}
+@end{Example}
+@end{DescribeCode}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1]}
+@ChgAdded{Version=[2],Text=[   @key[subtype] @AdaSubTypeDefn{Name=[An_Anonymous_Access_to_Object_Definition], Of=[]} @key[is] Access_Definition_Kinds
+      @key[range] An_Anonymous_Access_To_Variable .. An_Anonymous_Access_To_Constant;]}
+
+@ChgAdded{Version=[2],Text=[   @key[subtype] @AdaSubTypeDefn{Name=[An_Anonymous_Access_to_Subprogram_Definition], Of=[]} @key[is] Access_Definition_Kinds
+      @key[range] An_Anonymous_Access_To_Procedure ..
+      An_Anonymous_Access_To_Protected_Function;]}
+@end{Example}
+@end{DescribeCode}
+
 
 
 @LabeledSubClause{type Root_Type_Kinds}

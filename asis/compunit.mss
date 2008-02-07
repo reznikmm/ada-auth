@@ -1,6 +1,6 @@
 @Part(compunit, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/compunit.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2007/10/13 05:33:32 $}
+@comment{$Revision: 1.7 $ $Date: 2008/02/06 06:23:46 $}
 
 
 @LabeledSection{package Asis.Compilation_Units}
@@ -40,8 +40,8 @@ Returns the Unit_Kinds value of the compilation unit.
 Returns Not_A_Unit for a Nil_Compilation_Unit.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Compilation_Unit expects a unit of
-any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are expected]}.
+@Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
+Old=[All Unit_Kinds are expected]}.
 
 Returns An_Unknown_Unit for any compilation unit that exists, but that
 does not have semantic element information available through ASIS.
@@ -82,8 +82,8 @@ Returns the Unit_Classes value of the compilation unit.
 Returns Not_A_Class for a Nil_Compilation_Unit.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Compilation_Unit expects a unit of
-any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are expected]}.
+@Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
+Old=[All Unit_Kinds are expected]}.
 @end{DescribeCode}
 
 
@@ -103,8 +103,8 @@ Not_A_Unit, An_Unknown_Unit, A_Nonexistent_Declaration, or
 A_Nonexistent_Body.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Compilation_Unit expects a unit of
-any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are expected]}.
+@Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
+Old=[All Unit_Kinds are expected]}.
 @end{DescribeCode}
 
 
@@ -134,8 +134,9 @@ units (same Ada implementor Context implementation unit value) will test as
 Is_Equal, but not Is_Identical, if they were obtained from different open
 ASIS Context variables.
 
-Raises ASIS_Inappropriate_Compilation_Unit if the unit is a
-Nil_Compilation_Unit.
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+Raises ASIS_Inappropriate_Compilation_Unit @ChgAdded{Version=[2],Text=[with
+a Status of Value_Error]} if the unit is a Nil_Compilation_Unit.
 @end{DescribeCode}
 
 
@@ -153,8 +154,9 @@ Returns the Container of the Context containing the compilation unit.
 Compilation units always remember the ASIS Context and Container from
 which they were obtained.
 
-Raises ASIS_Inappropriate_Compilation_Unit if the unit is a
-Nil_Compilation_Unit.
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+Raises ASIS_Inappropriate_Compilation_Unit @ChgAdded{Version=[2],Text=[with
+a Status of Value_Error]} if the unit is a Nil_Compilation_Unit.
 @end{DescribeCode}
 
 
@@ -331,7 +333,7 @@ overlap.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Library_Unit expects a unit
-of],Old=[Appropriate]} Unit_Kinds:
+that has one of the following],Old=[Appropriate]} Unit_Kinds:
 @begin{Display}
 A_Package
 A_Generic_Package
@@ -344,8 +346,8 @@ of Value_Error for any unit that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of units that each have
-one of ],Old=[]}Unit_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of units that
+each have one of the following],Old=[]} Unit_Kinds:
 @begin{Display}
 A_Procedure
 A_Function
@@ -420,7 +422,7 @@ overlap.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Library_Unit expects a unit
-of],Old=[Appropriate]} Unit_Kinds:
+that has one of the following],Old=[Appropriate]} Unit_Kinds:
 @begin{Display}
 A_Procedure
 A_Function
@@ -449,7 +451,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a unit with
-one of ],Old=[]}Unit_Kinds:
+one of the following],Old=[]} Unit_Kinds:
 @begin{Display}
 Not_A_Unit
 A_Package
@@ -502,7 +504,7 @@ not have a corresponding library unit contained in The_Context.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Library_Item expects a unit
-of],Old=[Appropriate]} Unit_Kinds:
+that has one of the following],Old=[Appropriate]} Unit_Kinds:
 @begin{Display}
 A_Procedure_Body
 A_Function_Body
@@ -516,8 +518,8 @@ of Value_Error for any unit that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Returns a unit with
-one of],Old=[Appropriate]} Unit_Kinds@Chg{Version=[2],New=[],
+@leading@keepnext@;@Chg{Version=[2],New=[Returns a unit
+that has one of the following],Old=[Appropriate]} Unit_Kinds:@Chg{Version=[2],New=[],
 Old=[ returning the argument Library_Item]}:
 @begin{Display}
 A_Procedure
@@ -621,7 +623,7 @@ do not have a corresponding library_unit_body contained in The_Context.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Library_Item expects a unit
-of],Old=[Appropriate]} Unit_Kinds:
+that has one of the following],Old=[Appropriate]} Unit_Kinds:
 @begin{Display}
 A_Procedure
 A_Function
@@ -638,8 +640,8 @@ of Value_Error for any unit that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Returns a unit with
-one of],Old=[Appropriate]} Unit_Kinds@Chg{Version=[2],New=[],
+@leading@keepnext@;@Chg{Version=[2],New=[Returns a unit
+that has one of the following],Old=[Appropriate]} Unit_Kinds@Chg{Version=[2],New=[],
 Old=[ returning the argument Library_Item]}:
 @begin{Display}
 A_Procedure_Body
@@ -796,8 +798,8 @@ Implementors are encouraged, but not required, to return names in the
 same case as was used in the original compilation text.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Compilation_Unit expects a unit of
-any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are appropriate]}.
+@Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
+Old=[All Unit_Kinds are expected]}.
 @end{DescribeCode}
 
 
@@ -822,8 +824,8 @@ to uniquely identify the compilation unit.
 Returns a null string only if a Nil_Compilation_Unit is given.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Compilation_Unit expects a unit of
-any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are appropriate]}.
+@Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
+Old=[All Unit_Kinds are expected]}.
 @end{DescribeCode}
 
 
@@ -842,8 +844,8 @@ Returns False for any unit with Not_A_Unit or nonexistent kind.
 Returns True for all other unit kinds.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Compilation_Unit expects a unit of
-any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are expected]}.
+@Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
+Old=[All Unit_Kinds are expected]}.
 @end{DescribeCode}
 
 
@@ -868,8 +870,8 @@ Results of this function may vary according to the requirements an Ada
 implementation may impose on a main subprogram.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Compilation_Unit expects a unit of
-any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are expected]}.
+@Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
+Old=[All Unit_Kinds are expected]}.
 @end{DescribeCode}
 
 
@@ -888,8 +890,8 @@ Returns True if the Compilation_Unit exists and is a library
 package_declaration that requires a body. See Reference Manual 7.2(4).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Compilation_Unit expects a unit of
-any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are expected]}.
+@Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
+Old=[All Unit_Kinds are expected]}.
 @end{DescribeCode}
 
 
@@ -915,8 +917,8 @@ Text_Name availability is a required feature of ASIS.
 Results of this function may vary among implementations.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Compilation_Unit expects a unit of
-any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are appropriate]}.
+@Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
+Old=[All Unit_Kinds are expected]}.
 @end{DescribeCode}
 
 
@@ -943,8 +945,8 @@ Text_Form availability is a required feature of ASIS.
 Results of this function may vary among implementations.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Compilation_Unit expects a unit of
-any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are appropriate]}.
+@Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
+Old=[All Unit_Kinds are expected]}.
 @end{DescribeCode}
 
 
@@ -965,8 +967,8 @@ a null string if the unit has a Nil or nonexistent kind, or if the
 object name is not available for any reason.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Compilation_Unit expects a unit of
-any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are appropriate]}.
+@Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
+Old=[All Unit_Kinds are expected]}.
 @end{DescribeCode}
 
 
@@ -988,8 +990,8 @@ nonexistent kind, if the object was created with an empty Form parameter,
 or if the object Form parameter value is not available for any reason.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Compilation_Unit expects a unit of
-any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are appropriate]}.
+@Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
+Old=[All Unit_Kinds are expected]}.
 @end{DescribeCode}
 
 
@@ -1011,8 +1013,8 @@ Returns null string if the unit has a Nil or nonexistent unit kind, or
 if the command line options are not available for any reason.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Compilation_Unit expects a unit of
-any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are appropriate]}.
+@Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
+Old=[All Unit_Kinds are expected]}.
 @end{DescribeCode}
 
 
@@ -1034,8 +1036,8 @@ Returns False if the unit is a Nil_Compilation_Unit argument, the
 Attribute does not exist, or the implementation does not support attributes.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Compilation_Unit expects a unit of
-any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are expected]}.
+@Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
+Old=[All Unit_Kinds are expected]}.
 
 Results of this query may vary across ASIS implementations.
 @end{DescribeCode}
@@ -1079,8 +1081,8 @@ argument, the unit has no values for this Attribute, or the implementation
 does not support attributes.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Compilation_Unit expects a unit of
-any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are appropriate]}.
+@Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
+Old=[All Unit_Kinds are expected]}.
 
 Results of this query may vary across ASIS implementations.
 @end{DescribeCode}
@@ -1125,15 +1127,17 @@ kind is A_Nonexistent_Body.
 Subunit lists are also available through the Semantic_Dependence_Order
 query using the Family relation.
 
-Raises ASIS_Inappropriate_Compilation_Unit if the unit is a
-Nil_Compilation_Unit.
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+Raises ASIS_Inappropriate_Compilation_Unit @ChgAdded{Version=[2],Text=[with
+a Status of Value_Error]} if the unit
+@Chg{Version=[2],New=[Parent_Body ],Old=[]}is a Nil_Compilation_Unit.
 
 If a subunit is absent or if it is inconsistent with the argument Element,
 A_Nonexistent_Body shall be returned for it.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of units that each have
-one of ],Old=[]}Unit_Kinds:
+one of the following],Old=[]}Unit_Kinds:
 @begin{Display}
 A_Nonexistent_Body
 A_Procedure_Body_Subunit
@@ -1179,7 +1183,7 @@ PUnit := Corresponding_Subunit_Parent_Body (SUnit,
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Subunit expects a unit
-of],Old=[Appropriate]} Unit_Kinds:
+that has one of the following],Old=[Appropriate]} Unit_Kinds:
 @begin{Display}
 A_Procedure_Body_Subunit
 A_Function_Body_Subunit
@@ -1194,8 +1198,8 @@ of Value_Error for any unit that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a unit with
-one of ],Old=[]}Unit_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a unit that has
+one of the following],Old=[]} Unit_Kinds:
 @begin{Display}
 A_Procedure_Body
 A_Function_Body

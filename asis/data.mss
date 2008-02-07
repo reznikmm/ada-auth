@@ -1,6 +1,6 @@
 @Part(data, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/data.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2007/10/13 05:33:35 $}
+@comment{$Revision: 1.8 $ $Date: 2008/02/06 06:23:47 $}
 
 @LabeledSection{package Asis.Data_Decomposition (optional)}
 
@@ -506,10 +506,15 @@ Returns Not_A_Type_Model for any unexpected argument such as a Nil value.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-of],Old=[Expected]} Element_Kinds:
+that has the following],Old=[Expected]} Element_Kinds:
 @begin{Display}
 A_Type_Definition
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
 @end{DescribeCode}
 
 
@@ -529,7 +534,9 @@ Returns True if Right is a Nil (or uninitialized) component value.
 
 Returns False for all other values.
 
-All component values are appropriate.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Right expects any kind of component.],
+Old=[All component values are appropriate.]}
 @end{DescribeCode}
 
 
@@ -557,7 +564,9 @@ Is_Equal (Enclosing_Compilation_Unit (Component_Declaration (Left)),
           Enclosing_Compilation_Unit (Component_Declaration (Right))) = True
 @end{ChildExample}
 
-All component values are appropriate.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Right and Left expect any kind of component.],
+Old=[All component values are appropriate.]}
 @end{DescribeCode}
 
 
@@ -585,7 +594,9 @@ Is_Identical (Enclosing_Compilation_Unit (Component_Declaration (Left)),
               Enclosing_Compilation_Unit (Component_Declaration (Right))) = True
 @end{ChildExample}
 
-All component values are appropriate.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Right and Left expect any kind of component.],
+Old=[All component values are appropriate.]}
 @end{DescribeCode}
 
 
@@ -740,9 +751,9 @@ values are valid parameters for all query operations.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
-A_Type_Definition@Chg{Version=[2],New=[ that has one of Type_Kinds:
+A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds:
    A_Derived_Type_Definition       (derived from a record type)
    A_Record_Type_Definition],Old=[]}
 @end{Display}
@@ -756,8 +767,8 @@ A_Record_Type_Definition]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Component expects an element
-of],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
+@leading@keepnext@;@Chg{Version=[2],New=[Component expects a component
+that has one of the following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 A_Simple_Dynamic_Model
@@ -766,8 +777,8 @@ A_Complex_Dynamic_Model
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element or component that does not have one of these
+expected kinds.]}
 @end{DescribeCode}
 
 
@@ -807,7 +818,7 @@ the record type is included in the result.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Type_Definition@Chg{Version=[2],New=[ that has one of Type_Kinds:
    A_Derived_Type_Definition       (derived from a record type)
@@ -823,7 +834,7 @@ A_Record_Type_Definition]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Component expects an element
+@leading@keepnext@;@Chg{Version=[2],New=[Component expects a component
 of],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
@@ -831,8 +842,8 @@ A_Simple_Static_Model
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element or component that does not have one of these
+expected kinds.]}
 @end{DescribeCode}
 
 
@@ -902,9 +913,9 @@ record type is included in the result.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
-A_Type_Definition@Chg{Version=[2],New=[ that has one of Type_Kinds:
+A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds:
    A_Derived_Type_Definition       (derived from a record type)
    A_Record_Type_Definition],Old=[]}
 @end{Display}
@@ -918,8 +929,8 @@ A_Record_Type_Definition]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Component expects an element
-of],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
+@leading@keepnext@;@Chg{Version=[2],New=[Component expects a component
+that has one of the following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 A_Simple_Dynamic_Model
@@ -927,8 +938,8 @@ A_Simple_Dynamic_Model
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element or component that does not have one of these
+expected kinds.]}
 @end{DescribeCode}
 
 
@@ -963,9 +974,9 @@ are valid parameters for all query operations.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
-A_Type_Definition@Chg{Version=[2],New=[ that has one of Type_Kinds:
+A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds:
    A_Derived_Type_Definition       (derived from an array type)
    An_Unconstrained_Array_Definition
    A_Constrained_Array_Definition],Old=[]}
@@ -981,8 +992,8 @@ A_Constrained_Array_Definition]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Component expects an element
-of],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
+@leading@keepnext@;@Chg{Version=[2],New=[Component expects a component
+that has one of the following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 A_Simple_Dynamic_Model
@@ -990,8 +1001,8 @@ A_Simple_Dynamic_Model
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element or component that does not have one of these
+expected kinds.]}
 @end{DescribeCode}
 
 
@@ -1059,7 +1070,9 @@ Raises ASIS_Inappropriate_Element if given a Nil_Array_Component_Iterator
 or one where Done(Iterator) = True. The Status value is Data_Error.
 The Diagnosis string will indicate the kind of error detected.
 
-All non-Nil component values are appropriate.
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Component expects any kind of non-Nil component.],
+Old=[All non-Nil component values are appropriate.]}
 @end{DescribeCode}
 
 
@@ -1080,13 +1093,15 @@ explicit declaration made by the user, or, it may be an implicit
 component declaration for an implementation-defined component (Reference Manual
 13.5.1(15)).
 
-All non-Nil component values are appropriate.
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Component expects any kind of non-Nil component.],
+Old=[All non-Nil component values are appropriate.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
+one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
-A_Declaration@Chg{Version=[2],New=[ that has one of Declaration_Kinds:
+A_Declaration@Chg{Version=[2],New=[ that has one of the following Declaration_Kinds:
     A_Component_Declaration
     A_Discriminant_Specification],Old=[]}
 @end{Display}
@@ -1115,11 +1130,12 @@ to be queried.
 Returns an Asis.Subtype_Indication. These values can be used to determine
 the subtype, type, and base type of the array components.
 
-All non-Nil component values are appropriate.
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Component expects any kind of non-Nil component.], Old=[All non-Nil component values are appropriate.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has one
+of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Subtype_Indication
 @end{Display}
@@ -1146,9 +1162,9 @@ An_Attribute_Reference expression.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
-A_Type_Definition@Chg{Version=[2],New=[ that has one of Type_Kinds:
+A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds:
    A_Derived_Type_Definition       (derived from a record type)
    A_Record_Type_Definition],Old=[]}
 @end{Display}
@@ -1163,7 +1179,7 @@ A_Record_Type_Definition]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[and Type_Definition expects an element
-of],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
+that has one of the following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 A_Simple_Dynamic_Model
@@ -1196,7 +1212,13 @@ array subtype may be multidimensional. The result treats the array as if
 it were unidimensional. It is the product of the 'Lengths of the
 individual array dimensions.
 
-All Is_Array(Component) = True values are appropriate.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@Chg{Version=[2],New=[Component expects a component that has
+Is_Array(Component) = True],Old=[values are appropriate]}.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any component that is not an array component.]}
 @end{DescribeCode}
 
 
@@ -1221,7 +1243,13 @@ Returns the number of components within an array valued component. The
 array subtype may be unidimensional. The result is the 'Length(Dimension)
 of the array.
 
-All Is_Array(Component) = True values are appropriate.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@Chg{Version=[2],New=[Component expects a component that has
+Is_Array(Component) = True],Old=[values are appropriate]}.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any component that is not an array component.]}
 @end{DescribeCode}
 
 
@@ -1244,7 +1272,8 @@ Returns the minimum number of bits required to hold a simple static type,
 the number of bits allocated to hold a record field, or the number of bits
 allocated to hold each array component.
 
-All non-Nil component values are appropriate.
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Type_Definition expects any kind of non-Nil element.], Old=[All non-Nil component values are appropriate.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
@@ -1254,16 +1283,16 @@ A_Type_Definition
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Component expects an element
-of],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
+@leading@keepnext@;@Chg{Version=[2],New=[Component expects a component
+that has the following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element or component that does not have one of these
+expected kinds.]}
 @end{DescribeCode}
 
 @begin{UsageNote}
@@ -1299,14 +1328,14 @@ data stream created by the Construct_Artificial_Data_Stream operation.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Type_Definition
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[and Type_Definition expects an element
-of],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
+that has the following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 A_Simple_Dynamic_Model
@@ -1351,7 +1380,9 @@ Returns the System.Storage_Unit offset, from the start of the first storage
 unit occupied by the enclosing composite type, of the first of the storage
 units occupied by the Component. The offset is measured in storage units.
 
-All non-Nil component values are appropriate. Raises
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Component expects any kind of non-Nil component.],
+Old=[All non-Nil component values are appropriate.]} Raises
 ASIS_Inappropriate_Element with a Status of Data_Error if any index is not
 in the expected range or if Done (Iterator) = True. The Status value will
 be Data_Error. The Diagnosis string will indicate the kind of error
@@ -1391,7 +1422,9 @@ Returns the bit offset, from the start of the first of the storage units
 occupied by the Component, of the first bit occupied by the Component. The
 offset is measured in bits.
 
-All non-Nil component values are appropriate. Raises
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Component expects any kind of non-Nil component.],
+Old=[All non-Nil component values are appropriate.]} Raises
 ASIS_Inappropriate_Element with a Status of Data_Error if any index is not
 in the expected range or if Done (Iterator) = True. The Status value will
 be Data_Error. The Diagnosis string will indicate the kind of error
@@ -1430,7 +1463,9 @@ Returns the bit offset, from the start of the first of the storage units
 occupied by the Index'th Element, of the last bit occupied by the Element.
 The offset is measured in bits.
 
-All non-Nil component values are appropriate. Raises
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Component expects any kind of non-Nil component.],
+Old=[All non-Nil component values are appropriate.]} Raises
 ASIS_Inappropriate_Element with a Status of Data_Error if any index is not
 in the expected range or if Done (Iterator) = True. The Status value will
 be Data_Error. The Diagnosis string will indicate the kind of error detected.
@@ -1507,9 +1542,9 @@ discriminants and components.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
-A_Type_Definition@Chg{Version=[2],New=[ that has one of Type_Kinds:
+A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds:
    A_Derived_Type_Definition       (derived from a record type)
    A_Record_Type_Definition],Old=[]}
 @end{Display}

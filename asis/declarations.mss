@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.10 $ $Date: 2007/10/13 05:33:33 $}
+@comment{$Revision: 1.11 $ $Date: 2008/02/06 06:23:46 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -46,15 +46,16 @@ declarations of universal and root numeric type (that is, if Type_Kind
 
 Function designators that define operators are A_Defining_Operator_Symbol.
 
-Results of this query may vary across ASIS implementations. Some
-implementations may normalize all multi-name declarations into an
-equivalent series of corresponding single name declarations. For those
-implementations, this query will always return a list containing a single
-name. See Reference Manual 3.3.1(7).
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0025-1]}
+@ChgDeleted{Version=[2],Text=[Results of this query may vary across ASIS
+implementations. Some implementations may normalize all multi-name declarations
+into an equivalent series of corresponding single name declarations. For those
+implementations, this query will always return a list containing a single name.
+See Reference Manual 3.3.1(7).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Declaration
 @end{Display}
@@ -66,7 +67,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that
-have one of ],Old=[]}Element_Kinds:
+have one of the following],Old=[]} Element_Kinds:
 @begin{Display}
 A_Defining_Name
 @end{Display}
@@ -136,7 +137,7 @@ syntactic constructs and any comments associated with them.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Defining_Name expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Defining_Name
 @end{Display}
@@ -180,7 +181,7 @@ For example: Integer'Image(Color'Pos(Blue)).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Defining_Name expects an element
-of],Old=[Appropriate]} Defining_Name_Kinds:
+that is one of the following],Old=[Appropriate]} Defining_Name_Kinds:
 @begin{Display}
 A_Defining_Character_Literal
 A_Defining_Enumeration_Literal
@@ -213,7 +214,7 @@ the Position_Number_Image.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Defining_Name expects an element
-of],Old=[Appropriate]} Defining_Name_Kinds:
+that is one of the following],Old=[Appropriate]} Defining_Name_Kinds:
 @begin{Display}
 A_Defining_Character_Literal
 A_Defining_Enumeration_Literal
@@ -257,7 +258,7 @@ The Defining_Prefix of A.B is A, and of A.B.C is A.B.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Defining_Name expects an element
-of],Old=[Appropriate]} Defining_Name_Kinds:
+that has one of the following],Old=[Appropriate]} Defining_Name_Kinds:
 @begin{Display}
 A_Defining_Expanded_Name
 @end{Display}
@@ -268,8 +269,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Expression_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
+one of the following],Old=[]} Expression_Kinds:
 @begin{Display}
 An_Identifier
 A_Selected_Component
@@ -294,7 +295,7 @@ The Defining_Selector of A.B is B, and of A.B.C is C.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Defining_Name expects an element
-of],Old=[Appropriate]} Defining_Name_Kinds:
+that has one of the following],Old=[Appropriate]} Defining_Name_Kinds:
 @begin{Display}
 A_Defining_Expanded_Name
 @end{Display}
@@ -305,8 +306,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Defining_Name_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
+has one of the following],Old=[]} Defining_Name_Kinds:
 @begin{Display}
 A_Defining_Identifier
 @end{Display}
@@ -343,7 +344,7 @@ Returns a Nil_Element if the Declaration has no explicit discriminant_part.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
-of],Old=[Appropriate]} Declaration_Kinds:
+that has one of the following],Old=[Appropriate]} Declaration_Kinds:
 @begin{Display}
 An_Ordinary_Type_Declaration
 A_Task_Type_Declaration
@@ -360,8 +361,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Definition_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
+one of the following],Old=[]} Definition_Kinds:
 @begin{Display}
 Not_A_Definition
 An_Unknown_Discriminant_Part
@@ -407,7 +408,7 @@ For a formal_type_declaration, returns the formal_type_definition.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0011-1]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
-of],Old=[Appropriate]} Declaration_Kinds:
+that has one of the following],Old=[Appropriate]} Declaration_Kinds:
 @begin{Display}
 An_Ordinary_Type_Declaration
 A_Task_Type_Declaration
@@ -425,8 +426,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0011-1],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Definition_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
+one of the following],Old=[]} Definition_Kinds:
 @begin{Display}
 Not_A_Definition
 A_Type_Definition
@@ -443,7 +444,8 @@ A_Formal_Type_Definition
 @end{DescribeCode}
 
 
-@LabeledClause{function Object_Declaration_View}
+*** This should be replaced by a new routine.
+@LabeledRevisedClause{Version=[2],New=[function Object_Declaration_Subtype],Old=[function Object_Declaration_View]}
 
 @begin{ElementRef}
 A_Subtype_Declaration @em 3.2.2
@@ -528,7 +530,7 @@ A_Protected_Definition
 A_Component_Definition
 @end{Display}
 @end{DescribeCode}
-
+*** End Obsolete code ***
 
 @LabeledClause{function Initialization_Expression}
 
@@ -658,7 +660,9 @@ A_Pragma
 @end{DescribeCode}
 
 
-@LabeledClause{function Declaration_Subtype_Mark}
+*** Start obsolete code ***
+
+@LabeledRevisedClause{Version=[2],New=[obsolete function DSM],Old=[function Declaration_Subtype_Mark]}
 
 @begin{ElementRef}
 A_Deferred_Constant_Declaration @em 3.3.1
@@ -741,7 +745,7 @@ A_Selected_Component
 An_Attribute_Reference
 @end{Display}
 @end{DescribeCode}
-
+*** end obsolete code ***
 
 @LabeledClause{function Corresponding_Type_Declaration}
 
@@ -1142,7 +1146,8 @@ A_Parameter_Specification
 @end{DescribeCode}
 
 
-@LabeledClause{function Result_Profile}
+*** Start obsolete code, should be replaced ***
+@LabeledRevisedClause{Version=[2],New=[function Result_Subtype],Old=[function Result_Profile]}
 
 @begin{ElementRef}
 A_Function_Declaration @em 6.1
@@ -1194,7 +1199,7 @@ A_Selected_Component
 An_Attribute_Reference
 @end{Display}
 @end{DescribeCode}
-
+*** End Obsolete code ***
 
 @LabeledClause{function Body_Declarative_Items}
 

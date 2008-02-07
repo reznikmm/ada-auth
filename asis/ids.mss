@@ -1,6 +1,6 @@
 @Part(ids, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/ids.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/09/28 05:12:00 $}
+@comment{$Revision: 1.2 $ $Date: 2008/02/06 06:23:47 $}
 
 @LabeledSection{package Asis.Ids}
 
@@ -129,7 +129,8 @@ for any other Element value unless the two Elements are Is_Identical.
 
 Nil_Id is returned for a Nil_Element.
 
-All Element_Kinds are appropriate.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Element expects any kind of element.], Old=[All Element_Kinds are appropriate.]}
 @end{DescribeCode}
 
 

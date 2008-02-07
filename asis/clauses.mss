@@ -1,6 +1,6 @@
 @Part(clauses, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/clauses.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2007/10/13 05:33:32 $}
+@comment{$Revision: 1.7 $ $Date: 2008/02/06 06:23:46 $}
 
 @LabeledSection{package Asis.Clauses}
 
@@ -49,7 +49,7 @@ name can appear more than once in a clause.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Clause expects an element
-of],Old=[Appropriate]} Element_Kinds:
+that has one of the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Use_Package_Clause
 A_Use_Type_Clause
@@ -62,8 +62,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Expression_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+has one of the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 A_Selected_Component
@@ -103,7 +103,7 @@ Returns the direct_name expression following the reserved word @key[for].
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Clause expects an element
-of],Old=[Appropriate]} Clause_Kinds:
+that has one of the following],Old=[Appropriate]} Clause_Kinds:
 @begin{Display}
 A_Representation_Clause
 A_Component_Clause
@@ -115,8 +115,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Expression_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
+one of the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 An_Attribute_Reference
@@ -140,7 +140,7 @@ words @key[use at].
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Clause expects an element
-of],Old=[Appropriate]} Representation_Clause_Kinds:
+that has one of the following],Old=[Appropriate]} Representation_Clause_Kinds:
 @begin{Display}
 An_Attribute_Definition_Clause
 An_Enumeration_Representation_Clause
@@ -153,8 +153,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
+the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -189,7 +189,7 @@ Returns a Nil_Element if a mod_clause is not present.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Clause expects an element
-of],Old=[Appropriate]} Representation_Clause_Kinds:
+that has the following],Old=[Appropriate]} Representation_Clause_Kinds:
 @begin{Display}
 A_Record_Representation_Clause
 @end{Display}
@@ -200,8 +200,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
+one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 Not_An_Element
 An_Expression
@@ -231,7 +231,7 @@ component_clause or pragma elements.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Clause expects an element
-of],Old=[Appropriate]} Representation_Clause_Kinds:
+that has one of the following],Old=[Appropriate]} Representation_Clause_Kinds:
 @begin{Display}
 A_Record_Representation_Clause
 @end{Display}
@@ -242,8 +242,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+has one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Clause@Chg{Version=[2],New=[ @em the returned element also has one of Clause_Kinds:],Old=[]}
 @Chg{Version=[2],New=[   A_Component_Clause],Old=[]}
@@ -283,7 +283,7 @@ Returns the position expression for the component_clause.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Clause expects an element
-of],Old=[Appropriate]} Clause_Kinds:
+that has the following],Old=[Appropriate]} Clause_Kinds:
 @begin{Display}
 A_Component_Clause
 @end{Display}
@@ -294,8 +294,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
+the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -316,7 +316,7 @@ Returns the first_bit .. last_bit range for the component_clause.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Clause expects an element
-of],Old=[Appropriate]} Clause_Kinds:
+that has the following],Old=[Appropriate]} Clause_Kinds:
 @begin{Display}
 A_Component_Clause
 @end{Display}
@@ -327,8 +327,8 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element with
-one of ],Old=[]}Discrete_Range_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
+the following ],Old=[]}Discrete_Range_Kinds:
 @begin{Display}
 A_Discrete_Simple_Expression_Range
 @end{Display}
