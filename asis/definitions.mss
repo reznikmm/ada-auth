@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2008/02/06 06:23:46 $}
+@comment{$Revision: 1.10 $ $Date: 2008/02/07 06:00:08 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -1165,6 +1165,12 @@ A_Parameter_Specification
 @ChgNote{SI99-0004-1 obsoleted old section, replaced with new one}
 @LabeledRevisedClause{Version=[2],New=[function Access_To_Function_Result_Subtype],
 Old=[function Access_To_Function_Result_Profile]}
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0004-1]}
+@ChgAdded{Version=[2],Text=[Access_To_Function_Result_Profile is now obsolescent, see
+@RefSecNum{function Access_To_Function_Result_Profile}.]}
+@end{Discussion}
 
 @begin{DescribeCode}
 @begin{Example}
