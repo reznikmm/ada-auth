@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2007/07/10 05:00:48 $}
+@Comment{$Date: 2008/02/23 06:13:38 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.35 $}
+@Comment{$Revision: 1.36 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1380,15 +1380,18 @@ type declared within the formal part of the generic unit.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00363-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0041-1]}
 If the designated type of the type of the @nt<allocator> is elementary,
 then the subtype of the created object is the designated
 subtype.
 If the designated type is composite, then the
 @Chg{Version=[2],New=[subtype of the ],Old=[]}created object is
 @Chg{Version=[2],New=[the designated
-subtype when the designated subtype is constrained or there is a partial
-view of the designated type that is constrained; otherwise, the
-created],Old=[always constrained;
+subtype when the designated subtype is constrained or there is
+@Chg{Version=[3],New=[an ancestor of the designated type that
+has a constrained],Old=[a]} partial
+view@Chg{Version=[3],New=[],Old=[ of the designated type that is constrained]};
+otherwise, the created],Old=[always constrained;
 if the designated subtype is constrained,
 then it provides the constraint of the created object;
 otherwise, the]} object is constrained by its initial value
@@ -1739,6 +1742,11 @@ has been moved to @RefSec{Storage Management}.
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0024-1]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the master check
   for tags since the masters may be for different tasks and thus incomparable.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0041-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the rules for
+  when an designated object is constrained by its initial value so that
+  types derived from a partial view are handled properly.]}
 @end{DiffWord95}
 
 
@@ -2477,6 +2485,7 @@ the index ranges of formal and actual constrained array subtypes have to
 statically match.
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0086-1]}
 @Defn2{Term=[statically compatible],
   Sec=(for a constraint and a scalar subtype)}
 A constraint is @i(statically compatible) with a scalar subtype if
@@ -2491,7 +2500,9 @@ if the subtype is unconstrained.
   Sec=(for two subtypes)}
 One subtype is @i(statically compatible) with a second subtype if
 the constraint of the first is statically compatible with the
-second subtype.
+second subtype@Chg{Version=[3],New=[, and in the case of
+an access type, if the second subtype excludes null, then so does
+the first],Old=[]}.
 @begin{Discussion}
   Static compatibility is required when constraining a parent subtype
   with a discriminant from a new @nt<discriminant_part>.
@@ -2510,12 +2521,15 @@ This subclause is new to Ada 95.
 @end{DiffWord83}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
-@Chg{Version=[2],New=[Added static matching rules for null exclusions and
-anonymous access-to-subprogram types; both of these are new in
-Ada 2005.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
+  @ChgAdded{Version=[2],Text=[Added static matching rules for null exclusions
+  and anonymous access-to-subprogram types; both of these are new.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00311-01]}
-@Chg{Version=[2],New=[We clarify that the constraint of the first subtype
-of a scalar formal type statically matches itself.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00311-01]}
+  @ChgAdded{Version=[2],Text=[We clarify that the constraint of the first
+  subtype of a scalar formal type statically matches itself.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0086-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Updated the statically
+  compatible rules to take null exclusions into account.]}
 @end{DiffWord95}

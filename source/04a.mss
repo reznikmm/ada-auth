@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2007/12/13 05:28:27 $}
+@Comment{$Date: 2008/02/23 06:13:37 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.90 $}
+@Comment{$Revision: 1.91 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -739,9 +739,10 @@ or a @nt<range_@!attribute_@!reference>.]
 @Syn{lhs=<attribute_reference>,
   rhs="@Syn2{prefix}@SingleQuote@Syn2{attribute_designator}"}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0004-1]}
 @Syn{lhs=<attribute_designator>,rhs="
     @Syn2{identifier}[(@SynI{static_}@Syn2{expression})]
-  | Access | Delta | Digits"}
+  | Access | Delta | Digits@Chg{Version=[3],New=[ | Mod],Old=[]}"}
 
 
 @Syn{lhs=<range_attribute_reference>,
@@ -4109,11 +4110,13 @@ or the floating point type):
 @key(function) "**"(Left : @RI(T); Right : Integer'Base) @key(return) @RI(T)
 @end(example)
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0088-1]}
 @Defn{exponent}
 The right operand of an exponentiation is the @i(exponent).
-The expression X**N with the value of the exponent
-N positive is equivalent to the
-expression X*X*...X (with N@en@;1 multiplications) except that the multiplications
+The @Chg{Version=[3],New=[value of],Old=[expression]} X**N with the value of
+the exponent N positive @Chg{Version=[3],New=[the same as the value of],
+Old=[is equivalent to the expression]} X*X*...X (with N@en@;1 multiplications)
+except that the multiplications
 are associated in an arbitrary order. With N equal to zero, the result is one.
 With the value of N negative
 @Redundant[(only defined for a floating point operand)],
@@ -4166,4 +4169,11 @@ with a parameter subtype of Natural rather than Integer for the exponent.
 This reflects the fact that Constraint_Error is raised if
 a negative value is provided for the exponent.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0088-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: The equivalence definition
+  for "**" was corrected so that it does not imply that the operands
+  are evaluated multiple times.]}
+@end{DiffWord95}
 

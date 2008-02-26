@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/12/06 06:53:16 $}
+@Comment{$Date: 2008/02/23 06:13:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4427,14 +4427,21 @@ used to define the discriminant of an object, the level of the object.]}]}
 @end{InnerItemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0024-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0024-1],ARef=[AI05-0066-1]}
 @ChgAdded{Version=[2],NoPrefix=[T],Text=[@Defn2{Term=[coextension],Sec=(of an object)}
 In @Chg{Version=[3],New=[the first],Old=[this last]} case, the allocated object
 is said to be a @i{coextension} of the object whose discriminant designates it,
 as well as of any object of which the discriminated object is itself a
-coextension or subcomponent. All coextensions of an object are finalized when
+coextension or subcomponent.@Chg{Version=[3],New=[ If the allocated object is
+a coextension of an
+anonymous object representing the result of an aggregate or function
+call that is used (in its entirety) to directly initialize a part of
+an object, after the result is assigned, the coextension becomes a
+coextension of the object being initialized and is no longer
+considered a coextension of the anonymous object.],Old=[]}
+All coextensions of an object @Chg{Version=[3],New=[@Redundant[(which have not
+thus been transfered by such an initialization)] ],Old=[]}are finalized when
 the object is finalized (see @RefSecNum{Completion and Finalization}).]}
-
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[The rules of access discriminants are such that
@@ -4508,17 +4515,24 @@ will succeed).]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00254-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0082-1]}
 The statically deeper relationship does not apply to the accessibility
 level of the anonymous type of an access parameter@Chg{Version=[2],
-New=[ specifying an access-to-object type],Old=[]};
+New=[ specifying an access-to-object type],Old=[]}@Chg{Version=[3],
+New=[ nor does it apply to a descendant of a generic formal type],Old=[]};
 that is, such an accessibility level is not considered to be statically
 deeper, nor statically shallower, than any other.
 
-
-For determining whether one level is statically deeper than another when
-within a generic package body, the generic package is presumed to be
+@Redundant[For determining whether one level is statically deeper than another
+when within a generic package body, the generic package is presumed to be
 instantiated at the same level as where it was declared;
-run-time checks are needed in the case of more deeply nested instantiations.
+run-time checks are needed in the case of more deeply nested instantiations.]
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0082-1]}
+  @ChgAdded{Version=[3],Text=[A generic package does not introduce a new master,
+  so it has the static level of its declaration; the rest follows from the
+  other @ldquote@;statically deeper@rdquote rules.]}
+@end{TheProof}
 
 For determining whether one level is statically deeper than another when
 within the declarative region of a @nt{type_declaration},
@@ -4637,9 +4651,21 @@ is the library level.
   deeper than@rquotes@; does not apply to such a type, nor to anything defined
   to have @lquotes@;the same@rquotes@; level as such a type.
 
-  Checks involving entities and views within generic packages.
-  This is because an instantiation can be at a level that is
-  more deeply nested than the generic package itself.
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0082-1]}
+  @ChgAdded{Version=[3],Text=[Checks involving generic formal types
+  and their descendants. This is because the actual type can be more
+  or less deeply nested than the generic unit. Note that this only
+  applies to the generic unit itself, and not to the instance. Any
+  static checks needed in the instance will be performed. Any other
+  checks (such as those in the generic body) will require a run-time
+  check of some sort (although implementations that macro-expand
+  generics can determine the result of the check when the generic
+  is expanded).]}
+
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0082-1]}
+  Checks involving @Chg{Version=[3],New=[other ],Old=[]}entities and
+  views within generic packages. This is because an instantiation can
+  be at a level that is more deeply nested than the generic package itself.
   In implementations that use a macro-expansion model of generics,
   these violations can be detected at macro-expansion time.
   For implementations that share generics,
@@ -4910,17 +4936,14 @@ denotes an aliased view of an object}:
   @end{discussion}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00363-01]}
-  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0008-1]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0008-1],ARef=[AI05-0041-1]}
   The view shall not be a subcomponent that
   depends on discriminants of @Chg{Version=[3],New=[an object unless
   the object is known to be constrained],Old=[a
   variable whose nominal subtype is unconstrained,
   unless this subtype is indefinite,
   or the variable is @Chg{Version=[2],New=[constrained by its initial value],
-  Old=[aliased]}]}.@Chg{Version=[3],New=[ @PDefn{generic contract issue}In
-  addition to the places where @LegalityTitle normally apply
-  (see @RefSecNum{Generic Instantiation}), this rule applies also in the
-  private part of an instance of a generic unit.],Old=[]}
+  Old=[aliased]}]}.
 
   @begin(Discussion)
     @comment{The following is a "fix" to keep consistent with v. 5.95;
@@ -4995,9 +5018,14 @@ denotes an aliased view of an object}:
     or@PDefn2{Term=[statically matching],Sec=(required)}]}
 
     @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00363-01]}
+    @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0041-1]}
     @ChgAdded{Version=[2],Text=[@i{D} shall be discriminated in its full view
     and unconstrained in any partial view, and the designated subtype of
-    @i{A} shall be unconstrained.]}
+    @i{A} shall be unconstrained.@Chg{Version=[3],New=[ For the purposes
+    of determining within a generic body whether @i{D} is unconstrained
+    in any partial view, a discriminated subtype is is
+    considered to have a constrained partial view if it is a descendant
+    of an untagged generic formal private or derived type.],Old=[]}]}
   @end{InnerItemize}
   @begin{ImplNote}
     This ensures
@@ -5016,14 +5044,14 @@ denotes an aliased view of an object}:
   object, only that any partial view that does exist is unconstrained.],Old=[]}
   @end{Ramification}
 
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0041-1]}
   The accessibility level of the view shall not be statically deeper
-  than that of the access type @i{A}.
+  than that of the access type @i{A}.@Chg{Version=[3],New=[],Old=[
   In addition to the places where @LegalityTitle normally apply
   (see @RefSecNum{Generic Instantiation}),
   this rule applies also in the private part of an
-  instance of a generic unit.
+  instance of a generic unit.@PDefn{generic contract issue}]}
 @PDefn2{Term=[accessibility rule],Sec=(Access attribute)}
-@PDefn{generic contract issue}
   @begin(Ramification)
     In an instance body, a run-time check applies.
 
@@ -5041,6 +5069,13 @@ denotes an aliased view of an object}:
     anonymous access-to-object types have "normal" accessibility checks.],Old=[]}
   @end(Ramification)
 @end(itemize)
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0041-1]}
+@ChgAdded{Version=[3],NoPrefix=[T],Text=[In addition to the places where
+  @LegalityTitle normally apply
+  (see @RefSecNum{Generic Instantiation}), these requirements apply
+  also in the private part of an instance of a generic
+  unit.@PDefn{generic contract issue}]}
 
   @NoPrefix@IndexCheck{Accessibility_Check}
   @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
@@ -5361,6 +5396,21 @@ applies to both Ada 95 and Ada 2005.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0024-1]}
 @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected accessibility
 rules for access discriminants so that no cases are omitted.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0041-1]}
+@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the checks
+for the constrainedness of the prefix of the Access attribute so that
+assume-the-worst is used in generic bodies.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0066-1]}
+@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Changed coextension
+rules so that coextensions that belong to an anonymous object are
+transfered to the ultimate object.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0082-1]}
+@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Eliminated the static
+accessibility check for generic formal types, as the actual can be
+more or less nested than the generic itself.]}
 @end{DiffWord95}
 
 

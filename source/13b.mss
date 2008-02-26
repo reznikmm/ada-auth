@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2007/12/06 06:53:17 $}
+@Comment{$Date: 2008/02/23 06:13:39 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -739,7 +739,9 @@ Note that there is no requirement that the Sizes be known at compile
 time.
 @end{Ramification}
 
-S'Alignment = Target'Alignment.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0078-1]}
+S'Alignment @Chg{Version=[3],New=[is a multiple of],Old=[=]}
+Target'Alignment@Chg{Version=[3],New=[ or Target'Alignment is zero],Old=[]}.
 
 The target subtype is not an unconstrained composite subtype.
 
@@ -878,6 +880,10 @@ followed.]}]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00426-01]}
   @ChgAdded{Version=[2],Text=[Clarified that the result of Unchecked_Conversion
   for scalar types can be invalid, but not abnormal.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0078-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Relaxed the alignment
+  requirement slightly.]}
 @end{DiffWord95}
 
 
@@ -2465,13 +2471,39 @@ allowed in a @nt{pragma} Restrictions.]}
 @end{StaticSem}
 
 @begin{LinkTime}
-@PDefn2{Term=[configuration pragma], Sec=(Restrictions)}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
+@ChgNote{Use ChgAdded to get conditional Leading}@ChgAdded{Version=[3],
+Type=[Leading],Text=[]}@PDefn2{Term=[configuration pragma], Sec=(Restrictions)}
 @PDefn2{Term=[pragma, configuration], Sec=(Restrictions)}
-A @nt{pragma} Restrictions is a configuration pragma;
-unless otherwise specified for a particular restriction,
+A @nt{pragma} Restrictions is a configuration pragma@Chg{Version=[3],
+New=[. If a @nt{pragma} Restrictions applies to any compilation unit included in
+the partition, this may impose either (or both) of two kinds of
+requirements, as],
+Old=[; unless otherwise]} specified for @Chg{Version=[3],New=[the],Old=[a]}
+particular restriction@Chg{Version=[3],New=[:],Old=[,
 a partition shall obey the restriction
 if a @nt{pragma} Restrictions applies to any compilation unit
-included in the partition.
+included in the partition.]}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0013-1]}
+@ChgAdded{Version=[3],Text=[A restriction may impose requirements on some or
+all of the units comprising the partition. Unless otherwise specified for a
+particular restriction, such a requirement applies to all of the units
+comprising the partition and is enforced via a post-compilation check.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0013-1]}
+@ChgAdded{Version=[3],Text=[A restriction may impose requirements on the
+runtime behavior of the program, as indicated by the specification of runtime
+behavior associated with a violation of the requirement.]}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[In this case, there is no post-compilation check
+required.]}
+@end{Ramification}
+@end{Itemize}
+
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0042],ARef=[AI95-00130-01]}
 @ChgAdded{Version=[1],Type=[Leading],Text=[For the purpose of checking whether
@@ -2568,6 +2600,10 @@ use of the more efficient and safe one.
   @ChgAdded{Version=[2],Text=[The syntax of a @nt{restriction_parameter_argument}
   has been defined to better support restriction No_Dependence (see
   @RefSecNum{Language-Defined Restrictions}).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: When restrictions are
+  checked has been clarified.]}
 @end{DiffWord95}
 
 
@@ -3021,6 +3057,18 @@ the attribute of @i(T) shall be directly specified.],Old=[]}
 of the stream elements read and written],Old=[representation used]} by the
 Read and Write attributes of elementary types@Chg{Version=[2],New=[],Old=[ in
 terms of stream elements]}.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0023-1]}
+@ChgAdded{Version=[3],Text=[If @i<T> is a discriminated type and its
+discriminants have defaults then
+S'Read first reads the discriminants from the stream without modifying
+@i<Item>. S'Read then creates an object of type @i<T> constrained by these
+discriminants. The value of this object is then converted to the subtype
+of @i<Item> and is assigned to @i<Item>. Finally, the Read attribute for each
+non-discriminant component of @i<Item> is called in canonical
+order as described above. Normal default initialization and finalization
+take place for the created object.]}
+
 @begin{Reason}
   A discriminant with a default value is treated simply as
   a component of the object. On the other hand,
@@ -3042,6 +3090,14 @@ terms of stream elements]}.]}
   @ChgAdded{Version=[1],Text=[Similarly, a type that has a progenitor
   with an available attribute must also have that attribute, for the
   same reason.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0023-1]}
+  @ChgAdded{Version=[3],Text=[The semantics of S'Read for a discriminated
+  type with defaults involves an anonymous object so that the
+  point of required initialization and finalization is well-defined,
+  especially for objects that change shape and have controlled components.
+  The creation of this anonymous object often can be omitted (see the
+  @ImplPermTitle below).]}
 @end{Reason}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01]}
@@ -3176,11 +3232,17 @@ the discriminants (using S'Write for each), and S'Input first
 reads the discriminants (using S'Read for each).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0023-1]}
 S'Output then calls S'Write to write the value of @i{Item} to the stream.
-S'Input then creates an object (with the bounds or discriminants, if any,
-taken from the stream), @Chg{Version=[2],New=[passes],Old=[initializes]} it
+S'Input then creates an object @Chg{Version=[3],New=[of type
+@i<T>, ],Old=[(]}with the bounds or @Chg{Version=[3],New=[(when without
+defaults) the ],Old=[]}discriminants, if any,
+taken from the stream@Chg{Version=[3],New=[],Old=[)]},
+@Chg{Version=[2],New=[passes],Old=[initializes]} it
 @Chg{Version=[2],New=[to],Old=[with]} S'Read, and returns
-the value of the object.@Chg{Version=[2],New=[ Normal default initialization
+the value of the object.@Chg{Version=[3],New=[ If @i<T> has discriminants, then this
+object is unconstrained if and only the discriminants have
+defaults.],Old=[]}@Chg{Version=[2],New=[ Normal default initialization
 and finalization take place for this object (see @RefSecNum{Object Declarations},
 @RefSecNum{User-Defined Assignment and Finalization}, and
 @RefSecNum{Completion and Finalization}).],Old=[]}
@@ -3601,6 +3663,48 @@ exist in the partition at the time of the call, execution is erroneous.]}
   this invocation returns. An explicit invocation is one appearing explicitly
   in the program text, possibly through a generic instantiation (see
   @RefSecNum{Generic Instantiation}).]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0023-1]}
+  @ChgAdded{Version=[3],Text=[If @i<T> is a discriminated type and its
+  discriminants have defaults then in two cases an execution of the default
+  implementation of S'Read is not required to create an anonymous object of
+  type @i<T>: If the discriminants values that are read in are equal to the
+  corresponding discriminant values of @i<Item>, then no object of type @i<T>
+  need be created and @i<Item> may be used instead. If they are not equal and
+  @i<Item> is a constrained variable, then Constraint_Error may be raised at
+  that point, before any further values are read from the stream and before
+  the object of type @i<T> is created.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0023-1]}
+  @ChgAdded{Version=[3],Text=[A default implementation of S'Input that calls the default implementation
+  of S'Read may create a constrained anonymous object with discriminants
+  that match those in the stream.]}
+@begin{ImplNote}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[This allows
+    the combined executions of S'Input and S'Read to create one
+    object of type @i<T> instead of two. If this option is exercised, then:]}
+@begin{Itemize}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[The discriminants are read from the stream by
+    S'Input, not S'Read.]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[S'Input declares an object of type @i<T>
+    constrained by the discriminants read from the stream, not an
+    unconstrained object.]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[The discriminant values which S'Read would
+    normally have read from the stream are read from Item instead.]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[The permissions of the preceding paragraph
+    then apply and no object of type @i<T> need be created by the execution
+    of S'Read.]}
+@end{Itemize}
+@end{ImplNote}
+
 @end{ImplPerm}
 
 @begin{Notes}
@@ -3766,6 +3870,12 @@ class-wide types descended from S.
   subtype is appropriate for attributes specified for partial views whose
   full type is a scalar type. It also eliminates a common user error
   (forgetting 'Base).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0023-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the definition
+  of the default version S'Read and S'Input to be well-defined if
+  S is a discriminated type with defaulted discriminants and
+  some components require initialization and/or finalizations.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0039-1]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Required that stream

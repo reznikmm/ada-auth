@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/12/06 06:53:16 $}
+@Comment{$Date: 2008/02/23 06:13:36 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -137,6 +137,29 @@ entity itself (a @nt(renaming_declaration) is an example of a declaration
 that does not define a new entity,
 but instead defines a view of an existing entity
 (see @RefSecNum(Renaming Declarations))).]}>}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0080-1]}
+@ChgAdded{Version=[3],Text=[When it is clear from context, the term @i<object>
+is used in place of @i<view of an object>. Similarly, the terms @i<type> and
+@i<subtype> are used in place of @i<view of a type> and @i<view of a subtype>,
+respectively.@Defn2{Term=[view],Sec=[of an object (implied)]}@Defn2{Term=[view],
+Sec=[of a type (implied)]}@Defn2{Term=[view],Sec=[of a subtype (implied)]}]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Rules interpreted at compile time generally
+  refer to views of entities, rather than the entities themselves. This is
+  necessary to preserve privacy; characteristics that are not visible should
+  not be used in compile-time rules. Thus, @StaticSemTitle and
+  @LegalityTitle generally implicitly have @ldquote@;view of@rdquote.
+  @LegalityTitle that need to look into the private part
+  are the exception to this interpretation.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[On the other hand, run-time rules can work
+  either way, so @ldquote@;view of@rdquote should not be assumed
+  in @RunTimeTitle rules.]}
+@end{Discussion}
 
 @PDefn2{Term=[scope], Sec=(informal definition)}
 For each declaration, the language rules define a certain
@@ -1662,20 +1685,20 @@ generic formal object of mode @key[in]); or]}
 @ChgAdded{Version=[3],Text=[it is part of a constant return object of an
 @nt{extended_return_statement}; or]}
 
-@ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1],ARef=[AI05-0041-1]}
 @ChgAdded{Version=[3],Text=[it is a dereference of a pool-specific access type,
-and there is no partial view of its type that is constrained.]}
+and there is no ancestor of its type that has a constrained partial view.]}
 
 @end{Itemize}
 
 @begin{Discussion}
-@ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[We do not include dereferences of general access
 types because they might denote stand-alone aliased unconstrained variables.
 That's true even for access-to-constant types (the denoted object does not
 have to be a constant).]}
 
-@ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[There are other cases that could have been
 included in this definition (view conversions, the current instance of
 a type, implementation-defined attributes, objects of a formal discriminated
@@ -1685,12 +1708,23 @@ the definition should be checked to see if any of these additional cases
 are relevant and appropriate wording added if necessary.]}
 @end{Discussion}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1]}
-@ChgAdded{Version=[3],Text=[For the purposes of determining within a generic
-body whether an object is known to be constrained, a subtype is not considered
-indefinite if it is a descendant of an untagged generic formal derived type,
-nor is an access type considered pool-specific if it is a descendant of a
-formal access type.]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1],ARef=[AI05-0041-1]}
+@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[For the purposes of
+determining within a generic body whether an object is known
+to be constrained:]}
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[if a subtype is a descendant of an untagged generic
+formal private or derived type, and the subtype is not an unconstrained array
+subtype, it is not considered indefinite and is considered to have a
+constrained partial view;]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[if a subtype is a descendant of a formal access type, it is not
+considered pool-specific.]}
+
+@end{Itemize}
+
 
 @Defn{named number}
 A @i(named number) provides a name for a numeric value known
@@ -1764,7 +1798,7 @@ assigning to an enclosing object.
   return objects to be declared as constants, and corrected the definition
   of return objects as objects.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1],ARef=[AI05-0041-1]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a definition of
   @i<known to be constrained>, for use in other rules.]}
 @end{DiffWord95}

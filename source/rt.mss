@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.78 $ $Date: 2007/11/30 03:34:27 $ $Author: Randy $ }
+@comment{ $Revision: 1.79 $ $Date: 2008/02/23 06:13:39 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2007/11/30 03:34:27 $}
+@Comment{$Date: 2008/02/23 06:13:39 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2722,8 +2722,19 @@ construction of highly efficient tasking run-time systems.]
 @begin{StaticSem}
 @Leading@;The following @SynI{restriction_}@nt{identifier}s are language defined:
 @begin{Description}
-@Defn2{Term=[Restrictions],Sec=(No_Task_Hierarchy)}No_Task_Hierarchy @\All (nonenvironment) tasks depend directly on
-                        the environment task of the partition.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
+@Defn2{Term=[Restrictions],Sec=(No_Task_Hierarchy)}No_Task_Hierarchy @\@Chg{Version=[3],
+  New=[No task depends on a task other than],Old=[All
+  (nonenvironment) tasks depend directly on]}
+  the environment task of the partition.
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
+@ChgAdded{Version=[3],Text=[This disallows any function returning an
+    object with a task part or coextension, even if called at the library level,
+    as such a task would temporarily depend on a nested master (the master
+    of the return statement), which is disallowed by this restriction.]}
+@end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0042],ARef=[AI95-00130-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00360-01]}
@@ -2735,11 +2746,11 @@ construction of highly efficient tasking run-time systems.]
   @Chg{Version=[3],New=[],Old=[and
   access types that designate @Chg{Version=[2],New=[a type that needs
   finalization],Old=[such objects@Chg{New=[,],Old=[]}]} ]}shall be
-  declared only at library level.@Chg{Version=[3],New=[ There are
+  declared only at library level.@Chg{Version=[3],New=[ If an access type
+  does not have library-level accessibility, then there are
   no @nt{allocator}s where the type determined by the @nt{subtype_mark}
   of the @nt{subtype_indication} or @nt{qualified_expression} needs
-  finalization where the type of the @nt{allocator}
-  does not have library-level accessibility.],Old=[]}
+  finalization.],Old=[]}
     @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0042],ARef=[AI95-00130-01]}
     @ChgNote{This is no longer true.}
@@ -2780,21 +2791,32 @@ No_Dynamic_Priorities @\There are no semantic dependences on the package
 @Defn2{Term=[Restrictions],Sec=(No_Dynamic_Priorities)}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00305-01],ARef=[AI95-00394-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
 @Chg{Version=[2],New=[@Defn2{Term=[Restrictions],Sec=(No_Dynamic_Attachment)}No_Dynamic_Attachment],
 Old=[@Defn2{Term=[Restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Control]}
     @\There
-    @Chg{Version=[2],New=[is no call to any of the operations defined
+    @Chg{Version=[2],New=[is no @Chg{Version=[3],New=[use of],Old=[call to]}
+    any of the operations defined
     in package Interrupts (Is_Reserved, Is_Attached, Current_Handler,
     Attach_Handler, Exchange_Handler, Detach_Handler, and Reference).],
     Old=[are no semantic dependences on the package Asynchronous_Task_Control.]}
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
+@ChgAdded{Version=[3],Text=[This includes 'Access and 'Address of any
+    of these operations, as well as inherited versions of these operations.]}
+@end{Ramification}
+
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Local_Protected_Objects)}No_Local_Protected_Objects @\Protected
-   objects shall be declared only at library level.]}
+   objects @Chg{Version=[2],New=[are],Old=[shall be]} declared only at
+   library level.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00297-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Local_Timing_Events)}No_Local_Timing_Events @\Timing_Events
-   shall be declared only at library level.]}
+   @Chg{Version=[2],New=[are],Old=[shall be]} declared only at library level.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Protected_Type_Allocators)}No_Protected_Type_Allocators @\There
@@ -2819,9 +2841,13 @@ Old=[@Defn2{Term=[Restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Co
   in Task_Termination.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(Simple_Barriers)}Simple_Barriers @\The
-   Boolean expression in an entry barrier shall be either a static Boolean
-   expression or a Boolean component of the enclosing protected object.]}
+   Boolean expression in @Chg{Version=[3],New=[each],Old=[an]} entry barrier
+   @Chg{Version=[3],New=[is],Old=[shall be]} either a static
+   @Chg{Version=[3],New=[],Old=[Boolean ]}expression or a
+   @Chg{Version=[3],New=[name that statically denotes a],Old=[Boolean]}
+   component of the enclosing protected object.]}
 
 @end{Description}
 
@@ -3005,6 +3031,12 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   coextensions of types that require nested finalization are also
   prohibited; this is done by prohibiting @nt{allocator}s rather than
   objects of specific access types.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Improved the wording
+  of various restrictions to make it clearer that they prohibit
+  things that would otherwise be legal, and to word them as
+  definitions, not @LegalityTitle;.]}
 @end{DiffWord95}
 
 

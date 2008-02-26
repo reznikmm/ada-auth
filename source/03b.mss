@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2007/11/30 03:34:21 $}
+@Comment{$Date: 2008/02/23 06:13:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 
 @LabeledClause{Array Types}
 
@@ -1545,27 +1545,31 @@ is that of the associated discriminant(s).
 @begin{Legality}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0008],ARef=[AI95-00168-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00363-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0041-1]}
 A @nt{discriminant_constraint} is only allowed in a
 @nt{subtype_indication} whose @nt{subtype_mark} denotes
 either an unconstrained discriminated subtype, or an
 unconstrained access subtype whose designated subtype is
 an unconstrained discriminated subtype.
 @Chg{New=[However, in the case of @Chg{Version=[2],New=[an],Old=[a general]}
-access subtype, a @nt{discriminant_@!constraint} is illegal
-if @Chg{Version=[2],New=[the
+access subtype, a @nt{discriminant_@!constraint} is
+@Chg{Version=[3],New=[legal only if any dereference of a value of the access
+type is known to be constrained (see @RefSecNum{Objects and Named Numbers})],
+Old=[illegal if @Chg{Version=[2],New=[the
 designated type has a partial view that is constrained or, for a general
-access subtype, has @nt{default_expression}s for its discriminants.
-In addition to the places where @LegalityTitle@; normally apply
-(see @RefSecNum{Generic Instantiation}),
-these rules apply also in the private part of an instance
-of a generic unit. In a generic body, this rule is checked presuming all
-formal access types of the generic might be general access types, and all
-untagged discriminated formal types of the generic might have
-@nt{default_expression}s for their discriminants.
-@PDefn{generic contract issue}],
+access subtype, has @nt{default_expression}s for its discriminants],Old=[]}]}],
 Old=[there is a place within the
 immediate scope of the designated subtype where the designated subtype's view
-is constrained.]}],Old=[]}
+is constrained]}.
+@Chg{Version=[2],New=[In addition to the places where @LegalityTitle@;
+normally apply (see @RefSecNum{Generic Instantiation}),
+these rules apply also in the private part of an instance
+of a generic unit.@PDefn{generic contract issue}],Old=[]}@Chg{Version=[3],
+New=[],Old=[@Chg{Version=[2],
+New=[ In a generic body, this rule is checked presuming all
+formal access types of the generic might be general access types, and all
+untagged discriminated formal types of the generic might have
+@nt{default_expression}s for their discriminants.],Old=[]}]}
 
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0008],ARef=[AI95-00168-01]}
@@ -1713,6 +1717,15 @@ not be constrained in the heap to avoid privacy problems. Again, the use
 of such subtypes is rare (they can only happen within the package and its
 child units).]}
 @end{Incompatible95}
+
+@begin{Diffword95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0041-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Revised the rules on
+  access subtypes having discriminant constraints to depend on the
+  @ldquote@;known to be constrained@rdquote rules. This centralizes
+  the rules so that future fixes only need to be made in one place,
+  as well as fixing bugs in obscure cases.]}
+@end{Diffword95}
 
 
 @LabeledSubClause{Operations of Discriminated Types}

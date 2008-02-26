@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2007/11/30 03:34:22 $}
+@Comment{$Date: 2008/02/23 06:13:38 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1136,6 +1136,7 @@ immediately after the definition of the type,
 except as stated below.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019],ARef=[AI95-00033-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0029-1]}
 For a composite type, the characteristics
 (see @RefSecNum{Private Types and Private Extensions})
 of the type are determined in part by the
@@ -1149,7 +1150,16 @@ Old=[within the immediate scope of the composite type]} additional
 characteristics become visible for a component type,
 then any corresponding characteristics become visible for the composite
 type.
-Any additional predefined operators are implicitly declared at that place.
+Any additional predefined operators are implicitly declared at that
+place.@Chg{Version=[3],New=[If there is no such place, then additional
+predefined operators are not declared at all, but they still exist.],Old=[]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}
+  @ChgAdded{Version=[3],Text=[We say that the predefined operators exist
+  because they can emerge in some unusual generic instantiations. See
+  @RefSecNum{Formal Types}.]}
+@end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019],ARef=[AI95-00033-01]}
 The corresponding rule applies to a type defined by a
@@ -1172,6 +1182,7 @@ In such a case, the predefined "=" operator is implicitly declared at
 that place, and assignment is allowed after that place.]
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019],ARef=[AI95-00033-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0029-1]}
 Inherited primitive subprograms follow a different rule.
 For a @nt{derived_type_definition},
 each inherited primitive subprogram
@@ -1182,10 +1193,11 @@ but after the @nt{type_declaration},
 where the corresponding declaration from the parent is
 visible.
 If there is no such place, then the inherited subprogram
-is not declared at all.
-@Redundant[An inherited subprogram that is not declared at all
-cannot be named in a call and cannot be overridden,
-but for a tagged type, it is possible to dispatch to it.]
+is not declared at all@Chg{Version=[3],New=[, but it still exists],Old=[]}.
+@Redundant[@Chg{Version=[3],New=[For a tagged type, it is possible to
+dispatch to an],Old=[An]} inherited subprogram that is not declared at
+all@Chg{Version=[3],New=[],Old=[cannot be named in a call and cannot be
+overridden, but for a tagged type, it is possible to dispatch to it]}.]
 
 For a @nt{private_extension_declaration}, each inherited subprogram is
 declared immediately after the @nt{private_extension_declaration}
@@ -1474,14 +1486,19 @@ has been moved to @lquotes@;Obsolescent Features.@rquotes@;
 @end{DiffWord83}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0018],ARef=[AI95-00033-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Clarified when additional operations
-are declared.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0018],ARef=[AI95-00033-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified when additional
+  operations are declared.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[Revised the note on operations of partial views to
-reflect that limited types do have an assignment operation, but not
-@nt{assignment_statement}s.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
+  @ChgAdded{Version=[2],Text=[Revised the note on operations of partial views
+  to reflect that limited types do have an assignment operation, but not
+  @nt{assignment_statement}s.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Revised the wording to say
+  that predefined operations still exist even if they are never declared,
+  because it is possible to reference them in a generic unit.]}
 @end{DiffWord95}
 
 
@@ -1592,6 +1609,20 @@ The elaboration of a deferred constant declaration
 elaborates the @nt<subtype_indication>@Chg{Version=[3],New=[,
 @nt<access_definition>,],Old=[]} or (only allowed in the case of an
 imported constant) the @nt<array_type_definition>.
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1]}
+  @ChgAdded{Version=[3],Text=[For non-imported constants, these elaborations
+  cannot require any code or checks for a legal program, because the given
+  @nt<subtype_indication> has to be indefinite or statically match that of
+  the full constant, meaning that either it is a @nt<subtype_mark> or it has
+  static constraints. If the deferred constant instead has an
+  @nt<access_definition>, the designated subtype must be a @nt<subtype_mark>.
+  We still say that these are elaborated, however, because part of elaboration
+  is creating the type, which is clearly needed for @nt<access_definition>s.
+  (A deferred constant and its full constant have different types when
+  they are specified by an @nt<access_definition>, although there is no
+  visible effect of these types being different as neither can be named.)]}
+@end{Ramification}
 @end{RunTime}
 
 @begin{Notes}
@@ -1866,8 +1897,13 @@ is @Chg{Version=[2],New=[],Old=[a descendant of ]}one of the following:
   protected types.]}
   @end{Ramification}
 
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00419-01]}
-  @ChgDeleted{Version=[2],Text=[a task or protected type;]}
+  @ChgNote{This should really be deleted in Version 2, but we want to
+  reuse the paragraph number, and that is hard, so we add the message manually.}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0087-1]}
+  @Chg{Version=[3],New=[a class-wide type whose specific type is limited;],
+  Old=[@Chg{Version=[2],New=[@Shrink{@i<This paragraph was deleted.>}],
+  Old=[a task or protected type;]}]}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
   a composite type with a limited component@Chg{Version=[2],New=[;],Old=[.]}
@@ -2106,7 +2142,12 @@ than being a subclause of
   @ChgAdded{Version=[2],Text=[Rewrote the definition of limited to ensure that
   interfaces are covered, but that limitedness is not inherited from interfaces.
   Derived types that explicitly include @key{limited} are now also covered.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0087-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Fixed an oversight: class-wide
+  types were never limited, even if their associated specific type is.]}
 @end{DiffWord95}
+
 
 @LabeledClause{User-Defined Assignment and Finalization}
 
@@ -2399,7 +2440,7 @@ the @i{assignment operation} proceeds as follows:
     abort is deferred during the assignment operation.
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0067-1]}@Comment{May need future changes.}
 @Defn{adjusting the value of an object}
 @Defn{adjustment}
 To adjust the value of a
@@ -2413,7 +2454,7 @@ Adjusting the value of an elementary object has no effect@Redundant[,
 nor does adjusting the value of a composite object with no
 controlled parts.]
 @begin{Ramification}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0067-1]}@Comment{May need future changes.}
 Adjustment is never @Chg{Version=[3],New=[actually ],Old=[]}performed for
   values of a by-reference limited type, since @Chg{Version=[3],New=[all
   assignment operations for such types are required to be built-in-place.
@@ -2548,12 +2589,12 @@ built-in-place (see @RefSecNum{Limited Types}).]}
 @end{ImplReq}
 
 @begin{ImplPerm}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0067-1]}@Comment{May need future changes.}
 An implementation is allowed to relax the above rules
 @Redundant[(for @Chg{Version=[3],New=[],Old=[nonlimited ]}controlled types)]
 in the following ways:
 @begin{TheProof}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0004-1]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0067-1]}@Comment{May need future changes.}
 @ChgDeleted{Version=[3],Text=[The phrase @lquotes@;for nonlimited controlled
 types@rquotes@; follows from the fact
 that all of the following permissions apply to cases involving
@@ -2562,7 +2603,7 @@ It is important because the programmer can count on a stricter semantics
 for limited controlled types.]}
 @end{TheProof}
 @begin{Ramification}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}@Comment{May need future changes.}
 @ChgAdded{Version=[3],Text=[The rules below about @nt{assignment_statement}s
 apply only to nonlimited controlled types, as @nt{assignment_statement}s
 are not allowed for limited types. The other rule applies to both limited and
@@ -2777,7 +2818,7 @@ Controlled types and user-defined finalization are new to Ada 95.
   @ldquote@;needs finalization@rdquote rules to clearly say that they
   ignore privacy.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}@Comment{May need future changes}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected wording to
   reflect that limited types also have assignment operations.]}
 @end{DiffWord95}
@@ -2971,6 +3012,17 @@ For the @i{finalization} of an object:
   @RefSecNum{Operations of Access Types}), each coextension is
   finalized after the object whose access discriminant designates it.]}
 
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0066-1]}
+  @ChgAdded{Version=[3],Text=[In the case of an aggregate or function call that is used
+  (in its entirety) to directly initialize a part of an object, the
+  coextensions of the result of evaluating the aggregate or function
+  call are transfered to become coextensions of the object being
+  initialized and are not finalized until the object being initialized
+  is ultimately finalized, even if an anonymous object is created
+  as part of the operation.]}
+@end{Ramification}
+
 @end{Itemize}
 
 @PDefn2{Term=[execution], Sec=(instance of Unchecked_Deallocation)}
@@ -3064,9 +3116,15 @@ in @RefSecNum{User-Defined Assignment and Finalization}.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0021],ARef=[AI95-00182-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0066-1]}
 @Chg{Version=[2],New=[The master of an object is the master enclosing its
 creation whose accessibility level (see @RefSecNum{Operations of Access Types})
-is equal to that of the object.],
+is equal to that of the object@Chg{Version=[3],New=[, except
+in the case of an anonymous object representing the result of
+an aggregate or function call. The master of such an anonymous
+object is the innermost master enclosing the evaluation of the
+aggregate or function call, which may be the aggregate or function
+call itself],Old=[]}.],
 Old=[@Chg{New=[If the @i{object_}@nt{name} in an @nt{object_renaming_declaration}, or
 the actual parameter for a generic formal @key[in out] parameter in a
 @nt{generic_instantiation}, denotes any part of an anonymous object created by
@@ -3115,13 +3173,33 @@ Old=[It might be quite inconvenient for the implementation to defer
 finalization of the anonymous object for G until after copying the
 value of F into X, especially if the size of the result
 is not known at the call site.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0066-1]}
+@ChgAdded{Version=[3],Text=[In @RefSecNum{Operations of Access Types}
+we assign an accessibility level to the result of an
+aggregate or function call that is used to directly initialize a
+part of an object based on the object being initialized. This is
+important to ensure that any access discriminants denote objects
+that live at least as long as the object being initialized.
+However, if the result of the aggregate or function call is not
+built directly in the target object, but instead is built in an
+anonymous object that is then assigned to the target, the anonymous
+object needs to be finalized after the assignment rather than
+persisting until the target object is finalized (but not its
+coextensions). (Note than an implementation is never required to
+create such an anonymous object, and in some cases is required to
+@i{not} have such a separate object, but rather to build the result
+directly in the target.)]}
 @end{Reason}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023],ARef=[AI95-00169-01]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00162-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0066-1]}
 @Chg{Version=[2],New=[In the case of an @nt{expression} that is a master,
-finalization of any (anonymous) objects occurs as the final part of
-evaluation of the @nt{expression}.],
+finalization of any (anonymous) objects occurs @Chg{Version=[3],New=[after
+completing],Old=[as the final part of]}
+evaluation of the @nt{expression}@Chg{Version=[3],New=[ and use of the
+objects, prior to starting the execution of any subsequent construct],Old=[]}.],
 Old=[@Chg{New=[If a transfer of control or raising of an exception occurs prior to
 performing a finalization of an anonymous object, the anonymous object is
 finalized as part of the finalizations due to be performed for the object's
@@ -3572,4 +3650,10 @@ the rules here refer to the task-waiting rules of Section 9.
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0064-1]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Removed a redundant rule,
   which is now covered by the additional places where masters are defined.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0066-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Changed the definition
+  of the master of an anonymous object used to directly initialize an
+  object, so it can be finalized immediately rather than having to hang
+  around as long as the object.]}
 @end{DiffWord95}

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2007/02/18 03:22:27 $}
+@Comment{$Date: 2008/02/23 06:13:38 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1245,9 +1245,10 @@ of the @nt{explicit_generic_actual_parameter}.
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00423-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 @Syn{lhs=<formal_object_declaration>,rhs="
     @Syn2{defining_identifier_list} : @Syn2{mode} @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark} [:= @Syn2{default_expression}];@Chg{Version=[2],New=<
-    @Syn2{defining_identifier_list} : @Syn2{mode} @Syn2{access_definition} [:= @Syn2{default_expression}];>,Old=<>}"}
+  @Chg{Version=[3],New=[|],Old=[ ]}  @Syn2{defining_identifier_list} : @Syn2{mode} @Syn2{access_definition} [:= @Syn2{default_expression}];>,Old=<>}"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -1684,6 +1685,7 @@ so long as the formal has unknown discriminants.
 @begin{StaticSem}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0037],ARef=[AI95-00043-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00233-01],ARef=[AI95-00442-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0029-1]}
 @Redundant[The formal type also belongs to each
 @Chg{Version=[2],New=[category],Old=[class]} that contains
 the determined @Chg{Version=[2],New=[category],Old=[class]}.]
@@ -1702,7 +1704,8 @@ Old=[; they are implicitly declared immediately after the declaration
 of the formal type.]} In an instance, the copy of such an
 implicit declaration declares a view of the predefined operator
 of the actual type, even if this operator has been overridden for
-the actual type.
+the actual type@Chg{Version=[3],New=[ or even if it is never declared
+for the actual type],Old=[]}.
 @Redundant[The rules specific to formal derived types are given
 in @RefSecNum{Formal Private and Derived Types}.]
 @begin{Ramification}
@@ -1719,6 +1722,44 @@ private type, or as a type derived from a (visibly) tagged type.
 (Note that the actual type might be tagged even if the formal type is
 not.)
 @end{Ramification}
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}
+@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[The somewhat
+  cryptic phrase @ldquote@;even if it is never declared@rdquote@; is
+  intended to deal with the following oddity:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[package] Q @key[is]
+    @key[type] T @key[is limited private];
+@key[private]
+    @key[type] T @key[is range] 1 .. 10;
+@key[end] Q;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[generic]
+    @key[type] A @key[is array] (Positive @key[range] <>) @key[of] T;
+@key[package] Q.G @key[is]
+    A1, A2 : A (1 .. 1);
+@key[private]
+    B : Boolean := A1 = A2;
+@key[end] Q.G;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] Q.G;
+@key[package] R @key[is]
+   @key[type] C @key[is array] (Positive @key[range] <>) @key[of] Q.T;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[package] I @key[is new] Q.G (C); --@RI{ Where is the predefined "=" for C?}
+@key[end] R;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[An "=" is available for the formal type A in the
+private part of Q.G. However, no "=" operator is ever declared for type C,
+because its component type Q.T is limited. Still, in the instance I the name
+"=" declares a view of the "=" for C which exists-but-is-never-declared.]}
+@end{Reason}
 @end{StaticSem}
 
 
@@ -1808,6 +1849,11 @@ had to.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
   @ChgAdded{Version=[2],Text=[We use @lquotes@;determines a category@rquotes
   rather than class, since not all interesting properties form a class.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Updated the wording to
+  acknowledge the possibility of operations that are never declared for an
+  actual type but still can be used inside of a generic unit.]}
 @end{DiffWord95}
 
 
@@ -1902,9 +1948,12 @@ are synchronized.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01],ARef=[AI95-00401-01],ARef=[AI95-00443-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0087-1]}
 @ChgAdded{Version=[2],Text=[The actual type for a formal derived type
 shall be a descendant of @Redundant[the ancestor type and] every progenitor of
-the formal type. If the reserved word @key[synchronized] appears
+the formal type. @Chg{Version=[3],New=[If the formal type is nonlimited,
+the actual type shall be nonlimited. ],Old=[]}If the reserved word
+@key[synchronized] appears
 in the declaration of the formal derived type, the actual
 type shall be a synchronized tagged type.]}
 @begin{TheProof}
@@ -1930,6 +1979,13 @@ type shall be a synchronized tagged type.]}
   possible range of types. In particular, an indefinite tagged
   limited formal private type can match any @lquotes@;concrete@rquotes
   actual tagged type.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0087-1]}
+  @ChgAdded{Version=[3],Text=[A type (including formal types) derived from a
+  limited interface could be nonlimited; we do not want a limited type derived
+  from such an interface to match a nonlimited formal derived type.
+  Otherwise, we could assign limited objects. Thus, we have to explicitly
+  ban this case.]}
 @end{Discussion}
 
 If the formal subtype is definite, then the actual subtype shall
@@ -2054,6 +2110,7 @@ as for a derived type defined by a @nt<derived_type_definition>
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0038],ARef=[AI95-00202]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00233-01],ARef=[AI95-00401-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0029-1]}
 For a formal derived type,
 the predefined operators and inherited user-defined subprograms are determined
 by the ancestor type@Chg{Version=[2],New=[ and any progenitor types],Old=[]}, and
@@ -2066,7 +2123,8 @@ primitive subprogram of the ancestor @Chg{Version=[2],New=[or progenitor
 copy of such an implicit declaration declares a view of the corresponding
 primitive subprogram of the ancestor@Chg{New=[@Chg{Version=[2], New=[ or
 progenitor],Old=[]} of the formal derived type],Old=[]}, even if this primitive
-has been overridden for the actual type. @Chg{New=[When the
+has been overridden for the actual type@Chg{Version=[3],New=[ or even if it is
+never declared for the actual type],Old=[]}. @Chg{New=[When the
 ancestor@Chg{Version=[2], New=[ or progenitor],Old=[]} of the formal derived
 type is itself a formal type, the copy of the implicit declaration declares a
 view of the corresponding copied operation of the ancestor@Chg{Version=[2],
@@ -2278,6 +2336,16 @@ run-time check to a compile-time check.
   @ChgAdded{Version=[2],Text=[We change to
   @lquotes@;determines a category@rquotes as that is the new terminology
   (it avoids confusion, since not all interesting properties form a class).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Updated the wording to
+  acknowledge the possibility of operations that are never declared for an
+  actual type but still can be used inside of a generic unit.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0087-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Added wording to
+  prevent a limited type from being passed to a nonlimited formal
+  derived type.]}
 @end{DiffWord95}
 
 
