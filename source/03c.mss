@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2008/02/23 06:13:37 $}
+@Comment{$Date: 2008/02/26 05:47:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1298,6 +1298,7 @@ may depend on operands or result context.
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02],ARef=[AI95-00416-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0076-1]}
 @Defn{call on a dispatching operation}
 @Defn{dispatching operation}
 A @i{call on a dispatching operation} is a call whose @nt<name> or
@@ -1314,13 +1315,16 @@ the corresponding formal parameter is called a
 If the controlling formal parameter is an access parameter, the
 controlling operand is the object designated by the actual parameter,
 rather than the actual parameter itself.
-@Defn{controlling result}
-If the call is to a (primitive) function with result type @i(T),
+@Defn{controlling result}@Chg{Version=[3],New=[@Defn2{Term=[function],Sec=[with a controlling result]}],Old=[]}
+If the call is to a (primitive) function with result type
+@i(T)@Chg{Version=[3],New=[ (a @i{function with a controlling result})],Old=[]},
 then the call has a @i(controlling result) @em
 the context of the call can control the dispatching.@Chg{Version=[2],
 New=[ Similarly, if the call is to a function with access result type
-designating @i(T), then the call has a @i(controlling access result), and
-the context can similarly control dispatching.],Old=[]}
+designating
+@i(T)@Chg{Version=[3],New=[ (a @i{function with a controlling access result})],Old=[]},
+then the call has a @i(controlling access result), and
+the context can similarly control dispatching.],Old=[]}@Chg{Version=[3],New=[@Defn{controlling access result}@Defn2{Term=[function],Sec=[with a controlling access result]}],Old=[]}
 @begin{Ramification}
   This definition implies that a call through the dereference of an
   access-to-subprogram value is never considered a call on
@@ -1869,6 +1873,11 @@ The concept of dispatching operations is new.
   usually a dispatching operation, even though it is not a primitive
   operation. If they weren't dispatching, T'Class'Input and T'Class'Output
   wouldn't work.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0076-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Defined
+  @ldquote@;function with a controlling result@rdquote, as it is used
+  in @RefSecNum{Abstract Types and Subprograms}.]}
 @end{Diffword95}
 
 
@@ -2921,6 +2930,7 @@ and aliased subcomponents of other objects.
 @end(ImplNote)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00225-01],ARef=[AI95-00363-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0053-1]}
 @Defn{aliased}
 A view of an object is defined to be @i(aliased) if
 it is defined by an @nt<object_@!declaration> or @nt<component_@!definition>
@@ -2928,10 +2938,15 @@ with the reserved word @key(aliased), or by a renaming of an aliased view.
 In addition, the dereference of an access-to-object
 value denotes an aliased view, as does a view conversion
 (see @RefSecNum{Type Conversions}) of an aliased view.
-@Chg{Version=[2],New=[The],Old=[Finally, the]} current instance of a
+@Chg{Version=[2],New=[The],Old=[Finally, the]} current instance of
+@Chg{Version=[3],New=[an immutably limited type is],Old=[a
 limited@Chg{Version=[2],New=[ tagged],Old=[]} type, @Chg{Version=[2],New=[a
 protected type, a task type, or a type that has the reserved word @key{limited}
-in its full definition is also defined to be aliased. Finally,],Old=[and]}
+in its full definition is also],Old=[]}]}
+@Chg{Version=[2],New=[defined to be aliased],Old=[]}@Chg{Version=[3],
+New=[, as is the return object of an @nt{extended_return_statement}
+(see @RefSecNum{Return Statements}) that is of an immutably limited type],
+Old=[]}@Chg{Version=[2],New=[. Finally,],Old=[and]}
 a formal parameter or generic formal object of a
 tagged type @Chg{Version=[2],New=[is],Old=[are]} defined to be aliased.
 @Redundant[Aliased views are the ones that can be designated by an
@@ -3507,27 +3522,31 @@ types used as parameters allow passing of subprograms at any level.],Old=[]}
 @end{Extend95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0012],ARef=[AI95-00062-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Added accidentally-omitted wording
-that says that a derived access type shares its storage pool with its
-parent type. This was clearly intended, both because of a note in
-@RefSecNum{Derived Types and Classes}, and because anything else would
-have been incompatible with Ada 83.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0012],ARef=[AI95-00062-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added accidentally-omitted
+  wording that says that a derived access type shares its storage pool with its
+  parent type. This was clearly intended, both because of a note in
+  @RefSecNum{Derived Types and Classes}, and because anything else would
+  have been incompatible with Ada 83.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0013],ARef=[AI95-00012-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Fixed typographical errors in
-the description of when access types are constrained.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0013],ARef=[AI95-00012-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Fixed typographical errors in
+  the description of when access types are constrained.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
-@Chg{Version=[2],New=[The wording was fixed to allow @nt{allocator}s and
-the literal @key{null} for anonymous access types. The former was clearly
-intended by Ada 95; see the @ImplAdviceTitle in @RefSecNum{Storage Management}.],
-Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01]}
+  @ChgAdded{Version=[2],Text=[The wording was fixed to allow @nt{allocator}s and
+  the literal @key{null} for anonymous access types. The former was clearly
+  intended by Ada 95; see the @ImplAdviceTitle in @RefSecNum{Storage Management}.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
-@Chg{Version=[2],New=[The rules about aliased objects being constrained by
-their initial values now apply only to allocated objects, and thus have
-been moved to @RefSec{Allocators}.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
+  @ChgAdded{Version=[2],Text=[The rules about aliased objects being constrained by
+  their initial values now apply only to allocated objects, and thus have
+  been moved to @RefSec{Allocators}.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0053-1]}
+  @ChgAdded{Version=[3],Text=[The rule about a current instance being aliased
+  now is worded in terms of immutably limited types. Return objects of
+  such types are also considered aliased.]}
 @end{DiffWord95}
 
 

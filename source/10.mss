@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2007/11/30 03:34:25 $}
+@Comment{$Date: 2008/02/26 05:47:30 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1198,8 +1198,10 @@ so @lquotes@;@key[with] A.B.C.D;@rquotes@; is illegal in the same places as
 @end{Honest}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0077-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[A @nt<name> denoting a
-library item that is visible only due to being mentioned in
+@Chg{Version=[3],New=[@nt{library_item}],Old=[library item]}
+that is visible only due to being mentioned in
 one or more @nt<with_clause>s that include the reserved word
 @key<private> shall appear only within:]}
 @begin{Itemize}
@@ -1228,7 +1230,10 @@ one or more @nt<with_clause>s that include the reserved word
 
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[These rules make the library item visible anywhere that
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0077-1]}
+@ChgAdded{Version=[2],Text=[These rules make the
+@Chg{Version=[3],New=[@nt{library_item}],Old=[library item]}
+visible anywhere that
 is not visible outside the subsystem rooted at the @nt{compilation_unit} having
 the private @nt{with_clause}, including private parts of packages
 nested in the visible part, private parts of child packages, the visible part
@@ -1343,23 +1348,47 @@ any of its descendants],Old=[]};]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@ChgAdded{Version=[2],Text=[in the same @nt{context_clause} as, or within the
-scope of, a @nt{nonlimited_with_clause} that
-mentions the same library package; or]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0077-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[within a], Old=[in the same]}
+@nt{context_clause}
+@Chg{Version=[3],New=[for a @nt{library_item} which is],Old=[as, or]}
+within the scope of@Chg{Version=[3],New=[],Old=[,]}
+a @nt{nonlimited_with_clause} that mentions the same library package; or]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0077-1]}
+  @ChgAdded{Version=[3],Text=[This applies to @nt{nonlimited_with_clause}s
+  found in the same @nt{context_clause}, as well as @nt{nonlimited_with_clause}s
+  found on parent units.]}
+@end{Ramification}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0077-1]}
   @ChgAdded{Version=[2],Text=[Such a @nt{limited_with_clause} could have no
-  effect, and would be confusing. If it is within the scope of a
-  @nt{nonlimited_with_clause}, or if such a clause is in the @nt{context_clause},
+  effect, and would be confusing. If@Chg{Version=[3],New=[],Old=[ it is
+  within the scope of]} a @nt{nonlimited_with_clause}@Chg{Version=[3],New=[
+  for the same package is inherited from a parent unit or given],Old=[, or
+  if such a clause is]} in the @nt{context_clause},
   the full view is available, which strictly provides more information than
   the limited view.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@ChgAdded{Version=[2],Text=[in the same @nt{context_clause} as, or within
-the scope of, a @nt{use_clause} that names an entity declared within the
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0077-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[within a], Old=[in the same]}
+@nt{context_clause}
+@Chg{Version=[3],New=[for a @nt{library_item} which is],Old=[as, or]}
+within the scope of@Chg{Version=[3],New=[],Old=[,]}
+a @nt{use_clause} that names an entity declared within the
 declarative region of the library package.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0077-1]}
+  @ChgAdded{Version=[3],Text=[This applies to @nt{use_clause}s found in the
+  same @nt{context_clause}, as well as @nt{use_clause}s found in (or on)
+  parent units.]}
+@end{Ramification}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1521,10 +1550,12 @@ definition in @RefSecNum{Use Clauses}.
   construction of mutually recursive types in multiple packages.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0077-1]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The syntax rules for @nt{with_clause} are modified to allow the reserved
   word @key{private}. Private @nt{with_clause}s do not allow the use of their
-  library item in the visible part of their @nt{compilation_unit}. They also
+  @Chg{Version=[3],New=[@nt{library_item}],Old=[library item]}
+  in the visible part of their @nt{compilation_unit}. They also
   allow using private units in more locations than in Ada 95.]}
 @end{Extend95}
 
@@ -1532,7 +1563,14 @@ definition in @RefSecNum{Use Clauses}.
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0040-1]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added missing rule that
   a limited with clause cannot name an ancestor unit.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0077-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Fixed wording so that
+  we are not checking whether something in a @nt{context_clause}
+  is @ldquote@;within the scope of@rdquote something, as @nt{context_clause}s
+  are never included in anything's scope.]}
 @end{DiffWord95}
+
 
 @LabeledSubClause{Subunits of Compilation Units}
 

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2007/12/06 06:53:16 $}
+@Comment{$Date: 2008/02/26 05:47:28 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1938,10 +1938,10 @@ innermost enclosing @nt{subprogram_@!body},
 @Syn{lhs=<@Chg{Version=[2],New=[simple_return_statement],Old=[return_statement]}>,rhs="@key{return} [@Syn2{expression}];"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0015-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0015-1],ARef=[AI05-0053-1]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=[extended_return_statement],Old=[]}>,
 rhs="@Chg{Version=[2],New=<
-    @key{return} @Syn2{defining_identifier} : [@Key{aliased}] @Chg{Version=[3],New=<[@Key{constant}] >,Old=[]}@Syn2{return_subtype_indication} [:= @Syn2{expression}] [@Key{do}
+    @key{return} @Syn2{defining_identifier} : [@Chg{Version=[3],New=<@Key{constant}>,Old=[@Key{aliased}]}] @Syn2{return_subtype_indication} [:= @Syn2{expression}] [@Key{do}
         @Syn2{handled_sequence_of_statements}
     @key{end} @key{return}];>,Old=[]}"}
 
@@ -2649,6 +2649,12 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   subtype of the function is class-wide. Specifying the (specific) type of
   the return object is awkward without this change, and this is consistent
   with the way @nt{allocator}s work.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0053-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Eliminated the @key{aliased}
+  keyword from the syntax of @nt{extended_return_statement}s, as this
+  would provide a way to get an aliased view of an object that is not
+  necessarily aliased.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0058-1]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the wording

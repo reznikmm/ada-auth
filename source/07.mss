@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2008/02/23 06:13:38 $}
+@Comment{$Date: 2008/02/26 05:47:28 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.92 $}
+@Comment{$Revision: 1.93 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1956,6 +1956,46 @@ Otherwise, the type is nonlimited.
 
 @Redundant[There are no predefined equality operators for
 a limited type.]
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0052-1]}
+@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[A type is
+@i{immutably limited} if it is one of the
+following:@Defn{immutably limited}@Defn2{Term=[limited type],Sec=[immutably]}]}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[A descendant of an explicitly limited record
+type;]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[A descendant of a non-formal tagged limited private
+type;]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[A descendant of a task type, a protected type, or a
+synchronized interface;]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[A descendant of a formal limited private type,
+except within the body of a generic unit or a body declared within the
+declarative region of a generic unit, if the type is declared within the formal
+part of the generic unit;]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[A type with a part that is of an immutably limited
+type.]}
+
+@end{Itemize}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[An immutably limited type is a type that cannot
+  become nonlimited subsequently in a private part or in a child unit.
+  If a view of the type makes it immutably limited, then no copying (assignment)
+  operations are ever available for objects of the type. This allows other
+  properties; for instance, it is safe for such objects to have
+  access discriminants that have defaults or designate other limited objects.]}
+@end{Discussion}
 @end{StaticSem}
 
 @begin{ImplReq}
@@ -2142,6 +2182,11 @@ than being a subclause of
   @ChgAdded{Version=[2],Text=[Rewrote the definition of limited to ensure that
   interfaces are covered, but that limitedness is not inherited from interfaces.
   Derived types that explicitly include @key{limited} are now also covered.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0052-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Added a definition for
+  immutably limited types, so that the fairly complex definition does
+  not need to be repeated in rules elsewhere in the Standard.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0087-1]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Fixed an oversight: class-wide

@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2008/02/23 06:13:38 $}
+@Comment{$Date: 2008/02/26 05:47:27 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1351,12 +1351,14 @@ the @nt{allocator}, shall not be statically deeper than that of the type of the
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00366-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0052-1]}
 @ChgAdded{Version=[2],Text=[An @nt{allocator} shall not be of an access type
 for which the Storage_Size has been specified by a static expression with value
-zero or is defined by the language to be zero. @PDefn{generic contract issue}In
-addition to the places where @LegalityTitle normally apply
+zero or is defined by the language to be zero. @Chg{Version=[3],New=[],
+Old=[@PDefn{generic contract issue}In addition to the places
+where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}), this rule applies also in the private
-part of an instance of a generic unit. This rule does not apply in the body of
+part of an instance of a generic unit. ]}This rule does not apply in the body of
 a generic unit or within a body declared within the declarative region of a
 generic unit, if the type of the allocator is a descendant of a formal access
 type declared within the formal part of the generic unit.]}
@@ -1375,7 +1377,35 @@ type declared within the formal part of the generic unit.]}
   generics, and formal access types of formal packages of the generic unit.]}
 @end{Reason}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0052-1]}
+@ChgAdded{Version=[3],Text=[If the designated type of the type of the
+@nt{allocator} is limited, then
+the @nt{allocator} shall not be used to define the value of an access
+discriminant, unless the discriminated type is immutably limited
+(see @RefSecNum{Limited Types}).]}
 
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Because coextensions work very much like parts,
+  we don't want users creating limited coextensions for nonlimited types. This
+  would be similar to extending a nonlimited type with a limited component. We
+  check this on the @nt{allocator}. Note that there is an asymmetry in what
+  types are considered limited; this is required to preserve privacy. We have
+  to assume that the designated type might be limited as soon as we see a
+  limited partial view, but we want to ensure that the containing object is of
+  a type that is always limited.]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0052-1]}
+@ChgAdded{Version=[3],Text=[@PDefn{generic contract issue}In addition to
+the places where @LegalityTitle normally apply
+(see @RefSecNum{Generic Instantiation}), these rules apply also in the private
+part of an instance of a generic unit.]}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This applies to all of the @LegalityTitle
+  of this clause.]}
+@end{Discussion}
 @end{Legality}
 
 @begin{StaticSem}
@@ -1747,6 +1777,11 @@ has been moved to @RefSec{Storage Management}.
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the rules for
   when an designated object is constrained by its initial value so that
   types derived from a partial view are handled properly.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0052-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a rule to prevent
+  limited coextensions of nonlimited types. Allowing this would have
+  far-reaching implementation costs.]}
 @end{DiffWord95}
 
 

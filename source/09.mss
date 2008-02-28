@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2007/11/30 03:34:24 $}
+@Comment{$Date: 2008/02/26 05:47:29 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.87 $}
+@Comment{$Revision: 1.88 $}
 
 @begin{Intro}
 
@@ -1676,6 +1676,74 @@ as is a requeue on such an entry.
 @end(Reason)
 @end{RunTime}
 
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
+@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[The form of a
+@nt{pragma} Implemented is as follows:]}
+@end{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=<@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Implemented>(@Syni{procedure_}@Syn2{local_name}, @Syn2<implementation_kind>);'>}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<implementation_kind>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<By_Entry | By_Protected_Procedure | By_Any>,Old=<>}"}
+@end{Syntax}
+
+@begin{Legality}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
+@ChgAdded{Version=[3],Text=[The @SynI{procedure_}@nt{local_name} of a
+@nt{pragma} Implemented shall denote a
+primitive procedure of a synchronized interface.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The @SynI{procedure_}@nt{local_name} can denote
+  more than one such procedure if there are several overloaded routines.
+  No functions can be denoted, even if one or more procedures are also
+  denoted.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
+@ChgAdded{Version=[3],Text=[A @nt{pragma} Implemented with @nt{implementation_kind}
+By_Protected shall not be applied to a primitive procedure of a task interface.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
+@ChgAdded{Version=[3],Text=[A procedure for which the @nt{implementation_kind}
+is specified as By_Entry shall be implemented by an entry. A procedure for
+which the @nt{implementation_kind} is specified as By_Protected_Procedure
+shall be implemented by a protected procedure.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
+@ChgAdded{Version=[3],Text=[If a primitive procedure overrides an
+inherited operation to which a @nt{pragma} Implemented applies then
+any @nt{pragma} Implemented applied to the
+overriding operation shall have the same @nt{implementation_kind}
+or the inherited @nt{implementation_kind} shall be By_Any.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
+@ChgAdded{Version=[3],Text=[@PDefn{generic contract issue}In addition to the
+places where @LegalityTitle normally apply (see
+@RefSecNum{Generic Instantiation}), these rules also apply in the
+private part of an instance of a generic unit.]}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
+@ChgAdded{Version=[3],Text=[A @nt{pragma} Implemented is said to @i<apply>
+to the procedure denoted by its @SynI<procedure_>@nt{local_name}. If an
+overriding operation does not have a @nt{pragma} Implemented then any
+@nt{pragma} Implemented applying to the inherited operation applies to
+the overriding operation.]}
+@end{StaticSem}
+
+@begin{Notes}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
+@ChgAdded{Version=[3],Text=[The @nt{implementation_kind} By_Protected_Procedure
+implies that the operation will not block.]}
+@end{Notes}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
   @ChgAdded{Version=[2],Text=[Added a @LegalityName to make it crystal-clear
@@ -1685,6 +1753,11 @@ as is a requeue on such an entry.
   better to explicitly say it. While many implementations have gotten this
   wrong, this is not an incompatibility @em allowing updates of protected
   constants has always been wrong.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
+  @ChgAdded{Version=[3],Text=[Added @nt{pragma} Implemented to allow
+  specifying that an interface procedure is really an entry or a
+  protected procedure.]}
 @end{DiffWord95}
 
 
@@ -2838,21 +2911,24 @@ the expiration of a delay.
 @end{Intro}
 
 @begin{Syntax}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0030-2]}
 @Syn{lhs=<requeue_statement>,
-  rhs="@key{requeue} @SynI{entry_}@Syn2{name} [@key{with} @key{abort}];"}
+  rhs="@key{requeue} @SynI{@Chg{Version=[3],New=[procedure_or_entry_],Old=[entry_]}}@Syn2{name} [@key{with} @key{abort}];"}
 @end{Syntax}
 
 @begin{Resolution}
 
-@Defn2{Term=[target entry], Sec=(of a @nt<requeue_statement>)}
-The @i(entry_)@nt{name} of a @nt{requeue_statement} shall resolve
-to denote an entry (the @i(target entry))
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0030-2]}
+@Chg{Version=[3],New=[@Defn{requeue target}],Old=[@Defn2{Term=[target entry], Sec=(of a @nt<requeue_statement>)}]}
+The @Chg{Version=[3],New=[@SynI{procedure_or_entry_}],Old=[@SynI(entry_)]}@nt{name}
+of a @nt{requeue_statement} shall resolve
+to denote an entry (the
+@Chg{Version=[3],New=[@i{requeue }],Old=[]}@i{target}@Chg{Version=[3],New=[],Old=[@i{ entry}]})
 that either has no parameters, or that has
 a profile that is type conformant (see @RefSecNum(Conformance Rules)) with
 the profile of the innermost enclosing @nt<entry_@!body> or
 @nt<accept_@!statement>.
 @Defn2{Term=[type conformance],Sec=(required)}
-
 @end{Resolution}
 
 @begin{Legality}
@@ -2862,11 +2938,23 @@ construct that is either an @nt{entry_body} or an
 @nt{accept_statement}, and this construct shall
 be the innermost enclosing body or callable construct.
 
-If the target entry has parameters,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0030-2]}
+If the
+@Chg{Version=[3],New=[requeue ],Old=[]}target@Chg{Version=[3],New=[],Old=[ entry]}
+has parameters,
 then its profile shall be subtype conformant with
 the profile of the innermost enclosing callable construct.
 @Defn2{Term=[subtype conformance],Sec=(required)}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0030-2]}
+@ChgAdded{Version=[3],Text=[If the target is a procedure, the name shall
+denote a rename of an entry, or shall denote a prefixed view of a
+primitive subprogram of a synchronized interface, where the first parameter
+of the unprefixed view of the primitive subprogram shall be a
+controlling parameter, and a pragma Implemented with
+@nt{implementation_kind} By_Entry shall apply to the primitive subprogram.]}
+
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0030-2]}
 @PDefn2{Term=[accessibility rule],Sec=(requeue statement)}
 In a @nt<requeue_statement> of an @nt<accept_statement> of
 some task unit, either the target object shall be a part of a
@@ -2879,7 +2967,7 @@ of some protected unit, either the target object shall be
 a part of a formal parameter of the @nt<entry_@!body>,
 or the accessibility level of the target object
 shall not be statically deeper than that
-of the @nt<entry_declaration>.
+of the @nt<entry_declaration>@Chg{Version=[3],New=[ for the @nt{entry_body}],Old=[]}.
 
 @begin{Ramification}
   In the @nt{entry_body} case, the intent is that the target object can
@@ -2920,10 +3008,11 @@ of the @nt<entry_declaration>.
 
 @begin{RunTime}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0030-2]}
 @PDefn2{Term=[execution], Sec=(requeue_statement)}
 The execution of a @nt{requeue_statement} proceeds by first evaluating the
-@i(entry_)@nt<name>@Redundant[, including the @nt<prefix>
-identifying the target task
+@Chg{Version=[3],New=[@SynI{procedure_or_entry_}],Old=[@SynI(entry_)]}@nt<name>@Redundant[,
+including the @nt<prefix> identifying the target task
 or protected object and the @nt<expression>
 identifying the entry
 within an entry family, if any].
@@ -2964,7 +3053,9 @@ object, after leaving the enclosing callable construct:
   as for a normal entry call (see @RefSecNum(Entry Calls)).
 @end(Itemize)
 
-If the new entry named in the @nt<requeue_statement>
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0030-2]}
+If the @Chg{Version=[3],New=[requeue target],Old=[new entry]}
+named in the @nt<requeue_statement>
 has formal parameters, then during the execution of the
 @nt<accept_statement> or @nt<entry_body> corresponding to the new entry,
 the formal parameters denote the same objects as
@@ -3032,6 +3123,13 @@ is part of the @i(entry_)@nt<name> for an entry of a family.
 @Defn{extensions to Ada 83}
 The @nt<requeue_statement> is new.
 @end{Extend83}
+
+@begin{Diffword95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added the ability
+  to requeue on operations of synchronized interfaces that are
+  declared to be an entry. This was omitted by oversight.]}
+@end{Diffword95}
 
 
 @LabeledClause{Delay Statements, Duration, and Time}

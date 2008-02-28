@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2008/02/23 06:13:37 $}
+@Comment{$Date: 2008/02/26 05:47:26 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 
 @LabeledClause{Array Types}
 
@@ -932,14 +932,16 @@ type @Redundant[or a generic formal type].]}
 @end(Reason)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00402-01],ARef=[AI95-00419-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0063-1]}
 A @nt<discriminant_specification> for
 an access discriminant
 @Chg{Version=[2],New=[may have a @nt{default_expression}],Old=[shall appear]}
-only in the declaration for a task or protected type,
+only in the declaration for @Chg{Version=[3],New=[an immutably limited type
+(see @RefSecNum{Limited Types})],Old=[a task or protected type,
 or for a type @Chg{Version=[2],New=[that is a descendant of an explicitly
 limited record type],Old=[with the reserved word @key[limited] in its
 @Redundant[(full)] definition
-or in that of one of its ancestors]}.
+or in that of one of its ancestors]}]}.
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
 this rule applies also in the private part of an
@@ -1485,6 +1487,12 @@ when the discriminant is initialized.
   @lquotes@;explicitly limited record@rquotes, which makes the intent
   much clearer (and eliminates confusion with derived types that happen to
   contain the reserved word @key(limited).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0063-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Changed the rules for
+  when access discriminants can have defaults to depend on the new
+  definition for immutably limited types; this will help ensure that
+  unusual corner cases are properly handled.]}
 @end{DiffWord95}
 
 
