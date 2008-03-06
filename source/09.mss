@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2008/02/26 05:47:29 $}
+@Comment{$Date: 2008/02/28 07:51:01 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.88 $}
+@Comment{$Revision: 1.89 $}
 
 @begin{Intro}
 
@@ -1695,7 +1695,7 @@ rhs="@Chg{Version=[3],New=<By_Entry | By_Protected_Procedure | By_Any>,Old=<>}"}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
 @ChgAdded{Version=[3],Text=[The @SynI{procedure_}@nt{local_name} of a
 @nt{pragma} Implemented shall denote a
-primitive procedure of a synchronized interface.]}
+primitive procedure of a synchronized tagged type.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2008/02/26 05:47:28 $}
+@Comment{$Date: 2008/02/28 07:51:01 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -115,7 +115,7 @@ is not significant)]}.
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
-  @ChgAdded{Version=[2],Text=[The @lquote@;sequence of characters@rquotes
+  @ChgAdded{Version=[2],Text=[The @ldquote@;sequence of characters@rdquote
   of the string literal of the operator is a technical term (see
   @RefSecNum{String Literals}), and does not include the surrounding quote
   characters. As defined in @RefSecNum{Lexical Elements, Separators, and Delimiters},

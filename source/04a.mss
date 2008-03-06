@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2008/02/23 06:13:37 $}
+@Comment{$Date: 2008/02/28 07:51:00 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -4172,7 +4172,7 @@ a negative value is provided for the exponent.
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0088-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: The equivalence definition
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> The equivalence definition
   for "**" was corrected so that it does not imply that the operands
   are evaluated multiple times.]}
 @end{DiffWord95}

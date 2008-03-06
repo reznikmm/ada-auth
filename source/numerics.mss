@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.54 $ $Date: 2006/10/19 06:40:29 $ $Author: Randy $ }
+@comment{ $Revision: 1.55 $ $Date: 2008/02/28 07:51:02 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2006/10/19 06:40:29 $}
+@Comment{$Date: 2008/02/28 07:51:02 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -3043,6 +3043,7 @@ A is not symmetric.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0047-1]}
 @ChgAdded{Version=[2],Text=[This procedure computes both the eigenvalues and
 eigenvectors of the symmetric matrix A. The out parameter Values is the same as
 that obtained by calling the function Eigenvalues. The out parameter Vectors is
@@ -3050,8 +3051,19 @@ a matrix whose columns are the eigenvectors of the matrix A. The order of the
 columns corresponds to the order of the eigenvalues. The eigenvectors are
 normalized and mutually orthogonal (they are orthonormal), including when there
 are repeated eigenvalues. Constraint_Error is raised if A'Length(1) is not
-equal to A'Length(2). The index ranges of the parameter Vectors are those of A.
-Argument_Error is raised if the matrix A is not symmetric.]}
+equal to A'Length(2)@Chg{Version=[3],New=[, or if Values'Range is not equal to
+A'Range(1), or if the],Old=[. The]} index ranges of the parameter Vectors are
+@Chg{Version=[3],New=[not equal to ],Old=[]}those of A. Argument_Error is
+raised if the matrix A is not symmetric.@Chg{Version=[3],New=[ Constraint_Error
+is also raised in implementation-defined circumstances if the algorithm used
+does not converge quickly enough.],Old=[]}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0047-1]}
+  @ChgAdded{Version=[3],Text=[There is no requirement on the absolute direction
+  of the returned eigenvectors. Thus they might be multiplied by -1. It is only
+  the ratios of the components that matter. This is standard practice.]}
+@end{Ramification}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3131,6 +3143,15 @@ Numerics.Generic_Real_Arrays shall be documented.]}]}
   although these may be fast they may not meet the accuracy requirement
   specified. See Accuracy and Stability of Numerical Algorithms By N J Higham
   (ISBN 0-89871-355-2), Section 3.1.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0047-1]}
+  @ChgAdded{Version=[3],Text=[Note moreover that the componentwise accuracy
+  requirements are not met by subcubic methods for matrix multiplication such
+  as that devised by Strassen. These methods which are typically used for the
+  fast multiplication of very large matrices (e.g. order > 1000) have normwise
+  accuracy properties. If it desired to use such methods then distinct
+  subprograms should be provided (perhaps in a child package). See Section
+  22.2.2 in the above reference.]}
 @end{ImplNote}
 @end{DocReq}
 
@@ -3168,13 +3189,30 @@ Constraint_Error is sufficient.]}
 document with this paragraph.]}
 @end{Discussion}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0047-1]}
 @ChgAdded{Version=[2],Text=[The test that a matrix is symmetric should be
 performed by using the equality operator to compare the relevant components.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The equality operator should be used to test that a matrix in
-Numerics.Generic_Real_Matrix is symmetric.]}]}
+Numerics.Generic_Real_Arrays is symmetric.]}]}
 
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[An implementation should minimize the circumstances
+under which the algorithm used for Eigenvalues and Eigensystem fails to
+converge.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[An implementation should minimize the circumstances
+under which the algorithm used for Numerics.Generic_Real_Arrays.Eigenvalues
+and Numerics.Generic_Real_Arrays.Eigensystem fails to converge.]}]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[J. H. Wilkinson is the acknowledged expert in
+  this area. See for example
+  Wilkinson, J. H., and Reinsch, C. , Linear Algebra , vol II of Handbook
+  for Automatic Computation, Springer-Verlag, or Wilkinson, J. H., The
+  Algebraic Eigenvalue Problem, Oxford University Press.]}
+@end{ImplNote}
 @end{ImplAdvice}
 
 @begin{Extend95}
@@ -3183,6 +3221,12 @@ Numerics.Generic_Real_Matrix is symmetric.]}]}
   The package Numerics.Generic_Real_Arrays and its nongeneric equivalents
   are new.]}
 @end{Extend95}
+
+@begin{Diffword95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0047-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected various
+  accuracy and definition issues.]}
+@end{Diffword95}
 
 
 @LabeledAddedSubClause{Version=[2],Name=[Complex Vectors and Matrices]}
@@ -3266,7 +3310,8 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{function} "*"  (Left, Right : Complex_Vector) @key{return} Complex;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} "@key{abs}"     (Right : Complex_Vector) @key{return} Complex;]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0047-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} "@key{abs}"     (Right : Complex_Vector) @key{return} @Chg{Version=[3],New=[Real'Base],Old=[Complex]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI{Mixed Real_Vector and Complex_Vector arithmetic operations}]}
@@ -3497,6 +3542,14 @@ to @i{involve an inner product}, Constraint_Error may be raised if an intermedia
 result has a component outside the range of Real'Base even though the final
 mathematical result would not.@Defn2{Term=[involve an inner product],Sec=[complex]}]}
 
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0047-1]}
+  @ChgAdded{Version=[3],Text=[An inner product never involves implicit complex
+  conjugation. If the product of a vector with the conjugate of another (or the
+  same) vector is required then this has to be stated explicitly by writing for
+  example X * Conjugate(Y). This mimics the usual mathematical notation.]}
+@end{Discussion}
+
 @begin{DescribeCode}
 
 @begin{Example}
@@ -3616,7 +3669,8 @@ Right'Length. This operation involves an inner product.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "@key{abs}" (Right : Complex_Vector) @key{return} Complex;]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0047-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} "@key{abs}" (Right : Complex_Vector) @key{return} @Chg{Version=[3],New=[Real'Base],Old=[Complex]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00418-01]}
@@ -4118,15 +4172,29 @@ A is not Hermitian.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0047-1]}
 @ChgAdded{Version=[2],Text=[This procedure computes both the eigenvalues and
 eigenvectors of the Hermitian matrix A. The out parameter Values is the same as
 that obtained by calling the function Eigenvalues. The out parameter Vectors is
 a matrix whose columns are the eigenvectors of the matrix A. The order of the
 columns corresponds to the order of the eigenvalues. The eigenvectors are
 mutually orthonormal, including when there are repeated eigenvalues.
-Constraint_Error is raised if A'Length(1) is not equal to A'Length(2). The
-index ranges of the parameter Vectors are those of A. Argument_Error is raised
-if the matrix A is not Hermitian.]}
+Constraint_Error is raised if A'Length(1) is not
+equal to A'Length(2)@Chg{Version=[3],New=[, or if Values'Range is not equal to
+A'Range(1), or if the],Old=[. The]} index ranges of the parameter Vectors are
+@Chg{Version=[3],New=[not equal to ],Old=[]}those of A. Argument_Error is
+raised if the matrix A is not Hermitian.@Chg{Version=[3],New=[ Constraint_Error
+is also raised in implementation-defined circumstances if the algorithm used
+does not converge quickly enough.],Old=[]}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0047-1]}
+  @ChgAdded{Version=[3],Text=[There is no requirement on the absolute direction
+  of the returned eigenvectors. Thus they might be multiplied by any complex
+  number whose modulus is 1. It is only the ratios of the components that
+  matter. This is standard practice.]}
+@end{Ramification}
+
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4256,6 +4324,24 @@ equality to compare the imaginary components
 Text=[The equality and negation operators should be used to test that a matrix is
 Hermitian.]}]}
 
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[An implementation should minimize the circumstances
+under which the algorithm used for Eigenvalues and Eigensystem fails to
+converge.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[An implementation should minimize the circumstances
+under which the algorithm used for Numerics.Generic_Complex_Arrays.Eigenvalues
+and Numerics.Generic_Complex_Arrays.Eigensystem fails to converge.]}]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[J. H. Wilkinson is the acknowledged expert in
+  this area. See for example
+  Wilkinson, J. H., and Reinsch, C. , Linear Algebra , vol II of Handbook
+  for Automatic Computation, Springer-Verlag, or Wilkinson, J. H., The
+  Algebraic Eigenvalue Problem, Oxford University Press.]}
+@end{ImplNote}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
 @ChgAdded{Version=[2],Text=[Implementations should not perform operations on
 mixed complex and real operands by first converting the real operand to
@@ -4276,4 +4362,8 @@ the real operand to complex.]}]}
   Just checking if anyone reads this stuff.}]}
 @end{Extend95}
 
-
+@begin{Diffword95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0047-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected various
+  accuracy and definition issues.]}
+@end{Diffword95}

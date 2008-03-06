@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.61 $ $Date: 2007/11/30 03:34:26 $ $Author: Randy $ }
+@comment{ $Revision: 1.62 $ $Date: 2008/02/28 07:51:03 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2007/11/30 03:34:26 $}
+@Comment{$Date: 2008/02/28 07:51:03 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -354,13 +354,15 @@ for an implementation to be a single contiguous array.]}
 package Containers.Vectors has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0084-1]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} Index_Type @key{is range} <>;
    @key{type} Element_Type @key{is private};
    @key{with function} "=" (Left, Right : Element_Type)
       @key{return} Boolean @key{is} <>;
 @key{package} Ada.Containers.Vectors @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Vectors]}
-   @key{pragma} Preelaborate(Vectors);]}
+   @key{pragma} Preelaborate(Vectors);@Chg{Version=[3],New=[
+   @key{pragma} Remote_Types(Vectors);],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{subtype} @AdaSubtypeDefn{Name=[Extended_Index],Of=[Index_Type'Base]} @key{is}
@@ -2252,6 +2254,10 @@ value of Last_Index.]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a pragma
+  Remote_Types so that containers can be used in distributed programs.]}
 @end{DiffWord95}
 
 
@@ -2284,12 +2290,14 @@ it contains.@Defn2{Term=[length],Sec=(of a list container)}]}
 package Containers.Doubly_Linked_Lists has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0084-1]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} Element_Type @key{is private};
    @key{with function} "=" (Left, Right : Element_Type)
       @key{return} Boolean @key{is} <>;
 @key{package} Ada.Containers.Doubly_Linked_Lists @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Doubly_@!Linked_@!Lists]}
-   @key{pragma} Preelaborate(Doubly_Linked_Lists);]}
+   @key{pragma} Preelaborate(Doubly_Linked_Lists);@Chg{Version=[3],New=[
+   @key{pragma} Remote_Types(Doubly_Linked_Lists);],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{List} @key{is tagged private};
@@ -3454,6 +3462,10 @@ probably not a stable sort.]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a pragma
+  Remote_Types so that containers can be used in distributed programs.]}
 @end{DiffWord95}
 
 
@@ -4190,6 +4202,7 @@ unless specified by the operation.]}]}
 package Containers.Hashed_Maps has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0084-1]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} Key_Type @key{is private};
    @key{type} Element_Type @key{is private};
@@ -4199,7 +4212,8 @@ package Containers.Hashed_Maps has the following declaration:]}
    @key{with function} "=" (Left, Right : Element_Type)
       @key{return} Boolean is <>;
 @key{package} Ada.Containers.Hashed_Maps @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Hashed_Maps]}
-   @key{pragma} Preelaborate(Hashed_Maps);]}
+   @key{pragma} Preelaborate(Hashed_Maps);@Chg{Version=[3],New=[
+   @key{pragma} Remote_Types(Hashed_Maps);],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Map} @key{is tagged private};
@@ -4726,6 +4740,12 @@ a cursor parameter should be @i{O}(1).]}]}
   The generic package Containers.Hashed_Maps is new.]}
 @end{Extend95}
 
+@begin{Diffword95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a pragma
+  Remote_Types so that containers can be used in distributed programs.]}
+@end{Diffword95}
+
 
 @LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Ordered_Maps]}
 
@@ -4736,13 +4756,15 @@ a cursor parameter should be @i{O}(1).]}]}
 package Containers.Ordered_Maps has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0084-1]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} Key_Type @key{is private};
    @key{type} Element_Type @key{is private};
    @key{with function} "<" (Left, Right : Key_Type) @key{return} Boolean @key{is} <>;
    @key{with function} "=" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
 @key{package} Ada.Containers.Ordered_Maps @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Ordered_Maps]}
-   @key{pragma} Preelaborate(Ordered_Maps);]}
+   @key{pragma} Preelaborate(Ordered_Maps);@Chg{Version=[3],New=[
+   @key{pragma} Remote_Types(Ordered_Maps);],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Equivalent_Keys} (Left, Right : Key_Type) @key{return} Boolean;]}
@@ -5234,6 +5256,10 @@ a cursor parameter should be @i{O}(1).]}]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a pragma
+  Remote_Types so that containers can be used in distributed programs.]}
 @end{DiffWord95}
 
 
@@ -6134,6 +6160,7 @@ unless specified by the operation.]}]}
 package Containers.Hashed_Sets has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0084-1]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} Element_Type @key{is private};
    @key{with function} Hash (Element : Element_Type) @key{return} Hash_Type;
@@ -6141,7 +6168,8 @@ package Containers.Hashed_Sets has the following declaration:]}
                  @key{return} Boolean;
    @key{with function} "=" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
 @key{package} Ada.Containers.Hashed_Sets @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Hashed_Sets]}
-   @key{pragma} Preelaborate(Hashed_Sets);]}
+   @key{pragma} Preelaborate(Hashed_Sets);@Chg{Version=[3],New=[
+   @key{pragma} Remote_Types(Hashed_Sets);],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Set} @key{is tagged private};
@@ -6589,6 +6617,10 @@ average time complexity of Containers.@!Hashed_Sets.@!Reserve_Capacity should be
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added wording to require
   the formal function be such that that equal elements are also equivalent.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a pragma
+  Remote_Types so that containers can be used in distributed programs.]}
 @end{DiffWord95}
 
 
@@ -6601,12 +6633,14 @@ average time complexity of Containers.@!Hashed_Sets.@!Reserve_Capacity should be
 package Containers.Ordered_Sets has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0084-1]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} Element_Type @key{is private};
    @key{with function} "<" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
    @key{with function} "=" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
 @key{package} Ada.Containers.Ordered_Sets @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Ordered_Sets]}
-   @key{pragma} Preelaborate(Ordered_Sets);]}
+   @key{pragma} Preelaborate(Ordered_Sets);@Chg{Version=[3],New=[
+   @key{pragma} Remote_Types(Ordered_Sets);],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Equivalent_Elements} (Left, Right : Element_Type) @key{return} Boolean;]}
@@ -7152,6 +7186,10 @@ of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a pragma
+  Remote_Types so that containers can be used in distributed programs.]}
 @end{DiffWord95}
 
 
@@ -7665,12 +7703,13 @@ An empty holder does not contain an element.@Defn{empty holder}]}
 @ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The generic library
 package Containers.Indefinite_Holders has the following declaration:]}
 @begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],Aref=[AI05-0069-1],Aref=[AI05-0084-1]}
 @ChgAdded{Version=[3],Text=[@key[generic]
    @key[type] Element_Type (<>) @key[is private];
    @key[with function] "=" (Left, Right : Element_Type) @key[return] Boolean @key[is] <>;
 @key[package] Ada.Containers.Indefinite_Holders @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Holders]}
-   @key[pragma] Preelaborate (Indefinite_Holders);]}
+   @key[pragma] Preelaborate(Indefinite_Holders);
+   @key[pragma] Remote_Types(Indefinite_Holders);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Holder} @key[is tagged private];
@@ -7982,7 +8021,7 @@ holder unless specified by the operation.]}
 @end{ImplAdvice}
 
 @begin{Extend95}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0084-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
   @b<Corrigendum 2:> The generic package Containers.Indefinite_Holders is new.]}
 @end{Extend95}

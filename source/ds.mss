@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.48 $ $Date: 2007/12/21 06:19:12 $ $Author: Randy $ }
+@comment{ $Revision: 1.49 $ $Date: 2008/02/28 07:51:02 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2007/12/21 06:19:12 $}
+@Comment{$Date: 2008/02/28 07:51:02 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -570,8 +570,10 @@ shall have user-specified Read and Write attributes]}.
 @end{itemize}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0082],ARef=[AI95-00164-01]}
-@Chg{New=[@Leading],Old=[]}@Defn{remote access type}
-An access type declared in the visible part of a remote types or remote
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0060-1]}
+@ChgAdded{Version=[1],Type=[Leading],Text=[]}@ChgNote{Use ChgAdded to get conditional Leading}@Defn{remote access type}
+@Chg{Version=[3],New=[A named],Old=[An]} access type declared in the
+visible part of a remote types or remote
 call interface library unit is called a @i{remote access type}.
 @Defn{remote access-to-subprogram type}
 @Defn{remote access-to-class-wide type}
@@ -584,9 +586,14 @@ type.]}
 @ChgAdded{Version=[1],Text=[an access-to-subprogram type, or]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0082],ARef=[AI95-00164-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0060-1]}
 @ChgAdded{Version=[1],Text=[a general access type that designates a class-wide
-limited private type or a class-wide private type extension all of whose
-ancestors are either private type extensions or limited private types.]}
+limited private type@Chg{Version=[3],New=[, a class-wide limited interface
+type,],Old=[]} or a class-wide
+private @Chg{Version=[3],New=[],Old=[type ]}extension all of whose
+ancestors are either
+private @Chg{Version=[3],New=[],Old=[type ]}extensions@Chg{Version=[3],New=[,
+limited interface types,],Old=[]} or limited private types.]}
 @end{Itemize}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0081],ARef=[AI95-00004-01]}
@@ -612,7 +619,9 @@ remote access-to-class-wide type:
 @begin{Itemize}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0083],ARef=[AI95-00047-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00240-01],ARef=[AI95-00366-01]}
-The primitive subprograms of the corresponding specific limited private type
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0060-1]}
+The primitive subprograms of the corresponding specific
+@Chg{Version=[3],New=[],Old=[limited private ]}type
 shall only have access parameters if they are controlling formal parameters;
 @Chg{New=[each non-controlling formal parameter],Old=[the types of all the
 non-controlling formal parameters]} shall @Chg{Version=[2],New=[support
@@ -620,6 +629,11 @@ external streaming (see @RefSecNum{Stream-Oriented Attributes});],
 Old=[have @Chg{New=[either a nonlimited
 type or a type with],Old=[]} Read and Write attributes@Chg{New=[ specified
 via an @nt{attribute_definition_clause};],Old=[.]}]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0060-1]}
+@ChgAdded{Version=[3],Text=[The corresponding specific type shall not have
+a primitive procedure to which a @nt{pragma} Implemented applies unless
+the @nt{implementation_kind} of the pragma is By_Any;]}
 
 A value of a remote access-to-class-wide type shall be
 explicitly converted only to another remote access-to-class-wide type;
@@ -662,6 +676,21 @@ provide for sending values of such a type
 between active partitions, with Write marshalling the
 representation, and Read unmarshalling any levels of
 indirection.
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0060-1]}
+@ChgAdded{Version=[3],Text=[The value of a remote access-to-class-wide limited
+interface can designate an object of a nonlimited type derived from the
+interface.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0060-1]}
+@ChgAdded{Version=[3],Text=[A remote access type may designate a class-wide
+synchronized, protected, or task interface type.]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Synchronized, protected, and task interfaces
+  are all considered limited interfaces, see @RefSecNum{Interface types}.]}
+@end{TheProof}
+
 @end{Notes}
 
 @begin{Incompatible95}
@@ -719,6 +748,13 @@ indirection.
   @ChgAdded{Version=[2],Text=[Corrected the wording so that a value of a local
   access-to-subprogram type cannot be converted to a remote
   access-to-subprogram type, as intended (and required by the ACATS).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0060-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Clarified that anonymous
+  access types are never remote access types (and can be used in
+  remote types units subject to the normal restrictions). Added wording
+  to allow limited class-wide interfaces to be designated by remote
+  access types.]}
 @end{DiffWord95}
 
 

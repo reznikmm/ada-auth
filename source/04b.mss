@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2008/02/26 05:47:27 $}
+@Comment{$Date: 2008/02/28 07:51:00 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 
 @LabeledClause{Type Conversions}
 
@@ -2565,6 +2565,6 @@ This subclause is new to Ada 95.
   subtype of a scalar formal type statically matches itself.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0086-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Updated the statically
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Updated the statically
   compatible rules to take null exclusions into account.]}
 @end{DiffWord95}

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2008/02/23 06:13:38 $}
+@Comment{$Date: 2008/02/28 07:51:02 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.68 $}
+@Comment{$Revision: 1.69 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2338,12 +2338,12 @@ run-time check to a compile-time check.
   (it avoids confusion, since not all interesting properties form a class).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Updated the wording to
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Updated the wording to
   acknowledge the possibility of operations that are never declared for an
   actual type but still can be used inside of a generic unit.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0087-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Added wording to
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added wording to
   prevent a limited type from being passed to a nonlimited formal
   derived type.]}
 @end{DiffWord95}

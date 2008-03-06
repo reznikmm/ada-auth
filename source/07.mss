@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2008/02/26 05:47:28 $}
+@Comment{$Date: 2008/02/28 07:51:01 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.93 $}
+@Comment{$Revision: 1.94 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1496,7 +1496,7 @@ has been moved to @lquotes@;Obsolescent Features.@rquotes@;
   @nt{assignment_statement}s.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Revised the wording to say
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Revised the wording to say
   that predefined operations still exist even if they are never declared,
   because it is possible to reference them in a generic unit.]}
 @end{DiffWord95}
@@ -2184,12 +2184,12 @@ than being a subclause of
   Derived types that explicitly include @key{limited} are now also covered.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0052-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Added a definition for
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a definition for
   immutably limited types, so that the fairly complex definition does
   not need to be repeated in rules elsewhere in the Standard.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0087-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Fixed an oversight: class-wide
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Fixed an oversight: class-wide
   types were never limited, even if their associated specific type is.]}
 @end{DiffWord95}
 

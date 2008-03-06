@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:23 $}
+@Comment{$Date: 2008/02/28 07:50:59 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -78,6 +78,7 @@ cell.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0079-1]}
 The@Chg{Version=[2],New=[],Old=[ character repertoire for the text of
 an Ada program consists of the
 collection of characters
@@ -91,7 +92,9 @@ a set of @ntf<other_control_function>s; the]} coded representation for
 representation defined within @Chg{Version=[2],New=[ISO/IEC 10646:2003],
 Old=[ISO-10646-1]})].@Chg{Version=[2],New=[ A character whose relative
 code position in its plane is 16#FFFE# or 16#FFFF# is not allowed anywhere
-in the text of a program.],Old=[]}
+in the text of a program.],Old=[]}@Chg{Version=[3],New=[ The only
+characters allowed outside of comments are those in categories
+@ntf{other_format}, @ntf{format_effector} and @ntf{graphic_character}.],Old=[]}
 @ImplDef{The coded representation for the text of an Ada program.}
 
 @begin{Ramification}@ChgNote{Moved from above}
@@ -546,7 +549,19 @@ that are not even linear sequences of characters.
 It is also the intent to allow different fonts:
 reserved words might be in bold face,
 and that should be irrelevant to the semantics.
+
 @end(Discussion)
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0079-1]}
+  @ChgAdded{Version=[3],Text=[In order to process the ACATS, an implementation
+  will have to have the ability to process Latin-1 and UTF-8 formatted files.
+  UTF-8 files by convention start with the character zero width no-break space
+  (16#0000FEFF#), also known as byte order mark (BOM); Latin-1 Ada source files
+  do not start with these characters (the BOM is encoded as 16#EF# 16#BB#
+  16#BF# for UTF-8; the last two characters are not legal in Ada programs
+  outside of comments). That means it is possible for a compiler to determine
+  which of these file formats are used without operator intervention.]}
+@end{ImplNote}
 @end{Notes}
 
 @begin{Extend83}
@@ -591,6 +606,13 @@ permitted in identifiers (in the standard mode).]}
   clause has been rewritten to use the categories defined in that Standard.
   This should ease programming in languages other than English.]}
 @end{Extend95}
+
+@begin{Diffword95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0079-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Clarified that only
+  characters in the categories defined here are allowed in the source
+  of an Ada program.]}
+@end{Diffword95}
 
 
 @LabeledClause{Lexical Elements, Separators, and Delimiters}
@@ -657,6 +679,11 @@ At least one separator is required between an @nt{identifier},
 a reserved word, or a @nt{numeric_literal} and an adjacent
 @nt{identifier}, reserved word, or @nt{numeric_literal}.
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0079-1]}
+@ChgAdded{Version=[3],Text=[One of more @ntf{other_format} characters
+are allowed anywhere that a separator is@Redundant[; any such characters
+have no effect on the meaning of an Ada program].]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Defn{delimiter}
 A @i{delimiter} is either one of the following@Chg{Version=[2],New=[],Old=[ special]}
@@ -714,6 +741,12 @@ From URG recommendation.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
   @ChgAdded{Version=[2],Text=[The wording was updated to use the new character
   categories defined in the preceding clause.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0079-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Clarified that
+  @ntf{other_format} characters are allowed anywhere that separators
+  are allowed. This was intended by the Amendment, but didn't actually
+  make it into the wording.]}
 @end{Diffword95}
 
 

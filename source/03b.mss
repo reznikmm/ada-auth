@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2008/02/26 05:47:26 $}
+@Comment{$Date: 2008/02/28 07:50:59 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 
 @LabeledClause{Array Types}
 
@@ -1489,7 +1489,7 @@ when the discriminant is initialized.
   contain the reserved word @key(limited).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0063-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Changed the rules for
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Changed the rules for
   when access discriminants can have defaults to depend on the new
   definition for immutably limited types; this will help ensure that
   unusual corner cases are properly handled.]}
@@ -1728,7 +1728,7 @@ child units).]}
 
 @begin{Diffword95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0041-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Revised the rules on
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Revised the rules on
   access subtypes having discriminant constraints to depend on the
   @ldquote@;known to be constrained@rdquote rules. This centralizes
   the rules so that future fixes only need to be made in one place,

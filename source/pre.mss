@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2007/11/30 03:34:26 $}
+@Comment{$Date: 2008/02/28 07:51:03 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.34 $}
+@comment{$Revision: 1.35 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -20,6 +20,7 @@ other library units are children of these:]
 @Leading@Keepnext
 @ChgRef{Version=(1),Kind=(Revised),Ref=(8652/0047),ARef=(AI95-00081-01)}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00424-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0069-1]}
 @ @*@ @;@comment{paragraph number here, paragraph numbers seem to intrude on
 the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @begin{Display}
@@ -254,6 +255,12 @@ or @lquotes@;if you compile a library unit called System,
 it has to be a package, and it has to contain at least
 the following declarations: ...@rquotes@;.
 @end{Ramification}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0060-1]}
+@ChgAdded{Version=[3],Text=[An implementation may omit pragma
+Remote_Types (see @RefSecNum{Remote Types Library Units}) in language-defined
+library units if the implementation does not conform to Annex E.]}
+
 @end{ImplPerm}
 
 @begin{DiffWord83}
@@ -278,6 +285,14 @@ The order and lettering of the annexes has been changed.
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added wording to ban
   redispatching unless it is explicitly required, in order to safeguard
   portability when overriding language-defined routines.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0060-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a permission to
+  omit pragma Remote_Types from language-defined units if Annex E is
+  not supported. (@RefSecNum{Conformity of an Implementation with the Standard}
+  says that am unsupported Annex feature must be rejected at compile-time or
+  raise an exception, and surely we don't want either of those to happen
+  with predefined units.)]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added the generic package
