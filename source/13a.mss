@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2006/10/19 06:40:29 $}
+@Comment{$Date: 2008/03/06 05:18:51 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1420,15 +1420,24 @@ Words are expected to be independently addressable.
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00133-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Text=[@Defn{machine scalar}
 A @i{machine scalar} is an amount of storage that can be conveniently and
 efficiently loaded, stored, or operated upon by the hardware. Machine scalars
 consist of an integral number of storage elements. The set of machine scalars
-is implementation defined, but must include at least the storage element and
+is implementation defined, but @Chg{Version=[3],New=[],Old=[must ]}include
+at least the storage element and
 the word. Machine scalars are used to interpret @nt{component_clause}s when the
 nondefault bit ordering applies.]}
 @ChgImplDef{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[The set of machine scalars.]}]}
+@begin{Ramification}
+  @ChgAdded{Version=[3],Text=[A single storage element is a machine scalar
+  in all Ada implementations. Similarly, a word is a machine scalar in
+  all implementations (although it might be the same as a storage element).
+  An implementation may define other machine scalars that make sense on the
+  target (a half-word, for instance).]}
+@end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Chg{New=[The following representation attributes are defined: Address,

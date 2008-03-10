@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2008/02/23 06:13:39 $}
+@Comment{$Date: 2008/03/06 05:18:52 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.60 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -3646,20 +3646,23 @@ exist in the partition at the time of the call, execution is erroneous.]}
   Annex.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
   @ChgAdded{Version=[2],Text=[If Constraint_Error is raised during a call to
-  Read because of failure of one the above checks, the implementation must
-  ensure that the discriminants of the actual parameter of Read are not
-  modified.]}
+  Read because of failure of one the above checks, the implementation
+  @Chg{Version=[3],New=[shall],Old=[must]} ensure that the discriminants
+  of the actual parameter of Read are not modified.]}
 @end{ImplReq}
 
 @begin{ImplPerm}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
   @ChgAdded{Version=[2],Text=[The number of calls performed by the predefined
   implementation of the stream-oriented attributes on the Read and Write
   operations of the stream type is unspecified. An implementation may take
   advantage of this permission to perform internal buffering. However, all the
   calls on the Read and Write operations of the stream type needed to implement
-  an explicit invocation of a stream-oriented attribute must take place before
+  an explicit invocation of a stream-oriented attribute
+  @Chg{Version=[3],New=[shall],Old=[must]} take place before
   this invocation returns. An explicit invocation is one appearing explicitly
   in the program text, possibly through a generic instantiation (see
   @RefSecNum{Generic Instantiation}).]}

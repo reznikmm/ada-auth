@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2008/02/23 06:13:36 $}
+@Comment{$Date: 2008/03/06 05:18:50 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.90 $}
+@Comment{$Revision: 1.91 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -2111,12 +2111,15 @@ it is important that F be evaluated before the aggregate.
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00373-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Text=[The assignments to any components, including
-implicit components, not requiring late initialization must precede the
+implicit components, not requiring late initialization
+@Chg{Version=[3],New=[],Old=[must ]}precede the
 initial value evaluations for any components requiring late initialization;
 if two components both require late initialization, then assignments to parts
 of the component occurring earlier in the order of the component declarations
-must precede the initial value evaluations of the component occurring later.]}
+@Chg{Version=[3],New=[],Old=[must ]}precede the
+initial value evaluations of the component occurring later.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[Components that require late

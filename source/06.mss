@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2008/02/28 07:51:01 $}
+@Comment{$Date: 2008/03/06 05:18:51 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.86 $}
+@Comment{$Revision: 1.87 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1147,8 +1147,10 @@ different @nt{default_expression}s.
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0018],ARef=[AI95-00175-01]}
-@Chg{New=[each @nt{attribute_designator} in one must be the same as the
-corresponding @nt{attribute_designator} in the other; and],Old=[]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0092-1]}
+@ChgAdded{Version=[1],Text=[each @nt{attribute_designator} in one
+@Chg{Version=[3],New=[is],Old=[must be]} the same as the
+corresponding @nt{attribute_designator} in the other; and]}
 
 each @nt{primary} that is a literal in one
 has the same value as the corresponding literal in the other.
