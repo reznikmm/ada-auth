@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2008/02/28 07:51:01 $}
+@Comment{$Date: 2008/03/10 05:04:09 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.94 $}
+@Comment{$Revision: 1.95 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1996,6 +1996,12 @@ type.]}
   properties; for instance, it is safe for such objects to have
   access discriminants that have defaults or designate other limited objects.]}
 @end{Discussion}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[A limited interface type is not immutably
+  limited type; a type derived from it can be nonlimited.]}
+@end{Ramification}
 @end{StaticSem}
 
 @begin{ImplReq}

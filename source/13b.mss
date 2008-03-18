@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2008/03/06 05:18:52 $}
+@Comment{$Date: 2008/03/10 05:04:09 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -4329,8 +4329,8 @@ entity, the profile of that entity is frozen.]}
 
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[The generic might call the actual for one of its formal subprograms, so we need
-to know the profile.]}
+@ChgAdded{Version=[3],Text=[Elaboration of the generic might call the actual
+for one of its formal subprograms, so we need to know the profile.]}
 @end{Reason}
 
 @Leading@PDefn2{Term=[freezing], Sec=(entity caused by a name)}
@@ -4453,9 +4453,9 @@ the corresponding specific type is frozen as well.
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0019-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[At the place where a specific
 tagged type is frozen, the primitive subprograms of the type are
-frozen.@Chg{Version=[3],New=[],Old=[ At the place where a type is frozen,
+frozen.@Chg{Version=[3],New=[ At the place where a type is frozen,
 any subprogram named in an @nt{attribute_definition_clause} for the type
-is frozen.]}]}
+is frozen.],Old=[]}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[We have a language design principle that all of
