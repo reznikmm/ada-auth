@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2008/03/10 05:04:09 $}
+@Comment{$Date: 2008/04/19 05:43:17 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -2499,8 +2499,8 @@ behavior associated with a violation of the requirement.]}
 
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[In this case, there is no post-compilation check
-required.]}
+@ChgAdded{Version=[3],Text=[In this latter case, there is no post-compilation
+check required.]}
 @end{Ramification}
 @end{Itemize}
 
@@ -2808,6 +2808,7 @@ Stream_Element_Arrays will probably have a lower bound of 0 or 1, but other
 lower bounds, including negative ones, make sense in some situations.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00114-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 @ChgNote{This was moved from 13.7.1, where it was totally bogus.}
 @ChgAdded{Version=[2],Text=[Note that there are some language-defined
 subprograms that fill part of a Stream_Element_Array, and return the index of the
@@ -2820,7 +2821,7 @@ Stream_Element_Offset.
 This implies that the Stream_Element_Array passed to these subprograms should
 not have a lower bound of Stream_Element_Offset'First,
 because then a read of 0 elements would always raise Constraint_Error.
-A better choice of lower bound is 1.]}
+A better choice of lower bound is @Chg{Version=[3],New=[0 or ],Old=[]}1.]}
 @end{Discussion}
 
 @end{StaticSem}

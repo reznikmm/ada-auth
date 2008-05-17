@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2008/02/28 07:51:00 $}
+@Comment{$Date: 2008/04/19 05:43:17 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.92 $}
+@Comment{$Revision: 1.93 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -842,7 +842,7 @@ the type; otherwise, its nominal subtype is the first subtype of
 the type. Similarly, unless explicitly specified otherwise, for an
 @nt{attribute_reference} that denotes a function, when its result
 type is scalar, its result subtype is the base subtype of the type,
-and when non-scalar, the result subtype is the first subtype of the
+and when nonscalar, the result subtype is the first subtype of the
 type.],Old=[]}
 @begin{Ramification}
   The attributes defined by the language are summarized in

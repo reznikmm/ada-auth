@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.62 $ $Date: 2008/02/28 07:51:03 $ $Author: randy $ }
+@comment{ $Revision: 1.63 $ $Date: 2008/04/19 05:43:18 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2008/02/28 07:51:03 $}
+@Comment{$Date: 2008/04/19 05:43:18 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -4210,7 +4210,7 @@ package Containers.Hashed_Maps has the following declaration:]}
    @key{with function} Equivalent_Keys (Left, Right : Key_Type)
       @key{return} Boolean;
    @key{with function} "=" (Left, Right : Element_Type)
-      @key{return} Boolean is <>;
+      @key{return} Boolean @Chg{Version=[3],New=[@b<is>],Old=[is]} <>;
 @key{package} Ada.Containers.Hashed_Maps @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Hashed_Maps]}
    @key{pragma} Preelaborate(Hashed_Maps);@Chg{Version=[3],New=[
    @key{pragma} Remote_Types(Hashed_Maps);],Old=[]}]}

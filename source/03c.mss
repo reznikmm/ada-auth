@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2008/02/26 05:47:25 $}
+@Comment{$Date: 2008/04/19 05:43:17 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.86 $}
+@Comment{$Revision: 1.87 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3725,6 +3725,13 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
   as the @nt<subtype_mark> in an @nt<access_definition>@Chg{Version=[2],New=[.],Old=[;]}
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[This does not mean any random @nt{subtype_mark}
+  in a construct that makes up an @nt<access_definition>, such as
+  a @nt<formal_part>, just the one given directly in the syntax of
+  @nt<access_definition>.]}
+@end{Honest}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
@@ -3733,8 +3740,8 @@ denotes a tagged incomplete view, it may also be used:]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
-  @Chg{Version=[2],New=[as the @nt{subtype_mark} defining the subtype of a
-  parameter in a @nt{formal_part};],Old=[]}
+  @ChgAdded{Version=[2],Text=[as the @nt{subtype_mark} defining the subtype of a
+  parameter in a @nt{formal_part};]}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
   as the @nt{prefix} of an @nt{attribute_reference}
@@ -5042,7 +5049,7 @@ denotes an aliased view of an object}:
     and unconstrained in any partial view, and the designated subtype of
     @i{A} shall be unconstrained.@Chg{Version=[3],New=[ For the purposes
     of determining within a generic body whether @i{D} is unconstrained
-    in any partial view, a discriminated subtype is is
+    in any partial view, a discriminated subtype is
     considered to have a constrained partial view if it is a descendant
     of an untagged generic formal private or derived type.],Old=[]}]}
   @end{InnerItemize}

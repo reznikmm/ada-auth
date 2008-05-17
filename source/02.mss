@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2008/02/28 07:50:59 $}
+@Comment{$Date: 2008/04/19 05:43:16 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -94,7 +94,7 @@ Old=[ISO-10646-1]})].@Chg{Version=[2],New=[ A character whose relative
 code position in its plane is 16#FFFE# or 16#FFFF# is not allowed anywhere
 in the text of a program.],Old=[]}@Chg{Version=[3],New=[ The only
 characters allowed outside of comments are those in categories
-@ntf{other_format}, @ntf{format_effector} and @ntf{graphic_character}.],Old=[]}
+@ntf{other_format}, @ntf{format_effector}, and @ntf{graphic_character}.],Old=[]}
 @ImplDef{The coded representation for the text of an Ada program.}
 
 @begin{Ramification}@ChgNote{Moved from above}

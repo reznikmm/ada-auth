@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.79 $ $Date: 2008/02/23 06:13:39 $ $Author: randy $ }
+@comment{ $Revision: 1.80 $ $Date: 2008/04/19 05:43:18 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2008/02/23 06:13:39 $}
+@Comment{$Date: 2008/04/19 05:43:18 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2748,9 +2748,9 @@ construction of highly efficient tasking run-time systems.]
   finalization],Old=[such objects@Chg{New=[,],Old=[]}]} ]}shall be
   declared only at library level.@Chg{Version=[3],New=[ If an access type
   does not have library-level accessibility, then there are
-  no @nt{allocator}s where the type determined by the @nt{subtype_mark}
-  of the @nt{subtype_indication} or @nt{qualified_expression} needs
-  finalization.],Old=[]}
+  no @nt{allocator}s of the type where the type determined by the
+  @nt{subtype_mark} of the @nt{subtype_indication} or
+  @nt{qualified_expression} needs finalization.],Old=[]}
     @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0042],ARef=[AI95-00130-01]}
     @ChgNote{This is no longer true.}
