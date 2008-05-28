@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2008/03/10 05:04:09 $}
+@Comment{$Date: 2008/05/17 03:20:38 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.95 $}
+@Comment{$Revision: 1.96 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1160,6 +1160,18 @@ predefined operators are not declared at all, but they still exist.],Old=[]}
   because they can emerge in some unusual generic instantiations. See
   @RefSecNum{Formal Types}.]}
 @end{Reason}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}
+  @ChgAdded{Version=[3],Text=[The predefined operators for the underlying class
+  of a type always exist, even if there is no visibility on that underlying
+  class. This rule is simply about where (if ever) those operators are
+  declared (and thus become usable). The @ldquote@;additional predefined
+  operators@rdquote defined by this rule are any that are not declared at the
+  point of the original type declaration. For instance, a type derived from a
+  private type whose full type is type String always will have a ">"
+  operator, but where that operator is declared (and thus whether it is
+  visible) will depend on the visibility of the full type of the parent type.]}
+@end{Discussion}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019],ARef=[AI95-00033-01]}
 The corresponding rule applies to a type defined by a

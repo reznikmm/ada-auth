@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2008/03/18 07:23:10 $}
+@Comment{$Date: 2008/05/17 03:20:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.74 $}
+@Comment{$Revision: 1.75 $}
 
 @LabeledClause{Array Types}
 
@@ -1600,6 +1600,15 @@ cruft and replace it by a simple rule @lquotes@;thou shalt not create an
 access subtype that can point to an item whose discriminants can be changed by
 assignment@rquotes@;.]}
 @end{Reason}
+
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0041-1]}
+@ChgAdded{Version=[3],Text=[The second rule will only use the indefinite or
+dereference bullets in the definition of @ldquote@;known to be constrained@rdquote.
+The rule is worded in terms of @ldquote@;known to be constrained@rdquote in
+order to capture the special rules that apply in generic bodies (rather than
+repeating them and getting them subtly wrong).]}
+@end{Discussion}
 
 A named @nt<discriminant_association> with more than one
 @nt<selector_name> is allowed only if the named discriminants

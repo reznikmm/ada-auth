@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.63 $ $Date: 2008/04/19 05:43:18 $ $Author: randy $ }
+@comment{ $Revision: 1.64 $ $Date: 2008/05/17 03:20:38 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2008/04/19 05:43:18 $}
+@Comment{$Date: 2008/05/17 03:20:38 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -65,8 +65,8 @@ ordering for a container, it is generally required to define
 a strict weak ordering. An operator "<" defines
 a @i<strict weak ordering>@Defn{strict weak ordering} if it is irreflexive,
 asymmetric, transitive, and in addition, if @i<x> < @i<y> for any values
-@i<x> and @i<y>, then for all other
-values @i<z>, (@i<x> < @i<z>) or (@i<z> < @i<y>).]}
+@i<x> and @i<y>, then for any other
+value @i<z>, (@i<x> < @i<z>) or (@i<z> < @i<y>).]}
 
 @end{Intro}
 

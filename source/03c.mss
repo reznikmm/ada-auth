@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2008/04/19 05:43:17 $}
+@Comment{$Date: 2008/05/17 03:20:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.87 $}
+@Comment{$Revision: 1.88 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2939,10 +2939,10 @@ In addition, the dereference of an access-to-object
 value denotes an aliased view, as does a view conversion
 (see @RefSecNum{Type Conversions}) of an aliased view.
 @Chg{Version=[2],New=[The],Old=[Finally, the]} current instance of
-@Chg{Version=[3],New=[an immutably limited type is],Old=[a
-limited@Chg{Version=[2],New=[ tagged],Old=[]} type, @Chg{Version=[2],New=[a
-protected type, a task type, or a type that has the reserved word @key{limited}
-in its full definition is also],Old=[]}]}
+@Chg{Version=[3],New=[an immutably limited type (see @RefSecNum{Limited Types})
+is],Old=[a limited@Chg{Version=[2],New=[ tagged],Old=[]} type,
+@Chg{Version=[2],New=[a protected type, a task type, or a type that has the
+reserved word @key{limited} in its full definition is also],Old=[]}]}
 @Chg{Version=[2],New=[defined to be aliased],Old=[]}@Chg{Version=[3],
 New=[, as is the return object of an @nt{extended_return_statement}
 (see @RefSecNum{Return Statements}) that is of an immutably limited type],

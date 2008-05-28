@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2008/04/19 05:43:17 $}
+@Comment{$Date: 2008/05/17 03:20:38 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -2500,7 +2500,7 @@ behavior associated with a violation of the requirement.]}
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[In this latter case, there is no post-compilation
-check required.]}
+check needed for the requirement.]}
 @end{Ramification}
 @end{Itemize}
 

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2008/02/28 07:51:02 $}
+@Comment{$Date: 2008/05/17 03:20:38 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1704,7 +1704,7 @@ Old=[; they are implicitly declared immediately after the declaration
 of the formal type.]} In an instance, the copy of such an
 implicit declaration declares a view of the predefined operator
 of the actual type, even if this operator has been overridden for
-the actual type@Chg{Version=[3],New=[ or even if it is never declared
+the actual type@Chg{Version=[3],New=[ and even if it is never declared
 for the actual type],Old=[]}.
 @Redundant[The rules specific to formal derived types are given
 in @RefSecNum{Formal Private and Derived Types}.]
@@ -2123,7 +2123,7 @@ primitive subprogram of the ancestor @Chg{Version=[2],New=[or progenitor
 copy of such an implicit declaration declares a view of the corresponding
 primitive subprogram of the ancestor@Chg{New=[@Chg{Version=[2], New=[ or
 progenitor],Old=[]} of the formal derived type],Old=[]}, even if this primitive
-has been overridden for the actual type@Chg{Version=[3],New=[ or even if it is
+has been overridden for the actual type@Chg{Version=[3],New=[ and even if it is
 never declared for the actual type],Old=[]}. @Chg{New=[When the
 ancestor@Chg{Version=[2], New=[ or progenitor],Old=[]} of the formal derived
 type is itself a formal type, the copy of the implicit declaration declares a

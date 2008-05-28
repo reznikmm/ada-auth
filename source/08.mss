@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2007/11/30 03:34:23 $}
+@Comment{$Date: 2008/05/17 03:20:38 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -2086,9 +2086,12 @@ disappear, which might leave dangling references.
 Similar restrictions exist for the Access attribute.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0017],ARef=[AI95-00184-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0008-1]}
 @ChgAdded{Version=[1],Type=[Leading],Text=[The @lquotes@;recheck on
-instantiation@rquotes@; and @lquotes@;assume-the-worst in the body@rquotes@;
-restrictions on generics are necessary to avoid renaming of components which
+instantiation@rquotes@; @Chg{Version=[3],New=[requirement], Old=[and
+@lquotes@;assume-the-worst in the body@rquotes@;
+restrictions]} on generics @Chg{Version=[3],New=[is],Old=[are]}
+necessary to avoid renaming of components which
 could disappear even when the nominal subtype would prevent the problem:]}
 
 @begin{Example}
@@ -2121,6 +2124,10 @@ Y : T2;
 Y := (D1 => True); -- @RI[Oops!  What happened to I.C1_Ren?]],Old=[]}
 @end{Example}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1]}
+@ChgAdded{Version=[3],Text=[In addition, the @ldquote@;known to be constrained@rdquote
+rules include assume-the-worst rules for generic bodies partially to
+prevent such problems.]}
 
 @end{Reason}
 @begin{ImplNote}
