@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2008/04/19 05:43:17 $}
+@Comment{$Date: 2008/05/29 01:53:49 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.93 $}
+@Comment{$Revision: 1.94 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -838,12 +838,16 @@ value, an object, a subprogram, or some
 other kind of program entity.@Chg{Version=[3],New=[ For an
 @nt{attribute_reference} that denotes a value or an object, if
 its type is scalar, then its nominal subtype is the base subtype of
-the type; otherwise, its nominal subtype is the first subtype of
-the type. Similarly, unless explicitly specified otherwise, for an
+the type; if its type is tagged, its nominal subtype is the first
+subtype of the type; otherwise, its nominal subtype is a subtype of the type
+without any constraint or @nt{null_exclusion}.
+Similarly, unless explicitly specified otherwise, for an
 @nt{attribute_reference} that denotes a function, when its result
 type is scalar, its result subtype is the base subtype of the type,
-and when nonscalar, the result subtype is the first subtype of the
-type.],Old=[]}
+when its result type is tagged, the result subtype is the first
+subtype of the type, and when the result type is some other type,
+the result subtype is a subtype of the type without any constraint or
+@nt{null_exclusion}.],Old=[]}
 @begin{Ramification}
   The attributes defined by the language are summarized in
   @RefSecNum{Language-Defined Attributes}.
@@ -858,6 +862,11 @@ type.],Old=[]}
   the nominal subtype. For non-discrete cases, we define the
   nominal subtype mainly for completeness. Implementations may
   specify otherwise for implementation-defined attribute functions.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The rule is written to match the meaning
+  of the italicized @i{T} in the definition of attributes such as Input;
+  see @RefSecNum{Logical Operators and Short-circuit Control Forms}.]}
 @end{Discussion}
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0006-1]}

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2008/05/17 03:20:38 $}
+@Comment{$Date: 2008/05/29 01:53:49 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.96 $}
+@Comment{$Revision: 1.97 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1976,26 +1976,26 @@ following:@Defn{immutably limited}@Defn2{Term=[limited type],Sec=[immutably]}]}
 
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[A descendant of an explicitly limited record
-type;]}
+@ChgAdded{Version=[3],Text=[An explicitly limited record type;]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[A descendant of a non-formal tagged limited private
-type;]}
+@ChgAdded{Version=[3],Text=[A non-formal limited private type that is
+tagged or has at least one access discriminant with a @nt{default_expression};]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The full type in both of these cases must
+  necessarily be immutably limited. We need to include private types
+  as much as possible so that we aren't unintentially discouraging the
+  use of private types.]}
+@end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[A descendant of a task type, a protected type, or a
+@ChgAdded{Version=[3],Text=[A task type, a protected type, or a
 synchronized interface;]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[A descendant of a formal limited private type,
-except within the body of a generic unit or a body declared within the
-declarative region of a generic unit, if the type is declared within the formal
-part of the generic unit;]}
-
-@ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[A type with a part that is of an immutably limited
-type.]}
+@ChgAdded{Version=[3],Text=[A descendant of an immutably limited type.]}
 
 @end{Itemize}
 
@@ -2014,6 +2014,24 @@ type.]}
   @ChgAdded{Version=[3],Text=[A limited interface type is not immutably
   limited type; a type derived from it can be nonlimited.]}
 @end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0052-1]}
+@ChgAdded{Version=[3],Text=[A descendant of a generic formal
+limited private type is
+presumed to be immutably limited except within the body
+of a generic unit or a body declared within the declarative
+region of a generic unit, if the formal type is declared
+within the formal part of the generic unit.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[In an instance, a type is descended from
+  the actual type corresponding to the formal, and all rules are rechecked
+  in the specification. Bodies are excepted so that we assume the worst there;
+  the complex wording is required to handle children of generics and
+  unrelated bodies properly.]}
+@end{Ramification}
+
 @end{StaticSem}
 
 @begin{ImplReq}

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2008/05/17 03:20:38 $}
+@Comment{$Date: 2008/05/29 01:53:49 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -2231,13 +2231,13 @@ known to be constrained.]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   A renaming can have an anonymous access type. In that case, the accessibility
   of the renaming is that of the original object (accessibility is not
-  lost as it is for a component or stand-alone object).]}
+  lost as it is for assignment to a component or stand-alone object).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01],ARef=[AI95-00423-01]}
   @ChgAdded{Version=[2],Text=[A renaming can have a @nt{null_exclusion}; if so,
   the renamed object must also exclude null, so that the @nt{null_exclusion}
   does not lie. On the other hand, if the renaming does not have a
-  @nt{null_exclusion}. it excludes null of the renamed object does.]}
+  @nt{null_exclusion}. it excludes null if the renamed object does.]}
 @end{Extend95}
 
 @begin{DiffWord95}

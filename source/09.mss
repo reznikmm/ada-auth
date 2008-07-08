@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2008/02/28 07:51:01 $}
+@Comment{$Date: 2008/05/29 01:53:49 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 
 @begin{Intro}
 
@@ -220,7 +220,7 @@ whose profile is type conformant with the
 prefixed view profile of the inherited subprogram, the inherited subprogram is
 said to be @i{implemented} by the conforming task entry@Chg{Version=[3],
 New=[using an implicitly declared non-abstract subprogram which
-has the same profile as the inherited subprogram and that
+has the same profile as the inherited subprogram and which
 overrides it@PDefn2{Term=[override],Sec=[when implemented by]}],
 Old=[]}.@PDefn2{Term=[implemented],
 Sec=[by a task entry]}@Defn2{Term=[type conformance],Sec=(required)}]}
@@ -1065,7 +1065,7 @@ profile is type conformant with the prefixed view profile of the
 inherited subprogram, the inherited subprogram is said to be
 @i{implemented} by the conforming protected subprogram or
 entry@Chg{Version=[3],New=[using an implicitly declared non-abstract subprogram
-which has the same profile as the inherited subprogram and that
+which has the same profile as the inherited subprogram and which
 overrides it@PDefn2{Term=[override],Sec=[when implemented by]}],
 Old=[]}.@PDefn2{Term=[implemented],
 Sec=[by a protected subprogram]}@PDefn2{Term=[implemented],

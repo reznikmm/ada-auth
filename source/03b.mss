@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2008/05/17 03:20:37 $}
+@Comment{$Date: 2008/05/29 01:53:49 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 
 @LabeledClause{Array Types}
 
@@ -948,21 +948,29 @@ this rule applies also in the private part of an
 instance of a generic unit.@PDefn{generic contract issue}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[Revised]}
+  @ChgRef{Version=[3],Kind=[Revised]}
   This rule implies that a type can have @Chg{Version=[2],
   New=[a default for ],Old=[]}an access discriminant
   if the type is limited,
   but not if the only reason it's limited is because of a limited component.
-  Compare with the definition of limited type in
-  @RefSecNum{Limited Types}.@Chg{Version=[2],New=[ Also, recall that a
-  @ldquote@;descendant@rdquote includes the type itself, so an explicitly
-  limited record type can have defaults.],Old=[]}
+  Compare @Chg{Version=[3],New=[],Old=[with ]}the definition of limited type
+  @Chg{Version=[3],New=[and immutably limited type ],Old=[]}in
+  @RefSecNum{Limited Types}.@Chg{Version=[3],New=[],Old=[@Chg{Version=[2],New=[ Also,
+  recall that a @ldquote@;descendant@rdquote includes the type itself, so
+  an explicitly limited record type can have defaults.],Old=[]}]}
 @end{Discussion}
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[Deleted]}
-  @ChgDeleted{Version=[2],Text=[
-  It is a consequence of this rule that only a return-by-reference
+  @ChgRef{Version=[2],Kind=[Revised]}
+  @ChgRef{Version=[3],Kind=[Revised]}
+  @ChgDeleted{Version=[2],Text=[It is a consequence
+  of this rule that only a return-by-reference
   type can have an access discriminant (see @RefSecNum{Return Statements}).
   This is important to avoid dangling references to local variables.]}
+  @ChgAdded{Version=[3],Text=[A (non-formal) limited private type can always
+  have a default for an access discriminant, because having the default itself
+  makes the type inmutably limited. Such a private type must necessarily
+  have a full type with the same access discriminant with a default, and
+  thus the full type will always be immutably limited (if legal).]}
 @end{Ramification}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
@@ -990,9 +998,11 @@ instance of a generic unit.@PDefn{generic contract issue}
     limited types that @lquotes@;become nonlimited@rquotes@;.
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0063-1]}
     @ChgAdded{Version=[2],Text=[A type may have an access discriminant if
-    it is a limited partial view, or a task, protected, or
-    explicitly limited record type. This was the rule chosen for Ada 95.]}
+    it is @Chg{Version=[3],New=[an immutably limited],Old=[a limited partial
+    view, or a task, protected, or explicitly limited record]} type. This
+    was the rule chosen for Ada 95.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[Any type may have an access discriminant.
@@ -1003,18 +1013,22 @@ instance of a generic unit.@PDefn{generic contract issue}
     full view -- giving the two views different accessibility.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0063-1]}
     @ChgAdded{Version=[2],Text=[Any type may have an access discriminant,
     as above. However, special accessibility rules only apply to types
-    that are @lquotes@;really@rquotes@; limited (task, protected, and
+    that are @Chg{Version=[3],New=[immutably],Old=[@lquotes@;really@rquotes@;]}
+    limited (task, protected, and
     explicitly limited records). However, this breaks privacy; worse,
     @LegalityTitle depend on the definition of accessibility.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0063-1]}
     @ChgAdded{Version=[2],Text=[Any type may have an access discriminant,
     as above. Limited types have special accessibility, while nonlimited
     types have normal accessibility. However, a limited partial view with an
-    access discriminant can only be completed by a task, protected, or
-    explicitly limited record type. That prevents accessibility from changing.
+    access discriminant can only be completed by @Chg{Version=[3],New=[an
+    immutably limited],Old=[a task, protected, or
+    explicitly limited record]} type. That prevents accessibility from changing.
     A runtime accessibility check is required on generic formal types with
     access discriminants. However, changing between limited and nonlimited
     types would have far-reaching consequences for access discriminants @em
@@ -1038,9 +1052,11 @@ instance of a generic unit.@PDefn{generic contract issue}
     Ada 95.]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0063-1]}
     @ChgAdded{Version=[2],Text=[Any type may have an access discriminant,
-    but access discriminants may have defaults only if they are a
-    @lquotes@;really@rquotes@; limited type. This is the rule chosen for
+    but access discriminants may have defaults only if they are
+    @Chg{Version=[3],New=[an immutably], Old=[a
+    @lquotes@;really@rquotes@; limited]} type. This is the rule chosen for
     Ada 2005, as it is not incompatible, and it doesn't require weird
     accessibility checks.]}
   @end{Itemize}

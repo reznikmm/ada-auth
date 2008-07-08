@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.55 $ $Date: 2008/02/28 07:51:02 $ $Author: randy $ }
+@comment{ $Revision: 1.56 $ $Date: 2008/05/29 01:53:49 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2008/02/28 07:51:02 $}
+@Comment{$Date: 2008/05/29 01:53:49 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -3148,8 +3148,8 @@ Numerics.Generic_Real_Arrays shall be documented.]}]}
   @ChgAdded{Version=[3],Text=[Note moreover that the componentwise accuracy
   requirements are not met by subcubic methods for matrix multiplication such
   as that devised by Strassen. These methods which are typically used for the
-  fast multiplication of very large matrices (e.g. order > 1000) have normwise
-  accuracy properties. If it desired to use such methods then distinct
+  fast multiplication of very large matrices (e.g. order more than a few thousands)
+  have normwise accuracy properties. If it desired to use such methods then distinct
   subprograms should be provided (perhaps in a child package). See Section
   22.2.2 in the above reference.]}
 @end{ImplNote}
