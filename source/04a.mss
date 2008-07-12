@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2008/05/29 01:53:49 $}
+@Comment{$Date: 2008/07/08 03:31:49 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.94 $}
+@Comment{$Revision: 1.95 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -871,12 +871,10 @@ the result subtype is a subtype of the type without any constraint or
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0006-1]}
   @ChgAdded{Version=[3],Text=[We don't worry about the fact that
-  @ldquote@;base subtype@rdquote or @ldquote@;first subtype@rdquote
-  is not explicitly defined for the universal types. Since it is
+  @ldquote@;base subtype@rdquote is not explicitly defined for the
+  universal types. Since it is
   not possible to constrain a universal numeric type, all subtypes
   are unconstrained, and hence can be considered base subtypes.
-  Similarly, since it is not possible to define a subtype of the
-  universal access type, all subtypes are considered first subtypes.
   The wording above could be altered to bypass this issue, but it
   doesn't seem necessary, since universal integer is handled
   specially in the rules for case expression full coverage, and

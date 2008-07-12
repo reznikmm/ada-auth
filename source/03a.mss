@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2008/03/06 05:18:50 $}
+@Comment{$Date: 2008/07/08 03:31:49 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1666,9 +1666,8 @@ untagged partial view; or]}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[its nominal subtype is indefinite; or]}
 
-@ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[its type is a protected type, a task type, or an
-explicitly limited record type; or]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1],ARef=[AI05-0093-1]}
+@ChgAdded{Version=[3],Text=[its type is immutably limited (see @RefSecNum{Limited Types}); or]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[it is part of a stand-alone constant (including a
@@ -1798,7 +1797,7 @@ assigning to an enclosing object.
   return objects to be declared as constants, and corrected the definition
   of return objects as objects.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1],ARef=[AI05-0041-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1],ARef=[AI05-0041-1],ARef=[AI05-0093-1]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a definition of
   @i<known to be constrained>, for use in other rules.]}
 @end{DiffWord95}
@@ -2718,8 +2717,8 @@ following the parent @nt<subtype_indication>.
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00419-01]}
 @ChgDeleted{Version=[2],Text=[The derived type is limited if and
 only if the parent type is limited.]}
-@ChgNote{This rule is normatively in 7.5, and we don't want it scattered
-everywhere.}
+@ChgNote{This rule is normatively in @RefSecNum{Limited Types}, and we don't
+want it scattered everywhere.}
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00419-01]}
   @ChgDeleted{Version=[2],Text=[The derived type can become nonlimited if

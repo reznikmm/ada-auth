@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.56 $ $Date: 2008/05/29 01:53:49 $ $Author: randy $ }
+@comment{ $Revision: 1.57 $ $Date: 2008/07/08 03:31:49 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2008/05/29 01:53:49 $}
+@Comment{$Date: 2008/07/08 03:31:49 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -1676,7 +1676,9 @@ satisfies the strict-mode requirements of
 numbers and safe range induced by these attributes and the previously
 determined value of S'Model_Mantissa.
 
-Finally, S'Safe_First and S'Safe_last are set (in either order) to the
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
+Finally, S'Safe_First and S'@Chg{Version=[3],New=[Safe_Last],Old=[Safe_last]}
+are set (in either order) to the
 smallest and largest values, respectively, for which the
 implementation satisfies the strict-mode requirements of
 @RefSecNum{Model of Floating Point Arithmetic} in

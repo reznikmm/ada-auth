@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2008/02/28 07:51:00 $}
+@Comment{$Date: 2008/07/08 03:31:49 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1271,6 +1271,21 @@ an access value that designates the object.
 @begin{Syntax}
 @Syn{lhs=<allocator>,rhs="
    @key{new} @Syn2{subtype_indication} | @key{new} @Syn2{qualified_expression}"}
+
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0104-1]}
+@ChgAdded{Version=[3],Text=[For an @nt{allocator} with a @nt{subtype_indication},
+the @nt{subtype_indication} shall not specify a @nt{null_exclusion}.]}
+
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Such an uninitialized @nt{allocator} would
+necessarily raise Constraint_Error, as the default value is @key[null].
+Also note that the syntax does not allow a @nt{null_exclusion} in
+an initialized @nt{allocator}, so it makes the most sense to make the
+uninitialized case illegal as well.]}
+@end{Reason}
+@end{SyntaxText}
 @end{Syntax}
 
 @begin{Resolution}
@@ -1782,6 +1797,11 @@ has been moved to @RefSec{Storage Management}.
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a rule to prevent
   limited coextensions of nonlimited types. Allowing this would have
   far-reaching implementation costs.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0104-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a rule to
+  make @nt{null_exclusion}s illegal for uninitialized @nt{allocator}s,
+  as such an @nt{allocator} would always raise Constraint_Error.]}
 @end{DiffWord95}
 
 

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2008/05/17 03:20:38 $}
+@Comment{$Date: 2008/07/08 03:31:49 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -499,11 +499,14 @@ The parent type of a private extension has to be specific
 This rule is not checked in the instance body.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00402-01]}
-A type with @Chg{Version=[2],New=[a @nt{default_expression} of ],Old=[]}an
-access discriminant has to be a
-descendant of @Chg{Version=[2],New=[an explicitly limited record type],Old=[a
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0093-1]}
+A type with an access discriminant @Chg{Version=[2],New=[with a @nt{default_expression}],
+Old=[]}has to be @Chg{Version=[3],New=[immutably limited],Old=[a
+descendant of @Chg{Version=[2],New=[an explicitly limited record type. In the
+generic body, the definition of immutably limited is adjusted in an
+assume-the-worst manner (thus the rule is checked that way)],Old=[a
 type declared with @key[limited]]}, or be a task or protected
-type. This rule is irrelevant in the instance body.]}
+type. This rule is irrelevant in the instance body]}.
 
 In the declaration of a record extension,
 if the parent type is nonlimited, then each of the
@@ -522,7 +525,7 @@ manner.
 @ChgAdded{Version=[2],NoPrefix=[T],Text=[The corrections made by the
 Corrigendum added a number of such rules, and the Amendment added many more.
 There doesn't seem to be much value in repeating all of these rules here (as
-of this writing, there are roughly 17 such rules).
+of this writing, there are roughly 33 such rules).
 As noted below, all such rules are indexed in the AARM.]}
 
 @PDefn2{Term=[accessibility rule],Sec=(checking in generic units)}
@@ -2177,9 +2180,10 @@ which is now considered obsolete.
 
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00158-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[In the case where a formal type is
-tagged with unknown discriminants, and the actual type is a class-wide type
-@i<T>'Class:]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0071-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[In the case where a formal type
+@Chg{Version=[3],New=[has],Old=[is tagged with]} unknown discriminants,
+and the actual type is a class-wide type @i<T>'Class:]}
 
 @begin{Itemize}
 
@@ -2341,6 +2345,11 @@ run-time check to a compile-time check.
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Updated the wording to
   acknowledge the possibility of operations that are never declared for an
   actual type but still can be used inside of a generic unit.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Fixed hole that failed
+  to define what happened for "=" for an untagged private type whose
+  actual is class-wide.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0087-1]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added wording to
@@ -2997,10 +3006,39 @@ is analogous to a renaming-as-declaration,
 and the actual is analogous to the renamed view.
 @end{Discussion}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0071-1]}
 If a generic unit has a @nt<subprogram_default> specified by a box, and
 the corresponding actual parameter is omitted, then it is equivalent to
 an explicit actual parameter that is a usage name identical to the
-defining name of the formal.
+defining name of the formal.@Chg{Version=[3],New=[ If a @nt<subtype_mark> in the
+profile of the @nt<formal_subprogram_declaration> denotes a formal private or
+formal derived type, and the actual type for this formal type is a class-wide
+type @i<T>'Class, then for the purposes of resolving this @nt<default_name> at
+the point of the instantiation, for each primitive subprogram of @i<T> that has
+a matching defining name, that is directly visible at the point of the
+instantiation, and that has at least one controlling formal parameter, a
+corresponding subprogram with the same defining name is directly visible, but
+with @i<T> systematically replaced by @i<T>'Class in the types of its profile.
+The body of such a subprogram is as defined in
+@RefSecNum{Formal Private and Derived Types} for primitive subprograms
+of a formal type when the actual type is class-wide.],Old=[]}
+
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1]}
+@ChgAdded{Version=[3],Text=[This gives the same capabilities for formal
+subprograms that primitive operations of the formal type have when the
+actual type is class-wide. We do not want to discourage the use of
+explicit declarations for subprograms!]}
+@end{Reason}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1]}
+@ChgAdded{Version=[3],Text=[Functions that only have a controlling result
+and do not have a controlling parameter of @i<T> are not covered by this
+rule, as any call would be required to raise Program_Error by
+@RefSecNum{Formal Private and Derived Types}. It is better to detect the
+error earlier than runtime.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
 @ChgAdded{Version=[2],Text=[If a generic unit has a @nt{subprogram_default}
@@ -3014,7 +3052,7 @@ that is a null procedure having the profile given in the
 @nt{formal_@!abstract_@!subprogram_@!declaration} with a controlling type @i<T>
 is a dispatching operation of type @i<T>.]}
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[This is necessary to trigger all of the
 dispatching operation
 rules. It otherwise would not be considered a dispatching operation, as
@@ -3129,6 +3167,12 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.]}
 @begin{Diffword95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00423-01]}
   @ChgAdded{Version=[2],Text=[Added matching rules for @nt{null_exclusion}s.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added matching rules for
+  box formal subprograms for class-wide actual types, to make it
+  possible to import subprograms via formal subprograms as well as
+  by implicit primitive operations of a formal type.]}
 @end{Diffword95}
 
 

@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.80 $ $Date: 2008/04/19 05:43:18 $ $Author: randy $ }
+@comment{ $Revision: 1.81 $ $Date: 2008/07/08 03:31:49 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2008/04/19 05:43:18 $}
+@Comment{$Date: 2008/07/08 03:31:49 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -4964,10 +4964,26 @@ Handler.@key{all} is Interrupt_Priority'Last. If the check fails, Program_Error
 is raised.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0094-1]}
 @ChgAdded{Version=[2],Text=[If a procedure Set_Handler is called with zero or
 negative In_Time or with At_Time indicating a time in the past then the handler
-is executed immediately by the task executing the call of Set_Handler. The
-timing event Event is cleared.]}
+is executed @Chg{Version=[3],New=[as soon as possible after the completion of],
+Old=[immediately by the task executing]} the call of Set_Handler.@Chg{Version=[3],
+New=[],Old=[ The timing event Event is cleared.]}]}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0094-1]}
+@ChgAdded{Version=[3],Text=[The handler will still be executed. Under no
+circumstances is a scheduled call of a handler lost.]}
+@end{Ramification}
+
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0094-1]}
+@ChgAdded{Version=[3],Text=[We say @ldquote@;as soon as possible@rdquote
+so that we do not deadlock if we are executing the handler when Set_Handler is
+called. In that case, the current invocation of the handler must complete
+before the new handler can start executing.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],Text=[The function Current_Handler returns the handler
@@ -5071,4 +5087,11 @@ Timing_Event objects.]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The package Real_Time.Timing_Events is new.]}
 @end{Extend95}
+
+@begin{Diffword95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0094-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Reworded to eliminate a
+  deadlock condition if the event time is in the past and a handler is currently
+  executing.]}
+@end{Diffword95}
 

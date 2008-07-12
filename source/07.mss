@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2008/05/29 01:53:49 $}
+@Comment{$Date: 2008/07/08 03:31:49 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.97 $}
+@Comment{$Revision: 1.98 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1995,7 +1995,7 @@ tagged or has at least one access discriminant with a @nt{default_expression};]}
 synchronized interface;]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[A descendant of an immutably limited type.]}
+@ChgAdded{Version=[3],Text=[A type derived from an immutably limited type.]}
 
 @end{Itemize}
 
@@ -2011,8 +2011,8 @@ synchronized interface;]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[A limited interface type is not immutably
-  limited type; a type derived from it can be nonlimited.]}
+  @ChgAdded{Version=[3],Text=[A non-synchronized limited interface type is
+  not immutably limited; a type derived from it can be nonlimited.]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0052-1]}
