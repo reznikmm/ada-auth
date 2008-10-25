@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.49 $ $Date: 2007/11/30 03:34:27 $ $Author: Randy $ }
+@comment{ $Revision: 1.50 $ $Date: 2008/07/12 04:04:48 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2007/11/30 03:34:27 $}
+@Comment{$Date: 2008/07/12 04:04:48 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1143,17 +1143,26 @@ shared variables.]
 
 @begin{Syntax}
 @begin{SyntaxText}
-@Leading@;The form for pragmas Atomic, Volatile, Atomic_Components, and
-Volatile_Components is as follows:
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
+@Leading@;The form for pragmas Atomic, Volatile,
+@Chg{Version=[3],New=[Independent, ],Old=[]}Atomic_Components,@Chg{Version=[3],New=[],Old=[ and]}
+Volatile_Components@Chg{Version=[3],New=[, and Independent_Components],Old=[]}
+is as follows:
 @end{SyntaxText}
 
 @PragmaSyn`@key{pragma} @prag(Atomic)(@Syn2{local_name});'
 
 @PragmaSyn`@key{pragma} @prag(Volatile)(@Syn2{local_name});'
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1]}
+@ChgAdded{Version=[3],Text=`@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Independent>(@SynI{component_}@Syn2{local_name});''}
+
 @PragmaSyn`@key{pragma} @prag(Atomic_Components)(@SynI{array_}@Syn2{local_name});'
 
 @PragmaSyn`@key{pragma} @prag(Volatile_Components)(@SynI{array_}@Syn2{local_name});'
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1]}
+@ChgAdded{Version=[3],Text=`@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Independent_Components>(@Syn2{local_name});''}
 
 @end{Syntax}
 
@@ -1186,14 +1195,18 @@ are all of its subcomponents @Redundant[(the same does not apply to atomic)].
 @end{Intro}
 
 @begin{Resolution}
-
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
 The @nt{local_name} in an Atomic or Volatile pragma shall resolve to denote
 either an @nt{object_declaration}, a non-inherited @nt{component_@!declaration},
-or a @nt{full_type_@!declaration}. The
-@SynI{array_}@nt{local_name} in an Atomic_@!Components or
+or a @nt{full_type_@!declaration}.@Chg{Version=[3],New=[ The
+@Syni{component_}@nt{local_name} in an Independent pragma
+shall resolve to denote a non-inherited @nt{component_declaration}.],Old=[]}
+The @SynI{array_}@nt{local_name} in an Atomic_@!Components or
 Volatile_@!Components pragma shall resolve to denote the declaration
 of an array type or an array object of an anonymous type.
-
+@Chg{Version=[3],New=[ The @nt{local_name} in an Independent_Components pragma
+shall resolve to denote the declaration of an array or record type or an
+array object of an anonymous type.],Old=[]}
 @end{Resolution}
 
 @begin{Legality}
@@ -1237,6 +1250,19 @@ For an imported stand-alone constant that is not atomic or
 volatile, the implementation can assume that it will not be
 altered.
 @end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1]}
+@ChgAdded{Version=[3],Text=[It is illegal to apply either an Independent or
+Independent_Components pragma to a component, object, or type if the
+implementation cannot provide the independent
+addressability required by the pragma (see @RefSecNum{Shared Variables}).]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1]}
+@ChgAdded{Version=[3],Text=[It is illegal to specify a representation aspect for
+a component, object, or type to which pragma Independent or
+Independent_Components applies, in a way that
+prevents the implementation from providing the independent addressability
+required by the pragma.]}
 
 @end{Legality}
 
@@ -1406,6 +1432,11 @@ because the pragma was not used to mark variables as shared.
   @ChgAdded{Version=[2],Text=[Added wording to clarify that a slice of an
   object of an atomic type is not atomic, just like a component of an atomic
   type is not (necessarily) atomic.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added pragmas Independent
+  and Independent_Components to eliminate ambiguity about independent
+  addressibility.]}
 @end{Diffword95}
 
 

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2008/03/06 05:18:51 $}
+@Comment{$Date: 2008/07/12 04:04:48 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -381,9 +381,14 @@ pragma Pack
 
 pragmas Import, Export, and Convention (when applied to a type)
 
-pragmas Atomic and Volatile (when applied to a type)
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
+pragmas Atomic@Chg{Version=[3],New=[, Independent,],Old=[]} and Volatile
+(when applied to a type)
 
-pragmas Atomic_Components and Volatile_Components (when applied to an array type)
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
+pragmas Atomic_Components@Chg{Version=[3],New=[, Independent_Components,],Old=[]}
+and Volatile_Components (when applied to @Chg{Version=[3],New=[a],Old=[an
+array]} type)
 
 pragma Discard_Names (when applied to an enumeration or tagged type)
 @end{Itemize}
@@ -409,8 +414,9 @@ than a type)
 
 pragmas Atomic and Volatile (when applied to an object or a component)
 
-pragmas Atomic_Components and Volatile_Components (when applied to an
-array object)
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
+pragmas Atomic_Components@Chg{Version=[3],New=[, Independent_Components,],Old=[]}
+and Volatile_Components (when applied to an array object)
 
 pragma Discard_Names (when applied to an exception)
 
@@ -548,6 +554,15 @@ and partial views, have the same operational and representation aspects.
 That's important so that the properties don't change when changing views.
 While most aspects are not available for an incomplete view, we don't want
 to leave any holes by not saying that they are the same.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0083-1]}
+@ChgAdded{Version=[3],Text=[However, this does not apply to objects.
+Different views of an object can have
+different representation aspects. For instance, an actual object passed
+by reference and the associated formal parameter may have different values for
+Alignment even though the formal parameter is merely a view of the
+actual object. This is necessary to maintain the language design principle
+that Alignments are always known at compile time.]}
 @end{Ramification}
 
 A representation item that specifies the Size for a given subtype,
@@ -691,6 +706,7 @@ The same issues apply to Alignment.
 @end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
 A derived type inherits each type-related aspect
 @Chg{New=[of representation ],Old=[]}of its parent type that
 was directly specified before the declaration of the derived type,
@@ -704,8 +720,9 @@ that was inherited by the parent subtype from the grandparent subtype,
 but only if the parent subtype statically matches the first subtype of
 the parent type.
 An inherited aspect of representation is overridden by a subsequent
-representation item that specifies the same aspect of the type or
-subtype.
+representation item that specifies
+@Chg{Version=[3],New=[a different value for ],Old=[]}the same aspect of
+the type or subtype.
 @begin{Honest}
 A @nt{record_representation_clause} for a record extension
 does not override the layout of the parent part;
@@ -716,6 +733,14 @@ it is inherited by the record extension.
 If a representation item for the parent appears after the
 @nt{derived_@!type_@!definition},
 then inheritance does not happen for that representation item.
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1]}
+@ChgAdded{Version=[3],Text=[If an inherited aspect is confirmed by a later
+representation item for a derived type, the confirming representation item does
+not override the inherited one. Thus the derived type has both a specified
+confirming and an inherited non-confirming representation item @em this means
+that rules that apply only to non-confirming representation items still apply
+to this type.]}
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
@@ -1125,6 +1150,13 @@ Some of the more stringent requirements are moved to
   used this capability). Also added
   wording to clearly define that subprogram inheritance works like derivation
   of subprograms.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Defined that overriding of
+  an aspect of representation only happens for a non-confirming representation
+  item. This prevents a derived type from being considered to have
+  only a confirming representation item when the value would be non-confirming
+  if given on a type that does not inherit any aspects of representation.]}
 @end{DiffWord95}
 
 
@@ -1212,9 +1244,10 @@ probably more efficient than a component of size 7 plus a 1-bit gap
 (assuming the gap is needed anyway).
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
 For a packed array type, if the component subtype's Size is less
-than or equal to the word size, and Component_Size is not
-specified for the type, Component_Size should be less than or
+than or equal to the word size@Chg{Version=[3],New=[],Old=[, and
+Component_Size is not specified for the type]}, Component_Size should be less than or
 equal to the Size of the component subtype, rounded up to the nearest
 factor of the word size.
 @begin{Ramification}
@@ -1234,6 +1267,11 @@ followed.]}]}
   ignore alignment requirements on types that don't have by-reference or
   aliased parts. This was always intended, but there was no wording to that
   effect.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Fixed so that the
+  presence or absence of a confirming Component_Size representation
+  clause does not change the meaning of pragma Pack.]}
 @end{DiffWord95}
 
 
@@ -1516,9 +1554,22 @@ stand-alone objects and for program units via an
 @end{StaticSem}
 
 @begin{Erron}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
 @PDefn2{Term=(erroneous execution),Sec=(cause)}If an Address is specified,
 it is the programmer's responsibility to ensure that
-the address is valid; otherwise, program execution is erroneous.
+the address is valid@Chg{Version=[3],New=[ and appropriate for the entity and
+its use],Old=[]}; otherwise, program execution is erroneous.
+
+@begin{Discussion}
+@ChgAdded{Version=[3],Text=[@ldquote@;Appropriate for the entity and its
+use@rdquote covers cases such as
+misaligned addresses, read-only code addresses for variable data objects (and
+non-executable data addresses for code units), and addresses which would
+force objects that are supposed to be independently addressable to not be.
+Such addresses may be @ldquote@;valid@rdquote as they designate locations that
+are accessible to the program, but the program execution is still erroneous
+(meaning that implementations do not have to worry about these cases).]}
+@end{Discussion}
 @end{Erron}
 
 @begin{ImplAdvice}
@@ -2577,8 +2628,11 @@ be followed.]}]}
 attribute is defined]}:
 
 @begin{Description}
-@ChgAttribute{Version=[1], Kind=[Revised], ChginAnnex=[F], Leading=[F],
-  Prefix=<S>, AttrName=<External_Tag>, Ref=[8652/0040], ARef=[AI95-00108-01],
+@Comment{Original. @ChgAttribute{Version=[1], Kind=[Revised], ChginAnnex=[F], Leading=[F],
+  Prefix=<S>, AttrName=<External_Tag>, Ref=[8652/0040], ARef=[AI95-00108-01], ...}
+  We don't have a way to change multiple versions for attributes.}
+@ChgAttribute{Version=[3], Kind=[Revised], ChginAnnex=[F], Leading=[F],
+  Prefix=<S>, AttrName=<External_Tag>, Ref=[8652/0040], ARef=[AI95-00108-01], ARef=[AI05-0092-1],
   Text=[@Defn{External_Tag clause}
   @PDefn2{Term=(specifiable), Sec=(of External_Tag for a tagged type)}
   S'External_Tag denotes an external string representation
@@ -2587,8 +2641,8 @@ attribute is defined]}:
   via an @nt{attribute_definition_clause};
   the expression of such a clause shall be static.
   The default external tag representation is implementation defined.
-  See @RefSecNum{Dispatching Operations of Tagged Types} and
-  @RefSecNum{Stream-Oriented Attributes}.]}
+  See @Chg{Version=[3],New=[],Old=[@RefSecNum{Dispatching Operations of Tagged Types}
+  and ]}@RefSecNum{Stream-Oriented Attributes}.]}
   @Chg{New=[The value of External_Tag is never inherited@Redundant[; the
   default value is always used unless a new value is directly specified
   for a type].],Old=[]}
@@ -2764,6 +2818,12 @@ except for certain explicit exceptions.
   and for objects. This simplified the wording and eliminated confusion about
   which rules applied to objects, which applied to subtypes, and which applied
   to both.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Improved the description
+  of erroneous execution for address clauses to make it clear that
+  specifying an address inappropriate for the entity will lead to
+  erroneous execution.]}
 @end{DiffWord95}
 
 

@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2008/05/29 01:53:49 $}
+@Comment{$Date: 2008/07/12 04:04:48 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.90 $}
+@Comment{$Revision: 1.91 $}
 
 @begin{Intro}
 
@@ -270,11 +270,13 @@ a limited interface type that is not a protected interface.]]}
 @end(TheProof)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00397-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0090-1]}
 @ChgAdded{Version=[2],Text=[The prefixed view profile of an explicitly
 declared primitive subprogram of a tagged task type shall not be type
-conformant with any entry of the task type, if the first
+conformant with any entry of the task type, if the @Chg{Version=[3],New=[
+subprogram has the same defining name as the entry and the ],Old=[]}first
 parameter of the subprogram is of the task type or is an
-access parameter designating the task type.]}
+access parameter designating the task type.@Defn2{Term=[type conformance],Sec=(required)}]}
 @begin(Reason)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This prevents the existence of two operations
@@ -544,6 +546,10 @@ because a @nt{declarative_part} can be empty.
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Clarified that an
   inherited procedure of a progenitor is overridden when it is
   implemented by an entry.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0090-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added the missing
+  defining name in the no conflicting primitive operation rule.]}
 @end{DiffWord95}
 
 
@@ -689,7 +695,7 @@ the new tasks never reach the point
 where it would initiate the activations (due to an abort or
 the raising of an exception),
 the newly created tasks become]}
-terminated @Chg{Version=[3],New=[is],Old=[are]}
+terminated @Chg{Version=[3],New=[and is],Old=[are]}
 never activated.
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0045-1]}
@@ -1119,9 +1125,12 @@ limited interface type that is not a task interface.]]}
 @end(TheProof)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00397-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0042-1]}
 @ChgAdded{Version=[2],Text=[The prefixed view profile of an explicitly declared
 primitive subprogram of a tagged protected type shall not be type conformant
-with any protected operation of the protected type, if the first parameter of
+with any protected operation of the protected type, if the@Chg{Version=[3],New=[
+subprogram has the same defining name as the protected operation and
+the],Old=[]}first parameter of
 the subprogram is of the protected type or is an access parameter designating
 the protected type.@Defn2{Term=[type conformance],Sec=(required)}]}
 @begin(Reason)
@@ -1545,6 +1554,10 @@ protected units do not exist in Ada 83.
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Clarified that an
   inherited subprogram of a progenitor is overridden when it is
   implemented by an entry or subprogram.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0090-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added the missing
+  defining name in the no conflicting primitive operation rule.]}
 @end{DiffWord95}
 
 
@@ -5150,22 +5163,38 @@ and after queuing a given caller.
 @LabeledClause{Shared Variables}
 
 @begin{StaticSem}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
 @Defn2{Term=[shared variable], Sec=(protection of)}
 @Defn{independently addressable}
 If two different objects, including nonoverlapping
 parts of the same object, are @i{independently addressable},
 they can be manipulated concurrently by two different tasks
 without synchronization.
-Normally, any two nonoverlapping objects are independently addressable.
+@Chg{Version=[3],New=[Any two nonoverlapping objects are independently
+addressable if either object is atomic (see @RefSecNum{Shared Variable Control}),
+if a @nt{pragma} Independent applies to either object (see
+@RefSecNum{Shared Variable Control}), or if either is a component of
+a composite object to which @nt{pragma} Independent_Components applies
+(see @RefSecNum{Shared Variable Control}). Otherwise,
+two nonoverlapping objects are independently addressable
+except when they are both parts of a composite object for which
+a non-confirming representation item is used to specify
+packing, record layout, Component_Size, or convention, in which case
+it is unspecified whether the parts are independently
+addressable.@PDefn{unspecified}],
+Old=[Normally, any two
+nonoverlapping objects are independently addressable.
 However, if packing, record layout, or Component_Size
 is specified for a given composite object,
 then it is implementation defined whether or not
 two nonoverlapping parts of that composite object
-are independently addressable.
-@ImplDef{Whether or not two nonoverlapping parts of a composite
+are independently addressable.]}
+@ChgImplDef{Version=[3],Kind=[Deleted],Text=[@Chg{Version=[3],New=[],
+Old=[Whether or not two
+nonoverlapping parts of a composite
 object are independently addressable,
 in the case where packing, record layout, or Component_Size
-is specified for the object.}
+is specified for the object.]}]}
 @begin{ImplNote}
 Independent addressability is the only high level semantic effect of
 a @nt{pragma} Pack.
@@ -5185,6 +5214,20 @@ Even if packing or one of the other above-mentioned aspects is specified,
 subcomponents should still be updated independently if the
 hardware efficiently supports it.
 @end{ImplNote}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
+@ChgAdded{Version=[3],Text=[If the compiler cannot guarantee that an object
+(including a component) to which @nt{pragma} Independent or @nt{pragma}
+Independent_Components applies is independently addressable from
+any other nonoverlapping object, then the pragma must be rejected.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
+@ChgAdded{Version=[3],Text=[Similarly, an atomic object (including atomic
+components) is always independently addressable from any other nonoverlapping
+object. Any representation item which would prevent this from being true should
+be rejected, notwithstanding what this Standard says elsewhere.]}
+@end{Ramification}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -5345,6 +5388,12 @@ see @RefSecNum(Shared Variable Control).
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that a task T2 can rely on
   values of variables that are updated by another task T1, if task T2 first
   verifies that T1'Terminated is True.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Revised the definition of
+  independent addressibility to exclude conforming representation clauses
+  and to require that atomic and independent objects always have
+  independent addressibility.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0072-1]}
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the wording of

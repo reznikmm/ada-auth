@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2008/03/06 05:18:51 $}
+@Comment{$Date: 2008/07/12 04:04:48 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.87 $}
+@Comment{$Revision: 1.88 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -115,15 +115,17 @@ is not significant)]}.
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0090-1]}
   @ChgAdded{Version=[2],Text=[The @ldquote@;sequence of characters@rdquote
   of the string literal of the operator is a technical term (see
   @RefSecNum{String Literals}), and does not include the surrounding quote
   characters. As defined in @RefSecNum{Lexical Elements, Separators, and Delimiters},
   lexical elements are @lquotes@;formed@rquotes from a sequence of characters.
-  Spaces are not allowed, and upper and lower case is not significant. See
+  Spaces are not allowed, and upper and lower case is
+  not significant.@Chg{Version=[3],New=[],Old=[ See
   @RefSecNum{Lexical Elements, Separators, and Delimiters} and
   @RefSecNum{Reserved Words} for rules related to the use of @ntf{other_format}
-  characters in delimiters and reserved words.]}
+  characters in delimiters and reserved words.]}]}
 @end{Reason}
 
 @end{SyntaxText}
@@ -471,11 +473,14 @@ is a descendant of one of the following:
 
   a task or protected type;
 
-  a nonprivate type with the reserved word @b(limited) in its declaration;
-  @begin{Ramification}
-    A limited private type is by-reference only if it falls
-    under one of the other categories.
-  @end{Ramification}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0096-1]}
+  @Chg{Version=[3],New=[an explicitly limited record type],Old=[a
+  nonprivate type with the reserved word @key[limited] in its declaration]};
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0096-1]}
+  @ChgDeleted{Version=[3],Text=[A limited private type is by-reference
+  only if it falls under one of the other categories.]}
+@end{Ramification}
 
   a composite type with a subcomponent of a by-reference type;
 
@@ -699,6 +704,12 @@ We now cover in a general way in @RefSecNum{Operations of Discriminated Types}
 the rule regarding erroneous execution when a discriminant
 is changed and one of the parameters depends on the discriminant.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0096-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected so that
+  limited derived types are by-reference only if their parent is.]}
+@end{DiffWord95}
 
 
 @LabeledClause{Subprogram Bodies}

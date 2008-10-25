@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2007/11/30 03:34:26 $}
+@Comment{$Date: 2008/07/12 04:04:48 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -3234,31 +3234,43 @@ Ada.Float_@!Wide_Text_IO,
 Ada.Long_@!Float_@!Wide_Text_IO.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00428-01]}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Text=[
 @ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Bounded_IO]}
 @ChildUnit{Parent=[Ada.Wide_Wide_@!Text_IO],Child=[Bounded_IO]}
 The specification of package Wide_Text_IO.Wide_@!Bounded_IO is the same as that
 for Text_IO.Bounded_IO, except that any occurrence of Bounded_String is
-replaced by Wide_@!Bounded_@!String, and any occurrence of package Bounded is
+replaced by @Chg{Version=[3],New=[Bounded_@!Wide_@!String],Old=[Wide_@!Bounded_@!String]},
+and any occurrence of package Bounded is
 replaced by Wide_Bounded. The specification of package
 @Chg{Version=[3],New=[Wide_Wide_@!Text_IO.Wide_Wide_@!Bounded_IO],
 Old=[Wide_Wide_@!Text_IO.Wide_@!Bounded_IO]} is the same as that for
 Text_IO.@!Bounded_IO, except that any occurrence of Bounded_@!String is
-replaced by Wide_Wide_@!Bounded_String, and any occurrence of package Bounded
+replaced by @Chg{Version=[3],New=[Bounded_@!Wide_Wide_@!String],
+Old=[Wide_Wide_@!Bounded_@!String]}, and any occurrence of package Bounded
 is replaced by Wide_Wide_@!Bounded.]}
 
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+  @ChgAdded{Version=[3],Text=[@ldquote@;package Bounded@rdquote refers
+  to both the package Ada.Strings.Bounded and the formal package
+  parameter named Bounded.]}
+@end{Honest}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00301-01]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Text=[
 @ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Unbounded_IO]}
 @ChildUnit{Parent=[Ada.Wide_Wide_@!Text_IO],Child=[Unbounded_IO]}
 The specification of package Wide_Text_IO.@!Wide_Unbounded_IO is the same as that
 for Text_IO.@!Unbounded_IO, except that any occurrence of Unbounded_@!String is
-replaced by Wide_@!Unbounded_@!String, and any occurrence of package Unbounded is
+replaced by @Chg{Version=[3],New=[Unbounded_@!Wide_@!String],Old=[Wide_@!Unbounded_@!String]},
+and any occurrence of package Unbounded is
 replaced by Wide_@!Unbounded. The specification of package
 Wide_Wide_Text_IO.Wide_Wide_@!Unbounded_IO is the same as that for
 Text_IO.Unbounded_IO, except that any occurrence of Unbounded_String is
-replaced by Wide_Wide_@!Unbounded_@!String, and any occurrence of package Unbounded
+replaced by @Chg{Version=[3],New=[Unbounded_@!Wide_Wide_@!String],
+Old=[Wide_Wide_@!Unbounded_@!String]}, and any occurrence of package Unbounded
 is replaced by Wide_Wide_@!Unbounded.]}
 @end{StaticSem}
 

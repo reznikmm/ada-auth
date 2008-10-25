@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2008/04/19 05:43:16 $}
+@Comment{$Date: 2008/07/12 04:04:48 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -773,49 +773,62 @@ rhs="@Chg{Version=[2],New=<
    | @Synf{number_letter}>,Old=<@Synf{identifier_letter} | @Synf{digit}>}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0091-1]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<identifier_extend>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<
      @Synf{mark_non_spacing}
    | @Synf{mark_spacing_combining}
    | @Synf{number_decimal}
-   | @Synf{punctuation_connector}
-   | @Synf{other_format}>,Old=<>}"}
+   | @Synf{punctuation_connector}@Chg{Version=[3],New=<>,Old=<
+   | @Synf{other_format}>}>,Old=<>}"}
 
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00395-01]}
-@Chg{Version=[2],New=[After eliminating the characters in category
-@ntf{other_format}, an @nt{identifier} shall not contain two consecutive
-characters in category punctuation_connector, or end with a character
-in that category.],Old=[An @nt{identifier} shall not be a reserved word.]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0091-1]}
+@Chg{Version=[2],New=[@Chg{Version=[3],New=[An],Old=[After eliminating the
+characters in category @ntf{other_format}, an]} @nt{identifier} shall not
+contain two consecutive characters in category
+@Chg{Version=[3],New=[@ntf{punctuation_connector}],Old=[punctuation_connector]},
+or end with a character in that category.],Old=[An @nt{identifier} shall not be
+a reserved word.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised]}
   @ChgAdded{Version=[2],Text=[This rule was stated in the syntax in Ada 95,
-  but that has gotten too complex in Ada 2005. Since @ntf{other_format}
+  but that has gotten too complex in Ada 2005.@Chg{Version=[3],New=[],
+  Old=[ Since @ntf{other_format}
   characters usually do not display, we do not want to count them as separating
-  two underscores.]}
+  two underscores.]}]}
 @end{Reason}
 @end{SyntaxText}
 @end{Syntax}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[Two @nt{identifier}s are ]}@Chg{Version=[2],
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0091-1]}
+@Comment{Removed the "Type=[Leading]" along with the bullets. Don't have
+a way to make it doubly conditional (only in Version=[2]), and since it is
+mainly for spacing, we just forget it.}
+@ChgAdded{Version=[2],Text=[Two @nt{identifier}s are ]}@Chg{Version=[2],
 New=[considered the same if they consist of the same sequence of characters
-after applying the following transformations (in this order):],Old=[All
-characters of an @nt{identifier} are significant, including any
-underline character.
+after @Chg{Version=[3],New=[converting the characters to upper
+case.@Defn{case insensitive}],Old=[applying the following transformations
+(in this order):]}],Old=[All characters of an @nt{identifier} are significant,
+including any underline character.
 @Defn{case insensitive}
 @nt{Identifier}s differing only in the use of
 corresponding upper and lower case letters are considered the same.]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[The characters in category @ntf{other_format}
-are eliminated.]}
+@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0091-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[The characters
+in category @ntf{other_format} are eliminated.]}]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
-@ChgAdded{Version=[2],Text=[The remaining sequence of characters is
-converted to upper case.
-@Defn{case insensitive}]}
+@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0091-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[The remaining sequence of
+characters is converted to upper case.
+@Defn{case insensitive}]}]}
 @end{Itemize}
 @begin(Discussion)
   @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
@@ -826,14 +839,19 @@ converted to upper case.
   are not considered equivalent to one another).]}
 @end(Discussion)
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}
-@ChgAdded{Version=[2],Text=[After applying these transformations, an
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0091-1]}
+@ChgAdded{Version=[2],Text=[After @Chg{Version=[3],New=[converting to upper
+case],Old=[applying these transformations]}, an
 @nt{identifier} shall not be identical to a reserved word (in upper case).]}
 @begin(ImplNote)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[We match the reserved words after doing these
-  transformations so that the rules for @nt{identifier}s and reserved words are
-  the same. (This allows @ntf{other_format} characters, which usually don't
-  display, in a reserved word without changing it to an @nt{identifier}.) Since
+  @ChgRef{Version=[3],Kind=[Revised]}
+  @ChgAdded{Version=[2],Text=[We match the reserved words after
+  @Chg{Version=[3],New=[converting to upper case],Old=[doing these
+  transformations]} so that the rules for @nt{identifier}s and reserved words are
+  the same. @Chg{Version=[3],New=[],Old=[(This allows @ntf{other_format}
+  characters, which usually don't display, in a reserved word
+  without changing it to an @nt{identifier}.) ]}Since
   a compiler usually will lexically process @nt{identifier}s and reserved words the
   same way (often with the same code), this will prevent a lot of headaches.]}
 @end(ImplNote)
@@ -961,6 +979,13 @@ implementation-defined attributes or pragma names.
   with several other categories. This should ease programming in languages
   other than English.]}
 @end{Extend95}
+
+@begin{Diffword95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgAdded{Version=[3],Text=[@B<Corrigendum 2:> @ntf{other_format}
+  characters were remved from identifiers as the Unicode recommendations
+  have changed.]}
+@end{Diffword95}
 
 
 @LabeledClause{Numeric Literals}
@@ -1708,14 +1733,16 @@ informative annex.
 @ChgDeleted[Version=[1],Type=[Leading],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00284-02],ARef=[AI95-00395-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0091-1]}
 @ChgNote{The table of words has no paragraph number, so we need to put the
 change here}
 @Leading
 @Defn{reserved word}
 The following are the @i{reserved words}@Chg{Version=[2],New=[. Within a program,
-some or all of the letters of a reserved word may be in upper case, and one or
+some or all of the letters of a reserved word may be in
+upper case@Chg{Version=[3],New=[],Old=[, and one or
 more characters in category @ntf{other_format} may be inserted within or at the
-end of the reserved word.],Old=[ (ignoring upper/lower case distinctions):]}
+end of the reserved word]}.],Old=[ (ignoring upper/lower case distinctions):]}
 @begin{Discussion}
   Reserved words have special meaning in the syntax.
   In addition, certain reserved words are used as attribute names.
@@ -1872,4 +1899,9 @@ to @RefSec(Obsolescent Features).
   been modified to allow identifiers using all of the characters of ISO 10646.
   This change has no effect on the character sequences that are reserved
   words, but does make some unusual sequences of characters illegal.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0091-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Removed @ntf{other_format}
+  characters from reserved words in order to be compatible with the latest
+  Unicode recommendations.]}
 @end{DiffWord95}

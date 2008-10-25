@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2008/07/08 03:31:49 $}
+@Comment{$Date: 2008/07/12 04:04:48 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.95 $}
+@Comment{$Revision: 1.96 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -542,7 +542,8 @@ corresponding entry, entry family, or protected subprogram.
 @ChgAdded{Version=[2],Text=[A view of a subprogram whose first formal parameter is of
 a tagged type or is an access parameter whose designated type is tagged:]}
 
-@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01],ARef=[AI95-00407-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0090-1]}
 @ChgAdded{Version=[2],NoPrefix=[T],Text=[The @nt<prefix> (after any implicit
 dereference) shall resolve to denote an object or value of a specific tagged
 type @i<T> or class-wide type @i<T>'Class. The @nt<selector_name> shall resolve
@@ -551,13 +552,34 @@ region in which an ancestor of the type @i<T> is declared. The first formal
 parameter of the subprogram shall be of type @i<T>, or a class-wide type that
 covers @i<T>, or an access parameter designating one of these types. The
 designator of the subprogram shall not be the same as that of a component of
-the tagged type visible at the point of the @nt<selected_component>. The
+the tagged type visible at the point of the @nt<selected_component>.
+@Chg{Version=[3],New=[The subprogram shall not
+be an implicitly declared primitive operation of type @i<T> that overrides
+an inherited subprogram implemented by an entry or protected subprogram
+visible at the point of the selected component. ],Old=[]}The
 @nt<selected_component> denotes a view of this subprogram that omits the first
 formal parameter. This view is called a @i{prefixed view} of the subprogram,
 and the @nt{prefix} of the @nt<selected_component> (after any implicit
 dereference) is called the @i<prefix> of the prefixed view.
 @Defn{prefixed view}@Defn2{Term=[prefix],Sec=[of a prefixed view]}]}
 
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0090-1]}
+  @ChgAdded{Version=[3],Text=[The part of the rule that excludes a primitive
+  overriding subprogram as a selector applies only to the wrapper subprogram
+  that is implicitly declared to override a subprogram inherited from a
+  synchronized interface that is implemented by an operation of a task or
+  protected type (see @RefSecNum{Task Units and Task Objects} and
+  @RefSecNum{Protected Units and Protected Objects}). We don't want
+  calls that use a prefixed view to be ambiguous between the wrapper
+  subprogram and the implementing entry or protected operation. Note that
+  it is illegal to declare an explicit primitive that has a prefixed view
+  that is homographic with one of the type's operations, so
+  in normal cases it isn't possible to have an ambiguity in a prefix call.
+  However, a class-wide operation of an ancestor type and declared in the
+  same declarative list with the ancestor type is also considered, and that
+  can still make a call ambiguous.]}
+@end{Discussion}
 @end{Itemize}
 
 @Leading@;An expanded name shall resolve to denote a declaration that
@@ -723,6 +745,13 @@ My_Object.Do_Something (Count => 10);]}
 My_Object.Do_Something_Else (Flag => True);]}
 @end{Example}
 @end{Extend95}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0090-1]}
+  @ChgAdded{Version=[3],Text=[Corrected the definition of a prefixed view
+  to ignore the implicit subprograms declared for
+  @ldquote@;implemented by@rdquote entries and protected subprograms.]}
+@end{DiffWord95}
 
 
 @RMNewPage@ChgNote{Only needed for Ada 2005 version}

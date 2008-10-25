@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2008/05/17 03:20:37 $}
+@Comment{$Date: 2008/07/12 04:04:48 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.88 $}
+@Comment{$Revision: 1.89 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -397,7 +397,7 @@ via an @nt{attribute_definition_clause}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00417-01]}
 @ChgAdded{Version=[2],Text=[The string returned by the functions Expanded_Name,
-Wide_Expanded_Name, Wide_Wide_Expanded_Name, and External_Tag has lower bound
+Wide_@!Expanded_@!Name, Wide_Wide_@!Expanded_@!Name, and External_Tag has lower bound
 1.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00279-01]}
@@ -663,9 +663,11 @@ The tag of a value is the tag of the associated object
 (see @RefSecNum{Formal Parameter Modes}).
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02],ARef=[AI95-00344-01],ARef=[AI95-00405-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Text=[Tag_Error is raised by a call of Descendant_Tag,
-Expanded_Name, External_Tag, Interface_Ancestor_Tag,
-Is_Descendant_At_Same_Level, or Parent_Tag if any
+Expanded_Name, External_Tag, @Chg{Version=[3],New=[Interface_@!Ancestor_@!Tags],
+Old=[Interface_Ancestor_Tag]},
+Is_Descendant_@!At_Same_Level, or Parent_Tag if any
 tag passed is No_Tag.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
@@ -2030,18 +2032,20 @@ a type.]}
 @end{Ramification}
 
 @Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00334-01],ARef=[AI95-00391-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0097-1]}
 @Chg{Version=[2],New=[If a type has an implicitly declared primitive subprogram
 that is inherited or is the predefined equality operator, and the corresponding
 primitive subprogram of],Old=[For a derived type, if]}
 the parent or ancestor type
 @Chg{Version=[2],New=[is abstract or is a function with a controlling access
-result, or if a type other than a null extension inherits a],
+result, or if a type other than a
+@Chg{Version=[3],New=[non-abstract],Old=[]}null extension inherits a],
 Old=[has an abstract primitive subprogram, or a primitive]}
 function with a controlling result, then:
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0068-1]}
   @ChgAdded{Version=[3],Text=[These rules apply to each view of the type
-  individually. That is necessary preserve privacy. For instance, in the
+  individually. That is necessary to preserve privacy. For instance, in the
   following example:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2447,6 +2451,10 @@ but then clients of the package would not have visibility to T.
   @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added rules to eliminate
   holes with controlling access results and generic functions that return
   abstract types.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0097-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected a minor
+  glitch having to do with abstract null extensions.]}
 @end{Diffword95}
 
 
@@ -3699,10 +3707,12 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
   for deferred incomplete types.]}
 @end(Discussion)
 @begin(itemize)
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0098-1]}
   as the @nt{subtype_mark} in the @nt{subtype_indication}
   of an @nt{access_to_@!object_@!definition};
   @Redundant[the only form of @nt{constraint} allowed in this
-  @nt{subtype_indication} is a @nt{discriminant_constraint};]
+  @nt{subtype_indication} is a @nt{discriminant_constraint}@Chg{Version=[3],New=[
+  @Redundant[(no @nt{null_exclusion} is allowed)]],Old=[]};]
   @begin(ImplNote)
     We now allow @nt<discriminant_constraint>s even if the
     full type is deferred to the package body. However, there
@@ -3770,8 +3780,10 @@ incomplete view, it may also be used:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}@ChgNote{Really moved}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0098-1]}
 @ChgAdded{Version=[2],Text=[as the @nt{subtype_mark} defining the subtype of a
-parameter or result of an @nt{access_to_@!subprogram_@!definition}.]}
+parameter or result of an @nt{access_to_@!subprogram_@!definition}@Chg{Version=[3],New=[
+or @nt{access_definition} for an access-to-subprogram type],Old=[]}.]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[Added]}
     @ChgAdded{Version=[2],Text=[This allows, for example, a record to have a
@@ -4018,6 +4030,11 @@ not at all) for different designated subtypes.
   neglected to give any rules for matching them with other types. Luckily,
   implementers did the right thing anyway. This change also makes it easier to
   describe the meaning of a limited view.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0098-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the definition
+  so that an anonymous access-to-subprogram type can use an incomplete
+  view in the same way that a named access-to-subprogram type can.]}
 @end{DiffWord95}
 
 

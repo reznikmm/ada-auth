@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2008/07/08 03:31:49 $}
+@Comment{$Date: 2008/07/12 04:04:48 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.92 $}
+@Comment{$Revision: 1.93 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -2563,8 +2563,14 @@ the parent type is a tagged type.]],Old=[]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0096-1]}
 @ChgAdded{Version=[2],Text=[If the reserved word @key{limited} appears in a
-@nt{derived_type_definition}, the parent type shall be a limited type.]}
+@nt{derived_type_definition}, the parent type shall be a limited
+type.@Chg{Version=[3],New=[ If the parent type is a tagged formal type,
+then in addition to the places where @LegalityTitle normally apply
+(see @RefSecNum{Generic Instantiation}), this rule applies also in
+the private part of an instance of a
+generic unit.@PDefn{generic contract issue}],Old=[]}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[We allow @key{limited} because we don't inherit
@@ -2578,6 +2584,20 @@ the parent type is a tagged type.]],Old=[]}
   @ChgAdded{Version=[2],Text=[However, we do not want to allow @key{limited}
   when the parent is nonlimited: limitedness cannot change in a derivation
   tree.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If the parent type is an untagged limited formal
+  type with an actual type that is nonlimited, we allow derivation as a limited
+  type in the private part or body as no place could have visibility on the
+  resulting type where it was known to be nonlimited (outside of the instance).
+  (See the previous paragraph's annotations for an explanation of this.)
+  However, if the parent type is a tagged limited formal type with an actual
+  type that is nonlimited, it would be possible to pass a value of the limited
+  type extension to a classwide type of the parent, which would be nonlimited.
+  That's too weird to allow (even though all of the extension components would
+  have to be nonlimited because the rules of @RefSecNum{Type Extensions} are
+  rechecked), so we have a special rule to prevent that in the private part
+  (type extension from a formal type is illegal in a generic package body).]}
 @end{Reason}
 @end{Legality}
 
@@ -3124,6 +3144,10 @@ These concepts are similar, but not the same.
   types@rquotes and used it in wording elsewhere; also specified the
   language-defined categories that form classes of types (this was never
   normatively specified in Ada 95.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0096-1]}
+  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a (re)check that
+  limited type extensions never are derived from non-limited types.]}
 @end{DiffWord95}
 
 
