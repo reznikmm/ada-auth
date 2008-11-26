@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.12 $ $Date: 2008/02/07 06:00:08 $}
+@comment{$Revision: 1.13 $ $Date: 2008/10/25 05:28:50 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -494,11 +494,18 @@ that form the view of the object_declaration. The view is the
 subtype_indication or full type definition of the object_declaration. An
 initial value, if any, is not part of this view]}.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0004-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0004-1],ARef=[SI99-0032-1]}
 For a single_task_declaration or single_protected_declaration, returns the
-task_definition or protected_definition following the reserved word
-@key[is]@Chg{Version=[2],New=[; use Is_Task_Definition_Present to determine
-if the entire definition is omitted],Old=[]}.
+task_definition or protected_definition@Chg{Version=[2],New=[. If no
+task_definition is given explicitly (the reserved word is is not written), an
+empty task_definition is returned for which Is_Task_Definition_Present returns
+False.],Old=[ following the reserved word @key[is]]}.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0032-1]}
+@ChgAdded{Version=[2], Text=[If an empty task_definition E is returned, then Is_Part_of_Implicit(E) = False;
+Element_Span(E) returns a value where the First_Column_Number > Last_Column_Number and
+First_Line = Last_Line = the line of the semicolon; Element_Image(E) = ""; and
+Lines(E) returns a single line whose Line_Image = "".]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0004-1]}
 @ChgDeleted{Version=[2],Text=[Returns a Nil_Element for a
@@ -1205,7 +1212,7 @@ function Result_@Chg{Version=[2],New=[Subtype],Old=[Profile]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0004-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0004-1],ARef=[SI99-0023-1]}
 @key[function] @Chg{Version=[2],New=[@AdaSubDefn{Result_Subtype}],Old=[@AdaSubDefn{Result_Profile}]} (Declaration : @key[in] Asis.Declaration)
                      @key[return] Asis.@Chg{Version=[2],New=[Definition],Old=[Expression]};
 @end{Example}
@@ -2202,8 +2209,9 @@ function Renamed_Entity
 
 @begin{DescribeCode}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0023-1]}
 @key[function] @AdaSubDefn{Renamed_Entity} (Declaration : @key[in] Asis.Declaration)
-                        @key[return] Asis.Expression;
+                        @key[return] @Chg{Version=[2],New=[Asis.Name], Old=[Asis.Expression]};
 @end{Example}
 
 Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the rename
@@ -2294,8 +2302,9 @@ function Renamed_Entity
 
 @begin{DescribeCode}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0023-1]}
 @key[function] @AdaSubDefn{Corresponding_Base_Entity} (Declaration : @key[in] Asis.Declaration)
-                             @key[return] Asis.Expression;
+                             @key[return] @Chg{Version=[2],New=[Asis.Name], Old=[Asis.Expression]};
 @end{Example}
 
 Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the rename
@@ -2984,8 +2993,9 @@ Then use Corresponding_Body to get to the body of the generic declaration.
 
 @begin{DescribeCode}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0023-1]}
 @key[function] @AdaSubDefn{Generic_Unit_Name} (Declaration : @key[in] Asis.Declaration)
-                           @key[return] Asis.Expression;
+                           @key[return] @Chg{Version=[2],New=[Asis.Name], Old=[Asis.Expression]};
 @end{Example}
 
 Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the generic
@@ -3156,9 +3166,10 @@ function Formal_Subprogram_Default
 
 @begin{DescribeCode}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0023-1]}
 @key[function] @AdaSubDefn{Formal_Subprogram_Default}
             (Declaration : @key[in] Asis.Generic_Formal_Parameter)
-           @key[return] Asis.Expression;
+           @key[return] @Chg{Version=[2],New=[Asis.Name], Old=[Asis.Expression]};
 @end{Example}
 
 Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the generic
@@ -3339,9 +3350,10 @@ A_Function_Renaming_Declaration
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1]}
 @ChgAdded{Version=[2],Text=[Declaration specifies the declaration to query.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1],ARef=[SI99-0032-1]}
 @ChgAdded{Version=[2],Text=[Returns a list of subtype marks making up the
-interface_list in the argument declaration, in their order of appearance.]}
+interface_list in the argument declaration, in their order of appearance.
+If Declaration has no progenitors, an empty list is returned.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[

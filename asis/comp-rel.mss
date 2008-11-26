@@ -1,6 +1,6 @@
 @Part(comp-rel, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/comp-rel.mss,v $}
-@comment{$Revision: 1.8 $ $Date: 2008/02/06 06:23:46 $}
+@comment{$Revision: 1.9 $ $Date: 2008/10/25 05:28:50 $}
 
 
 @LabeledSection{package Asis.Compilation_Units.Relations}
@@ -116,18 +116,21 @@ causing the inconsistent semantic dependence.
 @end{ImplPerm}
 
 @begin{Indent}
-@leading@keepnext@;For the above example, the list returned is:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0029-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[For the above
+example, the list returned is:]}
 
 @begin{ChildExample}
-DC DB DA CB CA BA
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2], Text=[DC DB DA CB CA BA]}
 @end{ChildExample}
-
-@leading@keepnext@;This list reports all dependencies:
-
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0029-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[This list reports all dependencies:]}
 @begin{ChildExample}
-D withed by C withed by B withed by A => DC DB DA
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2], Text=[D withed by C withed by B withed by A => DC DB DA
             C withed by B withed by A => CB CA
-                        B withed by A => BA
+                        B withed by A => BA]}
 @end{ChildExample}
 @end{Indent}
 
@@ -152,8 +155,9 @@ It can be deduced that:
    the kind for A, C can be A's required body or some subunit of A).
 @end{ChildExample}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
    A unit is reported as missing only if the Post-Compilation Rules of Ada
-   determine it to be needed. Reference Manual 10.2.
+   determine it to be needed. @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.2.
 @end{Indent}
 
 @leading@keepnext@;Circular dependence list:
@@ -212,8 +216,9 @@ The dependencies are:  A depends on B, B depends on C, C depends on A.
 @LabeledClause{function Semantic_Dependence_Order}
 
 @begin{UsageNote}
-Semantic Dependence Relationships @em Reference Manual 10.1.1(24).
-Elaboration Dependence Relationships @em Reference Manual 10.1.1(25).
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+Semantic Dependence Relationships @em @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.1(24).
+Elaboration Dependence Relationships @em @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.1(25).
 @end{UsageNote}
 
 @begin{Intro}

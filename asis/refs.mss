@@ -1,7 +1,7 @@
 @Part(refs, Root="asis.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/refs.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/09/28 05:12:01 $}
+@comment{$Revision: 1.3 $ $Date: 2008/10/25 05:28:50 $}
 
 @UnnumberedSection{Bibliography}
 
@@ -27,7 +27,8 @@ DIANA: An Intermediate Language for Ada, Springer-Verlag LNCS #161.
 @LocalTarget{Target=[R6],Text={6.}}@\Intermetrics; 1986: Reference Manual for
 the Descriptive Intermediate Annotated Notation for Ada (DIANA).
 
-@LocalTarget{Target=[R7],Text={7.}}@\ISO/IEC 8652:1995, Information technology
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]} @Comment{Changed New=[ISO/IEC 8652:1995(E)], Old=[ISO/IEC 8652:1995] throughout document.}
+@LocalTarget{Target=[R7],Text={7.}}@\@Chg{Version=[2], New=[ISO/IEC 8652:1995(E)], Old=[ISO/IEC 8652:1995]}, Information technology
 - Programming languages - Ada.
 
 @LocalTarget{Target=[R8],Text={8.}}@\Rational; May 1989: Rational Design and

@@ -1,11 +1,13 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/intro.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/07/25 04:56:43 $}
+@comment{$Revision: 1.2 $ $Date: 2008/10/25 05:28:50 $}
 
 @UnNumberedSection(Introduction)
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 The Ada Semantic Interface Specification (ASIS) is an interface between an Ada
-environment (as defined by ISO/IEC 8652:1995) and any tool requiring
+environment (as defined by @Chg{Version=[2], New=[ISO/IEC 8652:1995(E)], Old=[ISO/IEC 8652:1995]}) and any tool
+requiring
 information from it. An Ada environment includes valuable semantic and
 syntactic information. ASIS is an open and published callable interface which
 gives CASE tool and application developers access to this information. ASIS has

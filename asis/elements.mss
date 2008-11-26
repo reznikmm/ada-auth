@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.11 $ $Date: 2008/02/06 06:23:46 $}
+@comment{$Revision: 1.12 $ $Date: 2008/10/25 05:28:50 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -221,11 +221,13 @@ dependent, many pragmas have the same effect regardless of order.)
 There are two sources for the pragmas that appear in this list:
 
 @begin{Itemize}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Program unit pragmas appearing at the place of a compilation_unit.
-See Reference Manual 10.1.5(4).
+See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.5(4).
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Configuration pragmas appearing before the first
-compilation_unit of a compilation. See Reference Manual 10.1.5(8).
+compilation_unit of a compilation. See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.5(8).
 @end{Itemize}
 
 This query does not return Elaborate pragmas from the unit context
@@ -414,27 +416,73 @@ A_Declaration
 @end{DescribeCode}
 
 
-@LabeledClause{function Trait_Kind}
+@ChgNote{SI99-0022-1 replace subprogram}
+@LabeledRevisedClause{Version=[2],New=[function Has_Abstract],
+Old=[function Trait_Kind]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Trait_Kind} (Element : @key[in] Asis.Element)
-                      @key[return] Asis.Trait_Kinds;
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[@key[function] @AdaSubDefn{Has_Abstract} ( Element : @key[in] Asis.Element ) @key[return] Boolean;]}
 @end{Example}
 
-Element @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the Element to
-query.
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[Element specifies the element to query.]}
 
-Returns the Trait_Kinds value of the Element.
+@ChgAdded{Version=[2], Text=[Returns True if the reserved word @key[abstract] appears in Element, and
+False otherwise.]}
 
-Returns Not_A_Trait for any unexpected element such as a
-Nil_Element, A_Statement, or An_Expression.
+@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including a Nil_Element.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Element expects an element
-that has one of the following],Old=[Expected]} Declaration_Kinds:
+@ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Declaration_Kinds:]}
 @begin{Display}
-A_Private_Type_Declaration
+@ChgAdded{Version=[2], Text=[  A_Formal_Procedure_Declaration
+  A_Formal_Function_Declaration
+  A_Function_Declaration
+  A_Private_Type_Declaration
+  A_Private_Extension_Declaration
+  A_Procedure_Declaration
+  A_Type_Declaration]}
+@end{Display}
+
+@ChgAdded{Version=[2], Text=[or an element that has one of the following Definition_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_Private_Extension_Definition
+  A_Private_Type_Definition
+  A_Tagged_Private_Type_Definition
+  A_Type_Definition]}
+@end{Display}
+
+@ChgAdded{Version=[2], Text=[or an element that has one of the following Formal_Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_Formal_Private_Type_Definition
+  A_Formal_Tagged_Private_Type_Definition
+  A_Formal_Derived_Type_Definition]}
+@end{Display}
+@end{DescribeCode}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Trait_Kind} (Element : @key[in] Asis.Element)
+                      @key[return] Asis.Trait_Kinds;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Text=[Element @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the Element to
+query.]}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Text=[Returns the Trait_Kinds value of the Element.]}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Text=[Returns Not_A_Trait for any unexpected element such as a
+Nil_Element, A_Statement, or An_Expression.]}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[Expected Declaration_Kinds:]}
+@begin{Display}
+@ChgDeleted{Version=[2],Text=[A_Private_Type_Declaration
 A_Private_Extension_Declaration
 A_Variable_Declaration
 A_Constant_Declaration
@@ -443,38 +491,343 @@ A_Discriminant_Specification
 A_Loop_Parameter_Specification
 A_Procedure_Declaration
 A_Function_Declaration
-A_Parameter_Specification
+A_Parameter_Specification]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[or Element expects an element
-that has one of the following],Old=[Expected]} Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[Expected Definition_Kinds:]}
 @begin{Display}
-A_Component_Definition
+@ChgDeleted{Version=[2],Text=[A_Component_Definition
 A_Private_Type_Definition
 A_Tagged_Private_Type_Definition
-A_Private_Extension_Definition
+A_Private_Extension_Definition]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[or Element expects an element
-that has one of the following],Old=[Expected]} Type_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[Expected Type_Kinds:]}
 @begin{Display}
-A_Derived_Type_Definition
+@ChgDeleted{Version=[2],Text=[A_Derived_Type_Definition
 A_Derived_Record_Extension_Definition
 A_Record_Type_Definition
-A_Tagged_Record_Type_Definition
+A_Tagged_Record_Type_Definition]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[or Element expects an element
-that has one of the following],Old=[Expected]} Formal_Type_Kinds:
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[Expected Formal_Type_Kinds:]}
 @begin{Display}
-A_Formal_Private_Type_Definition
+@ChgDeleted{Version=[2],Text=[A_Formal_Private_Type_Definition
 A_Formal_Tagged_Private_Type_Definition
-A_Formal_Derived_Type_Definition
+A_Formal_Derived_Type_Definition]}
 @end{Display}
 @end{DescribeCode}
+
+
+@comment{Remainder of SI99-0022-1 function inserts}
+
+@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Aliased]}}
+@LabeledAddedSubClause{Version=[2],Name=[function Has_Aliased]}
+@begin{Discussion}
+@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
+change all of the following clause numbers, so this is a subclause temporarily.]}
+@end{Discussion}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgAdded{Version=[2], Text=[@key[function] @AdaSubDefn{Has_Aliased} ( Element : @key[in] Asis.Element ) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[Element specifies the Element to query.]}
+
+@ChgAdded{Version=[2], Text=[Returns True if the reserved word @key[aliased]
+appears in Element, and False otherwise.]}
+
+@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including
+a Nil_Element.]}
+
+@ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Declaration_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_Constant_Declaration
+  A_Deferred_Constant_Declaration
+  A_Return_Object_Specification
+  A_Variable_Declaration]}
+@end{Display}
+
+@ChgAdded{Version=[2], Text=[or an element that has one of the following Definition_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_Component_Definition]}
+@end{Display}
+@end{DescribeCode}
+
+
+
+@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Limited]}}
+@LabeledAddedSubClause{Version=[2],Name=[function Has_Limited]}
+@begin{Discussion}
+@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
+change all of the following clause numbers, so this is a subclause temporarily.]}
+@end{Discussion}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[@key[function] @AdaSubDefn{Has_Limited} ( Element : @key[in] Asis.Element ) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[Element specifies the Element to query.]}
+
+@ChgAdded{Version=[2], Text=[Returns True if the reserved word @key[limited] appears in Element, and
+False otherwise.]}
+
+@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including a Nil_Element.]}
+
+@ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Clause_Kinds:]}
+  A_With_Clause
+
+@ChgAdded{Version=[2], Text=[or an element that has one of the following Declaration_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_Type_Declaration
+  A_Private_Type_Declaration
+  A_Private_Extension_Declaration]}
+@end{Display}
+
+@ChgAdded{Version=[2], Text=[or an element that has one of the following Definition_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_Type_Definition
+  A_Private_Type_Definition
+  A_Tagged_Private_Type_Definition
+  A_Private_Extension_Definition
+  An_Interface_Type_Definition]}
+@end{Display}
+
+@ChgAdded{Version=[2], Text=[or an element that has one of the following Formal_Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_Formal_Private_Type_Definition
+  A_Formal_Tagged_Private_Type_Definition
+  A_Formal_Derived_Type_Definition]}
+@end{Display}
+@end{DescribeCode}
+
+
+@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Private]}}
+@LabeledAddedSubClause{Version=[2],Name=[function Has_Private]}
+@begin{Discussion}
+@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
+change all of the following clause numbers, so this is a subclause temporarily.]}
+@end{Discussion}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[@key[function] @AdaSubDefn{Has_Private} ( Element : @key[in] Asis.Element ) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[Element specifies the element to query.]}
+
+@ChgAdded{Version=[2], Text=[Returns True if the reserved word @key[private] appears in Element, and
+False otherwise.]}
+
+@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including a Nil_Element.]}
+
+@ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Declaration_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_Type_Declaration
+  A_Private_Type_Declaration]}
+@end{Display}
+
+@ChgAdded{Version=[2], Text=[or an element that has one of the following Definition_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_Private_Extension_Definition
+  A_Private_Type_Definition
+  A_Tagged_Private_Type_Definition
+  A_Type_Definition]}
+@end{Display}
+
+@ChgAdded{Version=[2], Text=[or an element that has one of the following Formal_Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_Formal_Private_Type_Definition
+  A_Formal_Tagged_Private_Type_Definition]}
+@end{Display}
+
+@ChgAdded{Version=[2], Text=[or an element that has one of the following Clause_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_With_Clause]}
+@end{Display}
+@end{DescribeCode}
+
+
+@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Protected]}}
+@LabeledAddedSubClause{Version=[2],Name=[function Has_Protected]}
+@begin{Discussion}
+@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
+change all of the following clause numbers, so this is a subclause temporarily.]}
+@end{Discussion}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[@key[function] @AdaSubDefn{Has_Protected} ( Element : @key[in] Asis.Element ) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[Element specifies the Element to query.]}
+
+@ChgAdded{Version=[2], Text=[Returns True if the reserved word @key[protected] appears in Element, and
+False otherwise.]}
+
+@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including a Nil_Element.]}
+
+@ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Definition_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  An_Interface_Type_Definition
+  A_Protected_Definition]}
+@end{Display}
+
+@ChgAdded{Version=[2], Text=[or an element that has one of the following Declaration_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_Protected_Body_Declaration
+  A_Protected_Type_Declaration
+  A_Single_Protected_Declaration]}
+@end{Display}
+@end{DescribeCode}
+
+
+@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Reverse]}}
+@LabeledAddedSubClause{Version=[2],Name=[function Has_Reverse]}
+@begin{Discussion}
+@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
+change all of the following clause numbers, so this is a subclause temporarily.]}
+@end{Discussion}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[@key[function] @AdaSubDefn{Has_Reverse} ( Element : @key[in] Asis.Element ) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[Element specifies the Element to query.]}
+
+@ChgAdded{Version=[2], Text=[Returns True if the reserved word @key[reverse] appears in Element, and
+False otherwise.]}
+
+@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including a Nil_Element.]}
+
+@ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Declaration_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_Loop_Parameter_Specification]}
+@end{Display}
+@end{DescribeCode}
+
+
+@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Synchronized]}}
+@LabeledAddedSubClause{Version=[2],Name=[function Has_Synchronized]}
+@begin{Discussion}
+@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
+change all of the following clause numbers, so this is a subclause temporarily.]}
+@end{Discussion}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[@key[function] @AdaSubDefn{Has_Synchronized} ( Element : @key[in] Asis.Element ) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[Element specifies the Element to query.]}
+
+@ChgAdded{Version=[2], Text=[Returns True if the reserved word @key[synchronized]
+appears in Element, and False otherwise.]}
+
+@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including
+a Nil_Element.]}
+
+@ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Definition_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  An_Interface_Type_Definition
+  A_Private_Extension_Definition]}
+@end{Display}
+@end{DescribeCode}
+
+
+@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Tagged]}}
+@LabeledAddedSubClause{Version=[2],Name=[function Has_Tagged]}
+@begin{Discussion}
+@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
+change all of the following clause numbers, so this is a subclause temporarily.]}
+@end{Discussion}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[@key[function] @AdaSubDefn{Has_Tagged} ( Element : @key[in] Asis.Element ) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[Element specifies the Element to query.]}
+
+@ChgAdded{Version=[2], Text=[Returns True if the reserved word @key[tagged] appears in Element, and
+False otherwise.]}
+
+@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including a Nil_Element.]}
+
+@ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Definition_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_Tagged_Incomplete_Type_Definition
+  A_Tagged_Private_Type_Definition
+  A_Tagged_Record_Type_Definition]}
+@end{Display}
+
+@ChgAdded{Version=[2], Text=[or an element that has one of the following Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_Tagged_Record_Type_Definition]}
+@end{Display}
+
+@ChgAdded{Version=[2], Text=[or an element that has one of the following Formal_Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_Formal_Tagged_Private_Type_Definition]}
+@end{Display}
+@end{DescribeCode}
+
+
+
+@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Task]}}
+@LabeledAddedSubClause{Version=[2],Name=[function Has_Task]}
+@begin{Discussion}
+@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
+change all of the following clause numbers, so this is a subclause temporarily.]}
+@end{Discussion}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[@key[function] @AdaSubDefn{Has_Task} ( Element : @key[in] Asis.Element ) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0022-1]}
+@ChgAdded{Version=[2], Text=[Element specifies the Element to query.]}
+
+@ChgAdded{Version=[2], Text=[Returns True if the reserved word @key[task] appears in Element, and
+False otherwise.]}
+
+@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including a Nil_Element.]}
+
+@ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Definition_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  An_Interface_Type_Definition
+  A_Task_Definition]}
+@end{Display}
+
+@ChgAdded{Version=[2], Text=[or an element that has one of the following Declaration_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_Task_Type_Declaration
+  A_Single_task_Declaration
+  A_Task_Body_Declaration]}
+@end{Display}
+@end{DescribeCode}
+
+@comment{End of SI99-0022-1 function inserts}
 
 
 @LabeledClause{function Declaration_Origin}
@@ -660,11 +1013,10 @@ An_Access_Type_Definition
 
 @ChgNote{ SI99-0004-1 }
 @Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Null_Exclusion]}}
-@*@thickline@*
-@ChgAdded{Version=[2],Text=[@b{@grow{@grow{13.xx function Has_Null_Exclusion}}}]}
+@LabeledAddedSubClause{Version=[2],Name=[function Has_Null_Exclusion]}
 @begin{Discussion}
 @ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers]}
+change all of the following clause numbers, so this is a subclause temporarily.]}
 @end{Discussion}
 
 @begin{DescribeCode}
@@ -719,11 +1071,10 @@ An_Object_Renaming_Declaration]}
 
 @ChgNote{ SI99-0004-1 }
 @Comment{@LabeledAddedClause{Version=[2],Name=[function Access_Definition_Kind]}}
-@*@thickline@*
-@ChgAdded{Version=[2],Text=[@b{@grow{@grow{13.xx function Access_Definition_Kind}}}]}
+@LabeledAddedSubClause{Version=[2],Name=[function Access_Definition_Kind]}
 @begin{Discussion}
 @ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers]}
+change all of the following clause numbers, so this is a subclause temporarily.]}
 @end{Discussion}
 
 @begin{DescribeCode}
@@ -756,11 +1107,10 @@ element that has one of the following Element_Kinds:]}
 
 @ChgNote{ SI99-0013-1 }
 @Comment{@LabeledAddedClause{Version=[2],Name=[function Interface_Kind]}}
-@*@thickline@*
-@ChgAdded{Version=[2],Text=[@b{@grow{@grow{13.xx function Interface_Kind}}}]}
+@LabeledAddedSubClause{Version=[2],Name=[function Interface_Kind]}
 @begin{Discussion}
 @ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers]}
+change all of the following clause numbers, so this is a subclause temporarily.]}
 @end{Discussion}
 
 
@@ -1170,8 +1520,9 @@ query.
 Returns True for any Element that is, or that forms part of, any
 implicitly declared or specified program Element structure.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Returns True for any implicit generic child unit specifications or their
-subcomponents. Reference Manual 10.1.1(19).
+subcomponents. @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.1(19).
 
 Returns False for a Nil_Element, or any Element that correspond to text
 which was specified explicitly (typed, entered, written).
@@ -1188,27 +1539,31 @@ another declaration which occurs explicitly within the generic template.
 language:
 
 @begin{Itemize}
-Reference Manual 4.5.(9)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 4.5.(9)
 
 @begin{InnerItemize}
 All predefined operator declarations and their component elements are
 Is_Part_Of_Implicit
 @end{InnerItemize}
 
-Reference Manual 3.4(16)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.4(16)
 
 @begin{InnerItemize}
 Implicit predefined operators of the derived type.
 @end{InnerItemize}
 
-Reference Manual 3.4(17-22)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.4(17-22)
 
 @begin{InnerItemize}
 Implicit inherited subprogram declarations and their component elements are
  Is_Part_Of_Implicit
 @end{InnerItemize}
 
-Reference Manual 6.4(9) and 12.3(7)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 6.4(9) and 12.3(7)
 
 @begin{InnerItemize}
 Implicit actual parameter expressions (defaults).
@@ -1227,7 +1582,8 @@ All A_Parameter_Association Kinds from a Normalized list are
 Is_Part_Of_Implicit.
 @end{InnerItemize}
 
-Reference Manual 6.6 (6)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 6.6 (6)
 
 @begin{InnerItemize}
 Inequality operator declarations for limited private types are
@@ -1239,7 +1595,8 @@ test as Is_Part_Of_Implicit because they do not represent text from the
 original compilation text.
 @end{InnerItemize}
 
-Reference Manual 12.3 (16)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 12.3 (16)
 
 @begin{InnerItemize}
 implicit generic instance specifications and bodies are not
@@ -1282,8 +1639,10 @@ instance or an implicit generic body instance.
 Returns False for explicit, inherited, and predefined Elements that are
 not the result of a generic expansion.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Returns False for any implicit generic child unit specifications or
-their subcomponents. Reference Manual 10.1.1(19).
+their subcomponents. @Chg{Version=[2],New=[Ada Standard],Old=[Reference
+Manual]} 10.1.1(19).
 
 Returns False for a Nil_Element.
 
@@ -1294,11 +1653,10 @@ encountered while traversing a generic instance.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0012-1]}
 @Comment{@LabeledAddedClause{Version=[2],Name=[function Is_Null_Procedure]}}
-@*@thickline@*
-@ChgAdded{Version=[2],Text=[@b{@grow{@grow{13.xx function Is_Null_Procedure}}}]}
+@LabeledAddedSubClause{Version=[2],Name=[function Is_Null_Procedure]}
 @begin{Discussion}
 @ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers]}
+change all of the following clause numbers, so this is a subclause temporarily.]}
 @end{Discussion}
 
 @begin{DescribeCode}
@@ -1349,11 +1707,10 @@ formal procedures can be null.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0012-1]}
 @Comment{@LabeledAddedClause{Version=[2],Name=[function Is_Abstract_Subprogram]}}
-@*@thickline@*
-@ChgAdded{Version=[2],Text=[@b{@grow{@grow{13.xx function Is_Abstract_Subprogram}}}]}
+@LabeledAddedSubClause{Version=[2],Name=[function Is_Abstract_Subprogram]}
 @begin{Discussion}
 @ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers]}
+change all of the following clause numbers, so this is a subclause temporarily.]}
 @end{Discussion}
 
 @begin{DescribeCode}
@@ -1456,11 +1813,13 @@ Given the An_Expression/An_Identifier selector from an expanded name,
 returns the An_Expression/A_Selected_Component that represents the
 combination of the prefix, the dot, and the selector.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Given the A_Declaration corresponding to the implicit redeclaration of
 a child generic for an instantiated parent generic, returns the expanded
 generic specific template from the parent generic instantiation
 corresponding to any implicit generic child unit specification given as
-an argument. Reference Manual 10.1.1(19).
+an argument. @Chg{Version=[2],
+New=[Ada Standard],Old=[Reference Manual]} 10.1.1(19).
 @end{Itemize}
 @end{Examples}
 

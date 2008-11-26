@@ -1,6 +1,6 @@
 @Part(text, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/text.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2007/08/05 01:46:39 $}
+@comment{$Revision: 1.6 $ $Date: 2008/10/25 05:28:50 $}
 
 @LabeledSection{package Asis.Text}
 
@@ -153,11 +153,11 @@ facilitates the capture of comments before or after an element.
 
 @begin{SingleNote}
 The original compilation unit text may or may not have existed in a
-"file", and any such file may or may not still exist. Reference Manual 10.1
-specifies that the text of a compilation unit is submitted to a compiler. It
-does not specify that the text is stored in a "file", nor does it specify that
-the text of a compilation unit has any particular lifetime.
-@end{SingleNote}
+"file", and any such file may or may not still exist. @Chg{Version=[2],New=[Ada
+Standard],Old=[Reference Manual]} 10.1 specifies that the text of a compilation
+unit is submitted to a compiler. It does not specify that the text is stored in
+a "file", nor does it specify that the text of a compilation unit has any
+particular lifetime. @end{SingleNote}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -196,9 +196,10 @@ Returns 0 if not Is_Text_Available(Element).
 The line number recorded for a particular element may or may not match the
 "true" line number of the program text for that element if the Ada environment
 and the local text editors do not agree on the definition of "line". For
-example, the Reference Manual states that any occurrence of an Ascii.Cr character
-is to be treated as one or more end-of-line occurrences. On most Unix systems,
-the editors do not treat a carriage return as being an end-of-line character.
+example, the @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} states
+that any occurrence of an Ascii.Cr character is to be treated as one or more
+end-of-line occurrences. On most Unix systems, the editors do not treat a
+carriage return as being an end-of-line character.
 
 @noprefix@;Ada treats all of the following as end-of-line characters: Ascii.Cr,
 Ascii.Lf, Ascii.Ff, Ascii.Vt. It is up to the compilation system to

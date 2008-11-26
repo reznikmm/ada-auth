@@ -1,12 +1,13 @@
 @Part(data, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/data.mss,v $}
-@comment{$Revision: 1.8 $ $Date: 2008/02/06 06:23:47 $}
+@comment{$Revision: 1.9 $ $Date: 2008/10/25 05:28:50 $}
 
 @LabeledSection{package Asis.Data_Decomposition (optional)}
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
 @Chg{Version=[1],New=[The library package @ChildUnit{Parent=[Asis],Child=[Data_Decomposition]}Asis.Data_Decomposition
-may exist. If it existis, the package
+may exist. If it @Chg{Version=[2], New=[exists], Old=[existis]},, the package
 shall provide interfaces equivalent to those described in the
 following subclauses.],
 Old=[@f{@key[package] @ChildUnit{Parent=[Asis],Child=[Data_Decomposition]}Asis.Data_Decomposition @key[is]}]}
@@ -15,17 +16,23 @@ Old=[@f{@key[package] @ChildUnit{Parent=[Asis],Child=[Data_Decomposition]}Asis.D
 
 This package is optional.
 
-Operations to decompose data values using the ASIS type information and a
-Portable_Data stream, representing a data value of that type.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
+@Chg{Version=[2], New=[The operations provided by this package
+may be used to determine the layout of a record or array type in cases where
+this information is known statically.], Old=[Operations to decompose data values
+using the ASIS type information and a Portable_Data stream, representing a data
+value of that type.]}
 
-An application can write data, using the Asis.Data_Decomposition.Portable_Transfer
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2], Text=[An application can write data, using the Asis.Data_Decomposition.Portable_Transfer
 package to an external medium for later retrieval by another application. The
 second application reads that data and then uses this package to convert that data
 into useful information. Simple discrete scalar types can be converted
 directly into useful information. Composite types, such as records and arrays,
-shall first be broken into their various discriminants and components.
+shall first be broken into their various discriminants and components.]}
 
-A data stream representing a record value can be decomposed into a group
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2], Text=[A data stream representing a record value can be decomposed into a group
 of discriminant and component data streams by extracting those streams from
 the record's data stream. This extraction is performed by applying any of
 the Record_Components which describe the discriminants and components of
@@ -33,22 +40,24 @@ the record type. Each discriminant and each component of a record type is
 described by a Record_Component value. Each value encapsulates the
 information needed, by the implementation, to efficiently extract the
 associated field from a data stream representing a record value of the
-correct type.
+correct type.]}
 
-A data stream representing an array value can be decomposed into a group of
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2], Text=[A data stream representing an array value can be decomposed into a group of
 component data streams by extracting those streams from the array's data
 stream. This extraction is performed by applying the single
 Array_Component which describes the components of the array type. One
 Array_Component value is used to describe all array components. The value
 encapsulates the information needed, by the implementation, to efficiently
-extract any of the array components.
+extract any of the array components.]}
 
 @leading@keepnext@;Assumptions and Limitations of this Interface:
 @begin{Enumerate}
-The data stream is appropriate for the ASIS host machine. For example,
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2], Text=[The data stream is appropriate for the ASIS host machine. For example,
 the implementation of this interface will not need to worry about
 byte flipping or reordering of bits caused by movement of data between
-machine architectures.
+machine architectures.]}
 
 Records, arrays, and their components may be packed.
 
@@ -131,6 +140,7 @@ I : Integer := Some_Function;
 X : Access_Array := @key[new] Heap_Array (1 .. 100);
 @end{ChildExample}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
 @Comment{Start item 3}@leading@;Complex, externally "discriminated" records,
 contain one or more components whose size or position depends on the value of
 one or more non-static external values (values not stored within instances of
@@ -138,6 +148,9 @@ the type) at execution time. The size for a value of the type cannot be
 determined without reference to these external values, whose runtime values are
 not known to the ASIS Context and cannot be automatically recorded by the
 Asis.Data_Decomposition.Portable_Transfer generics. For example:
+Asis.Data_Decomposition.Portable_Transfer generics. @ChgAdded{Version=[2], Text=[A class-wide type also falls in this category,
+as does an array type with a dynamic component size.]}
+For example:
 
 @begin{ChildExample}
 N : Natural := Function_Call();
@@ -156,13 +169,14 @@ N : Natural := Function_Call();
 
 General Usage Rules:
 
-All operations in this package will attempt to detect the use of invalid
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[All operations in this package will attempt to detect the use of invalid
 data streams. A data stream is "invalid" if an operation determines that
 the stream could not possibly represent a value of the expected variety.
 Possible errors are: stream is of incorrect length, stream contains bit
 patterns which are illegal, etc. The exception ASIS_Inappropriate_Element
 is raised in these cases. The Status value is Data_Error. The
-Diagnosis string will indicate the kind of error detected.
+Diagnosis string will indicate the kind of error detected.]}
 
 All implementations will handle arrays with a minimum of 16 dimensions,
 or the number of dimensions allowed by their compiler, whichever is
@@ -326,9 +340,10 @@ in indexing an N dimensional array with a single index value.
 Iterators can be copied. The copies operate independently (have separate
 state).
 
-@leading@keepnext@;An example:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[An example:]}
 @begin{Example}
-@key[declare]
+@ChgDeleted{Version=[2],Text=[@key[declare]
    Component        : Array_Component := ...;
    Iter             : Array_Component_Iterator;
    Array_Stream     : Portable_Data (...) := ...;
@@ -339,10 +354,9 @@ state).
       Component_Stream := Component_Data_Stream (Iter, Array_Stream);
       Next (Iter);
    @key[end loop];
-@key[end];
+@key[end];]}
 @end{Example}
 
-@ChgAdded{Version=[2],Text=[@b{@i{We need some separator between the example and the definition - RLB}}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -353,117 +367,127 @@ state).
 @end{DescribeCode}
 
 
-@LabeledClause{type Portable_Data}
+@ChgNote{SI99-0035-1 remove type}
+@LabeledRevisedClause{Version=[2],New=[obsolete type Portable_Data],
+Old=[type Portable_Data]}
+@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
+removing it now would change all of the clause numbers,
+and that would make a mess for editing and reference purposes. Ultimately,
+when the final standard is produced, it will be removed. - RLB}}]}
 
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[Portable_Data represents an ordered "stream" of data values.]}
 
-Portable_Data represents an ordered "stream" of data values.
-
-The portable representation for application data is an array of data
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[The portable representation for application data is an array of data
 values. This portable data representation is guaranteed to be valid when
 written, and later read, on the same machine architecture, using the same
 implementor's compiler and runtime system. Portability of the data
 values, across implementations and architectures, is not guaranteed.
 Some implementors may be able to provide data values which are portable
-across a larger subset of their supported machine architectures.
+across a larger subset of their supported machine architectures.]}
 
-Some of the problems encountered when changing architectures are: bit
+@ChgDeleted{Version=[2],Text=[Some of the problems encountered when changing architectures are: bit
 order, byte order, floating point representation, and alignment
 constraints. Some of the problems encountered when changing runtime
 systems or implementations are: type representation, optimization,
-record padding, and other I/O subsystem implementation variations.
+record padding, and other I/O subsystem implementation variations.]}
 
-@leading@;The nature of these data values is deliberately unspecified. An
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[The nature of these data values is deliberately unspecified. An
 implementor will choose a data value type that is suitable for the
 expected uses of these arrays and data values. Arrays and data
-values have these uses:
+values have these uses:]}
 
 @begin{Enumerate}
-Array values are used in conjunction with the
+@ChgDeleted{Version=[2],Text=[Array values are used in conjunction with the
    Asis.Data_Decomposition interface. The data value type should be
    readily decomposable, by that package, so that array and record
    components can be efficiently extracted from a data stream represented
-   by this array type. The efficiency of that interface is a priority.
+   by this array type. The efficiency of that interface is a priority.]}
 
-@leading@;The data value type is read and written by applications. It
-   should have a size that makes efficient I/O possible. Applications can
-   be expected to perform I/O in any or all of these ways:
+@ChgDeleted{Version=[2],Type=[Leading],Text=[The data value type is read and
+   written by applications. It should have a size that makes efficient I/O
+   possible. Applications can be expected to perform I/O in any or all of these
+   ways:]}
 
 @begin{InnerEnumerate}
-Ada.Sequential_Io or Ada.Direct_Io could be used to read or write
-      these values.
+@ChgDeleted{Version=[2],Text=[Ada.Sequential_Io or Ada.Direct_Io could be used to read or write
+      these values.]}
 
-Individual values may be placed inside other types and those types
-      may be read or written.
+@ChgDeleted{Version=[2],Text=[Individual values may be placed inside other types and those types
+      may be read or written.]}
 
-The 'Address of a data value, plus the 'Size of the data value
+@ChgDeleted{Version=[2],Text=[The 'Address of a data value, plus the 'Size of the data value
       type, may be used to perform low level system I/O. Note: This
       requires the 'Size of the type and the 'Size of a variable of that
-      type to be the same for some implementations.
+      type to be the same for some implementations.]}
 
-Individual values may be passed through Unchecked_Conversion in
+@ChgDeleted{Version=[2],Text=[Individual values may be passed through Unchecked_Conversion in
       order to obtain a different value type, of the same 'Size, suitable
       for use with some user I/O facility. This usage is non-portable
-      across implementations.
+      across implementations.]}
 @end{InnerEnumerate}
 
-@leading@;Array values are read and written by applications. The data value
+@ChgDeleted{Version=[2],Type=[Leading],Text=[Array values are read and written by applications. The data value
    type should have a size that makes efficient I/O possible.
-   Applications can be expected to perform I/O in any or all of these ways:
+   Applications can be expected to perform I/O in any or all of these ways:]}
 
 @begin{InnerEnumerate}
-Ada.Sequential_Io or Ada.Direct_Io could be used to read or write a
-      constrained array subtype.
+@ChgDeleted{Version=[2],Text=[Ada.Sequential_Io or Ada.Direct_Io could be used to read or write a
+      constrained array subtype.]}
 
-Array values may be placed inside other types and those types may
-      be read and written.
+@ChgDeleted{Version=[2],Text=[Array values may be placed inside other types and those types may
+      be read and written.]}
 
-The 'Address of the first array value, plus the 'Length of the
+@ChgDeleted{Version=[2],Text=[The 'Address of the first array value, plus the 'Length of the
       array times the 'Size of the values, may be used to perform low
       level system I/O. Note: This implies that the array type is
       unpacked, or, that the packed array type has no "padding" (e.g.,
       groups of five 6-bit values packed into 32-bit words with 2 bits
-      of padding every 5 elements).
+      of padding every 5 elements).]}
 
-Array values may be passed through Unchecked_Conversion in order to
+@ChgDeleted{Version=[2],Text=[Array values may be passed through Unchecked_Conversion in order to
       obtain an array value, with a different value type, suitable for
       use with some user I/O facility. This usage is non-portable across
-      implementations.
+      implementations.]}
 @end{InnerEnumerate}
 @end{Enumerate}
 
-The data value type should be chosen so that the 'Address of the first
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[The data value type should be chosen so that the 'Address of the first
 array data value is also the 'Address of the first storage unit containing
 array data. This is especially necessary for target architectures where
 the "bit" instructions address bits in the opposite direction as that used
 by normal machine memory (or array component) indexing. A recommended
-'Size is System.Storage_Unit (or a multiple of that size).
+'Size is System.Storage_Unit (or a multiple of that size).]}
 
-Implementations that do not support Unchecked_Conversion of array values,
+@ChgDeleted{Version=[2],Text=[Implementations that do not support Unchecked_Conversion of array values,
 or which do not guarantee that Unchecked_Conversion of array values will
 always "do the right thing" (convert only the data, and not the dope vector
 information), should provide warnings in their ASIS documentation that
-detail possible consequences and work-arounds.
+detail possible consequences and work-arounds.]}
 
-The index range for the Portable_Data type shall be a numeric type whose
+@ChgDeleted{Version=[2],Text=[The index range for the Portable_Data type shall be a numeric type whose
 range is large enough to encompass the Portable_Data representation for all
-possible runtime data values.
+possible runtime data values.]}
 
-All conversion interfaces always return Portable_Data array values with a
-'First of one (1).
+@ChgDeleted{Version=[2],Text=[All conversion interfaces always return Portable_Data array values with a
+'First of one (1).]}
 
-The Portable_Value type may be implemented in any way
-whatsoever. It need not be a numeric type.
+@ChgDeleted{Version=[2],Text=[The Portable_Value type may be implemented in any way
+whatsoever. It need not be a numeric type.]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[type] @AdaTypeDefn{Portable_Value} @key[is] @i{(Implementation_Defined)};
+@ChgDeleted{Version=[2],Text=[@key[type] @AdaTypeDefn{Portable_Value} @key[is] @i{(Implementation_Defined)};]}
 
-@key[subtype] @AdaSubTypeDefn{Name=[Portable_Positive],Of=[Asis.ASIS_Positive]} @key[is] Asis.ASIS_Positive
-   @key[range] 1 .. @i{Implementation_Defined_Integer_Constant};
+@ChgDeleted{Version=[2],Text=[@key[subtype] @AdaSubTypeDefn{Name=[Portable_Positive],Of=[Asis.ASIS_Positive]} @key[is] Asis.ASIS_Positive
+   @key[range] 1 .. @i{Implementation_Defined_Integer_Constant};]}
 
-@key[type] @AdaTypeDefn{Portable_Data} @key[is array] (Portable_Positive @key[range] <>) @key[of] Portable_Value;
+@ChgDeleted{Version=[2],Text=[@key[type] @AdaTypeDefn{Portable_Data} @key[is array] (Portable_Positive @key[range] <>) @key[of] Portable_Value;]}
 
-@AdaObjDefn{Nil_Portable_Data} : Portable_Data (1 .. 0);
+@ChgDeleted{Version=[2],Text=[@AdaObjDefn{Nil_Portable_Data} : Portable_Data (1 .. 0);]}
 @end{Example}
 @end{DescribeCode}
 
@@ -631,9 +655,11 @@ array.
 Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} any
 component.
 
-Returns True if the component has a record subtype.
-Returns False for Nil components and any component that is not an embedded
-record.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
+Returns True if the component has a record@Chg{Version=[2], New=[,
+task, or protected subtype.
+Returns True for a task or protected component because such a
+component may have discriminants], Old=[ subtype]}.
 @end{DescribeCode}
 
 
@@ -800,8 +826,9 @@ Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record
 Component @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a component
 which has a record subtype, Is_Record(Component) = True.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
 Returns a list of the discriminants and components for the indicated simple
-static record type. (See rule 6.A above.)
+static record type.@Chg{Version=[2],New=[],Old=[ (See rule 6.A above.)]}
 
 The result describes the locations of the record type's discriminants and
 components. All return components are intended for use with a data stream
@@ -811,8 +838,9 @@ All Is_Record (Component) = True values, having simple static types, are
 appropriate. All return values are valid parameters for all query operations.
 
 @begin{SingleNote}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 If an Ada implementation uses implementation-dependent record
-components (Reference Manual 13.5.1 (15)), then each such component of
+components (@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 13.5.1 (15)), then each such component of
 the record type is included in the result.
 @end{SingleNote}
 
@@ -847,51 +875,60 @@ expected kinds.]}
 @end{DescribeCode}
 
 
-@LabeledClause{function Record_Components (stream)}
+@ChgNote{SI99-0035-1 remove subprogram}
+@LabeledRevisedClause{Version=[2],New=[obsolete function Record_Components (stream)],
+Old=[function Record_Components (stream)]}
+@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
+removing it now would change all of the clause numbers,
+and that would make a mess for editing and reference purposes. Ultimately,
+when the final standard is produced, it will be removed. - RLB}}]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Record_Components}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Record_Components}
             (Type_Definition : @key[in] Asis.Type_Definition;
              Data_Stream     : @key[in] Portable_Data)
-            @key[return] Record_Component_List;
+            @key[return] Record_Component_List;]}
 
-@key[function] @AdaSubDefn{Record_Components}
+@ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Record_Components}
             (Component   : @key[in] Record_Component;
              Data_Stream : @key[in] Portable_Data)
-            @key[return] Record_Component_List;
+            @key[return] Record_Component_List;]}
 
-@key[function] @AdaSubDefn{Record_Components}
+@ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Record_Components}
             (Component   : @key[in] Array_Component;
              Data_Stream : @key[in] Portable_Data)
-            @key[return] Record_Component_List;
+            @key[return] Record_Component_List;]}
 @end{Example}
 
-Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition to query.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition to query.
 Component @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a component which has a record subtype,
                   Is_Record(Component) = True.
 Data_Stream @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} a data stream containing, at least, the
-                  complete set of discriminant or index constraints for the type.
+                  complete set of discriminant or index constraints for the type.]}
 
-Returns a list of the discriminants and components for the indicated record
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[Returns a list of the discriminants and components for the indicated record
 type, using the data stream argument as a guide. The record type shall be
-either a simple static, or a simple dynamic, record type. (See rules 6.A
-and 6.B above.)
+either a simple static, or a simple dynamic, record
+type. (See rules 6.A and 6.B above.)]}
 
-The result describes the locations of the record type's discriminants and
+@ChgDeleted{Version=[2],Text=[The result describes the locations of the record type's discriminants and
 all components of the appropriate variant parts. The contents of the list
-are determined by the discriminant values present in the data stream.
+are determined by the discriminant values present in the data stream.]}
 
-A simple static type will always return the same component list (Is_Equal
+@ChgDeleted{Version=[2],Text=[A simple static type will always return the same component list (Is_Equal
 parts) regardless of the Data_Stream, because the layout of a simple static
 type does not change with changes in discriminant values. A simple dynamic
 type returns different component lists (non-Is_Equal parts) depending on
 the contents of the Data_Stream, because the contents and layout of a
 simple dynamic type changes with changes in discriminant values. All
 return components are intended for use with a data stream representing a
-value of the indicate record type.
+value of the indicate record type.]}
 
-The Data_Stream shall represent a fully discriminated value of the indicated
+@ChgDeleted{Version=[2],Text=[The Data_Stream shall represent a fully discriminated value of the indicated
 record type. The stream may have been read from a file, it may have been
 extracted from some enclosing data stream, or it may be an artificial value
 created by the Construct_Artificial_Data_Stream operation. Only the
@@ -900,24 +937,25 @@ some discriminant fields may need to be checked, depending on the
 complexity of the record type. The best approach, for any application that
 is constructing artificial data streams, is to always provide appropriate
 values for all discriminant fields. It is not necessary to provide values
-for non-discriminant fields.
+for non-discriminant fields.]}
 
-All Is_Record(Component) = True values are appropriate. All return values
-are valid parameters for all query operations.
+@ChgDeleted{Version=[2],Text=[All Is_Record(Component) = True values are appropriate. All return values
+are valid parameters for all query operations.]}
 
 @begin{SingleNote}
-If an Ada implementation uses implementation-dependent record
+@ChgDeleted{Version=[2],Text=[If an Ada implementation uses implementation-dependent record
 components (Reference Manual 13.5.1 (15)), then each such component of the
-record type is included in the result.
+record type is included in the result.]}
 @end{SingleNote}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Element_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[
+@Chg{Version=[2],New=[Type_Definition expects an element
+that has one of the following],Old=[Appropriate]} Element_Kinds:]}
 @begin{Display}
-A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds:
+@ChgDeleted{Version=[2],Text=[A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds:
    A_Derived_Type_Definition       (derived from a record type)
-   A_Record_Type_Definition],Old=[]}
+   A_Record_Type_Definition],Old=[]}]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
@@ -928,12 +966,11 @@ A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds
 A_Record_Type_Definition]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Component expects a component
-that has one of the following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[Appropriate Asis.Data_Decomposition.Type_Model_Kinds:]}
 @begin{Display}
-A_Simple_Static_Model
-A_Simple_Dynamic_Model
+@ChgDeleted{Version=[2],Text=[A_Simple_Static_Model
+A_Simple_Dynamic_Model]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
@@ -961,9 +998,10 @@ Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the array 
 Component @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a
 component which has an array subtype, Is_Array(Component) = True.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
 Returns a single component, describing all components of the indicated
 array type. The array type shall be a simple static, or a simple dynamic
-array type. (See rules 6.A and 6.B above.)
+array type.@Chg{Version=[2],New=[],Old=[ (See rules 6.A and 6.B above.)]}
 
 The result contains all information necessary to index and extract any
 component of a data stream representing a value of the indicated array
@@ -1010,69 +1048,87 @@ expected kinds.]}
 
 @begin{DescribeCode}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgAdded{Version=[2], Text=[@key[function] @AdaSubDefn{Array_Iterator} (Type_Definition : @key[in] Asis.Type_Definition)
+                        @key[return] Array_Component_Iterator;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgAdded{Version=[2], Text=[@key[function] @AdaSubDefn{Array_Iterator} (Component : @key[in] Record_Component)
+                        @key[return] Array_Component_Iterator;]}
+
 @key[function] @AdaSubDefn{Array_Iterator} (Component : @key[in] Array_Component)
                         @key[return] Array_Component_Iterator;
 @end{Example}
 
-Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} an array component to be used for iteration
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
+@Chg{Version=[2], New=[Type_Definition specifies the array type definition to
+query. ],Old=[]}omponent @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]}
+New=[a component which has an array subtype,
+Is_Array (Component) = True.],Old=[an array component to be used for iteration]}
 
 Returns an iterator poised to fetch the 1st component of an array.
 @end{DescribeCode}
 
 
-@LabeledClause{function Component_Data_Stream}
+@ChgNote{SI99-0035-1 remove subprogram}
+@LabeledRevisedClause{Version=[2],New=[obsolete function Component_Data_Stream],
+Old=[function Component_Data_Stream]}
+@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
+removing it now would change all of the clause numbers,
+and that would make a mess for editing and reference purposes. Ultimately,
+when the final standard is produced, it will be removed. - RLB}}]}
+
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Component_Data_Stream}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Component_Data_Stream}
             (Component   : @key[in] Record_Component;
              Data_Stream : @key[in] Portable_Data)
-            @key[return] Portable_Data;
+            @key[return] Portable_Data;]}
 
-@key[function] @AdaSubDefn{Component_Data_Stream}
+@ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Component_Data_Stream}
             (Component   : @key[in] Array_Component;
              Index       : @key[in] Asis.ASIS_Positive;
              Data_Stream : @key[in] Portable_Data)
-            @key[return] Portable_Data;
+            @key[return] Portable_Data;]}
 
-@key[function] @AdaSubDefn{Component_Data_Stream}
+@ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Component_Data_Stream}
             (Component   : @key[in] Array_Component;
              Indexes     : @key[in] Dimension_Indexes;
              Data_Stream : @key[in] Portable_Data)
-            @key[return] Portable_Data;
+            @key[return] Portable_Data;]}
 
-@key[function] @AdaSubDefn{Component_Data_Stream}
+@ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Component_Data_Stream}
             (Iterator    : @key[in] Array_Component_Iterator;
              Data_Stream : @key[in] Portable_Data)
-            @key[return] Portable_Data;
+            @key[return] Portable_Data;]}
 @end{Example}
 
-Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component or discriminant to be extracted.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component or discriminant to be extracted.
 Index @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} an index, 1..Array_Length, within an array.
 Indexes @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} a list of index values, there is one value for
               each dimension of the array type, each index N is in the
               range 1..Array_Length (Component, N);.
 Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the array component to extract.
-Data_Stream @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the data stream from which to extract the result.
+Data_Stream @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the data stream from which to extract the result.]}
 
-Returns a data stream representing just the value of the chosen Component.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[Returns a data stream representing just the value of the chosen Component.
 The return value is sliced from the data stream. The Data_Stream shall
 represent a value of the appropriate type. It may have been obtained from
 a file, extracted from another data stream, or artificially constructed
-using the Construct_Artificial_Data_Stream operation.
+using the Construct_Artificial_Data_Stream operation.]}
 
-An artificial data stream may raise ASIS_Inappropriate_Element (the Status
+@ChgDeleted{Version=[2],Text=[An artificial data stream may raise ASIS_Inappropriate_Element (the Status
 is Value_Error). Only the constraint values are valid, once they
 have been properly initialized, and can be safely extracted from an
-artificial data stream.
+artificial data stream.]}
 
-Raises ASIS_Inappropriate_Element if given a Nil_Array_Component_Iterator
+@ChgDeleted{Version=[2],Text=[Raises ASIS_Inappropriate_Element if given a Nil_Array_Component_Iterator
 or one where Done(Iterator) = True. The Status value is Data_Error.
-The Diagnosis string will indicate the kind of error detected.
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@Chg{Version=[2], New=[Component expects any kind of non-Nil component.],
-Old=[All non-Nil component values are appropriate.]}
+The Diagnosis string will indicate the kind of error detected.]}
 @end{DescribeCode}
 
 
@@ -1086,12 +1142,13 @@ Old=[All non-Nil component values are appropriate.]}
 
 Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component to be queried
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Returns an Asis.Declaration, which is either A_Component_Declaration
 or A_Discriminant_Specification. These values can be used to determine the
 subtype, type, and base type of the record component. The result may be an
 explicit declaration made by the user, or, it may be an implicit
-component declaration for an implementation-defined component (Reference Manual
-13.5.1(15)).
+component declaration for an implementation-defined component (@Chg{Version=[2],
+New=[Ada Standard],Old=[Reference Manual]} 13.5.1(15)).
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @Chg{Version=[2], New=[Component expects any kind of non-Nil component.],
@@ -1152,12 +1209,13 @@ A_Subtype_Indication
 
 Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition to query.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Returns a list of all discriminant and component entity names defined by
 the record type. All record type definitions are appropriate for this
 operation. This query provides a means for determining whether a field,
 with a particular name, exists for some possible instance of the record
 type. This list does not include the names of implementation-defined
-components (Reference Manual 13.5.1 (15)); those name have the form of
+components (@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 13.5.1 (15)); those name have the form of
 An_Attribute_Reference expression.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1305,46 +1363,50 @@ padding bits which are necessary to fully occupy the space allotted.
 @end{UsageNote}
 
 
-@LabeledClause{function Size (stream)}
+@ChgNote{SI99-0035-1 remove subprogram}
+@LabeledRevisedClause{Version=[2],New=[obsolete function Size (stream)],
+Old=[function Size (stream)]}
+@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
+removing it now would change all of the clause numbers,
+and that would make a mess for editing and reference purposes. Ultimately,
+when the final standard is produced, it will be removed. - RLB}}]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Size} (Type_Definition : @key[in] Asis.Type_Definition;
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Size} (Type_Definition : @key[in] Asis.Type_Definition;
                Data_Stream     : @key[in] Portable_Data)
-              @key[return] Asis.ASIS_Natural;
+              @key[return] Asis.ASIS_Natural;]}
 @end{Example}
 
-Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the type definition to query.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the type definition to query.
 Data_Stream @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} a data stream containing, at least, the complete
-set of discriminant or index constraints for the type.
+set of discriminant or index constraints for the type.]}
 
-Returns the 'Size of a value of this type, with these constraints. This is
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[Returns the 'Size of a value of this type, with these constraints. This is
 the minimum number of bits that is needed to hold any possible value of the
 given fully constrained subtype. Only the constraint portion of the
-Data_Stream is checked.
+Data_Stream is checked.]}
 
-The Data_Stream may be a data stream or it may be an artificial
-data stream created by the Construct_Artificial_Data_Stream operation.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[The Data_Stream may be a data stream or it may be an artificial
+data stream created by the Construct_Artificial_Data_Stream operation.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-that has the following],Old=[Appropriate]} Element_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Element_Kinds:]}
 @begin{Display}
-A_Type_Definition
+@ChgDeleted{Version=[2],Text=[A_Type_Definition]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[and Type_Definition expects an element
-that has the following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate
+Asis.Data_Decomposition.Type_Model_Kinds:]}
 @begin{Display}
-A_Simple_Static_Model
-A_Simple_Dynamic_Model
+@ChgDeleted{Version=[2],Text=[A_Simple_Static_Model
+A_Simple_Dynamic_Model]}
 @end{Display}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
 @end{DescribeCode}
 
 
@@ -1472,81 +1534,92 @@ be Data_Error. The Diagnosis string will indicate the kind of error detected.
 @end{DescribeCode}
 
 
-@LabeledClause{function Portable_Constrained_Subtype}
+@ChgNote{SI99-0035-1 remove subprogram}
+@Chg{Version=[2],New=[],Old=[@b<@i<obsolete function Portable_Constrained_Subtype>>]}
+@ChgAdded{Version=[2],Text=[@b{@i{This clause header was removed as there are
+no remaining clauses after it. - RLB}}]}
 
-Generic for Data Stream Conversions.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[Generic for Data Stream Conversions.]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[generic]
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[@key[generic]
     -- @examcom{Ada notation for a constrained subtype.}
     -- @examcom{@key[type] Constrained_Subtype (<>) @key[is private];}
     @key[type] Constrained_Subtype @key[is private];
 @key[function] @AdaSubDefn{Portable_Constrained_Subtype}
             (Data_Stream : @key[in] Portable_Data)
-            @key[return] Constrained_Subtype;
+            @key[return] Constrained_Subtype;]}
 @end{Example}
 
-Data_Stream @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} an extracted
-component of a record.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[Data_Stream @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} an extracted
+component of a record.]}
 
-Instantiated with an appropriate scalar type, (e.g., System.Integer, can be
-used to convert a data stream to a value that can be directly examined).
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[Instantiated with an appropriate scalar type, (e.g.,
+@Chg{Version=[2], New=[Standard.Integer], Old=[System.Integer]}, can be
+used to convert a data stream to a value that can be directly examined).]}
 
-Instantiated with a record type, can be used to convert a data stream to a
-value that can be directly examined.
+@ChgDeleted{Version=[2],Text=[Instantiated with a record type, can be used to convert a data stream to a
+value that can be directly examined.]}
 
-Instantiations with constrained array subtypes may not convert array values
+@ChgDeleted{Version=[2],Text=[Instantiations with constrained array subtypes may not convert array values
 if they were created using the Portable_Array_Type_1,
-Portable_Array_Type_2, or Portable_Array_Type_3 interfaces.
+Portable_Array_Type_2, or Portable_Array_Type_3 interfaces.]}
 
-May raise Constraint_Error if the subtype is a scalar and the converted
-value is not in the subtype's range.
+@ChgDeleted{Version=[2],Text=[May raise Constraint_Error if the subtype is a scalar and the converted
+value is not in the subtype's range.]}
 @end{DescribeCode}
 
 
-@LabeledClause{function Construct_Artificial_Data_Stream}
+@Chg{Version=[2],New=[],Old=[@b<@i<obsolete function Construct_Artificial_Data_Stream>>]}
+@ChgAdded{Version=[2],Text=[@b{@i{This clause header was removed as there are
+no remaining clauses after it. - RLB}}]}
+
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Construct_Artificial_Data_Stream}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Construct_Artificial_Data_Stream}
             (Type_Definition : @key[in] Asis.Type_Definition;
              Data_Stream     : @key[in] Portable_Data;
              Discriminant    : @key[in] Record_Component;
              Value           : @key[in] Portable_Data)
-            @key[return] Portable_Data;
+            @key[return] Portable_Data;]}
 @end{Example}
 
-Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition for the record
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Text=[Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition for the record
 valued data stream being constructed.
 Data_Stream @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} the data stream constructed so far; initially
 specified as the Nil_Portable_Data value.
 Discriminant @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the discriminant of the record type that is
 being set or changed.
 Value @Chg{Version=[1],New=[specifies],Old=[          @en Specifies]} a data stream representing a single
-discriminant value of the appropriate type.
+discriminant value of the appropriate type.]}
 
-Used to artificially construct a data stream which represents the
+@ChgDeleted{Version=[2],Text=[Used to artificially construct a data stream which represents the
 discriminant portion of a fully constrained value of the indicated record
 type. This operation is called once with a value for each discriminant of
 the record type (the order in which the discriminants are specified is not
 important). The return value of each call is used as the input Data_Stream
-for the next.
+for the next.]}
 
-The resulting artificial data stream may be used solely for the purpose of
+@ChgDeleted{Version=[2],Text=[The resulting artificial data stream may be used solely for the purpose of
 creating Record_Component values. The values of any non-discriminant
 fields are arbitrary and quite possibly invalid. The resulting
 component values may then be used for any purpose. In particular, they may
 be used to determine First_Bit, Last_Bit, and Size values for all record
-discriminants and components.
+discriminants and components.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Element_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[
+Appropriate Element_Kinds:]}
 @begin{Display}
-A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds:
-   A_Derived_Type_Definition       (derived from a record type)
-   A_Record_Type_Definition],Old=[]}
+@ChgDeleted{Version=[2],Text=[A_Type_Definition]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
@@ -1557,13 +1630,8 @@ A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds
 A_Record_Type_Definition]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
-
-Raises ASIS_Inappropriate_Element, with a Status of Data_Error, if the
-discriminant Value is inappropriate for the specified Discriminant.
+@ChgDeleted{Version=[2],Text=[Raises ASIS_Inappropriate_Element, with a Status of Data_Error, if the
+discriminant Value is inappropriate for the specified Discriminant.]}
 @end{DescribeCode}
 
 

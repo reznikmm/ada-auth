@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.14 $ $Date: 2008/02/06 06:23:47 $}
+@comment{$Revision: 1.15 $ $Date: 2008/10/25 05:28:50 $}
 
 @LabeledSection{package Asis}
 
@@ -17,16 +17,19 @@ Package Asis is the root of the ASIS interface.
 
 @ChgDeleted{Version=[1],Text=[Abstract]}@Comment{This whole section is intro material}
 
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 The Ada Semantic Interface Specification (ASIS) is an interface between an
-Ada environment as defined by ISO/IEC 8652:1995 (the Ada Reference Manual)
-and any tool requiring information from this environment. An Ada environment
-includes valuable semantic and syntactic information. ASIS is an open and
-published callable interface which gives CASE tool and application
-developers access to this information. ASIS has been designed to be
-independent of underlying Ada environment implementations, thus supporting
-portability of software engineering tools while relieving tool developers
-from having to understand the complexities of an Ada environment's
-proprietary internal representation.
+Ada environment as defined by @Chg{Version=[2], New=[the Ada Standard (ISO/IEC
+8652:1995(E) and later documents)], Old=[ISO/IEC 8652:1995 (the Ada Reference
+Manual)]} and any tool requiring information from this environment. An Ada
+environment includes valuable semantic and syntactic information. ASIS is an
+open and published callable interface which gives CASE tool and application
+developers access to this information. ASIS has been designed to be independent
+of underlying Ada environment implementations, thus supporting portability of
+software engineering tools while relieving tool developers from having to
+understand the complexities of an Ada environment's proprietary internal
+representation.
 
 @ChgDeleted{Version=[1],Text=[Package ASIS Types:]}@Comment{The next line says the same thing}
 
@@ -118,11 +121,12 @@ size.
 
 @LabeledClause{type Context}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 The ASIS @i{Context}@Defn{Context} is a view of a particular implementation
 of an Ada environment. ASIS requires an application to identify that view of
 the Ada environment. An ASIS Context identifies an Ada environment
-as defined by ISO/IEC 8652:1995. The Ada environment is well
-defined for Ada implementations. ISO/IEC 8652:1995 provides for an
+as defined by @Chg{Version=[2], New=[the Ada Standard], Old=[ISO/IEC 8652:1995]}. The Ada environment is well
+defined for Ada implementations. @Chg{Version=[2], New=[the Ada Standard], Old=[ISO/IEC 8652:1995]} provides for an
 implementation-defined method to enter compilation units into the
 Ada environment. Implementation permissions allow for illegal and
 inconsistent units to be in the environment. The use of ASIS may
@@ -320,11 +324,13 @@ additional subordinate kinds.
 
 For example, Element_Kinds'A_Declaration might be classified into
 Declaration_Kinds'A_Parameter_Specification which might be further
-classified into Trait_Kinds'An_Access_Definition_Trait.
+classified into
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0022-1]}
+@Chg{Version=[2], New=[Mode_Kinds'An_In_Mode], Old=[Trait_Kinds'An_Access_Definition_Trait]}.
 This fully identifies the syntax of an element such as:
 
 @begin{Example}
-   (Who : @key[access] Person)
+   (Who : @key[@Chg{Version=[2], New=[in], Old=[access]}] Person)
 @end{Example}
 
 All Element_Kinds and subordinate kinds Queries are in Asis.Elements.
@@ -344,19 +350,21 @@ These are designated within the hierarchy shown below:
        A_Defining_Name       -> Defining_Name_Kinds
                                         -> Operator_Kinds
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0022-1]}
        A_Declaration         -> Declaration_Kinds
-                                        -> Trait_Kinds
-                                        -> Declaration_Origins
+@Chg{Version=[2],New=[],Old=[                                        -> Trait_Kinds
+]}                                        -> Declaration_Origins
                                         -> Mode_Kinds
                                         -> Subprogram_Default_Kinds
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0022-1]}
        A_Definition          -> Definition_Kinds
-                                        -> Trait_Kinds
-                                        -> Type_Kinds
-                                                   -> Trait_Kinds
-                                        -> Formal_Type_Kinds
-                                                   -> Trait_Kinds
-                                        -> Access_Type_Kinds
+@Chg{Version=[2],New=[],Old=[                                                   -> Trait_Kinds
+]}                                        -> Type_Kinds
+@Chg{Version=[2],New=[],Old=[                                                   -> Trait_Kinds
+]}                                        -> Formal_Type_Kinds
+@Chg{Version=[2],New=[],Old=[                                                   -> Trait_Kinds
+]}                                        -> Access_Type_Kinds
                                         -> Root_Type_Kinds
                                         -> Constraint_Kinds
                                         -> Discrete_Range_Kinds
@@ -470,7 +478,7 @@ Literals                          -- @examcom{Reference Manual}]}@Comment{Moved 
    @AdaObjDefn{An_Unknown_Pragma});               -- @examcom{Unknown to ASIS}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each pragma.]}
+the Ada Standard for each pragma.]}
 @end{DescribeCode}
 
 
@@ -495,7 +503,7 @@ specifications.@Chg{Version=[1],New=[],Old=[Literals                            
                                      -- @examcom{program unit name defining_identifier}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each kind of defining name.]}
+the Ada Standard for each defining name.]}
 @end{DescribeCode}
 
 
@@ -516,17 +524,19 @@ literals.@Chg{Version=[1],New=[],Old=[Literals                                 -
       -- @examcom{a full_type_declaration of the form:}
       -- @examcom{@key[type] defining_identifier [known_discriminant_part] @key[is] type_definition;}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0022-1]}
    @AdaObjDefn{A_Task_Type_Declaration},                 -- @examcom{9.1(2)}
    @AdaObjDefn{A_Protected_Type_Declaration},            -- @examcom{9.4(2)}
    @AdaObjDefn{An_Incomplete_Type_Declaration},          -- @examcom{3.2.1(2), 3.10(2)}
-   @AdaObjDefn{A_Private_Type_Declaration},              -- @examcom{3.2.1(2), 7.3(2) -> Trait_Kinds}
-   @AdaObjDefn{A_Private_Extension_Declaration},         -- @examcom{3.2.1(2), 7.3(3) -> Trait_Kinds}
+   @AdaObjDefn{A_Private_Type_Declaration},              -- @examcom{3.2.1(2), 7.3(2) @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
+   @AdaObjDefn{A_Private_Extension_Declaration},         -- @examcom{3.2.1(2), 7.3(3) @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
 
    @AdaObjDefn{A_Subtype_Declaration},                   -- @examcom{3.2.2(2)}
 
-   @AdaObjDefn{A_Variable_Declaration},                  -- @examcom{3.3.1(2) -> Trait_Kinds}
-   @AdaObjDefn{A_Constant_Declaration},                  -- @examcom{3.3.1(4) -> Trait_Kinds}
-   @AdaObjDefn{A_Deferred_Constant_Declaration},         -- @examcom{3.3.1(6), 7.4(2) -> Trait_Kinds}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0022-1]}
+   @AdaObjDefn{A_Variable_Declaration},                  -- @examcom{3.3.1(2) @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
+   @AdaObjDefn{A_Constant_Declaration},                  -- @examcom{3.3.1(4) @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
+   @AdaObjDefn{A_Deferred_Constant_Declaration},         -- @examcom{3.3.1(6), 7.4(2) @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
    @AdaObjDefn{A_Single_Task_Declaration},               -- @examcom{3.3.1(2), 9.1(3)}
    @AdaObjDefn{A_Single_Protected_Declaration},          -- @examcom{3.3.1(2), 9.4(2)}
 
@@ -536,16 +546,19 @@ literals.@Chg{Version=[1],New=[],Old=[Literals                                 -
    @AdaObjDefn{An_Enumeration_Literal_Specification},    -- @examcom{3.5.1(3)}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0010-1]}
-   @AdaObjDefn{A_Discriminant_Specification},            -- @examcom{3.7(5)   -> Trait_Kinds}
+   @AdaObjDefn{A_Discriminant_Specification},            -- @examcom{3.7(5)   @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
    @AdaObjDefn{A_Component_Declaration},                 -- @examcom{3.8(6)}@Chg{Version=[2],New=[
    @AdaObjDefn{A_Return_Object_Specification}            -- @examcom{6.5(2)}],Old=[]}
 
-   @AdaObjDefn{A_Loop_Parameter_Specification},          -- @examcom{5.5(4)   -> Trait_Kinds}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0022-1]}
+   @AdaObjDefn{A_Loop_Parameter_Specification},          -- @examcom{5.5(4)   @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
 
-   @AdaObjDefn{A_Procedure_Declaration},                 -- @examcom{6.1(4)   -> Trait_Kinds}
-   @AdaObjDefn{A_Function_Declaration},                  -- @examcom{6.1(4)   -> Trait_Kinds}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0022-1]}
+   @AdaObjDefn{A_Procedure_Declaration},                 -- @examcom{6.1(4)   @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
+   @AdaObjDefn{A_Function_Declaration},                  -- @examcom{6.1(4)   @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
 
-   @AdaObjDefn{A_Parameter_Specification},               -- @examcom{6.1(15)  -> Trait_Kinds}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0022-1]}
+   @AdaObjDefn{A_Parameter_Specification},               -- @examcom{6.1(15)  @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
                                             -- @examcom{         -> Mode_Kinds}
    @AdaObjDefn{A_Procedure_Body_Declaration},            -- @examcom{6.3(2)}
    @AdaObjDefn{A_Function_Body_Declaration},             -- @examcom{6.3(2)}
@@ -593,8 +606,8 @@ literals.@Chg{Version=[1],New=[],Old=[Literals                                 -
    @AdaObjDefn{A_Formal_Package_Declaration_With_Box});  -- @examcom{12.7(3)}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each kind of declaration; the subordinate kind (if any)
-is given as well.]}
+the Ada Standard for each kind
+of declaration; the subordinate kind (if any) is given as well.]}
 
 @leading@;The following Declaration_Kinds subtypes are not used by ASIS but are
 provided for the convenience of the ASIS implementor:
@@ -633,14 +646,9 @@ provided for the convenience of the ASIS implementor:
 
 
 
-@ChgNote{ SI99-0003-1 }
-@Comment{@LabeledAddedClause{Version=[2],Name=[type Overriding_Indicator_Kinds]}}
-@*@thickline@*
-@ChgAdded{Version=[2],Text=[@b{@grow{@grow{3.9.x type Overriding_Indicator_Kinds}}}]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers]}
-@end{Discussion}
+@ChgNote{ SI99-0003-1 and SI99-0022-1 - Replaced Trait_Kinds with Overriding_Indicator_Kinds}
+@LabeledRevisedSubClause{Version=[2],New=[type Overriding_Indicator_Kinds],
+Old=[type Trait_Kinds]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0003-1]}
 @ChgAdded{Version=[2],Text=[Type Overriding_Indicator_Kinds classifies declarations
@@ -659,101 +667,98 @@ and specifications having an overrriding indicator.]}
 @end{Example}
 @end{DescribeCode}
 
-
-@LabeledSubClause{type Trait_Kinds}
-
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0017-1]}
-Trait_Kinds provide a means of further classifying the syntactic structure
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0017-1],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Text=[Trait_Kinds provide a means of further classifying the syntactic structure
 or @i{trait} of certain A_Declaration and A_Definition elements.@Defn{Trait}
 Trait_Kinds are determined only by the presence (or absence) of certain
-@Chg{Version=[2],New=[syntactic constructs],Old=[reserved words]}. The
-The semantics of an element are not considered.@Chg{Version=[2],New=[],Old=[
+reserved words. The semantics of an element are not considered.
 The reserved words of interest here
 are @key[abstract], @key[aliased], @key[limited], @key[private], @key[reverse], and
 @key[access] when it appears in an access_definition. Trait_Kinds enumerates
 all combinations useful in this classification.]}
 
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0017-1]}
-@Chg{Version=[2],New=[The syntax of interest
-here are the reserved words @key[abstract], @key[aliased],
-@key[limited], @key[private], @key[reverse], whereever they appear, and the reserved
-word @key[access] when it qualifies a definition defining an anonymous type
-(an access_definition).
-Trait_Kinds enumerates all combinations useful in this classification.],
-Old=[For example,
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0017-1],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Text=[For example,
 A_Variable_Declaration element that is semantically a
 limited type because its components are of a limited type is
 An_Ordinary_Trait, not A_Limited_Trait, since the reserved word @key[limited]
 does not appear in its declaration or definition.]}
 
-
-@leading@;The subordinate Trait_Kinds allow Declaration_Kinds and
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[The subordinate Trait_Kinds allow Declaration_Kinds and
 Definition_Kinds to enumerate fewer higher level elements, and be less
 cluttered by all possible permutations of syntactic possibilities. For example,
 in the case of a record_type_definition, Definition_Kinds can provide just two
 literals that differentiate between ordinary record types and tagged record
-types:
+types:]}
 
 @begin{Example}
-   A_Record_Type_Definition,              -- @examcom{3.8(2)    -> Trait_Kinds}
-   A_Tagged_Record_Type_Definition,       -- @examcom{3.8(2)    -> Trait_Kinds}
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[   A_Record_Type_Definition,              -- @examcom{3.8(2)    -> Trait_Kinds}
+   A_Tagged_Record_Type_Definition,       -- @examcom{3.8(2)    -> Trait_Kinds}]}
 @end{Example}
 
-The remaining classification can be accomplished, if desired, using
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Text=[The remaining classification can be accomplished, if desired, using
 Trait_Kinds to determine if the definition is abstract, or limited, or both.
 Without Trait_Kinds, Definition_Kinds needs six literals to identify
-all the syntactic combinations for a record_type_definition.
+all the syntactic combinations for a record_type_definition.]}
 
-@leading@;Elements expected by the Trait_Kind query are any Declaration_Kinds or
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[Elements expected by the Trait_Kind query are any Declaration_Kinds or
 Definition_Kinds for which Trait_Kinds is a subordinate kind: the literal
 definition has "-> Trait_Kinds" following it. For example, the
-definitions of:
+definitions of:]}
 
 @begin{Example}
-   A_Discriminant_Specification,              -- @examcom{3.7(5)   -> Trait_Kinds}
-   A_Component_Declaration,                   -- @examcom{3.8(6)}
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[   A_Discriminant_Specification,              -- @examcom{3.7(5)   -> Trait_Kinds}
+   A_Component_Declaration,                   -- @examcom{3.8(6)}]}
 @end{Example}
 
-indicate A_Discriminant_Specification is an expected kind while
-A_Component_Declaration is unexpected.
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[indicate A_Discriminant_Specification is an expected kind while
+A_Component_Declaration is unexpected.]}
 
-All Declaration_Kinds and Definition_Kinds for which Trait_Kinds is not a
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Text=[All Declaration_Kinds and Definition_Kinds for which Trait_Kinds is not a
 subordinate kind, and all other Element_Kinds, are unexpected and are
-Not_A_Trait.
+Not_A_Trait.]}
 
-An_Ordinary_Trait is any expected element whose syntax does not explicitly
-contain any of the reserved words listed above.
-
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Text=[An_Ordinary_Trait is any expected element whose syntax does not explicitly
+contain any of the reserved words listed above.]}
 
 @Chg{Version=[1],New=[],Old=[Trait_Kinds
 Literals]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[type] @AdaTypeDefn{Trait_Kinds} @key[is] (
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Text=[@key[type] @AdaTypeDefn{Trait_Kinds} @key[is] (]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0017-1]}
-   @AdaObjDefn{Not_A_Trait},                         -- @examcom{An unexpected element}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0017-1],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Text=[   @AdaObjDefn{Not_A_Trait},                         -- @examcom{An unexpected element}
    @AdaObjDefn{An_Ordinary_Trait},                   -- @examcom{The declaration or definition does}
-                                        -- @examcom{@Chg{Version=[2],New=[have any of the following traits],Old=[contain the reserved words]}}@Chg{Version=[2],New=[],Old=[
+                                        -- @examcom{contain the reserved words}
                                         -- @examcom{@key[aliased], @key[reverse], @key[private],}
                                         -- @examcom{@key[limited], @key[abstract], or}
                                         -- @examcom{@key[access] in an access_definition}]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0017-1]}
-   @AdaObjDefn{An_Aliased_Trait},                    -- @examcom{@key[aliased] is present}
-   @AdaObjDefn{An_Access_Definition_Trait},          -- @examcom{@Chg{Version=[2],New=[The definition defines an anonymous access type],Old=[@key[access] in an access_definition is present]}}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0017-1],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Text=[   @AdaObjDefn{An_Aliased_Trait},                    -- @examcom{@key[aliased] is present}
+   @AdaObjDefn{An_Access_Definition_Trait},          -- @examcom{@key[access] in an access_definition is present}
    @AdaObjDefn{A_Reverse_Trait},                     -- @examcom{@key[reverse] is present}
    @AdaObjDefn{A_Private_Trait},                     -- @examcom{Only @key[private] is present}
    @AdaObjDefn{A_Limited_Trait},                     -- @examcom{Only @key[limited] is present}
-   @AdaObjDefn{A_Limited_Private_Trait},             -- @examcom{@key[limited] and @key[private] are present}
+   @AdaObjDefn{A_Limited_Private_Trait},             -- @examcom{@key[limited] and @key[private] are present}]}
 
-   @AdaObjDefn{An_Abstract_Trait},                   -- @examcom{Only @key[abstract] is present}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0022-1]}
+@ChgDeleted{Version=[2],Text=[   @AdaObjDefn{An_Abstract_Trait},                   -- @examcom{Only @key[abstract] is present}
    @AdaObjDefn{An_Abstract_Private_Trait},           -- @examcom{@key[abstract] and @key[private] are present}
    @AdaObjDefn{An_Abstract_Limited_Trait},           -- @examcom{@key[abstract] and @key[limited] are present}
    @AdaObjDefn{An_Abstract_Limited_Private_Trait});  -- @examcom{@key[abstract], @key[limited], and @key[private] are}
-                                        -- @examcom{present}
+                                        -- @examcom{present}]}
 @end{Example}
 @end{DescribeCode}
 
@@ -776,7 +781,7 @@ Literals                             -- @examcom{Reference Manual}]}
    @AdaObjDefn{An_Implicit_Inherited_Declaration});  -- @examcom{3.1(5), 3.4(6-35)}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each declaration origin.]}
+the Ada Standard for each kind of declaration origin.]}
 @end{DescribeCode}
 
 
@@ -806,12 +811,14 @@ Literals                 -- @examcom{Reference Manual}]}
 
 @begin{DescribeCode}
 @begin{Example}
+@Chgref{Version=[2],Kind=[Revised],ARef=[SI99-0034-1]}
 @key[type] @AdaTypeDefn{Subprogram_Default_Kinds} @key[is] (   -- @examcom{12.6@Chg{Version=[1],New=[ in 8652:1995],Old=[]}}
 
    @AdaObjDefn{Not_A_Default},           -- @examcom{An unexpected element}
 
    @AdaObjDefn{A_Name_Default},          -- @examcom{@key[with] subprogram_specification @key[is] default_name;}
    @AdaObjDefn{A_Box_Default},           -- @examcom{@key[with] subprogram_specification @key[is] <>;}
+   @ChgAdded{Version=[2], Text=[@AdaObjDefn{A_Null_Default},          -- @examcom{@key[with] subprogram_specification @key[is] null;}]}
    @AdaObjDefn{A_Nil_Default});          -- @examcom{@key[with] subprogram_specification;}
 @end{Example}
 @end{DescribeCode}
@@ -833,7 +840,8 @@ Literals                          -- @examcom{Reference Manual   -> Subordinate 
    @AdaObjDefn{A_Subtype_Indication},             -- @examcom{3.2.2(3)}
    @AdaObjDefn{A_Constraint},                     -- @examcom{3.2.2(5)    -> Constraint_Kinds}
 
-   @AdaObjDefn{A_Component_Definition},           -- @examcom{3.6(7)      -> Trait_Kinds}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0022-1]}
+   @AdaObjDefn{A_Component_Definition},           -- @examcom{3.6(7)      @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
 
    @AdaObjDefn{A_Discrete_Subtype_Definition},    -- @examcom{3.6(6)      -> Discrete_Range_Kinds}
    @AdaObjDefn{A_Discrete_Range},                 -- @examcom{3.6.1(3)    -> Discrete_Range_Kinds}
@@ -850,14 +858,14 @@ Literals                          -- @examcom{Reference Manual   -> Subordinate 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0011-1],ARef=[SI99-0004-1]}
    @AdaObjDefn{An_Others_Choice},                 -- @examcom{3.8.1(5), 4.3.1(5), 4.3.3(5), 11.2(5)}@Chg{Version=[2],New=[
-   @AdaObjDefn{An_Access_Definition},             -- @examcom{3.3.1(2), 3.6(7), 3.10(6), 6.1(13),}
-                                     -- @examcom{6.5(2), 8.5.1(2), 12.4(2)}
+   @AdaObjDefn{An_Access_Definition},             -- @examcom{3.10(6)}
    @AdaObjDefn{An_Incomplete_Type_Definition},    -- @examcom{3.10.1(1)}
    @AdaObjDefn{A_Tagged_Incomplete_Type_Definition}, -- @examcom{3.10.1(2)}],Old=[]}
 
-   @AdaObjDefn{A_Private_Type_Definition},        -- @examcom{7.3(2)      -> Trait_Kinds}
-   @AdaObjDefn{A_Tagged_Private_Type_Definition}, -- @examcom{7.3(2)      -> Trait_Kinds}
-   @AdaObjDefn{A_Private_Extension_Definition},   -- @examcom{7.3(3)      -> Trait_Kinds}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0022-1]}
+   @AdaObjDefn{A_Private_Type_Definition},        -- @examcom{7.3(2)      @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
+   @AdaObjDefn{A_Tagged_Private_Type_Definition}, -- @examcom{7.3(2)      @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
+   @AdaObjDefn{A_Private_Extension_Definition},   -- @examcom{7.3(3)      @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
 
    @AdaObjDefn{A_Task_Definition},                -- @examcom{9.1(4)}
    @AdaObjDefn{A_Protected_Definition},           -- @examcom{9.4(4)}
@@ -865,7 +873,7 @@ Literals                          -- @examcom{Reference Manual   -> Subordinate 
    @AdaObjDefn{A_Formal_Type_Definition});        -- @examcom{12.5(3)     -> Formal_Type_Kinds}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each kind of definition; the subordinate kind (if any)
+the Ada Standard for each kind of definition; the subordinate kind (if any)
 is given as well.]}
 @end{DescribeCode}
 
@@ -881,8 +889,9 @@ Literals                               -- @examcom{Reference Manual  -> Subordin
 
    @AdaObjDefn{Not_A_Type_Definition},                 -- @examcom{An unexpected element}
 
-   @AdaObjDefn{A_Derived_Type_Definition},             -- @examcom{3.4(2)     -> Trait_Kinds}
-   @AdaObjDefn{A_Derived_Record_Extension_Definition}, -- @examcom{3.4(2)     -> Trait_Kinds}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0022-1]}
+   @AdaObjDefn{A_Derived_Type_Definition},             -- @examcom{3.4(2)     @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
+   @AdaObjDefn{A_Derived_Record_Extension_Definition}, -- @examcom{3.4(2)     @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
 
    @AdaObjDefn{An_Enumeration_Type_Definition},        -- @examcom{3.5.1(2)}
 
@@ -899,15 +908,15 @@ Literals                               -- @examcom{Reference Manual  -> Subordin
    @AdaObjDefn{An_Unconstrained_Array_Definition},     -- @examcom{3.6(2)}
    @AdaObjDefn{A_Constrained_Array_Definition},        -- @examcom{3.6(2)}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0006-1]}
-   @AdaObjDefn{A_Record_Type_Definition},              -- @examcom{3.8(2)     -> Trait_Kinds}
-   @AdaObjDefn{A_Tagged_Record_Type_Definition},       -- @examcom{3.8(2)     -> Trait_Kinds}@Chg{Version=[2],New=[
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0006-1],ARef=[SI99-0022-1]}
+   @AdaObjDefn{A_Record_Type_Definition},              -- @examcom{3.8(2)     @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
+   @AdaObjDefn{A_Tagged_Record_Type_Definition},       -- @examcom{3.8(2)     @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}@Chg{Version=[2],New=[
    @AdaObjDefn{An_Interface_Type_Definition},          -- @examcom{3.9.4 (2)}],Old=[]}
 
    @AdaObjDefn{An_Access_Type_Definition});            -- @examcom{3.10(2)    -> Access_Type_Kinds}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each kind of type; the subordinate kind (if any)
+the Ada Standard for each kind of type; the subordinate kind (if any)
 is given as well.]}
 @end{DescribeCode}
 
@@ -923,10 +932,12 @@ Literals                                  -- @examcom{Reference Manual  -> Subor
 
    @AdaObjDefn{Not_A_Formal_Type_Definition},             -- @examcom{An unexpected element}
 
-   @AdaObjDefn{A_Formal_Private_Type_Definition},         -- @examcom{12.5.1(2)   -> Trait_Kinds}
-   @AdaObjDefn{A_Formal_Tagged_Private_Type_Definition},  -- @examcom{12.5.1(2)   -> Trait_Kinds}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0022-1]}
+   @AdaObjDefn{A_Formal_Private_Type_Definition},         -- @examcom{12.5.1(2)   @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
+   @AdaObjDefn{A_Formal_Tagged_Private_Type_Definition},  -- @examcom{12.5.1(2)   @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
 
-   @AdaObjDefn{A_Formal_Derived_Type_Definition},         -- @examcom{12.5.1(3)   -> Trait_Kinds}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0022-1]}
+   @AdaObjDefn{A_Formal_Derived_Type_Definition},         -- @examcom{12.5.1(3)   @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
 
    @AdaObjDefn{A_Formal_Discrete_Type_Definition},        -- @examcom{12.5.2(2)}
 
@@ -945,7 +956,7 @@ Literals                                  -- @examcom{Reference Manual  -> Subor
    @AdaObjDefn{A_Formal_Interface_Type_Definition});      -- @examcom{12.5.5 (2)}],Old=[]}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each kind of formal type; the subordinate kind (if any)
+the Ada Standard for each kind of formal type; the subordinate kind (if any)
 is given as well.]}
 @end{DescribeCode}
 
@@ -971,7 +982,7 @@ Literals                             -- @examcom{Reference Manual}]}
    @AdaObjDefn{An_Access_To_Protected_Function});    -- @examcom{@key[access protected function]}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each kind of access type.]}
+the Ada Standard for each kind of access type.]}
 
 @leading@;The following Access_Type_Kinds subtypes are not used by ASIS but are
 provided for the convenience of the ASIS implementor:
@@ -987,12 +998,11 @@ provided for the convenience of the ASIS implementor:
 
 
 @ChgNote{SI99-0004-1 added new section}
-@Comment{@LabeledAddedClause{Version=[2],Name=[type Access_Definition_Kinds]}}
-@*@thickline@*
-@ChgAdded{Version=[2],Text=[@b{@grow{@grow{3.9.xx type Access_Definition_Kinds}}}]}
+@Comment{@LabeledAddedSubClause{Version=[2],Name=[type Access_Definition_Kinds]}}
+@LabeledAddedSubSubClause{Version=[2],Name=[type Access_Definition_Kinds]}
 @begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers]}
+@ChgAdded{Version=[2],Text=[Can't use a real subclause for now, as that would
+change all of the following subclause numbers, so this is a subsubclause temporarily.]}
 @end{Discussion}
 
 @begin{DescribeCode}
@@ -1038,12 +1048,14 @@ Literals                               -- @examcom{Reference Manual}]}
    @AdaObjDefn{A_Root_Integer_Definition},             -- @examcom{3.4.1(8)}
    @AdaObjDefn{A_Root_Real_Definition},                -- @examcom{3.4.1(8)}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0032-1]}
    @AdaObjDefn{A_Universal_Integer_Definition},        -- @examcom{3.4.1(6)}
    @AdaObjDefn{A_Universal_Real_Definition},           -- @examcom{3.4.1(6)}
-   @AdaObjDefn{A_Universal_Fixed_Definition});         -- @examcom{3.4.1(6)}
+   @AdaObjDefn{A_Universal_Fixed_Definition},          -- @examcom{3.4.1(6)}@Chg{Version=[2],New=[
+   @AdaObjDefn{A_Universal_Access_Definition});        -- @examcom{3.4.1(6)}],Old=[]}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each kind of root type.]}
+the Ada Standard for each kind of root type.]}
 @end{DescribeCode}
 
 
@@ -1066,7 +1078,7 @@ Literals                               -- @examcom{Reference Manual}]}
    @AdaObjDefn{A_Discriminant_Constraint});            -- @examcom{3.2.2}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each kind of constraint.]}
+the Ada Standard for each kind of constraint.]}
 @end{DescribeCode}
 
 
@@ -1086,17 +1098,16 @@ Literals                               -- @examcom{Reference Manual}]}
    @AdaObjDefn{A_Discrete_Simple_Expression_Range});   -- @examcom{3.6.1, 3.5}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each kind of discrete range.]}
+the Ada Standard for each kind of discrete range.]}
 @end{DescribeCode}
 
 
 @ChgNote{ SI99-0006-1 }
-@Comment{@LabeledAddedClause{Version=[2],Name=[type Interface_Kinds]}}
-@*@thickline@*
-@ChgAdded{Version=[2],Text=[@b{@grow{@grow{3.9.xx type Interface_Kinds}}}]}
+@Comment{@LabeledAddedSubClause{Version=[2],Name=[type Interface_Kinds]}}
+@LabeledAddedSubSubClause{Version=[2],Name=[type Interface_Kinds]}
 @begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers]}
+@ChgAdded{Version=[2],Text=[Can't use a real subclause for now, as that would
+change all of the following subclause numbers, so this is a subsubclause temporarily.]}
 @end{Discussion}
 
 @begin{DescribeCode}
@@ -1132,7 +1143,7 @@ Literals                               -- @examcom{Reference Manual}]}
    @AdaObjDefn{A_Generic_Association});                -- @examcom{12.3}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each kind of association.]}
+the Ada Standard for each kind of association.]}
 @end{DescribeCode}
 
 
@@ -1191,7 +1202,7 @@ Literals                                   -- @examcom{Reference Manual -> Subor
    @AdaObjDefn{An_Allocation_From_Qualified_Expression});  -- @examcom{4.8}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each kind of expression; the subordinate kind (if any)
+the Ada Standard for each kind of expression; the subordinate kind (if any)
 is given as well.]}
 @end{DescribeCode}
 
@@ -1345,9 +1356,8 @@ Literals                       -- @examcom{Reference Manual}]}
    @AdaObjDefn{An_Implementation_Defined_Attribute},  -- @examcom{Reference Manual, Annex M}
    @AdaObjDefn{An_Unknown_Attribute});         -- @examcom{Unknown to ASIS}
 @end{Example}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0018-1]}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC @Chg{Version=[2],New=[8652:2007 ed. 3],Old=[8652:1995]} for each attribute.]}
+the Ada Standard for each attribute.]}
 @end{DescribeCode}
 
 
@@ -1405,7 +1415,7 @@ Literals                             -- @examcom{Reference Manual}]}
    -- @examcom{For compatibility with a prior version of this Standard}]}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each statement.]}
+the Ada Standard for each statement.]}
 @end{DescribeCode}
 
 
@@ -1493,7 +1503,7 @@ of the example. I don't have a good idea - RLB}}]}
                                        -- @examcom{@key[then abort] sequence_of_statements}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each path, and the path represented.]}
+the Ada Standard for each path, and the path represented.]}
 @end{DescribeCode}
 
 
@@ -1518,7 +1528,7 @@ Literals                      -- @examcom{Reference Manual    -> Subordinate Kin
    @AdaObjDefn{A_Component_Clause});        -- @examcom{13.5.1}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each clause, and any subordinate kinds.]}
+the Ada Standard for each clause, and any subordinate kinds.]}
 @end{DescribeCode}
 
 
@@ -1541,7 +1551,7 @@ Literals                                  -- @examcom{Reference Manual}]}
    @AdaObjDefn{An_At_Clause});                          -- @examcom{J.7}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-ISO/IEC 8652:1995 for each representation clause.]}
+the Ada Standard for each representation clause.]}
 @end{DescribeCode}
 
 

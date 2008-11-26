@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.12 $ $Date: 2007/02/19 23:57:41 $}
+@comment{$Revision: 1.13 $ $Date: 2008/10/25 05:28:50 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -33,8 +33,11 @@ I probably ought to add a style just for this purpose)
 
 @LabeledClause{Scope}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 The Ada Semantic Interface Specification (ASIS) is an interface between an Ada
-environment (as defined by ISO/IEC 8652:1995) and any tool requiring
+environment (as defined by @Chg{Version=[2], New=[ISO/IEC 8652:1995(E)],
+Old=[ISO/IEC 8652:1995]})
+and any tool requiring
 information from this environment. An Ada environment includes valuable
 semantic and syntactic information. ASIS is an open and published callable
 interface which gives CASE tool and application developers access to this
@@ -210,11 +213,12 @@ includes the following headers:]}
 @end{AARMOnly}
 
 @begin{ElementRef}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[These items],Old=[@b{Element Reference} - These comments]}
 mark an element kind reference which acts as a header for those queries that
 work on this element kind.@Chg{Version=[1],New=[ The reference includes the
 name of a query that can produce the appropriate element kind and the
-subclause in the Ada Standard (ISO/IEC 8652:1995) where the kind is defined.],Old=[]}
+subclause in the Ada Standard @Chg{Version=[2], New=[], Old=[(ISO/IEC 8652:1995)]} where the kind is defined.],Old=[]}
 @end{ElementRef}
 
 @begin{ChildRef}
@@ -294,8 +298,9 @@ Except as explicitly provided for in this International Standard,
 Standard.Storage_Error is the only exception that should be raised by
 operations declared in this International Standard.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 When executed, an implementation of this International Standard shall not be
-erroneous, as defined by ISO/IEC 8652:1995.
+erroneous, as defined by @Chg{Version=[2], New=[the Ada Standard], Old=[ISO/IEC 8652:1995]}.
 @end{Enumerate}
 
 @LabeledSubSubClause{Implementation conformance documentation}
@@ -588,18 +593,26 @@ investigate the possibility of applying the most recent edition of the
 International Standard indicated below. Members of IEC and ISO maintain
 registers of currently valid International Standards.
 
-ISO/IEC 8652:1995, @i{Information technology @em Programming languages @em Ada}.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@Chg{Version=[2], New=[ISO/IEC 8652:1995(E)], Old=[ISO/IEC 8652:1995]}, @i{Information technology @em Programming languages @em Ada}.
 
 
 @LabeledClause{Terms and definitions}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0030-1]}
+@ChgAdded{Version=[2],Text=[The Ada Programming Language is defined by International Standard ISO/IEC 8652:1995(E) as
+corrected by ISO/IEC 8652:1995/COR1:2001(E) and amended by ISO/IEC 8652:1995/AMD.1:2007(E). This
+set of documents is collectively known as the @i{Ada Standard}.]}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 For the purposes of this International Standard, the terms and definitions
-given in ISO/IEC 8652:1995 and the following apply.
+given in @Chg{Version=[2], New=[the Ada Standard], Old=[ISO/IEC 8652:1995]} and the following apply.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Additional terms are defined throughout this International Standard, indicated
 by @i{italic} type. Terms explicitly defined in this International Standard are not
 to be presumed to refer implicitly to similar terms defined elsewhere. Terms
-not defined in this International Standard and ISO/IEC 8652:1995 are to be
+not defined in this International Standard
+and @Chg{Version=[2], New=[the Ada Standard], Old=[ISO/IEC 8652:1995]} are to be
 interpreted according to the @i{Webster@lquote@;s Third New International
 Dictionary of
 the English Language}. Informal descriptions of some terms are also given in

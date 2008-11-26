@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/concepts.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2007/02/18 03:23:55 $}
+@comment{$Revision: 1.6 $ $Date: 2008/10/25 05:28:50 $}
 
 
 @LabeledSection{ASIS technical concepts}
@@ -8,10 +8,11 @@
 
 @LabeledClause{Ada compilation environment}
 
-
-ASIS is an interface between an Ada environment as defined by ISO/IEC 8652:1995
-(the Ada Reference Manual) and any tool requiring information from this
-environment, as shown in Figure 2.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+ASIS is an interface between an Ada environment as defined by
+@Chg{Version=[2],New=[the Ada Standard (ISO/IEC 8652:1995(E) and later
+documents)], Old=[ISO/IEC 8652:1995 (the Ada Reference Manual)]} and any tool
+requiring information from this environment, as shown in Figure 2.
 
 @PictureAlone(Alignment=[Center], Border=[None],
          Height=[427], Width=[456],
@@ -23,7 +24,9 @@ environment, as shown in Figure 2.
 
 @LabeledSubClause{Ada environment}
 
-ISO/IEC 8652:1995, 10.1.4(1) provides a notion for this compilation
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@Chg{Version=[2],New=[The Ada Standard],Old=[ISO/IEC 8652:1995]},
+10.1.4(1) provides a notion for this compilation
 @i{environment} as:@Defn{compilation environment} @ldquote@;Each compilation
 unit submitted to the compiler is compiled in the context of an environment
 declarative_part (or simply environment), which is a conceptual
@@ -399,8 +402,10 @@ these packages are used, see the examples in
 
 @b{Figure 7 @em ASIS package architecture}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @b{package ASIS} @en Package ASIS, together with its children, provides the
-interface between an Ada environment (as defined by ISO/IEC 8652:1995) and any
+interface between an Ada environment (as defined by @Chg{Version=[2], New=[the
+Ada Standard], Old=[ISO/IEC 8652:1995]}) and any
 tool requiring information from it. Valuable semantic and syntactic information
 is made available via queries through child packages of package ASIS.
 
@@ -536,10 +541,12 @@ particular element (i.e., a unique reference to an Element) which is efficient
 and persistent as long as the environment is not recompiled (see Clause
 @RefSecNum{package Asis.Ids}).
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
 @b{Asis.Data_Decomposition} @en This optional child package encapsulates a set
 of operations to decompose data values using the ASIS type information and a
 portable data stream, representing a data value of that type (see Clause
-@RefSecNum{package Asis.Data_Decomposition (optional)}). Its child package
+@RefSecNum{package Asis.Data_Decomposition (optional)}).@Chg{Version=[2],New=[],
+Old=[Its child package
 @b{Asis.Data_Decomposition.Portable_Transfer} provides support for logging and
 delogging of application data using ASIS. Internal packages of
 Asis.Data_Decomposition.Portable_Transfer include:
@@ -547,7 +554,7 @@ Portable_Constrained_Subtype, Portable_Unconstrained_Record_Type,
 Portable_Array_Type_1 (for one dimensional arrays), Portable_Array_Type_2 (for
 two dimensional arrays), and Portable_Array_Type_3 (for three dimensional
 arrays) (see Clause
-@RefSecNum{package Asis.Data_Decomposition.Portable_Transfer}).
+@RefSecNum{Obsolescent package Asis.Data_Decomposition.Portable_Transfer}).]}
 
 @end{Itemize}
 

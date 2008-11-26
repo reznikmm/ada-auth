@@ -1,23 +1,31 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2006/09/28 05:12:00 $}
+@Comment{$Date: 2008/10/25 05:28:50 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/glossary.mss,v $}
-@comment{$Revision: 1.1 $}
+@comment{$Revision: 1.2 $}
 
 @LabeledInformativeAnnex{Glossary}
 
-All terms which are defined in ISO/IEC 8652:1995 as Ada technical terms are
-used in the ASIS specification in full accordance with those definitions. See
-the Ada International Standard for definitions.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+All terms which are defined in @Chg{Version=[2], New=[the Ada Standard],
+Old=[ISO/IEC 8652:1995]} as Ada technical terms are used in the ASIS
+specification in full accordance with those definitions. See the Ada
+International Standard for definitions.
+
+@ToGlossary{Term=<Ada Standard>,Text=<Collectively, the International Standard
+ISO/IEC 8652:1995(E) as corrected by ISO/IEC 8652:1995/COR1:2001(E)@Chg{Version=[2],New=[ and amended
+by ISO/IEC 8652:1995/AMD.1:2007(E)],Old=[]}.>}
 
 @ToGlossary{Term=<Ancestor>,Text=<Ancestors of a library unit are itself, its
 parent, its parent's parent, and so on. (Standard is an ancestor of every
 library unit).>}
 
-@ToGlossary{Term=<ASIS>,Text=<Any programming system or any set of software
-components making use of ASIS queries to obtain information about any set of
-Ada components.>}
+@ToGlossary{Term=<ASIS>,Text=<@Chg{Version=[2],New=[is used in reference to the
+acronym Ada Semantic Interface Specification. It is also used in reference to
+the Ada package Asis],Old=[Any programming system or any set of software
+components making use of ASIS queries to obtain information about any set of Ada
+components]}.>}
 
 @ToGlossary{Term=<ASIS implementation>,Text=<All the hardware and software that
 implement the ASIS specification for a given Ada implementation and that
@@ -42,7 +50,7 @@ or "Implicit_..." in the ASIS specification.)>}
 @ToGlossary{Term=<Compilation unit>,Text=<@ldquote@;The term @i{compilation unit} is used to
 refer to a compilation_unit. When the meaning is clear from context, the term
 is also used to refer to the library_item of a compilation_unit or to the
-proper_body of a subunit@rdquote;. [ISO/IEC 8652:1995, 10.1.1(9)]. ASIS says "ASIS
+proper_body of a subunit@rdquote;. [@Chg{Version=[2], New=[The Ada Standard], Old=[ISO/IEC 8652:1995]}, 10.1.1(9)]. ASIS says "ASIS
 compilation unit" when the intent is to stress, that the ASIS viewpoint on an
 Ada compilation unit is described in the ASIS standard. Note, that the term
 "compilation unit" can refer to either syntactical category "compilation_unit"
@@ -100,7 +108,7 @@ to the compiler is compiled in the context of an environment declarative_part
 (or simply environment), which is a conceptual declarative_part that forms the
 outermost declarative region of the context of any compilation. At run time, an
 environment forms the declarative_part of the body of the environment task of a
-partition.@rdquote [ISO/IEC 8652:1995(E), 10.1.4(1)]. Note that the mechanisms
+partition.@rdquote [@Chg{Version=[2], New=[ISO/IEC 8652:1995(E)], Old=[ISO/IEC 8652:1995]}, 10.1.4(1)]. Note that the mechanisms
 for creating an environment and for adding and replacing compilation units
 within an environment are implementation-defined.>}
 
@@ -175,6 +183,57 @@ stated otherwise in the ASIS specification.>}
 @ToGlossary{Term=<Supporter>,Text=<Supporters of a compilation unit are units
 on which it semantically depends, either directly or indirectly. B is a
 supporter of A, if A is a dependent of B.>}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0030-1]}
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<CASE>,Text=<@ChgAdded{Version=[2],Text=[Computer
+Assisted Software/System
+Engineering refers to the methods dedicated to an engineering discipline for the
+development of information systems together with automated tools that can be used
+in this process.]}>}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0030-1]}
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<DII>,Text=<@ChgAdded{Version=[2],Text=[Dynamic
+Invocation Interface is an
+API which allows dynamic construction of CORBA object invocations. It is used at
+compile time when a client does not have knowledge about the object it wants to invoke.
+With this interface an argument list is marshalled, a function is named, and a request
+for service is sent to the object server. DII will usually have an asynchronous mode of operation.]}>}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0030-1]}
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<IDL>,Text=<@ChgAdded{Version=[2],Text=[Interface
+Definition Language is used
+by CORBA to specify the interfaces that objects will present to the outside world.
+CORBA then specifies a mapping from IDL to a specific implementation language like
+C++ or Java. Standard mappings exist for Ada, C, C++, Lisp, Smalltalk, Java, COBOL,
+PL/I and Python. There are also non-standard mappings for Perl, Visual Basic, Ruby,
+Erlang, and Tcl implemented by object request brokers (ORBs) written for those languages.]}>}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<IEC>,Text=<@ChgAdded{Version=[2],Text=[International
+Electrotechnical Commission
+is a not-for-profit, non-governmental international standards organization that prepares
+and publishes International Standards for all electrical, electronic and related
+technologies collectively known as "electrotechnology".]}>}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0030-1]}
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<ISO>,Text=<@ChgAdded{Version=[2],Text=[International
+Organization for
+Standardization (Organisation internationale de normalisation),  widely known as ISO,
+is an international standard-setting body composed of representatives from various
+national standards organizations.]}>}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0030-1]}
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=[JTC],Text=<@ChgAdded{Version=[2],Text=[ISO/IEC
+JTC is the Joint Technical
+Committee of the International Organization for Standardization (ISO) and the
+International Electrotechnical Commission (IEC). It deals with all matters of
+information technology.]}>}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0030-1]}
+@ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<ORB>,Text=<@ChgAdded{Version=[2],Text=[A CORBA
+Object Request Broker
+is a piece of middleware software that allows programmers to make program
+calls from one computer to another via a network.]}>}
 
 @Comment{Display the glossary}
 @GlossaryList

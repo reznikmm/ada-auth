@@ -1,6 +1,6 @@
 @Part(statements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/statements.mss,v $}
-@comment{$Revision: 1.8 $ $Date: 2008/02/06 06:23:47 $}
+@comment{$Revision: 1.9 $ $Date: 2008/10/25 05:28:50 $}
 
 
 @LabeledSection{package Asis.Statements}
@@ -59,8 +59,9 @@ A_Defining_Identifier
 
 @begin{DescribeCode}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0023-1]}
 @key[function] @AdaSubDefn{Assignment_Variable_Name} (Statement : @key[in] Asis.Statement)
-                                  @key[return] Asis.Expression;
+                                  @key[return] @Chg{Version=[2], New=[Asis.Name], Old=[Asis.Expression]};
 @end{Example}
 
 Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
@@ -711,8 +712,9 @@ A_Pragma
 
 @begin{DescribeCode}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0023-1]}
 @key[function] @AdaSubDefn{Exit_Loop_Name} (Statement : @key[in] Asis.Statement)
-                         @key[return] Asis.Expression;
+                         @key[return] @Chg{Version=[2], New=[Asis.Name], Old=[Asis.Expression]};
 @end{Example}
 
 Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the exit
@@ -859,11 +861,10 @@ An_Expression
 
 @ChgNote{ SI99-0010-1 }
 @Comment{@LabeledAddedClause{Version=[2],Name=[function Return_Object_Specification]}}
-@*@thickline@*
-@ChgAdded{Version=[2],Text=[@b{@grow{@grow{18.xx function Return_Object_Specification}}}]}
+@LabeledAddedSubClause{Version=[2],Name=[function Return_Object_Specification]}
 @begin{Discussion}
 @ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers]}
+change all of the following clause numbers, so this is a subclause temporarily.]}
 @end{Discussion}
 
 @begin{DescribeCode}
@@ -901,13 +902,11 @@ Returns an element that has one of the following Declaration_Kinds:]}
 
 
 @ChgNote{ SI99-0010-1 }
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Extended_Return_Statements]}
-We can't use this now, as it would change the clause numbers}
-@*@thickline@*
-@ChgAdded{Version=[2],Text=[@b{@grow{@grow{18.xx function Extended_Return_Statements}}}]}
+@Comment{@LabeledAddedClause{Version=[2],Name=[function Extended_Return_Statements]}}
+@LabeledAddedSubClause{Version=[2],Name=[function Extended_Return_Statements]}
 @begin{Discussion}
 @ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers]}
+change all of the following clause numbers, so this is a subclause temporarily.]}
 @end{Discussion}
 
 @begin{DescribeCode}
@@ -958,13 +957,11 @@ A_Pragma]}
 
 
 @ChgNote{ SI99-0010-1 }
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Extended_Return_Exception_Handlers]}
-We can't use this now, as it would change the clause numbers}
-@*@thickline@*
-@ChgAdded{Version=[2],Text=[@b{@grow{@grow{18.xx function Extended_Return_Exception_Handlers}}}]}
+@Comment{@LabeledAddedClause{Version=[2],Name=[function Extended_Return_Exception_Handlers]}}
+@LabeledAddedSubClause{Version=[2],Name=[function Extended_Return_Exception_Handlers]}
 @begin{Discussion}
 @ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers]}
+change all of the following clause numbers, so this is a subclause temporarily.]}
 @end{Discussion}
 
 @begin{DescribeCode}
@@ -1017,8 +1014,9 @@ A_Pragma]}
 
 @begin{DescribeCode}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0023-1]}
 @key[function] @AdaSubDefn{Goto_Label} (Statement : @key[in] Asis.Statement)
-                     @key[return] Asis.Expression;
+                     @key[return] @Chg{Version=[2], New=[Asis.Name], Old=[Asis.Expression]};
 @end{Example}
 
 Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the goto
@@ -1085,7 +1083,7 @@ A_Statement
 
 
 @begin{UsageNote}
-The @Chg{New=[Ada Standard],Old=[Reference Manual]} allows a pragma between
+The @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} allows a pragma between
 a statement and a label attached
 to it. If so, when the label is passed as an actual parameter to
 this query, the query returns the statement, but not the label. The only way
@@ -1100,8 +1098,9 @@ corresponding positions in the source text.
 
 @begin{DescribeCode}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0023-1]}
 @key[function] @AdaSubDefn{Called_Name} (Statement : @key[in] Asis.Statement)
-                     @key[return] Asis.Expression;
+                     @key[return] @Chg{Version=[2], New=[Asis.Name], Old=[Asis.Expression]};
 @end{Example}
 
 Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the procedure
@@ -1402,10 +1401,11 @@ statement, in their order of appearance.
 
 Returns a Nil_Element_List if the accept_statement has no parameters.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Results of this query may vary across ASIS implementations. Some
 implementations normalize all multiple name parameter specifications into an
 equivalent sequence of corresponding single name parameter specifications.
-See Reference Manual 3.3.1(7).
+See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
@@ -1662,8 +1662,9 @@ An_Expression
 
 @begin{DescribeCode}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0023-1]}
 @key[function] @AdaSubDefn{Aborted_Tasks} (Statement : @key[in] Asis.Statement)
-                        @key[return] Asis.Expression_List;
+                        @key[return] @Chg{Version=[2], New=[Asis.Name_List], Old=[Asis.Expression_List]};
 @end{Example}
 
 Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the abort
@@ -1823,8 +1824,9 @@ A_Statement
 
 @begin{DescribeCode}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0023-1]}
 @key[function] @AdaSubDefn{Raised_Exception} (Statement : @key[in] Asis.Statement)
-                           @key[return] Asis.Expression;
+                           @key[return] @Chg{Version=[2],New=[Asis.Name], Old=[Asis.Expression]};
 @end{Example}
 
 Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the raise
@@ -1858,11 +1860,10 @@ A_Selected_Component
 
 
 @Comment{@LabeledAddedClause{Version=[2],Name=[function Raise_Statement_Message]}}
-@*@thickline@*
-@ChgAdded{Version=[2],Text=[@b{@grow{@grow{18.xx function Raise_Statement_Message}}}]}
+@LabeledAddedClause{Version=[2],Name=[function Raise_Statement_Message]}
 @begin{Discussion}
 @ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers]}
+change all of the following clause numbers, so this is a subclause temporarily.]}
 @end{Discussion}
 
 @begin{DescribeCode}

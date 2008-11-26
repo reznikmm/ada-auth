@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.10 $ $Date: 2008/02/07 06:00:08 $}
+@comment{$Revision: 1.11 $ $Date: 2008/10/25 05:28:50 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -32,9 +32,10 @@ A_Type_Definition @em 3.2.1
 Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the type
 to query.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Returns a list of operators. These include all predefined operators, and
 all user-defined operator overloads, that have been implicitly or
-explicitly declared for the type. (Reference Manual 7.3.1(2))
+explicitly declared for the type. (@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 7.3.1(2))
 
 @leading@;This list includes only operators appropriate for the type, from the set:
 @begin{ChildExample}
@@ -215,10 +216,12 @@ A_Null_Record_Definition
 Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the derived
 type to query.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Returns a list of Is_Part_Of_Implicit inherited enumeration literals,
 discriminants, components, protected subprograms, or entries of a
 derived_type_definition whose parent type is an enumeration type, or a
-composite type other than an array type. See Reference Manual 3.4(10-14).
+composite type other than an array type. See
+@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.4(10-14).
 
 Returns a Nil_Element_List if the root type of derived_type_definition is
 not an enumeration, record, task, or protected type.
@@ -257,11 +260,6 @@ A_Derived_Record_Extension_Definition]}
 @ChgRef{Version=[2],Kind=[Deleted]}
 @ChgDeleted{Version=[2],Text=[A_Formal_Derived_Type_Definition]}
 @end{Display}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
@@ -310,8 +308,9 @@ type to query.
 Returns the list of user-defined inherited primitive subprograms that have
 been implicitly declared for the derived_type_definition.
 
-The list result does not include hidden inherited subprograms (Reference Manual
-8.3).
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+The list result does not include hidden inherited subprograms
+(@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 8.3).
 
 Returns a Nil_Element_List if there are no inherited subprograms for the
 derived type.
@@ -397,6 +396,11 @@ A_Derived_Type_Definition
 A_Derived_Record_Extension_Definition
 @end{Display}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
 one of the following ],Old=[]}Declaration_Kinds:
@@ -475,10 +479,11 @@ A_Private_Extension_Declaration
 Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
 derived_type_definition to query.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Returns the type structure from which the specified type definition has
 been derived. This function will recursively unwind derivations and
 subtyping until the type_declaration derives a change of representation or
-is no longer derived. See Reference Manual 13.6.
+is no longer derived. See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 13.6.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
@@ -833,9 +838,10 @@ function Array_Component_Definition
 
 @begin{DescribeCode}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0023-1]}
 @key[function] @AdaSubDefn{Index_Subtype_Definitions}
             (Type_Definition : @key[in] Asis.Type_Definition)
-            @key[return] Asis.Expression_List;
+            @key[return] @Chg{Version=[2], New=[Asis.Name_List], Old=[Asis.Expression_List]};
 @end{Example}
 
 Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
@@ -1047,11 +1053,10 @@ A_Subtype_Indication
 
 @ChgNote{SI99-0004-1 added new section}
 @Comment{@LabeledAddedClause{Version=[2],Name=[function Anonymous_Access_To_Object_Subtype_Mark]}}
-@*@thickline@*
-@ChgAdded{Version=[2],Text=[@b{@grow{@grow{16.xx function Anonymous_Access_To_Object_Subtype_Mark}}}]}
+@LabeledAddedSubClause{Version=[2],Name=[function Anonymous_Access_To_Object_Subtype_Mark]}
 @begin{Discussion}
 @ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers]}
+change all of the following clause numbers, so this is a subclause temporarily.]}
 @end{Discussion}
 
 @begin{DescribeCode}
@@ -1082,6 +1087,11 @@ An_Access_Definition that has one of the following Access_Definition_Kinds:
    An_Anonymous_Access_To_Constant]}
 @end{Display}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0004-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns an
 element that has one of the following Expression_Kinds:]}
@@ -1110,22 +1120,21 @@ parameter_profile in the access_to_subprogram_definition.
 
 Returns a Nil_Element_List if the parameter_profile has no formal part.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Results of this query may vary across ASIS implementations. Some
 implementations normalize all multiple name parameter_specification elements
 into an equivalent sequence of corresponding single name
-parameter_specification elements. See Reference Manual 3.3.1(7).
+parameter_specification elements. See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Type_Kinds:
+@ChgAdded{Version=[2],Text=[Type_Definition expects
+an element that has either:]}
+
+@leading@keepnext@;@Chg{Version=[2],New=[one of the
+following],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
-    An_Access_Type_Definition
-    A_Formal_Access_Type_Definition
-@Chg{Version=[2],New=[that also has one of the following Access_Type_Kinds:
-    An_Access_To_Procedure
-    An_Access_To_Protected_Procedure
-    An_Access_To_Function
-    An_Access_To_Protected_Function],Old=[]}
+An_Access_Type_Definition
+A_Formal_Access_Type_Definition
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
@@ -1139,13 +1148,24 @@ An_Access_To_Protected_Function]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0004-1]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[or Type_Definition expects an element
-that has one of the following Access_Definition_Kinds:]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[or that
+has one of the following Access_Definition_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[An_Anonymous_Access_To_Procedure
 An_Anonymous_Access_To_Protected_Procedure
 An_Anonymous_Access_To_Function
 An_Anonymous_Access_To_Protected_Function ]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0004-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Also if the kind
+is An_Access_Type_Definition or A_Formal_Access_Type_Definition then it
+also has one of the following Access_Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[An_Access_To_Procedure
+An_Access_To_Protected_Procedure
+An_Access_To_Function
+An_Access_To_Protected_Function]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
@@ -1196,19 +1216,37 @@ Old=[Returns the subtype_mark expression for the return type for the access
 function.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0004-1],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Definition expects
-an element that has one of the following Definition_Kinds:]}
+@ChgAdded{Version=[2],Text=[Definition expects
+an element that has either:]}
+
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[one of the
+following Type_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2],Text=[A_Type_Definition that has one of the following Type_Kinds:
-        An_Access_Type_Definition
-        A_Formal_Access_Type_Definition
-    and that also has one of the following Access_Type_Kinds:
-        An_Access_To_Function
-        An_Access_To_Protected_Function
-An_Access_Definition that has one of the following Access_Definition_Kinds:
-    An_Anonymous_Access_To_Function
-    An_Anonymous_Access_To_Protected_Function]}
+@ChgAdded{Version=[2],Text=[An_Access_Type_Definition
+A_Formal_Access_Type_Definition]}
 @end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0004-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[or that
+has one of the following Access_Definition_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[An_Anonymous_Access_To_Procedure
+An_Anonymous_Access_To_Protected_Procedure
+An_Anonymous_Access_To_Function
+An_Anonymous_Access_To_Protected_Function]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0004-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Also if the kind
+is An_Access_Type_Definition or A_Formal_Access_Type_Definition then it
+also has one of the following Access_Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[An_Access_To_Procedure
+An_Access_To_Protected_Procedure
+An_Access_To_Function
+An_Access_To_Protected_Function]}
+@end{Display}
+
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0004-1]}
 @ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[Appropriate Type_Kinds:]}
@@ -1259,8 +1297,9 @@ function Subtype_Constraint
 
 @begin{DescribeCode}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0023-1]}
 @key[function] @AdaSubDefn{Subtype_Mark} (Definition : @key[in] Asis.Definition)
-                       @key[return] Asis.Expression;
+                       @key[return] @Chg{Version=[2], New=[Asis.Name], Old=[Asis.Expression]};
 @end{Example}
 
 Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the definition
@@ -1760,10 +1799,11 @@ known_discriminant_part to query.
 Returns a list of discriminant_specification elements, in their order of
 appearance.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Results of this query may vary across ASIS implementations. Some
 implementations normalize all multi-name discriminant_specification elements
 into an equivalent sequence of single name discriminant_specification elements.
-See Reference Manual 3.3.1(7).
+See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
@@ -1814,8 +1854,9 @@ pragmas are to be returned.
 Returns a list of the components and pragmas of the record_definition or
 variant, in their order of appearance.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Declarations are not returned for implementation-defined components of the
-record_definition. See Reference Manual 13.5.1 (15). These components are not
+record_definition. See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 13.5.1 (15). These components are not
 normally visible to the ASIS application. However, they can be obtained
 with the query Implicit_Components.
 
@@ -2293,9 +2334,9 @@ kinds.]}
 @ChgAdded{Version=[2],Text=[Definition specifies the definition element to
 query.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1]}
-@ChgAdded{Version=[2],Text=[Returns True if the element has a task
-definition.]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1],ARef=[SI99-0032-1]}
+@ChgAdded{Version=[2],Text=[Returns True if the element has a task_definition
+that is given explicitly.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1]}
 @ChgAdded{Version=[2],Text=[Returns False for any other Element including a

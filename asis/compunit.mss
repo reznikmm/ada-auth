@@ -1,6 +1,6 @@
 @Part(compunit, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/compunit.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2008/02/06 06:23:46 $}
+@comment{$Revision: 1.8 $ $Date: 2008/10/25 05:28:50 $}
 
 
 @LabeledSection{package Asis.Compilation_Units}
@@ -742,10 +742,11 @@ Returns True if the compilation_unit list has a length of zero.
 Left @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the first unit to compare.
 Right @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the second unit to compare.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Returns True if Left and Right represent the same physical compilation unit
 or if both are Nil_Compilation_Unit values. The two units may or may not
 be from the same ASIS Context variable. (@ldquote@;The same physical compilation
-unit@rdquote@; have the same version, as defined by Reference Manual E.3(5)
+unit@rdquote@; have the same version, as defined by @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} E.3(5)
 and the same program text.)
 
 Two nonexistent units are Is_Equal if they have the same Name and Unit_Kind.
@@ -764,10 +765,11 @@ Two nonexistent units are Is_Equal if they have the same Name and Unit_Kind.
 Left @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the first unit to compare.
 Right @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the second unit to compare.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Returns True if Left and Right represent the same physical compilation
 unit, from the same open ASIS Context variable, or, if both are
 Nil_Compilation_Unit values. (@ldquote@;The same physical compilation
-unit@rdquote@; have the same version, as defined by Reference Manual E.3(5)
+unit@rdquote@; have the same version, as defined by @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} E.3(5)
 and the same program text.)
 
 Two nonexistent units are Is_Identical if they have the same
@@ -886,8 +888,9 @@ Old=[All Unit_Kinds are expected]}.
 Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
 unit to test.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Returns True if the Compilation_Unit exists and is a library
-package_declaration that requires a body. See Reference Manual 7.2(4).
+package_declaration that requires a body. See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 7.2(4).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],

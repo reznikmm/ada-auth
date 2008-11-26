@@ -1,6 +1,6 @@
 @Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.8 $ $Date: 2008/02/06 06:23:47 $}
+@comment{$Revision: 1.9 $ $Date: 2008/10/25 05:28:50 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -244,7 +244,8 @@ kinds.]}
 @begin{SingleNote}
 Implicit subtypes that can be encountered while traversing the
 semantic information embedded in implicit inherited subprogram declarations
-(Reference Manual 3.4 (17-22)) could have names that are unique in a
+(@Chg{Version=[2],New=[Ada
+Standard],Old=[Reference Manual]} 3.4 (17-22)) could have names that are unique in a
 particular scope. This is because these subtypes are Is_Part_Of_Implicit
 declarations that do not form part of the physical text of the original
 compilation units. Some applications may wish to carefully separate the names
@@ -472,7 +473,8 @@ an identifier which syntactically is placed before "=>" in a
 pragma_argument_association which has the form of a named association;
 such an identifier can never have a declaration;
 
-an identifier specific to a pragma (Reference Manual, 2.8(10)).
+an identifier specific to a pragma (@Chg{Version=[2],New=[Ada
+Standard],Old=[Reference Manual]}, 2.8(10)).
 @end{Itemize}
 
 @ChgAdded{Version=[1],Type=[Leading],Text=[For example:]}
@@ -1213,7 +1215,13 @@ association to query.
 Returns the expression of the record_component_association or
 array_component_association.
 
-The Enclosing_Element of the expression is the Association argument.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0036-1]}
+@Chg{Version=[2], New=[If the Association argument is from a Normalized list,
+the Enclosing_Element of the returned expression is the non-normalized
+An_Association Element containing the corresponding component association.
+Otherwise, the Enclosing_Element of the returned expression is the Association
+argument], Old=[The Enclosing_Element of the expression is the Association
+argument.]}
 
 Normalized lists contain artificial ASIS An_Association elements that
 provide one formal A_Defining_Name => An_Expression pair per
@@ -1393,7 +1401,10 @@ the explicit_actual_parameter of a parameter_association.
 the explicit_generic_actual_parameter of a generic_association.
 @end{InnerInnerItemize}
 
-@noprefix@;The Enclosing_Element of An_Expression is the Association argument.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0031-1]}
+@noprefix@;The Enclosing_Element of An_Expression is the @Chg{Version=[2],
+New=[non-normalized An_Association Element containing the corresponding actual
+parameter], Old=[Association argument.]}
 @end{InnerItemize}
 
 @leading@;If the Association is given by default:
@@ -1543,7 +1554,9 @@ discriminant_association to query.
 Returns An_Expression representing the expression of the
   discriminant_association.
 
-@noprefix@;The Enclosing_Element of An_Expression is the Association argument.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0036-1]}
+@noprefix@;The Enclosing_Element of @ChgAdded{Version=[2], Text=[the returned]}
+An_Expression is the Association argument.
 @end{Itemize}
 
 @leading@;If the Association argument is from a Normalized list:
@@ -1555,20 +1568,30 @@ Returns An_Expression representing the expression of the
 Returns An_Expression representing the expression of the
     discriminant_association.
 
-The Enclosing_Element of An_Expression is the Association argument.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0036-1]}
+@noprefix@;The Enclosing_Element of
+@Chg{Version=[2], New=[the returned ],Old=[]}An_Expression is
+the @Chg{Version=[2],New=[non-normalized An_Association Element containing the
+corresponding discriminant_specification], Old=[Association argument]}.
 @end{InnerItemize}
 
 @leading@;If the Association is given by default:
 
 @begin{InnerItemize}
-@leading@;Returns An_Expression representing:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0036-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[]}@Comment{Conditional leading}Returns
+An_Expression representing@Chg{Version=[2],New=[the corresponding
+default_expression of the Is_Normalized A_Discriminant_Association.],Old=[:]}
 
 @begin{InnerInnerItemize}
-the corresponding default_expression of the Is_Normalized
-A_Discriminant_Association.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0036-1]}
+@ChgDeleted{Version=[2],Text=[the corresponding default_expression of the
+Is_Normalized A_Discriminant_Association.]}
 @end{InnerInnerItemize}
 
-@noprefix@;The Enclosing_Element of the An_Expression element is the
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0036-1]}
+@noprefix@;The Enclosing_Element of the @ChgAdded{Version=[2], Text=[the
+    returned]} An_Expression element is the
     discriminant_specification that contains the default_expression.
 @end{InnerItemize}
 
@@ -1632,11 +1655,6 @@ A_Record_Component_Association
 A_Parameter_Association
 A_Generic_Association
 @end{Display}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
 @end{DescribeCode}
 
 
@@ -1672,11 +1690,6 @@ that has one of the following ],Old=[Appropriate]} Association_Kinds:
 A_Parameter_Association
 A_Generic_Association
 @end{Display}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
 @end{DescribeCode}
 
 @begin{UsageNote}
@@ -1706,7 +1719,8 @@ one set of parenthesis at a time, so the result may itself be
 A_Parenthesized_Expression.
 
 A_Parenthesized_Expression kind corresponds only to the (expression)
-alternative in the syntax notion of primary in Reference Manual 4.4. For
+alternative in the syntax notion of primary in @Chg{Version=[2],New=[Ada
+Standard],Old=[Reference Manual]} 4.4. For
 example, an expression of a type_conversion is A_Parenthesized_Expression only
 if it is similar to the form subtype_mark((expression)) where it has at least
 one set of its own parenthesis.
@@ -1761,11 +1775,6 @@ that has one of the following],Old=[Expected]} Expression_Kinds:
 @begin{Display}
 A_Function_Call
 @end{Display}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
 @end{DescribeCode}
 
 
@@ -2106,9 +2115,10 @@ A_Simple_Expression_Range
 
 @begin{DescribeCode}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0023-1]}
 @key[function] @AdaSubDefn{Membership_Test_Subtype_Mark}
             (Expression : @key[in] Asis.Expression)
-            @key[return] Asis.Expression;
+            @key[return] @Chg{Version=[2], New=[Asis.Name], Old=[Asis.Expression]};
 @end{Example}
 
 Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
@@ -2146,9 +2156,10 @@ An_Attribute_Reference
 
 @begin{DescribeCode}
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0023-1]}
 @key[function] @AdaSubDefn{Converted_Or_Qualified_Subtype_Mark}
                (Expression : @key[in] Asis.Expression)
-                   @key[return] Asis.Expression;
+                   @key[return] @Chg{Version=[2],New=[Asis.Name], Old=[Asis.Expression]};
 @end{Example}
 
 Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the type
