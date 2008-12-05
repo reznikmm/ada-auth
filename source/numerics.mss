@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.57 $ $Date: 2008/07/08 03:31:49 $ $Author: randy $ }
+@comment{ $Revision: 1.58 $ $Date: 2008/11/26 23:41:02 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2008/07/08 03:31:49 $}
+@Comment{$Date: 2008/11/26 23:41:02 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -3226,7 +3226,7 @@ and Numerics.Generic_Real_Arrays.Eigensystem fails to converge.]}]}
 
 @begin{Diffword95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0047-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected various
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected various
   accuracy and definition issues.]}
 @end{Diffword95}
 
@@ -4366,6 +4366,6 @@ the real operand to complex.]}]}
 
 @begin{Diffword95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0047-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected various
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected various
   accuracy and definition issues.]}
 @end{Diffword95}

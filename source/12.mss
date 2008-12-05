@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2008/07/08 03:31:49 $}
+@Comment{$Date: 2008/11/26 23:41:02 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -401,13 +401,21 @@ unit of the corresponding kind @Redundant[(generic package,
 generic procedure, or generic
 function, respectively)].
 
-The @SynI{generic_formal_parameter_}@nt{selector_name} of a
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0118-1]}
+The @SynI{generic_formal_parameter_}@nt{selector_name} of
+a@Chg{Version=[3],New=[ named],Old=[]}
 @nt{generic_association} shall denote a
 @nt{generic_formal_parameter_declaration}
 of the generic unit being instantiated.
 If two or more formal subprograms have the same defining name, then
 named associations are not allowed for the corresponding
 actuals.
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0118-1]}
+@ChgAdded{Version=[3],Text=[The @nt{generic_formal_parameter_declaration}
+for a positional @nt{generic_association} is the parameter with the
+corresponding position in the @nt{generic_formal_part} of the
+generic unit being instantiated.]}
 
 A @nt{generic_instantiation} shall contain at
 most one @nt<generic_association> for each formal.
@@ -501,10 +509,10 @@ This rule is not checked in the instance body.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00402-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0093-1]}
 A type with an access discriminant @Chg{Version=[2],New=[with a @nt{default_expression}],
-Old=[]}has to be @Chg{Version=[3],New=[immutably limited],Old=[a
-descendant of @Chg{Version=[2],New=[an explicitly limited record type. In the
+Old=[]}has to be @Chg{Version=[3],New=[immutably limited. In the
 generic body, the definition of immutably limited is adjusted in an
 assume-the-worst manner (thus the rule is checked that way)],Old=[a
+descendant of @Chg{Version=[2],New=[an explicitly limited record type],Old=[a
 type declared with @key[limited]]}, or be a task or protected
 type. This rule is irrelevant in the instance body]}.
 
@@ -1229,6 +1237,13 @@ generic parameters.
 @end{Extend95}
 
 
+@begin{Diffword95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0118-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a definition for
+  positional parameters, as this is missing from Ada 95 and later.]}
+@end{Diffword95}
+
+
 @LabeledClause{Formal Objects}
 
 @begin{Intro}
@@ -1430,7 +1445,7 @@ reference.
 Initialization and finalization happen for the constant declared by
 a @nt{formal_object_declaration} of mode @key{in} as for any constant;
 see @RefSec{Object Declarations}
-and @RefSec{User-Defined Assignment and Finalization}.
+and @RefSec{Assignment and Finalization}.
 
 @PDefn2{Term=[subtype], Sec=(of a generic formal object)}
 In an instance,
@@ -1452,7 +1467,7 @@ for a formal object of mode @key{in},
 a constant object is created, the value of the actual parameter
 is converted to the nominal subtype of the formal object,
 and assigned to the object@Redundant[, including any value adjustment @em
-see @RefSecNum{User-Defined Assignment and Finalization}].
+see @RefSecNum{Assignment and Finalization}].
 @PDefn2{Term=[implicit subtype conversion],Sec=(generic formal object of mode @key[in])}
 @begin{Ramification}
 This includes evaluating the actual
@@ -1854,7 +1869,7 @@ had to.
   rather than class, since not all interesting properties form a class.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Updated the wording to
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2>: Updated the wording to
   acknowledge the possibility of operations that are never declared for an
   actual type but still can be used inside of a generic unit.]}
 @end{DiffWord95}
@@ -2307,6 +2322,16 @@ The check for discriminant subtype matching is changed from a
 run-time check to a compile-time check.
 @end{Incompatible83}
 
+
+@begin{Incompatible95}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0087-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b<Amendment 2:>
+  Added wording to
+  prevent a limited type from being passed to a nonlimited formal
+  derived type. While this was allowed, it would break the contract
+  for the limited type, so hopefully no programs actually depend on that.]}
+@end{Incompatible95}
+
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00401-01],ARef=[AI95-00419-01],ARef=[AI95-00443-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -2342,19 +2367,14 @@ run-time check to a compile-time check.
   (it avoids confusion, since not all interesting properties form a class).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Updated the wording to
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Updated the wording to
   acknowledge the possibility of operations that are never declared for an
   actual type but still can be used inside of a generic unit.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Fixed hole that failed
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Fixed hole that failed
   to define what happened for "=" for an untagged private type whose
   actual is class-wide.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0087-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added wording to
-  prevent a limited type from being passed to a nonlimited formal
-  derived type.]}
 @end{DiffWord95}
 
 
@@ -3012,7 +3032,7 @@ the corresponding actual parameter is omitted, then it is equivalent to
 an explicit actual parameter that is a usage name identical to the
 defining name of the formal.@Chg{Version=[3],New=[ If a @nt<subtype_mark> in the
 profile of the @nt<formal_subprogram_declaration> denotes a formal private or
-formal derived type, and the actual type for this formal type is a class-wide
+formal derived type and the actual type for this formal type is a class-wide
 type @i<T>'Class, then for the purposes of resolving this @nt<default_name> at
 the point of the instantiation, for each primitive subprogram of @i<T> that has
 a matching defining name, that is directly visible at the point of the
@@ -3169,7 +3189,7 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.]}
   @ChgAdded{Version=[2],Text=[Added matching rules for @nt{null_exclusion}s.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added matching rules for
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added matching rules for
   box formal subprograms for class-wide actual types, to make it
   possible to import subprograms via formal subprograms as well as
   by implicit primitive operations of a formal type.]}
@@ -3442,7 +3462,7 @@ an instantiation of a package with formal packages:}]}
   is done when the actual is a formal package.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0025-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Missing rules for generic
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Missing rules for generic
   parameters to parallel those in @RefSecNum{Generic Instantiation}
   were added.]}
 @end{DiffWord95}

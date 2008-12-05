@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2007/11/30 03:34:20 $}
+@Comment{$Date: 2008/11/26 23:41:01 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -58,8 +58,9 @@ facilities for, among others, input-output, string manipulation,
 numeric elementary functions, and random number generation.
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised]}
+@ChgRef{Version=[3],Kind=[Revised]}@Comment{TBD: Do we use a different name and headings for Amendment 2? WG 9 seems to imply not.}
 This Annotated Ada Reference Manual (AARM) contains the entire text of
-the Ada Reference Manual @Chg{Version=[2],New=[ with Amendment 1 (the Ada 2005 RM],Old=[(RM95]}),
+the Ada Reference Manual @Chg{Version=[2],New=[ with Amendment 1 @Chg{Version=[3],New=[and 2 ],Old=[]}(the Ada 2005 RM],Old=[(RM95]}),
 plus certain annotations.
 The annotations give a more in-depth analysis of the language.
 They describe the reason for each non-obvious rule,
@@ -765,11 +766,12 @@ and does not appear in the @Chg{Version=[2],New=[Ada 95 or Ada 2005 RM],Old=[RM9
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@ @* @Comment{Two blank lines: why? Because it was in the Ada 95 original.}
 @*
 The next three headings list all language changes between Ada 95
 and Ada 2005 (the language defined by the Ada 95 standard plus
-Technical Corrigendum 1 plus Amendment 1).
+Technical Corrigendum 1 plus Amendment 1@Chg{Version=[3],New=[ plus Amendment 2],Old=[]}).
 Each language change falls into one of the following three
 categories:]}
 @end{Discussion}
@@ -794,6 +796,17 @@ inconsistencies between Ada 95 and Ada 2005. Practically, however, they very
 well may be, as early Ada 95 implementations may not follow the recommendation.
 Inconsistencies so marked are not portable between Ada 95 implementations,
 while usually Ada 2005 will have more clearly defined behavior. Therefore, we
+document these for completeness.]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Inconsistencies marked with
+@b[Amendment 2:]@Defn{Amendment 2} are corrections or updates to the
+original Ada 2005 definition (Corrigendum 1 plus Amendment 1) introduced
+by Amendment 2. Many of the corrections only affect new features
+introduced by Amendment 1, so they may not actually represent inconsistencies
+between Ada 95 and Ada 2005. Practically, however, these inconsistencies
+may not be portable between Ada 2005 implementations, as early implementations
+may not follow the currently defined behavior. Therefore, we
 document these for completeness.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -825,6 +838,17 @@ may be able to compile the examples, while others may not. In constrast,
 Ada 2005 compilers will have consistent behavior. Therefore, we document these
 for completeness.]}
 
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Incompatibilities marked with
+@b[Amendment 2:]@Defn{Amendment 2} are corrections or updates to the
+original Ada 2005 definition (Corrigendum 1 plus Amendment 1) introduced
+by Amendment 2. Many of the corrections only affect new features
+introduced by Amendment 1, so they may not actually represent incompatibilities
+between Ada 95 and Ada 2005. Practically, however, these inconsistencies
+may not be portable between Ada 2005 implementations, as early implementations
+may not follow the behavior defined by Amendment 2. Therefore, we
+document these for completeness.]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[This is not part of the definition of the language,
 and does not appear in the Ada 2005 RM.]}
@@ -854,6 +878,14 @@ some Ada 95 implementations may be able to compile the examples, while others
 may not. In constrast, Ada 2005 compilers will always support the extensions.
 Therefore, we document these for completeness.]}
 
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Extensions marked with
+@b[Amendment 2:]@Defn{Amendment 2} are updates to the
+original Ada 2005 definition (Corrigendum 1 plus Amendment 1) introduced
+by Amendment 2. These extensions may not be supported by early Ada 2005
+implementations. Therefore, we
+document these for completeness.]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[This is not part of the definition of the language,
 and does not appear in the Ada 2005 RM.],Old=[]}
@@ -867,12 +899,14 @@ the next heading does not represent any language change:]}
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised]}
 @Chg{Version=[2],New=[@Defn{wording changes from Ada 95}
 This heading lists some of the non-semantic changes between the Ada 95 RM and
 the Ada 2005 RM. This heading lists only @lquotes@;interesting@rquotes@; changes
 (for instance, editorial corrections are not listed). Changes which
 come from Technical Corrigendum 1 are marked @b{Corrigendum}; unmarked changes
-come from Amendment 1.],Old=[]}
+come from Amendment 1@Chg{Version=[3],New=[; and changes which come from
+Amendment 2 are marked @b{Amendment 2}],Old=[]}.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[This is not part of the definition of the language,

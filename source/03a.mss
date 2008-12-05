@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2008/07/12 04:04:48 $}
+@Comment{$Date: 2008/11/26 23:41:01 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.93 $}
+@Comment{$Revision: 1.94 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1534,24 +1534,35 @@ All of the following are objects:
 
   the result of evaluating an @nt<aggregate>;
 
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0003-1]}
+  @ChgAdded{Version=[3],Text=[a @nt{qualified_expression} whose operand denotes an object;]}
+
   a component, slice, or view conversion of another object.
 @end(itemize)
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0054-2]}
 @Defn{constant}
 @Defn{variable}
 @Defn{constant object}
 @Defn{variable object}
 @Defn{constant view}
 @Defn{variable view}
-An object is either a @i(constant) object or a @i(variable) object.
-The value of a constant object cannot be changed
-between its initialization
+An object is either a @i(constant) object or a @i(variable)
+object.@Chg{Version=[3],New=[],Old=[ The value of a constant object
+cannot be changed between its initialization
 and its finalization, whereas the value of a variable object can be
-changed.
+changed.]}
 Similarly, a view of an object is either a @i(constant) or
-a @i(variable). All views of a constant object are constant.
-A constant view of a variable object cannot be used to modify
-the value of the variable. The terms constant and variable by themselves
+a @i(variable). All views of a constant
+@Chg{Version=[3],New=[elementary ],Old=[]}object are constant.
+@Chg{Version=[3],New=[All views of a constant composite object are
+constant, except for parts that are of controlled or immutably limited
+types; variable views of those parts and their subcomponents
+may exist. In this sense, objects of controlled and immutably
+limited types are @i<inherently mutable>@Defn{inherently mutable object}. ],Old=[]}A
+constant view of @Chg{Version=[3],New=[an],Old=[a variable]} object
+cannot be used to modify @Chg{Version=[3],New=[its value],Old=[the value
+of the variable]}. The terms constant and variable by themselves
 refer to constant and variable views of objects.
 
 @Defn2{Term=[read], Sec=(the value of an object)}
@@ -1614,6 +1625,14 @@ The following (and no others) represent constants:
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0015-1]}
   the @Chg{Version=[3],New=[object denoted by],Old=[result of evaluating]}
   a @nt<function_call> or an @nt<aggregate>;
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0003-1]}
+  @ChgAdded{Version=[3],Text=[the result of evaluating a @nt{qualified_expression};]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0120-1]}
+  @ChgAdded{Version=[3],Text=[within the body of a protected function (or a
+  function declared immediately within a @nt{protected_body}), the current
+  instance of the enclosing protected unit;]}
 
   a @nt<selected_component>, @nt<indexed_component>,
   @nt<slice>, or view conversion of a constant.
@@ -1735,6 +1754,13 @@ A constant cannot be the target of an assignment operation, nor be
 passed as an @key(in) @key(out) or @key(out)
 parameter, between its initialization and finalization, if any.
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0054-2]}
+@ChgAdded{Version=[3],Text=[The value of a constant object cannot be
+changed after its initialization, except in some cases where the
+object has a controlled or immutably limited part (see
+@RefSecNum{Limited Types}, @RefSecNum{Assignment and Finalization},
+and @RefSecNum{Data Validity}).]}
+
 The nominal and actual subtypes of an elementary object are
 always the same. For a discriminated or array object,
 if the nominal subtype is constrained then so is the actual
@@ -1787,20 +1813,41 @@ Reading and updating now includes the case of evaluating or
 assigning to an enclosing object.
 @end{DiffWord83}
 
+@begin{Extend95}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0015-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}@b<Amendment 2:>
+  Added wording to allow
+  return objects to be declared as constants, and corrected the definition
+  of return objects as objects.]}
+@end{Extend95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Clarified that the return object is the object
   created by a function call.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0015-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added wording to allow
-  return objects to be declared as constants, and corrected the definition
-  of return objects as objects.]}
-
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1],ARef=[AI05-0041-1],ARef=[AI05-0093-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a definition of
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a definition of
   @i<known to be constrained>, for use in other rules.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0003-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> The result of a
+  @nt{qualified_expression} is defined to be a constant view and is defined
+  to be an object if the operand of the @nt{qualified_expression} is an object.
+  These definitions, combined with some grammar changes, allows
+  @nt{qualified_expression}s to be used in more places.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0054-2]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> We now recognize the fact
+  that not all declared constant objects are immutable; for those that
+  a variable view can be constructed, they can be changed via that view.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0120-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added the current instance of
+  a protected object to the list of constant views; since the list
+  claims to include all possibilities, it had better include that one.]}
 @end{DiffWord95}
+
 
 @LabeledSubClause{Object Declarations}
 
@@ -2003,7 +2050,7 @@ sequence of steps:
   Any initial values (whether explicit or implicit) are assigned
   to the object or to the corresponding subcomponents.
   As described in @RefSecNum{Assignment Statements}
-  and @RefSecNum{User-Defined Assignment and Finalization},
+  and @RefSecNum{Assignment and Finalization},
   Initialize and Adjust procedures can be called.
   @IndexSee{Term=[constructor],See=[initialization]}],Old=[]}
   @begin(Discussion)
@@ -2038,7 +2085,7 @@ sequence of steps:
   Any initial values (whether explicit or implicit) are assigned
   to the object or to the corresponding subcomponents.
   As described in @RefSecNum{Assignment Statements}
-  and @RefSecNum{User-Defined Assignment and Finalization},
+  and @RefSecNum{Assignment and Finalization},
   Initialize and Adjust procedures can be called.
   @IndexSee{Term=[constructor],See=[initialization]}]}
   @begin(Ramification)
@@ -2593,7 +2640,7 @@ generic unit.@PDefn{generic contract issue}],Old=[]}]}
   (See the previous paragraph's annotations for an explanation of this.)
   However, if the parent type is a tagged limited formal type with an actual
   type that is nonlimited, it would be possible to pass a value of the limited
-  type extension to a classwide type of the parent, which would be nonlimited.
+  type extension to a class-wide type of the parent, which would be nonlimited.
   That's too weird to allow (even though all of the extension components would
   have to be nonlimited because the rules of @RefSecNum{Type Extensions} are
   rechecked), so we have a special rule to prevent that in the private part
@@ -3121,6 +3168,16 @@ replaces the Ada 83 concept of "collection."
 These concepts are similar, but not the same.
 @end{DiffWord83}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0096-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b<Amendment 2:>
+  Added a (re)check that limited type extensions never are derived from
+  non-limited types in generic private parts. This is disallowed as it would
+  make it possible to pass a limited object to a non-limited class-wide type,
+  which could then be copied. This is only possible using Ada 2005 syntax,
+  so examples in existing programs should be very rare.]}
+@end{Incompatible95}
+
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -3144,10 +3201,6 @@ These concepts are similar, but not the same.
   types@rquotes and used it in wording elsewhere; also specified the
   language-defined categories that form classes of types (this was never
   normatively specified in Ada 95.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0096-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a (re)check that
-  limited type extensions never are derived from non-limited types.]}
 @end{DiffWord95}
 
 
@@ -4591,7 +4644,7 @@ a function, which is called to produce a value.
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0006-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Defined the result
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Defined the result
   subtype of an enumeration literal to close a minor language hole.]}
 @end{DiffWord95}
 

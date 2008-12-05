@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.39 $ $Date: 2006/10/19 06:40:32 $ $Author: Randy $ }
+@Comment{ $Revision: 1.40 $ $Date: 2008/11/26 23:41:03 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2006/10/19 06:40:32 $}
+@Comment{$Date: 2008/11/26 23:41:03 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -1192,7 +1192,8 @@ also be specified for the partition.]}
 
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
-@ChgAdded{Version=[2],Text=[Notwithstanding what this International Standard
+@ChgAdded{Version=[2],Text=[Notwithstanding@Defn{notwithstanding} what this
+International Standard
 says elsewhere, this @nt{pragma} allows partition elaboration rules concerning
 task activation and interrupt attachment to be changed. If the
 @SynI{policy_}@nt{identifier} is Concurrent, or if there is no pragma

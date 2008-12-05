@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.50 $ $Date: 2008/07/12 04:04:48 $ $Author: randy $ }
+@comment{ $Revision: 1.51 $ $Date: 2008/11/26 23:41:03 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2008/07/12 04:04:48 $}
+@Comment{$Date: 2008/11/26 23:41:03 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -661,6 +661,13 @@ a protected procedure that is an interrupt handler.
   use of Attach_Handler and Interrupt_Handler are identical. This means
   that uses of pragma Interrupt_Handler outside of the target protected type
   or single protected object are now illegal.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0033-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added missing generic
+  contract wording for the pragma Attach_Handler and Interrupt_Handler.
+  This means that nested instances with these pragmas in the private part
+  are now illegal. This is not likely to occur in practice.]}
+
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -678,11 +685,6 @@ a protected procedure that is an interrupt handler.
   implementations can retain the rule as an implementation-defined
   restriction on the use of the type, as permitted by the @ImplPermTitle
   above.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added missing generic
-  contract wording for the pragma Attach_Handler and Interrupt_Handler.]}
-
 @end{Diffword95}
 
 
@@ -1276,9 +1278,18 @@ required by the pragma.]}
 @PDefn2{Term=[pragma, representation], Sec=(Atomic_Components)}
 @PDefn2{Term=[representation pragma], Sec=(Volatile_Components)}
 @PDefn2{Term=[pragma, representation], Sec=(Volatile_Components)}
-These @nt{pragma}s are representation pragmas
+@Chg{Version=[3],New=[@PDefn2{Term=[representation pragma], Sec=(Independent)}
+@PDefn2{Term=[pragma, representation], Sec=(Independent)}
+@PDefn2{Term=[representation pragma], Sec=(Independent_Components)}
+@PDefn2{Term=[pragma, representation], Sec=(Independent_Components)}
+],Old=[]}These @nt{pragma}s are representation pragmas
 (see @RefSecNum{Operational and Representation Items}).
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[Pragmas Independent and
+Independent_Components guarantee independent addressability for the named object
+or component, or in the case of a type, for objects of that type (see
+@RefSecNum{Shared Variables}).]]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -1434,7 +1445,7 @@ because the pragma was not used to mark variables as shared.
   type is not (necessarily) atomic.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added pragmas Independent
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added pragmas Independent
   and Independent_Components to eliminate ambiguity about independent
   addressibility.]}
 @end{Diffword95}
@@ -1675,7 +1686,7 @@ corresponding attribute of T.
 The Set_Value operation performs any finalization on the old value of the
 attribute of T and assigns Val to that attribute
 (see @RefSecNum{Assignment Statements} and
-@RefSecNum{User-Defined Assignment and Finalization}).
+@RefSecNum{Assignment and Finalization}).
 
 The effect of the Reinitialize operation is the same as Set_Value where
 the Val parameter is replaced with Initial_Value.
@@ -2051,7 +2062,7 @@ otherwise it returns @key{null}.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
 @ChgAdded{Version=[2],Text=[As part of the finalization of a @nt{task_body},
 after performing the actions specified in
-@RefSecNum{User-Defined Assignment and Finalization} for finalization of a
+@RefSecNum{Assignment and Finalization} for finalization of a
 master, the specific handler for the task, if one is set, is executed.
 If the specific handler is cleared, a search
 for a fall-back handler proceeds by recursively following the master

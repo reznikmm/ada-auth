@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.29 $ $Date: 2007/11/30 03:34:26 $ $Author: Randy $ }
+@comment{ $Revision: 1.30 $ $Date: 2008/11/26 23:41:02 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2007/11/30 03:34:26 $}
+@Comment{$Date: 2008/11/26 23:41:02 $}
 
 @RMNewPage@Comment{For printed RM Ada 2007}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -673,7 +673,7 @@ state of a directory search. A
 default-initialized Search_Type object has no entries available (function
 More_Entries returns False). Type Search_Type
 needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
-(see @RefSecNum{User-Defined Assignment and Finalization}).]}
+(see @RefSecNum{Assignment and Finalization}).]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Start_Search (Search    : @key{in out} Search_Type;

@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2008/02/28 07:51:03 $}
+@Comment{$Date: 2008/11/26 23:41:02 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.35 $}
+@comment{$Revision: 1.36 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -74,7 +74,7 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @Chg{Version=[2],New=(@\@\Execution_Time @em @RefSecNum{Execution Time}
 @\@\@\Group_Budgets @em @RefSecNum{Group Execution Time Budgets}
 @\@\@\Timers @em @RefSecNum{Execution Time Timers}
-), Old=()}@\@\Finalization @em @RefSecNum{User-Defined Assignment and Finalization}
+), Old=()}@\@\Finalization @em @RefSecNum{Assignment and Finalization}
 @Chg{New=(@\@\Float_Text_IO @em @RefSecNum{Input-Output for Real Types}
 @\@\Float_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @Chg{Version=[2],New=(@\@\Float_Wide_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
@@ -282,12 +282,12 @@ The order and lettering of the annexes has been changed.
   predefined units.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0048-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added wording to ban
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording to ban
   redispatching unless it is explicitly required, in order to safeguard
   portability when overriding language-defined routines.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0060-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a permission to
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a permission to
   omit pragma Remote_Types from language-defined units if Annex E is
   not supported. (@RefSecNum{Conformity of an Implementation with the Standard}
   says that am unsupported Annex feature must be rejected at compile-time or
@@ -295,6 +295,6 @@ The order and lettering of the annexes has been changed.
   with predefined units.)]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added the generic package
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added the generic package
   Containers.Indefinite_Holders to the list of predefined units.]}
 @end{DiffWord95}

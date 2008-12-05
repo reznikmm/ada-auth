@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2008/07/12 04:04:48 $}
+@Comment{$Date: 2008/11/26 23:41:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -322,7 +322,7 @@ a property of a file object, not of an external file.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
 @ChgAdded{Version=[2],Text=[The type File_Type
 needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
-(see @RefSecNum{User-Defined Assignment and Finalization})
+(see @RefSecNum{Assignment and Finalization})
 in every instantiation of Sequential_IO.]}
 
 @end{StaticSem}
@@ -706,7 +706,7 @@ uninitialized variables of the type.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
 @ChgAdded{Version=[2],Text=[The type File_Type
 needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
-(see @RefSecNum{User-Defined Assignment and Finalization})
+(see @RefSecNum{Assignment and Finalization})
 in every instantiation of Direct_IO.]}
 
 @begin{ImplNote}
@@ -1412,7 +1412,7 @@ Append_File is new in Ada 95.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
 @ChgAdded{Version=[2],Text=[The type File_Type
 needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
-(see @RefSecNum{User-Defined Assignment and Finalization}).]}
+(see @RefSecNum{Assignment and Finalization}).]}
 
 @end{StaticSem}
 
@@ -1969,11 +1969,14 @@ of these terminators by a single character, provided that it is properly
 recognized on input.
 @end{Notes}
 
-@begin{DiffWord95}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0038-1]}
-@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Fixed a glitch in Set_Line
-   such that we could have called New_Line(0).]}
-@end{DiffWord95}
+@begin{Inconsistent95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0038-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2:>
+  Fixed a glitch in Set_Line such that we could have called New_Line(0), which
+  would have to raise Constraint_Error. It's now defined to work. The bug
+  occurred in Ada 95 and Ada 2005 Amendment 1. It's very unlikely that
+  any real programs depend on this exception being raised.]}
+@end{Inconsistent95}
 
 
 @LabeledSubClause{Get and Put Procedures}
@@ -2326,7 +2329,7 @@ return as soon as a line terminator is read.
 
 @begin{DiffWord95}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0038-1]}
-@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added missing wording about
+@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added missing wording about
   raising Status_Error to Look_Ahead and Get_Immediate.]}
 @end{DiffWord95}
 
@@ -2481,14 +2484,18 @@ Put(126, Width => 13, Base => 2);    --@RI{ "bbb2#1111110#"}
 @end{Example}
 @end{Examples}
 
-@begin{Diffword95}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0038-1]}
-@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Changed wording to make
-  Integer_IO and Modular_IO raise Data_Error in the same way when the
-  bounds of the subtype are exceeded. There is no value to different
-  behavior, and all surveyed compilers already treat integer and modular
-  values the same way.]}
-@end{Diffword95}
+@begin{Inconsistent95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0038-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2:>
+  Changed wording to make Integer_IO and Modular_IO raise Data_Error in the same
+  way when the bounds of the subtype are exceeded. There is no value to
+  different behavior, and all surveyed compilers already treat integer and
+  modular values the same way. This could only cause a problem if a
+  program was compiled with some unsurveyed compiler, and the Ada 95-defined
+  behavior is expected for Modular_IO. But note that such code is not portable
+  anyway, as most widely used compilers behave consistently with the
+  new wording, so it is unlikely that such code exists.]}
+@end{Inconsistent95}
 
 
 @LabeledSubClause{Input-Output for Real Types}
@@ -3438,7 +3445,7 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00360-01]}
 @ChgAdded{Version=[2],Text=[The type File_Type
 needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
-(see @RefSecNum{User-Defined Assignment and Finalization}).]}
+(see @RefSecNum{Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00283-01]}
 The subprograms @Chg{Version=[2],New=[given in subclause

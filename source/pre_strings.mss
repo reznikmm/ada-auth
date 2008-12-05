@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.54 $ $Date: 2007/11/30 03:34:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.55 $ $Date: 2008/11/26 23:41:03 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2007/11/30 03:34:28 $}
+@Comment{$Date: 2008/11/26 23:41:03 $}
 
 @LabeledClause{String Handling}
 
@@ -685,8 +685,8 @@ of Source are copied to Target.
 The Move procedure will work even if Source and Target
 overlap.@end{ramification}
 @begin{reason}
-The order of parameters (Source before Target) corresponds to
-the order in COBOL's MOVE verb.@end{reason}
+The order of parameters (Source before Target)
+corresponds to the order in COBOL's MOVE verb.@end{reason}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
@@ -1157,7 +1157,7 @@ string handling subprograms, Constraint_Error is propagated.
   Delete, and "*" always return a string with lower bound 1.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0056-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Clarified that Index
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Clarified that Index
   never raises Index_Error if the source string is null.]}
 @end{DiffWord95}
 
@@ -2145,7 +2145,7 @@ as the length does not exceed the allocated length.
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00360-01]}
 @ChgAdded{Version=[2],Text=[The type Unbounded_String
 needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
-(see @RefSecNum{User-Defined Assignment and Finalization}).]}
+(see @RefSecNum{Assignment and Finalization}).]}
 
 Null_Unbounded_String represents the null String.
 If an object of type Unbounded_String is not otherwise initialized, it

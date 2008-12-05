@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2008/05/17 03:20:38 $}
+@Comment{$Date: 2008/11/26 23:41:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -517,11 +517,13 @@ To_Address(@key[null]) returns Null_Address@Chg{Version=[2],New=[],Old=[ (for
 To_Address(Y), where Y /= @key[null], returns Y.@key[all]'Address.
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 The programmer should ensure that
 the address passed to To_Pointer is either Null_Address,
-or the address of an object of type Object. @Chg{Version=[2],New=[(If Object is not
-a not by-reference type, the object ought to be aliased; recall that the
-Address attribute is not required to provide a useful result other objects.)],Old=[]}
+or the address of an object of type Object. @Chg{Version=[2],New=[(If Object is
+not a @Chg{Version=[3],New=[],Old=[not ]}by-reference type, the object ought to
+be aliased; recall that the Address attribute is not required to provide a
+useful result @Chg{Version=[3],New=[for ],Old=[]}other objects.)],Old=[]}
 Otherwise, the behavior of the program is unspecified;
 it might raise an exception or crash, for example.
 @end{Discussion}
@@ -882,8 +884,8 @@ followed.]}]}
   for scalar types can be invalid, but not abnormal.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0078-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: Relaxed the alignment
-  requirement slightly.]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2>: Relaxed the alignment
+  requirement slightly, giving a defined result in more cases.]}
 @end{DiffWord95}
 
 
@@ -1119,7 +1121,7 @@ are proven redundant).
 @key[function] Unsafe_Convert @key[is] @key[new] Unchecked_Conversion(My_Int, Positive);
 X : Positive := Safe_Convert(0); --@RI{ Raises Constraint_Error.}
 Y : Positive := Unsafe_Convert(0); --@Chg{Version=[2],New=[@RI{ Bounded Error, may be invalid.}
-B : Boolean := Y'Valid; --@RI{ OK, B = False.}
+B : Boolean  := Y'Valid; --@RI{ OK, B = False.}
 Z : Positive := Y+1; --@RI{ Erroneous to use Y.}],Old=[@RI{ Erroneous.}]}
 
 @end{Example}
@@ -1169,27 +1171,38 @@ conversions in the example in the same way and raise Constraint_Error.]}
   to a composite operand with an invalid scalar subcomponent.
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0054-2]}
 @PDefn2{Term=(erroneous execution),Sec=(cause)}
 The dereference of an access value is erroneous if
 it does not designate an object of an appropriate type or a subprogram
 with an appropriate profile,
 if it designates a nonexistent object,
 or if it is an access-to-variable value that designates a
-constant object.
-@Redundant[Such an access value can exist, for example, because of
+constant object@Chg{Version=[3],New=[ and it did not originate from an
+attribute_reference applied to an aliased variable view
+of a controlled or immutably limited object],Old=[]}.
+@Redundant[@Chg{Version=[3],New=[An],Old=[Such an]} access value
+@Chg{Version=[3],New=[whose dereference is erroneous ],Old=[]}can exist,
+for example, because of
 Unchecked_Deallocation, Unchecked_Access, or Unchecked_Conversion.]
+
 @begin{Ramification}
 The above mentioned Unchecked_... features are not the only causes
 of such access values.
 For example, interfacing to other languages can also cause the problem.
 
-One obscure example is if the Adjust subprogram of a controlled type
-uses Unchecked_Access to create an access-to-variable value designating
-a subcomponent of its controlled parameter, and saves this access value
-in a global object. When Adjust is called during the initialization of a
-constant object of the type,
-the end result will be an access-to-variable value that designates a
-constant object.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0054-2]}
+@Chg{Version=[3],New=[We permit the use of access-to-variable
+values that designate constant objects so long as they originate
+from an aliased variable view of a controlled or immutably limited
+constant, such as during the initialization of a constant (both via
+the @ldquote@;current instance@rdquote and during a call to Initialize) or
+during an assignment (during a call to Adjust).],Old=[One obscure example is if
+the Adjust subprogram of a controlled type uses Unchecked_Access to create an
+access-to-variable value designating a subcomponent of its controlled parameter,
+and saves this access value in a global object. When Adjust is called during the
+initialization of a constant object of the type, the end result will be an
+access-to-variable value that designates a constant object.]}
 @end{Ramification}
 @end{Erron}
 
@@ -1211,6 +1224,18 @@ reading an abnormal object is still erroneous.
 In fact, the only safe thing to do to an abnormal object is
 to assign to the object as a whole.
 @end{DiffWord83}
+
+@begin{Extend95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0054-2]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
+  Common programming techniques such as squirreling an access to a
+  controlled object during initialization and using a self-referencing
+  discriminant (the so-called @lquote@;Rosen trick@rdquote) no longer
+  are immediately erroneous if the object is declared constant,
+  so these techniques can be used portably and safely. Practically,
+  these techniques already worked as compilers did not take much advantage
+  of this rule, so the impact of this change will be slight.]}
+@end{Extend95}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00167-01]}
@@ -2119,7 +2144,7 @@ performs finalization@Chg{Version=[2],New=[ of the object designated by X (and
 any coextensions of the object @em see @RefSecNum{Operations of Access Types})],
 Old=[]}, as described in
 @Chg{Version=[2],New=[@RefSecNum{Completion and Finalization}],
-Old=[@RefSecNum{User-Defined Assignment and Finalization}]}.
+Old=[@RefSecNum{Assignment and Finalization}]}.
 It then deallocates the storage occupied by the object designated by
 X@Chg{Version=[2],New=[ (and any coextensions)],Old=[]}.
 If the storage pool is a user-defined object, then
@@ -2241,9 +2266,10 @@ This is implied by the rules of @RefSecNum{Formal Access Types}.
   Ada 95 (coextensions existed in Ada 95, they just didn't have a name).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a rule that using
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a rule that using
   a access-to-protected-subprogram is erroneous if the associated
-  object no longer exists.]}
+  object no longer exists. It hard to imagine an alternative meaning here,
+  and this has no effect on correct programs.]}
 @end{DiffWord95}
 
 
@@ -2305,7 +2331,7 @@ any self-relative pointers will have to be updated by the garbage
 collector.
 If an implementation provides garbage collection
 for a storage pool containing controlled objects
-(see @RefSecNum{User-Defined Assignment and Finalization}),
+(see @RefSecNum{Assignment and Finalization}),
 then it should provide a means for deferring garbage collection of
 those controlled objects.
 @end{ImplNote}
@@ -2602,7 +2628,7 @@ use of the more efficient and safe one.
   @RefSecNum{Language-Defined Restrictions}).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2>: When restrictions are
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2>: When restrictions are
   checked has been clarified.]}
 @end{DiffWord95}
 
@@ -3245,7 +3271,7 @@ the value of the object.@Chg{Version=[3],New=[ If @i<T> has discriminants, then 
 object is unconstrained if and only the discriminants have
 defaults.],Old=[]}@Chg{Version=[2],New=[ Normal default initialization
 and finalization take place for this object (see @RefSecNum{Object Declarations},
-@RefSecNum{User-Defined Assignment and Finalization}, and
+@RefSecNum{Assignment and Finalization}, and
 @RefSecNum{Completion and Finalization}).],Old=[]}
 @end(Itemize)
 
@@ -3306,6 +3332,7 @@ level deeper than that of S.],Old=[]}>}@Comment{End of S'Class'Output attribute}
 @end{DescExample}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00279-01],ARef=[AI95-00344-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0109-1]}
 @noprefix@;First reads the external tag from @i{Stream} and determines
 the corresponding internal tag
 (by calling Tags.@Chg{Version=[2],New=[Descendant_Tag],
@@ -3315,8 +3342,17 @@ see @RefSecNum{Tagged Types and Type Extensions})
 and then dispatches to the subprogram denoted by the Input attribute of
 the specific type identified by the internal tag;
 returns that result.@Chg{Version=[2],New=[ If the specific type identified
-by the internal tag is not covered by @i<T>'Class or is abstract, Constraint_Error
+by the internal tag @Chg{Version=[3],New=[],Old=[is not covered by
+@i<T>'Class ]}or is abstract, Constraint_Error
 is raised.],Old=[]}>}@Comment{End S'Class'Input attribute}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0109-1]}
+  @ChgAdded{Version=[3],Text=[Descendant_Tag will ensure that the tag it
+  returns is covered by T'Class; Tag_Error will be raised if it would not
+  cover T'Class.]}
+@end{Ramification}
+
 @end{Description}
 @EndPrefixType{}
 
@@ -3794,6 +3830,16 @@ class-wide types descended from S.
   95 as well.]}
 @end{Inconsistent95}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0039-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b<Amendment 2:>
+  Added a requirement that stream
+  attributes be specified by a static subprogram name rather than a
+  dynamic expression. Expressions cannot provide any useful functionality
+  because of the freezing rules, and the possibility of them complicates
+  implementations. Only pathological programs should be affected.]}
+@end{Incompatible95}
+
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00270-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -3807,6 +3853,14 @@ class-wide types descended from S.
   constructed attributes if all of the parent and (for extensions) extension
   components have available attributes. Ada 2005 adds the notion of
   availability to patch up some holes in the Corrigendum model.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0007-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Stream attributes
+  for scalar types can be specified with subprograms that take the first
+  subtype as well as the base type. This eliminates confusion about which
+  subtype is appropriate for attributes specified for partial views whose
+  full type is a scalar type. It also eliminates a common user error
+  (forgetting 'Base).]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -3867,30 +3921,20 @@ class-wide types descended from S.
   called (that is, aren't @lquotes@;available@rquotes@;). Also clarified when
   inheritance takes place.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0007-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Stream attributes
-  for scalar types can be specified with subprograms that take the first
-  subtype as well as the base type. This eliminates confusion about which
-  subtype is appropriate for attributes specified for partial views whose
-  full type is a scalar type. It also eliminates a common user error
-  (forgetting 'Base).]}
-
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0023-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the definition
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the definition
   of the default version S'Read and S'Input to be well-defined if
   S is a discriminated type with defaulted discriminants and
   some components require initialization and/or finalizations.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0039-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Required that stream
-  attributes be specified by a static subprogram name rather than a
-  dynamic expression. Expressions cannot provide any useful functionality
-  because of the freezing rules, and the possibility of them complicates
-  implementations.]}
-
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0065-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Defined remote access
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Defined remote access
   types to support external streaming, since that is their purpose.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0109-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Removed a misleading phrase
+  which implies that Constraint_Error is raised for internal tags of the
+  wrong type, when Tag_Error should be raised for such tags.]}
 @end{DiffWord95}
 
 
@@ -4768,6 +4812,12 @@ Old=[@ntf{attribute_representation_clause}]} has been generalized.
   specific tagged type are frozen when the type is frozen, preventing dubious
   convention changes (and address clauses) after the freezing point. In both
   cases, the code is dubious and the workaround is easy.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0019-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Separated the freezing of
+  the profile from the rest of a subprogram, in order to reduce the impact
+  of the incompatibility noted above. (The effects were much more limiting
+  than expected.)]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -4786,13 +4836,8 @@ Old=[@ntf{attribute_representation_clause}]} has been generalized.
   checking for uncreated tags (see @RefSecNum{Tagged Types and Type Extensions}).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0017-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Reworded so that
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Reworded so that
   incomplete types with a deferred completion aren't prematurely
   frozen.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0019-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Separated the freezing of
-  the profile from the rest of a subprogram, in order to fix an unexpectedly
-  severe incompatibility with Ada 95 introduced by AI95-00341-01.]}
 @end{DiffWord95}
 

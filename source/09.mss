@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2008/07/12 04:04:48 $}
+@Comment{$Date: 2008/11/26 23:41:02 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 
 @begin{Intro}
 
@@ -543,12 +543,12 @@ because a @nt{declarative_part} can be empty.
   access types.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0042-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Clarified that an
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Clarified that an
   inherited procedure of a progenitor is overridden when it is
   implemented by an entry.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0090-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added the missing
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added the missing
   defining name in the no conflicting primitive operation rule.]}
 @end{DiffWord95}
 
@@ -1551,12 +1551,12 @@ protected units do not exist in Ada 83.
   access types.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0042-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Clarified that an
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Clarified that an
   inherited subprogram of a progenitor is overridden when it is
   implemented by an entry or subprogram.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0090-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added the missing
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added the missing
   defining name in the no conflicting primitive operation rule.]}
 @end{DiffWord95}
 
@@ -1793,16 +1793,22 @@ See @RefSec{Conformance Rules}.
 @end{Intro}
 
 @begin{StaticSem}
-Within the body of a protected function
+@Redundant[Within the body of a protected function
 (or a function declared immediately within a @nt<protected_body>),
 the current instance of the enclosing protected unit is defined to be a
 constant
-@Redundant[(that is, its subcomponents may be read but not updated)].
+(that is, its subcomponents may be read but not updated).
 Within the body of a protected procedure
 (or a procedure declared immediately within a @nt<protected_body>),
 and within an @nt<entry_body>,
 the current instance is defined to be a variable
-@Redundant[(updating is permitted)].
+(updating is permitted).]
+@begin(TheProof)
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0120-1]}
+  @ChgAdded{Version=[3],Text=[All constant views are defined in
+  @RefSec{Objects and Named Numbers}, anything not named there
+  is a variable view.]}
+@end(TheProof)
 @begin(Ramification)
   The current instance is like an implicit parameter,
   of mode @key(in) for a protected function, and of mode @key(in out)
@@ -3137,12 +3143,13 @@ is part of the @i(entry_)@nt<name> for an entry of a family.
 The @nt<requeue_statement> is new.
 @end{Extend83}
 
-@begin{Diffword95}
+@begin{Extend95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added the ability
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}@b<Amendment 2:>
+  Added the ability
   to requeue on operations of synchronized interfaces that are
-  declared to be an entry. This was omitted by oversight.]}
-@end{Diffword95}
+  declared to be an entry.]}
+@end{Extend95}
 
 
 @LabeledClause{Delay Statements, Duration, and Time}
@@ -3315,13 +3322,14 @@ has already passed, the task is not blocked.
   See @RefSec(Priority Scheduling).
 @end(Discussion)
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 @Defn2{Term=[cancellation], Sec=(of a @nt<delay_statement>)}
 If an attempt is made to @i(cancel) the @nt<delay_statement>
 @Redundant[(as part of an @nt<asynchronous_@!select> or abort @em
 see @RefSecNum{Asynchronous Transfer of Control} and
 @RefSecNum{Abort of a Task - Abort of a Sequence of Statements})],
-the @ntf<_statement> is cancelled if
-the expiration time has not yet passed,
+the @Chg{Version=[3],New=[statement],Old=[@ntf<_statement>]}
+is cancelled if the expiration time has not yet passed,
 thereby completing the @nt<delay_statement>.
 @begin(Reason)
   This is worded this way so that in an @nt<asynchronous_select>
@@ -4941,7 +4949,7 @@ the following are the abort-deferred operations:
 @end(Itemize)
 
 @Redundant[The last three of these are discussed further in
-@RefSecNum(User-Defined Assignment and Finalization).]
+@RefSecNum(Assignment and Finalization).]
 @begin{Reason}
   Deferring abort during Initialize and finalization allows,
   for example, the result of an allocator performed in
@@ -5390,13 +5398,14 @@ see @RefSecNum(Shared Variable Control).
   verifies that T1'Terminated is True.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Revised the definition of
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Revised the definition of
   independent addressibility to exclude conforming representation clauses
   and to require that atomic and independent objects always have
-  independent addressibility.]}
+  independent addressibility. This should not change behavior that the
+  user sees for any Ada program, so it is not an inconsistency.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0072-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the wording of
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the wording of
   AI95-00118-01 to actually say what was intended (as described above).]}
 @end{DiffWord95}
 

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2008/07/12 04:04:48 $}
+@Comment{$Date: 2008/11/26 23:41:01 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -667,7 +667,9 @@ The tag of a value is the tag of the associated object
 @ChgAdded{Version=[2],Text=[Tag_Error is raised by a call of Descendant_Tag,
 Expanded_Name, External_Tag, @Chg{Version=[3],New=[Interface_@!Ancestor_@!Tags],
 Old=[Interface_Ancestor_Tag]},
-Is_Descendant_@!At_Same_Level, or Parent_Tag if any
+Is_Descendant_@!At_Same_Level,
+@Chg{Version=[3],New=[],Old=[or ]}Parent_Tag@Chg{Version=[3],New=[,
+Wide_Expanded_Name, or Wide_Wide_Expanded_Name],Old=[]} if any
 tag passed is No_Tag.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
@@ -1672,12 +1674,13 @@ tag-indeterminate, then:
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0126-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[]}@ChgNote{Dummy add to allow conditional "leading"}
 For the execution of a call on a dispatching operation,
 the @Chg{Version=[2],New=[action performed is determined by the properties
 of the corresponding dispatching operation],Old=[body executed is the one for
 the corresponding primitive subprogram]} of the specific type
-identified by the controlling tag value.
+identified by the controlling tag value@Chg{Version=[3],New=[:],Old=[.
 @Chg{Version=[2],New=[If the corresponding operation is],Old=[The body
 for an]} explicitly declared
 @Chg{Version=[2],New=[for this type, @Redundant[even if the declaration occurs
@@ -1685,15 +1688,24 @@ in a private part], then the action comprises an invocation of the],
 Old=[dispatching operation is the corresponding]}
 explicit body for the
 @Chg{Version=[2],New=[operation. If the corresponding operation is
-implicitly declared for this type:],Old=[subprogram. The body for an implicitly
+implicitly declared for this type:],Old=[subprogram.
+The body for an implicitly
 declared dispatching operation that is overridden is the body for the
 overriding subprogram, @Redundant[even if the overriding occurs in a private
 part.] The body for an inherited dispatching operation that is not overridden
-is the body of the corresponding subprogram of the parent or ancestor type.]}
+is the body of the corresponding subprogram of the parent or ancestor type.]}]}
 
 @begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0126-1]}
+@ChgAdded{Version=[3],Text=[if the corresponding operation is explicitly
+declared for this type, @Redundant[even if the declaration occurs in a private
+part], then the action comprises an invocation of the explicit body for the
+operation;]}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@ChgAdded{Version=[2],Text=[if the operation is implemented by an entry or
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0126-1]}
+@ChgAdded{Version=[2],Text=[if the operation is @Chg{Version=[3],New=[implicitly
+declared for this type and is ],Old=[]}implemented by an entry or
 protected subprogram (see @RefSecNum{Task Units and Task Objects} and
 @RefSecNum{Protected Units and Protected Objects}), then the action comprises a
 call on this entry or protected subprogram, with the target object being given
@@ -1702,21 +1714,46 @@ entry or protected subprogram being given by the remaining actual parameters of
 the call, if any;]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0126-1]}
 @ChgAdded{Version=[2],Text=[otherwise, the action is the same as the action for
-the corresponding operation of the parent type.]}
+the corresponding operation of the parent type@Chg{Version=[3],New=[ or
+progenitor type from which the operation is inherited],Old=[]}.]}
 @end{Itemize}
 
 @begin{Honest}
-In the unusual case in which a dispatching subprogram is explicitly
-declared (overridden) by a body (with no preceding
-@nt{subprogram_declaration}),
-the body for that dispatching subprogram is that body;
-that is, the @lquotes@;corresponding explicit body@rquotes@; in the above rule is the
-body itself.
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0126-1]}
+@ChgDeleted{Version=[3],Text=[In the unusual case in which a
+dispatching subprogram is explicitly declared (overridden) by a body (with no
+preceding @nt{subprogram_declaration}), the body for that dispatching subprogram
+is that body; that is, the @lquotes@;corresponding explicit body@rquotes@; in
+the above rule is the body itself.]}
 @end{Honest}
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0126-1]}
+@ChgAdded{Version=[3],Text=[@ldquote@;Corresponding primitive operation@rdquote
+refers to the inheritance relationship between subprograms. Primitive
+operations are always inherited for a type T, but they may not be declared if
+the primitive operation is never visible within the immediate scope of the type
+T. If no corresponding operation is declared, the last bullet is used and the
+corresponding operation of the parent type is executed (an explicit body that
+happens to have the right name is not called in that case).]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0126-1]}
+@ChgAdded{Version=[3],Text=[We have to talk about progenitors in the last
+bullet in case the corresponding operation is a null procedure inherited
+from an interface. In that case, the parent type may not even have the
+operation in question.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0126-1]}
+@ChgAdded{Version=[3],Text=[Any explicit declaration for an inherited
+corresponding primitive operation has to be an overriding routine.
+These rules mean that a dispatching call executes the
+the overriding routine (if any) for the specific type.]}
+@end{Ramification}
 @begin{Reason}
-@Leading@;The wording of the above rule is intended to ensure that the same
-body is executed for a given tag,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
+@Leading@;The wording of the above @Chg{Version=[3],New=[rules are],Old=[rule is]}
+intended to ensure that the same body is executed for a given tag,
 whether that tag is determined statically or dynamically.
 For a type declared in a package,
 it doesn't matter whether a given subprogram is
@@ -1769,10 +1806,12 @@ which can happen only if the call is part of a default expression,
 the overriding will still take effect for that call.
 
 @end{Reason}
-  @begin{ImplNote}
+
+@begin{ImplNote}
 Even when a tag is not @i(statically determined), a compiler
   might still be able to figure it out and thereby avoid
-  the overhead of run-time dispatching.@end{implnote}
+  the overhead of run-time dispatching.
+@end{implnote}
 
 @end{RunTime}
 
@@ -1877,9 +1916,14 @@ The concept of dispatching operations is new.
   wouldn't work.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0076-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Defined
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Defined
   @ldquote@;function with a controlling result@rdquote, as it is used
   in @RefSecNum{Abstract Types and Subprograms}.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0126-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected holes in the
+  definition of dynamic dispatching: the behavior for operations that are
+  never declared and/or inherited from a progenitor were not specified.]}
 @end{Diffword95}
 
 
@@ -2417,6 +2461,22 @@ but then clients of the package would not have visibility to T.
 @end{Discussion}
 @end{Notes}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0073-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b<Amendment 2:>
+  Added rules to eliminate
+  holes with controlling access results and generic functions that return
+  abstract types. While these changes are technically incompatible, it
+  is unlikely that they could be used in a program without violating some
+  other rule of the use of abstract types.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0097-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected a minor
+  glitch having to do with abstract null extensions. The Amendment 1
+  rule allowed such extensions to inherit concrete operations in some
+  rare cases. It is unlikely that these cases exist in user code.]}
+@end{Incompatible95}
+
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00391-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -2446,15 +2506,6 @@ but then clients of the package would not have visibility to T.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00391-01]}
   @ChgAdded{Version=[2],Text=[We define the term @i<require overriding>
   to make other wording easier to understand.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0073-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added rules to eliminate
-  holes with controlling access results and generic functions that return
-  abstract types.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0097-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected a minor
-  glitch having to do with abstract null extensions.]}
 @end{Diffword95}
 
 
@@ -2840,7 +2891,7 @@ operations which are intended to be implemented by task entries (see 9.1).]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0070-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the definition
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the definition
   of elaboration for an @nt{interface_type_definition} to match that
   of other type definitions.]}
 @end{DiffWord95}
@@ -3712,7 +3763,7 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
   of an @nt{access_to_@!object_@!definition};
   @Redundant[the only form of @nt{constraint} allowed in this
   @nt{subtype_indication} is a @nt{discriminant_constraint}@Chg{Version=[3],New=[
-  @Redundant[(no @nt{null_exclusion} is allowed)]],Old=[]};]
+  @Redundant[(a @nt{null_exclusion} is not allowed)]],Old=[]};]
   @begin(ImplNote)
     We now allow @nt<discriminant_constraint>s even if the
     full type is deferred to the package body. However, there
@@ -3783,7 +3834,7 @@ incomplete view, it may also be used:]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0098-1]}
 @ChgAdded{Version=[2],Text=[as the @nt{subtype_mark} defining the subtype of a
 parameter or result of an @nt{access_to_@!subprogram_@!definition}@Chg{Version=[3],New=[
-or @nt{access_definition} for an access-to-subprogram type],Old=[]}.]}
+or an @nt{access_definition} for an access-to-subprogram type],Old=[]}.]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[Added]}
     @ChgAdded{Version=[2],Text=[This allows, for example, a record to have a
@@ -4021,6 +4072,11 @@ not at all) for different designated subtypes.
   @ChgAdded{Version=[2],Text=[A @nt{subtype_declaration} can be used to
   give a new name to an incomplete view of a type. This is valuable to
   give shorter names to entities imported with a @nt{limited_with_clause}.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0098-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the definition
+  so that an anonymous access-to-subprogram type can use an incomplete
+  view in the same way that a named access-to-subprogram type can.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -4030,11 +4086,6 @@ not at all) for different designated subtypes.
   neglected to give any rules for matching them with other types. Luckily,
   implementers did the right thing anyway. This change also makes it easier to
   describe the meaning of a limited view.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0098-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the definition
-  so that an anonymous access-to-subprogram type can use an incomplete
-  view in the same way that a named access-to-subprogram type can.]}
 @end{DiffWord95}
 
 
@@ -5365,7 +5416,7 @@ details of the implementation of the private type visible to the client of
 the private type. See @RefSecNum{Allocators} for more on this topic.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00229-01],ARef=[AI95-00254-01]}
-@Chg{Version=[2],New=[@b[Amendment Correction:] Taking 'Access of a subprogram
+@ChgAdded{Version=[2],Text=[@b[Amendment Correction:] Taking 'Access of a subprogram
 declared in a generic unit in the body of that generic is no longer allowed.
 Such references can easily be used to create dangling pointers, as
 @LegalityTitle are not rechecked in instance bodies. At the same time, the
@@ -5373,10 +5424,10 @@ rules were loosened a bit where that is harmless, and also to allow any routine
 to be passed to an access parameter of an access-to-subprogram type. The now
 illegal uses of 'Access can almost always be moved to the private part of the
 generic unit, where they are still legal (and rechecked upon instantiation for
-possibly dangling pointers).],Old=[]}
+possibly dangling pointers).]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
-@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Simplified the description
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1]}
+@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Simplified the description
 of when a discriminant-dependent component is allowed as the prefix of
 'Access to when the object is known to be constrained. This fixes
 a confusion as to whether a subcomponent of an object that is not certain
@@ -5386,6 +5437,12 @@ a constant; but it now applies no matter what kind of object is involved.
 The incompatibility is not too bad, since most kinds of constants are
 known to be constrained.]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0041-1]}
+@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the checks
+for the constrainedness of the prefix of the Access attribute so that
+assume-the-worst is used in generic bodies. This may make some programs
+illegal, but those programs were at risk having objects disappear while
+valid access values still pointed at them.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -5419,41 +5476,38 @@ Result2 : Float := Zap (Int_Ptr'(Value'access)); -- @RI[Resolves in Ada 95 and A
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[This change is upward compatible; any expression
 that does not resolve by the new rules would have failed a Legality Rule.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0082-1]}
+@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Eliminated the static
+accessibility check for generic formal types, as the actual can be
+more or less nested than the generic itself. This allows programs
+that were illegal for Ada 95 and for Amendment 1 Ada 2005.]}
 @end{Extend95}
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00162-01]}
-@Chg{Version=[2],New=[Adjusted the wording to reflect the fact that expressions
-and function calls are masters.],Old=[]}
+@ChgAdded{Version=[2],Text=[Adjusted the wording to reflect the fact that
+expressions and function calls are masters.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00254-01],ARef=[AI95-00318-02],ARef=[AI95-00385-01],ARef=[AI95-00416-01]}
-@Chg{Version=[2],New=[Defined the accessibility of the various new kinds and
-uses of anonymous access types.],Old=[]}
+@ChgAdded{Version=[2],Text=[Defined the accessibility of the various new kinds and
+uses of anonymous access types.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0014-1]}
-@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the rules so that
+@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the rules so that
 the accessibility of the object designated by an access object is that
-of the access type, even when no dereference is given. This correction
+of the access type, even when no dereference is given. The accessibility
+was not specified in the past. This correction
 applies to both Ada 95 and Ada 2005.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0024-1]}
-@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected accessibility
+@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected accessibility
 rules for access discriminants so that no cases are omitted.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0041-1]}
-@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the checks
-for the constrainedness of the prefix of the Access attribute so that
-assume-the-worst is used in generic bodies.]}
-
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0066-1]}
-@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Changed coextension
+@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Changed coextension
 rules so that coextensions that belong to an anonymous object are
 transfered to the ultimate object.]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0082-1]}
-@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Eliminated the static
-accessibility check for generic formal types, as the actual can be
-more or less nested than the generic itself.]}
 @end{DiffWord95}
 
 

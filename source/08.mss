@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2008/05/29 01:53:49 $}
+@Comment{$Date: 2008/11/26 23:41:02 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.79 $}
+@Comment{$Revision: 1.80 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -2213,8 +2213,8 @@ using the type T2 of the previous example:]}
                                     -- @RI[invalid when this is assigned.]]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
-@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Simplified the description
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1]}
+@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Simplified the description
 of when a discriminant-dependent component is allowed to be renamed
 to when the object is known to be constrained. This fixes
 a confusion as to whether a subcomponent of an object that is not certain
@@ -2223,7 +2223,6 @@ an incompatibility, as the rule did not apply in Ada 95 if the prefix was
 a constant; but it now applies no matter what kind of object is involved.
 The incompatibility is not too bad, since most kinds of constants are
 known to be constrained.]}
-
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -2534,6 +2533,7 @@ waiting.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0105],ARef=[AI95-00211-01]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00228-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0095-1]}
 @Chg{New=[All properties of the renamed entity are inherited by the new view
 unless otherwise stated by this International Standard. In particular, if the
 renamed entity is abstract@Chg{Version=[2],New=[],Old=[ or requires
@@ -2541,6 +2541,9 @@ overriding (see @RefSecNum{Abstract Types and Subprograms})]}, the new view
 also is abstract@Chg{Version=[2],New=[.],Old=[ or requires overriding. (The
 renaming will often be illegal in these cases,
 as a renaming cannot be overridden.)]}],Old=[]}
+@ChgAdded{Version=[3],Text=[Similarly, if the renamed entity is not a program
+unit, then neither is the renaming. (Implicitly declared subprograms are not
+program units, see @RefSecNum{Separate Compilation}).]}
 @end{Ramification}
 @end{StaticSem}
 

@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2007/02/06 04:48:43 $}
+@Comment{$Date: 2008/11/26 23:41:01 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.32 $}
+@Comment{$Revision: 1.33 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -434,7 +434,7 @@ nothing.
 
   If any part of the target is controlled, its value
   is adjusted as explained in
-  clause @RefSecNum{User-Defined Assignment and Finalization}.
+  clause @RefSecNum{Assignment and Finalization}.
 @PDefn2{Term=[adjustment], Sec=(as part of assignment)}
 @begin{Ramification}
     If any parts of the object are controlled,
@@ -530,7 +530,7 @@ incorrect.
 @Defn{extensions to Ada 83}
 We now allow user-defined finalization and value adjustment actions
 as part of @nt{assignment_statement}s
-(see @RefSec{User-Defined Assignment and Finalization}).
+(see @RefSec{Assignment and Finalization}).
 @end{Extend83}
 
 @begin{DiffWord83}
@@ -680,12 +680,14 @@ shall appear alone and in the last @nt{discrete_choice_list}.]
 
 The possible values of the @nt{expression} shall be covered as follows:
 @begin{itemize}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1]}
   If the @nt{expression} is a @nt{name} @Redundant[(including a
-  @nt<type_conversion> or a @nt<function_call>)] having
-  a static and constrained nominal subtype, or
+  @nt<type_conversion>@Chg{Version=[3],New=[, a @nt{qualified_expression},],Old=[]}
+  or a @nt<function_call>)] having
+  a static and constrained nominal subtype,@Chg{Version=[3],New=[],Old=[ or
   is a @nt{qualified_expression} whose
   @nt{subtype_mark} denotes a static and constrained
-  scalar subtype,
+  scalar subtype,]}
   then each non-@key{others} @nt{discrete_choice} shall cover only values in
   that subtype, and each value of that subtype shall
   be covered by some @nt{discrete_choice}
@@ -904,6 +906,13 @@ their coverage rule is now covered under the general rule
 for @nt<name>s, rather than being separated out along with
 @nt<qualified_expression>s.
 @end{DiffWord83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0003-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Rewording to reflect that
+  a @nt{qualified_expression} is now a @nt{name}.]}
+@end{Diffword95}
+
 
 @LabeledClause{Loop Statements}
 
@@ -1128,7 +1137,7 @@ Swap:
 If task objects are declared within a @nt{block_statement} whose execution
 is completed, the @nt{block_statement} is not left until all its dependent
 tasks are terminated
-(see @RefSecNum{User-Defined Assignment and Finalization}).
+(see @RefSecNum{Assignment and Finalization}).
 This rule applies to completion caused by a transfer of control.
 
 Within a @nt{block_statement}, the block name can be used in expanded

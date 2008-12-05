@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2008/07/12 04:04:48 $}
+@Comment{$Date: 2008/11/26 23:41:01 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.96 $}
+@Comment{$Revision: 1.97 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -25,12 +25,13 @@ Finally, @nt<name>s can denote attributes of any of the foregoing.]
 @end{Intro}
 
 @begin{Syntax}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1]}
 @Syn{tabs=[P22], lhs=<name>,rhs="
      @Syn2{direct_name}@\| @Syn2{explicit_dereference}
    | @Syn2{indexed_component}@\| @Syn2{slice}
    | @Syn2{selected_component}@\| @Syn2{attribute_reference}
    | @Syn2{type_conversion}@\| @Syn2{function_call}
-   | @Syn2{character_literal}"}
+   | @Syn2{character_literal}@Chg{Version=[3],New=[@\| @Syn2{qualified_expression}],Old=[]}"}
 
 
 @Syn{lhs=<direct_name>,
@@ -274,12 +275,26 @@ since we now describe the semantics of a prefix in terms
 of implicit dereference.
 @end{DiffWord83}
 
+@begin{Extend95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0015-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}@b<Amendment 2:>
+  A @nt{qualified_expression} is now a @nt{name} representing a constant view;
+  this allows them to be used as a prefix and to be renamed as an object.
+  They are often used to remove ambiguity from function calls, and there
+  may be no other way to do that. Interestingly, a @nt{type_conversion} of
+  a @nt{qualified_expression} is legal in these contexts, so this change
+  mainly reduces clutter by eliminating an otherwise unneeded @nt{type_conversion}
+  from some expressions.]}
+@end{Extend95}
+
 @begin{DiffWord95}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
-@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a missing rule so
-that most dereferences are assumed constrained (without determining whether the
-designated object is.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a missing rule so
+  that most dereferences are assumed constrained (without determining whether
+  the designated object is. This is just confirming the Ada 95 rules;
+  Amendment 1 failed to ensure that this property was unchanged.]}
 @end{DiffWord95}
+
 
 @LabeledSubClause{Indexed Components}
 
@@ -1059,7 +1074,7 @@ The Ada 83 rule said that the
   expected type (see @RefSecNum{Operations of Access Types}).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0006-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Defined the nominal
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Defined the nominal
   subtype of an @nt{attribute_reference} to close a minor language hole.]}
 @end{DiffWord95}
 
@@ -1317,17 +1332,17 @@ The value of the @nt{aggregate} is the value of this object.
 @begin{Ramification}
   The assignment operations do the necessary
   value adjustment, as described in
-  @RefSecNum{User-Defined Assignment and Finalization}.
+  @RefSecNum{Assignment and Finalization}.
   Note that the value as a whole is not adjusted
   @em just the subcomponents (and ancestor part, if any).
-  @RefSecNum{User-Defined Assignment and Finalization} also describes
+  @RefSecNum{Assignment and Finalization} also describes
   when this anonymous object is finalized.
 
   If the @nt<ancestor_part> is a @nt<subtype_mark>
   the Initialize procedure for the ancestor type is applied
   to the ancestor part after default-initializing it,
   unless the procedure is abstract, as described
-  in @RefSecNum{User-Defined Assignment and Finalization}.
+  in @RefSecNum{Assignment and Finalization}.
   The Adjust procedure for the ancestor type is not called
   in this case, since there is no assignment to the ancestor
   part as a whole.
@@ -1363,7 +1378,7 @@ it is nonlimited record (extension) or array.
 
 An @nt{aggregate} now creates an anonymous object.
 This is necessary so that controlled types
-will work (see @RefSecNum{User-Defined Assignment and Finalization}).
+will work (see @RefSecNum{Assignment and Finalization}).
 @end{DiffWord83}
 
 @begin{Incompatible95}
@@ -1778,19 +1793,19 @@ a record aggregate. Now we do.
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}<> can be used in
   place of an @nt{expression} in a @nt{record_aggregate}, default
   initializing the component.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0016-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Fixed the wording so that
+  @key[others] => <> can be used in place of @key[null record].
+  This is needed to avoid a generic contract issue for generic bodies:
+  we do not want to have to assume the worst to disallow others => <>
+  if the record type @i{might} be a null record.]}
 @end{Extend95}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
   @ChgAdded{Version=[2],Text=[Limited @nt{record_aggregate}s are allowed (since
   all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0016-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Fixed the wording so that
-  @key[others] => <> can be used in place of @key[null record].
-  This is needed to avoid a generic contract issue for generic bodies:
-  we do not want to have to assume the worst to disallow others => <>
-  if the record type @i{might} be a null record.]}
 @end{DiffWord95}
 
 
@@ -1872,6 +1887,29 @@ or more record extensions (and no private extensions).
   ancestor type. This is similar to the
   rules in @RefSecNum{Dispatching Operations of Tagged Types}.]}
 @end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0067-1]}
+@ChgAdded{Version=[3],Text=[If the @nt{ancestor_part} is a function call
+and the type of the @nt{ancestor_part} is limited, then the @nt{ancestor_part}
+shall have a constrained nominal subtype unless there are no components needed
+in the @nt{record_component_association_list}.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
+  @ChgAdded{Version=[3],Text=[This restriction simplifies implementation,
+  because it ensures that either the caller or the callee knows the size to
+  allocate for the aggregate. Without this restriction, information from both
+  caller and callee would have to be combined to determine the appropriate
+  size.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
+  @ChgAdded{Version=[3],Text=[The (F(...) with null record) case is exempt from
+  this rule, because such extension
+  aggregates are created internally for inherited functions returning
+  null-extension types -- we can't very well make those illegal. Moreover, we
+  don't need the rule for null extensions, as the result can simply use
+  the space returned by the function call.]}
+@end{Reason}
 @end{Legality}
 
 @begin{StaticSem}
@@ -1935,7 +1973,7 @@ then its type can be abstract. If its type is controlled,
 then as the last step of evaluating the aggregate,
 the Initialize procedure of the ancestor type is called,
 unless the Initialize procedure is abstract
-(see @RefSecNum{User-Defined Assignment and Finalization}).
+(see @RefSecNum{Assignment and Finalization}).
 @end{Notes}
 
 @begin{Examples}
@@ -1965,6 +2003,15 @@ The extension aggregate syntax is new.
   it is illegal in Ada 2005. Such @nt{aggregate}s are thought to be rare;
   the problem can be fixed with a type conversion to the appropriate
   specific type if it occurs.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0067-1]}
+  @ChgAdded{Version=[3],Text=[@b[Amendment 2:] A limited unconstrained
+  ancestor expression that is a function call is now illegal unless the
+  extension part is null.
+  Such @nt{aggregate}s were first introduced in Ada 2005 and are very complex
+  to implement as they must be built-in-place with an unknown size; as such,
+  it is unlikely that they are implemented correctly in existing compilers and
+  thus not often used in existing code.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -2445,6 +2492,18 @@ multidimensional and one-dimensional aggregates more uniformly,
 and to incorporate the rulings of AI83-00019, AI83-00309, etc.
 @end{DiffWord83}
 
+
+@begin{Inconsistent95}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0037-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2:>
+  Fixed so the check
+  for components outside of the array applies to both @nt<expression>s and
+  <>s. As <> was a new feature in Amendment 1, there should be little existing
+  code that depends on a <> component that is specified outside of the array
+  (and that is nonsense anyway, that a compiler is likely to detect even
+  without an explicit language rule disallowing it).]}
+@end{Inconsistent95}
+
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}<> can be used in
@@ -2463,11 +2522,6 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
   they can be different for an @nt{extended_return_statement}, and we want
   to use the subtype that's explicitly in the code at the point of the
   @nt{expression}.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0037-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Fixed so the check
-  for components outside of the array applies to both @nt<expression>s and
-  <>s.]}
 @end{DiffWord95}
 
 
@@ -2542,9 +2596,10 @@ of any of the other five syntactic categories defined below.
 
 @Syn{lhs=<factor>,rhs="@Syn2{primary} [** @Syn2{primary}] | @key{abs} @Syn2{primary} | @key{not} @Syn2{primary}"}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1]}
 @Syn{lhs=<primary>,rhs="
    @Syn2{numeric_literal} | @key{null} | @Syn2{string_literal} | @Syn2{aggregate}
- | @Syn2{name} | @Syn2{qualified_expression} | @Syn2{allocator} | (@Syn2{expression})"}
+ | @Syn2{name} | @Chg{Version=[3],New=[],Old=[@Syn2{qualified_expression} | ]}@Syn2{allocator} | (@Syn2{expression})"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -2667,6 +2722,13 @@ Essentially, the operation ".." is of higher precedence than the
 logical operators, and hence uses of logical operators
 still have to be parenthesized when used in a bound of a range.
 @end{Extend83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0003-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Moved @nt{qualified_expression}
+  from @nt{primary} to @nt{name} (see @RefSecNum{Names}). This allows the
+  use of @nt{qualified_expression}s in more places.]}
+@end{DiffWord95}
 
 
 @LabeledClause{Operators and Expression Evaluation}
@@ -3334,7 +3396,7 @@ for those composite types covered earlier) is defined as follows:
     predefined operations @lquotes@;reemerge@rquotes@; in a generic for
     untagged types, but do not for tagged types. Also, only
     tagged types support user-defined assignment
-    (see @RefSecNum{User-Defined Assignment and Finalization}),
+    (see @RefSecNum{Assignment and Finalization}),
     so only tagged types
     can fully handle levels of indirection in the implementation
     of the type. For untagged types, one reason for
@@ -3555,7 +3617,7 @@ cover the tested type, in order to be consistent with type
 conversions.],Old=[]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0020-1]}
-@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Wording was added to clarify
+@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Wording was added to clarify
 that @i{universal_access} "=" does not apply if an appropriate operator is
 declared for a partial or incomplete view of the designated type.
 Otherwise, adding a partial or incomplete view could made some "=" operators
@@ -3650,7 +3712,7 @@ assignment to an anonymous object,
 as for any function call (see @RefSecNum{Return Statements}).
 @begin{Ramification}
 This implies that value adjustment is performed as appropriate
-@em see @RefSecNum{User-Defined Assignment and Finalization}.
+@em see @RefSecNum{Assignment and Finalization}.
 We don't bother saying this for other predefined operators,
 even though they are all function calls,
 because this is the only one where it matters.
@@ -4072,7 +4134,7 @@ operators when they had defined user-defined versions.],Old=[]}
 
 @begin{DiffWord95}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0020-1]}
-@ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Wording was added to clarify
+@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Wording was added to clarify
 that @i{universal_fixed} "*" and "/" does not apply if an appropriate
 operator is declared for a partial view of the designated type.
 Otherwise, adding a partial view could made some "*" and "/" operators
@@ -4208,7 +4270,7 @@ a negative value is provided for the exponent.
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0088-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> The equivalence definition
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> The equivalence definition
   for "**" was corrected so that it does not imply that the operands
   are evaluated multiple times.]}
 @end{DiffWord95}

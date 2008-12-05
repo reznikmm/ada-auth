@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.81 $ $Date: 2008/07/08 03:31:49 $ $Author: randy $ }
+@comment{ $Revision: 1.82 $ $Date: 2008/11/26 23:41:03 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2008/07/08 03:31:49 $}
+@Comment{$Date: 2008/11/26 23:41:03 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1673,7 +1673,7 @@ follows the existing rules for ceiling locking.]}
 
 @begin{Diffword95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0055-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected definition
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected definition
   of active priority to avoid deadline inversion in an unusual case.]}
 @end{Diffword95}
 
@@ -2741,7 +2741,7 @@ construction of highly efficient tasking run-time systems.]
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
 @Defn2{Term=[Restrictions],Sec=(No_Nested_Finalization)}No_Nested_Finalization @\Objects
   @Chg{Version=[2],New=[of a type that needs finalization (see
-  @RefSecNum{User-Defined Assignment and Finalization})],Old=[with
+  @RefSecNum{Assignment and Finalization})],Old=[with
   controlled@Chg{New=[, protected, or task],Old=[]} parts]}
   @Chg{Version=[3],New=[],Old=[and
   access types that designate @Chg{Version=[2],New=[a type that needs
@@ -2996,6 +2996,14 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   allowed in local objects in Ada 2005 whereas it would be allowed in original
   Ada 95. Such code is not portable, as other Ada compilers may have had a
   controlled part, and thus would be illegal under the restriction.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0013-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Changed so that
+  coextensions of types that require nested finalization are also
+  prohibited; this is done by prohibiting @nt{allocator}s rather than
+  objects of specific access types. It seems unlikely that any program
+  depending on this restriction would violate it in this blatant manner,
+  so it is expected that very few programs will be affected by this change.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -3027,13 +3035,7 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   obsolescent.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Changed so that
-  coextensions of types that require nested finalization are also
-  prohibited; this is done by prohibiting @nt{allocator}s rather than
-  objects of specific access types.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Improved the wording
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Improved the wording
   of various restrictions to make it clearer that they prohibit
   things that would otherwise be legal, and to word them as
   definitions, not @LegalityTitle;.]}
@@ -4404,7 +4406,7 @@ language-defined library package exists:]}
 @ChgAdded{Version=[2],Text=[The type Timer represents an execution-time event
 for a single task and is capable of detecting execution-time overruns. The
 access discriminant T identifies the task concerned. The type Timer needs
-finalization (see @RefSecNum{User-Defined Assignment and Finalization}).]}
+finalization (see @RefSecNum{Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],Text=[An object of type Timer is said to be @i<set> if it
@@ -4642,7 +4644,7 @@ language-defined library package exists:]}
 @ChgAdded{Version=[2],Text=[The type Group_Budget represents an execution time
 budget to be used by a group of tasks. The type Group_Budget
 needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
-(see @RefSecNum{User-Defined Assignment and Finalization}). A task can belong
+(see @RefSecNum{Assignment and Finalization}). A task can belong
 to at most one group. Tasks of any priority can be added to a group.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
@@ -4870,7 +4872,7 @@ language-defined library package exists:]}
 @ChgAdded{Version=[2],Text=[The type Timing_Event represents a time in the future
 when an event is to occur. The type Timing_Event
 needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
-@RefSecNum{User-Defined Assignment and Finalization}).]}
+@RefSecNum{Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],Text=[An object of type Timing_Event is said to be
@@ -5090,8 +5092,10 @@ Timing_Event objects.]}
 
 @begin{Diffword95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0094-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Reworded to eliminate a
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Reworded to eliminate a
   deadlock condition if the event time is in the past and a handler is currently
-  executing.]}
+  executing. This is technically an inconsistency, but only if a program is
+  depending on deadlocking; since it is impossible to imagine how that could
+  be useful, we have not documented this as an inconsistency.]}
 @end{Diffword95}
 

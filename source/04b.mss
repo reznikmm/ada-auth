@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2008/07/08 03:31:49 $}
+@Comment{$Date: 2008/11/26 23:41:01 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.39 $}
+@Comment{$Revision: 1.40 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1205,6 +1205,18 @@ shall resolve to be of the type determined by the @nt{subtype_@!mark},
 or a universal type that covers it.
 @end{Resolution}
 
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0003-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[If the operand of a @nt{qualified_expression}
+denotes an object, the @nt{qualified_expression} denotes a constant view
+of that object.] The nominal subtype of a @nt{qualified_expression}
+is the subtype denoted by the @nt{subtype_mark}.]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0003-1]}
+  @ChgAdded{Version=[3],Text=[This is stated in @RefSecNum{Objects and Named Numbers}.]}
+@end{TheProof}
+@end{StaticSem}
+
 @begin{RunTime}
 @PDefn2{Term=[evaluation], Sec=(qualified_expression)}
 @IndexCheck{Range_Check}
@@ -1257,6 +1269,13 @@ Print (Code'(Dec));  @RI[--  Dec is of type Code ]
 Dozen'(1 | 3 | 5 | 7 => 2, @key(others) => 0) @RI[-- see @RefSecNum{Type Conversions} ]
 @end{Example}
 @end{Examples}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0003-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a definition of
+  the nominal subtype of a @nt{qualified_expression}.]}
+@end{DiffWord95}
+
 
 @LabeledClause{Allocators}
 
@@ -1646,7 +1665,7 @@ See @RefSecNum{Abstract Types and Subprograms}.
 
 If any part of the created object is controlled, the initialization
 includes calls on corresponding Initialize or Adjust procedures.
-See @RefSecNum{User-Defined Assignment and Finalization}.
+See @RefSecNum{Assignment and Finalization}.
 
 As explained in @RefSec{Storage Management},
 the storage for an object allocated by an @nt{allocator} comes from a
@@ -1741,11 +1760,25 @@ has been moved to @RefSec{Storage Management}.
   zero is now illegal. Ada 95 allowed the @nt{allocator}, but it had to
   raise Storage_Error if executed. The primary impact of this change should
   be to detect bugs.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0052-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a rule to prevent
+  limited coextensions of nonlimited types. Allowing this would have
+  far-reaching implementation costs. Because of those costs, it seems
+  unlikely that any implementation ever supported it properly and thus
+  it is unlikely that any existing code depends on this capability.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0104-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a rule to
+  make @nt{null_exclusion}s illegal for uninitialized @nt{allocator}s,
+  as such an @nt{allocator} would always raise Constraint_Error.
+  Programs that depend on the unconditional raising of a predefined
+  exception should be very rare.]}
 @end{Incompatible95}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0010],ARef=[AI95-00127-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95} @b<Corrigendum:> An
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}@b<Corrigendum:> An
   @nt{allocator} can be a controlling parameter of a dispatching call. This
   was an oversight in Ada 95.]}
 
@@ -1785,23 +1818,13 @@ has been moved to @RefSec{Storage Management}.
   as the discriminants always have the accessibility of the object.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0024-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the master check
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the master check
   for tags since the masters may be for different tasks and thus incomparable.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0041-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the rules for
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the rules for
   when an designated object is constrained by its initial value so that
   types derived from a partial view are handled properly.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0052-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a rule to prevent
-  limited coextensions of nonlimited types. Allowing this would have
-  far-reaching implementation costs.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0104-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a rule to
-  make @nt{null_exclusion}s illegal for uninitialized @nt{allocator}s,
-  as such an @nt{allocator} would always raise Constraint_Error.]}
 @end{DiffWord95}
 
 
@@ -2585,6 +2608,6 @@ This subclause is new to Ada 95.
   subtype of a scalar formal type statically matches itself.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0086-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Updated the statically
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Updated the statically
   compatible rules to take null exclusions into account.]}
 @end{DiffWord95}

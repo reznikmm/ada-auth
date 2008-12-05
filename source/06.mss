@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2008/07/12 04:04:48 $}
+@Comment{$Date: 2008/11/26 23:41:01 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.88 $}
+@Comment{$Revision: 1.89 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -707,7 +707,7 @@ is changed and one of the parameters depends on the discriminant.
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0096-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected so that
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected so that
   limited derived types are by-reference only if their parent is.]}
 @end{DiffWord95}
 
@@ -1241,6 +1241,16 @@ conforms fully with "(X: T; Y: T)",
 and "(X: T)" conforms fully with "(X: @key[in] T)".
 @end{Extend83}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0046-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected to require
+  @nt{null_exclusion}s to match for full conformance. While this is
+  technically incompatible with Ada 2005 as defined by Amendment 1,
+  it is a new Ada 2005 feature and it is unlikely that users have
+  been taking advantage of the rule different. In any case, it is
+  easy to fix: add a @nt{null_exclusion} where needed for conformance.]}
+@end{Incompatible95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0011],ARef=[AI95-00117-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that the default
@@ -1267,10 +1277,6 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00409-01]}
   @ChgAdded{Version=[2],Text=[Defined the conformance of anonymous
   access-to-subprogram parameters.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0046-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected to require
-  @nt{null_exclusion}s to match for full conformance.]}
 @end{DiffWord95}
 
 
@@ -1707,9 +1713,22 @@ being passed as an @b(out) parameter.
 @end{MetaRules}
 
 @begin{Resolution}
-The @SynI{formal_parameter_}@nt{selector_name} of a
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0118-1]}
+The @SynI{formal_parameter_}@nt{selector_name} of
+a@Chg{Version=[3],New=[ named],Old=[]}
 @nt{parameter_@!association} shall resolve to denote a
-@nt{parameter_@!specification} of the view being called.
+@nt{parameter_@!specification} of the view being called@Chg{Version=[3],New=[;
+@Defn{named association}@Defn{positional association}@Defn{named parameter association}@Defn{positional parameter association}this
+is the formal parameter of the association. The formal parameter for a
+positional @nt{parameter_@!association} is the parameter with the corresponding
+position in the formal part of the view being called],Old=[]}.
+
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0118-1]}
+  @ChgAdded{Version=[3],Text=[For positional parameters, the
+  @ldquote@;corresponding position@rdquote is calculated after any
+  transformation of prefixed views.]}
+@end{Honest}
 
 @Defn2{Term=[actual parameter], Sec=(for a formal parameter)}
 The @i(actual parameter) is either the @nt<explicit_actual_parameter>
@@ -1924,13 +1943,18 @@ as it is subsumed by earlier clauses and subclauses.
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> A missing rule was added
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> A missing rule was added
   to cover cases that were missed in Ada 95 and Ada 2005; specifically, that
   an @key[in] parameter passed by reference might have its discriminants
   changed via another path. Such cases are erroneous as requiring compilers
   to detect such errors would be expensive, and requiring such cases to
   work would be a major change of the user model (@key[in] parameters
-  would no longer could be assumed constant).]}
+  would no longer could be assumed constant). This is not an inconsistency,
+  as compilers are not required to change any current behavior.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0118-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a definition for
+  positional parameters, as this is missing from Ada 95 and later.]}
 @end{DiffWord95}
 
 
@@ -2079,12 +2103,14 @@ the function body.]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0032-1]}@Comment{Paragraph number only change}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For any return statement
 that applies to a function body:]}
 
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0032-1]}@Comment{Paragraph number only change}
 @ChgAdded{Version=[2],Text=[If the result subtype of the function is limited,
 then the @nt{expression} of the return statement (if any) shall be an
 @nt{aggregate}, a function call (or equivalent use of an operator), or a
@@ -2446,7 +2472,7 @@ that object.]}
   @ChgRef{Version=[2],Kind=[Deleted]}
   @ChgDeleted{Version=[2],Text=[The assignment operation does the necessary
   value adjustment, as described in
-  @RefSec{User-Defined Assignment and Finalization}.
+  @RefSec{Assignment and Finalization}.
   @RefSecNum{Completion and Finalization}
   describes when the anonymous constant is finalized.]}
 @end{Ramification}
@@ -2495,35 +2521,92 @@ denotes a constant view of the return object.]}
 
 @begin{ImplPerm}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
-@ChgAdded{Version=[2],Text=[If the result subtype of a function is
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0050-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[]}@Comment{This is a fake used to provide a conditional leading.}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[For a function call used to
+initialize a composite],Old=[If the result subtype of a function is
 unconstrained, and a call on the function is used to provide the initial value
-of an object with a constrained nominal subtype, Constraint_Error may be raised
+of an]} object with a constrained nominal subtype@Chg{Version=[3],New=[ or
+used to initialize a return object that is built in place
+into such an object:],Old=[, Constraint_Error may be raised
 at the point of the call (after abandoning the execution of the function body)
 if, while elaborating the @nt{return_@!subtype_@!indication} or
 evaluating the @nt{expression} of a return statement that applies to the
 function body, it
 is determined that the value of the result will violate the constraint of the
-subtype of this object.]}
+subtype of this object.]}]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0050-1]}
+  @ChgAdded{Version=[3],Text=[If the result subtype of the function is
+  constrained, and conversion of an object of this subtype to the subtype of the
+  object being initialized would raise Constraint_Error, then Constraint_Error
+  may be raised before calling the function.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0050-1]}
+  @ChgAdded{Version=[3],Text=[If the result subtype of the function is
+  unconstrained, and a return statement is executed such that the return object
+  is known to be constrained, and conversion of the return object to the subtype
+  of the object being initialized would raise Constraint_Error, then
+  Constraint_Error may be raised at the point of the call (after abandoning the
+  execution of the function body).]}
+@end{Itemize}
+
 @begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0050-1]}
   @ChgAdded{Version=[2],Text=[Without such a permission, it would be very
-  difficult to implement @lquotes@;build-in-place@rquotes semantics. Such an
+  difficult to implement
+  @lquotes@;@Chg{Version=[3],New=[built-in-place],Old=[build-in-place]}@rquotes semantics.
+  @Chg{Version=[3],New=[The intention is that the exception is raised at same
+  point that it would have been raised without the permission; it should not
+  change handlers if the implementation switches between return-by-copy and
+  built-in-place. This means that the],Old=[Such an]}
   exception is not handleable within the function, because in the
   return-by-copy case, the constraint check to verify that the result satisfies
   the constraints of the object being initialized happens after the function
-  returns, and we want the semantics to change as little as possible when
-  switching between return-by-copy and build-in-place. This implies further
-  that upon detecting such a situation, the implementation may need to simulate
-  a goto to a point outside any local exception handlers prior to raising the
-  exception.]}
+  returns@Chg{Version=[3],New=[],Old=[, and we want the semantics to change as
+  little as possible when switching between return-by-copy and build-in-place]}.
+  This implies further that upon detecting such a situation, the implementation
+  may need to simulate a goto to a point outside any local exception handlers
+  prior to raising the exception.]}
 @end{Reason}
+
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This permission is allowed during the evaluation
-  of the @nt{expression} of an @nt{extended_return_statement}, because the
-  @nt{return_@!subtype_@!indication} may be unconstrained and the @nt{expression}
-  then would provide the constraints.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0050-1]}
+  @Chg{Version=[3],New=[These permissions do not apply in the case of an extended
+  return object with mutable discriminants. That's necessary because in that
+  case a return object can be created with the @ldquote@;wrong@rdquote
+  discriminants and then changed to the @ldquote@;right@rdquote discriminants
+  later (but before returning). We don't want this case raising an exception
+  when the canonical semantics will not do so.],Old=[@Chg{Version=[2],New=[This
+  permission is allowed during the evaluation of the @nt{expression} of an
+  @nt{extended_return_statement}, because the @nt{return_@!subtype_@!indication}
+  may be unconstrained and the @nt{expression} then would provide the
+  constraints.],Old=[]}]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0050-1]}
+  @ChgAdded{Version=[3],Text=[It's still possible to write a program that will
+  raise an exception using this permission that would not in the canonical
+  semantics. That could happen if a return statement with the
+  @ldquote@;wrong@rdquote discriminants or bounds is abandoned (via an
+  exception, or for an extended_return_statement, via an exit or goto
+  statement), and then a return statement with the @ldquote@;right@rdquote
+  discrimiants or bounds is executed. The only solution for this problem is not
+  have the permission at all, but this is too unusual of a case to worry about
+  the effects of the permission, especially given the implementation
+  difficulties for built-in-place objects that this permission is intended to
+  ease.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0050-1]}
+  @ChgAdded{Version=[3],Text=[Note that the mutable-discriminant case only
+  happens when build-in-place initialization is optional. This means that any
+  difficulties associated with implementing built-in-place initialization
+  without these permissions can be sidestepped by not building in place.]}
+
 @end{Ramification}
+
 @end{ImplPerm}
 
 @begin{Examples}
@@ -2587,6 +2670,36 @@ the phrase @lquotes@;body of a subprogram or generic subprogram@rquotes@; is
 syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
 @end{DiffWord83}
 
+@begin{Inconsistent95}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-0416-1]}
+  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0050-1]}
+  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
+  Added an @ImplPermName allowing early raising of Constraint_Error if the
+  result cannot fit in the ultimate object. This gives implementations more
+  flexibility to do built-in-place returns, and is essential for limited types
+  (which cannot be built in a temporary). However, it allows raising an
+  Constraint_Error in some cases where it would not be raised if the
+  permission was not used. @Chg{Version=[3],New=[@b<Amendment 2> removes the
+  most common of these cases from the permission (returning an object with
+  mutuable discriminants, where the return object is created with one set of
+  discriminants and then changed to another. (It also widens the permission to
+  allow the early check for constrained functions when that constraint is
+  wrong.) However, there still is an unlikely case where the permission would
+  allow an exception to be raised when none would be raised by the canonical
+  semantics (when a return statement is abandoned). All of these cases
+  are],Old=[This case is]} potentially inconsistent with Ada 95, but a compiler
+  does not have to take advantage of these permissions for any Ada 95 code, so
+  there should be little practical impact.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0073-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:>
+  Added a tag check for functions returning anonymous access-to-tagged types,
+  so that dispatching of tag-indeterminant function works as expected.
+  This is technically inconsistent with Ada 2005 (as defined by Amendment 1),
+  but as the feature in question was newly added to Ada 2005, there should
+  be little code that depends on the behavior that now raises an exception.]}
+@end{Inconsistent95}
+
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95} The entire
@@ -2606,6 +2719,14 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   can be used as build-in-place constructors for limited types. This reduces
   the differences between limited and nonlimited types, which will
   make limited types useful in more circumstances.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0053-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Eliminated the @key{aliased}
+  keyword from the syntax of @nt{extended_return_statement}s, as this
+  would provide a way to get an aliased view of an object that is not
+  necessarily aliased. This is technically incompatible, but since the
+  feature was added in Ada 2005 and not widely implemented, it is
+  very unlikely that it appears in existing programs.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -2615,6 +2736,18 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   the object being returned, which reduces the copying needed to return
   complex objects (including no copying at all for limited objects). It also
   allows component-by-component construction of the return object.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0015-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> The return object of
+  an @nt{extended_return_statement} can be declared constant; this
+  works similarly to a constant object declaration.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0032-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording to allow
+  the @nt{return_subtype_indication} to have a specific type if the return
+  subtype of the function is class-wide. Specifying the (specific) type of
+  the return object is awkward without this change, and this is consistent
+  with the way @nt{allocator}s work.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -2640,45 +2773,15 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   types have to be limited in Ada 95, the @nt{expression} of a return statement
   would have been illegal in order for this check to fail.]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
-  @ChgAdded{Version=[2],Text=[Added an @ImplPermName allowing
-  early raising of Constraint_Error if the result cannot fit in the ultimate
-  object. This gives implementations more flexibility to do built-in-place
-  returns, and is essential for limited types (which cannot be built in a
-  temporary).]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0015-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> The unintentionally omitted
-  keyword @key[constant] and associated rules were added to
-  @nt{extended_return_statement}s.]}
-
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0024-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the master check
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the master check
   for tags since the masters may be for different tasks and thus incomparable.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0032-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added wording to allow
-  the @nt{return_subtype_indication} to have a specific type if the return
-  subtype of the function is class-wide. Specifying the (specific) type of
-  the return object is awkward without this change, and this is consistent
-  with the way @nt{allocator}s work.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0053-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Eliminated the @key{aliased}
-  keyword from the syntax of @nt{extended_return_statement}s, as this
-  would provide a way to get an aliased view of an object that is not
-  necessarily aliased.]}
-
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0058-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the wording
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the wording
   defining returns for @nt{extended_return_statement}s, since leaving by
   an exit or goto is considered @ldquote@;normal@rdquote completion of the
   statement.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0073-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a tag check for
-  functions returning anonymous access-to-tagged types, so that
-  dispatching of tag-indeterminant function works as expected.]}
 @end{DiffWord95}
 
 

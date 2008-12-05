@@ -1,9 +1,9 @@
 
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.64 $ $Date: 2008/05/17 03:20:38 $ $Author: randy $ }
+@comment{ $Revision: 1.65 $ $Date: 2008/11/26 23:41:02 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2008/05/17 03:20:38 $}
+@Comment{$Date: 2008/11/26 23:41:02 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -236,7 +236,7 @@ implementations that are unstable if given buggy hash functions, et al.]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a definition of
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a definition of
   strict weak ordering.]}
 @end{DiffWord95}
 
@@ -721,7 +721,7 @@ unspecified.@PDefn{unspecified}]}
 @ChgAdded{Version=[2],Text=[The type Vector is used to represent vectors.
 The type Vector needs finalization@PDefn2{Term=<needs finalization>,
 Sec=<language-defined type>}
-(see @RefSecNum{User-Defined Assignment and Finalization}).]}
+(see @RefSecNum{Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Empty_Vector represents the empty vector object. It
@@ -2243,20 +2243,20 @@ value of Last_Index.]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a @BoundedTitle
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
   to cover tampering by generic actual subprograms.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a @BoundedTitle
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
   to cover access to finalized Vector containers.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Redefined "<" actuals
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a pragma
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a pragma
   Remote_Types so that containers can be used in distributed programs.]}
 @end{DiffWord95}
 
@@ -2529,7 +2529,7 @@ unspecified.@PDefn{unspecified}]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The type List is used to represent lists. The type
 List needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
-(see @RefSecNum{User-Defined Assignment and Finalization}).]}
+(see @RefSecNum{Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Empty_List represents the empty List object. It has
@@ -3451,20 +3451,20 @@ probably not a stable sort.]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a @BoundedTitle
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
   to cover tampering by generic actual subprograms.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a @BoundedTitle
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
   to cover access to finalized list containers.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Redefined "<" actuals
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a pragma
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a pragma
   Remote_Types so that containers can be used in distributed programs.]}
 @end{DiffWord95}
 
@@ -3515,7 +3515,7 @@ function "=" on map values are unspecified.@PDefn{unspecified}]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The type Map is used to represent maps. The type
 Map needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
-(see @RefSecNum{User-Defined Assignment and Finalization}).]}
+(see @RefSecNum{Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[node],Sec=[of a map]}A map contains
@@ -4184,11 +4184,11 @@ unless specified by the operation.]}]}
   extensions are documented with the specific packages.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a @BoundedTitle
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
   to cover tampering by generic actual subprograms.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a @BoundedTitle
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
   to cover access to finalized map containers.]}
 @end{DiffWord95}
 
@@ -4742,7 +4742,7 @@ a cursor parameter should be @i{O}(1).]}]}
 
 @begin{Diffword95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a pragma
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a pragma
   Remote_Types so that containers can be used in distributed programs.]}
 @end{Diffword95}
 
@@ -5253,12 +5253,12 @@ a cursor parameter should be @i{O}(1).]}]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Redefined "<" actuals
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a pragma
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a pragma
   Remote_Types so that containers can be used in distributed programs.]}
 @end{DiffWord95}
 
@@ -5310,7 +5310,7 @@ function "=" on set values are unspecified.@PDefn{unspecified}]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The type Set is used to represent sets. The type
 Set needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
-(see @RefSecNum{User-Defined Assignment and Finalization}).]}
+(see @RefSecNum{Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[A set contains elements. Set cursors designate
@@ -6141,11 +6141,11 @@ unless specified by the operation.]}]}
   extensions are documented with the specific packages.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a @BoundedTitle
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
   to cover tampering by generic actual subprograms.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a @BoundedTitle
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
   to cover access to finalized set containers.]}
 @end{DiffWord95}
 
@@ -6615,11 +6615,11 @@ average time complexity of Containers.@!Hashed_Sets.@!Reserve_Capacity should be
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added wording to require
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording to require
   the formal function be such that that equal elements are also equivalent.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a pragma
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a pragma
   Remote_Types so that containers can be used in distributed programs.]}
 @end{DiffWord95}
 
@@ -7179,16 +7179,16 @@ of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added wording to require
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording to require
   the formal function be such that that equal elements are also equivalent.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Redefined "<" actuals
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a pragma
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a pragma
   Remote_Types so that containers can be used in distributed programs.]}
 @end{DiffWord95}
 
@@ -7672,7 +7672,7 @@ should minimize copying of elements.]}]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Redefined "<" actuals
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
 @end{DiffWord95}
@@ -7783,7 +7783,7 @@ holder values are unspecified.]}
 @ChgAdded{Version=[3],Text=[The type Holder is used to represent holder
 containers. The type Holder needs finalization@PDefn2{Term=<needs finalization>,
 Sec=<language-defined type>}
-(see @RefSecNum{User-Defined Assignment and Finalization}).]}
+(see @RefSecNum{Assignment and Finalization}).]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
 @ChgAdded{Version=[3],Text=[Empty_Holder represents an empty holder object. If
@@ -8023,6 +8023,6 @@ holder unless specified by the operation.]}
 @begin{Extend95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0084-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
-  @b<Corrigendum 2:> The generic package Containers.Indefinite_Holders is new.]}
+  @b<Amendment 2:> The generic package Containers.Indefinite_Holders is new.]}
 @end{Extend95}
 

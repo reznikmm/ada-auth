@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2007/11/30 03:34:25 $}
+@Comment{$Date: 2008/11/26 23:41:02 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -71,7 +71,7 @@ we have to make this distinction.
 
 @begin{DiffWord95}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0043-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a missing Ada 95
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a missing Ada 95
   case to the list of ways that an exception can be initially raised.]}
 @end{DiffWord95}
 
@@ -1170,7 +1170,7 @@ exception contains such a character.]}
   because identifiers can now contain characters outside of Latin-1.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0043-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added explicit wording
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added explicit wording
   that the exception message for language-defined checks is unspecified.
   The old wording appeared inclusive, but it was not.]}
 @end{DiffWord95}

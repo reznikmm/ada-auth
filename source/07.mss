@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2008/07/08 03:31:49 $}
+@Comment{$Date: 2008/11/26 23:41:02 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.98 $}
+@Comment{$Revision: 1.99 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1508,7 +1508,7 @@ has been moved to @lquotes@;Obsolescent Features.@rquotes@;
   @nt{assignment_statement}s.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Revised the wording to say
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Revised the wording to say
   that predefined operations still exist even if they are never declared,
   because it is possible to reference them in a generic unit.]}
 @end{DiffWord95}
@@ -1737,7 +1737,7 @@ they are simply a special case of @nt<object_declaration>s.
   exclude null.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0062-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected rules so
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected rules so
   that the intent that a full constant may have a null exclusion even
   if the deferred constant does not is actually met.]}
 @end{DiffWord95}
@@ -2036,31 +2036,34 @@ within the formal part of the generic unit.]}
 
 @begin{ImplReq}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
-@ChgAdded{Version=[2],Text=[
+@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0067-1]}
+@ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[
 For an @nt{aggregate} of a limited type used to initialize an object as allowed
 above, the implementation shall not create a separate anonymous object for the
 @nt{aggregate}. For a @nt{function_call} of a type with a part that is of a
 task, protected, or explicitly limited record type that is used to initialize
 an object as allowed above, the implementation shall not create a separate
 return object (see 6.5) for the @nt{function_call}. The @nt{aggregate} or
-@nt{function_call} shall be constructed directly in the new object.]}
+@nt{function_call} shall be constructed directly in the new object.],Old=[]}]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
-@ChgAdded{Version=[2],Text=[For a @nt{function_call}, we only require
-@i{build-in-place}@PDefn{build-in-place}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0067-1]}
+@ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[For a
+@nt{function_call}, we only require @i{build-in-place}@PDefn{build-in-place}
 for a limited type that would have
 been a return-by-reference type in Ada 95. We do this because
-we want to minimize disruption to Ada 95 implementations and users.]}
+we want to minimize disruption to Ada 95 implementations and users.],Old=[]}]}
 @end{Discussion}
 @end{ImplReq}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0067-1]}
 @Chg{Version=[2],New=[While it is allowed to write initializations of limited
 objects, such initializations never copy a limited object. The source of such an
 assignment operation must be an @nt<aggregate> or @nt<function_call>, and such
 @nt<aggregate>s and @nt<function_call>s must be built directly in the target
-object.],
+object@Chg{Version=[3],New=[ (see @RefSecNum{Assignment and Finalization})],Old=[]}.],
 Old=[@leading@keepnext@;The following are consequences of the rules for limited types:]}
 @begin{Honest}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2220,17 +2223,24 @@ than being a subclause of
   Derived types that explicitly include @key{limited} are now also covered.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0052-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Added a definition for
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a definition for
   immutably limited types, so that the fairly complex definition does
   not need to be repeated in rules elsewhere in the Standard.]}
 
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> The built-in-place rules
+  are consolidated in @RefSecNum{Assignment and Finalization}, and thus
+  they are removed from this clause.]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0087-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Fixed an oversight: class-wide
-  types were never limited, even if their associated specific type is.]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Fixed an oversight: class-wide
+  types were never defined to be limited, even if their associated specific
+  type is. It is thought that this oversight was never implemented by any
+  compiler, thus we have not classified it as an incompatibility.]}
 @end{DiffWord95}
 
 
-@LabeledClause{User-Defined Assignment and Finalization}
+@LabeledRevisedClause{Version=[3],New=[Assignment and Finalization],Old=[User-Defined Assignment and Finalization]}
 
 @begin{Intro}
 @redundant[@Defn{user-defined assignment}
@@ -2535,9 +2545,10 @@ Adjusting the value of an elementary object has no effect@Redundant[,
 nor does adjusting the value of a composite object with no
 controlled parts.]
 @begin{Ramification}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0067-1]}@Comment{May need future changes.}
-Adjustment is never @Chg{Version=[3],New=[actually ],Old=[]}performed for
-  values of a by-reference limited type, since @Chg{Version=[3],New=[all
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0067-1]}
+  Adjustment is never @Chg{Version=[3],New=[actually ],Old=[]}performed for
+  values of a @Chg{Version=[3],New=[immutably],Old=[by-reference]} limited type,
+  since @Chg{Version=[3],New=[all
   assignment operations for such types are required to be built-in-place.
   Even so, we still define adjustment for all types in order that the
   canonical semantics is well-defined],Old=[these
@@ -2615,28 +2626,56 @@ case.
 Forbidding such cases is not an option @em it would cause generic
 contract model violations.
 @end{Reason}
-@end{RunTime}
 
-@begin{ImplReq}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0022],ARef=[AI95-00083-01]}
-@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00318-02]}
-@ChgAdded{Version=[1],Text=[For an @nt{aggregate} of a controlled type
-whose value is assigned,
-other than by an @nt{assignment_statement}@Chg{Version=[2],New=[],Old=[ or
-a @nt{return_statement}]}, the
-implementation shall not create a separate anonymous object for the
-@nt{aggregate}. The aggregate value shall be constructed directly in the target
-of the assignment operation and Adjust is not called on the target object.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0067-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[When a function call
+or @nt{aggregate} is used to initialize an object, the
+result of the function call or @nt{aggregate} is an anonymous object, which
+is assigned into the newly-created object. For such an assignment,
+the anonymous object might be built in place. Under certain circumstances,
+the anonymous object is required to be @i<built in place>,@Defn{built in place}
+in which case the assignment does not involve any copying. In particular:]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
+  @ChgAdded{Version=[3],Text=[We say assignment to built-in-place objects does not
+  involve copying, which matches the intended implementation (see below). Of
+  course, the implementation can do any copying it likes, if it can make such
+  copying semantically invisible (by patching up access values to point to the
+  copy, and so forth).]}
+@end{Discussion}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[If the full type of any part of the object is
+  immutably limited, the anonymous object is built in place.]}
+
 @begin{Reason}
-@ChgRef{Version=[1],Kind=[Added]}
-@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00318-02]}
-@ChgAdded{Version=[1],Type=[Leading],Text=[@Chg{Version=[2],
-New=[@PDefn{build-in-place}],Old=[]}This@Chg{Version=[2],
-New=[ @i<build-in-place> requirement],Old=[]} is necessary to prevent
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
+  @ChgAdded{Version=[3],Text=[We talk about the full types being immutably
+  limited, as (like parameter passing), this is independent of the view of a type.
+  That is, privacy is ignored for this purpose.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
+  @ChgAdded{Version=[3],Text=[For function calls, we only require building in
+  place for immutable types. These are the types that would have been
+  return-by-reference types in Ada 95. We limited the requirement because
+  we want to minimize disruption to Ada 95 implementations and users.]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[In the case of an @nt{aggregate}, if the full type
+  of any part of the newly-created object is controlled, the anonymous object is
+  built in place.]}
+
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[This is necessary to prevent
 elaboration problems with deferred constants of controlled types. Consider:]}
 @begin{Example}
-@ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[@key[package] P @key[is]
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@key[package] P @key[is]
    @key[type] Dyn_String @key[is private];
    Null_String : @key[constant] Dyn_String;
    ...
@@ -2648,34 +2687,201 @@ elaboration problems with deferred constants of controlled types. Consider:]}
    Null_String : @key[constant] Dyn_String :=
       (Ada.Finalization.Controlled @key[with] ...);
    ...
-@key[end] P;],Old=[]}
+@key[end] P;]}
 @end{Example}
-@ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[When Null_String is elaborated, the bodies of Finalize and Adjust
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[When Null_String is elaborated, the bodies of Finalize and Adjust
 clearly have not been elaborated. Without this rule, this declaration would
 necessarily raise Program_Error (unless the permissions given below are
-used by the implementation).],Old=[]}
+used by the implementation).]}
+@end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[An @nt{aggregate} with a controlled part
+  used in the return expression
+  of a @nt{simple_@!return_@!statement} has to be built in place in the anonymous
+  return object, as this is similar to an object declaration. (This is a change
+  from Ada 95, but it is not an inconsistency as it only serves to restrict
+  implementation choices.) But this only covers the @nt{aggregate}; a separate
+  anonymous return object can still be used unless it too is required to be
+  built in place.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Similarly, an @nt{aggregate} that has
+  a controlled part but it not itself controlled and that is used to
+  initialize an object also has to be built in place. This is also a change
+  from Ada 95, but it is not an inconsistency as it only serves to restrict
+  implementation choices. This avoids problems if a type like Dyn_String
+  (in the example above) is used as a component in a type used as a
+  deferred constant in package P.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[In other cases, it is unspecified whether the
+  anonymous object is built in place.@PDefn{unspecified}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is left unspecified so the implementation
+  can use any appropriate criteria for determining when to build in place.
+  That includes making the decision on a call-by-call basis. Reasonable
+  programs will not care what decision is made here anyway.]}
+@end{Reason}
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0067-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[Notwithstanding@Defn{notwithstanding}
+what this International Standard says elsewhere, if an object is
+built in place:]}
+
+@begin{Itemize}
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[Upon successful completion of the return
+    statement or @nt{aggregate}, the anonymous object "mutates into" the
+    newly-created object; that is, the anonymous object ceases to exist, and the
+    newly-created object appears in its place.]}
+
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[Finalization is not performed on the anonymous object.]}
+
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[Adjustment is not performed on the newly-created
+    object.]}
+
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[All access values that designate parts of the
+    anonymous object now designate the corresponding parts of the newly-created
+    object.]}
+
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[All renamings of parts of the anonymous
+    object now denote views of the corresponding parts of the newly-created
+    object.]}
+
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[Coextensions of the anonymous object become
+    coextensions of the newly-created object.]}
+@end{Itemize}
+
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This @ldquote@;mutating@rdquote does not
+  necessarily happen atomically with
+  respect to abort and other tasks. For example, if a function call is used as
+  the parent part of an @nt{extension_aggregate}, then the tag of the anonymous
+  object (the function result) will be different from the tag of the
+  newly-created object (the parent part of the @nt{extension_aggregate}). In
+  implementation terms, this involves modifying the tag field. If the current
+  task is aborted during this modification, the object might become abnormal.
+  Likewise, if some other task accesses the tag field during this modification,
+  it constitutes improper use of shared variables, and is erroneous.]}
+@end{Honest}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The intended implementation is that the
+  anonymous object is allocated at the
+  same address as the newly-created object. Thus, no run-time action is
+  required to cause all the access values and renamings to point to the right
+  place. They just point to the newly-created object, which is what the return
+  object has magically @ldquote@;mutated into@rdquote.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[There is no requirement that 'Address of the
+  return object is equal to 'Address of the newly-created object, but that will
+  be true in the intended implementation.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[For a function call, if the size of the
+  newly-created object is known at the call site, the object is allocated there,
+  and the address is implicitly passed to the function; the return object is
+  created at that address. Otherwise, a storage pool is implicitly passed to the
+  function; the size is determined at the point of the return statement, and
+  passed to the Allocate procedure. The address returned by the storage pool is
+  returned from the function, and the newly-created object uses that same
+  address. If the return statement is left without returning (via an exception
+  or a goto, for example), then Deallocate is called.  The storage pool might be
+  a dummy pool that represents @ldquote@;allocate on the stack@rdquote.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The Tag of the newly-created object may be
+  different from that of the result object. Likewise, the master and
+  accessibility level may be different.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[An alternative implementation model might allow
+  objects to move around to different addresses. In this case, access values and
+  renamings would need to be modified at run time. It seems that this model
+  requires the full power of tracing garbage collection.]}
+@end{ImplNote}
+@end{RunTime}
+
+@begin{ImplReq}
+@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0022],ARef=[AI95-00083-01]}
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00318-02]}
+@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0067-1]}
+@ChgDeleted{Version=[3],Text=[@Chg{Version=[1],New=[For an @nt{aggregate} of a
+controlled type whose value is assigned,
+other than by an @nt{assignment_statement}@Chg{Version=[2],New=[],Old=[ or
+a @nt{return_statement}]}, the
+implementation shall not create a separate anonymous object for the
+@nt{aggregate}. The aggregate value shall be constructed directly in the target
+of the assignment operation and Adjust is not called on the target object.],Old=[]}]}
+@begin{Reason}
+@ChgRef{Version=[1],Kind=[Added]}
+@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00318-02]}
+@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0067-1]}
+@ChgDeleted{Version=[3],Type=[Leading],Text=[@Chg{Version=[1],New=[@Chg{Version=[2],
+New=[@PDefn{build-in-place}],Old=[]}This@Chg{Version=[2],
+New=[ @i<build-in-place> requirement],Old=[]} is necessary to prevent
+elaboration problems with deferred constants of controlled types. Consider:],Old=[]}]}
+@begin{Example}
+@ChgRef{Version=[1],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[DeletedAdded]}
+@ChgDeleted{Version=[3],Text=[@Chg{New=[@key[package] P @key[is]
+   @key[type] Dyn_String @key[is private];
+   Null_String : @key[constant] Dyn_String;
+   ...
+@key[private]
+   @key[type] Dyn_String @key[is new] Ada.Finalization.Controlled @key[with] ...
+   @key[procedure] Finalize(X : @key[in out] Dyn_String);
+   @key[procedure] Adjust(X : @key[in out] Dyn_String);
+@comment{Blank Line}
+   Null_String : @key[constant] Dyn_String :=
+      (Ada.Finalization.Controlled @key[with] ...);
+   ...
+@key[end] P;],Old=[]}]}
+@end{Example}
+@ChgRef{Version=[1],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[DeletedAdded]}
+@ChgDeleted{Version=[3],Text=[@Chg{New=[When Null_String is elaborated, the bodies of Finalize and Adjust
+clearly have not been elaborated. Without this rule, this declaration would
+necessarily raise Program_Error (unless the permissions given below are
+used by the implementation).],Old=[]}]}
 @end{Reason}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[An @nt{aggregate} of a controlled type
+@ChgRef{Version=[3],Kind=[DeletedAdded]}
+@ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[An @nt{aggregate} of a controlled type
 used in the return expression
 of a @nt{simple_@!return_@!statement} has to be built-in-place in the anonymous
 return object, as this is similar to an object declaration. (This is a change
 from Ada 95, but it is not an inconsistency as it only serves to restrict
 implementation choices.) But this only covers the @nt{aggregate}; a separate
 anonymous return object can still be used unless it too is required to be
-built-in-place (see @RefSecNum{Limited Types}).]}
+built-in-place (see @RefSecNum{Limited Types}).],Old=[]}]}
 @end{Ramification}
 @end{ImplReq}
 
 @begin{ImplPerm}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0067-1]}@Comment{May need future changes.}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0067-1]}
 An implementation is allowed to relax the above rules
-@Redundant[(for @Chg{Version=[3],New=[],Old=[nonlimited ]}controlled types)]
+@Chg{Version=[3],New=[for @nt{assignment_statement}s],
+Old=[@Redundant[(for nonlimited controlled types)]]}
 in the following ways:
 @begin{TheProof}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0067-1]}@Comment{May need future changes.}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0067-1]}
 @ChgDeleted{Version=[3],Text=[The phrase @lquotes@;for nonlimited controlled
 types@rquotes@; follows from the fact
 that all of the following permissions apply to cases involving
@@ -2684,26 +2890,26 @@ It is important because the programmer can count on a stricter semantics
 for limited controlled types.]}
 @end{TheProof}
 @begin{Ramification}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}@Comment{May need future changes.}
-@ChgAdded{Version=[3],Text=[The rules below about @nt{assignment_statement}s
-apply only to nonlimited controlled types, as @nt{assignment_statement}s
-are not allowed for limited types. The other rule applies to both limited and
-nonlimited types, and in fact is required for all assignment operations
-involving @nt{aggregate}s and function calls of @lquotes;really@rquotes
-limited types. This is important because the programmer can count on a
-stricter semantics for limited controlled types.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
+@ChgAdded{Version=[3],Text=[The relaxations apply only to nonlimited types,
+as @nt{assignment_statement}s
+are not allowed for limited types. This is important so that the programmer
+can count on a stricter semantics for limited controlled types.]}
 @end{Ramification}
 @begin{Itemize}
-For an @nt{assignment_statement} that assigns to an object the value
-of that same object,
-the implementation need not do anything.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0067-1]}
+@Chg{Version=[3],New=[If],Old=[For an @nt{assignment_statement} that assigns to]}
+an object @Chg{Version=[3],New=[is assigned ],Old=[]}the value of that same
+object, the implementation need not do anything.
 @begin{Ramification}
   In other words, even if an object is controlled and a combination
   of Finalize and Adjust on the object might have a net
   side effect, they need not be performed.
 @end{Ramification}
 
-For an @nt{assignment_statement} for a noncontrolled type,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0067-1]}
+For @Chg{Version=[3],New=[assignment of],Old=[an @nt{assignment_statement} for]}
+a noncontrolled type,
 the implementation may finalize and assign each
 component of the variable separately (rather than finalizing the entire
 variable and assigning the entire new value)
@@ -2715,15 +2921,26 @@ since array types are not controlled (although their components may be).
 Note that the direction, and even the fact that it's a slice assignment,
 can in general be determined only at run time.
 @end{Reason}
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+@ChgAdded{Version=[3],Text=[This potentially breaks a single assignment
+operation into many, and thus abort deferral (see
+@RefSecNum{Abort of a Task - Abort of a Sequence of Statements}) needs to
+last only across an individual component assignment when the component
+has a controlled part. It is only important that the copy step is
+not separated (by an abort) from the adjust step, so aborts between
+component assignments is not harmful.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00147-01]}
-For an @nt{aggregate} or function call whose value is assigned
-into a target object,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0067-1]}
+@Chg{Version=[3],New=[The],Old=[For an @nt{aggregate} or function call whose
+value is assigned into a target object,
 the implementation need not create a separate anonymous object if
 it can safely create the value of
 the @nt{aggregate} or function call
 directly in the target object.
-Similarly, for an @nt{assignment_@!statement},
+Similarly, for an @nt{assignment_@!statement},]}
 the implementation need not create an anonymous object if
 the value being assigned is the result of evaluating a @nt{name}
 denoting an object (the source object) whose storage cannot overlap
@@ -2743,14 +2960,13 @@ anonymous object has no aliased subcomponents.]}
 Old=[In the @nt{aggregate} case, only one
 value adjustment is necessary, and]} there is no anonymous object to be
 finalized@Chg{Version=[3],New=[ and thus the Finalize call is on it is
-eliminated. In addition, if the value is created directly in the target
-object, then no Adjust call is needed on the target object.],Old=[]}.
+eliminated.],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00147-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 @Chg{Version=[2],New=[@Chg{Version=[3],New=[Note that if the anonymous
-object is eliminated but the new value is not created directly
-in the target object],Old=[Similarly, in the function call case, the
+object is eliminated but the new value is not built in place in the
+target object],Old=[Similarly, in the function call case, the
 anonymous object can be eliminated. Note, however]}, that Adjust
 must be called],Old=[In the @nt{assignment_statement} case as well,
 no finalization of the anonymous object is needed.
@@ -2759,15 +2975,8 @@ then an adjustment takes place]} directly on the target object
 as the last step of the assignment, since some of the
 subcomponents may be self-referential or otherwise
 position-dependent.@Chg{Version=[2],New=[ This Adjust can be eliminated only
-by using one of the following permissions.],Old=[]}]}
+by using one of the following permissions.],Old=[]}
 @end{Ramification}
-@begin{ImplNote}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
-@ChgAdded{Version=[3],Text=[We sometimes require that an @nt{aggregate} or
-function call not use an anonymous object and be constructed directly in
-the target object. Not using an anonymous object in this way means
-the target object is @i{built-in-place}.@PDefn{build-in-place}]}
-@end{ImplNote}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00147-01]}
@@ -2880,28 +3089,31 @@ Controlled types and user-defined finalization are new to Ada 95.
   are covered.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Eliminated coextensions
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Eliminated coextensions
   from the @ldquote@;needs finalization@rdquote rules, as this cannot be
   determined in general in the compilation unit that declares the type.
   (The designated type of the coextension may have been imported as a
   limited view.) Uses of @ldquote@;needs finalization@rdquote need to
   ensure that coextensions are handled by other means (such as
   in No_Nested_Finalization @en see @RefSecNum{Tasking Restrictions})
-  or that they cannot happen.]}
+  or that coextensions cannot happen.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the
   @ldquote@;needs finalization@rdquote rules to include class-wide types,
   as a future extension can include a part that needs finalization.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0026-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected the
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the
   @ldquote@;needs finalization@rdquote rules to clearly say that they
   ignore privacy.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}@Comment{May need future changes}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Corrected wording to
-  reflect that limited types also have assignment operations.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Changed @ldquote@;built in place@rdquote
+  to @RuntimeTitle and centralized the rules here. This eliminates the
+  fiction that built in place is just a combination of a permission and
+  a requirement; it clearly has noticable semantic effects. This wording
+  change is not intended to change the semantics of any correct Ada program.]}
 @end{DiffWord95}
 
 
@@ -3063,17 +3275,37 @@ really means
 @leading@keepnext@RootDefn2{Term=[finalization], Sec=(of an object)}
 For the @i{finalization} of an object:
 @begin{Itemize}
-  If the object is of an elementary type, finalization has no effect;
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0099-1]}
+  If @Chg{Version=[3],New=[the full type of ],Old=[]}the object is
+  @Chg{Version=[3],New=[],Old=[of ]}an elementary type, finalization
+  has no effect;
+  @begin{Reason}
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0099-1]}
+    @ChgAdded{Version=[3],Text=[We say @ldquote@;full type@rdquote in this
+    and the following bullets as privacy is ignored for the purpose of
+    determing the finalization actions of an object; that is as expected
+    for @RunTimeTitle rules.]}
+  @end{Reason}
 
-  If the object is of a controlled type, the Finalize procedure is
-  called;
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0099-1]}
+  If @Chg{Version=[3],New=[the full type of ],Old=[]}the object is
+  @Chg{Version=[3],New=[a tagged type, and the tag of the object
+  identifies],Old=[of]} a controlled type,
+  the Finalize procedure @Chg{Version=[3],New=[of that controlled
+  type ],Old=[]}is called;
 
-  If the object is of a protected type, the actions defined in
-  @RefSecNum{Protected Units and Protected Objects} are performed;
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0099-1]}
+  If @Chg{Version=[3],New=[the full type of ],Old=[]}the object is
+  @Chg{Version=[3],New=[],Old=[of ]}a protected type,
+  @Chg{Version=[3],New=[or if the full type of the object is a tagged type
+  and the tag of the object identifies a protected type, ],Old=[]}the
+  actions defined in @RefSecNum{Protected Units and Protected Objects} are performed;
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
-  If the object is of a composite type, then after performing the
-  above actions, if any, every component of the object
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0099-1]}
+  If @Chg{Version=[3],New=[the full type of ],Old=[]}the object is
+  @Chg{Version=[3],New=[],Old=[of ]}a composite type, then after performing
+  the above actions, if any, every component of the object
   is finalized in an arbitrary order, except as follows:
   if the object has
   a component with an access discriminant constrained by a per-object
@@ -3087,6 +3319,13 @@ For the @i{finalization} of an object:
     to refer to other components of the enclosing object prior to
     their being finalized.
   @end{Reason}
+  @begin{Honest}
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0099-1]}
+    @ChgAdded{Version=[3],Text=[The components discussed here are all of the
+    components that the object actually has, not just those components that are
+    statically identified by the type of the object. These can be different if
+    the object has a classwide type.]}
+  @end{Honest}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[If the object has coextensions (see
@@ -3094,7 +3333,7 @@ For the @i{finalization} of an object:
   finalized after the object whose access discriminant designates it.]}
 
 @begin{Ramification}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0066-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0066-1]}
   @ChgAdded{Version=[3],Text=[In the case of an aggregate or function call that is used
   (in its entirety) to directly initialize a part of an object, the
   coextensions of the result of evaluating the aggregate or function
@@ -3193,7 +3432,7 @@ finalized state.
 The target of an @Chg{Version=[2],New=[@nt{assignment_statement}],
 Old=[assignment statement]} is finalized before copying in the
 new value, as explained
-in @RefSecNum{User-Defined Assignment and Finalization}.
+in @RefSecNum{Assignment and Finalization}.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0021],ARef=[AI95-00182-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}
@@ -3628,7 +3867,7 @@ operation is never executed, and no adjustment takes place. While
 built-in-place
 is always allowed, it is required for some types @em see
 @RefSecNum{Limited Types} and
-@RefSecNum{User-Defined Assignment and Finalization} @em and that's
+@RefSecNum{Assignment and Finalization} @em and that's
 important since limited types have no Adjust to call.]}
 @end{Itemize}
 
@@ -3694,6 +3933,18 @@ Task waiting is closely related to user-defined finalization;
 the rules here refer to the task-waiting rules of Section 9.
 @end{DiffWord83}
 
+@begin{Inconsistent95}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0066-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2:>
+  Changed the definition
+  of the master of an anonymous object used to directly initialize an
+  object, so it can be finalized immediately rather than having to hang
+  around as long as the object. In this case, the Amendment 1 definition was
+  inconsistent with Ada 95, and Amendment 2 changes it back. It is unlikely
+  that many compilers implemented the rule as written in Amendment 1,
+  so an inconsistency is unlikely to arise in practice.]}
+@end{Inconsistent95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0021],ARef=[AI95-00182-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Fixed the wording to say that
@@ -3729,12 +3980,12 @@ the rules here refer to the task-waiting rules of Section 9.
   the concept did not have a name, it was overlooked.)]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0064-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Removed a redundant rule,
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Removed a redundant rule,
   which is now covered by the additional places where masters are defined.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0066-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Changed the definition
-  of the master of an anonymous object used to directly initialize an
-  object, so it can be finalized immediately rather than having to hang
-  around as long as the object.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0099-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Clarified the finalization
+  rules so that there is no doubt that privacy is ignored, and to ensure
+  that objects of classwide interface types are finalized based on their
+  concrete type.]}
 @end{DiffWord95}

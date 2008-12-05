@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2008/07/12 04:04:48 $}
+@Comment{$Date: 2008/11/26 23:41:02 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -423,7 +423,7 @@ pragma Discard_Names (when applied to an exception)
 pragma Asynchronous (applies to procedures)
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00414-01]}
-@ChgAdded{Version=[2],Text=[pragma No_Return (applies to procedures)]}
+@ChgAdded{Version=[2],Text=[pragma No_Return (applies to subprograms)]}
 @end{Itemize}
 @end{Ramification}
 
@@ -493,6 +493,22 @@ the same aspect of the type.]}
   partial views. Since they don't affect the representation, the full
   declaration need not be known to determine their legality.]}
 @end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0106-1]}
+@ChgAdded{Version=[3],Text=[Unless otherwise specified, an operational or
+representational item shall not specify an aspect of a generic formal
+parameter.]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[Specifying an aspect on a generic formal
+  parameter implies an added contract for a generic unit. That contract
+  needs to be defined via generic parameter matching rules, and, as
+  aspects vary widely, that has to be done for each such aspect. Since
+  most aspects do not need this complexity (including all language-defined
+  aspects as of this writing), we avoid the complexity by saying that
+  such contract-forming aspect specifications are banned unless the
+  rules defining them explicitly exist.]}
+@end{Reason}
 
 For an untagged derived type, no type-related representation items
 are allowed if the parent type is a by-reference type,
@@ -831,6 +847,17 @@ components of a composite value in the same way for all subtypes of a
 given composite type.
 Hence, Component_Size and record layout are type-related aspects.
 @end{Discussion}
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0083-1]}
+@ChgAdded{Version=[3],Text=[As noted previously, in the case of an
+object, the entity mentioned in this text is a specific view of an object. That
+means that only references to the same view of an object that has a specified
+value for a representation aspect @i<R> necessarily have that value for the
+aspect @i<R>. The value of the aspect @i<R> for a different view of that object
+is unspecified. In particular, this means that the representation values for
+by-reference parameters is unspecified; they do not have to be the same as those
+of the underlying object.]}
+@end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgAdded{Version=[1],Text=[@Defn2{Term=[specified], Sec=(of an operational aspect of an entity)}
@@ -1105,6 +1132,17 @@ Some of the more stringent requirements are moved to
 @RefSec{Required Representation Support}.
 @end{DiffWord83}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0106-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b<Amendment 2:>
+  Specifying a language-defined aspect for a generic formal parameter is no
+  longer allowed. Most aspects could not be specified on these anyway; moreover,
+  this was not allowed in Ada 83, so it is unlikely that compilers are
+  supporting this as a capability (and it is not likely that they have a
+  consistent definition of what it means if it is allowed). Thus, we expect
+  this to occur rarely in existing programs.]}
+@end{Incompatible95}
+
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -1152,11 +1190,13 @@ Some of the more stringent requirements are moved to
   of subprograms.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Defined that overriding of
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Defined that overriding of
   an aspect of representation only happens for a non-confirming representation
   item. This prevents a derived type from being considered to have
   only a confirming representation item when the value would be non-confirming
-  if given on a type that does not inherit any aspects of representation.]}
+  if given on a type that does not inherit any aspects of representation.
+  This change just eliminates a wording confusion and ought not change any
+  behavior.]}
 @end{DiffWord95}
 
 
@@ -1245,7 +1285,9 @@ probably more efficient than a component of size 7 plus a 1-bit gap
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
-For a packed array type, if the component subtype's Size is less
+For a packed array type, if the @Chg{Version=[3],New=[],
+Old=[component subtype's ]}Size@Chg{Version=[3],New=[ of the
+component subtype],Old=[]} is less
 than or equal to the word size@Chg{Version=[3],New=[],Old=[, and
 Component_Size is not specified for the type]}, Component_Size should be less than or
 equal to the Size of the component subtype, rounded up to the nearest
@@ -1269,7 +1311,7 @@ followed.]}]}
   effect.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Fixed so that the
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Fixed so that the
   presence or absence of a confirming Component_Size representation
   clause does not change the meaning of pragma Pack.]}
 @end{DiffWord95}
@@ -1493,15 +1535,19 @@ allocated to X. For a program unit or
 label, this value refers to the machine code associated with
 the corresponding body or @nt{statement}.
 The value of this attribute is of type System.Address.>}
+
 @begin{Ramification}
-
-  Here, the @lquotes@;first of the storage elements@rquotes@; is intended to mean
-  the one with the lowest address;
+  Here, the @lquotes@;first of the storage elements@rquotes@; is intended
+  to mean the one with the lowest address;
   the endianness of the machine doesn't matter.
-
 @end{Ramification}
 
-@NoPrefix@;@PDefn2{Term=[specifiable], Sec=(of Address for stand-alone
+@NoPrefix@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0095-1]}
+@ChgAdded{Version=[3],Text=[The prefix of X'Address shall not statically denote
+a subprogram that has convention Intrinsic. X'Address raises Program_Error if X
+denotes a subprogram that has convention Intrinsic.]}
+
+@NoPrefix@PDefn2{Term=[specifiable], Sec=(of Address for stand-alone
 objects and for program units)}
 @Defn{Address clause}
 @ChgNote{Removed Redundant here, as per AI-00114. Did not mark change, as it is
@@ -1512,6 +1558,13 @@ stand-alone objects and for program units via an
   Address is not allowed for enumeration literals,
   predefined operators, derived task types,
   or derived protected types, since they are not program units.
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Address is not allowed for intrinsic subprograms,
+  either. That can be checked statically unless the prefix is a generic formal
+  subprogram and the attribute reference is in the body of a generic unit.
+  We define that case to raise Program_Error, in order that the compiler
+  does not have to build a wrapper for intrinsic subprograms.]}
 
   The validity of a given address depends on the run-time model;
   thus, in order to use Address clauses correctly,
@@ -2448,7 +2501,8 @@ A @nt{pragma} Pack cannot.
 
 @begin{Inconsistent83}
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00114-01]}
-  @ChgAdded{Version=[2],Text=[We specify the meaning of Size in much more
+  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 83}We specify
+  the meaning of Size in much more
   detail than Ada 83. This is not technically an inconsistency, but it is in
   practice, as most Ada 83 compilers use a different definition for Size than
   is required here. This should have been documented more explicitly during
@@ -2776,6 +2830,29 @@ In Ada 95, they are the same,
 except for certain explicit exceptions.
 @end{DiffWord83}
 
+@begin{Inconsistent95}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI95-0095-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}
+  @b<Amendment 2:> An address attribute with a prefix of a generic formal
+  subprogram whose actual parameter has convention Intrinsic now raises
+  Program_Error. Since it is unlikely that such an attribute would have done
+  anything useful (a subprogram with convention Intrinsic is not expected
+  to have a normal subprogram body), it is highly unlikely that any
+  existing programs would notice the difference, and any that do probably
+  are buggy.]}
+@end{Inconsistent95}
+
+@begin{Incompatible95}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0095-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b[Amendment 2:]
+  An address attribute with a prefix of a subprogram with convention Intrinsic is
+  now illegal. Such attributes are very unlikely to have provided a useful
+  answer (the intended meaning
+  of convention Intrinsic is that there is no actual subprogram body for
+  the operation), so this is highly unlikely to affect any existing programs
+  unless they have a hidden bug.]}
+@end{Incompatible95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to specify for
@@ -2820,7 +2897,7 @@ except for certain explicit exceptions.
   to both.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
-  @ChgAdded{Version=[3],Text=[@b<Corrigendum 2:> Improved the description
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Improved the description
   of erroneous execution for address clauses to make it clear that
   specifying an address inappropriate for the entity will lead to
   erroneous execution.]}
