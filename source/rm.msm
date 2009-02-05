@@ -20,7 +20,7 @@
 @RTFHeaderPrefix{Version=[1],Text=[ISO/IEC 8652:1995(E) with COR.1:2001]}
 @Comment{PDFs: }@RTFHeaderPrefix{Version=[2],Text=[ISO/IEC 8652:2007(E) Ed. 3]}
 @Comment{Springer: @RTFHeaderPrefix{Version=[2],Text=[Consolidated Ada Reference Manual - 2005 Edition]}}
-@RTFHeaderPrefix{Version=[3],Text=[ISO/IEC 8652:20zz(E) Ed. 4]}
+@RTFHeaderPrefix{Version=[3],Text=[ISO/IEC 8652:201z(E) Ed. 3]}
 @RTFPageSize{Ada95}
 @RTFFonts{Serif=[Times],SansSerif=[Arial]}
 
@@ -33,8 +33,8 @@
 @HTMLTabs{EmulateFixedOnly}
 @HTMLHeader{<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>}
 @HTMLFooter{<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
-<SPAN Style="vertical-align: middle">Sponsored by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
-<SPAN Style="font-size: 125%"> and (since late 2007) by the <SPAN Style="font-size: 125%"><A HREF="http://www.adaresource.org/"><B>Ada Resource Association</B></A></SPAN></SPAN></DIV>}
+<SPAN Style="vertical-align: middle">Sponsored by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN><BR><BR>
+and (since late 2007) by the <SPAN Style="font-size: 125%"><A HREF="http://www.adaresource.org/"><B>Ada Resource Association</B></A></SPAN></SPAN></DIV>}
 @HTMLColor{Text=[#000000],Background=[#FFFFF0],Link=[#000080],VLink=[#330033],ALink=[#0000FF]}
 
 @Comment{Source files and related items, in collating order}

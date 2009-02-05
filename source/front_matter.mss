@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.60 $ $Date: 2008/11/26 23:41:03 $}
+@comment{$Revision: 1.61 $ $Date: 2008/12/05 03:01:42 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -36,7 +36,7 @@ by early]} 2007.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[In November 2008, WG 9 requested
-the preparation of an Amendment to the International Standard.
+the preparation of a second Amendment to the International Standard.
 The completion of Amendment 2 is expected at the end of 2010, with
 final approval in 2011.]}
 
