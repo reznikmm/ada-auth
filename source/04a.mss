@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:01 $}
+@Comment{$Date: 2009/02/05 07:12:35 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.97 $}
+@Comment{$Revision: 1.98 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -276,15 +276,15 @@ of implicit dereference.
 @end{DiffWord83}
 
 @begin{Extend95}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0015-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0003-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}@b<Amendment 2:>
   A @nt{qualified_expression} is now a @nt{name} representing a constant view;
   this allows them to be used as a prefix and to be renamed as an object.
   They are often used to remove ambiguity from function calls, and there
   may be no other way to do that. Interestingly, a @nt{type_conversion} of
-  a @nt{qualified_expression} is legal in these contexts, so this change
-  mainly reduces clutter by eliminating an otherwise unneeded @nt{type_conversion}
-  from some expressions.]}
+  a @nt{qualified_expression} is already legal in these contexts, so this
+  change mainly reduces clutter by eliminating an otherwise unneeded
+  @nt{type_conversion} from some expressions.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -4212,8 +4212,8 @@ or the floating point type):
 @Defn{exponent}
 The right operand of an exponentiation is the @i(exponent).
 The @Chg{Version=[3],New=[value of],Old=[expression]} X**N with the value of
-the exponent N positive @Chg{Version=[3],New=[the same as the value of],
-Old=[is equivalent to the expression]} X*X*...X (with N@en@;1 multiplications)
+the exponent N positive is @Chg{Version=[3],New=[the same as the value of],
+Old=[equivalent to the expression]} X*X*...X (with N@en@;1 multiplications)
 except that the multiplications
 are associated in an arbitrary order. With N equal to zero, the result is one.
 With the value of N negative

@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:02 $}
+@Comment{$Date: 2009/02/05 07:12:35 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -2154,7 +2154,7 @@ provided:
 @end{Example}
   @Trailing@ChgRef{Version=[1],Kind=[Revised]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0038-1]}@Chg{Version=[3],
-  New=[Status_Error is propagated if the file is not open.],Old=[]}Mode_Error
+  New=[Status_Error is propagated if the file is not open. ],Old=[]}Mode_Error
   is propagated if
   the mode of the file is not In_File. Sets End_Of_Line to True if at end of
   line, including if at end of page or at end of file; in each of these cases
@@ -2172,7 +2172,7 @@ provided:
 @Trailing@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0038-1]}Reads
 the next character, either control or graphic, from the specified
 File or the default input file. @Chg{Version=[3],New=[Status_Error is
-propagated if the file is not open.],Old=[]}Mode_Error is propagated
+propagated if the file is not open. ],Old=[]}Mode_Error is propagated
 if the mode of the
 file is not In_File. End_Error is propagated if at the end of the file.
 The current column, line and page numbers for the file are not affected.
@@ -2192,7 +2192,7 @@ is not available, then Available is False and the value of
 Item is not specified.
 @PDefn{unspecified}
 @Chg{Version=[3],New=[Status_Error is propagated if the file is
-not open.],Old=[]}Mode_Error is propagated if the mode of the
+not open. ],Old=[]}Mode_Error is propagated if the mode of the
 file is not In_File. End_Error is propagated if at the end of the file.
 The current column, line and page numbers for the file are not affected.
 

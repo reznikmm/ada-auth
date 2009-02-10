@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.40 $ $Date: 2008/11/26 23:41:03 $ $Author: randy $ }
+@Comment{ $Revision: 1.41 $ $Date: 2009/02/05 07:12:35 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:03 $}
+@Comment{$Date: 2009/02/05 07:12:35 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -698,18 +698,21 @@ language defined:],Old=[additional restrictions apply in this Annex.]}
 @leading@keepnext@b{Tasking-related restriction:}
 
 @begin{Description}
-@Trailing@;@Defn2{Term=[Restrictions],Sec=(No_Protected_Types)}No_Protected_Types @\There
+@Trailing@;@Defn2{Term=[restrictions],Sec=(No_Protected_Types)}@Chg{Version=[3],New=[@Defn{No_Protected_Types restriction}],
+Old=[]}No_Protected_Types @\There
 are no declarations of protected types or protected objects.
 @end{Description}
 
 @leading@keepnext@b{Memory-management related restrictions:}
 
 @begin{Description}
-@Defn2{Term=[Restrictions],Sec=(No_Allocators)}No_Allocators @\There are no
+@Defn2{Term=[restrictions],Sec=(No_Allocators)}@Chg{Version=[3],New=[@Defn{No_Allocators restriction}],
+   Old=[]}No_Allocators @\There are no
 occurrences of an @nt{allocator}.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0042],ARef=[AI95-00130]}
-@Defn2{Term=[Restrictions],Sec=(No_Local_Allocators)}No_Local_Allocators @\@nt{Allocator}s
+@Defn2{Term=[restrictions],Sec=(No_Local_Allocators)}@Chg{Version=[3],New=[@Defn{No_Local_Allocators restriction}],
+Old=[]}No_Local_Allocators @\@nt{Allocator}s
 are prohibited in subprograms, generic subprograms,
 tasks, and entry bodies@Chg{New=[],Old=[; instantiations of generic packages
 are also prohibited in these contexts]}.
@@ -731,7 +734,7 @@ liberalizing where they can be instantiated.]}
 @end[Reason]
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00394-01]}
-@ChgDeleted{Version=[2],Text=[@Defn2{Term=[Restrictions],
+@ChgDeleted{Version=[2],Text=[@Defn2{Term=[restrictions],
 Sec=(No_Unchecked_Deallocation)}No_Unchecked_Deallocation @\Semantic
 dependence on Unchecked_Deallocation is not allowed.]}
 @begin{Discussion}
@@ -746,7 +749,8 @@ dependence on Unchecked_Deallocation is not allowed.]}
 @nt{allocator}s and not deallocated via unchecked deallocation, any storage
 reserved at run time for an object is immediately reclaimed when the
 object no longer exists.
-@Defn2{Term=[Restrictions],Sec=(Immediate_Reclamation)}
+@Defn2{Term=[restrictions],Sec=(Immediate_Reclamation)}@Chg{Version=[3],New=[@Defn{Immediate_Reclamation restriction}],
+Old=[]}
 @begin{Discussion}
 Immediate reclamation would apply to storage created by the compiler, such
 as for a return value from a function whose size is not known at the
@@ -757,7 +761,8 @@ call site.
 @leading@keepnext@b{Exception-related restriction:}
 
 @begin{Description}
-@Trailing@Defn2{Term=[Restrictions],Sec=(No_Exceptions)}No_Exceptions @\@nt{Raise_statement}s
+@Trailing@Defn2{Term=[restrictions],Sec=(No_Exceptions)}@Chg{Version=[3],New=[@Defn{No_Exceptions restriction}],
+   Old=[]}No_Exceptions @\@nt{Raise_statement}s
 and @nt{exception_handler}s are not allowed.
 No language-defined run-time checks are generated;
 however, a run-time check performed automatically by the hardware
@@ -779,7 +784,8 @@ programming at the assembler level.
 @leading@keepnext@b{Other restrictions:}
 
 @begin{Description}
-@Defn2{Term=[Restrictions],Sec=(No_Floating_Point)}No_Floating_Point @\Uses of predefined floating point types and
+@Defn2{Term=[restrictions],Sec=(No_Floating_Point)}@Chg{Version=[3],New=[@Defn{No_Floating_Point restriction}],
+   Old=[]}No_Floating_Point @\Uses of predefined floating point types and
 operations, and declarations of new floating point types, are
 not allowed.
 @begin{Discussion}
@@ -797,7 +803,8 @@ not have floating point instructions.
 
 @end{Discussion}
 
-@Defn2{Term=[Restrictions],Sec=(No_Fixed_Point)}No_Fixed_Point @\Uses of predefined fixed point types and
+@Defn2{Term=[restrictions],Sec=(No_Fixed_Point)}@Chg{Version=[3],New=[@Defn{No_Fixed_Point restriction}],
+   Old=[]}No_Fixed_Point @\Uses of predefined fixed point types and
 operations, and declarations of new fixed point types, are
 not allowed.
 @begin{Discussion}
@@ -812,7 +819,7 @@ machine level, fixed point is virtually the same as integer arithmetic.
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00394-01]}
-@ChgDeleted{Version=[2],Text=[@Defn2{Term=[Restrictions],
+@ChgDeleted{Version=[2],Text=[@Defn2{Term=[restrictions],
 Sec=(No_Unchecked_Conversion)}No_Unchecked_Conversion @\Semantic dependence
 on the predefined generic Unchecked_Conversion is not allowed.]}
 @begin{Discussion}
@@ -826,7 +833,8 @@ on the predefined generic Unchecked_Conversion is not allowed.]}
 
 No_Access_Subprograms @\The declaration of access-to-subprogram types
 is not allowed.
-@Defn2{Term=[Restrictions],Sec=(No_Access_Subprograms)}
+@Defn2{Term=[restrictions],Sec=(No_Access_Subprograms)}@Chg{Version=[3],New=[@Defn{No_Access_Subprograms restriction}],
+Old=[]}
 @begin{Discussion}@ChgNote{Moved from above}
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[Most critical applications would require
@@ -837,15 +845,18 @@ is not allowed.
   restrictions, and to restriction No_Dependence => Ada.Unchecked_Conversion.]}
 @end{Discussion}
 
-@Defn2{Term=[Restrictions],Sec=(No_Unchecked_Access)}No_Unchecked_Access @\The @attr[Unchecked_Access] attribute
+@Defn2{Term=[restrictions],Sec=(No_Unchecked_Access)}@Chg{Version=[3],New=[@Defn{No_Unchecked_Access restriction}],
+   Old=[]}No_Unchecked_Access @\The @attr[Unchecked_Access] attribute
 is not allowed.
 
-@Defn2{Term=[Restrictions],Sec=(No_Dispatch)}No_Dispatch @\Occurrences of T'Class are not allowed, for any
+@Defn2{Term=[restrictions],Sec=(No_Dispatch)}@Chg{Version=[3],New=[@Defn{No_Dispatch restriction}],
+Old=[]}No_Dispatch @\Occurrences of T'Class are not allowed, for any
 (tagged)
 subtype T.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@Defn2{Term=[Restrictions],Sec=(No_IO)}No_IO @\Semantic dependence on
+@Defn2{Term=[restrictions],Sec=(No_IO)}@Chg{Version=[3],New=[@Defn{No_IO restriction}],
+   Old=[]}No_IO @\Semantic dependence on
 any of the library units
 Sequential_IO, Direct_IO, Text_IO, Wide_Text_IO, @Chg{Version=[2],
 New=[Wide_Wide_Text_IO, ],Old=[]}or Stream_IO is not allowed.
@@ -858,7 +869,8 @@ facilities or a call on a non-Ada feature.
 
 @end{Discussion}
 
-@Defn2{Term=[Restrictions],Sec=(No_Delay)}No_Delay @\@nt[Delay_Statement]s
+@Defn2{Term=[restrictions],Sec=(No_Delay)}@Chg{Version=[3],New=[@Defn{No_Delay restriction}],
+Old=[]}No_Delay @\@nt[Delay_Statement]s
 and semantic dependence on package Calendar
 are not allowed.
 @begin[Ramification]
@@ -870,10 +882,12 @@ within the run-time system.
 
 @end[ramification]
 
-@Defn2{Term=[Restrictions],Sec=(No_Recursion)}No_Recursion @\As part of the execution of a subprogram, the same
+@Defn2{Term=[restrictions],Sec=(No_Recursion)}@Chg{Version=[3],New=[@Defn{No_Recursion restriction}],
+   Old=[]}No_Recursion @\As part of the execution of a subprogram, the same
 subprogram is not invoked.
 
-@Defn2{Term=[Restrictions],Sec=(No_Reentrancy)}No_Reentrancy @\During the execution of a subprogram by a task, no other
+@Defn2{Term=[restrictions],Sec=(No_Reentrancy)}@Chg{Version=[3],New=[@Defn{No_Reentrany restriction}],
+   Old=[]}No_Reentrancy @\During the execution of a subprogram by a task, no other
 task invokes the same subprogram.
 
 @end{description}

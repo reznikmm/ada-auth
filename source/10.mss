@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:02 $}
+@Comment{$Date: 2009/02/05 07:12:35 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -423,7 +423,7 @@ limited view of that package, with the same @nt{defining_program_unit_name}.]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06],ARef=[AI95-00326-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0108-1]}
 @ChgAdded{Version=[2],Text=[For each @nt{type_declaration} in the visible part, an
-incomplete view of the type@Chg{Version=[3],New=[with no discriminant_part],Old=[]};
+incomplete view of the type@Chg{Version=[3],New=[ with no @nt{discriminant_part}],Old=[]};
 if the @nt{type_declaration} is
 tagged, then the view is a tagged incomplete view.]}
 @begin{Ramification}

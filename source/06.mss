@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:01 $}
+@Comment{$Date: 2009/02/05 07:12:35 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1949,8 +1949,9 @@ as it is subsumed by earlier clauses and subclauses.
   changed via another path. Such cases are erroneous as requiring compilers
   to detect such errors would be expensive, and requiring such cases to
   work would be a major change of the user model (@key[in] parameters
-  would no longer could be assumed constant). This is not an inconsistency,
-  as compilers are not required to change any current behavior.]}
+  with discriminants could no longer be assumed constant). This is not
+  an inconsistency, as compilers are not required to change any current
+  behavior.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0118-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a definition for
@@ -2072,7 +2073,7 @@ with the reserved word @key[constant] shall include an @nt{expression}.],Old=[]}
 @ChgAdded{Version=[2],Text=[If the result subtype of the function is defined by a
 @nt{subtype_mark}, the @nt{return_@!subtype_@!indication} shall be a
 @nt{subtype_indication}. The type of the @nt{subtype_indication}
-shall be@Chg{Version=[3],New=[covered by ],Old=[]} the
+shall be@Chg{Version=[3],New=[ covered by],Old=[]} the
 result type of the function. If the result subtype of the function is
 constrained, then the subtype defined by the @nt{subtype_indication} shall also
 be constrained and shall statically match this result subtype.
@@ -2495,7 +2496,7 @@ that object.]}
 @nt{extended_@!return_@!statement} causes a transfer of control that completes
 the @nt{extended_@!return_@!statement}. Upon completion
 of a return statement that applies to a callable construct@Chg{Version=[3],
-New=[by the normal completion of a @nt{simple_return_statement} or
+New=[ by the normal completion of a @nt{simple_return_statement} or
 by reaching the @key[end return] of an @nt{extended_return_statement}],
 Old=[]}],Old=[Finally]}, a
 transfer of control is performed which completes the execution of the callable
@@ -2672,12 +2673,13 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
 
 @begin{Inconsistent95}
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-0416-1]}
-  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0050-1]}
+  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0005-1],ARef=[AI05-0050-1]}
   @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
   Added an @ImplPermName allowing early raising of Constraint_Error if the
   result cannot fit in the ultimate object. This gives implementations more
   flexibility to do built-in-place returns, and is essential for limited types
-  (which cannot be built in a temporary). However, it allows raising an
+  (which cannot be built in a temporary). However, it allows
+  raising @Chg{Version=[3],New=[],Old=[an ]}
   Constraint_Error in some cases where it would not be raised if the
   permission was not used. @Chg{Version=[3],New=[@b<Amendment 2> removes the
   most common of these cases from the permission (returning an object with

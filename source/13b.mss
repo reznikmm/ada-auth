@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:02 $}
+@Comment{$Date: 2009/02/05 07:12:35 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -2645,7 +2645,9 @@ restrictions are defined in the Specialized Needs Annexes):]}
 @begin{Description}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00257-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Implementation_Attributes)}No_Implementation_Attributes @\There
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],
+   Sec=(No_Implementation_Attributes)}@Chg{Version=[3],New=[@Defn{No_Implementation_Pragmas restriction}],
+   Old=[]}No_Implementation_Attributes @\There
    are no implementation-defined attributes. This restriction applies
    only to the current compilation or environment, not the entire partition.]}
 @begin{Discussion}
@@ -2658,13 +2660,17 @@ restrictions are defined in the Specialized Needs Annexes):]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00257-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Implementation_Pragmas)}No_Implementation_Pragmas @\There
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],
+   Sec=(No_Implementation_Pragmas)}@Chg{Version=[3],New=[@Defn{No_Implementation_Pragmas restriction}],
+   Old=[]}No_Implementation_Pragmas @\There
    are no implementation-defined pragmas or pragma arguments. This
    restriction applies only to the current compilation or environment, not the
    entire partition.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00368-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Obsolescent_Features)}No_Obsolescent_Features @\There
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],
+   Sec=(No_Obsolescent_Features)}@Chg{Version=[3],New=[@Defn{No_Obsolescent_Features restriction}],
+   Old=[]}No_Obsolescent_Features @\There
    is no use of language features defined in Annex J. It is
    implementation-defined if uses of the renamings of
    @RefSecNum{Renamings of Library Units} are detected by this
@@ -2697,7 +2703,7 @@ restrictions are defined in the Specialized Needs Annexes):]}
 @begin{Description}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Dependence)}No_Dependence @\Specifies
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Dependence)}No_Dependence @\Specifies
    a library unit on which there are no semantic dependences.]}
 @end{Description}
 

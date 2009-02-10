@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.82 $ $Date: 2008/11/26 23:41:03 $ $Author: randy $ }
+@comment{ $Revision: 1.83 $ $Date: 2009/02/05 07:12:35 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2008/11/26 23:41:03 $}
+@Comment{$Date: 2009/02/05 07:12:35 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -933,7 +933,10 @@ dispatching policy.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[The @SynI{policy_}@nt{identifier}
-FIFO_Within_Priorities is a task dispatching policy.]}
+FIFO_Within_Priorities is a task dispatching
+policy.@Chg{Version=[3],New=[@Defn2{Term=[task dispatching policy],
+Sec=(FIFO_Within_Priorities)}@Defn{FIFO_Within_Priorities task dispatching policy}],
+Old=[]}]}
 
 @end{StaticSem}
 
@@ -1079,7 +1082,10 @@ dispatching policy.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00298-01],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[The @SynI{policy_}@nt{identifier}
-Non_Preemptive_FIFO_Within_Priorities is a task dispatching policy.]}
+Non_Preemptive_FIFO_Within_Priorities is a task dispatching
+policy.@Chg{Version=[3],New=[@Defn2{Term=[task dispatching policy],
+Sec=(Non_Preemptive_FIFO_Within_Priorities)}@Defn{Non_Preemptive_FIFO_Within_Priorities task disp. policy}],
+Old=[]}]}
 
 @end{StaticSem}
 
@@ -1188,7 +1194,10 @@ policy Round_Robin_Within_Priorities and the package Round_Robin.]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[The @SynI{policy}_@nt{identifier}
-Round_Robin_Within_Priorities is a task dispatching policy.]}
+Round_Robin_Within_Priorities is a task dispatching
+policy.@Chg{Version=[3],New=[@Defn2{Term=[task dispatching policy],
+Sec=(Round_Robin_Within_Priorities)}@Defn{Round_Robin_Within_Priorities task dispatching policy}],
+Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
@@ -1425,7 +1434,10 @@ construct.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[The @SynI{policy_}@nt{identifier}
-EDF_Across_Priorities is a task dispatching policy.]}
+EDF_Across_Priorities is a task dispatching
+policy.@Chg{Version=[3],New=[@Defn2{Term=[task dispatching policy],
+Sec=(EDF_Across_Priorities)}@Defn{EDF_Across_Priorities task dispatching policy}],
+Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The following
@@ -1754,7 +1766,9 @@ is specified by the locking policy.
 @PDefn2{Term=[implicit subtype conversion],Sec=(pragma Interrupt_Priority)}]}
 
 @Leading@;There is one predefined locking policy, Ceiling_Locking; this policy is
-defined as follows:
+defined as follows:@Chg{Version=[3],New=[@Defn2{Term=[locking policy],
+Sec=(Ceiling_Locking)}@Defn{Ceiling_Locking locking policy}],
+Old=[]}
 @begin{itemize}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00327-01]}
@@ -2039,11 +2053,15 @@ Two queuing policies, FIFO_Queuing and Priority_Queuing,
 are language defined. If no Queuing_Policy pragma
 @Chg{Version=[2],New=[applies to],Old=[appears in]} any of the program units
 comprising the partition, the queuing policy for that partition
-is FIFO_Queuing. The rules for this policy are specified in
+is FIFO_Queuing.@Chg{Version=[3],New=[@Defn2{Term=[queuing policy],
+Sec=(FIFO_Queuing)}@Defn{FIFO_Queuing queuing policy}],
+Old=[]} The rules for this policy are specified in
 @RefSecNum{Entry Calls} and @RefSecNum{Selective Accept}.
 
-@Leading@Keepnext@;The Priority_Queuing policy is defined as follows:
-@begin{itemize}
+@Leading@Keepnext@;The Priority_Queuing policy is defined as
+follows:@Chg{Version=[3],New=[@Defn2{Term=[queuing policy],
+Sec=(Priority_Queuing)}@Defn{Priority_Queuing queuing policy}],
+Old=[]}@begin{itemize}
 
 @Defn{priority of an entry call}
 The calls to an entry @Redundant[(including a member of an entry family)]
@@ -2723,7 +2741,8 @@ construction of highly efficient tasking run-time systems.]
 @Leading@;The following @SynI{restriction_}@nt{identifier}s are language defined:
 @begin{Description}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
-@Defn2{Term=[Restrictions],Sec=(No_Task_Hierarchy)}No_Task_Hierarchy @\@Chg{Version=[3],
+@Defn2{Term=[restrictions],Sec=(No_Task_Hierarchy)}@Chg{Version=[3],New=[@Defn{No_Task_Hierarchy restriction}],
+   Old=[]}No_Task_Hierarchy @\@Chg{Version=[3],
   New=[No task depends on a task other than],Old=[All
   (nonenvironment) tasks depend directly on]}
   the environment task of the partition.
@@ -2739,7 +2758,8 @@ construction of highly efficient tasking run-time systems.]
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0042],ARef=[AI95-00130-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00360-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
-@Defn2{Term=[Restrictions],Sec=(No_Nested_Finalization)}No_Nested_Finalization @\Objects
+@Defn2{Term=[restrictions],Sec=(No_Nested_Finalization)}@Chg{Version=[3],New=[@Defn{No_Nested_Finalization restriction}],
+   Old=[]}No_Nested_Finalization @\Objects
   @Chg{Version=[2],New=[of a type that needs finalization (see
   @RefSecNum{Assignment and Finalization})],Old=[with
   controlled@Chg{New=[, protected, or task],Old=[]} parts]}
@@ -2767,16 +2787,20 @@ construction of highly efficient tasking run-time systems.]
     coextension type needs finalization (it could be a limited view).]}
     @end{Ramification}
 
-@Defn2{Term=[Restrictions],Sec=(No_Abort_Statements)}No_Abort_Statements @\There are no @nt{abort_statement}s, and there are no
+@Defn2{Term=[restrictions],Sec=(No_Abort_Statements)}@Chg{Version=[3],New=[@Defn{No_Abort_Statements restriction}],
+   Old=[]}No_Abort_Statements @\There are no @nt{abort_statement}s, and there are no
 calls on Task_Identification.Abort_Task.
 
-@Defn2{Term=[Restrictions],Sec=(No_Terminate_Alternatives)}No_Terminate_Alternatives @\There are no @nt{selective_accept}s with
+@Defn2{Term=[restrictions],Sec=(No_Terminate_Alternatives)}@Chg{Version=[3],New=[@Defn{No_Terminate_Alternatives restriction}],
+   Old=[]}No_Terminate_Alternatives @\There are no @nt{selective_accept}s with
                         @nt{terminate_alternative}s.
 
-@Defn2{Term=[Restrictions],Sec=(No_Task_Allocators)}No_Task_Allocators @\There are no @nt{allocator}s for task types or types
+@Defn2{Term=[restrictions],Sec=(No_Task_Allocators)}@Chg{Version=[3],New=[@Defn{No_Task_Allocators restriction}],
+   Old=[]}No_Task_Allocators @\There are no @nt{allocator}s for task types or types
                         containing task subcomponents.
 
-@Defn2{Term=[Restrictions],Sec=(No_Implicit_Heap_Allocations)}No_Implicit_Heap_Allocations @\There are no operations that implicitly require
+@Defn2{Term=[restrictions],Sec=(No_Implicit_Heap_Allocations)}@Chg{Version=[3],New=[@Defn{No_Implicit_Heap_Allocations restriction}],
+   Old=[]}No_Implicit_Heap_Allocations @\There are no operations that implicitly require
                         heap storage allocation to be performed by the
                         implementation. The operations that implicitly
                         require heap storage allocation are
@@ -2788,12 +2812,15 @@ require heap storage allocation.}
 No_Dynamic_Priorities @\There are no semantic dependences on the package
                 Dynamic_Priorities@Chg{Version=[2],New=[, and no occurrences
                 of the attribute Priority],Old=[]}.
-@Defn2{Term=[Restrictions],Sec=(No_Dynamic_Priorities)}
+@Defn2{Term=[restrictions],Sec=(No_Dynamic_Priorities)}@Chg{Version=[3],New=[@Defn{No_Dynamic_Priorities restriction}],
+Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00305-01],ARef=[AI95-00394-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
-@Chg{Version=[2],New=[@Defn2{Term=[Restrictions],Sec=(No_Dynamic_Attachment)}No_Dynamic_Attachment],
-Old=[@Defn2{Term=[Restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Control]}
+@Chg{Version=[2],New=[@Defn2{Term=[restrictions],
+   Sec=(No_Dynamic_Attachment)}@Chg{Version=[3],New=[@Defn{No_Dynamic_Attachment restriction}],
+   Old=[]}No_Dynamic_Attachment],
+Old=[@Defn2{Term=[restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Control]}
     @\There
     @Chg{Version=[2],New=[is no @Chg{Version=[3],New=[use of],Old=[call to]}
     any of the operations defined
@@ -2809,40 +2836,48 @@ Old=[@Defn2{Term=[Restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Co
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Local_Protected_Objects)}No_Local_Protected_Objects @\Protected
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Local_Protected_Objects)}@Chg{Version=[3],New=[@Defn{No_Local_Protected_Objects restriction}],
+   Old=[]}No_Local_Protected_Objects @\Protected
    objects @Chg{Version=[2],New=[are],Old=[shall be]} declared only at
    library level.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00297-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Local_Timing_Events)}No_Local_Timing_Events @\Timing_Events
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Local_Timing_Events)}@Chg{Version=[3],New=[@Defn{No_Local_Timing_Events restriction}],
+   Old=[]}No_Local_Timing_Events @\Timing_Events
    @Chg{Version=[2],New=[are],Old=[shall be]} declared only at library level.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Protected_Type_Allocators)}No_Protected_Type_Allocators @\There
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Protected_Type_Allocators)}@Chg{Version=[3],New=[@Defn{No_Protected_Type_Allocators restriction}],
+   Old=[]}No_Protected_Type_Allocators @\There
    are no @nt{allocator}s for protected types or types
    containing protected type subcomponents.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Relative_Delay)}No_Relative_Delay @\There
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Relative_Delay)}@Chg{Version=[3],New=[@Defn{No_Relative_Delay restriction}],
+   Old=[]}No_Relative_Delay @\There
    are no @nt{delay_relative_statement}s.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Requeue_Statements)}No_Requeue_Statements @\There
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Requeue_Statements)}@Chg{Version=[3],New=[@Defn{No_Requeue_Statements restriction}],
+   Old=[]}No_Requeue_Statements @\There
    are no @nt{requeue_statement}s.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Select_Statements)}No_Select_Statements @\There
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Select_Statements)}@Chg{Version=[3],New=[@Defn{No_Select_Statements restriction}],
+   Old=[]}No_Select_Statements @\There
    are no @nt{select_statement}s.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00394-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Specific_Termination_Handlers)}No_Specific_Termination_Handlers @\There
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Specific_Termination_Handlers)}@Chg{Version=[3],New=[@Defn{No_Specific_Termination_Handlers restriction}],
+   Old=[]}No_Specific_Termination_Handlers @\There
   are no calls to the Set_Specific_Handler and Specific_Handler subprograms
   in Task_Termination.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(Simple_Barriers)}Simple_Barriers @\The
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(Simple_Barriers)}@Chg{Version=[3],New=[@Defn{Simple_Barriers restriction}],
+   Old=[]}Simple_Barriers @\The
    Boolean expression in @Chg{Version=[3],New=[each],Old=[an]} entry barrier
    @Chg{Version=[3],New=[is],Old=[shall be]} either a static
    @Chg{Version=[3],New=[],Old=[Boolean ]}expression or a
@@ -2854,10 +2889,12 @@ Old=[@Defn2{Term=[Restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Co
 @Leading@;The following @SynI{restriction_parameter_}@nt{identifier}s are
 language defined:
 @begin{Description}
-@Defn2{Term=[Restrictions],Sec=(Max_Select_Alternatives)}Max_Select_Alternatives @\Specifies the maximum number of alternatives
+@Defn2{Term=[restrictions],Sec=(Max_Select_Alternatives)}@Chg{Version=[3],New=[@Defn{Max_Select_Alternatives restriction}],
+   Old=[]}Max_Select_Alternatives @\Specifies the maximum number of alternatives
                 in a @nt{selective_accept}.
 
-@Defn2{Term=[Restrictions],Sec=(Max_Task_Entries)}Max_Task_Entries @\Specifies the maximum number of entries per task.
+@Defn2{Term=[restrictions],Sec=(Max_Task_Entries)}@Chg{Version=[3],New=[@Defn{Max_Task_Entries restriction}],
+   Old=[]}Max_Task_Entries @\Specifies the maximum number of entries per task.
     The bounds of every entry family
     of a task unit shall be static,
     or shall be defined by a discriminant of a subtype whose
@@ -2871,7 +2908,8 @@ Max_Protected_Entries @\Specifies the maximum number of entries per
     of a protected unit shall be static,
     or shall be defined by a discriminant of a subtype whose
     corresponding bound is static.
-@Defn2{Term=[Restrictions],Sec=(Max_Protected_Entries)}
+@Defn2{Term=[restrictions],Sec=(Max_Protected_Entries)}@Chg{Version=[3],New=[@Defn{Max_Protected_Entries restriction}],
+Old=[]}
 @end{Description}
 @end{StaticSem}
 
@@ -2890,7 +2928,8 @@ Storage_Error should be raised.]}
 
 @begin{Description}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01],ARef=[AI95-00394-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],Sec=(No_Task_Termination)}No_Task_Termination @\All
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Task_Termination)}@Chg{Version=[3],New=[@Defn{No_Task_Termination restriction}],
+   Old=[]}No_Task_Termination @\All
    tasks are non-terminating. It is implementation-defined what happens if
    a task attempts to terminate. If there is a fall-back handler (see C.7.3)
    set for the partition it should be called when the first task attempts to
@@ -2904,7 +2943,8 @@ Text=[When restriction No_Task_Termination applies to a partition, what
 language defined:
 @begin{Description}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0076],ARef=[AI95-00067-01]}
-@Defn2{Term=[Restrictions],Sec=(Max_Storage_At_Blocking)}Max_Storage_At_Blocking @\Specifies
+@Defn2{Term=[restrictions],Sec=(Max_Storage_At_Blocking)}@Chg{Version=[3],New=[@Defn{Max_Storage_At_Blocking restriction}],
+   Old=[]}Max_Storage_At_Blocking @\Specifies
   the maximum portion @redundant[(in storage elements)]
   of a task's Storage_Size that can be retained by a blocked task@Chg{New=[.
   If an implementation chooses to detect a violation of this
@@ -2916,7 +2956,8 @@ language defined:
 Text=[The behavior when restriction Max_Storage_At_Blocking is violated.]}]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0076],ARef=[AI95-00067-01]}
-@Defn2{Term=[Restrictions],Sec=(Max_Asynchronous_Select_Nesting)}Max_Asynchronous_Select_Nesting @\Specifies
+@Defn2{Term=[restrictions],Sec=(Max_Asynchronous_Select_Nesting)}@Chg{Version=[3],New=[@Defn{Max_Asynchronous_Select_Nesting restriction}],
+   Old=[]}Max_Asynchronous_Select_Nesting @\Specifies
   the maximum dynamic nesting level of @nt{asynchronous_select}s.
   A value of zero prevents the use of any @nt{asynchronous_@!select}@Chg{New=[ and,
   if a program contains an @nt{asynchronous_@!select}, it is illegal.
@@ -2931,7 +2972,8 @@ Text=[The behavior when restriction Max_Storage_At_Blocking is violated.]}]}
 Text=[The behavior when restriction Max_Asynchronous_Select_Nesting is violated.]}]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0076],ARef=[AI95-00067-01]}
-@Defn2{Term=[Restrictions],Sec=(Max_Tasks)}Max_Tasks @\Specifies the maximum
+@Defn2{Term=[restrictions],Sec=(Max_Tasks)}@Chg{Version=[3],New=[@Defn{Max_Tasks restriction}],
+   Old=[]}Max_Tasks @\Specifies the maximum
   number of task creations that may be executed over the lifetime of a
   partition, not counting the creation of the environment task@Chg{New=[.
   A value of zero prevents any task creation and, if a program contains a
@@ -2953,8 +2995,9 @@ Text=[The behavior when restriction Max_Asynchronous_Select_Nesting is violated.
 Text=[The behavior when restriction Max_Tasks is violated.]}]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Restrictions],
-Sec=(Max_Entry_Queue_Length)}Max_Entry_Queue_Length @\Max_Entry_Queue_Length
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],
+Sec=(Max_Entry_Queue_Length)}@Chg{Version=[3],New=[@Defn{Max_Entry_Queue_Length restriction}],
+Old=[]}Max_Entry_Queue_Length @\Max_Entry_Queue_Length
   defines the maximum number of calls
   that are queued on an entry. Violation of this restriction
   results in the raising of Program_Error at the point of the call or
