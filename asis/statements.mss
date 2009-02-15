@@ -1,6 +1,6 @@
 @Part(statements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/statements.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2008/10/25 05:28:50 $}
+@comment{$Revision: 1.10 $ $Date: 2009/02/10 06:51:27 $}
 
 
 @LabeledSection{package Asis.Statements}
@@ -36,7 +36,7 @@ The Enclosing_Element of the A_Defining_Name elements is the statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Element_Kinds:
+that has the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Statement
 @end{Display}
@@ -48,7 +48,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
-have one of the following ],Old=[]}Defining_Name_Kinds:
+have the following ],Old=[]}Defining_Name_Kinds:
 @begin{Display}
 A_Defining_Identifier
 @end{Display}
@@ -69,19 +69,18 @@ assignment statement to query.
 
 Returns the expression that names the left hand side of the assignment.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Element_Kinds:
-@begin{Display}
-A_Statement@Chg{Version=[2],New=[ that has one of the following Statement_Kinds:
-    An_Assignment_Statement],Old=[]}
-@end{Display}
-
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Statement_Kinds:]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Element_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Deleted]}
-@ChgDeleted{Version=[2],Text=[An_Assignment_Statement]}
+@ChgDeleted{Version=[2],Text=[A_Statement]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+that has the following],Old=[Appropriate]} Statement_Kinds:
+@begin{Display}
+An_Assignment_Statement
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
@@ -91,7 +90,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
-that has one of the following ],Old=[]}Element_Kinds:
+that has the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -111,19 +110,17 @@ assignment statement to query
 
 Returns the expression from the right hand side of the assignment.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Element_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Element_Kinds:]}
 @begin{Display}
-A_Statement@Chg{Version=[2],New=[ that has one of the following Statement_Kinds:
-    An_Assignment_Statement],Old=[]}
+@ChgDeleted{Version=[2],Text=[A_Statement]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Statement_Kinds:]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
-@ChgRef{Version=[2],Kind=[Deleted]}
-@ChgDeleted{Version=[2],Text=[An_Assignment_Statement]}
+An_Assignment_Statement
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
@@ -133,7 +130,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
-that has one of the following ],Old=[]}Element_Kinds:
+that has the following ],Old=[]}Element_Kinds:
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @begin{Display}
 An_Expression
@@ -163,7 +160,7 @@ a case statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has one of the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_If_Statement
 A_Case_Statement
@@ -203,7 +200,7 @@ Returns the condition expression for an @key[if] path or an @key[elsif] path.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Path expects an element
-that has one of the following ],Old=[Appropriate]}Path_Kinds:
+that has one of the following],Old=[Appropriate]} Path_Kinds:
 @begin{Display}
 An_If_Path
 An_Elsif_Path
@@ -216,7 +213,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
-that has one of the following ],Old=[]}Element_Kinds:
+that has the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -242,7 +239,7 @@ in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Path expects an element
-that has one of the following ],Old=[Appropriate]}Element_Kinds:
+that has the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Path
 @end{Display}
@@ -277,19 +274,18 @@ statement to query.
 Returns the expression of the case statement that determines which
 execution path is taken.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Element_Kinds:
-@begin{Display}
-A_Statement@Chg{Version=[2],New=[ that has one of the following Statement_Kinds:
-    A_Case_Statement],Old=[]}
-@end{Display}
-
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Statement_Kinds:]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Element_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Deleted]}
-@ChgDeleted{Version=[2],Text=[A_Case_Statement]}
+@ChgDeleted{Version=[2],Text=[A_Statement]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+that has one of the following],Old=[Appropriate]} Statement_Kinds:
+@begin{Display}
+A_Case_Statement
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
@@ -299,7 +295,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
-that has one of the following ],Old=[]}Element_Kinds:
+that has the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -323,7 +319,7 @@ order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Path expects an element
-that has one of the following ],Old=[Appropriate]}Path_Kinds:
+that has the following],Old=[Appropriate]} Path_Kinds:
 @begin{Display}
 A_Case_Path
 @end{Display}
@@ -333,9 +329,9 @@ A_Case_Path
 of Value_Error for any element that does not have one of these expected
 kinds.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
-have one of of the follwing ],Old=[]}Element_Kinds:
+have one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 A_Definition@Chg{Version=[2],New=[ that has one of the following Definition_Kinds:
@@ -373,7 +369,7 @@ The Enclosing_Element of the name is the statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has one of the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Loop_Statement
 A_While_Loop_Statement
@@ -439,18 +435,17 @@ statement to query.
 Returns the condition expression associated with the while loop.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Element_Kinds:
-@begin{Display}
-A_Statement@Chg{Version=[2],New=[ that has one of the following Statement_Kinds:
-    A_While_Loop_Statement],Old=[]}
-@end{Display}
-
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Statement_Kinds:]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Element_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Deleted]}
-@ChgDeleted{Version=[2],Text=[A_While_Loop_Statement]}
+@ChgDeleted{Version=[2],Text=[A_Statement]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
+that has the following],Old=[Appropriate]} Statement_Kinds:
+@begin{Display}
+A_While_Loop_Statement
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
@@ -460,7 +455,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
-that has one of the following ],Old=[]}Element_Kinds:
+that has the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -484,7 +479,7 @@ Returns the declaration of the A_Loop_Parameter_Specification.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_For_Loop_Statement
 @end{Display}
@@ -496,7 +491,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
-that has one of the following ],Old=[]}Declaration_Kinds:
+that has the following ],Old=[]}Declaration_Kinds:
 @begin{Display}
 A_Loop_Parameter_Specification
 @end{Display}
@@ -523,7 +518,7 @@ in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has one of the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Loop_Statement
 A_While_Loop_Statement
@@ -565,7 +560,7 @@ block_statement, or for any unexpected Element.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following],Old=[Expected]} Statement_Kinds:
+that has the following],Old=[Expected]} Statement_Kinds:
 @begin{Display}
 A_Block_Statement
 @end{Display}
@@ -588,15 +583,17 @@ statement to query.
 Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
 pragmas are to be returned.
 
-Returns a list of the declarations, representation_clause elements, pragmas,
-and use_clause elements in the declarative_part of the block_statement, in their
-order of appearance.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+Returns a list of the declarations,
+@Chg{Version=[2],New=[aspect_clause],Old=[representation_clause]} elements,
+pragmas, and use_clause elements in the declarative_part of the block_statement,
+in their order of appearance.
 
 Returns a Nil_Element_List if there are no declarative items.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Block_Statement
 @end{Display}
@@ -642,7 +639,7 @@ that has no sequence_of_statements.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Block_Statement
 @end{Display}
@@ -687,7 +684,7 @@ Returns a Nil_Element_List if there are no exception_handler elements.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Block_Statement
 @end{Display}
@@ -726,7 +723,7 @@ Returns a Nil_Element if no loop name is present.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Exit_Statement
 @end{Display}
@@ -765,7 +762,7 @@ Returns a Nil_Element if no condition is present.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Exit_Statement
 @end{Display}
@@ -801,7 +798,7 @@ Returns the loop statement exited by the exit statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Exit_Statement
 @end{Display}
@@ -839,7 +836,7 @@ Returns a Nil_Element if no expression is present.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Return_Statement
 @end{Display}
@@ -882,7 +879,7 @@ to query.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Statement expects an element that has one of the following Statement_Kinds:]}
+Statement expects an element that has the following Statement_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[An_Extended_Return_Statement]}
 @end{Display}
@@ -894,7 +891,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Returns an element that has one of the following Declaration_Kinds:]}
+Returns an element that has the following Declaration_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Return_Object_Specification]}
 @end{Display}
@@ -935,7 +932,7 @@ not include handled_sequence_of_statements.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Statement expects an element that has one of the following Statement_Kinds:]}
+Statement expects an element that has the following Statement_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[An_Extended_Return_Statement]}
 @end{Display}
@@ -989,7 +986,7 @@ Returns a Nil_Element_List if there are no exception_handler elements.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Statement expects an element that has one of the following Statement_Kinds:]}
+Statement expects an element that has the following Statement_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[An_Extended_Return_Statement]}
 @end{Display}
@@ -1027,7 +1024,7 @@ statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Goto_Statement
 @end{Display}
@@ -1039,7 +1036,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
-that has one of the following ],Old=[]}Expression_Kinds:
+that has the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 @end{Display}
@@ -1063,7 +1060,7 @@ Returns the target statement specified by the goto statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Goto_Statement
 @end{Display}
@@ -1075,7 +1072,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
-that has one of the following ],Old=[]}Element_Kinds:
+that has the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Statement
 @end{Display}
@@ -1111,7 +1108,7 @@ family takes the form of An_Indexed_Component.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has one of the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Entry_Call_Statement
 A_Procedure_Call_Statement
@@ -1124,7 +1121,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
-that has one of the following ],Old=[]}Element_Kinds:
+that has the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1167,7 +1164,7 @@ Nil_Element should be returned. For an attribute reference which is not
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has one of the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Entry_Call_Statement
 A_Procedure_Call_Statement
@@ -1248,11 +1245,17 @@ parameter_specification elements of the formal_part of the
 parameter_and_result_profile. The order of normalized associations matches
 the order of parameter_specification elements.
 
-Each normalized association represents a one on one mapping of a
-parameter_specification elements to the explicit or default expression.
-A normalized association has one A_Defining_Name component that denotes the
-parameter_specification, and one An_Expression component that is either the
-explicit_actual_parameter or a default_expression.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0007-1]}
+Each normalized association represents a
+@Chg{Version=[2],New=[one-to-one],Old=[one on one]} mapping of a
+parameter_specification @Chg{Version=[2],New=[element],Old=[elements]}
+to the explicit or default
+expression. A normalized association has one A_Defining_Name
+component that denotes the parameter_specification, and one
+An_Expression component that is either the
+explicit_actual_parameter@Chg{Version=[2],New=[,],Old=[ or]} a
+default_expression@Chg{Version=[2],New=[, or when the call
+uses a prefixed view of the subprogram, the prefix of the call],Old=[]}.
 
 If the prefix of the call denotes an access to a procedure implicit or
 explicit deference, normalized associations are constructed on the basis
@@ -1268,7 +1271,7 @@ call is an attribute reference and Is_Normalized is True.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has one of the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Entry_Call_Statement
 A_Procedure_Call_Statement
@@ -1281,7 +1284,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
-have one of the following ],Old=[]}Element_Kinds:
+have the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Parameter_Association
 @end{Display}
@@ -1328,7 +1331,7 @@ Returns a Nil_Element if the statement has no explicit entry index,
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
@@ -1365,7 +1368,7 @@ Returns the direct name of the entry. The name follows the reserved word
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
@@ -1377,7 +1380,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
-that has one of the following ],Old=[]}Expression_Kinds:
+that has the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 @end{Display}
@@ -1409,7 +1412,7 @@ See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
@@ -1421,7 +1424,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
-have one of the following ],Old=[]}Declaration_Kinds:
+have the following ],Old=[]}Declaration_Kinds:
 @begin{Display}
 A_Parameter_Specification
 @end{Display}
@@ -1447,7 +1450,7 @@ statement, in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
@@ -1488,7 +1491,7 @@ accept statement, in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
@@ -1524,7 +1527,7 @@ Returns the declaration of the entry accepted in this statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Accept_Statement
 @end{Display}
@@ -1536,7 +1539,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
-that has one of the following ],Old=[]}Element_Kinds:
+that has the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Entry_Declaration
 @end{Display}
@@ -1560,7 +1563,7 @@ The name follows the reserved word @key[requeue].
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has one of the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Requeue_Statement
 A_Requeue_Statement_With_Abort
@@ -1573,7 +1576,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
-that has one of the following ],Old=[]}Element_Kinds:
+that has the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1596,7 +1599,7 @@ Returns the expression for the duration of the delay.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has one of the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Delay_Until_Statement
 A_Delay_Relative_Statement
@@ -1609,7 +1612,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
-that has one of the following ],Old=[]}Element_Kinds:
+that has the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1636,7 +1639,7 @@ statement where a guard is not legal.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Path expects an element
-that has one of the following ],Old=[Appropriate]}Path_Kinds:
+that has one of the following],Old=[Appropriate]} Path_Kinds:
 @begin{Display}
 A_Select_Path
 An_Or_Path
@@ -1675,7 +1678,7 @@ of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 An_Abort_Statement
 @end{Display}
@@ -1687,7 +1690,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
-have one of the following ],Old=[]}Element_Kinds:
+have the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1714,7 +1717,7 @@ Returns a Nil_Element if there is no explicit choice parameter.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Handler expects an element
-that has one of the following ],Old=[Appropriate]}Element_Kinds:
+that has the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 An_Exception_Handler
 @end{Display}
@@ -1752,7 +1755,7 @@ an others choice.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Handler expects an element
-that has one of the following ],Old=[Appropriate]}Element_Kinds:
+that has the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 An_Exception_Handler
 @end{Display}
@@ -1772,7 +1775,7 @@ A_Selected_Component
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[or an element that has
-one of the following ],Old=[Returns ]}Definition_Kinds:
+the following ],Old=[Returns ]}Definition_Kinds:
 @begin{Display}
 An_Others_Choice
 @end{Display}
@@ -1799,7 +1802,7 @@ exception handler, in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Handler expects an element
-that has one of the following ],Old=[Appropriate]}Element_Kinds:
+that has the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 An_Exception_Handler
 @end{Display}
@@ -1838,7 +1841,7 @@ Returns a Nil_Element if there is no explicitly named exception.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Raise_Statement
 @end{Display}
@@ -1887,7 +1890,7 @@ expression.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Statement
-expects an element that has one of the following Statement_Kinds:]}
+expects an element that has the following Statement_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[A_Raise_Statement]}
@@ -1925,7 +1928,7 @@ Returns the qualified aggregate expression representing the code statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following ],Old=[Appropriate]}Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Code_Statement
 @end{Display}
@@ -1937,7 +1940,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
-that has one of the following ],Old=[]}Expression_Kinds:
+that has the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 A_Qualified_Expression
 @end{Display}
@@ -1964,14 +1967,14 @@ Returns False for any unexpected Element.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Call expects an element
-that has one of the following],Old=[Expected]} Expression_Kinds:
+that has the following],Old=[Expected]} Expression_Kinds:
 @begin{Display}
 A_Function_Call
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[or Call expects an element
-that has one of the following],Old=[Expected]} Statement_Kinds:
+that has the following],Old=[Expected]} Statement_Kinds:
 @begin{Display}
 A_Procedure_Call_Statement
 @end{Display}

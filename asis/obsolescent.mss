@@ -1,10 +1,10 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2008/10/25 05:28:50 $}
+@Comment{$Date: 2009/02/10 06:51:27 $}
 @LabeledAddedNormativeAnnex{Version=[2],Name=[Obsolescent Features]}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/obsolescent.mss,v $}
-@comment{$Revision: 1.6 $}
+@comment{$Revision: 1.7 $}
 
 @LabeledAddedClause{Version=[2],Name=[Annex Contents]}
 
@@ -125,6 +125,56 @@ Literals]}
                                         -- @examcom{present}]}
 @end{Example}
 @end{DescribeCode}
+
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+@LabeledAddedSubclause{Version=[2],Name=[subtypes Representation_Clause and Representation_Clause_List]}
+@begin{DescribeCode}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+@ChgAdded{Version=[2],Text=[Subtypes Representation_Clause and Representation_Clause_List are
+provided for compatibility with previous editions of this standard. Use of these
+subtypes is not recommended in new programs.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+   @ChgAdded{Version=[2],Text=[@key[subtype] @AdaTypeDefn{Representation_Clause}           @key[is] Aspect_Clause;]}
+   @ChgAdded{Version=[2],Text=[@key[subtype] @AdaTypeDefn{Representation_Clause_List}      @key[is] Aspect_Clause_List;]}
+@end{Example}
+@end{DescribeCode}
+
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+@LabeledAddedSubclause{Version=[2],Name=[function A_Representation_Clause]}
+@begin{DescribeCode}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+@ChgAdded{Version=[2],Text=[Function A_Representation_Clause is provided for
+compatibility with previous editions of this standard. Use of this function is
+not recommended in new programs.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+@ChgAdded{Version=[2],Text=[@key[function] A_Representation_Clause @key[return] Clause_Kinds @key[renames] An_Aspect_Clause;]}
+@end{Example}
+@end{DescribeCode}
+
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+@LabeledAddedSubclause{Version=[2],Name=[type Representation_Clause_Kinds]}
+@begin{DescribeCode}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+@ChgAdded{Version=[2],Text=[Subtype Representation_Clause_Kinds and function
+Not_A_Representation_Clause are provided for compatibility with
+previous editions of this standard. Use of these entities is not recommended in new programs.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+   @ChgAdded{Version=[2],Text=[@key[subtype] @AdaTypeDefn{Representation_Clause_Kinds} @key[is] Aspect_Clause_Kinds;]}
+   @ChgAdded{Version=[2],Text=[@key[function] Not_A_Representation_Clause @key[return] Aspect_Clause_Kinds @key[renames] Not_An_Aspect_Clause;]}
+@end{Example}
+@end{DescribeCode}
+
 
 
 @ChgNote{SI99-0025-1 add chapter on newly obsolete subprograms}
@@ -519,6 +569,82 @@ A_Formal_Derived_Type_Definition]}
 @end{DescribeCode}
 
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@LabeledAddedSubclause{Version=[2],Name=[function Corresponding_Pragmas]}
+
+@begin{DescribeCode}
+@begin{Example}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Corresponding_Pragmas} (Element : @key[in] Asis.Element)
+                                 @key[return] Asis.Pragma_Element_List;]}
+@end{Example}
+
+@ChgAdded{Version=[2],Text=[Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to
+query.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@ChgAdded{Version=[2],Text=[Returns the list of pragmas semantically associated with the given element,
+in their order of appearance, or, in any order that does not affect their
+relative interpretations. These are pragmas that directly affect the
+given element. For example, a pragma Pack affects the type it names.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@ChgAdded{Version=[2],Text=[Returns a Nil_Element_List if there are no semantically associated pragmas.]}
+
+@begin{UsageNote}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@ChgAdded{Version=[2],Text=[If the argument is a inherited entry declaration from a derived task
+type, all pragmas returned are elements taken from the original task
+type's declarative item list. Their Enclosing_Element is the original
+type definition and not the derived type definition.]}
+@end{UsageNote}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@ChgAdded{Version=[2],Text=[If Element is a declaration that includes several defining_names,
+the result of this query is implementation defined.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@ChgAdded{Version=[2],Text=[@leading@keepnext@;@Chg{Version=[2],New=[Element expects an element
+that has one of the following],Old=[Appropriate]} Element_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Declaration
+A_Statement]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@ChgAdded{Version=[2],Text=[@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
+has the following],Old=[]} Element_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Pragma]}
+@end{Display}
+
+@end{DescribeCode}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+@LabeledAddedSubclause{Version=[2],Name=[function Representation_Clause_Kind]}
+@begin{DescribeCode}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+@ChgAdded{Version=[2],Text=[Function Representation_Clause_Kind is provided for
+compatibility with previous editions of this standard. Use of this function is
+not recommended in new programs.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+   @ChgAdded{Version=[2],Text=[@key[function] Representation_Clause_Kind
+                  (Clause : @key[in] Asis.Aspect_Clause)
+                   @key[return] Asis.Aspect_Clause_Kinds @key[renames] Aspect_Clause_Kind;]}
+
+@end{Example}
+@end{DescribeCode}
+
+
+
 
 @ChgNote{SI99-0027-1 add chapter on newly obsolete subprograms}
 @LabeledAddedClause{Version=[2],Name=[Obsolescent Features in package Asis.Declarations]}
@@ -575,7 +701,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0027-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns an element that
-has one of the following Statement_Kinds:]}
+has the following Statement_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[A_Block_Statement]}
@@ -777,6 +903,62 @@ An_Attribute_Reference]}
 @end{DescribeCode}
 
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@LabeledAddedSubClause{Version=[2],Name=[function Corresponding_Representation_Clauses]}
+
+
+@begin{DescribeCode}
+@begin{Example}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@Chg{Version=[2],New=[@key[function] @AdaSubDefn{Corresponding_Representation_Clauses}
+            (Declaration : @key[in] Asis.Declaration)
+            @key[return] Asis.Representation_Clause_List;],Old=[]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@Chg{Version=[2],New=[Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+declaration to query.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@Chg{Version=[2],New=[Returns all aspect_clause elements that apply to the
+declaration, including the aspect clauses for
+stream-oriented attributes whose prefix is the class-wide type
+associated with the named entity.],Old=[Returns
+all representation_clause elements that apply to the declaration.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@Chg{Version=[2],New=[Returns a Nil_Element_List if no clauses apply to the declaration.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@Chg{Version=[2],New=[If Declaration is a declaration that includes several defining_names,
+the result of this query is implementation defined.],Old=[]}
+
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@Chg{Version=[2],New=[The clauses returned may be the clauses applying to a parent type if the
+type is a derived type with no explicit representation. These clauses
+are not Is_Part_Of_Implicit, they are the representation_clause elements
+specified in conjunction with the declaration of the parent type.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@Chg{Version=[2],New=[@Chg{Version=[2],New=[Declaration expects an element that has any],Old=[All]}
+Declaration_Kinds @Chg{Version=[2],New=[except],Old=[are appropriate
+except]} Not_A_Declaration.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@Chg{Version=[2],New=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.],Old=[]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@Chg{Version=[2],New=[@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have the following],Old=[]} Clause_Kinds:],Old=[]}
+@begin{Display}
+@Chg{Version=[2],New=[A_Representation_Clause],Old=[]}
+@end{Display}
+@end{DescribeCode}
+
+
+
 @ChgNote{SI99-0004-1 add chapter on newly obsolete functions}
 @LabeledAddedClause{Version=[2],Name=[Obsolescent Features in package Asis.Definitions]}
 
@@ -845,6 +1027,51 @@ has one of the following Expression_Kinds:]}
 A_Selected_Component]}
 @end{Display}
 @end{DescribeCode}
+
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+@LabeledAddedClause{Version=[2],Name=[Obsolescent Features in package Asis.Clauses]}
+
+@LabeledAddedSubclause{Version=[2],Name=[Introduction for Obsolescent Features in package Asis.Clauses]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1]}
+@ChgAdded{Version=[2],Text=[In addition to the interfaces defined in section
+@RefSecNum{package Asis.Clauses}, the library package
+Asis.Clauses also shall provide interfaces equivalent to the obsolescent
+ones described in the following subclauses.]}
+
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+@LabeledAddedSubclause{Version=[2],Name=[function Representation_Clause_Name]}
+@begin{DescribeCode}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+@ChgAdded{Version=[2],Text=[Function Representation_Clause_Name is provided for
+compatibility with previous editions of this standard. Use of this function is
+not recommended in new programs.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+   @ChgAdded{Version=[2],Text=[@key[function] Representation_Clause_Name (Clause : @key[in] Asis.Clause)
+                                        @key[return] Asis.Name @key[renames] Aspect_Clause_Name;]}
+   @end{Example}
+@end{DescribeCode}
+
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+@LabeledAddedSubclause{Version=[2],Name=[function Representation_Clause_Expression]}
+@begin{DescribeCode}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+@ChgAdded{Version=[2],Text=[Function Representation_Clause_Expression is
+provided for compatibility with previous editions of this standard. Use of this
+function is not recommended in new programs.]}
+
+@begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}
+   @ChgAdded{Version=[2],Text=[@key[function] Representation_Clause_Expression (Clause : @key[in] Asis.Aspect_Clause)
+                                        @key[return] Asis.Expression @key[renames] Aspect_Clause_Expression;]}
+   @end{Example}
+@end{DescribeCode}
+
 
 
 @ChgNote{SI99-0035-1 add chapter on newly obsolete functions}
@@ -1104,7 +1331,7 @@ record type is included in the result.]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[
 Type_Definition expects an element
-that has one of the following Element_Kinds:]}
+that has the following Element_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Type_Definition that has one of the following Type_Kinds:
    A_Derived_Type_Definition       (derived from a record type)
@@ -1347,7 +1574,7 @@ discriminants and components.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[Type_Definition expects an element
-that has one of the following Element_Kinds:]}
+that has the following Element_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Type_Definition that has one of the following Type_Kinds:
    A_Derived_Type_Definition       (derived from a record type)

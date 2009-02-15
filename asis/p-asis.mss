@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.15 $ $Date: 2008/10/25 05:28:50 $}
+@comment{$Revision: 1.16 $ $Date: 2009/02/10 06:51:27 $}
 
 @LabeledSection{package Asis}
 
@@ -51,10 +51,13 @@ type Traverse_Control
 subtype Program_Text
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0041-1]}
 The ASIS interface uses string parameters for many procedure and function
 calls. Wide_String is used to convey ASIS environment information.
 Program_Text, a subtype of Wide_String, is used to convey program text.
-The Ada type String is not used in the ASIS interface. Neither the Ada
+@Chg{Version=[2],New=[Throughout ASIS, Wide_String is to be interpreted
+according to the UTF-16 encoding defined in ISO/IEC 10646:2003, Annex Q. ],
+Old=[]}The Ada type String is not used in the ASIS interface. Neither the Ada
 types Character nor Wide_Character are used in the ASIS interface.
 
 @Comment{Private parts don't belong in a standard!}
@@ -242,64 +245,92 @@ The ASIS Element type shall be an undiscriminated private type.
 
 @begin{DescribeCode}
 @begin{Example}
-    @key[subtype] @AdaSubtypeDefn{Name=[Access_Type_Definition],Of=[Element]}          @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Association],Of=[Element]}                     @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Association_List],Of=[Element_List]}                @key[is] Element_List;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1],ARef=[SI99-0039-1]}
+    @key[subtype] @AdaSubtypeDefn{Name=[Access_Type_Definition],Of=[Element]}          @key[is] Element;@Chg{Version=[2],New=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Aspect_Clause],Of=[Element]}                   @key[is] Element;],Old=[]}
+    @key[subtype] @AdaSubtypeDefn{Name=[Association],Of=[Element]}                     @key[is] Element;@Chg{Version=[2],New=[],Old=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Association_List],Of=[Element_List]}                @key[is] Element_List;]}
     @key[subtype] @AdaSubtypeDefn{Name=[Case_Statement_Alternative],Of=[Element]}      @key[is] Element;
     @key[subtype] @AdaSubtypeDefn{Name=[Clause],Of=[Element]}                          @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Component_Clause],Of=[Element]}                @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Component_Clause_List],Of=[Element_List]}           @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Component_Clause],Of=[Element]}                @key[is] Element;@Chg{Version=[2],New=[],Old=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Component_Clause_List],Of=[Element_List]}           @key[is] Element_List;]}
     @key[subtype] @AdaSubtypeDefn{Name=[Component_Declaration],Of=[Element]}           @key[is] Element;
     @key[subtype] @AdaSubtypeDefn{Name=[Component_Definition],Of=[Element]}            @key[is] Element;
     @key[subtype] @AdaSubtypeDefn{Name=[Constraint],Of=[Element]}                      @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Context_Clause],Of=[Element]}                  @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Context_Clause_List],Of=[Element_List]}             @key[is] Element_List;
-    @key[subtype] @AdaSubtypeDefn{Name=[Declaration],Of=[Element]}                     @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Context_Clause],Of=[Element]}                  @key[is] Element;@Chg{Version=[2],New=[],Old=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Context_Clause_List],Of=[Element_List]}             @key[is] Element_List;]}
+    @key[subtype] @AdaSubtypeDefn{Name=[Declaration],Of=[Element]}                     @key[is] Element;@Chg{Version=[2],New=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Defining_Name],Of=[Element]}                   @key[is] Element;],Old=[
     @key[subtype] @AdaSubtypeDefn{Name=[Declaration_List],Of=[Element_List]}                @key[is] Element_List;
-    @key[subtype] @AdaSubtypeDefn{Name=[Declarative_Item_List],Of=[Element_List]}           @key[is] Element_List;
-    @key[subtype] @AdaSubtypeDefn{Name=[Definition],Of=[Element]}                      @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Definition_List],Of=[Element_List]}                 @key[is] Element_List;
-    @key[subtype] @AdaSubtypeDefn{Name=[Discrete_Range],Of=[Element]}                  @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Discrete_Range_List],Of=[Element_List]}             @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Declarative_Item_List],Of=[Element_List]}           @key[is] Element_List;]}
+    @key[subtype] @AdaSubtypeDefn{Name=[Definition],Of=[Element]}                      @key[is] Element;@Chg{Version=[2],New=[],Old=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Definition_List],Of=[Element_List]}                 @key[is] Element_List;]}
+    @key[subtype] @AdaSubtypeDefn{Name=[Discrete_Range],Of=[Element]}                  @key[is] Element;@Chg{Version=[2],New=[],Old=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Discrete_Range_List],Of=[Element_List]}             @key[is] Element_List;]}
     @key[subtype] @AdaSubtypeDefn{Name=[Discrete_Subtype_Definition],Of=[Element]}     @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Discriminant_Association],Of=[Element]}        @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Discriminant_Association],Of=[Element]}        @key[is] Element;@Chg{Version=[2],New=[],Old=[
     @key[subtype] @AdaSubtypeDefn{Name=[Discriminant_Association_List],Of=[Element_List]}   @key[is] Element_List;
     @key[subtype] @AdaSubtypeDefn{Name=[Discriminant_Specification_List],Of=[Element_List]} @key[is] Element_List;
     @key[subtype] @AdaSubtypeDefn{Name=[Defining_Name],Of=[Element]}                   @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Defining_Name_List],Of=[Element_List]}              @key[is] Element_List;
-    @key[subtype] @AdaSubtypeDefn{Name=[Exception_Handler],Of=[Element]}               @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Exception_Handler_List],Of=[Element_List]}          @key[is] Element_List;
-    @key[subtype] @AdaSubtypeDefn{Name=[Expression],Of=[Element]}                      @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Expression_List],Of=[Element_List]}                 @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Defining_Name_List],Of=[Element_List]}              @key[is] Element_List;]}
+    @key[subtype] @AdaSubtypeDefn{Name=[Exception_Handler],Of=[Element]}               @key[is] Element;@Chg{Version=[2],New=[],Old=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Exception_Handler_List],Of=[Element_List]}          @key[is] Element_List;]}
+    @key[subtype] @AdaSubtypeDefn{Name=[Expression],Of=[Element]}                      @key[is] Element;@Chg{Version=[2],New=[],Old=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Expression_List],Of=[Element_List]}                 @key[is] Element_List;]}
     @key[subtype] @AdaSubtypeDefn{Name=[Formal_Type_Definition],Of=[Element]}          @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Generic_Formal_Parameter],Of=[Element]}        @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Generic_Formal_Parameter_List],Of=[Element_List]}   @key[is] Element_List;
-    @key[subtype] @AdaSubtypeDefn{Name=[Identifier],Of=[Element]}                      @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Identifier_List],Of=[Element_List]}                 @key[is] Element_List;
-    @key[subtype] @AdaSubtypeDefn{Name=[Name],Of=[Element]}                            @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Name_List],Of=[Element_List]}                       @key[is] Element_List;
-    @key[subtype] @AdaSubtypeDefn{Name=[Parameter_Specification],Of=[Element]}         @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Parameter_Specification_List],Of=[Element_List]}    @key[is] Element_List;
-    @key[subtype] @AdaSubtypeDefn{Name=[Path],Of=[Element]}                            @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Path_List],Of=[Element_List]}                       @key[is] Element_List;
-    @key[subtype] @AdaSubtypeDefn{Name=[Pragma_Element],Of=[Element]}                  @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Pragma_Element_List],Of=[Element_List]}             @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Generic_Formal_Parameter],Of=[Element]}        @key[is] Element;@Chg{Version=[2],New=[],Old=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Generic_Formal_Parameter_List],Of=[Element_List]}   @key[is] Element_List;]}
+    @key[subtype] @AdaSubtypeDefn{Name=[Identifier],Of=[Element]}                      @key[is] Element;@Chg{Version=[2],New=[],Old=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Identifier_List],Of=[Element_List]}                 @key[is] Element_List;]}
+    @key[subtype] @AdaSubtypeDefn{Name=[Name],Of=[Element]}                            @key[is] Element;@Chg{Version=[2],New=[],Old=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Name_List],Of=[Element_List]}                       @key[is] Element_List;]}
+    @key[subtype] @AdaSubtypeDefn{Name=[Parameter_Specification],Of=[Element]}         @key[is] Element;@Chg{Version=[2],New=[],Old=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Parameter_Specification_List],Of=[Element_List]}    @key[is] Element_List;]}
+    @key[subtype] @AdaSubtypeDefn{Name=[Path],Of=[Element]}                            @key[is] Element;@Chg{Version=[2],New=[],Old=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Path_List],Of=[Element_List]}                       @key[is] Element_List;]}
+    @key[subtype] @AdaSubtypeDefn{Name=[Pragma_Element],Of=[Element]}                  @key[is] Element;@Chg{Version=[2],New=[],Old=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Pragma_Element_List],Of=[Element_List]}             @key[is] Element_List;]}
     @key[subtype] @AdaSubtypeDefn{Name=[Range_Constraint],Of=[Element]}                @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Record_Component],Of=[Element]}                @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Record_Component_List],Of=[Element_List]}           @key[is] Element_List;
-    @key[subtype] @AdaSubtypeDefn{Name=[Record_Definition],Of=[Element]}               @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Record_Component],Of=[Element]}                @key[is] Element;@Chg{Version=[2],New=[],Old=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Record_Component_List],Of=[Element_List]}           @key[is] Element_List;]}
+    @key[subtype] @AdaSubtypeDefn{Name=[Record_Definition],Of=[Element]}               @key[is] Element;@Chg{Version=[2],New=[],Old=[
     @key[subtype] @AdaSubtypeDefn{Name=[Representation_Clause],Of=[Element]}           @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Representation_Clause_List],Of=[Element_List]}      @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Representation_Clause_List],Of=[Element_List]}      @key[is] Element_List;]}
     @key[subtype] @AdaSubtypeDefn{Name=[Root_Type_Definition],Of=[Element]}            @key[is] Element;
     @key[subtype] @AdaSubtypeDefn{Name=[Select_Alternative],Of=[Element]}              @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Statement],Of=[Element]}                       @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Statement_List],Of=[Element_List]}                  @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Statement],Of=[Element]}                       @key[is] Element;@Chg{Version=[2],New=[],Old=[
+    @key[subtype] @AdaSubtypeDefn{Name=[Statement_List],Of=[Element_List]}                  @key[is] Element_List;]}
     @key[subtype] @AdaSubtypeDefn{Name=[Subtype_Indication],Of=[Element]}              @key[is] Element;
     @key[subtype] @AdaSubtypeDefn{Name=[Subtype_Mark],Of=[Element]}                    @key[is] Element;
     @key[subtype] @AdaSubtypeDefn{Name=[Type_Definition],Of=[Element]}                 @key[is] Element;
-    @key[subtype] @AdaSubtypeDefn{Name=[Variant],Of=[Element]}                         @key[is] Element;
+    @key[subtype] @AdaSubtypeDefn{Name=[Variant],Of=[Element]}                         @key[is] Element;@Chg{Version=[2],New=[],Old=[
     @key[subtype] @AdaSubtypeDefn{Name=[Variant_Component_List],Of=[Element_List]}          @key[is] Element_List;
-    @key[subtype] @AdaSubtypeDefn{Name=[Variant_List],Of=[Element_List]}                    @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Variant_List],Of=[Element_List]}                    @key[is] Element_List;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1],ARef=[SI99-0039-1]}
+@ChgAdded{Version=[2],Text=[    @key[subtype] @AdaSubtypeDefn{Name=[Aspect_Clause_List],Of=[Element_List]}              @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Association_List],Of=[Element_List]}                @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Component_Clause_List],Of=[Element_List]}           @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Context_Clause_List],Of=[Element_List]}             @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Declaration_List],Of=[Element_List]}                @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Declarative_Item_List],Of=[Element_List]}           @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Defining_Name_List],Of=[Element_List]}              @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Definition_List],Of=[Element_List]}                 @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Discrete_Range_List],Of=[Element_List]}             @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Discriminant_Association_List],Of=[Element_List]}   @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Discriminant_Specification_List],Of=[Element_List]} @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Exception_Handler_List],Of=[Element_List]}          @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Expression_List],Of=[Element_List]}                 @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Generic_Formal_Parameter_List],Of=[Element_List]}   @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Identifier_List],Of=[Element_List]}                 @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Name_List],Of=[Element_List]}                       @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Parameter_Specification_List],Of=[Element_List]}    @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Path_List],Of=[Element_List]}                       @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Pragma_Element_List],Of=[Element_List]}             @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Record_Component_List],Of=[Element_List]}           @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Statement_List],Of=[Element_List]}                  @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Variant_Component_List],Of=[Element_List]}          @key[is] Element_List;
+    @key[subtype] @AdaSubtypeDefn{Name=[Variant_List],Of=[Element_List]}                    @key[is] Element_List;]}
 @end{Example}
 @end{DescribeCode}
 
@@ -379,8 +410,9 @@ These are designated within the hierarchy shown below:
 
        A_Path                -> Path_Kinds
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
        A_Clause              -> Clause_Kinds
-                                        -> Representation_Clause_Kinds
+                                        -> @Chg{Version=[2],New=[Aspect_Clause_Kinds],Old=[Representation_Clause_Kinds]}
 
        An_Exception_Handler
 @end{Example}
@@ -1167,11 +1199,13 @@ Literals                                   -- @examcom{Reference Manual -> Subor
    @AdaObjDefn{A_Real_Literal},                            -- @examcom{2.4.1}
    @AdaObjDefn{A_String_Literal},                          -- @examcom{2.6}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0019-1]}
    @AdaObjDefn{An_Identifier},                             -- @examcom{4.1}
    @AdaObjDefn{An_Operator_Symbol},                        -- @examcom{4.1}
    @AdaObjDefn{A_Character_Literal},                       -- @examcom{4.1}
    @AdaObjDefn{An_Enumeration_Literal},                    -- @examcom{4.1}
-   @AdaObjDefn{An_Explicit_Dereference},                   -- @examcom{4.1}
+   @AdaObjDefn{An_Explicit_Dereference},                   -- @examcom{4.1}@Chg{Version=[2],New=[
+   @AdaObjDefn{An_Implicit_Dereference},                   -- @examcom{4.1}],Old=[]}
    @AdaObjDefn{A_Function_Call},                           -- @examcom{4.1}
 
    @AdaObjDefn{An_Indexed_Component},                      -- @examcom{4.1.1}
@@ -1524,7 +1558,8 @@ Literals                      -- @examcom{Reference Manual    -> Subordinate Kin
 
    @AdaObjDefn{A_With_Clause},              -- @examcom{10.1.2}
 
-   @AdaObjDefn{A_Representation_Clause},    -- @examcom{13.1     -> Representation_Clause_Kinds}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+   @Chg{Version=[2],New=[@AdaObjDefn{An_Aspect_Clause}],Old=[@AdaObjDefn{A_Representation_Clause}]},    -- @examcom{13.1     -> @Chg{Version=[2],New=[@AdaObjDefn{Aspect_Clause_Kinds}],Old=[@AdaObjDefn{Representation_Clause_Kinds}]}}
    @AdaObjDefn{A_Component_Clause});        -- @examcom{13.5.1}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
@@ -1532,26 +1567,30 @@ the Ada Standard for each clause, and any subordinate kinds.]}
 @end{DescribeCode}
 
 
-@LabeledSubClause{type Representation_Clause_Kinds}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+@LabeledRevisedSubClause{Version=[2],New=[type Aspect_Clause_Kinds],Old=[type Representation_Clause_Kinds]}
 
-@Chg{Version=[1],New=[Type ],Old=[]}Representation_Clause_Kinds
-@Chg{Version=[1],New=[describes],Old=[@en]} varieties of representation
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+@Chg{Version=[1],New=[Type ],Old=[]}@Chg{Version=[2],New=[Aspect_Clause_Kinds],Old=[Representation_Clause_Kinds]}
+@Chg{Version=[1],New=[describes],Old=[@en]} varieties of @Chg{Version=[2],New=[aspect],Old=[representation]}
 clauses@Chg{Version=[1],New=[.],Old=[
 Literals                                  -- @examcom{Reference Manual}]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[type] @AdaTypeDefn{Representation_Clause_Kinds} @key[is] (
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+@key[type] @Chg{Version=[2],New=[@AdaTypeDefn{Aspect_Clause_Kinds}],Old=[@AdaTypeDefn{Representation_Clause_Kinds}]} @key[is] (
 
-   @AdaObjDefn{Not_A_Representation_Clause},            -- @examcom{An unexpected element}
+   @Chg{Version=[2],New=[@AdaObjDefn{Not_An_Aspect_Clause}],Old=[@AdaObjDefn{Not_A_Representation_Clause}]},            -- @examcom{An unexpected element}
 
    @AdaObjDefn{An_Attribute_Definition_Clause},         -- @examcom{13.3}
    @AdaObjDefn{An_Enumeration_Representation_Clause},   -- @examcom{13.4}
    @AdaObjDefn{A_Record_Representation_Clause},         -- @examcom{13.5.1}
    @AdaObjDefn{An_At_Clause});                          -- @examcom{J.7}
 @end{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-the Ada Standard for each representation clause.]}
+the Ada Standard for each @Chg{Version=[2],New=[aspect],Old=[representation]} clause.]}
 @end{DescribeCode}
 
 
@@ -1572,8 +1611,9 @@ The declaration of a library_item or unit.
 Pragmas that apply to the compilation, of which the unit is a part.
 @end{Enumerate}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 The context clause contains zero or more with clauses, use clauses,
-pragma elaborates, and possibly other pragmas.
+@Chg{Version=[2],New=[and pragmas.], Old=[pragma elaborates, and possibly other pragmas.]}
 
 ASIS treats Pragmas that appear immediately after the context clause and before
 before the subsequent declaration part as belonging to the context clause part.
@@ -1802,6 +1842,14 @@ Unit_Origins @Chg{Version=[1],New=[defines],Old=[@en]} classification of possibl
    @AdaObjDefn{An_Application_Unit}); -- @examcom{Neither A_Predefined_Unit or}
                          -- @examcom{An_Implementation_Unit}
 @end{Example}
+
+@begin{ImplPerm}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}
+@ChgAdded{Version=[2],Text=[Units with an Origin of other than
+An_Application_Unit are implementation-defined. This will effect the return
+value of function Asis.Compilation_Units.Unit_Origin directly and all other ASIS
+return values for other than An_Application_Unit.]}
+@end{ImplPerm}
 @end{DescribeCode}
 
 
@@ -1888,7 +1936,8 @@ in another compilation unit is a Dependent of the other unit.
 For example:
 
 @begin{Display}
-If A withs B and B withs C
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
+If A @Chg{Version=[2],New=[mentions B and B mentions C in with_clauses],Old=[withs B and B withs C]}
 then A directly depends on A, B directly depends on C,
     A indirectly depends on C, and
     both A and B are dependents of C.
@@ -1934,8 +1983,10 @@ For example:
 Assume the body of C has a subunit C.S and the declaration of C has child units C.Y and C.Z.
 
 @begin{Display}
-If A withs B, B withs C, B withs C.Y, and C does not with a library
-unit. Then the needed units of A are:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
+If A @Chg{Version=[2],New=[mentions B and B mentions C and C.Y in with_clauses and C does not
+have a with_clause, then], Old=[withs B, B withs C, B withs C.Y, and C does not with a library
+unit. Then]} the needed units of A are:
     library unit declaration C
     child library unit declaration C.Y
     child library unit body C.Y, if any

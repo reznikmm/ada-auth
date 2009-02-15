@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.13 $ $Date: 2008/10/25 05:28:50 $}
+@comment{$Revision: 1.14 $ $Date: 2009/02/10 06:51:27 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -583,7 +583,7 @@ implementations.
 @end{Itemize}
 
 
-@LabeledClause{Normative reference}
+@LabeledClause{Normative references}
 
 The following standard contains provisions which, through reference in this
 text, constitute provisions of this International Standard. At the time of
@@ -595,6 +595,18 @@ registers of currently valid International Standards.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[2], New=[ISO/IEC 8652:1995(E)], Old=[ISO/IEC 8652:1995]}, @i{Information technology @em Programming languages @em Ada}.
+
+@Comment{I checked all of these citations on the ISO website on Nov. 10, 2008.
+The oddity of the '.' in the Corrigendum but not in the Amendment is how
+they write them. RLB.}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}
+@ChgAdded{Version=[2],Text=[ISO/IEC 8652:1995/Cor.1:2001(E), @i{Information technology @em Programming languages @em Ada} @em Technical Corrigendum 1.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}
+@ChgAdded{Version=[2],Text=[ISO/IEC 8652:1995/AMD 1:2007(E), @i{Information technology @em Programming languages @em Ada} @em Amendment 1.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0041-1]}
+@ChgAdded{Version=[2],Text=[ISO/IEC 10646:2003, @i{Information technology @em Universal Multiple-Octet Coded Character Set (UCS)}.]}
 
 
 @LabeledClause{Terms and definitions}

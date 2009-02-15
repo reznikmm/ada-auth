@@ -1,6 +1,6 @@
 @Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2008/10/25 05:28:50 $}
+@comment{$Revision: 1.10 $ $Date: 2009/02/10 06:51:27 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -105,7 +105,7 @@ declared object.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has one of the following ],Old=[Appropriate]} Element_Kinds:
+that has the following ],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -285,7 +285,7 @@ Returned references are in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Name expects an element
-that has one of the following ],Old=[Appropriate]} Element_Kinds:
+that has the following ],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Defining_Name
 @end{Display}
@@ -297,7 +297,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
-have one of the following ],Old=[]}Element_Kinds:
+have the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -337,14 +337,14 @@ Returns False for any unexpected Element.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Name expects an element
-that has one of the following],Old=[Expected]} Element_Kinds:
+that has the following],Old=[Expected]} Element_Kinds:
 @begin{Display}
 A_Defining_Name
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Within_Element expects
-an element that has one of the following Element_Kinds: ]}
+an element that has the following Element_Kinds: ]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Defining_Name]}
 @end{Display}
@@ -553,7 +553,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
-have one of the following ],Old=[]}Element_Kinds:
+have the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Defining_Name
 @end{Display}
@@ -587,17 +587,11 @@ See the comments for Corresponding_Name_Definition for details.
 The result is either a Declaration or a Statement. Statements result
 from references to statement labels, loop identifiers, and block identifiers.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Reference expects an element
-that has one of the following ],Old=[Appropriate]} Element_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[AI05-0037-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[Appropriate Element_Kinds:]}
 @begin{Display}
-An_Expression
+@ChgDeleted{Version=[2],Text=[An_Expression]}
 @end{Display}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Reference expects an element
@@ -660,7 +654,9 @@ form A + B is equivalent to the prefix form "+"(A, B).
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
 that has one of the following ],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0019-1]}
 An_Explicit_Dereference @em P.ALL
+@ChgAdded{Version=[2],Text=[An_Implicit_Dereference @em P.X, P'Attr, P(...)]}
 An_Attribute_Reference @em Priv'Base'First
 A_Function_Call @em Abc(...) or Integer'Image(...)
 An_Indexed_Component @em An_Array(3)
@@ -675,7 +671,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following ],Old=[]}Expression_Kinds:
+the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -709,7 +705,7 @@ in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has one of the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following ],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Indexed_Component
 @end{Display}
@@ -721,7 +717,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
-have one of the following ],Old=[]}Element_Kinds:
+have the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -754,7 +750,7 @@ Returns the discrete range of the slice.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has one of the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following ],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Slice
 @end{Display}
@@ -766,7 +762,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following ],Old=[]}Definition_Kinds:
+the following ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Discrete_Range
 @end{Display}
@@ -790,7 +786,7 @@ the selected_component).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has one of the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following ],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Selected_Component
 @end{Display}
@@ -836,7 +832,7 @@ are treated as An_Identifier.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has one of the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following ],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Attribute_Reference
 @end{Display}
@@ -848,7 +844,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following ],Old=[]}Expression_Kinds:
+the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 @end{Display}
@@ -876,7 +872,7 @@ Returns a Nil_Element_List if there are no arguments.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has one of the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following ],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Attribute_Reference@Chg{Version=[2],New=[ that has one of the following Attribute_Kinds:],Old=[
   Appropriate Attribute_Kinds:]}
@@ -895,7 +891,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
-have one of the following ],Old=[]}Element_Kinds:
+have the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -957,7 +953,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
-have one of the following ],Old=[]}Association_Kinds:
+have the following ],Old=[]}Association_Kinds:
 @begin{Display}
 A_Record_Component_Association
 @end{Display}
@@ -999,7 +995,7 @@ the extension_aggregate.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has one of the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following ],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Extension_Aggregate
 @end{Display}
@@ -1011,7 +1007,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following ],Old=[]}Element_Kinds:
+the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1048,7 +1044,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
-have one of the following ],Old=[]}Association_Kinds:
+have the following ],Old=[]}Association_Kinds:
 @begin{Display}
 An_Array_Component_Association
 @end{Display}
@@ -1095,7 +1091,7 @@ Returns a Nil_Element_List otherwise.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
-that has one of the following ],Old=[Appropriate]} Association_Kinds:
+that has the following ],Old=[Appropriate]} Association_Kinds:
 @begin{Display}
 An_Array_Component_Association
 @end{Display}
@@ -1175,7 +1171,7 @@ component A_Defining_Name is not Is_Normalized.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
-that has one of the following ],Old=[Appropriate]} Association_Kinds:
+that has the following ],Old=[Appropriate]} Association_Kinds:
 @begin{Display}
 A_Record_Component_Association
 @end{Display}
@@ -1191,10 +1187,10 @@ have one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Defining_Name @em Is_Normalized(Association)
 An_Expression @em @key[not] Is_Normalized(Association)
-  @Chg{Version=[2],New=[that has one of the following],Old=[Returns]} Expression_Kinds:
+  @Chg{Version=[2],New=[that has the following],Old=[Returns]} Expression_Kinds:
     An_Identifier
 A_Definition
-  @Chg{Version=[2],New=[that has one of the following],Old=[Returns]} Definition_Kinds:
+  @Chg{Version=[2],New=[that has the following],Old=[Returns]} Definition_Kinds:
     An_Others_Choice
 @end{Display}
 @end{DescribeCode}
@@ -1258,7 +1254,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following ],Old=[]}Element_Kinds:
+the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1353,7 +1349,7 @@ An_Expression @em @key[not] Is_Normalized(Association)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following ],Old=[]}Expression_Kinds:
+the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 @end{Display}
@@ -1456,7 +1452,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element has
-one of the following ],Old=[]}Element_Kinds:
+the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1513,7 +1509,7 @@ Normalized lists contain artificial ASIS An_Association elements that
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
-that has one of the following ],Old=[Appropriate]} Association_Kinds:
+that has the following ],Old=[Appropriate]} Association_Kinds:
 @begin{Display}
 A_Discriminant_Association
 @end{Display}
@@ -1529,7 +1525,7 @@ one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Defining_Name @em Is_Normalized (Association)
 An_Expression @em @key[not] Is_Normalized (Association)
-  @Chg{Version=[2],New=[that has one of the following],Old=[Returns]} Expression_Kinds:
+  @Chg{Version=[2],New=[that has the following],Old=[Returns]} Expression_Kinds:
     An_Identifier
 @end{Display}
 @end{DescribeCode}
@@ -1605,7 +1601,7 @@ Normalized lists contain artificial ASIS An_Association elements that
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
-that has one of the following ],Old=[Appropriate]} Association_Kinds:
+that has the following ],Old=[Appropriate]} Association_Kinds:
 @begin{Display}
 A_Discriminant_Association
 @end{Display}
@@ -1617,7 +1613,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following ],Old=[]}Element_Kinds:
+the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1727,7 +1723,7 @@ one set of its own parenthesis.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has one of the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following ],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Parenthesized_Expression
 @end{Display}
@@ -1739,7 +1735,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following ],Old=[]}Element_Kinds:
+the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1771,7 +1767,7 @@ Foo (A, B);   -- @examcom{Returns True}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has one of the following],Old=[Expected]} Expression_Kinds:
+that has the following],Old=[Expected]} Expression_Kinds:
 @begin{Display}
 A_Function_Call
 @end{Display}
@@ -1816,7 +1812,7 @@ returned.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has one of the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following ],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Function_Call
 @end{Display}
@@ -1897,11 +1893,15 @@ parameter_specification elements of the formal_part of the
 parameter_and_result_profile. The order of normalized associations matches
 the order of parameter_specification elements.
 
-Each normalized association represents a one on one mapping of a
-parameter_specification elements to the explicit or default expression.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0007-1]}
+Each normalized association represents a @Chg{Version=[2],New=[one-to-one],
+Old=[one on one]} mapping of a parameter_specification @Chg{Version=[2],New=[element],
+Old=[elements]} to the explicit or default expression.
 A normalized association has one A_Defining_Name component that denotes the
 parameter_specification, and one An_Expression component that is either the
-explicit_actual_parameter or a default_expression.
+explicit_actual_parameter@Chg{Version=[2],New=[,],Old=[ or]} a
+default_expression@Chg{Version=[2],New=[, or when the call uses a prefixed view
+of the function, the prefix of the call], Old=[]}.
 
 If the prefix of the call denotes an access to a function implicit or
 explicit deference, normalized associations are constructed on the basis
@@ -1917,7 +1917,7 @@ call is an attribute reference and Is_Normalized is True.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has one of the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following ],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Function_Call
 @end{Display}
@@ -1929,7 +1929,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
-have one of the following ],Old=[]}Element_Kinds:
+have the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Parameter_Association
 @end{Display}
@@ -1988,7 +1988,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-the one of the following ],Old=[]}Element_Kinds:
+the the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -2026,7 +2026,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-the one of the following ],Old=[]}Element_Kinds:
+the the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -2064,7 +2064,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following ],Old=[]}Element_Kinds:
+the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -2222,7 +2222,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following ],Old=[]}Element_Kinds:
+the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -2245,7 +2245,7 @@ Returns the subtype indication for the object being allocated.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has one of the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following ],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Allocation_From_Subtype
 @end{Display}
@@ -2257,7 +2257,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following ],Old=[]}Definition_Kinds:
+the following ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Subtype_Indication
 @end{Display}
@@ -2279,7 +2279,7 @@ Returns the qualified expression for the object being allocated.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has one of the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following ],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Allocation_From_Qualified_Expression
 @end{Display}
@@ -2291,7 +2291,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following ],Old=[]}Expression_Kinds:
+the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 A_Qualified_Expression
 @end{Display}

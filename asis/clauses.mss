@@ -1,6 +1,6 @@
 @Part(clauses, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/clauses.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2008/02/06 06:23:46 $}
+@comment{$Revision: 1.8 $ $Date: 2009/02/10 06:51:26 $}
 
 @LabeledSection{package Asis.Clauses}
 
@@ -72,10 +72,11 @@ An_Attribute_Reference
 @end{DescribeCode}
 
 
-@LabeledClause{function Representation_Clause_Name}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+@LabeledRevisedClause{Version=[2],New=[function Aspect_Clause_Name],Old=[function Representation_Clause_Name]}
 
 @begin{ElementRef}
-A_Representation_Clause @em 13.1@*
+@Chg{Version=[2],New=[An_Aspect_Clause],Old=[A_Representation_Clause]} @em 13.1@*
 @*
 An_Attribute_Definition_Clause @em 13.3@*
 An_Enumeration_Representation_Clause @em 13.4@*
@@ -92,12 +93,13 @@ function Representation_Clause_Expression
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Representation_Clause_Name} (Clause : @key[in] Asis.Clause)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+@key[function] @Chg{Version=[2],New=[@AdaSubDefn{Aspect_Clause_Name}],Old=[@AdaSubDefn{Representation_Clause_Name}]} (Clause : @key[in] Asis.Clause)
                                      @key[return] Asis.Name;
 @end{Example}
 
-Clause @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
-representation_clause to query.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}Clause @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+@Chg{Version=[2],New=[aspect_clause or component_clause],Old=[representation_clause]} to query.
 
 Returns the direct_name expression following the reserved word @key[for].
 
@@ -105,7 +107,7 @@ Returns the direct_name expression following the reserved word @key[for].
 @leading@keepnext@;@Chg{Version=[2],New=[Clause expects an element
 that has one of the following],Old=[Appropriate]} Clause_Kinds:
 @begin{Display}
-A_Representation_Clause
+@Chg{Version=[2],New=[An_Aspect_Clause],Old=[A_Representation_Clause]}
 A_Component_Clause
 @end{Display}
 
@@ -124,23 +126,27 @@ An_Attribute_Reference
 @end{DescribeCode}
 
 
-@LabeledClause{function Representation_Clause_Expression}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+@LabeledRevisedClause{Version=[2],New=[function Aspect_Clause_Expression],Old=[function Representation_Clause_Expression]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Representation_Clause_Expression}
-            (Clause : @key[in] Asis.Representation_Clause)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+@key[function] @Chg{Version=[2],New=[@AdaSubDefn{Aspect_Clause_Expression}],Old=[@AdaSubDefn{Representation_Clause_Expression}]}
+            (Clause : @key[in] @Chg{Version=[2],New=[Asis.Aspect_Clause],Old=[Asis.Representation_Clause]})
              @key[return] Asis.Expression;
 @end{Example}
 
-Clause @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the representation_clause to query.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+Clause @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
+@Chg{Version=[2],New=[aspect_clause],Old=[representation_clause]} to query.
 
 Returns the expression following the reserved word @key[use] or the reserved
 words @key[use at].
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0039-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Clause expects an element
-that has one of the following],Old=[Appropriate]} Representation_Clause_Kinds:
+that has one of the following],Old=[Appropriate]} @Chg{Version=[2],New=[Aspect_Clause_Kinds],Old=[Representation_Clause_Kinds]}:
 @begin{Display}
 An_Attribute_Definition_Clause
 An_Enumeration_Representation_Clause
@@ -169,7 +175,7 @@ A_Record_Representation_Clause @em 13.5.1
 @end{ElementRef}
 @begin{ChildRef}@ @;
 @begin{Display}
-function Representation_Clause_Name
+function @Chg{Version=[2],New=[Aspect_Clause_Name],Old=[Representation_Clause_Name]}
 function Mod_Clause_Expression
 function Component_Clauses
 @end{Display}
@@ -177,19 +183,21 @@ function Component_Clauses
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Mod_Clause_Expression} (Clause : @key[in] Asis.Representation_Clause)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+@key[function] @AdaSubDefn{Mod_Clause_Expression} (Clause : @key[in] @Chg{Version=[2],New=[Asis.Aspect_Clause],Old=[Asis.Representation_Clause]})
                              @key[return] Asis.Expression;
 @end{Example}
 
-Clause @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the record representation clause to query.
+Clause @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the record
+representation clause to query.
 
 Returns the static_expression appearing after the reserved words @key[at mod].
 
 Returns a Nil_Element if a mod_clause is not present.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0039-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Clause expects an element
-that has the following],Old=[Appropriate]} Representation_Clause_Kinds:
+that has the following],Old=[Appropriate]} @Chg{Version=[2],New=[Aspect_Clause_Kinds],Old=[Representation_Clause_Kinds]}:
 @begin{Display}
 A_Record_Representation_Clause
 @end{Display}
@@ -213,7 +221,8 @@ An_Expression
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Component_Clauses} (Clause : @key[in] Asis.Representation_Clause;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+@key[function] @AdaSubDefn{Component_Clauses} (Clause : @key[in] @Chg{Version=[2],New=[Asis.Aspect_Clause],Old=[Asis.Representation_Clause]};
                             Include_Pragmas : @key[in] Boolean := False)
                             @key[return] Asis.Component_Clause_List;
 @end{Example}
@@ -229,9 +238,9 @@ record_representation_clause, in their order of appearance.
 Returns a Nil_Element_List if the record_representation_clause has no
 component_clause or pragma elements.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0039-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Clause expects an element
-that has one of the following],Old=[Appropriate]} Representation_Clause_Kinds:
+that has one of the following],Old=[Appropriate]} @Chg{Version=[2],New=[Aspect_Clause_Kinds],Old=[Representation_Clause_Kinds]}:
 @begin{Display}
 A_Record_Representation_Clause
 @end{Display}

@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.11 $ $Date: 2008/10/25 05:28:50 $}
+@comment{$Revision: 1.12 $ $Date: 2009/02/10 06:51:26 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -160,7 +160,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has one of the following ],Old=[]}Definition_Kinds:
+has the following ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Subtype_Indication
 @end{Display}
@@ -235,14 +235,14 @@ Declaration argument.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
-that has one of the following],Old=[Appropriate]} Definition_Kinds:
+that has the following],Old=[Appropriate]} Definition_Kinds:
 @ChgRef{Version=[2],Kind=[Revised]}
 @begin{Display}
 A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds:
     A_Derived_Type_Definition
     A_Derived_Record_Extension_Definition],Old=[]}
 A_Private_Extension_Definition
-A_Formal_Type_Definition@Chg{Version=[2],New=[ that has one of the following Formal_Type_Kinds:
+A_Formal_Type_Definition@Chg{Version=[2],New=[ that has the following Formal_Type_Kinds:
     A_Formal_Derived_Type_Definition],Old=[]}
 @end{Display}
 
@@ -283,13 +283,14 @@ artificial declarations for implicitly declared elements.]}
 @end{ImplPerm}
 
 @begin{UsageNote}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
 This query returns only implicit inherited entry declarations for
-derived task types. All representation clauses and pragmas associated
-with the entries of the original task type (the root type of the
-derived task type) apply to the inherited entries. Those are available
-by examining the original type or by calling Corresponding_Pragmas and
-Corresponding_Representation_Clauses. These functions will return the
-pragmas and clauses from the original type.
+All @Chg{Version=[2],New=[aspect],Old=[representation]} clauses and pragmas
+associated with the entries of the original task type (the root type of the
+derived task type) apply to the inherited entries. Those are available by
+examining the original type or by calling Corresponding_Pragmas and
+Corresponding_Representation_Clauses. These functions will return the pragmas
+and clauses from the original type.
 @end{UsageNote}
 
 
@@ -331,7 +332,7 @@ A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds
     A_Derived_Type_Definition
     A_Derived_Record_Extension_Definition],Old=[]}
 A_Private_Extension_Definition
-A_Formal_Type_Definition@Chg{Version=[2],New=[ that has one of the following Formal_Type_Kinds:
+A_Formal_Type_Definition@Chg{Version=[2],New=[ that has the following Formal_Type_Kinds:
     A_Formal_Derived_Type_Definition],Old=[]}
 @end{Display}
 
@@ -539,7 +540,7 @@ in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Type_Kinds:
+that has the following],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 An_Enumeration_Type_Definition
 @end{Display}
@@ -551,7 +552,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
-have one of the following ],Old=[]}Declaration_Kinds:
+have the following ],Old=[]}Declaration_Kinds:
 @begin{Display}
 An_Enumeration_Literal_Specification
 @end{Display}
@@ -585,7 +586,7 @@ Returns the range_constraint of the signed_integer_type_definition.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Type_Kinds:
+that has the following],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 A_Signed_Integer_Type_Definition
 @end{Display}
@@ -597,7 +598,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has one of the following ],Old=[]}Constraint_Kinds:
+has the following ],Old=[]}Constraint_Kinds:
 @begin{Display}
 A_Simple_Expression_Range
 @end{Display}
@@ -631,7 +632,7 @@ Returns the static_expression following the reserved word @key[mod].
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Type_Kinds:
+that has the following],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 A_Modular_Type_Definition
 @end{Display}
@@ -643,7 +644,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has one of the following ],Old=[]}Element_Kinds:
+has the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -686,22 +687,25 @@ to query.
 
 Returns the static_expression following the reserved word @key[digits].
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
-that has one of the following],Old=[Appropriate]} Type_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Type_Kinds:]}
 @begin{Display}
-A_Floating_Point_Definition
-A_Decimal_Fixed_Point_Definition
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Floating_Point_Definition
+A_Decimal_Fixed_Point_Definition]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[or Definition expects an element
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
 that has one of the following],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Revised]}
-A_Constraint@Chg{Version=[2],New=[ that has one of the following],Old=[
+A_Constraint@Chg{Version=[2],New=[ that has the following],Old=[
   Appropriate]} Constraint_Kinds:
-    A_Digits_Constraint
+    A_Digits_Constraint@Chg{Version=[2],New=[
+A_Type_Definition that has one of the following Type_Kinds:
+    A_Floating_Point_Definition
+    A_Decimal_Fixed_Point_Definition],Old=[]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
@@ -711,7 +715,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has one of the following ],Old=[]}Element_Kinds:
+has the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -741,22 +745,25 @@ definition to query.
 
 Returns the static_expression following the reserved word @key[delta].
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
-that has one of the following],Old=[Appropriate]} Type_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Type_Kinds:]}
 @begin{Display}
-An_Ordinary_Fixed_Point_Definition
-A_Decimal_Fixed_Point_Definition
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[An_Ordinary_Fixed_Point_Definition
+A_Decimal_Fixed_Point_Definition]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[or Definition expects an element
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
 that has one of the following],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Revised]}
-A_Constraint@Chg{Version=[2],New=[ that has one of the following],Old=[
+A_Constraint@Chg{Version=[2],New=[ that has the following],Old=[
   Appropriate]} Constraint_Kinds:
-    A_Delta_Constraint
+    A_Delta_Constraint@Chg{Version=[2],New=[
+A_Type_Definition that has one of the following Type_Kinds:
+    An_Ordinary_Fixed_Point_Definition
+    A_Decimal_Fixed_Point_Definition],Old=[]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
@@ -766,7 +773,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has one of the following ],Old=[]}Element_Kinds:
+has the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -788,24 +795,27 @@ Returns the real_range_specification range_constraint of the definition.
 
 Returns a Nil_Element if there is no explicit range_constraint.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
-that has one of the following],Old=[Appropriate]} Type_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Type_Kinds:]}
 @begin{Display}
-A_Floating_Point_Definition
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Floating_Point_Definition
 An_Ordinary_Fixed_Point_Definition
-A_Decimal_Fixed_Point_Definition
+A_Decimal_Fixed_Point_Definition]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[or Definition expects an element
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
 that has one of the following],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Revised]}
-A_Constraint@Chg{Version=[2],New=[ that has one of the following],Old=[
+A_Constraint@Chg{Version=[2],New=[ that has the following],Old=[
   Appropriate]} Constraint_Kinds:
-    A_Digits_Constraint
-    A_Delta_Constraint
+    A_Delta_Constraint@Chg{Version=[2],New=[
+A_Type_Definition that has one of the following Type_Kinds:
+    A_Floating_Point_Definition
+    An_Ordinary_Fixed_Point_Definition
+    A_Decimal_Fixed_Point_Definition],Old=[]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
@@ -852,14 +862,14 @@ an unconstrained_array_definition, in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Type_Kinds:
+that has the following],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 An_Unconstrained_Array_Definition
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[or Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Formal_Type_Kinds:
+that has the following],Old=[Appropriate]} Formal_Type_Kinds:
 @begin{Display}
 A_Formal_Unconstrained_Array_Definition
 @end{Display}
@@ -907,14 +917,14 @@ constrained_array_definition, in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Type_Kinds:
+that has the following],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 A_Constrained_Array_Definition
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[or Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Formal_Type_Kinds:
+that has the following],Old=[Appropriate]} Formal_Type_Kinds:
 @begin{Display}
 A_Formal_Constrained_Array_Definition
 @end{Display}
@@ -926,7 +936,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of the following ],Old=[]}Definition_Kinds:
+the following ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Discrete_Subtype_Definition
 @end{Display}
@@ -970,7 +980,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has one of the following ],Old=[]}Definition_Kinds:
+has the following ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Component_Definition
 @end{Display}
@@ -1016,14 +1026,14 @@ Returns the subtype_indication following the reserved word @key[access].
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Type_Kinds:
+that has the following],Old=[Appropriate]} Type_Kinds:
 @begin{Display}
 An_Access_Type_Definition
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[or Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Formal_Type_Kinds:
+that has the following],Old=[Appropriate]} Formal_Type_Kinds:
 @begin{Display}
 A_Formal_Access_Type_Definition
 @end{Display}
@@ -1044,7 +1054,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has one of the following ],Old=[]}Element_Kinds:
+has the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Subtype_Indication
 @end{Display}
@@ -1313,13 +1323,13 @@ that has one of the following],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Revised]}
 A_Subtype_Indication
-A_Discrete_Subtype_Definition@Chg{Version=[2],New=[ that has one of the following ],Old=[
+A_Discrete_Subtype_Definition@Chg{Version=[2],New=[ that has the following ],Old=[
   Appropriate]} Discrete_Range_Kinds:
     A_Discrete_Subtype_Indication
-A_Discrete_Range@Chg{Version=[2],New=[ that has one of the following ],Old=[
+A_Discrete_Range@Chg{Version=[2],New=[ that has the following ],Old=[
   Appropriate]} Discrete_Range_Kinds:
     A_Discrete_Subtype_Indication
-A_Formal_Type_Definition@Chg{Version=[2],New=[ that has one of the following ],Old=[
+A_Formal_Type_Definition@Chg{Version=[2],New=[ that has the following ],Old=[
   Appropriate]} Formal_Type_Kinds:
     A_Formal_Derived_Type_Definition
 @end{Display}
@@ -1361,10 +1371,10 @@ that has one of the following],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Revised]}
 A_Subtype_Indication
-A_Discrete_Subtype_Definition@Chg{Version=[2],New=[ that has one of the following ],Old=[
+A_Discrete_Subtype_Definition@Chg{Version=[2],New=[ that has the following ],Old=[
   Appropriate]} Discrete_Range_Kinds:
     A_Discrete_Subtype_Indication
-A_Discrete_Range@Chg{Version=[2],New=[ that has one of the following ],Old=[
+A_Discrete_Range@Chg{Version=[2],New=[ that has the following ],Old=[
   Appropriate]} Discrete_Range_Kinds:
     A_Discrete_Subtype_Indication
 @end{Display}
@@ -1417,14 +1427,14 @@ Returns the simple_expression for the lower bound of the range.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Constraint expects an element
-that has one of the following],Old=[Appropriate]} Constraint_Kinds:
+that has the following],Old=[Appropriate]} Constraint_Kinds:
 @begin{Display}
 A_Simple_Expression_Range
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[or Constraint expects an element
-that has one of the following],Old=[Appropriate]} Discrete_Range_Kinds:
+that has the following],Old=[Appropriate]} Discrete_Range_Kinds:
 @begin{Display}
 A_Discrete_Simple_Expression_Range
 @end{Display}
@@ -1436,7 +1446,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has one of the following ],Old=[]}Element_Kinds:
+has the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1458,14 +1468,14 @@ Returns the simple_expression for the upper bound of the range.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Constraint expects an element
-that has one of the following],Old=[Appropriate]} Constraint_Kinds:
+that has the following],Old=[Appropriate]} Constraint_Kinds:
 @begin{Display}
 A_Simple_Expression_Range
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[or Constraint expects an element
-that has one of the following],Old=[Appropriate]} Discrete_Range_Kinds:
+that has the following],Old=[Appropriate]} Discrete_Range_Kinds:
 @begin{Display}
 A_Discrete_Simple_Expression_Range
 @end{Display}
@@ -1477,7 +1487,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has one of the following ],Old=[]}Element_Kinds:
+has the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -1508,14 +1518,14 @@ Returns the range_attribute_reference expression of the range.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Constraint expects an element
-that has one of the following],Old=[Appropriate]} Constraint_Kinds:
+that has the following],Old=[Appropriate]} Constraint_Kinds:
 @begin{Display}
 A_Range_Attribute_Reference
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[or Constraint expects an element
-that has one of the following],Old=[Appropriate]} Discrete_Range_Kinds:
+that has the following],Old=[Appropriate]} Discrete_Range_Kinds:
 @begin{Display}
 A_Discrete_Range_Attribute_Reference
 @end{Display}
@@ -1527,7 +1537,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has one of the following ],Old=[]}Expression_Kinds:
+has the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Attribute_Reference
 @end{Display}
@@ -1582,7 +1592,7 @@ in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Constraint expects an element
-that has one of the following],Old=[Appropriate]} Constraint_Kinds:
+that has the following],Old=[Appropriate]} Constraint_Kinds:
 @begin{Display}
 An_Index_Constraint
 @end{Display}
@@ -1594,7 +1604,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
-have one of the following ],Old=[]}Definition_Kinds:
+have the following ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Discrete_Range
 @end{Display}
@@ -1648,7 +1658,7 @@ explicit expression.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Constraint expects an element
-that has one of the following],Old=[Appropriate]} Constraint_Kinds:
+that has the following],Old=[Appropriate]} Constraint_Kinds:
 @begin{Display}
 A_Discriminant_Constraint
 @end{Display}
@@ -1660,7 +1670,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of the following ],Old=[]}Association_Kinds:
+the following ],Old=[]}Association_Kinds:
 @begin{Display}
 A_Discriminant_Association
 @end{Display}
@@ -1718,7 +1728,7 @@ Returns the subtype_indication of the Component_Definition.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Component_Definition expects an element
-that has one of the following],Old=[Appropriate]} Definition_Kinds:
+that has the following],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 A_Component_Definition
 @end{Display}
@@ -1730,7 +1740,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has one of the following ],Old=[]}Definition_Kinds:
+has the following ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Subtype_Indication
 @end{Display}
@@ -1807,7 +1817,7 @@ See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
-that has one of the following],Old=[Appropriate]} Definition_Kinds:
+that has the following],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 A_Known_Discriminant_Part
 @end{Display}
@@ -1819,7 +1829,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of the following ],Old=[]}Declaration_Kinds:
+the following ],Old=[]}Declaration_Kinds:
 @begin{Display}
 A_Discriminant_Specification
 @end{Display}
@@ -1878,12 +1888,12 @@ kinds.]}
 one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Pragma
-A_Declaration@Chg{Version=[2],New=[ that has one of the following Declaration_Kinds:
+A_Declaration@Chg{Version=[2],New=[ that has the following Declaration_Kinds:
     A_Component_Declaration],Old=[]}
 A_Definition@Chg{Version=[2],New=[ that has one of the following Definition_Kinds:
     A_Null_Component
     A_Variant_Part],Old=[]}
-A_Clause@Chg{Version=[2],New=[ that has one of the following Definition_Kinds:
+A_Clause@Chg{Version=[2],New=[ that has the following Definition_Kinds:
     An_Attribute_Definition_Clause],Old=[]}
 @end{Display}
 
@@ -1944,20 +1954,18 @@ A_Variant
 of Value_Error for any element that does not have one of these expected
 kinds.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of the following ],Old=[]}Element_Kinds:
-@begin{Display}
-@ChgRef{Version=[2],Kind=[Revised]}
-A_Declaration@Chg{Version=[2],New=[ that has one of the following Declaration_Kinds:
-    A_Component_Declaration],Old=[]}
-@end{Display}
-
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
-@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns Declaration_Kinds:]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns Element_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Deleted]}
-@ChgDeleted{Version=[2],Text=[A_Component_Declaration]}
+@ChgDeleted{Version=[2],Text=[A_Declaration]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
+have the following ],Old=[]}Declaration_Kinds:
+@begin{Display}
+A_Component_Declaration
 @end{Display}
 @end{DescribeCode}
 
@@ -2003,7 +2011,7 @@ Returns the Discriminant_Direct_Name of the variant_part.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Variant_Part expects an element
-that has one of the following],Old=[Appropriate]} Definition_Kinds:
+that has the following],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 A_Variant_Part
 @end{Display}
@@ -2015,7 +2023,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has one of the following ],Old=[]}Expression_Kinds:
+has the following ],Old=[]}Expression_Kinds:
 @begin{Display}
 An_Identifier
 @end{Display}
@@ -2045,7 +2053,7 @@ following variants.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Variant_Part expects an element
-that has one of the following],Old=[Appropriate]} Definition_Kinds:
+that has the following],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 A_Variant_Part
 @end{Display}
@@ -2061,7 +2069,7 @@ one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Revised]}
 A_Pragma
-A_Definition@Chg{Version=[2],New=[ that has one of the following Definition_Kinds:
+A_Definition@Chg{Version=[2],New=[ that has the following Definition_Kinds:
     A_Variant],Old=[]}
 @end{Display}
 
@@ -2102,7 +2110,7 @@ Choices are either an expression, a discrete range, or an others choice.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Variant expects an element
-that has one of the following],Old=[Appropriate]} Definition_Kinds:
+that has the following],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 A_Variant
 @end{Display}
@@ -2165,7 +2173,7 @@ in the private_extension_declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
-that has one of the following],Old=[Appropriate]} Definition_Kinds:
+that has the following],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 A_Private_Extension_Definition
 @end{Display}
@@ -2177,7 +2185,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has one of the following ],Old=[]}Definition_Kinds:
+has the following ],Old=[]}Definition_Kinds:
 @begin{Display}
 A_Subtype_Indication
 @end{Display}
@@ -2209,9 +2217,10 @@ function Private_Part_Items
 Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
 type_definition to query. Include_Pragmas
 @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether pragmas are to be
-returned,
+returned@Chg{Version=[1],New=[.],Old=[,]}
 
-Returns a list of declarations, representation clauses, and pragmas
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+Returns a list of declarations, representation @Chg{Version=[2],New=[and operational items],Old=[clauses]}, and pragmas
 in the visible part of the task or protected definition, in their order
 of appearance. The list does not include discriminant_specification elements of
 the known_discriminant_part, if any, of the protected type or task type
@@ -2258,7 +2267,8 @@ type definition to query.
 Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
 pragmas are to be returned.
 
-Returns a list of declarations, representation clauses, and pragmas in the
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+Returns a list of declarations, representation @Chg{Version=[2],New=[and operational items],Old=[clauses]}, and pragmas in the
 private part of the task or protected definition, in their order of appearance.
 
 Returns a Nil_Element_List if there are no items.
@@ -2344,7 +2354,7 @@ Nil_Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Definition expects an
-element that has one of the following Definition_Kinds:]}
+element that has the following Definition_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Task_Definition]}
 @end{Display}

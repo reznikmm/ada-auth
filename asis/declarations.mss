@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.13 $ $Date: 2008/10/25 05:28:50 $}
+@comment{$Revision: 1.14 $ $Date: 2009/02/10 06:51:26 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -55,7 +55,7 @@ See Reference Manual 3.3.1(7).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
-that has one of the following],Old=[Appropriate]} Element_Kinds:
+that has the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Declaration
 @end{Display}
@@ -67,7 +67,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that
-have one of the following],Old=[]} Element_Kinds:
+have the following],Old=[]} Element_Kinds:
 @begin{Display}
 A_Defining_Name
 @end{Display}
@@ -137,7 +137,7 @@ syntactic constructs and any comments associated with them.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Defining_Name expects an element
-that has one of the following],Old=[Appropriate]} Element_Kinds:
+that has the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Defining_Name
 @end{Display}
@@ -207,7 +207,9 @@ expression to query.
 
 Returns the string image of the internal code for the enumeration literal.
 
-If a representation_clause is defined for the enumeration type then the
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+If a @Chg{Version=[2],New=[aspect_clause],Old=[representation_clause]}
+is defined for the enumeration type then the
 string returned is the Integer'Wide_Image of the corresponding value given in
 the enumeration_aggregate. Otherwise, the string returned is the same as
 the Position_Number_Image.
@@ -258,7 +260,7 @@ The Defining_Prefix of A.B is A, and of A.B.C is A.B.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Defining_Name expects an element
-that has one of the following],Old=[Appropriate]} Defining_Name_Kinds:
+that has the following],Old=[Appropriate]} Defining_Name_Kinds:
 @begin{Display}
 A_Defining_Expanded_Name
 @end{Display}
@@ -295,7 +297,7 @@ The Defining_Selector of A.B is B, and of A.B.C is C.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Defining_Name expects an element
-that has one of the following],Old=[Appropriate]} Defining_Name_Kinds:
+that has the following],Old=[Appropriate]} Defining_Name_Kinds:
 @begin{Display}
 A_Defining_Expanded_Name
 @end{Display}
@@ -307,7 +309,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has one of the following],Old=[]} Defining_Name_Kinds:
+has the following],Old=[]} Defining_Name_Kinds:
 @begin{Display}
 A_Defining_Identifier
 @end{Display}
@@ -664,7 +666,7 @@ Corresponding_Name_Definition queries.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Name expects an element
-that has one of the following],Old=[Appropriate]} Element_Kinds:
+that has the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Revised]}
 A_Defining_Name@Chg{Version=[2],New=[ that has one of the following Declaration_Kinds:
@@ -1035,43 +1037,61 @@ A_Formal_Type_Declaration
 @end{DescribeCode}
 
 
-@LabeledClause{function Corresponding_Representation_Clauses}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0021-1]}
+@LabeledRevisedClause{Version=[2],New=[function Corresponding_Aspect_Clauses],Old=[function Corresponding_Representation_Clauses]}
 
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Corresponding_Representation_Clauses}
-            (Declaration : @key[in] Asis.Declaration)
-            @key[return] Asis.Representation_Clause_List;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0021-1]}
+@key[function] @Chg{Version=[2],New=[@AdaSubDefn{Corresponding_Aspect_Clauses}],Old=[@AdaSubDefn{Corresponding_Representation_Clauses}]}
+            (@Chg{Version=[2],New=[Defining_Name],Old=[Declaration]} : @key[in] @Chg{Version=[2],New=[Asis.Defining_Name],Old=[Asis.Declaration]})
+            @key[return] @Chg{Version=[2],New=[Asis.Aspect_Clause_List],Old=[Asis.Representation_Clause_List]};
 @end{Example}
 
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
-declaration to query.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0021-1]}
+@Chg{Version=[2],New=[Defining_Name],Old=[Declaration]} @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+@Chg{Version=[2],New=[defining_name],Old=[declaration]} to query.
 
-Returns all representation_clause elements that apply to the declaration.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0021-1]}
+Returns all @Chg{Version=[2],New=[aspect_clause],Old=[representation_clause]}
+elements that apply to the @Chg{Version=[2],New=[named entity],Old=[declaration]}.
 
-Returns a Nil_Element_List if no clauses apply to the declaration.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0021-1]}
+Returns a Nil_Element_List if no clauses apply to the
+@Chg{Version=[2],New=[named entity],Old=[declaration]}.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0021-1]}
 The clauses returned may be the clauses applying to a parent type if the
-type is a derived type with no explicit representation. These clauses
-are not Is_Part_Of_Implicit, they are the representation_clause elements
+@Chg{Version=[2],New=[name refers to a type which],Old=[type]} is a derived type
+with no explicit @Chg{Version=[2],New=[aspect clause],Old=[representation]}.
+These clauses are not Is_Part_Of_Implicit, they are the
+@Chg{Version=[2],New=[An_Aspect_Clause],Old=[representation_clause]} elements
 specified in conjunction with the declaration of the parent type.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Declaration expects an element that has any],Old=[All]}
-Declaration_Kinds @Chg{Version=[2],New=[except],Old=[are appropriate
-except]} Not_A_Declaration.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0021-1]}
+@ChgDeleted{Version=[2],Text=[All Declaration_Kinds are appropriate
+except Not_A_Declaration.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[Defining_Name expects an
+element of appropriate Element_Kinds:]}
+@begin{Display}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[A_Defining_Name]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error if Defining_Name does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
 have one of the following],Old=[]} Clause_Kinds:
 @begin{Display}
-A_Representation_Clause
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0021-1]}
+@Chg{Version=[2],New=[An_Aspect_Clause],Old=[A_Representation_Clause]}
 @end{Display}
 @end{DescribeCode}
 
@@ -1116,11 +1136,12 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-have one of the following],Old=[]} Definition_Kinds:
+have the following],Old=[]} Definition_Kinds:
 @begin{Display}
 A_Discrete_Subtype_Definition
 @end{Display}
 @end{DescribeCode}
+
 
 
 @LabeledClause{function Parameter_Profile}
@@ -1183,7 +1204,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that
-have one of the following],Old=[]} Declaration_Kinds:
+have the following],Old=[]} Declaration_Kinds:
 @begin{Display}
 A_Parameter_Specification
 @end{Display}
@@ -1296,9 +1317,10 @@ Declaration @chg{Version=[1],New=[specifies],Old=[    @en Specifies]} the body
 declaration to query. Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en
 Specifies]} whether pragmas are to be returned.
 
-Returns a list of all basic declarations, representation specifications,
-use clauses, and pragmas in the declarative part of the body, in their
-order of appearance.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+Returns a list of all basic declarations, representation
+@Chg{Version=[2],New=[and operational items],Old=[specifications]}, use clauses,
+and pragmas in the declarative part of the body, in their order of appearance.
 
 Returns a Nil_Element_List if there are no declarative_item or pragma elements.
 
@@ -1532,11 +1554,6 @@ A_Single_Protected_Declaration
 A_Protected_Body_Declaration
 An_Entry_Body_Declaration
 @end{Display}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
 @end{DescribeCode}
 
 
@@ -1826,7 +1843,8 @@ An_Entry_Body_Declaration]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
 one of the following],Old=[]} Element_Kinds:
 @begin{Display}
-Not_An_Element
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}Not_An_Element@Chg{Version=[2],New=[
+A_Pragma],Old=[]}
 A_Declaration@Chg{Version=[2],New=[ that has one of Declaration_Kinds:
     Not_A_Declaration
     A_Function_Body_Declaration
@@ -1841,8 +1859,7 @@ A_Declaration@Chg{Version=[2],New=[ that has one of Declaration_Kinds:
     A_Task_Body_Stub
     A_Protected_Body_Declaration
     A_Protected_Body_Stub
-    An_Entry_Body_Declaration],Old=[]}
-A_Pragma
+    An_Entry_Body_Declaration],Old=[A_Pragma]}
 @end{Display}
 @end{DescribeCode}
 
@@ -1863,22 +1880,19 @@ Returns the subprogram declaration from which the given implicit inherited
 subprogram argument was inherited. The result can itself be an implicitly
 inherited subprogram.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
-that has one of the following],Old=[Appropriate]} Element_Kinds:
-@begin{Display}
-@ChgRef{Version=[2],Kind=[Revised]}
-A_Declaration@Chg{Version=[2],New=[ that has one of the following Declaration_Kinds:
-    A_Function_Declaration
-    A_Procedure_Declaration],Old=[]}
-@end{Display}
-
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
-@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Declaration_Kinds:]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Element_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Deleted]}
-@ChgDeleted{Version=[2],Text=[A_Function_Declaration
-A_Procedure_Declaration]}
+@ChgDeleted{Version=[2],Text=[A_Declaration]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
+that has one of the following],Old=[Appropriate]} Declaration_Kinds:
+@begin{Display}
+A_Function_Declaration
+A_Procedure_Declaration
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
@@ -1886,30 +1900,23 @@ A_Procedure_Declaration]}
 of Value_Error for any element that does not have one of these expected
 kinds.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following],Old=[]} Element_Kinds:
-@begin{Display}
-@ChgRef{Version=[2],Kind=[Revised]}
-A_Declaration@Chg{Version=[2],New=[ that has one of Declaration_Kinds:
-    A_Function_Body_Declaration
-    A_Function_Declaration
-    A_Function_Renaming_Declaration
-    A_Procedure_Body_Declaration
-    A_Procedure_Declaration
-    A_Procedure_Renaming_Declaration],Old=[]}
-@end{Display}
-
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
-@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns Declaration_Kinds:]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns Element_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Deleted]}
-@ChgDeleted{Version=[2],Text=[A_Function_Body_Declaration
+@ChgDeleted{Version=[2],Text=[A_Declaration]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
+one of the following],Old=[]} Declaration_Kinds:
+@begin{Display}
+A_Function_Body_Declaration
 A_Function_Declaration
 A_Function_Renaming_Declaration
 A_Procedure_Body_Declaration
 A_Procedure_Declaration
-A_Procedure_Renaming_Declaration]}
+A_Procedure_Renaming_Declaration
 @end{Display}
 
 Raises ASIS_Inappropriate_Element for a subprogram declaration that is not
@@ -1934,21 +1941,19 @@ also works for declarations of predefined operators such as "+" and "=".
 Raises ASIS_Inappropriate_Element if the argument is not an implicit
 declaration resulting from the declaration of a type.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
-that has one of the following],Old=[Appropriate]} Element_Kinds:
-@begin{Display}
-A_Declaration@Chg{Version=[2],New=[ that has one of Declaration_Kinds:
-    A_Function_Declaration
-    A_Procedure_Declaration],Old=[]}
-@end{Display}
-
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
-@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Declaration_Kinds:]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Element_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Deleted]}
-@ChgDeleted{Version=[2],Text=[A_Function_Declaration
-A_Procedure_Declaration]}
+@ChgDeleted{Version=[2],Text=[A_Declaration]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
+that has one of the following],Old=[Appropriate]} Declaration_Kinds:
+@begin{Display}
+A_Function_Declaration
+A_Procedure_Declaration
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
@@ -1998,7 +2003,7 @@ Returns a Nil_Element for any other function declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
-that has one of the following],Old=[Appropriate]} Declaration_Kinds:
+that has the following],Old=[Appropriate]} Declaration_Kinds:
 @begin{Display}
 A_Function_Declaration
 @end{Display}
@@ -2010,7 +2015,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-have one of the following],Old=[]} Declaration_Kinds:
+have the following],Old=[]} Declaration_Kinds:
 @begin{Display}
 A_Function_Declaration
 @end{Display}
@@ -2044,7 +2049,8 @@ package to query.
 Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
 pragmas are to be returned.
 
-Returns a list of all basic declarations, representation specifications,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+Returns a list of all basic declarations, representation @Chg{Version=[2],New=[and operational items],Old=[specifications]},
 use clauses, and pragmas in the visible part of a package, in their order
 of appearance.
 
@@ -2094,21 +2100,19 @@ word @key[private] which marks the beginning of a (possibly empty) private part.
 Returns False for any package specification without a private part.
 Returns False for any unexpected Element.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element that has
-one of the following],Old=[Expected]} Element_Kinds:
-@begin{Display}
-A_Declaration@Chg{Version=[2],New=[ that has one of Declaration_Kinds:
-    A_Generic_Package_Declaration
-    A_Package_Declaration],Old=[]}
-@end{Display}
-
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
-@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Declaration_Kinds:]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Element_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Deleted]}
-@ChgDeleted{Version=[2],Text=[A_Generic_Package_Declaration
-A_Package_Declaration]}
+@ChgDeleted{Version=[2],Text=[A_Declaration]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element that has
+one of the following],Old=[Expected]} Declaration_Kinds:
+@begin{Display}
+A_Generic_Package_Declaration
+A_Package_Declaration
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
@@ -2133,7 +2137,8 @@ package to query.
 Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
 pragmas are to be returned.
 
-Returns a list of all basic declarations, representation specifications,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+Returns a list of all basic declarations, representation @Chg{Version=[2],New=[and operational items],Old=[specifications]},
 use clauses, and pragmas in the private part of a package in their order of
 appearance.
 
@@ -2241,7 +2246,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-have one of the following],Old=[]} Element_Kinds:
+have the following],Old=[]} Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -2340,7 +2345,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has one of the following],Old=[]} Element_Kinds:
+has the following],Old=[]} Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -2440,7 +2445,7 @@ Returns a Nil_Element_List if there are no items or pragmas.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
-that has one of the following],Old=[Appropriate]} Declaration_Kinds:
+that has the following],Old=[Appropriate]} Declaration_Kinds:
 @begin{Display}
 A_Protected_Body_Declaration
 @end{Display}
@@ -2450,7 +2455,7 @@ A_Protected_Body_Declaration
 of Value_Error for any element that does not have one of these expected
 kinds.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0039-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
 one of the following],Old=[]} Element_Kinds:
 @begin{Display}
@@ -2462,7 +2467,7 @@ A_Declaration@Chg{Version=[2],New=[ that has one of the following Declaration_Ki
     A_Function_Body_Declaration
     An_Entry_Body_Declaration],Old=[]}
 A_Clause@Chg{Version=[2],New=[ that has one of Clause_Kinds:
-    A_Representation_Clause],Old=[]}
+    An_Aspect_Clause],Old=[]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
@@ -2516,7 +2521,7 @@ of entries.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
-that has one of the following],Old=[Appropriate]} Declaration_Kinds:
+that has the following],Old=[Appropriate]} Declaration_Kinds:
 @begin{Display}
 An_Entry_Declaration
 @end{Display}
@@ -2572,7 +2577,7 @@ An_Entry_Index_Specification element.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
-that has one of the following],Old=[Appropriate]} Declaration_Kinds:
+that has the following],Old=[Appropriate]} Declaration_Kinds:
 @begin{Display}
 An_Entry_Body_Declaration
 @end{Display}
@@ -2608,7 +2613,7 @@ declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
-that has one of the following],Old=[Appropriate]} Declaration_Kinds:
+that has the following],Old=[Appropriate]} Declaration_Kinds:
 @begin{Display}
 An_Entry_Body_Declaration
 @end{Display}
@@ -2620,7 +2625,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-have one of the following],Old=[]} Element_Kinds:
+have the following],Old=[]} Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -3097,7 +3102,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-one of the following],Old=[]} Association_Kinds:
+the following],Old=[]} Association_Kinds:
 @begin{Display}
 A_Generic_Association
 @end{Display}
@@ -3188,7 +3193,7 @@ A_Formal_Procedure_Declaration
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[or Declaration expects an element
-that has one of the following],Old=[Appropriate]} Subprogram_Default_Kinds:
+that has the following],Old=[Appropriate]} Subprogram_Default_Kinds:
 @begin{Display}
 A_Name_Default
 @end{Display}
@@ -3200,7 +3205,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has one of the following],Old=[]} Element_Kinds:
+has the following],Old=[]} Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}

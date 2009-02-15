@@ -1,20 +1,23 @@
 @Part(data, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/data.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2008/10/25 05:28:50 $}
+@comment{$Revision: 1.10 $ $Date: 2009/02/10 06:51:27 $}
 
 @LabeledSection{package Asis.Data_Decomposition (optional)}
 
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1],ARef=[SI99-0037-1]}
+@Chg{Version=[2],New=[Support for data decomposition is optional. ],Old=[]}
 @Chg{Version=[1],New=[The library package @ChildUnit{Parent=[Asis],Child=[Data_Decomposition]}Asis.Data_Decomposition
-may exist. If it @Chg{Version=[2], New=[exists], Old=[existis]},, the package
+@Chg{Version=[2],New=[shall],Old=[may]} exist@Chg{Version=[2],New=[ for an implementation
+that support data decomposition],Old=[]}. If it exists, the package
 shall provide interfaces equivalent to those described in the
 following subclauses.],
 Old=[@f{@key[package] @ChildUnit{Parent=[Asis],Child=[Data_Decomposition]}Asis.Data_Decomposition @key[is]}]}
 
 @ChgDeleted{Version=[1],Text=[Asis.Data_Decomposition]}
 
-This package is optional.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0037-1]}
+@ChgDeleted{Version=[2],Text=[This package is optional.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
 @Chg{Version=[2], New=[The operations provided by this package
@@ -61,8 +64,9 @@ machine architectures.]}
 
 Records, arrays, and their components may be packed.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1],ARef=[SI99-0039-1]}
 Records, array components, enumerations, and scalar types may have
-representation and length clauses applied to them. This includes scalar
+@Chg{Version=[2],New=[aspect],Old=[representation and length]} clauses applied to them. This includes scalar
 types used as record discriminants and array indices.
 
 This specification supports two of the three type models discussed
@@ -777,7 +781,7 @@ values are valid parameters for all query operations.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Element_Kinds:
+that has the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds:
    A_Derived_Type_Definition       (derived from a record type)
@@ -846,7 +850,7 @@ the record type is included in the result.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Element_Kinds:
+that has the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Type_Definition@Chg{Version=[2],New=[ that has one of Type_Kinds:
    A_Derived_Type_Definition       (derived from a record type)
@@ -1012,7 +1016,7 @@ are valid parameters for all query operations.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Element_Kinds:
+that has the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds:
    A_Derived_Type_Definition       (derived from an array type)
@@ -1062,8 +1066,8 @@ expected kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
 @Chg{Version=[2], New=[Type_Definition specifies the array type definition to
-query. ],Old=[]}omponent @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]}
-New=[a component which has an array subtype,
+query. ],Old=[]}Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]}
+@Chg{Version=[2],New=[a component which has an array subtype,
 Is_Array (Component) = True.],Old=[an array component to be used for iteration]}
 
 Returns an iterator poised to fetch the 1st component of an array.
@@ -1156,7 +1160,7 @@ Old=[All non-Nil component values are appropriate.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following ],Old=[]}Element_Kinds:
+the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Declaration@Chg{Version=[2],New=[ that has one of the following Declaration_Kinds:
     A_Component_Declaration
@@ -1191,8 +1195,8 @@ the subtype, type, and base type of the array components.
 @Chg{Version=[2], New=[Component expects any kind of non-Nil component.], Old=[All non-Nil component values are appropriate.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has one
-of the following ],Old=[]}Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
+the following ],Old=[]}Element_Kinds:
 @begin{Display}
 A_Subtype_Indication
 @end{Display}
@@ -1220,7 +1224,7 @@ An_Attribute_Reference expression.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Element_Kinds:
+that has the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds:
    A_Derived_Type_Definition       (derived from a record type)

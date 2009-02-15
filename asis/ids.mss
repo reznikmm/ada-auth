@@ -1,6 +1,6 @@
 @Part(ids, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/ids.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2008/02/06 06:23:47 $}
+@comment{$Revision: 1.3 $ $Date: 2009/02/10 06:51:27 $}
 
 @LabeledSection{package Asis.Ids}
 
@@ -20,11 +20,15 @@ the ASIS Id abstraction. An Id is a way of identifying a particular
 Element, from a particular Compilation_Unit, from a particular Context.
 Ids can be written to files. Ids can be read from files and converted into
 an Element value with the use of a suitable open Context.
+
+
 @LabeledClause{type Id}
 
-The Ada element Id abstraction (a private type).
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0037-1]}
+@Chg{Version=[2],New=[],Old=[The Ada element Id abstraction (a private type).]}
 
-The Id type is a distinct abstract type representing permanent "names"
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
+The Id type @Chg{Version=[2],New=[represents],Old=[is a distinct abstract type representing]} permanent "names"
 that correspond to specific Element values.
 
 These names can be written to files, retrieved at a later time, and
@@ -35,9 +39,10 @@ a particular physical compilation unit. Ids are "relative names". Each Id
 value is valid (is usable, makes sense, can be interpreted) only in the
 context of an appropriate open ASIS Context.
 
-Id shall be an undiscriminated private type, or, shall be derived from an
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0037-1]}
+@Chg{Version=[2],New=[],Old=[Id shall be an undiscriminated private type, or, shall be derived from an
 undiscriminated private type. It shall be declared as a new type or as a
-subtype of an existing type.
+subtype of an existing type.]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -58,6 +63,13 @@ subtype of an existing type.
 @key[function] @AdaSubDefn{Hash} (The_Id : @key[in] Id)
               @key[return] Asis.ASIS_Integer;
 @end{Example}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}@Comment{From the RM A.4.9(3/2)}
+@ChgAdded{Version=[2],Text=[Returns an implementation-defined value which is a function of the value of The_Id.
+If A and B are ids such that Is_Equal (A, B) is true, Hash(A) equals Hash(B).]}
+@begin{Implnote}
+@ChgAdded{Version=[2],Text=[This function should produce a result (not raise
+an exception) when passed Nil_Id.]}
+@end{Implnote}
 @end{DescribeCode}
 
 
@@ -68,6 +80,9 @@ subtype of an existing type.
 @key[function] "<" (Left  : @key[in] Id;
               Right : @key[in] Id) @key[return] Boolean;
 @end{Example}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]} @Comment{From the RM 4.5.2(10)}
+@Chg{Version=[2],New=[Less than ("<") is defined in terms of the corresponding mathematical
+operation on the position numbers of the values of the operands.],Old=[]}
 @end{DescribeCode}
 
 
@@ -78,6 +93,9 @@ subtype of an existing type.
 @key[function] ">" (Left  : @key[in] Id;
               Right : @key[in] Id) @key[return] Boolean;
 @end{Example}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]} @Comment{From the RM 4.5.2(10)}
+@Chg{Version=[2],New=[Greater than (">") is defined in terms of the corresponding mathematical
+operation on the position numbers of the values of the operands.],Old=[]}
 @end{DescribeCode}
 
 
@@ -146,19 +164,30 @@ Nil_Id is returned for a Nil_Element.
 The_Id @Chg{Version=[1],New=[specifies],Old=[     @en Specifies]} the Id to be converted to an Element.
 The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Context containing the Element with this Id.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 Returns the Element value corresponding to The_Id. The_Id shall
 correspond to an Element available from a Compilation_Unit contained by
-(referencible through) The_Context.
+(@Chg{Version=[2],New=[can be referenced],Old=[referencible]} through)
+The_Context.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}
+@ChgAdded{Version=[2],Text=[Is_Identical (Create_Element (Create_Id(E),
+Enclosing_Context(Enclosing_Compilation_Unit(E))), E) is True for any element E.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}
+@ChgAdded{Version=[2],Text=[If Create_Element is called twice with the same Id and context, the two results
+are Is_Identical.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 Raises ASIS_Inappropriate_Element if the Element value is not available
-though The_Context. The Status is Value_Error and the Diagnosis
-string will attempt to indicate the reason for the failure. (e.g., "Unit is
-inconsistent", "No such unit", "Element is inconsistent (Unit inconsistent)",
-etc.)
+@Chg{Version=[2],New=[through],Old=[though]} The_Context. The Status is
+Value_Error and the Diagnosis string will attempt to indicate the reason for the
+failure. (e.g., "Unit is inconsistent", "No such unit", "Element is inconsistent
+(Unit inconsistent)", etc.)
 @end{DescribeCode}
 
 
-@LabeledClause{function Debug_Image (ids)}
+@LabeledClause{function Debug_Image (id)}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -167,8 +196,9 @@ etc.)
 
 The_Id @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} an Id to convert.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}
 Returns a string value containing implementation-defined debug
-information associated with the Id.
+information associated with the Id @Chg{Version=[2],New=[including for Nil_Id],Old=[]}.
 
 The return value uses Asis.Text.Delimiter_Image to separate the lines
 of multi-line results. The return value does not end with

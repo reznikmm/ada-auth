@@ -1,6 +1,6 @@
 @Part(text, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/text.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2008/10/25 05:28:50 $}
+@comment{$Revision: 1.7 $ $Date: 2009/02/10 06:51:27 $}
 
 @LabeledSection{package Asis.Text}
 
@@ -37,11 +37,13 @@ renaming, deletion, corruption, or moving of the text.
 
 @LabeledClause{type Line}
 
-An Ada text @i{line} abstraction (a private type).@Defn{Line}@Defn{Text line}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0037-1]}
+@Chg{Version=[2],New=[],Old=[An Ada text @i{line} abstraction (a private type).]} @Defn{Line}@Defn{Text line}
 
-Used to represent text fragments from a compilation.
-ASIS Lines are representations of the compilation text.
-This shall be supported by all ASIS implementations.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
+@Chg{Version=[2],New=[The type @i{Line} represents],Old=[Used to represent]} text fragments from a compilation.
+ASIS Lines are representations of the compilation text.@Chg{Version=[2],New=[],Old=[ This
+shall be supported by all ASIS implementations.]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -53,11 +55,15 @@ This shall be supported by all ASIS implementations.
                   @key[return] Boolean @key[is abstract];
 @end{Example}
 
-@ChgAdded{Version=[1],Text=[Line shall be an undiscriminated private type,
-or, shall be derived from an undiscriminated private type. It can be declared
-as a new type or as a subtype of an existing type.]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0037-1]}
+@ChgAdded{Version=[1],Text=[@Chg{Version=[2],New=[],Old=[Line shall be an
+undiscriminated private type, or, shall be derived from an undiscriminated
+private type. It can be declared as a new type or as a subtype of an existing
+type.]}]}
 
-Nil_Line is the value of an uninitialized Line object.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
+Nil_Line is the value of @Chg{Version=[2],New=[a default-initialized],Old=[an
+uninitialized]} Line object.
 @end{DescribeCode}
 
 
@@ -140,15 +146,19 @@ position zero.
 
 @LabeledClause{type Span}
 
-Span is a single text position that is identified by a line number and a column
-number representing the text's position within the compilation unit.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
+@Chg{Version=[2],New=[A @i{single text position}@Defn{single text position}],Old=[Span
+is a single text position]} that is identified by a line number and a column
+number representing the text's @Chg{Version=[2],New=[location],Old=[position]}
+within the compilation unit.
 
 The text of an element can span one or more lines. The textual Span of an
 element identifies the lower and upper bound of a span of text positions.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 Spans and positions give client tools the option of accessing compilation
 unit text through the queries provided by this package, or, to access
-the text directly through the original compilation unit text file. Type span
+the text directly through the original compilation unit text file. Type @Chg{Version=[2],New=[Span],Old=[span]}
 facilitates the capture of comments before or after an element.
 
 @begin{SingleNote}
@@ -306,7 +316,8 @@ Returns a Nil_Span if not Is_Text_Available(Element).
 Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the line to
 check.
 
-Returns True if the argument is the Nil_Line.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
+Returns True if the argument is the Nil_Line@Chg{Version=[2],New=[ otherwise returns False],Old=[]}.
 
 A Line from a Line_List obtained from any of the Lines functions
 will not be Is_Nil even if it has a length of zero.
@@ -324,7 +335,8 @@ will not be Is_Nil even if it has a length of zero.
 Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the line list to
 check.
 
-Returns True if the argument has a 'Length of zero.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
+Returns True if the argument has a 'Length of zero@Chg{Version=[2],New=[ otherwise returns False],Old=[]}.
 @end{DescribeCode}
 
 
@@ -339,7 +351,8 @@ Returns True if the argument has a 'Length of zero.
 Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the Span to
 check.
 
-Returns True if the argument has a Nil_Span.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
+Returns True if the argument has a Nil_Span@Chg{Version=[2],New=[ otherwise returns False],Old=[]}.
 @end{DescribeCode}
 
 
@@ -354,8 +367,9 @@ Returns True if the argument has a Nil_Span.
 Left @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the first of the two lines.
 Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the second of the two lines.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 Returns True if the two lines encompass the same text (have the same Span
-and are from the same compilation).
+and are from the same compilation)@Chg{Version=[2],New=[ otherwise returns False],Old=[]}.
 @end{DescribeCode}
 
 
@@ -371,8 +385,9 @@ Left @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the first of the
 two lines. Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
 second of the two lines.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 Returns True if the two lines encompass the same text (have the same Span
-and are from the same compilation) and are from the same Context.
+and are from the same compilation) and are from the same Context@Chg{Version=[2],New=[ otherwise returns False],Old=[]}.
 @end{DescribeCode}
 
 
@@ -671,6 +686,9 @@ The_Line @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the line to con
 
 Returns a string value containing implementation-defined debug
 information associated with the line.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}
+@Chg{Version=[2],New=[Raises ASIS_Inappropriate_Line if Is_Nil (The_Line).],Old=[]}
 
 The return value uses Asis.Text.Delimiter_Image to separate the lines
 of multi-line results. The return value does not end with
