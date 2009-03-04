@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.16 $ $Date: 2009/02/10 06:51:27 $}
+@comment{$Revision: 1.17 $ $Date: 2009/02/15 08:00:55 $}
 
 @LabeledSection{package Asis}
 
@@ -1494,11 +1494,9 @@ representing such an alternative.
    @key[end select];
 @end{Example}
 
-@Chg{Version=[1],New=[],Old=[Path_Kinds
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
+@Chg{Version=[1],New=[@Chg{Version=[2],New=[The type definition is:],Old=[]}],Old=[Path_Kinds
 Literals                      -- @examcom{Reference Manual}]}
-@ChgAdded{Version=[2],Text=[@b{@i{We need some kind of separator between the example
-and the definition; they look the same and the type definition looks like part
-of the example. I don't have a good idea - RLB}}]}
 
 @begin{DescribeCode}
 @begin{Example}

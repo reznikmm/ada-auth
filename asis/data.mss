@@ -1,6 +1,6 @@
 @Part(data, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/data.mss,v $}
-@comment{$Revision: 1.10 $ $Date: 2009/02/10 06:51:27 $}
+@comment{$Revision: 1.11 $ $Date: 2009/02/15 08:00:55 $}
 
 @LabeledSection{package Asis.Data_Decomposition (optional)}
 
@@ -970,17 +970,12 @@ that has one of the following],Old=[Appropriate]} Element_Kinds:]}
 A_Record_Type_Definition]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
 @ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[Appropriate Asis.Data_Decomposition.Type_Model_Kinds:]}
 @begin{Display}
 @ChgDeleted{Version=[2],Text=[A_Simple_Static_Model
 A_Simple_Dynamic_Model]}
 @end{Display}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element or component that does not have one of these
-expected kinds.]}
 @end{DescribeCode}
 
 
@@ -1540,8 +1535,8 @@ be Data_Error. The Diagnosis string will indicate the kind of error detected.
 
 @ChgNote{SI99-0035-1 remove subprogram}
 @Chg{Version=[2],New=[],Old=[@b<@i<obsolete function Portable_Constrained_Subtype>>]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header was removed as there are
-no remaining clauses after it. - RLB}}]}
+@ChgNote{This clause header was removed as there are no remaining clauses
+after it. - RLB}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
 @ChgDeleted{Version=[2],Text=[Generic for Data Stream Conversions.]}
@@ -1580,8 +1575,8 @@ value is not in the subtype's range.]}
 
 
 @Chg{Version=[2],New=[],Old=[@b<@i<obsolete function Construct_Artificial_Data_Stream>>]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header was removed as there are
-no remaining clauses after it. - RLB}}]}
+@ChgNote{This clause header was removed as there are no remaining clauses
+after it. - RLB}
 
 
 @begin{DescribeCode}

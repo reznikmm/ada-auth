@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.13 $ $Date: 2009/02/10 06:51:27 $}
+@comment{$Revision: 1.14 $ $Date: 2009/02/15 08:00:55 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -1661,7 +1661,7 @@ encountered while traversing a generic instance.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0007-1]}
 @Comment{@LabeledAddedClause{Version=[2],Name=[function Is_Prefix_Notation]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Is_Prefix_Notation]}}
+@LabeledAddedSubClause{Version=[2],Name=[function Is_Prefix_Notation]}
 @begin{Discussion}
 @ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
 change all of the following clause numbers, so this is a subclause temporarily.]}
@@ -1925,17 +1925,13 @@ Pragmas is controlled by an Include_Pragmas parameter.
 
 Returns a Nil_Element_List if there are no pragmas.
 
-@b{@i{We ought to get rid of the two column format here, because it
-formats horribly, especially in HTML. Any ideas?? (I tried a table, but
-that was worse; tabs don't appear in HTML) - RLB}}@*
-
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[The_Element expects an element
 that has one of the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 @tabset{P34}
-A_Path@\(pragmas from the statement list + pragmas immediately preceding the reserved word @key[when] of the first alternative)
-An_Exception_Handler@\(pragmas from the statement list + pragmas immediately preceding the reserved word @key[when] of the first exception handler)
+A_Path@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from the statement list + pragmas immediately preceding the reserved word @key[when] of the first alternative)
+An_Exception_Handler@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from the statement list + pragmas immediately preceding the reserved word @key[when] of the first exception handler)
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1943,16 +1939,16 @@ An_Exception_Handler@\(pragmas from the statement list + pragmas immediately pre
 that has one of the following],Old=[Appropriate]} Declaration_Kinds:
 @begin{Display}
 @tabset{P34}
-A_Procedure_Body_Declaration@\(pragmas from declarative region + statements)
-A_Function_Body_Declaration@\(pragmas from declarative region + statements)
-A_Package_Declaration@\(pragmas from visible + private declarative regions)
-A_Package_Body_Declaration@\(pragmas from declarative region + statements)
-A_Task_Body_Declaration@\(pragmas from declarative region + statements)
-A_Protected_Body_Declaration@\(pragmas from declarative region)
-An_Entry_Body_Declaration@\(pragmas from declarative region + statements)
-A_Generic_Procedure_Declaration@\(pragmas from formal declarative region)
-A_Generic_Function_Declaration@\(pragmas from formal declarative region)
-A_Generic_Package_Declaration@\(pragmas from formal + visible + private declarative regions)
+A_Procedure_Body_Declaration@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from declarative region + statements)
+A_Function_Body_Declaration@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from declarative region + statements)
+A_Package_Declaration@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from visible + private declarative regions)
+A_Package_Body_Declaration@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from declarative region + statements)
+A_Task_Body_Declaration@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from declarative region + statements)
+A_Protected_Body_Declaration@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from declarative region)
+An_Entry_Body_Declaration@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from declarative region + statements)
+A_Generic_Procedure_Declaration@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from formal declarative region)
+A_Generic_Function_Declaration@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from formal declarative region)
+A_Generic_Package_Declaration@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from formal + visible + private declarative regions)
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1960,11 +1956,11 @@ A_Generic_Package_Declaration@\(pragmas from formal + visible + private declarat
 that has one of the following],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 @tabset{P34}
-A_Record_Definition@\(pragmas from the component list)
-A_Variant_Part@\(pragmas immediately preceding the first reserved word @key[when] + between variants)
-A_Variant@\(pragmas from the component list)
-A_Task_Definition@\(pragmas from visible + private declarative regions)
-A_Protected_Definition@\(pragmas from visible + private declarative regions)
+A_Record_Definition@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from the component list)
+A_Variant_Part@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas immediately preceding the first reserved word @key[when] + between variants)
+A_Variant@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from the component list)
+A_Task_Definition@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from visible + private declarative regions)
+A_Protected_Definition@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from visible + private declarative regions)
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1972,11 +1968,11 @@ A_Protected_Definition@\(pragmas from visible + private declarative regions)
 that has one of the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 @tabset{P34}
-A_Loop_Statement@\(pragmas from statement list)
-A_While_Loop_Statement@\(pragmas from statement list)
-A_For_Loop_Statement@\(pragmas from statement list)
-A_Block_Statement@\(pragmas from declarative region + statements)
-An_Accept_Statement@\(pragmas from statement list)
+A_Loop_Statement@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from statement list)
+A_While_Loop_Statement@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from statement list)
+A_For_Loop_Statement@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from statement list)
+A_Block_Statement@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from declarative region + statements)
+An_Accept_Statement@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from statement list)
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0039-1]}
@@ -1987,7 +1983,7 @@ NoBreak=[F],Border=[F],SmallSize=[F],Caption=[],Headers=[],
 Body=[]}}
 @begin{Display}
 @tabset{P34}
-A_Record_Representation_Clause@\(pragmas from component specifications)
+A_Record_Representation_Clause@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from component specifications)
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}

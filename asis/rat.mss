@@ -1,9 +1,9 @@
 @Part(rat, Root="asis.msm")
 
-@Comment{$Date: 2006/10/10 05:10:36 $}
+@Comment{$Date: 2009/02/15 08:00:55 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/rat.mss,v $}
-@comment{$Revision: 1.2 $}
+@comment{$Revision: 1.3 $}
 
 @LabeledInformativeAnnex{Rationale}
 
@@ -238,6 +238,7 @@ rather than at the internal representation level. It was these issues that
 drove some Ada compiler vendors to independently develop proprietary
 higher-level interfaces to encapsulate their Ada program libraries.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 In particular, to overcome the drawbacks of DIANA while retaining all of its
 advantages, Rational Software Corporation developed their
 LRM-Interface@Defn{LRM-Interface} product
@@ -245,14 +246,13 @@ LRM-Interface@Defn{LRM-Interface} product
 services that extracted a variety of information from the internal DIANA trees.
 The LRM-Interface was also considerably easier to understand than DIANA,
 because it used the already-familiar terminology defined in the Ada LRM (the
-original @i{Reference Manual for the Ada Programming Language} [12], or its more
-recent version, the @i{Ada 95 Reference Manual} [7]). Furthermore, the
+original @Chg{Version=[2],New=[Ada Standard, ISO 8652:1987],
+Old=[@i{Reference Manual for the Ada Programming Language}]} [12], or its more
+recent version, the @Chg{Version=[2],New=[ISO/IEC 8652:1995],Old=[@i{Ada 95
+Reference Manual}]} [7]). Furthermore, the
 LRM-Interface was not subject to change (or at least much less so than was the
 underlying DIANA), so tools written against it were easily migrated to updated
-implementations.@Chg{Version=[1],New=[@i{@b{We're not allowed to reference other
-standards this way, in particular "Ada Reference Manual" is verboten. That
-happens a lot in this Standard (I'm surprised that ITTF didn't complain).
-We need to fix that in a variety of places. - RLB}}],Old=[]}
+implementations.
 
 @leading@;Regardless of LRM-Interface specifics, this and other similar
 approaches generally provide great flexibility: for example, an ad hoc tool can

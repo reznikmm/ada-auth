@@ -1,6 +1,6 @@
 @Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.10 $ $Date: 2009/02/10 06:51:27 $}
+@comment{$Revision: 1.11 $ $Date: 2009/02/15 08:00:55 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -1027,7 +1027,12 @@ An_Expression
 Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} an array
 aggregate expression to query.
 
-Returns a list of the Array_Component_Associations in an array aggregate.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
+Returns a list of the Array_Component_Associations in an array
+aggregate.@Chg{Version=[2],New=[ If the aggregate is a positional array
+aggregate, the Array_Component_Associations consist of an expression of the
+aggregate, and Array_Component_Choices that are a Nil_Element_List for all
+positional expressions except an others choice.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
@@ -1051,13 +1056,14 @@ An_Array_Component_Association
 @end{DescribeCode}
 
 @begin{SingleNote}
-@b{@i{Shouldn't this be normative?? - RLB}}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 While positional_array_aggregate elements do not have
 array_component_association elements defined by Ada syntax, ASIS treats
-A_Positional_Array_Aggregate as if it were A_Named_Array_Aggregate.
-The An_Array_Component_Association elements returned will have
+A_Positional_Array_Aggregate as if it were
+A_Named_Array_Aggregate.@Chg{Version=[2],New=[],Old=[The
+An_Array_Component_Association elements returned will have
 Array_Component_Choices that are a Nil_Element_List for all positional
-expressions except an others choice.
+expressions except an others choice.]}
 @end{SingleNote}
 
 

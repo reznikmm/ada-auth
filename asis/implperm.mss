@@ -1,6 +1,6 @@
 @Part(implperm, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/implperm.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2008/02/06 06:23:47 $}
+@comment{$Revision: 1.7 $ $Date: 2009/02/15 08:00:55 $}
 
 
 @LabeledSection{package Asis.Implementation.Permissions}
@@ -293,12 +293,10 @@ operations.
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function InhDecS],
-Old=[function Inherited_Declarations_Supported]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - GG}}]}
+@Chg{Version=[2],New=[],Old=[obsolete function Inherited_Declarations_Supported]}
+@ChgNote{This clause header was removed as there are no remaining clauses
+after it. - RLB}
+
 @begin{DescribeCode}
 @begin{Example}
 @ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Inherited_Declarations_Supported} @key[return] Boolean;]}
@@ -309,8 +307,10 @@ queries of inherited declarations.]}
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function InhSubS],
-Old=[function Inherited_Subprograms_Supported]}
+@Chg{Version=[2],New=[],Old=[obsolete function Inherited_Subprograms_Supported]}
+@ChgNote{This clause header was removed as there are no remaining clauses
+after it. - RLB}
+
 @ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
 removing it now would change all of the clause numbers,
 and that would make a mess for editing and reference purposes. Ultimately,
@@ -325,12 +325,9 @@ queries of inherited subprograms.]}
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function Gen_MacEx_S],
-Old=[function Generic_Macro_Expansion_Supported]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - GG}}]}
+@Chg{Version=[2],New=[],Old=[obsolete function Generic_Macro_Expansion_Supported]}
+@ChgNote{This clause header was removed as there are no remaining clauses
+after it. - RLB}
 @begin{DescribeCode}
 @begin{Example}
 @ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Generic_Macro_Expansion_Supported} @key[return] Boolean;]}
