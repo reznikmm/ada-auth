@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/concepts.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2008/10/25 05:28:50 $}
+@comment{$Revision: 1.7 $ $Date: 2009/03/04 01:07:17 $}
 
 
 @LabeledSection{ASIS technical concepts}
@@ -958,3 +958,42 @@ results for this unit.
 Standard are presented as a compilable interface, documented with Ada
 comments.]}
 
+@LabeledAddedSubSubClause{Version=[2],Name=[Processing instantiations]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}@ChgNote{Moved from section 15}
+@ChgAdded{Version=[2],Text=[Instantiations can always be analyzed in terms of
+the generic actual parameters supplied with the instantiation. A generic
+instance is a copy of the generic unit, and while there is no explicit (textual)
+specification in the program text, an implicit specification and body, if there
+is one, with the generic actual parameters is implied.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[To analyze the implicit instance
+specification or body of a generic instantiation:]}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[Use Corresponding_Declaration to return the
+implicit expanded specification of an instantiation.]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[Use Corresponding_Body to return the implicit body
+of an instantiation.]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[Then analyze the specification or body with any
+appropriate queries.]}
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[To analyze the explicit generic
+specification or body referenced by a generic instantiation:]}
+@begin{Itemize}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[Use Generic_Unit_Name to obtain the name of the generic unit.]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[Then use Corresponding_Name_Declaration to get to the generic declaration.]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[Then use Corresponding_Body to get to the body of the generic declaration.]}
+@end{Itemize}

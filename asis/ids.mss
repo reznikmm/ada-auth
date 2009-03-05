@@ -1,6 +1,6 @@
 @Part(ids, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/ids.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2009/02/10 06:51:27 $}
+@comment{$Revision: 1.4 $ $Date: 2009/03/04 01:07:17 $}
 
 @LabeledSection{package Asis.Ids}
 
@@ -65,7 +65,8 @@ subtype of an existing type.]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}@Comment{From the RM A.4.9(3/2)}
 @ChgAdded{Version=[2],Text=[Returns an implementation-defined value which is a function of the value of The_Id.
-If A and B are ids such that Is_Equal (A, B) is true, Hash(A) equals Hash(B).]}
+If A and B are ids such that Is_Identical (A, B) is true, Hash(A) equals
+Hash(B).]}
 @begin{Implnote}
 @ChgAdded{Version=[2],Text=[This function should produce a result (not raise
 an exception) when passed Nil_Id.]}
@@ -80,9 +81,8 @@ an exception) when passed Nil_Id.]}
 @key[function] "<" (Left  : @key[in] Id;
               Right : @key[in] Id) @key[return] Boolean;
 @end{Example}
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]} @Comment{From the RM 4.5.2(10)}
-@Chg{Version=[2],New=[Less than ("<") is defined in terms of the corresponding mathematical
-operation on the position numbers of the values of the operands.],Old=[]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}
+@Chg{Version=[2],New=[Defines a total ordering on Ids.],Old=[]}
 @end{DescribeCode}
 
 
@@ -93,9 +93,8 @@ operation on the position numbers of the values of the operands.],Old=[]}
 @key[function] ">" (Left  : @key[in] Id;
               Right : @key[in] Id) @key[return] Boolean;
 @end{Example}
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]} @Comment{From the RM 4.5.2(10)}
-@Chg{Version=[2],New=[Greater than (">") is defined in terms of the corresponding mathematical
-operation on the position numbers of the values of the operands.],Old=[]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}
+@Chg{Version=[2],New=[Equivalent to Right < Left.],Old=[]}
 @end{DescribeCode}
 
 

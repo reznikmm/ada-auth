@@ -1,6 +1,6 @@
 @Part(comp-rel, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/comp-rel.mss,v $}
-@comment{$Revision: 1.10 $ $Date: 2009/02/10 06:51:26 $}
+@comment{$Revision: 1.11 $ $Date: 2009/03/04 01:07:17 $}
 
 
 @LabeledSection{package Asis.Compilation_Units.Relations}
@@ -71,11 +71,13 @@ which they semantically depend.
 @begin{Indent}
    The second list is made up of unit pairs.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
    Each pairing defines an inconsistent semantic dependence relationship.
    The right unit of each pair semantically depends on the preceding left
    unit. All rightmost units of each pair are always inconsistent, and will
    not appear in the consistent units list. The leftmost unit can be either
-   consistent or inconsistent. If a leftmost units is consistent, then it
+   consistent or inconsistent. If a @Chg{Version=[2],New=[leftmost units],
+   Old=[unit that is the leftmost of a pair]} is consistent, then it
    also appears in the consistent units list; otherwise the unit is part of
    an inconsistent transitive relationship.
 
@@ -213,7 +215,7 @@ The dependencies are:  A depends on B, B depends on C, C depends on A.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}
 @ChgAdded{Version=[2],Text=[A Nil_Relationship is returned by all
-Compilation_Units.Relations functions when there is no releationship between the
+Compilation_Units.Relations functions when there is no relationship between the
 specified units.]}
 @end{DescribeCode}
 

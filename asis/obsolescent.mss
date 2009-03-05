@@ -1,10 +1,10 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2009/02/10 06:51:27 $}
+@Comment{$Date: 2009/03/04 01:07:17 $}
 @LabeledAddedNormativeAnnex{Version=[2],Name=[Obsolescent Features]}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/obsolescent.mss,v $}
-@comment{$Revision: 1.7 $}
+@comment{$Revision: 1.8 $}
 
 @LabeledAddedClause{Version=[2],Name=[Annex Contents]}
 
@@ -569,8 +569,13 @@ A_Formal_Derived_Type_Definition]}
 @end{DescribeCode}
 
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@ChgRef{Version=[2],Kind=[Added]}
 @LabeledAddedSubclause{Version=[2],Name=[function Corresponding_Pragmas]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@ChgAdded{Version=[2],Text=[This function has been replaced by
+Corresponding_Aspect_Pragmas. Use of the function
+Corresponding_Pragmas is not recommented in new programs.]}
 
 @begin{DescribeCode}
 @begin{Example}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
@@ -902,9 +907,13 @@ An_Attribute_Reference]}
 @end{Display}
 @end{DescribeCode}
 
+@ChgRef{Version=[2],Kind=[Added]}
+@LabeledAddedSubClause{Version=[2],Name=[function Corresponding_Representation_Clauses]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
-@LabeledAddedSubClause{Version=[2],Name=[function Corresponding_Representation_Clauses]}
+@ChgAdded{Version=[2],Text=[This function has been replaced by
+Corresponding_Aspect_Clauses. Use of the function
+Corresponding_Representation_Clauses is not recommented in new programs.]}
 
 
 @begin{DescribeCode}
@@ -915,15 +924,14 @@ An_Attribute_Reference]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
-@Chg{Version=[2],New=[Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+@Chg{Version=[2],New=[Declaration specifies the
 declaration to query.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
-@Chg{Version=[2],New=[Returns all aspect_clause elements that apply to the
+@ChgAdded{Version=[2],Text=[Returns all aspect_clause elements that apply to the
 declaration, including the aspect clauses for
 stream-oriented attributes whose prefix is the class-wide type
-associated with the named entity.],Old=[Returns
-all representation_clause elements that apply to the declaration.]}
+associated with the named entity.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
 @Chg{Version=[2],New=[Returns a Nil_Element_List if no clauses apply to the declaration.],Old=[]}
@@ -1027,6 +1035,63 @@ has one of the following Expression_Kinds:]}
 A_Selected_Component]}
 @end{Display}
 @end{DescribeCode}
+
+
+@ChgNote{SI99-0044-1 add clause on newly obsolete function}
+@LabeledAddedSubClause{Version=[2],Name=[function Corresponding_Parent_Subtype]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0044-1]}
+@ChgAdded{Version=[2],Text=[This function has been replaced by
+Parent_Subtype_Indication. Use of the function Corresponding_Parent_Subtype is
+not recommended in new programs.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0044-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Corresponding_Parent_Subtype}
+             (Type_Definition : @key[in] Asis.Type_Definition)
+                 @key[return] Asis.Declaration;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0044-1]}
+@ChgAdded{Version=[2],Text=[Type_Definition specifies the
+derived_type_definition to query.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0044-1]}
+@ChgAdded{Version=[2],Text=[Returns the parent subtype declaration of the
+derived_type_definition. The parent subtype is defined by the
+parent_subtype_indication. If the parent subtype have no explicit
+declaration, the value returns is implementation defined.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0044-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Type_Definition expects an element
+that has one of the following Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Derived_Type_Definition
+A_Derived_Record_Extension_Definition]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0044-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0044-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns an element
+that has one of the following Declaration_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[An_Ordinary_Type_Declaration
+A_Task_Type_Declaration
+A_Protected_Type_Declaration
+A_Subtype_Declaration
+A_Formal_Type_Declaration
+An_Incomplete_Type_Declaration
+A_Private_Type_Declaration
+A_Private_Extension_Declaration]}
+@end{Display}
+@end{DescribeCode}
+
+
 
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0039-1]}

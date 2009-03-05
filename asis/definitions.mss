@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.12 $ $Date: 2009/02/10 06:51:26 $}
+@comment{$Revision: 1.13 $ $Date: 2009/03/04 01:07:17 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -374,46 +374,49 @@ artificial declarations for implicitly declared elements.]}
 @end{ImplPerm}
 
 
-@LabeledClause{function Corresponding_Parent_Subtype}
+@LabeledRevisedClause{Version=[2],New=[obsolete function Corr_Parent_Subtype],
+Old=[function Corresponding_Parent_Subtype]}
+@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
+removing it now would change all of the clause numbers,
+and that would make a mess for editing and reference purposes. Ultimately,
+when the final standard is produced, it will be removed. - RLB}}]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Corresponding_Parent_Subtype}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0044-1]}
+@ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Corresponding_Parent_Subtype}
              (Type_Definition : @key[in] Asis.Type_Definition)
-                 @key[return] Asis.Declaration;
+                 @key[return] Asis.Declaration;]}
 @end{Example}
 
-Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
-derived_type_definition to query.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0044-1]}
+@ChgDeleted{Version=[2],Text=[Type_Definition specifies the
+derived_type_definition to query.]}
 
-Returns the parent subtype declaration of the derived_type_definition.
-The parent subtype is defined by the parent_subtype_indication.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0044-1]}
+@ChgDeleted{Version=[2],Text=[Returns the parent subtype declaration of the
+derived_type_definition. The parent subtype is defined by the
+parent_subtype_indication.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
-that has one of the following],Old=[Appropriate]} Type_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0044-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[Appropriate Type_Kinds:]}
 @begin{Display}
-A_Derived_Type_Definition
-A_Derived_Record_Extension_Definition
+@ChgDeleted{Version=[2],Text=[A_Derived_Type_Definition
+A_Derived_Record_Extension_Definition]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
-
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following ],Old=[]}Declaration_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0044-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns
+Declaration_Kinds:]}
 @begin{Display}
-An_Ordinary_Type_Declaration
+@ChgDeleted{Version=[2],Text=[An_Ordinary_Type_Declaration
 A_Task_Type_Declaration
 A_Protected_Type_Declaration
 A_Subtype_Declaration
 A_Formal_Type_Declaration
 An_Incomplete_Type_Declaration
 A_Private_Type_Declaration
-A_Private_Extension_Declaration
+A_Private_Extension_Declaration]}
 @end{Display}
 @end{DescribeCode}
 

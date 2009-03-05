@@ -1,6 +1,6 @@
 @Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.11 $ $Date: 2009/02/15 08:00:55 $}
+@comment{$Revision: 1.12 $ $Date: 2009/03/04 01:07:17 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -27,26 +27,56 @@ An_Expression and An_Association elements.
 Expression @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
 expression to query.
 
-@leading@;Returns the type declaration for the type or subtype of the expression.
-This query does not "unwind" subtypes or derived types to get to the
-Corresponding_First_Subtype or Corresponding_Parent_Subtype declarations.
-For example, for the following program text:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
+@ChgAdded{Version=[2],Text=[Returns the declaration for the subtype named by the
+subtype mark in the definition of the nominal subtype of the expression. If the
+subtype mark in the definition is a Base attribute reference, the declaration of
+the prefix of the attribute is returned.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
+@ChgAdded{Version=[2],Text=[Returns a Nil_Element if the expression is of an
+anonymous or classwide type, or is a named number, a numeric literal, or a null
+literal.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
+@ChgAdded{Version=[2],Text=[Returns an implementation-defined result if the
+expression is an attribute reference, aggregate, string literal, allocator,
+membership test, short-circuit operation, or the invocation of a predefined
+operator.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
+@ChgAdded{Version=[2],Text=[For a slice, the result is the same as for the
+prefix of the slice. For an invocation of a user-defined operator, the result is
+the same as for the equivalent function call.  For a parenthesized expression,
+it is the same as for the enclosed expression.]}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0045-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[Returns the type declaration for
+the type or subtype of the expression. This query does not "unwind" subtypes or
+derived types to get to the Corresponding_First_Subtype or
+Corresponding_Parent_Subtype declarations. For example, for the following
+program text:]}
 
 @begin{ChildExample}
-@key[type] Int @key[is range] -5_000 .. 5_000;
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[@key[type] Int @key[is range] -5_000 .. 5_000;
 @key[type] My_Int @key[is new] Int;
 @key[type] Good_Int @key[is new] My_Int;
-Var: Good_Int;
+Var: Good_Int;]}
 @end{ChildExample}
 
-The type declaration for Good_Int should be returned. The "unwinding" should
-not occur. The type declaration for either My_Int or Int should not be returned.
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[The type declaration for Good_Int should be
+returned. The "unwinding" should not occur. The type declaration for either
+My_Int or Int should not be returned.]}
 
-@leading@;Returns a Nil_Element if the argument Expression does not represent
-an Ada expression having an Ada type, including the following classes:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0045-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[@leading@;Returns a Nil_Element if the argument Expression does not represent
+an Ada expression having an Ada type, including the following classes:]}
 
 @begin{Itemize}
-Naming expressions that name packages, subprograms, tasks, etc. These
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[Naming expressions that name packages, subprograms, tasks, etc. These
 expressions do have a Corresponding_Name_Definition and a
 Corresponding_Name_Declaration. Although task objects do have
 a type, this query is limited, on purpose. Thus, when a naming
@@ -55,37 +85,44 @@ tasks, etc.), this query will return Nil_Element. @Chg{Version=[1],
 New=[If],Old=[As the @b{APPLICATION NOTE} below indicates, if]}
 any further information is needed, the element should be queried by
 Corresponding_Name_Definition or Corresponding_Name_Declaration,
-which should eventually return an A_Task_Type_Declaration element.
+which should eventually return an A_Task_Type_Declaration element.]}
 
-When An_Identifier Element representing an attribute designator is passed
-as the actual to this query.
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[When An_Identifier Element representing an
+attribute designator is passed as the actual to this query.]}
 
-The Actual_Parameter Expression from A_Pragma_Argument_Association for a
-Pragma may or may not have a Corresponding_Expression_Type.
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[The Actual_Parameter Expression from
+A_Pragma_Argument_Association for a Pragma may or may not have a
+Corresponding_Expression_Type.]}
 
-An_Attribute_Reference Element also may or may not have a
-Corresponding_Expression_Type;
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[An_Attribute_Reference Element also may or may not
+have a Corresponding_Expression_Type;]}
 
-An enumeration_aggregate which is a part of enumeration_representation_clause;
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[An enumeration_aggregate which is a part of
+enumeration_representation_clause;]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0009-1]}
-@ChgAdded{Version=[2],Text=[A_Box_Expression
+@Comment{Text from SI99-0009-1, now deleted:
+A_Box_Expression
 returned by Component_Expression applied to an unnormalized
-record association.]}
+record association.}
 
-@begin{Discussion}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0009-1]}
-@ChgAdded{Version=[2],Text=[This is necessary as the <> of an unnnormalized
+@Comment{Text from SI99-0009-1, now deleted:
+Discussion: This is necessary as the <> of an unnnormalized
 record association may represent several components of different types. If the
 record association is normalized, it has a single component and the type of
 A_Box_Expression is that of the component. Similarly, the type of
-A_Box_Expression for an array association is that of the component type.]}
-@end{Discussion}
+A_Box_Expression for an array association is that of the component type.}
 @end{Itemize}
 
-Returns a Nil_Element, if the statically determinable type of Expression is a
-class-wide type, or the Expression corresponds to an inner sub-aggregate in
-multi-dimensional array aggregates.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0045-1]}
+Returns a Nil_Element@Chg{Version=[2],New=[ if the expression denotes an
+entity that does not have a type, such as a package or an exception],Old=[, if
+the statically determinable type of Expression is a class-wide type, or the
+Expression corresponds to an inner sub-aggregate in multi-dimensional array
+aggregates]}.
 
 @begin{UsageNote}
 If the returned declaration is Nil, an application should make its own
@@ -101,6 +138,15 @@ For example, @f{@key[pragma] Private_Part (Open => Yes);}, the @f{Yes}
 expression may simply be a keyword that is specially recognized by the
 implementor's compilation system and may not refer to any
 declared object.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
+@ChgAdded{Version=[2],Text=[An alternative to using this function would
+be to use Asis.Expressions.Views.Corresponding_View to retrieve a semantic
+view of the expression, check if it is an object or value with
+Asis.Views.Is_Object_or_Value, and, assuming it is, use
+Asis.Object_Views.Nominal_Subtype to retrieve the subtype. The retrieved
+subtype will include anonymous and classwide subtypes so complete
+analysis can be done without many special cases.]}
 @end{UsageNote}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -122,6 +168,28 @@ one of the following ],Old=[]}Element_Kinds:
 Not_An_Element
 A_Declaration
 @end{Display}
+
+@begin{SingleNote}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[This query does not "unwind" subtypes
+or derived types to get to the first subtype or parent subtype declarations, but
+it does ignore explicit constraints or null exclusions in the definition of the
+nominal subtype.  For example, for the following program text:]}
+
+@begin{ChildExample}
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[@key[type] Int @key[is range] -5_000 .. 5_000;
+@key[type] My_Int @key[is new] Int;
+@key[type] Good_Int @key[is new] My_Int;
+Var: Good_Int @key[range] -2_000 .. 2_000;]}
+@end{ChildExample}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgAdded{Version=[2],Text=[For Corresponding_Expression_Type of an expression
+denoting Var, the declaration for Good_Int should be returned. No further
+"unwinding" should occur. The declaration for either My_Int or Int should not be
+returned.]}
+@end{SingleNote}
 @end{DescribeCode}
 
 
@@ -1031,8 +1099,8 @@ aggregate expression to query.
 Returns a list of the Array_Component_Associations in an array
 aggregate.@Chg{Version=[2],New=[ If the aggregate is a positional array
 aggregate, the Array_Component_Associations consist of an expression of the
-aggregate, and Array_Component_Choices that are a Nil_Element_List for all
-positional expressions except an others choice.],Old=[]}
+aggregate with Array_Component_Choices that are each a Nil_Element_List for
+all positional expressions except for the others choice, if any.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element

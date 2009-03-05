@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.15 $ $Date: 2009/02/15 08:00:55 $}
+@comment{$Revision: 1.16 $ $Date: 2009/03/04 01:07:17 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -273,11 +273,9 @@ an environment in which an application can be run with the behavior specified
 by this International Standard. In no case except package name conflicts shall
 such an environment require modification of a Basic Conforming or Fully
 Conforming ASIS Application. An implementation shall not @Chg{Version=[2],
-New=[add any entities to the visible part of logical packages defined in the
-following clauses of this International Standard, other than aspect clauses and
-pragmas that don't change the semantics of any defined entity (such as
-List).],Old=[change package specifications in this International Standard
-except by:]}
+New=[add any declarations to the visible part of logical packages defined in the
+following clauses of this International Standard.],Old=[change package
+specifications in this International Standard except by:]}
 
 @begin{InnerItemize}
 @ChgRef{Version=[2],Kind=[Deleted]}
@@ -556,8 +554,8 @@ Internal_Error@Defn{Internal_Error}@\-- Implementation internal failure]}
 Diagnostic messages may be more specific.
 
 @leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
-@Chg{Version=[2],New=[ASIS defines a set of global exceptions. The
-following exceptions are raised under the circumstances listed:],Old=[A set of
+@Chg{Version=[2],New=[ASIS defines a set of global exceptions. These
+exceptions are raised under the circumstances listed:],Old=[A set of
 exceptions shall be raised for the following circumstances:]}
 
 @begin{Itemize}

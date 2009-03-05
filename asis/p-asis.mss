@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.17 $ $Date: 2009/02/15 08:00:55 $}
+@comment{$Revision: 1.18 $ $Date: 2009/03/04 01:07:17 $}
 
 @LabeledSection{package Asis}
 
@@ -1723,8 +1723,8 @@ configuration pragmas or comments.
    @AdaObjDefn{A_Configuration_Compilation}, -- @examcom{Corresponds to the whole content of a}
                                 -- @examcom{compilation with no compilation_unit,}
                                 -- @examcom{but possibly containing comments,}
-                                -- @examcom{configuration pragmas}, or both.}
-                                -- @examcom{A Context is not limited to the number of}
+                                -- @examcom{configuration pragmas, or both.}
+                                -- @examcom{A Context @Chg{Version=[2],New=[may have any],Old=[is not limited to the]} number of}
                                 -- @examcom{units of A_Configuration_Compilation kind.}
                                 -- @examcom{A unit of A_Configuration_Compilation}
                                 -- @examcom{does not have a name. This unit}
@@ -1840,14 +1840,6 @@ Unit_Origins @Chg{Version=[1],New=[defines],Old=[@en]} classification of possibl
    @AdaObjDefn{An_Application_Unit}); -- @examcom{Neither A_Predefined_Unit or}
                          -- @examcom{An_Implementation_Unit}
 @end{Example}
-
-@begin{ImplPerm}
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}
-@ChgAdded{Version=[2],Text=[Units with an Origin of other than
-An_Application_Unit are implementation-defined. This will effect the return
-value of function Asis.Compilation_Units.Unit_Origin directly and all other ASIS
-return values for other than An_Application_Unit.]}
-@end{ImplPerm}
 @end{DescribeCode}
 
 

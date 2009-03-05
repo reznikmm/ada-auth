@@ -1,6 +1,6 @@
 @Part(compunit, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/compunit.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2009/02/10 06:51:26 $}
+@comment{$Revision: 1.10 $ $Date: 2009/03/04 01:07:17 $}
 
 
 @LabeledSection{package Asis.Compilation_Units}
@@ -97,15 +97,27 @@ Old=[All Unit_Kinds are expected]}.
 
 Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the compilation unit to query.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 Returns the Unit_Origins value of the unit.
 Returns Not_An_Origin for a compilation_unit whose Unit_Kind is
-Not_A_Unit, An_Unknown_Unit, A_Nonexistent_Declaration, or
-A_Nonexistent_Body.
+Not_A_Unit,
+@Chg{Version=[2],New=[],Old=[An_Unknown_Unit, ]}A_Nonexistent_Declaration,
+Chg{Version=[2],New=[],Old=[or ]}A_Nonexistent_Body@Chg{Version=[2],New=[, or
+possibly An_Unknown_Unit],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
 Old=[All Unit_Kinds are expected]}.
 @end{DescribeCode}
+
+@begin{ImplPerm}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}
+@ChgAdded{Version=[2],Text=[ASIS queries on the private part and bodies of
+Compilation_Units whose Unit_Origin is other than An_Application_Unit may have
+limitations that are implementation-defined. Operations of package Asis.Text on
+Compilation_Units whose Unit_Origin is other than An_Application_Unit may have
+limitations that are implementation-defined.]}
+@end{ImplPerm}
 
 
 @LabeledClause{function Enclosing_Context (unit)}

@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.14 $ $Date: 2009/02/10 06:51:26 $}
+@comment{$Revision: 1.15 $ $Date: 2009/03/04 01:07:17 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -2965,34 +2965,42 @@ function Generic_Actual_Part
 @end{ChildRef}
 
 @begin{Intro}
-@b{@i{I don't know where this introductory text goes; it doesn't seem to
-relate very closely to any of the routines near here. It surely does not
-belong here, however. - RLB@*}}
-Instantiations can always be analyzed in terms of the generic actual
-parameters supplied with the instantiation. A generic instance is a copy
-of the generic unit, and while there is no explicit (textual) specification
-in the program text, an implicit specification and body, if there is one,
-with the generic actual parameters is implied.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0037-1]}@ChgNote{Moved to section 2}
+@ChgDeleted{Version=[2],Text=[Instantiations can always be analyzed in terms of
+the generic actual parameters supplied with the instantiation. A generic
+instance is a copy of the generic unit, and while there is no explicit (textual)
+specification in the program text, an implicit specification and body, if there
+is one, with the generic actual parameters is implied.]}
 
-@leading@;To analyze the implicit instance specification or body of a generic
-instantiation:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0037-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[To analyze the implicit instance
+specification or body of a generic instantiation:]}
 @begin{Itemize}
-Use Corresponding_Declaration to return the implicit expanded
-specification of an instantiation.
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[Use Corresponding_Declaration to return the
+implicit expanded specification of an instantiation.]}
 
-Use Corresponding_Body to return the implicit body of an instantiation.
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[Use Corresponding_Body to return the implicit body
+of an instantiation.]}
 
-Then analyze the specification or body with any appropriate queries.
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[Then analyze the specification or body with any
+appropriate queries.]}
 @end{Itemize}
 
-@leading@;To analyze the explicit generic specification or body referenced by a
-generic instantiation:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0037-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[To analyze the explicit generic
+specification or body referenced by a generic instantiation:]}
 @begin{Itemize}
-Use Generic_Unit_Name to obtain the name of the generic unit.
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[Use Generic_Unit_Name to obtain the name of the generic unit.]}
 
-Then use Corresponding_Name_Declaration to get to the generic declaration.
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[Then use Corresponding_Name_Declaration to get to the generic declaration.]}
 
-Then use Corresponding_Body to get to the body of the generic declaration.
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[Then use Corresponding_Body to get to the body of the generic declaration.]}
 @end{Itemize}
 @end{Intro}
 
@@ -3325,14 +3333,16 @@ Returns True if the declaration is a primitive subprogram of a tagged type.
 
 Returns False for any unexpected argument.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0040-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element that has
 one of the following],Old=[Expected]} Element_Kinds:
 @begin{Display}
 A_Procedure_Declaration
 A_Function_Declaration
 A_Procedure_Renaming_Declaration
-A_Function_Renaming_Declaration
+A_Function_Renaming_Declaration@Chg{Version=[2],New=[
+A_Procedure_Instantiation
+A_Function_Instantiation],Old=[]}
 @end{Display}
 @end{DescribeCode}
 
