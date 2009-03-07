@@ -9,7 +9,7 @@ package body ARM_Contents is
     -- references.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004, 2005, 2006, 2007  AXE Consultants.
+    -- Copyright 2000, 2004, 2005, 2006, 2007, 2008  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -51,6 +51,7 @@ package body ARM_Contents is
     --  9/22/06 - RLB - Created type Clause_Number_Type and added SubSubClause.
     -- 10/12/07 - RLB - Extended the range of properly formatted clause numbers.
     -- 12/18/07 - RLB - Added Plain_Annex.
+    -- 10/24/08 - RLB - More old titles.
 
     function "<" (Left, Right : Clause_Number_Type) return Boolean is
 	-- True if Left comes before Right in the collating order.
@@ -106,7 +107,7 @@ package body ARM_Contents is
     Title_List : array (1 .. 750) of Title_Record;
     Last_Title : Natural;
 
-    Old_Title_List : array (1 .. 100) of Title_Record;
+    Old_Title_List : array (1 .. 150) of Title_Record;
     Last_Old_Title : Natural;
 
     procedure Initialize is

@@ -19,7 +19,7 @@ package body ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007  AXE Consultants.
+    -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -249,6 +249,10 @@ package body ARM_Format is
     --			in Check_End_Paragraph.
     --		- RLB - Added Plain_Annex and associated commands.
     -- 12/19/07 - RLB - Added color commands.
+    --  6/12/08 - RLB - Corrected handling of the ChgGlossary command.
+    --  3/ 4/09 - RLB - Added code to suppress bullets and the like when
+    --			displaying a deleted paragraph in New-Only mode
+    --			and no paragraph numbers are shown.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -2669,20 +2673,32 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 
 --Ada.Text_IO.Put_Line ("Check_Paragraph, no number: format= " & Paragraph_Type'Image(Format_Object.Next_Paragraph_Format_Type) &
 --   " output format= " & ARM_Output.Paragraph_Type'Image(Format_Object.Format));
-		    ARM_Output.Start_Paragraph (Output_Object,
-				                Style     => Format_Object.Style,
-				                Indent    => Format_Object.Indent,
-						Number    => "",
-						No_Prefix => Format_Object.No_Prefix,
-						Tab_Stops => Format_Object.Paragraph_Tab_Stops,
-						No_Breaks => Format_Object.No_Breaks or Format_Object.In_Bundle,
-						Keep_with_Next => Format_Object.Keep_with_Next or Format_Object.In_Bundle,
-						Space_After => Format_Object.Space_After);
-		    Format_Object.In_Paragraph := True;
-		    Format_Object.No_Start_Paragraph := False;
-		    Format_Object.Current_Paragraph_Len := 0; -- Empty paragraph number.
-		    Format_Object.No_Para_Num := False;
-		end if;
+		    -- Start the paragraph:
+		    if (ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_No_Delete_Message) or else
+		        ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message) or else
+			ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted) or else
+		        ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number)) and then
+		       ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
+			-- Nothing at all should be showm.
+			-- ** Warning ** If we lie here, the program will crash!
+		        Format_Object.No_Start_Paragraph := True;
+Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
+		    else
+		        ARM_Output.Start_Paragraph (Output_Object,
+				                    Style     => Format_Object.Style,
+				                    Indent    => Format_Object.Indent,
+						    Number    => "",
+						    No_Prefix => Format_Object.No_Prefix,
+						    Tab_Stops => Format_Object.Paragraph_Tab_Stops,
+						    No_Breaks => Format_Object.No_Breaks or Format_Object.In_Bundle,
+						    Keep_with_Next => Format_Object.Keep_with_Next or Format_Object.In_Bundle,
+						    Space_After => Format_Object.Space_After);
+		        Format_Object.In_Paragraph := True;
+		        Format_Object.No_Start_Paragraph := False;
+		        Format_Object.Current_Paragraph_Len := 0; -- Empty paragraph number.
+		        Format_Object.No_Para_Num := False;
+		    end if;
+	        end if;
 
 		if not Format_Object.No_Prefix then
 		    if Format_Object.Next_Paragraph_Format_Type = Notes and then
@@ -6212,7 +6228,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 
 			Format_Object.Glossary_Change_Kind := Kind;
 
-			if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Command = Change_To_Glossary_Also then
+			if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Change_To_Glossary_Also then
 			    -- The text just goes straight to the file. It will
 			    -- get formatted appropriately. So we only need to
 			    -- figure out whether it will get indexed and displayed
