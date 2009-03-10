@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.15 $ $Date: 2009/03/04 01:07:17 $}
+@comment{$Revision: 1.16 $ $Date: 2009/03/07 06:33:31 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -844,10 +844,18 @@ Returns a Nil_Element when a full type declaration is given that has no
 corresponding private or incomplete type declaration, or when a
 corresponding type declaration does not exist within The_Context.
 
-The parameter The_Context is used whenever the corresponding full type of
-an incomplete type is in a corresponding package body. See
-Reference Manual 3.10.1(3). Any non-Nil result will always have the given
-Context as its Enclosing_Context.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0046-1]}
+@ChgDeleted{Version=[2],Text=[The parameter The_Context is used whenever the
+corresponding full type of an incomplete type is in a corresponding package
+body. See Reference Manual 3.10.1(3). Any non-Nil result will always have the
+given Context as its Enclosing_Context.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0046-1]}
+@ChgAdded{Version=[2],Text=[If The_Context specifies a context that is different
+from the Enclosing_Context(Enclosing_Compilation_Unit(Declaration)), returns the
+corresponding type declaration for the element in The_Context that Is_Equal to
+Declaration. If no such element exists in The_Context that Is_Equal to
+Declaration, returns A_Nil_Element.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
@@ -1614,6 +1622,13 @@ Is_Equal with the argument, it will only be Is_Identical if the
 Enclosing_Context of the Declaration is the same as the parameter
 The_Context.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0046-1]}
+@ChgAdded{Version=[2],Text=[If The_Context specifies a context that is different
+from the Enclosing_Context(Enclosing_Compilation_Unit(Declaration)), returns the
+declaration for the element in The_Context that Is_Equal to
+Declaration. If no such element exists in The_Context that Is_Equal to
+Declaration, returns A_Nil_Element.]}
+
 If a generic instantiation is given, the expanded generic specification
 template representing the instance is returned and Is_Part_Of_Instance.
 For example, an argument that is A_Package_Instantiation, results in a
@@ -1746,6 +1761,13 @@ as its Enclosing_Context. This implies that while a non-Nil result may be
 Is_Equal with the argument, it will only be Is_Identical if the
 Enclosing_Context of the Declaration is the same as the parameter
 The_Context.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0046-1]}
+@ChgAdded{Version=[2],Text=[If The_Context specifies a context that is different
+from the Enclosing_Context(Enclosing_Compilation_Unit(Declaration)), returns the
+declaration for the element in The_Context that Is_Equal to
+Declaration. If no such element exists in The_Context that Is_Equal to
+Declaration, returns A_Nil_Element.]}
 
 Implicit predefined operations (e.g., "+", "=", etc.) will not typically
 have unit bodies. (Corresponding_Body returns a Nil_Element.)
@@ -2698,6 +2720,13 @@ Decl2 := Corresponding_Subunit
 The parameter The_Context is used to locate the corresponding subunit body.
 Any non-Nil result will always have The_Context as its Enclosing_Context.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0046-1]}
+@ChgAdded{Version=[2],Text=[If The_Context specifies a context that is different
+from the Enclosing_Context(Enclosing_Compilation_Unit(Body_Stub)), returns the
+unit for the element in The_Context that Is_Equal to
+Body_Stub. If no such element exists in The_Context that Is_Equal to
+Body_Stub, returns A_Nil_Element.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Body_Stub expects an element
 that has one of the following],Old=[Appropriate]} Declaration_Kinds:
@@ -2792,6 +2821,13 @@ Decl2 := Corresponding_Body_Stub
 The parameter The_Context is used to locate the corresponding parent body.
 Any non-Nil result will always have The_Context as its Enclosing_Context.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0046-1]}
+@ChgAdded{Version=[2],Text=[If The_Context specifies a context that is different
+from the Enclosing_Context(Enclosing_Compilation_Unit(Subunit)), returns the
+declaration for the element in The_Context that Is_Equal to
+Subunit. If no such element exists in The_Context that Is_Equal to
+Subunit, returns A_Nil_Element.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Subunit expects an element
 that has one of the following],Old=[Appropriate]} Declaration_Kinds
@@ -2823,7 +2859,7 @@ A_Protected_Body_Stub
 @end{DescribeCode}
 
 
-@LabeledClause{function Generic_Formal_Part}
+@LabeledClause{function Generic_Formal_Part (declaration)}
 
 @begin{ElementRef}
 An_Exception_Declaration @em 11.1

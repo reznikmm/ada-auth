@@ -1,6 +1,6 @@
 @Part(compunit, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/compunit.mss,v $}
-@comment{$Revision: 1.10 $ $Date: 2009/03/04 01:07:17 $}
+@comment{$Revision: 1.11 $ $Date: 2009/03/07 06:33:30 $}
 
 
 @LabeledSection{package Asis.Compilation_Units}
@@ -328,16 +328,27 @@ of children, and so on.
 Returns a Nil_Compilation_Unit_List for all library unit arguments that
 do not have any child units contained in The_Context.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0046-1]}
+@ChgAdded{Version=[2],Text=[If The_Context specifies a context that is different
+from the Enclosing_Context(Library_Unit), returns a list of child units for the
+parent library unit that Is_Equal to Library_Unit in The_Context. If no such
+parent library unit exists in The_Context, returns a
+Nil_Compilation_Unit_List.]}
+
 @leading@;These two function calls will always produce identical results:
 
 @begin{Display}
 @exam{Units := Corresponding_Children (Unit);
 Units := Corresponding_Children (Unit, Enclosing_Context (Unit));}
 @end{Display}
-Any non-Nil result will have an Enclosing_Context value that Is_Identical
-to The_Context.
 
-The Enclosing_Context for any non-Nil result will always be The_Context,
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0046-1]}
+@ChgDeleted{Version=[2],Text=[Any non-Nil result will have an Enclosing_Context
+value that Is_Identical to The_Context.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0046-1]}
+The Enclosing_Context for any non-Nil result will always be
+@Chg{Version=[2],New=[Is_Identical to ],Old=[]}The_Context,
 regardless of the Enclosing_Context value for the Library_Unit argument.
 This query is one means of obtaining (Is_Equal) child units
 from separate ASIS Context values whose underlying implementations
@@ -416,6 +427,12 @@ Returns A_Nonexistent_Declaration when the Library_Unit has a
 parent_unit_name denoted in the defining_program_unit_name but the parent
 unit is not contained in The_Context.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0046-1]}
+@ChgAdded{Version=[2],Text=[If The_Context specifies a context that is different
+from the Enclosing_Context(Library_Unit), returns the parent library unit for
+the child unit in The_Context that Is_Equal to Library_Item. If no such child
+unit exists in The_Context, returns a Nil_Compilation_Unit.]}
+
 @leading@;These two function calls will always produce identical results:
 
 @begin{Display}
@@ -423,10 +440,13 @@ unit is not contained in The_Context.
 Unit := Corresponding_Parent_Declaration (Unit, Enclosing_Context (Unit));}
 @end{Display}
 
-Any non-Nil result will have an Enclosing_Context value that Is_Identical
-to The_Context.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0046-1]}
+@ChgDeleted{Version=[2],Text=[Any non-Nil result will have an Enclosing_Context
+value that Is_Identical to The_Context.]}
 
-The Enclosing_Context for any non-Nil result will always be The_Context,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0046-1]}
+The Enclosing_Context for any non-Nil result will always be
+@Chg{Version=[2],New=[Is_Identical to ],Old=[]}The_Context,
 regardless of the Enclosing_Context value for the Library_Unit
 argument. This query is one means of obtaining (Is_Equal) parent units
 from separate ASIS Context values whose underlying implementations
@@ -514,6 +534,13 @@ not have a corresponding library unit contained in The_Context.
 @ChgNote{The following is either redundant or conflicting with the later definition.}
 @ChgDeleted{Version=[1],Text=[All Unit_Kinds are appropriate except Not_A_Unit.]}
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0046-1]}
+@ChgAdded{Version=[2],Text=[If The_Context specifies a context that is different
+from the Enclosing_Context(Library_Unit), returns the corresponding library unit
+declaration for the library unit body in The_Context that Is_Equal to
+Library_Item. If no such library unit body exists in The_Context, returns a
+Nil_Compilation_Unit.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Library_Item expects a unit
 that has one of the following],Old=[Appropriate]} Unit_Kinds:
@@ -570,8 +597,9 @@ A_Public_Declaration_And_Body kind.)
 @end{DescribeCode}
 
 @begin{ImplReq}
-Any non-Nil result will have an Enclosing_Context value that
-Is_Identical to The_Context.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0046-1]}
+@ChgDeleted{Version=[2],Text=[Any non-Nil result will have an Enclosing_Context
+value that Is_Identical to The_Context.]}
 
 @leading@;These two function calls will always produce identical results:
 @begin{Display}
@@ -579,7 +607,9 @@ Is_Identical to The_Context.
 Unit := Corresponding_Declaration (Unit, Enclosing_Context (Unit));}
 @end{Display}
 
-The Enclosing_Context for any non-Nil result will always be The_Context,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0046-1]}
+The Enclosing_Context for any non-Nil result will always be
+@Chg{Version=[2],New=[Is_Identical to ],Old=[]}The_Context,
 regardless of the Enclosing_Context value for the Library_Item
 argument. This query is one means of obtaining corresponding
 (Is_Equal) units from separate ASIS Context values whose underlying
@@ -632,6 +662,13 @@ do not have a corresponding library_unit_body contained in The_Context.
 @ChgRef{Version=[1],Kind=[Deleted]}
 @ChgNote{The following is either redundant or conflicting with the later definition.}
 @ChgDeleted{Version=[1],Text=[All Unit_Kinds are appropriate except Not_A_Unit.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0046-1]}
+@ChgAdded{Version=[2],Text=[If The_Context specifies a context that is different
+from the Enclosing_Context(Library_Unit), returns the corresponding library unit
+body for the library unit in The_Context that Is_Equal to
+Library_Item. If no such library unit exists in The_Context, returns a
+Nil_Compilation_Unit.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Library_Item expects a unit
@@ -689,8 +726,9 @@ be returned.
 @end{DescribeCode}
 
 @begin{ImplReq}
-Any non-Nil result will have an Enclosing_Context value that
-Is_Identical to The_Context.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0046-1]}
+@ChgDeleted{Version=[2],Text=[Any non-Nil result will have an Enclosing_Context
+value that Is_Identical to The_Context.]}
 
 @leading@;These two function calls will always produce identical results:
 @begin{Display}
@@ -698,7 +736,9 @@ Is_Identical to The_Context.
 Unit := Corresponding_Body (Unit, Enclosing_Context (Unit));}
 @end{Display}
 
-The Enclosing_Context for any non-Nil result will always be The_Context,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0046-1]}
+The Enclosing_Context for any non-Nil result will always be
+@Chg{Version=[2],New=[Is_Identical to ],Old=[]}The_Context,
 regardless of the Enclosing_Context value for the Library_Item
 argument. This query is one means of obtaining corresponding
 (Is_Equal) units from separate ASIS Context values whose underlying

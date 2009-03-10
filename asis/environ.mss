@@ -1,6 +1,6 @@
 @Part(environ, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/environ.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2007/02/06 06:21:06 $}
+@comment{$Revision: 1.4 $ $Date: 2009/03/07 06:33:31 $}
 
 @LabeledSection{package Asis.Ada_Environments}
 
@@ -286,7 +286,7 @@ Returns a null string if The_Context is uninitialized.
 @end{DescribeCode}
 
 
-@LabeledClause{function Parameters}
+@LabeledClause{function Parameters (context)}
 
 @begin{DescribeCode}
 @begin{Example}

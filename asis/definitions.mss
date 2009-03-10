@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.13 $ $Date: 2009/03/04 01:07:17 $}
+@comment{$Revision: 1.14 $ $Date: 2009/03/07 06:33:31 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -1964,7 +1964,7 @@ kinds.]}
 @ChgDeleted{Version=[2],Text=[A_Declaration]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
 have the following ],Old=[]}Declaration_Kinds:
 @begin{Display}

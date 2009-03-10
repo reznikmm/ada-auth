@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/except.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2007/02/06 06:21:06 $}
+@comment{$Revision: 1.5 $ $Date: 2009/03/07 06:33:31 $}
 
 @LabeledSection{package Asis.Exceptions}
 
@@ -57,6 +57,36 @@ Raised when ASIS is given a Line value that is not appropriate.
 Raised when ASIS is given a Line_Number value that is not appropriate.
 This exception will typically indicate that a user error has occurred
 within the application.
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@AdaExcDefn{ASIS_Inappropriate_View} : @key[exception];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Raised when ASIS is given an inappropriate view or profile.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@AdaExcDefn{ASIS_Not_In_Context} : @key[exception];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Raised for any operation defined in Asis.Views,
+Asis.Program_Units, Asis.Subtype_Views, Asis.Object_Views, Asis.Profiles,
+Asis.Callable_Views, Asis.Package_Views, Asis.Generic_Views,
+Asis.Exception_Views, Asis.Statement_Views, and their subpackages and children,
+if the result is an entity that is not part of the current context.]}
+
+@begin{SingleNote}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[This can happen, for instance, if the View is of an
+incomplete view, and the full view is not part of the context. It also can
+happen if only a portion of the semantic dependencies of the queried unit is
+included in the context.]}
+@end{SingleNote}
+
+
 
 @begin{Example}
 @AdaExcDefn{ASIS_Failed} : @key[exception];

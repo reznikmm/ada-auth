@@ -1,6 +1,6 @@
 @Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.12 $ $Date: 2009/03/04 01:07:17 $}
+@comment{$Revision: 1.13 $ $Date: 2009/03/07 06:33:31 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -185,7 +185,7 @@ Var: Good_Int @key[range] -2_000 .. 2_000;]}
 @end{ChildExample}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[For Corresponding_Expression_Type of an expression
+@ChgAdded{Version=[2],NoPrefix=[T],Text=[For Corresponding_Expression_Type of an expression
 denoting Var, the declaration for Good_Int should be returned. No further
 "unwinding" should occur. The declaration for either My_Int or Int should not be
 returned.]}
