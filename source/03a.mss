@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:01 $}
+@Comment{$Date: 2009/03/10 07:16:40 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.94 $}
+@Comment{$Revision: 1.95 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1402,6 +1402,12 @@ specific type are defined as follows:
   explicitly declared immediately within the same
   @nt<package_specification> and that operate on the type;
 
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0128-1]}
+  @ChgAdded{Version=[3],Text=[For a specific type with an
+  explicitly declared primitive "=" operator whose result type
+  is Boolean, the corresponding "/=" operator (see
+  @RefSecNum{Overloading of Operators});]}
+
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00200-01]}
   @Defn2{Term=[override], Sec=(a primitive subprogram)}
   @Chg{Version=[2],New=[For a nonformal type, any],Old=[Any]}
@@ -1480,6 +1486,11 @@ The description of S'Base has been moved to
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Added wording to include access result types
   in the kinds of operations that operate on a type T.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0128-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> The implicitly declared "/="
+  for a primitive "=" operator is also primitive; this makes it eligible
+  to be made visible by a @key[use type] clause.]}
 @end{DiffWord95}
 
 

@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2009/02/05 07:12:35 $}
+@Comment{$Date: 2009/03/10 07:16:40 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -417,23 +417,36 @@ limited view of a package contains:]}
 
 @begin(Itemize)
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
-@ChgAdded{Version=[2],Text=[For each nested @nt{package_declaration}, a declaration of the
-limited view of that package, with the same @nt{defining_program_unit_name}.]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0134-1]}
+@ChgAdded{Version=[2],Text=[For each nested
+@nt{package_declaration}@Chg{Version=[3],New=[ directly in the visible part],Old=[]},
+a declaration of the limited view of that package, with the
+same @nt{defining_program_unit_name}.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06],ARef=[AI95-00326-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0108-1]}
-@ChgAdded{Version=[2],Text=[For each @nt{type_declaration} in the visible part, an
-incomplete view of the type@Chg{Version=[3],New=[ with no @nt{discriminant_part}],Old=[]};
-if the @nt{type_declaration} is
-tagged, then the view is a tagged incomplete view.]}
-@begin{Ramification}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0108-1],ARef=[AI05-0134-1]}
+@ChgAdded{Version=[2],Text=[For each @nt{type_declaration}
+@Chg{Version=[3],New=[directly ],Old=[]}in the visible
+part@Chg{Version=[3],New=[ that is not an
+@nt{incomplete_type_declaration}],Old=[]}, an incomplete view
+of the type@Chg{Version=[3],New=[ with no @nt{discriminant_part}],Old=[]};
+if the @nt{type_declaration} is tagged, then the view is a
+tagged incomplete view.]}
+@begin{Reason}
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0108-1]}
   @ChgAdded{Version=[3],Text=[The incomplete view of a type does not have
   a discriminant_part even if the the type_declaration does have
   one. This is necessary because semantic analysis (and the associated
   dependence on @nt{with_clause}s) would be necessary
   to determine the types of the discriminants.]}
-@end{Ramification}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0134-1]}
+  @ChgAdded{Version=[3],Text=[No incomplete views of incomplete types are
+  included in the limited view. The rules of
+  @RefSecNum{Incomplete Type Declarations} ensure that the completion of any
+  visible incomplete type is declared in the same visible part, so such
+  an incomplete view would simply be redundant.]}
+@end{Reason}
 @end(Itemize)
 
 @begin(Discussion)
@@ -966,6 +979,11 @@ Standard.Standard.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00331-01]}
   @ChgAdded{Version=[2],Text=[Clarified the wording so that a grandchild
   generic unit will work as expected.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0108-1],ARef=[AI05-0134-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Clarified the wording so that
+  it is clear that limited views of types never have discriminants and never
+  are of incomplete types.]}
 @end{DiffWord95}
 
 
@@ -2175,14 +2193,16 @@ inside.
 @end{Ramification}
 @end{Itemize}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0132-1]}
 @RootDefn{library unit pragma}
 @RootDefn{pragma, library unit}
 @PDefn2{Term=[program unit pragma], Sec=(library unit pragmas)}
 @PDefn2{Term=[pragma, program unit], Sec=(library unit pragmas)}
 Certain program unit pragmas are defined to be
 @i{library unit pragmas}.
-The @nt{name}, if any, in a library unit pragma shall denote the
-declaration of a library unit.
+@Chg{Version=[3],New=[If a library unit
+pragma applies to a program unit @i{P}, @i{P} shall be],Old=[The @nt{name}, if
+any, in a library unit pragma shall denote the declaration of]} a library unit.
 @begin{Ramification}
 This, together with the rules for program unit pragmas above,
 implies that if a library unit pragma applies to a @nt{subprogram_declaration}
@@ -2270,6 +2290,10 @@ for which there is not an overriding pragma applied directly to the instance.]}]
   @ChgRef{Version=[2], Kind=[AddedNormal]}
   @ChgAdded{Version=[2], Text=[Ensure that confirming pragmas are always allowed.]}
   @end{itemize}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0132-1]}
+  @ChgAdded{Version=[3], Text=[@b<Amendment 2:> A library unit pragma must
+  apply directly to a library unit, even if no name is given in the pragma.]}
 
 @end{DiffWord95}
 

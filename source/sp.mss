@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.51 $ $Date: 2008/11/26 23:41:03 $ $Author: randy $ }
+@comment{ $Revision: 1.52 $ $Date: 2009/03/10 07:16:40 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2008/11/26 23:41:03 $}
+@Comment{$Date: 2009/03/10 07:16:40 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1286,11 +1286,30 @@ required by the pragma.]}
 (see @RefSecNum{Operational and Representation Items}).
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1]}
-@ChgAdded{Version=[3],Text=[@Redundant[Pragmas Independent and
-Independent_Components guarantee independent addressability for the named object
-or component, or in the case of a type, for objects of that type (see
-@RefSecNum{Shared Variables}).]]}
+@ChgAdded{Version=[3],Text=[Pragmas Independent and Independent_Components
+specify that the named object or component(s) are @i{specified as
+independently addressable}, or in the case of a type, that all objects of that
+type are specified as independently
+addressable.@Defn{specified as independently addressable}@Defn2{Term=[independently addressable],Sec=[specified]}
+An atomic object is considered to be specified as independently addressable.]}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[If the compiler cannot guarantee that an object
+(including a component) to which pragma Independent or pragma
+Independent_Components applies is independently addressable from
+any other nonoverlapping object, then the pragma must be rejected.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Similarly, an atomic object (including atomic
+components) is always independently addressable from any other nonoverlapping
+object. Any representation item which would prevent this from being true should
+be rejected, notwithstanding what this Standard says elsewhere.]}
+@end{Ramification}
+
 @end{StaticSem}
+
+
 
 @begin{RunTime}
 

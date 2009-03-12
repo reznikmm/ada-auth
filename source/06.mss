@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2009/02/05 07:12:35 $}
+@Comment{$Date: 2009/03/10 07:16:40 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.90 $}
+@Comment{$Revision: 1.91 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1081,14 +1081,16 @@ with any other profile.
 @PDefn{generic contract issue}
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0046-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0046-1],ARef=[AI05-0134-1]}
 @Defn2{Term=[full conformance], Sec=(for profiles)}
 @Defn2{Term=[profile],Sec=(fully conformant)}
 Two profiles are @i{fully conformant} if they
 are subtype-conformant, and corresponding parameters
-have the same names and @Chg{Version=[3],New=[both or neither
-have @nt{null_exclusion}s and they ],Old=[]}have @nt<default_expression>s
-that are fully conformant with one another.
+have the same names, @Chg{Version=[3],New=[both or neither
+have @nt{null_exclusion}s, they ],Old=[ and]}have @nt<default_expression>s
+that are fully conformant with one another@Chg{Version=[3],New=[ and, for
+access-to-subprogram parameters or access-to-subprogram results, the designated
+profiles are fully conformant],Old=[]}.
 @begin{Ramification}
 Full conformance requires subtype conformance,
 which requires the same calling conventions.
@@ -1101,6 +1103,13 @@ subprogram or entry are always the same by definition.
   necessary to prevent controlling parameters from having different
   exclusions, as such a parameter is defined to exclude
   null whether or not an exclusion is given.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0134-1]}
+@ChgAdded{Version=[3],Text=[The part about access-to-subprogram parameters
+  and results is necessary to prevent such types from having different
+  @nt{default_expression}s in the specification and body of a subprogram.
+  If that was allowed, it would be undefined which @nt{default_expression}
+  was used in a call of an access-to-subprogram parameter.]}
 @end{Reason}
 
 @leading@Defn2{Term=[full conformance], Sec=(for expressions)}
@@ -1247,8 +1256,20 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
   @nt{null_exclusion}s to match for full conformance. While this is
   technically incompatible with Ada 2005 as defined by Amendment 1,
   it is a new Ada 2005 feature and it is unlikely that users have
-  been taking advantage of the rule different. In any case, it is
-  easy to fix: add a @nt{null_exclusion} where needed for conformance.]}
+  been intentionally taking advantage of the ability to write mismatching
+  exclusions. In any case, it is easy to fix: add a @nt{null_exclusion}
+  where needed for conformance.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0132-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected to require
+  full conformance of anonynous access-to-subprogram parameters and results
+  for full conformance. This is necessary so that there is no confusion about
+  the default expression that is used for a call. While this is technically
+  incompatible with Ada 2005 as defined by Amendment 1, it is a new Ada 2005
+  feature and it is unlikely that users have been intentionally taking advantage
+  and writing different default expressions. In any case, it is
+  easy to fix: change any default expressions that don't conform so that they
+  do conform.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -2069,16 +2090,20 @@ with the reserved word @key[constant] shall include an @nt{expression}.],Old=[]}
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0032-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0032-1],ARef=[AI05-0103-1]}
 @ChgAdded{Version=[2],Text=[If the result subtype of the function is defined by a
 @nt{subtype_mark}, the @nt{return_@!subtype_@!indication} shall be a
 @nt{subtype_indication}. The type of the @nt{subtype_indication}
 shall be@Chg{Version=[3],New=[ covered by],Old=[]} the
-result type of the function. If the result subtype of the function is
-constrained, then the subtype defined by the @nt{subtype_indication} shall also
-be constrained and shall statically match this result subtype.
-@PDefn2{Term=[statically matching],Sec=(required)}
-If the result subtype of the function is unconstrained, then the subtype
+result type of the function. @Chg{Version=[3],New=[The],Old=[If the result
+subtype of the function is constrained, then the]} subtype defined by the
+@nt{subtype_indication} shall @Chg{Version=[3],New=[statically compatible
+with the result subtype of the function; if the result type of the
+fucntion is elementary, the two subtypes],Old=[also
+be constrained and]} shall statically match@Chg{Version=[3],New=[],Old=[ this
+result subtype]}.@PDefn2{Term=[statically matching],Sec=(required)}
+If the result subtype of the function is @Chg{Version=[3],New=[indefinite],
+Old=[unconstrained]}, then the subtype
 defined by the @nt{subtype_indication} shall be a definite subtype, or there
 shall be an @nt{expression}.]}
 
@@ -2729,6 +2754,18 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   necessarily aliased. This is technically incompatible, but since the
   feature was added in Ada 2005 and not widely implemented, it is
   very unlikely that it appears in existing programs.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0103-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording to require
+  static matching for unconstrained access types in extended return statements.
+  This disallows adding or omitting null exclusions, and adding access
+  constraints, in the declaration of the return object. While this is
+  incompatible, the incompatible cases in question are either useless (access
+  constraints @en the constraint can be given on an @nt{allocator} if necessary,
+  and still must be given there even if given on the return object)
+  or wrong (null exclusions @en null could be returned from a
+  function declared to be null excluding), so we expect them to be extremely
+  rare in practice.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -2986,9 +3023,14 @@ type of the predefined type Boolean.
 @end{Legality}
 
 @begin{StaticSem}
-A declaration of "=" whose result type is
-Boolean implicitly declares a declaration of "/=" that
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0128-1]}
+@Chg{Version=[3],New=[An explicit],Old=[A]} declaration of "="
+whose result type is Boolean implicitly declares
+@Chg{Version=[3],New=[an operator],Old=[a declaration]} of "/=" that
 gives the complementary result.
+@begin{Discussion}
+6.6(6): @Defn{Number of the Beast}
+@end{Discussion}
 @end{StaticSem}
 
 @begin{Notes}
@@ -3018,6 +3060,14 @@ combination of parameter and result types.
 Explicit declarations of "/=" are now permitted, so long
 as the result type is not Boolean.
 @end{Extend83}
+
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0128-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the wording
+  so that only explicit declarations of "=" cause an implicit declaration
+  of "/="; otherwise, we could get multiple implicit definitions of "/="
+  without an obvious way to chose between them.]}
+@end{DiffWord95}
 
 
 @RMNewPage@Comment{For printed RM Ada 2005}

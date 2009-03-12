@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:02 $}
+@Comment{$Date: 2009/03/10 07:16:40 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -295,6 +295,7 @@ without any particular representation.
 An object is considered to be more concrete.
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0112-1]}
 @RootDefn{aspect of representation}
 @Defn{representation aspect}
 @Defn2{Term=[directly specified],
@@ -314,7 +315,11 @@ A representation item that names a subtype is either
 @i(subtype-specific) (Size and Alignment clauses)
 or @i{type-related} (all others).
 @Redundant[Subtype-specific aspects may differ for
-different subtypes of the same type.]
+different subtypes of the same type.]@Chg{Version=[3],New=[ Unless otherwise
+specified, the name of the aspect of representation specified by a
+representation pragma is the name of the pragma.],Old=[]}
+
+
 @begin{Honest}
 @i{Type-related} and @i{subtype-specific} are defined likewise for
 the corresponding aspects of representation.
@@ -339,6 +344,17 @@ We don't need to say that an @nt{at_clause} or a
 @nt{mod_clause} specify separate aspects,
 because these are equivalent to @nt{attribute_definition_clause}s.
 See @RefSec{At Clauses}, and @RefSec{Mod Clauses}.
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0112-1]}
+@ChgAdded{Version=[3],Text=[We give a default naming for representation
+aspects of representation pragmas so we don't have to do that for every
+pragma. A Volatile_Components pragma (see
+@RefSecNum{Shared Variable Control}), for example, specifies the
+Volatile_Components aspect of representation of its argument.
+Representation attributes are defined to be aspects of representation
+in @RefSecNum{Operational and Representation Attributes}.
+we don't want any anonymous aspects; that would make other rules
+more difficult to write and understand.]}
 @end{Reason}
 @begin{Ramification}
 @Leading@;The following representation items are type-related:
@@ -1197,6 +1213,10 @@ Some of the more stringent requirements are moved to
   if given on a type that does not inherit any aspects of representation.
   This change just eliminates a wording confusion and ought not change any
   behavior.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0112-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Defined a default naming for
+  representation aspects that are representation pragmas.]}
 @end{DiffWord95}
 
 
@@ -1864,6 +1884,26 @@ execution is erroneous if the object is not aligned according to
 @end{Erron}
 
 @begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0116-1]}
+@ChgAdded{Version=[3],Text=[For any tagged specific subtype @i<S>,
+@i<S>'Class'Alignment should equal @i<S>'Alignment.]}
+
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[A tagged object should never be less aligned than
+the alignment of the type of its view, so for a class-wide type T'Class, the
+alignment should be no greater than that of any type covered by T'Class. If the
+implementation only supports alignments that are required by the recommended
+level of support (and this is most likely), then the alignment of any covered
+type has to be the same or greater than that of T @em which leaves the only
+reasonable value of T'Class'Alignment being T'Alignment. Thus we suggest that,
+but don't require it in the unlikely case the implementation does support
+smaller alignments for covered types.]}
+@end{Reason}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[For any tagged specific subtype @i<S>,
+@i<S>'Class'Alignment should equal @i<S>'Alignment.]}]}
+
 @PDefn2{Term=[recommended level of support], Sec=(Alignment attribute
 for subtypes)}
 @Leading@;The recommended level of support for the Alignment attribute for
@@ -1909,6 +1949,15 @@ nonconfirming Alignment specified for a derived untagged by-reference type.]}
   @RefSecNum{Operational and Representation Items} requires support for
   confirming Alignment clauses for all types.]}
 @end{Ramification}
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0116-1]}
+  @ChgAdded{Version=[3],Text=[An implementation that tries to support other
+  alignments for derived tagged types will need to allow inherited subprograms
+  to be passed objects that are less aligned than expected by the parent
+  subprogram and type. This is unlikely to work if alignment has any effect on
+  code selection. Similar issues arise for untagged derived types whose
+  parameters are passed by reference.]}
+@end{ImplNote}
 @end{Itemize}
 
 @Leading@PDefn2{Term=[recommended level of support], Sec=(Alignment attribute
@@ -2901,6 +2950,10 @@ except for certain explicit exceptions.
   of erroneous execution for address clauses to make it clear that
   specifying an address inappropriate for the entity will lead to
   erroneous execution.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0116-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added @ImplAdviceTitle for
+  the alignment of class-wide types.]}
 @end{DiffWord95}
 
 

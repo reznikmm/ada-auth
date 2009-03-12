@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:02 $}
+@Comment{$Date: 2009/03/10 07:16:40 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.92 $}
+@Comment{$Revision: 1.93 $}
 
 @begin{Intro}
 
@@ -5179,11 +5179,8 @@ parts of the same object, are @i{independently addressable},
 they can be manipulated concurrently by two different tasks
 without synchronization.
 @Chg{Version=[3],New=[Any two nonoverlapping objects are independently
-addressable if either object is atomic (see @RefSecNum{Shared Variable Control}),
-if a @nt{pragma} Independent applies to either object (see
-@RefSecNum{Shared Variable Control}), or if either is a component of
-a composite object to which @nt{pragma} Independent_Components applies
-(see @RefSecNum{Shared Variable Control}). Otherwise,
+addressable if either object is specified as independently addressable (see
+@RefSecNum{Shared Variable Control}). Otherwise,
 two nonoverlapping objects are independently addressable
 except when they are both parts of a composite object for which
 a non-confirming representation item is used to specify
@@ -5225,13 +5222,7 @@ hardware efficiently supports it.
 
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
-@ChgAdded{Version=[3],Text=[If the compiler cannot guarantee that an object
-(including a component) to which @nt{pragma} Independent or @nt{pragma}
-Independent_Components applies is independently addressable from
-any other nonoverlapping object, then the pragma must be rejected.]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
-@ChgAdded{Version=[3],Text=[Similarly, an atomic object (including atomic
+@ChgAdded{Version=[3],Text=[An atomic object (including atomic
 components) is always independently addressable from any other nonoverlapping
 object. Any representation item which would prevent this from being true should
 be rejected, notwithstanding what this Standard says elsewhere.]}

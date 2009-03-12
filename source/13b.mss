@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2009/02/05 07:12:35 $}
+@Comment{$Date: 2009/03/10 07:16:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1594,6 +1594,7 @@ a non-derived access-to-object type
 via an @nt{attribute_@!definition_@!clause};
 the @nt{name} in a Storage_Pool clause shall denote a variable.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0116-1]}
 An @nt{allocator} of type T allocates storage from T's storage pool.
 If the storage pool is a user-defined object, then
 the storage is allocated by calling Allocate,
@@ -1602,7 +1603,9 @@ The Size_In_Storage_Elements parameter indicates the number of storage elements
 to be allocated,
 and is no more than D'Max_Size_In_Storage_Elements,
 where D is the designated subtype.
-The Alignment parameter is D'Alignment.
+The Alignment parameter is D'Alignment@Chg{Version=[3],New=[ if D is
+a specific type, and otherwise is the alignment of the specific type identified
+by the tag of the object being created],Old=[]}.
 @PDefn{contiguous representation}
 @PDefn{discontiguous representation}
 The result returned in the Storage_Address parameter is used by the
@@ -2045,6 +2048,11 @@ objects incorrectly by missing various cases.
   @ChgAdded{Version=[2],Text=[Added wording to clarify that an @nt{allocator}
   for a coextension nested inside an outer @nt{allocator} shares
   the pool with the outer @nt{allocator}.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0116-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording to specify the
+  alignment for an @nt{allocator} with a class-wide designated type comes from
+  the specific type that is allocated.]}
 @end{DiffWord95}
 
 

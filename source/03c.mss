@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:01 $}
+@Comment{$Date: 2009/03/10 07:16:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.90 $}
+@Comment{$Revision: 1.91 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -930,7 +930,7 @@ Every type extension is a tagged type, and
 is @Chg{Version=[2],New=[],Old=[either ]}a @i(record extension) or a
 @i(private extension) of
 some other tagged type@Chg{Version=[2],New=[, or a non-interface
-synchronized tagged type.],Old=[]}.]
+synchronized tagged type],Old=[]}.]
 @end{Intro}
 
 @begin{MetaRules}
