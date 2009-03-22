@@ -1,6 +1,6 @@
 @Part(comp-rel, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/comp-rel.mss,v $}
-@comment{$Revision: 1.11 $ $Date: 2009/03/04 01:07:17 $}
+@comment{$Revision: 1.12 $ $Date: 2009/03/13 07:12:33 $}
 
 
 @LabeledSection{package Asis.Compilation_Units.Relations}
@@ -76,8 +76,8 @@ which they semantically depend.
    The right unit of each pair semantically depends on the preceding left
    unit. All rightmost units of each pair are always inconsistent, and will
    not appear in the consistent units list. The leftmost unit can be either
-   consistent or inconsistent. If a @Chg{Version=[2],New=[leftmost units],
-   Old=[unit that is the leftmost of a pair]} is consistent, then it
+   consistent or inconsistent. If a @Chg{Version=[2],New=[unit that is the
+   leftmost of a pair],Old=[leftmost units]} is consistent, then it
    also appears in the consistent units list; otherwise the unit is part of
    an inconsistent transitive relationship.
 
@@ -147,7 +147,7 @@ example, the list returned is:]}
 
    Given a list containing the units:  AB AC
 
-@begin{ChildExample}
+@begin{Display}
 If Unit_Kind(B) = A_Nonexistent_Declaration and
    Unit_Kind(C) = A_Nonexistent_Body then
 
@@ -155,7 +155,7 @@ It can be deduced that:
    A is missing a needed supporter B (A depends semantically on B).
    A is missing a needed related unit body C (depending on
    the kind for A, C can be A's required body or some subunit of A).
-@end{ChildExample}
+@end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
    A unit is reported as missing only if the Post-Compilation Rules of Ada
@@ -182,14 +182,14 @@ It can be deduced that:
 
    Given a list containing the units:  AC CB BA DG GF FE ED
 
-@begin{ChildExample}
+@begin{Display}
 It can be determined that there are two sets of circularly
 dependent units:
     {A, B, C} and {D, E, F, G}
 
 The dependencies are:  A depends on B, B depends on C, C depends on A.
        D depends on E, E depends on F, F depends on G, G depends on D.
-@end{ChildExample}
+@end{Display}
 
    Each circle of dependence is reported exactly once. It is not reported
    once for each unit in the circle.

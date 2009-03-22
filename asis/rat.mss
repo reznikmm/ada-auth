@@ -1,9 +1,9 @@
 @Part(rat, Root="asis.msm")
 
-@Comment{$Date: 2009/02/15 08:00:55 $}
+@Comment{$Date: 2009/03/13 07:12:33 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/rat.mss,v $}
-@comment{$Revision: 1.3 $}
+@comment{$Revision: 1.4 $}
 
 @LabeledInformativeAnnex{Rationale}
 
@@ -446,7 +446,9 @@ Each ASIS interface should be fully defined and unambiguous.
 
 ASIS should be easy to learn and easy to use.
 
-ASIS should use the Ada Reference Manual terminology and style.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+ASIS should use the Ada @Chg{Version=[2],New=[Standard],Old=[Reference Manual]}
+terminology and style.
 
 ASIS should have a callable Ada interface.
 
@@ -569,9 +571,11 @@ reworded to make them consistent with Ada.
 
 @LabeledSubClause{Essence of Ada and ASIS}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 There are some fundamental differences between a language definition (i.e., the
 definition of Ada) and the interface definition of a tool, such as ASIS.
-Clearly the Ada language definition, as described in the Ada Reference Manual,
+Clearly the Ada language definition, as described in the
+Ada @Chg{Version=[2],New=[Standard],Old=[Reference Manual]},
 and ASIS are different in nature and have different aims.
 
 Ada defines the notion of a legal compilation unit, the notion of a legal
@@ -621,32 +625,36 @@ of an interface to an Ada program library in ASIS 1.1.1 by an interface to an
 Ada compilation environment. This change has in fact some farther-reaching
 consequences than it seems at a first look.
 
-The Ada Reference Manual 10.1.4(1) says: "Each compilation unit submitted to
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+The Ada @Chg{Version=[2],New=[Standard],Old=[Reference Manual]} 10.1.4(1) says: "Each compilation unit submitted to
 the compiler is compiled in the context of an environment declarative_part (or
 simply, an environment@Defn{Environment}), which is a conceptual
 declarative_part that forms the outermost declarative region of the context of
 any compilation. At run time, an environment forms the declarative_part of the
 body of the environment task of a partition". And the next paragraph says: "The
 declarative_items of the environment are library_items appearing in an order
-such that there are no forward semantic dependencies." Reference Manual
+such that there are no forward semantic dependencies." @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}
 10.1.4(5) then says: "When a compilation unit is compiled, all compilation
 units upon which it depends semantically shall already exist in the
 environment;..."
 
-At a first look, there seems to be a contradiction between Reference Manual
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+At a first look, there seems to be a contradiction between @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}
 10.1.4(1,2) which defines an environment as a declarative_part and says that an
 environment contains library_items, but not compilation_units, and Reference
 Manual 10.1.4(5) which speaks about the existence of compilation units in the
 environment.
 
-But this apparent "contradiction" is resolved in Reference Manual 10.1.1(9),
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+But this apparent "contradiction" is resolved in @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.1(9),
 which says: "The term compilation unit is used to refer to a compilation_unit.
 When the meaning is clear from context, the term is also used to refer to the
 library_item of a compilation_unit or to the proper_body of a subunit (that is,
 the compilation_unit without the context_clause and without the separate
 (parent_unit_name))."
 
-This means the Ada Reference Manual defines compilation_unit as a syntactical
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+This means the Ada @Chg{Version=[2],New=[Standard],Old=[Reference Manual]} defines compilation_unit as a syntactical
 category, and at the same time it defines "compilation unit" (without
 underscore and typed in regular font) as another technical term, which can
 denote either one of the syntactical categories "compilation_unit",
@@ -665,6 +673,7 @@ of the corresponding stub.
 
 @LabeledSubClause{ASIS context and inconsistency}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 ASIS has to deal with sets of compilation units. To avoid any confusion, it
 therefore introduces a new term, the concept of a context@Defn{Context}, which
 stands for a set of compilation_units maintained by an Ada compilation system.
@@ -672,7 +681,7 @@ A context has a state, consisting of the compilation units belonging to it, and
 the configuration pragmas applying to them, but also depending on the history
 of compiler runs, or other actions taken by the compilation system. Thus, the
 ASIS concept of a context resembles closely an Ada environment when used as a
-dynamic concept like in the Ada Reference Manual 10.1.4(3), which says: "The
+dynamic concept like in the Ada @Chg{Version=[2],New=[Standard],Old=[Reference Manual]} 10.1.4(3), which says: "The
 mechanisms for creating an environment and for adding and replacing compilation
 units within an environment are implementation-defined."
 
@@ -704,20 +713,22 @@ compile
    @key[procedure] B ...
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 As far as the legality of compilation units is the concern, the environments
 can be distinguished as: P alone, P together with A, P' alone, and P' together
 with B. It could well be that compiling A with P' yields a compilation error.
 Nevertheless, all these environments contain only consistent unit sets
-following Reference Manual 10.1.4 (5), which says: "When a compilation unit is
+following @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.4 (5), which says: "When a compilation unit is
 compiled, all compilation units upon which it depends semantically shall
 already exist in the environment; the set of these compilation units shall be
 consistent in the sense that the new compilation unit shall not semantically
 depend (directly or indirectly) on two different versions of the same
 compilation unit, nor on an earlier version of itself."
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Only when the results of these compilations are used to build a partition, the
 inconsistency of depending on two versions for P can be detected by the
-implementation following Reference Manual 10.2 (27), which says: "The
+implementation following @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.2 (27), which says: "The
 implementation shall ensure that all compilation units included in a partition
 are consistent with one another, and are legal according to the rules of the
 language."
@@ -745,8 +756,9 @@ units, the second depending on the first: (A depends on P). An inconsistency is
 reported if the latest compiler runs for A and P used different versions of P,
 or different versions of any other unit upon which P depends.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 This is perhaps the place to speak about the concept of a version of a
-compilation unit. Even though Ada uses the term in Reference Manual 10.1.4 (5),
+compilation unit. Even though Ada uses the term in @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.4 (5),
 it does not define it. On the contrary, ASIS does not use it at all. ASIS
 provides queries for retrieving a library unit having a given name; it is
 stated that at most one unit can be retrieved, which means that library units,
@@ -762,10 +774,11 @@ very nature of ASIS.
 
 @LabeledSubClause{Implicit declarations}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Sometimes a concept is missing as such in ASIS, but it can be rebuilt
 indirectly (e.g., implicit declarations of a declarative region can only be
 retrieved indirectly). Ada distinguishes between explicit and implicit
-declarations (Reference Manual 3.1 (5)): "A declaration is a language construct
+declarations (@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.1 (5)): "A declaration is a language construct
 that associates a name with (a view of) an entity. A declaration can appear
 explicitly in the program text (an explicit
 declaration@Defn{Explicit declaration}), or can be supposed to
@@ -786,8 +799,9 @@ associated with a type, ASIS provides queries to get all the predefined and
 inherited subprograms associated with it, and also its implicit components,
 when it is a record.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 A second case is @b{statement_identifiers}. Labels, block names and loop names
-are statement_identifiers. Reference Manual 5.1(12) says that "For each
+are statement_identifiers. @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 5.1(12) says that "For each
 statement_identifier, there is an implicit declaration (with the specified
 identifier) at the end of the declarative_part of the innermost block_statement
 or body that encloses the Statement_Identifier." ASIS does not provide a query
@@ -840,8 +854,9 @@ for keeping the approach.
 
 @LabeledSubClause{Select alternative}
 
-@leading@;Let's start by recalling the Ada syntax of a select_alternative
-(Reference Manual 9.7.1 (4-7)):
+@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+Let's start by recalling the Ada syntax of a select_alternative
+(@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 9.7.1 (4-7)):
 
 @begin{Example}
 select_alternative ::= accept_alternative
@@ -865,7 +880,8 @@ the distinction is needed, by examining the first statement in the sequence.
 
 @LabeledSubClause{Attribute definition clauses}
 
-@leading@;In Reference Manual 13.3 (2), Ada says that an
+@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+In @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 13.3 (2), Ada says that an
 attribute_definition_clause is defined as:
 @begin{Example}
 attribute_definition_clause ::=
@@ -873,8 +889,9 @@ attribute_definition_clause ::=
            | @key[for] local_name'attribute_designator @key[use] name;
 @end{Example}
 
-@leading@;In Reference Manual 4.1, Ada says that a name may be an
-attribute_reference, which then is formally defined in Reference Manual 4.1.4
+@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+In @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 4.1, Ada says that a name may be an
+attribute_reference, which then is formally defined in @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 4.1.4
 (2) by:
 @begin{Example}
 attribute_reference ::= prefix'attribute_designator
@@ -895,7 +912,8 @@ attribute_designator parts.
 
 @LabeledSubClause{Configuration pragmas}
 
-According to Reference Manual 10.1.5 (8), the purpose of configuration pragmas
+@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+According to @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.5 (8), the purpose of configuration pragmas
 is: "They are generally used to select a partition-wide or system-wide option."
 The same paragraph says about their placement that "[T]hey shall appear before
 the first compilation_unit of a compilation.", and later on about their "scope"

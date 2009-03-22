@@ -1,6 +1,6 @@
 @Part(ids, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/semant.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2009/03/07 06:33:31 $}
+@comment{$Revision: 1.2 $ $Date: 2009/03/13 07:12:33 $}
 
 @LabeledAddedSection{Version=[2],Name=[ASIS Semantic Subsystem]}
 
@@ -144,27 +144,100 @@ subclauses.]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{View_Kinds} @key[is] (...);]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{View_Kinds} @key[is] (
+   An_Exception,
+   An_Exception_Renaming,]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   A_Generic_Package,
+   A_Generic_Package_Renaming,
+   A_Generic_Subprogram,
+   A_Generic_Subprogram_Renaming,]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   A_Noninstance_Package,
+   A_Package_Instance,
+   A_Package_Renaming,
+   A_Limited_Package_View,]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   A_Noninstance_Subprogram,
+   A_Subprogram_Instance,
+   A_Subprogram_Renaming,
+   A_Protected_Subprogram,
+   An_Imported_Subprogram,
+   An_Attribute_Subprogram,
+   An_Intrinsic_Subprogram,
+   A_Designated_Subprogram,
+   A_Generic_Formal_Subprogram,
+   A_Protected_Entry,
+   A_Task_Entry,]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   A_Standalone_Object,
+   A_Generic_Formal_Object,
+   A_Formal_Parameter_Object,
+   An_Object_Renaming,
+   A_Designated_Object,
+   A_Component_Object,
+   An_Attribute_Object,
+   An_Aggregate_Object,
+   A_Function_Result_Object,
+   A_Named_Number,
+   An_Attribute_Value,
+   An_Expr_Value,]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   A_Boolean_Subtype,
+   A_Character_Subtype,
+   An_Ordinary_Enumeration_Subtype,
+   A_Signed_Integer_Subtype,
+   A_Modular_Integer_Subtype,
+   An_Ordinary_Fixed_Subtype,
+   A_Decimal_Fixed_Subtype,
+   A_Float_Subtype,
+   An_Access_To_Object_Subtype,
+   An_Access_To_Subprogram_Subtype,]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   An_Array_Subtype,
+   A_Record_Subtype,
+   A_Record_Extension,
+   A_Task_Subtype,
+   A_Protected_Subtype,
+   An_Interface,]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   A_Private_Subtype,
+   A_Private_Extension,]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   An_Incomplete_Subtype,]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   A_Label_Statement_View,
+   A_Block_Statement_View,
+   A_Loop_Statement_View);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Exception_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds
-  @key[range] An_Exception .. An_Exception_Renaming;]}
+   @key[range] An_Exception .. An_Exception_Renaming;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Generic_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds
-  @key[range] A_Generic_Package .. A_Generic_Subprogram_Renaming;]}
+   @key[range] A_Generic_Package .. A_Generic_Subprogram_Renaming;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Callable_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds
-  @key[range] A_Noninstance_Subprogram .. A_Task_Entry;]}
+   @key[range] A_Noninstance_Subprogram .. A_Task_Entry;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Object_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds
-  @key[range] A_Standalone_Object .. An_Expr_Value;]}
+   @key[range] A_Standalone_Object .. An_Expr_Value;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Subtype_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds
-  @key[range] A_Boolean_Subtype .. An_Incomplete_Subtype;]}
+   @key[range] A_Boolean_Subtype .. An_Incomplete_Subtype;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Package_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds @key[range]
@@ -277,9 +350,12 @@ Element_Denoting_View (V).]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Conventions} is (
-  Intrinsic_Convention, Ada_Convention,
-  Protected_Convention, Entry_Convention,
-  Other_Convention, Unspecified_Convention);]}
+   Intrinsic_Convention,
+   Ada_Convention,
+   Protected_Convention,
+   Entry_Convention,
+   Other_Convention,
+   Unspecified_Convention);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Convention} (V : View) @key[return] Conventions @key[is abstract];]}
@@ -410,15 +486,23 @@ corresponding package body in this sequence. Otherwise returns False.]}
 @ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Region_Part_List} @key[is array] (Positive @key[range] <>) @key[of] Region_Part;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Region_Part_Kinds} @key[is] (Generic_Formal_Part, Callable_Formal_Part,
-    Discriminant_Part, Entry_Family_Index_Part,
-    Record_Part, Extension_Part,
-    Package_Visible_Part, Package_Private_Part,
-    Task_Visible_Part, Task_Private_Part,
-    Protected_Visible_Part,
-    Protected_Private_Part,
-    Body_Part, Block_Declarative_Part,
-    Loop_Declarative_Part, Child_Part);]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Region_Part_Kinds} @key[is] (
+   Generic_Formal_Part,
+   Callable_Formal_Part,
+   Discriminant_Part,
+   Entry_Family_Index_Part,
+   Record_Part,
+   Extension_Part,
+   Package_Visible_Part,
+   Package_Private_Part,
+   Task_Visible_Part,
+   Task_Private_Part,
+   Protected_Visible_Part,
+   Protected_Private_Part,
+   Body_Part,
+   Block_Declarative_Part,
+   Loop_Declarative_Part,
+   Child_Part);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
@@ -700,13 +784,37 @@ returns False.]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Language_Defined_Aspect_Kinds} @key[is] (Address, Alignment, Asynchronous,
-   Atomic, Atomic_Components, Bit_Order, Coding, Component_Size,
-   Controlled, Convention, Discarded_Names, Exported, External_Tag,
-   Imported, Independent, Independent_Components,
-   Input, Layout, No_Return, Output, Packing, Read, Size, Small,
-   Storage_Pool, Storage_Size, Stream_Size, Volatile,
-   Volatile_Components, Write);]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Language_Defined_Aspect_Kinds} @key[is] (
+    Address,
+    Alignment,
+    Asynchronous,
+    Atomic,
+    Atomic_Components,
+    Bit_Order,
+    Coding,
+    Component_Size,
+    Controlled,
+    Convention,
+    Discarded_Names,
+    Exported,
+    External_Tag,
+    Imported,
+    Independent,
+    Independent_Components,
+    Input,
+    Layout,
+    No_Return,
+    Output,
+    Packing,
+    Read,
+    Size,
+    Small,
+    Storage_Pool,
+    Storage_Size,
+    Stream_Size,
+    Volatile,
+    Volatile_Components,
+    Write);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Aspect_Specified} (V : View;
@@ -1280,7 +1388,7 @@ returns an unspecified one.]}
 
 @begin{SingleNote}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Note: Function Ultimate_Ancestor may stop on an
+@ChgAdded{Version=[2],Text=[Function Ultimate_Ancestor may stop on an
 incomplete or partial view. If the ultimate full view is needed, call Full_View
 on the result of Ultimate_Ancestor.]}
 @end{SingleNote}
@@ -3066,7 +3174,7 @@ in the following subclauses.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Declaration expects
-an element that has one of the following Element_Kinds:]}
+an element that has the following Element_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Declaration]}
 @end{Display}
@@ -3149,7 +3257,7 @@ of the Expression.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Expression expects an
-element that has one of the following Element_Kinds:]}
+element that has the following Element_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[An_Expression]}
 @end{Display}

@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/except.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2009/03/07 06:33:31 $}
+@comment{$Revision: 1.6 $ $Date: 2009/03/13 07:12:33 $}
 
 @LabeledSection{package Asis.Exceptions}
 
@@ -78,16 +78,6 @@ Asis.Callable_Views, Asis.Package_Views, Asis.Generic_Views,
 Asis.Exception_Views, Asis.Statement_Views, and their subpackages and children,
 if the result is an entity that is not part of the current context.]}
 
-@begin{SingleNote}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[This can happen, for instance, if the View is of an
-incomplete view, and the full view is not part of the context. It also can
-happen if only a portion of the semantic dependencies of the queried unit is
-included in the context.]}
-@end{SingleNote}
-
-
-
 @begin{Example}
 @AdaExcDefn{ASIS_Failed} : @key[exception];
 @end{Example}
@@ -96,6 +86,16 @@ This is a catch-all exception that may be raised for different reasons
 in different ASIS implementations. All ASIS routines may raise ASIS_Failed
 whenever they cannot normally complete their operation. This exception
 will typically indicate a failure of the underlying ASIS implementation.
+
+@begin{SingleNote}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[ASIS_Not_In_Context can happen, for instance, if the
+View is of an incomplete view, and the full view is not part of the context. It
+also can happen if only a portion of the semantic dependencies of the queried
+unit is included in the context.]}
+@end{SingleNote}
+
+
 @end{DescribeCode}
 
 @begin{Example}

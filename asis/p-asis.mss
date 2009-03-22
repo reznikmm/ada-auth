@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.18 $ $Date: 2009/03/04 01:07:17 $}
+@comment{$Revision: 1.19 $ $Date: 2009/03/13 07:12:34 $}
 
 @LabeledSection{package Asis}
 
@@ -157,13 +157,14 @@ Parameters values that are used by the implementation to identify and
 connect to the information in the Ada environment.
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 An ASIS Context is associated with some set of Ada compilation units
 maintained by an underlying Ada implementation or a stand-alone ASIS
-implementation. After this association has been made, this set of units
-is considered to be part of the compile-time Ada environment, which forms
-the outermost context of any compilation, as specified in section 10.1.4 of
-the Ada Reference Manual. This same environment context provides the
-implicit outermost anonymous task during program execution.
+implementation. After this association has been made, this set of units is
+considered to be part of the compile-time Ada environment, which forms the
+outermost context of any compilation, as specified in section 10.1.4 of the Ada
+@Chg{Version=[2],New=[Standard],Old=[Reference Manual]}. This same environment
+context provides the implicit outermost anonymous task during program execution.
 
 Some implementations might not need explicit Name and/or Parameters values to
 identify their Ada environment. Other implementations might choose to
@@ -444,10 +445,11 @@ each kind.]}
 
 @LabeledSubClause{type Pragma_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[Type ],Old=[]}Pragma_Kinds
 @Chg{Version=[1],New=[provides],Old=[@en]} classifications for
 pragmas@Chg{Version=[1],New=[.],Old=[
-Literals                          -- @examcom{Reference Manual}]}@Comment{Moved below}
+Literals                          -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}@Comment{Moved below}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -462,22 +464,25 @@ Literals                          -- @examcom{Reference Manual}]}@Comment{Moved 
    @AdaObjDefn{An_Atomic_Components_Pragma},      -- @examcom{C.6(5)}
    @AdaObjDefn{An_Attach_Handler_Pragma},         -- @examcom{C.3.1(4)}
    @AdaObjDefn{A_Controlled_Pragma},              -- @examcom{13.11.3(3)}
-   @AdaObjDefn{A_Convention_Pragma},              -- @examcom{B.1(7)}, M.1(5)}
+   @AdaObjDefn{A_Convention_Pragma},              -- @examcom{B.1(7), M.1(5)}
    @AdaObjDefn{A_Discard_Names_Pragma},           -- @examcom{C.5(3)}@Chg{Version=[2],New=[
    @AdaObjDefn{A_Detect_Blocking_Pragma},         -- @examcom{D.13 (4)}],Old=[]}
+
    @AdaObjDefn{An_Elaborate_Pragma},              -- @examcom{10.2.1(20)}
    @AdaObjDefn{An_Elaborate_All_Pragma},          -- @examcom{10.2.1(21)}
    @AdaObjDefn{An_Elaborate_Body_Pragma},         -- @examcom{10.2.1(22)}
-   @AdaObjDefn{An_Export_Pragma},                 -- @examcom{B.1(5)}, M.1(5)}
-   @AdaObjDefn{An_Import_Pragma},                 -- @examcom{B.1(6)}, M.1(5)}
+   @AdaObjDefn{An_Export_Pragma},                 -- @examcom{B.1(5), M.1(5)}
+   @AdaObjDefn{An_Import_Pragma},                 -- @examcom{B.1(6), M.1(5)}
    @AdaObjDefn{An_Inline_Pragma},                 -- @examcom{6.3.2(3)}
    @AdaObjDefn{An_Inspection_Point_Pragma},       -- @examcom{H.3.2(3)}
    @AdaObjDefn{An_Interrupt_Handler_Pragma},      -- @examcom{C.3.1(2)}
    @AdaObjDefn{An_Interrupt_Priority_Pragma},     -- @examcom{D.1(5)}
    @AdaObjDefn{A_Linker_Options_Pragma},          -- @examcom{B.1(8)}
    @AdaObjDefn{A_List_Pragma},                    -- @examcom{2.8(21)}
-   @AdaObjDefn{A_Locking_Policy_Pragma},          -- @examcom{D.3(3)}@Chg{Version=[2],New=[
-   @AdaObjDefn{A_No_Return_Pragma},               -- @examcom{6.5.1 (3)}],Old=[]}
+   @AdaObjDefn{A_Locking_Policy_Pragma},          -- @examcom{D.3(3)}
+
+@ChgRef{Version=[2],Kind=[Revised]}
+@Chg{Version=[2],New=[@AdaObjDefn{A_No_Return_Pragma},               -- @examcom{6.5.1 (3)}],Old=[]}
    @AdaObjDefn{A_Normalize_Scalars_Pragma},       -- @examcom{H.1(3)}
    @AdaObjDefn{An_Optimize_Pragma},               -- @examcom{2.8(23)}
    @AdaObjDefn{A_Pack_Pragma},                    -- @examcom{13.2(3)}
@@ -490,6 +495,8 @@ Literals                          -- @examcom{Reference Manual}]}@Comment{Moved 
    @AdaObjDefn{A_Priority_Specific_Dispatching_Pragma},  -- @examcom{D.2.2 (2.2)}@Chg{Version=[2],New=[
    @AdaObjDefn{A_Profile_Pragma},                 -- @examcom{D.13 (2)}],Old=[]}
    @AdaObjDefn{A_Pure_Pragma},                    -- @examcom{10.2.1(14)}
+
+@ChgRef{Version=[2],Kind=[Revised]}
    @AdaObjDefn{A_Queuing_Policy_Pragma},          -- @examcom{D.4(3)}@Chg{Version=[2],New=[
    @AdaObjDefn{A_Relative_Deadline_Pragma},       -- @examcom{D.2.6 (2.2)}],Old=[]}
    @AdaObjDefn{A_Remote_Call_Interface_Pragma},   -- @examcom{E.2.3(3)}
@@ -516,10 +523,11 @@ the Ada Standard for each pragma.]}
 
 @LabeledSubClause{type Defining_Name_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[Type ],Old=[]}Defining_Name_Kinds
 @Chg{Version=[1],New=[classifies],Old=[@en]}
 names defined by declarations and
-specifications.@Chg{Version=[1],New=[],Old=[Literals                                   -- @examcom{Reference Manual}]}
+specifications.@Chg{Version=[1],New=[],Old=[Literals                                   -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -541,10 +549,11 @@ the Ada Standard for each defining name.]}
 
 @LabeledSubClause{type Declaration_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[Type ],Old=[]}Declaration_Kinds
 @Chg{Version=[1],New=[classifies],Old=[@en]}
 declarations and specifications having defining name
-literals.@Chg{Version=[1],New=[],Old=[Literals                                 -- @examcom{Reference Manual -> Subordinate Kinds}]}
+literals.@Chg{Version=[1],New=[],Old=[Literals                                 -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} -> Subordinate Kinds}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -691,8 +700,10 @@ and specifications having an overrriding indicator.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0003-1]}
 @ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Overriding_Indicator_Kinds} @key[is] (]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[  @AdaObjDefn{Not_An_Overriding_Indicator},]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[  @AdaObjDefn{No_Overriding_Indicator},          -- @examcom{8.3.1 (2)}
   @AdaObjDefn{An_Indicator_of_Overriding},       -- @examcom{8.3.1 (2)}
   @AdaObjDefn{An_Indicator_of_Not_Overriding});  -- @examcom{8.3.1 (2)}]}
@@ -797,8 +808,9 @@ Literals]}
 
 @LabeledSubClause{type Declaration_Origins}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[],Old=[Declaration_Origins
-Literals                             -- @examcom{Reference Manual}]}
+Literals                             -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -819,8 +831,9 @@ the Ada Standard for each kind of declaration origin.]}
 
 @LabeledSubClause{type Mode_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[],Old=[Mode_Kinds
-Literals                 -- @examcom{Reference Manual}]}
+Literals                 -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -828,9 +841,9 @@ Literals                 -- @examcom{Reference Manual}]}
 
    @AdaObjDefn{Not_A_Mode},              -- @examcom{An unexpected element}
 
-   @AdaObjDefn{A_Default_In_Mode},       -- @examcom{@key[procedure] A(B :        C);}
-   @AdaObjDefn{An_In_Mode},              -- @examcom{@Key[procedure] A(B : @key[in]     C);}
-   @AdaObjDefn{An_Out_Mode},             -- @examcom{@key[procedure] A(B :    @key[out] C);}
+   @AdaObjDefn{A_Default_In_Mode},       -- @examcom{@key[procedure] A(B : C);}
+   @AdaObjDefn{An_In_Mode},              -- @examcom{@Key[procedure] A(B : @key[in] C);}
+   @AdaObjDefn{An_Out_Mode},             -- @examcom{@key[procedure] A(B : @key[out] C);}
    @AdaObjDefn{An_In_Out_Mode});         -- @examcom{@key[procedure] A(B : @key[in out] C);}
 @end{Example}
 @end{DescribeCode}
@@ -838,8 +851,9 @@ Literals                 -- @examcom{Reference Manual}]}
 
 @LabeledSubClause{type Subprogram_Default_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[],Old=[Subprogram_Default_Kinds
-Literals                 -- @examcom{Reference Manual}]}
+Literals                 -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -858,8 +872,9 @@ Literals                 -- @examcom{Reference Manual}]}
 
 @LabeledSubClause{type Definition_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[],Old=[Definition_Kinds
-Literals                          -- @examcom{Reference Manual   -> Subordinate Kinds}]}
+Literals                          -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}   -> Subordinate Kinds}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -912,8 +927,9 @@ is given as well.]}
 
 @LabeledSubClause{type Type_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[],Old=[Type_Kinds
-Literals                               -- @examcom{Reference Manual  -> Subordinate Kinds}]}
+Literals                               -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}  -> Subordinate Kinds}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -955,8 +971,9 @@ is given as well.]}
 
 @LabeledSubClause{type Formal_Type_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[],Old=[Formal_Type_Kinds
-Literals                                  -- @examcom{Reference Manual  -> Subordinate Kinds}]}
+Literals                                  -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}  -> Subordinate Kinds}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -981,8 +998,10 @@ Literals                                  -- @examcom{Reference Manual  -> Subor
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0006-1]}
    @AdaObjDefn{A_Formal_Ordinary_Fixed_Point_Definition}, -- @examcom{12.5.2(6)}
    @AdaObjDefn{A_Formal_Decimal_Fixed_Point_Definition},  -- @examcom{12.5.2(7)}
+
    @AdaObjDefn{A_Formal_Unconstrained_Array_Definition},  -- @examcom{@Chg{Version=[2],New=[12.5.3(2), ],Old=[]}3.6(3)}
    @AdaObjDefn{A_Formal_Constrained_Array_Definition},    -- @examcom{@Chg{Version=[2],New=[12.5.3(2), ],Old=[]}3.6(5)}
+
    @AdaObjDefn{A_Formal_Access_Type_Definition},          -- @examcom{@Chg{Version=[2],New=[12.5.4(2)],Old=[3.10(3), 3.10(5)]}}
                                              -- @examcom{        -> Access_Type_Kinds}@Chg{Version=[2],New=[
    @AdaObjDefn{A_Formal_Interface_Type_Definition});      -- @examcom{12.5.5 (2)}],Old=[]}
@@ -995,8 +1014,9 @@ is given as well.]}
 
 @LabeledSubClause{type Access_Type_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[],Old=[Access_Type_Kinds
-Literals                             -- @examcom{Reference Manual}]}
+Literals                             -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1040,27 +1060,31 @@ change all of the following subclause numbers, so this is a subsubclause tempora
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Access_Definition_Kinds} @key[is] (   -- @examcom{3.3.1(2) / 3.10(6)}
-      @AdaObjDefn{Not_An_Access_Definition},                   -- @examcom{An unexpected element}
-      @AdaObjDefn{An_Anonymous_Access_To_Variable},            -- @examcom{3.3.1(2) [...] access subtype_mark}
-      @AdaObjDefn{An_Anonymous_Access_To_Constant},            -- @examcom{3.3.1(2) / 3.10(6) }
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Access_Definition_Kinds} @key[is] (   -- @examcom{3.3.1(2) / 3.10(6)}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{Not_An_Access_Definition},                   -- @examcom{An unexpected element}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{An_Anonymous_Access_To_Variable},            -- @examcom{3.3.1(2) [...] access subtype_mark}
+   @AdaObjDefn{An_Anonymous_Access_To_Constant},            -- @examcom{3.3.1(2) / 3.10(6) }
                                                   -- @examcom{[...] access constant subtype_mark}
-      @AdaObjDefn{An_Anonymous_Access_To_Procedure},           -- @examcom{3.10(6) access procedure}
-      @AdaObjDefn{An_Anonymous_Access_To_Protected_Procedure}, -- @examcom{3.10(6) access protected procedure}
-      @AdaObjDefn{An_Anonymous_Access_To_Function},            -- @examcom{3.10(6) access function}
-      @AdaObjDefn{An_Anonymous_Access_To_Protected_Function}); -- @examcom{3.10(6) access protected function}]}
+   @AdaObjDefn{An_Anonymous_Access_To_Procedure},           -- @examcom{3.10(6) access procedure}
+   @AdaObjDefn{An_Anonymous_Access_To_Protected_Procedure}, -- @examcom{3.10(6) access protected procedure}
+   @AdaObjDefn{An_Anonymous_Access_To_Function},            -- @examcom{3.10(6) access function}
+   @AdaObjDefn{An_Anonymous_Access_To_Protected_Function}); -- @examcom{3.10(6) access protected function}]}
 @end{Example}
 @end{DescribeCode}
 
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1]}
-@ChgAdded{Version=[2],Text=[   @key[subtype] @AdaSubTypeDefn{Name=[An_Anonymous_Access_to_Object_Definition], Of=[]} @key[is] Access_Definition_Kinds
-      @key[range] An_Anonymous_Access_To_Variable .. An_Anonymous_Access_To_Constant;]}
+@ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubTypeDefn{Name=[An_Anonymous_Access_to_Object_Definition], Of=[]} @key[is] Access_Definition_Kinds
+   @key[range] An_Anonymous_Access_To_Variable .. An_Anonymous_Access_To_Constant;]}
 
-@ChgAdded{Version=[2],Text=[   @key[subtype] @AdaSubTypeDefn{Name=[An_Anonymous_Access_to_Subprogram_Definition], Of=[]} @key[is] Access_Definition_Kinds
-      @key[range] An_Anonymous_Access_To_Procedure ..
-      An_Anonymous_Access_To_Protected_Function;]}
+@ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubTypeDefn{Name=[An_Anonymous_Access_to_Subprogram_Definition], Of=[]} @key[is] Access_Definition_Kinds
+   @key[range] An_Anonymous_Access_To_Procedure ..
+   An_Anonymous_Access_To_Protected_Function;]}
 @end{Example}
 @end{DescribeCode}
 
@@ -1068,8 +1092,9 @@ change all of the following subclause numbers, so this is a subsubclause tempora
 
 @LabeledSubClause{type Root_Type_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[],Old=[Root_Type_Kinds
-Literals                               -- @examcom{Reference Manual}]}
+Literals                               -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1093,8 +1118,9 @@ the Ada Standard for each kind of root type.]}
 
 @LabeledSubClause{type Constraint_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[],Old=[Constraint_Kinds
-Literals                               -- @examcom{Reference Manual}]}
+Literals                               -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1116,8 +1142,9 @@ the Ada Standard for each kind of constraint.]}
 
 @LabeledSubClause{type Discrete_Range_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[],Old=[Discrete_Range_Kinds
-Literals                               -- @examcom{Reference Manual}]}
+Literals                               -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1145,21 +1172,26 @@ change all of the following subclause numbers, so this is a subsubclause tempora
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Interface_Kinds} @key[is] (  -- @examcom{3.9.4 (2)}
-      @AdaObjDefn{Not_An_Interface},                 -- @examcom{An unexpected element}
-      @AdaObjDefn{An_Ordinary_Interface},            -- @examcom{3.9.4(2)}
-      @AdaObjDefn{A_Limited_Interface},              -- @examcom{3.9.4(2)}
-      @AdaObjDefn{A_Task_Interface},                 -- @examcom{3.9.4(2)}
-      @AdaObjDefn{A_Protected_Interface},            -- @examcom{3.9.4(2)}
-      @AdaObjDefn{A_Synchronized_Interface});        -- @examcom{3.9.4(2)}]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Interface_Kinds} @key[is] (  -- @examcom{3.9.4 (2)}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{Not_An_Interface},                 -- @examcom{An unexpected element}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @AdaObjDefn{An_Ordinary_Interface},            -- @examcom{3.9.4(2)}
+   @AdaObjDefn{A_Limited_Interface},              -- @examcom{3.9.4(2)}
+   @AdaObjDefn{A_Task_Interface},                 -- @examcom{3.9.4(2)}
+   @AdaObjDefn{A_Protected_Interface},            -- @examcom{3.9.4(2)}
+   @AdaObjDefn{A_Synchronized_Interface});        -- @examcom{3.9.4(2)}]}
 @end{Example}
 @end{DescribeCode}
 
 
 @LabeledSubClause{type Association_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[],Old=[Association_Kinds
-Literals                               -- @examcom{Reference Manual}]}
+Literals                               -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1181,10 +1213,11 @@ the Ada Standard for each kind of association.]}
 
 @LabeledSubClause{type Expression_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[Type ],Old=[]}Expression_Kinds
 @Chg{Version=[1],New=[describes],Old=[@en]} general expression
 classifications@Chg{Version=[1],New=[.],Old=[
-Literals                                   -- @examcom{Reference Manual -> Subordinate Kinds}]}
+Literals                                   -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} -> Subordinate Kinds}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1243,10 +1276,11 @@ is given as well.]}
 
 @LabeledSubClause{type Operator_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[Type ],Old=[]}Operator_Kinds
 @Chg{Version=[1],New=[describes],Old=[@en]} classification of
 the various Ada predefined operators@Chg{Version=[1],New=[.],Old=[
-Literals                           -- @examcom{Reference Manual}]}
+Literals                           -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1281,10 +1315,11 @@ Literals                           -- @examcom{Reference Manual}]}
 
 @LabeledSubClause{type Attribute_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[Type ],Old=[]}Attribute_Kinds
 @Chg{Version=[1],New=[describes],Old=[@en]} classifications of all known
 Ada attributes@Chg{Version=[1],New=[.],Old=[
-Literals                       -- @examcom{Reference Manual}]}
+Literals                       -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1292,15 +1327,16 @@ Literals                       -- @examcom{Reference Manual}]}
 
    @AdaObjDefn{Not_An_Attribute},              -- @examcom{An unexpected element}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0018-1]}
    @AdaObjDefn{An_Access_Attribute},           -- @examcom{3.10.2(24), 3.10.2(32), K(2), K(4)}
    @AdaObjDefn{An_Address_Attribute},          -- @examcom{13.3(11), J.7.1(5), K(6)}
    @AdaObjDefn{An_Adjacent_Attribute},         -- @examcom{A.5.3(48), K(8)}
    @AdaObjDefn{An_Aft_Attribute},              -- @examcom{3.5.10(5), K(12)}
    @AdaObjDefn{An_Alignment_Attribute},        -- @examcom{13.3(23), K(14)}
+
    @AdaObjDefn{A_Base_Attribute},              -- @examcom{3.5(15), K(17)}
    @AdaObjDefn{A_Bit_Order_Attribute},         -- @examcom{13.5.3(4), K(19)}
    @AdaObjDefn{A_Body_Version_Attribute},      -- @examcom{E.3(4), K(21)}
+
    @AdaObjDefn{A_Callable_Attribute},          -- @examcom{9.9(2), K(23)}
    @AdaObjDefn{A_Caller_Attribute},            -- @examcom{C.7.1(14), K(25)}
    @AdaObjDefn{A_Ceiling_Attribute},           -- @examcom{A.5.3(33), K(27)}
@@ -1310,24 +1346,31 @@ Literals                       -- @examcom{Reference Manual}]}
    @AdaObjDefn{A_Constrained_Attribute},       -- @examcom{3.7.2(3), J.4(2), K(42)}
    @AdaObjDefn{A_Copy_Sign_Attribute},         -- @examcom{A.5.3(51), K(44)}
    @AdaObjDefn{A_Count_Attribute},             -- @examcom{9.9(5), K(48)}
+
    @AdaObjDefn{A_Definite_Attribute},          -- @examcom{12.5.1(23), K(50)}
    @AdaObjDefn{A_Delta_Attribute},             -- @examcom{3.5.10(3), K(52)}
    @AdaObjDefn{A_Denorm_Attribute},            -- @examcom{A.5.3(9), K(54)}
    @AdaObjDefn{A_Digits_Attribute},            -- @examcom{3.5.8(2), 3.5.10(7), K(56), K(58)}
+
    @AdaObjDefn{An_Exponent_Attribute},         -- @examcom{A.5.3(18), K(60)}
    @AdaObjDefn{An_External_Tag_Attribute},     -- @examcom{13.3(75), K(64)}
+
    @AdaObjDefn{A_First_Attribute},             -- @examcom{3.5(12), 3.6.2(3), K(68), K(70)}
    @AdaObjDefn{A_First_Bit_Attribute},         -- @examcom{13.5.2(3), K(72)}
    @AdaObjDefn{A_Floor_Attribute},             -- @examcom{A.5.3(30), K(74)}
    @AdaObjDefn{A_Fore_Attribute},              -- @examcom{3.5.10(4), K(78)}
    @AdaObjDefn{A_Fraction_Attribute},          -- @examcom{A.5.3(21), K(80)}
+
    @AdaObjDefn{An_Identity_Attribute},         -- @examcom{11.4.1(9), C.7.1(12), K(84), K(86)}
    @AdaObjDefn{An_Image_Attribute},            -- @examcom{3.5(35), K(88)}
    @AdaObjDefn{An_Input_Attribute},            -- @examcom{13.13.2(22), 13.13.2(32), K(92), K(96)}
+
    @AdaObjDefn{A_Last_Attribute},              -- @examcom{3.5(13), 3.6.2(5), K(102), K(104)}
    @AdaObjDefn{A_Last_Bit_Attribute},          -- @examcom{13.5.2(4), K(106)}
    @AdaObjDefn{A_Leading_Part_Attribute},      -- @examcom{A.5.3(54), K(108)}
    @AdaObjDefn{A_Length_Attribute},            -- @examcom{3.6.2(9), K(117)}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0018-1]}
    @AdaObjDefn{A_Machine_Attribute},           -- @examcom{A.5.3(60), K(119)}
    @AdaObjDefn{A_Machine_Emax_Attribute},      -- @examcom{A.5.3(8), K(123)}
    @AdaObjDefn{A_Machine_Emin_Attribute},      -- @examcom{A.5.3(7), K(125)}
@@ -1346,17 +1389,23 @@ Literals                       -- @examcom{Reference Manual}]}
    @AdaObjDefn{A_Model_Mantissa_Attribute},    -- @examcom{A.5.3(64), G.2.2(3), K(159)}
    @AdaObjDefn{A_Model_Small_Attribute},       -- @examcom{A.5.3(67), K(161)}
    @AdaObjDefn{A_Modulus_Attribute},           -- @examcom{3.5.4(17), K(163)}
+
    @AdaObjDefn{An_Output_Attribute},           -- @examcom{13.13.2(19), 13.13.2(29), K(165), K(169)}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0018-1]}
    @AdaObjDefn{A_Partition_ID_Attribute},      -- @examcom{E.1(9), K(173)}
    @AdaObjDefn{A_Pos_Attribute},               -- @examcom{3.5.5(2), K(175)}
    @AdaObjDefn{A_Position_Attribute},          -- @examcom{13.5.2(2), K(179)}
    @AdaObjDefn{A_Pred_Attribute},              -- @examcom{3.5(25), K(181)}@Chg{Version=[2],New=[
    @AdaObjDefn{A_Priority_Attribute},          -- @examcom{D.2.6(27/2)), K(184.1/2)}],Old=[]}
+
    @AdaObjDefn{A_Range_Attribute},             -- @examcom{3.5(14), 3.6.2(7), K(187), K(189)}
    @AdaObjDefn{A_Read_Attribute},              -- @examcom{13.13.2(6), 13.13.2(14), K(191), K(195)}
    @AdaObjDefn{A_Remainder_Attribute},         -- @examcom{A.5.3(45), K(199)}
    @AdaObjDefn{A_Round_Attribute},             -- @examcom{3.5.10(12), K(203)}
    @AdaObjDefn{A_Rounding_Attribute},          -- @examcom{A.5.3(36), K(207)}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0018-1]}
    @AdaObjDefn{A_Safe_First_Attribute},        -- @examcom{A.5.3(71), G.2.2(5), K(211)}
    @AdaObjDefn{A_Safe_Last_Attribute},         -- @examcom{A.5.3(72), G.2.2(6), K(213)}
    @AdaObjDefn{A_Scale_Attribute},             -- @examcom{3.5.10(11), K(215)}
@@ -1367,17 +1416,21 @@ Literals                       -- @examcom{Reference Manual}]}
    @AdaObjDefn{A_Stream_Size_Attribute},       -- @examcom{13.13.2(1.2/2)), K(237.1/2)}],Old=[]}
    @AdaObjDefn{A_Storage_Pool_Attribute},      -- @examcom{13.11(13), K(232)}
    @AdaObjDefn{A_Storage_Size_Attribute},      -- @examcom{13.3(60), 13.11(14), J.9(2), K(234),}
-                                     -- @examcom{K(236)}
+                                -- @examcom{K(236)}
    @AdaObjDefn{A_Succ_Attribute},              -- @examcom{3.5(22), K(238)}
+
    @AdaObjDefn{A_Tag_Attribute},               -- @examcom{3.9(16), 3.9(18), K(242), K(244)}
    @AdaObjDefn{A_Terminated_Attribute},        -- @examcom{9.9(3), K(246)}
    @AdaObjDefn{A_Truncation_Attribute},        -- @examcom{A.5.3(42), K(248)}
+
    @AdaObjDefn{An_Unbiased_Rounding_Attribute},-- @examcom{A.5.3(39), K(252)}
    @AdaObjDefn{An_Unchecked_Access_Attribute}, -- @examcom{13.10(3), H.4(18), K(256)}
+
    @AdaObjDefn{A_Val_Attribute},               -- @examcom{3.5.5(5), K(258)}
    @AdaObjDefn{A_Valid_Attribute},             -- @examcom{13.9.2(3), H(6), K(262)}
    @AdaObjDefn{A_Value_Attribute},             -- @examcom{3.5(52), K(264)}
    @AdaObjDefn{A_Version_Attribute},           -- @examcom{E.3(3), K(268)}
+
    @AdaObjDefn{A_Wide_Image_Attribute},        -- @examcom{3.5(28), K(270)}
    @AdaObjDefn{A_Wide_Value_Attribute},        -- @examcom{3.5(40), K(274)}@Chg{Version=[2],New=[
    @AdaObjDefn{A_Wide_Wide_Image_Attribute},   -- @examcom{3.5(27.1/2)), K(277.1/2)}
@@ -1387,7 +1440,9 @@ Literals                       -- @examcom{Reference Manual}]}
    @AdaObjDefn{A_Width_Attribute},             -- @examcom{3.5(39), K(280)}
    @AdaObjDefn{A_Write_Attribute},             -- @examcom{13.13.2(3), 13.13.2(11), K(282), K(286)}
 
-   @AdaObjDefn{An_Implementation_Defined_Attribute},  -- @examcom{Reference Manual, Annex M}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+   @AdaObjDefn{An_Implementation_Defined_Attribute},  -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}, Annex M}
+
    @AdaObjDefn{An_Unknown_Attribute});         -- @examcom{Unknown to ASIS}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
@@ -1397,10 +1452,11 @@ the Ada Standard for each attribute.]}
 
 @LabeledSubClause{type Statement_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[Type ],Old=[]}Statement_Kinds
 @Chg{Version=[1],New=[describes],Old=[@en]} classifications of Ada
 statements@Chg{Version=[1],New=[.],Old=[
-Literals                             -- @examcom{Reference Manual}]}
+Literals                             -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1494,9 +1550,9 @@ representing such an alternative.
    @key[end select];
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0037-1]}
 @Chg{Version=[1],New=[@Chg{Version=[2],New=[The type definition is:],Old=[]}],Old=[Path_Kinds
-Literals                      -- @examcom{Reference Manual}]}
+Literals                      -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1541,9 +1597,10 @@ the Ada Standard for each path, and the path represented.]}
 
 @LabeledSubClause{type Clause_Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[1],New=[Type ],Old=[]}Clause_Kinds
 @Chg{Version=[1],New=[describes kinds of clauses.],Old=[
-Literals                      -- @examcom{Reference Manual    -> Subordinate Kinds}]}
+Literals                      -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}    -> Subordinate Kinds}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1557,7 +1614,7 @@ Literals                      -- @examcom{Reference Manual    -> Subordinate Kin
    @AdaObjDefn{A_With_Clause},              -- @examcom{10.1.2}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
-   @Chg{Version=[2],New=[@AdaObjDefn{An_Aspect_Clause}],Old=[@AdaObjDefn{A_Representation_Clause}]},    -- @examcom{13.1     -> @Chg{Version=[2],New=[@AdaObjDefn{Aspect_Clause_Kinds}],Old=[@AdaObjDefn{Representation_Clause_Kinds}]}}
+   @Chg{Version=[2],New=[@AdaObjDefn{An_Aspect_Clause}        ],Old=[@AdaObjDefn{A_Representation_Clause}]},    -- @examcom{13.1     -> @Chg{Version=[2],New=[@AdaObjDefn{Aspect_Clause_Kinds}],Old=[@AdaObjDefn{Representation_Clause_Kinds}]}}
    @AdaObjDefn{A_Component_Clause});        -- @examcom{13.5.1}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
@@ -1568,11 +1625,11 @@ the Ada Standard for each clause, and any subordinate kinds.]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
 @LabeledRevisedSubClause{Version=[2],New=[type Aspect_Clause_Kinds],Old=[type Representation_Clause_Kinds]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0039-1]}
 @Chg{Version=[1],New=[Type ],Old=[]}@Chg{Version=[2],New=[Aspect_Clause_Kinds],Old=[Representation_Clause_Kinds]}
 @Chg{Version=[1],New=[describes],Old=[@en]} varieties of @Chg{Version=[2],New=[aspect],Old=[representation]}
 clauses@Chg{Version=[1],New=[.],Old=[
-Literals                                  -- @examcom{Reference Manual}]}
+Literals                                  -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1613,8 +1670,10 @@ Pragmas that apply to the compilation, of which the unit is a part.
 The context clause contains zero or more with clauses, use clauses,
 @Chg{Version=[2],New=[and pragmas.], Old=[pragma elaborates, and possibly other pragmas.]}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 ASIS treats Pragmas that appear immediately after the context clause and before
-before the subsequent declaration part as belonging to the context clause part.
+@Chg{Version=[2],New=[],Old=[before ]}the subsequent declaration part as
+belonging to the context clause part.
 
 The declaration associated with a compilation unit is one of: a
 package, a procedure, a function, a generic, or a subunit for normal units.
@@ -1690,15 +1749,17 @@ configuration pragmas or comments.
    @AdaObjDefn{A_Generic_Function_Renaming},
    @AdaObjDefn{A_Generic_Package_Renaming},
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
    @AdaObjDefn{A_Procedure_Body},    -- @examcom{A unit interpreted only as the completion}
                         -- @examcom{of a procedure, or a unit interpreted as}
                         -- @examcom{both the declaration and body of a library}
-                        -- @examcom{procedure. Reference Manual 10.1.4(4)}
+                        -- @examcom{procedure. @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.4(4)}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
    @AdaObjDefn{A_Function_Body},     -- @examcom{A unit interpreted only as the completion}
                         -- @examcom{of a function, or a unit interpreted as}
                         -- @examcom{both the declaration and body of a library}
-                        -- @examcom{function. Reference Manual 10.1.4(4)}
+                        -- @examcom{function. @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.4(4)}
 
    @AdaObjDefn{A_Package_Body},
 
@@ -1781,7 +1842,8 @@ Unit_Classes @Chg{Version=[1],New=[defines],Old=[@en]} classification of public,
 
 @begin{DescribeCode}
 @begin{Example}
-@key[type] @AdaTypeDefn{Unit_Classes} @key[is] (  -- @examcom{Reference Manual 10.1.1(12), 10.1.3}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@key[type] @AdaTypeDefn{Unit_Classes} @key[is] (  -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.1(12), 10.1.3}
 
    @AdaObjDefn{Not_A_Class},              -- @examcom{A nil, nonexistent, unknown,}
                              -- @examcom{or configuration compilation unit class.}
@@ -1792,10 +1854,11 @@ Unit_Classes @Chg{Version=[1],New=[defines],Old=[@en]} classification of public,
    @AdaObjDefn{A_Public_Body},            -- @examcom{library_unit_body interpreted only as a}
                              -- @examcom{completion. Its declaration is public.}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
    @AdaObjDefn{A_Public_Declaration_And_Body},
                              -- @examcom{subprogram_body interpreted as both a}
                              -- @examcom{declaration and body of a library}
-                             -- @examcom{subprogram - Reference Manual 10.1.4(4).}
+                             -- @examcom{subprogram - @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.4(4).}
 
    @AdaObjDefn{A_Private_Declaration},    -- @examcom{private library_unit_declaration or}
                              -- @examcom{private library_unit_renaming_declaration.}
@@ -1848,103 +1911,104 @@ Unit_Origins @Chg{Version=[1],New=[defines],Old=[@en]} classification of possibl
 Relation_Kinds @Chg{Version=[1],New=[defines],Old=[@en]} classification of unit
 relationships@Chg{Version=[1],New=[.],Old=[]}
 
+@ChgNote{This was completely rearranged; the text was not changed. We don't
+record the order changes. - RLB]}
+
 @begin{DescribeCode}
 @begin{Example}
 @key[type] @AdaTypeDefn{Relation_Kinds} @key[is] (
    @AdaObjDefn{Ancestors},
    @AdaObjDefn{Descendants},
+   @AdaObjDefn{Supporters},
+   @AdaObjDefn{Dependents},
+   @AdaObjDefn{Family},
+   @AdaObjDefn{Needed_Units});
 @end{Example}
 
-@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------
+@begin{Itemize}
+@ChgDeleted{Version=[1],NoPrefix=[T],Text=[-----------------------------------------------------------------------------
 Definition:  ANCESTORS of a unit; DESCENDANTS of a unit]}
 
 @i{Ancestors}@Defn2{Term=[Ancestor],Sec=[of a library unit]} of a library unit
 are itself, its parent, its parent's
 parent, and so on. (Standard is an ancestor of every library unit).
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 The @i{Descendants} relation is the inverse of the ancestor relation.
-Reference Manual 10.1.1(11).@Defn2{Term=[Ancestor],Sec=[of a library unit]}
+@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.1(11).@Defn2{Term=[Ancestor],Sec=[of a library unit]}
 
-@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------]}
+@ChgDeleted{Version=[1],NoPrefix=[T],Text=[-----------------------------------------------------------------------------]}
 
-@begin{Example}
-   @AdaObjDefn{Supporters},
-@end{Example}
-
-@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------
+@ChgDeleted{Version=[1],NoPrefix=[T],Text=[-----------------------------------------------------------------------------
 Definition:  SUPPORTERS of a unit]}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @i{Supporters} of a compilation unit are units on which it semantically
-depends. Reference Manual 10.1.1(26).@Defn2{Term=[Supporter],Sec=[of a compilation unit]}
+depends. @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.1(26).@Defn2{Term=[Supporter],Sec=[of a compilation unit]}
 
-The Supporters relation is transitive; units that are supporters of library
+@NoPrefix@;The Supporters relation is transitive; units that are supporters of library
 units mentioned in a with clause of a compilation unit are also supporters
 of that compilation unit.
 
-A parent declaration is a Supporter of its descendant units.
+@NoPrefix@;A parent declaration is a Supporter of its descendant units.
 
+@NoPrefix@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Each library unit mentioned in the with clauses of a compilation unit
 is a Supporter of that compilation unit and (recursively) any
 completion, child units, or subunits that are included in the declarative
-region of that compilation unit. Reference Manual 8.1(7-10).
+region of that compilation unit. @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 8.1(7-10).
 
-A library_unit_body has as a Supporter, its corresponding
+@NoPrefix@;A library_unit_body has as a Supporter, its corresponding
 library_unit_declaration, if any.
 
-The parent body of a subunit is a Supporter of the subunit.
+@NoPrefix@;The parent body of a subunit is a Supporter of the subunit.
 
-@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------]}
+@ChgDeleted{Version=[1],NoPrefix=[T],Text=[-----------------------------------------------------------------------------]}
 
-@begin{Example}
-   @AdaObjDefn{Dependents},
-@end{Example}
-
-@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------
+@ChgDeleted{Version=[1],NoPrefix=[T],Text=[-----------------------------------------------------------------------------
 Definition:  DEPENDENTS of a unit]}
 
 @i{Dependents} of a compilation unit are all the compilation units that
 depend semantically on it.@Defn2{Term=[Dependents],Sec=[of a compilation unit]}
 
-The Dependents relation is transitive; Dependents of a unit include the
+@NoPrefix@;The Dependents relation is transitive; Dependents of a unit include the
 unit's Dependents, each dependent unit's Dependents, and so on. A unit
 that is a dependent of a compilation unit also is a dependent
 of the compilation unit's Supporters.
 
-Child units are Dependents of their ancestor units.
+@NoPrefix@;Child units are Dependents of their ancestor units.
 
-A compilation unit that mentions other library units in its with
+@NoPrefix@;A compilation unit that mentions other library units in its with
 clauses is one of the Dependents of those library units.
 
-A library_unit_body is a Dependent of its corresponding
+@NoPrefix@;A library_unit_body is a Dependent of its corresponding
 library_unit_declaration, if any.
 
-A subunit is a Dependent of its parent body.
+@NoPrefix@;A subunit is a Dependent of its parent body.
 
-A compilation unit that contains an attribute_reference of a type defined
+@NoPrefix@;A compilation unit that contains an attribute_reference of a type defined
 in another compilation unit is a Dependent of the other unit.
 
-For example:
+@NoPrefix@;For example:
 
 @begin{Display}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
+@NoPrefix@;@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 If A @Chg{Version=[2],New=[mentions B and B mentions C in with_clauses],Old=[withs B and B withs C]}
-then A directly depends on A, B directly depends on C,
-    A indirectly depends on C, and
-    both A and B are dependents of C.
+then A directly depends on @Chg{Version=[2],New=[B],Old=[A]},
+   B directly depends on C,
+   A indirectly depends on C, and
+   both A and B are dependents of C.
 @end{Display}
 
-Dependencies between compilation units may also be introduced by
-inline inclusions (Reference Manual 10.1.4(7)) and for certain other compiler
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@NoPrefix@;Dependencies between compilation units may also be introduced by
+inline inclusions (@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.4(7)) and for certain other compiler
 optimizations. These relations are intended to reflect all of these
 considerations.
 
-@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------]}
+@ChgDeleted{Version=[1],NoPrefix=[T],Text=[-----------------------------------------------------------------------------]}
 
-@begin{Example}
-   @AdaObjDefn{Family},
-@end{Example}
-
-@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------
+@ChgDeleted{Version=[1],NoPrefix=[T],Text=[-----------------------------------------------------------------------------
 Definition:  FAMILY of a unit]}
 
 The @i{family} of a given unit is defined as the set of compilation
@@ -1952,28 +2016,25 @@ units that comprise the given unit's declaration, body, descendants,
 and subunits (and subunits of subunits and descendants,
 etc.).@Defn2{Term=[Family],Sec=[of a compilation unit]}
 
-@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------]}
+@ChgDeleted{Version=[1],NoPrefix=[T],Text=[-----------------------------------------------------------------------------]}
 
-@begin{Example}
-   @AdaObjDefn{Needed_Units});
-@end{Example}
-
-@ChgDeleted{Version=[1],Text=[-----------------------------------------------------------------------------
+@ChgDeleted{Version=[1],NoPrefix=[T],Text=[-----------------------------------------------------------------------------
 Definition:  NEEDED UNITS of a unit; CLOSURE of a unit]}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 The @i{needed units} of a given unit is defined as the set of all
 the Ada units ultimately needed by that unit to form a partition.
-Reference Manual 10.2(2-7).@Defn2{Term=[Needed units],Sec=[of a compilation unit]}
+@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.2(2-7).@Defn2{Term=[Needed units],Sec=[of a compilation unit]}
 
-The term @i{closure} is commonly used with similar
+@NoPrefix@;The term @i{closure} is commonly used with similar
 meaning.@Defn2{Term=[Closure],Sec=[of a compilation unit]}
 
-For example:
+@NoPrefix@;For example:
 
-Assume the body of C has a subunit C.S and the declaration of C has child units C.Y and C.Z.
+@NoPrefix@;Assume the body of C has a subunit C.S and the declaration of C has child units C.Y and C.Z.
 
 @begin{Display}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
+@NoPrefix@;@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 If A @Chg{Version=[2],New=[mentions B and B mentions C and C.Y in with_clauses and C does not
 have a with_clause, then], Old=[withs B, B withs C, B withs C.Y, and C does not with a library
 unit. Then]} the needed units of A are:
@@ -1987,8 +2048,9 @@ unit. Then]} the needed units of A are:
     library unit declaration A
     library unit body A, if any
 
-Child unit C.Z is only part of the Needed_Units if it is needed.
+@NoPrefix@;Child unit C.Z is only part of the Needed_Units if it is needed.
 @end{Display}
+@end{Itemize}
 @end{DescribeCode}
 
 @LabeledClause{type Traverse_Control}

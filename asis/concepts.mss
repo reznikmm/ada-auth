@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/concepts.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2009/03/04 01:07:17 $}
+@comment{$Revision: 1.8 $ $Date: 2009/03/13 07:12:33 $}
 
 
 @LabeledSection{ASIS technical concepts}
@@ -62,6 +62,7 @@ shown in Figure 3. ASIS may process several different contexts at a time.
 
 @b{Figure 3 @em Application interface to ASIS Context}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 A context may have one or more Compilation_Units. ASIS has defined
 Compilation_Unit as an ASIS private type. This type has values which denote an
 Ada compilation unit@Defn{Compilation unit} or configuration
@@ -73,7 +74,8 @@ result of compiling a configuration pragma. An ASIS @i{compilation unit} include
 the notion of some implementation-defined way to associate the corresponding
 ASIS object with some physical external object. This is necessary to support
 ASIS queries such as Time_Of_Last_Update and Text_Name which have no relation
-to the Reference Manual-defined notion of an Ada compilation unit.
+to the @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}-defined
+notion of an Ada compilation unit.
 
 To facilitate the use of context, implementations may support the use of
 @i{containers} which are logical collections of ASIS compilation
@@ -131,9 +133,11 @@ Semantic queries about Dependence Order.
 
 @LabeledSubClause{General ASIS query processing}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Both structural (syntactic) and semantic queries are facilitated through the
 notion of ASIS elements and their kinds. Most ASIS queries provide for the
-processing of specific constructs with respect to the Ada Reference Manual and
+processing of specific constructs with respect to the Ada @Chg{Version=[2],
+New=[Standard],Old=[Reference Manual]} and
 the processing of their lists.
 
 
@@ -179,26 +183,29 @@ program text for the compilation unit, but could occur at a given place in the
 program text as a consequence of the semantics of another construct (e.g., an
 implicit declaration, a generic instantiation).
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 ASIS provides the ability to visit elements of the tree and ask questions of
 each element. One key hierarchy of questions begins with: @ldquote@;What kind
 of element
 do I have?@rquote Elements of the highest level of the ASIS hierarchy are
 classified into kinds. The following table identifies the high level hierarchy
 of kinds, the primary ASIS package to support processing of those kinds, and
-the references for those kinds in the Ada Reference Manual.
+the references for those kinds in the
+Ada @Chg{Version=[2],New=[Standard],Old=[Reference Manual]}.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @table{Columns=[3],Alignment=[Allleft],FirstColWidth=[1],LastColWidth=[2],
 NoBreak=[F],Border=[F],SmallSize=[F],Caption=[],Headers=[],
-Body=[A_Defining_Name@\Asis.Definitions@\Reference Manual  3, 6
-A_Declaration@\Asis.Declarations@\Reference Manual  3, 5, 6, 7, 8, 9, 10, 11, 12
-A_Definition@\Asis.Definitions@\Reference Manual  3, 7, 9, 12
-An_Expression@\Asis.Expressions@\Reference Manual  2, 4
-A_Statement@\Asis.Statements@\Reference Manual  5, 6, 9, 11, 13
-A_Path@\Asis.Statements@\Reference Manual  5, 9
-A_Clause@\Asis.Clauses@\Reference Manual  8, 10, 13
-An_Association@\Asis.Expressions@\Reference Manual  2, 3, 4, 6, 12
-An_Exception_Handler@\Asis.Statements@\Reference Manual  11.2@last
-A_Pragma@\Asis.Elements@\Reference Manual  2, 10, 11, 13, B, G, H, I, L]}
+Body=[A_Defining_Name@\Asis.Definitions@\@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}  3, 6
+A_Declaration@\Asis.Declarations@\@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}  3, 5, 6, 7, 8, 9, 10, 11, 12
+A_Definition@\Asis.Definitions@\@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}  3, 7, 9, 12
+An_Expression@\Asis.Expressions@\@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}  2, 4
+A_Statement@\Asis.Statements@\@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}  5, 6, 9, 11, 13
+A_Path@\Asis.Statements@\@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}  5, 9
+A_Clause@\Asis.Clauses@\@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}  8, 10, 13
+An_Association@\Asis.Expressions@\@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}  2, 3, 4, 6, 12
+An_Exception_Handler@\Asis.Statements@\@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}  11.2@last
+A_Pragma@\Asis.Elements@\@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}  2, 10, 11, 13, B, G, H, I, L]}
 
 The function Asis.Elements.Element_Kind classifies any element into one of
 these kinds. Once the client knows that an element is a declaration, for
@@ -209,16 +216,16 @@ structures like the following.
 @begin{Examples}
 @leading@;Case statement to classify elements:
 @begin{Example}
-@key[case] Asis.Elements.Element_Kind (My_Element) @key[is]               -- @examcom{@RefSecNum{function Element_Kind}}
-   @key[when] Asis.A_Declaration =>                                -- @examcom{ @RefSecNum{type Element_Kinds}}
-      @key[case] Asis.Elements.Declaration_Kind (My_Element) @key[is]   -- @examcom{@RefSecNum{function Declaration_Kind}}
+@key[case] Asis.Elements.Element_Kind (My_Element) @key[is]            -- @examcom{@RefSecNum{function Element_Kind}}
+   @key[when] Asis.A_Declaration =>                              -- @examcom{ @RefSecNum{type Element_Kinds}}
+      @key[case] Asis.Elements.Declaration_Kind (My_Element) @key[is]  -- @examcom{@RefSecNum{function Declaration_Kind}}
          @key[when] Asis.A_Variable_Declaration =>               -- @examcom{ @RefSecNum{type Declaration_Kinds}}
             { statement }
          @key[when others] =>
             @key[null];
       @key[end case];
-   @key[when] Asis.A_Statement =>                                  -- @examcom{ @RefSecNum{type Element_Kinds}}
-      @key[case] Asis.Elements.Statement_Kind (My_Element) @key[is]     -- @examcom{@RefSecNum{function Statement_Kind}}
+   @key[when] Asis.A_Statement =>                                -- @examcom{ @RefSecNum{type Element_Kinds}}
+      @key[case] Asis.Elements.Statement_Kind (My_Element) @key[is]    -- @examcom{@RefSecNum{function Statement_Kind}}
          @key[when] Asis.A_Block_Statement =>                    -- @examcom{ @RefSecNum{type Statement_Kinds}}
             @i[{ statement }]
          @key[when others] =>
@@ -441,17 +448,19 @@ implementor-independent manner. Package ASIS is the root of the ASIS interface.
 All other packages are child packages of package Asis. These packages are:
 
 @begin{Itemize}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @b{Asis.Ada_Environments} @en This child package encapsulates a set of queries
 that map physical Ada compilation and program execution environments to logical
 ASIS environments. An ASIS Context is associated with some set of Ada
 compilation units maintained by an underlying Ada implementation. After this
 association has been made, this set of units is considered to be part of the
 compile-time Ada environment, which forms the outermost context of any
-compilation, as specified in section 10.1.4 of the Ada Reference manual. This
+compilation, as specified in section 10.1.4 of the
+Ada @Chg{Version=[2],New=[Standard],Old=[Reference manual]}. This
 same environment context provides the implicit outermost anonymous task during
 program execution. If an Ada implementation supports the notion of a program
 library or @ldquote@;library@rdquote as specified in section 10(2) of the
-Ada Reference Manual,
+Ada @Chg{Version=[2],New=[Standard],Old=[Reference Manual]},
 then an ASIS Context value can be mapped onto one or more implementor libraries
 represented by Containers. More than one context may be manipulated at a time.
 Important interfaces include: Associate, Dissociate, Open, and Close (see
@@ -495,7 +504,7 @@ operate on all elements and some queries specific to A_Pragma elements.
 Element_Kinds, defined in package Asis are defined as enumeration types
 describing the various kinds of elements. ASIS offers a hierarchical
 classification of elements. At the highest level, the Element_Kinds type
-provides literals that define “kinds” or classes into which all non-nil
+provides literals that define "kinds" or classes into which all non-nil
 elements are grouped. Element_Kinds are: Not_An_Element, A_Pragma,
 A_Defining_Name, A_Declaration, A_Definition, An_Expression, An_Association,
 A_Statement, A_Path, A_Clause, and An_Exception_Handler. Elements in each of
@@ -661,25 +670,25 @@ exists and must be reported by identifying the line number of the violation.
 Otherwise, there is no processing for this Element.
 
 @begin{Example}
-@key[procedure] Check_Short_Circuit (Elem : @key[in] Asis.Element) @key[is]        -- @examcom{ @RefSecNum{type Element}}
-   Op_Kind : Asis.Operator_Kinds :=                              -- @examcom{ @RefSecNum{type Operator_Kinds}}
-                 Asis.Elements.Operator_Kind (Elem);             -- @examcom{@RefSecNum{function Operator_Kind}}
+@key[procedure] Check_Short_Circuit (Elem : @key[in] Asis.Element) @key[is]             -- @examcom{ @RefSecNum{type Element}}
+   Op_Kind : Asis.Operator_Kinds :=                                   -- @examcom{ @RefSecNum{type Operator_Kinds}}
+                 Asis.Elements.Operator_Kind (Elem);                  -- @examcom{@RefSecNum{function Operator_Kind}}
 
 @key[begin]
    @key[case] Op_Kind @key[is]
 
-      @key[when] Asis.An_And_Operator =>                               -- @examcom{ @RefSecNum{type Operator_Kinds}}
+      @key[when] Asis.An_And_Operator =>                                    -- @examcom{ @RefSecNum{type Operator_Kinds}}
          Put_Line ("Violation of Short Circuit Operator guideline:");
-         Put ("-- @examcom{Use of AND Operator at line ");}
-         Put (Asis.Text.Line_Number'Wide_Image                   -- @examcom{@RefSecNum{type Line_Number}}
-                      (Asis.Text.First_Line_Number (Elem)));     -- @examcom{@RefSecNum{function First_Line_Number}}
+         Put ("-- Use of AND Operator at line ");
+         Put (Asis.Text.Line_Number'Wide_Image                        -- @examcom{@RefSecNum{type Line_Number}}
+                      (Asis.Text.First_Line_Number (Elem)));          -- @examcom{@RefSecNum{function First_Line_Number}}
          New_Line;
 
-      @key[when] Asis.An_Or_Operator =>                                -- @examcom{ @RefSecNum{type Operator_Kinds}}
+      @key[when] Asis.An_Or_Operator =>                                     -- @examcom{ @RefSecNum{type Operator_Kinds}}
          Put_Line ("Violation of Short Circuit Operator guideline:");
-         Put ("-- @examcom{Use of OR Operator at line ");}
-         Put (Asis.Text.Line_Number'Wide_Image                   -- @examcom{@RefSecNum{type Line_Number}}
-                (Asis.Text.First_Line_Number (Elem)));           -- @examcom{@RefSecNum{function First_Line_Number}}
+         Put ("-- Use of OR Operator at line ");
+         Put (Asis.Text.Line_Number'Wide_Image                        -- @examcom{@RefSecNum{type Line_Number}}
+                (Asis.Text.First_Line_Number (Elem)));                -- @examcom{@RefSecNum{function First_Line_Number}}
          New_Line;
 
       @key[when others] =>
@@ -725,12 +734,12 @@ The function Is_Library_Level returns true when the Unit_Class of the
 Compilation_Unit is A_Public_Declaration.
 
 @begin{Example}
-@key[function] Is_Library_Level (CU : Asis.Compilation_Unit)          -- @examcom{ @RefSecNum{type Compilation_Unit}}
+@key[function] Is_Library_Level (CU : Asis.Compilation_Unit)               -- @examcom{ @RefSecNum{type Compilation_Unit}}
    @key[return] Boolean @key[is]
 @key[begin]
 
-   @key[case] Asis.Compilation_Units.Unit_Class (CU) @key[is]               -- @examcom{@RefSecNum{function Unit_Class}}
-      @key[when] Asis.A_Public_Declaration =>                         -- @examcom{ @RefSecNum{type Unit_Classes}}
+   @key[case] Asis.Compilation_Units.Unit_Class (CU) @key[is]                    -- @examcom{@RefSecNum{function Unit_Class}}
+      @key[when] Asis.A_Public_Declaration =>                              -- @examcom{ @RefSecNum{type Unit_Classes}}
           @key[return] True;
       @key[when others] =>
           @key[return] False;

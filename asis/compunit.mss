@@ -1,6 +1,6 @@
 @Part(compunit, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/compunit.mss,v $}
-@comment{$Revision: 1.11 $ $Date: 2009/03/07 06:33:30 $}
+@comment{$Revision: 1.12 $ $Date: 2009/03/13 07:12:33 $}
 
 
 @LabeledSection{package Asis.Compilation_Units}
@@ -102,7 +102,7 @@ Returns the Unit_Origins value of the unit.
 Returns Not_An_Origin for a compilation_unit whose Unit_Kind is
 Not_A_Unit,
 @Chg{Version=[2],New=[],Old=[An_Unknown_Unit, ]}A_Nonexistent_Declaration,
-Chg{Version=[2],New=[],Old=[or ]}A_Nonexistent_Body@Chg{Version=[2],New=[, or
+@Chg{Version=[2],New=[],Old=[or ]}A_Nonexistent_Body@Chg{Version=[2],New=[, or
 possibly An_Unknown_Unit],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -819,11 +819,12 @@ Two nonexistent units are Is_Equal if they have the same Name and Unit_Kind.
 Left @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the first unit to compare.
 Right @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the second unit to compare.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0037-1]}
 Returns True if Left and Right represent the same physical compilation
 unit, from the same open ASIS Context variable, or, if both are
 Nil_Compilation_Unit values.@Chg{Version=[2],New=[],Old=[ (@ldquote@;The same physical compilation
-unit@rdquote@; have the same version, as defined by Reference Manual E.3(5)
+unit@rdquote@; have the same version, as defined
+by @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} E.3(5)
 and the same program text.)]}
 
 Two nonexistent units are Is_Identical if they have the same
@@ -915,10 +916,11 @@ Old=[All Unit_Kinds are expected]}.
 
 Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to test.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Returns True if the Compilation_Unit exists and is a subprogram
 library_unit_declaration, library_unit_renaming_declaration, or
-library_unit_body that can be used as a main subprogram. See Reference
-Manual 10.2(7).
+library_unit_body that can be used as a main subprogram.
+See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.2(7).
 
 Returns False otherwise.
 
@@ -942,11 +944,12 @@ Old=[All Unit_Kinds are expected]}.
 Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
 unit to test.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0038-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0038-1]}
 Returns True if the Compilation_Unit exists and @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0038-1]}
 @Chg{Version=[2],New=[requires a body to be present to make up a complete
 partition; otherwise returns False.], Old=[is a library
-package_declaration that requires a body. See Reference Manual 7.2(4).]}
+package_declaration that requires a body. See
+@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 7.2(4).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
@@ -1044,10 +1047,10 @@ Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
 unit whose object form is desired.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
-Returns the Form parameter (as for ChgAdded{Version=[2],Text=[Ada.]}Text_Io.Open) for the object, or
-other structure, that was the machine-code result of the compilation of
-this Compilation_Unit. Returns a null string if the unit has a Nil or
-nonexistent kind, if the object was created with an empty Form parameter,
+Returns the Form parameter (as for @Chg{Version=[2],New=[Ada.],Old=[]}Text_Io.Open)
+for the object, or other structure, that was the machine-code result of the
+compilation of this Compilation_Unit. Returns a null string if the unit has a
+Nil or nonexistent kind, if the object was created with an empty Form parameter,
 or if the object Form parameter value is not available for any reason.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}

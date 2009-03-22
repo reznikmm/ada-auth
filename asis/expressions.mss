@@ -1,6 +1,6 @@
 @Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.13 $ $Date: 2009/03/07 06:33:31 $}
+@comment{$Revision: 1.14 $ $Date: 2009/03/13 07:12:33 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -178,10 +178,10 @@ nominal subtype.  For example, for the following program text:]}
 
 @begin{ChildExample}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[@key[type] Int @key[is range] -5_000 .. 5_000;
+@ChgAdded{Version=[2],Text=[@-{@key[type] Int @key[is range] -5_000 .. 5_000;
 @key[type] My_Int @key[is new] Int;
 @key[type] Good_Int @key[is new] My_Int;
-Var: Good_Int @key[range] -2_000 .. 2_000;]}
+Var: Good_Int @key[range] -2_000 .. 2_000;}]}
 @end{ChildExample}
 
 @ChgRef{Version=[2],Kind=[Added]}
@@ -965,10 +965,10 @@ An_Expression
 @end{Display}
 @end{DescribeCode}
 
-@b{Implementation Permissions}
-
+@begin{ImplPerm}
 This query returns a list to support implementation-defined attributes
 that may have more than one static_expression.
+@end{ImplPerm}
 
 
 @LabeledClause{function Record_Component_Associations}

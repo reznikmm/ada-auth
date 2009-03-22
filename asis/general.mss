@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.16 $ $Date: 2009/03/04 01:07:17 $}
+@comment{$Revision: 1.17 $ $Date: 2009/03/13 07:12:33 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -46,9 +46,11 @@ environment implementations, thus supporting portability of software
 engineering tools while relieving tool developers from needing to understand
 the complexities of an Ada environment's proprietary internal representation.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Examples of tools that benefit from the ASIS interface include: automated code
 monitors, browsers, call tree tools, code reformators, coding standards
-compliance tools, correctness verifiers, debuggers, dependency tree analysis
+compliance tools, correctness verifiers,
+@Chg{Version=[2],New=[],Old=[debuggers, ]}dependency tree analysis
 tools, design tools, document generators, metrics tools, quality assessment
 tools, reverse engineering tools, re-engineering tools, safety and security
 tools, style checkers, test tools, timing estimators, and translators.
@@ -56,8 +58,10 @@ tools, style checkers, test tools, timing estimators, and translators.
 This International Standard specifies the form and meaning of the ASIS
 interface to the Ada compilation environment.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 This International Standard is applicable to tools and applications needing
-syntactic and semantic information in the Ada compilation environment.
+syntactic and semantic information @Chg{Version=[2],New=[from],Old=[in]}
+the Ada compilation environment.
 
 @LabeledSubClause{Extent}
 
@@ -93,62 +97,95 @@ ASIS implementers and standards writers.]}
 
 @LabeledSubClause{Structure}
 
-This International Standard contains twenty-three clauses and four annexes.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+This International Standard contains twenty-three @Chg{Version=[2],New=[sections],Old=[clauses]}
+and @Chg{Version=[2],New=[six],Old=[four]} annexes.
 
-Clause 1 is general in nature providing the scope of this International
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 1 is general in nature providing the scope of this International
 Standard, normative references, and definitions.
 
-Clause 2 identifies the ASIS technical concepts. Here the Ada compilation
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 2 identifies the ASIS technical concepts. Here the Ada compilation
 environment to which ASIS interfaces is described. The concept of queries is
 presented. The ASIS package architecture is presented.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 The packages that comprise the ASIS International Standard are provided in
-Clauses 3 through 23.@Chg{Version=[1],New=[],Old=[ These packages are provided
+@Chg{Version=[2],New=[Section],Old=[Clause]}s 3 through 23.@Chg{Version=[1],New=[],Old=[ These packages are provided
 in the correct compilation order and when presented in electronic format are
 compilable.]}
 
 @begin{Itemize}
-Clause  3   package Asis
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]}  3   package Asis
 
-Clause  4   package Asis.Errors
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]}  4   package Asis.Errors
 
-Clause  5   package Asis.Exceptions
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]}  5   package Asis.Exceptions
 
-Clause  6   package Asis.Implementation
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]}  6   package Asis.Implementation
 
-Clause  7   package Asis.Implementation.Permissions
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]}  7   package Asis.Implementation.Permissions
 
-Clause  8   package Asis.Ada_Environments
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]}  8   package Asis.Ada_Environments
 
-Clause  9   package Asis.Ada_Environments.Containers
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]}  9   package Asis.Ada_Environments.Containers
 
-Clause 10   package Asis.Compilation_Units
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 10   package Asis.Compilation_Units
 
-Clause 11   package Asis.Compilation_Units.Times
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 11   package Asis.Compilation_Units.Times
 
-Clause 12   package Asis.Compilation_Units.Relations
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 12   package Asis.Compilation_Units.Relations
 
-Clause 13   package Asis.Elements
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 13   package Asis.Elements
 
-Clause 14   package Asis.Iterator
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 14   package Asis.Iterator
 
-Clause 15   package Asis.Declarations
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 15   package Asis.Declarations
 
-Clause 16   package Asis.Definitions
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 16   package Asis.Definitions
 
-Clause 17   package Asis.Expressions
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 17   package Asis.Expressions
 
-Clause 18   package Asis.Statements
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 18   package Asis.Statements
 
-Clause 19   package Asis.Clauses
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 19   package Asis.Clauses
 
-Clause 20   package Asis.Text
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 20   package Asis.Text
 
-Clause 21   package Asis.Ids
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 21   package Asis.Ids
 
-Clause 22   package Asis.Data_Decomposition (optional package)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 22   package Asis.Data_Decomposition (optional package)
 
-Clause 23   package Asis.Data_Decomposition.Portable_Transfer
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 23   package @Chg{Version=[2],New=[Asis.Views, Asis.Program_Units,
+Asis.Subtype_Views, Asis.Subtype_Views.Elementary, Asis.Subtype_Views.Composite,
+Asis.Object_Views, Asis.Object_Views.Access_Views, Asis.Profiles,
+Asis.Callable_Views,
+Asis.Package_Views, Asis.Generic_Views, Asis.Exception_Views,
+Asis.Statement_Views, Asis.Declarations.Views, Asis.Definitions.Views,
+and Asis.Expressions.Views],Old=[Asis.Data_Decomposition.Portable_Transfer]}
+
 @end{Itemize}
 
 The following annexes are informative:
@@ -336,7 +373,7 @@ Standard states that implementations may vary.
 No specifications other than those described in this subclause shall be present
 in the conformance document.
 
-The phrase @ldquote@;shall be documented@rdquote@; in this International
+The phrase @i{shall be documented} in this International
 Standard means that documentation of the feature shall appear in the
 conformance document, as described previously, unless the system documentation
 is explicitly mentioned.@Defn{shall be documented}
@@ -347,6 +384,7 @@ conformance document.
 
 @LabeledSubSubClause{Implementation conformance categories}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 An implementation is required to define all of the subprograms for all of the
 operations defined in this International Standard, including those whose
 implementation is optional. @i{Required functionality} is the subset of ASIS
@@ -356,10 +394,11 @@ explicitly identified in the ASIS standard as optional which may legitimately
 be omitted from a Basic Conforming ASIS implementation.@Defn{Optional functionality}
 Optional interfaces
 shall be included in any Fully Conforming ASIS implementation, unless stated
-otherwise in the ASIS specification. An application that accesses an Ada
-environment’s semantic tree (e.g., Diana Tree) directly using work-arounds is
-not considered to be a conformant application. All Conforming Applications fall
-within one of the categories defined below.
+otherwise in the ASIS specification.@Chg{Version=[2],New=[],Old=[ An
+application that accesses an Ada
+environment's semantic tree (e.g., Diana Tree) directly using work-arounds is
+not considered to be a conformant application.]} All Conforming Applications
+fall within one of the categories defined below.
 
 If an unimplemented feature is used, the exception Asis.ASIS_Failed shall be
 raised and Asis.Implementation_Status shall return the value for Error_Kinds of
@@ -402,12 +441,14 @@ Implementation.@Defn2{Term=[Fully conforming ASIS implementation],Sec=[using ext
 
 @LabeledSubSubClause{Application conformance categories}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 An @i{ASIS application} is any programming system or any set of software
 components making use of ASIS queries to obtain information about any set of
 Ada components. All ASIS applications claiming conformance to this
 International Standard shall use a Conforming ASIS Implementation with or
-without extensions.@Defn{ASIS application}
-
+without extensions.@Defn{ASIS application}@Chg{Version=[2],New=[ In any case,
+an application that accesses an Ada environment directly (other than through
+ASIS) is not considered to be a conformant application.],Old=[]}
 
 @Subheading{Basic conforming ASIS application}
 
@@ -446,76 +487,104 @@ Using Extensions may or may not be portable to other Fully Conforming ASIS
 Implementation Using Extensions.@Defn2{Term=[Fully conforming ASIS application],Sec=[using extensions]}
 
 
-@LabeledSubClause{Implementation permissions}
+@LabeledRevisedSubClause{Version=[2],New=[obsolete clause Impl Perms],
+Old=[Implementation permissions]}
+@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
+removing it now would change all of the clause numbers,
+and that would make a mess for editing and reference purposes. Ultimately,
+when the final standard is produced, it will be removed. - RLB}}]}
 
-The ASIS Application Program Interface (API) may be implemented through a
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[The ASIS Application Program Interface (API) may be implemented through a
 variety of approaches. Approaches permitted by this International Standard are
 based on the traditional approach and the client /server approach. These
-implementation permissions are depicted in Figure 1 and described below:
+implementation permissions are depicted in Figure 1 and described below:]}
 
 
-@LabeledSubSubClause{Traditional approach (permission 1)}
+@ChgNote{SI99-0047-1 remove junk}
+@Chg{Version=[2],New=[],Old=[Traditional approach (permission 1)]}
+@ChgNote{This subsubclause header was removed as there are no remaining clauses
+after it. - RLB}
 
-Traditionally, the ASIS API implementation is intended to execute on the node
-containing the implementor's Ada software engineering environment and the
-desired Ada compilation environment. Because the ASIS API interfaces directly,
-ASIS performs at its best. It is expected that most ASIS implementors will
-support this approach as it requires little additional effort when alternative
-approaches are supported. In Figure 1, the client tool using Permission 1 uses
-the ASIS specification exactly as specified in this International Standard.
-ASIS tools and applications are compiled in the implementor's environment.
-
-
-@LabeledSubSubClause{Client / server approach (permission 2)}
-
-As an alternative, a client / server approach can be used to implement the ASIS
-API. Here the ASIS API is supported by a server; ASIS client tools can request
-ASIS services within the supported network.
-
-Figure 1 identifies four ASIS client tools using permission 2 capable of
-interfacing with an ASIS Object Request Broker (ORB) server. One client tool is
-written in Ada, one in Java, one in C++, and one in Smalltalk. The ORB serves
-as a broker between the client and server on a network consisting of many
-nodes. Server location and services are registered with the ORB. A client
-needing the services interfaces with the ORB, who brokers the needed server
-interface information. The interface between a client and server is written as
-an interface specification in the Interface Definition Language (IDL). IDL is
-very different from most computer languages; when IDL is compiled, the
-interface specification is produced in either Ada, Java, C++, or Smalltalk. In
-addition, the necessary artifacts are produced to register the client or server
-interface with the ORB.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[Traditionally, the ASIS API implementation is
+intended to execute on the node containing the implementor's Ada software
+engineering environment and the desired Ada compilation environment. Because the
+ASIS API interfaces directly, ASIS performs at its best. It is expected that
+most ASIS implementors will support this approach as it requires little
+additional effort when alternative approaches are supported. In Figure 1, the
+client tool using Permission 1 uses the ASIS specification exactly as specified
+in this International Standard. ASIS tools and applications are compiled in the
+implementor's environment.]}
 
 
-@LabeledSubSubClause{Distributed traditional approach (permission 3)}
+@ChgNote{SI99-0047-1 remove junk}
+@Chg{Version=[2],New=[],Old=[Client / server approach (permission 2)]}
+@ChgNote{This subsubclause header was removed as there are no remaining clauses
+after it. - RLB}
 
-The Ada specification created by the compilation of this ASIS API in IDL is
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[As an alternative, a client / server approach can
+be used to implement the ASIS API. Here the ASIS API is supported by a server;
+ASIS client tools can request ASIS services within the supported network.]}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[Figure 1 identifies four ASIS client tools using
+permission 2 capable of interfacing with an ASIS Object Request Broker (ORB)
+server. One client tool is written in Ada, one in Java, one in C++, and one in
+Smalltalk. The ORB serves as a broker between the client and server on a network
+consisting of many nodes. Server location and services are registered with the
+ORB. A client needing the services interfaces with the ORB, who brokers the
+needed server interface information. The interface between a client and server
+is written as an interface specification in the Interface Definition Language
+(IDL). IDL is very different from most computer languages; when IDL is compiled,
+the interface specification is produced in either Ada, Java, C++, or Smalltalk.
+In addition, the necessary artifacts are produced to register the client or
+server interface with the ORB.]}
+
+
+@ChgNote{SI99-0047-1 remove junk}
+@Chg{Version=[2],New=[],Old=[Distributed traditional approach (permission 3)]}
+@ChgNote{This subsubclause header was removed as there are no remaining clauses
+after it. - RLB}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[The Ada specification created by the compilation of this ASIS API in IDL is
 semantically equivalent to this ASIS standard, but not syntactically identical.
 An ASIS Client tool written in Ada interfaces to the ASIS API as specified in
 this International Standard. As shown in Figure 1, the ASIS API encapsulates
 the ASIS ORB client as generated from the compilation of the ASIS IDL into Ada.
 Client tools using either permission 1 or permission 3 are, most likely,
 identical. Client tools developed using permission 3 can be developed as plug
-and play.
+and play.]}
 
 
-@LabeledSubSubClause{ASIS dynamic client approach (permission 4)}
+@ChgNote{SI99-0047-1 remove junk}
+@Chg{Version=[2],New=[],Old=[ASIS dynamic client approach (permission 4)]}
+@ChgNote{This subsubclause header was removed as there are no remaining clauses
+after it. - RLB}
 
-In addition to using traditional compiled tools through the client / server
-interface, ORBs can provide a Dynamic Interface Invocation (DII) capability
-where rather general purpose tools can access the interface dynamically. Shown
-in Figure 1, such a tool behaves more like a browser. It accesses the ASIS IDL
-as registered with the server and browses through the services provided by the
-ASIS interface. Use of this capability with ASIS is extremely cumbersome and
-manually intensive. However, this provides a user access to information across
-the interface that had not been preprogrammed by a tool.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[In addition to using traditional compiled tools
+through the client / server interface, ORBs can provide a Dynamic Interface
+Invocation (DII) capability where rather general purpose tools can access the
+interface dynamically. Shown in Figure 1, such a tool behaves more like a
+browser. It accesses the ASIS IDL as registered with the server and browses
+through the services provided by the ASIS interface. Use of this capability with
+ASIS is extremely cumbersome and manually intensive. However, this provides a
+user access to information across the interface that had not been preprogrammed
+by a tool.]}
 
-@PictureAlone(Alignment=[Center], Border=[None],
+@ChgNote{No picture delete available.}
+@Comment{@PictureAlone(Alignment=[Center], Border=[None],
          Height=[596], Width=[492],
          Name=[asis_orb.png],
-         Descr=[ASIS implementation permissions])
+         Descr=[ASIS implementation permissions])}
 @Comment{Image dimensions: Height=[674], Width=[556]}
 
-@b{Figure 1 @em ASIS implementation permissions}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[@b{Figure 1 @em ASIS implementation permissions}]}
 
 
 @LabeledSubClause{Classification of errors}
@@ -553,39 +622,48 @@ Internal_Error@Defn{Internal_Error}@\-- Implementation internal failure]}
 
 Diagnostic messages may be more specific.
 
-@leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
-@Chg{Version=[2],New=[ASIS defines a set of global exceptions. These
-exceptions are raised under the circumstances listed:],Old=[A set of
-exceptions shall be raised for the following circumstances:]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[A set of
+exceptions shall be raised for the following
+circumstances:]}@Comment{ somewhat of a fake to a get a
+conditional @leading}@Chg{Version=[2],New=[ASIS defines a set of global
+exceptions. These exceptions are raised under the circumstances described in
+@RefSec{package Asis.Exceptions}],Old=[]}
 
 @begin{Itemize}
-@b{ASIS_Inappropriate_Context}@Defn{ASIS_Inappropriate_Context} @en Raised when
-ASIS is passed a Context value that is not appropriate for the operation. This
-exception typically indicates that a user error has occurred within the
-application.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[@b{ASIS_Inappropriate_Context}@Defn{ASIS_Inappropr
+iate_Context} @en Raised when ASIS is passed a Context value that is not
+appropriate for the operation. This exception typically indicates that a user
+error has occurred within the application.]}
 
-@b{ASIS_Inappropriate_Compilation_Unit}@Defn{ASIS_Inappropriate_Compilation_Uni
-t} @en Raised when ASIS is passed a Compilation_Unit value that is not
-appropriate. This exception typically indicates that a user error has occurred
-within the application.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[@b{ASIS_Inappropriate_Compilation_Unit}@Defn{ASIS_
+Inappropriate_Compilation_Unit} @en Raised when ASIS is passed a
+Compilation_Unit value that is not appropriate. This exception typically
+indicates that a user error has occurred within the application.]}
 
-@b{ASIS_Inappropriate_Element}@Defn{ASIS_Inappropriate_Element} @en Raised when
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[@b{ASIS_Inappropriate_Element}@Defn{ASIS_Inappropriate_Element} @en Raised when
 ASIS is given an Element value that is not appropriate. This exception
-typically indicates that a user error has occurred within the application.
+typically indicates that a user error has occurred within the application.]}
 
-@b{ASIS_Inappropriate_Line}@Defn{ASIS_Inappropriate_Line} @en Raised when ASIS
-is given a Line value that is not appropriate.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[@b{ASIS_Inappropriate_Line}@Defn{ASIS_Inappropriate_Line} @en Raised when ASIS
+is given a Line value that is not appropriate.]}
 
-@b{ASIS_Inappropriate_Line_Number}@Defn{ASIS_Inappropriate_Line_Number} @en
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[@b{ASIS_Inappropriate_Line_Number}@Defn{ASIS_Inappropriate_Line_Number} @en
 Raised when ASIS is given a Line_Number value that is not appropriate. This
 exception typically indicates that a user error has occurred within the
-application.
+application.]}
 
-@b{ASIS_Failed}@Defn{ASIS_Failed} @en All ASIS routines may raise ASIS_Failed
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[@b{ASIS_Failed}@Defn{ASIS_Failed} @en All ASIS routines may raise ASIS_Failed
 whenever they cannot normally complete their operation. This exception
 typically indicates a failure of the underlying ASIS implementation. This is a
 catch-all exception that is raised for different reasons in different ASIS
-implementations.
+implementations.]}
 @end{Itemize}
 
 

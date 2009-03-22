@@ -1,6 +1,6 @@
 @Part(statements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/statements.mss,v $}
-@comment{$Revision: 1.10 $ $Date: 2009/02/10 06:51:27 $}
+@comment{$Revision: 1.11 $ $Date: 2009/03/13 07:12:33 $}
 
 
 @LabeledSection{package Asis.Statements}
@@ -283,7 +283,7 @@ execution path is taken.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
-that has one of the following],Old=[Appropriate]} Statement_Kinds:
+that has the following],Old=[Appropriate]} Statement_Kinds:
 @begin{Display}
 A_Case_Statement
 @end{Display}

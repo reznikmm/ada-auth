@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/intro.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2008/10/25 05:28:50 $}
+@comment{$Revision: 1.3 $ $Date: 2009/03/13 07:12:33 $}
 
 @UnNumberedSection(Introduction)
 
@@ -16,15 +16,16 @@ thus supporting portability of software engineering tools while relieving tool
 developers from needing to understand the complexities of an Ada environment's
 proprietary internal representation.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Examples of tools that benefit from the ASIS interface include: automated code
 monitors, browsers, call tree tools, code reformators, coding standards
-compliance tools, correctness verifiers, debuggers, dependency tree analysis
-tools, design tools, document generators, metrics tools, quality assessment
-tools, reverse engineering tools, re-engineering tools, style checkers, test
-tools, timing estimators, and translators.
+compliance tools, correctness verifiers, @Chg{Version=[2],New=[],Old=[debuggers, ]}
+dependency tree analysis tools, design tools, document generators, metrics
+tools, quality assessment tools, reverse engineering tools, re-engineering
+tools, style checkers, test tools, timing estimators, and translators.
 
 The word "may" as used in this International Standard consistently means "is
-allowed to" (or"are allowed to"). It is used only to express permission, as in
+allowed to" (or "are allowed to"). It is used only to express permission, as in
 the commonly occurring phrase "an implementation may"; other words (such as
 "can," "could" or "might") are used to express ability, possibility, capacity,
 or consequentiality.

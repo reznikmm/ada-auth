@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.16 $ $Date: 2009/03/07 06:33:31 $}
+@comment{$Revision: 1.17 $ $Date: 2009/03/13 07:12:33 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -562,14 +562,14 @@ An_Access_Definition],Old=[]}
 @end{Display}
 @end{DescribeCode}
 
-@begin{Notes}
+@begin{SingleNote}
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0004-1]}
 @ChgAdded{Version=[2],Text=[Asis.Declarations.Object_Declaration_View,
 Asis.Declarations.Declaration_Subtype_Mark and the value
 An_Access_Definition_Trait of Trait_Kinds type are obsolescent
 and should not be used in new applications that are supposed to analyze Ada
 2005 code.]}
-@end{Notes}
+@end{SingleNote}
 
 
 @LabeledClause{function Initialization_Expression}
@@ -1180,10 +1180,12 @@ subprogram or entry declaration, in their order of appearance.
 Returns a Nil_Element_List if the subprogram or entry has no
 parameters.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Results of this query may vary across ASIS implementations. Some
 implementations normalize all multiple name parameter specifications into
 an equivalent sequence of corresponding single name parameter
-specifications. See Reference Manual 3.3.1(7).
+specifications.
+See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
@@ -1332,10 +1334,11 @@ and pragmas in the declarative part of the body, in their order of appearance.
 
 Returns a Nil_Element_List if there are no declarative_item or pragma elements.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Results of this query may vary across ASIS implementations. Some
 implementations normalize all multi-name declarations into an
 equivalent sequence of corresponding single name object declarations.
-See Reference Manual 3.3.1(7).
+See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
@@ -1606,9 +1609,10 @@ unless it is a generic instantiation or an inherited subprogram declaration
 @begin{enumerate}
 in case of renaming-as-declaration, the same element is returned;
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 in case of renaming-as-body, the subprogram declaration completed
 by this subprogram renaming declaration is returned.
-(Reference Manual, 8.5.4(1))
+(@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}, 8.5.4(1))
 @end{enumerate}
 
 Returns a Nil_Element if no explicit specification exists, or the
@@ -1635,8 +1639,9 @@ For example, an argument that is A_Package_Instantiation, results in a
 value that is A_Package_Declaration that can be analyzed with all
 appropriate queries.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Retuns the declaration of the generic child unit corresponding to an
-implicit generic child unit specification. Reference Manual 10.1.1(19).
+implicit generic child unit specification. @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.1(19).
 
 The Enclosing_Element of the expanded specification is the generic
 instantiation. The Enclosing_Compilation_Unit of the expanded template is
@@ -1787,8 +1792,9 @@ or inserted into the Ada Environment Context.
 The Enclosing_Element of the expanded body is the generic instantiation. The
 Enclosing_Compilation_Unit of the expanded template is that of the instantiation.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Returns Nil_Element for an implicit generic child unit specification.
-Reference Manual 10.1.1(19).
+@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.1(19).
 
 Returns A_Pragma if the Declaration is completed by pragma Import.
 
@@ -2076,10 +2082,11 @@ Returns a list of all basic declarations, representation @Chg{Version=[2],New=[a
 use clauses, and pragmas in the visible part of a package, in their order
 of appearance.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Results of this query may vary across ASIS implementations. Some
 implementations normalize all multi-name object declarations into an
 equivalent sequence of corresponding single name object declarations.
-See Reference Manual 3.3.1(7).
+See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element that has
@@ -2164,10 +2171,11 @@ Returns a list of all basic declarations, representation @Chg{Version=[2],New=[a
 use clauses, and pragmas in the private part of a package in their order of
 appearance.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Results of this query may vary across ASIS implementations. Some
 implementations normalize all multi-name object declarations into an
 equivalent sequence of corresponding single name object declarations.
-See Reference Manual 3.3.1(7).
+See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
@@ -2828,12 +2836,13 @@ declaration for the element in The_Context that Is_Equal to
 Subunit. If no such element exists in The_Context that Is_Equal to
 Subunit, returns A_Nil_Element.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0047-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Subunit expects an element
-that has one of the following],Old=[Appropriate]} Declaration_Kinds
+for which Is_Subunit(Declaration) is True and that has one of the
+following],Old=[Appropriate]} Declaration_Kinds@Chg{Version=[2],New=[:],Old=[]}
 @begin{Display}
-(Is_Subunit(Declaration) shall also be True)
-A_Function_Body_Declaration
+@Chg{Version=[2],New=[],Old=[(Is_Subunit(Declaration) shall also be True)
+]}A_Function_Body_Declaration
 A_Package_Body_Declaration
 A_Procedure_Body_Declaration
 A_Task_Body_Declaration
@@ -2908,10 +2917,11 @@ Specifies]} whether pragmas are to be returned.
 Returns a list of generic formal parameter declarations, use clauses,
 and pragmas, in their order of appearance.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Results of this query may vary across ASIS implementations. Some
 implementations normalize all multi-name object declarations into an
 equivalent sequence of corresponding single name object declarations.
-See Reference Manual 3.3.1(7).
+See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
@@ -3304,10 +3314,11 @@ Reference @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} an expression
 that references an entity declared within the implicit specification of a
 generic instantiation, or, specifies the defining name of such an entity.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 Given a reference to some implicit entity, whose declaration occurs within
 an implicit generic instance, returns the corresponding entity name
 definition from the generic template used to create the generic instance.
-(Reference Manual 12.3 (16))
+(@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 12.3 (16))
 
 Returns the first A_Defining_Name, from the generic template, that
 corresponds to the entity referenced.

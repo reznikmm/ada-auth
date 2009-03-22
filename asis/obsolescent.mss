@@ -1,10 +1,10 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2009/03/04 01:07:17 $}
+@Comment{$Date: 2009/03/13 07:12:33 $}
 @LabeledAddedNormativeAnnex{Version=[2],Name=[Obsolescent Features]}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/obsolescent.mss,v $}
-@comment{$Revision: 1.8 $}
+@comment{$Revision: 1.9 $}
 
 @LabeledAddedClause{Version=[2],Name=[Annex Contents]}
 
@@ -1387,12 +1387,6 @@ for non-discriminant fields.]}
 @ChgAdded{Version=[2],Text=[All Is_Record(Component) = True values are appropriate. All return values
 are valid parameters for all query operations.]}
 
-@begin{SingleNote}
-@ChgAdded{Version=[2],Text=[If an Ada implementation uses implementation-dependent record
-components (Ada Standard 13.5.1 (15)), then each such component of the
-record type is included in the result.]}
-@end{SingleNote}
-
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[
 Type_Definition expects an element
@@ -1416,6 +1410,13 @@ A_Simple_Dynamic_Model]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
 of Value_Error for any element or component that does not have one of these
 expected kinds.]}
+
+@begin{SingleNote}
+@ChgAdded{Version=[2],Text=[If an Ada implementation uses implementation-dependent record
+components (Ada Standard 13.5.1 (15)), then each such component of the
+record type is included in the result.]}
+@end{SingleNote}
+
 @end{DescribeCode}
 
 

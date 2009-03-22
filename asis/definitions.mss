@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.14 $ $Date: 2009/03/07 06:33:31 $}
+@comment{$Revision: 1.15 $ $Date: 2009/03/13 07:12:33 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -329,11 +329,11 @@ that has one of the following],Old=[Appropriate]} Definition_Kinds:
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Revised]}
 A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds:
-    A_Derived_Type_Definition
-    A_Derived_Record_Extension_Definition],Old=[]}
+ @ @ @ @  A_Derived_Type_Definition
+ @ @ @ @  A_Derived_Record_Extension_Definition],Old=[]}
 A_Private_Extension_Definition
 A_Formal_Type_Definition@Chg{Version=[2],New=[ that has the following Formal_Type_Kinds:
-    A_Formal_Derived_Type_Definition],Old=[]}
+ @ @ @ @  A_Formal_Derived_Type_Definition],Old=[]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
@@ -814,6 +814,7 @@ that has one of the following],Old=[Appropriate]} Definition_Kinds:
 @ChgRef{Version=[2],Kind=[Revised]}
 A_Constraint@Chg{Version=[2],New=[ that has the following],Old=[
   Appropriate]} Constraint_Kinds:
+    A_Digits_Constraint
     A_Delta_Constraint@Chg{Version=[2],New=[
 A_Type_Definition that has one of the following Type_Kinds:
     A_Floating_Point_Definition
@@ -2363,12 +2364,12 @@ element that has the following Definition_Kinds:]}
 @end{Display}
 @end{DescribeCode}
 
-@begin{Notes}
+@begin{SingleNote}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1]}
 @ChgAdded{Version=[2],Text=[Is_Task_Definition_Present is used to determine whether the
 original text was @exam{@key[task] T;} (for which it returns False) or
 @exam{@key[task] T @key[is end] T;} (for which it returns True).]}
-@end{Notes}
+@end{SingleNote}
 
 
 @ChgNote{ SI99-0006-1 }

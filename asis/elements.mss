@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.14 $ $Date: 2009/02/15 08:00:55 $}
+@comment{$Revision: 1.15 $ $Date: 2009/03/13 07:12:33 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -1930,8 +1930,10 @@ Returns a Nil_Element_List if there are no pragmas.
 that has one of the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 @tabset{P34}
-A_Path@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from the statement list + pragmas immediately preceding the reserved word @key[when] of the first alternative)
-An_Exception_Handler@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from the statement list + pragmas immediately preceding the reserved word @key[when] of the first exception handler)
+A_Path@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from the statement list +
+    pragmas immediately preceding the reserved word @key[when] of the first alternative)
+An_Exception_Handler@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from the statement list +
+    pragmas immediately preceding the reserved word @key[when] of the first exception handler)
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -2006,7 +2008,7 @@ A_Pragma
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0021-1]}
-@key[function] @Chg{Version=[2],New=[@AdaSubDefn{Corresponding_Aspect_Pragmas}],Old=[@AdaSubDefn{Corresponding_Pragmas}]} (@Chg{Version=[2],New=[Defining_Name],Old=[Element]} : @key[in] New=[Asis.Defining_Name],Old=[Asis.Element]})
+@key[function] @Chg{Version=[2],New=[@AdaSubDefn{Corresponding_Aspect_Pragmas}],Old=[@AdaSubDefn{Corresponding_Pragmas}]} (@Chg{Version=[2],New=[Defining_Name],Old=[Element]} : @key[in] @Chg{Version=[2],New=[Asis.Defining_Name],Old=[Asis.Element]})
                                  @key[return] Asis.Pragma_Element_List;]}
 @end{Example}
 

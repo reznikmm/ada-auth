@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/errors.mss,v $}
-@comment{$Revision: 1.1 $ $Date: 2006/09/26 05:15:07 $}
+@comment{$Revision: 1.2 $ $Date: 2009/03/13 07:12:33 $}
 
 @LabeledSection{package Asis.Errors}
 
@@ -34,7 +34,9 @@ This enumeration type describes the various kinds of errors.
 @begin{Example}
 @tabset{P49}
 @key[type] @AdaTypeDefn{Error_Kinds} @key[is] (
+
     @AdaObjDefn{Not_An_Error},@\-- No error is presently recorded
+
     @AdaObjDefn{Value_Error},@\-- Routine argument value invalid
     @AdaObjDefn{Initialization_Error},@\-- ASIS is uninitialized
     @AdaObjDefn{Environment_Error},@\-- ASIS could not initialize
