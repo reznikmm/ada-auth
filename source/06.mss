@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2009/03/10 07:16:40 $}
+@Comment{$Date: 2009/03/22 03:27:52 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -3027,9 +3027,14 @@ type of the predefined type Boolean.
 @Chg{Version=[3],New=[An explicit],Old=[A]} declaration of "="
 whose result type is Boolean implicitly declares
 @Chg{Version=[3],New=[an operator],Old=[a declaration]} of "/=" that
-gives the complementary result.
+gives the complementary result.@Defn{/= operator}
 @begin{Discussion}
-6.6(6): @Defn{Number of the Beast}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0128-1]}
+@ChgAdded{Version=[3],Text=[A "/=" defined by this rule is considered
+user-defined, which means that it will be inherited by a derived type.
+@ldquote@;User-defined@rdquote means @ldquote@;not language-defined@rdquote for
+the purposes of inheritance, that is anything other than predefined operators.
+6.6(6): @Defn{Number of the Beast}]}
 @end{Discussion}
 @end{StaticSem}
 
