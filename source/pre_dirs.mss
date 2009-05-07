@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.30 $ $Date: 2008/11/26 23:41:02 $ $Author: randy $ }
+@comment{ $Revision: 1.31 $ $Date: 2009/04/28 02:58:34 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:02 $}
+@Comment{$Date: 2009/04/28 02:58:34 $}
 
 @RMNewPage@Comment{For printed RM Ada 2007}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -398,9 +398,10 @@ New_Name.]}
 @end{ImplNote}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Copy_File (Source_Name,
                      Target_Name : @key{in} String;
-                     Form        : @key{in} String);]}
+                     Form        : @key{in} String@Chg{Version=[3],New=[ := ""],Old=[]});]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Copies the contents of the existing
