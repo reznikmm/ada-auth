@@ -13,7 +13,7 @@ package ARM_RTF is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -82,6 +82,8 @@ package ARM_RTF is
     --  2/13/07 - RLB - Revised to separate style and indent information
     --			for paragraphs.
     -- 12/19/07 - RLB - Added limited colors to Text_Format.
+    --  5/ 4/09 - RLB - Added footer commands.
+    --  5/ 6/09 - RLB - Added version names.
 
     type RTF_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -103,6 +105,11 @@ package ARM_RTF is
 		      Body_Font : in ARM_Output.Font_Family_Type := ARM_Output.Roman;
 		      File_Prefix : in String;
 		      Header_Prefix : in String := "";
+		      Footer_Use_Date : in Boolean;
+		      Footer_Use_Clause_Name : in Boolean;
+		      Footer_Use_ISO_Format : in Boolean;
+		      Footer_Text : in String := "";
+		      Version_Names : in ARM_Contents.Versioned_String;
 		      Title : in String := "");
 	-- Create an Output_Object for a document with the specified page
 	-- size. Changes from the base document are included if
@@ -114,9 +121,16 @@ package ARM_RTF is
 	-- The title of the document is Title.
 	-- The header prefix appears in the header (if any) before the title,
 	-- separated by a dash.
+	-- The footer consists of the page number, the date if Footer_Use_Date
+	-- is true, and the clause name if Footer_Use_Clase_Name is True, and
+	-- the Footer_Text otherwise. The font and size of the footer is as
+	-- an ISO standard if Footer_Use_ISO_Format is True, and as the
+	-- Ada Reference Manual otherwise.
 	-- The primary font used for the Sans_Serif text, and for the Serif
 	-- text, is as specified.
 	-- Which font is used for the body is specified by Body_Font.
+	-- The author names of the various versions is specified by the
+	-- Version_Names.
 
     procedure Close (Output_Object : in out RTF_Output_Type);
 	-- Close an Output_Object. No further output to the object is
@@ -444,7 +458,12 @@ private
 	File_Prefix : Prefix_String; -- Blank padded.
 	Title : Ada.Strings.Unbounded.Unbounded_String;
 	Header_Prefix : Ada.Strings.Unbounded.Unbounded_String;
+        Footer_Use_Date : Boolean;
+        Footer_Use_Clause_Name : Boolean;
+        Footer_Use_ISO_Format : Boolean;
+	Footer_Text : Ada.Strings.Unbounded.Unbounded_String;
 	Page_Size : ARM_RTF.Page_Size;
+	Version_Names : ARM_Contents.Versioned_String;
 	Includes_Changes : Boolean;
 	Big_Files : Boolean; -- For RTF, this means to generate a single monster file.
 	Primary_Sans_Serif_Font : Sans_Serif_Fonts;

@@ -17,7 +17,7 @@ package body ARM_RTF is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -130,6 +130,8 @@ package body ARM_RTF is
     -- 12/19/07 - RLB - Added limited colors to Text_Format.
     -- 12/21/07 - RLB - Removed extra "not" from "large" character counter
     --			in Ordinary_Character.
+    --  5/ 4/09 - RLB - Added the footer information.
+    --  5/ 6/09 - RLB - Added ISO format footer and version names.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -2403,7 +2405,23 @@ package body ARM_RTF is
 	    -- \tqr - set following tab as a right tab.
 
 	-- Revision table:
-	Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\*\revtbl {Original Text;}{Technical Corrigendum 1;}{Amendment 1;}{Technical Corrigendum 2;}}");
+	Ada.Text_IO.Put (Output_Object.Output_File, "{\*\revtbl ");
+        if Ada.Strings.Unbounded.Length (Output_Object.Version_Names('0')) = 0 then
+	    Ada.Text_IO.Put (Output_Object.Output_File, "{Original Text;}");
+	else
+            Ada.Text_IO.Put (Output_Object.Output_File, "{" &
+	       Ada.Strings.Unbounded.To_String(Output_Object.Version_Names('0')) &
+		";}");
+	end if;
+	for Version in '1' .. '9' loop
+            if Ada.Strings.Unbounded.Length (Output_Object.Version_Names(Version)) /= 0 then
+                Ada.Text_IO.Put (Output_Object.Output_File, "{" &
+	           Ada.Strings.Unbounded.To_String(Output_Object.Version_Names(Version)) &
+		    ";}");
+	    else exit; -- No more after the first empty one.
+	    end if;
+	end loop;
+	Ada.Text_IO.Put_Line (Output_Object.Output_File, "}");
 
 	-- Information (truncated):
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "{\info{\title " &
@@ -2508,6 +2526,11 @@ package body ARM_RTF is
 		      Body_Font : in ARM_Output.Font_Family_Type := ARM_Output.Roman;
 		      File_Prefix : in String;
 		      Header_Prefix : in String := "";
+		      Footer_Use_Date : in Boolean;
+		      Footer_Use_Clause_Name : in Boolean;
+		      Footer_Use_ISO_Format : in Boolean;
+		      Footer_Text : in String := "";
+		      Version_Names : in ARM_Contents.Versioned_String;
 		      Title : in String := "") is
 	-- Create an Output_Object for a document with the specified page
 	-- size. Changes from the base document are included if
@@ -2519,9 +2542,16 @@ package body ARM_RTF is
 	-- The title of the document is Title.
 	-- The header prefix appears in the header (if any) before the title,
 	-- separated by a dash.
+	-- The footer consists of the page number, the date if Footer_Use_Date
+	-- is true, and the clause name if Footer_Use_Clase_Name is True, and
+	-- the Footer_Text otherwise. The font and size of the footer is as
+	-- an ISO standard if Footer_Use_ISO_Format is True, and as the
+	-- Ada Reference Manual otherwise.
 	-- The primary font used for the Sans_Serif text, and for the Serif
 	-- text, is as specified.
 	-- Which font is used for the body is specified by Body_Font.
+	-- The author names of the various versions is specified by the
+	-- Version_Names.
     begin
 	if Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -2539,6 +2569,12 @@ package body ARM_RTF is
 	Output_Object.Title := Ada.Strings.Unbounded.To_Unbounded_String (Title);
 	Output_Object.Header_Prefix :=
 		Ada.Strings.Unbounded.To_Unbounded_String (Header_Prefix);
+	Output_Object.Footer_Text :=
+		Ada.Strings.Unbounded.To_Unbounded_String (Footer_Text);
+	Output_Object.Footer_Use_Date := Footer_Use_Date;
+	Output_Object.Footer_Use_Clause_Name := Footer_Use_Clause_Name;
+	Output_Object.Footer_Use_ISO_Format := Footer_Use_ISO_Format;
+	Output_Object.Version_Names := Version_Names;
 	if Big_Files then
 	    -- We're going to generate a single giant file. Open it now.
 	    Start_RTF_File (Output_Object,
@@ -2769,7 +2805,7 @@ package body ARM_RTF is
 	Output_Object.Wrote_into_Section := True;
 
 	-- First, write the paragraph number, if any. This has its own style.
-	if Number /= "" then -- No paragraph numbers.
+	if Number /= "" then -- We have a paragraph number.
 	    Write_Style_for_Paragraph (Output_Object.Output_File,
 	        Paragraph_Number_Info, Output_Object.Char_Count);
 	    -- Figure the space above: (We use a variable space above so the
@@ -2798,6 +2834,7 @@ package body ARM_RTF is
 	    Ada.Text_IO.Put (Output_Object.Output_File, Number);
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\par}");
 	    Output_Object.Char_Count := 0;
+	-- else no paragraph number.
 	end if;
 	-- Now, write the paragraph header:
 	case Style is
@@ -2811,11 +2848,13 @@ package body ARM_RTF is
 		Write_Style_for_Paragraph (Output_Object.Output_File,
 		    Paragraph_Info(Style, Indent),
 		    Output_Object.Char_Count);
+--Ada.Text_IO.Put_Line ("Start paragraph - full style");
 	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted |
 		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted =>
 		Write_Style_for_Paragraph (Output_Object.Output_File,
 		    Paragraph_Info(Style, Indent),
 		    Output_Object.Char_Count);
+--Ada.Text_IO.Put_Line ("Start paragraph - full style (bullet)");
 		if No_Prefix then
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "\tab ");
 		    Output_Object.Char_Count := Output_Object.Char_Count + 5;
@@ -2849,6 +2888,7 @@ package body ARM_RTF is
 		Write_Style_for_Paragraph (Output_Object.Output_File,
 		    Paragraph_Info(Style, Indent),
 		    Output_Object.Char_Count);
+--Ada.Text_IO.Put_Line ("Start paragraph - full style (hang)");
 		if No_Prefix then
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "\tab ");
 		    Output_Object.Char_Count := Output_Object.Char_Count + 5;
@@ -2865,6 +2905,7 @@ package body ARM_RTF is
 	Output_Object.Is_Bold := False;
 	Output_Object.Is_Italic := False;
 	Output_Object.Size := 0;
+	Output_Object.Color := ARM_Output.Default;
 	Output_Object.Real_Size := Paragraph_Info(Style,Indent).Size;
 	Output_Object.Tab_Stops := Tab_Stops;
 	Output_Object.Current_Space_After := Space_After;
@@ -2970,6 +3011,7 @@ package body ARM_RTF is
 	Output_Object.Is_In_Paragraph := False;
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "\par}");
 	Output_Object.Char_Count := 0;
+--Ada.Text_IO.Put_Line ("End paragraph '}'");
     end End_Paragraph;
 
 
@@ -3051,47 +3093,133 @@ package body ARM_RTF is
 	   ARM_Contents."="(Level, ARM_Contents.Unnumbered_Section) then
 	    Ada.Text_IO.Put (Output_Object.Output_File, "{\footerl ");
 	    Write_Style_for_Paragraph (Output_Object.Output_File, Footer_Info, Count);
-            Ada.Text_IO.Put (Output_Object.Output_File, "{\f0 ");
-            Ada.Text_IO.Put (Output_Object.Output_File, Header_Text);
+	    if Output_Object.Footer_Use_ISO_Format then
+		Ada.Text_IO.Put (Output_Object.Output_File, "{\f1\fs16 ");
+	    elsif ARM_Output."="(Output_Object.Body_Font, ARM_Output.Swiss) then
+		Ada.Text_IO.Put (Output_Object.Output_File, "{\f1 ");
+	    else
+		Ada.Text_IO.Put (Output_Object.Output_File, "{\f0 ");
+	    end if;
+	    if Output_Object.Footer_Use_Clause_Name then
+                Ada.Text_IO.Put (Output_Object.Output_File, Header_Text);
+	    else
+                Ada.Text_IO.Put (Output_Object.Output_File,
+		    Ada.Strings.Unbounded.To_String (Output_Object.Footer_Text));
+	    end if;
             Ada.Text_IO.Put (Output_Object.Output_File, "\tab ");
-	    Ada.Text_IO.Put (Output_Object.Output_File, Current_Date);
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "\~\~\~\~\~\~{\field{\*\fldinst { PAGE }}{\fldrslt {\lang1024 x}}}\par}}}");
+	    if Output_Object.Footer_Use_Date then
+	        Ada.Text_IO.Put (Output_Object.Output_File, Current_Date);
+	    -- else no date.
+	    end if;
+	    if Output_Object.Footer_Use_ISO_Format then
+                Ada.Text_IO.Put_Line (Output_Object.Output_File, "\~\~\~\~\~\~{\f1\fs22\b {\field{\*\fldinst { PAGE }}{\fldrslt {\lang1024 x}}}}\par}}}");
+	    else
+                Ada.Text_IO.Put_Line (Output_Object.Output_File, "\~\~\~\~\~\~{\field{\*\fldinst { PAGE }}{\fldrslt {\lang1024 x}}}\par}}}");
+	    end if;
 	    Ada.Text_IO.Put (Output_Object.Output_File, "{\footerr ");
 	    Write_Style_for_Paragraph (Output_Object.Output_File, Footer_Info, Count);
-	    Ada.Text_IO.Put (Output_Object.Output_File, "{\f0 {\field{\*\fldinst { PAGE }}{\fldrslt {\lang1024 x}}}\~\~\~\~\~\~");
-	    Ada.Text_IO.Put (Output_Object.Output_File, Current_Date);
+	    if Output_Object.Footer_Use_ISO_Format then
+		Ada.Text_IO.Put (Output_Object.Output_File, "{\f1\fs22\b {\field{\*\fldinst { PAGE }}{\fldrslt {\lang1024 x}}}}\~\~\~\~\~\~");
+	    elsif ARM_Output."="(Output_Object.Body_Font, ARM_Output.Swiss) then
+		Ada.Text_IO.Put (Output_Object.Output_File, "{\f1 {\field{\*\fldinst { PAGE }}{\fldrslt {\lang1024 x}}}}\~\~\~\~\~\~");
+	    else
+		Ada.Text_IO.Put (Output_Object.Output_File, "{\f0 {\field{\*\fldinst { PAGE }}{\fldrslt {\lang1024 x}}}}\~\~\~\~\~\~");
+	    end if;
+	    if Output_Object.Footer_Use_Date then
+	        Ada.Text_IO.Put (Output_Object.Output_File, Current_Date);
+	    -- else no date.
+	    end if;
 	    Ada.Text_IO.Put (Output_Object.Output_File, "\tab ");
-            Ada.Text_IO.Put (Output_Object.Output_File, Header_Text);
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "\par}}}");
+	    if Output_Object.Footer_Use_ISO_Format then
+		Ada.Text_IO.Put (Output_Object.Output_File, "{\f1\fs16 ");
+	    end if;
+	    if Output_Object.Footer_Use_Clause_Name then
+                Ada.Text_IO.Put (Output_Object.Output_File, Header_Text);
+	    else
+                Ada.Text_IO.Put (Output_Object.Output_File,
+		    Ada.Strings.Unbounded.To_String (Output_Object.Footer_Text));
+	    end if;
+	    if Output_Object.Footer_Use_ISO_Format then
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\par}}}");
+	    else
+	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "\par}}");
+	    end if;
 	else
 	    Ada.Text_IO.Put (Output_Object.Output_File, "{\footerl ");
 	    Write_Style_for_Paragraph (Output_Object.Output_File, Footer_Info, Count);
-            Ada.Text_IO.Put (Output_Object.Output_File, "{\b\f1 ");
-	    if Level in ARM_Contents.Plain_Annex .. ARM_Contents.Normative_Annex then
-		-- Clause Number includes "Annex". Just use the letter.
-		Ada.Text_IO.Put (Output_Object.Output_File, Clause_Number(Clause_Number'Last));
+	    if Output_Object.Footer_Use_Clause_Name then
+                Ada.Text_IO.Put (Output_Object.Output_File, "{\b\f1 ");
+	        if Level in ARM_Contents.Plain_Annex .. ARM_Contents.Normative_Annex then
+		    -- Clause Number includes "Annex". Just use the letter.
+		    Ada.Text_IO.Put (Output_Object.Output_File, Clause_Number(Clause_Number'Last));
+	        else
+		    Ada.Text_IO.Put (Output_Object.Output_File, Clause_Number);
+	        end if;
+	        if Output_Object.Footer_Use_ISO_Format then
+		    Ada.Text_IO.Put (Output_Object.Output_File, "}\~\~\~{\f1\fs16 ");
+	        elsif ARM_Output."="(Output_Object.Body_Font, ARM_Output.Swiss) then
+		    Ada.Text_IO.Put (Output_Object.Output_File, "}\~\~\~{\f1 ");
+	        else
+		    Ada.Text_IO.Put (Output_Object.Output_File, "}\~\~\~{\f0 ");
+	        end if;
+                Ada.Text_IO.Put (Output_Object.Output_File, Header_Text);
 	    else
-		Ada.Text_IO.Put (Output_Object.Output_File, Clause_Number);
+	        if Output_Object.Footer_Use_ISO_Format then
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\f1\fs16 ");
+	        elsif ARM_Output."="(Output_Object.Body_Font, ARM_Output.Swiss) then
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\f1 ");
+	        else
+		    Ada.Text_IO.Put (Output_Object.Output_File, "{\f0 ");
+	        end if;
+                Ada.Text_IO.Put (Output_Object.Output_File,
+		    Ada.Strings.Unbounded.To_String (Output_Object.Footer_Text));
 	    end if;
-            Ada.Text_IO.Put (Output_Object.Output_File, "}\~\~\~{\f0 ");
-            Ada.Text_IO.Put (Output_Object.Output_File, Header_Text);
             Ada.Text_IO.Put (Output_Object.Output_File, "\tab ");
-	    Ada.Text_IO.Put (Output_Object.Output_File, Current_Date);
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "\~\~\~\~\~\~{\field{\*\fldinst { PAGE }}{\fldrslt {\lang1024 x}}}\par}}}");
+	    if Output_Object.Footer_Use_Date then
+	        Ada.Text_IO.Put (Output_Object.Output_File, Current_Date);
+	    -- else no date.
+	    end if;
+	    if Output_Object.Footer_Use_ISO_Format then
+                Ada.Text_IO.Put_Line (Output_Object.Output_File, "\~\~\~\~\~\~{\f1\fs22\b {\field{\*\fldinst { PAGE }}{\fldrslt {\lang1024 x}}}}\par}}}");
+	    else
+                Ada.Text_IO.Put_Line (Output_Object.Output_File, "\~\~\~\~\~\~{\field{\*\fldinst { PAGE }}{\fldrslt {\lang1024 x}}}\par}}}");
+	    end if;
 	    Ada.Text_IO.Put (Output_Object.Output_File, "{\footerr ");
 	    Write_Style_for_Paragraph (Output_Object.Output_File, Footer_Info, Count);
-	    Ada.Text_IO.Put (Output_Object.Output_File, "{\f0 {\field{\*\fldinst { PAGE }}{\fldrslt {\lang1024 x}}}\~\~\~\~\~\~");
-	    Ada.Text_IO.Put (Output_Object.Output_File, Current_Date);
-	    Ada.Text_IO.Put (Output_Object.Output_File, "\tab ");
-            Ada.Text_IO.Put (Output_Object.Output_File, Header_Text);
-	    Ada.Text_IO.Put (Output_Object.Output_File, "\~\~\~\b\f1 ");
-	    if Level in ARM_Contents.Plain_Annex .. ARM_Contents.Normative_Annex then
-		-- Clause Number includes "Annex". Just use the letter.
-		Ada.Text_IO.Put (Output_Object.Output_File, Clause_Number(Clause_Number'Last));
+	    if Output_Object.Footer_Use_ISO_Format then
+		Ada.Text_IO.Put (Output_Object.Output_File, "{\f1\fs22\b {\field{\*\fldinst { PAGE }}{\fldrslt {\lang1024 x}}}}\~\~\~\~\~\~");
+	    elsif ARM_Output."="(Output_Object.Body_Font, ARM_Output.Swiss) then
+		Ada.Text_IO.Put (Output_Object.Output_File, "{\f1 {\field{\*\fldinst { PAGE }}{\fldrslt {\lang1024 x}}}}\~\~\~\~\~\~");
 	    else
-		Ada.Text_IO.Put (Output_Object.Output_File, Clause_Number);
+		Ada.Text_IO.Put (Output_Object.Output_File, "{\f0 {\field{\*\fldinst { PAGE }}{\fldrslt {\lang1024 x}}}}\~\~\~\~\~\~");
 	    end if;
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "\par}}}");
+	    if Output_Object.Footer_Use_Date then
+	        Ada.Text_IO.Put (Output_Object.Output_File, Current_Date);
+	    -- else no date.
+	    end if;
+	    Ada.Text_IO.Put (Output_Object.Output_File, "\tab ");
+	    if Output_Object.Footer_Use_ISO_Format then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "{\f1\fs16 ");
+	    elsif ARM_Output."="(Output_Object.Body_Font, ARM_Output.Swiss) then
+	        Ada.Text_IO.Put (Output_Object.Output_File, "{\f1 ");
+	    else
+	        Ada.Text_IO.Put (Output_Object.Output_File, "{\f0 ");
+	    end if;
+	    if Output_Object.Footer_Use_Clause_Name then
+                Ada.Text_IO.Put (Output_Object.Output_File, Header_Text);
+	        Ada.Text_IO.Put (Output_Object.Output_File, "}\~\~\~\b\f1 ");
+	        if Level in ARM_Contents.Plain_Annex .. ARM_Contents.Normative_Annex then
+		    -- Clause Number includes "Annex". Just use the letter.
+		    Ada.Text_IO.Put (Output_Object.Output_File, Clause_Number(Clause_Number'Last));
+	        else
+		    Ada.Text_IO.Put (Output_Object.Output_File, Clause_Number);
+	        end if;
+	    else
+                Ada.Text_IO.Put (Output_Object.Output_File,
+		    Ada.Strings.Unbounded.To_String (Output_Object.Footer_Text));
+	        Ada.Text_IO.Put (Output_Object.Output_File, "}");
+	    end if;
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\par}}");
 	end if;
 	Output_Object.Wrote_into_Section := True;
     end Clause_Footer;
@@ -4397,6 +4525,7 @@ package body ARM_RTF is
 	-- Note: Changes to these properties ought be stack-like; that is,
 	-- Bold on, Italic on, Italic off, Bold off is OK; Bold on, Italic on,
 	-- Bold off, Italic off should be avoided (as separate commands).
+	TRACE_TF : constant Boolean := FALSE;
 	use type ARM_Output.Change_Type;
 	use type ARM_Contents.Change_Version_Type;
 	use type ARM_Output.Location_Type;
@@ -4436,10 +4565,28 @@ package body ARM_RTF is
 		ARM_Output."=" (Output_Object.Font, ARM_Output.Default) and
 		Output_Object.Color =  ARM_Output.Default and
 	        Output_Object.Size = 0 then
-		-- No format was, so none to close (default).
+		-- No format previously set, so none to close (default).
 		return;
 	    end if;
---Ada.Text_Io.Put (" Close basic format");
+	    if TRACE_TF then
+		Ada.Text_Io.Put (" Close basic format [");
+		if Output_Object.Is_Bold then
+		    Ada.Text_Io.Put ('B');
+		end if;
+		if Output_Object.Is_Italic then
+		    Ada.Text_Io.Put ('I');
+		end if;
+		if Output_Object.Size /= 0 then
+		    Ada.Text_Io.Put ('S');
+		end if;
+		if Output_Object.Color /= ARM_Output.Default then
+		    Ada.Text_Io.Put ('C');
+		end if;
+		if ARM_Output."/=" (Output_Object.Font, ARM_Output.Default) then
+		    Ada.Text_Io.Put ('F');
+		end if;
+		Ada.Text_Io.Put (']');
+	    end if;
 	    Ada.Text_IO.Put (Output_Object.Output_File, "}");
 	    Output_Object.Char_Count := Output_Object.Char_Count + 1;
 	    Output_Object.Real_Size := Output_Object.Real_Size -
@@ -4453,8 +4600,11 @@ package body ARM_RTF is
 		when ARM_Output.Fixed => null;
 		when ARM_Output.Roman => null;
 		when ARM_Output.Swiss =>
-		    -- Undo the size adjustment.
-		    Output_Object.Real_Size := Output_Object.Real_Size + 1;
+		    -- Undo the size adjustment, if any.
+		    if ARM_Output."/=" (Output_Object.Body_Font, ARM_Output.Swiss) then
+		        Output_Object.Real_Size := Output_Object.Real_Size + 1;
+		    -- else no adjustment.
+		    end if;
 	    end case;
 	    Output_Object.Font := ARM_Output.Default;
 	end Close_Basic_Format;
@@ -4472,27 +4622,37 @@ package body ARM_RTF is
 	    end if;
 	    Ada.Text_IO.Put (Output_Object.Output_File, "{");
 	    Output_Object.Char_Count := Output_Object.Char_Count + 1;
+            if TRACE_TF then
+		Ada.Text_Io.Put (" Make basic {");
+            end if;
 
 	    -- Bold:
 	    if Format.Bold then
---Ada.Text_Io.Put (" Change bold");
+	        if TRACE_TF then
+		    Ada.Text_Io.Put (" Change bold");
+	        end if;
 	        Ada.Text_IO.Put (Output_Object.Output_File, "\b");
 	        Output_Object.Char_Count := Output_Object.Char_Count + 2;
 	        Output_Object.Is_Bold := True;
 	    end if;
 	    -- Italic:
 	    if Format.Italic then
---Ada.Text_Io.Put (" Change italics");
+	        if TRACE_TF then
+		    Ada.Text_Io.Put (" Change italics");
+	        end if;
 	        Ada.Text_IO.Put (Output_Object.Output_File, "\i");
 	        Output_Object.Char_Count := Output_Object.Char_Count + 2;
 	        Output_Object.Is_Italic := True;
 	    end if;
 	    -- Size:
 	    if Format.Size /= 0 then
---Ada.Text_Io.Put (" Change size " & ARM_Output.Size_Type'Image(Size));
+	        if TRACE_TF then
+		    Ada.Text_Io.Put (" Change size " & ARM_Output.Size_Type'Image(Format.Size));
+	        end if;
 	        Output_Object.Real_Size := Output_Object.Real_Size +
 						    Integer(Format.Size)*2;
-		if ARM_Output."/=" (Format.Font, ARM_Output.Swiss) then
+		if ARM_Output."/=" (Format.Font, ARM_Output.Swiss)
+		    or else ARM_Output."=" (Output_Object.Body_Font, ARM_Output.Swiss) then
 	            Make_Size_Command (Output_Object.Real_Size);
 		-- else it will be done by the Font, below.
 		end if;
@@ -4500,7 +4660,9 @@ package body ARM_RTF is
 	    Output_Object.Size := Format.Size;
 	    -- Color:
 	    if Format.Color /= ARM_Output.Default then
---Ada.Text_Io.Put (" Change color " & ARM_Output.Color_Type'Image(Format.Color));
+	        if TRACE_TF then
+		    Ada.Text_Io.Put (" Change color " & ARM_Output.Color_Type'Image(Format.Color));
+	        end if;
 	        case Format.Color is
 		    when ARM_Output.Default => null;
 		    when ARM_Output.Black => -- Color 1
@@ -4523,20 +4685,29 @@ package body ARM_RTF is
 	    case Format.Font is
 		when ARM_Output.Default => null;
 		when ARM_Output.Fixed =>
---Ada.Text_Io.Put (" Change font fixed");
+	            if TRACE_TF then
+			Ada.Text_Io.Put (" Change font fixed");
+	            end if;
 		    Ada.Text_IO.Put (Output_Object.Output_File, "\f2");
 		    Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		when ARM_Output.Roman =>
---Ada.Text_Io.Put (" Change font roman");
+	            if TRACE_TF then
+			Ada.Text_Io.Put (" Change font roman");
+	            end if;
 		    Ada.Text_IO.Put (Output_Object.Output_File, "\f0");
 		    Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		when ARM_Output.Swiss =>
---Ada.Text_Io.Put (" Change font swiss");
+	            if TRACE_TF then
+			Ada.Text_Io.Put (" Change font swiss");
+	            end if;
 		    Ada.Text_IO.Put (Output_Object.Output_File, "\f1");
 		    Output_Object.Char_Count := Output_Object.Char_Count + 3;
-		    -- Swiss fonts always appear too large, so shrink it a bit.
-		    Output_Object.Real_Size := Output_Object.Real_Size - 1;
-		    Make_Size_Command (Output_Object.Real_Size);
+		    -- Swiss fonts always appear too large, so shrink it a bit,
+		    -- but not if the main body is a Swiss font.
+		    if ARM_Output."/=" (Output_Object.Body_Font, ARM_Output.Swiss) then
+		        Output_Object.Real_Size := Output_Object.Real_Size - 1;
+		        Make_Size_Command (Output_Object.Real_Size);
+		    end if;
 	    end case;
 	    Ada.Text_IO.Put (Output_Object.Output_File, " ");
 	    Output_Object.Char_Count := Output_Object.Char_Count + 1;
@@ -4552,21 +4723,27 @@ package body ARM_RTF is
 	    -- and unnecessary.
 	    case Format.Change is
 		when ARM_Output.Insertion =>
---Ada.Text_Io.Put (" Change ins");
+	            if TRACE_TF then
+			Ada.Text_Io.Put (" Change insertion");
+	            end if;
 		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth" & Format.Version & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 18;
 			-- Note: \revauthN indicates the author. Each version
 			-- that we'll use needs an entry in the \revtbl.
 			-- We could include a date with \revddtm??, but that's messy.
 		when ARM_Output.Deletion =>
---Ada.Text_Io.Put (" Change del");
+	            if TRACE_TF then
+			Ada.Text_Io.Put (" Change deletion");
+	            end if;
 		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel" & Format.Version & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 21;
 			-- Note: \revauthdelN indicates the author. Each version
 			-- that we'll use needs an entry in the \revtbl.
 			-- We could include a date with \revddtmdel??, but that's messy.
 		when ARM_Output.Both =>
---Ada.Text_Io.Put (" Change both");
+	            if TRACE_TF then
+			Ada.Text_Io.Put (" Change both");
+	            end if;
 		    Ada.Text_IO.Put (Output_Object.Output_File, "{\revised\revauth" & Format.Added_Version & ' ');
 		    Output_Object.Char_Count := Output_Object.Char_Count + 18;
 		    Ada.Text_IO.Put (Output_Object.Output_File, "{\deleted\revauthdel" & Format.Version & ' ');
@@ -4591,17 +4768,23 @@ package body ARM_RTF is
 	    -- and unnecessary.
 	    case Output_Object.Change is
 		when ARM_Output.Insertion =>
---Ada.Text_Io.Put (" Unchange ins");
+	            if TRACE_TF then
+			Ada.Text_Io.Put (" Unchange insertion");
+	            end if;
 		    Ada.Text_IO.Put (Output_Object.Output_File, "}");
 		    Output_Object.Char_Count := Output_Object.Char_Count + 1;
 		when ARM_Output.Deletion =>
---Ada.Text_Io.Put (" Unchange del");
+	            if TRACE_TF then
+			Ada.Text_Io.Put (" Unchange deletion");
+	            end if;
 		    Ada.Text_IO.Put (Output_Object.Output_File, "}");
 		    Output_Object.Char_Count := Output_Object.Char_Count + 1;
 		when ARM_Output.None =>
 		    null;
 		when ARM_Output.Both =>
---Ada.Text_Io.Put (" Unchange both");
+	            if TRACE_TF then
+			Ada.Text_Io.Put (" Unchange both");
+	            end if;
 	            Ada.Text_IO.Put (Output_Object.Output_File, "}}");
 	            Output_Object.Char_Count := Output_Object.Char_Count + 2;
 	    end case;
@@ -4613,11 +4796,15 @@ package body ARM_RTF is
 	begin
 	    case Format.Location is
 		when ARM_Output.Subscript =>
---Ada.Text_Io.Put (" Change sub");
+	            if TRACE_TF then
+			Ada.Text_Io.Put (" Change sub");
+	            end if;
 		    Ada.Text_IO.Put (Output_Object.Output_File, "{\sub ");
 		    Output_Object.Char_Count := Output_Object.Char_Count + 6;
 		when ARM_Output.Superscript =>
---Ada.Text_Io.Put (" Change sup");
+	            if TRACE_TF then
+			Ada.Text_Io.Put (" Change sup");
+	            end if;
 		    Ada.Text_IO.Put (Output_Object.Output_File, "{\super ");
 		    Output_Object.Char_Count := Output_Object.Char_Count + 8;
 		when ARM_Output.Normal =>
@@ -4632,11 +4819,15 @@ package body ARM_RTF is
 	begin
 	    case Output_Object.Location is
 		when ARM_Output.Subscript =>
---Ada.Text_Io.Put (" Unchange sub");
+	            if TRACE_TF then
+			Ada.Text_Io.Put (" Unchange sub");
+	            end if;
 		    Ada.Text_IO.Put (Output_Object.Output_File, "}");
 		    Output_Object.Char_Count := Output_Object.Char_Count + 1;
 		when ARM_Output.Superscript =>
---Ada.Text_Io.Put (" Unchange sup");
+	            if TRACE_TF then
+			Ada.Text_Io.Put (" Unchange sup");
+	            end if;
 		    Ada.Text_IO.Put (Output_Object.Output_File, "}");
 		    Output_Object.Char_Count := Output_Object.Char_Count + 1;
 		when ARM_Output.Normal =>
@@ -4654,7 +4845,9 @@ package body ARM_RTF is
 		"Not in paragraph");
 	end if;
 
---Ada.Text_Io.Put ("Text format");
+        if TRACE_TF then
+	    Ada.Text_Io.Put ("Text format");
+        end if;
 	-- We always make changes in the order:
 	-- Revision;
 	-- Location;
@@ -4688,7 +4881,9 @@ package body ARM_RTF is
 	    Make_Basic_Format;
 	-- else no change at all.
 	end if;
---Ada.Text_Io.New_Line;
+        if TRACE_TF then
+	    Ada.Text_Io.New_Line;
+        end if;
     end Text_Format;
 
 

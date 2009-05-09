@@ -253,6 +253,7 @@ package body ARM_Format is
     --  3/ 4/09 - RLB - Added code to suppress bullets and the like when
     --			displaying a deleted paragraph in New-Only mode
     --			and no paragraph numbers are shown.
+    --  5/ 6/09 - RLB - Added Labeled_Deleted_xxx.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -541,6 +542,7 @@ package body ARM_Format is
 	Labeled_Subclause, Labeled_Subsubclause,
 	Labeled_Revised_Section, Labeled_Revised_Clause, Labeled_Revised_Subclause, Labeled_Revised_Subsubclause,
         Labeled_Added_Section, Labeled_Added_Clause, Labeled_Added_Subclause, Labeled_Added_Subsubclause,
+        Labeled_Deleted_Clause, Labeled_Deleted_Subclause, Labeled_Deleted_Subsubclause,
 	Preface_Section,
 	Labeled_Annex, Labeled_Revised_Annex, Labeled_Added_Annex,
 	Labeled_Informative_Annex, Labeled_Revised_Informative_Annex,
@@ -854,6 +856,12 @@ package body ARM_Format is
 	    return Labeled_Added_Subclause;
 	elsif Canonical_Name = "labeledaddedsubsubclause" then
 	    return Labeled_Added_Subsubclause;
+	elsif Canonical_Name = "labeleddeletedclause" then
+	    return Labeled_Deleted_Clause;
+	elsif Canonical_Name = "labeleddeletedsubclause" then
+	    return Labeled_Deleted_Subclause;
+	elsif Canonical_Name = "labeleddeletedsubsubclause" then
+	    return Labeled_Deleted_Subsubclause;
 	elsif Canonical_Name = "subheading" then
 	    return Subheading;
 	elsif Canonical_Name = "addedsubheading" then
@@ -2524,7 +2532,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 	    begin
 --Ada.Text_IO.Put_Line ("Show_Leading_Text, para kind: " &
 --ARM_Database.Paragraph_Change_Kind_Type'Image(Format_Object.Next_Paragraph_Change_Kind) &
---"; version=" & Format_Object.Next_Paragraph_Version);
+--"; version=" & Format_Object.Next_Paragraph_Version & "; on line " & Arm_Input.Line_String(Input_Object));
 		if (ARM_Database."/=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted) and then
 		    ARM_Database."/=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number) and then
 		    ARM_Database."/=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_No_Delete_Message) and then
@@ -2584,7 +2592,29 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		-- Output subheader, if needed.
 		if Format_Object.Next_Paragraph_Subhead_Type /=
 		   Format_Object.Last_Paragraph_Subhead_Type then
-		    Make_Subhead (Format_Object.Next_Paragraph_Subhead_Type);
+		    if (ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_No_Delete_Message) or else
+		        ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message)) and then
+		       ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
+			-- Nothing at all should be showm.
+			null;
+if Format_Object.Next_Paragraph_Subhead_Type /= Plain or else
+   Format_Object.Next_Paragraph_Subhead_Type /= Introduction then
+   Ada.Text_IO.Put_Line("    -- No subhead (DelNoMsg); on line " & Arm_Input.Line_String(Input_Object));
+end if;
+		    elsif ((not Format_Object.Number_Paragraphs) or else
+		          Format_Object.No_Para_Num) and then
+		       (ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted) or else
+		        ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number)) and then
+		       ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
+			-- Nothing at all should be showm.
+			null;
+if Format_Object.Next_Paragraph_Subhead_Type /= Plain or else
+   Format_Object.Next_Paragraph_Subhead_Type /= Introduction then
+   Ada.Text_IO.Put_Line("    -- No subhead (Del-no paranum); on line " & Arm_Input.Line_String(Input_Object));
+end if;
+		    else
+		        Make_Subhead (Format_Object.Next_Paragraph_Subhead_Type);
+		    end if;
 		end if;
 
 		-- Set the paragraph format:
@@ -2672,7 +2702,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 		     -- number has been suppressed with @NoParaNum):
 
 --Ada.Text_IO.Put_Line ("Check_Paragraph, no number: format= " & Paragraph_Type'Image(Format_Object.Next_Paragraph_Format_Type) &
---   " output format= " & ARM_Output.Paragraph_Type'Image(Format_Object.Format));
+--   " output style= " & ARM_Output.Paragraph_Style_Type'Image(Format_Object.Style));
 		    -- Start the paragraph:
 		    if (ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_No_Delete_Message) or else
 		        ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind, ARM_Database.Deleted_Inserted_Number_No_Delete_Message) or else
@@ -6949,6 +6979,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			Ch : Character;
 			Version : ARM_Contents.Change_Version_Type := '0';
 		        Level : ARM_Contents.Level_Type;
+			Disposition : ARM_Output.Change_Type;
+			use type ARM_Output.Change_Type;
 		    begin
 			Get_Change_Version (Is_First => True,
 					    Version => Version);
@@ -6972,103 +7004,238 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			    ARM_Input.Replace_Char (Input_Object);
 		        end if;
 
-		        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Subclause then
-			    Format_Object.Clause_Number :=
-				(Section   => Format_Object.Clause_Number.Section,
-				 Clause    => Format_Object.Clause_Number.Clause,
-				 Subclause => Format_Object.Clause_Number.Subclause + 1,
-				 Subsubclause => 0);
-			    Level := ARM_Contents.Subclause;
-		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Subsubclause then
-			    Format_Object.Clause_Number.Subsubclause :=
-				Format_Object.Clause_Number.Subsubclause + 1;
-			    Level := ARM_Contents.Subsubclause;
-		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Clause then
-			    Format_Object.Clause_Number :=
-				(Section   => Format_Object.Clause_Number.Section,
-				 Clause    => Format_Object.Clause_Number.Clause + 1,
-				 Subclause => 0, Subsubclause => 0);
-			    Level := ARM_Contents.Clause;
-		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Section then
-			    Format_Object.Clause_Number :=
-				(Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
-				 Clause    => 0,
-				 Subclause => 0, Subsubclause => 0);
-			    Level := ARM_Contents.Section;
-			elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Annex then
-			    Format_Object.Clause_Number :=
-				(Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
-				 Clause    => 0,
-				 Subclause => 0, Subsubclause => 0);
-			    Level := ARM_Contents.Plain_Annex;
-			elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Normative_Annex then
-			    Format_Object.Clause_Number :=
-				(Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
-				 Clause    => 0,
-				 Subclause => 0, Subsubclause => 0);
-			    Level := ARM_Contents.Normative_Annex;
-			else -- Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Informative_Annex then
-			    Format_Object.Clause_Number :=
-				(Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
-				 Clause    => 0,
-				 Subclause => 0, Subsubclause => 0);
-			    Level := ARM_Contents.Informative_Annex;
+		        Calc_Change_Disposition (
+	            	    Format_Object => Format_Object,
+			    Version => Version,
+			    Operation => ARM_Output.Insertion,
+			    Text_Kind => Disposition);
+
+		        if Disposition = Do_Not_Display_Text then
+			    null; -- Ignore this; it isn't numbered or anything.
+		        elsif Disposition = ARM_Output.Deletion then
+		            raise Program_Error; -- A deletion inside of an insertion command!
+			else
+		            if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Subclause then
+			        Format_Object.Clause_Number :=
+				    (Section   => Format_Object.Clause_Number.Section,
+				     Clause    => Format_Object.Clause_Number.Clause,
+				     Subclause => Format_Object.Clause_Number.Subclause + 1,
+				     Subsubclause => 0);
+			        Level := ARM_Contents.Subclause;
+		            elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Subsubclause then
+			        Format_Object.Clause_Number.Subsubclause :=
+				    Format_Object.Clause_Number.Subsubclause + 1;
+			        Level := ARM_Contents.Subsubclause;
+		            elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Clause then
+			        Format_Object.Clause_Number :=
+				    (Section   => Format_Object.Clause_Number.Section,
+				     Clause    => Format_Object.Clause_Number.Clause + 1,
+				     Subclause => 0, Subsubclause => 0);
+			        Level := ARM_Contents.Clause;
+		            elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Section then
+			        Format_Object.Clause_Number :=
+				    (Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				     Clause    => 0,
+				     Subclause => 0, Subsubclause => 0);
+			        Level := ARM_Contents.Section;
+			    elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Annex then
+			        Format_Object.Clause_Number :=
+				    (Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				     Clause    => 0,
+				     Subclause => 0, Subsubclause => 0);
+			        Level := ARM_Contents.Plain_Annex;
+			    elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Normative_Annex then
+			        Format_Object.Clause_Number :=
+				    (Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				     Clause    => 0,
+				     Subclause => 0, Subsubclause => 0);
+			        Level := ARM_Contents.Normative_Annex;
+			    else -- Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Informative_Annex then
+			        Format_Object.Clause_Number :=
+				    (Section   => Format_Object.Clause_Number.Section, -- Will be set elsewhere.
+				     Clause    => 0,
+				     Subclause => 0, Subsubclause => 0);
+			        Level := ARM_Contents.Informative_Annex;
+			    end if;
+
+			    begin
+			        declare
+			            Clause_Number : constant String :=
+				        ARM_Contents.Lookup_Clause_Number (New_Title);
+
+			        begin
+			            if Disposition = ARM_Output.None then
+				        -- Normal reference:
+				        Check_End_Paragraph; -- End any paragraph that we're in.
+				        ARM_Output.Clause_Header (Output_Object,
+				            New_Title(1..New_Title_Length),
+				            Level => Level,
+				            Clause_Number => Clause_Number);
+			            else -- Insertion.
+				        Check_End_Paragraph; -- End any paragraph that we're in.
+				        ARM_Output.Revised_Clause_Header (Output_Object,
+				            New_Header_Text => New_Title(1..New_Title_Length),
+				            Old_Header_Text => "",
+				            Level => Level,
+				            Version => Version,
+				            Clause_Number => Clause_Number);
+				    end if;
+
+			            -- Check that the section numbers match the title:
+			            if Ada.Characters.Handling.To_Lower (New_Title) /=
+			               Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
+				          Level, Format_Object.Clause_Number)) then
+				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
+			            end if;
+			        end;
+			    exception
+			        when ARM_Contents.Not_Found_Error =>
+				    Ada.Text_IO.Put_Line ("** Unable to find header reference, line " & ARM_Input.Line_String (Input_Object));
+				    Ada.Text_IO.Put_Line ("   Looking for " & New_Title(1..New_Title_Length));
+			    end;
+		            -- Reset the paragraph numbers:
+		            Format_Object.Next_Paragraph := 1;
+		            Format_Object.Next_Insert_Para := 1;
+		            Format_Object.Next_AARM_Sub := 'a';
+		            -- Reset the subhead:
+		            Format_Object.Last_Paragraph_Subhead_Type := Plain;
+		            Format_Object.Next_Paragraph_Format_Type := Plain;
 			end if;
 
-			begin
-			    declare
-			        Clause_Number : constant String :=
-				    ARM_Contents.Lookup_Clause_Number (New_Title);
+		        Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
+--Ada.Text_IO.Put_Line (" &Unstack (Header)");
+		    end;
 
-				Disposition : ARM_Output.Change_Type;
-				use type ARM_Output.Change_Type;
+	        when Labeled_Deleted_Clause |
+		     Labeled_Deleted_Subclause |
+		     Labeled_Deleted_Subsubclause =>
+		    -- Load the title into the Title string:
+		    declare
+		        Old_Title : ARM_Contents.Title_Type;
+		        Old_Title_Length : Natural;
+		        Ch : Character;
+		        Version : ARM_Contents.Change_Version_Type := '0';
+		        Level : ARM_Contents.Level_Type;
+			Disposition : ARM_Output.Change_Type;
+			use type ARM_Output.Change_Type;
+		    begin
+			Get_Change_Version (Is_First => True,
+					    Version => Version);
+			ARM_Input.Check_Parameter_Name (Input_Object,
+			    Param_Name => "Name" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+			    Is_First => False,
+			    Param_Close_Bracket => Ch);
+			if Ch /= ' ' then
+			    -- There is a parameter:
+			    -- Load the new title into the Title string:
+			    ARM_Input.Copy_to_String_until_Close_Char (
+			        Input_Object,
+			        Ch,
+			        Old_Title, Old_Title_Length);
+			    Old_Title(Old_Title_Length+1 .. Old_Title'Last) :=
+				(others => ' ');
+			end if;
+		        ARM_Input.Get_Char (Input_Object, Ch);
+		        if Ch /= Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char then
+			    Ada.Text_IO.Put_Line ("  ** Bad close for Labeled_Deleted_(Sub)Clause on line " & ARM_Input.Line_String (Input_Object));
+			    ARM_Input.Replace_Char (Input_Object);
+		        end if;
+
+		        Calc_Change_Disposition (
+	            	    Format_Object => Format_Object,
+			    Version => Version,
+			    Operation => ARM_Output.Deletion,
+			    Text_Kind => Disposition);
+
+Ada.Text_IO.Put_Line ("Labeled_Deleted disp: " & ARM_Output.Change_Type'Image(Disposition));
+Ada.Text_IO.Put_Line ("  Version:" & Version);
+		        if Disposition = Do_Not_Display_Text then
+			    null; -- Ignore this; it isn't numbered or anything.
+		        elsif Disposition = ARM_Output.Insertion then
+		            raise Program_Error; -- An insertion inside of a deletion command!
+		        elsif Disposition = ARM_Output.Deletion then
+			    -- Format the text as a deletion, but not as a header.
+			    Check_End_Paragraph; -- End any paragraph that we're in.
+
+			    ARM_Output.Start_Paragraph (Output_Object,
+				Style => ARM_Output.Title,
+				Indent => 0,
+				Number => "");
+			    ARM_Output.Text_Format (Output_Object,
+				Format => (Bold => True,
+					   Italic => False,
+					   Font => ARM_Output.Default,
+					   Size => ARM_Output.Size_Type(-2),
+					   Color => ARM_Output.Default,
+					   Change => ARM_Output.Deletion,
+					   Version => Version,
+					   Added_Version => '0',
+					   Location => ARM_Output.Normal));
+			    ARM_Output.Ordinary_Text (Output_Object,
+				Old_Title(1..Old_Title_Length));
+			    ARM_Output.Text_Format (Output_Object,
+				ARM_Output.NORMAL_FORMAT);
+			    ARM_Output.End_Paragraph (Output_Object);
+
+		            -- Reset the paragraph numbers: (for the following deleted text, presumably also shown).
+		            Format_Object.Next_Paragraph := 1;
+		            Format_Object.Next_Insert_Para := 1;
+		            Format_Object.Next_AARM_Sub := 'a';
+		            -- Reset the subhead:
+		            Format_Object.Last_Paragraph_Subhead_Type := Plain;
+		            Format_Object.Next_Paragraph_Format_Type := Plain;
+			else -- Disposition = ARM_Output.None then
+		            if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Deleted_Subclause then
+			        Format_Object.Clause_Number :=
+				    (Section   => Format_Object.Clause_Number.Section,
+				     Clause    => Format_Object.Clause_Number.Clause,
+				     Subclause => Format_Object.Clause_Number.Subclause + 1,
+				     Subsubclause => 0);
+			        Level := ARM_Contents.Subclause;
+		            elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Deleted_Subsubclause then
+			        Format_Object.Clause_Number.Subsubclause :=
+				    Format_Object.Clause_Number.Subsubclause + 1;
+			        Level := ARM_Contents.Subsubclause;
+		            else --Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Deleted_Clause then
+			        Format_Object.Clause_Number :=
+				    (Section   => Format_Object.Clause_Number.Section,
+				     Clause    => Format_Object.Clause_Number.Clause + 1,
+				     Subclause => 0, Subsubclause => 0);
+			        Level := ARM_Contents.Clause;
+			    end if;
+
 			    begin
-			        Calc_Change_Disposition (
-		            	    Format_Object => Format_Object,
-				    Version => Version,
-				    Operation => ARM_Output.Insertion,
-				    Text_Kind => Disposition);
-
-			        if Disposition = Do_Not_Display_Text then
-				    null; -- Ignore this.
-			        elsif Disposition = ARM_Output.None then
+			        declare
+			            Clause_Number : constant String :=
+				        ARM_Contents.Lookup_Clause_Number (Old_Title);
+			        begin
 				    -- Normal reference:
 				    Check_End_Paragraph; -- End any paragraph that we're in.
 				    ARM_Output.Clause_Header (Output_Object,
-				        New_Title(1..New_Title_Length),
+				        Old_Title(1..Old_Title_Length),
 				        Level => Level,
 				        Clause_Number => Clause_Number);
-			        elsif Disposition = ARM_Output.Deletion then
-			            raise Program_Error; -- A deletion inside of an insertion command!
-			        else -- Insertion.
-				    Check_End_Paragraph; -- End any paragraph that we're in.
-				    ARM_Output.Revised_Clause_Header (Output_Object,
-				        New_Header_Text => New_Title(1..New_Title_Length),
-				        Old_Header_Text => "",
-				        Level => Level,
-				        Version => Version,
-				        Clause_Number => Clause_Number);
-				end if;
+				end;
 
 			        -- Check that the section numbers match the title:
-			        if Ada.Characters.Handling.To_Lower (New_Title) /=
+			        if Ada.Characters.Handling.To_Lower (Old_Title) /=
 			           Ada.Characters.Handling.To_Lower (ARM_Contents.Lookup_Title (
 				      Level, Format_Object.Clause_Number)) then
 				    Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
 			        end if;
+			    exception
+			        when ARM_Contents.Not_Found_Error =>
+				    Ada.Text_IO.Put_Line ("** Unable to find header reference, line " & ARM_Input.Line_String (Input_Object));
+				    Ada.Text_IO.Put_Line ("   Looking for " & Old_Title(1..Old_Title_Length));
 			    end;
-			exception
-			    when ARM_Contents.Not_Found_Error =>
-				Ada.Text_IO.Put_Line ("** Unable to find header reference, line " & ARM_Input.Line_String (Input_Object));
-				Ada.Text_IO.Put_Line ("   Looking for " & New_Title(1..New_Title_Length));
-			end;
-		        -- Reset the paragraph numbers:
-		        Format_Object.Next_Paragraph := 1;
-		        Format_Object.Next_Insert_Para := 1;
-		        Format_Object.Next_AARM_Sub := 'a';
-		        -- Reset the subhead:
-		        Format_Object.Last_Paragraph_Subhead_Type := Plain;
-		        Format_Object.Next_Paragraph_Format_Type := Plain;
+		            -- Reset the paragraph numbers:
+		            Format_Object.Next_Paragraph := 1;
+		            Format_Object.Next_Insert_Para := 1;
+		            Format_Object.Next_AARM_Sub := 'a';
+		            -- Reset the subhead:
+		            Format_Object.Last_Paragraph_Subhead_Type := Plain;
+		            Format_Object.Next_Paragraph_Format_Type := Plain;
+			end if;
 
 			Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Header)");
@@ -8017,6 +8184,15 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				-- as in 4.6. There ought to be a better way
 				-- of handling this, not sure what it is.
 				Dump_References (Format_Object.References);
+			    elsif (ARM_Database."=" (Kind, ARM_Database.Deleted) or else
+			        ARM_Database."=" (Kind, ARM_Database.Deleted_Inserted_Number)) and then
+			       ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) and then
+				(not Format_Object.Number_Paragraphs) then
+			        -- No delete messages ever in this case, so
+				-- display nothing, period.
+				Display_It := False;
+				-- Check if any Ref's already exist; see above.
+				Dump_References (Format_Object.References);
 			    else
 			        Display_It := Format_Object.Include_Annotations;
 			    end if;
@@ -8763,6 +8939,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		     Labeled_Revised_Subclause | Labeled_Revised_Subsubclause |
 		     Labeled_Added_Section | Labeled_Added_Clause |
 		     Labeled_Added_Subclause | Labeled_Added_Subsubclause |
+		     Labeled_Deleted_Clause |
+		     Labeled_Deleted_Subclause | Labeled_Deleted_Subsubclause |
 		     Labeled_Annex | Labeled_Revised_Annex | Labeled_Added_Annex |
 		     Labeled_Informative_Annex | Labeled_Revised_Informative_Annex |
 		     Labeled_Added_Informative_Annex |
@@ -10268,6 +10446,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			Labeled_Revised_Subclause | Labeled_Revised_Subsubclause |
 			Labeled_Added_Section | Labeled_Added_Clause |
 			Labeled_Added_Subclause | Labeled_Added_Subsubclause |
+		        Labeled_Deleted_Clause |
+			Labeled_Deleted_Subclause | Labeled_Deleted_Subsubclause |
 			Preface_Section |
 			Labeled_Annex | Labeled_Revised_Annex | Labeled_Added_Annex |
 			Labeled_Informative_Annex |

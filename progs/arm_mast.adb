@@ -21,7 +21,7 @@ package body ARM_Master is
     -- execute it.
     --
     -- ---------------------------------------
-    -- Copyright 2006, 2007  AXE Consultants.
+    -- Copyright 2006, 2007, 2009  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -66,6 +66,8 @@ package body ARM_Master is
     -- 10/04/06 - RLB - Added the List_Format command.
     -- 10/13/06 - RLB - Added specifiable default HTML colors.
     -- 12/19/07 - RLB - Added MS-DOS file names.
+    --  5/04/09 - RLB - Added the RTFFooter command.
+    --  5/06/09 - RLB - Added the RTFVersionName command.
 
     type Command_Type is (
 	-- Source commands:
@@ -99,8 +101,11 @@ package body ARM_Master is
 	-- RTF properties:
 	Single_RTF_Output_File,
 	RTF_Header_Prefix,
+	RTF_Footer_Text,
+	RTF_Footer,
 	RTF_Page_Size,
 	RTF_Fonts,
+	RTF_Version_Name,
 	-- Other commands:
 	Comment, Unknown);
 
@@ -126,16 +131,13 @@ package body ARM_Master is
     Source_Data : array (Source_Index) of Source_Item;
     Source_Length : Source_Count := 0;
 
-    type Versioned_Item is array (ARM_Contents.Change_Version_Type) of
-	Ada.Strings.Unbounded.Unbounded_String;
-
     -- Command line (global) properties:
     Change_Kind : ARM_Format.Change_Kind; -- Changes to generate.
     Change_Version : ARM_Contents.Change_Version_Type; -- Change version.
 
     -- Global properties:
     Display_Index_Entries : Boolean := False; -- Should Index entries be displayed?
-    Document_Title : Versioned_Item; -- Document title.
+    Document_Title : ARM_Contents.Versioned_String; -- Document title.
     Output_File_Prefix : Ada.Strings.Unbounded.Unbounded_String; -- Output file prefix.
     Include_Annotations : Boolean := False; -- Should annotations be included in the output?
     Include_ISO_Text : Boolean := False; -- Should ISO text be included in the output?
@@ -177,7 +179,13 @@ package body ARM_Master is
 
     -- RTF properties:
     Use_Large_RTF_Files : Boolean := False; -- Use small output files by default.
-    Header_Prefix : Versioned_Item;
+    Header_Prefix : ARM_Contents.Versioned_String;
+    Footer_Text   : ARM_Contents.Versioned_String;
+    Footer_Use_Date : Boolean := True; -- Use the date by default.
+    Footer_Use_Clause_Name : Boolean := True; -- Use the clause name rather than the text above by default.
+    Footer_Use_ISO_Format : Boolean := False; -- Use the normal format.
+    Version_Name  : ARM_Contents.Versioned_String;
+
     Page_Size : ARM_RTF.Page_Size := ARM_RTF.Letter; -- Use Letter size by default.
     Serif_Font : ARM_RTF.Serif_Fonts := ARM_RTF.Times_New_Roman; -- Use Times by default.
     Sans_Serif_Font : ARM_RTF.Sans_Serif_Fonts := ARM_RTF.Arial; -- Use Arial by default.
@@ -247,10 +255,16 @@ package body ARM_Master is
 	    return Single_RTF_Output_File;
 	elsif Canonical_Name = "rtfheaderprefix" then
 	    return RTF_Header_Prefix;
+	elsif Canonical_Name = "rtffootertext" then
+	    return RTF_Footer_Text;
+	elsif Canonical_Name = "rtffooter" then
+	    return RTF_Footer;
 	elsif Canonical_Name = "rtfpagesize" then
 	    return RTF_Page_Size;
 	elsif Canonical_Name = "rtffonts" then
 	    return RTF_Fonts;
+	elsif Canonical_Name = "rtfversionname" then
+	    return RTF_Version_Name;
 	elsif Canonical_Name = "comment" then
 	    return Comment;
 	else
@@ -259,7 +273,7 @@ package body ARM_Master is
     end Decode_Command;
 
 
-    function Get_Versioned_Item (Item_Details : in Versioned_Item;
+    function Get_Versioned_String (Item_Details : in ARM_Contents.Versioned_String;
 			         For_Version  : in ARM_Contents.Change_Version_Type)
 	return String is
 	-- Get a versioned item for the appropriate version.
@@ -272,7 +286,7 @@ package body ARM_Master is
 	    end if;
 	end loop;
 	return ""; -- Not defined for any version.
-    end Get_Versioned_Item;
+    end Get_Versioned_String;
 
 
     procedure Read_Master_File (Input_Object : in out ARM_Input.Input_Type'Class) is
@@ -321,13 +335,14 @@ package body ARM_Master is
 	    end Get_Single_String;
 
 	    procedure Get_Boolean (Param_Name : in ARM_Input.Command_Name_Type;
-				   Result : out Boolean) is
+				   Result : out Boolean;
+				   Is_First : in Boolean := False) is
 		-- Get a boolean value from a parameter named Param_Name.
 		Ch, Close_Ch : Character;
 	    begin
 		ARM_Input.Check_Parameter_Name (Input_Object,
 		    Param_Name => Param_Name,
-		    Is_First => False,
+		    Is_First => Is_First,
 		    Param_Close_Bracket => Close_Ch);
 		if Close_Ch /= ' ' then
 		    -- Get the Boolean character:
@@ -354,7 +369,7 @@ package body ARM_Master is
 		end if;
 	    end Get_Boolean;
 
-	    procedure Process_Versioned_Item (Item : in out Versioned_Item) is
+	    procedure Process_Versioned_String (Item : in out ARM_Contents.Versioned_String) is
 		-- @Command{Version=[<Version>],Text=[<Text>]}
 	        Param_Close_Ch, Ch : Character;
 	        Text : String(1..80);
@@ -403,7 +418,7 @@ package body ARM_Master is
 		    Ada.Text_IO.Put_Line ("** Missing closing character for command on line" & ARM_Input.Line_String (Input_Object));
 	            ARM_Input.Replace_Char (Input_Object);
 		end if;
- 	    end Process_Versioned_Item;
+ 	    end Process_Versioned_String;
 
 	    procedure Process_RTF_Fonts is
 	        -- @RTFFonts{Serif=[Times|Souvenir]},SansSerif=[Arial|Helvetica]}
@@ -861,7 +876,7 @@ package body ARM_Master is
 
 		when Title =>
 		    -- @Title{Version=[<version>],Text=[<title_text>]}
-		    Process_Versioned_Item (Document_Title);
+		    Process_Versioned_String (Document_Title);
 
 		when File_Prefix =>
 		    -- @FilePrefix{<File_Prefix>}
@@ -1033,7 +1048,53 @@ package body ARM_Master is
 
 		when RTF_Header_Prefix =>
 		    -- @RTFHeaderPrefix{Version=[<version>],Text=[<title_text>]}
-		    Process_Versioned_Item (Header_Prefix);
+		    Process_Versioned_String (Header_Prefix);
+
+		when RTF_Footer_Text =>
+		    -- @RTFFooterPrefix{Version=[<version>],Text=[<title_text>]}
+		    Process_Versioned_String (Footer_Text);
+
+		when RTF_Footer =>
+		    -- @RTFFooter{UseDate=[T|F],UseClauseName=[T|F],UseISOFormat=[T|F]}
+		    begin
+			Get_Open_Char;
+--Ada.Text_IO.Put_Line("Process RTF Footer");
+		        Get_Boolean ("UseDate" & (8..ARM_Input.Command_Name_Type'Last => ' '),
+				     Footer_Use_Date, Is_First => True);
+			if Footer_Use_Date then
+			    Ada.Text_IO.Put_Line("RTF footer will include the date");
+			else
+			    Ada.Text_IO.Put_Line("RTF footer will omit the date");
+			end if;
+
+		        Get_Boolean ("UseClauseName" & (14..ARM_Input.Command_Name_Type'Last => ' '),
+				     Footer_Use_Clause_Name);
+			if Footer_Use_Clause_Name then
+			    Ada.Text_IO.Put_Line("RTF footer will include the name of the clause that starts the page");
+			else
+			    Ada.Text_IO.Put_Line("RTF footer will include the fixed footer text");
+			end if;
+
+		        Get_Boolean ("UseISOFormat" & (13..ARM_Input.Command_Name_Type'Last => ' '),
+				     Footer_Use_ISO_Format);
+			if Footer_Use_ISO_Format then
+			    Ada.Text_IO.Put_Line("RTF footer will use the ISO format (swiss font, multiple sizes)");
+			else
+			    Ada.Text_IO.Put_Line("RTF footer will use the normal format (body fond, one size)");
+			end if;
+
+		        ARM_Input.Get_Char (Input_Object, Ch);
+		        if Ch = Close_Ch then
+			    null;
+		        else
+			    Ada.Text_IO.Put_Line ("** Missing closing character for command on line" & ARM_Input.Line_String (Input_Object));
+		            ARM_Input.Replace_Char (Input_Object);
+		        end if;
+		    end;
+
+		when RTF_Version_Name =>
+		    -- @RTFVersionName{Version=[<version>],Text=[<title_text>]}
+		    Process_Versioned_String (Version_Name);
 
 		when RTF_Page_Size =>
 		    -- @RTFPageSize{Letter|A4|HalfLetter|Ada95}
@@ -1233,7 +1294,7 @@ package body ARM_Master is
 				     Tab_Emulation => HTML_Tab_Emulation,
 			             Header_HTML => +HTML_Header_Text,
 			             Footer_HTML => +HTML_Footer_Text,
-				     Title => Get_Versioned_Item(Document_Title,Change_Version),
+				     Title => Get_Versioned_String(Document_Title,Change_Version),
 				     Body_Font => Font_of_Body,
 				     Text_Color => HTML_Text_Color,
 				     Background_Color => HTML_Background_Color,
@@ -1256,9 +1317,14 @@ package body ARM_Master is
 				        Primary_Serif_Font => Serif_Font,
 				        Primary_Sans_Serif_Font => Sans_Serif_Font,
 				        File_Prefix => +Output_File_Prefix,
-				        Title => Get_Versioned_Item(Document_Title,Change_Version),
-				        Header_Prefix => Get_Versioned_Item(Header_Prefix,Change_Version),
-				        Body_Font => Font_of_Body);
+				        Title => Get_Versioned_String(Document_Title,Change_Version),
+				        Header_Prefix => Get_Versioned_String(Header_Prefix,Change_Version),
+					Footer_Use_Date => Footer_Use_Date,
+					Footer_Use_Clause_Name => Footer_Use_Clause_Name,
+					Footer_Use_ISO_Format=> Footer_Use_ISO_Format,
+				        Footer_Text => Get_Versioned_String (Footer_Text, Change_Version),
+				        Body_Font => Font_of_Body,
+					Version_Names => Version_Name);
 		    else
 		        ARM_RTF.Create (Output,
 				        Page_Size => Page_Size,
@@ -1267,9 +1333,14 @@ package body ARM_Master is
 				        Primary_Serif_Font => Serif_Font,
 				        Primary_Sans_Serif_Font => Sans_Serif_Font,
 				        File_Prefix => +Output_File_Prefix,
-				        Title => Get_Versioned_Item(Document_Title,Change_Version),
-				        Header_Prefix => Get_Versioned_Item(Header_Prefix,Change_Version),
-				        Body_Font => Font_of_Body);
+				        Title => Get_Versioned_String (Document_Title, Change_Version),
+				        Header_Prefix => Get_Versioned_String (Header_Prefix, Change_Version),
+					Footer_Use_Date => Footer_Use_Date,
+					Footer_Use_Clause_Name => Footer_Use_Clause_Name,
+					Footer_Use_ISO_Format=> Footer_Use_ISO_Format,
+				        Footer_Text => Get_Versioned_String (Footer_Text, Change_Version),
+				        Body_Font => Font_of_Body,
+					Version_Names => Version_Name);
 		    end if;
 		    Generate_Sources (Output);
 		    ARM_RTF.Close (Output);
@@ -1280,7 +1351,7 @@ package body ARM_Master is
 	        begin
 		    ARM_Text.Create (Output,
 				     File_Prefix => +Output_File_Prefix,
-				     Title => Get_Versioned_Item(Document_Title,Change_Version));
+				     Title => Get_Versioned_String(Document_Title,Change_Version));
 		    Generate_Sources (Output);
 		    ARM_Text.Close (Output);
 	        end;
@@ -1290,7 +1361,7 @@ package body ARM_Master is
 	        begin
 		    ARM_Corr.Create (Output,
 				     File_Prefix => +Output_File_Prefix,
-				     Title => Get_Versioned_Item(Document_Title,Change_Version));
+				     Title => Get_Versioned_String(Document_Title,Change_Version));
 		    Generate_Sources (Output);
 		    ARM_Corr.Close (Output);
 	        end;

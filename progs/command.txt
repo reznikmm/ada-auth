@@ -1,6 +1,6 @@
 Ada formatting tool.
 
-Copyright 2000, 2002, 2004, 2005, 2006, 2007 AXE Consultants.
+Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009 AXE Consultants.
 P.O. Box 1512, Madison WI  53701
 E-Mail: randy@rrsoftware.com
 
@@ -295,10 +295,27 @@ RTF Output properties:
      the output, rather than one file per section. If this is not given,
      smaller files are generated.
 @RTFHeaderPrefix{Version=[<version>],Text=[<title_text>]}
-     The text given in the header before the title.
-     If no header prefix is given for the current version, the prefix of the
-     previous version is used; to use the same prefix for all versions, give
-     the prefix for Version=[0].
+     The text given in the header before the title; this is *RTF* text; no
+     embedded commands can be given here. If no header prefix is given for the
+     current version, the prefix of the previous version is used; to use the
+     same prefix for all versions, give the prefix for Version=[0]. If this is
+     empty, only the title will be used.
+@RTFFooterText{Version=[<version>],Text=[<title_text>]}
+     The fixed text given in the footer; this is *RTF* text; no embedded
+     commands can be given here. If no footer text is given for the current
+     version, the text of the previous version is used; to use the same text for
+     all versions, give the prefix for Version=[0]. This text will not be used
+     if UseClauseName is True.
+@RTFFooter{UseDate=[T|F],UseClauseName=[T|F],UseISOFormat=[T|F]}
+     Specifies the format of the footer. The date will be included if
+     UseDate is true (T), otherwise it will be omitted; by default it is
+     included. The footer text will be the name of the clause that starts the
+     page (other clauses may start on the page) if UseClauseName is true (T),
+     otherwise it will be the FooterText. The defailt is to use clause names.
+     The text font and size will match the ISO requirements if UseISOFormat
+     is true (T) - this means the footer will be in a Swiss font with multiple
+     sizes; otherwise (and this is the default) the footer will be in the body
+     font with a single size.
 @RTFPageSize{Letter|A4|HalfLetter|Ada95}
      Specifies the size of the RTF output; Letter is used if this is not
      specified. Letter is 8.5"x11"; A4 is European standard size; HalfLetter
@@ -306,6 +323,10 @@ RTF Output properties:
 @RTFFonts{Serif=[Times|Souvenir],SansSerif=[Arial|Helvetica]}
      Specifies the specific fonts used for the Serif and Sans Serif fonts.
      If not specified, Times ("Times New Roman") and Arial are used.
+@RTFVersionName{Version=[<version>],Text=[<title_text>]}
+     The specified text names the version as the "author" of any revisions.
+     For instance, for the Ada Standard, @RTFVersionName{Version=[2],Text=[Amendment 1]}
+     gives the author name "Amendment 1" to all version 2 revisions.
 
 Other commands:
 
@@ -493,6 +514,24 @@ Text commands:
         (Any annex references in commands ought to be "new text".) The
         formatter assigns annex letters. Version is the
         version number of the change (see @ChgRef for details).
+@LabeledDeletedClause{Version=[<version>],Name=[<old_text>]} - Start a labeled
+        clause. The title will be "old_text". If we are generating a new
+	version of the document, this clause does not exist. (Any clause references
+	ought to be in old deleted text.) The formatter assigns clause numbers. Version
+	is the version number of the change (see @ChgRef for details).
+	[Note: We do not support deleting sections or annexes.]
+@LabeledDeletedSubClause{Version=[<version>],Name=[<old_text>]} - Start a labeled
+        subclause. The title will be "old_text". If we are generating a new
+	version of the document, this subclause does not exist. (Any subclause
+	references ought to be in old deleted text.) The formatter assigns subclause
+        numbers. Version is the version number of the change (see @ChgRef for
+        details).
+@LabeledDeletedSubSubClause{Version=[<version>],Name=[<old_text>]} - Start a labeled
+        subsubclause. The title will be "old_text". If we are generating a new
+	version of the document, this subsubclause does not exist. (Any subsubclause
+	references ought to be in old deleted text.) The formatter assigns subsubclause
+        numbers. Version is the version number of the change (see @ChgRef for
+        details).
 
 @UnnumberedSection{<text>} - Start an unnumbered section. (These are the
 	Forward and Introduction). This *can* be referenced by a reference,

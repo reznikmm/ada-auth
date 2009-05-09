@@ -107,7 +107,7 @@ package body ARM_Contents is
     Title_List : array (1 .. 750) of Title_Record;
     Last_Title : Natural;
 
-    Old_Title_List : array (1 .. 150) of Title_Record;
+    Old_Title_List : array (1 .. 250) of Title_Record;
     Last_Old_Title : Natural;
 
     procedure Initialize is

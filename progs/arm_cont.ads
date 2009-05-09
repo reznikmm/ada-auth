@@ -1,3 +1,4 @@
+with Ada.Strings.Unbounded;
 package ARM_Contents is
 
     --
@@ -7,7 +8,7 @@ package ARM_Contents is
     -- references.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004, 2006, 2007  AXE Consultants.
+    -- Copyright 2000, 2004, 2006, 2007, 2009  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -49,6 +50,7 @@ package ARM_Contents is
     --		- RLB - Added version to changes.
     --  9/22/06 - RLB - Created type Clause_Number_Type and added SubSubClause.
     -- 12/18/07 - RLB - Added Plain_Annex.
+    --  5/06/09 - RLB - Added Versioned_String.
 
     subtype Title_Type is String (1 .. 80);
 	-- The type of a title.
@@ -61,6 +63,9 @@ package ARM_Contents is
 
     subtype Change_Version_Type is Character range '0' .. '9';
 	-- Defines the change version. Version 0 is the original text.
+
+    type Versioned_String is array (ARM_Contents.Change_Version_Type) of
+	Ada.Strings.Unbounded.Unbounded_String;
 
     type Clause_Number_Type is record
 	Section : Section_Number_Type;
