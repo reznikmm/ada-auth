@@ -1,10 +1,10 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2009/03/13 07:12:33 $}
+@Comment{$Date: 2009/05/09 06:28:46 $}
 @LabeledAddedNormativeAnnex{Version=[2],Name=[Obsolescent Features]}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/obsolescent.mss,v $}
-@comment{$Revision: 1.9 $}
+@comment{$Revision: 1.10 $}
 
 @LabeledAddedClause{Version=[2],Name=[Annex Contents]}
 
@@ -793,12 +793,12 @@ that has one of the following Definition_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Not_A_Definition
-A_Type_Definition that has one of the following Type_Kinds:
-    A_Constrained_Array_Definition
 A_Subtype_Indication
 A_Task_Definition
 A_Protected_Definition
-A_Component_Definition]}
+A_Component_Definition
+A_Type_Definition @em the returned element also has Type_Kinds:
+ @ @ @ @  A_Constrained_Array_Definition]}
 @end{Display}
 @end{DescribeCode}
 
@@ -1480,7 +1480,9 @@ or one where Done(Iterator) = True. The Status value is Data_Error.
 The Diagnosis string will indicate the kind of error detected.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Text=[Component expects any kind of non-Nil component.]}
+@ChgAdded{Version=[2],Text=[Component expects any kind of non-Nil component.
+Raises ASIS_Inappropriate_Element with a Status of Value_Error for any Nil
+component.]}
 @end{DescribeCode}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}

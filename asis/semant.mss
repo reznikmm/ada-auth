@@ -1,6 +1,6 @@
 @Part(ids, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/semant.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2009/03/13 07:12:33 $}
+@comment{$Revision: 1.3 $ $Date: 2009/05/09 06:28:46 $}
 
 @LabeledAddedSection{Version=[2],Name=[ASIS Semantic Subsystem]}
 
@@ -2634,8 +2634,8 @@ a component) that can hold a Callable_View.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[The library package
-@ChildUnit{Parent=[Asis.Object_Views],Child=[Access_Views]}Asis.Object_Views.Acc
-ess_Views shall exist. The package shall provide interfaces equivalent to those
+@ChildUnit{Parent=[Asis.Object_Views],Child=[Access_Views]}Asis.Object_Views.Access_Views
+shall exist. The package shall provide interfaces equivalent to those
 described in the following subclauses.]}
 
 

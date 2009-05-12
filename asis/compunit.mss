@@ -1,6 +1,6 @@
 @Part(compunit, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/compunit.mss,v $}
-@comment{$Revision: 1.12 $ $Date: 2009/03/13 07:12:33 $}
+@comment{$Revision: 1.13 $ $Date: 2009/05/09 06:28:46 $}
 
 
 @LabeledSection{package Asis.Compilation_Units}
@@ -337,10 +337,10 @@ Nil_Compilation_Unit_List.]}
 
 @leading@;These two function calls will always produce identical results:
 
-@begin{Display}
-@exam{Units := Corresponding_Children (Unit);
-Units := Corresponding_Children (Unit, Enclosing_Context (Unit));}
-@end{Display}
+@begin{ChildExample}
+Units := Corresponding_Children (Unit);
+Units := Corresponding_Children (Unit, Enclosing_Context (Unit));
+@end{ChildExample}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0046-1]}
 @ChgDeleted{Version=[2],Text=[Any non-Nil result will have an Enclosing_Context
@@ -435,10 +435,10 @@ unit exists in The_Context, returns a Nil_Compilation_Unit.]}
 
 @leading@;These two function calls will always produce identical results:
 
-@begin{Display}
-@exam{Unit := Corresponding_Parent_Declaration (Unit);
-Unit := Corresponding_Parent_Declaration (Unit, Enclosing_Context (Unit));}
-@end{Display}
+@begin{ChildExample}
+Unit := Corresponding_Parent_Declaration (Unit);
+Unit := Corresponding_Parent_Declaration (Unit, Enclosing_Context (Unit));
+@end{ChildExample}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0046-1]}
 @ChgDeleted{Version=[2],Text=[Any non-Nil result will have an Enclosing_Context
@@ -602,10 +602,10 @@ A_Public_Declaration_And_Body kind.)
 value that Is_Identical to The_Context.]}
 
 @leading@;These two function calls will always produce identical results:
-@begin{Display}
-@exam{Unit := Corresponding_Declaration (Unit);
-Unit := Corresponding_Declaration (Unit, Enclosing_Context (Unit));}
-@end{Display}
+@begin{ChildExample}
+Unit := Corresponding_Declaration (Unit);
+Unit := Corresponding_Declaration (Unit, Enclosing_Context (Unit));
+@end{ChildExample}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0046-1]}
 The Enclosing_Context for any non-Nil result will always be
@@ -731,10 +731,10 @@ be returned.
 value that Is_Identical to The_Context.]}
 
 @leading@;These two function calls will always produce identical results:
-@begin{Display}
-@exam{Unit := Corresponding_Body (Unit);
-Unit := Corresponding_Body (Unit, Enclosing_Context (Unit));}
-@end{Display}
+@begin{ChildExample}
+Unit := Corresponding_Body (Unit);
+Unit := Corresponding_Body (Unit, Enclosing_Context (Unit));
+@end{ChildExample}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0046-1]}
 The Enclosing_Context for any non-Nil result will always be
@@ -1176,10 +1176,10 @@ Is_Identical to The_Context.
 
 @leading@;These two function calls will always produce identical results:
 
-@begin{Display}
-@exam{SUnits := Subunits (PUnit);
-SUnits := Subunits (PUnit, Enclosing_Context (PUnit));}
-@end{Display}
+@begin{ChildExample}
+SUnits := Subunits (PUnit);
+SUnits := Subunits (PUnit, Enclosing_Context (PUnit));
+@end{ChildExample}
 
 The result may include unit values with a nonexistent unit kind. It
 includes values for subunits that exist in The_Context as
@@ -1239,11 +1239,11 @@ Is_Identical to The_Context.
 
 @leading@;These two function calls will always produce identical results:
 
-@begin{Display}
-@exam{PUnit := Corresponding_Subunit_Parent_Body (SUnit);
+@begin{ChildExample}
+PUnit := Corresponding_Subunit_Parent_Body (SUnit);
 PUnit := Corresponding_Subunit_Parent_Body (SUnit,
-                                   Enclosing_Context (SUnit));}
-@end{Display}
+                                   Enclosing_Context (SUnit));
+@end{ChildExample}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Subunit expects a unit

@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.19 $ $Date: 2009/03/13 07:12:34 $}
+@comment{$Revision: 1.20 $ $Date: 2009/05/09 06:28:47 $}
 
 @LabeledSection{package Asis}
 
@@ -34,7 +34,7 @@ representation.
 @ChgDeleted{Version=[1],Text=[Package ASIS Types:]}@Comment{The next line says the same thing}
 
 @leading@;The following types are made visible directly through package Asis:
-@begin{Example}
+@begin{Display}
 type ASIS_Integer
 type ASIS_Natural
 type ASIS_Positive
@@ -49,7 +49,7 @@ type Compilation_Unit_List
 Unit Kinds (set of enumeration types)
 type Traverse_Control
 subtype Program_Text
-@end{Example}
+@end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0041-1]}
 The ASIS interface uses string parameters for many procedure and function
@@ -77,32 +77,53 @@ An implementation may define reasonable types and constants.
 Please refer to commentary where each is used.]}
 
 
-@LabeledClause{type ASIS_Integer}
+@ChgNote{By SI99-0047-1}
+@LabeledRevisedClause{Version=[2],New=[subtypes ASIS_Integer, ASIS_Natural, and ASIS_Positive],Old=[type ASIS_Integer]}
 
 @begin{DescribeCode}
 @begin{Example}
 @key[subtype] @AdaSubtypeDefn{Name=[ASIS_Integer],Of=[Implementation_Defined_Integer_Type]} @key[is] @i{Implementation_Defined_Integer_Type};
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[ASIS_Natural],Of=[ASIS_Integer]} @key[is] ASIS_Integer @key[range] 0 .. ASIS_Integer'Last;
+@key[subtype] @AdaSubtypeDefn{Name=[ASIS_Positive],Of=[ASIS_Integer]} @key[is] ASIS_Integer @key[range] 1 .. ASIS_Integer'Last;]}
 @end{Example}
 
-A numeric subtype that allows each ASIS implementation to place constraints
-on the lower and upper bounds. Whenever possible, the range of this type
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Numeric subtypes],Old=[A numeric subtype]}
+that allows each ASIS implementation to place constraints
+on the lower and upper bounds@Chg{Version=[2],New=[ of values],Old=[]}.
+Whenever possible, the range of
+@Chg{Version=[2],New=[subtype ASIS_Integer],Old=[this type]}
 should meet or exceed -(2**31-1) .. 2**31-1.
 @end{DescribeCode}
 
-@LabeledClause{type ASIS_Natural}
+@LabeledRevisedClause{Version=[2],New=[moved type ASIS_Natural],
+Old=[type ASIS_Natural]}
+@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
+removing it now would change all of the clause numbers,
+and that would make a mess for editing and reference purposes. Ultimately,
+when the final standard is produced, it will be removed. - RLB}}]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[subtype] @AdaSubtypeDefn{Name=[ASIS_Natural],Of=[ASIS_Integer]} @key[is] ASIS_Integer @key[range] 0 .. ASIS_Integer'Last;
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[ASIS_Natural],Of=[ASIS_Integer]} @key[is] ASIS_Integer @key[range] 0 .. ASIS_Integer'Last;]}
 @end{Example}
 @end{DescribeCode}
 
 
-@LabeledClause{type ASIS_Positive}
+@LabeledRevisedClause{Version=[2],New=[moved type ASIS_Positive],
+Old=[type ASIS_Positive]}
+@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
+removing it now would change all of the clause numbers,
+and that would make a mess for editing and reference purposes. Ultimately,
+when the final standard is produced, it will be removed. - RLB}}]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[subtype] @AdaSubtypeDefn{Name=[ASIS_Positive],Of=[ASIS_Integer]} @key[is] ASIS_Integer @key[range] 1 .. ASIS_Integer'Last;
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[ASIS_Positive],Of=[ASIS_Integer]} @key[is] ASIS_Integer @key[range] 1 .. ASIS_Integer'Last;]}
 @end{Example}
 @end{DescribeCode}
 
@@ -373,9 +394,8 @@ results will only be obtained from subordinate kinds that are appropriate.
 These are designated within the hierarchy shown below:
 
 @begin{Example}@Comment{This could be a table, but it would be messy}
-       Element_Kinds         -> Subordinate Kinds
-
-  Key: Read "->" as "is further classified by its"
+       @b{Element_Kinds         -> Subordinate Kinds}
+           @i{(Read "->" as "is further classified by its")}
 
        A_Pragma              -> Pragma_Kinds
 
@@ -482,7 +502,7 @@ Literals                          -- @examcom{@Chg{Version=[2],New=[Ada Standard
    @AdaObjDefn{A_Locking_Policy_Pragma},          -- @examcom{D.3(3)}
 
 @ChgRef{Version=[2],Kind=[Revised]}
-@Chg{Version=[2],New=[@AdaObjDefn{A_No_Return_Pragma},               -- @examcom{6.5.1 (3)}],Old=[]}
+@Chg{Version=[2],New=[   @AdaObjDefn{A_No_Return_Pragma},               -- @examcom{6.5.1 (3)}],Old=[]}
    @AdaObjDefn{A_Normalize_Scalars_Pragma},       -- @examcom{H.1(3)}
    @AdaObjDefn{An_Optimize_Pragma},               -- @examcom{2.8(23)}
    @AdaObjDefn{A_Pack_Pragma},                    -- @examcom{13.2(3)}
@@ -491,7 +511,7 @@ Literals                          -- @examcom{@Chg{Version=[2],New=[Ada Standard
    @AdaObjDefn{A_Relative_Deadline_Pragma},       -- @examcom{D.2.6 (2.2)}@Chg{Version=[2],New=[
    @AdaObjDefn{A_Preelaborable_Initialization_Pragma},   -- @examcom{7.6 (5)}],Old=[]}
    @AdaObjDefn{A_Preelaborate_Pragma},            -- @examcom{10.2.1(3)}
-   @AdaObjDefn{A_Priority_Pragma},                -- @examcom{D.1(3)}}
+   @AdaObjDefn{A_Priority_Pragma},                -- @examcom{D.1(3)}
    @AdaObjDefn{A_Priority_Specific_Dispatching_Pragma},  -- @examcom{D.2.2 (2.2)}@Chg{Version=[2],New=[
    @AdaObjDefn{A_Profile_Pragma},                 -- @examcom{D.13 (2)}],Old=[]}
    @AdaObjDefn{A_Pure_Pragma},                    -- @examcom{10.2.1(14)}
@@ -1284,7 +1304,7 @@ Literals                           -- @examcom{@Chg{Version=[2],New=[Ada Standar
 
 @begin{DescribeCode}
 @begin{Example}
-@key[type] @AdaTypeDefn{Operator_Kinds} @key[is] (             -- @examcom{4.5@Chg{Version=[1],New=[ in 8652:1995],Old=[]}}
+@key[type] @AdaTypeDefn{Operator_Kinds} @key[is] (              -- @examcom{4.5@Chg{Version=[1],New=[ in the Ada Standard],Old=[]}}
 
    @AdaObjDefn{Not_An_Operator},                   -- @examcom{An unexpected element}
 
@@ -1614,7 +1634,7 @@ Literals                      -- @examcom{@Chg{Version=[2],New=[Ada Standard],Ol
    @AdaObjDefn{A_With_Clause},              -- @examcom{10.1.2}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
-   @Chg{Version=[2],New=[@AdaObjDefn{An_Aspect_Clause}        ],Old=[@AdaObjDefn{A_Representation_Clause}]},    -- @examcom{13.1     -> @Chg{Version=[2],New=[@AdaObjDefn{Aspect_Clause_Kinds}],Old=[@AdaObjDefn{Representation_Clause_Kinds}]}}
+   @Chg{Version=[2],New=[@AdaObjDefn{An_Aspect_Clause}        ],Old=[@AdaObjDefn{A_Representation_Clause}]}    -- @examcom{13.1     -> @Chg{Version=[2],New=[@AdaObjDefn{Aspect_Clause_Kinds}],Old=[@AdaObjDefn{Representation_Clause_Kinds}]}}
    @AdaObjDefn{A_Component_Clause});        -- @examcom{13.5.1}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
@@ -2076,6 +2096,11 @@ to IDL (See @RefSecNum{Miscellaneous ASIS I/O and IDL approaches} for details).
 
 
 @LabeledClause{type Program_Text}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Program_Text provides an abstraction for the
+program text for a program's source code. This is the return type for all Image
+functions.]}
 
 @begin{Example}
 @key[subtype] @AdaSubtypeDefn{Name=[Program_Text],Of=[Wide_String]} @key[is] Wide_String;

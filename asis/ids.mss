@@ -1,6 +1,6 @@
 @Part(ids, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/ids.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2009/03/04 01:07:17 $}
+@comment{$Revision: 1.5 $ $Date: 2009/05/09 06:28:46 $}
 
 @LabeledSection{package Asis.Ids}
 
@@ -53,6 +53,10 @@ subtype of an existing type.]}
               Right : @key[in] Id)
               @key[return] Boolean @key[is abstract];
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Nil_Id is the value of a Id that represents no
+element.]}
 @end{DescribeCode}
 
 
@@ -65,7 +69,7 @@ subtype of an existing type.]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}@Comment{From the RM A.4.9(3/2)}
 @ChgAdded{Version=[2],Text=[Returns an implementation-defined value which is a function of the value of The_Id.
-If A and B are ids such that Is_Identical (A, B) is true, Hash(A) equals
+If A and B are ids such that Is_Equal (A, B) is true, Hash(A) equals
 Hash(B).]}
 @begin{Implnote}
 @ChgAdded{Version=[2],Text=[This function should produce a result (not raise
@@ -107,7 +111,9 @@ an exception) when passed Nil_Id.]}
 
 Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the Id to check.
 
-Returns True if the Id is the Nil_Id.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns True if the Id is the Nil_Id@Chg{Version=[2],New=[, and
+returns False otherwise],Old=[]}.
 @end{DescribeCode}
 
 
@@ -117,15 +123,17 @@ Returns True if the Id is the Nil_Id.
 @begin{DescribeCode}
 @begin{Example}
 @key[function] @AdaSubDefn{Is_Equal} (Left  : @key[in] Id;
-                    Right : @key[in] Id) @key[return] Boolean;
+                   Right : @key[in] Id) @key[return] Boolean;
 @end{Example}
 
 Left @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the left Id to compare.
 Right @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the right Id to compare.
 
-Returns True if Left and Right represent the same physical Id, from the
-same physical compilation unit. The two Ids convert
-to Is_Identical Elements when converted with the same open ASIS Context.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns True if Left and Right represent the same physical Id@Chg{Version=[2],New=[],Old=[,]}
+from the same physical compilation unit@Chg{Version=[2],New=[, and
+returns False otherwise],Old=[]}. The two Ids convert to Is_Identical Elements when
+converted with the same open ASIS Context.
 @end{DescribeCode}
 
 

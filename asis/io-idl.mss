@@ -1,9 +1,9 @@
 @Part(io-idl, Root="asis.msm")
 
-@Comment{$Date: 2007/02/18 03:23:56 $}
+@Comment{$Date: 2009/05/09 06:28:46 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/io-idl.mss,v $}
-@comment{$Revision: 1.2 $}
+@comment{$Revision: 1.3 $}
 
 @LabeledInformativeAnnex{Miscellaneous ASIS I/O and IDL approaches}
 
@@ -13,20 +13,23 @@ types: Portable_Data and Id. The third portion contains an approach to
 providing an ASIS IDL. Annex C consists of:
 
 @begin{Itemize}
-@RefSec{package Portable_Data_Io} @em I/O for type Portable_Data from
-Asis.Data_Decomposition
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[@RefSec{package Portable_Data_Io} @em I/O for type
+Portable_Data from Asis.Data_Decomposition]}
 
 @RefSec{package Asis.Ids.Id_Io} @em I/O for type Id from Asis.Ids
 
-@RefSec{Implementation approach for IDL}
+@RefSec{Using ASIS with CORBA and IDL}
 @end{Itemize}
 
 
-@LabeledClause{package Portable_Data_Io}
+@ChgNote{Removed SI-47}
+@LabeledDeletedClause{Version=[2],Name=[package Portable_Data_Io]}
 
 
 @begin{Example}
-----------------------------------------------------------------------------
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------
 ----------------------------------------------------------------------------
 Annex C.1  package Portable_Data_Io
 ----------------------------------------------------------------------------
@@ -38,171 +41,171 @@ Annex C.1  package Portable_Data_Io
 ----------------------------------------------------------------------------
 @key[package] Portable_Data_Io @key[is]
 ----------------------------------------------------------------------------
-Portable_Data_Io
+Portable_Data_Io]}
 
-A package for reading/writing sequential portable data streams.
+@ChgDeleted{Version=[2],Text=[A package for reading/writing sequential portable data streams.
 ----------------------------------------------------------------------------
 It provides support for logging and delogging of application data using
-ASIS.
+ASIS.]}
 
-These interfaces do not make use of the normal ASIS implementation.
+@ChgDeleted{Version=[2],Text=[These interfaces do not make use of the normal ASIS implementation.
 This is a standalone package. It is not necessary to initialize ASIS
-before using this interface.
+before using this interface.]}
 
-This interface is intended to be separate from the normal ASIS
+@ChgDeleted{Version=[2],Text=[This interface is intended to be separate from the normal ASIS
 implementation. That is, linking with this interface does not cause the
 full ASIS implementation to be linked with an application. This keeps the
 memory cost of this facility to a minimum. However, it also means that the
 normal ASIS exceptions, Status, and Diagnosis facilities are not available.
 This interface can propagate exceptions other than those defined in
 Asis.Errors. In particular, the I/O facilities can raise any of the
-normal Ada I/O exceptions from package Ada.Io_Exceptions.
+normal Ada I/O exceptions from package Ada.Io_Exceptions.]}
 
-----------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------
 Annex C.1.1  type File_Type
-----------------------------------------------------------------------------
+----------------------------------------------------------------------------]}
 
-    @key[type] File_Type @key[is limited private];
+@ChgDeleted{Version=[2],Text=[    @key[type] File_Type @key[is limited private];]}
 
-----------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------
 Annex C.1.2  type File_Mode
-----------------------------------------------------------------------------
+----------------------------------------------------------------------------]}
 
-    @key[type] File_Mode @key[is] (In_File,
-                       Out_File);
+@ChgDeleted{Version=[2],Text=[    @key[type] File_Mode @key[is] (In_File,
+                       Out_File);]}
 
-------------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[------------------------------------------------------------------------------
 Annex C.1.3  procedure Create
-----------------------------------------------------------------------------
+----------------------------------------------------------------------------]}
 
-    @key[procedure] Create (File           : @key[in out] File_Type;
+@ChgDeleted{Version=[2],Text=[    @key[procedure] Create (File           : @key[in out] File_Type;
                       Mode           : @key[in]     File_Mode := Out_File;
                       Name           : @key[in]     Wide_String    := "";
-                      Form           : @key[in]     Wide_String    := "");
+                      Form           : @key[in]     Wide_String    := "");]}
 
-----------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------
 Annex C.1.4  procedure Open
-----------------------------------------------------------------------------
+----------------------------------------------------------------------------]}
 
-    @key[procedure] Open   (File           : @key[in out] File_Type;
+@ChgDeleted{Version=[2],Text=[    @key[procedure] Open   (File           : @key[in out] File_Type;
                       Mode           : @key[in]     File_Mode;
                       Name           : @key[in]     Wide_String;
-                      Form           : @key[in]     Wide_String := "");
+                      Form           : @key[in]     Wide_String := "");]}
 
-----------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------
 Annex C.1.5  procedure Close
-----------------------------------------------------------------------------
+----------------------------------------------------------------------------]}
 
-    @key[procedure] Close  (File           : @key[in out] File_Type);
+@ChgDeleted{Version=[2],Text=[    @key[procedure] Close  (File           : @key[in out] File_Type);]}
 
-----------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------
 Annex C.1.6  procedure Delete
-----------------------------------------------------------------------------
+----------------------------------------------------------------------------]}
 
-    @key[procedure] Delete (File           : @key[in out] File_Type);
+@ChgDeleted{Version=[2],Text=[    @key[procedure] Delete (File           : @key[in out] File_Type);]}
 
-----------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------
 Annex C.1.7  procedure Reset
-----------------------------------------------------------------------------
+----------------------------------------------------------------------------]}
 
-    @key[procedure] Reset  (File           : @key[in out] File_Type;
+@ChgDeleted{Version=[2],Text=[    @key[procedure] Reset  (File           : @key[in out] File_Type;
                       Mode           : @key[in]     File_Mode);
-    @key[procedure] Reset  (File           : @key[in out] File_Type);
+    @key[procedure] Reset  (File           : @key[in out] File_Type);]}
 
-----------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------
 Annex C.1.8  function Mode
-----------------------------------------------------------------------------
+----------------------------------------------------------------------------]}
 
-    @key[function] Mode (File              : @key[in] File_Type) @key[return] File_Mode;
+@ChgDeleted{Version=[2],Text=[    @key[function] Mode (File              : @key[in] File_Type) @key[return] File_Mode;]}
 
-----------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------
 Annex C.1.9  function Name
-----------------------------------------------------------------------------
+----------------------------------------------------------------------------]}
 
-    @key[function] Name (File              : @key[in] File_Type) @key[return] Wide_String;
+@ChgDeleted{Version=[2],Text=[    @key[function] Name (File              : @key[in] File_Type) @key[return] Wide_String;]}
 
-----------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------
 Annex C.1.10  function Form
-----------------------------------------------------------------------------
+----------------------------------------------------------------------------]}
 
-    @key[function] Form (File              : @key[in] File_Type) @key[return] Wide_String;
+@ChgDeleted{Version=[2],Text=[    @key[function] Form (File              : @key[in] File_Type) @key[return] Wide_String;]}
 
-----------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------
 Annex C.1.11  function Is_Open
-----------------------------------------------------------------------------
+----------------------------------------------------------------------------]}
 
-    @key[function] Is_Open (File           : @key[in] File_Type) @key[return] Boolean;
+@ChgDeleted{Version=[2],Text=[    @key[function] Is_Open (File           : @key[in] File_Type) @key[return] Boolean;]}
 
-----------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------
 Annex C.1.12  function Read
-----------------------------------------------------------------------------
+----------------------------------------------------------------------------]}
 
-    -- @examcom{ Read operations for single value and array values:}
+@ChgDeleted{Version=[2],Text=[    -- @examcom{ Read operations for single value and array values:}]}
 
-    @key[function] Read (File              : @key[in] File_Type)
-        @key[return] Asis.Data_Decomposition.Portable_Value;
+@ChgDeleted{Version=[2],Text=[    @key[function] Read (File              : @key[in] File_Type)
+        @key[return] Asis.Data_Decomposition.Portable_Value;]}
 
-    @key[function] Read (File              : @key[in] File_Type)
-        @key[return] Asis.Data_Decomposition.Portable_Data;
+@ChgDeleted{Version=[2],Text=[    @key[function] Read (File              : @key[in] File_Type)
+        @key[return] Asis.Data_Decomposition.Portable_Data;]}
 
-----------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------
 Annex C.1.13  procedure Write
-----------------------------------------------------------------------------
+----------------------------------------------------------------------------]}
 
- Write operations for single value and array values:
+@ChgDeleted{Version=[2],Text=[ Write operations for single value and array values:]}
 
-   @key[procedure] Write (File             : @key[in] File_Type;
-                    Data_Stream      : @key[in] Asis.Data_Decomposition.Portable_Value);
+@ChgDeleted{Version=[2],Text=[   @key[procedure] Write (File             : @key[in] File_Type;
+                    Data_Stream      : @key[in] Asis.Data_Decomposition.Portable_Value);]}
 
-   @key[procedure] Write (File             : @key[in] File_Type;
-                    Data_Stream      : @key[in] Asis.Data_Decomposition.Portable_Data);
+@ChgDeleted{Version=[2],Text=[   @key[procedure] Write (File             : @key[in] File_Type;
+                    Data_Stream      : @key[in] Asis.Data_Decomposition.Portable_Data);]}
 
-----------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------
 Annex C.1.14  generic package Write_Data_Type
-----------------------------------------------------------------------------
+----------------------------------------------------------------------------]}
 
-    @key[generic]
+@ChgDeleted{Version=[2],Text=[    @key[generic]
         @key[type] Data_Type @key[is private];
         @key[with function] Convert (Value : @key[in] Data_Type)
             @key[return] Asis.Data_Decomposition.Portable_Data;
         -- @examcom{Instantiated from Asis.Data_Decomposition.Portable_Transfer.Convert}
     @key[package] Write_Data_Type @key[is]
         @key[procedure] Write (File        : @key[in] File_Type;
-                         Value       : @key[in] Data_Type);
+                         Value       : @key[in] Data_Type);]}
 
-        -- @examcom{ Convenience interface. Can be more efficient, but is}
+@ChgDeleted{Version=[2],Text=[        -- @examcom{ Convenience interface. Can be more efficient, but is}
         -- @examcom{ exactly equivalent to:}
         --
         -- @examcom{     Write (File, Convert(Value));}
         --
-    end Write_Data_Type;
+    end Write_Data_Type;]}
 
-----------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------
 Annex C.1.15  function End_Of_File
-----------------------------------------------------------------------------
+----------------------------------------------------------------------------]}
 
-    @key[function] End_Of_File (File       : @key[in] File_Type) @key[return] Boolean;
+@ChgDeleted{Version=[2],Text=[    @key[function] End_Of_File (File       : @key[in] File_Type) @key[return] Boolean;]}
 
-----------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------
 Annex C.1.16  Exceptions
-----------------------------------------------------------------------------
+----------------------------------------------------------------------------]}
 
-    Status_Error : @key[exception renames] Ada.Io_Exceptions.Status_Error;
+@ChgDeleted{Version=[2],Text=[    Status_Error : @key[exception renames] Ada.Io_Exceptions.Status_Error;
     Mode_Error   : @key[exception renames] Ada.Io_Exceptions.Mode_Error;
     Name_Error   : @key[exception renames] Ada.Io_Exceptions.Name_Error;
     Use_Error    : @key[exception renames] Ada.Io_Exceptions.Use_Error;
     Device_Error : @key[exception renames] Ada.Io_Exceptions.Device_Error;
     End_Error    : @key[exception renames] Ada.Io_Exceptions.End_Error;
-    Data_Error   : @key[exception renames] Ada.Io_Exceptions.Data_Error;
+    Data_Error   : @key[exception renames] Ada.Io_Exceptions.Data_Error;]}
 
-@key[private]
+@ChgDeleted{Version=[2],Text=[@key[private]
     @key[package] Seq_Io @key[is new] Ada.Sequential_Io
         (Asis.Data_Decomposition.Portable_Value);
-    @key[type] File_Type @key[is new] Seq_Io.File_Type;
+    @key[type] File_Type @key[is new] Seq_Io.File_Type;]}
 
-----------------------------------------------------------------------------
+@ChgDeleted{Version=[2],Text=[----------------------------------------------------------------------------]}
 
-@key[end] Portable_Data_Io;
+@ChgDeleted{Version=[2],Text=[@key[end] Portable_Data_Io;]}
 @end{Example}
 
 
@@ -210,22 +213,13 @@ Annex C.1.16  Exceptions
 
 
 @begin{Example}
-----------------------------------------------------------------------------
-----------------------------------------------------------------------------
-Annex C.2  package Asis.Ids.Id_Io
-----------------------------------------------------------------------------
-----------------------------------------------------------------------------
 @key[with] Asis;
 @key[with] Asis.Ids;
 @key[with] Ada.Direct_Io;
 @key[with] Ada.Io_Exceptions;
-----------------------------------------------------------------------------
-----------------------------------------------------------------------------
 @key[package] Id_Io @key[is]
 ----------------------------------------------------------------------------
-----------------------------------------------------------------------------
 Asis.Ids.Id_Io provides Id I/O Facilities.
-----------------------------------------------------------------------------
 ----------------------------------------------------------------------------
 This interface is a copy of the Ada.Direct_Io interface.
 The internals of this package are implementation dependent and the
@@ -233,13 +227,13 @@ amount of space taken, in an Id file, by an ASIS Id value is variable.
 An ASIS Id value has a fixed 'Size, but, the size of the data represented
 by that Id value can be arbitrarily large. It can contain access values.
 ----------------------------------------------------------------------------
-Annex C.2.1  type File_Type
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.1  type File_Type
 ----------------------------------------------------------------------------
 
     @key[type] File_Type @key[is] limited private;
 
 ----------------------------------------------------------------------------
-Annex C.2.2  type File_Mode
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.2  type File_Mode
 ----------------------------------------------------------------------------
 
     @key[type] File_Mode @key[is] (In_File,
@@ -252,20 +246,20 @@ Annex C.2.2  type File_Mode
     -- @examcom{ Id in a file is not necessarily at From => 2.}
 
 ----------------------------------------------------------------------------
-Annex C.2.3  type Count
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.3  type Count
 ----------------------------------------------------------------------------
 
     @key[type] Count @key[is new] Integer range 0 ..
         Asis.Implementation_Defined_Integer_Constant;
 
 ----------------------------------------------------------------------------
-Annex C.2.4  type Positive_Count
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.4  type Positive_Count
 ----------------------------------------------------------------------------
 
     @key[subtype] Positive_Count @key[is] Count range 1 .. Count'Last;
 
 ----------------------------------------------------------------------------
-Annex C.2.5  procedure Create
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.5  procedure Create
 ----------------------------------------------------------------------------
 
     @key[procedure] Create (File      : @key[in out] File_Type;
@@ -274,7 +268,7 @@ Annex C.2.5  procedure Create
                       Form      : @key[in]     Wide_String    := "");
 
 ----------------------------------------------------------------------------
-Annex C.2.6  procedure Open
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.6  procedure Open
 ----------------------------------------------------------------------------
 
     @key[procedure] Open (File        : @key[in out] File_Type;
@@ -283,50 +277,50 @@ Annex C.2.6  procedure Open
                     Form        : @key[in]     Wide_String := "");
 
 ----------------------------------------------------------------------------
-Annex C.2.7  procedure Close
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.7  procedure Close
 ----------------------------------------------------------------------------
 
     @key[procedure] Close (File       : @key[in out] File_Type);
 
 ----------------------------------------------------------------------------
-Annex C.2.8  procedure Delete
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.8  procedure Delete
 ----------------------------------------------------------------------------
 
     @key[procedure] Delete (File      : @key[in out] File_Type);
 
 ----------------------------------------------------------------------------
-Annex C.2.9  procedure Reset
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.9  procedure Reset
 ----------------------------------------------------------------------------
 
     @key[procedure] Reset (File       : @key[in out] File_Type; Mode : File_Mode);
     @key[procedure] Reset (File       : @key[in out] File_Type);
 
 ----------------------------------------------------------------------------
-Annex C.2.10 function Mode
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.10 function Mode
 ----------------------------------------------------------------------------
 
     @key[function] Mode (File         : @key[in] File_Type) @key[return] File_Mode;
 
 ----------------------------------------------------------------------------
-Annex C.2.11 function Name
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.11 function Name
 ----------------------------------------------------------------------------
 
     @key[function] Name (File         : @key[in] File_Type) @key[return] Wide_String;
 
 ----------------------------------------------------------------------------
-Annex C.2.12 function Form
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.12 function Form
 ----------------------------------------------------------------------------
 
     @key[function] Form (File         : @key[in] File_Type) @key[return] Wide_String;
 
 ----------------------------------------------------------------------------
-Annex C.2.13 function Is_Open
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.13 function Is_Open
 ----------------------------------------------------------------------------
 
     @key[function] Is_Open (File      : @key[in] File_Type) @key[return] Boolean;
 
 ----------------------------------------------------------------------------
-Annex C.2.14 procedure Read
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.14 procedure Read
 ----------------------------------------------------------------------------
 Read operations
 
@@ -344,7 +338,7 @@ Read operations
                     Context     : @key[in]  Asis.Context);
 
 ------------------------------------------------------------------------------
-Annex C.2.15 procedure Write
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.15 procedure Write
 ----------------------------------------------------------------------------
 Write operations
 
@@ -360,32 +354,32 @@ Write operations
                      Item       : @key[in] Asis.Element);
 
 ----------------------------------------------------------------------------
-Annex C.2.16 procedure Set_Index
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.16 procedure Set_Index
 ----------------------------------------------------------------------------
 
     @key[procedure] Set_Index (File   : @key[in] File_Type;
                          To     : @key[in] Positive_Count);
 
 ----------------------------------------------------------------------------
-Annex C.2.17 function Index
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.17 function Index
 ----------------------------------------------------------------------------
 
     @key[function] Index (File        : @key[in] File_Type) @key[return] Positive_Count;
 
 ----------------------------------------------------------------------------
-Annex C.2.18 function Size
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.18 function Size
 ----------------------------------------------------------------------------
 
     @key[function] Size (File         : @key[in] File_Type) @key[return] Count;
 
 ----------------------------------------------------------------------------
-Annex C.2.19 function End_Of_File
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.19 function End_Of_File
 ----------------------------------------------------------------------------
 
     @key[function] End_Of_File (File  : File_Type) @key[return] Boolean;
 
 ----------------------------------------------------------------------------
-Annex C.2.20 Exceptions
+Annex C.@Chg{Version=[2],New=[1],Old=[2]}.20 Exceptions
 ----------------------------------------------------------------------------
 
     -- @examcom{Exceptions}
@@ -409,7 +403,8 @@ Annex C.2.20 Exceptions
 @end{Example}
 
 
-@LabeledClause{Implementation approach for IDL}
+@ChgNote{Improve title - SI-47}
+@LabeledRevisedClause{Version=[2],New=[Using ASIS with CORBA and IDL],Old=[Implementation approach for IDL]}
 
 An ASIS application can use the required ASIS interfaces within a Common Object
 Request Broker Architecture (CORBA)@Defn{CORBA} networked environment using the
@@ -457,15 +452,19 @@ specification through an Ada with clause. Client tools in Java, in C++, or in
 Smalltalk can also be easily built.
 
 
-@LabeledSubClause{Approach to implement the Traverse_Element generic}
+@ChgNote{Improve title - SI-47}
+@LabeledRevisedSubClause{Version=[2],New=[Implementing generic subprogram
+Traverse_Element in a CORBA environment],Old=[Approach to implement the
+Traverse_Element generic]}
 
-@leading@;An IDL should first be created from the ASIS specification (this
-International Standard). Automatic IDL generators can create IDL from Ada.
-Language features such as generics are problematic for this automatic
-conversion as generics cannot be automatically translated into IDL. The package
-Asis.Iterator is the only required ASIS package containing a generic. The
-following steps should be performed to create an IDL to support the required
-ASIS interfaces:
+@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+An IDL @Chg{Version=[2],New=[must],Old=[should]} first be created from the ASIS
+specification (this International Standard). Automatic IDL generators can create
+IDL from Ada. Language features such as generics are problematic for this
+automatic conversion as generics cannot be automatically translated into IDL.
+The package Asis.Iterator is the only required ASIS package containing a
+generic. The following steps should be performed to create an IDL to support the
+required ASIS interfaces:
 
 @begin{Enumerate}
 Remove child package Asis.Iterator.
@@ -480,8 +479,8 @@ Rename package Asis as ASIS_CORBA.
 Submit package ASIS_CORBA to an automatic IDL generation process.
 
 Insert the attached IDL segments for Interface Iterator (see
-@RefSecNum{ASIS API client tool}) and
-Interface Generics (See @RefSecNum{ASIS API client tool}) to restore the
+@RefSecNum{IDL to implement generic subprogram Traverse_Element}) and
+Interface Generics (see @RefSecNum{IDL to implement generic subprogram Traverse_Element}) to restore the
 effects of Asis.Iterator into the automatically generated IDL. [Note: the
 Interface Element and enum Traverse_Control could be automatically generated;
 they are shown here as they are supporters of Interface Generics and Interface
@@ -514,7 +513,9 @@ portable).
 @end{Enumerate}
 
 
-@LabeledSubClause{IDL to implement the Traverse_Element generic}
+@ChgNote{Improve title - SI-47}
+@LabeledRevisedSubClause{Version=[2],New=[IDL to implement generic subprogram Traverse_Element],
+Old=[IDL to implement the Traverse_Element generic]}
 
 It is possible to automatically generate IDL from the ASIS specification. The
 following interfaces for Interface Generics and Interface Iterator should be

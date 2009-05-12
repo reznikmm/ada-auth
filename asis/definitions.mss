@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.15 $ $Date: 2009/03/13 07:12:33 $}
+@comment{$Revision: 1.16 $ $Date: 2009/05/09 06:28:46 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -483,11 +483,13 @@ A_Private_Extension_Declaration
 Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
 derived_type_definition to query.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0047-1]}
 Returns the type structure from which the specified type definition has
 been derived. This function will recursively unwind derivations and
-subtyping until the type_declaration derives a change of representation or
-is no longer derived. See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 13.6.
+subtyping until the type_declaration @Chg{Version=[2],New=[is a derived type whose parent
+type has a different representation],Old=[derives a change of representation]} or
+is @Chg{Version=[2],New=[not a derived type],Old=[no longer derived]}.
+See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 13.6.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
@@ -1244,9 +1246,7 @@ A_Formal_Access_Type_Definition]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[or that
 has one of the following Access_Definition_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2],Text=[An_Anonymous_Access_To_Procedure
-An_Anonymous_Access_To_Protected_Procedure
-An_Anonymous_Access_To_Function
+@ChgAdded{Version=[2],Text=[An_Anonymous_Access_To_Function
 An_Anonymous_Access_To_Protected_Function]}
 @end{Display}
 
@@ -1255,9 +1255,7 @@ An_Anonymous_Access_To_Protected_Function]}
 is An_Access_Type_Definition or A_Formal_Access_Type_Definition then it
 also has one of the following Access_Type_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2],Text=[An_Access_To_Procedure
-An_Access_To_Protected_Procedure
-An_Access_To_Function
+@ChgAdded{Version=[2],Text=[An_Access_To_Function
 An_Access_To_Protected_Function]}
 @end{Display}
 
@@ -1654,7 +1652,7 @@ explicit associations. It has a length equal to the number of
 discriminant_specification elements of the known_discriminant_part. The order
 of normalized associations matches the order of discriminant_specification elements.
 
-Each normalized association represents a one on one mapping of a
+Each normalized association represents a one-on-one mapping of a
 discriminant_specification to the explicit expression. A normalized
 association has one A_Defining_Name component that denotes the
 discriminant_specification, and one An_Expression component that is the
@@ -2266,8 +2264,9 @@ A_Clause
              @key[return] Asis.Declarative_Item_List;
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Type_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the task
-type definition to query.
+@Chg{Version=[2],New=[or protected],Old=[type]} definition to query.
 Include_Pragmas @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether
 pragmas are to be returned.
 

@@ -1,6 +1,6 @@
 @Part(statements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/statements.mss,v $}
-@comment{$Revision: 1.11 $ $Date: 2009/03/13 07:12:33 $}
+@comment{$Revision: 1.12 $ $Date: 2009/05/09 06:28:46 $}
 
 
 @LabeledSection{package Asis.Statements}
@@ -857,12 +857,7 @@ An_Expression
 
 
 @ChgNote{ SI99-0010-1 }
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Return_Object_Specification]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Return_Object_Specification]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Return_Object_Specification]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -899,12 +894,7 @@ Returns an element that has the following Declaration_Kinds:]}
 
 
 @ChgNote{ SI99-0010-1 }
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Extended_Return_Statements]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Extended_Return_Statements]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Extended_Return_Statements]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -954,12 +944,7 @@ A_Pragma]}
 
 
 @ChgNote{ SI99-0010-1 }
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Extended_Return_Exception_Handlers]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Extended_Return_Exception_Handlers]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Extended_Return_Exception_Handlers]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1145,16 +1130,23 @@ Returns the declaration of the procedure or entry denoted by the call.
 @leading@keepnext@;Returns a Nil_Element if the:
 
 @begin{Itemize}
-prefix of the call denotes an access to a procedure implicit
-or explicit dereference,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+prefix of the call denotes an @Chg{Version=[2],New=[],Old=[access to a procedure ]}implicit or explicit
+  dereference@Chg{Version=[2],New=[ of an access to a procedure value, or],Old=[,]}
 
-argument is a dispatching call,
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[argument is a dispatching call,]}
 
-argument is a call to a dispatching operation of a tagged type which
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Statement],Old=[argument]} is a
+to a dispatching operation of a tagged type which
 is not statically determined.
 @end{Itemize}
 
-If procedure_prefix denotes an attribute_reference, and if the corresponding
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+If @Chg{Version=[2],New=[the ],Old=[]}@Syni{procedure_}prefix
+@Chg{Version=[2],New=[or @Syni{procedure_}name ],Old=[]}denotes
+an attribute_reference, and if the corresponding
 attribute is (re)defined by an attribute definition clause, an implementation
 is encouraged, but not required, to return the definition of the corresponding
 subprogram whose name is used after @key[use] in this attribute definition
@@ -1257,10 +1249,11 @@ explicit_actual_parameter@Chg{Version=[2],New=[,],Old=[ or]} a
 default_expression@Chg{Version=[2],New=[, or when the call
 uses a prefixed view of the subprogram, the prefix of the call],Old=[]}.
 
-If the prefix of the call denotes an access to a procedure implicit or
-explicit deference, normalized associations are constructed on the basis
-of the formal_part of the parameter_profile from the corresponding
-access_to_subprogram definition.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+If the prefix of the call denotes an @Chg{Version=[2],New=[],Old=[access to a procedure ]}implicit
+or explicit dereference@Chg{Version=[2],New=[ of an access to a procedure value],Old=[]},
+normalized associations are constructed on the basis of the formal_part of the
+parameter_profile from the corresponding access_to_subprogram definition.
 
 Returns Nil_Element for normalized associations in the case where
 the called procedure can be determined only dynamically (dispatching
@@ -1862,12 +1855,7 @@ A_Selected_Component
 @end{DescribeCode}
 
 
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Raise_Statement_Message]}}
 @LabeledAddedClause{Version=[2],Name=[function Raise_Statement_Message]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
 
 @begin{DescribeCode}
 @begin{Example}

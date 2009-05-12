@@ -1,4 +1,4 @@
-@Comment{Master file for the ASIS Standard}
+@Comment{Master file for the ASIS Standard (ISO version)}
 
 @Comment{Global properties}
 @HideIndexEntries
@@ -6,8 +6,10 @@
 @ShowISO@Comment{only ISO versions of this document}
 @Comment{No paragraph numbers - no @NumberParagraphs command}
 @comment{Do not link Non-Terminals [no grammar here]}
-@Title{Version=[0],Text=[Ada Semantic Interface Specification (ASIS)]}@Comment{Same title for all versions}
-@FilePrefix{AS}
+@Title{Version=[0],Text=[ISO/IEC 15291:1999(E) reorganized]}
+@Title{Version=[1],Text=[ISO/IEC 15291:1999(E) new style]}
+@Title{Version=[2],Text=[ISO/IEC CD 15291]}
+@FilePrefix{ISO}
 @ExampleFont{Fixed}
 @BodyFont{Swiss}@Comment{Following the current ISO drafting style}
 @NoteFormat{ISO2004}@Comment{Ditto}
@@ -16,20 +18,23 @@
 
 @Comment{RTF properties}
 @SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}
-@RTFHeaderPrefix{Version=[0],Text=[ISO/IEC 15291:1999(E) reorganized]}
-@RTFHeaderPrefix{Version=[1],Text=[ISO/IEC 15291:1999(E) new style]}
-@RTFHeaderPrefix{Version=[2],Text=[ISO/IEC 15291:200Y(E)]}
-@RTFFooter{UseDate=[T],UseClauseName=[T],UseISOFormat=[F]}@Comment{RM style footers}
-@RTFPageSize{Letter}@Comment{ISO version should be A4}
-@RTFFonts{Serif=[Times],SansSerif=[Arial]}
+@RTFHeaderPrefix{Version=[0],Text=[]}@Comment{No prefix here, just the title (really the document number)}
+@RTFHeaderPrefix{Version=[1],Text=[]}@Comment{No prefix here, just the title (really the document number)}
+@RTFHeaderPrefix{Version=[2],Text=[]}@Comment{No prefix here, just the title (really the document number)}
+@RTFFooterText{Version=[0],Text=[\'a9 ISO/IEC 1999 \endash  All rights reserved]}
+@RTFFooterText{Version=[2],Text=[\'a9 ISO/IEC 2009 \endash  All rights reserved]}
+@RTFFooter{UseDate=[F],UseClauseName=[F],UseISOFormat=[T]}
+@RTFPageSize{A4}
+@RTFFonts{Serif=[Times],SansSerif=[Helvetica]}@Comment{ISO requires the latter}
 @RTFVersionName{Version=[0],Text=[Original Text]}
 @RTFVersionName{Version=[1],Text=[Reformatted Text]}
 @RTFVersionName{Version=[2],Text=[Revised Standard]}
 
-@Comment{HTML properties}
+@Comment{HTML properties - generally, no HTML version is made of the ISO version,
+         so these settings aren't important}
 @Comment{Many small files are used, thus no @SingleHTMLOutputFile command}
 @HTMLKind{Version=[4],Unicode=[T]}
-@HTMLNavBar{RefName=[],SrchName=[AS-SRCH.html],IndexName=[],
+@HTMLNavBar{RefName=[],SrchName=[ISO-SRCH.html],IndexName=[],
    UseButtons=[T],OnTop=[T],OnBottom=[T]}
 @Comment{We let the program generate the links to "References" and "Index"}
 @HTMLTabs{EmulateFixedOnly}

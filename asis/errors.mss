@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/errors.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2009/03/13 07:12:33 $}
+@comment{$Revision: 1.3 $ $Date: 2009/05/09 06:28:46 $}
 
 @LabeledSection{package Asis.Errors}
 
@@ -35,23 +35,23 @@ This enumeration type describes the various kinds of errors.
 @tabset{P49}
 @key[type] @AdaTypeDefn{Error_Kinds} @key[is] (
 
-    @AdaObjDefn{Not_An_Error},@\-- No error is presently recorded
+    @AdaObjDefn{Not_An_Error},@\-- @examcom{No error is presently recorded}
 
-    @AdaObjDefn{Value_Error},@\-- Routine argument value invalid
-    @AdaObjDefn{Initialization_Error},@\-- ASIS is uninitialized
-    @AdaObjDefn{Environment_Error},@\-- ASIS could not initialize
-    @AdaObjDefn{Parameter_Error},@\-- Bad Parameter given to Initialize
-    @AdaObjDefn{Capacity_Error},@\-- Implementation overloaded
-    @AdaObjDefn{Name_Error},@\-- Context/unit not found
-    @AdaObjDefn{Use_Error},@\-- Context/unit not use/open-able
-    @AdaObjDefn{Data_Error},@\-- Context/unit bad/invalid/corrupt
-    @AdaObjDefn{Text_Error},@\-- The program text cannot be located
-    @AdaObjDefn{Storage_Error},@\-- Storage_Error suppressed
-    @AdaObjDefn{Obsolete_Reference_Error},@\-- Argument or result is invalid due to
-@\-- and inconsistent compilation unit
-    @AdaObjDefn{Unhandled_Exception_Error},@\-- Unexpected exception suppressed
-    @AdaObjDefn{Not_Implemented_Error},@\-- Functionality not implemented
-    @AdaObjDefn{Internal_Error});@\-- Implementation internal failure
+    @AdaObjDefn{Value_Error},@\-- @examcom{Routine argument value invalid}
+    @AdaObjDefn{Initialization_Error},@\-- @examcom{ASIS is uninitialized}
+    @AdaObjDefn{Environment_Error},@\-- @examcom{ASIS could not initialize}
+    @AdaObjDefn{Parameter_Error},@\-- @examcom{Bad Parameter given to Initialize}
+    @AdaObjDefn{Capacity_Error},@\-- @examcom{Implementation overloaded}
+    @AdaObjDefn{Name_Error},@\-- @examcom{Context/unit not found}
+    @AdaObjDefn{Use_Error},@\-- @examcom{Context/unit not use/open-able}
+    @AdaObjDefn{Data_Error},@\-- @examcom{Context/unit bad/invalid/corrupt}
+    @AdaObjDefn{Text_Error},@\-- @examcom{The program text cannot be located}
+    @AdaObjDefn{Storage_Error},@\-- @examcom{Storage_Error suppressed}
+    @AdaObjDefn{Obsolete_Reference_Error},@\-- @examcom{Argument or result is invalid due to}
+@\-- @examcom{and inconsistent compilation unit}
+    @AdaObjDefn{Unhandled_Exception_Error},@\-- @examcom{Unexpected exception suppressed}
+    @AdaObjDefn{Not_Implemented_Error},@\-- @examcom{Functionality not implemented}
+    @AdaObjDefn{Internal_Error});@\-- @examcom{Implementation internal failure}
 @end{Example}
 
 @begin{Example}

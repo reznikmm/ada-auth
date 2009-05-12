@@ -1,6 +1,6 @@
 @Part(data, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/data.mss,v $}
-@comment{$Revision: 1.11 $ $Date: 2009/02/15 08:00:55 $}
+@comment{$Revision: 1.12 $ $Date: 2009/05/09 06:28:47 $}
 
 @LabeledSection{package Asis.Data_Decomposition (optional)}
 
@@ -9,7 +9,7 @@
 @Chg{Version=[2],New=[Support for data decomposition is optional. ],Old=[]}
 @Chg{Version=[1],New=[The library package @ChildUnit{Parent=[Asis],Child=[Data_Decomposition]}Asis.Data_Decomposition
 @Chg{Version=[2],New=[shall],Old=[may]} exist@Chg{Version=[2],New=[ for an implementation
-that support data decomposition],Old=[]}. If it exists, the package
+that supports data decomposition],Old=[]}. If it exists, the package
 shall provide interfaces equivalent to those described in the
 following subclauses.],
 Old=[@f{@key[package] @ChildUnit{Parent=[Asis],Child=[Data_Decomposition]}Asis.Data_Decomposition @key[is]}]}
@@ -191,7 +191,9 @@ smaller.
 
 Type Record_Component describes one discriminant or component of a record type.
 
-Implementation is highly implementation dependent. The "=" operator is not
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[],Old=[Implementation is highly implementation
+dependent. ]}The "=" operator is not
 meaningful between Record_Component values unless one of them is the
 Nil_Record_Component value.
 
@@ -240,6 +242,10 @@ origin.
               Right : @key[in] Record_Component)
               @key[return] Boolean @key[is abstract];
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Nil_Record_Component is the value of a
+Record_Component that represents no component.]}
 @end{DescribeCode}
 
 
@@ -258,7 +264,9 @@ origin.
 Type Array_Component describes the components of an array valued field for a
 record type.
 
-Implementation is highly implementor dependent. The "=" operator is not
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[],Old=[Implementation is highly implementor
+dependent. ]}The "=" operator is not
 meaningful between Array_Component values unless one of them is the
 Nil_Array_Component value.
 
@@ -306,6 +314,10 @@ A_Type_Definition Element; that Element determines their Context of origin.
               Right : @key[in] Array_Component)
               @key[return] Boolean @key[is abstract];
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Nil_Array_Component is the value of an
+Array_Component that represents no component.]}
 @end{DescribeCode}
 
 
@@ -335,11 +347,13 @@ array stream.
 
 @LabeledClause{type Array_Component_Iterator}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Type Array_Component_Iterator is used to iterate over successive components of
-an array. This can be more efficient than using individual index values when
-extracting array components from a data stream because it substitutes two
-subroutine calls (Next and Done) for the multiplications and divisions implicit
-in indexing an N dimensional array with a single index value.
+an array.@Chg{Version=[2],New=[],Old=[ This can be more efficient than using
+individual index values when extracting array components from a data stream
+because it substitutes two subroutine calls (Next and Done) for the
+multiplications and divisions implicit in indexing an N dimensional array with a
+single index value.]}
 
 Iterators can be copied. The copies operate independently (have separate
 state).
@@ -368,16 +382,15 @@ state).
 
 @AdaObjDefn{Nil_Array_Component_Iterator} : @key[constant] Array_Component_Iterator;
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Nil_Array_Component_Iterator is the value of an
+Array_Component_Iterator that represents no iterator.]}
 @end{DescribeCode}
 
 
 @ChgNote{SI99-0035-1 remove type}
-@LabeledRevisedClause{Version=[2],New=[obsolete type Portable_Data],
-Old=[type Portable_Data]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - RLB}}]}
+@LabeledDeletedClause{Version=[2],Name=[type Portable_Data (stream)]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
 @ChgDeleted{Version=[2],Text=[Portable_Data represents an ordered "stream" of data values.]}
@@ -582,8 +595,11 @@ Old=[All component values are appropriate.]}
 Left @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the left component to compare.
 Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the right component to compare.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Returns True if Left and Right represent the same physical component of the
-same record or array type, from the same physical compilation unit. The
+same record or array type@Chg{Version=[2],New=[],Old=[,]}
+from the same physical compilation unit@Chg{Version=[2],New=[, and
+returns False otherwise],Old=[]}. The
 two components may or may not be from the same open ASIS Context variable.
 
 @leading@keepnext@;Implies:
@@ -612,9 +628,12 @@ Old=[All component values are appropriate.]}
 Left @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the left component to compare.
 Right @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the right component to compare.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Returns True if Left and Right represent the same physical component of the
-same record or array type, from the same physical compilation unit and the
-same open ASIS Context variable.
+same record or array type@Chg{Version=[2],New=[],Old=[,]}
+from the same physical compilation unit and the
+same open ASIS Context variable@Chg{Version=[2],New=[, and
+returns False otherwise],Old=[]}.
 
 @leading@keepnext@;Implies:
 @begin{ChildExample}
@@ -659,11 +678,12 @@ array.
 Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} any
 component.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1],ARef=[SI99-0047-1]}
 Returns True if the component has a record@Chg{Version=[2], New=[,
 task, or protected subtype.
 Returns True for a task or protected component because such a
-component may have discriminants], Old=[ subtype]}.
+component may have discriminants], Old=[ subtype]}.@Chg{Version=[2],New=[
+Returns False otherwise.],Old=[]}
 @end{DescribeCode}
 
 
@@ -677,8 +697,10 @@ component may have discriminants], Old=[ subtype]}.
 Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the iterator
 to query.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Returns True if the iterator has been advanced past the last array
-component. Returns True for a Nil_Array_Component_Iterator.
+component. Returns True for a Nil_Array_Component_Iterator.@Chg{Version=[2],New=[
+Returns False otherwise.],Old=[]}
 @end{DescribeCode}
 
 
@@ -691,9 +713,11 @@ component. Returns True for a Nil_Array_Component_Iterator.
 
 Iterator @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} the iterator to advance.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Advances the iterator to the next array component. Use Done to test the
 iterator to see if it has passed the last component. Does nothing if the
-iterator is already past the last component.
+iterator is @Chg{Version=[2],New=[Nil_Array_Component_Iterator
+or is ],Old=[]}already past the last component.
 @end{DescribeCode}
 
 
@@ -704,9 +728,11 @@ iterator is already past the last component.
 @key[procedure] @AdaSubDefn{Reset} (Iterator : @key[in out] Array_Component_Iterator);
 @end{Example}
 
-Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the iterator to reset
+Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the iterator to reset.
 
-Resets the iterator to the first array component.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Resets the iterator to the first array component.@Chg{Version=[2],New=[
+Has no effect if Iterator is Nil_Array_Component_Iterator.],Old=[]}
 @end{DescribeCode}
 
 
@@ -771,13 +797,17 @@ Component @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a componen
 Returns a list of the discriminant components for records of the indicated
 record type.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 The result describes the locations of the record type's discriminants,
-regardless of the static or dynamic nature of the record type.
-All return components are intended for use with a data stream representing
-a value of the indicated record type.
+regardless of the static or dynamic nature of the record
+type.@Chg{Version=[2],New=[],Old=[All return components are intended for use
+with a data stream representing a value of the indicated record type.]}
 
-All Is_Record(Component) = True arguments are appropriate. All return
-values are valid parameters for all query operations.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[],Old=[All Is_Record(Component) = True arguments are
+appropriate. ]}All return
+values are valid parameters for all query
+operations@Chg{Version=[2],New=[ that accept Record_Components],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
@@ -798,7 +828,8 @@ A_Record_Type_Definition]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Component expects a component
-that has one of the following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
+that has Is_Record(Component) = True and has one of the
+following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 A_Simple_Dynamic_Model
@@ -808,7 +839,7 @@ A_Complex_Dynamic_Model
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
 of Value_Error for any element or component that does not have one of these
-expected kinds.]}
+expected kinds or types.]}
 @end{DescribeCode}
 
 
@@ -834,12 +865,17 @@ which has a record subtype, Is_Record(Component) = True.
 Returns a list of the discriminants and components for the indicated simple
 static record type.@Chg{Version=[2],New=[],Old=[ (See rule 6.A above.)]}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 The result describes the locations of the record type's discriminants and
-components. All return components are intended for use with a data stream
-representing a value of the indicated record type.
+components.@Chg{Version=[2],New=[],Old=[ All return components are intended for
+use with a data stream representing a value of the indicated record type.]}
 
-All Is_Record (Component) = True values, having simple static types, are
-appropriate. All return values are valid parameters for all query operations.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[],Old=[All Is_Record(Component) = True arguments are
+appropriate. ]}All return
+values are valid parameters for all query
+operations@Chg{Version=[2],New=[ that accept Record_Components],Old=[]}.
+
 
 @begin{SingleNote}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
@@ -867,7 +903,8 @@ A_Record_Type_Definition]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Component expects a component
-of],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
+that has Is_Record(Component) = True and has one of the
+following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 @end{Display}
@@ -875,17 +912,12 @@ A_Simple_Static_Model
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
 of Value_Error for any element or component that does not have one of these
-expected kinds.]}
+expected kinds or types.]}
 @end{DescribeCode}
 
 
 @ChgNote{SI99-0035-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function Record_Components (stream)],
-Old=[function Record_Components (stream)]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - RLB}}]}
+@LabeledDeletedClause{Version=[2],Name=[function Record_Components (portable_data)]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1006,8 +1038,11 @@ The result contains all information necessary to index and extract any
 component of a data stream representing a value of the indicated array
 type.
 
-All Is_Array (Component) = True values are appropriate. All return values
-are valid parameters for all query operations.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@Chg{Version=[2],New=[],Old=[All Is_Array(Component) = True values are
+appropriate. ]}All return values
+are valid parameters for all query operations@Chg{Version=[2],New=[ that
+accept Array_Components],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
@@ -1030,7 +1065,8 @@ A_Constrained_Array_Definition]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Component expects a component
-that has one of the following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
+that has Is_Array(Component) = True and has
+one of the following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model
 A_Simple_Dynamic_Model
@@ -1039,7 +1075,7 @@ A_Simple_Dynamic_Model
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
 of Value_Error for any element or component that does not have one of these
-expected kinds.]}
+expected kinds or types.]}
 @end{DescribeCode}
 
 
@@ -1063,19 +1099,39 @@ expected kinds.]}
 @Chg{Version=[2], New=[Type_Definition specifies the array type definition to
 query. ],Old=[]}Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]}
 @Chg{Version=[2],New=[a component which has an array subtype,
-Is_Array (Component) = True.],Old=[an array component to be used for iteration]}
+Is_Array(Component) = True.],Old=[an array component to be used for iteration]}
 
 Returns an iterator poised to fetch the 1st component of an array.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Type_Definition expects
+an element that has the following Element_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Type_Definition that has one of the following Type_Kinds:
+   A_Derived_Type_Definition       (derived from an array type)
+   An_Unconstrained_Array_Definition
+   A_Constrained_Array_Definition]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[
+Component expects a component
+that has Is_Array(Component) = True and has
+one of the following Asis.Data_Decomposition.Type_Model_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Simple_Static_Model
+A_Simple_Dynamic_Model]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element or component that does not have one of these
+expected kinds or types.]}
 @end{DescribeCode}
 
 
 @ChgNote{SI99-0035-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function Component_Data_Stream],
-Old=[function Component_Data_Stream]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - RLB}}]}
+@LabeledDeletedClause{Version=[2],Name=[function Component_Data_Stream (portable_data)]}
 
 
 @begin{DescribeCode}
@@ -1149,9 +1205,14 @@ explicit declaration made by the user, or, it may be an implicit
 component declaration for an implementation-defined component (@Chg{Version=[2],
 New=[Ada Standard],Old=[Reference Manual]} 13.5.1(15)).
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @Chg{Version=[2], New=[Component expects any kind of non-Nil component.],
 Old=[All non-Nil component values are appropriate.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status of
+Value_Error for any element or component that does not have one of these
+expected kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -1186,8 +1247,14 @@ to be queried.
 Returns an Asis.Subtype_Indication. These values can be used to determine
 the subtype, type, and base type of the array components.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Component expects any kind of non-Nil component.],
+Old=[All non-Nil component values are appropriate.]}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@Chg{Version=[2], New=[Component expects any kind of non-Nil component.], Old=[All non-Nil component values are appropriate.]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status of
+Value_Error for any element or component that does not have one of these
+expected kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -1270,8 +1337,9 @@ it were unidimensional. It is the product of the 'Lengths of the
 individual array dimensions.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Component expects a component that has
-Is_Array(Component) = True],Old=[values are appropriate]}.
+@Chg{Version=[2],New=[Component expects a component that has],Old=[All]}
+Is_Array(Component) = True@Chg{Version=[2],New=[],Old=[ values
+are appropriate]}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
@@ -1301,8 +1369,9 @@ array subtype may be unidimensional. The result is the 'Length(Dimension)
 of the array.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@Chg{Version=[2],New=[Component expects a component that has
-Is_Array(Component) = True],Old=[values are appropriate]}.
+@Chg{Version=[2],New=[Component expects a component that has],Old=[All]}
+Is_Array(Component) = True@Chg{Version=[2],New=[],Old=[ values
+are appropriate]}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
@@ -1328,9 +1397,6 @@ Component @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a componen
 Returns the minimum number of bits required to hold a simple static type,
 the number of bits allocated to hold a record field, or the number of bits
 allocated to hold each array component.
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@Chg{Version=[2], New=[Type_Definition expects any kind of non-Nil element.], Old=[All non-Nil component values are appropriate.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
@@ -1363,12 +1429,7 @@ padding bits which are necessary to fully occupy the space allotted.
 
 
 @ChgNote{SI99-0035-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function Size (stream)],
-Old=[function Size (stream)]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - RLB}}]}
+@LabeledDeletedClause{Version=[2],Name=[function Size (portable_data)]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1442,7 +1503,9 @@ unit occupied by the enclosing composite type, of the first of the storage
 units occupied by the Component. The offset is measured in storage units.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@Chg{Version=[2], New=[Component expects any kind of non-Nil component.],
+@Chg{Version=[2], New=[Component expects any kind of non-Nil component. Raises
+ASIS_Inappropriate_Element with a Status of Value_Error for any
+Nil component.],
 Old=[All non-Nil component values are appropriate.]} Raises
 ASIS_Inappropriate_Element with a Status of Data_Error if any index is not
 in the expected range or if Done (Iterator) = True. The Status value will
@@ -1484,7 +1547,9 @@ occupied by the Component, of the first bit occupied by the Component. The
 offset is measured in bits.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@Chg{Version=[2], New=[Component expects any kind of non-Nil component.],
+@Chg{Version=[2], New=[Component expects any kind of non-Nil component. Raises
+ASIS_Inappropriate_Element with a Status of Value_Error for any
+Nil component.],
 Old=[All non-Nil component values are appropriate.]} Raises
 ASIS_Inappropriate_Element with a Status of Data_Error if any index is not
 in the expected range or if Done (Iterator) = True. The Status value will
@@ -1525,7 +1590,9 @@ occupied by the Index'th Element, of the last bit occupied by the Element.
 The offset is measured in bits.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@Chg{Version=[2], New=[Component expects any kind of non-Nil component.],
+@Chg{Version=[2], New=[Component expects any kind of non-Nil component. Raises
+ASIS_Inappropriate_Element with a Status of Value_Error for any
+Nil component.],
 Old=[All non-Nil component values are appropriate.]} Raises
 ASIS_Inappropriate_Element with a Status of Data_Error if any index is not
 in the expected range or if Done (Iterator) = True. The Status value will
@@ -1534,9 +1601,7 @@ be Data_Error. The Diagnosis string will indicate the kind of error detected.
 
 
 @ChgNote{SI99-0035-1 remove subprogram}
-@Chg{Version=[2],New=[],Old=[@b<@i<obsolete function Portable_Constrained_Subtype>>]}
-@ChgNote{This clause header was removed as there are no remaining clauses
-after it. - RLB}
+@LabeledDeletedClause{Version=[2],Name=[function Portable_Constrained_Subtype (portable_data)]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0035-1]}
 @ChgDeleted{Version=[2],Text=[Generic for Data Stream Conversions.]}
@@ -1574,9 +1639,7 @@ value is not in the subtype's range.]}
 @end{DescribeCode}
 
 
-@Chg{Version=[2],New=[],Old=[@b<@i<obsolete function Construct_Artificial_Data_Stream>>]}
-@ChgNote{This clause header was removed as there are no remaining clauses
-after it. - RLB}
+@LabeledDeletedClause{Version=[2],Name=[function Construct_Artificial_Data_Stream (portable_data)]}
 
 
 @begin{DescribeCode}

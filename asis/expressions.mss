@@ -1,6 +1,6 @@
-@Part(expressions, root="asis.msm")
+`@Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.14 $ $Date: 2009/03/13 07:12:33 $}
+@comment{$Revision: 1.15 $ $Date: 2009/05/09 06:28:46 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -34,21 +34,21 @@ subtype mark in the definition is a Base attribute reference, the declaration of
 the prefix of the attribute is returned.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
-@ChgAdded{Version=[2],Text=[Returns a Nil_Element if the expression is of an
-anonymous or classwide type, or is a named number, a numeric literal, or a null
-literal.]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
 @ChgAdded{Version=[2],Text=[Returns an implementation-defined result if the
-expression is an attribute reference, aggregate, string literal, allocator,
-membership test, short-circuit operation, or the invocation of a predefined
-operator.]}
+expression is an attribute reference other than Base, aggregate,
+string literal, allocator, membership test, short-circuit operation,
+or the invocation of a predefined operator.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
 @ChgAdded{Version=[2],Text=[For a slice, the result is the same as for the
 prefix of the slice. For an invocation of a user-defined operator, the result is
 the same as for the equivalent function call.  For a parenthesized expression,
 it is the same as for the enclosed expression.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
+@ChgAdded{Version=[2],Text=[Returns a Nil_Element if the expression is of an
+anonymous or classwide type, or is a named number, a numeric literal, or a null
+literal.]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0045-1]}
 @ChgDeleted{Version=[2],Type=[Leading],Text=[Returns the type declaration for
@@ -141,17 +141,18 @@ declared object.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
 @ChgAdded{Version=[2],Text=[An alternative to using this function would
-be to use Asis.Expressions.Views.Corresponding_View to retrieve a semantic
-view of the expression, check if it is an object or value with
-Asis.Views.Is_Object_or_Value, and, assuming it is, use
-Asis.Object_Views.Nominal_Subtype to retrieve the subtype. The retrieved
-subtype will include anonymous and classwide subtypes so complete
-analysis can be done without many special cases.]}
+be to use Asis.Expressions.Views.Corresponding_View
+(see @RefSecNum{function Corresponding_View}) to retrieve a semantic view of the
+expression, check if it is an object or value with Asis.Views.Is_Object_or_Value
+(see @RefSecNum{type View_Kinds and type View}), and, assuming it is, use
+Asis.Object_Views.Nominal_Subtype (see @RefSecNum{type Object_View}) to retrieve
+the subtype. The retrieved subtype will include anonymous and classwide subtypes
+so complete analysis can be done without many special cases.]}
 @end{UsageNote}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has the following ],Old=[Appropriate]} Element_Kinds:
+that has the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -178,7 +179,7 @@ nominal subtype.  For example, for the following program text:]}
 
 @begin{ChildExample}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[@-{@key[type] Int @key[is range] -5_000 .. 5_000;
+@ChgAdded{Version=[2],Text=[@Shrink{@key[type] Int @key[is range] -5_000 .. 5_000;
 @key[type] My_Int @key[is new] Int;
 @key[type] Good_Int @key[is new] My_Int;
 Var: Good_Int @key[range] -2_000 .. 2_000;}]}
@@ -222,9 +223,10 @@ expression to query.
 Returns the string image of the value of the string, integer, or real
 literal.
 
-For string literals, Value will return the quotes around the string
-literal, these quotes are doubled, just as any quote appearing embedded in
-the string literal in the program text.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+For string literals, @Chg{Version=[2],New=[Value_Image returns],Old=[Value will return]}
+the quotes around the string literal, these quotes are doubled, just as any
+quote appearing embedded in the string literal in the program text.
 
 The form of numbers returned by this query may vary between implementors.
 Implementors are encouraged, but not required, to return numeric literals
@@ -276,7 +278,9 @@ function Corresponding_Name_Declaration
 @key[function] @AdaSubDefn{Name_Image} (Expression : @key[in] Asis.Expression) @key[return] Program_Text;
 @end{Example}
 
-Name @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the name to query.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Expression],Old=[Name]}
+@chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the name to query.
 
 Returns the program text image of the name.
 
@@ -353,7 +357,7 @@ Returned references are in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Name expects an element
-that has the following ],Old=[Appropriate]} Element_Kinds:
+that has the following],Old=[Appropriate]} Element_Kinds:
 @begin{Display}
 A_Defining_Name
 @end{Display}
@@ -362,6 +366,9 @@ A_Defining_Name
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
 of Value_Error for any element that does not have one of these expected
 kinds.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Within_Element expects any kind of element.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -392,13 +399,15 @@ for the query which is limited to the Element and its children.
 
 @leading@;If the Implicitly argument is True:
 @begin{Description}
-@noprefix@;Returns True if the Name is referenced by either implicit or
-explicit elements within the given limits.
+@noprefix@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns True if the Name is referenced by either implicit or
+explicit elements within the given limits@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
 @end{Description}
 
 @leading@;If the Implicitly argument is False:
 @begin{Description}
-@noprefix@;Returns True only if the Name is referenced by explicit elements.
+@noprefix@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns True only if the Name is referenced by explicit elements@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
 @end{Description}
 
 Returns False for any unexpected Element.
@@ -410,12 +419,8 @@ that has the following],Old=[Expected]} Element_Kinds:
 A_Defining_Name
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Within_Element expects
-an element that has the following Element_Kinds: ]}
-@begin{Display}
-@ChgAdded{Version=[2],Text=[A_Defining_Name]}
-@end{Display}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Within_Element expects any kind of element.]}
 
 May raise ASIS_Failed with a Status of Obsolete_Reference_Error if the
 argument is part of an inconsistent compilation unit.
@@ -530,8 +535,10 @@ and provide artificial declarations for implicitly declared elements.
 
 @begin{ImplReq}
 
-@leading@;Raises ASIS_Inappropriate_Element, with a Status of Value_Error, if
-passed a reference that does not have a declaration:
+@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Raises ASIS_Inappropriate_Element, with a Status of Value_Error, if
+passed a reference that does not have a
+declaration@Chg{Version=[2],New=[, including the following],Old=[]}:
 
 @begin{Itemize}
 a reference to an attribute_designator. Attributes are defined, but
@@ -773,7 +780,7 @@ in their order of appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Indexed_Component
 @end{Display}
@@ -818,7 +825,7 @@ Returns the discrete range of the slice.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Slice
 @end{Display}
@@ -854,7 +861,7 @@ the selected_component).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Selected_Component
 @end{Display}
@@ -895,12 +902,14 @@ the attribute_reference can itself be an attribute_reference as in
 T'Base'First where the prefix is T'Base and the attribute_designator name
 is First.
 
-Attribute_designator reserved words @key[access], @key[delta], and @key[digits]
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Attribute_designator reserved words @key[access], @key[delta],
+@Chg{Version=[2],New=[],Old=[and ]}@key[digits]@Chg{Version=[2],New=[, and @key[mod]],Old=[]}
 are treated as An_Identifier.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Attribute_Reference
 @end{Display}
@@ -940,7 +949,7 @@ Returns a Nil_Element_List if there are no arguments.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Attribute_Reference@Chg{Version=[2],New=[ that has one of the following Attribute_Kinds:],Old=[
   Appropriate Attribute_Kinds:]}
@@ -1063,7 +1072,7 @@ the extension_aggregate.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Extension_Aggregate
 @end{Display}
@@ -1150,9 +1159,11 @@ association to query.
 
 @leading@;If the Association is from a named_array_aggregate:
 @begin{Itemize}
-Returns the discrete_choice_list order of appearance. The choices are
-  either An_Expression or A_Discrete_Range elements, or a single
-  An_Others_Choice element.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns the discrete_choice_list @Chg{Version=[2],New=[in ],Old=[]}order of
+  appearance@Chg{Version=[2],New=[ in the program text],Old=[]}. The choices
+  are either An_Expression or A_Discrete_Range
+  elements, or a single An_Others_Choice element.
 @end{Itemize}
 
 @leading@;If the Association is from a positional_array_aggregate:
@@ -1165,7 +1176,7 @@ Returns a Nil_Element_List otherwise.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
-that has the following ],Old=[Appropriate]} Association_Kinds:
+that has the following],Old=[Appropriate]} Association_Kinds:
 @begin{Display}
 An_Array_Component_Association
 @end{Display}
@@ -1179,16 +1190,17 @@ kinds.]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
 one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
-A_Definition
 An_Expression
+A_Definition@Chg{Version=[2],New=[ that has one of the following Definition_Kinds:
+   A_Discrete_Range
+   An_Others_Choice],Old=[]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following ],Old=[]}Definition_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns Definition_Kinds:]}
 @begin{Display}
-A_Discrete_Range
-An_Others_Choice
+@ChgDeleted{Version=[2],Text=[A_Discrete_Range
+An_Others_Choice]}
 @end{Display}
 @end{DescribeCode}
 
@@ -1212,9 +1224,11 @@ association to query.
 @leading@;If the Association is a named component association:
 
 @begin{InnerItemize}
-Returns the component_choice_list order of appearance. The choices are
-    either An_Identifier elements representing component_selector_name elements, or
-    a single An_Others_Choice element.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns the component_choice_list @Chg{Version=[2],New=[in ],Old=[]}order of
+  appearance@Chg{Version=[2],New=[ in the program text],Old=[]}. The choices are
+  either An_Identifier elements representing component_selector_name elements, or
+  a single An_Others_Choice element.
 
 The Enclosing_Element of the choices is the Association argument.
 @end{InnerItemize}
@@ -1226,7 +1240,7 @@ Returns a Nil_Element_List.
 @end{InnerItemize}
 @end{Itemize}
 
-@leading@;If the Association argument is from a Normalized list:
+@leading@;If the Association argument is from a normalized list:
 @begin{Itemize}
 @leading@;Returns a list containing a single choice:
 
@@ -1245,7 +1259,7 @@ component A_Defining_Name is not Is_Normalized.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
-that has the following ],Old=[Appropriate]} Association_Kinds:
+that has the following],Old=[Appropriate]} Association_Kinds:
 @begin{Display}
 A_Record_Component_Association
 @end{Display}
@@ -1286,8 +1300,8 @@ Returns the expression of the record_component_association or
 array_component_association.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0036-1]}
-@Chg{Version=[2], New=[If the Association argument is from a Normalized list,
-the Enclosing_Element of the returned expression is the non-normalized
+@Chg{Version=[2], New=[If the Association argument is from a normalized list,
+the Enclosing_Element of the returned expression is the unnormalized
 An_Association Element containing the corresponding component association.
 Otherwise, the Enclosing_Element of the returned expression is the Association
 argument], Old=[The Enclosing_Element of the expression is the Association
@@ -1299,7 +1313,7 @@ association. These artificial associations are Is_Normalized. Their
 component An_Expression elements are not Is_Normalized.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0009-1]}
-@ChgAdded{Version=[2],Text=[For An_Array_Component_Association and non-normalized
+@ChgAdded{Version=[2],Text=[For An_Array_Component_Association and unnormalized
 A_Record_Component_Association where the association contains a
 box expression, Asis.Expressions.Component_Expression
 returns A_Box_Expression. ]}
@@ -1307,7 +1321,7 @@ returns A_Box_Expression. ]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0009-1]}
 @ChgAdded{Version=[2],Text=[
 For a normalized A_Record_Component_Association, where the association
-contains a a box expression, if the corresponding record type that
+contains a box expression, if the corresponding record type that
 contains this component contains a default expression,
 Asis.Expressions.Component_Expression returns this default
 expression, otherwise Asis.Expressions.Component_Expression
@@ -1367,7 +1381,7 @@ Returns a Nil_Element.
 @end{Indent}
 @end{Itemize}
 
-@leading@;If the Association argument is from a Normalized list:
+@leading@;If the Association argument is from a normalized list:
 
 @begin{Itemize}
 Returns A_Defining_Name representing the defining_identifier of the
@@ -1386,12 +1400,16 @@ component A_Defining_Name elements are not Is_Normalized.
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0014-1]}
 @ChgAdded{Version=[2],Text=[Asis.Expressions.Formal_Parameter
 may return An_Others_Choice for a
-non-normalized A_Generic_Association argument;]}
+unnormalized A_Generic_Association argument;]}
+@begin{Discussion}
+@ChgAdded{Version=[2],Text=[This can happen if the A_Generic_Association
+represents a formal_package_association.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0014-1]}
 @ChgAdded{Version=[2],Text=[
 If a formal_package_association contains a box, then the corresponding
-non-normalized A_Generic_Association element contains an Expression_Element
+unnormalized A_Generic_Association element contains an Expression_Element
 with expression kind A_Box_Expression as its
 Actual_Parameter part. The normalized A_Generic_Association contains either
 a default parameter or an Expression_Element with expression kind
@@ -1457,7 +1475,7 @@ the name or expression of a pragma_argument_association.
 @noprefix@;The Enclosing_Element of An_Expression is the Association argument.
 @end{Itemize}
 
-@leading@;If the Association argument is from a Normalized list:
+@leading@;If the Association argument is from a normalized list:
 
 @begin{Itemize}
 @leading@;If the Association is given explicitly:
@@ -1473,7 +1491,7 @@ the explicit_generic_actual_parameter of a generic_association.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0031-1]}
 @noprefix@;The Enclosing_Element of An_Expression is the @Chg{Version=[2],
-New=[non-normalized An_Association Element containing the corresponding actual
+New=[unnormalized An_Association Element containing the corresponding actual
 parameter], Old=[Association argument.]}
 @end{InnerItemize}
 
@@ -1525,7 +1543,7 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element has
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
 the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
@@ -1566,7 +1584,7 @@ Returns a Nil_Element_List.
 
 @end{Itemize}
 
-@leading@;If the Association argument is from a Normalized list:
+@leading@;If the Association argument is from a normalized list:
 
 @begin{Itemize}
 Returns a list containing a single A_Defining_Name element representing
@@ -1583,7 +1601,7 @@ Normalized lists contain artificial ASIS An_Association elements that
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
-that has the following ],Old=[Appropriate]} Association_Kinds:
+that has the following],Old=[Appropriate]} Association_Kinds:
 @begin{Display}
 A_Discriminant_Association
 @end{Display}
@@ -1629,7 +1647,7 @@ Returns An_Expression representing the expression of the
 An_Expression is the Association argument.
 @end{Itemize}
 
-@leading@;If the Association argument is from a Normalized list:
+@leading@;If the Association argument is from a normalized list:
 
 @begin{Itemize}
 @leading@;If the Association is given explicitly:
@@ -1641,7 +1659,7 @@ Returns An_Expression representing the expression of the
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0036-1]}
 @noprefix@;The Enclosing_Element of
 @Chg{Version=[2], New=[the returned ],Old=[]}An_Expression is
-the @Chg{Version=[2],New=[non-normalized An_Association Element containing the
+the @Chg{Version=[2],New=[unnormalized An_Association Element containing the
 corresponding discriminant_specification], Old=[Association argument]}.
 @end{InnerItemize}
 
@@ -1650,7 +1668,7 @@ corresponding discriminant_specification], Old=[Association argument]}.
 @begin{InnerItemize}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0036-1]}
 @ChgDeleted{Version=[2],Type=[Leading],Text=[]}@Comment{Conditional leading}Returns
-An_Expression representing@Chg{Version=[2],New=[the corresponding
+An_Expression representing@Chg{Version=[2],New=[ the corresponding
 default_expression of the Is_Normalized A_Discriminant_Association.],Old=[:]}
 
 @begin{InnerInnerItemize}
@@ -1675,7 +1693,7 @@ Normalized lists contain artificial ASIS An_Association elements that
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
-that has the following ],Old=[Appropriate]} Association_Kinds:
+that has the following],Old=[Appropriate]} Association_Kinds:
 @begin{Display}
 A_Discriminant_Association
 @end{Display}
@@ -1767,8 +1785,8 @@ Always returns False for discriminant associations. Defaulted
 discriminant associations occur only when the discriminant constraint is
 completely missing from a subtype indication. Consequently, it is not
 possible to obtain a (normalized) discriminant constraint list for such
-subtype indications. Always returns False for component associations.
-Aggregates cannot have defaulted components.
+subtype indications. Always returns False for component associations, as
+aggregates cannot have defaulted components.
 @end{UsageNote}
 
 
@@ -1797,7 +1815,7 @@ one set of its own parenthesis.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Parenthesized_Expression
 @end{Display}
@@ -1866,16 +1884,22 @@ Returns the declaration of the called function.
 @leading@;Returns a Nil_Element if the:
 
 @begin{Itemize}
-function_prefix denotes a predefined operator for which the implementation
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Syni{function_}prefix @Chg{Version=[2],New=[ or the operator of an infix call],Old=[]}
+  denotes a predefined operator for which the implementation
   does not provide an artificial function declaration,
 
-prefix of the call denotes an access to a function implicit or explicit
-  dereference,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+prefix of the call denotes an @Chg{Version=[2],New=[],Old=[access to a function ]}implicit or explicit
+  dereference@Chg{Version=[2],New=[ of an access to a function value, or],Old=[,]}
 
-argument is a dispatching call.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Expression],Old=[argument]} is a dispatching call,
 @end{Itemize}
 
-If function_prefix denotes an attribute_reference, and if the corresponding
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+If @Chg{Version=[2],New=[the ],Old=[]}@SynI{function_}prefix@Chg{Version=[2],New=[ or @Syni{function_}name],Old=[]}
+denotes an attribute_reference, and if the corresponding
 attribute is (re)defined by an attribute definition clause, an implementation
 is encouraged, but not required, to return the definition of the corresponding
 subprogram whose name is used after @key[use] in this attribute definition
@@ -1886,7 +1910,7 @@ returned.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Function_Call
 @end{Display}
@@ -1977,8 +2001,10 @@ explicit_actual_parameter@Chg{Version=[2],New=[,],Old=[ or]} a
 default_expression@Chg{Version=[2],New=[, or when the call uses a prefixed view
 of the function, the prefix of the call], Old=[]}.
 
-If the prefix of the call denotes an access to a function implicit or
-explicit deference, normalized associations are constructed on the basis
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+If the prefix of the call denotes an @Chg{Version=[2],New=[],Old=[access to a function ]}implicit
+or explicit dereference@Chg{Version=[2],New=[ of an access to
+a function value],Old=[]}, normalized associations are constructed on the basis
 of the formal_part of the parameter_and_result_profile from the
 corresponding access_to_subprogram definition.
 
@@ -1991,7 +2017,7 @@ call is an attribute reference and Is_Normalized is True.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 A_Function_Call
 @end{Display}
@@ -2319,7 +2345,7 @@ Returns the subtype indication for the object being allocated.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Allocation_From_Subtype
 @end{Display}
@@ -2353,7 +2379,7 @@ Returns the qualified expression for the object being allocated.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
-that has the following ],Old=[Appropriate]} Expression_Kinds:
+that has the following],Old=[Appropriate]} Expression_Kinds:
 @begin{Display}
 An_Allocation_From_Qualified_Expression
 @end{Display}

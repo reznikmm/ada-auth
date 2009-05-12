@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/foreword.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2009/02/10 06:51:27 $}
+@comment{$Revision: 1.4 $ $Date: 2009/05/09 06:28:47 $}
 
 @UnNumberedSection(Foreword)
 
@@ -40,5 +40,5 @@ edition (ISO/IEC 15291:1999), of which it constitutes a technical revision.]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 Annexes A, B, C, @Chg{Version=[2],New=[D, and E],Old=[and D]} of
 this International Standard are for information only.@Chg{Version=[2],New=[ Annex
-F forms and integral part of the International Standard.],Old=[]}
+F forms an integral part of the International Standard.],Old=[]}
 

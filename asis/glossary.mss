@@ -1,9 +1,9 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2008/10/25 05:28:50 $}
+@Comment{$Date: 2009/05/09 06:28:46 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/glossary.mss,v $}
-@comment{$Revision: 1.2 $}
+@comment{$Revision: 1.3 $}
 
 @LabeledInformativeAnnex{Glossary}
 
@@ -51,14 +51,16 @@ or "Implicit_..." in the ASIS specification.)>}
 refer to a compilation_unit. When the meaning is clear from context, the term
 is also used to refer to the library_item of a compilation_unit or to the
 proper_body of a subunit@rdquote;. [@Chg{Version=[2], New=[The Ada Standard], Old=[ISO/IEC 8652:1995]}, 10.1.1(9)]. ASIS says "ASIS
-compilation unit" when the intent is to stress, that the ASIS viewpoint on an
-Ada compilation unit is described in the ASIS standard. Note, that the term
+compilation unit" when the intent is to stress that the ASIS viewpoint on an
+Ada compilation unit is described in the ASIS standard. Note that the term
 "compilation unit" can refer to either syntactical category "compilation_unit"
 or to the library_item of a compilation_unit or to the proper_body of a subunit
 (that is, the compilation_unit without the context_clause and the separate
 (parent_unit_name)).>}
 
-@ToGlossary{Term=<Compilation_Unit [type]>,Text=<An ASIS private type for which
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Compilation_Unit [type]>,Text=<An
+ASIS private type @Chg{Version=[2],New=[whose],Old=[for which]}
 values denote an Ada compilation unit or configuration pragma from the
 environment denoted by some open ASIS context. A non-nil value of the
 Compilation_Unit type also contains information about some physical object from
@@ -72,18 +74,23 @@ predefined types, another container can hold implementation-defined packages.
 Containers provide the implementation-defined way of grouping the compilation
 units accessible for an ASIS application through the ASIS queries.>}
 
-@ToGlossary{Term=<Container [type]>,Text=<An ASIS private type for which values
-denote a set of compilation units being a subset of the set of compilation
-units making up a context.>}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Container [type]>,Text=<An ASIS
+private type @Chg{Version=[2],New=[whose],Old=[for which]} values denote a set
+of compilation units being a subset of the set of compilation units making up a
+context.>}
 
-@ToGlossary{Term=<Context>,Text=<Defines a set of compilation units and
-configuration pragmas processed by an ASIS application. ASIS provides any
-information from a context by treating this set as if its elements make up an
-environment declarative part by modeling some view (most likely one of the
-views of the underlying Ada implementation) on the environment. ASIS may
-process several different contexts at a time.>}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Context>,Text=<@Chg{Version=[2],New=[A],Old=[Defines a]}
+set of compilation units and configuration pragmas processed by an ASIS
+application. ASIS provides any information from a context by treating this set
+as if its elements make up an environment declarative part by modeling some view
+(most likely one of the views of the underlying Ada implementation) on the
+environment. ASIS may process several different contexts at a time.>}
 
-@ToGlossary{Term=<Context [type]>,Text=<An ASIS private type for which values
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Context [type]>,Text=<An ASIS private
+type @Chg{Version=[2],New=[whose],Old=[for which]} values
 denote a set of compilation units considered by ASIS as making up an Ada
 environment declarative part from which to provide information.>}
 
@@ -153,8 +160,10 @@ the source code of the external representation of a compilation unit.>}
 abstraction. The values of the Line type represent the lines of text from the
 source code of the external representation of compilation units.>}
 
-@ToGlossary{Term=<Needed Units>,Text=<The needed units of a given compilation
-unit is a set of compilation units ultimately needed by the given compilation
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Needed Units>,Text=<The
+@Chg{Version=[2],New=[],Old=[needed units of a given compilation
+unit is a ]}set of compilation units ultimately needed by the given compilation
 unit to make up or to be included in a completed partition.>}
 
 @ToGlossary{Term=<Optional functionality>,Text=<The subset of ASIS facilities
@@ -165,9 +174,11 @@ otherwise in the ASIS specification.>}
 
 @ToGlossary{Term=<Queries>,Text=<See ASIS queries.>}
 
-@ToGlossary{Term=<Relation (between ASIS Compilation Units)>,Text=<Semantic
-relationships between compilation units (as discussed in chapter 10 of ISO/IEC
-8652:1995). The Relation_Kinds type enumerates the kinds of relations that can
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Relation (between ASIS Compilation Units)>,Text=<Semantic
+relationships between compilation units (as discussed in chapter 10 of
+@Chg{Version=[2],New=[the Ada Standard],Old=[ISO/IEC 8652:1995]}). The
+Relation_Kinds type enumerates the kinds of relations that can
 exist between compilation units. See also Dependent, Extended Family, and
 Supporter.>}
 
@@ -193,11 +204,11 @@ in this process.]}>}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0030-1]}
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<DII>,Text=<@ChgAdded{Version=[2],Text=[Dynamic
-Invocation Interface is an
-API which allows dynamic construction of CORBA object invocations. It is used at
-compile time when a client does not have knowledge about the object it wants to invoke.
-With this interface an argument list is marshalled, a function is named, and a request
-for service is sent to the object server. DII will usually have an asynchronous mode of operation.]}>}
+Invocation Interface is an API which allows dynamic construction of CORBA object
+invocations. It is used at compile time when a client does not have knowledge
+about the object it wants to invoke. With this interface an argument list is
+marshalled, a function is named, and a request for service is sent to the object
+server. DII implementations will usually have an asynchronous mode of operation.]}>}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0030-1]}
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<IDL>,Text=<@ChgAdded{Version=[2],Text=[Interface
@@ -208,7 +219,7 @@ C++ or Java. Standard mappings exist for Ada, C, C++, Lisp, Smalltalk, Java, COB
 PL/I and Python. There are also non-standard mappings for Perl, Visual Basic, Ruby,
 Erlang, and Tcl implemented by object request brokers (ORBs) written for those languages.]}>}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0030-1]}
 @ChgToGlossary{Version=[2],Kind=[AddedNormal],Term=<IEC>,Text=<@ChgAdded{Version=[2],Text=[International
 Electrotechnical Commission
 is a not-for-profit, non-governmental international standards organization that prepares

@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.17 $ $Date: 2009/03/13 07:12:33 $}
+@comment{$Revision: 1.18 $ $Date: 2009/05/09 06:28:46 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -41,8 +41,8 @@ appearance. Declarations that define a single name will return a list of
 length one.
 
 Returns Nil_Element_List for A_Declaration Elements representing the (implicit)
-declarations of universal and root numeric type (that is, if Type_Kind
-(Type_Declaration_View (Declaration) = A_Root_Type_Definition.
+declarations of universal and root numeric types (that is, if Type_Kind
+(Type_Declaration_View (Declaration)) = A_Root_Type_Definition).
 
 Function designators that define operators are A_Defining_Operator_Symbol.
 
@@ -208,7 +208,7 @@ expression to query.
 Returns the string image of the internal code for the enumeration literal.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
-If a @Chg{Version=[2],New=[aspect_clause],Old=[representation_clause]}
+If @Chg{Version=[2],New=[an aspect_clause],Old=[a representation_clause]}
 is defined for the enumeration type then the
 string returned is the Integer'Wide_Image of the corresponding value given in
 the enumeration_aggregate. Otherwise, the string returned is the same as
@@ -1144,7 +1144,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-have the following],Old=[]} Definition_Kinds:
+has the following],Old=[]} Definition_Kinds:
 @begin{Display}
 A_Discrete_Subtype_Definition
 @end{Display}
@@ -1428,7 +1428,7 @@ Returns a list of the exception_handler elements of the body, in their order of
 appearance.
 
 The only pragmas returned are those following the reserved word @key[exception]
-and preceding the reserved word @key[when] of first exception handler.
+and preceding the reserved word @key[when] of the first exception handler.
 
 Returns a Nil_Element_List if there are no exception_handler or pragma elements.
 
@@ -1640,7 +1640,7 @@ value that is A_Package_Declaration that can be analyzed with all
 appropriate queries.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-Retuns the declaration of the generic child unit corresponding to an
+Returns the declaration of the generic child unit corresponding to an
 implicit generic child unit specification. @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.1(19).
 
 The Enclosing_Element of the expanded specification is the generic
@@ -2013,7 +2013,7 @@ or an inequality operator declaration.
 @leading@;If given an explicit Declaration of "=" whose result type is Boolean:
 
 @begin{Itemize}
-Returns the complimentary implicit "/=" operator declaration.
+Returns the complementary implicit "/=" operator declaration.
 
 Returns a Nil_Element if the Ada implementation has not defined an
 implicit "/=" for the "=". Implementations of this sort will transform
@@ -2024,7 +2024,7 @@ representing the @key[not] operation is Is_Part_Of_Implicit in this case.
 @leading@;If given an implicit declaration of "/=" whose result type is Boolean:
 
 @begin{Itemize}
-Returns the complimentary explicit "=" operator declaration.
+Returns the complementary explicit "=" operator declaration.
 @end{Itemize}
 
 Returns a Nil_Element for any other function declaration.
@@ -2043,7 +2043,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-have the following],Old=[]} Declaration_Kinds:
+has the following],Old=[]} Declaration_Kinds:
 @begin{Display}
 A_Function_Declaration
 @end{Display}
@@ -2276,7 +2276,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-have the following],Old=[]} Element_Kinds:
+has the following],Old=[]} Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -2342,8 +2342,9 @@ function Renamed_Entity
                              @key[return] @Chg{Version=[2],New=[Asis.Name], Old=[Asis.Expression]};
 @end{Example}
 
-Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the rename
-declaration to query.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
+@Chg{Version=[2],New=[renaming],Old=[rename]} declaration to query.
 
 The base entity is defined to be the renamed entity that is not itself
 defined by another renaming declaration.
@@ -2655,7 +2656,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-have the following],Old=[]} Element_Kinds:
+has the following],Old=[]} Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -2722,7 +2723,7 @@ Returns a Nil_Element if the subunit does not exist in The_Context.
 @begin{ChildExample}
 Decl2 := Corresponding_Subunit (Decl1);
 Decl2 := Corresponding_Subunit
-         (Decl1, Enclosing_Context (Enclosing_Compilation_Unit (Decl1));
+         (Decl1, Enclosing_Context (Enclosing_Compilation_Unit (Decl1)));
 @end{ChildExample}
 
 The parameter The_Context is used to locate the corresponding subunit body.
@@ -3417,12 +3418,11 @@ A_Function_Instantiation],Old=[]}
 interface_list in the argument declaration, in their order of appearance.
 If Declaration has no progenitors, an empty list is returned.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1],ARef=[SI99-0028-1],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
 Declaration expects an element that has one of the following Declaration_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Private_Extension_Declaration
-A_Private_Type_Declaration
 A_Task_Type_Declaration
 A_Protected_Type_Declaration
 A_Single_Task_Declaration

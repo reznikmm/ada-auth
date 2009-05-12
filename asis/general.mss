@@ -1,6 +1,6 @@
-@Part(frontmatter, root="asis.msm")
+@Part(general, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.17 $ $Date: 2009/03/13 07:12:33 $}
+@comment{$Revision: 1.18 $ $Date: 2009/05/09 06:28:47 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -14,17 +14,23 @@ I probably ought to add a style just for this purpose)
 
 @begin{WideAbove}
 @noparanum@leading@tabclear()@tabset(P45)
+@Comment{Final
 @Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 15291:@Chg{Version=[1],New=[200x(E)],Old=[1999(E)]}}]>
+}@Comment{End final}
+@Comment{Draft}
+@Swiss<@Grow[@B{COMMITTEE DRAFT@\ISO/IEC 15291 CD}]>
+@Comment{End draft}
+
 @end{WideAbove}
 
 @thickline
 
-@begin{Title}
+@begin{Title}@Comment{Should be 16 points, somehow comes out as 20}
 @noparanum@ @*@comment{Some vertical whitespace}
 
-@noparanum@Swiss{@b{Information technology @Em}}@*
-@Swiss{@b{Programming languages @Em}}@*
-@Swiss{@b{Ada Semantic Interface Specification (ASIS)}}
+@noparanum@Swiss{@Shrink{@Shrink{@b{Information technology @Em}}}}@*
+@Swiss{@Shrink{@Shrink{@b{Programming languages @Em}}}}@*
+@Swiss{@Shrink{@Shrink{@b{Ada Semantic Interface Specification (ASIS)}}}}
 
 @noparanum@ @*@comment{Some vertical whitespace}
 @end{Title}
@@ -33,14 +39,15 @@ I probably ought to add a style just for this purpose)
 
 @LabeledClause{Scope}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0047-1]}
 The Ada Semantic Interface Specification (ASIS) is an interface between an Ada
 environment (as defined by @Chg{Version=[2], New=[ISO/IEC 8652:1995(E)],
 Old=[ISO/IEC 8652:1995]})
 and any tool requiring
 information from this environment. An Ada environment includes valuable
 semantic and syntactic information. ASIS is an open and published callable
-interface which gives CASE tool and application developers access to this
+interface which gives @Chg{Version=[2],New=[],Old=[CASE ]}tool and application
+developers access to this
 information. ASIS has been designed to be independent of underlying Ada
 environment implementations, thus supporting portability of software
 engineering tools while relieving tool developers from needing to understand
@@ -178,13 +185,22 @@ compilable.]}
 @Chg{Version=[2],New=[Section],Old=[Clause]} 22   package Asis.Data_Decomposition (optional package)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} 23   package @Chg{Version=[2],New=[Asis.Views, Asis.Program_Units,
-Asis.Subtype_Views, Asis.Subtype_Views.Elementary, Asis.Subtype_Views.Composite,
-Asis.Object_Views, Asis.Object_Views.Access_Views, Asis.Profiles,
-Asis.Callable_Views,
-Asis.Package_Views, Asis.Generic_Views, Asis.Exception_Views,
-Asis.Statement_Views, Asis.Declarations.Views, Asis.Definitions.Views,
-and Asis.Expressions.Views],Old=[Asis.Data_Decomposition.Portable_Transfer]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 23   package @Chg{Version=[2],New=[Asis.Views,@*
+Asis.Program_Units,@*
+Asis.Subtype_Views,@*
+Asis.Subtype_Views.Elementary,@*
+Asis.Subtype_Views.Composite,@*
+Asis.Object_Views,@*
+Asis.Object_Views.Access_Views,@*
+Asis.Profiles,@*
+Asis.Callable_Views,@*
+Asis.Package_Views,@*
+Asis.Generic_Views,@*
+Asis.Exception_Views,@*
+Asis.Statement_Views,@*
+Asis.Declarations.Views,@*
+Asis.Definitions.Views, and@*
+Asis.Expressions.Views],Old=[Asis.Data_Decomposition.Portable_Transfer]}
 
 @end{Itemize}
 
@@ -234,8 +250,8 @@ describe additional requirements for conforming implementations.
 @end{ImplReq}
 
 @begin{SingleNote}
-@Chg{Version=[1],New=[These items],Old=[@b{Application Note} - These comments]}These
-notes describe notes of interest to ASIS applications.
+@Chg{Version=[1],New=[These items],Old=[@b{Application Note} - These comments]}
+describe notes of interest to ASIS applications.
 @end{SingleNote}
 
 @begin{Examples}
@@ -268,8 +284,8 @@ mysterious to me.}
 @end{ChildRef}
 
 @begin{UsageNote}
-@Chg{Version=[1],New=[These items],Old=[@b{Application Note} - These comments]}These
-notes describe suggested uses, further
+@Chg{Version=[1],New=[These items],Old=[@b{Application Note} - These comments]}
+describe suggested uses, further
 analysis, or other notes of interest to ASIS applications.
 @end{UsageNote}
 
@@ -397,8 +413,8 @@ shall be included in any Fully Conforming ASIS implementation, unless stated
 otherwise in the ASIS specification.@Chg{Version=[2],New=[],Old=[ An
 application that accesses an Ada
 environment's semantic tree (e.g., Diana Tree) directly using work-arounds is
-not considered to be a conformant application.]} All Conforming Applications
-fall within one of the categories defined below.
+not considered to be a conformant application. All Conforming Applications
+fall within one of the categories defined below.]}
 
 If an unimplemented feature is used, the exception Asis.ASIS_Failed shall be
 raised and Asis.Implementation_Status shall return the value for Error_Kinds of
@@ -448,7 +464,8 @@ Ada components. All ASIS applications claiming conformance to this
 International Standard shall use a Conforming ASIS Implementation with or
 without extensions.@Defn{ASIS application}@Chg{Version=[2],New=[ In any case,
 an application that accesses an Ada environment directly (other than through
-ASIS) is not considered to be a conformant application.],Old=[]}
+ASIS) is not considered to be a conformant application. All Conforming
+Applications fall within one of the categories defined below.],Old=[]}
 
 @Subheading{Basic conforming ASIS application}
 
@@ -487,12 +504,13 @@ Using Extensions may or may not be portable to other Fully Conforming ASIS
 Implementation Using Extensions.@Defn2{Term=[Fully conforming ASIS application],Sec=[using extensions]}
 
 
-@LabeledRevisedSubClause{Version=[2],New=[obsolete clause Impl Perms],
+@LabeledDeletedSubClause{Version=[2],Name=[Implementation permissions]}
+@Comment{@LabeledRevisedSubClause{Version=[2],New=[obsolete clause Impl Perms],
 Old=[Implementation permissions]}
 @ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
 removing it now would change all of the clause numbers,
 and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - RLB}}]}
+when the final standard is produced, it will be removed. - RLB}}]}}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
 @ChgDeleted{Version=[2],Text=[The ASIS Application Program Interface (API) may be implemented through a
@@ -502,9 +520,7 @@ implementation permissions are depicted in Figure 1 and described below:]}
 
 
 @ChgNote{SI99-0047-1 remove junk}
-@Chg{Version=[2],New=[],Old=[Traditional approach (permission 1)]}
-@ChgNote{This subsubclause header was removed as there are no remaining clauses
-after it. - RLB}
+@LabeledDeletedSubSubClause{Version=[2],Name=[Traditional approach (permission 1)]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
 @ChgDeleted{Version=[2],Text=[Traditionally, the ASIS API implementation is
@@ -519,9 +535,7 @@ implementor's environment.]}
 
 
 @ChgNote{SI99-0047-1 remove junk}
-@Chg{Version=[2],New=[],Old=[Client / server approach (permission 2)]}
-@ChgNote{This subsubclause header was removed as there are no remaining clauses
-after it. - RLB}
+@LabeledDeletedSubSubClause{Version=[2],Name=[Client / server approach (permission 2)]}
 
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
@@ -545,9 +559,7 @@ server interface with the ORB.]}
 
 
 @ChgNote{SI99-0047-1 remove junk}
-@Chg{Version=[2],New=[],Old=[Distributed traditional approach (permission 3)]}
-@ChgNote{This subsubclause header was removed as there are no remaining clauses
-after it. - RLB}
+@LabeledDeletedSubSubClause{Version=[2],Name=[Distributed traditional approach (permission 3)]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
 @ChgDeleted{Version=[2],Text=[The Ada specification created by the compilation of this ASIS API in IDL is
@@ -561,9 +573,7 @@ and play.]}
 
 
 @ChgNote{SI99-0047-1 remove junk}
-@Chg{Version=[2],New=[],Old=[ASIS dynamic client approach (permission 4)]}
-@ChgNote{This subsubclause header was removed as there are no remaining clauses
-after it. - RLB}
+@LabeledDeletedSubSubClause{Version=[2],Name=[ASIS dynamic client approach (permission 4)]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
 @ChgDeleted{Version=[2],Text=[In addition to using traditional compiled tools
@@ -717,4 +727,14 @@ the English Language}. Informal descriptions of some terms are also given in
 @ldquote@;ASIS@rdquote is used in reference to the acronym @ldquote@;Ada
 Semantic Interface Specification.@rdquote@;
 @ldquote@;Asis@rdquote is used in reference to the package Asis.
+
+@begin{Discussion}
+@ChgNote{Moved this from the Introduction, where it surely does not belong}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[The word "may" as used in this International
+Standard consistently means "is allowed to" (or "are allowed to"). It is used
+only to express permission, as in the commonly occurring phrase "an
+implementation may"; other words (such as "can," "could" or "might") are used to
+express ability, possibility, capacity, or consequentiality.]}
+@end{Discussion}
 

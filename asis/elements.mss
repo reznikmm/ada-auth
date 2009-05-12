@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.15 $ $Date: 2009/03/13 07:12:33 $}
+@comment{$Revision: 1.16 $ $Date: 2009/05/09 06:28:46 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -1937,7 +1937,7 @@ An_Exception_Handler@Chg{Version=[1],New=[ @em ],Old=[@\]}(pragmas from the stat
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[The_Element expects an element
+@leading@keepnext@;@Chg{Version=[2],New=[or an element
 that has one of the following],Old=[Appropriate]} Declaration_Kinds:
 @begin{Display}
 @tabset{P34}
@@ -2009,7 +2009,7 @@ A_Pragma
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0021-1]}
 @key[function] @Chg{Version=[2],New=[@AdaSubDefn{Corresponding_Aspect_Pragmas}],Old=[@AdaSubDefn{Corresponding_Pragmas}]} (@Chg{Version=[2],New=[Defining_Name],Old=[Element]} : @key[in] @Chg{Version=[2],New=[Asis.Defining_Name],Old=[Asis.Element]})
-                                 @key[return] Asis.Pragma_Element_List;]}
+                                 @key[return] Asis.Pragma_Element_List;
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0021-1]}
@@ -2054,7 +2054,7 @@ A_Statement]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that
 each have],Old=[]} Element_Kinds:
 @begin{Display}
-A_Pragma]
+A_Pragma
 @end{Display}
 @end{DescribeCode}
 

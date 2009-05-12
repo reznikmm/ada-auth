@@ -1,6 +1,6 @@
 @Part(iterator, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/iterator.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2008/02/06 06:23:47 $}
+@comment{$Revision: 1.4 $ $Date: 2009/05/09 06:28:46 $}
 
 @LabeledSection{package Asis.Iterator}
 
@@ -47,9 +47,10 @@ iteration capability and to facilitate the translation of ASIS to IDL.
              State   : @key[in out] State_Information);
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Element @Chg{Version=[1],New=[specifies],Old=[            @en Specifies]} the initial element in the traversal.
 Control @Chg{Version=[1],New=[specifies],Old=[            @en Specifies]} what next to do with the traversal.
-State_Information @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} other information for the traversal.
+@Chg{Version=[2],New=[State],Old=[State_Information]} @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} other information for the traversal.
 
 Traverses the element and all its component elements, if any.
 Component elements are all elements that can be obtained by a combination
@@ -58,7 +59,7 @@ of the ASIS structural queries appropriate for the given element.
 If an element has one or more component elements, each is called a child
 element. An element's parent element is its Enclosing_Element. Children
 with the same parent are sibling elements. The type Traverse_Control uses
-the terms children and siblings to control the traverse.
+the terms children and siblings to control the traversal.
 
 For each element, the formal procedure Pre_Operation is called when first
 visiting the element. Each of that element's children are then visited
@@ -108,7 +109,7 @@ A call to an instance of Traverse_Element will not result in calls to
 Pre_Operation or Post_Operation unless Control is set to Continue.
 
 @leading@;The subprograms matching Pre_Operation and Post_Operation can set
-their Control parameter to affect the traverse:
+their Control parameter to affect the traversal:
 
 @begin{Itemize}
 Continue

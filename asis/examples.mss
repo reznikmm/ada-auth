@@ -1,13 +1,14 @@
 @Part(examples, Root="asis.msm")
 
-@Comment{$Date: 2007/02/18 03:23:56 $}
+@Comment{$Date: 2009/05/09 06:28:46 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/examples.mss,v $}
-@comment{$Revision: 1.2 $}
+@comment{$Revision: 1.3 $}
 
 @LabeledInformativeAnnex{ASIS application examples}
 
-@LabeledClause{Use to traverse compilation unit}
+@Chgnote{Improved title - SI-47}
+@LabeledRevisedClause{Version=[2],New=[An ASIS application to traverse a compilation unit],Old=[Use to traverse compilation unit]}
 
 The following example of an ASIS tool prompts the user for the name of
 an Ada package specification, traverses that compilation unit, and prints
@@ -195,7 +196,8 @@ S (is kind) A_VARIABLE_DECLARATION
 @end{Example}
 
 
-@LabeledClause{Use to build call tree}
+@Chgnote{Improved title - SI-47}
+@LabeledRevisedClause{Version=[2],New=[An ASIS application to build a call tree],Old=[Use to build call tree]}
 
 This example prints call tree information (i.e., a list of all procedure,
 function, and entry calls made within a compilation unit) for each compilation
@@ -272,7 +274,7 @@ where:
       Put (Asis.Declarations.Defining_Name_Image                       -- @examcom{@RefSecNum{function Defining_Name_Image}}
                        (Asis.Declarations.Names (Callee) (1)));        -- @examcom{@RefSecNum{function Names}}
       Put (" at line ");
-      Put (Asis.Text.Line_Number'Wide_Image                            -- @examcom{@RefSecNum{type Line_Number}}
+      Put (Asis.Text.Line_Number'Wide_Image                            -- @examcom{@RefSecNum{subtypes Line_Number and Line_Number_Positive}}
                     (Asis.Text.First_Line_Number (Caller)));           -- @examcom{@RefSecNum{function First_Line_Number}}
       New_Line;
 
@@ -390,7 +392,9 @@ where:
 @end{Example}
 
 
-@leading@;The ASIS_Call_Tree_Example is demonstrated using a context containing the
+@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Consider the],Old=[The ASIS_Call_Tree_Example is
+demonstrated using a]} context containing the
 following compilation units:
 
 @begin{Example}
@@ -442,8 +446,12 @@ following compilation units:
 @end{Example}
 
 
-@leading@;Given a context containing the above set of compilation units, the sample
-output resulting from the execution of ASIS_Call_Tree_Example is:
+@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Applying],Old=[Given a context containing the
+above set of compilation units, the sample
+output resulting from the execution of]} ASIS_Call_Tree_Example
+@Chg{Version=[2],New=[to the context given above yields the
+following output],Old=[is]}:
 
 @begin{Example}
 Processing Unit: P

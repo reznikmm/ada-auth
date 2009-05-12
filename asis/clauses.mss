@@ -1,6 +1,6 @@
 @Part(clauses, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/clauses.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2009/03/13 07:12:33 $}
+@comment{$Revision: 1.10 $ $Date: 2009/05/09 06:28:46 $}
 
 @LabeledSection{package Asis.Clauses}
 
@@ -254,7 +254,7 @@ kinds.]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
 has one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
-A_Clause@Chg{Version=[2],New=[ @em the returned element also has one of Clause_Kinds:],Old=[]}
+A_Clause@Chg{Version=[2],New=[ @em the returned element also has Clause_Kinds:],Old=[]}
 @Chg{Version=[2],New=[ @ @ @ @  A_Component_Clause],Old=[]}
 A_Pragma
 @end{Display}

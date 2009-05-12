@@ -1,6 +1,6 @@
 @Part(text, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/text.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2009/02/10 06:51:27 $}
+@comment{$Revision: 1.8 $ $Date: 2009/05/09 06:28:47 $}
 
 @LabeledSection{package Asis.Text}
 
@@ -67,7 +67,8 @@ uninitialized]} Line object.
 @end{DescribeCode}
 
 
-@LabeledClause{type Line_Number}
+@ChgNote{By SI99-0047-1}
+@LabeledRevisedClause{Version=[2],New=[subtypes Line_Number and Line_Number_Positive],Old=[type Line_Number]}
 
 Line_Number is a numeric subtype that allows each ASIS implementation to place
 constraints on the upper bound for Line_List elements and compilation unit size.
@@ -88,15 +89,19 @@ as a new type or as a subtype of an existing type.]}@ChgNote{Moved up}
     @i{Implementation_Defined_Integer_Constant};
 
 @key[subtype] @AdaSubtypeDefn{Name=[Line_Number],Of=[ASIS_Natural]} @key[is] ASIS_Natural @key[range] 0 .. Maximum_Line_Number;
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Line_Number_Positive],Of=[Line_Numberl]} @key[is] Line_Number @key[range] 1 .. Maximum_Line_Number;]}
 @end{Example}
 @end{DescribeCode}
 
 
-@LabeledClause{type Line_Number_Positive}
+@LabeledDeletedClause{Version=[2],Name=[type Line_Number_Positive]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[subtype] @AdaSubtypeDefn{Name=[Line_Number_Positive],Of=[Line_Numberl]} @key[is] Line_Number @key[range] 1 .. Maximum_Line_Number;
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Line_Number_Positive],Of=[Line_Numberl]} @key[is] Line_Number @key[range] 1 .. Maximum_Line_Number;]}
 @end{Example}
 @end{DescribeCode}
 
@@ -108,10 +113,15 @@ as a new type or as a subtype of an existing type.]}@ChgNote{Moved up}
 @key[type] @AdaTypeDefn{Line_List} @key[is array] (Line_Number_Positive @key[range] <>) @key[of] Line;
 @AdaObjDefn{Nil_Line_List} : @key[constant] Line_List;
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Nil_Line_List is the value of a Line_List containing no elements.]}
+
 @end{DescribeCode}
 
 
-@LabeledClause{type Character_Position}
+@ChgNote{By SI99-0047-1}
+@LabeledRevisedClause{Version=[2],New=[subtypes Character_Position and Character_Position_Positive],Old=[type Character_Position]}
 
 Character_Position is a numeric subtype that allows each ASIS implementation to
 place constraints on the upper bound for Character_Position and for compilation
@@ -127,19 +137,24 @@ position zero.
 @begin{DescribeCode}
 @begin{Example}
 @AdaObjDefn{Maximum_Line_Length} : @key[constant] ASIS_Natural :=
-    @i{Implementation_Defined_Integer_Constant};
+   @i{Implementation_Defined_Integer_Constant};
 
 @key[subtype] @AdaSubtypeDefn{Name=[Character_Position],Of=[ASIS_Natural]} @key[is] ASIS_Natural @key[range] 0 .. Maximum_Line_Length;
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Character_Position_Positive],Of=[Character_Position]} @key[is]
+   Character_Position @key[range] 1 .. Maximum_Line_Length;]}
 @end{Example}
 @end{DescribeCode}
 
 
-@LabeledClause{type Character_Position_Positive}
+@LabeledDeletedClause{Version=[2],Name=[type Character_Position_Positive]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[subtype] @AdaSubtypeDefn{Name=[Character_Position_Positive],Of=[Character_Position]} @key[is]
-    Character_Position @key[range] 1 .. Maximum_Line_Length;
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Character_Position_Positive],Of=[Character_Position]} @key[is]
+   Character_Position @key[range] 1 .. Maximum_Line_Length;]}
 @end{Example}
 @end{DescribeCode}
 
@@ -148,7 +163,7 @@ position zero.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 @Chg{Version=[2],New=[A @i{single text position}@Defn{single text position}],Old=[Span
-is a single text position]} that is identified by a line number and a column
+is a single text position that]} is identified by a line number and a column
 number representing the text's @Chg{Version=[2],New=[location],Old=[position]}
 within the compilation unit.
 
@@ -162,12 +177,14 @@ the text directly through the original compilation unit text file. Type @Chg{Ver
 facilitates the capture of comments before or after an element.
 
 @begin{SingleNote}
-The original compilation unit text may or may not have existed in a
-"file", and any such file may or may not still exist. @Chg{Version=[2],New=[Ada
-Standard],Old=[Reference Manual]} 10.1 specifies that the text of a compilation
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[The original compilation unit text may or may not have existed in a
+"file", and any such file may or may not still exist.
+Reference Manual 10.1 specifies that the text of a compilation
 unit is submitted to a compiler. It does not specify that the text is stored in
 a "file", nor does it specify that the text of a compilation unit has any
-particular lifetime. @end{SingleNote}
+particular lifetime.]}
+@end{SingleNote}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -185,6 +202,16 @@ particular lifetime. @end{SingleNote}
                              Last_Column  => 0);
 @end{Example}
 @end{DescribeCode}
+
+@begin{SingleNote}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0030-1],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[The original compilation unit text may or may not have existed in a
+"file", and any such file may or may not still exist. Ada
+Standard 10.1 specifies that the text of a compilation
+unit is submitted to a compiler. It does not specify that the text is stored in
+a "file", nor does it specify that the text of a compilation unit has any
+particular lifetime.]}
+@end{SingleNote}
 
 
 @LabeledClause{function First_Line_Number}
@@ -418,8 +445,9 @@ query.
 
 Returns a list of lines covering the span of the given program element.
 
-Returns a Nil_Span if the text of a Compilation containing a given
-Element cannot be located for any reason.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns a @Chg{Version=[2],New=[Nil_Line_List],Old=[Nil_Span]} if the text
+of a Compilation containing a given Element cannot be located for any reason.
 
 Line lists can be indexed to obtain individual lines. The bounds of each
 list correspond to the lines with those same numbers in the compilation
@@ -455,8 +483,9 @@ textual span to return.
 Returns a list of lines covering the given span from the compilation
 containing the given program element.
 
-Returns a Nil_Span if the text of a Compilation containing a given
-Element cannot be located for any reason.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns a @Chg{Version=[2],New=[Nil_Line_List],Old=[Nil_Span]} if the text
+of a Compilation containing a given Element cannot be located for any reason.
 
 This operation can be used to access lines from text outside the span of an
 element, but still within the compilation. For example, lines containing
@@ -503,13 +532,16 @@ lines from the compilation containing the given element. This operation
 can be used to access lines from text outside the span of an element, but
 still within the compilation.
 
-Returns a Nil_Span if the text of a Compilation containing a given
-Element cannot be located for any reason.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns a @Chg{Version=[2],New=[Nil_Line_List],Old=[Nil_Span]} if the text
+of a Compilation containing a given Element cannot be located for any reason.
 
 Line lists can be indexed to obtain individual lines. The bounds of each
 list correspond to the lines with those same numbers in the compilation text.
 
-Raises ASIS_Inappropriate_Line_Number if the span is nil. If the span defines
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Raises ASIS_Inappropriate_Line_Number if @Chg{Version=[2],New=[Last_Line is
+less than First_Line],Old=[the span is nil]}. If the span defines
 a line whose number is outside the range of text lines that can be accessed
 through the Element, the implementation is encouraged, but not required to
 raise ASIS_Inappropriate_Line_Number.
@@ -550,14 +582,14 @@ span more than one line, in which case the program text returned by the
 function Delimiter_Image separates the individual lines. The bounds on
 the returned program text value are 1..N, N is as large as necessary.
 
-Returns a null string if not Is_Text_Available(Element).
+Returns a null string if @key{not} Is_Text_Available(Element).
 
 If an Element's Span begins at column position P, the returned program text will
 be padded at the beginning with P-1 white space characters (Ascii.' ' or Ascii.Ht).
 The first character of the Element's image will thus begin at character P of the
 returned program text. Due to the possible presence of Ascii.Ht characters, the
 "column" position of characters within the image might not be the same as their
-print-column positions when the image is displayed on a screen or printed.
+print-column position when the image is displayed on a screen or printed.
 @end{DescribeCode}
 
 @begin{SingleNote}
@@ -582,15 +614,17 @@ element can be sliced from the returned value using the first and last
 column character positions from the Span of the Element. The bounds on the
 returned program text are 1 .. Length(Line).
 
-If the Line is the first line from the Lines result for an Element, it can
-represent only a portion of a line from the original compilation. If the
-span began at character position P, the first Line of it's Lines
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+If the Line is the first line from the Lines result for an Element, it
+@Chg{Version=[2],New=[may],Old=[can]} represent only a portion of a line
+from the original compilation. If the
+span began at character position P, the first Line of @Chg{Version=[2],New=[its],Old=[it's]} Lines
 result is padded at the beginning with P-1 white space characters
 (Ascii.' ' or Ascii.Ht). The first character of the image will
 thus begin at character P of the program text for the first Line. Due to the
 possible presence of Ascii.Ht characters, the "column" position of
 characters within the image may not be the same as their print-column
-positions when the image is displayed or printed.
+position when the image is displayed or printed.
 
 Similarly, if the Line is the last line from the Lines result for an
 Element, it may represent only a portion of a line from the original
