@@ -1,9 +1,9 @@
 @Part(rat, Root="asis.msm")
 
-@Comment{$Date: 2009/03/13 07:12:33 $}
+@Comment{$Date: 2009/05/12 06:23:26 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/rat.mss,v $}
-@comment{$Revision: 1.4 $}
+@comment{$Revision: 1.5 $}
 
 @LabeledInformativeAnnex{Rationale}
 
@@ -566,6 +566,33 @@ hierarchy of child units.
 
 Terminology was revised and comments in the ASIS package specifications were
 reworded to make them consistent with Ada.
+@end{Itemize}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Major changes from ASIS for ISO/IEC 15291:1999]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The main changes in the
+ASIS definition are as follows:]}
+@begin{Itemize}
+
+@ChgAdded{Version=[2],Text=[Previous versions of ASIS provided mostly syntactic
+information regarding an Ada unit or program. An entire new interface and set of
+packages was added to provide a semantic "view" of units. Routines are also
+provided to allow for easy transition between these two different views of an
+Ada program. The semantic view makes it easier to access information that is
+otherwise implicit or anonymous.]}
+
+@ChgAdded{Version=[2],Text=[New queries and types were added to support language
+features added or revised by Amendment 1 (ISO/IEC 8652:1995/AMD 1:2007) such as
+new kinds of types, new pragmas, attribute kinds, and use of prefix notation.
+Existing queries and types were revised to take into account language changes.]}
+
+@ChgAdded{Version=[2],Text=[The expected input types and return types were
+clarified throughout the standard.]}
+
+@ChgAdded{Version=[2],Text=[Restricted some past allowed variability between
+implementations, increasing the portability of source transforming tools.]}
 @end{Itemize}
 
 

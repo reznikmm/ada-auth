@@ -1,6 +1,6 @@
 @Part(comptime, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/comptime.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2009/03/13 07:12:33 $}
+@comment{$Revision: 1.3 $ $Date: 2009/05/12 06:23:26 $}
 
 @LabeledSection{package Asis.Compilation_Units.Times}
 
@@ -27,7 +27,7 @@ time is unavailable/unknown.
 
 @begin{DescribeCode}
 @begin{Example}
-@AdaObjDefn{Nil_ASIS_Time} : constant Ada.Calendar.Time :=
+@AdaObjDefn{Nil_ASIS_Time} : @key[constant] Ada.Calendar.Time :=
        Ada.Calendar.Time_Of (Year    => 1901,
                              Month   => 1,
                              Day     => 1,

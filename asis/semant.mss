@@ -1,13 +1,15 @@
 @Part(ids, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/semant.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2009/05/09 06:28:46 $}
+@comment{$Revision: 1.4 $ $Date: 2009/05/12 06:23:26 $}
 
 @LabeledAddedSection{Version=[2],Name=[ASIS Semantic Subsystem]}
 
 @LabeledAddedClause{Version=[2],Name=[Introduction for ASIS Semantic Subsystem]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[The ASIS Semantic Subsystem comprises a set of
+@ChgAdded{Version=[2],Text=[The ASIS Semantic
+Subsystem@Defn{semantic subsystem}@Defn2{Term=[subsystem],Sec=[semantic]}
+comprises a set of
 packages that provide a semantic-level interface to the program library. Other
 parts of ASIS are based on Elements that represent syntactic constructs. The
 Semantic Subsystem defines a set of types that represent views of entities

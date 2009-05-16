@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.16 $ $Date: 2009/05/09 06:28:46 $}
+@comment{$Revision: 1.17 $ $Date: 2009/05/12 06:23:26 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -17,7 +17,9 @@ and some queries specific to A_Pragma elements.
 
 @LabeledClause{function Unit_Declaration}
 
-Gateway queries between Compilation_Units and Elements.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[Gateway queries between Compilation_Units and
+Elements.]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -36,10 +38,9 @@ A_Nonexistent_Body, A_Configuration_Compilation, or An_Unknown_Unit.
 @Chg{Version=[2],New=[Compilation_Unit expects a unit of
 any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are appropriate]} except Not_A_Unit.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Compilation_Unit with a
-Status of Value_Error for any unit that does not have one of these expected
-kinds.]}
+Status of Value_Error if Compilation_Unit has Unit_Kinds Not_A_Unit.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -103,8 +104,10 @@ Returns a list of with clauses, use clauses, and pragmas that explicitly
 appear in the context clause of the compilation unit, in their order of
 appearance.
 
-Returns a Nil_Element_List if the unit has A_Nonexistent_Declaration,
-A_Nonexistent_Body, or An_Unknown_Unit Unit_Kind.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns a Nil_Element_List if the @Chg{Version=[2],New=[Unit_Kind of the ],Old=[]}unit
+has A_Nonexistent_Declaration, A_Nonexistent_Body, or
+An_Unknown_Unit@Chg{Version=[2],New=[],Old=[ Unit_Kind]}.
 
 @begin{ImplReq}
 @begin{Itemize}
@@ -113,17 +116,6 @@ list. Other pragmas will appear in this list, or in the Compilation_Pragmas
 list, or both.
 @end{Itemize}
 @end{ImplReq}
-
-@begin{ImplPerm}
-@begin{Itemize}
-@noprefix@;Implementors are encouraged to use this list to return all pragmas whose
-full effect is determined by their exact textual position. Pragmas that
-do not have placement dependencies may be returned in either list. Only
-pragmas that appear in the unit's context clause are returned
-by this query. All other pragmas, affecting the compilation of this
-unit, are available from the Compilation_Pragmas query.
-@end{Itemize}
-@end{ImplPerm}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 @Chg{Version=[2],New=[],Old=[Ada predefined packages, such as package Standard,
@@ -135,9 +127,16 @@ or not a particular unit is an Ada Predefined unit.]}
 
 @begin{ImplPerm}
 @begin{Itemize}
+@noprefix@;Implementors are encouraged to use this list to return all pragmas whose
+full effect is determined by their exact textual position. Pragmas that
+do not have placement dependencies may be returned in either list. Only
+pragmas that appear in the unit's context clause are returned
+by this query. All other pragmas, affecting the compilation of this
+unit, are available from the Compilation_Pragmas query.
+
 @noprefix@;Results of this query may vary across ASIS implementations. Some
 implementations normalize all multi-name with clauses and use clauses
-into an equivalent sequence of single-name with clause and use clauses.
+into an equivalent sequence of single-name with clauses and use clauses.
 Similarly, an implementation may retain only a single reference to a name
 that appeared more than once in the original context clause.
 Some implementors will return only pragma
@@ -150,14 +149,13 @@ Compilation_Pragmas query.
 @Chg{Version=[2],New=[Compilation_Unit expects a unit of
 any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are appropriate]} except Not_A_Unit.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Compilation_Unit with a
-Status of Value_Error for any unit that does not have one of these expected
-kinds.]}
+Status of Value_Error if Compilation_Unit has Unit_Kinds Not_A_Unit.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-one of the following],Old=[]} Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that
+each have one of the following],Old=[]} Element_Kinds:
 @begin{Display}
 A_Pragma
 A_Clause@Chg{Version=[2],New=[ that has one of the following Clause_Kinds:
@@ -195,8 +193,8 @@ dependent, many pragmas have the same effect regardless of order.)
 Returns a Nil_Element_List if there are no such configuration pragmas.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has the following],Old=[]} Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that
+each have the following],Old=[]} Element_Kinds:
 @begin{Display}
 A_Pragma
 @end{Display}
@@ -264,14 +262,13 @@ is an An_Unknown_Unit, A_Nonexistent_Declaration, or A_Nonexistent_Body.
 @Chg{Version=[2],New=[Compilation_Unit expects a unit of
 any],Old=[All]} Unit_Kinds@Chg{Version=[2],New=[],Old=[ are appropriate]} except Not_A_Unit.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Compilation_Unit with a
-Status of Value_Error for any unit that does not have one of these expected
-kinds.]}
+Status of Value_Error if Compilation_Unit has Unit_Kinds Not_A_Unit.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has the following],Old=[]} Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that
+each have the following],Old=[]} Element_Kinds:
 @begin{Display}
 A_Pragma
 @end{Display}
@@ -524,12 +521,7 @@ A_Formal_Derived_Type_Definition]}
 
 @comment{Remainder of SI99-0022-1 function inserts}
 
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Aliased]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Has_Aliased]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Has_Aliased]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -561,12 +553,7 @@ a Nil_Element.]}
 
 
 
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Limited]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Has_Limited]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Has_Limited]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -610,12 +597,7 @@ False otherwise.]}
 @end{DescribeCode}
 
 
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Private]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Has_Private]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Has_Private]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -658,12 +640,7 @@ False otherwise.]}
 @end{DescribeCode}
 
 
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Protected]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Has_Protected]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Has_Protected]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -694,12 +671,7 @@ False otherwise.]}
 @end{DescribeCode}
 
 
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Reverse]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Has_Reverse]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Has_Reverse]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -722,12 +694,7 @@ False otherwise.]}
 @end{DescribeCode}
 
 
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Synchronized]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Has_Synchronized]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Has_Synchronized]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -752,12 +719,7 @@ a Nil_Element.]}
 @end{DescribeCode}
 
 
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Tagged]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Has_Tagged]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Has_Tagged]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -793,12 +755,7 @@ False otherwise.]}
 
 
 
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Task]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Has_Task]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Has_Task]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1013,12 +970,7 @@ An_Access_Type_Definition
 
 
 @ChgNote{ SI99-0004-1 }
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Has_Null_Exclusion]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Has_Null_Exclusion]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Has_Null_Exclusion]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1031,10 +983,10 @@ change all of the following clause numbers, so this is a subclause temporarily.]
 
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1]}
-@ChgAdded{Version=[2],Text=[Element specifies the element to check.]}
+@ChgAdded{Version=[2],Text=[Element specifies the element to query.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Checks if the argument element has a null_exclusion
+@ChgAdded{Version=[2],Text=[Returns True if the argument element has a null_exclusion
 specifier.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1071,12 +1023,7 @@ An_Object_Renaming_Declaration]}
 
 
 @ChgNote{ SI99-0004-1 }
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Access_Definition_Kind]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Access_Definition_Kind]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Access_Definition_Kind]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1107,12 +1054,7 @@ element that has the following Element_Kinds:]}
 
 
 @ChgNote{ SI99-0013-1 }
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Interface_Kind]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Interface_Kind]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Interface_Kind]}
 
 
 @begin{DescribeCode}
@@ -1262,8 +1204,9 @@ An_Expression
 Element @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the Element to
 query.
 
-Returns the Operator_Kinds value of the A_Defining_Name or An_Expression
-element.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns the Operator_Kinds value of the
+@Chg{Version=[2],New=[],Old=[A_Defining_Name or An_Expression ]}element.
 
 Returns Not_An_Operator for any unexpected element such as a
 Nil_Element, A_Statement, or A_Declaration.
@@ -1449,7 +1392,9 @@ that has the following],Old=[Appropriate]} Clause_Kinds:
 Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the element to
 check.
 
-Returns True if the program element is the Nil_Element.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns True if the program element is the
+Nil_Element@Chg{Version=[2],New=[ and returns False otherwise],Old=[]}.
 @end{DescribeCode}
 
 
@@ -1463,7 +1408,9 @@ Returns True if the program element is the Nil_Element.
 Right @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element list
 to check.
 
-Returns True if the element list has a length of zero.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns True if the element list has a length of
+zero@Chg{Version=[2],New=[ and returns False otherwise],Old=[]}.
 @end{DescribeCode}
 
 
@@ -1479,8 +1426,10 @@ Left @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the left element
 to compare. Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
 right element to compare.
 
-Returns True if Left and Right represent the same physical element,
-from the same physical compilation unit. The two elements may or
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns True if Left and Right represent the same physical element
+from the same physical compilation unit@Chg{Version=[2],New=[, and returns
+False otherwise],Old=[]}. The two elements may or
 may not be from the same open ASIS Context variable.
 
 @leading@keepnext@Chg{Version=[1],New=[A True result implies],Old=[Implies]}:
@@ -1503,9 +1452,10 @@ Left @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the left element.
 Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the right
 element.
 
-Returns True if Left and Right represent the same physical element,
-from the same physical compilation unit, from the same open ASIS
-Context variable.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns True if Left and Right represent the same physical element
+from the same physical compilation unit from the same open ASIS
+Context variable@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
 
 @leading@keepnext@Chg{Version=[1],New=[A True result implies],Old=[Implies]}:
 @begin{ChildExample}
@@ -1659,13 +1609,7 @@ encountered while traversing a generic instance.
 @end{DescribeCode}
 
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0007-1]}
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Is_Prefix_Notation]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Is_Prefix_Notation]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Is_Prefix_Notation]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1678,7 +1622,7 @@ change all of the following clause numbers, so this is a subclause temporarily.]
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0007-1]}
 @ChgAdded{Version=[2],Text=[Returns True if the prefix of the call is a prefixed view of the
-subprogram (see Ada Standard 4.1.3(9.2/2)).]}
+subprogram (see Ada Standard 4.1.3(9.2/2)), and returns False otherwise.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0007-1]}
 @ChgAdded{Version=[2],Text=[Call expects an element that has the following Statement_Kinds:]}
@@ -1699,13 +1643,7 @@ element that does not have one of these expected kinds.]}
 
 
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0012-1]}
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Is_Null_Procedure]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Is_Null_Procedure]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Is_Null_Procedure]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1753,13 +1691,7 @@ formal procedures can be null.]}
 
 
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0012-1]}
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Is_Abstract_Subprogram]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Is_Abstract_Subprogram]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Is_Abstract_Subprogram]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1995,8 +1927,8 @@ kinds.]}
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has the following],Old=[]} Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that
+each have the following],Old=[]} Element_Kinds:
 @begin{Display}
 A_Pragma
 @end{Display}
@@ -2052,7 +1984,7 @@ A_Statement]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0021-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that
-each have],Old=[]} Element_Kinds:
+each have the following],Old=[]} Element_Kinds:
 @begin{Display}
 A_Pragma
 @end{Display}
@@ -2120,8 +2052,8 @@ kinds.]}
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has the following],Old=[]} Element_Kinds:
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that
+each have the following],Old=[]} Element_Kinds:
 @begin{Display}
 A_Pragma_Argument_Association
 @end{Display}

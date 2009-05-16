@@ -1,6 +1,6 @@
 @Part(comp-rel, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/comp-rel.mss,v $}
-@comment{$Revision: 1.12 $ $Date: 2009/03/13 07:12:33 $}
+@comment{$Revision: 1.13 $ $Date: 2009/05/12 06:23:25 $}
 
 
 @LabeledSection{package Asis.Compilation_Units.Relations}
@@ -63,17 +63,21 @@ which they semantically depend.
    The semantics for the ordering of units in the first list are
    defined by the individual queries.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
    Every unit in this list is unique. No duplicates are returned; no
-   two units in the list are Is_Equal or Is_Identical.
+   two units @Chg{Version=[2],New=[A and B ],Old=[]}in the list
+   @Chg{Version=[2],New=[have],Old=[are]} Is_Equal
+   @Chg{Version=[2],New=[(A, B) = True],Old=[or Is_Identical]}.
 @end{Indent}
 
 @leading@keepnext@;Inconsistent units list:
 @begin{Indent}
    The second list is made up of unit pairs.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1],ARef=[SI99-0047-1]}
    Each pairing defines an inconsistent semantic dependence relationship.
-   The right unit of each pair semantically depends on the preceding left
+   The right unit of each pair semantically depends on the
+   @Chg{Version=[2],New=[immediately ],Old=[]}preceding left
    unit. All rightmost units of each pair are always inconsistent, and will
    not appear in the consistent units list. The leftmost unit can be either
    consistent or inconsistent. If a @Chg{Version=[2],New=[unit that is the

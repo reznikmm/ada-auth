@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.20 $ $Date: 2009/05/09 06:28:47 $}
+@comment{$Revision: 1.21 $ $Date: 2009/05/12 06:23:26 $}
 
 @LabeledSection{package Asis}
 
@@ -91,19 +91,13 @@ Please refer to commentary where each is used.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
 @Chg{Version=[2],New=[Numeric subtypes],Old=[A numeric subtype]}
-that allows each ASIS implementation to place constraints
-on the lower and upper bounds@Chg{Version=[2],New=[ of values],Old=[]}.
-Whenever possible, the range of
-@Chg{Version=[2],New=[subtype ASIS_Integer],Old=[this type]}
-should meet or exceed -(2**31-1) .. 2**31-1.
+that @Chg{Version=[2],New=[allow],Old=[allows]} each ASIS implementation to
+place constraints on the lower and upper bounds@Chg{Version=[2],New=[ of
+values],Old=[]}. Whenever possible, the range of @Chg{Version=[2],New=[subtype
+ASIS_Integer],Old=[this type]} should meet or exceed -(2**31-1) .. 2**31-1.
 @end{DescribeCode}
 
-@LabeledRevisedClause{Version=[2],New=[moved type ASIS_Natural],
-Old=[type ASIS_Natural]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - RLB}}]}
+@LabeledDeletedClause{Version=[2],Name=[type ASIS_Natural]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -113,12 +107,7 @@ when the final standard is produced, it will be removed. - RLB}}]}
 @end{DescribeCode}
 
 
-@LabeledRevisedClause{Version=[2],New=[moved type ASIS_Positive],
-Old=[type ASIS_Positive]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - RLB}}]}
+@LabeledDeletedClause{Version=[2],Name=[type ASIS_Positive]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -132,10 +121,10 @@ when the final standard is produced, it will be removed. - RLB}}]}
 
 @begin{DescribeCode}
 @begin{Example}
-@AdaObjDefn{List_Index_Implementation_Upper} :
-   @key[constant] ASIS_Positive := @i{Implementation_Defined_Integer_Constant};
-    @key[subtype] @AdaSubtypeDefn{Name=[List_Index],Of=[ASIS_Positive]} @key[is] ASIS_Positive
-        @key[range] 1 .. List_Index_Implementation_Upper;
+@AdaObjDefn{List_Index_Implementation_Upper} : @key[constant] ASIS_Positive :=
+    @i{Implementation_Defined_Integer_Constant};
+@key[subtype] @AdaSubtypeDefn{Name=[List_Index],Of=[ASIS_Positive]} @key[is] ASIS_Positive
+    @key[range] 1 .. List_Index_Implementation_Upper;
 @end{Example}
 
 List_Index is a numeric subtype used to establish the upper bound for list
@@ -157,21 +146,26 @@ inconsistent units to be in the environment. The use of ASIS may
 result in the exception ASIS_Failed being raised if the Ada
 environment includes such units.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Defined by the implementation, an ASIS context is a way to identify
 a set of Compilation Units to be processed by an ASIS application.
 This may include things such as the pathname, search rules, etc.,
 which are attributes of the Ada environment and consequently
-becomes part of the ASIS Context only because it is a "view" of
+@Chg{Version=[2],New=[become],Old=[becomes]} part of the ASIS Context only
+because @Chg{Version=[2],New=[the context],Old=[it]} is a "view" of
 the Ada environment.
 
-Because the contents of the Ada environment are (Ada-)implementation
-defined, the ASIS context may contain illegal compilation units.
-An ASIS Context is a handle to a set of compilation units accessible
-by an ASIS application. The set of compilation units available
-from an ASIS context may be inconsistent, and may contain illegal
-compilation units. The contents are selected from the Ada
-environment as defined by the corresponding Ada Implementation.
-ASIS should allow multiple open contexts.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[],Old=[Because the contents of the Ada environment are
+(Ada-)implementation defined, the ASIS context may contain illegal compilation
+units. ]}An ASIS Context is a handle to a set of compilation units accessible by
+an ASIS application. @Chg{Version=[2],New=[Because the contents of the Ada
+environment are (Ada-)implementation defined, the],Old=[The]} set of compilation
+units available from an ASIS context may be inconsistent, and may contain
+illegal compilation units. The contents are selected from the Ada environment
+@Chg{Version=[2],New=[in an implementation-defined manner],Old=[as
+defined by the corresponding Ada Implementation]}. ASIS should allow multiple
+open contexts.
 
 In the Context abstraction, a logical handle is associated with Name and
 Parameters values that are used by the implementation to identify and
@@ -187,12 +181,13 @@ outermost context of any compilation, as specified in section 10.1.4 of the Ada
 @Chg{Version=[2],New=[Standard],Old=[Reference Manual]}. This same environment
 context provides the implicit outermost anonymous task during program execution.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Some implementations might not need explicit Name and/or Parameters values to
 identify their Ada environment. Other implementations might choose to
 implement the Ada environment as a single external file in which case the
 name and parameters values might simply supply the Name, Form, and any other
 values needed to open such a file.
-Context shall be an undiscriminated limited private.
+Context shall be an undiscriminated limited private@Chg{Version=[2],New=[ type],Old=[]}.
 
 @begin{DescribeCode}
 @begin{Example}
@@ -218,12 +213,18 @@ Context value that defines the environment declarative_part or
 
 @ChgDeleted{Version=[1],Text=[The Ada lexical element abstraction (a private type).]}
 
-The @i{Element}@Defn{Element} type is a distinct abstract type representing
-handles for the lexical elements that form the text of compilation units.
-Elements deal with the internal or "textual" view of compilation units.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+The @i{Element}@Defn{Element} type is a distinct @Chg{Version=[2],New=[],Old=[abstract ]}type
+@Chg{Version=[2],New=[used to represent],Old=[representing]}
+handles @Chg{Version=[2],New=[on the syntactic constructs],Old=[for the
+lexical elements]} that form the text of compilation units.
+Elements deal with the internal @Chg{Version=[2],New=[and then],Old=[or]}
+"textual" view of compilation units.
 
-@leading@;Operations are provided that split a Compilation_Unit object into one
-Element and two Element lists:
+@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Operations are provided that @Chg{Version=[2],New=[parse a],Old=[split an ASIS]}
+Compilation_Unit object into one Element and
+two @Chg{Version=[2],New=[Element_Lists],Old=[Element lists]}:
 
 @begin{Enumerate}
 A context clause represented by an Element_List containing
@@ -359,26 +360,30 @@ The ASIS Element type shall be an undiscriminated private type.
 
 @LabeledClause{Element Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Element Kinds are enumeration types describing various kinds of elements.
-These element kinds are only used by package Asis.Elements.
+These element kinds are @Chg{Version=[2],New=[],Old=[only ]}used
+@Chg{Version=[2],New=[within],Old=[by]} package Asis.Elements.
 
 
 @LabeledSubClause{type Element_Kinds}
 
 @ChgDeleted{Version=[1],Text=[Element_Kinds Hierarchy]}@Comment{Adds nothing}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 ASIS offers hierarchical classification of elements. At the highest
 level, the Element_Kinds type provides literals that define "kinds" or
 classes listed below into which all non-nil elements are grouped. Elements
 in each of the Element_Kinds classes, with the exception of
 An_Exception_Handler, can be further classified by a subordinate kind at
-the next level in the hierarchy. Several subordinate kinds also have
-additional subordinate kinds.
+the next level in the hierarchy. Several subordinate kinds
+@Chg{Version=[2],New=[],Old=[also ]}have
+@Chg{Version=[2],New=[further sub-subordinate],Old=[additional subordinate]} kinds.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0022-1]}
 For example, Element_Kinds'A_Declaration might be classified into
 Declaration_Kinds'A_Parameter_Specification which might be further
 classified into
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0022-1]}
 @Chg{Version=[2], New=[Mode_Kinds'An_In_Mode], Old=[Trait_Kinds'An_Access_Definition_Trait]}.
 This fully identifies the syntax of an element such as:
 
@@ -569,11 +574,11 @@ the Ada Standard for each defining name.]}
 
 @LabeledSubClause{type Declaration_Kinds}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0047-1]}
 @Chg{Version=[1],New=[Type ],Old=[]}Declaration_Kinds
 @Chg{Version=[1],New=[classifies],Old=[@en]}
-declarations and specifications having defining name
-literals.@Chg{Version=[1],New=[],Old=[Literals                                 -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} -> Subordinate Kinds}]}
+declarations and specifications having defining @Chg{Version=[2],New=[names],
+Old=[name literals]}.@Chg{Version=[1],New=[],Old=[Literals                                 -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} -> Subordinate Kinds}]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -670,8 +675,10 @@ literals.@Chg{Version=[1],New=[],Old=[Literals                                 -
 the Ada Standard for each kind
 of declaration; the subordinate kind (if any) is given as well.]}
 
-@leading@;The following Declaration_Kinds subtypes are not used by ASIS but are
-provided for the convenience of the ASIS implementor:
+@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+The following Declaration_Kinds subtypes are not used by ASIS but are
+provided for the convenience of the ASIS
+@Chg{Version=[2],New=[user],Old=[implementor]}:
 
 @begin{Example}
 @key[subtype] @AdaSubtypeDefn{Name=[A_Type_Declaration],Of=[Declaration_Kinds]} @key[is] Declaration_Kinds @key[range]
@@ -887,6 +894,10 @@ Literals                 -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Re
    @ChgAdded{Version=[2], Text=[@AdaObjDefn{A_Null_Default},          -- @examcom{@key[with] subprogram_specification @key[is] null;}]}
    @AdaObjDefn{A_Nil_Default});          -- @examcom{@key[with] subprogram_specification;}
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Note that an abstract formal subprogram is indicated with the
+Has_Abstract query (see @RefSecNum{function Has_Abstract}).]}
 @end{DescribeCode}
 
 
@@ -1056,8 +1067,10 @@ Literals                             -- @examcom{@Chg{Version=[2],New=[Ada Stand
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
 the Ada Standard for each kind of access type.]}
 
-@leading@;The following Access_Type_Kinds subtypes are not used by ASIS but are
-provided for the convenience of the ASIS implementor:
+@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+The following Access_Type_Kinds subtypes are not used by ASIS but are
+provided for the convenience of the ASIS
+@Chg{Version=[2],New=[user],Old=[implementor]}:
 
 @begin{Example}
 @key[subtype] @AdaSubtypeDefn{Name=[Access_To_Object_Definition],Of=[]} @key[is] Access_Type_Kinds @key[range]
@@ -1070,12 +1083,7 @@ provided for the convenience of the ASIS implementor:
 
 
 @ChgNote{SI99-0004-1 added new section}
-@Comment{@LabeledAddedSubClause{Version=[2],Name=[type Access_Definition_Kinds]}}
-@LabeledAddedSubSubClause{Version=[2],Name=[type Access_Definition_Kinds]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real subclause for now, as that would
-change all of the following subclause numbers, so this is a subsubclause temporarily.]}
-@end{Discussion}
+@LabeledAddedSubClause{Version=[2],Name=[type Access_Definition_Kinds]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1132,7 +1140,7 @@ Literals                               -- @examcom{@Chg{Version=[2],New=[Ada Sta
    @AdaObjDefn{A_Universal_Access_Definition});        -- @examcom{3.4.1(6)}],Old=[]}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-the Ada Standard for each kind of root type.]}
+the Ada Standard for each kind of root or universal type.]}
 @end{DescribeCode}
 
 
@@ -1156,7 +1164,7 @@ Literals                               -- @examcom{@Chg{Version=[2],New=[Ada Sta
    @AdaObjDefn{A_Discriminant_Constraint});            -- @examcom{3.2.2}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-the Ada Standard for each kind of constraint.]}
+the Ada Standard for each kind of constraint or range.]}
 @end{DescribeCode}
 
 
@@ -1177,17 +1185,12 @@ Literals                               -- @examcom{@Chg{Version=[2],New=[Ada Sta
    @AdaObjDefn{A_Discrete_Simple_Expression_Range});   -- @examcom{3.6.1, 3.5}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-the Ada Standard for each kind of discrete range.]}
+the Ada Standard for each kind of range.]}
 @end{DescribeCode}
 
 
 @ChgNote{ SI99-0006-1 }
-@Comment{@LabeledAddedSubClause{Version=[2],Name=[type Interface_Kinds]}}
-@LabeledAddedSubSubClause{Version=[2],Name=[type Interface_Kinds]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real subclause for now, as that would
-change all of the following subclause numbers, so this is a subsubclause temporarily.]}
-@end{Discussion}
+@LabeledAddedSubClause{Version=[2],Name=[type Interface_Kinds]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1335,10 +1338,10 @@ Literals                           -- @examcom{@Chg{Version=[2],New=[Ada Standar
 
 @LabeledSubClause{type Attribute_Kinds}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0047-1]}
 @Chg{Version=[1],New=[Type ],Old=[]}Attribute_Kinds
-@Chg{Version=[1],New=[describes],Old=[@en]} classifications of all known
-Ada attributes@Chg{Version=[1],New=[.],Old=[
+@Chg{Version=[1],New=[describes],Old=[@en]} classifications of
+@Chg{Version=[2],New=[],Old=[all known ]}Ada attributes@Chg{Version=[1],New=[.],Old=[
 Literals                       -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
 
 @begin{DescribeCode}
@@ -1638,7 +1641,12 @@ Literals                      -- @examcom{@Chg{Version=[2],New=[Ada Standard],Ol
    @AdaObjDefn{A_Component_Clause});        -- @examcom{13.5.1}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in
-the Ada Standard for each clause, and any subordinate kinds.]}
+the Ada Standard for each clause, and any subordinate
+kinds.@Chg{Version=[2],New=[ Note that a private
+with clause is indicated by the Has_Private query (see
+@RefSecNum{function Has_Private}).
+Similarly, a limited with clause is indicated by the Has_Limited
+query (see @RefSecNum{function Has_Limited}).],Old=[]}]}
 @end{DescribeCode}
 
 
@@ -1671,7 +1679,9 @@ the Ada Standard for each @Chg{Version=[2],New=[aspect],Old=[representation]} cl
 
 @LabeledClause{type Compilation_Unit}
 
-The Ada @i{Compilation Unit} abstraction:@Defn{Compilation Unit}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+The @Chg{Version=[2],New=[type Compilation_Unit is used to represent
+an ],Old=[]}Ada @i{Compilation Unit}@Chg{Version=[2],New=[.],Old=[ abstraction:]}@Defn{Compilation Unit}
 
 The text of a program is submitted to the compiler in one or more
 compilations. Each compilation is a succession of compilation units.
@@ -1700,10 +1710,11 @@ package, a procedure, a function, a generic, or a subunit for normal units.
 The associated declaration is a Nil_Element for An_Unknown_Unit and
 Nonexistent units.
 
-The abstract type Compilation_Unit is a handle for compilation units as a
-whole. An object of the type Compilation_Unit deals with the external view
-of compilation units such as their relationships with other units or their
-compilation attributes.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+The @Chg{Version=[2],New=[],Old=[abstract ]}type Compilation_Unit is a handle
+for compilation units as a whole. An object of the type Compilation_Unit deals
+with the external view of compilation units such as their relationships with
+other units or their compilation attributes.
 
 Compilation_Unit shall be an undiscriminated private type.
 
@@ -1733,13 +1744,17 @@ Compilation_Unit shall be an undiscriminated private type.
 
 @LabeledClause{Unit Kinds}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Unit Kinds@Defn{Unit kinds} are enumeration types describing the various kinds of units.
-These element kinds are only used by package Asis.Compilation_Units.
+These element kinds are @Chg{Version=[2],New=[],Old=[only ]}used
+@Chg{Version=[2],New=[within],Old=[by]} package Asis.Compilation_Units.
 
 
 @LabeledSubClause{type Unit_Kinds}
 
-Unit_Kinds @Chg{Version=[1],New=[defines],Old=[@en]} the varieties of compilation units of compilations,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Unit_Kinds @Chg{Version=[1],New=[defines],Old=[@en]} the varieties of
+compilation units @Chg{Version=[2],New=[which form],Old=[of]} compilations,
 including compilations having no compilation units but consisting of
 configuration pragmas or comments.
 
@@ -1858,7 +1873,12 @@ configuration pragmas or comments.
 
 @LabeledSubClause{type Unit_Classes}
 
-Unit_Classes @Chg{Version=[1],New=[defines],Old=[@en]} classification of public, private, body, and subunit.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Unit_Classes @Chg{Version=[1],New=[defines@Chg{Version=[2],New=[ a],Old=[]}],Old=[@en]}
+classification of @Chg{Version=[2],New=[compilation units according to
+whether they are ],Old=[]} public@Chg{Version=[2],New=[ or],Old=[,]}
+private, @Chg{Version=[2],New=[declaration or ],Old=[]}body, and
+@Chg{Version=[2],New=[library unit or ],Old=[]}subunit.
 
 @begin{DescribeCode}
 @begin{Example}
@@ -2020,9 +2040,10 @@ then A directly depends on @Chg{Version=[2],New=[B],Old=[A]},
    both A and B are dependents of C.
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0047-1]}
 @NoPrefix@;Dependencies between compilation units may also be introduced by
-inline inclusions (@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.4(7)) and for certain other compiler
+inline @Chg{Version=[2],New=[expansions],Old=[inclusions]}
+(@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.4(7)) and for certain other compiler
 optimizations. These relations are intended to reflect all of these
 considerations.
 
@@ -2068,7 +2089,8 @@ unit. Then]} the needed units of A are:
     library unit declaration A
     library unit body A, if any
 
-@NoPrefix@;Child unit C.Z is only part of the Needed_Units if it is needed.
+@NoPrefix@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Child unit C.Z is only part of the Needed_Units if it is needed@Chg{Version=[2],New=[ according to the rules of the Ada standard, 10.2(2-7)],Old=[]}.
 @end{Display}
 @end{Itemize}
 @end{DescribeCode}

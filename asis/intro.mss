@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/intro.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2009/05/09 06:28:47 $}
+@comment{$Revision: 1.5 $ $Date: 2009/05/12 06:23:26 $}
 
 @UnNumberedSection(Introduction)
 
@@ -37,9 +37,10 @@ express ability, possibility, capacity, or consequentiality.]}
 subtypes, and subprograms which provide a capability to query the Ada
 compilation environment for syntactic and semantic
 information@Defn{compilation environment}. The ASIS interface can be separated
-into two related subsystems, the syntactic subsystem and the semantic subsystem.
-The syntactic subsystem provides the ability to traverse a program based on the
-syntactic (textual) structure of the program, while the semantic subsystem
+into two related subsystems, the syntactic subsystem and the
+semantic subsystem.@Defn{syntactic subsystem}@Defn2{Term=[subsystem],Sec=[syntactic]}@Defn{semantic subsystem}@Defn2{Term=[subsystem],Sec=[semantic]}
+The @i{syntactic subsystem} provides the ability to traverse a program based on the
+syntactic (textual) structure of the program, while the @i{semantic subsystem}
 provides the ability to traverse the program based on the semantics (meaning) of
 the program. Interconnections are provided to allow moving seamlessly between
 the subsystems.]}
