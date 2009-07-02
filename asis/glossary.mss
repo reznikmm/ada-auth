@@ -1,9 +1,9 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2009/05/09 06:28:46 $}
+@Comment{$Date: 2009/07/02 04:50:54 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/glossary.mss,v $}
-@comment{$Revision: 1.3 $}
+@comment{$Revision: 1.4 $}
 
 @LabeledInformativeAnnex{Glossary}
 
@@ -31,7 +31,9 @@ components]}.>}
 implement the ASIS specification for a given Ada implementation and that
 provide the functionality required by the ASIS specification.>}
 
-@ToGlossary{Term=<ASIS queries>,Text=<Those subprogram interfaces (and only
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<ASIS queries>,Text=<Those
+subprogram interfaces (and only
 those) defined in the ASIS standard; these are supported by types, subtypes,
 and exceptions also defined in the ASIS standard. Thus, ASIS queries and
 supporting entities are together the ASIS interface. The following informal
@@ -40,9 +42,11 @@ those ASIS queries which produce information about compilation units and
 "white-box" queries are those ASIS queries which produce information about
 Elements; semantic queries are those ASIS queries which express semantic
 properties of ASIS Elements in terms of other Elements; structural queries are
-those ASIS queries which provide the top-down decomposition and reverse
-bottom-up composition of the compilation unit according to its syntax
-structure. (Note that semantic queries are generally named "Corresponding_..."
+those ASIS queries which provide @Chg{Version=[2],New=[information about the
+syntactic],Old=[the top-down decomposition and reverse
+bottom-up composition of the compilation unit according to its syntax]}
+structure@Chg{Version=[2],New=[ of the compilation unit],Old=[]}.
+(Note that semantic queries are generally named "Corresponding_..."
 or "Implicit_..." in the ASIS specification.)>}
 
 @ToGlossary{Term=<Closure>,Text=<A term commonly used instead of needed units.>}
@@ -164,7 +168,8 @@ source code of the external representation of compilation units.>}
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<Needed Units>,Text=<The
 @Chg{Version=[2],New=[],Old=[needed units of a given compilation
 unit is a ]}set of compilation units ultimately needed by the given compilation
-unit to make up or to be included in a completed partition.>}
+unit @Chg{Version=[2],New=[],Old=[to make up or ]}to be included in a
+completed partition.>}
 
 @ToGlossary{Term=<Optional functionality>,Text=<The subset of ASIS facilities
 that are explicitly identified in the ASIS standard as optional which may

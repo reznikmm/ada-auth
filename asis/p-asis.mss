@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.22 $ $Date: 2009/05/16 03:55:40 $}
+@comment{$Revision: 1.23 $ $Date: 2009/07/02 04:50:55 $}
 
 @LabeledSection{package Asis}
 
@@ -455,7 +455,8 @@ These are designated within the hierarchy shown below:
 @end{Example}
 
 @begin{DescribeCode}
-@Chg{Version=[1],New=[Type ],Old=[]}Element_Kinds
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+@Chg{Version=[2],New=[The type ],Old=[@Chg{Version=[1],New=[Type ],Old=[]}]}Element_Kinds
 @Chg{Version=[1],New=[provides],Old=[@en]} general element
 classifications@Chg{Version=[1],New=[.],Old=[
 Literals                   -- @examcom{ASIS package with queries for these kinds.}]}@Comment{Moved below}
@@ -481,8 +482,8 @@ each kind.]}
 
 @LabeledSubClause{type Pragma_Kinds}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-@Chg{Version=[1],New=[Type ],Old=[]}Pragma_Kinds
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0055-1]}
+@Chg{Version=[2],New=[The type ],Old=[@Chg{Version=[1],New=[Type ],Old=[]}]}Pragma_Kinds
 @Chg{Version=[1],New=[provides],Old=[@en]} classifications for
 pragmas@Chg{Version=[1],New=[.],Old=[
 Literals                          -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}@Comment{Moved below}
@@ -559,8 +560,8 @@ the Ada Standard for each pragma.]}
 
 @LabeledSubClause{type Defining_Name_Kinds}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-@Chg{Version=[1],New=[Type ],Old=[]}Defining_Name_Kinds
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0055-1]}
+@Chg{Version=[2],New=[The type ],Old=[@Chg{Version=[1],New=[Type ],Old=[]}]}Defining_Name_Kinds
 @Chg{Version=[1],New=[classifies],Old=[@en]}
 names defined by declarations and
 specifications.@Chg{Version=[1],New=[],Old=[Literals                                   -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
@@ -585,8 +586,8 @@ the Ada Standard for each defining name.]}
 
 @LabeledSubClause{type Declaration_Kinds}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0047-1]}
-@Chg{Version=[1],New=[Type ],Old=[]}Declaration_Kinds
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
+@Chg{Version=[2],New=[The type ],Old=[@Chg{Version=[1],New=[Type ],Old=[]}]}Declaration_Kinds
 @Chg{Version=[1],New=[classifies],Old=[@en]}
 declarations and specifications having defining @Chg{Version=[2],New=[names],
 Old=[name literals]}.@Chg{Version=[1],New=[],Old=[Literals                                 -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} -> Subordinate Kinds}]}
@@ -1251,8 +1252,8 @@ the Ada Standard for each kind of association.]}
 
 @LabeledSubClause{type Expression_Kinds}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-@Chg{Version=[1],New=[Type ],Old=[]}Expression_Kinds
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0055-1]}
+@Chg{Version=[2],New=[The type ],Old=[@Chg{Version=[1],New=[Type ],Old=[]}]}Expression_Kinds
 @Chg{Version=[1],New=[describes],Old=[@en]} general expression
 classifications@Chg{Version=[1],New=[.],Old=[
 Literals                                   -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} -> Subordinate Kinds}]}
@@ -1314,8 +1315,8 @@ is given as well.]}
 
 @LabeledSubClause{type Operator_Kinds}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-@Chg{Version=[1],New=[Type ],Old=[]}Operator_Kinds
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0055-1]}
+@Chg{Version=[2],New=[The type ],Old=[@Chg{Version=[1],New=[Type ],Old=[]}]}Operator_Kinds
 @Chg{Version=[1],New=[describes],Old=[@en]} classification of
 the various Ada predefined operators@Chg{Version=[1],New=[.],Old=[
 Literals                           -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
@@ -1353,8 +1354,8 @@ Literals                           -- @examcom{@Chg{Version=[2],New=[Ada Standar
 
 @LabeledSubClause{type Attribute_Kinds}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0047-1]}
-@Chg{Version=[1],New=[Type ],Old=[]}Attribute_Kinds
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
+@Chg{Version=[2],New=[The type ],Old=[@Chg{Version=[1],New=[Type ],Old=[]}]}Attribute_Kinds
 @Chg{Version=[1],New=[describes],Old=[@en]} classifications of
 @Chg{Version=[2],New=[],Old=[all known ]}Ada attributes@Chg{Version=[1],New=[.],Old=[
 Literals                       -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
@@ -1490,8 +1491,8 @@ the Ada Standard for each attribute.]}
 
 @LabeledSubClause{type Statement_Kinds}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-@Chg{Version=[1],New=[Type ],Old=[]}Statement_Kinds
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0055-1]}
+@Chg{Version=[2],New=[The type ],Old=[@Chg{Version=[1],New=[Type ],Old=[]}]}Statement_Kinds
 @Chg{Version=[1],New=[describes],Old=[@en]} classifications of Ada
 statements@Chg{Version=[1],New=[.],Old=[
 Literals                             -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
@@ -1635,8 +1636,8 @@ the Ada Standard for each path, and the path represented.]}
 
 @LabeledSubClause{type Clause_Kinds}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-@Chg{Version=[1],New=[Type ],Old=[]}Clause_Kinds
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0055-1]}
+@Chg{Version=[2],New=[The type ],Old=[@Chg{Version=[1],New=[Type ],Old=[]}]}Clause_Kinds
 @Chg{Version=[1],New=[describes kinds of clauses.],Old=[
 Literals                      -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}    -> Subordinate Kinds}]}
 
@@ -1668,8 +1669,8 @@ query (see @RefSecNum{function Has_Limited}).],Old=[]}]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
 @LabeledRevisedSubClause{Version=[2],New=[type Aspect_Clause_Kinds],Old=[type Representation_Clause_Kinds]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0039-1]}
-@Chg{Version=[1],New=[Type ],Old=[]}@Chg{Version=[2],New=[Aspect_Clause_Kinds],Old=[Representation_Clause_Kinds]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0039-1],ARef=[SI99-0055-1]}
+@Chg{Version=[2],New=[The type ],Old=[@Chg{Version=[1],New=[Type ],Old=[]}]}@Chg{Version=[2],New=[Aspect_Clause_Kinds],Old=[Representation_Clause_Kinds]}
 @Chg{Version=[1],New=[describes],Old=[@en]} varieties of @Chg{Version=[2],New=[aspect],Old=[representation]}
 clauses@Chg{Version=[1],New=[.],Old=[
 Literals                                  -- @examcom{@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}}]}
@@ -2013,7 +2014,9 @@ is a Supporter of that compilation unit and (recursively) any
 completion, child units, or subunits that are included in the declarative
 region of that compilation unit. @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 8.1(7-10).
 
-@NoPrefix@;A library_unit_body has as a Supporter, its corresponding
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+@NoPrefix@;A library_unit_body has as a Supporter@Chg{Version=[2],New=[],Old=[,]}
+its corresponding
 library_unit_declaration, if any.
 
 @NoPrefix@;The parent body of a subunit is a Supporter of the subunit.

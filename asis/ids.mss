@@ -1,6 +1,6 @@
 @Part(ids, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/ids.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2009/05/09 06:28:46 $}
+@comment{$Revision: 1.6 $ $Date: 2009/07/02 04:50:54 $}
 
 @LabeledSection{package Asis.Ids}
 
@@ -54,8 +54,8 @@ subtype of an existing type.]}
               @key[return] Boolean @key[is abstract];
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
-@ChgAdded{Version=[2],Text=[Nil_Id is the value of a Id that represents no
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
+@ChgAdded{Version=[2],Text=[Nil_Id is the value of an Id that represents no
 element.]}
 @end{DescribeCode}
 
@@ -129,10 +129,11 @@ returns False otherwise],Old=[]}.
 Left @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the left Id to compare.
 Right @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the right Id to compare.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
 Returns True if Left and Right represent the same physical Id@Chg{Version=[2],New=[],Old=[,]}
 from the same physical compilation unit@Chg{Version=[2],New=[, and
-returns False otherwise],Old=[]}. The two Ids convert to Is_Identical Elements when
+returns False otherwise],Old=[]}. @Chg{Version=[2],New=[If True, the],Old=[The]}
+two Ids convert to Is_Identical Elements when
 converted with the same open ASIS Context.
 @end{DescribeCode}
 

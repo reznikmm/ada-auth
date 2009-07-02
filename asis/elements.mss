@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.18 $ $Date: 2009/05/16 03:55:40 $}
+@comment{$Revision: 1.19 $ $Date: 2009/07/02 04:50:54 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -31,7 +31,9 @@ Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the un
 
 Returns the element representing the declaration of the compilation_unit.
 
-Returns a Nil_Element if the unit is A_Nonexistent_Declaration,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+Returns a Nil_Element if the @Chg{Version=[2],New=[Unit_Kind of the
+],Old=[]}unit is A_Nonexistent_Declaration,
 A_Nonexistent_Body, A_Configuration_Compilation, or An_Unknown_Unit.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -104,10 +106,10 @@ Returns a list of with clauses, use clauses, and pragmas that explicitly
 appear in the context clause of the compilation unit, in their order of
 appearance.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-Returns a Nil_Element_List if the @Chg{Version=[2],New=[Unit_Kind of the ],Old=[]}unit
-has A_Nonexistent_Declaration, A_Nonexistent_Body, or
-An_Unknown_Unit@Chg{Version=[2],New=[],Old=[ Unit_Kind]}.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
+Returns a Nil_Element_List if the @Chg{Version=[2],New=[Unit_Kind of the
+],Old=[]}unit @Chg{Version=[2],New=[is],Old=[has]} A_Nonexistent_Declaration,
+A_Nonexistent_Body, or An_Unknown_Unit@Chg{Version=[2],New=[],Old=[ Unit_Kind]}.
 
 @begin{ImplReq}
 @begin{Itemize}
@@ -1423,11 +1425,11 @@ Left @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the left element
 to compare. Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
 right element to compare.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
 Returns True if Left and Right represent the same physical element
 from the same physical compilation unit@Chg{Version=[2],New=[, and returns
 False otherwise],Old=[]}. The two elements may or
-may not be from the same open ASIS Context variable.
+may not be from the same open ASIS Context@Chg{Version=[2],New=[],Old=[ variable]}.
 
 @leading@keepnext@Chg{Version=[1],New=[A True result implies],Old=[Implies]}:
 @begin{ChildExample}
@@ -1449,10 +1451,10 @@ Left @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the left element.
 Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the right
 element.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
 Returns True if Left and Right represent the same physical element
 from the same physical compilation unit from the same open ASIS
-Context variable@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
+Context@Chg{Version=[2],New=[, and returns False otherwise],Old=[ variable]}.
 
 @leading@keepnext@Chg{Version=[1],New=[A True result implies],Old=[Implies]}:
 @begin{ChildExample}

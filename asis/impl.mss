@@ -1,6 +1,6 @@
 @Part(impl, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/impl.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2009/05/16 03:55:40 $}
+@comment{$Revision: 1.8 $ $Date: 2009/07/02 04:50:55 $}
 
 @LabeledSection{package Asis.Implementation}
 
@@ -130,7 +130,7 @@ initialized@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
 @Key[procedure] @AdaSubDefn{Finalize} (Parameters : @Key[in] Wide_String := "");
 @end{Example}
 
-Parameters @Chg{Version=[1],New=[specify],Old=[ @en Specifies]} any implementation required parameter values.
+Parameters @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} any implementation required parameter values.
 
 Performs any necessary ASIS termination activities. This should be invoked
 once following the last use of other ASIS queries. Parameter values are

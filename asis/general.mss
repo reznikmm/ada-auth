@@ -1,6 +1,6 @@
 @Part(general, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.19 $ $Date: 2009/05/16 03:55:40 $}
+@comment{$Revision: 1.20 $ $Date: 2009/07/02 04:50:54 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -602,11 +602,17 @@ and Diagnosis queries to indicate the cause of the error. The possible values
 for Status are indicated here along with suggestions for the associated
 contents of the Diagnosis string.
 
-@leading@;ASIS applications are encouraged to follow this same convention
-whenever they explicitly raise any ASIS exception to always record a Status and
-Diagnosis prior to raising the exception. Values of errors along with their
-general meanings are:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+@leading@;ASIS applications are encouraged to
+@Chg{Version=[2],New=[similarly ],Old=[]}follow
+@Chg{Version=[2],New=[the],Old=[this same]} convention
+@Chg{Version=[2],New=[of recording],Old=[whenever they explicitly raise
+any ASIS exception to always record]} a Status and
+Diagnosis prior to @Chg{Version=[2],New=[explicitly ],Old=[]}raising
+@Chg{Version=[2],New=[any ASIS],Old=[the]} exception. Values of errors
+along with their general meanings are:
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
 @table{Columns=[2],Alignment=[Allleft],FirstColWidth=[2],LastColWidth=[3],
 NoBreak=[F],Border=[F],SmallSize=[F],Caption=[],Headers=[],
 Body=[Not_An_Error@Defn{Not_An_Error}@\-- No error is presently recorded
@@ -614,14 +620,14 @@ Value_Error@Defn{Value_Error}@\-- Routine argument value invalid
 Initialization_Error@Defn{Initialization_Error}@\-- ASIS is uninitialized
 Environment_Error@Defn{Environment_Error}@\-- ASIS could not initialize
 Parameter_Error@Defn{Parameter_Error}@\-- Bad Parameter given to Initialize
-Capacity_Error@Defn{Capacity_Error}@\-- Implementation overloaded
+Capacity_Error@Defn{Capacity_Error}@\-- @Chg{Version=[2],New=[Capacity exceeded],Old=[Implementation overloaded]}
 Name_Error@Defn{Name_Error}@\-- Context/unit not found
 Use_Error@Defn{Use_Error}@\-- Context/unit not use/open-able
 Data_Error@Defn{Data_Error}@\-- Context/unit bad/invalid/corrupt
 Text_Error@Defn{Text_Error}@\-- The program text cannot be located
-Storage_Error@Defn{Storage_Error}@\-- Storage_Error suppressed
+Storage_Error@Defn{Storage_Error}@\-- Storage_Error @Chg{Version=[2],New=[detected],Old=[suppressed]}
 Obsolete_Reference_Error@Defn{Obsolete_Reference_Error}@\-- Semantic reference is obsolete
-Unhandled_Exception_Error@Defn{Unhandled_Exception_Error}@\-- Unexpected exception suppressed
+Unhandled_Exception_Error@Defn{Unhandled_Exception_Error}@\-- Unexpected exception @Chg{Version=[2],New=[detected],Old=[suppressed]}
 Not_Implemented_Error@Defn{Not_Implemented_Error}@\-- Functionality not implemented@Last
 Internal_Error@Defn{Internal_Error}@\-- Implementation internal failure]}
 
@@ -674,13 +680,16 @@ implementations.]}
 
 @LabeledClause{Normative references}
 
-The following standard contains provisions which, through reference in this
+@ChgRef{Version=[2],Kind=[revised],ARef=[SI99-0055-1]}
+The following @Chg{Version=[2],New=[standards],Old=[standard]} contains
+provisions which, through reference in this
 text, constitute provisions of this International Standard. At the time of
 publication, the edition indicated was valid. All standards are subject to
 revision, and parties to agreements based on this standard are encouraged to
 investigate the possibility of applying the most recent edition of the
-International Standard indicated below. Members of IEC and ISO maintain
-registers of currently valid International Standards.
+International @Chg{Version=[2],New=[Standards],Old=[Standard]} indicated below.
+Members of IEC and ISO maintain registers of currently valid
+International Standards.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 @Chg{Version=[2], New=[ISO/IEC 8652:1995(E)], Old=[ISO/IEC 8652:1995]}, @i{Information technology @em Programming languages @em Ada}.

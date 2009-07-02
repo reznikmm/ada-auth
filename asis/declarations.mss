@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.19 $ $Date: 2009/05/16 03:55:40 $}
+@comment{$Revision: 1.20 $ $Date: 2009/07/02 04:50:54 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -835,8 +835,11 @@ Decl2 := Corresponding_Type_Declaration
           Enclosing_Context (Enclosing_Compilation_Unit (Decl1)));
 @end{ChildExample}
 
-Returns a Nil_Element when a full type declaration is given that has no
-corresponding private or incomplete type declaration, or when a
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+Returns a Nil_Element when @Chg{Version=[2],New=[Declaration is ],Old=[]}a
+full type declaration @Chg{Version=[2],New=[],Old=[is given ]}that has no
+corresponding private or incomplete type declaration, or when
+@Chg{Version=[2],New=[Declaration is ],Old=[]}a
 corresponding type declaration does not exist within The_Context.
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0046-1]}
@@ -1590,11 +1593,15 @@ Decl2 := Corresponding_Declaration
          (Decl1, Enclosing_Context (Enclosing_Compilation_Unit (Decl1)));
 @end{ChildExample}
 
-If a specification declaration is given, the same element is returned,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+If @Chg{Version=[2],New=[Declaration is ],Old=[]}a specification
+declaration@Chg{Version=[2],New=[],Old=[ is given]}, the same element is returned,
 unless it is a generic instantiation or an inherited subprogram declaration
 (see below).
 
-@leading@keepnext@;If a subprogram renaming declaration is given:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+@leading@keepnext@;If @Chg{Version=[2],New=[Declaration is ],Old=[]}a
+subprogram renaming declaration@Chg{Version=[2],New=[],Old=[ is given]}:
 
 @begin{enumerate}
 in case of renaming-as-declaration, the same element is returned;
@@ -1623,7 +1630,10 @@ declaration for the element in The_Context that Is_Equal to
 Declaration. If no such element exists in The_Context that Is_Equal to
 Declaration, returns A_Nil_Element.]}
 
-If a generic instantiation is given, the expanded generic specification
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+If @Chg{Version=[2],New=[Declaration is ],Old=[]}a generic
+instantiation@Chg{Version=[2],New=[],Old=[ is given]}, the expanded generic
+specification
 template representing the instance is returned and Is_Part_Of_Instance.
 For example, an argument that is A_Package_Instantiation, results in a
 value that is A_Package_Declaration that can be analyzed with all
@@ -1637,7 +1647,9 @@ The Enclosing_Element of the expanded specification is the generic
 instantiation. The Enclosing_Compilation_Unit of the expanded template is
 that of the instantiation.
 
-If an inherited subprogram declaration is given, the specification
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+If @Chg{Version=[2],New=[Declaration is ],Old=[]}an inherited subprogram
+declaration@Chg{Version=[2],New=[],Old=[ is given]}, the specification
 returned is the one for the user-defined subprogram from which the
 argument was ultimately inherited.
 
@@ -1745,7 +1757,9 @@ Decl2 := Corresponding_Body
          (Decl1, Enclosing_Context (Enclosing_Compilation_Unit (Decl1)));
 @end{ChildExample}
 
-If a body declaration is given, the same element is returned.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+If @Chg{Version=[2],New=[Declaration is ],Old=[]}a body
+declaration@Chg{Version=[2],New=[],Old=[ is given]}, the same element is returned.
 
 Returns a Nil_Element if no body exists in The_Context.
 
@@ -1771,7 +1785,10 @@ Corresponding_Body values once the bodies have inserted into the
 environment. The Corresponding_Body of an inherited subprogram is that
 of the original user-defined subprogram.
 
-If a generic instantiation is given, the body representing the expanded
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+If @Chg{Version=[2],New=[Declaration is ],Old=[]}a generic
+instantiation@Chg{Version=[2],New=[],Old=[ is given]}, the body
+representing the expanded
 generic body template is returned. (i.e., an argument that is
 A_Package_Instantiation, results in a value that is
 A_Package_Body_Declaration that can be analyzed with all appropriate ASIS queries).

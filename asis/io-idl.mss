@@ -1,9 +1,9 @@
 @Part(io-idl, Root="asis.msm")
 
-@Comment{$Date: 2009/05/09 06:28:46 $}
+@Comment{$Date: 2009/07/02 04:50:54 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/io-idl.mss,v $}
-@comment{$Revision: 1.3 $}
+@comment{$Revision: 1.4 $}
 
 @LabeledInformativeAnnex{Miscellaneous ASIS I/O and IDL approaches}
 
@@ -457,8 +457,9 @@ Smalltalk can also be easily built.
 Traverse_Element in a CORBA environment],Old=[Approach to implement the
 Traverse_Element generic]}
 
-@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-An IDL @Chg{Version=[2],New=[must],Old=[should]} first be created from the ASIS
+@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
+@Chg{Version=[2],New=[To use ASIS in a CORBA environment, an],Old=[An]}
+IDL @Chg{Version=[2],New=[must],Old=[should]} first be created from the ASIS
 specification (this International Standard). Automatic IDL generators can create
 IDL from Ada. Language features such as generics are problematic for this
 automatic conversion as generics cannot be automatically translated into IDL.

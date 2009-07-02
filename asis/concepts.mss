@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/concepts.mss,v $}
-@comment{$Revision: 1.11 $ $Date: 2009/05/16 03:55:40 $}
+@comment{$Revision: 1.12 $ $Date: 2009/07/02 04:50:54 $}
 
 
 @LabeledSection{ASIS technical concepts}
@@ -10,8 +10,8 @@
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 ASIS is an interface between an Ada environment as defined by
-@Chg{Version=[2],New=[the Ada Standard (ISO/IEC 8652:1995(E) and later
-documents)], Old=[ISO/IEC 8652:1995 (the Ada Reference Manual)]} and any tool
+@Chg{Version=[2],New=[the Ada Standard], Old=[ISO/IEC 8652:1995 (the Ada
+Reference Manual)]} and any tool
 requiring information from this environment, as shown in Figure 2.
 
 @PictureAlone(Alignment=[Center], Border=[None],
@@ -114,11 +114,13 @@ queries to the Ada compilation environment.
 
 @LabeledSubClause{Structural queries}
 
-@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
 @i{Structural queries}@Defn{Structural queries}@Defn2{Term=[Queries],Sec=[Structural]}
-are those ASIS queries which provide the top-down
+are those ASIS queries which provide @Chg{Version=[2],New=[information about
+the syntactic],Old=[the top-down
 decomposition and reverse bottom-up composition of the compilation unit
-according to its syntax structure. @Chg{Version=[2],New=[Structural queries
+according to its syntax]} structure@Chg{Version=[2],New=[ of the compilation
+unit],Old=[]}. @Chg{Version=[2],New=[Structural queries
 are the primary component of the syntactic
 subsystem@Defn{syntactic subsystem}@Defn2{Term=[subsystem],Sec=[syntactic]}, and are only found in
 that subsystem. ],Old=[]}These structural queries are further characterized as:
@@ -134,7 +136,7 @@ lexical elements of compilation units.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Text=[@i{Semantic queries} are those ASIS queries
-which expression semantic properties (that is, the meaning) of constructs
+which express semantic properties (that is, the meaning) of constructs
 in the compilation unit.]}
 
 @leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
@@ -153,7 +155,7 @@ Semantic queries about Dependence Order.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Text=[In addition, semantic queries are provided by
-the semantic subsystem
+the semantic
 subsystem@Defn{semantic subsystem}@Defn2{Term=[subsystem],Sec=[semantic]}(see
 section @RefSecNum{ASIS Semantic Subsystem})
 which defines a largely self-contained set of packages defining the
@@ -178,12 +180,13 @@ the processing of their lists]}.
 
 @LabeledSubSubClause{Elements and element kinds}
 
-@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
 The base object in ASIS is the Asis.Element.@Defn{Element} @i{Element} is a
 common abstraction used to @Chg{Version=[2],New=[represent syntactic
 constructs],Old=[denote the syntax]} (both explicit and implicit)
 @Chg{Version=[2],New=[occurring within],Old=[of]}
-ASIS compilation units. Elements correspond to nodes of a hierarchical tree
+ASIS compilation units. Elements correspond to nodes of a
+@Chg{Version=[2],New=[abstract syntax],Old=[hierarchical]} tree
 representation of an Ada program. Most elements of the tree have child
 elements. These children can appear as single elements (possibly with children
 themselves) or as a list of elements (also possibly with children). As an
@@ -408,9 +411,10 @@ References from one part of an Ada program to another can be traversed with
 functions whose name begins with @ldquote@;Corresponding_@rdquote@;, such as:
 Corresponding_@!Children, Corresponding_@!Declaration, Corresponding_Body,
 @Chg{Version=[2],New=[Corresponding_@!Expression_Type, ],Old=[]}Corresponding_@!Type_Declaration,
-Corresponding_Type, Corresponding_@!Body_Stub,
-Corresponding_@!Name_Definition, Corresponding_@!Name_Declaration,
-Corresponding_@!Loop_Exited, Corresponding_@!Entry, etc. If an element references
+@Chg{Version=[2],New=[],Old=[Corresponding_Type, Corresponding_@!Body_Stub,
+]}Corresponding_@!Name_Definition, Corresponding_@!Name_Declaration,
+@Chg{Version=[2],New=[],Old=[Corresponding_@!Loop_Exited,
+Corresponding_@!Entry, ]}etc. If an element references
 another element, the user can traverse to the referenced element with
 @Chg{Version=[2],New=[such a],Old=[this]} function. A Nil_Element is returned if
 no definition traversal is possible.
@@ -468,7 +472,7 @@ these packages are used, see the examples in
 @b{Figure 7 @em ASIS package architecture}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-@b{package ASIS} @en Package ASIS, together with its children, provides the
+@b{package Asis} @en Package Asis, together with its children, provides the
 interface between an Ada environment (as defined by @Chg{Version=[2], New=[the
 Ada Standard], Old=[ISO/IEC 8652:1995]}) and any
 tool requiring information from it. Valuable semantic and syntactic information
@@ -476,7 +480,7 @@ is made available via queries through child packages of package ASIS.
 
 @leading@;Package Asis contains common types and subtypes used for the ASIS
 interface and its child packages. Important common types include (see Section
-@RefSecNum{package ASIS}):
+@RefSecNum{package Asis}):
 @begin{Itemize}
 Type Context@Defn{Context} helps identify the compilation units considered to
 be analyzable as part of the Ada compilation environment.
@@ -700,7 +704,7 @@ called (subprograms and entries).]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Text=[@b{Asis.Package_Views}@Defn{Package_Views} @en This
-child package provides queries on semantic views of packages units.]}
+child package provides queries on semantic views of packages.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Text=[@b{Asis.Generic_Views}@Defn{Generic_Views} @en This
@@ -738,18 +742,18 @@ packages includes the following in its context clause:
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[@key[with]],Old=[]}Asis, Asis.Errors,
+@Chg{Version=[2],New=[@key[with] ],Old=[]}Asis, Asis.Errors,
   Asis.Compilation_Units, Asis.Compilation_Units.Times,
   Asis.Compilation_Units.Relations, Asis.Ada_Environments, Asis.Implementation,
   Asis.Exceptions, Asis.Elements, Asis.Iterator, Asis.Declarations,
   Asis.Expressions, Asis.Clauses, Asis.Definitions, Asis.Statements, Asis.Text,
   Asis.Ids, Asis.Data_Decomposition@Chg{Version=[2],New=[, Asis.Views,
-  Asis.Program_Units, Asis.Subtype_Views, Asis.Subtype_Views.Elementary,
-  Asis.Subtype_Views.Composite, Asis.Object_Views, Asis.Object_Views.Access_Views,
+  Asis.Program_Units, Asis.Subtype_Views,
+  Asis.Subtype_Views.Elementary, Asis.Subtype_Views.Composite,
+  Asis.Object_Views, Asis.Object_Views.Access_Views,
   Asis.Profiles, Asis.Callable_Views, Asis.Package_Views,
   Asis.Generic_Views, Asis.Exception_Views, Asis.Statement_Views,
-  Asis.Declarations.Views, Asis.Definitions.Views,
-  Asis.Expressions.Views;],Old=[; and Asis.Data_Decomposition.Portable_Transfer.]}
+  Asis.Declarations.Views, Asis.Definitions.Views, Asis.Expressions.Views;],Old=[; and Asis.Data_Decomposition.Portable_Transfer.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
@@ -964,11 +968,13 @@ task library level violations.
    @key[end] Check_Compilation_Unit;
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
 The ASIS application is almost complete. A main
 @Chg{Version=[2],New=[subprogram],Old=[program]} is needed @Chg{Version=[2],New=[that],Old=[which]}
 contains the required sequencing of calls to initialize the ASIS interface,
-name the Ada environment, access the Ada environment, loop through all
+@Chg{Version=[2],New=[to ],Old=[]}name the Ada environment,
+@Chg{Version=[2],New=[to ],Old=[]}access the Ada environment,
+@Chg{Version=[2],New=[to ],Old=[]}loop through all
 Compilation_Units in the ASIS Context with the Find_Violations procedure, and
 @Chg{Version=[2],New=[to close/release],Old=[closing/releasing]} all ASIS
 resources. The Compilation_Units in the Context are placed into the Unit_List.

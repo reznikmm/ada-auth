@@ -1,6 +1,6 @@
 `@Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.15 $ $Date: 2009/05/09 06:28:46 $}
+@comment{$Revision: 1.16 $ $Date: 2009/07/02 04:50:54 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -223,8 +223,9 @@ expression to query.
 Returns the string image of the value of the string, integer, or real
 literal.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-For string literals, @Chg{Version=[2],New=[Value_Image returns],Old=[Value will return]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
+For string literals, @Chg{Version=[2],New=[Value_Image includes],
+Old=[Value will return]}
 the quotes around the string literal, these quotes are doubled, just as any
 quote appearing embedded in the string literal in the program text.
 
@@ -337,9 +338,11 @@ creating symbol tables and other name-specific lookup mechanisms.
                     @key[return] Asis.Name_List;
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
 Name @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the entity to query.
 Within_Element @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the limits
-for the query which is limited to the Element and its children.
+for the query which is @Chg{Version=[2],New=[restricted],Old=[limited]} to the
+element and its children.
 
 @leading@;If the Implicitly argument is True:
 @begin{Description}
@@ -393,9 +396,11 @@ argument is part of an inconsistent compilation unit.
                        @key[return] Boolean;
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
 Name @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the entity to query.
 Within_Element @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the limits
-for the query which is limited to the Element and its children.
+for the query which is @Chg{Version=[2],New=[restricted],Old=[limited]} to the
+element and its children.
 
 @leading@;If the Implicitly argument is True:
 @begin{Description}
@@ -406,8 +411,9 @@ explicit elements within the given limits@Chg{Version=[2],New=[, and returns Fal
 
 @leading@;If the Implicitly argument is False:
 @begin{Description}
-@noprefix@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-Returns True only if the Name is referenced by explicit elements@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
+@noprefix@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
+Returns True @Chg{Version=[2],New=[],Old=[only ]}if the Name is referenced
+by explicit elements@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
 @end{Description}
 
 Returns False for any unexpected Element.

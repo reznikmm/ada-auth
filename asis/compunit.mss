@@ -1,6 +1,6 @@
 @Part(compunit, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/compunit.mss,v $}
-@comment{$Revision: 1.14 $ $Date: 2009/05/16 03:55:40 $}
+@comment{$Revision: 1.15 $ $Date: 2009/07/02 04:50:54 $}
 
 
 @LabeledSection{package Asis.Compilation_Units}
@@ -19,8 +19,10 @@ ASIS Compilation_Unit abstraction.
 More than one compilation unit may be manipulated at one time. (The exact
 number is subject to implementation specific limitations.)
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
 A specific Compilation_Unit value is valid (usable) for as long as the ASIS
-Context variable used to create it remains open. Once an ASIS Context is
+Context @Chg{Version=[2],New=[object],Old=[variable]} used to create it
+remains open. Once an ASIS Context is
 closed, all associated Compilation_Unit values become invalid. It is
 erroneous to use an invalid Compilation_Unit value.
 
@@ -143,10 +145,11 @@ queries. ]}This @Chg{Version=[2],New=[function can be used to
 eliminate],Old=[conveniently eliminates]} the need to make the original Context
 visible at the place of each call where a Context parameter is required.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
 Two Compilation_Unit values, that represent the same physical compilation
 units (same Ada implementor Context implementation unit value) will test as
 Is_Equal, but not Is_Identical, if they were obtained from different open
-ASIS Context variables.
+ASIS Context @Chg{Version=[2],New=[objects],Old=[variables]}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 Raises ASIS_Inappropriate_Compilation_Unit @ChgAdded{Version=[2],Text=[with
@@ -885,11 +888,12 @@ zero@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
 Left @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the first unit to compare.
 Right @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the second unit to compare.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0037-1],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0037-1],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
 Returns True if Left and Right represent the same physical compilation unit
 or if both are Nil_Compilation_Unit values@Chg{Version=[2],New=[, and returns
 False otherwise],Old=[]}. The two units may or may not
-be from the same ASIS Context variable. (@Chg{Version=[2],New=[],Old=[@ldquote]}The
+be from the same ASIS Context@Chg{Version=[2],New=[],Old=[ variable]}.
+(@Chg{Version=[2],New=[],Old=[@ldquote]}The
 @Chg{Version=[2],New=[@i<same physical compilation unit> has],Old=[same
 physical compilation unit have]} the same version, as defined
 by @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} E.3(5)
@@ -911,13 +915,14 @@ Two nonexistent units are Is_Equal if they have the same Name and Unit_Kind.
 Left @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the first unit to compare.
 Right @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the second unit to compare.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0037-1],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0037-1],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
 Returns True if Left and Right represent the same physical compilation
-unit from the same open ASIS Context variable or if both are
-Nil_Compilation_Unit values@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.@Chg{Version=[2],New=[],Old=[ (@ldquote@;The same physical compilation
-unit@rdquote@; have the same version, as defined
-by @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} E.3(5)
-and the same program text.)]}
+unit from the same open ASIS Context@Chg{Version=[2],New=[],Old=[ variable]}
+or if both are Nil_Compilation_Unit values@Chg{Version=[2],New=[, and returns
+False otherwise],Old=[]}.@Chg{Version=[2],New=[],Old=[ (@ldquote@;The same
+physical compilation unit@rdquote@; have the same version, as defined by
+@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} E.3(5) and the same
+program text.)]}
 
 Two nonexistent units are Is_Identical if they have the same
 Unique_Name and the same Enclosing_Context.
@@ -939,8 +944,10 @@ compilation unit. This may be a simple name ("A") of a root library
 unit, or an expanded name ("A.B") of a subunit or non-root child unit.
 An expanded name shall contain the full parent_unit_name as its prefix.
 
-Returns a null string only if A_Configuration_Compilation or a
-Nil_Compilation_Unit is given.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+Returns a null string @Chg{Version=[2],New=[if Compilation_Unit is],Old=[only if]}
+A_Configuration_Compilation or a
+Nil_Compilation_Unit@Chg{Version=[2],New=[],Old=[ is given]}.
 
 The case of names returned by this query may vary between implementations.
 Implementors are encouraged, but not required, to return names in the
@@ -970,7 +977,9 @@ and parameters of the Context, file system paths, library files, version
 numbers, kind, or any other information that an implementation may need
 to uniquely identify the compilation unit.
 
-Returns a null string only if a Nil_Compilation_Unit is given.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+Returns a null string @Chg{Version=[2],New=[if Compilation_Unit is],Old=[only if]}
+Nil_Compilation_Unit@Chg{Version=[2],New=[],Old=[ is given]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],

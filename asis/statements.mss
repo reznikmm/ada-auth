@@ -1,6 +1,6 @@
 @Part(statements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/statements.mss,v $}
-@comment{$Revision: 1.12 $ $Date: 2009/05/09 06:28:46 $}
+@comment{$Revision: 1.13 $ $Date: 2009/07/02 04:50:54 $}
 
 
 @LabeledSection{package Asis.Statements}
@@ -1127,21 +1127,23 @@ procedure_call_statement or entry_call_statement to query.
 
 Returns the declaration of the procedure or entry denoted by the call.
 
-@leading@keepnext@;Returns a Nil_Element if the:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+@leading@keepnext@;Returns a Nil_Element if@Chg{Version=[2],New=[],Old=[ the]}:
 
 @begin{Itemize}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-prefix of the call denotes an @Chg{Version=[2],New=[],Old=[access to a procedure ]}implicit or explicit
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
+@Chg{Version=[2],New=[],Old=[the ]}prefix of the call denotes an @Chg{Version=[2],New=[],Old=[access to a procedure ]}implicit or explicit
   dereference@Chg{Version=[2],New=[ of an access to a procedure value, or],Old=[,]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
 @ChgDeleted{Version=[2],Text=[argument is a dispatching call,]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Statement],Old=[argument]} is a
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
+@Chg{Version=[2],New=[the Statement],Old=[argument]} is a call
 to a dispatching operation of a tagged type which
 is not statically determined.
 @end{Itemize}
+
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 If @Chg{Version=[2],New=[the ],Old=[]}@Syni{procedure_}prefix

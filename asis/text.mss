@@ -1,6 +1,6 @@
 @Part(text, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/text.mss,v $}
-@comment{$Revision: 1.8 $ $Date: 2009/05/09 06:28:47 $}
+@comment{$Revision: 1.9 $ $Date: 2009/07/02 04:50:54 $}
 
 @LabeledSection{package Asis.Text}
 
@@ -614,9 +614,9 @@ element can be sliced from the returned value using the first and last
 column character positions from the Span of the Element. The bounds on the
 returned program text are 1 .. Length(Line).
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
 If the Line is the first line from the Lines result for an Element, it
-@Chg{Version=[2],New=[may],Old=[can]} represent only a portion of a line
+@Chg{Version=[2],New=[might],Old=[can]} represent only a portion of a line
 from the original compilation. If the
 span began at character position P, the first Line of @Chg{Version=[2],New=[its],Old=[it's]} Lines
 result is padded at the beginning with P-1 white space characters

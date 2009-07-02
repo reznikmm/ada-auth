@@ -1,6 +1,6 @@
 @Part(data, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/data.mss,v $}
-@comment{$Revision: 1.13 $ $Date: 2009/05/16 03:55:40 $}
+@comment{$Revision: 1.14 $ $Date: 2009/07/02 04:50:54 $}
 
 @LabeledSection{package Asis.Data_Decomposition (optional)}
 
@@ -602,12 +602,13 @@ Old=[All component values are appropriate.]}
 Left @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the left component to compare.
 Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the right component to compare.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
 Returns True if Left and Right represent the same physical component of the
 same record or array type@Chg{Version=[2],New=[],Old=[,]}
 from the same physical compilation unit@Chg{Version=[2],New=[, and
 returns False otherwise],Old=[]}. The
-two components may or may not be from the same open ASIS Context variable.
+two components may or may not be from the same open
+ASIS Context@Chg{Version=[2],New=[],Old=[ variable]}.
 
 @leading@keepnext@;Implies:
 @begin{ChildExample}
@@ -635,12 +636,12 @@ Old=[All component values are appropriate.]}
 Left @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the left component to compare.
 Right @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the right component to compare.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
 Returns True if Left and Right represent the same physical component of the
 same record or array type@Chg{Version=[2],New=[],Old=[,]}
 from the same physical compilation unit and the
-same open ASIS Context variable@Chg{Version=[2],New=[, and
-returns False otherwise],Old=[]}.
+same open ASIS Context@Chg{Version=[2],New=[, and
+returns False otherwise],Old=[ variable]}.
 
 @leading@keepnext@;Implies:
 @begin{ChildExample}

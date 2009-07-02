@@ -1,9 +1,9 @@
 @Part(examples, Root="asis.msm")
 
-@Comment{$Date: 2009/05/09 06:28:46 $}
+@Comment{$Date: 2009/07/02 04:50:54 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/examples.mss,v $}
-@comment{$Revision: 1.3 $}
+@comment{$Revision: 1.4 $}
 
 @LabeledInformativeAnnex{ASIS application examples}
 
@@ -203,12 +203,13 @@ This example prints call tree information (i.e., a list of all procedure,
 function, and entry calls made within a compilation unit) for each compilation
 unit in the context. The output format is of the form:
 
+@begin{Example}
 <Calling_Compilation_Unit> (calls) <Called_Program_Unit> at line <Line_Number>
-where:
+@end{Example}
 
-<Calling_Compilation_Unit>  is the Expanded Name of the Unit making the call
-<Called_Program_Unit>       is the name of the program unit being called
-<Line_Number>               is the first line number of the call in the source file
+where <Calling_Compilation_Unit> is the Expanded Name of the Unit making the
+call; <Called_Program_Unit> is the name of the program unit being called; and
+<Line_Number> is the first line number of the call in the source file.
 
 
 @begin{Example}

@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/except.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2009/05/16 03:55:40 $}
+@comment{$Revision: 1.8 $ $Date: 2009/07/02 04:50:54 $}
 
 @LabeledSection{package Asis.Exceptions}
 
@@ -40,7 +40,9 @@ error has occurred within the application.
 @AdaExcDefn{ASIS_Inappropriate_Element} : @key[exception];
 @end{Example}
 
-Raised when ASIS is given an Element value that is not appropriate. This
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0055-1]}
+Raised when ASIS is @Chg{Version=[2],New=[passed],Old=[given]}
+an Element value that is not appropriate. This
 exception will typically indicate that a user error has occurred within
 the application.
 
@@ -48,13 +50,17 @@ the application.
 @AdaExcDefn{ASIS_Inappropriate_Line} : @key[exception];
 @end{Example}
 
-Raised when ASIS is given a Line value that is not appropriate.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0055-1]}
+Raised when ASIS is @Chg{Version=[2],New=[passed],Old=[given]} a Line
+value that is not appropriate.
 
 @begin{Example}
 @AdaExcDefn{ASIS_Inappropriate_Line_Number} : @key[exception];
 @end{Example}
 
-Raised when ASIS is given a Line_Number value that is not appropriate.
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0055-1]}
+Raised when ASIS is @Chg{Version=[2],New=[passed],Old=[given]}
+a Line_Number value that is not appropriate.
 This exception will typically indicate that a user error has occurred
 within the application.
 
@@ -63,8 +69,8 @@ within the application.
 @ChgAdded{Version=[2],Text=[@AdaExcDefn{ASIS_Inappropriate_View} : @key[exception];]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Raised when ASIS is given an inappropriate view or profile.]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0055-1]}
+@ChgAdded{Version=[2],Text=[Raised when ASIS is passed an inappropriate view or profile.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}

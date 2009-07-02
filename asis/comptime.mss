@@ -1,6 +1,6 @@
 @Part(comptime, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/comptime.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2009/05/12 06:23:26 $}
+@comment{$Revision: 1.4 $ $Date: 2009/07/02 04:50:54 $}
 
 @LabeledSection{package Asis.Compilation_Units.Times}
 
@@ -47,7 +47,9 @@ time is unavailable/unknown.
 
 Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the unit to query.
 
-Returns the time that this physical compilation unit was most recently
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+Returns the time @Chg{Version=[2],New=[at which],Old=[that]} this
+physical compilation unit was most recently
 updated in its implementor's Ada Environment. This will often be the
 time of its last compilation. The exact significance of the result is
 implementation specific.

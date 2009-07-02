@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/intro.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2009/05/16 03:55:40 $}
+@comment{$Revision: 1.7 $ $Date: 2009/07/02 04:50:55 $}
 
 @UnNumberedSection(Introduction)
 
@@ -191,9 +191,9 @@ edition from 1999.]}
 addition of the semantic subsystem (see above and Section
 @RefSecNum{ASIS Semantic Subsystem}). The new concept of views added by the
 semantic subsystem addresses a significant
-shortcoming in the 1999 edition of ASIS @en entities that do not have explicit
-declarations (such as classwide types, inherited subprograms, and the like) are
-represented poorly or not not at all as elements in ASIS. The new concept also
+shortcoming in the 1999 edition of ASIS @en ASIS elements represent entities
+that do not have explicit declarations (such as classwide types, inherited
+subprograms, and the like) poorly or not at all. The new concept also
 simplifies access to properties that are not easily determined from the syntax
 of an entity. For instance, a type can become tagged explicitly, by being an
 interface, via inheritance in a derived type, or by having a progenitor.
@@ -207,7 +207,7 @@ the more significant changes were:>}
 
 @begin{Itemize}
 
-@ChgAdded{Version=[2],Text=[Added support for newly added constructs to ASIS,
+@ChgAdded{Version=[2],Text=[Added support for newly added constructs,
 including tagged incomplete types, null procedures, overriding indicators,
 extended returns, exception messages in raise statements, and new predefined
 pragmas;]}
@@ -233,7 +233,7 @@ using the ASIS package interfaces. Important changes include:]}
 @begin{Itemize}
 
 @ChgAdded{Version=[2],Text=[Added a query to determine directly if an element
-representing a name represents an implicit dereference;]}
+that is a name represents an implicit dereference;]}
 
 @ChgAdded{Version=[2],Text=[Replaced traits with a set of direct query
 functions; and]}

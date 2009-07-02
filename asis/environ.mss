@@ -1,6 +1,6 @@
 @Part(environ, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/environ.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2009/05/16 03:55:40 $}
+@comment{$Revision: 1.6 $ $Date: 2009/07/02 04:50:54 $}
 
 @LabeledSection{package Asis.Ada_Environments}
 
@@ -149,7 +149,9 @@ when they are no longer necessary. Some amount of program storage can be
 tied up by the stored Name and Parameter strings. This space is only
 freed when a Context is Dissociated or when ASIS is Finalized.
 
-This operation has no physical affect on any implementor's Ada environment.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+This operation has no physical @Chg{Version=[2],New=[effect],Old=[affect]}
+on any implementor's Ada environment.
 
 Raises ASIS_Inappropriate_Context if The_Context is open.
 @end{DescribeCode}
@@ -166,10 +168,11 @@ Raises ASIS_Inappropriate_Context if The_Context is open.
 Left @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the first Context.
 Right @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the second Context.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
 Returns True if Left and Right designate the same set of associated
 compilation units@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
-The Context variables may be open or closed.
+The Context @Chg{Version=[2],New=[objects],Old=[variables]} may be open
+or closed.
 
 Unless both Contexts are open, this operation is implemented as a pair of
 simple string comparisons between the Name and Parameter associations for
@@ -216,15 +219,20 @@ not open.]}
 @end{DescribeCode}
 
 @begin{UsageNote}
-No two physically separate open Context variables are ever Is_Identical.
-The value associated with an open ASIS Context variable is also directly
-associated with every Compilation_Unit or Element derived from that
-Context. It is possible to obtain these Context values by way of the
-Enclosing_Context and the Enclosing_Compilation_Unit queries. These
-Context values can be tested for identity with each other or with
-specific Context variables. An open ASIS Context variable and an
-Enclosing_Context value are only Is_Identical if the Compilation_Unit in
-question was derived specifically from that open ASIS Context variable.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+No two physically separate open Context
+@Chg{Version=[2],New=[objects],Old=[variables]} are ever Is_Identical. The value
+associated with an open ASIS Context
+@Chg{Version=[2],New=[object],Old=[variable]} is also directly associated with
+every Compilation_Unit or Element derived from that Context. It is possible to
+obtain these Context values by way of the Enclosing_Context and the
+Enclosing_Compilation_Unit queries. These Context values can be tested for
+identity with each other or with specific Context
+@Chg{Version=[2],New=[objects],Old=[variables]}. An open ASIS Context
+@Chg{Version=[2],New=[object],Old=[variable]}
+and an Enclosing_Context value are only Is_Identical if the Compilation_Unit in
+question was derived specifically from that open ASIS Context
+@Chg{Version=[2],New=[object],Old=[variable]}.
 @end{UsageNote}
 
 
