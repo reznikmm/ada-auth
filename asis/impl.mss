@@ -1,6 +1,6 @@
 @Part(impl, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/impl.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2007/02/06 06:21:06 $}
+@comment{$Revision: 1.7 $ $Date: 2009/05/16 03:55:40 $}
 
 @LabeledSection{package Asis.Implementation}
 
@@ -77,7 +77,9 @@ e.g., "Copyright ..."
 @Key[function] @AdaSubDefn{Is_Initialized} @Key[return] Boolean;
 @end{Example}
 
-Returns True if ASIS is currently initialized.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns True if ASIS is currently initialized@Chg{Version=[2],New=[, and
+returns False otherwise],Old=[]}.
 @end{DescribeCode}
 
 
@@ -116,8 +118,9 @@ ASIS_Inappropriate_Context to be raised.
 @Key[function] @AdaSubDefn{Is_Finalized} @Key[return] Boolean;
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Returns True if ASIS is currently finalized or if ASIS has never been
-initialized.
+initialized@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
 @end{DescribeCode}
 
 @LabeledClause{procedure Finalize}
@@ -135,17 +138,23 @@ implementation dependent. The call is ignored if ASIS is already finalized.
 Subsequent calls to ASIS Environment, Compilation_Unit, and Element queries,
 are erroneous while the environment Is_Finalized.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Raises ASIS_Failed if the ASIS implementation failed to finalize. Status
-is likely to be Internal_Error and will not be Not_An_Error.
-Whenever an error condition is detected, and any ASIS exception is raised,
+is likely to be Internal_Error and will not be
+Not_An_Error.@Chg{Version=[2],New=[],Old=[ Whenever an error condition is
+detected, and any ASIS exception is raised,
 an Asis.Errors.Error_Kinds value and a Diagnosis string is stored. These
 values can be retrieved by the Status and Diagnosis functions. The
-Diagnosis function will retrieve the diagnostic message describing the error.
+Diagnosis function will retrieve the diagnostic message describing the error.]}
 
-Error information always refers to the most recently recorded error.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[Error information always refers to the most
+recently recorded error.]}
 
-Note that Diagnosis values are implementation dependent and may vary
-greatly among ASIS implementations.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[Note that Diagnosis values are implementation
+dependent and may vary greatly among ASIS implementations.]}
+
 @end{DescribeCode}
 
 @LabeledClause{function Status}
@@ -156,6 +165,12 @@ greatly among ASIS implementations.
 @end{Example}
 
 Returns the Error_Kinds value for the most recent error.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Whenever an error condition is detected, and any
+ASIS exception is raised, an Asis.Errors.Error_Kinds value and a Diagnosis
+string are stored. The Status function returns the Asis.Errors.Error_Kinds value
+for the most recently recorded error.]}
 @end{DescribeCode}
 
 @LabeledClause{function Diagnosis}
@@ -166,6 +181,13 @@ Returns the Error_Kinds value for the most recent error.
 @end{Example}
 
 Returns a string value describing the most recent error.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Whenever an error condition is detected, and any
+ASIS exception is raised, an Asis.Errors.Error_Kinds value and a Diagnosis
+string are stored. The Diagnosis function returns the diagnostic message
+describing the most recently recorded error. Note that Diagnosis values are
+implementation dependent and may vary greatly among ASIS implementations.]}
 
 Will typically return a null string if Status = Not_An_Error.
 @end{DescribeCode}

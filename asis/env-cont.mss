@@ -1,6 +1,6 @@
 @Part(env-cont, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/env-cont.mss,v $}
-@comment{$Revision: 1.2 $ $Date: 2006/09/28 05:11:59 $}
+@comment{$Revision: 1.3 $ $Date: 2009/05/16 03:55:40 $}
 
 
 @LabeledSection{package Asis.Ada_Environments.Containers}
@@ -43,6 +43,10 @@ one ASIS Container whose Name is that of the Asis.Context Name.
               Right : @key[in] Container)
               @key[return] Boolean @key[is abstract];
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Nil_Container is the value of a Container that
+represents no container.]}
 @end{DescribeCode}
 
 
@@ -53,6 +57,9 @@ one ASIS Container whose Name is that of the Asis.Context Name.
 @key[type] @AdaTypeDefn{Container_List} @key[is]
    @key[array] (List_Index @key[range] <>) @key[of] Container;
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Type Container_List represents a list of containers.]}
 @end{DescribeCode}
 
 
@@ -64,7 +71,7 @@ one ASIS Container whose Name is that of the Asis.Context Name.
     @key[return] Container_List;
 @end{Example}
 
-The_Context @Chg{Version=[1],New=[specifies],Old=[- Specifies]} the Context to define.
+The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Context to define.
 
 Returns a Container_List value that defines the single environment Context.
 Each Container will have an Enclosing_Context that Is_Identical to the
@@ -88,7 +95,7 @@ Raises ASIS_Inappropriate_Context if The_Context is not open.
     @key[return] Asis.Context;
 @end{Example}
 
-The_Container @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Container to query
+The_Container @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Container to query.
 
 Returns the Context value associated with the Container.
 
@@ -111,7 +118,7 @@ Raises ASIS_Inappropriate_Container if the Container is a Nil_Container.
                                    @key[return] Asis.Compilation_Unit_List;
 @end{Example}
 
-The_Container @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Container to query
+The_Container @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Container to query.
 
 Returns a list of all library_unit_declaration and
 library_unit_renaming_declaration  elements contained in the Container. Individual
@@ -142,7 +149,7 @@ is not open.
                                  @key[return] Asis.Compilation_Unit_List;
 @end{Example}
 
-The_Container @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Container to query
+The_Container @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Container to query.
 
 Returns a list of all library_unit_body and subunit elements contained in the
 Container. Individual units will appear only once in an order that is not
@@ -170,7 +177,7 @@ is not open.
                            @key[return] Asis.Compilation_Unit_List;
 @end{Example}
 
-The_Container @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Container to query
+The_Container @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Container to query.
 
 Returns a list of all compilation units contained in the Container.
 Individual units will appear only once in an order that is not defined.
@@ -197,12 +204,14 @@ is not open.
                    Right : @key[in] Container) @key[return] Boolean;
 @end{Example}
 
-Left @chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the first Container
-Right @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the second Container
+Left @chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the first Container.
+Right @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the second Container.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Returns True if Left and Right designate Container values that contain the
-same set of compilation units. The Container values may have been defined
-from different Context values.
+same set of compilation units@Chg{Version=[2],New=[, and returns False
+otherwise],Old=[]}. The Container values may have been defined from different
+Context values.
 @end{DescribeCode}
 
 
@@ -215,11 +224,12 @@ from different Context values.
                        Right : @key[in] Container) @key[return] Boolean;
 @end{Example}
 
-Left @chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the first Container
-Right @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the second Container
+Left @chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the first Container.
+Right @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the second Container.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Returns True if Is_Equal(Left, Right) and the Container values have been
-defined from Is_Equal Context values.
+defined from Is_Equal Context values@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
 @end{DescribeCode}
 
 
@@ -230,7 +240,7 @@ defined from Is_Equal Context values.
 @key[function] @AdaSubDefn{Name} (The_Container : @key[in] Container) @key[return] Wide_String;
 @end{Example}
 
-The_Container@chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the Container to name
+The_Container @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Container to name.
 
 Returns the Name value associated with the Container.
 

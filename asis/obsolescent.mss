@@ -1,10 +1,10 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2009/05/09 06:28:46 $}
+@Comment{$Date: 2009/05/16 03:55:40 $}
 @LabeledAddedNormativeAnnex{Version=[2],Name=[Obsolescent Features]}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/obsolescent.mss,v $}
-@comment{$Revision: 1.10 $}
+@comment{$Revision: 1.11 $}
 
 @LabeledAddedClause{Version=[2],Name=[Annex Contents]}
 
@@ -46,7 +46,7 @@ syntactic constructs. The semantics of an element are not considered.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0017-1],ARef=[SI99-0022-1]}
 @ChgAdded{Version=[2],Text=[The syntax of interest
 here are the reserved words @key[abstract], @key[aliased],
-@key[limited], @key[private], @key[reverse], whereever they appear, and the reserved
+@key[limited], @key[private], @key[reverse], wherever they appear, and the reserved
 word @key[access] when it qualifies a definition defining an anonymous type
 (an access_definition).
 Trait_Kinds enumerates all combinations useful in this classification.]}
@@ -575,7 +575,7 @@ A_Formal_Derived_Type_Definition]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
 @ChgAdded{Version=[2],Text=[This function has been replaced by
 Corresponding_Aspect_Pragmas. Use of the function
-Corresponding_Pragmas is not recommented in new programs.]}
+Corresponding_Pragmas is not recommended in new programs.]}
 
 @begin{DescribeCode}
 @begin{Example}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
@@ -607,23 +607,23 @@ type definition and not the derived type definition.]}
 @ChgAdded{Version=[2],Text=[If Element is a declaration that includes several defining_names,
 the result of this query is implementation defined.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
-@ChgAdded{Version=[2],Text=[@leading@keepnext@;@Chg{Version=[2],New=[Element expects an element
-that has one of the following],Old=[Appropriate]} Element_Kinds:]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0021-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Element expects an element
+that has one of the following Element_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Declaration
 A_Statement]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
 of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
-@ChgAdded{Version=[2],Text=[@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has the following],Old=[]} Element_Kinds:]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns an element that
+has the following Element_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Pragma]}
 @end{Display}
@@ -713,11 +713,6 @@ has the following Statement_Kinds:]}
 @end{Display}
 @end{DescribeCode}
 
-@begin{SingleNote}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0027-1]}
-@ChgAdded{Version=[2],Text=[This function is never called by Traverse_Element.]}
-@end{SingleNote}
-
 @begin{UsageNote}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0027-1]}
 @ChgAdded{Version=[2],Text=[This function is intended for compatibility with
@@ -797,7 +792,7 @@ A_Subtype_Indication
 A_Task_Definition
 A_Protected_Definition
 A_Component_Definition
-A_Type_Definition @em the returned element also has Type_Kinds:
+A_Type_Definition @em the returned element also has the following Type_Kinds:
  @ @ @ @  A_Constrained_Array_Definition]}
 @end{Display}
 @end{DescribeCode}
@@ -898,7 +893,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns an element
-with one of Expression_Kinds:]}
+that has one of the following Expression_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[An_Identifier
@@ -913,7 +908,7 @@ An_Attribute_Reference]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
 @ChgAdded{Version=[2],Text=[This function has been replaced by
 Corresponding_Aspect_Clauses. Use of the function
-Corresponding_Representation_Clauses is not recommented in new programs.]}
+Corresponding_Representation_Clauses is not recommended in new programs.]}
 
 
 @begin{DescribeCode}
@@ -944,22 +939,21 @@ the result of this query is implementation defined.],Old=[]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
 @Chg{Version=[2],New=[The clauses returned may be the clauses applying to a parent type if the
 type is a derived type with no explicit representation. These clauses
-are not Is_Part_Of_Implicit, they are the representation_clause elements
+are not Is_Part_Of_Implicit, they are the aspect_clause elements
 specified in conjunction with the declaration of the parent type.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
-@Chg{Version=[2],New=[@Chg{Version=[2],New=[Declaration expects an element that has any],Old=[All]}
-Declaration_Kinds @Chg{Version=[2],New=[except],Old=[are appropriate
-except]} Not_A_Declaration.],Old=[]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Declaration expects an element that has any
+Declaration_Kinds except Not_A_Declaration.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1],ARef=[SI99-0028-1]}
 @Chg{Version=[2],New=[Raises ASIS_Inappropriate_Element with a Status
 of Value_Error for any element that does not have one of these expected
 kinds.],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
-@Chg{Version=[2],New=[@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
-have the following],Old=[]} Clause_Kinds:],Old=[]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns a list of elements that each
+have the following Clause_Kinds:]}
 @begin{Display}
 @Chg{Version=[2],New=[A_Representation_Clause],Old=[]}
 @end{Display}
@@ -1005,7 +999,7 @@ type for the access function.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Type_Definition expects
-an element of Type_Kinds:]}
+an element of one of the following Type_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[An_Access_Type_Definition
@@ -1013,8 +1007,8 @@ A_Formal_Access_Type_Definition]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[and Type_Definition
-expects an element of Access_Type_Kinds:]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[that also has one of
+the following Access_Type_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[An_Access_To_Function
@@ -1387,19 +1381,18 @@ for non-discriminant fields.]}
 @ChgAdded{Version=[2],Text=[All Is_Record(Component) = True values are appropriate. All return values
 are valid parameters for all query operations.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[
-Type_Definition expects an element
-that has the following Element_Kinds:]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Type_Definition
+expects an element that has the following Element_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Type_Definition that has one of the following Type_Kinds:
    A_Derived_Type_Definition       (derived from a record type)
    A_Record_Type_Definition]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[
-Component expects a component that has one of the following
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Component
+expects a component that has one of the following
 Asis.Data_Decomposition.Type_Model_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Simple_Static_Model
@@ -1545,7 +1538,7 @@ that has the following Element_Kinds:]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[and
 Type_Definition expects an element
-that has the following Asis.Data_Decomposition.Type_Model_Kinds:]}
+that has one of the following Asis.Data_Decomposition.Type_Model_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[A_Simple_Static_Model
 A_Simple_Dynamic_Model]}
@@ -1674,7 +1667,7 @@ following subclauses.]}
 @ChgAdded{Version=[2],Text=[This package is part of the optional Asis.Data_Decomposition package.
 It may or may not be present in all ASIS implementations.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
 @ChgAdded{Version=[2],Text=[It provides support for marshalling and unmarshalling
 of application data using ASIS.]}
 

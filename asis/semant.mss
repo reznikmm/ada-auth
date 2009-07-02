@@ -1,6 +1,6 @@
 @Part(ids, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/semant.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2009/05/12 06:23:26 $}
+@comment{$Revision: 1.5 $ $Date: 2009/05/16 03:55:40 $}
 
 @LabeledAddedSection{Version=[2],Name=[ASIS Semantic Subsystem]}
 
@@ -53,7 +53,7 @@ Expression is a Name).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[The generic packages Containers.Vectors and
-Containers.Holders are instantiated as needed for various of the types used in
+Containers.Indefinite_Holders are instantiated as needed for various types used in
 the ASIS Semantic Subsystem. These instantiations permit more convenient
 manipulation of objects of a class-wide type, allowing for extensible lists and
 more easily updatable variables, despite the fact that class-wide types are
@@ -187,7 +187,7 @@ subclauses.]}
    A_Function_Result_Object,
    A_Named_Number,
    An_Attribute_Value,
-   An_Expr_Value,]}
+   An_Expression_Value,]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   A_Boolean_Subtype,
@@ -235,7 +235,7 @@ subclauses.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Object_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds
-   @key[range] A_Standalone_Object .. An_Expr_Value;]}
+   @key[range] A_Standalone_Object .. An_Expression_Value;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Subtype_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds
@@ -418,8 +418,8 @@ region in which declarations may occur.]}
    @key[return] Asis.Declaration @key[is abstract];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{View_Identifier} (D : View_Declaration)
-   @key[return] Asis.Identifier @key[is abstract];]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{View_Defining_Name} (D : View_Declaration)
+   @key[return] Asis.Defining_Name @key[is abstract];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Imported} (D : View_Declaration) @key[return] Boolean @key[is abstract];]}
@@ -438,8 +438,18 @@ declaration D. If a declaration defines multiple views because the list of
 Identifiers has more that one element, then a separate View_Declaration is
 associated with each view, just as though they were defined by separate
 declarations. Function Declaration returns the Asis.Declaration corresponding to
-the declaration D. Function View_Identifier returns the Asis.Identifier
-introduced by the declaration D. Function Is_Imported returns True if and only
+the declaration D.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Function View_Defining_Name returns the
+Asis.Defining_Name introduced by the declaration D. Nil_Element is returned if D
+is anonymous (does not introduce a name). For most declarations,
+View_Defining_Name returns an identifier, but it can also return an operator
+symbol, a character literal (for an enumeration value), or an expanded name (for
+a child unit).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Imported returns True if and only
 if the declaration D is completed with a pragma Import.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
@@ -471,7 +481,7 @@ otherwise.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Returns True if Are_Declared_In_Same_Region
-(Earlier, Later) is True and Eariler occurs before Later in the logical sequence
+(Earlier, Later) is True and Earlier occurs before Later in the logical sequence
 of the program, where a package specification is presumed to occur before the
 corresponding package body in this sequence. Otherwise returns False.]}
 @end{DescribeCode}
@@ -656,7 +666,8 @@ of these functions.]}
 Asis.Compilation_Unit representing the compilation unit in which the declaration
 D occurs. Function Expanded_Name returns the Wide_String representing the full
 expanded name denoting the declaration D (encoded in UTF-16, as described in
-@RefSecNum{package Asis}).]}
+@RefSecNum{package Asis}). The result is implementation defined if D is declared
+within an unnamed block or loop statement.]}
 @end{DescribeCode}
 
 
@@ -691,8 +702,8 @@ expanded name denoting the declaration D (encoded in UTF-16, as described in
 of these subprograms.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Declarations may overload, override, or rename other
-declarations. Function Is_Overloadable returns True if and only if the
+@ChgAdded{Version=[2],Text=[Declarations may overload, override, or rename views of
+other declarations. Function Is_Overloadable returns True if and only if the
 declaration D is a declaration that may be overloaded. Function Is_Overriding
 returns True if and only if the declaration D overrides one or more other
 declarations. Procedure Overridden_Declarations returns (in the Overridden
@@ -773,7 +784,10 @@ package Asis.Views.]}
 @ChgAdded{Version=[2],Text=[Function Has_Declaration returns True if and only if
 view V was defined by a declaration. Function Declaration returns the
 declaration that defines view V, or raises ASIS_Inappropriate_View if
-Has_Declaration (V) returns False. Function Defines_Declarative_Region returns
+Has_Declaration (V) returns False.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Function Defines_Declarative_Region returns
 True if and only if view V is of an entity that has its own declarative region.
 Function Defined_Region returns the declarative region of the entity represented
 by view V, or raises ASIS_Inappropriate_View if Defines_Declarative_Region (V)
@@ -860,7 +874,9 @@ does not have a declaration.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Type Implementation_Defined_Aspect_Kinds is an
 implementation-defined enumeration of aspect names; it should include the names
-of all implementation-defined aspects defined by the implementation.]}
+of all implementation-defined aspects defined by the implementation.
+If there are no implementation-defined aspects, it should consist of the single
+item None.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[V specifies the view to query and Aspect specifies
@@ -893,7 +909,7 @@ use function Aspect_Items on the declaration of the entity.]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{View_Holders} @key[is new] Ada.Containers.Holders (View'Class);
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{View_Holders} @key[is new] Ada.Containers.Indefinite_Holders (View'Class);
 @key[type] @AdaTypeDefn{View_Holder} @key[is new] View_Holders.Holder @key[with null record];]}
 @end{Example}
 
@@ -1242,7 +1258,7 @@ scalar, and the subtype has no constraint or null exclusion. Otherwise,
 Is_Unadorned_Subtype returns False.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Unadorned_Subtype returns the a view of a
+@ChgAdded{Version=[2],Text=[Function Unadorned_Subtype returns a view of a
 subtype without any constraints or null exclusions. Specifically, if the subtype
 S is a scalar subtype, Unadorned_Subtype returns a view of the base subtype of
 S. If the subtype S is a tagged subtype, Unadorned_Subtype returns the first
@@ -1333,7 +1349,7 @@ subtype With_Subtype, and returns False otherwise.]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[@key[procedure] @AdaSubDefn{Primitive_Subprograms} (S : Subtype_View;
-   Primitives : @key[out] Declarative_Regions.View_Declaration_Vector) @key[is abstract];]}
+   Primitives : @key[out] Declarative_Regions.View_Declaration_Vector'Class) @key[is abstract];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Derived} (S : Subtype_View) @key[return] Boolean @key[is abstract];]}
@@ -1349,7 +1365,7 @@ of these subprograms.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Function Primitive_Subprograms returns in the
-parameter Primitives a vector of declarations for the primitive subprograms of
+parameter Primitives a vector of view declarations for the primitive subprograms of
 the type of the subtype S. Function Is_Derived returns True if and only if the
 type of the subtype S is defined by a derived_type_definition, a
 private_extension_declaration, or a formal_derived_type_definition. Function
@@ -1425,7 +1441,7 @@ if the type of S is an incomplete view of a type.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[If S is an incomplete view, Complete_View returns
-the completion of S. Otherwise, Complete_View returns S.]}
+a view of the completion of S. Otherwise, Complete_View returns S.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Function Is_Partial_View returns True if and only if
@@ -1462,8 +1478,9 @@ of these functions.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Function Subtype_Size returns the same value as the
-Size attribute of the subtype S, if the object is elementary or if its size is
-specified. The result is implementation-defined in other cases, and may be
+Size attribute of the subtype S, if the subtype is elementary or if
+Is_Aspect_Specified (S, Size) returns True. The result is
+implementation-defined in other cases, and may be
 ASIS_Natural'Last. Function Subtype_Alignment returns the same value as the
 Alignment attribute of the subtype S.]}
 @end{DescribeCode}
@@ -1474,7 +1491,7 @@ Alignment attribute of the subtype S.]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Subtype_Holders} @key[is new] Ada.Containers.Holders (Subtype_View'Class);
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Subtype_Holders} @key[is new] Ada.Containers.Indefinite_Holders (Subtype_View'Class);
 @key[type] @AdaTypeDefn{Subtype_Holder} @key[is new] Subtype_Holders.Holder @key[with null record];]}
 @end{Example}
 
@@ -1568,6 +1585,9 @@ Function Nominal_Subtype returns the nominal subtype of the view.]}
    @key[return] View_Declaration'Class @key[is abstract];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Component_Selected_Component} (O : Object_View) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Position} (O : Object_View) @key[return] Object_View'Class @key[is abstract];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1597,10 +1617,16 @@ ASIS_Inappropriate_View if Is_Indexed_Component (O) returns False.]}
 @ChgAdded{Version=[2],Text=[Function Is_Selected_Component returns True if and
 only if the view O is of a selected component. Function Selector_Declaration
 returns the declaration of the selected component O, or raises
-ASIS_Inappropriate_View if Is_Selected_Component (O) returns False. Functions
-Position, First_Bit, and Last_Bit, return a view of the value of a
-reference to the corresponding attribute of the given component O, or raise
 ASIS_Inappropriate_View if Is_Selected_Component (O) returns False.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Component_Selected_Component returns
+True if and only if the view O is of a selected component that denotes a
+component. Functions Position, First_Bit, and Last_Bit, return a view of the
+value of a reference to the corresponding attribute of the given component O, or
+raise ASIS_Inappropriate_View if Is_Component_Selected_Component (O) returns
+False.]}
+
 @end{DescribeCode}
 
 
@@ -1676,6 +1702,9 @@ object O is an implicit dereference of an access-to-object value.]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Static_Discrete_Image} (O : Object_View)
    @key[return] Wide_String @key[is abstract];]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Longest_Float} @key[is digits] @examcom{<implementation-defined>};]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Static_Real} (O : Object_View) @key[return] Boolean @key[is abstract];]}
 
@@ -1702,15 +1731,16 @@ of these functions.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Function Is_Static_Discrete returns True if and only
 if the view O is a view of the value of a static expression of a discrete type.
-Function Static_Discrete_Value returns the value of the static discrete
-expression O, or raises ASIS_Inappropriate_View if Is_Static_Discrete (O)
-returns False. If the value is outside the range of Longest_Discrete, it raises
-Constraint_Error. Function Static_Discrete_Image returns the image of the value
-of the static discrete expression O, with the syntax used by the Image attribute
-of its type (with a leading minus if negative, and a leading space otherwise),
-or raises ASIS_Inappropriate_View if Is_Static_Discrete (O) returns False. A
-correct image is returned even if the value is outside the base range of the
-type.]}
+Function Static_Discrete_Value returns the position number of the value of the
+static discrete expression O, or raises ASIS_Inappropriate_View if
+Is_Static_Discrete (O) returns False. If the position number of the value is
+outside the range of Longest_Discrete, it raises Constraint_Error. Function
+Static_Discrete_Image returns the image of the position number of the value of
+the static discrete expression O, with the syntax used by the Image attribute of
+its type (with a leading minus if negative, and a leading space otherwise), or
+raises ASIS_Inappropriate_View if Is_Static_Discrete (O) returns False. A
+correct image is returned even if the position number of the value is outside
+the base range of the type.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Function Is_Static_Real returns True if and only if
@@ -1735,11 +1765,17 @@ in UTF-16, as described in Section 3). The function raises
 ASIS_Inappropriate_View if Is_Static_String (O) returns False.]}
 @end{DescribeCode}
 
-@begin{SingleNote}
+@begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Static_Discrete_Value can be used on integer,
 character, and enumeration values.]}
-@end{SingleNote}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[The result of Static_Real_Value may not have all of
+the precision of the original static value even if it is in range. If the exact
+value is important, use Static_Real_Image to retrieve the value instead of
+Static_Real_Value.]}
+@end{Notes}
 
 
 @LabeledAddedSubClause{Version=[2],Name=[Representational Object Attributes]}
@@ -1759,8 +1795,9 @@ of these functions.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Function Object_Size returns the same value as the
-Size attribute of the object O, if the object is elementary or if its size or
-its subtype's size is specified. The result is implementation-defined in other
+Size attribute of the object O, if the object is elementary, if
+Is_Aspect_Specified (O, Size) returns True, or if its  subtype's size is
+specified. The result is implementation-defined in other
 cases, and may be ASIS_Natural'Last. Function Object_Alignment returns the same
 value as the Alignment attribute of the object O. If the view is of a value
 rather than an object, the result of Object_Size and Object_Alignment is
@@ -1775,7 +1812,7 @@ of the same type.]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Object_Holders} @key[is new] Ada.Containers.Holders (Object_View'Class);
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Object_Holders} @key[is new] Ada.Containers.Indefinite_Holders (Object_View'Class);
 @key[type] @AdaTypeDefn{Object_Holder} @key[is new] Object_Holders.Holder @key[with null record];]}
 @end{Example}
 
@@ -1910,8 +1947,8 @@ Import, or Export used to specify the convention of the entity.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[The library package
-@ChildUnit{Parent=[Asis.Subtype_Views],Child=[Elementary]}Asis.Subtype_Views.Elem
-entary shall exist. The package shall provide interfaces equivalent to those
+@ChildUnit{Parent=[Asis.Subtype_Views],Child=[Elementary]}Asis.Subtype_Views.Elementary
+shall exist. The package shall provide interfaces equivalent to those
 described in the following subclauses.]}
 
 
@@ -2106,14 +2143,14 @@ if the type of the subtype A is pool specific.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Function Storage_Pool returns a view of the object
 denoted by the Storage_Pool attribute of the type of the subtype A, if
-Storage_Pool is specified. The result is implementation-defined in other
-cases.]}
+Is_Aspect_Specified (A, Storage_Pool) returns True. The result is
+implementation-defined in other cases.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Function Storage_Size returns a view of a value
 equal to the Storage_Size of the type of the subtype A, if the type is defined
-to have zero Storage_Size, or if its Storage_Size is specified. The result is
-implementation-defined in other cases.]}
+to have zero Storage_Size, or if Is_Aspect_Specified (A, Storage_Size) returns
+True. The result is implementation-defined in other cases.]}
 @end{DescribeCode}
 
 
@@ -2148,8 +2185,8 @@ view of an access-to-subprogram subtype.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[The library package
-@ChildUnit{Parent=[Asis.Subtype_Views],Child=[Composite]}Asis.Subtype_Views.Comp
-osite shall exist. The package shall provide interfaces equivalent to those
+@ChildUnit{Parent=[Asis.Subtype_Views],Child=[Composite]}Asis.Subtype_Views.Composite
+shall exist. The package shall provide interfaces equivalent to those
 described in the following subclauses.]}
 
 
@@ -2211,8 +2248,8 @@ for each of these functions.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Function Is_Limited returns True if and only if the
-subtype C is limited. Function Contains_Task returns True if and only if the
-type of the subtype C has a part that is a task type. Function
+view of the subtype C is limited. Function Contains_Task returns True if and
+only if the type of the subtype C has a part that is a task type. Function
 Needs_Finalization returns True if and only if the type of the subtype C needs
 finalization. Function Has_Preelaborable_Initialization returns True if and only
 if the subtype C has preelaborable initialization.]}
@@ -2274,9 +2311,9 @@ for each of these functions.]}
 @ChgAdded{Version=[2],Text=[Function Component_Subtype returns a view of the
 component subtype of the type of the array subtype A. Function Num_Dimensions
 returns a count of the number of dimensions of the type of the array subtype A.
-Function Index_Subtype returns a view of the index subtype of the type of the
-array subtype A. Function Is_String_Subtype returns True if and only if the type
-of the subtype A is a string type.]}
+Function Index_Subtype returns a view of the Dimension-th index subtype of the
+type of the array subtype A. Function Is_String_Subtype returns True if and only
+if the type of the subtype A is a string type.]}
 @end{DescribeCode}
 
 
@@ -2337,8 +2374,9 @@ a synchronized tagged type. Function Is_Classwide returns True if and only if
 the type of the subtype T is classwide.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Root_Subtype returns a view of the subtype
-of the classwide subtype T, or raises ASIS_Inappropriate_View if the type of the
+@ChgAdded{Version=[2],Text=[Function Root_Subtype returns a view of a specific
+subtype @I{S} that is the root of the class T (that is, @I{S}'Class = T),
+or raises ASIS_Inappropriate_View if the type of the
 subtype T is not classwide. Function Is_Specific returns True if and only if the
 type of the subtype T is a specific tagged type. Function Classwide_Subtype
 returns a view of the classwide subtype rooted at the subtype T, equivalent to
@@ -2433,8 +2471,9 @@ these functions.]}
 @ChgAdded{Version=[2],Text=[Is_Subprogram returns True if the callable view C is
 of a subprogram (that is, C has Callable_View_kinds of A_Noninstance_Subprogram,
 A_Subprogram_Instance, A_Subprogram_Renaming, A_Protected_Subprogram,
-An_Imported_Subprogram, An_Attribute_Subprogram, An_Intrinsic_Subprogram, or
-A_Designated_Subprogram), and returns False otherwise.]}
+An_Imported_Subprogram, An_Attribute_Subprogram, An_Intrinsic_Subprogram,
+A_Designated_Subprogram, or A_Generic_Formal_Subprogram),
+and returns False otherwise.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Is_Enumeration_Literal returns True if the callable
@@ -2442,27 +2481,32 @@ view C is of an enumeration literal, and returns False otherwise.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Is_Procedure returns True if the callable view C
-represents a procedure, and returns False otherwise.]}
+denotes a procedure, and returns False otherwise.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Is_Entry returns True if the callable view C
-represents an entry (that is, C has Callable_View_kinds of A_Protected_Entry or
+denotes an entry (that is, C has Callable_View_kinds of A_Protected_Entry or
 A_Task_Entry), otherwise it returns False.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Is_Function returns True if the callable view C
-represents a function, and returns False otherwise.]}
+denotes a function, and returns False otherwise.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Is_Abstract returns True if the callable view C
-represents a subprogram declared by an abstract_subprogram_declaration or an
+denotes a subprogram declared by an abstract_subprogram_declaration or an
 abstract inherited subprogram, and returns False otherwise.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Is_Null returns true if the Callable_View represents
+@ChgAdded{Version=[2],Text=[Is_Null returns true if the Callable_View denotes
 a Null Procedure, and returns False otherwise.]}
 @end{DescribeCode}
-
+@begin{SingleNote}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[A use of an enumeration literal is formally a
+function call, so a view of such a use is a Callable_View for which Is_Function
+returns True.]}
+@end{SingleNote}
 
 @LabeledAddedSubClause{Version=[2],Name=[Primitive operations]}
 
@@ -2482,7 +2526,7 @@ primitive subprogram. Returns False otherwise.]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[@key[procedure] @AdaSubDefn{Primitive_On_Subtypes} (
-   C : Callable_View; Subtypes : @key[out] Subtype_Vector) @key[is abstract];]}
+   C : Callable_View; Subtypes : @key[out] Subtype_Vector'Class) @key[is abstract];]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
@@ -2507,7 +2551,7 @@ Subtype_Vector(Subtype_Vectors.Empty_Vector).]}
 @ChgAdded{Version=[2],Text=[C specifies the callable view to query.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Returns True if C represents a dispatching
+@ChgAdded{Version=[2],Text=[Returns True if C denotes a dispatching
 operation. Returns False otherwise.]}
 
 @begin{Example}
@@ -2583,7 +2627,7 @@ prefix of C. Otherwise, raises ASIS_Inappropriate_View.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Returns True if the callable view C represents an
-access to subprogram call; otherwise, returnd False.]}
+access to subprogram call; otherwise, returns False.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
@@ -2622,7 +2666,7 @@ the callable view C is an implicit dereference of an access-to-subprogram value.
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Callable_Holders} @key[is new] Ada.Containers.Holders (Callable_View'Class);
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Callable_Holders} @key[is new] Ada.Containers.Indefinite_Holders (Callable_View'Class);
 @key[type] @AdaTypeDefn{Callable_Holder} @key[is new] Callable_Holders.Holder @key[with null record];]}
 @end{Example}
 
@@ -2790,8 +2834,10 @@ In this case, Limited_View (Full_View (P)) = P.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Returns P otherwise.]}
 
+@begin{SingleNote}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[In all cases, Is_Limited_View (Full_View (P)) = False.]}
+@end{SingleNote}
 @end{DescribeCode}
 
 
@@ -2810,8 +2856,10 @@ In this case, Limited_View (Full_View (P)) = P.]}
 @ChgAdded{Version=[2],Text=[Returns True if P denotes the full view of a package.
 Returns False otherwise.]}
 
+@begin{SingleNote}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[In all cases, Is_Full_View (P) /= Is_Limited_View (P).]}
+@end{SingleNote}
 @end{DescribeCode}
 
 
@@ -2846,7 +2894,7 @@ ASIS_Inappropriate_View.]}
 @end{Discussion}
 
 
-@LabeledAddedSubClause{Version=[2],Name=[Package predicates]}
+@LabeledAddedSubClause{Version=[2],Name=[function Is_Formal_Package]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -2898,7 +2946,7 @@ package.]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Package_Holders} @key[is new] Ada.Containers.Holders (Package_View'Class);
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Package_Holders} @key[is new] Ada.Containers.Indefinite_Holders (Package_View'Class);
 @key[type] @AdaTypeDefn{Package_Holder} @key[is new] Package_Holders.Holder @key[with null record];]}
 @end{Example}
 
@@ -3040,7 +3088,7 @@ generic unit. This function yields a view of that instance for generic G.]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Generic_Holders} @key[is new] Ada.Containers.Holders (Generic_View'Class);
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Generic_Holders} @key[is new] Ada.Containers.Indefinite_Holders (Generic_View'Class);
 @key[type] @AdaTypeDefn{Generic_Holder} @key[is new] Generic_Holders.Holder @key[with null record];]}
 @end{Example}
 
@@ -3084,7 +3132,7 @@ an exception view E, use Is_Aspect_Specified (E, Discarded_Names).]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Exception_Holders} @key[is new] Ada.Containers.Holders (Exception_View'Class);
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Exception_Holders} @key[is new] Ada.Containers.Indefinite_Holders (Exception_View'Class);
 @key[type] @AdaTypeDefn{Exception_Holder} @key[is new] Exception_Holders.Holder @key[with null record];]}
 @end{Example}
 
@@ -3139,7 +3187,7 @@ following subclauses.]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Statement_Holders} @key[is new] Ada.Containers.Holders (Statement_View'Class);
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Statement_Holders} @key[is new] Ada.Containers.Indefinite_Holders (Statement_View'Class);
 @key[type] @AdaTypeDefn{Statement_Holder} @key[is new] Statement_Holders.Holder @key[with null record];]}
 @end{Example}
 
@@ -3207,7 +3255,7 @@ following subclauses.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Type_Definition specifies the type to query.]}
+@ChgAdded{Version=[2],Text=[Type_Definition specifies the type definition to query.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Returns a view that specifies the subtype denoted by

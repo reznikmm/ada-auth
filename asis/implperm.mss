@@ -1,6 +1,6 @@
 @Part(implperm, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/implperm.mss,v $}
-@comment{$Revision: 1.8 $ $Date: 2009/03/07 06:33:31 $}
+@comment{$Revision: 1.9 $ $Date: 2009/05/16 03:55:40 $}
 
 
 @LabeledSection{package Asis.Implementation.Permissions}
@@ -13,12 +13,8 @@ Old=[@f{@key[package] @ChildUnit{Parent=[Asis.Implementation],Child=[Permissions
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function IFPNNS],
-Old=[function Is_Formal_Parameter_Named_Notation_Supported]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - GG}}]}
+@LabeledDeletedClause{Version=[2],Name=[function Is_Formal_Parameter_Named_Notation_Supported (perms)]}
+
 @begin{DescribeCode}
 @begin{Example}
 @ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Formal_Parameter_Named_Notation_Supported} @key[return] Boolean;]}
@@ -38,12 +34,8 @@ calls.]}
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function D_In_Mode_S],
-Old=[function Default_In_Mode_Supported]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - GG}}]}
+@LabeledDeletedClause{Version=[2],Name=[function Default_In_Mode_Supported (perms)]}
+
 @begin{DescribeCode}
 @begin{Example}
 @ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Default_In_Mode_Supported} @key[return] Boolean;]}
@@ -54,12 +46,8 @@ supported by this implementation.]}
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function G_Act_Part_Norm],
-Old=[function Generic_Actual_Part_Normalized]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - GG}}]}
+@LabeledDeletedClause{Version=[2],Name=[function Generic_Actual_Part_Normalized (perms)]}
+
 @begin{DescribeCode}
 @begin{Example}
 @ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Generic_Actual_Part_Normalized} @key[return] Boolean;]}
@@ -75,12 +63,8 @@ always behave as if called with Normalized => True.]}
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function Rec_Comp_Assoc_Norm],
-Old=[function Record_Component_Associations_Normalized]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - GG}}]}
+@LabeledDeletedClause{Version=[2],Name=[function Record_Component_Associations_Normalized (perms)]}
+
 @begin{DescribeCode}
 @begin{Example}
 @ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Record_Component_Associations_Normalized} @key[return] Boolean;]}
@@ -97,12 +81,8 @@ Normalized => True.]}
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function IPrefix_Call_S],
-Old=[function Is_Prefix_Call_Supported]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - GG}}]}
+@LabeledDeletedClause{Version=[2],Name=[function Is_Prefix_Call_Supported (perms)]}
+
 @begin{DescribeCode}
 @begin{Example}
 @ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Prefix_Call_Supported} @key[return] Boolean;]}
@@ -113,12 +93,8 @@ ability to determine whether calls are in prefix form.]}
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function FuncC_Param_Norm],
-Old=[function Function_Call_Parameters_Normalized]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - GG}}]}
+@LabeledDeletedClause{Version=[2],Name=[function Function_Call_Parameters_Normalized (perms)]}
+
 @begin{DescribeCode}
 @begin{Example}
 @ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Function_Call_Parameters_Normalized} @key[return] Boolean;]}
@@ -134,12 +110,8 @@ query Function_Call_Parameters will always behave as if called with Normalized
 @end{DescribeCode}
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function Call_St_Param_Norm],
-Old=[function Call_Statement_Parameters_Normalized]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - GG}}]}
+@LabeledDeletedClause{Version=[2],Name=[function Call_Statement_Parameters_Normalized (perms)]}
+
 @begin{DescribeCode}
 @begin{Example}
 @ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Call_Statement_Parameters_Normalized} @key[return] Boolean;]}
@@ -164,12 +136,8 @@ the query Subtype_Constraint.]}
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function Disc_Asc_Norm],
-Old=[function Discriminant_Associations_Normalized]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - GG}}]}
+@LabeledDeletedClause{Version=[2],Name=[function Discriminant_Associations_Normalized (perms)]}
+
 @begin{DescribeCode}
 @begin{Example}
 @ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Discriminant_Associations_Normalized} @key[return] Boolean;]}
@@ -186,12 +154,8 @@ query Discriminant_Associations will always behave as if called with Normalized
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function ILine_NumS],
-Old=[function Is_Line_Number_Supported]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - GG}}]}
+@LabeledDeletedClause{Version=[2],Name=[function Is_Line_Number_Supported (perms)]}
+
 @begin{DescribeCode}
 @begin{Example}
 @ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Line_Number_Supported} @key[return] Boolean;]}
@@ -205,12 +169,8 @@ number values in which case this function returns False.]}
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function ISCol_PosS],
-Old=[function Is_Span_Column_Position_Supported]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - GG}}]}
+@LabeledDeletedClause{Version=[2],Name=[function Is_Span_Column_Position_Supported (perms)]}
+
 @begin{DescribeCode}
 @begin{Example}
 @ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Span_Column_Position_Supported} @key[return] Boolean;]}
@@ -225,12 +185,8 @@ False. This function will be False if Is_Line_Number_Supported = False.]}
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function ICommS],
-Old=[function Is_Commentary_Supported]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - GG}}]}
+@LabeledDeletedClause{Version=[2],Name=[function Is_Commentary_Supported (perms)]}
+
 @begin{DescribeCode}
 @begin{Example}
 @ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Commentary_Supported} @key[return] Boolean;]}
@@ -250,8 +206,11 @@ in the text in which case the function Is_Commentary_Supported returns False.]}
 @key[function] @AdaSubDefn{Attributes_Are_Supported} @key[return] Boolean;
 @end{Example}
 
-Returns True if an implementation supports compilation unit attributes.
-Returns False if all attributes will return Has_Attribute() = False.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns True if an implementation supports compilation unit
+attributes@Chg{Version=[2],New=[; otherwise, returns],Old=[. Returns]} False if
+@Chg{Version=[2],New=[(],Old=[]}all attributes will return Has_Attribute() =
+False@Chg{Version=[2],New=[)],Old=[]}.
 @end{DescribeCode}
 
 
@@ -262,19 +221,16 @@ Returns False if all attributes will return Has_Attribute() = False.
 @key[function] @AdaSubDefn{Implicit_Components_Supported} @key[return] Boolean;
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Returns True if the implementation provides elements representing
-implicit implementation-defined record components.
+implicit implementation-defined record components@Chg{Version=[2],New=[, and
+returns False otherwise],Old=[]}.
 @end{DescribeCode}
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@LabeledRevisedClause{Version=[2],New=[obsolete function Obj_Dec_Norm],
-Old=[function Object_Declarations_Normalized]}
+@LabeledDeletedClause{Version=[2],Name=[function Object_Declarations_Normalized (perms)]}
 
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - GG}}]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Object_Declarations_Normalized} @key[return] Boolean;]}
@@ -291,15 +247,15 @@ multiple object declarations to an equivalent sequence of single declarations.]}
 @key[function] @AdaSubDefn{Predefined_Operations_Supported} @key[return] Boolean;
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Returns True if the implementation supports queries of predefined
-operations.
+operations@Chg{Version=[2],New=[, and
+returns False otherwise],Old=[]}.
 @end{DescribeCode}
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@Chg{Version=[2],New=[],Old=[obsolete function Inherited_Declarations_Supported]}
-@ChgNote{This clause header was removed as there are no remaining clauses
-after it. - RLB}
+@LabeledDeletedClause{Version=[2],Name=[function Inherited_Declarations_Supported (perms)]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -311,9 +267,7 @@ queries of inherited declarations.]}
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@Chg{Version=[2],New=[],Old=[obsolete function Inherited_Subprograms_Supported]}
-@ChgNote{This clause header was removed as there are no remaining clauses
-after it. - RLB}
+@LabeledDeletedClause{Version=[2],Name=[function Inherited_Subprograms_Supported (perms)]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -325,9 +279,8 @@ queries of inherited subprograms.]}
 
 
 @ChgNote{SI99-0025-1 remove subprogram}
-@Chg{Version=[2],New=[],Old=[obsolete function Generic_Macro_Expansion_Supported]}
-@ChgNote{This clause header was removed as there are no remaining clauses
-after it. - RLB}
+@LabeledDeletedClause{Version=[2],Name=[function Generic_Macro_Expansion_Supported (perms)]}
+
 @begin{DescribeCode}
 @begin{Example}
 @ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Generic_Macro_Expansion_Supported} @key[return] Boolean;]}

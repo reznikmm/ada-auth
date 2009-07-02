@@ -1,6 +1,6 @@
 @Part(general, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.18 $ $Date: 2009/05/09 06:28:47 $}
+@comment{$Revision: 1.19 $ $Date: 2009/05/16 03:55:40 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -55,8 +55,9 @@ the complexities of an Ada environment's proprietary internal representation.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Examples of tools that benefit from the ASIS interface include: automated code
-monitors, browsers, call tree tools, code reformators, coding standards
-compliance tools, correctness verifiers,
+monitors, browsers, call tree tools, code
+@Chg{Version=[2],New=[reformatters],Old=[reformators]},
+coding standards compliance tools, correctness verifiers,
 @Chg{Version=[2],New=[],Old=[debuggers, ]}dependency tree analysis
 tools, design tools, document generators, metrics tools, quality assessment
 tools, reverse engineering tools, re-engineering tools, safety and security
@@ -505,12 +506,6 @@ Implementation Using Extensions.@Defn2{Term=[Fully conforming ASIS application],
 
 
 @LabeledDeletedSubClause{Version=[2],Name=[Implementation permissions]}
-@Comment{@LabeledRevisedSubClause{Version=[2],New=[obsolete clause Impl Perms],
-Old=[Implementation permissions]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - RLB}}]}}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
 @ChgDeleted{Version=[2],Text=[The ASIS Application Program Interface (API) may be implemented through a

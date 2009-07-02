@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/concepts.mss,v $}
-@comment{$Revision: 1.10 $ $Date: 2009/05/12 06:23:26 $}
+@comment{$Revision: 1.11 $ $Date: 2009/05/16 03:55:40 $}
 
 
 @LabeledSection{ASIS technical concepts}
@@ -307,9 +307,9 @@ as the @Chg{Version=[2],New=[Object_Declaration_Subtype],Old=[Object_Declaration
 and Initialization_Expression functions above.
 Since the kind of element that is returned for each of these functions is
 already known, processing can continue directly with the functions in the
-Asis.Definitions package (Clause @RefSecNum{package Asis.Definitions})
+Asis.Definitions package (Section @RefSecNum{package Asis.Definitions})
 that accept @Chg{Version=[2],New=[A_Subtype_Indication],Old=[A_Type_Definition]}
-elements or the Asis.Expressions package (Clause @RefSecNum{package Asis.Expressions}) that
+elements or the Asis.Expressions package (Section @RefSecNum{package Asis.Expressions}) that
 accept An_Expression elements.
 The exception ASIS_Inappropriate_Element is raised whenever an ASIS function is
 passed an element it is not intended to process. Parameter names and subtype
@@ -406,11 +406,11 @@ the declaration.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 References from one part of an Ada program to another can be traversed with
 functions whose name begins with @ldquote@;Corresponding_@rdquote@;, such as:
-Corresponding_Children, Corresponding_Declaration, Corresponding_Body,
-@Chg{Version=[2],New=[Corresponding_Expression_Type, ],Old=[]}Corresponding_Type_Declaration,
-Corresponding_Type, Corresponding_Body_Stub,
-Corresponding_Name_Definition, Corresponding_Name_Declaration,
-Corresponding_Loop_Exited, Corresponding_Entry, etc. If an element references
+Corresponding_@!Children, Corresponding_@!Declaration, Corresponding_Body,
+@Chg{Version=[2],New=[Corresponding_@!Expression_Type, ],Old=[]}Corresponding_@!Type_Declaration,
+Corresponding_Type, Corresponding_@!Body_Stub,
+Corresponding_@!Name_Definition, Corresponding_@!Name_Declaration,
+Corresponding_@!Loop_Exited, Corresponding_@!Entry, etc. If an element references
 another element, the user can traverse to the referenced element with
 @Chg{Version=[2],New=[such a],Old=[this]} function. A Nil_Element is returned if
 no definition traversal is possible.
@@ -421,8 +421,8 @@ Corresponding_Name_Definition. This function traverses from a Name
 to the corresponding defining name, represented by an element of kind
 A_Defining_Name. From this point a traversal using the Enclosing_Element
 function can be used to arrive at the declaration of the corresponding program
-entity. Corresponding_Name_Declaration combines these two traversals into a
-single operation. Corresponding_Expression_Type traverses from an Expression to
+entity. Corresponding_@!Name_Declaration combines these two traversals into a
+single operation. Corresponding_@!Expression_Type traverses from an Expression to
 the declaration of its type.],Old=[A slightly more precise statement of the
 operation of this function is that identifier references point to identifier
 definitions. Traversal arrives at the identifier definition where the
@@ -475,7 +475,7 @@ tool requiring information from it. Valuable semantic and syntactic information
 is made available via queries through child packages of package ASIS.
 
 @leading@;Package Asis contains common types and subtypes used for the ASIS
-interface and its child packages. Important common types include (see Clause
+interface and its child packages. Important common types include (see Section
 @RefSecNum{package ASIS}):
 @begin{Itemize}
 Type Context@Defn{Context} helps identify the compilation units considered to
@@ -526,33 +526,33 @@ If an Ada implementation supports the notion of a program library or
 @Chg{Version=[2],New=[Standard],Old=[Reference Manual]}, then an ASIS Context
 value can be mapped onto one or more implementor libraries represented by
 Containers. More than one context may be manipulated at a time. Important
-interfaces include: Associate, Dissociate, Open, and Close (see Clause
+interfaces include: Associate, Dissociate, Open, and Close (see Section
 @RefSecNum{package Asis.Ada_Environments}). The type Container and its
 supporting functions are provided in the child package
-@b{Asis.Ada_Environments.Containers} (see Clause
+@b{Asis.Ada_Environments.Containers} (see Section
 @RefSecNum{package Asis.Ada_Environments.Containers}).
 
 @b{Asis.Implementation}@Defn{Implementation} @en This child package provides operations to
 initialize and finalize the ASIS interface. It also provides queries for the
-error status of the ASIS implementation (see Clause
+error status of the ASIS implementation (see Section
 @RefSecNum{package Asis.Implementation}). Its child package
 @b{Asis.Implementation.Permissions} provides queries to determine options used
-by an implementation (see Clause
+by an implementation (see Section
 @RefSecNum{package Asis.Implementation.Permissions}).
 
 @b{Asis.Compilation_Units}@Defn{Compilation_Units} @en This child package
 encapsulates a set of queries that implement the ASIS Compilation_Unit
 abstraction. It defines queries that deal with Compilation_Units and the gateway
 queries between Compilation_Units, Elements, and Ada_Environments. More than one
-compilation unit may be manipulated at one time (see Clause
+compilation unit may be manipulated at one time (see Section
 @RefSecNum{package Asis.Compilation_Units}). The child package
 @b{Asis.Compilation_Units.Times}@Defn{Compilation_Units.Times} encapsulates the
 time related functions used within ASIS (see
-Clause @RefSecNum{package Asis.Compilation_Units.Times}). A second child
+Section @RefSecNum{package Asis.Compilation_Units.Times}). A second child
 package, @b{Asis.Compilation_Units.Relations}@Defn{Compilation_Units.Relations}
 encapsulates the semantic relationship concepts used in ASIS. Relation queries
 provide references to compilation units that are related, in some specific
-fashion, to one or more given compilation units (see Clause
+fashion, to one or more given compilation units (see Section
 @RefSecNum{package Asis.Compilation_Units.Relations}).
 
 @b{Asis.Iterator}@Defn{Iterator} @en This child package encapsulates the Traverse_Element
@@ -560,7 +560,7 @@ mechanism to perform an iterative traversal of a logical syntax tree. During
 the traversal, ASIS can analyze the various elements present and provide
 application processing via generic procedures instantiated by the application
 using queries to decompose ASIS elements into the logical semantic tree of the
-Ada program (see Clause @RefSecNum{package Asis.Iterator}). This key mechanism
+Ada program (see Section @RefSecNum{package Asis.Iterator}). This key mechanism
 is the heart of most ASIS tools; examples of its use are provided in
 @RefSecNum{Asis Application Examples}.
 
@@ -577,54 +577,54 @@ are grouped. Element_Kinds are: Not_An_Element, A_Pragma, A_Defining_Name,
 A_Declaration, A_Definition, An_Expression, An_Association, A_Statement, A_Path,
 A_Clause, and An_Exception_Handler. Elements in each of the Element_Kinds
 classes, with the exception of An_Exception_Handler, can be further classified
-by a subordinate kind at the next level in the hierarchy (see Clause
+by a subordinate kind at the next level in the hierarchy (see Section
 @RefSecNum{package Asis.Elements}).
 
 @b{Asis.Clauses}@Defn{Clauses} @en This child package encapsulates a set of
 queries that operate on the A_Clause element (see
-Clause @RefSecNum{package Asis.Clauses}).
+Section @RefSecNum{package Asis.Clauses}).
 
 @b{Asis.Declarations}@Defn{Declarations} @en This child package encapsulates a
 set of queries that operate on A_Defining_Name and A_Declaration elements (see
-Clause @RefSecNum{package Asis.Declarations}).
+Section @RefSecNum{package Asis.Declarations}).
 
 @b{Asis.Definitions}@Defn{Definitions} @en This child package encapsulates a set
 of queries that operate on A_Definition elements (see
-Clause @RefSecNum{package Asis.Definitions}).
+Section @RefSecNum{package Asis.Definitions}).
 
 @b{Asis.Expressions}@Defn{Expressions} @en This child package encapsulates a set
-of queries that operate on An_Expression and An_Association elements (see Clause
+of queries that operate on An_Expression and An_Association elements (see Section
 @RefSecNum{package Asis.Expressions}).
 
 @b{Asis.Statements}@Defn{Statements} @en This child package encapsulates a set
 of queries that operate on A_Statement, A_Path, and An_Exception_Handler
-elements (see Clause @RefSecNum{package Asis.Statements}).
+elements (see Section @RefSecNum{package Asis.Statements}).
 
 @b{Asis.Text}@Defn{Text} @en This child package encapsulates a set of operations
 to access the text of ASIS Elements. This text is represented as logical
 @i{lines} from the source code of the external representation of a compilation
-unit. Type Line is defined to support program text operations (see Clause
+unit. Type Line is defined to support program text operations (see Section
 @RefSecNum{package Asis.Text}). It assumes no knowledge of the existence,
 location, or form of the program text.
 
 @b{Asis.Errors}@Defn{Errors} @en This child package provides an enumeration type
-identifying the error kinds used for the ASIS interface (see Clause
+identifying the error kinds used for the ASIS interface (see Section
 @RefSecNum{package Asis.Errors}).
 
 @b{Asis.Exceptions}@Defn{Exceptions} @en This child package identifies all
-defined ASIS exceptions (see Clause @RefSecNum{package Asis.Exceptions}).
+defined ASIS exceptions (see Section @RefSecNum{package Asis.Exceptions}).
 
 @b{Asis.Ids}@Defn{Ids} @en This child package encapsulates a set of operations
 and queries that implement the ASIS Id abstraction. An Id is a way to identify a
 particular element (i.e., a unique reference to an Element) which is efficient
-and persistent as long as the environment is not recompiled (see Clause
+and persistent as long as the environment is not recompiled (see Section
 @RefSecNum{package Asis.Ids}).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
 @b{Asis.Data_Decomposition}@Defn{Data_Decomposition} @en This optional child
 package encapsulates a set
 of operations to decompose data values using the ASIS type information and a
-portable data stream, representing a data value of that type (see Clause
+portable data stream, representing a data value of that type (see Section
 @RefSecNum{package Asis.Data_Decomposition (optional)}).@Chg{Version=[2],New=[],
 Old=[Its child package
 @b{Asis.Data_Decomposition.Portable_Transfer} provides support for logging and
@@ -633,7 +633,7 @@ Asis.Data_Decomposition.Portable_Transfer include:
 Portable_Constrained_Subtype, Portable_Unconstrained_Record_Type,
 Portable_Array_Type_1 (for one dimensional arrays), Portable_Array_Type_2 (for
 two dimensional arrays), and Portable_Array_Type_3 (for three dimensional
-arrays) (see Clause
+arrays) (see Section
 @RefSecNum{Obsolescent package Asis.Data_Decomposition.Portable_Transfer}).]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
@@ -641,7 +641,8 @@ arrays) (see Clause
 provides the basis of the semantic subsystem. A view represents a semantic
 entity in an Ada program, whether or not the entity has a syntactic
 representation. This package
-includes mechanisms for finding the associated element (if any).]}
+includes mechanisms for finding the associated element (if any). (see Section
+@RefSecNum{ASIS Semantic Subsystem}).]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Text=[@b{Asis.Declarations.Views}@Defn{Declarations.Views}

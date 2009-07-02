@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.16 $ $Date: 2009/05/09 06:28:46 $}
+@comment{$Revision: 1.17 $ $Date: 2009/05/16 03:55:40 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -374,12 +374,7 @@ artificial declarations for implicitly declared elements.]}
 @end{ImplPerm}
 
 
-@LabeledRevisedClause{Version=[2],New=[obsolete function Corr_Parent_Subtype],
-Old=[function Corresponding_Parent_Subtype]}
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - RLB}}]}
+@LabeledDeletedClause{Version=[2],Name=[function Corresponding_Parent_Subtype (defn)]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1068,12 +1063,7 @@ A_Subtype_Indication
 
 
 @ChgNote{SI99-0004-1 added new section}
-@Comment{@LabeledAddedClause{Version=[2],Name=[function Anonymous_Access_To_Object_Subtype_Mark]}}
-@LabeledAddedSubClause{Version=[2],Name=[function Anonymous_Access_To_Object_Subtype_Mark]}
-@begin{Discussion}
-@ChgAdded{Version=[2],Text=[Can't use a real clause for now, as that would
-change all of the following clause numbers, so this is a subclause temporarily.]}
-@end{Discussion}
+@LabeledAddedClause{Version=[2],Name=[function Anonymous_Access_To_Object_Subtype_Mark]}
 
 @begin{DescribeCode}
 @begin{Example}

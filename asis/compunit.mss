@@ -1,6 +1,6 @@
 @Part(compunit, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/compunit.mss,v $}
-@comment{$Revision: 1.13 $ $Date: 2009/05/09 06:28:46 $}
+@comment{$Revision: 1.14 $ $Date: 2009/05/16 03:55:40 $}
 
 
 @LabeledSection{package Asis.Compilation_Units}
@@ -20,7 +20,7 @@ More than one compilation unit may be manipulated at one time. (The exact
 number is subject to implementation specific limitations.)
 
 A specific Compilation_Unit value is valid (usable) for as long as the ASIS
-Context variable, used to create it, remains open. Once an ASIS Context is
+Context variable used to create it remains open. Once an ASIS Context is
 closed, all associated Compilation_Unit values become invalid. It is
 erroneous to use an invalid Compilation_Unit value.
 
@@ -33,7 +33,7 @@ erroneous to use an invalid Compilation_Unit value.
            @key[return] Asis.Unit_Kinds;
 @end{Example}
 
-Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[- Specifies]} the
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
 compilation unit to query.
 
 Returns the Unit_Kinds value of the compilation unit.
@@ -136,10 +136,12 @@ Returns the Context containing the compilation unit.
 Compilation units always remember the ASIS Context and Container from
 which they were obtained.
 
-Because Context is limited private, this function is only intended to be
-used to supply a Context parameter for other queries. This conveniently
-eliminates the need to make the original Context visible at the place of
-each call where a Context parameter is required.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[],Old=[Because Context is limited private, this function
+is only intended to be used to supply a Context parameter for other
+queries. ]}This @Chg{Version=[2],New=[function can be used to
+eliminate],Old=[conveniently eliminates]} the need to make the original Context
+visible at the place of each call where a Context parameter is required.
 
 Two Compilation_Unit values, that represent the same physical compilation
 units (same Ada implementor Context implementation unit value) will test as
@@ -160,7 +162,7 @@ a Status of Value_Error]} if the unit is a Nil_Compilation_Unit.
            @key[return] Asis.Ada_Environments.Containers.Container;
 @end{Example}
 
-Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the unit whose Container is required..
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the unit whose Container is required.
 
 Returns the Container of the Context containing the compilation unit.
 Compilation units always remember the ASIS Context and Container from
@@ -185,19 +187,26 @@ a Status of Value_Error]} if the unit is a Nil_Compilation_Unit.
 Name @Chg{Version=[1],New=[specifies],Old=[       @en Specifies]} the defining program unit name.
 The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Returns the library_unit_declaration or library_unit_renaming_declaration
-with the name, contained in The_Context.
+with the @Chg{Version=[2],New=[specified Name],Old=[name]}, contained in
+The_Context.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 This query will never return a unit with A_Configuration_Compilation or
 a nonexistent unit kind. It will never return a unit with A_Procedure_Body or
 A_Function_Body unit kind even though the unit is interpreted as both the
-declaration and body of a library procedure or library function. (Reference
-Manual 10.1.4(4).
+declaration and body of a library procedure or library function.
+(@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.4(4).)
 
 A Nil_Compilation_Unit is returned if no such declaration exists.
 
 Any non-Nil result will have an Enclosing_Context value that Is_Identical
 to the Context. Never returns a unit with a nonexistent unit kind.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context with a Status of
+Value_Error if The_Context is not open.]}
 @end{DescribeCode}
 
 
@@ -210,8 +219,8 @@ to the Context. Never returns a unit with a nonexistent unit kind.
                                 @key[return] Asis.Compilation_Unit;
 @end{Example}
 
-Name @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} the defining_program_unit_name
-The_Context@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
+Name @Chg{Version=[1],New=[specifies],Old=[       @en Specifies]} the defining_program_unit_name.
+The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment.
 
 Returns the library_unit_body or subunit with the name, contained
 in the library.
@@ -220,6 +229,10 @@ A Nil_Compilation_Unit is returned if no such body exists.
 
 Any non-Nil result will have an Enclosing_Context value that Is_Identical
 to The_Context. Never returns a unit with a nonexistent unit kind.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context with a Status of
+Value_Error if The_Context is not open.]}
 @end{DescribeCode}
 
 
@@ -231,7 +244,7 @@ to The_Context. Never returns a unit with a nonexistent unit kind.
                                    @key[return] Asis.Compilation_Unit_List;
 @end{Example}
 
-The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
+The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment.
 
 Returns a list of all library_unit_declaration and
 library_unit_renaming_declaration elements contained in The_Context. Individual
@@ -240,14 +253,19 @@ units will appear only once in an order that is not defined.
 A Nil_Compilation_Unit_List is returned if there are no declarations of
 library units within The_Context.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 This query will never return a unit with A_Configuration_Compilation or
 a nonexistent unit kind. It will never return a unit with A_Procedure_Body or
 A_Function_Body unit kind even though the unit is interpreted as both the
-declaration and body of a library procedure or library function. (Reference
-Manual 10.1.4(4).
+declaration and body of a library procedure or library function.
+(@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.4(4).)
 
 All units in the result will have an Enclosing_Context value that
 Is_Identical to The_Context.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context with a Status of
+Value_Error if The_Context is not open.]}
 @end{DescribeCode}
 
 
@@ -259,7 +277,7 @@ Is_Identical to The_Context.
                                  @key[return] Asis.Compilation_Unit_List;
 @end{Example}
 
-The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
+The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment.
 
 Returns a list of all library_unit_body and subunit elements contained in
 The_Context. Individual units will appear only once in an order that is not
@@ -273,6 +291,10 @@ a nonexistent unit kind.
 
 All units in the result will have an Enclosing_Context value that
 Is_Identical to The_Context.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context with a Status of
+Value_Error if The_Context is not open.]}
 @end{DescribeCode}
 
 
@@ -284,7 +306,7 @@ Is_Identical to The_Context.
                            @key[return] Asis.Compilation_Unit_List;
 @end{Example}
 
-The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
+The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment.
 
 Returns a list of all compilation units contained in The_Context.
 Individual units will appear only once in an order that is not defined.
@@ -297,6 +319,10 @@ a nonexistent unit kind.
 
 All units in the result will have an Enclosing_Context value that
 Is_Identical to The_Context.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context with a Status of
+Value_Error if The_Context is not open.]}
 @end{DescribeCode}
 
 
@@ -330,8 +356,8 @@ do not have any child units contained in The_Context.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0046-1]}
 @ChgAdded{Version=[2],Text=[If The_Context specifies a context that is different
-from the Enclosing_Context(Library_Unit), returns a list of child units for the
-parent library unit that Is_Equal to Library_Unit in The_Context. If no such
+from the Enclosing_Context(Library_Unit), returns a list of the child units for
+the parent library unit that Is_Equal to Library_Unit in The_Context. If no such
 parent library unit exists in The_Context, returns a
 Nil_Compilation_Unit_List.]}
 
@@ -367,6 +393,10 @@ A_Package_Instance
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Compilation_Unit with a Status
 of Value_Error for any unit that does not have one of these expected
 kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context with a Status of
+Value_Error if The_Context is provided and is not open.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of units that
@@ -481,6 +511,10 @@ A_Package_Body
 of Value_Error for any unit that does not have one of these expected
 kinds.]}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context with a Status of
+Value_Error if The_Context is provided and is not open.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a unit with
 one of the following],Old=[]} Unit_Kinds:
@@ -541,20 +575,43 @@ declaration for the library unit body in The_Context that Is_Equal to
 Library_Item. If no such library unit body exists in The_Context, returns a
 Nil_Compilation_Unit.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Library_Item expects a unit
-that has one of the following],Old=[Appropriate]} Unit_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[These two function calls will always
+produce identical results:]}
+
+@begin{ChildExample}
+@ChgAdded{Version=[2],Text=[Unit := Corresponding_Declaration (Unit);
+Unit := Corresponding_Declaration (Unit, Enclosing_Context (Unit));]}
+@end{ChildExample}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0046-1],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[The Enclosing_Context for any non-Nil result
+will always be Is_Identical to The_Context,
+regardless of the Enclosing_Context value for the Library_Item
+argument. This query is one means of obtaining corresponding
+(Is_Equal) units from separate ASIS Context values whose underlying
+implementations overlap.]}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[Appropriate Unit_Kinds:]}
 @begin{Display}
-A_Procedure_Body
+@ChgDeleted{Version=[2],Text=[A_Procedure_Body
 A_Function_Body
 A_Package_Body
-An_Unknown_Unit            -- @examcom{See @ImplPermTitle}
+An_Unknown_Unit            -- @examcom{See @ImplPermTitle}]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Library_Item expects a unit of any Unit_Kinds
+except Not_A_Unit.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Compilation_Unit with a Status
-of Value_Error for any unit that does not have one of these expected
-kinds.]}
+of Value_Error if Library_Item has Unit_Kinds Not_A_Unit.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context with a Status of
+Value_Error if The_Context is provided and is not open.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Returns a unit
@@ -601,19 +658,22 @@ A_Public_Declaration_And_Body kind.)
 @ChgDeleted{Version=[2],Text=[Any non-Nil result will have an Enclosing_Context
 value that Is_Identical to The_Context.]}
 
-@leading@;These two function calls will always produce identical results:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[These two function calls will always
+produce identical results:]}
+
 @begin{ChildExample}
-Unit := Corresponding_Declaration (Unit);
-Unit := Corresponding_Declaration (Unit, Enclosing_Context (Unit));
+@ChgDeleted{Version=[2],Text=[Unit := Corresponding_Declaration (Unit);
+Unit := Corresponding_Declaration (Unit, Enclosing_Context (Unit));]}
 @end{ChildExample}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0046-1]}
-The Enclosing_Context for any non-Nil result will always be
-@Chg{Version=[2],New=[Is_Identical to ],Old=[]}The_Context,
-regardless of the Enclosing_Context value for the Library_Item
-argument. This query is one means of obtaining corresponding
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[The Enclosing_Context for any non-Nil result will
+always be The_Context, regardless of the Enclosing_Context value for the
+Library_Item argument. This query is one means of obtaining corresponding
 (Is_Equal) units from separate ASIS Context values whose underlying
-implementations overlap.
+implementations overlap.]}
 @end{ImplReq}
 
 @begin{ImplPerm}
@@ -640,8 +700,8 @@ return the An_Unknown_Unit argument in all cases.
             @key[return] Asis.Compilation_Unit;
 @end{Example}
 
-Library_Item@Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the library_item whose body is desired
-The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment
+Library_Item @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the library_item whose body is desired.
+The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Context environment.
 
 Returns the corresponding library_unit_body, if any, for the
 library_unit_declaration. The corresponding library_unit_body is the unit
@@ -650,7 +710,7 @@ that depends semantically on the library_unit_declaration.
 @leading@;Returns a unit that Is_Equal to the argument if:
 
 @begin{Itemize}
-the argument is a an instance of a library_unit_declaration,
+the argument is an instance of a library_unit_declaration,
 a library_unit_body, a library_unit_renaming_declaration, or a subunit.
 
 the argument is A_Nonexistent_Declaration or A_Nonexistent_Body.
@@ -670,23 +730,46 @@ body for the library unit in The_Context that Is_Equal to
 Library_Item. If no such library unit exists in The_Context, returns a
 Nil_Compilation_Unit.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Library_Item expects a unit
-that has one of the following],Old=[Appropriate]} Unit_Kinds:
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[These two function calls will always
+produce identical results:]}
+
+@begin{ChildExample}
+@ChgAdded{Version=[2],Text=[Unit := Corresponding_Body (Unit);
+Unit := Corresponding_Body (Unit, Enclosing_Context (Unit));]}
+@end{ChildExample}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0046-1],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[The Enclosing_Context for any non-Nil result will
+always be Is_Identical to The_Context, regardless of the Enclosing_Context value
+for the Library_Item argument. This query is one means of obtaining
+corresponding (Is_Equal) units from separate ASIS Context values whose
+underlying implementations overlap.]}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[Appropriate Unit_Kinds:]}
 @begin{Display}
-A_Procedure
+@ChgDeleted{Version=[2],Text=[A_Procedure
 A_Function
 A_Package
 A_Generic_Procedure
 A_Generic_Function
 A_Generic_Package
-An_Unknown_Unit            -- @examcom{See @ImplPermTitle}
+An_Unknown_Unit            -- @examcom{See @ImplPermTitle}]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Library_Item expects a unit of any Unit_Kinds
+except Not_A_Unit.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Compilation_Unit with a Status
-of Value_Error for any unit that does not have one of these expected
-kinds.]}
+of Value_Error if Library_Item has Unit_Kinds Not_A_Unit.]}
+
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context with a Status of
+Value_Error if The_Context is provided and is not open.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Returns a unit
@@ -730,19 +813,21 @@ be returned.
 @ChgDeleted{Version=[2],Text=[Any non-Nil result will have an Enclosing_Context
 value that Is_Identical to The_Context.]}
 
-@leading@;These two function calls will always produce identical results:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Text=[These two function calls will always
+produce identical results:]}
+
 @begin{ChildExample}
-Unit := Corresponding_Body (Unit);
-Unit := Corresponding_Body (Unit, Enclosing_Context (Unit));
+@ChgDeleted{Version=[2],Text=[Unit := Corresponding_Body (Unit);
+Unit := Corresponding_Body (Unit, Enclosing_Context (Unit));]}
 @end{ChildExample}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0046-1]}
-The Enclosing_Context for any non-Nil result will always be
-@Chg{Version=[2],New=[Is_Identical to ],Old=[]}The_Context,
-regardless of the Enclosing_Context value for the Library_Item
-argument. This query is one means of obtaining corresponding
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[The Enclosing_Context for any non-Nil result will
+always be The_Context, regardless of the Enclosing_Context value for the
+Library_Item argument. This query is one means of obtaining corresponding
 (Is_Equal) units from separate ASIS Context values whose underlying
-implementations overlap.
+implementations overlap.]}
 @end{ImplReq}
 
 @begin{ImplPerm}
@@ -765,7 +850,11 @@ An_Unknown_Unit argument in all cases.
 
 Right @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to test.
 
-Returns True if the compilation_unit is a Nil_Compilation_Unit.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns True if the compilation_unit is a
+Nil_Compilation_Unit@Chg{Version=[2],New=[, and returns False
+otherwise],Old=[]}.
+
 @end{DescribeCode}
 
 
@@ -779,7 +868,9 @@ Returns True if the compilation_unit is a Nil_Compilation_Unit.
 
 Right @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit list to test.
 
-Returns True if the compilation_unit list has a length of zero.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns True if the compilation_unit list has a length of
+zero@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
 @end{DescribeCode}
 
 
@@ -794,9 +885,10 @@ Returns True if the compilation_unit list has a length of zero.
 Left @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the first unit to compare.
 Right @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the second unit to compare.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0037-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0037-1],ARef=[SI99-0047-1]}
 Returns True if Left and Right represent the same physical compilation unit
-or if both are Nil_Compilation_Unit values. The two units may or may not
+or if both are Nil_Compilation_Unit values@Chg{Version=[2],New=[, and returns
+False otherwise],Old=[]}. The two units may or may not
 be from the same ASIS Context variable. (@Chg{Version=[2],New=[],Old=[@ldquote]}The
 @Chg{Version=[2],New=[@i<same physical compilation unit> has],Old=[same
 physical compilation unit have]} the same version, as defined
@@ -819,10 +911,10 @@ Two nonexistent units are Is_Equal if they have the same Name and Unit_Kind.
 Left @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the first unit to compare.
 Right @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the second unit to compare.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0037-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0037-1],ARef=[SI99-0047-1]}
 Returns True if Left and Right represent the same physical compilation
-unit, from the same open ASIS Context variable, or, if both are
-Nil_Compilation_Unit values.@Chg{Version=[2],New=[],Old=[ (@ldquote@;The same physical compilation
+unit from the same open ASIS Context variable or if both are
+Nil_Compilation_Unit values@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.@Chg{Version=[2],New=[],Old=[ (@ldquote@;The same physical compilation
 unit@rdquote@; have the same version, as defined
 by @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} E.3(5)
 and the same program text.)]}
@@ -868,7 +960,7 @@ Old=[All Unit_Kinds are expected]}.
      (Compilation_Unit : @key[in] Asis.Compilation_Unit) @key[return] Wide_String;
 @end{Example}
 
-Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the unit
+Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the unit.
 whose name is desired.
 
 Returns a string that uniquely identifies the given compilation unit
@@ -1096,8 +1188,11 @@ Specifies]} the name of the attribute to query.
 
 Returns True if the compilation unit has the given attribute.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Returns False if the unit is a Nil_Compilation_Unit argument, the
-Attribute does not exist, or the implementation does not support attributes.
+@Chg{Version=[2],New=[unit does not have the
+given ],Old=[]}Attribute@Chg{Version=[2],New=[],Old=[ does not exist]}, or the
+implementation does not support attributes.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
@@ -1196,6 +1291,10 @@ Raises ASIS_Inappropriate_Compilation_Unit @ChgAdded{Version=[2],Text=[with
 a Status of Value_Error]} if the unit
 @Chg{Version=[2],New=[Parent_Body ],Old=[]}is a Nil_Compilation_Unit.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context with a Status of
+Value_Error if The_Context is provided and is not open.]}
+
 If a subunit is absent or if it is inconsistent with the argument Element,
 A_Nonexistent_Body shall be returned for it.
 
@@ -1220,12 +1319,12 @@ A_Protected_Body_Subunit
 @key[function] @AdaSubDefn{Corresponding_Subunit_Parent_Body}
            (Subunit : @key[in] Asis.Compilation_Unit)
             @key[return] Asis.Compilation_Unit;
-@end{Example}
 
 @key[function] @AdaSubDefn{Corresponding_Subunit_Parent_Body}
            (Subunit     : @key[in] Asis.Compilation_Unit;
             The_Context : @key[in] Asis.Context)
             @key[return] Asis.Compilation_Unit;
+@end{Example}
 
 Subunit @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} the subunit
 to query. The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
@@ -1261,6 +1360,10 @@ A_Protected_Body_Subunit
 of Value_Error for any unit that does not have one of these expected
 kinds.]}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context with a Status of
+Value_Error if The_Context is provided and is not open.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a unit that has
 one of the following],Old=[]} Unit_Kinds:
@@ -1282,6 +1385,7 @@ To locate the parent of a subunit that is not itself a subunit,
 repeatedly call Corresponding_Subunit_Parent_Body until a unit that
 is not a subunit is returned.
 @end{DescribeCode}
+
 
 
 @LabeledClause{function Debug_Image (unit)}

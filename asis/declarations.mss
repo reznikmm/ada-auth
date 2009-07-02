@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.18 $ $Date: 2009/05/09 06:28:46 $}
+@comment{$Revision: 1.19 $ $Date: 2009/05/16 03:55:40 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -700,12 +700,7 @@ A_Pragma
 @end{DescribeCode}
 
 
-@LabeledRevisedClause{Version=[2],New=[obsolete function DSM],Old=[function Declaration_Subtype_Mark]}
-
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - RLB}}]}
+@LabeledDeletedClause{Version=[2],Name=[function Declaration_Subtype_Mark (decls)]}
 
 @begin{ElementRef}
 A_Deferred_Constant_Declaration @em 3.3.1
@@ -1458,7 +1453,7 @@ A_Pragma
 @end{DescribeCode}
 
 
-@LabeledRevisedClause{Version=[2],New=[obsolesent function 1],Old=[function Body_Block_Statement]}
+@LabeledDeletedClause{Version=[2],Name=[function Body_Block_Statement (decls)]}
 
 @begin{ElementRef}
 A_Function_Body_Declaration @em 6.3
@@ -1475,11 +1470,6 @@ function Body_Exception_Handlers
 function Body_Block_Statement @em obsolescent, not recommended
 @end{Display}
 @end{ChildRef}
-
-@ChgAdded{Version=[2],Text=[@b{@i{This clause header is left for now;
-removing it now would change all of the clause numbers,
-and that would make a mess for editing and reference purposes. Ultimately,
-when the final standard is produced, it will be removed. - RLB}}]}
 
 @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[SI99-0027-1]}
 @ChgDeleted{Version=[2],Text=[Function Body_Block_Statement is a new query
@@ -2776,9 +2766,13 @@ A_Protected_Body_Declaration
 Declaration @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
 declaration to query.
 
-Returns True if the declaration is the proper_body of a subunit.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns True if the declaration is the proper_body of a subunit@Chg{Version=[2],
+New=[, and returns False otherwise (including if Declaration has an unexpected
+Declaration_Kinds)],Old=[]}.
 
-Returns False for any unexpected Element.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[Returns False for any unexpected Element.]}
 
 @leading@keepnext@;Equivalent to:
 @begin{ChildExample}

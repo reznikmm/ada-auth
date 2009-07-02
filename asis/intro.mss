@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/intro.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2009/05/12 06:23:26 $}
+@comment{$Revision: 1.6 $ $Date: 2009/05/16 03:55:40 $}
 
 @UnNumberedSection(Introduction)
 
@@ -19,11 +19,13 @@ proprietary internal representation.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Examples of tools that benefit from the ASIS interface include: automated code
-monitors, browsers, call tree tools, code reformators, coding standards
-compliance tools, correctness verifiers, @Chg{Version=[2],New=[],Old=[debuggers, ]}
-dependency tree analysis tools, design tools, document generators, metrics
-tools, quality assessment tools, reverse engineering tools, re-engineering
-tools, style checkers, test tools, timing estimators, and translators.
+monitors, browsers, call tree tools, code
+@Chg{Version=[2],New=[reformatters],Old=[reformators]},
+coding standards compliance tools, correctness verifiers,
+@Chg{Version=[2],New=[],Old=[debuggers, ]} dependency tree analysis tools,
+design tools, document generators, metrics tools, quality assessment tools,
+reverse engineering tools, re-engineering tools, style checkers, test tools,
+timing estimators, and translators.
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
 @ChgDeleted{Version=[2],Text=[The word "may" as used in this International

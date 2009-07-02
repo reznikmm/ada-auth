@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.21 $ $Date: 2009/05/12 06:23:26 $}
+@comment{$Revision: 1.22 $ $Date: 2009/05/16 03:55:40 $}
 
 @LabeledSection{package Asis}
 
@@ -206,6 +206,11 @@ Context shall be an undiscriminated limited private@Chg{Version=[2],New=[ type],
 Each ASIS implementation provides the means to construct an ASIS
 Context value that defines the environment declarative_part or
 "context" from which ASIS can obtain library units.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[A default-initialized context object is
+unassociated and not open (see @RefSecNum{procedure Open}). Nil_Context
+represents no context, and is unassociated and not open.]}
 @end{ImplReq}
 
 
@@ -222,9 +227,10 @@ Elements deal with the internal @Chg{Version=[2],New=[and then],Old=[or]}
 "textual" view of compilation units.
 
 @leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-Operations are provided that @Chg{Version=[2],New=[parse a],Old=[split an ASIS]}
-Compilation_Unit object into one Element and
-two @Chg{Version=[2],New=[Element_Lists],Old=[Element lists]}:
+Operations are provided that @Chg{Version=[2],New=[retrieve],Old=[split a
+Compilation_Unit object into]} one Element and
+two @Chg{Version=[2],New=[Element_Lists from an ASIS Compilation_Unit
+object],Old=[Element lists]}:
 
 @begin{Enumerate}
 A context clause represented by an Element_List containing
@@ -261,6 +267,9 @@ The ASIS Element type shall be an undiscriminated private type.
 
 @AdaObjDefn{Nil_Element_List} : @key[constant] Element_List;
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Type Element_List represents a list of elements.]}
 @end{DescribeCode}
 
 
@@ -296,6 +305,7 @@ The ASIS Element type shall be an undiscriminated private type.
     @key[subtype] @AdaSubtypeDefn{Name=[Discriminant_Specification_List],Of=[Element_List]} @key[is] Element_List;
     @key[subtype] @AdaSubtypeDefn{Name=[Defining_Name],Of=[Element]}                   @key[is] Element;
     @key[subtype] @AdaSubtypeDefn{Name=[Defining_Name_List],Of=[Element_List]}              @key[is] Element_List;]}
+
     @key[subtype] @AdaSubtypeDefn{Name=[Exception_Handler],Of=[Element]}               @key[is] Element;@Chg{Version=[2],New=[],Old=[
     @key[subtype] @AdaSubtypeDefn{Name=[Exception_Handler_List],Of=[Element_List]}          @key[is] Element_List;]}
     @key[subtype] @AdaSubtypeDefn{Name=[Expression],Of=[Element]}                      @key[is] Element;@Chg{Version=[2],New=[],Old=[
@@ -313,6 +323,7 @@ The ASIS Element type shall be an undiscriminated private type.
     @key[subtype] @AdaSubtypeDefn{Name=[Path_List],Of=[Element_List]}                       @key[is] Element_List;]}
     @key[subtype] @AdaSubtypeDefn{Name=[Pragma_Element],Of=[Element]}                  @key[is] Element;@Chg{Version=[2],New=[],Old=[
     @key[subtype] @AdaSubtypeDefn{Name=[Pragma_Element_List],Of=[Element_List]}             @key[is] Element_List;]}
+
     @key[subtype] @AdaSubtypeDefn{Name=[Range_Constraint],Of=[Element]}                @key[is] Element;
     @key[subtype] @AdaSubtypeDefn{Name=[Record_Component],Of=[Element]}                @key[is] Element;@Chg{Version=[2],New=[],Old=[
     @key[subtype] @AdaSubtypeDefn{Name=[Record_Component_List],Of=[Element_List]}           @key[is] Element_List;]}
@@ -1207,6 +1218,10 @@ the Ada Standard for each kind of range.]}
    @AdaObjDefn{A_Protected_Interface},            -- @examcom{3.9.4(2)}
    @AdaObjDefn{A_Synchronized_Interface});        -- @examcom{3.9.4(2)}]}
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The comments list a reference to the definition in
+the Ada Standard for each kind of interface.]}
 @end{DescribeCode}
 
 

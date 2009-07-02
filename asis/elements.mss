@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.17 $ $Date: 2009/05/12 06:23:26 $}
+@comment{$Revision: 1.18 $ $Date: 2009/05/16 03:55:40 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -986,12 +986,9 @@ An_Access_Type_Definition
 @ChgAdded{Version=[2],Text=[Element specifies the element to query.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Returns True if the argument element has a null_exclusion
-specifier.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Returns False for any unexpected element such as a Nil_Element,
-A_Statement or A_Clause.]}
+@ChgAdded{Version=[2],Text=[Returns True if the argument element has a
+null_exclusion specifier, and returns False otherwise (including for any
+unexpected element).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Element expects an

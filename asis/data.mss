@@ -1,6 +1,6 @@
 @Part(data, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/data.mss,v $}
-@comment{$Revision: 1.12 $ $Date: 2009/05/09 06:28:47 $}
+@comment{$Revision: 1.13 $ $Date: 2009/05/16 03:55:40 $}
 
 @LabeledSection{package Asis.Data_Decomposition (optional)}
 
@@ -256,6 +256,10 @@ Record_Component that represents no component.]}
 @key[type] @AdaTypeDefn{Record_Component_List} @key[is]
    @key[array] (Asis.List_Index @key[range] <>) @key[of] Record_Component;
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Type Record_Component_List represents a list of
+record components.]}
 @end{DescribeCode}
 
 
@@ -328,6 +332,9 @@ Array_Component that represents no component.]}
 @key[type] @AdaTypeDefn{Array_Component_List} @key[is]
    @key[array] (Asis.List_Index @key[range] <>) @key[of] Array_Component;
 @end{Example}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Type Array_Component_List represents a list of
+array components.]}
 @end{DescribeCode}
 
 
@@ -903,7 +910,7 @@ A_Record_Type_Definition]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Component expects a component
-that has Is_Record(Component) = True and has one of the
+that has Is_Record(Component) = True and has the
 following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
 @begin{Display}
 A_Simple_Static_Model

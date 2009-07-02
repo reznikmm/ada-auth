@@ -1,6 +1,6 @@
 @Part(environ, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/environ.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2009/03/07 06:33:31 $}
+@comment{$Revision: 1.5 $ $Date: 2009/05/16 03:55:40 $}
 
 @LabeledSection{package Asis.Ada_Environments}
 
@@ -52,15 +52,20 @@ The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Context to
 Name @Chg{Version=[1],New=[specifies],Old=[     @en Specifies]} the name for the Context association.
 Parameters @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} parameters to use when opening the Context.
 
-Used to give name and parameter associations to a Context. The
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Procedure Associate is used],Old=[Used]}
+to give name and parameter associations to a Context. The
 Has_Associations query is used to test whether or not a Context has
 been given name and parameter associations. The Name and Parameters
 queries are used to examine name and parameter associations.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 A Context has at most one set of name/parameter values associated with
-it at any time. Name and parameter associations cannot be modified while a
-Context is open  Previous name and parameters associations for this Context
-are replaced by this call.
+it at any time. @Chg{Version=[2],New=[If The_Context is not open then any
+previous Name and Parameters],Old=[Name and parameter associations
+cannot be modified while a Context is open  Previous name and parameters]}
+associations@Chg{Version=[2],New=[],Old=[ for this Context]} are replaced by
+this call.
 
 ASIS implementations are encouraged, but not required, to validate the
 Parameters string immediately. It is recognized that some options cannot
@@ -75,7 +80,7 @@ Raises ASIS_Inappropriate_Context if The_Context is open.
 
 @begin{DescribeCode}
 @begin{Example}
-@key[procedure] @AdaSubDefn{Open} (The_Context : @key[in] out Asis.Context);
+@key[procedure] @AdaSubDefn{Open} (The_Context : @key[in out] Asis.Context);
 @end{Example}
 
 The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Context
@@ -84,8 +89,10 @@ to open.
 Opens the ASIS Context using the Context's associated name and parameter
 values.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Raises ASIS_Inappropriate_Context if The_Context is already open or if it
-is uninitialized (does not have associated name and parameter values).
+is @Chg{Version=[2],New=[@i{unassociated}: @Defn2{Term=[unassociated],Sec=[context]}],Old=[uninitialized (]}does
+not have associated name and parameter values@Chg{Version=[2],New=[],Old=[)]}.
 
 Raises ASIS_Failed if The_Context could not be opened for any reason. The
 most likely Status values are Name_Error, Use_Error, Data_Error, and
@@ -98,7 +105,7 @@ Capacity_Error.
 
 @begin{DescribeCode}
 @begin{Example}
-@key[procedure] @AdaSubDefn{Close} (The_Context : @key[in] out Asis.Context);
+@key[procedure] @AdaSubDefn{Close} (The_Context : @key[in out] Asis.Context);
 @end{Example}
 
 The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Context
@@ -126,15 +133,16 @@ Raises ASIS_Inappropriate_Context if The_Context is not open.
 
 @begin{DescribeCode}
 @begin{Example}
-@key[procedure] @AdaSubDefn{Dissociate} (The_Context : @key[in] out Asis.Context);
+@key[procedure] @AdaSubDefn{Dissociate} (The_Context : @key[in out] Asis.Context);
 @end{Example}
 
 The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Context
 whose name and parameter associations are to be cleared.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Severs all previous associations for The_Context. A Context that does not
-have associations (is uninitialized) is returned unchanged. The
-variable The_Context is returned to its uninitialized state.
+have associations (is @Chg{Version=[2],New=[unassociated],Old=[uninitialized]}) is returned unchanged. The
+variable The_Context is returned to its @Chg{Version=[2],New=[unassociated],Old=[uninitialized]} state.
 
 Contexts that have been given Names and Parameters should be Dissociated
 when they are no longer necessary. Some amount of program storage can be
@@ -158,8 +166,10 @@ Raises ASIS_Inappropriate_Context if The_Context is open.
 Left @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the first Context.
 Right @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the second Context.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Returns True if Left and Right designate the same set of associated
-compilation units. The Context variables may be open or closed.
+compilation units@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
+The Context variables may be open or closed.
 
 Unless both Contexts are open, this operation is implemented as a pair of
 simple string comparisons between the Name and Parameter associations for
@@ -195,10 +205,14 @@ ASIS program A opens the Right Context for READ, and gets the new version.
 Left @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the first Context.
 Right @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the second Context.
 
-Returns True if Left and Right both designate the value associated with
-one specific ASIS Context variable.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns True if Left and Right @Chg{Version=[2],New=[denote the same ASIS
+context object and that object is open. Returns False otherwise],Old=[both
+designate the value associated with one specific ASIS Context variable]}.
 
-Returns False otherwise or if either Context is not open.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[Returns False otherwise or if either Context is
+not open.]}
 @end{DescribeCode}
 
 @begin{UsageNote}
@@ -221,13 +235,16 @@ question was derived specifically from that open ASIS Context variable.
 @key[function] @AdaSubDefn{Exists} (The_Context : @key[in] Asis.Context) @key[return] Boolean;
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a Context
-with associated name and parameter values.
+@Chg{Version=[2],New=[to query],Old=[with associated name and parameter values]}.
 
 Returns True if The_Context is open or if The_Context designates an Ada
 environment that can be determined to exist.
 
-Returns False for any uninitialized The_Context variable.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns False @Chg{Version=[2],New=[otherwise (in particular, if],Old=[for any
+uninitialized]} The_Context @Chg{Version=[2],New=[is unassociated],Old=[variable]}.
 @end{DescribeCode}
 
 @begin{ImplPerm}
@@ -246,10 +263,12 @@ verified by an Open.
 @key[function] @AdaSubDefn{Is_Open} (The_Context : @key[in] Asis.Context) @key[return] Boolean;
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Context
-to check.
+to @Chg{Version=[2],New=[query],Old=[check]}.
 
-Returns True if The_Context is currently open.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns True if The_Context is currently open@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
 @end{DescribeCode}
 
 
@@ -260,13 +279,15 @@ Returns True if The_Context is currently open.
 @key[function] @AdaSubDefn{Has_Associations} (The_Context : @key[in] Asis.Context) @key[return] Boolean;
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Context
-to check.
+to @Chg{Version=[2],New=[query],Old=[check]}.
 
 Returns True if name and parameter values have been associated with
 The_Context.
 
-Returns False if The_Context is uninitialized.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns False if The_Context is @Chg{Version=[2],New=[unassociated],Old=[uninitialized]}.
 @end{DescribeCode}
 
 
@@ -277,12 +298,18 @@ Returns False if The_Context is uninitialized.
 @key[function] @AdaSubDefn{Name} (The_Context : @key[in] Asis.Context) @key[return] Wide_String;
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Context
-to check.
+to @Chg{Version=[2],New=[query],Old=[check]}.
 
-Returns the Name value associated with The_Context.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[Returns the Name value associated with
+The_Context.]}
 
-Returns a null string if The_Context is uninitialized.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns a null string if The_Context is
+@Chg{Version=[2],New=[unassociated; otherwise, returns the Name value
+associated with The_Context],Old=[uninitialized]}.
 @end{DescribeCode}
 
 
@@ -293,12 +320,19 @@ Returns a null string if The_Context is uninitialized.
 @key[function] @AdaSubDefn{Parameters} (The_Context : @key[in] Asis.Context) @key[return] Wide_String;
 @end{Example}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Context
-to check.
+to @Chg{Version=[2],New=[query],Old=[check]}.
 
-Returns the Parameters value associated with The_Context.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
+@ChgDeleted{Version=[2],Text=[Returns the Parameters value associated with
+The_Context.]}
 
-Returns a null string if The_Context is uninitialized.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns a null string if The_Context is
+@Chg{Version=[2],New=[unassociated; otherwise, returns the Parameters value
+associated with The_Context],Old=[uninitialized]}.
 @end{DescribeCode}
 
 
@@ -319,7 +353,8 @@ The return value uses Asis.Text.Delimiter_Image to separate lines in
 multi-line results. The return value is not terminated with
 Asis.Text.Delimiter_Image.
 
-Returns a null string if The_Context is uninitialized.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns a null string if The_Context is @Chg{Version=[2],New=[unassociated],Old=[uninitialized]}.
 
 These values are intended for two purposes. They are suitable for
 inclusion in problem reports sent to the ASIS implementor. They can be

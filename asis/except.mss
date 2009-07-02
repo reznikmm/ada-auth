@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/except.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2009/03/13 07:12:33 $}
+@comment{$Revision: 1.7 $ $Date: 2009/05/16 03:55:40 $}
 
 @LabeledSection{package Asis.Exceptions}
 
@@ -91,8 +91,8 @@ will typically indicate a failure of the underlying ASIS implementation.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[ASIS_Not_In_Context can happen, for instance, if the
 View is of an incomplete view, and the full view is not part of the context. It
-also can happen if only a portion of the semantic dependencies of the queried
-unit is included in the context.]}
+also can happen if the context includes only a portion of the semantic
+dependencies of the queried unit.]}
 @end{SingleNote}
 
 
