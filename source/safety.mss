@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.41 $ $Date: 2009/02/05 07:12:35 $ $Author: randy $ }
+@Comment{ $Revision: 1.42 $ $Date: 2009/07/02 04:51:29 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2009/02/05 07:12:35 $}
+@Comment{$Date: 2009/07/02 04:51:29 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -733,6 +733,10 @@ rather than inhibiting what can be in the generic while
 liberalizing where they can be instantiated.]}
 @end[Reason]
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0152-1]}
+@ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],Sec=(No_Anonymous_Allocators)}@Defn{No_Anonymous_Allocators restriction}
+No_Anonymous_Allocators @\@nt{Allocator}s of anonymous access types are not allowed.]}.
+
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00394-01]}
 @ChgDeleted{Version=[2],Text=[@Defn2{Term=[restrictions],
 Sec=(No_Unchecked_Deallocation)}No_Unchecked_Deallocation @\Semantic
@@ -1089,6 +1093,10 @@ proscribed
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0042],ARef=[AI95-00130-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   No_Local_Allocators no longer prohibits generic instantiations.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0152-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Restriction
+  No_Anonymous_Allocators is new.]}
 @end{Extend95}
 
 @begin{DiffWord95}

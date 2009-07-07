@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.83 $ $Date: 2009/02/05 07:12:35 $ $Author: randy $ }
+@comment{ $Revision: 1.84 $ $Date: 2009/07/02 04:51:29 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2009/02/05 07:12:35 $}
+@Comment{$Date: 2009/07/02 04:51:29 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1084,7 +1084,7 @@ dispatching policy.]]}
 @ChgAdded{Version=[2],Text=[The @SynI{policy_}@nt{identifier}
 Non_Preemptive_FIFO_Within_Priorities is a task dispatching
 policy.@Chg{Version=[3],New=[@Defn2{Term=[task dispatching policy],
-Sec=(Non_Preemptive_FIFO_Within_Priorities)}@Defn{Non_Preemptive_FIFO_Within_Priorities task disp. policy}],
+Sec=(Non_Preemptive_@!FIFO_@!Within_@!Priorities)}@Defn{Non_Preemptive_FIFO_@!Within_@!Priorities task disp. policy}],
 Old=[]}]}
 
 @end{StaticSem}

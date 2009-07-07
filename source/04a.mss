@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2009/02/05 07:12:35 $}
+@Comment{$Date: 2009/07/02 04:51:28 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.98 $}
+@Comment{$Revision: 1.99 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -3258,6 +3258,23 @@ the designated profiles shall be subtype conformant.]}
   and any reasonable meaning for "=" would allow using it in such a subprogram,
   this doesn't impose any further restrictions on Ada implementations.]}
 @end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
+@ChgAdded{Version=[3],Text=[The explicit declaration of a primitive equality
+operator of an untagged record type shall occur before the type is frozen. If
+the untagged record type has a nonlimited partial view, then the declaration
+shall occur in the visible part of the enclosing package.
+@PDefn{generic contract issue}
+In addition to the places where @LegalityTitle normally apply
+(see @RefSecNum{Generic Instantiation}),
+this rule applies also in the private part of an instance of a generic unit.]}
+@begin{Honest}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[  The phrase @ldquote@;equality operator@rdquote
+  as used here refers only to a
+  function whose profile is type conformant with that of the
+  predefined equality operator for the untagged record type.]}
+@end{Honest}
 @end{Legality}
 
 @begin{RunTime}
@@ -3304,12 +3321,15 @@ This allows each Access @nt<attribute_reference>
   if necessary to support an indirect call.
 @end{Reason}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0123-1]}
 @Defn2{Term=[equality operator],Sec=(special inheritance rule for tagged types)}
 For a type extension, predefined equality
 is defined in terms of the primitive @Redundant[(possibly
 user-defined)] equals operator
-of the parent type and of any tagged components of the
-extension part, and predefined equality
+@Chg{Version=[3],New=[for],Old=[of]} the parent type and
+@Chg{Version=[3],New=[for],Old=[of]} any @Chg{Version=[3],New=[],Old=[tagged ]}components
+@Chg{Version=[3],New=[ of a record type ],Old=[]}of the extension part, and
+predefined equality
 for any other components not inherited from the parent type.
 @begin{Ramification}
   Two values of a type extension are not equal if there is
@@ -3342,7 +3362,20 @@ for any other components not inherited from the parent type.
   Typ3.],Old=[]}
 @end{Ramification}
 
-For a private type, if its full type is tagged, predefined
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
+@ChgAdded{Version=[3],Text=[For a derived type whose parent is an untagged
+record type, predefined equality is defined in terms of the primitive (possibly
+user-defined) equals operator of the parent type.]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This prevents predefined equality from
+  reemerging in generic units for untagged record types. For other uses
+  the primitive equality is inherited and the inherited routine is primitive.]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0123-1]}
+For a private type, if its full type is
+@Chg{Version=[3],New=[a record type],Old=[tagged]}, predefined
 equality is defined in terms of the primitive equals operator of the
 full type; if the full type is untagged, predefined equality
 for the private type is that of its full type.
@@ -3385,16 +3418,22 @@ for those composite types covered earlier) is defined as follows:
 
   If there are unmatched components, the result is defined to be False;
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0123-1]}
   Otherwise, the result is defined in terms of
   the primitive equals operator for any
-  matching tagged components, and the predefined equals for any
-  matching untagged components.
+  matching @Chg{Version=[3],New=[],Old=[tagged ]}components@Chg{Version=[3],New=[ that
+  are records],Old=[]}, and
+  the predefined equals for any @Chg{Version=[3],New=[other ],Old=[]}matching
+  @Chg{Version=[3],New=[],Old=[untagged ]}components.
   @begin{Reason}
-    This asymmetry between tagged and untagged components is
-    necessary to preserve upward compatibility and corresponds
+    @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0123-1]}
+    This asymmetry between @Chg{Version=[3],New=[],Old=[tagged and
+    untagged ]}components @Chg{Version=[3],New=[ with and without a record type],Old=[]}is
+    necessary to preserve @Chg{Version=[3],New=[most ],Old=[]}upward compatibility and corresponds
     with the corresponding situation with generics, where the
     predefined operations @lquotes@;reemerge@rquotes@; in a generic for
-    untagged types, but do not for tagged types. Also, only
+    @Chg{Version=[3],New=[non-record],Old=[untagged]} types, but do not
+    for @Chg{Version=[3],New=[record],Old=[tagged]} types. Also, only
     tagged types support user-defined assignment
     (see @RefSecNum{Assignment and Finalization}),
     so only tagged types
@@ -3411,12 +3450,15 @@ for those composite types covered earlier) is defined as follows:
   Two null arrays of the same type are always equal;
   two null records of the same type are always equal.
 
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0123-1]}
   Note that if a composite object has a component
   of a floating point type, and the floating point type
   has both a plus and minus zero, which are considered
   equal by the predefined equality, then a block compare
   cannot be used for the predefined composite equality.
-  Of course, with user-defined equals operators for tagged components,
+  Of course, with user-defined equals operators for
+  @Chg{Version=[3],New=[],Old=[tagged ]}components@Chg{Version=[3],New=[ that
+  are records],Old=[]},
   a block compare breaks down anyway, so this is not the only
   special case that requires component-by-component comparisons.
   On a one's complement machine, a similar situation might
@@ -3430,12 +3472,29 @@ for those composite types covered earlier) is defined as follows:
   @i<universal_access> type (anonymous access types have no equality operators
   of their own).]}
 
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0123-1]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[For a component with a tagged type @i{T},
+  @ChgAdded{Version=[2],Text=[For a component with a @Chg{Version=[3],New=[record],
+  Old=[tagged]} type @i{T},
   @lquotes@;the primitive equals operator@rquotes@; is the one with two
   parameters of @i(T) which returns Boolean. We're not talking about some
   random other primitive function named "=".]}
 @end{Honest}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
+@ChgAdded{Version=[3],Text=[If the primitive equals operator for an untagged
+record type is abstract, then Program_Error is raised at the point of any
+(implicit) call to that abstract subprogram.]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[An explicit call to an abstract subprogram is
+  illegal. This rule is needed in order to define the effect of an implicit call
+  such as a call that is part of the predefined equality operation for an
+  enclosing composite type that has a component of an untagged record type that
+  has an abstract primitive equals operator. For tagged types, an abstract
+  primitive equals operator is only allowed for an abstract type, and abstract
+  types cannot be components, so this case does not occur.]}
+@end{Reason}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0016],ARef=[AI95-00123-01]}
 @ChgAdded{Version=[1],Text=[For any composite type, the order in which "="
@@ -3527,13 +3586,14 @@ language-defined packages, the "=" and "/=" operators of the type shall behave
 as if they were the predefined equality operators for the purposes of the
 equality of composite types and generic formal types.]}
 @begin{Ramification}
-@ChgRef{Version=[1],Kind=[Added]}
+@ChgRef{Version=[1],Kind=[Added],ARef=[AI95-00123-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0123-1]}
 @ChgAdded{Version=[1],Text=[If any language-defined types are implemented with
-a user-defined "=" operator, then either the full type must be tagged, or
-the compiler must
+a user-defined "=" operator, then either the full type must be @Chg{Version=[3],
+New=[a record type],Old=[tagged]}, or the compiler must
 use @lquotes@;magic@rquotes@; to implement equality for this type. A normal
-user-defined "=" operator for an untagged type does @i{not} meet this
-requirement.]}
+user-defined "=" operator for @Chg{Version=[3],New=[a non-record],Old=[an untagged]}
+type does @i{not} meet this requirement.]}
 @end{Ramification}
 @end{ImplReq}
 
@@ -3596,6 +3656,34 @@ category similar to @lquotes@;ordering operator@rquotes@; to refer to both
 
 We have changed the term @lquotes@;catenate@rquotes@; to @lquotes@;concatenate@rquotes@;.
 @end{DiffWord83}
+
+@begin{Inconsistent95}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2:>
+  User-defined untagged record equality is now defined to compose and be used in
+  generics. Any code which assumes that the predefined equality reemerges
+  in generics and in predefined equals for composite types could fail.
+  However, it is much more likely that this change will fix bugs, as the
+  behavior that would be expected (the user-defined "=" is used) will be
+  true in more cases.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> If a composite type contains
+  a component of an untagged record type with an abstract equality operation,
+  calling "=" on the composite type will raise Program_Error, while in the
+  past a result will be returned using the predefined equality. This is
+  quite possible in ASIS programs; it will detect a bug in such programs but
+  of course the programs will need to be fixed before they will work.]}
+@end{Inconsistent95}
+
+@begin{Incompatible95}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatiblities with Ada 95}@b<Amendment 2:>
+  Late and hidden overriding of equality for untagged record types is now
+  prohibited. This is necessary to make composition of equality predicable.
+  It should always be possible to move the overridding to an earlier spot
+  where it will be legal.]}
+@end{Incompatible95}
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00420-01]}

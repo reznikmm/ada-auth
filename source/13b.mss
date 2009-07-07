@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2009/03/10 07:16:40 $}
+@Comment{$Date: 2009/07/02 04:51:28 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1594,18 +1594,17 @@ a non-derived access-to-object type
 via an @nt{attribute_@!definition_@!clause};
 the @nt{name} in a Storage_Pool clause shall denote a variable.
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0116-1]}
-An @nt{allocator} of type T allocates storage from T's storage pool.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0107-1],ARef=[AI05-0116-1]}
+An @nt{allocator} of type @i<T> allocates storage from @i<T>'s storage pool.
 If the storage pool is a user-defined object, then
-the storage is allocated by calling Allocate,
+the storage is allocated by calling Allocate@Chg{Version=[3],New=[ as described
+below.],Old=[,
 passing T'Storage_Pool as the Pool parameter.
 The Size_In_Storage_Elements parameter indicates the number of storage elements
 to be allocated,
 and is no more than D'Max_Size_In_Storage_Elements,
 where D is the designated subtype.
-The Alignment parameter is D'Alignment@Chg{Version=[3],New=[ if D is
-a specific type, and otherwise is the alignment of the specific type identified
-by the tag of the object being created],Old=[]}.
+The Alignment parameter is D'Alignment.
 @PDefn{contiguous representation}
 @PDefn{discontiguous representation}
 The result returned in the Storage_Address parameter is used by the
@@ -1613,7 +1612,7 @@ The result returned in the Storage_Address parameter is used by the
 which is a contiguous block of memory of Size_In_@!Storage_@!Elements
 storage elements.
 @Redundant[Any exception propagated by Allocate is propagated by the
-@nt{allocator}.]
+@nt{allocator}.]]}
 @begin{Ramification}
 If the implementation chooses to represent the designated
 subtype in multiple pieces,
@@ -1623,18 +1622,19 @@ In any case, @nt{allocator}s for the access type obtain all the required
 storage for an object of the designated type by calling the
 specified Allocate procedure.
 
-Note that the implementation does not turn other exceptions into
-Storage_Error.
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0107-1]}
+@ChgDeleted{Version=[3],Text=[Note that the implementation does not turn other
+exceptions into Storage_Error.]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0111],ARef=[AI95-00103-01]}
-@ChgAdded{Version=[1],Text=[If D (the designated type of T) includes
+@ChgAdded{Version=[1],Text=[If @i<D> (the designated type of @i<T>) includes
 subcomponents of other access types, they will be allocated from the storage
 pools for those types, even if those @nt{allocator}s are executed as part of
-the @nt{allocator} of T (as part of the initialization of the object). For
-instance, an access-to-task type TT may allocate the data structures used to
+the @nt{allocator} of @i<T> (as part of the initialization of the object). For
+instance, an access-to-task type @i<TT> may allocate the data structures used to
 implement the task value from other storage pools. (In particular, the task
 stack does not necessarily need to be allocated from the storage pool for
-TT.)]}
+@i<TT>.)]}
 @end{Ramification}
 
 @Defn{standard storage pool}
@@ -1744,6 +1744,130 @@ then Allocate should propagate an exception
 If Allocate behaves in any other manner,
 then the program execution is erroneous.
 @end{Erron}
+
+@begin{ImplReq}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The Allocate procedure of a
+user-defined storage pool object @i<P> may be called by the implementation only
+to allocate storage for a type @i<T> whose pool is @i<P> and:]}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[During the execution of an @nt{allocator} of type
+@i<T>;]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This includes during the evaluation of the
+  initializing expression such as an @nt{aggregate}; this is important if the
+  initializing expression is built in place. We need to allow allocation to be
+  deferred until the size of the object is known.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[During the execution of a return statement for a
+function whose result is built-in-place in the result of an @nt{allocator}
+of type @i<T>;]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We need this bullet as well as the preceding one
+  in order that exceptions that propagate from such a call to Allocate can be
+  handled within the return statement. We don't want to require the generation
+  of special handling code in this unusual case, as it would add overhead to
+  most return statements of composite types.]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[During the execution of an assignment operation with
+a target of an allocated object of type @i<T> with a part that has an
+unconstrained discriminated subtype with defaults.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We allow Allocate to be called during assignment
+  of objects with mutable parts so that mutable objects can be implemented with
+  reallocation on assignment. (Unfortunately, the term "mutable" is only defined
+  in the AARM, so we have to use the long-winded wording shown here.)]}
+@end{Reason}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Of course, explicit calls to Allocate are also
+  allowed and are not bound by any of the rules found here.]}
+@end{Discussion}
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1],ARef=[AI05-0116-1]}
+@ChgAdded{Version=[3],Text=[For one of the calls of Allocate described above,
+@i{P} (@i{T}'Storage_Pool) is passed as the Pool parameter. The
+Size_In_Storage_Elements parameter indicates the number
+of storage elements to be allocated, and is no more than
+@i{D}'Max_Size_In_Storage_Elements, where @i{D} is the designated subtype of @i{T}.
+The Alignment parameter is @i{D}'Alignment if @i{D} is a specific type, and
+otherwise is the alignment of the specific type identified by the tag of the
+object being created. The result returned in the Storage_Address parameter is
+used as the address of the allocated storage, which is a contiguous block of
+memory of Size_In_Storage_Elements storage elements. @Redundant[Any exception
+propagated by Allocate is propagated by the construct that contained the call.]]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Note that the implementation does not turn other
+  exceptions into Storage_Error.]}@ChgNote{Moved from 13.11(16).}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1]}
+@ChgAdded{Version=[3],Text=[The number of calls to Allocate needed to implement
+an @nt{allocator} for any particular type is unspecified.@PDefn{unspecified}
+@PDefn{contiguous representation}
+@PDefn{discontiguous representation}
+The number of calls to Deallocate needed to implement an instance of
+Unchecked_Deallocation (see @RefSecNum{Unchecked Storage Deallocation}) for any
+particular object is the same as the number of Allocate calls for that object.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This supports objects that are allocated in one or
+  more parts. The second sentence prevents extra or missing calls to Deallocate.]}
+@end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We do not define the relative order of multiple
+  calls used to deallocate the same object @em that is, if the @nt{allocator}
+  allocated two pieces @i{x} and @i{y}, then an instance of Unchecked_Deallocation
+  might deallocate @i{x} and then @i{y}, or it might deallocate @i{y} and then
+  @i{x}.]}@ChgNote{Moved from 13.11.2}
+@end{Ramification}
+
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1]}
+@ChgAdded{Version=[3],Text=[The Deallocate procedure of a user-defined storage
+pool object @i{P} may be called by the implementation to deallocate storage for a
+type @i{T} whose pool is @i{P} only at the places when an Allocate call is allowed for
+@i{P}, during the execution of an instance of Unchecked_Deallocation for @i{T}, or as
+part of the finalization of the collection of @i{T}. For such a call of Deallocate,
+@i{P} (@i{T}'Storage_Pool) is passed as the Pool parameter. The value of the
+Storage_Address parameter for a call to Deallocate is the value returned in the
+Storage_Address parameter of the corresponding successful call to Allocate. The
+values of the Size_In_Storage_Elements and Alignment parameters are the same
+values passed to the corresponding Allocate call. Any exception propagated by
+Deallocate is propagated by the construct that contained the call.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We allow Deallocate to be called anywhere that
+  Allocate is, in order to allow the recovery of storage from failed allocations
+  (that is, those that raise exceptions); from extended return statements that
+  exit via a goto, exit, or locally handled exception; and from objects which
+  are reallocated when they are assigned. In each of these cases, we would have
+  a storage leak if the implementation did not recover the storage (there is no
+  way for the programmer to do it). We do not require such recovery, however, as
+  it could be a serious performance drag on these operations.]}
+@end{Reason}
+@end{ImplReq}
 
 @begin{DocReq}
 An implementation shall document
@@ -2049,6 +2173,11 @@ objects incorrectly by missing various cases.
   for a coextension nested inside an outer @nt{allocator} shares
   the pool with the outer @nt{allocator}.]}
 
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0107-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Clarified when an implementation
+  is allowed to call Allocate and Deallocate, and the requirements on such
+  calls.]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0116-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording to specify the
   alignment for an @nt{allocator} with a class-wide designated type comes from
@@ -2147,6 +2276,7 @@ After executing Free(X), the value of X is @key{null}.
 Free(X), when X is already equal to @key{null}, has no effect.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0107-1]}
 Free(X), when X is not equal to @key{null} first
 performs finalization@Chg{Version=[2],New=[ of the object designated by X (and
 any coextensions of the object @em see @RefSecNum{Operations of Access Types})],
@@ -2154,27 +2284,28 @@ Old=[]}, as described in
 @Chg{Version=[2],New=[@RefSecNum{Completion and Finalization}],
 Old=[@RefSecNum{Assignment and Finalization}]}.
 It then deallocates the storage occupied by the object designated by
-X@Chg{Version=[2],New=[ (and any coextensions)],Old=[]}.
+X@Chg{Version=[2],New=[ (and any coextensions)],Old=[]}
 If the storage pool is a user-defined object, then
-the storage is deallocated by calling Deallocate,
+the storage is deallocated by calling Deallocate@Chg{Version=[3],New=[ as described
+in @RefSecNum{Storage Management}],Old=[,
 passing @i[access_to_@!variable_@!subtype_name]'Storage_Pool as the Pool parameter.
 Storage_Address is the value returned in the Storage_Address parameter of the
 corresponding Allocate call.
 Size_In_@!Storage_@!Elements and Alignment are the same values passed to the
-corresponding Allocate call.
+corresponding Allocate call]}.
 There is one exception: if the object being freed contains tasks,
 the object might not be deallocated.
 @begin{Ramification}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0107-1]}
 Free calls only the specified Deallocate procedure
-to do deallocation.
-For any given object deallocation,
-the number of calls to Free (usually one)
+to do deallocation.@Chg{Version=[3],New=[],Old=[ For any given
+object deallocation, the number of calls to Free (usually one)
 will be equal to the number of Allocate calls it took
 to allocate the object.
 We do not define the relative order of multiple calls used to deallocate
 the same object @em that is, if the @nt{allocator} allocated two pieces @i{x}
 and @i{y}, then Free might deallocate @i{x} and then @i{y},
-or it might deallocate @i{y} and then @i{x}.
+or it might deallocate @i{y} and then @i{x}.]}
 @end{Ramification}
 @end{Enumerate}
 
@@ -2278,6 +2409,13 @@ This is implied by the rules of @RefSecNum{Formal Access Types}.
   a access-to-protected-subprogram is erroneous if the associated
   object no longer exists. It hard to imagine an alternative meaning here,
   and this has no effect on correct programs.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0107-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Moved the requirements
+  on an implementation-generated call to Deallocate to
+  @RefSecNum{Storage Management}, in order to put all of the rules
+  associated with implementation-generated calls to Allocate and Deallocate
+  together.]}
 @end{DiffWord95}
 
 
@@ -4030,14 +4168,19 @@ or subtypes; however, various other kinds of entities,
 such as objects and subprograms, are possible.
 @end{Itemize}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 Similar issues arise for incomplete types.
-However, we do not use freezing there;
+However, we do not use freezing @Chg{Version=[3],
+New=[to prevent premature access],Old=[there]};
 incomplete types have different, more severe, restrictions.
 Similar issues also arise for subprograms, protected operations,
 tasks and generic units.
-However, we do not use freezing there either;
+However, we do not use freezing @Chg{Version=[3],
+New=[to prevent premature access for those,],Old=[there]} either;
 @RefSecNum{Declarative Parts} prevents problems with run-time
-Elaboration_Checks.
+Elaboration_Checks.@Chg{Version=[3],New=[ Even so, freezing is used for these
+entities to prevent giving representation items too late (that is, after uses
+that require representation information, such as calls).],Old=[]}
 @end{Discussion}
 @end{Intro}
 

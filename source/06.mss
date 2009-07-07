@@ -1,10 +1,11 @@
+
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2009/03/22 03:27:52 $}
+@Comment{$Date: 2009/07/02 04:51:28 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.92 $}
+@Comment{$Revision: 1.93 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -166,6 +167,7 @@ if any, is that of the formal parameter.
 @end{Resolution}
 
 @begin{Legality}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0143-1]}
 @Defn{parameter mode}
 The @i(parameter mode) of a formal parameter conveys the direction of
 information transfer with the actual parameter:
@@ -175,10 +177,11 @@ and is the mode of a parameter defined by an @nt{access_definition}.
 The formal parameters of a function, if any, shall have
 the mode @key(in).
 @begin{Ramification}
-Access parameters are permitted.
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0143-1]}
+@ChgDeleted{Version=[3],Text=[Access parameters are permitted.
 This restriction to @b(in) parameters is primarily a methodological
 restriction, though it also simplifies implementation for some compiler
-technologies.
+technologies.]}
 @end{Ramification}
 
 A @nt{default_expression} is only allowed in a @nt{parameter_specification}
@@ -409,6 +412,12 @@ The syntax rules for @nt{defining_designator} and
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
   @ChgAdded{Version=[2],Text=[The return type of a function can be an
   anonymous access type.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0143-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> The parameters of a function
+  can now have any mode. @i<Note: This extension is conditional on the
+  future approval of @AILink{AI=[AI05-0144-1],Text=[AI05-0144-1]}, which
+  makes calls with obvious order dependencies illegal.>]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -1081,16 +1090,31 @@ with any other profile.
 @PDefn{generic contract issue}
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0046-1],ARef=[AI05-0134-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0134-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[]}@Comment{Dummy for conditional leading.}
 @Defn2{Term=[full conformance], Sec=(for profiles)}
 @Defn2{Term=[profile],Sec=(fully conformant)}
 Two profiles are @i{fully conformant} if they
-are subtype-conformant, and corresponding parameters
-have the same names, @Chg{Version=[3],New=[both or neither
-have @nt{null_exclusion}s, they ],Old=[ and]}have @nt<default_expression>s
-that are fully conformant with one another@Chg{Version=[3],New=[ and, for
-access-to-subprogram parameters or access-to-subprogram results, the designated
-profiles are fully conformant],Old=[]}.
+are subtype-conformant, @Chg{Version=[3],New=[if they have
+access-to-subprogram results whose designated profiles are fully
+conformant,],Old=[]}and corresponding parameters have@Chg{Version=[3],New=[:],
+Old=[ the same names and have @nt<default_expression>s
+that are fully conformant with one another.]}
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[the same names; and]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0046-1]}
+@ChgAdded{Version=[3],Text=[both or neither have @nt{null_exclusion}s; and]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[neither have @nt{default_expression}s, or they both
+have @nt{default_expression}s that are fully conformant with one another; and]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0134-1]}
+@ChgAdded{Version=[3],Text=[for access-to-subprogram parameters, the designated
+profiles are fully conformant.]}
+@end{Itemize}
 @begin{Ramification}
 Full conformance requires subtype conformance,
 which requires the same calling conventions.
@@ -1105,7 +1129,7 @@ subprogram or entry are always the same by definition.
   null whether or not an exclusion is given.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0134-1]}
-@ChgAdded{Version=[3],Text=[The part about access-to-subprogram parameters
+@ChgAdded{Version=[3],Text=[The parts about access-to-subprogram parameters
   and results is necessary to prevent such types from having different
   @nt{default_expression}s in the specification and body of a subprogram.
   If that was allowed, it would be undefined which @nt{default_expression}
@@ -1807,10 +1831,12 @@ Print(3); --@RI{ Ambiguous!}
   is ambiguous.
 @end{Reason}
 
-The type of the actual parameter associated with an access parameter
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0102-1]}
+@ChgDeleted{Version=[3],Text=[The type of the actual parameter
+associated with an access parameter
 shall be convertible (see @RefSecNum{Type Conversions})
 to its anonymous access type.
-@PDefn2{Term=[convertible],Sec=(required)}
+@PDefn2{Term=[convertible],Sec=(required)}]}
 @end{Legality}
 
 @begin{RunTime}
@@ -1974,6 +2000,10 @@ as it is subsumed by earlier clauses and subclauses.
   an inconsistency, as compilers are not required to change any current
   behavior.]}
 
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0102-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Moved implicit conversion
+  @LegalityName to @RefSecNum{The Context of Overload Resolution}.]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0118-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a definition for
   positional parameters, as this is missing from Ada 95 and later.]}
@@ -2097,7 +2127,7 @@ with the reserved word @key[constant] shall include an @nt{expression}.],Old=[]}
 shall be@Chg{Version=[3],New=[ covered by],Old=[]} the
 result type of the function. @Chg{Version=[3],New=[The],Old=[If the result
 subtype of the function is constrained, then the]} subtype defined by the
-@nt{subtype_indication} shall @Chg{Version=[3],New=[statically compatible
+@nt{subtype_indication} shall @Chg{Version=[3],New=[be statically compatible
 with the result subtype of the function; if the result type of the
 fucntion is elementary, the two subtypes],Old=[also
 be constrained and]} shall statically match@Chg{Version=[3],New=[],Old=[ this
@@ -2584,10 +2614,10 @@ subtype of this object.]}]}
   @ChgAdded{Version=[2],Text=[Without such a permission, it would be very
   difficult to implement
   @lquotes@;@Chg{Version=[3],New=[built-in-place],Old=[build-in-place]}@rquotes semantics.
-  @Chg{Version=[3],New=[The intention is that the exception is raised at same
-  point that it would have been raised without the permission; it should not
-  change handlers if the implementation switches between return-by-copy and
-  built-in-place. This means that the],Old=[Such an]}
+  @Chg{Version=[3],New=[The intention is that the exception is raised at the
+  same point that it would have been raised without the permission; it
+  should not change handlers if the implementation switches between
+  return-by-copy and built-in-place. This means that the],Old=[Such an]}
   exception is not handleable within the function, because in the
   return-by-copy case, the constraint check to verify that the result satisfies
   the constraints of the object being initialized happens after the function
@@ -2619,15 +2649,15 @@ subtype of this object.]}]}
   @ldquote@;wrong@rdquote discriminants or bounds is abandoned (via an
   exception, or for an extended_return_statement, via an exit or goto
   statement), and then a return statement with the @ldquote@;right@rdquote
-  discrimiants or bounds is executed. The only solution for this problem is not
-  have the permission at all, but this is too unusual of a case to worry about
+  discrimiants or bounds is executed. The only solution for this problem is to
+  not have the permission at all, but this is too unusual of a case to worry about
   the effects of the permission, especially given the implementation
   difficulties for built-in-place objects that this permission is intended to
   ease.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0050-1]}
   @ChgAdded{Version=[3],Text=[Note that the mutable-discriminant case only
-  happens when build-in-place initialization is optional. This means that any
+  happens when built-in-place initialization is optional. This means that any
   difficulties associated with implementing built-in-place initialization
   without these permissions can be sidestepped by not building in place.]}
 
@@ -3008,11 +3038,15 @@ the Ada standard.]}
 @end{Resolution}
 
 @begin{Legality}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0143-1]}
 The @nt{subprogram_specification} of a unary or binary operator shall have
-one or two parameters, respectively.
+one or two parameters, respectively.@Chg{Version=[3],New=[ The parameters
+shall be of mode @key[in].],Old=[]}
 A generic function instantiation whose @nt{designator} is an
 @nt{operator_symbol} is only allowed if the specification of the
-generic function has the corresponding number of parameters.
+generic function has the corresponding number of
+parameters@Chg{Version=[3],New=[ of mode @key[in] and no other
+parameters],Old=[]}.
 
 @nt{Default_expression}s are not allowed for the parameters of an operator
 (whether the operator is declared with an explicit
@@ -3026,7 +3060,7 @@ type of the predefined type Boolean.
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0128-1]}
 @Chg{Version=[3],New=[An explicit],Old=[A]} declaration of "="
 whose result type is Boolean implicitly declares
-@Chg{Version=[3],New=[an operator],Old=[a declaration]} of "/=" that
+@Chg{Version=[3],New=[an operator],Old=[a declaration of]} "/=" that
 gives the complementary result.@Defn{/= operator}
 @begin{Discussion}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0128-1]}
@@ -3072,6 +3106,10 @@ as the result type is not Boolean.
   so that only explicit declarations of "=" cause an implicit declaration
   of "/="; otherwise, we could get multiple implicit definitions of "/="
   without an obvious way to chose between them.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0143-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording so that
+  operators only allow parameters of mode @key[in].]}
 @end{DiffWord95}
 
 

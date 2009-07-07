@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:01 $}
+@Comment{$Date: 2009/07/02 04:51:28 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 
 @LabeledClause{Array Types}
 
@@ -1055,8 +1055,8 @@ instance of a generic unit.@PDefn{generic contract issue}
     @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0063-1]}
     @ChgAdded{Version=[2],Text=[Any type may have an access discriminant,
     but access discriminants may have defaults only if they are
-    @Chg{Version=[3],New=[an immutably], Old=[a
-    @lquotes@;really@rquotes@; limited]} type. This is the rule chosen for
+    @Chg{Version=[3],New=[of an immutably], Old=[a
+    @lquotes@;really@rquotes@;]} limited type. This is the rule chosen for
     Ada 2005, as it is not incompatible, and it doesn't require weird
     accessibility checks.]}
   @end{Itemize}
@@ -1121,13 +1121,15 @@ subtype of the corresponding parent discriminant.
 @end(Ramification)
 @end{Itemize}
 
-The type of the @nt<default_expression>, if any, for an access discriminant
-shall be convertible to the anonymous access type of the discriminant
-(see @RefSecNum{Type Conversions}).
-@PDefn2{Term=[convertible],Sec=(required)}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0102-1]}
+@ChgDeleted{Version=[3],Text=[The type of the @nt<default_expression>, if any,
+for an access discriminant shall be convertible to the anonymous access type of
+the discriminant (see @RefSecNum{Type Conversions}).
+@PDefn2{Term=[convertible],Sec=(required)}]}
 @begin{Ramification}
-This requires convertibility
-of the designated subtypes.
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[This requires convertibility
+of the designated subtypes.]}
 @end{ramification}
 @end{Legality}
 
@@ -1514,6 +1516,10 @@ when the discriminant is initialized.
   @lquotes@;explicitly limited record@rquotes, which makes the intent
   much clearer (and eliminates confusion with derived types that happen to
   contain the reserved word @key(limited).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0102-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Moved implicit conversion
+  @LegalityName to @RefSecNum{The Context of Overload Resolution}.]}
 @end{DiffWord95}
 
 
@@ -1637,20 +1643,26 @@ are all of the same type.
 A @nt<discriminant_constraint> shall provide exactly one value for each
 discriminant of the subtype being constrained.
 
-The @nt<expression> associated with an access discriminant
-shall be of a type convertible to the anonymous access type.
-@PDefn2{Term=[convertible],Sec=(required)}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0102-1]}
+@ChgDeleted{Version=[3],Text=[The @nt<expression> associated with an access
+discriminant shall be of a type convertible to the anonymous access type.
+@PDefn2{Term=[convertible],Sec=(required)}]}
+
 @begin(Ramification)
 
-  This implies both convertibility of designated types, and
-  static accessibility.
+  @ChgRef{Version=[3],Kind=[Revised]}
+  @Chg{Version=[3],New=[In addition, @RefSecNum{The Context of Overload Resolution}
+  requires that the @nt{expression} associated with an access discriminant
+  is convertible (see @RefSecNum{Type Conversions}) to the anonymous access type.],Old=[]}
+  This implies both convertibility of designated
+  types, and static accessibility.
   This implies that if an object of type T with an
   access discriminant is created
   by an allocator for an access type A, then it requires that the
   type of the @nt<expression> associated
   with the access discriminant have an accessibility level
   that is not statically deeper than that of A.
-  This is to avoid dangling references.
+  This is to avoid dangling references.]}
 
 @end(Ramification)
 @end{Legality}
@@ -1763,6 +1775,10 @@ child units).]}
   @ldquote@;known to be constrained@rdquote rules. This centralizes
   the rules so that future fixes only need to be made in one place,
   as well as fixing bugs in obscure cases.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0102-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Moved implicit conversion
+  @LegalityName to @RefSecNum{The Context of Overload Resolution}.]}
 @end{Diffword95}
 
 

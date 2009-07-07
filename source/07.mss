@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:02 $}
+@Comment{$Date: 2009/07/02 04:51:28 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.99 $}
+@Comment{$Revision: 1.100 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -814,18 +814,21 @@ if and only if the ancestor subtype is constrained.
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0004-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0004-1]}
 @ChgAdded{Version=[2],Text=[If the @nt{full_type_declaration} for a private
-extension is @Chg{Version=[3],New=[defined by ],Old=[]}a @nt{derived_type_definition},
+extension @Chg{Version=[3],New=[includes],Old=[is]} a
+@Chg{Version=[3],New=[@nt{derived_type_definition}],Old=[@ntf{derived_type_declaration}]},
 then the reserved word
 @key{limited} shall appear in the @nt{full_type_declaration} if and only if it
 also appears in the @nt{private_extension_declaration}.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
   @ChgAdded{Version=[2],Text=[The word @key{limited} is optional (unless the
   ancestor is an interface), but it should be used consistently. Otherwise
   things would be too confusing for the reader. Of course, we only require
-  that if the full type is defined by a @nt{derived_type_definition}, as we
+  that if the full type @Chg{Version=[3],New=[includes],Old=[is defined by]}
+  a @nt{derived_type_definition}, as we
   want to allow task and protected types to complete extensions of synchronized
   interfaces.]}
 @end{Reason}
@@ -1151,7 +1154,7 @@ characteristics become visible for a component type,
 then any corresponding characteristics become visible for the composite
 type.
 Any additional predefined operators are implicitly declared at that
-place.@Chg{Version=[3],New=[If there is no such place, then additional
+place.@Chg{Version=[3],New=[ If there is no such place, then additional
 predefined operators are not declared at all, but they still exist.],Old=[]}
 
 @begin{Reason}
@@ -2654,8 +2657,9 @@ in which case the assignment does not involve any copying. In particular:]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
   @ChgAdded{Version=[3],Text=[We talk about the full types being immutably
-  limited, as (like parameter passing), this is independent of the view of a type.
-  That is, privacy is ignored for this purpose.]}
+  limited, as this is independent of the view of a type (in the same way that it
+  is for determining the technique of parameter passing). That is, privacy is
+  ignored for this purpose.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
   @ChgAdded{Version=[3],Text=[For function calls, we only require building in
@@ -3730,6 +3734,24 @@ a bounded error to raise Program_Error
 @end{Itemize}
 @end{Bounded}
 
+@begin{ImplPerm}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1]}
+@ChgAdded{Version=[3],Text=[If the execution of an @nt{allocator} propagates an
+exception, any parts of the allocated object that were successfully initialized
+may be finalized as part of the finalization of the innermost master enclosing
+the @nt{allocator}.]}
+
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[This allows deallocating the memory for the
+allocated object at the innermost master, preventing a storage leak. Otherwise,
+the object would have to stay around until the finalization of the collection
+that it belongs to, which could be the entire life of the program if the
+associated access type is library level.]}
+@end{Reason}
+@end{ImplPerm}
+
+
 @begin{Notes}
 The rules of Section 10 imply that
 immediately prior to partition termination, Finalize operations
@@ -3988,4 +4010,10 @@ the rules here refer to the task-waiting rules of Section 9.
   rules so that there is no doubt that privacy is ignored, and to ensure
   that objects of classwide interface types are finalized based on their
   concrete type.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0107-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Allowed premature finalization
+  of parts of failed @nt{allocator}s. This could be an inconsistency, but the
+  previous behavior is still allowed and there is no requirement that
+  implementations take advantage of the permission.]}
 @end{DiffWord95}

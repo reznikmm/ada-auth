@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:01 $}
+@Comment{$Date: 2009/07/02 04:51:28 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.40 $}
+@Comment{$Revision: 1.41 $}
 
 @LabeledClause{Type Conversions}
 
@@ -547,9 +547,14 @@ Further, if the operand type is not @i<universal_@!access>:]}
   @end{Reason}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0148-1]}
   @Chg{Version=[2],New=[@PDefn2{Term=[accessibility rule],Sec=(type conversion)}
   The accessibility level of the operand type shall not be statically
-  deeper than that of the target type.
+  deeper than that of the target type@Chg{Version=[3],New=[, unless the target is a
+  stand-alone object of an anonymous access type. If the target is
+  such a stand-alone object, the accessibility level of the operand type
+  shall not be statically deeper than that of the declaration of the
+  stand-alone object],Old=[]}.
   @PDefn{generic contract issue}
   In addition to the places where @LegalityTitle normally apply
   (see @RefSecNum{Generic Instantiation}),
@@ -557,9 +562,17 @@ Further, if the operand type is not @i<universal_@!access>:]}
   instance of a generic unit.],Old=[]}
   @begin{Ramification}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0148-1]}
     @ChgAdded{Version=[2],Text=[The access parameter case is handled by a run-time
-    check. Run-time checks are also done in instance bodies.]}
+    check. Run-time checks are also done in instance bodies@Chg{Version=[3],
+    New=[, and for stand-alone objects of anonymous access types],Old=[]}.]}
   @end{Ramification}
+  @begin{Reason}
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[We prohibit storing accesses to objects deeper
+    than a stand-alone object of a anonymous access-to-object (even while we
+    allow storing all other accesses) in order to prevent dangling accesses.]}
+  @end{Reason}
 
 @end(inneritemize)
 
@@ -817,14 +830,22 @@ Composite (Non-Array) Type Conversion
 @Defn2{Term=[conversion],sec=(access)}
 Access Type Conversion
 @begin(inneritemize)
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0148-1]}
   For an access-to-object type,
   a check is made that the accessibility level of the operand
-  type is not deeper than that of the target type.
+  type is not deeper than that of the target type@Chg{Version=[3],New=[, unless
+  the target is a stand-alone object of an anonymous access type. If the
+  target is such a stand-alone object, a check is made that the accessibility
+  level of the operand type is not deeper than that of the declaration of the
+  stand-alone object @Redundant[; then if the check succeeds, the accessibility
+  level of the target type becomes that of the operand type].],Old=[]}.
   @IndexCheck{Accessibility_Check}
 
   @begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0148-1]}
   This check is needed for operands that are access
-  parameters and in instance bodies.
+  parameters@Chg{Version=[3],New=[, for stand-alone anonymous access objects,],Old=[]}
+  and in instance bodies.
 
   Note that this check can never fail for the implicit conversion
   to the anonymous type of an access parameter that is done when
@@ -1099,6 +1120,17 @@ for "parameters of the form of a type conversion,"
 and have been generalized to cover the use of a type conversion
 as a @nt<name>.
 @end{DiffWord83}
+
+@begin{Inconsistent95}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2:>
+  A stand-alone object of an anonymous access-to-object type now has dynamic
+  accessibility. Normally, this will make programs legal that were illegal
+  in the language as defined by Amendment 1. However, it is possible that
+  a program that previously raised Program_Error now will not. It is very
+  unlikely that an existing program intentionally depends on the exception
+  being raised; the change is more likely to fix bugs than introduce them.]}
+@end{Inconsistent95}
 
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00246-01]}

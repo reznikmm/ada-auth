@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2009/03/10 07:16:40 $}
+@Comment{$Date: 2009/07/02 04:51:28 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -512,7 +512,7 @@ the same aspect of the type.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0106-1]}
 @ChgAdded{Version=[3],Text=[Unless otherwise specified, an operational or
-representational item shall not specify an aspect of a generic formal
+representation item shall not specify an aspect of a generic formal
 parameter.]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[Added]}
@@ -1896,9 +1896,10 @@ alignment should be no greater than that of any type covered by T'Class. If the
 implementation only supports alignments that are required by the recommended
 level of support (and this is most likely), then the alignment of any covered
 type has to be the same or greater than that of T @em which leaves the only
-reasonable value of T'Class'Alignment being T'Alignment. Thus we suggest that,
-but don't require it in the unlikely case the implementation does support
-smaller alignments for covered types.]}
+reasonable value of T'Class'Alignment being T'Alignment. Thus we recommend this,
+but don't require it so that in the unlikely case that the implementation does
+support smaller alignments for covered types it can select an smaller value
+for T'Class'Alignment.]}
 @end{Reason}
 @ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
 Text=[For any tagged specific subtype @i<S>,

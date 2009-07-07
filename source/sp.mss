@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.53 $ $Date: 2009/03/12 05:23:09 $ $Author: randy $ }
+@comment{ $Revision: 1.54 $ $Date: 2009/07/02 04:51:29 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2009/03/12 05:23:09 $}
+@Comment{$Date: 2009/07/02 04:51:29 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1288,8 +1288,8 @@ required by the pragma.]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1]}
 @ChgAdded{Version=[3],Text=[Pragmas Independent and Independent_Components
 @i<specify as independently addressable> the named object or component(s), or in
-the case of a type, all objects of that type. All atomic objects are specified
-as independently
+the case of a type, all objects of that type. All atomic objects are considered
+to be specified as independently
 addressable.@Defn{specified as independently addressable}@Defn2{Term=[independently addressable],Sec=[specified]}]}
 
 @begin{Ramification}

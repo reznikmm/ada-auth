@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2009/03/10 07:16:40 $}
+@Comment{$Date: 2009/07/02 04:51:28 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1717,7 +1717,7 @@ the call, if any;]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0126-1]}
 @ChgAdded{Version=[2],Text=[otherwise, the action is the same as the action for
 the corresponding operation of the parent type@Chg{Version=[3],New=[ or
-progenitor type from which the operation is inherited],Old=[]}.]}
+progenitor type from which the operation was inherited],Old=[]}.]}
 @end{Itemize}
 
 @begin{Honest}
@@ -1730,13 +1730,13 @@ the above rule is the body itself.]}
 @end{Honest}
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0126-1]}
-@ChgAdded{Version=[3],Text=[@ldquote@;Corresponding primitive operation@rdquote
+@ChgAdded{Version=[3],Text=[@ldquote@;Corresponding dispatching operation@rdquote
 refers to the inheritance relationship between subprograms. Primitive
 operations are always inherited for a type T, but they may not be declared if
 the primitive operation is never visible within the immediate scope of the type
 T. If no corresponding operation is declared, the last bullet is used and the
 corresponding operation of the parent type is executed (an explicit body that
-happens to have the right name is not called in that case).]}
+happens to have the same name and profile is not called in that case).]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0126-1]}
 @ChgAdded{Version=[3],Text=[We have to talk about progenitors in the last
@@ -1746,7 +1746,7 @@ operation in question.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0126-1]}
 @ChgAdded{Version=[3],Text=[Any explicit declaration for an inherited
-corresponding primitive operation has to be an overriding routine.
+corresponding operation has to be an overriding routine.
 These rules mean that a dispatching call executes the
 the overriding routine (if any) for the specific type.]}
 @end{Ramification}
@@ -2083,7 +2083,7 @@ primitive subprogram of],Old=[For a derived type, if]}
 the parent or ancestor type
 @Chg{Version=[2],New=[is abstract or is a function with a controlling access
 result, or if a type other than a
-@Chg{Version=[3],New=[non-abstract],Old=[]}null extension inherits a],
+@Chg{Version=[3],New=[non-abstract ],Old=[]}null extension inherits a],
 Old=[has an abstract primitive subprogram, or a primitive]}
 function with a controlling result, then:
 @begin{Ramification}
@@ -2336,7 +2336,7 @@ unless it is overriding an abstract subprogram
 implicitly declared in the visible part.
 For a tagged type declared in a visible part,
 a primitive function with a controlling result@Chg{Version=[3],New=[
-or a controlling access result],Old=[]}shall not be declared
+or a controlling access result],Old=[]} shall not be declared
 in the private part, unless it is overriding a function
 implicitly declared in the visible part.
 @begin{Reason}
@@ -4326,10 +4326,12 @@ function@Chg{Version=[2],New=[ call],Old=[]}.
   @nt{assignment_statement} is not an initialization of an object, so the
   second sentence applies.]}
 
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The @lquotes@;innermost master which evaluated
   the function call@rquotes@; does not include the function call itself (which
   might be a master).]}
 
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[We really mean the innermost master here,
   which could be a very short lifetime. Consider a function call used as
   a parameter of a procedure call. In this case the innermost master which
@@ -4482,6 +4484,12 @@ types with @lquotes@;normal@rquotes@; accessibility, as those typically don't
 include the extra information needed to make a call.]}
 @end{Reason}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1]}
+@ChgAdded{Version=[3],Text=[The accessibility level of the type of a stand-alone
+object of an anonymous access-to-object type is determined by the accessibility
+level of the type of the access value most recently assigned to the object, but
+is never deeper than that of the declaration of the stand-alone object.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
 @ChgNote{Use ChgAdded below to get conditional Leading}
 @ChgAdded{Version=[2],Type=[Leading],Text=[]}
@@ -4616,6 +4624,18 @@ New=[ specifying an access-to-object type],Old=[]}@Chg{Version=[3],
 New=[ nor does it apply to a descendant of a generic formal type],Old=[]};
 that is, such an accessibility level is not considered to be statically
 deeper, nor statically shallower, than any other.
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1]}
+@ChgAdded{Version=[3],Text=[The statically deeper relationship does not apply to
+the accessibility level of the type of a stand-alone object of an anonymous
+access-to-object type; that is, such an accessibility level is not considered to
+be statically deeper, nor statically shallower, than any other.]}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[In these cases, we use dynamic accessibility
+checks.]}
+@end{Ramification}
 
 @Redundant[For determining whether one level is statically deeper than another
 when within a generic package body, the generic package is presumed to be
@@ -4892,6 +4912,32 @@ is the library level.
 
   This method, using statically known values most of the time,
   is efficient, and, more importantly, avoids distributed overhead.
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1]}
+  @ChgAdded{Version=[3],Text=[The implementation of accessibility checks for
+  stand-alone objects of anonyomous access-to-object types can be similar to
+  that for anonymous access-to-object parameters. A static level sufficies; it
+  can be calculated using rules similar to those previously described for access
+  parameters.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1]}
+  @ChgAdded{Version=[3],Text=[One important difference between the stand-alone
+  access variables and access parameters is that one can assign a local access
+  parameter to a more global stand-alone access variable. Similarly, one can
+  assign a more global access parameter to a more local stand-alone access
+  variable.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1]}
+  @ChgAdded{Version=[3],Text=[For these cases, it is important to note that the
+  @ldquote@;correct@rdquote static accessibility level for an access parameter
+  assigned to a stand-alone access parameter is the minimum of the passed in
+  level and the static accessibility level of the stand-alone object itself.
+  This is true since the static accessibility level passed in might be deeper
+  than that of the stand-alone object, but the dynamic accessibility of the
+  passed in object clearly must be shallower than the stand-alone object
+  (whatever is passed in must live at least as long as the subprogram call). We
+  do not need to keep a more local static level as objects statically deeper
+  than the stand-alone object cannot be stored into the stand-alone object.]}
 @end(ImplNote)
 @begin{Discussion}
 @Leading@keepnext@;Examples of accessibility:
@@ -5479,9 +5525,15 @@ that does not resolve by the new rules would have failed a Legality Rule.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0082-1]}
 @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Eliminated the static
-accessibility check for generic formal types, as the actual can be
+accessibility definition for generic formal types, as the actual can be
 more or less nested than the generic itself. This allows programs
 that were illegal for Ada 95 and for Amendment 1 Ada 2005.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1]}
+@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Eliminate the static accessibility
+definition for stand-alone objects of anonymous access-to-object types. This
+allows such objects to be used as temporaries without causing accessibility
+problems.]}
 @end{Extend95}
 
 @begin{DiffWord95}

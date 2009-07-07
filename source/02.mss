@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:01 $}
+@Comment{$Date: 2009/07/02 04:51:28 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -1386,7 +1386,7 @@ Also at any place where a @nt{compilation_unit} would be allowed]}.
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0100-1]}
 @ChgAdded{Version=[3],Text=[At any place where a @nt{compilation_unit}
-would be allowed.]}
+is allowed.]}
 @end{Itemize}
 
 Additional syntax rules and placement restrictions

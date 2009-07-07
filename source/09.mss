@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2009/03/10 07:16:40 $}
+@Comment{$Date: 2009/07/02 04:51:28 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.93 $}
+@Comment{$Revision: 1.94 $}
 
 @begin{Intro}
 
@@ -1720,7 +1720,8 @@ primitive procedure of a synchronized tagged type.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
 @ChgAdded{Version=[3],Text=[A @nt{pragma} Implemented with @nt{implementation_kind}
-By_Protected shall not be applied to a primitive procedure of a task interface.]}
+By_Protected_Procedure shall not be applied to a primitive procedure of a task
+interface.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
 @ChgAdded{Version=[3],Text=[A procedure for which the @nt{implementation_kind}

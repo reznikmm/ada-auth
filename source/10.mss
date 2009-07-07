@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2009/03/10 07:16:40 $}
+@Comment{$Date: 2009/07/02 04:51:28 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -435,7 +435,7 @@ tagged incomplete view.]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0108-1]}
   @ChgAdded{Version=[3],Text=[The incomplete view of a type does not have
-  a discriminant_part even if the the type_declaration does have
+  a discriminant_part even if the @nt{type_declaration} does have
   one. This is necessary because semantic analysis (and the associated
   dependence on @nt{with_clause}s) would be necessary
   to determine the types of the discriminants.]}
@@ -2200,8 +2200,8 @@ inside.
 @PDefn2{Term=[pragma, program unit], Sec=(library unit pragmas)}
 Certain program unit pragmas are defined to be
 @i{library unit pragmas}.
-@Chg{Version=[3],New=[If a library unit
-pragma applies to a program unit @i{P}, @i{P} shall be],Old=[The @nt{name}, if
+@Chg{Version=[3],New=[If a library unit pragma applies to a program unit,
+the program unit shall be],Old=[The @nt{name}, if
 any, in a library unit pragma shall denote the declaration of]} a library unit.
 @begin{Ramification}
 This, together with the rules for program unit pragmas above,

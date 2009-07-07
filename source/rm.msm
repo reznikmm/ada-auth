@@ -21,8 +21,13 @@
 @Comment{PDFs: }@RTFHeaderPrefix{Version=[2],Text=[ISO/IEC 8652:2007(E) Ed. 3]}
 @Comment{Springer: @RTFHeaderPrefix{Version=[2],Text=[Consolidated Ada Reference Manual - 2005 Edition]}}
 @RTFHeaderPrefix{Version=[3],Text=[ISO/IEC 8652:201z(E) Ed. 3]}
+@RTFFooter{UseDate=[T],UseClauseName=[T],UseISOFormat=[F]}@Comment{RM style footers}
 @RTFPageSize{Ada95}
 @RTFFonts{Serif=[Times],SansSerif=[Arial]}
+@RTFVersionName{Version=[0],Text=[Original Text]}
+@RTFVersionName{Version=[1],Text=[Technical Corrigendum 1]}
+@RTFVersionName{Version=[2],Text=[Amendment 1]}
+@RTFVersionName{Version=[3],Text=[Amendment 2]}
 
 @Comment{HTML properties}
 @Comment{Many small files are used, thus no @SingleHTMLOutputFile command}

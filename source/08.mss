@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:02 $}
+@Comment{$Date: 2009/07/02 04:51:28 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.80 $}
+@Comment{$Revision: 1.81 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -2560,16 +2560,21 @@ value of the call.],Old=[]}
 renaming-as-body has its own elaboration check.]}
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0123-1]}
 For a call on a renaming of a dispatching subprogram that is overridden,
 if the overriding occurred before the renaming, then the body executed
 is that of the overriding declaration,
 even if the overriding declaration is not visible at the place of the renaming;
-otherwise, the inherited or predefined subprogram is called.
+otherwise, the inherited or predefined subprogram is
+called.@Chg{Version=[3],New=[ A corresponding rule applies to a call on a
+renaming of a predefined equality operator for an untagged record type.],Old=[]}
 @begin{Discussion}
 Note that whether or not the renaming is itself primitive has
 nothing to do with the renamed subprogram.
 
-Note that the above rule is only for tagged types.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0123-1]}
+Note that the above rule is only for tagged types@Chg{Version=[3],New=[ and
+equality of untagged record types],Old=[]}.
 
 @leading@keepnext@;Consider the following example:
 @begin{Example}
@@ -2688,6 +2693,19 @@ We'll live with the oddity.
 @key[function] Minimum(L : Link := Head) @key[return] Cell @key[renames] Min_Cell; --@RI{ see @RefSecNum{Subprogram Declarations}}
 @end{Example}
 @end{Examples}
+
+@begin{Inconsistent95}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2:>
+  Renaming of user-defined untagged record equality is now defined to call the
+  overridden body so long as the overriding occurred before the renames.
+  This could change the body called in unusual cases; the change is necessary
+  to preserve the principle that the body called for an explicit call to
+  "=" (via a renames in this case) is the same as the one inherited for a
+  derived type and used in generics. Note that any renamings before the
+  overriding will be unchanged. Any differences caused by the change will be
+  rare and most likely will fix a bug.]}
+@end{Inconsistent95}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0028],ARef=[AI95-00145-01]}
@@ -3182,6 +3200,21 @@ in a class in scope.
   on.]}
 @end{Discussion}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0102-1]}
+@ChgAdded{Version=[3],Text=[If the expected type of a construct is @i<T1> and
+the actual type of the construct is @i<T2>, then @i<T2> shall be convertible to
+@i<T1> (see @RefSecNum{Type Conversions}).@Defn2{Term=[implicit conversion],
+Sec=[legality]}@PDefn2{Term=[convertible],Sec=(required)}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This rule prevents an implicit conversion that
+  would be illegal if it was an explicit conversion. For instance, this
+  prevents assigning an access-to-constant value into a stand-alone anonymous
+  access-to-variable object. It also covers convertibility of the designated
+  type and accessibility checks.]}
+@end{Reason}
+
 A complete context shall have at least one acceptable interpretation;
 if there is exactly one, then that one is chosen.
 @begin{Ramification}
@@ -3460,5 +3493,11 @@ Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2005.]]}
   (like object renames and qualified expressions). This fixes a hole in Ada 95
   that appears to prohibit using @nt{aggregate}s, 'Access, character literals,
   string literals, and @nt{allocator}s in qualified expressions.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0102-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a requirement
+  here that implicit conversions are convertible to the appropriate type.
+  This rule was scattered about the Standard, we moved a single generalized
+  version here.]}
 @end{DiffWord95}
 

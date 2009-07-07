@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.55 $ $Date: 2008/11/26 23:41:03 $ $Author: randy $ }
+@comment{ $Revision: 1.56 $ $Date: 2009/07/02 04:51:29 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2008/11/26 23:41:03 $}
+@Comment{$Date: 2009/07/02 04:51:29 $}
 
 @LabeledClause{String Handling}
 
@@ -2922,6 +2922,79 @@ equivalent to the function call Strings.Hash (To_String (Key));]}
 
 @end{DescribeCode}
 
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
+Strings.Hash_Case_Insensitive has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key<with> Ada.Containers;
+@key<function> Ada.Strings.Hash_Case_Insensitive (Key : String)@SubChildUnit{Parent=[Ada.Strings],Child=[Hash_Case_Insensitive]}
+   @key<return> Containers.Hash_Type;
+@key<pragma> Pure(Hash_Case_Insensitive);]}
+@end{Example}
+
+@begin{DescribeCode}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns an implementation-defined
+value which is a function of the value of Key, folded to lower case. If A and B
+are strings such that A equals B, Hash_Case_Insensitive(A) equals
+Hash_Case_Insensitive(B).]}
+@end{DescribeCode}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
+Strings.Fixed.Hash_Case_Insensitive has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@key<with> Ada.Containers, Ada.Strings.Hash_Case_Insensitive;
+@key[function] Ada.Strings.Fixed.Hash_Case_Insensitive (Key : String)@SubChildUnit{Parent=[Ada.Strings.Fixed],Child=[Hash_Case_Insensitive]}
+   @key[return] Containers.Hash_Type @key[renames] Ada.Strings.Hash_Case_Insensitive;
+pragma Pure(Hash_Case_Insensitive);]}
+@end{Example}
+
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The generic library
+function Strings.Bounded.Hash_Case_Insensitive has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@key<with> Ada.Containers;
+@key[generic]
+   @key[with package] Bounded @key[is]
+          @key[new] Ada.Strings.Bounded.Generic_Bounded_Length (<>);
+@key[function] Ada.Strings.Bounded.Hash_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Bounded],Child=[Hash_Case_Insensitive]}
+   (Key : Bounded.Bounded_String) @key[return] Containers.Hash_Type;
+@key[pragma] Preelaborate(Hash_Case_Insensitive);]}
+@end{Example}
+
+@begin{DescribeCode}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Strings.Bounded.Hash_Case_Insensitive
+is equivalent to the function call
+Strings.Hash_Case_Insensitive (Bounded.To_String (Key));]}
+@end{DescribeCode}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
+Strings.Unbounded.Hash_Case_Insensitive has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@key<with> Ada.Containers;
+@key[function] Ada.Strings.Unbounded.Hash_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Hash_Case_Insensitive]}
+   (Key : Unbounded_String) @key[return] Containers.Hash_Type;
+@key[pragma] Preelaborate(Hash_Case_Insensitive);]}
+@end{Example}
+
+@begin{DescribeCode}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Strings.Unbounded.Hash_Case_Insensitive
+is equivalent to the function call Strings.Hash_Case_Insensitive (To_String (Key));]}
+@end{DescribeCode}
 
 @end{StaticSem}
 
@@ -2948,5 +3021,325 @@ and similar strings should rarely return the same value.]}]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The Strings.Hash, Strings.Fixed.Hash, Strings.Bounded.Hash, and
   Strings.Unbounded.Hash functions are new.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:>
+  The Strings.Hash_Case_Insensitive, Strings.Fixed.Hash_Case_Insensitive,
+  Strings.Bounded.Hash_Case_Insensitive, and
+  Strings.Unbounded.Hash_Case_Insensitive functions are new.]}
 @end{Extend95}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[String Comparison]}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
+Strings.Equal_Case_Insensitive has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[function] Ada.Strings.Equal_Case_Insensitive (Left, Right : String)@SubChildUnit{Parent=[Ada.Strings],Child=[Equal_Case_Insensitive]}
+   @key[return] Boolean;
+@key[pragma] Pure(Equal_Case_Insensitive);]}
+@end{Example}
+
+@begin{DescribeCode}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Compares strings Left and Right,
+folded to lower case, for equality.]}
+@end{DescribeCode}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
+Strings.Fixed.Equal_Case_Insensitive has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] Ada.Containers, Ada.Strings.Equal_Case_Insensitive;
+function Ada.Strings.Fixed.Equal_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Fixed],Child=[Equal_Case_Insensitive]}
+   (Left, Right : String) @key[return] Boolean
+      @key[renames] Ada.Strings.Equal_Case_Insensitive;
+@key[pragma] Pure(Equal_Case_Insensitive);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The generic library
+function Strings.Bounded.Equal_Case_Insensitive has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] Ada.Containers;
+@key[generic]
+   @key[with package] Bounded @key[is]
+          @key[new] Ada.Strings.Bounded.Generic_Bounded_Length (<>);
+@key[function] Ada.Strings.Bounded.Equal_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Bounded],Child=[Equal_Case_Insensitive]}
+   (Left, Right : Bounded.Bounded_String) @key[return] Boolean;
+@key[pragma] Preelaborate(Equal_Case_Insensitive);]}
+@end{Example}
+
+@begin{DescribeCode}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Strings.Bounded.Equal_Case_Insensitive
+is equivalent to the function call Strings.Equal_Case_Insensitive
+(Bounded.To_String (Key));]}
+@end{DescribeCode}
+
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
+Strings.Unbounded.Equal_Case_Insensitive has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] Ada.Containers;
+@key[function] Ada.Strings.Unbounded.Equal_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Equal_Case_Insensitive]}
+   (Left, Right : Unbounded_String) @key[return] Boolean;
+@key[pragma] Preelaborate(Equal_Case_Insensitive);]}
+@end{Example}
+
+@begin{DescribeCode}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Strings.Unbounded.Equal_Case_Insensitive
+is equivalent to the function call Strings.Equal_Case_Insensitive
+(To_String (Key));]}
+@end{DescribeCode}
+
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
+Strings.Less_Case_Insensitive has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[function] Ada.Strings.Less_Case_Insensitive (Left, Right : String)@SubChildUnit{Parent=[Ada.Strings],Child=[Less_Case_Insensitive]}
+   @key[return] Boolean;
+@key[pragma] Pure(Less_Case_Insensitive);]}
+@end{Example}
+
+@begin{DescribeCode}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Performs a lexicographic comparison
+of strings Left and Right, folded to lower case.]}
+@end{DescribeCode}
+
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
+Strings.Fixed.Less_Case_Insensitive has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] Ada.Containers, Ada.Strings.Less_Case_Insensitive;
+@key[function] Ada.Strings.Fixed.Less_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Fixed],Child=[Less_Case_Insensitive]}
+   (Left, Right : String) @key[return] Boolean
+   @key[renames] Ada.Strings.Less_Case_Insensitive;
+@key[pragma] Pure(Less_Case_Insensitive);]}
+@end{Example}
+
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The generic library
+function Strings.Bounded.Less_Case_Insensitive has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] Ada.Containers;
+@key[generic]
+   @key[with package] Bounded @key[is]
+          @key[new] Ada.Strings.Bounded.Generic_Bounded_Length (<>);
+@key[function] Ada.Strings.Bounded.Less_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Bounded],Child=[Less_Case_Insensitive]}
+  (Left, Right : Bounded.Bounded_String) @key[return] Boolean;
+@key[pragma] Preelaborate(Less_Case_Insensitive);]}
+@end{Example}
+
+@begin{DescribeCode}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Strings.Bounded.Less_Case_Insensitive
+is equivalent to the function call Strings.Less_Case_Insensitive
+(Bounded.To_String (Key));]}
+@end{DescribeCode}
+
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
+Strings.Unbounded.Less_Case_Insensitive has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] Ada.Containers;
+@key[function] Ada.Strings.Unbounded.Less_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Less_Case_Insensitive]}
+  (Left, Right : Unbounded_String) @key[return] Boolean;
+@key[pragma] Preelaborate(Less_Case_Insensitive);]}
+@end{Example}
+
+@begin{DescribeCode}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Strings.Unbounded.Less_Case_Insensit
+ive is equivalent to the function call Strings.Less_Case_Insensitive (To_String
+(Key));]}
+@end{DescribeCode}
+
+@end{StaticSem}
+
+@begin{Extend95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:>
+  The Strings.Equal_Case_Insensitive, Strings.Fixed.Equal_Case_Insensitive,
+  Strings.Bounded.Equal_Case_Insensitive,
+  Strings.Unbounded.Equal_Case_Insensitive,
+  Strings.Less_Case_Insensitive, Strings.Fixed.Less_Case_Insensitive,
+  Strings.Bounded.Less_Case_Insensitive,
+  Strings.Unbounded.Less_Case_Insensitive functions are new.]}
+@end{Extend95}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[String Encoding]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+@ChgAdded{Version=[3],Text=[The language-defined package Strings.UTF_Encoding
+provides facilities for encoding and decoding strings in various character
+encoding schemes.]}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The library package
+Strings.UTF_Encoding has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings],Child=[UTF_Encoding]}@key[package] Ada.Strings.UTF_Encoding @key[is]
+   @key[pragma] Pure (UTF_Encoding);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Encoding_Scheme} @key[is] (UTF_None, UTF_8, UTF_16BE, UTF_16LE, UTF_16);
+   @key[subtype] @AdaSubtypeDefn{Name=[Short_Encoding],Of=[Encoding_Scheme]} @key[is] Encoding_Scheme @key[range] UTF_8  .. UTF_16LE;
+   @key[subtype] @AdaSubtypeDefn{Name=[Long_Encoding],Of=[Encoding_Scheme]}  @key[is] Encoding_Scheme @key[range] UTF_16 .. UTF_16;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_8}    : @key[constant] String := Character'Val (16#EF#) & Character'Val (16#BB#) &
+                 Character'Val (16#BF#);
+   @AdaObjDefn{BOM_16BE} : @key[constant] String := Character'Val (16#FE#) & Character'Val (16#FF#);
+   @AdaObjDefn{BOM_16LE} : @key[constant] String := Character'Val (16#FF#) & Character'Val (16#FE#);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_16}   : @key[constant] Wide_String := (1 => Wide_Character'Val (16#FEFF#));]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encode} (Item   : @key[in] Wide_String;
+                    Scheme : @key[in] Short_Encoding := UTF_8)
+            @key[return] String;
+   @key[function] @AdaSubDefn{Encode} (Item   : @key[in] Wide_Wide_String;
+                    Scheme : @key[in] Short_Encoding := UTF_8)
+            @key[return] String;
+   @key[function] @AdaSubDefn{Decode} (Item   : @key[in] String;
+                    Scheme : @key[in] Short_Encoding := UTF_8)
+            @key[return] Wide_String;
+   @key[function] @AdaSubDefn{Decode} (Item   : @key[in] String;
+                    Scheme : @key[in] Short_Encoding := UTF_8)
+            @key[return] Wide_Wide_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encode} (Item   : @key[in] Wide_Wide_String;
+                    Scheme : @key[in] Long_Encoding := UTF_16)
+            @key[return] Wide_String;
+   @key[function] @AdaSubDefn{Decode} (Item   : @key[in] Wide_String;
+                    Scheme : @key[in] Long_Encoding := UTF_16)
+            @key[return] Wide_Wide_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encoding} (Item : @key[in] String) @key[return] Encoding_Scheme;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encoding} (Item : @key[in] Wide_String) @key[return] Encoding_Scheme;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @AdaExcDefn{Encoding_Error} : @key[exception];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[end] Ada.Strings.UTF_Encoding;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+@ChgAdded{Version=[3],Text=[The type Encoding_Scheme defines encoding schemes.
+UTF_8 corresponds to the UTF-8 encoding scheme defined by Annex D of ISO/IEC
+106046. UTF_16 corresponds to the UTF-16 encoding scheme defined by Annex C of
+ISO/IEC 106046 stored in 16 bits; UTF_16BE corresponds to the UTF-16 encoding
+scheme stored in 8 bits, big endian; and UTF_16LE corresponds to the UTF-16
+encoding scheme on 8 bits, little endian.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+@ChgAdded{Version=[3],Text=[The subtype Short_Encoding covers the values of
+Encoding_Scheme for 8 bits encoding schemes, and the subtype Long_Encoding
+covers the values of Encoding_Scheme for 16 bits encoding schemes.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+@ChgAdded{Version=[3],Text=[Each of the Encode functions takes a Wide_String
+(respectively Wide_Wide_String) Item parameter and returns a String
+(respectively Wide_String) whose characters have position values that correspond
+to the encoding of the Item parameter according to the encoding scheme specified
+by the Scheme parameter. For UTF_8, no overlong encoding is returned. The lower
+bound of the returned string shall be 1.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+@ChgAdded{Version=[3],Text=[Each of the Decode functions takes a String
+(respectively Wide_String) Item parameter which is assumed to contain characters
+whose position values correspond to a valid encoding according to the encoding
+scheme specified by the Scheme parameter, and returns the corresponding
+Wide_String (respectively Wide_Wide_String). The exception Encoding_Error is
+propagated if the input string does not correspond to a valid encoding
+(including overlong encoding for UTF_8). The lower bound of the returned string
+is 1.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For each of the Decode functions
+whose Scheme parameter is of the Short_Encoding subtype, if the Item parameter
+starts with one of the BOM sequences then:]}
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[If this sequence identifies
+the same encoding as specified by the Scheme parameter, the sequence is
+ignored;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Otherwise, Encoding_Error is raised.]}
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+@ChgAdded{Version=[3],Text=[The Encode functions do put BOM sequences in the
+result.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+@ChgAdded{Version=[3],Text=[For each of the Encoding functions, if the initial
+characters of Item match a BOM, the corresponding encoding is returned;
+otherwise, UTF_None is returned.]}
+@end{StaticSem}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+@ChgAdded{Version=[3],Text=[If an implementation supports other encoding
+schemes, another similar child of Ada.Strings should be defined.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[If an implementation supports other string encoding
+schemes, a child of Ada.Strings similar to UTF_Encoding should be defined.]}]}
+@end{ImplAdvice}
+
+@begin{Notes}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+@ChgAdded{Version=[3],Text=[A BOM can be included in a file or other entity to
+indicate the encoding; it is skipped when decoding. An explicit concatenation is
+needed to include a BOM in an encoded entity (it is not added automatically).
+Typically, only the first line of a file or other entity will contain a BOM.
+When decoding, the appropriate Encoding function can be used on the first line
+to determine the encoding; that encoding will then be used in subsequent calls
+to Decode to convert all of the lines to an internal format.]}
+@end{Notes}
+
+@begin{Extend95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:>
+  The package Strings.UTF_Encoding is new.]}
+@end{Extend95}
+
 
