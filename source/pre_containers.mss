@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.66 $ $Date: 2009/07/02 04:51:29 $ $Author: randy $ }
+@comment{ $Revision: 1.67 $ $Date: 2009/07/07 04:31:06 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2009/07/02 04:51:29 $}
+@Comment{$Date: 2009/07/07 04:31:06 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -265,7 +265,7 @@ Containers has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Count_Type} @key{is range} 0 .. @i<implementation-defined>;]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[   @AdaExcDefn{Capacity_Error} : @key[exception];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2340,6 +2340,11 @@ value of Last_Index.]}
 @end{Extend95}
 
 @begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Generalized the definition
+  of Reserve_Capacity and Move. Specified which elements are read/written
+  by stream attributes.]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
   to cover tampering by generic actual subprograms.]}
@@ -2443,6 +2448,12 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
       Position  : @key{in}     Cursor;
       Process   : @key{not null access procedure}
                       (Element : @key{in out} Element_Type));]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} List; Source : @key{in} List);]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Copy} (Source : List) @key[return] List;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} List;
@@ -2657,6 +2668,11 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
   can always be specified if there is a need to support streaming.]}
 @end{Reason}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[List'Write writes List.Length elements to the
+stream. List'Read reads List.Length elements from the stream.]}
+
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[@Redundant[Some operations of this generic package
 have access-to-subprogram parameters. To ensure such operations are
@@ -2692,6 +2708,10 @@ Merge procedures of an instance of Generic_Sorting with @i<L> as a parameter; or
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[it finalizes @i<L>; or]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[it calls Assign with @i<L> as the
+Target parameter; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[it calls the Move procedure with @i<L> as a
@@ -2849,17 +2869,39 @@ unconstrained.]}
 @end{Ramification}
 
 @begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Assign (Target : @key{in out} List;
+                Source : @key{in} List);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as
+Source, the operation has no effect.  Otherwise, it clears Target, and each
+element of Source is assigned to the corresponding elements of Target.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Copy (Source : List) @key[return] List;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns a list whose elements match
+the elements of Source.]}
+
+@begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Move (Target : @key{in out} List;
                 Source : @key{in out} List);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Target denotes the same object
-as Source, then Move has no effect. Otherwise, Move first calls Clear (Target).
-Then, the nodes in Source are moved to Target (in the original order). The
-length of Target is set to the length of Source, and the length of Source is
-set to 0.]}
+as Source, then Move has no effect. Otherwise, @Chg{Version=[3],New=[equivalent
+to Target.Assign (Source) followed by Source.Clear],Old=[Move first calls Clear
+(Target). Then, the nodes in Source are moved to Target (in the original order).
+The length of Target is set to the length of Source, and the length of Source is
+set to 0]}.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3489,7 +3531,7 @@ procedure Sort of an
 instance of Containers.Doubly_Linked_Lists.Generic_Sorting should be
 @i{O}(@i<N>**2), and the average time complexity should be better than @i{O}(@i<N>**2).]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[a call on procedure Sort of an
+Text=[A call on procedure Sort of an
 instance of Containers.Doubly_Linked_Lists.Generic_Sorting
 should have an average time complexity better than @i{O}(@i{N}**2) and
 worst case no worse than @i{O}(@i{N}**2).]}]}
@@ -3559,6 +3601,10 @@ probably not a stable sort.]}
 @end{Extend95}
 
 @begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Generalized the definition
+  of Move. Specified which elements are read/written by stream attributes.]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
   to cover tampering by generic actual subprograms.]}
@@ -3680,6 +3726,9 @@ as a parameter; or]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[it finalizes @i<M>; or]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[it calls Assign with @i<M> as the Target parameter; or]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[it calls the Move procedure with @i<M> as a
 parameter; or]}
@@ -3748,6 +3797,11 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
   that streaming of cursors raise Program_Error by default. The attributes
   can always be specified if there is a need to support streaming.]}
 @end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[Map'Write writes Map.Length elements to the stream.
+Map'Read reads Map.Length elements from the stream.]}
+
 
 @begin{DescribeCode}
 
@@ -3890,6 +3944,17 @@ shall be unconstrained.]}
   of the element in place.]}
 @end{Ramification}
 
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Assign (Target : @key{in out} Map; Source : @key{in} Map);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as
+Source, the operation has no effect. Otherwise, each key/element pair of Source
+is assigned to the corresponding key/element pairs of Target.]}
+
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Move (Target : @key{in out} Map;
@@ -3897,10 +3962,12 @@ shall be unconstrained.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Target denotes the same object
-as Source, then Move has no effect. Otherwise, Move first calls Clear (Target).
+as Source, then Move has no effect. Otherwise, @Chg{Version=[3],New=[equivalent
+to Target.Assign (Source) followed by Source.Clear],Old=[Move first calls Clear (Target).
 Then, each node from Source is removed from Source and inserted into Target.
-The length of Source is 0 after a successful call to Move.]}
+The length of Source is 0 after a successful call to Move]}.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4294,7 +4361,11 @@ unless specified by the operation.]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added procedure Assign;
-  the extension and incompatibly is documented with the specific packages.]}
+  the extension and incompatibility is documented with the specific packages.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Generalized the definition
+  of Move. Specified which elements are read/written by stream attributes.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
@@ -4385,6 +4456,12 @@ package Containers.Hashed_Maps has the following declaration:]}
       Process   : @key{not null access procedure}
                       (Key     : @key{in}     Key_Type;
                        Element : @key{in out} Element_Type));]}
+
+@ChgRef{Version=[3],Kind=[Added],Aref=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Assign} (Target : @key[in out] Map; Source : @key[in] Map);]}
+
+@ChgRef{Version=[3],Kind=[Added],Aref=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Copy} (Source : Map; Capacity : Count_Type := 0) @key[return] Map;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} Map;
@@ -4662,6 +4739,29 @@ cursors of Container.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[In addition to the semantics
 described in @RefSecNum{Maps}, Clear does not affect the capacity of
 Container.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Assign (Target : @key[in out] Map; Source : @key[in] Map);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[In addition to the semantics
+described in @RefSecNum{Maps}, if Source.Length is greater than Target.Capacity,
+Reserve_Capacity is called with Source.Length as the capacity before assigning
+elements.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Copy (Source : Map; Capacity : Count_Type := 0) @key[return] Map;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns a map whose keys and
+elements are initialized from the keys and elements of Source. If Capacity is 0,
+then the map capacity is the length of Source; if Capacity is equal to or
+greater than Source.Length, the map capacity is at least the specified value.
+Otherwise, the operation raises Capacity_Error.]}
 
 @begin{ImplNote}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4944,6 +5044,12 @@ package Containers.Ordered_Maps has the following declaration:]}
                       (Key     : @key{in}     Key_Type;
                        Element : @key{in out} Element_Type));]}
 
+@ChgRef{Version=[3],Kind=[Added],Aref=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Assign} (Target : @key[in out] Map; Source : @key[in] Map);]}
+
+@ChgRef{Version=[3],Kind=[Added],Aref=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Copy} (Source : Map) @key[return] Map;]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} Map;
                    Source : @key{in out} Map);]}
@@ -5164,6 +5270,16 @@ key that is smaller than the key of the given node. All comparisons are done
 using the generic formal "<" operator for keys.]}
 
 @begin{DescribeCode}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Copy (Source : Map) @key[return] Map;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns a map whose keys and
+elements are initialized from the corresponding keys and elements of Source.]}
+
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5506,6 +5622,10 @@ procedures with @i{S} as a parameter; or]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[it finalizes @i<S>; or]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[it calls Assign with @i<S> as the Target parameter;
+or]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[it calls the Move procedure with @i<S> as a
 parameter; or]}
@@ -5571,6 +5691,10 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
   that streaming of cursors raise Program_Error by default. The attributes
   can always be specified if there is a need to support streaming.]}
 @end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[Set'Write writes Set.Length elements to the stream.
+Set'Read reads Set.Length elements from the stream.]}
 
 @begin{DescribeCode}
 
@@ -5704,16 +5828,28 @@ Program_Error is propagated if Process.@key{all} tampers with the elements of
 Container. Any exception raised by Process.@key{all} is propagated.]}
 
 @begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Assign (Target : @key{in out} Set; Source : @key{in} Set);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as Source, the operation has no
+effect. Otherwise, each element of Source is assigned to the
+corresponding element of Target.]}
+
+@begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Move (Target : @key{in out} Set;
                 Source : @key{in out} Set);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Target denotes the same object
-as Source, then Move has no effect. Otherwise, Move first clears Target. Then,
-each element from Source is removed from Source and inserted into Target. The
-length of Source is 0 after a successful call to Move.]}
+as Source, then Move has no effect. Otherwise, @Chg{Version=[3],New=[equivalent
+to Target.Assign (Source) followed by Source.Clear],Old=[Move first clears
+Target. Then, each element from Source is removed from Source and inserted into
+Target. The length of Source is 0 after a successful call to Move]}.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -6277,7 +6413,11 @@ unless specified by the operation.]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added procedure Assign;
-  the extension and incompatibly is documented with the specific packages.]}
+  the extension and incompatibility is documented with the specific packages.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Generalized the definition
+  of Move. Specified which elements are read/written by stream attributes.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
@@ -6361,6 +6501,12 @@ package Containers.Hashed_Sets has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Query_Element}
      (Position : @key{in} Cursor;
       Process  : @key{not null access procedure} (Element : @key{in} Element_Type));]}
+
+@ChgRef{Version=[3],Kind=[Added],Aref=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Assign} (Target : @key[in out] Set; Source : @key[in] Set);]}
+
+@ChgRef{Version=[3],Kind=[Added],Aref=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Copy} (Source : Set; Capacity : Count_Type := 0) @key[return] Set;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} Set;
@@ -6650,6 +6796,29 @@ described in @RefSecNum{Sets}, Clear does not affect the capacity of
 Container.]}
 
 @begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Assign (Target : @key[in out] Set; Source : @key[in] Set);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[In addition to the semantics
+described in @RefSecNum{Sets}, if Source.Length is greater than Target.Capacity,
+Reserve_Capacity is called with Source.Length as the capacity before assigning
+elements.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Copy (Source : Set; Capacity : Count_Type := 0) @key[return] Set;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns a set whose elements are
+initialized from the elements of Source. If Capacity is 0, then the set capacity
+is the length of Source; if Capacity is equal to or greater than Source.Length,
+the set capacity is at least the specified value. Otherwise, the operation
+raises Capacity_Error.]}
+
+@begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Insert (Container : @key{in out} Set;
                   New_Item  : @key{in}     Element_Type;
@@ -6839,6 +7008,12 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Query_Element}
      (Position : @key{in} Cursor;
       Process  : @key{not null access procedure} (Element : @key{in} Element_Type));]}
+
+@ChgRef{Version=[3],Kind=[Added],Aref=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Assign} (Target : @key[in out] Set; Source : @key[in] Set);]}
+
+@ChgRef{Version=[3],Kind=[Added],Aref=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Copy} (Source : Set) @key[return] Set;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} Set;
@@ -7131,6 +7306,15 @@ formal "<" operator for elements.]}
 @begin{DescribeCode}
 
 @begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Copy (Source : Set) @key[return] Set;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns a set whose
+elements are initialized from the corresponding elements of Source.]}
+
+@begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Delete_First (Container : @key{in out} Set);]}
 @end{Example}
@@ -7368,10 +7552,12 @@ the generic formal Element_Type is indefinite.]}
 @begin{StaticSem}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The declaration
 of the generic library package
 Containers.Indefinite_Vectors@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Vectors]}
-has the same contents as Containers.Vectors except:]}
+has the same contents @Chg{Version=[3],New=[and semantics ],Old=[]}as
+Containers.Vectors except:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -7431,10 +7617,11 @@ with the difference that the generic formal Element_Type is indefinite.]}
 @begin{StaticSem}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The declaration of
 the generic library package
 Containers.@!Indefinite_@!Doubly_@!Linked_@!Lists@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Doubly_Linked_Lists]}
-has the same contents as
+has the same contents @Chg{Version=[3],New=[and semantics ],Old=[]}as
 Containers.@!Doubly_@!Linked_@!Lists except:]}
 
 @begin{Itemize}
@@ -7493,10 +7680,12 @@ indefinite.]}
 @begin{StaticSem}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The declaration of
 the generic library package
 Containers.Indefinite_Hashed_Maps@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Hashed_Maps]}
-has the same contents as Containers.Hashed_Maps except:]}
+has the same contents @Chg{Version=[3],New=[and semantics ],Old=[]}as
+Containers.Hashed_Maps except:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -7556,10 +7745,11 @@ the generic formal types Key_Type and Element_Type are indefinite.]}
 @begin{StaticSem}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The declaration of
 the generic library package
 Containers.Indefinite_Ordered_Maps@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Ordered_Maps]}
-has the same contents as
+has the same contents @Chg{Version=[3],New=[and semantics ],Old=[]}as
 Containers.Ordered_Maps except:]}
 
 @begin{Itemize}
@@ -7622,10 +7812,11 @@ that the generic formal type Element_Type is indefinite.]}
 @begin{StaticSem}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The declaration
 of the generic library package
 Containers.Indefinite_Hashed_Sets@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Hashed_Sets]}
-has the same contents as
+has the same contents @Chg{Version=[3],New=[and semantics ],Old=[]}as
 Containers.Hashed_Sets except:]}
 
 @begin{Itemize}
@@ -7660,10 +7851,12 @@ that the generic formal type Element_Type is indefinite.]}
 @begin{StaticSem}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The declaration
 of the generic library package
 Containers.Indefinite_Ordered_Sets@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Ordered_Sets]}
-has the same contents as Containers.Ordered_Sets except:]}
+has the same contents @Chg{Version=[3],New=[and semantics ],Old=[]}as
+Containers.Ordered_Sets except:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -8055,13 +8248,600 @@ holder unless specified by the operation.]}
   @b<Amendment 2:> The generic package Containers.Indefinite_Holders is new.]}
 @end{Extend95}
 
+@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Vectors]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[The language-defined generic package
+Containers.Bounded_Vectors provides a private type Vector and a set of
+operations. It provides the same operations as the package Containers.Vectors
+(see @RefSecNum{The Package Containers.Vectors}), with the difference that the
+maximum storage is bounded.]}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The declaration of the generic
+library package Containers.Bounded_Vectors has the same contents and semantics
+as Containers.Vectors except:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[@nt{Pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+
+  @begin{ImplNote}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Vectors
+      cannot depend on package Ada.Finalization (because that package
+      has Preelaborate categorization).]}
+  @end{ImplNote}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The type Vector is declared with a
+    discriminant that specifies the capacity:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key{type} Vector (Capacity : Count_Type) @key[is tagged private];]}
+@end{Example}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The type Vector needs finalization if and only if
+    type Element_Type needs finalization.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[In function Copy, if the Capacity parameter is
+    equal to or greater than Source.Length, the vector capacity exactly equals
+    the value of the Capacity parameter.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The description of Reserve_Capacity
+  is replaced by:]}
+@begin{Indent}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],NoPrefix=[T],Text=[If the specified Capacity is larger
+    than the Container.Capacity, then Reserve_Capacity raises Capacity_Error.
+    Otherwise, the operation has no effect.]}
+@end{Indent}
+@end{Itemize}
+@end{StaticSem}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[Bounded vector objects should be implemented without
+implicit pointers or dynamic allocation.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[Bounded vector objects should be implemented without
+implicit pointers or dynamic allocation.]}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[The implementation advice for procedure Move to
+minimize copying does not apply.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[The implementation advice for procedure Move to
+minimize copying does not apply to bounded vectors.]}]}
+
+@end{ImplAdvice}
+
+
+@begin{Extend95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
+  @b<Amendment 2:> The generic package Containers.Bounded_Vectors is new.]}
+@end{Extend95}
+
+
+@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Doubly_Linked_Lists]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[The language-defined generic package
+Containers.Bounded_Doubly_Linked_Lists provides a private type List
+and a set of operations. It provides the same operations as the
+package Containers.Doubly_Linked_Lists
+(see @RefSecNum{The Package Containers.Doubly_Linked_Lists}), with the
+difference that the maximum storage is bounded.]}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The declaration of the generic
+library package Containers.Bounded_Doubly_Linked_Lists has the same contents and semantics
+as Containers.Doubly_Linked_Lists except:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[@nt{Pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+
+  @begin{ImplNote}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Doubly_Linked_Lists
+      cannot depend on package Ada.Finalization (because that package
+      has Preelaborate categorization).]}
+  @end{ImplNote}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The type List is declared with a
+    discriminant that specifies the capacity (maximum number of elements)
+    as follows:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key{type} List (Capacity : Count_Type) @key[is tagged private];]}
+@end{Example}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The type List needs finalization if and only if
+    type Element_Type needs finalization.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The allocation of internal storage includes a
+    check that the capacity is not exceeded, and Capacity_Error is raised if
+    this check fails.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[In procedure Assign, if Source length is greater
+    than Target capacity, then Capacity_Error is raised.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[Function Copy is declared as follows:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[function] @AdaSubDefn{Copy} (Source : List; Capacity : Count_Type := 0)
+      @key[return] List;]}
+@end{Example}
+@begin{Indent}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Noprefix=[T],Text=[If Capacity is 0, then the list capacity is the length of
+    Source; if Capacity is equal to or greater than Source.Length,
+    the list capacity equals the value of the Capacity parameter;
+    otherwise, the operation raises Capacity_Error.]}
+@end{Indent}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[In the three-parameter procedure Splice whose
+    Source has type List, if the sum of Target.Length and Source.Length is
+    greater than Target.Capacity, then Splice raises Capacity_Error.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[In the four-parameter procedure Splice, if
+    Target.Length equals Target.Capacity, then Splice raises Capacity_Error.]}
+
+@end{Itemize}
+@end{StaticSem}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[Bounded list objects should be implemented without
+implicit pointers or dynamic allocation.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[Bounded list objects should be implemented without
+implicit pointers or dynamic allocation.]}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[The implementation advice for procedure Move to
+minimize copying does not apply.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[The implementation advice for procedure Move to
+minimize copying does not apply to bounded lists.]}]}
+
+@end{ImplAdvice}
+
+@begin{Extend95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
+  @b<Amendment 2:> The generic package Containers.Bounded_Doubly_Linked_Lists is new.]}
+@end{Extend95}
+
+
+@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Hashed_Maps]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[The language-defined generic package
+Containers.Bounded_Hashed_Maps provides a private type List
+and a set of operations. It provides the same operations as the
+package Containers.Hashed_Maps
+(see @RefSecNum{The Package Containers.Hashed_Maps}), with the
+difference that the maximum storage is bounded.]}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The declaration of the generic
+library package Containers.Bounded_Hashed_Maps has the same contents and semantics
+as Containers.Hashed_Maps except:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[@nt{Pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+
+  @begin{ImplNote}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Hashed_Maps
+      cannot depend on package Ada.Finalization (because that package
+      has Preelaborate categorization).]}
+  @end{ImplNote}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The type Map is declared with
+    discriminants that specify both the capacity (number of elements) and
+    modulus (number of distinct hash values) of the hash table as follows:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[type] Map (Capacity : Count_Type;
+             Modulus  : Hash_Type) @key[is tagged private];]}
+@end{Example}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The type Map needs finalization if and only if type
+      Key_Type or type Element_Type needs finalization.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The description of Reserve_Capacity
+  is replaced by:]}
+@begin{Indent}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],NoPrefix=[T],Text=[If the specified Capacity is larger
+    than the Container.Capacity, then Reserve_Capacity raises Capacity_Error.
+    Otherwise, the operation has no effect.]}
+@end{Indent}
+
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[An additional operation is added immediately following Reserve_Capacity:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[function] @AdaSubDefn{Default_Modulus} (Capacity : Count_Type) @key[return] Hash_Type;]}
+@end{Example}
+@begin{Indent}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Noprefix=[T],Text=[Default_Modulus returns an
+    implementation-defined value for the number of distinct hash values to be
+    used for the given capacity (maximum number of elements).]}
+@end{Indent}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[function] @AdaSubDefn{Copy} (Source : Map;
+                  Capacity : Count_Type := 0;
+                  Modulus  : Hash_Type := 0) @key[return] Map;]}
+@end{Example}
+@begin{Indent}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a map with key/element pairs initialized from the values
+    in Source. If Capacity is 0, then the map capacity is the
+    length of Source; if Capacity is equal to or greater than
+    Source.Length, the map capacity is the value of the Capacity
+    parameter; otherwise, the operation raises Capacity_Error.  If
+    the Modulus argument is 0, then the map modulus is the value
+    returned by a call to Default_Modulus with the map capacity as its
+    argument; otherwise the map modulus is the value of the Modulus parameter.]}
+@end{Indent}
+
+@end{Itemize}
+@end{StaticSem}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[Bounded map objects should be implemented without
+implicit pointers or dynamic allocation.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[Bounded map objects should be implemented without
+implicit pointers or dynamic allocation.]}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[The implementation advice for procedure Move to
+minimize copying does not apply.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[The implementation advice for procedure Move to
+minimize copying does not apply to bounded maps.]}]}
+
+@end{ImplAdvice}
+
+@begin{Extend95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
+  @b<Amendment 2:> The generic package Containers.Bounded_Hashed_Maps is new.]}
+@end{Extend95}
+
+
+@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Ordered_Maps]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[The language-defined generic package
+Containers.Bounded_Ordered_Maps provides a private type List
+and a set of operations. It provides the same operations as the
+package Containers.Ordered_Maps
+(see @RefSecNum{The Package Containers.Ordered_Maps}), with the
+difference that the maximum storage is bounded.]}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The declaration of the generic
+library package Containers.Bounded_Ordered_Maps has the same contents and semantics
+as Containers.Ordered_Maps except:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[@nt{Pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+
+  @begin{ImplNote}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Ordered_Maps
+      cannot depend on package Ada.Finalization (because that package
+      has Preelaborate categorization).]}
+  @end{ImplNote}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The type Map is declared with a
+    discriminant that specifies the capacity (maximum number of elements)
+    as follows:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key{type} Map (Capacity : Count_Type) @key[is tagged private];]}
+@end{Example}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The type Map needs finalization if and only if
+    type Element_Type needs finalization.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The allocation of a new node includes a check that
+    the capacity is not exceeded, and Capacity_Error is raised if this check
+    fails.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[In procedure Assign, if Source length is greater
+    than Target capacity, then Capacity_Error is raised.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[function] @AdaSubDefn{Copy} (Source : Map;
+                  Capacity : Count_Type := 0) @key[return] Map;]}
+@end{Example}
+@begin{Indent}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a map with key/element pairs
+    initialized from the values in Source. If Capacity is 0, then the map
+    capacity is the length of Source; if Capacity is equal to or greater than
+    Source.Length, the map capacity is the specified value; otherwise, the
+    operation raises Capacity_Error.]}
+@end{Indent}
+
+@end{Itemize}
+@end{StaticSem}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[Bounded map objects should be implemented without
+implicit pointers or dynamic allocation.]}
+@Comment{We omit the @ChgImplAdvice as it is identical to that of the previous clause.}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[The implementation advice for procedure Move to
+minimize copying does not apply.]}
+@Comment{We omit the @ChgImplAdvice as it is identical to that of the previous clause.}
+
+@end{ImplAdvice}
+
+@begin{Extend95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
+  @b<Amendment 2:> The generic package Containers.Bounded_Ordered_Maps is new.]}
+@end{Extend95}
+
+
+@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Hashed_Sets]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[The language-defined generic package
+Containers.Bounded_Hashed_Sets provides a private type List
+and a set of operations. It provides the same operations as the
+package Containers.Hashed_Sets
+(see @RefSecNum{The Package Containers.Hashed_Sets}), with the
+difference that the maximum storage is bounded.]}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The declaration of the generic
+library package Containers.Bounded_Hashed_Sets has the same contents and semantics
+as Containers.Hashed_Sets except:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[@nt{Pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+
+  @begin{ImplNote}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Hashed_Sets
+      cannot depend on package Ada.Finalization (because that package
+      has Preelaborate categorization).]}
+  @end{ImplNote}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The type Set is declared with
+    discriminants that specify both the capacity (number of elements) and
+    modulus (number of distinct hash values) of the hash table as follows:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[type] Set (Capacity : Count_Type;
+             Modulus  : Hash_Type) @key[is tagged private];]}
+@end{Example}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The type Set needs finalization if and only if type
+      Key_Type or type Element_Type needs finalization.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The description of Reserve_Capacity
+  is replaced by:]}
+@begin{Indent}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],NoPrefix=[T],Text=[If the specified Capacity is larger
+    than the Container.Capacity, then Reserve_Capacity raises Capacity_Error.
+    Otherwise, the operation has no effect.]}
+@end{Indent}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[An additional operation is added immediately following Reserve_Capacity:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[function] @AdaSubDefn{Default_Modulus} (Capacity : Count_Type) @key[return] Hash_Type;]}
+@end{Example}
+@begin{Indent}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Noprefix=[T],Text=[Default_Modulus returns an
+    implementation-defined value for the number of distinct hash values to be
+    used for the given capacity (maximum number of elements).]}
+@end{Indent}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[function] @AdaSubDefn{Copy} (Source : Set;
+                  Capacity : Count_Type := 0;
+                  Modulus  : Hash_Type := 0) @key[return] Set;]}
+@end{Example}
+@begin{Indent}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a set whose elements are
+    initialized from the values in Source. If Capacity is 0, then the set
+    capacity is the length of Source; if Capacity is equal to or greater than
+    Source.Length, the set capacity is the value of the Capacity parameter;
+    otherwise, the operation raises Capacity_Error. If the Modulus argument is
+    0, then the set modulus is the value returned by a call to Default_Modulus
+    with the set capacity as its argument; otherwise the set modulus is the
+    value of the Modulus parameter.]}
+@end{Indent}
+
+@end{Itemize}
+@end{StaticSem}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[Bounded set objects should be implemented without
+implicit pointers or dynamic allocation.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[Bounded set objects should be implemented without
+implicit pointers or dynamic allocation.]}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[The implementation advice for procedure Move to
+minimize copying does not apply.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[The implementation advice for procedure Move to
+minimize copying does not apply to bounded sets.]}]}
+
+@end{ImplAdvice}
+
+@begin{Extend95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
+  @b<Amendment 2:> The generic package Containers.Bounded_Hashed_Sets is new.]}
+@end{Extend95}
+
+
+@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Ordered_Sets]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[The language-defined generic package
+Containers.Bounded_Ordered_Sets provides a private type List
+and a set of operations. It provides the same operations as the
+package Containers.Ordered_Sets
+(see @RefSecNum{The Package Containers.Ordered_Sets}), with the
+difference that the maximum storage is bounded.]}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The declaration of the generic
+library package Containers.Bounded_Ordered_Sets has the same contents and semantics
+as Containers.Ordered_Sets except:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[@nt{Pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+
+  @begin{ImplNote}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Ordered_Sets
+      cannot depend on package Ada.Finalization (because that package
+      has Preelaborate categorization).]}
+  @end{ImplNote}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The type Set is declared with a
+    discriminant that specifies the capacity (maximum number of elements)
+    as follows:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key{type} Set (Capacity : Count_Type) @key[is tagged private];]}
+@end{Example}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The type Set needs finalization if and only if
+    type Element_Type needs finalization.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If Insert (or Include) adds an element, a check is
+    made that the capacity is not exceeded, and Capacity_Error is raised if this
+    check fails.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[In procedure Assign, if Source length is greater
+    than Target capacity, then Capacity_Error is raised.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[function] @AdaSubDefn{Copy} (Source : Set;
+                  Capacity : Count_Type := 0) @key[return] Set;]}
+@end{Example}
+@begin{Indent}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a set whose elements
+    are initialized from the values in Source. If Capacity is 0, then the set
+    capacity is the length of Source; if Capacity is equal to or greater than
+    Source.Length, the set capacity is the specified value; otherwise, the
+    operation raises Capacity_Error.]}
+@end{Indent}
+
+@end{Itemize}
+@end{StaticSem}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[Bounded set objects should be implemented without
+implicit pointers or dynamic allocation.]}
+@Comment{We omit the @ChgImplAdvice as it is identical to that of the previous clause.}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],Text=[The implementation advice for procedure Move to
+minimize copying does not apply.]}
+@Comment{We omit the @ChgImplAdvice as it is identical to that of the previous clause.}
+
+@end{ImplAdvice}
+
+@begin{Extend95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
+  @b<Amendment 2:> The generic package Containers.Bounded_Ordered_Sets is new.]}
+@end{Extend95}
+
 
 @LabeledAddedSubclause{Version=[2],Name=[Array Sorting]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[2],Text=[The language-defined generic procedures
-Containers.Generic_Array_Sort and Containers.Generic_Constrained_Array_Sort
+Containers.Generic_Array_Sort@Chg{Version=[3],New=[,],Old=[ and]}
+Containers.Generic_Constrained_Array_Sort@Chg{Version=[3],New=[, and
+Containers.Generic_Sort],Old=[]}
 provide sorting on arbitrary array types.]}
 @end{Intro}
 
@@ -8157,6 +8937,42 @@ Generic_Constrained_Array_Sort calls "<" is unspecified.@PDefn{unspecified}]}
 
 @end{DescribeCode}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The generic library
+procedure Containers.@!Generic_@!Sort has the following declaration:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@key{generic}
+   @key{type} Index_Type @key{is} (<>);
+   @key{with function} Before (Left, Right : Index_Type) @key{return} Boolean;
+   @key{with procedure} Swap (Left, Right : Index_Type);
+@key{procedure} Ada.Containers.Generic_Sort@SubChildUnit{Parent=[Ada.Containers],Child=[Generic_Sort]}
+      (First, Last : Index_Type'Base);
+@key{pragma} Pure(Ada.Containers.Generic_Sort);]}
+@end{Example}
+
+@begin{DescribeCode}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Reorders the elements of an indexable structure,
+over the range First .. Last, such that the elements are sorted in the ordering
+determined by the generic formal Before function. The generic formal Before
+compares the elements having the given indices, and the generic formal Swap
+exchanges the values of the indicated elements. Any exception raised during
+evaluation of Before or Swap is propagated.]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[The actual function for the generic formal function Before of
+Generic_Sort is expected to return the same value each time it is
+called with index values that identify a particular pair of element values.
+It should define a strict weak ordering relationship (see @RefSecNum{Containers});
+it should not modify the elements. The actual function for the generic formal
+Swap should exchange the values of the indicated elements. If the actual for
+either Before or Swap behaves in some other manner, the behavior of
+Generic_Sort is unspecified. How many times the Generic_Sort calls Before
+or Swap is unspecified.@PDefn{unspecified}]}
+
+@end{DescribeCode}
+
 @end{StaticSem}
 
 @begin{ImplAdvice}
@@ -8200,8 +9016,12 @@ should minimize copying of elements.]}]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The generic packages Containers.Generic_Array_Sort and
+  The generic procedures Containers.Generic_Array_Sort and
   Containers.Generic_Constrained_Array_Sort are new.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> The generic procedure
+  Containers.Generic_Sort is new.]}
 @end{Extend95}
 
 @begin{DiffWord95}
