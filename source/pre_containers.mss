@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.67 $ $Date: 2009/07/07 04:31:06 $ $Author: randy $ }
+@comment{ $Revision: 1.68 $ $Date: 2009/07/11 04:00:27 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2009/07/07 04:31:06 $}
+@Comment{$Date: 2009/07/11 04:00:27 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -806,7 +806,7 @@ to the Index_Type'Last.]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[If an operation attempts to modify the vector such
 that the position of the last element would be greater than Index_Type'Last,
-then the operation raises Constraint_Error.]}
+then the operation propagates Constraint_Error.]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1290,7 +1290,7 @@ Each element of Source is assigned to the corresponding elements of Target.]}
 initialized from the corresponding elements of Source. If Capacity is 0, then
 the vector capacity is the length of Source; if Capacity is equal to or greater
 than Source.Length, the vector capacity is at least the specified value.
-Otherwise, the operation raises Capacity_Error.]}
+Otherwise, the operation propagated Capacity_Error.]}
 
 
 @begin{Example}
@@ -4761,7 +4761,7 @@ elements.]}
 elements are initialized from the keys and elements of Source. If Capacity is 0,
 then the map capacity is the length of Source; if Capacity is equal to or
 greater than Source.Length, the map capacity is at least the specified value.
-Otherwise, the operation raises Capacity_Error.]}
+Otherwise, the operation propagates Capacity_Error.]}
 
 @begin{ImplNote}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -6816,7 +6816,7 @@ elements.]}
 initialized from the elements of Source. If Capacity is 0, then the set capacity
 is the length of Source; if Capacity is equal to or greater than Source.Length,
 the set capacity is at least the specified value. Otherwise, the operation
-raises Capacity_Error.]}
+propagates Capacity_Error.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -8298,7 +8298,7 @@ as Containers.Vectors except:]}
 @begin{Indent}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
     @ChgAdded{Version=[3],NoPrefix=[T],Text=[If the specified Capacity is larger
-    than the Container.Capacity, then Reserve_Capacity raises Capacity_Error.
+    than the Container.Capacity, then Reserve_Capacity propagates Capacity_Error.
     Otherwise, the operation has no effect.]}
 @end{Indent}
 @end{Itemize}
@@ -8372,12 +8372,12 @@ as Containers.Doubly_Linked_Lists except:]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The allocation of internal storage includes a
-    check that the capacity is not exceeded, and Capacity_Error is raised if
-    this check fails.]}
+    check that the capacity is not exceeded, and Capacity_Error is raised
+    if this check fails.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[In procedure Assign, if Source length is greater
-    than Target capacity, then Capacity_Error is raised.]}
+    than Target capacity, then Capacity_Error is propagated.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[Function Copy is declared as follows:]}
@@ -8391,17 +8391,17 @@ as Containers.Doubly_Linked_Lists except:]}
   @ChgAdded{Version=[3],Noprefix=[T],Text=[If Capacity is 0, then the list capacity is the length of
     Source; if Capacity is equal to or greater than Source.Length,
     the list capacity equals the value of the Capacity parameter;
-    otherwise, the operation raises Capacity_Error.]}
+    otherwise, the operation propagated Capacity_Error.]}
 @end{Indent}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[In the three-parameter procedure Splice whose
     Source has type List, if the sum of Target.Length and Source.Length is
-    greater than Target.Capacity, then Splice raises Capacity_Error.]}
+    greater than Target.Capacity, then Splice propagates Capacity_Error.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[In the four-parameter procedure Splice, if
-    Target.Length equals Target.Capacity, then Splice raises Capacity_Error.]}
+    Target.Length equals Target.Capacity, then Splice propagates Capacity_Error.]}
 
 @end{Itemize}
 @end{StaticSem}
@@ -8478,7 +8478,7 @@ as Containers.Hashed_Maps except:]}
 @begin{Indent}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
     @ChgAdded{Version=[3],NoPrefix=[T],Text=[If the specified Capacity is larger
-    than the Container.Capacity, then Reserve_Capacity raises Capacity_Error.
+    than the Container.Capacity, then Reserve_Capacity propagates Capacity_Error.
     Otherwise, the operation has no effect.]}
 @end{Indent}
 
@@ -8510,7 +8510,7 @@ as Containers.Hashed_Maps except:]}
     in Source. If Capacity is 0, then the map capacity is the
     length of Source; if Capacity is equal to or greater than
     Source.Length, the map capacity is the value of the Capacity
-    parameter; otherwise, the operation raises Capacity_Error.  If
+    parameter; otherwise, the operation propagates Capacity_Error.  If
     the Modulus argument is 0, then the map modulus is the value
     returned by a call to Default_Modulus with the map capacity as its
     argument; otherwise the map modulus is the value of the Modulus parameter.]}
@@ -8591,7 +8591,7 @@ as Containers.Ordered_Maps except:]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[In procedure Assign, if Source length is greater
-    than Target capacity, then Capacity_Error is raised.]}
+    than Target capacity, then Capacity_Error is propagated.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
@@ -8606,7 +8606,7 @@ as Containers.Ordered_Maps except:]}
     initialized from the values in Source. If Capacity is 0, then the map
     capacity is the length of Source; if Capacity is equal to or greater than
     Source.Length, the map capacity is the specified value; otherwise, the
-    operation raises Capacity_Error.]}
+    operation propagates Capacity_Error.]}
 @end{Indent}
 
 @end{Itemize}
@@ -8680,7 +8680,7 @@ as Containers.Hashed_Sets except:]}
 @begin{Indent}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
     @ChgAdded{Version=[3],NoPrefix=[T],Text=[If the specified Capacity is larger
-    than the Container.Capacity, then Reserve_Capacity raises Capacity_Error.
+    than the Container.Capacity, then Reserve_Capacity propagates Capacity_Error.
     Otherwise, the operation has no effect.]}
 @end{Indent}
 
@@ -8711,7 +8711,7 @@ as Containers.Hashed_Sets except:]}
     initialized from the values in Source. If Capacity is 0, then the set
     capacity is the length of Source; if Capacity is equal to or greater than
     Source.Length, the set capacity is the value of the Capacity parameter;
-    otherwise, the operation raises Capacity_Error. If the Modulus argument is
+    otherwise, the operation propagates Capacity_Error. If the Modulus argument is
     0, then the set modulus is the value returned by a call to Default_Modulus
     with the set capacity as its argument; otherwise the set modulus is the
     value of the Modulus parameter.]}
@@ -8792,7 +8792,7 @@ as Containers.Ordered_Sets except:]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[In procedure Assign, if Source length is greater
-    than Target capacity, then Capacity_Error is raised.]}
+    than Target capacity, then Capacity_Error is propagated.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
@@ -8807,7 +8807,7 @@ as Containers.Ordered_Sets except:]}
     are initialized from the values in Source. If Capacity is 0, then the set
     capacity is the length of Source; if Capacity is equal to or greater than
     Source.Length, the set capacity is the specified value; otherwise, the
-    operation raises Capacity_Error.]}
+    operation propagates Capacity_Error.]}
 @end{Indent}
 
 @end{Itemize}
