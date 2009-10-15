@@ -1,6 +1,6 @@
 @Part(env-cont, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/env-cont.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2009/05/16 03:55:40 $}
+@comment{$Revision: 1.4 $ $Date: 2009/09/15 04:48:14 $}
 
 
 @LabeledSection{package Asis.Ada_Environments.Containers}
@@ -127,11 +127,12 @@ units will appear only once in an order that is not defined.
 A Nil_Compilation_Unit_List is returned if there are no declarations of
 library units within the Container.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 This query will never return a unit with A_Configuration_Compilation or
 a Nonexistent unit kind. It will never return a unit with A_Procedure_Body or
 A_Function_Body unit kind even though the unit is interpreted as both the
-declaration and body of a library procedure or library function. (Reference
-Manual 10.1.4(4).
+declaration and body of a library procedure or library function.
+@Chg{Version=[2],New=[Ada Standard],Old=[(Reference Manual]} 10.1.4(4).
 
 All units in the result will have an Enclosing_Container value that
 Is_Identical to the Container.

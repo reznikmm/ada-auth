@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.20 $ $Date: 2009/07/02 04:50:54 $}
+@comment{$Revision: 1.21 $ $Date: 2009/09/15 04:48:13 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -499,7 +499,7 @@ initial value, if any, is not part of this view]}.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0004-1],ARef=[SI99-0032-1]}
 For a single_task_declaration or single_protected_declaration, returns the
 task_definition or protected_definition@Chg{Version=[2],New=[. If no
-task_definition is given explicitly (the reserved word is is not written), an
+task_definition is given explicitly (the reserved word is not written), an
 empty task_definition is returned for which Is_Task_Definition_Present returns
 False.],Old=[ following the reserved word @key[is]]}.
 
@@ -2950,7 +2950,7 @@ of Value_Error for any element that does not have one of these expected
 kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[a a list of elements that each have
+@leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
 one of the following],Old=[]} Element_Kinds:
 @begin{Display}
 A_Pragma

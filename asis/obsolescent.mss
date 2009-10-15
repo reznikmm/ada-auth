@@ -1,10 +1,10 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2009/05/16 03:55:40 $}
+@Comment{$Date: 2009/09/15 04:48:14 $}
 @LabeledAddedNormativeAnnex{Version=[2],Name=[Obsolescent Features]}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/obsolescent.mss,v $}
-@comment{$Revision: 1.11 $}
+@comment{$Revision: 1.12 $}
 
 @LabeledAddedClause{Version=[2],Name=[Annex Contents]}
 
@@ -1591,7 +1591,7 @@ value is not in the subtype's range.]}
 
 
 @ChgNote{SI99-0035-1 add section on newly obsolete subprogram}
-@LabeledAddedSubclause{Version=[2],Name=[function Construct_Artifical_Data_Stream]}
+@LabeledAddedSubclause{Version=[2],Name=[function Construct_Artificial_Data_Stream]}
 
 @begin{DescribeCode}
 @begin{Example}

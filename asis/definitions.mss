@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.17 $ $Date: 2009/05/16 03:55:40 $}
+@comment{$Revision: 1.18 $ $Date: 2009/09/15 04:48:13 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -263,7 +263,7 @@ A_Derived_Record_Extension_Definition]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
-have one of the following ],Old=[]}Declaration_Kinds:
+one of the following ],Old=[]}Declaration_Kinds:
 @begin{Display}
 An_Enumeration_Literal_Specification
 A_Discriminant_Specification

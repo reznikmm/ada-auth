@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/concepts.mss,v $}
-@comment{$Revision: 1.12 $ $Date: 2009/07/02 04:50:54 $}
+@comment{$Revision: 1.13 $ $Date: 2009/09/15 04:48:13 $}
 
 
 @LabeledSection{ASIS technical concepts}
@@ -486,7 +486,7 @@ Type Context@Defn{Context} helps identify the compilation units considered to
 be analyzable as part of the Ada compilation environment.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-Type Element@Defn{Elememt} is an abstraction of
+Type Element@Defn{Element} is an abstraction of
 @Chg{Version=[2],New=[constructs],Old=[entities]} within a logical Ada syntax
 tree.
 

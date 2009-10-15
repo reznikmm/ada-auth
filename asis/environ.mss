@@ -1,6 +1,6 @@
 @Part(environ, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/environ.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2009/07/02 04:50:54 $}
+@comment{$Revision: 1.7 $ $Date: 2009/09/15 04:48:14 $}
 
 @LabeledSection{package Asis.Ada_Environments}
 
@@ -252,7 +252,7 @@ environment that can be determined to exist.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Returns False @Chg{Version=[2],New=[otherwise (in particular, if],Old=[for any
-uninitialized]} The_Context @Chg{Version=[2],New=[is unassociated],Old=[variable]}.
+uninitialized]} The_Context @Chg{Version=[2],New=[is unassociated)],Old=[variable]}.
 @end{DescribeCode}
 
 @begin{ImplPerm}

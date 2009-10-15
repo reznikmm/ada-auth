@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.23 $ $Date: 2009/07/02 04:50:55 $}
+@comment{$Revision: 1.24 $ $Date: 2009/09/15 04:48:14 $}
 
 @LabeledSection{package Asis}
 
@@ -732,7 +732,7 @@ Old=[type Trait_Kinds]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0003-1]}
 @ChgAdded{Version=[2],Text=[Type Overriding_Indicator_Kinds classifies declarations
-and specifications having an overrriding indicator.]}
+and specifications having an overriding indicator.]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1416,12 +1416,12 @@ Literals                       -- @examcom{@Chg{Version=[2],New=[Ada Standard],O
    @AdaObjDefn{A_Machine_Mantissa_Attribute},  -- @examcom{A.5.3(6), K(127)}
    @AdaObjDefn{A_Machine_Overflows_Attribute}, -- @examcom{A.5.3(12), A.5.4(4), K(129), K(131)}
    @AdaObjDefn{A_Machine_Radix_Attribute},     -- @examcom{A.5.3(2), A.5.4(2), K(133), K(135)}@Chg{Version=[2],New=[
-   @AdaObjDefn{A_Machine_Rounding_Attribute},  -- @examcom{A.5.3(41.1/2)), K(135.1/2)}],Old=[]}
+   @AdaObjDefn{A_Machine_Rounding_Attribute},  -- @examcom{A.5.3(41.1/2), K(135.1/2)}],Old=[]}
    @AdaObjDefn{A_Machine_Rounds_Attribute},    -- @examcom{A.5.3(11), A.5.4(3), K(137), K(139)}
    @AdaObjDefn{A_Max_Attribute},               -- @examcom{3.5(19), K(141)}
    @AdaObjDefn{A_Max_Size_In_Storage_Elements_Attribute},-- @examcom{ 13.11.1(3), K(145)}
    @AdaObjDefn{A_Min_Attribute},               -- @examcom{3.5(16), K(147)}@Chg{Version=[2],New=[
-   @AdaObjDefn{A_Mod_Attribute},               -- @examcom{3.5.4(16.3/2)), K(150.1/2)}],Old=[]}
+   @AdaObjDefn{A_Mod_Attribute},               -- @examcom{3.5.4(16.3/2), K(150.1/2)}],Old=[]}
    @AdaObjDefn{A_Model_Attribute},             -- @examcom{A.5.3(68), G.2.2(7), K(151)}
    @AdaObjDefn{A_Model_Emin_Attribute},        -- @examcom{A.5.3(65), G.2.2(4), K(155)}
    @AdaObjDefn{A_Model_Epsilon_Attribute},     -- @examcom{A.5.3(66), K(157)}
@@ -1436,7 +1436,7 @@ Literals                       -- @examcom{@Chg{Version=[2],New=[Ada Standard],O
    @AdaObjDefn{A_Pos_Attribute},               -- @examcom{3.5.5(2), K(175)}
    @AdaObjDefn{A_Position_Attribute},          -- @examcom{13.5.2(2), K(179)}
    @AdaObjDefn{A_Pred_Attribute},              -- @examcom{3.5(25), K(181)}@Chg{Version=[2],New=[
-   @AdaObjDefn{A_Priority_Attribute},          -- @examcom{D.2.6(27/2)), K(184.1/2)}],Old=[]}
+   @AdaObjDefn{A_Priority_Attribute},          -- @examcom{D.2.6(27/2), K(184.1/2)}],Old=[]}
 
    @AdaObjDefn{A_Range_Attribute},             -- @examcom{3.5(14), 3.6.2(7), K(187), K(189)}
    @AdaObjDefn{A_Read_Attribute},              -- @examcom{13.13.2(6), 13.13.2(14), K(191), K(195)}
@@ -1452,10 +1452,9 @@ Literals                       -- @examcom{@Chg{Version=[2],New=[Ada Standard],O
    @AdaObjDefn{A_Signed_Zeros_Attribute},      -- @examcom{A.5.3(13), K(221)}
    @AdaObjDefn{A_Size_Attribute},              -- @examcom{13.3(40), 13.3(45), K(223), K(228)}
    @AdaObjDefn{A_Small_Attribute},             -- @examcom{3.5.10(2), K(230)}@Chg{Version=[2],New=[
-   @AdaObjDefn{A_Stream_Size_Attribute},       -- @examcom{13.13.2(1.2/2)), K(237.1/2)}],Old=[]}
+   @AdaObjDefn{A_Stream_Size_Attribute},       -- @examcom{13.13.2(1.2/2), K(237.1/2)}],Old=[]}
    @AdaObjDefn{A_Storage_Pool_Attribute},      -- @examcom{13.11(13), K(232)}
-   @AdaObjDefn{A_Storage_Size_Attribute},      -- @examcom{13.3(60), 13.11(14), J.9(2), K(234),}
-                                -- @examcom{K(236)}
+   @AdaObjDefn{A_Storage_Size_Attribute},      -- @examcom{13.3(60), 13.11(14), J.9(2), K(234), K(236)}
    @AdaObjDefn{A_Succ_Attribute},              -- @examcom{3.5(22), K(238)}
 
    @AdaObjDefn{A_Tag_Attribute},               -- @examcom{3.9(16), 3.9(18), K(242), K(244)}
@@ -1472,9 +1471,9 @@ Literals                       -- @examcom{@Chg{Version=[2],New=[Ada Standard],O
 
    @AdaObjDefn{A_Wide_Image_Attribute},        -- @examcom{3.5(28), K(270)}
    @AdaObjDefn{A_Wide_Value_Attribute},        -- @examcom{3.5(40), K(274)}@Chg{Version=[2],New=[
-   @AdaObjDefn{A_Wide_Wide_Image_Attribute},   -- @examcom{3.5(27.1/2)), K(277.1/2)}
-   @AdaObjDefn{A_Wide_Wide_Value_Attribute},   -- @examcom{3.5(39.1/2)), K(277.5/2)}
-   @AdaObjDefn{A_Wide_Wide_Width_Attribute},   -- @examcom{3.5(37.1/2)), K(277.9/2)}],Old=[]}
+   @AdaObjDefn{A_Wide_Wide_Image_Attribute},   -- @examcom{3.5(27.1/2), K(277.1/2)}
+   @AdaObjDefn{A_Wide_Wide_Value_Attribute},   -- @examcom{3.5(39.1/2), K(277.5/2)}
+   @AdaObjDefn{A_Wide_Wide_Width_Attribute},   -- @examcom{3.5(37.1/2), K(277.9/2)}],Old=[]}
    @AdaObjDefn{A_Wide_Width_Attribute},        -- @examcom{3.5(38), K(278)}
    @AdaObjDefn{A_Width_Attribute},             -- @examcom{3.5(39), K(280)}
    @AdaObjDefn{A_Write_Attribute},             -- @examcom{13.13.2(3), 13.13.2(11), K(282), K(286)}

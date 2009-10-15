@@ -1,6 +1,6 @@
 `@Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.16 $ $Date: 2009/07/02 04:50:54 $}
+@comment{$Revision: 1.17 $ $Date: 2009/09/15 04:48:14 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -1684,8 +1684,8 @@ Is_Normalized A_Discriminant_Association.]}
 @end{InnerInnerItemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0036-1]}
-@noprefix@;The Enclosing_Element of the @ChgAdded{Version=[2], Text=[the
-    returned]} An_Expression element is the
+@noprefix@;The Enclosing_Element of the
+    @ChgAdded{Version=[2], Text=[returned]} An_Expression element is the
     discriminant_specification that contains the default_expression.
 @end{InnerItemize}
 
@@ -2094,7 +2094,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-the the following ],Old=[]}Element_Kinds:
+the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
@@ -2132,7 +2132,7 @@ kinds.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-the the following ],Old=[]}Element_Kinds:
+the following ],Old=[]}Element_Kinds:
 @begin{Display}
 An_Expression
 @end{Display}
