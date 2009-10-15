@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2009/07/02 04:51:28 $}
+@Comment{$Date: 2009/10/15 06:20:51 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -417,14 +417,14 @@ limited view of a package contains:]}
 
 @begin(Itemize)
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0134-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0129-1]}
 @ChgAdded{Version=[2],Text=[For each nested
 @nt{package_declaration}@Chg{Version=[3],New=[ directly in the visible part],Old=[]},
 a declaration of the limited view of that package, with the
 same @nt{defining_program_unit_name}.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06],ARef=[AI95-00326-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0108-1],ARef=[AI05-0134-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0108-1],ARef=[AI05-0129-1]}
 @ChgAdded{Version=[2],Text=[For each @nt{type_declaration}
 @Chg{Version=[3],New=[directly ],Old=[]}in the visible
 part@Chg{Version=[3],New=[ that is not an
@@ -440,7 +440,7 @@ tagged incomplete view.]}
   dependence on @nt{with_clause}s) would be necessary
   to determine the types of the discriminants.]}
 
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0134-1]}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0129-1]}
   @ChgAdded{Version=[3],Text=[No incomplete views of incomplete types are
   included in the limited view. The rules of
   @RefSecNum{Incomplete Type Declarations} ensure that the completion of any
@@ -980,7 +980,7 @@ Standard.Standard.
   @ChgAdded{Version=[2],Text=[Clarified the wording so that a grandchild
   generic unit will work as expected.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0108-1],ARef=[AI05-0134-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0108-1],ARef=[AI05-0129-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Clarified the wording so that
   it is clear that limited views of types never have discriminants and never
   are of incomplete types.]}

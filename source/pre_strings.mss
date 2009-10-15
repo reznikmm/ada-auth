@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.56 $ $Date: 2009/07/02 04:51:29 $ $Author: randy $ }
+@comment{ $Revision: 1.57 $ $Date: 2009/10/15 06:20:52 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2009/07/02 04:51:29 $}
+@Comment{$Date: 2009/10/15 06:20:52 $}
 
 @LabeledClause{String Handling}
 
@@ -2897,9 +2897,10 @@ function Strings.Bounded.Hash has the following declaration:]}
 @begin{DescribeCode}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Strings.Bounded.Hash is
-equivalent to the function call
-Strings.Hash (Bounded.To_String (Key));]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[3],New=[Equivalent to],
+Old=[Strings.Bounded.Hash is
+equivalent to the function call]} Strings.Hash (Bounded.To_String (Key));]}
 
 @end{DescribeCode}
 
@@ -2917,8 +2918,11 @@ function Strings.Unbounded.Hash has the following declaration:]}
 @begin{DescribeCode}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Strings.Unbounded.Hash is
-equivalent to the function call Strings.Hash (To_String (Key));]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[3],New=[Equivalent to],
+Old=[Strings.Unbounded.Hash is
+equivalent to the function call]}
+Strings.Hash (To_String (Key));]}
 
 @end{DescribeCode}
 
@@ -2937,8 +2941,8 @@ Strings.Hash_Case_Insensitive has the following declaration:]}
 @begin{DescribeCode}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns an implementation-defined
-value which is a function of the value of Key, folded to lower case. If A and B
-are strings such that A equals B, Hash_Case_Insensitive(A) equals
+value which is a function of the value of Key, converted to lower case. If
+A and B are strings such that A equals B, Hash_Case_Insensitive(A) equals
 Hash_Case_Insensitive(B).]}
 @end{DescribeCode}
 
@@ -2973,8 +2977,7 @@ function Strings.Bounded.Hash_Case_Insensitive has the following declaration:]}
 @begin{DescribeCode}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Strings.Bounded.Hash_Case_Insensitive
-is equivalent to the function call
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to
 Strings.Hash_Case_Insensitive (Bounded.To_String (Key));]}
 @end{DescribeCode}
 
@@ -2992,8 +2995,8 @@ Strings.Unbounded.Hash_Case_Insensitive has the following declaration:]}
 
 @begin{DescribeCode}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Strings.Unbounded.Hash_Case_Insensitive
-is equivalent to the function call Strings.Hash_Case_Insensitive (To_String (Key));]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to
+Strings.Hash_Case_Insensitive (To_String (Key));]}
 @end{DescribeCode}
 
 @end{StaticSem}
@@ -3047,7 +3050,7 @@ Strings.Equal_Case_Insensitive has the following declaration:]}
 @begin{DescribeCode}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Compares strings Left and Right,
-folded to lower case, for equality.]}
+converted to lower case, for equality.]}
 @end{DescribeCode}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
@@ -3080,9 +3083,8 @@ function Strings.Bounded.Equal_Case_Insensitive has the following declaration:]}
 
 @begin{DescribeCode}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Strings.Bounded.Equal_Case_Insensitive
-is equivalent to the function call Strings.Equal_Case_Insensitive
-(Bounded.To_String (Key));]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to
+Strings.Equal_Case_Insensitive (Bounded.To_String (Key));]}
 @end{DescribeCode}
 
 
@@ -3100,9 +3102,8 @@ Strings.Unbounded.Equal_Case_Insensitive has the following declaration:]}
 
 @begin{DescribeCode}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Strings.Unbounded.Equal_Case_Insensitive
-is equivalent to the function call Strings.Equal_Case_Insensitive
-(To_String (Key));]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to
+Strings.Equal_Case_Insensitive (To_String (Key));]}
 @end{DescribeCode}
 
 
@@ -3120,7 +3121,7 @@ Strings.Less_Case_Insensitive has the following declaration:]}
 @begin{DescribeCode}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Performs a lexicographic comparison
-of strings Left and Right, folded to lower case.]}
+of strings Left and Right, converted to lower case.]}
 @end{DescribeCode}
 
 
@@ -3155,9 +3156,8 @@ function Strings.Bounded.Less_Case_Insensitive has the following declaration:]}
 
 @begin{DescribeCode}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Strings.Bounded.Less_Case_Insensitive
-is equivalent to the function call Strings.Less_Case_Insensitive
-(Bounded.To_String (Key));]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to
+Strings.Less_Case_Insensitive (Bounded.To_String (Key));]}
 @end{DescribeCode}
 
 
@@ -3175,9 +3175,8 @@ Strings.Unbounded.Less_Case_Insensitive has the following declaration:]}
 
 @begin{DescribeCode}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Strings.Unbounded.Less_Case_Insensit
-ive is equivalent to the function call Strings.Less_Case_Insensitive (To_String
-(Key));]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to
+Strings.Less_Case_Insensitive (To_String (Key));]}
 @end{DescribeCode}
 
 @end{StaticSem}
@@ -3218,13 +3217,13 @@ Strings.UTF_Encoding has the following declaration:]}
    @key[subtype] @AdaSubtypeDefn{Name=[Long_Encoding],Of=[Encoding_Scheme]}  @key[is] Encoding_Scheme @key[range] UTF_16 .. UTF_16;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_8}    : @key[constant] String := Character'Val (16#EF#) & Character'Val (16#BB#) &
-                 Character'Val (16#BF#);
-   @AdaObjDefn{BOM_16BE} : @key[constant] String := Character'Val (16#FE#) & Character'Val (16#FF#);
-   @AdaObjDefn{BOM_16LE} : @key[constant] String := Character'Val (16#FF#) & Character'Val (16#FE#);]}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_8}    : @key[constant] String := Character'Val(16#EF#) &
+                 Character'Val(16#BB#) & Character'Val(16#BF#);
+   @AdaObjDefn{BOM_16BE} : @key[constant] String := Character'Val(16#FE#) & Character'Val(16#FF#);
+   @AdaObjDefn{BOM_16LE} : @key[constant] String := Character'Val(16#FF#) & Character'Val(16#FE#);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_16}   : @key[constant] Wide_String := (1 => Wide_Character'Val (16#FEFF#));]}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_16}   : @key[constant] Wide_String := (1 => Wide_Character'Val(16#FEFF#));]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encode} (Item   : @key[in] Wide_String;
@@ -3271,8 +3270,8 @@ encoding scheme on 8 bits, little endian.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
 @ChgAdded{Version=[3],Text=[The subtype Short_Encoding covers the values of
-Encoding_Scheme for 8 bits encoding schemes, and the subtype Long_Encoding
-covers the values of Encoding_Scheme for 16 bits encoding schemes.]}
+Encoding_Scheme for 8-bit encoding schemes, and the subtype Long_Encoding
+covers the values of Encoding_Scheme for 16-bit encoding schemes.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
 @ChgAdded{Version=[3],Text=[Each of the Encode functions takes a Wide_String
@@ -3280,7 +3279,7 @@ covers the values of Encoding_Scheme for 16 bits encoding schemes.]}
 (respectively Wide_String) whose characters have position values that correspond
 to the encoding of the Item parameter according to the encoding scheme specified
 by the Scheme parameter. For UTF_8, no overlong encoding is returned. The lower
-bound of the returned string shall be 1.]}
+bound of the returned string is 1.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
 @ChgAdded{Version=[3],Text=[Each of the Decode functions takes a String
@@ -3307,7 +3306,7 @@ ignored;]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
-@ChgAdded{Version=[3],Text=[The Encode functions do put BOM sequences in the
+@ChgAdded{Version=[3],Text=[The Encode functions do not put BOM sequences in the
 result.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
@@ -3327,13 +3326,14 @@ schemes, a child of Ada.Strings similar to UTF_Encoding should be defined.]}]}
 
 @begin{Notes}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
-@ChgAdded{Version=[3],Text=[A BOM can be included in a file or other entity to
-indicate the encoding; it is skipped when decoding. An explicit concatenation is
-needed to include a BOM in an encoded entity (it is not added automatically).
-Typically, only the first line of a file or other entity will contain a BOM.
-When decoding, the appropriate Encoding function can be used on the first line
-to determine the encoding; that encoding will then be used in subsequent calls
-to Decode to convert all of the lines to an internal format.]}
+@ChgAdded{Version=[3],Text=[A BOM (Byte-Order Mark, code position 16#FEFF#) can
+be included in a file or other entity to indicate the encoding; it is skipped
+when decoding. An explicit concatenation is needed to include a BOM in an
+encoded entity (it is not added automatically). Typically, only the first line
+of a file or other entity will contain a BOM. When decoding, the appropriate
+Encoding function can be used on the first line to determine the encoding; that
+encoding will then be used in subsequent calls to Decode to convert all of the
+lines to an internal format.]}
 @end{Notes}
 
 @begin{Extend95}

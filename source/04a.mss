@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2009/07/02 04:51:28 $}
+@Comment{$Date: 2009/10/15 06:20:51 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.99 $}
+@Comment{$Revision: 1.100 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -3261,20 +3261,15 @@ the designated profiles shall be subtype conformant.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
 @ChgAdded{Version=[3],Text=[The explicit declaration of a primitive equality
-operator of an untagged record type shall occur before the type is frozen. If
-the untagged record type has a nonlimited partial view, then the declaration
-shall occur in the visible part of the enclosing package.
+operator of an untagged record type, if its profile is type conformant
+with that of the corresponding predefined equality operator, shall occur
+before the type is frozen. If the untagged record type has a nonlimited
+partial view, then the declaration shall occur in the visible part
+of the enclosing package.
 @PDefn{generic contract issue}
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
 this rule applies also in the private part of an instance of a generic unit.]}
-@begin{Honest}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[  The phrase @ldquote@;equality operator@rdquote
-  as used here refers only to a
-  function whose profile is type conformant with that of the
-  predefined equality operator for the untagged record type.]}
-@end{Honest}
 @end{Legality}
 
 @begin{RunTime}
@@ -3328,7 +3323,7 @@ is defined in terms of the primitive @Redundant[(possibly
 user-defined)] equals operator
 @Chg{Version=[3],New=[for],Old=[of]} the parent type and
 @Chg{Version=[3],New=[for],Old=[of]} any @Chg{Version=[3],New=[],Old=[tagged ]}components
-@Chg{Version=[3],New=[ of a record type ],Old=[]}of the extension part, and
+@Chg{Version=[3],New=[ that have a record type in],Old=[of]} the extension part, and
 predefined equality
 for any other components not inherited from the parent type.
 @begin{Ramification}

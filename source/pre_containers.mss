@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.68 $ $Date: 2009/07/11 04:00:27 $ $Author: randy $ }
+@comment{ $Revision: 1.69 $ $Date: 2009/10/15 06:20:52 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2009/07/11 04:00:27 $}
+@Comment{$Date: 2009/10/15 06:20:52 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -64,8 +64,8 @@ ordering for a container, it is generally required to define
 a strict weak ordering. A function "<" defines
 a @i<strict weak ordering>@Defn{strict weak ordering} if it is irreflexive,
 asymmetric, transitive, and in addition, if @i<x> < @i<y> for any values
-@i<x> and @i<y>, then for any other
-value @i<z>, (@i<x> < @i<z>) or (@i<z> < @i<y>).]}
+@i<x> and @i<y>, then for all other
+values @i<z>, (@i<x> < @i<z>) or (@i<z> < @i<y>).]}
 
 @end{Intro}
 
@@ -494,10 +494,10 @@ package Containers.Vectors has the following declaration:]}
       Process   : @key{not null access procedure}
                       (Element : @key{in out} Element_Type));]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Vector; Source : @key{in} Vector);]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Copy} (Source : Vector; Capacity : Count_Type := 0)
       @key[return] Vector;]}
 
@@ -773,8 +773,8 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[Vector'Write writes Vector.Length elements to the
-stream. Vector'Read reads Vector.Length elements from the stream.]}
+@ChgAdded{Version=[3],Text=[Vector'Write writes the length of Vector elements to the
+stream. Vector'Read reads the length Vector elements from the stream.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -784,7 +784,7 @@ stream. Vector'Read reads Vector.Length elements from the stream.]}
   capacity of the vector streamed, as those beyond the length of the container
   have undefined contents. This will require a custom stream attribute
   implementation; the language-defined default implementation will not work
-  (even for a bounded form, as that would most likely would stream the entire
+  (even for a bounded form, as that would most likely stream the entire
   capacity of the vector).]}
 @end{ImplNote}
 
@@ -848,7 +848,7 @@ it calls the Insert, Insert_Space, Clear, Delete, or Set_Length procedures with
 @ChgAdded{Version=[2],Text=[it finalizes @i<V>; or]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[it calls Assign with @i<V> as the Target parameter;
+@ChgAdded{Version=[3],Text=[it calls the Assign procedure with @i<V> as the Target parameter;
 or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1275,9 +1275,10 @@ is not an empty element after successful completion of this operation.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as
-Source, the operation has no effect. If Source length is greater than Target
-capacity, Reserve_Capacity is called with the Source length as the capacity.
-Each element of Source is assigned to the corresponding elements of Target.]}
+Source, the operation has no effect. If the length of Source is greater than the
+capacity of Target, Reserve_Capacity is called with the length of Source as the
+capacity. Each element of Source is assigned to the corresponding element of
+Target.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -1289,7 +1290,7 @@ Each element of Source is assigned to the corresponding elements of Target.]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns a vector whose elements are
 initialized from the corresponding elements of Source. If Capacity is 0, then
 the vector capacity is the length of Source; if Capacity is equal to or greater
-than Source.Length, the vector capacity is at least the specified value.
+than the length of Source, the vector capacity is at least the specified value.
 Otherwise, the operation propagated Capacity_Error.]}
 
 
@@ -1303,8 +1304,8 @@ Otherwise, the operation propagated Capacity_Error.]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Target denotes the same object
 as Source, then Move has no effect. Otherwise, Move first calls
-@Chg{Version=[3],New=[Target.Reserve_Capacity (Source.Length) and then
-Target.Clear],Old=[Clear (Target)]};
+@Chg{Version=[3],New=[Reserve_Capacity (Target, Length (Source))
+and then ],Old=[]}Clear (Target);
 then, each element from Source is removed from Source and inserted into Target
 in the original order. The length of Source is 0 after a successful call to
 Move.]}
@@ -2669,8 +2670,8 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[List'Write writes List.Length elements to the
-stream. List'Read reads List.Length elements from the stream.]}
+@ChgAdded{Version=[3],Text=[List'Write writes the length of List elements to the
+stream. List'Read reads the length of List elements from the stream.]}
 
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -2710,7 +2711,7 @@ Merge procedures of an instance of Generic_Sorting with @i<L> as a parameter; or
 @ChgAdded{Version=[2],Text=[it finalizes @i<L>; or]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[it calls Assign with @i<L> as the
+@ChgAdded{Version=[3],Text=[it calls the Assign procedure with @i<L> as the
 Target parameter; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2877,7 +2878,7 @@ unconstrained.]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as
 Source, the operation has no effect.  Otherwise, it clears Target, and each
-element of Source is assigned to the corresponding elements of Target.]}
+element of Source is assigned to the corresponding element of Target.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -3727,7 +3728,7 @@ as a parameter; or]}
 @ChgAdded{Version=[2],Text=[it finalizes @i<M>; or]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[it calls Assign with @i<M> as the Target parameter; or]}
+@ChgAdded{Version=[3],Text=[it calls the Assign procedure with @i<M> as the Target parameter; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[it calls the Move procedure with @i<M> as a
@@ -3799,8 +3800,8 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[Map'Write writes Map.Length elements to the stream.
-Map'Read reads Map.Length elements from the stream.]}
+@ChgAdded{Version=[3],Text=[Map'Write writes the length of Map elements to the stream.
+Map'Read reads the length of Map elements from the stream.]}
 
 
 @begin{DescribeCode}
@@ -3953,7 +3954,7 @@ shall be unconstrained.]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as
 Source, the operation has no effect. Otherwise, each key/element pair of Source
-is assigned to the corresponding key/element pairs of Target.]}
+is assigned to the corresponding key/element pair of Target.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4747,9 +4748,10 @@ Container.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[In addition to the semantics
-described in @RefSecNum{Maps}, if Source.Length is greater than Target.Capacity,
-Reserve_Capacity is called with Source.Length as the capacity before assigning
-elements.]}
+described in @RefSecNum{Maps}, if the length of Source is greater than the
+capacity of Target,
+Reserve_Capacity is called with the length of Source as the capacity before assigning
+any elements.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -4760,8 +4762,8 @@ elements.]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns a map whose keys and
 elements are initialized from the keys and elements of Source. If Capacity is 0,
 then the map capacity is the length of Source; if Capacity is equal to or
-greater than Source.Length, the map capacity is at least the specified value.
-Otherwise, the operation propagates Capacity_Error.]}
+greater than the length of Source, the map capacity is at least the specified
+value. Otherwise, the operation propagates Capacity_Error.]}
 
 @begin{ImplNote}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5623,7 +5625,7 @@ procedures with @i{S} as a parameter; or]}
 @ChgAdded{Version=[2],Text=[it finalizes @i<S>; or]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[it calls Assign with @i<S> as the Target parameter;
+@ChgAdded{Version=[3],Text=[it calls the Assign procedure with @i<S> as the Target parameter;
 or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5693,8 +5695,8 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[Set'Write writes Set.Length elements to the stream.
-Set'Read reads Set.Length elements from the stream.]}
+@ChgAdded{Version=[3],Text=[Set'Write writes the length of Set elements to the stream.
+Set'Read reads the length of Set elements from the stream.]}
 
 @begin{DescribeCode}
 
@@ -6802,9 +6804,9 @@ Container.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[In addition to the semantics
-described in @RefSecNum{Sets}, if Source.Length is greater than Target.Capacity,
-Reserve_Capacity is called with Source.Length as the capacity before assigning
-elements.]}
+described in @RefSecNum{Sets}, if the length of Source is greater than the
+capacity of Target, Reserve_Capacity is called with the length of Source as the
+capacity before assigning any elements.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -6814,9 +6816,9 @@ elements.]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns a set whose elements are
 initialized from the elements of Source. If Capacity is 0, then the set capacity
-is the length of Source; if Capacity is equal to or greater than Source.Length,
-the set capacity is at least the specified value. Otherwise, the operation
-propagates Capacity_Error.]}
+is the length of Source; if Capacity is equal to or greater than the length of
+Source, the set capacity is at least the specified value. Otherwise, the
+operation propagates Capacity_Error.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -7936,12 +7938,14 @@ package Containers.Indefinite_Holders has the following declaration:]}
                               New_Item  : @key[in]     Element_Type);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Query_Element} (Container : @key[in] Holder;
-                            Process   : @key[not null access procedure] (Element : @key[in] Element_Type));]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Query_Element}
+  (Container : @key[in] Holder;
+   Process   : @key[not null access procedure] (Element : @key[in] Element_Type));]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Update_Element} (Container : @key[in] Holder;
-                             Process   : @key[not null access procedure] (Element : @key[in out] Element_Type));]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Update_Element}
+  (Container : @key[in] Holder;
+   Process   : @key[not null access procedure] (Element : @key[in out] Element_Type));]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Assign} (Target : @key[in out] Holder; Source : @key[in] Holder);]}
@@ -8102,8 +8106,9 @@ Container is not empty after a successful call to Replace_Element.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Query_Element (Container : @key[in] Holder;
-                         Process   : @key[not null access procedure] (Element : @key[in] Element_Type));]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Query_Element
+  (Container : @key[in] Holder;
+   Process   : @key[not null access procedure] (Element : @key[in] Element_Type));]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
@@ -8124,8 +8129,9 @@ exception raised by Process.@key[all] is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Update_Element (Container : @key[in] Holder;
-                          Process   : @key[not null access procedure] (Element : @key[in out] Element_Type));]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Update_Element
+  (Container : @key[in] Holder;
+   Process   : @key[not null access procedure] (Element : @key[in out] Element_Type));]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
@@ -8266,7 +8272,7 @@ as Containers.Vectors except:]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[@nt{Pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
 
   @begin{ImplNote}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8280,7 +8286,7 @@ as Containers.Vectors except:]}
     discriminant that specifies the capacity:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key{type} Vector (Capacity : Count_Type) @key[is tagged private];]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} Vector (Capacity : Count_Type) @key[is tagged private];]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8289,16 +8295,16 @@ as Containers.Vectors except:]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[In function Copy, if the Capacity parameter is
-    equal to or greater than Source.Length, the vector capacity exactly equals
+    equal to or greater than the length of Source, the vector capacity exactly equals
     the value of the Capacity parameter.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The description of Reserve_Capacity
-  is replaced by:]}
+  is replaced with:]}
 @begin{Indent}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
     @ChgAdded{Version=[3],NoPrefix=[T],Text=[If the specified Capacity is larger
-    than the Container.Capacity, then Reserve_Capacity propagates Capacity_Error.
+    than the capacity of Container, then Reserve_Capacity propagates Capacity_Error.
     Otherwise, the operation has no effect.]}
 @end{Indent}
 @end{Itemize}
@@ -8348,7 +8354,7 @@ as Containers.Doubly_Linked_Lists except:]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[@nt{Pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
 
   @begin{ImplNote}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8363,7 +8369,7 @@ as Containers.Doubly_Linked_Lists except:]}
     as follows:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key{type} List (Capacity : Count_Type) @key[is tagged private];]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} List (Capacity : Count_Type) @key[is tagged private];]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8380,28 +8386,30 @@ as Containers.Doubly_Linked_Lists except:]}
     than Target capacity, then Capacity_Error is propagated.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[Function Copy is declared as follows:]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[function] @AdaSubDefn{Copy} (Source : List; Capacity : Count_Type := 0)
-      @key[return] List;]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source : List; Capacity : Count_Type := 0)
+     @key[return] List;]}
 @end{Example}
 @begin{Indent}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Noprefix=[T],Text=[If Capacity is 0, then the list capacity is the length of
-    Source; if Capacity is equal to or greater than Source.Length,
+    Source; if Capacity is equal to or greater than the length of Source,
     the list capacity equals the value of the Capacity parameter;
     otherwise, the operation propagated Capacity_Error.]}
 @end{Indent}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[In the three-parameter procedure Splice whose
-    Source has type List, if the sum of Target.Length and Source.Length is
-    greater than Target.Capacity, then Splice propagates Capacity_Error.]}
+    Source has type List, if the sum of the length of Target and the length
+    of Source is greater than the capacity of Target, then Splice propagates
+    Capacity_Error.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[In the four-parameter procedure Splice, if
-    Target.Length equals Target.Capacity, then Splice propagates Capacity_Error.]}
+    the length of Target equals the capacity of Target, then Splice
+    propagates Capacity_Error.]}
 
 @end{Itemize}
 @end{StaticSem}
@@ -8449,7 +8457,7 @@ as Containers.Hashed_Maps except:]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[@nt{Pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
 
   @begin{ImplNote}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8464,8 +8472,8 @@ as Containers.Hashed_Maps except:]}
     modulus (number of distinct hash values) of the hash table as follows:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[type] Map (Capacity : Count_Type;
-             Modulus  : Hash_Type) @key[is tagged private];]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[type] Map (Capacity : Count_Type;
+            Modulus  : Hash_Type) @key[is tagged private];]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8474,11 +8482,11 @@ as Containers.Hashed_Maps except:]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The description of Reserve_Capacity
-  is replaced by:]}
+  is replaced with:]}
 @begin{Indent}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
     @ChgAdded{Version=[3],NoPrefix=[T],Text=[If the specified Capacity is larger
-    than the Container.Capacity, then Reserve_Capacity propagates Capacity_Error.
+    than the capacity of Container, then Reserve_Capacity propagates Capacity_Error.
     Otherwise, the operation has no effect.]}
 @end{Indent}
 
@@ -8487,7 +8495,7 @@ as Containers.Hashed_Maps except:]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[An additional operation is added immediately following Reserve_Capacity:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[function] @AdaSubDefn{Default_Modulus} (Capacity : Count_Type) @key[return] Hash_Type;]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Default_Modulus} (Capacity : Count_Type) @key[return] Hash_Type;]}
 @end{Example}
 @begin{Indent}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8500,16 +8508,16 @@ as Containers.Hashed_Maps except:]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[function] @AdaSubDefn{Copy} (Source : Map;
-                  Capacity : Count_Type := 0;
-                  Modulus  : Hash_Type := 0) @key[return] Map;]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source : Map;
+                 Capacity : Count_Type := 0;
+                 Modulus  : Hash_Type := 0) @key[return] Map;]}
 @end{Example}
 @begin{Indent}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a map with key/element pairs initialized from the values
     in Source. If Capacity is 0, then the map capacity is the
     length of Source; if Capacity is equal to or greater than
-    Source.Length, the map capacity is the value of the Capacity
+    the length of Source, the map capacity is the value of the Capacity
     parameter; otherwise, the operation propagates Capacity_Error.  If
     the Modulus argument is 0, then the map modulus is the value
     returned by a call to Default_Modulus with the map capacity as its
@@ -8562,7 +8570,7 @@ as Containers.Ordered_Maps except:]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[@nt{Pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
 
   @begin{ImplNote}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8577,7 +8585,7 @@ as Containers.Ordered_Maps except:]}
     as follows:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key{type} Map (Capacity : Count_Type) @key[is tagged private];]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[type] Map (Capacity : Count_Type) @key[is tagged private];]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8597,15 +8605,15 @@ as Containers.Ordered_Maps except:]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[function] @AdaSubDefn{Copy} (Source : Map;
-                  Capacity : Count_Type := 0) @key[return] Map;]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source : Map;
+                 Capacity : Count_Type := 0) @key[return] Map;]}
 @end{Example}
 @begin{Indent}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a map with key/element pairs
     initialized from the values in Source. If Capacity is 0, then the map
     capacity is the length of Source; if Capacity is equal to or greater than
-    Source.Length, the map capacity is the specified value; otherwise, the
+    the length of Source, the map capacity is the specified value; otherwise, the
     operation propagates Capacity_Error.]}
 @end{Indent}
 
@@ -8651,7 +8659,7 @@ as Containers.Hashed_Sets except:]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[@nt{Pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
 
   @begin{ImplNote}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8666,8 +8674,8 @@ as Containers.Hashed_Sets except:]}
     modulus (number of distinct hash values) of the hash table as follows:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[type] Set (Capacity : Count_Type;
-             Modulus  : Hash_Type) @key[is tagged private];]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[type] Set (Capacity : Count_Type;
+            Modulus  : Hash_Type) @key[is tagged private];]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8676,11 +8684,11 @@ as Containers.Hashed_Sets except:]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The description of Reserve_Capacity
-  is replaced by:]}
+  is replaced with:]}
 @begin{Indent}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
     @ChgAdded{Version=[3],NoPrefix=[T],Text=[If the specified Capacity is larger
-    than the Container.Capacity, then Reserve_Capacity propagates Capacity_Error.
+    than the capacity of Container, then Reserve_Capacity propagates Capacity_Error.
     Otherwise, the operation has no effect.]}
 @end{Indent}
 
@@ -8688,7 +8696,7 @@ as Containers.Hashed_Sets except:]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[An additional operation is added immediately following Reserve_Capacity:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[function] @AdaSubDefn{Default_Modulus} (Capacity : Count_Type) @key[return] Hash_Type;]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Default_Modulus} (Capacity : Count_Type) @key[return] Hash_Type;]}
 @end{Example}
 @begin{Indent}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8701,16 +8709,16 @@ as Containers.Hashed_Sets except:]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[function] @AdaSubDefn{Copy} (Source : Set;
-                  Capacity : Count_Type := 0;
-                  Modulus  : Hash_Type := 0) @key[return] Set;]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source : Set;
+                 Capacity : Count_Type := 0;
+                 Modulus  : Hash_Type := 0) @key[return] Set;]}
 @end{Example}
 @begin{Indent}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a set whose elements are
     initialized from the values in Source. If Capacity is 0, then the set
     capacity is the length of Source; if Capacity is equal to or greater than
-    Source.Length, the set capacity is the value of the Capacity parameter;
+    the length of Source, the set capacity is the value of the Capacity parameter;
     otherwise, the operation propagates Capacity_Error. If the Modulus argument is
     0, then the set modulus is the value returned by a call to Default_Modulus
     with the set capacity as its argument; otherwise the set modulus is the
@@ -8763,7 +8771,7 @@ as Containers.Ordered_Sets except:]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[@nt{Pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
 
   @begin{ImplNote}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8778,7 +8786,7 @@ as Containers.Ordered_Sets except:]}
     as follows:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key{type} Set (Capacity : Count_Type) @key[is tagged private];]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} Set (Capacity : Count_Type) @key[is tagged private];]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8798,15 +8806,15 @@ as Containers.Ordered_Sets except:]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[   @key[function] @AdaSubDefn{Copy} (Source : Set;
-                  Capacity : Count_Type := 0) @key[return] Set;]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source : Set;
+                 Capacity : Count_Type := 0) @key[return] Set;]}
 @end{Example}
 @begin{Indent}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a set whose elements
     are initialized from the values in Source. If Capacity is 0, then the set
     capacity is the length of Source; if Capacity is equal to or greater than
-    Source.Length, the set capacity is the specified value; otherwise, the
+    the length of Source, the set capacity is the specified value; otherwise, the
     operation propagates Capacity_Error.]}
 @end{Indent}
 
@@ -8839,9 +8847,9 @@ minimize copying does not apply.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[2],Text=[The language-defined generic procedures
-Containers.Generic_Array_Sort@Chg{Version=[3],New=[,],Old=[ and]}
-Containers.Generic_Constrained_Array_Sort@Chg{Version=[3],New=[, and
-Containers.Generic_Sort],Old=[]}
+Containers.@!Generic_@!Array_Sort@Chg{Version=[3],New=[,],Old=[ and]}
+Containers.@!Generic_@!Constrained_@!Array_Sort@Chg{Version=[3],New=[, and
+Containers.@!Generic_Sort],Old=[]}
 provide sorting on arbitrary array types.]}
 @end{Intro}
 
@@ -8955,7 +8963,7 @@ procedure Containers.@!Generic_@!Sort has the following declaration:]}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Reorders the elements of an indexable structure,
 over the range First .. Last, such that the elements are sorted in the ordering
-determined by the generic formal Before function. The generic formal Before
+determined by the generic formal function Before. The generic formal Before
 compares the elements having the given indices, and the generic formal Swap
 exchanges the values of the indicated elements. Any exception raised during
 evaluation of Before or Swap is propagated.]}

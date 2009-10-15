@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2009/07/02 04:51:28 $}
+@Comment{$Date: 2009/10/15 06:20:51 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 
 @LabeledClause{Type Conversions}
 
@@ -570,7 +570,7 @@ Further, if the operand type is not @i<universal_@!access>:]}
   @begin{Reason}
     @ChgRef{Version=[3],Kind=[Added]}
     @ChgAdded{Version=[3],Text=[We prohibit storing accesses to objects deeper
-    than a stand-alone object of a anonymous access-to-object (even while we
+    than a stand-alone object of an anonymous access-to-object (even while we
     allow storing all other accesses) in order to prevent dangling accesses.]}
   @end{Reason}
 

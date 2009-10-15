@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2009/07/02 04:51:28 $}
+@Comment{$Date: 2009/10/15 06:20:51 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.100 $}
+@Comment{$Revision: 1.101 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2944,8 +2944,8 @@ the implementation need not create a separate anonymous object if
 it can safely create the value of
 the @nt{aggregate} or function call
 directly in the target object.
-Similarly, for an @nt{assignment_@!statement},]}
-the implementation need not create an anonymous object if
+Similarly, for an @nt{assignment_@!statement}, the]}
+implementation need not create an anonymous object if
 the value being assigned is the result of evaluating a @nt{name}
 denoting an object (the source object) whose storage cannot overlap
 with the target. If the source object might overlap with the

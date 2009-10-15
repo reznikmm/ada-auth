@@ -1,11 +1,11 @@
 
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2009/07/02 04:51:28 $}
+@Comment{$Date: 2009/10/15 06:20:51 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.93 $}
+@Comment{$Revision: 1.94 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1173,10 +1173,11 @@ are equivalent to calls using prefix notation.
     @key[function] F(X : Integer := 1) @key[return] Boolean;
 @key[end] A;
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0005-1]}
 @key[with] A;
 @key[package] B @key[is]
     @key[package] A_View @key[renames] A;
-    @key[function] F_View(X : Integer := 9999) @key[return] Boolean @key[renames] F;
+    @key[function] F_View(X : Integer := 9999) @key[return] Boolean @key[renames] @Chg{Version=[3],New=[A.],Old=[]}F;
 @key[end] B;
 
 @key[with] A, B; @key[use] A, B;
@@ -2129,7 +2130,7 @@ result type of the function. @Chg{Version=[3],New=[The],Old=[If the result
 subtype of the function is constrained, then the]} subtype defined by the
 @nt{subtype_indication} shall @Chg{Version=[3],New=[be statically compatible
 with the result subtype of the function; if the result type of the
-fucntion is elementary, the two subtypes],Old=[also
+function is elementary, the two subtypes],Old=[also
 be constrained and]} shall statically match@Chg{Version=[3],New=[],Old=[ this
 result subtype]}.@PDefn2{Term=[statically matching],Sec=(required)}
 If the result subtype of the function is @Chg{Version=[3],New=[indefinite],

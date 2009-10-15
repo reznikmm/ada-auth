@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2009/07/02 04:51:28 $}
+@Comment{$Date: 2009/10/15 06:20:52 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1801,7 +1801,7 @@ unconstrained discriminated subtype with defaults.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1],ARef=[AI05-0116-1]}
 @ChgAdded{Version=[3],Text=[For one of the calls of Allocate described above,
-@i{P} (@i{T}'Storage_Pool) is passed as the Pool parameter. The
+@i{P} (equivalent to @i{T}'Storage_Pool) is passed as the Pool parameter. The
 Size_In_Storage_Elements parameter indicates the number
 of storage elements to be allocated, and is no more than
 @i{D}'Max_Size_In_Storage_Elements, where @i{D} is the designated subtype of @i{T}.
@@ -1849,12 +1849,13 @@ pool object @i{P} may be called by the implementation to deallocate storage for 
 type @i{T} whose pool is @i{P} only at the places when an Allocate call is allowed for
 @i{P}, during the execution of an instance of Unchecked_Deallocation for @i{T}, or as
 part of the finalization of the collection of @i{T}. For such a call of Deallocate,
-@i{P} (@i{T}'Storage_Pool) is passed as the Pool parameter. The value of the
-Storage_Address parameter for a call to Deallocate is the value returned in the
-Storage_Address parameter of the corresponding successful call to Allocate. The
-values of the Size_In_Storage_Elements and Alignment parameters are the same
-values passed to the corresponding Allocate call. Any exception propagated by
-Deallocate is propagated by the construct that contained the call.]}
+@i{P} (equivelent to @i{T}'Storage_Pool) is passed as the Pool parameter. The
+value of the Storage_Address parameter for a call to Deallocate is the value
+returned in the Storage_Address parameter of the corresponding successful call
+to Allocate. The values of the Size_In_Storage_Elements and Alignment parameters
+are the same values passed to the corresponding Allocate call. Any exception
+propagated by Deallocate is propagated by the construct that contained the
+call.]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}

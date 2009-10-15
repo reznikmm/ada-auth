@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2009/07/02 04:51:28 $}
+@Comment{$Date: 2009/10/15 06:20:51 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.92 $}
+@Comment{$Revision: 1.93 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4486,7 +4486,7 @@ include the extra information needed to make a call.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1]}
 @ChgAdded{Version=[3],Text=[The accessibility level of the type of a stand-alone
-object of an anonymous access-to-object type is determined by the accessibility
+object of an anonymous access-to-object type is the same as the accessibility
 level of the type of the access value most recently assigned to the object, but
 is never deeper than that of the declaration of the stand-alone object.]}
 
@@ -4916,7 +4916,7 @@ is the library level.
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1]}
   @ChgAdded{Version=[3],Text=[The implementation of accessibility checks for
   stand-alone objects of anonyomous access-to-object types can be similar to
-  that for anonymous access-to-object parameters. A static level sufficies; it
+  that for anonymous access-to-object parameters. A static level suffices; it
   can be calculated using rules similar to those previously described for access
   parameters.]}
 
@@ -4936,8 +4936,9 @@ is the library level.
   than that of the stand-alone object, but the dynamic accessibility of the
   passed in object clearly must be shallower than the stand-alone object
   (whatever is passed in must live at least as long as the subprogram call). We
-  do not need to keep a more local static level as objects statically deeper
-  than the stand-alone object cannot be stored into the stand-alone object.]}
+  do not need to keep a more local static level as accesses to objects
+  statically deeper than the stand-alone object cannot be stored into the
+  stand-alone object.]}
 @end(ImplNote)
 @begin{Discussion}
 @Leading@keepnext@;Examples of accessibility:

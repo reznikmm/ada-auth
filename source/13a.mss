@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2009/07/02 04:51:28 $}
+@Comment{$Date: 2009/10/15 06:20:51 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.74 $}
+@Comment{$Revision: 1.75 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -667,7 +667,7 @@ the ancestors of a @nt{type_declaration}.]}]}
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[An implementation can only use this rule to
-  reject @nt{type_declaration}s where one its ancestors has a representation
+  reject @nt{type_declaration}s where one of its ancestors has a representation
   item. An implementation must ensure that
   the default representations of ancestors cannot conflict.]}
 @end{ImplNote}
