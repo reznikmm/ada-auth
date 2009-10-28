@@ -1,6 +1,6 @@
 @Part(statements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/statements.mss,v $}
-@comment{$Revision: 1.13 $ $Date: 2009/07/02 04:50:54 $}
+@comment{$Revision: 1.14 $ $Date: 2009/10/15 06:21:25 $}
 
 
 @LabeledSection{package Asis.Statements}
@@ -106,7 +106,7 @@ An_Expression
 @end{Example}
 
 Statement @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
-assignment statement to query
+assignment statement to query.
 
 Returns the expression from the right hand side of the assignment.
 

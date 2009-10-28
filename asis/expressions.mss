@@ -1,6 +1,6 @@
 `@Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.17 $ $Date: 2009/09/15 04:48:14 $}
+@comment{$Revision: 1.18 $ $Date: 2009/10/15 06:21:25 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -1406,7 +1406,7 @@ component A_Defining_Name elements are not Is_Normalized.
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0014-1]}
 @ChgAdded{Version=[2],Text=[Asis.Expressions.Formal_Parameter
 may return An_Others_Choice for a
-unnormalized A_Generic_Association argument;]}
+unnormalized A_Generic_Association argument.]}
 @begin{Discussion}
 @ChgAdded{Version=[2],Text=[This can happen if the A_Generic_Association
 represents a formal_package_association.]}
@@ -1419,7 +1419,7 @@ unnormalized A_Generic_Association element contains an Expression_Element
 with expression kind A_Box_Expression as its
 Actual_Parameter part. The normalized A_Generic_Association contains either
 a default parameter or an Expression_Element with expression kind
-A_Box_Expression;]}
+A_Box_Expression.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Association expects an element
@@ -1498,7 +1498,7 @@ the explicit_generic_actual_parameter of a generic_association.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0031-1]}
 @noprefix@;The Enclosing_Element of An_Expression is the @Chg{Version=[2],
 New=[unnormalized An_Association Element containing the corresponding actual
-parameter], Old=[Association argument.]}
+parameter], Old=[Association argument]}.
 @end{InnerItemize}
 
 @leading@;If the Association is given by default:
@@ -1900,7 +1900,7 @@ prefix of the call denotes an @Chg{Version=[2],New=[],Old=[access to a function 
   dereference@Chg{Version=[2],New=[ of an access to a function value, or],Old=[,]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Expression],Old=[argument]} is a dispatching call,
+@Chg{Version=[2],New=[Expression],Old=[argument]} is a dispatching call@Chg{Version=[2],New=[.],Old=[,]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}

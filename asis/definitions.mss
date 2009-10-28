@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.18 $ $Date: 2009/09/15 04:48:13 $}
+@comment{$Revision: 1.19 $ $Date: 2009/10/15 06:21:25 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -1626,7 +1626,7 @@ function Discriminant_Associations
 Constraint @chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the
 discriminant_constraint to query. Normalized
 @chg{Version=[1],New=[specifies],Old=[@en Specifies]} whether the normalized
-form is desired
+form is desired.
 
 Returns a list of the discriminant_association elements of the
 discriminant_constraint.

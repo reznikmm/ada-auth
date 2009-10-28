@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.24 $ $Date: 2009/09/15 04:48:14 $}
+@comment{$Revision: 1.25 $ $Date: 2009/10/15 06:21:25 $}
 
 @LabeledSection{package Asis}
 
@@ -524,8 +524,7 @@ Literals                          -- @examcom{@Chg{Version=[2],New=[Ada Standard
    @AdaObjDefn{An_Optimize_Pragma},               -- @examcom{2.8(23)}
    @AdaObjDefn{A_Pack_Pragma},                    -- @examcom{13.2(3)}
    @AdaObjDefn{A_Page_Pragma},                    -- @examcom{2.8(22)}@Chg{Version=[2],New=[
-   @AdaObjDefn{A_Partition_Elaboration_Policy_Pragma},   -- @examcom{H.6 (3)}],Old=[]}
-   @AdaObjDefn{A_Relative_Deadline_Pragma},       -- @examcom{D.2.6 (2.2)}@Chg{Version=[2],New=[
+   @AdaObjDefn{A_Partition_Elaboration_Policy_Pragma},   -- @examcom{H.6 (3)}
    @AdaObjDefn{A_Preelaborable_Initialization_Pragma},   -- @examcom{7.6 (5)}],Old=[]}
    @AdaObjDefn{A_Preelaborate_Pragma},            -- @examcom{10.2.1(3)}
    @AdaObjDefn{A_Priority_Pragma},                -- @examcom{D.1(3)}
@@ -626,7 +625,7 @@ Old=[name literals]}.@Chg{Version=[1],New=[],Old=[Literals                      
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0010-1]}
    @AdaObjDefn{A_Discriminant_Specification},            -- @examcom{3.7(5)   @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
    @AdaObjDefn{A_Component_Declaration},                 -- @examcom{3.8(6)}@Chg{Version=[2],New=[
-   @AdaObjDefn{A_Return_Object_Specification}            -- @examcom{6.5(2)}],Old=[]}
+   @AdaObjDefn{A_Return_Object_Specification},           -- @examcom{6.5(2)}],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0022-1]}
    @AdaObjDefn{A_Loop_Parameter_Specification},          -- @examcom{5.5(4)   @Chg{Version=[2],New=[],Old=[-> Trait_Kinds]}}
@@ -1561,7 +1560,7 @@ ASIS treats the select_alternative, entry_call_alternative, and
 triggering_alternative, as the syntactic equivalent of a
 sequence_of_statements. Specifically, the terminate_alternative (terminate;)
 is treated as the syntactical equivalent of a single statement and are
-represented as Statement_Kinds'A_Terminate_Alternative_Statement.
+represented as Statement_Kinds'(A_Terminate_Alternative_Statement).
 This allows queries to directly provide the sequence_of_statements enclosed
 by A_Path elements, avoiding the extra step of returning an element
 representing such an alternative.
@@ -1652,7 +1651,7 @@ Literals                      -- @examcom{@Chg{Version=[2],New=[Ada Standard],Ol
    @AdaObjDefn{A_With_Clause},              -- @examcom{10.1.2}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
-   @Chg{Version=[2],New=[@AdaObjDefn{An_Aspect_Clause}        ],Old=[@AdaObjDefn{A_Representation_Clause}]}    -- @examcom{13.1     -> @Chg{Version=[2],New=[@AdaObjDefn{Aspect_Clause_Kinds}],Old=[@AdaObjDefn{Representation_Clause_Kinds}]}}
+   @Chg{Version=[2],New=[@AdaObjDefn{An_Aspect_Clause}        ],Old=[@AdaObjDefn{A_Representation_Clause}]},    -- @examcom{13.1     -> @Chg{Version=[2],New=[@AdaObjDefn{Aspect_Clause_Kinds}],Old=[@AdaObjDefn{Representation_Clause_Kinds}]}}
    @AdaObjDefn{A_Component_Clause});        -- @examcom{13.5.1}
 @end{Example}
 @ChgAdded{Version=[1],Text=[The comments list a reference to the definition in

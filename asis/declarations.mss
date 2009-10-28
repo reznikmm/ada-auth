@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.21 $ $Date: 2009/09/15 04:48:13 $}
+@comment{$Revision: 1.22 $ $Date: 2009/10/15 06:21:25 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -501,7 +501,7 @@ For a single_task_declaration or single_protected_declaration, returns the
 task_definition or protected_definition@Chg{Version=[2],New=[. If no
 task_definition is given explicitly (the reserved word is not written), an
 empty task_definition is returned for which Is_Task_Definition_Present returns
-False.],Old=[ following the reserved word @key[is]]}.
+False],Old=[ following the reserved word @key[is]]}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0032-1]}
 @ChgAdded{Version=[2], Text=[If an empty task_definition E is returned, then Is_Part_of_Implicit(E) = False;

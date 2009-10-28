@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.19 $ $Date: 2009/07/02 04:50:54 $}
+@comment{$Revision: 1.20 $ $Date: 2009/10/15 06:21:25 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -1556,7 +1556,7 @@ original compilation text.
 @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 12.3 (16)
 
 @begin{InnerItemize}
-implicit generic instance specifications and bodies are not
+Implicit generic instance specifications and bodies are not
 Is_Part_Of_Implicit; they are Is_Part_Of_Instance and are only implicit if some
 other rule makes them so.
 @end{InnerItemize}
