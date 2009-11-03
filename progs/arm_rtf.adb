@@ -6,7 +6,8 @@ with ARM_Output,
      Ada.Strings.Maps,
      Ada.Strings.Fixed,
      Ada.Characters.Handling,
-     Ada.Calendar;
+     Ada.Calendar,
+     Ada.Unchecked_Conversion;
 package body ARM_RTF is
 
     --
@@ -3311,6 +3312,8 @@ package body ARM_RTF is
 	            Heading_4_Info, Count);
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File,
 		     Clause_Number & " " & Header_Text & "\par}");
+	    when ARM_Contents.Dead_Clause =>
+		raise Program_Error; -- No headers for dead clauses.
 	end case;
 	Output_Object.Char_Count := 0;
     end Clause_Header;
@@ -3397,6 +3400,8 @@ package body ARM_RTF is
 	            Heading_4_Info, Count);
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File,
 		     Clause_Number & " " & Header_Text & "\par}");
+	    when ARM_Contents.Dead_Clause =>
+		raise Program_Error; -- No headers for dead clauses.
 	end case;
 	Output_Object.Char_Count := 0;
     end Revised_Clause_Header;
