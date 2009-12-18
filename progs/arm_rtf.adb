@@ -133,6 +133,7 @@ package body ARM_RTF is
     --			in Ordinary_Character.
     --  5/ 4/09 - RLB - Added the footer information.
     --  5/ 6/09 - RLB - Added ISO format footer and version names.
+    -- 10/28/09 - RLB - Added missing with.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
