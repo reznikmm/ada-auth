@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2009/07/02 04:51:28 $}
+@Comment{$Date: 2009/12/18 07:15:33 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.94 $}
+@Comment{$Revision: 1.95 $}
 
 @begin{Intro}
 
@@ -1070,8 +1070,8 @@ with the same identifier within the protected declaration, whose
 profile is type conformant with the prefixed view profile of the
 inherited subprogram, the inherited subprogram is said to be
 @i{implemented} by the conforming protected subprogram or
-entry@Chg{Version=[3],New=[using an implicitly declared non-abstract subprogram
-which has the same profile as the inherited subprogram and which
+entry@Chg{Version=[3],New=[ using an implicitly declared non-abstract
+subprogram which has the same profile as the inherited subprogram and which
 overrides it@PDefn2{Term=[override],Sec=[when implemented by]}],
 Old=[]}.@PDefn2{Term=[implemented],
 Sec=[by a protected subprogram]}@PDefn2{Term=[implemented],
@@ -1130,7 +1130,7 @@ limited interface type that is not a task interface.]]}
 primitive subprogram of a tagged protected type shall not be type conformant
 with any protected operation of the protected type, if the@Chg{Version=[3],New=[
 subprogram has the same defining name as the protected operation and
-the],Old=[]}first parameter of
+the],Old=[]} first parameter of
 the subprogram is of the protected type or is an access parameter designating
 the protected type.@Defn2{Term=[type conformance],Sec=(required)}]}
 @begin(Reason)

@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:01 $}
+@Comment{$Date: 2009/12/18 07:15:33 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.33 $}
+@Comment{$Revision: 1.34 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -381,8 +381,7 @@ are first evaluated in an arbitrary order.
 
 @Leading@keepnext@;When the type of the target is class-wide:
 @begin(itemize)
-  @PDefn2{Term=[controlling tag value], Sec=(for the @nt{expression}
-    in an @nt{assignment_statement})}
+  @PDefn2{Term=[controlling tag value], Sec=(for the @nt{expression} in an @nt{assignment_statement})}
   If the @nt<expression> is tag-indeterminate
   (see @RefSecNum{Dispatching Operations of Tagged Types}), then the controlling
   tag value for the @nt<expression> is the tag of the target;

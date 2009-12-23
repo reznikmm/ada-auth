@@ -1,10 +1,10 @@
 @Part(glossary, Root="ada.mss")
 
-@Comment{$Date: 2006/10/19 06:40:32 $}
+@Comment{$Date: 2009/12/18 07:15:34 $}
 @LabeledAddedInformativeAnnex{Version=[2],Name=[Language-Defined Entities]}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/langdef.mss,v $}
-@comment{$Revision: 1.3 $}
+@comment{$Revision: 1.4 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
@@ -17,7 +17,7 @@ in @RefSec{Predefined Language Environment}.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
-@ChgAdded{Version=[2],Text=[This clause lists all language-defined packages.]}
+@ChgAdded{Version=[2],Text=[This clause lists all language-defined packages.@Defn{Language-defined packages}]}
 @end{Intro}
 
 @PackageList
@@ -27,7 +27,7 @@ in @RefSec{Predefined Language Environment}.]}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
 @ChgAdded{Version=[2],Text=[This clause lists all language-defined types and
-subtypes.]}
+subtypes.@Defn{Language-defined types}@Defn{Language-defined subtypes}]}
 @end{Intro}
 
 @TypeList
@@ -37,7 +37,7 @@ subtypes.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
-@ChgAdded{Version=[2],Text=[This clause lists all language-defined subprograms.]}
+@ChgAdded{Version=[2],Text=[This clause lists all language-defined subprograms.@Defn{Language-defined subprograms}]}
 @end{Intro}
 
 @SubprogramList
@@ -46,7 +46,7 @@ subtypes.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
-@ChgAdded{Version=[2],Text=[This clause lists all language-defined exceptions.]}
+@ChgAdded{Version=[2],Text=[This clause lists all language-defined exceptions.@Defn{Language-defined exceptions}]}
 @end{Intro}
 
 @ExceptionList
@@ -57,7 +57,7 @@ subtypes.]}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
 @ChgAdded{Version=[2],Text=[This clause lists all language-defined constants,
-variables, named numbers, and enumeration literals.]}
+variables, named numbers, and enumeration literals.@Defn{Language-defined objects}@Defn{Language-defined constants}@Defn{Language-defined values}]}
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Formally, named numbers and enumeration literals

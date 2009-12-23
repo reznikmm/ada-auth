@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.58 $ $Date: 2008/11/26 23:41:02 $ $Author: randy $ }
+@comment{ $Revision: 1.59 $ $Date: 2009/12/18 07:15:34 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:02 $}
+@Comment{$Date: 2009/12/18 07:15:34 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -3191,14 +3191,14 @@ Constraint_Error is sufficient.]}
 document with this paragraph.]}
 @end{Discussion}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0047-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The test that a matrix is symmetric should be
 performed by using the equality operator to compare the relevant components.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The equality operator should be used to test that a matrix in
 Numerics.Generic_Real_Arrays is symmetric.]}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0047-1]}
 @ChgAdded{Version=[3],Text=[An implementation should minimize the circumstances
 under which the algorithm used for Eigenvalues and Eigensystem fails to
 converge.]}

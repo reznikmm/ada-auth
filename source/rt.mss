@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.84 $ $Date: 2009/07/02 04:51:29 $ $Author: randy $ }
+@comment{ $Revision: 1.85 $ $Date: 2009/12/18 07:15:34 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2009/07/02 04:51:29 $}
+@Comment{$Date: 2009/12/18 07:15:34 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2479,11 +2479,15 @@ This follows from the general reentrancy requirements stated near the
 beginning of @RefSec{Predefined Language Environment}.
 @end{TheProof}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 The rule for when Tasking_Error is raised for Set_Priority or Get_Priority is
 different from the rule for when Tasking_Error is raised on an
-entry call (see @RefSecNum{Entry Calls}). In particular, setting or
-querying the priority of a completed or an abnormal
-task is allowed, so long as the task is not yet terminated.
+entry call (see @RefSecNum{Entry Calls}). In particular,
+@Chg{Version=[3],New=[],Old=[setting or ]}querying the priority of
+a completed or an abnormal
+task is allowed, so long as the task is not yet
+terminated@Chg{Version=[3],New=[, and setting the priority of a task
+is allowed for any task state (including for terminated tasks)],Old=[]}.
 
 Changing the priorities of a set of tasks can be performed by a
 series of calls to Set_Priority for each task separately. For

@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2009/10/15 06:20:51 $}
+@Comment{$Date: 2009/12/18 07:15:34 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -2372,14 +2372,10 @@ This is necessary because it is not normally legal to use an expanded
 name to reach inside a generic package.]}
 @end{Reason}
 
-@PDefn2{Term=[directly visible], Sec=(within a @nt{use_clause} in a
-  @nt{context_clause})}
-@PDefn2{Term=[visible], Sec=(within a
-  @nt{use_clause} in a @nt{context_clause})}
-@PDefn2{Term=[directly visible], Sec=(within a @nt{pragma} in a
-  @nt{context_clause})}
-@PDefn2{Term=[visible], Sec=(within a @nt{pragma} in a
-  @nt{context_clause})}
+@PDefn2{Term=[directly visible], Sec=(within a @nt{use_clause} in a @nt{context_clause})}
+@PDefn2{Term=[visible], Sec=(within a @nt{use_clause} in a @nt{context_clause})}
+@PDefn2{Term=[directly visible], Sec=(within a @nt{pragma} in a @nt{context_clause})}
+@PDefn2{Term=[visible], Sec=(within a @nt{pragma} in a @nt{context_clause})}
 Within a @nt{use_clause} or @nt{pragma}
 that is within a @nt{context_clause},
 each @nt<library_item> mentioned in a previous

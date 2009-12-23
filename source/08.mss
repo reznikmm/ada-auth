@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2009/07/02 04:51:28 $}
+@Comment{$Date: 2009/12/18 07:15:33 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -950,8 +950,7 @@ declaration, except:
 
 @end(InnerItemize)
 
-@PDefn2{Term=[hidden from all visibility], Sec=(for a declaration completed
-  by a subsequent declaration)}
+@PDefn2{Term=[hidden from all visibility], Sec=(for a declaration completed by a subsequent declaration)}
 If the completion of a declaration is a declaration,
 then within the scope of the completion,
 the first declaration is hidden from all visibility.
@@ -972,8 +971,7 @@ and you can't denote it.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06],ARef=[AI95-00412-01]}
-@PDefn2{Term=[hidden from all visibility], Sec=(by lack of a
-@nt{with_clause})}
+@PDefn2{Term=[hidden from all visibility], Sec=(by lack of a @nt{with_clause})}
 The declaration of a library unit
 (including a @nt{library_unit_renaming_declaration})
 is hidden from all visibility @Chg{Version=[2],New=[],Old=[except ]}at
@@ -1032,8 +1030,7 @@ from direct visibility, as follows:
   declaration, if the homograph occurs within an inner declarative
   region;
 
-  @PDefn2{Term=[hidden from direct visibility],
-    Sec=(where hidden from all visibility)}
+  @PDefn2{Term=[hidden from direct visibility], Sec=(where hidden from all visibility)}
   A declaration is also hidden from direct visibility
   where hidden from all visibility.
 @end{Itemize}
@@ -3124,6 +3121,12 @@ type @em such a preference would cause Beaujolais effects.
       Note that that rule is not a @ResolutionName.
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0149-1]}
+@ChgAdded{Version=[3],Text=[when @i(T) is a named general access-to-object type
+    (see @RefSecNum{Access Types}) with designated type @i(D), to an anonymous
+    access-to-object type whose designated type covers or is covered by @i(D);
+    or]}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01],ARef=[AI95-00409-01]}
 @ChgAdded{Version=[2],Text=[when @i(T) is an anonymous access-to-subprogram
      type (see @RefSecNum{Access Types}), to an access-to-subprogram type
@@ -3200,11 +3203,19 @@ in a class in scope.
   on.]}
 @end{Discussion}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0102-1]}
-@ChgAdded{Version=[3],Text=[If the expected type of a construct is @i<T1> and
-the actual type of the construct is @i<T2>, then @i<T2> shall be convertible to
-@i<T1> (see @RefSecNum{Type Conversions}).@Defn2{Term=[implicit conversion],
-Sec=[legality]}@PDefn2{Term=[convertible],Sec=(required)}]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0102-1],ARef=[AI05-0149-1]}
+@ChgAdded{Version=[3],Text=[Other than for the @nt{simple_expression} of a
+membership test, if the expected type for a @nt{name} or @nt{expression} is not
+the same as the actual type of the @nt{name} or @nt{expression}, the actual type
+shall be convertible to the expected type (see
+@RefSecNum{Type Conversions});@Defn2{Term=[implicit conversion],
+Sec=[legality]}@PDefn2{Term=[convertible],Sec=(required)} further, if the
+expected type is a named access-to-object type with designated type @i<D1> and
+the actual type is an anonymous access-to-object type with designated type
+@i<D2>, then @i<D1> shall cover @i<D2>, and the @nt{name} or @nt{expression}
+shall denote a view with an accessibility level for which the statically deeper
+relationship applies@Redundant[; in particular it shall not denote an access
+parameter nor a standalone access object].]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3213,6 +3224,12 @@ Sec=[legality]}@PDefn2{Term=[convertible],Sec=(required)}]}
   prevents assigning an access-to-constant value into a stand-alone anonymous
   access-to-variable object. It also covers convertibility of the designated
   type and accessibility checks.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The rule also minimizes cases of implicit
+  conversions when the tag check or the accessibility check might fail. We
+  word this this way because access discriminants should also be disallowed if
+  their enclosing object is designated by an access parameter.]}
 @end{Reason}
 
 A complete context shall have at least one acceptable interpretation;
@@ -3224,6 +3241,7 @@ about ambiguity, are the ones that suck in all the @SyntaxName@;s and
 Note that this and the ambiguity rule have to be @LegalityName@;s.
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0149-1]}
 @Defn2{Term=[preference], Sec=(for root numeric operators and @nt<range>s)}
 There is a @i{preference} for the primitive operators (and @nt<range>s)
 of the root numeric
@@ -3234,7 +3252,15 @@ context differ only in that one is for a primitive operator (or
 @nt<range>) of the
 type @i{root_integer} or @i{root_real}, and the other is not,
 the interpretation using the primitive operator (or @nt<range>)
-of the root numeric type is @i{preferred}.
+of the root numeric type is @i{preferred}.@Chg{Version=[3],New=[ Similarly,
+there is a preference for the equality operators of the @i{universal_access}
+type (see @RefSecNum{Relational Operators and Membership Tests}). If two
+acceptable interpretations of a constituent of a
+complete context differ only in that one is for an equality operator of the
+@i{universal_access} type, and the other is not, the interpretation using the
+equality operator of the @i{universal_access} type is
+preferred.@Defn2{Term=[preference], Sec=(for universal access equality operators)}],Old=[]}
+
 @begin{Reason}
 @leading@;The reason for this preference is so that expressions involving
 literals and named numbers can be unambiguous.
@@ -3246,6 +3272,13 @@ N : @key[constant] := 123;
     ...
 @key[end] @key[if];
 @end{Example}
+
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0149-1]}
+  @ChgAdded{Version=[3],Text=[The preference for @i{universal_access} equality
+  operators is necessary because of implicit conversion
+  from an anonymous access type to a named access type, which would
+  allow the equality operator of any named access type to be used
+  to compare anonymous access values (and that way lies madness).]}
 @end{Reason}
 
 For a complete context, if there is exactly one
@@ -3458,6 +3491,17 @@ Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2005.]]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[If there is any code like this (such code should
   be rare), it will be ambiguous in Ada 2005.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0149-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Implicit conversion now allowed
+  from anonymous access-to-object types to general access-to-object types.
+  Such conversions can make calls ambiguous. That can only happen
+  when there are two visible subprograms with the same name and have profiles
+  that differ only by a parameter that is of a named or anonymous access type,
+  and the actual argument is of an anonymous access type. This should be
+  rare, as many possible calls would be ambiguous even in Ada 2005 (including
+  @nt{allocator}s and any actual of a named access type if the designated
+  types are the same).]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -3484,6 +3528,12 @@ Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2005.]]}
    ...
 @key{end} T;]}
 @end{Example}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0149-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Implicit conversion is allowed
+  from anonymous access-to-object types to general access-to-object types
+  if the designated type is convertable and runtime checks are minimized.
+  See also the incompatibilities section.]}
 @end{Extend95}
 
 @begin{DiffWord95}

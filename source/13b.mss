@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2009/10/15 06:20:52 $}
+@Comment{$Date: 2009/12/18 07:15:34 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.68 $}
+@Comment{$Revision: 1.69 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1799,18 +1799,20 @@ unconstrained discriminated subtype with defaults.]}
 @end{Discussion}
 @end{Itemize}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1],ARef=[AI05-0116-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1],ARef=[AI05-0116-1],ARef=[AI05-0193-1]}
 @ChgAdded{Version=[3],Text=[For one of the calls of Allocate described above,
 @i{P} (equivalent to @i{T}'Storage_Pool) is passed as the Pool parameter. The
 Size_In_Storage_Elements parameter indicates the number
 of storage elements to be allocated, and is no more than
 @i{D}'Max_Size_In_Storage_Elements, where @i{D} is the designated subtype of @i{T}.
-The Alignment parameter is @i{D}'Alignment if @i{D} is a specific type, and
-otherwise is the alignment of the specific type identified by the tag of the
-object being created. The result returned in the Storage_Address parameter is
-used as the address of the allocated storage, which is a contiguous block of
-memory of Size_In_Storage_Elements storage elements. @Redundant[Any exception
-propagated by Allocate is propagated by the construct that contained the call.]]}
+The Alignment parameter is at least @i{D}'Alignment if @i{D} is a specific type, and
+otherwise is at least the alignment of the specific type identified by the tag
+of the object being created. The Alignment parameter is no more than
+@i{D}'Max_Alignment_For_Allocation. The result returned in the Storage_Address
+parameter is used as the address of the allocated storage, which is a contiguous
+block of memory of Size_In_Storage_Elements storage elements. @Redundant[Any
+exception propagated by Allocate is propagated by the construct that contained
+the call.]]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2179,51 +2181,90 @@ objects incorrectly by missing various cases.
   is allowed to call Allocate and Deallocate, and the requirements on such
   calls.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0116-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0116-1],ARef=[AI05-0193-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording to specify the
   alignment for an @nt{allocator} with a class-wide designated type comes from
-  the specific type that is allocated.]}
+  the specific type that is allocated. Also changed the wording to allow larger
+  alignments, up to Max_Alignment_For_Allocation.]}
 @end{DiffWord95}
 
 
 
-@LabeledSubClause{The Max_Size_In_Storage_Elements Attribute}
+@LabeledRevisedSubClause{Version=[3],New=[Storage Allocation Attributes],
+Old=[The Max_Size_In_Storage_Elements Attribute]}
 
 @begin{Intro}
-@redundant[The Max_Size_In_Storage_Elements attribute is useful in writing user-defined pool
-types.]
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0193-1]}
+@redundant[The Max_Size_In_Storage_Elements @Chg{Version=[3],New=[and
+Max_Alignment_For_Allocation attributes may be],Old=[attribute is]}
+useful in writing user-defined pool types.]
 @end{Intro}
 
 @begin{StaticSem}
-@Leading@;For @PrefixType{every subtype S},
-the following attribute is defined:
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0193-1]}
+For @PrefixType{every subtype S},
+the following @Chg{Version=[3],New=[attributes are],Old=[attribute is]} defined:
 @begin{Description}
 @ChgAttribute{Version=[2],Kind=[Revised],ChginAnnex=[T],
   Leading=<F>, Prefix=<S>, AttrName=<Max_Size_In_Storage_Elements>,
-  ARef=[AI95-00256-01],ARef=[AI95-00416-01],
+  ARef=[AI95-00256-01],ARef=[AI95-00416-01],ARef=[AI05-0193-1],
   Text=<Denotes the maximum value for Size_In_Storage_Elements
 that @Chg{Version=[2],New=[could],Old=[will]} be requested @Chg{Version=[2],
 New=[by the implementation ],Old=[]}via Allocate for an access type whose
-designated subtype is S.@Chg{Version=[2],New=[ For a type with access
+designated subtype is S.@Chg{Version=[2],New=[@Chg{Version=[3],New=[],Old=[ For a type with access
 discriminants, if the implementation allocates space for a coextension
 in the same pool as that of the object having the access discriminant,
 then this accounts for any calls on Allocate that could be performed to
-provide space for such coextensions.],Old=[]}
+provide space for such coextensions.]}],Old=[]}
 The value of this attribute is of type @i{universal_integer}.>}
-@EndPrefixType{}
 @begin{Ramification}
 If S is an unconstrained array subtype,
 or an unconstrained subtype with discriminants,
 S'Max_Size_In_Storage_Elements might be very large.
 @end{Ramification}
+
+@ChgAttribute{Version=[3], Kind=[Added], ChginAnnex=[T], Leading=[F],
+  Prefix=<S>, AttrName=<Max_Alignment_For_Allocation>, ARef=[AI05-0193-1],
+  Text=<@Chg{Version=[3],New=[Denotes the maximum value for Alignment that
+  could be requested by the implementation via Allocate for an access type
+  whose designated subtype is S. The value of this attribute is of type
+  @i{universal_integer}.],Old=[]}>}
+@EndPrefixType{}
 @end{Description}
 @end{StaticSem}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0193-1]}
+@ChgAdded{Version=[3],Text=[For a type with access discriminants, if the
+implementation allocates space for a coextension in the same pool as that of the
+object having the access discriminant, then these attributes account for any
+calls on Allocate that could be performed to provide space for such
+coextensions.]}
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0193-1]}
+@ChgAdded{Version=[3],Text=[The values of these attributes should reflect only
+the calls that might be made to the pool specified for an access type with
+designated type S. Thus, if the coextensions would normally be
+allocated from a different pool than the one used for the main object (that is,
+the @ImplAdviceName of @RefSecNum{Storage Management} for determining the pool
+of an anonymous access discriminant is not followed), then these attributes
+should not reflect any calls on Allocate used to allocate the coextensions.]}
+@end{Reason}
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0193-1]}
+@ChgAdded{Version=[3],Text=[Coextensions of coextensions of this type (and so on)
+are included in the values of these attributes if they are allocated from the
+same pool.]}
+@end{Ramification}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00256-01]}
   @ChgAdded{Version=[2],Text=[Corrected the wording so that a
   fortune-telling compiler that can see the future execution of the
   program is not required.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0193-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> The Max_Alignment_For_Allocation
+  attribute is new.]}
 @end{DiffWord95}
 
 
@@ -2258,6 +2299,26 @@ the attribute Access is not allowed
 for instances of Unchecked_Deallocation.
 @end{Reason}
 @end{StaticSem}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0157-1]}
+@ChgAdded{Version=[3],Text=[A call on an instance of Unchecked_Deallocation is
+illegal if the actual access type of the instance is a type for which the
+Storage_Size has been specified by a static expression with value zero or is
+defined by the language to be zero.
+@PDefn{generic contract issue}In addition to the places where
+@LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
+this rule applies also in the private part of an instance of a generic unit.]}
+
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[This rule is the same as the rule for
+@nt{allocator}s. We could have left the last sentence out, as a call to
+Unchecked_Deallocation cannot occur in a specification as it is a procedure
+call, but we left it for consistency and to avoid future maintenance hazards.]}
+@end{Discussion}
+
+@end{Legality}
 
 @begin{RunTime}
 @Leading@;Given an instance of Unchecked_Deallocation
@@ -2373,6 +2434,13 @@ an access type whose pool is Name'Storage_Pool.
 intended to cover the case of an access-to-protected-subprogram where
 the associated object has been deallocated.]}
 @end{Reason}
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0157-1]}
+@ChgAdded{Version=[3],Text=[This text does not cover the case of
+a name that contains a null access value, as @key[null] does not
+denote an object (rather than denoting a nonexistent object).]}
+@end{Ramification}
+
 @end{Erron}
 
 @begin{ImplAdvice}
@@ -2383,11 +2451,29 @@ Text=[For a standard storage pool, an instance of Unchecked_Deallocation
 should actually reclaim the storage.]}]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
-This is not a testable property,
-since we do not @Chg{Version=[2],New=[know ],Old=[]}how much storage is used
-by a given pool element, nor whether fragmentation can occur.
+  This is not a testable property,
+  since we do not @Chg{Version=[2],New=[know ],Old=[]}how much storage is used
+  by a given pool element, nor whether fragmentation can occur.
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0157-1]}
+@ChgAdded{Version=[3],Text=[A call on an instance of Unchecked_Deallocation with
+a non-null access value should raise Program_Error if the actual access type of
+the instance is a type for which the Storage_Size has been specified to be zero
+or is defined by the language to be zero.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[A call on an instance of Unchecked_Deallocation with
+a non-null access value should raise Program_Error if the actual access type of
+the instance is a type for which the Storage_Size has been specified to be zero
+or is defined by the language to be zero.]}]}
+@begin{Discussion}
+  @ChgAdded{Version=[3],Text=[If the call is not illegal (as in a generic body), we
+  recommend that it raise Program_Error. Since the execution of this call is
+  erroneous (any allocator from the pool will have raised Storage_Error, so
+  the non-null access value must have been allocated from a different pool or
+  be a stack-allocated object), we can't require any behavior @em anything at
+  all would be a legitimate implementation.]}
+@end{Discussion}
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -2417,6 +2503,11 @@ This is implied by the rules of @RefSecNum{Formal Access Types}.
   @RefSecNum{Storage Management}, in order to put all of the rules
   associated with implementation-generated calls to Allocate and Deallocate
   together.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0157-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording so that calling
+  an instance of Unchecked_Deallocation is treated similarly to @nt{allocator}s
+  for access types where @nt{allocator}s would be banned.]}
 @end{DiffWord95}
 
 
@@ -3496,7 +3587,7 @@ and then dispatches to the subprogram denoted by the Input attribute of
 the specific type identified by the internal tag;
 returns that result.@Chg{Version=[2],New=[ If the specific type identified
 by the internal tag @Chg{Version=[3],New=[],Old=[is not covered by
-@i<T>'Class ]}or is abstract, Constraint_Error
+@i<T>'Class or ]}is abstract, Constraint_Error
 is raised.],Old=[]}>}@Comment{End S'Class'Input attribute}
 
 @begin{Ramification}

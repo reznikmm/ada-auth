@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2009/10/15 06:20:51 $}
+@Comment{$Date: 2009/12/18 07:15:33 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1417,17 +1417,17 @@ the @nt{allocator}, shall not be statically deeper than that of the type of the
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00366-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0052-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0052-1],ARef=[AI05-0157-1]}
 @ChgAdded{Version=[2],Text=[An @nt{allocator} shall not be of an access type
 for which the Storage_Size has been specified by a static expression with value
 zero or is defined by the language to be zero. @Chg{Version=[3],New=[],
 Old=[@PDefn{generic contract issue}In addition to the places
 where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}), this rule applies also in the private
-part of an instance of a generic unit. ]}This rule does not apply in the body of
+part of an instance of a generic unit. This rule does not apply in the body of
 a generic unit or within a body declared within the declarative region of a
 generic unit, if the type of the allocator is a descendant of a formal access
-type declared within the formal part of the generic unit.]}
+type declared within the formal part of the generic unit.]}]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1439,8 +1439,24 @@ type declared within the formal part of the generic unit.]}
   types, as they would represent state.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The last sentence covers the case of children of
-  generics, and formal access types of formal packages of the generic unit.]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0157-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[We don't need a special
+  rule to cover generic formals (unlike many other similar @LegalityTitle).
+  There are only two cases of interest. For formal access types, the
+  Storage_Size property is not known in the generic, and surely isn't
+  static, so this @LegalityName can never apply. For a formal derived type,
+  this @LegalityName can only be triggered by a parent type having one of
+  the appropriate properties. But Storage_Size can never be specified for
+  a derived access type, so it always has the same value for all child types;
+  additionally, a type derived from a remote access type (which has Storage_Size
+  defined to be zero) is also a remote access type. That means that any actual
+  that would match the formal derived type necessarily has the same
+  Storage_Size properties, so it is harmless (and preferable) to check them
+  in the body - they are always known in that case.
+  For other formal types,@nt{allocator}s are not allowed, so we don't need
+  to consider them. So we don't need an assume-the-best rule
+  here.],Old=[The last sentence covers the case of children of
+  generics, and formal access types of formal packages of the generic unit.]}]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0052-1]}

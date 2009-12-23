@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2009/10/15 06:20:51 $}
+@Comment{$Date: 2009/12/18 07:15:33 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.101 $}
+@Comment{$Revision: 1.102 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -725,8 +725,10 @@ interface type.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[This rule also prevents completing a private type
-  with an interface. A interface, like all types, is a descendant of itself,
+  with an interface. @Chg{Version=[3],New=[An],Old=[A]} interface, like all
+  types, is a descendant of itself,
   and thus this rule is triggered. One reason this is necessary is that
   a client of a private extension should be able to inherit limitedness
   without having to look in the private part to see if the type is an
@@ -1894,8 +1896,9 @@ built-in-place.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0178-1]}
 @leading@keepnext@Defn{limited type}
-A type is @i{limited} if it
+A @Chg{Version=[3],New=[view of a ],Old=[]}type is @i{limited} if it
 is @Chg{Version=[2],New=[],Old=[a descendant of ]}one of the following:
 @begin(itemize)
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00411-01],ARef=[AI95-00419-01]}
@@ -1915,13 +1918,16 @@ is @Chg{Version=[2],New=[],Old=[a descendant of ]}one of the following:
   @ChgNote{This should really be deleted in Version 2, but we want to
   reuse the paragraph number, and that is hard, so we add the message manually.}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
-  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0087-1]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0087-1]}
   @Chg{Version=[3],New=[a class-wide type whose specific type is limited;],
   Old=[@Chg{Version=[2],New=[@Shrink{@i<This paragraph was deleted.>}],
   Old=[a task or protected type;]}]}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00419-01]}
   a composite type with a limited component@Chg{Version=[2],New=[;],Old=[.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0178-1]}
+  @ChgAdded{Version=[3],Text=[an incomplete view;]}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00419-01]}
   @ChgAdded{Version=[2],Text=[a derived type whose parent is limited and is not an
@@ -2240,6 +2246,13 @@ than being a subclause of
   types were never defined to be limited, even if their associated specific
   type is. It is thought that this oversight was never implemented by any
   compiler, thus we have not classified it as an incompatibility.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0178-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added incomplete views
+  to the list of reasons for a view of a type to be limited. This is not
+  a change as the definition already was in
+  @RefSecNum{Incomplete Type Declarations}. But it is much better to have
+  all of the reasons for limitedness together.]}
 @end{DiffWord95}
 
 

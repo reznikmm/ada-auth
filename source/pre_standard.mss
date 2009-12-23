@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.33 $ $Date: 2006/10/18 00:25:28 $ $Author: Randy $ }
+@comment{ $Revision: 1.34 $ $Date: 2009/12/18 07:15:34 $ $Author: randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:28 $}
+@Comment{$Date: 2009/12/18 07:15:34 $}
 
 @RMNewPage@Comment{For printed RM Ada 2005}
 @LabeledClause{The Package Standard}
@@ -180,6 +180,7 @@ the visible part of package Standard.}
    @key[function] "/=" (Left, Right: @RI[universal_access]) @key[return] Boolean;]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00415-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0181-1]}
 @tabclear()@tabset(P7, P14, P21, P28, P37, P44, P51, P58, P64)
 @comment{blank line}
       --@RI{ The declaration of type Character is based on the standard ISO 8859-1 character set.}
@@ -221,7 +222,7 @@ the visible part of package Standard.}
       @RI[st],@\@RI[osc],@\@RI[pm],@\@RI[apc],@\@\@\@\@\--@RI{156 (16#9C#) .. 159 (16#9F#)}
 @comment{blank line}
       ' ',@\'@latin1(161)',@\'@latin1(162)',@\'@latin1(163)',@\'@latin1(164)',@\'@latin1(165)',@\'@latin1(166)',@\'@latin1(167)',@\--@RI{160 (16#A0#) .. 167 (16#A7#)}
-      '@latin1(168)',@\'@latin1(169)',@\'@latin1(170)',@\'@latin1(171)',@\'@latin1(172)',@\'@latin1(173)',@\'@latin1(174)',@\'@latin1(175)',@\--@RI{168 (16#A8#) .. 175 (16#AF#)}
+      '@latin1(168)',@\'@latin1(169)',@\'@latin1(170)',@\'@latin1(171)',@\'@latin1(172)',@\@Chg{Version=[3],New=[@RI[soft_hyphen]],Old=['@latin1(173)']},@\'@latin1(174)',@\'@latin1(175)',@\--@RI{168 (16#A8#) .. 175 (16#AF#)}
 @comment{blank line}
       '@latin1(176)',@\'@latin1(177)',@\'@latin1(178)',@\'@latin1(179)',@\'@latin1(180)',@\'@latin1(181)',@\'@latin1(182)',@\'@latin1(183)',@\--@RI{176 (16#B0#) .. 183 (16#B7#)}
       '@latin1(184)',@\'@latin1(185)',@\'@latin1(186)',@\'@latin1(187)',@\'@latin1(188)',@\'@latin1(189)',@\'@latin1(190)',@\'@latin1(191)',@\--@RI{184 (16#B8#) .. 191 (16#BF#)}
@@ -470,4 +471,13 @@ the ride.
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0028],ARef=[AI95-00145-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the parameter
   type for the Boolean operators declared in Standard..]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0181-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Since soft_hyphen (position
+  173) is defined to be nongraphic, gave it a name.]}
+  @begin{Discussion}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[The inconsistencies associated with this
+    change are documented in @RefSecNum{Scalar Types}.]}
+  @end{Discussion}
 @end{DiffWord95}

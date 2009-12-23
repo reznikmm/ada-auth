@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2009/10/15 06:20:51 $}
+@Comment{$Date: 2009/12/18 07:15:33 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.100 $}
+@Comment{$Revision: 1.101 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -3562,9 +3562,19 @@ in an arbitrary order.
       specific type.
     @end{Ramification}
     @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
+    @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0149-1]}
     @ChgAdded{Version=[2],Text=[if the tested type is an access type and the
     named subtype excludes null, the value of the @nt{simple_expression} is
-    not null.]}
+    not null@Chg{Version=[3],New=[;],Old=[.]}]}
+
+    @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0149-1]}
+    @ChgAdded{Version=[3],Text=[if the tested type is a general access-to-object
+    type, the type of the @nt{simple_expression} is convertible to the tested
+    type and its accessibility level is no deeper than that of the tested type;
+    further, if the designated type is tagged and the @nt{simple_expression} is
+    non-null, the tag of the object designated by the value of the
+    @nt{simple_expression} is covered by the designated type of the tested
+    type.]}
   @end{Inneritemize}
 @end(itemize)
 
@@ -3681,10 +3691,14 @@ We have changed the term @lquotes@;catenate@rquotes@; to @lquotes@;concatenate@r
 @end{Incompatible95}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00420-01]}
-@Chg{Version=[2],New=[@Defn{extensions to Ada 95}The @i{universal_access}
-equality operators are new. They provide equality operations (most importantly,
-testing against @key{null}) for anonymous access types.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00420-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}The @i{universal_access}
+  equality operators are new. They provide equality operations (most
+  importantly, testing against @key{null}) for anonymous access types.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0149-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Membership checks for the
+  accessibility and designated tags for general access types are new.]}
 @end{Extend95}
 
 @begin{DiffWord95}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.69 $ $Date: 2009/10/15 06:20:52 $ $Author: randy $ }
+@comment{ $Revision: 1.70 $ $Date: 2009/12/18 07:15:34 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2009/10/15 06:20:52 $}
+@Comment{$Date: 2009/12/18 07:15:34 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -237,7 +237,7 @@ implementations that are unstable if given buggy hash functions, et al.]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a definition of
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a definition of
   strict weak ordering.]}
 @end{DiffWord95}
 
@@ -2144,12 +2144,30 @@ was created:@Defn2{Term=[invalid cursor],Sec=[of a vector]}
 @ChgAdded{Version=[2],Text=[The vector that contains the element it designates
 has been finalized;]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The vector that contains the element it designates
-has been used as the Source or Target of a call to Move; or]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0160-1]}
+@ChgAdded{Version=[3],Text=[The vector that contains the element it designates
+has been used as the Target of a call to Assign, or as the target of an
+@nt{assignment_statement};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The element it designates has been deleted.]}
+@ChgAdded{Version=[2],Text=[@Redundant[The vector that contains the element it
+designates has been used as the Source or Target of a call to Move;] or]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[Move has been reworded in terms of Assign and
+  Clear, which are covered by other bullets, so this text is redundant.]}
+@end{TheProof}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0160-1]}
+@ChgAdded{Version=[2],Text=[The element it designates has been
+deleted@Chg{Version=[3],New=[or removed from the vector that contains
+the element],Old=[]}.]}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
+  @ChgAdded{Version=[3],Text=[An element can be removed via calls to Set_Length,
+  Clear, and Merge; and indirectly via calls to Assign and Move.]}
+@end{Ramification}
 
 @end{Itemize}
 
@@ -2347,21 +2365,25 @@ value of Last_Index.]}
   by stream attributes.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a @BoundedName
   to cover tampering by generic actual subprograms.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a @BoundedName
   to cover access to finalized Vector containers.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Redefined "<" actuals
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a pragma
   Remote_Types so that containers can be used in distributed programs.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Revised the definition
+  of invalid cursors to cover missing (and new) cases.]}
 @end{DiffWord95}
 
 
@@ -2899,7 +2921,7 @@ the elements of Source.]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Target denotes the same object
 as Source, then Move has no effect. Otherwise, @Chg{Version=[3],New=[equivalent
-to Target.Assign (Source) followed by Source.Clear],Old=[Move first calls Clear
+to Assign (Target, Source) followed by Clear (Source)],Old=[Move first calls Clear
 (Target). Then, the nodes in Source are moved to Target (in the original order).
 The length of Target is set to the length of Source, and the length of Source is
 set to 0]}.]}
@@ -3451,12 +3473,39 @@ was created:@Defn2{Term=[invalid cursor],Sec=[of a list container]}
 @ChgAdded{Version=[2],Text=[The list that contains the element it designates
 has been finalized;]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The list that contains the element it designates
-has been used as the Source or Target of a call to Move; or]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0160-1]}
+@ChgAdded{Version=[3],Text=[The list that contains the element it designates
+has been used as the Target of a call to Assign, or as the target of an
+@nt{assignment_statement};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The element it designates has been deleted.]}
+@ChgAdded{Version=[2],Text=[@Redundant[The list that contains the element it
+designates has been used as the Source or Target of a call to Move;] or]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[Move has been reworded in terms of Assign and
+  Clear, which are covered by other bullets, so this text is redundant.]}
+@end{TheProof}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0160-1]}
+@ChgAdded{Version=[2],Text=[The element it designates has been
+@Chg{Version=[3],New=[removed from the list that contains the
+element],Old=[deleted]}.]}
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
+  @ChgAdded{Version=[3],Text=[The cursor modified by the four parameter Splice
+  is not invalid, even though the element it designates has been removed from
+  the source list, because that cursor has been modified to designate that
+  element in the target list @en the cursor no longer designates an element
+  in the source list.]}
+@end{Honest}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
+  @ChgAdded{Version=[3],Text=[This can happen directly via calls to Delete,
+  Delete_Last, Clear, Splice with a Source parameter, and Merge; and indirectly
+  via calls to Delete_First, Assign, and Move.]}
+@end{Ramification}
 
 @end{Itemize}
 
@@ -3607,21 +3656,25 @@ probably not a stable sort.]}
   of Move. Specified which elements are read/written by stream attributes.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a @BoundedName
   to cover tampering by generic actual subprograms.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a @BoundedName
   to cover access to finalized list containers.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Redefined "<" actuals
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a pragma
   Remote_Types so that containers can be used in distributed programs.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Revised the definition
+  of invalid cursors to cover missing (and new) cases.]}
 @end{DiffWord95}
 
 
@@ -3966,9 +4019,9 @@ is assigned to the corresponding key/element pair of Target.]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Target denotes the same object
 as Source, then Move has no effect. Otherwise, @Chg{Version=[3],New=[equivalent
-to Target.Assign (Source) followed by Source.Clear],Old=[Move first calls Clear (Target).
-Then, each node from Source is removed from Source and inserted into Target.
-The length of Source is 0 after a successful call to Move]}.]}
+to Assign (Target, Source) followed by Clear (Source)],Old=[Move first calls
+Clear (Target). Then, each node from Source is removed from Source and inserted
+into Target. The length of Source is 0 after a successful call to Move]}.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4271,13 +4324,25 @@ created:@Defn2{Term=[invalid cursor],Sec=[of a map]}
 @ChgAdded{Version=[2],Text=[The map that contains the node it designates has
 been finalized;]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0160-1]}
+@ChgAdded{Version=[3],Text=[The map that contains the node it designates has
+been used as the Target of a call to Assign, or as the target of an
+@nt{assignment_statement};]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The map that contains the node it designates has
 been used as the Source or Target of a call to Move; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The node it designates has been deleted from the
-map.]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0160-1]}
+@ChgAdded{Version=[2],Text=[The node it designates has been
+@Chg{Version=[3],New=[removed],Old=[deleted]} from the map@Chg{Version=[3],New=[
+that contains the node],Old=[]}.]}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
+  @ChgAdded{Version=[3],Text=[This can happen directly via calls to Clear,
+  Exclude, and Delete.]}
+@end{Ramification}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4369,12 +4434,16 @@ unless specified by the operation.]}]}
   of Move. Specified which elements are read/written by stream attributes.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a @BoundedName
   to cover tampering by generic actual subprograms.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a @BoundedName
   to cover access to finalized map containers.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Revised the definition
+  of invalid cursors to cover missing (and new) cases.]}
 @end{DiffWord95}
 
 
@@ -5506,7 +5575,7 @@ a cursor parameter should be @i{O}(1).]}]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Redefined "<" actuals
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
 
@@ -5849,7 +5918,7 @@ corresponding element of Target.]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Target denotes the same object
 as Source, then Move has no effect. Otherwise, @Chg{Version=[3],New=[equivalent
-to Target.Assign (Source) followed by Source.Clear],Old=[Move first clears
+to Assign (Target, Source) followed by Clear (Source)],Old=[Move first clears
 Target. Then, each element from Source is removed from Source and inserted into
 Target. The length of Source is 0 after a successful call to Move]}.]}
 
@@ -6318,13 +6387,25 @@ created:@Defn2{Term=[invalid cursor],Sec=[of a set]}
   @ChgAdded{Version=[2],Text=[The set that contains the element it designates
   has been finalized;]}
 
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0160-1]}
+  @ChgAdded{Version=[3],Text=[The set that contains the element it designates has been used as the Target of
+  a call to Assign, or as the target of an @nt{assignment_statement};]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The set that contains the element it designates
   has been used as the Source or Target of a call to Move; or]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The element it designates has been deleted from
-  the set.]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0160-1]}
+  @ChgAdded{Version=[2],Text=[The element it designates has been
+  @Chg{Version=[3],New=[removed],Old=[deleted]} from the
+  set@Chg{Version=[3],New=[ that contains the element],Old=[]}.]}
+  @begin{Ramification}
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
+    @ChgAdded{Version=[3],Text=[This can happen directly via calls to Clear,
+    Exclude, Delete, and Update_Element_Preserving_Key, and indirectly via calls
+    to procedures Intersection, Difference, and Symmetric_Difference.]}
+  @end{Ramification}
 
 @end{Itemize}
 
@@ -6422,12 +6503,16 @@ unless specified by the operation.]}]}
   of Move. Specified which elements are read/written by stream attributes.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a @BoundedName
   to cover tampering by generic actual subprograms.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a @BoundedTitle
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a @BoundedName
   to cover access to finalized set containers.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Revised the definition
+  of invalid cursors to cover missing (and new) cases.]}
 @end{DiffWord95}
 
 
@@ -6936,7 +7021,7 @@ average time complexity of Containers.@!Hashed_Sets.@!Reserve_Capacity should be
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording to require
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added wording to require
   the formal function be such that that equal elements are also equivalent.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
@@ -7526,8 +7611,9 @@ of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording to require
-  the formal function be such that that equal elements are also equivalent.]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added wording to
+  require the formal function be such that that equal elements are also
+  equivalent.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Redefined "<" actuals
@@ -8310,6 +8396,14 @@ as Containers.Vectors except:]}
 @end{Itemize}
 @end{StaticSem}
 
+@begin{Bounded}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error to use a bounded vector
+if it was the target of an @nt{assignment_statement} whose source was in the middle of
+an operation that disallows tampering with elements @Redundant[or cursors].
+Either Program_Error is raised, or the operation proceeds as defined.]}
+@end{Bounded}
+
 @begin{ImplAdvice}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[Bounded vector objects should be implemented without
@@ -8413,6 +8507,14 @@ as Containers.Doubly_Linked_Lists except:]}
 
 @end{Itemize}
 @end{StaticSem}
+
+@begin{Bounded}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error to use a bounded list if it was the
+target of an @nt{assignment_statement} whose source was in the middle of
+an operation that disallows tampering with elements @Redundant[or cursors].
+Either Program_Error is raised, or the operation proceeds as defined.]}
+@end{Bounded}
 
 @begin{ImplAdvice}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
@@ -8527,6 +8629,14 @@ as Containers.Hashed_Maps except:]}
 @end{Itemize}
 @end{StaticSem}
 
+@begin{Bounded}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error to use a bounded map if it was the
+target of an @nt{assignment_statement} whose source was in the middle of
+an operation that disallows tampering with elements @Redundant[or cursors].
+Either Program_Error is raised, or the operation proceeds as defined.]}
+@end{Bounded}
+
 @begin{ImplAdvice}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[Bounded map objects should be implemented without
@@ -8619,6 +8729,14 @@ as Containers.Ordered_Maps except:]}
 
 @end{Itemize}
 @end{StaticSem}
+
+@begin{Bounded}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error to use a bounded map if it was the
+target of an @nt{assignment_statement} whose source was in the middle of
+an operation that disallows tampering with elements @Redundant[or cursors].
+Either Program_Error is raised, or the operation proceeds as defined.]}
+@end{Bounded}
 
 @begin{ImplAdvice}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
@@ -8728,6 +8846,14 @@ as Containers.Hashed_Sets except:]}
 @end{Itemize}
 @end{StaticSem}
 
+@begin{Bounded}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error to use a bounded set if it was the
+target of an @nt{assignment_statement} whose source was in the middle of
+an operation that disallows tampering with elements @Redundant[or cursors].
+Either Program_Error is raised, or the operation proceeds as defined.]}
+@end{Bounded}
+
 @begin{ImplAdvice}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[Bounded set objects should be implemented without
@@ -8820,6 +8946,14 @@ as Containers.Ordered_Sets except:]}
 
 @end{Itemize}
 @end{StaticSem}
+
+@begin{Bounded}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error to use a bounded set if it was the
+target of an @nt{assignment_statement} whose source was in the middle of
+an operation that disallows tampering with elements @Redundant[or cursors].
+Either Program_Error is raised, or the operation proceeds as defined.]}
+@end{Bounded}
 
 @begin{ImplAdvice}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
@@ -9034,7 +9168,7 @@ should minimize copying of elements.]}]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Redefined "<" actuals
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
 @end{DiffWord95}

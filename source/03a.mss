@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2009/03/10 07:16:40 $}
+@Comment{$Date: 2009/12/18 07:15:33 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.95 $}
+@Comment{$Revision: 1.96 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -2890,12 +2890,15 @@ the implementation of the predefined equality operator of the record extension
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0164-1]}
 @noprefix@;The profile of an inherited subprogram
 (including an inherited enumeration literal) is obtained
 from the profile of the corresponding
 (user-defined) primitive subprogram of the parent@Chg{Version=[2],New=[ or progenitor],Old=[]}
 type, after systematic replacement of each
-subtype of its profile (see @RefSecNum{Subprogram Declarations})
+subtype of its profile (see
+@RefSecNum{Subprogram Declarations})@Chg{Version=[3],New=[, other than
+those found in the designated profile of an @nt{access_definition},],Old=[]}
 that is of the parent@Chg{Version=[2],New=[ or progenitor],Old=[]} type
 with a @i(corresponding subtype) of the derived type.
 @Defn{corresponding subtype}
@@ -2925,6 +2928,13 @@ the corresponding subtype of the derived type is defined as follows:
     all required constraint checks on an indirect call to such
     an inherited subprogram was felt to impose an undesirable
     implementation burden.
+
+    @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0164-1]}
+    @ChgAdded{Version=[3],Text=[Note that the exception to substitition of the
+    parent or progenitor type applies only in the profiles of anonymous
+    access-to-subprogram types. The exception is necessary to avoid calling
+    an access-to-subprogram with types and/or constraints different than
+    expected by the actual routine.]}
   @end{Reason}
 @end(inneritemize)
 
@@ -3212,6 +3222,10 @@ These concepts are similar, but not the same.
   types@rquotes and used it in wording elsewhere; also specified the
   language-defined categories that form classes of types (this was never
   normatively specified in Ada 95.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0164-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording to ensure that
+  anonymous access-to-subprogram types don't get modified on derivation.]}
 @end{DiffWord95}
 
 
@@ -4502,6 +4516,19 @@ The definition of S'Base has been moved here from
 More explicit rules are provided for nongraphic characters.
 @end{DiffWord83}
 
+@begin{Inconsistent95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0181-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2 correction:>
+  Soft hyphen (position 173) is nongraphic in ISO/IEC 10646:2003. Thus, we have given it
+  the language-defined name @i{soft_hyphen}. This changes the result of
+  Character'Image (and all of the related types and attributes) for this
+  character, and changes the behavior of Character'Value (and all of the
+  related types and attributes for this character), and (in unusual circumstances),
+  changes the result for Character'Width (and all of the related types and
+  attributes). The vast majority of programs won't see any difference, as they
+  are already prepared to handle nongraphic characters.]}
+@end{Inconsistent95}
+
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -4667,6 +4694,7 @@ An enumeration type is said to be a @i(character type) if at least
 one of its enumeration literals is a @nt<character_literal>.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0181-1]}
 @Defn{Latin-1}
 @Defn{BMP}
 @Chg{Version=[2],New=[@Defn{ISO/IEC 10646:2003}],Old=[@Defn{ISO 10646}]}
@@ -4678,7 +4706,7 @@ Old=[ISO 10646]}
 Basic Multilingual Plane (BMP).
 Each of the graphic characters of Row 00 of the BMP has
 a corresponding @nt<character_literal> in Character.
-Each of the nongraphic positions of Row 00 (0000-001F and 007F-009F)
+Each of the nongraphic positions of Row 00@Chg{Version=[3],New=[],Old=[ (0000-001F and 007F-009F)]}
 has a corresponding language-defined name, which is not usable as an
 enumeration literal,
 but which is usable with the attributes @Chg{Version=[2],New=[Image,
@@ -4900,6 +4928,11 @@ Context is used to resolve their type.
   non-standard interpretation of character sets; an implementation can
   do what it wants in a non-standard mode, so there isn't much point to
   any advice.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0181-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Removed the position numbers
+  of nongraphic characters from the text, as it is wrong and thus
+  misleading.]}
 @end{DiffWord95}
 
 

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.57 $ $Date: 2009/10/15 06:20:52 $ $Author: randy $ }
+@comment{ $Revision: 1.58 $ $Date: 2009/12/18 07:15:34 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2009/10/15 06:20:52 $}
+@Comment{$Date: 2009/12/18 07:15:34 $}
 
 @LabeledClause{String Handling}
 
@@ -2942,8 +2942,9 @@ Strings.Hash_Case_Insensitive has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns an implementation-defined
 value which is a function of the value of Key, converted to lower case. If
-A and B are strings such that A equals B, Hash_Case_Insensitive(A) equals
-Hash_Case_Insensitive(B).]}
+A and B are strings such that Strings.Equal_Case_Insensitive (A, B) (see
+@RefSecNum{String Comparison}) is
+True, then Hash_Case_Insensitive(A) equals Hash_Case_Insensitive(B).]}
 @end{DescribeCode}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}

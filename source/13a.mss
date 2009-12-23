@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2009/10/15 06:20:51 $}
+@Comment{$Date: 2009/12/18 07:15:34 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1525,7 +1525,7 @@ Words are expected to be independently addressable.
 A @i{machine scalar} is an amount of storage that can be conveniently and
 efficiently loaded, stored, or operated upon by the hardware. Machine scalars
 consist of an integral number of storage elements. The set of machine scalars
-is implementation defined, but @Chg{Version=[3],New=[],Old=[must ]}include
+is implementation defined, but @Chg{Version=[3],New=[includes],Old=[must include]}
 at least the storage element and
 the word. Machine scalars are used to interpret @nt{component_clause}s when the
 nondefault bit ordering applies.]}
@@ -1562,8 +1562,8 @@ The value of this attribute is of type System.Address.>}
   the endianness of the machine doesn't matter.
 @end{Ramification}
 
-@NoPrefix@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0095-1]}
-@ChgAdded{Version=[3],Text=[The prefix of X'Address shall not statically denote
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0095-1]}
+@ChgAdded{Version=[3],NoPrefix=[T],Text=[The prefix of X'Address shall not statically denote
 a subprogram that has convention Intrinsic. X'Address raises Program_Error if X
 denotes a subprogram that has convention Intrinsic.]}
 

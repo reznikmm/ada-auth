@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2009/10/15 06:20:51 $}
+@Comment{$Date: 2009/12/18 07:15:33 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.93 $}
+@Comment{$Revision: 1.94 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -600,8 +600,7 @@ construct overridings for T'Class'Input.]}
 @Leading@keepnext@;The tag associated with an object of a tagged type is
 determined as follows:
 @begin(Itemize)
-@PDefn2{Term=[tag of an object], Sec=(stand-alone object,
-  component, or @nt<aggregate>)}
+@PDefn2{Term=[tag of an object], Sec=(stand-alone object, component, or @nt<aggregate>)}
 The tag of a stand-alone object, a component, or an
 @nt<aggregate> of a specific tagged type @i(T)
 identifies @i(T).
@@ -656,8 +655,7 @@ function with a class-wide result
 type is that of the return @Chg{Version=[2],New=[object],Old=[expression]}.
 @end(Itemize)
 
-@PDefn2{Term=[tag of an object], Sec=(preserved by type conversion and parameter
-passing)}
+@PDefn2{Term=[tag of an object], Sec=(preserved by type conversion and parameter passing)}
 The tag is preserved by type conversion and by parameter passing.
 The tag of a value is the tag of the associated object
 (see @RefSecNum{Formal Parameter Modes}).
@@ -3636,7 +3634,7 @@ type and its first subtype; the first subtype is unconstrained if
 a @nt<discriminant_part> appears. If the
 @nt{incomplete_@!type_@!declaration} includes the reserved word @key{tagged}, it
 declares a @i{tagged incomplete view}.@Defn2{Term=[incomplete view],Sec=[tagged]}@Defn{tagged incomplete view}
-An incomplete view of a type is a limited view of the type (see @RefSecNum{Limited Types}).]}
+@Redundant[An incomplete view of a type is a limited view of the type (see @RefSecNum{Limited Types}).]]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[Given an access type @i{A} whose designated
@@ -3785,7 +3783,9 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
   @end{Reason}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
-  as the @nt<subtype_mark> in an @nt<access_definition>@Chg{Version=[2],New=[.],Old=[;]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0151-1]}
+  as the @nt<subtype_mark> in an
+  @nt<access_definition>@Chg{Version=[2],New=[@Chg{Version=[3],New=[;],Old=[.]}],Old=[;]}
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This does not mean any random @nt{subtype_mark}
@@ -3793,6 +3793,15 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
   a @nt<formal_part>, just the one given directly in the syntax of
   @nt<access_definition>.]}
 @end{Honest}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0151-1]}
+  @ChgAdded{Version=[3],Text=[as the @nt{subtype_mark} defining the subtype
+  of a parameter or result in a profile occurring within a
+  @nt{basic_declaration}.]}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[But not in the profile for a body or entry.]}
+@end{Ramification}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
@@ -3801,8 +3810,10 @@ denotes a tagged incomplete view, it may also be used:]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
+  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0151-1]}
   @ChgAdded{Version=[2],Text=[as the @nt{subtype_mark} defining the subtype of a
-  parameter in a @nt{formal_part};]}
+  parameter in @Chg{Version=[3],New=[the profile for a @nt{subprogram_body},
+  @nt{entry_body}, or @nt{accept_statement}],Old=[a @nt{formal_part}]};]}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
   as the @nt{prefix} of an @nt{attribute_reference}
@@ -3825,37 +3836,53 @@ denotes a tagged incomplete view, it may also be used:]}
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[If such a @nt{name} occurs within
+@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0151-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Chg{Version=[3],New=[],Old=[If
+such a @nt{name} occurs within
 the declaration list containing the completion of the
-incomplete view, it may also be used:]}
+incomplete view, it may also be used:]}]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}@ChgNote{Really moved}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0098-1]}
-@ChgAdded{Version=[2],Text=[as the @nt{subtype_mark} defining the subtype of a
-parameter or result of an @nt{access_to_@!subprogram_@!definition}@Chg{Version=[3],New=[
-or an @nt{access_definition} for an access-to-subprogram type],Old=[]}.]}
+@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0098-1],ARef=[AI05-0151-1]}@ChgNote{Now part of the next paragraph}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[as the @nt{subtype_mark} defining the subtype of a
+parameter or result of an @nt{access_to_@!subprogram_@!definition}.]}]}
   @begin{Reason}
-    @ChgRef{Version=[2],Kind=[Added]}
-    @ChgAdded{Version=[2],Text=[This allows, for example, a record to have a
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgRef{Version=[3],Kind=[Deleted]}
+    @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[This allows,
+    for example, a record to have a
     component designating a subprogram that takes that same record
-    type as a parameter.]}
+    type as a parameter.]}]}
   @end{Reason}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0151-1]}
 @ChgAdded{Version=[2],Text=[If any of the above uses occurs as part of the
-declaration of a primitive subprogram of the incomplete view, and the
-declaration occurs immediately within the private part of a package, then
-the completion of the incomplete view shall also occur immediately within
-the private part; it shall not be deferred to the package body.]}
+declaration of a primitive subprogram of the incomplete view,
+@Chg{Version=[3],New=[or as part of an
+@nt{access_to_subprogram_definition} or an @nt{access_definition} for an
+access-to-subprogram type, then the primitive subprogram declaration
+or the access-to-subprogram type definition shall occur within the
+declaration list immediately containing],Old=[and the
+declaration occurs immediately within the private part of a package, then]}
+the completion of the incomplete view@Chg{Version=[3],New=[],Old=[ shall also
+occur immediately within the private part; it shall not be deferred to the
+package body]}.]}
+  @begin{Ramification}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[In this case, the incomplete type cannot be
+    deferred to the package body, even if the declaration occurs in the
+    private part.]}
+  @end{Ramification}
   @begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This fixes a hole in Ada 95 where a dispatching
-  operation with an access parameter could be declared in a private part
-  and a dispatching call on it could occur in a child even though there is
-  no visibility on the full type, requiring access to the controlling tag
-  without access to the representation of the type.]}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[This fixes a hole in Ada 95 where a dispatching
+    operation with an access parameter could be declared in a private part
+    and a dispatching call on it could occur in a child even though there is
+    no visibility on the full type, requiring access to the controlling tag
+    without access to the representation of the type.]}
   @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
@@ -3863,29 +3890,40 @@ the private part; it shall not be deferred to the package body.]}
 incomplete view of a type are allowed.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0151-1]}
 @Chg{Version=[2],New=[A @nt{prefix} that denotes an object],
 Old=[A dereference (whether implicit or explicit @em see @RefSecNum(Names))]}
-shall not be of an incomplete @Chg{Version=[2],New=[view],Old=[type]}.
+shall not be of an incomplete @Chg{Version=[2],New=[view],Old=[type]}.@Chg{Version=[3],New=[
+An actual parameter in a call shall not be of an untagged incomplete
+view. The result object of a function call shall not be of an
+incomplete view.],Old=[]}
   @begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[We used to disallow all dereferences of an incomplete
-  type. Now we only disallow such dereferences when used as a @nt{prefix}.
-  Dereferences used in other contexts do not pose a problem since normal type
-  matching will preclude their use except when the full type is @lquotes@;nearby@rquotes@;
-  as context (for example, as the expected type).]}
+    @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgAdded{Version=[2],Text=[We used to disallow all dereferences of an incomplete
+    type. Now we only disallow such dereferences when used as a @nt{prefix}.
+    Dereferences used in other contexts do not pose a problem since normal type
+    matching will preclude their use except when the full type is @lquotes@;nearby@rquotes@;
+    as context (for example, as the expected type).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This also disallows @nt{prefix}es that are
-  directly of an incomplete view. For instance, a parameter @i{P} can be
-  declared of a tagged incomplete type, but we don't want to allow @i{P}'Size,
-  @i{P}'Alignment, or the like, as representation values aren't known for an
-  incomplete view.]}
+    @ChgAdded{Version=[2],Text=[This also disallows @nt{prefix}es that are
+    directly of an incomplete view. For instance, a parameter @i{P} can be
+    declared of a tagged incomplete type, but we don't want to allow @i{P}'Size,
+    @i{P}'Alignment, or the like, as representation values aren't known for an
+    incomplete view.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[We say @lquotes@;denotes an object@rquotes
-  so that prefixes that directly name an incomplete view are not covered;
-  the previous rules cover such cases, and we certainly don't want to ban
-  Incomp'Class.]}
+    @ChgAdded{Version=[2],Text=[We say @lquotes@;denotes an object@rquotes
+    so that prefixes that directly name an incomplete view are not covered;
+    the previous rules cover such cases, and we certainly don't want to ban
+    Incomp'Class.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0151-1]}
+    @ChgAdded{Version=[3],Text=[As subprogram profiles now may include any
+    kind of incomplete type, we also disallow passing objects of untagged
+    incomplete types in subprogram calls (as the parameter passing method
+    is not known as it is for tagged types) and disallow returning any
+    sort of incomplete objects (since we don't know how big they are).]}
   @end{Reason}
 @end{Legality}
 
@@ -3929,6 +3967,12 @@ This is because a type has to
 be completely defined before it is frozen, and a body freezes
 all types declared prior to it in the same @nt<declarative_part>
 (see @RefSecNum{Freezing Rules}).
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0151-1]}
+@ChgAdded{Version=[3],Text=[A @nt{name} that denotes an object of an
+incomplete view is defined to be of a limited type. Hence, the target of
+an assignment statement shall not be of an incomplete view.]}
+
 @end{Notes}
 
 @begin{Examples}
@@ -4077,6 +4121,12 @@ not at all) for different designated subtypes.
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the definition
   so that an anonymous access-to-subprogram type can use an incomplete
   view in the same way that a named access-to-subprogram type can.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0151-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Incomplete types now can be used
+  in subprogram declarations. The type has to be complete before any calls
+  or the body is declared. This reduces the places where access types are
+  required for type imported from limited views of packages.]}
 @end{Extend95}
 
 @begin{DiffWord95}

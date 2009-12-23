@@ -1,11 +1,10 @@
-
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2009/10/15 06:20:51 $}
+@Comment{$Date: 2009/12/18 07:15:33 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.94 $}
+@Comment{$Revision: 1.95 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -284,8 +283,10 @@ The @i(subtypes of a profile) are:
   the designated subtype of the parameter type.
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01]}
+  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0164-1]}
   @ChgAdded{Version=[2],Text=[For any access parameters of an access-to-subprogram
-  type, the subtypes of the profile of the parameter type.]}
+  type, the subtypes of the @Chg{Version=[3],New=[designated ],Old=[]}profile
+  of the parameter type.]}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00318-02]}
   @Chg{Version=[2],New=[For any non-access result, the nominal subtype of the
@@ -296,8 +297,10 @@ The @i(subtypes of a profile) are:
   the designated subtype of the result type.],Old=[]}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
+  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0164-1]}
   @Chg{Version=[2],New=[For any access result type of an access-to-subprogram
-  type, the subtypes of the profile of the result type.],Old=[]}
+  type, the subtypes of the @Chg{Version=[3],New=[designated ],Old=[]}profile
+  of the result type.],Old=[]}
 
 @end{Itemize}
 
