@@ -1,6 +1,6 @@
 @Part(compunit, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/compunit.mss,v $}
-@comment{$Revision: 1.15 $ $Date: 2009/07/02 04:50:54 $}
+@comment{$Revision: 1.16 $ $Date: 2009/12/23 06:58:59 $}
 
 
 @LabeledSection{package Asis.Compilation_Units}
@@ -39,7 +39,7 @@ Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
 compilation unit to query.
 
 Returns the Unit_Kinds value of the compilation unit.
-Returns Not_A_Unit for a Nil_Compilation_Unit.
+Returns Not_A_Unit for Nil_Compilation_Unit.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
@@ -81,7 +81,7 @@ result of some sort of failure.
 Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the compilation unit to query.
 
 Returns the Unit_Classes value of the compilation unit.
-Returns Not_A_Class for a Nil_Compilation_Unit.
+Returns Not_A_Class for Nil_Compilation_Unit.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],
@@ -153,7 +153,7 @@ ASIS Context @Chg{Version=[2],New=[objects],Old=[variables]}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 Raises ASIS_Inappropriate_Compilation_Unit @ChgAdded{Version=[2],Text=[with
-a Status of Value_Error]} if the unit is a Nil_Compilation_Unit.
+a Status of Value_Error]} if the unit is Nil_Compilation_Unit.
 @end{DescribeCode}
 
 
@@ -173,7 +173,7 @@ which they were obtained.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 Raises ASIS_Inappropriate_Compilation_Unit @ChgAdded{Version=[2],Text=[with
-a Status of Value_Error]} if the unit is a Nil_Compilation_Unit.
+a Status of Value_Error]} if the unit is Nil_Compilation_Unit.
 @end{DescribeCode}
 
 
@@ -197,12 +197,12 @@ The_Context.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 This query will never return a unit with A_Configuration_Compilation or
-a nonexistent unit kind. It will never return a unit with A_Procedure_Body or
+a Nonexistent unit kind. It will never return a unit with A_Procedure_Body or
 A_Function_Body unit kind even though the unit is interpreted as both the
 declaration and body of a library procedure or library function.
 (@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.4(4).)
 
-A Nil_Compilation_Unit is returned if no such declaration exists.
+Nil_Compilation_Unit is returned if no such declaration exists.
 
 Any non-Nil result will have an Enclosing_Context value that Is_Identical
 to the Context. Never returns a unit with a nonexistent unit kind.
@@ -228,7 +228,7 @@ The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Cont
 Returns the library_unit_body or subunit with the name, contained
 in the library.
 
-A Nil_Compilation_Unit is returned if no such body exists.
+Nil_Compilation_Unit is returned if no such body exists.
 
 Any non-Nil result will have an Enclosing_Context value that Is_Identical
 to The_Context. Never returns a unit with a nonexistent unit kind.
@@ -253,12 +253,14 @@ Returns a list of all library_unit_declaration and
 library_unit_renaming_declaration elements contained in The_Context. Individual
 units will appear only once in an order that is not defined.
 
-A Nil_Compilation_Unit_List is returned if there are no declarations of
+Nil_Compilation_Unit_List is returned if there are no declarations of
 library units within The_Context.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-This query will never return a unit with A_Configuration_Compilation or
-a nonexistent unit kind. It will never return a unit with A_Procedure_Body or
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0053-1]}
+This query will never return a unit with
+@Chg{Version=[2],New=[kinds ],Old=[]}A_Configuration_Compilation or
+@Chg{Version=[2],New=[A_Nonexistent_Declaration],Old=[a Nonexistent unit kind]}.
+It will never return a unit with A_Procedure_Body or
 A_Function_Body unit kind even though the unit is interpreted as both the
 declaration and body of a library procedure or library function.
 (@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.4(4).)
@@ -286,11 +288,13 @@ Returns a list of all library_unit_body and subunit elements contained in
 The_Context. Individual units will appear only once in an order that is not
 defined.
 
-A Nil_Compilation_Unit_List is returned if there are no bodies within
+Nil_Compilation_Unit_List is returned if there are no bodies within
 The_Context.
 
-This query will never return a unit with A_Configuration_Compilation or
-a nonexistent unit kind.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+This query will never return a unit with @Chg{Version=[2],New=[kinds ],Old=[]}
+A_Configuration_Compilation or
+@Chg{Version=[2],New=[A_Nonexistent_Body],Old=[a nonexistent unit kind]}.
 
 All units in the result will have an Enclosing_Context value that
 Is_Identical to The_Context.
@@ -314,11 +318,13 @@ The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a program Cont
 Returns a list of all compilation units contained in The_Context.
 Individual units will appear only once in an order that is not defined.
 
-A Nil_Compilation_Unit_List is returned if there are no units within
+Nil_Compilation_Unit_List is returned if there are no units within
 The_Context.
 
-This query will never return a unit with A_Configuration_Compilation or
-a nonexistent unit kind.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+This query will never return a unit with @Chg{Version=[2],New=[kinds ],Old=[]}
+A_Configuration_Compilation@Chg{Version=[2],New=[, A_Nonexistent_Declaration,
+or A_Nonexistent_Body],Old=[ or a nonexistent unit kind]}.
 
 All units in the result will have an Enclosing_Context value that
 Is_Identical to The_Context.
@@ -326,6 +332,38 @@ Is_Identical to The_Context.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context with a Status of
 Value_Error if The_Context is not open.]}
+@end{DescribeCode}
+
+@begin{UsageNote}
+@ChgAdded{Version=[2],Text=[Function Compilation_Units returns all units that
+are contained in a context, including declarations, renames, instances, bodies,
+and subunits. But it does not return any configuration pragmas. To get just
+declarations, use Library_Unit_Declarations; to get just bodies, use
+Compilation_Unit_Bodies; and to get just configuration pragmas, use
+Configuration_Compilation_Units.]}
+@end{UsageNote}
+
+
+
+@LabeledAddedClause{Version=[2],Name=[function Configuration_Compilation_Units (context)]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgAdded{Version=[2], Text=[@key[function] @AdaSubDefn{Configuration_Compilation_Units} (The_Context : @key[in] Asis.Context)
+                   @key[return] Asis.Compilation_Unit_List;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0053-1]}
+@ChgAdded{Version=[2], Text=[The_Context specifies a program Context environment.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0053-1]}
+@ChgAdded{Version=[2], Text=[Returns a list of all configuration compilation
+units contained in The_Context. Individual units will appear only once in an
+order that is not defined. A Nil_Compilation_Unit_List is returned if there are
+no configurations units within The_Container. All units in the result will have
+an Enclosing_Context value that Is_Identical to The_Context. Raises
+ASIS_Inappropriate_Context with a Status of Value_Error if The_Context is not
+open.]}
 @end{DescribeCode}
 
 
@@ -354,14 +392,14 @@ Use the compilation unit relationship queries
 with a Relation_Kinds of Descendants to create a list of children, children
 of children, and so on.
 
-Returns a Nil_Compilation_Unit_List for all library unit arguments that
+Returns Nil_Compilation_Unit_List for all library unit arguments that
 do not have any child units contained in The_Context.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0046-1]}
 @ChgAdded{Version=[2],Text=[If The_Context specifies a context that is different
 from the Enclosing_Context(Library_Unit), returns a list of the child units for
 the parent library unit that Is_Equal to Library_Unit in The_Context. If no such
-parent library unit exists in The_Context, returns a
+parent library unit exists in The_Context, returns
 Nil_Compilation_Unit_List.]}
 
 @leading@;These two function calls will always produce identical results:
@@ -453,7 +491,7 @@ The_Context @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} a program Con
 
 Returns the parent unit of the given library unit.
 
-Returns a Nil_Compilation_Unit if the Library_Unit argument represents
+Returns Nil_Compilation_Unit if the Library_Unit argument represents
 package Standard. Root Library_Unit arguments return the package Standard.
 
 Returns A_Nonexistent_Declaration when the Library_Unit has a
@@ -464,7 +502,7 @@ unit is not contained in The_Context.
 @ChgAdded{Version=[2],Text=[If The_Context specifies a context that is different
 from the Enclosing_Context(Library_Unit), returns the parent library unit for
 the child unit in The_Context that Is_Equal to Library_Item. If no such child
-unit exists in The_Context, returns a Nil_Compilation_Unit.]}
+unit exists in The_Context, returns Nil_Compilation_Unit.]}
 
 @leading@;These two function calls will always produce identical results:
 
@@ -564,7 +602,7 @@ a library_unit_renaming_declaration, or a subunit.
 the argument is A_Nonexistent_Declaration or A_Nonexistent_Body.
 @end{Itemize}
 
-Returns a Nil_Compilation_Unit for library_unit_body arguments that do
+Returns Nil_Compilation_Unit for library_unit_body arguments that do
 not have a corresponding library unit contained in The_Context.
 
 @ChgRef{Version=[1],Kind=[Deleted]}
@@ -575,7 +613,7 @@ not have a corresponding library unit contained in The_Context.
 @ChgAdded{Version=[2],Text=[If The_Context specifies a context that is different
 from the Enclosing_Context(Library_Unit), returns the corresponding library unit
 declaration for the library unit body in The_Context that Is_Equal to
-Library_Item. If no such library unit body exists in The_Context, returns a
+Library_Item. If no such library unit body exists in The_Context, returns
 Nil_Compilation_Unit.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
@@ -719,7 +757,7 @@ a library_unit_body, a library_unit_renaming_declaration, or a subunit.
 the argument is A_Nonexistent_Declaration or A_Nonexistent_Body.
 @end{Itemize}
 
-Returns a Nil_Compilation_Unit for library_unit_declaration arguments that
+Returns Nil_Compilation_Unit for library_unit_declaration arguments that
 do not have a corresponding library_unit_body contained in The_Context.
 
 @ChgRef{Version=[1],Kind=[Deleted]}
@@ -730,7 +768,7 @@ do not have a corresponding library_unit_body contained in The_Context.
 @ChgAdded{Version=[2],Text=[If The_Context specifies a context that is different
 from the Enclosing_Context(Library_Unit), returns the corresponding library unit
 body for the library unit in The_Context that Is_Equal to
-Library_Item. If no such library unit exists in The_Context, returns a
+Library_Item. If no such library unit exists in The_Context, returns
 Nil_Compilation_Unit.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
@@ -854,7 +892,7 @@ An_Unknown_Unit argument in all cases.
 Right @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the unit to test.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-Returns True if the compilation_unit is a
+Returns True if the compilation_unit is
 Nil_Compilation_Unit@Chg{Version=[2],New=[, and returns False
 otherwise],Old=[]}.
 
@@ -1273,7 +1311,7 @@ unit to query. The_Context @Chg{Version=[1],New=[specifies],Old=[@en
 Specifies]} the program Context to use for context.
 
 Returns a complete list of subunit values, with one value for each body
-stub that appears in the given Parent_Body. Returns a
+stub that appears in the given Parent_Body. Returns
 Nil_Compilation_Unit_List if the parent unit does not contain any body
 stubs. Every unit in the result will have an Enclosing_Context that
 Is_Identical to The_Context.
@@ -1298,7 +1336,7 @@ query using the Family relation.
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 Raises ASIS_Inappropriate_Compilation_Unit @ChgAdded{Version=[2],Text=[with
 a Status of Value_Error]} if the unit
-@Chg{Version=[2],New=[Parent_Body ],Old=[]}is a Nil_Compilation_Unit.
+@Chg{Version=[2],New=[Parent_Body ],Old=[]}is Nil_Compilation_Unit.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context with a Status of
@@ -1341,7 +1379,7 @@ program Context to use for context.
 
 
 Returns the Compilation_Unit containing the body stub of the given Subunit.
-Returns a Nil_Compilation_Unit if the subunit parent is not contained in
+Returns Nil_Compilation_Unit if the subunit parent is not contained in
 The_Context. Any non-Nil result will have an Enclosing_Context value that
 Is_Identical to The_Context.
 

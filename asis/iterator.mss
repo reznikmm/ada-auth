@@ -1,6 +1,6 @@
 @Part(iterator, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/iterator.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2009/05/09 06:28:46 $}
+@comment{$Revision: 1.5 $ $Date: 2009/12/23 06:58:59 $}
 
 @LabeledSection{package Asis.Iterator}
 
@@ -151,7 +151,7 @@ Terminate_Immediately
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 Raises ASIS_Inappropriate_Element @ChgAdded{Version=[2],Text=[with a Status
-of Value_Error]} if the element is a Nil_Element.
+of Value_Error]} if the element is Nil_Element.
 @end{DescribeCode}
 
 @begin{Example}

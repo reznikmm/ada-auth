@@ -1,6 +1,6 @@
 @Part(comp-rel, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/comp-rel.mss,v $}
-@comment{$Revision: 1.13 $ $Date: 2009/05/12 06:23:25 $}
+@comment{$Revision: 1.14 $ $Date: 2009/12/23 06:58:59 $}
 
 
 @LabeledSection{package Asis.Compilation_Units.Relations}
@@ -218,7 +218,7 @@ The dependencies are:  A depends on B, B depends on C, C depends on A.
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}
-@ChgAdded{Version=[2],Text=[A Nil_Relationship is returned by all
+@ChgAdded{Version=[2],Text=[Nil_Relationship is returned by all
 Compilation_Units.Relations functions when there is no relationship between the
 specified units.]}
 @end{DescribeCode}

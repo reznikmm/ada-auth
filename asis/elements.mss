@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.20 $ $Date: 2009/10/15 06:21:25 $}
+@comment{$Revision: 1.21 $ $Date: 2009/12/23 06:58:59 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -32,7 +32,7 @@ Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the un
 Returns the element representing the declaration of the compilation_unit.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
-Returns a Nil_Element if the @Chg{Version=[2],New=[Unit_Kind of the
+Returns Nil_Element if the @Chg{Version=[2],New=[Unit_Kind of the
 ],Old=[]}unit is A_Nonexistent_Declaration,
 A_Nonexistent_Body, A_Configuration_Compilation, or An_Unknown_Unit.
 
@@ -85,7 +85,7 @@ Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} an Element whose C
 
 Returns the Compilation_Unit that contains the given Element.
 
-Raises ASIS_Inappropriate_Element if the Element is a Nil_Element.
+Raises ASIS_Inappropriate_Element if the Element is Nil_Element.
 @end{DescribeCode}
 
 
@@ -107,7 +107,7 @@ appear in the context clause of the compilation unit, in their order of
 appearance.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
-Returns a Nil_Element_List if the @Chg{Version=[2],New=[Unit_Kind of the
+Returns Nil_Element_List if the @Chg{Version=[2],New=[Unit_Kind of the
 ],Old=[]}unit @Chg{Version=[2],New=[is],Old=[has]} A_Nonexistent_Declaration,
 A_Nonexistent_Body, or An_Unknown_Unit@Chg{Version=[2],New=[],Old=[ Unit_Kind]}.
 
@@ -136,14 +136,14 @@ pragmas that appear in the unit's context clause are returned
 by this query. All other pragmas, affecting the compilation of this
 unit, are available from the Compilation_Pragmas query.
 
-@noprefix@;Results of this query may vary across ASIS implementations. Some
-implementations normalize all multi-name with clauses and use clauses
-into an equivalent sequence of single-name with clauses and use clauses.
-Similarly, an implementation may retain only a single reference to a name
-that appeared more than once in the original context clause.
-Some implementors will return only pragma
-Elaborate elements in this list and return all other pragmas via the
-Compilation_Pragmas query.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],NoPrefix=[T],Text=[Results of this query may vary across
+ASIS implementations. Some implementations normalize all multi-name with clauses
+and use clauses into an equivalent sequence of single-name with clauses and use
+clauses. Similarly, an implementation may retain only a single reference to a
+name that appeared more than once in the original context clause. Some
+implementors will return only pragma Elaborate elements in this list and return
+all other pragmas via the Compilation_Pragmas query.]}
 @end{Itemize}
 @end{ImplPerm}
 
@@ -192,7 +192,7 @@ To the extent that order is meaningful, the pragmas should be in
 their order of appearance in the compilation. (The order is implementation
 dependent, many pragmas have the same effect regardless of order.)
 
-Returns a Nil_Element_List if there are no such configuration pragmas.
+Returns Nil_Element_List if there are no such configuration pragmas.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that
@@ -252,7 +252,7 @@ is true for other Ada predefined packages, such as Ada.Text_Io and
 Ada.Direct_Io. The Origin query can be used to determine whether or
 not a particular unit is an Ada Predefined unit.
 
-@leading@keepnext@;Returns a Nil_Element_List if the compilation unit:
+@leading@keepnext@;Returns Nil_Element_List if the compilation unit:
 
 @begin{Itemize}
 has no such applicable pragmas; or
@@ -335,7 +335,7 @@ Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to que
 @RefSecNum{type Element_Kinds}.]}
 
 Returns the Element_Kinds value of Element.
-Returns Not_An_Element for a Nil_Element.
+Returns Not_An_Element for Nil_Element.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
 @Chg{Version=[2],New=[Element expects any kind of element],
@@ -354,7 +354,7 @@ Old=[All element kinds are expected]}.
 Pragma_Element @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} the element to query.
 
 Returns the Pragma_Kinds value of Pragma_Element.
-Returns Not_A_Pragma for any unexpected element such as a
+Returns Not_A_Pragma for any unexpected element such as
 Nil_Element, A_Statement, or A_Declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -379,7 +379,7 @@ Defining_Name @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the elemen
 
 Returns the Defining_Name_Kinds value of the Defining_Name.
 
-Returns Not_A_Defining_Name for any unexpected element such as a
+Returns Not_A_Defining_Name for any unexpected element such as
 Nil_Element, A_Clause, or A_Statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -404,7 +404,7 @@ to query.
 
 Returns the Declaration_Kinds value of the Declaration.
 
-Returns Not_A_Declaration for any unexpected element such as a
+Returns Not_A_Declaration for any unexpected element such as
 Nil_Element, A_Definition, or A_Statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -432,7 +432,7 @@ Old=[function Trait_Kind]}
 @ChgAdded{Version=[2], Text=[Returns True if the reserved word @key[abstract] appears in Element, and
 False otherwise.]}
 
-@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including a Nil_Element.]}
+@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including Nil_Element.]}
 
 @ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Declaration_Kinds:]}
 @begin{Display}
@@ -476,7 +476,7 @@ query.]}
 @ChgDeleted{Version=[2],Text=[Returns the Trait_Kinds value of the Element.]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0022-1]}
-@ChgDeleted{Version=[2],Text=[Returns Not_A_Trait for any unexpected element such as a
+@ChgDeleted{Version=[2],Text=[Returns Not_A_Trait for any unexpected element such as
 Nil_Element, A_Statement, or An_Expression.]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0022-1]}
@@ -537,7 +537,7 @@ A_Formal_Derived_Type_Definition]}
 appears in Element, and False otherwise.]}
 
 @ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including
-a Nil_Element.]}
+Nil_Element.]}
 
 @ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Declaration_Kinds:]}
 @begin{Display}
@@ -569,10 +569,12 @@ a Nil_Element.]}
 @ChgAdded{Version=[2], Text=[Returns True if the reserved word @key[limited] appears in Element, and
 False otherwise.]}
 
-@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including a Nil_Element.]}
+@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including Nil_Element.]}
 
 @ChgAdded{Version=[2], Text=[Element expects an element that has the following Clause_Kinds:]}
-  A_With_Clause
+@begin{Display}
+@ChgAdded{Version=[2], Text=[  A_With_Clause]}
+@end{Display}
 
 @ChgAdded{Version=[2], Text=[or an element that has one of the following Declaration_Kinds:]}
 @begin{Display}
@@ -613,7 +615,7 @@ False otherwise.]}
 @ChgAdded{Version=[2], Text=[Returns True if the reserved word @key[private] appears in Element, and
 False otherwise.]}
 
-@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including a Nil_Element.]}
+@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including Nil_Element.]}
 
 @ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Declaration_Kinds:]}
 @begin{Display}
@@ -656,7 +658,7 @@ False otherwise.]}
 @ChgAdded{Version=[2], Text=[Returns True if the reserved word @key[protected] appears in Element, and
 False otherwise.]}
 
-@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including a Nil_Element.]}
+@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including Nil_Element.]}
 
 @ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Definition_Kinds:]}
 @begin{Display}
@@ -687,7 +689,7 @@ False otherwise.]}
 @ChgAdded{Version=[2], Text=[Returns True if the reserved word @key[reverse] appears in Element, and
 False otherwise.]}
 
-@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including a Nil_Element.]}
+@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including Nil_Element.]}
 
 @ChgAdded{Version=[2], Text=[Element expects an element that has the following Declaration_Kinds:]}
 @begin{Display}
@@ -711,7 +713,7 @@ False otherwise.]}
 appears in Element, and False otherwise.]}
 
 @ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including
-a Nil_Element.]}
+Nil_Element.]}
 
 @ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Definition_Kinds:]}
 @begin{Display}
@@ -735,7 +737,7 @@ a Nil_Element.]}
 @ChgAdded{Version=[2], Text=[Returns True if the reserved word @key[tagged] appears in Element, and
 False otherwise.]}
 
-@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including a Nil_Element.]}
+@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including Nil_Element.]}
 
 @ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Definition_Kinds:]}
 @begin{Display}
@@ -771,7 +773,7 @@ False otherwise.]}
 @ChgAdded{Version=[2], Text=[Returns True if the reserved word @key[task] appears in Element, and
 False otherwise.]}
 
-@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including a Nil_Element.]}
+@ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including Nil_Element.]}
 
 @ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Definition_Kinds:]}
 @begin{Display}
@@ -803,7 +805,7 @@ Declaration to query.
 
 Returns the Declaration_Origins value of the Declaration.
 
-Returns Not_A_Declaration_Origin for any unexpected element such as a
+Returns Not_A_Declaration_Origin for any unexpected element such as
 Nil_Element, A_Definition, or A_Clause.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -830,7 +832,7 @@ Returns the Mode_Kinds value of the Declaration.
 
 Returns A_Default_In_Mode for an access parameter.
 
-Returns Not_A_Mode for any unexpected element such as a
+Returns Not_A_Mode for any unexpected element such as
 Nil_Element, A_Definition, or A_Statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -856,7 +858,7 @@ to query.
 
 Returns the Subprogram_Default_Kinds value of the Declaration.
 
-Returns Not_A_Declaration for any unexpected element such as a
+Returns Not_A_Declaration for any unexpected element such as
 Nil_Element, A_Definition, or A_Statement.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -882,7 +884,7 @@ Definition to query.
 
 Returns the Definition_Kinds value of the Definition.
 
-Returns Not_A_Definition for any unexpected element such as a
+Returns Not_A_Definition for any unexpected element such as
 Nil_Element, A_Statement, or A_Declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -907,7 +909,7 @@ Type_Definition to query.
 
 Returns the Type_Kinds value of the Definition.
 
-Returns Not_A_Type_Definition for any unexpected element such as a
+Returns Not_A_Type_Definition for any unexpected element such as
 Nil_Element, A_Statement, or A_Declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -933,7 +935,7 @@ Formal_Type_Definition to query.
 
 Returns the Formal_Type_Kinds value of the Definition.
 
-Returns Not_A_Formal_Type_Definition for any unexpected element such as a
+Returns Not_A_Formal_Type_Definition for any unexpected element such as
 Nil_Element, A_Statement, or A_Declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -959,7 +961,7 @@ Access_Type_Definition to query.
 
 Returns the Access_Type_Kinds value of the Definition.
 
-Returns Not_An_Access_Type_Definition for any unexpected element such as a
+Returns Not_An_Access_Type_Definition for any unexpected element such as
 Nil_Element, A_Statement, or A_Declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1041,7 +1043,7 @@ Definition.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Returns Not_An_Access_Definition for any unexpected element
-such as a Nil_Element, A_Statement, or A_Declaration.]}
+such as Nil_Element, A_Statement, or A_Declaration.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Definition expects an
@@ -1073,7 +1075,7 @@ Definition.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Returns Not_An_Interface for any unexpected element
-such as a Nil_Element, A_Statement, or A_Declaration.]}
+such as Nil_Element, A_Statement, or A_Declaration.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Definition expects
@@ -1102,7 +1104,7 @@ Root_Type_Definition to query.
 
 Returns the Root_Type_Kinds value of the Definition.
 
-Returns Not_A_Root_Type_Definition for any unexpected element such as a
+Returns Not_A_Root_Type_Definition for any unexpected element such as
 Nil_Element, A_Statement, or A_Declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1128,7 +1130,7 @@ constraint to query.
 
 Returns the Constraint_Kinds value of the Definition.
 
-Returns Not_A_Constraint for any unexpected element such as a
+Returns Not_A_Constraint for any unexpected element such as
 Nil_Element, A_Statement, or A_Declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1154,7 +1156,7 @@ discrete_range to query.
 
 Returns the Discrete_Range_Kinds value of the Definition.
 
-Returns Not_A_Discrete_Range for any unexpected element such as a
+Returns Not_A_Discrete_Range for any unexpected element such as
 Nil_Element, A_Statement, or A_Declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1180,7 +1182,7 @@ Expression to query.
 
 Returns the Expression_Kinds value of the Expression.
 
-Returns Not_An_Expression for any unexpected element such as a
+Returns Not_An_Expression for any unexpected element such as
 Nil_Element, A_Statement, or A_Declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1207,7 +1209,7 @@ query.
 Returns the Operator_Kinds value of the
 @Chg{Version=[2],New=[],Old=[A_Defining_Name or An_Expression ]}element.
 
-Returns Not_An_Operator for any unexpected element such as a
+Returns Not_An_Operator for any unexpected element such as
 Nil_Element, A_Statement, or A_Declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1239,7 +1241,7 @@ Expression to query.
 
 Returns the Attribute_Kinds value of the Expression.
 
-Returns Not_An_Attribute for any unexpected element such as a
+Returns Not_An_Attribute for any unexpected element such as
 Nil_Element, A_Statement, or A_Declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1264,7 +1266,7 @@ Association to query.
 
 Returns the Association_Kinds value of the Association.
 
-Returns Not_An_Association for any unexpected element such as a
+Returns Not_An_Association for any unexpected element such as
 Nil_Element, A_Statement, or A_Declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1289,7 +1291,7 @@ to query.
 
 Returns the Statement_Kinds value of the statement.
 
-Returns Not_A_Statement for any unexpected element such as a
+Returns Not_A_Statement for any unexpected element such as
 Nil_Element, A_Definition, or A_Declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1312,7 +1314,7 @@ Path @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the Path to query.
 
 Returns the Path_Kinds value of the Path.
 
-Returns Not_A_Path for any unexpected element such as a
+Returns Not_A_Path for any unexpected element such as
 Nil_Element, A_Statement, or A_Declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1336,7 +1338,7 @@ query.
 
 Returns the Clause_Kinds value of the Clause.
 
-Returns Not_A_Clause for any unexpected element such as a
+Returns Not_A_Clause for any unexpected element such as
 Nil_Element, A_Definition, or A_Declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1368,7 +1370,7 @@ Returns the @Chg{Version=[2],New=[Aspect_Clause_Kinds],Old=[Representation_Claus
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0039-1]}
 Returns
 @Chg{Version=[2],New=[Not_An_Aspect_Clause],Old=[Not_A_Representation_Clause]}
-for any unexpected element such as a Nil_Element, A_Definition, or
+for any unexpected element such as Nil_Element, A_Definition, or
 A_Declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1481,7 +1483,7 @@ implicitly declared or specified program Element structure.
 Returns True for any implicit generic child unit specifications or their
 subcomponents. @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 10.1.1(19).
 
-Returns False for a Nil_Element, or any Element that correspond to text
+Returns False for Nil_Element, or any Element that correspond to text
 which was specified explicitly (typed, entered, written).
 
 Generic instance specifications and bodies, while implicit, are treated
@@ -1576,7 +1578,7 @@ Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to que
 Returns True for any Element that is, or that forms part of, an
 inherited primitive subprogram declaration.
 
-Returns False for any other Element including a Nil_Element.
+Returns False for any other Element including Nil_Element.
 @end{DescribeCode}
 
 
@@ -1601,7 +1603,7 @@ Returns False for any implicit generic child unit specifications or
 their subcomponents. @Chg{Version=[2],New=[Ada Standard],Old=[Reference
 Manual]} 10.1.1(19).
 
-Returns False for a Nil_Element.
+Returns False for Nil_Element.
 
 Instantiations are not themselves Is_Part_Of_Instance unless they are
 encountered while traversing a generic instance.
@@ -1660,7 +1662,7 @@ element that does not have one of these expected kinds.]}
 formal procedure that is declared as null.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Returns False for any other Element including a
+@ChgAdded{Version=[2],Text=[Returns False for any other Element including
 Nil_Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0012-1],ARef=[SI99-0028-1]}
@@ -1708,7 +1710,7 @@ formal procedures can be null.]}
 formal subprogram that is declared as abstract.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Returns False for any other Element including a
+@ChgAdded{Version=[2],Text=[Returns False for any other Element including
 Nil_Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0012-1],ARef=[SI99-0028-1]}
@@ -1761,7 +1763,7 @@ than its structure) return Elements that usually do not have the original
 argument Element as their parent.
 @end{UsageNote}
 
-@leading@keepnext@;Returns a Nil_Element if:
+@leading@keepnext@;Returns Nil_Element if:
 @begin{Itemize}
 the element is the declaration part of a compilation unit
 (Unit_Declaration).
@@ -1776,7 +1778,7 @@ the element is a pragma for a compilation unit
 Use Enclosing_Compilation_Unit to get the enclosing compilation unit for
 any element value other than Nil_Element.
 
-Raises ASIS_Inappropriate_Element if the Element is a Nil_Element.
+Raises ASIS_Inappropriate_Element if the Element is Nil_Element.
 @end{DescribeCode}
 
 @begin{Examples}
@@ -1812,8 +1814,8 @@ Element. The Expected_Enclosing_Element parameter provides a means of
 shortening the search.
 Note: If the argument Element is not a sub-element of the
 Expected_Enclosing_Element parameter, or if the
-Expected_Enclosing_Element is a Nil_Element, the result of the
-call is a Nil_Element.
+Expected_Enclosing_Element is Nil_Element, the result of the
+call is Nil_Element.
 
 Implementations that do not require the Expected_Enclosing_Element
 parameter may ignore it. They are encouraged, but not required, to test
@@ -1854,7 +1856,7 @@ various queries, that accept these same argument kinds, and that
 return Declaration_List and Statement_List, where the inclusion of
 Pragmas is controlled by an Include_Pragmas parameter.
 
-Returns a Nil_Element_List if there are no pragmas.
+Returns Nil_Element_List if there are no pragmas.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[The_Element expects an element
@@ -1962,7 +1964,7 @@ A_Pragma elements specified in conjunction with the declaration of the parent
 type.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0021-1]}
-Returns a Nil_Element_List if there are no @Chg{Version=[2],New=[aspect
+Returns Nil_Element_List if there are no @Chg{Version=[2],New=[aspect
 pragmas that apply to the named entity],Old=[semantically associated pragmas]}.
 
 @begin{UsageNote}
@@ -2093,29 +2095,42 @@ intelligible to the user.
 @key[function] @AdaSubDefn{Hash} (Element : @key[in] Asis.Element) @key[return] Asis.ASIS_Integer;
 @end{Example}
 
-The purpose of the hash function is to provide a convenient name for an
-object of type Asis.Element in order to facilitate application defined I/O
-and/or other application defined processing.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+@Chg{Version=[2],New=[Returns an implementation-defined value which is a
+function of the value of Element. If A and B are ids such that Is_Equal (A, B)
+is true, Hash(A) equals Hash(B).],Old=[The purpose of the hash function is to
+provide a convenient name for an object of type Asis.Element in order to
+facilitate application defined I/O and/or other application defined
+processing.]}
 
-The hash function maps Asis.Element objects into N discrete classes
-("buckets") of objects. A good hash function is uniform across its range.
-It is important to note that the distribution of objects in the
-application's domain will affect the distribution of the hash function.
-A good hash measured against one domain will not necessarily be good when
-fed objects from a different set.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[The hash function maps Asis.Element objects into N
+discrete classes ("buckets") of objects. A good hash function is uniform across
+its range. It is important to note that the distribution of objects in the
+application's domain will affect the distribution of the hash function. A good
+hash measured against one domain will not necessarily be good when fed objects
+from a different set.]}
 
-A continuous uniform hash can be divided by any N and provide a uniform
-distribution of objects to each of the N discrete classes. A hash value is
-not unique for each hashed Asis.Element. The application is responsible for
-handling name collisions of the hashed value.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[A continuous uniform hash can be divided by any N
+and provide a uniform distribution of objects to each of the N discrete classes.
+A hash value is not unique for each hashed Asis.Element. The application is
+responsible for handling name collisions of the hashed value.]}
 
-The hash function returns a hashed value of type ASIS_Integer. If desired,
-a user could easily map ASIS_Integer'Range to any smaller range for the
-hash based on application constraints (i.e., the application implementor
-can tune the time-space tradeoffs by choosing a small table, implying
-slower lookups within each "bucket", or a large table, implying faster
-lookups within each "bucket").
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[The hash function returns a hashed value of type
+ASIS_Integer. If desired, a user could easily map ASIS_Integer'Range to any
+smaller range for the hash based on application constraints (i.e., the
+application implementor can tune the time-space tradeoffs by choosing a small
+table, implying slower lookups within each "bucket", or a large table, implying
+faster lookups within each "bucket").]}
 @end{DescribeCode}
+
+@begin{ImplNote}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0053-1]}
+@ChgAdded{Version=[2],Text=[This function should produce a result (not raise an
+exception) when passed Nil_Element.]}
+@end{ImplNote}
 
 @begin{Example}
 @ChgDeleted{Version=[1],Text=[@key[end] Asis.Elements;]}

@@ -1,6 +1,6 @@
 @Part(text, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/text.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2009/07/02 04:50:54 $}
+@comment{$Revision: 1.10 $ $Date: 2009/12/23 06:58:59 $}
 
 @LabeledSection{package Asis.Text}
 
@@ -278,7 +278,7 @@ query.
 
 Returns the span of the given element.
 
-Returns a Nil_Span if the text of a Compilation_Unit (Compilation) cannot be
+Returns Nil_Span if the text of a Compilation_Unit (Compilation) cannot be
 located for any reason.
 @end{DescribeCode}
 
@@ -303,7 +303,7 @@ query.
 Returns the span of the text comprising the enclosing compilation unit of
 the given element.
 
-Returns a Nil_Span if the text of a Compilation_Unit (Compilation) cannot be
+Returns Nil_Span if the text of a Compilation_Unit (Compilation) cannot be
 located for any reason.
 @end{DescribeCode}
 
@@ -328,7 +328,7 @@ query.
 Returns the span of the text comprising the compilation to which the
 element belongs. The text span may include one or more compilation units.
 
-Returns a Nil_Span if not Is_Text_Available(Element).
+Returns Nil_Span if not Is_Text_Available(Element).
 @end{DescribeCode}
 
 
@@ -446,7 +446,7 @@ query.
 Returns a list of lines covering the span of the given program element.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-Returns a @Chg{Version=[2],New=[Nil_Line_List],Old=[Nil_Span]} if the text
+Returns @Chg{Version=[2],New=[Nil_Line_List],Old=[Nil_Span]} if the text
 of a Compilation containing a given Element cannot be located for any reason.
 
 Line lists can be indexed to obtain individual lines. The bounds of each
@@ -484,7 +484,7 @@ Returns a list of lines covering the given span from the compilation
 containing the given program element.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-Returns a @Chg{Version=[2],New=[Nil_Line_List],Old=[Nil_Span]} if the text
+Returns @Chg{Version=[2],New=[Nil_Line_List],Old=[Nil_Span]} if the text
 of a Compilation containing a given Element cannot be located for any reason.
 
 This operation can be used to access lines from text outside the span of an
@@ -533,7 +533,7 @@ can be used to access lines from text outside the span of an element, but
 still within the compilation.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-Returns a @Chg{Version=[2],New=[Nil_Line_List],Old=[Nil_Span]} if the text
+Returns @Chg{Version=[2],New=[Nil_Line_List],Old=[Nil_Span]} if the text
 of a Compilation containing a given Element cannot be located for any reason.
 
 Line lists can be indexed to obtain individual lines. The bounds of each

@@ -1,6 +1,6 @@
 @Part(general, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.20 $ $Date: 2009/07/02 04:50:54 $}
+@comment{$Revision: 1.21 $ $Date: 2009/12/23 06:58:59 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -63,13 +63,14 @@ tools, design tools, document generators, metrics tools, quality assessment
 tools, reverse engineering tools, re-engineering tools, safety and security
 tools, style checkers, test tools, timing estimators, and translators.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
 This International Standard specifies the form and meaning of the ASIS
-interface to the Ada compilation environment.
+interface to the Ada @Chg{Version=[2],New=[],Old=[compilation ]}environment.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0053-1]}
 This International Standard is applicable to tools and applications needing
 syntactic and semantic information @Chg{Version=[2],New=[from],Old=[in]}
-the Ada compilation environment.
+the Ada @Chg{Version=[2],New=[],Old=[compilation ]}environment.
 
 @LabeledSubClause{Extent}
 
@@ -90,8 +91,9 @@ program containing such violations;
 This International Standard does not specify:
 
 @begin{Itemize}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
 Semantics of the interface in the face of simultaneous updates to the Ada
-compilation environment.
+@Chg{Version=[2],New=[],Old=[compilation ]}environment.
 
 Semantics of the interface for more than one thread of control.
 @end{Itemize}
@@ -113,9 +115,10 @@ and @Chg{Version=[2],New=[six],Old=[four]} annexes.
 @Chg{Version=[2],New=[Section],Old=[Clause]} 1 is general in nature providing the scope of this International
 Standard, normative references, and definitions.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} 2 identifies the ASIS technical concepts. Here the Ada compilation
-environment to which ASIS interfaces is described. The concept of queries is
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0053-1]}
+@Chg{Version=[2],New=[Section],Old=[Clause]} 2 identifies the ASIS technical
+concepts. Here the Ada @Chg{Version=[2],New=[],Old=[compilation ]}environment
+to which ASIS interfaces is described. The concept of queries is
 presented. The ASIS package architecture is presented.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
@@ -296,9 +299,11 @@ analysis, or other notes of interest to ASIS applications.
 
 @LabeledSubSubClause{Implementation conformance requirements}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
 An @i{ASIS implementation}@defn{ASIS implementation} includes all the hardware
-and software that implements the ASIS specification for a given Ada
-implementation and that provides the functionality required by the ASIS
+and software that implements the ASIS specification @Chg{Version=[2],
+New=[],Old=[for a given Ada implementation ]}and that provides the
+functionality required by the ASIS
 specification. An @i{ASIS implementor}@defn{ASIS implementor} is a company,
 institution, or other group (such as a vendor) who develops an ASIS
 implementation. A conforming ASIS implementation shall meet all of the
@@ -364,39 +369,49 @@ erroneous, as defined by @Chg{Version=[2], New=[the Ada Standard], Old=[ISO/IEC 
 
 @LabeledSubSubClause{Implementation conformance documentation}
 
-A conformance document shall be available for an implementation claiming
-conformance to this International Standard. The conformance document shall have
-the same structure as this International Standard, with the information
-presented in the equivalently numbered clauses, and subclauses. The conformance
-document shall not contain information about extended facilities or
-capabilities outside the scope of this International Standard.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+@Chg{Version=[2],New=[Conformance documentation],Old=[A conformance document]}
+shall be available for an implementation claiming
+conformance to this International Standard.@Chg{Version=[2],New=[],Old=[ The
+conformance document shall have the same structure as this International
+Standard, with the information presented in the equivalently numbered clauses,
+and subclauses. The conformance document shall not contain information about
+extended facilities or capabilities outside the scope of this International
+Standard.]}
 
-The conformance document shall contain a statement that indicates the full
-name, number, and date of the International Standard that applies. The
-conformance document may also list software standards approved by ISO/IEC or
-any ISO/IEC member body that are available for use by a Basic or Fully
-Conforming ASIS Application. Applicable characteristics whose documentation is
-required by one of these standards, or by standards of government bodies, may
-also be included.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+The conformance @Chg{Version=[2],New=[documentation],Old=[document]} shall
+contain a statement that indicates the full name, number, and date of the
+International Standard that applies. The conformance
+@Chg{Version=[2],New=[documentation],Old=[document]} may also list software
+standards approved by ISO/IEC or any ISO/IEC member body that are available for
+use by a Basic or Fully Conforming ASIS Application. Applicable characteristics
+whose documentation is required by one of these standards, or by standards of
+government bodies, may also be included.
 
-The conformance document shall describe the behavior of the implementation for
-all implementation-defined features defined in this International Standard.
-This requirement shall be met by listing these features and providing either a
-specific reference to the system documentation or providing full syntax and
-semantics of these features. The conformance document shall specify the
-behavior of the implementation for those features where this International
-Standard states that implementations may vary.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+The conformance @Chg{Version=[2],New=[documentation],Old=[document]} shall
+describe the behavior of the implementation for all implementation-defined
+features defined in this International Standard. This requirement shall be met
+by listing these features and providing either a specific reference to the
+system documentation or providing full syntax and semantics of these features.
+The conformance @Chg{Version=[2],New=[documentation],Old=[document]} shall
+specify the behavior of the implementation for those features where this
+International Standard states that implementations may vary.
 
-No specifications other than those described in this subclause shall be present
-in the conformance document.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[No specifications other than those described in
+this subclause shall be present in the conformance document.]}
 
-The phrase @i{shall be documented} in this International
-Standard means that documentation of the feature shall appear in the
-conformance document, as described previously, unless the system documentation
-is explicitly mentioned.@Defn{shall be documented}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[The phrase @i{shall be documented} in this
+International Standard means that documentation of the feature shall appear in
+the conformance document, as described previously, unless the system
+documentation is explicitly mentioned.@Defn{shall be documented}]}
 
-The system documentation should also contain the information found in the
-conformance document.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[The system documentation should also contain the
+information found in the conformance document.]}
 
 
 @LabeledSubSubClause{Implementation conformance categories}
@@ -483,26 +498,30 @@ International Standard. It shall be portable to any Fully Conforming ASIS
 Implementation.@Defn{Fully conforming ASIS application}
 
 
-@Subheading{Basic conforming ASIS application using extensions}
+@Subheading{@ChgDeleted{Version=[2],Text=[Basic conforming ASIS application using extensions]}}
 
-A Basic Conforming ASIS Application Using Extensions is an application that
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[A Basic Conforming ASIS Application Using Extensions is an application that
 differs from a Basic Conforming ASIS Application only in that it uses
 nonstandard, implementation provided, extended facilities that are consistent
 with this International Standard. Such an application should fully document its
 requirements for these extended facilities. A Basic Conforming ASIS Application
 Using Extensions may or may not be portable to other Basic or Fully Conforming
-ASIS Implementation Using Extensions.@Defn2{Term=[Basic conforming ASIS application],Sec=[using extensions]}
+ASIS Implementation Using Extensions.@Defn2{Term=[Basic conforming ASIS application],Sec=[using extensions]}]}
 
 
-@Subheading{Fully conforming ASIS application using extensions}
+@Subheading{@ChgDeleted{Version=[2],Text=[Fully conforming ASIS application using extensions]}}
 
-A Fully Conforming ASIS Application Using Extensions is an application that
-differs from a Fully Conforming ASIS Application only in that it uses
-nonstandard, implementation provided, extended facilities that are consistent
-with this International Standard. Such an application should fully document its
-requirements for these extended facilities. A Fully Conforming ASIS Application
-Using Extensions may or may not be portable to other Fully Conforming ASIS
-Implementation Using Extensions.@Defn2{Term=[Fully conforming ASIS application],Sec=[using extensions]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[A Fully Conforming ASIS Application Using
+Extensions is an application that differs from a Fully Conforming ASIS
+Application only in that it uses nonstandard, implementation provided, extended
+facilities that are consistent with this International Standard. Such an
+application should fully document its requirements for these extended
+facilities. A Fully Conforming ASIS Application Using Extensions may or may not
+be portable to other Fully Conforming ASIS Implementation Using
+Extensions.@Defn2{Term=[Fully conforming ASIS application],Sec=[using
+extensions]}]}
 
 
 @LabeledDeletedSubClause{Version=[2],Name=[Implementation permissions]}
@@ -595,24 +614,27 @@ by a tool.]}
 @LabeledSubClause{Classification of errors}
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
 ASIS reports all operational errors by raising an exception. Whenever an ASIS
-implementation raises one of the exceptions declared in package
-Asis.Exceptions, it will previously have set the values returned by the Status
-and Diagnosis queries to indicate the cause of the error. The possible values
-for Status are indicated here along with suggestions for the associated
-contents of the Diagnosis string.
+implementation raises one of the exceptions declared in package Asis.Exceptions,
+it will @Chg{Version=[2],New=[indicate the cause of the error by including an
+exception message and by setting the value returned by the Status query before
+raising the exception],Old=[previously have set the values returned by the
+Status and Diagnosis queries to indicate the cause of the error]}. The possible
+values for Status are indicated @Chg{Version=[2],New=[below],Old=[here along
+with suggestions for the associated contents of the Diagnosis string]}.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1],ARef=[SI99-0055-1]}
 @leading@;ASIS applications are encouraged to
 @Chg{Version=[2],New=[similarly ],Old=[]}follow
 @Chg{Version=[2],New=[the],Old=[this same]} convention
 @Chg{Version=[2],New=[of recording],Old=[whenever they explicitly raise
-any ASIS exception to always record]} a Status and
-Diagnosis prior to @Chg{Version=[2],New=[explicitly ],Old=[]}raising
+any ASIS exception to always record]} a Status @Chg{Version=[2],New=[],Old=[and
+Diagnosis ]}prior to @Chg{Version=[2],New=[explicitly ],Old=[]}raising
 @Chg{Version=[2],New=[any ASIS],Old=[the]} exception. Values of errors
 along with their general meanings are:
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+@ChgNote{@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]} - doesn't show on text}
 @table{Columns=[2],Alignment=[Allleft],FirstColWidth=[2],LastColWidth=[3],
 NoBreak=[F],Border=[F],SmallSize=[F],Caption=[],Headers=[],
 Body=[Not_An_Error@Defn{Not_An_Error}@\-- No error is presently recorded
@@ -631,7 +653,8 @@ Unhandled_Exception_Error@Defn{Unhandled_Exception_Error}@\-- Unexpected excepti
 Not_Implemented_Error@Defn{Not_Implemented_Error}@\-- Functionality not implemented@Last
 Internal_Error@Defn{Internal_Error}@\-- Implementation internal failure]}
 
-Diagnostic messages may be more specific.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[Diagnostic messages may be more specific.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1],ARef=[SI99-0047-1]}
 @ChgDeleted{Version=[2],Type=[Leading],Text=[A set of

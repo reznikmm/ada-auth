@@ -1,6 +1,6 @@
 @Part(env-cont, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/env-cont.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2009/09/15 04:48:14 $}
+@comment{$Revision: 1.5 $ $Date: 2009/12/23 06:58:59 $}
 
 
 @LabeledSection{package Asis.Ada_Environments.Containers}
@@ -106,7 +106,7 @@ remember the Context from which they were defined.
 Because Context is limited private, this function is only intended to be
 used to supply a Context parameter for other queries.
 
-Raises ASIS_Inappropriate_Container if the Container is a Nil_Container.
+Raises ASIS_Inappropriate_Container if the Container is Nil_Container.
 @end{DescribeCode}
 
 
@@ -121,23 +121,25 @@ Raises ASIS_Inappropriate_Container if the Container is a Nil_Container.
 The_Container @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Container to query.
 
 Returns a list of all library_unit_declaration and
-library_unit_renaming_declaration  elements contained in the Container. Individual
-units will appear only once in an order that is not defined.
+library_unit_renaming_declaration elements contained in The_Container.
+Individual units will appear only once in an order that is not defined.
 
-A Nil_Compilation_Unit_List is returned if there are no declarations of
-library units within the Container.
+Nil_Compilation_Unit_List is returned if there are no declarations of
+library units within The_Container.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-This query will never return a unit with A_Configuration_Compilation or
-a Nonexistent unit kind. It will never return a unit with A_Procedure_Body or
-A_Function_Body unit kind even though the unit is interpreted as both the
-declaration and body of a library procedure or library function.
-@Chg{Version=[2],New=[Ada Standard],Old=[(Reference Manual]} 10.1.4(4).
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0053-1]}
+This query will never return a unit with
+@Chg{Version=[2],New=[kinds ],Old=[]}A_Configuration_Compilation or
+@Chg{Version=[2],New=[A_Nonexistent_Declaration],Old=[a Nonexistent unit kind]}.
+It will never return a unit with A_Procedure_Body or A_Function_Body unit kind
+even though the unit is interpreted as both the declaration and body of a
+library procedure or library function. @Chg{Version=[2],New=[Ada
+Standard],Old=[(Reference Manual]} 10.1.4(4).
 
 All units in the result will have an Enclosing_Container value that
-Is_Identical to the Container.
+Is_Identical to The_Container.
 
-Raises ASIS_Inappropriate_Context if the Enclosing_Context(Container)
+Raises ASIS_Inappropriate_Context if the Enclosing_Context(The_Container)
 is not open.
 @end{DescribeCode}
 
@@ -152,20 +154,22 @@ is not open.
 
 The_Container @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Container to query.
 
-Returns a list of all library_unit_body and subunit elements contained in the
-Container. Individual units will appear only once in an order that is not
+Returns a list of all library_unit_body and subunit elements contained in
+The_Container. Individual units will appear only once in an order that is not
 defined.
 
-A Nil_Compilation_Unit_List is returned if there are no bodies within the
-Container.
+Nil_Compilation_Unit_List is returned if there are no bodies within
+The_Container.
 
-This query will never return a unit with A_Configuration_Compilation or
-a nonexistent unit kind.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+This query will never return a unit with @Chg{Version=[2],New=[kinds ],Old=[]}
+A_Configuration_Compilation or
+@Chg{Version=[2],New=[A_Nonexistent_Body],Old=[a nonexistent unit kind]}.
 
 All units in the result will have an Enclosing_Container value that
-Is_Identical to the Container.
+Is_Identical to The_Container.
 
-Raises ASIS_Inappropriate_Context if the Enclosing_Context(Container)
+Raises ASIS_Inappropriate_Context if the Enclosing_Context(The_Container)
 is not open.
 @end{DescribeCode}
 
@@ -180,20 +184,53 @@ is not open.
 
 The_Container @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Container to query.
 
-Returns a list of all compilation units contained in the Container.
+Returns a list of all compilation units contained in The_Container.
 Individual units will appear only once in an order that is not defined.
 
-A Nil_Compilation_Unit_List is returned if there are no units within the
+Nil_Compilation_Unit_List is returned if there are no units within the
 Container.
 
-This query will never return a unit with A_Configuration_Compilation or
-a nonexistent unit kind.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+This query will never return a unit with @Chg{Version=[2],New=[kinds ],Old=[]}
+A_Configuration_Compilation@Chg{Version=[2],New=[, A_Nonexistent_Declaration,
+or A_Nonexistent_Body],Old=[ or a nonexistent unit kind]}.
 
 All units in the result will have an Enclosing_Container value that
-Is_Identical to the Container.
+Is_Identical to The_Container.
 
-Raises ASIS_Inappropriate_Context if the Enclosing_Context(Container)
+Raises ASIS_Inappropriate_Context if the Enclosing_Context(The_Container)
 is not open.
+@end{DescribeCode}
+
+@begin{UsageNote}
+@ChgAdded{Version=[2],Text=[Function Compilation_Units returns all units that
+are contained in a context, including declarations, renames, instances, bodies,
+and subunits. But it does not return any configuration pragmas. To get just
+declarations, use Library_Unit_Declarations; to get just bodies, use
+Compilation_Unit_Bodies; and to get just configuration pragmas, use
+Configuration_Compilation_Units.]}
+@end{UsageNote}
+
+
+@LabeledAddedClause{Version=[2],Name=[function Configuration_Compilation_Units (container)]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgAdded{Version=[2], Text=[@key[function] @AdaSubDefn{Configuration_Compilation_Units} (The_Container : @key[in] Container)
+                   @key[return] Asis.Compilation_Unit_List;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0053-1]}
+@ChgAdded{Version=[2], Text=[The_Container specifies the Container to query.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0053-1]}
+@ChgAdded{Version=[2], Text=[Returns a list of all configuration compilation
+units contained in The_Container. Individual units will appear only once in an
+order that is not defined. A Nil_Compilation_Unit_List is returned if there are
+no configurations units within The_Container. All units in the result will have
+an Enclosing_Container value that Is_Identical to The_Container. Raises
+ASIS_Inappropriate_Context with a Status of Value_Error if the
+Enclosing_Context(The_Container) is not open.]}
 @end{DescribeCode}
 
 
@@ -208,11 +245,12 @@ is not open.
 Left @chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the first Container.
 Right @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the second Container.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0053-1]}
 Returns True if Left and Right designate Container values that contain the
-same set of compilation units@Chg{Version=[2],New=[, and returns False
-otherwise],Old=[]}. The Container values may have been defined from different
-Context values.
+same set of compilation units@Chg{Version=[2],New=[, where two compilation units
+are the same when Is_Equal on the corresponding Compilation_Units returns True,
+and returns False otherwise],Old=[]}. The Container values may have been defined
+from different Context values.
 @end{DescribeCode}
 
 
@@ -228,9 +266,10 @@ Context values.
 Left @chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the first Container.
 Right @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the second Container.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0053-1]}
 Returns True if Is_Equal(Left, Right) and the Container values have been
-defined from Is_Equal Context values@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
+defined from @Chg{Version=[2],New=[Is_Identical],Old=[Is_Equal]}
+Context values@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
 @end{DescribeCode}
 
 
@@ -245,7 +284,7 @@ The_Container @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Containe
 
 Returns the Name value associated with the Container.
 
-Returns a null string if the Container is a Nil_Container.
+Returns a null string if the Container is Nil_Container.
 @end{DescribeCode}
 
 @begin{Example}

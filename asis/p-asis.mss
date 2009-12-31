@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.25 $ $Date: 2009/10/15 06:21:25 $}
+@comment{$Revision: 1.26 $ $Date: 2009/12/23 06:58:59 $}
 
 @LabeledSection{package Asis}
 
@@ -1721,7 +1721,7 @@ belonging to the context clause part.
 
 The declaration associated with a compilation unit is one of: a
 package, a procedure, a function, a generic, or a subunit for normal units.
-The associated declaration is a Nil_Element for An_Unknown_Unit and
+The associated declaration is Nil_Element for An_Unknown_Unit and
 Nonexistent units.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
@@ -1776,7 +1776,7 @@ configuration pragmas or comments.
 @begin{Example}
 @key[type] @AdaTypeDefn{Unit_Kinds} @key[is] (
 
-   @AdaObjDefn{Not_A_Unit},                  -- @examcom{A Nil_Compilation_Unit}
+   @AdaObjDefn{Not_A_Unit},                  -- @examcom{Nil_Compilation_Unit}
 
    @AdaObjDefn{A_Procedure},
    @AdaObjDefn{A_Function},

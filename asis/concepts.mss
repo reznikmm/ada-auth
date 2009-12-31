@@ -1,12 +1,12 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/concepts.mss,v $}
-@comment{$Revision: 1.13 $ $Date: 2009/09/15 04:48:13 $}
+@comment{$Revision: 1.14 $ $Date: 2009/12/23 06:58:59 $}
 
 
 @LabeledSection{ASIS technical concepts}
 
 
-@LabeledClause{Ada compilation environment}
+@LabeledClause{Ada environment and context}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
 ASIS is an interface between an Ada environment as defined by
@@ -17,36 +17,42 @@ requiring information from this environment, as shown in Figure 2.
 @PictureAlone(Alignment=[Center], Border=[None],
          Height=[427], Width=[456],
          Name=[ada_env.png],
-         Descr=[ASIS as interface to Ada compilation environment])
+         Descr=[ASIS as interface to Ada environment])
 @Comment{Original size:  Height=[483], Width=[515]}
 
-@b{Figure 2 @em ASIS as interface to Ada compilation environment}
+@b{Figure 2 @em ASIS as interface to Ada environment}
 
 @LabeledSubClause{Ada environment}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-@Chg{Version=[2],New=[The Ada Standard],Old=[ISO/IEC 8652:1995]},
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+@Chg{Version=[2],New=[The Ada @i{environment}@Defn{environment} contains
+the compilation units of a partition. The Ada Standard defines
+the environment as a conceptual declarative_part that forms the outermost
+declarative region of the context of any compilation.],Old=[ISO/IEC 8652:1995,
 10.1.4(1) provides a notion for this compilation
 @i{environment} as:@Defn{compilation environment} @ldquote@;Each compilation
 unit submitted to the compiler is compiled in the context of an environment
 declarative_part (or simply environment), which is a conceptual
 declarative_part that forms the outermost declarative region of the context of
 any compilation. At run time, an environment forms the declarative_part of the
-body of the environment task of a partition.@rdquote
+body of the environment task of a partition.@rdquote]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+@ChgAdded{Version=[2],Text=[The Ada environment may be created by an Ada
+implementation, some other tools, or by a stand-alone ASIS implementation. The
+mechanisms for creating an environment and for adding compilation units are
+implementation-defined. The environment may be represented by a persistent
+database, by a distributed set of files, or directly by Ada source code.]}
 
-@LabeledSubClause{ASIS notion of the Ada compilation environment}
+@LabeledSubClause{ASIS notion of the Ada environment}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[The],Old=[However, the]} mechanisms for creating an
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0053-1]}
+@Chg{Version=[2],New=[],Old=[However, the mechanisms for creating an
 environment and for adding and replacing compilation units within an environment
-are implementation-defined. @Chg{Version=[2],New=[In some implementations,
-environments are represented by a],Old=[Some implementor environments create and
-maintain]} persistent @Chg{Version=[2],New=[database,],Old=[databases]} while
-@Chg{Version=[2],New=[in ],Old=[]}others @Chg{Version=[2],New=[they
-are],Old=[do]} not. Consequently, ASIS requires the user of the interface (i.e.,
-ASIS application) to establish the compilation environment. This is done through
-the context.
+are implementation-defined. Some implementor environments create and
+maintain persistent databases while others do not. Consequently, ]}ASIS requires
+the user of the interface (i.e., ASIS application) to establish the compilation
+environment. This is done through the context.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 The @i{context}@Defn{context} @Chg{Version=[2],New=[is a view of an
@@ -389,14 +395,16 @@ the element.
 Asis.Text.Element_Image (@RefSecNum{function Element_Image}) @en Returns the
 program text image of any element.
 
-Asis.Elements.Hash (@RefSecNum{function Hash}) @en Returns a convenient name
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+Asis.Elements.Hash (@RefSecNum{function Hash}) @en Returns a
+@Chg{Version=[2],New=[numeric hash value],Old=[convenient name]}
 for an object of type Asis.Element.
 
 Asis.Ids.Create_Id (@RefSecNum{function Create_Id}) @en Returns a unique Id
 value corresponding to this element.
 
 Asis.Elements.Is_Nil (@RefSecNum{function Is_Nil (element)}) @en Determines
-whether an element is nil. Some functions return a Nil_Element when a potential
+whether an element is nil. Some functions return Nil_Element when a potential
 element does not exist in the program. This is true for the
 Initialization_Expression function above when no initial value is present in
 the declaration.
@@ -416,7 +424,7 @@ Corresponding_@!Children, Corresponding_@!Declaration, Corresponding_Body,
 @Chg{Version=[2],New=[],Old=[Corresponding_@!Loop_Exited,
 Corresponding_@!Entry, ]}etc. If an element references
 another element, the user can traverse to the referenced element with
-@Chg{Version=[2],New=[such a],Old=[this]} function. A Nil_Element is returned if
+@Chg{Version=[2],New=[such a],Old=[this]} function. Nil_Element is returned if
 no definition traversal is possible.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
@@ -568,21 +576,61 @@ Ada program (see Section @RefSecNum{package Asis.Iterator}). This key mechanism
 is the heart of most ASIS tools; examples of its use are provided in
 @RefSecNum{Asis Application Examples}.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@b{Asis.Elements}@Defn{Elements} @en This child package encapsulates a set of
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[]}@ChgNote{Fake to add conditional "leading"}@b{Asis.Elements}@Defn{Elements}
+@en This child package encapsulates a set of
 queries that operate on all elements and some queries specific to A_Pragma
-elements. @Chg{Version=[2],New=[The element kinds],Old=[Element_Kinds]},
+elements@Chg{Version=[2],New=[(see Section @RefSecNum{package Asis.Elements})],
+Old=[]}. @Chg{Version=[2],New=[The element kinds],Old=[Element_Kinds]},
 defined in package Asis@Chg{Version=[2],New=[,],Old=[]} are defined
 as@Chg{Version=[2],New=[ a set of],Old=[]} enumeration
 types describing the various kinds of elements. ASIS offers a hierarchical
 classification of elements. At the highest level, the Element_Kinds type
 provides literals that define "kinds" or classes into which all non-nil elements
-are grouped. Element_Kinds are: Not_An_Element, A_Pragma, A_Defining_Name,
+are grouped. Element_Kinds are:@Chg{Version=[2],New=[],Old=[ Not_An_Element, A_Pragma, A_Defining_Name,
 A_Declaration, A_Definition, An_Expression, An_Association, A_Statement, A_Path,
 A_Clause, and An_Exception_Handler. Elements in each of the Element_Kinds
 classes, with the exception of An_Exception_Handler, can be further classified
 by a subordinate kind at the next level in the hierarchy (see Section
-@RefSecNum{package Asis.Elements}).
+@RefSecNum{package Asis.Elements}).]}
+@begin{InnerItemize}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+  @ChgAdded{Version=[2],Text=[Not_An_Element]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+  @ChgAdded{Version=[2],Text=[A_Pragma]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+  @ChgAdded{Version=[2],Text=[A_Defining_Name]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+  @ChgAdded{Version=[2],Text=[A_Declaration]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+  @ChgAdded{Version=[2],Text=[A_Definition]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+  @ChgAdded{Version=[2],Text=[An_Expression]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+  @ChgAdded{Version=[2],Text=[An_Association]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+  @ChgAdded{Version=[2],Text=[A_Statement]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+  @ChgAdded{Version=[2],Text=[A_Path]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+  @ChgAdded{Version=[2],Text=[A_Clause]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+  @ChgAdded{Version=[2],Text=[An_Exception_Handler]}
+@end{InnerItemize}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+@ChgAdded{Version=[2],NoPrefix=[T],Text=[Elements in each of the Element_Kinds
+classes, with the exception of An_Exception_Handler, can be further classified
+by a subordinate kind at the next level in the hierarchy.]}
 
 @b{Asis.Clauses}@Defn{Clauses} @en This child package encapsulates a set of
 queries that operate on the A_Clause element (see
@@ -1049,7 +1097,9 @@ The following are general usage rules:
 @begin{Itemize}
 All queries returning list values always return lists with a 'First of one (1).
 
-All queries with a Context parameter of mode IN raise
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+All queries @Chg{Version=[2],New=[other than simple Boolean or enumeration
+value queries that have],Old=[with]} a Context parameter of mode @key[in] raise
 ASIS_Inappropriate_Context if the Context value is not open. The Status is set
 to Value_Error.@Defn{ASIS_Inappropriate_Context}
 

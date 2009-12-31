@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/errors.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2009/05/09 06:28:46 $}
+@comment{$Revision: 1.4 $ $Date: 2009/12/23 06:58:59 $}
 
 @LabeledSection{package Asis.Errors}
 
@@ -10,22 +10,31 @@ shall provide interfaces equivalent to those described in the
 following subclauses.],
 Old=[@f{@key[package] @ChildUnit{Parent=[Asis],Child=[Errors]}ASIS.Errors @key[is]}]}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
 ASIS reports all operational errors by raising an exception. Whenever an
 ASIS implementation raises one of the exceptions declared in package
-Asis.Exceptions, it will previously have set the values
-returned by the
-Status and Diagnosis queries to indicate the cause of the error. The
-possible values for Status are indicated in the definition of Error_Kinds
-below, with suggestions for the associated contents of the Diagnosis
-string as a comment.
+Asis.Exceptions, it will @Chg{Version=[2],New=[indicate the cause of the error
+by including an exception message and by setting the value returned by
+the Status query before raising the exception],Old=[previously have set
+the values returned by the Status and Diagnosis queries to indicate the cause of
+the error]}. The possible values for Status are indicated in the definition of
+Error_Kinds @Chg{Version=[2],New=[in the next clause, with suggestions for the
+contents of the exception message],Old=[below, with suggestions for the
+associated contents of the Diagnosis string]} as a comment.
 
-The Diagnosis and Status queries are provided in the Asis.Implementation
-package to supply more information about the reasons for raising any
-exception.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+The @Chg{Version=[2],New=[],Old=[Diagnosis and ]}Status
+@Chg{Version=[2],New=[query],Old=[queries]} are provided in the
+Asis.Implementation package to supply more information about the reasons for
+raising any exception.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
 ASIS applications are encouraged to follow this same convention whenever
-they explicitly raise any ASIS exception--always record a Status and
-Diagnosis prior to raising the exception.
+they explicitly raise any ASIS exception--always record a Status
+@Chg{Version=[2],New=[],Old=[and Diagnosis ]}prior to raising the
+exception@Chg{Version=[2],New=[, and include a meaningful exception
+message],Old=[]}.
+
 
 @LabeledClause{type Error_Kinds}
 

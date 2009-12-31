@@ -1,6 +1,6 @@
 @Part(comptime, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/comptime.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2009/07/02 04:50:54 $}
+@comment{$Revision: 1.5 $ $Date: 2009/12/23 06:58:59 $}
 
 @LabeledSection{package Asis.Compilation_Units.Times}
 
@@ -103,7 +103,7 @@ Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the un
 Attribute @Chg{Version=[1],New=[specifies],Old=[       @en Specifies]} the name of the attribute to query.
 
 Returns the Time value associated with the given attribute. Returns
-Nil_ASIS_Time if the argument is a Nil_Compilation_Unit, the unit does
+Nil_ASIS_Time if the argument is Nil_Compilation_Unit, the unit does
 not have the given Attribute, or the implementation does not record times
 for attributes.
 

@@ -1,10 +1,10 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2009/09/15 04:48:14 $}
+@Comment{$Date: 2009/12/23 06:58:59 $}
 @LabeledAddedNormativeAnnex{Version=[2],Name=[Obsolescent Features]}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/obsolescent.mss,v $}
-@comment{$Revision: 1.12 $}
+@comment{$Revision: 1.13 $}
 
 @LabeledAddedClause{Version=[2],Name=[Annex Contents]}
 
@@ -176,6 +176,56 @@ previous editions of this standard. Use of these entities is not recommended in 
 @end{DescribeCode}
 
 
+
+@ChgNote{SI99-0053-1 add chapter on newly obsolete subprograms}
+@LabeledAddedClause{Version=[2],Name=[Obsolescent Features in package Asis.Implementation]}
+
+@LabeledAddedSubclause{Version=[2],Name=[Introduction for Obsolescent Features in package Asis.Implementation]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+@ChgAdded{Version=[2], Text=[In addition to the interfaces defined in section
+@RefSecNum{package Asis.Implementation}, the library package
+Asis.Implementation also shall provide interfaces equivalent to
+the obsolescent ones described in the following subclauses.]}
+
+
+@ChgNote{SI99-0053-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Diagnosis]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+@ChgAdded{Version=[2], Text=[This function has been superceded by the Ada
+function Ada.Exceptions.Exception_Message. Use of the function Diagnosis is not
+recommended in new programs.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+@ChgAdded{Version=[2],Text=[@key[function] Diagnosis @key[return] Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+@ChgAdded{Version=[2],Text=[Returns a string value describing the most recent
+error.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0047-1],ARef=[SI99-0053-1]}
+@ChgAdded{Version=[2],Text=[Whenever an error condition is detected, and any
+ASIS exception is raised, an Asis.Errors.Error_Kinds value and a Diagnosis
+string are stored. The Diagnosis function returns the diagnostic message
+describing the most recently recorded error. Note that Diagnosis values are
+implementation dependent and may vary greatly among ASIS implementations.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+@ChgAdded{Version=[2],Text=[Function Diagnosis will typically return a null
+string if Status = Not_An_Error.]}
+@end{DescribeCode}
+
+@begin{SingleNote}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
+@ChgAdded{Version=[2],Text=[Unless the diagnosis string has been set explicitly,
+we recommend that function Diagnosis returns the same string as
+Ada.Exceptions.Exception_Message for the exception raised by the
+most recent error.]}
+@end{SingleNote}
 
 @ChgNote{SI99-0025-1 add chapter on newly obsolete subprograms}
 @LabeledAddedClause{Version=[2],Name=[Obsolescent Features in package Asis.Implementation.Permissions]}
@@ -515,7 +565,7 @@ Trait_Kind is not recommended in new programs.]}
 @ChgAdded{Version=[2],Text=[Returns the Trait_Kinds value of the Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0022-1]}
-@ChgAdded{Version=[2],Text=[Returns Not_A_Trait for any unexpected element such as a
+@ChgAdded{Version=[2],Text=[Returns Not_A_Trait for any unexpected element such as
 Nil_Element, A_Statement, or An_Expression.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0022-1],ARef=[SI99-0028-1]}
@@ -593,7 +643,7 @@ relative interpretations. These are pragmas that directly affect the
 given element. For example, a pragma Pack affects the type it names.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
-@ChgAdded{Version=[2],Text=[Returns a Nil_Element_List if there are no semantically associated pragmas.]}
+@ChgAdded{Version=[2],Text=[Returns Nil_Element_List if there are no semantically associated pragmas.]}
 
 @begin{UsageNote}
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
@@ -751,7 +801,7 @@ single_protected_declaration, returns the task_definition or
 protected_definition following the reserved word @key[is].]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1]}
-@ChgAdded{Version=[2],Text=[Returns a Nil_Element for a single_task_declaration
+@ChgAdded{Version=[2],Text=[Returns Nil_Element for a single_task_declaration
 that has no explicit task_definition.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1]}
@@ -929,7 +979,7 @@ stream-oriented attributes whose prefix is the class-wide type
 associated with the named entity.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
-@Chg{Version=[2],New=[Returns a Nil_Element_List if no clauses apply to the declaration.],Old=[]}
+@Chg{Version=[2],New=[Returns Nil_Element_List if no clauses apply to the declaration.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
 @Chg{Version=[2],New=[If Declaration is a declaration that includes several defining_names,
@@ -1468,7 +1518,7 @@ is Value_Error). Only the constraint values are valid, once they
 have been properly initialized, and can be safely extracted from an
 artificial data stream.]}
 
-@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element if given a Nil_Array_Component_Iterator
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element if given Nil_Array_Component_Iterator
 or one where Done(Iterator) = True. The Status value is Data_Error.
 The Diagnosis string will indicate the kind of error detected.]}
 

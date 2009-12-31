@@ -1,6 +1,6 @@
 @Part(clauses, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/clauses.mss,v $}
-@comment{$Revision: 1.10 $ $Date: 2009/05/09 06:28:46 $}
+@comment{$Revision: 1.11 $ $Date: 2009/12/23 06:58:58 $}
 
 @LabeledSection{package Asis.Clauses}
 
@@ -41,11 +41,12 @@ Returns a list of the names that appear in the given clause.
 The names in the list should be in their order of appearance in the
 original clauses from the compilation text.
 
-Results of this query may vary across ASIS implementations. Some
-implementations normalize all clauses containing multiple names
-into an equivalent sequence of corresponding single clauses.
-Similarly, an implementation may keep a name only once even though that
-name can appear more than once in a clause.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[Results of this query may vary across ASIS
+implementations. Some implementations normalize all clauses containing multiple
+names into an equivalent sequence of corresponding single clauses. Similarly, an
+implementation may keep a name only once even though that name can appear more
+than once in a clause.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Clause expects an element
@@ -193,7 +194,7 @@ representation clause to query.
 
 Returns the static_expression appearing after the reserved words @key[at mod].
 
-Returns a Nil_Element if a mod_clause is not present.
+Returns Nil_Element if a mod_clause is not present.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0039-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Clause expects an element
@@ -235,7 +236,7 @@ pragmas are to be returned.
 Returns the component_clause and pragma elements from the
 record_representation_clause, in their order of appearance.
 
-Returns a Nil_Element_List if the record_representation_clause has no
+Returns Nil_Element_List if the record_representation_clause has no
 component_clause or pragma elements.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0039-1]}

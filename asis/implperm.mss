@@ -1,6 +1,6 @@
 @Part(implperm, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/implperm.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2009/05/16 03:55:40 $}
+@comment{$Revision: 1.10 $ $Date: 2009/12/23 06:58:59 $}
 
 
 @LabeledSection{package Asis.Implementation.Permissions}
@@ -25,7 +25,7 @@ named notation.]}
 l@ChgDeleted{Version=[2],Text=[Returns False if this implementation will always change parameter lists
 using named notation to positional lists in function, subprogram, and
 entry calls. In that case, the Formal_Parameter query will always return
-a Nil_Element unless the parameter list is obtained with Normalized = True.]}
+Nil_Element unless the parameter list is obtained with Normalized = True.]}
 
 @ChgDeleted{Version=[2],Text=[This function affects association lists for
 aggregates, instantiations, discriminant lists, entry calls, and subprogram
@@ -129,7 +129,7 @@ query Call_Statement_Parameters will always behave as if called with Normalized
 @ChgDeleted{Version=[2],Text=[It is not possible to obtain either a normalized
 or unnormalized Discriminant_Association list for an unconstrained record or
 derived subtype_indication where the discriminant_association is supplied by
-default; there is no constraint to query, and a Nil_Element is returned from
+default; there is no constraint to query, and Nil_Element is returned from
 the query Subtype_Constraint.]}
 @end{SingleNote}
 @end{DescribeCode}

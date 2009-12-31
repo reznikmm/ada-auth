@@ -1,6 +1,6 @@
-`@Part(expressions, root="asis.msm")
+@Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.18 $ $Date: 2009/10/15 06:21:25 $}
+@comment{$Revision: 1.19 $ $Date: 2009/12/23 06:58:59 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -46,7 +46,7 @@ the same as for the equivalent function call.  For a parenthesized expression,
 it is the same as for the enclosed expression.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
-@ChgAdded{Version=[2],Text=[Returns a Nil_Element if the expression is of an
+@ChgAdded{Version=[2],Text=[Returns Nil_Element if the expression is of an
 anonymous or classwide type, or is a named number, a numeric literal, or a null
 literal.]}
 
@@ -71,7 +71,7 @@ returned. The "unwinding" should not occur. The type declaration for either
 My_Int or Int should not be returned.]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0045-1]}
-@ChgDeleted{Version=[2],Type=[Leading],Text=[@leading@;Returns a Nil_Element if the argument Expression does not represent
+@ChgDeleted{Version=[2],Type=[Leading],Text=[@leading@;Returns Nil_Element if the argument Expression does not represent
 an Ada expression having an Ada type, including the following classes:]}
 
 @begin{Itemize}
@@ -118,7 +118,7 @@ A_Box_Expression for an array association is that of the component type.}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0045-1]}
-Returns a Nil_Element@Chg{Version=[2],New=[ if the expression denotes an
+Returns Nil_Element@Chg{Version=[2],New=[ if the expression denotes an
 entity that does not have a type, such as a package or an exception],Old=[, if
 the statically determinable type of Expression is a class-wide type, or the
 Expression corresponds to an inner sub-aggregate in multi-dimensional array
@@ -138,16 +138,6 @@ For example, @f{@key[pragma] Private_Part (Open => Yes);}, the @f{Yes}
 expression may simply be a keyword that is specially recognized by the
 implementor's compilation system and may not refer to any
 declared object.
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
-@ChgAdded{Version=[2],Text=[An alternative to using this function would
-be to use Asis.Expressions.Views.Corresponding_View
-(see @RefSecNum{function Corresponding_View}) to retrieve a semantic view of the
-expression, check if it is an object or value with Asis.Views.Is_Object_or_Value
-(see @RefSecNum{type View_Kinds and type View}), and, assuming it is, use
-Asis.Object_Views.Nominal_Subtype (see @RefSecNum{type Object_View}) to retrieve
-the subtype. The retrieved subtype will include anonymous and classwide subtypes
-so complete analysis can be done without many special cases.]}
 @end{UsageNote}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -170,7 +160,21 @@ Not_An_Element
 A_Declaration
 @end{Display}
 
-@begin{SingleNote}
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1],ARef=[SI99-0053-1]}
+@ChgAdded{Version=[2],Text=[An alternative to using this function would
+be to use Asis.Expressions.Views.Corresponding_View
+(see @RefSecNum{function Corresponding_View}) to retrieve a semantic view of the
+expression, check if it is an object or value with Asis.Views.Is_Object_or_Value
+(see @RefSecNum{type View_Kinds and type View}), and, assuming it is, use
+Asis.Object_Views.Nominal_Subtype (see @RefSecNum{type Object_View}) to retrieve
+the subtype. The retrieved subtype will include anonymous and classwide subtypes
+so complete analysis can be done without many special cases.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0053-1]}
+@ChgAdded{Version=[2],Text=[We recommend that the type returned in the
+implementation-defined cases be a type defined by the context.]}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[This query does not "unwind" subtypes
 or derived types to get to the first subtype or parent subtype declarations, but
@@ -190,7 +194,7 @@ Var: Good_Int @key[range] -2_000 .. 2_000;}]}
 denoting Var, the declaration for Good_Int should be returned. No further
 "unwinding" should occur. The declaration for either My_Int or Int should not be
 returned.]}
-@end{SingleNote}
+@end{Notes}
 @end{DescribeCode}
 
 
@@ -438,12 +442,14 @@ argument is part of an inconsistent compilation unit.
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Corresponding_Name_Definition} (Reference : @key[in] Asis.Expression)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+@key[function] @AdaSubDefn{Corresponding_Name_Definition} (Reference : @key[in] @key[in] @Chg{Version=[2],New=[Asis.Name],Old=[Asis.Expression]})
                          @key[return] Asis.Defining_Name;
 @end{Example}
 
-Reference @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} an expression
-to query.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+Reference @chg{Version=[1],New=[specifies],Old=[  @en Specifies]}
+@Chg{Version=[2],New=[a name],Old=[an expression]} to query.
 
 Returns the defining_identifier, defining_character_literal,
 defining_operator_symbol, or defining_program_unit_name from the
@@ -476,11 +482,11 @@ References, within expanded generic instances, that refer to other
 
 In case of renaming, the function returns the new name for the entity.
 
-Returns a Nil_Element if the reference is to an implicitly declared
+Returns Nil_Element if the reference is to an implicitly declared
 element for which the implementation does not provide declarations and
 defining name elements.
 
-Returns a Nil_Element if the argument is a dispatching call.
+Returns Nil_Element if the argument is a dispatching call.
 
 The Enclosing_Element of a non-Nil result is either a Declaration or a
 Statement.
@@ -598,12 +604,14 @@ list of referenced entities.
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Corresponding_Name_Definition_List} (Reference : @key[in] Asis.Element)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+@key[function] @AdaSubDefn{Corresponding_Name_Definition_List} (Reference : @key[in] @Chg{Version=[2],New=[Asis.Name],Old=[Asis.Element]})
                                @key[return] Asis.Defining_Name_List;
 @end{Example}
 
-Reference @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} an entity
-reference to query.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+Reference @chg{Version=[1],New=[specifies],Old=[  @en Specifies]}
+@Chg{Version=[2],New=[a name],Old=[an entity reference]} to query.
 
 @leading@;Exactly like Corresponding_Name_Definition except it returns a list.
 The list will almost always have a length of one. The exception to this
@@ -646,12 +654,15 @@ A_Defining_Name
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Corresponding_Name_Declaration} (Reference : @key[in] Asis.Expression)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+@key[function] @AdaSubDefn{Corresponding_Name_Declaration} (Reference : @key[in] @Chg{Version=[2],New=[Asis.Name],Old=[Asis.Expression]})
                           @key[return] Asis.Element;
 @end{Example}
 
-Reference @chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the entity
-reference to query.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+Reference @chg{Version=[1],New=[specifies],Old=[  @en Specifies]}
+@Chg{Version=[2],New=[a name],Old=[an entity reference]} to query.
+
 
 @leading@;Returns the declaration that declared the entity named by the given
 reference. The result is exactly the same as:
@@ -951,7 +962,7 @@ Returns the static expressions associated with the optional argument of the
 attribute_designator. Expected predefined attributes are A'First(N),
 A'Last(N), A'Length(N), and A'Range(N).
 
-Returns a Nil_Element_List if there are no arguments.
+Returns Nil_Element_List if there are no arguments.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
@@ -1005,7 +1016,7 @@ normalized form is desired.
 Returns a list of the record_component_association elements of a
 record_aggregate or an extension_aggregate.
 
-Returns a Nil_Element_List if the aggregate is of the form (null record).
+Returns Nil_Element_List if the aggregate is of the form (null record).
 
 An unnormalized list contains all needed associations ordered as they
 appear in the program text. Each unnormalized association has an optional
@@ -1114,8 +1125,8 @@ aggregate expression to query.
 Returns a list of the Array_Component_Associations in an array
 aggregate.@Chg{Version=[2],New=[ If the aggregate is a positional array
 aggregate, the Array_Component_Associations consist of an expression of the
-aggregate with Array_Component_Choices that are each a Nil_Element_List for
-all positional expressions except for the others choice, if any.],Old=[]}
+aggregate with Array_Component_Choices that are each Nil_Element_List for
+all positional expressions except for the @key<others> choice, if any.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Expression expects an element
@@ -1145,8 +1156,8 @@ array_component_association elements defined by Ada syntax, ASIS treats
 A_Positional_Array_Aggregate as if it were
 A_Named_Array_Aggregate.@Chg{Version=[2],New=[],Old=[The
 An_Array_Component_Association elements returned will have
-Array_Component_Choices that are a Nil_Element_List for all positional
-expressions except an others choice.]}
+Array_Component_Choices that are Nil_Element_List for all positional
+expressions except an @key<others> choice.]}
 @end{SingleNote}
 
 
@@ -1177,7 +1188,7 @@ Returns the discrete_choice_list @Chg{Version=[2],New=[in ],Old=[]}order of
 Returns a single An_Others_Choice if the association is an others
 choice (@key[others] => expression).
 
-Returns a Nil_Element_List otherwise.
+Returns Nil_Element_List otherwise.
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1242,7 +1253,7 @@ The Enclosing_Element of the choices is the Association argument.
 @leading@;If the Association is a positional component association:
 
 @begin{InnerItemize}
-Returns a Nil_Element_List.
+Returns Nil_Element_List.
 @end{InnerItemize}
 @end{Itemize}
 
@@ -1383,7 +1394,7 @@ argument.
 @leading@;If the Association is given in positional notation:
 
 @begin{Indent}
-Returns a Nil_Element.
+Returns Nil_Element.
 @end{Indent}
 @end{Itemize}
 
@@ -1585,7 +1596,7 @@ The Enclosing_Element of the names is the Association argument.
 @leading@;If the Association is a positional discriminant_association:
 
 @begin{InnerItemize}
-Returns a Nil_Element_List.
+Returns Nil_Element_List.
 @end{InnerItemize}
 
 @end{Itemize}
@@ -1887,7 +1898,7 @@ function_call to query.
 
 Returns the declaration of the called function.
 
-@leading@;Returns a Nil_Element if the:
+@leading@;Returns Nil_Element if the:
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
@@ -1899,8 +1910,10 @@ Returns the declaration of the called function.
 prefix of the call denotes an @Chg{Version=[2],New=[],Old=[access to a function ]}implicit or explicit
   dereference@Chg{Version=[2],New=[ of an access to a function value, or],Old=[,]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Expression],Old=[argument]} is a dispatching call@Chg{Version=[2],New=[.],Old=[,]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0053-1]}
+@Chg{Version=[2],New=[Expression],Old=[argument]} is a dispatching
+@Chg{Version=[2],New=[operation of a tagged type which
+is not statically determined.],Old=[call,]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
@@ -1909,9 +1922,9 @@ denotes an attribute_reference, and if the corresponding
 attribute is (re)defined by an attribute definition clause, an implementation
 is encouraged, but not required, to return the definition of the corresponding
 subprogram whose name is used after @key[use] in this attribute definition
-clause. If an implementation cannot return such a subprogram definition, a
+clause. If an implementation cannot return such a subprogram definition,
 Nil_Element should be returned. For an attribute reference which is not
-(re)defined by an attribute definition clause, a Nil_Element should be
+(re)defined by an attribute definition clause, Nil_Element should be
 returned.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -1985,7 +1998,7 @@ normalized form is desired.
 
 Returns a list of parameter_association elements of the call.
 
-Returns a Nil_Element_List if there are no parameter_association elements.
+Returns Nil_Element_List if there are no parameter_association elements.
 
 An unnormalized list contains only explicit associations ordered as they
 appear in the program text. Each unnormalized association has an optional

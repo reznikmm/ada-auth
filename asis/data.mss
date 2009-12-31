@@ -1,6 +1,6 @@
 @Part(data, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/data.mss,v $}
-@comment{$Revision: 1.14 $ $Date: 2009/07/02 04:50:54 $}
+@comment{$Revision: 1.15 $ $Date: 2009/12/23 06:58:59 $}
 
 @LabeledSection{package Asis.Data_Decomposition (optional)}
 
@@ -707,7 +707,7 @@ to query.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 Returns True if the iterator has been advanced past the last array
-component. Returns True for a Nil_Array_Component_Iterator.@Chg{Version=[2],New=[
+component. Returns True for Nil_Array_Component_Iterator.@Chg{Version=[2],New=[
 Returns False otherwise.],Old=[]}
 @end{DescribeCode}
 

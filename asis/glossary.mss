@@ -1,9 +1,9 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2009/07/02 04:50:54 $}
+@Comment{$Date: 2009/12/23 06:58:59 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/glossary.mss,v $}
-@comment{$Revision: 1.4 $}
+@comment{$Revision: 1.5 $}
 
 @LabeledInformativeAnnex{Glossary}
 
@@ -27,8 +27,11 @@ the Ada package Asis],Old=[Any programming system or any set of software
 components making use of ASIS queries to obtain information about any set of Ada
 components]}.>}
 
-@ToGlossary{Term=<ASIS implementation>,Text=<All the hardware and software that
-implement the ASIS specification for a given Ada implementation and that
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
+@ChgToGlossary{Version=[2],Kind=[Revised],Term=<ASIS implementation>,
+Text=<All the hardware and software that
+implement the ASIS specification @Chg{Version=[2],New=[],Old=[for a given
+Ada implementation ]}and that
 provide the functionality required by the ASIS specification.>}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}

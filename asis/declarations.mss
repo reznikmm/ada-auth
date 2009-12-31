@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.22 $ $Date: 2009/10/15 06:21:25 $}
+@comment{$Revision: 1.23 $ $Date: 2009/12/23 06:58:59 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -342,7 +342,7 @@ declaration to query.
 Returns the discriminant_part, if any, from the type_declaration or
 formal_type_declaration.
 
-Returns a Nil_Element if the Declaration has no explicit discriminant_part.
+Returns Nil_Element if the Declaration has no explicit discriminant_part.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
@@ -391,7 +391,7 @@ the reserved word @key[is].
 For a full_type_declaration, returns the type_definition, task_definition,
 or protected_definition following the reserved word @key[is] in the declaration.
 
-Returns a Nil_Element for a task_type_declaration that has no explicit
+Returns Nil_Element for a task_type_declaration that has no explicit
 task_definition.
 
 For a private_type_declaration or private_extension_declaration, returns
@@ -510,7 +510,7 @@ First_Line = Last_Line = the line of the semicolon; Element_Image(E) = ""; and
 Lines(E) returns a single line whose Line_Image = "".]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0004-1]}
-@ChgDeleted{Version=[2],Text=[Returns a Nil_Element for a
+@ChgDeleted{Version=[2],Text=[Returns Nil_Element for a
 single_task_declaration that has no explicit task_definition.]}
 
 For a Component_Declaration, returns the Component_Definition following
@@ -585,7 +585,7 @@ declaration to query.
 
 Returns the initialization expression [:= expression] of the declaration.
 
-Returns a Nil_Element if the declaration does not include an explicit
+Returns Nil_Element if the declaration does not include an explicit
 initialization.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
@@ -655,7 +655,7 @@ from a full constant declaration.
 Returns A_Pragma if the deferred constant declaration is completed
 by pragma Import.
 
-Returns a Nil_Element if the full constant declaration has no corresponding
+Returns Nil_Element if the full constant declaration has no corresponding
 deferred constant declaration.
 
 Raises ASIS_Inappropriate_Element with a Status of Value_Error if the
@@ -836,7 +836,7 @@ Decl2 := Corresponding_Type_Declaration
 @end{ChildExample}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
-Returns a Nil_Element when @Chg{Version=[2],New=[Declaration is ],Old=[]}a
+Returns Nil_Element when @Chg{Version=[2],New=[Declaration is ],Old=[]}a
 full type declaration @Chg{Version=[2],New=[],Old=[is given ]}that has no
 corresponding private or incomplete type declaration, or when
 @Chg{Version=[2],New=[Declaration is ],Old=[]}a
@@ -853,7 +853,7 @@ given Context as its Enclosing_Context.]}
 from the Enclosing_Context(Enclosing_Compilation_Unit(Declaration)), returns the
 corresponding type declaration for the element in The_Context that Is_Equal to
 Declaration. If no such element exists in The_Context that Is_Equal to
-Declaration, returns A_Nil_Element.]}
+Declaration, returns Nil_Element.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
@@ -1064,7 +1064,7 @@ Returns all @Chg{Version=[2],New=[aspect_clause],Old=[representation_clause]}
 elements that apply to the @Chg{Version=[2],New=[named entity],Old=[declaration]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0021-1]}
-Returns a Nil_Element_List if no clauses apply to the
+Returns Nil_Element_List if no clauses apply to the
 @Chg{Version=[2],New=[named entity],Old=[declaration]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0021-1]}
@@ -1175,15 +1175,14 @@ subprogram or entry declaration to query.
 Returns a list of parameter specifications in the formal part of the
 subprogram or entry declaration, in their order of appearance.
 
-Returns a Nil_Element_List if the subprogram or entry has no
+Returns Nil_Element_List if the subprogram or entry has no
 parameters.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-Results of this query may vary across ASIS implementations. Some
-implementations normalize all multiple name parameter specifications into
-an equivalent sequence of corresponding single name parameter
-specifications.
-See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[Results of this query may vary across ASIS
+implementations. Some implementations normalize all multiple name parameter
+specifications into an equivalent sequence of corresponding single name
+parameter specifications. See Reference Manual 3.3.1(7).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
@@ -1330,13 +1329,13 @@ Returns a list of all basic declarations, representation
 @Chg{Version=[2],New=[and operational items],Old=[specifications]}, use clauses,
 and pragmas in the declarative part of the body, in their order of appearance.
 
-Returns a Nil_Element_List if there are no declarative_item or pragma elements.
+Returns Nil_Element_List if there are no declarative_item or pragma elements.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-Results of this query may vary across ASIS implementations. Some
-implementations normalize all multi-name declarations into an
-equivalent sequence of corresponding single name object declarations.
-See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[Results of this query may vary across ASIS
+implementations. Some implementations normalize all multi-name declarations into
+an equivalent sequence of corresponding single name object declarations. See
+Reference Manual 3.3.1(7).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
@@ -1381,7 +1380,7 @@ Specifies]} whether pragmas are to be returned.
 Returns a list of the statements and pragmas for the body, in
 their order of appearance.
 
-Returns a Nil_Element_List if there are no statements or pragmas.
+Returns Nil_Element_List if there are no statements or pragmas.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
@@ -1428,7 +1427,7 @@ appearance.
 The only pragmas returned are those following the reserved word @key[exception]
 and preceding the reserved word @key[when] of the first exception handler.
 
-Returns a Nil_Element_List if there are no exception_handler or pragma elements.
+Returns Nil_Element_List if there are no exception_handler or pragma elements.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
@@ -1612,7 +1611,7 @@ by this subprogram renaming declaration is returned.
 (@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}, 8.5.4(1))
 @end{enumerate}
 
-Returns a Nil_Element if no explicit specification exists, or the
+Returns Nil_Element if no explicit specification exists, or the
 declaration is the proper body of a subunit.
 
 The parameter The_Context is used to locate the corresponding specification
@@ -1628,7 +1627,7 @@ The_Context.
 from the Enclosing_Context(Enclosing_Compilation_Unit(Declaration)), returns the
 declaration for the element in The_Context that Is_Equal to
 Declaration. If no such element exists in The_Context that Is_Equal to
-Declaration, returns A_Nil_Element.]}
+Declaration, returns Nil_Element.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
 If @Chg{Version=[2],New=[Declaration is ],Old=[]}a generic
@@ -1761,7 +1760,7 @@ Decl2 := Corresponding_Body
 If @Chg{Version=[2],New=[Declaration is ],Old=[]}a body
 declaration@Chg{Version=[2],New=[],Old=[ is given]}, the same element is returned.
 
-Returns a Nil_Element if no body exists in The_Context.
+Returns Nil_Element if no body exists in The_Context.
 
 The parameter The_Context is used to locate the corresponding specification
 within a particular Context. The_Context need not be the Enclosing_Context
@@ -1776,10 +1775,10 @@ The_Context.
 from the Enclosing_Context(Enclosing_Compilation_Unit(Declaration)), returns the
 declaration for the element in The_Context that Is_Equal to
 Declaration. If no such element exists in The_Context that Is_Equal to
-Declaration, returns A_Nil_Element.]}
+Declaration, returns Nil_Element.]}
 
 Implicit predefined operations (e.g., "+", "=", etc.) will not typically
-have unit bodies. (Corresponding_Body returns a Nil_Element.)
+have unit bodies. (Corresponding_Body returns Nil_Element.)
 User-defined overloads of the predefined operations will have
 Corresponding_Body values once the bodies have inserted into the
 environment. The Corresponding_Body of an inherited subprogram is that
@@ -1793,7 +1792,7 @@ generic body template is returned. (i.e., an argument that is
 A_Package_Instantiation, results in a value that is
 A_Package_Body_Declaration that can be analyzed with all appropriate ASIS queries).
 
-Returns a Nil_Element if the body of the generic has not yet been compiled
+Returns Nil_Element if the body of the generic has not yet been compiled
 or inserted into the Ada Environment Context.
 
 The Enclosing_Element of the expanded body is the generic instantiation. The
@@ -1806,7 +1805,7 @@ Returns Nil_Element for an implicit generic child unit specification.
 Returns A_Pragma if the Declaration is completed by pragma Import.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0012-1]}
-@ChgAdded{Version=[2], Text=[Returns A_Nil_Element for a null procedure or an
+@ChgAdded{Version=[2], Text=[Returns Nil_Element for a null procedure or an
 abstract procedure.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -2022,7 +2021,7 @@ or an inequality operator declaration.
 @begin{Itemize}
 Returns the complementary implicit "/=" operator declaration.
 
-Returns a Nil_Element if the Ada implementation has not defined an
+Returns Nil_Element if the Ada implementation has not defined an
 implicit "/=" for the "=". Implementations of this sort will transform
 a A/=B expression into a @key[not](A=B) expression. The function call
 representing the @key[not] operation is Is_Part_Of_Implicit in this case.
@@ -2034,7 +2033,7 @@ representing the @key[not] operation is Is_Part_Of_Implicit in this case.
 Returns the complementary explicit "=" operator declaration.
 @end{Itemize}
 
-Returns a Nil_Element for any other function declaration.
+Returns Nil_Element for any other function declaration.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
@@ -2089,11 +2088,11 @@ Returns a list of all basic declarations, representation @Chg{Version=[2],New=[a
 use clauses, and pragmas in the visible part of a package, in their order
 of appearance.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-Results of this query may vary across ASIS implementations. Some
-implementations normalize all multi-name object declarations into an
-equivalent sequence of corresponding single name object declarations.
-See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[Results of this query may vary across ASIS
+implementations. Some implementations normalize all multi-name object
+declarations into an equivalent sequence of corresponding single name object
+declarations. See Reference Manual 3.3.1(7).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element that has
@@ -2178,11 +2177,11 @@ Returns a list of all basic declarations, representation @Chg{Version=[2],New=[a
 use clauses, and pragmas in the private part of a package in their order of
 appearance.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-Results of this query may vary across ASIS implementations. Some
-implementations normalize all multi-name object declarations into an
-equivalent sequence of corresponding single name object declarations.
-See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[Results of this query may vary across ASIS
+implementations. Some implementations normalize all multi-name object
+declarations into an equivalent sequence of corresponding single name object
+declarations. See Reference Manual]} 3.3.1(7).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
@@ -2479,7 +2478,7 @@ pragmas are to be returned.
 Returns a list of protected_operation_item and pragma elements of the
 protected_body, in order of appearance.
 
-Returns a Nil_Element_List if there are no items or pragmas.
+Returns Nil_Element_List if there are no items or pragmas.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
@@ -2554,7 +2553,7 @@ declaration to query.
 Returns the Discrete_Subtype_Definition element for the entry family of
 an entry_declaration.
 
-Returns a Nil_Element if the entry_declaration does not define a family
+Returns Nil_Element if the entry_declaration does not define a family
 of entries.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -2610,7 +2609,7 @@ body declaration to query.
 Returns the An_Entry_Index_Specification element of an entry body
 declaration.
 
-Returns a Nil_Element if the entry does not declare any
+Returns Nil_Element if the entry does not declare any
 An_Entry_Index_Specification element.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
@@ -2724,7 +2723,7 @@ Context to use to locate the subunit.
 Returns the Unit_Declaration of the subunit compilation unit corresponding
 to the body stub.
 
-Returns a Nil_Element if the subunit does not exist in The_Context.
+Returns Nil_Element if the subunit does not exist in The_Context.
 
 @leading@;These two function calls will always produce identical results:
 @begin{ChildExample}
@@ -2741,7 +2740,7 @@ Any non-Nil result will always have The_Context as its Enclosing_Context.
 from the Enclosing_Context(Enclosing_Compilation_Unit(Body_Stub)), returns the
 unit for the element in The_Context that Is_Equal to
 Body_Stub. If no such element exists in The_Context that Is_Equal to
-Body_Stub, returns A_Nil_Element.]}
+Body_Stub, returns Nil_Element.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Body_Stub expects an element
@@ -2829,7 +2828,7 @@ locate the parent unit.
 
 Returns the body stub declaration located in the subunit's parent unit.
 
-Returns a Nil_Element if the parent unit does not exist in The_Context.
+Returns Nil_Element if the parent unit does not exist in The_Context.
 
 @leading@;These two function calls will always produce identical results:
 @begin{ChildExample}
@@ -2846,7 +2845,7 @@ Any non-Nil result will always have The_Context as its Enclosing_Context.
 from the Enclosing_Context(Enclosing_Compilation_Unit(Subunit)), returns the
 declaration for the element in The_Context that Is_Equal to
 Subunit. If no such element exists in The_Context that Is_Equal to
-Subunit, returns A_Nil_Element.]}
+Subunit, returns Nil_Element.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0047-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Subunit expects an element
@@ -2929,11 +2928,11 @@ Specifies]} whether pragmas are to be returned.
 Returns a list of generic formal parameter declarations, use clauses,
 and pragmas, in their order of appearance.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-Results of this query may vary across ASIS implementations. Some
-implementations normalize all multi-name object declarations into an
-equivalent sequence of corresponding single name object declarations.
-See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[Results of this query may vary across ASIS
+implementations. Some implementations normalize all multi-name object
+declarations into an equivalent sequence of corresponding single name object
+declarations. See Reference Manual 3.3.1(7).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
@@ -3119,7 +3118,7 @@ normalized form is desired.
 
 Returns a list of the generic_association elements of the instantiation.
 
-Returns a Nil_Element_List if there are no generic_association elements.
+Returns Nil_Element_List if there are no generic_association elements.
 
 An unnormalized list contains only explicit associations ordered as they
 appear in the program text. Each unnormalized association has an optional
@@ -3335,7 +3334,7 @@ definition from the generic template used to create the generic instance.
 Returns the first A_Defining_Name, from the generic template, that
 corresponds to the entity referenced.
 
-Returns a Nil_Element if the argument does not refer to an entity declared
+Returns Nil_Element if the argument does not refer to an entity declared
 as a component of a generic package instantiation. The entity name can
 refer to an ordinary declaration, an inherited subprogram declaration, or a
 predefined operator declaration.

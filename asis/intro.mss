@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/intro.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2009/07/02 04:50:55 $}
+@comment{$Revision: 1.8 $ $Date: 2009/12/23 06:58:59 $}
 
 @UnNumberedSection(Introduction)
 
@@ -34,11 +34,11 @@ only to express permission, as in the commonly occurring phrase "an
 implementation may"; other words (such as "can," "could" or "might") are used to
 express ability, possibility, capacity, or consequentiality.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1],ARef=[SI99-0053-1]}
 @ChgAdded{Version=[2],Text=[The ASIS interface consists of a set of types,
 subtypes, and subprograms which provide a capability to query the Ada
-compilation environment for syntactic and semantic
-information@Defn{compilation environment}. The ASIS interface can be separated
+environment for syntactic and semantic
+information@Defn{environment}. The ASIS interface can be separated
 into two related subsystems, the syntactic subsystem and the
 semantic subsystem.@Defn{syntactic subsystem}@Defn2{Term=[subsystem],Sec=[syntactic]}@Defn{semantic subsystem}@Defn2{Term=[subsystem],Sec=[semantic]}
 The @i{syntactic subsystem} provides the ability to traverse a program based on the
@@ -57,7 +57,7 @@ elements that make up an Ada program. Queries are provided to learn about
 declarations, expressions, statements, compilation units, and so on.]}
 
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0053-1]}
 @Chg{Version=[2],New=[],Old=[The ASIS interface consists of a set of types,
 subtypes, and subprograms which provide a capability to query the Ada compilation
 environment@Defn{compilation environment} for syntactic and
@@ -67,7 +67,8 @@ abstractions @Chg{Version=[2],New=[in the syntactic subsystem ],Old=[]}include
 Context@Defn{Context}, Element@Defn{Element}, and
 Compilation_Unit@Defn{Compilation_Unit}. @Chg{Version=[2],New=[The type],Old=[Type]}
 Context helps identify the compilation units considered to be analyzable as part
-of the Ada compilation environment. @Chg{Version=[2],New=[The type],Old=[Type]}
+of the Ada @Chg{Version=[2],New=[],Old=[compilation ]}environment.
+@Chg{Version=[2],New=[The type],Old=[Type]}
 Element is an abstraction of entities within a logical Ada syntax tree.
 @Chg{Version=[2],New=[The type],Old=[Type]} Compilation_Unit is an abstraction
 for Ada compilation units. In addition, there are two sets of enumeration types

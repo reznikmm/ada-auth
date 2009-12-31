@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.19 $ $Date: 2009/10/15 06:21:25 $}
+@comment{$Revision: 1.20 $ $Date: 2009/12/23 06:58:59 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -42,10 +42,10 @@ explicitly declared for the type. (@Chg{Version=[2],New=[Ada Standard],Old=[Refe
 @key[and or xor] = /= < <= > >= + - & * / @key[mod rem] ** @key[abs not]
 @end{ChildExample}
 
-Returns a Nil_Element_List if there are no predefined or overloaded
+Returns Nil_Element_List if there are no predefined or overloaded
 operators for the type.
 
-Returns a Nil_Element_List if the implementation does not provide
+Returns Nil_Element_List if the implementation does not provide
 such implicit declarations.
 
 The Enclosing_Element for each implicit declaration is the declaration (type
@@ -223,11 +223,11 @@ derived_type_definition whose parent type is an enumeration type, or a
 composite type other than an array type. See
 @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.4(10-14).
 
-Returns a Nil_Element_List if the root type of derived_type_definition is
+Returns Nil_Element_List if the root type of derived_type_definition is
 not an enumeration, record, task, or protected type.
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0025-1]}
-@ChgDeleted{Version=[2],Text=[Returns a Nil_Element_List if the implementation
+@ChgDeleted{Version=[2],Text=[Returns Nil_Element_List if the implementation
 does not provide such implicit declarations.]}
 
 The Enclosing_Element for each of the implicit declarations is the
@@ -313,11 +313,11 @@ been implicitly declared for the derived_type_definition.
 The list result does not include hidden inherited subprograms
 (@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 8.3).
 
-Returns a Nil_Element_List if there are no inherited subprograms for the
+Returns Nil_Element_List if there are no inherited subprograms for the
 derived type.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0025-1]}
-@ChgDeleted{Version=[2],Text=[Returns a Nil_Element_List if the implementation
+@ChgDeleted{Version=[2],Text=[Returns Nil_Element_List if the implementation
 does not provide such implicit declarations.]}
 
 The Enclosing_Element for each of the subprogram declarations is the
@@ -793,7 +793,7 @@ definition to query.
 
 Returns the real_range_specification range_constraint of the definition.
 
-Returns a Nil_Element if there is no explicit range_constraint.
+Returns Nil_Element if there is no explicit range_constraint.
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
 @ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Type_Kinds:]}
@@ -1124,13 +1124,13 @@ Access_Type_Definition to query.
 Returns a list of parameter_specification elements in the formal part of the
 parameter_profile in the access_to_subprogram_definition.
 
-Returns a Nil_Element_List if the parameter_profile has no formal part.
+Returns Nil_Element_List if the parameter_profile has no formal part.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-Results of this query may vary across ASIS implementations. Some
-implementations normalize all multiple name parameter_specification elements
-into an equivalent sequence of corresponding single name
-parameter_specification elements. See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[Results of this query may vary across ASIS
+implementations. Some implementations normalize all multiple name
+parameter_specification elements into an equivalent sequence of corresponding
+single name parameter_specification elements. See Reference Manual 3.3.1(7).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Type_Definition expects
@@ -1355,7 +1355,7 @@ definition to query.
 
 Returns the constraint of the subtype_indication.
 
-Returns a Nil_Element if no explicit constraint is present.
+Returns Nil_Element if no explicit constraint is present.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
@@ -1387,7 +1387,7 @@ A_Constraint
 
 @begin{UsageNote}
 When an unconstrained subtype indication for a type having
-discriminants with default values is used, a Nil_Element is
+discriminants with default values is used, Nil_Element is
 returned by this function. Use the queries Subtype_Mark, and
 Corresponding_Name_Declaration [, and Corresponding_First_Subtype]
 to obtain the declaration defining the defaults.
@@ -1631,7 +1631,7 @@ form is desired.
 Returns a list of the discriminant_association elements of the
 discriminant_constraint.
 
-Returns a Nil_Element_List if there are no discriminant_association elements.
+Returns Nil_Element_List if there are no discriminant_association elements.
 
 An unnormalized list contains only explicit associations ordered as they
 appear in the program text. Each unnormalized association has a list of
@@ -1689,7 +1689,7 @@ Discriminant_Associations_Normalized will return True.]}
 It is not possible to obtain either a normalized or unnormalized
 Discriminant_Association list for an unconstrained record or derived
 subtype_indication where the discriminant_association elements are supplied
-by default; there is no constraint to query, and a Nil_Element is
+by default; there is no constraint to query, and Nil_Element is
 returned from the query Subtype_Constraint.
 @end{UsageNote}
 
@@ -1801,11 +1801,11 @@ known_discriminant_part to query.
 Returns a list of discriminant_specification elements, in their order of
 appearance.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-Results of this query may vary across ASIS implementations. Some
-implementations normalize all multi-name discriminant_specification elements
-into an equivalent sequence of single name discriminant_specification elements.
-See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[Results of this query may vary across ASIS
+implementations. Some implementations normalize all multi-name
+discriminant_specification elements into an equivalent sequence of single name
+discriminant_specification elements. See Reference Manual 3.3.1(7).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
@@ -1929,7 +1929,7 @@ Returns a list of all implicit implementation-defined components of the
 record_definition or variant. The Enclosing_Element of each component is
 the Definition argument. Each component is Is_Part_Of_Implicit.
 
-Returns a Nil_Element_List if there are no implicit implementation-defined
+Returns Nil_Element_List if there are no implicit implementation-defined
 components or if the ASIS implementation does not support such
 implicit declarations.
 
@@ -2218,7 +2218,7 @@ of appearance. The list does not include discriminant_specification elements of
 the known_discriminant_part, if any, of the protected type or task type
 declaration.
 
-Returns a Nil_Element_List if there are no items.
+Returns Nil_Element_List if there are no items.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
@@ -2264,7 +2264,7 @@ pragmas are to be returned.
 Returns a list of declarations, representation @Chg{Version=[2],New=[and operational items],Old=[clauses]}, and pragmas in the
 private part of the task or protected definition, in their order of appearance.
 
-Returns a Nil_Element_List if there are no items.
+Returns Nil_Element_List if there are no items.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element

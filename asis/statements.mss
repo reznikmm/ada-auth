@@ -1,6 +1,6 @@
 @Part(statements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/statements.mss,v $}
-@comment{$Revision: 1.14 $ $Date: 2009/10/15 06:21:25 $}
+@comment{$Revision: 1.15 $ $Date: 2009/12/23 06:58:59 $}
 
 
 @LabeledSection{package Asis.Statements}
@@ -30,7 +30,7 @@ to query.
 Returns label_statement_identifier elements (A_Defining_Name elements) that
 define the labels attached to the statement, in their order of appearance.
 
-Returns a Nil_Element_List if there are no labels attached to the statement.
+Returns Nil_Element_List if there are no labels attached to the statement.
 
 The Enclosing_Element of the A_Defining_Name elements is the statement.
 
@@ -363,7 +363,7 @@ to query.
 
 Returns the identifier for the loop_statement or block_statement.
 
-Returns a Nil_Element if the loop has no identifier.
+Returns Nil_Element if the loop has no identifier.
 
 The Enclosing_Element of the name is the statement.
 
@@ -589,7 +589,7 @@ Returns a list of the declarations,
 pragmas, and use_clause elements in the declarative_part of the block_statement,
 in their order of appearance.
 
-Returns a Nil_Element_List if there are no declarative items.
+Returns Nil_Element_List if there are no declarative items.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
@@ -632,7 +632,7 @@ pragmas are to be returned.
 Returns a list of the statements and pragmas for the block_statement, in
 their order of appearance.
 
-Returns a Nil_Element_List if there are no statements or pragmas. This
+Returns Nil_Element_List if there are no statements or pragmas. This
 can only occur for a block_statement obtained from the obsolescent query
 Body_Block_Statement when its argument is a package_body
 that has no sequence_of_statements.
@@ -680,7 +680,7 @@ their order of appearance.
 The only pragmas returned are those following the reserved word @key[exception]
 and preceding the reserved word @key[when] of first exception handler.
 
-Returns a Nil_Element_List if there are no exception_handler elements.
+Returns Nil_Element_List if there are no exception_handler elements.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
@@ -719,7 +719,7 @@ statement to query.
 
 Returns the name of the exited loop.
 
-Returns a Nil_Element if no loop name is present.
+Returns Nil_Element if no loop name is present.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
@@ -758,7 +758,7 @@ statement to query.
 
 Returns the @key[when] condition of the exit statement.
 
-Returns a Nil_Element if no condition is present.
+Returns Nil_Element if no condition is present.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
@@ -832,7 +832,7 @@ statement to query.
 
 Returns the expression in the return statement.
 
-Returns a Nil_Element if no expression is present.
+Returns Nil_Element if no expression is present.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
@@ -916,7 +916,7 @@ statement, in their order of appearance.
 ]}
 
 @ChgAdded{Version=[2],Text=[
-Returns a Nil_Element_List if the argument extended return statement does
+Returns Nil_Element_List if the argument extended return statement does
 not include handled_sequence_of_statements.
 ]}
 
@@ -967,7 +967,7 @@ The only pragmas returned are those following the reserved word "exception"
 and preceding the reserved word "when" of first exception handler.]}
 
 @ChgAdded{Version=[2],Text=[
-Returns a Nil_Element_List if there are no exception_handler elements.]}
+Returns Nil_Element_List if there are no exception_handler elements.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
@@ -1128,7 +1128,7 @@ procedure_call_statement or entry_call_statement to query.
 Returns the declaration of the procedure or entry denoted by the call.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
-@leading@keepnext@;Returns a Nil_Element if@Chg{Version=[2],New=[],Old=[ the]}:
+@leading@keepnext@;Returns Nil_Element if@Chg{Version=[2],New=[],Old=[ the]}:
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
@@ -1152,9 +1152,9 @@ an attribute_reference, and if the corresponding
 attribute is (re)defined by an attribute definition clause, an implementation
 is encouraged, but not required, to return the definition of the corresponding
 subprogram whose name is used after @key[use] in this attribute definition
-clause. If an implementation cannot return such a subprogram definition, a
+clause. If an implementation cannot return such a subprogram definition,
 Nil_Element should be returned. For an attribute reference which is not
-(re)defined by an attribute definition clause, a Nil_Element should be returned.
+(re)defined by an attribute definition clause, Nil_Element should be returned.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
@@ -1227,7 +1227,7 @@ normalized form is desired.
 
 Returns a list of parameter_association elements of the call.
 
-Returns a Nil_Element_List if there are no parameter_association elements.
+Returns Nil_Element_List if there are no parameter_association elements.
 
 An unnormalized list contains only explicit associations ordered as they
 appear in the program text. Each unnormalized association has an optional
@@ -1322,7 +1322,7 @@ statement to query.
 
 Returns the entry index expression in the accept statement.
 
-Returns a Nil_Element if the statement has no explicit entry index,
+Returns Nil_Element if the statement has no explicit entry index,
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
@@ -1397,13 +1397,13 @@ statement to query.
 Returns a list of parameter specifications in the formal part of the accept
 statement, in their order of appearance.
 
-Returns a Nil_Element_List if the accept_statement has no parameters.
+Returns Nil_Element_List if the accept_statement has no parameters.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
-Results of this query may vary across ASIS implementations. Some
-implementations normalize all multiple name parameter specifications into an
-equivalent sequence of corresponding single name parameter specifications.
-See @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 3.3.1(7).
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
+@ChgDeleted{Version=[2],Text=[Results of this query may vary across ASIS
+implementations. Some implementations normalize all multiple name parameter
+specifications into an equivalent sequence of corresponding single name
+parameter specifications. See Reference Manual 3.3.1(7).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
@@ -1628,7 +1628,7 @@ execution path to query.
 
 Returns the conditional expression guard for the path.
 
-Returns a Nil_Element if there is no guard, or if the path is from a
+Returns Nil_Element if there is no guard, or if the path is from a
 timed_entry_call, a conditional_entry_call, or an asynchronous_select
 statement where a guard is not legal.
 
@@ -1708,7 +1708,7 @@ handler to query.
 Returns the choice parameter specification following the reserved word
 @key[when] in the exception handler.
 
-Returns a Nil_Element if there is no explicit choice parameter.
+Returns Nil_Element if there is no explicit choice parameter.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Handler expects an element
@@ -1832,7 +1832,7 @@ statement to query.
 
 Returns the expression that names the raised exception.
 
-Returns a Nil_Element if there is no explicitly named exception.
+Returns Nil_Element if there is no explicitly named exception.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Statement expects an element
@@ -1875,7 +1875,7 @@ with the raised exception and follows the @key[with] keyword in the raise
 statement.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1]}
-@ChgAdded{Version=[2],Text=[Returns a Nil_Element if there is no string
+@ChgAdded{Version=[2],Text=[Returns Nil_Element if there is no string
 expression.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1],ARef=[SI99-0028-1]}
