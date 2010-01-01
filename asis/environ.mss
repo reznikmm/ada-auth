@@ -1,6 +1,6 @@
 @Part(environ, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/environ.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2009/09/15 04:48:14 $}
+@comment{$Revision: 1.8 $ $Date: 2009/12/31 02:44:04 $}
 
 @LabeledSection{package Asis.Ada_Environments}
 
@@ -52,20 +52,20 @@ The_Context @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the Context to
 Name @Chg{Version=[1],New=[specifies],Old=[     @en Specifies]} the name for the Context association.
 Parameters @Chg{Version=[1],New=[specifies],Old=[ @en Specifies]} parameters to use when opening the Context.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0057-1]}
 @Chg{Version=[2],New=[Procedure Associate is used],Old=[Used]}
-to give name and parameter associations to a Context. The
+to give name and parameter associations to a
+Context@Chg{Version=[2],New=[ prior to opening],Old=[]}. The
 Has_Associations query is used to test whether or not a Context has
 been given name and parameter associations. The Name and Parameters
 queries are used to examine name and parameter associations.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0057-1]}
 A Context has at most one set of name/parameter values associated with
-it at any time. @Chg{Version=[2],New=[If The_Context is not open then any
-previous Name and Parameters],Old=[Name and parameter associations
-cannot be modified while a Context is open  Previous name and parameters]}
-associations@Chg{Version=[2],New=[],Old=[ for this Context]} are replaced by
-this call.
+it at any time. @Chg{Version=[2],New=[A call on Associate will replace any
+prior name/parameter values with the given Name and Parameters],Old=[Name and parameter associations
+cannot be modified while a Context is open  Previous name and parameters
+associations for this Context are replaced by this call]}.
 
 ASIS implementations are encouraged, but not required, to validate the
 Parameters string immediately. It is recognized that some options cannot
@@ -174,11 +174,14 @@ compilation units@Chg{Version=[2],New=[, and returns False otherwise],Old=[]}.
 The Context @Chg{Version=[2],New=[objects],Old=[variables]} may be open
 or closed.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0057-1]}
 Unless both Contexts are open, this operation is implemented as a pair of
 simple string comparisons between the Name and Parameter associations for
 the two Contexts. If both Contexts are open, this operation acts as a
-set comparison and returns True if both sets contain the same units (all
-unit versions are included in the comparison).
+set comparison and returns True if both sets contain the same
+units@Chg{Version=[2],New=[, where two compilation units are the same
+when Is_Equal on the corresponding Compilation_Units returns True],Old=[ (all
+unit versions are included in the comparison)]}.
 @end{DescribeCode}
 
 @begin{UsageNote}
@@ -194,6 +197,11 @@ version of the implementor Context,
 
 ASIS program A opens the Right Context for READ, and gets the new version.
 @end{Enumerate}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[In particular, the versions (and possibly
+compilation status) of the units matter in the comparison. That makes this
+a potentially expensive operation.]}
 @end{UsageNote}
 
 

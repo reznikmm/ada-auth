@@ -1,10 +1,10 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2009/12/23 06:58:59 $}
+@Comment{$Date: 2009/12/31 02:44:04 $}
 @LabeledAddedNormativeAnnex{Version=[2],Name=[Obsolescent Features]}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/obsolescent.mss,v $}
-@comment{$Revision: 1.13 $}
+@comment{$Revision: 1.14 $}
 
 @LabeledAddedClause{Version=[2],Name=[Annex Contents]}
 
@@ -699,6 +699,94 @@ not recommended in new programs.]}
 @end{DescribeCode}
 
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0057-1]}
+@LabeledAddedSubclause{Version=[2],Name=[function Enclosing_Element (with expected parameter)]}
+@begin{DescribeCode}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[The behavior of this function is not portable; use
+the one parameter version of Enclosing_Element (see
+@RefSecNum{function Enclosing_Element}) instead. Use of the two parameter
+version of function Enclosing_Element is not recommended in new programs.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Enclosing_Element} (Element                    : @key[in] Asis.Element;
+                            Expected_Enclosing_Element : @key[in] Asis.Element)
+                        @key[return] Asis.Element;]}
+
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[Element specifies the element to query.
+Expected_Enclosing_Element specifies an enclosing element expected to contain
+the element; the interpretation of this parameter is implementation-defined.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[Returns the Element that immediately encloses the
+given element. This query is intended to exactly reverse any single
+parent-to-child element traversal. For any structural query that returns a
+subcomponent of an element (or that returns a list of subcomponent elements),
+the original element can be determined by passing the subcomponent element to
+this query.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns Nil_Element if:]}
+@begin{Itemize}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[the element is the declaration part of a
+  compilation unit (Unit_Declaration).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[the element is with clause or use clause of a
+  context clause (Context_Clause_Elements).]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgAdded{Version=[2],Text=[the element is a pragma for a compilation unit
+  (Compilation_Pragmas and Context_Clause_Elements).]}
+@end{Itemize}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[Use Enclosing_Compilation_Unit to get the enclosing
+compilation unit for any element value other than Nil_Element.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element if the Element is
+Nil_Element.]}
+
+@end{DescribeCode}
+@begin{UsageNote}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[The original intent of the second parameter was
+described as follows (we do not try to normatively describe this intent):]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[The Expected_Enclosing_Element parameter is used
+only to optimize this query. This speed up is only present for ASIS
+implementations where the underlying implementor's environment does not have
+"parent pointers". For these implementations, this query is implemented as a
+"search". The Enclosing_Compilation_Unit is searched for the argument Element.
+The Expected_Enclosing_Element parameter provides a means of shortening the
+search. Note: If the argument Element is not a sub-element of the
+Expected_Enclosing_Element parameter, or if the Expected_Enclosing_Element is
+Nil_Element, the result of the call is Nil_Element.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Implementations that do not require the
+Expected_Enclosing_Element parameter may ignore it. They are encouraged, but not
+required, to test the Expected_Enclosing_Element parameter and to determine if
+it is an invalid Element value (its associated Environment Context may be
+closed).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Portable applications should not use the
+Expected_Enclosing_Element parameter since it can lead to unexpected differences
+when porting an application between ASIS implementations where one
+implementation uses the parameter and the other implementation does not. Passing
+a "wrong" Expected_Enclosing_Element to an implementation that ignores it, is
+harmless. Passing a "wrong" Expected_Enclosing_Element to an implementation that
+may utilize it, can lead to an unexpected Nil_Element result.]}
+@end{UsageNote}
 
 
 @ChgNote{SI99-0027-1 add chapter on newly obsolete subprograms}

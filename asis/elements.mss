@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.21 $ $Date: 2009/12/23 06:58:59 $}
+@comment{$Revision: 1.22 $ $Date: 2009/12/31 02:44:04 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -436,28 +436,28 @@ False otherwise.]}
 
 @ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Declaration_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Formal_Procedure_Declaration
-  A_Formal_Function_Declaration
-  A_Function_Declaration
-  A_Private_Type_Declaration
-  A_Private_Extension_Declaration
-  A_Procedure_Declaration
-  A_Type_Declaration]}
+@ChgAdded{Version=[2], Text=[A_Formal_Procedure_Declaration
+A_Formal_Function_Declaration
+A_Function_Declaration
+An_Ordinary_Type_Declaration
+A_Private_Type_Declaration
+A_Private_Extension_Declaration
+A_Procedure_Declaration]}
 @end{Display}
 
 @ChgAdded{Version=[2], Text=[or an element that has one of the following Definition_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Private_Extension_Definition
-  A_Private_Type_Definition
-  A_Tagged_Private_Type_Definition
-  A_Type_Definition]}
+@ChgAdded{Version=[2], Text=[A_Private_Extension_Definition
+A_Private_Type_Definition
+A_Tagged_Private_Type_Definition
+A_Type_Definition]}
 @end{Display}
 
 @ChgAdded{Version=[2], Text=[or an element that has one of the following Formal_Type_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Formal_Private_Type_Definition
-  A_Formal_Tagged_Private_Type_Definition
-  A_Formal_Derived_Type_Definition]}
+@ChgAdded{Version=[2], Text=[A_Formal_Private_Type_Definition
+A_Formal_Tagged_Private_Type_Definition
+A_Formal_Derived_Type_Definition]}
 @end{Display}
 @end{DescribeCode}
 
@@ -541,15 +541,15 @@ Nil_Element.]}
 
 @ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Declaration_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Constant_Declaration
-  A_Deferred_Constant_Declaration
-  A_Return_Object_Specification
-  A_Variable_Declaration]}
+@ChgAdded{Version=[2], Text=[A_Constant_Declaration
+A_Deferred_Constant_Declaration
+A_Return_Object_Specification
+A_Variable_Declaration]}
 @end{Display}
 
 @ChgAdded{Version=[2], Text=[or an element that has the following Definition_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Component_Definition]}
+@ChgAdded{Version=[2], Text=[A_Component_Definition]}
 @end{Display}
 @end{DescribeCode}
 
@@ -573,30 +573,29 @@ False otherwise.]}
 
 @ChgAdded{Version=[2], Text=[Element expects an element that has the following Clause_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_With_Clause]}
+@ChgAdded{Version=[2], Text=[A_With_Clause]}
 @end{Display}
 
 @ChgAdded{Version=[2], Text=[or an element that has one of the following Declaration_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Type_Declaration
-  A_Private_Type_Declaration
-  A_Private_Extension_Declaration]}
+@ChgAdded{Version=[2], Text=[An_Ordinary_Type_Declaration
+A_Private_Type_Declaration
+A_Private_Extension_Declaration]}
 @end{Display}
 
 @ChgAdded{Version=[2], Text=[or an element that has one of the following Definition_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Type_Definition
-  A_Private_Type_Definition
-  A_Tagged_Private_Type_Definition
-  A_Private_Extension_Definition
-  An_Interface_Type_Definition]}
+@ChgAdded{Version=[2], Text=[A_Type_Definition
+A_Private_Type_Definition
+A_Tagged_Private_Type_Definition
+A_Private_Extension_Definition]}
 @end{Display}
 
 @ChgAdded{Version=[2], Text=[or an element that has one of the following Formal_Type_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Formal_Private_Type_Definition
-  A_Formal_Tagged_Private_Type_Definition
-  A_Formal_Derived_Type_Definition]}
+@ChgAdded{Version=[2], Text=[A_Formal_Private_Type_Definition
+A_Formal_Tagged_Private_Type_Definition
+A_Formal_Derived_Type_Definition]}
 @end{Display}
 @end{DescribeCode}
 
@@ -619,27 +618,27 @@ False otherwise.]}
 
 @ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Declaration_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Type_Declaration
-  A_Private_Type_Declaration]}
+@ChgAdded{Version=[2], Text=[A_Private_Extension_Declaration
+A_Private_Type_Declaration]}
 @end{Display}
 
 @ChgAdded{Version=[2], Text=[or an element that has one of the following Definition_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Private_Extension_Definition
-  A_Private_Type_Definition
-  A_Tagged_Private_Type_Definition
-  A_Type_Definition]}
+@ChgAdded{Version=[2], Text=[A_Private_Extension_Definition
+A_Private_Type_Definition
+A_Tagged_Private_Type_Definition
+A_Type_Definition]}
 @end{Display}
 
 @ChgAdded{Version=[2], Text=[or an element that has one of the following Formal_Type_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Formal_Private_Type_Definition
-  A_Formal_Tagged_Private_Type_Definition]}
+@ChgAdded{Version=[2], Text=[A_Formal_Private_Type_Definition
+A_Formal_Tagged_Private_Type_Definition]}
 @end{Display}
 
 @ChgAdded{Version=[2], Text=[or an element that has the following Clause_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_With_Clause]}
+@ChgAdded{Version=[2], Text=[A_With_Clause]}
 @end{Display}
 @end{DescribeCode}
 
@@ -660,17 +659,21 @@ False otherwise.]}
 
 @ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including Nil_Element.]}
 
-@ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Definition_Kinds:]}
+@ChgAdded{Version=[2], Text=[Element expects an element that has the following Definition_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  An_Interface_Type_Definition
-  A_Protected_Definition]}
+@ChgAdded{Version=[2], Text=[A_Protected_Definition]}
+@end{Display}
+
+@ChgAdded{Version=[2], Text=[or an element that has the following Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[An_Interface_Type_Definition]}
 @end{Display}
 
 @ChgAdded{Version=[2], Text=[or an element that has one of the following Declaration_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Protected_Body_Declaration
-  A_Protected_Type_Declaration
-  A_Single_Protected_Declaration]}
+@ChgAdded{Version=[2], Text=[A_Protected_Body_Declaration
+A_Protected_Type_Declaration
+A_Single_Protected_Declaration]}
 @end{Display}
 @end{DescribeCode}
 
@@ -693,7 +696,7 @@ False otherwise.]}
 
 @ChgAdded{Version=[2], Text=[Element expects an element that has the following Declaration_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Loop_Parameter_Specification]}
+@ChgAdded{Version=[2], Text=[A_Loop_Parameter_Specification]}
 @end{Display}
 @end{DescribeCode}
 
@@ -715,11 +718,16 @@ appears in Element, and False otherwise.]}
 @ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including
 Nil_Element.]}
 
-@ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Definition_Kinds:]}
+@ChgAdded{Version=[2], Text=[Element expects an element that has the following Definition_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  An_Interface_Type_Definition
-  A_Private_Extension_Definition]}
+@ChgAdded{Version=[2], Text=[A_Private_Extension_Definition]}
 @end{Display}
+
+@ChgAdded{Version=[2], Text=[or an element that has the following Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[An_Interface_Type_Definition]}
+@end{Display}
+
 @end{DescribeCode}
 
 
@@ -741,19 +749,18 @@ False otherwise.]}
 
 @ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Definition_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Tagged_Incomplete_Type_Definition
-  A_Tagged_Private_Type_Definition
-  A_Tagged_Record_Type_Definition]}
+@ChgAdded{Version=[2], Text=[A_Tagged_Incomplete_Type_Definition
+A_Tagged_Private_Type_Definition]}
 @end{Display}
 
 @ChgAdded{Version=[2], Text=[or an element that has the following Type_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Tagged_Record_Type_Definition]}
+@ChgAdded{Version=[2], Text=[A_Tagged_Record_Type_Definition]}
 @end{Display}
 
 @ChgAdded{Version=[2], Text=[or an element that has the following Formal_Type_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Formal_Tagged_Private_Type_Definition]}
+@ChgAdded{Version=[2], Text=[A_Formal_Tagged_Private_Type_Definition]}
 @end{Display}
 @end{DescribeCode}
 
@@ -775,17 +782,21 @@ False otherwise.]}
 
 @ChgAdded{Version=[2], Text=[Returns False for any unexpected element, including Nil_Element.]}
 
-@ChgAdded{Version=[2], Text=[Element expects an element that has one of the following Definition_Kinds:]}
+@ChgAdded{Version=[2], Text=[Element expects an element that has the following Definition_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  An_Interface_Type_Definition
-  A_Task_Definition]}
+@ChgAdded{Version=[2], Text=[A_Task_Definition]}
+@end{Display}
+
+@ChgAdded{Version=[2], Text=[or an element that has the following Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[An_Interface_Type_Definition]}
 @end{Display}
 
 @ChgAdded{Version=[2], Text=[or an element that has one of the following Declaration_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2], Text=[  A_Task_Type_Declaration
-  A_Single_task_Declaration
-  A_Task_Body_Declaration]}
+@ChgAdded{Version=[2], Text=[A_Task_Type_Declaration
+A_Single_task_Declaration
+A_Task_Body_Declaration]}
 @end{Display}
 @end{DescribeCode}
 
@@ -813,6 +824,48 @@ Nil_Element, A_Definition, or A_Clause.
 that has the following],Old=[Expected]} Element_Kinds:
 @begin{Display}
 A_Declaration
+@end{Display}
+@end{DescribeCode}
+
+
+@ChgNote{ SI99-0003-1, SI99-0057-1 }
+@LabeledAddedClause{Version=[2],Name=[function Overriding_Indicator_Kind]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0003-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Overriding_Indicator_Kind} -- @examcom{8.3.1 (2)}
+        (Declaration : @key[in] Asis.Declaration)
+        @key[return] Overriding_Indicator_Kinds;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Declaration specifies the subprogram declaration
+to query.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Returns the kind of Overriding_Indicator for the
+subprogram declaration.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Returns Not_An_Overriding_Indicator for any
+unexpected Element.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0003-1],ARef=[SI99-0028-1],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
+Declaration expects an element that has one of the following Declaration_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Procedure_Declaration
+A_Function_Declaration
+A_Procedure_Body_Declaration
+A_Function_Body_Declaration
+A_Procedure_Renaming_Declaration
+A_Function_Renaming_Declaration
+An_Entry_Declaration
+A_Procedure_Body_Stub
+A_Function_Body_Stub
+A_Procedure_Instantiation
+A_Function_Instantiation ]}
 @end{Display}
 @end{DescribeCode}
 
@@ -969,6 +1022,13 @@ Nil_Element, A_Statement, or A_Declaration.
 that has the following],Old=[Expected]} Type_Kinds:
 @begin{Display}
 An_Access_Type_Definition
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[or Element expects an
+element that has the following Formal_Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2], Text=[A_Formal_Access_Type_Definition]}
 @end{Display}
 @end{DescribeCode}
 
@@ -1621,9 +1681,12 @@ encountered while traversing a generic instance.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0007-1]}
 @ChgAdded{Version=[2],Text=[Call specifies the call to query.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0007-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0007-1],ARef=[SI99-0057-1]}
 @ChgAdded{Version=[2],Text=[Returns True if the prefix of the call is a prefixed view of the
-subprogram (see Ada Standard 4.1.3(9.2/2)), and returns False otherwise.]}
+subprogram (see Ada Standard 4.1.3(9.2/2)).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[Returns False for any other element including Nil_Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0007-1]}
 @ChgAdded{Version=[2],Text=[Call expects an element that has the following Statement_Kinds:]}
@@ -1636,10 +1699,6 @@ subprogram (see Ada Standard 4.1.3(9.2/2)), and returns False otherwise.]}
 @begin{Display}
 @ChgAdded{Version=[2], Text=[A_Function_Call]}
 @end{Display}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0007-1]}
-@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status of Value_Error for any
-element that does not have one of these expected kinds.]}
 @end{DescribeCode}
 
 
@@ -1742,14 +1801,16 @@ an abstract subprogram (including renames).]}
 @begin{Example}
 @key[function] @AdaSubDefn{Enclosing_Element} (Element : @key[in] Asis.Element) @key[return] Asis.Element;
 
-@key[function] @AdaSubDefn{Enclosing_Element} (Element                    : @key[in] Asis.Element;
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0057-1]}
+@ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Enclosing_Element} (Element                    : @key[in] Asis.Element;
                             Expected_Enclosing_Element : @key[in] Asis.Element)
-                        @key[return] Asis.Element;
+                        @key[return] Asis.Element;]}
 @end{Example}
 
-Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to query.
-Expected_Enclosing_Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} an enclosing element expected to
-contain the element.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0057-1]}
+Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the element to
+query.@Chg{Version=[2],New=[],Old=[ Expected_Enclosing_Element @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} an enclosing element expected to
+contain the element.]}
 
 Returns the Element that immediately encloses the given element. This
 query is intended to exactly reverse any single parent-to-child element
@@ -1805,7 +1866,8 @@ New=[Ada Standard],Old=[Reference Manual]} 10.1.1(19).
 @end{Examples}
 
 @begin{UsageNote}
-The optional Expected_Enclosing_Element parameter is used only to optimize
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0057-1]}
+@ChgDeleted{Version=[2],Text=[The optional Expected_Enclosing_Element parameter is used only to optimize
 this query. This speed up is only present for ASIS implementations
 where the underlying implementor's environment does not have "parent
 pointers". For these implementations, this query is implemented as a
@@ -1815,21 +1877,24 @@ shortening the search.
 Note: If the argument Element is not a sub-element of the
 Expected_Enclosing_Element parameter, or if the
 Expected_Enclosing_Element is Nil_Element, the result of the
-call is Nil_Element.
+call is Nil_Element.]}
 
-Implementations that do not require the Expected_Enclosing_Element
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[Implementations that do not require the Expected_Enclosing_Element
 parameter may ignore it. They are encouraged, but not required, to test
 the Expected_Enclosing_Element parameter and to determine if it is an
-invalid Element value (its associated Environment Context may be closed)
+invalid Element value (its associated Environment Context may be closed)]}
 
-Portable applications should not use the Expected_Enclosing_Element
-parameter since it can lead to unexpected differences when porting an
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[Portable applications should not use
+the Expected_Enclosing_Element parameter since it can lead to unexpected
+differences when porting an
 application between ASIS implementations where one implementation uses
 the parameter and the other implementation does not. Passing a "wrong"
 Expected_Enclosing_Element to an implementation that ignores it, is
 harmless. Passing a "wrong" Expected_Enclosing_Element to an
 implementation that may utilize it, can lead to an unexpected
-Nil_Element result.
+Nil_Element result.]}
 @end{UsageNote}
 
 

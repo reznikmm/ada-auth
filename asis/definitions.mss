@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.20 $ $Date: 2009/12/23 06:58:59 $}
+@comment{$Revision: 1.21 $ $Date: 2009/12/31 02:44:03 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -1081,16 +1081,22 @@ the anonymous access definition to query.]}
 @ChgAdded{Version=[2],Text=[Returns the subtype_mark following the reserved
 word(s) @key[access] or @key[access constant].]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1],ARef=[SI99-0028-1],ARef=[SI99-0057-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Definition expects an element
-that has one of the following Definition_Kinds:]}
+that has the following Definition_Kinds:]}
 @begin{Display}
-@ChgAdded{Version=[2],Text=[A_Pool_Specific_Access_To_Variable
-An_Access_To_Variable
-An_Access_To_Constant
-An_Access_Definition that has one of the following Access_Definition_Kinds:
+@ChgAdded{Version=[2],Text=[An_Access_Definition that has one of the following Access_Definition_Kinds:
    An_Anonymous_Access_To_Variable
    An_Anonymous_Access_To_Constant]}
+@end{Display}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[or expects an element
+that has the following Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[An_Access_Type_Definition that has one of the following Access_Type_Kinds:
+   A_Pool_Specific_Access_To_Variable
+   An_Access_To_Variable
+   An_Access_To_Constant]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
@@ -2380,13 +2386,14 @@ query.]}
 @ChgAdded{Version=[2],Text=[Returns a list of subtype marks making up the
 interface_list in the argument definition, in their order of appearance.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1],ARef=[SI99-0028-1],ARef=[SI99-0057-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[Type_Definition
 expects an element that has one of the following Type_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[A_Derived_Record_Extension_Definition
-An_Interface_Type_Definition]}
+An_Interface_Type_Definition
+A_Private_Extension_Definition]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1],ARef=[SI99-0028-1]}

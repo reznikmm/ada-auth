@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.23 $ $Date: 2009/12/23 06:58:59 $}
+@comment{$Revision: 1.24 $ $Date: 2009/12/31 02:44:03 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -664,15 +664,11 @@ argument is not the name of a constant or a deferred constant.
 The name of a constant declaration is available from both the Names and the
 Corresponding_Name_Definition queries.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;@Chg{Version=[2],New=[Name expects an element
-that has the following],Old=[Appropriate]} Element_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[SI99-0057-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Element_Kinds:]}
 @begin{Display}
-@ChgRef{Version=[2],Kind=[Revised]}
-A_Defining_Name@Chg{Version=[2],New=[ that has one of the following Declaration_Kinds:
-    Not_A_Declaration
-    A_Constant_Declaration
-    A_Deferred_Constant_Declaration],Old=[]}
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Defining_Name]}
 @end{Display}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
@@ -684,17 +680,21 @@ A_Constant_Declaration
 A_Deferred_Constant_Declaration]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+@Comment{The following is uniquely formatted; it will not (and should not)
+get updated by a global substitution}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status of
+Value_Error Value_Error if element Name has an Element_Kind is not
+A_Defining_Name or if element Name does not designate a constant declaration.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0057-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
 one of the following],Old=[]} Element_Kinds:
 @begin{Display}
 Not_An_Element
-A_Declaration
+A_Declaration@Chg{Version=[2],New=[ that has one of the following Declaration_Kinds:
+   A_Constant_Declaration
+   A_Deferred_Constant_Declaration],Old=[]}
 A_Pragma
 @end{Display}
 @end{DescribeCode}
@@ -2149,11 +2149,6 @@ one of the following],Old=[Expected]} Declaration_Kinds:
 A_Generic_Package_Declaration
 A_Package_Declaration
 @end{Display}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
 @end{DescribeCode}
 
 
@@ -3409,14 +3404,14 @@ A_Function_Instantiation],Old=[]}
 @end{Example}
 
 
-@ChgNote{ SI99-006-1 }
+@ChgNote{ SI99-0006-1 }
 @LabeledAddedClause{Version=[2],Name=[function Progenitor_List (declaration)]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0006-1],ARef=[SI99-0057-1]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Progenitor_List}
-     (Declaration : @key[in] Asis.Definition)
+     (Declaration : @key[in] Asis.Declaration)
       @key[return] Asis.Name_List;]}
 @end{Example}
 
@@ -3450,49 +3445,6 @@ of elements that each have one of the following Expression_Kinds:]}
 @begin{Display}
 @ChgAdded{Version=[2],Text=[An_Identifier
 A_Selected_Component]}
-@end{Display}
-@end{DescribeCode}
-
-
-@ChgNote{ SI99-0003-1 }
-@LabeledAddedClause{Version=[2],Name=[function Overriding_Indicator_Kind]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0003-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Overriding_Indicator_Kind} -- @examcom{8.3.1 (2)}
-	(Declaration : @key[in] Asis.Declaration)
-        @key[return] Overriding_Indicator_Kinds;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Declaration specifies the subprogram declaration
-to query.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Returns the kind of Overriding_Indicator for the
-subprogram declaration.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Returns Not_An_Overriding_Indicator for any
-unexpected Element.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0003-1],ARef=[SI99-0028-1]}
-@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
-Declaration expects an element that has one of the following Declaration_Kinds:]}
-@begin{Display}
-@ChgAdded{Version=[2],Text=[A_Procedure_Declaration
-A_Function_Declaration
-A_Procedure_Body_Declaration
-A_Function_Body_Declaration
-A_Null_Procedure_Declaration
-A_Procedure_Renaming_Declaration
-A_Function_Renaming_Declaration
-An_Entry_Declaration
-A_Procedure_Body_Stub
-A_Function_Body_Stub
-A_Procedure_Instantiation
-A_Function_Instantiation ]}
 @end{Display}
 @end{DescribeCode}
 

@@ -1,6 +1,6 @@
 @Part(text, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/text.mss,v $}
-@comment{$Revision: 1.10 $ $Date: 2009/12/23 06:58:59 $}
+@comment{$Revision: 1.11 $ $Date: 2009/12/31 02:44:04 $}
 
 @LabeledSection{package Asis.Text}
 
@@ -706,7 +706,9 @@ such as renaming, deletion, or moving of text.
 @end{DescribeCode}
 
 @begin{ImplReq}
-An implementation shall make text available for all explicit elements.
+An implementation shall make text available for all explicit
+elements@Chg{Version=[2],New=[ if text exists for the enclosing compilation
+(see the Ada Standard 10.1(2)],Old=[]}.
 @end{ImplReq}
 
 @LabeledClause{function Debug_Image (line)}
