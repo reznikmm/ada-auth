@@ -1,6 +1,6 @@
 @Part(ids, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/semant.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2010/01/01 04:20:44 $}
+@comment{$Revision: 1.7 $ $Date: 2010/01/12 04:43:16 $}
 
 @LabeledAddedSection{Version=[2],Name=[ASIS Semantic Subsystem]}
 
@@ -145,39 +145,36 @@ subclauses.]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
 @ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{View_Kinds} @key[is] (
-   An_Exception,
-   An_Exception_Renaming,]}
+   A_Boolean_Subtype,
+   A_Character_Subtype,
+   An_Ordinary_Enumeration_Subtype,
+   A_Signed_Integer_Subtype,
+   A_Modular_Integer_Subtype,
+   An_Ordinary_Fixed_Subtype,
+   A_Decimal_Fixed_Subtype,
+   A_Float_Subtype,
+   An_Access_To_Object_Subtype,
+   An_Access_To_Subprogram_Subtype,]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   A_Generic_Package,
-   A_Generic_Package_Renaming,
-   A_Generic_Subprogram,
-   A_Generic_Subprogram_Renaming,]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[   An_Array_Subtype,
+   A_Record_Subtype,
+   A_Record_Extension,
+   A_Task_Subtype,
+   A_Protected_Subtype,
+   An_Interface,]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   A_Noninstance_Package,
-   A_Package_Instance,
-   A_Package_Renaming,
-   A_Limited_Package_View,]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[   A_Private_Subtype,
+   A_Private_Extension,]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   A_Noninstance_Subprogram,
-   A_Subprogram_Instance,
-   A_Subprogram_Renaming,
-   A_Protected_Subprogram,
-   An_Imported_Subprogram,
-   An_Attribute_Subprogram,
-   An_Intrinsic_Subprogram,
-   A_Designated_Subprogram,
-   A_Generic_Formal_Subprogram,
-   A_Protected_Entry,
-   A_Task_Entry,]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[   An_Incomplete_Subtype,]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
 @ChgAdded{Version=[2],Text=[   A_Standalone_Object,
-   A_Generic_Formal_Object,
    A_Formal_Parameter_Object,
    An_Object_Renaming,
    A_Designated_Object,
@@ -189,63 +186,64 @@ subclauses.]}
    An_Attribute_Value,
    An_Expression_Value,]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   A_Boolean_Subtype,
-   A_Character_Subtype,
-   An_Ordinary_Enumeration_Subtype,
-   A_Signed_Integer_Subtype,
-   A_Modular_Integer_Subtype,
-   An_Ordinary_Fixed_Subtype,
-   A_Decimal_Fixed_Subtype,
-   A_Float_Subtype,
-   An_Access_To_Object_Subtype,
-   An_Access_To_Subprogram_Subtype,]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[   A_Noninstance_Subprogram,
+   A_Subprogram_Instance,
+   A_Subprogram_Renaming,
+   A_Protected_Subprogram,
+   An_Imported_Subprogram,
+   An_Attribute_Subprogram,
+   An_Intrinsic_Subprogram,
+   A_Designated_Subprogram,
+   A_Protected_Entry,
+   A_Task_Entry,]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   An_Array_Subtype,
-   A_Record_Subtype,
-   A_Record_Extension,
-   A_Task_Subtype,
-   A_Protected_Subtype,
-   An_Interface,]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[   A_Noninstance_Package,
+   A_Package_Instance,
+   A_Package_Renaming,
+   A_Limited_Package_View,]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   A_Private_Subtype,
-   A_Private_Extension,]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[   A_Generic_Package,
+   A_Generic_Package_Renaming,
+   A_Generic_Subprogram,
+   A_Generic_Subprogram_Renaming,]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   An_Incomplete_Subtype,]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[   An_Exception,
+   An_Exception_Renaming,]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[   A_Label_Statement_View,
    A_Block_Statement_View,
    A_Loop_Statement_View);]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Exception_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds
-   @key[range] An_Exception .. An_Exception_Renaming;]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Generic_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds
-   @key[range] A_Generic_Package .. A_Generic_Subprogram_Renaming;]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Callable_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds
-   @key[range] A_Noninstance_Subprogram .. A_Task_Entry;]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Object_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds
-   @key[range] A_Standalone_Object .. An_Expression_Value;]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
 @ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Subtype_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds
    @key[range] A_Boolean_Subtype .. An_Incomplete_Subtype;]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Object_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds
+   @key[range] A_Standalone_Object .. An_Expression_Value;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Callable_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds
+   @key[range] A_Noninstance_Subprogram .. A_Task_Entry;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
 @ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Package_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds @key[range]
    A_Noninstance_Package..A_Limited_Package_View;]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Generic_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds
+   @key[range] A_Generic_Package .. A_Generic_Subprogram_Renaming;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Exception_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds
+   @key[range] An_Exception .. An_Exception_Renaming;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[@key[subtype] @AdaSubtypeDefn{Name=[Statement_View_Kinds],Of=[View_Kinds]} @key[is] View_Kinds @key[range]
    A_Label_Statement_View .. A_Loop_Statement_View;]}
 
@@ -260,29 +258,29 @@ by the type View_Kind. Subranges of this enumeration type are defined to
 correspond to the extensions of the View type.]}
 
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Kind} (V : View) @key[return] View_Kinds @key[is abstract];]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Exception} (V : View) @key[return] Boolean @key[is abstract];]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Subtype} (V : View'Class) @key[return] Boolean;]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Generic} (V : View) @key[return] Boolean @key[is abstract];]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Object_Or_Value} (V : View'Class) @key[return] Boolean;]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Package} (V : View) @key[return] Boolean @key[is abstract];]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Callable} (V : View'Class) @key[return] Boolean;]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Callable} (V : View) @key[return] Boolean @key[is abstract];]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Package} (V : View'Class) @key[return] Boolean;]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Object_Or_Value} (V : View) @key[return] Boolean @key[is abstract];]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Generic} (V : View'Class) @key[return] Boolean;]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Subtype} (V : View) @key[return] Boolean @key[is abstract];]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Exception} (V : View'Class) @key[return] Boolean;]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Statement} (V : View) @key[return] Boolean @key[is abstract];]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Statement} (V : View'Class) @key[return] Boolean;]}
 
 @end{Example}
 
@@ -377,7 +375,9 @@ Convention_Identifier returns "Intrinsic", "Ada", "Protected", or "Entry" when
 function Convention returns the corresponding value of type Conventions. When
 Convention returns Other_Convention, Convention_Identifier returns the
 convention identifier given in the pragma Convention, Import, or Export used to
-specify the convention of the entity.]}
+specify the convention of the entity; the case of the result of this function is
+implemention-defined, but returning results in the same case as was used in the
+original compilation text is preferred.]}
 @end{DescribeCode}
 
 
@@ -608,7 +608,7 @@ Other kinds of regions may have multiple region parts.]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Defining_Construct} (R : Declarative_Region)
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Element_Defining_Region} (R : Declarative_Region)
    @key[return] Asis.Element;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -631,8 +631,9 @@ Other kinds of regions may have multiple region parts.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Declarative regions are generally associated with
-language constructs, and may be nested. Function Defining_Construct returns the
-Asis.Element with which the declarative region R is associated.]}
+language constructs, and may be nested. Function Element_Defining_Region
+returns the Asis.Element for the construct that defines the declarative
+region R.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Function Has_Defining_Declaration returns True if
@@ -1202,6 +1203,15 @@ subtype can be determined with the above functions. S specifies the view of a
 subtype to query for each of these functions.]}
 @end{DescribeCode}
 
+@begin{SingleNote}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[The characteristics of a subtype view depend on the
+location of the view; different views of the same subtype can get different
+answers from these functions. In particular, these functions respect privacy, so
+the characteristics can change depending on the visibility of the full view of
+the subtype.]}
+@end{SingleNote}
+
 
 @LabeledAddedSubClause{Version=[2],Name=[Types, Subtypes, and Constraints]}
 
@@ -1387,29 +1397,65 @@ the type of the subtype S is a descendant of the type of the subtype
 Of_Subtype.]}
 
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Ultimate_Ancestor} (S : Subtype_View)
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Ultimate_Ancestors} (S : Subtype_View)
+   @key[return] Subtype_Vector @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[S specifies the view of a subtype to query.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[Function Ultimate_Ancestors returns all of the
+ancestors of the subtype S that are not themselves a descendant of any other
+type; the list will just be the type itself if Is_Derived (S) returns False and
+Progenitors (S) (see @RefSecNum{Tagged Subtypes}) returns an empty vector.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Root_Noninterface_Ancestor} (S : Subtype_View)
    @key[return] Subtype_View'Class @key[is abstract];]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
 @ChgAdded{Version=[2],Text=[S specifies the view of a subtype to query.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Ultimate_Ancestor returns an ancestor of
-the subtype S that is not itself a descendant of any other type; it will be the
-type itself if Is_Derived (S) returns False and Progenitors (S) (see
-@RefSecNum{Tagged Subtypes}) returns an empty vector. If there are multiple such
-ancestors, Ultimate_Ancestor returns the one that is not an interface type, if
-there is one. If all of the ultimate ancestors are interfaces, Ultimate_Ancestor
-returns an unspecified one.]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[Function Root_Noninterface_Ancestor raises
+Asis_Inappropriate_View if S is composite and Is_Interface (S) (see
+@RefSecNum{Tagged Subtypes}) is True. Otherwise, it returns the noninterface
+ancestor of the subtype S that is not itself a descendant of any other type; it
+will be the type itself if Is_Derived (S) returns False returns False.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Full_View_Root_Noninterface_Ancestor} (S : Subtype_View)
+   @key[return] Subtype_View'Class @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[S specifies the view of a subtype to query.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[Function Full_View_Root_Noninterface_Ancestor raises
+Asis_Inappropriate_View if S is composite and Is_Interface (S) (see
+@RefSecNum{Tagged Subtypes}) is True. Otherwise, it returns the full view of the
+noninterface ancestor of the subtype S that is not itself a descendant of any
+other type.]}
 
 @begin{SingleNote}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Ultimate_Ancestor may stop on an
-incomplete or partial view. If the ultimate full view is needed, call Full_View
-on the result of Ultimate_Ancestor.]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[Function Root_Noninterface_Ancestor may stop on an
+incomplete or partial view. If the ultimate full view is needed, call
+Full_View_Noninterface_Ancestor instead.]}
 @end{SingleNote}
+@begin{UsageNote}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[The Full_View of the Root_Noninterface_Ancestor may be a
+derived type; Full_View_Root_Noninterface_Ancestor keeps going until the full
+view of an ancestor that has no non-interface ancestor.]}
+@end{UsageNote}
+
 @end{DescribeCode}
 
 
@@ -1461,7 +1507,7 @@ view is the private type.]}
 @end{DescribeCode}
 
 
-@LabeledAddedSubClause{Version=[2],Name=[Subtype Aspects]}
+@LabeledAddedSubClause{Version=[2],Name=[Representation and Operational Subtype Aspects]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1483,7 +1529,29 @@ Is_Aspect_Specified (S, Size) returns True. The result is
 implementation-defined in other cases, and may be
 ASIS_Natural'Last. Function Subtype_Alignment returns the same value as the
 Alignment attribute of the subtype S.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Stream_Attribute_Available} (S : Subtype_View;
+   Attribute : Views.Language_Defined_Aspect_Kinds) @key[return] Boolean @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[S specifies the view of a subtype to query.
+Attribute specifies the stream attribute of interest; if it is not
+Read, Write, Input, or Output, raises Asis_Inappropriate_View.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[Returns True if the specified attribute of the
+subtype is available for S, and False otherwise.]}
 @end{DescribeCode}
+
+@begin{SingleNote}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[Stream attribute availability depends on the
+location of the subtype view; different views of the same subtype can get
+different answers from this function.]}
+@end{SingleNote}
 
 
 @LabeledAddedSubClause{Version=[2],Name=[Subtype Holders]}
@@ -1542,20 +1610,31 @@ values, as denoted by names or expressions.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Constant_View} (O : Object_View) @key[return] Boolean @key[is abstract];]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Formal_Object} (O : Object_View)
+   @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Nominal_Subtype} (O : Object_View)
    @key[return] Subtype_View'Class @key[is abstract];]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[O specifies the view of an object to query for both
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[O specifies the view of an object to query for all
 of these functions.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Function Is_Constant_View returns True if and only
-if the object O is a constant view of an object, or is a view of a value.
-Function Nominal_Subtype returns the nominal subtype of the view.]}
+if the object O is a constant view of an object, or is a view of a value.]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Formal_Object returns True if and only
+if the object O denotes a generic formal object.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[Function Nominal_Subtype returns the nominal subtype
+of the view. Function The view is of a subtype_indication, usually all or part
+of the subtype_indication of the object_declaration.]}
 @end{DescribeCode}
 
 
@@ -1584,8 +1663,8 @@ Function Nominal_Subtype returns the nominal subtype of the view.]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Selector_Declaration} (O : Object_View)
    @key[return] View_Declaration'Class @key[is abstract];]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Component_Selected_Component} (O : Object_View) @key[return] Boolean @key[is abstract];]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Has_Storage_Place_Attributes} (O : Object_View) @key[return] Boolean @key[is abstract];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Position} (O : Object_View) @key[return] Object_View'Class @key[is abstract];]}
@@ -1619,12 +1698,12 @@ only if the view O is of a selected component. Function Selector_Declaration
 returns the declaration of the selected component O, or raises
 ASIS_Inappropriate_View if Is_Selected_Component (O) returns False.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Component_Selected_Component returns
-True if and only if the view O is of a selected component that denotes a
-component. Functions Position, First_Bit, and Last_Bit, return a view of the
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[Function Has_Storage_Place_Attributes returns
+True if and only if the view O is of a selected component that has storage
+place attributes. Functions Position, First_Bit, and Last_Bit, return a view of the
 value of a reference to the corresponding attribute of the given component O, or
-raise ASIS_Inappropriate_View if Is_Component_Selected_Component (O) returns
+raise ASIS_Inappropriate_View if Has_Storage_Place_Attributes (O) returns
 False.]}
 
 @end{DescribeCode}
@@ -2234,10 +2313,6 @@ composite subtype.]}
   @key[return] Boolean @key[is abstract];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Has_Nondiscriminant_Region_Parts} (C : Composite_Subtype)
-  @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Nondiscriminant_Region_Parts} (C : Composite_Subtype)
   @key[return] Declarative_Regions.Region_Part_List @key[is abstract];]}
 @end{Example}
@@ -2264,14 +2339,13 @@ does not have known discriminants. Function Discriminants_Have_Defaults returns
 True if and only if the subtype C has known discriminants with
 default_expressions.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Has_Nondiscriminant_Region_Parts returns
-True if and only if the subtype C is a descendant of a record type, a record
-extension, a task type, or a protected type. Function
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[Function
 Nondiscriminant_Region_Parts returns a list of Region_Parts, one for each
 separate visible region part, each comprising components, entries, and protected
 subprograms from a single list of components or items of subtype C. The returned
-list is empty if Has_Nondiscriminant_Region_Parts (C) is False.]}
+list is empty if subtype C is not a descendant of a record type, a record
+extension, a task type, or a protected type.]}
 @end{DescribeCode}
 
 
@@ -2452,7 +2526,7 @@ entities, as denoted by names or expressions.]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Subprogram} (C : Callable_View) @key[return] Boolean @key[is abstract];
 @key[function] @AdaSubDefn{Is_Enumeration_Literal} (C : Callable_View)
    @key[return] Boolean @key[is abstract];
@@ -2461,19 +2535,19 @@ entities, as denoted by names or expressions.]}
 @key[function] @AdaSubDefn{Is_Function} (C : Callable_View) @key[return] Boolean @key[is abstract];
 @key[function] @AdaSubDefn{Is_Abstract} (C : Callable_View) @key[return] Boolean @key[is abstract];
 @key[function] @AdaSubDefn{Is_Null} (C : Callable_View) @key[return] Boolean @key[is abstract];]}
+@key[function] @AdaSubDefn{Is_Formal_Subprogram} (C : Callable_View) @key[return] Boolean @key[is abstract];]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[C specifies the callable view to query for each of
 these functions.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
 @ChgAdded{Version=[2],Text=[Is_Subprogram returns True if the callable view C is
 of a subprogram (that is, C has Callable_View_kinds of A_Noninstance_Subprogram,
 A_Subprogram_Instance, A_Subprogram_Renaming, A_Protected_Subprogram,
 An_Imported_Subprogram, An_Attribute_Subprogram, An_Intrinsic_Subprogram,
-A_Designated_Subprogram, or A_Generic_Formal_Subprogram),
-and returns False otherwise.]}
+or A_Designated_Subprogram), and returns False otherwise.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Is_Enumeration_Literal returns True if the callable
@@ -2498,9 +2572,14 @@ denotes a subprogram declared by an abstract_subprogram_declaration or an
 abstract inherited subprogram, and returns False otherwise.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Is_Null returns true if the Callable_View denotes
+@ChgAdded{Version=[2],Text=[Is_Null returns True if the Callable_View denotes
 a Null Procedure, and returns False otherwise.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[Is_Formal_Subprogram returns True if the
+Callable_View denotes a generic formal subprogram, and returns False otherwise.]}
 @end{DescribeCode}
+
 @begin{SingleNote}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[A use of an enumeration literal is formally a

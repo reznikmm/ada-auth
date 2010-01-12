@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.26 $ $Date: 2009/12/23 06:58:59 $}
+@comment{$Revision: 1.27 $ $Date: 2010/01/12 04:43:16 $}
 
 @LabeledSection{package Asis}
 
@@ -139,7 +139,7 @@ The ASIS @i{Context}@Defn{Context} is a view of a particular implementation
 of an Ada environment. ASIS requires an application to identify that view of
 the Ada environment. An ASIS Context identifies an Ada environment
 as defined by @Chg{Version=[2], New=[the Ada Standard], Old=[ISO/IEC 8652:1995]}. The Ada environment is well
-defined for Ada implementations. @Chg{Version=[2], New=[the Ada Standard], Old=[ISO/IEC 8652:1995]} provides for an
+defined for Ada implementations. @Chg{Version=[2], New=[The Ada Standard], Old=[ISO/IEC 8652:1995]} provides for an
 implementation-defined method to enter compilation units into the
 Ada environment. Implementation permissions allow for illegal and
 inconsistent units to be in the environment. The use of ASIS may
