@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2009/12/18 07:15:33 $}
+@Comment{$Date: 2010/01/12 04:45:35 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.94 $}
+@Comment{$Revision: 1.95 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3804,6 +3804,19 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
 @end{Ramification}
 @end{Itemize}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0151-1]}
+@ChgAdded{Version=[3],Text=[If the @nt{subtype_mark} occurs within an
+@nt{access_to_subprogram_definition} or an @nt{access_definition} for an
+access-to-subprogram type, then the @nt{subtype_mark} shall denote a tagged
+incomplete view or the access-to-subprogram type definition shall occur within
+the declaration list immediately containing the completion of the incomplete
+view.]}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[An untagged incomplete view from
+  a limited view cannot be used here.]}
+@end{Ramification}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[If such a @nt{name}
 denotes a tagged incomplete view, it may also be used:]}
@@ -3858,24 +3871,12 @@ parameter or result of an @nt{access_to_@!subprogram_@!definition}.]}]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0151-1]}
 @ChgAdded{Version=[2],Text=[If any of the above uses occurs as part of the
 declaration of a primitive subprogram of the incomplete view,
-@Chg{Version=[3],New=[or as part of an
-@nt{access_to_subprogram_definition} or an @nt{access_definition} for an
-access-to-subprogram type, then the primitive subprogram declaration
-or the access-to-subprogram type definition shall occur within the
-declaration list immediately containing],Old=[and the
-declaration occurs immediately within the private part of a package, then]}
-the completion of the incomplete view@Chg{Version=[3],New=[],Old=[ shall also
+and the declaration occurs immediately within the private part of a package, then
+the completion of the incomplete view shall also
 occur immediately within the private part; it shall not be deferred to the
-package body]}.]}
-  @begin{Ramification}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[In this case, the incomplete type cannot be
-    deferred to the package body, even if the declaration occurs in the
-    private part.]}
-  @end{Ramification}
+package body.]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[This fixes a hole in Ada 95 where a dispatching
