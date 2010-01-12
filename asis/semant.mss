@@ -1,6 +1,6 @@
 @Part(ids, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/semant.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2009/05/16 03:55:40 $}
+@comment{$Revision: 1.6 $ $Date: 2010/01/01 04:20:44 $}
 
 @LabeledAddedSection{Version=[2],Name=[ASIS Semantic Subsystem]}
 
@@ -264,22 +264,22 @@ correspond to the extensions of the View type.]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Kind} (V : View) @key[return] View_Kinds @key[is abstract];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Object_Or_Value} (V : View) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Callable} (V : View) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Subtype} (V : View) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Package} (V : View) @key[return] Boolean @key[is abstract];]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Exception} (V : View) @key[return] Boolean @key[is abstract];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Generic} (V : View) @key[return] Boolean @key[is abstract];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Exception} (V : View) @key[return] Boolean @key[is abstract];]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Package} (V : View) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Callable} (V : View) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Object_Or_Value} (V : View) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Subtype} (V : View) @key[return] Boolean @key[is abstract];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Statement} (V : View) @key[return] Boolean @key[is abstract];]}
@@ -337,11 +337,11 @@ following program fragment:]}
       ...]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0057-1]}
 @ChgAdded{Version=[2],Text=[If V is a view representing the use of Var in the
 exit statement at (2), the element returned by Element_Denoting_View is the one
-in the exit statement, and not the one in the declaration. In particular, if E
-is the element representing the exit statement, then Exit_Condition (E) =
+in the exit statement, and not the one in the declaration at (1). In particular,
+if E is the element representing the exit statement, then Exit_Condition (E) =
 Element_Denoting_View (V).]}
 @end{Examples}
 
@@ -949,8 +949,8 @@ following subclauses.]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Program_Unit} @key[is interface and] View_Declaration;]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Program_Unit} @key[is interface and] Views.Declarative_Regions.View_Declaration;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
@@ -1142,8 +1142,8 @@ following subclauses.]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Subtype_View} @key[is interface and] View;]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Subtype_View} @key[is interface and] Views.View;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
@@ -1530,8 +1530,8 @@ following subclauses.]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Object_View} @key[is interface and] View;]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Object_View} @key[is interface and] Views.View;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
@@ -2420,8 +2420,8 @@ following subclauses.]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Callable_View} @key[is interface and] View;]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Callable_View} @key[is interface and] Views.View;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
@@ -2763,8 +2763,8 @@ following subclauses.]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Package_View} @key[is interface and] View;]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Package_View} @key[is interface and] Views.View;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
@@ -2927,10 +2927,11 @@ Returns False otherwise.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[P specifies the package view to query.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Visible_Part yields the appropriate (either limited
-or full) view of the visible part of the package. Private_Part yields the
-appropriate (either limited or full) view of the private part of the package.]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[Function Visible_Part returns the appropriate
+(either limited or full) view of the visible part of the package. Function
+Private_Part returns the appropriate (either limited or full) view of the
+private part of the package.]}
 @end{DescribeCode}
 
 @begin{SingleNote}
@@ -2969,8 +2970,8 @@ described in the following subclauses.]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Generic_View} @key[is interface and] View;]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Generic_View} @key[is interface and] Views.View;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
@@ -3112,8 +3113,8 @@ following subclauses.]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Exception_View} @key[is interface and] View;]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Exception_View} @key[is interface and] Views.View;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
@@ -3156,8 +3157,8 @@ following subclauses.]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Statement_View} @key[is interface and] View;]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Statement_View} @key[is interface and] Views.View;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
