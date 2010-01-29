@@ -1,6 +1,6 @@
 @Part(general, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.21 $ $Date: 2009/12/23 06:58:59 $}
+@comment{$Revision: 1.22 $ $Date: 2010/01/29 05:17:56 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -15,10 +15,11 @@ I probably ought to add a style just for this purpose)
 @begin{WideAbove}
 @noparanum@leading@tabclear()@tabset(P45)
 @Comment{Final
-@Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 15291:@Chg{Version=[1],New=[200x(E)],Old=[1999(E)]}}]>
+@Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 15291:@Chg{Version=[1],New=[201x(E)],Old=[1999(E)]}}]>
 }@Comment{End final}
 @Comment{Draft}
-@Swiss<@Grow[@B{COMMITTEE DRAFT@\ISO/IEC 15291 CD}]>
+@Comment{@Swiss<@Grow[@B{COMMITTEE DRAFT@\ISO/IEC 15291 CD}]>}
+@Swiss<@Grow[@B{WORKING DRAFT 0.8@\ISO/IEC 15291 WD}]>
 @Comment{End draft}
 
 @end{WideAbove}

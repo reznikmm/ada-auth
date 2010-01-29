@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.24 $ $Date: 2009/12/31 02:44:03 $}
+@comment{$Revision: 1.25 $ $Date: 2010/01/29 05:17:56 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -2176,7 +2176,7 @@ appearance.
 @ChgDeleted{Version=[2],Text=[Results of this query may vary across ASIS
 implementations. Some implementations normalize all multi-name object
 declarations into an equivalent sequence of corresponding single name object
-declarations. See Reference Manual]} 3.3.1(7).]}
+declarations. See Reference Manual 3.3.1(7).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element
