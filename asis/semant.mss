@@ -1,6 +1,6 @@
 @Part(ids, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/semant.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2010/01/12 04:43:16 $}
+@comment{$Revision: 1.8 $ $Date: 2010/01/29 04:54:55 $}
 
 @LabeledAddedSection{Version=[2],Name=[ASIS Semantic Subsystem]}
 
@@ -2534,7 +2534,7 @@ entities, as denoted by names or expressions.]}
 @key[function] @AdaSubDefn{Is_Entry} (C : Callable_View) @key[return] Boolean @key[is abstract];
 @key[function] @AdaSubDefn{Is_Function} (C : Callable_View) @key[return] Boolean @key[is abstract];
 @key[function] @AdaSubDefn{Is_Abstract} (C : Callable_View) @key[return] Boolean @key[is abstract];
-@key[function] @AdaSubDefn{Is_Null} (C : Callable_View) @key[return] Boolean @key[is abstract];]}
+@key[function] @AdaSubDefn{Is_Null} (C : Callable_View) @key[return] Boolean @key[is abstract];
 @key[function] @AdaSubDefn{Is_Formal_Subprogram} (C : Callable_View) @key[return] Boolean @key[is abstract];]}
 @end{Example}
 
