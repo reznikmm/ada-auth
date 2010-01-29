@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2009/12/18 07:15:33 $}
+@Comment{$Date: 2010/01/12 04:56:02 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.95 $}
+@Comment{$Revision: 1.96 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1288,7 +1288,7 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
   exclusions. In any case, it is easy to fix: add a @nt{null_exclusion}
   where needed for conformance.]}
 
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0132-1]}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0134-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected to require
   full conformance of anonynous access-to-subprogram parameters and results
   for full conformance. This is necessary so that there is no confusion about
