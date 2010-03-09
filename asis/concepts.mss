@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/concepts.mss,v $}
-@comment{$Revision: 1.14 $ $Date: 2009/12/23 06:58:59 $}
+@comment{$Revision: 1.15 $ $Date: 2010/01/29 06:25:50 $}
 
 
 @LabeledSection{ASIS technical concepts}
@@ -301,7 +301,7 @@ declarations:
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 @key[function] Names (Declaration : Asis.Declaration)                       -- @examcom{@RefSecNum{function Names}}
       @key[return] Asis.Defining_Name_List;
-@key[function] @Chg{Version=[2],New=[Object_Declaration_Subtype],Old=[Object_Declaration_View]} (Declaration : Asis.Declaration)     -- @examcom{@Chg{Version=[2],New=[@RefSecNum{function Object_Declaration_Subtype}],Old=[@RefSecNum{function Object_Declaration_View}]}}
+@key[function] @Chg{Version=[2],New=[Object_Declaration_Subtype],Old=[Object_Declaration_View]} (Declaration : Asis.Declaration)  -- @examcom{@Chg{Version=[2],New=[@RefSecNum{function Object_Declaration_Subtype}],Old=[@RefSecNum{function Object_Declaration_View}]}}
       @key[return] Asis.Definition;
 @key[function] Initialization_Expression (Declaration : Asis.Declaration)   -- @examcom{@RefSecNum{function Initialization_Expression}}
       @key[return] Asis.Expression;

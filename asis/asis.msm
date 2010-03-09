@@ -19,7 +19,7 @@
 @SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}
 @RTFHeaderPrefix{Version=[0],Text=[ISO/IEC 15291:1999(E) reorganized]}
 @RTFHeaderPrefix{Version=[1],Text=[ISO/IEC 15291:1999(E) new style]}
-@RTFHeaderPrefix{Version=[2],Text=[ISO/IEC 15291:200Y(E)]}
+@RTFHeaderPrefix{Version=[2],Text=[ISO/IEC 15291:201Y(E) WD]}
 @RTFFooter{UseDate=[T],UseClauseName=[T],UseISOFormat=[F]}@Comment{RM style footers}
 @RTFPageSize{Letter}@Comment{ISO version should be A4}
 @RTFFonts{Serif=[Times],SansSerif=[Arial]}

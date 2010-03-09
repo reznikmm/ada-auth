@@ -1,7 +1,7 @@
 @Part(title, Root="asis.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/title.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2010/01/29 05:17:56 $}
+@comment{$Revision: 1.5 $ $Date: 2010/01/29 06:25:50 $}
 
 @begin{ISOOnly}
 @Noparanum@Swiss{@Chg{Version=[1],New=[@B{@latin1(169) ISO/IEC 2009 @en All rights reserved}],Old=[]}}
@@ -96,40 +96,37 @@ provide supporting documentation.
 cover or back cover". But we don't have a cover, so I am putting it on the
 back of the title page.}
 @begin{NotISO}
-@Comment{The following puts the copyright near the bottom of the page}
-@Noparanum@ @*@*@*@*@*
+@Comment{ISO Copyright for drafts}
+@center{@b{@grow{@grow{Copyright notice}}}}
 
+This ISO document is a working draft or committee draft and is
+copyright-protected by ISO. While the reproduction of working drafts or
+committee drafts in any form for use by participants in the ISO standards
+development process is permitted without prior permission from ISO, neither this
+document nor any extract from it may be reproduced, stored or transmitted in any
+form for any other purpose without prior written permission from ISO.
 
+Requests for permission to reproduce this document for the purpose of selling it
+should be addressed as shown below or to ISO's member body in the country of the
+requester:
 
-@Comment{Don't have an appropriate copyright.
-@Noparanum@;@Chg{Version=[2], New=[@b{Consolidated Standard}], Old=[]}
+@Begin{Indent}
+ISO Copyright Office@*
+Case postale 56@*
+CH-1211 Geneva 20@*
+Tel: +41 22 749 01 11@*
+Fax: +41 22 749 09 47@*
+Email: @urllink{URL=[mailto:copyright@iso.org],Text=[copyright@iso.org]}@*
+Web: @urllink{URL=[http://www.iso.org],Text=[www.iso.org]}
+@end{Indent}
 
-@Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2008, 2009  Ada-Europe.], Old=[]}
+Reproduction for sales purposes may be subject to royalty payments or a
+licensing agreement.
 
-@Noparanum@;@Chg{Version=[2], New=[This document may be copied, in whole or in
-part, in any form or by any means, as is, or with alterations, provided that
-(1) alterations are clearly marked as alterations and (2) this copyright notice
-is included unmodified in any copy. Any other use or distribution of this
-document is prohibited without the prior express permission of Ada-Europe.], Old=[]}
-
-@Noparanum@;@Chg{Version=[2], New=[You use this document on the condition that
-you indemnify and hold harmless Ada-Europe and its Board from any and all
-liability or damages to yourself or your hardware or software, or third
-parties, including attorneys' fees, court costs, and other related costs and
-expenses, arising out of your use of this document irrespective of the cause of
-said liability.], Old=[]}
-
-@Noparanum@;@Chg{Version=[2], New=[ADA-EUROPE MAKES THIS DOCUMENT AVAILABLE ON AN "AS IS" BASIS AND MAKES NO WARRANTY,
-EXPRESS OR IMPLIED, AS TO THE ACCURACY, CAPABILITY, EFFICIENCY MERCHANTABILITY,
-OR FUNCTIONING OF THIS DOCUMENT. IN NO EVENT WILL ADA-EUROPE BE LIABLE FOR ANY
-GENERAL, CONSEQUENTIAL, INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES,
-EVEN IF ADA-EUROPE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.], Old=[]}
-
-** End old copyrights.}
-
+Violators may be prosecuted.
 @end{NotISO}
 
-@begin{ISOOnly}@Comment{Copyright for drafts}
+@begin{ISOOnly}@Comment{Copyright for drafts (same as previous for now)}
 @center{@b{@grow{@grow{Copyright notice}}}}
 
 This ISO document is a working draft or committee draft and is
