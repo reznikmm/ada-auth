@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/p-asis.mss,v $}
-@comment{$Revision: 1.27 $ $Date: 2010/01/12 04:43:16 $}
+@comment{$Revision: 1.28 $ $Date: 2010/03/09 06:46:51 $}
 
 @LabeledSection{package Asis}
 
@@ -1830,6 +1830,7 @@ configuration pragmas or comments.
                                 -- @examcom{2) a required corresponding}
                                 -- @examcom{   library_unit_body}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0043-1],ARef=[SI99-0058-1]}
    @AdaObjDefn{A_Configuration_Compilation}, -- @examcom{Corresponds to the whole content of a}
                                 -- @examcom{compilation with no compilation_unit,}
                                 -- @examcom{but possibly containing comments,}
@@ -1839,10 +1840,10 @@ configuration pragmas or comments.
                                 -- @examcom{A unit of A_Configuration_Compilation}
                                 -- @examcom{does not have a name. This unit}
                                 -- @examcom{represents configuration pragmas that}
-                                -- @examcom{are "in effect". The only interface that}
+                                -- @examcom{are "in effect".}@Chg{Version=[2],New=[],Old=[@examcom{ The only interface that}
                                 -- @examcom{returns this unit kind is}
                                 -- @examcom{Enclosing_Compilation_Unit when given}
-                                -- @examcom{A_Pragma element obtained from Configuration_Pragmas.}
+                                -- @examcom{A_Pragma element obtained from Configuration_Pragmas.}]}
 
    @AdaObjDefn{An_Unknown_Unit});            -- @examcom{An indeterminable or proprietary unit}
 

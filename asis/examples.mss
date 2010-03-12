@@ -1,9 +1,9 @@
 @Part(examples, Root="asis.msm")
 
-@Comment{$Date: 2009/07/02 04:50:54 $}
+@Comment{$Date: 2010/03/09 06:46:51 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/examples.mss,v $}
-@comment{$Revision: 1.4 $}
+@comment{$Revision: 1.5 $}
 
 @LabeledInformativeAnnex{ASIS application examples}
 
@@ -143,8 +143,8 @@ all explicit declarations with their kind.@Chg{Version=[1],New=[],Old=[ ASIS App
 
 @key[exception]
 
-   @key[when]   Asis.Exceptions.ASIS_Inappropriate_Context                 -- @examcom{ @RefSecNum{package Asis.Exceptions}}
-        | Asis.Exceptions.ASIS_Inappropriate_Container               -- @examcom{ @RefSecNum{package Asis.Exceptions}}
+   @key[when]   Asis.Exceptions.ASIS_Inappropriate_Context                 -- @examcom{ @RefSecNum{package Asis.Exceptions}}@Chg{Version=[2],New=[],Old=[
+        | Asis.Exceptions.ASIS_Inappropriate_Container               -- @examcom{ @RefSecNum{package Asis.Exceptions}}]}
         | Asis.Exceptions.ASIS_Inappropriate_Compilation_Unit        -- @examcom{ @RefSecNum{package Asis.Exceptions}}
         | Asis.Exceptions.ASIS_Inappropriate_Element                 -- @examcom{ @RefSecNum{package Asis.Exceptions}}
         | Asis.Exceptions.ASIS_Inappropriate_Line                    -- @examcom{ @RefSecNum{package Asis.Exceptions}}
@@ -369,8 +369,8 @@ call; <Called_Program_Unit> is the name of the program unit being called; and
 
 @key[exception]
 
-   @key[when] Asis.Exceptions.ASIS_Inappropriate_Context                     -- @examcom{ @RefSecNum{package Asis.Exceptions}}
-        | Asis.Exceptions.ASIS_Inappropriate_Container                 -- @examcom{ @RefSecNum{package Asis.Exceptions}}
+   @key[when] Asis.Exceptions.ASIS_Inappropriate_Context                     -- @examcom{ @RefSecNum{package Asis.Exceptions}}@Chg{Version=[2],New=[],Old=[
+        | Asis.Exceptions.ASIS_Inappropriate_Container                 -- @examcom{ @RefSecNum{package Asis.Exceptions}}]}
         | Asis.Exceptions.ASIS_Inappropriate_Compilation_Unit          -- @examcom{ @RefSecNum{package Asis.Exceptions}}
         | Asis.Exceptions.ASIS_Inappropriate_Element                   -- @examcom{ @RefSecNum{package Asis.Exceptions}}
         | Asis.Exceptions.ASIS_Inappropriate_Line                      -- @examcom{ @RefSecNum{package Asis.Exceptions}}

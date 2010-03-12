@@ -1,6 +1,6 @@
 @Part(general, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.22 $ $Date: 2010/01/29 05:17:56 $}
+@comment{$Revision: 1.23 $ $Date: 2010/03/09 06:46:51 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -124,73 +124,74 @@ presented. The ASIS package architecture is presented.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 The packages that comprise the ASIS International Standard are provided in
-@Chg{Version=[2],New=[Section],Old=[Clause]}s 3 through 23.@Chg{Version=[1],New=[],Old=[ These packages are provided
+@Chg{Version=[2],New=[Section],Old=[Clause]}s @RefSecNum{package Asis} through
+@RefSecNum{ASIS Semantic Subsystem}.@Chg{Version=[1],New=[],Old=[ These packages are provided
 in the correct compilation order and when presented in electronic format are
 compilable.]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]}  3   package Asis
+@Chg{Version=[2],New=[Section],Old=[Clause]}  @RefSecNum{package Asis}   package Asis
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]}  4   package Asis.Errors
+@Chg{Version=[2],New=[Section],Old=[Clause]}  @RefSecNum{package Asis.Errors}   package Asis.Errors
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]}  5   package Asis.Exceptions
+@Chg{Version=[2],New=[Section],Old=[Clause]}  @RefSecNum{package Asis.Exceptions}   package Asis.Exceptions
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]}  6   package Asis.Implementation
+@Chg{Version=[2],New=[Section],Old=[Clause]}  @RefSecNum{package Asis.Implementation}   package Asis.Implementation
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]}  7   package Asis.Implementation.Permissions
+@Chg{Version=[2],New=[Section],Old=[Clause]}  @RefSecNum{package Asis.Implementation.Permissions}   package Asis.Implementation.Permissions
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]}  8   package Asis.Ada_Environments
+@Chg{Version=[2],New=[Section],Old=[Clause]}  @RefSecNum{package Asis.Ada_Environments}   package Asis.Ada_Environments
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1],ARef=[SI99-0058-1]}
+@ChgDeleted{Version=[2],Text=[Clause  9   package Asis.Ada_Environments.Containers]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]}  9   package Asis.Ada_Environments.Containers
+@Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Compilation_Units}   package Asis.Compilation_Units
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} 10   package Asis.Compilation_Units
+@Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Compilation_Units.Times}   package Asis.Compilation_Units.Times
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} 11   package Asis.Compilation_Units.Times
+@Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Compilation_Units.Relations}   package Asis.Compilation_Units.Relations
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} 12   package Asis.Compilation_Units.Relations
+@Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Elements}   package Asis.Elements
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} 13   package Asis.Elements
+@Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Iterator}   package Asis.Iterator
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} 14   package Asis.Iterator
+@Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Declarations}   package Asis.Declarations
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} 15   package Asis.Declarations
+@Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Definitions}   package Asis.Definitions
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} 16   package Asis.Definitions
+@Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Expressions}   package Asis.Expressions
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} 17   package Asis.Expressions
+@Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Statements}   package Asis.Statements
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} 18   package Asis.Statements
+@Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Clauses}   package Asis.Clauses
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} 19   package Asis.Clauses
+@Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Text}   package Asis.Text
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} 20   package Asis.Text
+@Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Ids}   package Asis.Ids
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} 21   package Asis.Ids
+@Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Data_Decomposition (optional)}   package Asis.Data_Decomposition (optional package)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} 22   package Asis.Data_Decomposition (optional package)
-
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} 23   package @Chg{Version=[2],New=[Asis.Views,@*
+@Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{ASIS Semantic Subsystem}   package @Chg{Version=[2],New=[Asis.Views,@*
 Asis.Program_Units,@*
 Asis.Subtype_Views,@*
 Asis.Subtype_Views.Elementary,@*
@@ -615,23 +616,22 @@ by a tool.]}
 @LabeledSubClause{Classification of errors}
 
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0058-1]}
 ASIS reports all operational errors by raising an exception. Whenever an ASIS
 implementation raises one of the exceptions declared in package Asis.Exceptions,
-it will @Chg{Version=[2],New=[indicate the cause of the error by including an
-exception message and by setting the value returned by the Status query before
-raising the exception],Old=[previously have set the values returned by the
+it will @Chg{Version=[2],New=[indicate the cause of the error by setting],
+Old=[previously have set]} the values returned by the
 Status and Diagnosis queries to indicate the cause of the error]}. The possible
 values for Status are indicated @Chg{Version=[2],New=[below],Old=[here along
 with suggestions for the associated contents of the Diagnosis string]}.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1],ARef=[SI99-0055-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
 @leading@;ASIS applications are encouraged to
 @Chg{Version=[2],New=[similarly ],Old=[]}follow
 @Chg{Version=[2],New=[the],Old=[this same]} convention
 @Chg{Version=[2],New=[of recording],Old=[whenever they explicitly raise
-any ASIS exception to always record]} a Status @Chg{Version=[2],New=[],Old=[and
-Diagnosis ]}prior to @Chg{Version=[2],New=[explicitly ],Old=[]}raising
+any ASIS exception to always record]} a Status and
+Diagnosis prior to @Chg{Version=[2],New=[explicitly ],Old=[]}raising
 @Chg{Version=[2],New=[any ASIS],Old=[the]} exception. Values of errors
 along with their general meanings are:
 

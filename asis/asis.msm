@@ -4,7 +4,7 @@
 @HideIndexEntries
 @HideAnnotations
 @Comment{@ShowISO@Comment{only ISO versions of this document}}
-@HideISO@Comment{regular drafts of this document}}
+@HideISO@Comment{regular drafts of this document}
 @Comment{No paragraph numbers - no @NumberParagraphs command}
 @comment{Do not link Non-Terminals [no grammar here]}
 @Title{Version=[0],Text=[Ada Semantic Interface Specification (ASIS)]}@Comment{Same title for all versions}

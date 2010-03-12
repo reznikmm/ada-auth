@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/except.mss,v $}
-@comment{$Revision: 1.8 $ $Date: 2009/07/02 04:50:54 $}
+@comment{$Revision: 1.9 $ $Date: 2010/03/09 06:46:51 $}
 
 @LabeledSection{package Asis.Exceptions}
 
@@ -21,12 +21,14 @@ operation. This exception will typically indicate that a user error
 has occurred within the application.
 
 @begin{Example}
-@AdaExcDefn{ASIS_Inappropriate_Container} : @key[exception];
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0058-1]}
+@ChgDeleted{Version=[2],Text=[@AdaExcDefn{ASIS_Inappropriate_Container} : @key[exception];]}
 @end{Example}
 
-Raised when ASIS is passed a Container value that is not appropriate for
-the operation. This exception will typically indicate that a user error
-has occurred within the application.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0058-1]}
+@ChgDeleted{Version=[2],Text=[Raised when ASIS is passed a Container value that
+is not appropriate for the operation. This exception will typically indicate
+that a user error has occurred within the application.]}
 
 @begin{Example}
 @AdaExcDefn{ASIS_Inappropriate_Compilation_Unit} : @key[exception];

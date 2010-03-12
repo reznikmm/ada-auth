@@ -1,10 +1,10 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2009/12/31 02:44:04 $}
+@Comment{$Date: 2010/03/09 06:46:51 $}
 @LabeledAddedNormativeAnnex{Version=[2],Name=[Obsolescent Features]}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/obsolescent.mss,v $}
-@comment{$Revision: 1.14 $}
+@comment{$Revision: 1.15 $}
 
 @LabeledAddedClause{Version=[2],Name=[Annex Contents]}
 
@@ -34,8 +34,9 @@ ones described in the following subclauses.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0022-1]}
 @ChgAdded{Version=[2],Text=[This type has been replaced by
 functions Has_Abstract, Has_Aliased, Has_Limited, Has_Private, Has_Protected,
-Has_Reverse, Has_Synchronized, Has_Tagged, and Has_Task. Use of the type
-Trait_Kinds is not recommended in new programs.]}
+Has_Reverse, Has_Synchronized, Has_Tagged, and Has_Task
+(see @RefSecNum{function Has_Abstract} through @RefSecNum{function Has_Task}).
+Use of the type Trait_Kinds is not recommended in new programs.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0017-1],ARef=[SI99-0022-1]}
 @ChgAdded{Version=[2],Text=[Trait_Kinds provide a means of further classifying the syntactic structure
@@ -175,57 +176,6 @@ previous editions of this standard. Use of these entities is not recommended in 
 @end{Example}
 @end{DescribeCode}
 
-
-
-@ChgNote{SI99-0053-1 add chapter on newly obsolete subprograms}
-@LabeledAddedClause{Version=[2],Name=[Obsolescent Features in package Asis.Implementation]}
-
-@LabeledAddedSubclause{Version=[2],Name=[Introduction for Obsolescent Features in package Asis.Implementation]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
-@ChgAdded{Version=[2], Text=[In addition to the interfaces defined in section
-@RefSecNum{package Asis.Implementation}, the library package
-Asis.Implementation also shall provide interfaces equivalent to
-the obsolescent ones described in the following subclauses.]}
-
-
-@ChgNote{SI99-0053-1 add section on newly obsolete subprogram}
-@LabeledAddedSubclause{Version=[2],Name=[function Diagnosis]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
-@ChgAdded{Version=[2], Text=[This function has been superceded by the Ada
-function Ada.Exceptions.Exception_Message. Use of the function Diagnosis is not
-recommended in new programs.]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
-@ChgAdded{Version=[2],Text=[@key[function] Diagnosis @key[return] Wide_String;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
-@ChgAdded{Version=[2],Text=[Returns a string value describing the most recent
-error.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0047-1],ARef=[SI99-0053-1]}
-@ChgAdded{Version=[2],Text=[Whenever an error condition is detected, and any
-ASIS exception is raised, an Asis.Errors.Error_Kinds value and a Diagnosis
-string are stored. The Diagnosis function returns the diagnostic message
-describing the most recently recorded error. Note that Diagnosis values are
-implementation dependent and may vary greatly among ASIS implementations.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
-@ChgAdded{Version=[2],Text=[Function Diagnosis will typically return a null
-string if Status = Not_An_Error.]}
-@end{DescribeCode}
-
-@begin{SingleNote}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1]}
-@ChgAdded{Version=[2],Text=[Unless the diagnosis string has been set explicitly,
-we recommend that function Diagnosis returns the same string as
-Ada.Exceptions.Exception_Message for the exception raised by the
-most recent error.]}
-@end{SingleNote}
 
 @ChgNote{SI99-0025-1 add chapter on newly obsolete subprograms}
 @LabeledAddedClause{Version=[2],Name=[Obsolescent Features in package Asis.Implementation.Permissions]}
@@ -531,6 +481,432 @@ implements generics.]}
 @end{Ramification}
 
 
+@ChgNote{SI99-0058-1 add chapter on newly obsolete subprograms}
+@LabeledAddedClause{Version=[2],Name=[Obsolescent Features in package Asis.Exceptions]}
+
+@LabeledAddedSubclause{Version=[2],Name=[Introduction for Obsolescent Features in package Asis.Exceptions]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[In addition to the interfaces defined in section
+@RefSecNum{package Asis.Exceptions}, the library package
+Asis.Exceptions also shall provide interfaces equivalent to the
+obsolescent one described in the following subclause.]}
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[exception ASIS_Inappropriate_Container]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Containers provide no implementation-independent
+functionality; use of containers is not recommended in new programs.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@AdaExcDefn{ASIS_Inappropriate_Container} : @key[exception];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Raised when ASIS is passed a Container value that is not appropriate for
+the operation. This exception will typically indicate that a user error
+has occurred within the application.]}
+@end{DescribeCode}
+
+
+
+@ChgNote{SI99-0058-1 add chapter on newly obsolete package}
+@LabeledAddedClause{Version=[2],Name=[Obsolescent package Asis.Ada_Environments.Containers]}
+
+@LabeledAddedSubclause{Version=[2],Name=[Introduction for Obsolescent package Asis.Ada_Environments.Containers]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[The library package Asis.Ada_Environments.Containers
+shall exist. The package shall provide interfaces equivalent to the obsolescent
+ones described in the following subclauses.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[If an Ada implementation supports the notion of a
+program library@Defn{Program library} or "library" as suggested in Subclause
+10(2) of the Ada Standard, then an ASIS Context value can be mapped onto one or
+more implementor libraries represented by Containers.]}
+
+
+@LabeledAddedSubclause{Version=[2],Name=[type Container]}
+
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[The @i{Container}@Defn{Container} abstraction is a
+logical collection of compilation units. For example, one container might hold
+compilation units which include Ada predefined library units, another container
+might hold implementation-defined packages. Alternatively, there might be 26
+containers, each holding compilation units that begin with their respective
+letter of the alphabet. The point is that no implementation-independent
+semantics are associated with a container; it is simply a logical collection.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Since containers provide no
+implementation-independent functionality it is recommended to avoid their
+use; other ASIS queries provide equivalent functionality. Use of type Container
+is not recommended in new programs.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[ASIS implementations shall minimally map the
+Asis.Context to a list of one ASIS Container whose Name is that of the
+Asis.Context Name.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Container} @key[is private];
+@AdaObjDefn{Nil_Container} : @key[constant] Container;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] "=" (Left  : @key[in] Container;
+              Right : @key[in] Container)
+              @key[return] Boolean @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0047-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Nil_Container is the value of a Container that
+represents no container.]}
+@end{DescribeCode}
+
+
+@LabeledAddedSubclause{Version=[2],Name=[type Container_List]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Container_List} @key[is]
+   @key[array] (List_Index @key[range] <>) @key[of] Container;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0047-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Type Container_List represents a list of containers.]}
+@end{DescribeCode}
+
+
+@LabeledAddedSubclause{Version=[2],Name=[function Defining_Containers]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Containers provide no implementation-independent
+functionality; use operations directly on The_Context rather than using
+containers. Use of function Defining_Containers is not recommended in new
+programs.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Defining_Containers} (The_Context : @key[in] Asis.Context)
+    @key[return] Container_List;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[The_Context specifies the Context to define.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns a Container_List value that defines the
+single environment Context. Each Container will have an Enclosing_Context that
+Is_Identical to the argument The_Context. The order of Container values in the
+list is not defined.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns a minimal list of length one if the ASIS Ada
+implementation does not support the concept of a program library. In this case,
+the Container will have the same name as the given Context.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context if The_Context is not open.]}
+@end{DescribeCode}
+
+
+@LabeledAddedSubclause{Version=[2],Name=[function Enclosing_Context (container)]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Containers provide no implementation-independent
+functionality; get the context directly from a compilation unit using
+Enclosing_Context (see @RefSecNum{function Enclosing_Context (unit)}). Use of
+function Enclosing_Context for a container is not recommended in new programs.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Enclosing_Context} (The_Container : @key[in] Container)
+    @key[return] Asis.Context;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[The_Container specifies the Container to query.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns the Context value associated with the Container.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns the Context for which the Container value
+was originally obtained. Container values obtained through the
+Defining_Containers query will always remember the Context from which they were
+defined.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Because Context is limited private, this function is
+only intended to be used to supply a Context parameter for other queries.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Container if the Container is Nil_Container.]}
+@end{DescribeCode}
+
+
+@LabeledAddedSubclause{Version=[2],Name=[function Library_Unit_Declarations (container)]}
+
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Containers provide no implementation-independent
+functionality; use Library_Unit_Declarations on the context (see
+@RefSecNum{function Library_Unit_Declarations (context)}) instead. Use of
+function Library_Unit_Declarations for a container is not recommended in new programs.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Library_Unit_Declarations} (The_Container : @key[in] Container)
+                                   @key[return] Asis.Compilation_Unit_List;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[The_Container specifies the Container to query.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns a list of all library_unit_declaration and
+library_unit_renaming_declaration elements contained in The_Container.
+Individual units will appear only once in an order that is not defined.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Nil_Compilation_Unit_List is returned if there are no declarations of
+library units within The_Container.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0030-1],ARef=[SI99-0053-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[This query will never return a unit with
+kinds A_Configuration_Compilation or A_Nonexistent_Declaration.
+It will never return a unit with A_Procedure_Body or A_Function_Body unit kind
+even though the unit is interpreted as both the declaration and body of a
+library procedure or library function. Ada Standard 10.1.4(4).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[All units in the result will have an
+Enclosing_Container value that Is_Identical to The_Container.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context if the Enclosing_Context(The_Container)
+is not open.]}
+@end{DescribeCode}
+
+
+@LabeledAddedSubclause{Version=[2],Name=[function Compilation_Unit_Bodies (container)]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Containers provide no implementation-independent
+functionality; use Compilation_Unit_Bodies on the context (see
+@RefSecNum{function Compilation_Unit_Bodies (context)}) instead. Use of
+function Compilation_Unit_Bodies for a container is not recommended in new
+programs.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Compilation_Unit_Bodies} (The_Container : @key[in] Container)
+                                 @key[return] Asis.Compilation_Unit_List;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[The_Container specifies the Container to query.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns a list of all library_unit_body and subunit
+elements contained in The_Container. Individual units will appear only once in
+an order that is not defined.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Nil_Compilation_Unit_List is returned if there are
+no bodies within The_Container.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[This query will never return a unit with kinds
+A_Configuration_Compilation or A_Nonexistent_Body.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[All units in the result will have an
+Enclosing_Container value that Is_Identical to The_Container.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context if the
+Enclosing_Context(The_Container) is not open.]}
+@end{DescribeCode}
+
+
+@LabeledAddedSubclause{Version=[2],Name=[function Compilation_Units (container)]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Containers provide no implementation-independent
+functionality; use Compilation_Units on the context (see
+@RefSecNum{function Compilation_Units (context)}) instead. Use of
+function Compilation_Units for a container is not recommended in new programs.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Compilation_Units} (The_Container : @key[in] Container)
+                           @key[return] Asis.Compilation_Unit_List;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[The_Container specifies the Container to query.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns a list of all compilation units contained in
+The_Container. Individual units will appear only once in an order that is not
+defined.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Nil_Compilation_Unit_List is returned if there are
+no units within the Container.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0053-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[This query will never return a unit with kinds
+A_Configuration_Compilation, A_Nonexistent_Declaration,
+or A_Nonexistent_Body.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[All units in the result will have an
+Enclosing_Container value that Is_Identical to The_Container.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Context if the Enclosing_Context(The_Container)
+is not open.]}
+@end{DescribeCode}
+
+
+@LabeledAddedSubclause{Version=[2],Name=[function Is_Equal (containers)]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Containers provide no implementation-independent
+functionality; use Is_Equal on the context (see
+@RefSecNum{function Is_Equal (context)}) instead. Use of
+function Is_Equal for a container is not recommended in new programs.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Equal} (Left  : @key[in] Container;
+                   Right : @key[in] Container) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Left specifies first Container.
+Right specifies the second Container.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0047-1],ARef=[SI99-0053-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns True if Left and Right designate Container
+values that contain the same set of compilation units,
+where two compilation units are the same when Is_Equal on the corresponding
+Compilation_Units returns True, and returns False otherwise. The
+Container values may have been defined from different Context values.]}
+@end{DescribeCode}
+
+
+@LabeledAddedSubclause{Version=[2],Name=[function Is_Identical (containers)]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Containers provide no implementation-independent
+functionality; use Is_Identical on the context (see
+@RefSecNum{function Is_Identical (context)}) instead. Use of
+function Is_Identical for a container is not recommended in new programs.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Identical} (Left  : @key[in] Container;
+                       Right : @key[in] Container) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Left specifies the first Container.
+Right specifies the second Container.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0047-1],ARef=[SI99-0053-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns True if Is_Equal(Left, Right) and the
+Container values have been defined from Is_Identical
+Context values, and returns False otherwise.]}
+@end{DescribeCode}
+
+
+@LabeledAddedSubclause{Version=[2],Name=[function Name (container)]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Containers provide no implementation-independent
+functionality; use Name on the context (see
+@RefSecNum{function Name (context)}) instead. Use of function Name for a
+container is not recommended in new programs.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Name} (The_Container : @key[in] Container) @key[return] Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[The_Container specifies the Container to name.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns the Name value associated with the
+Container.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns a null string if the Container is
+Nil_Container.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add chapter on newly obsolete subprograms}
+@LabeledAddedClause{Version=[2],Name=[Obsolescent Features in package Asis.Compilation_Units]}
+
+@LabeledAddedSubclause{Version=[2],Name=[Introduction for Obsolescent Features in package Asis.Compilation_Units]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[In addition to the interfaces defined in section
+@RefSecNum{package Asis.Compilation_Units}, the library package
+Asis.Compilation_Units also shall provide interfaces equivalent to the
+obsolescent one described in the following subclause.]}
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Enclosing_Container]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Containers provide no implementation-independent
+functionality; get the context directly using Enclosing_Context (see
+@RefSecNum{function Enclosing_Context (unit)}). Use
+of function Enclosing_Container is not recommended in new programs.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Enclosing_Container} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
+           @key[return] Asis.Ada_Environments.Containers.Container;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Compilation_Unit specifies the unit whose Container is required.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns the Container of the Context containing the
+compilation unit. Compilation units always remember the ASIS Context and
+Container from which they were obtained.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0028-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Compilation_Unit with a
+Status of Value_Error if the unit is Nil_Compilation_Unit.]}
+@end{DescribeCode}
+
+
+
 @ChgNote{SI99-0022-1 add chapter on newly obsolete subprograms}
 @LabeledAddedClause{Version=[2],Name=[Obsolescent Features in package Asis.Elements]}
 
@@ -548,7 +924,9 @@ ones described in the following subclauses.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0022-1]}
 @ChgAdded{Version=[2],Text=[This function has been replaced by
 functions Has_Abstract, Has_Aliased, Has_Limited, Has_Private, Has_Protected,
-Has_Reverse, Has_Synchronized, Has_Tagged, and Has_Task. Use of the function
+Has_Reverse, Has_Synchronized, Has_Tagged, and Has_Task
+(see @RefSecNum{function Has_Abstract} through @RefSecNum{function Has_Task}).
+Use of the function
 Trait_Kind is not recommended in new programs.]}
 
 @begin{DescribeCode}
@@ -619,13 +997,12 @@ A_Formal_Derived_Type_Definition]}
 @end{DescribeCode}
 
 
-@ChgRef{Version=[2],Kind=[Added]}
 @LabeledAddedSubclause{Version=[2],Name=[function Corresponding_Pragmas]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
 @ChgAdded{Version=[2],Text=[This function has been replaced by
-Corresponding_Aspect_Pragmas. Use of the function
-Corresponding_Pragmas is not recommended in new programs.]}
+Corresponding_Aspect_Pragmas (see @RefSecNum{function Corresponding_Aspect_Pragmas}).
+Use of the function Corresponding_Pragmas is not recommended in new programs.]}
 
 @begin{DescribeCode}
 @begin{Example}@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
@@ -805,7 +1182,10 @@ ones described in the following subclauses.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0027-1]}
 @ChgAdded{Version=[2],Text=[This function is redundant with the queries
-Body_Declarative_Items, Body_Statements, and Body_Exception_Handlers.
+Body_Declarative_Items, Body_Statements, and Body_Exception_Handlers
+(see @RefSecNum{function Body_Declarative_Items},
+@RefSecNum{function Body_Statements}, and
+@RefSecNum{function Body_Exception_Handlers}).
 Use of the query Body_Block_Statement is not recommended in new
 programs.]}
 
@@ -863,7 +1243,8 @@ ASIS 83.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1]}
 @ChgAdded{Version=[2],Text=[This function has been replaced by
-Object_Declaration_Subtype. Use of the function Object_Declaration_View is not
+Object_Declaration_Subtype (see @RefSecNum{function Object_Declaration_Subtype}).
+Use of the function Object_Declaration_View is not
 recommended in new programs.]}
 
 @begin{DescribeCode}
@@ -941,8 +1322,8 @@ A_Type_Definition @em the returned element also has the following Type_Kinds:
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1]}
 @ChgAdded{Version=[2],Text=[This function has been replaced by
-Object_Declaration_Subtype. Use of the function Declaration_Subtype_Mark is not
-recommended in new programs.]}
+Object_Declaration_Subtype (see @RefSecNum{function Object_Declaration_Subtype}).
+Use of the function Declaration_Subtype_Mark is not recommended in new programs.]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -993,8 +1374,8 @@ An_Attribute_Reference]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1]}
 @ChgAdded{Version=[2],Text=[This function has been replaced by
-function Result_Subtype. Use of the function Result_Profile is not
-recommended in new programs.]}
+function Result_Subtype (see @RefSecNum{function Result_Subtype}).
+Use of the function Result_Profile is not recommended in new programs.]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1045,7 +1426,8 @@ An_Attribute_Reference]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0021-1]}
 @ChgAdded{Version=[2],Text=[This function has been replaced by
-Corresponding_Aspect_Clauses. Use of the function
+Corresponding_Aspect_Clauses (see @RefSecNum{function Corresponding_Aspect_Clauses}).
+Use of the function
 Corresponding_Representation_Clauses is not recommended in new programs.]}
 
 
@@ -1115,8 +1497,8 @@ ones described in the following subclauses.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0004-1]}
 @ChgAdded{Version=[2],Text=[This function has been replaced by
-Access_To_Function_Result_Subtype. Use of the function
-Access_To_Function_Result_Profile is not recommended in new
+Access_To_Function_Result_Subtype (see @RefSecNum{function Access_To_Function_Result_Subtype}).
+Use of the function Access_To_Function_Result_Profile is not recommended in new
 programs.]}
 
 @begin{DescribeCode}
@@ -1174,8 +1556,9 @@ A_Selected_Component]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0044-1]}
 @ChgAdded{Version=[2],Text=[This function has been replaced by
-Parent_Subtype_Indication. Use of the function Corresponding_Parent_Subtype is
-not recommended in new programs.]}
+Parent_Subtype_Indication (see @RefSecNum{function Parent_Subtype_Indication}).
+Use of the function Corresponding_Parent_Subtype is not recommended in new
+programs.]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1220,6 +1603,51 @@ A_Formal_Type_Declaration
 An_Incomplete_Type_Declaration
 A_Private_Type_Declaration
 A_Private_Extension_Declaration]}
+@end{Display}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0056-1 add clause on newly obsolete function}
+@LabeledAddedSubClause{Version=[2],Name=[function Component_Subtype_Indication]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0056-1]}
+@ChgAdded{Version=[2],Text=[This function has been replaced by
+Component_Definition_Subtype (see @RefSecNum{function Component_Definition_Subtype}).
+Use of the function Component_Subtype_Indication is not recommended in new
+programs.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0056-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Component_Subtype_Indication}
+        (Component_Definition : @key[in] Asis.Component_Definition)
+            @key[return] Asis.Subtype_Indication;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0056-1]}
+@ChgAdded{Version=[2],Text=[Component_Definition specifies the
+Component_Definition to query.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0056-1]}
+@ChgAdded{Version=[2],Text=[Returns the subtype_indication of the
+Component_Definition.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0056-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Component_Definition
+expects an element that has the following Definition_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Component_Definition]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0056-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have this expected kind.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0056-1],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns an element
+that has the following Definition_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Subtype_Indication]}
 @end{Display}
 @end{DescribeCode}
 
@@ -1950,10 +2378,10 @@ such instantiations will operate correctly; data could be lost.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
-@ChgAdded{Version=[2],Text=[These generic packages are superseded by the Ada Stream
-operations. The use of generic packages Portable_Array_Type_1
-Portable_Array_Type_2, and Portable_Array_Type_3 is not
-recommended in new programs.]}
+@ChgAdded{Version=[2],Text=[These generic packages are superseded by the Ada
+Stream operations. The use of generic packages Portable_Array_Type_1
+Portable_Array_Type_2, and Portable_Array_Type_3 is not recommended in new
+programs.]}
 
 @ChgAdded{Version=[2],Text=[Value specifies an array value
 which is to be converted to a portable data stream.]}
@@ -1965,8 +2393,8 @@ the result will not be larger (larger 'Size) than the argument.
 This interface will correctly capture the array index (dope vector)
 information associated with the array value.]}
 
-@ChgAdded{Version=[2],Text=[Use the Portable_Constrained_Subtype generic for statically constrained
-array subtypes.]}
+@ChgAdded{Version=[2],Text=[Use the Portable_Constrained_Subtype generic for
+statically constrained array subtypes.]}
 
 @ChgAdded{Version=[2],Text=[Array types with more than 3 dimensions can be converted to portable data
 streams by placing them inside a discriminated record type (where the

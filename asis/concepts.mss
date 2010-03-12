@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/concepts.mss,v $}
-@comment{$Revision: 1.15 $ $Date: 2010/01/29 06:25:50 $}
+@comment{$Revision: 1.16 $ $Date: 2010/03/09 06:46:51 $}
 
 
 @LabeledSection{ASIS technical concepts}
@@ -92,14 +92,14 @@ ASIS queries such as Time_Of_Last_Update and Text_Name which have no relation
 to the @Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]}-defined
 notion of an Ada compilation unit.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-To facilitate the use of context, implementations may support the use of
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1],ARef=[SI99-0058-1]}
+@ChgDeleted{Version=[2],Text=[To facilitate the use of context, implementations may support the use of
 @i{containers} which are logical collections of ASIS compilation
 units.@Defn{Container} For example, some containers can hold compilation units
-@Chg{Version=[2],New=[that declare],Old=[which include]} Ada predefined types;
+which include Ada predefined types;
 another container can hold implementation-defined packages. Containers provide
 an implementation-defined way of grouping the compilation units accessible for
-an ASIS application through the ASIS queries.
+an ASIS application through the ASIS queries.]}
 
 
 @LabeledSubClause{Illegal / inconsistent units in the compilation Environment}
@@ -523,7 +523,7 @@ implementor-independent manner. Package ASIS is the root of the ASIS interface.
 All other packages are child packages of package Asis. These packages are:
 
 @begin{Itemize}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1],ARef=[SI99-0058-1]}
 @b{Asis.Ada_Environments}@Defn{Ada_Environments} @en This child package
 encapsulates a set of queries that map physical Ada compilation and program
 execution environments to logical ASIS environments. An ASIS Context is
@@ -533,16 +533,16 @@ considered to be part of the compile-time Ada environment, which forms the
 outermost context of any compilation, as specified in section 10.1.4 of the Ada
 @Chg{Version=[2],New=[Standard],Old=[Reference manual]}. This same environment
 context provides the implicit outermost anonymous task during program execution.
-If an Ada implementation supports the notion of a program library or
+@Chg{Version=[2],New=[],Old=[ If an Ada implementation supports the notion of a program library or
 @ldquote@;library@rdquote as specified in section 10(2) of the Ada
-@Chg{Version=[2],New=[Standard],Old=[Reference Manual]}, then an ASIS Context
+Reference Manual, then an ASIS Context
 value can be mapped onto one or more implementor libraries represented by
-Containers. More than one context may be manipulated at a time. Important
+Containers.]} More than one context may be manipulated at a time. Important
 interfaces include: Associate, Dissociate, Open, and Close (see Section
-@RefSecNum{package Asis.Ada_Environments}). The type Container and its
-supporting functions are provided in the child package
+@RefSecNum{package Asis.Ada_Environments}).@Chg{Version=[2],New=[],Old=[ The
+type Container and its supporting functions are provided in the child package
 @b{Asis.Ada_Environments.Containers} (see Section
-@RefSecNum{package Asis.Ada_Environments.Containers}).
+@RefSecNum{obsolescent package Asis.Ada_Environments.Containers}).]}
 
 @b{Asis.Implementation}@Defn{Implementation} @en This child package provides operations to
 initialize and finalize the ASIS interface. It also provides queries for the

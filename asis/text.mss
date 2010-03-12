@@ -1,6 +1,6 @@
 @Part(text, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/text.mss,v $}
-@comment{$Revision: 1.11 $ $Date: 2009/12/31 02:44:04 $}
+@comment{$Revision: 1.12 $ $Date: 2010/03/09 06:46:51 $}
 
 @LabeledSection{package Asis.Text}
 
@@ -201,6 +201,13 @@ particular lifetime.]}
                              Last_Line    => 0,
                              Last_Column  => 0);
 @end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[An @i<empty span>@Defn{empty span} is a span where
+the single text position represented by Last_Line and Last_Column precedes the
+single text position represented by First_List and First_Column. Nil_Span
+is an empty span.]}
+
 @end{DescribeCode}
 
 @begin{SingleNote}
@@ -378,8 +385,9 @@ Returns True if the argument has a 'Length of zero@Chg{Version=[2],New=[ otherwi
 Right @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the Span to
 check.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
-Returns True if the argument has a Nil_Span@Chg{Version=[2],New=[ otherwise returns False],Old=[]}.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1],ARef=[SI99-0058-1]}
+Returns True if the argument @Chg{Version=[2],New=[is an empty span; otherwise
+returns False],Old=[has a Nil_Span]}.
 @end{DescribeCode}
 
 

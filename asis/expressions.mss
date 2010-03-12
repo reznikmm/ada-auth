@@ -1,6 +1,6 @@
 @Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.19 $ $Date: 2009/12/23 06:58:59 $}
+@comment{$Revision: 1.20 $ $Date: 2010/03/09 06:46:51 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -33,11 +33,11 @@ subtype mark in the definition of the nominal subtype of the expression. If the
 subtype mark in the definition is a Base attribute reference, the declaration of
 the prefix of the attribute is returned.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
-@ChgAdded{Version=[2],Text=[Returns an implementation-defined result if the
-expression is an attribute reference other than Base, aggregate,
-string literal, allocator, membership test, short-circuit operation,
-or the invocation of a predefined operator.]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns an implementation-defined declaration of a
+subtype of the appropriate type if the expression is an attribute reference
+other than Base, aggregate, string literal, allocator, membership test,
+short-circuit operation, or the invocation of a predefined operator.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
 @ChgAdded{Version=[2],Text=[For a slice, the result is the same as for the
@@ -45,10 +45,11 @@ prefix of the slice. For an invocation of a user-defined operator, the result is
 the same as for the equivalent function call.  For a parenthesized expression,
 it is the same as for the enclosed expression.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[Returns Nil_Element if the expression is of an
-anonymous or classwide type, or is a named number, a numeric literal, or a null
-literal.]}
+anonymous or classwide type, or is a named number, a numeric literal, a null
+literal, or is not an Ada expression or name denoting an object, value, or
+subtype.]}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0045-1]}
 @ChgDeleted{Version=[2],Type=[Leading],Text=[Returns the type declaration for
@@ -149,8 +150,7 @@ An_Expression
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -169,11 +169,8 @@ expression, check if it is an object or value with Asis.Views.Is_Object_or_Value
 (see @RefSecNum{type View_Kinds and type View}), and, assuming it is, use
 Asis.Object_Views.Nominal_Subtype (see @RefSecNum{type Object_View}) to retrieve
 the subtype. The retrieved subtype will include anonymous and classwide subtypes
-so complete analysis can be done without many special cases.]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0053-1]}
-@ChgAdded{Version=[2],Text=[We recommend that the type returned in the
-implementation-defined cases be a type defined by the context.]}
+as well as explicit constraints so complete analysis can be done without many
+special cases.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0045-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[This query does not "unwind" subtypes
@@ -371,8 +368,7 @@ A_Defining_Name
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Text=[Within_Element expects any kind of element.]}
@@ -443,7 +439,7 @@ argument is part of an inconsistent compilation unit.
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0053-1]}
-@key[function] @AdaSubDefn{Corresponding_Name_Definition} (Reference : @key[in] @key[in] @Chg{Version=[2],New=[Asis.Name],Old=[Asis.Expression]})
+@key[function] @AdaSubDefn{Corresponding_Name_Definition} (Reference : @key[in] @Chg{Version=[2],New=[Asis.Name],Old=[Asis.Expression]})
                          @key[return] Asis.Defining_Name;
 @end{Example}
 
@@ -804,8 +800,7 @@ An_Indexed_Component
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -849,8 +844,7 @@ A_Slice
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -885,8 +879,7 @@ A_Selected_Component
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -933,8 +926,7 @@ An_Attribute_Reference
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -1096,8 +1088,7 @@ An_Extension_Aggregate
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -1200,8 +1191,7 @@ An_Array_Component_Association
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
@@ -1283,8 +1273,7 @@ A_Record_Component_Association
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -1446,21 +1435,23 @@ A_Pragma_Argument_Association
 of Value_Error for any element that does not have one of these expected
 kinds.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0058-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
 one of the following ],Old=[]}Element_Kinds:
 @begin{Display}
 Not_An_Element
 An_Operator_Symbol
 A_Defining_Name @em Is_Normalized(Association)
-An_Expression @em @key[not] Is_Normalized(Association)
+An_Expression@Chg{Version=[2],New=[ that has the following Expression_Kinds:
+   An_Identifer],Old=[]} @em @key[not] Is_Normalized(Association)@Chg{Version=[2],New=[
+A_Definition that has the following Definition_Kinds:
+   An_Others_Choice @em @key[not] Is_Normalized(Association)],Old=[]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
-@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
-the following ],Old=[]}Expression_Kinds:
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0058-1]}
+@ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns Expression_Kinds:]}
 @begin{Display}
-An_Identifier
+@ChgDeleted{Version=[2],Text=[An_Identifier]}
 @end{Display}
 @end{DescribeCode}
 
@@ -1625,8 +1616,7 @@ A_Discriminant_Association
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -1717,8 +1707,7 @@ A_Discriminant_Association
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -1839,8 +1828,7 @@ A_Parenthesized_Expression
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -1936,8 +1924,7 @@ A_Function_Call
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -2043,8 +2030,7 @@ A_Function_Call
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -2371,8 +2357,7 @@ An_Allocation_From_Subtype
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -2405,8 +2390,7 @@ An_Allocation_From_Qualified_Expression
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has

@@ -4,7 +4,7 @@
 @ShowIndexEntries @Comment{To match the Ada 95 AARM}
 @ShowAnnotations
 @Comment{@ShowISO@Comment{only ISO versions of this document}}
-@HideISO@Comment{regular drafts of this document}}
+@HideISO@Comment{regular drafts of this document}
 @Comment{No paragraph numbers - no @NumberParagraphs command}
 @comment{Do not link Non-Terminals [no grammar here]}
 @Title{Version=[0],Text=[Annotated Ada Semantic Interface Specification (AASIS)]}@Comment{Same title for all versions}

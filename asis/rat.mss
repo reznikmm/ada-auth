@@ -1,9 +1,9 @@
 @Part(rat, Root="asis.msm")
 
-@Comment{$Date: 2009/05/12 06:23:26 $}
+@Comment{$Date: 2010/03/09 06:46:51 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/rat.mss,v $}
-@comment{$Revision: 1.5 $}
+@comment{$Revision: 1.6 $}
 
 @LabeledInformativeAnnex{Rationale}
 
@@ -849,10 +849,11 @@ ASIS implementation to yield them as a result of a query.
 
 @LabeledSubClause{Abstract "=" for private types}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0058-1]}
 An Is_Equal function has been defined for the private types Context (Clause
 @RefSecNum{type Context}), Element (Clause @RefSecNum{type Element}),
 Compilation_Unit (Clause @RefSecNum{type Compilation_Unit}),
-Container (Clause @RefSecNum{type Container}),
+@Chg{Version=[2],New=[],Old=[Container (Clause @RefSecNum{type Container}),]}
 Line (Clause @RefSecNum{type Line}), Id (Clause @RefSecNum{type Id}),
 Record_Component (Clause @RefSecNum{type Record_Component}), and
 Array_Component (Clause @RefSecNum{type Array_Component}). An abstract

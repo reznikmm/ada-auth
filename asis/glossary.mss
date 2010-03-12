@@ -1,9 +1,9 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2009/12/23 06:58:59 $}
+@Comment{$Date: 2010/03/09 06:46:51 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/glossary.mss,v $}
-@comment{$Revision: 1.5 $}
+@comment{$Revision: 1.6 $}
 
 @LabeledInformativeAnnex{Glossary}
 
@@ -75,17 +75,19 @@ the "external world" treated by the underlying Ada implementation as the
 corresponding Ada compilation unit or as a result of compiling a configuration
 pragma.>}
 
+@Comment{SI99-0058-1 removes this.
 @ToGlossary{Term=<Container>,Text=<Logical collection of ASIS compilation
 units. For example, some container can hold compilation units which include Ada
 predefined types, another container can hold implementation-defined packages.
 Containers provide the implementation-defined way of grouping the compilation
-units accessible for an ASIS application through the ASIS queries.>}
+units accessible for an ASIS application through the ASIS queries.>}}
 
+@Comment{SI99-0058-1 removes this.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<Container [type]>,Text=<An ASIS
 private type @Chg{Version=[2],New=[whose],Old=[for which]} values denote a set
 of compilation units being a subset of the set of compilation units making up a
-context.>}
+context.>}}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 @ChgToGlossary{Version=[2],Kind=[Revised],Term=<Context>,Text=<@Chg{Version=[2],New=[A],Old=[Defines a]}

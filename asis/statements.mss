@@ -1,6 +1,6 @@
 @Part(statements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/statements.mss,v $}
-@comment{$Revision: 1.15 $ $Date: 2009/12/23 06:58:59 $}
+@comment{$Revision: 1.16 $ $Date: 2010/03/09 06:46:51 $}
 
 
 @LabeledSection{package Asis.Statements}
@@ -43,8 +43,7 @@ A_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -69,7 +68,7 @@ assignment statement to query.
 
 Returns the expression that names the left hand side of the assignment.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
 @ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Element_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Deleted]}
@@ -85,8 +84,7 @@ An_Assignment_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
@@ -125,8 +123,7 @@ An_Assignment_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
@@ -246,8 +243,7 @@ A_Path
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -290,8 +286,7 @@ A_Case_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
@@ -326,8 +321,7 @@ A_Case_Path
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0037-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -434,7 +428,7 @@ statement to query.
 
 Returns the condition expression associated with the while loop.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
 @ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Element_Kinds:]}
 @begin{Display}
 @ChgRef{Version=[2],Kind=[Deleted]}
@@ -450,8 +444,7 @@ A_While_Loop_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
@@ -486,8 +479,7 @@ A_For_Loop_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
@@ -600,8 +592,7 @@ A_Block_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -646,8 +637,7 @@ A_Block_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -691,8 +681,7 @@ A_Block_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -730,8 +719,7 @@ An_Exit_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
@@ -769,8 +757,7 @@ An_Exit_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
@@ -805,8 +792,7 @@ An_Exit_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
@@ -843,8 +829,7 @@ A_Return_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
@@ -881,8 +866,7 @@ Statement expects an element that has the following Statement_Kinds:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
@@ -929,8 +913,7 @@ Statement expects an element that has the following Statement_Kinds:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns a list of
@@ -978,8 +961,7 @@ Statement expects an element that has the following Statement_Kinds:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0010-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns a list of
@@ -1016,8 +998,7 @@ A_Goto_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
@@ -1052,8 +1033,7 @@ A_Goto_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
@@ -1113,6 +1093,33 @@ An_Expression
 @end{DescribeCode}
 
 
+@ChgNote{ SI99-0051-1 }
+@LabeledAddedClause{Version=[2],Name=[function Is_Defaulted_Null_Procedure_Call]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0051-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Defaulted_Null_Procedure_Call}
+     (Statement : @key[in] Asis.Statement) @key[return] Boolean;]}
+@end{Example}
+
+@ChgAdded{Version=[2],Text=[Statement specifies the procedure_call_statement
+to query.]}
+
+@ChgAdded{Version=[2],Text=[Returns True if Statement is a procedure call to a
+generic formal procedure that has @key[null] as a default and no explicit actual
+procedure is provided, and returns False otherwise (including for any unexpected
+element).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0051-1]}
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[
+Statement expects an element that has the following Statement_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Procedure_Call_Statement]}
+@end{Display}
+@end{DescribeCode}
+
+
 @LabeledClause{function Corresponding_Called_Entity}
 
 
@@ -1132,11 +1139,13 @@ Returns the declaration of the procedure or entry denoted by the call.
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
-@Chg{Version=[2],New=[],Old=[the ]}prefix of the call denotes an @Chg{Version=[2],New=[],Old=[access to a procedure ]}implicit or explicit
+@Chg{Version=[2],New=[the ],Old=[]}prefix of the call denotes an @Chg{Version=[2],New=[],Old=[access to a procedure ]}implicit or explicit
   dereference@Chg{Version=[2],New=[ of an access to a procedure value, or],Old=[,]}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1]}
-@ChgDeleted{Version=[2],Text=[argument is a dispatching call,]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0051-1]}
+@Chg{Version=[2],New=[the Statement is a call to a generic formal procedure that has
+*null* as a default and no explicit actual procedure is provided,
+or],Old=[argument is a dispatching call,]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0055-1]}
 @Chg{Version=[2],New=[the Statement],Old=[argument]} is a call
@@ -1333,8 +1342,7 @@ An_Accept_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
@@ -1370,8 +1378,7 @@ An_Accept_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
@@ -1414,8 +1421,7 @@ An_Accept_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -1452,8 +1458,7 @@ An_Accept_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -1493,8 +1498,7 @@ An_Accept_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -1529,8 +1533,7 @@ An_Accept_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
@@ -1680,8 +1683,7 @@ An_Abort_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -1719,8 +1721,7 @@ An_Exception_Handler
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
@@ -1757,8 +1758,7 @@ An_Exception_Handler
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -1804,8 +1804,7 @@ An_Exception_Handler
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -1843,8 +1842,7 @@ A_Raise_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element
@@ -1888,8 +1886,7 @@ expects an element that has the following Statement_Kinds:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0013-1],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns an element
@@ -1925,8 +1922,7 @@ A_Code_Statement
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element

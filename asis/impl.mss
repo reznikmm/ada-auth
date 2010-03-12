@@ -1,6 +1,6 @@
 @Part(impl, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/impl.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2009/12/23 06:58:59 $}
+@comment{$Revision: 1.10 $ $Date: 2010/03/09 06:46:51 $}
 
 @LabeledSection{package Asis.Implementation}
 
@@ -168,28 +168,34 @@ Returns the Error_Kinds value for the most recent error.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Text=[Whenever an error condition is detected, and any
-ASIS exception is raised, an Asis.Errors.Error_Kinds value is stored.
+ASIS exception is raised, an Asis.Errors.Error_Kinds value and a Diagnosis
+string are stored.
 The Status function returns the Asis.Errors.Error_Kinds value
 for the most recently recorded error.]}
 @end{DescribeCode}
 
-@ChgNote{SI99-0053-1 remove subprogram}
-@LabeledDeletedClause{Version=[2],Name=[function Diagnosis (obs)]}
+@LabeledClause{function Diagnosis}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
-@ChgDeleted{Version=[2],Text=[@Key[function] @AdaSubDefn{Diagnosis} @Key[return] Wide_String;]}
+@Key[function] @AdaSubDefn{Diagnosis} @Key[return] Wide_String;
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
-@ChgDeleted{Version=[2],Text=[Returns a string value describing the most
-recent error.]}
+Returns a string value describing the most recent error.
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0053-1]}
-@ChgDeleted{Version=[2],Text=[Will typically return a null string if Status =
-Not_An_Error.]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[Diagnosis will],Old=[Will]} typically return a null string
+if Status = Not_An_Error.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Whenever an error condition is detected, and any
+ASIS exception is raised, an Asis.Errors.Error_Kinds value and a Diagnosis
+string are stored. The Diagnosis function returns the diagnostic message
+describing the most recently recorded error. Note that Diagnosis values are
+implementation dependent and may vary greatly among ASIS implementations.]}
+
 @end{DescribeCode}
+
 
 @LabeledClause{procedure Set_Status}
 

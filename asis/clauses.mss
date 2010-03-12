@@ -1,6 +1,6 @@
 @Part(clauses, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/clauses.mss,v $}
-@comment{$Revision: 1.11 $ $Date: 2009/12/23 06:58:58 $}
+@comment{$Revision: 1.12 $ $Date: 2010/03/09 06:46:51 $}
 
 @LabeledSection{package Asis.Clauses}
 
@@ -48,9 +48,9 @@ names into an equivalent sequence of corresponding single clauses. Similarly, an
 implementation may keep a name only once even though that name can appear more
 than once in a clause.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0058-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Clause expects an element
-that has one of the following],Old=[Appropriate]} Element_Kinds:
+that has one of the following Clause_Kinds],Old=[Appropriate Element_Kinds]}:
 @begin{Display}
 A_Use_Package_Clause
 A_Use_Type_Clause
@@ -114,8 +114,7 @@ A_Component_Clause
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -205,8 +204,7 @@ A_Record_Representation_Clause
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -248,8 +246,7 @@ A_Record_Representation_Clause
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -300,8 +297,7 @@ A_Component_Clause
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -333,8 +329,7 @@ A_Component_Clause
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has

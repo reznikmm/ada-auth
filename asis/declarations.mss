@@ -1,6 +1,6 @@
 @Part(declarations, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/declarations.mss,v $}
-@comment{$Revision: 1.25 $ $Date: 2010/01/29 05:17:56 $}
+@comment{$Revision: 1.26 $ $Date: 2010/03/09 06:46:51 $}
 
 
 @LabeledSection{package Asis.Declarations}
@@ -62,8 +62,7 @@ A_Declaration
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that
@@ -144,8 +143,7 @@ A_Defining_Name
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 @end{DescribeCode}
 
 
@@ -267,8 +265,7 @@ A_Defining_Expanded_Name
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -304,8 +301,7 @@ A_Defining_Expanded_Name
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
@@ -1792,6 +1788,14 @@ generic body template is returned. (i.e., an argument that is
 A_Package_Instantiation, results in a value that is
 A_Package_Body_Declaration that can be analyzed with all appropriate ASIS queries).
 
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0052-1]}
+  @ChgAdded{Version=[2],Text=[If the generic unit is completed with a pragma
+  Import, the result of this function is implementation-defined, as the Ada
+  Standard does not define the meaning of pragma Import completing a
+  generic unit.]}
+@end{Discussion}
+
 Returns Nil_Element if the body of the generic has not yet been compiled
 or inserted into the Ada Environment Context.
 
@@ -2484,8 +2488,7 @@ A_Protected_Body_Declaration
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0039-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
@@ -2560,8 +2563,7 @@ An_Entry_Declaration
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -2616,8 +2618,7 @@ An_Entry_Body_Declaration
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
@@ -2652,8 +2653,7 @@ An_Entry_Body_Declaration
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
@@ -3386,7 +3386,7 @@ Returns True if the declaration is a primitive subprogram of a tagged type.
 
 Returns False for any unexpected argument.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0040-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0040-1],ARef=[SI99-0050-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Declaration expects an element that has
 one of the following],Old=[Expected]} Element_Kinds:
 @begin{Display}
@@ -3395,7 +3395,11 @@ A_Function_Declaration
 A_Procedure_Renaming_Declaration
 A_Function_Renaming_Declaration@Chg{Version=[2],New=[
 A_Procedure_Instantiation
-A_Function_Instantiation],Old=[]}
+A_Function_Instantiation
+A_Procedure_Body_Declaration
+A_Function_Body_Declaration
+A_Procedure_Body_Stub
+A_Function_Body_Stub],Old=[]}
 @end{Display}
 @end{DescribeCode}
 

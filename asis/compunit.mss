@@ -1,6 +1,6 @@
 @Part(compunit, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/compunit.mss,v $}
-@comment{$Revision: 1.16 $ $Date: 2009/12/23 06:58:59 $}
+@comment{$Revision: 1.17 $ $Date: 2010/03/09 06:46:51 $}
 
 
 @LabeledSection{package Asis.Compilation_Units}
@@ -157,23 +157,28 @@ a Status of Value_Error]} if the unit is Nil_Compilation_Unit.
 @end{DescribeCode}
 
 
-@LabeledClause{function Enclosing_Container}
+@LabeledDeletedClause{Version=[2],Name=[function Enclosing_Container (unit)]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Enclosing_Container} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
-           @key[return] Asis.Ada_Environments.Containers.Container;
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0058-1]}
+@ChgDeleted{Version=[2],Text=[@key[function] @AdaSubDefn{Enclosing_Container} (Compilation_Unit : @key[in] Asis.Compilation_Unit)
+           @key[return] Asis.Ada_Environments.Containers.Container;]}
 @end{Example}
 
-Compilation_Unit @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the unit whose Container is required.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0058-1]}
+@ChgDeleted{Version=[2],Text=[Compilation_Unit
+@Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the unit whose Container
+is required.]}
 
-Returns the Container of the Context containing the compilation unit.
-Compilation units always remember the ASIS Context and Container from
-which they were obtained.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0058-1]}
+@ChgDeleted{Version=[2],Text=[Returns the Container of the Context containing
+the compilation unit. Compilation units always remember the ASIS Context and
+Container from which they were obtained.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
-Raises ASIS_Inappropriate_Compilation_Unit @ChgAdded{Version=[2],Text=[with
-a Status of Value_Error]} if the unit is Nil_Compilation_Unit.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0058-1]}
+@ChgDeleted{Version=[2],Text=[Raises ASIS_Inappropriate_Compilation_Unit
+if the unit is Nil_Compilation_Unit.]}
 @end{DescribeCode}
 
 
@@ -345,7 +350,7 @@ Configuration_Compilation_Units.]}
 
 
 
-@LabeledAddedClause{Version=[2],Name=[function Configuration_Compilation_Units (context)]}
+@LabeledAddedClause{Version=[2],Name=[function Configuration_Compilation_Units]}
 
 @begin{DescribeCode}
 @begin{Example}

@@ -1,6 +1,6 @@
 @Part(definitions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/definitions.mss,v $}
-@comment{$Revision: 1.21 $ $Date: 2009/12/31 02:44:03 $}
+@comment{$Revision: 1.22 $ $Date: 2010/03/09 06:46:51 $}
 
 
 @LabeledSection{package Asis.Definitions}
@@ -232,6 +232,14 @@ does not provide such implicit declarations.]}
 
 The Enclosing_Element for each of the implicit declarations is the
 Declaration argument.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0059-1]}
+@ChgAdded{Version=[2],Text=[May raise Asis_Failed with a Status of Storage_Error
+if the implementation is unable to create the result in the stack or memory
+space available and may raise Storage_Error if the result cannot be returned
+after being created. This is particularly likely if the Definition is derived
+from Standard.Wide_Wide_Character but is possible with any very large
+enumeration type.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Definition expects an element
@@ -521,7 +529,9 @@ An_Enumeration_Type_Definition @em 3.5.1
 
 @begin{ChildRef}@ @;
 @begin{Display}
-function Enumeration_Literal_Declarations
+function Enumeration_Literal_Declarations@Chg{Version=[2],New=[
+function Enumeration_Literal_Specification],Old=[]}
+
 @end{Display}
 @end{ChildRef}
 
@@ -538,6 +548,14 @@ enumeration type definition to query.
 Returns a list of the literals declared in an enumeration_type_definition,
 in their order of appearance.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0059-1]}
+@ChgAdded{Version=[2],Text=[May raise Asis_Failed with a Status of Storage_Error
+if the implementation is unable to create the result in the stack or memory
+space available and may raise Storage_Error if the result cannot be returned
+after being created. This is particularly likely if the Type_Definition is
+Standard.Wide_Wide_Character but is possible with any very large
+enumeration type.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
 that has the following],Old=[Appropriate]} Type_Kinds:
@@ -547,14 +565,93 @@ An_Enumeration_Type_Definition
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
 have the following ],Old=[]}Declaration_Kinds:
 @begin{Display}
 An_Enumeration_Literal_Specification
+@end{Display}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0059-1 added new section}
+@LabeledAddedClause{Version=[2],Name=[constant Enumeration_First_Pos]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0059-1]}
+@ChgAdded{Version=[2],Text=[@AdaObjDefn{Enumeration_First_Pos} : @key[constant] Asis.Asis_Natural := 0;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0059-1]}
+@ChgAdded{Version=[2],Text=[Corresponds to the position number of the first
+literal of an enumeration type definition.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0059-1 added new section}
+@LabeledAddedClause{Version=[2],Name=[function Enumeration_Last_Pos]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0059-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Enumeration_Last_Pos}
+               (Type_Definition : @key[in] Asis.Type_Definition)
+                     @key[return] Asis.Asis_Natural;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0059-1]}
+@ChgAdded{Version=[2],Text=[Returns the position number of the last literal of
+Type_Definition. Raises Constraint_Error if the number is outside the range of
+ASIS_Natural.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0059-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Type_Definition expects an element
+that has the following Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[An_Enumeration_Type_Definition]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0059-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have this expected kind.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0059-1 added new section}
+@LabeledAddedClause{Version=[2],Name=[function Enumeration_Literal_Specification]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0059-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Enumeration_Literal_Specification}
+               (Type_Definition : @key[in] Asis.Type_Definition;
+                Position        : @key[in] Asis.Asis_Natural)
+                     @key[return] Asis.Declaration;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0059-1]}
+@ChgAdded{Version=[2],Text=[Returns the An_Enumeration_Literal_Specification for
+the literal indicated by Position of the enumeration type.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0059-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Type_Definition expects an element
+that has the following Type_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[An_Enumeration_Type_Definition]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0059-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have this expected kind.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0059-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns an
+element that has the following Declaration_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[An_Enumeration_Literal_Specification]}
 @end{Display}
 @end{DescribeCode}
 
@@ -593,8 +690,7 @@ A_Signed_Integer_Type_Definition
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
@@ -639,8 +735,7 @@ A_Modular_Type_Definition
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
@@ -1597,8 +1692,7 @@ An_Index_Constraint
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each
@@ -1663,8 +1757,7 @@ A_Discriminant_Constraint
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
@@ -1700,7 +1793,15 @@ returned from the query Subtype_Constraint.
 @end{UsageNote}
 
 
-@LabeledClause{function Component_Subtype_Indication}
+@ChgNote{SI99-0056-1 obsoleted old section, replaced with new one}
+@LabeledRevisedClause{Version=[2],New=[function Component_Definition_Subtype],
+Old=[function Component_Subtype_Indication]}
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0056-1]}
+@ChgAdded{Version=[2],Text=[Component_Subtype_Indication is now obsolescent, see
+@RefSecNum{function Component_Subtype_Indication}.]}
+@end{Discussion}
 
 @begin{ElementRef}
 A_Component_Definition @em 3.6
@@ -1708,21 +1809,24 @@ A_Component_Definition @em 3.6
 
 @begin{ChildRef}@ @;
 @begin{Display}
-function Component_Subtype_Indication
+function @Chg{Version=[2],New=[Component_Definition_Subtype],Old=[Component_Subtype_Indication]}
 @end{Display}
 @end{ChildRef}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Component_Subtype_Indication}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0056-1]}
+@key[function] @Chg{Version=[2],New=[@AdaSubDefn{Component_Definition_Subtype}],Old=[@AdaSubDefn{Component_Subtype_Indication}]}
         (Component_Definition : @key[in] Asis.Component_Definition)
-            @key[return] Asis.Subtype_Indication;
+            @key[return] Asis.@Chg{Version=[2],New=[Definition],Old=[Subtype_Indication]};
 @end{Example}
 
 Component_Definition @chg{Version=[1],New=[specifies],Old=[@en Specifies]} the
 Component_Definition to query.
 
-Returns the subtype_indication of the Component_Definition.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0056-1]}
+Returns the subtype_indication @Chg{Version=[2],New=[or access_definition ],Old=[]}of
+the Component_Definition.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Component_Definition expects an element
@@ -1733,14 +1837,14 @@ A_Component_Definition
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0056-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
-has the following ],Old=[]}Definition_Kinds:
+has one of the following ],Old=[]}Definition_Kinds:
 @begin{Display}
-A_Subtype_Indication
+A_Subtype_Indication@Chg{Version=[2],New=[
+An_Access_Definition],Old=[]}
 @end{Display}
 @end{DescribeCode}
 
@@ -1822,8 +1926,7 @@ A_Known_Discriminant_Part
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
@@ -2016,8 +2119,7 @@ A_Variant_Part
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that
@@ -2058,8 +2160,7 @@ A_Variant_Part
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
@@ -2115,8 +2216,7 @@ A_Variant
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[a list of elements that each have
@@ -2178,8 +2278,7 @@ A_Private_Extension_Definition
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;Returns @Chg{Version=[2],New=[an element that

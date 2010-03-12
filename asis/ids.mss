@@ -1,6 +1,6 @@
 @Part(ids, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/ids.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2009/07/02 04:50:54 $}
+@comment{$Revision: 1.7 $ $Date: 2010/03/09 06:46:51 $}
 
 @LabeledSection{package Asis.Ids}
 
@@ -185,6 +185,35 @@ Enclosing_Context(Enclosing_Compilation_Unit(E))), E) is True for any element E.
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0037-1]}
 @ChgAdded{Version=[2],Text=[If Create_Element is called twice with the same Id and context, the two results
 are Is_Identical.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0049-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[If The_Context is different from the
+context @i<C> used to create the Id, but the Id refers to an entity in a
+compilation unit which represents the same physical compilation unit in both
+contexts:]}
+@begin{Itemize}
+   @ChgRef{Version=[2],Kind=[Added]}
+   @ChgAdded{Version=[2],Text=[if all of the compilation units in The_Context are
+   the same physical compilation units as in @i<C>, Create_Element shall return
+   an element referring to the same entity as in context @i<C>;]}
+
+   @ChgRef{Version=[2],Kind=[Added]}
+   @ChgAdded{Version=[2],Text=[otherwise, it is implementation-defined whether
+   Create_Element can return a element referring to the same entity.]}
+@end{Itemize}
+@begin{Discussion}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0049-1]}
+  @ChgAdded{Version=[2],Text=[If no units are changed in the environment, then
+  Create_Element will return the same element even if the implementation
+  consider contexts different each time they are created. Changes in
+  configuration pragmas, project files, and the like are considered changes in
+  compilation units as they are provided as part of one or more configuration
+  compilation units (which are considered part of the context).
+  "Implementation-defined" here means that implementations are expected to
+  document what sort of changes to other units in an environment can be made
+  without invalidating Asis.Ids. Note that we have no requirements for this
+  function if the compilation unit containing the element has changed.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 Raises ASIS_Inappropriate_Element if the Element value is not available

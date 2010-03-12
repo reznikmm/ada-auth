@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.22 $ $Date: 2009/12/31 02:44:04 $}
+@comment{$Revision: 1.23 $ $Date: 2010/03/09 06:46:51 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -2083,8 +2083,7 @@ A_Pragma
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 @end{DescribeCode}
 
@@ -2113,8 +2112,7 @@ A_Pragma
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
-of Value_Error for any element that does not have one of these expected
-kinds.]}
+of Value_Error for any element that does not have this expected kind.]}
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
