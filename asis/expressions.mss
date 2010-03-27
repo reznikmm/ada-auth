@@ -1,6 +1,6 @@
 @Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.20 $ $Date: 2010/03/09 06:46:51 $}
+@comment{$Revision: 1.21 $ $Date: 2010/03/12 06:02:39 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -609,17 +609,39 @@ list of referenced entities.
 Reference @chg{Version=[1],New=[specifies],Old=[  @en Specifies]}
 @Chg{Version=[2],New=[a name],Old=[an entity reference]} to query.
 
-@leading@;Exactly like Corresponding_Name_Definition except it returns a list.
-The list will almost always have a length of one. The exception to this
-is the case where an expression in a pragma is ambiguous and reference
-more than one entity. For example:
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0058-1]}
+@leading@;@Chg{Version=[2],New=[Returns a list of defining names:],Old=[Exactly
+like Corresponding_Name_Definition except it returns a list. The list will
+almost always have a length of one. The exception to this is the case where an
+expression in a pragma is ambiguous and reference more than one entity. For
+example:]}
 
 @begin{ChildExample}
-@key[pragma] Inline ("+");        -- @examcom{Inlines all "+" operators}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0058-1]}
+@ChgDeleted{Version=[2],Text=[@key[pragma] Inline ("+");        -- @examcom{Inlines all "+" operators}]}
 @end{ChildExample}
 
-The "+" expression is An_Operator_Symbol but could reference more than one "+"
-operator. In this case, the resulting list includes all referenced entities.
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0058-1]}
+@ChgDeleted{Version=[2],Text=[The "+" expression is An_Operator_Symbol but could
+reference more than one "+" operator. In this case, the resulting list includes
+all referenced entities.]}
+
+@begin{Itemize}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+  @ChgAdded{Version=[2],Text=[If Corresponding_Name_Definition applied to the
+  same reference returns Nil_Element or Not_An_Element, then
+  Corresponding_Name_Definition_List returns an empty list.]}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+  @ChgAdded{Version=[2],Text=[If the reference is overloaded, as may be the case
+  for a pragma that applies to more than one entity, then the list contains all
+  entities to which the pragma applies.]}
+
+  @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+  @ChgAdded{Version=[2],Text=[Otherwise returns a one-element list whose single
+  element is the result of applying Corresponding_Name_Definition to the
+  reference.]}
+@end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @leading@keepnext@;@Chg{Version=[2],New=[Reference expects an element
@@ -1477,6 +1499,10 @@ the explicit_actual_parameter of a parameter_association.
 
 the explicit_generic_actual_parameter of a generic_association.
 
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[the box of a formal_package_association or
+"@key[others] => <>" of a formal package.]}
+
 the name or expression of a pragma_argument_association.
 @end{InnerItemize}
 
@@ -1495,7 +1521,16 @@ Returns An_Expression representing:
 the explicit_actual_parameter of a parameter_association.
 
 the explicit_generic_actual_parameter of a generic_association.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[the box of a formal_package_association.]}
 @end{InnerInnerItemize}
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[See @RefSecNum{function Formal_Parameter} for further details
+regarding box of a formal package.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0031-1]}
 @noprefix@;The Enclosing_Element of An_Expression is the @Chg{Version=[2],

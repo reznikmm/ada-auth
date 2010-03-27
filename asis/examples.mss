@@ -1,9 +1,9 @@
 @Part(examples, Root="asis.msm")
 
-@Comment{$Date: 2010/03/09 06:46:51 $}
+@Comment{$Date: 2010/03/12 06:02:39 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/examples.mss,v $}
-@comment{$Revision: 1.5 $}
+@comment{$Revision: 1.6 $}
 
 @LabeledInformativeAnnex{ASIS application examples}
 
@@ -474,5 +474,110 @@ P.P2 (calls) F1 at line  4
 Processing Unit: P.P3
 @end{Example}
 
+@ChgNote{From SI99-0060-1}
+@LabeledAddedClause{Version=[2],Name=[An ASIS semantic subsystem application to display dispatching calls]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0060-1]}
+@ChgAdded{Version=[2],Text=[This example adds Dispatching_Call processing to the
+previous example, via the ASIS semantic subsystem queries. Assuming that that
+example is updated with an appropriate stub for and call to procedure
+Process_Dispatching_Call; the following example will output additional
+information relating to dispatching calls.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[with] Asis.Views;
+@key[with] Asis.Expressions.Views;
+@key[with] Asis.Callable_Views;
+@key[with] Asis.Subtype_Views;
+@key[with] Ada.Wide_Text_Io; @key[use] Ada.Wide_Text_Io;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[separate] (Check_Compilation_Unit)
+@key[procedure] Process_Dispatching_Call (A_Call : @key[in] Asis.Element) @key[is]
+   Call_Name : Asis.Name;
+@key[begin]]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key[if] Asis.Statements.Is_Dispatching_Call(A_Call) @key[then]                   -- @examcom{@refsecnum{function Is_Dispatching_Call}}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[      -- @examcom{Get the element representing the name of the call}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[      @key[case] Asis.Elements.Element_Kind (A_Call) @key[is]
+         @key[when] Asis.An_Expression =>
+                  Call_Name := Asis.Expressions.Prefix(A_Call);          -- @examcom{@refsecnum{function Prefix}}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[         @key[when] Asis.A_Statement =>
+                  Call_Name:= Asis.Statements.Called_Name(A_Call);       -- @examcom{@refsecnum{function Called_Name}}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[         @key[when others] => @key[null];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[      @key[end case];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[      @key[declare]
+         -- @examcom{Create the callable_view from the call_name}
+         Call_View : @key[constant] Asis.Callable_Views.Callable_View'Class
+            := Asis.Callable_Views.Callable_View
+               (Asis.Expressions.Views.Corresponding_View (Call_Name));  -- @examcom{@refsecnum{function Corresponding_View}}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[         -- @examcom{Via a semantic query, determine the controlling type}
+         Controlling_Type : @key[constant] Asis.Subtype_Views.Subtype_View'Class
+            := Call_View.Associated_Tagged_Type;                         -- @examcom{@refsecnum{Primitive operations}}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[         -- @examcom{Determine the declaration of the callee and the controlling type}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[         Callee_Decl : @key[constant] Asis.Views.Declarative_Regions.View_Declaration'Class
+            := Call_View.Declaration;                                    -- @examcom{@refsecnum{Views and Declarations}}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[         Type_Decl : @key[constant] Asis.Views.Declarative_Regions.View_Declaration'Class
+            := Controlling_Type.Declaration;                             -- @examcom{@refsecnum{Views and Declarations}}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[         -- @examcom{Get the Asis Element representing the declaration of the callee}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[         Callee_Declaration_Element : Asis.Declaration :=
+             Callee_Decl.Declaration;                                    -- @examcom{@refsecnum{function Element_Denoting_View}}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[         -- @examcom{Get the Asis Element representing the declaration of the controlling}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[         Controlling_Type_Declaration_Element : Asis.Declaration :=
+             Type_Decl.Declaration;                                      -- @examcom{@refsecnum{function Element_Denoting_View}}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[         -- @examcom{Output the dispatching call info}]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[      begin]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[         Put ("Dispatching Call to ");
+         Put ( Callee_Decl.Expanded_Name );                              -- @examcom{@refsecnum{Nested Declarative Regions}}
+         Put ( Asis.Views.Declarative_Regions.Expanded_Name(Callee_Decl));
+         Put (" with controlling tagged type of ");
+         Put_Line ( Asis.Views.Declarative_Regions.Expanded_Name(Type_Decl));]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[      @key[end];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key[end] if;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[end] Process_Dispatching_Call;]}
+
+
+@end{Example}
 

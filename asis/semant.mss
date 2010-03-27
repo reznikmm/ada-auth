@@ -1,6 +1,6 @@
 @Part(ids, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/semant.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2010/03/09 06:46:51 $}
+@comment{$Revision: 1.10 $ $Date: 2010/03/12 06:02:39 $}
 
 @LabeledAddedSection{Version=[2],Name=[ASIS Semantic Subsystem]}
 
@@ -294,6 +294,18 @@ Boolean queries Is_Object_Or_Value, Is_Callable, Is_Subtype, Is_Package,
 Is_Generic, Is_Exception, and Is_Statement, are provided to determine to which
 extension of View the specified view V belongs.  For example, @exam{Is_Callable(V)}
 is equivalent to @exam{V @key[in] Callable_View'Class}.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0062-1]}
+@ChgAdded{Version=[2],Text=[The "=" operator is defined for View and its
+descendants.  For views A and B, "A = B" returns True if A and B are both
+produced by calls on Corresponding_View applied to the same Element. Similarly,
+"A = B" returns True if A and B are both produced by calls on
+Corresponding_Subtype_View applied to the same Element. "A = B" returns False if
+any ASIS query defined for A and B would return results that are not equal when
+applied to A and B.  It is unspecified whether "A = B" returns True if A and B
+produce identical results from all ASIS queries, but A and B were produced from
+distinct Elements or a distinct sequence of ASIS queries.]}
+
 @end{DescribeCode}
 
 
@@ -399,8 +411,8 @@ information about the declaration, if any, associated with a given view
 of an entity. This includes the identifier introduced by the declaration
 to denote the view, as well as indicating the particular part of the
 declarative region in which the declaration occurred. The subpackage has the
-contents given in the following subclauses, up to but not including
-@RefSec{Views and Declarations}.]}
+contents given in the subclauses @RefSecNum{type Declarative_Region and type View_Declaration}
+through @RefSecNum{View Declaration Vectors}.]}
 
 
 @LabeledAddedSubClause{Version=[2],Name=[type Declarative_Region and type View_Declaration]}
@@ -1673,8 +1685,12 @@ if the object O denotes a generic formal object.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
 @ChgAdded{Version=[2],Text=[Function Nominal_Subtype returns the nominal subtype
-of the view. Function The view is of a subtype_indication, usually all or part
-of the subtype_indication of the object_declaration.]}
+of the view. The returned Subtype_View corresponds to the subtype_indication,
+discrete_range, or type_definition that defined the nominal subtype of the
+object or value. The nominal subtype of a numeric literal or named number is a
+view of the corresponding universal base subtype. The nominal subtype of a use
+of an operator is that of the equivalent function call, namely the result
+subtype of the corresponding function.]}
 @end{DescribeCode}
 
 
@@ -2388,10 +2404,11 @@ for each of these functions.]}
 @ChgAdded{Version=[2],Text=[Function Is_Limited returns True if and only if the
 view of the subtype C is limited. Function Has_Task_Part returns True if and
 only if the type of the subtype C has a part that is of a task type (whether
- visibly or only in the full definition). Function Needs_Finalization returns
-True if and only if the type of the subtype C needs finalization. Function
-Has_Preelaborable_Initialization returns True if and only if the subtype C has
-preelaborable initialization.]}
+ visibly or only in the full definition). If subtype C is a class-wide
+subtype S'Class, then returns Has_Task_Part(S). Function Needs_Finalization
+returns True if and only if the type of the subtype C needs finalization.
+Function Has_Preelaborable_Initialization returns True if and only if the
+subtype C has preelaborable initialization.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Function Has_Unknown_Discriminants returns True if
@@ -2407,9 +2424,16 @@ default_expressions.]}
 @ChgAdded{Version=[2],Text=[Function
 Nondiscriminant_Region_Parts returns a list of Region_Parts, one for each
 separate visible region part, each comprising components, entries, and protected
-subprograms from a single list of components or items of subtype C. The returned
-list is empty if subtype C is not a descendant of a record type, a record
-extension, a task type, or a protected type.]}
+subprograms from a single list of components or items from the declaration
+of some ancestor of subtype C. The returned list is empty if subtype C is not a
+descendant of a record type, a record extension, a task type, or a protected
+type.]}
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[There is one part for each record or extension,
+even if the record or extension is null (empty).]}
+@end{Discussion}
 @end{DescribeCode}
 
 
@@ -2708,9 +2732,9 @@ operation. Returns False otherwise.]}
 @ChgAdded{Version=[2],Text=[C specifies the callable view to query.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Returns the controlling tagged type of a dispatching
-operation C. If C is not a dispatching operation, ASIS_Inappropriate_View is
-raised.]}
+@ChgAdded{Version=[2],Text=[Returns the tagged type of which the dispatching
+operation C is a primitive. If C is not a dispatching operation,
+ASIS_Inappropriate_View is raised.]}
 @end{DescribeCode}
 
 
@@ -3183,7 +3207,11 @@ ASIS_Inappropriate_View.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[As seen from within itself, a generic unit is an
 instance (that is, the current instance of the given generic); it is not a
-generic unit. This function yields a view of that instance for generic G.]}
+generic unit. This function yields a view of that instance for generic G.
+For example, given the generic package Ada.Text_IO.Enumeration_IO,
+Current_Package_Instance would return a view of a non-generic
+package which can be passed to the interfaces defined for
+Package_View, such as Visible_Part, Is_Full_View, etc.]}
 @end{DescribeCode}
 
 
@@ -3229,7 +3257,11 @@ ASIS_Inappropriate_View.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[As seen from within itself, a generic unit is an
 instance (that is, the current instance of the given generic); it is not a
-generic unit. This function yields a view of that instance for generic G.]}
+generic unit. This function yields a view of that instance for generic G.
+For example, given the generic subprogram Ada.Unchecked_Deallocation,
+Current_Subprogram_Instance would return a view of a non-generic subprogram
+which can be passed to the interfaces defined for Callable_View, such as
+Callable_Profile, Is_Procedure, etc.]}
 @end{DescribeCode}
 
 
@@ -3370,20 +3402,24 @@ shall exist. The package shall provide interfaces equivalent to those described
 in the following subclauses.]}
 
 
-@LabeledAddedSubClause{Version=[2],Name=[function Corresponding_View_Declaration]}
+@LabeledAddedSubClause{Version=[2],Name=[procedure Corresponding_View_Declarations]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Corresponding_View_Declaration} (Declaration: @key[in] Asis.Declaration)
-   @key[return] Asis.Views.Declarative_Regions.View_Declaration'Class;]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
+@ChgAdded{Version=[2],Text=[@key[procedure] @AdaSubDefn{Corresponding_View_Declarations}
+   (Declaration: @key[in] Asis.Declaration;
+    View_Declarations : @key[out] Declarative_Regions.View_Declaration_Vector'Class);]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Declaration specifies the declaration to query.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Returns a view that specifies the entity denoted by Declaration.]}
+@ChgAdded{Version=[2],Text=[Returns in parameter View_Declarations a vector of
+view declarations, one element for each defining name of Declaration;
+each view declaration defines the view of the corresponding named
+entity declared by Declaration.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Declaration expects
@@ -3394,7 +3430,7 @@ an element that has the following Element_Kinds:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status of Value_Error for any element
-that does not have one of these expected kinds.]}
+that does not have this expected kind.]}
 @end{DescribeCode}
 
 
@@ -3481,7 +3517,7 @@ element that has the following Element_Kinds:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status of
-Value_Error for any element that does not have one of these expected kinds.]}
+Value_Error for any element that does not have this expected kind.]}
 @end{DescribeCode}
 
 @begin{SingleNote}

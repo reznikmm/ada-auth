@@ -1,9 +1,9 @@
 @Part(rat, Root="asis.msm")
 
-@Comment{$Date: 2010/03/09 06:46:51 $}
+@Comment{$Date: 2010/03/12 06:02:39 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/rat.mss,v $}
-@comment{$Revision: 1.6 $}
+@comment{$Revision: 1.7 $}
 
 @LabeledInformativeAnnex{Rationale}
 
@@ -19,8 +19,14 @@ automation can harness the excellent software engineering features of Ada to
 facilitate code comprehension, high reliability, and high quality of the
 software product. The following text presents some motivational background.
 
-@LabeledSubClause{Definition}
+@begin{SingleNote}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[This Rationale Annex has not been updated in this
+edition of the standard. It is provided for historical reference only.]}
+@end{SingleNote}
 
+
+@LabeledSubClause{Definition}
 
 Code analysis@Defn{Code analysis} is the inspection of software source code for
 the purpose of extracting information about the software. Such information can
