@@ -1,6 +1,6 @@
 @Part(elements, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/elements.mss,v $}
-@comment{$Revision: 1.23 $ $Date: 2010/03/09 06:46:51 $}
+@comment{$Revision: 1.24 $ $Date: 2010/03/27 07:31:18 $}
 
 
 @LabeledSection{package Asis.Elements}
@@ -175,18 +175,27 @@ A_Use_Package_Clause]}
 @end{DescribeCode}
 
 
-@LabeledClause{function Configuration_Pragmas}
+@ChgNote{SI99-0058-1 obsoleted the original function and replaced it.}
+@LabeledRevisedClause{Version=[2],New=[function Inherited_Configuration_Pragmas],
+Old=[function Configuration_Pragmas]}
 
 @begin{DescribeCode}
 @begin{Example}
-@key[function] @AdaSubDefn{Configuration_Pragmas} (The_Context : @key[in] Asis.Context)
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0058-1]}
+@key[function] @Chg{Version=[2],New=[@AdaSubDefn{Inherited_Configuration_Pragmas} (Compilation_Unit],Old=[@AdaSubDefn{Configuration_Pragmas} (The_Context]} : @key[in] Asis.@Chg{Version=[2],New=[Compilation_Unit],Old=[Context]})
                              @key[return] Asis.Pragma_Element_List;
 @end{Example}
 
-The_Context @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the Context to query.
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0058-1]}
+@Chg{Version=[2],New=[Compilation_Unit specifies],Old=[The_Context    @en Specifies]}
+the @Chg{Version=[2],New=[unit],Old=[Context]} to query.
 
-Returns a list of pragmas that apply to all future compilation_unit elements
-compiled into The_Context. Pragmas returned by this query should
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0058-1]}
+Returns a list of @Chg{Version=[2],New=[configuration ],Old=[]}pragmas that
+apply to @Chg{Version=[2],New=[the given compilation_unit that were inherited
+from the environment, rather than being specified explicitly within the
+associated compilation],Old=[all future compilation_unit elements
+compiled into The_Context]}. Pragmas returned by this query should
 have appeared in a compilation that had no compilation_unit elements.
 To the extent that order is meaningful, the pragmas should be in
 their order of appearance in the compilation. (The order is implementation

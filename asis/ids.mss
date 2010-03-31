@@ -1,6 +1,6 @@
 @Part(ids, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/ids.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2010/03/09 06:46:51 $}
+@comment{$Revision: 1.8 $ $Date: 2010/03/27 07:31:18 $}
 
 @LabeledSection{package Asis.Ids}
 
@@ -199,21 +199,22 @@ contexts:]}
 
    @ChgRef{Version=[2],Kind=[Added]}
    @ChgAdded{Version=[2],Text=[otherwise, it is implementation-defined whether
-   Create_Element can return a element referring to the same entity.]}
+   Create_Element can return an element referring to the same entity.]}
 @end{Itemize}
-@begin{Discussion}
+@begin{Ramification}
   @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0049-1]}
   @ChgAdded{Version=[2],Text=[If no units are changed in the environment, then
   Create_Element will return the same element even if the implementation
-  consider contexts different each time they are created. Changes in
+  considers contexts different each time they are created. Changes in
   configuration pragmas, project files, and the like are considered changes in
   compilation units as they are provided as part of one or more configuration
   compilation units (which are considered part of the context).
   "Implementation-defined" here means that implementations are expected to
   document what sort of changes to other units in an environment can be made
   without invalidating Asis.Ids. Note that we have no requirements for this
-  function if the compilation unit containing the element has changed.]}
-@end{Discussion}
+  function if the compilation unit containing the element has changed; the
+  behavior is unspecified and no documentation is required.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 Raises ASIS_Inappropriate_Element if the Element value is not available

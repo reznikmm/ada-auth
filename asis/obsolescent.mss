@@ -1,10 +1,10 @@
 @Part(glossary, Root="asis.msm")
 
-@Comment{$Date: 2010/03/09 06:46:51 $}
+@Comment{$Date: 2010/03/27 07:31:18 $}
 @LabeledAddedNormativeAnnex{Version=[2],Name=[Obsolescent Features]}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/obsolescent.mss,v $}
-@comment{$Revision: 1.15 $}
+@comment{$Revision: 1.16 $}
 
 @LabeledAddedClause{Version=[2],Name=[Annex Contents]}
 
@@ -28,7 +28,7 @@ Use of these features is not recommended in newly written programs.]}
 Asis also shall provide interfaces equivalent to the obsolescent
 ones described in the following subclauses.]}
 
-@ChgNote{SI99-0022-1 add section on newly obsolete subprogram}
+@ChgNote{SI99-0022-1 add section on newly obsolete type}
 @LabeledAddedSubclause{Version=[2],Name=[type Trait_Kinds]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0022-1]}
@@ -918,6 +918,57 @@ Status of Value_Error if the unit is Nil_Compilation_Unit.]}
 Asis.Elements also shall provide interfaces equivalent to the obsolescent
 ones described in the following subclauses.]}
 
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Configuration_Pragmas]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[This function has been replaced by
+Inherited_Configuration_Pragmas (see @RefSecNum{function Inherited_Configuration_Pragmas}).
+Use of the function
+Configuration_Pragmas is not recommended in new programs.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Configuration_Pragmas} (The_Context : @key[in] Asis.Context)
+                             @key[return] Asis.Pragma_Element_List;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[The_Context specifies the Context to query.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns a list of pragmas that apply to all future
+compilation_unit elements compiled into The_Context. Pragmas returned by this
+query should have appeared in a compilation that had no compilation_unit
+elements. To the extent that order is meaningful, the pragmas should be in their
+order of appearance in the compilation. (The order is implementation dependent,
+many pragmas have the same effect regardless of order.)]}
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[This query is obsolescent as most Ada
+implementations have multiple ways to provide configuration pragmas; they often
+depend on the location or project where a unit is compiled. This query does not
+provide that information, so no useful answer can be provided on those
+implementations.]}
+@end{Discussion}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns Nil_Element_List if there are no such
+configuration pragmas.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Returns a list of
+elements that each have the following Element_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Pragma]}
+@end{Display}
+@end{DescribeCode}
+
+
+
 @ChgNote{SI99-0022-1 add section on newly obsolete subprogram}
 @LabeledAddedSubclause{Version=[2],Name=[function Trait_Kind]}
 
@@ -1699,24 +1750,24 @@ function is not recommended in new programs.]}
 
 
 
-@ChgNote{SI99-0035-1 add chapter on newly obsolete functions}
-@LabeledAddedClause{Version=[2],Name=[Obsolescent Features in package Asis.Data_Decomposition]}
+@ChgNote{SI99-0058-1 add chapter on newly obsolete package}
+@LabeledAddedClause{Version=[2],Name=[Obsolescent package Asis.Data_Decomposition]}
 
-@LabeledAddedSubclause{Version=[2],Name=[Introduction for Obsolescent Features in package Asis.Data_Decomposition]}
+@LabeledAddedSubclause{Version=[2],Name=[Introduction for Obsolescent package Asis.Data_Decomposition]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0035-1]}
-@ChgAdded{Version=[2],Text=[In addition to the interfaces defined in
-@RefSecNum{package Asis.Data_Decomposition (optional)}, the library package
-Asis.Data_Decomposition (if provided) also shall provide interfaces equivalent
-to the obsolescent ones described in the following subclauses.]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0037-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Support for data decomposition is optional. The
+library package Asis.Data_Decomposition shall exist for an implementation that
+supports data decomposition. If it exists, the package shall provide interfaces
+equivalent to the obsolescent ones described in the following subclauses.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[Operations to decompose data values using the ASIS
 type information and a Portable_Data stream, representing a data value of that
 type, are provided by this package. These facilities are largely superseded by
 the Ada streams operations.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[An application can write data, using the
 Asis.Data_Decomposition.Portable_Transfer package to an external medium for
 later retrieval by another application. The second application reads that data
@@ -1725,7 +1776,7 @@ discrete scalar types can be converted directly into useful information.
 Composite types, such as records and arrays, shall first be broken into their
 various discriminants and components.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[A data stream representing a record value can be
 decomposed into a group of discriminant and component data streams by extracting
 those streams from the record's data stream. This extraction is performed by
@@ -1735,7 +1786,7 @@ type is described by a Record_Component value. Each value encapsulates the
 information needed, by the implementation, to efficiently extract the associated
 field from a data stream representing a record value of the correct type.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[A data stream representing an array value can be
 decomposed into a group of component data streams by extracting those streams
 from the array's data stream. This extraction is performed by applying the
@@ -1744,13 +1795,141 @@ Array_Component value is used to describe all array components. The value
 encapsulates the information needed, by the implementation, to efficiently
 extract any of the array components.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0035-1]}
-@ChgAdded{Version=[2], Text=[This interface assumes that the data stream is
-appropriate for the ASIS host machine. For example, the implementation of this
-interface will not need to worry about byte flipping or reordering of bits
-caused by movement of data between machine architectures.]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[Assumptions and Limitations of this Interface:]}
+@begin{Enumerate}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2], Text=[The data stream is appropriate for the ASIS host machine. For example,
+the implementation of this interface will not need to worry about
+byte flipping or reordering of bits caused by movement of data between
+machine architectures.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Records, arrays, and their components may be packed.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0037-1],ARef=[SI99-0039-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Records, array components, enumerations, and scalar
+types may have aspect clauses applied to them. This includes scalar types used
+as record discriminants and array indices.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[This specification supports two of the three type
+models discussed below. Models 1 and 2 are supported. Model 3 is not
+supported.]}
+
+@begin{InnerEnumerate}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[Simple "static" types contain no variants, have a single fixed 'Size,
+      and all components and attributes are themselves static and/or fully
+      constrained. The size and position for any component of the type can be
+      determined without regard to constraints. For example:]}
+
+@begin{ChildExample}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[type] Static_Record @key[is]
+    @key[record]
+        F1, F2 : Natural;
+        C1     : Wide_Character;
+        A1     : Wide_String (1..5);
+    @key[end record];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[type] Static_Discriminated (X : Boolean) @key[is]
+    @key[record]
+        F1, F2 : Natural;
+        C1     : Wide_Character;
+    @key[end record];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[type] Static_Array   @key[is array] (Integer @key[range] 1 .. 100) @key[of] Boolean;
+@key[type] Static_Enum    @key[is] (One, Two, Three);
+@key[type] Static_Integer @key[is range] 1 .. 512;
+@key[type] Static_Float   @key[is digits] 15 @key[range] -100.0 .. 100.0;
+@key[type] Static_Fixed   @key[is delta] 0.1 @key[range] -100.0 .. 100.0;]}
+@end{ChildExample}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Comment{Start item 2}@ChgAdded{Version=[2],Text=[Simple "dynamic" types contain one or more components or
+attributes whose size, position, or value depends on the value of one or more
+constraints computed at execution time. This means that the size, position, or
+number of components within the data type cannot be determined without
+reference to constraint values.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Leading],NoPrefix=[T],Text=[Records containing components, whose size depends on discriminants
+      of the record, can be handled because the discriminants for a record
+      value are fully specified by the data stream form of the record value.
+      For example:]}
+
+@begin{ChildExample}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[type] Dynamic_Length (Length : Natural) @key[is]
+    @key[record]
+        S1 : Wide_String (1 .. Length);
+    @key[end record];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[type] Dynamic_Variant (When : Boolean) @key[is]
+    @key[record]
+        @key[case] When @key[is]
+            @key[when] True =>
+                C1 : Wide_Character;
+            @key[when] False =>
+                @key[null];
+        @key[end case];
+    @key[end record];]}
+@end{ChildExample}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Leading],NoPrefix=[T],Text=[Arrays with an
+unconstrained subtype, whose 'Length, 'First, and 'Last depend on dynamic index
+constraints, can be handled because these attributes can be queried and stored
+when the data stream is written. For example:]}
+
+@begin{ChildExample}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[I : Integer := Some_Function;
+@key[type] Dynamic_Array @key[is]
+    @key[array] (Integer @key[range] I .. I + 10) @key[of] Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[type] Heap_Array   @key[is array] (Integer @key[range] <>) @key[of] Boolean;
+@key[type] Access_Array @key[is access] Heap_Array;
+X : Access_Array := @key[new] Heap_Array (1 .. 100);]}
+@end{ChildExample}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@Comment{Start item 3}@ChgAdded{Version=[2],Type=[Leading],Text=[Complex,
+externally "discriminated" records,
+contain one or more components whose size or position depends on the value of
+one or more non-static external values (values not stored within instances of
+the type) at execution time. The size for a value of the type cannot be
+determined without reference to these external values, whose runtime values are
+not known to the ASIS Context and cannot be automatically recorded by the
+Asis.Data_Decomposition.Portable_Transfer generics. A class-wide type also
+falls in this category, as does an array type with a dynamic component size.
+For example:]}
+
+@begin{ChildExample}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[N : Natural := Function_Call();
+....
+@key[declare]
+    @key[type] Complex @key[is]
+        @key[record]
+            S1 : Wide_String (1 .. N);
+        @key[end record];
+@key[begin]
+    ....
+@key[end];]}
+@end{ChildExample}
+@end{InnerEnumerate}
+@end{Enumerate}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[General Usage Rules:]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[All operations in this package will attempt to detect the use of invalid
 data streams. A data stream is "invalid" if an operation determines that
 the stream could not possibly represent a value of the expected variety.
@@ -1759,13 +1938,260 @@ patterns which are illegal, etc. The exception ASIS_Inappropriate_Element
 is raised in these cases. The Status value is Data_Error. The
 Diagnosis string will indicate the kind of error detected.]}
 
-@ChgNote{SI99-0035-1 add section on newly obsolete subprogram}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[All implementations will handle arrays with a
+minimum of 16 dimensions, or the number of dimensions allowed by their compiler,
+whichever is smaller.]}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[type Record_Component]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Type Record_Component describes one discriminant or
+component of a record type.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0047-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[The "=" operator is not
+meaningful between Record_Component values unless one of them is the
+Nil_Record_Component value.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[A record type describes composite values which
+contain zero or more discriminant and component fields. A_Record_Type_Definition
+can be queried to obtain a list of Record_Components. Each Record_Component
+contains the information necessary to extract one discriminant or component
+field of the record.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Record_Components are intended for use with data
+stream extraction operations. An extraction operation is performed using a
+Record_Component, in conjunction with a data stream representing a value of the
+record type. The record data stream contains data for all fields of the record.
+The result is an extracted data stream representing just the value of the one
+field. Record_Components are implemented so as to allow for efficient extraction
+of field values.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[An extracted field data stream is suitable for all
+uses. If the field is a scalar type, it can be converted directly into useful
+information. If the field is, in turn, another composite value, it can be
+further decomposed into its own component values.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[There are two ways to obtain the Record_Components
+or the Array_Component needed to further decompose an embedded composite field.
+First, if the type of the field is known, the type definition can be directly
+queried to obtain the Record_Components or the Array_Component that describe its
+internal structure. Second, the Record_Component used to extract the field can
+be queried to obtain the same Record_Components or the same Array_Component.
+Both methods return identical information.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[This kind of nested decomposition can be carried to
+any required level.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Record_Components become invalid when the Context,
+from which they originate, is closed. All Record_Components are obtained by
+referencing a) an Element, which has an associated Context, b) another
+Record_Component, or c) an Array_Component. Ultimately, all component values
+originate from a A_Type_Definition Element; that Element determines their
+Context of origin.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Record_Component} @key[is private];
+@AdaObjDefn{Nil_Record_Component} : @key[constant] Record_Component;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] "=" (Left  : @key[in] Record_Component;
+              Right : @key[in] Record_Component)
+              @key[return] Boolean @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Nil_Record_Component is the value of a
+Record_Component that represents no component.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[type Record_Component_List]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Record_Component_List} @key[is]
+   @key[array] (Asis.List_Index @key[range] <>) @key[of] Record_Component;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Type Record_Component_List represents a list of
+record components.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[type Array_Component]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Type Array_Component describes the components of an array valued field for a
+record type.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0047-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[The "=" operator is not
+meaningful between Array_Component values unless one of them is the
+Nil_Array_Component value.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[An array type describes composite values which
+contain zero or more indexed components. Both An_Unconstrained_Array_Definition
+or A_Constrained_Array_Definition can be queried to obtain a single
+Array_Component. The Array_Component contains the information necessary to
+extract any arbitrary component of the array.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Array_Components are intended for use with data stream extraction
+operations. An extraction operation is performed using an Array_Component,
+in conjunction with a data stream representing a value of the array type.
+The array data stream contains data for all components of the array. The
+result is an extracted data stream representing just the value of the one
+component. Array_Components are implemented so as to allow for efficient
+extraction of array component values.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[An extracted component data stream is suitable for
+all uses. If the component is a scalar type, it can be converted directly into
+useful information. If the component is, in turn, another composite value, it
+can be further decomposed into its own component values.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[There are two ways to obtain the Record_Components
+or the Array_Component needed to further decompose an embedded composite
+component. First, if the type of the component is known, the type definition can
+be directly queried to obtain the Record_Components or the Array_Component that
+describe its internal structure. Second, the Array_Component used to extract the
+component can be queried to obtain the same Record_Components or the same
+Array_Component. Both methods return identical information.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[This kind of nested decomposition can be carried to any required level.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Array_Components become invalid when the Context, from which they
+originate, is closed. All Record_Components are obtained by referencing a)
+an Element, which has an associated Context, b) a Record_Component, or c)
+another Array_Component. Ultimately, all component values originate from a
+A_Type_Definition Element; that Element determines their Context of origin.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Array_Component} @key[is private];
+@AdaObjDefn{Nil_Array_Component} : @key[constant] Array_Component;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] "=" (Left  : @key[in] Array_Component;
+              Right : @key[in] Array_Component)
+              @key[return] Boolean @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Nil_Array_Component is the value of an
+Array_Component that represents no component.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[type Array_Component_List]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Array_Component_List} @key[is]
+   @key[array] (Asis.List_Index @key[range] <>) @key[of] Array_Component;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Type Array_Component_List represents a list of
+array components.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[type Dimension_Indexes]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Type Dimension_Indexes
+is an array of index values used to access an array stream.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Dimension_Indexes} @key[is]
+   @key[array] (Asis.ASIS_Positive @key[range] <>) @key[of] Asis.ASIS_Positive;]}
+@end{Example}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[type Array_Component_Iterator]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0047-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Type Array_Component_Iterator is used to iterate
+over successive components of an array. This can be more efficient than using
+individual index values when extracting array components from a data stream
+because it substitutes two subroutine calls (Next and Done) for the
+multiplications and divisions implicit in indexing an N dimensional array with a
+single index value.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Iterators can be copied. The copies operate
+independently (have separate state).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[An example:]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[declare]
+   Component        : Array_Component := ...;
+   Iter             : Array_Component_Iterator;
+   Array_Stream     : Portable_Data (...) := ...;
+   Component_Stream : Portable_Data (...);
+@key[begin]
+   Iter := Array_Iterator (Component);
+   @key[while not] Done (Iter) @key[loop]
+      Component_Stream := Component_Data_Stream (Iter, Array_Stream);
+      Next (Iter);
+   @key[end loop];
+@key[end];]}
+@end{Example}
+
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Array_Component_Iterator} @key[is] private;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@AdaObjDefn{Nil_Array_Component_Iterator} : @key[constant] Array_Component_Iterator;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Nil_Array_Component_Iterator is the value of an
+Array_Component_Iterator that represents no iterator.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete type}
 @LabeledAddedSubclause{Version=[2],Name=[type Portable_Data]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[Portable_Data represents an ordered "stream" of data values.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[The portable representation for application data is an array of data
 values. This portable data representation is guaranteed to be valid when
 written, and later read, on the same machine architecture, using the same
@@ -1780,7 +2206,7 @@ constraints. Some of the problems encountered when changing runtime
 systems or implementations are: type representation, optimization,
 record padding, and other I/O subsystem implementation variations.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The nature of these data values is deliberately unspecified. An
 implementor will choose a data value type that is suitable for the
 expected uses of these arrays and data values. Arrays and data
@@ -1841,7 +2267,7 @@ values have these uses:]}
 @end{InnerEnumerate}
 @end{Enumerate}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[The data value type should be chosen so that the 'Address of the first
 array data value is also the 'Address of the first storage unit containing
 array data. This is especially necessary for target architectures where
@@ -1879,13 +2305,455 @@ whatsoever. It need not be a numeric type.]}
 @end{DescribeCode}
 
 
-@ChgNote{SI99-0035-1 add section on newly obsolete subprogram}
-@LabeledAddedSubclause{Version=[2],Name=[function Record_Components (stream)]}
 
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[type Type_Model_Kinds]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Each Type_Definition fits into one of three type models.]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Type_Model_Kinds} @key[is] (A_Simple_Static_Model,
+                          A_Simple_Dynamic_Model,
+                          A_Complex_Dynamic_Model,
+                          Not_A_Type_Model);           -- @examcom{Nil arguments}]}
+@end{Example}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Type_Model_Kind]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Type_Model_Kind} (Type_Definition : @key[in] Asis.Type_Definition)
+                         @key[return] Type_Model_Kinds;]}
+
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Type_Model_Kind} (Component : @key[in] Record_Component)
+                         @key[return] Type_Model_Kinds;]}
+
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Type_Model_Kind} (Component : @key[in] Array_Component)
+                         @key[return] Type_Model_Kinds;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Type_Definition specifies the type definition to query.
+Component specifies a record field with a record or array type.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns the model that best describes the type
+indicated by the argument. Returns Not_A_Type_Model for any unexpected argument
+such as a Nil value.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0028-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Type_Definition expects
+an element that has the following Element_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Type_Definition]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Is_Nil (component)]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Record_Component) @key[return] Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Nil} (Right : @key[in] Array_Component)  @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Right specifies the component to check.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Returns True if Right is a Nil (or uninitialized) component value.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Returns False for all other values.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Right expects any kind of component.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Is_Equal (component)]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Equal} (Left  : @key[in] Record_Component;
+                   Right : @key[in] Record_Component) @key[return] Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Equal} (Left  : @key[in] Array_Component;
+                   Right : @key[in] Array_Component)  @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Left specifies the left component to compare.
+Right specifies the right component to compare.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0047-1],ARef=[SI99-0055-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns True if Left and Right represent the same physical component of the
+same record or array type from the same physical compilation unit, and
+returns False otherwise. The two components may or may not be from the same open
+ASIS Context.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Implies:]}
+@begin{ChildExample}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Is_Equal (Enclosing_Compilation_Unit (Component_Declaration (Left)),
+          Enclosing_Compilation_Unit (Component_Declaration (Right))) = True]}
+@end{ChildExample}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Right and Left expect any kind of component.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Is_Identical (component)]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Identical} (Left  : @key[in] Record_Component;
+                       Right : @key[in] Record_Component) @key[return] Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Identical} (Left  : @key[in] Array_Component;
+                       Right : @key[in] Array_Component)  @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Left specifies the left component to compare.
+Right specifies the right component to compare.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0047-1],ARef=[SI99-0055-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns True if Left and Right represent the same
+physical component of the same record or array type from the same physical
+compilation unit and the same open ASIS Context, and returns False otherwise.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Implies:]}
+@begin{ChildExample}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Is_Identical (Enclosing_Compilation_Unit (Component_Declaration (Left)),
+              Enclosing_Compilation_Unit (Component_Declaration (Right))) = True]}
+@end{ChildExample}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Right and Left expect any kind of component.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Is_Array]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Array} (Component : @key[in] Record_Component) @key[return] Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Array} (Component : @key[in] Array_Component)  @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Component specifies any component.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Returns True if the component has an array subtype
+(contains an array value).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[Returns False for Nil components and any component
+that is not an embedded array.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Is_Record]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Record} (Component : @key[in] Record_Component) @key[return] Boolean;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Record} (Component : @key[in] Array_Component)  @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Component specifies any component.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0047-1],ARef=[SI99-0055-1],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[Returns True if the component has a record,
+task, or protected subtype.
+Returns True for a task or protected component because such a
+component may have discriminants. Returns False otherwise.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Done]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0058-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Done} (Iterator : @key[in] Array_Component_Iterator) @key[return] Boolean;]}
+@end{Example}
+
+**** Redo TBD ****
+
+Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the iterator
+to query.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Returns True if the iterator has been advanced past the last array
+component. Returns True for Nil_Array_Component_Iterator.@Chg{Version=[2],New=[
+Returns False otherwise.],Old=[]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[procedure Next]}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[procedure] @AdaSubDefn{Next} (Iterator : @key[in out] Array_Component_Iterator);
+@end{Example}
+
+Iterator @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} the iterator to advance.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Advances the iterator to the next array component. Use Done to test the
+iterator to see if it has passed the last component. Does nothing if the
+iterator is @Chg{Version=[2],New=[Nil_Array_Component_Iterator
+or is ],Old=[]}already past the last component.
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[procedure Reset]}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[procedure] @AdaSubDefn{Reset} (Iterator : @key[in out] Array_Component_Iterator);
+@end{Example}
+
+Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the iterator to reset.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+Resets the iterator to the first array component.@Chg{Version=[2],New=[
+Has no effect if Iterator is Nil_Array_Component_Iterator.],Old=[]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Array_Index]}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Array_Index} (Iterator : @key[in] Array_Component_Iterator)
+                     @key[return] Asis.ASIS_Natural;
+@end{Example}
+
+Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} the iterator to query.
+
+Returns the Index value which, when used in conjunction with the
+Array_Component value used to create the Iterator, indexes the same array
+component as that presently addressed by the Iterator.
+
+Raises ASIS_Inappropriate_Element if given a Nil_Array_Component_Iterator
+or one where Done(Iterator) = True. The Status value is Data_Error.
+The Diagnosis string will indicate the kind of error detected.
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Array_Indexes]}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Array_Indexes} (Iterator : @key[in] Array_Component_Iterator)
+                        @key[return] Dimension_Indexes;
+@end{Example}
+
+Iterator @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the iterator to query.
+
+Returns the index values which, when used in conjunction with the
+Array_Component value used to create the Iterator, indexes the same array
+component as that presently addressed by the Iterator.
+
+Raises ASIS_Inappropriate_Element if given a Nil_Array_Component_Iterator
+or one where Done(Iterator) = True. The Status value is Data_Error.
+The Diagnosis string will indicate the kind of error detected.
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Discriminant_Components]}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Discriminant_Components} (Type_Definition : @key[in] Asis.Type_Definition)
+                                 @key[return] Record_Component_List;
+
+@key[function] @AdaSubDefn{Discriminant_Components} (Component : @key[in] Record_Component)
+                                 @key[return] Record_Component_List;
+
+@key[function] @AdaSubDefn{Discriminant_Components} (Component : @key[in] Array_Component)
+                                 @key[return] Record_Component_List;
+@end{Example}
+
+Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition to query.
+Component @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a component which has a record subtype,
+                  Is_Record(Component) = True.
+
+Returns a list of the discriminant components for records of the indicated
+record type.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+The result describes the locations of the record type's discriminants,
+regardless of the static or dynamic nature of the record
+type.@Chg{Version=[2],New=[],Old=[All return components are intended for use
+with a data stream representing a value of the indicated record type.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[],Old=[All Is_Record(Component) = True arguments are
+appropriate. ]}All return
+values are valid parameters for all query
+operations@Chg{Version=[2],New=[ that accept Record_Components],Old=[]}.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+that has the following],Old=[Appropriate]} Element_Kinds:
+@begin{Display}
+A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds:
+   A_Derived_Type_Definition       (derived from a record type)
+   A_Record_Type_Definition],Old=[]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Type_Kinds:]}
+@begin{Display}
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Derived_Type_Definition       (derived from a record type)
+A_Record_Type_Definition]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Component expects a component
+that has Is_Record(Component) = True and has one of the
+following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
+@begin{Display}
+A_Simple_Static_Model
+A_Simple_Dynamic_Model
+A_Complex_Dynamic_Model
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element or component that does not have one of these
+expected kinds or types.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Record_Components (data decomposition)]}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Record_Components} (Type_Definition : @key[in] Asis.Type_Definition)
+                           @key[return] Record_Component_List;
+
+@key[function] @AdaSubDefn{Record_Components} (Component : @key[in] Record_Component)
+                           @key[return] Record_Component_List;
+
+@key[function] @AdaSubDefn{Record_Components} (Component : @key[in] Array_Component)
+                           @key[return] Record_Component_List;
+@end{Example}
+
+Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition to query.
+Component @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a component
+which has a record subtype, Is_Record(Component) = True.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
+Returns a list of the discriminants and components for the indicated simple
+static record type.@Chg{Version=[2],New=[],Old=[ (See rule 6.A above.)]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+The result describes the locations of the record type's discriminants and
+components.@Chg{Version=[2],New=[],Old=[ All return components are intended for
+use with a data stream representing a value of the indicated record type.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1],ARef=[SI99-0047-1]}
+@Chg{Version=[2],New=[],Old=[All Is_Record(Component) = True arguments are
+appropriate. ]}All return
+values are valid parameters for all query
+operations@Chg{Version=[2],New=[ that accept Record_Components],Old=[]}.
+
+
+@begin{SingleNote}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+If an Ada implementation uses implementation-dependent record
+components (@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 13.5.1 (15)), then each such component of
+the record type is included in the result.
+@end{SingleNote}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+that has the following],Old=[Appropriate]} Element_Kinds:
+@begin{Display}
+A_Type_Definition@Chg{Version=[2],New=[ that has one of Type_Kinds:
+   A_Derived_Type_Definition       (derived from a record type)
+   A_Record_Type_Definition],Old=[]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Type_Kinds:]}
+@begin{Display}
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Derived_Type_Definition       (derived from a record type)
+A_Record_Type_Definition]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Component expects a component
+that has Is_Record(Component) = True and has the
+following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
+@begin{Display}
+A_Simple_Static_Model
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element or component that does not have one of these
+expected kinds or types.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Record_Components (stream)]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Record_Components}
             (Type_Definition : @key[in] Asis.Type_Definition;
              Data_Stream     : @key[in] Portable_Data)
@@ -1902,19 +2770,19 @@ whatsoever. It need not be a numeric type.]}
             @key[return] Record_Component_List;]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[Type_Definition specifies the record type definition to query.
 Component specifies a component which has a record subtype,
                   Is_Record(Component) = True.
 Data_Stream specifies a data stream containing, at least, the
                   complete set of discriminant or index constraints for the type.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[These functions are superseded by the Ada Stream
 operations. The use of any of the functions Record_Components is not recommended
 in new programs.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[Returns a list of the discriminants and components for the indicated record
 type, using the data stream argument as a guide. The record type shall be
 either a simple static, or a simple dynamic, record
@@ -1947,7 +2815,7 @@ for non-discriminant fields.]}
 @ChgAdded{Version=[2],Text=[All Is_Record(Component) = True values are appropriate. All return values
 are valid parameters for all query operations.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Type_Definition
 expects an element that has the following Element_Kinds:]}
 @begin{Display}
@@ -1956,7 +2824,7 @@ expects an element that has the following Element_Kinds:]}
    A_Record_Type_Definition]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Component
 expects a component that has one of the following
 Asis.Data_Decomposition.Type_Model_Kinds:]}
@@ -1979,12 +2847,133 @@ record type is included in the result.]}
 @end{DescribeCode}
 
 
-@ChgNote{SI99-0035-1 add section on newly obsolete subprogram}
-@LabeledAddedSubclause{Version=[2],Name=[function Component_Data_Stream]}
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Array_Components]}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Array_Components} (Type_Definition : @key[in] Asis.Type_Definition)
+                          @key[return] Array_Component;
+
+@key[function] @AdaSubDefn{Array_Components} (Component : @key[in] Record_Component)
+                          @key[return] Array_Component;
+
+@key[function] @AdaSubDefn{Array_Components} (Component : @key[in] Array_Component)
+                          @key[return] Array_Component;
+@end{Example}
+
+Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the array type definition to query.
+Component @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a
+component which has an array subtype, Is_Array(Component) = True.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
+Returns a single component, describing all components of the indicated
+array type. The array type shall be a simple static, or a simple dynamic
+array type.@Chg{Version=[2],New=[],Old=[ (See rules 6.A and 6.B above.)]}
+
+The result contains all information necessary to index and extract any
+component of a data stream representing a value of the indicated array
+type.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@Chg{Version=[2],New=[],Old=[All Is_Array(Component) = True values are
+appropriate. ]}All return values
+are valid parameters for all query operations@Chg{Version=[2],New=[ that
+accept Array_Components],Old=[]}.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+that has the following],Old=[Appropriate]} Element_Kinds:
+@begin{Display}
+A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds:
+   A_Derived_Type_Definition       (derived from an array type)
+   An_Unconstrained_Array_Definition
+   A_Constrained_Array_Definition],Old=[]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Type_Kinds:]}
+@begin{Display}
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Derived_Type_Definition       (derived from an array type)
+An_Unconstrained_Array_Definition
+A_Constrained_Array_Definition]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Component expects a component
+that has Is_Array(Component) = True and has
+one of the following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
+@begin{Display}
+A_Simple_Static_Model
+A_Simple_Dynamic_Model
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element or component that does not have one of these
+expected kinds or types.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Array_Iterator]}
 
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgAdded{Version=[2], Text=[@key[function] @AdaSubDefn{Array_Iterator} (Type_Definition : @key[in] Asis.Type_Definition)
+                        @key[return] Array_Component_Iterator;]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgAdded{Version=[2], Text=[@key[function] @AdaSubDefn{Array_Iterator} (Component : @key[in] Record_Component)
+                        @key[return] Array_Component_Iterator;]}
+
+@key[function] @AdaSubDefn{Array_Iterator} (Component : @key[in] Array_Component)
+                        @key[return] Array_Component_Iterator;
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
+@Chg{Version=[2], New=[Type_Definition specifies the array type definition to
+query. ],Old=[]}Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]}
+@Chg{Version=[2],New=[a component which has an array subtype,
+Is_Array(Component) = True.],Old=[an array component to be used for iteration]}
+
+Returns an iterator poised to fetch the 1st component of an array.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Type_Definition expects
+an element that has the following Element_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Type_Definition that has one of the following Type_Kinds:
+   A_Derived_Type_Definition       (derived from an array type)
+   An_Unconstrained_Array_Definition
+   A_Constrained_Array_Definition]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[
+Component expects a component
+that has Is_Array(Component) = True and has
+one of the following Asis.Data_Decomposition.Type_Model_Kinds:]}
+@begin{Display}
+@ChgAdded{Version=[2],Text=[A_Simple_Static_Model
+A_Simple_Dynamic_Model]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element or component that does not have one of these
+expected kinds or types.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Component_Data_Stream]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Component_Data_Stream}
             (Component   : @key[in] Record_Component;
              Data_Stream : @key[in] Portable_Data)
@@ -2008,12 +2997,12 @@ record type is included in the result.]}
             @key[return] Portable_Data;]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[These functions are superseded by the Ada Stream
 operations. The use of any of the functions Component_Data_Stream is not recommended
 in new programs.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[Component specifies the component or discriminant to be extracted.
 Index specifies an index, 1..Array_Length, within an array.
 Indexes specifies a list of index values, there is one value for
@@ -2022,7 +3011,7 @@ Indexes specifies a list of index values, there is one value for
 Iterator specifies the array component to extract.
 Data_Stream specifies the data stream from which to extract the result.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[Returns a data stream representing just the value of the chosen Component.
 The return value is sliced from the data stream. The Data_Stream shall
 represent a value of the appropriate type. It may have been obtained from
@@ -2044,7 +3033,7 @@ Raises ASIS_Inappropriate_Element with a Status of Value_Error for any Nil
 component.]}
 @end{DescribeCode}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[An example:]}
 @begin{Example}
 @ChgAdded{Version=[2],Text=[@key[declare]
@@ -2062,38 +3051,285 @@ component.]}
 @end{Example}
 
 
-@ChgNote{SI99-0035-1 add section on newly obsolete subprogram}
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Component_Declaration]}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Component_Declaration} (Component : @key[in] Record_Component)
+                               @key[return] Asis.Declaration;
+@end{Example}
+
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component to be queried
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+Returns an Asis.Declaration, which is either A_Component_Declaration
+or A_Discriminant_Specification. These values can be used to determine the
+subtype, type, and base type of the record component. The result may be an
+explicit declaration made by the user, or, it may be an implicit
+component declaration for an implementation-defined component (@Chg{Version=[2],
+New=[Ada Standard],Old=[Reference Manual]} 13.5.1(15)).
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Component expects any kind of non-Nil component.],
+Old=[All non-Nil component values are appropriate.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status of
+Value_Error for any element or component that does not have one of these
+expected kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
+the following ],Old=[]}Element_Kinds:
+@begin{Display}
+A_Declaration@Chg{Version=[2],New=[ that has one of the following Declaration_Kinds:
+    A_Component_Declaration
+    A_Discriminant_Specification],Old=[]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Returns Declaration_Kinds:]}
+@begin{Display}
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Component_Declaration
+A_Discriminant_Specification]}
+@end{Display}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Component_Indication]}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Component_Indication} (Component : @key[in] Array_Component)
+                              @key[return] Asis.Subtype_Indication;
+@end{Example}
+
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component
+to be queried.
+
+Returns an Asis.Subtype_Indication. These values can be used to determine
+the subtype, type, and base type of the array components.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Component expects any kind of non-Nil component.],
+Old=[All non-Nil component values are appropriate.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status of
+Value_Error for any element or component that does not have one of these
+expected kinds.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;Returns @Chg{Version=[2],New=[an element that has
+the following ],Old=[]}Element_Kinds:
+@begin{Display}
+A_Subtype_Indication
+@end{Display}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function All_Named_Components]}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{All_Named_Components} (Type_Definition : @key[in] Asis.Type_Definition)
+                              @key[return] Asis.Defining_Name_List;
+@end{Example}
+
+Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} the record type definition to query.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0030-1]}
+Returns a list of all discriminant and component entity names defined by
+the record type. All record type definitions are appropriate for this
+operation. This query provides a means for determining whether a field,
+with a particular name, exists for some possible instance of the record
+type. This list does not include the names of implementation-defined
+components (@Chg{Version=[2],New=[Ada Standard],Old=[Reference Manual]} 13.5.1 (15)); those name have the form of
+An_Attribute_Reference expression.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+that has the following],Old=[Appropriate]} Element_Kinds:
+@begin{Display}
+A_Type_Definition@Chg{Version=[2],New=[ that has one of the following Type_Kinds:
+   A_Derived_Type_Definition       (derived from a record type)
+   A_Record_Type_Definition],Old=[]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0028-1]}
+@ChgDeleted{Version=[2],Keepnext=[T],Type=[Leading],Text=[Appropriate Type_Kinds:]}
+@begin{Display}
+@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgDeleted{Version=[2],Text=[A_Derived_Type_Definition       (derived from a record type)
+A_Record_Type_Definition]}
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[and Type_Definition expects an element
+that has one of the following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
+@begin{Display}
+A_Simple_Static_Model
+A_Simple_Dynamic_Model
+A_Complex_Dynamic_Model
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element that does not have one of these expected
+kinds.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Array_Length]}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Array_Length} (Component : @key[in] Record_Component)
+                      @key[return] Asis.ASIS_Natural;
+
+@key[function] @AdaSubDefn{Array_Length} (Component : @key[in] Array_Component)
+                      @key[return] Asis.ASIS_Natural;
+@end{Example}
+
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component
+to query.
+
+Returns the number of components within an array valued component. The
+array subtype may be multidimensional. The result treats the array as if
+it were unidimensional. It is the product of the 'Lengths of the
+individual array dimensions.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@Chg{Version=[2],New=[Component expects a component that has],Old=[All]}
+Is_Array(Component) = True@Chg{Version=[2],New=[],Old=[ values
+are appropriate]}.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any component that is not an array component.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Array_Length (with dimension)]}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Array_Length} (Component : @key[in] Record_Component;
+                       Dimension : @key[in] Asis.ASIS_Natural)
+                      @key[return] Asis.ASIS_Natural;
+
+@key[function] @AdaSubDefn{Array_Length} (Component : @key[in] Array_Component;
+                       Dimension : @key[in] Asis.ASIS_Natural)
+                       @key[return] Asis.ASIS_Natural;
+@end{Example}
+
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component
+to query. Dimension @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the
+array dimension to query.
+
+Returns the number of components within an array valued component. The
+array subtype may be unidimensional. The result is the 'Length(Dimension)
+of the array.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@Chg{Version=[2],New=[Component expects a component that has],Old=[All]}
+Is_Array(Component) = True@Chg{Version=[2],New=[],Old=[ values
+are appropriate]}.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any component that is not an array component.]}
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Size]}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Size} (Type_Definition : @key[in] Asis.Type_Definition)
+              @key[return] Asis.ASIS_Natural;
+
+@key[function] @AdaSubDefn{Size} (Component : @key[in] Record_Component) @key[return] Asis.ASIS_Natural;
+
+@key[function] @AdaSubDefn{Size} (Component : @key[in] Array_Component)  @key[return] Asis.ASIS_Natural;
+@end{Example}
+
+Type_Definition @Chg{Version=[1],New=[specifies],Old=[@en Specifies]} a type definition, whose 'Size is desired.
+Component @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a component, whose 'Size is desired.
+
+Returns the minimum number of bits required to hold a simple static type,
+the number of bits allocated to hold a record field, or the number of bits
+allocated to hold each array component.
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Type_Definition expects an element
+of],Old=[Appropriate]} Element_Kinds:
+@begin{Display}
+A_Type_Definition
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
+@leading@keepnext@;@Chg{Version=[2],New=[Component expects a component
+that has the following],Old=[Appropriate]} Asis.Data_Decomposition.Type_Model_Kinds:
+@begin{Display}
+A_Simple_Static_Model
+@end{Display}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element with a Status
+of Value_Error for any element or component that does not have one of these
+expected kinds.]}
+@end{DescribeCode}
+
+@begin{UsageNote}
+For components, this is the number of bits allocated
+within the composite value. It may be greater than the number
+of bits occupied by data values of this component type.
+Also, the data value, when occupying more space than is
+minimally required, may be preceded, followed, or surrounded by
+padding bits which are necessary to fully occupy the space allotted.
+@end{UsageNote}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
 @LabeledAddedSubclause{Version=[2],Name=[function Size (stream)]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Size} (Type_Definition : @key[in] Asis.Type_Definition;
                Data_Stream     : @key[in] Portable_Data)
               @key[return] Asis.ASIS_Natural;]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[This function is superseded by the Ada Stream
 operations. The use of this function Size is not recommended
 in new programs.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[Type_Definition specifies the type definition to query.
 Data_Stream specifies a data stream containing, at least, the complete
 set of discriminant or index constraints for the type.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[Returns the 'Size of a value of this type, with these constraints. This is
 the minimum number of bits that is needed to hold any possible value of the
 given fully constrained subtype. Only the constraint portion of the
 Data_Stream is checked.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[The Data_Stream may be a data stream or it may be an artificial
 data stream created by the Construct_Artificial_Data_Stream operation.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[Type_Definition
 expects an element
 that has the following Element_Kinds:]}
@@ -2101,7 +3337,7 @@ that has the following Element_Kinds:]}
 @ChgAdded{Version=[2],Text=[A_Type_Definition]}
 @end{Display}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[and
 Type_Definition expects an element
 that has one of the following Asis.Data_Decomposition.Type_Model_Kinds:]}
@@ -2117,12 +3353,147 @@ kinds.]}
 @end{DescribeCode}
 
 
-@ChgNote{SI99-0035-1 add section on newly obsolete subprogram}
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Position]}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Position} (Component : @key[in] Record_Component)
+                  @key[return] Asis.ASIS_Natural;
+
+@key[function] @AdaSubDefn{Position} (Component : @key[in] Array_Component;
+                   Index     : @key[in] Asis.ASIS_Positive)
+                  @key[return] Asis.ASIS_Natural;
+
+@key[function] @AdaSubDefn{Position} (Component : @key[in] Array_Component;
+                   Indexes   : @key[in] Dimension_Indexes)
+                  @key[return] Asis.ASIS_Natural;
+
+@key[function] @AdaSubDefn{Position} (Iterator : @key[in] Array_Component_Iterator)
+                  @key[return] Asis.ASIS_Natural;
+@end{Example}
+
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component to query.
+Index @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a value in the range 1..Array_Length (Component),
+the index of the component to query.
+Indexes @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} a list of index values, there is one value for
+each dimension of the array type, each index N is in the
+range 1..Array_Length (Component, N);.
+Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} a particular
+array component to query.
+
+Returns the System.Storage_Unit offset, from the start of the first storage
+unit occupied by the enclosing composite type, of the first of the storage
+units occupied by the Component. The offset is measured in storage units.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Component expects any kind of non-Nil component. Raises
+ASIS_Inappropriate_Element with a Status of Value_Error for any
+Nil component.],
+Old=[All non-Nil component values are appropriate.]} Raises
+ASIS_Inappropriate_Element with a Status of Data_Error if any index is not
+in the expected range or if Done (Iterator) = True. The Status value will
+be Data_Error. The Diagnosis string will indicate the kind of error
+detected.
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function First_Bit]}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{First_Bit} (Component : @key[in] Record_Component)
+                   @key[return] Asis.ASIS_Natural;
+
+@key[function] @AdaSubDefn{First_Bit} (Component : @key[in] Array_Component;
+                    Index     : @key[in] Asis.ASIS_Positive)
+                   @key[return] Asis.ASIS_Natural;
+
+@key[function] @AdaSubDefn{First_Bit} (Component : @key[in] Array_Component;
+                    Indexes   : @key[in] Dimension_Indexes)
+                   @key[return] Asis.ASIS_Natural;
+
+@key[function] @AdaSubDefn{First_Bit} (Iterator : @key[in] Array_Component_Iterator)
+                   @key[return] Asis.ASIS_Natural;
+@end{Example}
+
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component to query.
+Index @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a value in the range
+1..Array_Length (Component), the index of the component to query.
+Indexes @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} a list of index values, there is one value for
+each dimension of the array type, each index N is in the
+range 1..Array_Length (Component, N);.
+Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} a particular
+array component to query.
+
+Returns the bit offset, from the start of the first of the storage units
+occupied by the Component, of the first bit occupied by the Component. The
+offset is measured in bits.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Component expects any kind of non-Nil component. Raises
+ASIS_Inappropriate_Element with a Status of Value_Error for any
+Nil component.],
+Old=[All non-Nil component values are appropriate.]} Raises
+ASIS_Inappropriate_Element with a Status of Data_Error if any index is not
+in the expected range or if Done (Iterator) = True. The Status value will
+be Data_Error. The Diagnosis string will indicate the kind of error
+detected.
+@end{DescribeCode}
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
+@LabeledAddedSubclause{Version=[2],Name=[function Last_Bit]}
+
+@begin{DescribeCode}
+@begin{Example}
+@key[function] @AdaSubDefn{Last_Bit} (Component : @key[in] Record_Component)
+                  @key[return] Asis.ASIS_Natural;
+
+@key[function] @AdaSubDefn{Last_Bit} (Component : @key[in] Array_Component;
+                   Index     : @key[in] Asis.ASIS_Positive)
+                  @key[return] Asis.ASIS_Natural;
+
+@key[function] @AdaSubDefn{Last_Bit} (Component : @key[in] Array_Component;
+                   Indexes   : @key[in] Dimension_Indexes)
+                  @key[return] Asis.ASIS_Natural;
+
+@key[function] @AdaSubDefn{Last_Bit} (Iterator : @key[in] Array_Component_Iterator)
+                  @key[return] Asis.ASIS_Natural;
+@end{Example}
+
+Component @Chg{Version=[1],New=[specifies],Old=[  @en Specifies]} the component to query.
+Index @Chg{Version=[1],New=[specifies],Old=[      @en Specifies]} a value in the range 1..Array_Length (Component),
+the index of the component to query.
+Indexes @Chg{Version=[1],New=[specifies],Old=[    @en Specifies]} a list of index values, there is one value for
+each dimension of the array type, each index N is in the
+range 1..Array_Length (Component, N);.
+Iterator @Chg{Version=[1],New=[specifies],Old=[   @en Specifies]} a particular array component to query.
+
+Returns the bit offset, from the start of the first of the storage units
+occupied by the Index'th Element, of the last bit occupied by the Element.
+The offset is measured in bits.
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1]}
+@Chg{Version=[2], New=[Component expects any kind of non-Nil component. Raises
+ASIS_Inappropriate_Element with a Status of Value_Error for any
+Nil component.],
+Old=[All non-Nil component values are appropriate.]} Raises
+ASIS_Inappropriate_Element with a Status of Data_Error if any index is not
+in the expected range or if Done (Iterator) = True. The Status value will
+be Data_Error. The Diagnosis string will indicate the kind of error detected.
+@end{DescribeCode}
+
+*** End TBD ***
+
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
 @LabeledAddedSubclause{Version=[2],Name=[function Portable_Constrained_Subtype]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[@key[generic]
     @key[type] Constrained_Subtype @key[is private];
 @key[function] @AdaSubDefn{Portable_Constrained_Subtype}
@@ -2130,16 +3501,16 @@ kinds.]}
             @key[return] Constrained_Subtype;]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[This generic function is superseded by the Ada Stream
 operations. The use of the generic function Portable_Constrained_Subtype
 is not recommended in new programs.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[Data_Stream specifies an extracted
 component of a record.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[Instantiated with an appropriate scalar type, (e.g.,
 Standard.Integer, can be used to convert a data stream to a value that can be
 directly examined).]}
@@ -2156,12 +3527,13 @@ value is not in the subtype's range.]}
 @end{DescribeCode}
 
 
-@ChgNote{SI99-0035-1 add section on newly obsolete subprogram}
+
+@ChgNote{SI99-0058-1 add section on newly obsolete subprogram}
 @LabeledAddedSubclause{Version=[2],Name=[function Construct_Artificial_Data_Stream]}
 
 @begin{DescribeCode}
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Construct_Artificial_Data_Stream}
             (Type_Definition : @key[in] Asis.Type_Definition;
              Data_Stream     : @key[in] Portable_Data;
@@ -2170,12 +3542,12 @@ value is not in the subtype's range.]}
             @key[return] Portable_Data;]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[This function is superseded by the Ada Stream
 operations. The use of the function Construct_Artificial_Data_Stream
 is not recommended in new programs.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Text=[Type_Definition specifies the record type definition for the record
 valued data stream being constructed.
 Data_Stream specifies the data stream constructed so far; initially
@@ -2199,7 +3571,7 @@ component values may then be used for any purpose. In particular, they may
 be used to determine First_Bit, Last_Bit, and Size values for all record
 discriminants and components.]}
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0035-1]}
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0028-1],ARef=[SI99-0058-1]}
 @ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[Type_Definition expects an element
 that has the following Element_Kinds:]}
 @begin{Display}
@@ -2216,7 +3588,6 @@ kinds.]}
 @ChgAdded{Version=[2],Text=[Raises ASIS_Inappropriate_Element, with a Status of Data_Error, if the
 discriminant Value is inappropriate for the specified Discriminant.]}
 @end{DescribeCode}
-
 
 
 @ChgNote{SI99-0035-1 add chapter on newly obsolete subprograms}

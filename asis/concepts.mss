@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/concepts.mss,v $}
-@comment{$Revision: 1.16 $ $Date: 2010/03/09 06:46:51 $}
+@comment{$Revision: 1.17 $ $Date: 2010/03/27 07:31:18 $}
 
 
 @LabeledSection{ASIS technical concepts}
@@ -672,13 +672,12 @@ particular element (i.e., a unique reference to an Element) which is efficient
 and persistent as long as the environment is not recompiled (see Section
 @RefSecNum{package Asis.Ids}).
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0035-1]}
-@b{Asis.Data_Decomposition}@Defn{Data_Decomposition} @en This optional child
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0058-1]}
+@ChgDeleted{Version=[2],Text=[@b{Asis.Data_Decomposition} @en This optional child
 package encapsulates a set
 of operations to decompose data values using the ASIS type information and a
 portable data stream, representing a data value of that type (see Section
-@RefSecNum{package Asis.Data_Decomposition (optional)}).@Chg{Version=[2],New=[],
-Old=[Its child package
+@RefSecNum{Obsolescent package Asis.Data_Decomposition}). Its child package
 @b{Asis.Data_Decomposition.Portable_Transfer} provides support for logging and
 delogging of application data using ASIS. Internal packages of
 Asis.Data_Decomposition.Portable_Transfer include:
@@ -795,13 +794,13 @@ packages includes the following in its context clause:
   Asis.Compilation_Units.Relations, Asis.Ada_Environments, Asis.Implementation,
   Asis.Exceptions, Asis.Elements, Asis.Iterator, Asis.Declarations,
   Asis.Expressions, Asis.Clauses, Asis.Definitions, Asis.Statements, Asis.Text,
-  Asis.Ids, Asis.Data_Decomposition@Chg{Version=[2],New=[, Asis.Views,
+  Asis.Ids, @Chg{Version=[2],New=[Asis.Views,
   Asis.Program_Units, Asis.Subtype_Views,
   Asis.Subtype_Views.Elementary, Asis.Subtype_Views.Composite,
   Asis.Object_Views, Asis.Object_Views.Access_Views,
   Asis.Profiles, Asis.Callable_Views, Asis.Package_Views,
   Asis.Generic_Views, Asis.Exception_Views, Asis.Statement_Views,
-  Asis.Declarations.Views, Asis.Definitions.Views, Asis.Expressions.Views;],Old=[; and Asis.Data_Decomposition.Portable_Transfer.]}
+  Asis.Declarations.Views, Asis.Definitions.Views, Asis.Expressions.Views;],Old=[Asis.Data_Decomposition; and Asis.Data_Decomposition.Portable_Transfer.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}

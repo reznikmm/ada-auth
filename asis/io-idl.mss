@@ -1,15 +1,18 @@
 @Part(io-idl, Root="asis.msm")
 
-@Comment{$Date: 2009/07/02 04:50:54 $}
+@Comment{$Date: 2010/03/27 07:31:18 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/io-idl.mss,v $}
-@comment{$Revision: 1.4 $}
+@comment{$Revision: 1.5 $}
 
 @LabeledInformativeAnnex{Miscellaneous ASIS I/O and IDL approaches}
 
+@leading@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0058-1]}
 This Annex contains examples of miscellaneous approaches to deal with I/O and
-IDL issues. The first two portions contain packages for application I/O of ASIS
-types: Portable_Data and Id. The third portion contains an approach to
+IDL issues. The first @Chg{Version=[2],New=[portion contains a package],
+Old=[two portions contain packages]} for application I/O of ASIS
+@Chg{Version=[2],New=[type],Old=[types: Portable_Data and]} Id. The
+@Chg{Version=[2],New=[second],Old=[third]} portion contains an approach to
 providing an ASIS IDL. Annex C consists of:
 
 @begin{Itemize}

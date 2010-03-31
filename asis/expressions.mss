@@ -1,6 +1,6 @@
 @Part(expressions, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/expressions.mss,v $}
-@comment{$Revision: 1.21 $ $Date: 2010/03/12 06:02:39 $}
+@comment{$Revision: 1.22 $ $Date: 2010/03/27 07:31:18 $}
 
 
 @LabeledSection{package Asis.Expressions}
@@ -629,7 +629,7 @@ all referenced entities.]}
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
   @ChgAdded{Version=[2],Text=[If Corresponding_Name_Definition applied to the
-  same reference returns Nil_Element or Not_An_Element, then
+  same reference returns Nil_Element, then
   Corresponding_Name_Definition_List returns an empty list.]}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
@@ -1500,8 +1500,8 @@ the explicit_actual_parameter of a parameter_association.
 the explicit_generic_actual_parameter of a generic_association.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0058-1]}
-@ChgAdded{Version=[2],Text=[the box of a formal_package_association or
-"@key[others] => <>" of a formal package.]}
+@ChgAdded{Version=[2],Text=[the box of a formal_package_association, or the box or
+"@key[others] => <>" of a formal_package_actual_part.]}
 
 the name or expression of a pragma_argument_association.
 @end{InnerItemize}

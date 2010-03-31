@@ -1,6 +1,6 @@
 @Part(general, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.23 $ $Date: 2010/03/09 06:46:51 $}
+@comment{$Revision: 1.24 $ $Date: 2010/03/27 07:31:18 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -187,8 +187,8 @@ compilable.]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 @Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Ids}   package Asis.Ids
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Data_Decomposition (optional)}   package Asis.Data_Decomposition (optional package)
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1],ARef=[SI99-0058-1]}
+@ChgDeleted{Version=[2],Text=[Clause  22    package Asis.Data_Decomposition (optional package)]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 @Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{ASIS Semantic Subsystem}   package @Chg{Version=[2],New=[Asis.Views,@*
@@ -312,13 +312,15 @@ implementation. A conforming ASIS implementation shall meet all of the
 following criteria:
 
 @begin{enumerate}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0058-1]}
 The system shall support all required interfaces defined within this
 International Standard. These interfaces shall support the functional behavior
 described herein. All interfaces in the ASIS specification are required unless
-the interface is specifically identified as being optional. The ASIS
+the interface is specifically identified as being optional.@Chg{Version=[2],
+New=[],Old=[ The ASIS
 specification defines one optional package: Asis.Data_Decomposition.
 Asis.@!Data_Decomposition has one child package,
-Asis.@!Data_Decomposition.@!Portable_Transfer.
+Asis.@!Data_Decomposition.@!Portable_Transfer.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0037-1]}
 The system may provide additional facilities not required by this International

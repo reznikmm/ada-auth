@@ -1,9 +1,9 @@
 @Part(examples, Root="asis.msm")
 
-@Comment{$Date: 2010/03/12 06:02:39 $}
+@Comment{$Date: 2010/03/27 07:31:18 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/examples.mss,v $}
-@comment{$Revision: 1.6 $}
+@comment{$Revision: 1.7 $}
 
 @LabeledInformativeAnnex{ASIS application examples}
 
@@ -523,7 +523,7 @@ information relating to dispatching calls.]}
 @ChgAdded{Version=[2],Text=[      @key[declare]
          -- @examcom{Create the callable_view from the call_name}
          Call_View : @key[constant] Asis.Callable_Views.Callable_View'Class
-            := Asis.Callable_Views.Callable_View
+            := Asis.Callable_Views.Callable_View'Class
                (Asis.Expressions.Views.Corresponding_View (Call_Name));  -- @examcom{@refsecnum{function Corresponding_View}}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -565,9 +565,8 @@ information relating to dispatching calls.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[         Put ("Dispatching Call to ");
          Put ( Callee_Decl.Expanded_Name );                              -- @examcom{@refsecnum{Nested Declarative Regions}}
-         Put ( Asis.Views.Declarative_Regions.Expanded_Name(Callee_Decl));
          Put (" with controlling tagged type of ");
-         Put_Line ( Asis.Views.Declarative_Regions.Expanded_Name(Type_Decl));]}
+         Put_Line ( Type_Decl.Expanded_Name);]}                            -- @examcom{@refsecnum{Nested Declarative Regions}}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[      @key[end];]}
