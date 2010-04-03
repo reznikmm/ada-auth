@@ -275,7 +275,7 @@ private
 
 	-- Paragraph numbering info:
 	Next_Note : Natural; -- The number of the next note. These are
-			     -- per-section, not per-clause.
+			     -- per-section, not per-clause (unless ISO 2004 is set).
 	Next_Paragraph : Positive; -- The number of the next paragraph. These
 			     -- are per-(sub)clause.
 	Next_Insert_Para : Positive; -- The subnumber of the next inserted

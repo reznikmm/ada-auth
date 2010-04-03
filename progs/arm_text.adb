@@ -557,6 +557,8 @@ package body ARM_Text is
 		 ARM_Contents.Subsubclause =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				      Clause_Number & ' ' & Header_Text);
+	    when ARM_Contents.Dead_Clause =>
+		raise Program_Error; -- No headers for dead clauses.
 	end case;
 	Ada.Text_IO.New_Line (Output_Object.Output_File, 2);
 	Output_Object.Char_Count := 0;
@@ -641,6 +643,8 @@ package body ARM_Text is
 		ARM_Contents.Subsubclause =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File,
 				      Clause_Number & ' ' & Header_Text);
+	    when ARM_Contents.Dead_Clause =>
+		raise Program_Error; -- No headers for dead clauses.
 	end case;
 	Ada.Text_IO.New_Line (Output_Object.Output_File, 2);
 	Output_Object.Char_Count := 0;

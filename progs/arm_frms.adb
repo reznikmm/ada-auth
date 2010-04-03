@@ -47,6 +47,7 @@
     --  7/31/07 - RLB - Added code to detect duplicated titles.
     -- 12/18/07 - RLB - Added Plain_Annex and associated commands.
     --  5/06/09 - RLB - Added Labeled_Deleted_xxx.
+    --  5/07/09 - RLB - Changed above to load dead clauses.
 
 separate(ARM_Format)
 procedure Scan (Format_Object : in out Format_Type;
@@ -592,7 +593,7 @@ procedure Scan (Format_Object : in out Format_Type;
 			Operation => ARM_Output.Deletion,
 			Text_Kind => How);
 
-Ada.Text_IO.Put_Line ("Labeled_Deleted disp: " & ARM_Output.Change_Type'Image(How));
+--Ada.Text_IO.Put_Line ("Labeled_Deleted disp: " & ARM_Output.Change_Type'Image(How));
 		    if How = ARM_Output.None then
 			-- Normal text, number normally.
 		        begin
@@ -648,7 +649,38 @@ Ada.Text_IO.Put_Line ("Labeled_Deleted disp: " & ARM_Output.Change_Type'Image(Ho
 			-- Huh? We're deleting here.
 			raise Program_Error;
 		    elsif How = ARM_Output.Deletion then
-			null; -- We'll just display the header without a number.
+			-- We'll just display the header without a number.
+			-- But we need to insert it so that x-refs don't
+			-- fail.
+		        begin
+		            declare
+			        Ref : constant String := ARM_Contents.Lookup_Clause_Number (Title);
+		            begin
+			        -- If we get here, this title is already defined. Oops.
+			        Ada.Text_IO.Put_Line ("  ** Title """ &
+			            Title(1..Title_Length) & """ is multiply defined on line " &
+			            ARM_File.Line_String (Input_Object));
+			        Ada.Text_IO.Put_Line ("     Initial use is for clause " & Ref);
+		            end;
+		        exception
+		            when ARM_Contents.Not_Found_Error =>
+			        -- OK, not previously defined.
+
+			        -- Load the title into the contents package as a dead clause:
+			        ARM_Contents.Add (Title, ARM_Contents.Dead_Clause,
+						  (Section   => 0,
+					           Clause    => 1,
+					           Subclause => 0,
+					           Subsubclause => 0),
+						  Version => '0');
+			        ARM_Contents.Add_Old ((others => ' '),
+						  ARM_Contents.Dead_Clause,
+						  (Section   => 0,
+					           Clause    => 1,
+					           Subclause => 0,
+					           Subsubclause => 0));
+		        end;
+
 		    elsif How = Do_Not_Display_Text then
 			null; -- Nothing to display/number.
 		    end if;

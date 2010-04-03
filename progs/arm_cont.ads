@@ -51,6 +51,7 @@ package ARM_Contents is
     --  9/22/06 - RLB - Created type Clause_Number_Type and added SubSubClause.
     -- 12/18/07 - RLB - Added Plain_Annex.
     --  5/06/09 - RLB - Added Versioned_String.
+    --  5/07/09 - RLB - Added Dead_Clause.
 
     subtype Title_Type is String (1 .. 80);
 	-- The type of a title.
@@ -81,7 +82,7 @@ package ARM_Contents is
 
     type Level_Type is (Section, Unnumbered_Section, Plain_Annex,
 			Normative_Annex, Informative_Annex,
-			Clause, Subclause, Subsubclause);
+			Clause, Subclause, Subsubclause, Dead_Clause);
 	-- Defines the level of a clause header.
 	-- Clause is "xx.nn"; Subclause is "xx.nn.nn"; Subsubclause is "xx.nn.nn.nn".
 

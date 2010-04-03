@@ -15,7 +15,8 @@ package body ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008  AXE Consultants.
+    -- Copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007,
+    --		 2008, 2009  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -169,7 +170,7 @@ package body ARM_HTML is
     -- 12/19/07 - RLB - Added DOS_Filename flag.
     --		- RLB - Added limited colors to Text_Format.
     --  1/02/08 - RLB - Made DOS filenames into all CAPS.
-
+    --  5/ 7/09 - RLB - Added code to prevent making links to dead clauses.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -2727,7 +2728,7 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 				-- Note: Clause_Number includes "Annex"
 		Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H2>(informative)</H2>");
 		Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>" & Header_Text & "</H1>");
-	    when ARM_Contents.Unnumbered_Section =>
+	    when ARM_Contents.Unnumbered_Section  =>
 	        if Header_Text /= "" then
 		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>" &
 				          Header_Text & "</H1>");
@@ -2739,6 +2740,8 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 		 ARM_Contents.Subsubclause =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1>" &
 				      Clause_Number & ' ' & Header_Text & "</H1>");
+	    when ARM_Contents.Dead_Clause  =>
+		raise Program_Error; -- No headers for dead clauses.
 	end case;
 	Output_Object.Char_Count := 0;
 	Output_Object.Disp_Char_Count := 0;
@@ -2827,6 +2830,8 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 		 ARM_Contents.Subsubclause =>
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "<H1> " &
 				      Clause_Number & ' ' & Header_Text & "</H1>");
+	    when ARM_Contents.Dead_Clause  =>
+		raise Program_Error; -- No headers for dead clauses.
 	end case;
 	Output_Object.Char_Count := 0;
 	Output_Object.Disp_Char_Count := 0;
@@ -4532,16 +4537,22 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not in paragraph");
 	end if;
-	Output_Text (Output_Object, "<A HREF=""");
-	declare
-	    Name : constant String :=
-		Make_Clause_Link_Name (Output_Object, Clause_Number);
-	begin
-	    Output_Text (Output_Object, Name);
-	end;
-	Output_Text (Output_Object, """>");
-        Ordinary_Text (Output_Object, Text);
-	Output_Text (Output_Object, "</A>");
+	if Clause_Number = "X.X" then
+	    -- Link to a dead clause, just output the text (presumably this
+	    -- is deleted).
+            Ordinary_Text (Output_Object, Text);
+	else
+	    Output_Text (Output_Object, "<A HREF=""");
+	    declare
+	        Name : constant String :=
+		    Make_Clause_Link_Name (Output_Object, Clause_Number);
+	    begin
+	        Output_Text (Output_Object, Name);
+	    end;
+	    Output_Text (Output_Object, """>");
+            Ordinary_Text (Output_Object, Text);
+	    Output_Text (Output_Object, "</A>");
+	end if;
     end Clause_Reference;
 
 

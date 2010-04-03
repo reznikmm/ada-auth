@@ -11,7 +11,7 @@ package body ARM_Database is
     -- appendixes.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004, 2005, 2006  AXE Consultants.
+    -- Copyright 2000, 2004, 2005, 2006, 2009  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -51,12 +51,14 @@ package body ARM_Database is
     --  1/19/05 - RLB - Added Added_Version.
     -- 10/17/05 - RLB - Fixed indexing of the Glossary.
     -- 10/18/06 - RLB - Added No_Deleted_Paragraph_Messages to Report.
+    -- 11/30/09 - RLB - Made the hang item bigger again (to make room to
+    --			handle commands like @ChgAdded).
 
     type String_Ptr is access String;
     type Item is record
 	Next : Item_List;
 	Sort_Key : String(1 .. 50);
-	Hang : String(1 .. 50);
+	Hang : String(1 .. 75);
 	Hang_Len : Natural;
 	Text : String_Ptr;
 	Change_Kind : Paragraph_Change_Kind_Type;

@@ -18,7 +18,8 @@ package body ARM_RTF is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2010
+    --   AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -134,6 +135,7 @@ package body ARM_RTF is
     --  5/ 4/09 - RLB - Added the footer information.
     --  5/ 6/09 - RLB - Added ISO format footer and version names.
     -- 10/28/09 - RLB - Added missing with.
+    --  3/31/10 - RLB - Adjusted picture scaling to be closer to reality.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -5045,8 +5047,13 @@ package body ARM_RTF is
 	use type ARM_Output.Picture_Alignment;
 	use type ARM_Output.Border_Kind;
 
-	HORIZONTAL_TWIPS_PER_PIXEL : constant := 17; -- By experiment.
-	VERTICAL_TWIPS_PER_PIXEL : constant := 17; -- By experiment.
+	HORIZONTAL_TWIPS_PER_PIXEL : constant := 16; -- By experiment.
+	VERTICAL_TWIPS_PER_PIXEL : constant := 16; -- By experiment.
+	    -- These values give us Pixels/90 = box size in inches.
+
+	-- For reasons that I don't understand, the supposed "raw" picture
+	-- size is Pixels/120. So a scaling of 75% gives exact pixels.
+
 
 	type Kind is (PNG, JPEG, Unknown);
 	type DWord is mod 2**32;
@@ -5206,6 +5213,8 @@ package body ARM_RTF is
 		-- Scaling so that the HTML pixel and Word pixel
 		-- have the same approximate size. Word's pixels
 		-- seem to be about 6 times smaller than HTML's.
+
+	    -- Word's box size is
 	begin
 	    Width_Scale := Float(Width) / Float(Picture_Width) * 100.0 * Word_Scaling;
 	    Height_Scale := Float(Height) / Float(Picture_Height) * 100.0 * Word_Scaling;
@@ -5220,6 +5229,15 @@ package body ARM_RTF is
 	    Ada.Text_IO.Put_Line ("Box width=" &
 	        Natural'Image(Width) & " Height=" &
 	        Natural'Image(Height));
+	    -- Note: Word 2000/2003 seems to ignore this scaling; it seems to
+	    -- use the "picwgoal" and "pichgoal" exclusively.
+	    -- As noted above, that naturally gives a 75% scaling when the
+	    -- picture size and box size are the same. We remove that for this
+	    -- information. (Note: The smaller the scaling the better.)
+	    Ada.Text_IO.Put_Line ("Word 2003 scaling: Width=" &
+	        Natural'Image(Natural(Float(Width) / Float(Picture_Width) * 100.0 / 0.75)) & " Height=" &
+	        Natural'Image(Natural(Float(Height) / Float(Picture_Height) * 100.0 / 0.75)));
+
 	end;
 
 	-- Wrap the picture in a shape, so we can set the properties:
@@ -5288,9 +5306,9 @@ package body ARM_RTF is
         Ada.Text_IO.Put_Line (Output_Object.Output_File,
 	    "\piccropb0"); -- Bottom crop (twips) [Should be zero].
         Ada.Text_IO.Put (Output_Object.Output_File,
-	    "\picw" & Format_Twips(Natural(Picture_Width) * 5)); -- Raw picture width in ???.
+	    "\picw" & Format_Twips(Natural(Picture_Width) * 5)); -- Raw picture width in ??? (doesn't seem to be used).
         Ada.Text_IO.Put (Output_Object.Output_File,
-	    "\pich" & Format_Twips(Natural(Picture_Height) * 5)); -- Raw picture height in ???.
+	    "\pich" & Format_Twips(Natural(Picture_Height) * 5)); -- Raw picture height in ??? (doesn't seem to be used).
 	Ada.Text_IO.Put (Output_Object.Output_File,
 	    "\picwgoal" & Format_Twips(Width * HORIZONTAL_TWIPS_PER_PIXEL)); -- Picture width goal in twips.
         Ada.Text_IO.Put_Line (Output_Object.Output_File,

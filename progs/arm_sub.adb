@@ -3,6 +3,7 @@ with ARM_Index;
 with ARM_Contents;
 with Ada.Characters.Handling;
 with Ada.Strings.Fixed;
+with Ada.Unchecked_Deallocation;
 with Ada.Text_IO; -- ** Temp.
 package body ARM_Subindex is
 

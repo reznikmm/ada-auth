@@ -9,7 +9,7 @@ package body ARM_Contents is
     -- references.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004, 2005, 2006, 2007, 2008  AXE Consultants.
+    -- Copyright 2000, 2004, 2005, 2006, 2007, 2008, 2009  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: rbrukardt@bix.com
     --
@@ -52,6 +52,7 @@ package body ARM_Contents is
     -- 10/12/07 - RLB - Extended the range of properly formatted clause numbers.
     -- 12/18/07 - RLB - Added Plain_Annex.
     -- 10/24/08 - RLB - More old titles.
+    --  5/07/09 - RLB - Added Dead_Clause.
 
     function "<" (Left, Right : Clause_Number_Type) return Boolean is
 	-- True if Left comes before Right in the collating order.
@@ -104,10 +105,10 @@ package body ARM_Contents is
         Version : ARM_Contents.Change_Version_Type := '0';
     end record;
 
-    Title_List : array (1 .. 750) of Title_Record;
+    Title_List : array (1 .. 900) of Title_Record;
     Last_Title : Natural;
 
-    Old_Title_List : array (1 .. 250) of Title_Record;
+    Old_Title_List : array (1 .. 300) of Title_Record;
     Last_Old_Title : Natural;
 
     procedure Initialize is
@@ -132,7 +133,8 @@ package body ARM_Contents is
 	    raise Program_Error;
 	end if;
 	if (Level /= Subsubclause and then Level /= Subclause and then
-	    Level /= Clause and then Level /= Unnumbered_Section) and then
+	    Level /= Clause and then Level /= Unnumbered_Section and then
+	    Level /= Dead_Clause) and then
 	   Clause_Number.Clause /= 0 then
 	    raise Program_Error;
 	end if;
@@ -165,7 +167,8 @@ package body ARM_Contents is
 	    raise Program_Error;
 	end if;
 	if (Level /= Subsubclause and then Level /= Subclause and then
-	    Level /= Clause and then Level /= Unnumbered_Section) and then
+	    Level /= Clause and then Level /= Unnumbered_Section and then
+	    Level /= Dead_Clause) and then
 	   Clause_Number.Clause /= 0 then
 	    raise Program_Error;
 	end if;
@@ -370,6 +373,8 @@ package body ARM_Contents is
 	        else
 		    raise Program_Error; -- Out of range.
 		end if;
+	    when Dead_Clause =>
+		return "X.X";
 	end case;
     end Make_Clause_Number;
 
@@ -538,12 +543,15 @@ package body ARM_Contents is
 	Make_Clause (Clause, Clause_Number);
 	for I in 1 .. Last_Title loop
 	    if Title_List(I).Clause_Number = Clause_Number then
-		if I = 1 then
-		    raise Not_Found_Error;
-		else
-		    return Make_Clause_Number (Title_List(I-1).Level,
-					       Title_List(I-1).Clause_Number);
-	        end if;
+		for J in reverse 1 .. I - 1 loop
+		    if Title_List(J).Level /= Dead_Clause then
+		        return Make_Clause_Number (Title_List(J).Level,
+					           Title_List(J).Clause_Number);
+		    -- else skip it and continue.
+		    end if;
+		end loop;
+		-- If we get here, it was not found.
+		raise Not_Found_Error;
 	    end if;
 	end loop;
 	raise Not_Found_Error;
@@ -559,12 +567,15 @@ package body ARM_Contents is
 	Make_Clause (Clause, Clause_Number);
 	for I in 1 .. Last_Title loop
 	    if Title_List(I).Clause_Number = Clause_Number then
-		if I = Last_Title then
-		    raise Not_Found_Error;
-		else
-		    return Make_Clause_Number (Title_List(I+1).Level,
-					       Title_List(I+1).Clause_Number);
-	        end if;
+		for J in I + 1 .. Last_Title loop
+		    if Title_List(J).Level /= Dead_Clause then
+		        return Make_Clause_Number (Title_List(J).Level,
+					           Title_List(J).Clause_Number);
+		    -- else skip it and continue.
+		    end if;
+		end loop;
+		-- If we get here, it was not found.
+		raise Not_Found_Error;
 	    end if;
 	end loop;
 	raise Not_Found_Error;
@@ -573,16 +584,20 @@ package body ARM_Contents is
 
     procedure For_Each is
 	-- Call Operate for each title in the contents, in the order that
-	-- they were added to the contents. If the Quit parameter to Operate
-	-- is True when Operate returns, the iteration is abandoned.
+	-- they were added to the contents (other than dead clauses). If the
+	-- Quit parameter to Operate is True when Operate returns, the
+	-- iteration is abandoned.
 	Quit : Boolean := False;
     begin
 	for I in 1 .. Last_Title loop
-	    Operate (Title_List(I).Title,
-		     Title_List(I).Level,
-		     Title_List(I).Clause_Number,
-		     Title_List(I).Version,
-		     Quit);
+	    if Title_List(I).Level /= Dead_Clause then
+	        Operate (Title_List(I).Title,
+		         Title_List(I).Level,
+		         Title_List(I).Clause_Number,
+		         Title_List(I).Version,
+		         Quit);
+	    -- else skip it.
+	    end if;
 	    if Quit then
 		return;
 	    end if;

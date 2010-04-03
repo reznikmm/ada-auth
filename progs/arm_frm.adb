@@ -254,6 +254,7 @@ package body ARM_Format is
     --			displaying a deleted paragraph in New-Only mode
     --			and no paragraph numbers are shown.
     --  5/ 6/09 - RLB - Added Labeled_Deleted_xxx.
+    --  5/15/09 - RLB - Fixed missing code for note numbers in revised/added clauses.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -6957,6 +6958,16 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		        Format_Object.Next_Paragraph := 1;
 		        Format_Object.Next_Insert_Para := 1;
 		        Format_Object.Next_AARM_Sub := 'a';
+		        if Format_Object.Use_ISO_2004_Note_Format then
+			    -- Reset the note number:
+		            Format_Object.Next_Note := 1;
+		        elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Section or else
+		              Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Annex or else
+		              Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Informative_Annex or else
+		              Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Revised_Normative_Annex then
+		            -- Reset the note number, only for sections:
+		            Format_Object.Next_Note := 1;
+		        end if;
 		        -- Reset the subhead:
 		        Format_Object.Last_Paragraph_Subhead_Type := Plain;
 		        Format_Object.Next_Paragraph_Format_Type := Plain;
@@ -7097,6 +7108,16 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		            Format_Object.Next_Paragraph := 1;
 		            Format_Object.Next_Insert_Para := 1;
 		            Format_Object.Next_AARM_Sub := 'a';
+		            if Format_Object.Use_ISO_2004_Note_Format then
+			        -- Reset the note number:
+		                Format_Object.Next_Note := 1;
+		            elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Section or else
+		                  Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Annex or else
+		                  Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Informative_Annex or else
+		                  Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Added_Normative_Annex then
+		                -- Reset the note number, only for sections:
+		                Format_Object.Next_Note := 1;
+		            end if;
 		            -- Reset the subhead:
 		            Format_Object.Last_Paragraph_Subhead_Type := Plain;
 		            Format_Object.Next_Paragraph_Format_Type := Plain;
@@ -7147,8 +7168,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			    Operation => ARM_Output.Deletion,
 			    Text_Kind => Disposition);
 
-Ada.Text_IO.Put_Line ("Labeled_Deleted disp: " & ARM_Output.Change_Type'Image(Disposition));
-Ada.Text_IO.Put_Line ("  Version:" & Version);
+--Ada.Text_IO.Put_Line ("Labeled_Deleted disp: " & ARM_Output.Change_Type'Image(Disposition));
+--Ada.Text_IO.Put_Line ("  Version:" & Version);
 		        if Disposition = Do_Not_Display_Text then
 			    null; -- Ignore this; it isn't numbered or anything.
 		        elsif Disposition = ARM_Output.Insertion then
@@ -7181,6 +7202,16 @@ Ada.Text_IO.Put_Line ("  Version:" & Version);
 		            Format_Object.Next_Paragraph := 1;
 		            Format_Object.Next_Insert_Para := 1;
 		            Format_Object.Next_AARM_Sub := 'a';
+		            if Format_Object.Use_ISO_2004_Note_Format then
+			        -- Reset the note number:
+		                Format_Object.Next_Note := 1;
+		            --elsif Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Deleted_Section or else
+		            --      Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Deleted_Annex or else
+		            --      Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Deleted_Informative_Annex or else
+		            --      Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Labeled_Deleted_Normative_Annex then
+		            --    -- Reset the note number, only for sections: (no sections yet)
+		            --    Format_Object.Next_Note := 1;
+		            end if;
 		            -- Reset the subhead:
 		            Format_Object.Last_Paragraph_Subhead_Type := Plain;
 		            Format_Object.Next_Paragraph_Format_Type := Plain;
