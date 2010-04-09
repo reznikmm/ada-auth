@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2009/12/18 07:15:34 $}
+@Comment{$Date: 2010/04/03 06:48:07 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -2755,6 +2755,38 @@ attribute is defined]}:
 @EndPrefixType()
 @end{StaticSem}
 
+@begin{RunTime}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0113-1]}
+@ChgAdded{Version=[3],Text=[If a user-specified external tag S'External_Tag is
+the same as T'External_Tag for some other tagged type declared by a different
+declaration in the partition, Program_Error is raised by the elaboration of the
+attribute_definition_clause.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This rule does not depend on the visibility of the
+  other tagged type, but it does depend on the existence of the other tagged
+  type. The other tagged type could have the default external tag or a
+  user-specified external tag.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This rule allows the same declaration to be
+  elaborated multiple times. In that case, different types could have the same
+  external tag. If that happens, Internal_Tag would return some unspecified tag,
+  and Decendant_Tag probably would return the intended tag (using the given
+  ancestor to determine which type is intended). However, in some cases (such as
+  multiple instantiations of a derived tagged type declared in a generic body),
+  Tag_Error might be raised by Descendant_Tag if multiple types are identified.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Note that while there is a race condition inherent
+  in this definition (which attribute_definition_clause raises Program_Error
+  depends on the order of elaboration), it doesn't matter as a program with two
+  such clauses is simply wrong. Two types that both come from the same
+  declaration are allowed, as noted previously.]}
+@end{Ramification}
+@end{RunTime}
+
 @begin{ImplReq}
 In an implementation, the default external tag for each specific tagged type
 declared in a partition
@@ -2796,6 +2828,23 @@ same in two different partitions.}
   8-bit bytes.
 @end{Ramification}
 @end{ImplReq}
+
+@begin{ImplPerm}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0113-1]}
+@ChgAdded{Version=[3],Text=[If a user-specified external tag S'External_Tag is
+the same as T'External_Tag for some other tagged type declared by a different
+declaration in the partition, the partition may be rejected.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is, in general, a post-compilation check.
+  This permission is intended for implementations that do link-time construction
+  of the external tag lookup table; implementations that dynamically construct
+  the table will likely prefer to raise Program_Error upon elaboration of the
+  problem construct. We don't want this check to require any implementation
+  complexity, as it will be very rare that there would be a problem.]}
+@end{Ramification}
+@end{ImplPerm}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00270-01]}
@@ -2883,18 +2932,28 @@ except for certain explicit exceptions.
 @begin{Inconsistent95}
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI95-0095-1]}
   @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}
-  @b<Amendment 2:> An address attribute with a prefix of a generic formal
+  @b<Amendment 2 Correction:> An address attribute with a prefix of a
+  generic formal
   subprogram whose actual parameter has convention Intrinsic now raises
   Program_Error. Since it is unlikely that such an attribute would have done
   anything useful (a subprogram with convention Intrinsic is not expected
   to have a normal subprogram body), it is highly unlikely that any
   existing programs would notice the difference, and any that do probably
   are buggy.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI95-0113-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> User-specified
+  external tags that conflict with other external tags raise Program_Error
+  (or are optionally illegal). This was legal and did not raise an exception
+  in the past, although the effects were not defined. So while a program
+  might depend on such behavior, the results were not portable (even to
+  different versions of the same implementation). Such programs should be
+  rare.]}
 @end{Inconsistent95}
 
 @begin{Incompatible95}
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0095-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b[Amendment 2:]
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b[Amendment 2 Correction:]
   An address attribute with a prefix of a subprogram with convention Intrinsic is
   now illegal. Such attributes are very unlikely to have provided a useful
   answer (the intended meaning
@@ -2947,13 +3006,13 @@ except for certain explicit exceptions.
   to both.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Improved the description
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Improved the description
   of erroneous execution for address clauses to make it clear that
   specifying an address inappropriate for the entity will lead to
   erroneous execution.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0116-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added @ImplAdviceTitle for
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Added @ImplAdviceTitle for
   the alignment of class-wide types.]}
 @end{DiffWord95}
 

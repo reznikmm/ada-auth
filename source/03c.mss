@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/01/12 04:45:35 $}
+@Comment{$Date: 2010/04/03 06:48:07 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.95 $}
+@Comment{$Revision: 1.96 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -421,13 +421,15 @@ has not yet been created (see @RefSecNum{Freezing Rules}).],Old=[]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0113-1]}
 @ChgAdded{Version=[2],Text=[The function Descendant_Tag returns the (internal)
 tag for the type that corresponds to the given external tag and is both a
 descendant of the type identified by the Ancestor tag and has the same
 accessibility level as the identified ancestor. Tag_Error is raised if External
 is not the external tag for such a type. Tag_Error is also raised if the
 specific type identified is a library-level type whose tag has not yet been
-created.]}
+created@Chg{Version=[3],New=[, or if the given external tag identifies more than
+one type that has the appropriate Ancestor and accessibility level],Old=[]}.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -439,7 +441,16 @@ created.]}
     the ancestor because there could be ambiguity in the presence of
     recursion or multiple tasks. Descendant_Tag can
     be used in constructing a user-defined replacement for T'Class'Input.]}
-@end{Reason}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0113-1]}
+  @ChgAdded{Version=[3],Text=[Rules for specifying external tags will usually
+  prevent an external tag from identifying more than one type. However, an
+  external tag can identify multiple types if a generic body contains a
+  derivation of a tagged type declared outside of the generic, and there are
+  multiple instances at the same accessibility level as the type. (There is
+  an exception to the general requirement that default external tags be unique
+  for this case.)]}
+  @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
 @ChgAdded{Version=[2],Text=[The function Is_Descendant_At_Same_Level returns
@@ -746,7 +757,7 @@ program's performance. Moreover, we'd still have a race condition; if task A
 terminated after the tag check, but before the tag was used, we'd still have
 a problem. That means that all of these operations would have to be serialized.
 That could be a significant performance drain, whether or not nested tagged
-types are every used. Therefore, we allow execution to become erroneous
+types are ever used. Therefore, we allow execution to become erroneous
 as we do for other dangling pointers. If the implementation can detect the
 error, we recommend that Tag_Error be raised.]}
 @end{Discussion}
@@ -786,18 +797,27 @@ We don't require the latter behavior;]} hence the word
 
 @begin{ImplAdvice}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
-@ChgAdded{Version=[2],Text=[Internal_Tag should return the tag of a type whose
-innermost master is the master of the point of the function call.]}
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],
-New=[Tags.Internal_Tag should return the tag of a type whose
-innermost master is the master of the point of the function call.],Old=[]}.]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0113-1]}
+@ChgAdded{Version=[2],Text=[Internal_Tag should return the tag of
+a type@Chg{Version=[3],New=[, if one exists,],Old=[]} whose
+innermost master is @Chg{Version=[3],New=[a],Old=[the]} master of the point of the function call.]}
+@ChgImplAdvice{Version=[3],Kind=[AddedNormal],Text=[@Chg{Version=[2],
+New=[Tags.Internal_Tag should return the tag of
+a type@Chg{Version=[3],New=[, if one exists,],Old=[]} whose innermost master
+is @Chg{Version=[3],New=[a],Old=[the]} master of the point of the function call.],Old=[]}.]}
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02],ARef=[AI95-00344-01]}
-@ChgAdded{Version=[2],Text=[It's not helpful if Internal_Tag returns the tag of
-some type in another task when one is available in the task that made the call.
-We don't require this behavior (because it requires the same implementation
-techniques we decided not to insist on previously), but encourage it.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02],ARef=[AI95-00344-01]}
+  @ChgAdded{Version=[2],Text=[It's not helpful if Internal_Tag returns the tag of
+  some type in another task when one is available in the task that made the call.
+  We don't require this behavior (because it requires the same implementation
+  techniques we decided not to insist on previously), but encourage it.]}
 @end{Reason}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0113-1]}
+  @ChgAdded{Version=[3],Text=[There is no Advice for the result of Internal_Tag
+  if no such type exists. In most cases, the @ImplPermName can be
+  used to raise Tag_Error, but some other tag can be returned as well.]}
+@end{Discussion}
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -876,6 +896,17 @@ Tagged types are a new concept.
   of these functions, it could fail when compiled with Ada 2005. Such code is
   not portable even between Ada 95 implementations, so it should be very
   rare.>}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI05-0113-1]}
+  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 2005}
+  @b[Amendment 2 Correction:] Added wording specifying that Dependent_Tag
+  must raise Tag_Error if there is more than one type which matches the
+  requirements. If an implementation had returned a random tag of the matching
+  types, a program may have worked properly. However, such a program would
+  not be portable (another implementation may return a different tag) and the
+  conditions that would cause the problem are unlikely (most likely, a tagged
+  type extension declared in a generic body with multiple instances in the
+  same scope).]}
 @end{Inconsistent95}
 
 @begin{Incompatible95}
@@ -2234,7 +2265,7 @@ allowed.]
   even considered by name resolution (see @RefSecNum{Subprogram Calls}).],Old=[]}
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0073-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0073-1],ARef=[AI05-0203-1]}
 The type of an @nt{aggregate}, or of an object created by an
 @nt{object_declaration} or an @nt{allocator},
 or a generic formal object of mode @key[in],
@@ -2247,8 +2278,10 @@ If the result type of a function is abstract,
 then the function shall be abstract.@Chg{Version=[3],New=[
 If a function has an access result type
 designating an abstract type, then the function shall be abstract.
-A generic function shall not have an abstract result type or
-an access result type designating an abstract type.],Old=[]}
+The type denoted by a @nt{return_subtype_indication} (see
+@RefSecNum{Return Statements}) shall not be abstract. A generic function
+shall not have an abstract result type or an access result type designating an
+abstract type.],Old=[]}
 @begin{Reason}
   This ensures that values of an abstract type cannot be created,
   which ensures that a dispatching call to an abstract subprogram
@@ -2461,7 +2494,7 @@ but then clients of the package would not have visibility to T.
 
 @begin{Incompatible95}
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0073-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b<Amendment 2:>
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b<Amendment 2 Correction:>
   Added rules to eliminate
   holes with controlling access results and generic functions that return
   abstract types. While these changes are technically incompatible, it
@@ -2469,7 +2502,7 @@ but then clients of the package would not have visibility to T.
   other rule of the use of abstract types.]}
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0097-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected a minor
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Corrected a minor
   glitch having to do with abstract null extensions. The Amendment 1
   rule allowed such extensions to inherit concrete operations in some
   rare cases. It is unlikely that these cases exist in user code.]}
@@ -2504,6 +2537,12 @@ but then clients of the package would not have visibility to T.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00391-01]}
   @ChgAdded{Version=[2],Text=[We define the term @i<require overriding>
   to make other wording easier to understand.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0203-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Added wording to
+  disallow abstract return objects. These were illegal in Ada 2005 by other
+  rules; the extension to support class-wide type better opened a hole which
+  has now been plugged.]}
 @end{Diffword95}
 
 
@@ -3640,20 +3679,35 @@ declares a @i{tagged incomplete view}.@Defn2{Term=[incomplete view],Sec=[tagged]
 @ChgAdded{Version=[2],Type=[Leading],Text=[Given an access type @i{A} whose designated
 type @i{T} is an incomplete view, a dereference of a value of type @i{A} also
 has this incomplete view except when:]}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0208-1]}
+  @ChgAdded{Version=[3],Text=[Whether the designated type is an incomplete view
+  (and thus whether this set of rules applies) is determined by the view of the
+  type at the declaration of the access type; it does not change during the life
+  of the type.]}
+@end{Discussion}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[it occurs within the immediate scope of the completion
 of @i{T}, or],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0208-1]}
 @ChgAdded{Version=[2],Text=[it occurs within the scope of a @nt{nonlimited_with_clause}
 that mentions a library package in whose visible part the completion of @i{T}
-is declared.]}
+is declared@Chg{Version=[3],New=[, or],Old=[.]}]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0208-1]}
+@ChgAdded{Version=[3],Text=[it occurs within the scope of @i{T} after the
+completion of @i{T} and @i{T} is an incomplete view declared by an
+@nt{incomplete_type_declaration}.]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[In these cases, the dereference has the full view
-of @i{T}.]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0162-1]}
+@ChgAdded{Version=[2],Text=[In these cases, the dereference has the
+@Chg{Version=[3],New=[],Old=[full ]}view
+of @i{T}@Chg{Version=[3],New=[ visible at the point of the dereference],Old=[]}.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[We need the @lquotes@;in
@@ -3676,35 +3730,42 @@ of @i{T}.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
 @Chg{Version=[2],New=[@Key{with} P.C;
 @Key{package body} P @Key{is}
-    -- @RI{Ptr.all'Size is not legal here@Chg{Version=[3],New=[.],Old=[, but it is in the scope of a]}}@Chg{Version=[3],New=[],Old=[
-    -- @nt{nonlimited_with_clause} @RI{for P.}]}
-    @Key{type} T @Key{is} ...
+    -- @RI{Ptr.all'Size is not legal here, but @Chg{Version=[3],New=[we are within],Old=[it is in]} the scope}
+    -- @RI{of a @nt{nonlimited_with_clause} @RI{for P.}}
+@Key{type} T @Key{is} ...
     --  @RI{Ptr.all'Size is legal here.}
 @Key{end} P;],Old=[]}
 @end{Example}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00412-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0162-1],ARef=[AI05-0208-1]}
 @ChgAdded{Version=[2],Text=[Similarly, if a @nt{subtype_mark} denotes a
 @nt{subtype_declaration} defining a subtype of an incomplete view @i<T>, the
-@nt{subtype_mark} denotes an incomplete view except under the same two
-circumstances given above, in which case it denotes the full view of @i<T>.]}
+@nt{subtype_mark} denotes an incomplete view except under the
+same @Chg{Version=[3],New=[three],Old=[two]}
+circumstances given above, in which case it denotes the
+@Chg{Version=[3],New=[],Old=[full ]}view of @i<T>@Chg{Version=[3],New=[ visible at the
+point of the @nt{subtype_mark}],Old=[]}.]}
 @end{StaticSem}
 
 @begin{Legality}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0162-1]}
 @PDefn2{Term=[requires a completion], Sec=(@nt<incomplete_type_declaration>)}
-An @nt{incomplete_type_declaration} requires a completion, which shall
-be a @nt{full_@!type_@!declaration}.
+An @nt{incomplete_@!type_@!declaration} requires a completion, which shall
+be a @Chg{Version=[3],New=[@nt{type_@!declaration} other than an
+@nt{incomplete_@!type_@!declaration}],Old=[@nt{full_@!type_@!declaration}]}.
 @Redundant[If the @nt{incomplete_@!type_@!declaration} occurs immediately
 within either the visible part of a
 @nt{package_@!specification} or a @nt<declarative_@!part>,
-then the @nt{full_@!type_@!declaration}
-shall occur later and immediately within this
+then the @Chg{Version=[3],New=[@nt{type_@!declaration}],
+Old=[@nt{full_@!type_@!declaration}]} shall occur later and immediately within this
 visible part or @nt<declarative_@!part>.
 If the @nt{incomplete_@!type_@!declaration} occurs
 immediately within the private part of a
 given @nt<package_@!specification>, then the
-@nt{full_@!type_@!declaration} shall occur later and immediately
+@Chg{Version=[3],New=[@nt{type_@!declaration}],
+Old=[@nt{full_@!type_@!declaration}]} shall occur later and immediately
 within either the private part itself, or the @nt{declarative_@!part}
 of the corresponding @nt{package_@!body}.]
 @begin{TheProof}
@@ -3716,9 +3777,9 @@ the same declarative region.
 @begin{Honest}
 If the @nt{incomplete_type_declaration} occurs immediately within
 the visible part of a @nt{package_specification},
-then the @nt{full_type_declaration}
-shall occur immediately within this
-visible part.
+then the @Chg{Version=[3],New=[completing @nt{type_@!declaration}],
+Old=[@nt{full_@!type_@!declaration}]}
+shall occur immediately within this visible part.
 @end{Honest}
 @begin(Honest)
   If the implementation supports it, an
@@ -3727,19 +3788,22 @@ visible part.
 @end(Honest)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0162-1]}
 @Chg{Version=[2],New=[If an @nt{incomplete_@!type_@!declaration} includes the
-reserved word @key{tagged}, then a @nt{full_@!type_@!declaration} that completes
+reserved word @key{tagged}, then a @Chg{Version=[3],New=[@nt{type_@!declaration}],
+Old=[@nt{full_@!type_@!declaration}]} that completes
 it shall declare a tagged type. ],Old=[]}If an @nt{incomplete_@!type_@!declaration}
 has a @nt{known_@!discriminant_@!part},
-then a @nt{full_@!type_@!declaration} that completes it shall have a fully
+then a @Chg{Version=[3],New=[@nt{type_@!declaration}],
+Old=[@nt{full_@!type_@!declaration}]} that completes it shall have a fully
 conforming (explicit) @nt{known_@!discriminant_@!part}
 (see @RefSecNum(Conformance Rules)).
 @Defn2{Term=[full conformance],Sec=(required)}
 @Redundant[If an @nt{incomplete_@!type_@!declaration} has no @nt<discriminant_part>
 (or an @nt<unknown_@!discriminant_@!part>),
-then a corresponding @nt{full_@!type_@!declaration} is nevertheless allowed
-to have discriminants,
-either explicitly, or inherited via derivation.]
+then a corresponding @Chg{Version=[3],New=[@nt{type_@!declaration}],
+Old=[@nt{full_@!type_@!declaration}]} is nevertheless allowed
+to have discriminants, either explicitly, or inherited via derivation.]
 
 
 @Leading@keepnext@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
@@ -4119,7 +4183,7 @@ not at all) for different designated subtypes.
   give shorter names to entities imported with a @nt{limited_with_clause}.]}
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0098-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the definition
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Fixed the definition
   so that an anonymous access-to-subprogram type can use an incomplete
   view in the same way that a named access-to-subprogram type can.]}
 
@@ -4128,6 +4192,12 @@ not at all) for different designated subtypes.
   in subprogram declarations. The type has to be complete before any calls
   or the body is declared. This reduces the places where access types are
   required for type imported from limited views of packages.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0162-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Incomplete types now can be
+  completed by private types and private extensions. Since this can already
+  happen for limited views, there is no remaining reason to disallow it for
+  explicitly declared incomplete types.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -4137,6 +4207,11 @@ not at all) for different designated subtypes.
   neglected to give any rules for matching them with other types. Luckily,
   implementers did the right thing anyway. This change also makes it easier to
   describe the meaning of a limited view.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0208-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Changed the
+  rules of uses of dereferences of incomplete views such that it does not
+  introduce an unintentional incompatibility with Ada 83 and Ada 95.]}
 @end{DiffWord95}
 
 
@@ -5840,8 +5915,14 @@ with a body.
 Thus, a declaration can actually come in @i{three} parts.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@Chg{Version=[2],New=[In Ada 2005 the limited view of the package contains
-an incomplete view of the private type, so we can have @i{four} parts now.],Old=[]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI0-0162-1]}
+@Chg{Version=[2],New=[@Chg{Version=[3],New=[An incomplete type (whether declared
+in the limited view of a package or not) may be completed by a private type
+declaration],Old=[In Ada 2005 the limited view of the package contains an
+incomplete view of the private type]}, so we can
+@Chg{Version=[3],New=[in fact ],Old=[]}have @i{four}
+parts@Chg{Version=[3],New=[],Old=[ now]}.],Old=[]}
+
 @end{Discussion}
 @end{Intro}
 

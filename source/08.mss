@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2009/12/18 07:15:33 $}
+@Comment{$Date: 2010/04/03 06:48:07 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -915,6 +915,11 @@ declaration, except:
   the declaration is hidden from all visibility only
   until the reserved word @b(record);
 
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0205-1]}
+  @ChgAdded{Version=[3],Text=[For an @nt{extended_return_statement}, the
+  declaration is hidden from all visibility only until the reserved word
+  @key[do] of the statement;]}
+
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
   For a @nt{package_declaration}, @Chg{Version=[2],New=[],Old=[task declaration,
   protected declaration, ]}@nt{generic_@!package_@!declaration},
@@ -1429,22 +1434,31 @@ complex than they already are.]}
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0025],ARef=[AI95-00044-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Clarified the overriding rules so that
-"/=" and @nt{statement_identifier}s are covered.],Old=[]}
+@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified the overriding rules so
+that "/=" and @nt{statement_identifier}s are covered.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0026],ARef=[AI95-00150-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> Clarified that is it never possible
+@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that is it never possible
 for two components with the same name to be visible; any such program is
-illegal.],Old=[]}
+illegal.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01],ARef=[AI95-00408-01]}
-@ChgAdded{Version=[2],Text=[The visibility of an @nt{attribute_definition_clause} is
-defined so that it can be used by the stream attribute availability rules
-(see @RefSecNum{Stream-Oriented Attributes}).]}
+@ChgAdded{Version=[2],Text=[The visibility of an
+@nt{attribute_definition_clause} is defined so that it can be used by the stream
+attribute availability rules (see @RefSecNum{Stream-Oriented Attributes}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@Chg{Version=[2],New=[The visibility of a limited view of a library package
-is defined (see @RefSecNum{Compilation Units - Library Units}).],Old=[]}
+@ChgAdded{Version=[2],Text=[The visibility of a limited view of a library package
+is defined (see @RefSecNum{Compilation Units - Library Units}).]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0205-1]}
+@ChgAdded{Version=[3],Text=[@b{Amendment 2 Correction:} Added a rule allowing
+visibility of the declared return object within an
+@nt{extended_return_statement}. While this is technically an extension
+(since the wording said that the return object was always hidden from all
+visibility), this is so obviously not intended (a declaration that can never be
+used is pointless) that the actual language rule was never implemented. So this
+just makes the wording consistent with practice.]}
 @end{DiffWord95}
 
 
@@ -1626,7 +1640,8 @@ change the meaning of a program from one legal interpretation to another.
 
 @Syn{lhs=<use_package_clause>,rhs="@key{use} @SynI{package_}@Syn2{name} {, @SynI{package_}@Syn2{name}};"}
 
-@Syn{lhs=<use_type_clause>,rhs="@key{use type} @Syn2{subtype_mark} {, @Syn2{subtype_mark}};"}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0150-1]}
+@Syn{lhs=<use_type_clause>,rhs="@key[use] @Chg{Version=[3],New=[{@key[all]} ],Old=[]}@key[type]} @Syn2{subtype_mark} {, @Syn2{subtype_mark}};"}
 @end{Syntax}
 
 @begin{Legality}
@@ -1696,6 +1711,8 @@ in a @nt{use_type_clause} if it is determined by a @nt{subtype_mark} of that
 clause.@Defn2{Term=[named],Sec=[in a use clause]}],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00217-06]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0150-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[]}@Comment{Dummy to add conditional leading}
 @Defn{potentially use-visible}
 For each package @Chg{Version=[2],New=[named in ],Old=[denoted by
 a @SynI{package_}@nt{name} of ]}a @nt{use_package_clause} whose scope
@@ -1707,7 +1724,21 @@ For each type @i(T) or @i(T)'Class @Chg{Version=[2],New=[named in ],Old=[
 determined by a @nt<subtype_mark> of ]}a @nt{use_type_clause} whose scope
 encloses a place, the declaration of each primitive operator of type @i(T)
 is potentially use-visible at this place
-if its declaration is visible at this place.
+if its declaration is visible at this place.@Chg{Version=[3], New=[ If a
+@nt{use_type_clause} whose scope encloses a place includes the reserved
+word @key[all], then the following entities are also potentially use-visible
+at this place if the declaration of the entity is visible at this place:],Old=[]}
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0150-1]}
+  @ChgAdded{Version=[3],Text=[Each primitive subprogram of @i<T> including each
+  enumeration literal (if any);]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0150-1]}
+  @ChgAdded{Version=[3],Text=[Each subprogram that is declared immediately
+  within the declarative region in which an ancestor type of @i<T> is declared
+  and that operates on a class-wide type that covers @i<T>.]}
+@end{Itemize}
+
   @begin{Ramification}
   Primitive subprograms whose defining name is an @nt{identifier} are
   @i{not} made potentially visible by a @nt{use_type_clause}.
@@ -1836,6 +1867,13 @@ declaration has to be visible in order to be
 potentially use-visible.
 @end{DiffWord83}
 
+
+@begin{Extend95}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0150-1]}
+@ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}@B[Amendment 2:] The
+@key[use all type] version of the @nt{use_type_clause} is new to Ada 2012.
+It works similarly to prefixed views.]}
+@end{Extend95}
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
@@ -3231,6 +3269,13 @@ parameter nor a standalone access object].]}
   word this this way because access discriminants should also be disallowed if
   their enclosing object is designated by an access parameter.]}
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This rule does not apply to expressions that
+  don't have expected types (such as the operand of a qualified expression or
+  the expression of a renames). We don't need a rule like this in those cases,
+  as the type needs to be the same; there is no implicit conversion.]}
+@end{Ramification}
 
 A complete context shall have at least one acceptable interpretation;
 if there is exactly one, then that one is chosen.

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.54 $ $Date: 2009/07/02 04:51:29 $ $Author: randy $ }
+@comment{ $Revision: 1.55 $ $Date: 2010/04/03 06:48:07 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2009/07/02 04:51:29 $}
+@Comment{$Date: 2010/04/03 06:48:07 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -2071,6 +2071,19 @@ set; otherwise it returns @key{null}.]}
 specific handler for the task identified by T; if Handler is @key{null}, that
 specific handler is cleared, otherwise it is set to be Handler.@key{all}. If a
 specific handler had previously been set it is replaced.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+  @ChgAdded{Version=[3],Text=[This package cannot portably be used to set
+  a handler on the program as a whole. It is possible to call
+  Set_Specific_Handler with the environment task's ID. But any call to the
+  handler would necessarily be a @BoundedName, as the handler is called
+  after the task's finalization has completed. In the case of the environment
+  task, that includes any possible protected objects, and calling a protected
+  object after it is finalized is a @BoundedName
+  (see @RefSecNum{Protected Units and Protected Objects}). This might work in
+  a particular implementation, but it cannot be depended upon.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
 @ChgAdded{Version=[2],Text=[The function Specific_Handler returns the specific

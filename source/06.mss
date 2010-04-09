@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2010/01/12 04:56:02 $}
+@Comment{$Date: 2010/04/03 06:48:07 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.96 $}
+@Comment{$Revision: 1.97 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1071,13 +1071,17 @@ have to be conformant.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00409-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0207-1]}
 @Defn{mode conformance}
 @Defn2{Term=[profile],Sec=(mode conformant)}
-Two profiles are @i{mode conformant} if they are type-conformant, and
-corresponding parameters have identical modes, and, for access
+Two profiles are @i{mode conformant} if they are
+@Chg{Version=[3],New=[type conformant],Old=[type-conformant]},
+@Chg{Version=[3],New=[],Old=[and ]}corresponding parameters have identical
+modes, and, for access
 parameters@Chg{Version=[2],New=[ or access result types],Old=[]}, the
-designated subtypes statically match@Chg{Version=[2],New=[, or the designated
-profiles are subtype conformant.],Old=[]}
+designated subtypes statically match@Chg{Version=[3],New=[ and either both or
+neither are access-to-constant],Old=[]}@Chg{Version=[2],New=[, or the
+designated profiles are subtype conformant.],Old=[]}
 @PDefn2{Term=[statically matching],Sec=(required)}
 
 @Defn{subtype conformance}
@@ -1280,7 +1284,7 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
 
 @begin{Incompatible95}
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0046-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected to require
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Now require
   @nt{null_exclusion}s to match for full conformance. While this is
   technically incompatible with Ada 2005 as defined by Amendment 1,
   it is a new Ada 2005 feature and it is unlikely that users have
@@ -1289,7 +1293,7 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
   where needed for conformance.]}
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0134-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected to require
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Now require
   full conformance of anonynous access-to-subprogram parameters and results
   for full conformance. This is necessary so that there is no confusion about
   the default expression that is used for a call. While this is technically
@@ -1298,6 +1302,15 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
   and writing different default expressions. In any case, it is
   easy to fix: change any default expressions that don't conform so that they
   do conform.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0207-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Now include
+  the presence or absence of @key[constant] in access parameters to be
+  considered when checking mode conformance. This is necessary to prevent
+  modification of constants. While this is technically incompatible with
+  Ada 2005 as defined by Amendment 1, it is a new Ada 2005 feature and it
+  is unlikely that users have been intentionally taking advantage and writing
+  mismatching access types.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -1880,8 +1893,11 @@ The conversion mentioned here is a value conversion.
 @leading@keepnext@;For an @key(out) parameter that is passed by copy,
 the formal parameter object is created, and:
 @begin(itemize)
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0196-1]}
   For an access type, the formal parameter is initialized
-  from the value of the actual, without a constraint check;
+  from the value of the actual, without @Chg{Version=[3],New=[checking that the
+  value satisfies any constraint or any exclusion of the null
+  value],Old=[a constraint check]};
 @begin{Reason}
   This preserves the @MetaRulesName that an object of an access type
   is always initialized with a @lquotes@;reasonable@rquotes@; value.
@@ -1994,9 +2010,9 @@ as it is subsumed by earlier clauses and subclauses.
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> A missing rule was added
-  to cover cases that were missed in Ada 95 and Ada 2005; specifically, that
-  an @key[in] parameter passed by reference might have its discriminants
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> A missing rule was
+  added to cover cases that were missed in Ada 95 and Ada 2005; specifically,
+  that an @key[in] parameter passed by reference might have its discriminants
   changed via another path. Such cases are erroneous as requiring compilers
   to detect such errors would be expensive, and requiring such cases to
   work would be a major change of the user model (@key[in] parameters
@@ -2005,12 +2021,18 @@ as it is subsumed by earlier clauses and subclauses.
   behavior.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0102-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Moved implicit conversion
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Moved implicit conversion
   @LegalityName to @RefSecNum{The Context of Overload Resolution}.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0118-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a definition for
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Added a definition for
   positional parameters, as this is missing from Ada 95 and later.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0196-1]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Clarified that
+  @key[out] parameters of an access type are not checked for null exclusions
+  when they are passed in (which is similar to the behavior for constraints.
+  This was unspecified in Ada 2005.]}
 @end{DiffWord95}
 
 
@@ -2380,7 +2402,7 @@ Constraint_Error is raised if this check fails.]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[This check is needed so that dispatching
-  on controlling access results works for tag-indeterminant functions.
+  on controlling access results works for tag-indeterminate functions.
   If it was not made, it would be possible for such functions to return
   an access to a decendant type, meaning the function could return
   an object with a tag different than the one assumed by the
@@ -2755,7 +2777,7 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0073-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:>
   Added a tag check for functions returning anonymous access-to-tagged types,
-  so that dispatching of tag-indeterminant function works as expected.
+  so that dispatching of tag-indeterminate function works as expected.
   This is technically inconsistent with Ada 2005 (as defined by Amendment 1),
   but as the feature in question was newly added to Ada 2005, there should
   be little code that depends on the behavior that now raises an exception.]}
