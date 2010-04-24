@@ -1044,14 +1044,18 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 
     AARM-only groupings: (not shown if HideAnnotations is used)
 	MetaRules - Language Design Principles.
-	Inconsistent83 - Inconsistenies with Ada 83.
+	Inconsistent83 - Inconsistencies with Ada 83.
 	Incompatible83 - Incompatibilities with Ada 83.
 	Extend83  - Extensions to Ada 83.
 	DiffWord83- Wording Changes from Ada 83.
-	Inconsistent95 - Inconsistenies with Ada 95.
+	Inconsistent95 - Inconsistencies with Ada 95.
 	Incompatible95 - Incompatibilities with Ada 95.
 	Extend95  - Extensions to Ada 95.
 	DiffWord95- Wording Changes from Ada 95.
+	Inconsistent2005 - Inconsistencies with Ada 2005.
+	Incompatible2005 - Incompatibilities with Ada 2005.
+	Extend2005  - Extensions to Ada 2005.
+	DiffWord2005- Wording Changes from Ada 2005.
 	AARMOnly  - Text that is not included in the RM. No format is implied.
 
     AARM annotations: (not shown if HideAnnotations is used)

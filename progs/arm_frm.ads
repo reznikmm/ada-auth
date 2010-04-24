@@ -13,7 +13,7 @@ package ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2010  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -95,6 +95,7 @@ package ARM_Format is
     --			added ChildExample.
     --  2/16/07 - RLB - Added Indent.
     --  2/19/07 - RLB - Added Title format.
+    --  4/23/10 - RLB - Added Ada 2005 header.
 
     type Format_Type is tagged limited private;
 
@@ -206,6 +207,8 @@ private
 	Ada83_Extensions, Ada83_Wording, -- AARM-only.
 	Ada95_Inconsistencies, Ada95_Incompatibilities, -- AARM-only.
 	Ada95_Extensions, Ada95_Wording, -- AARM-only.
+	Ada2005_Inconsistencies, Ada2005_Incompatibilities, -- AARM-only.
+	Ada2005_Extensions, Ada2005_Wording, -- AARM-only.
 	Element_Ref, Child_Ref, Usage_Note, -- For ASIS (AASIS-only).
 	-- AARM annotations (no headers)
 	Reason, Ramification, Proof, Imp_Note, Corr_Change, Discussion,

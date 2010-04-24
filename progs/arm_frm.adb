@@ -19,7 +19,7 @@ package body ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009  AXE Consultants.
+    -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -255,6 +255,7 @@ package body ARM_Format is
     --			and no paragraph numbers are shown.
     --  5/ 6/09 - RLB - Added Labeled_Deleted_xxx.
     --  5/15/09 - RLB - Fixed missing code for note numbers in revised/added clauses.
+    --  4/23/10 - RLB - Added Ada 2005 clause headers for Ada 2012 edition.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -294,6 +295,13 @@ package body ARM_Format is
 			 => (Length => 27, Str => "Incompatibility with Ada 95             "), -- Incompatible95Name
 	 Ada95_Extensions=> (Length => 19, Str => "Extension to Ada 95                     "), -- Extend95Name
 	 Ada95_Wording	 => (Length => 26, Str => "Wording Change from Ada 95              "), -- DiffWord95Name
+	 Ada2005_Inconsistencies
+			 => (Length => 27, Str => "Inconsistency with Ada 2005             "), -- Inconsistent2005Name
+	 Ada2005_Incompatibilities
+			 => (Length => 29, Str => "Incompatibility with Ada 2005           "), -- Incompatible2005Name
+	 Ada2005_Extensions
+			 => (Length => 21, Str => "Extension to Ada 2005                   "), -- Extend2005Name
+	 Ada2005_Wording => (Length => 28, Str => "Wording Change from Ada 2005            "), -- DiffWord2005Name
 	 Element_Ref	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Child_Ref	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Usage_Note	 => (Length =>  0, Str => (others => ' ')), -- Not used.
@@ -357,6 +365,13 @@ package body ARM_Format is
 			 => (Length => 29, Str => "Incompatibilities With Ada 95           "), -- Incompatible95Title
 	 Ada95_Extensions=> (Length => 20, Str => "Extensions to Ada 95                    "), -- Extend95Title
 	 Ada95_Wording	 => (Length => 27, Str => "Wording Changes from Ada 95             "), -- DiffWord95Title
+	 Ada2005_Inconsistencies
+			 => (Length => 29, Str => "Inconsistencies With Ada 2005           "), -- Inconsistent2005Title
+	 Ada2005_Incompatibilities
+			 => (Length => 31, Str => "Incompatibilities With Ada 2005         "), -- Incompatible2005Title
+	 Ada2005_Extensions
+			 => (Length => 22, Str => "Extensions to Ada 2005                  "), -- Extend2005Title
+	 Ada2005_Wording => (Length => 29, Str => "Wording Changes from Ada 2005           "), -- DiffWord2005Title
 	 Element_Ref	 => (Length => 19, Str => "Element Reference:                      "), -- Paragraph start.
 	 Child_Ref	 => (Length => 28, Str => "Child Elements returned by:             "), -- Paragraph start.
 	 Usage_Note	 => (Length => 12, Str => "Usage Note:                             "), -- Paragraph start.
@@ -590,13 +605,15 @@ package body ARM_Format is
 	Single_Note_Name, Examples_Name, Meta_Name, Inconsistent83_Name,
 	Incompatible83_Name, Extend83_Name, Wording83_Name,
 	Inconsistent95_Name, Incompatible95_Name, Extend95_Name, Wording95_Name,
+	Inconsistent2005_Name, Incompatible2005_Name, Extend2005_Name, Wording2005_Name,
 	Syntax_Title, Resolution_Title, Legality_Title, Static_Title,
 	Link_Title, Run_Title, Bounded_Title, Erroneous_Title, Req_Title,
 	Doc_Title, Metrics_Title, Permission_Title, Advice_Title, Notes_Title,
 	Single_Note_Title,
 	Examples_Title, Meta_Title, Inconsistent83_Title, Incompatible83_Title,
 	Extend83_Title, Wording83_Title, Inconsistent95_Title, Incompatible95_Title,
-	Extend95_Title, Wording95_Title,
+	Extend95_Title, Wording95_Title, Inconsistent2005_Title, Incompatible2005_Title,
+	Extend2005_Title, Wording2005_Title,
 	-- Character macros:
 	EM_Dash, EN_Dash, LE, LT, GE, GT, NE, PI, Times, PorM, Single_Quote,
 	Latin_1, Unicode, Ceiling, Floor, Absolute, Log, Thin_Space,
@@ -951,6 +968,14 @@ package body ARM_Format is
 	    return Extend95_Name;
 	elsif Canonical_Name = "diffword95name" then
 	    return Wording95_Name;
+	elsif Canonical_Name = "inconsistent2005name" then
+	    return Inconsistent2005_Name;
+	elsif Canonical_Name = "incompatible2005name" then
+	    return Incompatible2005_Name;
+	elsif Canonical_Name = "extend2005name" then
+	    return Extend2005_Name;
+	elsif Canonical_Name = "diffword2005name" then
+	    return Wording2005_Name;
 	elsif Canonical_Name = "syntaxtitle" then
 	    return Syntax_Title;
 	elsif Canonical_Name = "resolutiontitle" then
@@ -1001,6 +1026,14 @@ package body ARM_Format is
 	    return Extend95_Title;
 	elsif Canonical_Name = "diffword95title" then
 	    return Wording95_Title;
+	elsif Canonical_Name = "inconsistent2005title" then
+	    return Inconsistent2005_Title;
+	elsif Canonical_Name = "incompatible2005title" then
+	    return Incompatible2005_Title;
+	elsif Canonical_Name = "extend2005title" then
+	    return Extend2005_Title;
+	elsif Canonical_Name = "diffword2005title" then
+	    return Wording2005_Title;
 	elsif Canonical_Name = "em" then
 	    return EM_Dash;
 	elsif Canonical_Name = "en" then
@@ -1748,7 +1781,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 		     Ada83_Incompatibilities | Ada83_Extensions |
 		     Ada83_Wording | Ada95_Inconsistencies |
 		     Ada95_Incompatibilities | Ada95_Extensions |
-		     Ada95_Wording | Reason | Ramification | Proof |
+		     Ada95_Wording | Ada2005_Inconsistencies |
+		     Ada2005_Incompatibilities | Ada2005_Extensions |
+		     Ada2005_Wording | Reason | Ramification | Proof |
 		     Imp_Note | Corr_Change | Discussion |
 		     Honest | Glossary_Marker | Bare_Annotation |
 		     Element_Ref | Child_Ref | Usage_Note =>
@@ -2066,7 +2101,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 				         Ada95_Inconsistencies | -- Inconsistent95
 				         Ada95_Incompatibilities | -- Incompatible95
 				         Ada95_Extensions | -- Extend95
-				         Ada95_Wording => -- DiffWord95
+				         Ada95_Wording | -- DiffWord95
+				         Ada2005_Inconsistencies | -- Inconsistent2005
+				         Ada2005_Incompatibilities | -- Incompatible2005
+				         Ada2005_Extensions | -- Extend2005
+				         Ada2005_Wording => -- DiffWord2005
 				        return 2; -- Normal indent for annotations.
 		        	    when Reason | Ramification | Proof |
 					 Imp_Note | Corr_Change | Discussion |
@@ -2175,7 +2214,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		         Ada95_Inconsistencies | -- Inconsistent95
 		         Ada95_Incompatibilities | -- Incompatible95
 		         Ada95_Extensions | -- Extend95
-		         Ada95_Wording => -- DiffWord95
+		         Ada95_Wording | -- DiffWord95
+		         Ada2005_Inconsistencies | -- Inconsistent2005
+		         Ada2005_Incompatibilities | -- Incompatible2005
+		         Ada2005_Extensions | -- Extend2005
+		         Ada2005_Wording => -- DiffWord2005
 			Format_Object.Style  := ARM_Output.Small;
 			Format_Object.Indent := 2; -- Two units.
 			Format_Object.No_Breaks := False;
@@ -2430,7 +2473,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		         Ada95_Inconsistencies | -- Inconsistent95
 		         Ada95_Incompatibilities | -- Incompatible95
 		         Ada95_Extensions | -- Extend95
-		         Ada95_Wording => -- DiffWord95
+		         Ada95_Wording | -- DiffWord95
+		         Ada2005_Inconsistencies | -- Inconsistent2005
+		         Ada2005_Incompatibilities | -- Incompatible2005
+		         Ada2005_Extensions | -- Extend2005
+		         Ada2005_Wording => -- DiffWord2005
 			ARM_Output.Category_Header (Output_Object, Paragraph_Kind_Title(For_Type).Str(1..Paragraph_Kind_Title(For_Type).Length));
 			Format_Object.Last_Paragraph_Subhead_Type := For_Type;
         	    when Plain | Introduction | Element_Ref | Child_Ref | Usage_Note =>
@@ -2480,7 +2527,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		         Ada95_Inconsistencies | -- Inconsistent95
 		         Ada95_Incompatibilities | -- Incompatible95
 		         Ada95_Extensions | -- Extend95
-		         Ada95_Wording => -- DiffWord95
+		         Ada95_Wording | -- DiffWord95
+		         Ada2005_Inconsistencies | -- Inconsistent2005
+		         Ada2005_Incompatibilities | -- Incompatible2005
+		         Ada2005_Extensions | -- Extend2005
+		         Ada2005_Wording => -- DiffWord2005
 			null; -- Not an annotation.
         	    when Reason | Ramification | Proof |
 			 Imp_Note | Corr_Change | Discussion |
@@ -3623,6 +3674,42 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    Format_Object.Next_Paragraph_Subhead_Type := Ada95_Wording;
 		else -- Don't show annotations.
 		    Toss_for_RM ("diffword95");
+		end if;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "inconsistent2005" then
+		if Format_Object.Include_Annotations then
+		    Format_Object.Next_Paragraph_Format_Type := Ada2005_Inconsistencies;
+		    Format_Object.Next_Paragraph_Subhead_Type := Ada2005_Inconsistencies;
+		else -- Don't show annotations.
+		    Toss_for_RM ("inconsistent2005");
+		end if;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "incompatible2005" then
+		if Format_Object.Include_Annotations then
+		    Format_Object.Next_Paragraph_Format_Type := Ada2005_Incompatibilities;
+		    Format_Object.Next_Paragraph_Subhead_Type := Ada2005_Incompatibilities;
+		else -- Don't show annotations.
+		    Toss_for_RM ("incompatible2005");
+		end if;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "extend2005" then
+		if Format_Object.Include_Annotations then
+		    Format_Object.Next_Paragraph_Format_Type := Ada2005_Extensions;
+		    Format_Object.Next_Paragraph_Subhead_Type := Ada2005_Extensions;
+		else -- Don't show annotations.
+		    Toss_for_RM ("extend2005");
+		end if;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "diffword2005" then
+		if Format_Object.Include_Annotations then
+		    Format_Object.Next_Paragraph_Format_Type := Ada2005_Wording;
+		    Format_Object.Next_Paragraph_Subhead_Type := Ada2005_Wording;
+		else -- Don't show annotations.
+		    Toss_for_RM ("diffword2005");
 		end if;
 	    -- ASIS groupings:
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
@@ -8740,6 +8827,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		     Incompatible83_Name | Extend83_Name | Wording83_Name |
 		     Inconsistent95_Name |
 		     Incompatible95_Name | Extend95_Name | Wording95_Name |
+		     Inconsistent2005_Name |
+		     Incompatible2005_Name | Extend2005_Name | Wording2005_Name |
 		     Syntax_Title | Resolution_Title | Legality_Title |
 		     Static_Title | Link_Title | Run_Title | Bounded_Title |
 		     Erroneous_Title | Req_Title | Doc_Title | Metrics_Title |
@@ -8749,6 +8838,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		     Incompatible83_Title | Extend83_Title | Wording83_Title |
 		     Inconsistent95_Title |
 		     Incompatible95_Title | Extend95_Title | Wording95_Title |
+		     Inconsistent2005_Title |
+		     Incompatible2005_Title | Extend2005_Title | Wording2005_Title |
 		     EM_Dash | EN_Dash | LT | LE | GT | GE | NE | PI |
 		     Times | PorM | Single_Quote | Thin_Space | Left_Quote |
 		     Right_Quote | Left_Double_Quote | Right_Double_Quote |
@@ -9093,6 +9184,14 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    Put_Name(Ada95_Extensions);
 		when Wording95_Name =>
 		    Put_Name(Ada95_Wording);
+		when Inconsistent2005_Name =>
+		    Put_Name(Ada2005_Inconsistencies);
+		when Incompatible2005_Name =>
+		    Put_Name(Ada2005_Incompatibilities);
+		when Extend2005_Name =>
+		    Put_Name(Ada2005_Extensions);
+		when Wording2005_Name =>
+		    Put_Name(Ada2005_Wording);
 
 		when Syntax_Title =>
 		    Put_Title(Syntax);
@@ -9144,6 +9243,14 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    Put_Title(Ada95_Extensions);
 		when Wording95_Title =>
 		    Put_Title(Ada95_Wording);
+		when Inconsistent2005_Title =>
+		    Put_Title(Ada2005_Inconsistencies);
+		when Incompatible2005_Title =>
+		    Put_Title(Ada2005_Incompatibilities);
+		when Extend2005_Title =>
+		    Put_Title(Ada2005_Extensions);
+		when Wording2005_Title =>
+		    Put_Title(Ada2005_Wording);
 
 		when EM_Dash =>
 		    Check_Paragraph;
