@@ -1,9 +1,9 @@
 @Part(io-idl, Root="asis.msm")
 
-@Comment{$Date: 2010/03/27 07:31:18 $}
+@Comment{$Date: 2010/04/09 07:02:39 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/io-idl.mss,v $}
-@comment{$Revision: 1.5 $}
+@comment{$Revision: 1.6 $}
 
 @LabeledInformativeAnnex{Miscellaneous ASIS I/O and IDL approaches}
 
@@ -421,10 +421,11 @@ servers can be created via the automatic generation of IDL described in the
 remaining portion of this annex.
 
 @PictureAlone(Alignment=[Center], Border=[None],
-         Height=[434], Width=[492],
+         Height=[410], Width=[494],
          Name=[asis_art.png],
          Descr=[ASIS CORBA usage])
 @Comment{Image dimensions: Height=[490], Width=[556]}
+@Comment{PDF 300 size:  Height=[2250], Width=[2715]; new box: Height=[410], Width=[494]}
 
 Figure C.1 @en Generation of client/server ASIS artifacts
 

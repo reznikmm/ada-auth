@@ -1,6 +1,6 @@
 @Part(ids, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/semant.mss,v $}
-@comment{$Revision: 1.11 $ $Date: 2010/03/27 07:31:18 $}
+@comment{$Revision: 1.12 $ $Date: 2010/04/09 07:02:39 $}
 
 @LabeledAddedSection{Version=[2],Name=[ASIS Semantic Subsystem]}
 
@@ -308,17 +308,17 @@ correspond to the extensions of the View type.]}
 by View'Class may be determined by the Kind dispatching operation. In addition,
 Boolean queries Is_Object_Or_Value, Is_Callable, Is_Subtype, Is_Package,
 Is_Generic, Is_Exception, and Is_Statement, are provided to determine to which
-extension of View the specified view V belongs.  For example, @exam{Is_Callable(V)}
+extension of View the specified view V belongs. For example, @exam{Is_Callable(V)}
 is equivalent to @exam{V @key[in] Callable_View'Class}.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0062-1]}
 @ChgAdded{Version=[2],Text=[The "=" operator is defined for View and its
-descendants.  For views A and B, "A = B" returns True if A and B are both
+descendants. For views A and B, "A = B" returns True if A and B are both
 produced by calls on Corresponding_View applied to the same Element (as
 determined by Is_Identical). Similarly, "A = B" returns True if A and B are both
 produced by calls on Corresponding_Subtype_View applied to the same Element. "A
 = B" returns False if any ASIS query defined for A and B would return results
-that are not equal when applied to A and B.  It is unspecified whether "A = B"
+that are not equal when applied to A and B. It is unspecified whether "A = B"
 returns True if A and B produce identical results from all ASIS queries, but A
 and B were produced from distinct Elements or a distinct sequence of ASIS
 queries.]}
@@ -405,7 +405,7 @@ prefixes of V1 and V2, or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[V1 and V2 are views of selected components (other
-than expanded names), the selectors are the same,  and Are_Views_Of_Same_Entity
+than expanded names), the selectors are the same, and Are_Views_Of_Same_Entity
 returns true for the respective prefixes of V1 and V2, or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1138,7 +1138,8 @@ use function Aspect_Items on the declaration of the entity.]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{View_Holders} @key[is new] Ada.Containers.Indefinite_Holders (View'Class);
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{View_Holders} @key[is new]
+   Ada.Containers.Indefinite_Holders (View'Class);
 @key[type] @AdaTypeDefn{View_Holder} @key[is new] View_Holders.Holder @key[with null record];]}
 @end{Example}
 
@@ -1161,201 +1162,6 @@ uninitialized variable (including a component) that can hold a View.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Type View_Vector allows the declaration of a list of
 Views.]}
-@end{DescribeCode}
-
-
-
-@LabeledAddedClause{Version=[2],Name=[package Asis.Program_Units]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[The library package
-@ChildUnit{Parent=[Asis],Child=[Program_Units]}Asis.Program_Units shall exist.
-The package shall provide interfaces equivalent to those described in the
-following subclauses.]}
-
-
-@LabeledAddedSubClause{Version=[2],Name=[type Program_Unit]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0057-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Program_Unit} @key[is interface and] Views.Declarative_Regions.View_Declaration;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[The type Program_Unit is an extension of
-View_Declaration, and is used to represent the declaration of a program unit
-(package, subprogram, task unit, protected unit, protected entry, or generic
-unit).]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Requires_Completion} (P : Program_Unit) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Has_Body} (P : Program_Unit) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Body_Of_Program_Unit} (P : Program_Unit)
-   @key[return] Asis.Declaration @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Instance} (P : Program_Unit) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Instantiated_Generic} (P : Program_Unit)
-   @key[return] Program_Unit'Class @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Actual_Part} (P : Program_Unit)
-   @key[return] Asis.Association_List @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Expanded_Body} (P : Program_Unit)
-   @key[return] Asis.Declaration @key[is abstract];]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[P specifies the program unit view declaration to
-query for each of these functions.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
-@ChgAdded{Version=[2],Text=[Function Requires_Completion returns True if and
-only if the program unit P requires a completion (see 3.11.1(1) in the Ada
-Standard). Function Has_Body returns True
-if the program unit P has a completion that is a body. Function
-Body_Of_Program_Unit returns the body that completes the program unit P, or
-raises ASIS_Inappropriate_View if Has_Body (P) returns False.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Instance returns True if and only if the
-program unit P is an instance of a generic unit. Function Instantiated_Generic
-returns the generic unit given the instance P, or raises ASIS_Inappropriate_View
-if Is_Instance (P) returns False. Function Actual_Part returns the list of
-actual parameters passed to the instantiation P, or raises
-ASIS_Inappropriate_View if Is_Instance (P) returns False. Function Expanded_Body
-returns the expanded body of the instantiation P, or raises
-ASIS_Inappropriate_View if Is_Instance returns False.]}
-@end{DescribeCode}
-
-
-@LabeledAddedSubClause{Version=[2],Name=[Compilation Units]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Compilation_Unit} (P : Program_Unit)
-   @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[procedure] @AdaSubDefn{Depends_Semantically_On} (
-   P : Program_Unit; Depends_On : @key[out] Program_Unit_Vector'Class) @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Subunit} (P : Program_Unit) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Stub_Of_Program_Unit} (P : Program_Unit)
-   @key[return] Asis.Declaration @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Library_Item} (P : Program_Unit) @key[return] Boolean @key[is abstract];]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[P specifies the program unit view declaration to
-query for each of these functions.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Compilation_Unit returns True if and
-only if the program unit P is separately compiled as a compilation unit.
-Procedure Depends_Semantically_On returns in the Depends_On parameter the vector
-of other compilation units on which compilation unit P depends semantically, or
-raises ASIS_Inappropriate_View if Is_Compilation_Unit (P) returns False (see
-10.1.1(26)) in the Ada Standard).]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Subunit returns True if and only if the
-program unit P is separately compiled as a subunit. Function
-Stub_Of_Program_Unit returns the Asis.Declaration that specifies the stub of the
-subunit P, or raises ASIS_Inappropriate_View if Is_Subunit (P) returns False.
-Function Is_Library_Item returns True if and only if the program unit P is
-separately compiled as a library item.]}
-@end{DescribeCode}
-
-
-@LabeledAddedSubClause{Version=[2],Name=[type Library_Item]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Library_Item} @key[is interface and] Program_Unit;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[The type Library_Item is used to represent program units that are separately
-compiled as library items @em those for which Is_Library_Item returns True.]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Has_Parent_Library_Unit} (L : Library_Item)
-   @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Parent_Library_Unit} (L : Library_Item)
-   @key[return] Library_Item'Class @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Pure_Unit} (L : Library_Item) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Preelaborated_Unit} (L : Library_Item) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Remote_Call_Interface_Unit} (L : Library_Item)
-   @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Remote_Types_Unit} (L : Library_Item)
-   @key[return] Boolean @key[is abstract];]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[L specifies the library unit view declaration to
-query for each of these functions.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Has_Parent_Library_Unit returns True if and
-only if the library item L is a child of a unit other than package Standard.
-Function Parent_Library_Unit returns the parent library item of a child unit L,
-or raises ASIS_Inappropriate_View if Has_Parent_Library_Unit (L) returns
-False.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Pure_Unit returns True if and only if
-the library item L is declared pure. Function Is_Preelaborated_Unit returns True
-if and only if the library item L is preelaborated. Function
-Is_Remote_Call_Interface_Unit returns True if and only if the pragma
-Remote_Call_Interface applies to the library item L. Function
-Is_Remote_Types_Unit returns True if and only if the pragma Remote_Types applies
-to the library item L.]}
-@end{DescribeCode}
-
-
-@LabeledAddedSubClause{Version=[2],Name=[Program Unit Vectors]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Program_Unit_Vectors} @key[is new]
-   Ada.Containers.Indefinite_Vectors (Positive, Program_Unit'Class);
-@key[type] @AdaTypeDefn{Program_Unit_Vector} @key[is new]
-   Program_Unit_Vectors.Vector @key[with null record];]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Type Program_Unit_Vector allows the declaration of a
-list of Program_Units.]}
 @end{DescribeCode}
 
 
@@ -1797,7 +1603,8 @@ different answers from this function.]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Subtype_Holders} @key[is new] Ada.Containers.Indefinite_Holders (Subtype_View'Class);
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Subtype_Holders} @key[is new]
+   Ada.Containers.Indefinite_Holders (Subtype_View'Class);
 @key[type] @AdaTypeDefn{Subtype_Holder} @key[is new] Subtype_Holders.Holder @key[with null record];]}
 @end{Example}
 
@@ -1820,476 +1627,6 @@ uninitialized variable (including a component) that can hold a Subtype_View.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[Type Subtype_Vector allows the declaration of a list
 of Subtype_Views.]}
-@end{DescribeCode}
-
-
-@LabeledAddedClause{Version=[2],Name=[package Asis.Object_Views]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[The library package
-@ChildUnit{Parent=[Asis],Child=[Object_Views]} Asis.Object_Views shall exist.
-The package shall provide interfaces equivalent to those described in the
-following subclauses.]}
-
-
-@LabeledAddedSubClause{Version=[2],Name=[type Object_View]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0057-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Object_View} @key[is interface and] Views.View;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[The type Object_View represents views of objects and
-values, as denoted by names or expressions.]}
-
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Constant_View} (O : Object_View) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Formal_Object} (O : Object_View)
-   @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Nominal_Subtype} (O : Object_View)
-   @key[return] Subtype_Views.Subtype_View'Class @key[is abstract];]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
-@ChgAdded{Version=[2],Text=[O specifies the view of an object to query for all
-of these functions.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Constant_View returns True if and only
-if the object O is a constant view of an object, or is a view of a value.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Formal_Object returns True if and only
-if the object O denotes a generic formal object.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
-@ChgAdded{Version=[2],Text=[Function Nominal_Subtype returns the nominal subtype
-of the view (see 3.3(23 and 3.3.1(8) in the Ada Standard). The returned
-Subtype_View corresponds to the subtype_indication, subtype_mark with a
-null_exclusion, discrete_range, or type definition that defined the nominal
-subtype of the object or value. The nominal subtype of a numeric literal or
-named number is a view of the corresponding universal base subtype. The nominal
-subtype of a use of an operator is that of the equivalent function call, namely
-the result subtype of the corresponding function.]}
-@end{DescribeCode}
-
-@begin{SingleNote}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
-@ChgAdded{Version=[2],Text=[When an Object_View denotes an object renaming, the
-properties of the view as reported by the queries in the semantic subsystem are
-as determined by the Ada Standard for a renaming (see 8.5.1(6/2) in the Ada
-Standard). Thus, the properties are those of the renamed object; for instance, a
-renamed constant is a constant, even though constant cannot be specified in a
-renaming.]}
-@end{SingleNote}
-
-@LabeledAddedSubClause{Version=[2],Name=[Components of Objects]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Component} (O : Object_View) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Enclosing_Object} (O : Object_View)
-   @key[return] Object_View'Class @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Indexed_Component} (O : Object_View) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Index_Value} (O : Object_View; Dimension : Positive := 1)
-   @key[return] Object_View'Class @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Selected_Component} (O : Object_View) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Selector_Declaration} (O : Object_View)
-   @key[return] Views.Declarative_Regions.View_Declaration'Class @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Has_Storage_Place_Attributes} (O : Object_View) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Position} (O : Object_View) @key[return] Object_View'Class @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{First_Bit} (O : Object_View) @key[return] Object_View'Class @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Last_Bit} (O : Object_View) @key[return] Object_View'Class @key[is abstract];]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
-@ChgAdded{Version=[2],Text=[O specifies the view of an object to query for each
-of these functions. Note that these are semantic queries, rather than
-syntactic queries @em for all of these functions, if the view O is defined by an
-object renaming, the result is determined by the properties of the renamed
-object.]}
-
-@begin{Ramification}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[For example, if we have]}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[X : Natural @key[renames] O.C;]}
-@end{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[Is_Component on a view of Z will
-return True, even though X is not syntactically a component selection.]}
-@end{Ramification}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Component returns True if and only if
-the view O is of a component of an enclosing composite object. Function
-Enclosing_Object returns a view of the enclosing object of the component O, or
-raises ASIS_Inappropriate_View if Is_Component (O) returns False.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Indexed_Component returns True if and
-only if the view O is of an indexed component for the given dimension.
-Function Index_Value returns a view of the value of the index of the indexed
-component O for the given dimension, or raises ASIS_Inappropriate_View if
-Is_Indexed_Component (O) returns False or Dimension is greater than
-Num_Dimensions applied to the subtype of Enclosing_Object(O).]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Selected_Component returns True if and
-only if the view O is of a selected component. Function Selector_Declaration
-returns the declaration of the selected component O, or raises
-ASIS_Inappropriate_View if Is_Selected_Component (O) returns False.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
-@ChgAdded{Version=[2],Text=[Function Has_Storage_Place_Attributes returns
-True if and only if the view O is of a selected component that has storage
-place attributes. Functions Position, First_Bit, and Last_Bit, return a view of the
-value of a reference to the corresponding attribute of the given component O, or
-raise ASIS_Inappropriate_View if Has_Storage_Place_Attributes (O) returns
-False.]}
-
-@end{DescribeCode}
-
-
-@LabeledAddedSubClause{Version=[2],Name=[Aliased Views and Dereferences]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Aliased} (O : Object_View) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Has_Static_Accessibility_Level} (O : Object_View)
-   @key[return] Boolean @key[is abstract];
-@key[function] @AdaSubDefn{Is_Library_Level} (O : Object_View) @key[return] Boolean @key[is abstract];
-@key[function] @AdaSubDefn{Is_Statically_Deeper_Than} (O : Object_View; Compared_To : Object_View)
-      @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Dereference} (O : Object_View) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Dereferenced_Value} (O : Object_View)
-   @key[return] Object_View'Class @key[is abstract];]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
-@ChgAdded{Version=[2],Text=[O specifies the view of an object to query for each
-of these functions. Note that these are semantic queries, not syntactic
-queries @em for all of these functions, if the view O is defined by an
-object renaming, the result is determined by the properties of the
-renamed object.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Aliased returns True if and only if the
-view O is aliased (see ARM 3.10(9) in the Ada Standard). Function
-Has_Static_Accessibility_Level returns True if Is_Aliased (O) and the statically
-deeper relationship is defined for the accessibility level of the view O (see
-3.10.2(17-21) in the Ada Standard). Function Is_Library_Level returns True if
-Has_Static_Accessibility_Level (O) is True and the accessibility level is
-library level (see 3.10.2(22) in the Ada Standard). Function
-Is_Statically_Deeper_Than raises ASIS_Inappropriate_View if
-Has_Static_Accessibility_Level returns False for either operand; otherwise it
-returns True if and only if the accessibility level of O is statically deeper
-than that of the object view Compared_To (see 3.10.2(17-21) in the Ada
-Standard).]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Dereference returns True if and only if
-the object O is a dereference of an access-to-object value. Function
-Dereferenced_Value returns a view of the access value that was dereferenced in
-the dereference O, or raises ASIS_Inappropriate_View if Is_Dereference (O)
-returns False.]}
-@end{DescribeCode}
-
-
-@LabeledAddedSubClause{Version=[2],Name=[Static Values]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Longest_Discrete} @key[is range] @examcom{<implementation-defined>};]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Static_Discrete} (O : Object_View) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Static_Discrete_Value} (O : Object_View)
-   @key[return] Longest_Discrete @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Static_Discrete_Image} (O : Object_View)
-   @key[return] Wide_String @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Longest_Float} @key[is digits] @examcom{<implementation-defined>};]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Static_Real} (O : Object_View) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Static_Real_Value} (O : Object_View)
-   @key[return] Longest_Float @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Static_Real_Image} (O : Object_View)
-   @key[return] Wide_String @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Static_String} (O : Object_View) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Static_String_Value} (O : Object_View)
-   @key[return] Wide_String @key[is abstract];]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[O specifies the view of an object to query for each
-of these functions.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Static_Discrete returns True if and only
-if the view O is a view of the value of a static expression of a discrete type
-(see 4.9(2-13) in the Ada Standard).
-Function Static_Discrete_Value returns the position number of the value of the
-static discrete expression O, or raises ASIS_Inappropriate_View if
-Is_Static_Discrete (O) returns False. If the position number of the value is
-outside the range of Longest_Discrete, it raises Constraint_Error. Function
-Static_Discrete_Image returns the image of the position number of the value of
-the static discrete expression O, with the syntax used by the Image attribute of
-its type (with a leading minus if negative, and a leading space otherwise), or
-raises ASIS_Inappropriate_View if Is_Static_Discrete (O) returns False. A
-correct image is returned even if the position number of the value is outside
-the base range of the type.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Static_Real returns True if and only if
-the view O is of the value of a static expression of a real type
-(see 4.9(2-13) in the Ada Standard). Function
-Static_Real_Value returns the value of the static real expression O converted to
-the Longest_Float type, or raises ASIS_Inappropriate_View if Is_Static_Real (O)
-returns False. If the value is outside the range of Longest_Real, it raises
-Constraint_Error. Function Static_Real_Image returns a string containing an
-optional minus sign, followed by a pair of non-negative integers separated by
-the character '/' corresponding to a numerator and a denominator for the reduced
-rational representation of the exact absolute value of the static real
-expression O. The denominator is one when the numerator is zero.
-Static_Real_Image raises ASIS_Inappropriate_View if Is_Static_Real (O) returns
-False.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Static_String returns True if and only
-if the view O is of the value of a static expression of a string type
-(see 4.9(2-13) in the Ada Standard). Function
-Static_String_Value returns a Wide_String whose characters match the
-corresponding characters of the static value of the string expression O (encoded
-in UTF-16, as described in Section 3). The function raises
-ASIS_Inappropriate_View if Is_Static_String (O) returns False.]}
-@end{DescribeCode}
-
-@begin{Notes}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Static_Discrete_Value can be used on integer,
-character, and enumeration values.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[The result of Static_Real_Value may not have all of
-the precision of the original static value even if it is in range. If the exact
-value is important, use Static_Real_Image to retrieve the value instead of
-Static_Real_Value.]}
-@end{Notes}
-
-
-@LabeledAddedSubClause{Version=[2],Name=[Representational Object Attributes]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Object_Size} (O : Object_View) @key[return] ASIS_Natural @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Object_Alignment} (O : Object_View) @key[return] ASIS_Natural @key[is abstract];]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[O specifies the view of an object to query for both
-of these functions.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Object_Size returns the same value as the
-Size attribute of the object O, if the object is elementary, if
-Is_Aspect_Specified (O, Size) returns True, or if its  subtype's size is
-specified. The result is implementation-defined in other
-cases, and may be ASIS_Natural'Last. Function Object_Alignment returns the same
-value as the Alignment attribute of the object O. If the view is of a value
-rather than an object, the result of Object_Size and Object_Alignment is
-implementation-defined, but is within the range of values possible for objects
-of the same type.]}
-
-@end{DescribeCode}
-
-
-@LabeledAddedSubClause{Version=[2],Name=[Object Holders]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Object_Holders} @key[is new] Ada.Containers.Indefinite_Holders (Object_View'Class);
-@key[type] @AdaTypeDefn{Object_Holder} @key[is new] Object_Holders.Holder @key[with null record];]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Type Object_Holder allows the declaration of an
-uninitialized variable (including a component) that can hold a Object_View.]}
-@end{DescribeCode}
-
-
-@LabeledAddedClause{Version=[2],Name=[package Asis.Profiles]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[The library package
-@ChildUnit{Parent=[Asis],Child=[Profiles]}Asis.Profiles shall exist. The package
-shall provide interfaces equivalent to those described in the following
-subclauses.]}
-
-
-@LabeledAddedSubClause{Version=[2],Name=[type Profile]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[type] Profile @key[is private];]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
-@ChgAdded{Version=[2],Text=[The type Profile specifies the profile of a callable
-entity (see 6.1(22) in the Ada Standard).]}
-@end{DescribeCode}
-
-
-
-@LabeledAddedSubClause{Version=[2],Name=[function Parameters (Profile)]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Parameters} (P : Profile) @key[return] Declarative_Regions.Region_Part;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[P specifies the Profile to query.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Returns the Region_Part containing the parameters of the profile.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[If there are no parameters in the profile, returns a
-Region_Part for which Is_Empty returns true.]}
-
-@end{DescribeCode}
-
-
-
-@LabeledAddedSubClause{Version=[2],Name=[Function queries]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Function} (P : Profile) @key[return] Boolean;
-@key[function] @AdaSubDefn{Result_Subtype} (P : Profile)
-    @key[return] Subtype_Views.Subtype_View'Class;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[P specifies the Profile to query for both of these
-functions.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Is_Function returns True if the profile represents a
-function, and returns False otherwise.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Result_Subtype returns the Subtype_View of the
-return part of the profile, if Is_Function (P) is True. Otherwise,
-Result_Subtype raises ASIS_Inappropriate_View.]}
-@end{DescribeCode}
-
-
-
-@LabeledAddedSubClause{Version=[2],Name=[Family index queries]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Has_Family_Index} (P : Profile) @key[return] Boolean;
-@key[function] @AdaSubDefn{Family_Index_Subtype} (P : Profile)
-   @key[return] Subtype_Views.Subtype_View'Class;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[P specifies the Profile to query for both of these
-functions.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Has_Family_Index returns True if the Profile applies
-to an entry family, and returns False otherwise.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
-@ChgAdded{Version=[2],Text=[Family_Index_Subtype returns the entry index subtype
-of the profile P if Has_Family_Index (P) is True (see 9.5.2(20) in the Ada
-Standard). Otherwise, Family_Index_Subtype raises ASIS_Inappropriate_View.]}
-
-@end{DescribeCode}
-
-
-
-@LabeledAddedSubClause{Version=[2],Name=[Profile conventions]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Convention} (P : Profile) @key[return] Views.Conventions;
-@key[function] @AdaSubDefn{Convention_Identifier} (P : Profile) @key[return] Wide_String;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[P specifies the Profile to query for both of these
-functions.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Convention returns the Convention of
-Profile P. Function Convention_Identifier returns "Intrinsic", "Ada",
-"Protected", or "Entry" when function Convention returns the corresponding value
-of type Conventions. When Convention returns Other_Convention,
-Convention_Identifier returns the identifier given in the pragma Convention,
-Import, or Export used to specify the convention of the entity.]}
 @end{DescribeCode}
 
 
@@ -2421,8 +1758,8 @@ access subtype.]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Has_Static_Accessibility_Level} (A : Access_Subtype)
    @key[return] Boolean @key[is abstract];
 @key[function] @AdaSubDefn{Is_Library_Level} (A : Access_Subtype) @key[return] Boolean @key[is abstract];
-@key[function] @AdaSubDefn{Is_Statically_Deeper_Than} (A : Access_Subtype; Compared_To : Access_Subtype)
-   @key[return] Boolean @key[is abstract];]}
+@key[function] @AdaSubDefn{Is_Statically_Deeper_Than} (A : Access_Subtype;
+   Compared_To : Access_Subtype) @key[return] Boolean @key[is abstract];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Excludes_Null} (A : Access_Subtype) @key[return] Boolean @key[is abstract];]}
@@ -2609,13 +1946,17 @@ for each of these functions.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
 @ChgAdded{Version=[2],Text=[Function Is_Limited returns True if and only if the
-view of the subtype C is limited. Function Has_Task_Part returns True if and
-only if the type of the subtype C has a part that is of a task type (whether
- visibly or only in the full definition). If subtype C is a class-wide
+view of the subtype C is limited (see 7.5(3-7) in the Ada Standard).
+Function Has_Task_Part returns True if and
+only if the type of the subtype C has a part (see 3.2(6) in the Ada Standard)
+that is of a task type (whether visibly or only in the full definition). If
+subtype C is a class-wide
 subtype S'Class, then returns Has_Task_Part(S). Function Needs_Finalization
-returns True if and only if the type of the subtype C needs finalization.
+returns True if and only if the type of the subtype C needs finalization
+(see 7.6(9.1-9.5) in the Ada Standard).
 Function Has_Preelaborable_Initialization returns True if and only if the
-subtype C has preelaborable initialization.]}
+subtype C has preelaborable initialization (see 10.2.1(11.1-11.8) in the
+Ada Standard).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
 @ChgAdded{Version=[2],Text=[Function Has_Unknown_Discriminants returns True if
@@ -2781,6 +2122,750 @@ a list of Tagged_Subtypes.]}
 
 
 
+@LabeledAddedClause{Version=[2],Name=[package Asis.Object_Views]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[The library package
+@ChildUnit{Parent=[Asis],Child=[Object_Views]}Asis.Object_Views shall exist.
+The package shall provide interfaces equivalent to those described in the
+following subclauses.]}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[type Object_View]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Object_View} @key[is interface and] Views.View;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[The type Object_View represents views of objects and
+values, as denoted by names or expressions.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Constant_View} (O : Object_View) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Formal_Object} (O : Object_View)
+   @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Nominal_Subtype} (O : Object_View)
+   @key[return] Subtype_Views.Subtype_View'Class @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[O specifies the view of an object to query for all
+of these functions.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Constant_View returns True if and only
+if the object O is a constant view of an object, or is a view of a value.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Formal_Object returns True if and only
+if the object O denotes a generic formal object.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[Function Nominal_Subtype returns the nominal subtype
+of the view (see 3.3(23 and 3.3.1(8) in the Ada Standard). The returned
+Subtype_View corresponds to the subtype_indication, subtype_mark with a
+null_exclusion, discrete_range, or type definition that defined the nominal
+subtype of the object or value. The nominal subtype of a numeric literal or
+named number is a view of the corresponding universal base subtype. The nominal
+subtype of a use of an operator is that of the equivalent function call, namely
+the result subtype of the corresponding function.]}
+@end{DescribeCode}
+
+@begin{SingleNote}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[When an Object_View denotes an object renaming, the
+properties of the view as reported by the queries in the semantic subsystem are
+as determined by the Ada Standard for a renaming (see 8.5.1(6/2) in the Ada
+Standard). Thus, the properties are those of the renamed object; for instance, a
+renamed constant is a constant, even though constant cannot be specified in a
+renaming.]}
+@end{SingleNote}
+
+@LabeledAddedSubClause{Version=[2],Name=[Components of Objects]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Component} (O : Object_View) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Enclosing_Object} (O : Object_View)
+   @key[return] Object_View'Class @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Indexed_Component} (O : Object_View) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Index_Value} (O : Object_View; Dimension : Positive := 1)
+   @key[return] Object_View'Class @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Selected_Component} (O : Object_View) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Selector_Declaration} (O : Object_View)
+   @key[return] Views.Declarative_Regions.View_Declaration'Class @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Has_Storage_Place_Attributes} (O : Object_View) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Position} (O : Object_View) @key[return] Object_View'Class @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{First_Bit} (O : Object_View) @key[return] Object_View'Class @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Last_Bit} (O : Object_View) @key[return] Object_View'Class @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[O specifies the view of an object to query for each
+of these functions. Note that these are semantic queries, rather than
+syntactic queries @em for all of these functions, if the view O is defined by an
+object renaming, the result is determined by the properties of the renamed
+object.]}
+
+@begin{Ramification}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[For example, if we have]}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[X : Natural @key[renames] O.C;]}
+@end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[Is_Component on a view of Z will
+return True, even though X is not syntactically a component selection.]}
+@end{Ramification}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Component returns True if and only if
+the view O is of a component of an enclosing composite object. Function
+Enclosing_Object returns a view of the enclosing object of the component O, or
+raises ASIS_Inappropriate_View if Is_Component (O) returns False.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Indexed_Component returns True if and
+only if the view O is of an indexed component for the given dimension.
+Function Index_Value returns a view of the value of the index of the indexed
+component O for the given dimension, or raises ASIS_Inappropriate_View if
+Is_Indexed_Component (O) returns False or Dimension is greater than
+Num_Dimensions applied to the subtype of Enclosing_Object(O).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Selected_Component returns True if and
+only if the view O is of a selected component. Function Selector_Declaration
+returns the declaration of the selected component O, or raises
+ASIS_Inappropriate_View if Is_Selected_Component (O) returns False.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[Function Has_Storage_Place_Attributes returns
+True if and only if the view O is of a selected component that has storage
+place attributes. Functions Position, First_Bit, and Last_Bit, return a view of the
+value of a reference to the corresponding attribute of the given component O, or
+raise ASIS_Inappropriate_View if Has_Storage_Place_Attributes (O) returns
+False.]}
+
+@end{DescribeCode}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Aliased Views and Dereferences]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Aliased} (O : Object_View) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Has_Static_Accessibility_Level} (O : Object_View)
+   @key[return] Boolean @key[is abstract];
+@key[function] @AdaSubDefn{Is_Library_Level} (O : Object_View) @key[return] Boolean @key[is abstract];
+@key[function] @AdaSubDefn{Is_Statically_Deeper_Than} (O : Object_View; Compared_To : Object_View)
+   @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Dereference} (O : Object_View) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Dereferenced_Value} (O : Object_View)
+   @key[return] Object_View'Class @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[O specifies the view of an object to query for each
+of these functions. Note that these are semantic queries, not syntactic
+queries @em for all of these functions, if the view O is defined by an
+object renaming, the result is determined by the properties of the
+renamed object.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Aliased returns True if and only if the
+view O is aliased (see ARM 3.10(9) in the Ada Standard). Function
+Has_Static_Accessibility_Level returns True if Is_Aliased (O) and the statically
+deeper relationship is defined for the accessibility level of the view O (see
+3.10.2(17-21) in the Ada Standard). Function Is_Library_Level returns True if
+Has_Static_Accessibility_Level (O) is True and the accessibility level is
+library level (see 3.10.2(22) in the Ada Standard). Function
+Is_Statically_Deeper_Than raises ASIS_Inappropriate_View if
+Has_Static_Accessibility_Level returns False for either operand; otherwise it
+returns True if and only if the accessibility level of O is statically deeper
+than that of the object view Compared_To (see 3.10.2(17-21) in the Ada
+Standard).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Dereference returns True if and only if
+the object O is a dereference of an access-to-object value. Function
+Dereferenced_Value returns a view of the access value that was dereferenced in
+the dereference O, or raises ASIS_Inappropriate_View if Is_Dereference (O)
+returns False.]}
+@end{DescribeCode}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Static Values]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Longest_Discrete} @key[is range] @examcom{<implementation-defined>};]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Static_Discrete} (O : Object_View) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Static_Discrete_Value} (O : Object_View)
+   @key[return] Longest_Discrete @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Static_Discrete_Image} (O : Object_View)
+   @key[return] Wide_String @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Longest_Float} @key[is digits] @examcom{<implementation-defined>};]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Static_Real} (O : Object_View) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Static_Real_Value} (O : Object_View)
+   @key[return] Longest_Float @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Static_Real_Image} (O : Object_View)
+   @key[return] Wide_String @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Static_String} (O : Object_View) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Static_String_Value} (O : Object_View)
+   @key[return] Wide_String @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[O specifies the view of an object to query for each
+of these functions.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Static_Discrete returns True if and only
+if the view O is a view of the value of a static expression of a discrete type
+(see 4.9(2-13) in the Ada Standard).
+Function Static_Discrete_Value returns the position number of the value of the
+static discrete expression O, or raises ASIS_Inappropriate_View if
+Is_Static_Discrete (O) returns False. If the position number of the value is
+outside the range of Longest_Discrete, it raises Constraint_Error. Function
+Static_Discrete_Image returns the image of the position number of the value of
+the static discrete expression O, with the syntax used by the Image attribute of
+its type (with a leading minus if negative, and a leading space otherwise), or
+raises ASIS_Inappropriate_View if Is_Static_Discrete (O) returns False. A
+correct image is returned even if the position number of the value is outside
+the base range of the type.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Static_Real returns True if and only if
+the view O is of the value of a static expression of a real type
+(see 4.9(2-13) in the Ada Standard). Function
+Static_Real_Value returns the value of the static real expression O converted to
+the Longest_Float type, or raises ASIS_Inappropriate_View if Is_Static_Real (O)
+returns False. If the value is outside the range of Longest_Real, it raises
+Constraint_Error. Function Static_Real_Image returns a string containing an
+optional minus sign, followed by a pair of non-negative integers separated by
+the character '/' corresponding to a numerator and a denominator for the reduced
+rational representation of the exact absolute value of the static real
+expression O. The denominator is one when the numerator is zero.
+Static_Real_Image raises ASIS_Inappropriate_View if Is_Static_Real (O) returns
+False.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Static_String returns True if and only
+if the view O is of the value of a static expression of a string type
+(see 4.9(2-13) in the Ada Standard). Function
+Static_String_Value returns a Wide_String whose characters match the
+corresponding characters of the static value of the string expression O (encoded
+in UTF-16, as described in Section 3). The function raises
+ASIS_Inappropriate_View if Is_Static_String (O) returns False.]}
+@end{DescribeCode}
+
+@begin{Notes}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Static_Discrete_Value can be used on integer,
+character, and enumeration values.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[The result of Static_Real_Value may not have all of
+the precision of the original static value even if it is in range. If the exact
+value is important, use Static_Real_Image to retrieve the value instead of
+Static_Real_Value.]}
+@end{Notes}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Representational Object Attributes]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Object_Size} (O : Object_View) @key[return] ASIS_Natural @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Object_Alignment} (O : Object_View) @key[return] ASIS_Natural @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[O specifies the view of an object to query for both
+of these functions.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Function Object_Size returns the same value as the
+Size attribute of the object O, if the object is elementary, if
+Is_Aspect_Specified (O, Size) returns True, or if its  subtype's size is
+specified. The result is implementation-defined in other
+cases, and may be ASIS_Natural'Last. Function Object_Alignment returns the same
+value as the Alignment attribute of the object O. If the view is of a value
+rather than an object, the result of Object_Size and Object_Alignment is
+implementation-defined, but is within the range of values possible for objects
+of the same type.]}
+
+@end{DescribeCode}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Object Holders]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Object_Holders} @key[is new]
+   Ada.Containers.Indefinite_Holders (Object_View'Class);
+@key[type] @AdaTypeDefn{Object_Holder} @key[is new] Object_Holders.Holder @key[with null record];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Type Object_Holder allows the declaration of an
+uninitialized variable (including a component) that can hold a Object_View.]}
+@end{DescribeCode}
+
+
+
+@LabeledAddedClause{Version=[2],Name=[package Asis.Object_Views.Access_Views]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[The library package
+@ChildUnit{Parent=[Asis.Object_Views],Child=[Access_Views]}Asis.Object_Views.Access_Views
+shall exist. The package shall provide interfaces equivalent to those
+described in the following subclauses.]}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[type Access_Object_View]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Access_Object_View} @key[is interface and] Object_View;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[The type Access_Object_View represents views of access objects and values, as
+denoted by names or expressions.]}
+@end{DescribeCode}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Designated object operations]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Object_Access_Attribute_Reference} (O : Access_Object_View) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Designated_Object} (O : Access_Object_View)
+   @key[return] Object_View'Class @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Implicit_Access_Attribute_Reference} (O : Access_Object_View)
+   @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Subprogram_Access_Attribute_Reference} (O : Access_Object_View)
+   @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Designated_Subprogram} (O : Access_Object_View)
+   @key[return] Callable_Views.Callable_View'Class @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[O specifies the view of an access object to query for each of these
+functions.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Object_Access_Attribute_Reference returns True if and only
+if the view O is of an (explicit or implicit) Access or Unchecked_Access
+attribute reference of an aliased object. Function Designated_Object returns
+the object designated by the access value in the attribute O, or raises
+ASIS_Inappropriate_View if Is_Object_Access_Attribute_Reference (O) returns False.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Implicit_Access_Attribute_Reference returns True if and
+only if the view O is of a value produced by an implicit Access attribute
+reference as part of a call on a prefixed view of a subprogram, where the
+first parameter of the unprefixed subprogram is an access parameter (see 6.4(10.1)
+in the Ada Standard).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Subprogram_Access_Attribute_Reference returns True if and only
+if the view O is of an Access attribute reference of
+a subprogram. Function Designated_Subprogram returns a view of the subprogram
+designated by the access value in the attribute O, or raises
+ASIS_Inappropriate_View if Is_Subprogram_Access_Attribute_Reference (O)
+returns False.]}
+@end{DescribeCode}
+
+
+
+@LabeledAddedClause{Version=[2],Name=[package Asis.Program_Units]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[The library package
+@ChildUnit{Parent=[Asis],Child=[Program_Units]}Asis.Program_Units shall exist.
+The package shall provide interfaces equivalent to those described in the
+following subclauses.]}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[type Program_Unit]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0057-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Program_Unit} @key[is interface and] Views.Declarative_Regions.View_Declaration;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[The type Program_Unit is an extension of
+View_Declaration, and is used to represent the declaration of a program unit
+(package, subprogram, task unit, protected unit, protected entry, or generic
+unit).]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Requires_Completion} (P : Program_Unit) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Has_Body} (P : Program_Unit) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Body_Of_Program_Unit} (P : Program_Unit)
+   @key[return] Asis.Declaration @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Instance} (P : Program_Unit) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Instantiated_Generic} (P : Program_Unit)
+   @key[return] Program_Unit'Class @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Actual_Part} (P : Program_Unit)
+   @key[return] Asis.Association_List @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Expanded_Body} (P : Program_Unit)
+   @key[return] Asis.Declaration @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[P specifies the program unit view declaration to
+query for each of these functions.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
+@ChgAdded{Version=[2],Text=[Function Requires_Completion returns True if and
+only if the program unit P requires a completion (see 3.11.1(1) in the Ada
+Standard). Function Has_Body returns True
+if the program unit P has a completion that is a body. Function
+Body_Of_Program_Unit returns the body that completes the program unit P, or
+raises ASIS_Inappropriate_View if Has_Body (P) returns False.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Instance returns True if and only if the
+program unit P is an instance of a generic unit. Function Instantiated_Generic
+returns the generic unit given the instance P, or raises ASIS_Inappropriate_View
+if Is_Instance (P) returns False. Function Actual_Part returns the list of
+actual parameters passed to the instantiation P, or raises
+ASIS_Inappropriate_View if Is_Instance (P) returns False. Function Expanded_Body
+returns the expanded body of the instantiation P, or raises
+ASIS_Inappropriate_View if Is_Instance returns False.]}
+@end{DescribeCode}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Compilation Units]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Compilation_Unit} (P : Program_Unit)
+   @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[procedure] @AdaSubDefn{Depends_Semantically_On} (
+   P : Program_Unit; Depends_On : @key[out] Program_Unit_Vector'Class) @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Subunit} (P : Program_Unit) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Stub_Of_Program_Unit} (P : Program_Unit)
+   @key[return] Asis.Declaration @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Library_Item} (P : Program_Unit) @key[return] Boolean @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[P specifies the program unit view declaration to
+query for each of these functions.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Compilation_Unit returns True if and
+only if the program unit P is separately compiled as a compilation unit.
+Procedure Depends_Semantically_On returns in the Depends_On parameter the vector
+of other compilation units on which compilation unit P depends semantically, or
+raises ASIS_Inappropriate_View if Is_Compilation_Unit (P) returns False (see
+10.1.1(26)) in the Ada Standard).]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Subunit returns True if and only if the
+program unit P is separately compiled as a subunit. Function
+Stub_Of_Program_Unit returns the Asis.Declaration that specifies the stub of the
+subunit P, or raises ASIS_Inappropriate_View if Is_Subunit (P) returns False.
+Function Is_Library_Item returns True if and only if the program unit P is
+separately compiled as a library item.]}
+@end{DescribeCode}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[type Library_Item]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Library_Item} @key[is interface and] Program_Unit;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[The type Library_Item is used to represent program units that are separately
+compiled as library items @em those for which Is_Library_Item returns True.]}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Has_Parent_Library_Unit} (L : Library_Item)
+   @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Parent_Library_Unit} (L : Library_Item)
+   @key[return] Library_Item'Class @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Pure_Unit} (L : Library_Item) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Preelaborated_Unit} (L : Library_Item) @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Remote_Call_Interface_Unit} (L : Library_Item)
+   @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Remote_Types_Unit} (L : Library_Item)
+   @key[return] Boolean @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[L specifies the library unit view declaration to
+query for each of these functions.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Function Has_Parent_Library_Unit returns True if and
+only if the library item L is a child of a unit other than package Standard.
+Function Parent_Library_Unit returns the parent library item of a child unit L,
+or raises ASIS_Inappropriate_View if Has_Parent_Library_Unit (L) returns
+False.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Function Is_Pure_Unit returns True if and only if
+the library item L is declared pure. Function Is_Preelaborated_Unit returns True
+if and only if the library item L is preelaborated. Function
+Is_Remote_Call_Interface_Unit returns True if and only if the pragma
+Remote_Call_Interface applies to the library item L. Function
+Is_Remote_Types_Unit returns True if and only if the pragma Remote_Types applies
+to the library item L.]}
+@end{DescribeCode}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Program Unit Vectors]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Program_Unit_Vectors} @key[is new]
+   Ada.Containers.Indefinite_Vectors (Positive, Program_Unit'Class);
+@key[type] @AdaTypeDefn{Program_Unit_Vector} @key[is new]
+   Program_Unit_Vectors.Vector @key[with null record];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Type Program_Unit_Vector allows the declaration of a
+list of Program_Units.]}
+@end{DescribeCode}
+
+
+
+@LabeledAddedClause{Version=[2],Name=[package Asis.Profiles]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[The library package
+@ChildUnit{Parent=[Asis],Child=[Profiles]}Asis.Profiles shall exist. The package
+shall provide interfaces equivalent to those described in the following
+subclauses.]}
+
+
+@LabeledAddedSubClause{Version=[2],Name=[type Profile]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[type] Profile @key[is private];]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
+@ChgAdded{Version=[2],Text=[The type Profile specifies the profile of a callable
+entity (see 6.1(22) in the Ada Standard).]}
+@end{DescribeCode}
+
+
+
+@LabeledAddedSubClause{Version=[2],Name=[function Parameters (Profile)]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Parameters} (P : Profile) @key[return] Declarative_Regions.Region_Part;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[P specifies the Profile to query.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Returns the Region_Part containing the parameters of the profile.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[If there are no parameters in the profile, returns a
+Region_Part for which Is_Empty returns true.]}
+
+@end{DescribeCode}
+
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Function queries]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Function} (P : Profile) @key[return] Boolean;
+@key[function] @AdaSubDefn{Result_Subtype} (P : Profile)
+    @key[return] Subtype_Views.Subtype_View'Class;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[P specifies the Profile to query for both of these
+functions.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Is_Function returns True if the profile represents a
+function, and returns False otherwise.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Result_Subtype returns the Subtype_View of the
+return part of the profile, if Is_Function (P) is True. Otherwise,
+Result_Subtype raises ASIS_Inappropriate_View.]}
+@end{DescribeCode}
+
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Family index queries]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Has_Family_Index} (P : Profile) @key[return] Boolean;
+@key[function] @AdaSubDefn{Family_Index_Subtype} (P : Profile)
+   @key[return] Subtype_Views.Subtype_View'Class;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[P specifies the Profile to query for both of these
+functions.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Has_Family_Index returns True if the Profile applies
+to an entry family, and returns False otherwise.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
+@ChgAdded{Version=[2],Text=[Family_Index_Subtype returns the entry index subtype
+of the profile P if Has_Family_Index (P) is True (see 9.5.2(20) in the Ada
+Standard). Otherwise, Family_Index_Subtype raises ASIS_Inappropriate_View.]}
+
+@end{DescribeCode}
+
+
+
+@LabeledAddedSubClause{Version=[2],Name=[Profile conventions]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Convention} (P : Profile) @key[return] Views.Conventions;
+@key[function] @AdaSubDefn{Convention_Identifier} (P : Profile) @key[return] Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[P specifies the Profile to query for both of these
+functions.]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgAdded{Version=[2],Text=[Function Convention returns the Convention of
+Profile P. Function Convention_Identifier returns "Intrinsic", "Ada",
+"Protected", or "Entry" when function Convention returns the corresponding value
+of type Conventions. When Convention returns Other_Convention,
+Convention_Identifier returns the identifier given in the pragma Convention,
+Import, or Export used to specify the convention of the entity.]}
+@end{DescribeCode}
+
+
+
 @LabeledAddedClause{Version=[2],Name=[package Asis.Callable_Views]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
@@ -2916,8 +3001,8 @@ Returns False otherwise.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[procedure] @AdaSubDefn{Primitive_On_Subtypes} (
-   C : Callable_View; Subtypes : @key[out] Subtype_Views.Subtype_Vector'Class) @key[is abstract];]}
+@ChgAdded{Version=[2],Text=[@key[procedure] @AdaSubDefn{Primitive_On_Subtypes} (C : Callable_View;
+   Subtypes : @key[out] Subtype_Views.Subtype_Vector'Class) @key[is abstract];]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
@@ -3044,7 +3129,8 @@ C.]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Callable_Holders} @key[is new] Ada.Containers.Indefinite_Holders (Callable_View'Class);
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Callable_Holders} @key[is new]
+   Ada.Containers.Indefinite_Holders (Callable_View'Class);
 @key[type] @AdaTypeDefn{Callable_Holder} @key[is new] Callable_Holders.Holder @key[with null record];]}
 @end{Example}
 
@@ -3054,86 +3140,11 @@ a component) that can hold a Callable_View.]}
 @end{DescribeCode}
 
 
-@LabeledAddedClause{Version=[2],Name=[package Asis.Object_Views.Access_Views]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[The library package
-@ChildUnit{Parent=[Asis.Object_Views],Child=[Access_Views]}Asis.Object_Views.Access_Views
-shall exist. The package shall provide interfaces equivalent to those
-described in the following subclauses.]}
-
-
-@LabeledAddedSubClause{Version=[2],Name=[type Access_Object_View]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[type] @AdaTypeDefn{Access_Object_View} @key[is interface and] Object_View;]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[The type Access_Object_View represents views of access objects and values, as
-denoted by names or expressions.]}
-@end{DescribeCode}
-
-
-@LabeledAddedSubClause{Version=[2],Name=[Designated object operations]}
-
-@begin{DescribeCode}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Object_Access_Attribute_Reference} (O : Access_Object_View) @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Designated_Object} (O : Access_Object_View)
-   @key[return] Object_View'Class @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Implicit_Access_Attribute_Reference} (O : Access_Object_View)
-   @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Is_Subprogram_Access_Attribute_Reference} (O : Access_Object_View)
-   @key[return] Boolean @key[is abstract];]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
-@ChgAdded{Version=[2],Text=[@key[function] @AdaSubDefn{Designated_Subprogram} (O : Access_Object_View)
-   @key[return] Callable_Views.Callable_View'Class @key[is abstract];]}
-@end{Example}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[O specifies the view of an access object to query for each of these
-functions.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Object_Access_Attribute_Reference returns True if and only
-if the view O is of an (explicit or implicit) Access or Unchecked_Access
-attribute reference of an aliased object. Function Designated_Object returns
-the object designated by the access value in the attribute O, or raises
-ASIS_Inappropriate_View if Is_Object_Access_Attribute_Reference (O) returns False.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Implicit_Access_Attribute_Reference returns True if and
-only if the view O is of a value produced by an implicit Access attribute
-reference as part of a call on a prefixed view of a subprogram, where the
-first parameter of the unprefixed subprogram is an access parameter (see 6.4(10.1)
-in the Ada Standard).]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0062-1]}
-@ChgAdded{Version=[2],Text=[Function Is_Subprogram_Access_Attribute_Reference returns True if and only
-if the view O is of an Access attribute reference of
-a subprogram. Function Designated_Subprogram returns a view of the subprogram
-designated by the access value in the attribute O, or raises
-ASIS_Inappropriate_View if Is_Subprogram_Access_Attribute_Reference (O)
-returns False.]}
-@end{DescribeCode}
-
-
 @LabeledAddedClause{Version=[2],Name=[package Asis.Package_Views]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[The library package
-@ChildUnit{Parent=[Asis],Child=[Package_Views]} Asis.Package_Views shall exist.
+@ChildUnit{Parent=[Asis],Child=[Package_Views]}Asis.Package_Views shall exist.
 The package shall provide interfaces equivalent to those described in the
 following subclauses.]}
 
@@ -3327,7 +3338,8 @@ package.]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Package_Holders} @key[is new] Ada.Containers.Indefinite_Holders (Package_View'Class);
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Package_Holders} @key[is new]
+   Ada.Containers.Indefinite_Holders (Package_View'Class);
 @key[type] @AdaTypeDefn{Package_Holder} @key[is new] Package_Holders.Holder @key[with null record];]}
 @end{Example}
 
@@ -3479,7 +3491,8 @@ Callable_Profile, Is_Procedure, etc.]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Generic_Holders} @key[is new] Ada.Containers.Indefinite_Holders (Generic_View'Class);
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Generic_Holders} @key[is new]
+   Ada.Containers.Indefinite_Holders (Generic_View'Class);
 @key[type] @AdaTypeDefn{Generic_Holder} @key[is new] Generic_Holders.Holder @key[with null record];]}
 @end{Example}
 
@@ -3523,7 +3536,8 @@ an exception view E, use Is_Aspect_Specified (E, Discard_Names).]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Exception_Holders} @key[is new] Ada.Containers.Indefinite_Holders (Exception_View'Class);
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Exception_Holders} @key[is new]
+   Ada.Containers.Indefinite_Holders (Exception_View'Class);
 @key[type] @AdaTypeDefn{Exception_Holder} @key[is new] Exception_Holders.Holder @key[with null record];]}
 @end{Example}
 
@@ -3591,7 +3605,8 @@ having the label.]}
 @begin{DescribeCode}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
-@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Statement_Holders} @key[is new] Ada.Containers.Indefinite_Holders (Statement_View'Class);
+@ChgAdded{Version=[2],Text=[@key[package] @AdaPackDefn{Statement_Holders} @key[is new]
+   Ada.Containers.Indefinite_Holders (Statement_View'Class);
 @key[type] @AdaTypeDefn{Statement_Holder} @key[is new] Statement_Holders.Holder @key[with null record];]}
 @end{Example}
 
@@ -3606,7 +3621,7 @@ uninitialized variable (including a component) that can hold a Statement_View.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[The library package
-@ChildUnit{Parent=[Asis.Declarations],Child=[Views]} Asis.Declarations.Views
+@ChildUnit{Parent=[Asis.Declarations],Child=[Views]}Asis.Declarations.Views
 shall exist. The package shall provide interfaces equivalent to those described
 in the following subclauses.]}
 
@@ -3696,7 +3711,7 @@ Value_Error for any element that does not have one of these expected kinds.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
 @ChgAdded{Version=[2],Text=[The library package
-@ChildUnit{Parent=[Asis.Expressions],Child=[Views]} Asis.Expressions.Views shall
+@ChildUnit{Parent=[Asis.Expressions],Child=[Views]}Asis.Expressions.Views shall
 exist. The package shall provide interfaces equivalent to those described in the
 following subclauses.]}
 

@@ -1,9 +1,9 @@
 @Part(examples, Root="asis.msm")
 
-@Comment{$Date: 2010/03/27 07:31:18 $}
+@Comment{$Date: 2010/04/09 07:02:39 $}
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/examples.mss,v $}
-@comment{$Revision: 1.7 $}
+@comment{$Revision: 1.8 $}
 
 @LabeledInformativeAnnex{ASIS application examples}
 
@@ -20,7 +20,7 @@ all explicit declarations with their kind.@Chg{Version=[1],New=[],Old=[ ASIS App
 @key[with] Asis.Exceptions;                                                -- @examcom{ @RefSecNum{package Asis.Exceptions}}
 @key[with] Asis.Implementation;                                            -- @examcom{ @RefSecNum{package Asis.Implementation}}
 @key[with] Asis.Ada_Environments;                                          -- @examcom{ @RefSecNum{package Asis.Ada_Environments}}
-@key[with] Asis.Compilation_Units;                                         -- @examcom{@RefSecNum{package Asis.Compilation_Units}}
+@key[with] Asis.Compilation_Units;                                         -- @examcom{ @RefSecNum{package Asis.Compilation_Units}}
 @key[with] Asis.Elements;                                                  -- @examcom{@RefSecNum{package Asis.Elements}}
 @key[with] Asis.Iterator;                                                  -- @examcom{@RefSecNum{package Asis.Iterator}}
 @key[with] Asis.Declarations;                                              -- @examcom{@RefSecNum{package Asis.Declarations}}
@@ -120,10 +120,10 @@ all explicit declarations with their kind.@Chg{Version=[1],New=[],Old=[ ASIS App
    Put_Line ("Type the name of an Ada package specification");
    Get_Line (Unit_Name, Unit_Name_Length);
 
-   My_Unit := Asis.Compilation_Units.Library_Unit_Declaration        -- @examcom{@RefSecNum{function Library_Unit_Declaration}}
+   My_Unit := Asis.Compilation_Units.Library_Unit_Declaration        -- @examcom{ @RefSecNum{function Library_Unit_Declaration}}
                   ( Unit_Name ( 1 .. Unit_Name_Length), My_Context );
 
-   @key[if] Asis.Compilation_Units.Is_Nil (My_Unit)                        -- @examcom{@RefSecNum{function Is_Nil (unit)}}
+   @key[if] Asis.Compilation_Units.Is_Nil (My_Unit)                        -- @examcom{ @RefSecNum{function Is_Nil (unit)}}
    @key[then]
       Put ("Context does not contain the requested unit: ");
       Put (Unit_Name ( 1 .. Unit_Name_Length));
@@ -218,7 +218,7 @@ call; <Called_Program_Unit> is the name of the program unit being called; and
 @key[with] Asis.Exceptions;                                                  -- @examcom{ @RefSecNum{package Asis.Exceptions}}
 @key[with] Asis.Implementation;                                              -- @examcom{ @RefSecNum{package Asis.Implementation}}
 @key[with] Asis.Ada_Environments;                                            -- @examcom{ @RefSecNum{package Asis.Ada_Environments}}
-@key[with] Asis.Compilation_Units;                                           -- @examcom{@RefSecNum{package Asis.Compilation_Units}}
+@key[with] Asis.Compilation_Units;                                           -- @examcom{ @RefSecNum{package Asis.Compilation_Units}}
 @key[with] Asis.Elements;                                                    -- @examcom{@RefSecNum{package Asis.Elements}}
 @key[with] Asis.Iterator;                                                    -- @examcom{@RefSecNum{package Asis.Iterator}}
 @key[with] Asis.Declarations;                                                -- @examcom{@RefSecNum{package Asis.Declarations}}
@@ -265,10 +265,10 @@ call; <Called_Program_Unit> is the name of the program unit being called; and
 
       Calling_Cu := Asis.Elements.Enclosing_Compilation_Unit (Caller); -- @examcom{@RefSecNum{function Enclosing_Compilation_Unit}}
 
-      @key[if] Asis.Compilation_Units.Is_Nil (Calling_Cu) @key[then]               -- @examcom{@RefSecNum{function Is_Nil (unit)}}
+      @key[if] Asis.Compilation_Units.Is_Nil (Calling_Cu) @key[then]               -- @examcom{ @RefSecNum{function Is_Nil (unit)}}
          Put ("An_Unknown_Unit");
       @key[else]
-         Put (Asis.Compilation_Units.Unit_Full_Name (Calling_Cu));     -- @examcom{@RefSecNum{function Unit_Full_Name}}
+         Put (Asis.Compilation_Units.Unit_Full_Name (Calling_Cu));     -- @examcom{ @RefSecNum{function Unit_Full_Name}}
       @key[end] if;
 
       Put (" (calls) ");
@@ -339,12 +339,12 @@ call; <Called_Program_Unit> is the name of the program unit being called; and
 
       @key[for] I @key[in] Unit_List'Range @key[loop]
 
-         case Asis.Compilation_Units.Unit_Origin (Unit_List (I)) @key[is]    -- @examcom{@RefSecNum{function Unit_Origin}}
+         case Asis.Compilation_Units.Unit_Origin (Unit_List (I)) @key[is]    -- @examcom{ @RefSecNum{function Unit_Origin}}
             @key[when] Asis.An_Application_Unit =>                           -- @examcom{ @RefSecNum{type Unit_Origins}}
                New_Line;
                Put_Line ("Processing Unit: " &
                                  Asis.Compilation_Units.Unit_Full_Name
-                                    (Unit_List (I)));                  -- @examcom{@RefSecNum{function Unit_Full_Name}}
+                                    (Unit_List (I)));                  -- @examcom{ @RefSecNum{function Unit_Full_Name}}
                Print_Call_Tree (Asis.Elements.Unit_Declaration         -- @examcom{@RefSecNum{function Unit_Declaration}}
                                     (Unit_List (I)), Control, State);
             @key[when others] =>
@@ -361,7 +361,7 @@ call; <Called_Program_Unit> is the name of the program unit being called; and
    Asis.Ada_Environments.Associate(My_Context, "My Context");          -- @examcom{ @RefSecNum{procedure Associate}}
    Asis.Ada_Environments.Open (My_Context);                            -- @examcom{ @RefSecNum{procedure Open}}
 
-   Process_Units (Asis.Compilation_Units.Compilation_Units (My_Context)); -- @examcom{@RefSecNum{function Compilation_Units (context)}}
+   Process_Units (Asis.Compilation_Units.Compilation_Units (My_Context)); -- @examcom{ @RefSecNum{function Compilation_Units (context)}}
 
    Asis.Ada_Environments.Close (My_Context);                           -- @examcom{ @RefSecNum{procedure Close}}
    Asis.Ada_Environments.Dissociate (My_Context);                      -- @examcom{ @RefSecNum{procedure Dissociate}}

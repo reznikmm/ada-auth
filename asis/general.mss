@@ -1,6 +1,6 @@
 @Part(general, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/general.mss,v $}
-@comment{$Revision: 1.24 $ $Date: 2010/03/27 07:31:18 $}
+@comment{$Revision: 1.25 $ $Date: 2010/04/09 07:02:40 $}
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
@@ -19,7 +19,7 @@ I probably ought to add a style just for this purpose)
 }@Comment{End final}
 @Comment{Draft}
 @Comment{@Swiss<@Grow[@B{COMMITTEE DRAFT@\ISO/IEC 15291 CD}]>}
-@Swiss<@Grow[@B{WORKING DRAFT 0.8@\ISO/IEC 15291 WD}]>
+@Swiss<@Grow[@B{WORKING DRAFT 0.9@\ISO/IEC 15291 WD}]>
 @Comment{End draft}
 
 @end{WideAbove}
@@ -152,7 +152,7 @@ compilable.]}
 @ChgDeleted{Version=[2],Text=[Clause  9   package Asis.Ada_Environments.Containers]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
-@Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Compilation_Units}   package Asis.Compilation_Units
+@Chg{Version=[2],New=[Section],Old=[Clause]}  @RefSecNum{package Asis.Compilation_Units}   package Asis.Compilation_Units
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
 @Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{package Asis.Compilation_Units.Times}   package Asis.Compilation_Units.Times
@@ -190,14 +190,14 @@ compilable.]}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[SI99-0047-1],ARef=[SI99-0058-1]}
 @ChgDeleted{Version=[2],Text=[Clause  22    package Asis.Data_Decomposition (optional package)]}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0054-1]}
 @Chg{Version=[2],New=[Section],Old=[Clause]} @RefSecNum{ASIS Semantic Subsystem}   package @Chg{Version=[2],New=[Asis.Views,@*
-Asis.Program_Units,@*
 Asis.Subtype_Views,@*
 Asis.Subtype_Views.Elementary,@*
 Asis.Subtype_Views.Composite,@*
 Asis.Object_Views,@*
 Asis.Object_Views.Access_Views,@*
+Asis.Program_Units,@*
 Asis.Profiles,@*
 Asis.Callable_Views,@*
 Asis.Package_Views,@*
@@ -623,9 +623,10 @@ ASIS reports all operational errors by raising an exception. Whenever an ASIS
 implementation raises one of the exceptions declared in package Asis.Exceptions,
 it will @Chg{Version=[2],New=[indicate the cause of the error by setting],
 Old=[previously have set]} the values returned by the
-Status and Diagnosis queries to indicate the cause of the error]}. The possible
-values for Status are indicated @Chg{Version=[2],New=[below],Old=[here along
-with suggestions for the associated contents of the Diagnosis string]}.
+Status and Diagnosis queries@Chg{Version=[2],New=[],Old=[ to indicate the cause
+of the error]}. The possible values for Status are indicated
+@Chg{Version=[2],New=[below],Old=[here along with suggestions for the associated
+contents of the Diagnosis string]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0055-1]}
 @leading@;ASIS applications are encouraged to

@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/concepts.mss,v $}
-@comment{$Revision: 1.17 $ $Date: 2010/03/27 07:31:18 $}
+@comment{$Revision: 1.18 $ $Date: 2010/04/09 07:02:39 $}
 
 
 @LabeledSection{ASIS technical concepts}
@@ -15,10 +15,12 @@ Reference Manual)]} and any tool
 requiring information from this environment, as shown in Figure 2.
 
 @PictureAlone(Alignment=[Center], Border=[None],
-         Height=[427], Width=[456],
+         Height=[451], Width=[440],
          Name=[ada_env.png],
          Descr=[ASIS as interface to Ada environment])
-@Comment{Original size:  Height=[483], Width=[515]}
+@Comment{Original size:  Height=[483], Width=[515]; original box: Height=[427], Width=[456]}
+@Comment{Greg size:  Height=[640], Width=[635]; new box: Height=[451], Width=[447]}
+@Comment{PDF 300 size:  Height=[2156], Width=[2100]; new box: Height=[451], Width=[440]}
 
 @b{Figure 2 @em ASIS as interface to Ada environment}
 
@@ -69,11 +71,13 @@ the procedure Asis.Ada_Environments.Associate, as
 shown in Figure 3. ASIS may process several different contexts at a time.
 
 @PictureAlone(Alignment=[Center], Border=[None],
-         Height=[282],
-         Width=[507],
+         Height=[381],
+         Width=[488],
          Name=[asis_cont.png],
          Descr=[Application interface to ASIS Context])
-@Comment{Original size:  Height=[319], Width=[573]}
+@Comment{Original size:  Height=[319], Width=[573]; original box: Height=[282], Width=[507]}
+@Comment{Greg size:  Height=[698], Width=[898]; new box: Height=[367], Width=[472]}
+@Comment{PDF 300 dpi size:  Height=[2205], Width=[2830]; new box: Height=[381], Width=[488]}
 
 @b{Figure 3 @em Application interface to ASIS Context}
 
@@ -214,11 +218,13 @@ A, B : Latitude := 0.0;
 has a corresponding tree as in Figure 4.
 
 @PictureAlone(Alignment=[Center], Border=[None],
-         Height=[271],
-         Width=[497],
+         Height=[299],
+         Width=[485],
          Name=[syn_tree.png],
          Descr=[Syntactic tree representation of an Ada object declaration])
-@Comment{Original size:  Height=[306], Width=[562]}
+@Comment{Original size:  Height=[306], Width=[562]; original box: Height=[271], Width=[497]}
+@Comment{Greg size:  Height=[514], Width=[873]; new box: Height=[286], Width=[485]}
+@Comment{PDF 300 dpi size:  Height=[1670], Width=[2715]; new box: Height=[299], Width=[485]}
 
 @b{Figure 4 @em Syntactic tree representation of an Ada object declaration}
 
@@ -357,11 +363,13 @@ processed.
 Figure 5 depicts operations which, in general, apply to all elements.
 
 @PictureAlone(Alignment=[Center], Border=[None],
-         Height=[412],
-         Width=[499],
+         Height=[337],
+         Width=[502],
          Name=[ele_op.png],
          Descr=[Operations on elements])
-@Comment{Original size:  Height=[466], Width=[564]}
+@Comment{Original size:  Height=[466], Width=[564]; original box: Height=[412], Width=[499]}
+@Comment{Greg size:  Height=[612], Width=[914]; new box: Height=[333], Width=[497]}
+@Comment{PDF 300 dpi size:  Height=[1950], Width=[2910]; new box: Height=[337], Width=[502]}
 
 @b{Figure 5 @em Operations on elements}
 
@@ -450,11 +458,13 @@ Corresponding_Name_Declaration. (Note: the thin lined-arrows depict syntactic
 queries while the thick-lined arrows depict semantic queries.)
 
 @PictureAlone(Alignment=[Center], Border=[None],
-         Height=[557],
-         Width=[511],
+         Height=[372],
+         Width=[525],
          Name=[sem_ref.png],
          Descr=[Semantic reference using corresponding queries])
-@Comment{Original size:  Height=[629], Width=[577]}
+@Comment{Original size:  Height=[629], Width=[577]; original box: Height=[557], Width=[511]}
+@Comment{Greg size:  Height=[648], Width=[922]; new box: Height=[381], Width=[542]}
+@Comment{PDF 300 dpi size:  Height=[2080], Width=[2940]; new box: Height=[372], Width=[525]}
 
 @b{Figure 6 @em Semantic reference using corresponding queries}
 
@@ -470,11 +480,13 @@ these packages are used, see the examples in
 @RefSecNum{Asis Application Examples}.
 
 @PictureAlone(Alignment=[Center], Border=[None],
-         Height=[534],
-         Width=[477],
+         Height=[404],
+         Width=[518],
          Name=[asis_ref.png],
          Descr=[ASIS package architecture])
-@Comment{Original size:  Height=[603], Width=[539]}
+@Comment{Original size:  Height=[603], Width=[539]; original box: Height=[534], Width=[477]}
+@Comment{Greg size:  Height=[706], Width=[834]; new box: Height=[416], Width=[491]}
+@Comment{PDF 300 dpi size:  Height=[2300], Width=[2950]; new box: Height=[404], Width=[518}
 
 
 @b{Figure 7 @em ASIS package architecture}
@@ -711,13 +723,6 @@ includes mechanisms for finding the associated element (if any). (see Section
 (an element, which can be a value or object) to a semantic one (a view).]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
-@ChgAdded{Version=[2],Text=[@b{Asis.Program_Units}@Defn{Program_Units} @en This
-child package provides a semantic representation of program units, including
-ones that don't exist explicitly, like inherited subprograms and entities
-declared by generic instances. It also provides a set of queries on this
-semantic representation.]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Text=[@b{Asis.Subtype_Views}@Defn{Subtype_Views} @en This
 child package provides queries on semantic views of (all) subtypes.]}
 
@@ -739,6 +744,13 @@ child package provides queries on semantic views of values and objects.]}
 @ChgAdded{Version=[2],Text=[@b{Asis.Object_Views.Access_Views}@Defn{Object_Views
 .Access_Views} @en This child package provides queries on semantic views of
 values and objects of access types.]}
+
+@ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1],ARef=[SI99-0054-1]}
+@ChgAdded{Version=[2],Text=[@b{Asis.Program_Units}@Defn{Program_Units} @en This
+child package provides a semantic representation of program units, including
+ones that don't exist explicitly, like inherited subprograms and entities
+declared by generic instances. It also provides a set of queries on this
+semantic representation.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[SI99-0047-1]}
 @ChgAdded{Version=[2],Text=[@b{Asis.Profiles}@Defn{Profiles} @en This child
@@ -788,17 +800,16 @@ An application using all @Chg{Version=[2],New=[non-obsolescent ],Old=[]}child
 packages includes the following in its context clause:
 
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0047-1],ARef=[SI99-0054-1]}
 @Chg{Version=[2],New=[@key[with] ],Old=[]}Asis, Asis.Errors,
   Asis.Compilation_Units, Asis.Compilation_Units.Times,
   Asis.Compilation_Units.Relations, Asis.Ada_Environments, Asis.Implementation,
   Asis.Exceptions, Asis.Elements, Asis.Iterator, Asis.Declarations,
   Asis.Expressions, Asis.Clauses, Asis.Definitions, Asis.Statements, Asis.Text,
-  Asis.Ids, @Chg{Version=[2],New=[Asis.Views,
-  Asis.Program_Units, Asis.Subtype_Views,
+  Asis.Ids, @Chg{Version=[2],New=[Asis.Views, Asis.Subtype_Views,
   Asis.Subtype_Views.Elementary, Asis.Subtype_Views.Composite,
   Asis.Object_Views, Asis.Object_Views.Access_Views,
-  Asis.Profiles, Asis.Callable_Views, Asis.Package_Views,
+  Asis.Program_Units, Asis.Profiles, Asis.Callable_Views, Asis.Package_Views,
   Asis.Generic_Views, Asis.Exception_Views, Asis.Statement_Views,
   Asis.Declarations.Views, Asis.Definitions.Views, Asis.Expressions.Views;],Old=[Asis.Data_Decomposition; and Asis.Data_Decomposition.Portable_Transfer.]}
 @end{Example}
@@ -951,7 +962,7 @@ Compilation_Unit is A_Public_Declaration.
    @key[return] Boolean @key[is]
 @key[begin]
 
-   @key[case] Asis.Compilation_Units.Unit_Class (CU) @key[is]                    -- @examcom{@RefSecNum{function Unit_Class}}
+   @key[case] Asis.Compilation_Units.Unit_Class (CU) @key[is]                    -- @examcom{ @RefSecNum{function Unit_Class}}
       @key[when] Asis.A_Public_Declaration =>                              -- @examcom{ @RefSecNum{type Unit_Classes}}
           @key[return] True;
       @key[when others] =>
@@ -1009,8 +1020,8 @@ task library level violations.
    @key[begin]
       Put_Line ("Processing " &
          Asis.Unit_Kinds'Wide_Image                                   -- @examcom{ @RefSecNum{type Unit_Kinds}}
-            (Asis.Compilation_Units.Unit_Kind (CU))                   -- @examcom{@RefSecNum{function Unit_Kind}}
-         & ": " &  (Asis.Compilation_Units.Unit_Full_Name (CU)));     -- @examcom{@RefSecNum{function Unit_Full_Name}}
+            (Asis.Compilation_Units.Unit_Kind (CU))                   -- @examcom{ @RefSecNum{function Unit_Kind}}
+         & ": " &  (Asis.Compilation_Units.Unit_Full_Name (CU)));     -- @examcom{ @RefSecNum{function Unit_Full_Name}}
       Check (Asis.Elements.Unit_Declaration (CU), Control, Dummy);
    @key[end] Check_Compilation_Unit;
 @end{Example}
@@ -1031,7 +1042,7 @@ This is achieved with the following main program, called My_Application.
 @key[with] Asis;                                                             -- @examcom{ @RefSecNum{package Asis}}
 @key[with] Asis.Implementation;                                              -- @examcom{ @RefSecNum{package Asis.Implementation}}
 @key[with] Asis.Ada_Environments;                                            -- @examcom{ @RefSecNum{package Asis.Ada_Environments}}
-@key[with] Asis.Compilation_Units;                                           -- @examcom{@RefSecNum{package Asis.Compilation_Units}}
+@key[with] Asis.Compilation_Units;                                           -- @examcom{ @RefSecNum{package Asis.Compilation_Units}}
 @key[with] Check_Compilation_Unit;
 
 @key[procedure] My_Application @key[is]
@@ -1044,10 +1055,10 @@ This is achieved with the following main program, called My_Application.
 
    @key[declare]
       Unit_List :  Asis.Compilation_Unit_List :=                       -- @examcom{ @RefSecNum{type Compilation_Unit_List}}
-         Asis.Compilation_Units.Compilation_Units (My_Context);        -- @examcom{@RefSecNum{function Compilation_Units (context)}}
+         Asis.Compilation_Units.Compilation_Units (My_Context);        -- @examcom{ @RefSecNum{function Compilation_Units (context)}}
    @key[begin]
       @key[for] I @key[in] Unit_List'Range @key[loop]
-         @key[case] Asis.Compilation_Units.Unit_Origin (Unit_List (I)) @key[is]    -- @examcom{@RefSecNum{function Unit_Origin}}
+         @key[case] Asis.Compilation_Units.Unit_Origin (Unit_List (I)) @key[is]    -- @examcom{ @RefSecNum{function Unit_Origin}}
             @key[when] Asis.An_Application_Unit =>                           -- @examcom{ @RefSecNum{type Unit_Origins}}
                Check_Compilation_Unit.Find_Violations (Unit_List (I));
             @key[when others] => @key[null];

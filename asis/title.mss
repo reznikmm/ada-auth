@@ -1,7 +1,7 @@
 @Part(title, Root="asis.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/ASIS/title.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2010/01/29 06:25:50 $}
+@comment{$Revision: 1.6 $ $Date: 2010/04/09 07:02:39 $}
 
 @begin{ISOOnly}
 @Noparanum@Swiss{@Chg{Version=[1],New=[@B{@latin1(169) ISO/IEC 2009 @en All rights reserved}],Old=[]}}
@@ -20,7 +20,7 @@
 @comment{End Draft}
 @end{ISOOnly}
 @begin{NotISO}
-@Noparanum@Right{@Swiss{@Grow{@B{Ada Semantic Interface Specification}, ISO/IEC 15291:@Chg{Version=[1],New=[201x(E), Working Draft 0.8],Old=[1999(E)]}}}}
+@Noparanum@Right{@Swiss{@Grow{@B{Ada Semantic Interface Specification}, ISO/IEC 15291:@Chg{Version=[1],New=[201x(E), Working Draft 0.9],Old=[1999(E)]}}}}
 @end{NotISO}
 
 @Noparanum@ @*
@@ -74,7 +74,7 @@ d'interface pour la s@Latin1(233)mantique Ada}}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
 
-@Noparanum@Center{@Swiss{@Chg{Version=[1], New=[@Grow{ISO/IEC 15291:201x(E)}, Working Draft 0.8],Old=[@Grow{ISO/IEC 15291:1999(E)}]}}}
+@Noparanum@Center{@Swiss{@Chg{Version=[1], New=[@Grow{ISO/IEC 15291:201x(E)}, Working Draft 0.9],Old=[@Grow{ISO/IEC 15291:1999(E)}]}}}
 @end{NotISO}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}

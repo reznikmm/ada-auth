@@ -1,6 +1,6 @@
 @Part(compunit, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/compunit.mss,v $}
-@comment{$Revision: 1.17 $ $Date: 2010/03/09 06:46:51 $}
+@comment{$Revision: 1.18 $ $Date: 2010/04/09 07:02:39 $}
 
 
 @LabeledSection{package Asis.Compilation_Units}
@@ -1244,7 +1244,7 @@ Returns True if the compilation unit has the given attribute.
 Returns False if the unit is a Nil_Compilation_Unit argument, the
 @Chg{Version=[2],New=[unit does not have the
 given ],Old=[]}Attribute@Chg{Version=[2],New=[],Old=[ does not exist]}, or the
-implementation does not support attributes.]}
+implementation does not support attributes.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[SI99-0028-1]}
 @Chg{Version=[2],New=[Compilation_Unit expects any kind of unit],

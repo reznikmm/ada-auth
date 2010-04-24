@@ -1,6 +1,6 @@
 @Part(frontmatter, root="asis.msm")
 @comment{$Source: e:\\cvsroot/ARM/ASIS/except.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2010/03/09 06:46:51 $}
+@comment{$Revision: 1.10 $ $Date: 2010/04/09 07:02:40 $}
 
 @LabeledSection{package Asis.Exceptions}
 
@@ -79,9 +79,9 @@ within the application.
 @ChgAdded{Version=[2],Text=[@AdaExcDefn{ASIS_Not_In_Context} : @key[exception];]}
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[SI99-0024-1],ARef=[SI99-0054-1]}
 @ChgAdded{Version=[2],Text=[Raised for any operation defined in Asis.Views,
-Asis.Program_Units, Asis.Subtype_Views, Asis.Object_Views, Asis.Profiles,
+Asis.Subtype_Views, Asis.Object_Views, Asis.Program_Units, Asis.Profiles,
 Asis.Callable_Views, Asis.Package_Views, Asis.Generic_Views,
 Asis.Exception_Views, Asis.Statement_Views, and their subpackages and children,
 if the result is an entity that is not part of the current context.]}
