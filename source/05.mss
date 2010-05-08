@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2009/12/18 07:15:33 $}
+@Comment{$Date: 2010/04/24 06:27:51 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.34 $}
+@Comment{$Revision: 1.35 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -47,7 +47,8 @@ no other @nt<statement>. A @nt<compound_statement> can enclose
 @end{Intro}
 
 @begin{Syntax}
-@Syn{lhs=<sequence_of_statements>,rhs="@Syn2{statement} {@Syn2{statement}}"}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0179-1]}
+@Syn{lhs=<sequence_of_statements>,rhs="@Syn2{statement} {@Syn2{statement}}@Chg{Version=[3],New=[ {@Syn2{label}}],Old=[]}"}
 
 
 @Syn{lhs=<statement>,rhs="
@@ -157,6 +158,19 @@ or @nt<block_statement> with the given @nt<statement_identifier>.
   labels.
   However, that would confuse the rules in Section 8, so we didn't do it.
 @end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0179-1]}
+@ChgAdded{Version=[3],Text=[If one or more @nt{label}s end a
+@nt{sequence_of_statements}, an implicit @nt{null_statement}
+follows the @nt{label}s before any following constructs.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[The semantics of a @nt{goto_statement} is
+  defined in terms of the statement having (following) that label. Thus
+  we ensure that every label has a following statement, which might be
+  implicit.]}
+@end{Reason}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -263,6 +277,12 @@ although RM83-5.1(6) did not take this view.
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The @nt{extended_return_statement} is new (@nt{simple_return_statement}
   is merely renamed).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0179-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  @b<Amendment 2:> A @nt{label} can end a @nt{sequence_of_statements},
+  eliminating the requirement for having an explicit @key[null]; statement
+  after an ending label (a common use).]}
 @end{Extend95}
 
 

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.58 $ $Date: 2009/12/18 07:15:34 $ $Author: randy $ }
+@comment{ $Revision: 1.59 $ $Date: 2010/04/24 06:27:51 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2009/12/18 07:15:34 $}
+@Comment{$Date: 2010/04/24 06:27:51 $}
 
 @LabeledClause{String Handling}
 
@@ -501,6 +501,14 @@ procedures.
       @key[return] Natural;
 
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0031-1]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Find_Token} (Source : @key[in] String;
+                         Set    : @key[in] Maps.Character_Set;
+                         From   : @key[in] Positive;
+                         Test   : @key[in] Membership;
+                         First  : @key[out] Positive;
+                         Last   : @key[out] Natural);]}
+
    @key[procedure] @AdaSubDefn{Find_Token} (Source : @key[in] String;
                          Set    : @key[in] Maps.Character_Set;
                          Test   : @key[in] Membership;
@@ -890,6 +898,25 @@ position.
 @Trailing@;Returns the number of occurrences in Source of characters that
 are in Set.
 
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@key[procedure] Find_Token (Source : @key[in] String;
+                      Set    : @key[in] Maps.Character_Set;
+                      From   : @key[in] Positive;
+                      Test   : @key[in] Membership;
+                      First  : @key[out] Positive;
+                      Last   : @key[out] Natural);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0031-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[If Source is not the null string and
+From is not in Source'Range, then Index_Error is raised. Otherwise, First is set
+to the index of the first character in Source(From..Source'Last) that satisfies
+the Test condition. Last is set to the largest index such that all characters in
+Source(First..Last) satisfy the Test condition. If no characters in
+Source(From..Source'Last) satisfy the Test condition, First is set to From, and
+Last is set to 0.]}
+
 @begin{Example}@Keepnext
 @key[procedure] Find_Token (Source : @key[in] String;
                       Set    : @key[in] Maps.Character_Set;
@@ -898,7 +925,10 @@ are in Set.
                       Last   : @key[out] Natural);
 @end{Example}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049],ARef=[AI95-00128-01]}
-@Trailing@;Find_Token returns in First and Last the indices of the beginning
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0031-1]}
+@Trailing@;@Chg{Version=[3],New=[Equivalent to Find_Token (Source, Set,
+Source'First, Test, First, Last).],Old=[Find_Token returns in
+First and Last the indices of the beginning
 and end of the first slice of Source all of whose elements
 satisfy the Test condition, and such that the elements
 (if any) immediately before and after the slice do not
@@ -907,7 +937,13 @@ If no such slice exists, then the value returned for Last is zero, and
 the value returned for First is Source'First@Chg{New=[; however, if
 Source'First is not in Positive then Constraint_Error
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
-is raised],Old=[]}.
+is raised],Old=[]}.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0031-1]}
+  @ChgAdded{Version=[3],Text=[If Source'First is not in Positive, which can only
+  happen for an empty string, this will raise Constraint_Error.]}
+@end{Ramification}
 
 @begin{Example}@Keepnext
 @key[function] Translate (Source  : @key[in] String;
@@ -1141,6 +1177,15 @@ string handling subprograms, Constraint_Error is propagated.
   Overloaded versions of Index and Index_Non_Blank are newly added to
   Strings.Fixed. If Strings.Fixed is referenced in a @nt{use_clause}, and an
   entity @i<E> with a @nt{defining_identifier} of Index or Index_Non_Blank is
+  defined in a package that is also referenced in a @nt{use_clause}, the entity
+  @i<E> may no longer be use-visible, resulting in errors. This should be rare
+  and is easily fixed if it does occur.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI05-0031-1]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 2005}
+  @b<Amendment 2:> An overloaded version of Find_Token is newly added to
+  Strings.Fixed. If Strings.Fixed is referenced in a @nt{use_clause}, and an
+  entity @i<E> with a @nt{defining_identifier} of Find_Token is
   defined in a package that is also referenced in a @nt{use_clause}, the entity
   @i<E> may no longer be use-visible, resulting in errors. This should be rare
   and is easily fixed if it does occur.]}
@@ -1417,6 +1462,14 @@ the copying and comparison of bounded strings.@end{reason}
                       Set      : @key[in] Maps.Character_Set)
          @key[return] Natural;
 
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0031-1]}
+@ChgAdded{Version=[3],Text=[      @key[procedure] @AdaSubDefn{Find_Token} (Source : @key[in] Bounded_String;
+                            Set    : @key[in] Maps.Character_Set;
+                            From   : @key[in] Positive;
+                            Test   : @key[in] Membership;
+                            First  : @key[out] Positive;
+                            Last   : @key[out] Natural);]}
 
       @key[procedure] @AdaSubDefn{Find_Token} (Source : @key[in] Bounded_String;
                             Set    : @key[in] Maps.Character_Set;
@@ -1786,13 +1839,23 @@ Null_Bounded_String : @key[constant] Bounded_String :=
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   Procedure Set_Bounded_String, two Bounded_Slice subprograms, and overloaded
-  versions of Index and Index_Non_Blank are newly added to Strings.Bounded.
-  If Strings.Bounded is
-  referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Strings.Bounded is defined in a
+  versions of Index and Index_Non_Blank are newly added to
+  Strings.Bounded.Generic_Bounded_Length. If an instance of Generic_Bounded_Length is
+  referenced in a @nt{use_clause}, and an entity @i<E> with the
+  @nt{defining_identifier} as a new entity in Generic_Bounded_Length is defined in a
   package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
   longer be use-visible, resulting in errors. This should be rare and is easily
   fixed if it does occur.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI05-0031-1]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 2005}
+  @b<Amendment 2:> An overloaded version of Find_Token is newly added to
+  Strings.Bounded.Generic_Bounded_Length. If an instance of Generic_Bounded_Length is
+  referenced in a @nt{use_clause}, and an
+  entity @i<E> with a @nt{defining_identifier} of Find_Token is
+  defined in a package that is also referenced in a @nt{use_clause}, the entity
+  @i<E> may no longer be use-visible, resulting in errors. This should be rare
+  and is easily fixed if it does occur.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -2027,6 +2090,14 @@ as the length does not exceed the allocated length.
       @key[return] Natural;
 
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0031-1]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Find_Token} (Source : @key[in] Unbounded_String;
+                         Set    : @key[in] Maps.Character_Set;
+                         From   : @key[in] Positive;
+                         Test   : @key[in] Membership;
+                         First  : @key[out] Positive;
+                         Last   : @key[out] Natural);]}
+
    @key[procedure] @AdaSubDefn{Find_Token} (Source : @key[in] Unbounded_String;
                          Set    : @key[in] Maps.Character_Set;
                          Test   : @key[in] Membership;
@@ -2260,6 +2331,15 @@ New=[Ada 95 ],Old=[]}Rationale.
   package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
   longer be use-visible, resulting in errors. This should be rare and is easily
   fixed if it does occur.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI05-0031-1]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 2005}
+  @b<Amendment 2:> An overloaded version of Find_Token is newly added to
+  Strings.Unbounded. If Strings.Unbounded is referenced in a @nt{use_clause},
+  and an entity @i<E> with a @nt{defining_identifier} of Find_Token is
+  defined in a package that is also referenced in a @nt{use_clause}, the entity
+  @i<E> may no longer be use-visible, resulting in errors. This should be rare
+  and is easily fixed if it does occur.]}
 @end{Incompatible95}
 
 @begin{Extend95}

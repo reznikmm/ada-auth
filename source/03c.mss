@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/04/03 06:48:07 $}
+@Comment{$Date: 2010/04/24 06:27:51 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.96 $}
+@Comment{$Revision: 1.97 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3698,8 +3698,8 @@ that mentions a library package in whose visible part the completion of @i{T}
 is declared@Chg{Version=[3],New=[, or],Old=[.]}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0208-1]}
-@ChgAdded{Version=[3],Text=[it occurs within the scope of @i{T} after the
-completion of @i{T} and @i{T} is an incomplete view declared by an
+@ChgAdded{Version=[3],Text=[it occurs within the scope of the completion
+of @i{T} and @i{T} is an incomplete view declared by an
 @nt{incomplete_type_declaration}.]}
 @end{Itemize}
 

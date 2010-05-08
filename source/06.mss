@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2010/04/03 06:48:07 $}
+@Comment{$Date: 2010/04/24 06:27:51 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.97 $}
+@Comment{$Revision: 1.98 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -574,6 +574,206 @@ is passed by copy or by reference.
 @end{Discussion}
 @end{StaticSem}
 
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0144-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[Two @nt{name}s or @nt{prefix}es,
+@i<N1> and @i<N2>, are @i{known to denote the same object} if:@Defn{known to
+denote the same object}]}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@i<N1> statically denotes a part of a stand-alone
+object or parameter, and @i<N2> statically denotes the same part of the same
+stand-alone object or parameter; or]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@i<N1> is a @nt{selected_component} @i<P1.C1> that
+represents a component, @i<N2> is a @nt{selected_component} @i<P2.C2> that
+represents a component, @nt{prefix}es @i<P1> and @i<P2> are known to denote the
+same object, and selectors @i<C1> and @i<C2> are the same; or]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@i<N1> is a dereference (implicit or
+explicit) of @i<P1>, @i<N2> is a dereference (implicit or explicit) of @i<P2>,
+and @nt{prefix}es @i<P1> and @i<P2> are known to denote the same object; or]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@i<N1> is an @nt{indexed_component}
+@i<P1>(@i<I1>,...), @i<N2> is an @nt{indexed_component} @i<P2>(@i<I2>,...), the
+@nt{prefix} @i<P1> is known to denote the same object as the @nt{prefix} @i<P2>,
+and for each index of the @nt{indexed_component}, @i<I1> and @i<I2> are static
+expressions with the same value, or @i<I1> and @i<I2> are names that are known
+to denote the same object; or]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@i<N1> and @i<N2> are @nt{slice}s, their
+@nt{prefix}es are known to denote the same object, and the two @nt{slice}s have
+statically matching index constraints; or]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@i<N2> is a @nt{slice} whose @nt{prefix} is known to
+denote the same object as @i<N1>, and the index constraint of @i<N2> statically
+matches the constraint @i<N1>'First .. @i<N1>'Last; or]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@i<N1> is a @nt{slice} whose @nt{prefix} is known to
+denote the same object as @i<N2>, and the index constraint of @i<N1> statically
+matches the constraint @i<N2>'First .. @i<N2>'Last.]}
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[ For the purpose of evaluating these rules, if @i<N>
+denotes a visible renaming of name @i<R>, @i<R> shall be used in the rules
+instead of @i<N>.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[This exposes known renamings of
+  slices, indexing, and the like to this definition. In particular, if we have]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[C : Character @key[renames] S(1);]}
+@end{Example}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[then C and S(1) are known to denote the same
+  object, as S(1) would replace C when evaluating the rules.]}
+@end{Reason}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Whether or not @nt{name}s or @nt{prefix}es are
+  known to denote the same object is determined statically. If the name
+  contains some dynamic portion other than a dereference, @nt{indexed_component}, or
+  @nt{slice}, it is not "known to denote the same object".]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[These rules make no attempt to handle overlapping
+  slices or slices constrained by objects that are known to denote the same
+  object. These are too rare or too likely to be false positives.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[These rules are intended to be symmetric: if
+  A is known to denote the same object as B, the reverse is also true.]}
+@end{Discussion}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0144-2]}
+@ChgAdded{Version=[3],Text=[Two @nt{name}s @i<N1> and @i<N2> are @i{known to
+refer to the same object} if @i<N1> and @i<N2> are known to denote the same
+object, or if @i<N1> is known to denote a subcomponent of the object denoted by
+@i<N2>, or vice-versa. @Defn{known to refer to the same object}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This ensures that names Prefix.Comp and Prefix are
+  known to refer to the same object for the purposes of the rules below. This
+  intentionally does not include dereferences; we only want to worry about
+  accesses to the same object, and a dereference changes the object in question.
+  (There is nothing shared between an access value and the object it
+  designates.)]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0144-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[
+If a call @i<C> has two or more parameters of mode @key[in out] or @key[out] that
+are of an elementary type, then the call is legal only if:]}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[For each @nt{name} @i<N> that is passed as a parameter of mode @key[in out] or
+@key[out] to the call @i<C>, there is no other @nt{name} among the other
+parameters of mode @key[in out] or @key[out] to @i<C> that is known to denote the
+same object.]}
+
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This means @i{visibly} an elementary type; it does
+  not include partial views of elementary types (partial views are always
+  composite). That's necessary to avoid having @LegalityTitle depend on the
+  contents of the private part.]}
+@end{Honest}
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0144-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[If a construct @i<C> has two or more
+direct constituents that are @nt{name}s or @nt{expression}s whose evaluation may
+occur in an arbitrary order, at least one of which contains a function call with
+an @key[in out] or @key[out] parameter, then the construct is legal only if:]}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[For each name @i<N> that is passed as a parameter of mode @key[in out] or
+@key[out] to some inner function call @i<C2> (not including the construct @i<C>
+itself), there is no other @nt{name} anywhere within a direct constituent of the
+construct @i<C> other than the one containing @i<C2>, that is known to refer to
+the same object.]}
+@end{Itemize}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This requirement cannot fail for a procedure
+  or entry call alone; there must be at least one function with an @key[in out]
+  or @key[out] parameter called as part of a parameter expression of the call in
+  order for it to fail.]}
+@end{Ramification}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[These rules prevent obvious cases of dependence on
+  the order of evaluation of @nt{name}s or @nt{expression}s. Such dependence is
+  usually a bug, and in any case, is not portable to another implementation (or
+  even another optimization setting).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[In the case that the top-level construct C is a
+  call, these rules do not require checks for most @key[in out] parameters, as
+  the rules about evaluation of calls prevent problems. Similarly, we do not
+  need checks for short circuit operations or other operations with a defined
+  order of evaluation. The rules about arbitrary order (see
+  @RefSecNum{Method of Description and Syntax Notation}) allow evaluating
+  parameters and writing parameters back in an arbitrary order, but not
+  interleaving of evaluating
+  parameters of one call with writing parameters back from another @em that
+  would not correspond to any allowed sequential order.]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0144-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For the purposes of checking this rule:]}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[For an array @nt{aggregate}, an @nt{expression}
+associated with a @nt{discrete_choice_list} that has two or more discrete
+choices, or that has a nonstatic range, is considered as two or more separate
+occurrences of the @nt{expression};]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a record @nt{aggregate}:]}
+
+@begin{InnerItemize}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[The @nt{expression} of a
+@nt{record_component_association} is considered to occur once for each
+associated component; and]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[The @nt{default_expression} for each
+@nt{record_component_association}
+with <> for which the associated component has a @nt{default_expression}
+is considered part of the @nt{aggregate};]}
+@end{InnerItemize}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[For a call, any @nt{default_expression} evaluated as
+part of the call is considered part of the call.]}
+@end{Itemize}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We do not check expressions that are evaluated only because
+  of a component initialized by default in an aggregate (via <>).]}
+@end{Ramification}
+@end{Legality}
+
 @begin{Bounded}
 @Defn{distinct access paths}
 @Defn2{Term=[access paths],Sec=(distinct)}
@@ -717,10 +917,32 @@ the rule regarding erroneous execution when a discriminant
 is changed and one of the parameters depends on the discriminant.
 @end{DiffWord83}
 
+@begin{Incompatible95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0144-2]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005} @b<Amendment 2:>
+  Additional rules have been added to make illegal passing the same elementaty
+  object to more than one @key[in out] or @key[out] parameters of the same
+  call. In this case, the result in the object could depend on the compiler
+  version, optimization settings, and potentially the phase of the moon, so
+  this check will mostly reject programs that are non-portable and could
+  fail with any change. Even when the result is expected to be the same in both
+  parameters, the code is unnecessarily tricky. Programs which fail this
+  new check should be rare and are easily fixed by adding a temporary object.]}
+@end{Incompatible95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0096-1]}
   @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected so that
   limited derived types are by-reference only if their parent is.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0144-2]}
+  @ChgAdded{Version=[3],Text=[@b<Amendment 2:>
+  Additional rules have been added such that passing an object to an @key[in out]
+  or @key[out] parameter of a function illegal if it is used elsewhere in a
+  construct which allows evaluation in an arbitrary order. Such calls are
+  not portable (since the results may depend on the evaluation order), and
+  the results could even vary because of optimization settings and the like.
+  Thus they've been banned.]}
 @end{DiffWord95}
 
 

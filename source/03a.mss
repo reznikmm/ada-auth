@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2009/12/18 07:15:33 $}
+@Comment{$Date: 2010/04/24 06:27:50 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.96 $}
+@Comment{$Revision: 1.97 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -2245,6 +2245,7 @@ for an indefinite subtype,
 because if an object's nominal subtype is indefinite,
 an explicit initial value is required.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 @Defn{stand-alone constant}
 @Defn{stand-alone variable}
 As indicated above,
@@ -2256,6 +2257,10 @@ nor is an object that is created by an @nt<allocator>.
 An object declared by a
 @nt<loop_parameter_specification>, @nt<parameter_specification>,
 @nt<entry_index_specification>, @nt<choice_parameter_specification>,
+@Chg{Version=[3],New=[@nt{extended_return_statement}, ],Old=[]}or
+a @nt{formal_object_declaration} @Chg{Version=[3],New=[of mode @key[in out] ],Old=[]}is
+not @Chg{Version=[3],New=[considered],Old=[called]} a stand-alone object.
+
 or a @nt<formal_object_declaration> is not called a
 stand-alone object.
 

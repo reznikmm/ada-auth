@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.85 $ $Date: 2009/12/18 07:15:34 $ $Author: randy $ }
+@comment{ $Revision: 1.86 $ $Date: 2010/04/24 06:27:51 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2009/12/18 07:15:34 $}
+@Comment{$Date: 2010/04/24 06:27:51 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -363,9 +363,17 @@ priority-ordered ready queues.]
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0166-1]}
 @ChgAdded{Version=[2],Text=[@key<package> Ada.Dispatching @key<is>@ChildUnit{Parent=[Ada],Child=[Dispatching]}
-  @key<pragma> Pure(Dispatching);
+  @key<pragma> @Chg{Version=[3],New=[Preelaborate],Old=[Pure]}(Dispatching);@Chg{Version=[3],New=[],Old=[
   @AdaExcDefn{Dispatching_Policy_Error} : @key<exception>;
+@key<end> Ada.Dispatching;]}]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0166-1]}
+@ChgAdded{Version=[3],Text=[   @key<procedure> @AdaSubDefn{Yield};]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0166-1]}
+@ChgAdded{Version=[3],Text=[  @AdaExcDefn{Dispatching_Policy_Error} : @key<exception>;
 @key<end> Ada.Dispatching;]}
 @end{Example}
 
@@ -457,6 +465,7 @@ if we count the idle task.
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0166-1]}
 @ChgDeleted{Version=[2],Text=[@Defn{preemptible resource}
 A preemptible resource is a resource that while allocated
 to one task can be allocated (temporarily) to another
@@ -468,6 +477,8 @@ is a nonpreemptible resource.
 When a higher-priority task is dispatched to the processor, and the previously
 running task is placed on the appropriate ready queue, the latter task
 is said to be @i{preempted}.]}
+@ChgAdded{Version=[3],Text=[A call of Yield is a task dispatching point. Yield
+is a potentially blocking operation (see @RefSecNum{Protected Subprograms and Protected Actions}).]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Deleted]}
   @ChgDeleted{Version=[2],Text=[A processor that is executing a task is available
@@ -575,6 +586,17 @@ deferred while the affected task performs a protected action.]}
   rules about preemption are moved elsewhere. This makes
   it easier to add other policies (which may not involve preemption).]}
 @end{DiffWord95}
+
+@begin{Incompatible95} @Comment{Really Incompatible05}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0166-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
+  @b<Amendment 2:> Procedure Yield is newly added to Dispatching.
+  If Dispatching is referenced in a @nt{use_clause}, and an
+  entity @i<E> with a @nt{defining_identifier} of Yield is
+  defined in a package that is also referenced in a @nt{use_clause}, the entity
+  @i<E> may no longer be use-visible, resulting in errors. This should be rare
+  and is easily fixed if it does occur.]}
+@end{Incompatible95}
 
 
 @LabeledRevisedSubClause{Version=[2],
@@ -1087,6 +1109,39 @@ policy.@Chg{Version=[3],New=[@Defn2{Term=[task dispatching policy],
 Sec=(Non_Preemptive_@!FIFO_@!Within_@!Priorities)}@Defn{Non_Preemptive_FIFO_@!Within_@!Priorities task disp. policy}],
 Old=[]}]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0166-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The following
+language-defined library package exists:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@key<package> Ada.Dispatching.Non_Preemptive @key<is>@ChildUnit{Parent=[Ada.Dispatching],Child=[Non_Preemptive]}
+  @key<pragma> Preelaborate(Dispatching.Non_Preemptive);
+  @key<procedure> @AdaSubDefn{Yield_To_Higher};
+  @key<procedure> @AdaSubDefn{Yield_To_Same_Or_Higher} @key<renames> Yield;
+@key<end> Ada.Dispatching.Non_Preemptive;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0166-1]}
+@ChgAdded{Version=[3],Text=[A call of Yield_To_Higher is a task dispatching
+point for this policy. If the task at the head of the highest priority ready
+queue has a higher active priority than the calling task then the calling task
+is preempted.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[For language-defined policies other than
+  Non_Preemptive, a higher priority task should never be on a ready queue while
+  a lower priority task is executed. Thus, for such policies, Yield_To_Higher
+  does nothing.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Yield_To_Higher is @i<not> a potentially blocking
+  operation; it can be used during a protected operation. That is allowed as any
+  task with a higher priority than the protected operation cannot call the
+  operation (that would violate the ceiling locking policy). An
+  implementation-defined locking policy may need to define the semantics of
+  Yield_To_Higher differently.]}
+@end{Ramification}
 @end{StaticSem}
 
 @begin{Legality}
@@ -1143,11 +1198,24 @@ its active priority.]}
 @end{itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[For this policy, a non-blocking @nt{delay_statement}
-is the only non-blocking event that is a task dispatching point (see
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0166-1]}
+@ChgAdded{Version=[2],Text=[For this policy, @Chg{Version=[3],New=[blocking
+or termination of a task, ],Old=[]}a@Chg{Version=[3],New=[],Old=[ non-blocking]}
+@nt{delay_statement}@Chg{Version=[3],New=[, a call to Yield_To_Higher, and
+a call to Yield_To_Same_Or_Higher or Yield are],Old=[ is]}
+the only@Chg{Version=[3],New=[],Old=[ non-blocking event that is a]}
+task dispatching @Chg{Version=[3],New=[points],Old=[point]} (see
 @RefSecNum{The Task Dispatching Model}).@PDefn{task dispatching point}
 @PDefn{dispatching point}]}
 
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0166-1]}
+  @ChgAdded{Version=[3],Text=[A @nt{delay_statement} is always a task
+  dispatching point even if it is not blocking. Similarly, calls to any of the
+  Yield procedures are never blocking, but they are task dispatching points.
+  In all of these cases, they can cause the current task to stop running (it is
+  still ready). Otherwise, the running task continues to run until it is blocked.]}
+@end{Ramification}
 @end{RunTime}
 
 @begin{ImplReq}
@@ -1179,6 +1247,10 @@ Interrupt_Handler, or Attach_Handler.]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00298-01],ARef=[AI95-00355-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Policy Non_Preemptive_FIFO_Within_Priorities is new.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0166-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  @b<Amendment 2:> Package Dispatching.Non_Preemptive is new.]}
 @end{Extend95}
 
 
@@ -1213,7 +1285,8 @@ language-defined library package exists:]}
                          Quantum : @key{in} Ada.Real_Time.Time_Span);
   @key{procedure} @AdaSubDefn{Set_Quantum} (Low, High : @key{in} System.Priority;
                          Quantum   : @key{in} Ada.Real_Time.Time_Span);
-  @key{function} @AdaSubDefn{Actual_Quantum} (Pri : System.Priority) @key{return} Ada.Real_Time.Time_Span;
+  @key{function} @AdaSubDefn{Actual_Quantum} (Pri : System.Priority)
+             @key{return} Ada.Real_Time.Time_Span;
   @key{function} @AdaSubDefn{Is_Round_Robin} (Pri : System.Priority) @key{return} Boolean;
 @key{end} Ada.Dispatching.Round_Robin;]}
 @end{Example}
@@ -2839,14 +2912,14 @@ Old=[@Defn2{Term=[restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Co
 
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0013-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Local_Protected_Objects)}@Chg{Version=[3],New=[@Defn{No_Local_Protected_Objects restriction}],
    Old=[]}No_Local_Protected_Objects @\Protected
    objects @Chg{Version=[2],New=[are],Old=[shall be]} declared only at
    library level.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00297-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0013-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Local_Timing_Events)}@Chg{Version=[3],New=[@Defn{No_Local_Timing_Events restriction}],
    Old=[]}No_Local_Timing_Events @\Timing_Events
    @Chg{Version=[2],New=[are],Old=[shall be]} declared only at library level.]}
@@ -2879,7 +2952,7 @@ Old=[@Defn2{Term=[restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Co
   in Task_Termination.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0013-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(Simple_Barriers)}@Chg{Version=[3],New=[@Defn{Simple_Barriers restriction}],
    Old=[]}Simple_Barriers @\The
    Boolean expression in @Chg{Version=[3],New=[each],Old=[an]} entry barrier
@@ -3694,6 +3767,18 @@ The implementation can ensure this by, for example, making the full view
 @Chg{Version=[2],New=[an explicitly],Old=[a]}
 limited record type.@end{implnote}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0168-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The following language-defined package
+exists:]}
+@begin{example}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0168-1]}
+@ChgAdded{Version=[3],Text=[@key{package} Ada.Synchronous_Task_Control.EDF @key{is}@ChildUnit{Parent=[Ada.Synchronous_Task_Control],Child=[EDF]}
+   @key{procedure} @AdaSubDefn{Suspend_Until_True_And_Set_Deadline}
+      (S  : @key{in out} Suspension_Object;
+       TS : @key{in}     Ada.Real_Time.Time_Span);
+@key{end} Ada.Synchronous_Task_Control.EDF;]}
+@end{example}
+
 @end{StaticSem}
 
 @begin{RunTime}
@@ -3734,6 +3819,13 @@ Program_Error is raised upon calling Suspend_Until_True if another
 task is already waiting on that suspension object.
 Suspend_Until_True is a potentially blocking operation
 (see @RefSecNum{Protected Subprograms and Protected Actions}).
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0168-1]}
+@ChgAdded{Version=[3],Text=[The procedure Suspend_Until_True_And_Set_Deadline
+blocks the calling task until the state of the object S is True: at that point
+the task becomes ready with a deadline of Ada.Real_Time.Clock + TS, and the
+state of the object becomes False. Suspend_Until_True_And_Set_Deadling is a
+potentially blocking operation.]}
 @end{RunTime}
 
 @begin{ImplReq}
@@ -3744,11 +3836,22 @@ in the Interrupt_Priority range.
 
 @end{ImplReq}
 
+@begin{Notes}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0168-1]}
+@ChgAdded{Version=[3],Text=[More complex schemes, such as setting the deadline
+relative to when Set_True is called, can be programmed using a protected
+object.]}
+@end{Notes}
+
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00362-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Synchronous_Task_Control is now Preelaborated,
   so it can be used in preelaborated units.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0168-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  @b<Amendment 2:> Child package Ada.Synchronous_Task_Control.EDF is new.]}
 @end{Extend95}
 
 

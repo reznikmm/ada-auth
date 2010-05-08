@@ -1,7 +1,7 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.43 $ $Date: 2009/07/11 04:00:27 $}
+@comment{$Revision: 1.44 $ $Date: 2010/04/24 06:27:51 $}
 
 @begin{ISOOnly}
 @Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[3],New=[201z Ed. 3],Old=[@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
@@ -178,7 +178,7 @@ EVEN IF AXE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.], Old=[]}
 
 @Noparanum@;@ @;@comment{A dummy paragraph containing just a blank}
 
-@Noparanum@;@Chg{Version=[2], New=[@b{Consolidated Standard}], Old=[]}
+@Noparanum@;@Chg{Version=[2], New=[@b{Ada 2005 Consolidated Standard}], Old=[]}
 
 @Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2004, 2005, 2006, Ada-Europe.], Old=[]}
 
