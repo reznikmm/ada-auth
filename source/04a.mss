@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2009/12/18 07:15:33 $}
+@Comment{$Date: 2010/05/08 06:31:32 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.101 $}
+@Comment{$Revision: 1.102 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -275,25 +275,25 @@ since we now describe the semantics of a prefix in terms
 of implicit dereference.
 @end{DiffWord83}
 
-@begin{Extend95}
+@begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0003-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}@b<Amendment 2:>
-  A @nt{qualified_expression} is now a @nt{name} representing a constant view;
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}A
+  @nt{qualified_expression} is now a @nt{name} representing a constant view;
   this allows them to be used as a prefix and to be renamed as an object.
   They are often used to remove ambiguity from function calls, and there
   may be no other way to do that. Interestingly, a @nt{type_conversion} of
   a @nt{qualified_expression} is already legal in these contexts, so this
   change mainly reduces clutter by eliminating an otherwise unneeded
   @nt{type_conversion} from some expressions.]}
-@end{Extend95}
+@end{Extend2005}
 
-@begin{DiffWord95}
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a missing rule so
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a missing rule so
   that most dereferences are assumed constrained (without determining whether
   the designated object is. This is just confirming the Ada 95 rules;
-  Amendment 1 failed to ensure that this property was unchanged.]}
-@end{DiffWord95}
+  Ada 2005 failed to ensure that this property was unchanged.]}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Indexed Components}
@@ -761,12 +761,12 @@ My_Object.Do_Something_Else (Flag => True);]}
 @end{Example}
 @end{Extend95}
 
-@begin{DiffWord95}
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0090-1]}
-  @ChgAdded{Version=[3],Text=[Corrected the definition of a prefixed view
-  to ignore the implicit subprograms declared for
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the definition of
+  a prefixed view to ignore the implicit subprograms declared for
   @ldquote@;implemented by@rdquote entries and protected subprograms.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @RMNewPage@ChgNote{Only needed for Ada 2005 version}
@@ -1072,11 +1072,13 @@ The Ada 83 rule said that the
   @ChgAdded{Version=[2],Text=[The note about resolving prefixes of attributes
   was updated to reflect that the prefix of an Access attribute now has an
   expected type (see @RefSecNum{Operations of Access Types}).]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0006-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Defined the nominal
-  subtype of an @nt{attribute_reference} to close a minor language hole.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0006-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Defined the nominal
+  subtype of an @nt{attribute_reference} to close a minor language hole.]}
+@end{DiffWord2005}
 
 
 @LabeledClause{Literals}
@@ -1793,13 +1795,6 @@ a record aggregate. Now we do.
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}<> can be used in
   place of an @nt{expression} in a @nt{record_aggregate}, default
   initializing the component.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0016-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Fixed the wording so that
-  @key[others] => <> can be used in place of @key[null record].
-  This is needed to avoid a generic contract issue for generic bodies:
-  we do not want to have to assume the worst to disallow others => <>
-  if the record type @i{might} be a null record.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -1807,6 +1802,15 @@ a record aggregate. Now we do.
   @ChgAdded{Version=[2],Text=[Limited @nt{record_aggregate}s are allowed (since
   all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).]}
 @end{DiffWord95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0016-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:> Fixed the wording so that
+  @key[others] => <> can be used in place of @key[null record].
+  This is needed to avoid a generic contract issue for generic bodies:
+  we do not want to have to assume the worst to disallow @key[others] => <>
+  if the record type @i{might} be a null record.]}
+@end{Extend2005}
 
 
 @RmNewPage
@@ -2003,15 +2007,6 @@ The extension aggregate syntax is new.
   it is illegal in Ada 2005. Such @nt{aggregate}s are thought to be rare;
   the problem can be fixed with a type conversion to the appropriate
   specific type if it occurs.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0067-1]}
-  @ChgAdded{Version=[3],Text=[@b[Amendment 2:] A limited unconstrained
-  ancestor expression that is a function call is now illegal unless the
-  extension part is null.
-  Such @nt{aggregate}s were first introduced in Ada 2005 and are very complex
-  to implement as they must be built-in-place with an unknown size; as such,
-  it is unlikely that they are implemented correctly in existing compilers and
-  thus not often used in existing code.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -2019,6 +2014,17 @@ The extension aggregate syntax is new.
   @ChgAdded{Version=[2],Text=[Limited @nt{extension_aggregate}s are allowed (since
   all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).]}
 @end{DiffWord95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b[Correction:]
+  A limited unconstrained ancestor expression that is a function call is now
+  illegal unless the extension part is null.
+  Such @nt{aggregate}s were first introduced in Ada 2005 and are very complex
+  to implement as they must be built-in-place with an unknown size; as such,
+  it is unlikely that they are implemented correctly in existing compilers and
+  thus not often used in existing code.]}
+@end{Incompatible2005}
 
 
 @LabeledSubClause{Array Aggregates}
@@ -2493,17 +2499,6 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
 @end{DiffWord83}
 
 
-@begin{Inconsistent95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0037-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2:>
-  Fixed so the check
-  for components outside of the array applies to both @nt<expression>s and
-  <>s. As <> was a new feature in Amendment 1, there should be little existing
-  code that depends on a <> component that is specified outside of the array
-  (and that is nonsense anyway, that a compiler is likely to detect even
-  without an explicit language rule disallowing it).]}
-@end{Inconsistent95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}<> can be used in
@@ -2523,6 +2518,17 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
   to use the subtype that's explicitly in the code at the point of the
   @nt{expression}.]}
 @end{DiffWord95}
+
+@begin{Inconsistent2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0037-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}@b<Correction:>
+  Fixed so the check
+  for components outside of the array applies to both @nt<expression>s and
+  <>s. As <> was a new feature in Ada 2005, there should be little existing
+  code that depends on a <> component that is specified outside of the array
+  (and that is nonsense anyway, that a compiler is likely to detect even
+  without an explicit language rule disallowing it).]}
+@end{Inconsistent2005}
 
 
 @LabeledClause{Expressions}
@@ -2723,12 +2729,12 @@ logical operators, and hence uses of logical operators
 still have to be parenthesized when used in a bound of a range.
 @end{Extend83}
 
-@begin{DiffWord95}
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0003-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Moved @nt{qualified_expression}
+  @ChgAdded{Version=[3],Text=[Moved @nt{qualified_expression}
   from @nt{primary} to @nt{name} (see @RefSecNum{Names}). This allows the
   use of @nt{qualified_expression}s in more places.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledClause{Operators and Expression Evaluation}
@@ -3662,43 +3668,11 @@ category similar to @lquotes@;ordering operator@rquotes@; to refer to both
 We have changed the term @lquotes@;catenate@rquotes@; to @lquotes@;concatenate@rquotes@;.
 @end{DiffWord83}
 
-@begin{Inconsistent95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2:>
-  User-defined untagged record equality is now defined to compose and be used in
-  generics. Any code which assumes that the predefined equality reemerges
-  in generics and in predefined equals for composite types could fail.
-  However, it is much more likely that this change will fix bugs, as the
-  behavior that would be expected (the user-defined "=" is used) will be
-  true in more cases.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> If a composite type contains
-  a component of an untagged record type with an abstract equality operation,
-  calling "=" on the composite type will raise Program_Error, while in the
-  past a result will be returned using the predefined equality. This is
-  quite possible in ASIS programs; it will detect a bug in such programs but
-  of course the programs will need to be fixed before they will work.]}
-@end{Inconsistent95}
-
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatiblities with Ada 95}@b<Amendment 2:>
-  Late and hidden overriding of equality for untagged record types is now
-  prohibited. This is necessary to make composition of equality predicable.
-  It should always be possible to move the overridding to an earlier spot
-  where it will be legal.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00420-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}The @i{universal_access}
   equality operators are new. They provide equality operations (most
   importantly, testing against @key{null}) for anonymous access types.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0149-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Membership checks for the
-  accessibility and designated tags for general access types are new.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -3712,14 +3686,51 @@ language-defined types.],Old=[]}
 @Chg{Version=[2],New=[Memberships were adjusted to allow interfaces which don't
 cover the tested type, in order to be consistent with type
 conversions.],Old=[]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0020-1]}
-@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Wording was added to clarify
-that @i{universal_access} "=" does not apply if an appropriate operator is
-declared for a partial or incomplete view of the designated type.
-Otherwise, adding a partial or incomplete view could made some "=" operators
-ambiguous.]}
 @end{DiffWord95}
+
+@begin{Inconsistent2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0123-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}
+  User-defined untagged record equality is now defined to compose and be used in
+  generics. Any code which assumes that the predefined equality reemerges
+  in generics and in predefined equals for composite types could fail.
+  However, it is much more likely that this change will fix bugs, as the
+  behavior that would be expected (the user-defined "=" is used) will be
+  true in more cases.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0123-1]}
+  @ChgAdded{Version=[3],Text=[If a composite type contains
+  a component of an untagged record type with an abstract equality operation,
+  calling "=" on the composite type will raise Program_Error, while in the
+  past a result will be returned using the predefined equality. This is
+  quite possible in ASIS programs; it will detect a bug in such programs but
+  of course the programs will need to be fixed before they will work.]}
+@end{Inconsistent2005}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0123-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatiblities with Ada 2005}
+  Late and hidden overriding of equality for untagged record types is now
+  prohibited. This is necessary to make composition of equality predicable.
+  It should always be possible to move the overridding to an earlier spot
+  where it will be legal.]}
+@end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0149-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Membership checks for the
+  accessibility and designated tags for general access types are new.]}
+@end{Extend2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0020-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Wording was added to clarify
+  that @i{universal_access} "=" does not apply if an appropriate operator is
+  declared for a partial or incomplete view of the designated type.
+  Otherwise, adding a partial or incomplete view could made some "=" operators
+  ambiguous.]}
+@end{DiffWord2005}
+
 
 
 @LabeledSubClause{Binary Adding Operators}
@@ -4229,14 +4240,14 @@ it causes, since it is unlikely that the user wanted to use predefined
 operators when they had defined user-defined versions.],Old=[]}
 @end{Incompatible95}
 
-@begin{DiffWord95}
+@begin{DiffWord2005}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0020-1]}
-@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Wording was added to clarify
-that @i{universal_fixed} "*" and "/" does not apply if an appropriate
-operator is declared for a partial view of the designated type.
-Otherwise, adding a partial view could made some "*" and "/" operators
-ambiguous.]}
-@end{DiffWord95}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Wording was added to clarify
+  that @i{universal_fixed} "*" and "/" does not apply if an appropriate
+  operator is declared for a partial view of the designated type.
+  Otherwise, adding a partial view could made some "*" and "/" operators
+  ambiguous.]}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Highest Precedence Operators}
@@ -4365,10 +4376,10 @@ This reflects the fact that Constraint_Error is raised if
 a negative value is provided for the exponent.
 @end{DiffWord83}
 
-@begin{DiffWord95}
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0088-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> The equivalence definition
+  @ChgAdded{Version=[3],Text=[@b<Correction:> The equivalence definition
   for "**" was corrected so that it does not imply that the operands
   are evaluated multiple times.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 

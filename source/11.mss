@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:02 $}
+@Comment{$Date: 2010/05/08 06:31:33 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.68 $}
+@Comment{$Revision: 1.69 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -69,11 +69,12 @@ In order to understand these semantics,
 we have to make this distinction.
 @end{DiffWord83}
 
-@begin{DiffWord95}
+@begin{DiffWord2005}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0043-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a missing Ada 95
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a missing Ada 95
   case to the list of ways that an exception can be initially raised.]}
-@end{DiffWord95}
+@end{DiffWord2005}
+
 
 @LabeledClause{Exception Declarations}
 
@@ -1168,12 +1169,14 @@ exception contains such a character.]}
   @ChgAdded{Version=[2],Text=[Added Wide_Exception_Name and
   Wide_Wide_Exception_Name
   because identifiers can now contain characters outside of Latin-1.]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0043-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added explicit wording
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added explicit wording
   that the exception message for language-defined checks is unspecified.
   The old wording appeared inclusive, but it was not.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledAddedSubClause{Version=[2],Name=[Pragmas Assert and Assertion_Policy]}

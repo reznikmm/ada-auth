@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2009/12/18 07:15:33 $}
+@Comment{$Date: 2010/05/08 06:31:33 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1121,17 +1121,6 @@ and have been generalized to cover the use of a type conversion
 as a @nt<name>.
 @end{DiffWord83}
 
-@begin{Inconsistent95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2:>
-  A stand-alone object of an anonymous access-to-object type now has dynamic
-  accessibility. Normally, this will make programs legal that were illegal
-  in the language as defined by Amendment 1. However, it is possible that
-  a program that previously raised Program_Error now will not. It is very
-  unlikely that an existing program intentionally depends on the exception
-  being raised; the change is more likely to fix bugs than introduce them.]}
-@end{Inconsistent95}
-
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00246-01]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
@@ -1214,6 +1203,17 @@ as a @nt<name>.
   levels, which could cause dangling access values in the absence of such
   checks.]}
 @end{DiffWord95}
+
+@begin{Inconsistent2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0148-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}A
+  stand-alone object of an anonymous access-to-object type now has dynamic
+  accessibility. Normally, this will make programs legal that were illegal
+  in Ada 2005. However, it is possible that a program that previously raised
+  Program_Error now will not. It is very unlikely that an existing program
+  intentionally depends on the exception being raised; the change is more likely
+  to fix bugs than introduce them.]}
+@end{Inconsistent2005}
 
 
 @LabeledClause{Qualified Expressions}
@@ -1302,11 +1302,11 @@ Dozen'(1 | 3 | 5 | 7 => 2, @key(others) => 0) @RI[-- see @RefSecNum{Type Convers
 @end{Example}
 @end{Examples}
 
-@begin{DiffWord95}
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0003-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a definition of
+  @ChgAdded{Version=[3],Text=[Added a definition of
   the nominal subtype of a @nt{qualified_expression}.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledClause{Allocators}
@@ -1808,20 +1808,6 @@ has been moved to @RefSec{Storage Management}.
   zero is now illegal. Ada 95 allowed the @nt{allocator}, but it had to
   raise Storage_Error if executed. The primary impact of this change should
   be to detect bugs.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0052-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a rule to prevent
-  limited coextensions of nonlimited types. Allowing this would have
-  far-reaching implementation costs. Because of those costs, it seems
-  unlikely that any implementation ever supported it properly and thus
-  it is unlikely that any existing code depends on this capability.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0104-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a rule to
-  make @nt{null_exclusion}s illegal for uninitialized @nt{allocator}s,
-  as such an @nt{allocator} would always raise Constraint_Error.
-  Programs that depend on the unconditional raising of a predefined
-  exception should be very rare.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -1864,16 +1850,35 @@ has been moved to @RefSec{Storage Management}.
   @ChgAdded{Version=[2],Text=[Added accessibility checks to access
   discriminants of @nt{allocator}s. These checks could not fail in Ada 95
   as the discriminants always have the accessibility of the object.]}
+@end{DiffWord95}
 
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0052-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Added a rule to prevent limited coextensions of nonlimited types. Allowing
+  this would have far-reaching implementation costs. Because of those costs, it
+  seems unlikely that any implementation ever supported it properly and thus it
+  is unlikely that any existing code depends on this capability.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0104-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a rule to
+  make @nt{null_exclusion}s illegal for uninitialized @nt{allocator}s,
+  as such an @nt{allocator} would always raise Constraint_Error.
+  Programs that depend on the unconditional raising of a predefined
+  exception should be very rare.]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0024-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the master check
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the master check
   for tags since the masters may be for different tasks and thus incomparable.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0041-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the rules for
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the rules for
   when an designated object is constrained by its initial value so that
   types derived from a partial view are handled properly.]}
-@end{DiffWord95}
+@end{DiffWord2005}
+
 
 
 @LabeledClause{Static Expressions and Static Subtypes}
@@ -2654,8 +2659,14 @@ This subclause is new to Ada 95.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00311-01]}
   @ChgAdded{Version=[2],Text=[We clarify that the constraint of the first
   subtype of a scalar formal type statically matches itself.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0086-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Updated the statically
-  compatible rules to take null exclusions into account.]}
 @end{DiffWord95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0086-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Updated the statically compatible rules to take null exclusions into account.
+  This is technically incompatible, as it could cause a legal Ada 2005 program
+  to be rejected; however, such a program violates the intent of the rules
+  (for instance, @RefSecNum{Discriminants}(15)) and this probably will simply
+  detect bugs.]}
+@end{Incompatible2005}

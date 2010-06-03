@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.51 $ $Date: 2008/11/26 23:41:03 $ $Author: randy $ }
+@comment{ $Revision: 1.52 $ $Date: 2010/05/08 06:31:34 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:03 $}
+@Comment{$Date: 2010/05/08 06:31:34 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -559,21 +559,6 @@ Existing implementations can continue to support pragma Interface for
 upward compatibility.
 @end{Extend83}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0002-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b<Amendment 2:>
-  Access types that designate unconstrained arrays are no longer defined
-  to be @i[L]-compatible. Such access-to-arrays require bounds information,
-  which is likely to be incompatible with a foreign language. The change
-  will allow (but not require) compilers to reject bad uses, which probably
-  will not work anyway.
-  Note that implementations can still support any type that it wants
-  as @i[L]-compatible; such uses will not be portable, however. As such,
-  there should be little existing code that will be impacted (compilers
-  probably already rejected cases that could not be translated whether
-  or not the language allowed doing so formally).]}
-@end{Incompatible95}
-
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0058],ARef=[AI95-00036-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that @nt{pragma}s
@@ -586,6 +571,22 @@ upward compatibility.
   foreign code doesn't follow the semantics promised by the Ada
   specifications.]}
 @end{DiffWord95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0002-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Access types that designate unconstrained arrays are no longer defined
+  to be @i[L]-compatible. Such access-to-arrays require bounds information,
+  which is likely to be incompatible with a foreign language. The change
+  will allow (but not require) compilers to reject bad uses, which probably
+  will not work anyway.
+  Note that implementations can still support any type that it wants
+  as @i[L]-compatible; such uses will not be portable, however. As such,
+  there should be little existing code that will be impacted (compilers
+  probably already rejected cases that could not be translated whether
+  or not the language allowed doing so formally).]}
+@end{Incompatible2005}
+
 
 
 @LabeledClause{The Package Interfaces}
@@ -1514,15 +1515,6 @@ specific numbers and types of parameters.
   package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
   longer be use-visible, resulting in errors. This should be rare and is easily
   fixed if it does occur.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0002-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a definition
-  of correspondences for function results. Also added wording to make
-  it clear that we do not expect the implementation to conjure bounds
-  for unconstrained arrays out of thin air. These changes allow (but don't
-  require) compilers to reject unreasonable uses of array types. Such uses
-  probably didn't work anyway (and probably were rejected, no matter what
-  the language definition said), so little existing code should be impacted.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -1559,6 +1551,17 @@ specific numbers and types of parameters.
   @ChgAdded{Version=[2],Text=[Added wording to make it clear that these
   facilities can also be used with C++.]}
 @end{DiffWord95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0002-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Added a definition of correspondences for function results. Also added wording
+  to make it clear that we do not expect the implementation to conjure bounds
+  for unconstrained arrays out of thin air. These changes allow (but don't
+  require) compilers to reject unreasonable uses of array types. Such uses
+  probably didn't work anyway (and probably were rejected, no matter what
+  the language definition said), so little existing code should be impacted.]}
+@end{Incompatible2005}
 
 
 
@@ -2382,27 +2385,27 @@ Y : Integer := X.F2; -- @RI[erroneous]]}
 @end{Example}
 @end{Notes}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0026-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b<Amendment 2:>
-  The use of discriminants on Unchecked_Union types is now illegal in
-  @nt{record_representation_clause}s, as it makes no sense to
-  specify a position for something that is not supposed to exist. It
-  is very unlikely that this change will have any impact on existing code.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   @nt{Pragma} Unchecked_Union is new.]}
 @end{Extend95}
 
-@begin{DiffWord95}
+@begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0026-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Revised the rules
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  The use of discriminants on Unchecked_Union types is now illegal in
+  @nt{record_representation_clause}s, as it makes no sense to
+  specify a position for something that is not supposed to exist. It
+  is very unlikely that this change will have any impact on existing code.]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0026-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Revised the rules
   to use the @ldquote@;needs finalization@rdquote definition,
   and eliminated generic contract issues.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 @RMNewPage@Comment{For printed RM Ada 2005}
 @LabeledClause{Interfacing with COBOL}

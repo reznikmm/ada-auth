@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2009/07/02 04:51:28 $}
+@Comment{$Date: 2010/05/08 06:31:32 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 
 @LabeledClause{Array Types}
 
@@ -1467,17 +1467,6 @@ when the discriminant is initialized.
 
 @end{DiffWord83}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0063-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b<Amendment 2:>
-  Changed the rules for when access discriminants can have defaults to depend
-  on the new definition for immutably limited types; this will help ensure that
-  unusual corner cases are properly handled. Note that the Ada 2005 rule was
-  unintentionally incompatible with the Ada 95 rule (as enforced by the ACATS);
-  this change brings it back into alignment with actual practice. So there
-  should be no practical incompatibility.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00402-01],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Access discriminants (anonymous access types
@@ -1516,11 +1505,25 @@ when the discriminant is initialized.
   @lquotes@;explicitly limited record@rquotes, which makes the intent
   much clearer (and eliminates confusion with derived types that happen to
   contain the reserved word @key(limited).]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0102-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Moved implicit conversion
-  @LegalityName to @RefSecNum{The Context of Overload Resolution}.]}
 @end{DiffWord95}
+
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0063-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Changed the rules for when access discriminants can have defaults to depend
+  on the new definition for immutably limited types; this will help ensure that
+  unusual corner cases are properly handled. Note that the Ada 2005 rule was
+  unintentionally incompatible with the Ada 95 rule (as enforced by the ACATS);
+  this change brings it back into alignment with actual practice. So there
+  should be no practical incompatibility.]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0102-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Moved implicit conversion
+  @LegalityName to @RefSecNum{The Context of Overload Resolution}.]}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Discriminant Constraints}
@@ -1768,18 +1771,18 @@ of such subtypes is rare (they can only happen within the package and its
 child units).]}
 @end{Incompatible95}
 
-@begin{Diffword95}
+@begin{Diffword2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0041-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Revised the rules on
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Revised the rules on
   access subtypes having discriminant constraints to depend on the
   @ldquote@;known to be constrained@rdquote rules. This centralizes
   the rules so that future fixes only need to be made in one place,
   as well as fixing bugs in obscure cases.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0102-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Moved implicit conversion
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Moved implicit conversion
   @LegalityName to @RefSecNum{The Context of Overload Resolution}.]}
-@end{Diffword95}
+@end{Diffword2005}
 
 
 @LabeledSubClause{Operations of Discriminated Types}

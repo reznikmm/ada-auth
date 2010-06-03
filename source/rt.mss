@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.86 $ $Date: 2010/04/24 06:27:51 $ $Author: randy $ }
+@comment{ $Revision: 1.87 $ $Date: 2010/05/08 06:31:33 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2010/04/24 06:27:51 $}
+@Comment{$Date: 2010/05/08 06:31:33 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -587,16 +587,16 @@ deferred while the affected task performs a protected action.]}
   it easier to add other policies (which may not involve preemption).]}
 @end{DiffWord95}
 
-@begin{Incompatible95} @Comment{Really Incompatible05}
+@begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0166-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
-  @b<Amendment 2:> Procedure Yield is newly added to Dispatching.
+  Procedure Yield is newly added to Dispatching.
   If Dispatching is referenced in a @nt{use_clause}, and an
   entity @i<E> with a @nt{defining_identifier} of Yield is
   defined in a package that is also referenced in a @nt{use_clause}, the entity
   @i<E> may no longer be use-visible, resulting in errors. This should be rare
   and is easily fixed if it does occur.]}
-@end{Incompatible95}
+@end{Incompatible2005}
 
 
 @LabeledRevisedSubClause{Version=[2],
@@ -1247,11 +1247,13 @@ Interrupt_Handler, or Attach_Handler.]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00298-01],ARef=[AI95-00355-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Policy Non_Preemptive_FIFO_Within_Priorities is new.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0166-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
-  @b<Amendment 2:> Package Dispatching.Non_Preemptive is new.]}
 @end{Extend95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0166-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Package
+  Dispatching.Non_Preemptive is new.]}
+@end{Extend2005}
 
 
 @LabeledAddedSubClause{Version=[2],Name=[Round Robin Dispatching]}
@@ -1756,11 +1758,11 @@ follows the existing rules for ceiling locking.]}
   Policy EDF_Across_Priorities and package Dispatching.EDF are new.]}
 @end{Extend95}
 
-@begin{Diffword95}
+@begin{Diffword2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0055-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected definition
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected definition
   of active priority to avoid deadline inversion in an unusual case.]}
-@end{Diffword95}
+@end{Diffword2005}
 
 
 @LabeledClause{Priority Ceiling Locking}
@@ -3116,14 +3118,6 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   allowed in local objects in Ada 2005 whereas it would be allowed in original
   Ada 95. Such code is not portable, as other Ada compilers may have had a
   controlled part, and thus would be illegal under the restriction.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0013-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Changed so that
-  coextensions of types that require nested finalization are also
-  prohibited; this is done by prohibiting @nt{allocator}s rather than
-  objects of specific access types. It seems unlikely that any program
-  depending on this restriction would violate it in this blatant manner,
-  so it is expected that very few programs will be affected by this change.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -3153,13 +3147,26 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
   @ChgAdded{Version=[2],Text=[Restriction No_Asynchronous_Control is now
   obsolescent.]}
+@end{DiffWord95}
 
+@begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Improved the wording
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Changed so that coextensions of types that require nested finalization are
+  also prohibited; this is done by prohibiting @nt{allocator}s rather than
+  objects of specific access types. It seems unlikely that any program depending
+  on this restriction would violate it in this blatant manner, so it is expected
+  that very few programs will be affected by this change.]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Improved the wording
   of various restrictions to make it clearer that they prohibit
   things that would otherwise be legal, and to word them as
   definitions, not @LegalityTitle;.]}
-@end{DiffWord95}
+@end{DiffWord2005}
+
 
 
 @LabeledClause{Monotonic Time}
@@ -3848,11 +3855,13 @@ object.]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Synchronous_Task_Control is now Preelaborated,
   so it can be used in preelaborated units.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0168-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
-  @b<Amendment 2:> Child package Ada.Synchronous_Task_Control.EDF is new.]}
 @end{Extend95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0168-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Child
+  package Ada.Synchronous_Task_Control.EDF is new.]}
+@end{Extend2005}
 
 
 
@@ -5240,12 +5249,12 @@ Timing_Event objects.]}
   The package Real_Time.Timing_Events is new.]}
 @end{Extend95}
 
-@begin{Diffword95}
+@begin{Diffword2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0094-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Reworded to eliminate a
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Reworded to eliminate a
   deadlock condition if the event time is in the past and a handler is currently
   executing. This is technically an inconsistency, but only if a program is
   depending on deadlocking; since it is impossible to imagine how that could
   be useful, we have not documented this as an inconsistency.]}
-@end{Diffword95}
+@end{Diffword2005}
 

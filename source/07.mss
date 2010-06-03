@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2009/12/18 07:15:33 $}
+@Comment{$Date: 2010/05/08 06:31:33 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.102 $}
+@Comment{$Revision: 1.103 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1511,12 +1511,14 @@ has been moved to @lquotes@;Obsolescent Features.@rquotes@;
   @ChgAdded{Version=[2],Text=[Revised the note on operations of partial views
   to reflect that limited types do have an assignment operation, but not
   @nt{assignment_statement}s.]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Revised the wording to say
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Revised the wording to say
   that predefined operations still exist even if they are never declared,
   because it is possible to reference them in a generic unit.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledClause{Deferred Constants}
@@ -1740,12 +1742,14 @@ they are simply a special case of @nt<object_declaration>s.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
   @ChgAdded{Version=[2],Text=[Added matching rules for subtypes that
   exclude null.]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0062-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected rules so
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected rules so
   that the intent that a full constant may have a null exclusion even
   if the deferred constant does not is actually met.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledClause{Limited Types}
@@ -2230,30 +2234,32 @@ than being a subclause of
   @ChgAdded{Version=[2],Text=[Rewrote the definition of limited to ensure that
   interfaces are covered, but that limitedness is not inherited from interfaces.
   Derived types that explicitly include @key{limited} are now also covered.]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0052-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a definition for
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a definition for
   immutably limited types, so that the fairly complex definition does
   not need to be repeated in rules elsewhere in the Standard.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> The built-in-place rules
+  @ChgAdded{Version=[3],Text=[@b<Correction:> The built-in-place rules
   are consolidated in @RefSecNum{Assignment and Finalization}, and thus
   they are removed from this clause.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0087-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Fixed an oversight: class-wide
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Fixed an oversight: class-wide
   types were never defined to be limited, even if their associated specific
-  type is. It is thought that this oversight was never implemented by any
-  compiler, thus we have not classified it as an incompatibility.]}
+  type is. It is thought that this oversight was never implemented incorrectly
+  by any compiler, thus we have not classified it as an incompatibility.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0178-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added incomplete views
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added incomplete views
   to the list of reasons for a view of a type to be limited. This is not
   a change as the definition already was in
   @RefSecNum{Incomplete Type Declarations}. But it is much better to have
   all of the reasons for limitedness together.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledRevisedClause{Version=[3],New=[Assignment and Finalization],Old=[User-Defined Assignment and Finalization]}
@@ -3104,9 +3110,11 @@ Controlled types and user-defined finalization are new to Ada 95.
   have Initialize called for them to say that it is done for all objects that
   are initialized by default. This is needed so that all of the new cases
   are covered.]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Eliminated coextensions
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Eliminated coextensions
   from the @ldquote@;needs finalization@rdquote rules, as this cannot be
   determined in general in the compilation unit that declares the type.
   (The designated type of the coextension may have been imported as a
@@ -3116,22 +3124,22 @@ Controlled types and user-defined finalization are new to Ada 95.
   or that coextensions cannot happen.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the
   @ldquote@;needs finalization@rdquote rules to include class-wide types,
   as a future extension can include a part that needs finalization.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0026-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the
   @ldquote@;needs finalization@rdquote rules to clearly say that they
   ignore privacy.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Changed @ldquote@;built in place@rdquote
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Changed @ldquote@;built in place@rdquote
   to @RuntimeTitle and centralized the rules here. This eliminates the
   fiction that built in place is just a combination of a permission and
   a requirement; it clearly has noticable semantic effects. This wording
   change is not intended to change the semantics of any correct Ada program.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Completion and Finalization}
@@ -3970,12 +3978,12 @@ the rules here refer to the task-waiting rules of Section 9.
 
 @begin{Inconsistent95}
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0066-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2:>
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2 Correction:>
   Changed the definition
   of the master of an anonymous object used to directly initialize an
   object, so it can be finalized immediately rather than having to hang
-  around as long as the object. In this case, the Amendment 1 definition was
-  inconsistent with Ada 95, and Amendment 2 changes it back. It is unlikely
+  around as long as the object. In this case, the Ada 2005 definition was
+  inconsistent with Ada 95, and Ada 2012 changes it back. It is unlikely
   that many compilers implemented the rule as written in Amendment 1,
   so an inconsistency is unlikely to arise in practice.]}
 @end{Inconsistent95}
@@ -4013,20 +4021,23 @@ the rules here refer to the task-waiting rules of Section 9.
   @ChgAdded{Version=[2],Text=[Clarified that a coextension is finalized at
   the same time as the outer object. (This was intended for Ada 95, but since
   the concept did not have a name, it was overlooked.)]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0064-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Removed a redundant rule,
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Removed a redundant rule,
   which is now covered by the additional places where masters are defined.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0099-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Clarified the finalization
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified the finalization
   rules so that there is no doubt that privacy is ignored, and to ensure
   that objects of classwide interface types are finalized based on their
-  concrete type.]}
+  specific concrete type.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0107-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Allowed premature finalization
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Allowed premature finalization
   of parts of failed @nt{allocator}s. This could be an inconsistency, but the
   previous behavior is still allowed and there is no requirement that
   implementations take advantage of the permission.]}
-@end{DiffWord95}
+@end{DiffWord2005}
+

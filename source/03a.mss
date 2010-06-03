@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/04/24 06:27:50 $}
+@Comment{$Date: 2010/05/08 06:31:32 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.97 $}
+@Comment{$Revision: 1.98 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1486,12 +1486,14 @@ The description of S'Base has been moved to
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Added wording to include access result types
   in the kinds of operations that operate on a type T.]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0128-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> The implicitly declared "/="
+  @ChgAdded{Version=[3],Text=[@b<Correction:> The implicitly declared "/="
   for a primitive "=" operator is also primitive; this makes it eligible
   to be made visible by a @key[use type] clause.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledClause{Objects and Named Numbers}
@@ -1824,40 +1826,43 @@ Reading and updating now includes the case of evaluating or
 assigning to an enclosing object.
 @end{DiffWord83}
 
-@begin{Extend95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0015-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}@b<Amendment 2:>
-  Added wording to allow
-  return objects to be declared as constants, and corrected the definition
-  of return objects as objects.]}
-@end{Extend95}
-
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Clarified that the return object is the object
   created by a function call.]}
+@end{DiffWord95}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0015-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:>
+  Added wording to allow
+  return objects to be declared as constants, and corrected the definition
+  of return objects as objects.]}
+@end{Extend2005}
+
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1],ARef=[AI05-0041-1],ARef=[AI05-0093-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a definition of
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a definition of
   @i<known to be constrained>, for use in other rules.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0003-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> The result of a
-  @nt{qualified_expression} is defined to be a constant view and is defined
-  to be an object if the operand of the @nt{qualified_expression} is an object.
-  These definitions, combined with some grammar changes, allows
-  @nt{qualified_expression}s to be used in more places.]}
-
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0054-2]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> We now recognize the fact
+  @ChgAdded{Version=[3],Text=[@b<Correction:> We now recognize the fact
   that not all declared constant objects are immutable; for those that
   a variable view can be constructed, they can be changed via that view.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0120-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added the current instance of
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added the current instance of
   a protected object to the list of constant views; since the list
   claims to include all possibilities, it had better include that one.]}
-@end{DiffWord95}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0003-1]}
+  @ChgAdded{Version=[3],Text=[The result of a
+  @nt{qualified_expression} is defined to be a constant view and is defined
+  to be an object if the operand of the @nt{qualified_expression} is an object.
+  These definitions, combined with some grammar changes, allows
+  @nt{qualified_expression}s to be used in more places. See
+  @RefSecNum{Names} for details.]}@ChgNote{This is defined an extension in @RefSecNum{Names}.}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Object Declarations}
@@ -3194,16 +3199,6 @@ replaces the Ada 83 concept of "collection."
 These concepts are similar, but not the same.
 @end{DiffWord83}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0096-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b<Amendment 2:>
-  Added a (re)check that limited type extensions never are derived from
-  non-limited types in generic private parts. This is disallowed as it would
-  make it possible to pass a limited object to a non-limited class-wide type,
-  which could then be copied. This is only possible using Ada 2005 syntax,
-  so examples in existing programs should be very rare.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00401-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -3227,11 +3222,23 @@ These concepts are similar, but not the same.
   types@rquotes and used it in wording elsewhere; also specified the
   language-defined categories that form classes of types (this was never
   normatively specified in Ada 95.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0164-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording to ensure that
-  anonymous access-to-subprogram types don't get modified on derivation.]}
 @end{DiffWord95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0096-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Added a (re)check that limited type extensions never are derived from
+  non-limited types in generic private parts. This is disallowed as it would
+  make it possible to pass a limited object to a non-limited class-wide type,
+  which could then be copied. This is only possible using Ada 2005 syntax,
+  so examples in existing programs should be very rare.]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0164-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to ensure that
+  anonymous access-to-subprogram types don't get modified on derivation.]}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Derivation Classes}
@@ -4521,19 +4528,6 @@ The definition of S'Base has been moved here from
 More explicit rules are provided for nongraphic characters.
 @end{DiffWord83}
 
-@begin{Inconsistent95}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0181-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2 correction:>
-  Soft hyphen (position 173) is nongraphic in ISO/IEC 10646:2003. Thus, we have given it
-  the language-defined name @i{soft_hyphen}. This changes the result of
-  Character'Image (and all of the related types and attributes) for this
-  character, and changes the behavior of Character'Value (and all of the
-  related types and attributes for this character), and (in unusual circumstances),
-  changes the result for Character'Width (and all of the related types and
-  attributes). The vast majority of programs won't see any difference, as they
-  are already prepared to handle nongraphic characters.]}
-@end{Inconsistent95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -4550,6 +4544,20 @@ More explicit rules are provided for nongraphic characters.
   Wide_Wide_Image and Wide_Wide_Value, but the images of numeric types
   have not changed.]}
 @end{DiffWord95}
+
+@begin{Inconsistent2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0181-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}@b<Correction:>
+  Soft hyphen (position 173) is nongraphic in ISO/IEC 10646:2003. Thus, we have given it
+  the language-defined name @i{soft_hyphen}. This changes the result of
+  Character'Image (and all of the related types and Image attributes)
+  for this character, and changes the behavior of Character'Value (and all of
+  the related types and Value attributes) for this character, and
+  (in unusual circumstances), changes the result for Character'Width (and all
+  of the related types and Width attributes). The vast majority of programs
+  won't see any difference, as they are already prepared to handle nongraphic
+  characters.]}
+@end{Inconsistent2005}
 
 
 @LabeledSubClause{Enumeration Types}
@@ -4685,11 +4693,12 @@ We emphasize the fact that an enumeration literal denotes
 a function, which is called to produce a value.
 @end{DiffWord83}
 
-@begin{DiffWord95}
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0006-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Defined the result
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Defined the result
   subtype of an enumeration literal to close a minor language hole.]}
-@end{DiffWord95}
+@end{DiffWord2005}
+
 
 @LabeledSubClause{Character Types}
 
@@ -4933,12 +4942,14 @@ Context is used to resolve their type.
   non-standard interpretation of character sets; an implementation can
   do what it wants in a non-standard mode, so there isn't much point to
   any advice.]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0181-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Removed the position numbers
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Removed the position numbers
   of nongraphic characters from the text, as it is wrong and thus
   misleading.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Boolean Types}

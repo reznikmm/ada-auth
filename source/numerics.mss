@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.59 $ $Date: 2009/12/18 07:15:34 $ $Author: randy $ }
+@comment{ $Revision: 1.60 $ $Date: 2010/05/08 06:31:33 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2009/12/18 07:15:34 $}
+@Comment{$Date: 2010/05/08 06:31:33 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -3224,11 +3224,11 @@ and Numerics.Generic_Real_Arrays.Eigensystem fails to converge.]}]}
   are new.]}
 @end{Extend95}
 
-@begin{Diffword95}
+@begin{Diffword2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0047-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected various
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected various
   accuracy and definition issues.]}
-@end{Diffword95}
+@end{Diffword2005}
 
 
 @LabeledAddedSubClause{Version=[2],Name=[Complex Vectors and Matrices]}
@@ -4364,8 +4364,8 @@ the real operand to complex.]}]}
   Just checking if anyone reads this stuff.}]}
 @end{Extend95}
 
-@begin{Diffword95}
+@begin{Diffword2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0047-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected various
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected various
   accuracy and definition issues.]}
-@end{Diffword95}
+@end{Diffword2005}

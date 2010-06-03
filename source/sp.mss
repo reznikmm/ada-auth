@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.55 $ $Date: 2010/04/03 06:48:07 $ $Author: randy $ }
+@comment{ $Revision: 1.56 $ $Date: 2010/05/08 06:31:34 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2010/04/03 06:48:07 $}
+@Comment{$Date: 2010/05/08 06:31:34 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -661,13 +661,6 @@ a protected procedure that is an interrupt handler.
   use of Attach_Handler and Interrupt_Handler are identical. This means
   that uses of pragma Interrupt_Handler outside of the target protected type
   or single protected object are now illegal.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0033-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added missing generic
-  contract wording for the pragma Attach_Handler and Interrupt_Handler.
-  This means that nested instances with these pragmas in the private part
-  are now illegal. This is not likely to occur in practice.]}
-
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -686,6 +679,15 @@ a protected procedure that is an interrupt handler.
   restriction on the use of the type, as permitted by the @ImplPermTitle
   above.]}
 @end{Diffword95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Added missing generic contract wording for the pragma Attach_Handler and
+  Interrupt_Handler. This means that nested instances with these pragmas in the
+  private part are now illegal. This is not likely to occur in practice.]}
+@end{Incompatible2005}
+
 
 
 @LabeledSubClause{The Package Interrupts}
@@ -1461,12 +1463,15 @@ because the pragma was not used to mark variables as shared.
   @ChgAdded{Version=[2],Text=[Added wording to clarify that a slice of an
   object of an atomic type is not atomic, just like a component of an atomic
   type is not (necessarily) atomic.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added pragmas Independent
-  and Independent_Components to eliminate ambiguity about independent
-  addressibility.]}
 @end{Diffword95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:>
+  Pragmas Independent and Independent_Components are new; they eliminate
+  ambiguity about independent addressibility.]}
+@end{Extend2005}
+
 
 
 @LabeledRevisedClause{Version=[2],New=[Task Information],

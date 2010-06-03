@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2009/12/18 07:15:34 $}
+@Comment{$Date: 2010/05/08 06:31:33 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.86 $}
+@Comment{$Revision: 1.87 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -979,12 +979,14 @@ Standard.Standard.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00331-01]}
   @ChgAdded{Version=[2],Text=[Clarified the wording so that a grandchild
   generic unit will work as expected.]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0108-1],ARef=[AI05-0129-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Clarified the wording so that
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified the wording so that
   it is clear that limited views of types never have discriminants and never
   are of incomplete types.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Context Clauses - With Clauses}
@@ -1568,13 +1570,6 @@ definition in @RefSecNum{Use Clauses}.
   declared in private child packages, and thus cannot be allowed. This was
   allowed by mistake in Ada 95; a subprogram that does this will now be
   illegal.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0040-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added missing rule that
-  a limited with clause cannot name an ancestor unit. This is incompatible
-  if Amendment 1 program does this, but as this is a new Ada 2005 feature and
-  the unintentionally allowed capability is not useful, the
-  incompatibility is very unlikely to occur in practice.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -1594,14 +1589,24 @@ definition in @RefSecNum{Use Clauses}.
   allow using private units in more locations than in Ada 95.]}
 @end{Extend95}
 
-@begin{DiffWord95}
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0040-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Added missing rule that
+  a limited with clause cannot name an ancestor unit. This is incompatible
+  if an Ada 2005 program does this, but as this is a new Ada 2005 feature and
+  the unintentionally allowed capability is not useful, the
+  incompatibility is very unlikely to occur in practice.]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0077-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Fixed wording so that
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Fixed wording so that
   we are not checking whether something in a @nt{context_clause}
   is @ldquote@;within the scope of@rdquote something, as @nt{context_clause}s
   are never included in anything's scope. The intended meaning is unchanged,
   however.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Subunits of Compilation Units}
@@ -2290,12 +2295,14 @@ for which there is not an overriding pragma applied directly to the instance.]}]
   @ChgRef{Version=[2], Kind=[AddedNormal]}
   @ChgAdded{Version=[2], Text=[Ensure that confirming pragmas are always allowed.]}
   @end{itemize}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0132-1]}
-  @ChgAdded{Version=[3], Text=[@b<Amendment 2:> A library unit pragma must
-  apply directly to a library unit, even if no name is given in the pragma.]}
-
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0132-1]}
+  @ChgAdded{Version=[3], Text=[@b<Correction:> A library unit pragma must
+  apply directly to a library unit, even if no name is given in the pragma.]}
+@end{DiffWord2005}
+
 
 @LabeledSubClause{Environment-Level Visibility Rules}
 
@@ -2476,7 +2483,6 @@ that were with-ed by our parent, etc.
 @end{DiffWord95}
 
 
-@NewPage
 @LabeledClause{Program Execution}
 
 @begin{Intro}
@@ -3839,26 +3845,6 @@ required to appear last.
   object to initialize a library-level object; that isn't allowed in Ada 2005. But such a unit wouldn't really
   be preelaborable, and Ada 95 compilers can reject such units (as this
   is a Binding Interpretation), so such units should be very rare.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0028-1]}
-  @ChgAdded{Version=[3],Text=[@B<Amendment 2:> Corrected a serious
-  unintended incompatibility with Ada 95 in the new preelaboration wording
-  @em explicit initialization of objects of types that don't have
-  preelaborable initialization was not allowed. Amendment 2 switches
-  back to the Ada 95 rule in these chases. This is unlikely to
-  occur in practice, as it is unlikely that a compiler would have
-  implemented the more restrictive rule (it would fail many ACATS tests
-  if it did).]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0035-1]}
-  @ChgAdded{Version=[3],Text=[@B<Amendment 2:> Added an assume-the-worst
-  rule for generic bodies (else they would never be checked for purity)
-  and added the boilerplate so that the entire generic specification is
-  rechecked. Also fixed wording to have consistent handling for subunits
-  for Pure and Preelaborate. An Ada 95 program could have depended on
-  marking a generic pure that was not really pure, although this
-  would defeat the purpose of the categorization and likely cause
-  problems with distributed programs.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -3875,30 +3861,6 @@ required to appear last.
   to omit calls was adjusted accordingly (which also fixes a hole in Ada 95, as
   access parameters are allowed, and changes in the values accessed by them
   must be taken into account).]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0034-1]}
-  @ChgAdded{Version=[3],Text=[@B<Amendment 2:> Added wording so that
-  a limited view is always treated as pure, no matter what categorization
-  is used for the originating unit. This was undefined in Amendment 1.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0035-1]}
-  @ChgAdded{Version=[3],Text=[@B<Amendment 2:> Adjusted wording so that
-  subunits can be pure (they are not a @nt<library_item>, but they
-  are a compilation unit).]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0035-1]}
-  @ChgAdded{Version=[3],Text=[@B<Amendment 2:> Adjusted wording so
-  that the rules for access types only apply to non-derived types
-  (derived types share their storage pool with their parent, so if
-  the parent access type is legal, so is any derived type.)]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0028-1]}
-  @ChgAdded{Version=[3],Text=[@B<Amendment 2:> Fixed minor issues with
-  preelaborable initialization (PI): null Initialize procedures do not make
-  a type non-PI; formal types with pragma PI can be assumed to have PI;
-  formal extensions are assumed to not have PI; all composite types
-  can have pragma PI (so that the possibility of hidden Initialize routines
-  can be handled).]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -3910,3 +3872,55 @@ required to appear last.
   @ChgAdded{Version=[2],Text=[Disallowed pragma Elaborate and Elaborate_All
   for packages that are mentioned in a @nt{limited_with_clause}.]}
 @end{DiffWord95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0028-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@B<Correction:> Corrected a serious
+  unintended incompatibility with Ada 95 in the new preelaboration wording
+  @em explicit initialization of objects of types that don't have
+  preelaborable initialization was not allowed. Amendment 2 switches
+  back to the Ada 95 rule in these chases. This is unlikely to
+  occur in practice, as it is unlikely that a compiler would have
+  implemented the more restrictive rule (it would fail many ACATS tests
+  if it did).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0035-1]}
+  @ChgAdded{Version=[3],Text=[@B<Correction:> Added an assume-the-worst
+  rule for generic bodies (else they would never be checked for purity)
+  and added the boilerplate so that the entire generic specification is
+  rechecked. Also fixed wording to have consistent handling for subunits
+  for Pure and Preelaborate. An Ada 95 program could have depended on
+  marking a generic pure that was not really pure, although this
+  would defeat the purpose of the categorization and likely cause
+  problems with distributed programs.]}
+@end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0035-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@B<Correction:>
+  Adjusted wording so that
+  subunits can be pure (they are not a @nt<library_item>, but they
+  are a compilation unit).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0035-1]}
+  @ChgAdded{Version=[3],Text=[@B<Correction:> Adjusted wording so
+  that the rules for access types only apply to non-derived types
+  (derived types share their storage pool with their parent, so if
+  the parent access type is legal, so is any derived type.)]}
+@end{Extend2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0034-1]}
+  @ChgAdded{Version=[3],Text=[@B<Correction:> Added wording so that
+  a limited view is always treated as pure, no matter what categorization
+  is used for the originating unit. This was undefined in Ada 2005.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0028-1]}
+  @ChgAdded{Version=[3],Text=[@B<Correction:> Fixed minor issues with
+  preelaborable initialization (PI): null Initialize procedures do not make
+  a type non-PI; formal types with pragma PI can be assumed to have PI;
+  formal extensions are assumed to not have PI; all composite types
+  can have pragma PI (so that the possibility of hidden Initialize routines
+  can be handled).]}
+@end{DiffWord2005}
+

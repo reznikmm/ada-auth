@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:02 $}
+@Comment{$Date: 2010/05/08 06:31:33 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.36 $}
+@comment{$Revision: 1.37 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -20,7 +20,7 @@ other library units are children of these:]
 @Leading@Keepnext
 @ChgRef{Version=(1),Kind=(Revised),Ref=(8652/0047),ARef=(AI95-00081-01)}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00424-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0069-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0069-1],ARef=[AI05-0166-1],ARef=[AI05-0168-1]}
 @ @*@ @;@comment{paragraph number here, paragraph numbers seem to intrude on
 the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @begin{Display}
@@ -64,7 +64,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Information @em @RefSecNum{The Package Directories}
 @\@\Dispatching @em @RefSecNum{The Task Dispatching Model}
 @\@\@\EDF @em @RefSecNum{Earliest Deadline First Dispatching}
-@\@\@\Round_Robin @em @RefSecNum{Round Robin Dispatching}
+@Chg{Version=[3],New=[@\@\@\Non_Preemptive @em @RefSecNum{Non-Preemptive Dispatching}
+], Old=[]}@\@\@\Round_Robin @em @RefSecNum{Round Robin Dispatching}
 ), Old=()}@\@\Dynamic_Priorities @em @RefSecNum{Dynamic Priorities}>
 @NewColumn@Comment{This should be conditional for version 2, but not with the current generator}
 @Noparanum@shrink<@Chg{Version=[2],New=[Standard (@i{...continued})
@@ -136,7 +137,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Wide_Wide_Unbounded @em @RefSecNum{Wide_Wide_String Handling}
 @\@\@\@\Wide_Wide_Hash @em @RefSecNum{Wide_Wide_String Handling}
 ), Old=()}@\@\Synchronous_Task_Control @em @RefSecNum{Synchronous Task Control}
-@\@\Tags @em @RefSecNum{Tagged Types and Type Extensions}
+@Chg{Version=[3],New=[@\@\@\EDF @em @RefSecNum{Synchronous Task Control}
+], Old=[]}@\@\Tags @em @RefSecNum{Tagged Types and Type Extensions}
 @Chg{Version=[2],New=(@\@\@\Generic_Dispatching_Constructor @em @RefSecNum{Tagged Types and Type Extensions}
 ), Old=()}@\@\Task_Attributes @em @RefSecNum{The Package Task_Attributes}
 @\@\Task_Identification @em @RefSecNum{The Package Task_Identification}
@@ -280,21 +282,23 @@ The order and lettering of the annexes has been changed.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00424-01]}
   @ChgAdded{Version=[2],Text=[Added new units to the list of
   predefined units.]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0048-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording to ban
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to ban
   redispatching unless it is explicitly required, in order to safeguard
   portability when overriding language-defined routines.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0060-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a permission to
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a permission to
   omit pragma Remote_Types from language-defined units if Annex E is
   not supported. (@RefSecNum{Conformity of an Implementation with the Standard}
   says that am unsupported Annex feature must be rejected at compile-time or
   raise an exception, and surely we don't want either of those to happen
   with predefined units.)]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added the generic package
-  Containers.Indefinite_Holders to the list of predefined units.]}
-@end{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0166-1],ARef=[AI05-0168-1]}
+  @ChgAdded{Version=[3],Text=[Added various new units to the
+  list of predefined units.]}
+@end{DiffWord2005}

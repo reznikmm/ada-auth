@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2010/04/24 06:27:50 $}
+@Comment{$Date: 2010/05/08 06:31:32 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -736,7 +736,7 @@ we are asking whether the set of behaviors changes.)
 @ChgRef{Version=[3],Kind=[Revised]}
 This is not part of the definition of the language,
 and does not appear in the @Chg{Version=[2],New=[Ada 95@Chg{Version=[3],New=[,],Old=[ or]}
-Ada 2005@Chg{Version=[3],New=[, or Ada 2012]} RM],Old=[RM95]}.
+Ada 2005@Chg{Version=[3],New=[, or Ada 2012],Old=[]} RM],Old=[RM95]}.
 @end{Inconsistent83}
 
 @begin{Incompatible83}
@@ -752,7 +752,7 @@ into an exception, or into an illegality, to be upwardly incompatible.
 @ChgRef{Version=[3],Kind=[Revised]}
 This is not part of the definition of the language,
 and does not appear in the @Chg{Version=[2],New=[Ada 95@Chg{Version=[3],New=[,],Old=[ or]}
-Ada 2005@Chg{Version=[3],New=[, or Ada 2012]} RM],Old=[RM95]}.
+Ada 2005@Chg{Version=[3],New=[, or Ada 2012],Old=[]} RM],Old=[RM95]}.
 @end{Incompatible83}
 
 @begin{Extend83}
@@ -767,7 +767,7 @@ The vast majority of language changes fall into this category.
 @ChgRef{Version=[3],Kind=[Revised]}
 This is not part of the definition of the language,
 and does not appear in the @Chg{Version=[2],New=[Ada 95@Chg{Version=[3],New=[,],Old=[ or]}
-Ada 2005@Chg{Version=[3],New=[, or Ada 2012]} RM],Old=[RM95]}.
+Ada 2005@Chg{Version=[3],New=[, or Ada 2012],Old=[]} RM],Old=[RM95]}.
 
 @Leading@ @* @Comment{Two blank lines: why? Because it was in the original.}
 @*
@@ -788,7 +788,7 @@ changes, but only the @lquotes@;interesting@rquotes@; ones.
 @ChgRef{Version=[3],Kind=[Revised]}
 This is not part of the definition of the language,
 and does not appear in the @Chg{Version=[2],New=[Ada 95@Chg{Version=[3],New=[,],Old=[ or]}
-Ada 2005@Chg{Version=[3],New=[, or Ada 2012]} RM],Old=[RM95]}.
+Ada 2005@Chg{Version=[3],New=[, or Ada 2012],Old=[]} RM],Old=[RM95]}.
 @end{DiffWord83}
 
 @begin{Discussion}
@@ -997,11 +997,6 @@ very well may be extensions, as early Ada 2005 implementations may not implement
 the extension. Therefore, some Ada 2005 implementations may be able to compile
 the examples, while others may not. In constrast, Ada 2012 compilers will always
 support the extensions. Therefore, we document these for completeness.]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Unmarked extensions are updates to the
-original Ada 2005 definition (Corrigendum 1 plus Amendment 1) introduced
-by Amendment 2.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[This is not part of the definition of the language,

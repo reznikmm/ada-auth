@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2009/12/18 07:15:34 $}
+@Comment{$Date: 2010/05/08 06:31:33 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -882,11 +882,16 @@ followed.]}]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00426-01]}
   @ChgAdded{Version=[2],Text=[Clarified that the result of Unchecked_Conversion
   for scalar types can be invalid, but not abnormal.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0078-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2>: Relaxed the alignment
-  requirement slightly, giving a defined result in more cases.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0078-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Relaxed the alignment
+  requirement slightly, giving a defined result in more cases.]}
+  @ChgNote{This is not an extension, as a program taking advantage of this
+  change was (and very well might have worked) legal before the change; it's
+  just guaranteed to be portable now.}
+@end{Diffword2005}
 
 
 @LabeledSubClause{Data Validity}
@@ -1225,18 +1230,6 @@ In fact, the only safe thing to do to an abnormal object is
 to assign to the object as a whole.
 @end{DiffWord83}
 
-@begin{Extend95}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0054-2]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
-  Common programming techniques such as squirreling an access to a
-  controlled object during initialization and using a self-referencing
-  discriminant (the so-called @lquote@;Rosen trick@rdquote) no longer
-  are immediately erroneous if the object is declared constant,
-  so these techniques can be used portably and safely. Practically,
-  these techniques already worked as compilers did not take much advantage
-  of this rule, so the impact of this change will be slight.]}
-@end{Extend95}
-
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00167-01]}
   @ChgAdded{Version=[2],Text=[The description of erroneous execution for
@@ -1247,6 +1240,21 @@ to assign to the object as a whole.
   @ChgAdded{Version=[2],Text=[Clarified the definition of objects that can
   become abnormal; made sure that all of the possibilities are included.]}
 @end{DiffWord95}
+
+@begin{Diffword2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0054-2]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Common programming
+  techniques such as squirreling an access to a
+  controlled object during initialization and using a self-referencing
+  discriminant (the so-called @lquote@;Rosen trick@rdquote) no longer
+  are immediately erroneous if the object is declared constant,
+  so these techniques can be used portably and safely. Practically,
+  these techniques already worked as compilers did not take much advantage
+  of this rule, so the impact of this change will be slight.]}
+  @ChgNote{This is not an extension, as such a program was already legal
+  (although erroneous).}
+@end{Diffword2005}
+
 
 
 @LabeledSubClause{The Valid Attribute}
@@ -2175,18 +2183,24 @@ objects incorrectly by missing various cases.
   @ChgAdded{Version=[2],Text=[Added wording to clarify that an @nt{allocator}
   for a coextension nested inside an outer @nt{allocator} shares
   the pool with the outer @nt{allocator}.]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0107-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Clarified when an implementation
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified when an implementation
   is allowed to call Allocate and Deallocate, and the requirements on such
   calls.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0116-1],ARef=[AI05-0193-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording to specify the
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0116-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to specify the
   alignment for an @nt{allocator} with a class-wide designated type comes from
-  the specific type that is allocated. Also changed the wording to allow larger
-  alignments, up to Max_Alignment_For_Allocation.]}
-@end{DiffWord95}
+  the specific type that is allocated.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0193-1]}
+  @ChgAdded{Version=[3],Text=[Added wording to allow larger
+  alignments for calls to Allocate made by an @nt{allocator}s,
+  up to Max_Alignment_For_Allocation. This eases implementation in some cases.]}
+@end{DiffWord2005}
 
 
 
@@ -2261,11 +2275,13 @@ same pool.]}
   @ChgAdded{Version=[2],Text=[Corrected the wording so that a
   fortune-telling compiler that can see the future execution of the
   program is not required.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0193-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> The Max_Alignment_For_Allocation
-  attribute is new.]}
 @end{DiffWord95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0193-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}The
+  Max_Alignment_For_Allocation attribute is new.]}
+@end{Extend2005}
 
 
 
@@ -2490,25 +2506,27 @@ This is implied by the rules of @RefSecNum{Formal Access Types}.
   @ChgAdded{Version=[2],Text=[The rules for coextensions are clarified
   (mainly by adding that term). In theory, this reflects no change from
   Ada 95 (coextensions existed in Ada 95, they just didn't have a name).]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a rule that using
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a rule that using
   a access-to-protected-subprogram is erroneous if the associated
   object no longer exists. It hard to imagine an alternative meaning here,
   and this has no effect on correct programs.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0107-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Moved the requirements
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Moved the requirements
   on an implementation-generated call to Deallocate to
   @RefSecNum{Storage Management}, in order to put all of the rules
   associated with implementation-generated calls to Allocate and Deallocate
   together.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0157-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording so that calling
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording so that calling
   an instance of Unchecked_Deallocation is treated similarly to @nt{allocator}s
   for access types where @nt{allocator}s would be banned.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Pragma Controlled}
@@ -2864,11 +2882,13 @@ use of the more efficient and safe one.
   @ChgAdded{Version=[2],Text=[The syntax of a @nt{restriction_parameter_argument}
   has been defined to better support restriction No_Dependence (see
   @RefSecNum{Language-Defined Restrictions}).]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2>: When restrictions are
-  checked has been clarified.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction>: When restrictions are
+  checked has been clarified.]}
+@end{DiffWord2005}
 
 
 @LabeledAddedSubclause{Version=[2], Name=[Language-Defined Restrictions]}
@@ -4074,16 +4094,6 @@ class-wide types descended from S.
   95 as well.]}
 @end{Inconsistent95}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0039-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b<Amendment 2:>
-  Added a requirement that stream
-  attributes be specified by a static subprogram name rather than a
-  dynamic expression. Expressions cannot provide any useful functionality
-  because of the freezing rules, and the possibility of them complicates
-  implementations. Only pathological programs should be affected.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00270-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -4097,14 +4107,6 @@ class-wide types descended from S.
   constructed attributes if all of the parent and (for extensions) extension
   components have available attributes. Ada 2005 adds the notion of
   availability to patch up some holes in the Corrigendum model.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0007-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Stream attributes
-  for scalar types can be specified with subprograms that take the first
-  subtype as well as the base type. This eliminates confusion about which
-  subtype is appropriate for attributes specified for partial views whose
-  full type is a scalar type. It also eliminates a common user error
-  (forgetting 'Base).]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -4164,22 +4166,46 @@ class-wide types descended from S.
   we don't define the default implementations of attributes that cannot be
   called (that is, aren't @lquotes@;available@rquotes@;). Also clarified when
   inheritance takes place.]}
+@end{DiffWord95}
 
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0039-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Added a requirement that stream
+  attributes be specified by a static subprogram name rather than a
+  dynamic expression. Expressions cannot provide any useful functionality
+  because of the freezing rules, and the possibility of them complicates
+  implementations. Only pathological programs should be affected.]}
+@end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0007-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:>
+  Stream attributes
+  for scalar types can be specified with subprograms that take the first
+  subtype as well as the base type. This eliminates confusion about which
+  subtype is appropriate for attributes specified for partial views whose
+  full type is a scalar type. It also eliminates a common user error
+  (forgetting 'Base).]}
+@end{Extend2005}
+
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0023-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the definition
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the definition
   of the default version S'Read and S'Input to be well-defined if
   S is a discriminated type with defaulted discriminants and
   some components require initialization and/or finalizations.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0065-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Defined remote access
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Defined remote access
   types to support external streaming, since that is their purpose.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0109-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Removed a misleading phrase
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Removed a misleading phrase
   which implies that Constraint_Error is raised for internal tags of the
   wrong type, when Tag_Error should be raised for such tags.]}
-@end{DiffWord95}
+@end{DiffWord2005}
+
 
 
 @LabeledClause{Freezing Rules}
@@ -5061,12 +5087,6 @@ Old=[@ntf{attribute_representation_clause}]} has been generalized.
   specific tagged type are frozen when the type is frozen, preventing dubious
   convention changes (and address clauses) after the freezing point. In both
   cases, the code is dubious and the workaround is easy.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0019-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Separated the freezing of
-  the profile from the rest of a subprogram, in order to reduce the impact
-  of the incompatibility noted above. (The effects were much more limiting
-  than expected.)]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -5083,10 +5103,20 @@ Old=[@ntf{attribute_representation_clause}]} has been generalized.
   @ChgAdded{Version=[2],Text=[Added wording that defines when a tag is created
   for a type (at the freezing point of the type). This is used to specify
   checking for uncreated tags (see @RefSecNum{Tagged Types and Type Extensions}).]}
+@end{DiffWord95}
 
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0019-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b<Correction:>
+  Separated the freezing of the profile from the rest of a subprogram, in order
+  to reduce the impact of the Ada 95 incompatibility noted above. (The effects
+  were much more limiting than expected.)]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0017-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Reworded so that
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Reworded so that
   incomplete types with a deferred completion aren't prematurely
   frozen.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2010/04/03 06:48:07 $}
+@Comment{$Date: 2010/05/08 06:31:33 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1148,17 +1148,6 @@ Some of the more stringent requirements are moved to
 @RefSec{Required Representation Support}.
 @end{DiffWord83}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0106-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b<Amendment 2:>
-  Specifying a language-defined aspect for a generic formal parameter is no
-  longer allowed. Most aspects could not be specified on these anyway; moreover,
-  this was not allowed in Ada 83, so it is unlikely that compilers are
-  supporting this as a capability (and it is not likely that they have a
-  consistent definition of what it means if it is allowed). Thus, we expect
-  this to occur rarely in existing programs.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -1204,9 +1193,22 @@ Some of the more stringent requirements are moved to
   used this capability). Also added
   wording to clearly define that subprogram inheritance works like derivation
   of subprograms.]}
+@end{DiffWord95}
 
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0106-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction 2:>
+  Specifying a language-defined aspect for a generic formal parameter is no
+  longer allowed. Most aspects could not be specified on these anyway; moreover,
+  this was not allowed in Ada 83, so it is unlikely that compilers are
+  supporting this as a capability (and it is not likely that they have a
+  consistent definition of what it means if it is allowed). Thus, we expect
+  this to occur rarely in existing programs.]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Defined that overriding of
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Defined that overriding of
   an aspect of representation only happens for a non-confirming representation
   item. This prevents a derived type from being considered to have
   only a confirming representation item when the value would be non-confirming
@@ -1214,10 +1216,11 @@ Some of the more stringent requirements are moved to
   This change just eliminates a wording confusion and ought not change any
   behavior.]}
 
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0112-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Defined a default naming for
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0112-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Defined a default naming for
   representation aspects that are representation pragmas.]}
-@end{DiffWord95}
+@end{DiffWord2005}
+
 
 
 @LabeledClause{Pragma Pack}
@@ -1329,12 +1332,14 @@ followed.]}]}
   ignore alignment requirements on types that don't have by-reference or
   aliased parts. This was always intended, but there was no wording to that
   effect.]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Fixed so that the
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Fixed so that the
   presence or absence of a confirming Component_Size representation
   clause does not change the meaning of pragma Pack.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 
@@ -2929,39 +2934,6 @@ In Ada 95, they are the same,
 except for certain explicit exceptions.
 @end{DiffWord83}
 
-@begin{Inconsistent95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI95-0095-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}
-  @b<Amendment 2 Correction:> An address attribute with a prefix of a
-  generic formal
-  subprogram whose actual parameter has convention Intrinsic now raises
-  Program_Error. Since it is unlikely that such an attribute would have done
-  anything useful (a subprogram with convention Intrinsic is not expected
-  to have a normal subprogram body), it is highly unlikely that any
-  existing programs would notice the difference, and any that do probably
-  are buggy.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI95-0113-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> User-specified
-  external tags that conflict with other external tags raise Program_Error
-  (or are optionally illegal). This was legal and did not raise an exception
-  in the past, although the effects were not defined. So while a program
-  might depend on such behavior, the results were not portable (even to
-  different versions of the same implementation). Such programs should be
-  rare.]}
-@end{Inconsistent95}
-
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0095-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b[Amendment 2 Correction:]
-  An address attribute with a prefix of a subprogram with convention Intrinsic is
-  now illegal. Such attributes are very unlikely to have provided a useful
-  answer (the intended meaning
-  of convention Intrinsic is that there is no actual subprogram body for
-  the operation), so this is highly unlikely to affect any existing programs
-  unless they have a hidden bug.]}
-@end{Incompatible95}
-
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to specify for
@@ -3004,17 +2976,51 @@ except for certain explicit exceptions.
   and for objects. This simplified the wording and eliminated confusion about
   which rules applied to objects, which applied to subtypes, and which applied
   to both.]}
+@end{DiffWord95}
 
+@begin{Inconsistent2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0095-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}
+  @b<Correction:> An address attribute with a prefix of a generic formal
+  subprogram whose actual parameter has convention Intrinsic now raises
+  Program_Error. Since it is unlikely that such an attribute would have done
+  anything useful (a subprogram with convention Intrinsic is not expected to
+  have a normal subprogram body), it is highly unlikely that any existing
+  programs would notice the difference, and any that do probably are buggy.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0113-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> User-specified
+  external tags that conflict with other external tags raise Program_Error
+  (or are optionally illegal). This was legal and did not raise an exception
+  in the past, although the effects were not defined. So while a program
+  might depend on such behavior, the results were not portable (even to
+  different versions of the same implementation). Such programs should be
+  rare.]}
+@end{Inconsistent2005}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0095-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b[Correction:]
+  An address attribute with a prefix of a subprogram with convention Intrinsic is
+  now illegal. Such attributes are very unlikely to have provided a useful
+  answer (the intended meaning
+  of convention Intrinsic is that there is no actual subprogram body for
+  the operation), so this is highly unlikely to affect any existing programs
+  unless they have a hidden bug.]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Improved the description
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Improved the description
   of erroneous execution for address clauses to make it clear that
   specifying an address inappropriate for the entity will lead to
   erroneous execution.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0116-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Added @ImplAdviceTitle for
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added @ImplAdviceTitle for
   the alignment of class-wide types.]}
-@end{DiffWord95}
+@end{DiffWord2005}
+
 
 
 

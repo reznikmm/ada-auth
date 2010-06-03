@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:02 $}
+@Comment{$Date: 2010/05/08 06:31:33 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1237,11 +1237,11 @@ generic parameters.
 @end{Extend95}
 
 
-@begin{Diffword95}
+@begin{Diffword2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0118-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a definition for
-  positional parameters, as this is missing from Ada 95 and later.]}
-@end{Diffword95}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a definition for
+  positional parameters, as this is missing from Ada 95 and Ada 2005.]}
+@end{Diffword2005}
 
 
 @LabeledClause{Formal Objects}
@@ -1867,12 +1867,14 @@ had to.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
   @ChgAdded{Version=[2],Text=[We use @lquotes@;determines a category@rquotes
   rather than class, since not all interesting properties form a class.]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2>: Updated the wording to
+  @ChgAdded{Version=[3],Text=[@b<Correction>: Updated the wording to
   acknowledge the possibility of operations that are never declared for an
   actual type but still can be used inside of a generic unit.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Formal Private and Derived Types}
@@ -2323,15 +2325,6 @@ run-time check to a compile-time check.
 @end{Incompatible83}
 
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0087-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b<Amendment 2:>
-  Added wording to
-  prevent a limited type from being passed to a nonlimited formal
-  derived type. While this was allowed, it would break the contract
-  for the limited type, so hopefully no programs actually depend on that.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01],ARef=[AI95-00401-01],ARef=[AI95-00419-01],ARef=[AI95-00443-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -2365,17 +2358,28 @@ run-time check to a compile-time check.
   @ChgAdded{Version=[2],Text=[We change to
   @lquotes@;determines a category@rquotes as that is the new terminology
   (it avoids confusion, since not all interesting properties form a class).]}
+@end{DiffWord95}
 
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0087-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Added wording to
+  prevent a limited type from being passed to a nonlimited formal
+  derived type. While this was allowed, it would break the contract
+  for the limited type, so hopefully no programs actually depend on that.]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Updated the wording to
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Updated the wording to
   acknowledge the possibility of operations that are never declared for an
   actual type but still can be used inside of a generic unit.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Fixed hole that failed
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Fixed hole that failed
   to define what happened for "=" for an untagged private type whose
   actual is class-wide.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Formal Scalar Types}
@@ -3187,13 +3191,15 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.]}
 @begin{Diffword95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00423-01]}
   @ChgAdded{Version=[2],Text=[Added matching rules for @nt{null_exclusion}s.]}
+@end{Diffword95}
 
+@begin{Diffword2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added matching rules for
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added matching rules for
   box formal subprograms for class-wide actual types, to make it
   possible to import subprograms via formal subprograms as well as
   by implicit primitive operations of a formal type.]}
-@end{Diffword95}
+@end{Diffword2005}
 
 
 @LabeledClause{Formal Packages}
@@ -3460,12 +3466,14 @@ an instantiation of a package with formal packages:}]}
   @ChgAdded{Version=[2],Text=[The description of which operations are
   visible in a formal package has been clarified. We also specify how matching
   is done when the actual is a formal package.]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0025-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Missing rules for generic
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Missing rules for generic
   parameters to parallel those in @RefSecNum{Generic Instantiation}
   were added.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledClause{Example of a Generic Package}

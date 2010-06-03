@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/04/24 06:27:51 $}
+@Comment{$Date: 2010/05/08 06:31:32 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.97 $}
+@Comment{$Revision: 1.98 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -896,17 +896,6 @@ Tagged types are a new concept.
   of these functions, it could fail when compiled with Ada 2005. Such code is
   not portable even between Ada 95 implementations, so it should be very
   rare.>}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI05-0113-1]}
-  @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 2005}
-  @b[Amendment 2 Correction:] Added wording specifying that Dependent_Tag
-  must raise Tag_Error if there is more than one type which matches the
-  requirements. If an implementation had returned a random tag of the matching
-  types, a program may have worked properly. However, such a program would
-  not be portable (another implementation may return a different tag) and the
-  conditions that would cause the problem are unlikely (most likely, a tagged
-  type extension declared in a generic body with multiple instances in the
-  same scope).]}
 @end{Inconsistent95}
 
 @begin{Incompatible95}
@@ -944,6 +933,21 @@ Tagged types are a new concept.
   that more nested type extensions will work properly. The wording does not
   require implementation changes for types that were allowed in Ada 95.]}
 @end{DiffWord95}
+
+@begin{Inconsistent2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0113-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}
+  @b[Correction:] Added wording specifying that Dependent_Tag
+  must raise Tag_Error if there is more than one type which matches the
+  requirements. If an implementation had returned a random tag of the matching
+  types, a program may have worked properly. However, such a program would
+  not be portable (another implementation may return a different tag) and the
+  conditions that would cause the problem are unlikely (most likely, a tagged
+  type extension declared in a generic body with multiple instances in the
+  same scope).]}
+@end{Inconsistent2005}
+
+
 
 @LabeledSubClause{Type Extensions}
 
@@ -1943,17 +1947,19 @@ The concept of dispatching operations is new.
   usually a dispatching operation, even though it is not a primitive
   operation. If they weren't dispatching, T'Class'Input and T'Class'Output
   wouldn't work.]}
+@end{Diffword95}
 
+@begin{Diffword2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0076-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Defined
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Defined
   @ldquote@;function with a controlling result@rdquote, as it is used
   in @RefSecNum{Abstract Types and Subprograms}.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0126-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected holes in the
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected holes in the
   definition of dynamic dispatching: the behavior for operations that are
   never declared and/or inherited from a progenitor were not specified.]}
-@end{Diffword95}
+@end{Diffword2005}
 
 
 @LabeledSubClause{Abstract Types and Subprograms}
@@ -2492,22 +2498,6 @@ but then clients of the package would not have visibility to T.
 @end{Discussion}
 @end{Notes}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0073-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@b<Amendment 2 Correction:>
-  Added rules to eliminate
-  holes with controlling access results and generic functions that return
-  abstract types. While these changes are technically incompatible, it
-  is unlikely that they could be used in a program without violating some
-  other rule of the use of abstract types.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0097-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Corrected a minor
-  glitch having to do with abstract null extensions. The Amendment 1
-  rule allowed such extensions to inherit concrete operations in some
-  rare cases. It is unlikely that these cases exist in user code.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00391-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -2537,13 +2527,30 @@ but then clients of the package would not have visibility to T.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00391-01]}
   @ChgAdded{Version=[2],Text=[We define the term @i<require overriding>
   to make other wording easier to understand.]}
+@end{Diffword95}
 
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0203-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Added wording to
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0073-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Added rules to eliminate holes with controlling access results and generic
+  functions that return abstract types. While these changes are technically
+  incompatible, it is unlikely that they could be used in a program without
+  violating some other rule of the use of abstract types.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0097-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected a minor
+  glitch having to do with abstract null extensions. The Ada 2005
+  rule allowed such extensions to inherit concrete operations in some
+  rare cases. It is unlikely that these cases exist in user code.]}
+@end{Incompatible2005}
+
+@begin{Diffword2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0203-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to
   disallow abstract return objects. These were illegal in Ada 2005 by other
   rules; the extension to support class-wide type better opened a hole which
   has now been plugged.]}
-@end{Diffword95}
+@end{Diffword2005}
 
 
 @LabeledAddedSubClause{Version=[2],Name=[Interface Types]}
@@ -2926,12 +2933,12 @@ operations which are intended to be implemented by task entries (see 9.1).]}
   facility provided in Java and other recent language designs.]}
 @end{Extend95}
 
-@begin{DiffWord95}
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0070-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the definition
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the definition
   of elaboration for an @nt{interface_type_definition} to match that
   of other type definitions.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledClause{Access Types}
@@ -3638,12 +3645,14 @@ types used as parameters allow passing of subprograms at any level.],Old=[]}
   @ChgAdded{Version=[2],Text=[The rules about aliased objects being constrained by
   their initial values now apply only to allocated objects, and thus have
   been moved to @RefSec{Allocators}.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0053-1]}
-  @ChgAdded{Version=[3],Text=[The rule about a current instance being aliased
-  now is worded in terms of immutably limited types. Return objects of
-  such types are also considered aliased.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0053-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> The rule about a current instance
+  being aliased now is worded in terms of immutably limited types. Return
+  objects of such types are also considered aliased.]}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Incomplete Type Declarations}
@@ -4181,23 +4190,6 @@ not at all) for different designated subtypes.
   @ChgAdded{Version=[2],Text=[A @nt{subtype_declaration} can be used to
   give a new name to an incomplete view of a type. This is valuable to
   give shorter names to entities imported with a @nt{limited_with_clause}.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0098-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Fixed the definition
-  so that an anonymous access-to-subprogram type can use an incomplete
-  view in the same way that a named access-to-subprogram type can.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0151-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Incomplete types now can be used
-  in subprogram declarations. The type has to be complete before any calls
-  or the body is declared. This reduces the places where access types are
-  required for type imported from limited views of packages.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0162-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Incomplete types now can be
-  completed by private types and private extensions. Since this can already
-  happen for limited views, there is no remaining reason to disallow it for
-  explicitly declared incomplete types.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -4207,12 +4199,33 @@ not at all) for different designated subtypes.
   neglected to give any rules for matching them with other types. Luckily,
   implementers did the right thing anyway. This change also makes it easier to
   describe the meaning of a limited view.]}
+@end{DiffWord95}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0098-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:>
+  Fixed the definition so that an anonymous access-to-subprogram type can use an
+  incomplete view in the same way that a named access-to-subprogram type can.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0151-1]}
+  @ChgAdded{Version=[3],Text=[Incomplete types now can be used
+  in subprogram declarations. The type has to be complete before any calls
+  or the body is declared. This reduces the places where access types are
+  required for type imported from limited views of packages.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0162-1]}
+  @ChgAdded{Version=[3],Text=[Incomplete types now can be
+  completed by private types and private extensions. Since this can already
+  happen for limited views, there is no remaining reason to disallow it for
+  explicitly declared incomplete types.]}
+@end{Extend2005}
+
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0208-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Changed the
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Changed the
   rules of uses of dereferences of incomplete views such that it does not
   introduce an unintentional incompatibility with Ada 83 and Ada 95.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Operations of Access Types}
@@ -5598,33 +5611,15 @@ to be passed to an access parameter of an access-to-subprogram type. The now
 illegal uses of 'Access can almost always be moved to the private part of the
 generic unit, where they are still legal (and rechecked upon instantiation for
 possibly dangling pointers).]}
-
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1]}
-@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Simplified the description
-of when a discriminant-dependent component is allowed as the prefix of
-'Access to when the object is known to be constrained. This fixes
-a confusion as to whether a subcomponent of an object that is not certain
-to be constrained can be used as a prefix of 'Access. The fix introduces
-an incompatibility, as the rule did not apply in Ada 95 if the prefix was
-a constant; but it now applies no matter what kind of object is involved.
-The incompatibility is not too bad, since most kinds of constants are
-known to be constrained.]}
-
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0041-1]}
-@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the checks
-for the constrainedness of the prefix of the Access attribute so that
-assume-the-worst is used in generic bodies. This may make some programs
-illegal, but those programs were at risk having objects disappear while
-valid access values still pointed at them.]}
 @end{Incompatible95}
 
 @begin{Extend95}
 @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0010],ARef=[AI95-00127-01]}
-@Chg{Version=[2],New=[@b<Corrigendum:> @Defn{extensions to Ada 95}
+@ChgAdded{Version=[2],Text=[@b<Corrigendum:> @Defn{extensions to Ada 95}
 Access attributes of objects of class-wide types
 can be used as the controlling parameter in a dispatching calls (see
 @RefSecNum{Dispatching Operations of Tagged Types}). This was an oversight in
-Ada 95.],Old=[]}
+Ada 95.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00235-01]}
 @ChgAdded{Version=[2],Text=[@b[Amendment Correction:] The type of the prefix
@@ -5649,18 +5644,6 @@ Result2 : Float := Zap (Int_Ptr'(Value'access)); -- @RI[Resolves in Ada 95 and A
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[This change is upward compatible; any expression
 that does not resolve by the new rules would have failed a Legality Rule.]}
-
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0082-1]}
-@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Eliminated the static
-accessibility definition for generic formal types, as the actual can be
-more or less nested than the generic itself. This allows programs
-that were illegal for Ada 95 and for Amendment 1 Ada 2005.]}
-
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1]}
-@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Eliminate the static accessibility
-definition for stand-alone objects of anonymous access-to-object types. This
-allows such objects to be used as temporaries without causing accessibility
-problems.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -5671,23 +5654,59 @@ expressions and function calls are masters.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00254-01],ARef=[AI95-00318-02],ARef=[AI95-00385-01],ARef=[AI95-00416-01]}
 @ChgAdded{Version=[2],Text=[Defined the accessibility of the various new kinds and
 uses of anonymous access types.]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0014-1]}
-@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the rules so that
-the accessibility of the object designated by an access object is that
-of the access type, even when no dereference is given. The accessibility
-was not specified in the past. This correction
-applies to both Ada 95 and Ada 2005.]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0024-1]}
-@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected accessibility
-rules for access discriminants so that no cases are omitted.]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0066-1]}
-@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Changed coextension
-rules so that coextensions that belong to an anonymous object are
-transfered to the ultimate object.]}
 @end{DiffWord95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Simplified the description of when a discriminant-dependent component is
+  allowed as the prefix of 'Access to when the object is known to be
+  constrained. This fixes a confusion as to whether a subcomponent of an object
+  that is not certain to be constrained can be used as a prefix of 'Access. The
+  fix introduces an incompatibility, as the rule did not apply in Ada 95 if the
+  prefix was a constant; but it now applies no matter what kind of object is
+  involved. The incompatibility is not too bad, since most kinds of constants
+  are known to be constrained.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0041-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the checks for the
+  constrainedness of the prefix of the Access attribute so that assume-the-worst
+  is used in generic bodies. This may make some programs illegal, but those
+  programs were at risk having objects disappear while valid access values still
+  pointed at them.]}
+@end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0082-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:>
+  Eliminated the static accessibility definition for generic formal types, as
+  the actual can be more or less nested than the generic itself. This allows
+  programs that were illegal for Ada 95 and for Ada 2005.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0148-1]}
+  @ChgAdded{Version=[3],Text=[Eliminate the static
+  accessibility definition for stand-alone objects of anonymous access-to-object
+  types. This allows such objects to be used as temporaries without causing
+  accessibility problems.]}
+@end{Extend2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0014-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the rules so that the
+  accessibility of the object designated by an access object is that of the
+  access type, even when no dereference is given. The accessibility was not
+  specified in the past. This correction applies to both Ada 95 and Ada 2005.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0024-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected accessibility rules for
+  access discriminants so that no cases are omitted.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0066-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Changed coextension rules so that
+  coextensions that belong to an anonymous object are transfered to the ultimate
+  object.]}
+@end{DiffWord2005}
+
 
 
 @LabeledClause{Declarative Parts}

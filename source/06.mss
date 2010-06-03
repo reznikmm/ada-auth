@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2010/04/24 06:27:51 $}
+@Comment{$Date: 2010/05/08 06:31:33 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.98 $}
+@Comment{$Revision: 1.99 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -415,12 +415,6 @@ The syntax rules for @nt{defining_designator} and
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
   @ChgAdded{Version=[2],Text=[The return type of a function can be an
   anonymous access type.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0143-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> The parameters of a function
-  can now have any mode. @i<Note: This extension is conditional on the
-  future approval of @AILink{AI=[AI05-0144-1],Text=[AI05-0144-1]}, which
-  makes calls with obvious order dependencies illegal.>]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -446,6 +440,12 @@ The syntax rules for @nt{defining_designator} and
   in @nt{operator_symbol}s in the same way as the underlying constructs.]}
 @end{DiffWord95}
 
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0143-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}The parameters
+  of a function can now have any mode.]}
+@end{Extend2005}
 
 @LabeledClause{Formal Parameter Modes}
 
@@ -576,68 +576,92 @@ is passed by copy or by reference.
 
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0144-2]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[Two @nt{name}s or @nt{prefix}es,
-@i<N1> and @i<N2>, are @i{known to denote the same object} if:@Defn{known to
-denote the same object}]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[Two @nt{name}s are
+@i{known to denote the same object} if:@Defn{known to denote the same object}]}
 
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[@i<N1> statically denotes a part of a stand-alone
-object or parameter, and @i<N2> statically denotes the same part of the same
+@ChgAdded{Version=[3],Text=[both @nt{name}s statically denote the same
 stand-alone object or parameter; or]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[@i<N1> is a @nt{selected_component} @i<P1.C1> that
-represents a component, @i<N2> is a @nt{selected_component} @i<P2.C2> that
-represents a component, @nt{prefix}es @i<P1> and @i<P2> are known to denote the
-same object, and selectors @i<C1> and @i<C2> are the same; or]}
+@ChgAdded{Version=[3],Text=[both @nt{name}s are @nt{selected_component}s,
+their @nt{prefix}es are known to denote the same object, and their
+@nt{selector_name}s denote the same component; or]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[@i<N1> is a dereference (implicit or
-explicit) of @i<P1>, @i<N2> is a dereference (implicit or explicit) of @i<P2>,
-and @nt{prefix}es @i<P1> and @i<P2> are known to denote the same object; or]}
+@ChgAdded{Version=[3],Text=[both @nt{name}s are dereferences (implicit or
+explicit), the dereferenced @nt{name}s are known to denote the same object, and
+both @nt{name}s have the same immediately enclosing statement or declaration;
+or]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[We need the requirement to have the
+  same enclosing statement in order to avoid problems with renames. Consider:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[   @key[type] Ref @key[is access] Some_Type;
+   Ptr : Ref := @key[new] Some_Type'(...);
+   X : Some_Type @key[renames] Ptr.@key[all];
+@key[begin]
+   Ptr := @key[new] Some_Type'(...);
+   P (Func_With_Out_Params (Ptr.@key[all], X));]}
+@end{Example}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[X and Ptr.@key[all] should not be
+  known to denote the same object, since they denote different allocated objects.]}
+@end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[@i<N1> is an @nt{indexed_component}
-@i<P1>(@i<I1>,...), @i<N2> is an @nt{indexed_component} @i<P2>(@i<I2>,...), the
-@nt{prefix} @i<P1> is known to denote the same object as the @nt{prefix} @i<P2>,
-and for each index of the @nt{indexed_component}, @i<I1> and @i<I2> are static
-expressions with the same value, or @i<I1> and @i<I2> are names that are known
-to denote the same object; or]}
+@ChgAdded{Version=[3],Text=[both @nt{name}s are @nt{indexed_component}s, their
+@nt{prefix}es are known to denote the same object, and each of the pairs of
+corresponding index values are either static expressions with the same value
+or @nt{name}s that are known to denote the same object; or]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[@i<N1> and @i<N2> are @nt{slice}s, their
+@ChgAdded{Version=[3],Text=[both @nt{name}s are @nt{slice}s, their
 @nt{prefix}es are known to denote the same object, and the two @nt{slice}s have
 statically matching index constraints; or]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[@i<N2> is a @nt{slice} whose @nt{prefix} is known to
-denote the same object as @i<N1>, and the index constraint of @i<N2> statically
-matches the constraint @i<N1>'First .. @i<N1>'Last; or]}
-
-@ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[@i<N1> is a @nt{slice} whose @nt{prefix} is known to
-denote the same object as @i<N2>, and the index constraint of @i<N1> statically
-matches the constraint @i<N2>'First .. @i<N2>'Last.]}
-@end{Itemize}
-
-@ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[ For the purpose of evaluating these rules, if @i<N>
-denotes a visible renaming of name @i<R>, @i<R> shall be used in the rules
-instead of @i<N>.]}
-
+@ChgAdded{Version=[3],Text=[one of the two @nt{name}s statically denotes a
+renaming declaration whose renamed @SynI{object_}@nt{name} is known to denote
+the same object as the other @nt{name}; or]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[This exposes known renamings of
-  slices, indexing, and the like to this definition. In particular, if we have]}
+  slices, indexing, and so on to this definition. In particular, if we have]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[C : Character @key[renames] S(1);]}
 @end{Example}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[then C and S(1) are known to denote the same
-  object, as S(1) would replace C when evaluating the rules.]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[then C and S(1) are known to
+  denote the same object.]}
 @end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[both @nt{name}s are known to denote the same object
+as a third @nt{name}.]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=["Known to denote the same object"
+  is intended to be an equivalence relationship, that is, it is reflexive,
+  symmetric, and transitive. This last bullet is needed to make the relationship
+  transitive. For instance, given the following declarations:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[S   : String(1..10);
+ONE : @key[constant] Natural := 1;
+R   : Character @key[renames] S(1);]}
+@end{Example}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[the names R and S(1) are known to
+  denote the same object by the sixth bullet, and S(1) and S(ONE) are known to
+  denote the same object by the fourth bullet, but we need the last bullet for R
+  and S(ONE) to be known to denote the same object.]}
+@end{Reason}
+@end{Itemize}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -647,20 +671,18 @@ instead of @i<N>.]}
   @nt{slice}, it is not "known to denote the same object".]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[These rules make no attempt to handle overlapping
-  slices or slices constrained by objects that are known to denote the same
-  object. These are too rare or too likely to be false positives.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[These rules are intended to be symmetric: if
-  A is known to denote the same object as B, the reverse is also true.]}
+  @ChgAdded{Version=[3],Text=[These rules make no attempt to handle slices of
+  objects that are known to be the same when the slices have dynamic bounds
+  (other than the trivial case of bounds being defined by the same subtype),
+  even when the bounds could be proven to be the same, as it is just too complex
+  to get right and these rules are intended to be conservative.]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0144-2]}
-@ChgAdded{Version=[3],Text=[Two @nt{name}s @i<N1> and @i<N2> are @i{known to
-refer to the same object} if @i<N1> and @i<N2> are known to denote the same
-object, or if @i<N1> is known to denote a subcomponent of the object denoted by
-@i<N2>, or vice-versa. @Defn{known to refer to the same object}]}
+@ChgAdded{Version=[3],Text=[Two @nt{name}s are @i{known to
+refer to the same object} if the names are known to denote the same object, or
+if one of the two names is known to denote a subcomponent or slice of the object
+denoted by the other. @Defn{known to refer to the same object}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -917,10 +939,10 @@ the rule regarding erroneous execution when a discriminant
 is changed and one of the parameters depends on the discriminant.
 @end{DiffWord83}
 
-@begin{Incompatible95}
+@begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0144-2]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005} @b<Amendment 2:>
-  Additional rules have been added to make illegal passing the same elementaty
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
+  Additional rules have been added to make illegal passing the same elementary
   object to more than one @key[in out] or @key[out] parameters of the same
   call. In this case, the result in the object could depend on the compiler
   version, optimization settings, and potentially the phase of the moon, so
@@ -928,22 +950,22 @@ is changed and one of the parameters depends on the discriminant.
   fail with any change. Even when the result is expected to be the same in both
   parameters, the code is unnecessarily tricky. Programs which fail this
   new check should be rare and are easily fixed by adding a temporary object.]}
-@end{Incompatible95}
+@end{Incompatible2005}
 
-@begin{DiffWord95}
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0096-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected so that
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected so that
   limited derived types are by-reference only if their parent is.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0144-2]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:>
-  Additional rules have been added such that passing an object to an @key[in out]
+  @ChgAdded{Version=[3],Text=[Additional rules have been added such
+  that passing an object to an @key[in out]
   or @key[out] parameter of a function illegal if it is used elsewhere in a
   construct which allows evaluation in an arbitrary order. Such calls are
   not portable (since the results may depend on the evaluation order), and
   the results could even vary because of optimization settings and the like.
   Thus they've been banned.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledClause{Subprogram Bodies}
@@ -1058,8 +1080,8 @@ RM83 forgot to restrict the definition of elaboration of a
 
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03]}
-@Chg{Version=[2],New=[@nt{Overriding_indicator} is added to
-@nt{subprogram_body}.],Old=[]}
+@ChgAdded{Version=[2],Text=[@nt{Overriding_indicator} is added to
+@nt{subprogram_body}.]}
 @end{DiffWord95}
 
 
@@ -1504,37 +1526,6 @@ conforms fully with "(X: T; Y: T)",
 and "(X: T)" conforms fully with "(X: @key[in] T)".
 @end{Extend83}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0046-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Now require
-  @nt{null_exclusion}s to match for full conformance. While this is
-  technically incompatible with Ada 2005 as defined by Amendment 1,
-  it is a new Ada 2005 feature and it is unlikely that users have
-  been intentionally taking advantage of the ability to write mismatching
-  exclusions. In any case, it is easy to fix: add a @nt{null_exclusion}
-  where needed for conformance.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0134-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Now require
-  full conformance of anonynous access-to-subprogram parameters and results
-  for full conformance. This is necessary so that there is no confusion about
-  the default expression that is used for a call. While this is technically
-  incompatible with Ada 2005 as defined by Amendment 1, it is a new Ada 2005
-  feature and it is unlikely that users have been intentionally taking advantage
-  and writing different default expressions. In any case, it is
-  easy to fix: change any default expressions that don't conform so that they
-  do conform.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0207-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Now include
-  the presence or absence of @key[constant] in access parameters to be
-  considered when checking mode conformance. This is necessary to prevent
-  modification of constants. While this is technically incompatible with
-  Ada 2005 as defined by Amendment 1, it is a new Ada 2005 feature and it
-  is unlikely that users have been intentionally taking advantage and writing
-  mismatching access types.]}
-@end{Incompatible95}
-
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0011],ARef=[AI95-00117-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that the default
@@ -1562,6 +1553,37 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
   @ChgAdded{Version=[2],Text=[Defined the conformance of anonymous
   access-to-subprogram parameters.]}
 @end{DiffWord95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0046-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:> Now require
+  @nt{null_exclusion}s to match for full conformance. While this is
+  technically incompatible with Ada 2005 as defined by Amendment 1,
+  it is a new Ada 2005 feature and it is unlikely that users have
+  been intentionally taking advantage of the ability to write mismatching
+  exclusions. In any case, it is easy to fix: add a @nt{null_exclusion}
+  where needed for conformance.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0134-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Now require
+  full conformance of anonynous access-to-subprogram parameters and results
+  for full conformance. This is necessary so that there is no confusion about
+  the default expression that is used for a call. While this is technically
+  incompatible with Ada 2005 as defined by Amendment 1, it is a new Ada 2005
+  feature and it is unlikely that users have been intentionally taking advantage
+  and writing different default expressions. In any case, it is
+  easy to fix: change any default expressions that don't conform so that they
+  do conform.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0207-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Now include
+  the presence or absence of @key[constant] in access parameters to be
+  considered when checking mode conformance. This is necessary to prevent
+  modification of constants. While this is technically incompatible with
+  Ada 2005 as defined by Amendment 1, it is a new Ada 2005 feature and it
+  is unlikely that users have been intentionally taking advantage and writing
+  mismatching access types.]}
+@end{Incompatible2005}
 
 
 @LabeledSubClause{Inline Expansion of Subprograms}
@@ -2230,9 +2252,20 @@ We have eliminated the subclause on Default Parameters,
 as it is subsumed by earlier clauses and subclauses.
 @end{DiffWord83}
 
-@begin{DiffWord95}
+@begin{Inconsistent2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0196-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}
+  @b<Correction:> Clarified that
+  @key[out] parameters of an access type are not checked for null exclusions
+  when they are passed in (which is similar to the behavior for constraints.
+  This was unspecified in Ada 2005, so a program which depends on the
+  behavior of an implementation which does check the exclusion may
+  malfunction. But a program depending on an exception being raised is unlikely.]}
+@end{Inconsistent2005}
+
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> A missing rule was
+  @ChgAdded{Version=[3],Text=[@b<Correction:> A missing rule was
   added to cover cases that were missed in Ada 95 and Ada 2005; specifically,
   that an @key[in] parameter passed by reference might have its discriminants
   changed via another path. Such cases are erroneous as requiring compilers
@@ -2243,19 +2276,13 @@ as it is subsumed by earlier clauses and subclauses.
   behavior.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0102-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Moved implicit conversion
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Moved implicit conversion
   @LegalityName to @RefSecNum{The Context of Overload Resolution}.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0118-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Added a definition for
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a definition for
   positional parameters, as this is missing from Ada 95 and later.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0196-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 Correction:> Clarified that
-  @key[out] parameters of an access type are not checked for null exclusions
-  when they are passed in (which is similar to the behavior for constraints.
-  This was unspecified in Ada 2005.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledClause{Return Statements}
@@ -2984,25 +3011,10 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   (which cannot be built in a temporary). However, it allows
   raising @Chg{Version=[3],New=[],Old=[an ]}
   Constraint_Error in some cases where it would not be raised if the
-  permission was not used. @Chg{Version=[3],New=[@b<Amendment 2> removes the
-  most common of these cases from the permission (returning an object with
-  mutuable discriminants, where the return object is created with one set of
-  discriminants and then changed to another. (It also widens the permission to
-  allow the early check for constrained functions when that constraint is
-  wrong.) However, there still is an unlikely case where the permission would
-  allow an exception to be raised when none would be raised by the canonical
-  semantics (when a return statement is abandoned). All of these cases
-  are],Old=[This case is]} potentially inconsistent with Ada 95, but a compiler
+  permission was not used. @Chg{Version=[3],New=[See @Inconsistent2005Title for
+  additional changes. ],Old=[]}This case is potentially inconsistent with Ada 95, but a compiler
   does not have to take advantage of these permissions for any Ada 95 code, so
   there should be little practical impact.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0073-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:>
-  Added a tag check for functions returning anonymous access-to-tagged types,
-  so that dispatching of tag-indeterminate function works as expected.
-  This is technically inconsistent with Ada 2005 (as defined by Amendment 1),
-  but as the feature in question was newly added to Ada 2005, there should
-  be little code that depends on the behavior that now raises an exception.]}
 @end{Inconsistent95}
 
 @begin{Incompatible95}
@@ -3024,26 +3036,6 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   can be used as build-in-place constructors for limited types. This reduces
   the differences between limited and nonlimited types, which will
   make limited types useful in more circumstances.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0053-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Eliminated the @key{aliased}
-  keyword from the syntax of @nt{extended_return_statement}s, as this
-  would provide a way to get an aliased view of an object that is not
-  necessarily aliased. This is technically incompatible, but since the
-  feature was added in Ada 2005 and not widely implemented, it is
-  very unlikely that it appears in existing programs.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0103-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording to require
-  static matching for unconstrained access types in extended return statements.
-  This disallows adding or omitting null exclusions, and adding access
-  constraints, in the declaration of the return object. While this is
-  incompatible, the incompatible cases in question are either useless (access
-  constraints @en the constraint can be given on an @nt{allocator} if necessary,
-  and still must be given there even if given on the return object)
-  or wrong (null exclusions @en null could be returned from a
-  function declared to be null excluding), so we expect them to be extremely
-  rare in practice.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -3053,18 +3045,6 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   the object being returned, which reduces the copying needed to return
   complex objects (including no copying at all for limited objects). It also
   allows component-by-component construction of the return object.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0015-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> The return object of
-  an @nt{extended_return_statement} can be declared constant; this
-  works similarly to a constant object declaration.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0032-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording to allow
-  the @nt{return_subtype_indication} to have a specific type if the return
-  subtype of the function is class-wide. Specifying the (specific) type of
-  the return object is awkward without this change, and this is consistent
-  with the way @nt{allocator}s work.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -3089,17 +3069,80 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   return statements for types with access discriminants. Since such
   types have to be limited in Ada 95, the @nt{expression} of a return statement
   would have been illegal in order for this check to fail.]}
+@end{DiffWord95}
 
+@begin{Inconsistent2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0050-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}
+  The @ImplPermName allowing early raising of Constraint_Error was modified
+  to remove the most common of these cases from the permission (returning an
+  object with mutuable discriminants, where the return object is created with
+  one set of discriminants and then changed to another. (The permission was
+  also widened to allow the early check for constrained functions when that
+  constraint is wrong.) However, there still is an unlikely case where the
+  permission would allow an exception to be raised when none would be raised by the canonical
+  semantics (when a return statement is abandoned). These changes can only
+  remove the raising of an exception (or change the place where it is raised)
+  compared to Ada 2005, so programs that depend on the previous behavior should
+  be very rare.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0073-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:>
+  Added a tag check for functions returning anonymous access-to-tagged types,
+  so that dispatching of tag-indeterminate function works as expected.
+  This is technically inconsistent with Ada 2005 (as defined by Amendment 1),
+  but as the feature in question was newly added to Ada 2005, there should
+  be little code that depends on the behavior that now raises an exception.]}
+@end{Inconsistent2005}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0053-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Eliminated the @key{aliased} keyword from the syntax of
+  @nt{extended_return_statement}s, as this would provide a way to get
+  an aliased view of an object that is not
+  necessarily aliased. This is technically incompatible, but since the
+  feature was added in Ada 2005 and not widely implemented, it is
+  very unlikely that it appears in existing programs.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0103-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to require
+  static matching for unconstrained access types in extended return statements.
+  This disallows adding or omitting null exclusions, and adding access
+  constraints, in the declaration of the return object. While this is
+  incompatible, the incompatible cases in question are either useless (access
+  constraints @en the constraint can be given on an @nt{allocator} if necessary,
+  and still must be given there even if given on the return object)
+  or wrong (null exclusions @en null could be returned from a
+  function declared to be null excluding), so we expect them to be extremely
+  rare in practice.]}
+@end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0015-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:>
+  The return object of an @nt{extended_return_statement} can be declared
+  constant; this works similarly to a constant object declaration.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0032-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to allow
+  the @nt{return_subtype_indication} to have a specific type if the return
+  subtype of the function is class-wide. Specifying the (specific) type of
+  the return object is awkward without this change, and this is consistent
+  with the way @nt{allocator}s work.]}
+@end{Extend2005}
+
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0024-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the master check
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the master check
   for tags since the masters may be for different tasks and thus incomparable.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0058-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the wording
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the wording
   defining returns for @nt{extended_return_statement}s, since leaving by
   an exit or goto is considered @ldquote@;normal@rdquote completion of the
   statement.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledAddedSubClause{Version=[2],Name=[Pragma No_Return]}
@@ -3279,9 +3322,9 @@ often happens, the equivalence is not perfect, as operator
 calls are not a @nt{name}, while a @nt{function_call} is a
 @nt{name}. Thus, operator calls cannot be used in contexts
 that require a @nt{name} (such as a rename of an object).
-A fix for this problem would be very disruptive, and thus
-we recommend it be delayed until the next major revision of
-the Ada standard.]}
+A direct fix for this problem would be very disruptive, and thus
+we have not done that. However, qualifying an operator call
+can be used as a workaround in contexts that require a @nt{name}.]}
 @end{Discussion}
 @end{Resolution}
 
@@ -3348,17 +3391,19 @@ Explicit declarations of "/=" are now permitted, so long
 as the result type is not Boolean.
 @end{Extend83}
 
-@begin{DiffWord95}
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0128-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the wording
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the wording
   so that only explicit declarations of "=" cause an implicit declaration
   of "/="; otherwise, we could get multiple implicit definitions of "/="
   without an obvious way to chose between them.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0143-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added wording so that
-  operators only allow parameters of mode @key[in].]}
-@end{DiffWord95}
+  @ChgAdded{Version=[3],Text=[Added wording so that operators only allow
+  parameters of mode @key[in]. This was made necessary by the elimination
+  elsewhere of the restriction that function parameters be only of
+  mode @key[in].]}
+@end{DiffWord2005}
 
 
 @RMNewPage@Comment{For printed RM Ada 2005}

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.50 $ $Date: 2008/11/26 23:41:02 $ $Author: randy $ }
+@comment{ $Revision: 1.51 $ $Date: 2010/05/08 06:31:33 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2008/11/26 23:41:02 $}
+@Comment{$Date: 2010/05/08 06:31:33 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -619,7 +619,7 @@ remote access-to-class-wide type:
 @begin{Itemize}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0083],ARef=[AI95-00047-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00240-01],ARef=[AI95-00366-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0060-1],ARef=[AI05-0121-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0060-1],ARef=[AI05-0101-1]}
 The primitive subprograms of the corresponding specific
 @Chg{Version=[3],New=[],Old=[limited private ]}type
 shall only have access parameters if they are controlling formal
@@ -647,7 +647,7 @@ A value of a remote access-to-class-wide type shall be dereferenced
 only as part of a dispatching call where the value designates
 a controlling operand of the call (see @RefSec{Remote Subprogram Calls})@Chg{New=[.],Old=[;]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0121-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0101-1]}
 @ChgAdded{Version=[3],Text=[A controlling access result value for a primitive
 function with any controlling operands of the corresponding specific type shall
 either be explicitly converted to a remote access-to-class-wide type or be part
@@ -716,17 +716,6 @@ synchronized, protected, or task interface type.]}
   visible part. These changes were made so that the rules were consistent with
   the rules introduced for the Corrigendum for stream attributes; moreover,
   legality should not depend on the contents of the private part.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0121-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added rules for
-  returning of remote access-to-classwide types; this had been missed
-  in the past. While programs that returned unstreamable types from
-  RCI functions were legal, it is not clear what they could have done
-  (as the results could not be marshalled). Similarly, RCI functions
-  that return remote controlling access types could try to save those
-  values, but it is unlikely that a compiler would know how to to that
-  usefully. Thus, it seems unlikely that
-  any real programs will be impacted by these changes.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -738,13 +727,6 @@ synchronized, protected, or task interface type.]}
   need stream attributes defined (otherwise there would be a signficant
   incompatibility, as Limited_Controlled would need stream attributes, and then
   all extensions of it also would need stream attributes).]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0060-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Clarified that anonymous
-  access types are never remote access types (and can be used in
-  remote types units subject to the normal restrictions). Added wording
-  to allow limited class-wide interfaces to be designated by remote
-  access types.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -777,6 +759,27 @@ synchronized, protected, or task interface type.]}
   access-to-subprogram type cannot be converted to a remote
   access-to-subprogram type, as intended (and required by the ACATS).]}
 @end{DiffWord95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0101-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Added rules for returning of remote access-to-classwide types; this had been
+  missed in the past. While programs that returned unstreamable types from RCI
+  functions were legal, it is not clear what they could have done (as the
+  results could not be marshalled). Similarly, RCI functions that return remote
+  controlling access types could try to save those values, but it is unlikely
+  that a compiler would know how to to that usefully. Thus, it seems unlikely
+  that any real programs will be impacted by these changes.]}
+@end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0060-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:>
+  Clarified that anonymous access types are never remote access types (and can
+  be used in remote types units subject to the normal restrictions). Added
+  wording to allow limited class-wide interfaces to be designated by remote
+  access types.]}
+@end{Extend2005}
 
 
 @LabeledSubClause{Remote Call Interface Library Units}
@@ -880,7 +883,7 @@ declaration of a subprogram to which a pragma Inline applies;
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078],ARef=[AI95-00048-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00240-01],ARef=[AI95-00366-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0121-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0101-1]}
 it shall not @Chg{New=[be, nor shall its visible part],
 Old=[]} contain@Chg{New=[,],Old=[]} a
 subprogram (or access-to-subprogram) declaration
@@ -894,7 +897,7 @@ limited type unless that limited type has user-specified Read and Write
 attributes]};
 
 @begin{Ramification}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0121-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0101-1]}
 @ChgAdded{Version=[3],Text=[No anonymous access types support external
 streaming, so they are never allowed as parameters or results of
 RCI subprograms.]}
@@ -1011,14 +1014,6 @@ be supported as an alternative to RPC.]
   This change was made so that the rules were consistent with the rules
   introduced for the Corrigendum for stream attributes; moreover, legality
   should not depend on the contents of the private part.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0121-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a rule to
-  ensure that function results are streamable; this was missing in
-  previous versions of Ada. While programs that returned unstreamable
-  types from RCI functions were legal, it is not clear what they could
-  have done (as the results could not be marshalled). Thus, it seems
-  unlikely that any real programs will be impacted by this change.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -1032,6 +1027,17 @@ be supported as an alternative to RPC.]
   with access types in pure units and implicitly declared attributes for
   type extensions are properly handled.]}
 @end{DiffWord95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0101-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Added a rule to ensure that function results are streamable; this was
+  missing in previous versions of Ada. While programs that returned
+  unstreamable types from RCI functions were legal, it is not clear what
+  they could have done (as the results could not be marshalled). Thus, it seems
+  unlikely that any real programs will be impacted by this change.]}
+@end{Incompatible2005}
+
 
 
 @LabeledClause{Consistency of a Distributed System}
@@ -1174,7 +1180,7 @@ the calling and the called partition.
 The latter two ways correspond to a @i(dynamic) binding between
 the calling and the called partition.
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0121-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0101-1]}
 @Chg{Version=[3],New=[Remote types library units (see
 @RefSecNum{Remote Types Library Units}) and],Old=[A]} remote
 call interface library @Chg{Version=[3],New=[units],Old=[unit]}
@@ -1519,11 +1525,13 @@ not include the library unit that defines the exception.
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that the check on
   class-wide types also applies to values returned from remote subprogram call
   functions.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0121-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Corrected the text to
-  note that remote access types can be defined in remote types units.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0101-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the text to
+  note that remote access types can be defined in remote types units.]}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Pragma Asynchronous}

@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2010/04/24 06:27:51 $}
+@Comment{$Date: 2010/05/08 06:31:33 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.35 $}
+@Comment{$Revision: 1.36 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -277,13 +277,15 @@ although RM83-5.1(6) did not take this view.
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The @nt{extended_return_statement} is new (@nt{simple_return_statement}
   is merely renamed).]}
+@end{Extend95}
 
+@begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0179-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
-  @b<Amendment 2:> A @nt{label} can end a @nt{sequence_of_statements},
+  A @nt{label} can end a @nt{sequence_of_statements},
   eliminating the requirement for having an explicit @key[null]; statement
   after an ending label (a common use).]}
-@end{Extend95}
+@end{Extend2005}
 
 
 @LabeledClause{Assignment Statements}
@@ -928,7 +930,7 @@ for @nt<name>s, rather than being separated out along with
 
 @begin{DiffWord95}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0003-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Rewording to reflect that
+  @ChgAdded{Version=[3],Text=[Rewording to reflect that
   a @nt{qualified_expression} is now a @nt{name}.]}
 @end{Diffword95}
 

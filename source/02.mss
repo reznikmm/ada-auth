@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2009/07/02 04:51:28 $}
+@Comment{$Date: 2010/05/08 06:31:32 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -607,13 +607,13 @@ permitted in identifiers (in the standard mode).]}
   This should ease programming in languages other than English.]}
 @end{Extend95}
 
-@begin{Diffword95}
+@begin{Diffword2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0079-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Clarified that only
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified that only
   characters in the categories defined here are allowed in the source
   of an Ada program. This was clear in Ada 95, but Amendment 1 dropped
   the wording instead of correcting it.]}
-@end{Diffword95}
+@end{Diffword2005}
 
 
 @LabeledClause{Lexical Elements, Separators, and Delimiters}
@@ -738,20 +738,21 @@ From URG recommendation.
 @end{Discussion}
 @end{ImplReq}
 
-@begin{Extend95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0079-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}@b<Amendment 2:>
-  Clarified that
-  @ntf{other_format} characters are allowed anywhere that separators
-  are allowed. This was intended by Amendment 1, but didn't actually
-  make it into the wording.]}
-@end{Extend95}
-
 @begin{Diffword95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
   @ChgAdded{Version=[2],Text=[The wording was updated to use the new character
   categories defined in the preceding clause.]}
 @end{Diffword95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0079-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:>
+  Clarified that
+  @ntf{other_format} characters are allowed anywhere that separators
+  are allowed. This was intended in Ada 2005, but didn't actually
+  make it into the wording.]}
+@end{Extend2005}
+
 
 
 @LabeledClause{Identifiers}
@@ -976,14 +977,6 @@ implementation-defined attributes or pragma names.
 @end{Ramification}
 @end{DiffWord83}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI95-00285-01]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}@B<Amendment 2:>
-  @ntf{other_format} characters were remved from identifiers as the Unicode
-  recommendations have changed. This change can only affect programs
-  written for Ada 2005, Amendment 1, so there should be few such programs.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -991,6 +984,14 @@ implementation-defined attributes or pragma names.
   with several other categories. This should ease programming in languages
   other than English.]}
 @end{Extend95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0091-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@B<Correction:>
+  @ntf{other_format} characters were remved from identifiers as the Unicode
+  recommendations have changed. This change can only affect programs
+  written for the original Ada 2005, so there should be few such programs.]}
+@end{Incompatible2005}
 
 
 @LabeledClause{Numeric Literals}
@@ -1748,11 +1749,14 @@ informative annex.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
   @ChgAdded{Version=[2],Text=[Updated the example of named pragma parameters,
   because the second parameter of @nt{pragma} Suppress is obsolescent.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0100-1]}
-  @ChgAdded{Version=[3],Text=[@b{Amendment 2:} Clarified where pragmas
-  are (and are not) allowed.]}
 @end{DiffWord95}
+
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0100-1]}
+  @ChgAdded{Version=[3],Text=[@b{Correction:} Clarified where pragmas
+  are (and are not) allowed.]}
+@end{DiffWord2005}
 
 
 @LabeledClause{Reserved Words}
@@ -1921,14 +1925,6 @@ to @RefSec(Obsolescent Features).
   allowance is made for @key{pragma} Interface (see @RefSecNum{Pragma Interface}).
   Uses of these words as identifiers will need to be changed, but we do not
   expect them to be common.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0091-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Removed @ntf{other_format}
-  characters from reserved words in order to be compatible with the latest
-  Unicode recommendations. This change can only affect programs
-  written for Ada 2005, Amendment 1, and there is little reason to put
-  @ntf{other_format} characters into reserved words in the first place,
-  so there should be very few such programs.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -1938,3 +1934,15 @@ to @RefSec(Obsolescent Features).
   This change has no effect on the character sequences that are reserved
   words, but does make some unusual sequences of characters illegal.]}
 @end{DiffWord95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0091-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Removed @ntf{other_format}
+  characters from reserved words in order to be compatible with the latest
+  Unicode recommendations. This change can only affect programs
+  written for original Ada 2005, and there is little reason to put
+  @ntf{other_format} characters into reserved words in the first place,
+  so there should be very few such programs.]}
+@end{Incompatible2005}
+

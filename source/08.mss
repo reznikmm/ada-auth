@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2010/04/03 06:48:07 $}
+@Comment{$Date: 2010/05/08 06:31:33 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1433,33 +1433,35 @@ complex than they already are.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0025],ARef=[AI95-00044-01]}
-@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified the overriding rules so
-that "/=" and @nt{statement_identifier}s are covered.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0025],ARef=[AI95-00044-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified the overriding rules so
+  that "/=" and @nt{statement_identifier}s are covered.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0026],ARef=[AI95-00150-01]}
-@ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that is it never possible
-for two components with the same name to be visible; any such program is
-illegal.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0026],ARef=[AI95-00150-01]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that is it never
+  possible for two components with the same name to be visible; any such program
+  is illegal.]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01],ARef=[AI95-00408-01]}
-@ChgAdded{Version=[2],Text=[The visibility of an
-@nt{attribute_definition_clause} is defined so that it can be used by the stream
-attribute availability rules (see @RefSecNum{Stream-Oriented Attributes}).]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01],ARef=[AI95-00408-01]}
+  @ChgAdded{Version=[2],Text=[The visibility of an
+  @nt{attribute_definition_clause} is defined so that it can be used by the
+  stream attribute availability rules (see @RefSecNum{Stream-Oriented Attributes}).]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@ChgAdded{Version=[2],Text=[The visibility of a limited view of a library package
-is defined (see @RefSecNum{Compilation Units - Library Units}).]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0205-1]}
-@ChgAdded{Version=[3],Text=[@b{Amendment 2 Correction:} Added a rule allowing
-visibility of the declared return object within an
-@nt{extended_return_statement}. While this is technically an extension
-(since the wording said that the return object was always hidden from all
-visibility), this is so obviously not intended (a declaration that can never be
-used is pointless) that the actual language rule was never implemented. So this
-just makes the wording consistent with practice.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+  @ChgAdded{Version=[2],Text=[The visibility of a limited view of a library
+  package is defined (see @RefSecNum{Compilation Units - Library Units}).]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0205-1]}
+  @ChgAdded{Version=[3],Text=[@b{Correction:} Added a rule allowing
+  visibility of the declared return object within an
+  @nt{extended_return_statement}. While this is technically an extension (since
+  the wording said that the return object was always hidden from all
+  visibility), this is so obviously not intended (a declaration that can never
+  be used is pointless) that the actual language rule was never implemented. So
+  this just makes the wording consistent with practice.]}
+@end{DiffWord2005}
 
 
 @RMNewPage@Comment{For printed Ada 2005 only}
@@ -1868,19 +1870,20 @@ potentially use-visible.
 @end{DiffWord83}
 
 
-@begin{Extend95}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0150-1]}
-@ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}@B[Amendment 2:] The
-@key[use all type] version of the @nt{use_type_clause} is new to Ada 2012.
-It works similarly to prefixed views.]}
-@end{Extend95}
-
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@Chg{Version=[2],New=[Limited views of packages are not allowed in use clauses.
-Defined @i<named in a use clause> for use in other limited view rules (see
-@RefSecNum{Context Clauses - With Clauses}).],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
+  @ChgAdded{Version=[2],Text=[Limited views of packages are not allowed in use clauses.
+  Defined @i<named in a use clause> for use in other limited view rules (see
+  @RefSecNum{Context Clauses - With Clauses}).]}
 @end{DiffWord95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0150-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}The
+  @key[use all type] version of the @nt{use_type_clause} is new to Ada 2012.
+  It works similarly to prefixed views.]}
+@end{Extend2005}
+
 
 
 @LabeledClause{Renaming Declarations}
@@ -2247,17 +2250,6 @@ using the type T2 of the previous example:]}
                                     -- @RI[but does not in Ada 2005, so C1_Ren becomes]
                                     -- @RI[invalid when this is assigned.]]}
 @end{Example}
-
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1]}
-@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Simplified the description
-of when a discriminant-dependent component is allowed to be renamed
-to when the object is known to be constrained. This fixes
-a confusion as to whether a subcomponent of an object that is not certain
-to be constrained can be renamed. The fix introduces
-an incompatibility, as the rule did not apply in Ada 95 if the prefix was
-a constant; but it now applies no matter what kind of object is involved.
-The incompatibility is not too bad, since most kinds of constants are
-known to be constrained.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -2279,6 +2271,19 @@ known to be constrained.]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Fixed to forbid renamings of
   depends-on-discriminant components if the type @i{might} be definite.]}
 @end{DiffWord95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Simplified the description of when a discriminant-dependent component is
+  allowed to be renamed to when the object is known to be constrained. This
+  fixes a confusion as to whether a subcomponent of an object that is not
+  certain to be constrained can be renamed. The fix introduces an
+  incompatibility, as the rule did not apply in Ada 95 if the prefix was a
+  constant; but it now applies no matter what kind of object is involved. The
+  incompatibility is not too bad, since most kinds of constants are known to be
+  constrained.]}
+@end{Incompatible2005}
 
 
 @LabeledSubClause{Exception Renaming Declarations}
@@ -2729,19 +2734,6 @@ We'll live with the oddity.
 @end{Example}
 @end{Examples}
 
-@begin{Inconsistent95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2:>
-  Renaming of user-defined untagged record equality is now defined to call the
-  overridden body so long as the overriding occurred before the renames.
-  This could change the body called in unusual cases; the change is necessary
-  to preserve the principle that the body called for an explicit call to
-  "=" (via a renames in this case) is the same as the one inherited for a
-  derived type and used in generics. Note that any renamings before the
-  overriding will be unchanged. Any differences caused by the change will be
-  rare and most likely will fix a bug.]}
-@end{Inconsistent95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0028],ARef=[AI95-00145-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -2772,6 +2764,19 @@ We'll live with the oddity.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00423-01]}
   @ChgAdded{Version=[2],Text=[Added matching rules for @nt{null_exclusion}s.]}
 @end{DiffWord95}
+
+@begin{Inconsistent2005}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}
+  Renaming of user-defined untagged record equality is now defined to call the
+  overridden body so long as the overriding occurred before the renames.
+  This could change the body called in unusual cases; the change is necessary
+  to preserve the principle that the body called for an explicit call to
+  "=" (via a renames in this case) is the same as the one inherited for a
+  derived type and used in generics. Note that any renamings before the
+  overriding will be unchanged. Any differences caused by the change will be
+  rare and most likely will fix a bug.]}
+@end{Inconsistent2005}
 
 
 @LabeledSubClause{Generic Renaming Declarations}
@@ -3536,17 +3541,6 @@ Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2005.]]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[If there is any code like this (such code should
   be rare), it will be ambiguous in Ada 2005.]}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0149-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Implicit conversion now allowed
-  from anonymous access-to-object types to general access-to-object types.
-  Such conversions can make calls ambiguous. That can only happen
-  when there are two visible subprograms with the same name and have profiles
-  that differ only by a parameter that is of a named or anonymous access type,
-  and the actual argument is of an anonymous access type. This should be
-  rare, as many possible calls would be ambiguous even in Ada 2005 (including
-  @nt{allocator}s and any actual of a named access type if the designated
-  types are the same).]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -3573,12 +3567,6 @@ Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2005.]]}
    ...
 @key{end} T;]}
 @end{Example}
-
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0149-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Implicit conversion is allowed
-  from anonymous access-to-object types to general access-to-object types
-  if the designated type is convertable and runtime checks are minimized.
-  See also the incompatibilities section.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -3588,11 +3576,34 @@ Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2005.]]}
   (like object renames and qualified expressions). This fixes a hole in Ada 95
   that appears to prohibit using @nt{aggregate}s, 'Access, character literals,
   string literals, and @nt{allocator}s in qualified expressions.]}
+@end{DiffWord95}
 
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0149-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}Implicit
+  conversion is now allowed from anonymous access-to-object types to
+  general access-to-object types. Such conversions can make calls ambiguous.
+  That can only happen when there are two visible subprograms with the same name
+  and have profiles that differ only by a parameter that is of a named or
+  anonymous access type, and the actual argument is of an anonymous access type.
+  This should be rare, as many possible calls would be ambiguous even in Ada
+  2005 (including @nt{allocator}s and any actual of a named access type if the
+  designated types are the same).]}
+@end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0149-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Implicit conversion
+  is allowed from anonymous access-to-object types to general access-to-object
+  types if the designated type is convertable and runtime checks are minimized.
+  See also the incompatibilities section.]}
+@end{Extend2005}
+
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0102-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a requirement
+  @ChgAdded{Version=[3],Text=[Added a requirement
   here that implicit conversions are convertible to the appropriate type.
   This rule was scattered about the Standard, we moved a single generalized
   version here.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
