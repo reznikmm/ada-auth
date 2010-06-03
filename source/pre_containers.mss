@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.70 $ $Date: 2009/12/18 07:15:34 $ $Author: randy $ }
+@comment{ $Revision: 1.71 $ $Date: 2010/06/03 02:25:24 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2009/12/18 07:15:34 $}
+@Comment{$Date: 2010/06/03 02:25:24 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -235,11 +235,11 @@ implementations that are unstable if given buggy hash functions, et al.]}
   subclauses.]}
 @end{Extend95}
 
-@begin{DiffWord95}
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a definition of
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a definition of
   strict weak ordering.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledAddedSubclause{Version=[2],Name=[The Package Containers]}
@@ -299,21 +299,22 @@ properly on machines with native sizes that are not 32 bits. For instance, a
 @end{Discussion}
 @end{ImplAdvice}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Exception Capacity_Error
-  is newly added to Containers. If Containers is referenced in a @nt{use_clause},
-  and an entity with the name Capacity_Error is defined in a package that is
-  also referenced in a @nt{use_clause}, the entity Capacity_Error may no
-  longer be use-visible, resulting in errors. This should be rare and is
-  easily fixed if it does occur.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The package Containers is new.]}
 @end{Extend95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}Exception Capacity_Error
+  is newly added to Containers. If Containers is referenced in a @nt{use_clause},
+  and an entity with the name Capacity_Error is defined in a package that is
+  also referenced in a @nt{use_clause}, the entity Capacity_Error may no
+  longer be use-visible, resulting in errors. This should be rare and is
+  easily fixed if it does occur.]}
+@end{Incompatible2005}
+
 
 
 @LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Vectors]}
@@ -2086,8 +2087,8 @@ Generic_Sorting, or to the Reverse_Elements procedure.]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[@PDefn2{Term=(bounded
-error),Sec=(cause)} It is a bounded error to call any subprogram other than "="
+@ChgAdded{Version=[2],Type=[Leading],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+It is a bounded error to call any subprogram other than "="
 or Has_Element declared in Containers.Vectors with an ambiguous (but not
 invalid, see below) cursor parameter. Possible results are:]}
 
@@ -2341,50 +2342,50 @@ value of Last_Index.]}
 
 @end{Notes}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Subprograms Assign and Copy
-  are newly added to Containers.Vectors. If an instance of Containers.Vectors
-  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Containers.Vectors is
-  is defined in a package that is also referenced in a @nt{use_clause}, the
-  entity @i<E> may no longer be use-visible, resulting in errors. This should
-  be rare and is easily fixed if it does occur.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The package Containers.Vectors is new.]}
 @end{Extend95}
 
-@begin{DiffWord95}
+@begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Generalized the definition
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}Subprograms Assign and Copy
+  are newly added to Containers.Vectors. If an instance of Containers.Vectors
+  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
+  @nt{defining_identifier} as a new entity in Containers.Vectors is
+  is defined in a package that is also referenced in a @nt{use_clause}, the
+  entity @i<E> may no longer be use-visible, resulting in errors. This should
+  be rare and is easily fixed if it does occur.]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[Generalized the definition
   of Reserve_Capacity and Move. Specified which elements are read/written
   by stream attributes.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a @BoundedName
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a @BoundedName
   to cover tampering by generic actual subprograms.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a @BoundedName
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a @BoundedName
   to cover access to finalized Vector containers.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Redefined "<" actuals
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a pragma
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a pragma
   Remote_Types so that containers can be used in distributed programs.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Revised the definition
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Revised the definition
   of invalid cursors to cover missing (and new) cases.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledAddedSubclause{Version=[2],
@@ -3444,7 +3445,8 @@ after Target is updated as described for Merge, or the operation works as
 defined.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error for the actual function
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+It is a bounded error for the actual function
 associated with a generic formal subprogram, when called as part of an
 operation of this package, to tamper with elements of any List parameter to
 the operation. Either Program_Error is raised, or the operation works as
@@ -3452,7 +3454,8 @@ defined on the value of the List either prior to, or subsequent to, some or
 all of the modifications to the List.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0027-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error to call any subprogram
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+It is a bounded error to call any subprogram
 declared in the visible part of Containers.Doubly_Linked_List
 when the associated container has been finalized. If the operation takes
 Container as an @key[in out] parameter, then it raises Constraint_Error or
@@ -3597,7 +3600,7 @@ worst case no worse than @i{O}(@i{N}**2).]}]}
 @ChgAdded{Version=[2],Text=[Move should not copy elements, and should minimize
 copying of internal data structures.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[Containers.Doubly_Link_Lists.Move should not copy elements, and should
+Text=[Containers.Doubly_Linked_Lists.Move should not copy elements, and should
 minimize copying of internal data structures.]}]}
 
 @begin{ImplNote}
@@ -3633,49 +3636,49 @@ than sorting an array or vector, which may need to copy elements, and is
 probably not a stable sort.]}
 @end{Notes}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Subprograms Assign and Copy
-  are newly added to Containers.Doubly_Linked_Lists. If an instance of Containers.Doubly_Linked_Lists
-  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Containers.Doubly_Linked_Lists is
-  is defined in a package that is also referenced in a @nt{use_clause}, the
-  entity @i<E> may no longer be use-visible, resulting in errors. This should
-  be rare and is easily fixed if it does occur.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The generic package Containers.Doubly_Linked_Lists is new.]}
 @end{Extend95}
 
-@begin{DiffWord95}
+@begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Generalized the definition
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}Subprograms Assign and Copy
+  are newly added to Containers.Doubly_Linked_Lists. If an instance of Containers.Doubly_Linked_Lists
+  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
+  @nt{defining_identifier} as a new entity in Containers.Doubly_Linked_Lists is
+  is defined in a package that is also referenced in a @nt{use_clause}, the
+  entity @i<E> may no longer be use-visible, resulting in errors. This should
+  be rare and is easily fixed if it does occur.]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[Generalized the definition
   of Move. Specified which elements are read/written by stream attributes.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a @BoundedName
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a @BoundedName
   to cover tampering by generic actual subprograms.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a @BoundedName
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a @BoundedName
   to cover access to finalized list containers.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Redefined "<" actuals
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a pragma
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a pragma
   Remote_Types so that containers can be used in distributed programs.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Revised the definition
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Revised the definition
   of invalid cursors to cover missing (and new) cases.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledAddedSubclause{Version=[2],Name=[Maps]}
@@ -4296,7 +4299,8 @@ exception raised by Process.@key{all} is propagated.]}
 
 @begin{Bounded}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error for the actual function
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+It is a bounded error for the actual function
 associated with a generic formal subprogram, when called as part of an
 operation of a map package, to tamper with elements of any Map parameter to
 the operation. Either Program_Error is raised, or the operation works as
@@ -4304,7 +4308,8 @@ defined on the value of the map either prior to, or subsequent to, some or
 all of the modifications to the map.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0027-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error to call any subprogram
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+It is a bounded error to call any subprogram
 declared in the visible part of a map package
 when the associated container has been finalized. If the operation takes
 Container as an @key[in out] parameter, then it raises Constraint_Error or
@@ -4424,27 +4429,29 @@ unless specified by the operation.]}]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[This description of maps is new; the
   extensions are documented with the specific packages.]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added procedure Assign;
+  @ChgAdded{Version=[3],Text=[Added procedure Assign;
   the extension and incompatibility is documented with the specific packages.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Generalized the definition
+  @ChgAdded{Version=[3],Text=[Generalized the definition
   of Move. Specified which elements are read/written by stream attributes.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a @BoundedName
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a @BoundedName
   to cover tampering by generic actual subprograms.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a @BoundedName
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a @BoundedName
   to cover access to finalized map containers.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Revised the definition
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Revised the definition
   of invalid cursors to cover missing (and new) cases.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Hashed_Maps]}
@@ -5003,7 +5010,8 @@ Delete, Exclude and Find operations that
 take a key parameter for Containers.Hashed_Maps should be
 @i{O}(log @i<N>). The average
 time complexity of the subprograms of Containers.Hashed_Maps that take
-a cursor parameter should be @i{O}(1).]}]}
+a cursor parameter should be @i{O}(1). The average time complexity of
+Containers.Hashed_Maps.Reserve_Capacity should be @i{O}(@i<N>).]}]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5018,28 +5026,28 @@ a cursor parameter should be @i{O}(1).]}]}
 @end{Reason}
 @end{ImplAdvice}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Subprograms Assign and Copy
-  are newly added to Containers.Hashed_Maps. If an instance of Containers.Hashed_Maps
-  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Containers.Hashed_Maps is
-  is defined in a package that is also referenced in a @nt{use_clause}, the
-  entity @i<E> may no longer be use-visible, resulting in errors. This should
-  be rare and is easily fixed if it does occur.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The generic package Containers.Hashed_Maps is new.]}
 @end{Extend95}
 
-@begin{Diffword95}
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}Subprograms Assign and Copy
+  are newly added to Containers.Hashed_Maps. If an instance of Containers.Hashed_Maps
+  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
+  @nt{defining_identifier} as a new entity in Containers.Hashed_Maps is
+  is defined in a package that is also referenced in a @nt{use_clause}, the
+  entity @i<E> may no longer be use-visible, resulting in errors. This should
+  be rare and is easily fixed if it does occur.]}
+@end{Incompatible2005}
+
+@begin{Diffword2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a pragma
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a pragma
   Remote_Types so that containers can be used in distributed programs.]}
-@end{Diffword95}
+@end{Diffword2005}
 
 
 @LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Ordered_Maps]}
@@ -5556,33 +5564,33 @@ a cursor parameter should be @i{O}(1).]}]}
 
 @end{ImplAdvice}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Subprograms Assign and Copy
-  are newly added to Containers.Ordered_Maps. If an instance of Containers.Ordered_Maps
-  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Containers.Ordered_Maps is
-  is defined in a package that is also referenced in a @nt{use_clause}, the
-  entity @i<E> may no longer be use-visible, resulting in errors. This should
-  be rare and is easily fixed if it does occur.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The generic package Containers.Ordered_Maps is new.]}
 @end{Extend95}
 
-@begin{DiffWord95}
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}Subprograms Assign and Copy
+  are newly added to Containers.Ordered_Maps. If an instance of Containers.Ordered_Maps
+  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
+  @nt{defining_identifier} as a new entity in Containers.Ordered_Maps is
+  is defined in a package that is also referenced in a @nt{use_clause}, the
+  entity @i<E> may no longer be use-visible, resulting in errors. This should
+  be rare and is easily fixed if it does occur.]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Redefined "<" actuals
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a pragma
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a pragma
   Remote_Types so that containers can be used in distributed programs.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledAddedSubclause{Version=[2],Name=[Sets]}
@@ -6358,7 +6366,8 @@ unconstrained.]}
 
 @begin{Bounded}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error for the actual function
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+It is a bounded error for the actual function
 associated with a generic formal subprogram, when called as part of an
 operation of a set package, to tamper with elements of any Set parameter to
 the operation. Either Program_Error is raised, or the operation works as
@@ -6366,7 +6375,8 @@ defined on the value of the set either prior to, or subsequent to, some or
 all of the modifications to the set.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0027-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error to call any subprogram
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+It is a bounded error to call any subprogram
 declared in the visible part of a set package
 when the associated container has been finalized. If the operation takes
 Container as an @key[in out] parameter, then it raises Constraint_Error or
@@ -6493,27 +6503,29 @@ unless specified by the operation.]}]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[This description of sets is new; the
   extensions are documented with the specific packages.]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added procedure Assign;
+  @ChgAdded{Version=[3],Text=[Added procedure Assign;
   the extension and incompatibility is documented with the specific packages.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Generalized the definition
+  @ChgAdded{Version=[3],Text=[Generalized the definition
   of Move. Specified which elements are read/written by stream attributes.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a @BoundedName
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a @BoundedName
   to cover tampering by generic actual subprograms.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added a @BoundedName
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a @BoundedName
   to cover access to finalized set containers.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Revised the definition
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Revised the definition
   of invalid cursors to cover missing (and new) cases.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 
@@ -7002,32 +7014,32 @@ average time complexity of Containers.@!Hashed_Sets.@!Reserve_Capacity should be
   for implementation notes regarding some of the operations of this package.]}
 @end{ImplNote}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Subprograms Assign and Copy
-  are newly added to Containers.Hashed_Sets. If an instance of Containers.Hashed_Sets
-  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Containers.Hashed_Sets is
-  is defined in a package that is also referenced in a @nt{use_clause}, the
-  entity @i<E> may no longer be use-visible, resulting in errors. This should
-  be rare and is easily fixed if it does occur.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The generic package Containers.Hashed_Sets is new.]}
 @end{Extend95}
 
-@begin{DiffWord95}
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}Subprograms Assign and Copy
+  are newly added to Containers.Hashed_Sets. If an instance of Containers.Hashed_Sets
+  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
+  @nt{defining_identifier} as a new entity in Containers.Hashed_Sets is
+  is defined in a package that is also referenced in a @nt{use_clause}, the
+  entity @i<E> may no longer be use-visible, resulting in errors. This should
+  be rare and is easily fixed if it does occur.]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added wording to require
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to require
   the formal function be such that that equal elements are also equivalent.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a pragma
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a pragma
   Remote_Types so that containers can be used in distributed programs.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Ordered_Sets]}
@@ -7592,739 +7604,1228 @@ of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}
   for implementation notes regarding some of the operations of this package.]}
 @end{ImplNote}
 
-@begin{Incompatible95}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Subprograms Assign and Copy
-  are newly added to Containers.Ordered_Sets. If an instance of Containers.Ordered_Sets
-  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
-  @nt{defining_identifier} as a new entity in Containers.Ordered_Sets is
-  is defined in a package that is also referenced in a @nt{use_clause}, the
-  entity @i<E> may no longer be use-visible, resulting in errors. This should
-  be rare and is easily fixed if it does occur.]}
-@end{Incompatible95}
-
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The generic package Containers.Ordered_Sets is new.]}
 @end{Extend95}
 
-@begin{DiffWord95}
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}Subprograms Assign and Copy
+  are newly added to Containers.Ordered_Sets. If an instance of Containers.Ordered_Sets
+  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
+  @nt{defining_identifier} as a new entity in Containers.Ordered_Sets is
+  is defined in a package that is also referenced in a @nt{use_clause}, the
+  entity @i<E> may no longer be use-visible, resulting in errors. This should
+  be rare and is easily fixed if it does occur.]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Added wording to
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to
   require the formal function be such that that equal elements are also
   equivalent.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Redefined "<" actuals
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Redefined "<" actuals
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a container.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added a pragma
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a pragma
   Remote_Types so that containers can be used in distributed programs.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Vectors]}
-
-@begin{Intro}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The language-defined generic package
-Containers.Indefinite_Vectors provides a private type Vector and a set of
-operations. It provides the same operations as the package Containers.Vectors
-(see @RefSecNum{The Package Containers.Vectors}), with the difference that
-the generic formal Element_Type is indefinite.]}
-@end{Intro}
-
-@begin{StaticSem}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[The declaration
-of the generic library package
-Containers.Indefinite_Vectors@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Vectors]}
-has the same contents @Chg{Version=[3],New=[and semantics ],Old=[]}as
-Containers.Vectors except:]}
-
-@begin{Itemize}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The generic formal Element_Type is indefinite.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[The procedures with
-the profiles:]}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Noprefix=[T],Keepnext=[F],Type=[Leading],Text=[@key{procedure} Insert (Container : @key{in out} Vector;
-                  Before    : @key{in}     Extended_Index;
-                  Count     : @key{in}     Count_Type := 1);]}
-
-@ChgAdded{Version=[2],Noprefix=[T],Keepnext=[T],Type=[Leading],Text=[@key{procedure} Insert (Container : @key{in out} Vector;
-                  Before    : @key{in}     Cursor;
-                  Position  :    @key{out} Cursor;
-                  Count     : @key{in}     Count_Type := 1);]}
-@end{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Noprefix=[T],Text=[are omitted.]}
-
-@begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[These procedures are omitted because there is no
-  way to create a default-initialized object of an indefinite type. Note that
-  Insert_Space can be used instead of this routine in most cases. Omitting
-  the routine completely allows any problems to be diagnosed by
-  the compiler when converting from a definite to indefinite vector.]}
-@end{Discussion}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
-of Update_Element may be constrained even if Element_Type is unconstrained.]}
-@end{Itemize}
-@end{StaticSem}
-
-@begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The generic package Containers.Indefinite_Vectors is new.]}
-@end{Extend95}
-
-
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Doubly_Linked_Lists]}
+@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Multiway_Trees]}
 
 @begin{Intro}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The language-defined generic package Containers.Indefinite_Doubly_Linked_Lists
-provides private types List and Cursor, and a set of operations for each
-type. It provides the same operations as the package
-Containers.Doubly_Linked_Lists
-(see @RefSecNum{The Package Containers.Doubly_Linked_Lists}),
-with the difference that the generic formal Element_Type is indefinite.]}
-@end{Intro}
-
-@begin{StaticSem}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[The declaration of
-the generic library package
-Containers.@!Indefinite_@!Doubly_@!Linked_@!Lists@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Doubly_Linked_Lists]}
-has the same contents @Chg{Version=[3],New=[and semantics ],Old=[]}as
-Containers.@!Doubly_@!Linked_@!Lists except:]}
-
-@begin{Itemize}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The generic formal Element_Type is indefinite.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[The procedure with
-the profile:]}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Noprefix=[T],Keepnext=[T],Type=[Leading],Text=[@key{procedure} Insert (Container : @key{in out} List;
-                  Before    : @key{in}     Cursor;
-                  Position  :    @key{out} Cursor;
-                  Count     : @key{in}     Count_Type := 1);]}
-@end{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Noprefix=[T],Text=[is omitted.]}
-
-@begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This procedure is omitted because there is no way
-  to create a default-initialized object of an indefinite type. We considered
-  having this routine insert an empty element similar to the empty elements of
-  a vector, but rejected this possibility because the semantics are fairly
-  complex and very different from the existing case. That would make it more
-  error-prone to convert a container from a definite type to an indefinite
-  type; by omitting the routine completely, any problems will be diagnosed by
-  the compiler.]}
-@end{Discussion}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
-of Update_Element may be constrained even if Element_Type is unconstrained.]}
-@end{Itemize}
-@end{StaticSem}
-
-@begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The generic package Containers.Indefinite_Doubly_Linked_Lists is new.]}
-@end{Extend95}
-
-
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Hashed_Maps]}
-
-@begin{Intro}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The language-defined generic package Containers.Indefinite_Hashed_Maps provides
-a map with the same operations as the package Containers.Hashed_Maps
-(see @RefSecNum{The Package Containers.Hashed_Maps}),
-with the difference that the generic formal types Key_Type and Element_Type are
-indefinite.]}
-@end{Intro}
-
-@begin{StaticSem}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[The declaration of
-the generic library package
-Containers.Indefinite_Hashed_Maps@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Hashed_Maps]}
-has the same contents @Chg{Version=[3],New=[and semantics ],Old=[]}as
-Containers.Hashed_Maps except:]}
-
-@begin{Itemize}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The generic formal Key_Type is indefinite.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The generic formal Element_Type is indefinite.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[The procedure with
-the profile:]}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Noprefix=[T],Keepnext=[T],Type=[Leading],Text=[@key{procedure} Insert (Container : @key{in out} Map;
-                  Key       : @key{in}     Key_Type;
-                  Position  :    @key{out} Cursor;
-                  Inserted  :    @key{out} Boolean);]}
-@end{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Noprefix=[T],Text=[is omitted.]}
-
-@begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This procedure is omitted because there is no way
-  to create a default-initialized object of an indefinite type. We considered
-  having this routine insert an empty element similar to the empty elements of
-  a vector, but rejected this possibility because the semantics are fairly
-  complex and very different from the existing case. That would make it more
-  error-prone to convert a container from a definite type to an indefinite
-  type; by omitting the routine completely, any problems will be diagnosed by
-  the compiler.]}
-@end{Discussion}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
-of Update_Element may be constrained even if Element_Type is unconstrained.]}
-@end{Itemize}
-@end{StaticSem}
-
-@begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The generic package Containers.Indefinite_Hashed_Maps is new.]}
-@end{Extend95}
-
-
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Ordered_Maps]}
-
-@begin{Intro}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The language-defined generic package Containers.Indefinite_Ordered_Maps
-provides a map with the same operations as the package Containers.Ordered_Maps
-(see @RefSecNum{The Package Containers.Ordered_Maps}), with the difference that
-the generic formal types Key_Type and Element_Type are indefinite.]}
-@end{Intro}
-
-@begin{StaticSem}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[The declaration of
-the generic library package
-Containers.Indefinite_Ordered_Maps@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Ordered_Maps]}
-has the same contents @Chg{Version=[3],New=[and semantics ],Old=[]}as
-Containers.Ordered_Maps except:]}
-
-@begin{Itemize}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The generic formal Key_Type is indefinite.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The generic formal Element_Type is indefinite.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Keepnext=[T],Type=[Leading],Text=[The procedure with
-the profile:]}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Noprefix=[T],Keepnext=[T],Type=[Leading],Text=[@key{procedure} Insert (Container : @key{in out} Map;
-                  Key       : @key{in}     Key_Type;
-                  Position  :    @key{out} Cursor;
-                  Inserted  :    @key{out} Boolean);]}
-@end{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Noprefix=[T],Text=[is omitted.]}
-
-@begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This procedure is omitted because there is no way
-  to create a default-initialized object of an indefinite type. We considered
-  having this routine insert an empty element similar to the empty elements of
-  a vector, but rejected this possibility because the semantics are fairly
-  complex and very different from the existing case. That would make it more
-  error-prone to convert a container from a definite type to an indefinite
-  type; by omitting the routine completely, any problems will be diagnosed by
-  the compiler.]}
-@end{Discussion}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
-of Update_Element may be constrained even if Element_Type is unconstrained.]}
-
-@end{Itemize}
-@end{StaticSem}
-
-@begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The generic package Containers.Indefinite_Ordered_Maps is new.]}
-@end{Extend95}
-
-
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Hashed_Sets]}
-
-@begin{Intro}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The language-defined generic package
-Containers.Indefinite_Hashed_Sets provides a set with the same operations as
-the package Containers.Hashed_Sets
-(see @RefSecNum{The Package Containers.Hashed_Sets}), with the difference
-that the generic formal type Element_Type is indefinite.]}
-@end{Intro}
-
-@begin{StaticSem}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[The declaration
-of the generic library package
-Containers.Indefinite_Hashed_Sets@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Hashed_Sets]}
-has the same contents @Chg{Version=[3],New=[and semantics ],Old=[]}as
-Containers.Hashed_Sets except:]}
-
-@begin{Itemize}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The generic formal Element_Type is indefinite.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
-of Update_@!Element_@!Preserving_Key may be constrained even if Element_Type is
-unconstrained.]}
-@end{Itemize}
-@end{StaticSem}
-
-@begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The generic package Containers.Indefinite_Hashed_Sets is new.]}
-@end{Extend95}
-
-
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Ordered_Sets]}
-
-@begin{Intro}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[The language-defined generic package
-Containers.Indefinite_Ordered_Sets provides a set with the same operations as
-the package Containers.Ordered_Sets
-(see @RefSecNum{The Package Containers.Ordered_Sets}), with the difference
-that the generic formal type Element_Type is indefinite.]}
-@end{Intro}
-
-@begin{StaticSem}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[The declaration
-of the generic library package
-Containers.Indefinite_Ordered_Sets@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Ordered_Sets]}
-has the same contents @Chg{Version=[3],New=[and semantics ],Old=[]}as
-Containers.Ordered_Sets except:]}
-
-@begin{Itemize}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The generic formal Element_Type is indefinite.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
-of Update_@!Element_@!Preserving_Key may be constrained even if Element_Type is
-unconstrained.]}
-@end{Itemize}
-@end{StaticSem}
-
-@begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-The generic package Containers.Indefinite_Ordered_Sets is new.]}
-@end{Extend95}
-
-
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Indefinite_Holders]}
-
-@begin{Intro}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
-Containers.Indefinite_Holders provides a private type Holder and a set of
-operations for that type. A holder container holds a single element of an
-indefinite type.]}
+Containers.Multiway_Trees provides private types Tree and Cursor, and a set of
+operations for each type. A multiway tree container is well-suited to represent
+nested structures.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Text=[A holder containers allows the declaration of an
-object that can be used like an uninitialized variable or component of an
-indefinite type.]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Text=[A holder container may be @i{empty}.
-An empty holder does not contain an element.@Defn{empty holder}]}
-@end{Intro}
-
-@begin{StaticSem}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The generic library
-package Containers.Indefinite_Holders has the following declaration:]}
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal],Aref=[AI05-0069-1],Aref=[AI05-0084-1]}
-@ChgAdded{Version=[3],Text=[@key[generic]
-   @key[type] Element_Type (<>) @key[is private];
-   @key[with function] "=" (Left, Right : Element_Type) @key[return] Boolean @key[is] <>;
-@key[package] Ada.Containers.Indefinite_Holders @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Holders]}
-   @key[pragma] Preelaborate(Indefinite_Holders);
-   @key[pragma] Remote_Types(Indefinite_Holders);]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[A multiway tree container object manages a tree of
+internal @i<nodes>, each of which contains an element and pointers to the parent,
+first child, last child, next (successor) sibling, and previous (predecessor)
+sibling internal nodes.@Defn2{Term=[node],Sec=[of a tree]} A cursor designates a
+particular node within a tree (and by extension the element contained in that
+node, if any). A cursor keeps designating the same node (and element) as long as
+the node is part of the container, even if the node is moved within
+the container.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Holder} @key[is tagged private];
-   @key[pragma] Preelaborable_Initialization (Holder);]}
+@ChgAdded{Version=[3],Text=[A @i<subtree> is a particular node (which @i<roots the subtree>) and all of its child
+nodes (including all of the children of the child nodes, recursively).
+@Defn2{Term=[subtree],Sec=[of a tree]}@Defn{roots the subtree}@Defn2{Term=[subtree],Sec=[node which roots]} There is
+a special node, the @i<root>, which is always present and has no associated element
+value. The root node provides a place to add nodes to an otherwise empty tree and
+represents the bottom of the tree.@Defn2{Term=[root],Sec=[of a tree]}@Defn2{Term=[root node],Sec=[of a tree]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @AdaObjDefn{Empty_Holder} : @key[constant] Holder;]}
+@ChgAdded{Version=[3],Text=[A node that has no children is called a
+@i<leaf node>.@Defn2{Term=[leaf node],Sec=[of a tree]} The @i<ancestors> of a node
+are the parent node, the parent of the parent node, and so on until a node with
+no parent is reached.@Defn2{Term=[ancestor],Sec=[of a tree node]} Similarly,
+the @i<descendants> of a node are the child nodes,
+the children of each child node, and so on.@Defn2{Term=[descendant],Sec=[of a tree node]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] "=" (Left, Right : Holder) @key[return] Boolean;]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{To_Holder} (New_Item : Element_Type) @key[return] Holder;]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Empty} (Container : Holder) @key[return] Boolean;]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Clear} (Container : @key[in out] Holder);]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Element} (Container : Holder) @key[return] Element_Type;]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Replace_Element} (Container : @key[in out] Holder;
-                              New_Item  : @key[in]     Element_Type);]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Query_Element}
-  (Container : @key[in] Holder;
-   Process   : @key[not null access procedure] (Element : @key[in] Element_Type));]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Update_Element}
-  (Container : @key[in] Holder;
-   Process   : @key[not null access procedure] (Element : @key[in out] Element_Type));]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Assign} (Target : @key[in out] Holder; Source : @key[in] Holder);]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Copy} (Source : Holder) @key[return] Holder;]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Move} (Target : @key[in out] Holder; Source : @key[in out] Holder);]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key{private}]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   ... -- @RI[not specified by the language]]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key{end} Ada.Containers.Indefinite_Holders;]}
-
-@end{Example}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Text=[The actual function for the generic formal
-function "=" on Element_Type values is expected to define a reflexive and
-symmetric relationship and return the same result value each time it is called
-with a particular pair of values. If it behaves in some other manner, the
-function "=" on holder values returns an unspecified value. The exact arguments
-and number of calls of this generic formal function by the function "=" on
-holder values are unspecified.]}
+@ChgAdded{Version=[3],Text=[The nodes of a subtree could be visited in several
+different orders. For a @i<depth-first order>, the last step of visiting a node
+is to visit the nodes of its child list in order, recursively.@Defn{depth-first
+order}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[If the actual function for "=" is not symmetric
-  and consistent, the result returned by any of the functions defined to use
-  "=" cannot be predicted. The implementation is not required to protect
-  against "=" raising an exception, or returning random results, or any other
-  "bad" behavior. And it can call "=" in whatever manner makes sense. But
-  note that only the results of the function "=" is unspecified; other
-  subprograms are not allowed to break if "=" is bad.]}
+  @ChgAdded{Version=[3],Text=[For the depth-first order, when each child node is
+    visited, the child list of the child node is visited before the next sibling
+    of the child node is visited.]}
 @end{Ramification}
+@end{Intro}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Text=[The type Holder is used to represent holder
-containers. The type Holder needs finalization@PDefn2{Term=<needs finalization>,
-Sec=<language-defined type>}
-(see @RefSecNum{Assignment and Finalization}).]}
+@begin{StaticSem}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Text=[Empty_Holder represents an empty holder object. If
-an object of type Holder is not otherwise initialized, it is initialized to the
-same value as Empty_Holder.]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Text=[@Redundant[Some operations of this generic package
-have access-to-subprogram parameters. To ensure such operations are
-well-defined, they guard against certain actions by the designated subprogram.
-In particular, some operations check for @ldquote@;tampering with
-elements@rdquote of a container because they depend on elements of the
-container not being replaced.]]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a holder]}
-A subprogram is said to @i{tamper with elements} of a holder object @i<H> if:]}
-
-@begin{Itemize}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[It clears the element contained by @i<H>, that is,
-it calls the Clear procedure with @i<H> as a parameter;]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[It replaces the element contained by @i<H>, that is,
-it calls the Replace_Element procedure with H as a parameter;]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[It calls the Move procedure with @i<H> as a parameter;]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[It finalizes @i<H>.]}
-
-@begin{Reason}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[Complete replacement of an element can cause its
-  memory to be deallocated while another operation is holding onto a reference
-  to it. That can't be allowed. However, a simple modification of (part of) an
-  element is not a problem, so Update_Element does not cause a problem.]}
-@end{Reason}
-@end{Itemize}
-
-@begin{DescribeCode}
-
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The generic library
+package Containers.Multiway_Trees has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} "=" (Left, Right : Holder) @key{return} Boolean;]}
-@end{Example}
+@ChgAdded{Version=[3],Text=[@key{generic}
+   @key{type} Element_Type @key{is private};
+   @key{with function} "=" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
+@key{package} Ada.Containers.Multiway_Trees @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Multiway_Trees]}
+@key{package} Ada.Containers.Multiway_Trees @key{is}
+   @key{pragma} Preelaborate(Multiway_Trees);
+   @key{pragma} Remote_Types(Multiway_Trees);]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[If Left and Right denote the same
-holder object, then the function returns True. Otherwise, it compares the
-element contained in Left to the element contained in Right using the
-generic formal equality operator, returning the result of that operation. Any
-exception raised during the evaluation of element equality is propagated.]}
-
-@begin{ImplNote}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[This wording describes the canonical semantics.
-  However, the order and number of calls on the formal equality @key[function]
-  is unspecified, so an implementation need not call the equality function
-  if the correct answer can be determined without doing so.]}
-@end{ImplNote}
-
-@begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] To_Holder (New_Item : Element_Type) @key[return] Holder;]}
-@end{Example}
+@ChgAdded{Version=[3],Text=[   @key{type} @AdaTypeDefn{Tree} @key{is tagged private};
+   @key{pragma} Preelaborable_Initialization(Tree);]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns a non-empty holder
-containing an element initialized to New_Item.]}
-
-@begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Is_Empty (Container : Holder) @key[return] Boolean;]}
-@end{Example}
+@ChgAdded{Version=[3],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};
+   @key{pragma} Preelaborable_Initialization(Cursor);]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the holder is
-empty, and False if it contains an element.]}
-
-@begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Clear (Container : @key[in out] Holder);]}
-@end{Example}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{Empty_Tree} : @key{constant} Tree;]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Removes the element from Container.
-Container is empty after a successful Clear operation.]}
-
-@begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Element (Container : Holder) @key[return] Element_Type;]}
-@end{Example}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[If Container is empty,
-Constraint_Error is propagated. Otherwise, returns the element stored in
-Container.]}
 
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Replace_Element (Container : @key[in out] Holder;
-                           New_Item  : @key[in]     Element_Type);]}
-@end{Example}
+** TBD below
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Overlap} (Left, Right : Set) @key{return} Boolean;]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Replace_Element assigns the value
-New_Item into Container, replacing any preexisting content of Container.
-Container is not empty after a successful call to Replace_Element.]}
 
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Query_Element
-  (Container : @key[in] Holder;
-   Process   : @key[not null access procedure] (Element : @key[in] Element_Type));]}
-@end{Example}
+   function Equal_Subtree (Left_Position : Cursor;
+                           Right_Position: Cursor) @key{return} Boolean;
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[If Container is empty,
-Constraint_Error is propagated. Otherwise, Query_Element calls
-Process.@key[all] with the contained element as the argument. Program_Error is
-raised if Process.@key[all] tampers with the elements of Container. Any
-exception raised by Process.@key[all] is propagated.]}
+   function "=" (Left, Right : Tree) @key{return} Boolean;
 
-@begin{ImplNote}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @ldquote@;tamper with the elements@rdquote
-  check is intended to prevent the Element parameter of Process from being
-  modified or deleted outside of Process. The check prevents data loss (if
-  Element_Type is passed by copy) or erroneous execution (if Element_Type is an
-  unconstrained type).]}
-@end{ImplNote}
+   function Is_Empty (Container : Tree) @key{return} Boolean;
 
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Update_Element
-  (Container : @key[in] Holder;
-   Process   : @key[not null access procedure] (Element : @key[in out] Element_Type));]}
-@end{Example}
+   function Node_Count (Container : Tree) @key{return} Count_Type;
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[If Container is empty,
-Constraint_Error is propagated. Otherwise, Update_Element calls
-Process.@key[all] with the contained element as the argument. Program_Error is
-raised if Process.@key[all] tampers with the elements of Container. Any
-exception raised by Process.@key[all] is propagated.]}
+   function Subtree_Node_Count (Position : Cursor) @key{return} Count_Type;
 
-@begin{ImplNote}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The Element parameter of Process.@key[all] may be
-  constrained even if Element_Type is unconstrained.]}
-@end{ImplNote}
+   function Depth (Position : Cursor) @key{return} Count_Type;
 
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Assign (Target : @key[in out] Holder; Source : @key[in] Holder);]}
-@end{Example}
+   function Is_Root (Position : Cursor) @key{return} Boolean;
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as
-Source, the operation has no effect. If Source is empty, Clear (Target) is
-called. Otherwise, Replace_Element (Target, Element (Source)) is called.]}
+   function Is_Leaf (Position : Cursor) @key{return} Boolean;
 
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Copy (Source : Holder) @key[return] Holder;]}
-@end{Example}
+   function Root (Container : Tree) @key{return} Cursor;
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[If Source is empty, returns an empty
-holder; otherwise, returns To_Holder (Element (Source)).]}
+   procedure Clear (Container : in out Tree);
 
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Move (Target : @key[in out] Holder; Source : @key[in out] Holder);]}
-@end{Example}
+   function Element (Position : Cursor) @key{return} Element_Type;
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object
-as Source, then Move has no effect. Otherwise, the element contained by Source
-(if any) is removed from Source and inserted into Target, replacing any
-preexisting content. Source is empty after a successful call to Move.]}
+   procedure Replace_Element (Container : in out Tree;
+                              Position  : in     Cursor;
+                              New_Item  : in     Element_Type);
 
-@end{DescribeCode}
+   procedure Query_Element
+     (Position : in Cursor;
+      Process  : not null access procedure (Element : in Element_Type));
+
+   procedure Update_Element
+     (Container : in out Tree;
+      Position  : in     Cursor;
+      Process   : not null access procedure
+                      (Element : in out Element_Type));
+
+   procedure Assign (Target : in out Tree; Source : in Tree);
+
+   function Copy (Source : Tree) @key{return} Tree;
+
+   procedure Move (Target : in out Tree;
+                   Source : in out Tree);
+
+   procedure Delete_Leaf (Container : in out Tree;
+                          Position  : in out Cursor);
+
+   procedure Delete_Subtree (Container : in out Tree;
+                             Position  : in out Cursor);
+
+   procedure Swap (Container : in out Tree;
+                   I, J      : in     Cursor);
+
+   function Find (Container : Tree;
+                  Item      : Element_Type)
+      @key{return} Cursor;
+
+   function Find_In_Subtree (Container : Tree;
+                             Item      : Element_Type;
+                             Position  : Cursor)
+      @key{return} Cursor;
+
+   function Ancestor_Find (Container : Tree;
+                           Item      : Element_Type;
+                           Position  : Cursor)
+      @key{return} Cursor;
+
+   function Contains (Container : Tree;
+                      Item      : Element_Type) @key{return} Boolean;
+
+   function Has_Element (Position : Cursor) @key{return} Boolean;
+
+   procedure Iterate
+     (Container : in Tree;
+      Process   : not null access procedure (Position : in Cursor));
+
+   procedure Iterate_Subtree
+     (Position  : in Cursor;
+      Process   : not null access procedure (Position : in Cursor));
+
+   function Child_Count (Parent : Cursor) @key{return} Count_Type;
+
+   function Child_Depth (Parent, Child : Cursor) @key{return} Count_Type;
+
+   procedure Insert_Child (Container : in out Tree;
+                           Parent    : in     Cursor;
+                           Before    : in     Cursor;
+                           New_Item  : in     Element_Type;
+                           Count     : in     Count_Type := 1);
+
+   procedure Insert_Child (Container : in out Tree;
+                           Parent    : in     Cursor;
+                           Before    : in     Cursor;
+                           New_Item  : in     Element_Type;
+                           Position  :    out Cursor;
+                           Count     : in     Count_Type := 1);
+
+   procedure Insert_Child (Container : in out Tree;
+                           Parent    : in     Cursor;
+                           Before    : in     Cursor;
+                           Position  :    out Cursor;
+                           Count     : in     Count_Type := 1);
+
+   procedure Prepend_Child (Container : in out Tree;
+                            Parent    : in     Cursor;
+                            New_Item  : in     Element_Type;
+                            Count     : in     Count_Type := 1);
+
+   procedure Append_Child (Container : in out Tree;
+                           Parent    : in     Cursor;
+                           New_Item  : in     Element_Type;
+                           Count     : in     Count_Type := 1);
+
+   procedure Delete_Children (Container : in out Tree;
+                              Parent    : in     Cursor);
+
+   procedure Copy_Subtree (Target   : in out Tree;
+                           Parent   : in     Cursor;
+                           Before   : in     Cursor;
+                           Source   : in     Cursor);
+
+   procedure Splice_Subtree (Target   : in out Tree;
+                             Parent   : in     Cursor;
+                             Before   : in     Cursor;
+                             Source   : in out Tree;
+                             Position : in out Cursor);
+
+   procedure Splice_Subtree (Container: in out Tree;
+                             Parent   : in     Cursor;
+                             Before   : in     Cursor;
+                             Position : in     Cursor);
+
+   procedure Splice_Children (Target          : in out Tree;
+                              Target_Parent   : in     Cursor;
+                              Before          : in     Cursor;
+                              Source          : in out Tree;
+                              Source_Parent   : in     Cursor);
+
+   procedure Splice_Children (Container       : in out Tree;
+                              Target_Parent   : in     Cursor;
+                              Before          : in     Cursor;
+                              Source_Parent   : in     Cursor);
+
+   function Parent (Position : Cursor) @key{return} Cursor;
+
+   function First_Child (Parent : Cursor) @key{return} Cursor;
+
+   function First_Child_Element (Parent : Cursor) @key{return} Element_Type;
+
+   function Last_Child (Parent : Cursor) @key{return} Cursor;
+
+   function Last_Child_Element (Parent : Cursor) @key{return} Element_Type;
+
+   function Next_Sibling (Position : Cursor) @key{return} Cursor;
+
+   function Previous_Sibling (Position : Cursor) @key{return} Cursor;
+
+   procedure Next_Sibling (Position : in out Cursor);
+
+   procedure Previous_Sibling (Position : in out Cursor);
+
+   procedure Iterate_Children
+     (Container : in Tree;
+      Parent    : in     Cursor;
+      Process   : not null access procedure (Position : in Cursor));
+
+   procedure Reverse_Iterate_Children
+     (Container : in Tree;
+      Parent    : in     Cursor;
+      Process   : not null access procedure (Position : in Cursor));
+
+private
+   ... -- not specified by the language
+end Ada.Containers.Multiway_Trees;
+
+The actual function for the generic formal function "=" on Element_Type values
+is expected to define a reflexive and symmetric relationship and @key{return} the same
+result value each time it is called with a particular pair of values. If it
+behaves in some other manner, the functions Find, Reverse_Find, Equal_Subtree,
+and "=" on tree values @key{return} an unspecified value. The exact arguments and
+number of calls of this generic formal function by the functions Find,
+Reverse_Find, Equal_Subtree, and "=" on tree values are unspecified.
+
+The type Tree is used to represent trees. The type Tree needs finalization (see
+7.6).
+
+Empty_Tree represents the empty Tree object. It contains only the root node (Count
+(Empty_Tree) returns 1). If an object of type Tree is not otherwise initialized,
+it is initialized to the same value as Empty_Tree.
+
+No_Element represents a cursor that designates no element. If an object of type
+Cursor is not otherwise initialized, it is initialized to the same value as
+No_Element.
+
+The predefined "=" operator for type Cursor returns True if both cursors are
+No_Element, or designate the same element in the same container.
+
+Execution of the default implementation of the Input, Output, Read, or Write
+attribute of type Cursor raises Program_Error.
+
+Tree'Write writes Tree.Count-1 elements to the stream.
+Tree'Read reads Tree.Count-1 elements from the stream.
+
+@Redundant[Some operations of this generic package have access-to-subprogram parameters. To
+ensure such operations are well-defined, they guard against certain actions by
+the designated subprogram. In particular, some operations check for "tampering
+with cursors" of a container because they depend on the set of elements of the
+container remaining constant, and others check for "tampering with elements" of
+a container because they depend on elements of the container not being replaced.]
+
+A subprogram is said to @i<tamper with cursors> of a tree object T if:
+* it inserts or deletes elements of T, that is, it calls the Clear, Delete_Leaf,
+  Insert_Child, or Delete_Children procedures with T as a parameter; or
+
+AARM To be honest: Operations which are defined to be equivalent to a call on
+one of these operations also are included. Similarly, operations which call one
+of these as part of their definition are included.
+
+* it reorders the elements of T, that is, it calls the Splice_Subtree or
+  Splice_Children procedures; or
+
+* it finalizes T; or
+
+* it calls Assign with T as the Target parameter; or
+
+* it calls the Move procedure with T as a parameter.
+
+AARM Reason: Swap copies elements rather than reordering them, so it doesn't
+tamper with cursors.
+
+A subprogram is said to tamper with elements of a tree object T if:
+
+* it tampers with cursors of T; or
+
+* it replaces one or more elements of T, that is, it calls the Replace_Element or Swap
+  procedures with T as a parameter.
+
+AARM Reason: Complete replacement of an element can cause its memory to be
+deallocated while another operation is holding onto a reference to it. That
+can't be allowed. However, a simple modification of (part of) an element is not
+a problem, so Update_Element does not cause a problem.
+
+   function Equal_Subtree (Left_Position : Cursor;
+                           Right_Position: Cursor) @key{return} Boolean;
+
+      If Left_Position or Right_Position equals No_Element, propagates
+      Constraint_Error. If the number of child nodes of the element designated
+      by Left_Position is different than the number of child nodes of the
+      element designated by Right_Position, the function returns False. If
+      Left_Position designates a root node and Right_Position does not,
+      the function returns False. If Right_Position designates a
+      root node and Left_Position does not, the function returns False.
+      Unless both cursors designate a root node, the elements are compared
+      using the generic formal equality operator. If the result is False, the
+      function returns False. Otherwise, it calls
+      Equal_Subtree on a cursor designating each child element of the element
+      designated by Left_Position and a cursor designated the corresponding
+      child element of the element designated by Right_Position. If any such
+      call returns False, the function returns False; otherwise it returns True.
+      Any exception raised during the evaluation of element equality is
+      propagated.
+
+      [Editor's note: I needed this to define "=" on Trees, as a recursive
+      definition is the only one that makes sense.]
+
+      AARM Ramification: Left_Position and Right_Position do not need to be from
+      the same tree.
+
+      AARM Implementation Note: This wording describes the canonical semantics.
+      However, the order and number of calls on the formal equality function is
+      unspecified for all of the operations that use it in this package, so an
+      implementation can call it as many or as few times as it needs to get the
+      correct answer. Similarly, a global rule (see the introduction of Annex A)
+      says that language-defined routines are not affected by overriding of
+      other language-defined routines. This means that no reasonable program can
+      tell how many times Equal_Subtree is called, and thus an implementation
+      can call it as many or as few times as it needs to get the correct answer.
+      Specifically, there is no requirement to call the formal equality or
+      Equal_Subtree additional times once the answer has been determined.
+
+   function "=" (Left, Right : Tree) @key{return} Boolean;
+
+      If Left and Right denote the same tree object, then the function returns
+      True. Otherwise, it calls Equal_Subtree with a cursor designating the root
+      node of Left and Right; the result is returned. Any exception raised during
+      the evaluation of Equal_Subtree is propagated.
+
+      AARM Implementation Note: Similar considerations apply here as apply to
+      Equal_Subtree. The actual number of calls performed is unspecified.
+
+   function Node_Count (Container : Tree) @key{return} Count_Type;
+
+      Node_Count returns the number of nodes in Container.
+
+      AARM Ramification: Since all tree objects have a root node, this can never
+      @key{return} a value of 0. Node_Count (Some_Tree) should always equal
+      Subtree_Node_Count (Root (Some_Tree)).
+
+   function Subtree_Node_Count (Position : Cursor) @key{return} Count_Type;
+
+      If Position is No_Element, Subtree_Count returns 0; otherwise,
+      Subtree_Node_Count returns the number of nodes in the subtree that is rooted
+      by Position.
+
+   function Is_Empty (Container : Tree) @key{return} Boolean;
+
+      Equivalent to Count (Container) = 1.
+
+      AARM Ramification: An empty tree contains just the root node.
+
+   function Depth (Position : Cursor) @key{return} Count_Type;
+
+      If Position equals No_Element, Depth returns 0; otherwise Depth returns
+      the number of ancestor nodes of the node designated by Position (including
+      the node itself).
+
+      AARM Ramification: Depth (Root (Some_Tree)) = 1.
+
+   function Is_Root (Position : Cursor) @key{return} Boolean;
+
+      Is_Root returns True if the Position designates the root node of the
+      tree; and returns False otherwise.
+
+   function Is_Leaf (Position : Cursor) @key{return} Boolean;
+
+      Is_Leaf returns True if Position designates a node that does not have
+      any child nodes; and returns False otherwise.
+
+      AARM Ramification: Is_Leaf returns False if passed No_Element, since
+      No_Element does not designate a node. Is_Leaf can be passed a cursor
+      that designates the root node; Is_Leaf will @key{return} True if passed
+      the root node of an empty tree.
+
+   function Root (Container : Tree) @key{return} Cursor;
+
+      Root returns a cursor that designates the root node of Container.
+
+      AARM Ramification: There is always a root node, even in an empty container,
+      so this function never returns No_Element.
+
+   procedure Clear (Container : in out Tree);
+
+      Removes all the elements from Container.
+
+      AARM Ramification: The root node is not removed; all trees have a root node.
+
+   function Element (Position : Cursor) @key{return} Element_Type;
+
+      If Position equals No_Element, then Constraint_Error is propagated; if
+      Position designates the root node of a tree, then Program_Error is propagated.
+      Otherwise, Element returns the element designated by Position.
+
+      AARM Ramification: The root node does not contain an element, so that value cannot
+      be read or written.
+
+   procedure Replace_Element (Container : in out Tree;
+                              Position  : in     Cursor;
+                              New_Item  : in     Element_Type);
+
+      If Position equals No_Element, then Constraint_Error is propagated; if Position
+      does not designate an element in Container (including if it designates the root
+      node), then Program_Error is propagated. Otherwise Replace_Element assigns the value New_Item
+      to the element designated by Position.
+
+   procedure Query_Element
+     (Position : in Cursor;
+      Process  : not null access procedure (Element : in Element_Type));
+
+      If Position equals No_Element, then Constraint_Error is propagated; if
+      Position designates the root node of a tree, then Program_Error is propagated.
+      Otherwise, Query_Element calls Process.all with the element
+      designated by Position as the argument. Program_Error is propagated if Process.all
+      tampers with the elements of Container. Any exception raised by
+      Process.all is propagated.
+
+   procedure Update_Element
+     (Container : in out Tree;
+      Position  : in     Cursor;
+      Process   : not null access procedure
+                      (Element : in out Element_Type));
+
+      If Position equals No_Element, then Constraint_Error is propagated; if Position
+      does not designate an element in Container (including if it designates the root
+      node), then Program_Error is propagated. Otherwise Update_Element calls Process.all with
+      the element designated by Position as the argument. Program_Error is propagated
+      if Process.all tampers with the elements of Container. Any exception raised
+      by Process.all is propagated.
+
+      If Element_Type is unconstrained and definite, then the actual Element
+      parameter of Process.all shall be unconstrained.
+
+   procedure Assign (Target : in out Tree; Source : in Tree);
+
+      If Target denotes the same object as Source, the operation has no
+      effect. Otherwise, it calls Clear (Target), and then each element of Source is
+      assigned to a corresponding element in Target.
+
+      AARM To Be Honest: The "corresponding element in Target" has a parent
+      element that corresponds to the parent element of the Source element, and
+      has child elements that correspond to the child elements of the Source
+      element.
+
+   function Copy (Source : Tree) @key{return} Tree;
+
+      Returns a tree with the same structure as Source and whose elements are
+      initialized from the corresponding elements of Source.
+
+   procedure Move (Target : in out Tree;
+                   Source : in out Tree);
+
+      If Target denotes the same object as Source, then Move has no effect.
+      Otherwise, Move first calls Clear (Target). Then, the nodes other than the
+      root node in Source are moved to Target (in the same positions). After Move
+      completes, Count(Target) is the number of nodes originally in Source, and
+      Count(Source) is 1.
+
+   procedure Delete_Leaf (Container : in out Tree;
+                          Position  : in out Cursor);
+
+      If Position equals No_Element, then Constraint_Error is propagated; if Position
+      does not designate an element in Container (including if it designates the root
+      node), then Program_Error is propagated. If the element designated by position has any
+      child elements, then Constraint_Error is propagated. Otherwise Delete_Leaf removes
+      (from Container) the element designated by Position. Finally, Position is set to
+      No_Element.
+
+      AARM Ramification: The check on Position checks that the cursor does not
+      belong to some other Container. This check implies that a reference to the
+      container is included in the cursor value. This wording is not meant to
+      require detection of dangling cursors; such cursors are defined to be
+      invalid, which means that execution is erroneous, and any result is
+      allowed (including not raising an exception).
+
+      The root node cannot be deleted.
+      End AARM Ramification.
+
+   procedure Delete_Subtree (Container : in out Tree;
+                             Position  : in out Cursor);
+
+      If Position equals No_Element, then Constraint_Error is propagated. If Position
+      does not designate an element in Container (including if it designates the root
+      node), then Program_Error is propagated. Otherwise Delete removes (from Container)
+      the subtree designated by Position (that is, the node designated by Position and
+      all of the descendant nodes of that node), and Position is set to No_Element.
+
+      AARM Ramification: The root node cannot be deleted. To delete the entire contents
+      of the tree, call Clear(Container).
+
+   procedure Swap (Container : in out Tree;
+                   I, J      : in     Cursor);
+
+      If either I or J equals No_Element, then Constraint_Error is propagated. If
+      either I or J do not designate an element in Container (including if either
+      designates the root node), then Program_Error is propagated. Otherwise, Swap
+      exchanges the values of the elements designated by I and J.
+
+      AARM Ramification: After a call to Swap, I designates the element value
+      previously designated by J, and J designates the element value previously
+      designated by I. The position of the elements do not change; for instance,
+      the parent node and the first child node of I are unchanged by the operation.
+
+      The root nodes do not contain element values, so they cannot be swapped
+      End AARM Ramification.
+
+      AARM To be honest: The implementation is not required to actually copy the
+      elements if it can do the swap some other way. But it is allowed to copy
+      the elements if needed.
+
+   function Find (Container : Tree;
+                  Item      : Element_Type)
+      @key{return} Cursor;
+
+      Find searches the elements of Container for an element equal to Item (using
+      the generic formal equality operator). The search starts at the root node.
+      The search checks the tree in a depth-first order. If no equal element is
+      found, then Find returns No_Element. Otherwise, it returns a cursor designating
+      the first equal element encountered.
+
+   function Find_In_Subtree (Container : Tree;
+                             Item      : Element_Type;
+                             Position  : Cursor)
+      @key{return} Cursor;
+
+      If Position equals No_Element, then Constraint_Error is propagated; if Position
+      does not designate a node in Container, then Program_Error is propagated.
+      Find_In_Subtree searches a subtree of the elements of Container for an element
+      equal to Item (using the generic formal equality operator). The search starts
+      at the element designated by Position. The search checks the subtree rooted by
+      Position in a depth-first order. If no equal element is found, then Find
+      returns No_Element. Otherwise, it returns a cursor designating the first
+      equal element encountered.
+
+      AARM Ramification: Find_In_Subtree does not check any siblings of the element
+      designated by Position. The root node does not contain an element, and
+      therefore it can never be returned, but it can be explicitly passed to
+      Position.
+
+      [Editor's note: The subtle difference in wording for belonging to the correct
+      container is needed as a cursor designating the root node is allowed here, and
+      it does not "designate an element" (anywhere), but it does "designate a node" in
+      Container.]
+
+   function Ancestor_Find (Container : Tree;
+                           Item      : Element_Type;
+                           Position  : Cursor)
+      @key{return} Cursor;
+
+      If Position equals No_Element, then Constraint_Error is propagated; if Position
+      does not designate an element in Container (including if it designates the root
+      node), then Program_Error is propagated. Otherwise, Ancestor_Find searches for
+      an element equal to Item (using the generic formal equality operator). The search
+      starts at the element designated by Position, and checks each ancestor proceeding
+      toward the root of the subtree. If no equal element is found, then Ancestor_Find
+      returns No_Element. Otherwise, it returns a cursor designating the first
+      equal element encountered.
+
+   function Contains (Container : Tree;
+                      Item      : Element_Type) @key{return} Boolean;
+
+      Equivalent to Find (Container, Item) /= No_Element.
+
+   function Has_Element (Position : Cursor) @key{return} Boolean;
+
+      Returns True if Position designates an element, and returns False
+      otherwise. @Redundant[In particular, Has_Element returns False if the
+      cursor designates the root node or equals No_Element.]
+
+      AARM To Be Honest: This function might not detect cursors that designate
+      deleted elements; such cursors are invalid (see below) and the result of
+      Has_Element for an invalid cursor is unspecified (but not erroneous).
+
+   procedure Iterate
+     (Container : in Tree;
+      Process   : not null access procedure (Position : in Cursor));
+
+      Iterate calls Process.all with a cursor that designates each element in
+      Container, starting with the root node and proceeding in a depth-first
+      order. Program_Error is propagated if Process.all tampers with the
+      cursors of Container. Any exception raised by Process.all is propagated.
+
+      AARM Ramification: Process is not called with the root node, which does
+      not have an associated element.
+
+      [Editor's note: It is a bit weird to skip the root node, but it seems better
+      that every cursor has an associated element. The alternative that the root
+      node is returned would require most Process implementations to test Is_Root
+      explicitly before doing any element operations; that would be a tripping
+      hazard (very easy to forget).]
+
+      AARM Implementation Note: The purpose of the tamper with cursors check is
+      to prevent erroneous execution from the Position parameter of Process.all
+      becoming invalid. This check takes place when the operations that tamper
+      with the cursors of the container are called. The check cannot be made
+      later (say in the body of Iterate), because that could cause the Position
+      cursor to be invalid and potentially cause execution to become erroneous
+      -- defeating the purpose of the check.
+
+      See Iterate for vectors (A.18.2) for a suggested implementation of the
+      check.
+      End AARM Implementation Note.
+
+   procedure Iterate_Subtree
+     (Position  : in Cursor;
+      Process   : not null access procedure (Position : in Cursor));
+
+      If Position equals No_Element, then Constraint_Error is propagated.
+      Iterate calls Process.all with a cursor that designates each element in
+      the subtree rooted by the node designated by Position, starting with the
+      node designated by Position and proceeding in a depth-first order. Program_Error
+      is propagated if Process.all tampers with the cursors of Container. Any
+      exception raised by Process.all is propagated.
+
+      AARM Ramification: Position can be passed a cursor designating the root
+      node; in that case, Process is not called with the root node, which does
+      not have an associated element.
+
+   function Child_Count (Parent : Cursor) @key{return} Count_Type;
+
+      Child_Count returns the number of child nodes of the node designated
+      by Parent.
+
+   function Child_Depth (Parent, Child : Cursor) @key{return} Count_Type;
+
+      If Child or Parent is equal to No_Element, then Constraint_Error is
+      propagated. Otherwise, Child_Depth returns the number of ancestor nodes
+      of Child (including Child itself), up to but not including Parent;
+      in this case Program_Error is propagated if Parent is not an
+      ancestor of Child.
+
+      AARM Ramification: Program_Error is propagated if Parent and Child are
+      nodes in different containers.
+
+      Child_Depth (Root (Some_Tree), Child) + 1 = Depth (Child) as the root
+      is not counted.
+      End AARM Ramification.
+
+   procedure Insert_Child (Container : in out Tree;
+                           Parent    : in     Cursor;
+                           Before    : in     Cursor;
+                           New_Item  : in     Element_Type;
+                           Count     : in     Count_Type := 1);
+
+      If Parent equals No_Element, then Constraint_Error is propagated. If Parent
+      does not designate a node in Container, then Program_Error is propagated.
+      If Before is not equal to No_Element, and does not designate a node in
+      Container, then Program_Error is propagated. If Before is not equal to
+      No_Element, and Container.Parent (Before) is not equal to Parent, then
+      Constraint_Error is propagated. Otherwise, Insert_Child allocates Count nodes
+      containing copies of New_Item and inserts them as children of Parent.
+      If Parent already has child nodes then the new nodes are inserted prior to the
+      node designated by Before, or, if Before equals No_Element, the new nodes
+      are inserted after the last existing child node of Parent. Any
+      exception raised during allocation of internal storage is propagated,
+      and Container is not modified.
+
+   procedure Insert_Child (Container : in out Tree;
+                           Parent    : in     Cursor;
+                           Before    : in     Cursor;
+                           New_Item  : in     Element_Type;
+                           Position  :    out Cursor;
+                           Count     : in     Count_Type := 1);
+
+      If Parent equals No_Element, then Constraint_Error is propagated. If Parent
+      does not designate a node in Container, then Program_Error is propagated.
+      If Before is not equal to No_Element, and does not designate a node in
+      Container, then Program_Error is propagated. If Before is not equal to
+      No_Element, and Container.Parent (Before) is not equal to Parent, then
+      Constraint_Error is propagated. Otherwise, Insert_Child allocates Count nodes
+      containing copies of New_Item and inserts them as children of Parent.
+      If Parent already has child nodes then the new nodes are inserted prior to the
+      node designated by Before, or, if Before equals No_Element, the new nodes
+      are inserted after the last existing child node of Parent. Position designates
+      the first newly-inserted node. Any exception raised during allocation of
+      internal storage is propagated, and Container is not modified.
+
+   procedure Insert_Child (Container : in out Tree;
+                           Parent    : in     Cursor;
+                           Before    : in     Cursor;
+                           Position  :    out Cursor;
+                           Count     : in     Count_Type := 1);
+
+      If Parent equals No_Element, then Constraint_Error is propagated. If Parent
+      does not designate a node in Container, then Program_Error is propagated.
+      If Before is not equal to No_Element, and does not designate a node in
+      Container, then Program_Error is propagated. If Before is not equal to
+      No_Element, and Container.Parent (Before) is not equal to Parent, then
+      Constraint_Error is propagated. Otherwise, Insert_Child allocates Count nodes,
+      the elements contained in the new nodes are initialized by default
+      (see 3.3.1), and the new nodes are inserted as children of Parent.
+      If Parent already has child nodes then the new nodes are inserted prior
+      to the node designated by Before, or, if Before equals No_Element, the
+      new nodes are inserted after the last existing child node of Parent.
+      Position designates the first newly-inserted node. Any exception raised
+      during allocation of internal storage is propagated, and Container is not
+      modified.
+
+   procedure Prepend_Child (Container : in out Tree;
+                            Parent    : in     Cursor;
+                            New_Item  : in     Element_Type;
+                            Count     : in     Count_Type := 1);
+
+      Equivalent to Insert_Child (Container, Parent, First_Child (Container,
+      Parent), New_Item, Count).
+
+   procedure Append_Child (Container : in out Tree;
+                           Parent    : in     Cursor;
+                           New_Item  : in     Element_Type;
+                           Count     : in     Count_Type := 1);
+
+      Equivalent to Insert_Child (Container, Parent, Last_Child (Container,
+      Parent), New_Item, Count).
+
+   procedure Delete_Children (Container : in out Tree;
+                              Parent    : in     Cursor);
+
+      If Parent equals No_Element, then Constraint_Error is propagated. If Parent
+      does not designate a node in Container, Program_Error is propagated.
+      Otherwise, Delete_Children removes (from Container) all of the child elements
+      of Parent along with their dependent elements.
+
+      AARM Discussion: This routine deletes all of the child subtrees of Parent
+      at once. Use Delete_Subtree to delete an individual subtree.
+
+      [Editor's note:  We don't provide a Delete_Leaf_Children (which would only
+      delete leaf nodes), even though we do provide such a routine for the entire tree,
+      as it would require pretesting the nodes to verify that they are leaves before
+      doing any deletions, eliminating any performance advantage.]
+
+   procedure Copy_Subtree (Target   : in out Tree;
+                           Parent   : in     Cursor;
+                           Before   : in     Cursor;
+                           Source   : in     Cursor);
+
+      If Parent equals No_Element, then Constraint_Error is propagated. If Parent
+      does not designate a node in Target, then Program_Error is propagated.
+      If Before is not equal to No_Element, and does not designate a node in
+      Target, then Program_Error is propagated. If Before is not equal to
+      No_Element, and Target.Parent (Before) is not equal to Parent, then
+      Constraint_Error is propagated. If Source designates a root node,
+      then Constraint_Error is propagated. If Source is equal to No_Element,
+      then the operation has no effect. Otherwise, the subtree
+      rooted by Source (which can be from any tree; it does not have to be a
+      subtree of Target) is copied (new nodes are allocated to create a new subtree
+      with the same structure as the Source subtree, with each element initialized
+      from the corresponding element of the Source subtree) and inserted
+      into Target as a child of Parent. If Parent already has child nodes
+      then the new nodes are inserted prior to the node designated by Before,
+      or, if Before equals No_Element, the new nodes are inserted after the
+      last existing child node of Parent. The parent of the newly created
+      subtree is set to Parent, and the overall count of Target is incremented
+      by Subtree_Count (Source). Any exception raised during allocation of
+      internal storage is propagated, and Container is not modified.
+
+      AARM Discussion: We only need one routine here, as the source object
+      is not modified, so we can use the same routine for both copying within
+      and between containers.
+
+      AARM Ramification: We do not allow copying a subtree that includes a
+      root node, as that would require inserting a node with no value
+      in the middle of the target tree. To copy an entire tree to another
+      tree object, use Copy.
+
+      [Editor's note: Normally, we would call the Source parameter "Position";
+      and Target would be "Container" but that seems to imply that the same
+      container is required for the Source parameter (which it is not).]
+
+   procedure Splice_Subtree (Target   : in out Tree;
+                             Parent   : in     Cursor;
+                             Before   : in     Cursor;
+                             Source   : in out Tree;
+                             Position : in out Cursor);
+
+      If Parent equals No_Element, then Constraint_Error is propagated. If Parent
+      does not designate a node in Target, then Program_Error is propagated.
+      If Before is not equal to No_Element, and does not designate a node in
+      Target, then Program_Error is propagated. If Before is not equal to
+      No_Element, and Target.Parent (Before) is not equal to Parent, then
+      Constraint_Error is propagated. If Position equals No_Element, Constraint_Error
+      is propagated. If Position does not designate a node in Source or designates
+      a root node, then Program_Error is propagated. If Source denotes the same
+      object as Target, then there is no effect; if Position designates an ancestor
+      of Parent or is equal to Parent, Constraint_Error is propagated; else
+      the subtree rooted by the element designated by Position is moved to be
+      a child of Parent. If Parent already has child nodes
+      then the moved nodes are inserted prior to the node designated by Before,
+      or, if Before equals No_Element, the moved nodes are inserted after the
+      last existing child node of Parent. In each of these cases, Position and the
+      count of Target are unchanged, and the parent of the element designated
+      by Position is set to Parent.
+
+      AARM Reason: We can't allow moving the subtree of Position to a
+      descendant node of the subtree, as the descendant node will be part of the
+      subtree being moved. The result would be a circularly linked tree, or one
+      with inaccessible nodes. Thus we have to check Position against Parent, even
+      though such a check is O(Depth(Source)).
+      End AARM Reason.
+
+      Otherwise (if Source does not denote the same object as Target),
+      the subtree designated by Position is removed from Source and
+      moved to Target. The subtree is inserted as a child of Parent. If Parent
+      already has child nodes then the moved nodes are inserted prior to the node
+      designated by Before, or, if Before equals No_Element, the moved nodes are
+      inserted after the last existing child node of Parent. In each of these cases,
+      the count of Target is incremented by Subtree_Count (Position), and the
+      count of Source is decremented by Subtree_Count (Position), Position is
+      updated to represent an element in Target.
+
+      AARM Ramification: If Source is the same as Target, and Position = Before,
+      or Next_Sibling(Position) = Before, Splice has no effect, as the subtree
+      does not have to move to meet the postcondition.
+
+      We do not allow splicing a subtree that includes a root node, as that
+      would require inserting a node with no value in the middle of the
+      target tree. Splice the children of the root node instead.
+
+      For this reason there is no operation to splice an entire tree, as that would
+      necessarily involve splicing a root node.
+      End AARM Ramification.
+
+   procedure Splice_Subtree (Container: in out Tree;
+                             Parent   : in     Cursor;
+                             Before   : in     Cursor;
+                             Position : in     Cursor);
+
+      If Parent equals No_Element, then Constraint_Error is propagated. If Parent
+      does not designate a node in Container, then Program_Error is propagated.
+      If Before is not equal to No_Element, and does not designate a node in
+      Container, then Program_Error is propagated. If Before is not equal to
+      No_Element, and Target.Parent (Before) is not equal to Parent, then
+      Constraint_Error is propagated. If Position equals No_Element or designates
+      a root node, Constraint_Error is propagated. If Position does not designate
+      a node in Container, then Program_Error is propagated. If Position equals
+      Before, there is no effect. If Position designates an ancestor of Parent
+      or is equal to Parent, Constraint_Error is propagated. Otherwise, the subtree
+      rooted by the element designated by Position is moved to be a child of Parent.
+      If Parent already has child nodes then the moved nodes are inserted prior to
+      the node designated by Before, or, if Before equals No_Element, the moved nodes
+      are inserted after the last existing child node of Parent.
+      The parent of the element designated by Position is set to Parent.
+
+      AARM Reason: We can't allow moving the subtree of Position to a
+      descendant node of the subtree, as the descendant node will be part of the
+      subtree being moved.
+
+
+   procedure Splice_Children (Target          : in out Tree;
+                              Target_Parent   : in     Cursor;
+                              Before          : in     Cursor;
+                              Source          : in out Tree;
+                              Source_Parent   : in     Cursor);
+
+      If Target_Parent equals No_Element, then Constraint_Error is propagated.
+      If Target_Parent does not designate a node in Target, then Program_Error
+      is propagated. If Before is not equal to No_Element, and does not designate
+      an element in Target, then Program_Error is propagated. If Source_Parent
+      equals No_Element, then Constraint_Error is propagated. If Source_Parent
+      does not designate a node in Source, then Program_Error is propagated. If
+      Before is not equal to No_Element, and Target.Parent (Before) is not equal
+      to Target_Parent, then Constraint_Error is propagated.
+
+      If Source denotes the same object as Target, then:
+        * if Target_Parent equals Source_Parent there is no effect; else
+        * if Source_Parent is an ancestor of Target_Parent, then Constraint_Error
+          is propagated; else
+        * the child elements (and their descendants) of Source_Parent are moved
+	  to be child elements of Target_Parent. If Target_Parent already has
+          child elements then the moved elements are inserted prior to the node
+          designated by Before, or, if Before equals No_Element, the moved
+          elements are inserted after the last existing child node of
+          Target_Parent. The parent of each moved child element is set to
+          Target_Parent.
+
+      AARM Reason: We can't allow moving the children of Source_Parent to a
+      descendant node, as the descendant node will be part of one of the
+      subtrees being moved.
+
+      Otherwise (if Source does not denote the same object as Target), the child
+      elements (and their descendants) of Source_Parent are removed from Source
+      and moved to Target. The child elements are inserted as children of
+      Target_Parent. If Target_Parent already has child elements then the moved
+      elements are inserted prior to the node designated by Before, or, if Before
+      equals No_Element, the moved elements are inserted after the last existing
+      child node of Target_Parent. In each of these cases, the overall count of
+      Target is incremented by Subtree_Count (Source_Parent)-1, and overall count
+      of Source is decremented by Subtree_Count (Source_Parent)-1.
+
+      AARM Ramification: The node designated by Source_Parent is not moved, thus
+      we never need to update Source_Parent.
+
+      Move (Target, Source) could be written Splice_Children (Target, Target.Root,
+      No_Element, Source, Source.Root);
+      End AARM Ramification.
+
+   procedure Splice_Children (Container       : in out Tree;
+                              Target_Parent   : in     Cursor;
+                              Before          : in     Cursor;
+                              Source_Parent   : in     Cursor);
+
+      If Target_Parent equals No_Element, then Constraint_Error is propagated.
+      If Target_Parent does not designate a node in Container, then Program_Error
+      is propagated. If Before is not equal to No_Element, and does not designate
+      an element in Container, then Program_Error is propagated. If Source_Parent
+      equals No_Element, then Constraint_Error is propagated. If Source_Parent does not
+      designate a node in Container, then Program_Error is propagated. If Before
+      is not equal to No_Element, and Container.Parent (Before) is not equal to
+      Target_Parent, then Constraint_Error is propagated. If Target_Parent equals
+      Source_Parent there is no effect. If Source_Parent is an ancestor of
+      Target_Parent, then Constraint_Error is propagated. Otherwise the child
+      elements (and their descendants) of Source_Parent are moved to be child
+      elements of Target_Parent. If Target_Parent already has child elements then
+      the moved elements are inserted prior to the node designated by Before, or,
+      if Before equals No_Element, the moved elements are inserted after the last
+      existing child node of Target_Parent. The parent of each moved child element
+      is set to Target_Parent.
+
+   function Parent (Position : Cursor) @key{return} Cursor;
+
+      If Position is equal to No_Element or designates a root node, No_Element
+      is returned. Otherwise, a cursor designating the parent node of the node
+      designated by Position is returned.
+
+   function First_Child (Parent : Cursor) @key{return} Cursor;
+
+      If Parent is equal to No_Element, then Constraint_Error is propagated.
+      Otherwise, First_Child returns a cursor designating the first child
+      node of the node designated by Parent; if there is no such node,
+      No_Element is returned.
+
+   function First_Child_Element (Parent : Cursor) @key{return} Element_Type;
+
+      Equivalent to Element (First_Child (Parent)).
+
+   function Last_Child (Parent : Cursor) @key{return} Cursor;
+
+      If Parent is equal to No_Element, then Constraint_Error is propagated.
+      Otherwise, Last_Child returns a cursor designating the last child node
+      of the node designated by Parent; if there is no such node, No_Element
+      is returned.
+
+   function Last_Child_Element (Parent : Cursor) @key{return} Element_Type;
+
+      Equivalent to Element (Last_Child (Parent)).
+
+   function Next_Sibling (Position : Cursor) @key{return} Cursor;
+
+      If Position equals No_Element or designates the last child node of its
+      parent, then Next_Sibling returns the value No_Element. Otherwise, it
+      returns a cursor that designates the successor (with the same parent) of
+      the node designated by Position.
+
+   function Previous_Sibling (Position : Cursor) @key{return} Cursor;
+
+      If Position equals No_Element or designates the first child node of its
+      parent, then Previous_Sibling returns the value No_Element. Otherwise, it
+      returns a cursor that designates the predecessor (with the same parent) of
+      the node designated by Position.
+
+   procedure Next_Sibling (Position : in out Cursor);
+
+      Equivalent to Position := Next_Sibling (Position);
+
+   procedure Previous_Sibling (Position : in out Cursor);
+
+      Equivalent to Position := Previous_Sibling (Position);
+
+   procedure Iterate_Children
+     (Container : in Tree;
+      Parent    : in     Cursor;
+      Process   : not null access procedure (Position : in Cursor));
+
+      If Parent equals No_Element, then Constraint_Error is propagated.
+      If Parent does not designate a node in Container, then Program_Error is
+      propagated.
+
+      Iterate_Children calls Process.all with a cursor that designates each
+      child node of Parent, starting with the first child node and moving the
+      cursor as per the function Next_Sibling.
+
+      Program_Error is propagated if Process.all tampers with the cursors of
+      Container. Any exception raised by Process.all is propagated.
+
+   procedure Reverse_Iterate_Children
+     (Container : in Tree;
+      Parent    : in     Cursor;
+      Process   : not null access procedure (Position : in Cursor));
+
+      If Parent equals No_Element, then Constraint_Error is propagated.
+      If Parent does not designate a node in Container, then Program_Error is
+      propagated.
+
+      Iterate_Children calls Process.all with a cursor that designates each
+      child node of Parent, starting with the last child node and moving the
+      cursor as per the function Previous_Sibling.
+
+      Program_Error is propagated if Process.all tampers with the cursors of
+      Container. Any exception raised by Process.all is propagated.
+
+*** End TBD.
 
 @end{StaticSem}
 
 @begin{Bounded}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0022-1],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error for the actual function associated with a
-generic formal subprogram, when called as part of an operation of
-this package, to tamper with elements of any Holder parameter to the
-operation. Either Program_Error is raised, or the operation works as
-defined on the value of the Holder either prior to, or subsequent to,
-some or all of the modifications to the Holder.]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+It is a bounded error for the actual function associated with a generic formal
+subprogram, when called as part of an operation of this package, to tamper with
+elements of any Tree parameter to the operation. Either Program_Error is raised,
+or the operation works as defined on the value of the Tree either prior to, or
+subsequent to, some or all of the modifications to the Tree.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error to call any subprogram declared in the visible part
-of Containers.Indefinite_Holders when the associated container has been
-finalized. If the operation takes Container as an @key[in out] parameter,
-then it raises Constraint_Error or Program_Error. Otherwise, the operation
-either proceeds as it would for an empty container, or it raises
-Constraint_Error or Program_Error.]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+It is a bounded error to call any subprogram declared in the visible part of
+Containers.Multiway_Trees when the associated container has been finalized. If
+the operation takes Container as an in out parameter, then it raises
+Constraint_Error or Program_Error. Otherwise, the operation either proceeds as
+it would for an empty container, or it raises Constraint_Error or Program_Error.]}
 @end{Bounded}
+
+@begin{Erron}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[A Cursor
+value is @i<invalid> if any of the following have occurred since
+it was created:@Defn2{Term=[invalid cursor],Sec=[of a tree]}
+@PDefn2{Term=[cursor],Sec=[invalid]}]}
+@begin{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The tree that contains the element it designates has
+been finalized;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The tree that contains the element it designates has
+been used as the Source or Target of a call to Move;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The tree that contains the element it designates has
+been used as the Target of a call to Assign or the target of an
+@nt{assignment_statement};]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The element it designates has been removed from the
+tree that previously contained the element.]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We talk about which tree the element was removed
+  from in order to handle splicing nodes from one tree to another. The node
+  still exists, but any cursors that designate it in the original tree are now
+  invalid. This bullet covers removals caused by calls to Clear, Delete_Leaf,
+  Delete_Subtree, Delete_Children, Splice_Children, and Splice_Subtree.]}
+@end{Reason}
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The result of "=" or Has_Element is unspecified if
+it is called with an invalid cursor parameter. Execution is erroneous if any
+other subprogram declared in Containers.Multiway_Trees is called with an invalid
+cursor parameter.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The list above is intended to be exhaustive. In
+  other cases, a cursor value continues to designate its original element (or
+  the root node). For instance, cursor values survive the insertion and deletion
+  of other nodes.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[While it is possible to check for these cases, in
+  many cases the overhead necessary to make the check is substantial in time or
+  space. Implementations are encouraged to check for as many of these cases as
+  possible and raise Program_Error if detected.]}
+@end{Discussion}
+@end{Erron}
 
 @begin{ImplReq}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Text=[No storage associated with a holder object shall be
-lost upon assignment or scope exit.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[No storage associated with a multiway tree object
+shall be lost upon assignment or scope exit.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Text=[The execution of an @nt{assignment_statement}
-for a holder shall have the effect of copying the element (if any) from the
-source holder object to the target holder object.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[The execution of an @nt{assignment_statement} for
+a tree shall have the effect of copying the elements from the source tree
+object to the target tree object.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[An assignment of a holder is a
-  @ldquote@;deep@rdquote copy; that is the elements are copied as well as the
-  data structures. We say @ldquote@;effect of@rdquote in order to allow the
-  implementation to avoid copying elements immediately if it wishes. For
-  instance, an implementation that avoided copying until one of the containers
-  is modified would be allowed.]}
+  @ChgAdded{Version=[3],Text=[An assignment of a Tree is a @lquotes@;deep@rquotes
+  copy; that is the elements are copied as well as the data structures.
+  We say @lquotes@;effect of@rquotes in order to allow the implementation to
+  avoid copying elements immediately if it wishes. For instance, an
+  implementation that avoided copying until one of the containers is modified
+  would be allowed.]}
 @end{ImplNote}
 @end{ImplReq}
 
 @begin{ImplAdvice}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[Containers.Multiway_Trees should be implemented
+similarly to a multiway tree. In particular, if @i{N} is the overall number of nodes
+for a particular tree, then the worst-case time complexity of Element, Parent,
+First_Child, Last_Child, Insert_Child with Count=1, and Delete should be @i{O}(log
+@i{N}).]}
+@ChgImplAdvice{Version=[3],Kind=[AddedNormal],Text=[@ChgAdded{Version=[3],
+Text=[The worst-case time complexity of the Element, Parent,
+First_Child, Last_Child, Insert_Child with Count=1, and Delete
+operations of Containers.Multiway_Trees should be @i{O}(log @i<N>).]}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We do not mean to overly constrain implementation
+  strategies here. However, it is important for portability that the performance
+  of large containers has roughly the same factors on different implementations.
+  If a program is moved to an implementation that takes @i{O}(@i<N>) time to access
+  elements, that program could be unusable when the trees are large. We allow
+  @i{O}(log @i<N>) access because the proportionality constant and caching effects are
+  likely to be larger than the log factor, and we don't want to discourage
+  innovative implementations.]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
 @ChgAdded{Version=[3],Text=[Move should not copy elements, and should minimize
 copying of internal data structures.]}
+@ChgImplAdvice{Version=[3],Kind=[AddedNormal],Text=[@ChgAdded{Version=[3],
+Text=[Containers.Multiway_Trees.Move should not copy elements, and should
+minimize copying of internal data structures.]}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[Usually that can be accomplished simply by moving
-  the pointer(s) to the internal data structures from the Source holder to the
-  Target holder.]}
+  @ChgAdded{Version=[3],Text=[Usually that can be accomplished simply by
+  moving the pointer(s) to the internal data structures from the Source
+  container to the Target container.]}
 @end{ImplNote}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Text=[If an exception is propagated from a holder
-operation, no storage should be lost, nor should the element be removed from a
-holder unless specified by the operation.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[If an exception is propagated from a tree
+operation, no storage should be lost, nor any elements removed from a tree
+unless specified by the operation.]}
+@ChgImplAdvice{Version=[3],Kind=[AddedNormal],Text=[@ChgAdded{Version=[3],
+Text=[If an exception is propagated from a tree
+operation, no storage should be lost, nor any elements removed from a tree
+unless specified by the operation.]}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8332,845 +8833,12 @@ holder unless specified by the operation.]}
   from errors. But we don't want to require heroic efforts, so we just require
   documentation of cases where this can't be accomplished.]}
 @end{Reason}
-@end{ImplAdvice}
 
-@begin{Extend95}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0084-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
-  @b<Amendment 2:> The generic package Containers.Indefinite_Holders is new.]}
-@end{Extend95}
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  The generic package Containers.Multiway_Trees is new.]}
+@end{Extend2005}
 
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Vectors]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[The language-defined generic package
-Containers.Bounded_Vectors provides a private type Vector and a set of
-operations. It provides the same operations as the package Containers.Vectors
-(see @RefSecNum{The Package Containers.Vectors}), with the difference that the
-maximum storage is bounded.]}
-
-@begin{StaticSem}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[The declaration of the generic
-library package Containers.Bounded_Vectors has the same contents and semantics
-as Containers.Vectors except:]}
-
-@begin{Itemize}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
-
-  @begin{ImplNote}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Vectors
-      cannot depend on package Ada.Finalization (because that package
-      has Preelaborate categorization).]}
-  @end{ImplNote}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[The type Vector is declared with a
-    discriminant that specifies the capacity:]}
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} Vector (Capacity : Count_Type) @key[is tagged private];]}
-@end{Example}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The type Vector needs finalization if and only if
-    type Element_Type needs finalization.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[In function Copy, if the Capacity parameter is
-    equal to or greater than the length of Source, the vector capacity exactly equals
-    the value of the Capacity parameter.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[The description of Reserve_Capacity
-  is replaced with:]}
-@begin{Indent}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],NoPrefix=[T],Text=[If the specified Capacity is larger
-    than the capacity of Container, then Reserve_Capacity propagates Capacity_Error.
-    Otherwise, the operation has no effect.]}
-@end{Indent}
-@end{Itemize}
-@end{StaticSem}
-
-@begin{Bounded}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error to use a bounded vector
-if it was the target of an @nt{assignment_statement} whose source was in the middle of
-an operation that disallows tampering with elements @Redundant[or cursors].
-Either Program_Error is raised, or the operation proceeds as defined.]}
-@end{Bounded}
-
-@begin{ImplAdvice}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[Bounded vector objects should be implemented without
-implicit pointers or dynamic allocation.]}
-@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
-Text=[Bounded vector objects should be implemented without
-implicit pointers or dynamic allocation.]}]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[The implementation advice for procedure Move to
-minimize copying does not apply.]}
-@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
-Text=[The implementation advice for procedure Move to
-minimize copying does not apply to bounded vectors.]}]}
-
-@end{ImplAdvice}
-
-
-@begin{Extend95}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
-  @b<Amendment 2:> The generic package Containers.Bounded_Vectors is new.]}
-@end{Extend95}
-
-
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Doubly_Linked_Lists]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[The language-defined generic package
-Containers.Bounded_Doubly_Linked_Lists provides a private type List
-and a set of operations. It provides the same operations as the
-package Containers.Doubly_Linked_Lists
-(see @RefSecNum{The Package Containers.Doubly_Linked_Lists}), with the
-difference that the maximum storage is bounded.]}
-
-@begin{StaticSem}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[The declaration of the generic
-library package Containers.Bounded_Doubly_Linked_Lists has the same contents and semantics
-as Containers.Doubly_Linked_Lists except:]}
-
-@begin{Itemize}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
-
-  @begin{ImplNote}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Doubly_Linked_Lists
-      cannot depend on package Ada.Finalization (because that package
-      has Preelaborate categorization).]}
-  @end{ImplNote}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[The type List is declared with a
-    discriminant that specifies the capacity (maximum number of elements)
-    as follows:]}
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} List (Capacity : Count_Type) @key[is tagged private];]}
-@end{Example}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The type List needs finalization if and only if
-    type Element_Type needs finalization.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The allocation of internal storage includes a
-    check that the capacity is not exceeded, and Capacity_Error is raised
-    if this check fails.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[In procedure Assign, if Source length is greater
-    than Target capacity, then Capacity_Error is propagated.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source : List; Capacity : Count_Type := 0)
-     @key[return] List;]}
-@end{Example}
-@begin{Indent}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Noprefix=[T],Text=[If Capacity is 0, then the list capacity is the length of
-    Source; if Capacity is equal to or greater than the length of Source,
-    the list capacity equals the value of the Capacity parameter;
-    otherwise, the operation propagated Capacity_Error.]}
-@end{Indent}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[In the three-parameter procedure Splice whose
-    Source has type List, if the sum of the length of Target and the length
-    of Source is greater than the capacity of Target, then Splice propagates
-    Capacity_Error.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[In the four-parameter procedure Splice, if
-    the length of Target equals the capacity of Target, then Splice
-    propagates Capacity_Error.]}
-
-@end{Itemize}
-@end{StaticSem}
-
-@begin{Bounded}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error to use a bounded list if it was the
-target of an @nt{assignment_statement} whose source was in the middle of
-an operation that disallows tampering with elements @Redundant[or cursors].
-Either Program_Error is raised, or the operation proceeds as defined.]}
-@end{Bounded}
-
-@begin{ImplAdvice}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[Bounded list objects should be implemented without
-implicit pointers or dynamic allocation.]}
-@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
-Text=[Bounded list objects should be implemented without
-implicit pointers or dynamic allocation.]}]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[The implementation advice for procedure Move to
-minimize copying does not apply.]}
-@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
-Text=[The implementation advice for procedure Move to
-minimize copying does not apply to bounded lists.]}]}
-
-@end{ImplAdvice}
-
-@begin{Extend95}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
-  @b<Amendment 2:> The generic package Containers.Bounded_Doubly_Linked_Lists is new.]}
-@end{Extend95}
-
-
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Hashed_Maps]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[The language-defined generic package
-Containers.Bounded_Hashed_Maps provides a private type List
-and a set of operations. It provides the same operations as the
-package Containers.Hashed_Maps
-(see @RefSecNum{The Package Containers.Hashed_Maps}), with the
-difference that the maximum storage is bounded.]}
-
-@begin{StaticSem}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[The declaration of the generic
-library package Containers.Bounded_Hashed_Maps has the same contents and semantics
-as Containers.Hashed_Maps except:]}
-
-@begin{Itemize}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
-
-  @begin{ImplNote}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Hashed_Maps
-      cannot depend on package Ada.Finalization (because that package
-      has Preelaborate categorization).]}
-  @end{ImplNote}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[The type Map is declared with
-    discriminants that specify both the capacity (number of elements) and
-    modulus (number of distinct hash values) of the hash table as follows:]}
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[type] Map (Capacity : Count_Type;
-            Modulus  : Hash_Type) @key[is tagged private];]}
-@end{Example}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The type Map needs finalization if and only if type
-      Key_Type or type Element_Type needs finalization.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[The description of Reserve_Capacity
-  is replaced with:]}
-@begin{Indent}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],NoPrefix=[T],Text=[If the specified Capacity is larger
-    than the capacity of Container, then Reserve_Capacity propagates Capacity_Error.
-    Otherwise, the operation has no effect.]}
-@end{Indent}
-
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[An additional operation is added immediately following Reserve_Capacity:]}
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Default_Modulus} (Capacity : Count_Type) @key[return] Hash_Type;]}
-@end{Example}
-@begin{Indent}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Noprefix=[T],Text=[Default_Modulus returns an
-    implementation-defined value for the number of distinct hash values to be
-    used for the given capacity (maximum number of elements).]}
-@end{Indent}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source : Map;
-                 Capacity : Count_Type := 0;
-                 Modulus  : Hash_Type := 0) @key[return] Map;]}
-@end{Example}
-@begin{Indent}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a map with key/element pairs initialized from the values
-    in Source. If Capacity is 0, then the map capacity is the
-    length of Source; if Capacity is equal to or greater than
-    the length of Source, the map capacity is the value of the Capacity
-    parameter; otherwise, the operation propagates Capacity_Error.  If
-    the Modulus argument is 0, then the map modulus is the value
-    returned by a call to Default_Modulus with the map capacity as its
-    argument; otherwise the map modulus is the value of the Modulus parameter.]}
-@end{Indent}
-
-@end{Itemize}
-@end{StaticSem}
-
-@begin{Bounded}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error to use a bounded map if it was the
-target of an @nt{assignment_statement} whose source was in the middle of
-an operation that disallows tampering with elements @Redundant[or cursors].
-Either Program_Error is raised, or the operation proceeds as defined.]}
-@end{Bounded}
-
-@begin{ImplAdvice}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[Bounded map objects should be implemented without
-implicit pointers or dynamic allocation.]}
-@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
-Text=[Bounded map objects should be implemented without
-implicit pointers or dynamic allocation.]}]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[The implementation advice for procedure Move to
-minimize copying does not apply.]}
-@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
-Text=[The implementation advice for procedure Move to
-minimize copying does not apply to bounded maps.]}]}
-
-@end{ImplAdvice}
-
-@begin{Extend95}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
-  @b<Amendment 2:> The generic package Containers.Bounded_Hashed_Maps is new.]}
-@end{Extend95}
-
-
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Ordered_Maps]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[The language-defined generic package
-Containers.Bounded_Ordered_Maps provides a private type List
-and a set of operations. It provides the same operations as the
-package Containers.Ordered_Maps
-(see @RefSecNum{The Package Containers.Ordered_Maps}), with the
-difference that the maximum storage is bounded.]}
-
-@begin{StaticSem}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[The declaration of the generic
-library package Containers.Bounded_Ordered_Maps has the same contents and semantics
-as Containers.Ordered_Maps except:]}
-
-@begin{Itemize}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
-
-  @begin{ImplNote}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Ordered_Maps
-      cannot depend on package Ada.Finalization (because that package
-      has Preelaborate categorization).]}
-  @end{ImplNote}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[The type Map is declared with a
-    discriminant that specifies the capacity (maximum number of elements)
-    as follows:]}
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[type] Map (Capacity : Count_Type) @key[is tagged private];]}
-@end{Example}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The type Map needs finalization if and only if
-    type Element_Type needs finalization.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The allocation of a new node includes a check that
-    the capacity is not exceeded, and Capacity_Error is raised if this check
-    fails.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[In procedure Assign, if Source length is greater
-    than Target capacity, then Capacity_Error is propagated.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source : Map;
-                 Capacity : Count_Type := 0) @key[return] Map;]}
-@end{Example}
-@begin{Indent}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a map with key/element pairs
-    initialized from the values in Source. If Capacity is 0, then the map
-    capacity is the length of Source; if Capacity is equal to or greater than
-    the length of Source, the map capacity is the specified value; otherwise, the
-    operation propagates Capacity_Error.]}
-@end{Indent}
-
-@end{Itemize}
-@end{StaticSem}
-
-@begin{Bounded}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error to use a bounded map if it was the
-target of an @nt{assignment_statement} whose source was in the middle of
-an operation that disallows tampering with elements @Redundant[or cursors].
-Either Program_Error is raised, or the operation proceeds as defined.]}
-@end{Bounded}
-
-@begin{ImplAdvice}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[Bounded map objects should be implemented without
-implicit pointers or dynamic allocation.]}
-@Comment{We omit the @ChgImplAdvice as it is identical to that of the previous clause.}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[The implementation advice for procedure Move to
-minimize copying does not apply.]}
-@Comment{We omit the @ChgImplAdvice as it is identical to that of the previous clause.}
-
-@end{ImplAdvice}
-
-@begin{Extend95}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
-  @b<Amendment 2:> The generic package Containers.Bounded_Ordered_Maps is new.]}
-@end{Extend95}
-
-
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Hashed_Sets]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[The language-defined generic package
-Containers.Bounded_Hashed_Sets provides a private type List
-and a set of operations. It provides the same operations as the
-package Containers.Hashed_Sets
-(see @RefSecNum{The Package Containers.Hashed_Sets}), with the
-difference that the maximum storage is bounded.]}
-
-@begin{StaticSem}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[The declaration of the generic
-library package Containers.Bounded_Hashed_Sets has the same contents and semantics
-as Containers.Hashed_Sets except:]}
-
-@begin{Itemize}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
-
-  @begin{ImplNote}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Hashed_Sets
-      cannot depend on package Ada.Finalization (because that package
-      has Preelaborate categorization).]}
-  @end{ImplNote}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[The type Set is declared with
-    discriminants that specify both the capacity (number of elements) and
-    modulus (number of distinct hash values) of the hash table as follows:]}
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[type] Set (Capacity : Count_Type;
-            Modulus  : Hash_Type) @key[is tagged private];]}
-@end{Example}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The type Set needs finalization if and only if type
-      Key_Type or type Element_Type needs finalization.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[The description of Reserve_Capacity
-  is replaced with:]}
-@begin{Indent}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],NoPrefix=[T],Text=[If the specified Capacity is larger
-    than the capacity of Container, then Reserve_Capacity propagates Capacity_Error.
-    Otherwise, the operation has no effect.]}
-@end{Indent}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[An additional operation is added immediately following Reserve_Capacity:]}
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Default_Modulus} (Capacity : Count_Type) @key[return] Hash_Type;]}
-@end{Example}
-@begin{Indent}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Noprefix=[T],Text=[Default_Modulus returns an
-    implementation-defined value for the number of distinct hash values to be
-    used for the given capacity (maximum number of elements).]}
-@end{Indent}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source : Set;
-                 Capacity : Count_Type := 0;
-                 Modulus  : Hash_Type := 0) @key[return] Set;]}
-@end{Example}
-@begin{Indent}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a set whose elements are
-    initialized from the values in Source. If Capacity is 0, then the set
-    capacity is the length of Source; if Capacity is equal to or greater than
-    the length of Source, the set capacity is the value of the Capacity parameter;
-    otherwise, the operation propagates Capacity_Error. If the Modulus argument is
-    0, then the set modulus is the value returned by a call to Default_Modulus
-    with the set capacity as its argument; otherwise the set modulus is the
-    value of the Modulus parameter.]}
-@end{Indent}
-
-@end{Itemize}
-@end{StaticSem}
-
-@begin{Bounded}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error to use a bounded set if it was the
-target of an @nt{assignment_statement} whose source was in the middle of
-an operation that disallows tampering with elements @Redundant[or cursors].
-Either Program_Error is raised, or the operation proceeds as defined.]}
-@end{Bounded}
-
-@begin{ImplAdvice}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[Bounded set objects should be implemented without
-implicit pointers or dynamic allocation.]}
-@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
-Text=[Bounded set objects should be implemented without
-implicit pointers or dynamic allocation.]}]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[The implementation advice for procedure Move to
-minimize copying does not apply.]}
-@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
-Text=[The implementation advice for procedure Move to
-minimize copying does not apply to bounded sets.]}]}
-
-@end{ImplAdvice}
-
-@begin{Extend95}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
-  @b<Amendment 2:> The generic package Containers.Bounded_Hashed_Sets is new.]}
-@end{Extend95}
-
-
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Ordered_Sets]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[The language-defined generic package
-Containers.Bounded_Ordered_Sets provides a private type List
-and a set of operations. It provides the same operations as the
-package Containers.Ordered_Sets
-(see @RefSecNum{The Package Containers.Ordered_Sets}), with the
-difference that the maximum storage is bounded.]}
-
-@begin{StaticSem}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[The declaration of the generic
-library package Containers.Bounded_Ordered_Sets has the same contents and semantics
-as Containers.Ordered_Sets except:]}
-
-@begin{Itemize}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
-
-  @begin{ImplNote}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Ordered_Sets
-      cannot depend on package Ada.Finalization (because that package
-      has Preelaborate categorization).]}
-  @end{ImplNote}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[The type Set is declared with a
-    discriminant that specifies the capacity (maximum number of elements)
-    as follows:]}
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} Set (Capacity : Count_Type) @key[is tagged private];]}
-@end{Example}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The type Set needs finalization if and only if
-    type Element_Type needs finalization.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[If Insert (or Include) adds an element, a check is
-    made that the capacity is not exceeded, and Capacity_Error is raised if this
-    check fails.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[In procedure Assign, if Source length is greater
-    than Target capacity, then Capacity_Error is propagated.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source : Set;
-                 Capacity : Count_Type := 0) @key[return] Set;]}
-@end{Example}
-@begin{Indent}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a set whose elements
-    are initialized from the values in Source. If Capacity is 0, then the set
-    capacity is the length of Source; if Capacity is equal to or greater than
-    the length of Source, the set capacity is the specified value; otherwise, the
-    operation propagates Capacity_Error.]}
-@end{Indent}
-
-@end{Itemize}
-@end{StaticSem}
-
-@begin{Bounded}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error to use a bounded set if it was the
-target of an @nt{assignment_statement} whose source was in the middle of
-an operation that disallows tampering with elements @Redundant[or cursors].
-Either Program_Error is raised, or the operation proceeds as defined.]}
-@end{Bounded}
-
-@begin{ImplAdvice}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[Bounded set objects should be implemented without
-implicit pointers or dynamic allocation.]}
-@Comment{We omit the @ChgImplAdvice as it is identical to that of the previous clause.}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[The implementation advice for procedure Move to
-minimize copying does not apply.]}
-@Comment{We omit the @ChgImplAdvice as it is identical to that of the previous clause.}
-
-@end{ImplAdvice}
-
-@begin{Extend95}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
-  @b<Amendment 2:> The generic package Containers.Bounded_Ordered_Sets is new.]}
-@end{Extend95}
-
-
-@LabeledAddedSubclause{Version=[2],Name=[Array Sorting]}
-
-@begin{Intro}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[2],Text=[The language-defined generic procedures
-Containers.@!Generic_@!Array_Sort@Chg{Version=[3],New=[,],Old=[ and]}
-Containers.@!Generic_@!Constrained_@!Array_Sort@Chg{Version=[3],New=[, and
-Containers.@!Generic_Sort],Old=[]}
-provide sorting on arbitrary array types.]}
-@end{Intro}
-
-@begin{StaticSem}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The generic library
-procedure Containers.Generic_Array_Sort has the following declaration:]}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{generic}
-   @key{type} Index_Type @key{is} (<>);
-   @key{type} Element_Type @key{is private};
-   @key{type} Array_Type @key{is array} (Index_Type @key{range} <>) @key{of} Element_Type;
-   @key{with function} "<" (Left, Right : Element_Type)
-      @key{return} Boolean @key{is} <>;
-@key{procedure} Ada.Containers.Generic_Array_Sort (Container : @key{in out} Array_Type);@SubChildUnit{Parent=[Ada.Containers],Child=[Generic_Array_Sort]}
-@key{pragma} Pure(Ada.Containers.Generic_Array_Sort);]}
-@end{Example}
-
-@begin{DescribeCode}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Reorders the elements of Container such that the elements are
-sorted smallest first as determined by the generic formal "<" operator
-provided. Any exception raised during evaluation of "<" is propagated.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0044-1]}
-@ChgAdded{Version=[2],Text=[The actual function for the generic formal function
-"<" of Generic_Array_Sort is expected to return the same value each time it is
-called with a particular pair of element values. It should define a strict
-@Chg{Version=[3],New=[weak ],Old=[]}ordering relationship@Chg{Version=[3],
-New=[ (see @RefSecNum{Containers})],Old=[, that is, be irreflexive, asymmetric,
-and transitive]}; it
-should not modify Container. If the actual for "<" behaves in some other
-manner, the behavior of the instance of Generic_Array_Sort is unspecified. How
-many times Generic_Array_Sort calls "<" is unspecified.@PDefn{unspecified}]}
-
-@begin{Ramification}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This implies swapping the elements, usually
-  including an intermediate copy. This of course means that the elements will be
-  copied. Since the elements are nonlimited, this usually will not be a problem.
-  Note that there is Implementation Advice below that the implementation should
-  use a sort that minimizes copying of elements.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The sort is not required to be stable (and the fast
-  algorithm required will not be stable). If a stable sort is needed, the user
-  can include the original location of the element as an extra "sort key". We
-  considered requiring the implementation to do that, but it is mostly extra
-  overhead -- usually there is something already in the element that provides the
-  needed stability.]}
-@end{Ramification}
-
-@end{DescribeCode}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The generic library
-procedure Containers.@!Generic_@!Constrained_@!Array_Sort has the following
-declaration:]}
-@begin{Example}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{generic}
-   @key{type} Index_Type @key{is} (<>);
-   @key{type} Element_Type @key{is private};
-   @key{type} Array_Type @key{is array} (Index_Type) @key{of} Element_Type;
-   @key{with function} "<" (Left, Right : Element_Type)
-      @key{return} Boolean @key{is} <>;
-@key{procedure} Ada.Containers.Generic_Constrained_Array_Sort@SubChildUnit{Parent=[Ada.Containers],Child=[Generic_Constrained_Array_Sort]}
-      (Container : @key{in out} Array_Type);
-@key{pragma} Pure(Ada.Containers.Generic_Constrained_Array_Sort);]}
-@end{Example}
-
-@begin{DescribeCode}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Reorders the elements of Container such that the
-elements are sorted smallest first as determined by the generic formal "<"
-operator provided. Any exception raised during evaluation of "<" is
-propagated.]}
-
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0044-1]}
-@ChgAdded{Version=[2],Text=[The actual function for the generic formal function
-"<" of Generic_Constrained_Array_Sort is expected to return the same value each
-time it is called with a particular pair of element values. It should define a
-strict @Chg{Version=[3],New=[weak ],Old=[]}ordering relationship@Chg{Version=[3],
-New=[ (see @RefSecNum{Containers})],Old=[, that is, be irreflexive, asymmetric,
-and transitive]}; it should not modify Container. If the actual for "<" behaves in
-some other manner, the behavior of the instance of
-Generic_Constrained_Array_Sort is unspecified. How many times
-Generic_Constrained_Array_Sort calls "<" is unspecified.@PDefn{unspecified}]}
-
-@end{DescribeCode}
-
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The generic library
-procedure Containers.@!Generic_@!Sort has the following declaration:]}
-@begin{Example}
-@ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[@key{generic}
-   @key{type} Index_Type @key{is} (<>);
-   @key{with function} Before (Left, Right : Index_Type) @key{return} Boolean;
-   @key{with procedure} Swap (Left, Right : Index_Type);
-@key{procedure} Ada.Containers.Generic_Sort@SubChildUnit{Parent=[Ada.Containers],Child=[Generic_Sort]}
-      (First, Last : Index_Type'Base);
-@key{pragma} Pure(Ada.Containers.Generic_Sort);]}
-@end{Example}
-
-@begin{DescribeCode}
-@ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[Reorders the elements of an indexable structure,
-over the range First .. Last, such that the elements are sorted in the ordering
-determined by the generic formal function Before. The generic formal Before
-compares the elements having the given indices, and the generic formal Swap
-exchanges the values of the indicated elements. Any exception raised during
-evaluation of Before or Swap is propagated.]}
-
-@ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[The actual function for the generic formal function Before of
-Generic_Sort is expected to return the same value each time it is
-called with index values that identify a particular pair of element values.
-It should define a strict weak ordering relationship (see @RefSecNum{Containers});
-it should not modify the elements. The actual function for the generic formal
-Swap should exchange the values of the indicated elements. If the actual for
-either Before or Swap behaves in some other manner, the behavior of
-Generic_Sort is unspecified. How many times the Generic_Sort calls Before
-or Swap is unspecified.@PDefn{unspecified}]}
-
-@end{DescribeCode}
-
-@end{StaticSem}
-
-@begin{ImplAdvice}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[
-The worst-case time complexity of a call on an instance of
-Containers.Generic_Array_Sort or Containers.Generic_Constrained_Array_Sort
-should be @i{O}(@i<N>**2) or better, and the average time complexity should be better
-than @i{O}(@i<N>**2), where @i<N> is the length of the Container parameter.]}
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[Containers.Generic_Array_Sort and Containers.Generic_Constrained_Array_Sort
-should have an average time complexity better than @i{O}(@i{N}**2) and worst case no
-worse than @i{O}(@i{N}**2).]}]}
-
-@begin{Discussion}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[In other words, we're requiring the use of
-  a sorting algorithm better than @i{O}(@i<N>**2), such as Quicksort. No bubble
-  sorts allowed!]}
-@end{Discussion}
-
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[
-Containers.Generic_Array_Sort and Containers.Generic_Constrained_Array_Sort
-should minimize copying of elements.]}
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[Containers.Generic_Array_Sort and Containers.Generic_Constrained_Array_Sort
-should minimize copying of elements.]}]}
-
-@begin{Honest}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[We do not mean @lquotes@;absolutely minimize@rquotes@;
-  here; we're not intending to require a single copy for each element. Rather,
-  we want to suggest that the sorting algorithm chosen is one that does not
-  copy items unnecessarily. Bubble sort would not meet this advice, for
-  instance.]}
-@end{Honest}
-@end{ImplAdvice}
-
-@begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  The generic procedures Containers.Generic_Array_Sort and
-  Containers.Generic_Constrained_Array_Sort are new.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> The generic procedure
-  Containers.Generic_Sort is new.]}
-@end{Extend95}
-
-@begin{DiffWord95}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2 correction:> Redefined "<" actuals
-  to require a strict weak ordering; the old definition allowed
-  indeterminant comparisons that would not have worked in a container.]}
-@end{DiffWord95}
 
 
