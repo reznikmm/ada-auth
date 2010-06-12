@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.30 $ $Date: 2006/10/19 06:40:32 $ $Author: Randy $ }
+@comment{ $Revision: 1.31 $ $Date: 2010/06/11 07:27:55 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2006/10/19 06:40:32 $}
+@Comment{$Date: 2010/06/11 07:27:55 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -565,6 +565,7 @@ sec=[a category of Character]}
 
 @keepnext--@RI{ Other graphic characters:}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0181-1]}
 --@RI{ Character positions 160 (16#A0#) .. 175 (16#AF#):}
     @AdaObjDefn{No_Break_Space}             : @key[constant] Character := ' '; --@RI{Character'Val(160)}
     @AdaObjDefn{NBSP}                       : Character @key[renames] No_Break_Space;
@@ -580,7 +581,7 @@ sec=[a category of Character]}
     @AdaObjDefn{Feminine_Ordinal_Indicator} : @key[constant] Character := '@latin1(170)'; --@RI{Character'Val(170)}
     @AdaObjDefn{Left_Angle_Quotation}       : @key[constant] Character := '@latin1(171)'; --@RI{Character'Val(171)}
     @AdaObjDefn{Not_Sign}                   : @key[constant] Character := '@latin1(172)'; --@RI{Character'Val(172)}
-    @AdaObjDefn{Soft_Hyphen}                : @key[constant] Character := '@latin1(173)'; --@RI{Character'Val(173)}
+    @AdaObjDefn{Soft_Hyphen}                : @key[constant] Character := @Chg{Version=[3],New=[Character'Val(173);],Old=['@latin1(173)'; --@RI{Character'Val(173)}]}
     @AdaObjDefn{Registered_Trade_Mark_Sign} : @key[constant] Character := '@latin1(174)'; --@RI{Character'Val(174)}
     @AdaObjDefn{Macron}                     : @key[constant] Character := '@latin1(175)'; --@RI{Character'Val(175)}
 
@@ -685,6 +686,14 @@ An implementation may provide additional packages as children of
 Ada.Characters, to declare names for the symbols of the local character set
 or other character sets.
 @end{ImplPerm}
+
+@begin{DiffWord2005}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0181-1]}
+@ChgAdded{Version=[3],Text=[@b<Correction:> Soft_Hyphen is not a graphic
+character, and thus a character literal for it is illegal. So we have to use the
+position value. This makes no semantic change to users of the constant.]}
+@end{DiffWord2005}
+
 
 @RMNewPage@LabeledAddedSubClause{Version=[2],Name=[The Package Characters.Conversions]}
 

@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2010/05/08 06:31:32 $}
+@Comment{$Date: 2010/06/11 07:27:55 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1469,8 +1469,10 @@ equivalent.
 @nt<term> ::= @nt<factor> | @nt<term> @nt<multiplying_operator> @nt<factor>
 @end(Display)
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0176-1]}
 @leading@keepnext@;A vertical line separates alternative items unless it occurs
-immediately after an opening curly bracket, in which case it stands
+immediately after an opening curly bracket@Chg{Version=[3],New=[ or a
+@nt{loop_parameter_specification}],Old=[]}, in which case it stands
 for itself:
 @begin(Display)
 @nt<constraint> ::= @nt<scalar_constraint> | @nt<composite_constraint>
@@ -1666,6 +1668,13 @@ The preferred places for other line breaks are after semicolons.
   @ChgAdded{Version=[2],Text=[The example for square brackets has been changed
   as there is no longer a @ntf{return_statement} syntax rule.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
+  @ChgAdded{Version=[3],Text=[A vertical line now can also appear explicitly
+  in the syntax for a @nt{quantified_expression}, wording was changed to
+  allow that.]}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Classification of Errors}

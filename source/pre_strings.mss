@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.59 $ $Date: 2010/04/24 06:27:51 $ $Author: randy $ }
+@comment{ $Revision: 1.60 $ $Date: 2010/06/11 07:27:55 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2010/04/24 06:27:51 $}
+@Comment{$Date: 2010/06/11 07:27:55 $}
 
 @LabeledClause{String Handling}
 
@@ -87,7 +87,7 @@ entities needed for character sets and character-to-character mappings.
    @key[pragma] @Chg{Version=[2],New=[Pure],Old=[Preelaborate]}(Maps);
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
-   --@RI{ Representation for a set of character values:}
+   --@Examcom{ Representation for a set of character values:}
    @key[type] @AdaTypeDefn{Character_Set} @key[is] @key[private];@Chg{Version=[2],New=[
    @key[pragma] Preelaborable_Initialization(Character_Set);],Old=[]}
 
@@ -98,7 +98,7 @@ entities needed for character sets and character-to-character mappings.
         Low  : Character;
         High : Character;
      @key[end] @key[record];
-   -- @RI[Represents Character range Low..High]
+   -- @Examcom[Represents Character range Low..High]
 
    @key[type] @AdaTypeDefn{Character_Ranges} @key[is] @key[array] (Positive @key[range] <>) @key[of] Character_Range;
 
@@ -129,7 +129,7 @@ entities needed for character sets and character-to-character mappings.
       @key[return] Boolean @key[renames] Is_Subset;
 
 
-   --@RI{ Alternative representation for a set of character values:}
+   --@Examcom{ Alternative representation for a set of character values:}
    @key[subtype] @AdaSubtypeDefn{Name=[Character_Sequence],Of=[String]} @key[is] String;
 
    @key[function] @AdaSubDefn{To_Set} (Sequence  : @key[in] Character_Sequence)@key[return] Character_Set;
@@ -140,7 +140,7 @@ entities needed for character sets and character-to-character mappings.
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
-   --@RI{ Representation for a character to character mapping:}
+   --@Examcom{ Representation for a character to character mapping:}
    @key[type] @AdaTypeDefn{Character_Mapping} @key[is] @key[private];@Chg{Version=[2],New=[
    @key[pragma] Preelaborable_Initialization(Character_Mapping);],Old=[]}
 
@@ -162,7 +162,7 @@ entities needed for character sets and character-to-character mappings.
       @key{access} @key{function} (From : @key{in} Character) @key{return} Character;
 
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @Examcom{not specified by the language}
 @key[end] Ada.Strings.Maps;
 @end{example}
 
@@ -419,7 +419,7 @@ procedures.
    @key[pragma] Preelaborate(Fixed);
 
 
---@RI{ "Copy" procedure for strings of possibly different lengths}
+--@Examcom{ "Copy" procedure for strings of possibly different lengths}
 
    @key[procedure] @AdaSubDefn{Move} (Source  : @key[in]  String;
                    Target  : @key[out] String;
@@ -428,7 +428,7 @@ procedures.
                    Pad     : @key[in]  Character  := Space);
 
 
---@RI{ Search subprograms}
+--@Examcom{ Search subprograms}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
 @ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index} (Source  : @key[in] String;
@@ -516,7 +516,7 @@ procedures.
                          Last   : @key[out] Natural);
 
 
-@Keepnext@;--@RI{ String translation subprograms}
+@Keepnext@;--@Examcom{ String translation subprograms}
 
    @key[function] @AdaSubDefn{Translate} (Source  : @key[in] String;
                        Mapping : @key[in] Maps.Character_Mapping)
@@ -533,7 +533,7 @@ procedures.
    @key[procedure] @AdaSubDefn{Translate} (Source  : @key[in] @key[out] String;
                         Mapping : @key[in] Maps.Character_Mapping_Function);
 
-@Keepnext@;--@RI{ String transformation subprograms}
+@Keepnext@;--@Examcom{ String transformation subprograms}
 
    @key[function] @AdaSubDefn{Replace_Slice} (Source   : @key[in] String;
                            Low      : @key[in] Positive;
@@ -583,7 +583,7 @@ procedures.
                      Justify : @key[in] Alignment := Left;
                      Pad     : @key[in] Character := Space);
 
- --@RI{String selector subprograms}
+ --@Examcom{String selector subprograms}
    @key[function] @AdaSubDefn{Trim} (Source : @key[in] String;
                   Side   : @key[in] Trim_End)
       @key[return] String;
@@ -625,7 +625,7 @@ procedures.
                    Justify : @key[in] Alignment := Left;
                    Pad     : @key[in] Character := Space);
 
-@keepnext@;--@RI{String constructor functions}
+@keepnext@;--@Examcom{String constructor functions}
 
    @key[function] "*" (Left  : @key[in] Natural;
                  Right : @key[in] Character) @key[return] String;
@@ -1180,15 +1180,6 @@ string handling subprograms, Constraint_Error is propagated.
   defined in a package that is also referenced in a @nt{use_clause}, the entity
   @i<E> may no longer be use-visible, resulting in errors. This should be rare
   and is easily fixed if it does occur.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI05-0031-1]}
-  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 2005}
-  @b<Amendment 2:> An overloaded version of Find_Token is newly added to
-  Strings.Fixed. If Strings.Fixed is referenced in a @nt{use_clause}, and an
-  entity @i<E> with a @nt{defining_identifier} of Find_Token is
-  defined in a package that is also referenced in a @nt{use_clause}, the entity
-  @i<E> may no longer be use-visible, resulting in errors. This should be rare
-  and is easily fixed if it does occur.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -1200,11 +1191,24 @@ string handling subprograms, Constraint_Error is propagated.
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0049],ARef=[AI95-00128-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Replace_Slice,
   Delete, and "*" always return a string with lower bound 1.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0056-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Clarified that Index
-  never raises Index_Error if the source string is null.]}
 @end{DiffWord95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0031-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
+  An overloaded version of Find_Token is newly added to
+  Strings.Fixed. If Strings.Fixed is referenced in a @nt{use_clause}, and an
+  entity @i<E> with a @nt{defining_identifier} of Find_Token is
+  defined in a package that is also referenced in a @nt{use_clause}, the entity
+  @i<E> may no longer be use-visible, resulting in errors. This should be rare
+  and is easily fixed if it does occur.]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0056-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified that Index
+  never raises Index_Error if the source string is null.]}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Bounded-Length String Handling}
@@ -1242,7 +1246,7 @@ the copying and comparison of bounded strings.@end{reason}
 
 
    @key[generic]
-      Max   : Positive;    --@RI{ Maximum length of a Bounded_String}
+      Max   : Positive;    --@Examcom{ Maximum length of a Bounded_String}
    @key[package] @AdaPackDefn{Generic_Bounded_Length} @key[is]
 
       @AdaObjDefn{Max_Length} : @key[constant] Positive := Max;
@@ -1256,7 +1260,7 @@ the copying and comparison of bounded strings.@end{reason}
       @key[function] @AdaSubDefn{Length} (Source : @key[in] Bounded_String) @key[return] Length_Range;
 
 
-   --@RI{ Conversion, Concatenation, and Selection functions}
+   --@Examcom{ Conversion, Concatenation, and Selection functions}
 
       @key[function] @AdaSubDefn{To_Bounded_String} (Source : @key[in] String;
                                   Drop   : @key[in] Truncation := Error)
@@ -1391,7 +1395,7 @@ the copying and comparison of bounded strings.@end{reason}
         @key[return] Boolean;
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00301-01]}
-   --@RI{ Search @Chg{Version=[2],New=[subprograms],Old=[functions]}}
+   --@Examcom{ Search @Chg{Version=[2],New=[subprograms],Old=[functions]}}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
 @ChgAdded{Version=[2],Text=[      @key[function] @AdaSubDefn{Index} (Source  : @key[in] Bounded_String;
@@ -1477,7 +1481,7 @@ the copying and comparison of bounded strings.@end{reason}
                             First  : @key[out] Positive;
                             Last   : @key[out] Natural);
 
-@Keepnext@;   --@RI{ String translation subprograms}
+@Keepnext@;   --@Examcom{ String translation subprograms}
 
       @key[function] @AdaSubDefn{Translate} (Source  : @key[in] Bounded_String;
                           Mapping : @key[in] Maps.Character_Mapping)
@@ -1494,7 +1498,7 @@ the copying and comparison of bounded strings.@end{reason}
       @key[procedure] @AdaSubDefn{Translate} (Source  : @key[in] @key[out] Bounded_String;
                            Mapping : @key[in] Maps.Character_Mapping_Function);
 
-@Keepnext@;   --@RI{ String transformation subprograms}
+@Keepnext@;   --@Examcom{ String transformation subprograms}
 
       @key[function] @AdaSubDefn{Replace_Slice} (Source   : @key[in] Bounded_String;
                               Low      : @key[in] Positive;
@@ -1543,7 +1547,7 @@ the copying and comparison of bounded strings.@end{reason}
                         From    : @key[in] Positive;
                         Through : @key[in] Natural);
 
-   --@RI{String selector subprograms}
+   --@Examcom{String selector subprograms}
 
       @key[function] @AdaSubDefn{Trim} (Source : @key[in] Bounded_String;
                      Side   : @key[in] Trim_End)
@@ -1582,7 +1586,7 @@ the copying and comparison of bounded strings.@end{reason}
                       Pad    : @key[in] Character  := Space;
                       Drop   : @key[in] Truncation := Error);
 
-   --@RI{String constructor subprograms}
+   --@Examcom{String constructor subprograms}
 
       @key[function] "*" (Left  : @key[in] Natural;
                     Right : @key[in] Character)
@@ -1613,7 +1617,7 @@ the copying and comparison of bounded strings.@end{reason}
          @key[return] Bounded_String;
 
    @key[private]
-       ... -- @RI{not specified by the language}
+       ... -- @Examcom{not specified by the language}
    @key[end] Generic_Bounded_Length;
 
 @key[end] Ada.Strings.Bounded;
@@ -1814,7 +1818,7 @@ of the package:
 
 @key[type] Bounded_String @key[is]
    @key[record]
-      Data : Bounded_String_Internals;  --@RI{ Unconstrained}
+      Data : Bounded_String_Internals;  --@Examcom{ Unconstrained}
    @key[end] @key[record];
 
 Null_Bounded_String : @key[constant] Bounded_String :=
@@ -1846,16 +1850,6 @@ Null_Bounded_String : @key[constant] Bounded_String :=
   package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
   longer be use-visible, resulting in errors. This should be rare and is easily
   fixed if it does occur.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI05-0031-1]}
-  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 2005}
-  @b<Amendment 2:> An overloaded version of Find_Token is newly added to
-  Strings.Bounded.Generic_Bounded_Length. If an instance of Generic_Bounded_Length is
-  referenced in a @nt{use_clause}, and an
-  entity @i<E> with a @nt{defining_identifier} of Find_Token is
-  defined in a package that is also referenced in a @nt{use_clause}, the entity
-  @i<E> may no longer be use-visible, resulting in errors. This should be rare
-  and is easily fixed if it does occur.]}
 @end{Incompatible95}
 
 @begin{DiffWord95}
@@ -1868,6 +1862,19 @@ Null_Bounded_String : @key[constant] Bounded_String :=
   transformation, selector, and constructor subprograms by describing the
   effects of procedures and functions separately.]}
 @end{DiffWord95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0031-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
+  An overloaded version of Find_Token is newly added to
+  Strings.Bounded.Generic_Bounded_Length. If an instance of Generic_Bounded_Length is
+  referenced in a @nt{use_clause}, and an
+  entity @i<E> with a @nt{defining_identifier} of Find_Token is
+  defined in a package that is also referenced in a @nt{use_clause}, the entity
+  @i<E> may no longer be use-visible, resulting in errors. This should be rare
+  and is easily fixed if it does occur.]}
+@end{Incompatible2005}
+
 
 
 @LabeledSubClause{Unbounded-Length String Handling}
@@ -1910,7 +1917,7 @@ as the length does not exceed the allocated length.
    @key[type] @AdaTypeDefn{String_Access} @key[is] @key[access] @key[all] String;
    @key[procedure] @AdaSubDefn{Free} (X : @key[in] @key[out] String_Access);
 
---@RI{ Conversion, Concatenation, and Selection functions}
+--@Examcom{ Conversion, Concatenation, and Selection functions}
 
    @key[function] @AdaSubDefn{To_Unbounded_String} (Source : @key[in] String)
       @key[return] Unbounded_String;
@@ -2019,7 +2026,7 @@ as the length does not exceed the allocated length.
      @key[return] Boolean;
 
 
---@RI{ Search subprograms}
+--@Examcom{ Search subprograms}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
 @ChgAdded{Version=[2],Text=[   @key[function] @AdaSubDefn{Index} (Source  : @key[in] Unbounded_String;
@@ -2105,7 +2112,7 @@ as the length does not exceed the allocated length.
                          Last   : @key[out] Natural);
 
 
-@Keepnext@;--@RI{ String translation subprograms}
+@Keepnext@;--@Examcom{ String translation subprograms}
 
    @key[function] @AdaSubDefn{Translate} (Source  : @key[in] Unbounded_String;
                        Mapping : @key[in] Maps.Character_Mapping)
@@ -2121,7 +2128,7 @@ as the length does not exceed the allocated length.
    @key[procedure] @AdaSubDefn{Translate} (Source  : @key[in] @key[out] Unbounded_String;
                         Mapping : @key[in] Maps.Character_Mapping_Function);
 
-@Keepnext@;--@RI{ String transformation subprograms}
+@Keepnext@;--@Examcom{ String transformation subprograms}
 
    @key[function] @AdaSubDefn{Replace_Slice} (Source   : @key[in] Unbounded_String;
                            Low      : @key[in] Positive;
@@ -2209,7 +2216,7 @@ as the length does not exceed the allocated length.
       @key[return] Unbounded_String;
 
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @Examcom{not specified by the language}
 @key[end] Ada.Strings.Unbounded;
 @end{example}
 
@@ -2322,8 +2329,8 @@ New=[Ada 95 ],Old=[]}Rationale.
   Unbounded_String, and thus would be illegal.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
-  @ChgAdded{Version=[2],Text=[
-  Procedure Set_Unbounded_String, two Unbounded_Slice subprograms, and overloaded
+  @ChgAdded{Version=[2],Text=[Procedure Set_Unbounded_String,
+  two Unbounded_Slice subprograms, and overloaded
   versions of Index and Index_Non_Blank are newly added to Strings.Unbounded.
   If Strings.Unbounded is
   referenced in a @nt{use_clause}, and an entity @i<E> with the same
@@ -2331,15 +2338,6 @@ New=[Ada 95 ],Old=[]}Rationale.
   package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
   longer be use-visible, resulting in errors. This should be rare and is easily
   fixed if it does occur.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI05-0031-1]}
-  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 2005}
-  @b<Amendment 2:> An overloaded version of Find_Token is newly added to
-  Strings.Unbounded. If Strings.Unbounded is referenced in a @nt{use_clause},
-  and an entity @i<E> with a @nt{defining_identifier} of Find_Token is
-  defined in a package that is also referenced in a @nt{use_clause}, the entity
-  @i<E> may no longer be use-visible, resulting in errors. This should be rare
-  and is easily fixed if it does occur.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -2349,6 +2347,17 @@ New=[Ada 95 ],Old=[]}Rationale.
   type Unbounded_String, so that it can be used to declare default-initialized
   objects in preelaborated units.]}
 @end{Extend95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0031-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
+  An overloaded version of Find_Token is newly added to
+  Strings.Unbounded. If Strings.Unbounded is referenced in a @nt{use_clause},
+  and an entity @i<E> with a @nt{defining_identifier} of Find_Token is
+  defined in a package that is also referenced in a @nt{use_clause}, the entity
+  @i<E> may no longer be use-visible, resulting in errors. This should be rare
+  and is easily fixed if it does occur.]}
+@end{Incompatible2005}
 
 
 @LabeledSubClause{String-Handling Sets and Mappings}
@@ -2390,14 +2399,14 @@ in a preelaborable way (i.e. via aggregates versus function calls).
    @AdaObjDefn{ISO_646_Set}           : @key[constant] Character_Set;
 
    @AdaObjDefn{Lower_Case_Map}        : @key[constant] Character_Mapping;
-     --@RI{Maps to lower case for letters, else identity}
+     --@Examcom{Maps to lower case for letters, else identity}
    @AdaObjDefn{Upper_Case_Map}        : @key[constant] Character_Mapping;
-     --@RI{Maps to upper case for letters, else identity}
+     --@Examcom{Maps to upper case for letters, else identity}
    @AdaObjDefn{Basic_Map}             : @key[constant] Character_Mapping;
-     --@RI{Maps to basic letter for letters, else identity}
+     --@Examcom{Maps to basic letter for letters, else identity}
 
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @Examcom{not specified by the language}
 @key[end] Ada.Strings.Maps.Constants;
 @end{example}
 
@@ -2446,7 +2455,7 @@ The package Strings.Wide_Maps has the following declaration.
    @key[pragma] Preelaborate(Wide_Maps);
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
-   --@RI{ Representation for a set of Wide_Character values:}
+   --@Examcom{ Representation for a set of Wide_Character values:}
    @key[type] @AdaTypeDefn{Wide_Character_Set} @key[is] @key[private];@Chg{Version=[2],New=[
    @key[pragma] Preelaborable_Initialization(Wide_Character_Set);],Old=[]}
 
@@ -2457,7 +2466,7 @@ The package Strings.Wide_Maps has the following declaration.
          Low  : Wide_Character;
          High : Wide_Character;
      @key[end] @key[record];
-   -- @RI{Represents Wide_Character range Low..High}
+   -- @Examcom{Represents Wide_Character range Low..High}
 
    @key[type] @AdaTypeDefn{Wide_Character_Ranges} @key[is] @key[array] (Positive @key[range] <>)
       @key[of] Wide_Character_Range;
@@ -2497,7 +2506,7 @@ The package Strings.Wide_Maps has the following declaration.
       @key[return] Boolean @key[renames] Is_Subset;
 
 
-   --@RI{ Alternative representation for a set of Wide_Character values:}
+   --@Examcom{ Alternative representation for a set of Wide_Character values:}
    @key[subtype] @AdaSubtypeDefn{Name=[Wide_Character_Sequence],Of=[Wide_String]} @key[is] Wide_String;
 
    @key[function] @AdaSubDefn{To_Set} (Sequence  : @key[in] Wide_Character_Sequence)
@@ -2511,7 +2520,7 @@ The package Strings.Wide_Maps has the following declaration.
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
-   --@RI{ Representation for a Wide_Character to Wide_Character mapping:}
+   --@Examcom{ Representation for a Wide_Character to Wide_Character mapping:}
    @key[type] @AdaTypeDefn{Wide_Character_Mapping} @key[is] @key[private];@Chg{Version=[2],New=[
    @key[pragma] Preelaborable_Initialization(Wide_Character_Mapping);],Old=[]}
 
@@ -2535,7 +2544,7 @@ The package Strings.Wide_Maps has the following declaration.
       @key{access} @key{function} (From : @key{in} Wide_Character) @key{return} Wide_Character;
 
 @key[private]
-   ... -- @RI{not specified by the language}
+   ... -- @Examcom{not specified by the language}
 @key[end] Ada.Strings.Wide_Maps;
 @end{example}
 
@@ -2593,8 +2602,8 @@ Strings.Wide_Maps.Wide_Constants:
 @begin{example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @AdaObjDefn{Character_Set} : @key[constant] Wide_Maps.Wide_Character_Set;
---@RI{Contains each Wide_Character value WC such that}@Chg{Version=[2],New=[
---],Old=[]}@RI{Characters.@Chg{Version=[2],New=[Conversions.],Old=[]}Is_Character(WC) is True}
+--@Examcom{Contains each Wide_Character value WC such that}@Chg{Version=[2],New=[
+--],Old=[]}@Examcom{Characters.@Chg{Version=[2],New=[Conversions.],Old=[]}Is_Character(WC) is True}
 @end{example}
 @end{StaticSem}
 
@@ -2696,7 +2705,7 @@ for strings of Character elements.
    @key<pragma> Preelaborate(Wide_Wide_Maps);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Representation for a set of Wide_Wide_Character values:]
+@ChgAdded{Version=[2],Text=[   -- @Examcom[Representation for a set of Wide_Wide_Character values:]
    @key<type> @AdaTypeDefn{Wide_Wide_Character_Set} @key<is private>;
    @key<pragma> Preelaborable_Initialization(Wide_Wide_Character_Set);]}
 
@@ -2709,7 +2718,7 @@ for strings of Character elements.
          Low  : Wide_Wide_Character;
          High : Wide_Wide_Character;
       @key<end record>;
-   -- @RI[Represents Wide_Wide_Character range Low..High]]}
+   -- @Examcom[Represents Wide_Wide_Character range Low..High]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Wide_Wide_Character_Ranges} @key<is array> (Positive @key<range> <>)
@@ -2758,7 +2767,7 @@ for strings of Character elements.
          @key<return> Boolean @key<renames> Is_Subset;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Alternative representation for a set of Wide_Wide_Character values:]
+@ChgAdded{Version=[2],Text=[   -- @Examcom[Alternative representation for a set of Wide_Wide_Character values:]
    @key<subtype> @AdaSubtypeDefn{Name=[Wide_Wide_Character_Sequence],Of=[Wide_Wide_String]} @key<is> Wide_Wide_String;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2774,8 +2783,8 @@ for strings of Character elements.
          @key<return> Wide_Wide_Character_Sequence;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   -- @RI[Representation for a Wide_Wide_Character to Wide_Wide_Character]
-   -- @RI[mapping:]
+@ChgAdded{Version=[2],Text=[   -- @Examcom[Representation for a Wide_Wide_Character to Wide_Wide_Character]
+   -- @Examcom[mapping:]
    @key<type> @AdaTypeDefn{Wide_Wide_Character_Mapping} @key<is private>;
    @key<pragma> Preelaborable_Initialization(Wide_Wide_Character_Mapping);]}
 
@@ -2806,7 +2815,7 @@ for strings of Character elements.
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key<private>
-   ... -- @RI[not specified by the language]
+   ... -- @Examcom[not specified by the language]
 @key<end> Ada.Strings.Wide_Wide_Maps;]}
 @end{Example}
 
@@ -2886,11 +2895,11 @@ Strings.Wide_Wide_Maps.Wide_Wide_Constants:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@AdaObjDefn{Character_Set} : @key<constant> Wide_Wide_Maps.Wide_Wide_Character_Set;
--- @RI[Contains each Wide_Wide_Character value WWC such that]
--- @RI[Characters.Conversions.Is_Character(WWC) is True]
+-- @Examcom[Contains each Wide_Wide_Character value WWC such that]
+-- @Examcom[Characters.Conversions.Is_Character(WWC) is True]
 @AdaObjDefn{Wide_Character_Set} : @key<constant> Wide_Wide_Maps.Wide_Wide_Character_Set;
--- @RI[Contains each Wide_Wide_Character value WWC such that]
--- @RI[Characters.Conversions.Is_Wide_Character(WWC) is True]]}
+-- @Examcom[Contains each Wide_Wide_Character value WWC such that]
+-- @Examcom[Characters.Conversions.Is_Wide_Character(WWC) is True]]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
@@ -3105,13 +3114,15 @@ and similar strings should rarely return the same value.]}]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The Strings.Hash, Strings.Fixed.Hash, Strings.Bounded.Hash, and
   Strings.Unbounded.Hash functions are new.]}
+@end{Extend95}
 
+@begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:>
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   The Strings.Hash_Case_Insensitive, Strings.Fixed.Hash_Case_Insensitive,
   Strings.Bounded.Hash_Case_Insensitive, and
   Strings.Unbounded.Hash_Case_Insensitive functions are new.]}
-@end{Extend95}
+@end{Extend2005}
 
 
 @LabeledAddedSubClause{Version=[3],Name=[String Comparison]}
@@ -3262,142 +3273,447 @@ Strings.Less_Case_Insensitive (To_String (Key));]}
 
 @end{StaticSem}
 
-@begin{Extend95}
+@begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:>
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   The Strings.Equal_Case_Insensitive, Strings.Fixed.Equal_Case_Insensitive,
   Strings.Bounded.Equal_Case_Insensitive,
   Strings.Unbounded.Equal_Case_Insensitive,
   Strings.Less_Case_Insensitive, Strings.Fixed.Less_Case_Insensitive,
   Strings.Bounded.Less_Case_Insensitive,
   Strings.Unbounded.Less_Case_Insensitive functions are new.]}
-@end{Extend95}
+@end{Extend2005}
 
 
 @LabeledAddedSubClause{Version=[3],Name=[String Encoding]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
-@ChgAdded{Version=[3],Text=[The language-defined package Strings.UTF_Encoding
-provides facilities for encoding and decoding strings in various character
-encoding schemes.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Text=[Facilities for encoding, decoding, and converting strings in various character
+encoding schemes are provided by packages Strings.UTF_Encoding,
+Strings.UTF_Encoding.Conversions, Strings.UTF_Encoding.Wide_Encoding, and
+Strings.UTF_Encoding.Wide_Wide_Encoding.]}
 
 @begin{StaticSem}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[The library package
-Strings.UTF_Encoding has the following declaration:]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The encoding library packages have
+the following declaration:]}
 
 @begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
 @ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings],Child=[UTF_Encoding]}@key[package] Ada.Strings.UTF_Encoding @key[is]
    @key[pragma] Pure (UTF_Encoding);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Encoding_Scheme} @key[is] (UTF_None, UTF_8, UTF_16BE, UTF_16LE, UTF_16);
-   @key[subtype] @AdaSubtypeDefn{Name=[Short_Encoding],Of=[Encoding_Scheme]} @key[is] Encoding_Scheme @key[range] UTF_8  .. UTF_16LE;
-   @key[subtype] @AdaSubtypeDefn{Name=[Long_Encoding],Of=[Encoding_Scheme]}  @key[is] Encoding_Scheme @key[range] UTF_16 .. UTF_16;]}
+@ChgAdded{Version=[3],Text=[      -- @Examcom[Declarations common to the string encoding packages]
+   @key[type] @AdaTypeDefn{Encoding_Scheme} @key[is] (UTF_8, UTF_16BE, UTF_16LE);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_8}    : @key[constant] String := Character'Val(16#EF#) &
-                 Character'Val(16#BB#) & Character'Val(16#BF#);
-   @AdaObjDefn{BOM_16BE} : @key[constant] String := Character'Val(16#FE#) & Character'Val(16#FF#);
-   @AdaObjDefn{BOM_16LE} : @key[constant] String := Character'Val(16#FF#) & Character'Val(16#FE#);]}
+@ChgAdded{Version=[3],Text=[   @key[subtype] @AdaSubtypeDefn{Name=[UTF_String],Of=[String]} @key[is] String;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_16}   : @key[constant] Wide_String := (1 => Wide_Character'Val(16#FEFF#));]}
+@ChgAdded{Version=[3],Text=[   @key[subtype] @AdaSubtypeDefn{Name=[UTF_8_String],Of=[String]} @key[is] String;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encode} (Item   : @key[in] Wide_String;
-                    Scheme : @key[in] Short_Encoding := UTF_8)
-            @key[return] String;
-   @key[function] @AdaSubDefn{Encode} (Item   : @key[in] Wide_Wide_String;
-                    Scheme : @key[in] Short_Encoding := UTF_8)
-            @key[return] String;
-   @key[function] @AdaSubDefn{Decode} (Item   : @key[in] String;
-                    Scheme : @key[in] Short_Encoding := UTF_8)
-            @key[return] Wide_String;
-   @key[function] @AdaSubDefn{Decode} (Item   : @key[in] String;
-                    Scheme : @key[in] Short_Encoding := UTF_8)
-            @key[return] Wide_Wide_String;]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encode} (Item   : @key[in] Wide_Wide_String;
-                    Scheme : @key[in] Long_Encoding := UTF_16)
-            @key[return] Wide_String;
-   @key[function] @AdaSubDefn{Decode} (Item   : @key[in] Wide_String;
-                    Scheme : @key[in] Long_Encoding := UTF_16)
-            @key[return] Wide_Wide_String;]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encoding} (Item : @key[in] String) @key[return] Encoding_Scheme;]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encoding} (Item : @key[in] Wide_String) @key[return] Encoding_Scheme;]}
+@ChgAdded{Version=[3],Text=[   @key[subtype] @AdaSubtypeDefn{Name=[UTF_16_Wide_String],Of=[Wide_String]} @key[is] Wide_String;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @AdaExcDefn{Encoding_Error} : @key[exception];]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_8}    : @key[constant] String :=
+                Character'Val(16#EF#) &
+                Character'Val(16#BB#) &
+                Character'Val(16#BF#);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_16BE} : @key[constant] String :=
+                Character'Val(16#FE#) &
+                Character'Val(16#FF#);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_16LE} : @key[constant] String :=
+                Character'Val(16#FF#) &
+                Character'Val(16#FE#);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_16}   : @key[constant] Wide_String :=
+               (1 => Wide_Character'Val(16#FEFF#));]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encoding} (Item    : UTF_String;
+                      Default : Encoding_Scheme := UTF_8) @key[return] Encoding_Scheme;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[end] Ada.Strings.UTF_Encoding;]}
+
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings.UTF_Encoding],Child=[Conversions]}@key[package] Ada.Strings.UTF_Encoding.Conversions @key[is]
+   @key[pragma] Pure (Conversions);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   -- @Examcom{Conversions between various encoding schemes}
+   @key[function] @AdaSubDefn{Convert} (Item          : UTF_String;
+                     Input_Scheme  : Encoding_Scheme;
+                     Output_Scheme : Encoding_Scheme;
+                     Output_BOM    : Boolean := False) @key[return] UTF_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Convert} (Item          : UTF_String;
+                     Input_Scheme  : Encoding_Scheme;
+                     Output_BOM    : Boolean := False) @key[return] UTF_16_Wide_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Convert} (Item          : UTF_8_String;
+                     Output_BOM    : Boolean := False) @key[return] UTF_16_Wide_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Convert} (Item          : UTF_16_Wide_String;
+                     Output_Scheme : Encoding_Scheme;
+                     Output_BOM    : Boolean := False) @key[return] UTF_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Convert} (Item          : UTF_16_Wide_String;
+                     Output_BOM    : Boolean := False) @key[return] UTF_8_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[end] Ada.Strings.UTF_Encoding.Conversions;]}
+
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings.UTF_Encoding],Child=[Wide_Wide_Encoding]}@key[package] Ada.Strings.UTF_Encoding.Wide_Encoding @key[is]
+   @key[pragma] Pure (Wide_Encoding);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   -- @Examcom{Encoding / decoding between Wide_String and various encoding schemes}
+   @key[function] @AdaSubDefn{Encode} (Item          : Wide_String;
+                    Output_Scheme : Encoding_Scheme;
+                    Output_BOM    : Boolean  := False) @key[return] UTF_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encode} (Item       : Wide_String;
+                    Output_BOM : Boolean  := False) @key[return] UTF_8_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encode} (Item       : Wide_String;
+                    Output_BOM : Boolean  := False) @key[return] UTF_16_Wide_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Decode} (Item         : UTF_String;
+                    Input_Scheme : Encoding_Scheme) @key[return] Wide_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Decode} (Item : UTF_8_String) @key[return] Wide_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Decode} (Item : UTF_16_Wide_String) @key[return] Wide_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[end] Ada.Strings.UTF_Encoding.Wide_Encoding;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings.UTF_Encoding],Child=[Wide_Wide_Encoding]}@key[package] Ada.Strings.UTF_Encoding.Wide_Wide_Encoding @key[is]
+   @key[pragma] Pure (Wide_Wide_Encoding);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   -- @Examcom{Encoding / decoding between Wide_Wide_String and various encoding schemes}
+   @key[function] @AdaSubDefn{Encode} (Item          : Wide_Wide_String;
+                    Output_Scheme : Encoding_Scheme;
+                    Output_BOM    : Boolean  := False) @key[return] UTF_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encode} (Item       : Wide_Wide_String;
+                    Output_BOM : Boolean  := False) @key[return] UTF_8_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encode} (Item       : Wide_Wide_String;
+                    Output_BOM : Boolean  := False) @key[return] UTF_16_Wide_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Decode} (Item         : UTF_String;
+                    Input_Scheme : Encoding_Scheme) @key[return] Wide_Wide_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Decode} (Item : UTF_8_String) @key[return] Wide_Wide_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Decode} (Item : UTF_16_Wide_String) @key[return] Wide_Wide_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[end] Ada.Strings.UTF_Encoding.Wide_Wide_Encoding;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
 @ChgAdded{Version=[3],Text=[The type Encoding_Scheme defines encoding schemes.
 UTF_8 corresponds to the UTF-8 encoding scheme defined by Annex D of ISO/IEC
-106046. UTF_16 corresponds to the UTF-16 encoding scheme defined by Annex C of
-ISO/IEC 106046 stored in 16 bits; UTF_16BE corresponds to the UTF-16 encoding
-scheme stored in 8 bits, big endian; and UTF_16LE corresponds to the UTF-16
-encoding scheme on 8 bits, little endian.]}
+106046. UTF_16BE corresponds to the UTF-16 encoding scheme defined by Annex C of
+ISO/IEC 106046 stored in 8 bits, big endian; and UTF_16LE corresponds to the
+UTF-16 encoding scheme on 8 bits, little
+endian.@Defn{encoding scheme}@Defn{character encoding}@Defn{UTF-8}@Defn{UTF-16}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
-@ChgAdded{Version=[3],Text=[The subtype Short_Encoding covers the values of
-Encoding_Scheme for 8-bit encoding schemes, and the subtype Long_Encoding
-covers the values of Encoding_Scheme for 16-bit encoding schemes.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Text=[The subtype UTF_String is used to represent a String
+of 8-bit values containing a sequence of values encoded in one of three ways
+(UTF-8, UTF-16BE, or UTF-16LE). The subtype UTF_8_String is used to represent a
+String of 8-bit values containing a sequence of values encoded in UTF-8. The
+subtype UTF_16_Wide_String is is used to represent a Wide_String of 16-bit
+containing a sequence of values encoded in UTF-16.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
-@ChgAdded{Version=[3],Text=[Each of the Encode functions takes a Wide_String
-(respectively Wide_Wide_String) Item parameter and returns a String
-(respectively Wide_String) whose characters have position values that correspond
-to the encoding of the Item parameter according to the encoding scheme specified
-by the Scheme parameter. For UTF_8, no overlong encoding is returned. The lower
-bound of the returned string is 1.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Text=[The BOM_8, BOM_16BE, BOM_16LE and BOM_16 constants
+correspond to values used at the start of a string to indicate the encoding.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
-@ChgAdded{Version=[3],Text=[Each of the Decode functions takes a String
-(respectively Wide_String) Item parameter which is assumed to contain characters
-whose position values correspond to a valid encoding according to the encoding
-scheme specified by the Scheme parameter, and returns the corresponding
-Wide_String (respectively Wide_Wide_String). The exception Encoding_Error is
-propagated if the input string does not correspond to a valid encoding
-(including overlong encoding for UTF_8). The lower bound of the returned string
-is 1.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Text=[For all Convert and Decode functions, an initial BOM
+in the input that matches the expected encoding scheme is ignored, and a
+different initial BOM causes Encoding_Error to be propagated.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[For each of the Decode functions
-whose Scheme parameter is of the Short_Encoding subtype, if the Item parameter
-starts with one of the BOM sequences then:]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Text=[For all Convert and Encode functions, a BOM is
+included at the start of the output string if the Output_BOM parameter is set to
+True.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The exception Encoding_Error is also propagated in the following
+situations:]}
 @begin{Itemize}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[If this sequence identifies
-the same encoding as specified by the Scheme parameter, the sequence is
-ignored;]}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[By a Decode @key[function] when an UTF encoded
+    string contains an invalid encoding sequence.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Otherwise, Encoding_Error is raised.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[By a Decode function when the expected encoding is
+    UTF-16BE or UTF-16LE and the input string has an odd length.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[By a Decode function yielding a Wide_String when
+    the decoding of a sequence results in a code-point whose value exceeds
+    16#FFFF#]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[By an Encode function taking a Wide_String as
+    input when an invalid character appears in the input. In particular the
+    characters whose position is in the range 16#D800# .. 16#DFFF# are invalid
+    because they conflict with UTF-16 surrogate encodings, and the characters
+    whose position is 16#FFFE# or 16#FFFF# are also invalid because they
+    conflict with BOM codes.]}
 @end{Itemize}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
-@ChgAdded{Version=[3],Text=[The Encode functions do not put BOM sequences in the
-result.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Text=[Each of the Convert and Encode functions returns a
+String (respectively Wide_String) value whose characters have position values
+that correspond to the encoding of the Item parameter according to the encoding
+scheme required by the function or specified by its Output_Scheme parameter. For
+UTF_8, no overlong encoding is returned. The lower bound of the returned string
+is 1.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
-@ChgAdded{Version=[3],Text=[For each of the Encoding functions, if the initial
-characters of Item match a BOM, the corresponding encoding is returned;
-otherwise, UTF_None is returned.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Text=[Each of the Decode functions takes a String (respectively Wide_String)
+Item parameter which is assumed to contain characters whose position
+values correspond to a valid encoding sequence according to the
+encoding scheme required by the function or specified by its
+Input_Scheme parameter, and returns the corresponding Wide_String
+(respectively Wide_Wide_String) value.]}
+
+@begin{DescribeCode}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Encoding (Item    : UTF_String;
+                   Default : Encoding_Scheme := UTF_8) @key[return] Encoding_Scheme;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Inspects a UTF_String value to
+determine whether it starts with a BOM for UTF-8, UTF-16BE, or UTF_16LE. If so,
+returns the scheme corresponding to the BOM; returns the value of Default
+otherwise.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Convert (Item          : UTF_String;
+                  Input_Scheme  : Encoding_Scheme;
+                  Output_Scheme : Encoding_Scheme;
+                  Output_BOM    : Boolean := False) @key[return] UTF_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Converts from input encoded in
+UTF-8, UTF-16LE, or UTF-16BE as specified by Input_Scheme, and generates an
+output encoded in one of these three schemes as specified by Output_Scheme.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Convert (Item          : UTF_String;
+                  Input_Scheme  : Encoding_Scheme;
+                  Output_BOM    : Boolean := False) @key[return] UTF_16_Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Converts from input encoded in
+UTF-8, UTF-16LE, or UTF-16BE as specified by Input_Scheme, and generates an
+output encoded in UTF-16.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Convert (Item          : UTF_8_String;
+                  Output_BOM    : Boolean := False) @key[return] UTF_16_Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Converts from input encoded in UTF-8
+and generates an output encoded in UTF-16.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Convert (Item          : UTF_16_Wide_String;
+                  Output_Scheme : Encoding_Scheme;
+                  Output_BOM    : Boolean := False) @key[return] UTF_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Converts from input encoded in
+UTF-16 and generates an output encoded in UTF-8, UTF-16LE, or UTF-16BE as
+specified by Output_Scheme.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Convert (Item          : UTF_16_Wide_String;
+                  Output_BOM    : Boolean := False) @key[return] UTF_8_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Converts from input encoded in
+UTF-16 and generates an output encoded in UTF-8.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Encode (Item          : Wide_String;
+                 Output_Scheme : Encoding_Scheme;
+                 Output_BOM    : Boolean  := False) @key[return] UTF_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Encodes from Wide_String input, and
+generates an output encoded in UTF-8, UTF-16LE or UTF-16BE encoding as specified
+by Output_Scheme.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Encode (Item       : Wide_String;
+                 Output_BOM : Boolean  := False) @key[return] UTF_8_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Encodes from Wide_String input, and
+generates an output encoded in UTF-8 encoding.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Encode (Item       : Wide_String;
+                 Output_BOM : Boolean  := False) @key[return] UTF_16_Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Encodes from Wide_String input, and
+generates an output encoded in UTF_16 encoding.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Decode (Item         : UTF_String;
+                 Input_Scheme : Encoding_Scheme) @key[return] Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Decodes from input encoded in UTF-8,
+UTF-16LE, or UTF-16BE as specified by Input_Scheme, and returns the
+corresponding Wide_String value.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Decode (Item : UTF_8_String) @key[return] Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Decodes from input encoded in UTF-8,
+and returns the corresponding Wide_String value.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Decode (Item : UTF_16_Wide_String) @key[return] Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Decodes from input encoded in
+UTF-16, and returns the corresponding Wide_String value.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Encode (Item          : Wide_Wide_String;
+                 Output_Scheme : Encoding_Scheme;
+                 Output_BOM    : Boolean  := False) @key[return] UTF_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Encodes from Wide_Wide_String input,
+and generates an output encoded in UTF-8, UTF-16LE or UTF-16BE encoding as
+specified by Output_Scheme.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Encode (Item       : Wide_Wide_String;
+                 Output_BOM : Boolean  := False) @key[return] UTF_8_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Encodes from Wide_Wide_String input,
+and generates an output encoded in UTF-8 encoding.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Encode (Item       : Wide_Wide_String;
+                 Output_BOM : Boolean  := False) @key[return] UTF_16_Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Encodes from Wide_Wide_String input,
+and generates an output encoded in UTF_16 encoding.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Decode (Item         : UTF_String;
+                 Input_Scheme : Encoding_Scheme) @key[return] Wide_Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Decodes from input encoded in UTF-8,
+UTF-16LE, or UTF-16BE as specified by Input_Scheme, and returns the
+corresponding Wide_Wide_String value.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Decode (Item : UTF_8_String) @key[return] Wide_Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Decodes from input encoded in UTF-8,
+and returns the corresponding Wide_Wide_String value.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Decode (Item : UTF_16_Wide_String) @key[return] Wide_Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Decodes from input encoded in
+UTF-16, and returns the corresponding Wide_Wide_String value.]}
+
+@end{DescribeCode}
+
 @end{StaticSem}
 
 @begin{ImplAdvice}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
 @ChgAdded{Version=[3],Text=[If an implementation supports other encoding
 schemes, another similar child of Ada.Strings should be defined.]}
 @ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
@@ -3406,21 +3722,21 @@ schemes, a child of Ada.Strings similar to UTF_Encoding should be defined.]}]}
 @end{ImplAdvice}
 
 @begin{Notes}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
 @ChgAdded{Version=[3],Text=[A BOM (Byte-Order Mark, code position 16#FEFF#) can
 be included in a file or other entity to indicate the encoding; it is skipped
-when decoding. An explicit concatenation is needed to include a BOM in an
-encoded entity (it is not added automatically). Typically, only the first line
-of a file or other entity will contain a BOM. When decoding, the appropriate
-Encoding function can be used on the first line to determine the encoding; that
-encoding will then be used in subsequent calls to Decode to convert all of the
-lines to an internal format.]}
+when decoding. Typically, only the first line of a file or other entity contains
+a BOM. When decoding, the Encoding function can be called on the first line to
+determine the encoding; this encoding will then be used in subsequent calls to
+Decode to convert all of the lines to an internal format.]}
 @end{Notes}
 
-@begin{Extend95}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:>
-  The package Strings.UTF_Encoding is new.]}
-@end{Extend95}
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  The packages Strings.UTF_Encoding, Strings.UTF_Encoding.Conversions,
+  Strings.UTF_Encoding.Wide_Encoding, and Strings.UTF_Encoding.Wide_Wide_Encoding
+  are new.]}
+@end{Extend2005}
 
 

@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2009/02/05 07:12:35 $}
+@Comment{$Date: 2010/06/11 07:27:55 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.55 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -891,6 +891,13 @@ of indirection, Buffer_Size will typically equal:
 A buffer used for Storage_IO holds only one element at a time; an external
 file used for Direct_IO holds a sequence of elements.
 @end{Notes}
+
+@begin{Extend83}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+@ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 83}
+Storage_IO is new in Ada 95.]}
+@end{Extend83}
+
 
 @LabeledClause{Text Input-Output}
 
@@ -1969,14 +1976,14 @@ of these terminators by a single character, provided that it is properly
 recognized on input.
 @end{Notes}
 
-@begin{Inconsistent95}
+@begin{Inconsistent2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0038-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2:>
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}@b<Correction:>
   Fixed a glitch in Set_Line such that we could have called New_Line(0), which
   would have to raise Constraint_Error. It's now defined to work. The bug
-  occurred in Ada 95 and Ada 2005 Amendment 1. It's very unlikely that
+  occurred in Ada 95 and Ada 2005. It's very unlikely that
   any real programs depend on this exception being raised.]}
-@end{Inconsistent95}
+@end{Inconsistent2005}
 
 
 @LabeledSubClause{Get and Put Procedures}
@@ -2327,11 +2334,11 @@ return as soon as a line terminator is read.
   The Text_IO.Get_Line functions are new.]}
 @end{Extend95}
 
-@begin{DiffWord95}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0038-1]}
-@ChgAdded{Version=[3],Text=[@b<Amendment 2:> Added missing wording about
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0038-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added missing wording about
   raising Status_Error to Look_Ahead and Get_Immediate.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 
@@ -2484,9 +2491,9 @@ Put(126, Width => 13, Base => 2);    --@RI{ "bbb2#1111110#"}
 @end{Example}
 @end{Examples}
 
-@begin{Inconsistent95}
+@begin{Inconsistent2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0038-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2:>
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}@b<Correction:>
   Changed wording to make Integer_IO and Modular_IO raise Data_Error in the same
   way when the bounds of the subtype are exceeded. There is no value to
   different behavior, and all surveyed compilers already treat integer and
@@ -2495,7 +2502,7 @@ Put(126, Width => 13, Base => 2);    --@RI{ "bbb2#1111110#"}
   behavior is expected for Modular_IO. But note that such code is not portable
   anyway, as most widely used compilers behave consistently with the
   new wording, so it is unlikely that such code exists.]}
-@end{Inconsistent95}
+@end{Inconsistent2005}
 
 
 @LabeledSubClause{Input-Output for Real Types}
@@ -3302,6 +3309,15 @@ Support for Wide_Character and Wide_String I/O is new in Ada 95.
   Wide_Text_IO.Wide_Bounded_IO and
   Wide_Wide_Text_IO.Wide_Wide_Bounded_IO are new as well.]}
 @end{Extend95}
+
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0092-1]}
+  @ChgAdded{Version=[3],Text=[@B<Correction>: Corrected the names of
+  various entities in the above description. Since the previously named
+  entities don't exist and the intent is obvious, this is just considered
+  a presentation change.]}
+@end{DiffWord2005}
 
 
 @LabeledClause{Stream Input-Output}

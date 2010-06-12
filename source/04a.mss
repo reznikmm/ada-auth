@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:32 $}
+@Comment{$Date: 2010/06/11 07:27:55 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.102 $}
+@Comment{$Revision: 1.103 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2602,10 +2602,11 @@ of any of the other five syntactic categories defined below.
 
 @Syn{lhs=<factor>,rhs="@Syn2{primary} [** @Syn2{primary}] | @key{abs} @Syn2{primary} | @key{not} @Syn2{primary}"}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1],ARef=[AI05-0176-1]}
 @Syn{lhs=<primary>,rhs="
    @Syn2{numeric_literal} | @key{null} | @Syn2{string_literal} | @Syn2{aggregate}
- | @Syn2{name} | @Chg{Version=[3],New=[],Old=[@Syn2{qualified_expression} | ]}@Syn2{allocator} | (@Syn2{expression})"}
+ | @Syn2{name} | @Chg{Version=[3],New=[],Old=[@Syn2{qualified_expression} | ]}@Syn2{allocator} | (@Syn2{expression})@Chg{Version=[3],New=[
+ | (@Syn2{quantified_expression})],Old=[]}"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -2734,6 +2735,10 @@ still have to be parenthesized when used in a bound of a range.
   @ChgAdded{Version=[3],Text=[Moved @nt{qualified_expression}
   from @nt{primary} to @nt{name} (see @RefSecNum{Names}). This allows the
   use of @nt{qualified_expression}s in more places.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
+  @ChgAdded{Version=[3],Text=[Added @nt{quantified_expression}
+  to @nt{primary}.]}
 @end{DiffWord2005}
 
 
@@ -4382,4 +4387,126 @@ a negative value is provided for the exponent.
   for "**" was corrected so that it does not imply that the operands
   are evaluated multiple times.]}
 @end{DiffWord2005}
+
+
+@LabeledAddedSubclause{Version=[3],Name=[Quantified Expressions]}
+
+@begin{Syntax}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<quantified_expression>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<@key[for] @Syn2{quantifier} @Syn2{loop_parameter_specification} | @Syn2{predicate}>,Old=<>}"}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<quantifier>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<@key[all] | Some>,Old=<>}"}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<predicate>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<@SynI<boolean_>@Syn2{expression}>,Old=<>}"}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The vertical line ('|') between the
+  @nt{loop_parameter_specification} and the @nt{predicate} is an explicit
+  vertical line; it does not separate alternative items as it does elsewhere in
+  the syntax. See @RefSecNum{Method of Description and Syntax Notation}.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
+@ChgAdded{Version=[3],Text=[Wherever the Syntax Rules allow an @nt{expression}, a
+@nt{quantified_expression} may be used in place of the @nt{expression}, so
+long as it is immediately surrounded by parentheses.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The syntactic category @nt{quantified_expression}
+  appears only as a @nt{primary} that is parenthesized. The above rule allows it to additionally
+  be used in other contexts where it would be directly surrounded by
+  parentheses. This is the same rule that is used for @ntf{conditional_expressions};
+  see 4.5.7 for a detailed discussion of the meaning and effects this rule.]}
+@ChgNote{The above should be changed when the real 4.5.7 is inserted}
+@end{Discussion}
+@end{Syntax}
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
+@ChgAdded{Version=[3],Text=[The expected type of a @nt{quantified_expression} is
+any Boolean type. The @nt{predicate} in a @nt{quantified_expression} is
+expected to be of the same type.@Defn{quantified expressions}]}
+@end{Resolution}
+
+@begin{Runtime}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
+@ChgAdded{Version=[3],Text=[For the evaluation of a @nt{quantified_expression},
+the @nt{loop_parameter_specification} is first elaborated. The evaluation of a
+@nt{quantified_expression} then evaluates the @nt{predicate} for each value of
+the loop parameter. These values are examined in the order specified by the
+@nt{loop_parameter_specification} (see @RefSecNum{Loop Statements}).]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The value of the
+@nt{quantified_expression} is determined as follows:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If the @nt{quantifier} is @key[all], the
+  expression is True if the evaluation of the @nt{predicate} yields True for
+  each value of the loop parameter. It is False otherwise. Evaluation of
+  the @nt{quantified_expression} stops when all values of the domain have been
+  examined, or when the @nt{predicate} yields False for a given value. Any
+  exception raised by evaluation of the @nt{predicate} is propagated.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The @nt{expression} is True if the domain contains no values.]}
+@end{Ramification}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If the @nt{quantifier} is @exam[Some], the
+  expression is True if the evaluation of the @nt{predicate} yields True for
+  some value of the loop parameter. It is False otherwise. Evaluation of
+  the @nt{quantified_expression} stops when all values of the domain have been
+  examined, or when the @nt{predicate} yields True for a given value. Any
+  exception raised by evaluation of the @nt{predicate} is propagated.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The @nt{expression} is False if the domain contains no values.]}
+@end{Ramification}
+@end{Itemize}
+@end{Runtime}
+
+@begin{Notes}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Some is not a reserved word.]}
+@end{Notes}
+
+@begin{Examples}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The postcondition for a sorting
+routine on an array A with an index subtype T can be written:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Post => (@key[for all] I @key[in] A'First .. T'Pred(A'Last) | A (I) <= A (T'Succ (I)))]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The assertion that a positive number
+is composite (as opposed to prime) can be written:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[pragma] Assert (@key[for] some X @key[in] 2 .. N / 2 | N @key[mod] X = 0);]}
+@end{Example}
+
+@end{Examples}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Quantified
+  expressions are new.]}
+@end{Extend2005}
 

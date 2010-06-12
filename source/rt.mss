@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.87 $ $Date: 2010/05/08 06:31:33 $ $Author: randy $ }
+@comment{ $Revision: 1.88 $ $Date: 2010/06/11 07:27:55 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2010/05/08 06:31:33 $}
+@Comment{$Date: 2010/06/11 07:27:55 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -3829,9 +3829,9 @@ Suspend_Until_True is a potentially blocking operation
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0168-1]}
 @ChgAdded{Version=[3],Text=[The procedure Suspend_Until_True_And_Set_Deadline
-blocks the calling task until the state of the object S is True: at that point
+blocks the calling task until the state of the object S is True; at that point
 the task becomes ready with a deadline of Ada.Real_Time.Clock + TS, and the
-state of the object becomes False. Suspend_Until_True_And_Set_Deadling is a
+state of the object becomes False. Suspend_Until_True_And_Set_Deadline is a
 potentially blocking operation.]}
 @end{RunTime}
 

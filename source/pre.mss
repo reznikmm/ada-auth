@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:33 $}
+@Comment{$Date: 2010/06/11 07:27:55 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.37 $}
+@comment{$Revision: 1.38 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -41,27 +41,39 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\Command_Line @em @RefSecNum{The Package Command_Line}
 @Chg{Version=[2],New=(@\@\Complex_Text_IO @em @RefSecNum{Complex Input-Output}
 @\@\Containers @em @RefSecNum{The Package Containers}
-@\@\@\Doubly_Linked_Lists @em @RefSecNum{The Package Containers.Doubly_Linked_Lists}
+@Chg{Version=[3],New=(@\@\@\Bounded_Doubly_Linked_Lists
+@\@\@\@\@\@\@em @RefSecNum{The Package Containers.Bounded_Doubly_Linked_Lists}
+@\@\@\Bounded_Hashed_Maps @em @RefSecNum{The Package Containers.Bounded_Hashed_Maps}
+@\@\@\Bounded_Hashed_Sets @em @RefSecNum{The Package Containers.Bounded_Hashed_Sets}
+@\@\@\Bounded_Multiway_Trees @em @RefSecNum{The Package Containers.Bounded_Multiway_Trees}
+@\@\@\Bounded_Ordered_Maps @em @RefSecNum{The Package Containers.Bounded_Ordered_Maps}
+@\@\@\Bounded_Ordered_Sets @em @RefSecNum{The Package Containers.Bounded_Ordered_Sets}
+@\@\@\Bounded_Vectors @em @RefSecNum{The Package Containers.Bounded_Vectors}
+), Old=()}@\@\@\Doubly_Linked_Lists @em @RefSecNum{The Package Containers.Doubly_Linked_Lists}
 @\@\@\Generic_Array_Sort @em @RefSecNum{Array Sorting}
 @\@\@\Generic_Constrained_Array_Sort
 @\@\@\@\@\@\@em @RefSecNum{Array Sorting}
-@\@\@\Hashed_Maps @em @RefSecNum{The Package Containers.Hashed_Maps}
+@Chg{Version=[3],New=(@\@\@\Generic_Sort @em @RefSecNum{Array Sorting}
+), Old=()}@\@\@\Hashed_Maps @em @RefSecNum{The Package Containers.Hashed_Maps}
 @\@\@\Hashed_Sets @em @RefSecNum{The Package Containers.Hashed_Sets}
 @\@\@\Indefinite_Doubly_Linked_Lists
 @\@\@\@\@\@\@em @RefSecNum{The Package Containers.Indefinite_Doubly_Linked_Lists}
 @\@\@\Indefinite_Hashed_Maps @em @RefSecNum{The Package Containers.Indefinite_Hashed_Maps}
 @\@\@\Indefinite_Hashed_Sets @em @RefSecNum{The Package Containers.Indefinite_Hashed_Sets}
 @Chg{Version=[3],New=(@\@\@\Indefinite_Holders @em @RefSecNum{The Package Containers.Indefinite_Holders}
+@\@\@\Indefinite_Multiway_Trees @em @RefSecNum{The Package Containers.Indefinite_Multiway_Trees}
 ), Old=()}@\@\@\Indefinite_Ordered_Maps @em @RefSecNum{The Package Containers.Indefinite_Ordered_Maps}
 @\@\@\Indefinite_Ordered_Sets @em @RefSecNum{The Package Containers.Indefinite_Ordered_Sets}
 @\@\@\Indefinite_Vectors @em @RefSecNum{The Package Containers.Indefinite_Vectors}
-@\@\@\Ordered_Maps @em @RefSecNum{The Package Containers.Ordered_Maps}
+@Chg{Version=[3],New=(@\@\@\Multiway_Trees @em @RefSecNum{The Package Containers.Multiway_Trees}
+), Old=()}@\@\@\Ordered_Maps @em @RefSecNum{The Package Containers.Ordered_Maps}
 @\@\@\Ordered_Sets @em @RefSecNum{The Package Containers.Ordered_Sets}
 @\@\@\Vectors @em @RefSecNum{The Package Containers.Vectors}
 ), Old=()}@\@\Decimal @em @RefSecNum{The Package Decimal}
 @\@\Direct_IO @em @RefSecNum{The Generic Package Direct_IO}
 @Chg{Version=[2],New=(@\@\Directories @em @RefSecNum{The Package Directories}
-@\@\@\Information @em @RefSecNum{The Package Directories}
+@Chg{Version=[3],New=(@\@\@\Hierarchical_File_Names @em @RefSecNum{The Package Directories.Hierarchical_File_Names}
+), Old=()}@\@\@\Information @em @RefSecNum{The Package Directories}
 @\@\Dispatching @em @RefSecNum{The Task Dispatching Model}
 @\@\@\EDF @em @RefSecNum{Earliest Deadline First Dispatching}
 @Chg{Version=[3],New=[@\@\@\Non_Preemptive @em @RefSecNum{Non-Preemptive Dispatching}
@@ -110,15 +122,31 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\Ada (@i{...continued})
 @\@\Strings @em @RefSecNum{The Package Strings}
 @\@\@\Bounded @em @RefSecNum{Bounded-Length String Handling}
-@Chg{Version=[2],New=(@\@\@\@\Hash @em @RefSecNum{String Hashing}
-), Old=()}@\@\@\Fixed @em @RefSecNum{Fixed-Length String Handling}
-@Chg{Version=[2],New=(@\@\@\@\Hash @em @RefSecNum{String Hashing}
-@\@\@\Hash @em @RefSecNum{String Hashing}
+@Chg{Version=[3],New=(@\@\@\@\Equal_Case_Insensitive @em @RefSecNum{String Comparison}
+), Old=()}@Chg{Version=[2],New=(@\@\@\@\Hash @em @RefSecNum{String Hashing}
+@Chg{Version=[3],New=(@\@\@\@\Hash_Case_Insensitive @em @RefSecNum{String Hashing}
+@\@\@\@\Less_Case_Insensitive @em @RefSecNum{String Comparison}
+), Old=()}), Old=()}@\@\@\Fixed @em @RefSecNum{Fixed-Length String Handling}
+@Chg{Version=[3],New=(@\@\@\@\Equal_Case_Insensitive @em @RefSecNum{String Comparison}
+), Old=()}@Chg{Version=[2],New=(@\@\@\@\Hash @em @RefSecNum{String Hashing}
+@Chg{Version=[3],New=(@\@\@\@\Hash_Case_Insensitive @em @RefSecNum{String Hashing}
+@\@\@\@\Less_Case_Insensitive @em @RefSecNum{String Comparison}
+@\@\@\Equal_Case_Insensitive @em @RefSecNum{String Comparison}
+), Old=()}), Old=()}@\@\@\Hash @em @RefSecNum{String Hashing}
+@Chg{Version=[3],New=(@\@\@\Hash_Case_Insensitive @em @RefSecNum{String Hashing}
+@\@\@\Less_Case_Insensitive @em @RefSecNum{String Comparison}
 ), Old=()}@\@\@\Maps @em @RefSecNum{The Package Strings.Maps}
 @\@\@\@\Constants @em @RefSecNum{String-Handling Sets and Mappings}
 @\@\@\Unbounded @em @RefSecNum{Unbounded-Length String Handling}
-@Chg{Version=[2],New=(@\@\@\@\Hash @em @RefSecNum{String Hashing}
-), Old=()}@\@\@\Wide_Bounded @em @RefSecNum{Wide_String Handling}
+@Chg{Version=[3],New=(@\@\@\@\Equal_Case_Insensitive @em @RefSecNum{String Comparison}
+), Old=()}@Chg{Version=[2],New=(@\@\@\@\Hash @em @RefSecNum{String Hashing}
+@Chg{Version=[3],New=(@\@\@\@\Hash_Case_Insensitive @em @RefSecNum{String Hashing}
+@\@\@\@\Less_Case_Insensitive @em @RefSecNum{String Comparison}
+@\@\@\UTF_Encoding @em @RefSecNum{String Encoding}
+@\@\@\@\Conversions @em @RefSecNum{String Encoding}
+@\@\@\@\Wide_Encoding @em @RefSecNum{String Encoding}
+@\@\@\@\Wide_Wide_Encoding @em @RefSecNum{String Encoding}
+), Old=()}), Old=()}), Old=()}@\@\@\Wide_Bounded @em @RefSecNum{Wide_String Handling}
 @Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
 ), Old=()}@\@\@\Wide_Fixed @em @RefSecNum{Wide_String Handling}
 @Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
@@ -298,7 +326,7 @@ The order and lettering of the annexes has been changed.
   raise an exception, and surely we don't want either of those to happen
   with predefined units.)]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0166-1],ARef=[AI05-0168-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0049-1],ARef=[AI05-0069-1],ARef=[AI05-0136-1],ARef=[AI05-0137-1],ARef=[AI05-0166-1],ARef=[AI05-0168-1]}
   @ChgAdded{Version=[3],Text=[Added various new units to the
   list of predefined units.]}
 @end{DiffWord2005}

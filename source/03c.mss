@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:32 $}
+@Comment{$Date: 2010/06/11 07:27:55 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.98 $}
+@Comment{$Revision: 1.99 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -447,9 +447,8 @@ one type that has the appropriate Ancestor and accessibility level],Old=[]}.]}
   prevent an external tag from identifying more than one type. However, an
   external tag can identify multiple types if a generic body contains a
   derivation of a tagged type declared outside of the generic, and there are
-  multiple instances at the same accessibility level as the type. (There is
-  an exception to the general requirement that default external tags be unique
-  for this case.)]}
+  multiple instances at the same accessibility level as the type. (The Standard
+  allows default external tags to not be unique in this case.)]}
   @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
@@ -1785,8 +1784,8 @@ the overriding routine (if any) for the specific type.]}
 @end{Ramification}
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
-@Leading@;The wording of the above @Chg{Version=[3],New=[rules are],Old=[rule is]}
-intended to ensure that the same body is executed for a given tag,
+@Leading@;The wording of the above @Chg{Version=[3],New=[rules],Old=[rule]}
+is intended to ensure that the same body is executed for a given tag,
 whether that tag is determined statically or dynamically.
 For a type declared in a package,
 it doesn't matter whether a given subprogram is
@@ -3877,19 +3876,6 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
 @end{Ramification}
 @end{Itemize}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0151-1]}
-@ChgAdded{Version=[3],Text=[If the @nt{subtype_mark} occurs within an
-@nt{access_to_subprogram_definition} or an @nt{access_definition} for an
-access-to-subprogram type, then the @nt{subtype_mark} shall denote a tagged
-incomplete view or the access-to-subprogram type definition shall occur within
-the declaration list immediately containing the completion of the incomplete
-view.]}
-@begin{Ramification}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[An untagged incomplete view from
-  a limited view cannot be used here.]}
-@end{Ramification}
-
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
 @ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[If such a @nt{name}
 denotes a tagged incomplete view, it may also be used:]}
@@ -3970,7 +3956,9 @@ Old=[A dereference (whether implicit or explicit @em see @RefSecNum(Names))]}
 shall not be of an incomplete @Chg{Version=[2],New=[view],Old=[type]}.@Chg{Version=[3],New=[
 An actual parameter in a call shall not be of an untagged incomplete
 view. The result object of a function call shall not be of an
-incomplete view.],Old=[]}
+incomplete view. A @nt{prefix} shall not denote a subprogram
+having a formal parameter of an untagged incomplete view,
+nor a return type that is an incomplete view.],Old=[]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[We used to disallow all dereferences of an incomplete

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:33 $}
+@Comment{$Date: 2010/06/11 07:27:55 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -3271,7 +3271,7 @@ parameter nor a standalone access object].]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The rule also minimizes cases of implicit
   conversions when the tag check or the accessibility check might fail. We
-  word this this way because access discriminants should also be disallowed if
+  word it this way because access discriminants should also be disallowed if
   their enclosing object is designated by an access parameter.]}
 @end{Reason}
 @begin{Ramification}
@@ -3291,7 +3291,6 @@ about ambiguity, are the ones that suck in all the @SyntaxName@;s and
 Note that this and the ambiguity rule have to be @LegalityName@;s.
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0149-1]}
 @Defn2{Term=[preference], Sec=(for root numeric operators and @nt<range>s)}
 There is a @i{preference} for the primitive operators (and @nt<range>s)
 of the root numeric
@@ -3302,14 +3301,7 @@ context differ only in that one is for a primitive operator (or
 @nt<range>) of the
 type @i{root_integer} or @i{root_real}, and the other is not,
 the interpretation using the primitive operator (or @nt<range>)
-of the root numeric type is @i{preferred}.@Chg{Version=[3],New=[ Similarly,
-there is a preference for the equality operators of the @i{universal_access}
-type (see @RefSecNum{Relational Operators and Membership Tests}). If two
-acceptable interpretations of a constituent of a
-complete context differ only in that one is for an equality operator of the
-@i{universal_access} type, and the other is not, the interpretation using the
-equality operator of the @i{universal_access} type is
-preferred.@Defn2{Term=[preference], Sec=(for universal access equality operators)}],Old=[]}
+of the root numeric type is @i{preferred}.
 
 @begin{Reason}
 @leading@;The reason for this preference is so that expressions involving
@@ -3322,12 +3314,23 @@ N : @key[constant] := 123;
     ...
 @key[end] @key[if];
 @end{Example}
+@end{Reason}
 
-  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0149-1]}
-  @ChgAdded{Version=[3],Text=[The preference for @i{universal_access} equality
-  operators is necessary because of implicit conversion
-  from an anonymous access type to a named access type, which would
-  allow the equality operator of any named access type to be used
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0149-1]}
+@ChgAdded{Version=[3],Text=[Similarly,
+there is a preference for the equality operators of the @i{universal_access}
+type (see @RefSecNum{Relational Operators and Membership Tests}). If two
+acceptable interpretations of a constituent of a
+complete context differ only in that one is for an equality operator of the
+@i{universal_access} type, and the other is not, the interpretation using the
+equality operator of the @i{universal_access} type is
+preferred.@Defn2{Term=[preference], Sec=(for universal access equality operators)}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This preference is necessary because of
+  implicit conversion from an anonymous access type to a named access type,
+  which would allow the equality operator of any named access type to be used
   to compare anonymous access values (and that way lies madness).]}
 @end{Reason}
 

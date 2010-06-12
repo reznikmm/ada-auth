@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.34 $ $Date: 2009/12/18 07:15:34 $ $Author: randy $ }
+@comment{ $Revision: 1.35 $ $Date: 2010/06/11 07:27:55 $ $Author: randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2009/12/18 07:15:34 $}
+@Comment{$Date: 2010/06/11 07:27:55 $}
 
 @RMNewPage@Comment{For printed RM Ada 2005}
 @LabeledClause{The Package Standard}
@@ -471,13 +471,15 @@ the ride.
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0028],ARef=[AI95-00145-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the parameter
   type for the Boolean operators declared in Standard..]}
+@end{DiffWord95}
 
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0181-1]}
-  @ChgAdded{Version=[3],Text=[@b<Amendment 2:> Since soft_hyphen (position
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Since soft_hyphen (position
   173) is defined to be nongraphic, gave it a name.]}
   @begin{Discussion}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
     @ChgAdded{Version=[3],Text=[The inconsistencies associated with this
     change are documented in @RefSecNum{Scalar Types}.]}
   @end{Discussion}
-@end{DiffWord95}
+@end{DiffWord2005}

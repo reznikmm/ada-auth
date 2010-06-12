@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.32 $ $Date: 2010/04/24 06:27:51 $ $Author: randy $ }
+@comment{ $Revision: 1.33 $ $Date: 2010/06/11 07:27:55 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2010/04/24 06:27:51 $}
+@Comment{$Date: 2010/06/11 07:27:55 $}
 
 @RMNewPage@Comment{For printed RM Ada 2007}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -1178,23 +1178,25 @@ should be deleted first.]}
 @end{Discussion}
 @end{Notes}
 
-@begin{Incompatible95}
+@begin{Extend95}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  Package Ada.Directories is new.]}
+@end{Extend95}
+
+@begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0049-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
-  @b<Amendment 2:> A new enumeration type Name_Case_Kind and a new function
+  A new enumeration type Name_Case_Kind and a new function
   Name_Case_Equivalence is newly added to Directories. If Directories
   is referenced in a @nt{use_clause}, and an
   entity @i<E> with a @nt{defining_identifier} of one of the new entities is
   defined in a package that is also referenced in a @nt{use_clause}, the entity
   @i<E> may no longer be use-visible, resulting in errors. This should be rare
   and is easily fixed if it does occur.]}
-@end{Incompatible95}
+@end{Incompatible2005}
 
-@begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  Package Ada.Directories is new.]}
-@end{Extend95}
+
 
 @LabeledAddedSubClause{Version=[3],Name=[The Package Directories.Hierarchical_File_Names]}
 
@@ -1293,8 +1295,9 @@ directory that cannot be decomposed further), and returns False otherwise.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Returns True if Name indicates the parent directory
-of any directory, and returns False otherwise.]}
+@ChgAdded{Version=[3],Text=[Returns True if Name can be used to indicate
+symbolically the the parent directory of any directory, and returns False
+otherwise.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1308,8 +1311,9 @@ of any directory, and returns False otherwise.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Returns True if Name indicates the current directory
-for any directory, and returns False otherwise.]}
+@ChgAdded{Version=[3],Text=[Returns True if Name can be used to indicate
+symbolically the directory itself for any directory, and returns False
+otherwise.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1332,12 +1336,13 @@ is a root, and returns False otherwise.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Returns True if Name has proper syntax but is not a
-full name, and returns False otherwise.]}
+@ChgAdded{Version=[3],Text=[Returns True if Name allows the identification of an
+external file but is not a full name, and returns False otherwise.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[Relative names include simple names as a special case.]}
+  @ChgAdded{Version=[3],Text=[Relative names include simple names as a special case.
+  This function returns False if the syntax of the name is incorrect.]}
 @end{Ramification}
 
 @begin{Example}
@@ -1346,7 +1351,7 @@ full name, and returns False otherwise.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Initial_Directory returns the leftmost directory
+@ChgAdded{Version=[3],Text=[Returns the leftmost directory
 part @key{in} Name. @Redundant[That is a root directory name (for a full name),
 or one of a parent directory name, a current directory name, or a simple name
 (for a relative name).] The exception Name_Error is propagated if the string
@@ -1359,7 +1364,7 @@ directories and special files).]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Relative_Name returns the entire file name except
+@ChgAdded{Version=[3],Text=[Returns the entire file name except
 the Initial_Directory portion. The exception Name_Error is propagated if the
 string given as Name does not allow the identification of an external file
 (including directories and special files), or if Name has a single part (this
@@ -1381,7 +1386,7 @@ Is_Parent_Directory_Name, or Is_Current_Directory_Name are True).]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Returns the name of the external file with the
 specified Directory, Relative_Name, and Extension. The exception Name_Error is
-propagated if the string given as Directory is not the null string and and does
+propagated if the string given as Directory is not the null string and does
 not allow the identification of a directory, or if Is_Relative_Name
 (Relative_Name) is False, or if the string given as Extension is not the null
 string and is not a possible extension, or if Extension is not the null string
@@ -1486,9 +1491,9 @@ Is_Root_Directory_Name, Is_Parent_Directory_Name, or Is_Current_Directory_Name
 are True.]}
 @end{Notes}
 
-@begin{Extend95} @Comment{Really Extend05, not yet defined}
+@begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0049-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Package Ada.Directories.Hierarchical_File_Names is new.]}
-@end{Extend95}
+@end{Extend2005}
 
