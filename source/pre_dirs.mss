@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.33 $ $Date: 2010/06/11 07:27:55 $ $Author: randy $ }
+@comment{ $Revision: 1.34 $ $Date: 2010/06/12 02:07:31 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2010/06/11 07:27:55 $}
+@Comment{$Date: 2010/06/12 02:07:31 $}
 
 @RMNewPage@Comment{For printed RM Ada 2007}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -713,10 +713,13 @@ needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
                         Filter    : @key{in} Filter_Type := (@key{others} => True));]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Starts a search
 in the directory named by
 Directory for entries matching Pattern. Pattern represents a pattern for
-matching file names. If Pattern is null, all items in the directory are matched; otherwise,
+matching file names. If Pattern is
+@Chg{Version=[3],New=[the ],Old=[]}null@Chg{Version=[3],New=[ string],Old=[]},
+all items in the directory are matched; otherwise,
 the interpretation of Pattern is implementation-defined. Only items that match
 Filter will be returned. After a successful call on Start_Search, the object
 Search may have entries available, but it may have no entries available if no
@@ -779,10 +782,13 @@ altered while a search is in progress.],Old=[]}]}
         Directory_Entry : @key{in} Directory_Entry_Type));]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Searches in the directory named by
 Directory for entries matching Pattern. The subprogram designated by Process
 is called with each matching entry in turn. Pattern represents a pattern for
-matching file names. If Pattern is null, all items in the directory are matched;
+matching file names. If Pattern is
+@Chg{Version=[3],New=[the ],Old=[]}null@Chg{Version=[3],New=[ string],Old=[]},
+all items in the directory are matched;
 otherwise, the interpretation of Pattern is implementation-defined. Only
 items that match Filter will be returned.
 The exception Name_Error is propagated if the string given by Directory
