@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2010/06/03 06:11:24 $}
+@Comment{$Date: 2010/08/13 05:23:13 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.100 $}
+@Comment{$Revision: 1.101 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -172,9 +172,9 @@ The @i(parameter mode) of a formal parameter conveys the direction of
 information transfer with the actual parameter:
 @key(in), @key(in out), or @key(out).
 Mode @key(in) is the default,
-and is the mode of a parameter defined by an @nt{access_definition}.
-The formal parameters of a function, if any, shall have
-the mode @key(in).
+and is the mode of a parameter defined by an
+@nt{access_definition}.@Chg{Version=[3],New=[],Old=[ The formal parameters
+of a function, if any, shall have the mode @key(in).]}
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0143-1]}
 @ChgDeleted{Version=[3],Text=[Access parameters are permitted.
@@ -1885,11 +1885,10 @@ statically matching index constraints; or]}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[one of the two @nt{name}s statically denotes a
 renaming declaration whose renamed @SynI{object_}@nt{name} is known to denote
-the same object as the other, and every index @nt{expression} for each
-@nt{indexed_component} which occurs within the renamed @SynI{object_}@nt{name}
-is a known to be unvarying @nt{expression}, and the dereferenced @nt{name} for
-each (implicit or explicit) dereference which occurs within the renamed
-@SynI{object_}@nt{name} is a known to be unvarying @nt{name}.]}
+the same object as the other, the @nt{prefix} of any dereference within
+the renamed @SynI{object_}@nt{name} is not a variable, and any @nt{expression}
+within the renamed @SynI{object_}@nt{name} contains no references to variables
+nor calls on non-static functions.]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[This exposes known renamings of
@@ -1903,10 +1902,11 @@ each (implicit or explicit) dereference which occurs within the renamed
   denote the same object.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[We need the requirement for
-  dereferences and index expressions to be "known to be unvarying" in renames in
-  order to avoid problems from later changes to those parts of renamed names.
-  Consider:]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[We need the requirement that no
+  variables occur in the @nt{prefix}es of dereferences and in (index)
+  @nt{expression}s of the renamed object in order to avoid problems from later
+  changes to those parts of renamed names. Consider:]}
+
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[   @key[type] Ref @key[is access] Some_Type;
@@ -1920,13 +1920,47 @@ each (implicit or explicit) dereference which occurs within the renamed
   @ChgAdded{Version=[3],Type=[Trailing],Text=[X and Ptr.@key[all] should not be
   known to denote the same object, since they denote different allocated objects
   (and this is not an unreasonable thing to do).]}
+@end{Reason}
+
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The exclusion of variables from
+  renamed object_names is not enough to prevent altering the value of the name
+  or expression by another access path. For instance, both @key[in] parameters
+  passed by reference and access-to-constant values can designate variables. For
+  the intended use of "known to be the same object", this is OK; the
+  modification via another access path is very tricky and it is OK to reject
+  code that would be buggy except for the tricky code. For example:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Global : Tagged_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{procedure} Foo (Param : @key{in} Tagged_Type := Global) @key{is}
+   X : Element @key{renames} Some_Global_Array (Param.C);
+@key{begin}
+   Global.C := Global.C + 1;
+   Swap (X, Some_Global_Array (Param.C));]}
+@end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[We don't need a similar requirement for slices as
-  the existing requirement for statically matching index constraints eliminates
-  any problems (the index constraints either have to be static or declared by
-  the same subtype declaration).]}
-@end{Reason}
+  @ChgAdded{Version=[3],Text=[The rules will flag the call of procedure Swap
+  as illegal, since X and Some_Global_Array (Parameter.C) are known to denote
+  the same object (even though they will actually represent different objects if
+  Param = Global). But this is only incorrect if the parameter actually is
+  Global and not some other value; the error could exist for some calls. So this
+  flagging seems harmless.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Similar examples can be constructed using
+  stand-alone composite constants with controlled or immutably limited
+  components, and (as previously noted) with dereferences of access-to-constant
+  values. Even when these examples flag a call incorrectly, that call depends
+  on very tricky code (modifying the value of a constant); the code is likely
+  to confuse future maintainers as well and thus we do not mind rejecting it.]}
+@end{Honest}
+
+
 @end{Itemize}
 
 @begin{Discussion}
@@ -1963,76 +1997,6 @@ R   : Character @key[renames] S(1);]}
    R and S(ONE), we simply have to test S(1) vs. S(ONE), which we already know
   denote the same object.]}
 @end{Ramification}
-
-
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0144-2]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[A @nt{name} or @nt{expression}
-is @i<known to be unvarying> if it denotes:@Defn{known to be unvarying}]}
-@begin{Itemize}
-@ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[a static @nt{expression}; or]}
-
-@ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[a constant object; or]}
-
-@begin{Discussion}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[This covers constant @nt{object_declaration}s,
-  generic formal @key{in} objects, constant extended return objects, and
-  exception choice parameters.]}
-@end{Discussion}
-
-@ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[a non-aliased formal parameter of mode @key{in}; or]}
-
-@ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[a @nt{selected_component} of a known to be unvarying name.]}
-@end{Itemize}
-
-@begin{Ramification}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[Dereferences, @nt{indexed_component}s, and
-  @nt{slice}s are never known to be unvarying even if the @nt{prefix} is known
-  to be unvarying. It is important that be true for a dereference of an
-  access-to-constant, as such an access may designate a variable object. We
-  could have included @nt{indexed_component}s with all index expressions being
-  known to be unvarying, but it doesn't seem important for the usage and we can
-  always add more rules if we are letting too many obvious cases slip through.]}
-@end{Ramification}
-
-@begin{Honest}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[The inclusion of selected
-  components and composite @key{in} parameters means that it might be possible
-  to alter the value of the @nt{name} or @nt{expression} by another access path.
-  For the use that we are putting this term to, this is OK; the modification via
-  another access path is very tricky and it is OK to reject code that would be
-  buggy except for the tricky code. For example:]}
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Global : Tagged_Type;]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key{procedure} Foo (Param : @key{in} Tagged_Type := Global) @key{is}
-   X : Element @key{renames} Some_Global_Array (Param.C);
-@key{begin}
-   Global.C := Global.C + 1;
-   Swap (X, Some_Global_Array (Param.C));]}
-@end{Example}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The rules will flag procedure Swap as illegal,
-  since X and Some_Global_Array (Parameter.C) are known to denote the same
-  object (even though they will actually represent different objects if Param =
-  Global). But this is only incorrect if the parameter actually is Global and
-  not some other value; the error could exist for some calls. So this flagging
-  seems harmless.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[Similar examples can be constructed using
-  stand-alone composite constants with controlled or immutably limited
-  components.]}
-@end{Honest}
 
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0144-2]}
@@ -3163,7 +3127,7 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
 @begin{Inconsistent2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0050-1]}
   @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}
-  The @ImplPermName allowing early raising of Constraint_Error was modified
+  @b<Correction:> The @ImplPermName allowing early raising of Constraint_Error was modified
   to remove the most common of these cases from the permission (returning an
   object with mutuable discriminants, where the return object is created with
   one set of discriminants and then changed to another. (The permission was
@@ -3209,12 +3173,12 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0015-1],ARef=[AI05-0144-2]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:>
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   The return object of an @nt{extended_return_statement} can be declared
   constant; this works similarly to a constant object declaration.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0032-1]}
-  @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to allow
+  @ChgAdded{Version=[3],Text=[Added wording to allow
   the @nt{return_subtype_indication} to have a specific type if the return
   subtype of the function is class-wide. Specifying the (specific) type of
   the return object is awkward without this change, and this is consistent

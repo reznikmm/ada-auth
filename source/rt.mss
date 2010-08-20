@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.88 $ $Date: 2010/06/11 07:27:55 $ $Author: randy $ }
+@comment{ $Revision: 1.89 $ $Date: 2010/08/13 05:23:14 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2010/06/11 07:27:55 $}
+@Comment{$Date: 2010/08/13 05:23:14 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1656,7 +1656,7 @@ EDF_Across_Priorities that includes the base priority of @i<T>;]}
 base priority of @i<T> such that one or more tasks are executing within a
 protected object with ceiling priority @i<P> and task @i<T>
 has an earlier deadline than all such tasks@Chg{Version=[3],New=[;
-and furthermore @i<T> has an an earlier deadline than all other tasks on
+and furthermore @i<T> has an earlier deadline than all other tasks on
 ready queues with priorities in the given EDF_Across_Priorities range that
 are strictly less than @i<P>],Old=[]}.]}
 @end{Itemize}
@@ -2819,14 +2819,21 @@ construction of highly efficient tasking run-time systems.]
 @begin{StaticSem}
 @Leading@;The following @SynI{restriction_}@nt{identifier}s are language defined:
 @begin{Description}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1],ARef=[AI05-0216-1]}
 @Defn2{Term=[restrictions],Sec=(No_Task_Hierarchy)}@Chg{Version=[3],New=[@Defn{No_Task_Hierarchy restriction}],
    Old=[]}No_Task_Hierarchy @\@Chg{Version=[3],
-  New=[No task depends on a task other than],Old=[All
-  (nonenvironment) tasks depend directly on]}
-  the environment task of the partition.
+  New=[No task depends on a master other than the library-level master],Old=[All
+  (nonenvironment) tasks depend directly on
+  the environment task of the partition]}.
 
 @begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0216-1]}
+@ChgAdded{Version=[3],Text=[This is equivalent to saying @ldquote@;no task
+   depends on a master other than the
+   master that is the execution of the body of the environment task of the
+   partition@rdquote, but it is much easier to understand. This is a
+   post-compilation check, which can be checked at compile-time.]}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
 @ChgAdded{Version=[3],Text=[This disallows any function returning an
     object with a task part or coextension, even if called at the library level,
@@ -2866,9 +2873,11 @@ construction of highly efficient tasking run-time systems.]
     coextension type needs finalization (it could be a limited view).]}
     @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0211-1]}
 @Defn2{Term=[restrictions],Sec=(No_Abort_Statements)}@Chg{Version=[3],New=[@Defn{No_Abort_Statements restriction}],
-   Old=[]}No_Abort_Statements @\There are no @nt{abort_statement}s, and there are no
-calls on Task_Identification.Abort_Task.
+   Old=[]}No_Abort_Statements @\There are no @nt{abort_statement}s, and there
+@Chg{Version=[3],New=[is no use of a @nt{name} denoting],Old=[are no calls on]}
+Task_Identification.Abort_Task.
 
 @Defn2{Term=[restrictions],Sec=(No_Terminate_Alternatives)}@Chg{Version=[3],New=[@Defn{No_Terminate_Alternatives restriction}],
    Old=[]}No_Terminate_Alternatives @\There are no @nt{selective_accept}s with
@@ -2895,14 +2904,14 @@ No_Dynamic_Priorities @\There are no semantic dependences on the package
 Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00305-01],ARef=[AI95-00394-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1],ARef=[AI05-0211-1]}
 @Chg{Version=[2],New=[@Defn2{Term=[restrictions],
    Sec=(No_Dynamic_Attachment)}@Chg{Version=[3],New=[@Defn{No_Dynamic_Attachment restriction}],
    Old=[]}No_Dynamic_Attachment],
 Old=[@Defn2{Term=[restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Control]}
     @\There
-    @Chg{Version=[2],New=[is no @Chg{Version=[3],New=[use of],Old=[call to]}
-    any of the operations defined
+    @Chg{Version=[2],New=[is no @Chg{Version=[3],New=[use of a @nt{name}
+    denoting],Old=[call to]} any of the operations defined
     in package Interrupts (Is_Reserved, Is_Attached, Current_Handler,
     Attach_Handler, Exchange_Handler, Detach_Handler, and Reference).],
     Old=[are no semantic dependences on the package Asynchronous_Task_Control.]}
@@ -2933,9 +2942,12 @@ Old=[@Defn2{Term=[restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Co
    containing protected type subcomponents.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0211-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Relative_Delay)}@Chg{Version=[3],New=[@Defn{No_Relative_Delay restriction}],
    Old=[]}No_Relative_Delay @\There
-   are no @nt{delay_relative_statement}s.]}
+   are no @nt{delay_relative_statement}s@Chg{Version=[3],New=[, and there is no
+   use of a @nt{name} that denotes the Timing_Events.Set_Handler
+   subprogram that has a Time_Span parameter],Old=[]}.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Requeue_Statements)}@Chg{Version=[3],New=[@Defn{No_Requeue_Statements restriction}],
@@ -2948,9 +2960,11 @@ Old=[@Defn2{Term=[restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Co
    are no @nt{select_statement}s.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00394-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0211-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Specific_Termination_Handlers)}@Chg{Version=[3],New=[@Defn{No_Specific_Termination_Handlers restriction}],
    Old=[]}No_Specific_Termination_Handlers @\There
-  are no calls to the Set_Specific_Handler and Specific_Handler subprograms
+  @Chg{Version=[3],New=[is no use of a @nt{name} denoting],Old=[are no calls to]}
+  the Set_Specific_Handler and Specific_Handler subprograms
   in Task_Termination.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
@@ -3157,10 +3171,32 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   objects of specific access types. It seems unlikely that any program depending
   on this restriction would violate it in this blatant manner, so it is expected
   that very few programs will be affected by this change.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0211-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:>
+  The restriction No_Relative_Delay was changed to include the Timing_Events
+  routine that uses a relative delay. This means that a program that uses
+  that routine and this restriction will now be rejected. However, such a
+  program violates the spirit and intent of the restriction and as such the
+  program should never have been allowed. Moreover, it is unlikely that
+  any program depending on this restriction would violate it in such an obvious
+  manner, so it is expected that very few programs will be affected by this
+  change.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0211-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> A number of restrictions were
+  changed from "no calls" on some subprogram to "no use of a @nt{name} that
+  denotes" that subprogram. This closes a hole where renames, uses as the prefix
+  of 'Access, and the like, would not be rejected by the restriction, possibly
+  allowing backdoor access to the prohibited subprogram. A program that
+  uses one of these restrictions and using such backdoor access will now be
+  rejected; however, it is extremely unlikely that any program that relies
+  on these restrictions would also use an end-run around the restriction, so
+  it is expected that very few programs will be affected by this change.]}
 @end{Incompatible2005}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1],ARef=[AI05-0216-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Improved the wording
   of various restrictions to make it clearer that they prohibit
   things that would otherwise be legal, and to word them as
@@ -3864,6 +3900,97 @@ object.]}
 @end{Extend2005}
 
 
+@LabeledAddedSubClause{Version=[3],Name=[Synchronous Barriers]}
+
+@begin{Intro}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
+@ChgAdded{Version=[3],Text=[This clause introduces a language-defined package to
+synchronously release a group of tasks after the number of blocked tasks reaches
+a specified count value.]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The following
+language-defined library package exists:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[package] Ada.Synchronous_Barriers @key{is}@ChildUnit{Parent=[Ada],Child=[Synchronous_Barriers]}
+   @key[pragma] Preelaborate(Synchronous_Barriers);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[subtype] @AdaSubtypeDefn{Name=[Barrier_Limit],Of=[Positive]} @key[is] Positive @key[range] 1 .. @RI<implementation-defined>;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Synchronous_Barrier} (Number_Waiting : Barrier_Limit) @key[is limited private];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Wait_For_Release} (The_Barrier : @key[in out] Synchronous_Barrier;
+                               Notified    :    @key[out] Boolean);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[private]
+   -- @RI{not specified by the language}
+@key[end] Ada.Synchronous_Barriers;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
+@ChgAdded{Version=[3],Text=[Type Synchronous_Barrier needs finalization (see
+@RefSecNum{Assignment and Finalization}).]}
+@end{StaticSem}
+
+@begin{Runtime}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
+@ChgAdded{Version=[3],Text=[Each call to Wait_For_Release blocks the calling
+task until the number of blocked tasks associated with the Synchronous_Barrier
+object is equal to Number_Waiting, at which time all blocked tasks are released.
+Notified is set to True for one of the released tasks, and set to False for all
+other released tasks.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
+@ChgAdded{Version=[3],Text=[The mechanism for determining which task sets
+Notified to True is implementation defined.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
+@ChgAdded{Version=[3],Text=[Once all tasks have been released, a
+Synchronous_Barrier object may be reused to block another Number_Waiting number
+of tasks.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
+@ChgAdded{Version=[3],Text=[As the first step of the finalization of a
+Synchronous_Barrier, each blocked task is unblocked and Program_Error is raised
+at the place of the call to Wait_For_Release.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
+@ChgAdded{Version=[3],Text=[It is implementation-defined whether an abnormal
+task which is waiting on a Synchronous_Barrier object is aborted immediately or
+aborted when the tasks waiting on the object are released.]}
+@ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[When an aborted task that is waiting on a Synchronous_Barrier is aborted.]}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
+@ChgAdded{Version=[3],Text=[Wait_For_Release is a potentially blocking operation
+(see @RefSecNum{Protected Subprograms and Protected Actions}).]}
+@end{Runtime}
+
+@begin{Bounded}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error to call Wait_For_Release on a
+Synchronous_Barrier object after that object is finalized. If the error is
+detected, Program_Error is raised. Otherwise, the call proceeds normally, which
+may leave a task blocked forever.]}
+@end{Bounded}
+
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  The package Ada.Synchronous_Barriers is new.]}
+@end{Extend2005}
+
+
 
 @LabeledClause{Asynchronous Task Control}
 
@@ -4225,6 +4352,7 @@ Ravenscar is equivalent to the following set of pragmas:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01],ARef=[AI95-00297-01],ARef=[AI95-00394-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0171-1]}
 @ChgAdded{Version=[2],Text=[
 @key{pragma} Task_Dispatching_Policy (FIFO_Within_Priorities);
 @key{pragma} Locking_Policy (Ceiling_Locking);
@@ -4250,9 +4378,10 @@ Ravenscar is equivalent to the following set of pragmas:]}
                 Max_Task_Entries => 0,
                 No_Dependence => Ada.Asynchronous_Task_Control,
                 No_Dependence => Ada.Calendar,
-                No_Dependence => Ada.Execution_Time.Group_Budget,
+                No_Dependence => Ada.Execution_Time.Group_Budgets,
                 No_Dependence => Ada.Execution_Time.Timers,
-                No_Dependence => Ada.Task_Attributes);]}
+                No_Dependence => Ada.Task_Attributes@Chg{Version=[3],New=[,
+                No_Dependence => System.Multiprocessors.Dispatching_Domains],Old=[]});]}
 @end{Example}
 
 @begin{Discussion}
@@ -4268,6 +4397,37 @@ it to find out how it can help them.}]}
 
 @end{StaticSem}
 
+@begin{ImplReq}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgAdded{Version=[3],Text=[A task shall only be on the ready queues of one
+processor, and the
+processor to which a task belongs shall be defined statically.
+Whenever a task running on a processor reaches a task dispatching point,
+it goes back to the ready queues of the same processor. A task with
+a CPU value of Not_A_Specific_CPU will execute on an implementation
+defined processor. @Redundant[A task without a CPU pragma will activate and
+execute on the same processor as its activating task.]]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The processor of a task without a pragma CPU is
+  defined in @RefSecNum{Multiprocessor Implementation}.]}
+@end{TheProof}
+@ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[The processor on which a task with a CPU value of a Not_A_Specific_CPU
+will execution when the Ravenscar profile is in effect.]}]}
+@end{ImplReq}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgAdded{Version=[3],Text=[On a multiprocessor system, an implementation should
+support a fully partitioned approach. Each processor should have separate and
+disjoint ready queues.]}
+
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[On a multiprocessor system, each processor should have a separate
+and disjoint ready queue.]}]}
+@end{ImplAdvice}
+
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
 @ChgAdded{Version=[2],Text=[
@@ -4281,6 +4441,12 @@ Max_Task_Entries => 0.]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The Ravenscar profile is new.]}
 @end{Extend95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+  @ChgAdded{Version=[2],Text=[How Ravenscar behaves on a multiprocessor
+  system is now defined.]}
+@end{DiffWord2005}
 
 
 @RMNewPage@Comment{For printed Ada 2007 RM}
@@ -4335,6 +4501,16 @@ language-defined library package exists:]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Time_Of} (SC : Seconds_Count;
                      TS : Time_Span := Time_Span_Zero) @key{return} CPU_Time;]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0170-1]}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{Interrupt_Clocks_Supported} : @key[constant] Boolean := @RI<implementation-defined>;]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0170-1]}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{Separate_Interrupt_Clocks_Supported} : @key[constant] Boolean :=
+     @RI<implementation-defined>;]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0170-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Clock_For_Interrupts} @key[return] CPU_Time;]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{private}
    ... -- @RI[not specified by the language]
@@ -4343,14 +4519,20 @@ language-defined library package exists:]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0170-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[execution time],Sec=[of a task]}
 @Defn2{Term=[CPU time],Sec=[of a task]}
 The @i<execution time> or CPU time of a given task is defined as the time spent by
 the system executing that task, including the time spent executing run-time or
 system services on its behalf. The mechanism used to measure execution time is
-implementation defined. It is implementation defined which task, if any, is
-charged the execution time that is consumed by interrupt handlers and run-time
-services on behalf of the system.]}
+implementation defined. @Chg{Version=[3],New=[The Boolean constant Interrupt_Clocks_Supported is
+set to True if the implementation separately accounts for the execution time
+of interrupt handlers. If it is set to False it],Old=[It]} is implementation
+defined which task, if any, is charged the execution time that is consumed by
+interrupt handlers@Chg{Version=[3],New=[. The Boolean constant
+Separate_Interrupt_Clocks_Supported is set to True if the implementation
+separately accounts for the execution time of individual interrupt
+handlers],Old=[ and run-time services on behalf of the system]}.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The implementation-defined properties above
@@ -4382,6 +4564,10 @@ the creation of the task.]}
 and largest values of the CPU_Time type, respectively.]}
 @end{StaticSem}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0170-1]}
+@ChgAdded{Version=[3],Text=[The execution time value for the
+Clock_For_Interrupts is initialized to zero.]}
+
 @begin{RunTime}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
@@ -4410,6 +4596,12 @@ TS) is to set SC and TS to values such that T*CPU_Time_Unit = SC*1.0 +
 TS*CPU_Time_Unit, and 0.0 <= TS*CPU_Time_Unit < 1.0. The value
 returned by Time_Of(SC,TS) is the execution-time value T such that
 T*CPU_Time_Unit=SC*1.0 + TS*CPU_Time_Unit.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0170-1]}
+@ChgAdded{Version=[3],Text=[The function Clock_For_Interrupts returns the total
+cumulative time spent executing within all interrupt handlers. This time is not
+allocated to any task execution time clock. If Interrupt_Clocks_Supported is set
+to False the function raises Program_Error.]}
 
 @end{RunTime}
 
@@ -4443,7 +4635,8 @@ the underlying mechanism used to measure execution times, such as the range of
 values supported and any relevant aspects of the underlying hardware or
 operating system facilities used.]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The properties of the mechanism used to implement package Execution_Time.]}]}
+Text=[The properties of the mechanism used to implement package Execution_Time@Chg{Version=[3],New=[,
+including the values of the constants defined in the package],Old=[]}.]}]}
 
 @end{DocReq}
 
@@ -4505,6 +4698,26 @@ configuration mechanisms to change the value of Execution_Time.CPU_Tick.]}]}
   The package Execution_Time is new.]}
 @end{Extend95}
 
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
+  Function Clock_For_Interrupts, and constants Interrupt_Clocks_Supported and
+  Separate_Interrupt_Clocks_Supported are newly added to Execution_Time.
+  If Execution_Time is referenced in a @nt{use_clause}, and an
+  entity @i<E> with a @nt{defining_identifier} of one of the newly added entities
+  is defined in a package that is also referenced in a @nt{use_clause}, the entity
+  @i<E> may no longer be use-visible, resulting in errors. This should be rare
+  and is easily fixed if it does occur.]}
+@end{Incompatible2005}
+
+@begin{Diffword2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
+  @ChgAdded{Version=[3],Text=[If Interrupt_Clocks_Supported is True, it is
+  now possible to determine the execution time of interrupt handlers. This
+  is not an inconsistency, as not charging any task for such time was a
+  legitimate implementation for Ada 2005.]}
+@end{Diffword2005}
+
 
 @LabeledAddedSubclause{Version=[2],Name=[Execution Time Timers]}
 
@@ -4556,7 +4769,7 @@ language-defined library package exists:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{private}
-   ... --  not specified by the language
+   ... -- @RI{not specified by the language}
 @key{end} Ada.Execution_Time.Timers;]}
 
 @end{Example}
@@ -4746,11 +4959,16 @@ assign execution time budgets to groups of tasks.]}
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{with} System;
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0169-1]}
+@ChgAdded{Version=[2],Text=[@key{with} System;@Chg{Version=[3],New=[
+@key{with} System.Multiprocessors;],Old=[]}
 @key{package} Ada.Execution_Time.Group_Budgets @key{is}@ChildUnit{Parent=[Ada.Execution_Time],Child=[Group_Budgets]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Group_Budget} @key{is tagged limited private};]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0169-1]}
+@ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Group_Budget}@Chg{Version=[3],New=[(P : System.Multiprocessors.CPU :=
+                                  System.Multiprocessors.CPU'First)
+   ],Old=[]} @key{is tagged limited private};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Group_Budget_Handler} @key{is access}
@@ -4763,6 +4981,8 @@ language-defined library package exists:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[  @AdaObjDefn{Min_Handler_Ceiling} : @key{constant} System.Any_Priority :=
     @RI[implementation-defined];]}
+@ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[The value of Min_Handler_Ceiling in Execution_Time.Group_Budgets.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[  @key{procedure} @AdaSubDefn{Add_Task} (GB : @key{in out} Group_Budget;
@@ -4794,7 +5014,7 @@ language-defined library package exists:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{private}
-    --  not specified by the language
+    --  @RI{not specified by the language}
 @key{end} Ada.Execution_Time.Group_Budgets;]}
 
 @end{Example}
@@ -4863,9 +5083,11 @@ type Task_Identification.Task_Id identifying the members of the group GB. The
 order of the components of the array is unspecified.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0169-1]}
 @ChgAdded{Version=[2],Text=[The procedure Replenish loads the group budget GB
 with To as the Time_Span value. The exception Group_Budget_Error is raised if
-the Time_Span value To is non-positive. Any execution of any member of the
+the Time_Span value To is non-positive. Any execution @Chg{Version=[3],New=[on
+processor P ],Old=[]}of any member of the
 group of tasks results in the budget counting down, unless exhausted. When the
 budget becomes exhausted (reaches Time_Span_Zero), the associated handler is
 executed if the handler of group budget GB is set. Nevertheless, the tasks
@@ -4983,6 +5205,83 @@ several Group_Budget objects.]}
   The package Execution_Time.Group_Budgets is new.]}
 @end{Extend95}
 
+@begin{Inconsistent2005}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0169-1]}
+@ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}
+A Group_Budget is now defined to work on a single processor.
+If an implementation managed to make this package work on for
+programs running on a multiprocessor system, and a program
+depends on that fact, it could fail when ported to Ada 2012.
+We believe it is unlikely that such an implementation exists
+because of the difficulty of signalling other processors when
+the time reaches zero; in any case, depending on such an
+implementation is not portable.]}
+@end{Inconsistent2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[Execution Time of Interrupt Handlers]}
+
+@begin{Intro}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
+@ChgAdded{Version=[3],Text=[This clause describes a language-defined package to
+measure the execution time of interrupt handlers.]}
+@end{Intro}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The following
+language-defined library package exists:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{with} Ada.Interrupts;
+@key{package} Ada.Execution_Time.Interrupts @key{is}@ChildUnit{Parent=[Ada.Execution_Time],Child=[Interrupts]}
+   @key{function} @AdaSubDefn{Clock} (I : Ada.Interrupts.Interrupt_ID)
+        @key{return} CPU_Time;
+   @key{function} @AdaSubDefn{Supported} (I : Ada.Interrupts.Interrupt_ID)
+        @key{return} Boolean;
+@key{end} Ada.Execution_Time.Interrupts;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
+@ChgAdded{Version=[3],Text=[The execution time or CPU time of a given interrupt
+I is defined as the time spent by the system executing interrupt handlers
+identified by I, including the time spent executing run-time or system services
+on its behalf. The mechanism used to measure execution time is implementation
+defined. Time spent executing interrupt handlers is distinct from time spent
+executing any task.]}
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The implementation-defined mechanism here is the
+same as that covered by the @DocReqTitle of @RefSecNum{Execution Time}, so we
+don't repeat that requirement here.]}
+@end{Discussion}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
+@ChgAdded{Version=[3],Text=[For each interrupt ID, the execution time value
+is initially set to zero.]}
+@end{StaticSem}
+
+@begin{RunTime}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
+@ChgAdded{Version=[3],Text=[The function Clock returns the current cumulative
+execution time of the interrupt identified by I. If
+Separate_Interrupt_Clocks_Supported is set to False the function raises
+Program_Error.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
+@ChgAdded{Version=[3],Text=[The function Supported returns True if the
+implementation is monitoring the execution time of interrupt I. Otherwise it
+returns False. For any interrupt ID I for which Supported(I) returns False, the
+function Clock(I) will return a value equal to Ada.Execution_Time.Time_Of(0).]}
+
+@end{RunTime}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  The package Execution_Time.Interrupts is new.]}
+@end{Extend2005}
+
 
 @LabeledAddedClause{Version=[2],Name=[Timing Events]}
 
@@ -5031,7 +5330,7 @@ language-defined library package exists:]}
 @ChgAdded{Version=[2],Text=[The type Timing_Event represents a time in the future
 when an event is to occur. The type Timing_Event
 needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
-@RefSecNum{Assignment and Finalization}).]}
+(see @RefSecNum{Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],Text=[An object of type Timing_Event is said to be
@@ -5210,9 +5509,13 @@ the following metric:]}
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0210-1]}
 @ChgAdded{Version=[2],Text=[An upper bound on the lateness of the execution of
-a handler. That is, the maximum time between when a handler is actually
-executed and the time specified when the event was set.]}
+a handler. That is, the maximum time between @Chg{Version=[3],New=[the time specified
+for the event and ],Old=[]}when a handler is actually
+@Chg{Version=[3],New=[invoked assuming no other handler or task is executing
+during this interval],Old=[executed and the time specified when the event was
+set]}.]}
 
 @end{Itemize}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
@@ -5256,5 +5559,124 @@ Timing_Event objects.]}
   executing. This is technically an inconsistency, but only if a program is
   depending on deadlocking; since it is impossible to imagine how that could
   be useful, we have not documented this as an inconsistency.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0210-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified the metric for lateness
+  of a timing event to exclude interference from other handlers and tasks.
+  This change might change the documentation of an implementation, but not
+  the implementation itself, so there is no inconsistency.]}
 @end{Diffword2005}
+
+
+@LabeledAddedClause{Version=[3],Name=[Multiprocessor Implementation]}
+
+@begin{Intro}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgAdded{Version=[3],Text=[This clause allows implementations on multiprocessor
+platforms to be configured.]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The following
+language-defined library package exists:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[package] System.Multiprocessors @key{is}@ChildUnit{Parent=[System],Child=[Multiprocessors]}
+   @key[pragma] Preelaborate(Multiprocessors);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{CPU_Range} @key[is range] 0 .. @RI<implementation-defined>;
+   @AdaObjDefn{Not_A_Specific_CPU} : @key[constant] CPU_Range := 0;
+   @key[subtype] @AdaSubtypeDefn{Name=[CPU],Of=[CPU_Range]} @key[is] CPU_Range @key[range] 1 .. CPU_Range'last;]}
+@ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[The value of CPU_Range'Last in System.Multiprocessors.]}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   function Number_Of_CPUs return CPU;
+@key[end] System.Multiprocessors;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgAdded{Version=[3],Text=[A call of Number_Of_CPUs returns the number of
+processors available to the program. Within a given partition, each call on
+Number_Of_CPUs will return the same value.]}
+
+@end{StaticSem}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[The form of a
+@nt{pragma} CPU is as follows:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=`@AddedPragmaSyn`Version=[3],@key{pragma} @prag<CPU> (@Syn2{expression});''}
+@end{Syntax}
+
+@begin{Resolution}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgAdded{Version=[3],Text=[The expected type for the @nt{expression} is
+System.Multiprocessors.CPU_Range.]}
+
+@end{Resolution}
+
+@begin{Legality}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgAdded{Version=[3],Text=[A CPU pragma is allowed only immediately within a
+@nt{task_definition}, or the @nt{declarative_part} of a @nt{subprogram_body}. At
+most one such pragma shall appear within a given construct.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgAdded{Version=[3],Text=[For a CPU pragma that appears in the
+@nt{declarative_part} of a @nt{subprogram_body}, the @nt{expression} shall be
+static.]}
+
+@end{Legality}
+
+@begin{Runtime}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgAdded{Version=[3],Text=[The @nt{expression} of a CPU pragma that appears in
+a @nt{task_definition} is evaluated for each task object (see
+@RefSecNum{Task Units and Task Objects}). The CPU value is then associated with
+the task object whose @nt{task_definition} contains the pragma.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgAdded{Version=[3],Text=[Elaboration of a CPU pragma given immediately within
+the @nt{declarative_part} of a @nt{subprogram_body} has no effect; the CPU value
+is not associated with any task unless the pragma occurs within the main
+subprogram.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgAdded{Version=[3],Text=[The CPU value is associated with the environment
+task if the pragma appears in the @nt{declarative_part} of the main subprogram.
+If a pragma CPU does not apply to the main subprogram it is implementation
+defined on which processor the environment task executes.]}
+@ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[The processor on which the environment task executes in the absence of a
+pragma CPU.]}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgAdded{Version=[3],Text=[The CPU value determines the processor on which the
+task will activate and execute; the task is said to be assigned to that
+processor. If the CPU value is Not_A_Specific_CPU then the task is not assigned
+to a processor. A task without a CPU pragma will activate and execute on the
+same processor as its activating task if the activating task is assigned a
+processor. If the CPU value is not in the range of
+System.Multiprocessors.CPU_Range or is greater than Number_Of_CPUs the task is
+defined to have failed, and it becomes a completed task (see
+@RefSecNum{Task Execution - Task Activation}).]}
+
+@end{Runtime}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  The package System.Multiprocessors and the pragma CPU are new.]}
+@end{Extend2005}
 

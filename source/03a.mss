@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:32 $}
+@Comment{$Date: 2010/08/13 05:23:13 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.98 $}
+@Comment{$Revision: 1.99 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1834,7 +1834,7 @@ assigning to an enclosing object.
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0015-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:>
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Added wording to allow
   return objects to be declared as constants, and corrected the definition
   of return objects as objects.]}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.34 $ $Date: 2010/06/12 02:07:31 $ $Author: randy $ }
+@comment{ $Revision: 1.35 $ $Date: 2010/08/13 05:23:14 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2010/06/12 02:07:31 $}
+@Comment{$Date: 2010/08/13 05:23:14 $}
 
 @RMNewPage@Comment{For printed RM Ada 2007}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -1302,7 +1302,7 @@ directory that cannot be decomposed further), and returns False otherwise.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Returns True if Name can be used to indicate
-symbolically the the parent directory of any directory, and returns False
+symbolically the parent directory of any directory, and returns False
 otherwise.]}
 
 @begin{ImplNote}

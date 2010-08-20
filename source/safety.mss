@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.43 $ $Date: 2010/05/08 06:31:34 $ $Author: randy $ }
+@Comment{ $Revision: 1.44 $ $Date: 2010/08/13 05:23:14 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:34 $}
+@Comment{$Date: 2010/08/13 05:23:14 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -890,7 +890,7 @@ within the run-time system.
    Old=[]}No_Recursion @\As part of the execution of a subprogram, the same
 subprogram is not invoked.
 
-@Defn2{Term=[restrictions],Sec=(No_Reentrancy)}@Chg{Version=[3],New=[@Defn{No_Reentrany restriction}],
+@Defn2{Term=[restrictions],Sec=(No_Reentrancy)}@Chg{Version=[3],New=[@Defn{No_Reentrancy restriction}],
    Old=[]}No_Reentrancy @\During the execution of a subprogram by a task, no other
 task invokes the same subprogram.
 

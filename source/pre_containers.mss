@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.72 $ $Date: 2010/06/03 04:36:16 $ $Author: randy $ }
+@comment{ $Revision: 1.73 $ $Date: 2010/08/13 05:23:14 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2010/06/03 04:36:16 $}
+@Comment{$Date: 2010/08/13 05:23:14 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -317,7 +317,7 @@ properly on machines with native sizes that are not 32 bits. For instance, a
 
 
 
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Vectors]}
+@LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Vectors]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2162,7 +2162,7 @@ designates has been used as the Source or Target of a call to Move;] or]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0160-1]}
 @ChgAdded{Version=[2],Text=[The element it designates has been
-deleted@Chg{Version=[3],New=[or removed from the vector that contains
+deleted@Chg{Version=[3],New=[ or removed from the vector that contains
 the element],Old=[]}.]}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
@@ -2389,7 +2389,7 @@ value of Last_Index.]}
 
 
 @LabeledAddedSubclause{Version=[2],
-Name=[The Package Containers.Doubly_Linked_Lists]}
+Name=[The Generic Package Containers.Doubly_Linked_Lists]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The language-defined generic package
@@ -3340,7 +3340,7 @@ exception raised by Process.@key{all} is propagated.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[See Iterate for vectors
-  (@RefSecNum{The Package Containers.Vectors}) for a suggested
+  (@RefSecNum{The Generic Package Containers.Vectors}) for a suggested
   implementation of the check.]}
 @end{ImplNote}
 
@@ -3695,9 +3695,9 @@ map orders the keys per a specified relation.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[This section describes the declarations that are
-common to both kinds of maps. See @RefSecNum{The Package Containers.Hashed_Maps}
+common to both kinds of maps. See @RefSecNum{The Generic Package Containers.Hashed_Maps}
 for a description of the semantics specific to
-Containers.Hashed_Maps and @RefSecNum{The Package Containers.Ordered_Maps} for
+Containers.Hashed_Maps and @RefSecNum{The Generic Package Containers.Ordered_Maps} for
 a description of the semantics specific to Containers.Ordered_Maps.]}
 @end{Intro}
 
@@ -4290,7 +4290,7 @@ exception raised by Process.@key{all} is propagated.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[See Iterate for vectors
-  (@RefSecNum{The Package Containers.Vectors}) for a suggested
+  (@RefSecNum{The Generic Package Containers.Vectors}) for a suggested
   implementation of the check.]}
 @end{ImplNote}
 
@@ -4454,7 +4454,7 @@ unless specified by the operation.]}]}
 @end{DiffWord2005}
 
 
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Hashed_Maps]}
+@LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Hashed_Maps]}
 
 @begin{StaticSem}
 
@@ -5050,7 +5050,7 @@ Containers.Hashed_Maps.Reserve_Capacity should be @i{O}(@i<N>).]}]}
 @end{Diffword2005}
 
 
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Ordered_Maps]}
+@LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Ordered_Maps]}
 
 @begin{StaticSem}
 
@@ -5608,9 +5608,9 @@ element per a specified relation.@Defn{set container}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[This section describes the declarations that are
 common to both kinds of sets.
-See @RefSecNum{The Package Containers.Hashed_Sets} for a description of the
+See @RefSecNum{The Generic Package Containers.Hashed_Sets} for a description of the
 semantics specific to
-Containers.Hashed_Sets and @RefSecNum{The Package Containers.Ordered_Sets} for
+Containers.Hashed_Sets and @RefSecNum{The Generic Package Containers.Ordered_Sets} for
 a description of the semantics specific to Containers.Ordered_Sets.]}
 @end{Intro}
 
@@ -6269,7 +6269,7 @@ Container. Any exception raised by Process.@key{all} is propagated.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[See Iterate for vectors
-  (@RefSecNum{The Package Containers.Vectors}) for a suggested
+  (@RefSecNum{The Generic Package Containers.Vectors}) for a suggested
   implementation of the check.]}
 @end{ImplNote}
 
@@ -6529,7 +6529,7 @@ unless specified by the operation.]}]}
 
 
 
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Hashed_Sets]}
+@LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Hashed_Sets]}
 
 @begin{StaticSem}
 
@@ -6833,7 +6833,7 @@ package is unspecified.@PDefn{unspecified}]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[See @RefSec{The Package Containers.Hashed_Maps}
+  @ChgAdded{Version=[2],Text=[See @RefSec{The Generic Package Containers.Hashed_Maps}
   for a suggested implementation, and for justification of the restrictions
   regarding Hash and Equivalent_Elements. Note that sets only need to store
   elements, not key/element pairs.]}
@@ -7010,7 +7010,7 @@ average time complexity of Containers.@!Hashed_Sets.@!Reserve_Capacity should be
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-  @ChgAdded{Version=[2],Text=[See @RefSec{The Package Containers.Hashed_Maps}
+  @ChgAdded{Version=[2],Text=[See @RefSec{The Generic Package Containers.Hashed_Maps}
   for implementation notes regarding some of the operations of this package.]}
 @end{ImplNote}
 
@@ -7042,7 +7042,7 @@ average time complexity of Containers.@!Hashed_Sets.@!Reserve_Capacity should be
 @end{DiffWord2005}
 
 
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Ordered_Sets]}
+@LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Ordered_Sets]}
 
 @begin{StaticSem}
 
@@ -7384,7 +7384,7 @@ results, the behavior of this package is unspecified.@PDefn{unspecified}]}
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[See @RefSec{The Package Containers.Ordered_Maps}
+@ChgAdded{Version=[2],Text=[See @RefSec{The Generic Package Containers.Ordered_Maps}
 for a suggested implementation, and for justification of the restrictions
 regarding "<" and "=". Note that sets only need to store elements, not
 key/element pairs.]}
@@ -7600,7 +7600,7 @@ of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-  @ChgAdded{Version=[2],Text=[See @RefSec{The Package Containers.Ordered_Maps}
+  @ChgAdded{Version=[2],Text=[See @RefSec{The Generic Package Containers.Ordered_Maps}
   for implementation notes regarding some of the operations of this package.]}
 @end{ImplNote}
 
@@ -7638,7 +7638,7 @@ of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}
 @end{DiffWord2005}
 
 
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Multiway_Trees]}
+@LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
@@ -7698,7 +7698,6 @@ package Containers.Multiway_Trees has the following declaration:]}
    @key{type} Element_Type @key{is private};
    @key{with function} "=" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
 @key{package} Ada.Containers.Multiway_Trees @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Multiway_Trees]}
-@key{package} Ada.Containers.Multiway_Trees @key{is}
    @key{pragma} Preelaborate(Multiway_Trees);
    @key{pragma} Remote_Types(Multiway_Trees);]}
 
@@ -7721,7 +7720,7 @@ package Containers.Multiway_Trees has the following declaration:]}
                            Right_Position: Cursor) @key{return} Boolean;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key{function} "=" Left, Right : Tree) @key{return} Boolean;]}
+@ChgAdded{Version=[3],Text=[   @key{function} "=" (Left, Right : Tree) @key{return} Boolean;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Is_Empty} (Container : Tree) @key{return} Boolean;]}
@@ -8090,7 +8089,7 @@ A subprogram is said to
     is unspecified for all of the operations that use it in this package, so an
     implementation can call it as many or as few times as it needs to get the
     correct answer. Similarly, a global rule (see the introduction of
-    Annex @RefSecNum{Predefined Language Environment})
+    @RefSecNum{Predefined Language Environment})
     says that language-defined routines are not affected by overriding of other
     language-defined routines. This means that no reasonable program can tell
     how many times Equal_Subtree is called, and thus an implementation can call
@@ -8540,7 +8539,7 @@ A subprogram is said to
 
     @ChgRef{Version=[3],Kind=[AddedNormal]}
     @ChgAdded{Version=[3],Text=[See Iterate for vectors
-    (@RefSecNum{The Package Containers.Vectors}) for a suggested
+    (@RefSecNum{The Generic Package Containers.Vectors}) for a suggested
     implementation of the check.]}
 @end{ImplNote}
 

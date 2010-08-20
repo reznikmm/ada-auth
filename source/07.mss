@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:33 $}
+@Comment{$Date: 2010/08/13 05:23:13 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.103 $}
+@Comment{$Revision: 1.104 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1848,11 +1848,15 @@ and ]}the task.
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0147-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[In the following contexts,
 an @nt{expression} of a limited
 type is not permitted unless it is an @nt{aggregate}, a @nt{function_call},
-or a parenthesized @nt{expression} or @nt{qualified_expression} whose operand
-is permitted by this rule:]}
+@Chg{Version=[3],New=[],Old=[or ]}a parenthesized @nt{expression} or
+@nt{qualified_expression} whose operand
+is permitted by this rule@Chg{Version=[3],New=[ or a @nt{conditional_expression}
+all of whose @Syni{dependent_}@nt{expression}s are permitted by this
+rule],Old=[]}:]}
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added]}
@@ -1990,6 +1994,10 @@ following:@Defn{immutably limited}@Defn2{Term=[limited type],Sec=[immutably]}]}
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[An explicitly limited record type;]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0217-1]}
+@ChgAdded{Version=[3],Text=[A record extension with the reserved word
+@key[limited];]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[A non-formal limited private type that is
@@ -2237,7 +2245,7 @@ than being a subclause of
 @end{DiffWord95}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0052-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0052-1],ARef=[AI05-0217-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added a definition for
   immutably limited types, so that the fairly complex definition does
   not need to be repeated in rules elsewhere in the Standard.]}
@@ -2252,6 +2260,11 @@ than being a subclause of
   types were never defined to be limited, even if their associated specific
   type is. It is thought that this oversight was never implemented incorrectly
   by any compiler, thus we have not classified it as an incompatibility.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+  @ChgAdded{Version=[3],Text=[Allowed @nt{conditional_expression}s in limited
+  constructor contexts @em we want to treat these as closely to parentheses as
+  possible.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0178-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added incomplete views
@@ -2569,7 +2582,7 @@ controlled parts.]
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0067-1]}
   Adjustment is never @Chg{Version=[3],New=[actually ],Old=[]}performed for
-  values of a @Chg{Version=[3],New=[immutably],Old=[by-reference]} limited type,
+  values of @Chg{Version=[3],New=[an immutably],Old=[a by-reference]} limited type,
   since @Chg{Version=[3],New=[all
   assignment operations for such types are required to be built-in-place.
   Even so, we still define adjustment for all types in order that the
@@ -2982,8 +2995,8 @@ anonymous object has no aliased subcomponents.]}
 @Chg{Version=[3],New=[If the anonymous object is eliminated by this permission, ],
 Old=[In the @nt{aggregate} case, only one
 value adjustment is necessary, and]} there is no anonymous object to be
-finalized@Chg{Version=[3],New=[ and thus the Finalize call is on it is
-eliminated.],Old=[]}.
+finalized@Chg{Version=[3],New=[ and thus the Finalize call on it is
+eliminated],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00147-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}

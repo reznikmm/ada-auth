@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:33 $}
+@Comment{$Date: 2010/08/13 05:23:13 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.96 $}
+@Comment{$Revision: 1.97 $}
 
 @begin{Intro}
 
@@ -219,7 +219,7 @@ a single entry with the same identifier within the task declaration,
 whose profile is type conformant with the
 prefixed view profile of the inherited subprogram, the inherited subprogram is
 said to be @i{implemented} by the conforming task entry@Chg{Version=[3],
-New=[using an implicitly declared non-abstract subprogram which
+New=[ using an implicitly declared non-abstract subprogram which
 has the same profile as the inherited subprogram and which
 overrides it@PDefn2{Term=[override],Sec=[when implemented by]}],
 Old=[]}.@PDefn2{Term=[implemented],
@@ -1777,7 +1777,7 @@ implies that the operation will not block.]}
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:>
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Added @nt{pragma} Implemented to allow
   specifying that an interface procedure is really an entry or a
   protected procedure.]}
@@ -3155,7 +3155,7 @@ The @nt<requeue_statement> is new.
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:>
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Added the ability
   to requeue on operations of synchronized interfaces that are
   declared to be an entry.]}
@@ -4155,13 +4155,14 @@ given string as a Time value.]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[The intent is that the implementation
   enforce the same range rules on the string as the appropriate function
   Time_Of, except for the hour, so
   @lquotes@;cannot interpret the given string as a Time value@rquotes
   happens when one of the values is out of the required range.
-  For example, "2005-08-31 24:0:0" should raise Constraint_Error (the hour
-  is out of range).]}
+  For example, "2005-08-31 @Chg{Version=[3],New=[24:00:00],Old=[24:0:0]}"
+  should raise Constraint_Error (the hour is out of range).]}
 @end{Discussion}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}

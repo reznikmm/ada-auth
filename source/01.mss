@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2010/06/11 07:27:55 $}
+@Comment{$Date: 2010/08/13 05:23:13 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -466,8 +466,10 @@ In some cases, the goal is only partially met;
 such cases are explained.
 
 @ChgRef{Version=[2],Kind=[Revised]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 This is not part of the definition of the language,
-and does not appear in the @Chg{Version=[2],New=[Ada 2005 RM],Old=[RM95]}.
+and does not appear in the @Chg{Version=[2],New=[Ada
+@Chg{Version=[3],New=[2012],Old=[2005]} RM],Old=[RM95]}.
 @end{MetaRules}
 
 @begin{Syntax}
@@ -1471,9 +1473,9 @@ equivalent.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0176-1]}
 @leading@keepnext@;A vertical line separates alternative items unless it occurs
-immediately after an opening curly bracket@Chg{Version=[3],New=[ or a
-@nt{loop_parameter_specification}],Old=[]}, in which case it stands
-for itself:
+immediately after an opening curly bracket@Chg{Version=[3],New=[, a
+@nt{loop_parameter_specification}, or a @nt{iterator_specification}],Old=[]},
+in which case it stands for itself:
 @begin(Display)
 @nt<constraint> ::= @nt<scalar_constraint> | @nt<composite_constraint>
 @nt<discrete_choice_list> ::= @nt<discrete_choice> {| @nt<discrete_choice>}
@@ -1861,6 +1863,13 @@ of applying the most recent editions of the standards indicated below.
 Members of IEC and ISO maintain registers of currently valid International
 Standards.
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0127-2]}
+@ChgAdded{Version=[3],Text=[@Defn{ISO/IEC 639-3:2007}
+@Defn{639-3:2007, ISO/IEC standard}
+@Defn{Language code standard}
+ISO/IEC 639-3:2007, @i{Terminology and other language and content resources @em
+Codes for the representation of names of languages @em Part 3: Alpha-3 code
+comprehensive coverage of languages}]}
 
 @Defn{ISO/IEC 646:1991}
 @Defn{646:1991, ISO/IEC standard}
@@ -1887,6 +1896,14 @@ New=[Fortran @em Part 1: Base language],Old=[FORTRAN]}}.
 @Defn{COBOL standard}
 ISO@Chg{Version=[2],New=[/IEC],Old=[]} 1989:@Chg{Version=[2],New=[2002],Old=[1985]},
 @i{@Chg{Version=[2],New=[Information technology @em ],Old=[]}Programming languages @em COBOL}.
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0127-2]}
+@ChgAdded{Version=[3],Text=[@Defn{ISO/IEC 3166-1:2006}
+@Defn{3166-1:2006, ISO/IEC standard}
+@Defn{Country code standard}
+ISO/IEC 3166-1:2006, @i{Information and documentation @em
+Codes for the representation of names of countries and their subdivisions
+@em Part 1: Country Codes}]}
 
 @Defn{ISO/IEC 6429:1992}
 @Defn{6429:1992, ISO/IEC standard}
@@ -1991,6 +2008,12 @@ POSIX,
   of these standards. Added C++ and time standards. Added C character set technical
   report.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
+  @ChgAdded{Version=[3],Text=[Added language and country code standards for
+  locale support.]}
+@end{DiffWord2005}
 
 
 

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:33 $}
+@Comment{$Date: 2010/08/13 05:23:14 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -508,10 +508,10 @@ This rule is not checked in the instance body.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00402-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0093-1]}
-A type with an access discriminant @Chg{Version=[2],New=[with a @nt{default_expression}],
-Old=[]}has to be @Chg{Version=[3],New=[immutably limited. In the
-generic body, the definition of immutably limited is adjusted in an
-assume-the-worst manner (thus the rule is checked that way)],Old=[a
+A type with an access discriminant @Chg{Version=[2],New=[with a
+@nt{default_expression} ],Old=[]}has to be @Chg{Version=[3],New=[immutably
+limited. In the generic body, the definition of immutably limited is adjusted
+in an assume-the-worst manner (thus the rule is checked that way)],Old=[a
 descendant of @Chg{Version=[2],New=[an explicitly limited record type],Old=[a
 type declared with @key[limited]]}, or be a task or protected
 type. This rule is irrelevant in the instance body]}.
@@ -3381,7 +3381,7 @@ package with formal package parameters:}]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key[with] Ada.Containers.Ordered_Maps;  --@RI[ see @RefSecNum{The Package Containers.Ordered_Maps}]
+@ChgAdded{Version=[2],Text=[@key[with] Ada.Containers.Ordered_Maps;  --@RI[ see @RefSecNum{The Generic Package Containers.Ordered_Maps}]
 @key[generic]
    @key[with package] Mapping_1 @key[is new] Ada.Containers.Ordered_Maps(<>);
    @key[with package] Mapping_2 @key[is new] Ada.Containers.Ordered_Maps

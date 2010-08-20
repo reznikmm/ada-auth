@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:33 $}
+@Comment{$Date: 2010/08/13 05:23:13 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.36 $}
+@Comment{$Revision: 1.37 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -613,12 +613,15 @@ value of one or more corresponding @nt{condition}s.]
     @key{end} @key{if};"}
 
 
-@Syn{lhs=<condition>,rhs="@SynI{boolean_}@Syn2{expression}"}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0147-1]}
+@Syn{lhs=<@Chg{Version=[3],New=[],Old=[condition]}>,
+rhs="@Chg{Version=[3],New=[],Old=[@SynI{boolean_}@Syn2{expression}]}"}
 @end{Syntax}
 
 @begin{Resolution}
-@PDefn2{Term=[expected type], Sec=(condition)}
-A @nt{condition} is expected to be of any boolean type.
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0147-1]}
+@ChgDeleted{Version=[3],Text=[@PDefn2{Term=[expected type], Sec=(condition)}
+A @nt{condition} is expected to be of any boolean type.]}
 @end{Resolution}
 
 @begin{RunTime}
@@ -662,6 +665,13 @@ them is executed.
 @key[end] @key[if];
 @end{Example}
 @end{Examples}
+
+@begin{Diffword2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+  @ChgAdded{Version=[3],Text=[Moved definition of @nt{condition} to
+  @RefSecNum{If Expressions} in order to eliminate a forward reference.]}
+@end{Diffword2005}
+
 
 @LabeledClause{Case Statements}
 
@@ -951,8 +961,10 @@ zero or more times.]
        @key{end} @key{loop} [@SynI{loop_}@Syn2{identifier}];"}
 
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2]}
 @Syn{lhs=<iteration_scheme>,rhs="@key{while} @Syn2{condition}
-   | @key{for} @Syn2{loop_parameter_specification}"}
+   | @key{for} @Syn2{loop_parameter_specification}@Chg{Version=[3],New=[
+   | @key{for} @Syn2{iterator_specification}],Old=[]}"}
 
 @Syn{lhs=<loop_parameter_specification>,rhs="
    @Syn2{defining_identifier} @key{in} [@key{reverse}] @Syn2{discrete_subtype_definition}"}
@@ -1025,7 +1037,6 @@ A loop parameter is a constant;
 it cannot be updated within the
 @nt{sequence_of_statements} of the loop
 (see @RefSecNum{Objects and Named Numbers}).
-
 
 An @nt{object_declaration} should not be given for a loop parameter,
 since the loop parameter is automatically declared by
@@ -1101,6 +1112,26 @@ Summation:
 The constant-ness of loop parameters is specified in
 @RefSec{Objects and Named Numbers}.
 @end{DiffWord83}
+
+@LabeledAddedSubClause{Version=[3],Name=[User-Defined Iterators]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<iterator_specification>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<@Syn2{defining_identifier} @key[in] [@key{reverse}] @SynI{iterator_}@Syn2{name}>,Old=<>}"}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[@i<@b{Editor's Note:} This sub-clause is a placeholder
+for the unfinished AI05-0139-2.>]}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}User-defined
+  iterators are new.]}
+@end{Extend2005}
+
+
+
 
 @RMNewPage
 @LabeledClause{Block Statements}

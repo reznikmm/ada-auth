@@ -1,15 +1,15 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.1 $ $Date: 2010/06/03 02:24:53 $ $Author: randy $ }
+@comment{ $Revision: 1.2 $ $Date: 2010/08/13 05:23:14 $ $Author: randy $ }
 
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Vectors]}
+@LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Vectors]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The language-defined generic package
 Containers.Indefinite_Vectors provides a private type Vector and a set of
 operations. It provides the same operations as the package Containers.Vectors
-(see @RefSecNum{The Package Containers.Vectors}), with the difference that
+(see @RefSecNum{The Generic Package Containers.Vectors}), with the difference that
 the generic formal Element_Type is indefinite.]}
 @end{Intro}
 
@@ -66,7 +66,7 @@ of Update_Element may be constrained even if Element_Type is unconstrained.]}
 @end{Extend95}
 
 
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Doubly_Linked_Lists]}
+@LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Doubly_Linked_Lists]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -74,7 +74,7 @@ of Update_Element may be constrained even if Element_Type is unconstrained.]}
 provides private types List and Cursor, and a set of operations for each
 type. It provides the same operations as the package
 Containers.Doubly_Linked_Lists
-(see @RefSecNum{The Package Containers.Doubly_Linked_Lists}),
+(see @RefSecNum{The Generic Package Containers.Doubly_Linked_Lists}),
 with the difference that the generic formal Element_Type is indefinite.]}
 @end{Intro}
 
@@ -130,13 +130,13 @@ The generic package Containers.Indefinite_Doubly_Linked_Lists is new.]}
 @end{Extend95}
 
 
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Hashed_Maps]}
+@LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Hashed_Maps]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The language-defined generic package Containers.Indefinite_Hashed_Maps provides
 a map with the same operations as the package Containers.Hashed_Maps
-(see @RefSecNum{The Package Containers.Hashed_Maps}),
+(see @RefSecNum{The Generic Package Containers.Hashed_Maps}),
 with the difference that the generic formal types Key_Type and Element_Type are
 indefinite.]}
 @end{Intro}
@@ -196,13 +196,13 @@ The generic package Containers.Indefinite_Hashed_Maps is new.]}
 @end{Extend95}
 
 
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Ordered_Maps]}
+@LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Ordered_Maps]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The language-defined generic package Containers.Indefinite_Ordered_Maps
 provides a map with the same operations as the package Containers.Ordered_Maps
-(see @RefSecNum{The Package Containers.Ordered_Maps}), with the difference that
+(see @RefSecNum{The Generic Package Containers.Ordered_Maps}), with the difference that
 the generic formal types Key_Type and Element_Type are indefinite.]}
 @end{Intro}
 
@@ -262,14 +262,14 @@ The generic package Containers.Indefinite_Ordered_Maps is new.]}
 @end{Extend95}
 
 
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Hashed_Sets]}
+@LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Hashed_Sets]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The language-defined generic package
 Containers.Indefinite_Hashed_Sets provides a set with the same operations as
 the package Containers.Hashed_Sets
-(see @RefSecNum{The Package Containers.Hashed_Sets}), with the difference
+(see @RefSecNum{The Generic Package Containers.Hashed_Sets}), with the difference
 that the generic formal type Element_Type is indefinite.]}
 @end{Intro}
 
@@ -301,14 +301,14 @@ The generic package Containers.Indefinite_Hashed_Sets is new.]}
 @end{Extend95}
 
 
-@LabeledAddedSubclause{Version=[2],Name=[The Package Containers.Indefinite_Ordered_Sets]}
+@LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Ordered_Sets]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[The language-defined generic package
 Containers.Indefinite_Ordered_Sets provides a set with the same operations as
 the package Containers.Ordered_Sets
-(see @RefSecNum{The Package Containers.Ordered_Sets}), with the difference
+(see @RefSecNum{The Generic Package Containers.Ordered_Sets}), with the difference
 that the generic formal type Element_Type is indefinite.]}
 @end{Intro}
 
@@ -340,14 +340,14 @@ The generic package Containers.Indefinite_Ordered_Sets is new.]}
 @end{Extend95}
 
 
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Indefinite_Multiway_Trees]}
+@LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Indefinite_Multiway_Trees]}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
 Containers.Indefinite_Multiway_Trees
 provides a multiway tree with the same operations as the package
-Containers.Multiway_Trees (see @RefSecNum{The Package Containers.Multiway_Trees}),
+Containers.Multiway_Trees (see @RefSecNum{The Generic Package Containers.Multiway_Trees}),
 with the difference that the generic formal Element_Type is indefinite.]}
 @end{Intro}
 
@@ -403,7 +403,7 @@ unconstrained.]}
 @end{Extend2005}
 
 
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Indefinite_Holders]}
+@LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Indefinite_Holders]}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
@@ -754,6 +754,9 @@ source holder object to the target holder object.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
 @ChgAdded{Version=[3],Text=[Move should not copy elements, and should minimize
 copying of internal data structures.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[Containers.Indefinite_Holders.Move should not copy elements, and should
+minimize copying of internal data structures.]}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -766,6 +769,10 @@ copying of internal data structures.]}
 @ChgAdded{Version=[3],Text=[If an exception is propagated from a holder
 operation, no storage should be lost, nor should the element be removed from a
 holder unless specified by the operation.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[If an exception is propagated from a holder
+operation, no storage should be lost, nor should the element be removed from a
+holder unless specified by the operation.]}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -782,13 +789,13 @@ holder unless specified by the operation.]}
 @end{Extend2005}
 
 
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Vectors]}
+@LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Vectors]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
 Containers.Bounded_Vectors provides a private type Vector and a set of
 operations. It provides the same operations as the package Containers.Vectors
-(see @RefSecNum{The Package Containers.Vectors}), with the difference that the
+(see @RefSecNum{The Generic Package Containers.Vectors}), with the difference that the
 maximum storage is bounded.]}
 
 @begin{StaticSem}
@@ -847,6 +854,34 @@ an operation that disallows tampering with elements @Redundant[or cursors].
 Either Program_Error is raised, or the operation proceeds as defined.]}
 @end{Bounded}
 
+@begin{ImplReq}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For each instance of
+Containers.Vectors and each instance of Containers.Bounded_Vectors,
+if the two instances meet the following conditions
+then the output generated by
+the Vector'Output or Vector'Write subprograms of either instance
+shall be readable by the Vector'Input
+or Vector'Read of the other instance, respectively:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the Element_Type parameters of the two instances
+    are statically matching subtypes of the same type (note that distinct
+    elaborations of a type declaration result in distinct types); and]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the output generated by Element_Type'Output or
+    Element_Type'Write is readable by Element_Type'Input or Element_Type'Read,
+    respectively (where Element_Type denotes the type of of the two actual
+    Element_Type parameters); and]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the preceding two conditions also hold for the
+    Index_Type parameters of the instances.]}
+@end{Itemize}
+@end{ImplReq}
+
 @begin{ImplAdvice}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[Bounded vector objects should be implemented without
@@ -865,20 +900,20 @@ minimize copying does not apply to bounded vectors.]}]}
 @end{ImplAdvice}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0160-1],ARef=[AI05-0184-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic package
   Containers.Bounded_Vectors is new.]}
 @end{Extend2005}
 
 
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Doubly_Linked_Lists]}
+@LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Doubly_Linked_Lists]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
 Containers.Bounded_Doubly_Linked_Lists provides a private type List
 and a set of operations. It provides the same operations as the
 package Containers.Doubly_Linked_Lists
-(see @RefSecNum{The Package Containers.Doubly_Linked_Lists}), with the
+(see @RefSecNum{The Generic Package Containers.Doubly_Linked_Lists}), with the
 difference that the maximum storage is bounded.]}
 
 @begin{StaticSem}
@@ -959,6 +994,31 @@ an operation that disallows tampering with elements @Redundant[or cursors].
 Either Program_Error is raised, or the operation proceeds as defined.]}
 @end{Bounded}
 
+@begin{ImplReq}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For each instance of
+Containers.Doubly_Linked_Lists and each instance of
+Containers.Bounded_Doubly_Linked_Lists,
+if the two instances meet the following conditions
+then the output generated by
+the List'Output or List'Write subprograms of either instance
+shall be readable by the List'Input
+or List'Read of the other instance, respectively:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the Element_Type parameters of the two instances
+    are statically matching subtypes of the same type (note that distinct
+    elaborations of a type declaration result in distinct types); and]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the output generated by Element_Type'Output or
+    Element_Type'Write is readable by Element_Type'Input or Element_Type'Read,
+    respectively (where Element_Type denotes the type of of the two actual
+    Element_Type parameters).]}
+@end{Itemize}
+@end{ImplReq}
+
 @begin{ImplAdvice}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[Bounded list objects should be implemented without
@@ -977,20 +1037,20 @@ minimize copying does not apply to bounded lists.]}]}
 @end{ImplAdvice}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0160-1],ARef=[AI05-0184-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic package
   Containers.Bounded_Doubly_Linked_Lists is new.]}
 @end{Extend2005}
 
 
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Hashed_Maps]}
+@LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Hashed_Maps]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
 Containers.Bounded_Hashed_Maps provides a private type Map
 and a set of operations. It provides the same operations as the
 package Containers.Hashed_Maps
-(see @RefSecNum{The Package Containers.Hashed_Maps}), with the
+(see @RefSecNum{The Generic Package Containers.Hashed_Maps}), with the
 difference that the maximum storage is bounded.]}
 
 @begin{StaticSem}
@@ -1081,6 +1141,34 @@ an operation that disallows tampering with elements @Redundant[or cursors].
 Either Program_Error is raised, or the operation proceeds as defined.]}
 @end{Bounded}
 
+@begin{ImplReq}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For each instance of
+Containers.Hashed_Maps and each instance of Containers.Bounded_Hashed_Maps,
+if the two instances meet the following conditions
+then the output generated by
+the Map'Output or Map'Write subprograms of either instance
+shall be readable by the Map'Input
+or Map'Read of the other instance, respectively:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the Element_Type parameters of the two instances
+    are statically matching subtypes of the same type (note that distinct
+    elaborations of a type declaration result in distinct types); and]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the output generated by Element_Type'Output or
+    Element_Type'Write is readable by Element_Type'Input or Element_Type'Read,
+    respectively (where Element_Type denotes the type of of the two actual
+    Element_Type parameters); and]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the preceding two conditions also hold for the
+    Key_Type parameters of the instances.]}
+@end{Itemize}
+@end{ImplReq}
+
 @begin{ImplAdvice}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[Bounded map objects should be implemented without
@@ -1099,20 +1187,20 @@ minimize copying does not apply to bounded maps.]}]}
 @end{ImplAdvice}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0160-1],ARef=[AI05-0184-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic package
   Containers.Bounded_Hashed_Maps is new.]}
 @end{Extend2005}
 
 
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Ordered_Maps]}
+@LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Ordered_Maps]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
 Containers.Bounded_Ordered_Maps provides a private type Map
 and a set of operations. It provides the same operations as the
 package Containers.Ordered_Maps
-(see @RefSecNum{The Package Containers.Ordered_Maps}), with the
+(see @RefSecNum{The Generic Package Containers.Ordered_Maps}), with the
 difference that the maximum storage is bounded.]}
 
 @begin{StaticSem}
@@ -1183,6 +1271,34 @@ an operation that disallows tampering with elements @Redundant[or cursors].
 Either Program_Error is raised, or the operation proceeds as defined.]}
 @end{Bounded}
 
+@begin{ImplReq}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For each instance of
+Containers.Ordered_Maps and each instance of Containers.Bounded_Ordered_Maps,
+if the two instances meet the following conditions
+then the output generated by
+the Map'Output or Map'Write subprograms of either instance
+shall be readable by the Map'Input
+or Map'Read of the other instance, respectively:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the Element_Type parameters of the two instances
+    are statically matching subtypes of the same type (note that distinct
+    elaborations of a type declaration result in distinct types); and]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the output generated by Element_Type'Output or
+    Element_Type'Write is readable by Element_Type'Input or Element_Type'Read,
+    respectively (where Element_Type denotes the type of of the two actual
+    Element_Type parameters); and]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the preceding two conditions also hold for the
+    Key_Type parameters of the instances.]}
+@end{Itemize}
+@end{ImplReq}
+
 @begin{ImplAdvice}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[Bounded map objects should be implemented without
@@ -1197,20 +1313,20 @@ minimize copying does not apply.]}
 @end{ImplAdvice}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0160-1],ARef=[AI05-0184-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic package
   Containers.Bounded_Ordered_Maps is new.]}
 @end{Extend2005}
 
 
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Hashed_Sets]}
+@LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Hashed_Sets]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
 Containers.Bounded_Hashed_Sets provides a private type Set
 and a set of operations. It provides the same operations as the
 package Containers.Hashed_Sets
-(see @RefSecNum{The Package Containers.Hashed_Sets}), with the
+(see @RefSecNum{The Generic Package Containers.Hashed_Sets}), with the
 difference that the maximum storage is bounded.]}
 
 @begin{StaticSem}
@@ -1300,6 +1416,30 @@ an operation that disallows tampering with elements @Redundant[or cursors].
 Either Program_Error is raised, or the operation proceeds as defined.]}
 @end{Bounded}
 
+@begin{ImplReq}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For each instance of
+Containers.Hashed_Sets and each instance of Containers.Bounded_Hashed_Sets,
+if the two instances meet the following conditions
+then the output generated by
+the Set'Output or Set'Write subprograms of either instance
+shall be readable by the Set'Input
+or Set'Read of the other instance, respectively:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the Element_Type parameters of the two instances
+    are statically matching subtypes of the same type (note that distinct
+    elaborations of a type declaration result in distinct types); and]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the output generated by Element_Type'Output or
+    Element_Type'Write is readable by Element_Type'Input or Element_Type'Read,
+    respectively (where Element_Type denotes the type of of the two actual
+    Element_Type parameters).]}
+@end{Itemize}
+@end{ImplReq}
+
 @begin{ImplAdvice}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[Bounded set objects should be implemented without
@@ -1318,20 +1458,20 @@ minimize copying does not apply to bounded sets.]}]}
 @end{ImplAdvice}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0160-1],ARef=[AI05-0184-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic package
   Containers.Bounded_Hashed_Sets is new.]}
 @end{Extend2005}
 
 
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Ordered_Sets]}
+@LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Ordered_Sets]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
 Containers.Bounded_Ordered_Sets provides a private type Set
 and a set of operations. It provides the same operations as the
 package Containers.Ordered_Sets
-(see @RefSecNum{The Package Containers.Ordered_Sets}), with the
+(see @RefSecNum{The Generic Package Containers.Ordered_Sets}), with the
 difference that the maximum storage is bounded.]}
 
 @begin{StaticSem}
@@ -1402,6 +1542,30 @@ an operation that disallows tampering with elements @Redundant[or cursors].
 Either Program_Error is raised, or the operation proceeds as defined.]}
 @end{Bounded}
 
+@begin{ImplReq}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For each instance of
+Containers.Ordered_Sets and each instance of Containers.Bounded_Ordered_Sets,
+if the two instances meet the following conditions
+then the output generated by
+the Set'Output or Set'Write subprograms of either instance
+shall be readable by the Set'Input
+or Set'Read of the other instance, respectively:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the Element_Type parameters of the two instances
+    are statically matching subtypes of the same type (note that distinct
+    elaborations of a type declaration result in distinct types); and]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the output generated by Element_Type'Output or
+    Element_Type'Write is readable by Element_Type'Input or Element_Type'Read,
+    respectively (where Element_Type denotes the type of of the two actual
+    Element_Type parameters).]}
+@end{Itemize}
+@end{ImplReq}
+
 @begin{ImplAdvice}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[Bounded set objects should be implemented without
@@ -1416,13 +1580,13 @@ minimize copying does not apply.]}
 @end{ImplAdvice}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0160-1],ARef=[AI05-0184-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic package
   Containers.Bounded_Ordered_Sets is new.]}
 @end{Extend2005}
 
 
-@LabeledAddedSubclause{Version=[3],Name=[The Package Containers.Bounded_Multiway_Trees]}
+@LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Multiway_Trees]}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
@@ -1430,7 +1594,7 @@ minimize copying does not apply.]}
 Containers.Bounded_Multiway_Trees provides a private type Tree and a set of
 operations. It provides the same operations as the package
 Containers.Multiway_Trees (see
-@RefSecNum{The Package Containers.Multiway_Trees}), with the difference
+@RefSecNum{The Generic Package Containers.Multiway_Trees}), with the difference
 that the maximum storage is bounded.]}
 
 @end{Intro}
@@ -1512,6 +1676,30 @@ an operation that disallows tampering with elements @Redundant[or cursors].
 Either Program_Error is raised, or the operation proceeds as defined.]}
 @end{Bounded}
 
+@begin{ImplReq}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For each instance of
+Containers.Multiway_Trees and each instance of Containers.Bounded_Multiway_Trees,
+if the two instances meet the following conditions
+then the output generated by
+the Tree'Output or Tree'Write subprograms of either instance
+shall be readable by the Tree'Input
+or Tree'Read of the other instance, respectively:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the Element_Type parameters of the two instances
+    are statically matching subtypes of the same type (note that distinct
+    elaborations of a type declaration result in distinct types); and]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the output generated by Element_Type'Output or
+    Element_Type'Write is readable by Element_Type'Input or Element_Type'Read,
+    respectively (where Element_Type denotes the type of of the two actual
+    Element_Type parameters).]}
+@end{Itemize}
+@end{ImplReq}
+
 @begin{ImplAdvice}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
 @ChgAdded{Version=[3],Text=[Bounded tree objects should be implemented without
@@ -1530,7 +1718,7 @@ minimize copying does not apply to bounded trees.]}]}
 
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0184-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   The generic package Containers.Bounded_Multiway_Trees is new.]}
 @end{Extend2005}
@@ -1735,6 +1923,506 @@ should minimize copying of elements.]}]}
   to require a strict weak ordering; the old definition allowed
   indeterminant comparisons that would not have worked in a sort.]}
 @end{DiffWord2005}
+
+
+
+@LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Synchronized_Queue_Interfaces]}
+
+@begin{Intro}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Text=[The language-defined generic package
+Containers.Synchronized_Queue_Interfaces provides interface type Queue, and a
+set of operations for that type. Interface Queue specifies a first-in, first-out
+queue.]}
+@end{Intro}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The generic library
+package Containers.Synchronized_Queue_Interfaces has the following declaration:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[generic]
+   @key[type] Element_Type @key[is private];
+@key[package] Ada.Containers.Synchronized_Queue_Interfaces @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Synchronized_Queue_Interfaces]}
+   @key[pragma] Pure(Synchronized_Queue_Interfaces);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Queue} @key[is synchronized interface];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Enqueue}
+     (Container : @key[in out] Queue;
+      New_Item  : @key[in]     Element_Type) @key[is abstract];
+   @key[pragma] Implemented (Enqueue, By_Entry);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Dequeue}
+     (Container : @key[in out] Queue;
+      Element   :    @key[out] Element_Type) @key[is abstract];
+   @key[pragma] Implemented (Dequeue, By_Entry);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Current_Use} (Container : Queue) @key[return] Count_Type @key[is abstract];
+   @key[function] @AdaSubDefn{Peak_Use} (Container : Queue) @key[return] Count_Type @key[is abstract];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{end} Ada.Containers.Synchronized_Queue_Interfaces;]}
+@end{Example}
+
+@begin{DescribeCode}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Enqueue
+  (Container : @key[in out] Queue;
+   New_Item  : @key[in]     Element_Type) @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[A queue type that implements this
+interface may have a bounded @i<capacity>@Defn2{Term=[capacity],Sec=[of a queue]}.
+If the queue object has a bounded
+capacity, and the number of existing elements equals the capacity, then Enqueue
+blocks until storage becomes available; otherwise Enqueue does not block. In any
+case, it then copies New_Item onto the queue.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Dequeue
+  (Container : @key[in out] Queue;
+   Element   :    @key[out] Element_Type) @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[If the queue is empty, then Dequeue
+blocks until an item becomes available. In any case, it then returns a copy of
+the element at the head of the queue, and removes it from the container.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Current_Use (Container : Queue) @key[return] Count_Type @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns the number of elements
+currently in the queue.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Peak_Use (Container : Queue) @key[return] Count_Type @key[is abstract];]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns the maximum number of
+elements that have been in the queue at any one time.]}
+
+@end{DescribeCode}
+
+@end{StaticSem}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic
+  package Containers.Synchronized_Queue_Interfaces is new.]}
+@end{Extend2005}
+
+
+@LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Unbounded_Synchronized_Queues]}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Text=[The language-defined generic package
+Containers.Unbounded_Synchronized_Queues provides type Queue, which implements
+the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] System;
+@key[with] Ada.Containers.Synchronized_Queue_Interfaces;
+@key[generic]
+   @key[with package] Queue_Interfaces @key[is new] Ada.Containers.Synchronized_Queue_Interfaces (<>);
+   Default_Ceiling: System.Any_Priority := System.Priority'Last;
+@key[package] Ada.Containers.Unbounded_Synchronized_Queues is@ChildUnit{Parent=[Ada.Containers],Child=[Unbounded_Synchronized_Queues]}
+   @key[pragma] Preelaborate(Unbounded_Synchronized_Queues);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[protected type] @AdaTypeDefn{Queue}
+        (Capacity : Count_Type := Default_Capacity;
+         Ceiling: System.Any_Priority := Default_Ceiling) @key[is]
+         @key[new] Queue_Interfaces.Queue @key[with]
+      @key[pragma] Priority(Ceiling);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      @key[overriding]
+      @key[entry] @AdaSubDefn{Enqueue} (New_Item: @key[in] Queue_Interfaces.Element_Type);
+      @key[overriding]
+      @key[entry] @AdaSubDefn{Dequeue} (Element: @key[out] Queue_Interfaces.Element_Type);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      @key[overriding]
+      @key[function] @AdaSubDefn{Current_Use} @key[return] Count_Type;
+      @key[overriding]
+      @key[function] @AdaSubDefn{Peak_Use} @key[return] Count_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[private]
+      ... -- @RI[not specified by the language]
+   @key[end] Queue;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{private}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   ... -- @RI[not specified by the language]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{end} Ada.Containers.Unbounded_Synchronized_Queues;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Text=[The type Queue is used to represent task-safe
+queues.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Text=[The capacity for instances of type Queue is
+unbounded.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Enqueue never blocks; if more storage is needed
+  for a new element, it is allocated dynamically. We don't need to explicitly
+  specify that Queue needs finalization, because it is visibly protected.]}
+@end{Ramification}
+
+@end{StaticSem}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic
+  package Containers.Unbounded_Synchronized_Queues is new.]}
+@end{Extend2005}
+
+
+
+@LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Synchronized_Queues]}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Text=[The language-defined generic package
+Containers.Bounded_Synchronized_Queues provides type Queue, which implements
+the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] System;
+@key[with] Ada.Containers.Synchronized_Queue_Interfaces;
+@key[generic]
+   @key[with package] Queue_Interfaces @key[is new] Ada.Containers.Synchronized_Queue_Interfaces (<>);
+   Default_Capacity : Count_Type;
+   Default_Ceiling: System.Any_Priority := System.Priority'Last;
+@key[package] Ada.Containers.Bounded_Synchronized_Queues is@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Synchronized_Queues]}
+   @key[pragma] Preelaborate(Bounded_Synchronized_Queues);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[protected type] @AdaTypeDefn{Queue}
+        (Capacity : Count_Type := Default_Capacity;
+         Ceiling: System.Any_Priority := Default_Ceiling) @key[is]
+         @key[new] Queue_Interfaces.Queue @key[with]
+      @key[pragma] Priority(Ceiling);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      @key[overriding]
+      @key[entry] @AdaSubDefn{Enqueue} (New_Item: @key[in] Queue_Interfaces.Element_Type);
+      @key[overriding]
+      @key[entry] @AdaSubDefn{Dequeue} (Element: @key[out] Queue_Interfaces.Element_Type);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      @key[overriding]
+      @key[function] @AdaSubDefn{Current_Use} @key[return] Count_Type;
+      @key[overriding]
+      @key[function] @AdaSubDefn{Peak_Use} @key[return] Count_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[private]
+      ... -- @RI[not specified by the language]
+   @key[end] Queue;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{private}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   ... -- @RI[not specified by the language]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{end} Ada.Containers.Bounded_Synchronized_Queues;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Keepnext=[T],Type=[Leading],Text=[The semantics are the
+same as for Unbounded_Synchronized_Queues, except:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The capacity for instances of type Queue is
+  bounded and specified by the discriminant Capacity.]}
+@end{Itemize}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Since this type has a bounded capacity, Enqueue
+  might block if the queue is full.]}
+@end{Ramification}
+
+@end{StaticSem}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Text=[Bounded queue objects should be implemented without
+implicit pointers or dynamic allocation.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[Bounded queue objects should be implemented without
+implicit pointers or dynamic allocation.]}]}
+@end{ImplAdvice}
+
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic
+  package Containers.Bounded_Synchronized_Queues is new.]}
+@end{Extend2005}
+
+
+
+@LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Unbounded_Priority_Queues]}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Text=[The language-defined generic package
+Containers.Unbounded_Priority_Queues provides type Queue, which implements
+the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] System;
+@key[with] Ada.Containers.Synchronized_Queue_Interfaces;
+@key[generic]
+   @key[with package] Queue_Interfaces @key[is new] Ada.Containers.Synchronized_Queue_Interfaces (<>);
+   @key[type] Queue_Priority @key[is private];
+   @key[with] @key[function] Get_Priority
+     (Element: Queue_Interfaces.Element_Type) @key[return] Queue_Priority is <>;
+   @key[with] @key[function] Before
+     (Left, Right : Queue_Priority) @key[return] Boolean is <>;
+   Default_Ceiling: System.Any_Priority := System.Priority'Last;
+@key[package] Ada.Containers.Unbounded_Priority_Queues @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Unbounded_Priority_Queues]}
+   @key[pragma] Preelaborate(Unbounded_Priority_Queues);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[protected type] @AdaTypeDefn{Queue}
+        (Capacity : Count_Type := Default_Capacity;
+         Ceiling: System.Any_Priority := Default_Ceiling) @key[is]
+         @key[new] Queue_Interfaces.Queue @key[with]
+      @key[pragma] Priority(Ceiling);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      @key[overriding]
+      @key[entry] @AdaSubDefn{Enqueue} (New_Item: @key[in] Queue_Interfaces.Element_Type);
+      @key[overriding]
+      @key[entry] @AdaSubDefn{Dequeue} (Element: @key[out] Queue_Interfaces.Element_Type);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      @key[not overriding]
+      @key[entry] @AdaSubDefn{Dequeue_Only_High_Priority}
+        (Low_Priority : @key[in]     Queue_Priority;
+         Element      :    @key[out] Queue_Interfaces.Element_Type);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      @key[overriding]
+      @key[function] @AdaSubDefn{Current_Use} @key[return] Count_Type;
+      @key[overriding]
+      @key[function] @AdaSubDefn{Peak_Use} @key[return] Count_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[private]
+      ... -- @RI[not specified by the language]
+   @key[end] Queue;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{private}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   ... -- @RI[not specified by the language]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{end} Ada.Containers.Unbounded_Priority_Queues;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Text=[The type Queue is used to represent task-safe
+priority queues.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Text=[The capacity for instances of type Queue is
+unbounded.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Text=[Two elements @i<E1> and @i<E2> are equivalent if
+Before(Get_Priority(@i<E1>), Get_Priority(@i<E2>)) and
+Before(Get_Priority(@i<E2>), Get_Priority(@i<E1>)) both return False.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Text=[Enqueue inserts an item according to the order
+specified by the Before function on the result of Get_Priority on the elements.
+If the queue already contains elements equivalent to New_Item, then it is
+inserted after the existing equivalent elements.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Enqueue never blocks; if more storage is needed
+  for a new element, it is allocated dynamically. We don't need to explicitly
+  specify that Queue needs finalization, because it is visibly protected.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Text=[Dequeue_Only_High_Priority is the same as Dequeue,
+except that it blocks until the element @i<E> at the head of the queue satisfies
+Before(Get_Priority(@i<E>), Low_Priority).]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Text=[The actual functions for Get_Priority and Before are
+expected to return the same value each time they are called with the same
+actuals, and should not modify their actuals. Before should define a strict weak
+ordering relationship (see @RefSecNum{The Package Containers}). If the actual
+functions behave in some other manner, the behavior of Unbounded_Priority_Queues
+is unspecified.]}
+
+@end{StaticSem}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic
+  package Containers.Unbounded_Priority_Queues is new.]}
+@end{Extend2005}
+
+
+@LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Priority_Queues]}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Text=[The language-defined generic package
+Containers.Bounded_Priority_Queues provides type Queue, which implements
+the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] System;
+@key[with] Ada.Containers.Synchronized_Queue_Interfaces;
+@key[generic]
+   @key[with package] Queue_Interfaces @key[is new] Ada.Containers.Synchronized_Queue_Interfaces (<>);
+   @key[type] Queue_Priority @key[is private];
+   @key[with function] Get_Priority
+     (Element: Queue_Interfaces.Element_Type) @key[return] Queue_Priority is <>;
+   @key[with function] Before
+     (Left, Right : Queue_Priority) @key[return] Boolean is <>;
+   Default_Capacity : Count_Type;
+   Default_Ceiling: System.Any_Priority := System.Priority'Last;
+@key[package] Ada.Containers.Bounded_Priority_Queues @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Priority_Queues]}
+   @key[pragma] Preelaborate(Bounded_Priority_Queues);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[protected type] @AdaTypeDefn{Queue}
+        (Capacity : Count_Type := Default_Capacity;
+         Ceiling: System.Any_Priority := Default_Ceiling) @key[is]
+         @key[new] Queue_Interfaces.Queue @key[with]
+      @key[pragma] Priority(Ceiling);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      @key[overriding]
+      @key[entry] @AdaSubDefn{Enqueue} (New_Item: @key[in] Queue_Interfaces.Element_Type);
+      @key[overriding]
+      @key[entry] @AdaSubDefn{Dequeue} (Element: @key[out] Queue_Interfaces.Element_Type);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      @key[not overriding]
+      @key[entry] @AdaSubDefn{Dequeue_Only_High_Priority}
+        (Low_Priority : @key[in]     Queue_Priority;
+         Element      :    @key[out] Queue_Interfaces.Element_Type);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      @key[overriding]
+      @key[function] @AdaSubDefn{Current_Use} @key[return] Count_Type;
+      @key[overriding]
+      @key[function] @AdaSubDefn{Peak_Use} @key[return] Count_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[private]
+      ... -- @RI[not specified by the language]
+   @key[end] Queue;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{private}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   ... -- @RI[not specified by the language]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{end} Ada.Containers.Bounded_Priority_Queues;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Keepnext=[T],Type=[Leading],Text=[The semantics are the
+same as for Unbounded_Priority_Queues, except:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The capacity for instances of type Queue is
+  bounded and specified by the discriminant Capacity.]}
+@end{Itemize}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Since this type has a bounded capacity, Enqueue
+  might block if the queue is full.]}
+@end{Ramification}
+
+@end{StaticSem}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Text=[Bounded priority queue objects should be implemented without
+implicit pointers or dynamic allocation.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[Bounded priority queue objects should be implemented without
+implicit pointers or dynamic allocation.]}]}
+@end{ImplAdvice}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic
+  package Containers.Bounded_Priority_Queues is new.]}
+@end{Extend2005}
+
+
+@LabeledAddedSubclause{Version=[3],Name=[Indefinite Synchronized Queues]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgAdded{Version=[3],Text=[There are three generic packages
+Containers.Indefinite_Synchronized_Queue_Interfaces@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Synchronized_Queue_Interfaces]},
+Containers.Indefinite_Unbounded_Synchronized_Queues@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Unbounded_Synchronized_Queues]}, and
+Containers.Indefinite_Unbounded_Priority_Queues@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Unbounded_Priority_Queues]}.
+These are identical to Containers.Synchronized_Queue_Interfaces,
+Containers.Unbounded_Synchronized_Queues, and
+Containers.Unbounded_Priority_Queues, respectively, except except that the
+generic formal Element_Type is indefinite.]}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic
+  packages Containers.Indefinite_Synchronized_Queue_Interfaces,
+  Containers.Indefinite_Unbounded_Synchronized_Queues, and
+  Containers.Indefinite_Unbounded_Priority_Queues are new.]}
+@end{Extend2005}
+
 
 
 

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:33 $}
+@Comment{$Date: 2010/08/13 05:23:14 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -2527,6 +2527,15 @@ enumeration types, record types, and array types.]}
   largest size supported for records need not be the same as the largest
   size supported for arrays.]}
 @end{Discussion}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0155-1]}
+  @ChgAdded{Version=[3],Text=[Only Size clauses with a size greater than or
+  equal to the Size that would be chosen by default may be safely presumed to be
+  supported on non-static elementary subtypes. Implementations may choose to
+  support smaller sizes, but only if the Size allows any value of the subtype to
+  be represented, for any possible value of the bounds.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
 @ChgAdded{Version=[2],Text=[A nonconfirming size clause for the first subtype

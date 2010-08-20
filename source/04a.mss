@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2010/06/11 07:27:55 $}
+@Comment{$Date: 2010/08/13 05:23:13 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.103 $}
+@Comment{$Revision: 1.104 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -853,12 +853,13 @@ resolved and is illegal:]}
 @ChgAdded{Version=[2],Text=[  @key[if] Get_It'Valid @key[then]]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[even though the Valid attribute is only defined
   for objects of scalar types, and thus cannot be applied to the result of
   function (2). That information cannot be used to resolve the @nt{prefix}.
-  The same would be true if (2) was been a procedure; even though the
-  procedure does not denote an object, the @nt{attribute_reference} is
-  still illegal.]}
+  The same would be true if (2) @Chg{Version=[3],New=[had],Old=[was]} been
+  a procedure; even though the procedure does not denote an object, the
+  @nt{attribute_reference} is still illegal.]}
 @end{Discussion}
 
 @PDefn2{Term=[expected type],
@@ -2201,14 +2202,19 @@ defines an applicable index constraint:
   is being used within a larger aggregate.
   @end{Discussion}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0147-1]}
   For a parenthesized @nt{expression}, the
   applicable index constraint is that, if any, defined for the
-  @nt{expression}.
+  @nt{expression}@Chg{Version=[3],New=[;],Old=[.]}
 @begin{Discussion}
 RM83 omitted this
   case, presumably as an oversight. We want to minimize situations
   where an @nt{expression} becomes illegal if parenthesized.
 @end{Discussion}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0147-1]}
+@ChgAdded{Version=[3],Text=[For a @nt{conditional_expression}, the
+applicable index constraint for each @SynI<dependent_>@nt{expression} is that,
+if any, defined for the @nt{conditional_expression}.]}
 @end(itemize)
 
 The applicable index constraint @i(applies) to an @nt{array_aggregate}
@@ -2530,16 +2536,27 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
   without an explicit language rule disallowing it).]}
 @end{Inconsistent2005}
 
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+  @ChgAdded{Version=[3],Text=[Added a definition of the applicable index
+  constraint for @nt{conditional_expression}s (which are new).]}
+@end{DiffWord2005}
+
+
 
 @LabeledClause{Expressions}
 
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0147-1]}
 @Defn{expression}
 An @i(expression) is a formula that defines the computation or retrieval
 of a value.
 In this International Standard, the term @lquotes@;expression@rquotes@; refers to a construct
-of the syntactic category @nt<expression> or
-of any of the other five syntactic categories defined below.
+of the syntactic category @nt<expression> or of any of the
+@Chg{Version=[3],New=[following categories: @nt{relation},
+@nt{simple_expression}, @nt{term}, @nt{factor}, @nt{primary},
+@nt{conditional_expression}],Old=[other five syntactic categories defined
+below]}.
 @Defn{and operator}@Defn2{Term=[operator],Sec=(and)}
 @Defn{or operator}@Defn2{Term=[operator],Sec=(or)}
 @Defn{xor operator}@Defn2{Term=[operator],Sec=(xor)}
@@ -2602,11 +2619,11 @@ of any of the other five syntactic categories defined below.
 
 @Syn{lhs=<factor>,rhs="@Syn2{primary} [** @Syn2{primary}] | @key{abs} @Syn2{primary} | @key{not} @Syn2{primary}"}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1],ARef=[AI05-0176-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1],ARef=[AI05-0147-1],ARef=[AI05-0176-1]}
 @Syn{lhs=<primary>,rhs="
    @Syn2{numeric_literal} | @key{null} | @Syn2{string_literal} | @Syn2{aggregate}
  | @Syn2{name} | @Chg{Version=[3],New=[],Old=[@Syn2{qualified_expression} | ]}@Syn2{allocator} | (@Syn2{expression})@Chg{Version=[3],New=[
- | (@Syn2{quantified_expression})],Old=[]}"}
+ | (@Syn2{conditional_expression}) | (@Syn2{quantified_expression})],Old=[]}"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -2736,9 +2753,9 @@ still have to be parenthesized when used in a bound of a range.
   from @nt{primary} to @nt{name} (see @RefSecNum{Names}). This allows the
   use of @nt{qualified_expression}s in more places.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
-  @ChgAdded{Version=[3],Text=[Added @nt{quantified_expression}
-  to @nt{primary}.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0176-1]}
+  @ChgAdded{Version=[3],Text=[Added @nt{conditional_expression} and
+  @nt{quantified_expression} to @nt{primary}.]}
 @end{DiffWord2005}
 
 
@@ -3434,7 +3451,7 @@ for those composite types covered earlier) is defined as follows:
   @begin{Reason}
     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0123-1]}
     This asymmetry between @Chg{Version=[3],New=[],Old=[tagged and
-    untagged ]}components @Chg{Version=[3],New=[ with and without a record type],Old=[]}is
+    untagged ]}components @Chg{Version=[3],New=[with and without a record type ],Old=[]}is
     necessary to preserve @Chg{Version=[3],New=[most ],Old=[]}upward compatibility and corresponds
     with the corresponding situation with generics, where the
     predefined operations @lquotes@;reemerge@rquotes@; in a generic for
@@ -4045,10 +4062,10 @@ multiplication operator if either operand is of a type having a user-defined
 primitive multiplication operator such that:]}
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0020-1]}
+  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0020-1],ARef=[AI05-0209-1]}
   @ChgAdded{Version=[2],Text=[it is declared immediately within the same
   declaration list as the type@Chg{Version=[3],New=[ or any partial
-  view thereof],Old=[]}; and]}
+  or incomplete view thereof],Old=[]}; and]}
 
   @ChgRef{Version=[2],Kind=[Added]}
   @ChgAdded{Version=[2],Text=[both of its formal parameters are of a
@@ -4246,12 +4263,12 @@ operators when they had defined user-defined versions.],Old=[]}
 @end{Incompatible95}
 
 @begin{DiffWord2005}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0020-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0020-1],ARef=[AI05-0209-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Wording was added to clarify
   that @i{universal_fixed} "*" and "/" does not apply if an appropriate
-  operator is declared for a partial view of the designated type.
-  Otherwise, adding a partial view could made some "*" and "/" operators
-  ambiguous.]}
+  operator is declared for a partial (or incomplete) view of the designated type.
+  Otherwise, adding a partial (or incomplete) view could made some
+  "*" and "/" operators ambiguous.]}
 @end{DiffWord2005}
 
 
@@ -4389,16 +4406,384 @@ a negative value is provided for the exponent.
 @end{DiffWord2005}
 
 
+@LabeledAddedSubclause{Version=[3],Name=[If Expressions]}
+
+@begin{Intro}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[A @nt{conditional_expression} selects for evaluation
+at most one of the enclosed @SynI<dependent_>@nt{expression}s, depending on some
+form of condition. One kind of @nt{conditional_expression} is the
+@nt{if_expression}, which selects for evaluation a
+@SynI<dependent_>@nt{expression} depending on the value of one or more
+corresponding @nt{condition}s. Another kind of @nt{conditional_expression} is
+defined in @RefSecNum{Case Expressions}.]}
+@end{Intro}
+
+@begin{MetaRules}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+  @ChgAdded{Version=[3],Text=[An @nt{if_expression} is one case of the more
+  general @nt{conditional_expression}. (A @nt{case_expression} is the
+  other @em @RefSecNum{Case Expressions}). Whenever possible, we have written
+  the rules in terms of @nt{conditional_expression}s to avoid duplication.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+  @ChgAdded{Version=[3],Text=[The rules for @nt{conditional_expression}s
+  have been designed as much as possible to work similarly to a parenthesized
+  expression. The intent is that as much as possible, wherever a parenthesized
+  expression would be allowed, a @nt{conditional_expression} would be allowed,
+  and it should work the same way.]}
+@end{MetaRules}
+
+@begin{Syntax}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<conditional_expression>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<@Syn2{if_expression} | @Syn2{case_expression}>,Old=<>}"}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<if_expression>,Old=<>}>,
+rhs="
+   @Chg{Version=[3],New=<@key[if] @Syn2{condition} @key[then] @SynI{dependent_}@Syn2{expression}
+   {@key[elsif] @Syn2{condition} @key[then] @SynI{dependent_}@Syn2{expression}}
+   [@key[else] @SynI{dependent_}@Syn2{expression}]>,Old=<>}"}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<condition>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<@SynI{boolean_}@Syn2{expression}>,Old=<>}"}
+@Comment{Moved from "If Statements"}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+@ChgAdded{Version=[3],Text=[Wherever the Syntax Rules allow an expression, a
+@nt{conditional_expression} may be used in place of the expression, so long as
+it is immediately surrounded by parentheses.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+  @ChgAdded{Version=[3],Text=[The syntactic category @nt{conditional_expression}
+  appears only as a primary that is parenthesized. The above rule allows it to
+  additionally be used in other contexts where it would be directly surrounded
+  by parentheses.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The grammar mades the following directly legal:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[A := (@key[if] X @key[then] Y @key[else] Z); --@examcom{ parentheses required}
+A := B + (@key[if] X @key[then] Y @key[else] Z) + C; --@examcom{ parentheses required}]}
+@end{Example}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The following procedure calls are
+  syntactically legal; the first uses the above rule to eliminate the redundant
+  parentheses found in the second:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[P(@key[if] X @key[then] Y @key[else] Z);
+P((@key[if] X @key[then] Y @key[else] Z)); --@Examcom{ redundant parentheses}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[P((@key[if] X @key[then] Y @key[else] Z), Some_Other_Param);
+P(Some_Other_Param, (@key[if] X @key[then] Y @key[else] Z));
+P(Formal => (@key[if] X @key[then] Y @key[else] Z));]}
+@end{Example}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[whereas the following are illegal:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[P(@key[if] X @key[then] Y @key[else] Z, Some_Other_Param);
+P(Some_Other_Param, @key[if] X @key[then] Y @key[else] Z);
+P(Formal => @key[if] X @key[then] Y @key[else] Z);]}
+@end{Example}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[because in these latter cases, the
+  conditional_expression is not immediately surrounded by parentheses (which
+  means on both sides!).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The English-language rule applies in all places
+  that could surround an expression with parentheses, including pragma
+  arguments, type conversion and qualified expression operands, and array index
+  expressions.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This English-language rule could have been
+  implemented instead by adding a non-terminal
+  @ntf{expression_within_parentheses}, which would consist of @nt{expression}s
+  and @nt{conditional_expression}s. Then, that could be used in all of the
+  syntax which could consist of parens directly around an @nt{expression}. We
+  did not do that because of the large amount of change required. A complete
+  grammar is given in @AILink{AI=[AI05-0147-1],Text=[AI05-0147-1]}.]}
+@end{Discussion}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+  @ChgAdded{Version=[3],Text=[Implementers are cautioned to consider error
+  detection when implementing the syntax for conditional_expressions. An
+  @nt{if_expression} and a @nt{if_statement} are very similar syntactically, (as
+  are a @nt{case_expression} and a @nt{case_statement}) and simple mistakes can
+  appear to change one into the other, potentially causing errors to be moved
+  far away from their actual location.]}
+@end{ImplNote}
+
+@end{Syntax}
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=[expected type], Sec=(condition)}
+A @nt{condition} is expected to be of any boolean type.]}
+@Comment{Moved from "If Statements"}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[If a @nt{conditional_expression} is
+expected to be of a type @i<T>, then each @SynI{dependent_}@nt{expression} of
+the @nt{conditional_expression} is expected to be of type @i<T>. Similarly, if a
+@nt{conditional_expression} is expected to be of some class of types, then each
+@SynI{dependent_}@nt{expression} of the @nt{conditional_expression} is subject
+to the same expectation. If a @nt{conditional_expression} shall resolve to be of
+a type @i<T>, then each @SynI{dependent_}@nt{expression} shall resolve to be of
+type @i<T>.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The possible types of a
+@nt{conditional_expression} are further determined as follows:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If the @nt{conditional_expression} is the operand
+  of a type conversion, the type of the @nt{conditional_expression} is the
+  target type of the conversion; otherwise]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[This rule distributes an enclosing
+  type conversion to the @SynI{dependent_}@nt{expression}s. This means that]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[T(@key[if] C @key[then] A @key[else] B)]}
+@end{Example}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[has the same semantics as]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[(@key[if] C @key[then] T(A) @key[else] T(B))]}
+@end{Example}
+@end{Reason}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If all of the @SynI{dependent_}@nt{expression}s
+  are of the same type, the type of the @nt{conditional_expression} is that
+  type; otherwise]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If a @SynI{dependent_}@nt{expression} is of an
+  elementary type, the type of the @nt{conditional_expression} shall be covered
+  by that type; otherwise]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This rule supports the use of
+  numeric literals and universal expressions within a
+  @nt{conditional_expression}.]}
+@end{Reason}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If the @nt{conditional_expression} is expected to
+  be of type @i<T> or shall resolve to type @i<T>, then the
+  @nt{conditional_expression} is of type @i<T>.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If the type of the @nt{conditional_expression}
+  cannot be determined by one of these rules, the Name Resolution has failed for
+  that expression, even if the @SynI{dependent_}@nt{expression} would
+  resolve individually.]}
+@end{Ramification}
+@end{Itemize}
+
+@end{Resolution}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[All of the @SynI{dependent_}@nt{expression}s
+shall be convertible to the type of the @nt{conditional_expression}.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[If the expected type of a
+@nt{conditional_expression} is a specific tagged type, all of the
+@SynI{dependent_}@nt{expression}s of the @nt{conditional_expression} shall be
+dynamically tagged, or none shall be dynamically tagged; the
+@nt{conditional_expression} is dynamically tagged if all of the
+@SynI{dependent_}@nt{expression}s are dynamically tagged, is tag-indeterminate
+if all of the @SynI{dependent_}@nt{expression}s are tag-indeterminate, and is
+statically tagged otherwise.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+@ChgAdded{Version=[3],Text=[If there is no @key[else]
+@SynI{dependent_}@nt{expression}, all of the @SynI{dependent_}@nt{expression}s
+of the @nt{if_expression} shall be of a boolean type.]}
+@end{Legality}
+
+
+@begin{Runtime}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+@ChgAdded{Version=[3],Text=[For the execution of an @nt{if_expression}, the
+@nt{condition} specified after @key[if], and any @nt{condition}s specified
+after @key[elsif], are evaluated in succession (treating a final @key[else]
+as @key[elsif] True @key[then]), until one evaluates to True or
+all @nt{condition}s are evaluated and yield False. If a @nt{condition}
+evaluates to True, the associated @synI{dependent_}@nt{expression} is evaluated,
+converted to the type of the @nt{if_expression}, and resulting value is the
+value of the @nt{if_expression}. Otherwise, the value of the @nt{if_expression}
+is True.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[@key[Else] is required unless the
+  @nt{if_expression} has a boolean type, so the last sentence can only apply to
+  @nt{if_expression}s with a boolean type.]}
+@end{Ramification}
+@end{Runtime}
+
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}If expressions
+  are new.]}
+@end{Extend2005}
+
+
+
+@LabeledAddedSubclause{Version=[3],Name=[Case Expressions]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[One kind of @nt{conditional_expression} is the
+@nt{case_expression}, which selects for evaluation one of a number of
+alternative @nt{expression}s; the chosen alternative is defined by the value of
+a @SynI{selector_}@nt{expression}.]}
+
+@begin{Syntax}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<case_expression>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<
+    @key[case] @SynI{selector_}@Syn2{expression} @key[is]
+    @Syn2[case_expression_alternative] {,
+    @Syn2[case_expression_alternative]}>,Old=<>}"}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<case_expression_alternative>,Old=<>}>,
+rhs="@Chg{Version=[3],New=[
+    @key[when] @Syn2{discrete_choice_list} =>
+        @SynI{dependent_}@Syn2{expression}],Old=<>}"}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The rules given in @RefSecNum{If Expressions}
+allowing omission of redundant parentheses also apply to @nt{case_expression}s,
+as they are a kind of @nt{conditional_expression}.]}
+@end{Ramification}
+@end{Syntax}
+
+
+@begin{Resolution}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[@ResolutionTitle for the type of the
+@nt{case_expression} as a whole and the types of the
+@SynI<dependent_>@nt{expression}s are given in @RefSecNum{If Expressions}.]]}
+
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[A @nt{case_expression} is a special case of a
+  @nt{conditional_expression}, so the rules defined for
+  @nt{conditional_expression}s also apply to @nt{case_expression}s.]}
+@end{TheProof}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[The expected type for the
+@SynI<selector_>@nt{expression} and the @nt{discrete_choice}s are as for case
+statements (see @RefSecNum{Case Statements}).]}
+
+@end{Resolution}
+
+@begin{Legality}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[The @nt{expression}s and @nt{discrete_range}s given
+as @nt{discrete_choice}s of a @nt{case_expression} shall be static. @Redundant[A
+@nt{discrete_choice} @key[others], if present, shall appear alone and in the
+last @nt{discrete_choice_list}.]]}
+
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The last sentence is formally given in
+  @RefSecNum{Variant Parts and Discrete Choices}.]}
+@end{TheProof}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[The possible values of the
+@SynI<selector_>@nt{expression} shall be covered as for case statements (see
+@RefSecNum{Case Statements}).]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[As for case statements, two distinct
+@nt{discrete_choice}s of a @nt{case_expression} shall not cover the same value.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[In addition, @LegalityTitle that apply to
+all @nt{conditional_expression}s (see @RefSecNum{If Expressions}) apply to
+@nt{case_expression}s.]]}
+
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[A @nt{case_expression} is a special case of a
+  @nt{conditional_expression}.]}
+@end{TheProof}
+@end{Legality}
+
+@begin{Runtime}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[For the execution of a @nt{case_expression}, the
+@SynI<selector_>@nt{expression} is first evaluated.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[If the value of the @SynI<selector_>@nt{expression}
+is covered by the @nt{discrete_choice_list} of some
+@nt{case_expression_alternative}, then the @SynI<dependent_>@nt{expression} of
+the @nt{case_expression_alternative} is evaluated, converted to the type of the
+@nt{case_expression}, and the resulting value is the value of the
+@nt{case_expression}.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[@IndexCheck{Overflow_Check}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+Otherwise (the value is not covered by any
+@nt{discrete_choice_list}, perhaps due to being outside the base range),
+Constraint_Error is raised.]}
+@end{Runtime}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Case expressions
+  are new.]}
+@end{Extend2005}
+
+
+
 @LabeledAddedSubclause{Version=[3],Name=[Quantified Expressions]}
 
 @begin{Syntax}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<quantified_expression>,Old=<>}>,
-rhs="@Chg{Version=[3],New=<@key[for] @Syn2{quantifier} @Syn2{loop_parameter_specification} | @Syn2{predicate}>,Old=<>}"}
+rhs="@Chg{Version=[3],New=<@key[for] @Syn2{quantifier} @Syn2{loop_parameter_specification} | @Syn2{predicate}
+  | @key[for] @Syn2{quantifier} @Syn2{iterator_specification} | @Syn2{predicate}>,Old=<>}"}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<quantifier>,Old=<>}>,
-rhs="@Chg{Version=[3],New=<@key[all] | Some>,Old=<>}"}
+rhs="@Chg{Version=[3],New=<@key[all] | @key[some]>,Old=<>}"}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<predicate>,Old=<>}>,
@@ -4407,7 +4792,8 @@ rhs="@Chg{Version=[3],New=<@SynI<boolean_>@Syn2{expression}>,Old=<>}"}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The vertical line ('|') between the
-  @nt{loop_parameter_specification} and the @nt{predicate} is an explicit
+  @nt{loop_parameter_specification} or @nt{iterator_specification}
+  and the @nt{predicate} is an explicit
   vertical line; it does not separate alternative items as it does elsewhere in
   the syntax. See @RefSecNum{Method of Description and Syntax Notation}.]}
 @end{Ramification}
@@ -4422,9 +4808,9 @@ long as it is immediately surrounded by parentheses.]}
   @ChgAdded{Version=[3],Text=[The syntactic category @nt{quantified_expression}
   appears only as a @nt{primary} that is parenthesized. The above rule allows it to additionally
   be used in other contexts where it would be directly surrounded by
-  parentheses. This is the same rule that is used for @ntf{conditional_expressions};
-  see 4.5.7 for a detailed discussion of the meaning and effects this rule.]}
-@ChgNote{The above should be changed when the real 4.5.7 is inserted}
+  parentheses. This is the same rule that is used for @nt{conditional_expression}s;
+  see @RefSecNum{If Expressions} for a detailed discussion of the
+  meaning and effects of this rule.]}
 @end{Discussion}
 @end{Syntax}
 
@@ -4463,7 +4849,7 @@ the loop parameter. These values are examined in the order specified by the
 @end{Ramification}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[If the @nt{quantifier} is @exam[Some], the
+  @ChgAdded{Version=[3],Text=[If the @nt{quantifier} is @key[some], the
   expression is True if the evaluation of the @nt{predicate} yields True for
   some value of the loop parameter. It is False otherwise. Evaluation of
   the @nt{quantified_expression} stops when all values of the domain have been
@@ -4476,11 +4862,6 @@ the loop parameter. These values are examined in the order specified by the
 @end{Ramification}
 @end{Itemize}
 @end{Runtime}
-
-@begin{Notes}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Some is not a reserved word.]}
-@end{Notes}
 
 @begin{Examples}
 
@@ -4499,7 +4880,7 @@ is composite (as opposed to prime) can be written:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[pragma] Assert (@key[for] some X @key[in] 2 .. N / 2 | N @key[mod] X = 0);]}
+@ChgAdded{Version=[3],Text=[@key[pragma] Assert (@key[for some] X @key[in] 2 .. N / 2 | N @key[mod] X = 0);]}
 @end{Example}
 
 @end{Examples}

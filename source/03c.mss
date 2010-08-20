@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/06/11 07:27:55 $}
+@Comment{$Date: 2010/08/13 05:23:13 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.99 $}
+@Comment{$Revision: 1.100 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -324,6 +324,9 @@ of the generic body result in distinct tags.@PDefn{Unspecified}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00405-01]}
 @ChgAdded{Version=[2],Text=[    @key[function] @AdaSubDefn{Interface_Ancestor_Tags} (T : Tag) @key[return] Tag_Array;]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0173-1]}
+@ChgAdded{Version=[3],Text=[    @key[function] @AdaSubDefn{Is_Abstract} (T : Tag) @key[return] Boolean;]}
+
     @AdaExcDefn{Tag_Error} : @key[exception];
 
 @key[private]
@@ -500,6 +503,10 @@ result of Interface_Ancestor_Tags. That's because where an interface appears
 in the derivation tree has no effect on the semantics of the type; the only
 interesting property is whether the type has an interface as an ancestor.]}
 @end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0173-1]}
+@ChgAdded{Version=[3],Text=[The function Is_Abstract returns True if the type
+whose tag is T is abstract, and False otherwise.]}
 
 For @PrefixType{every subtype S of a tagged type @i(T)
 (specific or class-wide)}, the following attributes are
@@ -945,6 +952,17 @@ Tagged types are a new concept.
   type extension declared in a generic body with multiple instances in the
   same scope).]}
 @end{Inconsistent2005}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0173-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
+  Function Is_Abstract is newly added to Ada.Tags.
+  If Ada.Tags is referenced in a @nt{use_clause}, and an entity @i<E> with the
+  @nt{defining_identifier} Is_Abstract is defined in a
+  package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
+  longer be use-visible, resulting in errors. This should be rare and is easily
+  fixed if it does occur.]}
+@end{Incompatible2005}
 
 
 
@@ -2153,7 +2171,7 @@ function with a controlling result, then:
 @ChgAdded{Version=[3],Text=[If this did not depend on the view,
 this would be legal. But in that case, the fact that Op is overridden
 in the private part would be visible; package R would have to be
-illegal if no overridding was in the private part.]}
+illegal if no overriding was in the private part.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Note that this means that whether an inherited
@@ -4199,7 +4217,7 @@ not at all) for different designated subtypes.
   @ChgAdded{Version=[3],Text=[Incomplete types now can be used
   in subprogram declarations. The type has to be complete before any calls
   or the body is declared. This reduces the places where access types are
-  required for type imported from limited views of packages.]}
+  required for types imported from limited views of packages.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0162-1]}
   @ChgAdded{Version=[3],Text=[Incomplete types now can be

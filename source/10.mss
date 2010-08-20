@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:33 $}
+@Comment{$Date: 2010/08/13 05:23:14 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.87 $}
+@Comment{$Revision: 1.88 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1228,12 +1228,14 @@ so @lquotes@;@key[with] A.B.C.D;@rquotes@; is illegal in the same places as
 @end{Honest}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0077-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0077-1],ARef=[AI05-0122-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[A @nt<name> denoting a
-@Chg{Version=[3],New=[@nt{library_item}],Old=[library item]}
-that is visible only due to being mentioned in
+@Chg{Version=[3],New=[@nt{library_item} (or the corresponding declaration
+for a child of a generic within an instance @em see
+@RefSecNum{Compilation Units - Library Units}), if it],Old=[library item that]}
+is visible only due to being mentioned in
 one or more @nt<with_clause>s that include the reserved word
-@key<private> shall appear only within:]}
+@key<private>@Chg{Version=[3],New=[,],Old=[]} shall appear only within:]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[a private part;]}
@@ -1606,6 +1608,11 @@ definition in @RefSecNum{Use Clauses}.
   is @ldquote@;within the scope of@rdquote something, as @nt{context_clause}s
   are never included in anything's scope. The intended meaning is unchanged,
   however.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0122-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Fixed wording so the
+  rules for private with clauses also apply to "sprouted" generic child
+  units.]}
 @end{DiffWord2005}
 
 
@@ -3650,6 +3657,7 @@ model.]}
 
 @begin{ImplPerm}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0219-1]}
 If a library unit is declared pure, then the implementation
 is permitted to omit a call on a library-level
 subprogram of the library unit if the
@@ -3659,8 +3667,9 @@ Old=[such ]}a call@Chg{Version=[2],New=[ on such a subprogram],Old=[]} and
 simply reuse the results produced by an earlier call on
 the same subprogram, provided that none of the
 parameters @Chg{Version=[2],New=[nor any object accessible via access
-values from the parameters ],Old=[]}are of
-a limited type, and the addresses and values of all by-reference
+values from the parameters ],Old=[]}@Chg{Version=[3],New=[have any part that
+is of a type whose full type is an immutably],Old=[are of
+a]} limited type, and the addresses and values of all by-reference
 actual parameters, @Chg{Version=[2],New=[],Old=[and ]}the values of all
 by-copy-in actual parameters, @Chg{Version=[2],New=[and the values of all
 objects accessible via access values from the parameters, ],Old=[]}are
@@ -3879,7 +3888,7 @@ required to appear last.
   unintended incompatibility with Ada 95 in the new preelaboration wording
   @em explicit initialization of objects of types that don't have
   preelaborable initialization was not allowed. Amendment 2 switches
-  back to the Ada 95 rule in these chases. This is unlikely to
+  back to the Ada 95 rule in these cases. This is unlikely to
   occur in practice, as it is unlikely that a compiler would have
   implemented the more restrictive rule (it would fail many ACATS tests
   if it did).]}
@@ -3922,5 +3931,12 @@ required to appear last.
   formal extensions are assumed to not have PI; all composite types
   can have pragma PI (so that the possibility of hidden Initialize routines
   can be handled).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0219-1]}
+  @ChgAdded{Version=[3],Text=[@B<Correction:> Clarified that the implementation
+  permission to omit pure subprogram calls does not apply if any part of the
+  parameters or any designated object has a part that is immutably limited.
+  The old wording just said "limited type", which can change via visibility
+  and thus isn't appropriate for dynamic semantics permissions.]}
 @end{DiffWord2005}
 

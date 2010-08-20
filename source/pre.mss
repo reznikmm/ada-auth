@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2010/06/11 07:27:55 $}
+@Comment{$Date: 2010/08/13 05:23:14 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.38 $}
+@comment{$Revision: 1.39 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -42,33 +42,44 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @Chg{Version=[2],New=(@\@\Complex_Text_IO @em @RefSecNum{Complex Input-Output}
 @\@\Containers @em @RefSecNum{The Package Containers}
 @Chg{Version=[3],New=(@\@\@\Bounded_Doubly_Linked_Lists
-@\@\@\@\@\@\@em @RefSecNum{The Package Containers.Bounded_Doubly_Linked_Lists}
-@\@\@\Bounded_Hashed_Maps @em @RefSecNum{The Package Containers.Bounded_Hashed_Maps}
-@\@\@\Bounded_Hashed_Sets @em @RefSecNum{The Package Containers.Bounded_Hashed_Sets}
-@\@\@\Bounded_Multiway_Trees @em @RefSecNum{The Package Containers.Bounded_Multiway_Trees}
-@\@\@\Bounded_Ordered_Maps @em @RefSecNum{The Package Containers.Bounded_Ordered_Maps}
-@\@\@\Bounded_Ordered_Sets @em @RefSecNum{The Package Containers.Bounded_Ordered_Sets}
-@\@\@\Bounded_Vectors @em @RefSecNum{The Package Containers.Bounded_Vectors}
-), Old=()}@\@\@\Doubly_Linked_Lists @em @RefSecNum{The Package Containers.Doubly_Linked_Lists}
+@\@\@\@\@\@\@em @RefSecNum{The Generic Package Containers.Bounded_Doubly_Linked_Lists}
+@\@\@\Bounded_Hashed_Maps @em @RefSecNum{The Generic Package Containers.Bounded_Hashed_Maps}
+@\@\@\Bounded_Hashed_Sets @em @RefSecNum{The Generic Package Containers.Bounded_Hashed_Sets}
+@\@\@\Bounded_Multiway_Trees @em @RefSecNum{The Generic Package Containers.Bounded_Multiway_Trees}
+@\@\@\Bounded_Ordered_Maps @em @RefSecNum{The Generic Package Containers.Bounded_Ordered_Maps}
+@\@\@\Bounded_Ordered_Sets @em @RefSecNum{The Generic Package Containers.Bounded_Ordered_Sets}
+@\@\@\Bounded_Priority_Queues @em @RefSecNum{The Generic Package Containers.Bounded_Priority_Queues}
+@\@\@\Bounded_Synchronized_Queues @em @RefSecNum{The Generic Package Containers.Bounded_Synchronized_Queues}
+@\@\@\Bounded_Vectors @em @RefSecNum{The Generic Package Containers.Bounded_Vectors}
+), Old=()}@\@\@\Doubly_Linked_Lists @em @RefSecNum{The Generic Package Containers.Doubly_Linked_Lists}
 @\@\@\Generic_Array_Sort @em @RefSecNum{Array Sorting}
 @\@\@\Generic_Constrained_Array_Sort
 @\@\@\@\@\@\@em @RefSecNum{Array Sorting}
 @Chg{Version=[3],New=(@\@\@\Generic_Sort @em @RefSecNum{Array Sorting}
-), Old=()}@\@\@\Hashed_Maps @em @RefSecNum{The Package Containers.Hashed_Maps}
-@\@\@\Hashed_Sets @em @RefSecNum{The Package Containers.Hashed_Sets}
+), Old=()}@\@\@\Hashed_Maps @em @RefSecNum{The Generic Package Containers.Hashed_Maps}
+@\@\@\Hashed_Sets @em @RefSecNum{The Generic Package Containers.Hashed_Sets}
 @\@\@\Indefinite_Doubly_Linked_Lists
-@\@\@\@\@\@\@em @RefSecNum{The Package Containers.Indefinite_Doubly_Linked_Lists}
-@\@\@\Indefinite_Hashed_Maps @em @RefSecNum{The Package Containers.Indefinite_Hashed_Maps}
-@\@\@\Indefinite_Hashed_Sets @em @RefSecNum{The Package Containers.Indefinite_Hashed_Sets}
-@Chg{Version=[3],New=(@\@\@\Indefinite_Holders @em @RefSecNum{The Package Containers.Indefinite_Holders}
-@\@\@\Indefinite_Multiway_Trees @em @RefSecNum{The Package Containers.Indefinite_Multiway_Trees}
-), Old=()}@\@\@\Indefinite_Ordered_Maps @em @RefSecNum{The Package Containers.Indefinite_Ordered_Maps}
-@\@\@\Indefinite_Ordered_Sets @em @RefSecNum{The Package Containers.Indefinite_Ordered_Sets}
-@\@\@\Indefinite_Vectors @em @RefSecNum{The Package Containers.Indefinite_Vectors}
-@Chg{Version=[3],New=(@\@\@\Multiway_Trees @em @RefSecNum{The Package Containers.Multiway_Trees}
-), Old=()}@\@\@\Ordered_Maps @em @RefSecNum{The Package Containers.Ordered_Maps}
-@\@\@\Ordered_Sets @em @RefSecNum{The Package Containers.Ordered_Sets}
-@\@\@\Vectors @em @RefSecNum{The Package Containers.Vectors}
+@\@\@\@\@\@\@em @RefSecNum{The Generic Package Containers.Indefinite_Doubly_Linked_Lists}
+@\@\@\Indefinite_Hashed_Maps @em @RefSecNum{The Generic Package Containers.Indefinite_Hashed_Maps}
+@\@\@\Indefinite_Hashed_Sets @em @RefSecNum{The Generic Package Containers.Indefinite_Hashed_Sets}
+@Chg{Version=[3],New=(@\@\@\Indefinite_Holders @em @RefSecNum{The Generic Package Containers.Indefinite_Holders}
+@\@\@\Indefinite_Multiway_Trees @em @RefSecNum{The Generic Package Containers.Indefinite_Multiway_Trees}
+), Old=()}@\@\@\Indefinite_Ordered_Maps @em @RefSecNum{The Generic Package Containers.Indefinite_Ordered_Maps}
+@\@\@\Indefinite_Ordered_Sets @em @RefSecNum{The Generic Package Containers.Indefinite_Ordered_Sets}
+@Chg{Version=[3],New=(@\@\@\Indefinite_Synchronized_Queue_Interfaces
+@\@\@\@\@\@\@em @RefSecNum{Indefinite Synchronized Queues}
+@\@\@\Indefinite_Unbounded_Priority_Queues
+@\@\@\@\@\@\@em @RefSecNum{Indefinite Synchronized Queues}
+@\@\@\Indefinite_Unbounded_Synchronized_Queues
+@\@\@\@\@\@\@em @RefSecNum{Indefinite Synchronized Queues}
+), Old=()}@\@\@\Indefinite_Vectors @em @RefSecNum{The Generic Package Containers.Indefinite_Vectors}
+@Chg{Version=[3],New=(@\@\@\Multiway_Trees @em @RefSecNum{The Generic Package Containers.Multiway_Trees}
+), Old=()}@\@\@\Ordered_Maps @em @RefSecNum{The Generic Package Containers.Ordered_Maps}
+@\@\@\Ordered_Sets @em @RefSecNum{The Generic Package Containers.Ordered_Sets}
+@Chg{Version=[3],New=(@\@\@\Synchronized_Queue_Interfaces @em @RefSecNum{The Generic Package Containers.Synchronized_Queue_Interfaces}
+@\@\@\Unbounded_Priority_Queues @em @RefSecNum{The Generic Package Containers.Unbounded_Priority_Queues}
+@\@\@\Unbounded_Synchronized_Queues @em @RefSecNum{The Generic Package Containers.Unbounded_Synchronized_Queues}
+), Old=()}@\@\@\Vectors @em @RefSecNum{The Generic Package Containers.Vectors}
 ), Old=()}@\@\Decimal @em @RefSecNum{The Package Decimal}
 @\@\Direct_IO @em @RefSecNum{The Generic Package Direct_IO}
 @Chg{Version=[2],New=(@\@\Directories @em @RefSecNum{The Package Directories}
@@ -86,7 +97,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 ], Old=()}@\@\Exceptions @em @RefSecNum{The Package Exceptions}
 @Chg{Version=[2],New=(@\@\Execution_Time @em @RefSecNum{Execution Time}
 @\@\@\Group_Budgets @em @RefSecNum{Group Execution Time Budgets}
-@\@\@\Timers @em @RefSecNum{Execution Time Timers}
+@Chg{Version=[3],New=(@\@\@\Interrupts @em @RefSecNum{Execution Time of Interrupt Handlers}
+), Old=()}@\@\@\Timers @em @RefSecNum{Execution Time Timers}
 ), Old=()}@\@\Finalization @em @RefSecNum{Assignment and Finalization}
 @Chg{New=(@\@\Float_Text_IO @em @RefSecNum{Input-Output for Real Types}
 @\@\Float_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
@@ -97,7 +109,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 ), Old=()}), Old=()}@\@\Interrupts @em @RefSecNum{The Package Interrupts}
 @\@\@\Names @em @RefSecNum{The Package Interrupts}
 @\@\IO_Exceptions @em @RefSecNum{Exceptions in Input-Output}
-@\@\Numerics @em @RefSecNum{The Numerics Packages}
+@Chg{Version=[3],New=(@\@\Locales @em @RefSecNum{The Package Locales}
+), Old=()}@\@\Numerics @em @RefSecNum{The Numerics Packages}
 @Chg{Version=[2],New=(@\@\@\Complex_Arrays @em @RefSecNum{Complex Vectors and Matrices}
 ), Old=()}@\@\@\Complex_Elementary_Functions @em @RefSecNum{Complex Elementary Functions}
 @\@\@\Complex_Types @em @RefSecNum{Complex Types}
@@ -144,9 +157,10 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\@\Less_Case_Insensitive @em @RefSecNum{String Comparison}
 @\@\@\UTF_Encoding @em @RefSecNum{String Encoding}
 @\@\@\@\Conversions @em @RefSecNum{String Encoding}
-@\@\@\@\Wide_Encoding @em @RefSecNum{String Encoding}
-@\@\@\@\Wide_Wide_Encoding @em @RefSecNum{String Encoding}
-), Old=()}), Old=()}), Old=()}@\@\@\Wide_Bounded @em @RefSecNum{Wide_String Handling}
+@\@\@\@\Strings @em @RefSecNum{String Encoding}
+@\@\@\@\Wide_Strings @em @RefSecNum{String Encoding}
+@\@\@\@\Wide_Wide_Strings @em @RefSecNum{String Encoding}
+), Old=()}), Old=()}@\@\@\Wide_Bounded @em @RefSecNum{Wide_String Handling}
 @Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
 ), Old=()}@\@\@\Wide_Fixed @em @RefSecNum{Wide_String Handling}
 @Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
@@ -164,7 +178,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\@\Wide_Wide_Constants @em @RefSecNum{Wide_Wide_String Handling}
 @\@\@\Wide_Wide_Unbounded @em @RefSecNum{Wide_Wide_String Handling}
 @\@\@\@\Wide_Wide_Hash @em @RefSecNum{Wide_Wide_String Handling}
-), Old=()}@\@\Synchronous_Task_Control @em @RefSecNum{Synchronous Task Control}
+@Chg{Version=[3],New=[@\@\Synchronous_Barriers @em @RefSecNum{Synchronous Barriers}
+], Old=[]}), Old=()}@\@\Synchronous_Task_Control @em @RefSecNum{Synchronous Task Control}
 @Chg{Version=[3],New=[@\@\@\EDF @em @RefSecNum{Synchronous Task Control}
 ], Old=[]}@\@\Tags @em @RefSecNum{Tagged Types and Type Extensions}
 @Chg{Version=[2],New=(@\@\@\Generic_Dispatching_Constructor @em @RefSecNum{Tagged Types and Type Extensions}
@@ -183,14 +198,16 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 ), Old=()}@\@\Unchecked_Conversion @em @RefSecNum{Unchecked Type Conversions}
 @\@\Unchecked_Deallocation @em @RefSecNum{Unchecked Storage Deallocation}
 @Chg{Version=[2],New=(@\@\Wide_Characters @em @RefSecNum{The Packages Characters, Wide_Characters, and Wide_Wide_Characters}
-),Old=()}@\@\Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
+@Chg{Version=[3],New=(@\@\@\Handling @em @RefSecNum{The Package Wide_Characters.Handling}
+),Old=()}),Old=()}@\@\Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @\@\@\Complex_IO @em @RefSecNum{The Package Wide_Text_IO.Complex_IO}
 @\@\@\Editing @em @RefSecNum{The Package Wide_Text_IO.Editing}
 @\@\@\Text_Streams @em @RefSecNum{The Package Wide_Text_IO.Text_Streams}
 @Chg{Version=[2],New=(@\@\@\Wide_Bounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @\@\@\Wide_Unbounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @\@\Wide_Wide_Characters @em @RefSecNum{The Packages Characters, Wide_Characters, and Wide_Wide_Characters}
-@\@\Wide_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
+@Chg{Version=[3],New=(@\@\@\Handling @em @RefSecNum{The Package Wide_Wide_Characters.Handling}
+),Old=()}@\@\Wide_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @\@\@\Complex_IO @em @RefSecNum{The Package Wide_Wide_Text_IO.Complex_IO}
 @\@\@\Editing @em @RefSecNum{The Package Wide_Wide_Text_IO.Editing}
 @\@\@\Text_Streams @em @RefSecNum{The Package Wide_Wide_Text_IO.Text_Streams}
@@ -207,7 +224,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @Noparanum@shrink<@\System @em @RefSecNum{The Package System}
 @\@\Address_To_Access_Conversions @em @RefSecNum{The Package System.Address_To_Access_Conversions}
 @\@\Machine_Code @em @RefSecNum{Machine Code Insertions}
-@\@\RPC @em @RefSecNum{Partition Communication Subsystem}
+@Chg{Version=[3],New=(@\@\Multiprocessors @em @RefSecNum{Multiprocessor Implementation}
+),Old=()}@\@\RPC @em @RefSecNum{Partition Communication Subsystem}
 @\@\Storage_Elements @em @RefSecNum{The Package System.Storage_Elements}
 @\@\Storage_Pools @em @RefSecNum{Storage Management}>]
 @end{TwoCol}

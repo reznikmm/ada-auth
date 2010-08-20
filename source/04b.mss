@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:33 $}
+@Comment{$Date: 2010/08/13 05:23:13 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1875,7 +1875,7 @@ has been moved to @RefSec{Storage Management}.
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0041-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the rules for
-  when an designated object is constrained by its initial value so that
+  when a designated object is constrained by its initial value so that
   types derived from a partial view are handled properly.]}
 @end{DiffWord2005}
 
@@ -2004,6 +2004,11 @@ where we allow @nt{qualified_expression}s.
 
 a short-circuit control form
 both of whose @nt{relation}s are static expressions;
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[a @nt{conditional_expression} all of whose
+@nt{condition}s, @SynI{selector_}@nt{expression}s, and
+@SynI{dependent_}@nt{expression}s are static expressions;]}
 
 a static expression enclosed in parentheses.
 @end{Itemize}
@@ -2195,10 +2200,62 @@ or if it is a static string constant.
 @end{Intro}
 
 @begin{Legality}
-@Leading@;A static expression is evaluated at compile time except when it is part
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[An expression is @i<statically
+unevaluated> if it is part of:@Defn{statically unevaluated}]}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+@ChgAdded{Version=[3],Text=[the right operand of a static short-circuit control
+form whose value is determined by its left operand; or]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[a @SynI{dependent_}@nt{expression} of an
+@nt{if_expression} whose
+associated @nt{condition} is static and equals False; or]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[a @nt{condition} or @SynI{dependent_}@nt{expression}
+of an @nt{if_expression} where the @nt{condition} corresponding to at least one
+preceding @SynI{dependent_}@nt{expression} of the @nt{if_expression} is static
+and equals True; or]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[We need this bullet so that only a
+  single @SynI{dependent_}@nt{expression} is evaluated in a static
+  @nt{if_expression} if there is more than one @nt{condition} that evaluates to
+  True. The part about @nt{condition}s makes]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[(@key[if] N = 0 @key[then] Min @key[elsif] 10_000/N > Min @key[then] 10_000/N @key[else] Min)]}
+@end{Example}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[legal if N and Min are static and N = 0.]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[a @SynI{dependent_}@nt{expression} of a
+@nt{case_expression} whose @nt{expression} is static and not covered by the
+corresponding @nt{discrete_choice_list}.]}
+@end{Itemize}
+
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[We need the "of the @nt{if_expression}" here so
+there is no confusion for nested @nt{if_expression}s; this rule only applies to
+the @nt{condition}s and @Syni{dependent_}@nt{expression}s of a single
+@nt{if_expression}. Similar
+reasoning applies to the "of a @nt{case_expression}" of the last bullet.]}
+@end{Discussion}
+
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0147-1]}
+@Leading@;A static expression is evaluated at compile time except when it is
+@Chg{Version=[3],New=[statically unevaluated],Old=[part
 of the right operand of a static short-circuit control form whose value
-is determined by its left operand.
-This evaluation is performed exactly,
+is determined by its left operand]}.
+@Chg{Version=[3],New=[The compile-time],Old=[This]} evaluation
+@Chg{Version=[3],New=[of a static expression ],Old=[]}is performed exactly,
 without performing Overflow_Checks.
 For a static expression that is evaluated:
 @begin{Itemize}
@@ -2548,6 +2605,14 @@ raising.
   @ChgAdded{Version=[2],Text=[We clarify that the first subtype of a scalar
   formal type has a nonstatic, non-null constraint.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
+  @ChgAdded{Version=[3],Text=[Added wording to define staticness and
+  the lack of evaluation for @nt{if_expression}s and @nt{case_expression}s.
+  These are new and defined elsewhere.]}
+@end{DiffWord2005}
+
 
 
 @LabeledSubClause{Statically Matching Constraints and Subtypes}

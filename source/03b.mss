@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:32 $}
+@Comment{$Date: 2010/08/13 05:23:13 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.79 $}
+@Comment{$Revision: 1.80 $}
 
 @LabeledClause{Array Types}
 
@@ -1656,8 +1656,8 @@ discriminant shall be of a type convertible to the anonymous access type.
   @ChgRef{Version=[3],Kind=[Revised]}
   @Chg{Version=[3],New=[In addition, @RefSecNum{The Context of Overload Resolution}
   requires that the @nt{expression} associated with an access discriminant
-  is convertible (see @RefSecNum{Type Conversions}) to the anonymous access type.],Old=[]}
-  This implies both convertibility of designated
+  is convertible (see @RefSecNum{Type Conversions}) to the anonymous
+  access type. ],Old=[]}This implies both convertibility of designated
   types, and static accessibility.
   This implies that if an object of type T with an
   access discriminant is created
@@ -1665,7 +1665,7 @@ discriminant shall be of a type convertible to the anonymous access type.
   type of the @nt<expression> associated
   with the access discriminant have an accessibility level
   that is not statically deeper than that of A.
-  This is to avoid dangling references.]}
+  This is to avoid dangling references.
 
 @end(Ramification)
 @end{Legality}

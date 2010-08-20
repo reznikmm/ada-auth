@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:33 $}
+@Comment{$Date: 2010/08/13 05:23:14 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1859,7 +1859,7 @@ pool object @i{P} may be called by the implementation to deallocate storage for 
 type @i{T} whose pool is @i{P} only at the places when an Allocate call is allowed for
 @i{P}, during the execution of an instance of Unchecked_Deallocation for @i{T}, or as
 part of the finalization of the collection of @i{T}. For such a call of Deallocate,
-@i{P} (equivelent to @i{T}'Storage_Pool) is passed as the Pool parameter. The
+@i{P} (equivalent to @i{T}'Storage_Pool) is passed as the Pool parameter. The
 value of the Storage_Address parameter for a call to Deallocate is the value
 returned in the Storage_Address parameter of the corresponding successful call
 to Allocate. The values of the Size_In_Storage_Elements and Alignment parameters
@@ -3910,8 +3910,8 @@ some part that includes the access type component, has Read and Write
 attributes that have been specified via an @nt{attribute_definition_clause},
 and that @nt{attribute_definition_clause} is visible. @Redundant[An anonymous
 access type does not support external streaming. ]All other types
-@Chg{Version=[3],New=[ (including remote access types,
-see @RefSecNum{Remote Types Library Units})],Old=[]}support
+@Chg{Version=[3],New=[(including remote access types,
+see @RefSecNum{Remote Types Library Units}) ],Old=[]}support
 external streaming.]}
 
 @begin{Ramification}

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2010/06/11 07:27:55 $}
+@Comment{$Date: 2010/08/13 05:23:13 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1643,7 +1643,7 @@ change the meaning of a program from one legal interpretation to another.
 @Syn{lhs=<use_package_clause>,rhs="@key{use} @SynI{package_}@Syn2{name} {, @SynI{package_}@Syn2{name}};"}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0150-1]}
-@Syn{lhs=<use_type_clause>,rhs="@key[use] @Chg{Version=[3],New=[{@key[all]} ],Old=[]}@key[type]} @Syn2{subtype_mark} {, @Syn2{subtype_mark}};"}
+@Syn{lhs=<use_type_clause>,rhs="@key[use] @Chg{Version=[3],New={[@key[all]] },Old=[]}@key[type] @Syn2{subtype_mark} {, @Syn2{subtype_mark}};"}
 @end{Syntax}
 
 @begin{Legality}
@@ -1742,9 +1742,12 @@ at this place if the declaration of the entity is visible at this place:],Old=[]
 @end{Itemize}
 
   @begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0150-1]}
   Primitive subprograms whose defining name is an @nt{identifier} are
-  @i{not} made potentially visible by a @nt{use_type_clause}.
-  A @nt{use_type_clause} is only for operators.
+  @i{not} made potentially visible by a
+  @nt{use_type_clause}@Chg{Version=[3],New=[ unless reserved word @key[all] is
+  included],Old=[]}.
+  A @nt{use_type_clause} @Chg{Version=[3],New=[without @key[all] ],Old=[]}is only for operators.
 
   The semantics described here should be similar
   to the semantics for expanded names given
@@ -2276,7 +2279,8 @@ using the type T2 of the previous example:]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
   Simplified the description of when a discriminant-dependent component is
-  allowed to be renamed to when the object is known to be constrained. This
+  allowed to be renamed @em it's now simply when the object is
+  known to be constrained. This
   fixes a confusion as to whether a subcomponent of an object that is not
   certain to be constrained can be renamed. The fix introduces an
   incompatibility, as the rule did not apply in Ada 95 if the prefix was a
@@ -3598,7 +3602,7 @@ Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2005.]]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0149-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Implicit conversion
   is allowed from anonymous access-to-object types to general access-to-object
-  types if the designated type is convertable and runtime checks are minimized.
+  types if the designated type is convertible and runtime checks are minimized.
   See also the incompatibilities section.]}
 @end{Extend2005}
 

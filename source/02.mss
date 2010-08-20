@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:32 $}
+@Comment{$Date: 2010/08/13 05:23:13 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -1341,15 +1341,15 @@ of a program; their sole purpose is the enlightenment of the human reader.
 @end{Intro}
 
 @begin{MetaRules}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0100-1]}
-  @ChgAdded{Version=[3],Text=[In general, if all pragmas are erased from
-  a program, the program should remain both syntactically and semantically
-  legal. There are a few exceptions to this general principle (for example,
-  pragma Import can eliminate the need for a completion), but the principle
-  remains, and is strictly true at the syntactic level. Certainly any
-  implementation-defined pragmas should obey this principle both syntactically
-  and semantically, so that if the pragmas are simply ignored by some
-  other implementation, the program will remain legal.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0100-1],ARef=[AI05-0163-1]}
+  @ChgAdded{Version=[3],Text=[In general, if all @nt{pragma}s are treated as
+  unrecognized @nt{pragma}s, the program should remain both syntactically and
+  semantically legal. There are a few exceptions to this general principle (for
+  example, @nt{pragma} Import can eliminate the need for a completion), but the
+  principle remains, and is strictly true at the syntactic level. Certainly any
+  implementation-defined @nt{pragma}s should obey this principle both
+  syntactically and semantically, so that if the @nt{pragma}s are not recognized
+  by some other implementation, the program will remain legal.]}
 @end{MetaRules}
 
 @begin{Syntax}
@@ -1374,7 +1374,7 @@ After a semicolon delimiter, but not within a
 or @nt{discriminant_part}.
 
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0100-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0100-1],ARef=[AI05-0163-1]}
 At any place where the syntax rules allow a construct defined by a
 syntactic category whose name ends with @ldquote@ntf{declaration}@rdquote,
 @ldquote@ntf{statement}@rdquote, @ldquote@ntf{clause}@rdquote, or
@@ -1382,8 +1382,12 @@ syntactic category whose name ends with @ldquote@ntf{declaration}@rdquote,
 @nt{variant} or @nt{exception_handler};
 but not in place of such a construct@Chg{Version=[3],New=[ if the construct
 is required, or is part of a list that is required to have at least one such
-construct@Redundant[, as in a @nt{sequence_of_statements}]],Old=[.
-Also at any place where a @nt{compilation_unit} would be allowed]}.
+construct],Old=[. Also at any place where a @nt{compilation_unit} would be
+allowed]}.
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0163-1]}
+@ChgAdded{Version=[3],Text=[In place of a @nt{statement} in a
+@nt{sequence_of_statements}.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0100-1]}
 @ChgAdded{Version=[3],Text=[At any place where a @nt{compilation_unit}
@@ -1417,7 +1421,7 @@ is a @i{pragma argument}.
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00284-02]}
   @ChgAdded{Version=[2],Text=[For compatibility with Ada 83, the name of a
-  pragma may also be @lquotes@key{interface}@rquotes@;, which is not an
+  @nt{pragma} may also be @lquotes@key{interface}@rquotes@;, which is not an
   identifier (because it is a reserved word).
   See @RefSecNum{Pragma Interface}.]}
 @end{Honest}
@@ -1481,7 +1485,7 @@ The syntax of individual pragmas overrides the general
 syntax for @nt{pragma}.
 @end{Honest}
 @begin{Ramification}
-Thus, an identifier specific to a pragma is not a @nt{name},
+Thus, an identifier specific to a @nt{pragma} is not a @nt{name},
 syntactically; if it were, the visibility rules would be invoked,
 which is not what we want.
 
@@ -1570,11 +1574,13 @@ syntax error is too complex.
 @end{ImplPerm}
 
 @begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0163-1]}
 Normally,
 implementation-defined pragmas should have no semantic effect
 for error-free programs;
-that is, if the implementation-defined pragmas are removed from a
-working program,
+that is, if the implementation-defined pragmas
+@Chg{Version=[3],New=[in a working program are replaced
+with unrecognized pragmas],Old=[are removed from a working program]},
 the program should still be legal, and should still have the same
 semantics.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
@@ -1647,6 +1653,20 @@ This was always true in Ada 83 (since it was not explicitly forbidden by
 RM83), but it was not clear, because there was no definition of
 @lquotes@;executing@rquotes@; or @lquotes@;elaborating@rquotes@; a @nt{pragma}.
 @end{DiffWord83}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0163-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:>
+  Allow @nt{pragma}s in place of a @nt{statement}, even if there are no
+  other @nt{statement}s in a @nt{sequence_of_statements}.]}
+@end{Extend2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0100-1]}
+  @ChgAdded{Version=[3],Text=[@b{Correction:} Clarified where @nt{pragma}s
+  are (and are not) allowed.]}
+@end{DiffWord2005}
+
 
 @begin{Syntax}
 @Leading@keepnext@;The forms of List, Page, and Optimize @nt{pragma}s are as follows:
@@ -1750,13 +1770,6 @@ informative annex.
   @ChgAdded{Version=[2],Text=[Updated the example of named pragma parameters,
   because the second parameter of @nt{pragma} Suppress is obsolescent.]}
 @end{DiffWord95}
-
-
-@begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0100-1]}
-  @ChgAdded{Version=[3],Text=[@b{Correction:} Clarified where pragmas
-  are (and are not) allowed.]}
-@end{DiffWord2005}
 
 
 @LabeledClause{Reserved Words}
@@ -1871,6 +1884,7 @@ end of the reserved word]}.],Old=[ (ignoring upper/lower case distinctions):]}
 
 @noparanum@key{select}
 @key{separate}
+@Chg{Version=[3],New=[@key{some}],Old=[]}
 @key{subtype}
 @Chg{Version=[2],New=[@key{synchronized}],Old=[]}
 
@@ -1944,5 +1958,11 @@ to @RefSec(Obsolescent Features).
   written for original Ada 2005, and there is little reason to put
   @ntf{other_format} characters into reserved words in the first place,
   so there should be very few such programs.]}
+
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI05-0176-1]}
+  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 2005}
+  The following word is not reserved in Ada 2005, but are reserved in Ada
+  2012: @key{some}. Use of this word as an identifier will need to be changed,
+  but we do not expect them to be common.]}
 @end{Incompatible2005}
 

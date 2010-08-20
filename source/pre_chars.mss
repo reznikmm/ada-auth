@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.31 $ $Date: 2010/06/11 07:27:55 $ $Author: randy $ }
+@comment{ $Revision: 1.32 $ $Date: 2010/08/13 05:23:14 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2010/06/11 07:27:55 $}
+@Comment{$Date: 2010/08/13 05:23:14 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -370,6 +370,17 @@ a graphic character but not both; each graphic character is either
 an alphanumeric or special graphic but not both; each alphanumeric
 is either a letter or decimal digit but not both; each letter is
 either upper case or lower case but not both.@end{ramification}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0114-1]}
+@ChgAdded{Version=[3],Text=[There are certain characters which are defined to be
+lower case letters by ISO 10646 and are therefore allowed in identifiers, but
+are not considered lower case letters by Ada.Characters.Handling.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is to maintain compatibility with the Ada 95
+  definitions of these functions.]}
+@end{Reason}
 @end{Notes}
 
 @begin{Extend95}
@@ -388,6 +399,13 @@ either upper case or lower case but not both.@end{ramification}
   @ChgAdded{Version=[2],Text=[We no longer talk about localized character
   sets; these are a non-standard mode, which is none of our business.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0114-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a note to clarify that
+  these functions don't have any relationship to the characters allowed in
+  identifiers.]}
+@end{DiffWord2005}
 
 
 @RMNewPage@Comment{For printed Ada 2005 RM}
@@ -907,6 +925,303 @@ Item.]}
   The package Characters.Conversions is new, replacing functions
   previously found in Characters.Handling.]}
 @end{Extend95}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[The Package Wide_Characters.Handling]}
+
+@begin{Intro}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Text=[The package Wide_Characters.Handling provides
+operations for classifying Wide_Characters and case folding for Wide_Characters.]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[The library package
+Wide_Characters.Handling has the following declaration:]}
+
+@begin{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[package] Ada.Wide_Characters.Handling @key[is]@ChildUnit{Parent=[Ada.Wide_Characters],Child=[Handling]}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Control} (Item : Wide_Character) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Letter} (Item : Wide_Character) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Lower} (Item : Wide_Character) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Upper} (Item : Wide_Character) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Digit} (Item : Wide_Character) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Decimal_Digit} (Item : Wide_Character) @key[return] Boolean
+      @key[renames] Is_Digit;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Hexadecimal_Digit} (Item : Wide_Character) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Alphanumeric} (Item : Wide_Character) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Special} (Item : Wide_Character) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Line_Terminator} (Item : Wide_Character) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Mark} (Item : Wide_Character) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Other} (Item : Wide_Character) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Punctuation} (Item : Wide_Character) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Space} (Item : Wide_Character) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Graphic} (Item : Wide_Character) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{To_Lower} (Item : Wide_Character) @key[return] Wide_Character;
+   @key[function] @AdaSubDefn{To_Upper} (Item : Wide_Character) @key[return] Wide_Character;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{To_Lower} (Item : Wide_String) @key[return] Wide_String;
+   @key[function] @AdaSubDefn{To_Upper} (Item : Wide_String) @key[return] Wide_String;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[end] Ada.Wide_Characters.Handling;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Text=[The subprograms defined in Ada.Wide_Characters.Handling are locale independent.]}
+
+@begin{DescribeCode}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Is_Control (Item : Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
+designated by Item is categorized as @ntf{other_control}, otherwise returns False.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Is_Letter (Item : Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
+designated by Item is categorized as @ntf{letter_uppercase},
+@ntf{letter_lowercase}, @ntf{letter_titlecase}, @ntf{letter_modifier},
+@ntf{letter_other}, or @ntf{number_letter}. Otherwise returns False.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Is_Lower (Item : Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
+designated by Item is categorized as @ntf{letter_lowercase}, otherwise returns
+False.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Is_Upper (Item : Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
+designated by Item is categorized as @ntf{letter_uppercase}, otherwise returns
+False.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Is_Digit (Item : Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
+designated by Item is categorized as @ntf{number_decimal}, otherwise returns
+False.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Is_Hexadecimal_Digit (Item : Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
+designated by Item is categorized as @ntf{number_decimal}, or is in the range
+'A' .. 'F' or 'a' .. 'f', otherwise returns False.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Is_Alphanumeric (Item : Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
+designated by Item is categorized as @ntf{letter_uppercase},
+@ntf{letter_lowercase}, @ntf{letter_titlecase}, @ntf{letter_modifier},
+@ntf{letter_other}, @ntf{number_letter}, or @ntf{number_decimal}. Otherwise
+returns False.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Is_Special (Item : Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
+designated by Item is categorized as @ntf{graphic_character}, but not categorized as
+@ntf{letter_uppercase}, @ntf{letter_lowercase}, @ntf{letter_titlecase},
+@ntf{letter_modifier}, @ntf{letter_other}, @ntf{number_letter}, or
+@ntf{number_decimal}. Otherwise returns False.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Is_Line_Terminator (Item : Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
+designated by Item is categorized as @ntf{separator_line} or
+@ntf{separator_paragraph}, or if Item is a conventional line terminator
+character (CR, LF, VT, or FF). Otherwise returns False.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Is_Mark (Item : Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
+designated by Item is categorized as @ntf{mark_non_spacing} or
+@ntf{mark_spacing_combining}, otherwise returns False.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Is_Other (Item : Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
+designated by Item is categorized as @ntf{other_format}, otherwise returns False.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Is_Punctuation (Item : Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
+designated by Item is categorized as @ntf{punctuation_connector}, otherwise
+returns False.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Is_Space (Item : Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
+designated by Item is categorized as @ntf{separator_space}, otherwise returns
+False.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Is_Graphic (Item : Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
+designated by Item is categorized as @ntf{graphic_character}, otherwise returns
+False.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] To_Lower (Item : Wide_Character) @key[return] Wide_Character;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns the Simple Lowercase Mapping
+of the Wide_Character designated by Item. If the Simple Lowercase Mapping does
+not exist for the Wide_Character designated by Item, then the value of Item is
+returned.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] To_Lower (Item : Wide_String) @key[return] Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns the result of applying the
+To_Lower Wide_Character to Wide_Character conversion to each element of the
+Wide_String designated by Item. The result is the null Wide_String if the value
+of the formal parameter is the null Wide_String.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] To_Upper (Item : Wide_Character) @key[return] Wide_Character;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns the Simple Uppercase
+Mapping of the Wide_Character designated by Item. If the Simple Uppercase
+Mapping does not exist for the Wide_Character designated by Item, then the value
+of Item is returned.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] To_Upper (Item : Wide_String) @key[return] Wide_String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns the result of applying the
+To_Upper Wide_Character to Wide_Character conversion to each element of the
+Wide_String designated by Item. The result is the null Wide_String if the value
+of the formal parameter is the null Wide_String.]}
+
+@end{DescribeCode}
+@end{StaticSem}
+
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  The package Wide_Characters.Handling is new.]}
+@end{Extend2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[The Package Wide_Wide_Characters.Handling]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+@ChgAdded{Version=[3],Text=[The package Wide_Wide_Characters.Handling
+@ChildUnit{Parent=[Ada.Wide_Wide_Characters],Child=[Handling]}has the same contents as
+Wide_Character.Handling except that each occurrence of Wide_Character is
+replaced by Wide_Wide_Character, and each occurrence of Wide_String is replaced
+by Wide_Wide_String.]}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  The package Wide_Wide_Characters.Handling is new.]}
+@end{Extend2005}
 
 
 
