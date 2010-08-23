@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:13 $}
+@Comment{$Date: 2010/08/20 06:48:26 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.104 $}
+@Comment{$Revision: 1.105 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -4609,7 +4609,8 @@ type @i<T>.]}
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
 @ChgAdded{Version=[3],Text=[All of the @SynI{dependent_}@nt{expression}s
-shall be convertible to the type of the @nt{conditional_expression}.]}
+shall be convertible (see @RefSecNum{Type Conversions}) to the type of the
+@nt{conditional_expression}.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
 @ChgAdded{Version=[3],Text=[If the expected type of a

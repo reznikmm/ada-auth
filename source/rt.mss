@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.89 $ $Date: 2010/08/13 05:23:14 $ $Author: randy $ }
+@comment{ $Revision: 1.90 $ $Date: 2010/08/20 06:48:26 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2010/08/13 05:23:14 $}
+@Comment{$Date: 2010/08/20 06:48:26 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -5594,7 +5594,7 @@ language-defined library package exists:]}
 Text=[The value of CPU_Range'Last in System.Multiprocessors.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   function Number_Of_CPUs return CPU;
+@ChgAdded{Version=[3],Text=[   @key[function] Number_Of_CPUs @key[return] CPU;
 @key[end] System.Multiprocessors;]}
 @end{Example}
 

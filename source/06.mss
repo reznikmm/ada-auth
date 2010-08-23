@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:13 $}
+@Comment{$Date: 2010/08/20 06:48:26 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.101 $}
+@Comment{$Revision: 1.102 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -143,8 +143,9 @@ is not significant)]}.
    (@Syn2{parameter_specification} {; @Syn2{parameter_specification}})"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4]}
 @Syn{lhs=<parameter_specification>,rhs="
-    @Syn2{defining_identifier_list} : @Syn2{mode} @Chg{Version=[2],New=<[@Syn2{null_exclusion}]>,Old=<>} @Syn2{subtype_mark} [:= @Syn2{default_expression}]
+    @Syn2{defining_identifier_list} : @Chg{Version=[3],New=<[@key[aliased]]>,Old=<>}@Syn2{mode} @Chg{Version=[2],New=<[@Syn2{null_exclusion}]>,Old=<>} @Syn2{subtype_mark} [:= @Syn2{default_expression}]
   | @Syn2{defining_identifier_list} : @Syn2{access_definition} [:= @Syn2{default_expression}]"}
 
 @Syn{lhs=<mode>,rhs="[@key{in}] | @key{in} @key{out} | @key{out}"}
@@ -250,6 +251,11 @@ determined by the optional @nt{null_exclusion} and the @nt{subtype_mark}, or
 defined by the @nt{access_definition}, in the
 @nt{parameter_and_result_profile}.
 @PDefn2{Term=[nominal subtype], Sec=(of a function result)}], Old=[]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4]}
+@ChgAdded{Version=[3],Text=[@Defn{explicitly aliased parameter}@Defn2{Term=[parameter],Sec=(explicitly aliased)}An
+@i(explicitly aliased parameter) is a formal parameter whose
+@nt{parameter_specification} includes the reserved word @key[aliased].]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00254-01],ARef=[AI95-00318-02]}
 @Defn{access parameter}
@@ -442,8 +448,13 @@ The syntax rules for @nt{defining_designator} and
 
 
 @begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Parameters can
+  now be explicitly aliased, allowing returning of values and forcing
+  by-reference parameter passing.]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0143-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}The parameters
+  @ChgAdded{Version=[3],Text=[The parameters
   of a function can now have any mode.]}
 @end{Extend2005}
 
@@ -471,11 +482,12 @@ the formal parameter denotes (a view of) the object denoted by the
 actual parameter; reads and updates of the formal parameter directly
 reference the actual parameter object.]
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4]}
 @Defn{by-copy type}
 A type is a @i(by-copy type) if it is an elementary type,
 or if it is a descendant of a private type whose full type is a
-by-copy type.
-A parameter of a by-copy type is passed by copy.
+by-copy type. A parameter of a by-copy type @Chg{Version=[3],New=[that is not
+explicitly aliased ],Old=[]}is passed by copy.
 
 @leading@keepnext@Defn{by-reference type}
 A type is a @i(by-reference type) if it
@@ -500,7 +512,9 @@ is a descendant of one of the following:
   whose full type is a by-reference type.
 @end(itemize)
 
-A parameter of a by-reference type is passed by reference.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4]}
+A parameter of a by-reference type is passed by reference@Chg{Version=[3],New=[, as is an explicitly aliased parameter
+of any type],Old=[]}.
 @Defn2{Term=[associated object], Sec=(of a value of a by-reference type)}
 Each value of a by-reference type has an associated object.
 For a parenthesized expression, @nt{qualified_expression},
@@ -721,6 +735,10 @@ is changed and one of the parameters depends on the discriminant.
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0096-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected so that
   limited derived types are by-reference only if their parent is.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
+  @ChgAdded{Version=[3],Text=[Defined that explicitly aliased parameters
+  (see @RefSecNum{Subprogram Declarations}) are always passed by reference.]}
 @end{DiffWord2005}
 
 
@@ -1071,13 +1089,14 @@ have to be conformant.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00409-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0207-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4],ARef=[AI05-0207-1]}
 @Defn{mode conformance}
 @Defn2{Term=[profile],Sec=(mode conformant)}
 Two profiles are @i{mode conformant} if they are
 @Chg{Version=[3],New=[type conformant],Old=[type-conformant]},
 @Chg{Version=[3],New=[],Old=[and ]}corresponding parameters have identical
-modes, and, for access
+modes,@Chg{Version=[3],New=[ both or neither are explicitly aliased
+parameters, ],Old=[]} and, for access
 parameters@Chg{Version=[2],New=[ or access result types],Old=[]}, the
 designated subtypes statically match@Chg{Version=[3],New=[ and either both or
 neither are access-to-constant],Old=[]}@Chg{Version=[2],New=[, or the
@@ -1340,6 +1359,13 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
   is unlikely that users have been intentionally taking advantage and writing
   mismatching access types.]}
 @end{Incompatible2005}
+
+@begin{Diffword2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
+  @ChgAdded{Version=[3],Text=[Explicitly aliased parameters are included
+  as part of mode conformance (since it affects the parameter passing
+  mechanism).]}
+@end{Diffword2005}
 
 
 @LabeledSubClause{Inline Expansion of Subprograms}

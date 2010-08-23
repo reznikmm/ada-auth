@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:13 $}
+@Comment{$Date: 2010/08/20 06:48:26 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.100 $}
+@Comment{$Revision: 1.101 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3050,10 +3050,11 @@ and aliased subcomponents of other objects.
 @end(ImplNote)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00225-01],ARef=[AI95-00363-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0053-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0053-1],ARef=[AI05-0142-4]}
 @Defn{aliased}
 A view of an object is defined to be @i(aliased) if
-it is defined by an @nt<object_@!declaration> or @nt<component_@!definition>
+it is defined by an @nt<object_@!declaration>@Chg{Version=[3],New=[,
+@nt{parameter_@!specification},],Old=[]} or @nt<component_@!definition>
 with the reserved word @key(aliased), or by a renaming of an aliased view.
 In addition, the dereference of an access-to-object
 value denotes an aliased view, as does a view conversion
@@ -3669,6 +3670,10 @@ types used as parameters allow passing of subprograms at any level.],Old=[]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> The rule about a current instance
   being aliased now is worded in terms of immutably limited types. Return
   objects of such types are also considered aliased.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0142-4]}
+  @ChgAdded{Version=[3],Text=[Explicitly aliased parameters (see
+  @RefSecNum{Subprogram Declarations}) are defined to be aliased.]}
 @end{DiffWord2005}
 
 
@@ -4635,6 +4640,12 @@ object of an anonymous access-to-object type is the same as the accessibility
 level of the type of the access value most recently assigned to the object, but
 is never deeper than that of the declaration of the stand-alone object.]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4]}
+@ChgAdded{Version=[3],Text=[The accessibility level of an explicitly aliased
+(see @RefSecNum{Subprogram Declarations}) formal parameter in a function body is
+determined by the point of call (which is the same level that the return object
+ultimately will have).]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
 @ChgNote{Use ChgAdded below to get conditional Leading}
 @ChgAdded{Version=[2],Type=[Leading],Text=[]}
@@ -4781,6 +4792,15 @@ be statically deeper, nor statically shallower, than any other.]}
 @ChgAdded{Version=[3],Text=[In these cases, we use dynamic accessibility
 checks.]}
 @end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4]}
+@ChgAdded{Version=[3],Text=[Inside a return statement that applies to a function
+@i<F>, when determining whether the accessibility level of an explicitly aliased
+parameter of @i<F> is statically deeper than the level of the return object of
+@i<F>, the level of the return object is presumed to be the same as that of the
+level of the explicitly aliased parameter; for statically comparing with the
+level of other entities, the level of the return object of @i<F> is presumed to
+be the same as that of the master that elaborated the function body of @i<F>.]}
 
 @Redundant[For determining whether one level is statically deeper than another
 when within a generic package body, the generic package is presumed to be
@@ -5711,6 +5731,10 @@ uses of anonymous access types.]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Changed coextension rules so that
   coextensions that belong to an anonymous object are transfered to the ultimate
   object.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
+  @ChgAdded{Version=[3],Text=[Defined the accessibility of explicitly
+  aliased parameters (see @RefSecNum{Subprogram Declarations}).]}
 @end{DiffWord2005}
 
 
