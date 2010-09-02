@@ -17,6 +17,7 @@
 @Comment{RTF properties}
 @SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}
 @RTFHeaderPrefix{Version=[0],Text=[]}
+@RTFFooter{UseDate=[T],UseClauseName=[T],UseISOFormat=[F]}@Comment{RM style footers}
 @RTFPageSize{Letter}
 @RTFFonts{Serif=[Times],SansSerif=[Arial]}
 

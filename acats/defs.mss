@@ -1,7 +1,7 @@
 @Part(defs, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/defs.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2008/01/04 05:29:12 $}
+@comment{$Revision: 1.7 $ $Date: 2010/08/23 18:51:28 $}
 
 @LabeledAnnex{Definitions}
 
@@ -48,8 +48,8 @@ issued only after witness testing is completed, and contain a summary
 of the testing (including which Specialized Needs Annexes were tested, any
 test modifications needed, and the values used in customizing the support
 files). Recent test reports can be found on-line at
-@URLLink{URL=[http://www.adaic.org/compilers/ada95.html],
-Text=[http://www.adaic.org/compilers/ada95.html]}, linked from the
+@URLLink{URL=[http://www.ada-auth.org/cpl.html],
+Text=[http://www.ada-auth.org/cpl.html]}, linked from the
 Certified Processors List.@SeeOther{Primary=[ACATR],Other=[Ada Conformity Assessment Test Report]}]}
 
 @ToGlossary{Term=[Ada implementation],Text=[An Ada compilation system,
@@ -95,9 +95,9 @@ of Ada Conformity Assessment Certificates.]}
 
 @ToGlossary{Term=[Certified Processors List],Text=[(Abbreviated @b{CPL})
 A published list
-identifying all certified Ada implementations. The CPL is available on the Ada
-Information Clearinghouse Internet site
-(@URLLink{URL=[http://www.adaic.org],Text=[www.adaic.org]}).@SeeOther{Primary=[CPL],Other=[certified processors list]}]}
+identifying all certified Ada implementations. The CPL is available on the ACAA
+Internet site
+(@URLLink{URL=[http://www.ada-auth.org],Text=[www.ada-auth.org]}).@SeeOther{Primary=[CPL],Other=[certified processors list]}]}
 
 @ToGlossary{Term=[Challenge],Text=[A documented disagreement with the test
 objective, test code, test grading criteria, or result of processing an ACATS
