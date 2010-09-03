@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:33 $}
+@Comment{$Date: 2010/09/02 06:27:38 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -85,7 +85,9 @@ exception.
 @end{Intro}
 
 @begin{Syntax}
-@Syn{lhs=<exception_declaration>,rhs="@Syn2{defining_identifier_list} : @key{exception};"}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
+@Syn{lhs=<exception_declaration>,rhs="@Syn2{defining_identifier_list} : @key{exception}@Chg{Version=[3],New=<
+   [@Syn2{aspect_specification}]>,Old=[]};"}
 @end{Syntax}
 
 @begin{StaticSem}
@@ -188,6 +190,14 @@ the exception will now be caught by that handler.
 @begin{DiffWord83}
 We explicitly define elaboration for @nt{exception_declaration}s.
 @end{DiffWord83}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a @nt{exception_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
+
 
 @LabeledClause{Exception Handlers}
 

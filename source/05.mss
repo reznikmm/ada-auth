@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:13 $}
+@Comment{$Date: 2010/09/02 06:27:37 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.37 $}
+@Comment{$Revision: 1.38 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1115,13 +1115,14 @@ The constant-ness of loop parameters is specified in
 
 @LabeledAddedSubClause{Version=[3],Name=[User-Defined Iterators]}
 
+@begin{Syntax}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<iterator_specification>,Old=<>}>,
 rhs="@Chg{Version=[3],New=<@Syn2{defining_identifier} @key[in] [@key{reverse}] @SynI{iterator_}@Syn2{name}>,Old=<>}"}
+@end{Syntax}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-@ChgAdded{Version=[3],Text=[@i<@b{Editor's Note:} This sub-clause is a placeholder
+@ChgAdded{Version=[3],Text=[@i<@b{Editor's Note:} This subclause is a placeholder
 for the unfinished AI05-0139-2.>]}
 
 @begin{Extend2005}

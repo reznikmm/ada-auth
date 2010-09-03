@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:13 $}
+@Comment{$Date: 2010/09/02 06:27:37 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.104 $}
+@Comment{$Revision: 1.105 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -34,8 +34,10 @@ have a @nt{package_body}.]
 @Syn{lhs=<package_declaration>,rhs="@Syn2{package_specification};"}
 
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<package_specification>,rhs="
-    @key{package} @Syn2{defining_program_unit_name} @key{is}
+    @key{package} @Syn2{defining_program_unit_name}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]} @key{is}
       {@Syn2{basic_declarative_item}}
    [@key{private}
       {@Syn2{basic_declarative_item}}]
@@ -194,6 +196,14 @@ well.
   @ChgAdded{Version=[2],Text=[Defined @lquotes@;declaration list@rquotes
   to avoid ambiguity in other rules as to whether packages are included.]}
 @end{DiffWord95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a @nt{package_specification}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
+
 
 @LabeledClause{Package Bodies}
 
@@ -394,14 +404,18 @@ and those will presumably be implemented in terms of dispatching).
 @end{MetaRules}
 
 @begin{Syntax}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<private_type_declaration>,rhs="
-   @key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}] @key{is} [[@key{abstract}] @key{tagged}] [@key{limited}] @key{private};"}
+   @key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}] @key{is} [[@key{abstract}] @key{tagged}] [@key{limited}] @key{private}@Chg{Version=[3],New=<
+      [@Syn2{aspect_specification}]>,Old=[]};"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00419-01],ARef=[AI95-00443-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<private_extension_declaration>,rhs="
    @key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}] @key{is}
      [@key{abstract}] @Chg{Version=[2],New=<[@key{limited} | @key{synchronized}]>,Old=[]} @key{new} @SynI(ancestor_)@Syn2{subtype_indication}@Chg{Version=[2],New=<
-     [@key{and} @Syn2[interface_list]]>,Old=<>} @key{with private};"}
+     [@key{and} @Syn2[interface_list]]>,Old=<>} @key{with private}@Chg{Version=[3],New=<
+       [@Syn2{aspect_specification}]>,Old=[]};"}
 @end{Syntax}
 
 @begin{Legality}
@@ -1114,6 +1128,15 @@ completely defined, unless the derived type is a private extension.
   interface can be used as the ancestor of a synchronized type (we do not
   allow hiding of synchronization).]}
 @end{Extend95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a @nt{private_type_declaration} and
+  a @nt{private_extension_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
+
 
 
 
@@ -2862,7 +2885,7 @@ controlled type whose value is assigned,
 other than by an @nt{assignment_statement}@Chg{Version=[2],New=[],Old=[ or
 a @nt{return_statement}]}, the
 implementation shall not create a separate anonymous object for the
-@nt{aggregate}. The aggregate value shall be constructed directly in the target
+@nt{aggregate}. The @nt{aggregate} value shall be constructed directly in the target
 of the assignment operation and Adjust is not called on the target object.],Old=[]}]}
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added]}
@@ -3094,7 +3117,7 @@ Controlled types and user-defined finalization are new to Ada 95.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0022],ARef=[AI95-00083-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that Adjust is never
-  called on an aggregate used for the initialization of an object or
+  called on an @nt{aggregate} used for the initialization of an object or
   subaggregate, or passed as a parameter.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00147-01]}
@@ -3372,9 +3395,9 @@ For the @i{finalization} of an object:
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0066-1]}
-  @ChgAdded{Version=[3],Text=[In the case of an aggregate or function call that is used
+  @ChgAdded{Version=[3],Text=[In the case of an @nt{aggregate} or function call that is used
   (in its entirety) to directly initialize a part of an object, the
-  coextensions of the result of evaluating the aggregate or function
+  coextensions of the result of evaluating the @nt{aggregate} or function
   call are transfered to become coextensions of the object being
   initialized and are not finalized until the object being initialized
   is ultimately finalized, even if an anonymous object is created
@@ -3474,15 +3497,19 @@ in @RefSecNum{Assignment and Finalization}.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0021],ARef=[AI95-00182-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0066-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0066-1],ARef=[AI05-0142-4]}
 @Chg{Version=[2],New=[The master of an object is the master enclosing its
 creation whose accessibility level (see @RefSecNum{Operations of Access Types})
 is equal to that of the object@Chg{Version=[3],New=[, except
 in the case of an anonymous object representing the result of
-an aggregate or function call. The master of such an anonymous
-object is the innermost master enclosing the evaluation of the
-aggregate or function call, which may be the aggregate or function
-call itself],Old=[]}.],
+an @nt{aggregate} or function call. If such an anonymous object
+is part of the actual parameter expression for an explicitly aliased
+parameter of a function call, the master of the object is the innermost
+master enclosing the evaluation of the @nt{aggregate} or function call, excluding
+the @nt{aggregate} or function call itself. Otherwise, the master of such
+an anonymous object is the innermost master enclosing the evaluation of the
+@nt{aggregate} or function call, which may be the @nt{aggregate} or function
+call itself.],Old=[]}.],
 Old=[@Chg{New=[If the @i{object_}@nt{name} in an @nt{object_renaming_declaration}, or
 the actual parameter for a generic formal @key[in out] parameter in a
 @nt{generic_instantiation}, denotes any part of an anonymous object created by
@@ -3535,11 +3562,11 @@ is not known at the call site.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0066-1]}
 @ChgAdded{Version=[3],Text=[In @RefSecNum{Operations of Access Types}
 we assign an accessibility level to the result of an
-aggregate or function call that is used to directly initialize a
+@nt{aggregate} or function call that is used to directly initialize a
 part of an object based on the object being initialized. This is
 important to ensure that any access discriminants denote objects
 that live at least as long as the object being initialized.
-However, if the result of the aggregate or function call is not
+However, if the result of the @nt{aggregate} or function call is not
 built directly in the target object, but instead is built in an
 anonymous object that is then assigned to the target, the anonymous
 object needs to be finalized after the assignment rather than
@@ -3548,7 +3575,35 @@ coextensions). (Note than an implementation is never required to
 create such an anonymous object, and in some cases is required to
 @i{not} have such a separate object, but rather to build the result
 directly in the target.)]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
+@ChgAdded{Version=[3],Text=[The special case for explicitly aliased parameters
+of functions is needed for the same reason, as access discriminants of the
+returned object may designate one of these parameters. In that case, we want to
+lengthen the lifetime of the anonymous objects as long as the possible lifetime
+of the result.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
+@ChgAdded{Version=[3],Text=[We don't do a similar change for other kinds of
+calls, because the extended lifetime of the parameters adds no value, but could
+consistute a storage leak. For instance, such an anonymous object created by a
+procedure call in the elaboration part of a package body would have to live
+until the end of the program, even though it could not be used after the
+procedure returns (other than via Unchecked_Access).]}
 @end{Reason}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
+@ChgAdded{Version=[3],Text=[Note that the master given to anonymous objects in
+explicitly aliased parameters of functions is not necessarily as long as the
+master of the object being initialized (if the function call is used to
+initialize an @nt{allocator}, for instance). In that case, the accessibility check on
+explicitly aliased parameters will necessarily fail if any such anonymous
+objects exist. This is necessary to avoid requiring the objects to live as long
+as the access type or having the implementation complexity of an implicit
+coextension.]}
+@end{Ramification}
+
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023],ARef=[AI95-00169-01]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00162-01]}
@@ -4052,5 +4107,11 @@ the rules here refer to the task-waiting rules of Section 9.
   of parts of failed @nt{allocator}s. This could be an inconsistency, but the
   previous behavior is still allowed and there is no requirement that
   implementations take advantage of the permission.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
+  @ChgAdded{Version=[3],Text=[Added text to specially define the master of
+  anonymous objects which are passed as explicitly aliased parameters (see
+  @RefSecNum{Subprogram Declarations}) of functions. The model for these
+  parameters is explained in detail in @RefSecNum{Parameter Associations}.]}
 @end{DiffWord2005}
 

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:14 $}
+@Comment{$Date: 2010/09/02 06:27:38 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.74 $}
+@Comment{$Revision: 1.75 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -63,11 +63,20 @@ a subprogram, or a package.]
 @Syn{lhs=<generic_declaration>,rhs="@Syn2{generic_subprogram_declaration} | @Syn2{generic_package_declaration}"}
 
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<generic_subprogram_declaration>,rhs="
-     @Syn2{generic_formal_part}  @Syn2{subprogram_specification};"}
+     @Syn2{generic_formal_part}  @Syn2{subprogram_specification}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};"}
 
 @Syn{lhs=<generic_package_declaration>,rhs="
      @Syn2{generic_formal_part}  @Syn2{package_specification};"}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[No syntax change is needed here to allow an
+  @nt{aspect_specification}; a generic package can have an @nt{aspect_specification}
+  because a @nt{package_specification} allows an @nt{aspect_specification}.]}
+@end{Ramification}
 
 @Syn{lhs=<generic_formal_part>,rhs="@key{generic} {@Syn2{generic_formal_parameter_declaration} | @Syn2{use_clause}}"}
 
@@ -223,6 +232,14 @@ We can't do that for @nt{generic_formal_parameter_declaration},
 because of confusion with normal formal parameters of subprograms.
 @end{DiffWord83}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a
+  @nt{generic_subprogram_declaration} (as well as a @nt{generic_package_declaration}).
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
+
 
 
 @RmNewPage@Comment{Insert page break so printed RM's look better.}
@@ -344,15 +361,19 @@ Similarly, the contract model does not apply to @LinkTimeTitle.
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<generic_instantiation>,rhs="
      @key{package} @Syn2{defining_program_unit_name} @key{is}
-         @key{new} @SynI{generic_package_}@Syn2{name} [@Syn2{generic_actual_part}];
+         @key{new} @SynI{generic_package_}@Syn2{name} [@Syn2{generic_actual_part}]@Chg{Version=[3],New=<
+            [@Syn2{aspect_specification}]>,Old=[]};
    | @Chg{Version=[2],New=<[@Syn2{overriding_indicator}]
      >,Old=<>}@key{procedure} @Syn2{defining_program_unit_name} @key{is}
-         @key{new} @SynI{generic_procedure_}@Syn2{name} [@Syn2{generic_actual_part}];
+         @key{new} @SynI{generic_procedure_}@Syn2{name} [@Syn2{generic_actual_part}]@Chg{Version=[3],New=<
+            [@Syn2{aspect_specification}]>,Old=[]};
    | @Chg{Version=[2],New=<[@Syn2{overriding_indicator}]
      >,Old=<>}@key{function} @Syn2{defining_designator} @key{is}
-         @key{new} @SynI{generic_function_}@Syn2{name} [@Syn2{generic_actual_part}];"}
+         @key{new} @SynI{generic_function_}@Syn2{name} [@Syn2{generic_actual_part}]@Chg{Version=[3],New=<
+            [@Syn2{aspect_specification}]>,Old=[]};"}
 
 
 @Syn{lhs=<generic_actual_part>,rhs="
@@ -1236,6 +1257,12 @@ generic parameters.
   @RefSecNum{Overriding Indicators}) is allowed on a subprogram instantiation.]}
 @end{Extend95}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a @nt{generic_instantiation}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
 
 @begin{Diffword2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0118-1]}
@@ -1263,10 +1290,12 @@ of the @nt{explicit_generic_actual_parameter}.
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00423-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1],ARef=[AI05-0183-1]}
 @Syn{lhs=<formal_object_declaration>,rhs="
-    @Syn2{defining_identifier_list} : @Syn2{mode} @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark} [:= @Syn2{default_expression}];@Chg{Version=[2],New=<
-  @Chg{Version=[3],New=[|],Old=[ ]}  @Syn2{defining_identifier_list} : @Syn2{mode} @Syn2{access_definition} [:= @Syn2{default_expression}];>,Old=<>}"}
+    @Syn2{defining_identifier_list} : @Syn2{mode} @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark} [:= @Syn2{default_expression}]@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};@Chg{Version=[2],New=<
+  @Chg{Version=[3],New=[|],Old=[ ]}  @Syn2{defining_identifier_list} : @Syn2{mode} @Syn2{access_definition} [:= @Syn2{default_expression}]@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};>,Old=<>}"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -1548,6 +1577,13 @@ important benefit, and any change has some cost.
   such an object to be a full constant declaration).]}
 @end{DiffWord95}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a @nt{formal_object_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
+
 
 @RMNewPage@Comment{For printed RM Ada 2005}
 @LabeledClause{Formal Types}
@@ -1572,9 +1608,10 @@ scheme very well.
 @end{Intro}
 
 @begin{Syntax}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<formal_type_declaration>,rhs="
-    @key{type} @Syn2{defining_identifier}[@Syn2{discriminant_part}] @key{is} @Syn2{formal_type_definition};"}
-
+    @key{type} @Syn2{defining_identifier}[@Syn2{discriminant_part}] @key{is} @Syn2{formal_type_definition}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
 @Syn{lhs=<formal_type_definition>,rhs="
@@ -1868,6 +1905,13 @@ had to.
   @ChgAdded{Version=[2],Text=[We use @lquotes@;determines a category@rquotes
   rather than class, since not all interesting properties form a class.]}
 @end{DiffWord95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a @nt{formal_type_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}
@@ -2788,14 +2832,18 @@ New=<@Syn2{formal_concrete_subprogram_declaration}
 Old=<@key{with} @Syn2{subprogram_specification} [@key{is} @Syn2{subprogram_default}];>}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0183-1]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<formal_concrete_subprogram_declaration>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<
-     @key{with} @Syn2{subprogram_specification} [@key{is} @Syn2{subprogram_default}];>,Old=<>}"}
+     @key{with} @Syn2{subprogram_specification} [@key{is} @Syn2{subprogram_default}]@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};>,Old=<>}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0183-1]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<formal_abstract_subprogram_declaration>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<
-     @key{with} @Syn2{subprogram_specification} @key{is abstract} [@Syn2{subprogram_default}];>,Old=<>}"}
+     @key{with} @Syn2{subprogram_specification} @key{is abstract} [@Syn2{subprogram_default}]@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};>,Old=<>}"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
 @Syn{lhs=<subprogram_default>,rhs="@Syn2{default_name} | <>@Chg{Version=[2],New=< | @key{null}>,Old=<>}"}
@@ -3193,6 +3241,15 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.]}
   @ChgAdded{Version=[2],Text=[Added matching rules for @nt{null_exclusion}s.]}
 @end{Diffword95}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in
+  a @nt{formal_concrete_subprogram_declaration} and a
+  @nt{formal_abstract_subprogram_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
+
 @begin{Diffword2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added matching rules for
@@ -3215,8 +3272,10 @@ of that generic package.]
 @end{Intro}
 
 @begin{Syntax}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<formal_package_declaration>,rhs="
-    @key{with} @key{package} @Syn2{defining_identifier} @key{is} @key{new} @SynI{generic_package_}@Syn2{name}  @Syn2{formal_package_actual_part};"}
+    @key{with} @key{package} @Syn2{defining_identifier} @key{is} @key{new} @SynI{generic_package_}@Syn2{name}  @Syn2{formal_package_actual_part}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00317-01]}
 @Syn{lhs=<formal_package_actual_part>,rhs="
@@ -3467,6 +3526,14 @@ an instantiation of a package with formal packages:}]}
   visible in a formal package has been clarified. We also specify how matching
   is done when the actual is a formal package.]}
 @end{DiffWord95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in
+  a @nt{formal_package_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0025-1]}

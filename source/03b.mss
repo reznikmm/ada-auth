@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:13 $}
+@Comment{$Date: 2010/09/02 06:27:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.80 $}
+@Comment{$Revision: 1.81 $}
 
 @LabeledClause{Array Types}
 
@@ -1902,8 +1902,10 @@ values of the components.
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Syn{lhs=<component_item>,rhs="@Syn2{component_declaration} | @Chg{New=[@Syn2{aspect_clause}],Old=[@Syn2{representation_clause}]}"}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<component_declaration>,rhs="
-   @Syn2{defining_identifier_list} : @Syn2{component_definition} [:= @Syn2{default_expression}];"}
+   @Syn2{defining_identifier_list} : @Syn2{component_definition} [:= @Syn2{default_expression}]@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -2253,6 +2255,14 @@ representation pragmas to be as similar as possible.
   @ChgAdded{Version=[2],Text=[Defined @i{explicitly limited record} type to
   use in other rules.]}
 @end{DiffWord95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a @nt{component_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
+
 
 
 @LabeledSubClause{Variant Parts and Discrete Choices}

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/08/20 06:48:26 $}
+@Comment{$Date: 2010/09/02 06:27:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.101 $}
+@Comment{$Revision: 1.102 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2018,10 +2018,12 @@ on abstract subprograms (dispatching calls will never reach them).
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03],ARef=[AI95-00348-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0183-1]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<abstract_subprogram_declaration>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<
     [@Syn2{overriding_indicator}]
-    @Syn2{subprogram_specification} @key{is} @key{abstract};>,Old=<>}"}
+    @Syn2{subprogram_specification} @key{is} @key{abstract}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};>,Old=<>}"}
 @end{Syntax}
 
 @begin{StaticSem}
@@ -2560,6 +2562,13 @@ but then clients of the package would not have visibility to T.
   rule allowed such extensions to inherit concrete operations in some
   rare cases. It is unlikely that these cases exist in user code.]}
 @end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a @nt{abstract_subprogram_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
 
 @begin{Diffword2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0203-1]}

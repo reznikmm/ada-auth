@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.56 $ $Date: 2010/05/08 06:31:34 $ $Author: randy $ }
+@comment{ $Revision: 1.57 $ $Date: 2010/09/02 06:27:38 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2010/05/08 06:31:34 $}
+@Comment{$Date: 2010/09/02 06:27:38 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1225,9 +1225,13 @@ components, or the layout attributes of an atomic component,
 in a way that prevents the implementation from performing the
 required indivisible reads and updates.
 
-If an atomic object is passed as a parameter, then the type of the formal
-parameter shall either be atomic or allow pass by copy @Redundant[(that
-is, not be a nonatomic by-reference type)]. If an atomic object is used
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4]}
+If an atomic object is passed as a parameter, then
+@Chg{Version=[3],New=[],Old=[the type of ]}the formal
+parameter shall either @Chg{Version=[3],New=[have an],Old=[be]} atomic
+@Chg{Version=[3],New=[type ],Old=[]}or allow pass by
+copy@Chg{Version=[3],New=[],Old=[ @Redundant[(that
+is, not be a nonatomic by-reference type)]]}. If an atomic object is used
 as an actual for a generic formal object of mode @key{in out}, then the
 type of the generic formal object shall be atomic. If the @nt<prefix> of
 an @nt<attribute_reference> for an Access attribute denotes an atomic
@@ -1236,6 +1240,13 @@ the resulting access type shall be atomic. If an atomic type is used as
 an actual for a generic formal derived type, then the ancestor of the
 formal type shall be atomic or allow pass by copy. Corresponding rules
 apply to volatile objects and types.
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
+  @ChgAdded{Version=[3],Text=[A formal parameter allows pass by copy
+  if it is not @key[aliased] and it is of a type that allows pass by copy (that
+  is, is not a by-reference type).]}
+@end{Discussion}
 
 If a pragma Volatile, Volatile_Components, Atomic, or Atomic_Components
 applies to a stand-alone constant object, then a pragma Import shall
@@ -1471,6 +1482,14 @@ because the pragma was not used to mark variables as shared.
   Pragmas Independent and Independent_Components are new; they eliminate
   ambiguity about independent addressibility.]}
 @end{Extend2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
+  @ChgAdded{Version=[3],Text=[Added wording to take explicitly aliased
+  parameters (see @RefSecNum{Subprogram Declarations}) into
+  account when determining the legality of parameter passing of volatile and
+  atomic objects.]}
+@end{DiffWord2005}
 
 
 

@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:13 $}
+@Comment{$Date: 2010/09/02 06:27:37 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.97 $}
+@Comment{$Revision: 1.98 $}
 
 @begin{Intro}
 
@@ -136,14 +136,18 @@ a named task object of that type.
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<task_type_declaration>,rhs="
-   @key{task} @key{type} @Syn2{defining_identifier} [@Syn2{known_discriminant_part}] [@key{is}@Chg{Version=[2],New=<
+   @key{task} @key{type} @Syn2{defining_identifier} [@Syn2{known_discriminant_part}]@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]} [@key{is}@Chg{Version=[2],New=<
      [@key{new} @Syn2{interface_list} @key{with}]
     >,Old=<>} @Syn2{task_definition}];"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00399-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<single_task_declaration>,rhs="
-   @key{task} @Syn2{defining_identifier} [@key{is}@Chg{Version=[2],New=<
+   @key{task} @Syn2{defining_identifier} @Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]}[@key{is}@Chg{Version=[2],New=<
      [@key{new} @Syn2{interface_list} @key{with}]
     >,Old=<>} @Syn2{task_definition}];"}
 
@@ -542,6 +546,14 @@ because a @nt{declarative_part} can be empty.
   a task type within itself to reflect the exception for anonymous
   access types.]}
 @end{DiffWord95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a
+  @nt{task_type_declaration} and a @nt{single_task_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0042-1]}
@@ -973,15 +985,19 @@ a named protected object of that type.
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<protected_type_declaration>,rhs="
-  @key{protected} @key{type} @Syn2{defining_identifier} [@Syn2{known_discriminant_part}] @key{is}@Chg{Version=[2],New=<
+  @key{protected} @key{type} @Syn2{defining_identifier} [@Syn2{known_discriminant_part}]@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]} @key{is}@Chg{Version=[2],New=<
      [@key{new} @Syn2{interface_list} @key{with}]
     >,Old=<>} @Syn2{protected_definition};"}
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00399-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<single_protected_declaration>,rhs="
-  @key{protected} @Syn2{defining_identifier} @key{is}@Chg{Version=[2],New=<
+  @key{protected} @Syn2{defining_identifier}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]} @key{is}@Chg{Version=[2],New=<
      [@key{new} @Syn2{interface_list} @key{with}]
     >,Old=<>} @Syn2{protected_definition};"}
 
@@ -1555,6 +1571,14 @@ protected units do not exist in Ada 83.
   access types.]}
 @end{DiffWord95}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a
+  @nt{protected_type_declaration} and a @nt{single_protected_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
+
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0042-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified that an
@@ -2033,9 +2057,11 @@ tasks and protected objects.
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00397-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<entry_declaration>,rhs="@Chg{Version=[2],New=<
    [@Syn2{overriding_indicator}]>,Old=[]}
-   @key{entry} @Syn2{defining_identifier} [(@Syn2{discrete_subtype_definition})] @Syn2{parameter_profile};"}
+   @key{entry} @Syn2{defining_identifier} [(@Syn2{discrete_subtype_definition})] @Syn2{parameter_profile}@Chg{Version=[3],New=<
+      [@Syn2{aspect_specification}]>,Old=[]};"}
 
 
 @Syn{lhs=<accept_statement>,rhs="
@@ -2522,6 +2548,13 @@ The syntax rule for @nt{entry_body} is new.
   entries; this is only useful when a task or protected type inherits
   from an interface.]}
 @end{DiffWord95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in an @nt{entry_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
 
 
 @LabeledSubClause{Entry Calls}

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2010/08/20 06:48:26 $}
+@Comment{$Date: 2010/09/02 06:27:37 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.102 $}
+@Comment{$Revision: 1.103 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -64,9 +64,11 @@ function.]
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<subprogram_declaration>,rhs="@Chg{Version=[2],New=<
     [@Syn2{overriding_indicator}]
-    >,Old=<>}@Syn2{subprogram_specification};"}
+    >,Old=<>}@Syn2{subprogram_specification}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};"}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00348-01]}
 @DeletedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<>,Old=<abstract_subprogram_declaration>}>,
@@ -456,6 +458,11 @@ The syntax rules for @nt{defining_designator} and
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0143-1]}
   @ChgAdded{Version=[3],Text=[The parameters
   of a function can now have any mode.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[An optional @nt{aspect_specification} can be
+  used in a @nt{subprogram_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
 
 @LabeledClause{Formal Parameter Modes}
@@ -1798,6 +1805,15 @@ are designed to ensure that the parts of a type that have
 implicit initial values (see @RefSecNum{Object Declarations})
 don't become @lquotes@;de-initialized@rquotes@; by
 being passed as an @b(out) parameter.
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
+@ChgAdded{Version=[3],Text=[For explictly aliased parameters of functions, we
+will ensure at the call site that a part of the parameter can be returned as
+part of the function result without creating a dangling pointer. We do this with
+accessibility checks at the call site that all actual objects of explicitly
+aliased parameters live as long as the function result; then we can allow them
+to be returned as access discriminants or anonymous access results, as those
+have the master of the function result as well.]}
 @end{MetaRules}
 
 @begin{Resolution}
@@ -1874,13 +1890,71 @@ Print(3); --@RI{ Ambiguous!}
   is ambiguous.
 @end{Reason}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0102-1],ARef=[AI05-0144-2]}
-@leading@;@Chg{Version=[3],New=[Two @nt{name}s are
-@i{known to denote the same object} if:@Defn{known to denote the same object}],
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0102-1],ARef=[AI05-0142-4]}
+@leading@;@Chg{Version=[3],New=[If the formal parameter is an explicitly aliased
+parameter, the type of the actual parameter shall be tagged or the actual
+parameter shall be an aliased view of an object. Further, if the formal
+parameter subtype @i{F} is untagged:],
 Old=[The type of the actual parameter associated with an access parameter
 shall be convertible (see @RefSecNum{Type Conversions})
 to its anonymous access type.
 @PDefn2{Term=[convertible],Sec=(required)}]}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[the subtype @i{F} shall statically match the nominal
+subtype of the actual object; or]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[the subtype @i{F} shall be unconstrained, discriminated
+in its full view, and unconstrained in any partial view.]}
+@end{Itemize}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Tagged objects (and tagged @nt{aggregate}s for @key[in]
+  parameters) do not need to be aliased. This matches the behavior of unaliased
+  formal parameters of tagged types, which allow 'Access to be taken of the
+  formal parameter regardless of the form of the actual parameter.]}
+@end{Ramification}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We need the subtype check on untagged actual
+  parameters so that the requirements of 'Access are not lost. 'Access makes its
+  checks against the nominal subtype of its prefix, and parameter passing can
+  change that subtype. But we don't want this parameter passing to change the
+  objects that would be allowed as the prefix of 'Access. This is particularly
+  important for arrays, where we don't want to require any additional
+  implementation burden.]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4]}
+@ChgAdded{Version=[3],Text=[In a function call, the accessibility level of the
+actual object for each explicitly aliased parameter shall not be statically
+deeper than accessibility level of the master of the function result.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Since explicitly aliased parameters are either
+  tagged or required to be objects, there is always an object (possibly
+  anonymous) to talk about. This is discussing the static accessibility level of
+  the actual object; it does not depend on any runtime information (for instance
+  when the actual object is a formal parameter to another call).]}
+@end{Discussion}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This accessibility check (and its dynamic cousin
+  as well) can only fail if the function call is used to directly initialize a
+  built-in-place object with a master different than that enclosing the call.
+  The only place all of those conditions exist is in the initializer of an
+  @nt{allocator}; in all other cases this check will always pass.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0144-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[Two @nt{name}s are
+@i{known to denote the same object} if:@Defn{known to denote the same object}]}
 
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -2235,6 +2309,22 @@ the formal parameter object is created, and:
   the Constraint_Error is raised before the call, rather than after.
 @end{Ramification}
 @end(itemize)
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4]}
+@ChgAdded{Version=[3],Text=[In a function call, for each explicitly aliased
+parameter, a check is made that the accessibility level of the master of the
+actual object is not deeper than that of the master of the function result.]}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[If the actual object to a call @i<C> is a formal
+  parameter of some function call @i<F>, no dynamic check against the master of
+  the actual parameter of @i<F> is necessary. Any case which could fail the
+  dynamic check is already statically illegal (either at the call site of @i<F>,
+  or at the call site @i<C>). This is important, as it would require nasty
+  distributed overhead to accurately know the dynamic accessibility of a formal
+  parameter (all tagged and explicitly aliased parameters would have to carry
+  accessibility levels).]}
+@end{Ramification}
 @end{Itemize}
 
 @PDefn2{Term=[constrained],Sec=(object)}
@@ -2352,10 +2442,15 @@ as it is subsumed by earlier clauses and subclauses.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added a definition for
   positional parameters, as this is missing from Ada 95 and later.]}
 
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
+  @ChgAdded{Version=[3],Text=[Rules have been added defining the legality
+  and dynamic checks needed for explicitly aliased parameters (see
+  @RefSecNum{Subprogram Declarations}).]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0144-2]}
   @ChgAdded{Version=[3],Text=[Additional rules have been added such
   that passing an object to an @key[in out]
-  or @key[out] parameter of a function illegal if it is used elsewhere in a
+  or @key[out] parameter of a function is illegal if it is used elsewhere in a
   construct which allows evaluation in an arbitrary order. Such calls are
   not portable (since the results may depend on the evaluation order), and
   the results could even vary because of optimization settings and the like.
@@ -3496,10 +3591,12 @@ to declare a procedure with an empty body.]}
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=<null_procedure_declaration>,Old=<>}>,
 rhs="@Chg{Version=[2],New=<
    [@Syn2{overriding_indicator}]
-   @Syn2{procedure_specification} @key{is} @key{null};>,Old=<>}"}
+   @Syn2{procedure_specification} @key{is} @key{null}@Chg{Version=[3],New=<
+       [@Syn2{aspect_specification}]>,Old=[]};;>,Old=<>}"}
 @end{Syntax}
 
 @begin{StaticSem}
@@ -3553,3 +3650,9 @@ The elaboration of a @nt{null_procedure_declaration} has no effect.]}
 Null procedures are new.]}
 @end{Extend95}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a @nt{null_procedure_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}

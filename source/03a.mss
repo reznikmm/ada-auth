@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:13 $}
+@Comment{$Date: 2010/09/02 06:27:37 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.99 $}
+@Comment{$Revision: 1.100 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -978,12 +978,14 @@ A @nt<type_declaration> declares a type and its first subtype.
    | @Syn2{private_extension_declaration}"}
 
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<full_type_declaration>,rhs="
-     @key{type} @Syn2{defining_identifier} [@Syn2{known_discriminant_part}] @key{is} @Syn2{type_definition};
+     @key{type} @Syn2{defining_identifier} [@Syn2{known_discriminant_part}] @key{is} @Syn2{type_definition}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};
    | @Syn2{task_type_declaration}
    | @Syn2{protected_type_declaration}"}
 
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
 @Syn{tabs=[P29], lhs=<type_definition>,rhs="
      @Syn2{enumeration_type_definition}@\| @Syn2{integer_type_definition}
    | @Syn2{real_type_definition}@\| @Syn2{array_type_definition}
@@ -1182,6 +1184,12 @@ created@Chg{Version=[2],New=[ (for a limited type)],Old=[]}.
   all types have a well-defined full view.]}
 @end{DiffWord95}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a @nt{full_type_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
 
 @LabeledSubClause{Subtype Declarations}
 
@@ -1191,9 +1199,10 @@ declared type, as defined by a @nt<subtype_indication>.
 @end{Intro}
 
 @begin{Syntax}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<subtype_declaration>,rhs="
-   @key{subtype} @Syn2{defining_identifier} @key{is} @Syn2{subtype_indication};"}
-
+   @key{subtype} @Syn2{defining_identifier} @key{is} @Syn2{subtype_indication}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @Syn{lhs=<subtype_indication>,rhs=" @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark} [@Syn2{constraint}]"}
@@ -1328,8 +1337,17 @@ since it always denotes a subtype.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   An optional @nt{null_exclusion} can be used in a @nt{subtype_indication}.
-  This is described in @RefSecNum{Access Types}]}
+  This is described in @RefSecNum{Access Types}.]}
 @end{Extend95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a @nt{subtype_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
+
+
 
 
 @LabeledSubClause{Classification of Operations}
@@ -1884,10 +1902,14 @@ of the (anonymous) type of the object.
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00385-01],ARef=[AI95-00406-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<object_declaration>,rhs="
-    @Syn2{defining_identifier_list} : [@key{aliased}] [@key{constant}] @Syn2{subtype_indication} [:= @Syn2{expression}];@Chg{Version=[2],New=<
-  | @Syn2{defining_identifier_list} : [@key{aliased}] [@key{constant}] @Syn2{access_definition} [:= @Syn2{expression}];>,Old=<>}
-  | @Syn2{defining_identifier_list} : [@key{aliased}] [@key{constant}] @Syn2{array_type_definition} [:= @Syn2{expression}];
+    @Syn2{defining_identifier_list} : [@key{aliased}] [@key{constant}] @Syn2{subtype_indication} [:= @Syn2{expression}]@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};@Chg{Version=[2],New=<
+  | @Syn2{defining_identifier_list} : [@key{aliased}] [@key{constant}] @Syn2{access_definition} [:= @Syn2{expression}]@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};>,Old=<>}
+  | @Syn2{defining_identifier_list} : [@key{aliased}] [@key{constant}] @Syn2{array_type_definition} [:= @Syn2{expression}]@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};
   | @Syn2{single_task_declaration}
   | @Syn2{single_protected_declaration}"}
 
@@ -2392,6 +2414,14 @@ without an initialization expression.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
   @ChgAdded{Version=[2],Text=[Added examples of various new constructs.]}
 @end{DiffWord95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in an @nt{object_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
+
 
 
 @LabeledSubClause{Number Declarations}
