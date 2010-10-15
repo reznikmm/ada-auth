@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2010/09/02 06:27:37 $}
+@Comment{$Date: 2010/09/04 00:30:44 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.38 $}
+@Comment{$Revision: 1.39 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1115,15 +1115,31 @@ The constant-ness of loop parameters is specified in
 
 @LabeledAddedSubClause{Version=[3],Name=[User-Defined Iterators]}
 
-@begin{Syntax}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<iterator_specification>,Old=<>}>,
-rhs="@Chg{Version=[3],New=<@Syn2{defining_identifier} @key[in] [@key{reverse}] @SynI{iterator_}@Syn2{name}>,Old=<>}"}
-@end{Syntax}
-
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Text=[@i<@b{Editor's Note:} This subclause is a placeholder
 for the unfinished AI05-0139-2.>]}
+
+@begin{Syntax}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<iterator_specification>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<
+    @Syn2{defining_identifier} @key[in] [@key{reverse}] @SynI{iterator_}@Syn2{name}
+  | @Syn2{defining_identifier} [: @Syn2{subtype_indication}] @key[of] [@key{reverse}] @SynI{array_}@Syn2{name}
+  | @Syn2{defining_identifier} [: @Syn2{subtype_indication}] @key[of] [@key{reverse}] @SynI{iteratable_}@Syn2{name}>,Old=<>}"}
+@end{Syntax}
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[In an @nt{iterator_specification}, the expected type for the
+@SynI{iterator_}@nt{name} is any iterator type; the expected type for the
+@SynI{array_}@nt{name} is any array type; the expected type for the
+@SynI{iteratable_}@nt{name} is any iteratable type.]}
+@end{Resolution}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+@ChgAdded{Version=[3],Text=[@b<@i<Editor's note: The remainder of the rules are
+omitted at this time.>>]}
+
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}

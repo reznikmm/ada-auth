@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 2010/08/13 05:23:14 $ $Author: randy $ }
+@comment{ $Revision: 1.3 $ $Date: 2010/09/04 00:30:44 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Vectors]}
 
@@ -36,6 +36,7 @@ the profiles:]}
                   Before    : @key{in}     Extended_Index;
                   Count     : @key{in}     Count_Type := 1);]}
 
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Noprefix=[T],Keepnext=[T],Type=[Leading],Text=[@key{procedure} Insert (Container : @key{in out} Vector;
                   Before    : @key{in}     Cursor;
                   Position  :    @key{out} Cursor;

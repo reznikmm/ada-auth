@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.73 $ $Date: 2010/08/13 05:23:14 $ $Author: randy $ }
+@comment{ $Revision: 1.74 $ $Date: 2010/09/04 00:30:44 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:14 $}
+@Comment{$Date: 2010/09/04 00:30:44 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -2226,6 +2226,7 @@ to an array. In particular, if the length of a vector is @i{N}, then]}
   Text=[The worst-case time complexity of Element
   for Containers.Vector should be @i{O}(log @i{N}).]}]}
 
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[the worst-case time complexity of Append with
   Count=1 when @i{N} is less than the capacity of the vector should be
   @i{O}(log @i{N}); and]}
