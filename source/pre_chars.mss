@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.32 $ $Date: 2010/08/13 05:23:14 $ $Author: randy $ }
+@comment{ $Revision: 1.33 $ $Date: 2010/10/15 07:05:38 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:14 $}
+@Comment{$Date: 2010/10/15 07:05:38 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -30,7 +30,7 @@ This clause is new to Ada 95.
 @end{Diffword95}
 
 
-@RMNewPage@Comment{For printed Ada 2005 RM}
+@Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
 @LabeledRevisedSubClause{Version=[2],New=[The Packages Characters, Wide_Characters, and Wide_Wide_Characters],Old=[The Package Characters]}
 
 @begin{StaticSem}
@@ -408,7 +408,7 @@ are not considered lower case letters by Ada.Characters.Handling.]}
 @end{DiffWord2005}
 
 
-@RMNewPage@Comment{For printed Ada 2005 RM}
+@Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
 @LabeledSubClause{The Package Characters.Latin_1}
 @begin{Intro}
 The package Characters.Latin_1 declares constants for

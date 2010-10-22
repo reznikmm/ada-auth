@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:13 $}
+@Comment{$Date: 2010/10/15 07:05:37 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -706,7 +706,7 @@ of a compound delimiter, or as a character of a @nt{comment},
 @nt{string_literal}, @nt{character_literal}, or
 @nt{numeric_literal}.
 
-@rmnewpage@ChgNote{Ada 2005 only}
+@Comment{@rmnewpage@ChgNote{Printed Ada 2005 only}}
 @Leading@keepnext@;The following names are used when referring to compound
 delimiters:@table{Columns=[2],
 Alignment=[Allleft],FirstColWidth=[1],LastColWidth=[4],
@@ -1377,7 +1377,8 @@ or @nt{discriminant_part}.
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0100-1],ARef=[AI05-0163-1]}
 At any place where the syntax rules allow a construct defined by a
 syntactic category whose name ends with @ldquote@ntf{declaration}@rdquote,
-@ldquote@ntf{statement}@rdquote, @ldquote@ntf{clause}@rdquote, or
+@Chg{Version=[3],New=[@ldquote@ntf{item}@rdquote, ],Old=[]}@ldquote@ntf{statement}@rdquote,
+@ldquote@ntf{clause}@rdquote, or
 @ldquote@ntf{alternative}@rdquote, or one of the syntactic categories
 @nt{variant} or @nt{exception_handler};
 but not in place of such a construct@Chg{Version=[3],New=[ if the construct
@@ -1959,10 +1960,9 @@ to @RefSec(Obsolescent Features).
   @ntf{other_format} characters into reserved words in the first place,
   so there should be very few such programs.]}
 
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI05-0176-1]}
-  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 2005}
-  The following word is not reserved in Ada 2005, but are reserved in Ada
-  2012: @key{some}. Use of this word as an identifier will need to be changed,
-  but we do not expect them to be common.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
+  @ChgAdded{Version=[3],Text=[The following word is not reserved in Ada 2005, but is
+  reserved in Ada 2012: @key{some}. Use of this word as an identifier will need
+  to be changed, but we do not expect them to be common.]}
 @end{Incompatible2005}
 

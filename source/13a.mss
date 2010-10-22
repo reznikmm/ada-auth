@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2010/09/04 00:30:44 $}
+@Comment{$Date: 2010/10/15 07:05:38 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -2804,7 +2804,7 @@ attribute_definition_clause.]}
   @ChgAdded{Version=[3],Text=[This rule allows the same declaration to be
   elaborated multiple times. In that case, different types could have the same
   external tag. If that happens, Internal_Tag would return some unspecified tag,
-  and Decendant_Tag probably would return the intended tag (using the given
+  and Descendant_Tag probably would return the intended tag (using the given
   ancestor to determine which type is intended). However, in some cases (such as
   multiple instantiations of a derived tagged type declared in a generic body),
   Tag_Error might be raised by Descendant_Tag if multiple types are identified.]}
@@ -3230,7 +3230,7 @@ For now, we just get the formatting right.}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Pre'Class@\This aspect
   specifies a precondition for a callable entity and its
-  decendants; it shall be specified by an @nt{expression}, called a
+  descendants; it shall be specified by an @nt{expression}, called a
   @i<precondition expression>.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3241,21 +3241,21 @@ For now, we just get the formatting right.}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Post'Class@\This aspect
-  This aspect specifies a postcondition for a callable entity and its
-  decendants; it shall be specified by an @nt{expression}, called a @i<postcondition
+  specifies a postcondition for a callable entity and its descendants;
+  it shall be specified by an @nt{expression}, called a @i<postcondition
   expression>.]}
 @end{Description}
 
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
 @ChgAdded{Version=[3],Text=[The expected type for a precondition or
-postcondition expression is the predefined type Boolean.]}
+postcondition expression is any boolean type.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
 @ChgAdded{Version=[3],Text=[Within the expression for a Pre'Class or Post'Class aspect for a primitive
 subprogram of a tagged type @i<T>, a name that denotes a formal parameter of type
 @i<T> is interpreted as having type @i<T>'Class. Similarly, a name that denotes a
-formal access parameter of type access-to-T is interpreted as having type
+formal access parameter of type access-to-@i<T> is interpreted as having type
 access-to-@i<T>'Class. @Redundant[This ensures the expression is
 well-defined for a primitive subprogram of a type descended from @i<T>.]]}
 
@@ -3263,7 +3263,7 @@ well-defined for a primitive subprogram of a type descended from @i<T>.]]}
 @ChgAdded{Version=[3],Text=[For an attribute_reference with attribute_designator
 Old, if the attribute reference has an expected type or shall resolve to a given
 type, the same applies to the @nt{prefix}; otherwise the @nt{prefix} shall be
-resolved independent of context.]}
+resolved independently of context.]}
 
 @end{Resolution}
 
@@ -3384,12 +3384,12 @@ subprogram or entry declaration is Check, then upon successful return from a
 call of the subprogram or entry, prior to copying back any by-copy @key[in out]
 or @key[out] parameters, a postcondition check is performed. This consists of
 the evaluation of the postcondition expressions that apply to the subprogram or
-entry. If any of the the postcondition expressions evaluate to False, then
+entry. If any of the postcondition expressions evaluate to False, then
 Ada.Assertions.Assertion_Error is raised. The order of performing the checks is
 not specified, and if one of them evaluates to False, it is not specified
-whether the others are checked. It is not specified whether any constraint
-checks associated with copying back @key[in out] or @key[out] parameters are
-performed before or after the postcondition check.]}
+whether the other postcondition expressions are evaluated. It is not specified
+whether any constraint checks associated with copying back @key[in out] or
+@key[out] parameters are performed before or after the postcondition check.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
 @ChgAdded{Version=[3],Text=[If a precondition or postcondition check fails, the
@@ -4506,7 +4506,7 @@ The Bit_Order attribute is new to Ada 95.
 
 
 
-@RMNewPage@Comment{For printed RM Ada 2005}
+@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
 @LabeledClause{Change of Representation}
 
 @begin{Intro}

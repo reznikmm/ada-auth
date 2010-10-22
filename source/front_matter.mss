@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.63 $ $Date: 2009/12/18 07:15:34 $}
+@comment{$Revision: 1.64 $ $Date: 2010/10/15 07:05:38 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -1158,7 +1158,7 @@ clause is not included in the International Standard.],Old=[]}
 @Chg{New=[This document has been revised with the corrections specified in Technical Corrigendum 1
 (ISO/IEC 8652:1995/COR.1:2001)@Chg{Version=[2],New=[@Chg{Version=[3],New=[,],Old=[ and]}
 Amendment 1 (ISO/IEC 8652/AMD 1:2007)@Chg{Version=[3],New=[, and
-Amendment 2 (ISO/IEC 8652/AMD 2:201z],Old=[]}],Old=[]}.
+Amendment 2 (ISO/IEC 8652/AMD 2:201z)],Old=[]}],Old=[]}.
 In addition, a variety of editorial errors have been corrected.],Old=[]}
 @end{RMOnly}
 @begin{AARMOnly}
@@ -1168,7 +1168,7 @@ In addition, a variety of editorial errors have been corrected.],Old=[]}
 @Chg{New=[This document has been revised with the corrections specified in Technical Corrigendum 1
 (ISO/IEC 8652:1995/COR.1:2001)@Chg{Version=[2],New=[@Chg{Version=[3],New=[,],Old=[ and]}
 Amendment 1 (ISO/IEC 8652/AMD 1:2007)@Chg{Version=[3],New=[, and
-Amendment 2 (ISO/IEC 8652/AMD 2:201z],Old=[]}],Old=[]}.
+Amendment 2 (ISO/IEC 8652/AMD 2:201z)],Old=[]}],Old=[]}.
 In addition, additional annotations have been added and
 a variety of editorial errors have been corrected.],Old=[]}
 @end{AARMOnly}

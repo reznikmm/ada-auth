@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:14 $}
+@Comment{$Date: 2010/10/15 07:05:38 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.39 $}
+@comment{$Revision: 1.40 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -49,7 +49,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Bounded_Ordered_Maps @em @RefSecNum{The Generic Package Containers.Bounded_Ordered_Maps}
 @\@\@\Bounded_Ordered_Sets @em @RefSecNum{The Generic Package Containers.Bounded_Ordered_Sets}
 @\@\@\Bounded_Priority_Queues @em @RefSecNum{The Generic Package Containers.Bounded_Priority_Queues}
-@\@\@\Bounded_Synchronized_Queues @em @RefSecNum{The Generic Package Containers.Bounded_Synchronized_Queues}
+@\@\@\Bounded_Synchronized_Queues
+@\@\@\@\@\@\ @em @RefSecNum{The Generic Package Containers.Bounded_Synchronized_Queues}
 @\@\@\Bounded_Vectors @em @RefSecNum{The Generic Package Containers.Bounded_Vectors}
 ), Old=()}@\@\@\Doubly_Linked_Lists @em @RefSecNum{The Generic Package Containers.Doubly_Linked_Lists}
 @\@\@\Generic_Array_Sort @em @RefSecNum{Array Sorting}
@@ -76,11 +77,17 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @Chg{Version=[3],New=(@\@\@\Multiway_Trees @em @RefSecNum{The Generic Package Containers.Multiway_Trees}
 ), Old=()}@\@\@\Ordered_Maps @em @RefSecNum{The Generic Package Containers.Ordered_Maps}
 @\@\@\Ordered_Sets @em @RefSecNum{The Generic Package Containers.Ordered_Sets}
-@Chg{Version=[3],New=(@\@\@\Synchronized_Queue_Interfaces @em @RefSecNum{The Generic Package Containers.Synchronized_Queue_Interfaces}
-@\@\@\Unbounded_Priority_Queues @em @RefSecNum{The Generic Package Containers.Unbounded_Priority_Queues}
-@\@\@\Unbounded_Synchronized_Queues @em @RefSecNum{The Generic Package Containers.Unbounded_Synchronized_Queues}
+@Chg{Version=[3],New=(@\@\@\Synchronized_Queue_Interfaces
+@\@\@\@\@\@\@em @RefSecNum{The Generic Package Containers.Synchronized_Queue_Interfaces}
+@\@\@\Unbounded_Priority_Queues
+@\@\@\@\@\@\@em @RefSecNum{The Generic Package Containers.Unbounded_Priority_Queues}
+@\@\@\Unbounded_Synchronized_Queues
+@\@\@\@\@\@\@em @RefSecNum{The Generic Package Containers.Unbounded_Synchronized_Queues}
 ), Old=()}@\@\@\Vectors @em @RefSecNum{The Generic Package Containers.Vectors}
-), Old=()}@\@\Decimal @em @RefSecNum{The Package Decimal}
+), Old=()}>@NewColumn@Comment{This should be conditional for version 2/3, but not with the current generator}
+@Noparanum@shrink<@Chg{Version=[2],New=[Standard (@i{...continued})
+@\Ada (@i{...continued})
+@\@\Decimal @em @RefSecNum{The Package Decimal}
 @\@\Direct_IO @em @RefSecNum{The Generic Package Direct_IO}
 @Chg{Version=[2],New=(@\@\Directories @em @RefSecNum{The Package Directories}
 @Chg{Version=[3],New=(@\@\@\Hierarchical_File_Names @em @RefSecNum{The Package Directories.Hierarchical_File_Names}
@@ -89,10 +96,7 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\EDF @em @RefSecNum{Earliest Deadline First Dispatching}
 @Chg{Version=[3],New=[@\@\@\Non_Preemptive @em @RefSecNum{Non-Preemptive Dispatching}
 ], Old=[]}@\@\@\Round_Robin @em @RefSecNum{Round Robin Dispatching}
-), Old=()}@\@\Dynamic_Priorities @em @RefSecNum{Dynamic Priorities}>
-@NewColumn@Comment{This should be conditional for version 2, but not with the current generator}
-@Noparanum@shrink<@Chg{Version=[2],New=[Standard (@i{...continued})
-@\Ada (@i{...continued})
+), Old=()}@\@\Dynamic_Priorities @em @RefSecNum{Dynamic Priorities}
 @\@\Environment_Variables @em @RefSecNum{The Package Environment_Variables}
 ], Old=()}@\@\Exceptions @em @RefSecNum{The Package Exceptions}
 @Chg{Version=[2],New=(@\@\Execution_Time @em @RefSecNum{Execution Time}

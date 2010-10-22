@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/09/02 06:27:37 $}
+@Comment{$Date: 2010/10/15 07:05:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.102 $}
+@Comment{$Revision: 1.103 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3680,7 +3680,7 @@ types used as parameters allow passing of subprograms at any level.],Old=[]}
   being aliased now is worded in terms of immutably limited types. Return
   objects of such types are also considered aliased.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0142-4]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
   @ChgAdded{Version=[3],Text=[Explicitly aliased parameters (see
   @RefSecNum{Subprogram Declarations}) are defined to be aliased.]}
 @end{DiffWord2005}

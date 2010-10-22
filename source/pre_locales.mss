@@ -1,13 +1,13 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_locales.mss,v $ }
-@comment{ $Revision: 1.1 $ $Date: 2010/08/13 05:23:14 $ $Author: randy $ }
+@comment{ $Revision: 1.2 $ $Date: 2010/10/15 07:05:38 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:14 $}
+@Comment{$Date: 2010/10/15 07:05:38 $}
 
 @LabeledAddedClause{Version=[3],Name=[The Package Locales]}
 
 @begin{Intro}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0127-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
 @ChgAdded{Version=[3],Text=[A @i{locale}@Defn{locale} identifies a geopolitical
 place or region and its associated language, which can be used to determine
 other internationalization related characteristics.]}
@@ -39,16 +39,16 @@ Locales has the following declaration:]}
 @ChgAdded{Version=[3],Text=[@key[end] Ada.Locales;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0127-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
 @ChgAdded{Version=[3],Text=[The @i{active locale}@Defn{active
 locale}@Defn2{Term=[locale],Sec=[active]} is the locale associated with the
 active partition.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0127-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
 @ChgAdded{Version=[3],Text=[Language_Code is a lower-case string representation
 of an ISO 639-3 alpha-3 code that identifies a language.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0127-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
 @ChgAdded{Version=[3],Text=[Country_Code is an upper-case string representation
 of an ISO 3166-1 alpha-2 code that identifies a country.]}
 
@@ -63,7 +63,7 @@ of an ISO 3166-1 alpha-2 code that identifies a country.]}
   countries are important enough to include.]}
 @end{Discussion}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0127-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
 @ChgAdded{Version=[3],Text=[Function Language returns the code of the language
 associated with the active locale. If the Language_Code associated with the
 active locale cannot be determined from the environment then Language returns
@@ -78,7 +78,7 @@ Language_Unknown.]}
   constants.]}
 @end{Discussion}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0127-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
 @ChgAdded{Version=[3],Text=[Function Country returns the code of the country
 associated with the active locale. If the Country_Code associated with the
 active locale cannot be determined from the environment then Country returns
@@ -87,7 +87,7 @@ Country_Unknown.]}
 @end{StaticSem}
 
 @begin{Extend2005}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0127-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
 @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
 Package Locales is new.]}
 @end{Extend2005}

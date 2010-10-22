@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.57 $ $Date: 2010/09/02 06:27:38 $ $Author: randy $ }
+@comment{ $Revision: 1.58 $ $Date: 2010/10/15 07:05:38 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2010/09/02 06:27:38 $}
+@Comment{$Date: 2010/10/15 07:05:38 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -321,7 +321,7 @@ one of its subprograms is an interrupt handler].
 
 In a multi-processor with more than one interrupt subsystem, it is
 implementation defined whether (and how) interrupt sources from
-separate subsystems share the same Interrupt_ID type
+separate subsystems share the same Interrupt_Id type
 (see @RefSecNum{The Package Interrupts}).
 In particular, the meaning of a blocked or pending interrupt may then be
 applicable to one processor only.
@@ -331,7 +331,7 @@ multi-processor. In a sense, if a particular interrupt source is not
 available to all processors, the system is not truly homogeneous.
 
 One way to approach this problem is to assign sub-ranges within
-Interrupt_ID to each interrupt subsystem, such that @lquotes@;similar@rquotes@; interrupt
+Interrupt_Id to each interrupt subsystem, such that @lquotes@;similar@rquotes@; interrupt
 sources (e.g. a timer) in different subsystems get a distinct id.
 @end{Discussion}
 
@@ -409,7 +409,7 @@ For the Interrupt_Handler and Attach_Handler pragmas, the
 with a parameterless profile.
 
 For the Attach_Handler pragma, the expected type for the
-@nt{expression} is Interrupts.Interrupt_ID
+@nt{expression} is Interrupts.Interrupt_Id
 (see @RefSecNum{The Package Interrupts}).
 @end{Resolution}
 
@@ -698,35 +698,35 @@ a protected procedure that is an interrupt handler.
 @begin{example}
 @key{with} System;@ChildUnit{Parent=[Ada],Child=[Interrupts]}
 @key[package] Ada.Interrupts @key[is]
-   @key[type] @AdaTypeDefn{Interrupt_ID} @key[is] @RI{implementation-defined};
+   @key[type] @AdaTypeDefn{Interrupt_Id} @key[is] @RI{implementation-defined};
    @key[type] @AdaTypeDefn{Parameterless_Handler} @key[is]
       @key[access] @key[protected] @key[procedure];
 
 @ChgRef{Version=[1], Kind=[Deleted]}
 @Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
-   @key[function] @AdaSubDefn{Is_Reserved} (Interrupt : Interrupt_ID)
+   @key[function] @AdaSubDefn{Is_Reserved} (Interrupt : Interrupt_Id)
       @key[return] Boolean;
 
-   @key[function] @AdaSubDefn{Is_Attached} (Interrupt : Interrupt_ID)
+   @key[function] @AdaSubDefn{Is_Attached} (Interrupt : Interrupt_Id)
       @key[return] Boolean;
 
-   @key[function] @AdaSubDefn{Current_Handler} (Interrupt : Interrupt_ID)
+   @key[function] @AdaSubDefn{Current_Handler} (Interrupt : Interrupt_Id)
       @key[return] Parameterless_Handler;
 
    @key[procedure] @AdaSubDefn{Attach_Handler}
       (New_Handler : @key[in] Parameterless_Handler;
-       Interrupt   : @key[in] Interrupt_ID);
+       Interrupt   : @key[in] Interrupt_Id);
 
    @key[procedure] @AdaSubDefn{Exchange_Handler}
       (Old_Handler : @key[out] Parameterless_Handler;
        New_Handler : @key[in] Parameterless_Handler;
-       Interrupt   : @key[in] Interrupt_ID);
+       Interrupt   : @key[in] Interrupt_Id);
 
    @key[procedure] @AdaSubDefn{Detach_Handler}
-      (Interrupt : @key[in] Interrupt_ID);
+      (Interrupt : @key[in] Interrupt_Id);
 
-   @key[function] @AdaSubDefn{Reference}(Interrupt : Interrupt_ID)
+   @key[function] @AdaSubDefn{Reference}(Interrupt : Interrupt_Id)
       @key{return} System.Address;
 
 @key[private]
@@ -735,10 +735,10 @@ a protected procedure that is an interrupt handler.
 
 
 @key[package] Ada.Interrupts.Names @key[is]@ChildUnit{Parent=[Ada.Interrupts],Child=[Names]}
-   @RI{implementation-defined} : @key[constant] Interrupt_ID :=
+   @RI{implementation-defined} : @key[constant] Interrupt_Id :=
      @RI{implementation-defined};
       . . .
-   @RI{implementation-defined} : @key[constant] Interrupt_ID :=
+   @RI{implementation-defined} : @key[constant] Interrupt_Id :=
      @RI{implementation-defined};
 @key[end] Ada.Interrupts.Names;
 @end{example}
@@ -747,7 +747,7 @@ a protected procedure that is an interrupt handler.
 
 @begin{RunTime}
 
-The Interrupt_ID type is an implementation-defined discrete type used to
+The Interrupt_Id type is an implementation-defined discrete type used to
 identify interrupts.
 
 The Is_Reserved function returns True if and only if the specified
@@ -794,7 +794,7 @@ The Detach_Handler procedure restores the default treatment for the
 specified interrupt.
 
 For all operations defined in this package that take a parameter of type
-Interrupt_ID, with the exception of Is_Reserved and Reference, a check is
+Interrupt_Id, with the exception of Is_Reserved and Reference, a check is
 made that the specified interrupt is not reserved.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised if this check fails.
@@ -869,11 +869,11 @@ the implementation.
 Device_Priority : @key[constant]
   @key[array] (1..5) of System.Interrupt_Priority := ( ... );@Softpage
 @key[protected] @key[type] Device_Interface
-  (Int_ID : Ada.Interrupts.Interrupt_ID) @key[is]
+  (Int_Id : Ada.Interrupts.Interrupt_Id) @key[is]
   @key[procedure] Handler;
-  @key[pragma] Attach_Handler(Handler, Int_ID);
+  @key[pragma] Attach_Handler(Handler, Int_Id);
   ...
-  @key[pragma] Interrupt_Priority(Device_Priority(Int_ID));
+  @key[pragma] Interrupt_Priority(Device_Priority(Int_Id));
 @key[end] Device_Interface;@Softpage
   ...
 Device_1_Driver : Device_Interface(1);

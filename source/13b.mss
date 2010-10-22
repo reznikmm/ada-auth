@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:14 $}
+@Comment{$Date: 2010/10/15 07:05:38 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -2285,7 +2285,7 @@ same pool.]}
 
 
 
-@RMNewPage@Comment{For printed Ada 2005 RM only}
+@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
 @LabeledSubClause{Unchecked Storage Deallocation}
 
 @begin{Intro}
@@ -2511,7 +2511,7 @@ This is implied by the rules of @RefSecNum{Formal Access Types}.
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added a rule that using
-  a access-to-protected-subprogram is erroneous if the associated
+  an access-to-protected-subprogram is erroneous if the associated
   object no longer exists. It hard to imagine an alternative meaning here,
   and this has no effect on correct programs.]}
 
@@ -3268,7 +3268,7 @@ followed.]}]}
 @end{Itemize}
 @end{ImplAdvice}
 
-@RMNewPage@Comment{For printed Ada 2005 RM}
+@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
 @begin{StaticSem}
 
 For @PrefixType{every subtype S of a specific type @i(T)},

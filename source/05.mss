@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2010/09/04 00:30:44 $}
+@Comment{$Date: 2010/10/15 07:05:37 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.39 $}
+@Comment{$Revision: 1.40 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1150,7 +1150,7 @@ omitted at this time.>>]}
 
 
 
-@RMNewPage
+@Comment{@RMNewPage - For Ada 95 thru Ada 2005 versions}
 @LabeledClause{Block Statements}
 
 @begin{Intro}

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2010/09/02 06:27:37 $}
+@Comment{$Date: 2010/10/15 07:05:37 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.103 $}
+@Comment{$Revision: 1.104 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1499,7 +1499,7 @@ Such a @nt{pragma} applies to all of the denoted entities.
 @end{Extend95}
 
 
-@RMNewPage@Comment{For printed RM Ada 2005 only}
+@Comment{@RMNewPage@Comment{For printed RM Ada 2005 only} - Now Ada 2012}
 @LabeledClause{Subprogram Calls}
 
 @begin{Intro}
@@ -3580,7 +3580,7 @@ as the result type is not Boolean.
 @end{DiffWord2005}
 
 
-@RMNewPage@Comment{For printed RM Ada 2005}
+@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
 @LabeledAddedClause{Version=[2],Name=[Null Procedures]}
 
 @begin{Intro}
@@ -3596,7 +3596,7 @@ to declare a procedure with an empty body.]}
 rhs="@Chg{Version=[2],New=<
    [@Syn2{overriding_indicator}]
    @Syn2{procedure_specification} @key{is} @key{null}@Chg{Version=[3],New=<
-       [@Syn2{aspect_specification}]>,Old=[]};;>,Old=<>}"}
+       [@Syn2{aspect_specification}]>,Old=[]};>,Old=<>}"}
 @end{Syntax}
 
 @begin{StaticSem}

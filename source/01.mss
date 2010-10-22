@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2010/08/13 05:23:13 $}
+@Comment{$Date: 2010/10/15 07:05:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1869,7 +1869,7 @@ Standards.
 @Defn{Language code standard}
 ISO/IEC 639-3:2007, @i{Terminology and other language and content resources @em
 Codes for the representation of names of languages @em Part 3: Alpha-3 code
-comprehensive coverage of languages}]}
+comprehensive coverage of languages}.]}
 
 @Defn{ISO/IEC 646:1991}
 @Defn{646:1991, ISO/IEC standard}
@@ -1903,7 +1903,7 @@ ISO@Chg{Version=[2],New=[/IEC],Old=[]} 1989:@Chg{Version=[2],New=[2002],Old=[198
 @Defn{Country code standard}
 ISO/IEC 3166-1:2006, @i{Information and documentation @em
 Codes for the representation of names of countries and their subdivisions
-@em Part 1: Country Codes}]}
+@em Part 1: Country Codes}.]}
 
 @Defn{ISO/IEC 6429:1992}
 @Defn{6429:1992, ISO/IEC standard}

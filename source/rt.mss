@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.90 $ $Date: 2010/08/20 06:48:26 $ $Author: randy $ }
+@comment{ $Revision: 1.91 $ $Date: 2010/10/15 07:05:38 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2010/08/20 06:48:26 $}
+@Comment{$Date: 2010/10/15 07:05:38 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1430,7 +1430,7 @@ priority will not be subject to round robin dispatching.]}
 @end{Extend95}
 
 
-@RMNewPage@Comment{For printed Ada 2005 RM}
+@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
 @LabeledAddedSubClause{Version=[2],Name=[Earliest Deadline First Dispatching]}
 
 @begin{Intro}
@@ -2074,7 +2074,7 @@ calls another protected operation on the same protected object).
 @end{DiffWord95}
 
 
-@Comment{@RMNewPage  Break here so printed Ada 95 RM looks better.}
+@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
 @LabeledClause{Entry Queuing Policies}
 
 @begin{Intro}
@@ -2604,7 +2604,7 @@ affected tasks.
 @end{DiffWord95}
 
 
-@RMNewPage@Comment{For printed Ada 2005 RM}
+@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
 @LabeledAddedSubClause{Version=[2],Name=[Dynamic Priorities for Protected Objects]}
 
 @begin{Intro}
@@ -2704,7 +2704,7 @@ completion of the protected action in which it is executed.]}
 
 
 
-@RMNewPage@Comment{For printed RM Ada 2005 only}
+@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
 @LabeledClause{Preemptive Abort}
 
 @begin{Intro}
@@ -2866,7 +2866,7 @@ construction of highly efficient tasking run-time systems.]
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}
     @ChgAdded{Version=[3],Text=[The second sentence prevents the declaration
-    objects of access types which would require nested finalization. It
+    of objects of access types which would require nested finalization. It
     also prevents the declarations of coextensions that need
     finalization in a nested scope. The latter cannot be done by preventing
     the declaration of the objects, as it is not necessarily known if the
@@ -4449,7 +4449,7 @@ Max_Task_Entries => 0.]}
 @end{DiffWord2005}
 
 
-@RMNewPage@Comment{For printed Ada 2007 RM}
+@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
 @LabeledAddedClause{Version=[2],Name=[Execution Time]}
 
 @begin{Intro}
@@ -4566,7 +4566,7 @@ and largest values of the CPU_Time type, respectively.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0170-1]}
 @ChgAdded{Version=[3],Text=[The execution time value for the
-Clock_For_Interrupts is initialized to zero.]}
+function Clock_For_Interrupts is initialized to zero.]}
 
 @begin{RunTime}
 
@@ -4944,7 +4944,7 @@ Timer objects.]}
 @end{Extend95}
 
 
-@RMNewPage@Comment{For printed Ada 2007 RM}
+@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
 @LabeledAddedSubclause{Version=[2],Name=[Group Execution Time Budgets]}
 
 @begin{Intro}
@@ -5235,9 +5235,9 @@ language-defined library package exists:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{with} Ada.Interrupts;
 @key{package} Ada.Execution_Time.Interrupts @key{is}@ChildUnit{Parent=[Ada.Execution_Time],Child=[Interrupts]}
-   @key{function} @AdaSubDefn{Clock} (I : Ada.Interrupts.Interrupt_ID)
+   @key{function} @AdaSubDefn{Clock} (I : Ada.Interrupts.Interrupt_Id)
         @key{return} CPU_Time;
-   @key{function} @AdaSubDefn{Supported} (I : Ada.Interrupts.Interrupt_ID)
+   @key{function} @AdaSubDefn{Supported} (I : Ada.Interrupts.Interrupt_Id)
         @key{return} Boolean;
 @key{end} Ada.Execution_Time.Interrupts;]}
 @end{Example}
@@ -5257,7 +5257,7 @@ don't repeat that requirement here.]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
-@ChgAdded{Version=[3],Text=[For each interrupt ID, the execution time value
+@ChgAdded{Version=[3],Text=[For each interrupt, the execution time value
 is initially set to zero.]}
 @end{StaticSem}
 
@@ -5270,9 +5270,10 @@ Program_Error.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
 @ChgAdded{Version=[3],Text=[The function Supported returns True if the
-implementation is monitoring the execution time of interrupt I. Otherwise it
-returns False. For any interrupt ID I for which Supported(I) returns False, the
-function Clock(I) will return a value equal to Ada.Execution_Time.Time_Of(0).]}
+implementation is monitoring the execution time of the interrupt identified
+by I. Otherwise it returns False. For any Interrupt_Id I for which
+Supported(I) returns False, the function Clock(I) will return a value equal to
+Ada.Execution_Time.Time_Of(0).]}
 
 @end{RunTime}
 
@@ -5589,7 +5590,7 @@ language-defined library package exists:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{CPU_Range} @key[is range] 0 .. @RI<implementation-defined>;
    @AdaObjDefn{Not_A_Specific_CPU} : @key[constant] CPU_Range := 0;
-   @key[subtype] @AdaSubtypeDefn{Name=[CPU],Of=[CPU_Range]} @key[is] CPU_Range @key[range] 1 .. CPU_Range'last;]}
+   @key[subtype] @AdaSubtypeDefn{Name=[CPU],Of=[CPU_Range]} @key[is] CPU_Range @key[range] 1 .. CPU_Range'Last;]}
 @ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
 Text=[The value of CPU_Range'Last in System.Multiprocessors.]}]}
 

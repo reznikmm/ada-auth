@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.44 $ $Date: 2010/08/13 05:23:14 $ $Author: randy $ }
+@Comment{ $Revision: 1.45 $ $Date: 2010/10/15 07:05:38 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:14 $}
+@Comment{$Date: 2010/10/15 07:05:38 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -1174,7 +1174,7 @@ and need not be detected.]}
   Pragma Detect_Blocking is new.]}
 @end{Extend95}
 
-@RMNewPage@Comment{For printed version of Ada 2007 RM}
+@Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
 @LabeledAddedClause{Version=[2],Name=[Pragma Partition_Elaboration_Policy]}
 
 @begin{Intro}

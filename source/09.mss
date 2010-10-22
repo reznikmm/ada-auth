@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2010/09/02 06:27:37 $}
+@Comment{$Date: 2010/10/15 07:05:37 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.98 $}
+@Comment{$Revision: 1.99 $}
 
 @begin{Intro}
 
@@ -958,7 +958,7 @@ selecting the @nt<terminate_alternative>, but before termination.
 @end{DiffWord95}
 
 
-@RMNewPage@Comment{For printed RM Ada 2005}
+@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
 @LabeledClause{Protected Units and Protected Objects}
 
 @begin{Intro}
@@ -4755,7 +4755,7 @@ a requeue-with-abort.
 @end{DiffWord83}
 
 
-@RMNewPage@Comment{For printed Ada 2005 RM}
+@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
 @LabeledSubClause{Asynchronous Transfer of Control}
 
 @begin{Intro}

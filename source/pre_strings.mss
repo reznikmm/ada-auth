@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.61 $ $Date: 2010/08/13 05:23:14 $ $Author: randy $ }
+@comment{ $Revision: 1.62 $ $Date: 2010/10/15 07:05:38 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2010/08/13 05:23:14 $}
+@Comment{$Date: 2010/10/15 07:05:38 $}
 
 @LabeledClause{String Handling}
 
@@ -3065,7 +3065,7 @@ Strings.Fixed.Hash_Case_Insensitive has the following declaration:]}
 @ChgAdded{Version=[3],Text=[@key<with> Ada.Containers, Ada.Strings.Hash_Case_Insensitive;
 @key[function] Ada.Strings.Fixed.Hash_Case_Insensitive (Key : String)@SubChildUnit{Parent=[Ada.Strings.Fixed],Child=[Hash_Case_Insensitive]}
    @key[return] Containers.Hash_Type @key[renames] Ada.Strings.Hash_Case_Insensitive;
-pragma Pure(Hash_Case_Insensitive);]}
+@key[pragma] Pure(Hash_Case_Insensitive);]}
 @end{Example}
 
 
@@ -3172,7 +3172,7 @@ Strings.Fixed.Equal_Case_Insensitive has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[with] Ada.Containers, Ada.Strings.Equal_Case_Insensitive;
-function Ada.Strings.Fixed.Equal_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Fixed],Child=[Equal_Case_Insensitive]}
+@key[function] Ada.Strings.Fixed.Equal_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Fixed],Child=[Equal_Case_Insensitive]}
    (Left, Right : String) @key[return] Boolean
       @key[renames] Ada.Strings.Equal_Case_Insensitive;
 @key[pragma] Pure(Equal_Case_Insensitive);]}

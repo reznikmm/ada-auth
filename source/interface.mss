@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.52 $ $Date: 2010/05/08 06:31:34 $ $Author: randy $ }
+@comment{ $Revision: 1.53 $ $Date: 2010/10/15 07:05:38 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2010/05/08 06:31:34 $}
+@Comment{$Date: 2010/10/15 07:05:38 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -2197,10 +2197,10 @@ is subject to a per-object constraint, then the component subtype shall be an
 unchecked union subtype.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0026-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0026-1]}
 @ChgAdded{Version=[2],Text=[Any name that denotes a discriminant of an object
 of an unchecked union type shall occur within the declarative region of the
-type@Chg{Version=[2],New=[, and shall not
+type@Chg{Version=[3],New=[, and shall not
 occur within a @nt{record_representation_clause}],Old=[]}.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
@@ -2407,7 +2407,7 @@ Y : Integer := X.F2; -- @RI[erroneous]]}
   and eliminated generic contract issues.]}
 @end{DiffWord2005}
 
-@RMNewPage@Comment{For printed RM Ada 2005}
+@Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
 @LabeledClause{Interfacing with COBOL}
 @begin{Intro}
 @Defn{interface to COBOL}

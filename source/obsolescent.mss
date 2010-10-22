@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2009/12/18 07:15:34 $}
+@Comment{$Date: 2010/10/15 07:05:38 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -271,7 +271,7 @@ primarily to decimal fixed point types now (they apply to
 floating point types only as an obsolescent feature).
 @end{DiffWord83}
 
-@RMNewPage@Comment{For printed Ada 2007 RM}
+@Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
 @LabeledClause{The Constrained Attribute}
 
 @begin{StaticSem}
@@ -586,7 +586,7 @@ interrupt model as specified in the Systems Programming Annex.
 was replaced by @nt{accept_statement}.], Old=[]}
 @end{DiffWord95}
 
-@RMNewPage@Comment{For printed RM Ada 2007}
+@Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
 @LabeledClause{Mod Clauses}
 
 @begin{Syntax}

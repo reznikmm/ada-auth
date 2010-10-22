@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2010/08/20 06:48:26 $}
+@Comment{$Date: 2010/10/15 07:05:37 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.105 $}
+@Comment{$Revision: 1.106 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -769,7 +769,7 @@ My_Object.Do_Something_Else (Flag => True);]}
 @end{DiffWord2005}
 
 
-@RMNewPage@ChgNote{Only needed for Ada 2005 version}
+@Comment{@RMNewPage@ChgNote{Only needed for Ada 2005 version} - Now Ada 2012}
 @LabeledSubClause{Attributes}
 
 @begin{Intro}
@@ -1814,7 +1814,7 @@ a record aggregate. Now we do.
 @end{Extend2005}
 
 
-@RmNewPage
+@Comment{@RmNewPage - Now Ada 2012}
 @LabeledSubClause{Extension Aggregates}
 
 @begin{Intro}
@@ -4526,7 +4526,9 @@ P(Formal => @key[if] X @key[then] Y @key[else] Z);]}
   @nt{if_expression} and a @nt{if_statement} are very similar syntactically, (as
   are a @nt{case_expression} and a @nt{case_statement}) and simple mistakes can
   appear to change one into the other, potentially causing errors to be moved
-  far away from their actual location.]}
+  far away from their actual location. The absence of @key[end if] to terminate
+  an @nt{if_expression} (and @key[end case] for a @nt{case_expression}) also
+  may make error handling harder.]}
 @end{ImplNote}
 
 @end{Syntax}
@@ -4637,7 +4639,7 @@ after @key[elsif], are evaluated in succession (treating a final @key[else]
 as @key[elsif] True @key[then]), until one evaluates to True or
 all @nt{condition}s are evaluated and yield False. If a @nt{condition}
 evaluates to True, the associated @synI{dependent_}@nt{expression} is evaluated,
-converted to the type of the @nt{if_expression}, and resulting value is the
+converted to the type of the @nt{if_expression}, and the resulting value is the
 value of the @nt{if_expression}. Otherwise, the value of the @nt{if_expression}
 is True.]}
 
