@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:37 $}
+@Comment{$Date: 2010/10/22 06:56:15 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.106 $}
+@Comment{$Revision: 1.107 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -291,7 +291,7 @@ of implicit dereference.
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added a missing rule so
   that most dereferences are assumed constrained (without determining whether
-  the designated object is. This is just confirming the Ada 95 rules;
+  the designated object is). This is just confirming the Ada 95 rules;
   Ada 2005 failed to ensure that this property was unchanged.]}
 @end{DiffWord2005}
 
@@ -591,8 +591,8 @@ dereference) is called the @i<prefix> of the prefixed view.
   it is illegal to declare an explicit primitive that has a prefixed view
   that is homographic with one of the type's operations, so
   in normal cases it isn't possible to have an ambiguity in a prefix call.
-  However, a class-wide operation of an ancestor type and declared in the
-  same declarative list with the ancestor type is also considered, and that
+  However, a class-wide operation of an ancestor type that is declared in the
+  same declaration list with the ancestor type is also considered, and that
   can still make a call ambiguous.]}
 @end{Discussion}
 @end{Itemize}
@@ -4500,7 +4500,7 @@ P(Formal => @key[if] X @key[then] Y @key[else] Z);]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[because in these latter cases, the
-  conditional_expression is not immediately surrounded by parentheses (which
+  @nt{conditional_expression} is not immediately surrounded by parentheses (which
   means on both sides!).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -4522,7 +4522,7 @@ P(Formal => @key[if] X @key[then] Y @key[else] Z);]}
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
   @ChgAdded{Version=[3],Text=[Implementers are cautioned to consider error
-  detection when implementing the syntax for conditional_expressions. An
+  detection when implementing the syntax for @nt{conditional_expression}s. An
   @nt{if_expression} and a @nt{if_statement} are very similar syntactically, (as
   are a @nt{case_expression} and a @nt{case_statement}) and simple mistakes can
   appear to change one into the other, potentially causing errors to be moved

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.62 $ $Date: 2010/10/15 07:05:38 $ $Author: randy $ }
+@comment{ $Revision: 1.63 $ $Date: 2010/10/22 06:56:16 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2010/10/15 07:05:38 $}
+@Comment{$Date: 2010/10/22 06:56:16 $}
 
 @LabeledClause{String Handling}
 
@@ -3434,7 +3434,7 @@ the following declarations:]}
 @ChgAdded{Version=[3],Text=[@key[end] Ada.Strings.UTF_Encoding.Strings;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
-@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings.UTF_Encoding],Child=[Wide_Wide_Strings]}@key[package] Ada.Strings.UTF_Encoding.Wide_Strings @key[is]
+@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada.Strings.UTF_Encoding],Child=[Wide_Strings]}@key[package] Ada.Strings.UTF_Encoding.Wide_Strings @key[is]
    @key[pragma] Pure (Wide_Strings);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3531,7 +3531,7 @@ True.]}
 situations:]}
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[By a Decode @key[function] when an UTF encoded
+  @ChgAdded{Version=[3],Text=[By a Decode @key[function] when a UTF encoded
     string contains an invalid encoding sequence.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3559,15 +3559,16 @@ situations:]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
 @ChgAdded{Version=[3],Text=[Each of the Convert and Encode functions returns a
-String (respectively Wide_String) value whose characters have position values
-that correspond to the encoding of the Item parameter according to the encoding
-scheme required by the function or specified by its Output_Scheme parameter. For
-UTF_8, no overlong encoding is returned. The lower bound of the returned string
-is 1.]}
+UTF_String (respectively UTF_8_String and UTF_16_String) value whose characters
+have position values that correspond to the encoding of the Item parameter
+according to the encoding scheme required by the function or specified by its
+Output_Scheme parameter. For UTF_8, no overlong encoding is returned. The lower
+bound of the returned string is 1.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
-@ChgAdded{Version=[3],Text=[Each of the Decode functions takes a String (respectively Wide_String)
-Item parameter which is assumed to contain characters whose position
+@ChgAdded{Version=[3],Text=[Each of the Decode functions takes a UTF_String
+(respectively UTF_8_String and UTF_16_String) Item parameter which is
+assumed to contain characters whose position
 values correspond to a valid encoding sequence according to the
 encoding scheme required by the function or specified by its
 Input_Scheme parameter, and returns the corresponding String, Wide_String, or

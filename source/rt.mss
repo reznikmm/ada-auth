@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.91 $ $Date: 2010/10/15 07:05:38 $ $Author: randy $ }
+@comment{ $Revision: 1.92 $ $Date: 2010/10/22 06:56:16 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2010/10/15 07:05:38 $}
+@Comment{$Date: 2010/10/22 06:56:16 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1211,9 +1211,9 @@ task dispatching @Chg{Version=[3],New=[points],Old=[point]} (see
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0166-1]}
   @ChgAdded{Version=[3],Text=[A @nt{delay_statement} is always a task
-  dispatching point even if it is not blocking. Similarly, calls to any of the
-  Yield procedures are never blocking, but they are task dispatching points.
-  In all of these cases, they can cause the current task to stop running (it is
+  dispatching point even if it is not blocking. Similarly, a call to
+  Yield_To_Higher is never blocking, but it is a task dispatching point
+  In each of these cases, they can cause the current task to stop running (it is
   still ready). Otherwise, the running task continues to run until it is blocked.]}
 @end{Ramification}
 @end{RunTime}
@@ -3923,7 +3923,7 @@ language-defined library package exists:]}
 @ChgAdded{Version=[3],Text=[   @key[subtype] @AdaSubtypeDefn{Name=[Barrier_Limit],Of=[Positive]} @key[is] Positive @key[range] 1 .. @RI<implementation-defined>;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Synchronous_Barrier} (Number_Waiting : Barrier_Limit) @key[is limited private];]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Synchronous_Barrier} (Release_Threshold : Barrier_Limit) @key[is limited private];]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Wait_For_Release} (The_Barrier : @key[in out] Synchronous_Barrier;
@@ -3945,7 +3945,7 @@ language-defined library package exists:]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
 @ChgAdded{Version=[3],Text=[Each call to Wait_For_Release blocks the calling
 task until the number of blocked tasks associated with the Synchronous_Barrier
-object is equal to Number_Waiting, at which time all blocked tasks are released.
+object is equal to Release_Threshold, at which time all blocked tasks are released.
 Notified is set to True for one of the released tasks, and set to False for all
 other released tasks.]}
 
@@ -3955,7 +3955,7 @@ Notified to True is implementation defined.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
 @ChgAdded{Version=[3],Text=[Once all tasks have been released, a
-Synchronous_Barrier object may be reused to block another Number_Waiting number
+Synchronous_Barrier object may be reused to block another Release_Threshold number
 of tasks.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
@@ -3964,7 +3964,7 @@ Synchronous_Barrier, each blocked task is unblocked and Program_Error is raised
 at the place of the call to Wait_For_Release.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
-@ChgAdded{Version=[3],Text=[It is implementation-defined whether an abnormal
+@ChgAdded{Version=[3],Text=[It is implementation defined whether an abnormal
 task which is waiting on a Synchronous_Barrier object is aborted immediately or
 aborted when the tasks waiting on the object are released.]}
 @ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
@@ -5235,20 +5235,20 @@ language-defined library package exists:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{with} Ada.Interrupts;
 @key{package} Ada.Execution_Time.Interrupts @key{is}@ChildUnit{Parent=[Ada.Execution_Time],Child=[Interrupts]}
-   @key{function} @AdaSubDefn{Clock} (I : Ada.Interrupts.Interrupt_Id)
+   @key{function} @AdaSubDefn{Clock} (Interrupt : Ada.Interrupts.Interrupt_Id)
         @key{return} CPU_Time;
-   @key{function} @AdaSubDefn{Supported} (I : Ada.Interrupts.Interrupt_Id)
+   @key{function} @AdaSubDefn{Supported} (Interrupt : Ada.Interrupts.Interrupt_Id)
         @key{return} Boolean;
 @key{end} Ada.Execution_Time.Interrupts;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
 @ChgAdded{Version=[3],Text=[The execution time or CPU time of a given interrupt
-I is defined as the time spent by the system executing interrupt handlers
-identified by I, including the time spent executing run-time or system services
-on its behalf. The mechanism used to measure execution time is implementation
-defined. Time spent executing interrupt handlers is distinct from time spent
-executing any task.]}
+Interrupt is defined as the time spent by the system executing interrupt
+handlers identified by Interrupt, including the time spent executing run-time or
+system services on its behalf. The mechanism used to measure execution time is
+implementation defined. Time spent executing interrupt handlers is distinct from
+time spent executing any task.]}
 @begin{Discussion}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[The implementation-defined mechanism here is the
@@ -5264,16 +5264,16 @@ is initially set to zero.]}
 @begin{RunTime}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
 @ChgAdded{Version=[3],Text=[The function Clock returns the current cumulative
-execution time of the interrupt identified by I. If
+execution time of the interrupt identified by Interrupt. If
 Separate_Interrupt_Clocks_Supported is set to False the function raises
 Program_Error.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
 @ChgAdded{Version=[3],Text=[The function Supported returns True if the
-implementation is monitoring the execution time of the interrupt identified
-by I. Otherwise it returns False. For any Interrupt_Id I for which
-Supported(I) returns False, the function Clock(I) will return a value equal to
-Ada.Execution_Time.Time_Of(0).]}
+implementation is monitoring the execution time of the interrupt identified by
+Interrupt. Otherwise it returns False. For any Interrupt_Id Interrupt for which
+Supported(Interrupt) returns False, the function Clock(Interrupt) will return a
+value equal to Ada.Execution_Time.Time_Of(0).]}
 
 @end{RunTime}
 
@@ -5648,10 +5648,9 @@ a @nt{task_definition} is evaluated for each task object (see
 the task object whose @nt{task_definition} contains the pragma.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
-@ChgAdded{Version=[3],Text=[Elaboration of a CPU pragma given immediately within
-the @nt{declarative_part} of a @nt{subprogram_body} has no effect; the CPU value
-is not associated with any task unless the pragma occurs within the main
-subprogram.]}
+@ChgAdded{Version=[3],Text=[A CPU pragma has no effect if it occurs immediately within the
+@nt{declarative_part} of a @nt{subprogram_body} other than the main subprogram;
+the CPU value is not associated with any task.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
 @ChgAdded{Version=[3],Text=[The CPU value is associated with the environment

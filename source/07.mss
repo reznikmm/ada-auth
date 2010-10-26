@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2010/09/02 06:27:37 $}
+@Comment{$Date: 2010/10/22 06:56:16 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.105 $}
+@Comment{$Revision: 1.106 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2445,7 +2445,9 @@ of Controlled only.
 a protected type; or]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[it has a component that needs finalization; or]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0092-1]}
+@ChgAdded{Version=[2],Text=[it has a component
+@Chg{Version=[3],New=[whose type ],Old=[that ]} needs finalization; or]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0013-1]}
@@ -3594,14 +3596,14 @@ procedure returns (other than via Unchecked_Access).]}
 
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
-@ChgAdded{Version=[3],Text=[Note that the master given to anonymous objects in
-explicitly aliased parameters of functions is not necessarily as long as the
-master of the object being initialized (if the function call is used to
-initialize an @nt{allocator}, for instance). In that case, the accessibility check on
-explicitly aliased parameters will necessarily fail if any such anonymous
-objects exist. This is necessary to avoid requiring the objects to live as long
-as the access type or having the implementation complexity of an implicit
-coextension.]}
+@ChgAdded{Version=[3],Text=[Note that the lifetime of the master given to
+anonymous objects in explicitly aliased parameters of functions is not
+necessarily as long as the lifetime of the master of the object being
+initialized (if the function call is used to initialize an @nt{allocator}, for
+instance). In that case, the accessibility check on explicitly aliased
+parameters will necessarily fail if any such anonymous objects exist. This is
+necessary to avoid requiring the objects to live as long as the access type or
+having the implementation complexity of an implicit coextension.]}
 @end{Ramification}
 
 

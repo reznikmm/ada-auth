@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.33 $ $Date: 2010/10/15 07:05:38 $ $Author: randy $ }
+@comment{ $Revision: 1.34 $ $Date: 2010/10/22 06:56:16 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:38 $}
+@Comment{$Date: 2010/10/22 06:56:16 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -1027,7 +1027,7 @@ designated by Item is categorized as @ntf{other_control}, otherwise returns Fals
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
 designated by Item is categorized as @ntf{letter_uppercase},
 @ntf{letter_lowercase}, @ntf{letter_titlecase}, @ntf{letter_modifier},
-@ntf{letter_other}, or @ntf{number_letter}. Otherwise returns False.]}
+@ntf{letter_other}, or @ntf{number_letter}; otherwise returns False.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1078,7 +1078,7 @@ designated by Item is categorized as @ntf{number_decimal}, or is in the range
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
 designated by Item is categorized as @ntf{letter_uppercase},
 @ntf{letter_lowercase}, @ntf{letter_titlecase}, @ntf{letter_modifier},
-@ntf{letter_other}, @ntf{number_letter}, or @ntf{number_decimal}. Otherwise
+@ntf{letter_other}, @ntf{number_letter}, or @ntf{number_decimal}; otherwise
 returns False.]}
 
 @begin{Example}
@@ -1091,7 +1091,7 @@ returns False.]}
 designated by Item is categorized as @ntf{graphic_character}, but not categorized as
 @ntf{letter_uppercase}, @ntf{letter_lowercase}, @ntf{letter_titlecase},
 @ntf{letter_modifier}, @ntf{letter_other}, @ntf{number_letter}, or
-@ntf{number_decimal}. Otherwise returns False.]}
+@ntf{number_decimal}; otherwise returns False.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1102,7 +1102,7 @@ designated by Item is categorized as @ntf{graphic_character}, but not categorize
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
 designated by Item is categorized as @ntf{separator_line} or
 @ntf{separator_paragraph}, or if Item is a conventional line terminator
-character (CR, LF, VT, or FF). Otherwise returns False.]}
+character (CR, LF, VT, or FF); otherwise returns False.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1213,7 +1213,7 @@ of the formal parameter is the null Wide_String.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Text=[The package Wide_Wide_Characters.Handling
 @ChildUnit{Parent=[Ada.Wide_Wide_Characters],Child=[Handling]}has the same contents as
-Wide_Character.Handling except that each occurrence of Wide_Character is
+Wide_Characters.Handling except that each occurrence of Wide_Character is
 replaced by Wide_Wide_Character, and each occurrence of Wide_String is replaced
 by Wide_Wide_String.]}
 

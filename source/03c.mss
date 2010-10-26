@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:37 $}
+@Comment{$Date: 2010/10/22 06:56:15 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.103 $}
+@Comment{$Revision: 1.104 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4455,6 +4455,11 @@ parenthesized expression,],Old=[]}
 is the same as that of
 the operand.
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[The accessibility level of a
+@nt{conditional_expression} is the accessibility level of the evaluated
+@Syni{dependent_}@nt{expression}.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00416-01]}
 @Chg{Version=[2],New=[The],Old=[For a function whose result type is a
 return-by-reference type,
@@ -4802,13 +4807,31 @@ be statically deeper, nor statically shallower, than any other.]}
 checks.]}
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[If a given accessibility level is statically deeper than the
+levels of any of the @SynI{dependent_}@nt{expression}s of a
+@nt{conditional_expression}, then the given level is statically deeper than
+that of the @nt{conditional_expression}. Similarly, if the accessibility
+level of any @SynI{dependent_}@nt{expression} of a @nt{conditional_expression}
+is statically deeper than some given level, then the accessibility
+level of the @nt{conditional_expression} is statically deeper than
+the given level.]}
+
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Roughly speaking, a "statically deeper than"
+relation involving a @nt{conditional_expression} holds if and
+only if the same relation would hold for some
+@Syni{dependent_}@nt{expression} of the @nt{conditional_expression}.]}
+@end{Discussion}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4]}
 @ChgAdded{Version=[3],Text=[Inside a return statement that applies to a function
 @i<F>, when determining whether the accessibility level of an explicitly aliased
 parameter of @i<F> is statically deeper than the level of the return object of
-@i<F>, the level of the return object is presumed to be the same as that of the
+@i<F>, the level of the return object is considered to be the same as that of the
 level of the explicitly aliased parameter; for statically comparing with the
-level of other entities, the level of the return object of @i<F> is presumed to
+level of other entities, the level of the return object of @i<F> is considered to
 be the same as that of the master that elaborated the function body of @i<F>.]}
 
 @Redundant[For determining whether one level is statically deeper than another
@@ -4964,10 +4987,11 @@ is the library level.
   for nested type extensions and access discriminants],Old=[]}.
   @end{Itemize}
 
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   Note that run-time checks are not required
-  for access discriminants, because their accessibility is
-  determined statically by the accessibility level of the enclosing
-  object.
+  for access discriminants@Chg{Version=[3],New=[ (except during
+  function returns and @nt{allocator}s)],Old=[]}, because their accessibility is
+  determined statically by the accessibility level of the enclosing object.
 
   @ChgRef{Version=[2],Kind=[Revised]}
   @Chg{Version=[2],New=[],Old=[This ]}The accessibility level of the result
@@ -5741,9 +5765,10 @@ uses of anonymous access types.]}
   coextensions that belong to an anonymous object are transfered to the ultimate
   object.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4],ARef=[AI05-0188-1]}
   @ChgAdded{Version=[3],Text=[Defined the accessibility of explicitly
-  aliased parameters (see @RefSecNum{Subprogram Declarations}).]}
+  aliased parameters (see @RefSecNum{Subprogram Declarations}) and
+  @nt{conditional_expression}s (see @RefSecNum{If Expressions}).]}
 @end{DiffWord2005}
 
 
@@ -5973,7 +5998,7 @@ with a body.
 Thus, a declaration can actually come in @i{three} parts.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI0-0162-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0162-1]}
 @Chg{Version=[2],New=[@Chg{Version=[3],New=[An incomplete type (whether declared
 in the limited view of a package or not) may be completed by a private type
 declaration],Old=[In Ada 2005 the limited view of the package contains an

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.74 $ $Date: 2010/09/04 00:30:44 $ $Author: randy $ }
+@comment{ $Revision: 1.75 $ $Date: 2010/10/22 06:56:16 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2010/09/04 00:30:44 $}
+@Comment{$Date: 2010/10/22 06:56:16 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -1614,8 +1614,9 @@ Delete (Container, Index_Type'Val(Index_Type'Pos(Last_Index (Container)) @en
 Count + 1), Count).]}
 
 @begin{Example}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Reverse_Elements (Container : @key{in out} List);]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Reverse_Elements (Container : @key{in out} @Chg{Version=[3],New=[Vector],Old=[List]});]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}

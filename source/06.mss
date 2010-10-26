@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:37 $}
+@Comment{$Date: 2010/10/22 06:56:15 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.104 $}
+@Comment{$Revision: 1.105 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -519,14 +519,16 @@ is a descendant of one of the following:
   whose full type is a by-reference type.
 @end(itemize)
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4],ARef=[AI05-0188-1]}
 A parameter of a by-reference type is passed by reference@Chg{Version=[3],New=[, as is an explicitly aliased parameter
 of any type],Old=[]}.
 @Defn2{Term=[associated object], Sec=(of a value of a by-reference type)}
 Each value of a by-reference type has an associated object.
 For a parenthesized expression, @nt{qualified_expression},
 or @nt{type_conversion}, this object is the one associated with the
-operand.
+operand.@Chg{Version=[3],New=[ For a
+@nt{conditional_expression}, this object is the one associated
+with the evaluated @Syni{dependent_}@nt{expression}.],Old=[]}
 
 @begin{Ramification}
 By-reference parameter passing makes sense only if there is an
@@ -1096,19 +1098,33 @@ have to be conformant.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00409-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4],ARef=[AI05-0207-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[]}@Comment{Dummy for conditional leading.}
 @Defn{mode conformance}
 @Defn2{Term=[profile],Sec=(mode conformant)}
-Two profiles are @i{mode conformant} if they are
-@Chg{Version=[3],New=[type conformant],Old=[type-conformant]},
-@Chg{Version=[3],New=[],Old=[and ]}corresponding parameters have identical
-modes,@Chg{Version=[3],New=[ both or neither are explicitly aliased
-parameters, ],Old=[]} and, for access
+Two profiles are @i{mode conformant} if@Chg{Version=[3],New=[:],Old=[ they are
+type-conformant, and
+corresponding parameters have identical
+modes, and, for access
 parameters@Chg{Version=[2],New=[ or access result types],Old=[]}, the
-designated subtypes statically match@Chg{Version=[3],New=[ and either both or
-neither are access-to-constant],Old=[]}@Chg{Version=[2],New=[, or the
+designated subtypes statically match@Chg{Version=[2],New=[, or the
 designated profiles are subtype conformant.],Old=[]}
-@PDefn2{Term=[statically matching],Sec=(required)}
+@PDefn2{Term=[statically matching],Sec=(required)}]}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4]}
+@ChgAdded{Version=[3],Text=[they are type conformant;]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4]}
+@ChgAdded{Version=[3],Text=[corresponding parameters have identical modes and
+both or neither are explicitly aliased parameters; and]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0207-1]}
+@ChgAdded{Version=[3],Text=[for corresponding access parameters and any access
+result type, the designated subtypes statically match and either both or neither
+are access-to-constant, or the designated profiles are subtype conformant.
+@PDefn2{Term=[statically matching],Sec=(required)}]}
+@end{Itemize}
 
 @Defn{subtype conformance}
 @Defn2{Term=[profile],Sec=(subtype conformant)}
@@ -1128,7 +1144,8 @@ with any other profile.
 @Defn2{Term=[full conformance], Sec=(for profiles)}
 @Defn2{Term=[profile],Sec=(fully conformant)}
 Two profiles are @i{fully conformant} if they
-are subtype-conformant, @Chg{Version=[3],New=[if they have
+are @Chg{Version=[3],New=[subtype conformant],Old=[subtype-conformant]},
+@Chg{Version=[3],New=[if they have
 access-to-subprogram results whose designated profiles are fully
 conformant,],Old=[]}and corresponding parameters have@Chg{Version=[3],New=[:],
 Old=[ the same names and have @nt<default_expression>s
@@ -2614,17 +2631,19 @@ that applies to a function body:]}
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0032-1]}@Comment{Paragraph number only change}
-@ChgAdded{Version=[2],Text=[If the result subtype of the function is limited,
-then the @nt{expression} of the return statement (if any) shall be an
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0188-1]}@Comment{Paragraph number only change}
+@ChgAdded{Version=[2],Text=[@Redundant[If the result subtype of the function is limited,
+then the @nt{expression} of the return statement (if any) shall @Chg{Version=[3],
+New=[meet the restrictions described in @RefSecNum{Limited Types}],Old=[be an
 @nt{aggregate}, a function call (or equivalent use of an operator), or a
 @nt{qualified_expression} or parenthesized expression whose operand is one of
-these.]}
+these]}.]]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[In other words, if limited, the @nt{expression}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0188-1]}
+  @ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[In other words, if limited, the @nt{expression}
   must produce a @lquotes@;new@rquotes@; object, rather than being the name
-  of a preexisting object (which would imply copying).]}
+  of a preexisting object (which would imply copying).],Old=[]}]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
