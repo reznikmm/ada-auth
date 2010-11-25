@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:14 $}
+@Comment{$Date: 2010/10/26 05:14:57 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.88 $}
+@Comment{$Revision: 1.89 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3907,9 +3907,8 @@ required to appear last.
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0035-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@B<Correction:>
-  Adjusted wording so that
-  subunits can be pure (they are not a @nt<library_item>, but they
-  are a compilation unit).]}
+  Adjusted wording so that a subunit can be pure (it is not a
+  @nt<library_item>, but it is a compilation unit).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0035-1]}
   @ChgAdded{Version=[3],Text=[@B<Correction:> Adjusted wording so
