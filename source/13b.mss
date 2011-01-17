@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:38 $}
+@Comment{$Date: 2010/11/25 03:11:50 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -4826,6 +4826,14 @@ However, that would be upward incompatible, so we rejected the idea.
 As in Ada 83, for an untagged type, the above call upon P will call the
 old P (which is arguably confusing).
 @end{Reason}
+
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0222-1]}
+  @ChgAdded{Version=[3],Text=[This rule only applies to "original" declarations
+  and not to the completion of a primitive subprogram, even though a completion
+  is technically an explicit declaration, and it may declare a primitive
+  subprogram.]}
+@end{Honest}
 
 @Leading@Redundant[A type shall be completely defined before it is frozen
 (see @RefSecNum{Completions of Declarations} and

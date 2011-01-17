@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/10/22 06:56:15 $}
+@Comment{$Date: 2010/11/25 03:11:49 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.104 $}
+@Comment{$Revision: 1.105 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1623,6 +1623,13 @@ primitive subprogram can be
 declared by a @nt{subprogram_body}.@Chg{Version=[2],New=[ (Other overridings
 must be provided by @nt{subprogram_declaration}s.)],Old=[]}
 @end{Ramification}
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0222-1]}
+  @ChgAdded{Version=[3],Text=[This rule only applies to "original" declarations
+  and not to the completion of a primitive subprogram, even though a completion
+  is technically an explicit declaration, and it may declare a primitive
+  subprogram.]}
+@end{Honest}
 
 @end{Legality}
 
@@ -4807,24 +4814,6 @@ be statically deeper, nor statically shallower, than any other.]}
 checks.]}
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0188-1]}
-@ChgAdded{Version=[3],Text=[If a given accessibility level is statically deeper than the
-levels of any of the @SynI{dependent_}@nt{expression}s of a
-@nt{conditional_expression}, then the given level is statically deeper than
-that of the @nt{conditional_expression}. Similarly, if the accessibility
-level of any @SynI{dependent_}@nt{expression} of a @nt{conditional_expression}
-is statically deeper than some given level, then the accessibility
-level of the @nt{conditional_expression} is statically deeper than
-the given level.]}
-
-@begin{Discussion}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Roughly speaking, a "statically deeper than"
-relation involving a @nt{conditional_expression} holds if and
-only if the same relation would hold for some
-@Syni{dependent_}@nt{expression} of the @nt{conditional_expression}.]}
-@end{Discussion}
-
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4]}
 @ChgAdded{Version=[3],Text=[Inside a return statement that applies to a function
 @i<F>, when determining whether the accessibility level of an explicitly aliased
@@ -5509,6 +5498,47 @@ denotes a subprogram}:
 
 @end{StaticSem}
 
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[An @nt{expression} is said to have
+@i{distributed accessibility} if it
+is@Defn{distributed accessibility}@Defn2{Term=[accessibility],Sec=[distributed]}]}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[a @nt{conditional_expression} (see
+@RefSecNum{Conditional Expressions}); or]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[a view conversion, @nt{qualified_expression},
+or parenthesized expression whose operand has distributed accessibility.]}
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[The statically deeper relationship does not apply to
+the accessibility level of an @nt{expression} having distributed accessibility;
+that is, such an accessibility level is not considered to be statically deeper,
+nor statically shallower, than any other.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[Any static accessibility requirement that is imposed
+on an @nt{expression} that has distributed accessibility (or on its type) is
+instead imposed on the @SynI{dependent_}@nt{expression}s of the underlying
+@nt{conditional_expression}. This rule is applied recursively if a
+@SynI{dependent_}@nt{expression} also has distributed accessibility.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This means that any @LegalityName requiring that
+  the accessibility level of an @nt{expression} (or that of the type of an
+  @nt{expression}) shall or shall not be statically deeper than some other level
+  also applies, in the case where the @nt{expression} has distributed
+  accessibility, to each @SynI{dependent_}@nt{expression} of the underlying
+  @nt{conditional_expression}.]}
+@end{Discussion}
+
+@end{Legality}
+
 @begin{Notes}
 The Unchecked_Access attribute yields the same result as the Access
 attribute for objects, but has fewer restrictions
@@ -5768,7 +5798,7 @@ uses of anonymous access types.]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4],ARef=[AI05-0188-1]}
   @ChgAdded{Version=[3],Text=[Defined the accessibility of explicitly
   aliased parameters (see @RefSecNum{Subprogram Declarations}) and
-  @nt{conditional_expression}s (see @RefSecNum{If Expressions}).]}
+  @nt{conditional_expression}s (see @RefSecNum{Conditional Expressions}).]}
 @end{DiffWord2005}
 
 

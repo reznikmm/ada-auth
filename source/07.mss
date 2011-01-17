@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2010/10/22 06:56:16 $}
+@Comment{$Date: 2010/11/25 03:11:50 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.106 $}
+@Comment{$Revision: 1.107 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2030,7 +2030,7 @@ tagged or has at least one access discriminant with a @nt{default_expression};]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The full type in both of these cases must
   necessarily be immutably limited. We need to include private types
-  as much as possible so that we aren't unintentially discouraging the
+  as much as possible so that we aren't unintentionally discouraging the
   use of private types.]}
 @end{Reason}
 

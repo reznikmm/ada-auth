@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2010/08/13 05:23:13 $}
+@Comment{$Date: 2010/11/25 03:11:49 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 
 @LabeledClause{Type Conversions}
 
@@ -2007,7 +2007,7 @@ both of whose @nt{relation}s are static expressions;
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
 @ChgAdded{Version=[3],Text=[a @nt{conditional_expression} all of whose
-@nt{condition}s, @SynI{selector_}@nt{expression}s, and
+@nt{condition}s, @SynI{selecting_}@nt{expression}s, and
 @SynI{dependent_}@nt{expression}s are static expressions;]}
 
 a static expression enclosed in parentheses.
@@ -2234,12 +2234,6 @@ and equals True; or]}
   @ChgAdded{Version=[3],Text=[legal if N and Min are static and N = 0.]}
 @end{Reason}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
-@ChgAdded{Version=[3],Text=[a @SynI{dependent_}@nt{expression} of a
-@nt{case_expression} whose @nt{expression} is static and not covered by the
-corresponding @nt{discrete_choice_list}.]}
-@end{Itemize}
-
 @begin{Discussion}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
 @ChgAdded{Version=[3],Text=[We need the "of the @nt{if_expression}" here so
@@ -2248,6 +2242,12 @@ the @nt{condition}s and @Syni{dependent_}@nt{expression}s of a single
 @nt{if_expression}. Similar
 reasoning applies to the "of a @nt{case_expression}" of the last bullet.]}
 @end{Discussion}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Text=[a @SynI{dependent_}@nt{expression} of a
+@nt{case_expression} whose @SynI{selecting_}@nt{expression} is static and is
+not covered by the corresponding @nt{discrete_choice_list}.]}
+@end{Itemize}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0147-1]}
 @Leading@;A static expression is evaluated at compile time except when it is

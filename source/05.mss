@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:37 $}
+@Comment{$Date: 2010/11/25 03:11:49 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.40 $}
+@Comment{$Revision: 1.41 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -669,7 +669,7 @@ them is executed.
 @begin{Diffword2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
   @ChgAdded{Version=[3],Text=[Moved definition of @nt{condition} to
-  @RefSecNum{If Expressions} in order to eliminate a forward reference.]}
+  @RefSecNum{Conditional Expressions} in order to eliminate a forward reference.]}
 @end{Diffword2005}
 
 
@@ -682,8 +682,9 @@ alternative is defined by the value of an expression.]
 @end{Intro}
 
 @begin{Syntax}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1]}
 @Syn{lhs=<case_statement>,rhs="
-   @key{case} @Syn2{expression} @key{is}
+   @key{case} @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@Syn2{expression} @key{is}
        @Syn2{case_statement_alternative}
       {@Syn2{case_statement_alternative}}
    @key{end} @key{case};"}
@@ -695,12 +696,15 @@ alternative is defined by the value of an expression.]
 @end{Syntax}
 
 @begin{Resolution}
-@PDefn2{Term=[expected type], Sec=(case expression)}
-The @nt{expression} is expected to be of any discrete type.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1]}
+@Chg{Version=[3],New=[@PDefn2{Term=[expected type], Sec=(case_statement selecting_expression)}
+@PDefn2{Term=[expected type], Sec=(selecting_expression case_statement)}],Old=[@PDefn2{Term=[expected type], Sec=(case expression)}]}
+The @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression} is
+expected to be of any discrete type.
 @PDefn2{Term=[expected type],
   Sec=(case_statement_alternative discrete_choice)}
 The expected type for each @nt{discrete_choice} is the type of the
-@nt{expression}.
+@Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression}.
 @end{Resolution}
 
 @begin{Legality}
@@ -709,10 +713,13 @@ The @nt{expression}s and @nt{discrete_range}s given as
 @Redundant[A @nt{discrete_choice} @key(others), if present,
 shall appear alone and in the last @nt{discrete_choice_list}.]
 
-The possible values of the @nt{expression} shall be covered as follows:
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1]}
+The possible values of the
+@Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression} shall be
+covered as follows:
 @begin{itemize}
-  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1]}
-  If the @nt{expression} is a @nt{name} @Redundant[(including a
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1],ARef=[AI05-0188-1]}
+  If the @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression} is a @nt{name} @Redundant[(including a
   @nt<type_conversion>@Chg{Version=[3],New=[, a @nt{qualified_expression},],Old=[]}
   or a @nt<function_call>)] having
   a static and constrained nominal subtype,@Chg{Version=[3],New=[],Old=[ or
@@ -729,7 +736,8 @@ The possible values of the @nt{expression} shall be covered as follows:
     See @RefSecNum{Type Conversions}.
   @end{Ramification}
 
-  If the type of the @nt{expression} is
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1]}
+  If the type of the @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression} is
   @i(root_integer), @i(universal_integer), or a descendant of a
   formal scalar type,
   then the @nt{case_statement} shall have an @key{others}
@@ -740,8 +748,9 @@ The possible values of the @nt{expression} shall be covered as follows:
   and not known statically in the case of a formal scalar type.
 @end{Reason}
 
-  Otherwise,
-  each value of the base range of the type of the @nt{expression} shall
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1]}
+  Otherwise, each value of the base range of the type of the
+  @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression} shall
   be covered
   @Redundant[(either explicitly or by @key(others))].
 @end{itemize}
@@ -749,8 +758,9 @@ The possible values of the @nt{expression} shall be covered as follows:
 Two distinct @nt{discrete_choice}s of a
 @nt{case_statement} shall not cover the same value.
 @begin{Ramification}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1]}
 The goal of these coverage rules is
-that any possible value of the @nt{expression} of a
+that any possible value of the @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression} of a
 @nt{case_statement} should be covered by exactly one
 @nt{discrete_choice} of the
 @nt{case_statement}, and that this should be checked at compile time.
@@ -767,10 +777,11 @@ It cannot, however, happen if the @nt{case_statement} has the
 even those outside the subtype.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1]}
 If the compiler chooses to represent the value of an expression of an
 unconstrained subtype in a way that includes values outside the bounds of the
 subtype, then those values can be outside the covered range.
-For example, if X: Integer := Integer'Last;, and the case @nt{expression} is
+For example, if X: Integer := Integer'Last;, and the case @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression} is
 X+1, then the implementation might choose to produce the correct value, which
 is outside the bounds of Integer.
 (It might raise Constraint_Error instead.)
@@ -801,15 +812,17 @@ there is no @lquotes@;out-of-range@rquotes@; situation that can produce them.
 @end{Legality}
 
 @begin{RunTime}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1]}
 @PDefn2{Term=[execution], Sec=(case_statement)}
 For the execution of a @nt{case_statement} the
-@nt{expression} is first evaluated.
+@Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression}
+is first evaluated.
 
-If the value of the @nt{expression} is covered by the
-@nt{discrete_@!choice_@!list} of some
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1]}
+If the value of the @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression}
+is covered by the @nt{discrete_@!choice_@!list} of some
 @nt{case_@!statement_@!alternative}, then the
-@nt{sequence_of_@!statements} of the @ntf{_alternative} is
-executed.
+@nt{sequence_of_@!statements} of the @ntf{_alternative} is executed.
 
 @IndexCheck{Overflow_Check}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
@@ -938,11 +951,16 @@ for @nt<name>s, rather than being separated out along with
 @nt<qualified_expression>s.
 @end{DiffWord83}
 
-@begin{DiffWord95}
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0003-1]}
   @ChgAdded{Version=[3],Text=[Rewording to reflect that
   a @nt{qualified_expression} is now a @nt{name}.]}
-@end{Diffword95}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+  @ChgAdded{Version=[3],Text=[Added the @SynI{selecting_} prefix to
+  make this wording consistent with @nt{case_expression}, and to clarify
+  which @nt{expression} is being talked about in the wording.]}
+@end{Diffword2005}
 
 
 @LabeledClause{Loop Statements}

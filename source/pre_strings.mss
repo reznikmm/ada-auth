@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.63 $ $Date: 2010/10/22 06:56:16 $ $Author: randy $ }
+@comment{ $Revision: 1.64 $ $Date: 2010/11/25 03:11:50 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2010/10/22 06:56:16 $}
+@Comment{$Date: 2010/11/25 03:11:50 $}
 
 @LabeledClause{String Handling}
 
@@ -2572,6 +2572,10 @@ The context clause for each of the packages Strings.Wide_Fixed,
 Strings.Wide_Bounded, and Strings.Wide_Unbounded
 identifies Strings.Wide_Maps instead of Strings.Maps.
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0223-1]}
+@ChgAdded{Version=[3],Text=[Types Wide_Character_Set and Wide_Character_Mapping
+need finalization.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00302-03]}
 @Leading@;For each of the packages Strings.Fixed, Strings.Bounded,
 Strings.Unbounded, and Strings.Maps.Constants@Chg{Version=[2],New=[, and
@@ -2689,6 +2693,14 @@ any element outside the Character portion of Wide_Character.]}
   but changing it would be inconsistent with Ada 95 and a one-to-one
   mapping isn't necessarily correct anyway.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0223-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction>: Identified Wide_Character_Set
+  and Wide_Character_Mapping as needing finalization. It is likely that they
+  are implemented with a controlled type, so this change is unlikely to make
+  any difference in practice.]}
+@end{DiffWord2005}
 
 
 @LabeledAddedSubClause{Version=[2],Name=[Wide_Wide_String Handling]}
@@ -2845,6 +2857,10 @@ The context clause for each of the packages Strings.Wide_Wide_Fixed,
 Strings.Wide_Wide_Bounded, and Strings.Wide_Wide_Unbounded identifies
 Strings.Wide_Wide_Maps instead of Strings.Maps.]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0223-1]}
+@ChgAdded{Version=[3],Text=[Types Wide_Wide_Character_Set and
+Wide_Wide_Character_Mapping need finalization.]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For each of the packages
 Strings.@!Fixed, Strings.@!Bounded, Strings.@!Unbounded, and Strings.@!Maps.Constants,
@@ -2951,6 +2967,16 @@ Wide_Wide_String handling subprograms, Constraint_Error is propagated.]}
   and functions Strings.Wide_Wide_Hash and
   Strings.Wide_Wide_Unbounded.Wide_Wide_Hash are new.]}
 @end{Extend95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0223-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction>: Identified Wide_Wide_Character_Set
+  and Wide_Wide_Character_Mapping as needing finalization. It is likely that
+  they are implemented with a controlled type, so this change is unlikely to
+  make any difference in practice.]}
+@end{DiffWord2005}
+
+
 
 
 @LabeledAddedSubClause{Version=[2],Name=[String Hashing]}
@@ -3499,8 +3525,8 @@ the following declarations:]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
 @ChgAdded{Version=[3],Text=[The type Encoding_Scheme defines encoding schemes.
 UTF_8 corresponds to the UTF-8 encoding scheme defined by Annex D of ISO/IEC
-106046. UTF_16BE corresponds to the UTF-16 encoding scheme defined by Annex C of
-ISO/IEC 106046 stored in 8 bits, big endian; and UTF_16LE corresponds to the
+10646. UTF_16BE corresponds to the UTF-16 encoding scheme defined by Annex C of
+ISO/IEC 10646 stored in 8 bits, big endian; and UTF_16LE corresponds to the
 UTF-16 encoding scheme on 8 bits, little
 endian.@Defn{encoding scheme}@Defn{character encoding}@Defn{UTF-8}@Defn{UTF-16}]}
 

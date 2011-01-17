@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.36 $ $Date: 2010/10/15 07:05:38 $ $Author: randy $ }
+@comment{ $Revision: 1.37 $ $Date: 2010/11/25 03:11:50 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:38 $}
+@Comment{$Date: 2010/11/25 03:11:50 $}
 
 @Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -328,12 +328,15 @@ form.]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Delete_Directory (Directory : @key{in} String);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0231-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Deletes an existing empty directory
 with name Directory. The exception
 Name_Error is propagated if the string given as Directory does not identify an
-existing directory. The exception Use_Error is propagated if the external
-environment does not support the deletion of the directory (or some portion of
-its contents) with the given name (in the absence of Name_Error).]}
+existing directory. The exception Use_Error is propagated if the
+@Chg{Version=[3],New=[directory is not empty or the ],Old=[]}external
+environment does not support the deletion of the directory
+@Chg{Version=[3],New=[],Old=[(or some portion of its contents) ]}with
+the given name (in the absence of Name_Error).]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Create_Path (New_Directory : @key{in} String;
@@ -383,10 +386,13 @@ file with the given name (in the absence of Name_Error).]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Rename (Old_Name, New_Name : @key{in} String);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0231-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Renames an existing external file
 (including directories) with name Old_Name
 to New_Name. The exception Name_Error is propagated if the string given as
-Old_Name does not identify an existing external file. The exception Use_Error
+Old_Name does not identify an existing external file@Chg{Version=[3],New=[
+or if the string given as New_Name does not allow the identification
+of an external file],Old=[]}. The exception Use_Error
 is propagated if the external environment does not support the renaming of the
 file with the given name (in the absence of Name_Error). In particular,
 Use_Error is propagated if a file or directory already exists with name
@@ -1103,12 +1109,14 @@ these as possible.]}
 
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Start_Search and Search should raise Use_Error if
-Pattern is malformed, but not if it could represent a file in the directory but
-does not actually do so.]}
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[Directories.Start_Search and Directories.Search should raise Use_Error
-for malformed patterns.]}]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0231-1]}
+@ChgAdded{Version=[2],Text=[Start_Search and Search should raise
+@Chg{Version=[3],New=[Name_Error],Old=[Use_Error]} if Pattern is malformed, but
+not if it could represent a file in the directory but does not actually do so.]}
+
+@ChgImplAdvice{Version=[3],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[Directories.Start_Search and Directories.Search should raise
+@Chg{Version=[3],New=[Name_Error],Old=[Use_Error]} for malformed patterns.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Rename should be supported at least when both
@@ -1189,6 +1197,21 @@ should be deleted first.]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Package Ada.Directories is new.]}
 @end{Extend95}
+
+@begin{Inconsistent2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0231-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}@b<Correction>:
+  Clarified when and which
+  exceptions are raised for Start_Search, Search, Delete_Directory, and
+  Rename. If an implementation followed the original incorrect wording, it might
+  raise Use_Error instead of Name_Error for Start_Search and Search,
+  Name_Error instead of Use_Error for Rename, and might have deleted a
+  non-empty directory instead of raising Use_Error for Delete_Directory.
+  The first two cases are very unlikely to matter in practice, and it unlikely
+  that an implementation would have followed the latter implementation
+  strategy, as it would be more work and would make Delete_Directory
+  identical to Delete_Tree (which is obvious nonsense).]}
+@end{Inconsistent2005}
 
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0049-1]}

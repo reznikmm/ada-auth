@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.4 $ $Date: 2010/10/15 07:05:38 $ $Author: randy $ }
+@comment{ $Revision: 1.5 $ $Date: 2010/11/25 03:11:50 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Vectors]}
 
@@ -2048,11 +2048,15 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
    @key[pragma] Preelaborate(Unbounded_Synchronized_Queues);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[package] Implementation @key[is]
+      ... -- @RI[not specified by the language]
+   @key[end] Implementation;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[protected type] @AdaTypeDefn{Queue}
-        (Capacity : Count_Type := Default_Capacity;
-         Ceiling: System.Any_Priority := Default_Ceiling) @key[is]
-         @key[new] Queue_Interfaces.Queue @key[with]
-      @key[pragma] Priority(Ceiling);]}
+        (Ceiling: System.Any_Priority := Default_Ceiling) @key[with]
+           Priority => Ceiling @key[is]
+              @key[new] Queue_Interfaces.Queue @key[with]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
@@ -2096,6 +2100,17 @@ unbounded.]}
   specify that Queue needs finalization, because it is visibly protected.]}
 @end{Ramification}
 
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Nested package Implementation can be used to
+  declare the types needed to implement the protected type Queue. This
+  nested package is necessary as types cannot be declared in the private
+  part of a protected type, and the types have to be declared within the
+  generic unit in order to depend on the types imported with package
+  Queue_Interfaces. Clients should never depend on the contents of
+  nested package Implementation.]}
+@end{Discussion}
+
 @end{StaticSem}
 
 @begin{Extend2005}
@@ -2126,11 +2141,16 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
    @key[pragma] Preelaborate(Bounded_Synchronized_Queues);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[package] Implementation @key[is]
+      ... -- @RI[not specified by the language]
+   @key[end] Implementation;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[protected type] @AdaTypeDefn{Queue}
         (Capacity : Count_Type := Default_Capacity;
-         Ceiling: System.Any_Priority := Default_Ceiling) @key[is]
-         @key[new] Queue_Interfaces.Queue @key[with]
-      @key[pragma] Priority(Ceiling);]}
+         Ceiling: System.Any_Priority := Default_Ceiling) @key[with]
+           Priority => Ceiling @key[is]
+              @key[new] Queue_Interfaces.Queue @key[with]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
@@ -2219,11 +2239,16 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
    @key[pragma] Preelaborate(Unbounded_Priority_Queues);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[package] Implementation @key[is]
+      ... -- @RI[not specified by the language]
+   @key[end] Implementation;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[protected type] @AdaTypeDefn{Queue}
         (Capacity : Count_Type := Default_Capacity;
-         Ceiling: System.Any_Priority := Default_Ceiling) @key[is]
-         @key[new] Queue_Interfaces.Queue @key[with]
-      @key[pragma] Priority(Ceiling);]}
+         Ceiling: System.Any_Priority := Default_Ceiling) @key[with]
+           Priority => Ceiling @key[is]
+              @key[new] Queue_Interfaces.Queue @key[with]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
@@ -2331,11 +2356,16 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
    @key[pragma] Preelaborate(Bounded_Priority_Queues);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[package] Implementation @key[is]
+      ... -- @RI[not specified by the language]
+   @key[end] Implementation;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[protected type] @AdaTypeDefn{Queue}
         (Capacity : Count_Type := Default_Capacity;
-         Ceiling: System.Any_Priority := Default_Ceiling) @key[is]
-         @key[new] Queue_Interfaces.Queue @key[with]
-      @key[pragma] Priority(Ceiling);]}
+         Ceiling: System.Any_Priority := Default_Ceiling) @key[with]
+           Priority => Ceiling @key[is]
+              @key[new] Queue_Interfaces.Queue @key[with]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]

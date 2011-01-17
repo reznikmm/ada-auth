@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:38 $}
+@Comment{$Date: 2010/11/25 03:11:50 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -3249,7 +3249,9 @@ For now, we just get the formatting right.}
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
 @ChgAdded{Version=[3],Text=[The expected type for a precondition or
-postcondition expression is any boolean type.]}
+postcondition expression is any boolean type.@PDefn2{Term=[expected type],
+Sec=(precondition expression)}@PDefn2{Term=[expected type],
+Sec=(postcondition expression)}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
 @ChgAdded{Version=[3],Text=[Within the expression for a Pre'Class or Post'Class aspect for a primitive
@@ -3269,10 +3271,10 @@ resolved independently of context.]}
 
 @begin{Legality}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0230-1]}
 @ChgAdded{Version=[3],Text=[The Pre or Post aspect shall not be specified for an
-abstract subprogram. @Redundant[Only the Pre'Class and Post'Class aspects may be
-specified for such a subprogram.]]}
+abstract subprogram or a null procedure. @Redundant[Only the Pre'Class and
+Post'Class aspects may be specified for such a subprogram.]]}
 
 @end{Legality}
 
@@ -3432,7 +3434,7 @@ protected action.]}
 @end{Notes}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0230-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Pre and Post aspects are new.]}
 @end{Extend2005}
@@ -3468,7 +3470,8 @@ For now, we just get the formatting right.}
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
 @ChgAdded{Version=[3],Text=[The expected type for an invariant expression
-is any boolean type.]}
+is any boolean type.@PDefn2{Term=[expected type],
+Sec=(invariant expression)}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
 @ChgAdded{Version=[3],Text=[@Redundant[Within an invariant expression, the

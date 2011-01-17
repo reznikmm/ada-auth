@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_locales.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 2010/10/15 07:05:38 $ $Author: randy $ }
+@comment{ $Revision: 1.3 $ $Date: 2010/11/25 03:11:50 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:38 $}
+@Comment{$Date: 2010/11/25 03:11:50 $}
 
 @LabeledAddedClause{Version=[3],Name=[The Package Locales]}
 
@@ -39,10 +39,18 @@ Locales has the following declaration:]}
 @ChgAdded{Version=[3],Text=[@key[end] Ada.Locales;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2],ARef=[AI05-0233-1]}
 @ChgAdded{Version=[3],Text=[The @i{active locale}@Defn{active
 locale}@Defn2{Term=[locale],Sec=[active]} is the locale associated with the
-active partition.]}
+partition of the current task.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0233-1]}
+  @ChgAdded{Version=[3],Text=[Some environments define both a system locale and
+  the locale of the current user. For such environments, the active locale is
+  that of current user if any; otherwise (as in a partition running on a server
+  without a user), the system locale should be used.]}
+@end{ImplNote}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
 @ChgAdded{Version=[3],Text=[Language_Code is a lower-case string representation
@@ -87,7 +95,7 @@ Country_Unknown.]}
 @end{StaticSem}
 
 @begin{Extend2005}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2],ARef=[AI05-0233-1]}
 @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
 Package Locales is new.]}
 @end{Extend2005}

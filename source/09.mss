@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:37 $}
+@Comment{$Date: 2010/11/25 03:11:50 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.99 $}
+@Comment{$Revision: 1.100 $}
 
 @begin{Intro}
 
@@ -1726,7 +1726,7 @@ as is a requeue on such an entry.
 @nt{pragma} Implemented is as follows:]}
 @end{SyntaxText}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=<@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Implemented>(@Syni{procedure_}@Syn2{local_name}, @Syn2<implementation_kind>);'>}
+@ChgAdded{Version=[3],Text=<@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Implemented>(@Syni{procedure_}@Syn2{local_name}, @Syn2<implementation_kind>);'>}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<implementation_kind>,Old=<>}>,
