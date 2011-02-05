@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.59 $ $Date: 2010/11/25 03:11:50 $ $Author: randy $ }
+@comment{ $Revision: 1.60 $ $Date: 2011/01/17 08:15:01 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2010/11/25 03:11:50 $}
+@Comment{$Date: 2011/01/17 08:15:01 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1540,12 +1540,16 @@ termination procedures with a task or set of tasks is defined.],Old=[]}]
    @key{function}  "=" (Left, Right : Task_Id) @key{return} Boolean;
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0070],ARef=[AI95-00101-01]}
-   @key{function}  @AdaSubDefn{Image}        (T : Task_Id) @key{return} String;
-   @key[function]  @AdaSubDefn{Current_Task} @key[return] Task_Id;
-   @Key[procedure] @AdaSubDefn{Abort_Task}   (T : @key[in] @Chg{New=[],Old=[@key[out] ]}Task_Id);
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0189-1]}
+   @key{function}  @AdaSubDefn{Image}                  (T : Task_Id) @key{return} String;
+   @key[function]  @AdaSubDefn{Current_Task}     @key[return] Task_Id;@Chg{Version=[3],New=[
+   @key[function]  @AdaSubDefn{Environment_Task} @key[return] Task_Id;],Old=[]}
+   @Key[procedure] @AdaSubDefn{Abort_Task}             (T : @key[in] @Chg{New=[],Old=[@key[out] ]}Task_Id);
 
-   @key[function]  @AdaSubDefn{Is_Terminated}(T : Task_Id) @key{return} Boolean;
-   @key[function]  @AdaSubDefn{Is_Callable}  (T : Task_Id) @key{return} Boolean;
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0189-1]}
+   @key[function]  @AdaSubDefn{Is_Terminated}          (T : Task_Id) @key{return} Boolean;
+   @key[function]  @AdaSubDefn{Is_Callable}            (T : Task_Id) @key{return} Boolean;@Chg{Version=[3],New=[
+   @key[function]  @AdaSubDefn{Activation_Is_Complete} (T : Task_Id) @key{return} Boolean;],Old=[]}
 @key[private]
    ... -- @RI{not specified by the language}
 @key[end] Ada.Task_Identification;
@@ -1567,6 +1571,10 @@ T. If T equals Null_Task_Id, Image returns an empty string.
 
 The function Current_Task returns a value that identifies the calling task.
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0189-1]}
+@ChgAdded{Version=[3],Text=[The function Environment_Task returns a value that
+identifies the environment task.]}
+
 The effect of Abort_Task is the same as the @nt{abort_statement} for the
 task identified by T. @Redundant[In addition, if T identifies the
 environment task, the entire partition is aborted, See @RefSecNum{Partitions}.]
@@ -1581,6 +1589,13 @@ call, but Is_Callable (usually True) could be False if the environment task is
 waiting for the termination of dependent tasks. Thus, a dependent task can use
 Is_Callable to determine if the main subprogram has completed.]}
 @end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0189-1]}
+@ChgAdded{Version=[3],Text=[The function Activation_Is_Complete returns True if the
+task identified by T has completed its activation (whether successfully or not).
+It returns False otherwise. If T identifies the environment task,
+Activation_Is_Complete returns True after the elaboration of the
+@nt{library_item}s of the partition has completed.]}
 
 @Leading@;For @PrefixType{a @nt<prefix> T that is of a task type
 @Redundant[(after any implicit dereference)]},
@@ -1691,6 +1706,16 @@ Task_Id value that identifies the environment task.
   which task does these operations.]}
 @end{Diffword95}
 
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0189-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
+  Functions Environment_Task and Activation_Is_Complete are newly added to
+  Task_Identification. If Task_Identification is referenced in a @nt{use_clause}, and an
+  entity @i<E> with a @nt{defining_identifier} of Environment_Task or
+  Activation_Is_Complete is defined in a package that is also referenced in a
+  @nt{use_clause}, the entity @i<E> may no longer be use-visible, resulting in
+  errors. This should be rare and is easily fixed if it does occur.]}
+@end{Incompatible2005}
 
 
 @LabeledSubClause{The Package Task_Attributes}

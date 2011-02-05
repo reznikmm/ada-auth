@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.92 $ $Date: 2010/10/22 06:56:16 $ $Author: randy $ }
+@comment{ $Revision: 1.93 $ $Date: 2011/01/17 08:15:01 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2010/10/22 06:56:16 $}
+@Comment{$Date: 2011/01/17 08:15:01 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -3095,6 +3095,22 @@ Old=[]}Max_Entry_Queue_Length @\Max_Entry_Queue_Length
   that are queued on an entry. Violation of this restriction
   results in the raising of Program_Error at the point of the call or
   requeue.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0189-1]}
+@ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
+Sec=(No_Standard_Storage_Pools_After_Elaboration)}@Defn{No_Standard_Storage_Pools_After_Elaboration restriction}
+No_Standard_Storage_Pools_After_Elaboration @\Specifies that an allocator using
+a standard storage pool (see @RefSecNum{Storage Management}) shall not occur
+within a parameterless library subprogram, nor within the
+@nt{handled_sequence_of_statements} of a task body. For the purposes of this rule, an
+allocator of a type derived from a formal access type does not use a standard
+storage pool.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0189-1]}
+@ChgAdded{Version=[3],NoPrefix=[T],Text=[At run-time, Storage_Error is raised if
+an allocator using a standard storage pool is evaluated after the elaboration of
+the @nt{library_item}s of the partition has completed.@Defn2{Term=[Storage_Error],
+Sec=(raised by failure of run-time check)}]}
 @end{Description}
 
 It is implementation defined whether the use of pragma Restrictions
@@ -3194,6 +3210,13 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   on these restrictions would also use an end-run around the restriction, so
   it is expected that very few programs will be affected by this change.]}
 @end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0189-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Restriction No_Standard_Storage_Pools_After_Elaboration is newly
+  added to Ada.]}
+@end{Extend2005}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1],ARef=[AI05-0216-1]}

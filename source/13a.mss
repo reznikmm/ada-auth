@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2010/11/25 03:11:50 $}
+@Comment{$Date: 2011/01/17 08:15:01 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1555,8 +1555,11 @@ Text=[The set of machine scalars.]}]}
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0191-1]}
 @Chg{New=[The following representation attributes are defined: Address,
-Alignment, Size, Storage_Size, and Component_Size.],
+Alignment, Size, Storage_Size,
+@Chg{Version=[3],New=[],Old=[and ]}Component_Size@Chg{Version=[3],New=[,
+Has_Same_Storage, and Overlaps_Storage],Old=[]}.],
 Old=[@Leading@;The following attributes are defined:]}
 
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
@@ -2753,6 +2756,72 @@ be followed.]}]}
 @end{ImplAdvice}
 
 @begin{StaticSem}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0191-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} X that
+denotes an object}:]}
+@begin(description)
+@ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],
+  Leading=<F>, Prefix=<X>, AttrName=<Has_Same_Storage>, ARef=[AI05-0191-1],
+  Text=[@Chg{Version=[3],New=[X'Has_Same_Storage denotes a function with the
+  following specification:],Old=[]}
+
+@begin(Descexample)
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@key(function) X'Has_Same_Storage (@RI{X} : @RI{any_type})
+  @key(return) Boolean]}
+@end(Descexample)
+
+   @ChgRef{Version=[3],Kind=[Added]}
+   @ChgAdded{Version=[3],NoPrefix=[T],Text=[The actual parameter shall be a name
+   that denotes an object. The object denoted by the actual parameter can be of
+   any type. This function evaluates the names of the objects involved and
+   returns true if the representation of the object denoted by the actual
+   parameter occupies exactly the same bits as the representation of the object
+   denoted by X; it is false otherwise.]}]}@Comment{End of Annex text here.}
+
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Has_Same_Storage means that, if the representation
+  is contiguous, the objects sit at the same address and occupy the same length
+  of memory.]}
+@end{Discussion}
+@end(description)
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0191-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} X that
+denotes an object}:]}
+@begin(description)
+@ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],
+  Leading=<F>, Prefix=<X>, AttrName=<Overlaps_Storage>, ARef=[AI05-0191-1],
+  Text=[@Chg{Version=[3],New=[X'Has_Same_Storage denotes a function with the
+  following specification:],Old=[]}
+
+@begin(Descexample)
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@key(function) X'Overlaps_Storage (@RI{X} : @RI{any_type})
+  @key(return) Boolean]}
+@end(Descexample)
+
+   @ChgRef{Version=[3],Kind=[Added]}
+   @ChgAdded{Version=[3],NoPrefix=[T],Text=[The actual parameter shall be a name
+   that denotes an object. The object denoted by the actual parameter can be of
+   any type. This function evaluates the names of the objects involved and
+   returns true if the representation of the object denoted by the actual
+   parameter shares at least one bit with the representation of the object
+   denoted by X; it is false otherwise.]}]}@Comment{End of Annex text here.}
+@end(description)
+@end{StaticSem}
+
+@begin{Notes}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0191-1]}
+@ChgAdded{Version=[3],Text=[X'Has_Same_Storage(Y) implies X'Overlaps_Storage(Y).]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0191-1]}
+@ChgAdded{Version=[3],Text=[X'Has_Same_Storage(Y) and X'Overlaps_Storage(Y) are
+not considered to be reads of X and Y.]}
+@end{Notes}
+
+@begin{StaticSem}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @ChgAdded{Version=[1],Text=[The following operational attribute is defined: External_Tag.]}
@@ -3034,6 +3103,12 @@ except for certain explicit exceptions.
   the operation), so this is highly unlikely to affect any existing programs
   unless they have a hidden bug.]}
 @end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0191-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Attributes Has_Same_Storage and Overlaps_Storage are new.]}
+@end{Extend2005}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
