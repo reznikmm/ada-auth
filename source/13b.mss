@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2010/11/25 03:11:50 $}
+@Comment{$Date: 2011/02/05 09:14:58 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1975,6 +1975,14 @@ parameters, the storage pool should be created at the point of the
 @nt{allocator}, and be reclaimed when the allocated object becomes
 inaccessible;]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1]}
+@ChgAdded{Version=[3],Text=[If the @nt{allocator} defines the result of a
+function with an access result, the storage pool is determined as though the
+@nt{allocator} were in place of the call of the function. If the call is the
+operand of a type conversion, the storage pool is that of the target access type
+of the conversion. If the call is itself defining the result of a function with
+an access result, this rule is applied recursively;]}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00230-01]}
 @ChgAdded{Version=[2],Text=[Otherwise, a default storage pool should be
 created at the point where the anonymous access type is elaborated; such
@@ -2186,6 +2194,10 @@ objects incorrectly by missing various cases.
 @end{DiffWord95}
 
 @begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0051-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added the missing definition
+  of the storage pool of an @nt{allocator} for an anonymous access result type.]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0107-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified when an implementation
   is allowed to call Allocate and Deallocate, and the requirements on such
@@ -4477,6 +4489,14 @@ incomplete type],Old=[]}.
   within a nested body,
   since some compilers look at bodies after looking
   at the containing @nt{declarative_part}.
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+  @ChgAdded{Version=[3],Text=[Note that @ldquote@;body@rdquote includes
+  @nt{null_procedure_declaration}s and @nt{expression_function_declaration}s
+  when those are used as completions, as well as @nt{entry_body}s (see
+  @RefSecNum{Completions of Declarations}). These all cause freezing,
+  along with @nt{proper_body}s and @nt{body_stub}s.]}
+
 @end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0046],ARef=[AI95-00106-01]}
@@ -4549,13 +4569,15 @@ type.]}
 @end{Itemize}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0046],ARef=[AI95-00106-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1]}
 @PDefn2{Term=[freezing], Sec=(by an expression)}
 A static expression causes freezing where it occurs.
 @Chg{New=[@PDefn2{Term=[freezing], Sec=(by an object name)}
 An object name or],Old=[A]} nonstatic expression causes freezing where it
 occurs, unless the @Chg{New=[name or ],Old=[]}expression is part of a
-@nt<default_expression>, a @nt<default_name>, or a per-object expression
-of a component's @nt<constraint>, in which case,
+@nt<default_expression>, a @nt<default_name>, @Chg{Version=[3],New=[
+the @nt{expression} of an expression function],Old=[]}or a
+per-object expression of a component's @nt{constraint}, in which case,
 the freezing occurs later as part of another construct.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046],ARef=[AI95-00106-01]}
@@ -4621,36 +4643,92 @@ In Ada 83, on the other hand, there is no occurrence of the name T,
 hence no forcing occurrence of T.
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0019-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[@PDefn2{Term=[freezing], Sec=(profile of a function call)}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0019-1],ARef=[AI05-0177-1]}
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=[freezing], Sec=(profile of a function call)}
+@PDefn2{Term=[freezing], Sec=(expression of an expression function by a call)}
 At the place where a function call causes freezing, the profile of the function is
 frozen. Furthermore, if a parameter of the call is defaulted, the
-@nt{default_expression} for that parameter causes freezing.]}
+@nt{default_expression} for that parameter causes freezing. If the function call
+is to an expression function, the @nt{expression} of the expression function
+causes freezing.]}
 
 @begin{Reason}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[ This is the important rule for profile freezing: a
-call freezes the profile. That's because generating the call will need to know
-how the parameters are passed, and that will require knowing details of the
-types. Other uses of subprograms do not need to know about the parameters, and
-thus only freeze the subprogram, and not the profile.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0019-1]}
+  @ChgAdded{Version=[3],Text=[This is the important rule for profile freezing: a
+  call freezes the profile. That's because generating the call will need to know
+  how the parameters are passed, and that will require knowing details of the
+  types. Other uses of subprograms do not need to know about the parameters, and
+  thus only freeze the subprogram, and not the profile.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Note that we don't
-need to consider procedure or entry calls, since a body freezes
-everything that precedes it, and the end of a declarative part freezes
-everything in the declarative part.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Note that we don't
+  need to consider procedure or entry calls, since a body freezes
+  everything that precedes it, and the end of a declarative part freezes
+  everything in the declarative part.]}
+@end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+  @ChgAdded{Version=[3],Text=[Freezing of the @nt{expression} of an expression
+  function only needs to be considered when the expression function is in the
+  same compilation unit and there are no intervening bodies; the end of a
+  declarative_part or library package freezes everything in it, and a body
+  freezes everything declared before it.]}
+@end{Ramification}
+
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0019-1],ARef=[AI05-0177-1]}
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=[freezing], Sec=(profile of a callable entity by an instantiation)}
+@PDefn2{Term=[freezing], Sec=(expression of an expression function by an instantiation)}
+At the place where a @nt{generic_instantiation} causes freezing of a callable
+entity, the profile of that entity is frozen; if the callable entity is
+an expression function, the @nt{expression} of the expression function causes
+freezing.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Elaboration of the generic might call the actual
+  for one of its formal subprograms, so we need to know the profile and
+  (for an expression function) @nt{expression}.]}
 @end{Reason}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0019-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[@PDefn2{Term=[freezing], Sec=(profile of a callable entity by an instantiation)}
-At the place where a @nt{generic_instantiation} causes freezing of a callable
-entity, the profile of that entity is frozen.]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0177-1]}
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=[freezing], Sec=(expression of an expression function by Access attribute)}
+At the place where a use of the Access or Unchecked_Access attribute whose
+@nt{prefix} denotes an expression function causes freezing, the @nt{expression}
+of the expression function causes freezing.]}
 
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Elaboration of the generic might call the actual
-for one of its formal subprograms, so we need to know the profile.]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[This is needed to avoid calls to
+unfrozen expressions. Consider:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[package] Pack @key[is]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] Flub @key[is range] 0 .. 100;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Foo (A : @key[in] Natural) @key[return] Natural @key[is]
+      (A + Flub'Size); -- @Examcom[The expression is not frozen here.]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] Bar @key[is access function] Foo (A : @key[in] Natural) @key[return] Natural;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   P : Bar := Foo'Access; -- @Examcom[(A)]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   Val : Natural := P.@key[all](5); -- @Examcom[(B)]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[end Pack;]}
+@end{Example}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If point (A) did not freeze the expression of Foo
+  (which freezes Flub), then the call at point (B) would be depending on the
+  aspects of the unfrozen type Flub. That would be bad.]}
 @end{Reason}
 
 @Leading@PDefn2{Term=[freezing], Sec=(entity caused by a name)}
@@ -5126,5 +5204,10 @@ Old=[@ntf{attribute_representation_clause}]} has been generalized.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Reworded so that
   incomplete types with a deferred completion aren't prematurely
   frozen.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+  @ChgAdded{Version=[3],Text=[Added freezing rules for expression functions;
+  these are frozen at the point of call, not the point of declaration, like
+  default expressions.]}
 @end{DiffWord2005}
 

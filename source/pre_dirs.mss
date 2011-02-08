@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.37 $ $Date: 2010/11/25 03:11:50 $ $Author: randy $ }
+@comment{ $Revision: 1.38 $ $Date: 2011/02/05 09:14:58 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2010/11/25 03:11:50 $}
+@Comment{$Date: 2011/02/05 09:14:58 $}
 
 @Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -184,8 +184,9 @@ Directories has the following declaration:]}
    @AdaExcDefn{Device_Error} : @key{exception renames} Ada.IO_Exceptions.Device_Error;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Text=[@key{private}
-    -- @RI{Not specified by the language.}
+    @Chg{Version=[3],New=[... ],Old=[]}-- @RI{@Chg{Version=[3],New=[not],Old=[Not]} specified by the language@Chg{Version=[3],New=[],Old=[.]}}
 @key{end} Ada.Directories;]}
 
 @end{Example}

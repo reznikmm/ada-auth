@@ -1,10 +1,10 @@
-`@Part(04, Root="ada.mss")
+@Part(04, Root="ada.mss")
 
-@Comment{$Date: 2010/11/25 03:11:49 $}
+@Comment{$Date: 2011/02/05 09:14:58 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.108 $}
+@Comment{$Revision: 1.109 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2555,14 +2555,14 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
 @LabeledClause{Expressions}
 
 @begin{Intro}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0147-1],ARef=[AI05-0176-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0147-1],ARef=[AI05-0158-1],ARef=[AI05-0176-1]}
 @Defn{expression}
 An @i(expression) is a formula that defines the computation or retrieval
 of a value.
 In this International Standard, the term @lquotes@;expression@rquotes@; refers to a construct
 of the syntactic category @nt<expression> or of any of the
-@Chg{Version=[3],New=[following categories: @nt{relation},
-@nt{simple_expression}, @nt{term}, @nt{factor}, @nt{primary},
+@Chg{Version=[3],New=[following categories: @nt{choice_expression}, @nt{choice_relation},
+@nt{relation}, @nt{simple_expression}, @nt{term}, @nt{factor}, @nt{primary},
 @nt{conditional_expression}, @nt{quantified_expression}],Old=[other five syntactic categories defined
 below]}.
 @Defn{and operator}@Defn2{Term=[operator],Sec=(and)}
@@ -2612,12 +2612,33 @@ below]}.
    | @Syn2{relation} {@key{or} @Syn2{relation}} @\| @Syn2{relation} {@key{or} @key{else} @Syn2{relation}}
    | @Syn2{relation} {@key{xor} @Syn2{relation}}"}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<choice_expression>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<
+     @Syn2[choice_relation] {@key[and] @Syn2[choice_relation]}
+   | @Syn2[choice_relation] {@key[or] @Syn2[choice_relation]}
+   | @Syn2[choice_relation] {@key[xor] @Syn2[choice_relation]}
+   | @Syn2[choice_relation] {@key[and then] @Syn2[choice_relation]}
+   | @Syn2[choice_relation] {@key[or else] @Syn2[choice_relation]}>,Old=<>}"}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<choice_relation>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<
+     @Syn2{simple_expression} [@Syn2{relational_operator} @Syn2{simple_expression}]>,Old=<>}"}
+
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
 @Syn{lhs=<relation>,rhs="
      @Syn2{simple_expression} [@Syn2{relational_operator} @Syn2{simple_expression}]
-   | @Syn2{simple_expression} [@key{not}] @key{in} @Syn2{range}
-   | @Syn2{simple_expression} [@key{not}] @key{in} @Syn2{subtype_mark}"}
+   | @Syn2{simple_expression} [@key{not}] @key{in} @Chg{Version=[3],New=[@Syn2{membership_choice_list}],Old="@Syn2{range}
+   | @Syn2{simple_expression} [@key{not}] @key{in} @Syn2{subtype_mark}"}"}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<membership_choice_list>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<@Syn2{membership_choice} {| @Syn2{membership_choice}}]>,Old=<>}"}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<membership_choice>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<@Syn2{choice_expression} | @Syn2{range} | @Syn2{subtype_mark}]>,Old=<>}"}
 
 @Syn{lhs=<simple_expression>,rhs="[@Syn2{unary_adding_operator}] @Syn2{term} {@Syn2{binary_adding_operator} @Syn2{term}}"}
 
@@ -2764,6 +2785,10 @@ still have to be parenthesized when used in a bound of a range.
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0176-1]}
   @ChgAdded{Version=[3],Text=[Added @nt{conditional_expression} and
   @nt{quantified_expression} to @nt{primary}.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0158-1]}
+  @ChgAdded{Version=[3],Text=[Expanded membership test syntax (see
+  @RefSecNum{Relational Operators and Membership Tests}).]}
 @end{DiffWord2005}
 
 
@@ -3137,17 +3162,31 @@ Membership tests are allowed for all types.]
 @begin{Resolution}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
 @PDefn2{Term=[expected type],
   Sec=(membership test simple_expression)}
 @Defn2{Term=[tested type], Sec=(of a membership test)}
 The @i(tested type) of a membership test
-is the type of the @nt<range> or the type
-determined by the @nt<subtype_mark>.
-If the tested type is tagged, then the @nt<simple_expression> shall resolve to
-be of a type that @Chg{Version=[2],New=[is convertible (see
-@RefSecNum{Type Conversions}) to],Old=[covers or is covered by]} the tested
-type; if untagged, the expected type for the @nt<simple_expression> is
-the tested type.
+is@Chg{Version=[3],New=[],Old=[ the type of the @nt<range> or the type]}
+determined by the @Chg{Version=[3],New=[@nt<membership_choice>s of the
+@nt<membership_choice_list>. Either @nt{membership_choice}s of the
+@nt{membership_choice_list} shall resolve to the same type, which is the tested
+type; or each @nt{membership_choice} shall be of an elementary type, and the
+tested type shall be covered by each of these elementary
+types.],Old=[@nt<subtype_mark>]}. If the tested type is tagged, then the
+@nt<simple_expression> shall resolve to be of a type that
+@Chg{Version=[2],New=[is convertible (see @RefSecNum{Type Conversions})
+to],Old=[covers or is covered by]} the tested type; if untagged, the expected
+type for the @nt<simple_expression> is the tested type.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
+@ChgAdded{Version=[3],Text=[If the tested type is tagged, then the
+@nt{simple_expression} shall resolve to be of a type that is
+convertible (see @RefSecNum{Type Conversions}) to the tested
+type; if untagged, the expected type for the @nt{simple_expression} is
+the tested type. The expected type of a @nt{choice_expression} in a
+@nt{membership_choice}, and of a @nt{simple_expression} of a @nt{range} in a
+@nt{membership_choice}, is the tested type of the membership operation.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
@@ -3164,6 +3203,12 @@ the tested type.
   one rooted at the tested type.@Chg{Version=[2],New=[ This includes any
   class-wide type that covers the tested type, along with class-wide interfaces
   in some cases.],Old=[]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0158-1]}
+@ChgAdded{Version=[3],Text=[The special rule for determining the tested type for
+  elementary types is to allow numeric literals in @nt{membership_choice_list}s.
+  Without the rule, @exam{A @key[in] B | 1} would be illegal as B and 1 would
+  have different types (the literal having type @i<universal integer>).]}
 @end{Reason}
 
 @end{Resolution}
@@ -3181,6 +3226,18 @@ Untagged types covered by the tagged class-wide type
   from one another at run time once converted to a covering
   class-wide type.
 @end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
+@ChgAdded{Version=[3],Text=[If a membership test includes one or more choice
+expressions and the tested type of the membership test is limited, then the
+tested type of the membership test shall have a visible primitive equality
+operator.]}
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0158-1]}
+@ChgAdded{Version=[3],Text=[A visible equality operator is required in order
+to avoid breaking privacy; that is, we don't want to depend on a hidden
+equality operator.]}
+@end{Reason}
 @end{Legality}
 
 @begin{StaticSem}
@@ -3557,17 +3614,45 @@ left operand is lexicographically less than that of the right (the
 @i(tail) consists of the remaining components beyond the first and
 can be null).
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
 @PDefn2{Term=[evaluation], Sec=(membership test)}
-For the evaluation of a membership test,
-the @nt<simple_expression> and the @nt<range> (if any) are evaluated
-in an arbitrary order.
+For the evaluation of a membership test@Chg{Version=[3],New=[ using @key[in]
+whose @nt{membership_choice_list} has a single membership_choice,],Old=[]},
+the @nt<simple_expression> and the
+@Chg{Version=[3],New=[@nt{membership_choice}],Old=[@nt<range> (if any)]} are
+evaluated in an arbitrary order@Chg{Version=[3],New=[; the result is the
+result of the individual membership test for the @nt{membership_choice}],Old=[]}.
 
-@Leading@;A membership test using
-@key(in) yields the result True if:
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
+@ChgAdded{Version=[3],Text=[For the evaluation of a membership test using
+@key[in] whose @nt{membership_choice_list} has more than one @nt{membership_choice},
+the @nt{simple_expression} of the membership test is evaluated first and the
+result of the operation is equivalent to that of a sequence consisting
+of an individual membership test on each @nt{membership_choice}
+combined with the short-circuit control form @b[or else].]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
+  @ChgAdded{Version=[3],Text=[This equivalence includes the evaluation of the
+  @nt{membership_choice}s; evaluation stops as soon as an invididual evaluates
+  to True.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
+@Leading@;@Chg{Version=[3],New=[An @i{individual membership test}@Defn{individual membership test}],Old=[A
+membership test using @key(in)]} yields the result True if:
 @begin(itemize)
-  The tested type is scalar, and the value of
-  the @nt<simple_expression> belongs to the given @nt<range>, or
-  the range of the named subtype; or
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
+  @ChgAdded{Version=[3],Text=[The @nt{membership_choice} is a @nt{choice_expression},
+  and the @nt{simple_expression} is equal to the value of the @nt{membership_choice}.
+  If the tested type is a record type or a limited type, the test uses the
+  primitive equality for the type; otherwise the test uses predefined equality.]}
+
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
+  @Chg{Version=[3],New=[The @nt{membership_choice} is a @nt{range} or
+  @nt{subtype_mark}, the],Old=[The]} tested type is scalar, and the value of the
+  @nt<simple_expression> belongs to the given @nt<range>, or the range of the
+  named subtype@Chg{Version=[3],New=[.],Old=[; or]}
 @begin{Ramification}
     The scalar membership test only does a range check.
     It does not perform any other check, such as whether
@@ -3581,8 +3666,10 @@ in an arbitrary order.
 @end{Ramification}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[]}@ChgNote{To get conditional Leading}
-  The tested type is not scalar, and
+  @Chg{Version=[3],New=[The @nt<membership_choice> is a
+  @nt<subtype_mark>, the],Old=[The]} tested type is not scalar, @Chg{Version=[3],New=[],Old=[and ]}
   the value of the @nt<simple_expression> satisfies any constraints
   of the named subtype, and@Chg{Version=[2],New=[:],Old=[, if the type of
   the @nt{simple_expression}
@@ -3618,6 +3705,14 @@ Otherwise the test yields the result False.
 
 A membership test using @key(not in) gives the complementary result to
 the corresponding membership test using @key(in).
+
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0158-1]}
+  @ChgAdded{Version=[3],Text=[@exam{@i<X> @key[not in] @i<A> | @i<B> | @i<C>}
+  is intended to be exactly equivalent to @exam{@key[not] @i<X> @key[in] @i<A> | @i<B> | @i<C>},
+  including in the order of evaluation of the @nt{simple_expression} and
+  @nt{membership_choice}s.]}
+@end{Honest}
 @end{RunTime}
 
 @begin{ImplReq}
@@ -3748,8 +3843,12 @@ conversions.],Old=[]}
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0149-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Membership checks for the
-  accessibility and designated tags for general access types are new.]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Membership tests
+  for the accessibility and designated tags for general access types are new.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0158-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Membership tests
+  now allow multiple choices.]}
 @end{Extend2005}
 
 @begin{DiffWord2005}
@@ -4546,7 +4645,7 @@ P(Formal => @key[if] X @key[then] Y @key[else] Z);]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
   @ChgAdded{Version=[3],Text=[Implementers are cautioned to consider error
   detection when implementing the syntax for @nt{conditional_expression}s. An
-  @nt{if_expression} and a @nt{if_statement} are very similar syntactically, (as
+  @nt{if_expression} and an @nt{if_statement} are very similar syntactically, (as
   are a @nt{case_expression} and a @nt{case_statement}) and simple mistakes can
   appear to change one into the other, potentially causing errors to be moved
   far away from their actual location. The absence of @key[end if] to terminate

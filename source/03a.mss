@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/09/02 06:27:37 $}
+@Comment{$Date: 2011/02/05 09:14:57 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.100 $}
+@Comment{$Revision: 1.101 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -31,16 +31,19 @@ is a form of declaration defined as follows.
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1]}
 @Syn{tabs=[P27], lhs=<basic_declaration>,rhs="
      @Syn2{type_declaration}@\| @Syn2{subtype_declaration}
    | @Syn2{object_declaration}@\| @Syn2{number_declaration}
    | @Syn2{subprogram_declaration}@\| @Syn2{abstract_subprogram_declaration}
-   | @Chg{Version=[2],New=[@Syn2{null_procedure_declaration}@\| ],Old=[]}@Syn2{package_declaration}@Chg{Version=[2],New=[
-   |],Old=[@\|]} @Syn2{renaming_declaration}@Chg{Version=[2],New=[@\|],Old=[
-   |]} @Syn2{exception_declaration}@Chg{Version=[2],New=[
-   |],Old=[@\|]} @Syn2{generic_declaration}@Chg{Version=[2],New=[@\|],Old=[
+   | @Chg{Version=[2],New=[@Syn2{null_procedure_declaration}@\| @Chg{Version=<3>,New=<@Syn2{expression_function_declaration}
+   | >,Old=<>}],Old=[]}@Syn2{package_declaration}@Chg{Version=[2],New=[@Chg{Version=[3],New=[@\|],Old=[
+   |]}],Old=[@\|]} @Syn2{renaming_declaration}@Chg{Version=[2],New=[@Chg{Version=[3],New=[
+   | ],Old=[@\|]}],Old=[
+   |]} @Syn2{exception_declaration}@Chg{Version=[2],New=[@Chg{Version=[3],New=[@\|],Old=[
+   |]}],Old=[@\|]} @Syn2{generic_declaration}@Chg{Version=[2],New=[@Chg{Version=[3],New=[
+   | ],Old=[@\|]}],Old=[
    |]} @Syn2{generic_instantiation}"}
-
 
 @Syn{lhs=<defining_identifier>,rhs="@Syn2{identifier}"}
 @end{Syntax}
@@ -433,6 +436,13 @@ the task creation.
   @ChgAdded{Version=[2],Text=[Added null procedures
   (see @RefSecNum{Null Procedures}) to the syntax.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+  @ChgAdded{Version=[3],Text=[Added expression functions
+  (see @RefSecNum{Expression Functions}) to the syntax.]}
+@end{DiffWord2005}
+
 
 
 @LabeledClause{Types and Subtypes}
@@ -2288,9 +2298,6 @@ An object declared by a
 a @nt{formal_object_declaration} @Chg{Version=[3],New=[of mode @key[in out] ],Old=[]}is
 not @Chg{Version=[3],New=[considered],Old=[called]} a stand-alone object.
 
-or a @nt<formal_object_declaration> is not called a
-stand-alone object.
-
 The type of a stand-alone object cannot
 be abstract (see @RefSecNum{Abstract Types and Subprograms}).
 @end{Notes}
@@ -2930,16 +2937,17 @@ the implementation of the predefined equality operator of the record extension
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0164-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0164-1],ARef=[AI05-0240-1]}
 @noprefix@;The profile of an inherited subprogram
 (including an inherited enumeration literal) is obtained
 from the profile of the corresponding
 (user-defined) primitive subprogram of the parent@Chg{Version=[2],New=[ or progenitor],Old=[]}
 type, after systematic replacement of each
 subtype of its profile (see
-@RefSecNum{Subprogram Declarations})@Chg{Version=[3],New=[, other than
-those found in the designated profile of an @nt{access_definition},],Old=[]}
-that is of the parent@Chg{Version=[2],New=[ or progenitor],Old=[]} type
+@RefSecNum{Subprogram Declarations})
+that is of the parent@Chg{Version=[2],New=[ or progenitor],Old=[]}
+type@Chg{Version=[3],New=[, other than those subtypes
+found in the designated profile of an @nt{access_definition},],Old=[]}
 with a @i(corresponding subtype) of the derived type.
 @Defn{corresponding subtype}
 For a given subtype of the parent@Chg{Version=[2],New=[ or progenitor],Old=[]} type,
@@ -6380,10 +6388,12 @@ the same as it was in Ada 83.
 @end{Inconsistent83}
 
 @begin{Extend83}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 @Defn{extensions to Ada 83}
 Decimal fixed point types are new, though their
 capabilities are essentially similar to that available
-in Ada 83 with a fixed point type whose @i(small) equals its @i(delta) equals
+in Ada 83 with a fixed point type whose @i(small) equals its @i(delta)
+@Chg{Version=[3],New=[and both are],Old=[equals]}
 a power of 10. However, in the Information Systems Annex, additional
 requirements are placed on the support of decimal fixed point types
 (e.g. a minimum of 18 digits of precision).

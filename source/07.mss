@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2010/11/25 03:11:50 $}
+@Comment{$Date: 2011/02/05 09:14:58 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.107 $}
+@Comment{$Revision: 1.108 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1910,7 +1910,12 @@ or the @nt{expression} of an @nt{array_component_association} (see
 @Chg{Version=[2],New=[the @nt{expression} of a return statement (see
 @RefSecNum{Return Statements})],Old=[]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0177-1]}
+@Chg{Version=[3],New=[the @nt{expression} of an
+@nt{expression_function_declaration} (see @RefSecNum{Expression Functions})],Old=[]}
+
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}@ChgNote{Only because the paragraph number has changed}
 @Chg{Version=[2],New=[the @nt{default_expression} or actual parameter for a
 formal object of mode @b{in} (see @RefSecNum{Formal Objects})],Old=[]}
 
@@ -2288,6 +2293,10 @@ than being a subclause of
   @ChgAdded{Version=[3],Text=[Allowed @nt{conditional_expression}s in limited
   constructor contexts @em we want to treat these as closely to parentheses as
   possible.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0178-1]}
+  @ChgAdded{Version=[3],Text=[Added wording so that expression functions can
+  return limited entities.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0178-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added incomplete views
@@ -2724,6 +2733,20 @@ in which case the assignment does not involve any copying. In particular:]}
   return-by-reference types in Ada 95. We limited the requirement because
   we want to minimize disruption to Ada 95 implementations and users.]}
 @end{Reason}
+
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0232-1]}
+  @ChgAdded{Version=[3],Text=[This is a dynamic property and is determined by
+  the specific type of the parts of the actual object. In particular, if a part
+  has a class-wide type, the tag of the object might need to be examined in
+  order to determine if build-in-place is required. However, we expect that most
+  Ada implementations will determine this property at compile-time using some
+  assume-the-worst algorithm in order to chose the appropriate method to
+  implement a given call or aggregate. In addition, there is no attribute or
+  other method for a program to determine if a particular object has this
+  property (or not), so there is no value to a more careful description of this
+  rule.]}
+@end{Honest}
 
 @ChgRef{Version=[3],Kind=[Added]}
   @ChgAdded{Version=[3],Text=[In the case of an @nt{aggregate}, if the full type
@@ -3418,12 +3441,13 @@ the object will still exist when the corresponding master completes,
 and it will be finalized then.]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00280-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0051-1]}
 The order in which the finalization of a master performs finalization of
 objects is as follows:
 Objects created by declarations in the master are finalized
 in the reverse order of their creation.
-For objects that were created
-by @nt{allocator}s for an access type whose
+For objects that were created by @nt{allocator}s for
+@Chg{Version=[3],New=[a named],Old=[an]} access type whose
 ultimate ancestor is declared in the master,
 this rule is applied as though each
 such object that still exists had been created
@@ -3433,7 +3457,10 @@ at the first freezing point
 of the ultimate ancestor type@Chg{Version=[2],New=[; the finalization of
 these objects is called the @i<finalization of the
 collection>@Defn{finalization of the collection}@Defn2{Term=[collection],
-Sec=[finalization of]}],Old=[]}.@Chg{Version=[2],
+Sec=[finalization of]}],Old=[]}.@Chg{Version=[3],New=[ Objects created by
+allocators for an anonymous access type that are not coextensions of some other
+object, are finalized in an arbitrary order during the finalization of their
+associated master.],Old=[]}@Chg{Version=[2],
 New=[ After the finalization of a master is complete, the objects finalized
 as part of its finalization cease to @i<exist>, as do any types and subtypes
 defined and created within the master.@PDefn2{Term=[exist],Sec=[cease to]}
@@ -4092,6 +4119,16 @@ the rules here refer to the task-waiting rules of Section 9.
   the same time as the outer object. (This was intended for Ada 95, but since
   the concept did not have a name, it was overlooked.)]}
 @end{DiffWord95}
+
+@begin{Inconsistent2005}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}@b<Correction:>
+  Allowed more flexibility as to when objects allocated from anonymous access
+  types are finalized. This could be inconsistent if objects are finalized in
+  a different order and that order caused different program behavior; however
+  programs that depend on the order of finalization within a single master are
+  already fragile and hopefully are rare.]}
+@end{Inconsistent2005}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0064-1]}

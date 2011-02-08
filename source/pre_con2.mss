@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.5 $ $Date: 2010/11/25 03:11:50 $ $Author: randy $ }
+@comment{ $Revision: 1.6 $ $Date: 2011/02/05 09:14:58 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Vectors]}
 
@@ -682,6 +682,12 @@ exception raised by Process.@key[all] is propagated.]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as
 Source, the operation has no effect. If Source is empty, Clear (Target) is
 called. Otherwise, Replace_Element (Target, Element (Source)) is called.]}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+  @ChgAdded{Version=[3],Text=[This routine exists for compatibility with the
+  other containers. For a holder, @exam{Assign(A, B)} and
+  @exam{A := B} behave identically.]}
+@end{Discussion}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1954,14 +1960,14 @@ package Containers.Synchronized_Queue_Interfaces has the following declaration:]
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Enqueue}
      (Container : @key[in out] Queue;
-      New_Item  : @key[in]     Element_Type) @key[is abstract];
-   @key[pragma] Implemented (Enqueue, By_Entry);]}
+      New_Item  : @key[in]     Element_Type) @key[is abstract]
+       @key[with] Is_Synchronized => By_Entry;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Dequeue}
      (Container : @key[in out] Queue;
-      Element   :    @key[out] Element_Type) @key[is abstract];
-   @key[pragma] Implemented (Dequeue, By_Entry);]}
+      Element   :    @key[out] Element_Type) @key[is abstract]
+       @key[with] Is_Synchronized => By_Entry;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Current_Use} (Container : Queue) @key[return] Count_Type @key[is abstract];
@@ -2054,9 +2060,9 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[protected type] @AdaTypeDefn{Queue}
-        (Ceiling: System.Any_Priority := Default_Ceiling) @key[with]
-           Priority => Ceiling @key[is]
-              @key[new] Queue_Interfaces.Queue @key[with]]}
+        (Ceiling: System.Any_Priority := Default_Ceiling)
+           @key[with] Priority => Ceiling @key[is]
+        @key[new] Queue_Interfaces.Queue @key[with]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
@@ -2148,9 +2154,9 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[protected type] @AdaTypeDefn{Queue}
         (Capacity : Count_Type := Default_Capacity;
-         Ceiling: System.Any_Priority := Default_Ceiling) @key[with]
-           Priority => Ceiling @key[is]
-              @key[new] Queue_Interfaces.Queue @key[with]]}
+         Ceiling: System.Any_Priority := Default_Ceiling)
+           @key[with] Priority => Ceiling @key[is]
+        @key[new] Queue_Interfaces.Queue @key[with]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
@@ -2246,9 +2252,9 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[protected type] @AdaTypeDefn{Queue}
         (Capacity : Count_Type := Default_Capacity;
-         Ceiling: System.Any_Priority := Default_Ceiling) @key[with]
-           Priority => Ceiling @key[is]
-              @key[new] Queue_Interfaces.Queue @key[with]]}
+         Ceiling: System.Any_Priority := Default_Ceiling)
+           @key[with] Priority => Ceiling @key[is]
+        @key[new] Queue_Interfaces.Queue @key[with]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
@@ -2363,9 +2369,9 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[protected type] @AdaTypeDefn{Queue}
         (Capacity : Count_Type := Default_Capacity;
-         Ceiling: System.Any_Priority := Default_Ceiling) @key[with]
-           Priority => Ceiling @key[is]
-              @key[new] Queue_Interfaces.Queue @key[with]]}
+         Ceiling: System.Any_Priority := Default_Ceiling)
+           @key[with] Priority => Ceiling @key[is]
+      @key[new] Queue_Interfaces.Queue @key[with]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]

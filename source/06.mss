@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2010/10/22 06:56:15 $}
+@Comment{$Date: 2011/02/05 09:14:58 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.105 $}
+@Comment{$Revision: 1.106 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -190,6 +190,7 @@ A @nt{default_expression} is only allowed in a @nt{parameter_specification}
 for a formal parameter of mode @key(in).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1]}
 @PDefn2{Term=[requires a completion], Sec=(@nt{subprogram_declaration})}
 @PDefn2{Term=[requires a completion], Sec=(@nt{generic_subprogram_declaration})}
 A @nt{subprogram_declaration}
@@ -200,13 +201,16 @@ requires a completion:
 Old=[@key(pragma)]} Import (see @RefSecNum{Interfacing Pragmas})].
 @Redundant[A completion is not allowed
 for an @nt<abstract_subprogram_declaration>@Chg{Version=[2],New=[ (see
-@RefSecNum{Abstract Types and Subprograms}) or a
-@nt{null_procedure_declaration} (see @RefSecNum{Null Procedures})],Old=[]}.]
+@RefSecNum{Abstract Types and Subprograms})@Chg{Version=[3],New=[,],Old=[ or]} a
+@nt{null_procedure_declaration} (see @RefSecNum{Null Procedures})@Chg{Version=[3],New=[,
+or an @nt{expression_function_declaration} (see @RefSecNum{Expression Functions})],Old=[]}],Old=[]}.]
 @begin(Ramification)
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
-  Abstract subprograms @Chg{Version=[2],New=[and null procedures ],Old=[]}are
-  not declared by
-  @nt{subprogram_declaration}s, and so do not require completion.
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1]}
+  Abstract subprograms @Chg{Version=[2],New=[@Chg{Version=[3],New=[,],Old=[and]}
+  null procedures@Chg{Version=[3],New=[, and expression functions],Old=[]} ],Old=[]}are
+  not declared by @nt{subprogram_declaration}s, and so do not require
+  completion@Chg{Version=[3],New=[ (although the latter two can @i<be> completions)],Old=[]}.
   Protected subprograms are declared by @nt{subprogram_declaration}s,
   and so require completion.
   Note that an abstract subprogram is a subprogram,
@@ -316,13 +320,17 @@ The @i(subtypes of a profile) are:
 The @i{types of a profile} are the types of those subtypes.]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1]}
 @Redundant[A subprogram declared by an
 @nt<abstract_subprogram_declaration>
 is abstract; a subprogram declared by a @nt<subprogram_declaration>
 is not. See @RefSec{Abstract Types and Subprograms}.@Chg{Version=[2],New=[
 Similarly, a procedure defined by a
 @nt{null_procedure_declaration} is a null procedure; a procedure declared by
-a @nt{subprogram_declaration} is not. See @RefSec{Null Procedures}.],Old=[]}]
+a @nt{subprogram_declaration} is not. See @RefSec{Null Procedures}.@Chg{Version=[3],New=[
+Finally, a function defined by an @nt{expression_function_declaration} is
+an expression function; a function declared by
+a @nt{subprogram_declaration} is not. See @RefSec{Expression Functions}.],Old=[]}],Old=[]}]
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00218-03]}
 @ChgAdded{Version=[2],Text=[@Redundant[An @nt{overriding_indicator} is used to
@@ -448,7 +456,6 @@ The syntax rules for @nt{defining_designator} and
   in @nt{operator_symbol}s in the same way as the underlying constructs.]}
 @end{DiffWord95}
 
-
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Parameters can
@@ -464,6 +471,13 @@ The syntax rules for @nt{defining_designator} and
   used in a @nt{subprogram_declaration}.
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+  @ChgAdded{Version=[3],Text=[Added expression functions (see
+  @RefSecNum{Expression Functions}) to the wording.]}
+@end{DiffWord2005}
+
 
 @LabeledClause{Formal Parameter Modes}
 
@@ -1126,12 +1140,15 @@ are access-to-constant, or the designated profiles are subtype conformant.
 @PDefn2{Term=[statically matching],Sec=(required)}]}
 @end{Itemize}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0239-1]}
 @Defn{subtype conformance}
 @Defn2{Term=[profile],Sec=(subtype conformant)}
-Two profiles are @i{subtype conformant} if they are mode-conformant,
+Two profiles are @i{subtype conformant} if they are
+@Chg{Version=[3],New=[mode conformant],Old=[mode-conformant]},
 corresponding subtypes of the profile statically match,
 and the associated calling conventions are the same.
-The profile of a generic formal subprogram is not subtype-conformant
+The profile of a generic formal subprogram is not
+@Chg{Version=[3],New=[subtype conformant],Old=[subtype-conformant]}
 with any other profile.
 @PDefn2{Term=[statically matching],Sec=(required)}
 
@@ -2647,33 +2664,48 @@ these]}.]]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0032-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0032-1],ARef=[AI05-0051-1]}
 @ChgAdded{Version=[2],Text=[If the result subtype of the function is class-wide,
 the accessibility level of the type of the @nt{expression}
 @Chg{Version=[3],New=[(if any) ],Old=[]}of the return
 statement shall not be statically deeper than that of the master that
-elaborated the function body. If the result subtype has one or more
+elaborated the function body.@Chg{Version=[3],New=[],Old=[ If the result subtype
+has one or more
 unconstrained access discriminants, the accessibility level of the anonymous
 access type of each access discriminant, as determined by the
 @nt{expression} of the @nt{simple_@!return_@!statement} or the
 @nt{return_@!subtype_@!indication}, shall not be
-statically deeper than that of the master that elaborated the function body.]}
+statically deeper than that of the master that elaborated the function body.]}]}
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0032-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0032-1],ARef=[AI05-0051-1]}
   @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[If],Old=[We know that if]}
   the result type is class wide, then there must be an @nt{expression} of the
   return statement@Chg{Version=[3],New=[ unless this is
   an @nt{extended_return_statement} whose @nt{return_subtype_indication} is
   a specific type. We have a separate rule to cover that case. Note that
   if an @nt{extended_return_statement} has an @nt{expression}, then both rules
-  must be satisfied. For the second sentence],Old=[. Similarly]}, if
+  must be satisfied],Old=[. Similarly, if
   the result subtype is unconstrained, then either the
   @nt{return_@!subtype_@!indication} (if any) is constrained, or
-  there must be an @nt{expression}.]}
+  there must be an @nt{expression}]}.]}
 @end{Discussion}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1]}
+@ChgAdded{Version=[3],Text=[If the subtype determined by the @nt{expression} of the
+@nt{simple_return_statement} or by the @nt{return_subtype_indication} has
+one or more access discriminants, the accessibility level of the anonymous
+access type of each access discriminant shall not be statically deeper than that
+of the master that elaborated the function body.]}
+
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[We use the type used by the return statement
+  rather than from the function return type since we want to check whenever
+  the return object has access discriminants, even if the function return type
+  doesn't have any (mostly for a class-wide type).]}
+@end{Discussion}
 @end{Itemize}
 
 @end{Legality}
@@ -2970,14 +3002,20 @@ The exception Program_Error is raised if this check fails.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00402-01],ARef=[AI95-00416-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0051-1]}
 @Chg{Version=[2],
-New=[If the result subtype of a function has one or more unconstrained access
-discriminants,
+New=[If @Chg{Version=[3],New=[any part of the return object (or coextension
+thereof)],Old=[the result subtype]} of a function has one or more
+@Chg{Version=[3],New=[],Old=[unconstrained ]}access
+discriminants@Chg{Version=[3],New=[ whose value is not constrained by the
+result subtype of the function],Old=[]},
 a check is made that the accessibility level of the anonymous access type
 of each access discriminant, as determined by the @nt{expression} or the
 @nt{return_@!subtype_@!indication} of the function,
-is not deeper than that of the master that elaborated the
-function body. If this check fails, Program_Error is raised.
+is not deeper than @Chg{Version=[3],New=[the level of the return object as
+determined by the point of call (see @RefSecNum{Operations of Access Types})],
+Old=[that of the master that elaborated the
+function body]}. If this check fails, Program_Error is raised.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 @IndexCheck{Accessibility_Check}],
 Old=[For a function with a return-by-reference result type
@@ -3137,13 +3175,13 @@ subtype of this object.]}]}
 @leading@keepnext@i{Examples of return statements:}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-@key[return];                         --@RI{ in a procedure body, }@nt{entry_body}@RI{,}@Chg{Version=[2],New=[
-                                -- @nt{accept_statement}@RI{, or }@nt{extended_return_statement}],Old=[@RI{ or }@nt{accept_statement}]}
+@key[return];                         --@ExamCom{ in a procedure body, }@nt{entry_body}@ExamCom{,}@Chg{Version=[2],New=[
+                                -- @nt{accept_statement}@ExamCom{, or }@nt{extended_return_statement}],Old=[@ExamCom{ or }@nt{accept_statement}]}
 
-@key[return] Key_Value(Last_Index);   --@RI{ in a function body}
+@key[return] Key_Value(Last_Index);   --@ExamCom{ in a function body}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
-@Chg{Version=[2],New=<@key[return] Node : Cell @key{do}           --@RI{ in a function body, see @RefSecNum{Incomplete Type Declarations} for Cell}
+@Chg{Version=[2],New=<@key[return] Node : Cell @key{do}           --@ExamCom{ in a function body, see @RefSecNum{Incomplete Type Declarations} for Cell}
    Node.Value := Result;
    Node.Succ := Next_Node;
 @key{end} @key{return};>,Old=<>}
@@ -3278,6 +3316,15 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   remove the raising of an exception (or change the place where it is raised)
   compared to Ada 2005, so programs that depend on the previous behavior should
   be very rare.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0051-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Accessibility checks for
+  access discriminants now depend on the point of the call rather than
+  the point of declaration of the function. This will result in cases
+  that used to raise Program_Error now running without raising any exception.
+  This is technically inconsistent with Ada 2005 (as defined by Amendment 1),
+  but it is unlikely that any real code depends on the raising of this
+  exception.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0073-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:>
@@ -3464,9 +3511,9 @@ normally, Program_Error is raised at the point of the call.
 @begin{Examples}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Text=[@key(procedure) Fail(Msg : String);  --@RI[ raises Fatal_Error exception]
+@ChgAdded{Version=[2],Text=[@key(procedure) Fail(Msg : String);  --@ExamCom[ raises Fatal_Error exception]
 @key(pragma) No_Return(Fail);
-   --@RI[ Inform compiler and reader that procedure never returns normally]]}
+   --@ExamCom[ Inform compiler and reader that procedure never returns normally]]}
 @end{Example}
 @end{Examples}
 
@@ -3567,8 +3614,8 @@ and hence may be overloaded with both one- and two-parameter functions.
 @key[function] "+" (Left, Right : Matrix) @key[return] Matrix;
 @key[function] "+" (Left, Right : Vector) @key[return] Vector;
 @Comment{Blank line}
---@RI{  assuming that A, B, and C are of the type Vector}
---@RI{  the following two statements are equivalent:}
+--@ExamCom{  assuming that A, B, and C are of the type Vector}
+--@ExamCom{  the following two statements are equivalent:}
 @Comment{Blank line}
 A := B + C;
 A := "+"(B, C);
@@ -3618,11 +3665,22 @@ rhs="@Chg{Version=[2],New=<
        [@Syn2{aspect_specification}]>,Old=[]};>,Old=<>}"}
 @end{Syntax}
 
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0177-1]}
+@ChgAdded{Version=[3],Text=[If a @nt{null_procedure_declaration} is a completion,
+it shall be the completion of a @nt{subprogram_declaration} or
+@nt{generic_subprogram_declaration}. The profile of a
+@nt{null_procedure_declaration} that completes a declaration shall
+conform fully to that of the declaration.@Defn2{Term=[full conformance],Sec=(required)}]}
+@end{Legality}
+
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1]}
 @ChgAdded{Version=[2],Text=[A @nt<null_procedure_declaration> declares a @i<null
 procedure>.@Defn{null procedure}@Defn2{Term=[procedure],Sec=[null]}
-A completion is not allowed for a @nt<null_procedure_declaration>.]}
+A completion is not allowed for a @nt<null_procedure_declaration>@Chg{Version=[3],New=[,
+however, a @nt{null_procedure_declaration} can complete a previous declaration],Old=[]}.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[There are no null functions because the return
@@ -3651,15 +3709,19 @@ place of a procedure specification.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=[elaboration], Sec=(null_procedure_declaration)}
-The elaboration of a @nt{null_procedure_declaration} has no effect.]}
+The elaboration of a @nt{null_procedure_declaration} has no
+@Chg{Version=[3],New=[other ],Old=[]}effect@Chg{Version=[3],New=[than to
+establish that the null procedure can be called without failing the
+Elaboration_Check],Old=[]}.]}
 @end{RunTime}
 
 @begin{Examples}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Text=[@key(procedure) Simplify(Expr : @key(in out) Expression) @key(is null); --@RI[ see @RefSecNum{Tagged Types and Type Extensions}]
---@RI[ By default, Simplify does nothing, but it may be overridden in extensions of Expression]]}
+@ChgAdded{Version=[2],Text=[@key(procedure) Simplify(Expr : @key(in out) Expression) @key(is null); --@ExamCom[ see @RefSecNum{Tagged Types and Type Extensions}]
+--@ExamCom[ By default, Simplify does nothing, but it may be overridden in extensions of Expression]]}
 @end{Example}
 @end{Examples}
 
@@ -3670,8 +3732,120 @@ Null procedures are new.]}
 @end{Extend95}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
-  An optional @nt{aspect_specification} can be used in a @nt{null_procedure_declaration}.
+  A @nt{null_procedure_declaration} can now be a completion.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[An optional @nt{aspect_specification}
+  can be used in a @nt{null_procedure_declaration}.
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
+
+
+@LabeledAddedClause{Version=[3],Name=[Expression Functions]}
+
+@begin{Intro}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+@ChgAdded{Version=[3],Text=[An @nt{expression_function_declaration} provides a
+shorthand to declare a function whose body consists of a single return
+statement.]}
+@end{Intro}
+
+@begin{Syntax}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0177-1]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<expression_function_declaration>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<
+   [@Syn2{overriding_indicator}]
+   @Syn2{function_specification} @key{is}
+       (@Syn2{expression})
+       [@Syn2{aspect_specification}];>,Old=<>}"}
+@end{Syntax}
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+@ChgAdded{Version=[3],Text=[The expected type for the @nt{expression} of an
+@nt{expression_@!function_@!declaration} is the result type (see
+@RefSecNum{Return Statements}) of the function.@PDefn2{Term=[expected type],
+Sec=(expression of expression function)}]}
+@end{Resolution}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+@ChgAdded{Version=[3],Text=[If an @nt{expression_@!function_@!declaration} is a
+completion, it shall be the completion of a @nt{subprogram_declaration} or
+@nt{generic_subprogram_declaration}. The profile of an
+@nt{expression_@!function_@!declaration} that completes a declaration
+shall conform fully to that of the declaration.@Defn2{Term=[full conformance],Sec=(required)}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+@ChgAdded{Version=[3],Text=[If the result subtype has one or more unconstrained
+access discriminants, the accessibility level of the anonymous access type of
+each access discriminant, as determined by the @nt{expression} of the expression
+function, shall not be statically deeper than that of the master that elaborated
+the @nt{expression_@!function_@!declaration}.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This can only fail if the discriminant is an
+  access to a part of a non-aliased parameter, as there can be no local
+  declarations here.]}
+@end{Ramification}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We don't need to repeat any of the other
+  @LegalityTitle for return statements since none of them can fail here: the
+  implicit return statement has to apply to this function (and isn't nested in
+  something), there clearly is a return statement in this function, and the
+  static classwide accessibility check cannot fail as a tagged type cannot be
+  declared locally in an expression function.]}
+@end{Discussion}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+@ChgAdded{Version=[3],Text=[An @nt{expression_@!function_@!declaration} declares
+an @i{expression function}.@Defn{exception funtion}@Defn2{Term=[function],Sec=[expression]}
+A completion
+is not allowed for an @nt{expression_@!function_@!declaration}, however an
+@nt{expression_@!function_@!declaration} can complete a previous declaration.]}
+@end{StaticSem}
+
+@begin{RunTime}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+@ChgAdded{Version=[3],Text=[ The execution of an expression function is invoked
+by a subprogram call. For the execution of a subprogram call on an expression
+function, the execution of the @nt{subprogram_body} is equivalent to a function
+body containing only a @nt{simple_return_statement} whose @nt{expression} is
+that of the expression function.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The last sentence effectively means that all of
+  the dynamic wording in @RefSecNum{Return Statements} applies as needed, and we
+  don't have to repeat it here.]}
+@end{Discussion}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=[elaboration],
+Sec=(expression_function_declaration)}The elaboration of an
+@nt{expression_@!function_@!declaration} has no other effect than to establish
+that the expression function can be called without failing the
+Elaboration_Check.]}
+@end{RunTime}
+
+@begin{Examples}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+@ChgAdded{Version=[3],Text=[@key(function) Is_Origin (P : @key[in] Point) @key[return] Boolean @key[is] -- @Examcom[see @RefSecNum{Tagged Types and Type Extensions}]
+   (P.X = 0.0 @key[and] P.Y = 0.0);]}
+@end{Example}
+@end{Examples}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Expression functions are new in Ada 2012.]}
+@end{Extend2005}
+

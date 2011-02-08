@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2010/11/25 03:11:49 $}
+@Comment{$Date: 2011/02/05 09:14:58 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 
 @LabeledClause{Type Conversions}
 
@@ -600,7 +600,9 @@ the operand type is not @i<universal_@!access>:]}
 @begin(inneritemize)
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-  @Chg{Version=[2],New=[The designated profiles shall be subtype-conformant.
+  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0239-1]}
+  @Chg{Version=[2],New=[The designated profiles shall be
+  @Chg{Version=[3],New=[subtype conformant],Old=[subtype-conformant]}.
   @Defn2{Term=[subtype conformance],Sec=(required)}],Old=[]}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
@@ -1404,12 +1406,16 @@ deeper than that of the type of the @nt{allocator}.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
-@ChgAdded{Version=[2],Text=[If the designated subtype of the type of the
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0051-1]}
+@ChgAdded{Version=[2],Text=[If the @Chg{Version=[3],New=[the subtype determined
+by the @nt{subtype_indication} or @nt{qualified_expression}],Old=[designated
+subtype of the type]} of the
 @nt{allocator} has one or more unconstrained access discriminants, then the
-accessibility level of the anonymous access type of each access discriminant,
+accessibility level of the anonymous access type of each access
+discriminant@Chg{Version=[3],New=[],Old=[,
 as determined by the @nt{subtype_indication} or @nt{qualified_expression} of
-the @nt{allocator}, shall not be statically deeper than that of the type of the
-@nt{allocator} (see @RefSecNum{Operations of Access Types}).]}
+the @nt{allocator},]} shall not be statically deeper than that of the type
+of the @nt{allocator} (see @RefSecNum{Operations of Access Types}).]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This prevents the allocated object from outliving
@@ -1595,7 +1601,7 @@ AI83-00150.
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01],ARef=[AI95-00416-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0024-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0024-1],ARef=[AI05-0051-1]}
 @ChgAdded{Version=[2],Text=[For any @nt{allocator}, if the designated type of
 the type of the @nt{allocator}
 is class-wide, then a check is made that the @Chg{Version=[3],New=[master],
@@ -1603,8 +1609,10 @@ Old=[accessibility level]} of the type
 determined by the @nt{subtype_indication}, or by the tag of the value of the
 @nt{qualified_expression}, @Chg{Version=[3],New=[includes the elaboration],
 Old=[is not deeper than that]} of the type of the @nt{allocator}. If the
-designated subtype of the @nt{allocator} has one or more unconstrained
-access discriminants, then a check is made that the accessibility
+@Chg{Version=[3],New=[subtype determined by the @nt{subtype_indication} or
+@nt{qualified_expression}],Old=[designated subtype]} of the @nt{allocator}
+has one or more @Chg{Version=[3],New=[],Old=[unconstrained ]}access
+discriminants, then a check is made that the accessibility
 level of the anonymous access type of each access discriminant is
 not deeper than that of the type of the @nt{allocator}.
 Program_Error is raised
@@ -1877,6 +1885,12 @@ has been moved to @RefSec{Storage Management}.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the rules for
   when a designated object is constrained by its initial value so that
   types derived from a partial view are handled properly.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0051-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the accessibility
+  check for access discriminants so that it does not depend on the
+  designated type (which might not have discriminants when the allocated
+  type does).]}
 @end{DiffWord2005}
 
 
@@ -1992,10 +2006,13 @@ Adding qualification to an expression shouldn't make it nonstatic, even
 for strings.
 @end{Reason}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
 a membership test
 whose @nt{simple_expression} is a static expression,
-and whose @nt{range} is a static range
-or whose @nt{subtype_mark} denotes a
+and whose @Chg{Version=[3],New=[@nt{membership_choice_list} consists only of
+@nt{membership_choice}s each of which is either a static @nt{choice_expression},
+a static @nt{range}, or a @nt{subtype_mark} that denotes],Old=[@nt{range}
+is a static range or whose @nt{subtype_mark} denotes]} a
 static @Redundant[(scalar or string)] subtype;
 @begin{Reason}
 Clearly, we should allow membership tests in exactly the same cases
@@ -2200,21 +2217,21 @@ or if it is a static string constant.
 @end{Intro}
 
 @begin{Legality}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0147-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[An expression is @i<statically
 unevaluated> if it is part of:@Defn{statically unevaluated}]}
 
 @begin{Itemize}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0147-1]}
 @ChgAdded{Version=[3],Text=[the right operand of a static short-circuit control
 form whose value is determined by its left operand; or]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
 @ChgAdded{Version=[3],Text=[a @SynI{dependent_}@nt{expression} of an
 @nt{if_expression} whose
 associated @nt{condition} is static and equals False; or]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
 @ChgAdded{Version=[3],Text=[a @nt{condition} or @SynI{dependent_}@nt{expression}
 of an @nt{if_expression} where the @nt{condition} corresponding to at least one
 preceding @SynI{dependent_}@nt{expression} of the @nt{if_expression} is static
@@ -2243,10 +2260,18 @@ the @nt{condition}s and @Syni{dependent_}@nt{expression}s of a single
 reasoning applies to the "of a @nt{case_expression}" of the last bullet.]}
 @end{Discussion}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0188-1]}
 @ChgAdded{Version=[3],Text=[a @SynI{dependent_}@nt{expression} of a
 @nt{case_expression} whose @SynI{selecting_}@nt{expression} is static and is
-not covered by the corresponding @nt{discrete_choice_list}.]}
+not covered by the corresponding @nt{discrete_choice_list}; or]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
+@ChgAdded{Version=[3],Text=[a @nt{choice_expression} (or a @nt{simple_expression}
+of a @nt{range} which occurs as a @nt{membership_choice} of a
+@nt{membership_choice_list}) of a static membership test which is preceded in
+the enclosing @nt{membership_choice_list} by another item whose individual
+membership test (see @RefSecNum{Relational Operators and Membership Tests})
+statically yields True.]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0147-1]}
@@ -2611,6 +2636,10 @@ raising.
   @ChgAdded{Version=[3],Text=[Added wording to define staticness and
   the lack of evaluation for @nt{if_expression}s and @nt{case_expression}s.
   These are new and defined elsewhere.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0158-1]}
+  @ChgAdded{Version=[3],Text=[Revised wording for membership tests to allow
+  for the new possibilities allowed by the @nt{membership_choice_list}.]}
 @end{DiffWord2005}
 
 

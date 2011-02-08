@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2010/11/25 03:11:50 $}
+@Comment{$Date: 2011/02/05 09:14:58 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.100 $}
+@Comment{$Revision: 1.101 $}
 
 @begin{Intro}
 
@@ -3238,6 +3238,7 @@ is expected to be of any nonlimited type.
 
 @begin{Legality}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 @Defn{time type}
 @Defn{time base}
 @Defn{clock}
@@ -3245,9 +3246,11 @@ There can be multiple time bases, each with a corresponding
 clock, and a corresponding @i{time type}.
 The type of the @i(delay_)@nt<expression>
 in a @nt{delay_until_statement} shall be a time type @em either the
-type Time defined in the language-defined package Calendar (see below),
-or some other implementation-defined time type
-(see @RefSecNum(Monotonic Time)).
+type Time defined in the language-defined package Calendar (see
+below),@Chg{Version=[3],New=[ the type Time in the package Real_Time
+(see @RefSecNum(Monotonic Time)),],Old=[]}
+or some other implementation-defined time type@Chg{Version=[3],New=[],Old=[
+(see @RefSecNum(Monotonic Time))]}.
 @ImplDef{Any implementation-defined time types.}
 @end{Legality}
 
@@ -3259,9 +3262,10 @@ of an interval of time, expressed in seconds.
 @Redundant[The type Duration is not specific to a particular time base,
 but can be used with any time base.]
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 A value of the type Time in package Calendar, or of some other
-implementation-defined time type, represents a time as reported
-by a corresponding clock.
+@Chg{Version=[3],New=[],Old=[implementation-defined ]}time type,
+represents a time as reported by a corresponding clock.
 
 @leading@keepnext@;The following language-defined library package exists:
 @begin{Example}

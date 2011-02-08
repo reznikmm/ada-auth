@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/11/25 03:11:49 $}
+@Comment{$Date: 2011/02/05 09:14:57 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.105 $}
+@Comment{$Revision: 1.106 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3896,7 +3896,8 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0151-1]}
   as the @nt<subtype_mark> in an
-  @nt<access_definition>@Chg{Version=[2],New=[@Chg{Version=[3],New=[;],Old=[.]}],Old=[;]}
+  @nt<access_definition>@Chg{Version=[2],New=[@Chg{Version=[3],New=[ for
+  an access-to-object type;],Old=[.]}],Old=[;]}
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This does not mean any random @nt{subtype_mark}
@@ -4668,17 +4669,24 @@ determined by the point of call (which is the same level that the return object
 ultimately will have).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 @ChgNote{Use ChgAdded below to get conditional Leading}
 @ChgAdded{Version=[2],Type=[Leading],Text=[]}
 The accessibility level of
 an object created by an @nt{allocator}
 is the same as that of
 the access type@Chg{Version=[2],New=[, except for an @nt{allocator} of an
-anonymous access type that defines the value of an access
-parameter or an access discriminant. For an @nt{allocator} defining the
-value of an access parameter, the accessibility level is that of
-the innermost master of the call. For one defining an
-access discriminant, the accessibility level is determined as
+anonymous access type @Chg{Version=[3],New=[(an @i<anonymous allocator>) in
+@Defn{anonymous allocator}certain contexts, as follows: For an anonymous
+allocator that defines the result of a function with an access result, the
+accessibility level is determined as though the allocator were in place of the
+call of the function; in the special case of a call that is the operand of a
+type conversion, the level is that of the target access type of the
+conversion.],Old=[that defines the value of an access parameter or an access
+discriminant]}. For an @Chg{Version=[3],New=[anonymous
+allocator],Old=[@nt{allocator}]} defining the value of an access parameter, the
+accessibility level is that of the innermost master of the call. For one
+defining an access discriminant, the accessibility level is determined as
 follows:],Old=[.]}
 
 @begin{InnerItemize}
@@ -4729,6 +4737,19 @@ the object is finalized (see @RefSecNum{Completion and Finalization}).]}
   13.11) that an object and its coextensions all be allocated from the same
   storage pool (or stack frame, in the case of a declared object).]}
 @end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1]}
+@ChgAdded{Version=[3],Text=[Within a return statement, the accessibility level
+of the anonymous access type of an access result is determined by the point of
+call. If the call is the operand of an explicit type conversion, the
+accessibility level is that of the target access type of the conversion. If the
+call is an actual parameter of another call or the @nt{prefix} of a name, the
+accessibility level is that of the innermost master of the call. If the call
+defines an access discriminant, the level is the same as that given above for an
+object created by an anonymous allocator that defines an access discriminant
+(even if the access result is of an access-to-subprogram type). If the call
+itself defines the result of a function with an access result, this rule is
+applied recursively.]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0014-1]}
 The accessibility level of a view of an object or subprogram
@@ -4814,7 +4835,7 @@ be statically deeper, nor statically shallower, than any other.]}
 checks.]}
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1],ARef=[AI05-0142-4]}
 @ChgAdded{Version=[3],Text=[Inside a return statement that applies to a function
 @i<F>, when determining whether the accessibility level of an explicitly aliased
 parameter of @i<F> is statically deeper than the level of the return object of
@@ -5445,7 +5466,7 @@ The following attribute is defined for @PrefixType{a @nt{prefix} P that
 denotes a subprogram}:
 @begin(description)
 @ChgAttribute{Version=[2],Kind=[Revised],ChginAnnex=[F], Leading=[F],
-  Prefix=<P>, AttrName=<Access>,ARef=[AI95-00229-01], ARef=[AI95-00254-01],
+  Prefix=<P>, AttrName=<Access>,ARef=[AI95-00229-01], ARef=[AI95-00254-01],ARef=[AI05-0239-1],
   Text=<P'Access yields an access value that designates the subprogram
   denoted by P.
   The type of P'Access is an access-to-subprogram type (@i(S)),
@@ -5460,7 +5481,8 @@ denotes a subprogram}:
   this rule applies also in the private part of an
   instance of a generic unit.
   The profile of P
-  shall be subtype-conformant with the designated profile of @i(S),
+  shall be @Chg{Version=[3],New=[subtype conformant],Old=[subtype-conformant]}
+  with the designated profile of @i(S),
   and shall not be Intrinsic.
 @Defn2{Term=[subtype conformance],Sec=(required)}
   If the subprogram denoted by P is declared within a
@@ -5486,7 +5508,7 @@ denotes a subprogram}:
     profile.
 
     Overload resolution ensures only that the profile
-    is type-conformant.
+    is @Chg{Version=[3],New=[type conformant],Old=[type-conformant]}.
     This rule specifies that subtype conformance is required (which also
     requires matching calling conventions).
     P cannot denote an entry because access-to-subprogram types
@@ -5790,6 +5812,10 @@ uses of anonymous access types.]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected accessibility rules for
   access discriminants so that no cases are omitted.]}
 
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0051-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected accessibility rules for
+  anonymous access return types and access discriminants in return statements.]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0066-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Changed coextension rules so that
   coextensions that belong to an anonymous object are transfered to the ultimate
@@ -5877,8 +5903,10 @@ are done in an arbitrary order.
   AI83-00406 applies to generic instantiation as well (see below).
 
   @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0014],ARef=[AI95-00064-01]}
+  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0177-1]}
   @ChgAdded{Version=[1],Text=[A subprogram can be completed by a
-  renaming-as-body, and we need
+  renaming-as-body@Chg{Version=[3],New=[, a @nt{null_procedure_declaration}, or
+  an @nt{expression_function_declaration}],Old=[]}, and we need
   to make an elaboration check on such a body, so we use
   @lquotes@;body@rquotes@; rather than @nt{subprogram_body} above.]}
 @end{Discussion}
@@ -5993,6 +6021,7 @@ is equivalent to one with an empty one.
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0014],ARef=[AI95-00064-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1]}
 Declarations sometimes come in two parts.
 @Defn{requires a completion}
 A declaration that requires a second part is said to @i(require completion).
@@ -6001,7 +6030,9 @@ The second part is called the @i(completion) of the declaration (and of
 the entity declared),
 and is either another declaration, a body, or a @nt<pragma>.
 @Chg{New=[A @defn<body>@i<body> is a @nt<body>,
-an @nt<entry_body>, or a renaming-as-body
+an @nt<entry_body>,@Chg{Version=[3],New=[ a @nt{null_procedure_declaration} or an
+@nt{expression_function_declaration} that completes another declaration,],Old=[]} or
+a renaming-as-body
 (see @RefSecNum<Subprogram Renaming Declarations>).],Old=[]}
 @begin{Discussion}
 @Leading@keepnext@;Throughout the RM95, there are rules about completions that
@@ -6161,3 +6192,9 @@ for any kind of entity.
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added a definition of @i{body},
   which is different than @nt{body} or @key{body}.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0177-1]}
+  @ChgAdded{Version=[3],Text=[Added null procedures and expression functions
+  that are completions to the definition of @i<body>.]}
+@end{DiffWord2005}

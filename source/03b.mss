@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2010/09/02 06:27:37 $}
+@Comment{$Date: 2011/02/05 09:14:57 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 
 @LabeledClause{Array Types}
 
@@ -2308,7 +2308,8 @@ parallel those for case statements.
 
 @Syn{lhs=<discrete_choice_list>,rhs="@Syn2{discrete_choice} {| @Syn2{discrete_choice}}"}
 
-@Syn{lhs=<discrete_choice>,rhs="@Syn2{expression} | @Syn2{discrete_range} | @key{others}"}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
+@Syn{lhs=<discrete_choice>,rhs="@Chg{Version=[3],New=[@Syn2{choice_expression}],Old=[@Syn2{expression}]} | @Syn2{discrete_range} | @key{others}"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -2488,4 +2489,13 @@ The rule requiring that the discriminant denote
 a discriminant of the type being defined seems to have been
 left implicit in RM83.
 @end{DiffWord83}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0158-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
+  Membership tests are no longer allowed as a @nt{discrete_choice}, in
+  order that those tests can be expanded to allow multiple tests in a
+  single expressiion without ambiguity. Since a membership test has a
+  boolean type, they are very unlikely to be used as a @nt{discrete_choice}.]}
+@end{Incompatible2005}
 

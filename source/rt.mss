@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.93 $ $Date: 2011/01/17 08:15:01 $ $Author: randy $ }
+@comment{ $Revision: 1.94 $ $Date: 2011/02/05 09:14:58 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2011/01/17 08:15:01 $}
+@Comment{$Date: 2011/02/05 09:14:58 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -3098,17 +3098,17 @@ Old=[]}Max_Entry_Queue_Length @\Max_Entry_Queue_Length
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0189-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
-Sec=(No_Standard_Storage_Pools_After_Elaboration)}@Defn{No_Standard_Storage_Pools_After_Elaboration restriction}
-No_Standard_Storage_Pools_After_Elaboration @\Specifies that an allocator using
+Sec=(No_Standard_Allocators_After_Elaboration)}@Defn{No_Standard_Allocators_After_Elaboration restriction}
+No_Standard_Allocators_After_Elaboration @\Specifies that an @nt{allocator} using
 a standard storage pool (see @RefSecNum{Storage Management}) shall not occur
 within a parameterless library subprogram, nor within the
 @nt{handled_sequence_of_statements} of a task body. For the purposes of this rule, an
-allocator of a type derived from a formal access type does not use a standard
+@nt{allocator} of a type derived from a formal access type does not use a standard
 storage pool.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0189-1]}
 @ChgAdded{Version=[3],NoPrefix=[T],Text=[At run-time, Storage_Error is raised if
-an allocator using a standard storage pool is evaluated after the elaboration of
+an @nt{allocator} using a standard storage pool is evaluated after the elaboration of
 the @nt{library_item}s of the partition has completed.@Defn2{Term=[Storage_Error],
 Sec=(raised by failure of run-time check)}]}
 @end{Description}
@@ -3214,7 +3214,7 @@ The above Storage_Checks can be suppressed with pragma Suppress.
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0189-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
-  Restriction No_Standard_Storage_Pools_After_Elaboration is newly
+  Restriction No_Standard_Allocators_After_Elaboration is newly
   added to Ada.]}
 @end{Extend2005}
 
@@ -4988,8 +4988,8 @@ language-defined library package exists:]}
 @key{package} Ada.Execution_Time.Group_Budgets @key{is}@ChildUnit{Parent=[Ada.Execution_Time],Child=[Group_Budgets]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0169-1]}
-@ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Group_Budget}@Chg{Version=[3],New=[(P : System.Multiprocessors.CPU :=
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1],ARef=[AI05-0169-1]}
+@ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Group_Budget}@Chg{Version=[3],New=[(CPU : System.Multiprocessors.CPU :=
                                   System.Multiprocessors.CPU'First)
    ],Old=[]} @key{is tagged limited private};]}
 
@@ -5106,11 +5106,11 @@ type Task_Identification.Task_Id identifying the members of the group GB. The
 order of the components of the array is unspecified.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0169-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1],ARef=[AI05-0169-1]}
 @ChgAdded{Version=[2],Text=[The procedure Replenish loads the group budget GB
 with To as the Time_Span value. The exception Group_Budget_Error is raised if
 the Time_Span value To is non-positive. Any execution @Chg{Version=[3],New=[on
-processor P ],Old=[]}of any member of the
+CPU ],Old=[]}of any member of the
 group of tasks results in the budget counting down, unless exhausted. When the
 budget becomes exhausted (reaches Time_Span_Zero), the associated handler is
 executed if the handler of group budget GB is set. Nevertheless, the tasks

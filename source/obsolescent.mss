@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:38 $}
+@Comment{$Date: 2011/02/05 09:14:59 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -596,8 +596,9 @@ was replaced by @nt{accept_statement}.], Old=[]}
 @begin{StaticSem}
 @leading@keepnext@;A @nt{record_representation_clause} of the form:
 @begin{example}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 @key[for] @RI{r} @key[use]
-    @key[record] @key[at] @key[mod] @RI{a}
+    @key[record] @key[at] @key[mod] @RI{a}@Chg{Version=[3],New=[;],Old=[]}
         ...
     @key[end] @key[record];
 @end{example}

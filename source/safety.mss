@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.46 $ $Date: 2011/01/17 08:15:01 $ $Author: randy $ }
+@Comment{ $Revision: 1.47 $ $Date: 2011/02/05 09:14:59 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2011/01/17 08:15:01 $}
+@Comment{$Date: 2011/02/05 09:14:59 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -911,7 +911,7 @@ shall support:]}
 @ChgAdded{Version=[2],Text=[the following restrictions defined in
 @RefSecNum{Tasking Restrictions}: No_Task_Hierarchy,
 No_Abort_Statement, No_Implicit_Heap_Allocation@Chg{Version=[3],New=[,
-No_Standard_Storage_Pools_After_Elaboration], Old=[]}; and]}
+No_Standard_Allocators_After_Elaboration], Old=[]}; and]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00347-01]}
 @ChgAdded{Version=[2],Text=[the @key{pragma} Profile(Ravenscar); and]}
@@ -1125,7 +1125,7 @@ proscribed
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0189-1]}
   @ChgAdded{Version=[3],Text=[New restriction
-  No_Standard_Storage_Pools_After_Elaboration is added to the list of
+  No_Standard_Allocators_After_Elaboration is added to the list of
   restrictions that are required by this annex.]}
 @end{DiffWord2005}
 

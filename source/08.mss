@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:37 $}
+@Comment{$Date: 2011/02/05 09:14:58 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.87 $}
+@Comment{$Revision: 1.88 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -921,10 +921,13 @@ declaration, except:
   @key[do] of the statement;]}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1]}
   For a @nt{package_declaration}, @Chg{Version=[2],New=[],Old=[task declaration,
   protected declaration, ]}@nt{generic_@!package_@!declaration},
-  or @nt{subprogram_@!body}, the declaration is
-  hidden from all visibility only until the reserved word @key(is)
+  @Chg{Version=[3],New=[],Old=[or ]}@nt{subprogram_@!body},
+  @Chg{Version=[3],New=[or @nt{expression_@!function_@!declaration}, ],Old=[]}the
+  declaration is hidden from all visibility only until the
+  reserved word @key(is)
   of the declaration@Chg{Version=[2],New=[;],Old=[.]}
   @begin{Ramification}
     We're talking about the @key{is} of the construct itself, here,
@@ -1453,6 +1456,11 @@ complex than they already are.]}
 @end{DiffWord95}
 
 @begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+  @ChgAdded{Version=[3],Text=[Added wording so that the parameters of an
+  @nt{expression_@!function_@!declaration} are visible in the @nt{expression}
+  of the function. (It would be pretty useless without such a rule.)]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0205-1]}
   @ChgAdded{Version=[3],Text=[@b{Correction:} Added a rule allowing
   visibility of the declared return object within an
@@ -1482,8 +1490,11 @@ rhs="@Chg{Version=[2],New=<[@key{not}] @key{overriding}>,Old=<>}"}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03],ARef=[AI95-00348-01],ARef=[AI95-00397-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0177-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[If an
-@nt{abstract_@!subprogram_@!declaration}, @nt{null_@!procedure_@!declaration},
+@nt{abstract_@!subprogram_@!declaration},
+@nt{null_@!procedure_@!declaration},@Chg{Version=[3],New=[
+@nt{expression_@!function_@!declaration},],Old=[]}
 @nt{subprogram_body}, @nt{subprogram_@!body_stub},
 @nt{subprogram_@!renaming_@!declaration}, @nt{generic_@!instantiation} of a
 subprogram, or @nt{subprogram_@!declaration}
@@ -1605,6 +1616,12 @@ this is a new operation.]}
   programmer state her overriding intentions to the compiler; if the compiler
   disagrees, an error will be produced rather than a hard to find bug.]}
 @end{Extend95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0177-1]}
+  @ChgAdded{Version=[3],Text=[Expression functions can have overriding
+  indicators.]}
+@end{DiffWord2005}
 
 
 @Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
@@ -2410,8 +2427,10 @@ is the profile given in the @nt<subprogram_specification>.
 @end{Resolution}
 
 @begin{Legality}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0239-1]}
 The profile of a renaming-as-declaration
-shall be mode-conformant with that of the renamed callable entity.
+shall be @Chg{Version=[3],New=[mode conformant],Old=[mode-conformant]},
+ with that of the renamed callable entity.
 @Defn2{Term=[mode conformance],Sec=(required)}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00423-01]}
@@ -2449,6 +2468,7 @@ the @nt{subprogram_specification} that has an explicit @nt{null_exclusion}:]}
 @end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0027],Ref=[8652/0028],ARef=[AI95-00135-01],ARef=[AI95-00145-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0239-1]}
 The profile of a renaming-as-body
 @Chg{New=[],Old=[shall be subtype-conformant with that of the renamed
 callable entity, and ]}shall conform fully to that of the declaration it
@@ -2456,11 +2476,12 @@ completes.
 @Defn2{Term=[full conformance],Sec=(required)}
 If the renaming-as-body completes that declaration
 before the subprogram it declares is frozen,
-@Chg{New=[the profile shall be mode-conformant
+@Chg{New=[the profile shall be @Chg{Version=[3],New=[mode conformant],Old=[mode-conformant]}
 @Defn2{Term=[mode conformance],Sec=(required)}with that of the renamed
 callable entity and ],Old=[]}the subprogram it declares
 takes its convention from the renamed subprogram;
-otherwise@Chg{New=[, the profile shall be subtype-conformant with that of the
+otherwise@Chg{New=[, the profile shall be @Chg{Version=[3],New=[subtype conformant],Old=[subtype-conformant]}
+with that of the
 renamed callable entity and],Old=[]} the convention of the renamed subprogram
 shall not be Intrinsic.
 @Defn2{Term=[subtype conformance],Sec=(required)}
@@ -3175,9 +3196,10 @@ type @em such a preference would cause Beaujolais effects.
     or]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01],ARef=[AI95-00409-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0239-1]}
 @ChgAdded{Version=[2],Text=[when @i(T) is an anonymous access-to-subprogram
      type (see @RefSecNum{Access Types}), to an access-to-subprogram type
-     whose designated profile is type-conformant with that of @i{T}.]}
+     whose designated profile is @Chg{Version=[3],New=[type conformant],Old=[type-conformant]} with that of @i{T}.]}
 
 @end(Inneritemize)
 @end{Itemize}
@@ -3195,11 +3217,12 @@ shall resolve to the name of a callable entity whose profile is type
 conformant with the expected profile.
 @Defn2{Term=[type conformance],Sec=(required)}
 @begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0239-1]}
   The parameter and result @i{sub}types are not used in overload
   resolution.
   Only type conformance of profiles
   is considered during overload resolution.
-  Legality rules generally require at least mode-conformance
+  Legality rules generally require at least @Chg{Version=[3],New=[mode conformance],Old=[mode-conformance]}
   in addition, but those rules are not used in overload resolution.
 @end{Ramification}
 @end{Resolution}

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:38 $}
+@Comment{$Date: 2011/02/05 09:14:58 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -470,6 +470,16 @@ runs into this problem.
 Such rules are rare; in most cases, the rules for matching of formals
 and actuals guarantee that if the rule is obeyed in the generic unit,
 then it has to be obeyed in the instance.
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0005-1]}
+@ChgAdded{Version=[3],Text=[Ada 2012 addendum: Such @LegalityTitle are not
+as rare as the authors of Ada 95 hoped; there are more than 30 of them known
+at this point. They are indexed under "generic contract issue" and
+are associated with the boilerplate "In addition to the places where
+@LegalityTitle normally apply...". Indeed, there is only one known rule
+where rechecking in the specification is needed and where rechecking in the
+private part is @i<not> wanted (it is in @RefSecNum{Derived Types and Classes},
+but even it needs rechecking when tagged types are involved).]}
 @end{Reason}
 @begin{Ramification}
 @leading@;The @lquotes@;properties@rquotes@; of the formals are determined
@@ -505,7 +515,8 @@ The subtype of a formal parameter of
 a formal subprogram does not
 provide an applicable index constraint.
 
-The profile of a formal subprogram is not subtype-conformant
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0239-1]}
+The profile of a formal subprogram is not @Chg{Version=[3],New=[subtype conformant],Old=[subtype-conformant]}
 with any other profile.
 @Defn{subtype conformance}
 
@@ -2198,12 +2209,13 @@ type, so if the tag in a call is statically determined to be that of the formal
 type, the body executed will be that corresponding to the actual type.]
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0239-1]}
 The above rule defining the properties of primitive subprograms in an
 instance applies even if the subprogram has been overridden or
 hidden for the actual type.
 This rule is necessary for untagged types,
 because their primitive subprograms might have been overridden by
-operations that are not subtype-conformant with the operations
+operations that are not @Chg{Version=[3],New=[subtype conformant],Old=[subtype-conformant]} with the operations
 defined for the class.
 For tagged types, the rule still applies, but the primitive
 subprograms will dispatch to the appropriate implementation based on
@@ -2657,9 +2669,10 @@ for subtypes that exclude null. We would rather that this sort of requirement
 be reflected in the contract of the generic.]}
 @end{Reason}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0239-1]}
 For a formal access-to-subprogram subtype,
 the designated profiles of the formal and the actual
-shall be mode-conformant,
+shall be @Chg{Version=[3],New=[mode conformant],Old=[mode-conformant]},
 and the calling convention of the actual shall be @i{protected}
 if and only if that of the formal is @i{protected}.
 @Defn2{Term=[mode conformance],Sec=(required)}
@@ -2892,15 +2905,18 @@ the expected profile for the actual is that of the formal subprogram.
 @end{Resolution}
 
 @begin{Legality}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0239-1]}
 The profiles of the formal and any named default shall be
-mode-conformant.
+@Chg{Version=[3],New=[mode conformant],Old=[mode-conformant]}.
 @Defn2{Term=[mode conformance],Sec=(required)}
 @begin{Ramification}
 This rule, unlike others in this clause, is checked at compile
 time of the @nt{generic_declaration}.
 @end{Ramification}
 
-The profiles of the formal and actual shall be mode-conformant.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0239-1]}
+The profiles of the formal and actual shall be
+@Chg{Version=[3],New=[mode conformant],Old=[mode-conformant]}.
 @Defn2{Term=[mode conformance],Sec=(required)}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00423-01]}

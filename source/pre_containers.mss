@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.75 $ $Date: 2010/10/22 06:56:16 $ $Author: randy $ }
+@comment{ $Revision: 1.76 $ $Date: 2011/02/05 09:14:58 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2010/10/22 06:56:16 $}
+@Comment{$Date: 2011/02/05 09:14:58 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -1280,6 +1280,14 @@ Source, the operation has no effect. If the length of Source is greater than the
 capacity of Target, Reserve_Capacity is called with the length of Source as the
 capacity. Each element of Source is assigned to the corresponding element of
 Target.]}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+  @ChgAdded{Version=[3],Text=[This routine exists for compatibility with the
+  bounded vector container. For an unbounded vector, @exam{Assign(A, B)} and
+  @exam{A := B} behave identically. For a bounded vector, := will raise an
+  exception if the container capacities are different, while Assign will
+  not raise an exception if there is enough room in the target.]}
+@end{Discussion}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -2904,6 +2912,14 @@ unconstrained.]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as
 Source, the operation has no effect.  Otherwise, it clears Target, and each
 element of Source is assigned to the corresponding element of Target.]}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+  @ChgAdded{Version=[3],Text=[This routine exists for compatibility with the
+  bounded list container. For an unbounded list, @exam{Assign(A, B)} and
+  @exam{A := B} behave identically. For a bounded list, := will raise an
+  exception if the container capacities are different, while Assign will
+  not raise an exception if there is enough room in the target.]}
+@end{Discussion}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -4013,6 +4029,14 @@ shall be unconstrained.]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as
 Source, the operation has no effect. Otherwise, each key/element pair of Source
 is assigned to the corresponding key/element pair of Target.]}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+  @ChgAdded{Version=[3],Text=[This routine exists for compatibility with the
+  bounded map containers. For an unbounded map, @exam{Assign(A, B)} and
+  @exam{A := B} behave identically. For a bounded map, := will raise an
+  exception if the container capacities are different, while Assign will
+  not raise an exception if there is enough room in the target.]}
+@end{Discussion}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5917,6 +5941,14 @@ Container. Any exception raised by Process.@key{all} is propagated.]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as Source, the operation has no
 effect. Otherwise, each element of Source is assigned to the
 corresponding element of Target.]}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+  @ChgAdded{Version=[3],Text=[This routine exists for compatibility with the
+  bounded set containers. For an unbounded set, @exam{Assign(A, B)} and
+  @exam{A := B} behave identically. For a bounded set, := will raise an
+  exception if the container capacities are different, while Assign will
+  not raise an exception if there is enough room in the target.]}
+@end{Discussion}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -8317,6 +8349,14 @@ A subprogram is said to
     and has child elements that correspond to the child elements of the Source
     element.]}
 @end{Honest}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+  @ChgAdded{Version=[3],Text=[This routine exists for compatibility with the
+  bounded tree container. For an unbounded tree, @exam{Assign(A, B)} and
+  @exam{A := B} behave identically. For a bounded tree, := will raise an
+  exception if the container capacities are different, while Assign will
+  not raise an exception if there is enough room in the target.]}
+@end{Discussion}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
