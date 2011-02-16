@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2011/02/05 09:14:58 $}
+@Comment{$Date: 2011/02/08 05:38:55 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.108 $}
+@Comment{$Revision: 1.109 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2085,7 +2085,7 @@ within the formal part of the generic unit.]}
 
 @begin{ImplReq}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
-@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0067-1]}
+@ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg],ARef=[AI05-0067-1]}
 @ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[
 For an @nt{aggregate} of a limited type used to initialize an object as allowed
 above, the implementation shall not create a separate anonymous object for the
@@ -2096,7 +2096,7 @@ return object (see 6.5) for the @nt{function_call}. The @nt{aggregate} or
 @nt{function_call} shall be constructed directly in the new object.],Old=[]}]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0067-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0067-1]}
 @ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[For a
 @nt{function_call}, we only require @i{build-in-place}@PDefn{build-in-place}
 for a limited type that would have

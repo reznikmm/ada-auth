@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/02/05 09:14:57 $}
+@Comment{$Date: 2011/02/08 05:38:55 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.106 $}
+@Comment{$Revision: 1.107 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4656,17 +4656,18 @@ types with @lquotes@;normal@rquotes@; accessibility, as those typically don't
 include the extra information needed to make a call.]}
 @end{Reason}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1],ARef=[AI05-0240-1]}
 @ChgAdded{Version=[3],Text=[The accessibility level of the type of a stand-alone
 object of an anonymous access-to-object type is the same as the accessibility
-level of the type of the access value most recently assigned to the object, but
-is never deeper than that of the declaration of the stand-alone object.]}
+level of the type of the access value most recently assigned to the
+object@Redundant[; accessibility checks ensure that this
+is never deeper than that of the declaration of the stand-alone object].]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0240-1]}
 @ChgAdded{Version=[3],Text=[The accessibility level of an explicitly aliased
 (see @RefSecNum{Subprogram Declarations}) formal parameter in a function body is
-determined by the point of call (which is the same level that the return object
-ultimately will have).]}
+determined by the point of call; it is the same level that the return object
+ultimately will have.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}

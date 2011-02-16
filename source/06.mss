@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2011/02/05 09:14:58 $}
+@Comment{$Date: 2011/02/08 05:38:55 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.106 $}
+@Comment{$Revision: 1.107 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -459,8 +459,8 @@ The syntax rules for @nt{defining_designator} and
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Parameters can
-  now be explicitly aliased, allowing returning of values and forcing
-  by-reference parameter passing.]}
+  now be explicitly aliased, allowing parts of function results to
+  designate parameters and forcing by-reference parameter passing.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0143-1]}
   @ChgAdded{Version=[3],Text=[The parameters
@@ -591,8 +591,9 @@ these statements are not always true for limited private types
 whose underlying type is nonlimited (unfortunately).
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0240-1]}
 @PDefn{unspecified}
-For parameters of other types,
+For @Chg{Version=[3],New=[other ],Old=[]}parameters@Chg{Version=[3],New=[],Old=[ of other types]},
 it is unspecified whether the parameter
 is passed by copy or by reference.
 @begin{Discussion}
@@ -612,6 +613,7 @@ is passed by copy or by reference.
 @end{StaticSem}
 
 @begin{Bounded}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0240-1]}
 @Defn{distinct access paths}
 @Defn2{Term=[access paths],Sec=(distinct)}
 @IndexSee{Term=[aliasing],See=(distinct access paths)}
@@ -622,7 +624,8 @@ a distinct formal parameter or an object that is not
 part of a formal parameter, then the two @nt<name>s are
 considered @i(distinct access paths).
 If an object is of a type for which the parameter passing
-mechanism is not specified, then it is a bounded error to
+mechanism is not specified@Chg{Version=[3],New=[ and is not an
+explicitly aliased parameter],Old=[]}, then it is a bounded error to
 assign to the object via one access path,
 and then read the value of the object via a distinct access path,
 unless the first access path denotes a part of a formal parameter that
@@ -1619,10 +1622,14 @@ formal parameter.
 Each formal parameter without an association shall have a
 @nt{default_expression} (in the profile of the view denoted
 by the @nt<name> or @nt<prefix>).
-This rule is an overloading rule
-(see @RefSecNum{The Context of Overload Resolution}).
+@Redundant[This rule is an overloading rule
+(see @RefSecNum{The Context of Overload Resolution}).]
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0240-1]}
+  @ChgAdded{Version=[3],Text=[All @ResolutionTitle are overloading rules,
+  see @RefSecNum{The Context of Overload Resolution}.]}
+@end{TheProof}
 @end{Resolution}
-
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
 @PDefn2{Term=[execution], Sec=(subprogram call)}

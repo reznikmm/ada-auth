@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2010/11/25 03:11:49 $}
+@Comment{$Date: 2011/02/08 05:38:55 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.41 $}
+@Comment{$Revision: 1.42 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -713,10 +713,17 @@ The @nt{expression}s and @nt{discrete_range}s given as
 @Redundant[A @nt{discrete_choice} @key(others), if present,
 shall appear alone and in the last @nt{discrete_choice_list}.]
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1],ARef=[AI05-0240-1]}
 The possible values of the
 @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression} shall be
-covered as follows:
+covered @Chg{Version=[3],New=[(@RefSecNum{Variant Parts and Discrete Choices}) ],
+Old=[]}as follows:
+  @begin{Discussion}
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0240-1]}
+    @ChgAdded{Version=[3],Text=[The meaning of "covered" here and in the
+    following rules is that of the term "cover a value" that is defined in
+    @RefSecNum{Variant Parts and Discrete Choices}.]}
+  @end{Discussion}
 @begin{itemize}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1],ARef=[AI05-0188-1]}
   If the @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression} is a @nt{name} @Redundant[(including a
