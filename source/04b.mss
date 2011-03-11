@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/02/05 09:14:58 $}
+@Comment{$Date: 2011/02/16 06:16:28 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1407,7 +1407,7 @@ deeper than that of the type of the @nt{allocator}.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0051-1]}
-@ChgAdded{Version=[2],Text=[If the @Chg{Version=[3],New=[the subtype determined
+@ChgAdded{Version=[2],Text=[If the @Chg{Version=[3],New=[subtype determined
 by the @nt{subtype_indication} or @nt{qualified_expression}],Old=[designated
 subtype of the type]} of the
 @nt{allocator} has one or more unconstrained access discriminants, then the

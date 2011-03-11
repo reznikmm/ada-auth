@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2011/02/05 09:14:58 $}
+@Comment{$Date: 2011/02/16 06:16:28 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.88 $}
+@Comment{$Revision: 1.89 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -470,10 +470,13 @@ even if P.Q is visible at the place where X is declared.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00408-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0183-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[scope], Sec=(of an attribute_@!definition_@!clause)}
 The scope of an @nt{attribute_definition_clause} is identical to the scope of a
 declaration that would occur at the point of the
-@nt{attribute_definition_clause}.]}
+@nt{attribute_definition_clause}.@Chg{Version=[3],New=[ The scope of an
+@nt{aspect_specification} is identical to the scope of the associated
+declaration.@Defn2{Term=[scope], Sec=(of an aspect_@!specification)}],Old=[]}]}
 
 @Defn2{Term=[immediate scope], Sec=[of (a view of) an entity]}
 The immediate scope of a declaration is also the immediate scope
@@ -613,6 +616,14 @@ because R does not mention Q in a @nt{with_clause}.
   so @i<that> can be used by the stream attribute availability rules
   (see @RefSecNum{Stream-Oriented Attributes}).]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[The scope of an @nt{aspect_specification}
+  is defined for similar reasons that we did that for
+  @nt{attribute_definition_clause}s.]}
+@end{DiffWord2005}
+
 
 @LabeledClause{Visibility}
 
@@ -1044,9 +1055,11 @@ from direct visibility, as follows:
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00195-01],ARef=[AI95-00408-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0183-1]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=[visible], Sec=(attribute_@!definition_@!clause)}
-An @nt{attribute_definition_clause} is @i{visible}
-everywhere within its scope.]}
+An @nt{attribute_definition_clause} @Chg{Version=[3],New=[or an
+@nt{aspect_specification}@PDefn2{Term=[visible], Sec=(aspect_@!specification)}
+],Old=[]}is @i{visible} everywhere within its scope.]}
 
 @end{StaticSem}
 
@@ -1460,6 +1473,11 @@ complex than they already are.]}
   @ChgAdded{Version=[3],Text=[Added wording so that the parameters of an
   @nt{expression_@!function_@!declaration} are visible in the @nt{expression}
   of the function. (It would be pretty useless without such a rule.)]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[The visibility of an
+  @nt{aspect_specification} is defined so that it can be used in various other
+  rules.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0205-1]}
   @ChgAdded{Version=[3],Text=[@b{Correction:} Added a rule allowing
@@ -1988,9 +2006,12 @@ irrelevant, since failing these tests is highly unlikely.
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00423-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<object_renaming_declaration>,rhs="@Chg{Version=[2],New=[
-    ],Old=[]}@Syn2{defining_identifier} : @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark} @key{renames} @SynI{object_}@Syn2{name};@Chg{Version=[2],New=[
-  | @Syn2{defining_identifier} : @Syn2{access_definition} @key{renames} @SynI{object_}@Syn2{name};],Old=[]}"}
+    ],Old=[]}@Syn2{defining_identifier} : @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark} @key{renames} @SynI{object_}@Syn2{name}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};@Chg{Version=[2],New=[
+  | @Syn2{defining_identifier} : @Syn2{access_definition} @key{renames} @SynI{object_}@Syn2{name}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};],Old=[]}"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -2306,6 +2327,14 @@ using the type T2 of the previous example:]}
   constrained.]}
 @end{Incompatible2005}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in an
+  @nt{object_renaming_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
+
 
 @LabeledSubClause{Exception Renaming Declarations}
 
@@ -2314,7 +2343,9 @@ using the type T2 of the previous example:]}
 @end{Intro}
 
 @begin{Syntax}
-@Syn{lhs=<exception_renaming_declaration>,rhs="@Syn2{defining_identifier} : @key{exception} @key{renames} @SynI{exception_}@Syn2{name};"}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
+@Syn{lhs=<exception_renaming_declaration>,rhs="@Syn2{defining_identifier} : @key{exception} @key{renames} @SynI{exception_}@Syn2{name}@Chg{Version=[3],New=<
+   [@Syn2{aspect_specification}]>,Old=[]};"}
 @end{Syntax}
 
 @begin{Legality}
@@ -2333,6 +2364,14 @@ EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error; @RI{-- see @Ref
 @end{Example}
 @end{Examples}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in an
+  @nt{exception_renaming_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
+
 
 @LabeledSubClause{Package Renaming Declarations}
 
@@ -2341,7 +2380,9 @@ EOF : @key[exception] @key[renames] Ada.IO_Exceptions.End_Error; @RI{-- see @Ref
 @end{Intro}
 
 @begin{Syntax}
-@Syn{lhs=<package_renaming_declaration>,rhs="@key{package} @Syn2{defining_program_unit_name} @key{renames} @SynI{package_}@Syn2{name};"}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
+@Syn{lhs=<package_renaming_declaration>,rhs="@key{package} @Syn2{defining_program_unit_name} @key{renames} @SynI{package_}@Syn2{name}@Chg{Version=[3],New=<
+   [@Syn2{aspect_specification}]>,Old=[]};"}
 @end{Syntax}
 
 @begin{Legality}
@@ -2393,6 +2434,14 @@ limited view of the renamed package is visible, a @nt{name} that denotes the
   only be used within the scope of a with_clause for the renamed package.]}
 @end{DiffWord95}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a
+  @nt{package_renaming_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
+
 
 @LabeledSubClause{Subprogram Renaming Declarations}
 
@@ -2414,9 +2463,11 @@ as defined in Section 3.
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<subprogram_renaming_declaration>,rhs="@Chg{Version=[2],New=<
     [@Syn2{overriding_indicator}]
-    >,Old=<>}@Syn2{subprogram_specification} @key{renames} @SynI{callable_entity_}@Syn2{name};"}
+    >,Old=<>}@Syn2{subprogram_specification} @key{renames} @SynI{callable_entity_}@Syn2{name}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -2803,6 +2854,14 @@ We'll live with the oddity.
   rare and most likely will fix a bug.]}
 @end{Inconsistent2005}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a
+  @nt{subprogram_renaming_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
+
 
 @LabeledSubClause{Generic Renaming Declarations}
 
@@ -2811,10 +2870,14 @@ We'll live with the oddity.
 @end{Intro}
 
 @begin{Syntax}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{tabs=[P22], lhs=<generic_renaming_declaration>,rhs="
-    @key{generic package}@\@Syn2{defining_program_unit_name} @key{renames} @SynI{generic_package_}@Syn2{name};
-  | @key{generic procedure}@\@Syn2{defining_program_unit_name} @key{renames} @SynI{generic_procedure_}@Syn2{name};
-  | @key{generic function}@\@Syn2{defining_program_unit_name} @key{renames} @SynI{generic_function_}@Syn2{name};"}
+    @key{generic package}@\@Syn2{defining_program_unit_name} @key{renames} @SynI{generic_package_}@Syn2{name}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};
+  | @key{generic procedure}@\@Syn2{defining_program_unit_name} @key{renames} @SynI{generic_procedure_}@Syn2{name}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};
+  | @key{generic function}@\@Syn2{defining_program_unit_name} @key{renames} @SynI{generic_function_}@Syn2{name}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};"}
 @end{Syntax}
 
 @begin{Legality}
@@ -2859,6 +2922,15 @@ and moved to @RefSecNum{Predefined Language Environment},
 except for the definition of @lquotes@;predefined type,@rquotes@;
 which has been moved to @RefSecNum{Type Declarations}.
 @end{DiffWord83}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a
+  @nt{generic_renaming_declaration}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
+
 
 @LabeledClause{The Context of Overload Resolution}
 

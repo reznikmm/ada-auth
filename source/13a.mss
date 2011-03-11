@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/01/17 08:15:01 $}
+@Comment{$Date: 2011/02/16 06:16:28 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -3132,19 +3132,14 @@ aspects of an entity may be specified as part of its declaration using an
 @nt{aspect_specification}, rather than using a separate representation or operational
 item.] The declaration with the @nt{aspect_specification} is termed the
 @i{associated declaration}.@Defn2{Term=[associated declaration],Sec=[of an aspect specification]}]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
-@ChgAdded{Version=[3],Text=[@b<@i<Editor's note: This clause is somewhat of
-a placeholder for the unfinished AI-183, and is not complete and is expected
-to change significantly.>>]}
 @end{Intro}
 
 @begin{Syntax}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<aspect_specification>,Old=<>}>,
-rhs="@Chg{Version=[3],New="
+rhs=`@Chg{Version=[3],New="
    @key[with] @Syn2{aspect_mark} [=> @Syn2{aspect_definition}] {,
-         @Syn2{aspect_mark} [=> @Syn2{aspect_definition}] }",Old=<>}"}
+          @Syn2{aspect_mark} [=> @Syn2{aspect_definition}] }",Old=<>}'}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<aspect_mark>,Old=<>}>,
@@ -3186,9 +3181,9 @@ rhs="@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression>>,Old=<>}"}
   @nt{abstract_subprogram_declaration}*
   @nt{null_procedure_declaration}*
   @nt{package_declaration}*  -- @Examcom{via} @nt{package_specification}
-  @nt{renaming_declaration}  --  NO
-    -- @Examcom{Allowing a renaming to change operational or representational aspects would seem to break}
-    -- @Examcom{the underlying model of renaming (that aspects are inherited and unchanged).}
+  @nt{renaming_declaration}*
+    -- @Examcom{There are no language-defined aspects that may be}
+    -- @Examcom{specified on renames, but implementations might support some.}
   @nt{exception_declaration}*
   @nt{generic_declaration}
     @nt{generic_subprogram_declaration}*
@@ -3232,32 +3227,36 @@ kind of entity. If the @nt{aspect_mark} identifies:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[an aspect that denotes an
 object, the @nt{aspect_definition} shall be a @nt{name}. The expected type for
-the @nt{name} is the type of the identified aspect of the associated entity.]}
+the @nt{name} is the type of the identified aspect of the associated entity;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[an aspect that is
 a value or an expression, the @nt{aspect_definition} shall be an @nt{expression}.
 The expected type for the @nt{expression} is the type of the identified aspect
-of the associated entity.]}
+of the associated entity;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[an aspect that denotes a subprogram, the
 @nt{aspect_definition} shall be a @nt{name}; the expected profile for the @nt{name}
-is the profile required for the aspect of the associated entity.]}
+is the profile required for the aspect of the associated entity;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[an aspect that
 denotes some other kind of entity, the @nt{aspect_definition} shall be a
 @nt{name}, and the name shall resolve to denote an entity of the appropriate
-kind.]}
+kind;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[an aspect that is given by an identifier specific to
+the aspect, the @nt{aspect_definition} shall be an @nt{identifier}, and the
+@nt{identifier} shall be one of the identifiers specific to the identified
+aspect.]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @ChgAdded{Version=[3],Text=[The usage names in an @nt{aspect_definition}
 @Redundant[ are not resolved at the point of the associated declaration, but
-rather] are resolved at the end of the immediately enclosing declaration list,
-or at the first freezing point of the associated entity, whichever comes
-first.]}
+rather] are resolved at the end of the immediately enclosing declaration list.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @ChgAdded{Version=[3],Text=[If the associated declaration is for a subprogram or
@@ -3272,9 +3271,37 @@ is a @nt{subtype_declaration}, within the @nt{aspect_definition} the name of
 the new subtype denotes the current instance of the (sub)type.]}
 @end{Resolution}
 
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+@ChgAdded{Version=[3],Text=[If the first freezing point of the associated entity
+comes before the end of the immediately enclosing declaration list, then each
+usage name in the @nt{aspect_definition} shall resolve to the same entity at the
+first freezing point as it does at the end of the immediately enclosing
+declaration list.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+@ChgAdded{Version=[3],Text=[At most one occurrence of each @nt{aspect_mark} is
+allowed within a single @nt{aspect_specification}. The aspect identified by the
+@nt{aspect_mark} shall be an aspect that can be specified for the associated
+entity (or view of the entity defined by the associated declaration).]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+@ChgAdded{Version=[3],Text=[The @nt{aspect_definition} associated with a given
+@nt{aspect_mark} may be omitted only when the @nt{aspect_mark} identifies an
+aspect of a boolean type, in which case it is equivalent to the
+@nt{aspect_definition} being specified as True.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+@ChgAdded{Version=[3],Text=[If the @nt{aspect_mark} includes 'Class, then the
+associated entity shall be a tagged type or a primitive subprogram of a tagged
+type.]}
+
+@end{Legality}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @ChgAdded{Version=[3],Text=[@b<@i<Editor's note: The remainder of the rules are
-omitted at this time.>>]}
+omitted at this time. AI05-0183-1 is unfinished at this time; changes are
+possible.>>]}
 
 
 @begin{Extend2005}

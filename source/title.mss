@@ -1,7 +1,7 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.47 $ $Date: 2011/02/08 05:38:55 $}
+@comment{$Revision: 1.48 $ $Date: 2011/02/16 06:16:28 $}
 
 @begin{ISOOnly}
 @Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[3],New=[201z Ed. 3],Old=[@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
@@ -78,7 +78,7 @@
 
 @Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2004, 2005, 2006  Ada-Europe], Old=[]}
 
-@Noparanum@;@Chg{Version=[3], New=[Copyright @Latin1(169) 2008, 2009, 2010  AXE Consultants], Old=[]}
+@Noparanum@;@Chg{Version=[3], New=[Copyright @Latin1(169) 2008, 2009, 2010, 2011  AXE Consultants], Old=[]}
 
 @NewPage
 @Comment{For ISO version, the back of the title page is blank, and the
@@ -155,7 +155,7 @@ EVEN IF AXE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.], Old=[]}
 
 @Noparanum@;@Chg{Version=[3], New=[@b{Amendment 2}], Old=[]}
 
-@Noparanum@;@Chg{Version=[3], New=[Copyright @Latin1(169) 2008, 2009, 2010, AXE Consultants.  All Rights Reserved.], Old=[]}
+@Noparanum@;@Chg{Version=[3], New=[Copyright @Latin1(169) 2008, 2009, 2010, 2011 AXE Consultants.  All Rights Reserved.], Old=[]}
 
 @Noparanum@;@Chg{Version=[3], New=[This document may be copied, in whole or in part, in any form or by any means,
 as is, or with alterations, provided that (1) alterations are clearly marked as

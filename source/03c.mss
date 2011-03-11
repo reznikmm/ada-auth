@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/02/08 05:38:55 $}
+@Comment{$Date: 2011/02/16 06:16:28 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.107 $}
+@Comment{$Revision: 1.108 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4670,7 +4670,7 @@ determined by the point of call; it is the same level that the return object
 ultimately will have.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0051-1]}
 @ChgNote{Use ChgAdded below to get conditional Leading}
 @ChgAdded{Version=[2],Type=[Leading],Text=[]}
 The accessibility level of
