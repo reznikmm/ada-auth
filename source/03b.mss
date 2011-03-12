@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/02/05 09:14:57 $}
+@Comment{$Date: 2011/03/11 07:00:36 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 
 @LabeledClause{Array Types}
 
@@ -2375,18 +2375,44 @@ its @nt{discrete_choice}s covers the value.
 @Leading@keepnext@;The possible values of the discriminant of a @nt{variant_part}
 shall be covered as follows:
 @begin{itemize}
-  If the discriminant is of a static constrained scalar subtype,
-  then each non-@key{others} @nt{discrete_@!choice} shall cover only values in
-  that subtype, and each value of that subtype shall be covered
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1]}
+  If the discriminant is of a static constrained scalar
+  subtype@Chg{Version=[3],New=[],Old=[,]}
+  then@Chg{Version=[3],New=[, except within an instance of a generic
+  unit,],Old=[]} each non-@key{others} @nt{discrete_@!choice} shall cover
+  only values in that subtype, and each value of that subtype shall be covered
   by some @nt{discrete_@!choice} @Redundant[(either explicitly or
   by @key<others>)];
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The exemption for a discriminated type declared in an instance
+  allows the following example:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[generic]
+   @key[type] T @key[is new] Integer;
+@key[package] G @key[is]
+   @key[type] Rec (Discrim : T) @key[is record]
+      @key[case] Discrim @key[is]
+         @key[when] -10 .. -1 =>
+            Foo : Float;
+         @key[when others] =>
+            @key[null];
+      @key[end case];
+   @key[end record];
+@key[end] G;]}
 
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{package} I @key{is new} G (Natural); -- @Examcom{Legal}]}
+@end{Example}
+@end{Reason}
   If the type of the discriminant is a
   descendant of a generic formal scalar type
   then the @nt{variant_part} shall have an @key{others}
-  @nt{discrete_choice};@begin{Reason}
-The base range is not known statically in this
-  case.@end{reason}
+  @nt{discrete_choice};
+@begin{Reason}
+  The base range is not known statically in this case.
+@end{Reason}
 
   Otherwise,
   each value of the base range of the type of the discriminant shall
@@ -2499,3 +2525,10 @@ left implicit in RM83.
   boolean type, they are very unlikely to be used as a @nt{discrete_choice}.]}
 @end{Incompatible2005}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Variants in generic specifications are no longer rejected if the subtype
+  of the actual type does not include all of the case choices. This probably
+  isn't useful, but it is consistent with the treatment of @nt{case_expression}s.]}
+@end{Extend2005}

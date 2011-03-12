@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/02/05 09:14:58 $}
+@Comment{$Date: 2011/03/11 07:00:37 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.109 $}
+@Comment{$Revision: 1.110 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1082,6 +1082,48 @@ The Ada 83 rule said that the
 @end{DiffWord2005}
 
 
+@LabeledAddedSubClause{Version=[3],Name=[User-Defined References]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[@i<@b{Editor's Note:} This subclause is a placeholder
+for the unfinished AI05-0139-2.>]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[Given a discriminated type @i<T>,
+the following aspect may be specified:]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[@b<@i<Editor's note: The remainder of the rules are
+omitted at this time.>>]}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Reference objects
+  and the aspect Implicit_Dereference are new.]}
+@end{Extend2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[User-Defined Indexing]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[@i<@b{Editor's Note:} This subclause is a placeholder
+for the unfinished AI05-0139-2.>]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[Given a tagged type @i<T>,
+the following aspects may be specified:]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[@b<@i<Editor's note: The remainder of the rules are
+omitted at this time.>>]}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Aspects
+  Constant_Indexing and Variable_Indexing are new.]}
+@end{Extend2005}
+
+
 @LabeledClause{Literals}
 
 @begin{Intro}
@@ -1901,14 +1943,26 @@ or more record extensions (and no private extensions).
   rules in @RefSecNum{Dispatching Operations of Tagged Types}.]}
 @end{Reason}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0067-1]}
-@ChgAdded{Version=[3],Text=[If the @nt{ancestor_part} is a function call
-and the type of the @nt{ancestor_part} is limited, then the @nt{ancestor_part}
-shall have a constrained nominal subtype unless there are no components needed
-in the @nt{record_component_association_list}.]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0067-1],ARef=[AI05-0244-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[If the type of the @nt{ancestor_part}
+is limited and at least one component is needed
+in the @nt{record_component_association_list}, then the @nt{ancestor_part}
+shall not be:]}
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[a call to a function with an unconstrained result
+  subtype; nor]}
 
+@ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[a parenthesized or qualified expression whose
+  operand would violate this rule; nor]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[a @nt{conditional_expression} having at least one
+  @SynI{dependent_}@nt{expression} that would violate this rule.]}
+@end{Itemize}
 @begin{Reason}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1],ARef=[AI05-0244-1]}
   @ChgAdded{Version=[3],Text=[This restriction simplifies implementation,
   because it ensures that either the caller or the callee knows the size to
   allocate for the aggregate. Without this restriction, information from both
@@ -1919,7 +1973,7 @@ in the @nt{record_component_association_list}.]}
   @ChgAdded{Version=[3],Text=[The (F(...) with null record) case is exempt from
   this rule, because such extension
   aggregates are created internally for inherited functions returning
-  null-extension types -- we can't very well make those illegal. Moreover, we
+  null-extension types @em we can't very well make those illegal. Moreover, we
   don't need the rule for null extensions, as the result can simply use
   the space returned by the function call.]}
 @end{Reason}
@@ -4762,9 +4816,34 @@ of the @nt{if_expression} shall be of a boolean type.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
 @ChgAdded{Version=[3],Text=[All @LegalityTitle that apply to the
 @nt{discrete_choice}s of a @nt{case_statement} (see @RefSecNum{Case Statements}),
-apply to the @nt{discrete_choice}s of a @nt{case_expression}.]}
-@end{Legality}
+apply to the @nt{discrete_choice}s of a @nt{case_expression} except
+within an instance of a generic unit.]}
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The exemption for a case expression
+that occurs in an instance allows the following example:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[generic]
+   @key[with function] Int_Func @key[return] Integer;
+@key[package] G @key[is]
+   X : Float := (@key[case] Int_Func @key[is]
+                  @key[when] Integer'First .. -1 => -1.0,
+                  @key[when] 0 => 0.0,
+                  @key[when] Positive => 1.0);
+@key[end] G;]}
 
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[function] Nat_Func @key[return] Natural @key[is] (123);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[package] I @key[is new] G (Int_Func => Nat_Func); -- @Examcom{Legal}]}
+@end{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Note that the @LegalityTitle still apply in the
+generic unit itself; they are just not enforced in an instance of the unit.]}
+@end{Reason}
+@end{Legality}
 
 @begin{Runtime}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}

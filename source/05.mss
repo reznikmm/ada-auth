@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2011/02/08 05:38:55 $}
+@Comment{$Date: 2011/03/11 07:00:37 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.42 $}
+@Comment{$Revision: 1.43 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1161,13 +1161,13 @@ rhs="@Chg{Version=[3],New=<
 @SynI{iteratable_}@nt{name} is any iteratable type.]}
 @end{Resolution}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Text=[@b<@i<Editor's note: The remainder of the rules are
 omitted at this time.>>]}
 
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}User-defined
   iterators are new.]}
 @end{Extend2005}

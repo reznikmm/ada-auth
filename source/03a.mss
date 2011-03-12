@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/02/05 09:14:57 $}
+@Comment{$Date: 2011/03/11 07:00:36 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.101 $}
+@Comment{$Revision: 1.102 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1522,6 +1522,33 @@ The description of S'Base has been moved to
   for a primitive "=" operator is also primitive; this makes it eligible
   to be made visible by a @key[use type] clause.]}
 @end{DiffWord2005}
+
+
+@LabeledAddedClause{Version=[3],Name=[Subtype Predicates]}
+
+@begin{Intro}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgAdded{Version=[3],Text=[The language-defined @i{predicate aspects}
+Static_Predicate and Dynamic_Predicate may be used to define properties of
+subtypes. A @i{predicate clause} is an aspect clause specifying one of the two
+predicate aspects.@Defn{predicate aspect}@Defn{predicate clause}@PDefn2{Term=[aspect],Sec=(predicate)}]}
+@end{Intro}
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgAdded{Version=[3],Text=[The expected type for a predicate aspect expression
+is any boolean type.]}
+@end{Resolution}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgAdded{Version=[3],Text=[@i<@b<Editor's note: The remainder of the rules are omitted
+at this time. AI05-0153-3 is in the process of being finalized.>>]}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Predicate aspects are new in Ada 2012.]}
+@end{Extend2005}
 
 
 @LabeledClause{Objects and Named Numbers}

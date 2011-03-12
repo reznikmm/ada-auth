@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2011/02/08 05:38:55 $}
+@Comment{$Date: 2011/03/11 07:00:37 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.107 $}
+@Comment{$Revision: 1.108 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1848,7 +1848,7 @@ don't become @lquotes@;de-initialized@rquotes@; by
 being passed as an @b(out) parameter.
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
-@ChgAdded{Version=[3],Text=[For explictly aliased parameters of functions, we
+@ChgAdded{Version=[3],Text=[For explicitly aliased parameters of functions, we
 will ensure at the call site that a part of the parameter can be returned as
 part of the function result without creating a dangling pointer. We do this with
 accessibility checks at the call site that all actual objects of explicitly

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.60 $ $Date: 2011/01/17 08:15:01 $ $Author: randy $ }
+@comment{ $Revision: 1.61 $ $Date: 2011/03/11 07:00:37 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2011/01/17 08:15:01 $}
+@Comment{$Date: 2011/03/11 07:00:37 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1225,7 +1225,7 @@ components, or the layout attributes of an atomic component,
 in a way that prevents the implementation from performing the
 required indivisible reads and updates.
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4],ARef=[AI05-0218-1]}
 If an atomic object is passed as a parameter, then
 @Chg{Version=[3],New=[],Old=[the type of ]}the formal
 parameter shall either @Chg{Version=[3],New=[have an],Old=[be]} atomic
@@ -1238,15 +1238,20 @@ an @nt<attribute_reference> for an Access attribute denotes an atomic
 object @Redundant[(including a component)], then the designated type of
 the resulting access type shall be atomic. If an atomic type is used as
 an actual for a generic formal derived type, then the ancestor of the
-formal type shall be atomic or allow pass by copy. Corresponding rules
-apply to volatile objects and types.
+formal type shall be atomic@Chg{Version=[3],New=[],Old=[ or allow pass by copy]}.
+Corresponding rules apply to volatile objects and types.
 
-@begin{Discussion}
+@begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
   @ChgAdded{Version=[3],Text=[A formal parameter allows pass by copy
   if it is not @key[aliased] and it is of a type that allows pass by copy (that
   is, is not a by-reference type).]}
-@end{Discussion}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0218-1]}
+@ChgAdded{Version=[3],Text=[If a volatile type is used as an actual for a
+generic formal array type, then the element type of the formal type shall be
+volatile.]}
 
 If a pragma Volatile, Volatile_Components, Atomic, or Atomic_Components
 applies to a stand-alone constant object, then a pragma Import shall
@@ -1483,6 +1488,15 @@ because the pragma was not used to mark variables as shared.
   type is not (necessarily) atomic.]}
 @end{Diffword95}
 
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0218-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Plugged a hole involving volatile components of formal types when the formal
+  type's component has a non-volatile type. This was done by making certain
+  actual types illegal for formal derived and formal array types; these types
+  were allowed for Ada 95 and Ada 2005.]}
+@end{Incompatible2005}
+
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:>
@@ -1491,19 +1505,19 @@ because the pragma was not used to mark variables as shared.
 @end{Extend2005}
 
 @begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0117-1]}
+  @ChgAdded{Version=[3],Text=[Revised the definition of volatile to
+  eliminate overspecification and simply focus on the root requirement (that
+  all tasks see the same view of volatile objects). This is not an
+  inconsistency; "memory" arguably includes on-chip caches so long as those are
+  kept consistent. Moreover, it is dificult to imagine a program that could tell
+  the difference.]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
   @ChgAdded{Version=[3],Text=[Added wording to take explicitly aliased
   parameters (see @RefSecNum{Subprogram Declarations}) into
   account when determining the legality of parameter passing of volatile and
   atomic objects.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0117-1]}
-  @ChgAdded{Version=[3],Text=[Revised the definition of volatile to
-  eliminate overspecification and simply focus on the root requirement (that
-  all tasks see the same view of volatile objects). This is not an inconsistency;
-  "memory" arguably includes on-chip caches so long as those are kept
-  consistent. Moreover, it is dificult to imagine a program that could tell
-  the difference.]}
 @end{DiffWord2005}
 
 
@@ -2095,17 +2109,26 @@ language-defined library package exists:]}
 @begin{RunTime}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0202-1]}
 @ChgAdded{Version=[2],Text=[@Defn{termination handler}@Defn2{Term=[handler],Sec=[termination]}
 The type Termination_Handler identifies a protected
 procedure to be executed by the implementation when a task terminates. Such a
 protected procedure is called a @i<handler>. In all cases T identifies the task
 that is terminating. If the task terminates due to completing the last
 statement of its body, or as a result of waiting on a terminate alternative,
-then Cause is set to Normal and X is set to Null_Occurrence. If the task
-terminates because it is being aborted, then Cause is set to Abnormal and X is
-set to Null_Occurrence. If the task terminates because of an exception raised
+@Chg{Version=[3],New=[and the finalization of the task completes normally, ],Old=[]}then
+Cause is set to Normal and X is set to Null_Occurrence. If the task
+terminates because it is being aborted, then Cause is set to
+Abnormal@Chg{Version=[3],New=[;],Old=[ and]} X is set to
+Null_Occurrence@Chg{Version=[3],New=[ if the finalization of the task completes normally],Old=[]}.
+If the task terminates because of an exception raised
 by the execution of its @nt{task_body}, then Cause is set to
-Unhandled_Exception and X is set to the associated exception occurrence.]}
+Unhandled_Exception@Chg{Version=[3],New=[;],Old=[ and]} X is set to the
+associated exception occurrence@Chg{Version=[3],New=[ if the finalization
+of the task completes normally],Old=[]}.@Chg{Version=[3],New=[ Independent of
+how the task completes, if finalization of the task propagates an exception,
+then Cause is either Unhandled_Exception or Abnormal, and X is an exception
+occurrence that identifies the Program_Error exception.],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
 @ChgAdded{Version=[2],Text=[@Defn{fall-back handler}@Defn2{Term=[termination handler],Sec=[fall-back]}
@@ -2189,3 +2212,13 @@ of the program is erroneous.]}
   Package Task_Termination is new.]}
 @end{Extend95}
 
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0202-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Specified what is passed to the
+  handler if the finalization of the task fails after it is completed. This was
+  not specified at all in Ada 2005, so there is a possibility that some program
+  depended on some other behavior of an implementation. But as this case is
+  very unlikely (and only occurs when there is already a significant bug in
+  the program - so should not occur in fielded systems), we're not listing
+  this as an inconsistency.]}
+@end{DiffWord2005}

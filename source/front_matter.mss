@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.64 $ $Date: 2010/10/15 07:05:38 $}
+@comment{$Revision: 1.65 $ $Date: 2011/03/11 07:00:37 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -802,18 +802,84 @@ giving better control over the suppression of checks. See clauses
 
 @end{Itemize}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0245-1]}
+@ChgAdded{Version=[3],Text=[Amendment 2 modifies the 1995 International Standard
+by making changes and additions that improve the capability of the language and
+the reliability of programs written in the language. In particular, enhancements
+are made to address two important issues, namely, the particular problems of
+multiprocessor architectures, and the need to further increase the capabilities
+regarding assertions for correctness.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0245-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The following significant changes
+with respect to the 1995 edition as amended by Amendment 1 are incorporated:]}
+
+@begin{Itemize}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[Amendment 2 modifies the 1995 International Standard by
-making changes and additions that improve the capability of the language and
-the reliability of programs written in the language. In particular blah blah blah blah.]}
+@ChgAdded{Version=[3],Text=[New syntax (the aspect specification) is introduced
+to enable properties to be specified for various entities in a more structured
+manner than through pragmas. See clause @RefSecNum{Aspect Specifications}.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[** List of new good stuff TBD **]}
+@ChgAdded{Version=[3],Text=[The concept of assertions introduced in the 2005
+edition is extended with the ability to specify preconditions and postconditions
+for subprograms, and invariants for private types. The concept of constraints in
+defining subtypes is supplemented with subtype predicates which enable subsets
+to be specified other than as simple ranges. These properties are all indicated
+using aspect specifications. See clauses @RefSecNum{Subtype Predicates},
+@RefSecNum{Preconditions and Postconditions}, and @RefSecNum{Type Invariants}.]}
 
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[New forms of expressions are introduced. These are
+if expressions, case expressions, quantified expressions and expression
+functions. As well as being useful for programming in general in avoiding the
+introduction of unnecessary assignments, they are especially valuable in
+conditions and invariants since they avoid the need to introduce auxiliary
+functions. See clauses @RefSecNum{Conditional Expressions},
+@RefSecNum{Quantified Expressions}, and @RefSecNum{Expression Functions}.
+Membership tests are also made more flexible. See clauses
+@RefSecNum{Expressions} and @RefSecNum{Relational Operators and Membership Tests}.]}
 
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[A number of changes are made to parameters.
+Functions may now have parameters of all modes. In order to mitigate consequent
+(and indeed existing) problems of inadvertent order dependence, rules are
+introduced to reduce aliasing. A parameter may now be explicitly marked as
+aliased and incomplete types may be used as parameters in certain circumstances.
+See clauses @RefSecNum{Incomplete Type Declarations}, @RefSecNum{Subprogram Declarations},
+and @RefSecNum{Parameter Associations}.]}
 
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[The use of access types is now more flexible. The
+rules for accessibility and certain conversions are improved. See clauses
+@RefSecNum{Operations of Access Types}, @RefSecNum{Relational Operators and Membership Tests},
+@RefSecNum{Type Conversions}, and @RefSecNum{The Context of Overload Resolution}.
+Furthermore, better control of storage pools is
+provided. See clause @RefSecNum{Storage Subpools}.]}
 
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[The Real-Time Systems Annex now includes facilities
+for defining domains of processors and assigning tasks to them. Improvements are
+made to scheduling and budgeting facilities. See clauses @RefSecNum{Synchronous Barriers},
+@RefSecNum{Execution Time}, and @RefSecNum{Multiprocessor Implementation}.]}
 
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[A number of important improvements are made to the
+standard library. These include packages for conversions between strings and UTF
+encodings, and classification functions for wide and wide wide characters.
+Internationalization is catered for by a package giving locale information. See
+clauses @RefSecNum{Character Handling}, @RefSecNum{String Encoding}, and
+@RefSecNum{The Package Locales}. The container library is extended to include
+bounded forms of the existing containers and new containers for indefinite
+objects, multiway trees, and queues. See clause @RefSecNum{Containers}.]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Finally, features are added primarily to ease the
+use of containers such as the ability to iterate over all elements in a
+container without having to encode the iteration. These can also be used for
+iteration over arrays. See clauses @RefSecNum{User-Defined References},
+@RefSecNum{User-Defined Indexing}, and @RefSecNum{User-Defined Iterators}.]}
+@end{Itemize}
 @end{Intro}
 
 @NewPage

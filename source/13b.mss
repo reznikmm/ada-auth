@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/02/05 09:14:58 $}
+@Comment{$Date: 2011/03/11 07:00:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.74 $}
+@Comment{$Revision: 1.75 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -2716,6 +2716,32 @@ accessible to people outside the Ada world.
 @end{DiffWord83}
 
 
+@LabeledAddedSubClause{Version=[3],Name=[Storage Subpools]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[@i<@b{Editor's Note:} This subclause is a placeholder
+for the unfinished AI05-0111-3.>]}
+
+@begin{Intro}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[This subclause defines a package to support the
+partitioning of a storage pool into subpools. A subpool may be specified as the
+default to be used for allocation from the associated storage pool, or a
+particular subpool may be specified as part of an @nt{allocator}
+(see @RefSecNum{Allocators}).]}
+@end{Intro}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[@b<@i<Editor's note: The remainder of the rules are
+omitted at this time.>>]}
+
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Subpools are new.]}
+@end{Extend2005}
+
+
 @LabeledClause{Pragma Restrictions}
 
 @begin{Intro}
@@ -3313,18 +3339,27 @@ the following attributes are defined.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00444-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0192-1]}
 @ChgAdded{Version=[1],Text=[For @Chg{Version=[2],New=[an ],Old=[]}untagged
 derived @Chg{Version=[2],New=[type],Old=[types]}, the Write
 @Chg{Version=[2],New=[(resp.],Old=[and]}
 Read@Chg{Version=[2],New=[) attribute is],Old=[ attributes are]}
 inherited @Chg{Version=[2],New=[according to the rules given],Old=[as specified]}
 in @RefSecNum(Operational and Representation Items)@Chg{Version=[2],
-New=[ if the attribute is available for the parent type at the point
+New=[ if the attribute is @Chg{Version=[3],New=[@Redundant[specified and] ],
+Old=[]}available for the parent type at the point
 where @i{T} is declared. For a tagged derived type, these attributes are
 not inherited, but rather],Old=[; otherwise,]} the default
 implementations @Chg{Version=[2],New=[],Old=[of these attributes ]}are
 used.@Chg{Version=[2],New=[],Old=[The default implementations of Write and
 Read attributes execute as follows:]}]}
+
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0192-1]}
+  @ChgAdded{Version=[3],Text=[The inheritance rules of
+  @RefSecNum(Operational and Representation Items) say that only specified or
+  inherited aspects are inherited; we mention it again here as a clarification.]}
+@end{TheProof}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00444-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The default implementations of
@@ -3508,6 +3543,7 @@ S'Output to determine how much to read.>}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00444-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0192-1]}
 @Chg{New=[For @Chg{Version=[2],New=[an ],Old=[]}untagged derived
 @Chg{Version=[2],New=[type],Old=[types]}, the Output
 @Chg{Version=[2],New=[(resp.],Old=[and]} Input@Chg{Version=[2],New=[) attribute
@@ -3515,7 +3551,8 @@ is],Old=[attributes of the parent type are]}
 inherited @Chg{Version=[2],New=[according to the rules given],
 Old=[as specified]} in
 @RefSecNum(Operational and Representation Items)@Chg{Version=[2],
-New=[ if the attribute is available for the parent type at the point where @i{T}
+New=[ if the attribute is @Chg{Version=[3],New=[@Redundant[specified and]],
+Old=[]}available for the parent type at the point where @i{T}
 is declared. For a tagged derived type, these attributes are not
 inherited, but rather],Old=[; otherwise,]} the default
 implementations@Chg{Version=[2],New=[],Old=[ of these
@@ -3523,6 +3560,12 @@ attributes]} are used.@Chg{Version=[2],New=[],Old=[ The default implementations 
 Output and Input attributes execute as follows:]}],
 Old=[Unless overridden by an @nt<attribute_definition_clause>, these
 subprograms execute as follows:]}
+
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0192-1]}
+  @ChgAdded{Version=[3],Text=[See the note following the inheritancee rules for
+  the Write attribute, above.]}
+@end{TheProof}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00444-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The default implementations of the
@@ -3875,10 +3918,20 @@ type.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
-@ChgAdded{Version=[2],Text=[In the @nt{parameter_and_result_profile}s for the
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0192-1]}
+@ChgAdded{Version=[2],Text=[In the @nt{parameter_and_result_profile}s for
+@Chg{Version=[3],New=[the default implementations of ],Old=[]}the
 stream-oriented attributes, the subtype of the Item parameter is the base
 subtype of @i<T> if @i<T> is a scalar type, and the first subtype otherwise.
 The same rule applies to the result of the Input attribute.]}
+
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0192-1]}
+@ChgAdded{Version=[3],Text=[An inherited stream attribute has a profile as
+determined by the rules for inheriting primitive subprograms (see
+@RefSecNum{Operational and Representation Items} and
+@RefSecNum{Derived Types and Classes}).]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0007-1]}
@@ -4216,6 +4269,12 @@ class-wide types descended from S.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Removed a misleading phrase
   which implies that Constraint_Error is raised for internal tags of the
   wrong type, when Tag_Error should be raised for such tags.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0192-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified that the profile
+  of an inherited stream attribute is as defined for an inherited primitive
+  subprogram, while the default implementation of the same attribute might
+  have a different profile.]}
 @end{DiffWord2005}
 
 

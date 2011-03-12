@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2011/02/05 09:14:58 $}
+@Comment{$Date: 2011/03/11 07:00:37 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.101 $}
+@Comment{$Revision: 1.102 $}
 
 @begin{Intro}
 
@@ -1611,15 +1611,23 @@ indirectly via a shared protected object.
 @end{Intro}
 
 @begin{StaticSem}
-@leading@Defn2{Term=[target object],
-  Sec=(of a call on an entry or a protected subprogram)}
-Any call on an entry or on a protected subprogram
-identifies a @i(target object) for the operation,
-which is either a task (for an entry call) or a protected
-object (for an entry call or a protected subprogram call).
-The target object is considered an implicit parameter to the operation,
-and is determined by the operation
-@nt<name> (or @nt<prefix>) used in the call on the operation, as follows:
+@leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0225-1]}
+@Chg{Version=[3],New=[@Defn2{Term=[target object],
+  Sec=(of the name of an entry or a protected subprogram)}],
+Old=[@Defn2{Term=[target object],
+  Sec=(of a call on an entry or a protected subprogram)}]}
+Any @Chg{Version=[3],New=[@nt{name} that denotes],Old=[call on]} an entry
+or @Chg{Version=[3],New=[],Old=[on ]}a protected subprogram
+identifies a @i(target object)@Chg{Version=[3],New=[],Old=[ for the operation]},
+which is either a task (for an entry@Chg{Version=[3],New=[],Old=[ call]}) or
+a protected object (for an entry@Chg{Version=[3],New=[],Old=[ call]} or a
+protected subprogram@Chg{Version=[3],New=[],Old=[ call]}). The target object
+@Chg{Version=[3],New=[identified],Old=[is considered an implicit parameter
+to the operation, and is determined]} by the operation
+@nt<name> (or @nt<prefix>) used in @Chg{Version=[3],New=[a],Old=[the]} call
+on @Chg{Version=[3],New=[an entry or a protected subprogram is considered an
+implicit parameter to the call. The target object is determined],Old=[the
+operation,]} as follows:
 @begin(Itemize)
   If it is a @nt<direct_name> or expanded name
   that denotes the declaration (or body) of the operation, then
@@ -1688,8 +1696,22 @@ and an @i(external requeue).
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@ChgAdded{Version=[2],Text=[The view of the target protected object associated
-with a call of a protected procedure or entry shall be a variable.]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0225-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[For a @nt{name} that denotes a
+protected procedure, the],Old=[The]} view of the target
+@Chg{Version=[3],New=[],Old=[protected ]}object@Chg{Version=[3],New=[],Old=[associated
+with a call of a protected procedure or entry]} shall be a
+variable.@Chg{Version=[3],New=[ For a @nt{name}
+that denotes a protected entry, the view of the target object shall be a
+variable unless the @nt{name} is the @nt{prefix} of a reference to the Count
+attribute.],Old=[]}]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0225-1]}
+  @ChgAdded{Version=[3],Text=[The point is to prevent any calls to such a
+  @nt{name}, directly, or via an access value, renames, or generic formal
+  subprogram. It is, however, legal to say P'Count in a protected function body,
+  even though the protected object is a constant view there.]}
+@end{Reason}
 @end{Legality}
 
 
@@ -1806,6 +1828,14 @@ implies that the operation will not block.]}
   specifying that an interface procedure is really an entry or a
   protected procedure.]}
 @end{Extend2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0225-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified that the target object
+  of any name denoted a protected procedure or entry can never be a constant
+  (other than for the 'Count attribute). This closes holes involving calls to
+  access-to-protected, renaming as a procedure, and generic formal subprograms.]}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Protected Subprograms and Protected Actions}
@@ -3461,8 +3491,9 @@ may allow representation of other dates as well (both earlier and later).]
 
 @begin{ImplPerm}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 An implementation may define additional time
-types (see @RefSecNum{Monotonic Time}).
+types@Chg{Version=[3],New=[],Old=[ (see @RefSecNum{Monotonic Time})]}.
 
 An implementation may raise Time_Error if the
 value of a @i{delay_}@nt<expression> in a @nt<delay_until_statement>

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/02/16 06:16:28 $}
+@Comment{$Date: 2011/03/11 07:00:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.108 $}
+@Comment{$Revision: 1.109 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4412,15 +4412,18 @@ given master directly depends
 (see @RefSecNum{Task Dependence - Termination of Tasks}).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01],ARef=[AI95-00416-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0235-1]}
 An entity or view @Chg{Version=[2],New=[defined],Old=[created]} by a
 declaration@Chg{Version=[2],New=[ and created as part of its elaboration],Old=[]}
 has the same accessibility level
 as the innermost @Chg{Version=[2],New=[],Old=[enclosing ]}master
 @Chg{Version=[2],New=[of the declaration ],Old=[]}except in the
 cases of renaming and derived access types described below.
-A parameter of a master has the same
-accessibility level as the master.
-
+@Chg{Version=[3],New=[Other than for an explicitly aliased parameter, a
+formal],Old=[A]} parameter of a
+@Chg{Version=[3],New=[callable entity],Old=[master]} has the same
+accessibility level as the master@Chg{Version=[3],New=[ representing the
+invocation of the entity],Old=[]}.
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[This rule defines the @lquotes@;normal@rquotes
@@ -4450,6 +4453,28 @@ accessibility level as the master.
   of a derived untagged type have the same accessibility as they
   did in the parent.]}
 @end{Ramification}
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0235-1]}
+  @ChgAdded{Version=[3],Text=[We use "invocation of" in the parameter case
+  as a master is formally an exceution of something. But we mean this to be
+  interpreted statically (for instance, as the body of the subprogram) for the
+  purposes of computing "statically deeper than" (see below).]}
+@end{Honest}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0235-1]}
+  @ChgAdded{Version=[3],Text=[Note that accessibility can differ depending on
+  the view of an object (for both static and dynamic accessibility). For
+  instance, the accessibility level of a formal parameter may be different than
+  the accessibility level of the corresponding actual parameter. This occurs
+  in other cases as well.]}
+@end{Ramification}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0235-1]}
+  @ChgAdded{Version=[3],Text=[We define the (dynamic) accessibility of formal
+  parameters in order that it does not depend on the parameter passing model
+  (by-reference or by-copy) as that is implementation defined. Otherwise, there
+  would be a portability issue.]}
+@end{Reason}
 
 The accessibility level of
 a view of an object or subprogram defined by a @nt{renaming_declaration}
@@ -4683,7 +4708,7 @@ allocator that defines the result of a function with an access result, the
 accessibility level is determined as though the allocator were in place of the
 call of the function; in the special case of a call that is the operand of a
 type conversion, the level is that of the target access type of the
-conversion.],Old=[that defines the value of an access parameter or an access
+conversion],Old=[that defines the value of an access parameter or an access
 discriminant]}. For an @Chg{Version=[3],New=[anonymous
 allocator],Old=[@nt{allocator}]} defining the value of an access parameter, the
 accessibility level is that of the innermost master of the call. For one
@@ -4836,14 +4861,29 @@ be statically deeper, nor statically shallower, than any other.]}
 checks.]}
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1],ARef=[AI05-0142-4]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0235-1]}
 @ChgAdded{Version=[3],Text=[Inside a return statement that applies to a function
 @i<F>, when determining whether the accessibility level of an explicitly aliased
 parameter of @i<F> is statically deeper than the level of the return object of
-@i<F>, the level of the return object is considered to be the same as that of the
-level of the explicitly aliased parameter; for statically comparing with the
-level of other entities, the level of the return object of @i<F> is considered to
-be the same as that of the master that elaborated the function body of @i<F>.]}
+@i<F>, the level of the return object is considered to be the same as that of
+the level of the explicitly aliased parameter; for statically comparing with the
+level of other entities, an explicitly aliased parameter of @i<F> is considered to
+have the accessibility level of the body of @i<F>.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1],ARef=[AI05-0235-1]}
+@ChgAdded{Version=[3],Text=[For determining whether a level is statically deeper
+than the level of the anonymous access type of an access result of a function,
+when within a return statement that applies to the function, the level
+determined by the point of call is presumed to be the same as that of the level
+of the master that elaborated the function body.]}
+
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0235-1]}
+  @ChgAdded{Version=[3],Text=[This rule has no effect if the previous bullet
+  also applies (that is, the "a level" is of an explicitly aliased parameter).]}
+@end{Honest}
+
+
 
 @Redundant[For determining whether one level is statically deeper than another
 when within a generic package body, the generic package is presumed to be
@@ -5813,7 +5853,7 @@ uses of anonymous access types.]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected accessibility rules for
   access discriminants so that no cases are omitted.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0051-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0051-1],ARef=[AI05-0235-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected accessibility rules for
   anonymous access return types and access discriminants in return statements.]}
 
@@ -5822,7 +5862,7 @@ uses of anonymous access types.]}
   coextensions that belong to an anonymous object are transfered to the ultimate
   object.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4],ARef=[AI05-0188-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4],ARef=[AI05-0188-1],ARef=[AI05-0235-1]}
   @ChgAdded{Version=[3],Text=[Defined the accessibility of explicitly
   aliased parameters (see @RefSecNum{Subprogram Declarations}) and
   @nt{conditional_expression}s (see @RefSecNum{Conditional Expressions}).]}
