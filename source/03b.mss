@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/03/11 07:00:36 $}
+@Comment{$Date: 2011/03/12 08:07:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 
 @LabeledClause{Array Types}
 
@@ -899,11 +899,13 @@ denoted by the @nt<subtype_mark> of the @nt<access_definition>]}.
 
 @ChgNote{This paragraph is just moved up}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00402-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0214-1]}
 @ChgAdded{Version=[2],Text=[@nt{Default_expression}s shall be provided either
 for all or for none
 of the discriminants of a @nt{known_@!discriminant_@!part}.
 No @nt<default_@!expression>s are permitted in a
-@nt<known_@!discriminant_@!part> in a declaration of a tagged
+@nt<known_@!discriminant_@!part> in a declaration of a
+@Chg{Version=[3],New=[nonlimited ],Old=[]}tagged
 type @Redundant[or a generic formal type].]}
 
 @begin(Reason)
@@ -918,15 +920,19 @@ type @Redundant[or a generic formal type].]}
   assigning to the object.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0214-1]}
   @ChgAdded{Version=[2],Text=[Defaults for discriminants of tagged types
   are disallowed so that every object of a
-  tagged type is constrained,
+  @Chg{Version=[3],New=[nonlimited ],Old=[]}tagged type is constrained,
   either by an explicit constraint,
   or by its initial discriminant values.
   This substantially simplifies the semantic rules
   and the implementation of inherited
-  dispatching operations. For generic formal types,
-  the restriction simplifies the type matching rules.
+  dispatching operations. @Chg{Version=[3],New=[We don't need this rule for
+  limited tagged types, as the discriminants of such objects cannot be changed
+  after the object is created in any case @em no full-object assignment is
+  supported, and that is required to change discriminant values. ],Old=[]}For
+  generic formal types, the restriction simplifies the type matching rules.
   If one simply wants a "default" value for the discriminants,
   a constrained subtype can be declared for future use.]}
 @end(Reason)
@@ -1507,7 +1513,6 @@ when the discriminant is initialized.
   contain the reserved word @key(limited).]}
 @end{DiffWord95}
 
-
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0063-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
@@ -1518,6 +1523,12 @@ when the discriminant is initialized.
   this change brings it back into alignment with actual practice. So there
   should be no practical incompatibility.]}
 @end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0214-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  A limited tagged type may now have defaults for its discriminants.]}
+@end{Extend2005}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0102-1]}
@@ -1801,26 +1812,49 @@ For @PrefixType{a @nt<prefix> A that is of a
 discriminated type @Redundant[(after any implicit dereference)]},
 the following attribute is defined:
 @begin(description)
-@Attribute{Prefix=<A>, AttrName=<Constrained>,
+@ChgAttribute{Version=[3], Kind=[Revised], ChginAnnex=[T],
+  Leading=[F], Prefix=<A>, AttrName=<Constrained>,
   Text=[Yields the value True if A denotes a constant, a value,
-  or a constrained variable,
+  @Chg{Version=[3],New=[a tagged object, ],Old=[]}or a constrained variable,
   and False otherwise.]}
 @begin(ImplNote)
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0214-1]}
  This attribute is primarily used on parameters, to determine whether
  the discriminants can be changed as part of an assignment.
  The Constrained attribute is statically True for @key(in) parameters.
  For @key(in out) and @key(out) parameters of a discriminated type,
  the value of this attribute needs to be passed as an implicit
- parameter, in general. However, if the type does not have
+ parameter, in general. However, if the type @Chg{Version=[3],New=[is
+ tagged or ],Old=[]}does not have
  defaults for its discriminants, the attribute is statically True,
  so no implicit parameter is needed.
- Parameters of a limited type
+ Parameters of a limited @Chg{Version=[3],New=[untagged ],Old=[]}type
  with defaulted discriminants need this implicit parameter,
  unless there are no nonlimited views,
  because they might be passed to a subprogram whose body has
  visibility on a nonlimited view of the type, and hence might be
  able to assign to the object and change its discriminants.
 @end(ImplNote)
+
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0214-1]}
+@ChgAdded{Version=[3],Text=[All tagged objects are known to be constrained (as
+ nonlimited tagged types cannot have discriminant defaults, and limited tagged
+ objects are immutably limited), and are always considered constrained by this
+ attribute to avoid distributed overhead for parameters of limited classwide
+ types, as limited tagged objects may technically be unconstrained if they use
+ defaulted discriminants. Such objects still cannot have their discriminants
+ changed, as assignment is not supported for them, so there is no use for this
+ attribute that would justify the overhead of passing it with all classwide
+ parameters.]}
+@end{Reason}
+
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0214-1]}
+@ChgAdded{Version=[3],Text=[If the type of A is a type derived from an untagged
+ partial view of a tagged type such that it is not a tagged type, then A is not
+ considered a tagged object, and A'Constrained can return either True or False.]}
+@end{Discussion}
 @end(description)
 @EndPrefixType{}
 @end{StaticSem}
@@ -1872,6 +1906,14 @@ subcomponents to this subclause. In Ada 83, it used to
 appear separately under @nt{assignment_statement}s and
 subprogram calls.
 @end{DiffWord83}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0214-1]}
+  @ChgAdded{Version=[3],Text=[A'Constrained is now defined to return
+  True for any A that is a tagged object. This doesn't change the result
+  for any A allowed by previous versions of Ada; the change is necessary to
+  avoid unnecessary overhead for limited tagged parameters.]}
+@end{DiffWord2005}
 
 
 @LabeledClause{Record Types}

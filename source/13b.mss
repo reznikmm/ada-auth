@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/03/11 07:00:37 $}
+@Comment{$Date: 2011/03/12 08:07:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -2940,6 +2940,22 @@ restrictions are defined in the Specialized Needs Annexes):]}
 
 @begin{Description}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0242-1]}
+@ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
+   Sec=(No_Implementation_Aspect_Specifications)}@Chg{Version=[3],New=[@Defn{No_Implementation_Aspect_Specifications restriction}],
+   Old=[]}No_Implementation_Aspect_Specifications @\There
+   are no implementation-defined aspects specified by an
+   @nt{aspect_specification}. This restriction applies only to the current
+   compilation or environment, not the entire partition.]}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0241-1]}
+  @ChgAdded{Version=[3],Text=[This restriction (as well as others below) applies
+  only to the current compilation, because it is likely that the runtime (and
+  possibly user-written low-level code) will need to use implementation-defined
+  aspects. But a partition-wide restriction applies everywhere, including the
+  runtime.]}
+@end{Discussion}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00257-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],
    Sec=(No_Implementation_Attributes)}@Chg{Version=[3],New=[@Defn{No_Implementation_Pragmas restriction}],
@@ -2948,11 +2964,12 @@ restrictions are defined in the Specialized Needs Annexes):]}
    only to the current compilation or environment, not the entire partition.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This restriction (as well as No_Implementation_Pragmas)
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0241-1]}
+  @ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[This restriction (as well as No_Implementation_Pragmas)
   only applies to the current compilation, because it is likely that the
   runtime (and possibly user-written low-level code) will need to use
   implementation-defined entities. But a partition-wide restriction applies
-  everywhere, including the runtime.]}
+  everywhere, including the runtime.],Old=[]}]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00257-01]}
@@ -2962,6 +2979,14 @@ restrictions are defined in the Specialized Needs Annexes):]}
    are no implementation-defined pragmas or pragma arguments. This
    restriction applies only to the current compilation or environment, not the
    entire partition.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0242-1]}
+@ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
+   Sec=(No_Implementation_Units)}@Chg{Version=[3],New=[@Defn{No_Implementation_Units restriction}],
+   Old=[]}No_Implementation_Units @\There
+   is no mention in the @nt{context_clause} of any implementation-defined
+   descendants of packages Ada, Interfaces, or System. This restriction applies
+   only to the current compilation or environment, not the entire partition.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00368-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],
@@ -2993,16 +3018,25 @@ restrictions are defined in the Specialized Needs Annexes):]}
 @end{Description}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0241-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The following
-@SynI{restriction_parameter_}@nt{identifier} is language defined:]}
+@SynI{restriction_parameter_}@nt{identifier}@Chg{Version=[3],New=[s are],Old=[is]}
+language defined:]}
 
 @begin{Description}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Dependence)}No_Dependence @\Specifies
    a library unit on which there are no semantic dependences.]}
-@end{Description}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0242-1]}
+@ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
+   Sec=(No_Specification_of_Aspect)}@Chg{Version=[3],New=[@Defn{No_Specification_of_Aspect restriction}],
+   Old=[]}No_Specification_of_Aspect @\Identifies an aspect for which no
+   @nt{aspect_specification}, @nt{attribute_definition_clause}, or @nt{pragma}
+   is given.]}
+
+@end{Description}
 @end{StaticSem}
 
 @begin{Legality}
@@ -3018,13 +3052,29 @@ present in the environment.]}
   @ChgAdded{Version=[2],Text=[This @nt{name} is not resolved.]}
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0241-1]}
+@ChgAdded{Version=[3],Text=[The @nt{restriction_parameter_argument} of a
+No_Specification_of_Aspect restriction shall be an @nt{identifier}; this
+@nt{identifier} does not denote any declaration.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This @nt{restriction_parameter_argument} is not
+    resolved. As for No_Dependence, there is no check that the aspect
+    @nt{identifier} is meaningful; it might refer to an implementation-defined
+    aspect on one implementation, but nothing at all on another implementation.
+    Of course, a good implementation will warn if the aspect is unknown to it.]}
+@end{Ramification}
+
 @end{Legality}
 
 @begin{LinkTime}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0241-1]}
 @ChgAdded{Version=[2],Text=[No compilation unit included in the partition shall
-depend semantically on the library unit identified by the @nt{name}.]}
+depend semantically on the library unit identified by the
+@nt{name}@Chg{Version=[3],New=[ of a No_Dependence restriction],Old=[]}.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3045,6 +3095,13 @@ depend semantically on the library unit identified by the @nt{name}.]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
   @ChgAdded{Version=[2],Text=[Restriction No_Dependence is new.]}
 @end{Extend95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0241-1],ARef=[AI05-0242-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Restrictions No_Implementation_Aspect_Specifications, No_Implementation_Units,
+  and No_Specification_of_Aspect are new.]}
+@end{Extend2005}
 
 
 @LabeledClause{Streams}

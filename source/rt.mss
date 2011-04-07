@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.94 $ $Date: 2011/02/05 09:14:58 $ $Author: randy $ }
+@comment{ $Revision: 1.95 $ $Date: 2011/03/12 08:07:37 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2011/02/05 09:14:58 $}
+@Comment{$Date: 2011/03/12 08:07:37 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2887,6 +2887,14 @@ Task_Identification.Abort_Task.
    Old=[]}No_Task_Allocators @\There are no @nt{allocator}s for task types or types
                         containing task subcomponents.
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0224-1]}
+@ChgAdded{Version=[3],NoPrefix=[T],Text=[In the case of an initialized
+   @nt{allocator} of an access type whose designated type is class-wide and
+   limited, a check is made that the specific type of the allocated object has
+   no task subcomponents. Program_Error is raised if this check
+   fails.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+   @Comment{We don't index this "check" as it doesn't have a name.}
+
 @Defn2{Term=[restrictions],Sec=(No_Implicit_Heap_Allocations)}@Chg{Version=[3],New=[@Defn{No_Implicit_Heap_Allocations restriction}],
    Old=[]}No_Implicit_Heap_Allocations @\There are no operations that implicitly require
                         heap storage allocation to be performed by the
@@ -2941,6 +2949,14 @@ Old=[@Defn2{Term=[restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Co
    are no @nt{allocator}s for protected types or types
    containing protected type subcomponents.]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0224-1]}
+@ChgAdded{Version=[3],NoPrefix=[T],Text=[In the case of an initialized
+   @nt{allocator} of an access type whose designated type is class-wide and
+   limited, a check is made that the specific type of the allocated object has
+   no protected subcomponents. Program_Error is raised if this check
+   fails.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+   @Comment{We don't index this "check" as it doesn't have a name.}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0211-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Relative_Delay)}@Chg{Version=[3],New=[@Defn{No_Relative_Delay restriction}],
@@ -2950,11 +2966,13 @@ Old=[@Defn2{Term=[restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Co
    subprogram that has a Time_Span parameter],Old=[]}.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}@Comment{Number changed due to insertion above}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Requeue_Statements)}@Chg{Version=[3],New=[@Defn{No_Requeue_Statements restriction}],
    Old=[]}No_Requeue_Statements @\There
    are no @nt{requeue_statement}s.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}@Comment{Number changed due to insertion above}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Select_Statements)}@Chg{Version=[3],New=[@Defn{No_Select_Statements restriction}],
    Old=[]}No_Select_Statements @\There
    are no @nt{select_statement}s.]}
@@ -3224,6 +3242,12 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   of various restrictions to make it clearer that they prohibit
   things that would otherwise be legal, and to word them as
   definitions, not @LegalityTitle;.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0192-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to explain
+  how No_Task_Allocators and No_Protected_Type_Allocators are checked
+  for class-wide types. This might be an extension if the compiler
+  assumed the worst in the past (it is now a runtime check).]}
 @end{DiffWord2005}
 
 

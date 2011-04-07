@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2011/03/11 07:00:37 $}
+@Comment{$Date: 2011/03/12 08:07:37 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.102 $}
+@Comment{$Revision: 1.103 $}
 
 @begin{Intro}
 
@@ -3441,6 +3441,21 @@ for times, have the conventional meaning.
 Text=[The @Chg{Version=[2],New=[time zone],Old=[timezone]} used for
 package Calendar operations.]}
 
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0119-1]}
+  @ChgAdded{Version=[3],Text=[The behavior of these values and subprograms if
+  the time zone changes is also implementation-defined. In particular, the
+  changes associated with summer time adjustments (like Daylight Savings Time in
+  the United States) should be treated as a change in the implementation-defined
+  time zone. The language does not specify whether the time zone information is
+  stored in values of type Time; therefore the results of binary operators are
+  unspecified when the operands are the two values with different
+  effective time zones. In particular, the results of "-" may differ from the
+  "real" result by the difference in the time zone adjustment. Similarly, the
+  result of UTC_Time_Offset (see 9.6.1) may or may not reflect a time zone
+  adjustment.]}
+@end{Ramification}
+
 If Time_Of is called with a seconds value of 86_400.0, the value
 returned is equal to the value of Time_Of for the next day
 with a seconds value of 0.0.
@@ -3891,10 +3906,17 @@ and another time zone.]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> UTC_Time_Offset (Date : Time := Clock) @key<return> Time_Offset;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0119-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns, as a number of minutes, the
-difference between the implementation-defined time zone of Calendar, and
+@Chg{Version=[3],New=[result of subtracting],Old=[difference between]}
+the implementation-defined time zone of Calendar, and
 UTC time, at the time Date. If the time zone of the Calendar implementation is
 unknown, then Unknown_Zone_Error is raised.]}
+@begin{Ramification}
+    @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0119-1]}
+    @ChgAdded{Version=[3],Text=[In North America, the result will be negative;
+    in Europe, the result will be zero or positive.]}
+@end{Ramification}
 @begin{Discussion}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[The Date parameter is needed to take
@@ -4053,16 +4075,26 @@ of Seconds_Of for the next second with a Sub_Second value of 0.0.]}
                  Sub_Second : @key<out> Second_Duration);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01],ARef=[AI95-00427-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0238-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Splits Seconds into Hour, Minute,
 Second and Sub_Second in such a way that the resulting values all belong to
 their respective subtypes. The value returned in the Sub_Second
-parameter is always less than 1.0.]}
+parameter is always less than 1.0.@Chg{Version=[3],New=[ If Seconds = 86400.0,
+Split propagates Time_Error.],Old=[]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[There is only one way to do the split which
   meets all of the requirements.]}
 @end{Ramification}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0238-1]}
+  @ChgAdded{Version=[3],Text=[If Seconds = 86400.0, one of the returned values
+  would have to be out of its defined range (either Sub_Second = 1.0 or Hour =
+  24 with the other value being 0). This doesn't seem worth breaking the
+  invariants.]}
+@end{Reason}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> Time_Of (Year       : Year_Number;
@@ -4350,6 +4382,21 @@ UTC_Time_Offset will generally be negative.]}
   Packages Calendar.Time_Zones, Calendar.Arithmetic, and Calendar.Formatting
   are new.]}
 @end{Extend95}
+
+@begin{Inconsistent2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0238-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}@b<Correction:>
+  Defined that Split for Seconds raises Time_Error for a value of exactly
+  86400.0, rather than breaking some invariant or raising some other exception.
+  Ada 2005 left this unspecified; a program that depended on what some
+  implementation does might break, but such a program is not portable anyway.]}
+@end{Inconsistent2005}
+
+@begin{Diffword2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0119-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified the sign of
+  UTC_Time_Offset.]}
+@end{Diffword2005}
 
 
 @LabeledClause{Select Statements}
@@ -5250,7 +5297,7 @@ and after queuing a given caller.
 @LabeledClause{Shared Variables}
 
 @begin{StaticSem}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1],ARef=[AI05-0201-1]}
 @Defn2{Term=[shared variable], Sec=(protection of)}
 @Defn{independently addressable}
 If two different objects, including nonoverlapping
@@ -5263,7 +5310,7 @@ addressable if either object is specified as independently addressable (see
 two nonoverlapping objects are independently addressable
 except when they are both parts of a composite object for which
 a non-confirming representation item is used to specify
-packing, record layout, Component_Size, or convention, in which case
+packing, record layout, Component_Size, Atomic, or convention, in which case
 it is unspecified whether the parts are independently
 addressable.@PDefn{unspecified}],
 Old=[Normally, any two
@@ -5300,11 +5347,13 @@ hardware efficiently supports it.
 @end{ImplNote}
 
 @begin{Ramification}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1],ARef=[AI05-0201-1]}
 @ChgAdded{Version=[3],Text=[An atomic object (including atomic
 components) is always independently addressable from any other nonoverlapping
 object. Any representation item which would prevent this from being true should
-be rejected, notwithstanding what this Standard says elsewhere.]}
+be rejected, notwithstanding what this Standard says elsewhere.
+Note, however, that the components of an atomic object are not necessarily
+atomic.]}
 @end{Ramification}
 @end{StaticSem}
 
@@ -5469,7 +5518,7 @@ see @RefSecNum(Shared Variable Control).
 @end{DiffWord95}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1],ARef=[AI05-0201-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Revised the definition of
   independent addressibility to exclude conforming representation clauses
   and to require that atomic and independent objects always have

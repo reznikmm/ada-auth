@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/03/11 07:00:36 $}
+@Comment{$Date: 2011/03/12 08:07:37 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.102 $}
+@Comment{$Revision: 1.103 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1524,7 +1524,7 @@ The description of S'Base has been moved to
 @end{DiffWord2005}
 
 
-@LabeledAddedClause{Version=[3],Name=[Subtype Predicates]}
+@LabeledAddedSubClause{Version=[3],Name=[Subtype Predicates]}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
@@ -4487,6 +4487,13 @@ arithmetic.
 See also the similar permission for Get in
 @RefSecNum{Input-Output for Real Types}.
 @end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0182-1]}
+@ChgAdded{Version=[3],Text=[An implementation may extend the Wide_Wide_Value, Wide_Value, and Value
+attributes of a character type to accept strings starting with "Hex_"
+(ignoring case) for graphics characters and those with a code
+position smaller than 16#100#, and three character strings of the form
+"'@i<nongraphic character>'".]}
 @end{ImplPerm}
 
 @begin{Notes}
@@ -4622,6 +4629,16 @@ More explicit rules are provided for nongraphic characters.
   of the related types and Width attributes). The vast majority of programs
   won't see any difference, as they are already prepared to handle nongraphic
   characters.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0182-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:>
+  Added an @ImplPermTitle to let Wide_Wide_Value, Wide_Value, and Value accept
+  strings in the form of literals containing non-graphic characters and
+  "Hex_hhhhhhhh" for Latin-1 and graphic characters. These were required to
+  raise Constraint_Error in Ada 2005. Since these attributes aren't very
+  useful, implementations were inconsistent as to whether these were accepted,
+  and code that would care why the attribute failed seems unlikely, this should
+  not be a problem in practice.]}
 @end{Inconsistent2005}
 
 

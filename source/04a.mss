@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/03/11 07:00:37 $}
+@Comment{$Date: 2011/03/12 08:07:37 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.110 $}
+@Comment{$Revision: 1.111 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1691,9 +1691,14 @@ anonymous access types whose subtypes statically match],Old=[]}.
   nor specified twice.
 @end{Ramification}
 
-If the components of a @nt{variant_part} are needed, then the value
-of a discriminant that governs the @nt{variant_part} shall be given
-by a static expression.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0220-1]}
+@Chg{Version=[3],New=[The],Old=[If the components of a @nt{variant_part}
+are needed, then the]} value of a discriminant that governs
+@Chg{Version=[3],New=[a],Old=[the]} @nt{variant_part}
+@Chg{Version=[3],New=[@i<P> ],Old=[]}shall be given
+by a static expression@Chg{Version=[3],New=[, unless @i<P> is nested within
+a @nt{variant} @i<V> that is not selected by the discriminant value
+governing the @nt{variant_part} enclosing @i<V>],Old=[]}.
 @begin{Ramification}
 This expression might either be given within the aggregate itself,
 or in a constraint on the parent subtype in a @nt<derived_type_definition>
@@ -1848,15 +1853,26 @@ a record aggregate. Now we do.
   all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).]}
 @end{DiffWord95}
 
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0220-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Corrected wording so that the rule for discriminants governing @nt{variant_part}s
+  was not effectively circular. The change makes a few @nt{aggregate}s where a
+  non-static discriminant governs an empty @nt{variant_part} illegal. However,
+  most Ada implementations already enforce some version of the new rule and
+  already reject these @nt{aggregate}s. So it is unlikely that any
+  incompatibility will be noticed in practice.]}
+@end{Incompatible2005}
+
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0016-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0016-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:> Fixed the wording so that
   @key[others] => <> can be used in place of @key[null record].
   This is needed to avoid a generic contract issue for generic bodies:
   we do not want to have to assume the worst to disallow @key[others] => <>
   if the record type @i{might} be a null record.]}
 
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0199-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0199-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> We now allow multiple components
   with anonymous access types to be specified with a single component
   association. This is to be consistent with the capabilities of a named
