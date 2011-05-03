@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.35 $ $Date: 2010/11/25 03:11:50 $ $Author: randy $ }
+@comment{ $Revision: 1.36 $ $Date: 2011/04/07 06:18:38 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2010/11/25 03:11:50 $}
+@Comment{$Date: 2011/04/07 06:18:38 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -436,8 +436,10 @@ are not considered lower case letters by Ada.Characters.Handling.]}
   see @RefSecNum{The Package Characters.Conversions}.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[2],Text=[We no longer talk about localized character
-  sets; these are a non-standard mode, which is none of our business.]}
+  sets; these are a @Chg{Version=[3],New=[nonstandard],Old=[non-standard]} mode,
+  which is none of our business.]}
 @end{DiffWord95}
 
 @begin{DiffWord2005}

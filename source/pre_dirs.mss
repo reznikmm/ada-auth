@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.39 $ $Date: 2011/03/11 07:00:37 $ $Author: randy $ }
+@comment{ $Revision: 1.40 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2011/03/11 07:00:37 $}
+@Comment{$Date: 2011/04/07 06:18:37 $}
 
 @Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -91,8 +91,8 @@ Directories has the following declaration:]}
                      Extension            : @key{in} String := "") @key{return} String;]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0049-1]}
-@ChgAdded{Version=[3],Text=[   @Key{type} @AdaTypeDefn{Name_Case_Kind} @key{is} (Unknown, Case_Sensitive, Case_Insensitive,
-                        Case_Preserving);]}
+@ChgAdded{Version=[3],Text=[   @Key{type} @AdaTypeDefn{Name_Case_Kind} @key{is}
+      (Unknown, Case_Sensitive, Case_Insensitive, Case_Preserving);]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0049-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Name_Case_Equivalence} (Name : @key{in} String) @key{return} Name_Case_Kind;]}
@@ -574,18 +574,18 @@ name (if Extension is null) or base name (if Extension is non-null).]}
 @ChgAdded{Version=[3],Keepnext=[T],Text=[@key{function} Name_Case_Equivalence (Name : @key{in} String) @key{return} Name_Case_Kind;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0049-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[Returns the file name equivalence rule for the
 directory containing Name. Raises Name_Error if Name is not a full name. Returns
 Case_Sensitive if file names that differ only in the case of letters are
 considered different names. If file names that differ only in the case of
-letters are considered the same name, then Case_Preserving is returned if the
-name has the case of the file name used when a file is created; and
-Case_Insensitive otherwise. Returns Unknown if the file name equivalence is not
-known.]}
+letters are considered the same name, then Case_Preserving is returned if
+names have the case of the file name used when a file is created; and
+Case_Insensitive is returned otherwise. Returns Unknown if the file name
+equivalence is not known.]}
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[Added]}
-  @ChgAdded{Version=[3],Text=[Unix, Linux, and its relatives are Case_Sensitive
+  @ChgAdded{Version=[3],Text=[Unix, Linux, and their relatives are Case_Sensitive
   systems. Microsoft@latin1(174) Windows@latin1(174) is a Case_Preserving system
   (unless the rarely used POSIX mode is used). Ancient systems like CP/M and
   early MS-DOS were Case_Insensitive systems (file names were always in UPPER
@@ -1292,7 +1292,7 @@ Directories.Hierarchical_File_Names has the following declaration:]}
 @ChgAdded{Version=[3],Text=[In addition to the operations provided in package
 Directories.Hierarchical_File_Names, operations in package Directories
 can be used. In particular, functions Full_Name, Base_Name, and Extension are
-useable with hierarchical file names.]}
+usable with hierarchical file names.]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1380,13 +1380,13 @@ external file but is not a full name, and returns False otherwise.]}
 @ChgAdded{Version=[3],Text=[@key{function} Initial_Directory (Name : @key{in} String) @key{return} String;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0049-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[Returns the leftmost directory
-part @key{in} Name. @Redundant[That is a root directory name (for a full name),
-or one of a parent directory name, a current directory name, or a simple name
-(for a relative name).] The exception Name_Error is propagated if the string
-given as Name does not allow the identification of an external file (including
-directories and special files).]}
+part in Name. @Redundant[That is, it returns a root directory name (for a full
+name), or one of a parent directory name, a current directory name, or a simple
+name (for a relative name).] The exception Name_Error is propagated if the
+string given as Name does not allow the identification of an external file
+(including directories and special files).]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}

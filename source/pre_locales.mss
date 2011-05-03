@@ -1,16 +1,16 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_locales.mss,v $ }
-@comment{ $Revision: 1.3 $ $Date: 2010/11/25 03:11:50 $ $Author: randy $ }
+@comment{ $Revision: 1.4 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2010/11/25 03:11:50 $}
+@Comment{$Date: 2011/04/07 06:18:37 $}
 
 @LabeledAddedClause{Version=[3],Name=[The Package Locales]}
 
 @begin{Intro}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[A @i{locale}@Defn{locale} identifies a geopolitical
 place or region and its associated language, which can be used to determine
-other internationalization related characteristics.]}
+other internationalization-related characteristics.]}
 @end{Intro}
 
 @begin{StaticSem}
@@ -32,8 +32,8 @@ Locales has the following declaration:]}
    @AdaObjDefn{Country_Unknown} : @key[constant] Country_Code := "ZZ";]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] Language @key[return] Language_Code;
-   @key[function] Country @key[return] Country_Code;]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Language} @key[return] Language_Code;
+   @key[function] @AdaSubDefn{Country} @key[return] Country_Code;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[end] Ada.Locales;]}
@@ -71,10 +71,10 @@ of an ISO 3166-1 alpha-2 code that identifies a country.]}
   countries are important enough to include.]}
 @end{Discussion}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[Function Language returns the code of the language
 associated with the active locale. If the Language_Code associated with the
-active locale cannot be determined from the environment then Language returns
+active locale cannot be determined from the environment, then Language returns
 Language_Unknown.]}
 
 @begin{Discussion}
@@ -86,10 +86,10 @@ Language_Unknown.]}
   constants.]}
 @end{Discussion}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[Function Country returns the code of the country
 associated with the active locale. If the Country_Code associated with the
-active locale cannot be determined from the environment then Country returns
+active locale cannot be determined from the environment, then Country returns
 Country_Unknown.]}
 
 @end{StaticSem}

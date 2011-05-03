@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/02/16 06:16:28 $}
+@Comment{$Date: 2011/04/07 06:18:36 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1335,7 +1335,7 @@ the @nt{subtype_indication} shall not specify a @nt{null_exclusion}.]}
 @ChgAdded{Version=[3],Text=[Such an uninitialized @nt{allocator} would
 necessarily raise Constraint_Error, as the default value is @key[null].
 Also note that the syntax does not allow a @nt{null_exclusion} in
-an initialized @nt{allocator}, so it makes the most sense to make the
+an initialized @nt{allocator}, so it makes sense to make the
 uninitialized case illegal as well.]}
 @end{Reason}
 @end{SyntaxText}
@@ -2426,7 +2426,7 @@ larger static expression, and whose expected type is not a descendant of a
 formal type, the rounding should be the same as the default rounding
 for the target system.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[For a real static expression with a non-formal type that is not part of a
+Text=[A real static expression with a non-formal type that is not part of a
 larger static expression should be rounded the same as the target system.]}]}
 @end{ImplAdvice}
 

@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2011/02/05 09:14:59 $}
+@Comment{$Date: 2011/04/07 06:18:38 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -160,7 +160,9 @@ method of including double quotes in a string without doubling them
 %"This is quoted."%
 @end{Example}
 
-@Leading@;is not legal in Ada 83, nor will it be in Ada 95. One has to write:
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0248-1]}
+is not legal in Ada @Chg{Version=[3],New=[(and never was legal)],Old=[83,
+nor will it be in Ada 95]}. One has to write:
 @begin{Example}
 """This is quoted."""
 @end{Example}

@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.95 $ $Date: 2011/03/12 08:07:37 $ $Author: randy $ }
+@comment{ $Revision: 1.96 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2011/03/12 08:07:37 $}
+@Comment{$Date: 2011/04/07 06:18:37 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -288,9 +288,10 @@ a task stops inheriting a priority from another source, its active priority
 is re-evaluated. This is in addition to other instances described in this
 Annex for such re-evaluation.
 
-An implementation may provide a non-standard mode in which tasks
-inherit priorities under conditions other than those specified
-above.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0248-1]}
+An implementation may provide a
+@Chg{Version=[3],New=[nonstandard],Old=[non-standard]} mode in which tasks
+inherit priorities under conditions other than those specified above.
 @begin{Ramification}
 The use of a Priority or Interrupt_Priority pragma does not
 require the package System to be named in a @nt{with_clause} for the
@@ -370,7 +371,7 @@ language-defined library package exists:]}
 @key<end> Ada.Dispatching;]}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0166-1]}
-@ChgAdded{Version=[3],Text=[   @key<procedure> @AdaSubDefn{Yield};]}
+@ChgAdded{Version=[3],Text=[  @key<procedure> @AdaSubDefn{Yield};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0166-1]}
 @ChgAdded{Version=[3],Text=[  @AdaExcDefn{Dispatching_Policy_Error} : @key<exception>;
@@ -3968,6 +3969,8 @@ language-defined library package exists:]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[subtype] @AdaSubtypeDefn{Name=[Barrier_Limit],Of=[Positive]} @key[is] Positive @key[range] 1 .. @RI<implementation-defined>;]}
+@ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[The value of Barrier_Limit'Last in Synchronous_Barriers.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Synchronous_Barrier} (Release_Threshold : Barrier_Limit) @key[is limited private];]}
@@ -4405,30 +4408,30 @@ Ravenscar is equivalent to the following set of pragmas:]}
 @key{pragma} Locking_Policy (Ceiling_Locking);
 @key{pragma} Detect_Blocking;
 @key{pragma} Restrictions (
-                No_Abort_Statements,
-                No_Dynamic_Attachment,
-                No_Dynamic_Priorities,
-                No_Implicit_Heap_Allocations,
-                No_Local_Protected_Objects,
-                No_Local_Timing_Events,
-                No_Protected_Type_Allocators,
-                No_Relative_Delay,
-                No_Requeue_Statements,
-                No_Select_Statements,
-                No_Specific_Termination_Handlers,
-                No_Task_Allocators,
-                No_Task_Hierarchy,
-                No_Task_Termination,
-                Simple_Barriers,
-                Max_Entry_Queue_Length => 1,
-                Max_Protected_Entries => 1,
-                Max_Task_Entries => 0,
-                No_Dependence => Ada.Asynchronous_Task_Control,
-                No_Dependence => Ada.Calendar,
-                No_Dependence => Ada.Execution_Time.Group_Budgets,
-                No_Dependence => Ada.Execution_Time.Timers,
-                No_Dependence => Ada.Task_Attributes@Chg{Version=[3],New=[,
-                No_Dependence => System.Multiprocessors.Dispatching_Domains],Old=[]});]}
+              No_Abort_Statements,
+              No_Dynamic_Attachment,
+              No_Dynamic_Priorities,
+              No_Implicit_Heap_Allocations,
+              No_Local_Protected_Objects,
+              No_Local_Timing_Events,
+              No_Protected_Type_Allocators,
+              No_Relative_Delay,
+              No_Requeue_Statements,
+              No_Select_Statements,
+              No_Specific_Termination_Handlers,
+              No_Task_Allocators,
+              No_Task_Hierarchy,
+              No_Task_Termination,
+              Simple_Barriers,
+              Max_Entry_Queue_Length => 1,
+              Max_Protected_Entries => 1,
+              Max_Task_Entries => 0,
+              No_Dependence => Ada.Asynchronous_Task_Control,
+              No_Dependence => Ada.Calendar,
+              No_Dependence => Ada.Execution_Time.Group_Budgets,
+              No_Dependence => Ada.Execution_Time.Timers,
+              No_Dependence => Ada.Task_Attributes@Chg{Version=[3],New=[,
+              No_Dependence => System.Multiprocessors.Dispatching_Domains],Old=[]});]}
 @end{Example}
 
 @begin{Discussion}
@@ -5642,7 +5645,7 @@ language-defined library package exists:]}
 Text=[The value of CPU_Range'Last in System.Multiprocessors.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] Number_Of_CPUs @key[return] CPU;
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Number_Of_CPUs} @key[return] CPU;
 @key[end] System.Multiprocessors;]}
 @end{Example}
 

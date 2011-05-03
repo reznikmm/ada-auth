@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2011/03/11 07:00:37 $}
+@Comment{$Date: 2011/04/07 06:18:36 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.108 $}
+@Comment{$Revision: 1.109 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -777,9 +777,11 @@ subprogram.]
 
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @Syn{lhs=<subprogram_body>,rhs="@Chg{Version=[2],New=<
     [@Syn2{overriding_indicator}]>,Old=<>}
-    @Syn2{subprogram_specification} @key{is}
+    @Syn2{subprogram_specification}@Chg{Version=[3],New=<
+       [@Syn2{aspect_specification}]>,Old=[]} @key{is}
        @Syn2{declarative_part}
     @key{begin}
         @Syn2{handled_sequence_of_statements}
@@ -883,6 +885,14 @@ RM83 forgot to restrict the definition of elaboration of a
 @ChgAdded{Version=[2],Text=[@nt{Overriding_indicator} is added to
 @nt{subprogram_body}.]}
 @end{DiffWord95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}An optional
+  @nt{aspect_specification} can be used in a @nt{subprogram_body}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
+
 
 
 @LabeledSubClause{Conformance Rules}

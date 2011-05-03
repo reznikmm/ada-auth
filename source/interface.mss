@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.53 $ $Date: 2010/10/15 07:05:38 $ $Author: randy $ }
+@comment{ $Revision: 1.54 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:38 $}
+@Comment{$Date: 2011/04/07 06:18:37 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -1346,9 +1346,9 @@ an interfacing pragma specifying convention C or C_Pass_By_Copy in the
 following cases:]}
 
 @begin{Itemize}
-@ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0002-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[an Export or Convention pragma applied to a
-subprogram which has a parameter of an unconstrained array subtype;]}
+subprogram that has a parameter of an unconstrained array subtype;]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[an interfacing pragma applied to a function with an

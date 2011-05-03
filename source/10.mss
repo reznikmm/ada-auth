@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2010/10/26 05:14:57 $}
+@Comment{$Date: 2011/04/07 06:18:37 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3346,10 +3346,11 @@ include a default expression and its type has preelaborable
 initialization.]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0028-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0028-1],ARef=[AI05-0221-1]}
 @ChgAdded{Version=[2],Text=[A derived type has preelaborable initialization
-if its parent type has preelaborable initialization and (in the case of a
-derived record extension) if the non-inherited components all have
+if its parent type has preelaborable initialization and
+@Chg{Version=[3],New=[],Old=[(in the case of a
+derived record extension) ]}if the non-inherited components all have
 preelaborable initialization. However, a @Chg{Version=[3],New=[],
 Old=[user-defined ]}controlled type with an
 @Chg{Version=[3],New=[],Old=[overriding ]}Initialize procedure
@@ -3923,13 +3924,14 @@ required to appear last.
   a limited view is always treated as pure, no matter what categorization
   is used for the originating unit. This was undefined in Ada 2005.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0028-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0028-1],ARef=[AI05-0221-1]}
   @ChgAdded{Version=[3],Text=[@B<Correction:> Fixed minor issues with
   preelaborable initialization (PI): null Initialize procedures do not make
   a type non-PI; formal types with pragma PI can be assumed to have PI;
   formal extensions are assumed to not have PI; all composite types
   can have pragma PI (so that the possibility of hidden Initialize routines
-  can be handled).]}
+  can be handled); added discriminants of a derived type are not considered
+  in calculating PI.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0219-1]}
   @ChgAdded{Version=[3],Text=[@B<Correction:> Clarified that the implementation

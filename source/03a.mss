@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/03/12 08:07:37 $}
+@Comment{$Date: 2011/04/07 06:18:36 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.103 $}
+@Comment{$Revision: 1.104 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -5020,10 +5020,12 @@ Context is used to resolve their type.
   the entire ISO/IEC 10646:2003 character set.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[2],Text=[We dropped the @ImplAdviceTitle for
-  non-standard interpretation of character sets; an implementation can
-  do what it wants in a non-standard mode, so there isn't much point to
-  any advice.]}
+  @Chg{Version=[3],New=[nonstandard],Old=[non-standard]} interpretation of
+  character sets; an implementation can do what it wants in a
+  @Chg{Version=[3],New=[nonstandard],Old=[non-standard]} mode, so there isn't
+  much point to any advice.]}
 @end{DiffWord95}
 
 @begin{DiffWord2005}

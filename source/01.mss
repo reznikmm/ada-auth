@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2010/11/25 03:11:49 $}
+@Comment{$Date: 2011/04/07 06:18:36 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1016,7 +1016,9 @@ As explained above, the next heading does not represent any language change:]}
 This heading lists some of the non-semantic changes between the Ada 2005 RM and
 the Ada 2012 RM. This heading lists only @lquotes@;interesting@rquotes@; changes
 (for instance, editorial corrections are not listed). These changes come from
-Amendment 2.]}
+Amendment 2. Items marked @b[Correction:] come from Ada Issues classified
+as Binding Interpretations and strictly speaking belong to Ada 2005; other items
+only belong to Ada 2012.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[This is not part of the definition of the language,

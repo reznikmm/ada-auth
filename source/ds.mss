@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.51 $ $Date: 2010/05/08 06:31:33 $ $Author: randy $ }
+@comment{ $Revision: 1.52 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2010/05/08 06:31:33 $}
+@Comment{$Date: 2011/04/07 06:18:37 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -705,10 +705,12 @@ synchronized, protected, or task interface type.]}
 
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00240-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   @b[Amendment Correction:] The wording was changed from
   @lquotes@;user-specified@rquotes to @lquotes@;available@rquotes
-  attributes. (This was then further changed, see below.) This means that
+  @Chg{Version=[3],New=[read and write ],Old=[]}attributes. (This was then
+  further changed, see below.) This means that
   an access type with the attributes specified in the private part would
   originally have been sufficient to allow the access type to be used in
   a remote type, but that is no longer allowed. Similarly, the attributes
@@ -1004,10 +1006,12 @@ be supported as an alternative to RPC.]
 
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00240-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   @b[Amendment Correction:] The wording was changed from
   @lquotes@;user-specified@rquotes to @lquotes@;available@rquotes
-  attributes. (This was then further changed, see below.) This means that
+  @Chg{Version=[3],New=[read and write ],Old=[]}attributes. (This was then
+  further changed, see below.) This means that
   a type with the attributes specified in the private part would
   originally have been allowed as a formal parameter of an RCI subprogram,
   but that is no longer allowed.
@@ -1050,8 +1054,10 @@ the consistency of a distributed program.
 
 @begin{MetaRules}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0248-1]}
 The rules guarantee that remote call interface
-and shared passive packages are consistent among all partitions
+and shared passive @Chg{Version=[3],New=[library units],Old=[packages]}
+are consistent among all partitions
 prior to the execution of a distributed program, so
 that the semantics of the distributed program are well defined.
 

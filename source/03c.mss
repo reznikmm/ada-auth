@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/03/11 07:00:37 $}
+@Comment{$Date: 2011/04/07 06:18:36 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.109 $}
+@Comment{$Revision: 1.110 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2137,9 +2137,10 @@ a type.]}
 @end{Ramification}
 
 @Leading@;@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00334-01],ARef=[AI95-00391-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0097-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0097-1],ARef=[AI05-0198-1]}
 @Chg{Version=[2],New=[If a type has an implicitly declared primitive subprogram
-that is inherited or is the predefined equality operator, and the corresponding
+that is inherited or is @Chg{Version=[3],New=[a],Old=[the]} predefined
+@Chg{Version=[3],New=[],Old=[equality ]}operator, and the corresponding
 primitive subprogram of],Old=[For a derived type, if]}
 the parent or ancestor type
 @Chg{Version=[2],New=[is abstract or is a function with a controlling access
@@ -2578,6 +2579,13 @@ but then clients of the package would not have visibility to T.
 @end{Extend2005}
 
 @begin{Diffword2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0198-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified that the predefined
+  operator corresponding to an inherited abstract operator is also abstract. The
+  Ada 2005 rules casued the predefined operator and the inherited operator to
+  override each other, which is weird. But the effect is the same either way
+  (the operator is not considered for resolution).]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0203-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to
   disallow abstract return objects. These were illegal in Ada 2005 by other

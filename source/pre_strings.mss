@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.64 $ $Date: 2010/11/25 03:11:50 $ $Author: randy $ }
+@comment{ $Revision: 1.65 $ $Date: 2011/04/07 06:18:38 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2010/11/25 03:11:50 $}
+@Comment{$Date: 2011/04/07 06:18:38 $}
 
 @LabeledClause{String Handling}
 
@@ -3535,7 +3535,7 @@ endian.@Defn{encoding scheme}@Defn{character encoding}@Defn{UTF-8}@Defn{UTF-16}]
 of 8-bit values containing a sequence of values encoded in one of three ways
 (UTF-8, UTF-16BE, or UTF-16LE). The subtype UTF_8_String is used to represent a
 String of 8-bit values containing a sequence of values encoded in UTF-8. The
-subtype UTF_16_Wide_String is used to represent a Wide_String of 16-bit
+subtype UTF_16_Wide_String is used to represent a Wide_String of 16-bit values
 containing a sequence of values encoded in UTF-16.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}

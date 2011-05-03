@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.76 $ $Date: 2011/02/05 09:14:58 $ $Author: randy $ }
+@comment{ $Revision: 1.77 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2011/02/05 09:14:58 $}
+@Comment{$Date: 2011/04/07 06:18:37 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -116,7 +116,7 @@ containers are provided:]}
 @ChgAdded{Version=[2],Text=[Separate versions for definite and indefinite
 element types are provided, as those for definite types can be implemented more
 efficiently.@Chg{Version=[3],New=[ Similarly, a separate bounded version is
-provided in order to give more predicable memory usage.],Old=[]}]}
+provided in order to give more predictable memory usage.],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Each container includes a cursor, which is a
@@ -1274,11 +1274,11 @@ is not an empty element after successful completion of this operation.]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Assign (Target : @key{in out} Vector; Source : @key{in} Vector);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as
 Source, the operation has no effect. If the length of Source is greater than the
-capacity of Target, Reserve_Capacity is called with the length of Source as the
-capacity. Each element of Source is assigned to the corresponding element of
+capacity of Target, Reserve_Capacity (Target, Length (Source)) is called.
+Each element of Source is assigned to the corresponding element of
 Target.]}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
@@ -1310,9 +1310,10 @@ Otherwise, the operation propagated Capacity_Error.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Target denotes the same object
-as Source, then Move has no effect. Otherwise, Move first calls
+as Source, then @Chg{Version=[3],New=[the operation],Old=[Move]}
+has no effect. Otherwise, Move first calls
 @Chg{Version=[3],New=[Reserve_Capacity (Target, Length (Source))
 and then ],Old=[]}Clear (Target);
 then, each element from Source is removed from Source and inserted into Target
@@ -2057,10 +2058,10 @@ generic formal "<" operator is a bounded error. Either Program_Error is raised
 after Target is updated as described for Merge, or the operation works as
 defined.]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[It is a bounded error for the actual function
 associated with a generic formal subprogram, when called as part of an
-operation of this package, to tamper with elements of any Vector parameter to
+operation of this package, to tamper with elements of any Vector parameter of
 the operation. Either Program_Error is raised, or the operation works as
 defined on the value of the Vector either prior to, or subsequent to, some or
 all of the modifications to the Vector.]}
@@ -2937,9 +2938,10 @@ the elements of Source.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Target denotes the same object
-as Source, then Move has no effect. Otherwise, @Chg{Version=[3],New=[equivalent
+as Source, then @Chg{Version=[3],New=[the operation],Old=[Move]}
+has no effect. Otherwise, Chg{Version=[3],New=[equivalent
 to Assign (Target, Source) followed by Clear (Source)],Old=[Move first calls Clear
 (Target). Then, the nodes in Source are moved to Target (in the original order).
 The length of Target is set to the length of Source, and the length of Source is
@@ -3462,11 +3464,11 @@ generic formal "<" operator is a bounded error. Either Program_Error is raised
 after Target is updated as described for Merge, or the operation works as
 defined.]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
 It is a bounded error for the actual function
 associated with a generic formal subprogram, when called as part of an
-operation of this package, to tamper with elements of any List parameter to
+operation of this package, to tamper with elements of any List parameter of
 the operation. Either Program_Error is raised, or the operation works as
 defined on the value of the List either prior to, or subsequent to, some or
 all of the modifications to the List.]}
@@ -4045,9 +4047,10 @@ is assigned to the corresponding key/element pair of Target.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Target denotes the same object
-as Source, then Move has no effect. Otherwise, @Chg{Version=[3],New=[equivalent
+as Source, then @Chg{Version=[3],New=[the operation],Old=[Move]}
+has no effect. Otherwise, Chg{Version=[3],New=[equivalent
 to Assign (Target, Source) followed by Clear (Source)],Old=[Move first calls
 Clear (Target). Then, each node from Source is removed from Source and inserted
 into Target. The length of Source is 0 after a successful call to Move]}.]}
@@ -4324,11 +4327,11 @@ exception raised by Process.@key{all} is propagated.]}
 @end{StaticSem}
 
 @begin{Bounded}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
 It is a bounded error for the actual function
 associated with a generic formal subprogram, when called as part of an
-operation of a map package, to tamper with elements of any Map parameter to
+operation of a map package, to tamper with elements of any Map parameter of
 the operation. Either Program_Error is raised, or the operation works as
 defined on the value of the map either prior to, or subsequent to, some or
 all of the modifications to the map.]}
@@ -4848,11 +4851,11 @@ Container.]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Assign (Target : @key[in out] Map; Source : @key[in] Map);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[In addition to the semantics
 described in @RefSecNum{Maps}, if the length of Source is greater than the
 capacity of Target,
-Reserve_Capacity is called with the length of Source as the capacity before assigning
+Reserve_Capacity (Target, Length (Source)) is called before assigning
 any elements.]}
 
 @begin{Example}
@@ -5957,9 +5960,10 @@ corresponding element of Target.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Target denotes the same object
-as Source, then Move has no effect. Otherwise, @Chg{Version=[3],New=[equivalent
+as Source, then @Chg{Version=[3],New=[the operation],Old=[Move]}
+has no effect. Otherwise, Chg{Version=[3],New=[equivalent
 to Assign (Target, Source) followed by Clear (Source)],Old=[Move first clears
 Target. Then, each element from Source is removed from Source and inserted into
 Target. The length of Source is 0 after a successful call to Move]}.]}
@@ -6399,11 +6403,11 @@ unconstrained.]}
 @end{StaticSem}
 
 @begin{Bounded}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
 It is a bounded error for the actual function
 associated with a generic formal subprogram, when called as part of an
-operation of a set package, to tamper with elements of any Set parameter to
+operation of a set package, to tamper with elements of any Set parameter of
 the operation. Either Program_Error is raised, or the operation works as
 defined on the value of the set either prior to, or subsequent to, some or
 all of the modifications to the set.]}
@@ -6933,11 +6937,11 @@ Container.]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Assign (Target : @key[in out] Set; Source : @key[in] Set);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[In addition to the semantics
 described in @RefSecNum{Sets}, if the length of Source is greater than the
-capacity of Target, Reserve_Capacity is called with the length of Source as the
-capacity before assigning any elements.]}
+capacity of Target, Reserve_Capacity (Target, Length (Source)) is called
+before assigning any elements.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -7068,7 +7072,7 @@ average time complexity of Containers.@!Hashed_Sets.@!Reserve_Capacity should be
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to require
-  the formal function be such that that equal elements are also equivalent.]}
+  the formal function be such that equal elements are also equivalent.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0084-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added a pragma
@@ -7658,7 +7662,7 @@ of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to
-  require the formal function be such that that equal elements are also
+  require the formal function be such that equal elements are also
   equivalent.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
@@ -7992,9 +7996,9 @@ Reverse_Find, Equal_Subtree, and "=" on tree values are unspecified.@PDefn{unspe
 type Tree needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
 (see @RefSecNum{Assignment and Finalization}).]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[Empty_Tree represents the empty Tree object. It
-contains only the root node (Count (Empty_Tree) returns 1). If an object of type
+contains only the root node (Node_Count (Empty_Tree) returns 1). If an object of type
 Tree is not otherwise initialized, it is initialized to the same value as
 Empty_Tree.]}
 
@@ -8012,9 +8016,9 @@ container.]}
 @ChgAdded{Version=[3],Text=[Execution of the default implementation of the
 Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
-@ChgAdded{Version=[3],Text=[Tree'Write writes Tree.Count-1 elements to the stream.
-Tree'Read reads Tree.Count-1 elements from the stream.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+@ChgAdded{Version=[3],Text=[Tree'Write writes Node_Count (Tree) - 1 elements to
+the stream. Tree'Read reads Node_Count (Tree) - 1 elements from the stream.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
 @ChgAdded{Version=[3],Text=[@Redundant[Some operations of this generic package
@@ -8043,9 +8047,10 @@ A subprogram is said to
     which call one of these as part of their definition are included.]}
 @end{Honest}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Text=[it reorders the elements of @i<T>, that is, it
-  calls the Splice_Subtree or Splice_Children procedures; or]}
+  calls the Splice_Subtree or Splice_Children procedures with @i<T> as a
+  parameter; or]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[it finalizes @i<T>; or]}
@@ -8093,16 +8098,17 @@ A subprogram is said to
                         Right_Position: Cursor) @key{return} Boolean;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Left_Position or Right_Position
   equals No_Element, propagates Constraint_Error. If the number of child nodes
-  of the element designated by Left_Position is different than the number of
+  of the element designated by Left_Position is different from the number of
   child nodes of the element designated by Right_Position, the function
   returns False. If Left_Position designates a root node and Right_Position does
   not, the function returns False. If Right_Position designates a root
   node and Left_Position does not, the function returns False. Unless both
   cursors designate a root node, the elements are compared using the generic
-  formal equality operator. If the result is False, the function returns
+  formal equality operator. If the result of the element comparision is False,
+  the function returns
   False. Otherwise, it calls Equal_Subtree on a cursor designating each child
   element of the element designated by Left_Position and a cursor designated the
   corresponding child element of the element designated by Right_Position. If
@@ -8171,9 +8177,9 @@ A subprogram is said to
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Subtree_Node_Count (Position : Cursor) @key{return} Count_Type;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position is No_Element,
-  Subtree_Count returns 0; otherwise, Subtree_Node_Count returns the number of
+  Subtree_Node_Count returns 0; otherwise, Subtree_Node_Count returns the number of
   nodes in the subtree that is rooted by Position.]}
 
 @begin{Example}
@@ -8182,7 +8188,7 @@ A subprogram is said to
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
-  @ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to Count (Container) = 1.]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to Node_Count (Container) = 1.]}
 
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8194,9 +8200,9 @@ A subprogram is said to
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Depth (Position : Cursor) @key{return} Count_Type;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
-  Depth returns 0; otherwise Depth returns the number of ancestor nodes of the
+  Depth returns 0; otherwise, Depth returns the number of ancestor nodes of the
   node designated by Position (including the node itself).]}
 
 @begin{Ramification}
@@ -8210,9 +8216,9 @@ A subprogram is said to
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Is_Root (Position : Cursor) @key{return} Boolean;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[Is_Root returns True if the
-  Position designates the root node of the tree; and returns False otherwise.]}
+  Position designates the root node of some tree; and returns False otherwise.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8331,6 +8337,12 @@ A subprogram is said to
   then the actual Element parameter of Process.@key{all} shall be
   unconstrained.]}
 
+  @begin{Ramification}
+    @ChgAdded{Version=[3],Text=[This means that the elements cannot be directly
+    allocated from the heap; it must be possible to change the discriminants of
+    the element in place.]}
+  @end{Ramification}
+
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Assign (Target : @key{in out} Tree; Source : @key{in} Tree);]}
@@ -8374,12 +8386,12 @@ A subprogram is said to
                 Source : @key{in out} Tree);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object
-  as Source, then Move has no effect. Otherwise, Move first calls Clear
+  as Source, then the operation has no effect. Otherwise, Move first calls Clear
   (Target). Then, the nodes other than the root node in Source are moved to
-  Target (in the same positions). After Move completes, Count(Target) is the
-  number of nodes originally in Source, and Count(Source) is 1.]}
+  Target (in the same positions). After Move completes, Node_Count (Target) is
+  the number of nodes originally in Source, and Node_Count (Source) is 1.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8387,12 +8399,12 @@ A subprogram is said to
                        Position  : @key{in out} Cursor);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
   then Constraint_Error is propagated; if Position does not designate an element
   in Container (including if it designates the root node), then Program_Error is
   propagated. If the element designated by position has any child elements, then
-  Constraint_Error is propagated. Otherwise Delete_Leaf removes (from Container)
+  Constraint_Error is propagated. Otherwise, Delete_Leaf removes (from Container)
   the element designated by Position. Finally, Position is set to No_Element.]}
 
 @begin{Ramification}
@@ -8538,7 +8550,7 @@ A subprogram is said to
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if Position
   designates an element, and returns False otherwise. @Redundant[In particular,
-  Has_Element returns False if the cursor designates the root node or equals
+  Has_Element returns False if the cursor designates a root node or equals
   No_Element.]]}
 
 @begin{Honest}
@@ -8648,7 +8660,7 @@ A subprogram is said to
                         Count     : @key{in}     Count_Type := 1);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
   Constraint_Error is propagated. If Parent does not designate a node in
   Container, then Program_Error is propagated. If Before is not equal to
@@ -8656,7 +8668,7 @@ A subprogram is said to
   propagated. If Before is not equal to No_Element, and Container.Parent
   (Before) is not equal to Parent, then Constraint_Error is propagated.
   Otherwise, Insert_Child allocates Count nodes containing copies of New_Item
-  and inserts them as children of Parent. If Parent already has child nodes then
+  and inserts them as children of Parent. If Parent already has child nodes, then
   the new nodes are inserted prior to the node designated by Before, or, if
   Before equals No_Element, the new nodes are inserted after the last existing
   child node of Parent. Any exception raised during allocation of internal
@@ -8672,7 +8684,7 @@ A subprogram is said to
                         Count     : @key{in}     Count_Type := 1);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
   Constraint_Error is propagated. If Parent does not designate a node in
   Container, then Program_Error is propagated. If Before is not equal to
@@ -8680,7 +8692,7 @@ A subprogram is said to
   propagated. If Before is not equal to No_Element, and Container.Parent
   (Before) is not equal to Parent, then Constraint_Error is propagated.
   Otherwise, Insert_Child allocates Count nodes containing copies of New_Item
-  and inserts them as children of Parent. If Parent already has child nodes then
+  and inserts them as children of Parent. If Parent already has child nodes, then
   the new nodes are inserted prior to the node designated by Before, or, if
   Before equals No_Element, the new nodes are inserted after the last existing
   child node of Parent. Position designates the first newly-inserted node. Any
@@ -8763,7 +8775,7 @@ A subprogram is said to
                         Source   : @key{in}     Cursor);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
   Constraint_Error is propagated. If Parent does not designate a node in Target,
   then Program_Error is propagated. If Before is not equal to No_Element, and
@@ -8776,11 +8788,11 @@ A subprogram is said to
   (new nodes are allocated to create a new subtree with the same structure as
   the Source subtree, with each element initialized from the corresponding
   element of the Source subtree) and inserted into Target as a child of Parent.
-  If Parent already has child nodes then the new nodes are inserted prior to the
+  If Parent already has child nodes, then the new nodes are inserted prior to the
   node designated by Before, or, if Before equals No_Element, the new nodes are
   inserted after the last existing child node of Parent. The parent of the newly
   created subtree is set to Parent, and the overall count of Target is
-  incremented by Subtree_Count (Source). Any exception raised during allocation
+  incremented by Subtree_Node_Count (Source). Any exception raised during allocation
   of internal storage is propagated, and Container is not modified.]}
 
 @begin{Discussion}
@@ -8807,7 +8819,7 @@ A subprogram is said to
                           Position : @key{in out} Cursor);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
   Constraint_Error is propagated. If Parent does not designate a node in Target,
   then Program_Error is propagated. If Before is not equal to No_Element, and
@@ -8818,8 +8830,8 @@ A subprogram is said to
   Source or designates a root node, then Program_Error is propagated. If Source
   denotes the same object as Target, then there is no effect; if Position
   designates an ancestor of Parent or is equal to Parent, Constraint_Error is
-  propagated; else the subtree rooted by the element designated by Position is
-  moved to be a child of Parent. If Parent already has child nodes then the
+  propagated; otherwise, the subtree rooted by the element designated by Position is
+  moved to be a child of Parent. If Parent already has child nodes, then the
   moved nodes are inserted prior to the node designated by Before, or, if Before
   equals No_Element, the moved nodes are inserted after the last existing child
   node of Parent. In each of these cases, Position and the count of Target are
@@ -8835,16 +8847,16 @@ A subprogram is said to
     though such a check is @i<O>(Depth(Source)).]}
 @end{Reason}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Text=[Otherwise (if Source does not denote the same
   object as Target), the subtree designated by Position is removed from Source
   and moved to Target. The subtree is inserted as a child of Parent. If Parent
-  already has child nodes then the moved nodes are inserted prior to the node
+  already has child nodes, then the moved nodes are inserted prior to the node
   designated by Before, or, if Before equals No_Element, the moved nodes are
   inserted after the last existing child node of Parent. In each of these cases,
-  the count of Target is incremented by Subtree_Count (Position), and the count
-  of Source is decremented by Subtree_Count (Position), Position is updated to
-  represent an element in Target.]}
+  the count of Target is incremented by Subtree_Node_Count (Position), and the
+  count of Source is decremented by Subtree_Node_Count (Position), Position is
+  updated to represent an element in Target.]}
 
 @begin{Ramification}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8870,7 +8882,7 @@ A subprogram is said to
                           Position : @key{in}     Cursor);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
   Constraint_Error is propagated. If Parent does not designate a node in
   Container, then Program_Error is propagated. If Before is not equal to
@@ -8882,7 +8894,7 @@ A subprogram is said to
   propagated. If Position equals Before, there is no effect. If Position
   designates an ancestor of Parent or is equal to Parent, Constraint_Error is
   propagated. Otherwise, the subtree rooted by the element designated by
-  Position is moved to be a child of Parent. If Parent already has child nodes
+  Position is moved to be a child of Parent. If Parent already has child nodes,
   then the moved nodes are inserted prior to the node designated by Before, or,
   if Before equals No_Element, the moved nodes are inserted after the last
   existing child node of Parent. The parent of the element designated by
@@ -8928,10 +8940,10 @@ A subprogram is said to
     @ChgAdded{Version=[3],Text=[if Source_Parent is an ancestor of
     Target_Parent, then Constraint_Error is propagated; else]}
 
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
     @ChgAdded{Version=[3],Text=[the child elements (and their descendants) of
     Source_Parent are moved to be child elements of Target_Parent. If
-    Target_Parent already has child elements then the moved elements are
+    Target_Parent already has child elements, then the moved elements are
     inserted prior to the node designated by Before, or, if Before equals
     No_Element, the moved elements are inserted after the last existing child
     node of Target_Parent. The parent of each moved child element is set to
@@ -8945,16 +8957,17 @@ A subprogram is said to
    subtrees being moved.]}
 @end{Reason}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Text=[Otherwise (if Source does not denote the same
   object as Target), the child elements (and their descendants) of Source_Parent
   are removed from Source and moved to Target. The child elements are inserted
-  as children of Target_Parent. If Target_Parent already has child elements then
+  as children of Target_Parent. If Target_Parent already has child elements, then
   the moved elements are inserted prior to the node designated by Before, or, if
   Before equals No_Element, the moved elements are inserted after the last
   existing child node of Target_Parent. In each of these cases, the overall
-  count of Target is incremented by Subtree_Count (Source_Parent)-1, and overall
-  count of Source is decremented by Subtree_Count (Source_Parent)-1.]}
+  count of Target is incremented by Subtree_Count (Source_Node_Parent)-1, and
+  the overall count of Source is decremented by Subtree_Count
+  (Source_Node_Parent)-1.]}
 
 @begin{Ramification}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8974,7 +8987,7 @@ A subprogram is said to
                            Source_Parent   : @key{in}     Cursor);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target_Parent equals
   No_Element, then Constraint_Error is propagated. If Target_Parent does not
   designate a node in Container, then Program_Error is propagated. If Before is
@@ -8987,7 +9000,7 @@ A subprogram is said to
   no effect. If Source_Parent is an ancestor of Target_Parent, then
   Constraint_Error is propagated. Otherwise the child elements (and their
   descendants) of Source_Parent are moved to be child elements of Target_Parent.
-  If Target_Parent already has child elements then the moved elements are
+  If Target_Parent already has child elements, then the moved elements are
   inserted prior to the node designated by Before, or, if Before equals
   No_Element, the moved elements are inserted after the last existing child node
   of Target_Parent. The parent of each moved child element is set to
@@ -9131,11 +9144,11 @@ is propagated.]}
 
 @begin{Bounded}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
 It is a bounded error for the actual function associated with a generic formal
 subprogram, when called as part of an operation of this package, to tamper with
-elements of any Tree parameter to the operation. Either Program_Error is raised,
+elements of any Tree parameter of the operation. Either Program_Error is raised,
 or the operation works as defined on the value of the Tree either prior to, or
 subsequent to, some or all of the modifications to the Tree.]}
 
@@ -9143,7 +9156,7 @@ subsequent to, some or all of the modifications to the Tree.]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
 It is a bounded error to call any subprogram declared in the visible part of
 Containers.Multiway_Trees when the associated container has been finalized. If
-the operation takes Container as an in out parameter, then it raises
+the operation takes Container as an @key[in out] parameter, then it raises
 Constraint_Error or Program_Error. Otherwise, the operation either proceeds as
 it would for an empty container, or it raises Constraint_Error or Program_Error.]}
 @end{Bounded}

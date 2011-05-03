@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.65 $ $Date: 2011/03/11 07:00:37 $}
+@comment{$Revision: 1.66 $ $Date: 2011/04/07 06:18:37 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -824,7 +824,7 @@ manner than through pragmas. See clause @RefSecNum{Aspect Specifications}.]}
 @ChgAdded{Version=[3],Text=[The concept of assertions introduced in the 2005
 edition is extended with the ability to specify preconditions and postconditions
 for subprograms, and invariants for private types. The concept of constraints in
-defining subtypes is supplemented with subtype predicates which enable subsets
+defining subtypes is supplemented with subtype predicates that enable subsets
 to be specified other than as simple ranges. These properties are all indicated
 using aspect specifications. See clauses @RefSecNum{Subtype Predicates},
 @RefSecNum{Preconditions and Postconditions}, and @RefSecNum{Type Invariants}.]}
@@ -845,9 +845,9 @@ Membership tests are also made more flexible. See clauses
 Functions may now have parameters of all modes. In order to mitigate consequent
 (and indeed existing) problems of inadvertent order dependence, rules are
 introduced to reduce aliasing. A parameter may now be explicitly marked as
-aliased and incomplete types may be used as parameters in certain circumstances.
-See clauses @RefSecNum{Incomplete Type Declarations}, @RefSecNum{Subprogram Declarations},
-and @RefSecNum{Parameter Associations}.]}
+aliased and incomplete types may be used as the type of a parameter in
+certain circumstances. See clauses @RefSecNum{Incomplete Type Declarations},
+@RefSecNum{Subprogram Declarations}, and @RefSecNum{Parameter Associations}.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[The use of access types is now more flexible. The
@@ -901,8 +901,9 @@ the defect correction procedure.
 Comments should use the following format:
 @begin(display)
 @ChgRef{Version=[2],Kind=[Revised]}
+@ChgRef{Version=[3],Kind=[Revised]}
 @TabSet(L6)@\@b(!topic) @i[Title summarizing comment]
-@\@b(!reference) @Chg{Version=[2],New=[Ada 2005 RM],Old=[RM95-]}@i{ss.ss(pp)}
+@\@b(!reference) @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[2012],Old=[2005]} RM],Old=[RM95-]}@i{ss.ss(pp)}
 @\@b(!from) @i{Author Name yy-mm-dd}
 @\@b(!keywords) @i{keywords related to topic}
 @\@b(!discussion)
@@ -1207,8 +1208,12 @@ thus, the page breaks are in different places.
 clause is not included in the International Standard.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[The @lquotes@;Using this version of the Ada Reference Manual@rquotes
-clause is not included in the International Standard.],Old=[]}
+@ChgAdded{Version=[2],Text=[The @lquotes@;Using this version of the Ada
+Reference Manual@rquotes clause is not included in the International Standard.]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Paragraph numbers are not included
+in the International Standard.]}
 @end{Itemize}
 @end{Intro}
 @end{NotISO}
@@ -1254,15 +1259,17 @@ more recent editorial corrections],Old=[]}.],Old=[]} Paragraphs not so marked ar
 unchanged by @Chg{Version=[2],New=[Amendment 1, @Chg{Version=[3],New=[Amendment
 2, ],Old=[]}],Old=[]}Technical Corrigendum
 1@Chg{Version=[2],New=[,],Old=[]} or editorial corrections. Paragraph numbers
-of unchanged paragraphs are the same as in the original Ada Reference Manual.
-In addition, some versions of this document include revision bars near the
+of unchanged paragraphs are the same as in
+the @Chg{Version=[3],New=[1995 edition of the],Old=[original]} Ada Reference
+Manual. In addition, some versions of this document include revision bars near the
 paragraph numbers. Where paragraphs are inserted, the paragraph numbers are of
 the form pp.nn, where pp is the number of the preceding paragraph, and nn is an
 insertion number. For instance, the first paragraph inserted after paragraph 8
 is numbered 8.1, the second paragraph inserted is numbered 8.2, and so on.
 Deleted paragraphs are indicated by the text @i{@shrink{This paragraph was
 deleted.}} Deleted paragraphs include empty paragraphs that were numbered in
-the original Ada Reference Manual.],Old=[]}
+the @Chg{Version=[3],New=[1995 edition of the],Old=[original]}
+Ada Reference Manual.],Old=[]}
 @end{RMOnly}
 @begin{AARMOnly}
 @ChgRef{Version=[1],Kind=[Added]}
@@ -1279,8 +1286,9 @@ more recent editorial corrections],Old=[]}.],Old=[]} Paragraphs not so marked ar
 unchanged by @Chg{Version=[2],New=[Amendment 1, @Chg{Version=[3],New=[Amendment
 2, ],Old=[]}],Old=[]}Technical Corrigendum
 1@Chg{Version=[2],New=[,],Old=[]} or editorial corrections. Paragraph numbers
-of unchanged paragraphs are the same as in the original International
-Standard. Inserted text is indicated by underlining, and deleted text is
+of unchanged paragraphs are the same as in the @Chg{Version=[3],New=[1995
+edition of the],Old=[original]} Ada Reference Manual. Inserted text is indicated
+by underlining, and deleted text is
 indicated by strikethroughs. @Chg{Version=[2],New=[Some versions also use
 color to indicate the version of the change.],Old=[]}Where paragraphs are
 inserted, the paragraph numbers are of the form pp.nn, where pp is the number
@@ -1288,8 +1296,9 @@ of the preceding paragraph, and nn is an insertion number. For instance, the
 first paragraph inserted after paragraph 8 is numbered 8.1, the second
 paragraph inserted is numbered 8.2, and so on. Deleted paragraphs are indicated
 by the text @i{@shrink{This paragraph was deleted.}} Deleted paragraphs include
-empty paragraphs that were numbered in the original Ada Reference Manual.
-Similar markings and numbering is used for changes to annotations.],Old=[]}
+empty paragraphs that were numbered in the @Chg{Version=[3],New=[1995 edition of
+the],Old=[original]} Ada Reference Manual. Similar markings and numbering is
+used for changes to annotations.],Old=[]}
 @end{AARMOnly}
 @end{Intro}
 @end{NotISO}

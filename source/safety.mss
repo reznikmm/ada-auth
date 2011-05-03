@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.47 $ $Date: 2011/02/05 09:14:59 $ $Author: randy $ }
+@Comment{ $Revision: 1.48 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2011/02/05 09:14:59 $}
+@Comment{$Date: 2011/04/07 06:18:37 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -1031,7 +1031,7 @@ still formally erroneous.
 
 @ChgNote{I can't find any reason in the normative wording for this item;
 therefore I've removed it. The notes below (commented out anyway) refer only
-to a non-standard mode, which is irrelevant in the Standard.}
+to a nonstandard mode, which is irrelevant in the Standard.}
 @ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
 Text=[Any restrictions on pragma Restrictions.]}]}
 

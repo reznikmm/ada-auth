@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2011/02/05 09:14:58 $}
+@Comment{$Date: 2011/04/07 06:18:37 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1977,6 +1977,7 @@ on such a subtype, either explicitly, or by its initial value.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01],ARef=[AI95-00419-01],ARef=[AI95-00443-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0237-1]}
 @Defn2{Term=[ancestor subtype], Sec=(of a formal derived type)}
 @PDefn{private extension}
 The @i(ancestor subtype) of a formal derived type is the
@@ -1996,7 +1997,8 @@ New=[ The reserved word @key{limited} or @key{synchronized} shall appear
 only if the ancestor type @Redundant[and any progenitor types] are limited types.
 The reserved word @key{synchronized} shall appear (rather than @key{limited}) if
 the ancestor type or any of the progenitor types are
-synchronized interfaces.],Old=[]}
+synchronized interfaces.],Old=[]}@Chg{Version=[3],New=[ The ancestor type shall be a limited interface if the reserved
+word @key{synchonized} appears.],Old=[]}
 
 @begin{Reason}
 We use the term @lquotes@;ancestor@rquotes@; here instead of @lquotes@;parent@rquotes@;
@@ -2435,6 +2437,13 @@ run-time check to a compile-time check.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Fixed hole that failed
   to define what happened for "=" for an untagged private type whose
   actual is class-wide.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0237-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added missing rule for the
+  ancestors of formal derived types. The added rule would formally be
+  incompatible, but since it would be impossible to instantiate any such
+  generic, this cannot happen outside of test suites and thus is not
+  documented as an incompatibility.]}
 @end{DiffWord2005}
 
 
@@ -3327,12 +3336,48 @@ more formal subprograms of the template have the same defining name, then named
 associations are not allowed for the corresponding actuals.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00398-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}@Comment{Because this is renumbered by the above}
 @ChgAdded{Version=[2],Text=[A @nt<formal_package_actual_part> shall contain
 at most one @nt<formal_package_association> for each formal parameter. If the
 @nt<formal_package_actual_part> does not include
 @lquotes@key[others] => <>@rquotes, each
 formal parameter without an association shall have a @nt<default_expression>
 or @nt<subprogram_default>.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0200-1]}
+@ChgAdded{Version=[3],Text=[The rules for matching between
+@nt{formal_package_association}s and the generic formals of the template are as
+follows:]}
+@begin{Itemize}
+
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[If all of the @nt{formal_package_association}s are
+  given by generic associations, the @nt{explicit_generic_actual_parameter}s of
+  the @nt{formal_package_association}s shall be legal for an instantiation of the
+  template.]}
+
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[If a @nt{formal_package_association} for a formal
+  type @i<T> of the template is given by <>, then the
+  @nt{formal_package_association} for any other
+  @nt{generic_formal_parameter_declaration} of
+  the template that mentions @i<T> directly or indirectly must be
+  given by <> as well.]}
+
+@end{Itemize}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0200-1]}
+  @ChgAdded{Version=[3],Text=[The above rule is simple to state, though it does
+  not reflect the fact that the formal package functions like an instantiation
+  of a special kind, where each box association for a
+  @nt{generic_formal_parameter_declaration} @i<F> is replaced with a new entity
+  @i<F>' that has the same characteristics as @i<F>: if @i<F> is a formal
+  discrete type then @i<F>' is a discrete type, if @i<F> is a formal subprogram
+  then @i<F>' is a subprogram with a similar signature, etc. In practice this is
+  achieved by making the association into a copy of the declaration of the
+  generic formal.]}
+
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00317-01]}
 @Leading@;The actual shall be an instance of the template.
@@ -3543,6 +3588,19 @@ an instantiation of a package with formal packages:}]}
   is done when the actual is a formal package.]}
 @end{DiffWord95}
 
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0025-1],ARef=[AI05-0200-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Added missing rules for parameters of generic formal package that
+  parallel those in @RefSecNum{Generic Instantiation}, as well as some
+  specific to <> parameters. These are technically incompatibilities because
+  generic formal package parameters that Ada 95
+  and Ada 2005 would have considered legal now have to be rejected. But this
+  should not be an issue in practice as such formal parameters could not have
+  matched any actual generics. And it is quite likely that implementations
+  already enforce some of these rules.]}
+@end{Incompatible2005}
+
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
@@ -3550,13 +3608,6 @@ an instantiation of a package with formal packages:}]}
   a @nt{formal_package_declaration}.
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
-
-@begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0025-1]}
-  @ChgAdded{Version=[3],Text=[@b<Correction:> Missing rules for generic
-  parameters to parallel those in @RefSecNum{Generic Instantiation}
-  were added.]}
-@end{DiffWord2005}
 
 
 @LabeledClause{Example of a Generic Package}

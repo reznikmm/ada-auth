@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2010/09/02 06:27:38 $}
+@Comment{$Date: 2011/04/07 06:18:37 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1702,6 +1702,14 @@ All_Checks @\Represents the union of all checks;
 All_Checks includes both language-defined and implementation-defined
 checks.
 @end{Ramification}
+@begin{Honest}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+@ChgAdded{Version=[3],Text=[There are additional checks defined in
+various Specialized Needs Annexes that are not listed here. Nevertheless, they
+are included in All_Checks and named in a Suppress pragma on implementations
+that support the relevant annex. Look up @ldquote@;check,
+language-defined@rdquote in the index to find the complete list.]}
+@end{Honest}
 @end{Description}
 @end{Itemize}
 @end{StaticSem}

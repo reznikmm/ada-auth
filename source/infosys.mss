@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.37 $ $Date: 2006/10/18 00:25:26 $ $Author: Randy $ }
+@comment{ $Revision: 1.38 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2006/10/18 00:25:26 $}
+@Comment{$Date: 2011/04/07 06:18:37 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -925,8 +925,9 @@ In the result string values shown below, 'b' represents the space character.
 @begin{Example}
 Item:         Picture and Result Strings:
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0248-1]}
 123456.78     Picture:  "-###**_***_**9.99"
-                        "bbb$***123,456.78"
+              @Chg{New=[Result:],Old=[       ]}   "bbb$***123,456.78"
                         "bbFF***123.456,78" (currency = "FF",
                                              separator = '.',
                                              radix mark = ',')

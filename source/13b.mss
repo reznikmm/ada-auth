@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/03/12 08:07:37 $}
+@Comment{$Date: 2011/04/07 06:18:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -3262,7 +3262,9 @@ Item'First is Stream_Element_Offset'First, Read will raise Constraint_Error.]}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
-The @Chg{New=[operational attributes ],Old=[]}Write, Read, Output, and
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
+The @Chg{Version=[3],New=[type-related ],Old=[]}@Chg{New=[operational
+attributes ],Old=[]}Write, Read, Output, and
 Input @Chg{New=[],Old=[attributes ]}convert values to a
 stream of elements and reconstruct values from a stream.
 @end{Intro}
@@ -3274,10 +3276,14 @@ stream of elements and reconstruct values from a stream.
 an elementary type @i(T)}, the following representation attribute is defined:]}
 @begin{Description}
 
-@ChgAttribute{Version=[2],Kind=[Added],ChginAnnex=[T],
-  Leading=<T>, Prefix=<S>, AttrName=<Stream_Size>, ARef=[AI95-00270-01],
-  Text=[@Chg{Version=[2],New=[Denotes the number of bits occupied
-  in a stream by items of subtype S. Hence, the number of stream elements
+@Comment{Originally Version=[2],Kind=[Added], but we don't have a way to do both;
+  also, Kind should be RevisedAdded, but that changes the attribute name to not inserted.}
+@ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],
+  Leading=<T>, Prefix=<S>, AttrName=<Stream_Size>, ARef=[AI95-00270-01], ARef=[AI05-0194-1],
+  Text=[@Chg{Version=[2],New=[Denotes the number of bits
+  @Chg{Version=[3],New=[read from or written to a stream by the
+  default implementations of S'Read and S'Write],Old=[occupied
+  in a stream by items of subtype S]}. Hence, the number of stream elements
   required per item of elementary type @i<T> is:],Old=[]}
 
 @begin(Descexample)
@@ -3302,6 +3308,16 @@ an elementary type @i(T)}, the following representation attribute is defined:]}
   @ChgAdded{Version=[2],Text=[Stream_Size is a type-related attribute (see
   @RefSecNum{Operational and Representation Items}).]}
 @end{Discussion}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal], ARef=[AI05-0194-1]}
+  @ChgAdded{Version=[3],Text=[The value of S'Stream_Size is unaffected by the
+    presence or absence of any @nt{attribute_definition_clause}s or
+    @nt{aspect_specification}s specifying the Read or Write attributes of any
+    ancestor of S. S'Stream_Size is defined in terms of the behavior of the
+    default implementations of S'Read and S'Write even if those default
+    implementations are overridden.]}
+@end{Ramification}
 @end{StaticSem}
 
 @begin{ImplAdvice}
@@ -4332,6 +4348,10 @@ class-wide types descended from S.
   of an inherited stream attribute is as defined for an inherited primitive
   subprogram, while the default implementation of the same attribute might
   have a different profile.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0194-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified that Stream_Size
+  has no effect on and is not effected by user-defined stream attributes.]}
 @end{DiffWord2005}
 
 
@@ -4682,19 +4702,27 @@ progenitor; these rules are similar so that the location of an interface
 in a record extension does not have an effect on the freezing of the interface
 type.]}
 @end{Ramification}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0183-1]}
+@ChgAdded{Version=[3],Text=[At the freezing point of the entity associated with
+an @nt{aspect_specification}, any @nt{expression}s or @nt{name}s within the
+@nt{aspect_specification} cause freezing. Any static expressions within an
+@nt{aspect_specification} also cause freezing
+at the end of the immediately enclosing declaration list.]}
 @end{Itemize}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0046],ARef=[AI95-00106-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1],ARef=[AI05-0183-1]}
 @PDefn2{Term=[freezing], Sec=(by an expression)}
-A static expression causes freezing where it occurs.
+A static expression @Chg{Version=[3],New=[(other than within an
+@nt{aspect_specification}) ],Old=[]}causes freezing where it occurs.
 @Chg{New=[@PDefn2{Term=[freezing], Sec=(by an object name)}
 An object name or],Old=[A]} nonstatic expression causes freezing where it
 occurs, unless the @Chg{New=[name or ],Old=[]}expression is part of a
-@nt<default_expression>, a @nt<default_name>, @Chg{Version=[3],New=[
-the @nt{expression} of an expression function],Old=[]}or a
-per-object expression of a component's @nt{constraint}, in which case,
-the freezing occurs later as part of another construct.
+@nt<default_expression>, a @nt<default_name>, @Chg{Version=[3],New=[the
+@nt{expression} of an expression function, an @nt{aspect_specification},
+],Old=[]}or a per-object expression of a component's @nt{constraint}, in which
+case, the freezing occurs later as part of another construct@Chg{Version=[3],New=[
+or at the freezing point of an associated entity],Old=[]}.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0046],ARef=[AI95-00106-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0019-1]}
@@ -5325,5 +5353,10 @@ Old=[@ntf{attribute_representation_clause}]} has been generalized.
   @ChgAdded{Version=[3],Text=[Added freezing rules for expression functions;
   these are frozen at the point of call, not the point of declaration, like
   default expressions.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[Added freezing rules for @nt{aspect_specification}s;
+  these are frozen at the freezing point of the associated entity, not the
+  point of declaration.]}
 @end{DiffWord2005}
 

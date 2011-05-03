@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/03/12 08:07:37 $}
+@Comment{$Date: 2011/04/07 06:18:36 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.111 $}
+@Comment{$Revision: 1.112 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1598,6 +1598,12 @@ the associated component(s) are as follows:
     an association list of an @nt<extension_aggregate>,
     only noninherited components are counted to determine
     the position.
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+  @ChgAdded{Version=[3],Text=[For a derived type (including type extensions),
+  the order of declaration is defined in @RefSec{Derived Types and Classes}.
+  In particular, all discriminants come first, regardless of whether they are
+  defined for the parent type or are newly added to the derived type.]}
 @end{Ramification}
 
   For a named association with one or more
@@ -2704,11 +2710,11 @@ rhs="@Chg{Version=[3],New=<
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<membership_choice_list>,Old=<>}>,
-rhs="@Chg{Version=[3],New=<@Syn2{membership_choice} {| @Syn2{membership_choice}}]>,Old=<>}"}
+rhs="@Chg{Version=[3],New=<@Syn2{membership_choice} {| @Syn2{membership_choice}}>,Old=<>}"}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<membership_choice>,Old=<>}>,
-rhs="@Chg{Version=[3],New=<@Syn2{choice_expression} | @Syn2{range} | @Syn2{subtype_mark}]>,Old=<>}"}
+rhs="@Chg{Version=[3],New=<@Syn2{choice_expression} | @Syn2{range} | @Syn2{subtype_mark}>,Old=<>}"}
 
 @Syn{lhs=<simple_expression>,rhs="[@Syn2{unary_adding_operator}] @Syn2{term} {@Syn2{binary_adding_operator} @Syn2{term}}"}
 
@@ -3687,7 +3693,7 @@ can be null).
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
 @PDefn2{Term=[evaluation], Sec=(membership test)}
 For the evaluation of a membership test@Chg{Version=[3],New=[ using @key[in]
-whose @nt{membership_choice_list} has a single membership_choice,],Old=[]},
+whose @nt{membership_choice_list} has a single membership_choice],Old=[]},
 the @nt<simple_expression> and the
 @Chg{Version=[3],New=[@nt{membership_choice}],Old=[@nt<range> (if any)]} are
 evaluated in an arbitrary order@Chg{Version=[3],New=[; the result is the
@@ -3704,8 +3710,8 @@ combined with the short-circuit control form @b[or else].]}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
   @ChgAdded{Version=[3],Text=[This equivalence includes the evaluation of the
-  @nt{membership_choice}s; evaluation stops as soon as an invididual evaluates
-  to True.]}
+  @nt{membership_choice}s; evaluation stops as soon as an individual choice
+  evaluates to True.]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
@@ -3779,7 +3785,7 @@ the corresponding membership test using @key(in).
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0158-1]}
   @ChgAdded{Version=[3],Text=[@exam{@i<X> @key[not in] @i<A> | @i<B> | @i<C>}
-  is intended to be exactly equivalent to @exam{@key[not] @i<X> @key[in] @i<A> | @i<B> | @i<C>},
+  is intended to be exactly equivalent to @exam{@key[not] (@i<X> @key[in] @i<A> | @i<B> | @i<C>)},
   including in the order of evaluation of the @nt{simple_expression} and
   @nt{membership_choice}s.]}
 @end{Honest}
@@ -3926,7 +3932,7 @@ conversions.],Old=[]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Wording was added to clarify
   that @i{universal_access} "=" does not apply if an appropriate operator is
   declared for a partial or incomplete view of the designated type.
-  Otherwise, adding a partial or incomplete view could made some "=" operators
+  Otherwise, adding a partial or incomplete view could make some "=" operators
   ambiguous.]}
 @end{DiffWord2005}
 
@@ -4444,7 +4450,7 @@ operators when they had defined user-defined versions.],Old=[]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Wording was added to clarify
   that @i{universal_fixed} "*" and "/" does not apply if an appropriate
   operator is declared for a partial (or incomplete) view of the designated type.
-  Otherwise, adding a partial (or incomplete) view could made some
+  Otherwise, adding a partial (or incomplete) view could make some
   "*" and "/" operators ambiguous.]}
 @end{DiffWord2005}
 
@@ -4788,7 +4794,7 @@ type @i<T>.@PDefn2{Term=[expected type],Sec=[dependent_expression]}]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[If the type of the @nt{conditional_expression}
   cannot be determined by one of these rules, the Name Resolution has failed for
-  that expression, even if the @SynI{dependent_}@nt{expression} would
+  that expression, even if the @SynI{dependent_}@nt{expression}s would
   resolve individually.]}
 @end{Ramification}
 @end{Itemize}
