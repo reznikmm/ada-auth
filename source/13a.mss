@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:37 $}
+@Comment{$Date: 2011/05/03 06:34:08 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.86 $}
+@Comment{$Revision: 1.87 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -352,12 +352,9 @@ See @RefSec{At Clauses}, and @RefSec{Mod Clauses}.
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0112-1]}
 @ChgAdded{Version=[3],Text=[We give a default naming for representation
 aspects of representation pragmas so we don't have to do that for every
-pragma. A Volatile_Components pragma (see
-@RefSecNum{Shared Variable Control}), for example, specifies the
-Volatile_Components aspect of representation of its argument.
-Representation attributes are defined to be aspects of representation
+pragma. Operational and representation attributes are given a default naming
 in @RefSecNum{Operational and Representation Attributes}.
-we don't want any anonymous aspects; that would make other rules
+We don't want any anonymous aspects; that would make other rules
 more difficult to write and understand.]}
 @end{Reason}
 @begin{Ramification}
@@ -3202,8 +3199,8 @@ rhs="@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>>,
   @nt{null_procedure_declaration}*
   @nt{package_declaration}*  -- @Examcom{via} @nt{package_specification}
   @nt{renaming_declaration}*
-    -- @Examcom{There are no language-defined aspects that may be}
-    -- @Examcom{specified on renames, but implementations might support some.}
+    -- @Examcom{There are no language-defined aspects that may be specified}
+    -- @Examcom{on renames, but implementations might support some.}
   @nt{exception_declaration}*
   @nt{generic_declaration}
     @nt{generic_subprogram_declaration}*
@@ -3219,6 +3216,8 @@ rhs="@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>>,
 @nt{entry_index_specification}  --  NO
 @nt{choice_parameter_specification}  --  NO
 @nt{generic_formal_parameter_declaration}
+    -- @Examcom{There are no language-defined aspects that may be specified}
+    -- @Examcom{on generic formals, but implementations might support some.}
   @nt{formal_object_declaration}*
   @nt{formal_type_declaration}*
   @nt{formal_subprogram_declaration}
@@ -3278,15 +3277,15 @@ rather] are resolved at the end of the immediately enclosing declaration list.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @ChgAdded{Version=[3],Text=[If the associated declaration is for a subprogram or
-entry, the names of the formal parameters are visible within the
+entry, the names of the formal parameters are directly visible within the
 @nt{aspect_definition}, as are certain attributes, as specified elsewhere in
 this International Standard for the identified aspect. If the associated
 declaration is a @nt{type_declaration}, within the @nt{aspect_definition} the
-names of any components are visible, and the name of the first subtype denotes
-the current instance of the type (see
+names of any components are directly visible, and the name of the first subtype
+denotes the current instance of the type (see
 @RefSecNum{The Context of Overload Resolution}). If the associated declaration
 is a @nt{subtype_declaration}, within the @nt{aspect_definition} the name of
-the new subtype denotes the current instance of the (sub)type.]}
+the new subtype denotes the current instance of the subtype.]}
 @end{Resolution}
 
 @begin{Legality}
@@ -3350,9 +3349,6 @@ are view specific:]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[An aspect specified on a @nt{subprogram_declaration};]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The Address aspect;]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[An aspect specified on a @nt{renaming_declaration}.]}
@@ -3800,7 +3796,7 @@ descendants of @i<T>.]]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[If one or more invariant expressions
 apply to a type @i<T>, and the Assertion_Policy at the point of the partial view
-declaration for T is Check, then an invariant check is performed at the
+declaration for @i<T> is Check, then an invariant check is performed at the
 following places, on the specified object(s):]}
 
 @begin{Itemize}

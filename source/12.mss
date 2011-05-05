@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:37 $}
+@Comment{$Date: 2011/05/03 06:34:08 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1331,7 +1331,7 @@ have the same designated type as that of the @nt{access_definition}.
 If the anonymous access type is an access-to-subprogram type, the type
 of the actual shall have a designated profile which
 is type conformant with that of the @nt{access_definition}.
-@Defn2{Term=[type conformance],Sec=(required)}],Old=[of the formal]}.
+@Defn2{Term=[type conformance],Sec=(required)}],Old=[of the formal.]}
 @begin{Reason}
 See the corresponding rule for @nt{object_renaming_declaration}s for a
 discussion of the reason for this rule.

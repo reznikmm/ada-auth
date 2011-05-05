@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:38 $}
+@Comment{$Date: 2011/05/03 06:34:09 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.40 $}
+@comment{$Revision: 1.41 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -307,12 +307,6 @@ or @lquotes@;if you compile a library unit called System,
 it has to be a package, and it has to contain at least
 the following declarations: ...@rquotes@;.
 @end{Ramification}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0060-1]}
-@ChgAdded{Version=[3],Text=[An implementation may omit pragma
-Remote_Types (see @RefSecNum{Remote Types Library Units}) in language-defined
-library units if the implementation does not conform to Annex E.]}
-
 @end{ImplPerm}
 
 @begin{DiffWord83}
@@ -340,13 +334,13 @@ The order and lettering of the annexes has been changed.
   redispatching unless it is explicitly required, in order to safeguard
   portability when overriding language-defined routines.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0060-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0060-1],ARef=[AI05-0206-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added a permission to
   omit pragma Remote_Types from language-defined units if Annex E is
-  not supported. (@RefSecNum{Conformity of an Implementation with the Standard}
-  says that am unsupported Annex feature must be rejected at compile-time or
-  raise an exception, and surely we don't want either of those to happen
-  with predefined units.)]}
+  not supported. This was later removed, as better method is available.
+  Note that this requires all implementations to provide minimal support for
+  the Remote_Types categorization even if Annex E is not supported; being
+  unable to compile language-defined units is not allowed.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0049-1],ARef=[AI05-0069-1],ARef=[AI05-0136-1],ARef=[AI05-0137-1],ARef=[AI05-0166-1],ARef=[AI05-0168-1]}
   @ChgAdded{Version=[3],Text=[Added various new units to the

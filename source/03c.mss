@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:36 $}
+@Comment{$Date: 2011/05/03 06:34:08 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.110 $}
+@Comment{$Revision: 1.111 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1770,11 +1770,18 @@ by the first actual parameter of the call, and the actual parameters of the
 entry or protected subprogram being given by the remaining actual parameters of
 the call, if any;]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0197-1]}
+@ChgAdded{Version=[3],Text=[if the corresponding operation is a predefined
+operator then the action comprises an invocation of that operator;]}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0126-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0126-1],ARef=[AI05-0197-1]}
 @ChgAdded{Version=[2],Text=[otherwise, the action is the same as the action for
 the corresponding operation of the parent type@Chg{Version=[3],New=[ or
-progenitor type from which the operation was inherited],Old=[]}.]}
+progenitor type from which the operation was inherited. If there is more than
+one such corresponding operation, the action is that for the operation that is
+not a null procedure, if any; otherwise, the action is that of an arbitrary one
+of the operations],Old=[]}.]}
 @end{Itemize}
 
 @begin{Honest}
@@ -1800,6 +1807,13 @@ happens to have the same name and profile is not called in that case).]}
 bullet in case the corresponding operation is a null procedure inherited
 from an interface. In that case, the parent type may not even have the
 operation in question.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0197-1]}
+@ChgAdded{Version=[3],Text=[For the last bullet, if there are multiple
+corresponding operations for the parent and progenitors, all but one of them
+have to be a null procedure. (If the progenitors declared abstract routines,
+there would have to be an explicit overriding of the operation, and then the
+first bullet would apply.) We call the non-null routine if one exists.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0126-1]}
 @ChgAdded{Version=[3],Text=[Any explicit declaration for an inherited
@@ -1979,7 +1993,7 @@ The concept of dispatching operations is new.
   @ldquote@;function with a controlling result@rdquote, as it is used
   in @RefSecNum{Abstract Types and Subprograms}.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0126-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0126-1],ARef=[AI05-0197-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected holes in the
   definition of dynamic dispatching: the behavior for operations that are
   never declared and/or inherited from a progenitor were not specified.]}

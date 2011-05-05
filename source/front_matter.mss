@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.66 $ $Date: 2011/04/07 06:18:37 $}
+@comment{$Revision: 1.67 $ $Date: 2011/05/03 06:34:09 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -845,7 +845,7 @@ Membership tests are also made more flexible. See clauses
 Functions may now have parameters of all modes. In order to mitigate consequent
 (and indeed existing) problems of inadvertent order dependence, rules are
 introduced to reduce aliasing. A parameter may now be explicitly marked as
-aliased and incomplete types may be used as the type of a parameter in
+aliased and the type of a parameter may be incomplete in
 certain circumstances. See clauses @RefSecNum{Incomplete Type Declarations},
 @RefSecNum{Subprogram Declarations}, and @RefSecNum{Parameter Associations}.]}
 
@@ -874,8 +874,8 @@ bounded forms of the existing containers and new containers for indefinite
 objects, multiway trees, and queues. See clause @RefSecNum{Containers}.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[Finally, features are added primarily to ease the
-use of containers such as the ability to iterate over all elements in a
+@ChgAdded{Version=[3],Text=[Finally, certain features are added primarily to
+ease the use of containers such as the ability to iterate over all elements in a
 container without having to encode the iteration. These can also be used for
 iteration over arrays. See clauses @RefSecNum{User-Defined References},
 @RefSecNum{User-Defined Indexing}, and @RefSecNum{User-Defined Iterators}.]}

@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.48 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
+@Comment{ $Revision: 1.49 $ $Date: 2011/05/03 06:34:09 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:37 $}
+@Comment{$Date: 2011/05/03 06:34:09 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -663,8 +663,8 @@ optimizations (such as unused object elimination).]}
 @LabeledRevisedClause{Version=[2],New=[High Integrity Restrictions],Old=[Safety and Security Restrictions]}
 @begin{Intro}
 This clause defines restrictions that can be used with pragma
-Restrictions (see @RefSecNum(Pragma Restrictions)); these facilitate
-the demonstration of program correctness by allowing
+Restrictions (see @RefSecNum(Pragma Restrictions and Pragma Profile)); these
+facilitate the demonstration of program correctness by allowing
 tailored versions of the run-time system.
 @begin{Discussion}
 

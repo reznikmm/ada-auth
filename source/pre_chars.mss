@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.36 $ $Date: 2011/04/07 06:18:38 $ $Author: randy $ }
+@comment{ $Revision: 1.37 $ $Date: 2011/05/03 06:34:09 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:38 $}
+@Comment{$Date: 2011/05/03 06:34:09 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -246,7 +246,8 @@ not alphanumeric.
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Text=[Is_Line_Terminator@\True if Item is a character
-with position 10 .. 13.]}
+True if Item is a character with position 10 .. 13 (Line_Feed, Line_Tabulation,
+Form_Feed, Carriage_Return) or 133 (Next_Line).]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Text=[Is_Mark@\Never True (no value of type Character
@@ -1144,7 +1145,8 @@ designated by Item is categorized as @ntf{graphic_character}, but not categorize
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
 designated by Item is categorized as @ntf{separator_line} or
 @ntf{separator_paragraph}, or if Item is a conventional line terminator
-character (CR, LF, VT, or FF); otherwise returns False.]}
+character (Line_Feed, Line_Tabulation, Form_Feed,
+Carriage_Return, Next_Line); otherwise returns False.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}

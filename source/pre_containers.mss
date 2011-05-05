@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.77 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
+@comment{ $Revision: 1.78 $ $Date: 2011/05/03 06:34:09 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:37 $}
+@Comment{$Date: 2011/05/03 06:34:09 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -1278,8 +1278,9 @@ is not an empty element after successful completion of this operation.]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as
 Source, the operation has no effect. If the length of Source is greater than the
 capacity of Target, Reserve_Capacity (Target, Length (Source)) is called.
-Each element of Source is assigned to the corresponding element of
-Target.]}
+The elements of Source are then copied to Target as for an
+@nt{assignment_statement} assigning Source to Target (this includes
+setting Target's length to be that of Source).]}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[3],Text=[This routine exists for compatibility with the
@@ -2909,10 +2910,11 @@ unconstrained.]}
                 Source : @key{in} List);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as
-Source, the operation has no effect.  Otherwise, it clears Target, and each
-element of Source is assigned to the corresponding element of Target.]}
+Source, the operation has no effect. Otherwise, the elements of Source are
+copied to Target as for an @nt{assignment_statement} assigning Source to
+Target.]}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[3],Text=[This routine exists for compatibility with the
@@ -2941,7 +2943,7 @@ the elements of Source.]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Target denotes the same object
 as Source, then @Chg{Version=[3],New=[the operation],Old=[Move]}
-has no effect. Otherwise, Chg{Version=[3],New=[equivalent
+has no effect. Otherwise, @Chg{Version=[3],New=[equivalent
 to Assign (Target, Source) followed by Clear (Source)],Old=[Move first calls Clear
 (Target). Then, the nodes in Source are moved to Target (in the original order).
 The length of Target is set to the length of Source, and the length of Source is
@@ -2985,8 +2987,8 @@ is propagated, and Container is not modified.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Before is not No_Element, and
-does not designate an element in Container, then Program_Error is propagated.
-Otherwise,
+does not designate an element in Container, then Program_Error is
+propagated. Otherwise,
 Insert allocates Count copies of New_Item, and inserts them prior to the
 element designated by Before. If Before equals No_Element, the new elements are
 inserted after the last element (if any). Position designates the first
@@ -3003,8 +3005,8 @@ storage is propagated, and Container is not modified.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Before is not No_Element, and
-does not designate an element in Container, then Program_Error is propagated.
-Otherwise,
+does not designate an element in Container, then Program_Error is
+propagated. Otherwise,
 Insert inserts Count new elements prior to the element designated by Before. If
 Before equals No_Element, the new elements are inserted after the last node (if
 any). The new elements are initialized by default (see
@@ -3662,6 +3664,16 @@ probably not a stable sort.]}
   The generic package Containers.Doubly_Linked_Lists is new.]}
 @end{Extend95}
 
+@begin{Inconsistent2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}The Insert
+  versions that return a Position parameter are now defined to raise
+  Constraint_Error if Count = 0. This is necessary so the Position cursor
+  returned always points at a new element. This was unspecified for Ada 2005;
+  so this will only be inconsistent if an implementation did something else and
+  a program depended on that something else -- this should be rare.]}
+@end{Inconsistent2005}
+
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}Subprograms Assign and Copy
@@ -4027,10 +4039,11 @@ shall be unconstrained.]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Assign (Target : @key{in out} Map; Source : @key{in} Map);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as
-Source, the operation has no effect. Otherwise, each key/element pair of Source
-is assigned to the corresponding key/element pair of Target.]}
+Source, the operation has no effect. Otherwise, the key/element pairs of Source
+are copied to Target as for an @nt{assignment_statement} assigning Source to
+Target.]}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[3],Text=[This routine exists for compatibility with the
@@ -5940,10 +5953,10 @@ Container. Any exception raised by Process.@key{all} is propagated.]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Assign (Target : @key{in out} Set; Source : @key{in} Set);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as Source, the operation has no
-effect. Otherwise, each element of Source is assigned to the
-corresponding element of Target.]}
+effect. Otherwise, the elements of Source are copied to Target as
+for an @nt{assignment_statement} assigning Source to Target.]}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[3],Text=[This routine exists for compatibility with the
@@ -7685,6 +7698,15 @@ Containers.Multiway_Trees provides private types Tree and Cursor, and a set of
 operations for each type. A multiway tree container is well-suited to represent
 nested structures.]}
 
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Text=[This tree just provides a basic structure, and
+  make no promises about balancing or other automatic organization. In this
+  sense, it is different than the indexed (Map, Set) forms. Rather, it
+  provides a building block on which to construct more complex and more
+  specialized tree containers.]}
+@end{Discussion}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
 @ChgAdded{Version=[3],Text=[A multiway tree container object manages a tree of
 internal @i<nodes>, each of which contains an element and pointers to the parent,
@@ -7832,15 +7854,13 @@ package Containers.Multiway_Trees has the following declaration:]}
       @key{return} Cursor;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Find_In_Subtree} (Container : Tree;
-                             Item      : Element_Type;
-                             Position  : Cursor)
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Find_In_Subtree} (Position : Cursor;
+                             Item     : Element_Type)
       @key{return} Cursor;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Ancestor_Find} (Container : Tree;
-                           Item      : Element_Type;
-                           Position  : Cursor)
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Ancestor_Find} (Position : Cursor;
+                           Item     : Element_Type)
       @key{return} Cursor;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -7965,15 +7985,13 @@ package Containers.Multiway_Trees has the following declaration:]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Iterate_Children}
-     (Container : @key{in} Tree;
-      Parent    : @key{in} Cursor;
-      Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+     (Parent  : @key{in} Cursor;
+      Process : @key{not null access procedure} (Position : @key{in} Cursor));]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Reverse_Iterate_Children}
-     (Container : @key{in} Tree;
-      Parent    : @key{in} Cursor;
-      Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+     (Parent  : @key{in} Cursor;
+      Process : @key{not null access procedure} (Position : @key{in} Cursor));]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{private}
@@ -8348,19 +8366,19 @@ A subprogram is said to
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Assign (Target : @key{in out} Tree; Source : @key{in} Tree);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object
-  as Source, the operation has no effect. Otherwise, it calls Clear (Target),
-  and then each element of Source is assigned to a corresponding element in
+  as Source, the operation has no effect. Otherwise, the elements of Source are
+  copied to Target as for an @nt{assignment_statement} assigning Source to
   Target.]}
 
-@begin{Honest}
+@begin{Ramification}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[The "corresponding element in Target" has a
+    @ChgAdded{Version=[3],Text=[Each element in Target has a
     parent element that corresponds to the parent element of the Source element,
     and has child elements that correspond to the child elements of the Source
     element.]}
-@end{Honest}
+@end{Ramification}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[3],Text=[This routine exists for compatibility with the
@@ -8490,16 +8508,14 @@ A subprogram is said to
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Find_In_Subtree (Container : Tree;
-                          Item      : Element_Type;
-                          Position  : Cursor)
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Find_In_Subtree (Position : Cursor;
+                          Item     : Element_Type)
    @key{return} Cursor;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
-  then Constraint_Error is propagated; if Position does not designate a node in
-  Container, then Program_Error is propagated. Find_In_Subtree searches a
+  then Constraint_Error is propagated. Find_In_Subtree searches a
   subtree of the elements of Container for an element equal to Item (using the
   generic formal equality operator). The search starts at the element designated
   by Position. The search checks the subtree rooted by Position in a depth-first
@@ -8516,22 +8532,24 @@ A subprogram is said to
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Ancestor_Find (Container : Tree;
-                        Item      : Element_Type;
-                        Position  : Cursor)
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Ancestor_Find (Position : Cursor;
+                        Item     : Element_Type;
    @key{return} Cursor;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
-  then Constraint_Error is propagated; if Position does not designate an element
-  in Container (including if it designates the root node), then Program_Error is
-  propagated. Otherwise, Ancestor_Find searches for an element equal to Item
-  (using the generic formal equality operator). The search starts at the element
-  designated by Position, and checks each ancestor proceeding toward the root of
-  the subtree. If no equal element is found, then Ancestor_Find returns
-  No_Element. Otherwise, it returns a cursor designating the first equal element
-  encountered.]}
+  then Constraint_Error is propagated. Otherwise, Ancestor_Find searches
+  for an element equal to Item (using the generic formal equality operator). The
+  search starts at the node designated by Position, and checks each ancestor
+  proceeding toward the root of the subtree. If no equal element is found, then
+  Ancestor_Find returns No_Element. Otherwise, it returns a cursor designating
+  the first equal element encountered.]}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Text=[No_Element is returned if Position is the root
+  node.]}
+@end{Ramification}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8610,8 +8628,8 @@ A subprogram is said to
   cursor that designates each element in the subtree rooted by the node
   designated by Position, starting with the node designated by Position and
   proceeding in a depth-first order. Program_Error is propagated if
-  Process.@key{all} tampers with the cursors of Container. Any exception raised
-  by Process.@key{all} is propagated.]}
+  Process.@key{all} tampers with the cursors of the tree containing Position.
+  Any exception raised by Process.@key{all} is propagated.]}
 
 @begin{Ramification}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8698,6 +8716,13 @@ A subprogram is said to
   child node of Parent. Position designates the first newly-inserted node. Any
   exception raised during allocation of internal storage is propagated, and
   Container is not modified.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Text=[We don't allow Count to be zero in this routine
+  and the next as in that case Position cannot designate a newly-inserted
+  node.]}
+@end{Reason}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -8828,9 +8853,10 @@ A subprogram is said to
   Parent, then Constraint_Error is propagated. If Position equals No_Element,
   Constraint_Error is propagated. If Position does not designate a node in
   Source or designates a root node, then Program_Error is propagated. If Source
-  denotes the same object as Target, then there is no effect; if Position
-  designates an ancestor of Parent or is equal to Parent, Constraint_Error is
-  propagated; otherwise, the subtree rooted by the element designated by Position is
+  denotes the same object as Target, then:
+  if Position equals Before there is no effect; if Position designates an
+  ancestor of Parent or is equal to Parent, Constraint_Error is propagated;
+  otherwise, the subtree rooted by the element designated by Position is
   moved to be a child of Parent. If Parent already has child nodes, then the
   moved nodes are inserted prior to the node designated by Before, or, if Before
   equals No_Element, the moved nodes are inserted after the last existing child
@@ -8889,8 +8915,8 @@ A subprogram is said to
   No_Element, and does not designate a node in Container, then Program_Error is
   propagated. If Before is not equal to No_Element, and Target.Parent (Before)
   is not equal to Parent, then Constraint_Error is propagated. If Position
-  equals No_Element or designates a root node, Constraint_Error is propagated.
-  If Position does not designate a node in Container, then Program_Error is
+  equals No_Element, Constraint_Error is propagated. If Position does not
+  designate a node in Container or designates a root node, then Program_Error is
   propagated. If Position equals Before, there is no effect. If Position
   designates an ancestor of Parent or is equal to Parent, Constraint_Error is
   propagated. Otherwise, the subtree rooted by the element designated by
@@ -9095,15 +9121,13 @@ A subprogram is said to
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Iterate_Children
-  (Container : @key{in} Tree;
-   Parent    : @key{in} Cursor;
-   Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+  (Parent  : @key{in} Cursor;
+   Process : @key{not null access procedure} (Position : @key{in} Cursor));]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
-Constraint_Error is propagated. If Parent does not designate a node in
-Container, then Program_Error is propagated.]}
+Constraint_Error is propagated.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Iterate_Children calls Process.@key{all} with a
@@ -9112,21 +9136,19 @@ node and moving the cursor as per the function Next_Sibling.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Program_Error is propagated if Process.@key{all}
-tampers with the cursors of Container. Any exception raised by Process.@key{all}
-is propagated.]}
+tampers with the cursors of the tree containing Parent. Any exception raised by
+Process.@key{all} is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Reverse_Iterate_Children
-  (Container : @key{in} Tree;
-   Parent    : @key{in} Cursor;
-   Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+  (Parent  : @key{in} Cursor;
+   Process : @key{not null access procedure} (Position : @key{in} Cursor));]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
-Constraint_Error is propagated. If Parent does not designate a node in
-Container, then Program_Error is propagated.]}
+Constraint_Error is propagated.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Reverse_Iterate_Children calls Process.@key{all}
@@ -9135,8 +9157,8 @@ child node and moving the cursor as per the function Previous_Sibling.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Program_Error is propagated if Process.@key{all}
-tampers with the cursors of Container. Any exception raised by Process.@key{all}
-is propagated.]}
+tampers with the cursors of the tree containing Parent. Any exception raised by
+Process.@key{all} is propagated.]}
 
 @end{DescribeCode}
 

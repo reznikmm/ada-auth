@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.96 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
+@comment{ $Revision: 1.97 $ $Date: 2011/05/03 06:34:09 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2011/04/07 06:18:37 $}
+@Comment{$Date: 2011/05/03 06:34:09 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2813,7 +2813,7 @@ deferral of abortion during finalization and in protected actions.
 
 @begin{Intro}
 @Redundant[This clause defines restrictions that can be used with a
-pragma Restrictions (see @RefSecNum{Pragma Restrictions}) to facilitate the
+pragma Restrictions (see @RefSecNum{Pragma Restrictions and Pragma Profile}) to facilitate the
 construction of highly efficient tasking run-time systems.]
 @end{Intro}
 
@@ -4328,56 +4328,159 @@ Text=[The metrics for entry-less protected objects.]}]}
 @end{Metrics}
 
 
+@Comment{TBD: @LabeledAddedRevisedClause{Version=[3],OldVersion=[2],New=[The Ravenscar Profile],Old=[Run-time Profiles]}}
 @LabeledAddedClause{Version=[2],Name=[Run-time Profiles]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0246-1]}
 @ChgAdded{Version=[2],Text=[@Redundant[This clause
-specifies a mechanism for defining run-time profiles.]]}
+@Chg{Version=[3],New=[defines the Ravenscar profile.@Defn{Ravenscar}],
+Old=[specifies a mechanism for defining run-time profiles.]}]]}
 @end{Intro}
 
 @begin{Syntax}
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The form of a
-@nt{pragma} Profile is as follows:]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0246-1]}
+@ChgDeleted{Version=[3],Type=[Leading],Keepnext=[T],Text=[@Chg{Version=[2],New=[The
+form of a @nt{pragma} Profile is as follows:],Old=[]}]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Profile> (@SynI{profile_}@Syn2{identifier} {, @SynI{profile_}@Syn2{pragma_argument_association}});''}
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=`@Chg[Version=[2],New=[
+@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Profile> (@SynI{profile_}@Syn2{identifier} {, @SynI{profile_}@Syn2{pragma_argument_association}});'],Old=[]]'}
 
 @end{Syntax}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
-@ChgAdded{Version=[2],Text=[The @SynI{profile_}@nt{identifier} shall be the name
-of a run-time profile. The semantics of any
-@SynI{profile_}@nt{pragma_@!argument_@!association}s are defined by
-the run-time profile specified by the @SynI{profile_}@nt{identifier}.]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0246-1]}
+@ChgAdded{Version=[2],Text=[The @SynI{profile_}@nt{identifier}
+@Chg{Version=[3],New=[Ravenscar is a usage profile (see @RefSecNum{Pragma Restrictions and Pragma Profile}).
+For usage profile Ravenscar, there shall be no],Old=[shall be the name
+of a run-time profile. The semantics of any]}
+@SynI{profile_}@nt{pragma_@!argument_@!association}s@Chg{Version=[3],New=[],Old=[
+are defined by
+the run-time profile specified by the @SynI{profile_}@nt{identifier}]}.]}
 @end{Legality}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
-@ChgAdded{Version=[2],Text=[
-A profile is equivalent to the set of configuration pragmas that is
-defined for each run-time profile.]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0246-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Chg{Version=[3],New=[The
+usage profile Ravenscar is equivalent to the following set of
+pragmas:],Old=[A profile is equivalent to the set of configuration
+pragmas that is defined for each run-time profile.]}]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-00249-01],ARef=[AI95-00297-01],ARef=[AI95-00394-01],ARef=[AI05-0171-1],ARef=[AI05-0246-1]}
+@ChgAdded{Version=[3],Text=[
+@key{pragma} Task_Dispatching_Policy (FIFO_Within_Priorities);
+@key{pragma} Locking_Policy (Ceiling_Locking);
+@key{pragma} Detect_Blocking;
+@key{pragma} Restrictions (
+              No_Abort_Statements,
+              No_Dynamic_Attachment,
+              No_Dynamic_Priorities,
+              No_Implicit_Heap_Allocations,
+              No_Local_Protected_Objects,
+              No_Local_Timing_Events,
+              No_Protected_Type_Allocators,
+              No_Relative_Delay,
+              No_Requeue_Statements,
+              No_Select_Statements,
+              No_Specific_Termination_Handlers,
+              No_Task_Allocators,
+              No_Task_Hierarchy,
+              No_Task_Termination,
+              Simple_Barriers,
+              Max_Entry_Queue_Length => 1,
+              Max_Protected_Entries => 1,
+              Max_Task_Entries => 0,
+              No_Dependence => Ada.Asynchronous_Task_Control,
+              No_Dependence => Ada.Calendar,
+              No_Dependence => Ada.Execution_Time.Group_Budgets,
+              No_Dependence => Ada.Execution_Time.Timers,
+              No_Dependence => Ada.Task_Attributes@Chg{Version=[3],New=[,
+              No_Dependence => System.Multiprocessors.Dispatching_Domains],Old=[]});]}
+@end{Example}
+
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The Ravenscar profile is named for the location
+of the meeting that defined its initial version. The name is now in widespread
+use, so we stick with existing practice, rather than using a more descriptive
+name.@Comment{ This is another example of Ada's lousy marketing sense; casual
+readers, especially those outside of Ada, have no conception of what
+@lquotes@;Ravenscar@rquotes@; is, and thus are much less likely to investigate
+it to find out how it can help them.}]}
+@end{Discussion}
 @end{StaticSem}
 
 @begin{Linktime}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
-@ChgAdded{Version=[2],Text=[@PDefn2{Term=[configuration pragma], Sec=(Profile)}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0246-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[@PDefn2{Term=[configuration pragma], Sec=(Profile)}
 @PDefn2{Term=[pragma, configuration], Sec=(Profile)}
 A @nt{pragma} Profile is a configuration pragma.
-There may be more than one @nt{pragma} Profile for a partition.]}
+There may be more than one @nt{pragma} Profile for a partition.]}]}
 @end{Linktime}
+
+@begin{ImplReq}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgAdded{Version=[3],Text=[A task shall only be on the ready queues of one
+processor, and the
+processor to which a task belongs shall be defined statically.
+Whenever a task running on a processor reaches a task dispatching point,
+it goes back to the ready queues of the same processor. A task with
+a CPU value of Not_A_Specific_CPU will execute on an implementation
+defined processor. @Redundant[A task without a CPU pragma will activate and
+execute on the same processor as its activating task.]]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The processor of a task without a pragma CPU is
+  defined in @RefSecNum{Multiprocessor Implementation}.]}
+@end{TheProof}
+@ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[The processor on which a task with a CPU value of a Not_A_Specific_CPU
+will execution when the Ravenscar profile is in effect.]}]}
+@end{ImplReq}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgAdded{Version=[3],Text=[On a multiprocessor system, an implementation should
+support a fully partitioned approach. Each processor should have separate and
+disjoint ready queues.]}
+
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[On a multiprocessor system, each processor should have a separate
+and disjoint ready queue.]}]}
+@end{ImplAdvice}
+
+@begin{Notes}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-00249-01],ARef=[AI05-0246-1]}
+@ChgAdded{Version=[3],Text=[The effect of the Max_Entry_Queue_Length => 1
+restriction applies only to protected entry queues due to the accompanying
+restriction of Max_Task_Entries => 0.]}
+@end{Notes}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0246-1]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  @nt{Pragma} Profile is new.]}
+  @Chg{Version=[3],New=[The Ravenscar profile is new; it was moved here by Ada
+  2012],Old=[@nt{Pragma} Profile is new]}.]}
 @end{Extend95}
 
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+  @ChgAdded{Version=[3],Text=[How Ravenscar behaves on a multiprocessor
+  system is now defined.]}
+@end{DiffWord2005}
 
+@Comment{Moved the following to the previous clause...
 @RMNewPage
 @LabeledAddedSubClause{Version=[2],Name=[The Ravenscar Profile]}
 
@@ -4487,16 +4590,17 @@ Max_Task_Entries => 0.]}
 @end{Notes}
 
 @begin{Extend95}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The Ravenscar profile is new.]}
 @end{Extend95}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI05-0171-1]}
-  @ChgAdded{Version=[2],Text=[How Ravenscar behaves on a multiprocessor
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+  @ChgAdded{Version=[3],Text=[How Ravenscar behaves on a multiprocessor
   system is now defined.]}
 @end{DiffWord2005}
+end commented out text...}@Comment{End of original Ravenscar}
 
 
 @Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}

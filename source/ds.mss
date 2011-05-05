@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.52 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
+@comment{ $Revision: 1.53 $ $Date: 2011/05/03 06:34:09 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2011/04/07 06:18:37 $}
+@Comment{$Date: 2011/05/03 06:34:09 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -292,14 +292,15 @@ applies.
 interface, but it cannot be a remote types or shared passive library unit.]}
 @end{Ramification}
 
-@redundant[The various categories of library units
-and the associated restrictions are
-described in this clause and its subclauses.
-The categories are related
-hierarchically in that the library units of one category can depend
-semantically only on library units of that category or an earlier one,
-except that the body of a remote types or remote call interface library
-unit is unrestricted.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1]}
+@redundant[The various categories of library units and the associated
+restrictions are described in this clause and its subclauses. The categories are
+related hierarchically in that the library units of one category can depend
+semantically only on library units of that category or an earlier one, except
+that the body of a remote types or remote call interface library unit is
+unrestricted@Chg{Version=[3],New=[ and the declaration of a remote types or
+remote call interface library unit may depend on preelaborated normal library
+units that are mentioned only in private with clauses}],Old=[]}.
 
 @Leading@;The overall hierarchy (including declared pure) is as follows:
 @begin{Description}
@@ -309,14 +310,19 @@ pure library units;
 Shared Passive @\Can depend only on other shared passive or
     declared pure library units;
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1]}
 Remote Types @\The declaration of the library unit can depend only
     on other remote types library units,
-    or one of the above;
+    or one of the above@Chg{Version=[3],New=[, or
+    preelaborated normal library units that are mentioned
+    only in private with clauses],Old=[]};
     the body of the library unit is unrestricted;
 
-
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1]}
 Remote Call Interface @\The declaration of the library unit can depend only
-    on other remote call interfaces, or one of the above;
+    on other remote call interfaces, or one of the above@Chg{Version=[3],New=[,
+    or preelaborated normal library units that are mentioned
+    only in private with clauses],Old=[]};
     the body of the library unit is unrestricted;
 
 Normal @\Unrestricted.
@@ -355,6 +361,13 @@ Implementations are allowed to define other categorization pragmas.
   definition of heterogeneous distributed systems and goes much further than
   required.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0206-1]}
+  @ChgAdded{Version=[3],Text=[We now allow private with of preelaborated
+  units in Remote Types and Remote Call Interface units; this is documented
+  as an extension in the sections where this is defined normatively.]}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Shared Passive Library Units}
@@ -526,8 +539,11 @@ the declaration of such a library unit:
 @begin{itemize}
 @Redundant[it shall be preelaborable;]
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1]}
 it shall depend semantically only on declared pure, shared passive,
-or other remote types library units;
+@Chg{Version=[3],New=[],Old=[or ]}other remote types library
+units@Chg{Version=[3],New=[, or preelaborated normal library units that are
+mentioned only in private with clauses],Old=[]};
 
 it shall not contain the declaration of any variable
 within the visible part of the library unit;
@@ -781,6 +797,10 @@ synchronized, protected, or task interface type.]}
   be used in remote types units subject to the normal restrictions). Added
   wording to allow limited class-wide interfaces to be designated by remote
   access types.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0206-1]}
+  @ChgAdded{Version=[3],Text=[Added wording to allow private withs of
+  preelaborated normal units in the specification of a remote types unit.]}
 @end{Extend2005}
 
 
@@ -835,10 +855,13 @@ pragma Remote_Call_Interface applies.
 A subprogram declared in the visible part of such a library unit@Chg{New=[,
 or declared by such a library unit,],Old=[]} is called a @i{remote subprogram}.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1]}
 The declaration of an RCI library unit shall be preelaborable
 (see @RefSecNum{Elaboration Control}), and shall depend semantically
 only upon declared pure, shared passive,
-remote types, or other remote call interface library units.
+@Chg{Version=[3],New=[],Old=[or ]}other remote call interface library
+units@Chg{Version=[3],New=[, or preelaborated normal library units that are
+mentioned only in private with clauses],Old=[]}.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078],ARef=[AI95-00048-01]}
 @Leading@;In addition, the following restrictions apply to @Chg{New=[],Old=[the
@@ -1041,6 +1064,14 @@ be supported as an alternative to RPC.]
   they could have done (as the results could not be marshalled). Thus, it seems
   unlikely that any real programs will be impacted by this change.]}
 @end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0206-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Added wording to
+  allow private withs of preelaborated normal units in the specification of a
+  remote call interface unit.]}
+@end{Extend2005}
+
 
 
 

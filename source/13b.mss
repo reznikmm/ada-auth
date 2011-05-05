@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:37 $}
+@Comment{$Date: 2011/05/03 06:34:08 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1244,10 +1244,10 @@ to assign to the object as a whole.
 @begin{Diffword2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0054-2]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Common programming
-  techniques such as squirreling an access to a
+  techniques such as squirreling away@Defn{squirrel away} an access to a
   controlled object during initialization and using a self-referencing
-  discriminant (the so-called @lquote@;Rosen trick@rdquote) no longer
-  are immediately erroneous if the object is declared constant,
+  discriminant (the so-called @ldquote@;Rosen trick@rdquote@Defn{Rosen trick})
+  no longer are immediately erroneous if the object is declared constant,
   so these techniques can be used portably and safely. Practically,
   these techniques already worked as compilers did not take much advantage
   of this rule, so the impact of this change will be slight.]}
@@ -1872,7 +1872,7 @@ call.]}
   @ChgAdded{Version=[3],Text=[We allow Deallocate to be called anywhere that
   Allocate is, in order to allow the recovery of storage from failed allocations
   (that is, those that raise exceptions); from extended return statements that
-  exit via a goto, exit, or locally handled exception; and from objects which
+  exit via a goto, exit, or locally handled exception; and from objects that
   are reallocated when they are assigned. In each of these cases, we would have
   a storage leak if the implementation did not recover the storage (there is no
   way for the programmer to do it). We do not require such recovery, however, as
@@ -2204,13 +2204,13 @@ objects incorrectly by missing various cases.
   calls.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0116-1]}
-  @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to specify the
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to specify that the
   alignment for an @nt{allocator} with a class-wide designated type comes from
   the specific type that is allocated.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0193-1]}
   @ChgAdded{Version=[3],Text=[Added wording to allow larger
-  alignments for calls to Allocate made by an @nt{allocator}s,
+  alignments for calls to Allocate made by @nt{allocator}s,
   up to Max_Alignment_For_Allocation. This eases implementation in some cases.]}
 @end{DiffWord2005}
 
@@ -2524,7 +2524,7 @@ This is implied by the rules of @RefSecNum{Formal Access Types}.
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added a rule that using
   an access-to-protected-subprogram is erroneous if the associated
-  object no longer exists. It hard to imagine an alternative meaning here,
+  object no longer exists. It is hard to imagine an alternative meaning here,
   and this has no effect on correct programs.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0107-1]}
@@ -2742,12 +2742,15 @@ omitted at this time.>>]}
 @end{Extend2005}
 
 
-@LabeledClause{Pragma Restrictions}
+@LabeledRevisedClause{Version=[3],New=[Pragma Restrictions and Pragma Profile],Old=[Pragma Restrictions]}
 
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0246-1]}
 @redundant[A @nt{pragma} Restrictions expresses the user's intent to abide by
-certain restrictions.
-This may facilitate the construction of
+certain restrictions.@Chg{Version=[3],New=[ A @nt{pragma} Profile expresses the
+user's intent to abide by a set of Restrictions or other specified run-time
+policies.],Old=[]}
+@Chg{Version=[3],New=[This],Old=[These]} may facilitate the construction of
 simpler run-time environments.]
 @end{Intro}
 
@@ -2874,6 +2877,41 @@ restriction prior to execution of a partition to which the restriction applies,
 provided that every execution of the partition would violate the restriction.]}
 @end{ImplPerm}
 
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-00249-01],ARef=[AI05-0246-1]}
+@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[The form of a
+@nt{pragma} Profile is as follows:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Profile> (@SynI{profile_}@Syn2{identifier} {, @SynI{profile_}@Syn2{pragma_argument_association}});''}
+
+@end{Syntax}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-00249-01],ARef=[AI05-0246-1]}
+@ChgAdded{Version=[3],Text=[The @SynI{profile_}@nt{identifier} shall be the name
+of a usage profile. The semantics of any
+@SynI{profile_}@nt{pragma_@!argument_@!association}s are defined by
+the usage profile specified by the @SynI{profile_}@nt{identifier}.]}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-00249-01],ARef=[AI05-0246-1]}
+@ChgAdded{Version=[3],Text=[A profile is equivalent to the set of configuration
+pragmas that is defined for each usage profile.]}
+@end{StaticSem}
+
+@begin{Linktime}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-00249-01]}
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=[configuration pragma], Sec=(Profile)}
+@PDefn2{Term=[pragma, configuration], Sec=(Profile)}
+A @nt{pragma} Profile is a configuration pragma.
+There may be more than one @nt{pragma} Profile for a partition.]}
+@end{Linktime}
+
+
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00347-01]}
 Restrictions intended to facilitate the construction of
@@ -2902,6 +2940,13 @@ use of the more efficient and safe one.
   Pragma Restrictions is new to Ada 95.
 @end{Extend83}
 
+@begin{Extend95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-00249-01],ARef=[AI05-0246-1]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @nt{Pragma} Profile is new; it was moved here by Ada 2012 and renamed to
+  a "usage profile" but was otherwise unchanged.]}
+@end{Extend95}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0042],ARef=[AI95-00130-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the wording so that
@@ -2929,6 +2974,7 @@ use of the more efficient and safe one.
 @end{DiffWord2005}
 
 
+@Comment{TBD:---@LabeledAddedRevisedClause{Version=[3],OldVersion=[2],New=[Language-Defined Restrictions and Profiles],Old=[Language-Defined Restrictions]}}
 @LabeledAddedSubclause{Version=[2], Name=[Language-Defined Restrictions]}
 
 @begin{StaticSem}
@@ -2958,7 +3004,7 @@ restrictions are defined in the Specialized Needs Annexes):]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00257-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],
-   Sec=(No_Implementation_Attributes)}@Chg{Version=[3],New=[@Defn{No_Implementation_Pragmas restriction}],
+   Sec=(No_Implementation_Attributes)}@Chg{Version=[3],New=[@Defn{No_Implementation_Attributes restriction}],
    Old=[]}No_Implementation_Attributes @\There
    are no implementation-defined attributes. This restriction applies
    only to the current compilation or environment, not the entire partition.]}
@@ -2972,6 +3018,68 @@ restrictions are defined in the Specialized Needs Annexes):]}
   everywhere, including the runtime.],Old=[]}]}
 @end{Discussion}
 
+@Comment{The end part of this and the bullets are Redundant, but that would
+cause bad nesting, so we don't mark it}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0246-1]}
+@ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
+   Sec=(No_Implementation_Identifiers)}@Defn{No_Implementation_Identifiers restriction}No_Implementation_Identifiers
+   @\There are no usage names that denote declarations with
+   implementation-defined identifiers that occur within language-defined
+   packages. Such identifiers can arise as follows:]}
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The following language-defined
+  packages allow implementation-defined identifiers:]}
+
+  @begin{InnerItemize}
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[package System (see
+      @RefSecNum{The Package System});]}
+
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[package Standard (see
+      @RefSecNum{The Package Standard});]}
+
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[package Ada.Command_Line (see
+      @RefSecNum{The Package Command_Line}).]}
+  @end{InnerItemize}
+
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The following language-defined
+  packages contain only implementation-defined identifiers:]}
+
+  @begin{InnerItemize}
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[package System.Machine_Code (see
+    @RefSecNum{Machine Code Insertions});]}
+
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[package Ada.Directories.Information (see
+    @RefSecNum{The Package Directories});]}
+
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[nested Implementation packages of the Queue
+    containers (see @RefSecNum{The Generic Package Containers.Unbounded_Synchronized_Queues}-31);]}
+
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[package Interfaces (
+      @RefSecNum{The Package Interfaces});]}
+
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[package Ada.Interrupts.Names (see
+      @RefSecNum{The Package Interrupts}).]}
+
+  @end{InnerItemize}
+
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],NoPrefix=[T],Text=[For package Standard,
+Standard.Long_Integer and Standard.Long_Float are considered language-defined
+identifiers, but identifiers such as Standard.Short_Short_Integer are considered
+implementation-defined.]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00257-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],
    Sec=(No_Implementation_Pragmas)}@Chg{Version=[3],New=[@Defn{No_Implementation_Pragmas restriction}],
@@ -2982,8 +3090,7 @@ restrictions are defined in the Specialized Needs Annexes):]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0242-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
-   Sec=(No_Implementation_Units)}@Chg{Version=[3],New=[@Defn{No_Implementation_Units restriction}],
-   Old=[]}No_Implementation_Units @\There
+   Sec=(No_Implementation_Units)}@Defn{No_Implementation_Units restriction}No_Implementation_Units @\There
    is no mention in the @nt{context_clause} of any implementation-defined
    descendants of packages Ada, Interfaces, or System. This restriction applies
    only to the current compilation or environment, not the entire partition.]}
@@ -3031,8 +3138,8 @@ language defined:]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0242-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
-   Sec=(No_Specification_of_Aspect)}@Chg{Version=[3],New=[@Defn{No_Specification_of_Aspect restriction}],
-   Old=[]}No_Specification_of_Aspect @\Identifies an aspect for which no
+   Sec=(No_Specification_of_Aspect)}@Defn{No_Specification_of_Aspect restriction}No_Specification_of_Aspect
+   @\Identifies an aspect for which no
    @nt{aspect_specification}, @nt{attribute_definition_clause}, or @nt{pragma}
    is given.]}
 
@@ -3086,6 +3193,35 @@ depend semantically on the library unit identified by the
 
 @end{LinkTime}
 
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0246-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The following
+@SynI{profile_}@nt{identifier} is language defined:]}
+
+@begin{Description}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0246-1]}
+@ChgAdded{Version=[3],Text=[@Defn2{Term=[profile],Sec=(No_Implementation_Extensions)}No_Implementation_Extensions @\]}
+
+@end{Description}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0246-1]}
+@ChgAdded{Version=[3],Text=[For usage profile No_Implementation_Extensions,
+there shall be no @SynI{profile_}@nt{pragma_argument_association}s.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0246-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The No_Implementation_Extensions
+usage profile is equivalent to the following restrictions:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[No_Implementation_Aspect_Specifications,
+No_Implementation_Attributes,
+No_Implementation_Identifiers,
+No_Implementation_Pragmas,
+No_Implementation_Units.]}
+@end{Example}
+@end{StaticSem}
+
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00257-01],ARef=[AI95-00368-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
@@ -3097,10 +3233,13 @@ depend semantically on the library unit identified by the
 @end{Extend95}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0241-1],ARef=[AI05-0242-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0241-1],ARef=[AI05-0242-1],ARef=[AI05-0246-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
-  Restrictions No_Implementation_Aspect_Specifications, No_Implementation_Units,
-  and No_Specification_of_Aspect are new.]}
+  Restrictions No_Implementation_Aspect_Specifications, No_Implementation_Identifiers,
+  No_Implementation_Units, and No_Specification_of_Aspect are new.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0246-1]}
+  @ChgAdded{Version=[3],Text=[Profile No_Implementation_Extensions is new.]}
 @end{Extend2005}
 
 
@@ -4110,7 +4249,7 @@ exist in the partition at the time of the call, execution is erroneous.]}
   @ChgAdded{Version=[3],Text=[If @i<T> is a discriminated type and its
   discriminants have defaults then in two cases an execution of the default
   implementation of S'Read is not required to create an anonymous object of
-  type @i<T>: If the discriminants values that are read in are equal to the
+  type @i<T>: If the discriminant values that are read in are equal to the
   corresponding discriminant values of @i<Item>, then no object of type @i<T>
   need be created and @i<Item> may be used instead. If they are not equal and
   @i<Item> is a constrained variable, then Constraint_Error may be raised at
@@ -4137,7 +4276,7 @@ exist in the partition at the time of the call, execution is erroneous.]}
     unconstrained object.]}
 
     @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[The discriminant values which S'Read would
+    @ChgAdded{Version=[3],Text=[The discriminant values that S'Read would
     normally have read from the stream are read from Item instead.]}
 
     @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -5016,7 +5155,7 @@ is frozen.],Old=[]}]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0019-1]}
   @ChgAdded{Version=[3],Text=[The second sentence is the rule that makes
   it possible to check that only subprograms with convention Ada are
-  specified in @nt{attribute_definition_clause}s without going through hoops.]}
+  specified in @nt{attribute_definition_clause}s without jumping through hoops.]}
 @end{Discussion}
 @end{Itemize}
 

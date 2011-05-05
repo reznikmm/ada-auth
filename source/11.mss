@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:37 $}
+@Comment{$Date: 2011/05/03 06:34:08 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -683,7 +683,7 @@ about the exception occurrence.
 Reraise_Occurrence reraises the specified exception occurrence.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01],ARef=[AI95-00378-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0043-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0043-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[2],Text=[Exception_Message returns the message associated
 with the given Exception_Occurrence. For an occurrence raised by a call to
 Raise_Exception, the message is the Message parameter passed to Raise_Exception.
@@ -694,7 +694,8 @@ the @Syni{string_}@nt{expression}. For the occurrence raised by a
 an @Syni{exception_}@nt{name} but without a @Syni{string_}@nt{expression},
 the message is a string giving implementation-defined information about the
 exception occurrence. @Chg{Version=[3],New=[For an occurrence originally raised
-for some other reason, the message is an unspecified
+in some other manner (including by the failure of a language-defined check),
+the message is an unspecified
 string.@PDefn{unspecified} ],Old=[]}In all cases, Exception_Message
 returns a string with lower bound 1.]}
 @ImplDef{The information returned by Exception_Message.}
