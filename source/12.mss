@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2011/05/03 06:34:08 $}
+@Comment{$Date: 2011/05/05 07:27:41 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.79 $}
+@Comment{$Revision: 1.80 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2177,18 +2177,28 @@ A formal derived tagged type is a private extension.
 word @key(abstract) appears in its declaration.]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00233-01]}
-If the ancestor type is a composite type that is not an
-array type, the formal type inherits components from the ancestor
-type (including
-discriminants if a new @nt<discriminant_part> is not specified),
-as for a derived type defined by a @nt<derived_type_definition>
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0110-1]}
+@Chg{Version=[3],New=[For a formal derived type, the characteristics],Old=[If
+the ancestor type is a composite type that is not an array type, the formal type
+inherits components from the ancestor type]} (including
+@Chg{Version=[3],New=[components, but excluding ],Old=[]}discriminants if
+@Chg{Version=[3],New=[there is ],Old=[]}a new @nt<discriminant_part>
+@Chg{Version=[3],New=[],Old=[is not ]}specified),
+@Chg{Version=[3],New=[predefined operators,
+and inherited user-defined primitive subprograms are determined
+by its ancestor type and its progenitor types (if any), in the
+same way that those of],Old=[as for]}
+a derived type
+@Chg{Version=[3],New=[are determined by those of its parent type and its
+progenitor types],Old=[defined by a @nt<derived_type_definition>]}
 (see @RefSecNum(Derived Types and Classes)@Chg{Version=[2],New=[ and
 @RefSecNum{Private Operations}],Old=[]}).
 
+
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0038],ARef=[AI95-00202]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00233-01],ARef=[AI95-00401-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0029-1]}
-For a formal derived type,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0029-1],ARef=[AI05-0110-1]}
+@Chg{Version=[3],New=[],Old=[For a formal derived type,
 the predefined operators and inherited user-defined subprograms are determined
 by the ancestor type@Chg{Version=[2],New=[ and any progenitor types],Old=[]}, and
 are implicitly declared at the earliest place, if any,
@@ -2196,8 +2206,11 @@ are implicitly declared at the earliest place, if any,
 Old=[within the immediate scope of]} the formal
 type@Chg{Version=[2],New=[ is declared],Old=[]}, where the corresponding
 primitive subprogram of the ancestor @Chg{Version=[2],New=[or progenitor
-],Old=[]}is visible (see @RefSecNum{Private Operations}). In an instance, the
-copy of such an implicit declaration declares a view of the corresponding
+],Old=[]}is visible (see @RefSecNum{Private Operations}). ]}In an instance,
+the
+copy of @Chg{Version=[3],New=[],Old=[such ]}an implicit declaration
+@Chg{Version=[3],New=[of a primitive subprogram of a formal derived type ],
+Old=[]}declares a view of the corresponding
 primitive subprogram of the ancestor@Chg{New=[@Chg{Version=[2], New=[ or
 progenitor],Old=[]} of the formal derived type],Old=[]}, even if this primitive
 has been overridden for the actual type@Chg{Version=[3],New=[ and even if it is
@@ -2437,6 +2450,13 @@ run-time check to a compile-time check.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Fixed hole that failed
   to define what happened for "=" for an untagged private type whose
   actual is class-wide.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0110-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Revised the wording for
+  inheritance of characteristics and operations of formal derived types
+  to be reuse the rules as defined for derived types; this should eliminate
+  holes which have plagued us with this wording (it has been changed five
+  times since Ada 95 was defined).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0237-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added missing rule for the
@@ -3103,39 +3123,60 @@ is analogous to a renaming-as-declaration,
 and the actual is analogous to the renamed view.
 @end{Discussion}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0071-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0071-1],ARef=[AI05-0131-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[If a @nt{subtype_mark} in the profile
+of the @nt{formal_subprogram_declaration} denotes a formal private or formal
+derived type and the actual type for this formal type is a class-wide type
+@i{T}'Class, then for the purposes of resolving the corresponding actual
+subprogram at the point of the instantiation, certain implicit declarations may
+be available as possible resolutions as follows:]}
+
+@begin{DescribeCode}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[For each primitive subprogram of @i{T} that is
+  directly visible at the point of the instantiation, and that has at least one
+  controlling formal parameter, a corresponding implicitly declared subprogram
+  with the same defining name, and having the same profile as the primitive
+  subprogram except that @i{T} is systematically replaced by @i{T}'Class in the
+  types of its profile, is potentially use-visible. The body of such a
+  subprogram is as defined in @RefSecNum{Formal Private and Derived Types} for
+  primitive subprograms of a formal type when the actual type is class-wide.]}
+@end{DescribeCode}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1],ARef=[AI05-0131-1]}
+  @ChgAdded{Version=[3],Text=[This gives the same capabilities to formal
+  subprograms as those that primitive operations of the formal type have
+  when the actual type is class-wide. We do not want to discourage the use of
+  explicit declarations for (formal) subprograms!]}
+@end{Reason}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1],ARef=[AI05-0131-1]}
+  @ChgAdded{Version=[3],Text=[Although the above wording seems to require
+  constructing implicit versions of all of the primitive subprograms of type @i{T},
+  it should be clear that a compiler only needs to consider those that could
+  possibly resolve to the corresponding actual subprogram. For instance, if the
+  formal subprogram is a procedure with two parameters, and the actual
+  subprogram name is Bar (either given explicitly or by default), the compiler
+  need not consider primitives that are functions, that have the wrong number of
+  parameters, that have defining names other than Bar, and so on; thus it does
+  not need to construct implicit declarations for those primitives.]}
+@end{ImplNote}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1],ARef=[AI05-0131-1]}
+  @ChgAdded{Version=[3],Text=[Functions that only have a controlling result
+  and do not have a controlling parameter of @i<T> are not covered by this
+  rule, as any call would be required to raise Program_Error by
+  @RefSecNum{Formal Private and Derived Types}. It is better to detect the
+  error earlier than at runtime.]}
+@end{Ramification}
+
 If a generic unit has a @nt<subprogram_default> specified by a box, and
 the corresponding actual parameter is omitted, then it is equivalent to
 an explicit actual parameter that is a usage name identical to the
-defining name of the formal.@Chg{Version=[3],New=[ If a @nt<subtype_mark> in the
-profile of the @nt<formal_subprogram_declaration> denotes a formal private or
-formal derived type and the actual type for this formal type is a class-wide
-type @i<T>'Class, then for the purposes of resolving this @nt<default_name> at
-the point of the instantiation, for each primitive subprogram of @i<T> that has
-a matching defining name, that is directly visible at the point of the
-instantiation, and that has at least one controlling formal parameter, a
-corresponding subprogram with the same defining name is directly visible, but
-with @i<T> systematically replaced by @i<T>'Class in the types of its profile.
-The body of such a subprogram is as defined in
-@RefSecNum{Formal Private and Derived Types} for primitive subprograms
-of a formal type when the actual type is class-wide.],Old=[]}
-
-@begin{Reason}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1]}
-@ChgAdded{Version=[3],Text=[This gives the same capabilities for formal
-subprograms that primitive operations of the formal type have when the
-actual type is class-wide. We do not want to discourage the use of
-explicit declarations for subprograms!]}
-@end{Reason}
-
-@begin{Ramification}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1]}
-@ChgAdded{Version=[3],Text=[Functions that only have a controlling result
-and do not have a controlling parameter of @i<T> are not covered by this
-rule, as any call would be required to raise Program_Error by
-@RefSecNum{Formal Private and Derived Types}. It is better to detect the
-error earlier than runtime.]}
-@end{Ramification}
+defining name of the formal.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00348-01]}
 @ChgAdded{Version=[2],Text=[If a generic unit has a @nt{subprogram_default}
@@ -3267,21 +3308,22 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.]}
 @end{Diffword95}
 
 @begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1],ARef=[AI05-0131-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:>
+  Added construction of implicit subprograms for primitives of class-wide actual
+  types, to make it possible to import subprograms via formal subprograms as
+  well as by implicit primitive operations of a formal type. (This is a
+  @b<Correction> as it is very important for the usability of indefinite
+  containers when instantiated with class-wide types; thus we want Ada 2005
+  implementations to support it.)]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
-  An optional @nt{aspect_specification} can be used in
-  a @nt{formal_concrete_subprogram_declaration} and a
+  @ChgAdded{Version=[3],Text=[An optional @nt{aspect_specification} can be
+  used in a @nt{formal_concrete_subprogram_declaration} and a
   @nt{formal_abstract_subprogram_declaration}.
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
 
-@begin{Diffword2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1]}
-  @ChgAdded{Version=[3],Text=[@b<Correction:> Added matching rules for
-  box formal subprograms for class-wide actual types, to make it
-  possible to import subprograms via formal subprograms as well as
-  by implicit primitive operations of a formal type.]}
-@end{Diffword2005}
 
 
 @LabeledClause{Formal Packages}

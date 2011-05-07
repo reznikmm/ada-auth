@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2011/02/08 05:38:55 $}
+@Comment{$Date: 2011/05/05 07:27:41 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.109 $}
+@Comment{$Revision: 1.110 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -932,7 +932,7 @@ available to outside program units;
 the declaration of the full view together with
 the private part define other operations whose direct use is
 possible only within the declarative region of the package itself.
-@Defn{characteristics}
+@PDefn{characteristics}
 Moreover, within the scope of the declaration of the full view, the
 @i{characteristics} of the type are determined by the full view;
 in particular, within its scope, the full view determines
@@ -942,19 +942,28 @@ what attributes and other predefined operations are allowed,
 and whether the first subtype is static.
 See @RefSecNum{Private Operations}.
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401]}
-A private extension inherits components (including
-discriminants unless there is a new @nt<discriminant_part>
-specified) and user-defined primitive
-subprograms from its ancestor type@Chg{Version=[2],New=[ and its progenitor
-types (if any)],Old=[]}, in the same way that
-a record extension inherits components and user-defined primitive
-subprograms from its parent type@Chg{Version=[2],New=[ and its progenitor
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00401-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0110-1]}
+@Chg{Version=[3],New=[For a],Old=[A]}
+private extension@Chg{Version=[3],New=[, the characteristics],
+Old=[inherits components]} (including
+@Chg{Version=[3],New=[components, but excluding ],Old=[]}discriminants
+@Chg{Version=[3],New=[if],Old=[unless]} there is a new @nt<discriminant_part>
+specified)@Chg{Version=[3],New=[, predefined operators,],Old=[]} and
+@Chg{Version=[3],New=[inherited ],Old=[]}user-defined primitive
+subprograms @Chg{Version=[3],New=[are determined
+by],Old=[from]} its ancestor type@Chg{Version=[2],New=[ and its progenitor
+types (if any)],Old=[]}, in the same way that@Chg{Version=[3],New=[ those
+of],Old=[]} a record extension @Chg{Version=[3],New=[are determined
+by those of its ancestor],Old=[inherits components and user-defined primitive
+subprograms from its parent]} type@Chg{Version=[2],New=[ and its progenitor
 types],Old=[]}
-(see @RefSecNum{Derived Types and Classes}).
+(see @RefSecNum{Derived Types and Classes}@Chg{Version=[3],New=[ and
+@RefSecNum{Private Operations}],Old=[]}).
 @begin{Honest}
-If an operation of the parent type is abstract,
-then the abstractness of the inherited operation
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0110-1]}
+If an operation of the @Chg{Version=[3],New=[ancestor or],Old=[]} parent type
+is abstract, then the abstractness of the inherited operation
 is different for nonabstract record extensions
 than for nonabstract private extensions
 (see @RefSecNum{Abstract Types and Subprograms}).
@@ -1137,6 +1146,13 @@ completely defined, unless the derived type is a private extension.
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
 
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0110-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> The description of how a
+  private extension inherits characteristics was made consistent with the
+  way formal derived types inherit characteristics (see
+  @RefSecNum{Formal Private and Derived Types}).]}
+@end{DiffWord2005}
 
 
 

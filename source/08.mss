@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2011/02/16 06:16:28 $}
+@Comment{$Date: 2011/05/05 07:27:41 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1807,6 +1807,12 @@ at this place if the declaration of the entity is visible at this place:],Old=[]
   which helps avoid breaking the generic contract model.
   @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0131-1]}
+@ChgAdded{Version=[3],Text=[Certain implicit declarations may become
+potentially use-visible in certain contexts as described in
+@RefSecNum{Formal Subprograms}.]}
+
+
 @leading@Defn{use-visible}
 @Defn2{Term=[visibility],Sec=(use clause)}
 A declaration is @i{use-visible} if it is potentially use-visible,
@@ -1921,6 +1927,13 @@ potentially use-visible.
   @key[use all type] version of the @nt{use_type_clause} is new to Ada 2012.
   It works similarly to prefixed views.]}
 @end{Extend2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0131-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to allow other
+  declarations to be potentially use-visible, to support corrections to
+  formal subprograms.]}
+@end{DiffWord2005}
 
 
 

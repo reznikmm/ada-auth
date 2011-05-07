@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:36 $}
+@Comment{$Date: 2011/05/05 07:27:41 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.104 $}
+@Comment{$Revision: 1.105 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -2758,7 +2758,18 @@ of the derived type.
 @ChgAdded{Version=[2],Text=[The first subtype of the derived type excludes null
 (see @RefSecNum{Access Types}) if and only if the parent subtype excludes null.]}
 
-@Leading@keepnext@;The characteristics of the derived type are defined as follows:
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0110-1]}
+@Leading@keepnext@;The @Chg{Version=[3],New=[@i{characteristics}@PDefn{characteristics}
+and implicitly declared primitive subprograms],Old=[characteristics]} of the
+derived type are defined as follows:
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0110-1]}
+  @ChgAdded{Version=[3],Text=[The characteristics of a type do not include its
+  primitive subprograms (primitive subprograms include predefined operators).
+  The rules governing availability/visibility and inheritance of characteristics
+  are separate from those for primitive subprograms.]}
+@end{Ramification}
+
 @begin(itemize)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00401-01],ARef=[AI95-00442-01]}
 @Chg{Version=[2],New=[@Redundant[If the parent type or a progenitor type
@@ -3300,6 +3311,12 @@ These concepts are similar, but not the same.
 @end{Incompatible2005}
 
 @begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0110-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to clarify that
+  the characteristics of derived types are formally defined here. (This is the
+  only place in the Standard that actually spells out what sorts of things
+  are actually characteristics, which is rather important.)]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0164-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to ensure that
   anonymous access-to-subprogram types don't get modified on derivation.]}
