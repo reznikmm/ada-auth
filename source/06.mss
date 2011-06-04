@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:36 $}
+@Comment{$Date: 2011/05/07 03:43:08 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.109 $}
+@Comment{$Revision: 1.110 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -477,6 +477,241 @@ The syntax rules for @nt{defining_designator} and
   @ChgAdded{Version=[3],Text=[Added expression functions (see
   @RefSecNum{Expression Functions}) to the wording.]}
 @end{DiffWord2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[Preconditions and Postconditions]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a subprogram or entry, the
+following language-defined aspects may be specified with an
+@nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
+
+@begin{Description}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Pre@\This aspect
+  specifies a precondition for a callable entity; it shall
+  be specified by an @nt{expression}, called a
+  @i<precondition expression>.@Defn{precondition expression}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Pre'Class@\This aspect
+  specifies a precondition for a callable entity and its
+  descendants; it shall be specified by an @nt{expression}, called a
+  @i<precondition expression>.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Post@\This aspect
+  specifies a postcondition for a callable entity; it shall be specified by an
+  @nt{expression}, called a @i<postcondition
+  expression>.@Defn{postcondition expression}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Post'Class@\This aspect
+  specifies a postcondition for a callable entity and its descendants;
+  it shall be specified by an @nt{expression}, called a @i<postcondition
+  expression>.]}
+@end{Description}
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgAdded{Version=[3],Text=[The expected type for a precondition or
+postcondition expression is any boolean type.@PDefn2{Term=[expected type],
+Sec=(precondition expression)}@PDefn2{Term=[expected type],
+Sec=(postcondition expression)}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgAdded{Version=[3],Text=[Within the expression for a Pre'Class or Post'Class aspect for a primitive
+subprogram of a tagged type @i<T>, a name that denotes a formal parameter of type
+@i<T> is interpreted as having type @i<T>'Class. Similarly, a name that denotes a
+formal access parameter of type access-to-@i<T> is interpreted as having type
+access-to-@i<T>'Class. @Redundant[This ensures the expression is
+well-defined for a primitive subprogram of a type descended from @i<T>.]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgAdded{Version=[3],Text=[For an attribute_reference with attribute_designator
+Old, if the attribute reference has an expected type or shall resolve to a given
+type, the same applies to the @nt{prefix}; otherwise the @nt{prefix} shall be
+resolved independently of context.]}
+
+@end{Resolution}
+
+@begin{Legality}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0230-1]}
+@ChgAdded{Version=[3],Text=[The Pre or Post aspect shall not be specified for an
+abstract subprogram or a null procedure. @Redundant[Only the Pre'Class and
+Post'Class aspects may be specified for such a subprogram.]]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[Pre'Class and Post'Class can only be specified
+  on primitive routines of tagged types, by a blanket rule found in
+  @RefSecNum{Aspect Specifications}.]}
+@end{Discussion}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgAdded{Version=[3],Text=[If a Pre'Class or Post'Class aspect is specified for
+a primitive subprogram of a tagged type @i<T>, then the associated expression
+also applies to the corresponding primitive subprogram of each descendant of
+@i<T>.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} X that
+denotes an object of a nonlimited type}, the following attribute is defined:]}
+@begin(description)
+@ChgAttribute{Version=[3],Kind=[AddedNormal],ChginAnnex=[T],
+  Leading=<F>, Prefix=<X>, AttrName=<Old>, ARef=[AI05-0145-2],
+  Text=[@Chg{Version=[3],New=[Denotes the value of X at the beginning of the
+  execution of the subprogram or entry. For each X'Old in a postcondition
+  expression that is enabled, a constant is implicitly declared at the beginning
+  of the subprogram or entry, of the type of X, initialized to X. The value of
+  X'Old in the postcondition expression is the value of this constant. The type
+  of X'Old is the type of X. These implicit declarations occur in an arbitrary
+  order.],Old=[]}]}@Comment{End of Annex text here.}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],NoPrefix=[T],Text=[Use of this attribute is allowed only
+  within a postcondition expression.]}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=<The @nt{prefix} X can be any
+  nonlimited object that obeys the syntax for prefix. Useful cases are: the name
+  of a formal parameter of mode [@key[in]] @key[out], the name of a global
+  variable updated by the subprogram, a function call passing those as
+  parameters, a subcomponent of those things, etc.>}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[A qualified expression can be used to make an
+  arbitrary expression into a valid prefix, so T'(X + Y)'Old is legal, even
+  though (X + Y)'Old is not. The value being saved here is the sum of X and Y (a
+  function result is an object). Of course, in this case "+"(X, Y)'Old is also
+  legal, but the qualified expression is arguably more readable.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Note that F(X)'Old and F(X'Old) are not
+  necessarily equal. The former calls F(X) and saves that value for later use
+  during the postcondition. The latter saves the value of X, and during the
+  postcondition, passes that saved value to F. In most cases, the former is what
+  one wants.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If X has controlled parts, adjustment and
+  finalization are implied by the implicit constant declaration.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If postconditions are disabled, we want the
+  compiler to avoid any overhead associated with saving 'Old values.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=['Old makes no sense for limited types, because its
+  implementation involves copying. It might make semantic sense to allow
+  build-in-place, but it's not worth the trouble.]}
+
+@end{Discussion}
+@end(description)
+@EndPrefixType{}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} F that
+denotes a function declaration}, the following attribute is defined:]}
+@begin(description)
+@ChgAttribute{Version=[3],Kind=[AddedNormal],ChginAnnex=[T],
+  Leading=<F>, Prefix=<F>, AttrName=<Result>, ARef=[AI05-0145-2],
+  Text=[@Chg{Version=[3],New=[Within a postcondition expression for function F,
+  denotes the result object of the function. The type of this attribute is that
+  of the function result except within a Post'Class postcondition expression for
+  a function with a controlling result or with a controlling access result. For
+  a controlling result, the type of the attribute is @i<T>'Class, where @i<T> is
+  the function result type. For a controlling access result, the type of the
+  attribute is an anonymous access type whose designated type is @i<T>'Class,
+  where @i<T> is the designated type of the function result type. Use of this
+  attribute is allowed only within a postcondition expression
+  for F.],Old=[]}]}@Comment{End of Annex text here.}
+@end(description)
+@EndPrefixType{}
+@end{StaticSem}
+
+@begin{Runtime}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgAdded{Version=[3],Text=[If one or more precondition expressions apply to a
+subprogram or entry, and the Assertion_Policy (see
+@RefSecNum{Pragmas Assert and Assertion_Policy}) in effect at the point of the
+subprogram or entry declaration is Check, then upon a call of the subprogram or
+entry, after evaluating any actual parameters, a precondition check is
+performed. This begins with the evaluation of the precondition expressions that
+apply to the subprogram or entry. If and only if all the precondition
+expressions evaluate to False, Ada.Assertions.Assertion_Error is raised. The
+order of performing the checks is not specified, and if any of the precondition
+expressions evaluate to True, it is not specified whether the other precondition
+expressions are evaluated. It is not specified whether any check for elaboration
+of the subprogram body is performed before or after the precondition check. It
+is not specified whether in a call on a protected operation, the check is
+performed before or after starting the protected action. For a task or protected
+entry call, the check is performed prior to checking whether the entry is
+open.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgAdded{Version=[3],Text=[If one or more postcondition expressions apply to a
+subprogram or entry, and the Assertion_Policy in effect at the point of the
+subprogram or entry declaration is Check, then upon successful return from a
+call of the subprogram or entry, prior to copying back any by-copy @key[in out]
+or @key[out] parameters, a postcondition check is performed. This consists of
+the evaluation of the postcondition expressions that apply to the subprogram or
+entry. If any of the postcondition expressions evaluate to False, then
+Ada.Assertions.Assertion_Error is raised. The order of performing the checks is
+not specified, and if one of them evaluates to False, it is not specified
+whether the other postcondition expressions are evaluated. It is not specified
+whether any constraint checks associated with copying back @key[in out] or
+@key[out] parameters are performed before or after the postcondition check.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgAdded{Version=[3],Text=[If a precondition or postcondition check fails, the
+exception is raised at the point of the call. @Redundant[The exception cannot
+be handled inside the called subprogram.]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgAdded{Version=[3],Text=[For a dispatching call or a call via an
+access-to-subprogram value, the precondition or postcondition check performed is
+determined by the subprogram actually invoked. @Redundant[Note that for a
+dispatching call, if there is a Pre'Class aspect that applies to the subprogram
+named in the call, then if the precondition expression for that aspect evaluates
+to True, the precondition check for the call will succeed.]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgAdded{Version=[3],Text=[If the Assertion_Policy in effect at the point of a
+subprogram or entry declaration is Ignore, then no precondition or postcondition
+check is performed on a call on that subprogram or entry. If the
+Assertion_Policy in effect at the point of a subprogram or entry declaration is
+Check, then preconditions and postconditions are considered to be @i<enabled>
+for that subprogram or entry.@Defn2{Term=[enabled],Sec=[precondition]}@Defn2{Term=[enabled],Sec=[postcondition]}]}
+@end{Runtime}
+
+@begin{Bounded}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+It is a bounded error to invoke a potentially blocking operation (see
+@RefSecNum{Protected Subprograms and Protected Actions}) during the evaluation
+of a precondition or postcondition expression. If the bounded error is detected,
+Program_Error is raised. If not detected, execution proceeds normally, but if it
+is invoked within a protected action, it might result in deadlock or a (nested)
+protected action.]}
+@end{Bounded}
+
+@begin{Notes}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+  @ChgAdded{Version=[3],Text=[A precondition is checked just before the call. If
+  another task can change any value that the precondition expression depends on,
+  the precondition may not hold within the subprogram or entry body.]}
+@end{Notes}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0230-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Pre and Post aspects are new.]}
+@end{Extend2005}
+
 
 
 @LabeledClause{Formal Parameter Modes}
@@ -1862,9 +2097,9 @@ being passed as an @b(out) parameter.
 will ensure at the call site that a part of the parameter can be returned as
 part of the function result without creating a dangling pointer. We do this with
 accessibility checks at the call site that all actual objects of explicitly
-aliased parameters live as long as the function result; then we can allow them
-to be returned as access discriminants or anonymous access results, as those
-have the master of the function result as well.]}
+aliased parameters live at least as long as the function result; then we can
+allow them to be returned as access discriminants or anonymous access results,
+as those have the master of the function result.]}
 @end{MetaRules}
 
 @begin{Resolution}
@@ -2328,6 +2563,28 @@ the formal parameter object is created, and:
   is always initialized with a @lquotes@;reasonable@rquotes@; value.
 @end{Reason}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
+@ChgAdded{Version=[3],Text=[For a scalar type that has the Default_Value aspect
+specified, the formal parameter is initialized from the value of the actual,
+without checking that the value satisfies any constraint;]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This preserves the @MetaRulesName that all objects
+  of a type with an implicit initial value are initialized. This is important so
+  that a programmer can guarantee that all objects of a scalar type have a valid
+  value with a carefully chosen Default_Value.]}
+@end{Reason}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This rule means that @b<out> parameters of a
+  subtype @i<T> with a specified Default_Value need to be large enough to
+  support any possible value of the base type of @i<T>. In contrast, a type that
+  does not have a Default_Value only need support the size of the subtype (since
+  no values are passed in).]}
+@end{ImplNote}
+
   For a composite type with discriminants or
   that has implicit initial values for any subcomponents
   (see @RefSecNum{Object Declarations}),
@@ -2352,9 +2609,10 @@ the formal parameter object is created, and:
   view conversion. If elementary, the actual subtype of the formal
   is given by its nominal subtype.
 @begin{Ramification}
-  This case covers scalar types, and composite types whose
-  subcomponent's subtypes do not have any implicit initial
-  values.
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0228-1]}
+  This case covers scalar types@Chg{Version=[3],New=[ that do not have
+  Default_Value specified],Old=[]}, and composite types whose
+  subcomponent's subtypes do not have any implicit initial values.
   The view conversion for composite types ensures that if the lengths
   don't match between an actual and a formal array parameter,
   the Constraint_Error is raised before the call, rather than after.

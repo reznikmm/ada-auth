@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/03/12 08:07:37 $}
+@Comment{$Date: 2011/05/07 03:43:08 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 
 @LabeledClause{Array Types}
 
@@ -281,6 +281,56 @@ and the elaboration of the
 @nt{component_@!definition} are performed in an arbitrary order.
 @end{RunTime}
 
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For an array type with a
+scalar component type, the following language-defined representation aspect
+may be specified with an @nt{aspect_specification} (see
+@RefSecNum{Aspect Specifications}):]}
+@begin{Description}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Default_Component_Value@\This aspect
+shall be specified by a static expression, and that
+expression shall be explicit, even if the aspect has a boolean type.
+Default_Value shall be specified only on a @nt{full_type_declaration}.]}
+@end{Description}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The part about requiring an explicit expression is
+  to disallow omitting the value for this aspect, which would otherwise be
+  allowed by the rules of @RefSecNum{Aspect Specifications}.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is a representation attribute in order to
+  disallow specifying it on a derived type that has inherited primitive
+  subprograms; that is necessary as the sizes of @key[out] parameters could be
+  different whether or not a Default_Value is specified (see
+  @RefSecNum{Parameter Associations}).]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
+@ChgAdded{Version=[3],Text=[If a derived type with no primitive subprograms
+inherits a boolean Default_Value aspect, the aspect may be specified to have any
+value for the derived type.]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is override the
+  @RefSecNum{Aspect Specifications} rule that says that a boolean aspect
+with a value True cannot be changed.]}
+@end{Reason}
+@end{StaticSem}
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
+@ChgAdded{Version=[3],Text=[The expected type for the @nt{expression}
+specified for the Default_Value aspect is the type defined by the
+@nt{full_type_declaration} on which it appears.]}
+@end{Resolution}
+
+
+
+
+
 @begin{Notes}
 All components of an array have the same subtype. In particular, for an array
 of components that are one-dimensional arrays, this means that all components
@@ -381,6 +431,13 @@ RM83-3.7.
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Added wording to allow
   the elaboration of per-object constraints for constrained arrays.]}
 @end{DiffWord95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0228-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  The new aspect Default_Component_Value allows defining implicit initial
+  values (see @RefSecNum{Object Declarations}) for arrays of scalar types.]}
+@end{Extend2005}
 
 
 @LabeledSubClause{Index Constraints and Discrete Ranges}
@@ -2350,8 +2407,8 @@ parallel those for case statements.
 
 @Syn{lhs=<discrete_choice_list>,rhs="@Syn2{discrete_choice} {| @Syn2{discrete_choice}}"}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
-@Syn{lhs=<discrete_choice>,rhs="@Chg{Version=[3],New=[@Syn2{choice_expression}],Old=[@Syn2{expression}]} | @Syn2{discrete_range} | @key{others}"}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0158-1]}
+@Syn{lhs=<discrete_choice>,rhs="@Chg{Version=[3],New=[@Syn2{choice_expression}],Old=[@Syn2{expression}]} | @Chg{Version=[3],New=[@SynI{discrete_}@Syn2{subtype_indication} | @Syn2{range}],Old=[@Syn2{discrete_range}]} | @key{others}"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -2379,7 +2436,9 @@ be of a discrete type.
 It shall not be of an access type,
   named or anonymous.@end{ramification}
 
-The @nt{expression}s and @nt{discrete_range}s given as
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
+The @Chg{Version=[3],New=[@nt{choice_expression}s, @nt{subtype_indication}s,
+and @nt{range}s],Old=[@nt{expression}s and @nt{discrete_range}s]} given as
 @nt{discrete_choice}s in a @nt{variant_part} shall be static.
 The @nt{discrete_choice} @key(others) shall appear alone
 in a @nt{discrete_choice_list}, and such a @nt{discrete_choice_list},
@@ -2393,7 +2452,14 @@ following cases:
   the value equals the value of the @nt{expression}
   converted to the expected type.
 
-  A @nt{discrete_choice} that is a @nt{discrete_range} covers all values
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3]}
+  @ChgAdded{Version=[3],Text=[A @nt{discrete_choice} that is a
+  @nt{subtype_indication} covers all values (possibly none) that belong to the
+  subtype.]}
+
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
+  A @nt{discrete_choice} that is a
+  @Chg{Version=[3],New=[@nt{range}],Old=[@nt{discrete_range}]} covers all values
   (possibly none) that belong to the range.
 
   The @nt{discrete_choice} @key{others} covers all values of its
@@ -2417,14 +2483,17 @@ its @nt{discrete_choice}s covers the value.
 @Leading@keepnext@;The possible values of the discriminant of a @nt{variant_part}
 shall be covered as follows:
 @begin{itemize}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0188-1]}
   If the discriminant is of a static constrained scalar
   subtype@Chg{Version=[3],New=[],Old=[,]}
   then@Chg{Version=[3],New=[, except within an instance of a generic
   unit,],Old=[]} each non-@key{others} @nt{discrete_@!choice} shall cover
-  only values in that subtype, and each value of that subtype shall be covered
+  only values in that subtype@Chg{Version=[3],New=[ that satisfy the
+  predicate],Old=[]}, and each value of that subtype @Chg{Version=[3],New=[that
+  satisfies the predicate ],Old=[]}shall be covered
   by some @nt{discrete_@!choice} @Redundant[(either explicitly or
   by @key<others>)];
+
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The exemption for a discriminated type declared in an instance
@@ -2563,14 +2632,19 @@ left implicit in RM83.
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
   Membership tests are no longer allowed as a @nt{discrete_choice}, in
   order that those tests can be expanded to allow multiple tests in a
-  single expressiion without ambiguity. Since a membership test has a
+  single expression without ambiguity. Since a membership test has a
   boolean type, they are very unlikely to be used as a @nt{discrete_choice}.]}
 @end{Incompatible2005}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
-  Variants in generic specifications are no longer rejected if the subtype
+  Subtypes with static predicates can be used in @nt{discrete_choice}s,
+  and the coverage rules are modified to take respect the predicates.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+  @ChgAdded{Version=[3],Text=[Variants in generic specifications are no
+  longer rejected if the subtype
   of the actual type does not include all of the case choices. This probably
   isn't useful, but it is consistent with the treatment of @nt{case_expression}s.]}
 @end{Extend2005}

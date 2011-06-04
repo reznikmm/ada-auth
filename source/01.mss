@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2011/04/07 06:18:36 $}
+@Comment{$Date: 2011/05/07 03:43:07 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1545,16 +1545,20 @@ ASCII characters; no characters outside of the 7-bit range are required.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0227-1]}
 @ChgAdded{Version=[2],Text=[When this International Standard mentions the
 conversion of some character or sequence of characters to upper case, it means
-the character or sequence of characters obtained by using locale-independent
-full case folding, as defined by documents referenced in the note in section 1
+the character or sequence of characters obtained by using
+@Chg{Version=[3],New=[simple upper case folding],Old=[locale-independent
+full case folding]}, as defined by documents referenced in the note in section 1
 of ISO/IEC 10646:2003.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Unless otherwise specified for sequences of
-  characters, case folding is applied to the sequence, not to individual
-  characters. It sometimes can make a difference.]}
+  @ChgRef{Version=[3],Kind=[DeletedAdded]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[Unless otherwise
+  specified for sequences of characters, case folding is applied to the
+  sequence, not to individual characters. It sometimes can make a
+  difference.]}]}
 @end{Discussion}
 @end{WideAbove}
 
@@ -1670,6 +1674,14 @@ The preferred places for other line breaks are after semicolons.
   @ChgAdded{Version=[2],Text=[The example for square brackets has been changed
   as there is no longer a @ntf{return_statement} syntax rule.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0227-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Upper case is defined by
+  "simple upper case mapping", because "full case folding" is a mapping
+  (mostly) to lower case.]}
+@end{DiffWord2005}
+
 
 
 @LabeledSubClause{Classification of Errors}

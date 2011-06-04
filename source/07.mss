@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2011/05/05 07:27:41 $}
+@Comment{$Date: 2011/05/07 03:43:08 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.110 $}
+@Comment{$Revision: 1.111 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1560,6 +1560,181 @@ has been moved to @lquotes@;Obsolescent Features.@rquotes@;
 @end{DiffWord2005}
 
 
+@LabeledAddedSubClause{Version=[3],Name=[Type Invariants]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a private type or private
+extension, the following language-defined aspects may be specified with an
+@nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
+
+@begin{Description}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Type_Invariant@\This aspect
+   shall be specified by an @nt{expression}, called an @i<invariant
+   expression>.@Defn{invariant expression}
+   Type_Invariant may be specified on a @nt{private_type_declaration} or a
+   @nt{private_extension_declaration}.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Type_Invariant'Class@\This aspect
+   shall be specified by an @nt{expression}, called an @i<invariant
+   expression>.
+   Type_Invariant'Class may be specified on a @nt{private_type_declaration} or a
+   @nt{private_extension_declaration}.]}
+@end{Description}
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
+@ChgAdded{Version=[3],Text=[The expected type for an invariant expression
+is any boolean type.@PDefn2{Term=[expected type],
+Sec=(invariant expression)}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[Within an invariant expression, the
+identifier of the first subtype of the associated type denotes the current
+instance of the type.] Within an invariant expression associated with type
+@i<T>, the type of the current instance is @i<T> for the Type_Invariant aspect
+and @i<T>'Class for the Type_Invariant'Class aspect.]}
+
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The first sentence is given formally in
+  @RefSecNum{Aspect Specifications}.]}
+@end{TheProof}
+
+@end{Resolution}
+
+@begin{Legality}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[The Type_Invariant'Class aspect shall not be
+specified for an untagged type.] The Type_Invariant aspect shall not be specified
+for an abstract type.]}
+
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The first sentence is given formally in
+  @RefSecNum{Aspect Specifications}.]}
+@end{TheProof}
+@end{Legality}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[If the Type_Invariant'Class aspect is
+specified for a tagged type @i<T>, then the invariant expression applies to all
+descendants of @i<T>.]]}
+
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is formally defined in
+  @RefSecNum{Aspect Specifications}.]}
+@end{TheProof}
+@end{StaticSem}
+@begin{Runtime}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[If one or more invariant expressions
+apply to a type @i<T>, and the Assertion_Policy (see
+@RefSecNum{Pragmas Assert and Assertion_Policy}) at the point of the partial
+view declaration for @i<T> is Check, then an invariant check is performed at the
+following places, on the specified object(s):]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[After default initialization of an object of
+  type @i<T>, on the new object;]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[After conversion to type @i<T>, on the result of
+  the conversion;]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[After a call on the Read or Input stream attribute
+  of the type @i<T>, on the object initialized by the stream attribute;]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[Upon return from a call on any
+  subprogram or entry that:]}
+  @begin{Itemize}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[has a result of type @i<T>, or one or more
+      @key[in out] or @key[out] parameters of type @i<T>,]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[is explicitly declared within the immediate
+      scope of type @i<T> (or is a part of an instance of a generic unit
+      declared within the immediate scope of type @i<T>), and]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[is visible outside the immediate scope of
+      type @i<T> or overrides an operation that is visible outside the
+      immediate scope of @i<T>,]}
+  @end{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],NoPrefix=[T],Text=[on the result object of type @i<T>,
+  and on each @key[in out] or @key[out] actual parameter of type @i<T>.]}
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
+@ChgAdded{Version=[3],Text=[The invariant check consists of the evaluation of
+each invariant expression that applies to @i<T>, on each of the objects
+specified above. If any of these evaluate to False,
+Ada.Assertions.Assertion_Error is raised at the point of the object
+initialization, conversion, or call. If a given call requires more than one
+evaluation of an invariant expression, either for multiple objects of a single
+type or for multiple types with invariants, the order of the evaluations is not
+specified, and if one of them evaluates to False, it is not specified whether
+the others are evaluated. Any invariant check is performed prior to copying back
+any by-copy @key[in out] or @key[out] parameters.  It is not specified whether
+any constraint checks associated with by-copy @key[in out] or @key[out]
+parameters are performed before or after any invariant checks. It is not
+specified whether any postcondition checks are performed before or after any
+invariant checks.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
+@ChgAdded{Version=[3],Text=[The invariant checks performed on a call are
+determined by the subprogram or entry actually invoked, whether directly, as
+part of a dispatching call, or as part of a call through an access-to-subprogram
+value.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[If the Assertion_Policy in effect at the
+point of a subprogram or entry declaration is Ignore, then no invariant check is
+performed on a call on that subprogram or entry.]]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Invariant checks on subprogram return are not
+  performed on objects that are accessible only through access values. It is
+  also possible to call through an access-to-subprogram value and reach a
+  subprogram body that has visibility on the full declaration of a type, from
+  outside the immediate scope of the type. No invariant checks will be performed
+  if the designated subprogram is not itself externally visible. These cases
+  represent "holes" in the protection provided by invariant checks; but note
+  that these holes cannot be caused by clients of the type @i<T> with the
+  invariant without help for the designer of the package containing @i<T>.]}
+@end{Ramification}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The implementation might want to produce a warning
+  if a private extension has an ancestor type that is a visible extension, and
+  an invariant expression depends on the value of one of the components from a
+  visible extension part.]}
+@end{ImplNote}
+
+@end{Runtime}
+
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Type_Invariant aspects are new.]}
+@end{Extend2005}
+
+
+
 @LabeledClause{Deferred Constants}
 
 @begin{Intro}
@@ -1656,7 +1831,6 @@ The completion of a deferred constant declaration shall occur
 before the constant is frozen
 (see @Chg{Version=[2],New=[@RefSecNum{Freezing Rules}],
 Old=[@RefSecNum{Deferred Constants}]}).
-
 
 @end{Legality}
 

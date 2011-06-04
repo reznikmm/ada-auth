@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/05/05 07:27:41 $}
+@Comment{$Date: 2011/05/07 03:43:07 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.105 $}
+@Comment{$Revision: 1.106 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -468,11 +468,12 @@ a value of the type.
   @Defn(closed under derivation) Classes are closed under derivation;
   that is, if a type is in a class, then all of its derivatives
   are in that class]}.>}
-@ChgToGlossary{Version=[2],Kind=[Revised],Term=<Subtype>,
-  Text=<A subtype is a type together with a constraint@Chg{Version=[2],
-  New=[ or null exclusion],Old=[]},
-  which constrains the values of the subtype to satisfy a certain
-  condition.
+@ChgToGlossary{Version=[3],Kind=[Revised],Term=<Subtype>,
+  Text=<A subtype is a type together with @Chg{Version=[3],New=[optional
+  constraints, null exclusions, and predicates],
+  Old=[a constraint@Chg{Version=[2],New=[ or null exclusion],Old=[]}]},
+  which @Chg{Version=[3],New=[constrain],Old=[constrains]}
+  the values of the subtype to satisfy a certain condition.
   The values of a subtype are a subset of the values of its type.>}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
@@ -1530,25 +1531,168 @@ The description of S'Base has been moved to
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
 @ChgAdded{Version=[3],Text=[The language-defined @i{predicate aspects}
 Static_Predicate and Dynamic_Predicate may be used to define properties of
-subtypes. A @i{predicate clause} is an aspect clause specifying one of the two
-predicate aspects.@Defn{predicate aspect}@Defn{predicate clause}@PDefn2{Term=[aspect],Sec=(predicate)}]}
+subtypes. A @i{predicate specification} is an @nt{aspect_specification}
+for one of the two predicate aspects.@Defn{predicate aspect}@Defn{predicate specification}@PDefn2{Term=[aspect],Sec=(predicate)}]}
 @end{Intro}
 
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
-@ChgAdded{Version=[3],Text=[The expected type for a predicate aspect expression
-is any boolean type.]}
+@ChgAdded{Version=[3],Text=[The expected type for a predicate aspect
+@nt{expression} is any boolean type.]}
 @end{Resolution}
 
+@begin{StaticSem}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
-@ChgAdded{Version=[3],Text=[@i<@b<Editor's note: The remainder of the rules are omitted
-at this time. AI05-0153-3 is in the process of being finalized.>>]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[A predicate specification may be
+given on a @nt{type_declaration} or a @nt{subtype_declaration}, and applies
+to the declared subtype. In addition, predicate specifications apply to
+certain other subtypes:]}
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[For a (first) subtype defined by a derived type
+  declaration, the predicates of the parent subtype and the progenitor subtypes
+  apply.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[For a subtype created by a subtype_indication, the
+  predicate of the subtype denoted by the subtype_mark applies.]}
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgAdded{Version=[3],Text=[The @i<predicate> of a subtype consists of all
+predicate specifications that apply, and-ed together; if no predicate
+specifications apply, the predicate is True @Redundant[(in particular, the
+predicate of a base subtype is True)].@Defn2{Term=[Predicate],Sec=(of a subtype)}]}
+@end{StaticSem}
+
+@begin{Legality}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The @nt{expression} of a
+Static_Predicate specification shall be @i<predicate-static>; that is, one of
+the following:@Defn{predicate-static}@Defn2{Term=[expression],Sec=[predicate-static]}]}
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[a static expression that does not raise
+  any exception;]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[a membership test whose @nt{simple_expression}
+  is the current instance, and whose @nt{membership_choice_list} meets the
+  requirements for a static membership test
+  (see @RefSecNum{Static Expressions and Static Subtypes});]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[a @nt{case_expression} whose
+  @SynI{selecting_}@nt{expression} is the current instance,
+  and whose @SynI{dependent_}@nt{expression}s are static expressions;]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[a call to a predefined equality or ordering
+  operator, where one operand is the current instance, and the other is a
+  static expression;]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[a call to a predefined boolean logical operator,
+  where both operands are predicate-static; or]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[a parenthesized predicate-static @nt{expression}.]}
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgAdded{Version=[3],Text=[An index subtype, @nt{discrete_range} of an
+@nt{index_constraint} or @nt{slice}, or a
+@nt{discrete_subtype_definition} of a @nt{constrained_array_definition},
+@nt{entry_declaration}, or @nt{entry_index_specification} shall not denote a
+subtype to which predicate specifications apply.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgAdded{Version=[3],Text=[The @nt{prefix} of an @nt{attribute_reference}
+whose @nt{attribute_designator} is First, Last, or Range shall not denote a
+scalar subtype to which predicate specifications apply.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgAdded{Version=[3],Text=[The @nt{discrete_subtype_definition} of a
+@nt{loop_parameter_specification} shall not denote a subtype to which
+Dynamic_Predicate specifications apply.]}
+
+
+@end{Legality}
+
+@begin{Runtime}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[If the Assertion_Policy (see
+@RefSecNum{Pragmas Assert and Assertion_Policy}) in effect is Check, then:]}
+@begin{DescribeCode}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[@Redundant[On every subtype conversion, the
+  predicate of the target subtype is evaluated, and a check is made that the
+  predicate is True. This includes all parameter passing, except for certain
+  parameters passed by reference, which are covered by the following rule: ] After
+  normal completion and leaving of a subprogram, for each @key[in out] or
+  @key[out] parameter
+  that is passed by reference, the predicate of the subtype of the actual is
+  evaluated, and a check is made that the predicate is True. For an object created
+  by an @nt{object_declaration} with no explicit initialization @nt{expression},
+  or by an uninitialized @nt{allocator}, if any subcomponents have implicit
+  initial values (see @RefSecNum{Object Declarations}), the predicate of the
+  nominal subtype of the @nt{object_declaration} or @nt{allocator}
+   is evaluated, and a check is made that the predicate is True.
+  Assertions.Assertion_Error is raised if any of these checks fail.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=<Predicates are not evaluated at the point of the
+  [sub]type declaration.>}
+@end{Ramification}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Static_Predicate checks can be removed even in the
+  presence of potentially invalid values, just as constraint checks can be
+  removed.]}
+@end{ImplNote}
+@end{DescribeCode}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgAdded{Version=[3],Text=[If any of the above Legality Rules is violated in an
+instance of a generic unit, Program_Error is raised. In addition to the places
+where @LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
+this rule applies also in the private part of an instance of a generic
+unit.@PDefn{generic contract issue}]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is the usual way around the contract model;
+  this applies even in generic bodies. The "In addition..." wording is included
+  for consistency with similar rules, even though it's not really necessary,
+  since Program_Error will be raised anyway.]}
+@end{Discussion}
+@end{Runtime}
+
+@begin{Notes}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgAdded{Version=[3],Text=[A predicate specification does not cause a subtype
+to be considered constrained.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgAdded{Version=[3],Text=[A Static_Predicate, like a constraint, always
+remains True for all objects of the subtype, except in the case of uninitialized
+variables and other invalid values. A Dynamic_Predicate, on the other hand, is
+checked as specified above, but can become False at other times. For example,
+the predicate of a record is not checked when a subcomponent is modified.]}
+@end{Notes}
+
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Predicate aspects are new in Ada 2012.]}
 @end{Extend2005}
+
 
 
 @LabeledClause{Objects and Named Numbers}
@@ -2063,22 +2207,42 @@ its nominal subtype, as follows:
   The implicit initial value for an access subtype is the
   null value of the access type.
 
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
+  @ChgAdded{Version=[3],Text=[The implicit initial value for a scalar subtype
+  that has the Default_Value aspect specified is the value of that aspect
+  converted to the nominal subtype (which might raise Constraint_Error @em see
+  @RefSec{Type Conversions});@PDefn2{Term=[implicit subtype conversion],
+  Sec=(default value of a scalar)}]}
+
+  @begin{Ramification}
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[This is a @RuntimeTitle rule, so the
+    visibility of the @nt{aspect_specification} is not relevant @em if the full
+    type for a private type has the Default_Value aspect specified, partial
+    views of the type also have this implicit initial value.]}
+  @end{Ramification}
+
   The implicit initial (and only) value for each discriminant
   of a constrained discriminated subtype is defined by the subtype.
 
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0228-1]}
   For a (definite) composite subtype,
   the implicit initial value of each component
   with a @nt<default_expression> is obtained by
   evaluation of this expression and conversion to the
   component's nominal subtype (which might raise
-  Constraint_Error @em see @RefSec{Type Conversions}),
-  unless the component is a
+  Constraint_Error@Chg{Version=[3],New=[],Old=[ @em see
+  @RefSec{Type Conversions}]}), unless the component is a
   discriminant of a constrained subtype (the previous case),
   or is in an excluded @nt<variant>
   (see @RefSecNum(Variant Parts and Discrete Choices)).
   @PDefn2{Term=[implicit subtype conversion],Sec=(component defaults)}
-  For each component that does not have a @nt<default_expression>, any implicit
-  initial values are those determined by the component's nominal subtype.
+  For each component that does not have a @nt<default_expression>,
+  @Chg{Version=[3],New=[if the composite subtype has the Default_Component_Value
+  aspect specified, the implicit initial value is the value of that aspect
+  converted to the component's nominal subtype; otherwise, ],Old=[]}any
+  implicit initial values are those determined by the component's
+  nominal subtype.
 
   For a protected or task subtype, there is an implicit component
   (an entry queue) corresponding to each entry, with its implicit
@@ -2275,10 +2439,13 @@ component, @RefSecNum{Data Validity} defines the execution to be erroneous.]}
 @end{Reason}
 @end{Itemize}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0228-1]}
 @Redundant[There is no implicit initial
-value defined for a scalar subtype.]
+value defined for a scalar subtype@Chg{Version=[3],New=[ unless the
+Default_Value aspect has been specified for the type],Old=[]}.]
 @PDefn{uninitialized variables}
-In the absence of an explicit initialization, a newly created
+In the absence of an explicit initialization@Chg{Version=[3],New=[ or the
+specification of the Default_Value aspect],Old=[]}, a newly created
 scalar object might have a value that does not belong to its subtype
 (see @RefSecNum{Data Validity} and @RefSecNum{Pragma Normalize_Scalars}).
 @begin{Honest}
@@ -2455,6 +2622,14 @@ without an initialization expression.
   An optional @nt{aspect_specification} can be used in an @nt{object_declaration}.
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0228-1]}
+  @ChgAdded{Version=[3],Text=[Implicit initial values can now be given
+  for scalar types and for scalar array components, using the Default_Value
+  (see @RefSecNum{Scalar Types}) and Default_Component_Value
+  (see @RefSecNum{Array Types}); the extension is documented there.]}
+@end{DiffWord2005}
 
 
 
@@ -4513,6 +4688,46 @@ position smaller than 16#100#, and three character strings of the form
 "'@i<nongraphic character>'".]}
 @end{ImplPerm}
 
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a scalar type,
+the following language-defined representation aspect
+may be specified with an @nt{aspect_specification} (see
+@RefSecNum{Aspect Specifications}):]}
+@begin{Description}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Default_Value@\This aspect
+shall be specified by a static expression, and that
+expression shall be explicit, even if the aspect has a boolean type.
+Default_Value shall be specified only on a @nt{full_type_declaration}.]}
+@end{Description}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The part about requiring an explicit expression is
+  to disallow omitting the value for this aspect, which would otherwise be
+  allowed by the rules of @RefSecNum{Aspect Specifications}.]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
+@ChgAdded{Version=[3],Text=[If a derived type with no primitive subprograms
+inherits a boolean Default_Value aspect, the aspect may be specified to have any
+value for the derived type.]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is override the
+  @RefSecNum{Aspect Specifications} rule that says that a boolean aspect
+with a value True cannot be changed.]}
+@end{Reason}
+@end{StaticSem}
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
+@ChgAdded{Version=[3],Text=[The expected type for the @nt{expression}
+specified for the Default_Component_Value aspect is the component type of the
+array type defined by the
+@nt{full_type_declaration} on which it appears.]}
+@end{Resolution}
+
 @begin{Notes}
 The evaluation of S'First or S'Last never raises an exception.
 If a scalar subtype S has a nonnull range, S'First and S'Last
@@ -4658,6 +4873,14 @@ More explicit rules are provided for nongraphic characters.
   not be a problem in practice.]}
 @end{Inconsistent2005}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0228-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  The new aspect Default_Value allows defining implicit initial values (see
+  @RefSecNum{Object Declarations}) for scalar types.]}
+@end{Extend2005}
+
+
 
 @LabeledSubClause{Enumeration Types}
 
@@ -4678,13 +4901,24 @@ An @nt<enumeration_type_definition> defines an enumeration type.]
 @end{Syntax}
 
 @begin{Legality}
-@Redundant[The @nt<defining_identifier>s and
-@nt<defining_character_literal>s listed in an
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0227-1]}
+The @nt<defining_identifier>s@Chg{Version=[3],New=[ in upper case],Old=[]}
+@Redundant[and@Chg{Version=[3],New=[ the],Old=[]}
+@nt<defining_character_literal>s] listed in an
 @nt<enumeration_type_definition> shall be distinct.]
   @begin{TheProof}
-This is a ramification of the normal disallowance
+    @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0227-1]}
+    @Chg{Version=[3],New=[For character literals, this],Old=[This]}
+    is a ramification of the normal disallowance
     of homographs explicitly declared immediately in the same
-    declarative region.@end{theproof}
+    declarative region.
+  @end{TheProof}
+  @begin{Reason}
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0227-1]}
+    @ChgAdded{Version=[3],Text=[To ease implementation of the attribute
+    Wide_Wide_Value, we require that all enumeration literals have distinct
+    images.]}
+  @end{Reason}
 @end{Legality}
 
 @begin{StaticSem}
@@ -4791,6 +5025,20 @@ syntactic categories.
 We emphasize the fact that an enumeration literal denotes
 a function, which is called to produce a value.
 @end{DiffWord83}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0227-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Required that all enumeration
+  literals in a type have distinct images; this might not be the case since
+  upper case conversion can map distinct characters to the same upper case
+  character. This can only happen for identifiers using Unicode characters first
+  allowed by Ada 2005; moreover, the original definition of Ada 2005 was
+  confused and appeared to require inconsistent results from the Image
+  attribute, so implementations that allowed problematic cases are rare; the
+  problematic cases are very rare; so it is expected that this change would
+  only affect test programs.]}
+@end{Incompatible2005}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0006-1]}

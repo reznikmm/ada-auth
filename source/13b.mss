@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/05/03 06:34:08 $}
+@Comment{$Date: 2011/05/07 03:43:08 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -3888,10 +3888,12 @@ is raised.],Old=[]}>}@Comment{End S'Class'Input attribute}
 @EndPrefixType{}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0228-1]}
 @IndexCheck{Range_Check}
 In the default implementation of Read and Input for a composite type,
-for each scalar component that is a discriminant or whose
-@nt{component_declaration} includes a @nt{default_expression},
+for each scalar component that is a discriminant or @Chg{Version=[3],New=[that
+has an implicit initial value],Old=[whose
+@nt{component_declaration} includes a @nt{default_expression}]},
 a check is made that the value returned by Read for the component
 belongs to its subtype.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
@@ -3907,6 +3909,29 @@ default implementation of Read for a composite type with defaulted
 discriminants, if the actual parameter of Read is constrained, a check is made
 that the discriminants read from the stream are equal to those of the actual
 parameter. Constraint_Error is raised if this check fails.],Old=[]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0228-1]}
+  @ChgAdded{Version=[3],Text=[The check for scalar components that have an
+  implicit initial value is to preserve our @MetaRulesName that all objects
+  that have an implicit initial value do not become "deinitialized".]}
+@end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0228-1]}
+  @ChgAdded{Version=[3],Text=[A scalar component can have an implicit initial
+  value if it has a default_expression, if the component's type has the
+  Default_Value aspect specified, or if the component is that of an array type
+  that has the Default_Component_Value aspect specified.]}
+@end{Ramification}
+
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0228-1]}
+  @ChgAdded{Version=[3],Text=[An implementation should always be able to detect
+  the error for a null value read into a component of a access subtype with
+  a null exclusion; the "if the implementation can detect" is intended to cover
+  non-null access values.]}
+@end{Honest}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
 @ChgAdded{Version=[2],Text=[@PDefn{unspecified}It is unspecified at which point

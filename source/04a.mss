@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:36 $}
+@Comment{$Date: 2011/05/07 03:43:08 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.112 $}
+@Comment{$Revision: 1.113 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2312,16 +2312,18 @@ no applicable index constraint is defined.
   actual subprograms with generic formal subprograms.
 @end(Reason)
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
 The @nt{discrete_choice_list} of an
 @nt{array_component_association} is allowed to
-have a @nt{discrete_choice} that is a nonstatic @nt<expression>
-or that is a @nt{discrete_range} that defines a nonstatic or
+have a @nt{discrete_choice} that is a nonstatic
+@Chg{Version=[3],New=[@nt<choice_expression>],Old=[@nt<expression>]}
+or that is a @Chg{Version=[3],New=[@nt{subtype_indication} or @nt{range}],
+Old=[@nt{discrete_range}]} that defines a nonstatic or
 null range, only if it is the single @nt{discrete_choice} of
 its @nt{discrete_choice_list}, and there is only one
 @nt{array_component_association} in the @nt<array_aggregate>.
 @begin{Discussion}
-We now
-allow a nonstatic @key(others) choice even if there are
+We now allow a nonstatic @key(others) choice even if there are
 other array component expressions as well.
 @end{Discussion}
 
@@ -3724,13 +3726,21 @@ membership test using @key(in)]} yields the result True if:
   If the tested type is a record type or a limited type, the test uses the
   primitive equality for the type; otherwise the test uses predefined equality.]}
 
-  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
-  @Chg{Version=[3],New=[The @nt{membership_choice} is a @nt{range} or
-  @nt{subtype_mark}, the],Old=[The]} tested type is scalar, and the value of the
-  @nt<simple_expression> belongs to the given @nt<range>, or the range of the
-  named subtype@Chg{Version=[3],New=[.],Old=[; or]}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3],ARef=[AI05-0158-1]}
+  @ChgAdded{Version=[3],Text=[The @nt{membership_choice} is a @nt{range}
+  @nt{subtype_mark} and the value of the @nt<simple_expression> belongs
+  to the given @nt<range>.]}
+
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0158-1]}
+  @Chg{Version=[3],New=[The @nt{membership_choice} is a @nt{subtype_mark},
+  the],Old=[The]} tested type is scalar, and the value of the
+  @nt<simple_expression> belongs to the @Chg{Version=[3],New=[],Old=[given
+  @nt<range>, or the ]}range of the named subtype@Chg{Version=[3],New=[, and
+  the predicate of the named subtype evaluates to True.],Old=[; or]}
 @begin{Ramification}
-    The scalar membership test only does a range check.
+    @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
+    The scalar membership test only does a range check@Chg{Version=[3],New=[
+    and a predicate check],Old=[]}.
     It does not perform any other check, such as whether
     a value falls in a @lquotes@;hole@rquotes@; of a @lquotes@;holey@rquotes@; enumeration type.
     The Pos attribute function can be used for that purpose.
@@ -3742,12 +3752,13 @@ membership test using @key(in)]} yields the result True if:
 @end{Ramification}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
-  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0158-1]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[]}@ChgNote{To get conditional Leading}
   @Chg{Version=[3],New=[The @nt<membership_choice> is a
   @nt<subtype_mark>, the],Old=[The]} tested type is not scalar, @Chg{Version=[3],New=[],Old=[and ]}
   the value of the @nt<simple_expression> satisfies any constraints
-  of the named subtype, and@Chg{Version=[2],New=[:],Old=[, if the type of
+  of the named subtype, @Chg{Version=[3],New=[the predicate of the named subtype
+  evaluates to True, ],Old=[]}and@Chg{Version=[2],New=[:],Old=[, if the type of
   the @nt{simple_expression}
   is class-wide, the value has a tag that identifies a type covered by
   the tested type.]}
@@ -3922,9 +3933,11 @@ conversions.],Old=[]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Membership tests
   for the accessibility and designated tags for general access types are new.]}
 
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+  @ChgAdded{Version=[3],Text=[Membership tests now include a predicate check.]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0158-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Membership tests
-  now allow multiple choices.]}
+  @ChgAdded{Version=[3],Text=[Membership tests now allow multiple choices.]}
 @end{Extend2005}
 
 @begin{DiffWord2005}

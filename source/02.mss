@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:36 $}
+@Comment{$Date: 2011/05/07 03:43:07 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -810,14 +810,15 @@ a reserved word.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0091-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0091-1],ARef=[AI05-0227-1]}
 @Comment{Removed the "Type=[Leading]" along with the bullets. Don't have
 a way to make it doubly conditional (only in Version=[2]), and since it is
 mainly for spacing, we just forget it.}
 @ChgAdded{Version=[2],Text=[Two @nt{identifier}s are ]}@Chg{Version=[2],
 New=[considered the same if they consist of the same sequence of characters
-after @Chg{Version=[3],New=[converting the characters to upper
-case.@Defn{case insensitive}],Old=[applying the following transformations
+after applying @Chg{Version=[3],New=[locale-independent simple case folding,
+as defined by documents referenced in the note in section 1 of
+ISO/IEC 10646:2003.@Defn{case insensitive}],Old=[the following transformations
 (in this order):]}],Old=[All characters of an @nt{identifier} are significant,
 including any underline character.
 @Defn{case insensitive}
@@ -837,22 +838,33 @@ characters is converted to upper case.
 @end{Itemize}
 @begin(Discussion)
   @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
-  @ChgDeleted{Version=[2],Text=[Two of the letters of ISO 8859-1
-  appear only as lower case,
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0227-1]}
+  @Chg{Version=[3],New=[Simple case folding is a mapping to lower case, so this
+  is matching the defining (lower case) version of a reserved word. We could
+  have mentioned case folding of the reserved words, but as that is an identity
+  function, it would have no effect.],Old=[@Chg{Version=[2],New=[],Old=[Two of
+  the letters of ISO 8859-1 appear only as lower case,
   "sharp s" and "y with diaeresis." These two letters have
   no corresponding upper case letter (in particular, they
-  are not considered equivalent to one another).]}
+  are not considered equivalent to one another).]}]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0227-1]}
+  @ChgAdded{Version=[3],Text=[The @ldquote@;documents referenced@rdquote means
+  Unicode. Note that simple case folding is supposed to be compatible between
+  Unicode versions, so the Unicode version used doesn't
+  matter.]}
 @end(Discussion)
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0091-1]}
-@ChgAdded{Version=[2],Text=[After @Chg{Version=[3],New=[converting to upper
-case],Old=[applying these transformations]}, an
-@nt{identifier} shall not be identical to a reserved word (in upper case).]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0091-1],ARef=[AI05-0227-1]}
+@ChgAdded{Version=[2],Text=[After applying @Chg{Version=[3],New=[simple
+case folding],Old=[these transformations]}, an
+@nt{identifier} shall not be identical to a reserved
+word@Chg{Version=[3],New=[],Old=[ (in upper case)]}.]}
 @begin(ImplNote)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgRef{Version=[3],Kind=[Revised]}
   @ChgAdded{Version=[2],Text=[We match the reserved words after
-  @Chg{Version=[3],New=[converting to upper case],Old=[doing these
+  @Chg{Version=[3],New=[applying case folding],Old=[doing these
   transformations]} so that the rules for @nt{identifier}s and reserved words are
   the same. @Chg{Version=[3],New=[],Old=[(This allows @ntf{other_format}
   characters, which usually don't display, in a reserved word
@@ -862,18 +874,26 @@ case],Old=[applying these transformations]}, an
 @end(ImplNote)
 @begin(Ramification)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0227-1]}
   @ChgAdded{Version=[2],Text=[The rules for reserved words differ in one way:
   they define case conversion on letters rather than sequences. This means that
-  some unusual sequences are neither @nt{identifier}s nor reserved words.
-  For instance, @lquotes@;@smldotlessi@;f@rquotes@; and
+  @Chg{Version=[3],New=[it is possible that there exist ],Old=[]}some
+  unusual sequences are neither @nt{identifier}s nor reserved words.
+  @Chg{Version=[3],New=[We are not aware of any such sequences so long as we use
+  simple case folding (as opposed to full case folding), but we have defined the
+  rules in case any are introduced in future character set standards. This
+  originally was a problem when converting to upper case:],Old=[For instance,]}
+  @lquotes@;@smldotlessi@;f@rquotes@; and
   @lquotes@;acce@latin1(223)@rquotes@; have upper case conversions of
   @lquotes@;IF@rquotes@; and @lquotes@;ACCESS@rquotes@; respectively.
-  These are not @nt{identifier}s, because the transformed values are identical
-  to a reserved word. But they are not reserved words, either, because the
-  original values do not match any reserved word as defined or with any number
+  @Chg{Version=[3],New=[We would not want these to be treated as reserved words.
+  But neither of these cases exist when using simple case folding.], Old=[These
+  are not @nt{identifier}s, because the transformed values are
+  identical to a reserved word. But they are not reserved words, either, because
+  the original values do not match any reserved word as defined or with any number
   of characters of the reserved word in upper case. Thus, these odd
   constructions are just illegal, and should not appear in the source of
-  a program.]}
+  a program.]}]}
 @end(Ramification)
 @end{StaticSem}
 
@@ -886,31 +906,54 @@ to accommodate local conventions].
 
 @begin(Discussion)
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0227-1]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[For instance, in most languages,
-  the uppercase
-  equivalent of LATIN SMALL LETTER I (a lower case letter with a dot above) is
-  LATIN CAPITAL LETTER I (an upper case letter without a dot above). In
-  Turkish, though, LATIN SMALL LETTER I and LATIN SMALL LETTER DOTLESS I are
-  two distinct letters, so the upper case equivalent of LATIN SMALL LETTER I is
-  LATIN CAPITAL LETTER I WITH DOT ABOVE, and the upper case equivalent of LATIN
-  SMALL LETTER DOTLESS I is LATIN CAPITAL LETTER I. Take for instance the
+  the @Chg{Version=[3],New=[simple case folded],Old=[uppercase
+  equivalent]} of LATIN @Chg{Version=[3],New=[CAPITAL],Old=[SMALL]} LETTER I
+  (@Chg{Version=[3],New=[an upper],Old=[a lower]} case letter
+  @Chg{Version=[3],New=[without],Old=[with]} a dot above) is
+  LATIN @Chg{Version=[3],New=[SMALL],Old=[CAPITAL]} LETTER I
+  (@Chg{Version=[3],New=[a lower],Old=[an upper]} case letter
+  @Chg{Version=[3],New=[with],Old=[without]} a dot above). In
+  Turkish, though, LATIN @Chg{Version=[3],New=[CAPITAL],Old=[SMALL]} LETTER I
+  and LATIN @Chg{Version=[3],New=[CAPITAL],Old=[SMALL]} LETTER DOTLESS I are two
+  distinct letters, so the @Chg{Version=[3],New=[case folded],Old=[upper case]}
+  equivalent of LATIN @Chg{Version=[3],New=[CAPITAL],Old=[SMALL]} LETTER I is
+  LATIN @Chg{Version=[3],New=[SMALL],Old=[CAPITAL]} LETTER I WITH DOT ABOVE, and
+  the @Chg{Version=[3],New=[case folded],Old=[upper case]} equivalent of LATIN
+  @Chg{Version=[3],New=[CAPITAL],Old=[SMALL]} LETTER DOTLESS I is LATIN
+  @Chg{Version=[3],New=[SMALL],Old=[CAPITAL]} LETTER I. Take for instance the
   following identifier (which is the name of a city on the Tigris river in
   Eastern Anatolia):]}
+
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[diyarbak@smldotlessi@;r -- @RI[The first i is dotted, the second isn't.]]}
+@ChgRef{Version=[3],Kind=[Revised]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[D@capdottedi@;YARBAKIR],Old=[diyarbak@smldotlessi@;r]} -- @RI[The first i is dotted, the second isn't.]]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Type=[Leading],Text=[Locale-independent conversion to
-  upper case results in:]}
+  @ChgRef{Version=[3],Kind=[Revised]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[@Chg{Version=[3],New=[A Turkish
+  reader would expect that the above identifier is equivalent to],Old=[Locale-independent conversion to
+  upper case results in]}:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[DIYARBAKIR -- @RI[Both Is are dotless.]]}
+@ChgRef{Version=[3],Kind=[Revised]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[diyarbak@smldotlessi@;r],Old=[DIYARBAKIR -- @RI[Both Is are dotless.]]}]}
+@end{Example}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[However, locale-independent simple case folding (and thus Ada)
+  maps this to:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[d@capdottedi@;yarbakir]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Type=[Leading],Text=[This means that the four following
-  sequences of characters represent the same identifier, even though for a
-  locutor of Turkish they would probably be considered distinct words:]}
+  @ChgRef{Version=[3],Kind=[Revised]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[@Chg{Version=[3],New=[which is
+  different from any of the following identifiers],Old=[This means that the four
+  following sequences of characters represent the same identifier, even though
+  for a locutor of Turkish they would probably be considered distinct words]}:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[diyarbakir
@@ -918,18 +961,30 @@ diyarbak@smldotlessi@;r
 d@smldotlessi@;yarbakir
 d@smldotlessi@;yarbak@smldotlessi@;r]}
 @end{Example}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=<including the @ldquote@;correct@rdquote matching
+  identifier for Turkish. Upper case conversion (used in '[Wide_]Wide_Image)
+  introduces additional problems.>}
+
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Type=[Leading],Text=[An implementation targeting the
+  @ChgRef{Version=[3],Kind=[Revised]}
+  @Comment{Removed the "Type=[Leading]" along with the example. Don't have
+  a way to make it doubly conditional (only in Version=[2]), and since it is
+  mainly for spacing, we just forget it.}
+  @ChgAdded{Version=[2],Text=[An implementation targeting the
   Turkish market is allowed (in fact, expected) to provide a nonstandard mode
-  where case folding is appropriate for Turkish.  This would cause the original
-  identifier to be converted to:]}
+  where case folding is appropriate for Turkish.@Chg{Version=[3],New=[],Old=[ This
+  would cause the original identifier to be converted to:]}]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[D@capdottedi@;YARBAKIR -- @RI[The first I is dotted, the second isn't.]]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[D@capdottedi@;YARBAKIR -- @RI[The first I is dotted, the second isn't.]]}]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[and the four sequences of characters shown above
-  would represent four distinct identifiers.]}
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[and the four
+  sequences of characters shown above would represent four distinct
+  identifiers.]}]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Lithuanian and Azeri are two other languages that
@@ -991,6 +1046,17 @@ implementation-defined attributes or pragma names.
   @ntf{other_format} characters were removed from identifiers as the Unicode
   recommendations have changed. This change can only affect programs
   written for the original Ada 2005, so there should be few such programs.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0227-1]}
+  @ChgAdded{Version=[3],Text=[@B<Correction:> We now specify simple case
+  folding rather than full case folding. That potentially could change
+  identifier equivalence, although it is more likely that identifiers that
+  are considered the same in original Ada 2005 will now be considered different.
+  This change was made because the original Ada 2005 definition was incompatible
+  (and even inconsistent in unusual cases) with the Ada 95 identifier
+  equivalence rules. As such, the Ada 2005 rules were rarely fully implemented,
+  and in any case, only Ada 2005 identifiers containing wide characters could
+  be affected.]}
 @end{Incompatible2005}
 
 
