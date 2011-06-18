@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/05/03 06:34:08 $}
+@Comment{$Date: 2011/06/04 05:28:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.111 $}
+@Comment{$Revision: 1.112 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -470,7 +470,24 @@ returns False.]}
     for T'Class'Output.]}
 @end{Reason}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0115-1]}
+@ChgAdded{Version=[3],Text=[For the purposes of the dynamic semantics of
+functions Descendant_Tag and Is_Descendant_At_Same_Level, a tagged type T2
+is a @i<descendant> of
+a type T1 if it is the same as T1, or if its parent type or one of its
+progenitor types is a descendant of type T1 by this rule@Redundant[,
+even if at the point of the declaration of T2, one of the derivations
+in the chain is not visible].@Defn2{Term=[descendant],Sec=[at runtime]}]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[In other contexts, @ldquote@;descendant@rdquote
+  is dependent on visibility, and the particular view a derived type has of
+  its parent type. See @RefSecNum{Private Operations}.]}
+@end{Discussion}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0115-1]}@ChgNote{Paragraph number changed}
 @ChgAdded{Version=[2],Text=[The function Parent_Tag returns the tag of the
 parent type of the type whose tag is T. If the type does not have a parent type
 (that is, it was not declared by a derived_type_declaration), then No_Tag is
@@ -485,6 +502,7 @@ operation, ignoring privateness is OK.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00405-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0115-1]}@ChgNote{Paragraph number changed}
 @ChgAdded{Version=[2],Text=[The function Interface_Ancestor_Tags returns an
 array containing the tag of each interface ancestor type of the type whose tag
 is T, other than T itself. The lower bound of the returned array is 1, and the
@@ -964,6 +982,12 @@ Tagged types are a new concept.
   fixed if it does occur.]}
 @end{Incompatible2005}
 
+@begin{DiffWord95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0115-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> We explicitly define the meaning
+  of "descendant" at runtime, so that it does not depend upon visibility
+  as does the usual meaning.]}
+@end{DiffWord95}
 
 
 @LabeledSubClause{Type Extensions}
@@ -3620,13 +3644,12 @@ The syntax rules for @nt{general_access_modifier} and
 @end{Extend83}
 
 @begin{DiffWord83}
-We use the term "storage pool" to talk about the data area from
-which allocation takes place.
-The term "collection" is no longer used.
-("Collection" and "storage pool" are not the same thing
-because multiple unrelated access types can share the
-same storage pool;
-see @RefSecNum(Storage Management) for more discussion.)
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1]}
+  We use the term "storage pool" to talk about the data area from which
+  allocation takes place. The term "collection" is @Chg{Version=[3],New=[only
+  used for finalization],Old=[no longer used]}. ("Collection" and "storage pool"
+  are not the same thing because multiple unrelated access types can share the
+  same storage pool; see @RefSecNum(Storage Management) for more discussion.)
 @end{DiffWord83}
 
 @begin{Inconsistent95}
@@ -3931,11 +3954,16 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0151-1]}
   @ChgAdded{Version=[3],Text=[as the @nt{subtype_mark} defining the subtype
   of a parameter or result in a profile occurring within a
-  @nt{basic_declaration}.]}
+  @nt{basic_declaration};]}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[But not in the profile for a body or entry.]}
 @end{Ramification}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0213-1]}
+  @ChgAdded{Version=[3],Text=[as a generic actual parameter whose corresponding
+  generic formal parameter is a formal incomplete type (see
+  @RefSecNum{Formal Private and Derived Types});]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
@@ -4275,6 +4303,10 @@ not at all) for different designated subtypes.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Changed the
   rules of uses of dereferences of incomplete views such that it does not
   introduce an unintentional incompatibility with Ada 83 and Ada 95.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0213-1]}
+  @ChgAdded{Version=[3],Text=[Incomplete types now can be used as actuals to
+  formal incomplete types (see @RefSecNum{Formal Private and Derived Types}).]}
 @end{DiffWord2005}
 
 
@@ -4516,48 +4548,130 @@ the operand.
 @Syni{dependent_}@nt{expression}.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00416-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0234-1]}
 @Chg{Version=[2],New=[The],Old=[For a function whose result type is a
 return-by-reference type,
 the accessibility level of the result object is the same as
 that of the master that elaborated the function body. For
 any other function, the]} accessibility level of @Chg{Version=[2],New=[an
-@nt{aggregate} or ],Old=[]}the result
-@Chg{Version=[2],New=[of a function call @Redundant[(or equivalent use of
-an operator)] that is
-used (in its entirety) to directly initialize part of an ],Old=[]}object
-is that of the
+@nt{aggregate} @Chg{Version=[3],New=[],Old=[or the result of a function call @Redundant[(or equivalent use
+of an operator)] ]}that is
+used (in its entirety) to directly initialize part of an],Old=[the result]}
+object is that of the
 @Chg{Version=[2],New=[object being initialized. In other contexts, the
-accessibility level of an @nt{aggregate} or the result of a function call
-is that of the innermost
-master that evaluates the @nt{aggregate} or],Old=[execution of the called]}
-function@Chg{Version=[2],New=[ call],Old=[]}.
-@begin{Honest}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
-  @ChgAdded{Version=[2],Text=[The first sentence is talking about a static
-  use of the entire return object - a slice that happens to be the entire
-  return object doesn't count. On the other hand, this is intended to allow
-  parentheses and @nt{qualified_expression}s.]}
-@end{Honest}
+accessibility level of an @nt{aggregate} @Chg{Version=[3],New=[],Old=[or the
+result of a function call ]}is that of the innermost
+master that evaluates the @nt{aggregate}@Chg{Version=[3],New=[],Old=[ or
+function call]}],Old=[execution of the called function]}.
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0234-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The accessibility level of the result
+of a function call is that of the @i<master of the function call>, which is
+determined by the point of call as follows:@Defn{master of a call}@Defn2{Term=[call],Sec=[master of]}@Defn2{Term=[function call],Sec=[master of]}]}
+
+@begin{InnerItemize}
+
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[If the result is used (in its entirety) to
+  directly initialize part of an object, the master is that of the object being
+  initialized. In the case where the initialized object is a coextension that
+  becomes a coextension of another object (see below), the master is that of the
+  eventual object to which the coextension will be transferred.]}
+
+  @begin{Honest}
+    @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+    @ChgAdded{Version=[2],Text=[The first sentence is talking about a static
+    use of the entire return object @em a slice that happens to be the entire
+    return object doesn't count. On the other hand, this is intended to allow
+    parentheses and @nt{qualified_expression}s.]}
+  @end{Honest}
+  @begin{Ramification}
+    @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+    @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0234-1]}
+    @ChgAdded{Version=[2],Text=[If the function is used as a @nt{prefix},
+    @Chg{Version=[3],New=[this bullet does not apply],Old=[the second sentence
+    applies]}. Similarly, an @nt{assignment_statement} is not an initialization
+    of an object, so @Chg{Version=[3],New=[this bullet does not apply],Old=[the second sentence
+    applies]}.]}
+  @end{Ramification}
+
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[If the result is of an anonymous access type and
+  is the operand of an explicit conversion, the master is that of the target
+  type of the conversion;]}
+
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[If the result is of an anonymous access type and
+  defines an access discriminant, the master is the same as that for an object
+  created by an anonymous @nt{allocator} that defines an access discriminant
+  (even if the access result is of an access-to-subprogram type).]}
+
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[If the call itself defines the result of a
+  function to which one of the above rules applies, these rules are applied
+  recursively;]}
+
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[In other cases, the master of the call is that of
+  the innermost master that evaluates the function call.]}
+
+  @begin{Ramification}
+    @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02],ARef=[AI95-00416-01]}
+    @ChgAdded{Version=[2],Text=[The @lquotes@;innermost master which evaluated
+    the function call@rquotes@; does not include the function call itself (which
+    might be a master).]}
+
+    @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02],ARef=[AI95-00416-01]}
+    @ChgAdded{Version=[2],Text=[We really mean the innermost master here,
+    which could be a very short lifetime. Consider a function call used as
+    a parameter of a procedure call. In this case the innermost master which
+    evaluated the function call is the procedure call.]}
+  @end{Ramification}
+
+@end{InnerItemize}
+
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
-  @ChgAdded{Version=[2],Text=[If the function is used as a @nt{prefix},
-  the second sentence applies. Similarly, an
-  @nt{assignment_statement} is not an initialization of an object, so the
-  second sentence applies.]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The @lquotes@;innermost master which evaluated
-  the function call@rquotes@; does not include the function call itself (which
-  might be a master).]}
-
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[We really mean the innermost master here,
-  which could be a very short lifetime. Consider a function call used as
-  a parameter of a procedure call. In this case the innermost master which
-  evaluated the function call is the procedure call.]}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0234-1]}
+  @ChgAdded{Version=[3],Text=[These rules do not mention whether the result
+  object is built-in-place (see @RefSecNum{Assignment and Finalization}). In
+  particular, in the case where building in place is optional, the choice
+  whether or not to build-in-place has no effect on masters, lifetimes, or
+  accessibility.]}
 @end{Ramification}
 
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0234-1]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[There are several cases where the
+  implementation may have to pass in the accessibility level of the result
+  object on a call, to support later rules where the accessibility level comes
+  from the master of the call:]}
+
+  @begin{Itemize}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[when the function result may have a part with
+    access discriminants;]}
+
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[when the function result type is an anonymous
+    access type;]}
+
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[when the function result is built-in-place;]}
+
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[when the function has an explicitly
+    aliased parameter.]}
+  @end{Itemize}
+
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[In particular, this implies passing a level
+  parameter when the result type is class-wide, since descendants may add access
+  discriminants. For most implementations this will mean that functions with
+  controlling results will also need a level parameter.]}
+@end{ImplNote}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}@ChgNote{Just because the paragraph number is changed}
 @ChgAdded{Version=[2],Text=[Within a return statement, the accessibility level
 of the return object is that of the execution of the return statement. If the
 return statement completes normally by returning from the
@@ -4567,7 +4681,7 @@ of call, as does the level of any coextensions (see below) of the
 return object.]}
 
 @begin{Reason}
-  @ChgRef{Version=[2],Kind=[Added]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[We define the accessibility level of the return
   object during the return statement to be that of the return statement itself
   so that the object may be designated by objects local to the return
@@ -4631,9 +4745,19 @@ derived from an Unchecked_Access attribute, the accessibility is library-level
 no matter what the accessibility level of the object is  (see
 @RefSecNum{Unchecked Access Value Creation}).]}
 @end{Ramification}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0234-1]}
+@ChgAdded{Version=[3],Text=[If the value of the access discriminant is
+determined by a @nt{default_expression} in the declaration of the discriminant,
+the level of the object or subprogram designated by the associated value (or
+library level if null);]}
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[This covers the case of a unconstrained
+  subcomponent of a limited type with defaulted access discriminants.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0004-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0004-1]}
 @ChgAdded{Version=[2],Text=[If the value of the access discriminant is
 determined by a @Chg{Version=[3],New=[@nt{record_component_association}],
 Old=[@ntf{component_association}]} in an @nt{aggregate}, the
@@ -4650,13 +4774,14 @@ value (or library level if the value is null);]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}@ChgNote{Just because the paragraph number is changed}
 @ChgAdded{Version=[2],Text=[In other cases, where the value of the access
 discriminant is determined by an object
 with an unconstrained nominal subtype, the accessibility level of the object.]}
 
 @end{InnerItemize}
 @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[In other words, if you know the value of the
   discriminant for an @nt{allocator} or return statement from a discriminant
   constraint or an @nt{aggregate} component
@@ -4665,6 +4790,7 @@ with an unconstrained nominal subtype, the accessibility level of the object.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}@ChgNote{Just because the paragraph number is changed}
 @ChgAdded{Version=[2],Text=[The accessibility level of the anonymous access
 type of an access discriminant in any other context is that of the
 enclosing object.]}
@@ -4788,16 +4914,8 @@ the object is finalized (see @RefSecNum{Completion and Finalization}).]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1]}
 @ChgAdded{Version=[3],Text=[Within a return statement, the accessibility level
-of the anonymous access type of an access result is determined by the point of
-call. If the call is the operand of an explicit type conversion, the
-accessibility level is that of the target access type of the conversion. If the
-call is an actual parameter of another call or the @nt{prefix} of a name, the
-accessibility level is that of the innermost master of the call. If the call
-defines an access discriminant, the level is the same as that given above for an
-object created by an anonymous allocator that defines an access discriminant
-(even if the access result is of an access-to-subprogram type). If the call
-itself defines the result of a function with an access result, this rule is
-applied recursively.]}
+of the anonymous access type of an access result is that of the master of the
+call.]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0014-1]}
 The accessibility level of a view of an object or subprogram
@@ -4892,17 +5010,18 @@ the level of the explicitly aliased parameter; for statically comparing with the
 level of other entities, an explicitly aliased parameter of @i<F> is considered to
 have the accessibility level of the body of @i<F>.]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1],ARef=[AI05-0235-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1],ARef=[AI05-0234-1],ARef=[AI05-0235-1]}
 @ChgAdded{Version=[3],Text=[For determining whether a level is statically deeper
 than the level of the anonymous access type of an access result of a function,
 when within a return statement that applies to the function, the level
-determined by the point of call is presumed to be the same as that of the level
+of the master of the call is presumed to be the same as that of the level
 of the master that elaborated the function body.]}
 
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0235-1]}
   @ChgAdded{Version=[3],Text=[This rule has no effect if the previous bullet
-  also applies (that is, the "a level" is of an explicitly aliased parameter).]}
+  also applies (that is, the @ldquote@;a level@rdquote is of
+  an explicitly aliased parameter).]}
 @end{Honest}
 
 
@@ -5875,7 +5994,7 @@ uses of anonymous access types.]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected accessibility rules for
   access discriminants so that no cases are omitted.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0051-1],ARef=[AI05-0235-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0051-1],ARef=[AI05-0234-1],ARef=[AI05-0235-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected accessibility rules for
   anonymous access return types and access discriminants in return statements.]}
 
@@ -5888,6 +6007,12 @@ uses of anonymous access types.]}
   @ChgAdded{Version=[3],Text=[Defined the accessibility of explicitly
   aliased parameters (see @RefSecNum{Subprogram Declarations}) and
   @nt{conditional_expression}s (see @RefSecNum{Conditional Expressions}).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Defined the term @ldquote@;master
+  of the call@rdquote to simplify other wording, especially that for the
+  accessibility checks associated with return statements and explicitly aliased
+  parameters.]}
 @end{DiffWord2005}
 
 

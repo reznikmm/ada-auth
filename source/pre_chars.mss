@@ -1,15 +1,16 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.37 $ $Date: 2011/05/03 06:34:09 $ $Author: randy $ }
+@comment{ $Revision: 1.38 $ $Date: 2011/06/04 05:28:20 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2011/05/03 06:34:09 $}
+@Comment{$Date: 2011/06/04 05:28:20 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
 This clause presents the packages related to character processing:
-an empty pure package Characters and child packages
-Characters.Handling and Characters.Latin_1.
+an empty @Chg{Version=[3],New=[declared ],Old=[]}pure package Characters
+and child packages Characters.Handling and Characters.Latin_1.
 The package Characters.Handling provides classification and conversion
 functions for Character data, and some simple functions for
 dealing with Wide_Character @Chg{Version=[2],New=[and Wide_Wide_Character ],

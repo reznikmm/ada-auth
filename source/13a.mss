@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/05/07 03:43:08 $}
+@Comment{$Date: 2011/06/04 05:28:19 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.88 $}
+@Comment{$Revision: 1.89 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -3356,9 +3356,9 @@ are view specific:]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
-@ChgAdded{Version=[3],Text=[Other @nt{aspect_specification}s are associated with
-the entity, and apply to all views of the entity, unless otherwise specified in
-this International Standard.]}
+@ChgAdded{Version=[3],Text=[All other @nt{aspect_specification}s are associated
+with the entity, and apply to all views of the entity, unless otherwise
+specified in this International Standard.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[If the aspect_mark includes 'Class,
@@ -3412,7 +3412,7 @@ of the application of the rule.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @ChgAdded{Version=[3],Text=[There are no language-defined aspects that may be
-specified on a @nt{renaming_declaration} nor on a @nt{formal_type_declaration}.]}
+specified on a @nt{renaming_declaration} or on a @nt{formal_type_declaration}.]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}

@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2011/05/03 06:34:08 $}
+@Comment{$Date: 2011/06/04 05:28:19 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1304,7 +1304,7 @@ If the assertion policy is Check at the point of a @nt{pragma} Assert, the
 elaboration of the pragma consists of evaluating the boolean expression, and if
 the result is False, evaluating the Message argument, if any, and raising the
 exception Assertions.Assertion_Error, with a message if the Message
-argument is provided.]}
+argument is provided.@Defn2{Term=[assertion policy],Sec=[Assert pragma]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Calling the procedure
@@ -1456,7 +1456,7 @@ and by parts of Section 9.
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}
-@Chg{Version=[2],New=[@i{Checking pragmas}@Defn{Checking pragmas} give
+@Chg{Version=[2],New=[@i{Checking pragmas}@Defn{checking pragmas} give
 instructions to an implementation on handling language-defined checks.],Old=[]}
 A @nt{pragma} Suppress gives permission to an
 implementation to omit certain language-defined checks@Chg{Version=[2],

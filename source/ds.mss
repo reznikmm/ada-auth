@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.53 $ $Date: 2011/05/03 06:34:09 $ $Author: randy $ }
+@comment{ $Revision: 1.54 $ $Date: 2011/06/04 05:28:20 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2011/05/03 06:34:09 $}
+@Comment{$Date: 2011/06/04 05:28:20 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -255,37 +255,51 @@ are associated with each category to ensure that the semantics
 of a distributed program remain close to the semantics for a nondistributed
 program.]
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
 @RootDefn{categorization pragma}
 @RootDefn{pragma, categorization}
 @PDefn2{Term=[library unit pragma], Sec=(categorization pragmas)}
 @PDefn2{Term=[pragma, library unit], Sec=(categorization pragmas)}
-@Defn{categorized library unit}
+@Chg{Version=[3],New=[@Defn{categorization aspect}],Old=[]}@Defn{categorized library unit}
 A @i{categorization pragma} is a library unit pragma
 (see @RefSecNum{Pragmas and Program Units})
 that restricts the declarations, child units, or
-semantic dependences of the library unit to which it applies. A
-@i{categorized library unit} is a library unit to which
-a categorization pragma applies.
+semantic dependences of the library unit to which it applies@Chg{Version=[3],New=[;
+each categorization pragma specifies a corresponding @i{categorization aspect}],Old=[]}. A
+@i{categorized library unit} is a library unit @Chg{Version=[3],New=[that has a
+categorization aspect that is True],Old=[to which a categorization pragma
+applies]}.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
 The pragmas Shared_Passive, Remote_Types, and Remote_Call_Interface
-are categorization pragmas.
-In addition, for the purposes of this Annex, the pragma Pure
-(see @RefSecNum{Elaboration Control}) is
-considered a categorization pragma.
+are categorization pragmas@Chg{Version=[3],New=[,
+and the associated aspects are categorization aspects],Old=[]}.
+In addition, for the purposes of this Annex, the @Chg{Version=[3],New=[aspect],
+Old=[pragma]} Pure (see @RefSecNum{Elaboration Control}) is
+considered a categorization @Chg{Version=[3],New=[aspect], Old=[pragma]}.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078],ARef=[AI95-00048-01]}
-@Defn{shared passive library unit}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
+@Redundant[@Defn{shared passive library unit}
 A library package or generic library package is called a
-@i{shared passive} library unit if a Shared_Passive pragma applies to it.
+@i{shared passive} library unit if @Chg{Version=[3],New=[the],Old=[a]}
+Shared_Passive @Chg{Version=[3],New=[aspect is True],Old=[pragma applies to it]}.
 @Defn{remote types library unit}
 A library package or generic library package is
-called a @i{remote types} library unit if a Remote_Types pragma applies to it.
+called a @i{remote types} library unit if @Chg{Version=[3],New=[the],Old=[a]}
+Remote_Types @Chg{Version=[3],New=[aspect is True],Old=[pragma applies to it]}.
 @Defn{remote call interface}
 A library @Chg{New=[unit],Old=[package or generic library package]} is called
-a @i{remote call interface} if a Remote_Call_Interface pragma applies to it.
+a @i{remote call interface} if @Chg{Version=[3],New=[the],Old=[a]}
+Remote_Call_Interface @Chg{Version=[3],New=[aspect is True],Old=[pragma applies to it]}.]
 @Defn{normal library unit}
-A @i{normal library unit} is one to which no categorization pragma
-applies.
+A @i{normal library unit} is one to which no categorization
+@Chg{Version=[3],New=[aspect is True],Old=[pragma applies]}.
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
+  @ChgAdded{Version=[3],Text=[These terms (other than @ldquote@;normal
+  library unit@rdquote) are really defined in the following clauses.]}
+@end{TheProof}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0078],ARef=[AI95-00048-01]}
 @ChgAdded{Version=[1],Text=[A library subprogram can be a remote call
@@ -300,15 +314,18 @@ semantically only on library units of that category or an earlier one, except
 that the body of a remote types or remote call interface library unit is
 unrestricted@Chg{Version=[3],New=[ and the declaration of a remote types or
 remote call interface library unit may depend on preelaborated normal library
-units that are mentioned only in private with clauses}],Old=[]}.
+units that are mentioned only in private with clauses],Old=[]}.
 
 @Leading@;The overall hierarchy (including declared pure) is as follows:
 @begin{Description}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
 Declared Pure @\Can depend only on other declared
-pure library units;
+pure library units@Chg{Version=[3],New=[ and upon limited views],Old=[]};
 
-Shared Passive @\Can depend only on other shared passive or
-    declared pure library units;
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
+Shared Passive @\Can depend only on other shared passive
+    @Chg{Version=[3],New=[],Old=[or declared pure ]}library
+    units@Chg{Version=[3],New=[, or on one of the above],Old=[]};
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1]}
 Remote Types @\The declaration of the library unit can depend only
@@ -367,6 +384,10 @@ Implementations are allowed to define other categorization pragmas.
   @ChgAdded{Version=[3],Text=[We now allow private with of preelaborated
   units in Remote Types and Remote Call Interface units; this is documented
   as an extension in the sections where this is defined normatively.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
+  @ChgAdded{Version=[3],Text=[We have introduced categorization aspects; these
+  are documented as extensions in the clauses where they actually are defined.]}
 @end{DiffWord2005}
 
 
@@ -402,9 +423,14 @@ The form of a @nt{pragma} Shared_Passive is as follows:
 
 @begin{Legality}
 
-@Leading@Defn{shared passive library unit}
-A @i{shared passive library unit} is a library unit to which
-a Shared_Passive pragma applies.
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
+@Defn{shared passive library unit}
+A@Chg{Version=[3],New=[ pragma Shared_Passive is used to specify that a
+library unit is a],Old=[]} @i{shared passive library unit}@Chg{Version=[3],New=[,
+namely that the],Old=[ is
+a library unit to which a]}
+Shared_Passive
+@Chg{Version=[3],New=[aspect of the library unit is True],Old=[pragma applies]}.
 The following restrictions apply to such a library unit:
 @begin{itemize}
 @Redundant[it shall be preelaborable (see @RefSecNum{Elaboration Control});]
@@ -419,14 +445,15 @@ The following restrictions apply to such a library unit:
   some active partition.
 @end{Ramification}
 
-it shall depend semantically only upon
-declared pure or shared passive library units;
-@begin{reason}
-Shared passive packages cannot depend semantically upon remote types packages
-because the values of an access type declared in a remote types package
-refer to the local heap of the active partition including the
-remote types package.
-@end{reason}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
+it shall depend semantically only upon declared pure or shared passive
+@Chg{Version=[3],New=[@nt{library_item}s],Old=[library units]};
+@begin{Reason}
+  Shared passive packages cannot depend semantically upon remote types packages
+  because the values of an access type declared in a remote types package
+  refer to the local heap of the active partition including the
+  remote types package.
+@end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0080],ARef=[AI95-00003-01]}
 it shall not contain a library-level declaration of an access type
@@ -502,6 +529,14 @@ partitions.
   access types in blocks in shared passive generic packages.]}
 @end{DiffWord95}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Shared_Passive
+  is now a categorication aspect,
+  so it can be specified by an @nt{aspect_specification} @em
+  although the pragma is still preferred by the Standard.]}
+@end{Extend2005}
+
 
 @LabeledSubClause{Remote Types Library Units}
 
@@ -532,16 +567,21 @@ The form of a @nt{pragma} Remote_Types is as follows:
 
 @begin{Legality}
 
-@Leading@Defn{remote types library unit}
-A @i{remote types library unit} is a library unit to which the pragma
-Remote_Types applies. The following restrictions apply to
-the declaration of such a library unit:
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
+@Defn{remote types library unit}
+A@Chg{Version=[3],New=[ pragma Remote_Types is used to specify that a library unit is a],Old=[]}
+@i{remote types library unit}@Chg{Version=[3],New=[,
+namely that the],Old=[ is a library unit to which the pragma]}
+Remote_Types
+@Chg{Version=[3],New=[aspect of the library unit is True],Old=[applies]}.
+The following restrictions apply to the declaration of such a library unit:
 @begin{itemize}
 @Redundant[it shall be preelaborable;]
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1]}
-it shall depend semantically only on declared pure, shared passive,
-@Chg{Version=[3],New=[],Old=[or ]}other remote types library
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1],ARef=[AI05-0243-1]}
+it shall depend semantically only on declared pure@Chg{Version=[3],New=[
+@nt{library_item}s],Old=[]}, shared passive@Chg{Version=[3],New=[ library
+units],Old=[]}, @Chg{Version=[3],New=[],Old=[or ]}other remote types library
 units@Chg{Version=[3],New=[, or preelaborated normal library units that are
 mentioned only in private with clauses],Old=[]};
 
@@ -649,10 +689,10 @@ type ],Old=[]}shall @Chg{Version=[2],New=[support external streaming (see
 nonlimited type or a type with],Old=[]} Read and Write attributes@Chg{New=[
 specified via an @nt{attribute_definition_clause};],Old=[.]}]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0060-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0060-1],ARef=[AI05-0215-1]}
 @ChgAdded{Version=[3],Text=[The corresponding specific type shall not have
-a primitive procedure to which a @nt{pragma} Implemented applies unless
-the @nt{implementation_kind} of the pragma is By_Any;]}
+a primitive procedure with the Synchronization aspect specified unless the
+@nt{synchronization_kind} is Optional;]}
 
 A value of a remote access-to-class-wide type shall be
 explicitly converted only to another remote access-to-class-wide type;
@@ -801,7 +841,14 @@ synchronized, protected, or task interface type.]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0206-1]}
   @ChgAdded{Version=[3],Text=[Added wording to allow private withs of
   preelaborated normal units in the specification of a remote types unit.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Remote_Types
+  is now a categorication aspect,
+  so it can be specified by an @nt{aspect_specification} @em
+  although the pragma is still preferred by the Standard.]}
 @end{Extend2005}
+
 
 
 @LabeledSubClause{Remote Call Interface Library Units}
@@ -845,20 +892,26 @@ A @nt{pragma} All_Calls_Remote is a library unit pragma.
 @begin{Legality}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078],ARef=[AI95-00048-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
 @Defn{remote call interface}
 @Defn2{Term=[RCI],Sec=(library unit)}
 @Defn2{Term=[RCI],Sec=(package)}
 @Defn2{Term=[RCI],Sec=(generic)}
 @Defn{remote subprogram}
-A @i{remote call interface (RCI)} is a library unit to which the
-pragma Remote_Call_Interface applies.
+A@Chg{Version=[3],New=[ pragma Remote_Call_Interface is used to specify that a
+library unit is a],Old=[]} @i{remote call interface (RCI)}@Chg{Version=[3],New=[,
+namely that the],Old=[ is a library unit to which the pragma]}
+Remote_Call_Interface
+@Chg{Version=[3],New=[aspect of the library unit is True],Old=[applies]}.
 A subprogram declared in the visible part of such a library unit@Chg{New=[,
 or declared by such a library unit,],Old=[]} is called a @i{remote subprogram}.
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1],ARef=[AI05-0243-1]}
 The declaration of an RCI library unit shall be preelaborable
 (see @RefSecNum{Elaboration Control}), and shall depend semantically
-only upon declared pure, shared passive,
+only upon declared pure@Chg{Version=[3],New=[ @nt{library_item}s],Old=[]},
+shared passive@Chg{Version=[3],New=[ library units],Old=[]},
+remote types@Chg{Version=[3],New=[ library units],Old=[]},
 @Chg{Version=[3],New=[],Old=[or ]}other remote call interface library
 units@Chg{Version=[3],New=[, or preelaborated normal library units that are
 mentioned only in private with clauses],Old=[]}.
@@ -1015,8 +1068,10 @@ and all the units are in the same active partition.
 
 @begin{ImplPerm}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
 An implementation need not support the
-Remote_Call_Interface pragma nor the All_Calls_Remote pragma.
+Remote_Call_Interface pragma @Chg{Version=[3],New=[or aspect ],Old=[]}nor
+the All_Calls_Remote pragma.
 @Redundant[Explicit message-based communication between active partitions can
 be supported as an alternative to RPC.]
 @begin{Ramification}
@@ -1070,8 +1125,13 @@ be supported as an alternative to RPC.]
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Added wording to
   allow private withs of preelaborated normal units in the specification of a
   remote call interface unit.]}
-@end{Extend2005}
 
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Remote_Call_Interface
+  is now a categorication aspect, so it can be specified by
+  an @nt{aspect_specification} @em
+  although the pragma is still preferred by the Standard.]}
+@end{Extend2005}
 
 
 

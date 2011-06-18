@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/05/07 03:43:08 $}
+@Comment{$Date: 2011/06/04 05:28:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.79 $}
+@Comment{$Revision: 1.80 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1271,10 +1271,13 @@ and the like.
 @Redundant[(after any implicit dereference)]},
 the following attribute is defined:
 @begin(description)
-@Attribute{Prefix=<X>, AttrName=<Valid>,
+@ChgAttribute{Version=[3],Kind=[Revised],ChginAnnex=[T],
+  Leading=<F>, Prefix=<X>, AttrName=<Valid>,
+  ARef=[AI05-0153-3],
   Text=<Yields True if and only if
-the object denoted by X is normal and has a valid
-representation.
+the object denoted by X is normal@Chg{Version=[3],New=[,],Old=[ and]} has a
+valid representation@Chg{Version=[3],New=[, and the predicate@Defn2{Term=[predicate evaluated],Sec=[Valid attribute]}
+of the nominal subtype of X evaluates to True],Old=[]}.
 The value of this attribute is of the predefined type Boolean.>}
 @begin{Ramification}
   Having checked that X'Valid is True, it is safe to read the
@@ -1359,8 +1362,15 @@ X'Valid is new in Ada 95.
   @ChgAdded{Version=[2],Text=[Added a note explaining that handlers for
   Constraint_Error and Program_Error are needed in the general case of
   testing for validity. (An implementation could document cases where these
-  are not necessary, but there is no language requirement.]}
+  are not necessary, but there is no language requirement.)]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+  @ChgAdded{Version=[3],Text=[The validity check now also includes a check
+  of the predicate aspects (see @RefSecNum{Subtype Predicates}), if any, of
+  the subtype of the object.]}
+@end{DiffWord2005}
 
 
 
@@ -2145,15 +2155,21 @@ User-defined storage pools are new to Ada 95.
 @end{Extend83}
 
 @begin{DiffWord83}
-Ada 83 had a concept called a @lquotes@;collection,@rquotes@;
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1]}
+Ada 83 @Chg{Version=[3],New=[originally introduced the],Old=[had a]}
+concept called a @lquotes@;collection,@rquotes@;
 which is similar to what we call a storage pool.
 All access types in the same derivation class
-shared the same collection.
-In Ada 95, all access types in the same derivation class
+@Chg{Version=[3],New=[share],Old=[shared]} the same collection.
+@Chg{Version=[3],New=[],Old=[In ]}Ada 95@Chg{Version=[3],New=[ introduces
+the storage pool, which is similar in that],Old=[,]} all access types in the
+same derivation class
 share the same storage pool,
 but other (unrelated) access types can also share the same storage pool,
 either by default, or as specified by the user.
-A collection was an amorphous collection of objects;
+A collection @Chg{Version=[3],New=[is],Old=[was]} an amorphous collection
+of objects@Chg{Version=[3],New=[ ( mainly used to describe finalization of
+access types)],Old=[]};
 a storage pool is a more concrete concept @em hence
 the different name.
 
@@ -2541,12 +2557,14 @@ This is implied by the rules of @RefSecNum{Formal Access Types}.
 @end{DiffWord2005}
 
 
-@LabeledSubClause{Pragma Controlled}
+@LabeledRevisedSubClause{Version=[3],New=[Default Storage Pools],
+Old=[Pragma Controlled]}
 
 @begin{Intro}
-@Redundant[Pragma Controlled is used to prevent any automatic
-reclamation of storage (garbage collection) for the objects
-created by @nt<allocator>s of a given access type.]
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[@Redundant[Pragma Controlled is used to prevent
+any automatic reclamation of storage (garbage collection) for the objects
+created by @nt<allocator>s of a given access type.]]}
 @end{Intro}
 
 @begin{Syntax}
@@ -2703,17 +2721,25 @@ a pragma Controlled has no effect.
 @end{ImplPerm}
 
 @begin{DiffWord83}
-Ada 83 used the term @lquotes@;automatic storage reclamation@rquotes@; to refer to what
-is known traditionally as @lquotes@;garbage collection@rquotes@;.
-Because of the existence of storage pools
-(see @RefSecNum{Storage Management}),
-we need to distinguish this from the storage reclamation that might
-happen upon leaving a master.
-Therefore, we now use the term @lquotes@;garbage collection@rquotes@;
-in its normal computer-science sense.
-This has the additional advantage of making our terminology more
-accessible to people outside the Ada world.
+  @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+  @ChgDeleted{Version=[3],Text=[Ada 83 used the term @lquotes@;automatic storage
+  reclamation@rquotes@; to refer to what is known traditionally as
+  @lquotes@;garbage collection@rquotes@;. Because of the existence of storage
+  pools (see @RefSecNum{Storage Management}), we need to distinguish this from
+  the storage reclamation that might happen upon leaving a master. Therefore, we
+  now use the term @lquotes@;garbage collection@rquotes@; in its normal
+  computer-science sense. This has the additional advantage of making our
+  terminology more accessible to people outside the Ada world.]}
 @end{DiffWord83}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[Pragma Controlled has been dropped from Ada,
+  as it has no effect in any known Ada implementations and it seems to promise
+  capabilities not expected in Ada implementations. This is not an
+  incompatibility, as the pragma merely becomes unrecognized (with a warning)
+  and can be implemented as a implementation-defined pragma if desired.]}
+@end{DiffWord2005}
 
 
 @LabeledAddedSubClause{Version=[3],Name=[Storage Subpools]}
@@ -4816,13 +4842,26 @@ but not the type.
 @end{Ramification}
 
 @begin{Itemize}
-@Leading@PDefn2{Term=[freezing], Sec=(generic_instantiation)}
-The occurrence of a @nt{generic_instantiation} causes freezing;
-also, if a parameter of the instantiation is defaulted,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0213-1]}
+@PDefn2{Term=[freezing], Sec=(generic_instantiation)}
+The occurrence of a @nt{generic_instantiation} causes
+freezing@Chg{Version=[3],New=[, except that
+a @nt{name} which is a generic actual parameter whose corresponding
+generic formal parameter is a formal incomplete type
+(see @RefSecNum{Formal Private and Derived Types})
+does not cause freezing. In addition, if],Old=[;
+also, if]} a parameter of the instantiation is defaulted,
 the @nt{default_expression} or @nt{default_name} for that parameter
 causes freezing.
 
-@Leading@PDefn2{Term=[freezing], Sec=(object_declaration)}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0213-1]}
+  @ChgAdded{Version=[3],Text=[Thus, an actual parameter corresponding to a
+  formal incomplete type parameter may denote an incomplete or private type
+  which is not completely defined at the point of the @nt{generic_instantiation}.]}
+@end{Ramification}
+
+@PDefn2{Term=[freezing], Sec=(object_declaration)}
 The occurrence of an @nt<object_declaration> that has no corresponding
 completion causes freezing.
 @begin{Ramification}
@@ -5522,5 +5561,9 @@ Old=[@ntf{attribute_representation_clause}]} has been generalized.
   @ChgAdded{Version=[3],Text=[Added freezing rules for @nt{aspect_specification}s;
   these are frozen at the freezing point of the associated entity, not the
   point of declaration.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0213-1]}
+  @ChgAdded{Version=[3],Text=[Added freezing rules for formal incomplete types;
+  the corresponding actual is not frozen.]}
 @end{DiffWord2005}
 

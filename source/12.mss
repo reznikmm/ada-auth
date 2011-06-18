@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2011/05/05 07:27:41 $}
+@Comment{$Date: 2011/06/04 05:28:19 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.80 $}
+@Comment{$Revision: 1.81 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1619,10 +1619,20 @@ scheme very well.
 @end{Intro}
 
 @begin{Syntax}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0213-1]}
 @Syn{lhs=<formal_type_declaration>,rhs="
-    @key{type} @Syn2{defining_identifier}[@Syn2{discriminant_part}] @key{is} @Syn2{formal_type_definition}@Chg{Version=[3],New=<
-        [@Syn2{aspect_specification}]>,Old=[]};"}
+    @Chg{Version=[3],New=[  @Syn2{formal_complete_type_declaration}
+    | @Syn2{formal_incomplete_type_declaration}],Old=<@key{type} @Syn2{defining_identifier}[@Syn2{discriminant_part}] @key{is} @Syn2{formal_type_definition}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]};>}"}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0183-1],ARef=[AI05-0213-1]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<formal_complete_type_declaration>,Old=<>}>,rhs="@Chg{Version=[3],New=<
+    @key{type} @Syn2{defining_identifier}[@Syn2{discriminant_part}] @key{is} @Syn2{formal_type_definition}
+        [@Syn2{aspect_specification}];>,Old=<>}"}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0213-1]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<formal_incomplete_type_declaration>,Old=<>}>,rhs="@Chg{Version=[3],New=<
+    @key{type} @Syn2{defining_identifier}[@Syn2{discriminant_part}] [@key{is tagged}];>,Old=<>}"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
 @Syn{lhs=<formal_type_definition>,rhs="
@@ -1669,6 +1679,7 @@ of a generic formal type is not a generic formal subtype.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0213-1]}
 @Chg{Version=[2],New=[@Defn{determined category for a formal type}
 @Defn{category determined for a formal type}],
 Old=[@Defn{determined class for a formal type}
@@ -1678,7 +1689,9 @@ The form of a @nt{formal_type_definition} @i{determines a
 formal type belongs.
 For a @nt{formal_private_type_definition} the reserved words
 @key{tagged} and @key{limited} indicate the @Chg{Version=[2],New=[category of types],Old=[class]}
-(see @RefSecNum{Formal Private and Derived Types}).
+(see @RefSecNum{Formal Private and Derived Types}).@Chg{Version=[3],New=[
+The reserved word @key{tagged} also plays this role in the case of a
+@nt{formal_incomplete_type_declaration}.],Old=[]}
 For a @nt{formal_derived_type_definition} the
 @Chg{Version=[2],New=[category of types],Old=[class]} is
 the derivation class rooted at the ancestor type.
@@ -1929,6 +1942,10 @@ had to.
   @ChgAdded{Version=[3],Text=[@b<Correction>: Updated the wording to
   acknowledge the possibility of operations that are never declared for an
   actual type but still can be used inside of a generic unit.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0215-1]}
+  @ChgAdded{Version=[3],Text=[Formal incomplete types are added; these
+  are documented as an extension in the next clause.]}
 @end{DiffWord2005}
 
 
@@ -1936,27 +1953,40 @@ had to.
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0213-1]}
 @Redundant[@Chg{Version=[2],New=[In its most general form, the category],
 Old=[The class]}
 determined for a formal private type @Chg{Version=[2],New=[is all types,
-but it can be restricted to only nonlimited types or to only tagged types],
+but @Chg{Version=[2],New=[the category],Old=[it]} can be restricted to
+only nonlimited types or to only tagged types],
 Old=[can be either limited or nonlimited, and either tagged or untagged;
-no more specific class is known for such a type]}.
+no more specific class is known for such a type]}.@Chg{Version=[2],New=[
+Similarly, the category for a formal incomplete type is all types but the
+category can be restricted to only tagged types; unlike other formal types,
+the actual type does not need to be able to be frozen (see @RefSecNum{Freezing Rules}).],Old=[]}
 The @Chg{Version=[2],New=[category],Old=[class]} determined for a formal
 derived type is the derivation class rooted at the ancestor type.]
 @begin{TheProof}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
-  @ChgAdded{Version=[2],Text=[The first rule is given normatively below,
-  and the second rule is given normatively in
-  @RefSecNum{Formal Types}; they are repeated here to give a capsule
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0213-1]}
+  @ChgAdded{Version=[2],Text=[The first @Chg{Version=[3],New=[two rules
+  are],Old=[rule is]} given normatively below,
+  and the @Chg{Version=[3],New=[third],Old=[second]} rule is given normatively
+  in @RefSecNum{Formal Types}; they are repeated here to give a capsule
   summary of what this subclause is about.]}
 @end{TheProof}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0213-1]}
+  @ChgAdded{Version=[3],Text=[Since the actual of a formal incomplete type
+  does not need to be able to be frozen, the actual can be an incomplete
+  type or a partial view before it's completion.]}
+@end{Ramification}
 @end{Intro}
 
 @begin{Syntax}
 @Syn{lhs=<formal_private_type_definition>,
   rhs="[[@key{abstract}] @key{tagged}] [@key{limited}] @key{private}"}
-
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01],ARef=[AI95-00419-01],ARef=[AI95-00443-01]}
 @Syn{lhs=<formal_derived_type_definition>,
@@ -2065,12 +2095,20 @@ type shall be a synchronized tagged type.]}
   ban this case.]}
 @end{Discussion}
 
-If the formal subtype is definite, then the actual subtype shall
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0213-1]}
+If @Chg{Version=[3],New=[a],Old=[the]} formal@Chg{Version=[3],New=[ private or
+derived],Old=[]} subtype is definite, then the actual subtype shall
 also be definite.
 @begin{Ramification}
 On the other hand, for an indefinite formal subtype,
 the actual can be either definite or indefinite.
 @end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0213-1]}
+@ChgAdded{Version=[3],Text=[A @nt{formal_incomplete_type_declaration} declares
+a formal incomplete type. The only view of a formal incomplete type is an
+incomplete view. @Redundant[Thus, a formal incomplete type is subject to the same
+usage restrictions as any other incomplete type @em see @RefSecNum{Incomplete Type Declarations}.]]}
 
 @leading@;For a generic formal derived type with no @nt<discriminant_part>:
 @begin(Itemize)
@@ -2125,10 +2163,11 @@ the actual can be either definite or indefinite.
 
 @end(Itemize)
 
-@Leading@;The declaration of a formal derived type shall not have a
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0213-1]}
+The declaration of a formal derived type shall not have a
 @nt{known_discriminant_part}.
-For a generic formal private type with a
-@nt{known_discriminant_part}:
+For a generic formal private @Chg{Version=[3],New=[or incomplete ],Old=[]}type
+with a @nt{known_discriminant_part}:
 @begin{Itemize}
 The actual type shall be a type with the same number of discriminants.
 
@@ -2169,6 +2208,12 @@ private type is as follows:
 
 @Redundant[The presence of the reserved word @key{abstract} determines
 whether the actual type may be abstract.]
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0213-1]}
+@ChgAdded{Version=[3],Text=[The category determined for a formal incomplete type is the
+category of all types, unless the @nt{formal_type_declaration}
+includes the reserved word @key[tagged]; in this case, it is the
+category of all tagged types.]}
 
 A formal private or derived type is a private or derived type,
 respectively.
@@ -2439,6 +2484,13 @@ run-time check to a compile-time check.
   derived type. While this was allowed, it would break the contract
   for the limited type, so hopefully no programs actually depend on that.]}
 @end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0215-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Formal incomplete types are a new kind of generic formal; these can
+  be instantiated with incomplete types and unfrozen private types.]}
+@end{Extend2005}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0029-1]}

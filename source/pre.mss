@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2011/05/03 06:34:09 $}
+@Comment{$Date: 2011/06/04 05:28:20 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.41 $}
+@comment{$Revision: 1.42 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -20,7 +20,7 @@ other library units are children of these:]
 @Leading@Keepnext
 @ChgRef{Version=(1),Kind=(Revised),Ref=(8652/0047),ARef=(AI95-00081-01)}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00424-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0069-1],ARef=[AI05-0166-1],ARef=[AI05-0168-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0069-1],ARef=[AI05-0166-1],ARef=[AI05-0167-1],ARef=[AI05-0168-1]}
 @ @*@ @;@comment{paragraph number here, paragraph numbers seem to intrude on
 the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @begin{Display}
@@ -229,6 +229,7 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\Address_To_Access_Conversions @em @RefSecNum{The Package System.Address_To_Access_Conversions}
 @\@\Machine_Code @em @RefSecNum{Machine Code Insertions}
 @Chg{Version=[3],New=(@\@\Multiprocessors @em @RefSecNum{Multiprocessor Implementation}
+@\@\@\Dispatching_Domains @em @RefSecNum{Multiprocessor Dispatching Domains}
 ),Old=()}@\@\RPC @em @RefSecNum{Partition Communication Subsystem}
 @\@\Storage_Elements @em @RefSecNum{The Package System.Storage_Elements}
 @\@\Storage_Pools @em @RefSecNum{Storage Management}>]

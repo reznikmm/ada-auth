@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2011/03/11 07:00:37 $}
+@Comment{$Date: 2011/06/04 05:28:19 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.43 $}
+@Comment{$Revision: 1.44 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -708,7 +708,10 @@ The expected type for each @nt{discrete_choice} is the type of the
 @end{Resolution}
 
 @begin{Legality}
-The @nt{expression}s and @nt{discrete_range}s given as
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
+The @Chg{Version=[3],New=[@nt{choice_expression}s,
+@nt{subtype_indication}s,],Old=[@nt{expression}s]} and
+@Chg{Version=[3],New=[@nt{range}s],Old=[@nt{discrete_range}s]} given as
 @nt{discrete_choice}s of a @nt{case_statement} shall be static.
 @Redundant[A @nt{discrete_choice} @key(others), if present,
 shall appear alone and in the last @nt{discrete_choice_list}.]
@@ -716,7 +719,7 @@ shall appear alone and in the last @nt{discrete_choice_list}.]
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1],ARef=[AI05-0240-1]}
 The possible values of the
 @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression} shall be
-covered @Chg{Version=[3],New=[(@RefSecNum{Variant Parts and Discrete Choices}) ],
+covered @Chg{Version=[3],New=[(see @RefSecNum{Variant Parts and Discrete Choices}) ],
 Old=[]}as follows:
   @begin{Discussion}
     @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0240-1]}
@@ -725,7 +728,7 @@ Old=[]}as follows:
     @RefSecNum{Variant Parts and Discrete Choices}.]}
   @end{Discussion}
 @begin{itemize}
-  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1],ARef=[AI05-0188-1]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1],ARef=[AI05-0153-3],ARef=[AI05-0188-1]}
   If the @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression} is a @nt{name} @Redundant[(including a
   @nt<type_conversion>@Chg{Version=[3],New=[, a @nt{qualified_expression},],Old=[]}
   or a @nt<function_call>)] having
@@ -734,8 +737,9 @@ Old=[]}as follows:
   @nt{subtype_mark} denotes a static and constrained
   scalar subtype,]}
   then each non-@key{others} @nt{discrete_choice} shall cover only values in
-  that subtype, and each value of that subtype shall
-  be covered by some @nt{discrete_choice}
+  that subtype@Chg{Version=[3],New=[ that satisfy the predicate],Old=[]},
+  and each value of that subtype@Chg{Version=[3],New=[ that satisfies the
+  predicate],Old=[]} shall be covered by some @nt{discrete_choice}
   @Redundant[(either explicitly or by @key(others))].
   @begin{Ramification}
     Although not official @nt<name>s of objects, a value conversion
@@ -958,10 +962,16 @@ for @nt<name>s, rather than being separated out along with
 @nt<qualified_expression>s.
 @end{DiffWord83}
 
+
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0003-1]}
   @ChgAdded{Version=[3],Text=[Rewording to reflect that
   a @nt{qualified_expression} is now a @nt{name}.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+  @ChgAdded{Version=[3],Text=[Revised for changes to @nt{discrete_choice}s
+  made to allow static predicates (see @RefSecNum{Subtype Predicates}) as
+  case choices (see @RefSecNum{Variant Parts and Discrete Choices}).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
   @ChgAdded{Version=[3],Text=[Added the @SynI{selecting_} prefix to

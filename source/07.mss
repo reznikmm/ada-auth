@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2011/05/07 03:43:08 $}
+@Comment{$Date: 2011/06/04 05:28:19 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.111 $}
+@Comment{$Revision: 1.112 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1237,6 +1237,64 @@ Old=[within the immediate scope of the array type.]}
 In such a case, the predefined "=" operator is implicitly declared at
 that place, and assignment is allowed after that place.]
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0115-1]}
+@ChgAdded{Version=[3],Text=[A type is a @i<descendant>@Defn2{Term=[descendant],
+Sec=[of the full view of a type]} of the full view of some ancestor
+of its parent type only if the current view it has of its parent is a
+descendant of the full view of that ancestor. More generally, at any given
+point, a type is descended from the same view of an ancestor as that from which
+the current view of its parent is descended. This view determines what
+characteristics are inherited from the ancestor@Redundant[, and, for example,
+whether the type is considered to be a descendant of a record type, or a
+descendant only through record extensions of some more distant ancestor].]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0115-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[It is possible for there to be places
+where a derived type is visibly a descendant of an ancestor type, but not a
+descendant of even a partial view of the ancestor type, because the parent
+of the derived type is not visibly a descendant of the ancestor.  In
+this case, the derived type inherits no characteristics from that
+ancestor, but nevertheless is within the derivation class of the
+ancestor for the purposes of type conversion, the "covers"
+relationship, and matching against a formal derived type. In this
+case the derived type is considered to be a @i<descendant> of an
+incomplete view of the ancestor.@Defn2{Term=[descendant],
+Sec=[of an incomplete view]}]]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[Here is an example of this situation:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@key[package] P @key[is]
+   @key[type] T @key[is] @key[private];
+   C : @key[constant] T;
+@key[private]
+   @key[type] T @key[is new] Integer;
+   C : @key[constant] T := 42;
+@key[end] P;]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@key[with] P;
+@key[package] Q @key[is]
+    @key[type] T2 @key[is new] P.T;
+@key[end] Q;]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@key[with] Q;
+@key[package] P.Child @key[is]
+    @key[type] T3 @key[is new] Q.T2;
+@key[private]
+    Int : Integer := 52;
+    V : T3 := T3(P.C);  -- @Examcom{Legal: conversion allowed}
+    W : T3 := T3(Int);  -- @Examcom{Legal: conversion allowed}
+    X : T3 := T3(42);   -- @Examcom{Error: T3 is not a numeric type}
+    Y : T3 := X + 1;    -- @Examcom{Error: no visible "+" operator}
+    Z : T3 := T3(Integer(X) + 1);   -- @Examcom{Legal: convert to Int first}
+@key[end] P.Child;]}
+@end{Example}
+@end{Discussion}
+
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0019],ARef=[AI95-00033-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0029-1]}
 Inherited primitive subprograms follow a different rule.
@@ -1557,6 +1615,12 @@ has been moved to @lquotes@;Obsolescent Features.@rquotes@;
   @ChgAdded{Version=[3],Text=[@b<Correction:> Revised the wording to say
   that predefined operations still exist even if they are never declared,
   because it is possible to reference them in a generic unit.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0115-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified that the characteristics
+  of a descendant of a private type depend on the visibility of the full
+  view of the direct ancestor. This has to be the case (so that privacy is not
+  violated), but it wasn't spelled out in earlier versions of Ada.]}
 @end{DiffWord2005}
 
 
@@ -1635,10 +1699,12 @@ descendants of @i<T>.]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[If one or more invariant expressions
-apply to a type @i<T>, and the Assertion_Policy (see
+apply to a type @i<T>, and the assertion policy (see
 @RefSecNum{Pragmas Assert and Assertion_Policy}) at the point of the partial
 view declaration for @i<T> is Check, then an invariant check is performed at the
-following places, on the specified object(s):]}
+following places, on the specified object(s):@Defn2{Term=[assertion policy],
+  Sec=[invariant check]}@Defn{invariant check}@Defn2{Term=[check, language-defined],
+  Sec=[controlled by assertion policy]}]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3631,13 +3697,13 @@ the object will still exist when the corresponding master completes,
 and it will be finalized then.]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00280-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0051-1]}
-The order in which the finalization of a master performs finalization of
-objects is as follows:
-Objects created by declarations in the master are finalized
-in the reverse order of their creation.
-For objects that were created by @nt{allocator}s for
-@Chg{Version=[3],New=[a named],Old=[an]} access type whose
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0051-1],ARef=[AI05-0190-1]}
+The @Chg{Version=[3],New=[],Old=[order in which the ]}finalization of a master
+performs finalization of objects @Chg{Version=[3],New=[],Old=[is as follows:
+Objects ]}created by declarations in the master
+@Chg{Version=[3],New=[],Old=[are finalized ]}in the reverse order of their
+creation.@Chg{Version=[3],New=[],Old=[ For objects that were created by
+@nt{allocator}s for an access type whose
 ultimate ancestor is declared in the master,
 this rule is applied as though each
 such object that still exists had been created
@@ -3650,19 +3716,21 @@ collection>@Defn{finalization of the collection}@Defn2{Term=[collection],
 Sec=[finalization of]}],Old=[]}.@Chg{Version=[3],New=[ Objects created by
 allocators for an anonymous access type that are not coextensions of some other
 object, are finalized in an arbitrary order during the finalization of their
-associated master.],Old=[]}@Chg{Version=[2],
+associated master.],Old=[]}]}@Chg{Version=[2],
 New=[ After the finalization of a master is complete, the objects finalized
 as part of its finalization cease to @i<exist>, as do any types and subtypes
 defined and created within the master.@PDefn2{Term=[exist],Sec=[cease to]}
 @PDefn2{Term=[cease to exist],Sec=[object]}
 @Defn2{Term=[cease to exist],Sec=[type]}],Old=[]}
 @begin{Reason}
-  Note that we talk about the type of the @nt{allocator} here.
-    There may be access values of a (general) access type
-    pointing at objects created by @nt{allocator}s for some other
-    type; these are not finalized at this point.
+  @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0190-1]}@ChgNote{Moved down}
+  @ChgDeleted{Version=[3],Text=[Note that we talk about the type of the
+  @nt{allocator} here. There may be access values of a (general) access type
+  pointing at objects created by @nt{allocator}s for some other type; these are
+  not finalized at this point.]}
 
-  The freezing point of the ultimate ancestor access type is chosen
+  @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0190-1]}@ChgNote{Moved down}
+  @ChgDeleted{Version=[3],Text=[The freezing point of the ultimate ancestor access type is chosen
   because before that point, pool elements cannot be created,
   and after that point, access values designating (parts of)
   the pool elements can be created.
@@ -3671,20 +3739,22 @@ defined and created within the master.@PDefn2{Term=[exist],Sec=[cease to]}
   We don't want to finalize the pool elements until after anything
   finalizing objects that contain access values designating them.
   Nor do we want to finalize pool elements after finalizing the pool
-  object itself.
+  object itself.]}
 @end{Reason}
 @begin{Ramification}
-Finalization of allocated objects is done according
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0190-1]}@ChgNote{Moved down}
+@ChgDeleted{Version=[3],Text=[Finalization of allocated objects is done according
   to the (ultimate ancestor) @nt{allocator} type, not according to the storage pool
   in which they are allocated.
   Pool finalization might reclaim storage (see @RefSec{Storage Management}),
   but has nothing (directly) to do with finalization of the
-  pool elements.
+  pool elements.]}
 
-Note that finalization is done only for objects that still exist;
-if an instance of Unchecked_Deallocation has already gotten rid of a
-given pool element, that pool element will not be finalized when
-the master is left.
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0190-1]}@ChgNote{Moved down}
+@ChgDeleted{Version=[3],Text=[Note that finalization is done only for objects
+that still exist; if an instance of Unchecked_Deallocation has already gotten
+rid of a given pool element, that pool element will not be finalized when
+the master is left.]}
 
 Note that a deferred constant declaration does not create the
 constant; the full constant declaration creates it.
@@ -3706,6 +3776,82 @@ a subsequent finalization might reference an object that has been
 finalized, and that object had better be in its (well-defined)
 finalized state.
 @end{ImplNote}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[Each nonderived access type @i<T> has
+an associated @i<collection>,@Defn2{Term=[collection],Sec=[of an access type]}
+which is the set of objects created by @nt{allocator}s of @i<T>,
+or of types derived from @i<T>. Unchecked_Deallocation removes an object from
+its collection. Finalization of a collection consists of finalization of each
+object in the collection, in an arbitrary order. The collection of an access
+type is an object implicitly declared at the following place:]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0190-1]}
+  @ChgAdded{Version=[3],Text=[The place of the implicit declaration determines
+  when allocated objects are finalized. For multiple collections declared at the
+  same place, we do not define the order of their implicit declarations.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0190-1]}@ChgNote{Moved down}
+  @ChgAdded{Version=[3],Text=[Finalization of allocated objects is done according
+  to the (ultimate ancestor) @nt{allocator} type, not according to the storage
+  pool in which they are allocated. Pool finalization might reclaim storage (see
+  @RefSec{Storage Management}), but has nothing (directly) to do with
+  finalization of the pool elements.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0190-1]}@ChgNote{Moved down}
+  @ChgAdded{Version=[3],Text=[Note that finalization is done only for objects that
+  still exist; if an instance of Unchecked_Deallocation has already gotten rid
+  of a given pool element, that pool element will not be finalized when the
+  master is left.]}
+@end{Ramification}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0190-1]}@ChgNote{Moved down}
+  @ChgAdded{Version=[3],Text=[Note that we talk about the type of the
+  @nt{allocator} here. There may be access values of a (general) access type
+  pointing at objects created by @nt{allocator}s for some other type; these are
+  not (necessarily) finalized at this point.]}
+@end{Reason}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[For a named access type, the first freezing point (see
+@RefSecNum{Freezing Rules}) of the type.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0190-1]}@ChgNote{Moved down}
+  @ChgAdded{Version=[3],Text=[The freezing point of the ultimate ancestor access
+  type is chosen because before that point, pool elements cannot be created,
+  and after that point, access values designating (parts of)
+  the pool elements can be created.
+  This is also the point after which the pool object cannot have been declared.
+  We don't want to finalize the pool elements until after anything
+  finalizing objects that contain access values designating them.
+  Nor do we want to finalize pool elements after finalizing the pool
+  object itself.]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[For the type of an access parameter, the call that
+contains the @nt{allocator}.]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[For the type of an access result, within the master of
+the call (see @RefSecNum{Operations of Access Types}).]}
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We mean at a place within the master consistent
+  with the execution of the call within the master. We don't say that
+  normatively, as it is difficult to explain that when the master of the call
+  may not be the master that immediately includes the call (such as when an
+  anonymous result is converted to a named access type).]}
+@end{Honest}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[For any other anonymous access type, the first
+freezing point of the innermost enclosing declaration.]}
+@end{Itemize}
+
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00256-01]}
 @PDefn2{Term=[execution], Sec=(assignment_statement)}
@@ -4311,13 +4457,14 @@ the rules here refer to the task-waiting rules of Section 9.
 @end{DiffWord95}
 
 @begin{Inconsistent2005}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0051-1],ARef=[AI05-0190-1]}
   @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}@b<Correction:>
-  Allowed more flexibility as to when objects allocated from anonymous access
-  types are finalized. This could be inconsistent if objects are finalized in
-  a different order and that order caused different program behavior; however
-  programs that depend on the order of finalization within a single master are
-  already fragile and hopefully are rare.]}
+  Better defined when objects allocated from anonymous access types are
+  finalized. This could be inconsistent if objects are finalized in
+  a different order than in an Ada 2005 implementation and that order caused
+  different program behavior; however programs that depend on the order of
+  finalization within a single master are already fragile and hopefully
+  are rare.]}
 @end{Inconsistent2005}
 
 @begin{DiffWord2005}
@@ -4343,4 +4490,3 @@ the rules here refer to the task-waiting rules of Section 9.
   @RefSecNum{Subprogram Declarations}) of functions. The model for these
   parameters is explained in detail in @RefSecNum{Parameter Associations}.]}
 @end{DiffWord2005}
-

@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:36 $}
+@Comment{$Date: 2011/06/04 05:28:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @LabeledClause{Type Conversions}
 
@@ -302,9 +302,11 @@ type shall be an access-to-subprogram type. Further:]}
 that are not reformatted. (Except the first rule is at the top.)}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0115-1]}
 @Leading@Defn2{Term=[type conversion],sec=[composite (non-array)]}
 @Defn2{Term=[conversion],sec=[composite (non-array)]}
-@Chg{Version=[2],New=[If there is a type that is an ancestor of both the target
+@Chg{Version=[2],New=[If there is a type@Chg{Version=[3],New=[ (other than a
+root numeric type)],Old=[]} that is an ancestor of both the target
 type and the operand type, or both types are class-wide types, then at least
 one of the following rules shall apply:],Old=[@Defn2{Term=[type conversion],sec=(enumeration)}
 @Defn2{Term=[conversion],sec=(enumeration)}
@@ -363,7 +365,9 @@ Further, if the target type is tagged, then either:]}
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
-@Chg{Version=[2],New=[If there is no type that is the ancestor of both the
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0115-1]}
+@Chg{Version=[2],New=[If there is no type@Chg{Version=[3],New=[ (other than a
+root numeric type)],Old=[]} that is the ancestor of both the
 target type and the operand type, and they are not both class-wide types, one
 of the following rules shall apply:], Old=[In a view conversion for
 an untagged type, the target type shall be convertible (back) to the operand type.]}
@@ -547,13 +551,13 @@ Further, if the operand type is not @i<universal_@!access>:]}
   @end{Reason}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
-  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0148-1]}
+  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0148-1],ARef=[AI05-0248-1]}
   @Chg{Version=[2],New=[@PDefn2{Term=[accessibility rule],Sec=(type conversion)}
   The accessibility level of the operand type shall not be statically
-  deeper than that of the target type@Chg{Version=[3],New=[, unless the target is a
-  stand-alone object of an anonymous access type. If the target is
-  such a stand-alone object, the accessibility level of the operand type
-  shall not be statically deeper than that of the declaration of the
+  deeper than that of the target type@Chg{Version=[3],New=[, unless the target
+  type is an anonymous access type of a stand-alone object. If the target type
+  is that of such a stand-alone object, the accessibility level of the operand
+  type shall not be statically deeper than that of the declaration of the
   stand-alone object],Old=[]}.
   @PDefn{generic contract issue}
   In addition to the places where @LegalityTitle normally apply
@@ -832,15 +836,16 @@ Composite (Non-Array) Type Conversion
 @Defn2{Term=[conversion],sec=(access)}
 Access Type Conversion
 @begin(inneritemize)
-  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0148-1]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0148-1],ARef=[AI05-0248-1]}
   For an access-to-object type,
   a check is made that the accessibility level of the operand
-  type is not deeper than that of the target type@Chg{Version=[3],New=[, unless
-  the target is a stand-alone object of an anonymous access type. If the
-  target is such a stand-alone object, a check is made that the accessibility
-  level of the operand type is not deeper than that of the declaration of the
-  stand-alone object @Redundant[; then if the check succeeds, the accessibility
-  level of the target type becomes that of the operand type].],Old=[]}.
+  type is not deeper than that of the target type@Chg{Version=[3],New=[,
+  unless the target type is an anonymous access type of a stand-alone
+  object. If the target type is that of such a stand-alone object, a check is
+  made that the accessibility level of the operand type is not deeper than that
+  of the declaration of the stand-alone object @Redundant[; then if the check
+  succeeds, the accessibility level of the target type becomes that of the
+  operand type].],Old=[]}.
   @IndexCheck{Accessibility_Check}
 
   @begin{Ramification}
@@ -889,23 +894,31 @@ Access Type Conversion
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
 @IndexCheck{Range_Check}
 @IndexCheck{Discriminant_Check}
 @IndexCheck{Index_Check}
 @Chg{Version=[2],New=[@IndexCheck{Access_Check}],Old=[]}
 After conversion of the value to the target type,
 if the target subtype is constrained,
-a check is performed that the value satisfies this constraint.
-@Chg{Version=[2],New=[If the target subtype excludes null,
-then a check is made that the value is not null.],Old=[]}
+a check is performed that the value satisfies this constraint.@Chg{Version=[2],
+New=[ If the target subtype excludes null,
+then a check is made that the value is not null.],Old=[]}@Chg{Version=[3],
+New=[ If the assertion policy (see
+@RefSecNum{Pragmas Assert and Assertion_Policy}) in effect is Check,
+the predicate of the target subtype is applied to the value and
+Assertions.Assertion_Error is raised if the result is False.@Defn2{Term=[assertion policy],
+Sec=[predicate check]}@Defn2{Term=[predicate check],
+Sec=[subtype conversion]}@Defn2{Term=[check, language-defined],
+Sec=[controlled by assertion policy]}],Old=[]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
   The @Chg{Version=[2],New=[first],Old=[above]} check
   @Chg{Version=[2],New=[above ],Old=[]}is a Range_Check for scalar subtypes, a
   Discriminant_Check or Index_Check for access subtypes, and a Discriminant_Check
   for discriminated subtypes. The Length_Check for an array conversion is
-  performed as part of the conversion to the target type.
-  @Chg{Version=[2],New=[The check for exclusion of null is an Access_Check.],Old=[]}
+  performed as part of the conversion to the target type.@Chg{Version=[2],
+  New=[ The check for exclusion of null is an Access_Check.],Old=[]}
 @end{Ramification}
 
 @PDefn2{Term=[evaluation], Sec=(view conversion)}
@@ -1216,6 +1229,16 @@ as a @nt<name>.
   intentionally depends on the exception being raised; the change is more likely
   to fix bugs than introduce them.]}
 @end{Inconsistent2005}
+
+@begin{Diffword2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0115-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified that a root numeric
+  type is not considered a common ancestor for a conversion.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+  @ChgAdded{Version=[3],Text=[Added rules so that predicate aspects (see
+  @RefSecNum{Subtype Predicates}) are enforced on subtype conversion.]}
+@end{Diffword2005}
 
 
 @LabeledClause{Qualified Expressions}
@@ -1601,17 +1624,20 @@ AI83-00150.
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01],ARef=[AI95-00416-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0024-1],ARef=[AI05-0051-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0024-1],ARef=[AI05-0051-1],ARef=[AI05-0234-1]}
 @ChgAdded{Version=[2],Text=[For any @nt{allocator}, if the designated type of
 the type of the @nt{allocator}
 is class-wide, then a check is made that the @Chg{Version=[3],New=[master],
 Old=[accessibility level]} of the type
 determined by the @nt{subtype_indication}, or by the tag of the value of the
 @nt{qualified_expression}, @Chg{Version=[3],New=[includes the elaboration],
-Old=[is not deeper than that]} of the type of the @nt{allocator}. If the
+Old=[is not deeper than that]} of the type of the @nt{allocator}. If
+@Chg{Version=[3],New=[any part of ],Old=[]}the
 @Chg{Version=[3],New=[subtype determined by the @nt{subtype_indication} or
 @nt{qualified_expression}],Old=[designated subtype]} of the @nt{allocator}
-has one or more @Chg{Version=[3],New=[],Old=[unconstrained ]}access
+@Chg{Version=[3],New=[(or by the tag of the value if the type of the
+@nt{qualified_expression} is class-wide) ],Old=[]}has
+one or more @Chg{Version=[3],New=[],Old=[unconstrained ]}access
 discriminants, then a check is made that the accessibility
 level of the anonymous access type of each access discriminant is
 not deeper than that of the type of the @nt{allocator}.
@@ -1886,7 +1912,7 @@ has been moved to @RefSec{Storage Management}.
   when a designated object is constrained by its initial value so that
   types derived from a partial view are handled properly.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0051-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0051-1],ARef=[AI05-0234-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the accessibility
   check for access discriminants so that it does not depend on the
   designated type (which might not have discriminants when the allocated
@@ -2129,6 +2155,7 @@ The base range of a scalar type is a static range, unless the
 type is a descendant of a formal scalar type.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00263-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
 @Defn2{Term=[static], Sec=(subtype)}
 A @i(static subtype) is either a @i(static scalar subtype) or a
 @i(static string subtype).
@@ -2146,7 +2173,9 @@ of a formal array type)]},
 or a constrained string subtype formed by imposing a compatible static
 constraint on a static string subtype.
 In any case, the subtype of a generic formal object of mode @key[in out],
-and the result subtype of a generic formal function, are not static.
+and the result subtype of a generic formal function, are not static.@Chg{Version=[3],
+New=[ Also, a subtype is not static if any Dynamic_Predicate specifications
+apply to it.],Old=[]}
 @begin{Ramification}
   String subtypes are the only composite subtypes that can be static.
 @end{Ramification}
@@ -2637,6 +2666,10 @@ raising.
   the lack of evaluation for @nt{if_expression}s and @nt{case_expression}s.
   These are new and defined elsewhere.]}
 
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+  @ChgAdded{Version=[3],Text=[Added wording to prevent subtypes that have
+  dynamic predicates (see @RefSecNum{Subtype Predicates}) from being static.]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0158-1]}
   @ChgAdded{Version=[3],Text=[Revised wording for membership tests to allow
   for the new possibilities allowed by the @nt{membership_choice_list}.]}
@@ -2676,9 +2709,12 @@ of a @nt<discrete_@!subtype_@!definition>; or],Old=[]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
 @Defn2{Term=[statically matching], Sec=(for subtypes)}
 A subtype @i(statically matches) another subtype of the same type
-if they have statically matching constraints@Chg{Version=[2],New=[, and, for
+if they have statically matching constraints@Chg{Version=[2],New=[,
+@Chg{Version=[3],New=[all predicate specifications that apply to
+them come from the same declarations, ],Old=[]}and, for
 access subtypes, either both or neither exclude null],Old=[]}.
 Two anonymous access@Chg{Version=[2],New=[-to-object],Old=[]} subtypes
 statically match if their designated subtypes statically
@@ -2710,7 +2746,7 @@ the index ranges of formal and actual constrained array subtypes have to
 statically match.
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0086-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0086-1],ARef=[AI05-0153-3]}
 @Defn2{Term=[statically compatible],
   Sec=(for a constraint and a scalar subtype)}
 A constraint is @i(statically compatible) with a scalar subtype if
@@ -2720,14 +2756,12 @@ are static and the constraint is compatible with the subtype.
   Sec=(for a constraint and an access or composite subtype)}
 A constraint is @i(statically compatible) with an access or composite subtype
 if it statically matches the constraint of the subtype, or
-if the subtype is unconstrained.
+if the subtype is unconstrained.@Chg{Version=[3],New=[],Old=[
 @Defn2{Term=[statically compatible],
   Sec=(for two subtypes)}
 One subtype is @i(statically compatible) with a second subtype if
 the constraint of the first is statically compatible with the
-second subtype@Chg{Version=[3],New=[, and in the case of
-an access type, if the second subtype excludes null, then so does
-the first],Old=[]}.
+second subtype.]}
 @begin{Discussion}
   Static compatibility is required when constraining a parent subtype
   with a discriminant from a new @nt<discriminant_part>.
@@ -2739,6 +2773,34 @@ the first],Old=[]}.
   compatible with a type. It is OK since the terms are
   used in different contexts.
 @end{Discussion}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[@Defn2{Term=[statically compatible],
+  Sec=(for two subtypes)}Two statically matching subtypes are statically
+compatible with each other. In addition, a subtype @i<S1> is statically
+compatible with a subtype @i<S2> if:]}
+@begin{Itemize}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the constraint of @i<S1> is statically compatible
+  with @i<S2>, and]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0086-1]}
+  @ChgAdded{Version=[3],Text=[if @i<S2> excludes null, so does @i<S1>, and]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[either:]}
+  @begin{InnerItemize}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[all predicate specifications that apply to
+    @i<S2> apply also to @i<S1>, or]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[both subtypes are static, and every value that
+    obeys the predicate of @i<S1> also obeys the predicate of @i<S2>.]}
+
+  @end{InnerItemize}
+@end{Itemize}
 @end{StaticSem}
 
 @begin{DiffWord83}
@@ -2764,3 +2826,9 @@ This subclause is new to Ada 95.
   (for instance, @RefSecNum{Discriminants}(15)) and this probably will simply
   detect bugs.]}
 @end{Incompatible2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+  @ChgAdded{Version=[3],Text=[Modified static matching and static compatibility
+  to take predicate aspects (see @RefSecNum{Subtype Predicates}) into account.]}
+@end{DiffWord2005}

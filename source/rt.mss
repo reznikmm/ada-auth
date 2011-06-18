@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.97 $ $Date: 2011/05/03 06:34:09 $ $Author: randy $ }
+@comment{ $Revision: 1.98 $ $Date: 2011/06/04 05:28:20 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2011/05/03 06:34:09 $}
+@Comment{$Date: 2011/06/04 05:28:20 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -5832,5 +5832,222 @@ defined to have failed, and it becomes a completed task (see
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   The package System.Multiprocessors and the pragma CPU are new.]}
+@end{Extend2005}
+
+@LabeledAddedSubClause{Version=[3],Name=[Multiprocessor Dispatching Domains]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[This clause allows implementations on multiprocessor
+platforms to be partitioned into distinct dispatching domains during program
+startup.]}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The following
+language-defined library package exists:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] Ada.Real_Time;
+@key[package] System.Multiprocessors.Dispatching_Domains @key{is}@ChildUnit{Parent=[System.Multiprocessors],Child=[Dispatching_Domains]}
+   @key[pragma] Preelaborate(Dispatching_Domains);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @AdaExcDefn{Dispatching_Domain_Error} : @key[exception];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Dispatching_Domain} (<>) @key[is limited private];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{System_Dispatching_Domain} : @key[constant] Dispatching_Domain;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Create} (First, Last : CPU) @key[return] Dispatching_Domain;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_First_CPU} (Domain : Dispatching_Domain) @key[return] CPU;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_Last_CPU}  (Domain : Dispatching_Domain) @key[return] CPU;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_Dispatching_Domain} (T : Task_Id := Current_Task)
+            @key[return] Dispatching_Domain;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Assign_Task} (Domain : @key[in out] Dispatching_Domain;
+                          CPU    : @key[in]     CPU_Range := Not_A_Specific_CPU;
+                          T      : @key[in]     Task_Id   := Current_Task);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Set_CPU} (CPU : @key[in] CPU_Range; T : @key[in] Task_Id := Current_Task);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_CPU} (T : Task_Id := Current_Task) @key[return] CPU_Range;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Delay_Until_And_Set_CPU} (
+       Delay_Until_Time : @key[in] Ada.Real_Time.Time; CPU : @key[in] CPU_Range);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[private]
+   ... -- @RI[not specified by the language]
+@key[end] System.Multiprocessors.Dispatching_Domains;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[The type Dispatching_Domain represents a series of
+processors on which a task may execute. Each processor is contained within
+exactly one Dispatching_Domain. System_Dispatching_Domain contains the processor
+or processors on which the environment task executes. At program start-up all
+processors are contained within System_Dispatching_Domain.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a task type (including the
+anonymous type of a @nt{single_task_declaration}), the following language-defined
+representation aspect may be specified:]}
+
+@begin{Description}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Dispatching_Domain@\The value of
+aspect Dispatching_Domain is an @nt{expression}, which shall be of
+type Dispatching_Domains.Dispatching_Domain. This aspect is the domain to
+which the task (or all objects of the task type) are assigned.]}
+@end{Description}
+@end{StaticSem}
+
+@begin{Legality}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[The Dispatching_Domain aspect shall not be specified
+for a task interface.]}
+
+@end{Legality}
+
+@begin{Runtime}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[The expression specifed for the Dispatching_Domain
+aspect of a task is evaluated for each task object (see
+@RefSecNum{Task Units and Task Objects}). The Dispatching_Domain value is then
+associated with the task object whose task declaration specifies the aspect.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[If a task is not explictly assigned to any domain,
+it is assigned to that of the activating task. A task always executes on some
+CPU in its domain.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[If both Dispatching_Domain and CPU are specified for
+a task, and the CPU value is not contained within the range of processors for
+the domain (and is not Not_A_Specific_CPU), the activation of the task is
+defined to have failed, and it becomes a completed task (see
+@RefSecNum{Task Execution - Task Activation}).]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[The function Create creates and returns a
+Dispatching_Domain containing all the processors in the range First .. Last.
+These processors are removed from System_Dispatching_Domain. A call of Create
+will raise Dispatching_Domain_Error if any designated processor is not currently
+in System_Dispatching_Domain, or if the system cannot support a distinct domain
+over the processors identified, or if a processor has a task assigned to it, or
+if the allocation would leave System_Dispatching_Domain empty. A call of Create
+will raise Dispatching_Domain_Error if the calling task is not the environment
+task, or if Create is called after the call to the main subprogram.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[The function Get_First_CPU returns the first CPU in
+Domain; Get_Last_CPU returns the last one.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[The function Get_Dispatching_Domain returns the
+Dispatching_Domain on which the task is assigned.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[A call of the procedure Assign_Task assigns task T
+to the CPU within Dispatching_Domain Domain. Task T can now execute only on CPU
+unless CPU designates Not_A_Specific_CPU, in which case it can execute on any
+processor within Domain. The exception Dispatching_Domain_Error is propagated if
+T is already assigned to a Dispatching_Domain other than
+System_Dispatching_Domain, or if CPU is not one of the processors of Domain (and
+is not Not_A_Specific_CPU). A call of Assign_Task is a task dispatching point
+for task T. If T is the Current_Task the effect is immediate, otherwise the
+effect is as soon as practical. Assigning a task to System_Dispatching_Domain
+that is already assigned to that domain has no effect.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[A call of procedure Set_CPU assigns task T to the
+CPU. Task T can now execute only on CPU, unless CPU designates
+Not_A_Specific_CPU, in which case it can execute on any processor within its
+Dispatching_Domain. The exception Dispatching_Domain_Error is propagated if CPU
+is not one of the processors of the Dispatching_Domain on which T is assigned
+(and is not Not_A_Specific_CPU). A call of Set_CPU is a task dispatching point
+for task T. If T is the Current_Task the effect is immediate, otherwise the
+effect is as soon as practical.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[The function Get_CPU returns the processor assigned
+to task T, or Not_A_Specific_CPU if the task is not assigned to a processor.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[A call of Delay_Until_And_Set_CPU delays the calling
+task for the designated time and then assigns the task to the specified
+processor when the delay expires. The exception Dispatching_Domain_Error is
+propagated if P is not one of the processors of the calling task's
+Dispatching_Domain (and is not Not_A_Specific_CPU).]}
+
+@end{Runtime}
+
+@begin{ImplReq}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[The implementation shall perform the operations
+Assign_Task, Set_CPU, Get_CPU and Delay_Until_And_Set_CPU atomically with
+respect to any of these operations on the same dispatching_domain, processor or
+task.]}
+
+@end{ImplReq}
+
+@begin{ImplAdvice}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[Each dispatching domain should have separate and
+disjoint ready queues.]}
+
+@ChgImplAdvice{Version=[3],Kind=[AddedNormal],Text=[@ChgAdded{Version=[3],
+Text=[Each dispatching domain should have separate and
+disjoint ready queues.]}]}
+
+@end{ImplAdvice}
+
+@begin{DocReq}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[The implementation shall document the processor(s)
+on which the clock interrupt is handled and hence where delay queue and ready
+queue manipulations occur. For any Interrupt_Id whose handler can execute on
+more than one processor the implementation shall also document this set of
+processors.]}
+
+@ChgDocReq{Version=[3],Kind=[AddedNormal],Text=[@ChgAdded{Version=[3],
+Text=[The processor(s) on which the clock interrupt is handled; the processors
+on which each Interrupt_Id can be handled.]}]}
+
+@end{DocReq}
+
+@begin{ImplPerm}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[An implementation may limit the number of
+dispatching domains that can be created and raise Dispatching_Domain_Error if an
+attempt is made to exceed this number.]}
+
+@end{ImplPerm}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  The package System.Multiprocessors.Dispatching_Domains and the aspect
+  Dispatching_Domains are new.]}
 @end{Extend2005}
 

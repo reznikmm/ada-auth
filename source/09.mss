@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2011/03/12 08:07:37 $}
+@Comment{$Date: 2011/06/04 05:28:19 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.103 $}
+@Comment{$Revision: 1.104 $}
 
 @begin{Intro}
 
@@ -1742,51 +1742,53 @@ as is a requeue on such an entry.
 @end{RunTime}
 
 @begin{Syntax}
-@begin{SyntaxText}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
-@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[The form of a
-@nt{pragma} Implemented is as follows:]}
-@end{SyntaxText}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=<@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Implemented>(@Syni{procedure_}@Syn2{local_name}, @Syn2<implementation_kind>);'>}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
-@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<implementation_kind>,Old=<>}>,
-rhs="@Chg{Version=[3],New=<By_Entry | By_Protected_Procedure | By_Any>,Old=<>}"}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2],ARef=[AI05-0215-1]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<synchronization_kind>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<By_Entry | By_Protected_Procedure | Optional>,Old=<>}"}
 @end{Syntax}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0215-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For the declaration of a primitive
+procedure of a synchronized tagged type the following language-defined
+representation aspect may be specified with @nt{aspect_specification} (see
+@RefSecNum{Aspect Specifications}):]}
+
+@begin{Description}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Synchronization@\If specified, the aspect definition
+shall be a @nt{synchronization_kind}.]}
+@end{Description}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2],ARef=[AI05-0215-1]}
+@ChgAdded{Version=[3],Text=[Inherited subprograms inherit the Synchronization
+aspect, if any, from the corresponding subprogram of the parent or progenitor
+type. If an overriding operation does not have a directly specified
+Synchronization aspect then the Synchronization aspect of the inherited
+operation is inherited by the overriding operation.]}
+@end{StaticSem}
 
 @begin{Legality}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
-@ChgAdded{Version=[3],Text=[The @SynI{procedure_}@nt{local_name} of a
-@nt{pragma} Implemented shall denote a
-primitive procedure of a synchronized tagged type.]}
-
-@begin{Ramification}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @SynI{procedure_}@nt{local_name} can denote
-  more than one such procedure if there are several overloaded routines.
-  No functions can be denoted, even if one or more procedures are also
-  denoted.]}
-@end{Ramification}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
-@ChgAdded{Version=[3],Text=[A @nt{pragma} Implemented with @nt{implementation_kind}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2],ARef=[AI05-0215-1]}
+@ChgAdded{Version=[3],Text=[The @nt{synchronization_kind}
 By_Protected_Procedure shall not be applied to a primitive procedure of a task
 interface.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
-@ChgAdded{Version=[3],Text=[A procedure for which the @nt{implementation_kind}
-is specified as By_Entry shall be implemented by an entry. A procedure for
-which the @nt{implementation_kind} is specified as By_Protected_Procedure
-shall be implemented by a protected procedure.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2],ARef=[AI05-0215-1]}
+@ChgAdded{Version=[3],Text=[A procedure for which the specified
+@nt{synchronization_kind} is By_Entry shall be implemented by an entry. A
+procedure for which the specified @nt{synchronization_kind} is
+By_Protected_Procedure shall be implemented by a protected procedure. A
+procedure for which the specified @nt{synchronization_kind} is Optional may be
+implemented by an entry or by a procedure (including a protected procedure).]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
-@ChgAdded{Version=[3],Text=[If a primitive procedure overrides an
-inherited operation to which a @nt{pragma} Implemented applies then
-any @nt{pragma} Implemented applied to the
-overriding operation shall have the same @nt{implementation_kind}
-or the inherited @nt{implementation_kind} shall be By_Any.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2],ARef=[AI05-0215-1]}
+@ChgAdded{Version=[3],Text=[If a primitive procedure overrides an inherited
+operation for which the Synchronization aspect has been specified to be By_Entry
+or By_Protected_Procedure, then any specification of the aspect Synchronization
+applied to the overriding operation shall have the same
+@nt{synchronization_kind}.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
 @ChgAdded{Version=[3],Text=[@PDefn{generic contract issue}In addition to the
@@ -1795,18 +1797,9 @@ places where @LegalityTitle normally apply (see
 private part of an instance of a generic unit.]}
 @end{Legality}
 
-@begin{StaticSem}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
-@ChgAdded{Version=[3],Text=[A @nt{pragma} Implemented is said to @i<apply>
-to the procedure denoted by its @SynI<procedure_>@nt{local_name}. If an
-overriding operation does not have a @nt{pragma} Implemented then any
-@nt{pragma} Implemented applying to the inherited operation applies to
-the overriding operation.]}
-@end{StaticSem}
-
 @begin{Notes}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
-@ChgAdded{Version=[3],Text=[The @nt{implementation_kind} By_Protected_Procedure
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2],ARef=[AI05-0215-1]}
+@ChgAdded{Version=[3],Text=[The @nt{synchronization_kind} By_Protected_Procedure
 implies that the operation will not block.]}
 @end{Notes}
 
@@ -1822,9 +1815,9 @@ implies that the operation will not block.]}
 @end{DiffWord95}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2],ARef=[AI05-0215-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
-  Added @nt{pragma} Implemented to allow
+  Added the Synchronization aspect to allow
   specifying that an interface procedure is really an entry or a
   protected procedure.]}
 @end{Extend2005}
@@ -3010,14 +3003,17 @@ the expiration of a delay.
 
 @begin{Resolution}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0030-2]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0030-2],ARef=[AI05-0215-1]}
 @Chg{Version=[3],New=[@Defn{requeue target}],Old=[@Defn2{Term=[target entry], Sec=(of a @nt<requeue_statement>)}]}
 The @Chg{Version=[3],New=[@SynI{procedure_or_entry_}],Old=[@SynI(entry_)]}@nt{name}
 of a @nt{requeue_statement} shall resolve
 to denote an entry (the
-@Chg{Version=[3],New=[@i{requeue }],Old=[]}@i{target}@Chg{Version=[3],New=[],Old=[@i{ entry}]})
-that either has no parameters, or that has
-a profile that is type conformant (see @RefSecNum(Conformance Rules)) with
+@Chg{Version=[3],New=[@i{requeue }],Old=[]}@i{target}@Chg{Version=[3],New=[],
+Old=[@i{ entry}]})@Chg{Version=[3],New=[. The profile of
+the entry, or the profile or prefixed profile of the procedure, shall],Old=[that]}
+either @Chg{Version=[3],New=[have],Old=[has]} no parameters, or @Chg{Version=[3],
+New=[be],Old=[that has
+a profile that is]} type conformant (see @RefSecNum(Conformance Rules)) with
 the profile of the innermost enclosing @nt<entry_@!body> or
 @nt<accept_@!statement>.
 @Defn2{Term=[type conformance],Sec=(required)}
@@ -3030,21 +3026,21 @@ construct that is either an @nt{entry_body} or an
 @nt{accept_statement}, and this construct shall
 be the innermost enclosing body or callable construct.
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0030-2]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0030-2],ARef=[AI05-0215-1]}
 If the
 @Chg{Version=[3],New=[requeue ],Old=[]}target@Chg{Version=[3],New=[],Old=[ entry]}
-has parameters,
-then its profile shall be subtype conformant with
+has parameters, then its @Chg{Version=[3],New=[(prefixed) ],Old=[]}profile
+shall be subtype conformant with
 the profile of the innermost enclosing callable construct.
 @Defn2{Term=[subtype conformance],Sec=(required)}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0030-2]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0030-2],ARef=[AI05-0215-1]}
 @ChgAdded{Version=[3],Text=[If the target is a procedure, the name shall
-denote a rename of an entry, or shall denote a prefixed view of a
+denote a renaming of an entry, or shall denote a view or prefixed view of a
 primitive subprogram of a synchronized interface, where the first parameter
 of the unprefixed view of the primitive subprogram shall be a
-controlling parameter, and a pragma Implemented with
-@nt{implementation_kind} By_Entry shall apply to the primitive subprogram.]}
+controlling parameter, and the Synchronization aspect shall be specified
+with @nt{synchronization_kind} By_Entry for the primitive subprogram.]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0030-2]}
 @PDefn2{Term=[accessibility rule],Sec=(requeue statement)}
@@ -3217,7 +3213,7 @@ The @nt<requeue_statement> is new.
 @end{Extend83}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2],ARef=[AI05-0215-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Added the ability
   to requeue on operations of synchronized interfaces that are

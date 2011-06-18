@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:38 $}
+@Comment{$Date: 2011/06/04 05:28:20 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -908,4 +908,68 @@ Ada.Characters.Handling:]}
   moved to Characters.Conversions
   (see @RefSecNum{The Package Characters.Conversions}).]}
 @end{DiffWord95}
+
+@LabeledAddedClause{Version=[3],Name=[Aspect-related Pragmas]}
+
+*** TBD.
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[This clause is new. Many existing pragmas have
+  been converted into aspects.]}
+@end{DiffWord2005}
+
+
+*** TBD (other subclauses). The following should be J.15.11.
+
+@LabeledAddedSubClause{Version=[3],Name=[Pragma Dispatching_Domain]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+  @ChgAdded{Version=[3],Text=[This pragma is born obsolescent; it is defined to
+  provide consistency with existing real-time pragmas. As with all obsolescent
+  features, this pragma is not optional; all Ada implementations need to
+  implement it.]}
+@end{Discussion}
+
+@begin{Syntax}
+
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[The form of a
+@nt{pragma} Dispatching_Domain is as follows:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=`@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Dispatching_Domain> (@nt{expression});''}
+
+@end{Syntax}
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[The expected type for the @nt{expression} is
+System.Multiprocessors.Dispatching_Domains.Dispatching_Domain.]}
+@end{Resolution}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[A Dispatching_Domain pragma is allowed only
+immediately within a @nt{task_definition}. At most one such pragma shall appear
+within a given @nt{task_definition}.]}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[For an implementation that supports Annex D, a
+pragma Dispatching_Domain specifies the value of the Dispatching_Domain aspect
+(see @RefSecNum{Multiprocessor Dispatching Domains}). The @nt{expression} is
+associated with the aspect for the task type or @nt{single_task_declaration}
+that contains the pragma.]}
+@end{StaticSem}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Pragma
+  Dispatching_Domain is new.]}
+@end{Extend2005}
 

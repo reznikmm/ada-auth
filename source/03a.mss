@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/05/07 03:43:07 $}
+@Comment{$Date: 2011/06/04 05:28:18 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.106 $}
+@Comment{$Revision: 1.107 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1615,16 +1615,16 @@ scalar subtype to which predicate specifications apply.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
 @ChgAdded{Version=[3],Text=[The @nt{discrete_subtype_definition} of a
-@nt{loop_parameter_specification} shall not denote a subtype to which
+@nt{loop_parameter_specification} or a @nt{discrete_choice} of a
+@nt{named_array_aggregate} shall not denote a subtype to which
 Dynamic_Predicate specifications apply.]}
-
 
 @end{Legality}
 
 @begin{Runtime}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[If the Assertion_Policy (see
+@ChgAdded{Version=[3],Type=[Leading],Text=[If the assertion policy (see
 @RefSecNum{Pragmas Assert and Assertion_Policy}) in effect is Check, then:]}
 @begin{DescribeCode}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1637,11 +1637,16 @@ Dynamic_Predicate specifications apply.]}
   that is passed by reference, the predicate of the subtype of the actual is
   evaluated, and a check is made that the predicate is True. For an object created
   by an @nt{object_declaration} with no explicit initialization @nt{expression},
-  or by an uninitialized @nt{allocator}, if any subcomponents have implicit
-  initial values (see @RefSecNum{Object Declarations}), the predicate of the
-  nominal subtype of the @nt{object_declaration} or @nt{allocator}
-   is evaluated, and a check is made that the predicate is True.
-  Assertions.Assertion_Error is raised if any of these checks fail.]}
+  or by an uninitialized @nt{allocator}, if any subcomponents have
+  @nt{default_expression}s, the predicate of the
+  nominal subtype of the created object is evaluated, and a check is made
+  that the predicate is True. Assertions.Assertion_Error is raised if any
+  of these checks fail.@Defn2{Term=[assertion policy],
+  Sec=[predicate check]}@Defn2{Term=[predicate check],
+  Sec=[@key[in out] parameters]}@Defn2{Term=[predicate check],
+  Sec=[@nt{object_declaration}]}@Defn2{Term=[predicate check],
+  Sec=[@nt{allocator}]}@Defn2{Term=[check, language-defined],
+  Sec=[controlled by assertion policy]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1933,7 +1938,7 @@ have to be a constant).]}
 included in this definition (view conversions, the current instance of
 a type, implementation-defined attributes, objects of a formal discriminated
 private type), but these are not relevant to the places this term is
-used, so there were not included. If this term is used in additional places,
+used, so they were not included. If this term is used in additional places,
 the definition should be checked to see if any of these additional cases
 are relevant and appropriate wording added if necessary.]}
 @end{Discussion}
@@ -3445,9 +3450,11 @@ See @RefSecNum(Classification of Operations).
 We now talk about the classes to which a type belongs, rather than
 a single class.
 
-As explained in Section 13, the concept of "storage pool"
-replaces the Ada 83 concept of "collection."
-These concepts are similar, but not the same.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1]}@ChgNote{Irrelevant here,
+and broken since 7.6.1 defined "collection"}
+@ChgDeleted{Version=[3],Text=[As explained in Section 13, the concept of
+"storage pool" replaces the Ada 83 concept of "collection." These concepts are
+similar, but not the same.]}
 @end{DiffWord83}
 
 @begin{Extend95}

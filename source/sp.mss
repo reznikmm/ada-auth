@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.61 $ $Date: 2011/03/11 07:00:37 $ $Author: randy $ }
+@comment{ $Revision: 1.62 $ $Date: 2011/06/04 05:28:20 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2011/03/11 07:00:37 $}
+@Comment{$Date: 2011/06/04 05:28:20 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -696,7 +696,9 @@ a protected procedure that is an interrupt handler.
 
 @Leading@Keepnext@;The following language-defined packages exist:
 @begin{example}
-@key{with} System;@ChildUnit{Parent=[Ada],Child=[Interrupts]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
+@key{with} System;@ChildUnit{Parent=[Ada],Child=[Interrupts]}@Chg{Version=[3],New=[
+@key{with} System.Multiprocessors;],Old=[]}
 @key[package] Ada.Interrupts @key[is]
    @key[type] @AdaTypeDefn{Interrupt_Id} @key[is] @RI{implementation-defined};
    @key[type] @AdaTypeDefn{Parameterless_Handler} @key[is]
@@ -728,6 +730,10 @@ a protected procedure that is an interrupt handler.
 
    @key[function] @AdaSubDefn{Reference}(Interrupt : Interrupt_Id)
       @key{return} System.Address;
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_CPU}(Interrupt : Interrupt_Id)
+      @key{return} System.Multiprocessors.CPU_Range;]}
 
 @key[private]
    ... -- @RI{not specified by the language}
@@ -814,6 +820,11 @@ specified by Interrupt. This function raises Program_Error if attaching
 task entries to interrupts (or to this particular interrupt) is not supported.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3]}
+@ChgAdded{Version=[3],Text=[The function Get_CPU returns the processor on which
+the handler for Interrupt is executed. If the handler can execute on more than
+one processor the value System.Multiprocessors.Not_A_Specific_CPU is returned.]}
+
 @end{RunTime}
 
 @begin{ImplReq}
@@ -889,6 +900,17 @@ Device_5_Driver : Device_Interface(5);
   returned by Current_Handler and Exchange_Handler for the default treatment
   is null.]}
 @end{Diffword95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
+  Functions Get_CPU is newly added to Interrupts. If Interrupts is referenced in
+  a @nt{use_clause}, and an entity @i<E> with a @nt{defining_identifier} of
+  Get_CPU is defined in a package that is also referenced in a @nt{use_clause},
+  the entity @i<E> may no longer be use-visible, resulting in errors. This
+  should be rare and is easily fixed if it does occur.]}
+@end{Incompatible2005}
+
 
 
 @LabeledClause{Preelaboration Requirements}

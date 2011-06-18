@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/05/07 03:43:08 $}
+@Comment{$Date: 2011/06/04 05:28:19 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.113 $}
+@Comment{$Revision: 1.114 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1938,25 +1938,32 @@ it becomes harder to produce good error messages.
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
 @ChgAdded{Version=[3],Text=[This rule is additive with the rule given in
-@RefSecNum{Aggregates}. That means that rule must be satisfied even though it
-is alway syntactally possible to tell that something is an extension aggregate
-rather than another kind of aggregate. Specifically, that means that an
-extension aggregate is ambiguous if the context is overloaded on array and/or
-untagged record types, even though those are never legal contexts for an
-extension aggregate. Thus, this rule acts more like a legality rule than a
-name resolution rule.]}
+@RefSecNum{Aggregates}. That means the @RefSecNum{Aggregates} rule must be
+satisfied even though it is always syntactically possible to tell that
+something is an extension aggregate rather than another kind of aggregate.
+Specifically, that means that an extension aggregate is ambiguous if the
+context is overloaded on array and/or untagged record types, even though
+those are never legal contexts for an extension aggregate. Thus, this rule
+acts more like a @LegalityTitle than a @ResolutionTitle.]}
 @end{Ramification}
 @end{Resolution}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00306-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0115-1]}
 If the @nt<ancestor_part> is a @nt<subtype_mark>, it shall
 denote a specific tagged subtype.
 @Chg{Version=[2],New=[If the @nt{ancestor_part} is an @nt{expression}, it
 shall not be dynamically tagged. ],Old=[]}
-The type of the @nt{extension_aggregate} shall be derived from the type of the
-@nt<ancestor_part>, through one
-or more record extensions (and no private extensions).
+The type of the @nt{extension_aggregate} shall be
+@Chg{Version=[3],New=[a descendant of],Old=[derived from]} the type of the
+@nt<ancestor_part>@Chg{Version=[3],New=[ (the @i<ancestor> type)@Defn2{Term=[ancestor type],
+Sec=<of an @nt<extension_aggregate>>}],Old=[]},
+through one or more record extensions (and no private
+extensions).@Chg{Version=[3],New=[If the @nt{ancestor_part} is a @nt{subtype_mark},
+the view of the ancestor type from which the type is descended
+(see @RefSecNum{Private Operations})
+shall not have unknown discriminants.],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00306-01]}
   @ChgAdded{Version=[2],Text=[The expression cannot be dynamically tagged to
@@ -2109,6 +2116,14 @@ The extension aggregate syntax is new.
   to implement as they must be built-in-place with an unknown size; as such,
   it is unlikely that they are implemented correctly in existing compilers and
   thus not often used in existing code.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0115-1]}
+  @ChgAdded{Version=[3],Text=[@b[Correction:] An @nt{ancestor_part} that is a
+  subtype with unknown discriminants is now explicitly illegal. Such a
+  subtype should not be used used to declare an object, and the @nt{ancestor_part}
+  acts like an object. The Ada 95 rules did not disallow such cases, so it
+  is possible that code exists that uses such an ancestor, but this should
+  be rare.]}
 @end{Incompatible2005}
 
 
@@ -3736,7 +3751,7 @@ membership test using @key(in)]} yields the result True if:
   the],Old=[The]} tested type is scalar, and the value of the
   @nt<simple_expression> belongs to the @Chg{Version=[3],New=[],Old=[given
   @nt<range>, or the ]}range of the named subtype@Chg{Version=[3],New=[, and
-  the predicate of the named subtype evaluates to True.],Old=[; or]}
+  the predicate of the named subtype evaluates to True.@Defn2{Term=[predicate evaluated],Sec=[membership]}],Old=[; or]}
 @begin{Ramification}
     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
     The scalar membership test only does a range check@Chg{Version=[3],New=[

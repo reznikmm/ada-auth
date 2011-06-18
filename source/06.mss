@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2011/05/07 03:43:08 $}
+@Comment{$Date: 2011/06/04 05:28:19 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.110 $}
+@Comment{$Revision: 1.111 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -636,7 +636,7 @@ denotes a function declaration}, the following attribute is defined:]}
 @begin{Runtime}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
 @ChgAdded{Version=[3],Text=[If one or more precondition expressions apply to a
-subprogram or entry, and the Assertion_Policy (see
+subprogram or entry, and the assertion policy (see
 @RefSecNum{Pragmas Assert and Assertion_Policy}) in effect at the point of the
 subprogram or entry declaration is Check, then upon a call of the subprogram or
 entry, after evaluating any actual parameters, a precondition check is
@@ -650,11 +650,13 @@ of the subprogram body is performed before or after the precondition check. It
 is not specified whether in a call on a protected operation, the check is
 performed before or after starting the protected action. For a task or protected
 entry call, the check is performed prior to checking whether the entry is
-open.]}
+open.@Defn2{Term=[assertion policy],
+  Sec=[precondition check]}@Defn{precondition check}@Defn2{Term=[check, language-defined],
+  Sec=[controlled by assertion policy]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
 @ChgAdded{Version=[3],Text=[If one or more postcondition expressions apply to a
-subprogram or entry, and the Assertion_Policy in effect at the point of the
+subprogram or entry, and the assertion policy in effect at the point of the
 subprogram or entry declaration is Check, then upon successful return from a
 call of the subprogram or entry, prior to copying back any by-copy @key[in out]
 or @key[out] parameters, a postcondition check is performed. This consists of
@@ -664,7 +666,10 @@ Ada.Assertions.Assertion_Error is raised. The order of performing the checks is
 not specified, and if one of them evaluates to False, it is not specified
 whether the other postcondition expressions are evaluated. It is not specified
 whether any constraint checks associated with copying back @key[in out] or
-@key[out] parameters are performed before or after the postcondition check.]}
+@key[out] parameters are performed before or after the postcondition
+check.@Defn2{Term=[assertion policy],
+  Sec=[postcondition check]}@Defn{postcondition check}@Defn2{Term=[check, language-defined],
+  Sec=[controlled by assertion policy]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
 @ChgAdded{Version=[3],Text=[If a precondition or postcondition check fails, the
@@ -680,10 +685,10 @@ named in the call, then if the precondition expression for that aspect evaluates
 to True, the precondition check for the call will succeed.]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
-@ChgAdded{Version=[3],Text=[If the Assertion_Policy in effect at the point of a
+@ChgAdded{Version=[3],Text=[If the assertion policy in effect at the point of a
 subprogram or entry declaration is Ignore, then no precondition or postcondition
 check is performed on a call on that subprogram or entry. If the
-Assertion_Policy in effect at the point of a subprogram or entry declaration is
+assertion policy in effect at the point of a subprogram or entry declaration is
 Check, then preconditions and postconditions are considered to be @i<enabled>
 for that subprogram or entry.@Defn2{Term=[enabled],Sec=[precondition]}@Defn2{Term=[enabled],Sec=[postcondition]}]}
 @end{Runtime}
@@ -2215,10 +2220,11 @@ in its full view, and unconstrained in any partial view.]}
   implementation burden.]}
 @end{Reason}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0234-1]}
 @ChgAdded{Version=[3],Text=[In a function call, the accessibility level of the
 actual object for each explicitly aliased parameter shall not be statically
-deeper than accessibility level of the master of the function result.]}
+deeper than accessibility level of the master of the call
+(see @RefSecNum{Operations of Access Types}).]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2316,7 +2322,8 @@ nor calls on non-static functions.]}
   passed by reference and access-to-constant values can designate variables. For
   the intended use of "known to be the same object", this is OK; the
   modification via another access path is very tricky and it is OK to reject
-  code that would be buggy except for the tricky code. For example:]}
+  code that would be buggy except for the tricky code. Assuming Element is an
+  elementary type, consider the following example:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Global : Tagged_Type;]}
@@ -2553,20 +2560,20 @@ The conversion mentioned here is a value conversion.
 @leading@keepnext@;For an @key(out) parameter that is passed by copy,
 the formal parameter object is created, and:
 @begin(itemize)
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0196-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0196-1]}
   For an access type, the formal parameter is initialized
   from the value of the actual, without @Chg{Version=[3],New=[checking that the
-  value satisfies any constraint or any exclusion of the null
+  value satisfies any constraint, any predicate, or any exclusion of the null
   value],Old=[a constraint check]};
 @begin{Reason}
   This preserves the @MetaRulesName that an object of an access type
   is always initialized with a @lquotes@;reasonable@rquotes@; value.
 @end{Reason}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3],ARef=[AI05-0228-1]}
 @ChgAdded{Version=[3],Text=[For a scalar type that has the Default_Value aspect
 specified, the formal parameter is initialized from the value of the actual,
-without checking that the value satisfies any constraint;]}
+without checking that the value satisfies any constraint or any predicate;]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2619,10 +2626,11 @@ without checking that the value satisfies any constraint;]}
 @end{Ramification}
 @end(itemize)
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0234-1]}
 @ChgAdded{Version=[3],Text=[In a function call, for each explicitly aliased
 parameter, a check is made that the accessibility level of the master of the
-actual object is not deeper than that of the master of the function result.]}
+actual object is not deeper than that of the  master of the call
+(see @RefSecNum{Operations of Access Types}).]}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[Added]}
   @ChgAdded{Version=[3],Text=[If the actual object to a call @i<C> is a formal
@@ -3279,16 +3287,18 @@ The exception Program_Error is raised if this check fails.]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00402-01],ARef=[AI95-00416-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0051-1]}
 @Chg{Version=[2],
-New=[If @Chg{Version=[3],New=[any part of the return object (or coextension
-thereof)],Old=[the result subtype]} of a function has one or more
+New=[If @Chg{Version=[3],New=[any part of the specific type of the return object],
+Old=[the result subtype]} of a function
+@Chg{Version=[3],New=[(or coextension thereof) ],Old=[]}has one or more
 @Chg{Version=[3],New=[],Old=[unconstrained ]}access
 discriminants@Chg{Version=[3],New=[ whose value is not constrained by the
 result subtype of the function],Old=[]},
 a check is made that the accessibility level of the anonymous access type
 of each access discriminant, as determined by the @nt{expression} or the
-@nt{return_@!subtype_@!indication} of the function,
-is not deeper than @Chg{Version=[3],New=[the level of the return object as
-determined by the point of call (see @RefSecNum{Operations of Access Types})],
+@nt{return_@!subtype_@!indication} of the @Chg{Version=[3],New=[return
+statement],Old=[function]},
+is not deeper than @Chg{Version=[3],New=[the level of the master of the call
+(see @RefSecNum{Operations of Access Types})],
 Old=[that of the master that elaborated the
 function body]}. If this check fails, Program_Error is raised.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
@@ -3321,6 +3331,106 @@ that object.]}
   which may come from the @nt{return_@!subtype_@!indication} (if constrained),
   or the @nt{expression}, but it is never necessary to check both.]}
 @end{Reason}
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+  @ChgAdded{Version=[3],Text=[The reason for saying @ldquote@;any part of
+  the specific type@rdquote is to simplify implementation. In the case of
+  class-wide result objects this allows the testing of a simple flag in the
+  tagged type descriptor that indicates whether specific type has any parts with
+  access discriminants. By basing the test on the type of the object rather than
+  the object itself, we avoid concerns about whether subcomponents in variant
+  parts and of arrays (which might be empty) are present.]}
+@end{ImplNote}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+  @ChgAdded{Version=[3],Text=[For a function with a class-wide result type, the
+   access values that need to be checked are determined by the tag of the return
+   object. In order to implement this accessibility check in the case where the
+   tag of the result is not known statically at the point of the return
+   statement, an implementation may need to somehow associate with the tag of a
+   specific tagged type an indication of whether the type has unconstrained
+   access discriminants (explicit or inherited) or has any subcomponents with
+   such discriminants. If an implementation is already maintaining a statically
+   initialized descriptor of some kind for each specific tagged type, then an
+   additional Boolean could be added to this descriptor.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Note that the flag should only be queried in the
+   case where any access discriminants which the result object might have
+   subtypes with "bad" accessibility levels (as determined by the rules of
+   @RefSecNum{Operations of Access Types} for determining the accessibility
+   level of the type of of an access discriminant in the @nt{expression} or
+   @nt{return_subtype_indication} of a return statement).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[Thus, in a case like]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[type] Global @key[is access] T'Class;
+@key[function] F (Ptr : Global) @key[return] T'Class @key[is]
+@key[begin]
+   @key[return] Ptr.@key[all];
+@key[end] F;]}
+@end{Example}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[there is no need for a run-time
+    accessibility check. The setting of the bit doesn't matter and there is no
+    need to query it.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[On the other hand, given]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[function] F @key[return] T'Class @key[is]
+   Local : T'Class := ... ;
+@key[begin]
+   @key[return] Local;
+@key[end] F;]}
+@end{Example}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[In this case, a check would
+    typically be required.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The need for including
+    subcomponents in this check is illustrated by the following example:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[X : @key[aliased] Integer;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[type] Component_Type (Discrim : @key[access] Integer := X'Access)
+   @key[is limited null record];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[type] Undiscriminated @key[is record]
+   Fld : Component_Type;
+@key[end record];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[function] F @key[return] Undiscriminated @key[is]
+   Local : @key[aliased] Integer;
+@key[begin]
+   @key[return] X : Undiscriminated := (Fld => (Discrim => Local'Access)) @key[do]
+      Foo;
+   @key[end return];
+   --@Examcom{ raises Program_Error after calling Foo.}
+@key[end]} F;]}
+@end{Example}
+@end{Discussion}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+  @ChgAdded{Version=[3],Text=[In the case where the tag of the result is not
+  known statically at the point of the return statement and the run-time
+  accessibility check is needed, discriminant values and array bounds play no
+  role in performing this check. That is, array components are assumed to have
+  nonzero length and components declared within variant parts are assumed to be
+  present. Thus, the check may be implemented simply by testing the
+  aforementioned descriptor bit and conditionally raising Program_Error.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0058-1]}
@@ -3592,9 +3702,9 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   compared to Ada 2005, so programs that depend on the previous behavior should
   be very rare.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0051-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0051-1],ARef=[AI05-0234-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Accessibility checks for
-  access discriminants now depend on the point of the call rather than
+  access discriminants now depend on the master of the call rather than
   the point of declaration of the function. This will result in cases
   that used to raise Program_Error now running without raising any exception.
   This is technically inconsistent with Ada 2005 (as defined by Amendment 1),

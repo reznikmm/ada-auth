@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/05/07 03:43:08 $}
+@Comment{$Date: 2011/06/04 05:28:18 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 
 @LabeledClause{Array Types}
 
@@ -2640,7 +2640,7 @@ left implicit in RM83.
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Subtypes with static predicates can be used in @nt{discrete_choice}s,
-  and the coverage rules are modified to take respect the predicates.]}
+  and the coverage rules are modified to respect the predicates.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
   @ChgAdded{Version=[3],Text=[Variants in generic specifications are no

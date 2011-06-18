@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:37 $}
+@Comment{$Date: 2011/06/04 05:28:19 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.90 $}
+@Comment{$Revision: 1.91 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3278,10 +3278,15 @@ user-defined subprogram.]}
 @end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0035],ARef=[AI95-00002-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0034-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0034-1],ARef=[AI05-0243-1]}
 @PDefn{preelaborated}
-If a @nt{pragma} Preelaborate (or @nt<pragma> Pure @em see below)
-applies to a library unit, then it is @i{preelaborated}.
+@Chg{Version=[3],New=[A],Old=[If a]} @nt{pragma} Preelaborate (or
+@nt<pragma> Pure @em see below) @Chg{Version=[3],New=[is used to specify that],
+Old=[applies to]}
+a library unit@Chg{Version=[3],New=[],Old=[, then it]} is
+@i{preelaborated}@Chg{Version=[3],New=[, namely that the Preelaborate
+aspect of the library unit is True; all compilation units of the
+library unit are preelaborated],Old=[]}.
 @Chg{Version=[3],New=[],Old=[@Redundant[
 @RootDefn{preelaborated}
 If a library unit is preelaborated, then its declaration, if any,
@@ -3291,10 +3296,9 @@ prior to all non-preelaborated @nt{library_item}s of the partition.]
 unit, and all subunits that are elaborated as part of elaborating the library
 unit,], Old=[All compilation units of a preelaborated
 library unit]} shall be preelaborable.@Chg{Version=[3],New=[
-In addition, the
-limited view of a library package is preelaborated. All
+All
 compilation units of a preelaborated library unit shall depend semantically only
-on compilation units of other preelaborated library units.],Old=[]}
+on declared pure or preelaborated @nt{library_item}s.],Old=[]}
 @PDefn{generic contract issue}
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
@@ -3584,29 +3588,35 @@ subprogram,
 task unit, or protected unit.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0034-1],ARef=[AI05-0035-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0034-1],ARef=[AI05-0035-1],ARef=[AI05-0243-1]}
 @Defn{declared pure}
-A @nt{pragma} Pure is used to declare that a library unit is pure.
-@Chg{Version=[3],New=[The declaration and
+A @nt{pragma} Pure is used to @Chg{Version=[3],New=[specify],Old=[declare]}
+that a library unit is @Chg{Version=[3],New=[@i{declared pure}, namely
+that the Pure aspect of the library unit is True; all compilation units
+of the library unit are declared ],Old=[]}pure.
+@Chg{Version=[3],New=[In addition, the limited view
+of any library package is declared pure. The declaration and
 body of a declared pure library unit, and all subunits that are
 elaborated as part of elaborating the library unit, shall be pure.
-In addition, the limited view of a library package is declared pure.
 All],Old=[If a @nt{pragma} Pure applies to a library unit,
 then its]} compilation units @Chg{Version=[3],New=[of a declared pure
 library unit],Old=[shall be pure, and they]} shall depend semantically
-only on compilation units of other library units that are
-declared pure.@Chg{Version=[3],New=[ @PDefn{generic contract issue}
+only on @Chg{Version=[3],New=[],Old=[compilation units of other library units
+that are ]}declared pure@Chg{Version=[3],New=[ @nt{library_item}s],
+Old=[]}.@Chg{Version=[3],New=[ @PDefn{generic contract issue}
 In addition to the places where @LegalityTitle normally apply
-(see @RefSecNum{Generic Instantiation}), this rule also
-applies in the private part of an instance of a generic unit.],
+(see @RefSecNum{Generic Instantiation}), these rules also
+apply in the private part of an instance of a generic unit.],
 Old=[]}@Chg{Version=[2],New=[ Furthermore, the full view of any
-partial view declared in the visible part of the library unit that has
+partial view declared in the visible part of @Chg{Version=[3],New=[a declared
+pure],Old=[the]} library unit that has
 any available stream attributes shall support external streaming
 (see @RefSecNum{Stream-Oriented Attributes}).],Old=[]}
 @begin{Honest}
-A @i{declared-pure} library unit is one to which a
-@nt{pragma} Pure applies.
-Its declaration and body are also said to be declared pure.
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0243-1]}@ChgNote{This is now described normatively}
+@ChgDeleted{Version=[3],Text=[A @i{declared-pure} library unit is one to
+which a @nt{pragma} Pure applies.
+Its declaration and body are also said to be declared pure.]}
 @end{Honest}
 @begin{Discussion}
 A declared-pure package is useful for defining types to be shared
@@ -3624,6 +3634,13 @@ that isn't true of Ada 83's deferred constants.
 Anonymous access types
 @Chg{Version=[2],New=[],Old=[(that is, access discriminants and
 access parameters) ]}are allowed.
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0243-1]}
+@ChgAdded{Version=[3],Text=[A limited view is not a library unit, so any rule
+that starts @ldquote@;declared pure library unit@rdquote does not apply to a
+limited view. In particular, the 3rd and last sentences never apply to limited
+views. However, a limited view is a @nt{library_item}, so rules that discuss
+@ldquote@;declared pure @nt{library_item}s@rdquote do include limited views.]}
 @end{Ramification}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
@@ -3916,6 +3933,11 @@ required to appear last.
   that the rules for access types only apply to non-derived types
   (derived types share their storage pool with their parent, so if
   the parent access type is legal, so is any derived type.)]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
+  @ChgAdded{Version=[3],Text=[Pure and Preelaborate are now aspects,
+  so they can be specified by an @nt{aspect_specification} @em
+  although the pragmas are still preferred by the Standard.]}
 @end{Extend2005}
 
 @begin{DiffWord2005}
