@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/06/04 05:28:19 $}
+@Comment{$Date: 2011/06/18 07:20:52 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -2807,7 +2807,7 @@ denotes an object}:]}
 @begin(description)
 @ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],
   Leading=<F>, Prefix=<X>, AttrName=<Overlaps_Storage>, ARef=[AI05-0191-1],
-  Text=[@Chg{Version=[3],New=[X'Has_Same_Storage denotes a function with the
+  Text=[@Chg{Version=[3],New=[X'Overlaps_Storage denotes a function with the
   following specification:],Old=[]}
 
 @begin(Descexample)
@@ -3177,6 +3177,7 @@ rhs="@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>>,
    (which have indications).]}
 
 @begin{Display}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@nt{basic_declaration}
   @nt{type_declaration}
     @nt{full_type_declaration}
@@ -3210,6 +3211,7 @@ rhs="@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>>,
 @nt{discriminant_specification}  --  NO
 @nt{component_declaration}*
 @nt{loop_parameter_specification}  --  NO
+@nt{iterator_specification}  --  NO
 @nt{parameter_specification}  --  NO
 @nt{subprogram_body}*  --  @Examcom{ - but only if there is no explicit specification}
 @nt{entry_declaration}*
@@ -3244,18 +3246,23 @@ kind of entity. If the @nt{aspect_mark} identifies:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[an aspect that denotes an
 object, the @nt{aspect_definition} shall be a @nt{name}. The expected type for
-the @nt{name} is the type of the identified aspect of the associated entity;]}
+the @nt{name} is the type of the identified aspect of the associated
+entity;@PDefn2{Term=[expected type], Sec=[object in an @nt{aspect_specification}]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[an aspect that is
 a value or an expression, the @nt{aspect_definition} shall be an @nt{expression}.
 The expected type for the @nt{expression} is the type of the identified aspect
-of the associated entity;]}
+of the associated
+entity;@PDefn2{Term=[expected type],
+Sec=[@nt{name} in an @nt{aspect_specification}]}@PDefn2{Term=[expected type],
+Sec=[@nt{expression} in an @nt{aspect_specification}]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[an aspect that denotes a subprogram, the
 @nt{aspect_definition} shall be a @nt{name}; the expected profile for the @nt{name}
-is the profile required for the aspect of the associated entity;]}
+is the profile required for the aspect of the associated
+entity;@PDefn2{Term=[expected profile], Sec=[@nt{name} in an @nt{aspect_specification}]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[an aspect that
@@ -3375,17 +3382,38 @@ then:]}
   subprogram of all descendants of @i<T>.]}
 @end{Itemize}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[All specifiable operational and representation
 attributes may be specified with an @nt{aspect_specification} instead of an
 @nt{attribute_definition_clause} (see
-@RefSecNum{Operational and Representation Attributes}). The
-@nt{attribute_designator} is used for the @nt{aspect_mark}. In addition, certain
+@RefSecNum{Operational and Representation Attributes}).]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The name of the aspect is the same as that of the attribute
+  (see @RefSecNum{Operational and Representation Attributes}), so the @nt{aspect_mark}
+  is the @nt{attribute_designator} of the attribute.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[Any aspect specified by a representation pragma
+or library unit pragma that has a @nt{local_name} as its single argument
+may be specified by an @nt{aspect_specification}, with the entity being the
+@nt{local_name}. The @nt{aspect_definition} is expected to be of type Boolean.
+The expression shall be static.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The name of the aspect is the same as that of the
+  pragma (see @RefSecNum{Operational and Representation Items}), so the
+  @nt{aspect_mark} is the name of the pragma.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[In addition, certain
 other operational and representation aspects not associated with specifiable
-attributes may be specified, as specified elsewhere in this International
-Standard. In the case of aspects specifiable with pragmas, the pragma
-@nt{identifier} is used for the @nt{aspect_mark}, unless otherwise specified in
-this International Standard.]}
+attributes or representation pragmas may be specified, as specified elsewhere
+in this International Standard.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @ChgAdded{Version=[3],Text=[If an aspect of a derived type is inherited from an
@@ -3473,7 +3501,7 @@ follow implementation-defined legality and semantics rules.]}
 @end{ImplPerm}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0229-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Aspect specifications are new.]}
 @end{Extend2005}

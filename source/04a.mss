@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/06/04 05:28:19 $}
+@Comment{$Date: 2011/06/18 07:20:52 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.114 $}
+@Comment{$Revision: 1.115 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -25,13 +25,14 @@ Finally, @nt<name>s can denote attributes of any of the foregoing.]
 @end{Intro}
 
 @begin{Syntax}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1],ARef=[AI05-0139-2]}
 @Syn{tabs=[P22], lhs=<name>,rhs="
      @Syn2{direct_name}@\| @Syn2{explicit_dereference}
    | @Syn2{indexed_component}@\| @Syn2{slice}
    | @Syn2{selected_component}@\| @Syn2{attribute_reference}
    | @Syn2{type_conversion}@\| @Syn2{function_call}
-   | @Syn2{character_literal}@Chg{Version=[3],New=[@\| @Syn2{qualified_expression}],Old=[]}"}
+   | @Syn2{character_literal}@Chg{Version=[3],New=[@\| @Syn2{qualified_expression}
+   | @Syn2{generalized_reference}@\| @Syn2{generalized_indexing}],Old=[]}"}
 
 
 @Syn{lhs=<direct_name>,
@@ -293,6 +294,11 @@ of implicit dereference.
   that most dereferences are assumed constrained (without determining whether
   the designated object is). This is just confirming the Ada 95 rules;
   Ada 2005 failed to ensure that this property was unchanged.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+  @ChgAdded{Version=[3],Text=[Added @nt{generalized_reference} and
+  @nt{generalized_indexing} as types of @nt{name}; these are documented
+  as extensions in the appropriate clauses.]}
 @end{DiffWord2005}
 
 
@@ -1084,43 +1090,261 @@ The Ada 83 rule said that the
 
 @LabeledAddedSubClause{Version=[3],Name=[User-Defined References]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-@ChgAdded{Version=[3],Text=[@i<@b{Editor's Note:} This subclause is a placeholder
-for the unfinished AI05-0139-2.>]}
-
+@begin{StaticSem}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[Given a discriminated type @i<T>,
-the following aspect may be specified:]}
+the following type-related operational aspect may be specified:]}
+
+@begin{Description}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Implicit_Dereference@\This aspect is specified by a
+name that denotes an access discriminant declared for the type @i<T>.]}
+@end{Description}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-@ChgAdded{Version=[3],Text=[@b<@i<Editor's note: The remainder of the rules are
-omitted at this time.>>]}
+@ChgAdded{Version=[3],Text=[A (view of a) type with a specified
+Implicit_Dereference aspect is a @i{reference type}.@Defn{reference type}
+A @i{reference object} is an object of a reference type.@Defn{reference object}
+The discriminant named by the Implicit_Dereference aspect is the @i{reference
+discriminant} of the reference type or reference object.@Defn{reference discriminant}
+@Redundant[A @nt{generalized_reference} is a @nt{name} that identifies a
+reference object, and denotes the object or subprogram designated by the
+reference discriminant of the reference object.]]}
+@end{StaticSem}
+
+@begin{Syntax}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<generalized_reference>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<@SynI{reference_object_}@Syn2{name}>,Old=<>}"}
+
+@end{Syntax}
+
+@begin{Resolution}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[The expected type for the @SynI{reference_object_}@nt{name}
+in a @nt{generalized_reference} is expected to be of any reference type.@PDefn2{Term=[expected type],
+  Sec=(@SynI{reference_object_}@nt{name})}]}
+@end{Resolution}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[A @nt{generalized_reference} denotes a view
+equivalent to that of a dereference of the reference discriminant of the
+reference object.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[Given a reference type @i<T>, the
+Implicit_Dereference aspect is inherited by descendants of type @i<T> if not
+overridden. If a descendant type constrains the value of the reference
+discriminant of @i<T> by a new discriminant, that new discriminant is the
+reference discriminant of the descendant. @Redundant[If the descendant type
+constrains the value of the reference discriminant of @i<T> by an
+@nt{expression} other than the @nt{name} of a new discriminant, a
+@nt{generalized_reference} that identifies an object of the descendant type
+denotes the object or subprogram designated by the value of this constraining
+expression.]]}
+
+@end{StaticSem}
+
+@begin{RunTime}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=[evaluation], Sec=(generalized_reference)}
+The evaluation of a @nt{generalized_reference}
+consists of the evaluation of the @SynI{reference_object_}@nt{name} and
+a determination of the object or subprogram designated by the
+reference discriminant of the named reference object.
+@IndexCheck{Access_Check}
+A check is made that the value of the reference
+discriminant is not the null access value.
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+Constraint_Error is raised if this check fails. The
+@nt{generalized_reference} denotes the object or
+subprogram designated by the value of the reference discriminant of the
+named reference object.]}
+
+@end{RunTime}
+
+@begin{Examples}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[@key[type] Ref_Element(Data : @key[access] Element) @key[is]
+   @key[new] Ada.Finalization.Limited_Controlled @key[with private]
+      @key[with] Implicit_Dereference => Data;
+        -- @Examcom{This Ref_Element type is a "reference" type.}
+        -- @ExamCom{"Data" is its reference discriminant.}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[function] Find(C : @key[access] Container; Key : String) @key[return] Ref_Element;
+   -- @Examcom{Return a reference to an element of a container.}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[...]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Find(C, "abc") := Element'(...);  -- @Examcom{Assign through a reference.}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[-- @Examcom{This is equivalent to:}
+--   Find(C, "abc").Data.@key[all] := Element'(...);]}
+
+@end{Example}
+@end{Examples}
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Reference objects
-  and the aspect Implicit_Dereference are new.]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}The aspect
+  Implicit_Dereference and the @nt{generalized_reference} are new.]}
 @end{Extend2005}
 
 
 @LabeledAddedSubClause{Version=[3],Name=[User-Defined Indexing]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-@ChgAdded{Version=[3],Text=[@i<@b{Editor's Note:} This subclause is a placeholder
-for the unfinished AI05-0139-2.>]}
+@begin{StaticSem}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[Given a tagged type @i<T>,
-the following aspects may be specified:]}
+the following type-related, operational aspects
+may be specified:]}
+
+@begin{Description}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Constant_Indexing@\This aspect shall be specified by
+a @nt{name} that denotes one or more functions declared immediately within the
+same declaration list in which @i<T> is declared. All of such functions shall
+have at least two parameters, the first of which is of type @i<T> or
+@i<T>'Class, or is an access-to-constant parameter with designated type @i<T> or
+@i<T>'Class.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Variable_Indexing@\This aspect shall be specified
+by a @nt{name} that denotes one or more functions declared immediately within
+the same declaration list in which @i<T> is declared. All of such functions
+shall have at least two parameters, the first of which is of type @i<T> or
+@i<T>'Class, or is an access parameter with designated type @i<T> or @i<T>'Class.
+All of such functions shall have a return type that is a reference
+type (see @RefSecNum{User-Defined References}), whose access discriminant
+is of an access-to-variable type.]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We require these functions to return a reference
+  type so that the object returned from the function can act like a variable.
+  We need no similar rule for Constant_Indexing, since all functions return
+  constant objects.]}
+@end{Reason}
+@end{Description}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[These aspects are inherited by descendants of @i<T>
+(including the class-wide type @i<T>'Class). The aspects may not be overridden,
+but the functions they denote may be.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Indexing can be provided for multiple index types
+  by overloading routines with different parameter profiles. For instance, the
+  map containers provide indexing on both cursors and keys by providing
+  pairs of overloaded routines to the Constant_Indexing and Variable_Indexing
+  aspects.]}
+@end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-@ChgAdded{Version=[3],Text=[@b<@i<Editor's note: The remainder of the rules are
-omitted at this time.>>]}
+@ChgAdded{Version=[3],Text=[An @i<indexable type> is (a view of) a
+tagged type with at least one of the aspects Constant_Indexing or
+Variable_Indexing specified.@Defn{indexable type}
+An @i<indexable object> is an object of an indexable type.@Defn{indexable object}
+@Redundant[A @nt{generalized_indexing} is a @nt{name} that denotes the result
+of calling a function named by a Contant_Indexing or Variable_Indexing aspect.]]}
+
+@end{StaticSem}
+
+@begin{Syntax}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<generalized_indexing>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<@SynI{indexable_object_}@Syn2{prefix} @Syn2{actual_parameter_part}>,Old=<>}"}
+
+@end{Syntax}
+
+@begin{Resolution}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[The expected type for the
+@Syni{indexable_object_}@nt{prefix} of a @nt{generalized_indexing}
+is any indexable type.@PDefn2{Term=[expected type],
+  Sec=(@SynI{indexable_object_}@nt{prefix})}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[If the Constant_Indexing aspect is
+specified for the type of the @SynI{indexable_object_}@nt{prefix} of a
+@nt{generalized_indexing}, then the @nt{generalized_indexing} is interpreted as
+a @i<constant indexing> under the following
+circumstances:@Defn{constant indexing}@Defn2{Term=[indexing],Sec=[constant]}]}
+
+@begin{Itemize}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[when the Variable_Indexing aspect is not specified
+     for the type of the @SynI{indexable_object_}@nt{prefix};]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[when the @SynI{indexable_object_}@nt{prefix}
+    denotes a constant;]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[when the @nt{generalized_indexing} is used within
+    a @nt{primary} where a @nt{name} denoting a constant is permitted.]}
+
+    @begin{Ramification}
+      @ChgRef{Version=[3],Kind=[AddedNormal]}
+      @ChgAdded{Version=[3],Text=[This means it is not interpreted as a
+        constant indexing for the @SynI{variable_}@nt{name} in the LHS of an
+        assignment (not inside a @nt{primary}), nor for the @nt{name} used
+        for an @key[out] or @key[in out] parameter (not allowed to be
+        a constant), nor for the @nt{name} in an object renaming
+        (not inside a primary), unless
+        there is no Variable_Indexing aspect defined.]}
+    @end{Ramification}
+
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Otherwise, the @nt{generalized_indexing} is
+interpreted as a
+@i{variable indexing}.@Defn{variable indexing}@Defn2{Term=[indexing],Sec=[variable]}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[When a @nt{generalized_indexing} is interpreted as a
+constant (or variable) indexing, it is equivalent to a call on a prefixed view
+of one of the functions named by the Constant_Indexing (or Variable_Indexing)
+aspect of the type of the @Syni{indexable_object_}@nt{prefix} with the given
+@nt{actual_parameter_part}, and with the @Syni{indexable_object_}@nt{prefix} as
+the @nt{prefix} of the prefixed view.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[In other words, the
+    @nt{generalized_indexing} is equivalent to:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@SynI{indexable_object_}@nt{prefix}.Indexing @nt{actual_parameter_part}]}
+@end{Example}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[where Indexing is the name
+    specified for the Constant_Indexing or Variable_Indexing aspect.]}
+@end{Ramification}
+
+@end{Resolution}
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Aspects
-  Constant_Indexing and Variable_Indexing are new.]}
+  Constant_Indexing and Variable_Indexing, and the @nt{generalized_indexing}
+  syntax are new.]}
 @end{Extend2005}
 
 
@@ -4985,7 +5209,7 @@ the @nt{loop_parameter_specification} or @nt{iterator_specification} is first el
 @nt{quantified_expression} then evaluates the @nt{predicate} for each value of
 the loop parameter. These values are examined in the order specified by the
 @nt{loop_parameter_specification} (see @RefSecNum{Loop Statements}) or
-@nt{iterator_specification} (see @RefSecNum{User-Defined Iterators}).@PDefn2{Term=[evaluation],Sec=[quantified_expression]}]}
+@nt{iterator_specification} (see @RefSecNum{Generalized Loop Iteration}).@PDefn2{Term=[evaluation],Sec=[quantified_expression]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The value of the

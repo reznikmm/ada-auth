@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/06/04 05:28:19 $}
+@Comment{$Date: 2011/06/18 07:20:52 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @LabeledClause{Type Conversions}
 
@@ -910,7 +910,8 @@ the predicate of the target subtype is applied to the value and
 Assertions.Assertion_Error is raised if the result is False.@Defn2{Term=[assertion policy],
 Sec=[predicate check]}@Defn2{Term=[predicate check],
 Sec=[subtype conversion]}@Defn2{Term=[check, language-defined],
-Sec=[controlled by assertion policy]}],Old=[]}
+Sec=[controlled by assertion policy]}@Defn2{Term=(Assertion_Error),
+Sec=(raised by failure of run-time check)}],Old=[]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
   The @Chg{Version=[2],New=[first],Old=[above]} check
@@ -1345,8 +1346,14 @@ an access value that designates the object.
 @end{Intro}
 
 @begin{Syntax}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0111-3]}
 @Syn{lhs=<allocator>,rhs="
-   @key{new} @Syn2{subtype_indication} | @key{new} @Syn2{qualified_expression}"}
+   @key{new} @Chg{Version=[3],New=<[@Syn2{subpool_specification}] >,Old=<>}@Syn2{subtype_indication}@Chg{Version=[3],New=<
+>,Old=<>} | @key{new} @Chg{Version=[3],New=<[@Syn2{subpool_specification}] >,Old=<>}@Syn2{qualified_expression}"}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0111-3]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<subpool_specification>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<(@SynI{subpool_handle_}@Syn2{name})>,Old=<>}"}
 
 @begin{SyntaxText}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0104-1]}
@@ -1366,13 +1373,18 @@ uninitialized case illegal as well.]}
 
 @begin{Resolution}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010],ARef=[AI95-00127-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0111-3]}
 @PDefn2{Term=[expected type],Sec=(allocator)}
 The expected type for an @nt<allocator> shall be a single access-to-object
 type @Chg{New=[with],Old=[whose]} designated type
 @Chg{New=[@i<D> such that either @i<D>],Old=[]} covers the type determined
 by the @nt<subtype_mark> of the @nt<subtype_@!indication> or
 @nt<qualified_@!expression>@Chg{New=[, or the expected type is anonymous and
-the determined type is @i<D>'Class],Old=[]}.
+the determined type is @i<D>'Class],Old=[]}.@Chg{Version=[3],New=[
+A @SynI{subpool_handle_}@nt{name} is expected to be of any type descended from
+Subpool_Handle, the type used to identify a subpool, declared in package
+System.Storage_Pools.Subpools
+(see @RefSecNum{Storage Subpools}).@PDefn2{Term=[expected type],Sec=(subpool_handle_name)}],Old=[]}
 @begin{Discussion}
   See @RefSec(The Context of Overload Resolution) for the meaning
   of @lquotes@;shall be a single ... type whose ...@rquotes@;
@@ -1417,7 +1429,13 @@ the @nt<allocator> shall be an uninitialized allocator.]}
   The Access attribute is legal for such a type, however.]}
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[If a @nt{subpool_specification} is given,
+the type of the storage pool of the access type shall be a descendant
+of Root_Storage_Pool_with_Subpools.]}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}@ChgNote{Because the paragraph numbers changed}
 @ChgAdded{Version=[2],Text=[If the designated type of the type of the
 @nt{allocator} is class-wide, the accessibility level of the type determined by the
 @nt{subtype_indication} or @nt{qualified_expression} shall not be statically
@@ -1722,6 +1740,32 @@ Program_Error is raised.@IndexCheck{Allocation_Check}
   be awaited.]}
 @end{Reason}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[If the @nt{allocator} includes a
+@SynI{subpool_handle_}@nt{name}, Constraint_Error is raised if the subpool
+handle is @key[null]. Program_Error is raised if the subpool does not @i<belong>
+(see @RefSecNum{Storage Subpools}) to the storage pool of the access type of the
+@nt{allocator}.@IndexCheck{Access_Check}@IndexCheck{Allocation_Check}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This can be implemented by comparing the result of
+  Pool_of_Subpool to a reference to the storage pool object. Pool_of_Subpool's
+  parameter is @key[not null], so the check for null falls out naturally.]}
+@end{ImplNote}
+
+@begin{Reason}
+   @ChgRef{Version=[3],Kind=[AddedNormal]}
+   @ChgAdded{Version=[3],Text=[This detects cases where the subpool belongs to
+   another pool, or to no pool at all. This includes detecting dangling subpool
+   handles so long as the subpool object (the object designated by the handle)
+   still exists. (If the subpool object has been deallocated, execution is
+   erroneous; it is likely that this check will still detect the problem, but
+   there cannot be a guarantee.)]}
+@end{Reason}
+
 @Redundant[If the created object contains any tasks,
 they are activated
 (see @RefSecNum(Task Execution - Task Activation)).]
@@ -1758,8 +1802,10 @@ is not enough storage.
 Instances of Unchecked_Deallocation may be used to explicitly reclaim
 storage.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 Implementations are permitted, but not required,
-to provide garbage collection (see @RefSecNum{Pragma Controlled}).
+to provide garbage collection@Chg{Version=[3],New=[],Old=[
+(see @RefSecNum{Default Storage Pools})]}.
 @begin{Ramification}
   Note that in an @nt<allocator>,
   the exception Constraint_Error can be
@@ -1901,6 +1947,12 @@ has been moved to @RefSec{Storage Management}.
   Programs that depend on the unconditional raising of a predefined
   exception should be very rare.]}
 @end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Subpool handles
+  (see @RefSecNum{Storage Subpools}) can be specified in an @nt{allocator}.]}
+@end{Extend2005}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0024-1]}

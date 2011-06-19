@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2011/06/04 05:28:19 $}
+@Comment{$Date: 2011/06/18 07:20:52 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.111 $}
+@Comment{$Revision: 1.112 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -481,7 +481,7 @@ The syntax rules for @nt{defining_designator} and
 
 @LabeledAddedSubClause{Version=[3],Name=[Preconditions and Postconditions]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For a subprogram or entry, the
 following language-defined aspects may be specified with an
 @nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
@@ -489,27 +489,36 @@ following language-defined aspects may be specified with an
 @begin{Description}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Pre@\This aspect
-  specifies a precondition for a callable entity; it shall
+  specifies a specific precondition for a callable entity; it shall
   be specified by an @nt{expression}, called a
-  @i<precondition expression>.@Defn{precondition expression}]}
+  @i<specific precondition
+  expression>.@Defn{specific precondition expression}@Defn2{Term=[precondition expression],Sec=[specific]}
+  If not specified for an entity, the specific precondition
+  expression for the entity is the enumeration literal True.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Pre'Class@\This aspect
-  specifies a precondition for a callable entity and its
+  specifies a class-wide precondition for a callable entity and its
   descendants; it shall be specified by an @nt{expression}, called a
-  @i<precondition expression>.]}
+  @i<class-wide precondition expression>.@Defn{class-wide precondition expression}@Defn2{Term=[precondition expression],Sec=[class-wide]}
+  If not specified for an entity, the class-wide precondition
+  expression for the entity is the enumeration literal True.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Post@\This aspect
-  specifies a postcondition for a callable entity; it shall be specified by an
-  @nt{expression}, called a @i<postcondition
-  expression>.@Defn{postcondition expression}]}
+  specifies a specific postcondition for a callable entity; it shall be
+  specified by an @nt{expression}, called a @i<specific postcondition
+  expression>.@Defn{specific postcondition expression}@Defn2{Term=[postcondition expression],Sec=[specific]}
+  If not specified for an entity, the specific postcondition
+  expression for the entity is the enumeration literal True.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Post'Class@\This aspect
-  specifies a postcondition for a callable entity and its descendants;
-  it shall be specified by an @nt{expression}, called a @i<postcondition
-  expression>.]}
+  specifies a class-wide postcondition for a callable entity and its
+  descendants; it shall be specified by an @nt{expression}, called a
+  @i<class-wide postcondition expression>.@Defn{class-wide postcondition expression}@Defn2{Term=[postcondition expression],Sec=[class-wide]}
+  If not specified for an entity, the class-wide postcondition
+  expression for the entity is the enumeration literal True.]}
 @end{Description}
 
 @begin{Resolution}
@@ -548,6 +557,99 @@ Post'Class aspects may be specified for such a subprogram.]]}
   on primitive routines of tagged types, by a blanket rule found in
   @RefSecNum{Aspect Specifications}.]}
 @end{Discussion}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0247-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[If a type has an inherited
+subprogram @i<P>
+implicitly declared, the corresponding primitive subprogram of the parent or
+progentitor is neither null nor abstract, a homograph
+(see @RefSecNum{Visibility}) of @i<P> is declared and inherited
+from an ancestor @i<T2> that is different from the ancestor @i<T1> from which
+@i<P> is inherited, and at least one class-wide precondition that applies
+to the subprogram inherited from @i<T2> does not fully conform to
+any class-wide precondition that applies @i<P>, then:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If the type is abstract the implicitly declared
+  subprogram is @i<abstract>.@PDefn{abstract subprogram}]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Otherwise, the subprogram @i{requires overriding}
+  and shall be overridden with a nonabstract subprogram.@PDefn{requires overriding}]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We use the term "requires overriding" here so that
+    this rule is taken into account when calculating visibility in
+    @RefSecNum{Visibility}; otherwise we would have a mess when this routine is
+    overridden.]}
+@end{Discussion}
+@end{Itemize}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Such an inherited subprogram would necessarily
+    violate the Liskov Substitutability Principle (LSP) if called via a
+    dispatching call from an ancestor other than the one that provides the
+    called body. In such a case, the class-wide precondition of the actual body
+    is stronger than the class-wide precondition of the ancestor. If we did not
+    enforce that precondition for the body, the body could be called when the
+    precondition it knows about is False @em such "counterfeiting" of
+    preconditions has to be avoided. But enforcing the precondition violates
+    LSP. We do not want the language to be implicitly creating bodies that
+    violate LSP; the programmer can still write an explicit body that calls the
+    appropriate parent subprogram. In that case, the violation of LSP is
+    explicitly in the code and obvious to code reviewers (both human and
+    automated).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We have to say that the subprogram is abstract for
+    an abstract type in this case, so that the next concrete type has to
+    override it for the reasons above. Otherwise, inserting an extra level of
+    abstract types would eliminate the requirement to override (as there is only
+    one declared operation for the concrete type), and that would be bad for the
+    reasons given above.]}
+@end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This requires the set of class-wide preconditions that
+    apply to each declared homograph to be identical. Since full conformance
+    requires each name to denote the same declaration, it is unlikely that
+    independently declared preconditions would conform. This rule does allow
+    "diamond inheritance" of preconditions, and of course no preconditions at
+    all match.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We considered adopting a rule that would allow
+    examples where the expressions would conform after all inheritance has been
+    applied, but this is complex and is not likely to be common in practice.
+    Since the penalty here is just that an explicit overriding is required, the
+    complexity is too much.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0247-1]}
+@ChgAdded{Version=[3],Text=[If a renaming of a subprogram or entry @i<S1>
+overrides an inherited subprogram @i<S2>, then the overriding is illegal
+unless each class-wide precondition that applies to @i<S1> fully conforms
+to some class-wide precondition that applies to @i<S2> and each class-wide
+precondition that applies to @i<S2> fully conforms to some
+class-wide precondition that applies to @i<S1>.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Such an overriding subprogram would violate LSP,
+    as the precondition of @i<S1> would usually be different (and thus stronger)
+    than the one known to a dispatching call through an ancestor routine of @i<S2>.
+    This is always OK if the preconditions match, so we always allow that.]}
+@end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This only applies to primitives of tagged types;
+    other routines cannot have class-wide preconditions.]}
+@end{Ramification}
 @end{Legality}
 
 @begin{StaticSem}
@@ -634,55 +736,154 @@ denotes a function declaration}, the following attribute is defined:]}
 @end{StaticSem}
 
 @begin{Runtime}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
-@ChgAdded{Version=[3],Text=[If one or more precondition expressions apply to a
-subprogram or entry, and the assertion policy (see
-@RefSecNum{Pragmas Assert and Assertion_Policy}) in effect at the point of the
-subprogram or entry declaration is Check, then upon a call of the subprogram or
-entry, after evaluating any actual parameters, a precondition check is
-performed. This begins with the evaluation of the precondition expressions that
-apply to the subprogram or entry. If and only if all the precondition
-expressions evaluate to False, Ada.Assertions.Assertion_Error is raised. The
-order of performing the checks is not specified, and if any of the precondition
-expressions evaluate to True, it is not specified whether the other precondition
-expressions are evaluated. It is not specified whether any check for elaboration
-of the subprogram body is performed before or after the precondition check. It
-is not specified whether in a call on a protected operation, the check is
-performed before or after starting the protected action. For a task or protected
-entry call, the check is performed prior to checking whether the entry is
-open.@Defn2{Term=[assertion policy],
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
+@ChgAdded{Version=[3],Text=[If the assertion policy (see
+@RefSecNum{Pragmas Assert and Assertion_Policy}) in effect at the point of
+a subprogram or entry declaration is Check, then upon a call of the
+subprogram or entry, after evaluating any actual parameters,
+precondition checks are performed as follows:@Defn2{Term=[assertion policy],
   Sec=[precondition check]}@Defn{precondition check}@Defn2{Term=[check, language-defined],
   Sec=[controlled by assertion policy]}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
-@ChgAdded{Version=[3],Text=[If one or more postcondition expressions apply to a
-subprogram or entry, and the assertion policy in effect at the point of the
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The specific precondition check begins with the
+  evaluation of the specific precondition expression that applies to the
+  subprogram or entry; if the expression evaluates to False,
+  Assertions.Assertion_Error is raised.@Defn2{Term=(Assertion_Error),
+  Sec=(raised by failure of run-time check)}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The class-wide precondition check begins with the
+  evaluation of any class-wide precondition expressions that apply to the
+  subprogram or entry. If and only if all the class-wide precondition
+  expressions evaluate to False, Assertions.Assertion_Error is raised.@Defn2{Term=(Assertion_Error),
+  Sec=(raised by failure of run-time check)}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The class-wide precondition expressions of the
+    entity itself as well as those of any parent or progentitor operations are
+    evaluated, as these apply to all descendants.]}
+@end{Ramification}
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
+@ChgAdded{Version=[3],Text=[The order of performing the checks is not specified,
+and if any of the class-wide precondition expressions evaluate to True, it is
+not specified whether the other class-wide precondition expressions are
+evaluated. It is not specified whether any check for elaboration of the
+subprogram body is performed before or after the precondition checks. It is not
+specified whether in a call on a protected operation, the checks are performed
+before or after starting the protected action. For a task or protected entry
+call, the checks are performed prior to checking whether the entry is open.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
+@ChgAdded{Version=[3],Text=[If the assertion policy in effect at the point of a
 subprogram or entry declaration is Check, then upon successful return from a
 call of the subprogram or entry, prior to copying back any by-copy @key[in out]
-or @key[out] parameters, a postcondition check is performed. This consists of
-the evaluation of the postcondition expressions that apply to the subprogram or
-entry. If any of the postcondition expressions evaluate to False, then
-Ada.Assertions.Assertion_Error is raised. The order of performing the checks is
-not specified, and if one of them evaluates to False, it is not specified
-whether the other postcondition expressions are evaluated. It is not specified
-whether any constraint checks associated with copying back @key[in out] or
-@key[out] parameters are performed before or after the postcondition
-check.@Defn2{Term=[assertion policy],
+or @key[out] parameters, the postcondition check is performed. This consists of
+the evaluation of the specific and class-wide postcondition expressions that
+apply to the subprogram or entry. If any of the postcondition expressions
+evaluate to False, then Ada.Assertions.Assertion_Error is raised. The order of
+performing the checks is not specified, and if any postcondition expression
+evaluates to False, it is not specified whether any other postcondition
+expressions are evaluated. It is not specified whether any constraint checks
+associated with copying back @key[in out] or @key[out] parameters are performed
+before or after the postcondition checks.@Defn2{Term=[assertion policy],
   Sec=[postcondition check]}@Defn{postcondition check}@Defn2{Term=[check, language-defined],
-  Sec=[controlled by assertion policy]}]}
+  Sec=[controlled by assertion policy]}@Defn2{Term=(Assertion_Error),
+  Sec=(raised by failure of run-time check)}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The class-wide postcondition expressions of the
+  entity itself as well as those of any parent or progentitor operations are
+  evaluated, as these apply to all descendants; in constrast, only the specific
+  postcondition of the entity applies. Postconditions can always be evaluated
+  inside the invoked body.]}
+@end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
 @ChgAdded{Version=[3],Text=[If a precondition or postcondition check fails, the
 exception is raised at the point of the call. @Redundant[The exception cannot
 be handled inside the called subprogram.]]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
-@ChgAdded{Version=[3],Text=[For a dispatching call or a call via an
-access-to-subprogram value, the precondition or postcondition check performed is
-determined by the subprogram actually invoked. @Redundant[Note that for a
-dispatching call, if there is a Pre'Class aspect that applies to the subprogram
-named in the call, then if the precondition expression for that aspect evaluates
-to True, the precondition check for the call will succeed.]]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
+@ChgAdded{Version=[3],Text=[For any subprogram or entry call (including
+dispatching calls), the specific precondition check and the postcondition check
+that is performed is determined by the those of the subprogram or entry actually
+invoked. For the purposes of these checks, if the subprogram actually invoked is
+primitive for some type @i<T> and is inherited from some other type, the checks
+needed are determined as if the body of the of the entity is declared directly
+as a primitive of type @i<T>; in addition, if the subprogram is neither null nor
+abstract, the specific postcondition of the invoked body is checked.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This applies to access-to-subprogram calls,
+    dispatching calls, and to statically bound calls. We need this rule to cover
+    statically bound calls as well, as specific pre- and postconditions are not
+    inherited, but the subprogram might be.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We use the "for the purposes" part of the rule to
+    include additional class-wide postconditions from those that apply to the
+    original subprogram. This may happen if the operation is inherited from both
+    a parent and a progenitor, and both the parent operation and progenitor
+    operation have one or more associated postcondition expressions.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[For concrete routines, we require the original
+    specific postcondition to be evaluated as well as the inherited class-wide
+    postconditions in order that the semantics of an explicitly defined wrapper
+    that does nothing but call the original routine is the same as that of an
+    inherited routine.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Note that this rule does not apply to class-wide
+    preconditions; they have their own rules mentioned below.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
+@ChgAdded{Version=[3],Text=[For a call via an access-to-subprogram value, the
+class-wide precondition check is determined by the subprogram or entry actually
+invoked. In contrast, the class-wide precondition check for other calls to a
+subprogram or entry consists solely of checking the class-wide preconditions
+that apply to the denoted entity (not necessarily the one that is invoked).]}
+
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The "for the purposes" rule mentioned in the
+    previous item also apply to class-wide preconditions of calls through
+    access-to-subprogram values.]}
+@end{Honest}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[For a dispatching call, we are talking about the
+    Pre'Class(es) that apply to the subprogram that the dispatching call is
+    resolving to, not the Pre'Class(es) for the subprogram that is ultimately
+    dispatched to. The class-wide precondition of the resolved call is
+    necessarily the same or stronger than that of the invoked call. For a
+    statically bound call, these are the same; for an access-to-subprogram,
+    (which has no class-wide preconditions of its own), we check the
+    class-wide preconditions of the invoked routine.]}
+@end{Ramification}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[These rules imply that logically, class-wide
+    preconditions of routines must be checked at the point of call (other
+    than for access-to-subprogram calls, which must be checked in the body,
+    probably using a wrapper). Specific preconditions that might be called with
+    a dispatching call or via an access-to-subprogram value must be checked
+    inside of the subprogram body. In contrast, the postcondition checks always
+    need to be checked inside the body of the routine. Of course, an
+    implementation can evaluate all of these at the point of call for statically
+    bound calls if the implementation uses wrappers for dispatching bodies and
+    for 'Access values.]}
+@end{ImplNote}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
 @ChgAdded{Version=[3],Text=[If the assertion policy in effect at the point of a
@@ -712,7 +913,7 @@ protected action.]}
 @end{Notes}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0230-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0230-1],ARef=[AI05-0247-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Pre and Post aspects are new.]}
 @end{Extend2005}
@@ -1670,120 +1871,166 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
 
 @begin{Syntax}
 @begin{SyntaxText}
-@leading@keepnext@PDefn2{Term=[program unit pragma], Sec=(Inline)}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Type=[Leading],KeepNext=[T],Text=[@PDefn2{Term=[program unit pragma], Sec=(Inline)}
 @PDefn2{Term=[pragma, program unit], Sec=(Inline)}
 The form of a @nt{pragma} Inline,
 which is a program unit pragma (see @RefSecNum{Pragmas and Program Units}),
-is as follows:
+is as follows:]}
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(Inline)(@Syn2{name} {, @Syn2{name}});'
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Inline)(@Syn2{name} {, @Syn2{name}});']}
 @end{Syntax}
 
 @begin{Legality}
-The @nt{pragma} shall apply to one or more callable entities
-or generic subprograms.
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[The @nt{pragma} shall apply to one or more
+callable entities or generic subprograms.]}
 @end{Legality}
 
 @begin{StaticSem}
-If a @nt{pragma} Inline applies to a callable entity,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[]}@ChgNote{Conditional leading}
+@Chg{Version=[3],New=[For],Old=[If a @nt{pragma} Inline applies to]}
+a callable entity@Chg{Version=[3],New=[ or],Old=[,
 this indicates that inline expansion is desired for all calls
 to that entity.
-If a @nt{pragma} Inline applies to a generic subprogram,
-this indicates that inline expansion is desired for all calls
-to all instances of that generic subprogram.
+If a @nt{pragma} Inline applies to]} a generic subprogram,
+@Chg{Version=[3],New=[the following language-defined
+representation aspect may be specified:],Old=[this indicates that
+inline expansion is desired for all calls to all instances of that
+generic subprogram.]}
+
+@begin{Description}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Inline@\The type of aspect Inline is Boolean. When
+aspect Inline is True for a callable entity, inline expansion is desired for all
+calls to that entity. When aspect Inline is True for a generic subprogram,
+inline expansion is desired for all calls to all instances of that generic
+subprogram.]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],NoPrefix=[T],Text=[If directly specified, the
+@nt{aspect_definition} shall be a static expression.
+@Redundant[This aspect is never inherited;] if not directly specified,
+the aspect is False.]}
+@end{Description}
+
+
 @begin{Ramification}
-@leading@;Note that inline expansion is desired no matter what
-name is used in the call.
-This allows one to request inlining for only one of several
-overloaded subprograms as follows:
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Type=[Leading],Text=[Note that inline expansion is
+desired no matter what name is used in the call. This allows one to request
+inlining for only one of several overloaded subprograms as follows:]}
 @begin{Example}
-@key[package] IO @key[is]
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[@key[package] IO @key[is]
    @key[procedure] Put(X : @key[in] Integer);
    @key[procedure] Put(X : @key[in] String);
    @key[procedure] Put(X : @key[in] Character);
 @key[private]
    @key[procedure] Character_Put(X : @key[in] Character) @key[renames] Put;
    @key[pragma] Inline(Character_Put);
-@key[end] IO;
+@key[end] IO;]}
 
-@key[with] IO; @key[use] IO;
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[@key[with] IO; @key[use] IO;
 @key[procedure] Main @key[is]
    I : Integer;
    C : Character;
 @key[begin]
    ...
-   Put(C); --@RI{ Inline expansion is desired.}
-   Put(I); --@RI{ Inline expansion is NOT desired.}
-@key[end] Main;
+   Put(C); --@Examcom{ Inline expansion is desired.}
+   Put(I); --@Examcom{ Inline expansion is NOT desired.}
+@key[end] Main;]}
 @end{Example}
 @end{Ramification}
 @begin{Ramification}
-The meaning of a subprogram can be changed by a @nt{pragma} Inline only
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+The meaning of a subprogram can be changed by @Chg{Version=[3],New=[inline
+expansion as requested by aspect],Old=[a @nt{pragma}]} Inline only
 in the presence of failing checks
 (see @RefSecNum{Exceptions and Optimization}).
 @end{Ramification}
 @end{StaticSem}
 
 @begin{ImplPerm}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 For each call,
 an implementation is free to follow or to ignore the recommendation
-expressed by the @nt{pragma}.
+@Chg{Version=[3],New=[determined],Old=[expressed]} by the
+@Chg{Version=[3],New=[Inline aspect],Old=[@nt{pragma}]}.
 @begin{Ramification}
 Note, in particular, that the recommendation
 cannot always be followed for a recursive call,
 and is often infeasible for entries.
 Note also that the implementation can inline calls even
-when no such desire was expressed by a pragma,
+when no such desire was expressed @Chg{Version=[3],New=[via the
+Inline aspect],Old=[by a pragma]},
 so long as the semantics of the program remains unchanged.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00309-01]}
-@Chg{Version=[2],New=[An implementation may allow a @nt{pragma} Inline that has
-an argument which is a @nt{direct_name} denoting a @nt{subprogram_body} of the
-same @nt{declarative_part}.],Old=[]}
+@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[An implementation may allow
+a @nt{pragma} Inline that has an argument which is a @nt{direct_name} denoting a
+@nt{subprogram_body} of the same @nt{declarative_part}.],Old=[]}]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[This is allowed for Ada 83 compatibility. This is
-only a permission as this usage is considered obsolescent.]}
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[This is allowed for
+Ada 83 compatibility. This is only a permission as this usage is considered
+obsolescent.]}]}
 @end{Reason}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[We only need to allow this in @nt{declarative_part}s,
-because a body is only allowed in another body, and these all have
-@nt{declarative_part}s.]}
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[We only need to allow
+this in @nt{declarative_part}s, because a body is only allowed in another body,
+and these all have @nt{declarative_part}s.]}]}
 @end{Discussion}
 @end{ImplPerm}
 
 @begin{Notes}
-The @nt{name} in a @nt{pragma} Inline can denote
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[The @nt{name} in a @nt{pragma} Inline can denote
 more than one entity in the case of overloading.
-Such a @nt{pragma} applies to all of the denoted entities.
+Such a @nt{pragma} applies to all of the denoted entities.]}
 @end{Notes}
 
 @begin{Incompatible83}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00309-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 83}
+  @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[@Defn{incompatibilities with Ada 83}
   A pragma Inline cannot refer to a @nt{subprogram_body} outside of that
   body. The pragma can be given inside of the subprogram body. Ada 2005
   adds an @ImplPermName to allow this usage for compatibility (and
   Ada 95 implementations also can use this permission), but
-  implementations do not have to allow such @nt{pragma}s.]}
+  implementations do not have to allow such @nt{pragma}s.]}]}
 @end{Incompatible83}
 
 @begin{Extend83}
-  @Defn{extensions to Ada 83}
+  @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+  @ChgDeleted{Version=[3],Text=[@Defn{extensions to Ada 83}
   A @nt{pragma} Inline is allowed inside a @nt{subprogram_body} if there
   is no corresponding @nt{subprogram_declaration}.
-  This is for uniformity with other program unit pragmas.
+  This is for uniformity with other program unit pragmas.]}
 @end{Extend83}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00309-01]}
-  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[@Defn{extensions to Ada 95}
   @b[Amendment Correction:] Implementations are allowed to let @nt{Pragma}
-  Inline apply to a @nt{subprogram_body}.]}
+  Inline apply to a @nt{subprogram_body}.]}]}
 @end{Extend95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Aspect Inline is new; @nt{pragma} Inline is now obsolescent.]}
+@end{Extend2005}
 
 
 @Comment{@RMNewPage@Comment{For printed RM Ada 2005 only} - Now Ada 2012}
@@ -3770,38 +4017,71 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
 @end{DiffWord2005}
 
 
-@LabeledAddedSubClause{Version=[2],Name=[Pragma No_Return]}
-
-@ChgNote{Putting @nt{pragma} in the syntax font is used for Assert and Pure,
-at least.}
+@Comment{TBD:---@LabeledAddedRevisedClause{Version=[3],OldVersion=[2],New=[Non-returning Procedures],Old=[Pragma No_Return]}}
+@LabeledAddedSubClause{Version=[3],Name=[Non-returning Procedures]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
-@ChgAdded{Version=[2],Text=[A @nt{pragma} No_Return indicates that a
-procedure cannot return normally@Redundant[; it may propagate an exception
-or loop forever].]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[Specifying aspect],Old=[A @nt{pragma}]}
+No_Return @Chg{Version=[3],New=[to have the value True ],Old=[]}indicates
+that a procedure cannot return normally@Redundant[; it may propagate
+an exception or loop forever].]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@nt{Pragma} No_Deposit will have to wait for Ada 2017. :-)]}
+@ChgRef{Version=[3],Kind=[Revised]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[Aspect],Old=[@nt{Pragma}]}
+No_Deposit@Defn{No_Deposit aspect} will have to wait for
+Ada @Chg{Version=[3],New=[2020],Old=[2017]}. :-)]}
 @end{Discussion}
 
 @begin{Syntax}
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
-@ChgAdded{Version=[2],Text=[The form of a @nt{pragma} No_Return, which is a
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[The form of a
+@nt{pragma} No_Return, which is a
 representation pragma (see @RefSecNum{Operational and Representation Items}),
-is as follows:]}
+is as follows:]}]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<No_Return>(@SynI{procedure_}@Syn2{local_name}{, @SynI{procedure_}@Syn2{local_name}});''}
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgAdded{Version=[2],Text=`@Chg{Version=[3],New=[],Old=[@AddedPragmaSyn`Version=[2],@key{pragma} @prag<No_Return>(@SynI{procedure_}@Syn2{local_name}{, @SynI{procedure_}@Syn2{local_name}});']}'}
 @end{Syntax}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a procedure or generic procedure, the following
+language-defined representation aspect may be specified:]}
+@begin{Description}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[No_Return@\The type of aspect No_Return is Boolean.
+When aspect No_Return is True for an entity, the entity is said to be
+@i<non-returning>.@Defn{non-returning}]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],NoPrefix=[T],Text=[If directly specified, the
+@nt{aspect_definition} shall be a static expression. @Redundant[This aspect is
+never inherited;] if not directly specified, the aspect is False.]}
+@end{Description}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}@ChgNote{Moved from below}
+@ChgAdded{Version=[3],Text=[If a generic procedure is non-returning, then so are
+its instances. If a procedure declared within a generic unit is non-returning,
+then so are the corresponding copies of that procedure in instances.]}
+
+@end{StaticSem}
+
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
-@ChgAdded{Version=[2],Text=[@Defn{non-returning}Each
-@SynI{procedure_}@nt{local_name} shall denote one or
-more procedures or generic procedures; the denoted entities are
-@i<non-returning>. The @SynI{procedure_}@nt{local_name} shall not denote a
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[Aspect No_Return],
+Old=[@Defn{non-returning}Each @SynI{procedure_}@nt{local_name} shall denote one
+or more procedures or generic procedures; the denoted entities are
+@i<non-returning>. The @SynI{procedure_}@nt{local_name}]} shall not
+@Chg{Version=[3],New=[be specified for],Old=[denote]} a
 null procedure nor an instance of a generic unit.]}
 
 @begin{Reason}
@@ -3812,10 +4092,11 @@ null procedure nor an instance of a generic unit.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The procedure can be abstract. The denoted
-  declaration can be a @nt{renaming_declaration} if it obeys the usual rules
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[2],Text=[The procedure can be abstract.@Chg{Version=[3],New=[],
+  Old=[ The denoted declaration can be a @nt{renaming_declaration} if it obeys the usual rules
   for representation pragmas: the renaming has to occur immediately within the
-  same declarative region as the renamed subprogram. If a non-returning
+  same declarative region as the renamed subprogram.]} If a non-returning
   procedure is renamed (anywhere) calls through the new name still have the
   non-returning semantics.]}
 @end{Ramification}
@@ -3853,10 +4134,11 @@ procedure declaration, then the renamed procedure shall be non-returning.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
-@ChgAdded{Version=[2],Text=[If a generic procedure is non-returning, then so
-are its instances. If a procedure declared within a generic unit is
-non-returning, then so are the corresponding copies of that procedure in
-instances.]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[If a generic procedure
+is non-returning, then so are its instances. If a procedure declared within
+a generic unit is non-returning, then so are the corresponding copies of
+that procedure in instances.]}]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -3896,17 +4178,24 @@ normally, Program_Error is raised at the point of the call.
 @begin{Examples}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
-@ChgAdded{Version=[2],Text=[@key(procedure) Fail(Msg : String);  --@ExamCom[ raises Fatal_Error exception]
-@key(pragma) No_Return(Fail);
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[2],Text=[@key(procedure) Fail(Msg : String)@Chg{Version=[3],New=[],Old=[;]}  --@ExamCom[ raises Fatal_Error exception]
+@Chg{Version=[3],New=[   @key(with)],Old=[@key(pragma)]} No_Return@Chg{Version=[3],New=[ => True],Old=[(Fail)]};
    --@ExamCom[ Inform compiler and reader that procedure never returns normally]]}
 @end{Example}
 @end{Examples}
 
 @begin{Extend95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
-@ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-@nt{Pragma} No_Return is new.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @nt{Pragma} No_Return is new.]}
 @end{Extend95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Aspect No_Return is new; @nt{pragma} No_Return is now obsolescent.]}
+@end{Extend2005}
 
 
 @LabeledClause{Overloading of Operators}

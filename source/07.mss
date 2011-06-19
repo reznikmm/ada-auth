@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2011/06/04 05:28:19 $}
+@Comment{$Date: 2011/06/18 07:20:52 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.112 $}
+@Comment{$Revision: 1.113 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1697,7 +1697,7 @@ descendants of @i<T>.]]}
 @end{StaticSem}
 @begin{Runtime}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[If one or more invariant expressions
 apply to a type @i<T>, and the assertion policy (see
 @RefSecNum{Pragmas Assert and Assertion_Policy}) at the point of the partial
@@ -1747,7 +1747,8 @@ following places, on the specified object(s):@Defn2{Term=[assertion policy],
 each invariant expression that applies to @i<T>, on each of the objects
 specified above. If any of these evaluate to False,
 Ada.Assertions.Assertion_Error is raised at the point of the object
-initialization, conversion, or call. If a given call requires more than one
+initialization, conversion, or call.@Defn2{Term=(Assertion_Error),
+Sec=(raised by failure of run-time check)} If a given call requires more than one
 evaluation of an invariant expression, either for multiple objects of a single
 type or for multiple types with invariants, the order of the evaluations is not
 specified, and if one of them evaluates to False, it is not specified whether
@@ -1758,14 +1759,34 @@ parameters are performed before or after any invariant checks. It is not
 specified whether any postcondition checks are performed before or after any
 invariant checks.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
-@ChgAdded{Version=[3],Text=[The invariant checks performed on a call are
-determined by the subprogram or entry actually invoked, whether directly, as
-part of a dispatching call, or as part of a call through an access-to-subprogram
-value.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1]}
+@ChgAdded{Version=[3],Text=[The invariant checks performed on a call are determined by the subprogram or entry
+actually invoked, whether directly, as part of a dispatching call, or as part of a
+call through an access-to-subprogram value. For the purposes of
+these checks, if the subprogram actually invoked is primitive for some type @i<T> and
+is inherited from some other type, the checks needed are determined as if the
+body of the of the entity is declared directly as a primitive of type @i<T>;
+in addition, if the subprogram is neither null nor abstract, the Type_Invariant(s)
+that apply to the parameter types of the invoked body are checked.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
-@ChgAdded{Version=[3],Text=[@Redundant[If the Assertion_Policy in effect at the
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[ We use the @ldquote@;for the purposes@rdquote
+  part of the rule to include additional Type_Invariant'Class checks from those
+  that apply to the original subprogram. This may happen if the operation is
+  inherited by a derived type that has both a parent and a progenitor, and
+  both the parent type and progenitor type have defined a Type_Invariant'Class.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[For inherited concrete routines, we require the
+  original Type_Invariant to be evaluated as well as the inherited
+  Type_Invariant'Classes and the current type's Type_Invariant in order that the
+  semantics of an explicitly defined wrapper that does nothing but call the
+  original routine is the same as that of an inherited routine.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[If the assertion policy in effect at the
 point of a subprogram or entry declaration is Ignore, then no invariant check is
 performed on a call on that subprogram or entry.]]}
 
@@ -1794,7 +1815,7 @@ performed on a call on that subprogram or entry.]]}
 
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Type_Invariant aspects are new.]}
 @end{Extend2005}
@@ -3080,7 +3101,7 @@ built in place:]}
     @ChgAdded{Version=[3],Text=[Upon successful completion of the return
     statement or @nt{aggregate}, the anonymous object "mutates into" the
     newly-created object; that is, the anonymous object ceases to exist, and the
-    newly-created object appears in its place.]}
+    newly-created object appears in its place.@Defn{mutates}]}
 
     @ChgRef{Version=[3],Kind=[Added]}
     @ChgAdded{Version=[3],Text=[Finalization is not performed on the anonymous object.]}
@@ -4195,14 +4216,39 @@ exception, any parts of the allocated object that were successfully initialized
 may be finalized as part of the finalization of the innermost master enclosing
 the @nt{allocator}.]}
 
-@begin{Reason}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[This allows deallocating the memory for the
-allocated object at the innermost master, preventing a storage leak. Otherwise,
-the object would have to stay around until the finalization of the collection
-that it belongs to, which could be the entire life of the program if the
-associated access type is library level.]}
-@end{Reason}
+  @begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This allows deallocating the memory for the
+  allocated object at the innermost master, preventing a storage leak.
+  Otherwise, the object would have to stay around until the finalization of the
+  collection that it belongs to, which could be the entire life of the program
+  if the associated access type is library level.]}
+  @end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[The implementation may finalize objects created by
+@nt{allocator}s for an access type whose storage pool supports subpools (see
+@RefSecNum{Storage Subpools}) as if the objects were created (in an arbitrary
+order) at the point where the storage pool was elaborated instead of the first
+freezing point of the access type.]}
+
+  @begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This allows the finalization of such objects to
+  occur later than they otherwise would, but still as part of the finalization
+  of the same master. Accessibility rules in @RefSecNum{Storage Subpools} ensure
+  that it is the same master (usually that of the environment task).]}
+  @end{Ramification}
+
+  @begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This permission is intended to allow the allocated
+  objects to "belong" to the subpool objects and to allow those objects to be
+  finalized at the time that the storage pool is finalized (if they are not
+  finalized earlier). This is expected to ease implementation, as the objects
+  will only need to belong to the subpool and not also to the collection.]}
+  @end{ImplNote}
+
 @end{ImplPerm}
 
 
@@ -4483,6 +4529,10 @@ the rules here refer to the task-waiting rules of Section 9.
   of parts of failed @nt{allocator}s. This could be an inconsistency, but the
   previous behavior is still allowed and there is no requirement that
   implementations take advantage of the permission.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+  @ChgAdded{Version=[3],Text=[Added a permission to finalize object allocated
+  from a subpool later than usual.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
   @ChgAdded{Version=[3],Text=[Added text to specially define the master of

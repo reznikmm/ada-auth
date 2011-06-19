@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2011/06/04 05:28:19 $}
+@Comment{$Date: 2011/06/18 07:20:52 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.44 $}
+@Comment{$Revision: 1.45 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1037,11 +1037,14 @@ execution of the @nt{sequence_of_@!statements}; if the value of the
 @nt{condition} is True, the @nt{sequence_of_@!statements} is executed;
 if False, the execution of the @nt{loop_@!statement} is complete.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2]}
 @PDefn2{Term=[execution],
   Sec=(loop_statement with a for iteration_scheme)}
 @PDefn2{Term=[elaboration], Sec=(loop_parameter_specification)}
-For the execution of a @nt{loop_statement} with a @key{for}
-@nt{iteration_scheme},
+For the execution of a @nt{loop_statement} with
+@Chg{Version=[3],New=[the],Old=[a @key{for}]}
+@nt{iteration_scheme}@Chg{Version=[3],New=[ being @key[for]
+@nt{loop_@!parameter_@!specification}],Old=[]},
 the @nt{loop_@!parameter_@!specification} is first elaborated. This
 elaboration creates the loop parameter and elaborates the
 @nt{discrete_@!subtype_@!definition}.
@@ -1148,11 +1151,180 @@ The constant-ness of loop parameters is specified in
 @RefSec{Objects and Named Numbers}.
 @end{DiffWord83}
 
-@LabeledAddedSubClause{Version=[3],Name=[User-Defined Iterators]}
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+  @ChgAdded{Version=[3],Text=[Generalized @nt{iterator_specification}s are
+  allowed in @key[for] loops; these are documented as an extension in the
+  appropriate clause.]}
+@end{DiffWord2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[User-Defined Iterator Types]}
+
+@begin{StaticSem}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-@ChgAdded{Version=[3],Text=[@i<@b{Editor's Note:} This subclause is a placeholder
-for the unfinished AI05-0139-2.>]}
+@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[The following
+language-defined generic library package exists:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada],Child=[Iterator_Interfaces]}
+@key[generic]
+   @key[type] Cursor;
+   @key[with function] Has_Element (Position : Cursor) @key[return] Boolean;
+@key[package] Ada.Iterator_Interfaces @key[is]
+   @key[pragma] Pure (Iterator_Interfaces);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Forward_Iterator} @key[is limited interface];
+   @key[function] @AdaSubDefn{First} (Object : Forward_Iterator) @key[return] Cursor @key[is abstract];
+   @key[function] @AdaSubDefn{Next} (Object : Forward_Iterator; Position : Cursor) @key[return] Cursor
+      @key[is abstract];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Reversible_Iterator} @key[is limited interface and] Forward_Iterator;
+   @key[function] @AdaSubDefn{Last} (Object : Reversible_Iterator) @key[return] Cursor @key[is abstract];
+   @key[function] @AdaSubDefn{Previous} (Object : Reversible_Iterator; Position : Cursor) @key[return] Cursor
+      @key[is abstract];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[end] Ada.Iterator_Interfaces;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[An @i<iterator type> is a type descended from
+the Forward_Iterator interface from some instance of
+Ada.Iterator_Interfaces.@Defn{iterator type}
+A @i<reversible iterator type> is a type descended from the Reversible_Iterator
+interface from some instance of Ada.Iterator_Interfaces.@Defn{reversible iterator type}
+An @i<iterator object> is an object of an iterator type.@Defn{iterator object}
+A @i<reversible iterator object> is an object
+of a reversible iterator type.@Defn{reversible iterator object}
+The formal subtype Cursor from the associated
+instance of Ada.Iterator_Interfaces is the @i<iteration cursor subtype> for the
+iterator type.@Defn{iteration cursor subtype}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The following type-related
+operational aspects may be specified for an indexable type @i<T> (see
+@RefSecNum{User-Defined Indexing}):]}
+
+@begin{Description}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Default_Iterator@\This aspect is specified
+    by a @nt{name} that denotes exactly one function declared immediately within
+    the same declaration list in which @i<T> is declared, whose first parameter
+    is of type @i<T> or @i<T>'Class or an access parameter whose designated type
+    is type @i<T> or @i<T>'Class, whose other parameters, if any, have default
+    expressions, and whose result type is an iterator type. This function is the
+    @i<default iterator function> for @i<T>.@Defn{default iterator function}
+    Its result subtype is the @i<default iterator subtype> for
+    @i<T>.@Defn{default iterator subtype} The iteration cursor subtype for
+    the default iterator subtype is the @i<default cursor subtype>
+    for @i<T>.@Defn{default cursor subtype}]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Iterator_Element@\This aspect is specified by a
+    @nt{name} that denotes a subtype. This is the @i<default element subtype>
+    for @i<T>.@Defn{default element subtype}]}
+@end{Description}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[These aspects are inherited by descendants of
+type @i<T> (including @i<T>'Class).]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[An @i<iterable type> is an indexable type
+with specified Default_iterator and Iterator_Element aspects.@Defn{iterable type}
+A @i<reversible iterable type> is an iterable type with the default iterator type
+being a reversible iterator type.@Defn{reversible iterable type}
+An @i<iterable object> is an object of an iterable type.@Defn{iterable object}
+A @i<reversible iterable object> is an object of a reversible iterable
+type.@Defn{reversible iterable object}]}
+
+@end{StaticSem}
+
+@begin{Legality}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The Constant_Indexing aspect (if any)
+of an iterable type @i<T> shall denote exactly one function with the following
+properties:]}
+
+@begin{Itemize}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the result type of the function is covered by the
+    default element type of @i<T> or is a reference type (see
+    @RefSecNum{User-Defined References}) with an access discriminant designating
+    a type covered by the default element type of @i<T>;]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the type of the second parameter of the function
+    covers the default cursor type for @i<T>;]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[if there are more than two parameters, the
+    additional parameters all have default expressions.]}
+
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[This function (if any) is the
+@i<default constant indexing function> for @i<T>.@Defn{default constant indexing function}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This does not mean that Constant_Indexing has to
+  designate only one subprogram, only that there is only one routine that meets
+  all of these properties. There can be other routines designated by
+  Constant_Indexing, but they cannot have the profile described above. For
+  instance, map containers have a version of Constant_Indexing that takes a
+  key instead of a cursor; this is allowed.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The Variable_Indexing aspect (if any)
+of an iterable type @i<T> shall denote exactly one function with the following
+properties:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the result type of the function is a reference
+    type (see @RefSecNum{User-Defined References}) with an access discriminant
+    designating a type covered by the default element type of @i<T>;]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the type of the second parameter of the function
+    covers the default cursor type for @i<T>;]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[if there are more than two parameters, the
+    additional parameters all have default expressions.]}
+
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[This function (if any) is the
+@i<default variable indexing function> for @i<T>.@Defn{default variable indexing function}]}
+
+@end{Legality}
+
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}User-defined
+  iterator types are new in Ada 2012.]}
+@end{Extend2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[Generalized Loop Iteration]}
+
+@begin{Intro}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[Generalized forms of loop iteration are provided by
+an @nt{iterator_specification}.]}
+@end{Intro}
 
 @begin{Syntax}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
@@ -1165,21 +1337,155 @@ rhs="@Chg{Version=[3],New=<
 
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-@ChgAdded{Version=[3],Text=[In an @nt{iterator_specification}, the expected type for the
-@SynI{iterator_}@nt{name} is any iterator type; the expected type for the
-@SynI{array_}@nt{name} is any array type; the expected type for the
-@SynI{iteratable_}@nt{name} is any iteratable type.]}
+@ChgAdded{Version=[3],Text=[The first form of @nt{iterator_specification} is
+called a @i<generalized iterator>;@Defn{generalized iterator}@Defn2{Term=[iterator],Sec=[generalized]}
+the
+expected type for the @SynI<iterator_>@nt{name} is any iterator
+type.@PDefn2{Term=[expected type],Sec=[@SynI<iterator_>@nt{name}]}
+The second form of @nt{iterator_specification} is called an @i<array
+component iterator>;@Defn{array component iterator}@Defn2{Term=[iterator],Sec=[array component]}
+the expected type for the @SynI<array_>@nt{name} is any array
+type.@PDefn2{Term=[expected type],Sec=[@SynI<array_>@nt{name} in an iterator]}
+The third form of @nt{iterator_specification} is called a
+@i<container element iterator>;@Defn{container element iterator}@Defn2{Term=[iterator],Sec=[container element]}
+the expected type for the @SynI<iterable_>@nt{name} is any iterable
+type.@PDefn2{Term=[expected type],Sec=[@SynI<iterable_>@nt{name}]}]}
 @end{Resolution}
 
+@begin{Legality}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-@ChgAdded{Version=[3],Text=[@b<@i<Editor's note: The remainder of the rules are
-omitted at this time.>>]}
+@ChgAdded{Version=[3],Text=[If the reserved word @key[reverse] appears,
+the iterator_specification is a @i<reverse iterator>;@Defn{reverse iterator}@Defn2{Term=[iterator],Sec=[reverse]}
+otherwise it is a @i<forward iterator>.@Defn{forward iterator}@Defn2{Term=[iterator],Sec=[forward]}
+In a reverse generalized iterator, the
+@SynI<iterator_>@nt{name} shall be of a reversible iterator type.
+In a reverse container element iterator, the default iterator type for the type
+of the @SynI<iterable_>@nt{name} shall be a reversible iterator type.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[The type of the @nt{subtype_indication}, if any,
+of an array component iterator shall cover the component type of the type
+of the @SynI<array_>@nt{name}. The type of the @nt{subtype_indication},
+if any, of a container element iterator shall cover the default element type
+for the type of the @SynI<iterable_>@nt{name}.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[In a container element iterator whose
+@SynI<iterable_>@nt{name} has type @i<T>, if the @SynI<iterable_>@nt{name}
+denotes a constant or the Variable_Indexing aspect is not specified for @i<T>,
+then the Constant_Indexing aspect shall be specified for @i<T>.]}
+
+@end{Legality}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[An @nt{iterator_specification} declares a
+@i<loop parameter>.@Defn{loop parameter}
+In a generalized iterator, the nominal subtype of the loop parameter is
+the iterator cursor subtype. In an array component iterator or a
+container element iterator, if a @nt{subtype_indication} is present, it
+determines the nominal subtype of the loop parameter. In an array
+component iterator if a @nt{subtype_indication} is not present, the
+nominal subtype of the loop parameter is the component subtype of the
+type of the @SynI{array_}@nt{name}. In a container element iterator if a
+@nt{subtype_indication} is not present, the nominal subtype of the loop
+parameter is the default element subtype for the type of the
+@SynI{iterable_}@nt{name}.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[In a generalized iterator, the loop parameter
+denotes a constant. In an array component iterator, the loop parameter
+denotes a constant if the @SynI<array_>@nt{name} denotes a constant; otherwise
+it denotes a variable. In a container element iterator, the loop parameter
+denotes a constant if the @SynI{iterable_}@nt{name} denotes a constant, or if
+the Variable_Indexing aspect is not specified for the type of the
+@SynI{iterable_}@nt{name}; otherwise it denotes a variable.]}
+
+@end{StaticSem}
+
+@begin{Runtime}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[For the execution of a @nt{loop_statement} with
+an @nt{iterator_specification}, the @nt{iterator_specification} is
+first elaborated. This elaboration elaborates the @nt{subtype_indication},
+if any.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[For a generalized iterator, the loop parameter is
+created, and the @SynI{iterator_}@nt{name} is evaluated and the denoted iterator
+object becomes the @i<loop iterator>.@Defn{loop iterator} In a forward
+generalized iterator, the operation First of the iterator type is called on the
+loop iterator, to produce the initial value for the loop parameter. If the
+result of calling Has_Element on the initial value is False, then the execution
+of the @nt{loop_statement} is complete. Otherwise, the
+@nt{sequence_of_statements} is executed and then the Next operation of the
+iterator type is called with the loop iterator and the current value of the loop
+parameter to produce the next value to be assigned to the loop parameter. This
+repeats until the result of calling Has_Element on the loop parameter is False,
+or the loop is left as a consequence of a transfer of control. For a reverse
+generalized iterator, the operations Last and Previous are called rather than
+First and Next.]}
+
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[For an array component iterator, the
+@SynI<array_>@nt{name} is evaluated and
+the array object denoted by the name becomes the @i<array for the
+loop>.@Defn{array for a loop} If the array for the loop is a null array,
+then the execution of the @nt{loop_statement} is complete. Otherwise, the
+@nt{sequence_of_statements} is executed with the loop parameter denoting
+each component of the array for the loop, using a @i<canonical> order
+of components,@Defn{canonical order of array components}
+which is last dimension varying fastest (unless the
+array has convention Fortran, in which case it is first dimension
+varying fastest). For a
+forward array component iterator, the iteration starts with the
+component whose index values are each the first in their index range,
+and continues in the canonical order. For a reverse array component
+iterator, the iteration starts with the component whose index values
+are each the last in their index range, and continues in the reverse
+of the canonical order. The loop iteration proceeds until the
+@nt{sequence_of_statements} has been executed for each component of the
+array for the loop, or until the loop is left as a consequence of a
+transfer of control.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[For a container element iterator, the @SynI<iterable_>@nt{name} is evaluated
+and the iterable object denoted by the name becomes the @i<iterable
+object for the loop>.@Defn{iterable object for a loop}
+The default iterator function for the type of
+the iterable object for the loop is called on the iterable object
+and the result is the @i<loop iterator>.@Defn2{Term=[loop iterator],Sec=[container element iterator]}
+An object of the default cursor subtype is created (the @i<loop cursor>).@Defn{loop cursor}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Text=[For a forward container element iterator, the
+operation First of the iterator type is called on the loop iterator, to produce
+the initial value for the loop cursor. If the result of calling Has_Element on
+the initial value is False, then the execution of the @nt{loop_statement} is
+complete. Otherwise, the @nt{sequence_of_statements} is executed with the loop
+parameter denoting an indexing (see @RefSecNum{User-Defined Indexing}) into the
+iterable object for the loop, with the only parameter to the indexing being the
+current value of the loop cursor; then the Next operation of the iterator type
+is called with the loop iterator and the loop cursor to produce the next value
+to be assigned to the loop cursor. This repeats until the result of calling
+Has_Element on the loop cursor is False, or until the loop is left as a
+consequence of a transfer of control. For a reverse container element iterator,
+the operations Last and Previous are called rather than First and Next. If the
+loop parameter is a constant (see above), then the indexing uses the default
+constant indexing function for the type of the iterable object for the loop;
+otherwise it uses the default variable indexing function.]}
+
+@end{Runtime}
 
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}User-defined
-  iterators are new.]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Generalized forms
+  of loop iteration are new.]}
 @end{Extend2005}
 
 

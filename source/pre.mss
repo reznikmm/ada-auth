@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2011/06/04 05:28:20 $}
+@Comment{$Date: 2011/06/18 07:20:52 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.42 $}
+@comment{$Revision: 1.43 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -113,7 +113,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 ), Old=()}), Old=()}@\@\Interrupts @em @RefSecNum{The Package Interrupts}
 @\@\@\Names @em @RefSecNum{The Package Interrupts}
 @\@\IO_Exceptions @em @RefSecNum{Exceptions in Input-Output}
-@Chg{Version=[3],New=(@\@\Locales @em @RefSecNum{The Package Locales}
+@Chg{Version=[3],New=(@\@\Iterator_Interfaces @em @RefSecNum{User-Defined Iterator Types}
+@\@\Locales @em @RefSecNum{The Package Locales}
 ), Old=()}@\@\Numerics @em @RefSecNum{The Numerics Packages}
 @Chg{Version=[2],New=(@\@\@\Complex_Arrays @em @RefSecNum{Complex Vectors and Matrices}
 ), Old=()}@\@\@\Complex_Elementary_Functions @em @RefSecNum{Complex Elementary Functions}
@@ -200,7 +201,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Text_Streams @em @RefSecNum{The Package Text_IO.Text_Streams}
 @Chg{Version=[2],New=(@\@\@\Unbounded_IO @em @RefSecNum{Input-Output for Unbounded Strings}
 ), Old=()}@\@\Unchecked_Conversion @em @RefSecNum{Unchecked Type Conversions}
-@\@\Unchecked_Deallocation @em @RefSecNum{Unchecked Storage Deallocation}
+@Chg{Version=[3],New=(@\@\Unchecked_Deallocate_Subpool @em @RefSecNum{Subpool Reclamation}
+), Old=()}@\@\Unchecked_Deallocation @em @RefSecNum{Unchecked Storage Deallocation}
 @Chg{Version=[2],New=(@\@\Wide_Characters @em @RefSecNum{The Packages Characters, Wide_Characters, and Wide_Wide_Characters}
 @Chg{Version=[3],New=(@\@\@\Handling @em @RefSecNum{The Package Wide_Characters.Handling}
 ),Old=()}),Old=()}@\@\Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
@@ -232,7 +234,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Dispatching_Domains @em @RefSecNum{Multiprocessor Dispatching Domains}
 ),Old=()}@\@\RPC @em @RefSecNum{Partition Communication Subsystem}
 @\@\Storage_Elements @em @RefSecNum{The Package System.Storage_Elements}
-@\@\Storage_Pools @em @RefSecNum{Storage Management}>]
+@\@\Storage_Pools @em @RefSecNum{Storage Management}@Chg{Version=[3],New=(
+@\@\@\Subpools @em @RefSecNum{Storage Subpools}), Old=()}>]
 @end{TwoCol}
 @end{Display}
 @begin{Discussion}

@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.67 $ $Date: 2011/05/03 06:34:09 $}
+@comment{$Revision: 1.68 $ $Date: 2011/06/18 07:20:52 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -878,7 +878,8 @@ objects, multiway trees, and queues. See clause @RefSecNum{Containers}.]}
 ease the use of containers such as the ability to iterate over all elements in a
 container without having to encode the iteration. These can also be used for
 iteration over arrays. See clauses @RefSecNum{User-Defined References},
-@RefSecNum{User-Defined Indexing}, and @RefSecNum{User-Defined Iterators}.]}
+@RefSecNum{User-Defined Indexing},  @RefSecNum{User-Defined Iterator Types},
+and @RefSecNum{Generalized Loop Iteration}.]}
 @end{Itemize}
 @end{Intro}
 

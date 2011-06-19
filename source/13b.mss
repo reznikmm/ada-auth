@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/06/04 05:28:19 $}
+@Comment{$Date: 2011/06/18 07:20:52 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.80 $}
+@Comment{$Revision: 1.81 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1612,11 +1612,14 @@ a non-derived access-to-object type
 via an @nt{attribute_@!definition_@!clause};
 the @nt{name} in a Storage_Pool clause shall denote a variable.
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0107-1],ARef=[AI05-0116-1]}
-An @nt{allocator} of type @i<T> allocates storage from @i<T>'s storage pool.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0107-1],ARef=[AI05-0111-3],ARef=[AI05-0116-1]}
+An @nt{allocator} of @Chg{Version=[3],New=[a ],Old=[]}type @i<T>
+@Chg{Version=[3],New=[that does not support subpools ],Old=[]}allocates
+storage from @i<T>'s storage pool.
 If the storage pool is a user-defined object, then
 the storage is allocated by calling Allocate@Chg{Version=[3],New=[ as described
-below.],Old=[,
+below. @nt{Allocator}s for types that support subpools are described
+in @RefSecNum{Storage Subpools}.],Old=[,
 passing T'Storage_Pool as the Pool parameter.
 The Size_In_Storage_Elements parameter indicates the number of storage elements
 to be allocated,
@@ -2123,29 +2126,38 @@ for T that takes advantage of the fact that T is of a certain size.
 If T2 is not of that size, then the above will probably not work.
 @end{Reason}
 
-@Leading@;As usual, a derivative of Root_Storage_Pool may define additional
-operations. For example, presuming that Mark_Release_Pool_Type has
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0111-3]}
+As usual, a derivative of Root_Storage_Pool may define additional
+operations. For example, @Chg{Version=[3],New=[consider the],Old=[presuming that]}
+Mark_Release_Pool_Type @Chg{Version=[3],New=[defined in
+@RefSecNum{Storage Subpool Example}, that ],Old=[]}has
 two additional operations, Mark and Release,
 the following is a possible use:
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0041],ARef=[AI95-00066-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0111-3]}
 @key[type] Mark_Release_Pool_Type
-   (Pool_Size : Storage_Elements.Storage_Count;
-    Block_Size : Storage_Elements.Storage_Count)
-        @key[is] @key[new] Root_Storage_Pool @key[with @Chg{New=[],Old=[limited ]}private];
+   (Pool_Size : Storage_Elements.Storage_Count@Chg{Version=[3],New=[],Old=[;
+    Block_Size : Storage_Elements.Storage_Count]})
+        @key[is] @key[new] Root_Storage_Pool @key[with @Chg{New=[],Old=[limited ]}private];@Chg{Version=[3],New=[
+           -- @Examcom{As defined in package MR_Pool, see @RefSecNum{Storage Subpool Example}}],Old=[]}
 
 ...
 
-MR_Pool : Mark_Release_Pool_Type (Pool_Size => 2000,
-                                  Block_Size => 100);
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0111-3]}
+@Chg{Version=[3],New=[Our_Pool],Old=[MR_Pool]} : Mark_Release_Pool_Type (Pool_Size => 2000@Chg{Version=[3],New=[],Old=[,
+                                  Block_Size => 100]});
+@Chg{Version=[3],New=[My_Mark : MR_Pool.Subpool_Handle; -- @Examcom{See @RefSecNum{Storage Subpool Example}}],Old=[]}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0111-3]}
 @key[type] Acc @key[is] @key[access] ...;
-@key[for] Acc'Storage_Pool @key[use] MR_Pool;
+@key[for] Acc'Storage_Pool @key[use] @Chg{Version=[3],New=[Our_Pool],Old=[MR_Pool]};
 ...
 
-Mark(MR_Pool);
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0111-3]}
+@Chg{Version=[3],New=[My_Mark := ],Old=[]}Mark(@Chg{Version=[3],New=[Our_Pool],Old=[MR_Pool]});
 ... --@RI{ Allocate objects using @lquotes@;@key[new] Designated(...)@rquotes@;.}
-Release(MR_Pool); --@RI{ Reclaim the storage.}
+Release(@Chg{Version=[3],New=[My_Mark],Old=[MR_Pool]}); --@RI{ @Chg{Version=[3],New=[Finalize objects and reclaim],Old=[Reclaim the]} storage.}
 @end{Example}
 @end{Examples}
 
@@ -2218,6 +2230,10 @@ objects incorrectly by missing various cases.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified when an implementation
   is allowed to call Allocate and Deallocate, and the requirements on such
   calls.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+  @ChgAdded{Version=[3],Text=[Added wording to support subpools and refer to
+  the subpool example, see @RefSecNum{Storage Subpools}.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0116-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to specify that the
@@ -2569,49 +2585,174 @@ created by @nt<allocator>s of a given access type.]]}
 
 @begin{Syntax}
 @begin{SyntaxText}
-@Leading@Keepnext@;The form of a @nt{pragma} Controlled is as follows:
+@Leading@Keepnext@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
+The form of a @nt{pragma} @Chg{Version=[3],New=[Default_Storage_Pool],Old=[Controlled]}
+is as follows:
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(Controlled)(@SynI{first_subtype_}@Syn2{local_name});'
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Default_Storage_Pool> (@Syn2{storage_pool_indicator});'],
+Old=[@PragmaSyn`@key{pragma} @prag(Controlled)(@SynI{first_subtype_}@Syn2{local_name});']}
+
 @begin{Discussion}
-Not to be confused with type Finalization.Controlled.
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[Not to be confused with type
+Finalization.Controlled.]}
 @end{Discussion}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<storage_pool_indicator>,Old=<>}>,
+rhs="@Chg{Version=[3],New=<@SynI{storage_pool_}@Syn2{name} | @key[null]>,Old=<>}"}
+
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+@ChgAdded{Version=[3],Text=[A @nt{pragma} Default_Storage_Pool is allowed
+immediately within the visible part of a @nt{package_specification}, immediately
+within a @nt{declarative_part}, or as a configuration pragma.]}
+@end{SyntaxText}
 @end{Syntax}
 
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+@ChgAdded{Version=[3],Text=[The @SynI{storage_pool_}@nt{name} is expected to be
+of type Root_Storage_Pool'Class.]}
+@end{Resolution}
+
 @begin{Legality}
-The @SynI{first_subtype_}@nt<local_name> of a @nt{pragma} Controlled
-shall denote a non-derived access subtype.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[The @SynI{storage_pool_}@nt{name} shall denote a variable.],
+Old=[The @SynI{first_subtype_}@nt<local_name> of a @nt{pragma} Controlled
+shall denote a non-derived access subtype.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+@ChgAdded{Version=[3],Text=[If the @nt{pragma} is used as a configuration pragma,
+the @nt{storage_pool_indicator} shall be @key[null], and it defines the
+@i<default pool>@Defn{default pool}@Defn2{Term=[storage pool],Sec=[default]}@Defn2{Term=[pool],Sec=[default]} to be @b<null> within all
+applicable compilation units (see @RefSecNum{Pragmas and Program Units}),
+except within the immediate scope of
+another @nt{pragma} Default_Storage_Pool. Otherwise, @Redundant[the pragma
+occurs immediately within a sequence of declarations, and] it defines the
+default pool within the immediate scope of the pragma to be either @key[null] or
+the pool denoted by the @SynI{storage_pool_}@nt{name}, except within the
+immediate scope of a later pragma Default_Storage_Pool. @Redundant[Thus, an
+inner pragma overrides an outer one.]]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+@ChgAdded{Version=[3],Text=[A @nt{pragma} Default_Storage_Pool shall not be used
+as a configuration pragma that applies to a compilation unit that is within the
+immediate scope of another such pragma.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[This is to prevent confusion in cases like this:]}
+@begin{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[package] Parent @key[is]
+   pragma Default_Storage_Pool(...);
+   ...
+@key[end] Parent;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[pragma] Default_Storage_Pool(...); --@examcom{ Illegal!}
+@key[package] Parent.Child @key[is]
+   ...
+@key[end] Parent.Child;]}
+@end{Example}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[where the Default_Storage_Pool
+  on Parent.Child would not (if it were legal) override the one in Parent.]}
+@end{Reason}
 @end{Legality}
 
 @begin{StaticSem}
-@PDefn2{Term=[representation pragma], Sec=(Controlled)}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[]}@Comment{Conditional leading}
+@Chg{Version=[3],New=[The pragma applies to all nonderived access types
+declared in the places defined above, unless Storage_Pool or
+Storage_Size is specified for the type:],
+Old=[@PDefn2{Term=[representation pragma], Sec=(Controlled)}
 @PDefn2{Term=[pragma, representation], Sec=(Controlled)}
 A @nt{pragma} Controlled is a representation pragma
 @PDefn2{Term=[aspect of representation], Sec=(controlled)}
 @Defn2{Term=[controlled], Sec=(aspect of representation)}
-that specifies the @i{controlled} aspect of representation.
+that specifies the @i{controlled} aspect of representation.]}
 
-@Defn{garbage collection}
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+  @ChgAdded{Version=[3],Text=[If the default pool is @key[null], the
+  Storage_Size attribute is defined by the language to be zero.
+  @Redundant[Therefore, an @nt{allocator} for such a type is illegal.]]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+  @ChgAdded{Version=[3],Text=[If the default pool is nonnull, the Storage_Pool
+  attribute is that pool.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+  @ChgAdded{Version=[3],Text=[@Redundant[Otherwise, there is no default pool; the standard storage
+  pool is used for the type as described in @RefSecNum{Storage Management}.]]}
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[The language-defined aspect Default_Storage_Pool may be
+used to define the default pool for access types within an instance. The expected
+type for the
+Default_Storage_Pool aspect is Root_Storage_Pool'Class. The @nt{aspect_definition}
+must be a name that denotes a variable. This aspect overrides any
+Default_Storage_Pool pragma that might apply to the generic unit],
+Old=[@Defn{garbage collection}
 @i{Garbage collection} is a process that automatically reclaims storage,
 or moves objects to a different address,
-while the objects still exist.
-@begin{Ramification}
-Storage reclamation upon leaving a master is not considered garbage
-collection.
+while the objects still exist]}.
 
-Note that garbage collection includes compaction of a pool
-(@lquotes@;moved to a different Address@rquotes@;), even if storage reclamation is not
-done.
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[Default_Storage_Pool is the only way to specify the
+storage pool for an anonymous access type],
+Old=[Storage reclamation upon leaving a master is not considered garbage
+collection]}.
+
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
+Note that @Chg{Version=[3],New=[coextensions should be allocated in the same
+pool (or on the stack) as the outer object (see @RefSecNum{Storage Management});
+the Storage_Pool of the access discriminant
+(and hence the Default_Storage_Pool) is supposed to be ignored for
+coextensions. This matches the required finalization point for coextensions],
+Old=[garbage collection includes compaction of a pool (@lquotes@;moved to
+a different Address@rquotes@;), even if storage reclamation is not done]}.
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+@ChgAdded{Version=[3],Text=[The default storage pool for an allocator that
+occurs within an instance of a generic is defined by the Default_Storage_Pool
+aspect of the instantiation (if specified), or by the Default_Storage_Pool
+pragma that applied to the generic; the Default_Storage_Pool pragma that applies
+to the instantiation is irrelevant.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+@ChgAdded{Version=[3],Text=[It is possible to specify the Default_Storage_Pool
+aspect for an instantiation such that allocations will fail. For example, the
+generic unit might be expecting a pool that supports certain sizes and
+alignments, and the one on the instance might be more restrictive. It is the
+programmer's responsibility to get this right.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+@ChgAdded{Version=[3],Text=[The semantics of the Default_Storage_Pool aspect are
+similar to passing a pool object as a generic formal, and putting pragma
+Default_Storage_Pool at the top of the generic's visible part, specifying that
+formal.]}
 @end{Ramification}
 @begin{Reason}
-Programs that will be damaged by automatic storage reclamation
-are just as likely to be damaged by having objects moved to different
-locations in memory.
-A @nt{pragma} Controlled should turn off both flavors of garbage collection.
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[Programs that will be damaged by automatic storage
+reclamation are just as likely to be damaged by having objects moved to
+different locations in memory. A @nt{pragma} Controlled should turn off both
+flavors of garbage collection.]}
 @end{Reason}
 @begin{ImplNote}
-If garbage collection reclaims the storage of a controlled object,
-it should first finalize it.
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[If garbage collection reclaims the storage of
+a controlled object, it should first finalize it.
 Finalization is not done when moving an object;
 any self-relative pointers will have to be updated by the garbage
 collector.
@@ -2619,71 +2760,79 @@ If an implementation provides garbage collection
 for a storage pool containing controlled objects
 (see @RefSecNum{Assignment and Finalization}),
 then it should provide a means for deferring garbage collection of
-those controlled objects.
+those controlled objects.]}
 @end{ImplNote}
 @begin{Reason}
-  @Leading@;This allows the manager of a resource released by a
-  Finalize operation to defer garbage collection during its critical regions;
-  it is up to the author of the Finalize operation to do so.
-  Garbage collection, at least in some systems,
-  can happen asynchronously with respect to normal user code.
-  Note that it is not enough to defer garbage collection
-  during Initialize, Adjust, and Finalize,
-  because the resource in question might be used
-  in other situations as well.
-  For example:
-  @begin{Example}
-@key[with] Ada.Finalization;
-@key[package] P @key[is]
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
+  @ChgDeleted{Version=[3],Type=[Leading],Text=[This allows the manager of a
+  resource released by a Finalize operation to defer garbage collection during
+  its critical regions; it is up to the author of the Finalize operation to do
+  so. Garbage collection, at least in some systems, can happen asynchronously
+  with respect to normal user code. Note that it is not enough to defer garbage
+  collection during Initialize, Adjust, and Finalize, because the resource in
+  question might be used in other situations as well. For example:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
+@ChgDeleted{Version=[3],Text=[@key[with] Ada.Finalization;
+@key[package] P @key[is]]}
 
-    @key[type] My_Controlled @key[is]
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
+@ChgDeleted{Version=[3],Text=[    @key[type] My_Controlled @key[is]
         @key[new] Ada.Finalization.Limited_Controlled @key[with] @key[private];
     @key[procedure] Finalize(Object : @key[in] @key[out] My_Controlled);
-    @key[type] My_Controlled_Access @key[is] @key[access] My_Controlled;
+    @key[type] My_Controlled_Access @key[is] @key[access] My_Controlled;]}
 
-    @key[procedure] Non_Reentrant;
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
+@ChgDeleted{Version=[3],Text=[    @key[procedure] Non_Reentrant;]}
 
-@key[private]
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
+@ChgDeleted{Version=[3],Text=[@key[private]
     ...
-@key[end] P;
+@key[end] P;]}
 
-@key[package] @key[body] P @key[is]
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
+@ChgDeleted{Version=[3],Text=[@key[package] @key[body] P @key[is]
     X : Integer := 0;
-    A : @key[array](Integer @key[range] 1..10) @key[of] Integer;
+    A : @key[array](Integer @key[range] 1..10) @key[of] Integer;]}
 
-    @key[procedure] Non_Reentrant @key[is]
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
+@ChgDeleted{Version=[3],Text=[    @key[procedure] Non_Reentrant @key[is]
     @key[begin]
         X := X + 1;
-        --@RI{ If the system decides to do a garbage collection here,}
-        --@RI{ then we're in trouble, because it will call Finalize on}
-        --@RI{ the collected objects; we essentially have two threads}
-        --@RI{ of control erroneously accessing shared variables.}
-        --@RI{ The garbage collector behaves like a separate thread}
-        --@RI{ of control, even though the user hasn't declared}
-        --@RI{ any tasks.}
+        --@Examcom{ If the system decides to do a garbage collection here,}
+        --@Examcom{ then we're in trouble, because it will call Finalize on}
+        --@Examcom{ the collected objects; we essentially have two threads}
+        --@Examcom{ of control erroneously accessing shared variables.}
+        --@Examcom{ The garbage collector behaves like a separate thread}
+        --@Examcom{ of control, even though the user hasn't declared}
+        --@Examcom{ any tasks.}
         A(X) := ...;
-    @key[end] Non_Reentrant;
+    @key[end] Non_Reentrant;]}
 
-    @key[procedure] Finalize(Object : @key[in] @key[out] My_Controlled) @key[is]
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
+@ChgDeleted{Version=[3],Text=[    @key[procedure] Finalize(Object : @key[in] @key[out] My_Controlled) @key[is]
     @key[begin]
         Non_Reentrant;
     @key[end] Finalize;
-@key[end] P;
+@key[end] P;]}
 
-@key[with] P; @key[use] P;
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
+@ChgDeleted{Version=[3],Text=[@key[with] P; @key[use] P;
 @key[procedure] Main @key[is]
 @key[begin]
-    ... @key[new] My_Controlled ... --@RI{ allocate some objects}
-    ... @RI{ forget the pointers to some of them, so they become garbage}
+    ... @key[new] My_Controlled ... --@Examcom{ allocate some objects}
+    ... @Examcom{ forget the pointers to some of them, so they become garbage}
     Non_Reentrant;
-@key[end] Main;
-  @end{Example}
+@key[end] Main;]}
+@end{Example}
 
-  It is the user's responsibility to protect against this sort of
-  thing, and the implementation's responsibility to provide the
-  necessary operations.
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
+  @ChgDeleted{Version=[3],Text=[It is the user's responsibility to protect
+  against this sort of thing, and the implementation's responsibility to provide
+  the necessary operations.]}
 
-  We do not give these operations names,
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
+  @ChgDeleted{Version=[3],Text=[We do not give these operations names,
   nor explain their exact semantics,
   because different implementations of garbage collection might have
   different needs, and because garbage collection is not supported by
@@ -2694,31 +2843,49 @@ those controlled objects.
   it might be only part of the Finalize operation that conflicts with
   some other resource.
   It is the intention that the mechanisms provided be finer-grained
-  than pragma Controlled.
+  than pragma Controlled.]}
 @end{Reason}
 
-If a @nt{pragma} Controlled is specified for an access type
-with a standard storage pool,
-then garbage collection is not performed for objects in that pool.
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[If a @nt{pragma} Controlled is specified
+for an access type with a standard storage pool,
+then garbage collection is not performed for objects in that pool.]}
 @begin{Ramification}
-If Controlled is not specified,
-the implementation may, but need not, perform garbage
-collection.
-If Storage_Pool is specified,
-then a @nt{pragma} Controlled for that type is ignored.
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
+  @ChgDeleted{Version=[3],Text=[If Controlled is not specified,
+  the implementation may, but need not, perform garbage
+  collection. If Storage_Pool is specified,
+  then a @nt{pragma} Controlled for that type is ignored.]}
 @end{Ramification}
 @begin{Reason}
-Controlled means that implementation-provided garbage collection is
-turned off;
-if the Storage_Pool is specified, the pool controls
-whether garbage collection is done.
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
+  @ChgDeleted{Version=[3],Text=[Controlled means that implementation-provided
+  garbage collection is turned off;
+  if the Storage_Pool is specified, the pool controls
+  whether garbage collection is done.]}
 @end{Reason}
 @end{StaticSem}
 
 @begin{ImplPerm}
-An implementation need not support garbage collection, in which case,
-a pragma Controlled has no effect.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[An object created by an @nt{allocator} that is passed as
+the actual parameter to an access parameter may be allocated on the stack, and
+automatically reclaimed, regardless of the default pool.],
+Old=[An implementation need not support garbage collection, in
+which case, a pragma Controlled has no effect]}.
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0190-1]}
+  @ChgAdded{Version=[3],Text=[This matches the required finalization point for
+  such an allocated object.]}
+@end{Discussion}
 @end{ImplPerm}
+
+@begin{Notes}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0190-1]}
+@ChgAdded{Version=[3],Text=[Default_Storage_Pool may be used with restrictions No_Coextensions and
+No_Access_Parameter_Allocators (see @RefSecNum{High Integrity Restrictions})
+to ensure that all @nt{allocator}s use the default pool.]}
+@end{Notes}
 
 @begin{DiffWord83}
   @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
@@ -2732,21 +2899,42 @@ a pragma Controlled has no effect.
   terminology more accessible to people outside the Ada world.]}
 @end{DiffWord83}
 
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 95}Pragma
+  Controlled has been dropped from Ada,
+  as it has no effect in any known Ada implementations and it seems to promise
+  capabilities not expected in Ada implementations. This is usually not an
+  incompatibility, as the pragma merely becomes unrecognized (with a warning)
+  and can be implemented as a implementation-defined pragma if desired. However,
+  it is incompatible if is (still) implemented as an implementation-defined
+  pragma, that someone used this pragma in a unit, and
+  and also used restriction No_Implementation_Pragmas on that unit. In that
+  case, the pragma would now violate the restriction; but use of this pragma
+  (which does nothing) should be very rare, so this is not a significant
+  issue.]}
+@end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0190-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}The
+  pragma Default_Storage_Pool is new.]}
+@end{Extend2005}
+
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[Pragma Controlled has been dropped from Ada,
-  as it has no effect in any known Ada implementations and it seems to promise
-  capabilities not expected in Ada implementations. This is not an
-  incompatibility, as the pragma merely becomes unrecognized (with a warning)
-  and can be implemented as a implementation-defined pragma if desired.]}
+  @ChgAdded{Version=[3],Text=[The entire discussion of garbage collection
+  (and especially that of controlled objects) is deleted. Ada 2012 provides
+  subpools (see @RefSecNum{Storage Subpools}) for storage management of objects,
+  including controlled objects, a mechanism which is much more predictable
+  than garbage collection. Note that no version of Ada allows early
+  finalization of controlled objects (other than via the use of
+  Unchecked_Deallocation or Unchecked_Deallocate_Subpool), so that garbage
+  collection of such objects would be ineffective in the standard mode anyway.]}
 @end{DiffWord2005}
 
 
 @LabeledAddedSubClause{Version=[3],Name=[Storage Subpools]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
-@ChgAdded{Version=[3],Text=[@i<@b{Editor's Note:} This subclause is a placeholder
-for the unfinished AI05-0111-3.>]}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
@@ -2757,15 +2945,570 @@ particular subpool may be specified as part of an @nt{allocator}
 (see @RefSecNum{Allocators}).]}
 @end{Intro}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
-@ChgAdded{Version=[3],Text=[@b<@i<Editor's note: The remainder of the rules are
-omitted at this time.>>]}
 
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[The following language-defined library package
+exists:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[System.Storage_Pools],Child=[Subpools]}@key[package] System.Storage_Pools.Subpools @key[is]
+   @key[pragma] Preelaborate (Subpools);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Root_Storage_Pool_With_Subpools} @key[is]
+      @key[abstract new] Root_Storage_Pool @key[with private];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Root_Subpool} @key[is abstract tagged limited private];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Subpool_Handle} @key[is access all] Root_Subpool'Class;
+   @key[for] Subpool_Handle'Storage_Size @key[use] 0;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Create_Subpool} (Pool : @key[in out] Root_Storage_Pool_With_Subpools)
+       @key[return not null] Subpool_Handle @key[is abstract];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Pool_of_Subpool} (Subpool : @key[not null] Subpool_Handle)
+        @key[return access] Root_Storage_Pool_With_Subpools'Class;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Set_Pool_of_Subpool} (Subpool : @key[not null] Subpool_Handle;
+                                  To : @key[in out] Root_Storage_Pool_With_Subpools'Class);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Allocate_From_Subpool} (
+      Pool : @key[in out] Root_Storage_Pool_With_Subpools;
+      Storage_Address : @key[out] Address;
+      Size_In_Storage_Elements : @key[in] Storage_Elements.Storage_Count;
+      Alignment : @key[in] Storage_Elements.Storage_Count;
+      Subpool : @key[not null] Subpool_Handle) @key[is abstract]
+         @key[with] Pre'Class => Pool_of_Subpool(Subpool) = Pool'Access;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Deallocate_Subpool} (
+      Pool : @key[in out] Root_Storage_Pool_With_Subpools;
+      Subpool : @key[in out] Subpool_Handle) @key[is abstract]
+         @key[with] Pre'Class => Pool_of_Subpool(Subpool) = Pool'Access;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Default_Subpool_for_Pool} (
+      Pool : @key[in] Root_Storage_Pool_With_Subpools) @key[return not null] Subpool_Handle;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[overriding]
+   @key[procedure] @AdaSubDefn{Allocate} (
+      Pool : @key[in out] Root_Storage_Pool_With_Subpools;
+      Storage_Address : @key[out] Address;
+      Size_In_Storage_Elements : @key[in] Storage_Elements.Storage_Count;
+      Alignment : @key[in] Storage_Elements.Storage_Count);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[overriding]
+   @key[procedure] @AdaSubDefn{Deallocate} (
+      Pool : @key[in out] Root_Storage_Pool_With_Subpools;
+      Storage_Address : @key[in] Address;
+      Size_In_Storage_Elements : @key[in] Storage_Elements.Storage_Count;
+      Alignment : @key[in] Storage_Elements.Storage_Count) @key[is null];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[overriding]
+   @key[function] @AdaSubDefn{Storage_Size} (Pool : Root_Storage_Pool_With_Subpools)
+      @key[return] Storage_Count @key[is] (Storage_Elements.Storage_Count'Last);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[private
+   ... -- @Examcom{not specified by the language}
+end System.Storage_Pools.Subpools;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[@Defn{subpool}@Defn2{Term=[pool],Sec={subpool}}
+@Defn{subpool handle}@Defn2{Term=[handle],Sec=[subpool]}
+@Defn{storage pool that supports subpools}A @i<subpool> is
+a separately reclaimable portion of a storage pool, identified by
+an object of type Subpool_Handle (a @i<subpool handle>). A subpool handle also
+identifies the enclosing storage pool, a @i<storage pool that supports subpools>,
+which is a storage pool whose type is descended from
+Root_Storage_Pool_With_Subpools. A subpool is created by calling Create_Subpool
+or a similar constructor; the constructor returns the subpool handle.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[A @i<subpool object> is an object of a type
+descended from Root_Subpool_Type. @Redundant[Typically, subpool objects are
+managed by the containing storage pool; only the handles need be exposed to
+clients of the storage pool. Subpool objects are designated by subpool handles,
+and are the run-time representation of a subpool.]]}
+
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We know that subpool handles designate
+  subpool objects because the declaration of Subpool_Handle says so.]}
+@end{TheProof}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[Each subpool @i<belongs>@Defn2{Term=[belongs],Sec=[subpool to a pool]}
+to a single storage pool @Redundant[(which will always be a pool
+that supports subpools)]. An access to the pool that a subpool belongs to can
+be obtained by calling Pool_of_Subpool with the subpool handle.
+Set_Pool_of_Subpool causes the subpool of the subpool handle to belong to the
+given pool@Redundant[; this is intended to be called from subpool constructors
+like Create_Subpool.] Set_Pool_of_Subpool propagates Program_Error if the
+subpool already belongs to a pool.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Pool_of_Subpool and Set_Pool_of_Subpool are
+  provided by the Ada implementation and typically will not be overridden by the
+  pool implementer.]}
+@end{Discussion}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[When an @nt{allocator} for a type whose storage pool
+supports subpools is evaluated, a call is made on Allocate_From_Subpool passing
+in a Subpool_Handle, in addition to the parameters as defined for calls on
+Allocate (see @RefSecNum{Storage Management}). The subpool denoted by the
+@Syni{subpool_handle_}@nt{name} is used, if specified in an @nt{allocator}.
+Otherwise, Default_Subpool_for_Pool of the Pool is used to provide a subpool
+handle. All requirements on the Allocate procedure also apply to
+Allocate_from_Subpool.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Deallocate_Subpool is expected to do whatever is
+  needed to deallocate all of the objects contained in the subpool; it is called
+  from Unchecked_Deallocate_Subpool (see @RefSecNum{Subpool Reclamation}).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Typically, the pool implementer will not override
+  Allocate. In the canoncial definition of the language, it will never be called
+  for a pool that supports subpools (there is an @ImplPermName below that allows
+  it to be called in certain rare cases).]}
+@end{Discussion}
+
+@end{StaticSem}
+
+@begin{Legality}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[If a storage pool that supports subpools is specified as the Storage_Pool for
+an access type, the access type is called a
+@i<subpool access type>.@Defn{subpool access type}@Defn2{Term=[access type],Sec=[subpool]}
+A subpool access type shall be a pool-specific access type.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[The accessibility level of a subpool access type
+shall not be statically deeper than that of the storage pool object.]}
+
+@end{Legality}
+
+@begin{Runtime}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[When a subpool access type is frozen (see
+@RefSecNum{Freezing Rules}), a check is made that the
+accessibility level of the subpool access type is not deeper than that of
+the storage pool object. Program_Error is raised if this
+check fails.@IndexCheck{Accessibility_Check}@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This check (and its static counterpart) ensures
+  that the type of the allocated objects exist at least as long as the storage
+  pool object, so that the subpools are finalized (which finalizes any remaining
+  allocated objects) before the type of the objects ceases to exist. The access
+  type itself (and the associated collection) will cease to exist before the
+  storage pool ceases to exist.]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[A call to Subpools.Allocate(P, Addr, Size, Align) does the following:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Allocate_From_Subpool
+  (Root_Storage_Pool_With_Subpools'Class(P),
+   Addr, Size, Align,
+   Subpool => Default_Subpool_for_Pool
+                (Root_Storage_Pool_With_Subpools'Class(P)));]}
+@end{Example}
+
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[An @nt{allocator} that allocates in a subpool raises
+Program_Error if the allocated object has task
+parts.@IndexCheck{Allocation_Check}@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is to ease implementation. We envision
+  relaxing this restriction in a future version of Ada, once implementation
+  experience has been gained. At this time, we are unable to come up with a set
+  of rules for task termination that is both useful, and surely feasible to
+  implement.]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[Unless overridden, Default_Subpool_for_Pool
+propagates Program_Error.]}
+
+@end{Runtime}
+
+@begin{ImplPerm}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[When an allocator for a type whose storage pool is
+of type Root_Storage_Pool'Class is evaluated, but supports subpools, the
+implementation may call Allocate rather than Allocate_From_Subpool.
+@Redundant[This will have the same effect, so long as Allocate has not been
+overridden.]]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[This ensures either of two implementation models
+  are possible for an @nt{allocator} with no @nt{subpool_specification}.
+  Note that the "supports subpools" property is not known at compile time for a
+  pool of the class-wide type.]}
+
+  @begin{Itemize}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[The implementation can dispatch to
+      Storage_Pools.Allocate. If the pool supports subpools, this will call
+      Allocate_From_Subpool with the default subpool so long as Allocate has not
+      been overridden.]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[The implementation can declare
+      Allocate_From_Subpool as a primitive of Root_Storage_Pool in the private
+      part of Storage_Pools. This means that the Allocate_From_Subpool for
+      Root_Storage_Pool_With_Subpools overrides that private one. The
+      implementation can thus call the private one, which will call Allocate for
+      non-subpool-supporting pools. The effect of this implementation does not
+      change if Allocate is overridden for a pool that supports subpools.]}
+  @end{Itemize}
+@end{Reason}
+
+@end{ImplPerm}
+
+@begin{Notes}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[A user-defined storage pool type that supports
+subpools can be implemented by extending the Root_Storage_Pool_With_Subpools
+type, and overriding the primitive subprograms Create_Subpool,
+Allocate_From_Subpool, and Deallocate_Subpool. Create_Subpool should call
+Set_Pool_Of_Subpool before returning the subpool handle. To make use of such a
+pool, a user would declare an object of the type extension, use it to define the
+Storage_Pool attribute of one or more access types, and then call Create_Subpool
+to obtain subpool handles associated with the pool.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[A user-defined storage pool type that supports
+subpools may define additional subpool constructors similar to Create_Subpool
+(these typically will have additional parameters).]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[The pool implementor should override
+Default_Subpool_For_Pool if the pool is to support a default subpool for the
+pool. The implementor can override Deallocate if individual object reclamation
+is to be supported, and can override Storage_Size if there is some limit on the
+total size of the storage pool. The implementor can override Initialize and
+Finalize if there is any need for non-trivial initialization and finalization
+for the pool as a whole. For example, Finalize might reclaim blocks of storage
+that are allocated over and above the space occupied by the pool object itself.
+The pool implementor may extend the Root_Subpool type as necessary to carry
+additional information with each subpool provided by Create_Subpool.]}
+
+@end{Notes}
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Subpools are new.]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Subpools and the
+  package System.Storage_Pools.Subpools are new.]}
 @end{Extend2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[Subpool Reclamation]}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The following language-defined
+library procedure exists:]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] System.Storage_Pools.Subpools;
+@SubChildUnit{Parent=[Ada],Child=[Ada.Unchecked_Deallocate_Subpool]}@key[procedure] Ada.Unchecked_Deallocate_Subpool
+   (Subpool : @key[in out] System.Storage_Pools.Subpools.Subpool_Handle);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[A subpool may be explicitly deallocated using
+Unchecked_Deallocate_Subpool.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[If Subpool is @key[null], a call on
+Unchecked_Deallocate_Subpool has no effect. Otherwise, the subpool is
+finalized, and Subpool is set to @key[null].]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[Finalization of a subpool has the
+following effects:]}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The subpool no longer belongs to any pool;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Any of the objects allocated from the subpool that
+still exist are finalized in an arbitrary order;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The following @Redundant[dispatching] call is then made:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],NoPrefix=[T],Text=[   Deallocate_Subpool(Pool_of_Subpool(Subpool).@key[all], Subpool);]}
+@end{Example}
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[Finalization of a Root_Storage_Pool_With_Subpools
+object finalizes all subpools that belong to that pool that have not yet been
+finalized.]}
+
+@begin{Discussion}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[There is no need to call Unchecked_Deallocation on
+an object allocated in a subpool. Such objects are deallocated all at once, when
+Unchecked_Deallocate_Subpool is called.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[If Unchecked_Deallocation is called, the object is
+finalized, and then Deallocate is called on the Pool, which typically will do
+nothing. If it wants to free memory, it will need some way to get from the
+address of the object to the subpool.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[There is no Deallocate_From_Subpool. There is
+no efficient way for the implementation to determine the subpool for
+an arbitrary object, and if the pool implementer can determinate that,
+they can use that as part of the implementation of Deallocate.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[If Unchecked_Deallocation is not called (the usual
+case), the object will be finalized when Unchecked_Deallocate_Subpool is
+called.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[If that's never called, then the object will be
+finalized when the Pool_With_Subpools is finalized (by permission @em it might
+happen when the collection of the access type is finalized).]}
+
+@end{Discussion}
+
+@end{StaticSem}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Unchecked_Deallocate_Subpool is new.]}
+@end{Extend2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[Storage Subpool Example]}
+
+@begin{Examples}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The following example is a simple but
+complete implementation of the classic Mark/Release pool using subpools:]}
+
+@begin{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] System.Storage_Pools.Subpools;
+@key[with] System.Storage_Elements;
+@key[with] Ada.Unchecked_Deallocate_Subpool;
+@key[package] MR_Pool @key[is]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[use] System.Storage_Pools;
+      -- @Examcom{For uses of Subpools.}
+   @key[use] System.Storage_Elements;
+      -- @Examcom{For uses of Storage_Count and Storage_Array.}]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   -- @Examcom{Mark and Release work in a stack fashion, and allocations are not allowed}
+   -- @Examcom{from a subpool other than the one at the top of the stack. This is also}
+   -- @Examcom{the default pool}.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[subtype] Subpool_Handle @key[is] Subpools.Subpool_Handle;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] Mark_Release_Pool_Type (Pool_Size : Storage_Count) @key[is new]
+      Subpools.Root_Storage_Pool_With_Subpools @key[with private];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Mark (Pool : @key[in out] Mark_Release_Pool_Type)
+      @key[return not null] Subpool_Handle;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] Release (Subpool : @key[in out] Subpool_Handle) @key[renames]
+      Ada.Unchecked_Deallocate_Subpool;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[private]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] MR_Subpool @key[is new] Subpools.Root_Subpool @key[with record]
+      Start : Storage_Count;
+   @key[end record];
+   @key[subtype] Subpool_Indexes @key[is] Positive @key[range] 1 .. 10;
+   @key[type] Subpool_Array @key[is array] (Subpool_Indexes) @key[of aliased] MR_Subpool;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] Mark_Release_Pool_Type (Pool_Size : Storage_Count) @key[is new]
+      Subpools.Root_Storage_Pool_With_Subpools @key[with record]
+      Storage         : Storage_Array (1 .. Pool_Size);
+      Next_Allocation : Storage_Count := 1;
+      Markers         : Subpool_Array;
+      Current_Pool    : Subpool_Indexes := 1;
+   @key[end record];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[overriding]
+   @key[function] Create_Subpool (Pool : @key[aliased in out] Mark_Release_Pool_Type)
+      @key[return not null] Subpool_Handle;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Mark (Pool : @key[in out] Mark_Release_Pool_Type)
+      @key[return not null] Subpool_Handle @key[renames] Create_Subpool;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[overriding]
+   @key[procedure] Allocate_From_Subpool (
+      Pool : @key[in out] Mark_Release_Pool_Type;
+      Storage_Address : @key[out] System.Address;
+      Size_In_Storage_Elements : @key[in] Storage_Count;
+      Alignment : @key[in] Storage_Count;
+      Subpool : @key[not null] Subpool_Handle);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[overriding]
+   @key[procedure] Deallocate_Subpool (
+      Pool : @key[in out] Mark_Release_Pool_Type;
+      Subpool : @key[in out] Subpool_Handle);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[overriding]
+   @key[function] Default_Subpool_for_Pool (
+      Pool : @key[in] Mark_Release_Pool_Type) @key[return not null] Subpool_Handle;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[overriding]
+   @key[procedure] Initialize (Pool : @key[in out] Mark_Release_Pool_Type);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   -- @Examcom{We don't need Finalize.}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[end] MR_Pool;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[package body] MR_Pool @key[is]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] Initialize (Pool : @key[in out] Mark_Release_Pool_Type) @key[is]
+      -- @Examcom{Initialize the first default subpool.}
+   @key[begin]
+      Pool.Markers(1).Start := 1;
+      Subpools.Set_Pool_of_Subpool
+         (Pool.Markers(1)'Unchecked_Access,
+          Pool'Unchecked_Access);
+   @key[end] Initialize;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Create_Subpool (Pool : @key[in out] Mark_Release_Pool_Type)
+      @key[return not null] Subpool_Handle @key[is]
+      -- @Examcom{Mark the current allocation location.}
+   @key[begin]
+      @key[if] Pool.Current_Pool = Subpool_Indexes'Last @key[then]
+         @key[raise] Storage_Error; -- @Examcom{No more subpools.}
+      @key[end if];
+      Pool.Current_Pool := Pool.Current_Pool + 1; -- @Examcom{Move to the next subpool}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      @key[return] Result : @key[constant not null] Subpool_Handle :=
+         Pool.Markers(Pool.Current_Pool)'Unchecked_Access
+      @key[do]
+         Result.Start := Pool.Next_Allocation;
+         Subpools.Set_Pool_of_Subpool (Result, Pool'Unchecked_Access);
+      @key[end return];
+   @key[end] Create_Subpool;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] Deallocate_Subpool (
+      Pool : @key[in out] Mark_Release_Pool_Type;
+      Subpool : @key[in out] Subpool_Handle) @key[is]
+   @key[begin]
+      @key[if] Subpool /= Pool.Markers(Pool.Current_Pool)'Unchecked_Access then
+         @key[raise] Program_Error; -- @Examcom{Only the last marked subpool can be released.}
+      @key[end if];
+      @key[if] Pool.Current_Pool /= 1 @key[then]
+         Pool.Next_Allocation := Pool.Markers(Pool.Current_Pool);
+         Pool.Current_Pool := Pool.Current_Pool - 1; -- @Examcom{Move to the previous subpool}
+      @key[else] -- @Examcom{Reinitialize the default subpool:}
+         Pool.Next_Allocation := 1;
+         Subpools.Set_Pool_of_Subpool
+            (Pool.Markers(1)'Unchecked_Access,
+             Pool'Unchecked_Access);
+      @key[end if];
+   @key[end] Deallocate_Subpool;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Default_Subpool_for_Pool (
+      Pool : @key[in] Mark_Release_Pool_Type) @key[return not null] Subpool_Handle @key[is]
+   @key[begin]
+      @key[return] Pool.Markers(Pool.Current_Pool)'Unchecked_Access;
+   @key[end] Default_Subpool_for_Pool;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] Allocate_From_Subpool (
+      Pool : @key[in out] Mark_Release_Pool_Type;
+      Storage_Address : @key[out] System.Address;
+      Size_In_Storage_Elements : @key[in] Storage_Count;
+      Alignment : @key[in] Storage_Count;
+      Subpool : @key[not null] Subpool_Handle) @key[is]
+   @key[begin]
+      @key[if] Subpool /= Pool.Markers(Pool.Current_Pool)'Unchecked_Access @key[then]
+         @key[raise] Program_Error; -- @Examcom{Only the last marked subpool can be used for allocations.}
+      @key[end if];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      -- @Examcom{Correct the alignment if necessary:}
+      Pool.Next_Allocation := Pool.Next_Allocation +
+         ((-Pool.Next_Allocation) @key[mod] Alignment);
+      @key[if] Pool.Next_Allocation + Size_In_Storage_Elements > Pool.Pool_Size @key[then]
+         @key[raise] Storage_Error; -- @Examcom{Out of space.}
+      @key[end if];
+      Storage_Address := Pool.Storage (Pool.Next_Allocation)'Address;
+      Pool.Next_Allocation := Pool.Next_Allocation + Size_In_Storage_Elements;
+   @key[end] Allocate_From_Subpool;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[end] MR_Pool;]}
+@end{Example}
+
+@end{Examples}
+
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+  @ChgAdded{Version=[3],Text=[This example of subpools is new.]}
+@end{DiffWord2005}
+
 
 
 @LabeledRevisedClause{Version=[3],New=[Pragma Restrictions and Pragma Profile],Old=[Pragma Restrictions]}
@@ -2990,7 +3733,7 @@ use of the more efficient and safe one.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
   @ChgAdded{Version=[2],Text=[The syntax of a @nt{restriction_parameter_argument}
   has been defined to better support restriction No_Dependence (see
-  @RefSecNum{Language-Defined Restrictions}).]}
+  @RefSecNum{Language-Defined Restrictions and Profiles}).]}
 @end{DiffWord95}
 
 @begin{DiffWord2005}
@@ -3001,7 +3744,7 @@ use of the more efficient and safe one.
 
 
 @Comment{TBD:---@LabeledAddedRevisedClause{Version=[3],OldVersion=[2],New=[Language-Defined Restrictions and Profiles],Old=[Language-Defined Restrictions]}}
-@LabeledAddedSubclause{Version=[2], Name=[Language-Defined Restrictions]}
+@LabeledAddedSubclause{Version=[3], Name=[Language-Defined Restrictions and Profiles]}
 
 @begin{StaticSem}
 
@@ -3068,7 +3811,27 @@ cause bad nesting, so we don't mark it}
 
     @ChgRef{Version=[3],Kind=[Added]}
     @ChgAdded{Version=[3],Text=[package Ada.Command_Line (see
-      @RefSecNum{The Package Command_Line}).]}
+      @RefSecNum{The Package Command_Line});]}
+
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[package Interfaces.C (see
+      @RefSecNum{Interfacing with C and C++});]}
+
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[package Interfaces.C.Strings (see
+      @RefSecNum{The Package Interfaces.C.Strings});]}
+
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[package Interfaces.C.Pointers (see
+      @RefSecNum{The Generic Package Interfaces.C.Pointers});]}
+
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[package Interfaces.COBOL (see
+      @RefSecNum{Interfacing with COBOL});]}
+
+    @ChgRef{Version=[3],Kind=[Added]}
+    @ChgAdded{Version=[3],Text=[package Interfaces.Fortran (see
+      @RefSecNum{Interfacing with Fortran});]}
   @end{InnerItemize}
 
   @ChgRef{Version=[3],Kind=[Added]}
@@ -3106,13 +3869,16 @@ Standard.Long_Integer and Standard.Long_Float are considered language-defined
 identifiers, but identifiers such as Standard.Short_Short_Integer are considered
 implementation-defined.]}
 
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],NoPrefix=[T],Text=[This restriction applies only to the
+current compilation or environment, not the entire partition.]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00257-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],
-   Sec=(No_Implementation_Pragmas)}@Chg{Version=[3],New=[@Defn{No_Implementation_Pragmas restriction}],
-   Old=[]}No_Implementation_Pragmas @\There
-   are no implementation-defined pragmas or pragma arguments. This
-   restriction applies only to the current compilation or environment, not the
-   entire partition.]}
+Sec=(No_Implementation_Pragmas)}@Chg{Version=[3],New=[@Defn{No_Implementation_Pr
+agmas restriction}], Old=[]}No_Implementation_Pragmas @\There are no
+implementation-defined pragmas or pragma arguments. This restriction applies
+only to the current compilation or environment, not the entire partition.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0242-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
@@ -3122,14 +3888,16 @@ implementation-defined.]}
    only to the current compilation or environment, not the entire partition.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00368-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],
    Sec=(No_Obsolescent_Features)}@Chg{Version=[3],New=[@Defn{No_Obsolescent_Features restriction}],
    Old=[]}No_Obsolescent_Features @\There
    is no use of language features defined in Annex J. It is
    implementation-defined if uses of the renamings of
-   @RefSecNum{Renamings of Library Units} are detected by this
-   restriction. This restriction applies only to the current compilation or
-   environment, not the entire partition.]}
+   @RefSecNum{Renamings of Library Units} @Chg{Version=[3],New=[and of the
+   @nt{pragma}s of @RefSecNum{Aspect-related Pragmas} ],Old=[]}are detected
+   by this restriction. This restriction applies only to the current
+   compilation or environment, not the entire partition.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[A user could compile a rename
@@ -3146,8 +3914,12 @@ implementation-defined.]}
   of @RefSecNum{Renamings of Library Units}
   by compiling them normally; we do not want to require implementations to use
   a special mechanism to implement these renames.]}
-@end{Reason}
 
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[The pragmas have exactly the functionality of the
+  corresponding aspect, (unlike the typical obsolescent feature) and rejecting
+  them could be a significant portability problem for existing code.]}
+@end{Reason}
 @end{Description}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
@@ -3605,6 +4377,7 @@ the Write and Read attributes, where available, execute as follows:]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01],ARef=[AI95-00251-01],ARef=[AI95-00270-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2]}
 For elementary types, @Chg{Version=[2],New=[Read reads (and Write writes) the
 number of stream elements implied by the Stream_Size for the type @i<T>;],
 Old=[]} the representation @Chg{Version=[2],New=[],Old=[in terms ]}of@Chg{Version=[2],
@@ -3612,7 +4385,9 @@ New=[ those],Old=[]} stream elements is implementation defined.
 For composite types, the Write or Read attribute for each component is
 called in @Chg{New=[],Old=[a ]}canonical order@Chg{New=[, which],
 Old=[. The canonical order of components]} is last dimension varying
-fastest for an array, and positional aggregate order for a record.
+fastest for an array@Chg{Version=[3],New=[ (unless the convention of the array is
+Fortran, in which case it is first dimension varying fastest)],Old=[]},
+and positional aggregate order for a record.
 Bounds are not included in the stream if @i(T) is an array type.
 If @i(T) is a discriminated type, discriminants are included only if they have
 defaults. If @i(T) is a tagged type, the tag is not included.
@@ -4532,6 +5307,11 @@ class-wide types descended from S.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Removed a misleading phrase
   which implies that Constraint_Error is raised for internal tags of the
   wrong type, when Tag_Error should be raised for such tags.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+  @ChgAdded{Version=[3],Text=[Clarified that arrays with convention Fortran
+  are written in column-major order, rather then row-major order. This
+  is necessary in order that streaming of Fortran arrays is efficient.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0192-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified that the profile

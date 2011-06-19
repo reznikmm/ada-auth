@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.49 $ $Date: 2011/05/03 06:34:09 $ $Author: randy $ }
+@Comment{ $Revision: 1.50 $ $Date: 2011/06/18 07:20:52 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2011/05/03 06:34:09 $}
+@Comment{$Date: 2011/06/18 07:20:52 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -737,12 +737,26 @@ liberalizing where they can be instantiated.]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],Sec=(No_Anonymous_Allocators)}@Defn{No_Anonymous_Allocators restriction}
 No_Anonymous_Allocators @\@nt{Allocator}s of anonymous access types are not allowed.]}.
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+@ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],Sec=(No_Coextensions)}@Defn{No_Coextensions restriction}
+No_Coextensions @\There are no coextensions. See @RefSecNum{Operations of Access Types}.]}.
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+@ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
+Sec=(No_Access_Parameter_Allocators)}@Defn{No_Access_Parameter_Allocators restriction}
+No_Access_Parameter_Allocators @\@nt{Allocator}s
+are not permitted as the actual parameter to an access parameter.
+See @RefSecNum{Subprogram Declarations}.]}
+
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00394-01]}
+@Comment{We can't reuse this paragraph for the above, because there is no
+way to have the hanging marker in both the added and deleted text (and since it
+isn't in Ada 2005 at all).}
 @ChgDeleted{Version=[2],Text=[@Defn2{Term=[restrictions],
 Sec=(No_Unchecked_Deallocation)}No_Unchecked_Deallocation @\Semantic
 dependence on Unchecked_Deallocation is not allowed.]}
 @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[This restriction would be useful in those
   contexts in which heap storage is needed on program start-up, but need not be
   increased subsequently. The danger of a dangling pointer can therefore be
@@ -827,7 +841,7 @@ machine level, fixed point is virtually the same as integer arithmetic.
 Sec=(No_Unchecked_Conversion)}No_Unchecked_Conversion @\Semantic dependence
 on the predefined generic Unchecked_Conversion is not allowed.]}
 @begin{Discussion}
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[Most critical applications would require
   some restrictions or additional validation checks on uses of unchecked
   conversion. If the application does not require the functionality, then
@@ -1038,7 +1052,7 @@ Text=[Any restrictions on pragma Restrictions.]}]}
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Text=[Uses of @Syni{restriction_parameter_}@nt{identifier}
-No_Dependence defined in @RefSecNum{Language-Defined Restrictions}:
+No_Dependence defined in @RefSecNum{Language-Defined Restrictions and Profiles}:
 No_Dependence => Ada.@!Unchecked_@!Deallocation and No_Dependence =>
 Ada.@!Unchecked_@!Conversion may be appropriate for high-integrity systems.
 Other uses of No_Dependence can also be appropriate for high-integrity
@@ -1117,9 +1131,10 @@ proscribed
 @end{DiffWord95}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0152-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}Restriction
-  No_Anonymous_Allocators is new.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0152-1],ARef=[AI05-0190-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}Restrictions
+  No_Anonymous_Allocators, No_Coextensions, and No_Access_Parameter_Allocators
+  are new.]}
 @end{Extend2005}
 
 @begin{DiffWord2005}

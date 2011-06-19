@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2011/06/04 05:28:20 $}
+@Comment{$Date: 2011/06/18 07:20:52 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -14,7 +14,8 @@ language whose functionality is largely redundant with other features
 defined by this International Standard.
 Use of these features is not recommended in newly written programs.
 @Chg{Version=[2],New=[Use of these features can be prevented by using pragma
-Restrictions (No_Obsolescent_Features), see @RefSecNum{Language-Defined Restrictions}.],
+Restrictions (No_Obsolescent_Features), see
+@RefSecNum{Language-Defined Restrictions and Profiles}.],
 Old=[]}]
 @begin{Ramification}
 These features are still part of the language,
@@ -824,7 +825,8 @@ this pragma.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Text=[The following restrictions involve dependence
 on specific language-defined units. The more general restriction No_Dependence
-(see @RefSecNum{Language-Defined Restrictions}) should be used for this purpose.]}
+(see @RefSecNum{Language-Defined Restrictions and Profiles}) should be
+used for this purpose.]}
 @end{Intro}
 
 
@@ -860,7 +862,7 @@ not allowed.]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
   @ChgAdded{Version=[2],Text=[This clause is new. These restrictions
   are replaced by the more general No_Dependence
-  (see @RefSecNum{Language-Defined Restrictions}).]}
+  (see @RefSecNum{Language-Defined Restrictions and Profiles}).]}
 @end{DiffWord95}
 
 @RMNewPage
@@ -911,16 +913,174 @@ Ada.Characters.Handling:]}
 
 @LabeledAddedClause{Version=[3],Name=[Aspect-related Pragmas]}
 
-*** TBD.
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[Pragmas can be used as an alternative to
+aspect_specifications to specify certain aspects.]}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
   @ChgAdded{Version=[3],Text=[This clause is new. Many existing pragmas have
-  been converted into aspects.]}
+  been converted into aspects; the pragmas have moved here.]}
+@end{DiffWord2005}
+
+@LabeledAddedSubClause{Version=[3],Name=[Pragma Inline]}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
+Inline, which is a program unit pragma (see @RefSecNum{Pragmas and Program Units})
+is as follows:@PDefn2{Term=[program unit pragma], Sec=(Inline)}
+@PDefn2{Term=[pragma, program unit], Sec=(Inline)}]}
+@end{SyntaxText}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Inline> (@Syn2[name] {, @Syn2[name]});']}
+@end{Syntax}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The @nt{pragma} shall apply to one or more
+callable entities or generic subprograms.]}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[@nt{Pragma} Inline specifies that the Inline aspect
+(see @RefSecNum{Inline Expansion of Subprograms}) for each
+entity denoted by each @nt{name} given in the @nt{pragma} has the value True.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[Note that inline expansion is
+  desired no matter what @nt{name} is used in the call. This allows one to request
+  inlining for only one of several overloaded subprograms as follows:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[package] IO @key[is]
+   @key[procedure] Put(X : @key[in] Integer);
+   @key[procedure] Put(X : @key[in] String);
+   @key[procedure] Put(X : @key[in] Character);
+@key[private]
+   @key[procedure] Character_Put(X : @key[in] Character) @key[renames] Put;
+   @key[pragma] Inline(Character_Put);
+@key[end] IO;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] IO; @key[use] IO;
+@key[procedure] Main @key[is]
+   I : Integer;
+   C : Character;
+@key[begin]
+   ...
+   Put(C); --@Examcom{ Inline expansion is desired.}
+   Put(I); --@Examcom{ Inline expansion is NOT desired.}
+@key[end] Main;]}
+@end{Example}
+@end{Ramification}
+@end{StaticSem}
+
+@begin{ImplPerm}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[An implementation may allow a @nt{pragma} Inline
+that has an argument which is a @nt{direct_name} denoting a
+@nt{subprogram_body} of the same @nt{declarative_part}.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is allowed for Ada 83 compatibility. This is
+  only a permission as this usage was considered obsolescent even for Ada 95.]}
+@end{Reason}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We only need to allow this in @nt{declarative_part}s,
+  because a @nt{body} is only allowed in another @nt{body}, and these all have
+  @nt{declarative_part}s.]}
+@end{Discussion}
+@end{ImplPerm}
+
+@begin{Notes}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The name in a @nt{pragma} Inline may denote more
+than one entity in the case of overloading. Such a @nt{pragma} applies to
+all of the denoted entities.]}
+@end{Notes}
+
+@begin{Incompatible83}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-00309-01],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 83}
+  A pragma Inline cannot refer to a @nt{subprogram_body} outside of that
+  body. The pragma can be given inside of the subprogram body. Ada 2005
+  adds an @ImplPermName to allow this usage for compatibility (and
+  Ada 95 implementations also can use this permission), but
+  implementations do not have to allow such @nt{pragma}s.]}
+@end{Incompatible83}
+
+@begin{Extend83}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 83}
+  A @nt{pragma} Inline is allowed inside a @nt{subprogram_body} if there
+  is no corresponding @nt{subprogram_declaration}.
+  This is for uniformity with other program unit pragmas.]}
+@end{Extend83}
+
+@begin{Extend95}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-00309-01],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}
+  @b[Amendment Correction:] Implementations are allowed to let @nt{Pragma}
+  Inline apply to a @nt{subprogram_body}.]}
+@end{Extend95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[This clause is new. Pragma Inline was moved
+  here from @RefSecNum{Inline Expansion of Subprograms}; aspect Inline lives
+  there now.]}
 @end{DiffWord2005}
 
 
-*** TBD (other subclauses). The following should be J.15.11.
+@LabeledAddedSubClause{Version=[3],Name=[Pragma No_Return]}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
+No_Return, which is a representation pragma
+(see @RefSecNum{Operational and Representation Items}),
+is as follows:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<No_Return> (@SynI[procedure_]@Syn2[local_name] {, @SynI[procedure_]@Syn2[local_name]});']}
+@end{Syntax}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[Each @SynI{procedure_}@nt{local_name}
+shall denote one or more procedures or generic procedures.
+@Redundant[The @SynI{procedure_}@nt{local_name} shall not denote a null
+procedure nor an instance of a generic unit.]]}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[@nt{Pragma} No_Return specifies that the No_Return
+aspect (see 6.3.2) for each procedure denoted by each @nt{local_name}
+given in the @nt{pragma} has the value True.]}
+@end{StaticSem}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[This clause is new. Pragma No_Return was moved
+  here from @RefSecNum{Non-returning Procedures}; aspect No_Return lives
+  there now.]}
+@end{DiffWord2005}
+
+
+
+*** TBD (other subclauses). The following should be J.15.10.
 
 @LabeledAddedSubClause{Version=[3],Name=[Pragma Dispatching_Domain]}
 

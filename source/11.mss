@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2011/06/04 05:28:19 $}
+@Comment{$Date: 2011/06/18 07:20:52 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -600,9 +600,10 @@ are not handled by the handlers of the
     @AdaObjDefn{Null_Occurrence} : @key[constant] Exception_Occurrence;
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00329-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
     @key[procedure] @AdaSubDefn{Raise_Exception}(E : @key[in] Exception_Id;
-                              Message : @key[in] String := "");@Chg{Version=[2],New=[
-        @key[pragma] No_Return(Raise_Exception);],Old=[]}
+                              Message : @key[in] String := "")@Chg{Version=[3],New=[],Old=[;]}@Chg{Version=[2],New=[
+        @Chg{Version=[3],New=[@key[with]],Old=[@key[pragma]]} No_Return@Chg{Version=[3],New=[ => True],Old=[(Raise_Exception)]};],Old=[]}
     @key[function] @AdaSubDefn{Exception_Message}(X : Exception_Occurrence) @key[return] String;
     @key[procedure] @AdaSubDefn{Reraise_Occurrence}(X : @key[in] Exception_Occurrence);
 
@@ -1275,11 +1276,11 @@ language-defined library package exists:]}
    @key[pragma] Pure(Assertions);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   Assertion_Error : @key<exception>;]}
+@ChgAdded{Version=[2],Text=[   @AdaExcDefn{Assertion_Error} : @key<exception>;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key<procedure> Assert(Check : @key<in> Boolean);
-   @key<procedure> Assert(Check : @key<in> Boolean; Message : @key<in> String);]}
+@ChgAdded{Version=[2],Text=[   @key<procedure> @AdaSubDefn{Assert}(Check : @key<in> Boolean);
+   @key<procedure> @AdaSubDefn{Assert}(Check : @key<in> Boolean; Message : @key<in> String);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key<end> Ada.Assertions;]}
@@ -1304,7 +1305,8 @@ If the assertion policy is Check at the point of a @nt{pragma} Assert, the
 elaboration of the pragma consists of evaluating the boolean expression, and if
 the result is False, evaluating the Message argument, if any, and raising the
 exception Assertions.Assertion_Error, with a message if the Message
-argument is provided.@Defn2{Term=[assertion policy],Sec=[Assert pragma]}]}
+argument is provided.@Defn2{Term=[assertion policy],Sec=[Assert pragma]}@Defn2{Term=(Assertion_Error),
+Sec=(raised by failure of assertion)}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[Calling the procedure

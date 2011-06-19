@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/06/04 05:28:18 $}
+@Comment{$Date: 2011/06/18 07:20:52 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.86 $}
+@Comment{$Revision: 1.87 $}
 
 @LabeledClause{Array Types}
 
@@ -323,13 +323,11 @@ with a value True cannot be changed.]}
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
 @ChgAdded{Version=[3],Text=[The expected type for the @nt{expression}
-specified for the Default_Value aspect is the type defined by the
-@nt{full_type_declaration} on which it appears.]}
+specified for the Default_Component_Value aspect is the component type of the
+array type defined by the
+@nt{full_type_declaration} on which it
+appears.@PDefn2{Term=[expected type],Sec=[@nt{expression} of a Default_Component_Value aspect]}]}
 @end{Resolution}
-
-
-
-
 
 @begin{Notes}
 All components of an array have the same subtype. In particular, for an array
