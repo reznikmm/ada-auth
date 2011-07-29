@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/06/18 07:20:52 $}
+@Comment{$Date: 2011/06/19 05:19:11 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -2969,15 +2969,16 @@ exists:]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Create_Subpool} (Pool : @key[in out] Root_Storage_Pool_With_Subpools)
-       @key[return not null] Subpool_Handle @key[is abstract];]}
+      @key[return not null] Subpool_Handle @key[is abstract];]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Pool_of_Subpool} (Subpool : @key[not null] Subpool_Handle)
-        @key[return access] Root_Storage_Pool_With_Subpools'Class;]}
+      @key[return access] Root_Storage_Pool_With_Subpools'Class;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Set_Pool_of_Subpool} (Subpool : @key[not null] Subpool_Handle;
-                                  To : @key[in out] Root_Storage_Pool_With_Subpools'Class);]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Set_Pool_of_Subpool} (
+      Subpool : @key[not null] Subpool_Handle;
+      To : @key[in out] Root_Storage_Pool_With_Subpools'Class);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Allocate_From_Subpool} (
@@ -2996,7 +2997,8 @@ exists:]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Default_Subpool_for_Pool} (
-      Pool : @key[in] Root_Storage_Pool_With_Subpools) @key[return not null] Subpool_Handle;]}
+      Pool : @key[in] Root_Storage_Pool_With_Subpools)
+         @key[return not null] Subpool_Handle;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[overriding]
@@ -3233,19 +3235,23 @@ additional information with each subpool provided by Create_Subpool.]}
 
 @LabeledAddedSubClause{Version=[3],Name=[Subpool Reclamation]}
 
+@begin{Intro}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgAdded{Version=[3],Text=[A subpool may be explicitly deallocated using
+Unchecked_Deallocate_Subpool.]}
+@end{Intro}
+
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The following language-defined
 library procedure exists:]}
 
+@begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[with] System.Storage_Pools.Subpools;
 @SubChildUnit{Parent=[Ada],Child=[Ada.Unchecked_Deallocate_Subpool]}@key[procedure] Ada.Unchecked_Deallocate_Subpool
    (Subpool : @key[in out] System.Storage_Pools.Subpools.Subpool_Handle);]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
-@ChgAdded{Version=[3],Text=[A subpool may be explicitly deallocated using
-Unchecked_Deallocate_Subpool.]}
+@end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
 @ChgAdded{Version=[3],Text=[If Subpool is @key[null], a call on
@@ -3359,7 +3365,7 @@ complete implementation of the classic Mark/Release pool using subpools:]}
       Ada.Unchecked_Deallocate_Subpool;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[private]]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[private]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[type] MR_Subpool @key[is new] Subpools.Root_Subpool @key[with record]
@@ -3417,7 +3423,7 @@ complete implementation of the classic Mark/Release pool using subpools:]}
 @ChgAdded{Version=[3],Text=[@key[end] MR_Pool;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[package body] MR_Pool @key[is]]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[package body] MR_Pool @key[is]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] Initialize (Pool : @key[in out] Mark_Release_Pool_Type) @key[is]
@@ -3490,11 +3496,13 @@ complete implementation of the classic Mark/Release pool using subpools:]}
 @ChgAdded{Version=[3],Text=[      -- @Examcom{Correct the alignment if necessary:}
       Pool.Next_Allocation := Pool.Next_Allocation +
          ((-Pool.Next_Allocation) @key[mod] Alignment);
-      @key[if] Pool.Next_Allocation + Size_In_Storage_Elements > Pool.Pool_Size @key[then]
+      @key[if] Pool.Next_Allocation + Size_In_Storage_Elements >
+         Pool.Pool_Size @key[then]
          @key[raise] Storage_Error; -- @Examcom{Out of space.}
       @key[end if];
       Storage_Address := Pool.Storage (Pool.Next_Allocation)'Address;
-      Pool.Next_Allocation := Pool.Next_Allocation + Size_In_Storage_Elements;
+      Pool.Next_Allocation :=
+         Pool.Next_Allocation + Size_In_Storage_Elements;
    @key[end] Allocate_From_Subpool;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}

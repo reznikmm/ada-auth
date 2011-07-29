@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2011/06/18 07:20:52 $}
+@Comment{$Date: 2011/06/19 05:19:10 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.45 $}
+@Comment{$Revision: 1.46 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1178,14 +1178,14 @@ language-defined generic library package exists:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Forward_Iterator} @key[is limited interface];
    @key[function] @AdaSubDefn{First} (Object : Forward_Iterator) @key[return] Cursor @key[is abstract];
-   @key[function] @AdaSubDefn{Next} (Object : Forward_Iterator; Position : Cursor) @key[return] Cursor
-      @key[is abstract];]}
+   @key[function] @AdaSubDefn{Next} (Object : Forward_Iterator; Position : Cursor)
+      @key[return] Cursor @key[is abstract];]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Reversible_Iterator} @key[is limited interface and] Forward_Iterator;
    @key[function] @AdaSubDefn{Last} (Object : Reversible_Iterator) @key[return] Cursor @key[is abstract];
-   @key[function] @AdaSubDefn{Previous} (Object : Reversible_Iterator; Position : Cursor) @key[return] Cursor
-      @key[is abstract];]}
+   @key[function] @AdaSubDefn{Previous} (Object : Reversible_Iterator; Position : Cursor)
+      @key[return] Cursor @key[is abstract];]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[end] Ada.Iterator_Interfaces;]}

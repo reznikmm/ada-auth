@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/06/18 07:20:52 $}
+@Comment{$Date: 2011/06/19 05:19:10 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.90 $}
+@Comment{$Revision: 1.91 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -3156,7 +3156,7 @@ item.] The declaration with the @nt{aspect_specification} is termed the
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<aspect_specification>,Old=<>}>,
 rhs=`@Chg{Version=[3],New="
    @key[with] @Syn2{aspect_mark} [=> @Syn2{aspect_definition}] {,
-          @Syn2{aspect_mark} [=> @Syn2{aspect_definition}] }",Old=<>}'}
+           @Syn2{aspect_mark} [=> @Syn2{aspect_definition}] }",Old=<>}'}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<aspect_mark>,Old=<>}>,

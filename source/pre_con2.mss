@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.7 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
+@comment{ $Revision: 1.8 $ $Date: 2011/06/19 05:19:11 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Vectors]}
 
@@ -473,6 +473,23 @@ package Containers.Indefinite_Holders has the following declaration:]}
   (Container : @key[in out] Holder;
    Process   : @key[not null access procedure] (Element : @key[in out] Element_Type));]}
 
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Constant_Reference_Type}
+      (Element : @key[not null access constant] Element_Type) @key[is private]
+   @key[with] Implicit_Dereference => Element;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Reference_Type} (Element : @key[not null access] Element_Type) @key[is private]
+   @key[with] Implicit_Dereference => Element;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Constant_Reference} (Container : @key[aliased in] Holder)
+   @key[return] Constant_Reference_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Reference} (Container : @key[aliased in out] Holder)
+   @key[return] Reference_Type;]}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Assign} (Target : @key[in out] Holder; Source : @key[in] Holder);]}
 
@@ -674,6 +691,71 @@ exception raised by Process.@key[all] is propagated.]}
 @end{ImplNote}
 
 @begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[@key[type] Constant_Reference_Type
+      (Element : @key[not null access constant] Element_Type) @key[is private]
+   @key[with] Implicit_Dereference => Element;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[type] Reference_Type (Element : @key[not null access] Element_Type) @key[is private]
+   @key[with] Implicit_Dereference => Element;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Constant_Reference_Type and Reference_Type
+need finalization.@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[The default initialization of an object of type
+Constant_Reference_Type or Reference_Type propagates Program_Error.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[It is expected that Reference_Type (and
+  Constant_Reference_Type) will be a controlled type, for which finalization
+  will have some action to terminate the tampering check for the associated
+  container. If the object is created by default, however, there is no
+  associated container. Since this is useless, and supporting this case would
+  take extra work, we define it to raise an exception.]}
+@end{Reason}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Constant_Reference (Container : @key[aliased in] Holder)
+   @key[return] Constant_Reference_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[This routine (combined with the
+Implicit_Dereference aspect) provides a convenient way to gain read access to
+the contained element of a holder container.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[If Container is empty, Constraint_Error is
+propagated. Otherwise, Constant_Reference returns an object whose discriminant
+is an access value that designates the contained element. Program_Error is
+propagated if any operation tampers with the elements of Container while the
+object returned by Constant_Reference exists and has not been finalized.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Reference (Container : @key[aliased in out] Holder)
+   @key[return] Reference_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
+Implicit_Dereference aspects) provides a convenient way to gain read and write
+access to the contained element of a holder container.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[If Container is empty, Constraint_Error is
+propagated. Otherwise, Reference returns an object whose discriminant is an
+access value that designates the contained element. Program_Error is propagated
+if any operation tampers with the elements of Container while the object
+returned by Reference exists and has not been finalized.]}
+
+@begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Assign (Target : @key[in out] Holder; Source : @key[in] Holder);]}
 @end{Example}
@@ -733,6 +815,30 @@ then it raises Constraint_Error or Program_Error. Otherwise, the operation
 either proceeds as it would for an empty container, or it raises
 Constraint_Error or Program_Error.]}
 @end{Bounded}
+
+@begin{Erron}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[Execution is erroneous if the holder associated with
+the result of a call to Reference or Constant_Reference is finalized before the
+result object returned by the call to Reference or Constant_Reference is
+finalized.@PDefn2{Term=(erroneous execution),Sec=(cause)}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+  @ChgAdded{Version=[3],Text=[Each object of Reference_Type and
+  Constant_Reference_Type probably contains some reference to the originating
+  container. If that container is prematurely finalized (which is only possible
+  via Unchecked_Deallocation, as accessibility checks prevent passing a
+  container to Reference that will not live as long as the result), the
+  finalization of the object of Reference_Type will try to access a non-existent
+  object. This is a normal case of a dangling pointer created by
+  Unchecked_Deallocation; we have to explicitly mention it here as the pointer
+  in question is not visible in the specification of the type. (This is the same
+  reason we have to say this for invalid cursors.)]}
+@end{Reason}
+@end{Erron}
+
+
 
 @begin{ImplReq}
 
@@ -816,13 +922,6 @@ as Containers.Vectors except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
 
-  @begin{ImplNote}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Vectors
-      cannot depend on package Ada.Finalization (because that package
-      has Preelaborate categorization).]}
-  @end{ImplNote}
-
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type Vector is declared with a
     discriminant that specifies the capacity:]}
@@ -834,6 +933,15 @@ as Containers.Vectors except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The type Vector needs finalization if and only if
     type Element_Type needs finalization.]}
+
+  @begin{ImplNote}
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+    @ChgAdded{Version=[3],Text=[The type Vector cannot depend on package
+    Ada.Finalization unless the element type depends on that package.
+    The objects returned from the Iterator and Reference functions probably do
+    depend on package Ada.Finalization. Restricted environments may need to
+    avoid use of those functions and their associated types.]}
+  @end{ImplNote}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[In function Copy, if the Capacity parameter is
@@ -933,13 +1041,6 @@ as Containers.Doubly_Linked_Lists except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
 
-  @begin{ImplNote}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Doubly_Linked_Lists
-      cannot depend on package Ada.Finalization (because that package
-      has Preelaborate categorization).]}
-  @end{ImplNote}
-
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type List is declared with a
     discriminant that specifies the capacity (maximum number of elements)
@@ -952,6 +1053,15 @@ as Containers.Doubly_Linked_Lists except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The type List needs finalization if and only if
     type Element_Type needs finalization.]}
+
+  @begin{ImplNote}
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+    @ChgAdded{Version=[3],Text=[The type List cannot depend on package
+    Ada.Finalization unless the element type depends on that package.
+    The objects returned from the Iterator and Reference functions probably do
+    depend on package Ada.Finalization. Restricted environments may need to
+    avoid use of those functions and their associated types.]}
+  @end{ImplNote}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The allocation of internal storage includes a
@@ -1069,13 +1179,6 @@ as Containers.Hashed_Maps except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
 
-  @begin{ImplNote}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Hashed_Maps
-      cannot depend on package Ada.Finalization (because that package
-      has Preelaborate categorization).]}
-  @end{ImplNote}
-
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type Map is declared with
     discriminants that specify both the capacity (number of elements) and
@@ -1089,6 +1192,15 @@ as Containers.Hashed_Maps except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The type Map needs finalization if and only if type
       Key_Type or type Element_Type needs finalization.]}
+
+  @begin{ImplNote}
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+    @ChgAdded{Version=[3],Text=[The type Map cannot depend on package
+    Ada.Finalization unless the element or key type depends on that package.
+    The objects returned from the Iterator and Reference functions probably do
+    depend on package Ada.Finalization. Restricted environments may need to
+    avoid use of those functions and their associated types.]}
+  @end{ImplNote}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The description of Reserve_Capacity
@@ -1218,13 +1330,6 @@ as Containers.Ordered_Maps except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
 
-  @begin{ImplNote}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Ordered_Maps
-      cannot depend on package Ada.Finalization (because that package
-      has Preelaborate categorization).]}
-  @end{ImplNote}
-
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type Map is declared with a
     discriminant that specifies the capacity (maximum number of elements)
@@ -1237,6 +1342,15 @@ as Containers.Ordered_Maps except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The type Map needs finalization if and only if
     type Element_Type needs finalization.]}
+
+  @begin{ImplNote}
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+    @ChgAdded{Version=[3],Text=[The type Map cannot depend on package
+    Ada.Finalization unless the element type depends on that package.
+    The objects returned from the Iterator and Reference functions probably do
+    depend on package Ada.Finalization. Restricted environments may need to
+    avoid use of those functions and their associated types.]}
+  @end{ImplNote}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The allocation of a new node includes a check that
@@ -1343,13 +1457,6 @@ as Containers.Hashed_Sets except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
 
-  @begin{ImplNote}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Hashed_Sets
-      cannot depend on package Ada.Finalization (because that package
-      has Preelaborate categorization).]}
-  @end{ImplNote}
-
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type Set is declared with
     discriminants that specify both the capacity (number of elements) and
@@ -1363,6 +1470,15 @@ as Containers.Hashed_Sets except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The type Set needs finalization if and only if type
       Key_Type or type Element_Type needs finalization.]}
+
+  @begin{ImplNote}
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+    @ChgAdded{Version=[3],Text=[The type Set cannot depend on package
+    Ada.Finalization unless the element or key type depends on that package.
+    The objects returned from the Iterator and Reference functions probably do
+    depend on package Ada.Finalization. Restricted environments may need to
+    avoid use of those functions and their associated types.]}
+  @end{ImplNote}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The description of Reserve_Capacity
@@ -1487,13 +1603,6 @@ as Containers.Ordered_Sets except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
 
-  @begin{ImplNote}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Ordered_Sets
-      cannot depend on package Ada.Finalization (because that package
-      has Preelaborate categorization).]}
-  @end{ImplNote}
-
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type Set is declared with a
     discriminant that specifies the capacity (maximum number of elements)
@@ -1506,6 +1615,15 @@ as Containers.Ordered_Sets except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The type Set needs finalization if and only if
     type Element_Type needs finalization.]}
+
+  @begin{ImplNote}
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+    @ChgAdded{Version=[3],Text=[The type Set cannot depend on package
+    Ada.Finalization unless the element type depends on that package. The
+    objects returned from the Iterator and Reference functions probably do
+    depend on package Ada.Finalization. Restricted environments may need to
+    avoid use of those functions and their associated types.]}
+  @end{ImplNote}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[If Insert (or Include) adds an element, a check is
@@ -1611,13 +1729,6 @@ semantics as Containers.Multiway_Trees except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
 
-  @begin{ImplNote}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[Package Containers.Bounded_Multiway_Trees
-      cannot depend on package Ada.Finalization (because that package
-      has Preelaborate categorization).]}
-  @end{ImplNote}
-
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type Tree is declared with a
     discriminant that specifies the capacity (maximum number of elements)
@@ -1630,6 +1741,15 @@ semantics as Containers.Multiway_Trees except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The type Tree needs finalization if and only if
     type Element_Type needs finalization.]}
+
+  @begin{ImplNote}
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+    @ChgAdded{Version=[3],Text=[The type Tree cannot depend on package
+    Ada.Finalization unless the element type depends on that package. The
+    objects returned from the Iterator and Reference functions probably do
+    depend on package Ada.Finalization. Restricted environments may need to
+    avoid use of those functions and their associated types.]}
+  @end{ImplNote}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The allocation of internal storage includes a
@@ -1974,13 +2094,13 @@ package Containers.Synchronized_Queue_Interfaces has the following declaration:]
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Enqueue}
      (Container : @key[in out] Queue;
       New_Item  : @key[in]     Element_Type) @key[is abstract]
-       @key[with] Is_Synchronized => By_Entry;]}
+       @key[with] Synchronization => By_Entry;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Dequeue}
      (Container : @key[in out] Queue;
       Element   :    @key[out] Element_Type) @key[is abstract]
-       @key[with] Is_Synchronized => By_Entry;]}
+       @key[with] Synchronization => By_Entry;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Current_Use} (Container : Queue) @key[return] Count_Type @key[is abstract];
@@ -2472,6 +2592,223 @@ generic formal Element_Type is indefinite.]}
   Containers.Indefinite_Unbounded_Synchronized_Queues, and
   Containers.Indefinite_Unbounded_Priority_Queues are new.]}
 @end{Extend2005}
+
+
+@LabeledAddedSubclause{Version=[3],Name=[Example of Container Use]}
+
+@begin{Examples}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[The following example is an implementation of
+Dijkstra's shortest path algorithm in a directed graph with positive distances.
+The graph is represented by a map from nodes to sets of edges.]}
+
+@begin{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[with] Ada.Containers.Vectors;
+@key[with] Ada.Containers.Doubly_Linked_Lists;
+@key[use] Ada.Containers;
+@key[generic]
+   @key[type] Node @key[is range] <>;
+@key[package] Shortest_Paths @key[is]
+   @key[type] Distance @key[is new] Float @key[range] 0.0 .. Float'Last;
+   @key[type] Edge @key[is record]
+      To, From : Node;
+      Length   : Distance;
+   @key[end record];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[package] Node_Maps @key[is new] Vectors (Node, Node);
+   --  @Examcom{The algorithm builds a map to indicate the node used to reach a given}
+   --  @Examcom{node in the shortest distance.}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[package] Adjacency_Lists @key[is new] Doubly_Linked_Lists (Edge);
+   @key[use] Adjacency_Lists;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[package] Graphs @key[is new] Vectors (Node, Adjacency_Lists.List);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[package] Paths @key[is new] Doubly_Linked_Lists (Node);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] Shortest_Path
+     (G : Graphs.Vector; Source : Node; Target : Node) @key[return] Paths.List
+      @key[with] Pre => G (Source) /= Adjacency_Lists.Empty_List;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[end] Shortest_Paths;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[package body] Shortest_Paths @key[is]
+   @key[function] Shortest_Path
+     (G : Graphs.Vector; Source : Node; Target : Node) @key[return] Paths.List
+   @key[is]
+      @key[use] Adjacency_Lists, Node_Maps, Paths, Graphs;
+      Reached  : @key[array] (Node) @key[of] Boolean := (@key[others] => False);
+      --  @ExamCom{The set of nodes whose shortest distance to the source is known.}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      Reached_From : @key[array] (Node) @key[of] Node;
+      So_Far   : @key[array] (Node) @key[of] Distance := (@key[others] => Distance'Last);
+      The_Path : Paths.List := Paths.Empty_List;
+      Nearest_Distance : Distance;
+      Next     : Node;
+   @key[begin]
+      Reached (Source) := True;
+      So_Far (Source)  := 0.0;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      @key[while not] Reached (Target) @key[loop]
+         Nearest_Distance := Distance'Last;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[         --  @Examcom{Find closest node not reached yet, by iterating over all nodes.}
+         --  @Examcom{A more efficient algorithm uses a priority queue for this step.}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[         Next := Source;
+         @key[for] N @key[in] Node'First .. Node'Last @key[loop]
+            @key[if not] Reached (N)
+              @key[and then] So_Far (N) < Nearest_Distance @key[then]
+                 Next := N;
+                 Nearest_Distance := So_Far (N);
+            @key[end if];
+         @key[end loop];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[         @key[if] Next = Source @key[then]  --  @Examcom{No next node found, graph is not connected}
+            @key[return] Paths.Empty_List;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[         @key[else]
+            Reached (Next) := True;
+         @key[end if];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[         --  @ExamCom{Update minimum distance to newly reachable nodes.}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[         @key[for] E @key[of] G (Next) @key[loop]
+            @key[if not] Reached (E.To) @key[then]
+               Nearest_Distance :=
+                 Distance'Min (So_Far (E.To) + So_Far (Next),
+                               So_Far (E.To));]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[               @key[if] Nearest_Distance < So_Far (E.To) @key[then]
+                  Reached_From (E.To) := Next;
+                  So_Far (E.To) := Nearest_Distance;
+               @key[end if];
+            @key[end if];
+         @key[end loop];
+      @key[end loop];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      --  @ExamCom{Rebuild path from target to source.}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      @key[declare]
+         N : Node := Target;
+      @key[begin]
+         @key[while] N /= Source @key[loop]
+            N := Reached_From (N);
+            Prepend (The_Path, N);
+         @key[end loop];
+      @key[end];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[      @key[return] The_Path;
+   @key[end];
+@key[end] Shortest_Paths;]}
+
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[Note that the effect of the
+Constant_Indexing aspect (on type Vector) and the Implicit_Dereference aspect
+(on type Reference_Type) is that]}
+
+@begin{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[G (Next)]}
+
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[is a convenient short hand for]}
+
+@begin{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[G.Constant_Reference (Next).Element.@key[all]]}
+
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[Similarly, the effect of the loop:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[for] E @key[of] G (Next) @key[loop]
+   @key[if not] Reached (E.To) @key[then]
+      ...
+   @key[end if];
+@key[end loop];]}
+
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[is the same as:]}
+
+@begin{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[for] C @key[in] G (Next).Iterate @key[loop]
+   @key[declare]
+      E : Edge @key[renames] G (Next)(C).@key[all];
+   @key[begin]
+      @key[if not] Reached (E.To) @key[then]
+         ...
+      @key[end if];
+   @key[end];
+@key[end loop];]}
+
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[which is the same as:]}
+
+@begin{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[declare]
+   L : Adjacency_Lists.List @key[renames] G (Next);
+   C : Adjacency_Lists.Cursor := L.First;
+@key[begin]
+   @key[while] Has_Element (C) @key[loop]
+      @key[declare]
+         E : Edge @key[renames] L(C).@key[all];
+      @key[begin]
+         @key[if not] Reached (E.To) @key[then]
+            ...
+         @key[end if];
+      @key[end];
+      C := L.Next (C);
+   @key[end loop];
+@key[end];]}
+
+@end{Example}
+@end{Examples}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+  @ChgAdded{Version=[3],Text=[This example of container use is new.]}
+@end{DiffWord2005}
+
 
 
 

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2011/06/18 07:20:52 $}
+@Comment{$Date: 2011/06/19 05:19:10 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.113 $}
+@Comment{$Revision: 1.114 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2650,9 +2650,10 @@ or Finalize is applied to the containing object.
 @begin{StaticSem}
 @leading@keepnext@;The following language-defined library package exists:
 @begin{Example}@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020],ARef=[AI95-00126-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
 @key[package] Ada.Finalization @key[is]@ChildUnit{Parent=[Ada],Child=[Finalization]}
-    @key[pragma] Preelaborate(Finalization);@Chg{New=[
-    @key[pragma] Remote_Types(Finalization);],Old=[]}
+    @key[pragma] @Chg{Version=[3],New=[Pure],Old=[Preelaborate]}(Finalization);@Chg{Version=[3],New=[],Old=[@Chg{New=[
+    @key[pragma] Remote_Types(Finalization);],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
     @key[type] @AdaTypeDefn{Controlled} @key[is abstract tagged private];@Chg{Version=[2],New=[
@@ -2715,7 +2716,7 @@ of Controlled only.
   @ChgAdded{Version=[2],Text=[For Ada 2005, we considered making these types
   interfaces. That would have the advantage of allowing them to be added
   to existing trees. But that was rejected both because it would cause
-  massive disruption to existing implementations, and because it would be
+  massive disruptions to existing implementations, and because it would be
   very incompatible due to the "no hidden interfaces" rule. The latter rule
   would prevent a tagged private type from being completed with a derivation
   from Controlled or Limited_Controlled @em a very common idiom.]}
@@ -3449,6 +3450,14 @@ Controlled types and user-defined finalization are new to Ada 95.
   are initialized by default. This is needed so that all of the new cases
   are covered.]}
 @end{DiffWord95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Package Ada.Finalization now has Pure categorization, so it can be mentioned
+  for any package. Note that this does not change the preelaborability of
+  objects descended from Controlled and Limited_Controlled.]}
+@end{Extend2005}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0013-1]}

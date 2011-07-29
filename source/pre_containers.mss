@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.78 $ $Date: 2011/05/03 06:34:09 $ $Author: randy $ }
+@comment{ $Revision: 1.79 $ $Date: 2011/06/19 05:19:11 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2011/05/03 06:34:09 $}
+@Comment{$Date: 2011/06/19 05:19:11 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -369,8 +369,9 @@ for an implementation to be a single contiguous array.]}
 package Containers.Vectors has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0084-1]}
-@ChgAdded{Version=[2],Text=[@key{generic}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0084-1],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[@key[with] Ada.Iterator_Interfaces;
+],Old=[]}@key{generic}
    @key{type} Index_Type @key{is range} <>;
    @key{type} Element_Type @key{is private};
    @key{with function} "=" (Left, Right : Element_Type)
@@ -387,7 +388,12 @@ package Containers.Vectors has the following declaration:]}
    @AdaObjDefn{No_Index} : @key{constant} Extended_Index := Extended_Index'First;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Vector} @key{is tagged private};
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Vector} @key{is tagged private}@Chg{Version=[3],New=[
+      @key[with] Constant_Indexing => Constant_Reference,
+           Variable_Indexing => Reference,
+           Default_Iterator  => Iterate,
+           Iterator_Element  => Element_Type],Old=[]};
    @key{pragma} Preelaborable_Initialization(Vector);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -399,6 +405,13 @@ package Containers.Vectors has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean;]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[package] @AdaPackDefn{Vector_Iterator_Interfaces} @key[is new]
+       Ada.Iterator_Interfaces (Cursor, Has_Element);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "=" (Left, Right : Vector) @key{return} Boolean;]}
@@ -494,6 +507,35 @@ package Containers.Vectors has the following declaration:]}
       Position  : @key{in}     Cursor;
       Process   : @key{not null access procedure}
                       (Element : @key{in out} Element_Type));]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[type] Constant_Reference_Type
+         (Element : @key[not null access constant] Element_Type) @key[is private]
+      @key[with] Implicit_Dereference => Element;]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Reference_Type} (Element : @key[not null access] Element_Type) @key[is private]
+      @key[with] Implicit_Dereference => Element;]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Constant_Reference} (Container : @key[aliased in] Vector;
+                                Index     : @key[in] Index_Type)
+      @key[return] Constant_Reference_Type;]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Reference} (Container : @key[aliased in out] Vector;
+                       Index     : @key[in] Index_Type)
+      @key[return] Reference_Type;]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Constant_Reference} (Container : @key[aliased in] Vector;
+                                Position  : @key[in] Cursor)
+      @key[return] Constant_Reference_Type;]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Reference} (Container : @key[aliased in out] Vector;
+                       Position  : @key[in] Cursor)
+      @key[return] Reference_Type;]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Vector; Source : @key{in} Vector);]}
@@ -671,7 +713,8 @@ package Containers.Vectors has the following declaration:]}
                       Item      : Element_Type) @key{return} Boolean;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean;]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean;]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure}  @AdaSubDefn{Iterate}
@@ -682,6 +725,14 @@ package Containers.Vectors has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Reverse_Iterate}
      (Container : @key{in} Vector;
       Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] Vector)
+      @key[return] Iterators.Reversible_Iterator'Class;]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] Vector; Start : @key[in] Cursor)
+      @key[return] Iterators.Reversible_Iterator'Class;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{generic}
@@ -890,6 +941,23 @@ parameter.]}
 @end{Itemize}
 
 @begin{DescribeCode}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Has_Element (Position : Cursor) @key{return} Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if Position designates
+an element, and returns False otherwise.]}
+
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This function may not detect cursors that
+  designate deleted elements; such cursors are invalid (see below) and the
+  result of calling Has_Element with an invalid cursor is unspecified (but
+  not erroneous).]}
+@end{Honest}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1268,6 +1336,130 @@ the actual Element parameter of Process.@key{all} shall be unconstrained.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[The element designated by Position
 is not an empty element after successful completion of this operation.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[@key[type] Constant_Reference_Type
+      (Element : @key[not null access constant] Element_Type) @key[is private]
+   @key[with] Implicit_Dereference => Element;]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[type] Reference_Type (Element : @key[not null access] Element_Type) @key[is private]
+   @key[with] Implicit_Dereference => Element;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Constant_Reference_Type and
+Reference_Type need finalization.@PDefn2{Term=<needs finalization>,
+Sec=<language-defined type>}]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[The default initialization of an object of type
+Constant_Reference_Type or Reference_Type propagates Program_Error.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[It is expected that Reference_Type (and
+  Constant_Reference_Type) will be a controlled type, for which finalization
+  will have some action to terminate the tampering check for the associated
+  container. If the object is created by default, however, there is no
+  associated container. Since this is useless, and supporting this case would
+  take extra work, we define it to raise an exception.]}
+@end{Reason}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Constant_Reference (Container : @key[aliased in] Vector;
+                             Index     : @key[in] Index_Type)
+   @key[return] Constant_Reference_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[This routine (combined with the
+Constant_Indexing and Implicit_Dereference aspects) provides a convenient way to
+gain read access to the individual elements of a container starting with an
+index value.]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[If Index is not in the range First_Index (Container)
+.. Last_Index (Container), then Constraint_Error is propagated. Otherwise,
+Constant_Reference returns an object whose discriminant is an access value that
+designates the element at position Index. Program_Error is propagated if any
+operation tampers with the elements of Container while the object returned by
+Constant_Reference exists and has not been finalized.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Reference (Container : @key[aliased in out] Vector;
+                    Index     : @key[in] Index_Type)
+   @key[return] Reference_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
+Variable_Indexing and Implicit_Dereference aspects) provides a convenient way to
+gain read and write access to the individual elements of a container starting
+with an index value.]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[If Index is not in the range First_Index (Container)
+.. Last_Index (Container), then Constraint_Error is propagated. Otherwise,
+Reference returns an object whose discriminant is an access value that
+designates the element at position Index. Program_Error is propagated if any
+operation tampers with the elements of Container while the object returned by
+Reference exists and has not been finalized.]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[The element designated by Position is not an empty
+element after successful completion of this operation.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Constant_Reference (Container : @key[aliased in] Vector;
+                             Position  : @key[in] Cursor)
+   @key[return] Constant_Reference_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
+Constant_Indexing and Implicit_Dereference aspects) provides a convenient way to
+gain read access to the individual elements of a container starting with a
+cursor.]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[If Position equals No_Element, then Constraint_Error
+is propagated; if Position does not designate an element in Container, then
+Program_Error is propagated. Otherwise, Constant_Reference returns an object
+whose discriminant is an access value that designates the element designated by
+Position. Program_Error is propagated if any operation tampers with the elements
+of Container while the object returned by Constant_Reference exists and has not
+been finalized.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Reference (Container : @key[aliased in out] Vector;
+                    Position  : @key[in] Cursor)
+   @key[return] Reference_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
+Variable_Indexing and Implicit_Dereference aspects) provides a convenient way to
+gain read and write access to the individual elements of a container starting
+with a cursor.]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[If Position equals No_Element, then Constraint_Error
+is propagated; if Position does not designate an element in Container, then
+Program_Error is propagated. Otherwise, Reference returns an object whose
+discriminant is an access value that designates the element designated by
+Position. Program_Error is propagated if any operation tampers with the elements
+of Container while the object returned by Reference exists and has not been
+finalized.]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[The element designated by Position is not an empty
+element after successful completion of this operation.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -1866,19 +2058,22 @@ encountered.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Has_Element (Position : Cursor) @key{return} Boolean;]}
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@Chg{Version=[3],New=[],Old=[@key{function} Has_Element (Position : Cursor) @key{return} Boolean;]}]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Returns True if Position designates
-an element, and returns False otherwise.]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[3],New=[],Old=[Returns True if Position designates
+an element, and returns False otherwise.]}]}
 
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This function may not detect cursors that
+  @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0212-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[This function may not detect cursors that
   designate deleted elements; such cursors are invalid (see below) and the
   result of calling Has_Element with an invalid cursor is unspecified (but
-  not erroneous).]}
+  not erroneous).]}]}
 @end{Honest}
 
 @begin{Example}
@@ -1928,6 +2123,56 @@ exception raised by Process is propagated.]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Iterates over the elements in
 Container as per Iterate, except that elements are traversed in reverse index
 order.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] Vector) @key[return] Iterators.Reversible_Iterator'Class;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a reversible
+iterator object that will generate a loop parameter designating each node in
+Container, starting with the first node and moving the cursor as per the Next
+function when used as a forward iterator, and starting with the last node and
+moving the cursor as per the Previous function when used as a reverse iterator.
+Program_Error is propagated if any operation (in particular, the
+@nt{sequence_of_statements} of the @nt{loop_statement} whose
+@nt{iterator_specification} denotes this object) tampers with the cursors of
+Container while the returned object exists. The returned object from Iterate
+needs finalization.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] Vector; Start : @key[in] Cursor) @key[return] Iterators.Reversible_Iterator'Class;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does
+not designate an item in Container, then Program_Error is propagated. If Start
+is No_Element, the call is equivalent to Iterate (Container). Otherwise, Iterate
+returns a reversible iterator object that will generate a loop parameter
+designating each node in Container, starting with the node designated by From
+and moving the cursor as per the Next function when used as a forward iterator,
+or moving the cursor as per the Previous function when used as a reverse
+iterator. Program_Error is propagated if any operation (in particular, the
+@nt{sequence_of_statements} of the @nt{loop_statement} whose
+@nt{iterator_specification} denotes this object) tampers with the cursors of
+Container while the returned object exists. The returned object from Iterate
+needs finalization.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[Exits are allowed from the loops
+  created using the iterator objects. In particular, to stop the iteration at a
+  particalar cursor, just add]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[exit when] Cur = Stop;]}
+@end{Example}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[in the body of the loop.]}
+@end{Discussion}
+
 
 @end{DescribeCode}
 
@@ -2198,6 +2443,25 @@ Sec=(cause)}]}
   appending of new elements.]}
 @end{Discussion}
 
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[Execution is erroneous if the vector associated with the result of a call to
+Reference or Constant_Reference is finalized before the result object returned
+by the call to Reference or Constant_Reference is finalized.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Each object of Reference_Type and
+  Constant_Reference_Type probably contains some reference to the originating
+  container. If that container is prematurely finalized (which is only possible
+  via Unchecked_Deallocation, as accessibility checks prevent passing a
+  container to Reference that will not live as long as the result), the
+  finalization of the object of Reference_Type will try to access a non-existent
+  object. This is a normal case of a dangling pointer created by
+  Unchecked_Deallocation; we have to explicitly mention it here as the pointer
+  in question is not visible in the specification of the type. (This is the same
+  reason we have to say this for invalid cursors.)]}
+@end{Reason}
+
 @end{Erron}
 
 @begin{ImplReq}
@@ -2370,6 +2634,13 @@ value of Last_Index.]}
   entity @i<E> may no longer be use-visible, resulting in errors. This should
   be rare and is easily fixed if it does occur.]}
 @end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Added iterator, reference, and indexing support to make containers more
+  convenient to use.]}
+@end{Extend2005}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
