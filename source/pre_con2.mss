@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.8 $ $Date: 2011/06/19 05:19:11 $ $Author: randy $ }
+@comment{ $Revision: 1.9 $ $Date: 2011/07/29 05:59:20 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Vectors]}
 
@@ -2134,10 +2134,10 @@ case, it then copies New_Item onto the queue.]}
    Element   :    @key[out] Element_Type) @key[is abstract];]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0251-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If the queue is empty, then Dequeue
-blocks until an item becomes available. In any case, it then returns a copy of
-the element at the head of the queue, and removes it from the container.]}
+blocks until an item becomes available. In any case, it then assigns the
+element at the head of the queue to Element, and removes it from the queue.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2161,8 +2161,30 @@ elements that have been in the queue at any one time.]}
 
 @end{StaticSem}
 
+@begin{Notes}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0251-1]}
+@ChgAdded{Version=[3],Text=[Unlike other language-defined containers, there are
+no queues whose element types are indefinite. Elements of an indefinite type can
+be handled by defining the element of the queue to be a holder container (see
+@RefSecNum{The Generic Package Containers.Indefinite_Holders}) of the indefinite
+type, or to be an explicit access type that designates the indefinite type.]}
+
+  @begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[There are no indefinite queues as a useful
+  definition for Dequeue is not possible. Dequeue cannot be a function as Ada
+  does not have entries that are functions (thus conditional and timed calls
+  would not be possible) and moreover protected functions do not allow modifying
+  the queue object (thus it doesn't work even if we decided we didn't care about
+  conditional and timed calls). If Dequeue is an entry, then the dequeued object
+  would have to be an @key[out] parameter and that would require the queue client to
+  guess the tag and constraints of the value that will be dequeued (otherwise
+  Constraint_Error would be raised), and that is rarely going to be possible.]}
+  @end{Reason}
+@end{Notes}
+
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0251-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic
   package Containers.Synchronized_Queue_Interfaces is new.]}
 @end{Extend2005}
@@ -2394,11 +2416,12 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
       @key[overriding]
       @key[entry] @AdaSubDefn{Dequeue} (Element: @key[out] Queue_Interfaces.Element_Type);]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0251-1]}
 @ChgAdded{Version=[3],Text=[      @key[not overriding]
-      @key[entry] @AdaSubDefn{Dequeue_Only_High_Priority}
-        (Low_Priority : @key[in]     Queue_Priority;
-         Element      :    @key[out] Queue_Interfaces.Element_Type);]}
+      @key[procedure] @AdaSubDefn{Dequeue_Only_High_Priority}
+        (At_Least : @key[in]     Queue_Priority;
+         Element  : @key[in out] Queue_Interfaces.Element_Type;
+         Success  :    @key[out] Boolean);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
@@ -2456,15 +2479,30 @@ inserted after the existing equivalent elements.]}
   specify that Queue needs finalization, because it is visibly protected.]}
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
-@ChgAdded{Version=[3],Text=[Dequeue_Only_High_Priority is the same as Dequeue,
-except that it blocks until the element @i<E> at the head of the queue satisfies
-Before(Get_Priority(@i<E>), Low_Priority).]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0251-1]}
+@ChgAdded{Version=[3],Text=[For a call on Dequeue_Only_High_Priority, if the
+head of the non-empty queue is @i<E>, and the function Before(At_Least,
+Get_Priority(@i<E>)) returns False, then @i<E> is assigned to
+Element and then removed from the queue, and Success is set to True;
+otherwise Success is set to False and Element is unchanged.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0251-1]}
+  @ChgAdded{Version=[3],Text=[Unlike Dequeue, Dequeue_Only_High_Priority is not
+  blocking; it always returns immediately.]}
+@end{Ramification}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0251-1]}
+  @ChgAdded{Version=[3],Text=[The use of Before is "backwards" so that it acts
+  like ">=" (it is defined similarly to ">"); thus we dequeue only when it is
+  False.]}
+@end{Reason}
 
 @end{StaticSem}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0251-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic
   package Containers.Unbounded_Priority_Queues is new.]}
 @end{Extend2005}
@@ -2512,11 +2550,12 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
       @key[overriding]
       @key[entry] @AdaSubDefn{Dequeue} (Element: @key[out] Queue_Interfaces.Element_Type);]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0251-1]}
 @ChgAdded{Version=[3],Text=[      @key[not overriding]
-      @key[entry] @AdaSubDefn{Dequeue_Only_High_Priority}
-        (Low_Priority : @key[in]     Queue_Priority;
-         Element      :    @key[out] Queue_Interfaces.Element_Type);]}
+      @key[procedure] @AdaSubDefn{Dequeue_Only_High_Priority}
+        (At_Least : @key[in]     Queue_Priority;
+         Element  : @key[in out] Queue_Interfaces.Element_Type;
+         Success  :    @key[out] Boolean);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
@@ -2567,30 +2606,9 @@ implicit pointers or dynamic allocation.]}]}
 @end{ImplAdvice}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0251-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic
   package Containers.Bounded_Priority_Queues is new.]}
-@end{Extend2005}
-
-
-@LabeledAddedSubclause{Version=[3],Name=[Indefinite Synchronized Queues]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
-@ChgAdded{Version=[3],Text=[There are three generic packages
-Containers.Indefinite_Synchronized_Queue_Interfaces@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Synchronized_Queue_Interfaces]},
-Containers.Indefinite_Unbounded_Synchronized_Queues@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Unbounded_Synchronized_Queues]}, and
-Containers.Indefinite_Unbounded_Priority_Queues@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Unbounded_Priority_Queues]}.
-These are identical to Containers.Synchronized_Queue_Interfaces,
-Containers.Unbounded_Synchronized_Queues, and
-Containers.Unbounded_Priority_Queues, respectively, except except that the
-generic formal Element_Type is indefinite.]}
-
-@begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic
-  packages Containers.Indefinite_Synchronized_Queue_Interfaces,
-  Containers.Indefinite_Unbounded_Synchronized_Queues, and
-  Containers.Indefinite_Unbounded_Priority_Queues are new.]}
 @end{Extend2005}
 
 

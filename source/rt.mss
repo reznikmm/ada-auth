@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.98 $ $Date: 2011/06/04 05:28:20 $ $Author: randy $ }
+@comment{ $Revision: 1.99 $ $Date: 2011/07/29 05:59:20 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2011/06/04 05:28:20 $}
+@Comment{$Date: 2011/07/29 05:59:20 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -5933,7 +5933,7 @@ aspect of a task is evaluated for each task object (see
 associated with the task object whose task declaration specifies the aspect.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
-@ChgAdded{Version=[3],Text=[If a task is not explictly assigned to any domain,
+@ChgAdded{Version=[3],Text=[If a task is not explicitly assigned to any domain,
 it is assigned to that of the activating task. A task always executes on some
 CPU in its domain.]}
 

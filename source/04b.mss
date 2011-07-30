@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/06/18 07:20:52 $}
+@Comment{$Date: 2011/07/29 05:59:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1634,7 +1634,7 @@ Sec=(during evaluation of an uninitialized allocator)}]}
   @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
   Constraint_Error is raised if this check fails.
   This check and the initialization of the object are performed in
-  an arbitrary order.
+  an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 
 @begin{Discussion}
 AI83-00150.

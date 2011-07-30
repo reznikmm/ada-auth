@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.68 $ $Date: 2011/06/18 07:20:52 $}
+@comment{$Revision: 1.69 $ $Date: 2011/07/29 05:59:21 $}
 
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
 @UnNumberedSection(Foreword to this version of the Ada Reference Manual)
@@ -1300,6 +1300,12 @@ by the text @i{@shrink{This paragraph was deleted.}} Deleted paragraphs include
 empty paragraphs that were numbered in the @Chg{Version=[3],New=[1995 edition of
 the],Old=[original]} Ada Reference Manual. Similar markings and numbering is
 used for changes to annotations.],Old=[]}
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The paragraph number is considered part of the
+  paragraph; when a paragraph is moved to a different paragraph number, it is
+  marked as changed even if the contents have not changed.]}
+@end{Honest}
 @end{AARMOnly}
 @end{Intro}
 @end{NotISO}

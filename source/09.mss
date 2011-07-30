@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2011/06/04 05:28:19 $}
+@Comment{$Date: 2011/07/29 05:59:20 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.104 $}
+@Comment{$Revision: 1.105 $}
 
 @begin{Intro}
 
@@ -4516,7 +4516,7 @@ a @i(delay_)@nt<expression> or @nt<entry_index> is not evaluated until
 after evaluating the corresponding @nt<condition>, if any.
 Selection and execution of one open alternative, or of the else part, then
 completes the execution of the @nt{selective_accept}; the rules for
-this selection are described below.
+this selection are described below.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 
 Open @nt{accept_alternative}s are first considered. Selection of one such
 alternative takes place immediately if the corresponding
@@ -5019,7 +5019,7 @@ type@Redundant[; they need not all be of the same task type.]
 
 @PDefn2{Term=[execution], Sec=(abort_statement)}
 For the execution of an @nt<abort_statement>, the given @i(task_)@nt<name>s
-are evaluated in an arbitrary order.
+are evaluated in an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 @Defn2{Term=[abort], Sec=(of a task)}
 @Defn{abnormal task}
 @PDefn2{Term=[task state], Sec=(abnormal)}

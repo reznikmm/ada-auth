@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2011/06/19 05:19:10 $}
+@Comment{$Date: 2011/07/29 05:59:19 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.114 $}
+@Comment{$Revision: 1.115 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1632,19 +1632,31 @@ extension, the following language-defined aspects may be specified with an
 @nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
 
 @begin{Description}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0250-1]}
 @ChgAdded{Version=[3],Text=[Type_Invariant@\This aspect
    shall be specified by an @nt{expression}, called an @i<invariant
    expression>.@Defn{invariant expression}
-   Type_Invariant may be specified on a @nt{private_type_declaration} or a
-   @nt{private_extension_declaration}.]}
+   Type_Invariant may be specified on a @nt{private_type_declaration}, on a
+   @nt{private_extension_declaration}, or on a @nt{full_type_declaration} that
+   declares the completion of a private type or private extension.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
 @ChgAdded{Version=[3],Text=[Type_Invariant'Class@\This aspect
    shall be specified by an @nt{expression}, called an @i<invariant
    expression>.
    Type_Invariant'Class may be specified on a @nt{private_type_declaration} or a
    @nt{private_extension_declaration}.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0254-1]}
+  @ChgAdded{Version=[3],Text=[A class-wide type invariant cannot be hidden
+  in the private part, as the creator of an extension needs to know about it
+  in order to conform to it in any new or overriding operations. On the other
+  hand, a specific type invariant is not inherited, so that no operation
+  outside of the original package needs to conform to it; thus there is no
+  need for it to be visible.]}
+@end{Reason}
+
 @end{Description}
 
 @begin{Resolution}
@@ -1684,6 +1696,10 @@ for an abstract type.]}
 
 @begin{StaticSem}
 
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0250-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[If the Type_Invariant aspect is
+specified for a type @i<T>, then the invariant expression applies to @i<T>.]]}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
 @ChgAdded{Version=[3],Text=[@Redundant[If the Type_Invariant'Class aspect is
 specified for a tagged type @i<T>, then the invariant expression applies to all
@@ -1691,7 +1707,7 @@ descendants of @i<T>.]]}
 
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[This is formally defined in
+  @ChgAdded{Version=[3],Text=["Applies" is formally defined in
   @RefSecNum{Aspect Specifications}.]}
 @end{TheProof}
 @end{StaticSem}
@@ -1708,41 +1724,53 @@ following places, on the specified object(s):@Defn2{Term=[assertion policy],
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[After default initialization of an object of
-  type @i<T>, on the new object;]}
+  @ChgAdded{Version=[3],Text=[After successful default initialization of an
+    object of type @i<T>, the check is performed on the new object;]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[After conversion to type @i<T>, on the result of
-  the conversion;]}
+  @ChgAdded{Version=[3],Text=[After successful conversion to type @i<T>, the
+    check is performed on the result of the conversion;]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[After a call on the Read or Input stream attribute
-  of the type @i<T>, on the object initialized by the stream attribute;]}
+  @ChgAdded{Version=[3],Text=[After assigning to a view conversion, outside the
+    immediate scope of @i<T>, that converts from @i<T> or one or more record
+    extensions (and no private extensions) of @i<T> to an ancestor of type
+    @i<T>, a check is performed on the part of the object that is of type T;
+    similarly, for passing a view conversion as an @key[out] or @key[in out]
+    parameter outside the immediate scope of @i<T>, this check is performed upon
+    successful return;]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[Upon return from a call on any
-  subprogram or entry that:]}
+  @ChgAdded{Version=[3],Text=[After a successful call on the Read or Input
+    stream attribute of the type @i<T>, the check is performed on the object
+    initialized by the stream attribute;]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[Upon successful return from a call
+  on any subprogram or entry that:]}
   @begin{Itemize}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[has a result of type @i<T>, or one or more
-      @key[in out] or @key[out] parameters of type @i<T>,]}
-
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
     @ChgAdded{Version=[3],Text=[is explicitly declared within the immediate
-      scope of type @i<T> (or is a part of an instance of a generic unit
-      declared within the immediate scope of type @i<T>), and]}
+      scope of type @i<T> (or by an instance of a generic unit, and the generic
+      is declared within the immediate scope of type @i<T>), and]}
 
     @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[is visible outside the immediate scope of
-      type @i<T> or overrides an operation that is visible outside the
-      immediate scope of @i<T>,]}
+    @ChgAdded{Version=[3],Text=[is visible outside the immediate scope of type
+      @i<T> or overrides an operation that is visible outside the immediate
+      scope of @i<T>, and]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[has a result with a part of type @i<T>, or one
+      or more @key[in out] or @key[out] parameters with a part of type @i<T>, or
+      an access to variable parameter whose designated type has a part of type
+      @i<T>.]}
   @end{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],NoPrefix=[T],Text=[on the result object of type @i<T>,
-  and on each @key[in out] or @key[out] actual parameter of type @i<T>.]}
+  @ChgAdded{Version=[3],NoPrefix=[T],Text=[the check is performed on each such
+  part of type @i<T>.]}
 @end{Itemize}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0250-1]}
 @ChgAdded{Version=[3],Text=[The invariant check consists of the evaluation of
 each invariant expression that applies to @i<T>, on each of the objects
 specified above. If any of these evaluate to False,
@@ -1750,40 +1778,18 @@ Ada.Assertions.Assertion_Error is raised at the point of the object
 initialization, conversion, or call.@Defn2{Term=(Assertion_Error),
 Sec=(raised by failure of run-time check)} If a given call requires more than one
 evaluation of an invariant expression, either for multiple objects of a single
-type or for multiple types with invariants, the order of the evaluations is not
-specified, and if one of them evaluates to False, it is not specified whether
+type or for multiple types with invariants, the evaluations are performed in
+an arbitrary order, and if one of them evaluates to False, it is not specified whether
 the others are evaluated. Any invariant check is performed prior to copying back
-any by-copy @key[in out] or @key[out] parameters.  It is not specified whether
+any by-copy @key[in out] or @key[out] parameters. Invariant checks,
+any postcondition check, and any
 any constraint checks associated with by-copy @key[in out] or @key[out]
-parameters are performed before or after any invariant checks. It is not
-specified whether any postcondition checks are performed before or after any
-invariant checks.]}
+parameters are performed in an arbitrary order.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1],ARef=[AI05-0250-1]}
 @ChgAdded{Version=[3],Text=[The invariant checks performed on a call are determined by the subprogram or entry
 actually invoked, whether directly, as part of a dispatching call, or as part of a
-call through an access-to-subprogram value. For the purposes of
-these checks, if the subprogram actually invoked is primitive for some type @i<T> and
-is inherited from some other type, the checks needed are determined as if the
-body of the of the entity is declared directly as a primitive of type @i<T>;
-in addition, if the subprogram is neither null nor abstract, the Type_Invariant(s)
-that apply to the parameter types of the invoked body are checked.]}
-
-@begin{Ramification}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[ We use the @ldquote@;for the purposes@rdquote
-  part of the rule to include additional Type_Invariant'Class checks from those
-  that apply to the original subprogram. This may happen if the operation is
-  inherited by a derived type that has both a parent and a progenitor, and
-  both the parent type and progenitor type have defined a Type_Invariant'Class.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[For inherited concrete routines, we require the
-  original Type_Invariant to be evaluated as well as the inherited
-  Type_Invariant'Classes and the current type's Type_Invariant in order that the
-  semantics of an explicitly defined wrapper that does nothing but call the
-  original routine is the same as that of an inherited routine.]}
-@end{Ramification}
+call through an access-to-subprogram value.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1]}
 @ChgAdded{Version=[3],Text=[@Redundant[If the assertion policy in effect at the
@@ -1813,9 +1819,28 @@ performed on a call on that subprogram or entry.]]}
 
 @end{Runtime}
 
+@begin{Notes}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0250-1]}
+  @ChgAdded{Version=[3],Text=[A call of a primitive subprogram of type @i<NT>
+  that is inherited from type @i<T> will need to satisfy the specific invariants
+  of both the types @i<NT> and @i<T>. A call of a primitive subprogram of type
+  @i<NT> that is redefined for type @i<NT> need to satisfy only the specific
+  invariants of type @i<NT>.]}
+
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This follows from the definition of inheritance
+  as view conversions of the parameters of the type, along with the rule
+  require checks on such view conversions. We require this in order that the
+  semantics of an explicitly defined wrapper that does nothing but call the
+  original routine is the same as that of an inherited routine.]}
+@end{TheProof}
+
+
+@end{Notes}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1],ARef=[AI05-0250-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Type_Invariant aspects are new.]}
 @end{Extend2005}
@@ -2832,7 +2857,7 @@ similarly.]}
 
 Initialize and other initialization
 operations are done in an arbitrary order,
-except as follows.
+except as follows.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 Initialize is applied to an object after initialization
 of its subcomponents, if any
 @Redundant[(including both implicit initialization and Initialize calls)].
@@ -2887,7 +2912,7 @@ the values of the components of the object are first
 adjusted in an arbitrary order,
 and then, if the object is
 @Chg{Version=[3],New=[nonlimited ],Old=[]}controlled,
-Adjust is called.
+Adjust is called.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 Adjusting the value of an elementary object has no effect@Redundant[,
 nor does adjusting the value of a composite object with no
 controlled parts.]
@@ -3678,7 +3703,7 @@ For the @i{finalization} of an object:
   If @Chg{Version=[3],New=[the full type of ],Old=[]}the object is
   @Chg{Version=[3],New=[],Old=[of ]}a composite type, then after performing
   the above actions, if any, every component of the object
-  is finalized in an arbitrary order, except as follows:
+  is finalized in an arbitrary order, except as follows:@PDefn2{Term=[arbitrary order],Sec=[allowed]}
   if the object has
   a component with an access discriminant constrained by a per-object
   expression, this component is finalized before any components that
@@ -3739,14 +3764,14 @@ this rule is applied as though each
 such object that still exists had been created
 in an arbitrary order
 at the first freezing point
-(see @RefSecNum{Freezing Rules})
+(see @RefSecNum{Freezing Rules})@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 of the ultimate ancestor type@Chg{Version=[2],New=[; the finalization of
 these objects is called the @i<finalization of the
 collection>@Defn{finalization of the collection}@Defn2{Term=[collection],
 Sec=[finalization of]}],Old=[]}.@Chg{Version=[3],New=[ Objects created by
 allocators for an anonymous access type that are not coextensions of some other
 object, are finalized in an arbitrary order during the finalization of their
-associated master.],Old=[]}]}@Chg{Version=[2],
+associated master.@PDefn2{Term=[arbitrary order],Sec=[allowed]}],Old=[]}]}@Chg{Version=[2],
 New=[ After the finalization of a master is complete, the objects finalized
 as part of its finalization cease to @i<exist>, as do any types and subtypes
 defined and created within the master.@PDefn2{Term=[exist],Sec=[cease to]}
@@ -3814,7 +3839,7 @@ which is the set of objects created by @nt{allocator}s of @i<T>,
 or of types derived from @i<T>. Unchecked_Deallocation removes an object from
 its collection. Finalization of a collection consists of finalization of each
 object in the collection, in an arbitrary order. The collection of an access
-type is an object implicitly declared at the following place:]}
+type is an object implicitly declared at the following place:@PDefn2{Term=[arbitrary order],Sec=[allowed]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0190-1]}
@@ -4239,7 +4264,7 @@ the @nt{allocator}.]}
 @nt{allocator}s for an access type whose storage pool supports subpools (see
 @RefSecNum{Storage Subpools}) as if the objects were created (in an arbitrary
 order) at the point where the storage pool was elaborated instead of the first
-freezing point of the access type.]}
+freezing point of the access type.@PDefn2{Term=[arbitrary order],Sec=[allowed]}]}
 
   @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}

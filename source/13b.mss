@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/06/19 05:19:11 $}
+@Comment{$Date: 2011/07/29 05:59:20 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -667,8 +667,10 @@ using the features in @RefSec{Interface to Other Languages}.
 @begin{Examples}
 @leading@keepnext@i{Example of a code statement:}
 @begin{Example}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 M : Mask;
-@key[procedure] Set_Mask; @key[pragma] Inline(Set_Mask);
+@key[procedure] Set_Mask@Chg{Version=[3],New=[
+  @key[with] Inline],Old=[]};@Chg{Version=[3],New=[],Old=[ @key[pragma] Inline(Set_Mask);]}
 
 @key[procedure] Set_Mask @key[is]
   @key[use] System.Machine_Code; --@RI{ assume @lquotes@;@key[with] System.Machine_Code;@rquotes@; appears somewhere above}
@@ -1820,8 +1822,8 @@ unconstrained discriminated subtype with defaults.]}
 @end{Discussion}
 @end{Itemize}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1],ARef=[AI05-0116-1],ARef=[AI05-0193-1]}
-@ChgAdded{Version=[3],Text=[For one of the calls of Allocate described above,
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1],ARef=[AI05-0116-1],ARef=[AI05-0193-1],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[For each of the calls of Allocate described above,
 @i{P} (equivalent to @i{T}'Storage_Pool) is passed as the Pool parameter. The
 Size_In_Storage_Elements parameter indicates the number
 of storage elements to be allocated, and is no more than
@@ -2139,7 +2141,7 @@ the following is a possible use:
 @key[type] Mark_Release_Pool_Type
    (Pool_Size : Storage_Elements.Storage_Count@Chg{Version=[3],New=[],Old=[;
     Block_Size : Storage_Elements.Storage_Count]})
-        @key[is] @key[new] Root_Storage_Pool @key[with @Chg{New=[],Old=[limited ]}private];@Chg{Version=[3],New=[
+        @key[is] @key[new] @Chg{Version=[3],New=[Subpools.Root_Storage_Pool_with_Subpools],Old=[Root_Storage_Pool]} @key[with @Chg{New=[],Old=[limited ]}private];@Chg{Version=[3],New=[
            -- @Examcom{As defined in package MR_Pool, see @RefSecNum{Storage Subpool Example}}],Old=[]}
 
 ...
@@ -2167,7 +2169,7 @@ User-defined storage pools are new to Ada 95.
 @end{Extend83}
 
 @begin{DiffWord83}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1],ARef=[AI05-0190-1]}
 Ada 83 @Chg{Version=[3],New=[originally introduced the],Old=[had a]}
 concept called a @lquotes@;collection,@rquotes@;
 which is similar to what we call a storage pool.
@@ -2179,8 +2181,9 @@ same derivation class
 share the same storage pool,
 but other (unrelated) access types can also share the same storage pool,
 either by default, or as specified by the user.
-A collection @Chg{Version=[3],New=[is],Old=[was]} an amorphous collection
-of objects@Chg{Version=[3],New=[ ( mainly used to describe finalization of
+A collection @Chg{Version=[3],New=[is],Old=[was]} an amorphous
+@Chg{Version=[3],New=[grouping],Old=[collection]}
+of objects@Chg{Version=[3],New=[ (mainly used to describe finalization of
 access types)],Old=[]};
 a storage pool is a more concrete concept @em hence
 the different name.
@@ -2906,10 +2909,10 @@ to ensure that all @nt{allocator}s use the default pool.]}
   as it has no effect in any known Ada implementations and it seems to promise
   capabilities not expected in Ada implementations. This is usually not an
   incompatibility, as the pragma merely becomes unrecognized (with a warning)
-  and can be implemented as a implementation-defined pragma if desired. However,
-  it is incompatible if is (still) implemented as an implementation-defined
-  pragma, that someone used this pragma in a unit, and
-  and also used restriction No_Implementation_Pragmas on that unit. In that
+  and can be implemented as an implementation-defined pragma if desired. However,
+  it is incompatible if it is (now) implemented as an implementation-defined
+  pragma, someone used this pragma in a unit, and they
+  also used restriction No_Implementation_Pragmas on that unit. In that
   case, the pragma would now violate the restriction; but use of this pragma
   (which does nothing) should be very rare, so this is not a significant
   issue.]}
@@ -2970,6 +2973,9 @@ exists:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Create_Subpool} (Pool : @key[in out] Root_Storage_Pool_With_Subpools)
       @key[return not null] Subpool_Handle @key[is abstract];]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0252-1]}
+@ChgAdded{Version=[3],Text=[   -- @Examcom{The following operations are intended for pool implementers:}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Pool_of_Subpool} (Subpool : @key[not null] Subpool_Handle)
@@ -3101,29 +3107,57 @@ an access type, the access type is called a
 @i<subpool access type>.@Defn{subpool access type}@Defn2{Term=[access type],Sec=[subpool]}
 A subpool access type shall be a pool-specific access type.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3],ARef=[AI05-0252-1]}
 @ChgAdded{Version=[3],Text=[The accessibility level of a subpool access type
-shall not be statically deeper than that of the storage pool object.]}
-
+shall not be statically deeper than that of the storage pool object.
+If the specified storage pool object is a storage pool that supports subpools,
+then the @nt{name} that denotes the object shall not denote part of a formal
+parameter, nor shall it denote part of a dereference of a value of a
+non-library-level general access type.
+@PDefn{generic contract issue}In addition to the places where
+@LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
+these rules also apply in the private part of an instance of a generic unit.]}
 @end{Legality}
 
 @begin{Runtime}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
-@ChgAdded{Version=[3],Text=[When a subpool access type is frozen (see
-@RefSecNum{Freezing Rules}), a check is made that the
-accessibility level of the subpool access type is not deeper than that of
-the storage pool object. Program_Error is raised if this
-check fails.@IndexCheck{Accessibility_Check}@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3],ARef=[AI05-0252-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[When an access type with a specified
+storage pool is frozen (see @RefSecNum{Freezing Rules}), if the tag of the
+storage pool object identifies a storage pool that supports subpools, the
+following checks are made:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the @nt{name} used to specify the storage pool
+  object does not denote part of a formal parameter nor part of a dereference of
+  a value of a non-library-level general access type; and@IndexCheck{Accessibility_Check}]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the accessibility level of the access type is not
+  deeper than that of the storage pool object.@IndexCheck{Accessibility_Check}]}
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0252-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Program_Error is raised if either
+of these checks
+fail.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[This check (and its static counterpart) ensures
-  that the type of the allocated objects exist at least as long as the storage
+  that the type of the allocated objects exists at least as long as the storage
   pool object, so that the subpools are finalized (which finalizes any remaining
   allocated objects) before the type of the objects ceases to exist. The access
   type itself (and the associated collection) will cease to exist before the
   storage pool ceases to exist.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We also disallow the use of formal parameters and
+  dereferences of non-library-level general access types when specifying a
+  storage pool object if it supports subpools, because the "apparent"
+  accessibility level is potentially deeper than that of the underlying object.
+  Neither of these cases is very likely to occur in practice.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
@@ -3227,7 +3261,7 @@ additional information with each subpool provided by Create_Subpool.]}
 @end{Notes}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3],ARef=[AI05-0252-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Subpools and the
   package System.Storage_Pools.Subpools are new.]}
 @end{Extend2005}
@@ -3268,7 +3302,7 @@ following effects:]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Any of the objects allocated from the subpool that
-still exist are finalized in an arbitrary order;]}
+still exist are finalized in an arbitrary order;@PDefn2{Term=[arbitrary order],Sec=[allowed]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The following @Redundant[dispatching] call is then made:]}
@@ -3883,8 +3917,9 @@ current compilation or environment, not the entire partition.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00257-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],
-Sec=(No_Implementation_Pragmas)}@Chg{Version=[3],New=[@Defn{No_Implementation_Pr
-agmas restriction}], Old=[]}No_Implementation_Pragmas @\There are no
+Sec=(No_Implementation_Pragmas)}@Chg{Version=[3],
+New=[@Defn{No_Implementation_Pragmas restriction}],
+Old=[]}No_Implementation_Pragmas @\There are no
 implementation-defined pragmas or pragma arguments. This restriction applies
 only to the current compilation or environment, not the entire partition.]}
 
@@ -3939,7 +3974,7 @@ language defined:]}
 @begin{Description}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00381-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Dependence)}No_Dependence @\Specifies
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Dependence)}@Defn{No_Dependence restriction}No_Dependence @\Specifies
    a library unit on which there are no semantic dependences.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0242-1]}
@@ -4572,7 +4607,7 @@ is],Old=[attributes of the parent type are]}
 inherited @Chg{Version=[2],New=[according to the rules given],
 Old=[as specified]} in
 @RefSecNum(Operational and Representation Items)@Chg{Version=[2],
-New=[ if the attribute is @Chg{Version=[3],New=[@Redundant[specified and]],
+New=[ if the attribute is @Chg{Version=[3],New=[@Redundant[specified and] ],
 Old=[]}available for the parent type at the point where @i{T}
 is declared. For a tagged derived type, these attributes are not
 inherited, but rather],Old=[; otherwise,]} the default

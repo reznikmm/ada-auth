@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/06/19 05:19:10 $}
+@Comment{$Date: 2011/07/29 05:59:20 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -3344,10 +3344,10 @@ identified by the @nt{aspect_mark}, an @nt{aspect_definition} specifies:]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The identified aspect of the
 associated entity, or in some cases, the view of the entity defined by the
 declaration, is as specified by the @nt{aspect_definition} (or by the default of
-True when boolean). Whether an @nt{aspect_specification} applies to an entity or
+True when boolean). Whether an @nt{aspect_specification} @i<applies> to an entity or
 only to the particular view of the entity defined by the declaration is
 determined by the @nt{aspect_mark} and the kind of entity. The following aspects
-are view specific:]}
+are view specific:@PDefn2{Term=[applies],Sec=[aspect]}]}
 
 @begin{Itemize}
 
@@ -3364,8 +3364,8 @@ are view specific:]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @ChgAdded{Version=[3],Text=[All other @nt{aspect_specification}s are associated
-with the entity, and apply to all views of the entity, unless otherwise
-specified in this International Standard.]}
+with the entity, and @i<apply> to all views of the entity, unless otherwise
+specified in this International Standard.@PDefn2{Term=[applies],Sec=[aspect]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[If the aspect_mark includes 'Class,
@@ -3374,12 +3374,12 @@ then:]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[if the associated entity is a tagged type, the
-  specification applies to all descendants of the type;]}
+  specification @i<applies> to all descendants of the type;@PDefn2{Term=[applies],Sec=[aspect]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[if the associated entity is a primitive subprogram
-  of a tagged type @i<T>, the specification applies to the corresponding primitive
-  subprogram of all descendants of @i<T>.]}
+  of a tagged type @i<T>, the specification @i<applies> to the corresponding primitive
+  subprogram of all descendants of @i<T>.@PDefn2{Term=[applies],Sec=[aspect]}]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0229-1]}

@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.50 $ $Date: 2011/06/18 07:20:52 $ $Author: randy $ }
+@Comment{ $Revision: 1.51 $ $Date: 2011/07/29 05:59:21 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2011/06/18 07:20:52 $}
+@Comment{$Date: 2011/07/29 05:59:21 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -954,11 +954,13 @@ prior to program execution]:]}
 @end{InnerItemize}
 @end{Itemize}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0263-1]}
 If an implementation supports @nt[pragma] Restrictions for a particular
 argument, then except for the restrictions No_Unchecked_Deallocation,
-No_Unchecked_Conversion, No_Access_Subprograms, and No_Unchecked_Access,
- the associated restriction applies to the
-run-time system.
+No_Unchecked_Conversion, No_Access_Subprograms,
+@Chg{Version=[3],New=[],Old=[and ]}No_Unchecked_Access,
+@Chg{Version=[3],New=[and the equivalent use of No_Dependence, ],Old=[]}the
+associated restriction applies to the run-time system.
 @begin[reason]
 Permission is granted for the run-time system to use the specified
 otherwise-restricted features, since the use of these features may
@@ -1142,6 +1144,10 @@ proscribed
   @ChgAdded{Version=[3],Text=[New restriction
   No_Standard_Allocators_After_Elaboration is added to the list of
   restrictions that are required by this annex.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0263-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Ada 2005 restriction No_Dependence
+  is added where needed (this was missed in Ada 2005).]}
 @end{DiffWord2005}
 
 

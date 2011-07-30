@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2011/06/19 05:19:10 $}
+@Comment{$Date: 2011/07/29 05:59:19 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.46 $}
+@Comment{$Revision: 1.47 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -393,7 +393,7 @@ or of type @i(T) and tag-indeterminate
 @PDefn2{Term=[execution], Sec=(assignment_statement)}
 For the execution of an @nt{assignment_statement},
 the @i(variable_)@nt<name> and the @nt<expression>
-are first evaluated in an arbitrary order.
+are first evaluated in an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 @begin{Ramification}
   Other rules of the language may require that the
   bounds of the variable be determined prior to evaluating
@@ -1068,6 +1068,12 @@ The order of creating the loop parameter and evaluating the
 since the creation of the loop parameter has no side effects (other
 than possibly raising Storage_Error, but anything can do that).
 @end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[For details about the execution of a
+@nt{loop_statement} with the @nt{iteration_scheme} being @key[for]
+@nt{iterator_specification}, see @RefSecNum{Generalized Loop Iteration}.]]}
+
 @end{RunTime}
 
 @begin{Notes}
@@ -1152,7 +1158,7 @@ The constant-ness of loop parameters is specified in
 @end{DiffWord83}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0262-1]}
   @ChgAdded{Version=[3],Text=[Generalized @nt{iterator_specification}s are
   allowed in @key[for] loops; these are documented as an extension in the
   appropriate clause.]}
@@ -1332,7 +1338,7 @@ an @nt{iterator_specification}.]}
 rhs="@Chg{Version=[3],New=<
     @Syn2{defining_identifier} @key[in] [@key{reverse}] @SynI{iterator_}@Syn2{name}
   | @Syn2{defining_identifier} [: @Syn2{subtype_indication}] @key[of] [@key{reverse}] @SynI{array_}@Syn2{name}
-  | @Syn2{defining_identifier} [: @Syn2{subtype_indication}] @key[of] [@key{reverse}] @SynI{iteratable_}@Syn2{name}>,Old=<>}"}
+  | @Syn2{defining_identifier} [: @Syn2{subtype_indication}] @key[of] [@key{reverse}] @SynI{iterable_}@Syn2{name}>,Old=<>}"}
 @end{Syntax}
 
 @begin{Resolution}

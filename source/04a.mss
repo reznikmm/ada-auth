@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/06/18 07:20:52 $}
+@Comment{$Date: 2011/07/29 05:59:19 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.115 $}
+@Comment{$Revision: 1.116 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -357,7 +357,8 @@ the individual entry of the entry family with the specified index value.
 @begin{RunTime}
 @PDefn2{Term=[evaluation], Sec=(indexed_component)}
 For the evaluation of an @nt<indexed_component>, the @nt{prefix} and the
-@nt{expression}s are evaluated in an arbitrary order. The value of
+@nt{expression}s are evaluated in an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
+The value of
 each @nt<expression> is converted to the corresponding index type.
 @PDefn2{Term=[implicit subtype conversion],Sec=(array index)}
 @IndexCheck{Index_Check}
@@ -432,7 +433,7 @@ Its bounds are those defined by the @nt{discrete_range}.
 @PDefn2{Term=[evaluation], Sec=(slice)}
 For the evaluation of a @nt{slice},
 the @nt{prefix} and the @nt{discrete_range}
-are evaluated in an arbitrary order.
+are evaluated in an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 @IndexCheck{Index_Check}
 @Defn{null slice}
 If the @nt{slice} is not a @i(null slice)
@@ -1256,7 +1257,7 @@ tagged type with at least one of the aspects Constant_Indexing or
 Variable_Indexing specified.@Defn{indexable type}
 An @i<indexable object> is an object of an indexable type.@Defn{indexable object}
 @Redundant[A @nt{generalized_indexing} is a @nt{name} that denotes the result
-of calling a function named by a Contant_Indexing or Variable_Indexing aspect.]]}
+of calling a function named by a Constant_Indexing or Variable_Indexing aspect.]]}
 
 @end{StaticSem}
 
@@ -1590,7 +1591,7 @@ components or ancestor part of the anonymous object.
 @Defn2{Term=[assignment operation],
   Sec=(during evaluation of an @nt{aggregate})}
 Obtaining the values and the assignments occur in an
-arbitrary order.
+arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 The value of the @nt{aggregate} is the value of this object.
 @begin{Discussion}
   The ancestor part is the set of components inherited from the
@@ -1965,7 +1966,7 @@ occur in an arbitrary order, except that the @nt<expression>
 for a discriminant is evaluated (and converted) prior to the
 elaboration of any per-object constraint that depends on it, which in
 turn occurs prior to the evaluation and conversion of the @nt{expression} for
-the component with the per-object constraint.
+the component with the per-object constraint.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 @begin{Ramification}
 The conversion in the first rule might raise Constraint_Error.
 @end{Ramification}
@@ -2184,9 +2185,9 @@ The type of the @nt{extension_aggregate} shall be
 @nt<ancestor_part>@Chg{Version=[3],New=[ (the @i<ancestor> type)@Defn2{Term=[ancestor type],
 Sec=<of an @nt<extension_aggregate>>}],Old=[]},
 through one or more record extensions (and no private
-extensions).@Chg{Version=[3],New=[If the @nt{ancestor_part} is a @nt{subtype_mark},
-the view of the ancestor type from which the type is descended
-(see @RefSecNum{Private Operations})
+extensions).@Chg{Version=[3],New=[ If the @nt{ancestor_part} is a
+@nt{subtype_mark}, the view of the ancestor type from which the type
+is descended (see @RefSecNum{Private Operations})
 shall not have unknown discriminants.],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00306-01]}
@@ -2256,7 +2257,7 @@ as for an object of the ancestor type.
 Any implicit initializations or evaluations are performed
 in an arbitrary order, except that the @nt<expression>
 for a discriminant is evaluated prior to any other evaluation
-or initialization that depends on it.
+or initialization that depends on it.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 
 @IndexCheck{Discriminant_Check}
 If the type of the @nt<ancestor_part> has
@@ -2344,7 +2345,7 @@ The extension aggregate syntax is new.
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0115-1]}
   @ChgAdded{Version=[3],Text=[@b[Correction:] An @nt{ancestor_part} that is a
   subtype with unknown discriminants is now explicitly illegal. Such a
-  subtype should not be used used to declare an object, and the @nt{ancestor_part}
+  subtype should not be used to declare an object, and the @nt{ancestor_part}
   acts like an object. The Ada 95 rules did not disallow such cases, so it
   is possible that code exists that uses such an ancestor, but this should
   be rare.]}
@@ -2599,7 +2600,7 @@ proceeds in two steps:
 @begin(enumerate)
   Any @nt{discrete_choice}s of this aggregate and of its subaggregates
   are evaluated in an arbitrary order, and converted to the corresponding
-  index type;
+  index type;@PDefn2{Term=[arbitrary order],Sec=[allowed]}
   @PDefn2{Term=[implicit subtype conversion],Sec=(choices of aggregate)}
 
   The array component expressions of the aggregate
@@ -2608,6 +2609,7 @@ proceeds in two steps:
   the array type; an array component expression
   is evaluated once for each associated component.
   @PDefn2{Term=[implicit subtype conversion],Sec=(expressions of aggregate)}
+  @PDefn2{Term=[arbitrary order],Sec=[allowed]}
 @end(enumerate)
 @begin(Ramification)
   Subaggregates are not separately evaluated.
@@ -2616,7 +2618,7 @@ proceeds in two steps:
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
 @ChgAdded{Version=[3],Text=[We don't need to say that <> is
-  evaluated once for each component, as it means that each component
+  evaluated once for each component, as <> means that each component
   is @i{initialized by default}. That means that the actions defined
   for default initialization are applied to each component individually.
   Initializing one component by default and copying
@@ -3237,6 +3239,7 @@ left-to-right or chosen order of association.
 The two operands of an expression of the form X op Y, where
 op is a binary operator, are evaluated in an arbitrary order,
 as for any @nt<function_call> (see @RefSecNum(Subprogram Calls)).
+
 @end{Notes}
 
 @begin{Examples}
@@ -3877,8 +3880,8 @@ for those composite types covered earlier) is defined as follows:
   @i<universal_access> type (anonymous access types have no equality operators
   of their own).]}
 
-  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0123-1]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0123-1]}
   @ChgAdded{Version=[2],Text=[For a component with a @Chg{Version=[3],New=[record],
   Old=[tagged]} type @i{T},
   @lquotes@;the primitive equals operator@rquotes@; is the one with two
@@ -3938,7 +3941,8 @@ whose @nt{membership_choice_list} has a single membership_choice],Old=[]},
 the @nt<simple_expression> and the
 @Chg{Version=[3],New=[@nt{membership_choice}],Old=[@nt<range> (if any)]} are
 evaluated in an arbitrary order@Chg{Version=[3],New=[; the result is the
-result of the individual membership test for the @nt{membership_choice}],Old=[]}.
+result of the individual membership test for
+the @nt{membership_choice}],Old=[]}.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
 @ChgAdded{Version=[3],Text=[For the evaluation of a membership test using
@@ -4162,7 +4166,7 @@ conversions.],Old=[]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0123-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatiblities with Ada 2005}
   Late and hidden overriding of equality for untagged record types is now
-  prohibited. This is necessary to make composition of equality predicable.
+  prohibited. This is necessary to make composition of equality predictable.
   It should always be possible to move the overridding to an earlier spot
   where it will be legal.]}
 @end{Incompatible2005}
@@ -4402,10 +4406,11 @@ the absolute value of B. Signed integer division satisfies the identity:
 @end(example)
 
 @begin{WideAbove}
-@Leading@;The signed integer modulus operator is defined such
-that the result of A @key(mod) B has
-the sign of B and an absolute value less than the absolute value
-of B; in addition, for some signed integer value N, this result
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0260-1]}
+The signed integer modulus operator is defined such
+that the result of A @key(mod) B @Chg{Version=[3],New=[is either zero,
+or ],Old=[]}has the sign of B and an absolute value less than the
+absolute value of B; in addition, for some signed integer value N, this result
 satisfies the relation:
 @begin(example)
 A = B*N + (A @key(mod) B)
@@ -4698,12 +4703,17 @@ operators when they had defined user-defined versions.],Old=[]}
 @end{Incompatible95}
 
 @begin{DiffWord2005}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0020-1],ARef=[AI05-0209-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0020-1],ARef=[AI05-0209-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Wording was added to clarify
   that @i{universal_fixed} "*" and "/" does not apply if an appropriate
   operator is declared for a partial (or incomplete) view of the designated type.
   Otherwise, adding a partial (or incomplete) view could make some
   "*" and "/" operators ambiguous.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0260-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> The wording for the @key[mod]
+  operator was corrected so that a result of 0 does not have to have
+  "the sign of B" (which is impossible if B is negative).]}
 @end{DiffWord2005}
 
 
@@ -5253,7 +5263,7 @@ routine on an array A with an index subtype T can be written:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Post => (A'Length < 2
-   @key[or else] (@key[for all] I @key[in] A'First .. T'Pred(A'Last) | A (I) <= A (T'Succ (I))))]}
+   @key[or else] (@key[for all] I @key[in] A'First .. T'Pred(A'Last) => A (I) <= A (T'Succ (I))))]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
@@ -5262,7 +5272,7 @@ is composite (as opposed to prime) can be written:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[pragma] Assert (@key[for some] X @key[in] 2 .. N / 2 | N @key[mod] X = 0);]}
+@ChgAdded{Version=[3],Text=[@key[pragma] Assert (@key[for some] X @key[in] 2 .. N / 2 => N @key[mod] X = 0);]}
 @end{Example}
 
 @end{Examples}

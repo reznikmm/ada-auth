@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2011/05/07 03:43:07 $}
+@Comment{$Date: 2011/07/29 05:59:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1549,7 +1549,7 @@ ASCII characters; no characters outside of the 7-bit range are required.]}
 @ChgAdded{Version=[2],Text=[When this International Standard mentions the
 conversion of some character or sequence of characters to upper case, it means
 the character or sequence of characters obtained by using
-@Chg{Version=[3],New=[simple upper case folding],Old=[locale-independent
+@Chg{Version=[3],New=[simple upper case mapping],Old=[locale-independent
 full case folding]}, as defined by documents referenced in the note in section 1
 of ISO/IEC 10646:2003.]}
 @begin{Discussion}

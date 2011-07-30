@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.54 $ $Date: 2011/06/04 05:28:20 $ $Author: randy $ }
+@comment{ $Revision: 1.55 $ $Date: 2011/07/29 05:59:20 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2011/06/04 05:28:20 $}
+@Comment{$Date: 2011/07/29 05:59:20 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -956,8 +956,11 @@ it@Chg{New=[s visible part],Old=[]} shall not contain a nested
 @end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078],ARef=[AI95-00048-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 it shall not @Chg{New=[be, nor shall its visible part],Old=[]} contain@Chg{New=[,],Old=[]} the
-declaration of a subprogram to which a pragma Inline applies;
+declaration of a subprogram @Chg{Version=[3],New=[for],Old=[to]} which
+@Chg{Version=[3],New=[aspect],Old=[a pragma]} Inline @Chg{Version=[3],New=[is True],
+Old=[applies]};
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078],ARef=[AI95-00048-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00240-01],ARef=[AI95-00366-01]}

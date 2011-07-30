@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2011/06/04 05:28:19 $}
+@Comment{$Date: 2011/07/29 05:59:20 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1961,8 +1961,10 @@ compilation unit that says "@key{with} A;" when A's body does not
 exist.
 It has to be able to detect errors without looking at A's body.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 Similarly, the implementation has to be able to compile a call to a
-subprogram for which a @nt{pragma} Inline has been specified without
+subprogram for which @Chg{Version=[3],New=[aspect],Old=[a @nt{pragma}]}
+Inline has been specified without
 seeing the body of that subprogram @em inlining would not be
 achieved in this case, but the call is still legal.
 
@@ -1982,6 +1984,7 @@ The implementation may require that a compilation unit be legal before
 it can be inserted],Old=[inserting it]} into the environment.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00214-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 When a compilation unit that declares or renames a library unit
 is added to the environment,
 the implementation may remove from the environment
@@ -1999,18 +2002,19 @@ expanded name as the @nt<body_stub>.],Old=[]}
 When a given compilation unit is removed from the environment,
 the implementation may also remove any compilation unit that depends
 semantically upon the given one.
-If the given compilation unit contains the body of a subprogram to
-which a @nt{pragma} Inline applies,
+If the given compilation unit contains the body of a subprogram @Chg{Version=[3],New=[for],Old=[to]}
+which @Chg{Version=[3],New=[aspect],Old=[a @nt{pragma}]} Inline @Chg{Version=[3],New=[is True],Old=[applies]},
 the implementation may also remove any compilation unit containing a
 call to that subprogram.
 @begin{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 The permissions given in this paragraph correspond to the traditional
 model, where compilation units enter the environment by being
 compiled into it, and the compiler checks their legality at that time.
-A implementation model in which the environment consists of all
-source files in a given directory might not want to take advantage of
-these permissions.
+@Chg{Version=[3],New=[An],Old=[A]} implementation model in which the
+environment consists of all source files in a given directory might not
+want to take advantage of these permissions.
 Compilation units would not be checked for
 legality as soon as they enter the environment; legality checking
 would happen later, when compilation units are compiled.
@@ -2028,10 +2032,11 @@ compilation units in the environment;
 it doesn't matter what @nt{with_clause}s are attached to the new
 compilation unit that triggered all this.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 An implementation may have other modes in which compilation units
 in addition to the ones mentioned above are removed.
 For example, an implementation might inline subprogram calls without
-an explicit @nt{pragma} Inline.
+an explicit @Chg{Version=[3],New=[aspect],Old=[@nt{pragma}]} Inline.
 If so, it either has to have a mode in which that optimization is
 turned off, or it has to automatically regenerate code for the inlined
 calls without requiring the user to resubmit them to the compiler.
@@ -2680,7 +2685,6 @@ structure:
 @begin{Example}
 @key[task] @RI{Environment_Task};
 
-@ChgRef{Version=[2],Kind=[Revised]}@Comment{The fonts corrected below}
 @key[task] @key[body] @RI{Environment_Task} @key[is]
     ... (1) --@RI{ The environment }@nt{declarative_part}
             --@RI{ (that is, the sequence of }@nt{library_item}@RI{s) goes here.}

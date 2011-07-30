@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2011/06/18 07:20:52 $}
+@Comment{$Date: 2011/07/29 05:59:21 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -1067,8 +1067,8 @@ procedure nor an instance of a generic unit.]]}
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[@nt{Pragma} No_Return specifies that the No_Return
-aspect (see 6.3.2) for each procedure denoted by each @nt{local_name}
-given in the @nt{pragma} has the value True.]}
+aspect (see @RefSecNum{Non-returning Procedures}) for each procedure denoted
+by each @nt{local_name} given in the @nt{pragma} has the value True.]}
 @end{StaticSem}
 
 @begin{DiffWord2005}

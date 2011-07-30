@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/06/18 07:20:52 $}
+@Comment{$Date: 2011/07/29 05:59:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.87 $}
+@Comment{$Revision: 1.88 $}
 
 @LabeledClause{Array Types}
 
@@ -278,7 +278,7 @@ The elaboration of a @nt{component_@!definition} in an
 of the @nt{subtype_@!indication}@Chg{Version=[2],New=[ or @nt{access_definition}],Old=[]}.
 The elaboration of any @nt{discrete_@!subtype_@!definition}s
 and the elaboration of the
-@nt{component_@!definition} are performed in an arbitrary order.
+@nt{component_@!definition} are performed in an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 @end{RunTime}
 
 @begin{StaticSem}
@@ -314,7 +314,7 @@ inherits a boolean Default_Value aspect, the aspect may be specified to have any
 value for the derived type.]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[This is override the
+  @ChgAdded{Version=[3],Text=[This overrides the
   @RefSecNum{Aspect Specifications} rule that says that a boolean aspect
 with a value True cannot be changed.]}
 @end{Reason}

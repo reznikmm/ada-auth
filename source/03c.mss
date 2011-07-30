@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/06/04 05:28:19 $}
+@Comment{$Date: 2011/07/29 05:59:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.112 $}
+@Comment{$Revision: 1.113 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1799,13 +1799,15 @@ the call, if any;]}
 operator then the action comprises an invocation of that operator;]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0126-1],ARef=[AI05-0197-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0126-1],ARef=[AI05-0197-1],ARef=[AI05-0250-1],ARef=[AI05-0254-1]}
 @ChgAdded{Version=[2],Text=[otherwise, the action is the same as the action for
 the corresponding operation of the parent type@Chg{Version=[3],New=[ or
-progenitor type from which the operation was inherited. If there is more than
-one such corresponding operation, the action is that for the operation that is
-not a null procedure, if any; otherwise, the action is that of an arbitrary one
-of the operations],Old=[]}.]}
+progenitor type from which the operation was inherited except that additional
+invariants (see @RefSecnum{Type Invariants}) and class-wide postconditions
+(see @RefSecNum{Preconditions and Postconditions}) may apply. If there is more
+than one such corresponding operation, the action is that for the operation that
+is not a null procedure, if any; otherwise, the action is that of an arbitrary
+one of the operations],Old=[]}.]}
 @end{Itemize}
 
 @begin{Honest}
@@ -1843,7 +1845,7 @@ first bullet would apply.) We call the non-null routine if one exists.]}
 @ChgAdded{Version=[3],Text=[Any explicit declaration for an inherited
 corresponding operation has to be an overriding routine.
 These rules mean that a dispatching call executes the
-the overriding routine (if any) for the specific type.]}
+overriding routine (if any) for the specific type.]}
 @end{Ramification}
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
@@ -2612,7 +2614,8 @@ but then clients of the package would not have visibility to T.
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
-  An optional @nt{aspect_specification} can be used in a @nt{abstract_subprogram_declaration}.
+  An optional @nt{aspect_specification} can be used in an
+  @nt{abstract_subprogram_declaration}.
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
 
@@ -2620,7 +2623,7 @@ but then clients of the package would not have visibility to T.
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0198-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified that the predefined
   operator corresponding to an inherited abstract operator is also abstract. The
-  Ada 2005 rules casued the predefined operator and the inherited operator to
+  Ada 2005 rules caused the predefined operator and the inherited operator to
   override each other, which is weird. But the effect is the same either way
   (the operator is not considered for resolution).]}
 
@@ -2876,7 +2879,9 @@ unit.@PDefn{generic contract issue}]}
 the interface type and its first subtype],Old=[has no effect]}.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[An @nt{interface_list} is made up of
+  @ChgRef{Version=[3],Kind=[Revised]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[There is no other
+  effect. ],Old=[]}An @nt{interface_list} is made up of
   @nt{subtype_mark}s, which do not need to be elaborated, so the
   @nt{interface_list} does not either. This is consistent with the
   handling of @nt{discriminant_part}s.]}
@@ -4843,11 +4848,10 @@ determined by the point of call; it is the same level that the return object
 ultimately will have.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0051-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0051-1],ARef=[AI05-0253-1]}
 @ChgNote{Use ChgAdded below to get conditional Leading}
 @ChgAdded{Version=[2],Type=[Leading],Text=[]}
-The accessibility level of
-an object created by an @nt{allocator}
+The accessibility level of an object created by an @nt{allocator}
 is the same as that of
 the access type@Chg{Version=[2],New=[, except for an @nt{allocator} of an
 anonymous access type @Chg{Version=[3],New=[(an @i<anonymous allocator>) in
@@ -4859,7 +4863,10 @@ type conversion, the level is that of the target access type of the
 conversion],Old=[that defines the value of an access parameter or an access
 discriminant]}. For an @Chg{Version=[3],New=[anonymous
 allocator],Old=[@nt{allocator}]} defining the value of an access parameter, the
-accessibility level is that of the innermost master of the call. For one
+accessibility level is that of the innermost master of the call.
+@Chg{Version=[3],New=[For an anonymous allocator whose type is that of a
+stand-alone object of an anonymous access-to-object type, the accessibility
+level is that of the declaration of the stand-alone object. ],Old=[]}For one
 defining an access discriminant, the accessibility level is determined as
 follows:],Old=[.]}
 
@@ -5305,7 +5312,7 @@ is the library level.
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1]}
   @ChgAdded{Version=[3],Text=[The implementation of accessibility checks for
-  stand-alone objects of anonyomous access-to-object types can be similar to
+  stand-alone objects of anonymous access-to-object types can be similar to
   that for anonymous access-to-object parameters. A static level suffices; it
   can be calculated using rules similar to those previously described for access
   parameters.]}
@@ -5320,7 +5327,7 @@ is the library level.
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1]}
   @ChgAdded{Version=[3],Text=[For these cases, it is important to note that the
   @ldquote@;correct@rdquote static accessibility level for an access parameter
-  assigned to a stand-alone access parameter is the minimum of the passed in
+  assigned to a stand-alone access object is the minimum of the passed in
   level and the static accessibility level of the stand-alone object itself.
   This is true since the static accessibility level passed in might be deeper
   than that of the stand-alone object, but the dynamic accessibility of the
@@ -5333,11 +5340,12 @@ is the library level.
 @begin{Discussion}
 @Leading@keepnext@;Examples of accessibility:
 @begin{Example}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}@Comment{A1 is access-to-variable, X better be a variable}
 @key[package] @key[body] Lib_Unit @key[is]
     @key[type] T @key[is] @key[tagged] ...;
     @key[type] A0 @key[is] @key[access] @key[all] T;
     Global: A0 := ...;
-    @key[procedure] P(X: T) @key[is]
+    @key[procedure] P(X: @Chg{Version=[3],New=[@key[in out] ],Old=[]}T) @key[is]
         Y: @key[aliased] T;
         @key[type] A1 @key[is] @key[access] @key[all] T;
         Ptr0: A0 := Global; --@RI{ OK.}
@@ -5352,9 +5360,10 @@ is the library level.
 @key[end] Lib_Unit;
 @end{Example}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 The above illegal statements are illegal because the accessibility
-level of X and Y are statically deeper than the accessibility level
-of A0.
+@Chg{Version=[3],New=[levels],Old=[level]} of X and Y are statically deeper
+than the accessibility level of A0.
 In every possible execution of any program including this library
 unit, if P is called, the accessibility level of X will be
 (dynamically) deeper than that of A0.
@@ -5628,11 +5637,13 @@ denotes an aliased view of an object}:
   @end{Ramification}
   @begin(ImplNote)
     @ChgRef{Version=[2],Kind=[Revised]}
+    @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0148-1]}
     This check requires that some indication of lifetime is
     passed as an implicit parameter along with access parameters@Chg{Version=[2],
-    New=[ of an access-to-object type],Old=[]}.
-    No such requirement applies to @Chg{Version=[2],New=[other anonymous
-    access types],Old=[access discriminants]}, since
+    New=[ of an access-to-object type],Old=[]}.@Chg{Version=[3],New=[ A similar
+    indication is required for stand-alone objects of anonymous access-to-object
+    types.],Old=[]}No such requirement applies to @Chg{Version=[2],New=[other
+    anonymous access types],Old=[access discriminants]}, since
     the checks associated with them are all compile-time checks.
   @end(ImplNote)
 
@@ -5689,6 +5700,7 @@ denotes a subprogram}:
     different calling convention from other subprograms with the same
     profile.
 
+    @Comment{The change is from AI05-0239-1, just punctuation}
     Overload resolution ensures only that the profile
     is @Chg{Version=[3],New=[type conformant],Old=[type-conformant]}.
     This rule specifies that subtype conformance is required (which also
@@ -5976,7 +5988,7 @@ uses of anonymous access types.]}
   the actual can be more or less nested than the generic itself. This allows
   programs that were illegal for Ada 95 and for Ada 2005.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0148-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0148-1],ARef=[AI05-0253-1]}
   @ChgAdded{Version=[3],Text=[Eliminate the static
   accessibility definition for stand-alone objects of anonymous access-to-object
   types. This allows such objects to be used as temporaries without causing
@@ -6081,7 +6093,7 @@ For a call to a (non-protected) subprogram that has
 an explicit body, a check is made that the
 @Chg{New=[body],Old=[@nt{subprogram_body}]} is already elaborated.
 This check and the evaluations of any actual parameters of the call
-are done in an arbitrary order.
+are done in an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 @begin{Discussion}
   AI83-00180 specifies that there is no elaboration check for
   a subprogram defined by a @nt{pragma} Interface (or equivalently,
@@ -6104,7 +6116,7 @@ For a call to a protected operation of a protected type
 applies to the protected type),
 a check is made that the @nt<protected_body> is already elaborated.
 This check and the evaluations of any actual parameters of the call
-are done in an arbitrary order.
+are done in an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 @begin{Discussion}
   A protected type has only one elaboration @lquotes@;bit,@rquotes@; rather than
   one for each operation, because one call may result in evaluating
@@ -6143,7 +6155,7 @@ of them.
 For the instantiation of a generic unit that has a body, a check is
 made that this body is already elaborated.
 This check and the evaluation of any @nt{explicit_generic_actual_parameter}s
-of the instantiation are done in an arbitrary order.
+of the instantiation are done in an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 @end{Itemize}
 
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}

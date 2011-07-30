@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2011/06/18 07:20:52 $}
+@Comment{$Date: 2011/07/29 05:59:20 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.74 $}
+@Comment{$Revision: 1.75 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -43,12 +43,15 @@ we sometimes use @lquotes@;@i{occurrence}@rquotes@; as a
 short-hand for @lquotes@;exception occurrence.@rquotes@;
 @end{Honest}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0043-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0043-1],ARef=[AI05-0258-1]}
 @redundant[An @nt{exception_declaration} declares a name for an exception.
-An exception is raised initially @Chg{Version=[3],New=[],Old=[either ]}by a
-@nt{raise_statement}@Chg{Version=[3],New=[, by a call to
-Raise_Exception,],Old=[]}
-or by the failure of a language-defined check.
+
+An exception @Chg{Version=[3],New=[can be],Old=[is]} raised
+@Chg{Version=[3],New=[explicitly (for example,],Old=[initially either]}
+by a @nt{raise_statement}@Chg{Version=[3],New=[)],Old=[]}
+or@Chg{Version=[3],New=[ implicitly (for example,],Old=[]}
+by the failure of a language-defined check@Chg{Version=[3],New=[)],Old=[]}.
+
 When an exception arises, control can be transferred to a
 user-provided @nt{exception_handler} at the end of a
 @nt{handled_@!sequence_of_@!statements},
@@ -71,8 +74,9 @@ we have to make this distinction.
 
 @begin{DiffWord2005}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0043-1]}
-  @ChgAdded{Version=[3],Text=[@b<Correction:> Added a missing Ada 95
-  case to the list of ways that an exception can be initially raised.]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Generalized the introductory
+  description of how an exception can be raised so that it does not appear
+  to cover all of the cases.]}
 @end{DiffWord2005}
 
 
@@ -1532,9 +1536,11 @@ pragma is the declarative region for the entire compilation unit (or units) to
 which it applies.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00224-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[If a checking pragma applies to a generic instantiation, then the checking
 pragma also applies to the instance. If a checking pragma applies to a call to
-a subprogram that has a @nt<pragma> Inline applied to it, then the checking
+a subprogram @Chg{Version=[3],New=[for which aspect],Old=[that has a @nt<pragma>]}
+Inline @Chg{Version=[3],New=[is True],Old=[applied to it]}, then the checking
 pragma also applies to the inlined subprogram body.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}
@@ -2031,6 +2037,7 @@ This follows from the canonical semantics.
   that X.all belongs to the subtype Str10, without even "looking."
 @end{ImplNote}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn{extra permission to reorder actions}
 If an exception is raised due to the failure
 of a language-defined check,
@@ -2051,7 +2058,8 @@ whose check failed.
 @Defn{independent subprogram}
 An independent subprogram is one that is
 defined outside the library unit containing the construct whose check
-failed, and has no Inline @nt<pragma> applied to it.
+failed, and @Chg{Version=[3],New=[for which the],Old=[has no]} Inline
+@Chg{Version=[3],New=[aspect is False],Old=[@nt<pragma> applied to it]}.
 @Defn{normal state of an object}
 @PDefn{abnormal state of an object}
 @PDefn{disruption of an assignment}

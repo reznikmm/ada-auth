@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2011/06/18 07:20:52 $}
+@Comment{$Date: 2011/07/29 05:59:20 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.43 $}
+@comment{$Revision: 1.44 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -67,13 +67,7 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Indefinite_Multiway_Trees @em @RefSecNum{The Generic Package Containers.Indefinite_Multiway_Trees}
 ), Old=()}@\@\@\Indefinite_Ordered_Maps @em @RefSecNum{The Generic Package Containers.Indefinite_Ordered_Maps}
 @\@\@\Indefinite_Ordered_Sets @em @RefSecNum{The Generic Package Containers.Indefinite_Ordered_Sets}
-@Chg{Version=[3],New=(@\@\@\Indefinite_Synchronized_Queue_Interfaces
-@\@\@\@\@\@\@em @RefSecNum{Indefinite Synchronized Queues}
-@\@\@\Indefinite_Unbounded_Priority_Queues
-@\@\@\@\@\@\@em @RefSecNum{Indefinite Synchronized Queues}
-@\@\@\Indefinite_Unbounded_Synchronized_Queues
-@\@\@\@\@\@\@em @RefSecNum{Indefinite Synchronized Queues}
-), Old=()}@\@\@\Indefinite_Vectors @em @RefSecNum{The Generic Package Containers.Indefinite_Vectors}
+@\@\@\Indefinite_Vectors @em @RefSecNum{The Generic Package Containers.Indefinite_Vectors}
 @Chg{Version=[3],New=(@\@\@\Multiway_Trees @em @RefSecNum{The Generic Package Containers.Multiway_Trees}
 ), Old=()}@\@\@\Ordered_Maps @em @RefSecNum{The Generic Package Containers.Ordered_Maps}
 @\@\@\Ordered_Sets @em @RefSecNum{The Generic Package Containers.Ordered_Sets}

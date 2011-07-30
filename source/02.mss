@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2011/05/07 03:43:07 $}
+@Comment{$Date: 2011/07/29 05:59:19 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -878,7 +878,8 @@ word@Chg{Version=[3],New=[],Old=[ (in upper case)]}.]}
   @ChgAdded{Version=[2],Text=[The rules for reserved words differ in one way:
   they define case conversion on letters rather than sequences. This means that
   @Chg{Version=[3],New=[it is possible that there exist ],Old=[]}some
-  unusual sequences are neither @nt{identifier}s nor reserved words.
+  unusual sequences @Chg{Version=[3],New=[that ],Old=[]}are neither
+  @nt{identifier}s nor reserved words.
   @Chg{Version=[3],New=[We are not aware of any such sequences so long as we use
   simple case folding (as opposed to full case folding), but we have defined the
   rules in case any are introduced in future character set standards. This
@@ -916,15 +917,19 @@ to accommodate local conventions].
   (@Chg{Version=[3],New=[a lower],Old=[an upper]} case letter
   @Chg{Version=[3],New=[with],Old=[without]} a dot above). In
   Turkish, though, LATIN @Chg{Version=[3],New=[CAPITAL],Old=[SMALL]} LETTER I
-  and LATIN @Chg{Version=[3],New=[CAPITAL],Old=[SMALL]} LETTER DOTLESS I are two
-  distinct letters, so the @Chg{Version=[3],New=[case folded],Old=[upper case]}
-  equivalent of LATIN @Chg{Version=[3],New=[CAPITAL],Old=[SMALL]} LETTER I is
-  LATIN @Chg{Version=[3],New=[SMALL],Old=[CAPITAL]} LETTER I WITH DOT ABOVE, and
-  the @Chg{Version=[3],New=[case folded],Old=[upper case]} equivalent of LATIN
-  @Chg{Version=[3],New=[CAPITAL],Old=[SMALL]} LETTER DOTLESS I is LATIN
-  @Chg{Version=[3],New=[SMALL],Old=[CAPITAL]} LETTER I. Take for instance the
-  following identifier (which is the name of a city on the Tigris river in
-  Eastern Anatolia):]}
+  and LATIN @Chg{Version=[3],New=[CAPITAL],Old=[SMALL]} LETTER
+  @Chg{Version=[3],New=[],Old=[DOTLESS ]}I@Chg{Version=[3],New=[ WITH DOT
+  ABOVE],Old=[]} are two distinct letters, so the @Chg{Version=[3],New=[case
+  folded],Old=[upper case]} equivalent of LATIN
+  @Chg{Version=[3],New=[CAPITAL],Old=[SMALL]} LETTER I is LATIN
+  @Chg{Version=[3],New=[SMALL],Old=[CAPITAL]} LETTER
+  @Chg{Version=[3],New=[DOTLESS ],Old=[]}I@Chg{Version=[3],New=[],Old=[ WITH DOT
+  ABOVE]}, and the @Chg{Version=[3],New=[case folded],Old=[upper case]}
+  equivalent of LATIN @Chg{Version=[3],New=[CAPITAL],Old=[SMALL]} LETTER
+  @Chg{Version=[3],New=[],Old=[DOTLESS ]}I@Chg{Version=[3],New=[ WITH DOT
+  ABOVE],Old=[]} is LATIN @Chg{Version=[3],New=[SMALL],Old=[CAPITAL]} LETTER I.
+  Take for instance the following identifier (which is the name of a city on the
+  Tigris river in Eastern Anatolia):]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1325,8 +1330,8 @@ sequence of characters of a @nt{string_literal}.]}
 " "   "A"   """"      --@RI{  three string literals of length 1}
 @comment{Blank line}
 "Characters such as $, %, and } are allowed in string literals"
-"Archimedes said ""@unicode(917)@unicode(973)@unicode(961)@unicode(951)@unicode(954)@unicode(945)"""
-"Volume of cylinder (@pi@;r@latin1(178)h) = "
+@Chg{Version=[2],New=["Archimedes said ""@unicode(917)@unicode(973)@unicode(961)@unicode(951)@unicode(954)@unicode(945)"""
+"Volume of cylinder (@pi@;r@latin1(178)h) = "],Old=[]}
 @end{Example}
 @end{Examples}
 
@@ -1583,7 +1588,7 @@ Any @nt{pragma} that appears at the place of an executable construct is
 executed.
 Unless otherwise specified for a particular pragma,
 this execution consists of the evaluation of each evaluable pragma
-argument in an arbitrary order.
+argument in an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 @begin{Ramification}
 For a @nt{pragma} that appears at the place of an elaborable
 construct, execution is elaboration.
@@ -1809,11 +1814,14 @@ Some compilers might even ignore the pragma altogether.
 @Leading@keepnext@i{Examples of pragmas:}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-@key[pragma] List(Off); --@RI{ turn off listing generation}
-@key[pragma] Optimize(Off); --@RI{ turn off optional optimizations}
-@key[pragma] Inline(Set_Mask); --@RI{ generate code for Set_Mask inline}
-@Chg{Version=[2],New=[@key[pragma] Import(C, Put_Char, External_Name => "putchar"); --@RI{ import C putchar function}],
-Old=[@key[pragma] Suppress(Range_Check, On => Index); --@RI{ turn off range checking on Index}]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@key[pragma] List(Off); --@Examcom{ turn off listing generation}
+@key[pragma] Optimize(Off); --@Examcom{ turn off optional optimizations}
+@Chg{Version=[3],New=[@key[pragma] Pure(Rational_Numbers); --@Examcom{ set categorization for package}
+@key[pragma] Assert(Exists(File_Name), Message => "Nonexistent file"); --@Examcom{ assert file exists}],
+Old=[@key[pragma] Inline(Set_Mask); --@Examcom{ generate code for Set_Mask inline}
+@Chg{Version=[2],New=[@key[pragma] Import(C, Put_Char, External_Name => "putchar"); --@Examcom{ import C putchar function}],
+Old=[@key[pragma] Suppress(Range_Check, On => Index); --@Examcom{ turn off range checking on Index}]}]}
 @end{Example}
 @end{Examples}
 
@@ -1837,6 +1845,12 @@ informative annex.
   @ChgAdded{Version=[2],Text=[Updated the example of named pragma parameters,
   because the second parameter of @nt{pragma} Suppress is obsolescent.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[2],Text=[Updated the example of pragmas, because both
+  @nt{pragma}s Inline and Import are obsolescent.]}
+@end{DiffWord2005}
 
 
 @LabeledClause{Reserved Words}

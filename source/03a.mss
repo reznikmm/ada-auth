@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/06/18 07:20:51 $}
+@Comment{$Date: 2011/07/29 05:59:19 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.108 $}
+@Comment{$Revision: 1.109 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -68,13 +68,15 @@ declaration).>}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0255-1]}
 @Defn{declaration}
 Each of the following is defined to be a declaration:
 any @nt{basic_@!declaration};
 an @nt{enumeration_@!literal_@!specification};
 a @nt{discriminant_@!specification};
 a @nt{component_@!declaration};
-a @nt{loop_@!parameter_@!specification};
+a @nt{loop_@!parameter_@!specification};@Chg{Version=[3],New=[
+an @nt{iterator_@!specification};],Old=[]}
 a @nt{parameter_@!specification};
 a @nt{subprogram_@!body};
 an @nt{entry_@!declaration};
@@ -1539,7 +1541,7 @@ for one of the two predicate aspects.@Defn{predicate aspect}@Defn{predicate spec
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
 @ChgAdded{Version=[3],Text=[The expected type for a predicate aspect
 @nt{expression} is any boolean
-type.@PDefn{Term=[expected type],Sec=[@nt{expression} of a predicate aspect]}]}
+type.@PDefn2{Term=[expected type],Sec=[@nt{expression} of a predicate aspect]}]}
 
 @end{Resolution}
 
@@ -2067,7 +2069,7 @@ assigning to an enclosing object.
   @ChgAdded{Version=[3],Text=[The result of a
   @nt{qualified_expression} is defined to be a constant view and is defined
   to be an object if the operand of the @nt{qualified_expression} is an object.
-  These definitions, combined with some grammar changes, allows
+  These definitions, combined with some grammar changes, allow
   @nt{qualified_expression}s to be used in more places. See
   @RefSecNum{Names} for details.]}@ChgNote{This is defined an extension in @RefSecNum{Names}.}
 @end{DiffWord2005}
@@ -2361,7 +2363,7 @@ includes the name of the discriminant.
 The evaluations of the third step and the assignments of the fourth step
 are performed in an arbitrary order,
 except that each evaluation is performed before the resulting value is
-assigned.]}
+assigned.]}@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 @begin(Itemize)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00373-01]}
@@ -2485,7 +2487,7 @@ for an indefinite subtype,
 because if an object's nominal subtype is indefinite,
 an explicit initial value is required.
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1],ARef=[AI05-0255-1]}
 @Defn{stand-alone constant}
 @Defn{stand-alone variable}
 As indicated above,
@@ -2495,7 +2497,8 @@ Similar definitions apply to
 A subcomponent of an object is not a stand-alone object,
 nor is an object that is created by an @nt<allocator>.
 An object declared by a
-@nt<loop_parameter_specification>, @nt<parameter_specification>,
+@nt<loop_parameter_specification>,
+@Chg{Version=[3],New=[@nt{iterator_specification}, ],Old=[]}@nt<parameter_specification>,
 @nt<entry_index_specification>, @nt<choice_parameter_specification>,
 @Chg{Version=[3],New=[@nt{extended_return_statement}, ],Old=[]}or
 a @nt{formal_object_declaration} @Chg{Version=[3],New=[of mode @key[in out] ],Old=[]}is
@@ -3957,7 +3960,7 @@ evaluation of the @nt{range}.
 The evaluation of a @nt{range} determines a lower bound and an upper bound.
 If @nt<simple_expression>s are given to specify bounds, the evaluation of
 the @nt<range> evaluates these @nt<simple_expression>s in an arbitrary order,
-and converts them to the type of the @nt<range>.
+and converts them to the type of the @nt<range>.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 @PDefn2{Term=[implicit subtype conversion],Sec=(bounds of a range)}
 If a @nt<range_attribute_reference> is given, the evaluation
 of the @nt<range>
@@ -4725,7 +4728,7 @@ inherits a boolean Default_Value aspect, the aspect may be specified to have any
 value for the derived type.]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[This is override the
+  @ChgAdded{Version=[3],Text=[This overrides the
   @RefSecNum{Aspect Specifications} rule that says that a boolean aspect
 with a value True cannot be changed.]}
 @end{Reason}

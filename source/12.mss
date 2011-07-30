@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2011/06/04 05:28:19 $}
+@Comment{$Date: 2011/07/29 05:59:20 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1045,7 +1045,7 @@ an implicit @nt{generic_association} is assumed for this rule.
 These evaluations are done in an arbitrary order, except that the
 evaluation for a default actual takes place after the evaluation
 for another actual if the default includes a @nt{name}
-that denotes the other one.
+that denotes the other one.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 Finally, the instance declaration and body are elaborated.
 @begin{Ramification}
 Note that if the evaluation of a default depends on some side-effect
@@ -2028,7 +2028,7 @@ only if the ancestor type @Redundant[and any progenitor types] are limited types
 The reserved word @key{synchronized} shall appear (rather than @key{limited}) if
 the ancestor type or any of the progenitor types are
 synchronized interfaces.],Old=[]}@Chg{Version=[3],New=[ The ancestor type shall be a limited interface if the reserved
-word @key{synchonized} appears.],Old=[]}
+word @key{synchronized} appears.],Old=[]}
 
 @begin{Reason}
 We use the term @lquotes@;ancestor@rquotes@; here instead of @lquotes@;parent@rquotes@;

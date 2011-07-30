@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2011/06/18 07:20:52 $}
+@Comment{$Date: 2011/07/29 05:59:19 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.112 $}
+@Comment{$Revision: 1.113 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -496,13 +496,36 @@ following language-defined aspects may be specified with an
   If not specified for an entity, the specific precondition
   expression for the entity is the enumeration literal True.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[In this and the following rules, we are talking
+  about the enumeration literal True declared in package Standard (see
+  @RefSecNum{The Package Standard}), and not some
+  other value or identifier True. That matters as some rules depend on full
+  conformance of these experessions, which depends on the specific declarations
+  involved.]}
+@end{Honest}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0254-1]}
 @ChgAdded{Version=[3],Text=[Pre'Class@\This aspect
   specifies a class-wide precondition for a callable entity and its
   descendants; it shall be specified by an @nt{expression}, called a
   @i<class-wide precondition expression>.@Defn{class-wide precondition expression}@Defn2{Term=[precondition expression],Sec=[class-wide]}
-  If not specified for an entity, the class-wide precondition
+  If not specified for an entity, then if no other
+  class-wide precondition applies to the entity,the class-wide precondition
   expression for the entity is the enumeration literal True.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0254-1]}
+  @ChgAdded{Version=[3],Text=[If other class-wide preconditions apply to the
+  entity and no class-wide precondition is specified, no class-wide precondition
+  is defined for the entity; of course, the class-wide preconditions (of
+  ancestors) that apply are still going to be checked. We need subprograms that
+  don't have ancestors and don't specify a class-wide precondition to have a
+  class-wide precondition of True, so that adding such a precondition to a
+  descendant has no effect (necessary as a dispatching call through the root
+  routine would not check any precondition).]}
+@end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Post@\This aspect
@@ -558,21 +581,35 @@ Post'Class aspects may be specified for such a subprogram.]]}
   @RefSecNum{Aspect Specifications}.]}
 @end{Discussion}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0247-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[If a type has an inherited
-subprogram @i<P>
-implicitly declared, the corresponding primitive subprogram of the parent or
-progentitor is neither null nor abstract, a homograph
-(see @RefSecNum{Visibility}) of @i<P> is declared and inherited
-from an ancestor @i<T2> that is different from the ancestor @i<T1> from which
-@i<P> is inherited, and at least one class-wide precondition that applies
-to the subprogram inherited from @i<T2> does not fully conform to
-any class-wide precondition that applies @i<P>, then:]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[If a type @i<T> has an implicitly
+declared subprogram @i<P> inherited from a parent type @i<T1> and
+a homograph (see @RefSecNum{Visibility}) of @i<P> from a progenitor type
+@i<T2>, and]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[If the type is abstract the implicitly declared
-  subprogram is @i<abstract>.@PDefn{abstract subprogram}]}
+  @ChgAdded{Version=[3],Text=[the corresponding primitive subprogram @i<P1> of
+  type @i<T1> is neither null nor abstract; and]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the class-wide precondition expression True does
+  not apply to @i<P1> (implicitly or explicitly); and]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[there is a class-wide precondition expression that
+  applies to the corresponding primitive subprogram @i<P2> of @i<T2> that does
+  not fully conform to any class-wide precondition expresion that applies to
+  @i<P1>,]}
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[then:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If the type @i<T> is abstract the implicitly
+  declared subprogram is @i<abstract>.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Otherwise, the subprogram @i{requires overriding}
@@ -615,7 +652,8 @@ any class-wide precondition that applies @i<P>, then:]}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[This requires the set of class-wide preconditions that
-    apply to each declared homograph to be identical. Since full conformance
+    that apply to the interface routine to be strictly stronger than those that
+    apply to the concrete routine. Since full conformance
     requires each name to denote the same declaration, it is unlikely that
     independently declared preconditions would conform. This rule does allow
     "diamond inheritance" of preconditions, and of course no preconditions at
@@ -631,11 +669,11 @@ any class-wide precondition that applies @i<P>, then:]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0247-1]}
 @ChgAdded{Version=[3],Text=[If a renaming of a subprogram or entry @i<S1>
-overrides an inherited subprogram @i<S2>, then the overriding is illegal
-unless each class-wide precondition that applies to @i<S1> fully conforms
-to some class-wide precondition that applies to @i<S2> and each class-wide
-precondition that applies to @i<S2> fully conforms to some
-class-wide precondition that applies to @i<S1>.]}
+overrides an inherited subprogram @i<S2>, then the overriding is illegal unless
+each class-wide precondition expression that applies to @i<S1> fully conforms to
+some class-wide precondition expression that applies to @i<S2> and each
+class-wide precondition expression that applies to @i<S2> fully conforms to some
+class-wide precondition expression that applies to @i<S1>.]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -671,7 +709,7 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
   of the subprogram or entry, of the type of X, initialized to X. The value of
   X'Old in the postcondition expression is the value of this constant. The type
   of X'Old is the type of X. These implicit declarations occur in an arbitrary
-  order.],Old=[]}]}@Comment{End of Annex text here.}
+  order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}],Old=[]}]}@Comment{End of Annex text here.}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],NoPrefix=[T],Text=[Use of this attribute is allowed only
@@ -768,32 +806,34 @@ precondition checks are performed as follows:@Defn2{Term=[assertion policy],
 @end{Ramification}
 @end{Itemize}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
-@ChgAdded{Version=[3],Text=[The order of performing the checks is not specified,
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
+@ChgAdded{Version=[3],Text=[The checks are performed in an arbitrary order,
 and if any of the class-wide precondition expressions evaluate to True, it is
 not specified whether the other class-wide precondition expressions are
-evaluated. It is not specified whether any check for elaboration of the
-subprogram body is performed before or after the precondition checks. It is not
+evaluated. The precondition checks and any check for elaboration of the
+subprogram body are performed in an arbitrary order. It is not
 specified whether in a call on a protected operation, the checks are performed
 before or after starting the protected action. For a task or protected entry
-call, the checks are performed prior to checking whether the entry is open.]}
+call, the checks are performed prior to checking whether the entry is open.@PDefn2{Term=(arbitrary order),
+  Sec=(allowed)}@PDefn{unspecified}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
 @ChgAdded{Version=[3],Text=[If the assertion policy in effect at the point of a
 subprogram or entry declaration is Check, then upon successful return from a
 call of the subprogram or entry, prior to copying back any by-copy @key[in out]
 or @key[out] parameters, the postcondition check is performed. This consists of
 the evaluation of the specific and class-wide postcondition expressions that
 apply to the subprogram or entry. If any of the postcondition expressions
-evaluate to False, then Ada.Assertions.Assertion_Error is raised. The order of
-performing the checks is not specified, and if any postcondition expression
-evaluates to False, it is not specified whether any other postcondition
-expressions are evaluated. It is not specified whether any constraint checks
-associated with copying back @key[in out] or @key[out] parameters are performed
-before or after the postcondition checks.@Defn2{Term=[assertion policy],
+evaluate to False, then Ada.Assertions.Assertion_Error is raised. The
+postcondition expressions are evaluated in an arbitrary order, and if any
+postcondition expression evaluates to False, it is not specified whether any
+other postcondition expressions are evaluated. The postcondition check and
+constraint checks associated with copying back @key[in out] or @key[out]
+parameters are performed in an arbitrary order.@Defn2{Term=[assertion policy],
   Sec=[postcondition check]}@Defn{postcondition check}@Defn2{Term=[check, language-defined],
   Sec=[controlled by assertion policy]}@Defn2{Term=(Assertion_Error),
-  Sec=(raised by failure of run-time check)}]}
+  Sec=(raised by failure of run-time check)}@PDefn2{Term=(arbitrary order),
+  Sec=(allowed)}@PDefn{unspecified}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -809,15 +849,16 @@ before or after the postcondition checks.@Defn2{Term=[assertion policy],
 exception is raised at the point of the call. @Redundant[The exception cannot
 be handled inside the called subprogram.]]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
-@ChgAdded{Version=[3],Text=[For any subprogram or entry call (including
-dispatching calls), the specific precondition check and the postcondition check
-that is performed is determined by the those of the subprogram or entry actually
-invoked. For the purposes of these checks, if the subprogram actually invoked is
-primitive for some type @i<T> and is inherited from some other type, the checks
-needed are determined as if the body of the of the entity is declared directly
-as a primitive of type @i<T>; in addition, if the subprogram is neither null nor
-abstract, the specific postcondition of the invoked body is checked.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
+@ChgAdded{Version=[3],Text=[For any subprogram or entry call (including dispatching calls), the checks
+that are performed that verify specific precondition expressions and specific
+and class-wide postcondition expressions are determined by those for the subprogram
+or entry actually invoked. Note that the class-wide postcondition expressions
+verified by the postcondition check that is part of a call on a primitive
+of type @i<T> includes all class-wide postcondition expressions originating
+in any progenitor of @i<T>@Redundant[, even if the primitive called
+is inherited from a type @i<T1> and some of the postcondition expressions do
+not apply to the corresponding primitive of @i<T1>].]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -827,37 +868,22 @@ abstract, the specific postcondition of the invoked body is checked.]}
     inherited, but the subprogram might be.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[We use the "for the purposes" part of the rule to
-    include additional class-wide postconditions from those that apply to the
-    original subprogram. This may happen if the operation is inherited from both
-    a parent and a progenitor, and both the parent operation and progenitor
-    operation have one or more associated postcondition expressions.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[For concrete routines, we require the original
+  @ChgAdded{Version=[3],Text=[For concrete subprogram, we require the original
     specific postcondition to be evaluated as well as the inherited class-wide
     postconditions in order that the semantics of an explicitly defined wrapper
-    that does nothing but call the original routine is the same as that of an
-    inherited routine.]}
+    that does nothing but call the original subprogram is the same as that of
+    an inherited subprogram.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Note that this rule does not apply to class-wide
     preconditions; they have their own rules mentioned below.]}
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
-@ChgAdded{Version=[3],Text=[For a call via an access-to-subprogram value, the
-class-wide precondition check is determined by the subprogram or entry actually
-invoked. In contrast, the class-wide precondition check for other calls to a
-subprogram or entry consists solely of checking the class-wide preconditions
-that apply to the denoted entity (not necessarily the one that is invoked).]}
-
-@begin{Honest}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The "for the purposes" rule mentioned in the
-    previous item also apply to class-wide preconditions of calls through
-    access-to-subprogram values.]}
-@end{Honest}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
+@ChgAdded{Version=[3],Text=[The class-wide precondition check for a call to a
+subprogram or entry consists solely of checking the class-wide precondition
+expressions that apply to the denoted callable entity (not necessarily the one
+that is invoked).]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -883,7 +909,27 @@ that apply to the denoted entity (not necessarily the one that is invoked).]}
     implementation can evaluate all of these at the point of call for statically
     bound calls if the implementation uses wrappers for dispatching bodies and
     for 'Access values.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[There is no requirement for an implementation
+    to generate special code for routines that are imported from outside of
+    the Ada program. That's because there is a requirement on the programmer
+    that the use of interfacing aspects do not violate Ada semantics (see
+    B.1). That includes making pre- and postcondition checks. For instance,
+    if the implementation expects routines to make their own postcondition
+    checks in the body before returning, C code can be assumed to do this
+    (even though that is highly unlikely). That's even though the formal
+    definition of those checks is that they are evaluated at the call site.
+    Note that pre- and postconditions can be very useful for verification
+    tools (even if they aren't checked), because they tell the tool about the
+    expectations on the foreign code that it most likely cannot analyze.]}
 @end{ImplNote}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
+@ChgAdded{Version=[3],Text=[For a call via an access-to-subprogram value, all
+precondition and postcondition checks performed are determined by the subprogram
+or entry denoted by the prefix of the Access attribute reference that produced
+the value.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
 @ChgAdded{Version=[3],Text=[If the assertion policy in effect at the point of a
@@ -913,7 +959,7 @@ protected action.]}
 @end{Notes}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0230-1],ARef=[AI05-0247-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0230-1],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Pre and Post aspects are new.]}
 @end{Extend2005}
@@ -2142,7 +2188,7 @@ on an entry or protected subprogram is performed (see
 @RefSecNum{Dispatching Operations of Tagged Types})],Old=[]}.
 Finally, if the subprogram completes normally, then after it is left,
 any necessary assigning back of formal to actual parameters occurs
-(see @RefSecNum{Parameter Associations}).
+(see @RefSecNum{Parameter Associations}).@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 
 @begin{Discussion}
   The implicit association for a default is only for this run-time rule.
@@ -2695,6 +2741,14 @@ direct constituents that are @nt{name}s or @nt{expression}s whose evaluation may
 occur in an arbitrary order, at least one of which contains a function call with
 an @key[in out] or @key[out] parameter, then the construct is legal only if:]}
 
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[All of the places where the language allows an
+  arbitrary order can be found by looking in the index under "arbitrary order,
+  allowed". Note that this listing includes places that don't involve
+  @nt{name}s or @nt{expression}s (such as checks or finalization).]}
+@end{Ramification}
+
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[For each name @i<N> that is passed as a parameter of mode @key[in out] or
@@ -2909,7 +2963,7 @@ the subtype of the variable given as the actual parameter
 and assigned to it.
 @PDefn2{Term=[implicit subtype conversion],Sec=(parameter passing)}
 These conversions and assignments occur in an arbitrary
-order.
+order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 @begin{Ramification}
 The conversions mentioned above during parameter passing might raise
 Constraint_Error @em (see @RefSecNum{Type Conversions}).
@@ -4386,7 +4440,7 @@ place of a procedure specification.]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=[elaboration], Sec=(null_procedure_declaration)}
 The elaboration of a @nt{null_procedure_declaration} has no
-@Chg{Version=[3],New=[other ],Old=[]}effect@Chg{Version=[3],New=[than to
+@Chg{Version=[3],New=[other ],Old=[]}effect@Chg{Version=[3],New=[ than to
 establish that the null procedure can be called without failing the
 Elaboration_Check],Old=[]}.]}
 @end{RunTime}
@@ -4480,7 +4534,7 @@ the @nt{expression_@!function_@!declaration}.]}
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
 @ChgAdded{Version=[3],Text=[An @nt{expression_@!function_@!declaration} declares
-an @i{expression function}.@Defn{exception funtion}@Defn2{Term=[function],Sec=[expression]}
+an @i{expression function}.@Defn{exception function}@Defn2{Term=[function],Sec=[expression]}
 A completion
 is not allowed for an @nt{expression_@!function_@!declaration}, however an
 @nt{expression_@!function_@!declaration} can complete a previous declaration.]}
