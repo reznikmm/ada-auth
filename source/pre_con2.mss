@@ -1,6 +1,1825 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.9 $ $Date: 2011/07/29 05:59:20 $ $Author: randy $ }
+@comment{ $Revision: 1.10 $ $Date: 2011/07/30 06:31:10 $ $Author: randy $ }
+
+@LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
+
+@begin{Intro}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[The language-defined generic package
+Containers.Multiway_Trees provides private types Tree and Cursor, and a set of
+operations for each type. A multiway tree container is well-suited to represent
+nested structures.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Text=[This tree just provides a basic structure, and
+  make no promises about balancing or other automatic organization. In this
+  sense, it is different than the indexed (Map, Set) forms. Rather, it
+  provides a building block on which to construct more complex and more
+  specialized tree containers.]}
+@end{Discussion}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[A multiway tree container object manages a tree of
+internal @i<nodes>, each of which contains an element and pointers to the parent,
+first child, last child, next (successor) sibling, and previous (predecessor)
+sibling internal nodes.@Defn2{Term=[node],Sec=[of a tree]} A cursor designates a
+particular node within a tree (and by extension the element contained in that
+node, if any). A cursor keeps designating the same node (and element) as long as
+the node is part of the container, even if the node is moved within
+the container.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[A @i<subtree> is a particular node (which @i<roots the subtree>) and all of its child
+nodes (including all of the children of the child nodes, recursively).
+@Defn2{Term=[subtree],Sec=[of a tree]}@Defn{roots the subtree}@Defn2{Term=[subtree],Sec=[node which roots]} There is
+a special node, the @i<root>, which is always present and has no associated element
+value. The root node provides a place to add nodes to an otherwise empty tree and
+represents the bottom of the tree.@Defn2{Term=[root],Sec=[of a tree]}@Defn2{Term=[root node],Sec=[of a tree]}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[A node that has no children is called a
+@i<leaf node>.@Defn2{Term=[leaf node],Sec=[of a tree]} The @i<ancestors> of a node
+are the parent node, the parent of the parent node, and so on until a node with
+no parent is reached.@Defn2{Term=[ancestor],Sec=[of a tree node]} Similarly,
+the @i<descendants> of a node are the child nodes,
+the children of each child node, and so on.@Defn2{Term=[descendant],Sec=[of a tree node]}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The nodes of a subtree could be visited in several
+different orders. For a @i<depth-first order>, the last step of visiting a node
+is to visit the nodes of its child list in order, recursively.@Defn{depth-first
+order}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[For the depth-first order, when each child node is
+    visited, the child list of the child node is visited before the next sibling
+    of the child node is visited.]}
+@end{Ramification}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The generic library
+package Containers.Multiway_Trees has the following declaration:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[@key{with} Ada.Iterator_Interfaces;
+@key{generic}
+   @key{type} Element_Type @key{is private};
+   @key{with function} "=" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
+@key{package} Ada.Containers.Multiway_Trees @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Multiway_Trees]}
+   @key{pragma} Preelaborate(Multiway_Trees);
+   @key{pragma} Remote_Types(Multiway_Trees);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key{type} @AdaTypeDefn{Tree} @key{is tagged private}
+      @key{with} Constant_Indexing => Constant_Reference,
+           Variable_Indexing => Reference,
+           Default_Iterator  => Iterate,
+           Iterator_Element  => Element_Type;
+   @key{pragma} Preelaborable_Initialization(Tree);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{type} @AdaTypeDefn{Cursor} @key{is private};
+   @key{pragma} Preelaborable_Initialization(Cursor);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{Empty_Tree} : @key{constant} Tree;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key{package} @AdaPackDefn{Tree_Iterator_Interfaces} @key{is new}
+      Ada.Iterator_Interfaces (Cursor, Has_Element);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Equal_Subtree} (Left_Position : Cursor;
+                           Right_Position: Cursor) @key{return} Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} "=" (Left, Right : Tree) @key{return} Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Is_Empty} (Container : Tree) @key{return} Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Node_Count} (Container : Tree) @key{return} Count_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Subtree_Node_Count} (Position : Cursor) @key{return} Count_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Depth} (Position : Cursor) @key{return} Count_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Is_Root} (Position : Cursor) @key{return} Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Is_Leaf} (Position : Cursor) @key{return} Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Root} (Container : Tree) @key{return} Cursor;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Clear} (Container : @key{in out} Tree);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Element} (Position : Cursor) @key{return} Element_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Replace_Element} (Container : @key{in out} Tree;
+                              Position  : @key{in}     Cursor;
+                              New_Item  : @key{in}     Element_Type);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Query_Element}
+     (Position : @key{in} Cursor;
+      Process  : @key{not null access procedure} (Element : @key{in} Element_Type));]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Update_Element}
+     (Container : @key{in out} Tree;
+      Position  : @key{in}     Cursor;
+      Process   : @key{not null access procedure}
+                      (Element : @key{in out} Element_Type));]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Constant_Reference_Type}
+         (Element : @key[not null access constant] Element_Type) @key[is private]
+      @key[with] Implicit_Dereference => Element;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Reference_Type} (Element : @key[not null access] Element_Type) @key[is private]
+      @key[with] Implicit_Dereference => Element;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Constant_Reference} (Container : @key[aliased in] Tree;
+                                Position  : @key[in] Cursor)
+      @key[return] Constant_Reference_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Reference} (Container : @key[aliased in out] Tree;
+                       Position  : @key[in] Cursor)
+      @key[return] Reference_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Tree; Source : @key{in} Tree);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Copy} (Source : Tree) @key{return} Tree;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} Tree;
+                   Source : @key{in out} Tree);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Delete_Leaf} (Container : @key{in out} Tree;
+                          Position  : @key{in out} Cursor);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Delete_Subtree} (Container : @key{in out} Tree;
+                             Position  : @key{in out} Cursor);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Swap} (Container : @key{in out} Tree;
+                   I, J      : @key{in}     Cursor);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Find} (Container : Tree;
+                  Item      : Element_Type)
+      @key{return} Cursor;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Find_In_Subtree} (Position : Cursor;
+                             Item     : Element_Type)
+      @key{return} Cursor;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Ancestor_Find} (Position : Cursor;
+                           Item     : Element_Type)
+      @key{return} Cursor;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Contains} (Container : Tree;
+                      Item      : Element_Type) @key{return} Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Iterate}
+     (Container : @key{in} Tree;
+      Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Iterate_Subtree}
+     (Position  : @key{in} Cursor;
+      Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Iterate} (Container : @key{in} Tree)
+      @key{return} Tree_Iterator_Interfaces.Forward_Iterator'Class;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Iterate_Subtree} (Position : @key{in} Cursor)
+      @key{return} Tree_Iterator_Interfaces.Forward_Iterator'Class;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Child_Count} (Parent : Cursor) @key{return} Count_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Child_Depth} (Parent, Child : Cursor) @key{return} Count_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Insert_Child} (Container : @key{in out} Tree;
+                           Parent    : @key{in}     Cursor;
+                           Before    : @key{in}     Cursor;
+                           New_Item  : @key{in}     Element_Type;
+                           Count     : @key{in}     Count_Type := 1);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Insert_Child} (Container : @key{in out} Tree;
+                           Parent    : @key{in}     Cursor;
+                           Before    : @key{in}     Cursor;
+                           New_Item  : @key{in}     Element_Type;
+                           Position  :    @key{out} Cursor;
+                           Count     : @key{in}     Count_Type := 1);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Insert_Child} (Container : @key{in out} Tree;
+                           Parent    : @key{in}     Cursor;
+                           Before    : @key{in}     Cursor;
+                           Position  :    @key{out} Cursor;
+                           Count     : @key{in}     Count_Type := 1);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Prepend_Child} (Container : @key{in out} Tree;
+                            Parent    : @key{in}     Cursor;
+                            New_Item  : @key{in}     Element_Type;
+                            Count     : @key{in}     Count_Type := 1);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Append_Child} (Container : @key{in out} Tree;
+                           Parent    : @key{in}     Cursor;
+                           New_Item  : @key{in}     Element_Type;
+                           Count     : @key{in}     Count_Type := 1);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Delete_Children} (Container : @key{in out} Tree;
+                              Parent    : @key{in}     Cursor);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Copy_Subtree} (Target   : @key{in out} Tree;
+                           Parent   : @key{in}     Cursor;
+                           Before   : @key{in}     Cursor;
+                           Source   : @key{in}     Cursor);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Splice_Subtree} (Target   : @key{in out} Tree;
+                             Parent   : @key{in}     Cursor;
+                             Before   : @key{in}     Cursor;
+                             Source   : @key{in out} Tree;
+                             Position : @key{in out} Cursor);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Splice_Subtree} (Container: @key{in out} Tree;
+                             Parent   : @key{in}     Cursor;
+                             Before   : @key{in}     Cursor;
+                             Position : @key{in}     Cursor);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Splice_Children} (Target          : @key{in out} Tree;
+                              Target_Parent   : @key{in}     Cursor;
+                              Before          : @key{in}     Cursor;
+                              Source          : @key{in out} Tree;
+                              Source_Parent   : @key{in}     Cursor);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Splice_Children} (Container       : @key{in out} Tree;
+                              Target_Parent   : @key{in}     Cursor;
+                              Before          : @key{in}     Cursor;
+                              Source_Parent   : @key{in}     Cursor);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Parent} (Position : Cursor) @key{return} Cursor;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{First_Child} (Parent : Cursor) @key{return} Cursor;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{First_Child_Element} (Parent : Cursor) @key{return} Element_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Last_Child} (Parent : Cursor) @key{return} Cursor;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Last_Child_Element} (Parent : Cursor) @key{return} Element_Type;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Next_Sibling} (Position : Cursor) @key{return} Cursor;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Previous_Sibling} (Position : Cursor) @key{return} Cursor;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Next_Sibling} (Position : @key{in out} Cursor);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Previous_Sibling} (Position : @key{in out} Cursor);]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Iterate_Children}
+     (Parent  : @key{in} Cursor;
+      Process : @key{not null access procedure} (Position : @key{in} Cursor));]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Reverse_Iterate_Children}
+     (Parent  : @key{in} Cursor;
+      Process : @key{not null access procedure} (Position : @key{in} Cursor));]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Iterate_Children} (Container : @key[in] Tree; Parent : @key[in] Cursor)
+      @key[return] Tree_Iterator_Interfaces.Reversible_Iterator'Class;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{private}
+   ... -- @RI[not specified by the language]
+@key[end] Ada.Containers.Multiway_Trees;]}
+
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[The actual function for the generic formal function "=" on Element_Type values
+is expected to define a reflexive and symmetric relationship and return the same
+result value each time it is called with a particular pair of values. If it
+behaves in some other manner, the functions Find, Reverse_Find, Equal_Subtree,
+and "=" on tree values return an unspecified value. The exact arguments and
+number of calls of this generic formal function by the functions Find,
+Reverse_Find, Equal_Subtree, and "=" on tree values are unspecified.@PDefn{unspecified}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[The type Tree is used to represent trees. The
+type Tree needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
+(see @RefSecNum{Assignment and Finalization}).]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+@ChgAdded{Version=[3],Text=[Empty_Tree represents the empty Tree object. It
+contains only the root node (Node_Count (Empty_Tree) returns 1). If an object of type
+Tree is not otherwise initialized, it is initialized to the same value as
+Empty_Tree.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[No_Element represents a cursor that designates no
+element. If an object of type Cursor is not otherwise initialized, it is
+initialized to the same value as No_Element.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[The predefined "=" operator for type Cursor returns
+True if both cursors are No_Element, or designate the same element in the same
+container.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[Execution of the default implementation of the
+Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+@ChgAdded{Version=[3],Text=[Tree'Write writes Node_Count (Tree) - 1 elements to
+the stream. Tree'Read reads Node_Count (Tree) - 1 elements from the stream.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[Some operations of this generic package
+have access-to-subprogram parameters. To ensure such operations are
+well-defined, they guard against certain actions by the designated subprogram.
+In particular, some operations check for "tampering with cursors" of a container
+because they depend on the set of elements of the container remaining constant,
+and others check for "tampering with elements" of a container because they
+depend on elements of the container not being replaced.]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[@Defn2{Term=[tamper with cursors],Sec=[of a tree]}
+A subprogram is said to
+@i{tamper with cursors} of a tree object @i<T> if:]}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[it inserts or deletes elements of @i<T>, that is,
+  it calls the Clear, Delete_Leaf, Insert_Child, or Delete_Children procedures
+  with @i<T> as a parameter; or]}
+
+@begin{Honest}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Operations which are defined to be equivalent to
+    a call on one of these operations also are included. Similarly, operations
+    which call one of these as part of their definition are included.]}
+@end{Honest}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Text=[it reorders the elements of @i<T>, that is, it
+  calls the Splice_Subtree or Splice_Children procedures with @i<T> as a
+  parameter; or]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[it finalizes @i<T>; or]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[it calls Assign with @i<T> as the Target parameter; or]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[it calls the Move procedure with @i<T> as a parameter.]}
+
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Swap copies elements rather than reordering
+    them, so it doesn't tamper with cursors.]}
+@end{Reason}
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a tree]}
+A subprogram is said to
+@i{tamper with elements} of a tree object @i<T> if:]}
+
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[it tampers with cursors of @i<T>; or]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[it replaces one or more elements of @i<T>, that is, it calls the Replace_Element or Swap
+  procedures with @i<T> as a parameter.]}
+
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Complete replacement of an element can cause its
+    memory to be deallocated while another operation is holding onto a reference
+    to it. That can't be allowed. However, a simple modification of (part of) an
+    element is not a problem, so Update_Element does not cause a problem.]}
+@end{Reason}
+@end{Itemize}
+
+@begin{DescribeCode}
+
+@begin{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@Chg{Version=[3],New=[],Old=[@key{function} Has_Element (Position : Cursor) @key{return} Boolean;]}]}
+@end{Example}
+
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[3],New=[],Old=[Returns True if Position designates
+an element, and returns False otherwise.]}]}
+
+@begin{Honest}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0212-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[This function may not detect cursors that
+  designate deleted elements; such cursors are invalid (see below) and the
+  result of calling Has_Element with an invalid cursor is unspecified (but
+  not erroneous).]}]}
+@end{Honest}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Equal_Subtree (Left_Position : Cursor;
+                        Right_Position: Cursor) @key{return} Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Left_Position or Right_Position
+  equals No_Element, propagates Constraint_Error. If the number of child nodes
+  of the element designated by Left_Position is different from the number of
+  child nodes of the element designated by Right_Position, the function
+  returns False. If Left_Position designates a root node and Right_Position does
+  not, the function returns False. If Right_Position designates a root
+  node and Left_Position does not, the function returns False. Unless both
+  cursors designate a root node, the elements are compared using the generic
+  formal equality operator. If the result of the element comparison is False,
+  the function returns
+  False. Otherwise, it calls Equal_Subtree on a cursor designating each child
+  element of the element designated by Left_Position and a cursor designated the
+  corresponding child element of the element designated by Right_Position. If
+  any such call returns False, the function returns False; otherwise it
+  returns True. Any exception raised during the evaluation of element equality
+  is propagated.]}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Left_Position and Right_Position do not need to
+    be from the same tree.]}
+@end{Ramification}
+
+@begin{ImplNote}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[This wording describes the canonical semantics.
+    However, the order and number of calls on the formal equality function
+    is unspecified for all of the operations that use it in this package, so an
+    implementation can call it as many or as few times as it needs to get the
+    correct answer. Similarly, a global rule (see the introduction of
+    @RefSecNum{Predefined Language Environment})
+    says that language-defined routines are not affected by overriding of other
+    language-defined routines. This means that no reasonable program can tell
+    how many times Equal_Subtree is called, and thus an implementation can call
+    it as many or as few times as it needs to get the correct answer.
+    Specifically, there is no requirement to call the formal equality or
+    Equal_Subtree additional times once the answer has been determined.]}
+@end{ImplNote}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} "=" (Left, Right : Tree) @key{return} Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Left and Right denote the same
+  tree object, then the function returns True. Otherwise, it calls Equal_Subtree
+  with a cursor designating the root node of Left and Right; the result is
+  returned. Any exception raised during the evaluation of Equal_Subtree is
+  propagated.]}
+
+@begin{ImplNote}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Similar considerations apply here as apply to
+    Equal_Subtree. The actual number of calls performed is unspecified.]}
+@end{ImplNote}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Node_Count (Container : Tree) @key{return} Count_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Node_Count returns the number of
+  nodes in Container.]}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Since all tree objects have a root node, this
+    can never return a value of 0. Node_Count (Some_Tree) should always equal
+    Subtree_Node_Count (Root (Some_Tree)).]}
+@end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Subtree_Node_Count (Position : Cursor) @key{return} Count_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position is No_Element,
+  Subtree_Node_Count returns 0; otherwise, Subtree_Node_Count returns the number of
+  nodes in the subtree that is rooted by Position.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Is_Empty (Container : Tree) @key{return} Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to Node_Count (Container) = 1.]}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[An empty tree contains just the root node.]}
+@end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Depth (Position : Cursor) @key{return} Count_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
+  Depth returns 0; otherwise, Depth returns the number of ancestor nodes of the
+  node designated by Position (including the node itself).]}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Depth (Root (Some_Tree)) = 1.]}
+@end{Ramification}
+
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Is_Root (Position : Cursor) @key{return} Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Is_Root returns True if the
+  Position designates the root node of some tree; and returns False otherwise.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Is_Leaf (Position : Cursor) @key{return} Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Is_Leaf returns True if Position
+  designates a node that does not have any child nodes; and returns False
+  otherwise.]}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Is_Leaf returns False if passed No_Element,
+    since No_Element does not designate a node. Is_Leaf can be passed a cursor
+    that designates the root node; Is_Leaf will return True if passed the root
+    node of an empty tree.]}
+@end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Root (Container : Tree) @key{return} Cursor;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Root returns a cursor that
+  designates the root node of Container.]}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[There is always a root node, even in an empty
+    container, so this function never returns No_Element.]}
+@end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Clear (Container : @key{in out} Tree);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Removes all the elements from
+  Container.]}
+
+@begin{Ramification}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[The root node is not removed; all trees have a
+    root node.]}
+@end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Element (Position : Cursor) @key{return} Element_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
+  then Constraint_Error is propagated; if Position designates the root node of a
+  tree, then Program_Error is propagated. Otherwise, Element returns the element
+  designated by Position.]}
+
+@begin{Ramification}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[The root node does not contain an element, so
+    that value cannot be read or written.]}
+@end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Replace_Element (Container : @key{in out} Tree;
+                           Position  : @key{in}     Cursor;
+                           New_Item  : @key{in}     Element_Type);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
+  then Constraint_Error is propagated; if Position does not designate an element
+  in Container (including if it designates the root node), then Program_Error is
+  propagated. Otherwise Replace_Element assigns the value New_Item to the
+  element designated by Position.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Query_Element
+  (Position : @key{in} Cursor;
+   Process  : @key{not null access procedure} (Element : @key{in} Element_Type));]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
+  then Constraint_Error is propagated; if Position designates the root node of a
+  tree, then Program_Error is propagated. Otherwise, Query_Element calls
+  Process.@key{all} with the element designated by Position as the argument.
+  Program_Error is propagated if Process.@key{all} tampers with the elements of
+  Container. Any exception raised by Process.@key{all} is propagated.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Update_Element
+  (Container : @key{in out} Tree;
+   Position  : @key{in}     Cursor;
+   Process   : @key{not null access procedure}
+                   (Element : @key{in out} Element_Type));]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
+  then Constraint_Error is propagated; if Position does not designate an element
+  in Container (including if it designates the root node), then Program_Error is
+  propagated. Otherwise Update_Element calls Process.@key{all} with the element
+  designated by Position as the argument. Program_Error is propagated if
+  Process.@key{all} tampers with the elements of Container. Any exception raised
+  by Process.@key{all} is propagated.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If Element_Type is unconstrained and definite,
+  then the actual Element parameter of Process.@key{all} shall be
+  unconstrained.]}
+
+  @begin{Ramification}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[This means that the elements cannot be directly
+    allocated from the heap; it must be possible to change the discriminants of
+    the element in place.]}
+  @end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key{type} Constant_Reference_Type
+      (Element : @key[not null access constant] Element_Type) @key[is private]
+   @key[with] Implicit_Dereference => Element;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[type] Reference_Type (Element : @key[not null access] Element_Type) @key[is private]
+   @key[with] Implicit_Dereference => Element;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Constant_Reference_Type and
+  Reference_Type need finalization.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The default initialization of an object of type
+  Constant_Reference_Type or Reference_Type propagates Program_Error.]}
+
+  @begin{Reason}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[It is expected that Reference_Type (and
+    Constant_Reference_Type) will be a controlled type, for which finalization
+    will have some action to terminate the tampering check for the associated
+    container. If the object is created by default, however, there is no
+    associated container. Since this is useless, and supporting this case would
+    take extra work, we define it to raise an exception.]}
+  @end{Reason}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Constant_Reference (Container : @key[aliased in] Tree;
+                             Position  : @key[in] Cursor)
+   @key[return] Constant_Reference_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
+  Constant_Indexing and Implicit_Dereference aspects) provides a convenient way
+  to gain read access to the individual elements of a container starting with a
+  cursor.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If Position equals No_Element, then
+  Constraint_Error is propagated; if Position does not designate an element in
+  Container, then Program_Error is propagated. Otherwise, Constant_Reference
+  returns an object whose discriminant is an access value that designates the
+  element designated by Position. Program_Error is propagated if any operation
+  tampers with the elements of Container while the object returned by
+  Constant_Reference exists and has not been finalized.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Reference (Container : @key[aliased in out] Tree;
+                    Position  : @key[in] Cursor)
+   @key[return] Reference_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
+  Variable_Indexing and Implicit_Dereference aspects) provides a convenient way
+  to gain read and write access to the individual elements of a container
+  starting with a cursor.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If Position equals No_Element, then
+  Constraint_Error is propagated; if Position does not designate an element in
+  Container, then Program_Error is propagated. Otherwise, Reference returns an
+  object whose discriminant is an access value that designates the element
+  designated by Position. Program_Error is propagated if any operation tampers
+  with the elements of Container while the object returned by Reference exists
+  and has not been finalized.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Assign (Target : @key{in out} Tree; Source : @key{in} Tree);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object
+  as Source, the operation has no effect. Otherwise, the elements of Source are
+  copied to Target as for an @nt{assignment_statement} assigning Source to
+  Target.]}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Each element in Target has a
+    parent element that corresponds to the parent element of the Source element,
+    and has child elements that correspond to the child elements of the Source
+    element.]}
+@end{Ramification}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+  @ChgAdded{Version=[3],Text=[This routine exists for compatibility with the
+  bounded tree container. For an unbounded tree, @exam{Assign(A, B)} and
+  @exam{A := B} behave identically. For a bounded tree, := will raise an
+  exception if the container capacities are different, while Assign will
+  not raise an exception if there is enough room in the target.]}
+@end{Discussion}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Copy (Source : Tree) @key{return} Tree;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns a tree with the same
+  structure as Source and whose elements are initialized from the corresponding
+  elements of Source.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Move (Target : @key{in out} Tree;
+                Source : @key{in out} Tree);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object
+  as Source, then the operation has no effect. Otherwise, Move first calls Clear
+  (Target). Then, the nodes other than the root node in Source are moved to
+  Target (in the same positions). After Move completes, Node_Count (Target) is
+  the number of nodes originally in Source, and Node_Count (Source) is 1.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Delete_Leaf (Container : @key{in out} Tree;
+                       Position  : @key{in out} Cursor);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
+  then Constraint_Error is propagated; if Position does not designate an element
+  in Container (including if it designates the root node), then Program_Error is
+  propagated. If the element designated by position has any child elements, then
+  Constraint_Error is propagated. Otherwise, Delete_Leaf removes (from Container)
+  the element designated by Position. Finally, Position is set to No_Element.]}
+
+@begin{Ramification}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[The check on Position
+    checks that the cursor does not belong to some other Container. This check
+    implies that a reference to the container is included in the cursor value.
+    This wording is not meant to require detection of dangling cursors; such
+    cursors are defined to be invalid, which means that execution is erroneous,
+    and any result is allowed (including not raising an exception).]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[The root node cannot be deleted.]}
+@end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Delete_Subtree (Container : @key{in out} Tree;
+                          Position  : @key{in out} Cursor);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
+  then Constraint_Error is propagated. If Position does not designate an element
+  in Container (including if it designates the root node), then Program_Error is
+  propagated. Otherwise Delete removes (from Container) the subtree designated
+  by Position (that is, the node designated by Position and all of the
+  descendant nodes of that node), and Position is set to No_Element.]}
+
+@begin{Ramification}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[The root node cannot be deleted. To delete the
+    entire contents of the tree, call Clear(Container).]}
+@end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Swap (Container : @key{in out} Tree;
+                I, J      : @key{in}     Cursor);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If either I or J equals
+  No_Element, then Constraint_Error is propagated. If either I or J do not
+  designate an element in Container (including if either designates the root
+  node), then Program_Error is propagated. Otherwise, Swap exchanges the values
+  of the elements designated by I and J.]}
+
+@begin{Ramification}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[After a call to Swap, I designates the element
+    value previously designated by J, and J designates the element value
+    previously designated by I. The position of the elements do not change; for
+    instance, the parent node and the first child node of I are unchanged by the
+    operation.]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[The root nodes do not contain element values, so
+    they cannot be swapped.]}
+@end{Ramification}
+
+@begin{Honest}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[The implementation is not required to actually
+    copy the elements if it can do the swap some other way. But it is allowed to
+    copy the elements if needed.]}
+@end{Honest}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Find (Container : Tree;
+               Item      : Element_Type)
+   @key{return} Cursor;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Find searches the elements of
+  Container for an element equal to Item (using the generic formal equality
+  operator). The search starts at the root node. The search checks the tree in a
+  depth-first order. If no equal element is found, then Find returns No_Element.
+  Otherwise, it returns a cursor designating the first equal element
+  encountered.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Find_In_Subtree (Position : Cursor;
+                          Item     : Element_Type)
+   @key{return} Cursor;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
+  then Constraint_Error is propagated. Find_In_Subtree searches a
+  subtree of the elements of Container for an element equal to Item (using the
+  generic formal equality operator). The search starts at the element designated
+  by Position. The search checks the subtree rooted by Position in a depth-first
+  order. If no equal element is found, then Find returns No_Element. Otherwise,
+  it returns a cursor designating the first equal element encountered.]}
+
+@begin{Ramification}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Find_In_Subtree does not check any siblings of
+    the element designated by Position. The root node does not contain an
+    element, and therefore it can never be returned, but it can be explicitly
+    passed to Position.]}
+@end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Ancestor_Find (Position : Cursor;
+                        Item     : Element_Type;
+   @key{return} Cursor;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
+  then Constraint_Error is propagated. Otherwise, Ancestor_Find searches
+  for an element equal to Item (using the generic formal equality operator). The
+  search starts at the node designated by Position, and checks each ancestor
+  proceeding toward the root of the subtree. If no equal element is found, then
+  Ancestor_Find returns No_Element. Otherwise, it returns a cursor designating
+  the first equal element encountered.]}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Text=[No_Element is returned if Position is the root
+  node.]}
+@end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Contains (Container : Tree;
+                   Item      : Element_Type) @key{return} Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to Find (Container, Item) /= No_Element.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Iterate
+  (Container : @key{in} Tree;
+   Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate calls Process.@key{all}
+  with a cursor that designates each element in Container, starting with the
+  root node and proceeding in a depth-first order. Program_Error is propagated
+  if Process.@key{all} tampers with the cursors of Container. Any exception
+  raised by Process.@key{all} is propagated.]}
+
+@begin{Ramification}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Process is not called with the root node, which
+    does not have an associated element.]}
+@end{Ramification}
+
+@begin{ImplNote}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[The purpose of the tamper with cursors check is
+    to prevent erroneous execution from the Position parameter of
+    Process.@key{all} becoming invalid. This check takes place when the
+    operations that tamper with the cursors of the container are called. The
+    check cannot be made later (say in the body of Iterate), because that could
+    cause the Position cursor to be invalid and potentially cause execution to
+    become erroneous @em defeating the purpose of the check.]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[See Iterate for vectors
+    (@RefSecNum{The Generic Package Containers.Vectors}) for a suggested
+    implementation of the check.]}
+@end{ImplNote}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Iterate_Subtree
+  (Position  : @key{in} Cursor;
+   Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
+  then Constraint_Error is propagated. Iterate calls Process.@key{all} with a
+  cursor that designates each element in the subtree rooted by the node
+  designated by Position, starting with the node designated by Position and
+  proceeding in a depth-first order. Program_Error is propagated if
+  Process.@key{all} tampers with the cursors of the tree containing Position.
+  Any exception raised by Process.@key{all} is propagated.]}
+
+@begin{Ramification}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Position can be passed a cursor designating the
+    root node; in that case, Process is not called with the root node, which
+    does not have an associated element.]}
+@end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Iterate (Container : @key{in} Tree)
+   @key{return} Tree_Iterator_Interfaces.Forward_Iterator'Class;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns an iterator object
+  that will generate a loop parameter designating each node in Container,
+  starting with the root node and proceeding in a depth-first order.
+  Program_Error is propagated if any operation (in particular, the
+  @nt{sequence_of_statements} of the @nt{loop_statement} whose
+  @nt{iterator_specification} denotes this object) tampers with the cursors of
+  Container while the returned object exists. The returned object from Iterate
+  needs finalization.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Iterate_Subtree (Position : @key{in} Cursor)
+   @key{return} Tree_Iterator_Interfaces.Forward_Iterator'Class;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate_Subtree returns an
+  iterator object that will generate a loop parameter designating each element
+  in the subtree rooted by the node designated by Position, starting with the
+  node designated by Position and proceeding in a depth-first order. If Position
+  equals No_Element, then Constraint_Error is propagated. Program_Error is
+  propagated if any operation (in particular, the @nt{sequence_of_statements} of
+  the @nt{loop_statement} whose @nt{iterator_specification} denotes this object)
+  tampers with the cursors of the container in which the node designated by
+  Position exists while the returned object exists. The returned object from
+  Iterate_Subtree needs finalization.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Child_Count (Parent : Cursor) @key{return} Count_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Child_Count returns the number of
+  child nodes of the node designated by Parent.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Child_Depth (Parent, Child : Cursor) @key{return} Count_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Child or Parent is equal to
+  No_Element, then Constraint_Error is propagated. Otherwise, Child_Depth
+  returns the number of ancestor nodes of Child (including Child itself), up to
+  but not including Parent; in this case Program_Error is propagated if Parent
+  is not an ancestor of Child.]}
+
+@begin{Ramification}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Program_Error is propagated if Parent and Child
+    are nodes in different containers.]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Child_Depth (Root (Some_Tree), Child) + 1 =
+    Depth (Child) as the root is not counted.]}
+@end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Insert_Child (Container : @key{in out} Tree;
+                        Parent    : @key{in}     Cursor;
+                        Before    : @key{in}     Cursor;
+                        New_Item  : @key{in}     Element_Type;
+                        Count     : @key{in}     Count_Type := 1);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
+  Constraint_Error is propagated. If Parent does not designate a node in
+  Container, then Program_Error is propagated. If Before is not equal to
+  No_Element, and does not designate a node in Container, then Program_Error is
+  propagated. If Before is not equal to No_Element, and Container.Parent
+  (Before) is not equal to Parent, then Constraint_Error is propagated.
+  Otherwise, Insert_Child allocates Count nodes containing copies of New_Item
+  and inserts them as children of Parent. If Parent already has child nodes, then
+  the new nodes are inserted prior to the node designated by Before, or, if
+  Before equals No_Element, the new nodes are inserted after the last existing
+  child node of Parent. Any exception raised during allocation of internal
+  storage is propagated, and Container is not modified.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Insert_Child (Container : @key{in out} Tree;
+                        Parent    : @key{in}     Cursor;
+                        Before    : @key{in}     Cursor;
+                        New_Item  : @key{in}     Element_Type;
+                        Position  :    @key{out} Cursor;
+                        Count     : @key{in}     Count_Type := 1);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1],ARef=[AI05-0257-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
+  Constraint_Error is propagated. If Parent does not designate a node in
+  Container, then Program_Error is propagated. If Before is not equal to
+  No_Element, and does not designate a node in Container, then Program_Error is
+  propagated. If Before is not equal to No_Element, and Container.Parent
+  (Before) is not equal to Parent, then Constraint_Error is propagated.
+  Otherwise, Insert_Child allocates Count nodes containing copies of New_Item
+  and inserts them as children of Parent. If Parent already has child nodes, then
+  the new nodes are inserted prior to the node designated by Before, or, if
+  Before equals No_Element, the new nodes are inserted after the last existing
+  child node of Parent. Position designates the first newly-inserted node, or if
+  Count equals 0, then Position is assigned the value of Before. Any exception
+  raised during allocation of internal storage is propagated, and Container is
+  not modified.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Insert_Child (Container : @key{in out} Tree;
+                        Parent    : @key{in}     Cursor;
+                        Before    : @key{in}     Cursor;
+                        Position  :    @key{out} Cursor;
+                        Count     : @key{in}     Count_Type := 1);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0257-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
+  Constraint_Error is propagated. If Parent does not designate a node in
+  Container, then Program_Error is propagated. If Before is not equal to
+  No_Element, and does not designate a node in Container, then Program_Error is
+  propagated. If Before is not equal to No_Element, and Container.Parent
+  (Before) is not equal to Parent, then Constraint_Error is propagated.
+  Otherwise, Insert_Child allocates Count nodes, the elements contained in the
+  new nodes are initialized by default (see @RefSecNum{Object Declarations}),
+  and the new nodes are inserted as children of Parent. If Parent already has
+  child nodes then the new nodes are inserted prior to the node designated by
+  Before, or, if Before equals No_Element, the new nodes are inserted after the
+  last existing child node of Parent. Position designates the first
+  newly-inserted node, or if Count equals 0, then Position is assigned the value
+  of Before. Any exception raised during allocation of internal storage is
+  propagated, and Container is not modified.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Prepend_Child (Container : @key{in out} Tree;
+                         Parent    : @key{in}     Cursor;
+                         New_Item  : @key{in}     Element_Type;
+                         Count     : @key{in}     Count_Type := 1);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to Insert_Child
+  (Container, Parent, First_Child (Container, Parent), New_Item, Count).]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Append_Child (Container : @key{in out} Tree;
+                        Parent    : @key{in}     Cursor;
+                        New_Item  : @key{in}     Element_Type;
+                        Count     : @key{in}     Count_Type := 1);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to Insert_Child
+  (Container, Parent, Last_Child (Container, Parent), New_Item, Count).]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Delete_Children (Container : @key{in out} Tree;
+                           Parent    : @key{in}     Cursor);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
+  Constraint_Error is propagated. If Parent does not designate a node in
+  Container, Program_Error is propagated. Otherwise, Delete_Children removes
+  (from Container) all of the child elements of Parent along with their
+  dependent elements.]}
+
+@begin{Discussion}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[This routine deletes all of the child subtrees
+    of Parent at once. Use Delete_Subtree to delete an individual subtree.]}
+@end{Discussion}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Copy_Subtree (Target   : @key{in out} Tree;
+                        Parent   : @key{in}     Cursor;
+                        Before   : @key{in}     Cursor;
+                        Source   : @key{in}     Cursor);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
+  Constraint_Error is propagated. If Parent does not designate a node in Target,
+  then Program_Error is propagated. If Before is not equal to No_Element, and
+  does not designate a node in Target, then Program_Error is propagated. If
+  Before is not equal to No_Element, and Target.Parent (Before) is not equal to
+  Parent, then Constraint_Error is propagated. If Source designates a root node,
+  then Constraint_Error is propagated. If Source is equal to No_Element, then
+  the operation has no effect. Otherwise, the subtree rooted by Source (which
+  can be from any tree; it does not have to be a subtree of Target) is copied
+  (new nodes are allocated to create a new subtree with the same structure as
+  the Source subtree, with each element initialized from the corresponding
+  element of the Source subtree) and inserted into Target as a child of Parent.
+  If Parent already has child nodes, then the new nodes are inserted prior to the
+  node designated by Before, or, if Before equals No_Element, the new nodes are
+  inserted after the last existing child node of Parent. The parent of the newly
+  created subtree is set to Parent, and the overall count of Target is
+  incremented by Subtree_Node_Count (Source). Any exception raised during allocation
+  of internal storage is propagated, and Container is not modified.]}
+
+@begin{Discussion}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[We only need one routine here, as the source
+    object is not modified, so we can use the same routine for both copying
+    within and between containers.]}
+@end{Discussion}
+
+@begin{Ramification}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[We do not allow copying a subtree that includes
+    a root node, as that would require inserting a node with no value in the
+    middle of the target tree. To copy an entire tree to another tree object,
+    use Copy.]}
+@end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Splice_Subtree (Target   : @key{in out} Tree;
+                          Parent   : @key{in}     Cursor;
+                          Before   : @key{in}     Cursor;
+                          Source   : @key{in out} Tree;
+                          Position : @key{in out} Cursor);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
+  Constraint_Error is propagated. If Parent does not designate a node in Target,
+  then Program_Error is propagated. If Before is not equal to No_Element, and
+  does not designate a node in Target, then Program_Error is propagated. If
+  Before is not equal to No_Element, and Target.Parent (Before) is not equal to
+  Parent, then Constraint_Error is propagated. If Position equals No_Element,
+  Constraint_Error is propagated. If Position does not designate a node in
+  Source or designates a root node, then Program_Error is propagated. If Source
+  denotes the same object as Target, then:
+  if Position equals Before there is no effect; if Position designates an
+  ancestor of Parent or is equal to Parent, Constraint_Error is propagated;
+  otherwise, the subtree rooted by the element designated by Position is
+  moved to be a child of Parent. If Parent already has child nodes, then the
+  moved nodes are inserted prior to the node designated by Before, or, if Before
+  equals No_Element, the moved nodes are inserted after the last existing child
+  node of Parent. In each of these cases, Position and the count of Target are
+  unchanged, and the parent of the element designated by Position is set to
+  Parent.]}
+
+@begin{Reason}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[We can't allow moving the subtree of Position to
+    a descendant node of the subtree, as the descendant node will be part of the
+    subtree being moved. The result would be a circularly linked tree, or one
+    with inaccessible nodes. Thus we have to check Position against Parent, even
+    though such a check is @i<O>(Depth(Source)).]}
+@end{Reason}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Text=[Otherwise (if Source does not denote the same
+  object as Target), the subtree designated by Position is removed from Source
+  and moved to Target. The subtree is inserted as a child of Parent. If Parent
+  already has child nodes, then the moved nodes are inserted prior to the node
+  designated by Before, or, if Before equals No_Element, the moved nodes are
+  inserted after the last existing child node of Parent. In each of these cases,
+  the count of Target is incremented by Subtree_Node_Count (Position), and the
+  count of Source is decremented by Subtree_Node_Count (Position), Position is
+  updated to represent an element in Target.]}
+
+@begin{Ramification}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[If Source is the same as Target, and Position =
+    Before, or Next_Sibling(Position) = Before, Splice_Subtree has no effect, as
+    the subtree does not have to move to meet the postcondition.]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[We do not allow splicing a subtree that includes
+    a root node, as that would require inserting a node with no value in the
+    middle of the target tree. Splice the children of the root node instead.]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[For this reason there is no operation to splice
+    an entire tree, as that would necessarily involve splicing a root node.]}
+@end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Splice_Subtree (Container: @key{in out} Tree;
+                          Parent   : @key{in}     Cursor;
+                          Before   : @key{in}     Cursor;
+                          Position : @key{in}     Cursor);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
+  Constraint_Error is propagated. If Parent does not designate a node in
+  Container, then Program_Error is propagated. If Before is not equal to
+  No_Element, and does not designate a node in Container, then Program_Error is
+  propagated. If Before is not equal to No_Element, and Target.Parent (Before)
+  is not equal to Parent, then Constraint_Error is propagated. If Position
+  equals No_Element, Constraint_Error is propagated. If Position does not
+  designate a node in Container or designates a root node, then Program_Error is
+  propagated. If Position equals Before, there is no effect. If Position
+  designates an ancestor of Parent or is equal to Parent, Constraint_Error is
+  propagated. Otherwise, the subtree rooted by the element designated by
+  Position is moved to be a child of Parent. If Parent already has child nodes,
+  then the moved nodes are inserted prior to the node designated by Before, or,
+  if Before equals No_Element, the moved nodes are inserted after the last
+  existing child node of Parent. The parent of the element designated by
+  Position is set to Parent.]}
+
+@begin{Reason}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[We can't allow moving the subtree of Position to
+    a descendant node of the subtree, as the descendant node will be part of the
+    subtree being moved.]}
+@end{Reason}
+
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Splice_Children (Target          : @key{in out} Tree;
+                           Target_Parent   : @key{in}     Cursor;
+                           Before          : @key{in}     Cursor;
+                           Source          : @key{in out} Tree;
+                           Source_Parent   : @key{in}     Cursor);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target_Parent equals
+  No_Element, then Constraint_Error is propagated. If Target_Parent does not
+  designate a node in Target, then Program_Error is propagated. If Before is not
+  equal to No_Element, and does not designate an element in Target, then
+  Program_Error is propagated. If Source_Parent equals No_Element, then
+  Constraint_Error is propagated. If Source_Parent does not designate a node in
+  Source, then Program_Error is propagated. If Before is not equal to
+  No_Element, and Target.Parent (Before) is not equal to Target_Parent, then
+  Constraint_Error is propagated.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[If Source denotes the same object as Target, then:]}
+
+@begin{Itemize}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[if Target_Parent equals Source_Parent there is
+    no effect; else]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[if Source_Parent is an ancestor of
+    Target_Parent, then Constraint_Error is propagated; else]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+    @ChgAdded{Version=[3],Text=[the child elements (and their descendants) of
+    Source_Parent are moved to be child elements of Target_Parent. If
+    Target_Parent already has child elements, then the moved elements are
+    inserted prior to the node designated by Before, or, if Before equals
+    No_Element, the moved elements are inserted after the last existing child
+    node of Target_Parent. The parent of each moved child element is set to
+    Target_Parent.]}
+@end{Itemize}
+
+@begin{Reason}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[We can't allow moving the children of Source_Parent to a
+   descendant node, as the descendant node will be part of one of the
+   subtrees being moved.]}
+@end{Reason}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Text=[Otherwise (if Source does not denote the same
+  object as Target), the child elements (and their descendants) of Source_Parent
+  are removed from Source and moved to Target. The child elements are inserted
+  as children of Target_Parent. If Target_Parent already has child elements, then
+  the moved elements are inserted prior to the node designated by Before, or, if
+  Before equals No_Element, the moved elements are inserted after the last
+  existing child node of Target_Parent. In each of these cases, the overall
+  count of Target is incremented by Subtree_Count (Source_Node_Parent)-1, and
+  the overall count of Source is decremented by Subtree_Count
+  (Source_Node_Parent)-1.]}
+
+@begin{Ramification}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[The node designated by Source_Parent is not
+    moved, thus we never need to update Source_Parent.]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Move (Target, Source) could be written
+    Splice_Children (Target, Target.Root, No_Element, Source, Source.Root);]}
+@end{Ramification}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Splice_Children (Container       : @key{in out} Tree;
+                           Target_Parent   : @key{in}     Cursor;
+                           Before          : @key{in}     Cursor;
+                           Source_Parent   : @key{in}     Cursor);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target_Parent equals
+  No_Element, then Constraint_Error is propagated. If Target_Parent does not
+  designate a node in Container, then Program_Error is propagated. If Before is
+  not equal to No_Element, and does not designate an element in Container, then
+  Program_Error is propagated. If Source_Parent equals No_Element, then
+  Constraint_Error is propagated. If Source_Parent does not designate a node in
+  Container, then Program_Error is propagated. If Before is not equal to
+  No_Element, and Container.Parent (Before) is not equal to Target_Parent, then
+  Constraint_Error is propagated. If Target_Parent equals Source_Parent there is
+  no effect. If Source_Parent is an ancestor of Target_Parent, then
+  Constraint_Error is propagated. Otherwise the child elements (and their
+  descendants) of Source_Parent are moved to be child elements of Target_Parent.
+  If Target_Parent already has child elements, then the moved elements are
+  inserted prior to the node designated by Before, or, if Before equals
+  No_Element, the moved elements are inserted after the last existing child node
+  of Target_Parent. The parent of each moved child element is set to
+  Target_Parent.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Parent (Position : Cursor) @key{return} Cursor;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position is equal to No_Element
+  or designates a root node, No_Element is returned. Otherwise, a cursor
+  designating the parent node of the node designated by Position is returned.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} First_Child (Parent : Cursor) @key{return} Cursor;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent is equal to No_Element,
+  then Constraint_Error is propagated. Otherwise, First_Child returns a cursor
+  designating the first child node of the node designated by Parent; if there is
+  no such node, No_Element is returned.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} First_Child_Element (Parent : Cursor) @key{return} Element_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to Element (First_Child (Parent)).]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Last_Child (Parent : Cursor) @key{return} Cursor;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent is equal to No_Element,
+  then Constraint_Error is propagated. Otherwise, Last_Child returns a cursor
+  designating the last child node of the node designated by Parent; if there is
+  no such node, No_Element is returned.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Last_Child_Element (Parent : Cursor) @key{return} Element_Type;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to Element (Last_Child (Parent)).]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Next_Sibling (Position : Cursor) @key{return} Cursor;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element or
+  designates the last child node of its parent, then Next_Sibling returns the
+  value No_Element. Otherwise, it returns a cursor that designates the successor
+  (with the same parent) of the node designated by Position.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Previous_Sibling (Position : Cursor) @key{return} Cursor;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element or
+  designates the first child node of its parent, then Previous_Sibling returns
+  the value No_Element. Otherwise, it returns a cursor that designates the
+  predecessor (with the same parent) of the node designated by Position.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Next_Sibling (Position : @key{in out} Cursor);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to Position := Next_Sibling (Position);]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Previous_Sibling (Position : @key{in out} Cursor);]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to Position := Previous_Sibling (Position);]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Iterate_Children
+  (Parent  : @key{in} Cursor;
+   Process : @key{not null access procedure} (Position : @key{in} Cursor));]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
+Constraint_Error is propagated.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Iterate_Children calls Process.@key{all} with a
+cursor that designates each child node of Parent, starting with the first child
+node and moving the cursor as per the function Next_Sibling.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Program_Error is propagated if Process.@key{all}
+tampers with the cursors of the tree containing Parent. Any exception raised by
+Process.@key{all} is propagated.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Reverse_Iterate_Children
+  (Parent  : @key{in} Cursor;
+   Process : @key{not null access procedure} (Position : @key{in} Cursor));]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
+Constraint_Error is propagated.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Reverse_Iterate_Children calls Process.@key{all}
+with a cursor that designates each child node of Parent, starting with the last
+child node and moving the cursor as per the function Previous_Sibling.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Program_Error is propagated if Process.@key{all}
+tampers with the cursors of the tree containing Parent. Any exception raised by
+Process.@key{all} is propagated.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Iterate_Children (Container : @key[in] Tree; Parent : @key[in] Cursor)
+   @key[return] Tree_Iterator_Interfaces.Reversible_Iterator'Class;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate_Children returns a
+reversible iterator object that will generate a loop parameter designating each
+child node of Parent. If Parent equals No_Element, then Constraint_Error is
+propagated. If Parent does not designate a node in Container, then Program_Error
+is propagated. Otherwise, when used as a forward iterator, the nodes are
+designated starting with the first child node and moving the cursor as per the
+function Next_Sibling; when used as a reverse iterator, the nodes are designated
+starting with the last child node and moving the cursor as per the function
+Previous_Sibling. Program_Error is propagated if any operation (in particular,
+the @nt{sequence_of_statements} of the @nt{loop_statement} whose
+@nt{iterator_specification} denotes this object) tampers with the cursors of
+Container while the returned object exists. The returned object from
+Iterate_Children needs finalization.]}
+
+@end{DescribeCode}
+
+@end{StaticSem}
+
+@begin{Bounded}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+It is a bounded error for the actual function associated with a generic formal
+subprogram, when called as part of an operation of this package, to tamper with
+elements of any Tree parameter of the operation. Either Program_Error is raised,
+or the operation works as defined on the value of the Tree either prior to, or
+subsequent to, some or all of the modifications to the Tree.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+It is a bounded error to call any subprogram declared in the visible part of
+Containers.Multiway_Trees when the associated container has been finalized. If
+the operation takes Container as an @key[in out] parameter, then it raises
+Constraint_Error or Program_Error. Otherwise, the operation either proceeds as
+it would for an empty container, or it raises Constraint_Error or Program_Error.]}
+@end{Bounded}
+
+@begin{Erron}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[A Cursor
+value is @i<invalid> if any of the following have occurred since
+it was created:@Defn2{Term=[invalid cursor],Sec=[of a tree]}
+@PDefn2{Term=[cursor],Sec=[invalid]}]}
+@begin{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The tree that contains the element it designates has
+been finalized;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The tree that contains the element it designates has
+been used as the Source or Target of a call to Move;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The tree that contains the element it designates has
+been used as the Target of a call to Assign or the target of an
+@nt{assignment_statement};]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The element it designates has been removed from the
+tree that previously contained the element.]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We talk about which tree the element was removed
+  from in order to handle splicing nodes from one tree to another. The node
+  still exists, but any cursors that designate it in the original tree are now
+  invalid. This bullet covers removals caused by calls to Clear, Delete_Leaf,
+  Delete_Subtree, Delete_Children, Splice_Children, and Splice_Subtree.]}
+@end{Reason}
+
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[The result of "=" or Has_Element is unspecified if
+it is called with an invalid cursor parameter.@PDefn{unspecified} Execution is
+erroneous if any other subprogram declared in Containers.Multiway_Trees is
+called with an invalid cursor parameter.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The list above is intended to be exhaustive. In
+  other cases, a cursor value continues to designate its original element (or
+  the root node). For instance, cursor values survive the insertion and deletion
+  of other nodes.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[While it is possible to check for these cases, in
+  many cases the overhead necessary to make the check is substantial in time or
+  space. Implementations are encouraged to check for as many of these cases as
+  possible and raise Program_Error if detected.]}
+@end{Discussion}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgAdded{Version=[3],Text=[Execution is erroneous if the tree associated with
+the result of a call to Reference or Constant_Reference is finalized before the
+result object returned by the call to Reference or Constant_Reference is
+finalized.]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Each object of Reference_Type and
+  Constant_Reference_Type probably contains some reference to the originating
+  container. If that container is prematurely finalized (which is only possible
+  via Unchecked_Deallocation, as accessibility checks prevent passing a
+  container to Reference that will not live as long as the result), the
+  finalization of the object of Reference_Type will try to access a non-existent
+  object. This is a normal case of a dangling pointer created by
+  Unchecked_Deallocation; we have to explicitly mention it here as the pointer
+  in question is not visible in the specification of the type. (This is the same
+  reason we have to say this for invalid cursors.)]}
+@end{Reason}
+@end{Erron}
+
+@begin{ImplReq}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[No storage associated with a multiway tree object
+shall be lost upon assignment or scope exit.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[The execution of an @nt{assignment_statement} for
+a tree shall have the effect of copying the elements from the source tree
+object to the target tree object.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[An assignment of a Tree is a @lquotes@;deep@rquotes
+  copy; that is the elements are copied as well as the data structures.
+  We say @lquotes@;effect of@rquotes in order to allow the implementation to
+  avoid copying elements immediately if it wishes. For instance, an
+  implementation that avoided copying until one of the containers is modified
+  would be allowed.]}
+@end{ImplNote}
+@end{ImplReq}
+
+@begin{ImplAdvice}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[Containers.Multiway_Trees should be implemented
+similarly to a multiway tree. In particular, if @i{N} is the overall number of nodes
+for a particular tree, then the worst-case time complexity of Element, Parent,
+First_Child, Last_Child, Insert_Child with Count=1, and Delete should be @i{O}(log
+@i{N}).]}
+@ChgImplAdvice{Version=[3],Kind=[AddedNormal],Text=[@ChgAdded{Version=[3],
+Text=[The worst-case time complexity of the Element, Parent,
+First_Child, Last_Child, Insert_Child with Count=1, and Delete
+operations of Containers.Multiway_Trees should be @i{O}(log @i<N>).]}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We do not mean to overly constrain implementation
+  strategies here. However, it is important for portability that the performance
+  of large containers has roughly the same factors on different implementations.
+  If a program is moved to an implementation that takes @i{O}(@i<N>) time to access
+  elements, that program could be unusable when the trees are large. We allow
+  @i{O}(log @i<N>) access because the proportionality constant and caching effects are
+  likely to be larger than the log factor, and we don't want to discourage
+  innovative implementations.]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[Move should not copy elements, and should minimize
+copying of internal data structures.]}
+@ChgImplAdvice{Version=[3],Kind=[AddedNormal],Text=[@ChgAdded{Version=[3],
+Text=[Containers.Multiway_Trees.Move should not copy elements, and should
+minimize copying of internal data structures.]}]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Usually that can be accomplished simply by
+  moving the pointer(s) to the internal data structures from the Source
+  container to the Target container.]}
+@end{ImplNote}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgAdded{Version=[3],Text=[If an exception is propagated from a tree
+operation, no storage should be lost, nor any elements removed from a tree
+unless specified by the operation.]}
+@ChgImplAdvice{Version=[3],Kind=[AddedNormal],Text=[@ChgAdded{Version=[3],
+Text=[If an exception is propagated from a tree
+operation, no storage should be lost, nor any elements removed from a tree
+unless specified by the operation.]}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is important so that programs can recover
+  from errors. But we don't want to require heroic efforts, so we just require
+  documentation of cases where this can't be accomplished.]}
+@end{Reason}
+@end{ImplAdvice}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0257-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  The generic package Containers.Multiway_Trees is new.]}
+@end{Extend2005}
+
 
 @LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Vectors]}
 
@@ -2826,9 +4645,6 @@ Constant_Indexing aspect (on type Vector) and the Implicit_Dereference aspect
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
   @ChgAdded{Version=[3],Text=[This example of container use is new.]}
 @end{DiffWord2005}
-
-
-
 
 
 

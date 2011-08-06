@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:19 $}
+@Comment{$Date: 2011/07/30 06:31:10 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.116 $}
+@Comment{$Revision: 1.117 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -3785,8 +3785,8 @@ user-defined) equals operator of the parent type.]}
 For a private type, if its full type is
 @Chg{Version=[3],New=[a record type],Old=[tagged]}, predefined
 equality is defined in terms of the primitive equals operator of the
-full type; if the full type is untagged, predefined equality
-for the private type is that of its full type.
+full type; @Chg{Version=[3],New=[otherwise],Old=[if the full type is untagged]},
+predefined equality for the private type is that of its full type.
 
 @Leading@Defn{matching components}
 For other composite types, the predefined equality operators
