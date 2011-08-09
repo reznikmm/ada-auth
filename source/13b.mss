@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:20 $}
+@Comment{$Date: 2011/08/06 05:45:24 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -969,7 +969,7 @@ state.]]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This follows (and echos) the standard rule
   of interfacing; the programmer must ensure that Ada semantics are
-  followed (see @RefSecNum{Interfacing Pragmas}).]}
+  followed (see @RefSecNum{Interfacing Aspects}).]}
 @end{TheProof}
 
 @PDefn{unspecified}

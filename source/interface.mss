@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.54 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
+@comment{ $Revision: 1.55 $ $Date: 2011/08/06 05:45:24 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:37 $}
+@Comment{$Date: 2011/08/06 05:45:24 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -35,32 +35,46 @@ This Annex contains what used to be RM83-13.8.
 @end{DiffWord83}
 
 
-@LabeledClause{Interfacing Pragmas}
+@LabeledRevisedClause{Version=[3],New=[Interfacing Aspects],Old=[Interfacing Pragmas]}
 
 @begin{Intro}
-A @nt{pragma} Import is used to import an entity defined in a foreign
-language into an Ada program,
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[An @i<interfacing> aspect is a representation
+aspect that is one of the aspects Import, Export, Link_Name, External_Name, or
+Convention.@Defn{interfacing aspect}@Defn2{Term=[aspect],Sec=[interfacing]}]}
+
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[Specifying aspect],Old=[A @nt{pragma}]} Import
+@Chg{Version=[3],New=[to have the value True ],Old=[]}is used to import
+an entity defined in a foreign language into an Ada program,
 thus allowing
- a foreign-language subprogram to be called from Ada,
+a foreign-language subprogram to be called from Ada,
 or a foreign-language variable to be accessed from Ada.
 In contrast,
-a @nt{pragma} Export is used to export an Ada entity
-to a foreign language, thus allowing
- an Ada subprogram to be called from a foreign language,
-or an Ada object
- to be accessed from a foreign language.
-The @nt[pragma]s
-Import and Export
+@Chg{Version=[3],New=[specifying aspect],Old=[a @nt{pragma}]}
+@Chg{Version=[3],New=[to have the value True ],Old=[]}Export is used to export
+an Ada entity to a foreign language, thus allowing
+an Ada subprogram to be called from a foreign language,
+or an Ada object to be accessed from a foreign language.
+The@Chg{Version=[3],New=[],Old=[ @nt[pragma]s]}
+Import and Export@Chg{Version=[3],New=[ aspects],Old=[]}
 are intended primarily for objects and
 subprograms, although implementations are allowed to support other
-entities.
+entities.@Chg{Version=[3],New=[ The Link_Name and External_Name aspects are
+used to specify the link name and external name, respectively, to be
+used to identify imported or exported entities in the external
+environment.],Old=[]}
 
-A @nt{pragma} Convention is used to specify that an Ada entity should use
-the conventions of another language.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[The],Old=[A @nt{pragma}]} Convention
+@Chg{Version=[3],New=[aspect ],Old=[]}is used to specify that an Ada entity
+should use the conventions of another language.
 It is intended primarily for types and @lquotes@;callback@rquotes@; subprograms.
 For example,
-@lquotes@;@key{pragma} Convention(Fortran, Matrix);@rquotes@;
-implies that Matrix should be represented according to the
+@lquotes@;@Chg{Version=[3],New=[@key{with}],Old=[@key{pragma}]}
+Convention@Chg{Version=[3],New=[ => ],Old=[(]}Fortran@Chg{Version=[3],New=[],Old=[, Matrix)]};@rquotes@;
+@Chg{Version=[3],New=[on the declaration of an array type Matrix ],Old=[]}implies
+that Matrix should be represented according to the
 conventions of the supported Fortran implementation, namely
 column-major order.
 
@@ -72,7 +86,8 @@ partition.
 
 @begin{Syntax}
 @begin{SyntaxText}
-@Leading@RootDefn{interfacing pragma}
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[The form of a],Old=[@RootDefn{interfacing pragma}
 @PDefn2{Term=[interfacing pragma], Sec=(Import)}
 @PDefn2{Term=[pragma, interfacing], Sec=(Import)}
 @PDefn2{Term=[interfacing pragma], Sec=(Export)}
@@ -84,18 +99,21 @@ An @i{interfacing pragma} is a representation
 @nt[pragma] that is
 one of the @nt{pragma}s Import, Export,
 or Convention.
-Their forms, together with that of the related
-@nt[pragma] Linker_Options, are as follows:
+Their forms, together with that of the related]}
+@nt[pragma] Linker_Options@Chg{Version=[3],New=[is],Old=[, are]} as follows:
 @end{SyntaxText}
-@PragmaSyn`@key{pragma} @prag(Import)(@*
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Import)(@*
 @ @ @ @ @ [Convention =>] @SynI{convention_}@Syn2{identifier}, [Entity =>] @Syn2{local_name}@*
-@ @ [, [External_Name =>] @SynI{string_}@Syn2{expression}] [, [Link_Name =>] @SynI{string_}@Syn2{expression}]);'
+@ @ [, [External_Name =>] @SynI{string_}@Syn2{expression}] [, [Link_Name =>] @SynI{string_}@Syn2{expression}]);']}
 
-@PragmaSyn`@key{pragma} @prag(Export)(@*
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Export)(@*
 @ @ @ @ @ [Convention =>] @SynI{convention_}@Syn2{identifier}, [Entity =>] @Syn2{local_name}@*
-@ @ [, [External_Name =>] @SynI{string_}@Syn2{expression}] [, [Link_Name =>] @SynI{string_}@Syn2{expression}]);'
+@ @ [, [External_Name =>] @SynI{string_}@Syn2{expression}] [, [Link_Name =>] @SynI{string_}@Syn2{expression}]);']}
 
-@PragmaSyn`@key{pragma} @prag(Convention)([Convention =>] @SynI{convention_}@Syn2{identifier},[Entity =>] @Syn2{local_name});'
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Convention)([Convention =>] @SynI{convention_}@Syn2{identifier},[Entity =>] @Syn2{local_name});']}
 
 @PragmaSyn`@key{pragma} @prag(Linker_Options)(@SynI{string_}@Syn2{expression});'
 
@@ -104,32 +122,50 @@ A @nt[pragma] Linker_Options is allowed only at the place of a
 @nt[declarative_item].
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0058],ARef=[AI95-00036-01]}
-@ChgAdded{Version=[1],Text=[For @nt{pragma}s Import and Export, the argument
+@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[1],Text=[@Chg{Version=[3],New=[],Old=[For @nt{pragma}s
+Import and Export, the argument
 for Link_Name shall not be given without the
 @i{pragma_@!argument_}@!@nt{identifier}
-unless the argument for External_Name is given.]}
+unless the argument for External_Name is given.]}]}
 @end{SyntaxText}
 @end{Syntax}
 
 @begin{Resolution}
-@PDefn2{Term=[expected type],
-  Sec=(link name)}
-The expected type for a @SynI{string_}@Syn2{expression}
-in an interfacing pragma or in pragma Linker_Options is String.
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The Import and Export aspects are of
+type Boolean.]}
+
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+The @Chg{Version=[3],New=[Link_Name and External_Name aspects are
+of],Old=[expected type for a @SynI{string_}@Syn2{expression}@PDefn2{Term=[expected type],
+  Sec=(link name)} in an interfacing pragma or in pragma Linker_Options
+is]} String.
 @begin{Ramification}
+@ChgRef{Version=[3],Kind=[Revised]}
 There is no language-defined support for
 external or link names of type
 Wide_String, or of other string types.
-Implementations may, of course, have additional pragmas for that
-purpose.
-Note that allowing both String and Wide_String in the same @nt{pragma} would
+Implementations may, of course, have additional
+@Chg{Version=[3],New=[aspects],Old=[pragmas]} for that purpose.
+Note that allowing both String and Wide_String in the same
+@Chg{Version=[3],New=[@nt{aspect_definition}],Old=[@nt{pragma}]} would
 cause ambiguities.
 @end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=[expected type],Sec=(linker options)}
+The expected type for the @SynI{string_}@Syn2{expression}
+in pragma Linker_Options is String.]}
+
 @end{Resolution}
 
 @begin{Legality}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn{convention}
-The @SynI{convention_}@nt{identifier} of an interfacing pragma
+The @Chg{Version=[3],New=[aspect Convention shall be specified
+by a ],Old=[]}@SynI{convention_}@nt{identifier}
+@Chg{Version=[3],New=[which],Old=[of an interfacing pragma]}
 shall be the name of a @i{convention}.
 The convention names are implementation defined,
 except for certain language-defined ones,
@@ -168,9 +204,10 @@ corresponding to @i[L] and is defined to be
 @refsecnum(Interfacing with COBOL),
 @refsecnum(Interfacing with Fortran)),
 
-@Leading@Defn2{Term=[eligible],Sec=[a type, for a convention]}
-Convention @i[L] has been specified for T in
-a @nt[pragma] Convention, and T is @i{eligible for
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Defn2{Term=[eligible],Sec=[a type, for a convention]}
+Convention @i[L] has been specified for T@Chg{Version=[3],New=[],Old=[ in
+a @nt[pragma] Convention]}, and T is @i{eligible for
 convention @i[L]}; that is:
 @begin[inneritemize]
 T is an array type with either an
@@ -193,29 +230,38 @@ and its designated profile's parameter and result types are all @i[L]-compatible
 T is derived from an @i[L]-compatible type,
 
 The implementation permits T as an @i[L]-compatible type.
-@begin{discussion}
 
-For example, an implementation might permit Integer as a C-compatible
-type, though the C type to which it corresponds might be different
-in different environments.@end{discussion}
+@begin{discussion}
+  For example, an implementation might permit Integer as a C-compatible
+  type, though the C type to which it corresponds might be different
+  in different environments.
+@end{discussion}
 @end[itemize]
 
-If @nt[pragma] Convention applies to a type,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+If @Chg{Version=[3],New=[the],Old=[@nt[pragma]]} Convention
+@Chg{Version=[3],New=[aspect is specified for],Old=[applies to]} a type,
 then the type shall either be
 compatible with or eligible for
 the convention specified in the pragma.
 @begin[ramification]
-If a type is derived from an @i[L]-compatible type, the derived type
-is by default @i[L]-compatible, but it is also permitted to specify
-pragma Convention for the derived type.
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+  If a type is derived from an @i[L]-compatible type, the derived type
+  is by default @i[L]-compatible, but it is also permitted to specify
+  @Chg{Version=[3],New=[the],Old=[pragma]} Convention
+  @Chg{Version=[3],New=[aspect ],Old=[]}for the derived type.
 
-It is permitted to specify pragma Convention for an incomplete type,
-but in the complete declaration each component must be
-@i[L]-compatible.
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+  It is permitted to specify @Chg{Version=[3],New=[the],Old=[pragma]}
+  Convention @Chg{Version=[3],New=[aspect ],Old=[]}for an incomplete type,
+  but in the complete declaration each component must be
+  @i[L]-compatible.
 
-If each component of a record type is @i[L]-compatible, then
-the record type itself is only @i[L]-compatible if it has a pragma
-Convention.
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+  If each component of a record type is @i[L]-compatible, then
+  the record type itself is only @i[L]-compatible if it has
+  @Chg{Version=[3],New=[specified],Old=[a pragma]}
+  Convention.
 @end[Ramification]
 
 A @nt{pragma} Import shall be the completion of a declaration.
@@ -863,8 +909,9 @@ the reference also applies to the corresponding entity in C++.],Old=[]}
 
    @key[function] @AdaSubDefn{To_Ada} (Item : @key[in] char) @key[return] Character;
 
-   @key(type) @AdaTypeDefn{char_array} @key(is) @key(array) (size_t @key(range) <>) @key(of) @key[aliased] char;
-   @key[pragma] Pack(char_array);
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+   @key(type) @AdaTypeDefn{char_array} @key(is) @key(array) (size_t @key(range) <>) @key(of) @key[aliased] char@Chg{Version=[3],New=[],Old=[;
+   @key[pragma] Pack(char_array)]};
    @key(for) char_array'Component_Size @key(use) CHAR_BIT;
 
    @key(function) @AdaSubDefn{Is_Nul_Terminated} (Item : @key(in) char_array) @key(return) Boolean;
@@ -899,9 +946,12 @@ Old=[@RI{implementation-defined}]};
    @key(function) @AdaSubDefn{To_C}   (Item : @key(in) Wide_Character) @key(return) wchar_t;
    @key(function) @AdaSubDefn{To_Ada} (Item : @key(in) wchar_t       ) @key(return) Wide_Character;
 
-   @key(type) @AdaTypeDefn{wchar_array} @key(is) @key(array) (size_t @key(range) <>) @key(of) @key(aliased) wchar_t;
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+   @key(type) @AdaTypeDefn{wchar_array} @key(is) @key(array) (size_t @key(range) <>) @key(of) @key(aliased) wchar_t@Chg{Version=[3],New=[
+      @key[with] Pack],Old=[]};
 
-   @key(pragma) Pack(wchar_array);
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[   @key(pragma) Pack(wchar_array);]}
 
    @key(function) @AdaSubDefn{Is_Nul_Terminated} (Item : @key(in) wchar_array) @key(return) Boolean;
 
@@ -937,10 +987,13 @@ Old=[@RI{implementation-defined}]};
    @key<function> @AdaSubDefn{To_Ada} (Item : @key<in> char16_t) @key<return> Wide_Character;]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{char16_array} @key<is array> (size_t @key<range> <>) @key<of aliased> char16_t;]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{char16_array} @key<is array> (size_t @key<range> <>) @key<of aliased> char16_t@Chg{Version=[3],New=[
+      @key[with] Pack],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[   @key<pragma> Pack(char16_array);]}
+@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[   @key<pragma> Pack(char16_array);]}]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Is_Nul_Terminated} (Item : @key<in> char16_array) @key<return> Boolean;
@@ -976,10 +1029,13 @@ Old=[@RI{implementation-defined}]};
    @key<function> @AdaSubDefn{To_Ada} (Item : @key<in> char32_t) @key<return> Wide_Wide_Character;]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{char32_array} @key<is array> (size_t @key<range> <>) @key<of aliased> char32_t;]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{char32_array} @key<is array> (size_t @key<range> <>) @key<of aliased> char32_t@Chg{Version=[3],New=[
+      @key[with] Pack],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[   @key<pragma> Pack(char32_array);]}
+@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[   @key<pragma> Pack(char32_array);]}]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Is_Nul_Terminated} (Item : @key<in> char32_array) @key<return> Boolean;
@@ -1314,7 +1370,7 @@ C_Pass_By_Copy shall only be applied to a type.]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059],ARef=[AI95-00131-01]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00216-01]}
-@ChgAdded{Version=[1],Text=[The eligibility rules in @RefSecNum(Interfacing Pragmas) do not apply
+@ChgAdded{Version=[1],Text=[The eligibility rules in @RefSecNum(Interfacing Aspects) do not apply
 to convention C_Pass_By_Copy. Instead, a type T is eligible for convention
 C_Pass_By_Copy @Chg{Version=[2],New=[if T is an unchecked union type or ],
 Old=[]}if T is a record type that has no discriminants and that only
@@ -1331,7 +1387,7 @@ also C-compatible.]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059],ARef=[AI95-00131-01]}
 An implementation shall support pragma Convention
 with a C @i{convention}_@nt{identifier} for a
-C-eligible type (see @refsecnum(Interfacing Pragmas))@Chg{New=[. An
+C-eligible type (see @refsecnum(Interfacing Aspects))@Chg{New=[. An
 implementation shall support pragma Convention with a C_Pass_By_Copy
 @i{convention}_@nt{identifier} for a C_Pass_By_Copy-eligible type.],Old=[]}
 @end{ImplReq}
@@ -1530,7 +1586,7 @@ specific numbers and types of parameters.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
   @ChgAdded{Version=[2],Text=[Specified that an unchecked union type (see
-  @RefSecNum{Pragma Unchecked_Union}) is eligible for convention
+  @RefSecNum{Unchecked Union Types}) is eligible for convention
   C_Pass_By_Copy.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00258-01]}
@@ -1655,7 +1711,7 @@ corresponds to the use of C's @lquotes@;char *@rquotes@; for
 a pointer to the first char in a char array terminated by nul.
 When an object of type chars_ptr is declared, its value is
 by default set to Null_Ptr, unless the object is imported
-(see @RefSecNum(Interfacing Pragmas)).
+(see @RefSecNum(Interfacing Aspects)).
 @begin{discussion}
 
 The type char_array_access is not necessarily C-compatible, since
@@ -2144,44 +2200,73 @@ Some_Pointer : Pointer := Some_Array(0)'Access;
 
 
 
-@LabeledAddedSubClause{Version=[2],Name=[Pragma Unchecked_Union]}
+@Comment{TBD:---@LabeledAddedRevisedClause{Version=[3],OldVersion=[2],New=[Unchecked Union Types],Old=[Pragma Unchecked_Union]}}
+@LabeledAddedSubClause{Version=[3],Name=[Unchecked Union Types]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[union],Sec=[C]}
-@Redundant[A pragma Unchecked_Union specifies an interface correspondence
-between a given discriminated type and some C union. The pragma
-specifies that the associated type shall be given a representation
+@Redundant[@Chg{Version=[3],New=[Specifying aspect],Old=[A pragma]}
+Unchecked_Union @Chg{Version=[3],New=[to have the value True
+defines],Old=[specifies]} an interface correspondence
+between a given discriminated type and some C union. The
+@Chg{Version=[3],New=[aspect requires],Old=[pragma specifies]}
+that the associated type shall be given a representation
 that leaves no space for its discriminant(s).]]}
 @end{Intro}
 
 @begin{Syntax}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],
-Text=[The form of a pragma Unchecked_Union is as follows:]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Type=[Leading],KeepNext=[T],Text=[
+@Chg{Version=[2],New=[The form of a pragma Unchecked_Union is as follows:],Old=[]}]}
+@Comment{We'd like a conditional insert of Leading, etc., but we don't have that.}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag{Unchecked_Union} (@Syni<first_subtype_>@Syn2<local_name>);''}
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag{Unchecked_Union} (@Syni<first_subtype_>@Syn2<local_name>);'',Old=[]}]}
 
 @end{Syntax}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a discriminated record type
+having a @nt{variant_part}, the following language-defined representation aspect
+may be specified:]}
+
+@begin{Description}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Unchecked_Union@\The type of aspect Unchecked_Union
+is Boolean. If directly specified, the @nt{aspect_definition} shall be a static
+expression. If not specified (including by inheritance), the aspect is False.]}
+@end{Description}
+@end{StaticSem}
 
 @begin{Legality}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
-@ChgAdded{Version=[2],Text=[Unchecked_Union is a representation pragma,
-specifying the unchecked union aspect of representation.]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[Unchecked_Union is a
+representation pragma, specifying the unchecked union aspect of
+representation.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
-@ChgAdded{Version=[2],Text=[The @SynI{first_subtype_}@nt{local_name} of a
-@nt{pragma} Unchecked_Union shall denote an unconstrained discriminated record
-subtype having a @nt{variant_part}.]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[The
+@SynI{first_subtype_}@nt{local_name} of a @nt{pragma} Unchecked_Union shall
+denote an unconstrained discriminated record subtype having a
+@nt{variant_part}.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[@Defn{unchecked union type}
 @Defn{unchecked union subtype}
 @Defn{unchecked union object}
-A type to which a pragma Unchecked_Union applies is called an
+A type @Chg{Version=[3],New=[for],Old=[to]} which
+@Chg{Version=[3],New=[aspect],Old=[a pragma]} Unchecked_Union
+@Chg{Version=[3],New=[is True],Old=[applies]} is called an
 @i<unchecked union type>. A subtype of an
 unchecked union type is defined to be an @i<unchecked union subtype>.
 An object of an unchecked union type is defined to be an @i<unchecked union
@@ -2351,9 +2436,10 @@ cases:@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
 @begin{ImplPerm}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
-@ChgAdded{Version=[2],Text=[An implementation may require that @nt{pragma}
-Controlled be specified for the type of an access subcomponent of an unchecked
-union type.]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[An implementation may
+require that @nt{pragma} Controlled be specified for the type of an access
+subcomponent of an unchecked union type.]}]}
 
 @end{ImplPerm}
 
@@ -2399,6 +2485,13 @@ Y : Integer := X.F2; -- @RI[erroneous]]}
   specify a position for something that is not supposed to exist. It
   is very unlikely that this change will have any impact on existing code.]}
 @end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Aspect Unchecked_Union is new; @nt{pragma} Unchecked_Union is
+  now obsolescent.]}
+@end{Extend2005}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0026-1]}
@@ -2453,9 +2546,11 @@ either an internal or external COBOL representation
    @AdaObjDefn{Max_Digits_Binary}      : @key(constant) := @RI{implementation-defined};
    @AdaObjDefn{Max_Digits_Long_Binary} : @key(constant) := @RI{implementation-defined};
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key(type) @AdaTypeDefn{Decimal_Element}  @key(is) @key(mod) @RI{implementation-defined};
-   @key(type) @AdaTypeDefn{Packed_Decimal} @key(is) @key(array) (Positive @key(range) <>) @key(of) Decimal_Element;
-   @key(pragma) Pack(Packed_Decimal);
+   @key(type) @AdaTypeDefn{Packed_Decimal} @key(is) @key(array) (Positive @key(range) <>) @key(of) Decimal_Element@Chg{Version=[3],New=[
+      @key[with] Pack],Old=[;
+   @key(pragma) Pack(Packed_Decimal)]};
 
 
    @key(type) @AdaTypeDefn{COBOL_Character} @key(is) @RI{implementation-defined character type};
@@ -2464,8 +2559,10 @@ either an internal or external COBOL representation
 
    @AdaObjDefn{COBOL_To_Ada} : @key(array) (COBOL_Character) @key(of) Character := @RI{implementation-defined};
 
-   @key(type) @AdaTypeDefn{Alphanumeric} @key(is) @key(array) (Positive range <>) @key(of) COBOL_Character;
-   @key(pragma) Pack(Alphanumeric);
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+   @key(type) @AdaTypeDefn{Alphanumeric} @key(is) @key(array) (Positive range <>) @key(of) COBOL_Character@Chg{Version=[3],New=[
+      @key[with] Pack],Old=[;
+   @key(pragma) Pack(Alphanumeric)]};
 
    @key(function) @AdaSubDefn{To_COBOL} (Item : @key(in) String) @key(return) Alphanumeric;
    @key(function) @AdaSubDefn{To_Ada}   (Item : @key(in) Alphanumeric) @key(return) String;
@@ -2478,8 +2575,10 @@ either an internal or external COBOL representation
                      Target   : @key(out) String;
                      Last     : @key(out) Natural);
 
-   @key(type) @AdaTypeDefn{Numeric} @key(is) @key(array) (Positive @key[range] <>) @key(of) COBOL_Character;
-   @key(pragma) Pack(Numeric);
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+   @key(type) @AdaTypeDefn{Numeric} @key(is) @key(array) (Positive @key[range] <>) @key(of) COBOL_Character@Chg{Version=[3],New=[
+      @key[with] Pack],Old=[;
+   @key(pragma) Pack(Numeric)]};
 
 @RI{-- Formats for COBOL data representations}
 
@@ -2505,9 +2604,11 @@ either an internal or external COBOL representation
 
 @RI{-- Types for external representation of COBOL binary data}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key(type) @AdaTypeDefn{Byte} @key(is) @key(mod) 2**COBOL_Character'Size;
-   @key(type) @AdaTypeDefn{Byte_Array} @key(is) @key(array) (Positive @key(range) <>) @key(of) Byte;
-   @key(pragma) Pack (Byte_Array);
+   @key(type) @AdaTypeDefn{Byte_Array} @key(is) @key(array) (Positive @key(range) <>) @key(of) Byte@Chg{Version=[3],New=[
+      @key[with] Pack],Old=[;
+   @key(pragma) Pack (Byte_Array)]};
 
    @AdaExcDefn{Conversion_Error} : @key(exception);
 
@@ -2854,7 +2955,7 @@ first).
 @begin{ImplReq}
 An implementation shall support pragma Convention with
 a COBOL @i[convention]_@nt[identifier] for a COBOL-eligible type
-(see @RefSecNum(Interfacing Pragmas)).
+(see @RefSecNum(Interfacing Aspects)).
 @begin{ramification}
 An implementation supporting this package shall ensure that if the bounds of
 a Packed_Decimal, Alphanumeric, or Numeric variable are static,
@@ -3089,8 +3190,10 @@ declaration:
 
    @key[type] @AdaTypeDefn{Character_Set} @key[is] @RI{implementation-defined character type};
 
-   @key[type] @AdaTypeDefn{Fortran_Character} @key[is] @key[array] (Positive @key[range] <>) @key[of] Character_Set;
-   @key[pragma] Pack (Fortran_Character);
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+   @key[type] @AdaTypeDefn{Fortran_Character} @key[is] @key[array] (Positive @key[range] <>) @key[of] Character_Set@Chg{Version=[3],New=[
+      @key[with] Pack],Old=[;
+   @key[pragma] Pack (Fortran_Character)]};
 
    @key[function] @AdaSubDefn{To_Fortran} (Item : @key[in] Character) @key[return] Character_Set;
    @key[function] @AdaSubDefn{To_Ada} (Item : @key[in] Character_Set) @key[return] Character;
@@ -3134,7 +3237,7 @@ found in Interfaces.COBOL.
 @begin[ImplReq]
 An implementation shall support @nt[pragma] Convention
 with a Fortran @i[convention]_@nt[identifier] for a Fortran-eligible
-type (see @RefSecNum(Interfacing Pragmas)).
+type (see @RefSecNum(Interfacing Aspects)).
 @end[ImplReq]
 
 @begin{ImplPerm}

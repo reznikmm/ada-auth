@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:20 $}
+@Comment{$Date: 2011/08/06 05:45:24 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.92 $}
+@Comment{$Revision: 1.93 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -256,9 +256,11 @@ same value.
 For example, an implementation might use a biased representation in
 some cases but not others:
 @begin{Example}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @key[subtype] S @key[is] Integer @key[range] 1..256;
-@key[type] A @key[is] @key[array](Natural @key[range] 1..4) @key[of] S;
-@key[pragma] Pack(A);
+@key[type] A @key[is] @key[array](Natural @key[range] 1..4) @key[of] S@Chg{Version=[3],New=[
+   @key[with] Pack],Old=[;
+@key[pragma] Pack(A)]};
 X : S := 3;
 Y : A := (1, 2, 3, 4);
 @end{Example}
@@ -279,6 +281,7 @@ Such tricks are not required, but are allowed.
   or a sign extension.
 @end{Discussion}
 @begin{Ramification}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 For example, suppose S'Size = 2, and an object X is of subtype S.
 If the machine code typically uses a 32-bit load instruction to load the
 value of X, then X'Size should be 32, even though 30 bits of the value
@@ -286,7 +289,8 @@ are just zeros or sign-extension bits.
 On the other hand, if the machine code typically masks out those 30
 bits, then X'Size should be 2.
 Usually, such masking only happens for components of a composite type
-for which packing, Component_Size, or record layout is specified.
+for which @Chg{Version=[3],New=[Pack],Old=[packing]}, Component_Size, or
+record layout is specified.
 
 Note, however, that the formal parameter of an instance of
 Unchecked_Conversion is a special case.
@@ -442,6 +446,12 @@ pragma Asynchronous (applies to procedures)
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00414-01]}
 @ChgAdded{Version=[2],Text=[pragma No_Return (applies to subprograms)]}
 @end{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[While a @nt{aspect_specification} is not
+a representation item, a similar categorization applies to the aspect
+that corresponds to each of these representation items (along with
+aspects that do not have associated representation items).]}
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -549,6 +559,7 @@ or has any user-defined primitive subprograms.
   Old=[]}.
 @end{Ramification}
 @begin{Reason}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
   The reason for forbidding type-related representation items on
   untagged by-reference types is because a change of representation
   is impossible when passing by reference (to an inherited subprogram).
@@ -565,8 +576,8 @@ or has any user-defined primitive subprograms.
   from changing the representation of the parent part;
   we want to allow a type-related representation item on a type extension
   to specify aspects of the extension part.
-  For example, a @nt{pragma} Pack will cause packing of the extension
-  part, but not of the parent part.
+  For example, @Chg{Version=[3],New=[specifying aspect],Old=[a @nt{pragma}]}
+  Pack will cause packing of the extension part, but not of the parent part.
 @end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01],Ref=[8652/0011],ARef=[AI95-00117-01]}
@@ -701,33 +712,36 @@ for a nonfirst subtype.
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00114}
 @key[package] P1 @key[is]
-    @key[subtype] S1 @key[is] Integer @key[range] 0..2**16-1;
-    @key[for] S1'Size @key[use] 16; --@RI{ Illegal!}
-        --@RI{ S1'Size would be 16 by default.}
-    @key[type] A1 @key[is] @key[access] @Chg{New=[@Key[all] ],Old=[]}S1;
-    X1: A1;
+   @key[subtype] S1 @key[is] Integer @key[range] 0..2**16-1;
+   @key[for] S1'Size @key[use] 16; --@RI{ Illegal!}
+      --@RI{ S1'Size would be 16 by default.}
+   @key[type] A1 @key[is] @key[access] @Chg{New=[@Key[all] ],Old=[]}S1;
+   X1: A1;
 @key[end] P1;
 
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00114}
 @key[package] P2 @key[is]
-    @key[subtype] S2 @key[is] Integer @key[range] 0..2**16-1;
-    @key[for] S2'Size @key[use] 32; --@RI{ Illegal!}
-    @key[type] A2 @key[is] @key[access] @Chg{New=[@Key[all] ],Old=[]}S2;
-    X2: A2;
+   @key[subtype] S2 @key[is] Integer @key[range] 0..2**16-1;
+   @key[for] S2'Size @key[use] 32; --@RI{ Illegal!}
+   @key[type] A2 @key[is] @key[access] @Chg{New=[@Key[all] ],Old=[]}S2;
+   X2: A2;
 @key[end] P2;
 
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00114}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @key[procedure] Q @key[is]
-    @key[use] P1, P2;
-    @key[type] Array1 @key[is] @key[array](Integer @key[range] <>) @key[of] @key[aliased] S1;
-    @key[pragma] Pack(Array1);
-    Obj1: Array1(1..100);
-    @key[type] Array2 @key[is] @key[array](Integer @key[range] <>) @key[of] @key[aliased] S2;
-    @key[pragma] Pack(Array2);
-    Obj2: Array2(1..100);
+   @key[use] P1, P2;
+   @key[type] Array1 @key[is] @key[array](Integer @key[range] <>) @key[of] @key[aliased] S1@Chg{Version=[3],New=[
+      @key[with] Pack],Old=[;
+   @key[pragma] Pack(Array1)]};
+   Obj1: Array1(1..100);
+   @key[type] Array2 @key[is] @key[array](Integer @key[range] <>) @key[of] @key[aliased] S2@Chg{Version=[3],New=[
+      @key[with] Pack],Old=[;
+   @key[pragma] Pack(Array2)]};
+   Obj2: Array2(1..100);
 @key[begin]
-    X1 := Obj2(17)'@Chg{New=[Unchecked_],Old=[]}Access;
-    X2 := Obj1(17)'@Chg{New=[Unchecked_],Old=[]}Access;
+   X1 := Obj2(17)'@Chg{New=[Unchecked_],Old=[]}Access;
+   X2 := Obj1(17)'@Chg{New=[Unchecked_],Old=[]}Access;
 @key[end] Q;
 @end{Example}
 
@@ -1077,7 +1091,10 @@ an indefinite or abstract subtype.]}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00075}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
-A pragma Pack will typically not pack so tightly as to disobey the above
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[A type with the Pack aspect specified],Old=[A pragma Pack]}
+will typically not @Chg{Version=[3],New=[be packed],Old=[pack]} so tightly as to
+disobey the above
 @Chg{Version=[2],New=[rules],Old=[rule]}. A Component_Size clause or
 @nt{record_representation_clause} will typically @Chg{New=[be],Old=[by]}
 illegal if it disobeys the above @Chg{Version=[2],New=[rules],Old=[rule]}.
@@ -1244,30 +1261,38 @@ Some of the more stringent requirements are moved to
 @end{DiffWord2005}
 
 
-
-@LabeledClause{Pragma Pack}
+@LabeledRevisedClause{Version=[3],New=[Packed Types],Old=[Pragma Pack]}
 
 @begin{Intro}
-@redundant[A @nt{pragma} Pack specifies that storage
-minimization should be the main criterion when
-selecting the representation of a composite type.]
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@redundant[@Chg{Version=[3],New=[The Pack aspect having the value True],Old=[A
+@nt{pragma} Pack]} specifies that storage minimization should be the main
+criterion when selecting the representation of a composite type.]
 @end{Intro}
 
 @begin{Syntax}
 @begin{SyntaxText}
-@Leading@Keepnext@;The form of a @nt{pragma} Pack is as follows:
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Type=[Leading],KeepNext=[T],Text=[The form of a
+@nt{pragma} Pack is as follows:]}
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(Pack)(@SynI{first_subtype_}@Syn2{local_name});'
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Pack)(@SynI{first_subtype_}@Syn2{local_name});']}
 @end{Syntax}
 
 @begin{Legality}
-The @SynI{first_subtype_}@nt{local_name} of a @nt{pragma} Pack
-shall denote a composite subtype.
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[The @SynI{first_subtype_}@nt{local_name} of a
+@nt{pragma} Pack shall denote a composite subtype.]}
 @end{Legality}
 
 @begin{StaticSem}
-@PDefn2{Term=[representation pragma], Sec=(Pack)}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[]}@Comment{A fake to get a conditional Leading}
+@Chg{Version=[3],New=[For a full type declaration of a composite type, the
+following language-defined representation aspect may be specified:],
+Old=[@PDefn2{Term=[representation pragma], Sec=(Pack)}
 @PDefn2{Term=[pragma, representation], Sec=(Pack)}
 @PDefn2{Term=[aspect of representation], Sec=(packing)}
 @Defn2{Term=[packing], Sec=(aspect of representation)}
@@ -1275,10 +1300,29 @@ shall denote a composite subtype.
 A @nt{pragma} Pack specifies the @i{packing} aspect of representation;
 the type (or the extension part) is said to be @i{packed}.
 For a type extension, the parent part is packed as for the parent
-type, and a @nt{pragma} Pack causes packing only of the extension part.
+type, and a @nt{pragma} Pack causes packing only of the extension part.]}
+
+@begin{Description}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Pack@\The type of aspect Pack is Boolean. When
+  aspect Pack is True for a type, the type (or the extension part) is said to be
+  @i{packed}. For a type extension, the parent part is packed as for the parent
+  type, and specifying Pack causes packing only of the extension part.
+@PDefn2{Term=[aspect of representation], Sec=(pack)}
+@Defn2{Term=[pack], Sec=(aspect of representation)}
+@Defn{packed}]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],NoPrefix=[T],Text=[If directly specified, the
+  @nt{aspect_definition} shall be a static expression. If not specified
+  (including by inheritance), the aspect is False.]}
+@end{Description}
+
 @begin{Ramification}
-The only high level semantic effect of a @nt{pragma} Pack
-is independent addressability (see @RefSec{Shared Variables}).
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+The only high level semantic effect of @Chg{Version=[3],New=[specifying the],Old=[a @nt{pragma}]
+Pack@Chg{Version=[3],New=[ aspect],Old=[]}
+is independent addressability (see @RefSec{Shared Variables}).]}
 @end{Ramification}
 @end{StaticSem}
 
@@ -1290,14 +1334,17 @@ subject to reasonable complexity in addressing calculations.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Storage allocated to objects of a packed type should be minimized.]}]}
 @begin{Ramification}
-A @nt{pragma} Pack is for gaining space efficiency,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[Specifying the],Old=[A @nt{pragma}]}
+Pack@Chg{Version=[3],New=[ aspect],Old=[]} is for gaining space efficiency,
 possibly at the expense of time.
 If more explicit control over representation is desired,
 then a @nt{record_representation_clause},
 a Component_Size clause,
 or a Size clause should be used instead of,
 or in addition to,
-a @nt{pragma} Pack.
+@Chg{Version=[3],New=[the],Old=[a @nt{pragma}]}
+Pack@Chg{Version=[3],New=[ aspect],Old=[]}.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
@@ -1308,8 +1355,12 @@ need not be allocated on a storage element boundary.]}
 @Comment{No "should" here; thus no ImplAdvice entry. This really qualifies the
 item above}
 
-@Leading@PDefn2{Term=[recommended level of support], Sec=(pragma Pack)}
-The recommended level of support for pragma Pack is:
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[@PDefn2{Term=[recommended level of support], Sec=(aspect Pack)}],
+Old=[@PDefn2{Term=[recommended level of support], Sec=(pragma Pack)}]}
+The recommended level of support for
+@Chg{Version=[3],New=[the],Old=[@nt{pragma}]}
+Pack@Chg{Version=[3],New=[ aspect],Old=[]} is:
 @begin{Itemize}
 For a packed record type,
 the components should be packed as tightly as possible
@@ -1343,24 +1394,33 @@ its Size will generally be a multiple of Storage_Unit,
 so it probably won't get packed very tightly.
 @end{Ramification}
 @end{Itemize}
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The recommended level of support for pragma Pack should be
+@ChgImplAdvice{Version=[3],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+Text=[The recommended level of support for @Chg{Version=[3],New=[the],Old=[pragma]}
+Pack@Chg{Version=[3],New=[ aspect],Old=[]} should be
 followed.]}]}
 @end{ImplAdvice}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
-  @ChgAdded{Version=[2],Text=[Added clarification that pragma Pack can
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[2],Text=[Added clarification that
+  @Chg{Version=[3],New=[the],Old=[pragma]} Pack@Chg{Version=[3],New=[ aspect],Old=[]} can
   ignore alignment requirements on types that don't have by-reference or
   aliased parts. This was always intended, but there was no wording to that
   effect.]}
 @end{DiffWord95}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Aspect Pack is new; @nt{pragma} Pack is now obsolescent.]}
+@end{Extend2005}
+
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Fixed so that the
   presence or absence of a confirming Component_Size representation
-  clause does not change the meaning of pragma Pack.]}
+  clause does not change the meaning of the Pack aspect.]}
 @end{DiffWord2005}
 
 
@@ -1745,7 +1805,7 @@ followed.]}]}
 
 @begin{Notes}
 The specification of a link name in a @nt{pragma} Export
-(see @RefSecNum{Interfacing Pragmas})
+(see @RefSecNum{Interfacing Aspects})
 for a subprogram or object is an alternative to explicit
 specification of its link-time address, allowing a link-time directive
 to place the subprogram or object within memory.
@@ -2043,8 +2103,11 @@ semantics of Alignment. For specified Alignments, it follows from a
 @LegalityName stated above.]}
 @end{Discussion}
 
-A @nt{component_clause}, Component_Size clause, or a @nt{pragma} Pack
-can override a specified Alignment.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+A @nt{component_clause}, Component_Size clause, or
+@Chg{Version=[3],New=[specifying the],Old=[a @nt{pragma}]} Pack
+@Chg{Version=[3],New=[aspect to True ],Old=[]}can override a specified
+Alignment.
 @begin{Discussion}
 Most objects are allocated by the implementation; for these, the
 implementation obeys the Alignment. The implementation is of course
@@ -2070,6 +2133,7 @@ about where an address @lquotes@;came from@rquotes@; can be lost to the compiler
 separate compilation.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 The Alignment of an object that is a component of a packed
 composite object will usually be 0, to indicate that the component is
 not necessarily aligned on a storage element boundary.
@@ -2077,7 +2141,8 @@ For a subtype, an Alignment of 0 means that objects of the subtype are
 not normally aligned on a storage element boundary at all.
 For example, an implementation might choose to make Component_Size be
 @Chg{Version=[2],New=[1],Old=[0]}
-for an array of Booleans, even when @nt{pragma} Pack has not been
+for an array of Booleans, even
+when @Chg{Version=[3],New=[the aspect],Old=[@nt{pragma}]} Pack has not been
 specified for the array.
 In this case, Boolean'Alignment would be 0.
 (In the presence of tasking, this would in general be feasible only on a
@@ -2238,9 +2303,11 @@ and its value nonnegative.
     (unless a @nt{component_clause} or a Component_Size clause applies).
   @end{Itemize}
 
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
   A @nt{component_clause} or a Component_Size clause can cause an object
   to be smaller than its subtype's specified size.
-  A @nt{pragma} Pack cannot; if a component subtype's size is specified,
+  @Chg{Version=[3],New=[The aspect],Old=[A @nt{pragma}]}
+  Pack cannot; if a component subtype's size is specified,
   this limits how tightly the composite object can be packed.
 
   The Size of a class-wide (tagged) subtype is unspecified,
@@ -2363,7 +2430,9 @@ the internal layout of components.
 Text=[A Size clause on a composite subtype should not affect
 the internal layout of components.]}]}
 @begin{Reason}
-That's what Pack @nt{pragma}s, @nt{record_representation_clause}s,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+That's what Pack @Chg{Version=[3],New=[aspects],Old=[@nt{pragma}s]},
+@nt{record_representation_clause}s,
 and Component_Size clauses are for.
 @end{Reason}
 
@@ -2406,6 +2475,7 @@ reflects this representation.
   However, it might, for example, choose a biased representation,
   in which case it could choose a smaller value.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
   On most machines, it is in general not a good idea to pack (parts of)
   multiple stand-alone objects into the same storage element,
   because (1) it usually doesn't save much space,
@@ -2418,7 +2488,8 @@ reflects this representation.
   It might, for example, be 8, 16 or 32, depending on the availability
   and efficiency of various machine instructions.
   The same applies to components of composite types,
-  unless packing, Component_Size, or record layout is specified.
+  unless @Chg{Version=[3],New=[Pack],Old=[packing]},
+  Component_Size, or record layout is specified.
 
   For an unconstrained discriminated object,
   if the implementation allocates the maximum
@@ -2592,9 +2663,10 @@ followed.]}]}
 @begin{Notes}
 Size is a subtype-specific attribute.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 A @nt{component_clause} or Component_Size clause
 can override a specified Size.
-A @nt{pragma} Pack cannot.
+@Chg{Version=[3],New=[Aspect],Old=[A @nt{pragma}]} Pack cannot.
 @end{Notes}
 
 @begin{Inconsistent83}
@@ -2620,7 +2692,8 @@ rather than letting implementations define their meaning.
 @Chg{New=[@nt{prefix}],Old=[prefix]} T that denotes a task
 object @Redundant[(after any implicit dereference)]]}:
 @begin{Description}
-@Attribute{Prefix=<T>, AttrName=<Storage_Size>,
+@ChgAttribute{Version=[3], Kind=[Revised], ChginAnnex=[F], Leading=[F],
+  Prefix=<T>, AttrName=<Storage_Size>, ARef=[AI05-0229-1],
   Text=<Denotes the number of storage elements reserved for
   the task.
 The value of this attribute is of the type
@@ -2630,9 +2703,11 @@ if any. The language does not specify whether or
 not it includes other storage associated with the task
 (such as the @lquotes@;task control block@rquotes@; used by some
 implementations.)>}
-If a @nt{pragma} Storage_Size is given,
+If @Chg{Version=[3],New=[the aspect],Old=[a @nt{pragma}]} Storage_Size is
+@Chg{Version=[3],New=[specified for the type of the object],Old=[given]},
 the value of the Storage_Size attribute is at least
-the value specified in the @nt{pragma}.
+the value @Chg{Version=[3],New=[determined by the aspect],Old=[specified
+in the @nt{pragma}]}.
 @EndPrefixType{}
   @begin{Ramification}
   The value of this attribute is never negative,
@@ -2655,39 +2730,82 @@ the value specified in the @nt{pragma}.
 @end{StaticSem}
 
 @begin{Intro}
-@redundant[@IndexSeeAlso{Term=[Storage_Size clause],See=[pragma Storage_Size]}
-A @nt{pragma} Storage_Size specifies the amount of storage to be
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0229-1]}
+@redundant[@Chg{Version=[3],New=[Aspect],Old=[@IndexSeeAlso{Term=[Storage_Size clause],See=[pragma Storage_Size]}
+A @nt{pragma}]} Storage_Size specifies the amount of storage to be
 reserved for the execution of a task.]
 @end{Intro}
 
 @begin{Syntax}
 @begin{SyntaxText}
-@Leading@;The form of a @nt{pragma} Storage_Size is as follows:
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Type=[Leading],KeepNext=[T],Text=[The form of a
+@nt{pragma} Storage_Size is as follows:]}
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(Storage_Size)(@Syn2{expression});'
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Storage_Size)(@Syn2{expression});']}
 
 @begin{SyntaxText}
-A @nt{pragma} Storage_Size is allowed only immediately within a
-@nt{task_definition}.
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[A @nt{pragma} Storage_Size is allowed only
+immediately within a @nt{task_definition}.]}
 @end{SyntaxText}
 @end{Syntax}
 
 @begin{Resolution}
-@PDefn2{Term=[expected type],
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[@PDefn2{Term=[expected type],
   Sec=(Storage_Size pragma argument)}
 The @nt{expression} of a @nt<pragma> Storage_Size
-is expected to be of any integer type.
+is expected to be of any integer type.]}
 @end{Resolution}
 
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a task type (including the
+anonymous type of a @nt{single_task_declaration}),
+the following language-defined representation aspect may be specified:]}
+
+@begin{Description}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Storage_Size@\The value of aspect Storage_Size is
+an @nt{expression}, which shall be of any integer type.]}
+
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This definition somewhat conflicts with the
+  "automatic" one for the obsolescent attribute Storage_Size (which can be
+  specified). We intend for the above definition to supercede that "automatic"
+  definition for this attribute.]}
+@end{Honest}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Note that the value of the Storage_Size aspect
+  @i<is> an @nt{expression}; it is not the @i<value> of an @nt{expression}.
+  The @nt{expression} is evaluated for each object of the type (see below).]}
+@end{Ramification}
+@end{Description}
+@end{StaticSem}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The Storage_Size aspect shall not be specified for a
+task interface type.]}
+@end{Legality}
+
 @begin{RunTime}
-A @nt<pragma> Storage_Size is elaborated when an object
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[When a task object is created, the @nt{expression}
+(if any) associated with the Storage_Size aspect of its
+type],Old=[A @nt<pragma> Storage_Size is elaborated when an object
 of the type defined by the immediately enclosing @nt<task_definition>
 is created.
 @PDefn2{Term=[elaboration],Sec=(Storage_Size pragma)}
-For the elaboration of a @nt<pragma> Storage_Size, the @nt<expression>
+For the elaboration of a @nt<pragma> Storage_Size, the @nt<expression>]}
 is evaluated; the Storage_Size attribute of the newly created task object
 is at least the value of the @nt<expression>.
+
 @begin{Ramification}
   The implementation is allowed to round up a specified Storage_Size
   amount.
@@ -2696,6 +2814,11 @@ is at least the value of the @nt<expression>.
   up to 4096. Also, if the user specifies a negative
   number, the implementation has to normalize this to 0,
   or perhaps to a positive number.
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[If the Storage_Size aspect is not specified for
+  the type of the task object, the value of the Storage_Size attribute is
+  unspecified.]}
 @end{Ramification}
 
 @IndexCheck{Storage_Check}
@@ -2742,15 +2865,18 @@ The recommended level of support for the Component_Size attribute is:
 An implementation need not support specified Component_Sizes that
 are less than the Size of the component subtype.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 An implementation should support specified Component_Sizes that
 are factors and multiples of the word size.
 For such Component_Sizes, the array should contain no gaps between
 components.
 For other Component_Sizes (if supported), the array should
-contain no gaps between components when packing is also specified;
+contain no gaps between components when
+@Chg{Version=[3],New=[Pack],Old=[packing]} is also specified;
 the implementation should forbid this combination in cases where it
 cannot support a no-gaps representation.
 @begin{Ramification}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 For example, if Storage_Unit = 8, and Word_Size = 32,
 then the user is allowed to specify a Component_Size of
 1, 2, 4, 8, 16, and 32, with no gaps.
@@ -2759,7 +2885,7 @@ again with no gaps.
 If the implementation accepts Component_Size = 3,
 then it might allocate 10 components per word,
 with a 2-bit gap at the end of each word
-(unless packing is also specified),
+(unless @Chg{Version=[3],New=[Pack],Old=[packing]} is also specified),
 or it might not have any internal gaps at all.
 (There can be gaps at either end of the array.)
 @end{Ramification}
@@ -3125,6 +3251,11 @@ except for certain explicit exceptions.
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0191-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Attributes Has_Same_Storage and Overlaps_Storage are new.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[Aspect Storage_Size is new;
+  @nt{pragma} Storage_Size is now obsolescent, joining attribute
+  Storage_Size for task types.]}
 @end{Extend2005}
 
 @begin{DiffWord2005}
@@ -4411,6 +4542,7 @@ The Bit_Order attribute is new to Ada 95.
 @LabeledClause{Change of Representation}
 
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @redundant[@Defn{change of representation}
 @Defn2{Term=[representation], Sec=(change of)}
 A @nt{type_conversion} (see @RefSecNum{Type Conversions})
@@ -4419,7 +4551,8 @@ representations of the same array or record.
 To convert an array from one representation to another,
 two array types need to be declared with
 matching component subtypes, and convertible index types.
-If one type has packing specified and the other does not,
+If one type has @Chg{Version=[3],New=[Pack],Old=[packing]}
+specified and the other does not,
 then explicit conversion can be used to pack or unpack an array.
 
 To convert a record from one representation to another,

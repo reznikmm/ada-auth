@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.99 $ $Date: 2011/07/29 05:59:20 $ $Author: randy $ }
+@comment{ $Revision: 1.100 $ $Date: 2011/08/06 05:45:24 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2011/07/29 05:59:20 $}
+@Comment{$Date: 2011/08/06 05:45:24 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -101,43 +101,88 @@ In addition, the methods for specifying priorities are defined.]
 
 @begin{Syntax}
 @begin{SyntaxText}
-@leading@keepnext@;The form of a @nt{pragma} Priority is as follows:
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Type=[Leading],KeepNext=[T],Text=[The form of a
+@nt{pragma} Priority is as follows:]}
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(Priority)(@Syn2{expression});'
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Priority)(@Syn2{expression});']}
 
 @begin{SyntaxText}
-@leading@keepnext@;The form of a @nt{pragma} Interrupt_Priority is as follows:
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Type=[Leading],KeepNext=[T],Text=[The form of a
+@nt{pragma} Interrupt_Priority is as follows:]}
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(Interrupt_Priority)[(@Syn2{expression})];'
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Interrupt_Priority)[(@Syn2{expression})];']}
 @end{Syntax}
 
 @begin{Resolution}
 
-@PDefn2{Term=[expected type],
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[@PDefn2{Term=[expected type],
   Sec=(Priority pragma argument)}
 @PDefn2{Term=[expected type],
   Sec=(Interrupt_Priority pragma argument)}
 The expected type for the @nt{expression} in a Priority
-or Interrupt_Priority pragma is Integer.
+or Interrupt_Priority pragma is Integer.]}
 @end{Resolution}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a task type (including the
+anonymous type of a @nt{single_task_declaration}), protected type (including the
+anonymous type of a @nt{single_protected_declaration}), or subprogram,
+the following language-defined representation aspects may be specified:]}
+
+@begin{Description}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Priority@\The value of aspect Priority is
+an @nt{expression}, which shall be of type Integer.]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Interrupt_Priority@\The value of aspect
+Interrupt_Priority is an @nt{expression}, which shall be of type Integer.]}
+
+@end{Description}
+@end{StaticSem}
+
 
 @begin{Legality}
 
-A Priority pragma is allowed only immediately within a @nt{task_definition},
-a @nt{protected_definition}, or the @nt{declarative_part} of a
-@nt{subprogram_body}. An Interrupt_Priority pragma is allowed only
-immediately within a @nt{task_definition} or a @nt{protected_definition}.
-At most one such pragma shall appear within a given construct.
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[A Priority pragma is allowed only immediately
+within a @nt{task_definition}, a @nt{protected_definition}, or the
+@nt{declarative_part} of a @nt{subprogram_body}. An Interrupt_Priority pragma is
+allowed only immediately within a @nt{task_definition} or a
+@nt{protected_definition}. At most one such pragma shall appear within a given
+construct.]}
 
-For a Priority pragma that appears in the @nt{declarative_part} of a
-@nt{subprogram_body}, the @nt{expression} shall be static, and its value shall
-be in the range of System.Priority.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[If the],Old=[For a]} Priority @Chg{Version=[3],New=[aspect
+is specified for a subprogram],Old=[pragma that appears in the
+@nt{declarative_part} of a @nt{subprogram_body}]}, the @nt{expression} shall be
+static, and its value shall be in the range of System.Priority.
 @begin{Reason}
 This value is needed before it gets elaborated, when the environment task
 starts executing.
 @end{Reason}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[At most one of the Priority and Interrupt_Priority
+aspects may be specified for a given entity.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This includes specifying via pragmas
+  (see @RefSecNum{Pragmas Priority and Interrupt_Priority}).]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[Neither of the Priority or Interrupt_Priority
+aspects shall be specified for a synchronized interface type.]}
 
 @end{Legality}
 
@@ -161,18 +206,23 @@ enough to require the blocking of one or more interrupts is specified by the
 subtype Interrupt_@!Priority. @Redundant[The subrange of priority values below
 System.@!Interrupt_@!Priority'First is specified by the subtype System.@!Priority.]
 
-The priority specified by a Priority or Interrupt_Priority pragma is the
-value of the @nt{expression} in the pragma, if any. If there is no
-@nt{expression} in an Interrupt_Priority pragma, the priority value is
-Interrupt_Priority'Last.
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[The priority specified by a Priority or
+Interrupt_Priority pragma is the value of the @nt{expression} in the pragma, if
+any. If there is no @nt{expression} in an Interrupt_Priority pragma, the
+priority value is Interrupt_Priority'Last.]}
 
 @end{StaticSem}
 
 @begin{RunTime}
 
-A Priority pragma has no effect
-if it occurs in the @nt{declarative_part} of the @nt{subprogram_body} of a
-subprogram other than the main subprogram.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[The],Old=[A]} Priority
+@Chg{Version=[3],New=[aspect],Old=[pragma]} has no effect
+if it @Chg{Version=[3],New=[is specified for],Old=[it occurs
+in the @nt{declarative_part} of the @nt{subprogram_body} of]} a
+subprogram other than the main subprogram@Chg{Version=[3],New=[; the Priority
+value is not associated with any task],Old=[]}.
 
 @Defn{task priority}
 @Defn{priority}
@@ -196,34 +246,52 @@ see @RefSecNum{Priority Ceiling Locking}) is used in the evaluation of another
 task's active priority.
 @ImplDef{Implementation-defined execution resources.}
 
-The effect of specifying such a pragma in a @nt{protected_definition}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+The effect of specifying @Chg{Version=[3],New=[a Priority or
+Interrupt_Priority aspect for a protected type or
+@nt{single_protected_declaration}],Old=[such a pragma
+in a @nt{protected_definition}]}
 is discussed in @RefSecNum{Priority Ceiling Locking}.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn2{Term=[creation], Sec=(of a task object)}
-The @nt{expression} in a Priority or Interrupt_Priority pragma that
-appears in a @nt{task_definition} is evaluated for each task object
+The @nt{expression} @Chg{Version=[3],New=[specified for the],Old=[in a]}
+Priority or Interrupt_Priority @Chg{Version=[3],New=[aspect of a task],
+Old=[pragma that
+appears in a @nt{task_definition}]} is evaluated for each task object
 (see @RefSecNum{Task Units and Task Objects}).
-For a Priority pragma, the
-value of the @nt{expression} is converted to the subtype Priority; for an
-Interrupt_Priority pragma, this value is converted to the subtype Any_Priority.
+For @Chg{Version=[3],New=[the],Old=[a]} Priority @Chg{Version=[3],New=[aspect],Old=[pragma]},
+the value of the @nt{expression} is converted to the subtype Priority;
+for @Chg{Version=[3],New=[the],Old=[an]}
+Interrupt_Priority @Chg{Version=[3],New=[aspect],Old=[pragma]}, this value
+is converted to the subtype Any_Priority.
 The priority value is then associated with the task object whose
-@nt{task_definition} contains the pragma.
-@PDefn2{Term=[implicit subtype conversion],Sec=(pragma Priority)}
-@PDefn2{Term=[implicit subtype conversion],Sec=(pragma Interrupt_Priority)}
+@Chg{Version=[3],New=[task declaration specifies the
+aspect],Old=[@nt{task_definition} contains the pragma]}.
+@Chg{Version=[3],New=[@PDefn2{Term=[implicit subtype conversion],Sec=(Priority aspect)}
+@PDefn2{Term=[implicit subtype conversion],Sec=(Interrupt_Priority aspect)}],
+Old=[@PDefn2{Term=[implicit subtype conversion],Sec=(pragma Priority)}
+@PDefn2{Term=[implicit subtype conversion],Sec=(pragma Interrupt_Priority)}]}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 Likewise, the priority value is associated with the environment task if the
-pragma appears in the @nt{declarative_part} of the main subprogram.
+@Chg{Version=[3],New=[aspect is specified for],Old=[pragma appears in the
+@nt{declarative_part}]} of the main subprogram.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 The initial value of a task's base priority is specified by default or
-by means of a Priority or Interrupt_Priority pragma.
+by means of a Priority or Interrupt_Priority
+@Chg{Version=[3],New=[aspect],Old=[pragma]}.
 @Redundant[After a task is created,
 its base priority can be changed only by a call to
 Dynamic_Priorities.Set_Priority (see @RefSecNum{Dynamic Priorities}).]
-The initial base priority of a task in the absence of a pragma is the
+The initial base priority of a task in the absence of
+@Chg{Version=[3],New=[an aspect],Old=[a pragma]}. is the
 base priority of the task that creates it at the time of creation
 (see @RefSecNum{Task Units and Task Objects}).
-If a pragma Priority does not apply to the main subprogram,
-the initial base priority of the environment task is
+If @Chg{Version=[3],New=[the aspect],Old=[a pragma]} Priority
+@Chg{Version=[3],New=[is not specified for],Old=[does not apply to]} the
+main subprogram, the initial base priority of the environment task is
 System.Default_Priority.
 @Redundant[The task's active priority is used when the task competes for
 processors.
@@ -293,7 +361,9 @@ An implementation may provide a
 @Chg{Version=[3],New=[nonstandard],Old=[non-standard]} mode in which tasks
 inherit priorities under conditions other than those specified above.
 @begin{Ramification}
-The use of a Priority or Interrupt_Priority pragma does not
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+The use of a Priority or Interrupt_Priority
+@Chg{Version=[3],New=[aspect],Old=[pragma]} does not
 require the package System to be named in a @nt{with_clause} for the
 enclosing @nt{compilation_unit}.
 @end{Ramification}
@@ -326,6 +396,13 @@ The description of the Priority pragma has been moved to this annex.
   inheritance to take into account the differences between the existing and
   new dispatching policies.]}
 @end{DiffWord95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Aspects Priority and Interrupt_Priority are new; @nt{pragma}s
+  Priority and Interrupt_Priority are now obsolescent.]}
+@end{Extend2005}
 
 
 @LabeledClause{Priority Scheduling}
@@ -1441,16 +1518,20 @@ urgency of the task; it represents a point on an ideal physical time line.
 The deadline might affect how resources are allocated to the task.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[This clause defines a package for representing the
 deadline of a task and a dispatching policy that defines Earliest Deadline
-First (EDF) dispatching. A pragma is defined to assign an initial deadline to a
-task.]}
+First (EDF) dispatching. @Chg{Version=[3],New=[An aspect],Old=[A pragma]}
+is defined to assign an initial deadline to a task.]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This pragma is the only way of assigning an
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[aspect],Old=[pragma]}
+  is the only way of assigning an
   initial deadline to a task so that its activation can be controlled by EDF
-  scheduling. This is similar to the way pragma Priority is used to give an
+  scheduling. This is similar to the way
+  @Chg{Version=[3],New=[aspect],Old=[pragma]} Priority is used to give an
   initial priority to a task.]}
 @end{Discussion}
 
@@ -1479,30 +1560,34 @@ before some existing tasks but not preempt the currently executing task.]}
 
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The form of a
-@nt{pragma} Relative_Deadline is as follows:]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Type=[Leading],Keepnext=[T],Text=[@Chg{Version=[2],New=[The
+form of a @nt{pragma} Relative_Deadline is as follows:],Old=[]}]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Relative_Deadline> (@SynI{relative_deadline_}@Syn2{expression});''}
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=`@Chg{Version=[2],New=[@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Relative_Deadline> (@SynI{relative_deadline_}@Syn2{expression});'],Old=[]}'}
 
 @end{Syntax}
 
 @begin{Resolution}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[The expected type for
-@SynI{relative_deadline_}@nt{expression} is Real_Time.Time_Span.]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[The expected type for
+@SynI{relative_deadline_}@nt{expression} is Real_Time.Time_Span.],Old=[]}]}
 
 @end{Resolution}
 
 @begin{Legality}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[A Relative_Deadline pragma is allowed only
-immediately within a @nt{task_definition} or the @nt{declarative_part} of a
-@nt{subprogram_body}. At most one such pragma shall appear within a given
-construct.]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[A Relative_Deadline pragma
+is allowed only immediately within a @nt{task_definition} or
+the @nt{declarative_part} of a @nt{subprogram_body}. At most one such pragma
+shall appear within a given construct.],Old=[]}]}
 
 @end{Legality}
 
@@ -1537,7 +1622,25 @@ language-defined library package exists:]}
 @key{end} Ada.Dispatching.EDF;]}
 @end{Example}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a task type (including the
+anonymous type of a @nt{single_task_declaration}) or subprogram, the following
+language-defined representation aspect may be specified:]}
+
+@begin{Description}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Relative_Deadline@\The value of aspect
+Relative_Deadline is an @nt{expression}, which shall be of
+type Real_Time.Time_Span.]}
+@end{Description}
+
 @end{StaticSem}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The Relative_Deadline aspect shall not be specified
+on a task interface type.]}
+@end{Legality}
 
 @begin{LinkTime}
 
@@ -1569,18 +1672,30 @@ be specified for the partition.]}
 @begin{RunTime}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[A Relative_Deadline pragma has no effect if it
-occurs in the @nt{declarative_part} of the @nt{subprogram_body} of a
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[The],Old=[A]}
+Relative_Deadline @Chg{Version=[3],New=[aspect],Old=[pragma]} has no effect
+if it @Chg{Version=[3],New=[is specified for],
+Old=[occurs in the @nt{declarative_part} of the @nt{subprogram_body} of]} a
 subprogram other than the main subprogram.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[The initial absolute deadline of a task containing
-pragma Relative_Deadline is the value of Real_Time.Clock +
-@SynI{relative_deadline_}@nt{expression}, where the call of Real_Time.Clock is made
-between task creation and the start of its activation. If there is no
-Relative_Deadline pragma then the initial absolute deadline of a task is the
-value of Default_Deadline. @Redundant[The environment task is also given
-an initial deadline by this rule.]]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[2],Text=[The initial absolute deadline of a task
+@Chg{Version=[3],New=[for which aspect],Old=[containing
+pragma]} Relative_Deadline@Chg{Version=[3],New=[ is specified],Old=[]} is
+the value of Real_Time.Clock +
+@Chg{Version=[3],New=[@nt{expression} that is the value of the
+aspect],Old=[@SynI{relative_deadline_}@nt{expression}]}, where
+@Chg{Version=[3],New=[this entire expression, including ],Old=[]}the
+the call of Real_Time.Clock @Chg{Version=[3],New=[, is evaluated],Old=[is made]}
+between task creation and the start of its activation. If
+@Chg{Version=[3],New=[the aspect],Old=[there is no]}
+Relative_Deadline @Chg{Version=[3],New=[is not specified],Old=[pragma]}
+then the initial absolute deadline of a task is the
+value of Default_Deadline. The environment task is also given
+an initial deadline by this rule@Chg{Version=[3],New=[, using the value of
+Relative_Deadline aspect of the main subprogram],Old=[]}.]}
 
 @begin{TheProof}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1759,6 +1874,13 @@ follows the existing rules for ceiling locking.]}
   Policy EDF_Across_Priorities and package Dispatching.EDF are new.]}
 @end{Extend95}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Aspect Relative_Deadline is new; @nt{pragma} Relative_Deadline
+  is now obsolescent.]}
+@end{Extend2005}
+
 @begin{Diffword2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0055-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected definition
@@ -1830,16 +1952,22 @@ Text=[The locking policy if no Locking_Policy pragma applies to any unit of
 a partition.]}]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00327-01]}
-@ChgAdded{Version=[2],Text=[The @nt{expression} of a Priority or Interrupt_Priority
-pragma (see @RefSecNum{Task Priorities}) is evaluated as part of the creation
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[2],Text=[The @nt{expression} @Chg{Version=[3],New=[specified
+for the],Old=[of a]} Priority or Interrupt_Priority
+@Chg{Version=[3],New=[aspect],Old=[pragma]}
+(see @RefSecNum{Task Priorities}) is evaluated as part of the creation
 of the corresponding
 protected object and converted to the subtype System.Any_Priority or
 System.Interrupt_Priority, respectively. The value of the expression is the
 initial priority of the corresponding protected object. If no Priority or
-Interrupt_Priority pragma applies to a protected object, the initial priority
+Interrupt_Priority @Chg{Version=[3],New=[aspect is specified for],Old=[pragma
+applies to]} a protected object, the initial priority
 is specified by the locking policy.
-@PDefn2{Term=[implicit subtype conversion],Sec=(pragma Priority)}
-@PDefn2{Term=[implicit subtype conversion],Sec=(pragma Interrupt_Priority)}]}
+@Chg{Version=[3],New=[@PDefn2{Term=[implicit subtype conversion],Sec=(Priority aspect)}
+@PDefn2{Term=[implicit subtype conversion],Sec=(Interrupt_Priority aspect)}],
+Old=[@PDefn2{Term=[implicit subtype conversion],Sec=(pragma Priority)}
+@PDefn2{Term=[implicit subtype conversion],Sec=(pragma Interrupt_Priority)}]}]}
 
 @Leading@;There is one predefined locking policy, Ceiling_Locking; this policy is
 defined as follows:@Chg{Version=[3],New=[@Defn2{Term=[locking policy],
@@ -1848,9 +1976,11 @@ Old=[]}
 @begin{itemize}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00327-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn2{Term=[ceiling priority], Sec=(of a protected object)}
 Every protected object has a @i{ceiling priority}, which
-is determined by either a Priority or Interrupt_Priority pragma as
+is determined by either a Priority or Interrupt_Priority
+@Chg{Version=[3],New=[aspect],Old=[pragma]} as
 defined in @RefSecNum{Task Priorities}@Chg{Version=[2],New=[, or by
 assignment to the Priority attribute as described
 in @RefSecNum{Dynamic Priorities for Protected Objects}],Old=[]}.
@@ -1860,8 +1990,7 @@ it calls protected operations of that protected object.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00327-01]}
 The @Chg{Version=[2],New=[initial ceiling priority of a],Old=[@nt{expression}
-of a Priority or Interrupt_Priority pragma is evaluated
-as part of the creation of the corresponding]}
+of a Priority or Interrupt_Priority pragma is evaluated as part of the creation of the corresponding]}
 protected object
 @Chg{Version=[2],New=[is
 equal to the initial priority for that object.],Old=[and converted
@@ -1872,19 +2001,30 @@ the corresponding protected object.
 @PDefn2{Term=[implicit subtype conversion],Sec=(pragma Interrupt_Priority)}]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00327-01]}
-If an Interrupt_Handler or Attach_Handler pragma
-(see @RefSecNum{Protected Procedure Handlers}) appears in a
-@nt{protected_definition} without an Interrupt_Priority pragma, the
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+If an Interrupt_Handler or Attach_Handler @Chg{Version=[3],New=[aspect],
+Old=[pragma]} (see @RefSecNum{Protected Procedure Handlers})
+@Chg{Version=[3],New=[is specified for a protected subprogram of a
+protected type that does not have the ],Old=[appears in a
+@nt{protected_definition} without an]} Interrupt_Priority
+@Chg{Version=[3],New=[aspect specified],Old=[pragma]}, the
 @Chg{Version=[2],New=[initial],Old=[ceiling]} priority of protected objects
 of that type is implementation defined,
 but in the range of the subtype System.Interrupt_Priority.
 @ImplDef{Default ceiling priorities.}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00327-01]}
-If no @nt{pragma} Priority, Interrupt_Priority,
-Interrupt_Handler, or Attach_Handler is specified in the
-@nt{protected_definition}, then the @Chg{Version=[2],New=[initial],Old=[ceiling]}
-priority of the corresponding protected object is System.Priority'Last.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+If @Chg{Version=[3],New=[neither aspect],Old=[no @nt{pragma}]}
+Priority@Chg{Version=[3],New=[ nor],Old=[,]}
+Interrupt_Priority@Chg{Version=[3],New=[],Old=[, Interrupt_Handler,
+or Attach_Handler]} is specified
+@Chg{Version=[3],New=[for a protected type, and no protected subprogram
+of the type has aspect Interrupt_Handler or
+Attach_Handler specified],Old=[in the
+@nt{protected_definition}]}, then the
+@Chg{Version=[2],New=[initial],Old=[ceiling]} priority of the corresponding
+protected object is System.Priority'Last.
 
 While a task executes a protected action, it inherits the ceiling
 priority of the corresponding protected object.
@@ -2073,6 +2213,13 @@ calls another protected operation on the same protected object).
   from @RefSecNum{Dynamic Priorities}, so that it applies no matter how the
   situation arises.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[Revised to use aspects Priority and
+  Interrupt_Priority as @nt{pragma}s
+  Priority and Interrupt_Priority are now obsolescent.]}
+@end{DiffWord2005}
 
 
 @Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
@@ -4429,23 +4576,23 @@ There may be more than one @nt{pragma} Profile for a partition.]}]}
 @end{Linktime}
 
 @begin{ImplReq}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[A task shall only be on the ready queues of one
 processor, and the
 processor to which a task belongs shall be defined statically.
 Whenever a task running on a processor reaches a task dispatching point,
 it goes back to the ready queues of the same processor. A task with
 a CPU value of Not_A_Specific_CPU will execute on an implementation
-defined processor. @Redundant[A task without a CPU pragma will activate and
+defined processor. @Redundant[A task without a CPU aspect will activate and
 execute on the same processor as its activating task.]]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The processor of a task without a pragma CPU is
+  @ChgAdded{Version=[3],Text=[The processor of a task without a aspect CPU is
   defined in @RefSecNum{Multiprocessor Implementation}.]}
 @end{TheProof}
 @ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
 Text=[The processor on which a task with a CPU value of a Not_A_Specific_CPU
-will execution when the Ravenscar profile is in effect.]}]}
+will execute when the Ravenscar profile is in effect.]}]}
 @end{ImplReq}
 
 @begin{ImplAdvice}
@@ -4558,16 +4705,16 @@ processor to which a task belongs shall be defined statically.
 Whenever a task running on a processor reaches a task dispatching point,
 it goes back to the ready queues of the same processor. A task with
 a CPU value of Not_A_Specific_CPU will execute on an implementation
-defined processor. @Redundant[A task without a CPU pragma will activate and
+defined processor. @Redundant[A task without a CPU aspect will activate and
 execute on the same processor as its activating task.]]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The processor of a task without a pragma CPU is
+  @ChgAdded{Version=[3],Text=[The processor of a task without an aspect CPU is
   defined in @RefSecNum{Multiprocessor Implementation}.]}
 @end{TheProof}
 @ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
 Text=[The processor on which a task with a CPU value of a Not_A_Specific_CPU
-will execution when the Ravenscar profile is in effect.]}]}
+will execute when the Ravenscar profile is in effect.]}]}
 @end{ImplReq}
 
 @begin{ImplAdvice}
@@ -5758,62 +5905,54 @@ Text=[The value of CPU_Range'Last in System.Multiprocessors.]}]}
 processors available to the program. Within a given partition, each call on
 Number_Of_CPUs will return the same value.]}
 
-@end{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a task type (including the
+anonymous type of a @nt{single_task_declaration}) or subprogram, the following
+language-defined representation aspect may be specified:]}
 
-@begin{Syntax}
-@begin{SyntaxText}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
-@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[The form of a
-@nt{pragma} CPU is as follows:]}
-@end{SyntaxText}
-
+@begin{Description}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=`@AddedPragmaSyn`Version=[3],@key{pragma} @prag<CPU> (@Syn2{expression});''}
-@end{Syntax}
+@ChgAdded{Version=[3],Text=[CPU@\The value of aspect CPU is an @nt{expression},
+which shall be of type System.Multiprocessors.CPU_Range.]}
+@end{Description}
 
-@begin{Resolution}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
-@ChgAdded{Version=[3],Text=[The expected type for the @nt{expression} is
-System.Multiprocessors.CPU_Range.]}
 
-@end{Resolution}
+@end{StaticSem}
 
 @begin{Legality}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
-@ChgAdded{Version=[3],Text=[A CPU pragma is allowed only immediately within a
-@nt{task_definition}, or the @nt{declarative_part} of a @nt{subprogram_body}. At
-most one such pragma shall appear within a given construct.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[If the CPU aspect is specified for a subprogram,
+the @nt{expression} shall be static.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
-@ChgAdded{Version=[3],Text=[For a CPU pragma that appears in the
-@nt{declarative_part} of a @nt{subprogram_body}, the @nt{expression} shall be
-static.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The CPU aspect shall not be specified on a task
+interface type.]}
 
 @end{Legality}
 
 @begin{Runtime}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
-@ChgAdded{Version=[3],Text=[The @nt{expression} of a CPU pragma that appears in
-a @nt{task_definition} is evaluated for each task object (see
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The @nt{expression} specified for the CPU aspect
+of a task is evaluated for each task object (see
 @RefSecNum{Task Units and Task Objects}). The CPU value is then associated with
-the task object whose @nt{task_definition} contains the pragma.]}
+the task object whose task declaration specifies the aspect.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
-@ChgAdded{Version=[3],Text=[A CPU pragma has no effect if it occurs immediately within the
-@nt{declarative_part} of a @nt{subprogram_body} other than the main subprogram;
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The CPU aspect has no effect if it is specified for
+a subprogram other than the main subprogram;
 the CPU value is not associated with any task.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[The CPU value is associated with the environment
-task if the pragma appears in the @nt{declarative_part} of the main subprogram.
-If a pragma CPU does not apply to the main subprogram it is implementation
+task if the CPU aspect is specified for the main subprogram.
+If the CPU aspect is not specified for the main subprogram it is implementation
 defined on which processor the environment task executes.]}
 @ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
 Text=[The processor on which the environment task executes in the absence of a
-pragma CPU.]}]}
+value for the aspect CPU.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
 @ChgAdded{Version=[3],Text=[The CPU value determines the processor on which the
@@ -5829,9 +5968,9 @@ defined to have failed, and it becomes a completed task (see
 @end{Runtime}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1],ARef=[AI05-0229-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
-  The package System.Multiprocessors and the pragma CPU are new.]}
+  The package System.Multiprocessors and the CPU aspect are new.]}
 @end{Extend2005}
 
 @LabeledAddedSubClause{Version=[3],Name=[Multiprocessor Dispatching Domains]}

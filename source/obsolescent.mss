@@ -1,10 +1,10 @@
-@Part(obsolescent, Root="ada.mss")
+ @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:21 $}
+@Comment{$Date: 2011/08/06 05:45:24 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -42,7 +42,7 @@ Safe_Large attributes of floating point types
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00284-02]}
 @ChgDeleted{Version=[2],Text=[The pragma Interface
-(see @RefSecNum{Interfacing Pragmas}).]}
+(see @RefSecNum{Interfacing Aspects}).]}
 
 The pragmas System_Name, Storage_Unit, and Memory_Size
 (see @RefSecNum{The Package System}).
@@ -643,11 +643,13 @@ of type @i{universal_integer}
 representing the number of storage
 elements reserved for a task of the subtype T.
 @begin{Honest}
-T'Storage_Size cannot be particularly meaningful in the presence of a
-@nt{pragma} Storage_Size, especially when the expression is dynamic, or
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+T'Storage_Size cannot be particularly meaningful in the presence of
+@Chg{Version=[3],New=[the specification of the aspect],Old=[a @nt{pragma}]}
+Storage_Size, especially when the expression is dynamic, or
 depends on a discriminant of the task,
 because the Storage_Size will be different for different objects of the type.
-Even without such a @nt{pragma},
+Even without such a @Chg{Version=[3],New=[specification],Old=[@nt{pragma}]},
 the Storage_Size can be different for different objects of the type,
 and in any case, the value is implementation defined.
 Hence, it is always implementation defined.
@@ -660,6 +662,18 @@ first subtype)}
 @Chg{Version=[2],New=[that is not an interface ],Old=[]}via
 an @nt{attribute_definition_clause}.
 @end{Description}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[When this attribute is specified with an
+  @nt{attribute_definition_clause}, the associated aspect is set to the
+  @i<value> of the @nt{expression} given in the @nt{attribute_definition_clause}.
+  This value is therefore the same for all objects of the type; in particular,
+  it is not re-evaluated when objects are created. This is different than
+  when the aspect is specified with an @nt{aspect_specification}
+  (see @RefSecNum{Operational and Representation Attributes}).]}
+@end{Ramification}
+
 @end{StaticSem}
 
 @begin{DiffWord95}
@@ -1049,7 +1063,8 @@ all of the denoted entities.]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
 No_Return, which is a representation pragma
 (see @RefSecNum{Operational and Representation Items}),
-is as follows:]}
+is as follows:@PDefn2{Term=[representation pragma], Sec=(No_Return)}
+@PDefn2{Term=[pragma, representation], Sec=(No_Return)}]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1079,8 +1094,453 @@ by each @nt{local_name} given in the @nt{pragma} has the value True.]}
 @end{DiffWord2005}
 
 
+@LabeledAddedSubClause{Version=[3],Name=[Pragma Pack]}
 
-*** TBD (other subclauses). The following should be J.15.10.
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
+Pack, which is a representation pragma
+(see @RefSecNum{Operational and Representation Items}),
+is as follows:@PDefn2{Term=[representation pragma], Sec=(Pack)}
+@PDefn2{Term=[pragma, representation], Sec=(Pack)}]}
+@end{SyntaxText}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Pack> (@SynI[first_subtype_]@Syn2[local_name]);']}
+@end{Syntax}
+
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The @SynI<first_subtype_>@nt{local_name} of a
+@nt{pragma} Pack shall denote a composite subtype.]}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[@nt{Pragma}
+Pack specifies that the Pack aspect (see @RefSecNum{Packed Types}) for the type
+denoted by @SynI<first_subtype_>@nt{local_name} has the value True.]}
+@end{StaticSem}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[This clause is new. Pragma Pack was moved
+  here from @RefSecNum{Packed Types}; aspect Pack lives
+  there now.]}
+@end{DiffWord2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[Pragma Storage_Size]}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
+Storage_Size is as follows:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Storage_Size> (@Syn2[expression]);']}
+
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[A @nt{pragma} Storage_Size is allowed only
+immediately within a @nt{task_definition}.]}
+@end{SyntaxText}
+@end{Syntax}
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The @nt{expression} of a @nt{pragma} Storage_Size
+is expected to be of any integer type.@PDefn2{Term=[expected type], Sec=(Storage_Size pragma argument)}]}
+@end{Resolution}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The @nt{pragma} Storage_Size sets the
+Storage_Size aspect (see @RefSecNum{Operational and Representation Attributes})
+of the type defined by the immediately enclosing @nt{task_definition}
+to the value of the @nt{expression} of the @nt{pragma}.]}
+@end{StaticSem}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[This clause is new. Pragma Storage_Size was moved
+  here from @RefSecNum{Operational and Representation Attributes};
+  aspect Storage_Size lives there now.]}
+@end{DiffWord2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[Interfacing Pragmas]}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[@RootDefn{interfacing pragma}
+@PDefn2{Term=[interfacing pragma], Sec=(Import)}
+@PDefn2{Term=[pragma, interfacing], Sec=(Import)}
+@PDefn2{Term=[interfacing pragma], Sec=(Export)}
+@PDefn2{Term=[pragma, interfacing], Sec=(Export)}
+@PDefn2{Term=[interfacing pragma], Sec=(Convention)}
+@PDefn2{Term=[pragma, interfacing], Sec=(Convention)}
+An @i{interfacing pragma} is a representation
+@nt[pragma] that is
+one of the @nt{pragma}s Import, Export,
+or Convention. Their forms are as follows:]}
+@end{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag(Import)(@*
+@ @ @ @ @ [Convention =>] @SynI{convention_}@Syn2{identifier}, [Entity =>] @Syn2{local_name}@*
+@ @ [, [External_Name =>] @SynI{external_name_string_}@Syn2{expression}]@*
+@ @ [, [Link_Name =>] @SynI{link_name_string_}@Syn2{expression}]);']}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag(Export)(@*
+@ @ @ @ @ [Convention =>] @SynI{convention_}@Syn2{identifier}, [Entity =>] @Syn2{local_name}@*
+@ @ [, [External_Name =>] @SynI{external_name_string_}@Syn2{expression}]@*
+@ @ [, [Link_Name =>] @SynI{link_name_string_}@Syn2{expression}]);']}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag(Convention)([Convention =>] @SynI{convention_}@Syn2{identifier},[Entity =>] @Syn2{local_name});']}
+
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[For @nt{pragma}s Import and Export, the argument
+for Link_Name shall not be given without the
+@i{pragma_@!argument_}@!@nt{identifier}
+unless the argument for External_Name is given.]}
+@end{SyntaxText}
+@end{Syntax}
+
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=[expected type],Sec=(link name)}
+@PDefn2{Term=[expected type],Sec=(external name)} The expected type for a
+@SynI{external_name_string_}@nt{expression} and a
+@SynI{link_name_string_}@nt{expression} in an interfacing pragma is String.]}
+@end{Resolution}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The @SynI{convention_}@nt{identifier} of an
+interfacing pragma shall be the name of a convention
+(see @RefSecNum{Interfacing Aspects}).]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[A pragma Import shall be the completion of a
+declaration.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The @SynI{external_name_string_}@nt{expression} and
+@SynI{link_name_string_}@nt{expression} of a @nt{pragma} Import or Export shall
+be static.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The @nt{local_name} of of each of these pragmas
+shall denote a declaration that may have the similarly named aspect specified.]}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[An interfacing pragma specifies
+various aspects of the entity denoted by the @nt{local_name} as follows:]}
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The Convention aspect (see
+  @RefSecNum{Interfacing Aspects}) is @SynI{convention_}@nt{identifier}.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[A @nt{pragma} Import specifies that the Import
+  aspect (see @RefSecNum{Interfacing Aspects}) is True.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[A @nt{pragma} Export specifies that the Export
+  aspect (see @RefSecNum{Interfacing Aspects}) is True.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[For both pragma Import and Export, if an external
+  name is given in the pragma, the External_Name aspect (see
+  @RefSecNum{Interfacing Aspects}) is specified to be
+  @SynI{external_name_string_}@nt{expression}. If a link name is given in the
+  pragma, the Link_Name aspect (see @RefSecNum{Interfacing Aspects}) is
+  specified to be the @SynI{link_name_string_}@nt{expression}.]}
+@end{Itemize}
+@end{StaticSem}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[This clause is new. Pragma Unchecked_Union was
+  moved here from @RefSecNum{Unchecked Union Types}; aspect Unchecked_Union
+  lives there now.]}
+@end{DiffWord2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[Pragma Unchecked_Union]}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
+Unchecked_Union, which is a representation pragma
+(see @RefSecNum{Operational and Representation Items}),
+is as follows:@PDefn2{Term=[representation pragma], Sec=(Unchecked_Union)}
+@PDefn2{Term=[pragma, representation], Sec=(Unchecked_Union)}]}
+@end{SyntaxText}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Unchecked_Union> (@SynI[first_subtype_]@Syn2[local_name]);']}
+@end{Syntax}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The @SynI<first_subtype_>@nt{local_name} of a
+@nt{pragma} Unchecked_Union shall denote an
+unconstrained discriminated record subtype having a @nt{variant_part}.]}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[A @nt{pragma} Unchecked_Union specifies that
+the Unchecked_Union aspect (see @RefSecNum{Unchecked Union Types})
+for the type denoted by @SynI<first_subtype_>@nt{local_name} has the value
+True.]}
+@end{StaticSem}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[This clause is new. Pragma Unchecked_Union was
+  moved here from @RefSecNum{Unchecked Union Types}; aspect Unchecked_Union
+  lives there now.]}
+@end{DiffWord2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[Pragmas Interrupt_Handler and Attach_Handler]}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
+Interrupt_Handler is as follows:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Interrupt_Handler> (@SynI[handler_]@Syn2[name]);']}
+
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
+Attach_Handler is as follows:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Interrupt_Handler> (@SynI[handler_]@Syn2[name], @Syn2[expression]);']}
+@end{Syntax}
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[For the Interrupt_Handler and Attach_Handler
+pragmas, the handler_name shall resolve to denote a protected procedure with a
+parameterless profile.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[For the Attach_Handler pragma, the expected type for
+the expression is Interrupts.Interrupt_Id (see @RefSecNum{The Package Interrupts}).
+@PDefn2{Term=[expected type], Sec=(Attach_Handler pragma second argument)}]}
+@end{Resolution}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The Attach_Handler and Interrupt_Handler pragmas
+are only allowed immediately within the @nt{protected_definition} where the corresponding subprogram is declared.
+The corresponding @nt{protected_type_declaration} or @nt{single_protected_declaration}
+shall be a library-level declaration, and shall not be declared within a generic
+body.
+@PDefn{generic contract issue}
+In addition to the places where Legality Rules normally apply (see
+@RefSecNum{Generic Instantiation}), these rules also apply in the private part
+of an instance of a generic unit.]}
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[In the case of a @nt{protected_type_declaration},
+an @nt{object_declaration} of an object of that type
+need not be at library level.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1]}
+@ChgAdded{Version=[3],Text=[We cannot allow these pragmas in a generic body,
+because legality rules are not checked for instance bodies, and these should
+not be allowed if the instance is not at the library level. The protected types
+can be declared in the private part if this is desired. Note that while the
+'Access to use the handler would provide the check in the case of
+Interrupt_Handler, there is no other check for Attach_Handler. Since these
+pragmas are so similar, we want the rules to be the same.]}
+@end{Discussion}
+
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[For an implementation that supports Annex C, a
+pragma Interrupt_Handler specifies the Interrupt_Handler aspect (see
+@RefSecNum{Protected Procedure Handlers}) for
+the protected procedure handler_name to have the value True. For an
+implementation that supports Annex C, a pragma Attach_Handler specifies the
+Attach_Handler aspect (see @RefSecNum{Protected Procedure Handlers}) for
+the protected procedure @SynI{handler_}@nt{name} to
+have the value of the given @nt{expression}@Redundant[ as evaluated at object
+creation time].]}
+@end{StaticSem}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Added missing generic contract wording for the pragma Attach_Handler and
+  Interrupt_Handler. This means that nested instances with these pragmas in the
+  private part are now illegal. This is not likely to occur in practice.]}
+@end{Incompatible2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[This clause is new. Pragmas Interrupt_Handler
+  and Attach_Handler were moved here from @RefSecNum{Protected Procedure Handlers};
+  aspects Interrupt_Handler and Attach_Handler live there now.]}
+@end{DiffWord2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[Shared Variable Pragmas]}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The form for a @nt{pragma}s
+Atomic, Volatile, Independent, Atomic_Components, and
+Volatile_Components, and Independent_Components is as follows:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Atomic> (@Syn2[local_name]);']}
+
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Volatile> (@Syn2[local_name]);']}
+
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Independent> (@SynI[component_]@Syn2[local_name]);']}
+
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Atomic_Components> (@SynI[array_]@Syn2[local_name]);']}
+
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Volatile_Components> (@SynI[array_]@Syn2[local_name]);']}
+
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Independent_Components> (@Syn2[local_name]);']}
+
+@end{Syntax}
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The @nt{local_name} in an Atomic or Volatile pragma
+shall resolve to denote either an @nt{object_declaration}, a non-inherited
+@nt{component_declaration}, or a @nt{full_type_declaration}. The
+@SynI{component_}@nt{local_name} in an Independent pragma shall resolve to
+denote a non-inherited component_declaration. The @SynI{array_}@nt{local_name}
+in an Atomic_Components or Volatile_Components pragma shall resolve to denote
+the declaration of an array type or an array object of an anonymous type. The
+@nt{local_name} in an Independent_Components pragma shall resolve to denote the
+declaration of an array or record type or an array object of an anonymous
+type.]}
+@end{Resolution}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[These pragmas are representation pragmas
+(see @RefSecNum{Operational and Representation Items}).
+Each of these pragmas specifies that the similarly named aspect
+(see @RefSecNum{Shared Variable Control}) of the
+type, object, or component denoted by its argument is True.
+@PDefn2{Term=[representation pragma], Sec=(Atomic)}
+@PDefn2{Term=[pragma, representation], Sec=(Atomic)}
+@PDefn2{Term=[representation pragma], Sec=(Volatile)}
+@PDefn2{Term=[pragma, representation], Sec=(Volatile)}
+@PDefn2{Term=[representation pragma], Sec=(Atomic_Components)}
+@PDefn2{Term=[pragma, representation], Sec=(Atomic_Components)}
+@PDefn2{Term=[representation pragma], Sec=(Volatile_Components)}
+@PDefn2{Term=[pragma, representation], Sec=(Volatile_Components)}
+@PDefn2{Term=[representation pragma], Sec=(Independent)}
+@PDefn2{Term=[pragma, representation], Sec=(Independent)}
+@PDefn2{Term=[representation pragma], Sec=(Independent_Components)}
+@PDefn2{Term=[pragma, representation], Sec=(Independent_Components)}]}
+@end{StaticSem}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The @nt{local_name} of each of these @nt{pragma}s
+shall denote a declaration that may have the similarly named aspect specified.]}
+@end{Legality}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[This clause is new. These pragmas
+  were moved here from @RefSecNum{Shared Variable Control};
+  various aspects live there now.]}
+@end{DiffWord2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[Pragma CPU]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[This pragma is born obsolescent; it is defined to
+  provide consistency with existing real-time pragmas. As with all obsolescent
+  features, this pragma is not optional; all Ada implementations need to
+  implement it.]}
+@end{Discussion}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
+CPU is as follows:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<CPU> (@Syn2[expression]);']}
+
+@end{Syntax}
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The expected type for the @nt{expression} of a
+@nt{pragma} CPU is
+System.Multiprocessors.CPU_Range.@PDefn2{Term=[expected type], Sec=(CPU pragma argument)}]}
+@end{Resolution}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[A CPU pragma is allowed only immediately within a
+@nt{task_definition}, or the @nt{declarative_part} of a @nt{subprogram_body}.
+At most one such pragma shall appear within a given construct.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[For a CPU pragma that appears in the
+@nt{declarative_part} of a @nt{subprogram_body}, the @nt{expression} shall be
+static.]}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[For an implementation that supports Annex D, a
+@nt{pragma} CPU specifies the value of the CPU aspect (see
+@RefSecNum{Multiprocessor Implementation}). If the @nt{pragma} appears in a
+@nt{task_definition}, the @nt{expression} is associated with the aspect for the
+task type or @nt{single_task_declaration} that contains the @nt{pragma};
+otherwise, the @nt{expression} is associated with the aspect for the subprogram
+that contains the @nt{pragma}.]}
+@end{StaticSem}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Pragma
+  CPU is new.]}
+@end{Extend2005}
+
 
 @LabeledAddedSubClause{Version=[3],Name=[Pragma Dispatching_Domain]}
 
@@ -1108,7 +1568,8 @@ by each @nt{local_name} given in the @nt{pragma} has the value True.]}
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
 @ChgAdded{Version=[3],Text=[The expected type for the @nt{expression} is
-System.Multiprocessors.Dispatching_Domains.Dispatching_Domain.]}
+System.Multiprocessors.Dispatching_Domains.Dispatching_Domain.
+@PDefn2{Term=[expected type], Sec=(Dispatching_Domains pragma argument)}]}
 @end{Resolution}
 
 @begin{Legality}
@@ -1132,4 +1593,181 @@ that contains the pragma.]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Pragma
   Dispatching_Domain is new.]}
 @end{Extend2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[Pragmas Priority and Interrupt_Priority]}
+
+@begin{Syntax}
+
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[The form of a
+@nt{pragma} Priority is as follows:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=`@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Priority> (@nt{expression});''}
+
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[The form of a
+@nt{pragma} Interrupt_Priority is as follows:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=`@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Interrupt_Priority> [(@nt{expression})];''}
+
+@end{Syntax}
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The expected type for the @nt{expression}
+in a Priority or Interrupt_Priority pragma is
+Integer.@PDefn2{Term=[expected type], Sec=(Priority pragma argument)}
+@PDefn2{Term=[expected type], Sec=(Interrupt_Priority pragma argument)}]}
+@end{Resolution}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[A Priority pragma is allowed only immediately
+within a @nt{task_definition}, a @nt{protected_definition}, or the
+@nt{declarative_part} of a @nt{subprogram_body}. An Interrupt_Priority pragma is
+allowed only immediately within a @nt{task_definition} or a
+@nt{protected_definition}. At most one such pragma shall appear within a given
+construct.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[For a Priority pragma that appears in the
+@nt{declarative_part} of a @nt{subprogram_body},
+the @nt{expression} shall be static, and its value shall be in the range of
+System.Priority.]}
+@end{Legality}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For an implementation that supports
+Annex D, a @nt{pragma} Priority specifies the value of the Priority aspect (see
+@RefSecNum{Task Priorities}) and a @nt{pragma} Interrupt_Priority specifies the
+value of the Interrupt_Priority aspect as follows:]}
+
+@begin{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[If the @nt{pragma} appears in a @nt{task_definition},
+  the @nt{expression} is associated with the aspect for the task type or
+  @nt{single_task_declaration} that contains the @nt{pragma};]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[If the @nt{pragma} appears in a @nt{protected_definition},
+  the @nt{expression} is associated with the aspect for the protected type or
+  @nt{single_protected_declaration} that contains the @nt{pragma};]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[If the @nt{pragma} appears in the @nt{declarative_part}
+  of a @nt{subprogram_body}, the @nt{expression} is associated with the
+  aspect for the subprogram that contains the @nt{pragma}.]}
+
+@end{Itemize}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[If there is no @nt{expression} in an
+Interrupt_Priority pragma, the Interrupt_Priority aspect has the value
+Interrupt_Priority'Last.]}
+@end{StaticSem}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[This clause is new. Pragmas Interrupt_Priority
+  and Priority were moved here from @RefSecNum{Task Priorities};
+  aspects Interrupt_Priority and Priority live there now.]}
+@end{DiffWord2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[Pragma Relative_Deadline]}
+
+@begin{Syntax}
+
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[The form of a
+@nt{pragma} Relative_Deadline is as follows:]}
+@end{SyntaxText}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=`@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Relative_Deadline> (@SynI{relative_deadline_}@nt{expression});''}
+
+@end{Syntax}
+
+@begin{Resolution}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The expected type for a
+@SynI{relative_deadline_}@nt{expression} is
+Real_Time.Time_Span.@PDefn2{Term=[expected type], Sec=(Relative_Deadline pragma argument)}]}
+@end{Resolution}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[A Relative_Deadline pragma is allowed only
+immediately within a @nt{task_definition} or the @nt{declarative_part}
+of a @nt{subprogram_body}. At most one such pragma shall
+appear within a given construct.]}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[For an implementation that supports Annex D, a
+@nt{pragma} Relative_Deadline specifies the value of the Relative_Deadline
+aspect (see @RefSecNum{Earliest Deadline First Dispatching}). If the @nt{pragma}
+appears in a @nt{task_definition}, the @nt{expression} is associated with the
+aspect for the task type or @nt{single_task_declaration} that contains the
+@nt{pragma}; otherwise, the @nt{expression} is associated with the aspect
+for the subprogram that contains the @nt{pragma}.]}
+@end{StaticSem}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[This clause is new. Pragma Relative_Deadline
+  was moved here from @RefSecNum{Earliest Deadline First Dispatching};
+  aspect Relative_Deadline lives there now.]}
+@end{DiffWord2005}
+
+
+@LabeledAddedSubClause{Version=[3],Name=[Pragma Asynchronous]}
+
+@begin{Syntax}
+@begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
+Asynchronous, which is a representation pragma
+(see @RefSecNum{Operational and Representation Items}),
+is as follows:@PDefn2{Term=[representation pragma], Sec=(Asynchronous)}
+@PDefn2{Term=[pragma, representation], Sec=(Asynchronous)}]}
+@end{SyntaxText}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Asynchronous> (@Syn2[local_name]);']}
+@end{Syntax}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[For an implementation that supports Annex E, a
+pragma Asynchronous specifies that the Asynchronous aspect (see
+@RefSecNum{Asynchronous Remote Calls}) for the procedure or type denoted by
+@nt{local_name} has the value True.]}
+@end{StaticSem}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The @nt{local_name} of a pragma Asynchronous shall
+denote a declaration that may have aspect Asynchronous specified.]}
+@end{Legality}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[This clause is new. Pragma Asynchronous
+  was moved here from @RefSecNum{Asynchronous Remote Calls};
+  aspect Asychronous lives there now.]}
+@end{DiffWord2005}
+
 

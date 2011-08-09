@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:19 $}
+@Comment{$Date: 2011/08/06 05:45:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.88 $}
+@Comment{$Revision: 1.89 $}
 
 @LabeledClause{Array Types}
 
@@ -1494,9 +1494,11 @@ used only for discriminants defined by an @nt<access_definition>.
    @key(end) @key(record);
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-@Chg{Version=[2],New=[@key(task type) Worker(Prio : System.Priority; Buf : @key(access) Buffer) @key(is)
-   --@RI[ discriminants used to parameterize the task type (see @RefSecNum{Task Units and Task Objects})]
-   @key(pragma) Priority(Prio);  --@RI[ see @RefSecNum{Task Priorities}]
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[2],New=[@key(task type) Worker(Prio : System.Priority; Buf : @key(access) Buffer)@Chg{Version=[3],New=[
+   @key(with) Priority => Prio @key(is) --@RI[ see @RefSecNum{Task Priorities}]],Old=[@key(is)]}
+   --@RI[ discriminants used to parameterize the task type (see @RefSecNum{Task Units and Task Objects})]@Chg{Version=[3],New=[],Old=[
+   @key(pragma) Priority(Prio);  --@RI[ see @RefSecNum{Task Priorities}]]}
    @key(entry) Fill;
    @key(entry) Drain;
 @key(end) Worker;],Old=[@key(type) Item(Number : Positive) @key(is)

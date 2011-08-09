@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.37 $ $Date: 2011/04/07 06:18:38 $ $Author: randy $ }
+@comment{ $Revision: 1.38 $ $Date: 2011/08/06 05:45:24 $ $Author: randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:38 $}
+@Comment{$Date: 2011/08/06 05:45:24 $}
 
 @Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
 @LabeledClause{The Package Standard}
@@ -264,10 +264,12 @@ the visible part of package Standard.}
 @Defn2{Term=[ASCII], Sec=(package physically nested within the declaration of Standard)}
 @comment[blank line]
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    --@RI{ Predefined string types:}
 @comment[blank line]
-   @key[type] @AdaTypeDefn{String} @key[is] @key[array](Positive @key[range] <>) @key[of] Character;
-   @key[pragma] Pack(String);
+   @key[type] @AdaTypeDefn{String} @key[is] @key[array](Positive @key[range] <>) @key[of] Character@Chg{Version=[3],New=[
+      @key[with] Pack],Old=[;
+   @key[pragma] Pack(String)]};
 
 @Keepnext   --@RI{ The predefined operators for this type are as follows:}
 
@@ -285,15 +287,19 @@ the visible part of package Standard.}
    --     @key[function] "&" (Left: Character; Right: Character) @key[return] String;
 
 
-   @key[type] @AdaTypeDefn{Wide_String} @key[is] @key[array](Positive @key[range] <>) @key[of] Wide_Character;
-   @key[pragma] Pack(Wide_String);
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+   @key[type] @AdaTypeDefn{Wide_String} @key[is] @key[array](Positive @key[range] <>) @key[of] Wide_Character@Chg{Version=[3],New=[
+      @key[with] Pack],Old=[;
+   @key[pragma] Pack(Wide_String)]};
 
    --@RI{ The predefined operators for this type correspond to those for String.}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[   @key[type] @AdaTypeDefn{Wide_Wide_String} @key[is array] (Positive @key[range] <>)
-     @key[of] Wide_Wide_Character;
-   @key[pragma] Pack (Wide_Wide_String);]}
+      @key[of] Wide_Wide_Character@Chg{Version=[3],New=[
+         @key[with] Pack],Old=[;
+   @key[pragma] Pack (Wide_Wide_String)]};]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgAdded{Version=[2],Text=[   --@RI[ The predefined operators for this type correspond to those for String.]]}

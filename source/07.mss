@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:19 $}
+@Comment{$Date: 2011/08/06 05:45:24 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.115 $}
+@Comment{$Revision: 1.116 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1995,7 +1995,7 @@ Null_Key : @key[constant] Key;      --@RI[ see @RefSecNum{Private Operations}]
 
 CPU_Identifier : @key[constant] String(1..8);
 @key[pragma] Import(Assembler, CPU_Identifier, Link_Name => "CPU_ID");
-                              --@RI[ see @RefSecNum{Interfacing Pragmas}]
+                              --@RI[ see @RefSecNum{Interfacing Aspects}]
 @end{Example}
 @end{Examples}
 

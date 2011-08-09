@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:19 $}
+@Comment{$Date: 2011/08/06 05:45:23 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.113 $}
+@Comment{$Revision: 1.114 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -198,7 +198,7 @@ or a @nt{generic_subprogram_declaration}
 requires a completion:
 @Redundant[a body, a @nt<renaming_declaration>
 (see @RefSecNum(Renaming Declarations)), or a @Chg{Version=[2],New=[@nt{pragma}],
-Old=[@key(pragma)]} Import (see @RefSecNum{Interfacing Pragmas})].
+Old=[@key(pragma)]} Import (see @RefSecNum{Interfacing Aspects})].
 @Redundant[A completion is not allowed
 for an @nt<abstract_subprogram_declaration>@Chg{Version=[2],New=[ (see
 @RefSecNum{Abstract Types and Subprograms})@Chg{Version=[3],New=[,],Old=[ or]} a
@@ -506,9 +506,9 @@ following language-defined aspects may be specified with an
   involved.]}
 @end{Honest}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0254-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0254-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[Pre'Class@\This aspect
-  specifies a class-wide precondition for a callable entity and its
+  specifies a class-wide precondition for an operation of a tagged type and its
   descendants; it shall be specified by an @nt{expression}, called a
   @i<class-wide precondition expression>.@Defn{class-wide precondition expression}@Defn2{Term=[precondition expression],Sec=[class-wide]}
   If not specified for an entity, then if no other
@@ -535,9 +535,9 @@ following language-defined aspects may be specified with an
   If not specified for an entity, the specific postcondition
   expression for the entity is the enumeration literal True.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[Post'Class@\This aspect
-  specifies a class-wide postcondition for a callable entity and its
+  specifies a class-wide postcondition for an operation of a tagged type and its
   descendants; it shall be specified by an @nt{expression}, called a
   @i<class-wide postcondition expression>.@Defn{class-wide postcondition expression}@Defn2{Term=[postcondition expression],Sec=[class-wide]}
   If not specified for an entity, the class-wide postcondition
@@ -802,7 +802,8 @@ precondition checks are performed as follows:@Defn2{Term=[assertion policy],
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The class-wide precondition expressions of the
     entity itself as well as those of any parent or progentitor operations are
-    evaluated, as these apply to all descendants.]}
+    evaluated, as these expressions apply to the corresponding operations
+    of all descendants.]}
 @end{Ramification}
 @end{Itemize}
 
@@ -1399,7 +1400,7 @@ conformance, subtype conformance, or full conformance.]
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0011],ARef=[AI95-00117-01]}
 @leading@Defn{convention}
 @Defn{calling convention}
-@Redundant[As explained in @RefSec{Interfacing Pragmas},
+@Redundant[As explained in @RefSec{Interfacing Aspects},
 a @i{convention} can be specified for an entity.]
 @Chg{New=[Unless this International Standard states otherwise, the default
 convention of an entity is Ada.],Old=[]}
@@ -1412,7 +1413,7 @@ The following conventions are defined by the language:
 The default calling convention for any subprogram not listed below is
 @i{Ada}.
 @Redundant[A @nt{pragma} Convention, Import, or Export may be used to override
-the default calling convention (see @RefSecNum{Interfacing Pragmas})].
+the default calling convention (see @RefSecNum{Interfacing Aspects})].
 @begin{Ramification}
 See also the rule about renamings-as-body
 in @RefSecNum{Subprogram Renaming Declarations}.
@@ -4092,8 +4093,8 @@ Ada @Chg{Version=[3],New=[2020],Old=[2017]}. :-)]}
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
 @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[The form of a
-@nt{pragma} No_Return, which is a
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Chg{Version=[3],New=[],Old=[The form
+of a @nt{pragma} No_Return, which is a
 representation pragma (see @RefSecNum{Operational and Representation Items}),
 is as follows:]}]}
 @end{SyntaxText}

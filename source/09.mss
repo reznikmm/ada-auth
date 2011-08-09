@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:20 $}
+@Comment{$Date: 2011/08/06 05:45:24 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.105 $}
+@Comment{$Revision: 1.106 $}
 
 @begin{Intro}
 
@@ -5293,7 +5293,7 @@ and after queuing a given caller.
 @LabeledClause{Shared Variables}
 
 @begin{StaticSem}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1],ARef=[AI05-0201-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1],ARef=[AI05-0201-1],ARef=[AI05-0229-1]}
 @Defn2{Term=[shared variable], Sec=(protection of)}
 @Defn{independently addressable}
 If two different objects, including nonoverlapping
@@ -5306,7 +5306,7 @@ addressable if either object is specified as independently addressable (see
 two nonoverlapping objects are independently addressable
 except when they are both parts of a composite object for which
 a non-confirming representation item is used to specify
-packing, record layout, Component_Size, Atomic, or convention, in which case
+record layout, Component_Size, Pack, Atomic, or convention, in which case
 it is unspecified whether the parts are independently
 addressable.@PDefn{unspecified}],
 Old=[Normally, any two
@@ -5323,8 +5323,9 @@ object are independently addressable,
 in the case where packing, record layout, or Component_Size
 is specified for the object.]}]}
 @begin{ImplNote}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 Independent addressability is the only high level semantic effect of
-a @nt{pragma} Pack.
+@Chg{Version=[3],New=[aspect],Old=[a @nt{pragma}]} Pack.
 If two objects are independently addressable,
 the implementation should allocate them in such a way
 that each can be written by the hardware without writing the other.
@@ -5337,9 +5338,10 @@ concurrently,
 and locking operations on all subcomponents is generally not a good
 idea.
 
-Even if packing or one of the other above-mentioned aspects is specified,
-subcomponents should still be updated independently if the
-hardware efficiently supports it.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+Even if @Chg{Version=[3],New=[Pack],Old=[packing]} or one of the other
+above-mentioned aspects is specified, subcomponents should still be updated
+independently if the hardware efficiently supports it.
 @end{ImplNote}
 
 @begin{Ramification}

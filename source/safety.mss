@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.51 $ $Date: 2011/07/29 05:59:21 $ $Author: randy $ }
+@Comment{ $Revision: 1.52 $ $Date: 2011/08/06 05:45:24 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:21 $}
+@Comment{$Date: 2011/08/06 05:45:24 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -167,7 +167,7 @@ The initialization requirement does not apply to a scalar for which
 pragma Import has been specified,
 since initialization of an imported object is performed
 solely by the foreign language environment
- (see @RefSecNum[Interfacing Pragmas]).
+ (see @RefSecNum[Interfacing Aspects]).
 
 The use of pragma Normalize_Scalars in conjunction with
 Pragma Restrictions(No_Exceptions) may result in erroneous execution

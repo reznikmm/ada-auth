@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:19 $}
+@Comment{$Date: 2011/08/06 05:45:23 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -1566,7 +1566,7 @@ arguments in an arbitrary order @em the order given in the syntax rule
 for each individual pragma must be obeyed.
 However, it is generally possible to leave out earlier arguments when
 later ones are given; for example, this is allowed by the syntax rule
-for pragma Import (see @RefSec{Interfacing Pragmas}).
+for pragma Import (see @RefSec{Interfacing Aspects}).
 As for subprogram calls, positional notation precedes named
 notation.
 

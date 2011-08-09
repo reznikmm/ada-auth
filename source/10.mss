@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:20 $}
+@Comment{$Date: 2011/08/06 05:45:24 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.92 $}
+@Comment{$Revision: 1.93 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -2730,9 +2730,12 @@ the order in which they appear in the environment
     then the @nt{library_unit_body} will depend on itself.
   @end{Ramification}
 
-  Any included @nt{library_unit_declaration} to which a @nt{pragma}
-  Elaborate_Body
-  applies is immediately followed by its @nt{library_unit_body},
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+  Any included @nt{library_unit_declaration} @Chg{Version=[3],New=[for],Old=[to]}
+  which @Chg{Version=[3],New=[aspect],Old=[a @nt{pragma}]}
+  Elaborate_Body @Chg{Version=[3],New=[is True @Redundant[(including when a
+  pragma Elaborate_Body applies)]],Old=[applies]}
+  is immediately followed by its @nt{library_unit_body},
   if included.
 @begin{Discussion}
   This implies that the body of such a library unit
@@ -2740,6 +2743,11 @@ the order in which they appear in the environment
   or anything else that depends semantically upon
   the declaration of the library unit.
 @end{Discussion}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@nt{Pragma} Elaborate_Body sets
+  aspect Elaborate_Body, see @RefSecNum{Elaboration Control}.]}
+@end{TheProof}
 
   All @nt{library_item}s declared pure occur before any
   that are not declared pure.
@@ -3752,9 +3760,21 @@ pragma, nor a library unit pragma.
 @end{Syntax}
 
 @begin{Legality}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @PDefn2{Term=[requires a completion], Sec=(declaration to which a @nt{pragma} Elaborate_Body applies)}
-If a @nt{pragma} Elaborate_Body applies to a declaration,
-then the declaration requires a completion @Redundant[(a body)].
+If @Chg{Version=[3],New=[the aspect],Old=[a @nt{pragma}]} Elaborate_Body
+@Chg{Version=[3],New=[is True for],Old=[applies to]} a
+declaration@Chg{Version=[3],New=[@Redundant[(including when @nt{pragma}
+Elaboration_Body applies)]],Old=[]},
+then the declaration requires a completion @Redundant[(a
+body)].@Chg{Version=[3],New=[@PDefn2{Term=[requires a completion],
+Sec=(declaration for which aspect Elaborate_Body is True)}],Old=[]}
+
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@nt{Pragma} Elaborate_Body sets the
+  aspect (see below).]}
+@end{TheProof}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
 @ChgAdded{Version=[2],Text=[The @SynI{library_unit_}@nt{name} of a
@@ -3773,16 +3793,30 @@ of a library unit.]}
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @redundant[A @nt{pragma} Elaborate specifies that the body of the named library
 unit is elaborated before the current @nt{library_item}.
 A @nt{pragma} Elaborate_All specifies that each @nt{library_item} that is
 needed by the named library unit declaration
-is elaborated before the current @nt{library_item}.
+is elaborated before the current @nt{library_item}.@Chg{Version=[3],New=[],Old=[
 A @nt{pragma} Elaborate_Body specifies that the body
-of the library unit is elaborated immediately after its declaration.]
+of the library unit is elaborated immediately after its declaration.]}]
+
 @begin{TheProof}
 The official statement of the semantics of these @nt{pragma}s is given in
 @RefSecNum{Program Execution}.
+@end{TheProof}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[A @nt{pragma} Elaborate_Body sets the Elaborate_Body
+representation aspect of the library unit to which it applies to the value True.
+@Redundant[If the Elaborate_Body aspect of a library unit is True, the body of the library
+unit is elaborated immediately after its declaration.]]}
+
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[The official statement of the semantics of this
+  aspect is given in @RefSecNum{Program Execution}.]}
 @end{TheProof}
 @begin{ImplNote}
 The presence of a @nt{pragma} Elaborate_Body simplifies the removal of
@@ -3937,6 +3971,11 @@ required to appear last.
   that the rules for access types only apply to non-derived types
   (derived types share their storage pool with their parent, so if
   the parent access type is legal, so is any derived type.)]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[Elaborate_Body is now an aspect,
+  so it can be specified by an @nt{aspect_specification} @em
+  although the pragma is still preferred by the Standard.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
   @ChgAdded{Version=[3],Text=[Pure and Preelaborate are now aspects,

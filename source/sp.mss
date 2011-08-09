@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.62 $ $Date: 2011/06/04 05:28:20 $ $Author: randy $ }
+@comment{ $Revision: 1.63 $ $Date: 2011/08/06 05:45:24 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2011/06/04 05:28:20 $}
+@Comment{$Date: 2011/08/06 05:45:24 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -391,58 +391,88 @@ is modeled after the rule about exceptions propagated out of task bodies.
 
 @begin{Syntax}
 @begin{SyntaxText}
-@Leading@keepnext@;The form of a @nt{pragma} Interrupt_Handler is as follows:
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Type=[Leading],KeepNext=[T],Text=[The form of a
+@nt{pragma} Interrupt_Handler is as follows:]}
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(Interrupt_Handler)(@SynI{handler_}@Syn2{name});'
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Interrupt_Handler)(@SynI{handler_}@Syn2{name});']}
 
 @begin{SyntaxText}
-@Leading@Keepnext@;The form of a @nt{pragma} Attach_Handler is as follows:
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Type=[Leading],KeepNext=[T],Text=[The form of a
+@nt{pragma} Attach_Handler is as follows:]}
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(Attach_Handler)(@SynI{handler_}@Syn2{name}, @Syn2{expression});'
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Attach_Handler)(@SynI{handler_}@Syn2{name}, @Syn2{expression});']}
 @end{Syntax}
 
 @begin{Resolution}
-For the Interrupt_Handler and Attach_Handler pragmas, the
-@SynI{handler_}@nt{name} shall resolve to denote a protected procedure
-with a parameterless profile.
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[For the Interrupt_Handler and Attach_Handler
+pragmas, the @SynI{handler_}@nt{name} shall resolve to denote a protected
+procedure with a parameterless profile.]}
 
-For the Attach_Handler pragma, the expected type for the
-@nt{expression} is Interrupts.Interrupt_Id
-(see @RefSecNum{The Package Interrupts}).
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[For the Attach_Handler pragma, the expected type
+for the @nt{expression} is Interrupts.Interrupt_Id
+(see @RefSecNum{The Package Interrupts}).]}
 @end{Resolution}
+
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a parameterless protected
+procedure, the following language-defined representation aspects may be
+specified:]}
+@begin{Description}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Interrupt_Handler@\
+The type of aspect Interrupt_Handler is Boolean.
+If directly specified, the aspect_definition shall be a static expression.
+@Redundant[This aspect is never inherited;] if not directly specified,
+the aspect is False.]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Attach_Handler@\
+The value of aspect Attach_Handler is an @nt{expression}, which shall be of type
+Interrupts.Interrupt_Id. @Redundant[This aspect is never inherited.]]}
+@end{Description}
+
+@end{StaticSem}
 
 @begin{Legality}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0033-1]}
-The Attach_Handler @Chg{Version=[3],New=[and Interrupt_Handler pragmas are],
-Old=[pragma is]} only allowed immediately within the
-@nt{protected_definition}
-where the corresponding subprogram is declared.
-The corresponding @nt{protected_@!type_@!declaration}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0033-1],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[If either the],Old=[The]} Attach_Handler
+@Chg{Version=[3],New=[or Interrupt_Handler aspect are specifed for a
+protected procedure, the],Old=[pragma is only allowed immediately within the
+@nt{protected_definition} where the corresponding subprogram is declared.
+The]} corresponding @nt{protected_@!type_@!declaration}
 or @nt{single_@!protected_@!declaration}
-shall be a library@Chg{Version=[2],New=[-],Old=[]}level
-declaration@Chg{Version=[3],New=[, and
-shall not be declared within a
+shall be a library@Chg{Version=[2],New=[-],Old=[]}level declaration
+@Chg{Version=[3],New=[ and shall not be declared within a
 generic body. @PDefn{generic contract issue}In addition
 to the places where @LegalityTitle normally apply
-(see @RefSecNum{Generic Instantiation}), these rules also apply
+(see @RefSecNum{Generic Instantiation}), this rule also applies
 in the private part of an instance of a generic unit],Old=[]}.
+
 @begin{Discussion}
 In the case of a @nt{protected_type_declaration},
 an @nt{object_declaration} of an object of that type
 need not be at library level.
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1]}
-@ChgAdded{Version=[3],Text=[We cannot allow these pragmas in a generic body,
-because legality rules are not checked for instance bodies, and these should
-not be allowed if the instance is not at the library level. The protected types
-can be declared in the private part if this is desired. Note that while the 'Access to
-use the handler would provide the check in the case of Interrupt_Handler, there
-is no other check for Attach_Handler. Since these pragmas are so similar, we
-want the rules to be the same.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[We cannot allow these aspects in protected
+declarations in a generic body, because legality rules are not checked for
+instance bodies, and these should not be allowed if the instance is not at the
+library level. The protected types can be declared in the private part if this
+is desired. Note that while the 'Access to use the handler would provide the
+check in the case of Interrupt_Handler, there is no other check for
+Attach_Handler. Since these aspects are so similar, we want the rules to be the
+same.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00253-01],ARef=[AI95-00303-01]}
@@ -460,17 +490,30 @@ declaration.@Chg{Version=[2],New=[],Old=[ In addition, any
 
 @begin{RunTime}
 
-If the pragma Interrupt_Handler appears in a @nt{protected_definition},
-then the corresponding procedure can be attached dynamically, as a handler, to
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+If the @Chg{Version=[3],New=[],Old=[pragma ]}Interrupt_Handler
+@Chg{Version=[3],New=[aspect of a protected procedure is True],Old=[appears in a
+@nt{protected_definition}]}, then the
+@Chg{Version=[3],New=[],Old=[corresponding ]}procedure
+@Chg{Version=[3],New=[may],Old=[can]}
+be attached dynamically, as a handler, to
 interrupts (see @RefSecNum{The Package Interrupts}).
 @Redundant[Such procedures are allowed to be attached to multiple interrupts.]
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn2{Term=[creation], Sec=(of a protected object)}
 @Defn2{Term=[initialization], Sec=(of a protected object)}
-The @nt{expression} in the Attach_Handler pragma @Redundant[as evaluated at
-object creation time] specifies an interrupt. As part
-of the initialization of that object, if the Attach_Handler pragma is
-specified, the @SynI{handler} procedure is attached to the specified interrupt.
+The @nt{expression} @Chg{Version=[3],New=[specified for],Old=[in]} the
+Attach_Handler @Chg{Version=[3],New=[aspect of a protected procedure @i<P>
+is evaluated as part of the creation of the protected object that
+contains @i<P>.
+The value of the @nt{expression} identifies],Old=[pragma @Redundant[as evaluated at
+object creation time] specifies]} an interrupt. As part
+of the initialization of that object,
+@Chg{Version=[3],New=[@i<P> (],Old=[if the Attach_Handler pragma is
+specified, ]}the @SynI{handler}
+procedure@Chg{Version=[3],New=[)],Old=[]}
+is attached to the @Chg{Version=[3],New=[identified],Old=[specified]} interrupt.
 @IndexCheck{Reserved_Check}
 A check is made that the corresponding interrupt is not reserved.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
@@ -478,31 +521,43 @@ Program_Error is raised if the check fails, and the existing treatment
 for the interrupt is not affected.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn2{Term=[initialization], Sec=(of a protected object)}
 @IndexCheck{Ceiling_Check}
 If the Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking}) is
 in effect@Chg{Version=[2],New=[,],Old=[]} then upon the initialization of a
-protected object @Chg{Version=[2],New=[for which],Old=[that]} either an
-Attach_Handler or Interrupt_Handler pragma applies to one of its procedures,
-a check is made that the ceiling priority defined in the
-@nt{protected_definition} is in the range of System.@!Interrupt_Priority.
+protected object @Chg{Version=[3],New=[that contains a protected
+procedure ],Old=[]}@Chg{Version=[2],New=[for which],Old=[that]} either
+@Chg{Version=[3],New=[the],Old=[an]}
+Attach_Handler@Chg{Version=[3],New=[ aspect is specified],Old=[]} or
+@Chg{Version=[3],New=[the ],Old=[]} Interrupt_Handler
+@Chg{Version=[3],New=[aspect is True],Old=[pragma applies to one of its
+procedures]},
+a check is made that the @Chg{Version=[3],New=[initial ],Old=[]}ceiling
+priority @Chg{Version=[3],New=[of the object],Old=[defined in the
+@nt{protected_definition}]} is in the range of System.@!Interrupt_Priority.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 If the check fails, Program_Error is raised.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0068],ARef=[AI95-00121-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn2{Term=[finalization], Sec=(of a protected object)}
 When a protected object is finalized, for any of its procedures that are
 attached to interrupts, the handler is detached. If the handler was
 attached by a procedure in the Interrupts package or if no user
 handler was previously attached to the interrupt, the default treatment is
-restored. @Chg{New=[If an Attach_@!Handler pragma was used and the most recently
+restored. @Chg{New=[If @Chg{Version=[3],New=[the],Old=[an]} Attach_@!Handler
+@Chg{Version=[3],New=[aspect],Old=[pragma]} was
+was @Chg{Version=[3],New=[specified],Old=[used]} and the most recently
 attached handler for the same interrupt is the same as the one that was
 attached at the time the protected object was initialized],
-Old=[Otherwise, @Redundant[that is, if an Attach_@!Handler pragma was
-used]]}, the previous handler is restored.
+Old=[Otherwise, @Redundant[that is, if an
+Attach_@!Handler pragma was specified]]}, the previous handler is
+restored.
 @begin{Discussion}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0068],ARef=[AI95-00121-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00303-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Chg{New=[If all protected objects for interrupt handlers are declared at the
 library@Chg{Version=[2],New=[ ],Old=[-]}level],Old=[Since only library-level
 protected procedures can be attached as
@@ -512,8 +567,8 @@ a partition.
 @Chg{New=[However, objects of a protected type containing an Attach_@!Handler
 pragma need not be at the library level. Thus, an implementation needs to be
 able to restore handlers during the execution of the program.@Chg{Version=[2],
-New=[ (An object with an Interrupt_@!Handler pragma also need not be at the
-library level, but such
+New=[ (An object with an Interrupt_@!Handler @Chg{Version=[3],New=[aspect],Old=[pragma]}
+also need not be at the library level, but such
 a handler cannot be attached to an interrupt using the Interrupts package.)],
 Old=[]}],Old=[]}
 @end{Discussion}
@@ -533,12 +588,15 @@ hardware priority is higher than the ceiling priority of the corresponding
 protected object, the execution of the program is erroneous.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0068],ARef=[AI95-00121-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[1],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
-If the handlers for a given interrupt attached via pragma
-Attach_Handler are not attached and detached in a stack-like (LIFO) order,
+If the handlers for a given interrupt attached via
+@Chg{Version=[3],New=[aspect],Old=[pragma]} Attach_Handler
+are not attached and detached in a stack-like (LIFO) order,
 program execution is erroneous. In particular, when a protected object is
 finalized, the execution is erroneous if any of the procedures of the
-protected object are attached to interrupts via pragma Attach_@!Handler and
+protected object are attached to interrupts via
+@Chg{Version=[3],New=[aspect],Old=[pragma]} Attach_@!Handler and
 the most recently attached handler for the same interrupt is not the same as
 the one that was attached at the time the protected object was initialized.]}
 @begin{Discussion}
@@ -576,8 +634,10 @@ Text=[The metrics for interrupt handlers.]}]}
 @end{Metrics}
 
 @begin{ImplPerm}
-When the pragmas Attach_Handler or Interrupt_Handler apply to a protected
-procedure, the implemen@!tation is allowed to impose
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+When the @Chg{Version=[3],New=[aspects],Old=[pragmas]} Attach_Handler or
+Interrupt_Handler @Chg{Version=[3],New=[are specified for],Old=[apply to]}
+a protected procedure, the implementation is allowed to impose
 implementation-defined restrictions on the
 corresponding @nt{protected_@!type_@!declaration} and @nt{protected_@!body}.
 @begin{Ramification}
@@ -585,9 +645,11 @@ The restrictions may be on the constructs that are allowed within them,
 and on ordinary calls (i.e. not via interrupts) on protected operations in
 these protected objects.
 @end{Ramification}
-@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],
+@ChgImplDef{Version=[3],Kind=[AddedNormal],Text=[@Chg{Version=[2],
 New=[Any restrictions on a protected procedure or its containing type when
-a @nt{pragma} Attach_handler or Interrupt_Handler applies.],Old=[]}]}
+@Chg{Version=[3],New=[an aspect],Old=[a @nt{pragma}]}
+Attach_handler or Interrupt_Handler
+@Chg{Version=[3],New=[is specified],Old=[applies]}.],Old=[]}]}
 
 An implementation may use a different mechanism for invoking a protected
 procedure in response to a hardware interrupt than is used for a call
@@ -598,18 +660,21 @@ This is despite the fact that the priority of an interrupt handler
 handler.
 @end{Discussion}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn{notwithstanding}
 Notwithstanding what this subclause says elsewhere,
-the Attach_Handler and Interrupt_Handler pragmas are allowed to be used
+the Attach_Handler and Interrupt_Handler
+@Chg{Version=[3],New=[aspects],Old=[pragmas]} are allowed to be used
 for other, implementation defined, forms of interrupt handlers.
 @begin{Ramification}
 For example, if an implementation wishes to allow interrupt
 handlers to have parameters, it is allowed to do so via these pragmas;
 it need not invent implementation-defined pragmas for the purpose.
 @end{Ramification}
-@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],
+@ChgImplDef{Version=[3],Kind=[AddedNormal],Text=[@Chg{Version=[2],
 New=[Any other forms of interrupt handler supported by the
-Attach_Handler and Interrupt_Handler pragmas.],Old=[]}]}
+Attach_Handler and Interrupt_Handler
+@Chg{Version=[3],New=[aspects],Old=[pragmas]}.],Old=[]}]}
 
 @end{ImplPerm}
 
@@ -631,7 +696,9 @@ handlers should be detected before run time.]}]}
 
 @begin{Notes}
 
-The Attach_Handler pragma can provide static attachment of handlers to
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+The Attach_Handler @Chg{Version=[3],New=[aspect may],Old=[pragma can]}
+provide static attachment of handlers to
 interrupts if the implementation supports preelaboration of protected
 objects. (See @RefSecNum{Preelaboration Requirements}.)
 
@@ -680,13 +747,19 @@ a protected procedure that is an interrupt handler.
   above.]}
 @end{Diffword95}
 
-@begin{Incompatible2005}
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Aspects Interrupt_Handler and Attach_Handler are is new; @nt{pragma}s
+  Interrupt_Handler and Attach_Handler are now obsolescent.]}
+@end{Extend2005}
+
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
-  Added missing generic contract wording for the pragma Attach_Handler and
-  Interrupt_Handler. This means that nested instances with these pragmas in the
-  private part are now illegal. This is not likely to occur in practice.]}
-@end{Incompatible2005}
+  Added missing generic contract wording for the aspects Attach_Handler and
+  Interrupt_Handler.]}
+@end{DiffWord2005}
 
 
 
@@ -769,13 +842,17 @@ the interrupt, Current_Handler returns @Chg{New=[@key{null}],
 Old=[a value that designates the default treatment; calling Attach_Handler
 or Exchange_Handler with this value restores the default treatment]}.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 The Attach_Handler procedure attaches the specified handler to the
 interrupt, overriding any existing treatment (including a user handler)
 in effect for that interrupt.
 If New_Handler is @key[null], the default treatment is restored.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-If New_Handler designates a protected procedure to which the pragma
-Interrupt_@!Handler does not apply, Program_Error is raised. In
+If New_Handler designates a protected procedure @Chg{Version=[3],New=[for],
+Old=[to]} which the @Chg{Version=[3],New=[aspect],
+Old=[pragma]}
+Interrupt_@!Handler @Chg{Version=[3],New=[is False],Old=[does not apply]},
+Program_Error is raised. In
 this case, the operation does not modify the existing interrupt treatment.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0069],ARef=[AI95-00166-01]}
@@ -805,9 +882,11 @@ made that the specified interrupt is not reserved.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised if this check fails.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 If, by using the Attach_Handler, Detach_Handler, or Exchange_Handler
 procedures, an attempt is made to
-detach a handler that was attached statically (using the pragma
+detach a handler that was attached statically (using the
+@Chg{Version=[3],New=[aspect],Old=[pragma]}
 Attach_Handler), the handler is not detached and Program_Error is
 raised.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
@@ -837,15 +916,21 @@ of the corresponding interrupt be undefined.
 @begin{DocReq}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 If the Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking}) is
 in effect@Chg{Version=[2],New=[,],Old=[]} the implementation shall document
 the default ceiling priority
-assigned to a protected object that contains either the Attach_Handler or
-Interrupt_Handler pragmas, but not the Interrupt_Priority pragma.
+assigned to a protected object that contains
+@Chg{Version=[3],New=[a protected procedure that specifies ],Old=[]}either
+the Attach_Handler or
+Interrupt_Handler @Chg{Version=[3],New=[aspects],Old=[pragmas]},
+but @Chg{Version=[3],New=[does not specify],Old=[not]} the
+Interrupt_Priority @Chg{Version=[3],New=[aspect],Old=[pragma]}.
 @Redundant[This default need not be the same for all interrupts.]
-@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgDocReq{Version=[3],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[If the Ceiling_Locking policy is in effect, the default ceiling priority
-for a protected object that contains an interrupt handler pragma.]}]}
+for a protected object that contains an interrupt
+handler @Chg{Version=[3],New=[aspect],Old=[pragma]}.]}]}
 
 @end{DocReq}
 
@@ -877,15 +962,18 @@ the implementation.
 @begin{Examples}
 @Leading@Keepnext@i{Example of interrupt handlers:}
 @begin{example}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 Device_Priority : @key[constant]
   @key[array] (1..5) of System.Interrupt_Priority := ( ... );@Softpage
 @key[protected] @key[type] Device_Interface
-  (Int_Id : Ada.Interrupts.Interrupt_Id) @key[is]
-  @key[procedure] Handler;
-  @key[pragma] Attach_Handler(Handler, Int_Id);
+  (Int_Id : Ada.Interrupts.Interrupt_Id) @Chg{Version=[3],New=[
+     @key[with] Interrupt_Priority => Device_Priority(Int_Id)],Old=[]}@key[is]
+  @key[procedure] Handler@Chg{Version=[3],New=[
+     @key[with] Attach_Handler => Int_Id],Old=[;
+  @key[pragma] Attach_Handler(Handler, Int_Id)]};
   ...
-  @key[pragma] Interrupt_Priority(Device_Priority(Int_Id));
-@key[end] Device_Interface;@Softpage
+  @Chg{Version=[3],New=[],Old=[@key[pragma] Interrupt_Priority(Device_Priority(Int_Id));
+]}@key[end] Device_Interface;@Softpage
   ...
 Device_1_Driver : Device_Interface(1);
   ...
@@ -1081,6 +1169,13 @@ then it applies also to all descendants of the type.
 If a @nt{local_name} is given, then
 a @nt{pragma} Discard_Names is a representation pragma.
 
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[Representation pragmas are automatically aspects,
+  so Discard_Names can be used as an @nt{aspect_mark} in an
+  @nt{aspect_specification} instead of using the pragma on individual
+  entities.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00400-01]}
 If the pragma applies to an enumeration type,
@@ -1435,13 +1530,19 @@ translate to V2:=X; V1:= X;
 @end{itemize}
 @end{Discussion}
 
-If a pragma Pack applies to a type any of whose subcomponents are atomic,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+If @Chg{Version=[3],New=[the],Old=[a pragma]} Pack
+@Chg{Version=[3],New=[aspect is True for],Old=[applies to]} a type any of whose
+subcomponents are atomic,
 the implementation shall not pack the atomic subcomponents more tightly
 than that for which it can support indivisible reads and updates.
 @begin{ImplNote}
-A warning might be appropriate if no packing whatsoever can be achieved.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
+@Chg{Version=[3],New=[Usually, specifying aspect Pack for such a type
+will be illegal as the Recommended Level of Support cannot be achieved;
+otherwise, a],Old=[A]} warning might be appropriate if
+no packing whatsoever can be achieved.
 @end{ImplNote}
-
 @end{ImplReq}
 
 @begin{ImplAdvice}

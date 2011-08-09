@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.55 $ $Date: 2011/07/29 05:59:20 $ $Author: randy $ }
+@comment{ $Revision: 1.56 $ $Date: 2011/08/06 05:45:24 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2011/07/29 05:59:20 $}
+@Comment{$Date: 2011/08/06 05:45:24 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -1005,8 +1005,13 @@ be a remote call interface library unit.
 @end{Discussion}
 @end{itemize}
 
-If a pragma All_Calls_Remote applies to a library unit,
-the library unit shall be a remote call interface.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[A],Old=[If a]} pragma All_Calls_Remote
+@Chg{Version=[3],New=[sets the All_Calls_Remote representation aspect of
+the],Old=[applies to a]} library unit@Chg{Version=[3],New=[to which it applies
+to the value True. If the All_Calls_Remote aspect of a library unit is True, the
+library unit shall be a remote call interface.],Old=[]}, the library unit shall
+be a remote call interface.
 @end{Legality}
 
 @begin{LinkTime}
@@ -1043,7 +1048,9 @@ explicitly assigned.]
 
 @begin{ImplReq}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078],ARef=[AI95-00048-01]}
-If a pragma All_Calls_Remote applies to a
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+If @Chg{Version=[3],New=[aspect],Old=[a pragma]} All_Calls_Remote
+@Chg{Version=[3],New=[is True for],Old=[applies to]} a
 given RCI library @Chg{New=[unit],Old=[package]}, then the
 implementation shall route any call to a subprogram of the RCI
 @Chg{New=[unit],Old=[package]} from outside the declarative region of the
@@ -1054,15 +1061,19 @@ the @Chg{New=[unit],Old=[package]} are defined to be local and shall
 not go through the PCS.
 @begin{Discussion}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078],ARef=[AI95-00048-01]}
-Without this pragma, it is presumed that most implementations will
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[When this aspect is False (or not used)],Old=[Without
+this pragma]}, it is presumed
+that most implementations will
 make direct calls if the call originates in the same partition
-as that of the RCI @Chg{New=[unit],Old=[package]}. With this pragma, all calls
+as that of the RCI @Chg{New=[unit],Old=[package]}. @Chg{Version=[3],New=[When
+this aspect is True],Old=[With this pragma]}, all calls
 from outside the subsystem rooted at the RCI @Chg{New=[unit],Old=[package]} are
 treated like calls from outside the
 partition, ensuring that the PCS is involved in all such calls
 (for debugging, redundancy, etc.).
 @end{Discussion}
-@begin{reason}
+@begin{Reason}
 There is no point to force local calls (or calls from children) to go through
 the PCS, since on the target system, these calls are always local,
 and all the units are in the same active partition.
@@ -1129,8 +1140,14 @@ be supported as an alternative to RPC.]
   allow private withs of preelaborated normal units in the specification of a
   remote call interface unit.]}
 
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[All_Calls_Remote
+  is now a representation aspect, so it can be specified by
+  an @nt{aspect_specification} @em
+  although the pragma is still preferred by the Standard.]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Remote_Call_Interface
+  @ChgAdded{Version=[3],Text=[Remote_Call_Interface
   is now a categorication aspect, so it can be specified by
   an @nt{aspect_specification} @em
   although the pragma is still preferred by the Standard.]}
@@ -1478,18 +1495,23 @@ is being called, and then to pass the incoming value of each of the
 @b(in) and @b(in out) parameters of the call.
 
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 It allocates (or reuses) a stream for the Result,
-unless a pragma Asynchronous is applied to the procedure.
+unless a @Chg{Version=[3],New=[aspect],Old=[pragma]} Asynchronous is
+@Chg{Version=[3],New=[specified as True for],Old=[applied to]} the procedure.
 
-
-It calls Do_RPC unless a pragma Asynchronous is applied to the procedure
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+It calls Do_RPC unless a @Chg{Version=[3],New=[aspect],Old=[pragma]}
+Asynchronous @Chg{Version=[3],New=[specified as True for],Old=[applied to]}
+the procedure
 in which case it calls Do_APC. An access value designating the message
 stream allocated and initialized above is passed as the Params parameter.
 An access value designating the Result stream is passed as the Result
 parameter.
 
 
-If the pragma Asynchronous is not specified for the procedure,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+If the @Chg{Version=[3],New=[aspect],Old=[pragma]} Asynchronous is not specified for the procedure,
 Do_RPC blocks until a reply message arrives,
 and then returns to the calling stub.
 The stub returns after extracting
@@ -1634,56 +1656,103 @@ not include the library unit that defines the exception.
 @end{DiffWord2005}
 
 
-@LabeledSubClause{Pragma Asynchronous}
+@LabeledRevisedSubClause{Version=[3],New=[Asynchronous Remote Calls],Old=[Pragma Asynchronous]}
 
 @begin{Intro}
-@redundant[This subclause introduces the pragma Asynchronous which allows a
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@redundant[This subclause introduces the
+@Chg{Version=[3],New=[aspect],Old=[pragma]} Asynchronous which
+@Chg{Version=[3],New=[can be specified to allow],Old=[allows]} a
 remote subprogram call to return prior to completion of the execution
 of the corresponding remote subprogram body.]
 @end{Intro}
 
 @begin{Syntax}
 @begin{SyntaxText}
-@Leading@;The form of a @nt{pragma} Asynchronous is as follows:
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
+Asynchronous is as follows:]}
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(Asynchronous)(@Syn2{local_name});'
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Asynchronous)(@Syn2{local_name});']}
 @end{Syntax}
 
 @begin{Legality}
-@Leading@;The @nt<local_name> of a pragma Asynchronous shall
-denote either:
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Type=[Leading],Text=[The @nt<local_name> of a pragma
+Asynchronous shall denote either:]}
 @begin{Itemize}
-   One or more remote procedures;
+   @ChgRef{Version=[3],Kind=[Deleted]}
+   @ChgDeleted{Version=[3],Text=[One or more remote procedures;
    the formal parameters of the procedure(s) shall all be of
-   mode @key{in};
+   mode @key{in};]}
 
-   The first subtype of a remote access-to-procedure type;
-   the formal parameters
+   @ChgRef{Version=[3],Kind=[Deleted]}
+   @ChgDeleted{Version=[3],Text=[The first subtype of a remote
+   access-to-procedure type; the formal parameters
    of the designated profile of
-   the type shall all be of mode @key{in};
+   the type shall all be of mode @key{in};]}
 
-   The first subtype of a remote access-to-class-wide type.
+   @ChgRef{Version=[3],Kind=[Deleted]}
+   @ChgDeleted{Version=[3],Text=[The first subtype of a remote
+   access-to-class-wide type.]}
 @end{Itemize}
-
 @end{Legality}
 
 @begin{StaticSem}
-@PDefn2{Term=[representation pragma], Sec=(Asynchronous)}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[]}@Comment{Fake to get conditional Leading}
+@Chg{Version=[3],New=[For a remote procedure, the following language-defined
+representation aspect may be specified:],
+Old=[@PDefn2{Term=[representation pragma], Sec=(Asynchronous)}
 @PDefn2{Term=[pragma, representation], Sec=(Asynchronous)}
 A pragma Asynchronous is a representation pragma.
 When applied to a type, it specifies the type-related @i{asynchronous}
-aspect of the type.
+aspect of the type.]}
+@begin{Description}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Asynchronous@\The type of aspect Asynchronous is
+Boolean. If directly specified, the @nt{aspect_definition} shall be a static
+expression. If not specified, the aspect is False.]}
+@end{Description}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a remote access type, the
+following language-defined representation aspect may be specified:]}
+@begin{Description}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Asynchronous@\The type of aspect Asynchronous is
+Boolean. If directly specified, the @nt{aspect_definition} shall be a static
+expression. If not specified (including by inheritance), the aspect is False.]}
+@end{Description}
 @end{StaticSem}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[If aspect Asynchronous is specified for a remote
+procedure, the formal parameters of the procedure shall all be of mode
+@key[in].]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[If aspect Asynchronous is specified for a remote
+access type, the type shall be a remote access-to-class-wide type, or the type
+shall be a remote access-to-procedure type with the formal parameters of the
+designated profile of the type all of mode @key[in].]}
+@end{Legality}
 
 @begin{RunTime}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn2{Term=[remote procedure call],Sec=(asynchronous)}
 @Defn2{Term=[asynchronous], Sec=(remote procedure call)}
 A remote call is @i{asynchronous} if it is a call to a procedure,
-or a call through a value of an access-to-procedure type, to which
-a pragma Asynchronous applies.
-In addition, if a pragma Asynchronous applies to a remote
+or a call through a value of an access-to-procedure type,
+@Chg{Version=[3],New=[for],Old=[to]} which
+@Chg{Version=[3],New=[aspect],Old=[a pragma]} Asynchronous
+@Chg{Version=[3],New=[is True],Old=[applies]}.
+In addition, if @Chg{Version=[3],New=[aspect],Old=[a pragma]} Asynchronous
+@Chg{Version=[3],New=[is True for],Old=[applies to]} a remote
 access-to-class-wide type, then
 a dispatching call on a procedure
 with a controlling operand designated by a value of the type
@@ -1699,6 +1768,13 @@ corresponding body executes at most once as a result of the call.
 It is not clear that this rule can be tested or even defined formally.
 @end{Honest}
 @end{ImplReq}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Aspect Asynchronous is new; @nt{pragma} Asynchronous is now obsolescent.]}
+@end{Extend2005}
+
 
 @LabeledSubClause{Example of Use of a Remote Access-to-Class-Wide Type}
 
