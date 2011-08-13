@@ -13,7 +13,7 @@ package ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2010  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2010, 2011  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -96,6 +96,7 @@ package ARM_Format is
     --  2/16/07 - RLB - Added Indent.
     --  2/19/07 - RLB - Added Title format.
     --  4/23/10 - RLB - Added Ada 2005 header.
+    --  8/ 8/11 - RLB - Added Aspect DB.
 
     type Format_Type is tagged limited private;
 
@@ -329,6 +330,12 @@ private
 	Syntax_Tab : String (1..40); -- Syntax tab string; used only during the
 				    -- processing of the Syn command.
 	Syntax_Tab_Len : Natural := 0;
+
+	-- Aspects:
+	Aspect_Name : String (1..30); -- Aspect name text
+	Aspect_Name_Len : Natural := 0;
+
+	Aspect_DB : ARM_Database.Database_Type;
 
 	-- Attributes:
 	Prefix_Text : String (1..160) := "@b{NONE!}" & (10..160 => ' ');

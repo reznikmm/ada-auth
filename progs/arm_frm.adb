@@ -7,6 +7,7 @@ with ARM_Output,
      ARM_Syntax,
      ARM_Index,
      ARM_Subindex,
+     ARM_Format.Data,
      Ada.Text_IO,
      Ada.Characters.Handling,
      Ada.Strings.Fixed;
@@ -19,7 +20,8 @@ package body ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010  AXE Consultants.
+    -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
+    --           2010, 2011  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -256,152 +258,13 @@ package body ARM_Format is
     --  5/ 6/09 - RLB - Added Labeled_Deleted_xxx.
     --  5/15/09 - RLB - Fixed missing code for note numbers in revised/added clauses.
     --  4/23/10 - RLB - Added Ada 2005 clause headers for Ada 2012 edition.
+    --  8/ 8/11 - RLB - Split various data items to reduce the size of this
+    --			package.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
-    type LString is record
-	Length : Natural;
-	Str : String(1..40);
-    end record;
-    Paragraph_Kind_Name : constant array (Paragraph_Type) of LString :=
-	(Plain		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Introduction	 => (Length => 17, Str => "Introductory Text                       "), -- IntroName
-	 Language_Design => (Length => 25, Str => "Language Design Principle               "), -- MetaRulesName
-	 Syntax		 => (Length => 11, Str => "Syntax Rule                             "), -- SyntaxName
-	 Resolution	 => (Length => 20, Str => "Name Resolution Rule                    "), -- ResolutionName
-	 Legality	 => (Length => 13, Str => "Legality Rule                           "), -- LegalityName
-	 Static_Semantics=> (Length => 20, Str => "Static Semantic Item                    "), -- StaticSemName
-	 Link_Time	 => (Length => 21, Str => "Post-Compilation Rule                   "), -- LinkTimeName
-	 Run_Time	 => (Length => 21, Str => "Dynamic Semantic Item                   "), -- RunTimeName
-	 Bounded_Errors  => (Length => 24, Str => "Bounded (Run-Time) Error                "), -- BoundedName
-	 Erroneous	 => (Length => 19, Str => "Erroneous Execution                     "), -- ErronName
-	 Requirements	 => (Length => 26, Str => "Implementation Requirement              "), -- ImplReqName
-	 Documentation	 => (Length => 25, Str => "Documentation Requirement               "), -- DocReqName
-	 Metrics	 => (Length =>  6, Str => "Metric                                  "), -- MetricsName
-	 Permissions	 => (Length => 25, Str => "Implementation Permission               "), -- ImplPermName
-	 Advice		 => (Length => 21, Str => "Implementation Advice                   "), -- ImplAdviceName
-	 Notes		 => (Length =>  4, Str => "Note                                    "), -- NotesName
-	 Single_Note	 => (Length =>  4, Str => "Note                                    "), -- SimpleNoteName
-	 Examples	 => (Length =>  7, Str => "Example                                 "), -- ExamplesName
-	 Ada83_Inconsistencies
-			 => (Length => 25, Str => "Inconsistency with Ada 83               "), -- Inconsistent83Name
-	 Ada83_Incompatibilities
-			 => (Length => 27, Str => "Incompatibility with Ada 83             "), -- Incompatible83Name
-	 Ada83_Extensions=> (Length => 19, Str => "Extension to Ada 83                     "), -- Extend83Name
-	 Ada83_Wording	 => (Length => 26, Str => "Wording Change from Ada 83              "), -- DiffWord83Name
-	 Ada95_Inconsistencies
-			 => (Length => 25, Str => "Inconsistency with Ada 95               "), -- Inconsistent95Name
-	 Ada95_Incompatibilities
-			 => (Length => 27, Str => "Incompatibility with Ada 95             "), -- Incompatible95Name
-	 Ada95_Extensions=> (Length => 19, Str => "Extension to Ada 95                     "), -- Extend95Name
-	 Ada95_Wording	 => (Length => 26, Str => "Wording Change from Ada 95              "), -- DiffWord95Name
-	 Ada2005_Inconsistencies
-			 => (Length => 27, Str => "Inconsistency with Ada 2005             "), -- Inconsistent2005Name
-	 Ada2005_Incompatibilities
-			 => (Length => 29, Str => "Incompatibility with Ada 2005           "), -- Incompatible2005Name
-	 Ada2005_Extensions
-			 => (Length => 21, Str => "Extension to Ada 2005                   "), -- Extend2005Name
-	 Ada2005_Wording => (Length => 28, Str => "Wording Change from Ada 2005            "), -- DiffWord2005Name
-	 Element_Ref	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Child_Ref	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Usage_Note	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Reason		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Ramification	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Proof		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Imp_Note	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Corr_Change	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Discussion	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Honest		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Glossary_Marker => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Bare_Annotation => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Wide_Above	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Example_Text	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Child_Example_Text => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Indented_Example_Text=>(Length =>  0, Str => (others => ' ')), -- Not used.
-	 Code_Indented	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Indent		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Bulleted	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Nested_Bulleted => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Nested_X2_Bulleted=>(Length=>  0, Str => (others => ' ')), -- Not used.
-	 Display	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Syntax_Display	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Syntax_Indented => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Syntax_Production=>(Length =>  0, Str => (others => ' ')), -- Not used.
-	 Enumerated	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Nested_Enumerated=>(Length =>  0, Str => (others => ' ')), -- Not used.
-	 Hanging_Indented=> (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Title		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 In_Table	 => (Length =>  0, Str => (others => ' '))); -- Not used.
-
-    Paragraph_Kind_Title : constant array (Paragraph_Type) of LString :=
-	(Plain		 => (Length =>  0, Str => (others => ' ')),
-	 Introduction	 => (Length =>  0, Str => (others => ' ')), -- IntroTitle (deleted).
-	 Language_Design => (Length => 26, Str => "Language Design Principles              "), -- MetaRulesTitle
-	 Syntax		 => (Length =>  6, Str => "Syntax                                  "), -- SyntaxTitle
-	 Resolution	 => (Length => 21, Str => "Name Resolution Rules                   "), -- ResolutionTitle
-	 Legality	 => (Length => 14, Str => "Legality Rules                          "), -- LegalityTitle
-	 Static_Semantics=> (Length => 16, Str => "Static Semantics                        "), -- StaticSemTitle
-	 Link_Time	 => (Length => 22, Str => "Post-Compilation Rules                  "), -- LinkTimeTitle
-	 Run_Time	 => (Length => 17, Str => "Dynamic Semantics                       "), -- RunTimeTitle
-	 Bounded_Errors  => (Length => 25, Str => "Bounded (Run-Time) Errors               "), -- BoundedTitle
-	 Erroneous	 => (Length => 19, Str => "Erroneous Execution                     "), -- ErronTitle
-	 Requirements	 => (Length => 27, Str => "Implementation Requirements             "), -- ImplReqTitle
-	 Documentation	 => (Length => 26, Str => "Documentation Requirements              "), -- DocReqTitle
-	 Metrics	 => (Length =>  7, Str => "Metrics                                 "), -- MetricsTitle
-	 Permissions	 => (Length => 26, Str => "Implementation Permissions              "), -- ImplPermTitle
-	 Advice		 => (Length => 21, Str => "Implementation Advice                   "), -- ImplAdviceTitle
-	 Notes		 => (Length =>  5, Str => "NOTES                                   "), -- NotesTitle
-	 Single_Note	 => (Length =>  5, Str => "NOTES                                   "), -- SimpleNoteTitle
-	 Examples	 => (Length =>  8, Str => "Examples                                "), -- ExamplesTitle
-	 Ada83_Inconsistencies
-			 => (Length => 27, Str => "Inconsistencies With Ada 83             "), -- Inconsistent83Title
-	 Ada83_Incompatibilities
-			 => (Length => 29, Str => "Incompatibilities With Ada 83           "), -- Incompatible83Title
-	 Ada83_Extensions=> (Length => 20, Str => "Extensions to Ada 83                    "), -- Extend83Title
-	 Ada83_Wording	 => (Length => 27, Str => "Wording Changes from Ada 83             "), -- DiffWord83Title
-	 Ada95_Inconsistencies
-			 => (Length => 27, Str => "Inconsistencies With Ada 95             "), -- Inconsistent95Title
-	 Ada95_Incompatibilities
-			 => (Length => 29, Str => "Incompatibilities With Ada 95           "), -- Incompatible95Title
-	 Ada95_Extensions=> (Length => 20, Str => "Extensions to Ada 95                    "), -- Extend95Title
-	 Ada95_Wording	 => (Length => 27, Str => "Wording Changes from Ada 95             "), -- DiffWord95Title
-	 Ada2005_Inconsistencies
-			 => (Length => 29, Str => "Inconsistencies With Ada 2005           "), -- Inconsistent2005Title
-	 Ada2005_Incompatibilities
-			 => (Length => 31, Str => "Incompatibilities With Ada 2005         "), -- Incompatible2005Title
-	 Ada2005_Extensions
-			 => (Length => 22, Str => "Extensions to Ada 2005                  "), -- Extend2005Title
-	 Ada2005_Wording => (Length => 29, Str => "Wording Changes from Ada 2005           "), -- DiffWord2005Title
-	 Element_Ref	 => (Length => 19, Str => "Element Reference:                      "), -- Paragraph start.
-	 Child_Ref	 => (Length => 28, Str => "Child Elements returned by:             "), -- Paragraph start.
-	 Usage_Note	 => (Length => 12, Str => "Usage Note:                             "), -- Paragraph start.
-	 Reason		 => (Length =>  8, Str => "Reason:                                 "), -- Paragraph start.
-	 Ramification	 => (Length => 14, Str => "Ramification:                           "), -- Paragraph start.
-	 Proof		 => (Length =>  7, Str => "Proof:                                  "), -- Paragraph start.
-	 Imp_Note	 => (Length => 21, Str => "Implementation Note:                    "), -- Paragraph start.
-	 Corr_Change	 => (Length =>  8, Str => "Change:                                 "), -- Paragraph start.
-	 Discussion	 => (Length => 12, Str => "Discussion:                             "), -- Paragraph start.
-	 Honest		 => (Length => 14, Str => "To be honest:                           "), -- Paragraph start.
-	 Glossary_Marker => (Length => 16, Str => "Glossary entry:                         "), -- Paragraph start.
-	 Bare_Annotation => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Wide_Above	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Example_Text	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Child_Example_Text => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Indented_Example_Text=>(Length =>  0, Str => (others => ' ')), -- Not used.
-	 Code_Indented	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Indent		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Bulleted	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Nested_Bulleted => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Nested_X2_Bulleted=>(Length=>  0, Str => (others => ' ')), -- Not used.
-	 Display	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Syntax_Display	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Syntax_Indented => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Syntax_Production=>(Length =>  0, Str => (others => ' ')), -- Not used.
-	 Enumerated	 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Nested_Enumerated=>(Length =>  0, Str => (others => ' ')), -- Not used.
-	 Hanging_Indented=> (Length =>  0, Str => (others => ' ')), -- Not used.
-	 Title		 => (Length =>  0, Str => (others => ' ')), -- Not used.
-	 In_Table	 => (Length =>  0, Str => (others => ' '))); -- Not used.
+    use ARM_Format.Data; -- use all type ARM_Format.Data.Command_Type;
+	-- Make the enumeration literals visible.
 
     Free_References : Reference_Ptr := null; -- Unused reference objects.
 	-- We don't expect there ever to be many of these, so we don't try
@@ -495,6 +358,7 @@ package body ARM_Format is
         Format_Object.Last_Paragraph_Subhead_Type := Plain;
         Format_Object.Next_Paragraph_Subhead_Type := Plain;
         Format_Object.Next_Paragraph_Format_Type := Plain;
+	ARM_Database.Create (Format_Object.Aspect_DB);
 	ARM_Database.Create (Format_Object.Attr_DB);
 	ARM_Database.Create (Format_Object.Pragma_DB);
 	ARM_Database.Create (Format_Object.Glossary_DB);
@@ -514,6 +378,7 @@ package body ARM_Format is
     procedure Destroy (Format_Object : in out Format_Type) is
 	-- Destroy a format object, releasing any resources.
     begin
+	ARM_Database.Destroy (Format_Object.Aspect_DB);
 	ARM_Database.Destroy (Format_Object.Attr_DB);
 	ARM_Database.Destroy (Format_Object.Pragma_DB);
 	ARM_Database.Destroy (Format_Object.Glossary_DB);
@@ -528,568 +393,6 @@ package body ARM_Format is
 	ARM_Subindex.Destroy (Format_Object.Exception_Index);
 	ARM_Subindex.Destroy (Format_Object.Object_Index);
     end Destroy;
-
-
-    type Command_Type is (
-	-- Paragraphs:
-	Text_Begin, Text_End, Redundant, Comment, Part, New_Page, Soft_Page,
-	New_Column, RM_New_Page,
-	-- Basic text formatting:
-	Bold, Italic, Roman, Swiss, Fixed, Roman_Italic, Shrink, Grow,
-	Black, Red, Green, Blue,
-	Keyword, Non_Terminal, Non_Terminal_Format,
-	Example_Text, Example_Comment,
-	No_Prefix, No_Para_Num, Keep_with_Next,
-        Leading, Trailing, Up, Down, Thin_Line, Thick_Line, Tab_Clear, Tab_Set,
-	-- Tables:
-	Table, Table_Param_Caption, Table_Param_Header, Table_Param_Body, Table_Last,
-	-- Pictures:
-	Picture_Alone, Picture_Inline,
-        -- Indexing:
-	Index_List,
-	Defn, RootDefn, PDefn, Defn2, RootDefn2, PDefn2, Index_See,
-	Index_See_Also, See_Other, See_Also,
-	Index_Root_Unit, Index_Child_Unit, Index_Subprogram_Child_Unit,
-	Index_Type, Index_Subtype, Index_Subprogram,
-	Index_Exception, Index_Object, Index_Package,
-	Index_Other, Index_Check, Index_Attr, Index_Pragma,
-	-- Clause labels:
-	Labeled_Section, Labeled_Section_No_Break, Labeled_Clause,
-	Labeled_Subclause, Labeled_Subsubclause,
-	Labeled_Revised_Section, Labeled_Revised_Clause, Labeled_Revised_Subclause, Labeled_Revised_Subsubclause,
-        Labeled_Added_Section, Labeled_Added_Clause, Labeled_Added_Subclause, Labeled_Added_Subsubclause,
-        Labeled_Deleted_Clause, Labeled_Deleted_Subclause, Labeled_Deleted_Subsubclause,
-	Preface_Section,
-	Labeled_Annex, Labeled_Revised_Annex, Labeled_Added_Annex,
-	Labeled_Informative_Annex, Labeled_Revised_Informative_Annex,
-        Labeled_Added_Informative_Annex,
-	Labeled_Normative_Annex, Labeled_Revised_Normative_Annex,
-        Labeled_Added_Normative_Annex,
-	Unnumbered_Section, Subheading, Heading, Center, Right,
-        Added_Subheading,
-	-- Clause references:
-	Ref_Section, Ref_Section_Number, Ref_Section_by_Number,
-	-- Links:
-	Local_Target, Local_Link, URL_Link, AI_Link,
-	-- Information:
-	Syntax_Rule, Syntax_Rule_RHS, Syntax_Term, Syntax_Term_Undefined,
-	Syntax_Prefix, Syntax_Summary, Syntax_Xref,
-	Added_Syntax_Rule, Deleted_Syntax_Rule,
-	Implementation_Defined,	Implementation_Defined_List,
-	To_Glossary, To_Glossary_Also,
-	Change_To_Glossary, Change_To_Glossary_Also,
-	Glossary_Text_Param, -- This is a parameter of the last four.
-	Glossary_List,
-        Prefix_Type, Reset_Prefix_Type, Attribute, Attribute_Leading, Attribute_Text_Param, -- The last is a parameter of Attribute.
-	Attribute_List,
-	Pragma_Syntax, Pragma_List, Added_Pragma_Syntax,
-	Package_List, Type_List, Subprogram_List, Exception_List, Object_List,
-	-- Corrigendum changes:
-	Change, Change_Param_Old, Change_Param_New, -- The latter are the parameters of "Change".
-	Change_Reference, Change_Note,
-	Change_Added, Change_Added_Param, Change_Deleted, Change_Deleted_Param,
-	Change_Implementation_Defined,
-	Change_Impdef_Text_Param, -- This is a parameter of the previous.
-	Change_Implementation_Advice,
-	Change_Impladv_Text_Param, -- This is a parameter of the previous.
-	Added_Implementation_Advice_List,
-	Change_Documentation_Requirement,
-	Change_DocReq_Text_Param, -- This is a parameter of the previous.
-	Added_Documentation_Requirements_List,
-	Change_Attribute, Change_Prefix_Type,
-	Change_Prefix_Text_Param, -- This is a parameter of the previous.
-	-- Text macros:
-	Intro_Name, Syntax_Name, Resolution_Name, Legality_Name, Static_Name,
-	Link_Name, Run_Name, Bounded_Name, Erroneous_Name, Req_Name,
-	Doc_Name, Metrics_Name, Permission_Name, Advice_Name, Notes_Name,
-	Single_Note_Name, Examples_Name, Meta_Name, Inconsistent83_Name,
-	Incompatible83_Name, Extend83_Name, Wording83_Name,
-	Inconsistent95_Name, Incompatible95_Name, Extend95_Name, Wording95_Name,
-	Inconsistent2005_Name, Incompatible2005_Name, Extend2005_Name, Wording2005_Name,
-	Syntax_Title, Resolution_Title, Legality_Title, Static_Title,
-	Link_Title, Run_Title, Bounded_Title, Erroneous_Title, Req_Title,
-	Doc_Title, Metrics_Title, Permission_Title, Advice_Title, Notes_Title,
-	Single_Note_Title,
-	Examples_Title, Meta_Title, Inconsistent83_Title, Incompatible83_Title,
-	Extend83_Title, Wording83_Title, Inconsistent95_Title, Incompatible95_Title,
-	Extend95_Title, Wording95_Title, Inconsistent2005_Title, Incompatible2005_Title,
-	Extend2005_Title, Wording2005_Title,
-	-- Character macros:
-	EM_Dash, EN_Dash, LE, LT, GE, GT, NE, PI, Times, PorM, Single_Quote,
-	Latin_1, Unicode, Ceiling, Floor, Absolute, Log, Thin_Space,
-	Left_Quote, Right_Quote, Left_Double_Quote, Right_Double_Quote,
-	Left_Quote_Pair, Right_Quote_Pair, Small_Dotless_I, Capital_Dotted_I,
-	Unknown);
-
-
-
-    function Command (Name : in ARM_Input.Command_Name_Type) return Command_Type is
-	-- Return the command value for a particular command name:
-	Canonical_Name : constant String :=
-	    Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (Name, Ada.Strings.Right));
-    begin
-	if Canonical_Name = "begin" then
-	    return Text_Begin;
-	elsif Canonical_Name = "end" then
-	    return Text_End;
-	elsif Canonical_Name = "redundant" then
-	    return Redundant;
-	elsif Canonical_Name = "comment" then
-	    return Comment;
-	elsif Canonical_Name = "noprefix" then
-	    return No_Prefix;
-	elsif Canonical_Name = "noparanum" then
-	    return No_Para_Num;
-	elsif Canonical_Name = "keepnext" then
-	    return Keep_with_Next;
-	elsif Canonical_Name = "leading" then
-	    return Leading;
-	elsif Canonical_Name = "trailing" then
-	    return Trailing;
-	elsif Canonical_Name = "+" then -- Can't happen directly, but can happen through stacking.
-	    return Up;
-	elsif Canonical_Name = "-" then -- Can't happen directly, but can happen through stacking.
-	    return Down;
-	elsif Canonical_Name = "thinline" then
-	    return Thin_Line;
-	elsif Canonical_Name = "thickline" then
-	    return Thick_Line;
-	elsif Canonical_Name = "tabclear" then
-	    return Tab_Clear;
-	elsif Canonical_Name = "tabset" then
-	    return Tab_Set;
-	elsif Canonical_Name = "table" then
-	    return Table;
-	elsif Canonical_Name = "picturealone" then
-	    return Picture_Alone;
-	elsif Canonical_Name = "pictureinline" then
-	    return Picture_Inline;
-	elsif Canonical_Name = "last" then
-	    return Table_Last;
-	elsif Canonical_Name = "part" then
-	    return Part;
-	elsif Canonical_Name = "newpage" then
-	    return New_Page;
-	elsif Canonical_Name = "rmnewpage" then
-	    return RM_New_Page;
-	elsif Canonical_Name = "softpage" then
-	    return Soft_Page;
-	elsif Canonical_Name = "newcolumn" then
-	    return New_Column;
-	elsif Canonical_Name = "b" or else Canonical_Name = "bold" then
-	    return Bold;
-	elsif Canonical_Name = "i" or else Canonical_Name = "italics" then
-	    return Italic;
-	elsif Canonical_Name = "r" or else Canonical_Name = "roman" then
-	    return Roman;
-	elsif Canonical_Name = "s" or else Canonical_Name = "swiss" then
-	    return Swiss;
-	elsif Canonical_Name = "f" or else Canonical_Name = "fixed" then
-	    return Fixed;
-	elsif Canonical_Name = "ri" then
-	    return Roman_Italic;
-	elsif Canonical_Name = "shrink" then
-	    return Shrink;
-	elsif Canonical_Name = "grow" then
-	    return Grow;
-	elsif Canonical_Name = "black" then
-	    return Black;
-	elsif Canonical_Name = "red" then
-	    return Red;
-	elsif Canonical_Name = "green" then
-	    return Green;
-	elsif Canonical_Name = "blue" then
-	    return Blue;
-	elsif Canonical_Name = "key" then
-	    return Keyword;
-	elsif Canonical_Name = "nt" then
-	    return Non_Terminal;
-	elsif Canonical_Name = "ntf" then
-	    return Non_Terminal_Format;
-	elsif Canonical_Name = "exam" then
-	    return Example_Text;
-	elsif Canonical_Name = "examcom" then
-	    return Example_Comment;
-	elsif Canonical_Name = "indexlist" then
-	    return Index_List;
-	elsif Canonical_Name = "defn" then
-	    return Defn;
-	elsif Canonical_Name = "defn2" then
-	    return Defn2;
-	elsif Canonical_Name = "rootdefn" then
-	    return RootDefn;
-	elsif Canonical_Name = "rootdefn2" then
-	    return RootDefn2;
-	elsif Canonical_Name = "pdefn" then
-	    return PDefn;
-	elsif Canonical_Name = "pdefn2" then
-	    return PDefn2;
-	elsif Canonical_Name = "indexsee" then
-	    return Index_See;
-	elsif Canonical_Name = "indexseealso" then
-	    return Index_See_Also;
-	elsif Canonical_Name = "seeother" then
-	    return See_Other;
-	elsif Canonical_Name = "seealso" then
-	    return See_Also;
-	elsif Canonical_Name = "rootlibunit" then
-	    return Index_Root_Unit;
-	elsif Canonical_Name = "childunit" then
-	    return Index_Child_Unit;
-	elsif Canonical_Name = "subchildunit" then
-	    return Index_Subprogram_Child_Unit;
-	elsif Canonical_Name = "adatypedefn" then
-	    return Index_Type;
-	elsif Canonical_Name = "adasubtypedefn" then
-	    return Index_Subtype;
-	elsif Canonical_Name = "adasubdefn" then
-	    return Index_Subprogram;
-	elsif Canonical_Name = "adaexcdefn" then
-	    return Index_Exception;
-	elsif Canonical_Name = "adaobjdefn" then
-	    return Index_Object;
-	elsif Canonical_Name = "adapackdefn" then
-	    return Index_Package;
-	elsif Canonical_Name = "adadefn" then
-	    return Index_Other;
-	elsif Canonical_Name = "indexcheck" then
-	    return Index_Check;
-	elsif Canonical_Name = "attr" then
-	    return Index_Attr;
-	elsif Canonical_Name = "prag" then
-	    return Index_Pragma;
-	elsif Canonical_Name = "syn" then
-	    return Syntax_Rule;
-	elsif Canonical_Name = "syn2" then
-	    return Syntax_Term;
-	elsif Canonical_Name = "synf" then
-	    return Syntax_Term_Undefined;
-	elsif Canonical_Name = "syni" then
-	    return Syntax_Prefix;
-	elsif Canonical_Name = "syntaxsummary" then
-	    return Syntax_Summary;
-	elsif Canonical_Name = "syntaxxref" then
-	    return Syntax_Xref;
-	elsif Canonical_Name = "addedsyn" then
-	    return Added_Syntax_Rule;
-	elsif Canonical_Name = "deletedsyn" then
-	    return Deleted_Syntax_Rule;
-	elsif Canonical_Name = "toglossary" then
-	    return To_Glossary;
-	elsif Canonical_Name = "toglossaryalso" then
-	    return To_Glossary_Also;
-	elsif Canonical_Name = "chgtoglossary" then
-	    return Change_To_Glossary;
-	elsif Canonical_Name = "chgtoglossaryalso" then
-	    return Change_To_Glossary_Also;
-	elsif Canonical_Name = "glossarylist" then
-	    return Glossary_List;
-	elsif Canonical_Name = "prefixtype" then
-	    return Prefix_Type;
-	elsif Canonical_Name = "chgprefixtype" then
-	    return Change_Prefix_Type;
-	elsif Canonical_Name = "endprefixtype" then
-	    return Reset_Prefix_Type;
-	elsif Canonical_Name = "attribute" then
-	    return Attribute;
-	elsif Canonical_Name = "attributeleading" then
-	    return Attribute_Leading;
-	elsif Canonical_Name = "chgattribute" then
-	    return Change_Attribute;
-	elsif Canonical_Name = "attributelist" then
-	    return Attribute_List;
-	elsif Canonical_Name = "pragmasyn" then
-	    return Pragma_Syntax;
-	elsif Canonical_Name = "pragmalist" then
-	    return Pragma_List;
-	elsif Canonical_Name = "addedpragmasyn" then
-	    return Added_Pragma_Syntax;
-	elsif Canonical_Name = "impldef" then
-	    return Implementation_Defined;
-	elsif Canonical_Name = "chgimpldef" then
-	    return Change_Implementation_Defined;
-	elsif Canonical_Name = "impldeflist" then
-	    return Implementation_Defined_List;
-	elsif Canonical_Name = "chgimpladvice" then
-	    return Change_Implementation_Advice;
-	elsif Canonical_Name = "addedimpladvicelist" then
-	    return Added_Implementation_Advice_List;
-	elsif Canonical_Name = "chgdocreq" then
-	    return Change_Documentation_Requirement;
-	elsif Canonical_Name = "addeddocreqlist" then
-	    return Added_Documentation_Requirements_List;
-	elsif Canonical_Name = "packagelist" then
-	    return Package_List;
-	elsif Canonical_Name = "typelist" then
-	    return Type_List;
-	elsif Canonical_Name = "subprogramlist" then
-	    return Subprogram_List;
-	elsif Canonical_Name = "exceptionlist" then
-	    return Exception_List;
-	elsif Canonical_Name = "objectlist" then
-	    return Object_List;
-	elsif Canonical_Name = "labeledsection" then
-	    return Labeled_Section;
-	elsif Canonical_Name = "labeledsectionnobreak" then
-	    return Labeled_Section_No_Break;
-	elsif Canonical_Name = "labeledclause" then
-	    return Labeled_Clause;
-	elsif Canonical_Name = "labeledsubclause" then
-	    return Labeled_Subclause;
-	elsif Canonical_Name = "labeledsubsubclause" then
-	    return Labeled_Subsubclause;
-	elsif Canonical_Name = "labeledannex" then
-	    return Labeled_Annex;
-	elsif Canonical_Name = "labeledinformativeannex" then
-	    return Labeled_Informative_Annex;
-	elsif Canonical_Name = "labelednormativeannex" then
-	    return Labeled_Normative_Annex;
-	elsif Canonical_Name = "unnumberedsection" then
-	    return Unnumbered_Section;
-	elsif Canonical_Name = "labeledrevisedannex" then
-	    return Labeled_Revised_Annex;
-	elsif Canonical_Name = "labeledrevisedinformativeannex" then
-	    return Labeled_Revised_Informative_Annex;
-	elsif Canonical_Name = "labeledrevisednormativeannex" then
-	    return Labeled_Revised_Normative_Annex;
-	elsif Canonical_Name = "labeledaddedannex" then
-	    return Labeled_Added_Annex;
-	elsif Canonical_Name = "labeledaddedinformativeannex" then
-	    return Labeled_Added_Informative_Annex;
-	elsif Canonical_Name = "labeledaddednormativeannex" then
-	    return Labeled_Added_Normative_Annex;
-	elsif Canonical_Name = "labeledrevisedsection" then
-	    return Labeled_Revised_Section;
-	elsif Canonical_Name = "labeledrevisedclause" then
-	    return Labeled_Revised_Clause;
-	elsif Canonical_Name = "labeledrevisedsubclause" then
-	    return Labeled_Revised_Subclause;
-	elsif Canonical_Name = "labeledrevisedsubsubclause" then
-	    return Labeled_Revised_Subsubclause;
-	elsif Canonical_Name = "labeledaddedsection" then
-	    return Labeled_Added_Section;
-	elsif Canonical_Name = "labeledaddedclause" then
-	    return Labeled_Added_Clause;
-	elsif Canonical_Name = "labeledaddedsubclause" then
-	    return Labeled_Added_Subclause;
-	elsif Canonical_Name = "labeledaddedsubsubclause" then
-	    return Labeled_Added_Subsubclause;
-	elsif Canonical_Name = "labeleddeletedclause" then
-	    return Labeled_Deleted_Clause;
-	elsif Canonical_Name = "labeleddeletedsubclause" then
-	    return Labeled_Deleted_Subclause;
-	elsif Canonical_Name = "labeleddeletedsubsubclause" then
-	    return Labeled_Deleted_Subsubclause;
-	elsif Canonical_Name = "subheading" then
-	    return Subheading;
-	elsif Canonical_Name = "addedsubheading" then
-	    return Added_Subheading;
-	elsif Canonical_Name = "heading" then
-	    return Heading;
-	elsif Canonical_Name = "center" then
-	    return Center;
-	elsif Canonical_Name = "right" then
-	    return Right;
-	elsif Canonical_Name = "prefacesection" then
-	    return Preface_Section;
-	elsif Canonical_Name = "refsec" then
-	    return Ref_Section;
-	elsif Canonical_Name = "refsecnum" then
-	    return Ref_Section_Number;
-	elsif Canonical_Name = "refsecbynum" then
-	    return Ref_Section_By_Number;
-	elsif Canonical_Name = "locallink" then
-	    return Local_Link;
-	elsif Canonical_Name = "localtarget" then
-	    return Local_Target;
-	elsif Canonical_Name = "urllink" then
-	    return URL_Link;
-	elsif Canonical_Name = "ailink" then
-	    return AI_Link;
-	elsif Canonical_Name = "chg" then
-	    return Change;
-	elsif Canonical_Name = "chgadded" then
-	    return Change_Added;
-	elsif Canonical_Name = "chgdeleted" then
-	    return Change_Deleted;
-	elsif Canonical_Name = "chgref" then
-	    return Change_Reference;
-	elsif Canonical_Name = "chgnote" then
-	    return Change_Note;
-	elsif Canonical_Name = "introname" then
-	    return Intro_Name;
-	elsif Canonical_Name = "syntaxname" then
-	    return Syntax_Name;
-	elsif Canonical_Name = "resolutionname" then
-	    return Resolution_Name;
-	elsif Canonical_Name = "legalityname" then
-	    return Legality_Name;
-	elsif Canonical_Name = "staticsemname" then
-	    return Static_Name;
-	elsif Canonical_Name = "linktimename" then
-	    return Link_Name;
-	elsif Canonical_Name = "runtimename" then
-	    return Run_Name;
-	elsif Canonical_Name = "boundedname" then
-	    return Bounded_Name;
-	elsif Canonical_Name = "erronname" then
-	    return Erroneous_Name;
-	elsif Canonical_Name = "implreqname" then
-	    return Req_Name;
-	elsif Canonical_Name = "docreqname" then
-	    return Doc_Name;
-	elsif Canonical_Name = "metricsname" then
-	    return Metrics_Name;
-	elsif Canonical_Name = "implpermname" then
-	    return Permission_Name;
-	elsif Canonical_Name = "impladvicename" then
-	    return Advice_Name;
-	elsif Canonical_Name = "notesname" then
-	    return Notes_Name;
-	elsif Canonical_Name = "singlenotename" then
-	    return Single_Note_Name;
-	elsif Canonical_Name = "examplesname" then
-	    return Examples_Name;
-	elsif Canonical_Name = "metarulesname" then
-	    return Meta_Name;
-	elsif Canonical_Name = "inconsistent83name" then
-	    return Inconsistent83_Name;
-	elsif Canonical_Name = "incompatible83name" then
-	    return Incompatible83_Name;
-	elsif Canonical_Name = "extend83name" then
-	    return Extend83_Name;
-	elsif Canonical_Name = "diffword83name" then
-	    return Wording83_Name;
-	elsif Canonical_Name = "inconsistent95name" then
-	    return Inconsistent95_Name;
-	elsif Canonical_Name = "incompatible95name" then
-	    return Incompatible95_Name;
-	elsif Canonical_Name = "extend95name" then
-	    return Extend95_Name;
-	elsif Canonical_Name = "diffword95name" then
-	    return Wording95_Name;
-	elsif Canonical_Name = "inconsistent2005name" then
-	    return Inconsistent2005_Name;
-	elsif Canonical_Name = "incompatible2005name" then
-	    return Incompatible2005_Name;
-	elsif Canonical_Name = "extend2005name" then
-	    return Extend2005_Name;
-	elsif Canonical_Name = "diffword2005name" then
-	    return Wording2005_Name;
-	elsif Canonical_Name = "syntaxtitle" then
-	    return Syntax_Title;
-	elsif Canonical_Name = "resolutiontitle" then
-	    return Resolution_Title;
-	elsif Canonical_Name = "legalitytitle" then
-	    return Legality_Title;
-	elsif Canonical_Name = "staticsemtitle" then
-	    return Static_Title;
-	elsif Canonical_Name = "linktimetitle" then
-	    return Link_Title;
-	elsif Canonical_Name = "runtimetitle" then
-	    return Run_Title;
-	elsif Canonical_Name = "boundedtitle" then
-	    return Bounded_Title;
-	elsif Canonical_Name = "errontitle" then
-	    return Erroneous_Title;
-	elsif Canonical_Name = "implreqtitle" then
-	    return Req_Title;
-	elsif Canonical_Name = "docreqtitle" then
-	    return Doc_Title;
-	elsif Canonical_Name = "metricstitle" then
-	    return Metrics_Title;
-	elsif Canonical_Name = "implpermtitle" then
-	    return Permission_Title;
-	elsif Canonical_Name = "impladvicetitle" then
-	    return Advice_Title;
-	elsif Canonical_Name = "notestitle" then
-	    return Notes_Title;
-	elsif Canonical_Name = "singlenotetitle" then
-	    return Single_Note_Title;
-	elsif Canonical_Name = "examplestitle" then
-	    return Examples_Title;
-	elsif Canonical_Name = "metarulestitle" then
-	    return Meta_Title;
-	elsif Canonical_Name = "inconsistent83title" then
-	    return Inconsistent83_Title;
-	elsif Canonical_Name = "incompatible83title" then
-	    return Incompatible83_Title;
-	elsif Canonical_Name = "extend83title" then
-	    return Extend83_Title;
-	elsif Canonical_Name = "diffword83title" then
-	    return Wording83_Title;
-	elsif Canonical_Name = "inconsistent95title" then
-	    return Inconsistent95_Title;
-	elsif Canonical_Name = "incompatible95title" then
-	    return Incompatible95_Title;
-	elsif Canonical_Name = "extend95title" then
-	    return Extend95_Title;
-	elsif Canonical_Name = "diffword95title" then
-	    return Wording95_Title;
-	elsif Canonical_Name = "inconsistent2005title" then
-	    return Inconsistent2005_Title;
-	elsif Canonical_Name = "incompatible2005title" then
-	    return Incompatible2005_Title;
-	elsif Canonical_Name = "extend2005title" then
-	    return Extend2005_Title;
-	elsif Canonical_Name = "diffword2005title" then
-	    return Wording2005_Title;
-	elsif Canonical_Name = "em" then
-	    return EM_Dash;
-	elsif Canonical_Name = "en" then
-	    return EN_Dash;
-	elsif Canonical_Name = "lt" then
-	    return LT;
-	elsif Canonical_Name = "leq" then
-	    return LE;
-	elsif Canonical_Name = "gt" then
-	    return GT;
-	elsif Canonical_Name = "geq" then
-	    return GE;
-	elsif Canonical_Name = "neq" then
-	    return NE;
-	elsif Canonical_Name = "pi" then
-	    return PI;
-	elsif Canonical_Name = "times" then
-	    return Times;
-	elsif Canonical_Name = "porm" then
-	    return PorM;
-	elsif Canonical_Name = "singlequote" then
-	    return Single_Quote;
-	elsif Canonical_Name = "latin1" then
-	    return LATIN_1;
-	elsif Canonical_Name = "unicode" then
-	    return Unicode;
-	elsif Canonical_Name = "ceiling" then
-	    return Ceiling;
-	elsif Canonical_Name = "floor" then
-	    return Floor;
-	elsif Canonical_Name = "abs" then
-	    return Absolute;
-	elsif Canonical_Name = "log" then
-	    return Log;
-	elsif Canonical_Name = "thin" then
-	    return Thin_Space;
-	elsif Canonical_Name = "lquote" then
-	    return Left_Quote;
-	elsif Canonical_Name = "lquotes" then
-	    return Left_Quote_Pair;
-	elsif Canonical_Name = "ldquote" then
-	    return Left_Double_Quote;
-	elsif Canonical_Name = "rquote" then
-	    return Right_Quote;
-	elsif Canonical_Name = "rquotes" then
-	    return Right_Quote_Pair;
-	elsif Canonical_Name = "rdquote" then
-	    return Right_Double_Quote;
-	elsif Canonical_Name = "smldotlessi" then
-	    return Small_Dotless_I;
-	elsif Canonical_Name = "capdottedi" then
-	    return Capital_Dotted_I;
-	else
-	    return Unknown;
-	end if;
-    end Command;
 
 
     function Clause_String (Format_Object : in Format_Type) return String is
@@ -1135,7 +438,7 @@ package body ARM_Format is
 		 Text_Kind     : out ARM_Output.Change_Type) is
         -- Determine the appropriate disposition for text.
         -- The text is to be inserted if Operation is Insertion;
-        -- and deleted if Text_Kind is Operation.
+        -- and deleted if Operation is Deletion.
         -- The appropriate Change_Type to use is returned in Text_Kind.
         -- If Text_Kind is None, the text should be displayed normally.
         -- If Text_Kind is Insertion, the text should be displayed as inserted.
@@ -1667,7 +970,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
     type Items is record
         Kind : Command_Kind_Type;
         Name : ARM_Input.Command_Name_Type;
-        Command : Command_Type;
+        Command : Data.Command_Type;
         Close_Char : Character; -- Ought to be }, ], >, or ).
 	Text_Format : ARM_Output.Format_Type;
 	    -- Format at the start of the command.
@@ -1719,7 +1022,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 	    Format_State.Nesting_Stack (Format_State.Nesting_Stack_Ptr) :=
 	        (Name => Name,
 		 Kind => Kind,
-		 Command => Command (Name),
+		 Command => Data.Command (Name),
 		 Close_Char => ' ', -- Set below.
 		 Text_Format => Format_Object.Text_Format, -- Save the current format.
 		 -- Other things next necessarily used:
@@ -1740,7 +1043,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 	end Set_Nesting_for_Command;
 
 
-	procedure Set_Nesting_for_Parameter (Command : in Command_Type;
+	procedure Set_Nesting_for_Parameter (Command  : in Data.Command_Type;
 					     Close_Ch : in Character) is
 	    -- Push the parameter onto the nesting stack.
 	begin
@@ -2447,7 +1750,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		         Permissions | -- ImplPerm
 		         Advice | -- ImplAdvice
 		         Examples =>
-			ARM_Output.Category_Header (Output_Object, Paragraph_Kind_Title(For_Type).Str(1..Paragraph_Kind_Title(For_Type).Length));
+			ARM_Output.Category_Header (Output_Object, Data.Paragraph_Kind_Title(For_Type).Str(1..Data.Paragraph_Kind_Title(For_Type).Length));
 			Format_Object.Last_Paragraph_Subhead_Type := For_Type;
 		    when Notes | Single_Note => -- Notes
 			if not Format_Object.Use_ISO_2004_Note_Format then
@@ -2458,7 +1761,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 							Number => "",
 						        No_Breaks => True,
 						        Keep_with_Next => True);
-			    ARM_Output.Ordinary_Text (Output_Object, Paragraph_Kind_Title(For_Type).Str(1..Paragraph_Kind_Title(For_Type).Length));
+			    ARM_Output.Ordinary_Text (Output_Object, Data.Paragraph_Kind_Title(For_Type).Str(1..Data.Paragraph_Kind_Title(For_Type).Length));
 			    ARM_Output.End_Paragraph (Output_Object);
 			    Format_Object.Last_Paragraph_Subhead_Type := For_Type;
 			else
@@ -2925,7 +2228,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			-- There is a formatting command active.
 			-- (Note: not all of these can be on the stack.)
 		        Ada.Text_IO.Put_Line ("** Paragraph end while in formatting command " &
-			    Command_Type'Image(Format_State.Nesting_Stack (I).Command) &
+			    Data.Command_Type'Image(Format_State.Nesting_Stack (I).Command) &
 			    "; line " & ARM_Input.Line_String (Input_Object));
 			exit;
 		    end if;
@@ -4012,9 +3315,11 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 	    end Gen_Ref_or_ARef_Parameter;
 
 
-	    procedure Gen_Chg_xxxx (Param_Cmd : in Command_Type;
-				    AARM_Prefix : in String) is
-		-- Implement chgimpdef, chgimpladv, and chgdocreq commands.
+	    procedure Gen_Chg_xxxx (Param_Cmd : in Data.Command_Type;
+				    AARM_Prefix : in String;
+				    For_Aspect : in Boolean := False) is
+		-- Implement chgimpdef, chgimpladv, chgdocreq, and
+		-- chgaspectdesc commands.
 		-- The AARM prefix (if needed) is AARM_Prefix, and
 		-- the parameter command is Param_Cmd.
 
@@ -4043,6 +3348,23 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 --Ada.Text_IO.Put_Line ("Gen_Chg_xxxx, Kind=" &
 --ARM_Database.Paragraph_Change_Kind_Type'Image(Kind) &
 --"; version=" & Version);
+
+		if For_Aspect then
+		    ARM_Input.Check_Parameter_Name (Input_Object,
+		        Param_Name => "Aspect" & (7..ARM_Input.Command_Name_Type'Last => ' '),
+		        Is_First => False,
+		        Param_Close_Bracket => Close_Ch);
+		    if Close_Ch /= ' ' then
+		        -- Save name:
+		        ARM_Input.Copy_to_String_until_Close_Char (
+			    Input_Object,
+			    Close_Ch,
+			    Format_Object.Aspect_Name,
+			    Format_Object.Aspect_Name_Len);
+		    -- else no parameter. Weird.
+		    end if;
+		--else no additional parameters.
+		end if;
 
 	        if (Kind = ARM_Database.Inserted or else
 		    Kind = ARM_Database.Inserted_Normal_Number) then
@@ -4176,6 +3498,34 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		        end if;
 		        Format_Object.Last_Paragraph_Subhead_Type := Bare_Annotation;
 		        Format_Object.Last_Non_Space := False;
+
+			if For_Aspect then
+			    -- Output the aspect name:
+			    declare
+			        Local_Format : ARM_Output.Format_Type :=
+				    Format_Object.Text_Format;
+			    begin
+			        Local_Format.Bold := True;
+			        Local_Format.Version := Format_Object.Impdef_Version;
+		                if ARM_Output."/=" (Local_Change, ARM_Output.None) then
+			            Local_Format.Change := Local_Change;
+			            ARM_Output.Text_Format (Output_Object,
+							    Local_Format);
+		                else -- No change from us:
+			            ARM_Output.Text_Format (Output_Object,
+							    Local_Format);
+		                end if;
+		                ARM_Output.Ordinary_Text (Output_Object,
+			             Text => Format_Object.Aspect_Name(1..Format_Object.Aspect_Name_Len));
+		                ARM_Output.Ordinary_Text (Output_Object,
+			             Text => ": ");
+			        Local_Format.Bold := Format_Object.Text_Format.Bold;
+			        Local_Format.Change := Format_Object.Text_Format.Change;
+		                ARM_Output.Text_Format (Output_Object,
+							Local_Format);
+			    end;
+			-- else no additional text.
+			end if;
 		    else -- Don't display, skip the text:
 		        ARM_Input.Skip_until_Close_Char (Input_Object,
 			    Close_Ch);
@@ -8257,8 +7607,13 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 		when Change_Docreq_Text_Param =>
 		    -- This can't get here; it represents the third parameter of
-		    -- "ChgImpladvice" and can't be generated explicitly.
+		    -- "ChgDocReq" and can't be generated explicitly.
 		    Ada.Text_IO.Put_Line ("  ** Docreq parameter command?? on line " & ARM_Input.Line_String (Input_Object));
+
+		when Change_AspectDesc_Text_Param =>
+		    -- This can't get here; it represents the fourth parameter of
+		    -- "ChgAspectDesc" and can't be generated explicitly.
+		    Ada.Text_IO.Put_Line ("  ** AspectDesc parameter command?? on line " & ARM_Input.Line_String (Input_Object));
 
 		when Change_Prefix_Text_Param =>
 		    -- This can't get here; it represents the second parameter of
@@ -8379,6 +7734,19 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    -- allowed bracketing characters can be used.
 		    Gen_Chg_xxxx (Param_Cmd => Change_Docreq_Text_Param,
 				  AARM_Prefix => "Documentation Requirement: ");
+
+		when Change_Aspect_Description =>
+		    -- This command is of the form:
+		    -- @chgdocreq{Version=[<version>], Kind=(<kind>),
+		    --   Aspect=[<name>],Text=(<text>)}}
+		    -- where <version> is a single character, <Kind> is one
+		    -- of Revised, Added, or Deleted, <Name> is the aspect
+		    -- name, and this is followed
+		    -- by the text. As usual, any of the
+		    -- allowed bracketing characters can be used.
+		    Gen_Chg_xxxx (Param_Cmd => Change_AspectDesc_Text_Param,
+				  AARM_Prefix => "Aspect Description for ",
+				  For_Aspect => True);
 
 		when Change_Attribute =>
 		     -- @ChgAttribute{Version=[<version>], Kind=(<kind>),
@@ -8732,6 +8100,21 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				    Added_Version => Version);
 		    end;
 
+		when Added_Aspect_Description_List =>
+		    -- This command is of the form:
+		    -- @AddedAspect{Version=[v]}
+		    declare
+			Version : ARM_Contents.Change_Version_Type;
+		    begin
+		        Get_Change_Version (Is_First => True,
+		            Version => Version);
+		            -- Read a parameter named "Version".
+		        DB_Report  (Format_Object.Aspect_DB,
+				    ARM_Database.Hanging_List,
+				    Sorted => True,
+				    Added_Version => Version);
+		    end;
+
         	when Latin_1 =>
 		    -- The parameter is the decimal code for the Latin-1
 		    -- character to generate.
@@ -8866,7 +8249,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 	    begin
 	        Check_Paragraph;
 	        ARM_Output.Ordinary_Text (Output_Object,
-		    Paragraph_Kind_Name(Kind).Str(1..Paragraph_Kind_Name(Kind).Length));
+		    Data.Paragraph_Kind_Name(Kind).Str(1..Data.Paragraph_Kind_Name(Kind).Length));
 		Format_Object.Last_Non_Space := True;
 	    end Put_Name;
 
@@ -9077,8 +8460,10 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		     Change_Implementation_Defined |
 		     Change_Implementation_Advice |
 		     Change_Documentation_Requirement |
+		     Change_Aspect_Description |
 		     Added_Implementation_Advice_List |
 		     Added_Documentation_Requirements_List |
+		     Added_Aspect_Description_List |
 		     Change_Attribute |
 		     Change_Prefix_Type |
 		     Latin_1 | Unicode | Ceiling | Floor | Absolute | Log =>
@@ -9126,6 +8511,11 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    -- This can't get here; it represents a parameter of
 		    -- "ChgDocreq" and can't be generated explicitly.
 		    Ada.Text_IO.Put_Line ("  ** DocReq parameter command?? on line " & ARM_Input.Line_String (Input_Object));
+
+		when Change_AspectDesc_Text_Param =>
+		    -- This can't get here; it represents a parameter of
+		    -- "ChgAspectDesc" and can't be generated explicitly.
+		    Ada.Text_IO.Put_Line ("  ** AspectDesc parameter command?? on line " & ARM_Input.Line_String (Input_Object));
 
 		when Change_Prefix_Text_Param =>
 		    -- This can't get here; it represents a parameter of
@@ -9350,7 +8740,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 	procedure Handle_End_of_Command is
 	    -- Unstack and handle the end of Commands.
 
-	    procedure Finish_and_DB_Entry (DB : in out ARM_Database.Database_Type) is
+	    procedure Finish_and_DB_Entry (DB : in out ARM_Database.Database_Type;
+					   For_Aspect : in Boolean := False) is
 		-- Close the text parameter for a number of commands
 		-- (impdef, chgimpdef, chgimpladv, chgdocreg)
 		-- and insert the resulting string into the appropriate DB.
@@ -9457,13 +8848,23 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		Arm_Input.Stop_Recording_and_Read_Result
 		    (Input_Object, Text_Buffer, Text_Buffer_Len);
 		Text_Buffer_Len := Text_Buffer_Len - 1; -- Remove command close character.
-	        ARM_Database.Insert (DB,
-		    Sort_Key => Sort_Clause_String,
-		    Hang_Item => "",
-		    Text => Text_Buffer(1..Text_Buffer_Len) &
-		       See_String,
-		    Change_Kind => Format_Object.Impdef_Change_Kind,
-		    Version => Format_Object.Impdef_Version);
+		if For_Aspect then
+	            ARM_Database.Insert (DB,
+		        Sort_Key => Format_Object.Aspect_Name(1..Format_Object.Aspect_Name_Len),
+		        Hang_Item => Format_Object.Aspect_Name(1..Format_Object.Aspect_Name_Len),
+		        Text => Text_Buffer(1..Text_Buffer_Len) &
+		           See_String,
+		        Change_Kind => Format_Object.Impdef_Change_Kind,
+		        Version => Format_Object.Impdef_Version);
+		else
+	            ARM_Database.Insert (DB,
+		        Sort_Key => Sort_Clause_String,
+		        Hang_Item => "",
+		        Text => Text_Buffer(1..Text_Buffer_Len) &
+		           See_String,
+		        Change_Kind => Format_Object.Impdef_Change_Kind,
+		        Version => Format_Object.Impdef_Version);
+		end if;
 	        -- Finish the text processing:
 	        if Format_Object.Include_Annotations then
 		    -- End the annotation:
@@ -10034,6 +9435,10 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		when Change_Docreq_Text_Param =>
 		    -- Save the documentation requirement entry in the database.
 		    Finish_and_DB_Entry (Format_Object.Docreq_DB);
+
+		when Change_AspectDesc_Text_Param =>
+		    -- Save the documentation requirement entry in the database.
+		    Finish_and_DB_Entry (Format_Object.Aspect_DB, For_Aspect => True);
 
 		when Prefix_Type | Change_Prefix_Text_Param =>
 		    -- Copy the text into the Format_Object.Prefix_Text string.
@@ -10677,14 +10082,14 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				    if Format_State.Nesting_Stack(Start_Depth+1).Command /= Table_Param_Body then
 				        Ada.Text_IO.Put_Line ("   ** Wrong command on top of table, line " & ARM_Input.Line_String (Input_Object));
 				        Ada.Text_IO.Put_Line ("      Command=" & Format_State.Nesting_Stack(Start_Depth+1).Name & " Class=" &
-					    Command_Type'Image(Format_State.Nesting_Stack(Start_Depth+1).Command));
+					    Data.Command_Type'Image(Format_State.Nesting_Stack(Start_Depth+1).Command));
 				    elsif Format_State.Nesting_Stack_Ptr /= Start_Depth+1 then
 				        Ada.Text_IO.Put_Line ("   ** Unfinished commands detected at end of row, line " & ARM_Input.Line_String (Input_Object));
 				    end if;
 				    for I in reverse Start_Depth+2 .. Format_State.Nesting_Stack_Ptr loop
 				        Ada.Text_IO.Put_Line ("      Open command=" &
 					    Format_State.Nesting_Stack(I).Name & " Class=" &
-					    Command_Type'Image(Format_State.Nesting_Stack(I).Command));
+					    Data.Command_Type'Image(Format_State.Nesting_Stack(I).Command));
 				    end loop;
 				end;
 

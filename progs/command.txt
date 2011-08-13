@@ -661,7 +661,7 @@ Text commands:
 	"every scalar subtype S". See also ChgPrefixType.
 @EndPrefixType{}
 	(The parameter list must exist and be empty) Set the saved attribute
-	text to "@b{NONE!}". This exists to insure that the prefixes are set
+	text to "@b{NONE!}". This exists to ensure that the prefixes are set
 	properly, and aren't just set by accident.
 
 @PragmaSyn{<Text>}
@@ -869,6 +869,7 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	combination of ChgRef and Impldef.) <text> is the
 	implementation-defined entry. See ChgRef and Impldef for details
 	on the handling of the arguments.
+
 @ChgImplAdvice{Version=[<version>],Kind=(<kind>),Text=<text>}
 	Marks a new or changed implementation advice entry. All IA entries
 	are new with version 2. The clause and paragraph references (along
@@ -878,6 +879,7 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 @AddedImplAdviceList{Version=[2]}
 	Generates the implementation advice list; it is inserted with the
 	given version number.
+
 @ChgDocReq{Version=[<version>],Kind=(<kind>),Text=<text>}
 	Marks a new or changed documentation requirements entry. All DocReq
 	entries are new with version 2. The clause and paragraph references
@@ -887,6 +889,19 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 @AddedDocReqList{Version=[2]}
 	Generates the documentation requirements list; it is inserted with the
 	given version number.
+
+@ChgAspectDesc{Version=[<version>],Kind=(<kind>),Aspect=[<name>],Text=[<text>]}
+	Marks a new or changed aspect description entry. All aspect
+        descriptions are new with version 3. The clause and paragraph
+        references (along with <name> and <text>) are saved to create part of
+	Annex K. For the AARM, <text> is an annotation; otherwise, it is
+	discarded. See ChgRef for details on the handling of Version and Kind
+	arguments.
+@AddedDocReqList{Version=[3]}
+	Generates the aspect description list; it is inserted with the
+	given version number.
+
+
 @ChgAttribute{Version=[<version>],Kind=(<kind>),ChginAnnex=[T|F],
 	Leading=[T|F],Prefix=<Prefix>,AttrName=<Name>,
 	{[Ref={<DR_Number>}|ARef={<AI_Number>}]},Text=<Text>}
@@ -1211,7 +1226,7 @@ paper.
 Versions:
    0-Original Ada 95 (equivalent to No-Changes)
    1-Technical Corrigendum 1
-   2-Amendment 1
-   3-??? (post Amendment 1 changes)
+   2-Amendment 1 [Ada 2005 (really Ada 2007)]
+   3-Amendment 2 [Ada 2012]
 
 
