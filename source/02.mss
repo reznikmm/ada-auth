@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2011/08/06 05:45:23 $}
+@Comment{$Date: 2011/08/13 04:53:56 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -1561,12 +1561,14 @@ Thus, an identifier specific to a @nt{pragma} is not a @nt{name},
 syntactically; if it were, the visibility rules would be invoked,
 which is not what we want.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 This also implies that named associations do not allow one to give the
 arguments in an arbitrary order @em the order given in the syntax rule
 for each individual pragma must be obeyed.
 However, it is generally possible to leave out earlier arguments when
 later ones are given; for example, this is allowed by the syntax rule
-for pragma Import (see @RefSec{Interfacing Aspects}).
+for pragma Import (see @Chg{Version=[3],New=[@RefSec{Interfacing Pragmas}],
+Old=[@RefSec{Interfacing Aspects}]}).
 As for subprogram calls, positional notation precedes named
 notation.
 
@@ -1677,7 +1679,17 @@ this paragraph is merely a recommendation.
 an implementation should not define pragmas that can make an illegal
 program legal, except as follows:
 @begin(Itemize)
-  A @nt<pragma> used to complete a declaration, such as a @nt{pragma} Import;
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+  A @nt<pragma> used to complete a
+  declaration@Chg{Version=[3],New=[],Old=[, such as a @nt{pragma} Import]};
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[There are no language-defined pragmas which
+  can be completions; @nt{pragma} Import was defined this way in Ada 95
+  and Ada 2005, but in Ada 2012 it sets aspect Import which disallows
+  having any completion.]}
+@end{Discussion}
 
   A @nt<pragma> used to configure the environment
   by adding, removing, or replacing @nt{library_item}s.

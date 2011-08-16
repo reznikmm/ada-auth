@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2011/08/06 05:45:24 $}
+@Comment{$Date: 2011/08/13 04:53:57 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.116 $}
+@Comment{$Revision: 1.117 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -61,8 +61,12 @@ if it contains any @Chg{Version=[2],New=[@nt{basic_declarative_item}],
 Old=[@nt<declarative_item>]} that requires a completion,
 but whose completion is not in its @nt{package_specification}.
 @begin(Honest)
-  If an implementation supports it, a @nt{pragma} Import may substitute
-  for the body of a package or generic package.
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+  If an implementation supports it,@Chg{Version=[3],New=[],Old=[ a
+  @nt{pragma} Import may substitute
+  for]} the body of a package or generic package@Chg{Version=[3],New=[
+  may be imported (using aspect Import, see @RefSecNum{Interfacing Aspects}),
+  in which case no explicit body is allowed],Old=[]}.
 @end(Honest)
 @end{Legality}
 
@@ -437,12 +441,14 @@ is called the @i(full view).]
 A generic formal private type or a
 generic formal private extension is also a partial view.
 @begin(Honest)
-  A private type can also be completed by a @nt{pragma}
-  Import, if supported by an implementation.
+  A private type can also be@Chg{Version=[3],New=[
+  imported (using aspect Import, see @RefSecNum{Interfacing Aspects}),
+  in which case no completion is allowed],Old=[completed by a @nt{pragma}
+  Import]}, if supported by an implementation.
 @end(Honest)
 @begin{Reason}
-  We originally used the term @lquotes@;private view,@rquotes@; but this was easily
-  confused with the view provided @i(from) the private part, namely the
+  We originally used the term @lquotes@;private view,@rquotes@; but this was
+  easily confused with the view provided @i(from) the private part, namely the
   full view.
 @end{Reason}
 @begin{TheProof}
@@ -1640,6 +1646,10 @@ extension, the following language-defined aspects may be specified with an
    @nt{private_extension_declaration}, or on a @nt{full_type_declaration} that
    declares the completion of a private type or private extension.]}
 
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Type_Invariant],
+    Text=[@ChgAdded{Version=[3],Text=[A condition that must hold true for all
+      objects of a type.]}]}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
 @ChgAdded{Version=[3],Text=[Type_Invariant'Class@\This aspect
    shall be specified by an @nt{expression}, called an @i<invariant
@@ -1656,6 +1666,10 @@ extension, the following language-defined aspects may be specified with an
   outside of the original package needs to conform to it; thus there is no
   need for it to be visible.]}
 @end{Reason}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Type_Invariant'Class],
+    Text=[@ChgAdded{Version=[3],Text=[A condition that must hold true for all
+      objects in a class of types.]}]}
 
 @end{Description}
 
@@ -1858,6 +1872,7 @@ languages (see @RefSecNum{Interface to Other Languages}).]
 @end{Intro}
 
 @begin{Legality}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Redundant[@Defn{deferred constant declaration}
 A @i(deferred constant declaration) is an @nt<object_declaration>
 with the reserved word @key(constant) but no initialization expression.]
@@ -1867,12 +1882,19 @@ a @i{deferred constant}.
 @PDefn2{Term=[requires a completion], Sec=(deferred constant declaration)}
 A deferred constant declaration requires a completion,
 which shall be a full constant declaration
-(called the @i{full declaration} of the deferred constant),
-or a @nt{pragma} Import (see @RefSecNum(Interface to Other Languages)).
+(called the @i{full declaration} of the deferred constant)@Chg{Version=[3],New=[
+@Redundant[unless the Import aspect (see @RefSecNum{Interfacing Aspects})
+is True for the deferred constant declaration]],Old=[,
+or a @nt{pragma} Import (see @RefSecNum(Interface to Other Languages))]}.
 @Defn{full declaration}
 @begin{TheProof}
 The first sentence is redundant, as it is stated officially in
 @RefSecNum(Object Declarations).
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[The last part of the last sentence is redundant,
+as no imported entity may have a completion, as stated in
+@RefSecNum{Interfacing Aspects}.]}
 @end{TheProof}
 
 @leading@;A deferred constant declaration that is completed
@@ -1932,9 +1954,11 @@ corresponding full declaration:
   @end{Ramification}
 @end(itemize)
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Redundant[A deferred constant declaration
-  that is completed by a @nt{pragma} Import need not appear in
-  the visible part of a @nt{package_specification},
+  @Chg{Version=[3],New=[for which the],Old=[that is completed by
+  a @nt{pragma}]} Import @Chg{Version=[3],New=[aspect is True ],Old=[]}need
+  not appear in the visible part of a @nt{package_specification},
   and has no full constant declaration.]
 
 
@@ -1993,8 +2017,9 @@ variables declared in the private part of a package.
 @begin{Example}
 Null_Key : @key[constant] Key;      --@RI[ see @RefSecNum{Private Operations}]
 
-CPU_Identifier : @key[constant] String(1..8);
-@key[pragma] Import(Assembler, CPU_Identifier, Link_Name => "CPU_ID");
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+CPU_Identifier : @key[constant] String(1..8)@Chg{Version=[3],New=[],Old=[;]}
+@Chg{Version=[3],New=[   @key[with]],Old=[@key[pragma]]} Import@Chg{Version=[3],New=[ => True, Convention => ],Old=[(]}Assembler, @Chg{Version=[3],New=[],Old=[CPU_Identifier, ]}Link_Name => "CPU_ID"@Chg{Version=[3],New=[],Old=[)]};
                               --@RI[ see @RefSecNum{Interfacing Aspects}]
 @end{Example}
 @end{Examples}
@@ -4491,7 +4516,7 @@ the rules here refer to the task-waiting rules of Section 9.
 
 @begin{Inconsistent95}
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0066-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Amendment 2 Correction:>
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 95}@b<Ada 2012 Correction:>
   Changed the definition
   of the master of an anonymous object used to directly initialize an
   object, so it can be finalized immediately rather than having to hang

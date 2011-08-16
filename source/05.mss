@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:19 $}
+@Comment{$Date: 2011/08/13 04:53:57 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.47 $}
+@Comment{$Revision: 1.48 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1229,10 +1229,18 @@ operational aspects may be specified for an indexable type @i<T> (see
     the default iterator subtype is the @i<default cursor subtype>
     for @i<T>.@Defn{default cursor subtype}]}
 
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Default_Iterator],
+    Text=[@ChgAdded{Version=[3],Text=[Default iterator to be used in @key[for]
+    loops.]}]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Iterator_Element@\This aspect is specified by a
     @nt{name} that denotes a subtype. This is the @i<default element subtype>
     for @i<T>.@Defn{default element subtype}]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Iterator_Element],
+    Text=[@ChgAdded{Version=[3],Text=[Element type to be used for user-defined
+      iterators.]}]}
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}

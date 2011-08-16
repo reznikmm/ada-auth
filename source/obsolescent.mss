@@ -1,10 +1,10 @@
  @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2011/08/06 05:45:24 $}
+@Comment{$Date: 2011/08/13 04:53:58 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -60,6 +60,15 @@ compatibility.
   @ChgAdded{Version=[2],Text=[A mention of the No_Obsolescent_Features
   restriction was added.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@nt{Pragma} Controlled has been removed from
+  the language, rather than declared to be obsolescent. No existing
+  implementation gives it any effect. An implementation could continue to
+  support the pragma as an implementation-defined pragma for upward
+  compatibility.]}
+@end{DiffWord2005}
 
 
 @LabeledRevisedClause{Version=[3],New=[Renamings of Library Units],
@@ -1231,7 +1240,16 @@ interfacing pragma shall be the name of a convention
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[A pragma Import shall be the completion of a
-declaration.]}
+declaration. @PDefn{Notwithstanding}Notwithstanding any rule to the
+contrary, a @nt{pragma} Import may serve as the completion of any kind of
+(explicit) declaration if supported by an implementation for that kind of
+declaration. If a completion is a @nt{pragma} Import, then it shall appear in
+the same @nt{declarative_part}, @nt{package_specification},
+@nt{task_definition}, or @nt{protected_definition} as the declaration. For a
+library unit, it shall appear in the same @nt{compilation}, before any
+subsequent @nt{compilation_unit}s other than @nt{pragma}s. If the
+@nt{local_name} denotes more than one entity, then the @nt{pragma} Import is the
+completion of all of them.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[The @SynI{external_name_string_}@nt{expression} and
@@ -1422,20 +1440,36 @@ Volatile_Components, and Independent_Components is as follows:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Atomic> (@Syn2[local_name]);']}
 
+@ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Volatile> (@Syn2[local_name]);']}
 
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
 @ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Independent> (@SynI[component_]@Syn2[local_name]);']}
 
+@ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Atomic_Components> (@SynI[array_]@Syn2[local_name]);']}
 
+@ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Volatile_Components> (@SynI[array_]@Syn2[local_name]);']}
 
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
 @ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Independent_Components> (@Syn2[local_name]);']}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[Pragmas Independent and Independent_Components
+  are born obsolescent; it is defined to provide consistency with the existing
+  shared variable pragmas. As with all obsolescent
+  features, these pragmas are not optional; all Ada implementations need to
+  implement them. Also note that these pragmas were defined as a @b<Correction>;
+  as such, they are expected to be implemented as part of Ada 2005
+  implementations (and they would not be obsolescent there).]}
+@end{Discussion}
 
 @end{Syntax}
 
 @begin{Resolution}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[The @nt{local_name} in an Atomic or Volatile pragma
 shall resolve to denote either an @nt{object_declaration}, a non-inherited
 @nt{component_declaration}, or a @nt{full_type_declaration}. The

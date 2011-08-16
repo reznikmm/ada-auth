@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2011/07/29 05:59:19 $}
+@Comment{$Date: 2011/08/13 04:53:56 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -58,9 +58,10 @@ facilities for, among others, input-output, string manipulation,
 numeric elementary functions, and random number generation.
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised]}
-@ChgRef{Version=[3],Kind=[Revised]}@Comment{TBD: Do we use a different name and headings for Amendment 2? WG 9 seems to imply not.}
+@ChgRef{Version=[3],Kind=[Revised]}
 This Annotated Ada Reference Manual (AARM) contains the entire text of
-the Ada Reference Manual @Chg{Version=[2],New=[ with Amendment 1 @Chg{Version=[3],New=[and 2 ],Old=[]}(the Ada @Chg{Version=[3],New=[2012],Old=[2005]} RM],Old=[(RM95]}),
+the @Chg{Version=[3],New=[third edition of the ],Old=[]}Ada Reference
+Manual @Chg{Version=[3],New=[ (the Ada 2012 RM],Old=[@Chg{Version=[2],New=[ with Amendment 1 (the Ada 2005 RM],Old=[(RM95]}]}),
 plus certain annotations.
 The annotations give a more in-depth analysis of the language.
 They describe the reason for each non-obvious rule,
@@ -375,7 +376,7 @@ Specialized Needs Annexes.
 The following Annexes are informative:
 @end{WideAbove}
 @begin{Itemize}
-@RefSec{Language-Defined Attributes}
+@RefSec{Language-Defined Aspects and Attributes}
 
 @RefSec{Language-Defined Pragmas}
 
@@ -921,8 +922,8 @@ and does not appear in the Ada 2005 @Chg{Version=[3],New=[or Ada 2012],Old=[]} R
 The next three headings list all language changes between Ada 2005
 (the language defined by the Ada 95 standard plus
 Technical Corrigendum 1 plus Amendment 1)
-and Ada 2012 (the language defined by the Ada 95 standard plus
-Technical Corrigendum 1 plus Amendment 1 plus Amendment 2).
+and Ada 2012 (the language defined by the third edition of the Standard@Comment{was:
+Ada 95 standard plus Technical Corrigendum 1 plus Amendment 1 plus Amendment 2}).
 Each language change falls into one of the following three categories:]}
 @end{Discussion}
 
@@ -936,7 +937,8 @@ is a legal Ada 2012 program with different semantics.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Inconsistencies marked with
 @b[Correction:]@Defn{Correction} are corrections to the original Ada 2005
-definition added by Amendment 2. Formally, these are
+definition added by the third edition of the Standard.
+Formally, these are
 inconsistencies caused by Ada Issues classified as Binding Interpretations;
 implementations of Ada 2005 are supposed to follow these corrections, not the
 original flawed language definition. Thus, these strictly speaking are not
@@ -962,7 +964,7 @@ illegal in Ada 2012.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[As with inconsistencies, incompatibilities
 marked with @b[Correction:] are corrections to the original Ada 2005 definition
-added by Amendment 2. Formally, these are
+added by the third edition. Formally, these are
 incompatibilities caused by Ada Issues classified as Binding Interpretations;
 implementations of Ada 2005 are supposed to follow these corrections, not the
 original flawed language definition. Thus,
@@ -990,7 +992,7 @@ The vast majority of language changes fall into this category.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[As with incompatibilities, extensions
 marked with @b[Correction:]
-are corrections to the original Ada 2005 definition added by Amendment 2.
+are corrections to the original Ada 2005 definition added by the third edition.
 Formally, these are extensions allowed by Ada Issues classified as Binding
 Interpretations. As corrections, implementations of Ada 2005 (and sometimes Ada 95)
 are allowed to implement these extensions. Thus, these strictly speaking are not
@@ -1015,8 +1017,8 @@ As explained above, the next heading does not represent any language change:]}
 @ChgAdded{Version=[3],Text=[@Defn{wording changes from Ada 2005}
 This heading lists some of the non-semantic changes between the Ada 2005 RM and
 the Ada 2012 RM. This heading lists only @lquotes@;interesting@rquotes@; changes
-(for instance, editorial corrections are not listed). These changes come from
-Amendment 2. Items marked @b[Correction:] come from Ada Issues classified
+(for instance, editorial corrections are not listed). Items marked
+@b[Correction:] come from Ada Issues classified
 as Binding Interpretations and strictly speaking belong to Ada 2005; other items
 only belong to Ada 2012.]}
 
@@ -1182,9 +1184,11 @@ The following are defined as @i(external interactions):
   (see @RefSecNum(Interface to Other Languages)) at the time
   of any other interaction with the external environment.
     @begin{Honest}
+    @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
     Also other uses of imported and exported entities,
     as defined by the implementation,
-    if the implementation supports such @nt{pragma}s.
+    if the implementation supports such @Chg{Version=[3],New=[importing or
+    exporting],Old=[@nt{pragma}s]}.
     @end{Honest}
 @end(Itemize)
 
@@ -1256,12 +1260,15 @@ required by the Annex is provided as specified.
   by supporting all capabilities required by the Annex.
 @end{Discussion}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 An implementation conforming to this International Standard
 may provide additional
-attributes, library units, and pragmas.
-However, it shall not provide any attribute,
+@Chg{Version=[3],New=[aspects, ],Old=[]}attributes, library units, and pragmas.
+However, it shall not provide any
+@Chg{Version=[3],New=[aspect, ],Old=[]}attribute,
 library unit, or pragma having the same name
-as an attribute, library unit, or pragma (respectively)
+as an @Chg{Version=[3],New=[aspect, ],Old=[]}attribute, library unit,
+or pragma (respectively)
 specified in a Specialized Needs Annex unless the provided construct
 is either as specified in the Specialized Needs Annex or is more
 limited in capability than that required by the Annex.
@@ -1293,7 +1300,6 @@ shall raise an exception at run time.
   will usually fail to compile.
   Alternatively, the implementation might declare the subprogram as
   abstract, so it cannot be called.
-  @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
   Alternatively, a subprogram body might be implemented just to raise
   Program_Error.
   The advantage of this approach is that a program to be run under a

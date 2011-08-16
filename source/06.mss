@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2011/08/06 05:45:23 $}
+@Comment{$Date: 2011/08/13 04:53:57 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.114 $}
+@Comment{$Revision: 1.115 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -190,15 +190,19 @@ A @nt{default_expression} is only allowed in a @nt{parameter_specification}
 for a formal parameter of mode @key(in).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1],ARef=[AI05-0229-1]}
 @PDefn2{Term=[requires a completion], Sec=(@nt{subprogram_declaration})}
 @PDefn2{Term=[requires a completion], Sec=(@nt{generic_subprogram_declaration})}
 A @nt{subprogram_declaration}
 or a @nt{generic_subprogram_declaration}
-requires a completion:
-@Redundant[a body, a @nt<renaming_declaration>
-(see @RefSecNum(Renaming Declarations)), or a @Chg{Version=[2],New=[@nt{pragma}],
-Old=[@key(pragma)]} Import (see @RefSecNum{Interfacing Aspects})].
+requires a completion@Chg{Version=[3],New=[],Old=[:]}
+@Redundant[@Chg{Version=[3],New=[unless the Import aspect (see
+@RefSecNum{Interfacing Aspects}) is True for the declaration; the
+completion will be],Old=[]}a body@Chg{Version=[3],New=[ or],Old=[,]}
+a @nt<renaming_declaration>
+(see @RefSecNum(Renaming Declarations))@Chg{Version=[3],New=[],Old=[, or
+a @Chg{Version=[2],New=[@nt{pragma}],
+Old=[@key(pragma)]} Import (see @RefSecNum{Interfacing Aspects})]}].
 @Redundant[A completion is not allowed
 for an @nt<abstract_subprogram_declaration>@Chg{Version=[2],New=[ (see
 @RefSecNum{Abstract Types and Subprograms})@Chg{Version=[3],New=[,],Old=[ or]} a
@@ -214,9 +218,17 @@ or an @nt{expression_function_declaration} (see @RefSecNum{Expression Functions}
   Protected subprograms are declared by @nt{subprogram_declaration}s,
   and so require completion.
   Note that an abstract subprogram is a subprogram,
-  and a protected subprogram is a subprogram,
-  but a generic subprogram is not a subprogram.
+  @Chg{Version=[3],New=[a null procedure is a subprogram, an expression function
+  is a subprogram, ],Old=[]}and a protected subprogram is a subprogram,
+  but a generic subprogram is not a subprogram.@Comment{Who's the idiot that
+  came up with that??}
 @end(Ramification)
+@begin(TheProof)
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[When the Import aspect is True for any entity,
+  no completion is allowed (see @RefSecNum{Interfacing Aspects}).]}
+@end{TheProof}
+
 
 A @nt{name} that denotes a formal parameter
 is not allowed within the @nt{formal_part} in which it is declared,
@@ -506,6 +518,10 @@ following language-defined aspects may be specified with an
   involved.]}
 @end{Honest}
 
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Pre],
+  Text=[@ChgAdded{Version=[3],Text=[Precondition; a condition that must hold
+    true before a call.]}]}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0254-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[Pre'Class@\This aspect
   specifies a class-wide precondition for an operation of a tagged type and its
@@ -527,6 +543,10 @@ following language-defined aspects may be specified with an
   routine would not check any precondition).]}
 @end{Ramification}
 
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Pre'Class],
+  Text=[@ChgAdded{Version=[3],Text=[Precondition inherited on type
+    derivation.]}]}
+
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Post@\This aspect
   specifies a specific postcondition for a callable entity; it shall be
@@ -534,6 +554,10 @@ following language-defined aspects may be specified with an
   expression>.@Defn{specific postcondition expression}@Defn2{Term=[postcondition expression],Sec=[specific]}
   If not specified for an entity, the specific postcondition
   expression for the entity is the enumeration literal True.]}
+
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Post],
+  Text=[@ChgAdded{Version=[3],Text=[Postcondition; a condition that must hold
+    true after a call.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[Post'Class@\This aspect
@@ -543,6 +567,10 @@ following language-defined aspects may be specified with an
   If not specified for an entity, the class-wide postcondition
   expression for the entity is the enumeration literal True.]}
 @end{Description}
+
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Post'Class],
+  Text=[@ChgAdded{Version=[3],Text=[Postcondition inherited on type
+    derivation.]}]}
 
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
@@ -1408,11 +1436,14 @@ convention of an entity is Ada.],Old=[]}
 the convention is called the @i{calling convention}.]
 The following conventions are defined by the language:
 @begin{Itemize}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn{Ada calling convention}
 @Defn2{Term=[calling convention], Sec=(Ada)}
 The default calling convention for any subprogram not listed below is
 @i{Ada}.
-@Redundant[A @nt{pragma} Convention, Import, or Export may be used to override
+@Redundant[@Chg{Version=[3],New=[The],Old=[A @nt{pragma}]}
+Convention@Chg{Version=[3],New=[ aspect],Old=[, Import, or Export]}
+may be @Chg{Version=[3],New=[specified],Old=[used]} to override
 the default calling convention (see @RefSecNum{Interfacing Aspects})].
 @begin{Ramification}
 See also the rule about renamings-as-body
@@ -1513,12 +1544,16 @@ for Intrinsic subprograms.]
   We do not wish to require the implementation to generate
   an out of line body for an intrinsic.
 
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
   Whenever we wish to disallow the Access attribute in order to ease
   implementation, we make the subprogram Intrinsic.
   Several language-defined subprograms have
-  @lquotes@;@key[pragma] Convention(Intrinsic, ...);@rquotes@;.
+  @lquotes@;@Chg{Version=[3],New=[@key[with]],Old=[@key[pragma]]}
+  Convention@Chg{Version=[3],New=[ => ],Old=[(]}Intrinsic@Chg{Version=[3],New=[],Old=[, ...)]};@rquotes@;.
   An implementation might actually implement this
-  as @lquotes@;@key[pragma] Import(Intrinsic, ...);@rquotes@;,
+  as @lquotes@;@Chg{Version=[3],New=[@key[with]],Old=[@key[pragma]]}
+  Import@Chg{Version=[3],New=[ => True, Convention
+  => ],Old=[(]}Intrinsic@Chg{Version=[3],New=[],Old=[, ...)]};@rquotes@;,
   if there is really no body, and the implementation of the subprogram
   is built into the code generator.
 
@@ -1576,12 +1611,16 @@ be that the type and operations all have the same convention.]}
 @end{Reason}
 @end{Itemize}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 Of these four conventions, only Ada and Intrinsic are
 allowed as a @SynI{convention_}@nt{identifier}
-in a @nt{pragma} Convention, Import, or Export.
+in @Chg{Version=[3],New=[the specification of aspect],Old=[a @nt{pragma}]}
+Convention@Chg{Version=[3],New=[],Old=[, Import, or Export]}.
 @begin{Discussion}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
   The names of the @i{protected} and @i{entry} calling conventions
-  cannot be used in the interfacing pragmas.
+  cannot be used in the @Chg{Version=[3],New=[specification of Convention],
+  Old=[interfacing pragmas]}.
   Note that @key[protected] and @key[entry] are reserved words.
 @end{Discussion}
 
@@ -1962,6 +2001,11 @@ subprogram.]}
 @nt{aspect_definition} shall be a static expression.
 @Redundant[This aspect is never inherited;] if not directly specified,
 the aspect is False.]}
+
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Inline],
+  Text=[@ChgAdded{Version=[3],Text=[For efficiency, Inline calls are requested
+    for a subprogram.]}]}
+
 @end{Description}
 
 
@@ -4119,6 +4163,9 @@ When aspect No_Return is True for an entity, the entity is said to be
 @ChgAdded{Version=[3],NoPrefix=[T],Text=[If directly specified, the
 @nt{aspect_definition} shall be a static expression. @Redundant[This aspect is
 never inherited;] if not directly specified, the aspect is False.]}
+
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[No_Return],
+  Text=[@ChgAdded{Version=[3],Text=[A procedure will not return normally.]}]}
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}@ChgNote{Moved from below}

@@ -1,13 +1,13 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.50 $ $Date: 2011/07/29 05:59:21 $}
+@comment{$Revision: 1.51 $ $Date: 2011/08/13 04:53:58 $}
 
 @begin{ISOOnly}
-@Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[3],New=[201z Ed. 3],Old=[@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
+@Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[3],New=[201z],Old=[@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
 @end{ISOOnly}
 @begin{NotISO}
-@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:@Chg{Version=[3],New=[201z Ed. 3],Old=[@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
+@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:@Chg{Version=[3],New=[201z],Old=[@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
 @end{NotISO}
 
 @Noparanum@ @*
@@ -40,9 +40,9 @@
 @end{NotISO}
 
 @begin{ISOOnly}
-@Comment{Jim Moore wants this deleted, as it is confusing.}
-@Noparanum@Chg{New=[@ @*@Comment{Dummy paragraph}],
-               Old=[@Swiss{[Revision of first edition (ISO 8652:1987)]}]}
+@Comment{Jim Moore wanted this deleted in the consolidated editions, as it is confusing.}
+@Noparanum@Chg{Version=[3],New=[Revision of second edition (ISO 8652:1995)],Old=[@Chg{New=[@ @*@Comment{Dummy paragraph}],
+               Old=[@Swiss{[Revision of first edition (ISO 8652:1987)]}]}]}
 @end{ISOOnly}
 
 @Noparanum@ @*
@@ -57,10 +57,9 @@
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
 
-@Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:1995(E)}}}
-@Noparanum@Center{@Swiss{@Chg{Version=[1], New=[@Grow{with Technical Corrigendum 1}], Old=[]}}}
-@Noparanum@Center{@Swiss{@Chg{Version=[2], New=[@Grow{and Amendment 1}], Old=[]}}}
-@Noparanum@Center{@Swiss{@Chg{Version=[3], New=[@Grow{and Amendment 2 (Draft 13)}], Old=[]}}}
+@Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:@Chg{Version=[3],New=[201x],Old=[1995]}(E)}}}@Chg{Version=[3],New=[ (Draft 13)],Old=[]}
+@Noparanum@Center{@Swiss{@Chg{Version=[3],New=[],Old=[@Chg{Version=[1], New=[@Grow{with Technical Corrigendum 1}], Old=[]}]}}}
+@Noparanum@Center{@Swiss{@Chg{Version=[3],New=[],Old=[@Chg{Version=[2], New=[@Grow{and Amendment 1}], Old=[]}]}}}
 @end{NotISO}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
@@ -153,7 +152,7 @@ OR FUNCTIONING OF THIS DOCUMENT. IN NO EVENT WILL AXE BE LIABLE FOR ANY
 GENERAL, CONSEQUENTIAL, INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES,
 EVEN IF AXE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.], Old=[]}
 
-@Noparanum@;@Chg{Version=[3], New=[@b{Amendment 2}], Old=[]}
+@Noparanum@;@Chg{Version=[3], New=[@b{Third Edition}], Old=[]}
 
 @Noparanum@;@Chg{Version=[3], New=[Copyright @Latin1(169) 2008, 2009, 2010, 2011 AXE Consultants.  All Rights Reserved.], Old=[]}
 

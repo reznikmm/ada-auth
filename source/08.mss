@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:20 $}
+@Comment{$Date: 2011/08/13 04:53:57 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1338,6 +1338,13 @@ A @SynI{pragma_argument_}@nt{identifier}.
 
 An @nt{identifier} specific to a
 pragma used in a pragma argument.
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0183-1]}
+@ChgAdded{Version=[3],Text=[An @nt{aspect_mark};]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0183-1]}
+@ChgAdded{Version=[3],Text=[An @nt{identifier} specific to an aspect used
+in an @nt{aspect_definition}.]}
 @end{enumerate}
 
 The visibility rules have nothing to do with the above cases;
@@ -3473,6 +3480,7 @@ all of the declarations determined by its interpretations,
 and all of the views declared by these declarations.
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}@ChgNote{Pragma is obsolete}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 This applies to Inline, Suppress,
 Import, Export, and Convention @nt{pragma}s.
 For example, it is OK to say @lquotes@;@key[pragma] @Chg{Version=[2],
@@ -3484,6 +3492,13 @@ This rule also applies to certain pragmas defined in the
 Specialized Needs Annexes.
 It almost applies to Pure, Elaborate_Body, and Elaborate_All @nt{pragma}s,
 but those can't have overloading for other reasons.
+@Chg{Version=[3],New=[ Note that almost all of
+these pragmas are obsolescent (see @RefSecNum{Specific Suppression of Checks} and
+@RefSecNum{Aspect-related Pragmas}), and a major reason is that this rule
+has proven to be too broad in practice (it is common to want to specify something
+on a single subprogram of an overloaded set, that can't be done easily with this
+rule). @nt{Aspect_specification}s,
+which are given on individual declarations, are preferred in Ada 2012.],Old=[]}
 
 Note that if a pragma argument denotes a @i{call} to a callable
 entity, rather than the entity itself,

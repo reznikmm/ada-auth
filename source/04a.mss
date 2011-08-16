@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/07/30 06:31:10 $}
+@Comment{$Date: 2011/08/13 04:53:57 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.117 $}
+@Comment{$Revision: 1.118 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1100,6 +1100,10 @@ the following type-related operational aspect may be specified:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Implicit_Dereference@\This aspect is specified by a
 name that denotes an access discriminant declared for the type @i<T>.]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Implicit_Dereference],
+    Text=[@ChgAdded{Version=[3],Text=[Mechanism for user-defined implicit .@key[all].]}]}
+
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
@@ -1219,6 +1223,10 @@ have at least two parameters, the first of which is of type @i<T> or
 @i<T>'Class, or is an access-to-constant parameter with designated type @i<T> or
 @i<T>'Class.]}
 
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Constant_Indexing],
+    Text=[@ChgAdded{Version=[3],Text=[Defines function(s) to implement
+      user-defined @nt{indexed_component}s.]}]}
+
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Variable_Indexing@\This aspect shall be specified
 by a @nt{name} that denotes one or more functions declared immediately within
@@ -1235,6 +1243,11 @@ is of an access-to-variable type.]}
   We need no similar rule for Constant_Indexing, since all functions return
   constant objects.]}
 @end{Reason}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Variable_Indexing],
+    Text=[@ChgAdded{Version=[3],Text=[Defines function(s) to implement
+      user-defined @nt{indexed_component}s.]}]}
+
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}

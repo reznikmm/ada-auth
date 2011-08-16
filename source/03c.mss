@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:19 $}
+@Comment{$Date: 2011/08/13 04:53:56 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.113 $}
+@Comment{$Revision: 1.114 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -600,6 +600,7 @@ generic function exists:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada.Tags],Child=[Generic_@!Dispatching_@!Constructor]}@key{generic}
     @key{type} T (<>) @key{is abstract tagged limited private};
     @key{type} Parameters (<>) @key{is limited private};
@@ -607,9 +608,10 @@ generic function exists:]}
         @key{return} T @key{is abstract};
 @key{function} Ada.Tags.Generic_Dispatching_Constructor
    (The_Tag : Tag;
-    Params  : @key{not null access} Parameters) @key{return} T'Class;
-@key{pragma} Preelaborate(Generic_Dispatching_Constructor);
-@key{pragma} Convention(Intrinsic, Generic_Dispatching_Constructor);]}
+    Params  : @key{not null access} Parameters) @key{return} T'Class@Chg{Version=[3],New=[
+   @key{with} Convention => Intrinsic],Old=[]};
+@key{pragma} Preelaborate(Generic_Dispatching_Constructor);@Chg{Version=[3],New=[],Old=[
+@key{pragma} Convention(Intrinsic, Generic_Dispatching_Constructor);]}]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
@@ -3880,8 +3882,10 @@ shall occur immediately within this visible part.
 @end{Honest}
 @begin(Honest)
   If the implementation supports it, an
-  @nt{incomplete_type_declaration} can be completed by a @nt{pragma}
-  Import.
+  @nt{incomplete_type_declaration} can be @Chg{Version=[3],New=[imported
+  (using aspect Import, see @RefSecNum{Interfacing Aspects}), in which
+  case no explicit completion is allowed],Old=[completed by a @nt{pragma}
+  Import]}.
 @end(Honest)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
@@ -6111,9 +6115,11 @@ are done in an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
   @lquotes@;body@rquotes@; rather than @nt{subprogram_body} above.]}
 @end{Discussion}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 For a call to a protected operation of a protected type
-(that has a body @em no check is performed if a @nt{pragma} Import
-applies to the protected type),
+(that has a body @em no check is performed if @Chg{Version=[3],New=[],Old=[a
+@nt{pragma} Import applies to]} the protected type@Chg{Version=[3],New=[ is
+imported @em see @RefSecNum{Interfacing Aspects}],Old=[]}),
 a check is made that the @nt<protected_body> is already elaborated.
 This check and the evaluations of any actual parameters of the call
 are done in an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
@@ -6267,6 +6273,13 @@ incomplete view of the private type]}, so we can
 @Chg{Version=[3],New=[in fact ],Old=[]}have @i{four}
 parts@Chg{Version=[3],New=[],Old=[ now]}.],Old=[]}
 
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[In Ada 2012, there are no language-defined pragmas
+that act as completions. Pragma Import (which is obsolescent) has the effect of
+setting aspect Import to True; such an aspect makes giving a completion illegal.
+We considered removing the wording which allows pragmas as completions, but
+decided to leave it for the benefit for implementation-defined pragmas which may
+want to act as a completion. ]}
 @end{Discussion}
 @end{Intro}
 
@@ -6291,18 +6304,20 @@ or is a @nt{pragma}.
 @end{Resolution}
 
 @begin{Legality}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 An implicit declaration shall not have a completion.
 @RootDefn{requires a completion}
 For any explicit declaration that is specified
 to @i(require completion), there shall be a corresponding explicit
-completion.
+completion@Chg{Version=[3],New=[, unless the declared
+entity is imported (see @RefSecNum{Interfacing Aspects})],Old=[]}.
 @begin(Honest)
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
-@Chg{Version=[2],New=[The implicit declarations occurring in a
+@ChgAdded{Version=[2],Text=[The implicit declarations occurring in a
 limited view do have a completion (the explicit declaration occurring in the
 full view) but that's a special case, since the implicit declarations are
 actually built from the explicit ones. So they do not @i{require} a
-completion, they have one by @i{fiat}.],Old=[]}
+completion, they have one by @i{fiat}.]}
 @end{Honest}
 
 @begin(Discussion)
@@ -6352,13 +6367,18 @@ A type shall be completely defined before it is frozen
 @end{Legality}
 
 @begin{Notes}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 Completions are in principle allowed for any kind of explicit declaration.
 However, for some kinds of declaration,
-the only allowed completion is a @nt{pragma} Import,
-and implementations are not required to support @nt{pragma} Import for
-every kind of entity.
+the only allowed completion is @Chg{Version=[3],New=[an implementation-defined
+pragma], Old=[a @nt{pragma} Import]},
+and implementations are not required to @Chg{Version=[3],New=[have any
+such pragmas],Old=[support @nt{pragma} Import for
+every kind of entity]}.
 @begin(Discussion)
-  In fact, we expect that implementations will @i{not} support pragma
+  @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+  @ChgDeleted{Version=[3],Text=[In fact, we expect that implementations
+  will @i{not} support pragma
   Import of things like types @em it's hard to even define the
   semantics of what it would mean.
   Therefore, in practice, @i{not} every explicit declaration
@@ -6366,7 +6386,7 @@ every kind of entity.
   In any case, if an implementation chooses to support pragma Import for,
   say, types, it can place whatever restrictions on the feature it wants
   to. For example, it might want the @nt{pragma} to be a freezing point for
-  the type.
+  the type.]}
 @end(Discussion)
 
 There are rules that prevent premature uses of declarations that have a

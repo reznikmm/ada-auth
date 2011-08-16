@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/08/06 05:45:23 $}
+@Comment{$Date: 2011/08/13 04:53:56 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 
 @LabeledClause{Array Types}
 
@@ -293,7 +293,6 @@ may be specified with an @nt{aspect_specification} (see
 shall be specified by a static expression, and that
 expression shall be explicit, even if the aspect has a boolean type.
 Default_Value shall be specified only on a @nt{full_type_declaration}.]}
-@end{Description}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The part about requiring an explicit expression is
@@ -307,6 +306,11 @@ Default_Value shall be specified only on a @nt{full_type_declaration}.]}
   different whether or not a Default_Value is specified (see
   @RefSecNum{Parameter Associations}).]}
 @end{Reason}
+
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Default_Component_Value],
+  Text=[@ChgAdded{Version=[3],Text=[Default value for the components of an
+    array-of-scalar subtype.]}]}
+@end{Description}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
 @ChgAdded{Version=[3],Text=[If a derived type with no primitive subprograms
@@ -636,10 +640,13 @@ These attributes are not defined if A is a subtype-mark
 @end{StaticSem}
 
 @begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 An implementation should normally represent
 multidimensional arrays in row-major order, consistent with the notation used
 for multidimensional array aggregates (see @RefSecNum(Array Aggregates)).
-However, if a @key<pragma> Convention(Fortran, ...) applies to a
+However, if @Chg{Version=[3],New=[convention],Old=[a @key<pragma>
+Convention]}(Fortran@Chg{Version=[3],New=[ is specified
+for],Old=[, ...) applies to]} a
 multidimensional array type, then column-major order should be used
 instead (see @RefSec{Interfacing with Fortran}).
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],

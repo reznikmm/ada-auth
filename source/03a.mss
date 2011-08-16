@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:19 $}
+@Comment{$Date: 2011/08/13 04:53:56 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.109 $}
+@Comment{$Revision: 1.110 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1535,6 +1535,13 @@ The description of S'Base has been moved to
 Static_Predicate and Dynamic_Predicate may be used to define properties of
 subtypes. A @i{predicate specification} is an @nt{aspect_specification}
 for one of the two predicate aspects.@Defn{predicate aspect}@Defn{predicate specification}@PDefn2{Term=[aspect],Sec=(predicate)}]}
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Static_Predicate],
+  Text=[@ChgAdded{Version=[3],Text=[Condition that must hold true for objects of
+    a given subtype; the subtype may be static.]}]}
+
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Dynamic_Predicate],
+  Text=[@ChgAdded{Version=[3],Text=[Condition that must hold true for objects of
+    a given subtype; the subtype is not static.]}]}
 @end{Intro}
 
 @begin{Resolution}
@@ -4714,13 +4721,15 @@ may be specified with an @nt{aspect_specification} (see
 shall be specified by a static expression, and that
 expression shall be explicit, even if the aspect has a boolean type.
 Default_Value shall be specified only on a @nt{full_type_declaration}.]}
-@end{Description}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The part about requiring an explicit expression is
   to disallow omitting the value for this aspect, which would otherwise be
   allowed by the rules of @RefSecNum{Aspect Specifications}.]}
 @end{Reason}
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Default_Value],
+  Text=[@ChgAdded{Version=[3],Text=[Default value for a scalar subtype.]}]}
+@end{Description}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
 @ChgAdded{Version=[3],Text=[If a derived type with no primitive subprograms
@@ -6759,6 +6768,9 @@ evaluation rules.]}
      via an @nt{attribute_@!definition_@!clause}
      (see @RefSecNum{Operational and Representation Attributes});
      the expression of such a clause shall be static.
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Small],
+    Text=[@ChgAdded{Version=[3],Text=[Scale factor for a fixed point type.]}]}
 
 @Attribute{Prefix=<S>, AttrName=<Delta>,
   Text=[S'Delta

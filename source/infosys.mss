@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.38 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
+@comment{ $Revision: 1.39 $ $Date: 2011/08/13 04:53:58 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:37 $}
+@Comment{$Date: 2011/08/13 04:53:58 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -42,13 +42,15 @@ The character and string handling packages in
 @end{Intro}
 
 @begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 If COBOL (respectively, C) is widely supported in the target environment,
 implementations supporting the Information Systems
  Annex should provide the child package
 Interfaces.COBOL (respectively, Interfaces.C) specified in
 @RefSecNum{Interface to Other Languages}
 and should support a @i{convention_}@nt{identifier} of
-COBOL (respectively, C) in the interfacing pragmas
+COBOL (respectively, C) in the @Chg{Version=[3],New=[Convention
+aspect],Old=[interfacing pragmas]}
 (see @RefSecNum{Interface to Other Languages}),
 thus allowing Ada programs to interface with programs written in
 that language.
@@ -85,6 +87,11 @@ value of 10 implies a decimal base range.
 In the absence of a Machine_Radix clause, the choice
 of 2 versus 10 for S'Machine_Radix is not specified.
 @end{Ramification}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Machine_Radix],
+    Text=[@ChgAdded{Version=[3],Text=[Radix (2 or 10) used to represent a
+      decimal fixed point type.]}]}
+
 @end{StaticSem}
 
 @begin{ImplAdvice}
@@ -97,6 +104,7 @@ for objects of subtype @i<S> when @i<S>'Machine_Radix = 10.]}]}
 
 @begin{Discussion}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 The intent of a decimal Machine_Radix attribute definition clause
 is to allow the programmer to declare an Ada decimal data object
 whose representation matches a particular COBOL implementation's
@@ -104,7 +112,8 @@ representation of packed decimal items.
 The Ada object may then be passed to an interfaced COBOL program
 that takes a packed decimal data item as a parameter,
 assuming that convention COBOL has been specified for the Ada
-object's type in a @nt[pragma] Convention.
+object's type @Chg{Version=[3],New=[with an aspect],Old=[in a @nt[pragma]]}
+Convention.
 
 Additionally, the Ada compiler may choose to generate arithmetic
 instructions that exploit the packed decimal representation.
@@ -135,6 +144,7 @@ instructions that exploit the packed decimal representation.
 
    @AdaObjDefn{Max_Decimal_Digits} : @key(constant) := @RI{implementation-defined};
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key(generic)
       @key(type) Dividend_Type  @key(is) @key(delta) <> @key(digits) <>;
       @key(type) Divisor_Type   @key(is) @key(delta) <> @key(digits) <>;
@@ -143,8 +153,9 @@ instructions that exploit the packed decimal representation.
    @key(procedure) @AdaSubDefn{Divide} (Dividend  : @key(in) Dividend_Type;
                      Divisor   : @key(in) Divisor_Type;
                      Quotient  : @key(out) Quotient_Type;
-                     Remainder : @key(out) Remainder_Type);
-   @key[pragma] Convention(Intrinsic, Divide);
+                     Remainder : @key(out) Remainder_Type)@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[;
+   @key[pragma] Convention(Intrinsic, Divide)]};
 
 @key(end) Ada.Decimal;
 @end{Example}

@@ -1,7 +1,8 @@
 @Comment{Master file for the AARM}
 
 @Comment{Global properties}
-@ShowIndexEntries @Comment{To match the Ada 95 AARM}
+@Comment{@ShowIndexEntries @Comment{To match the Ada 95 AARM}}
+@HideIndexEntries @Comment{As recommended by the ARG (Feb. 2011)}
 @ShowAnnotations
 @HideISO
 @NumberParagraphs
@@ -19,14 +20,14 @@
 @RTFHeaderPrefix{Version=[0],Text=[ISO/IEC 8652:1995(E)]}
 @RTFHeaderPrefix{Version=[1],Text=[ISO/IEC 8652:1995(E) with COR.1:2001]}
 @RTFHeaderPrefix{Version=[2],Text=[ISO/IEC 8652:2007(E) Ed. 3]}
-@RTFHeaderPrefix{Version=[3],Text=[ISO/IEC 8652:201z(E) Ed. 3]}
+@RTFHeaderPrefix{Version=[3],Text=[ISO/IEC 8652:201z(E)]}
 @RTFFooter{UseDate=[T],UseClauseName=[T],UseISOFormat=[F]}@Comment{RM style footers}
 @RTFPageSize{Letter}
 @RTFFonts{Serif=[Times],SansSerif=[Arial]}
 @RTFVersionName{Version=[0],Text=[Original Text]}
 @RTFVersionName{Version=[1],Text=[Technical Corrigendum 1]}
 @RTFVersionName{Version=[2],Text=[Amendment 1]}
-@RTFVersionName{Version=[3],Text=[Amendment 2]}
+@RTFVersionName{Version=[3],Text=[Ada 2012]}
 
 @Comment{HTML properties}
 @Comment{Many small files are used, thus no @SingleHTMLOutputFile command}

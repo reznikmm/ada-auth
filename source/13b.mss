@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/08/06 05:45:24 $}
+@Comment{$Date: 2011/08/13 04:53:57 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -53,16 +53,22 @@ of package System@Chg{Version=[2],New=[],Old=[and its language-defined children]
    @AdaObjDefn{Word_Size}    : @key[constant] := @RI{implementation-defined} * Storage_Unit;
    @AdaObjDefn{Memory_Size}  : @key[constant] := @RI{implementation-defined};
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    --@RI{ @Defn2{Term=[address], Sec=(comparison)}Address Comparison:}
-   @key(function) "<" (Left, Right : Address) @key(return) Boolean;
-   @key(function) "<="(Left, Right : Address) @key(return) Boolean;
-   @key(function) ">" (Left, Right : Address) @key(return) Boolean;
-   @key(function) ">="(Left, Right : Address) @key(return) Boolean;
-   @key(function) "=" (Left, Right : Address) @key(return) Boolean;
+   @key(function) "<" (Left, Right : Address) @key(return) Boolean@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
+   @key(function) "<="(Left, Right : Address) @key(return) Boolean@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
+   @key(function) ">" (Left, Right : Address) @key(return) Boolean@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
+   @key(function) ">="(Left, Right : Address) @key(return) Boolean@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
+   @key(function) "=" (Left, Right : Address) @key(return) Boolean@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
 -- @key(function) "/=" (Left, Right : Address) @key(return) Boolean;
-   --@RI{ "/=" is implicitly defined}
+   --@RI{ "/=" is implicitly defined}@Chg{Version=[3],New=[],Old=[
    @key[pragma] Convention(Intrinsic, "<");
-   ... --@RI{ and so on for all language-defined subprograms in this package}
+   ... --@RI{ and so on for all language-defined subprograms in this package}]}
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00221-01]}
@@ -345,33 +351,45 @@ have been moved to the Real Time Annex.
 
    --@RI{ @Defn2{Term=[address], Sec=(arithmetic)}Address Arithmetic:}
 
-   @key(function) "+"(Left : Address; Right : Storage_Offset)
-     @key(return) Address;
-   @key(function) "+"(Left : Storage_Offset; Right : Address)
-     @key(return) Address;
-   @key(function) "-"(Left : Address; Right : Storage_Offset)
-     @key(return) Address;
-   @key(function) "-"(Left, Right : Address)
-     @key(return) Storage_Offset;
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+   @key(function) "+"(Left : Address; Right : Storage_Offset)@Chg{Version=[3],New=[],Old=[
+     ]} @key(return) Address@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
+   @key(function) "+"(Left : Storage_Offset; Right : Address)@Chg{Version=[3],New=[],Old=[
+     ]} @key(return) Address@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
+   @key(function) "-"(Left : Address; Right : Storage_Offset)@Chg{Version=[3],New=[],Old=[
+     ]} @key(return) Address@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
+   @key(function) "-"(Left, Right : Address)@Chg{Version=[3],New=[],Old=[
+     ]} @key(return) Storage_Offset@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
 
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
    @key(function) "@key(mod)"(Left : Address; Right : Storage_Offset)
-     @key(return) Storage_Offset;
+      @key(return) Storage_Offset@Chg{Version=[3],New=[
+         @key(with) Convention => Intrinsic],Old=[]};
 
 
    --@RI{ Conversion to/from integers:}
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
    @key[type] @AdaTypeDefn{Integer_Address} @key[is] @RI{implementation-defined};
-   @key[function] @AdaSubDefn{To_Address}(Value : Integer_Address) @key[return] Address;
-   @key[function] @AdaSubDefn{To_Integer}(Value : Address) @key[return] Integer_Address;
+   @key[function] @AdaSubDefn{To_Address}(Value : Integer_Address) @key[return] Address@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
+   @key[function] @AdaSubDefn{To_Integer}(Value : Address) @key[return] Integer_Address@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
 
 
-   @key[pragma] Convention(Intrinsic, "+");
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[],Old=[   @key[pragma] Convention(Intrinsic, "+");
       @RI(-- ...and so on for all language-defined subprograms declared in this package.)
-@key[end] System.Storage_Elements;
+]}@key[end] System.Storage_Elements;
 @end{Example}
 @begin{Reason}
-The Convention @nt{pragma}s imply that
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+The Convention @Chg{Version=[3],New=[aspects],Old=[@nt{pragma}s]} imply that
 the attribute Access is not allowed for those operations.
 
 The @key(mod) function is needed so that the
@@ -491,13 +509,17 @@ converts from that record type to type Address.
 @key[package] System.Address_To_Access_Conversions @key[is]
    @key[pragma] Preelaborate(Address_To_Access_Conversions);
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
    @key[type] Object_Pointer @key[is] @key[access] @key[all] Object;
-   @key[function] @AdaSubDefn{To_Pointer}(Value : Address) @key[return] Object_Pointer;
-   @key[function] @AdaSubDefn{To_Address}(Value : Object_Pointer) @key[return] Address;
+   @key[function] @AdaSubDefn{To_Pointer}(Value : Address) @key[return] Object_Pointer@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
+   @key[function] @AdaSubDefn{To_Address}(Value : Object_Pointer) @key[return] Address@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
 
-   @key[pragma] Convention(Intrinsic, To_Pointer);
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[],Old=[   @key[pragma] Convention(Intrinsic, To_Pointer);
    @key[pragma] Convention(Intrinsic, To_Address);
-@key[end] System.Address_To_Access_Conversions;
+]}@key[end] System.Address_To_Access_Conversions;
 @end{Example}
 
 
@@ -710,15 +732,18 @@ of the generic function Unchecked_Conversion.]
 @begin{StaticSem}
 @Leading@keepnext@;The following language-defined generic library function exists:
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
 @key[generic]
    @key[type] Source(<>) @key[is] @key[limited] @key[private];
    @key[type] Target(<>) @key[is] @key[limited] @key[private];
-@SubChildUnit{Parent=[Ada],Child=[Unchecked_Conversion]}@key[function] Ada.Unchecked_Conversion(S : Source) @key[return] Target;
-@key[pragma] Convention(Intrinsic, Ada.Unchecked_Conversion);
+@SubChildUnit{Parent=[Ada],Child=[Unchecked_Conversion]}@key[function] Ada.Unchecked_Conversion(S : Source) @key[return] Target@Chg{Version=[3],New=[
+   @key(with) Convention => Intrinsic;],Old=[;
+@key[pragma] Convention(Intrinsic, Ada.Unchecked_Conversion);]}
 @key[pragma] Pure(Ada.Unchecked_Conversion);
 @end{Example}
 @begin{Reason}
-The @nt{pragma} Convention implies that
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+The @Chg{Version=[3],New=[aspect],Old=[@nt{pragma}]} Convention implies that
 the attribute Access is not allowed
 for instances of Unchecked_Conversion.
 @end{Reason}
@@ -1614,6 +1639,16 @@ a non-derived access-to-object type
 via an @nt{attribute_@!definition_@!clause};
 the @nt{name} in a Storage_Pool clause shall denote a variable.
 
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Storage_Pool],
+    Text=[@ChgAdded{Version=[3],Text=[Pool of memory from which @key[new] will
+    allocate for a given access type.]}]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Storage_Size (access)],
+    Text=[@ChgAdded{Version=[3],Text=[Sets memory size for allocations for an
+      access type.]}]}
+
+
+
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0107-1],ARef=[AI05-0111-3],ARef=[AI05-0116-1]}
 An @nt{allocator} of @Chg{Version=[3],New=[a ],Old=[]}type @i<T>
 @Chg{Version=[3],New=[that does not support subpools ],Old=[]}allocates
@@ -2349,15 +2384,18 @@ the generic procedure Unchecked_Deallocation.]
 @begin{StaticSem}
 @leading@keepnext@;The following language-defined generic library procedure exists:
 @begin{Example}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
 @key[generic]
    @key[type] Object(<>) @key[is] @key[limited] @key[private];
    @key[type] Name   @key[is] @key[access]  Object;
-@SubChildUnit{Parent=[Ada],Child=[Unchecked_Deallocation]}@key[procedure] Ada.Unchecked_Deallocation(X : @key[in] @key[out] Name);
-@key[pragma] Convention(Intrinsic, Ada.Unchecked_Deallocation);
+@SubChildUnit{Parent=[Ada],Child=[Unchecked_Deallocation]}@key[procedure] Ada.Unchecked_Deallocation(X : @key[in] @key[out] Name)@Chg{Version=[3],New=[
+   @key(with) Convention => Intrinsic;],Old=[;
+@key[pragma] Convention(Intrinsic, Ada.Unchecked_Deallocation);]}
 @key[pragma] Preelaborate(Ada.Unchecked_Deallocation);
 @end{Example}
 @begin{Reason}
-The @nt{pragma} Convention implies that
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+The @Chg{Version=[3],New=[aspect],Old=[@nt{pragma}]} Convention implies that
 the attribute Access is not allowed
 for instances of Unchecked_Deallocation.
 @end{Reason}
@@ -3894,7 +3932,7 @@ cause bad nesting, so we don't mark it}
     containers (see @RefSecNum{The Generic Package Containers.Unbounded_Synchronized_Queues}-31);]}
 
     @ChgRef{Version=[3],Kind=[Added]}
-    @ChgAdded{Version=[3],Text=[package Interfaces (
+    @ChgAdded{Version=[3],Text=[package Interfaces (see
       @RefSecNum{The Package Interfaces});]}
 
     @ChgRef{Version=[3],Kind=[Added]}
@@ -3959,8 +3997,8 @@ only to the current compilation or environment, not the entire partition.]}
   a special mechanism to implement these renames.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[The pragmas have exactly the functionality of the
-  corresponding aspect, (unlike the typical obsolescent feature) and rejecting
+  @ChgAdded{Version=[3],Text=[The pragmas have the same functionality as the
+  corresponding aspect (unlike the typical obsolescent feature), and rejecting
   them could be a significant portability problem for existing code.]}
 @end{Reason}
 @end{Description}
@@ -4280,6 +4318,11 @@ an elementary type @i(T)}, the following representation attribute is defined:]}
   first subtypes via an @nt{attribute_definition_clause}; the @nt{expression}
   of such a clause shall be static, nonnegative, and a multiple of
   Stream_Element'Size.]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Stream_Size],
+    Text=[@ChgAdded{Version=[3],Text=[Size in bits used to represent elementary
+      objects in a stream.]}]}
+
 @end{Description}
 @EndPrefixType{}
 
@@ -4886,6 +4929,23 @@ The same rule applies to the result of the Input function.]}
   an attribute for a limited type based on a specified attribute for the parent
   type, we want to be able to call that attribute.]}
 @end{Discussion}
+
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Read],
+  Text=[@ChgAdded{Version=[3],Text=[Procedure to read a value from a stream for
+    a given type.]}]}
+
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Write],
+  Text=[@ChgAdded{Version=[3],Text=[Procedure to write a value to a stream for a
+    given type.]}]}
+
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Input],
+  Text=[@ChgAdded{Version=[3],Text=[Function to read a value from a stream for a
+    given type, including any bounds and discriminants.]}]}
+
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Output],
+  Text=[@ChgAdded{Version=[3],Text=[Procedure to write a value to a stream for a
+    given type, including any bounds and discriminants.]}]}
+
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[A stream-oriented attribute for a
@@ -5615,9 +5675,10 @@ incomplete type],Old=[]}.
   where the tag is stored.]}
 @end{Discussion}
 @begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
   The part about bodies does not say @i{immediately} within.
   A renaming-as-body does not have this property.
-  Nor does a @nt{pragma} Import.
+  Nor does @Chg{Version=[3],New=[an imported body],Old=[a @nt{pragma} Import.]}
 @end{Ramification}
 @begin{Reason}
   The reason bodies cause freezing is because we want

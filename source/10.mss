@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2011/08/06 05:45:24 $}
+@Comment{$Date: 2011/08/13 04:53:57 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.93 $}
+@Comment{$Revision: 1.94 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3338,6 +3338,10 @@ semantically on non-preelaborated units, which is also consistent with
 nested units.]}
 @end{Ramification}
 
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Preelaborate],
+    Text=[@ChgAdded{Version=[3],Text=[Code execution during elaboration is
+      avoided for a given package.]}]}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00161-01]}
 @ChgAdded{Version=[2],Text=[@defn{preelaborable initialization}The following rules
 specify which entities have @i{preelaborable initialization}:]}
@@ -3683,6 +3687,11 @@ prevention of @nt{allocator}s would have to be
 a run-time check, in order to avoid violations of the generic contract
 model.]}
 @end{Reason}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Pure],
+    Text=[@ChgAdded{Version=[3],Text=[Side effects are avoided in the
+      subprograms of a given package.]}]}
+
 @end{Legality}
 
 @begin{ImplPerm}
@@ -3846,6 +3855,11 @@ each @i{library_unit_}@nt{name} of a @nt{pragma} Elaborate
 or Elaborate_All has to denote a library unit mentioned by a
 previous @nt{with_clause} of the same @nt{context_clause}.
 @end{Discussion}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Elaborate_Body],
+    Text=[@ChgAdded{Version=[3],Text=[A given package must have a body, and that
+      body is elaborated immediately after the declaration.]}]}
+
 @end{StaticSem}
 
 @begin{Notes}
@@ -3940,10 +3954,11 @@ required to appear last.
 
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0028-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@B<Correction:> Corrected a serious
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@B<Correction:>
+  Corrected a serious
   unintended incompatibility with Ada 95 in the new preelaboration wording
   @em explicit initialization of objects of types that don't have
-  preelaborable initialization was not allowed. Amendment 2 switches
+  preelaborable initialization was not allowed. Ada 2012 switches
   back to the Ada 95 rule in these cases. This is unlikely to
   occur in practice, as it is unlikely that a compiler would have
   implemented the more restrictive rule (it would fail many ACATS tests

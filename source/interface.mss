@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.55 $ $Date: 2011/08/06 05:45:24 $ $Author: randy $ }
+@comment{ $Revision: 1.56 $ $Date: 2011/08/13 04:53:58 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2011/08/06 05:45:24 $}
+@Comment{$Date: 2011/08/13 04:53:58 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -65,6 +65,22 @@ used to specify the link name and external name, respectively, to be
 used to identify imported or exported entities in the external
 environment.],Old=[]}
 
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Import],
+    Text=[@ChgAdded{Version=[3],Text=[Entity is imported from another
+      language.]}]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Export],
+    Text=[@ChgAdded{Version=[3],Text=[Entity is exported to another
+      language.]}]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[External_Name],
+    Text=[@ChgAdded{Version=[3],Text=[Name used to identify an imported or
+      exported entity.]}]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Link_Name],
+    Text=[@ChgAdded{Version=[3],Text=[Linker symbol used to identify an imported
+      or exported entity.]}]}
+
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[The],Old=[A @nt{pragma}]} Convention
 @Chg{Version=[3],New=[aspect ],Old=[]}is used to specify that an Ada entity
@@ -77,6 +93,10 @@ Convention@Chg{Version=[3],New=[ => ],Old=[(]}Fortran@Chg{Version=[3],New=[],Old
 that Matrix should be represented according to the
 conventions of the supported Fortran implementation, namely
 column-major order.
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Convention],
+    Text=[@ChgAdded{Version=[3],Text=[Calling convention or other convention
+      used for interfacing to other languages.]}]}
 
 A @nt{pragma} Linker_Options is used to specify the system linker
 parameters needed when a given compilation unit is included in a
@@ -138,9 +158,10 @@ type Boolean.]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 The @Chg{Version=[3],New=[Link_Name and External_Name aspects are
-of],Old=[expected type for a @SynI{string_}@Syn2{expression}@PDefn2{Term=[expected type],
+of],Old=[expected]} type The @Chg{Version=[3],New=[],Old=[for a
+@SynI{string_}@Syn2{expression}@PDefn2{Term=[expected type],
   Sec=(link name)} in an interfacing pragma or in pragma Linker_Options
-is]} String.
+is ]}String.
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[Revised]}
 There is no language-defined support for
@@ -264,10 +285,13 @@ the convention specified in the pragma.
   Convention.
 @end[Ramification]
 
-A @nt{pragma} Import shall be the completion of a declaration.
-@Defn{notwithstanding}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[],Old=[A @nt{pragma} Import shall be the completion of
+a declaration.]}@Defn{notwithstanding}
 Notwithstanding any rule to the contrary,
-a @nt{pragma} Import may serve as the completion of any
+@Chg{Version=[3],New=[a declaration with a True],Old=[a @nt{pragma}]} Import
+@Chg{Version=[3],New=[aspect shall not have a],Old=[may serve as the]}
+completion@Chg{Version=[3],New=[],Old=[ of any
 kind of (explicit) declaration if supported by an implementation for
 that kind of declaration.
 If a completion is a @nt{pragma} Import,
@@ -278,22 +302,34 @@ as the declaration.
 For a library unit, it shall appear in the same @nt{compilation},
 before any subsequent @nt{compilation_unit}s other than @nt{pragma}s.
 If the @nt{local_name} denotes more than one entity,
-then the @nt{pragma} Import is the completion of all of them.
+then the @nt{pragma} Import is the completion of all of them]}.
 @begin(Discussion)
-  For declarations of deferred constants and subprograms, we mention
-  pragma Import
-  explicitly as a possible completion. For other declarations that
-  require completions, we ignore the possibility of pragma Import.
-  Nevertheless, if an implementation chooses to allow a @nt{pragma} Import
-  to complete the declaration of a task, protected type, incomplete
-  type, private type, etc., it may do so, and the normal completion
-  is then not allowed for that declaration.
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+  For declarations of deferred constants and subprograms, we
+  @Chg{Version=[3],New=[explicitly ],Old=[]}mention
+  @Chg{Version=[3],New=[that no completion is allowed when aspect],
+  Old=[pragma]} Import @Chg{Version=[3],New=[is True],Old=[explicitly
+  as a possible completion]}. For other declarations that
+  require completions, we ignore the possibility of
+  @Chg{Version=[3],New=[the],Old=[pragma]} Import@Chg{Version=[3],New=[ being
+  True],Old=[]}.
+  Nevertheless, if an implementation chooses to allow
+  @Chg{Version=[3],New=[specifying aspect],Old=[a @nt{pragma}]} Import
+  to @Chg{Version=[3],New=[be True for],Old=[complete]} the declaration
+  of a task, protected type, incomplete type, private type, etc.,
+  it may do so, and the normal completion is then not allowed for that
+  declaration.
 @end(Discussion)
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn{imported entity} @Defn{exported entity}
-An entity specified as the Entity argument to a @nt[pragma] Import
-(or @nt[pragma] Export)
- is said to be @i{imported} (respectively, @i{exported}).
+An entity @Chg{Version=[3],New=[with a True],Old=[specified
+as the Entity argument to a @nt[pragma]]} Import
+(or @Chg{Version=[3],New=[],Old=[@nt[pragma] ]}Export@Chg{Version=[3],New=[
+aspect],Old=[]})
+is said to be @i{imported}
+(respectively, @i{exported}).@Chg{Version=[3],New=[ An entity shall not be both
+imported and exported.],Old=[]}
 
 The declaration of an imported object shall not include an explicit
 initialization expression.
@@ -303,25 +339,35 @@ This follows from the @lquotes@;Notwithstanding ...@rquotes@;
 wording in the Dynamics Semantics paragraphs below.
 @end{TheProof}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 The type of an imported or exported object shall be compatible with the
-convention specified in the corresponding @nt[pragma].
+@Chg{Version=[3],New=[specified Convention
+aspect, if any], Old=[convention specified in the corresponding @nt{pragma}]}.
 @begin[Ramification]
 This implies, for example, that importing an Integer object might be illegal,
 whereas importing an object of type Interfaces.C.int would be permitted.
 @end[Ramification]
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 For an imported or exported subprogram, the result and parameter types
-shall each be compatible with the convention specified in the
-corresponding pragma.
+shall each be compatible with the @Chg{Version=[3],New=[specified Convention
+aspect, if any], Old=[convention specified in the corresponding pragma]}.
 
-The external name and link name @i{string}_@nt[expression]s
-of a @nt{pragma} Import or Export, and the @i[string]_@nt[expression]
-of a @nt[pragma] Linker_Options, shall be
-static.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[The @nt{aspect_definition} (if any) used to directly
+specify an],Old=[The external name and link name @i{string}_@nt[expression]s
+of a @nt{pragma}]} Import@Chg{Version=[3],New=[,],Old=[ or]} Export,
+@Chg{Version=[3],New=[External_Name, or Link_Name aspect shall be a static
+@nt{expression}. The],Old=[and the]} @SynI[string]_@nt[expression]
+of a @nt[pragma] Linker_Options@Chg{Version=[3],New=[],Old=[,]} shall be
+static.@Chg{Version=[3],New=[ An External_Name or Link_Name aspect shall be
+specified only for an entity that is either imported or exported.],Old=[]}
+
 @end{Legality}
 
 @begin{StaticSem}
-@PDefn2{Term=[representation pragma], Sec=(Import)}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[@PDefn2{Term=[representation pragma], Sec=(Import)}
 @PDefn2{Term=[pragma, representation], Sec=(Import)}
 @PDefn2{Term=[representation pragma], Sec=(Export)}
 @PDefn2{Term=[pragma, representation], Sec=(Export)}
@@ -337,9 +383,10 @@ that specify the @i{convention} aspect of representation.
 @Defn2{Term=[exported], Sec=(aspect of representation)}
 In addition, Import and Export @nt{pragma}s specify the
 @i{imported} and @i{exported} aspects of representation,
-respectively.
+respectively.]}
 
-@PDefn2{Term=[program unit pragma], Sec=(Import)}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[@PDefn2{Term=[program unit pragma], Sec=(Import)}
 @PDefn2{Term=[pragma, program unit], Sec=(Import)}
 @PDefn2{Term=[program unit pragma], Sec=(Export)}
 @PDefn2{Term=[pragma, program unit], Sec=(Export)}
@@ -347,23 +394,35 @@ respectively.
 @PDefn2{Term=[pragma, program unit], Sec=(Convention)}
 An interfacing pragma is a program unit pragma
 when applied to a program unit
-(see @RefSecNum{Pragmas and Program Units}).
+(see @RefSecNum{Pragmas and Program Units}).]}
 
-@Leading@;An interfacing pragma defines the convention
-of the entity denoted by the @nt{local_name}.
-The convention represents the calling convention or representation
-convention of the entity.
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[],Old=[An interfacing pragma defines the convention
+of the entity denoted by the @nt{local_name}. ]}The
+@Chg{Version=[3],New=[Convention aspect],Old=[convention]} represents
+the calling convention or representation convention of the entity.
 For an access-to-subprogram type, it represents the calling
 convention of designated subprograms.
 In addition:
 @begin{Itemize}
-A @nt{pragma} Import specifies that the entity is defined externally (that is,
-outside the Ada program).
+@ChgRef{Version=[3],Kind=[Revised]}
+A @Chg{Version=[3],New=[True],Old=[@nt{pragma}]} Import
+@Chg{Version=[3],New=[aspect indicates],Old=[specifies]}
+that the entity is defined externally (that is,
+outside the Ada program).@Chg{Version=[3],New=[ This aspect is never inherited;
+if not directly specified, the Import aspect is False.],Old=[]}
 
-A @nt{pragma} Export specifies that the entity is used externally.
+@ChgRef{Version=[3],Kind=[Revised]}
+A @Chg{Version=[3],New=[True],Old=[@nt{pragma}]} Export
+@Chg{Version=[3],New=[aspect indicates],Old=[specifies]}
+that the entity is used externally.@Chg{Version=[3],New=[ This aspect is never
+inherited; if not directly specified, the Export aspect is False.],Old=[]}
 
-A @nt{pragma} Import or Export optionally specifies an
-entity's external name, link name, or both.
+@ChgRef{Version=[3],Kind=[Revised]}
+@Chg{Version=[3],New=[For an entity with a True],Old=[A @nt{pragma}]}
+Import or Export @Chg{Version=[3],New=[aspect, an],Old=[optionally specifies
+an entity's]} external name, link name, or both@Chg{Version=[3],New=[ may also
+be specified],Old=[]}.
 @end{Itemize}
 
 @Defn{external name}
@@ -408,12 +467,15 @@ defined.
 @end{StaticSem}
 
 @begin{RunTime}
-@PDefn2{Term=[elaboration], Sec=(declaration named by a @nt{pragma} Import)}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[@PDefn2{Term=[elaboration], Sec=(declaration with a True Import aspect)}],
+Old=[@PDefn2{Term=[elaboration], Sec=(declaration named by a @nt{pragma} Import)}]}
 @Defn{notwithstanding}
 Notwithstanding what this International Standard says elsewhere,
-the elaboration of a declaration denoted by the
+the elaboration of a declaration @Chg{Version=[3],New=[with a True Import
+aspect],Old=[denoted by the
 @nt{local_name} of
-a @nt{pragma} Import does not create the entity.
+a @nt{pragma} Import]} does not create the entity.
 Such an elaboration has no other effect than to allow the defining name
 to denote the external entity.
 @begin{Ramification}
@@ -422,14 +484,17 @@ This implies that default initializations are skipped.
 For example, an imported access object is @i{not}
 initialized to @key[null].
 
-Note that the @nt{local_name}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[Note that the @nt{local_name}
  in a @nt{pragma} Import might denote
 more than one declaration; in that case, the entity of all of those
-declarations will be the external entity.
+declarations will be the external entity.]}
 @end{Ramification}
 @begin{Discussion}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 This @lquotes@;notwithstanding@rquotes@; wording is better than saying
-@lquotes@;unless named by a @nt{pragma} Import@rquotes@; on every definition of
+@lquotes@;unless @Chg{Version=[3],New=[aspect],Old=[named by a @nt{pragma}]}
+Import@Chg{Version=[3],New=[ is True],Old=[]}@rquotes@; on every definition of
 elaboration.
 It says we recognize the contradiction, and this rule takes
 precedence.
@@ -438,15 +503,16 @@ precedence.
 
 @begin{Erron}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00320-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
 It is the programmer's responsibility to ensure that the use of interfacing
-pragmas does not violate Ada semantics; otherwise, program execution is
-erroneous.]}
+@Chg{Version=[3],New=[aspects],Old=[pragmas]} does not violate Ada semantics;
+otherwise, program execution is erroneous.]}
 @end{Erron}
 
-
 @begin{ImplAdvice}
-    If an implementation supports pragma Export
+    @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+    If an implementation supports @Chg{Version=[3],New=[],Old=[pragma ]}Export
     to a given language, then it should also
     allow the main subprogram to be written in that language.
     It should support some mechanism for invoking the elaboration of the
@@ -464,39 +530,49 @@ erroneous.]}
     Sec=[of environment task for a foreign language main subprogram]}],
     Old=[]}@ChgNote{Presentation AI-00052. Index entries only; no
       real change, so no Chgref}
-@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[If @nt{pragma} Export is supported for a language, the main program should
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[If @Chg{Version=[3],New=[],Old=[@nt{pragma} ]} Export is supported
+for a language, the main program should
 be able to be written in that language. Subprograms named "adainit" and
 "adafinal"
 should be provided for elaboration and finalization of the environment task.]}]}
 @begin{ramification}
-For example, if the main subprogram is written in C,
-it can call adainit before the first call to an Ada subprogram,
-and adafinal after the last.@end{ramification}
+  For example, if the main subprogram is written in C,
+  it can call adainit before the first call to an Ada subprogram,
+  and adafinal after the last.
+@end{ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 Automatic elaboration of preelaborated packages should be provided
-when @nt[pragma] Export is supported.
-@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+when @Chg{Version=[3],New=[specifying],Old=[@nt[pragma]]} Export
+@Chg{Version=[3],New=[as True ],Old=[]}is supported.
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Automatic elaboration of preelaborated packages should be provided
-when @nt[pragma] Export is supported.]}]}
+when @Chg{Version=[3],New=[specifying],Old=[@nt[pragma]]} Export
+@Chg{Version=[3],New=[as True ],Old=[]}is supported.]}]}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 For each supported convention @i[L] other than Intrinsic,
-an implementation should support Import and Export @nt{pragma}s for
-objects of @i[L]-compatible types and for
-subprograms, and @nt(pragma) Convention for @i[L]-eligible
-types and for subprograms,
+an implementation should support @Chg{Version=[3],New=[specifying
+the ],Old=[]}Import and Export @Chg{Version=[3],New=[aspects],Old=[@nt{pragma}s]}
+for objects of @i[L]-compatible types and for
+subprograms, and @Chg{Version=[3],New=[the],Old=[@nt(pragma)]}
+Convention @Chg{Version=[3],New=[aspect ],Old=[]}for @i[L]-eligible types and for subprograms,
 presuming the other language has corresponding features.
-@nt(Pragma) Convention need not be supported for scalar types.
+@Chg{Version=[3],New=[specifying the ],Old=[@nt{Pragma}]} Convention
+@Chg{Version=[3],New=[aspect ],Old=[]}need not be supported for scalar types.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[For each supported convention @i[L] other than Intrinsic,
-@nt{pragma}s Import and Export should be supported for
+@Chg{Version=[3],New=[specifying the aspects],Old=[@nt{pragma}s]}
+Import and Export should be supported for
 objects of @i[L]-compatible types and for
-subprograms, and @nt(pragma) Convention should be supported for @i[L]-eligible
-types and for subprograms.]}]}
+subprograms, and @Chg{Version=[3],New=[aspect],Old=[@nt(pragma)]}
+Convention should be supported for @i[L]-eligible types and for subprograms.]}]}
 @begin{reason}
-Pragma Convention is not necessary for scalar types,
-since the language interface packages declare scalar types corresponding
-to those provided by the respective foreign languages.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[Specifying aspect],Old=[Pragma]} Convention is not
+necessary for scalar types, since the language interface packages declare scalar
+types corresponding to those provided by the respective foreign languages.
 @end[reason]
 @begin{ImplNote}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
@@ -519,8 +595,9 @@ standard.]}
 @end{ImplAdvice}
 
 @begin{Notes}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 Implementations may place restrictions on interfacing
-pragmas;
+@Chg{Version=[3],New=[aspects],Old=[pragmas]};
 for example, requiring each exported entity to be declared
 at the library level.
 @begin{TheProof}
@@ -534,40 +611,54 @@ kinds of entities,
 or only for certain conventions.
 @end{Ramification}
 
-A @nt{pragma} Import specifies the conventions for accessing external
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[The Convention aspect in combination with
+the],Old=[A @nt{pragma}]}
+Import @Chg{Version=[3],New=[aspect indicates],Old=[specifies]}
+the conventions for accessing external
 entities. It is possible that the actual entity is written in assembly
 language, but reflects the conventions of a particular
-language. For example, @key{pragma} Import(Ada, ...) can be used to
+language. For example, @Chg{Version=[3],New=[@exam{@key[with] Convention
+=> Ada}],Old=[@key{pragma} Import(Ada, ...)]} can be used to
 interface to an assembly language routine that obeys the
 Ada compiler's calling conventions.
 
-To obtain @lquotes@;call-back@rquotes@; to an Ada subprogram from a foreign language
-environment, @key(pragma) Convention should be specified both for the
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+To obtain @lquotes@;call-back@rquotes@; to an Ada subprogram from a foreign
+language
+environment, @Chg{Version=[3],New=[the],Old=[@key(pragma)]} Convention
+@Chg{Version=[3],New=[aspect ],Old=[]}should be specified both for the
 access-to-subprogram type and the specific subprogram(s) to which 'Access
 is applied.
 
-It is illegal to specify more than one of
-Import, Export, or Convention for a given entity.
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[It is illegal to specify more than one of
+Import, Export, or Convention for a given entity.]}
 
-The @nt{local_name}
- in an interfacing pragma can denote more than one
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[The @nt{local_name}
+in an interfacing pragma can denote more than one
 entity in the case of overloading.
-Such a @nt{pragma} applies to all of the denoted entities.
+Such a @nt{pragma} applies to all of the denoted entities.]}
 
 See also @RefSec{Machine Code Insertions}.
 @begin{Ramification}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 The Intrinsic convention (see @refsecnum(Conformance Rules))
 implies that the entity is somehow @lquotes@;built
 in@rquotes@; to the implementation.
 Thus, it generally does not make sense for users to specify Intrinsic
-in a @nt{pragma} Import.
+@Chg{Version=[3],New=[along with specifying that the entity is imported],
+Old=[in a @nt{pragma} Import]}.
 The intention is that only implementations will specify
-Intrinsic in a @nt{pragma} Import.
+Intrinsic @Chg{Version=[3],New=[for an imported entity],Old=[in a @nt{pragma}
+Import]}.
 The language also defines certain subprograms to be Intrinsic.
 @end{Ramification}
 @begin{Discussion}
-There are many imaginable interfacing pragmas that don't make any
-sense.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+There are many imaginable interfacing @Chg{Version=[3],New=[aspects],
+Old=[pragmas]} that don't make any sense.
 For example, setting the Convention of a protected procedure to Ada
 is probably wrong.
 Rather than enumerating all such cases, however,
@@ -575,8 +666,9 @@ we leave it up to implementations to decide what
 is sensible.
 @end{Discussion}
 
-If both External_Name and Link_Name are specified for an Import
-or Export pragma,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+If both External_Name and Link_Name are specified for @Chg{Version=[3],
+New=[a given entity],Old=[an Import or Export pragma]},
 then the External_Name is ignored.
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00320-01]}
@@ -587,12 +679,15 @@ that violates Ada semantics.]}
 @begin{Examples}
 @leading@keepnext@i{Example of interfacing pragmas:}
 @begin{Example}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @key[package] Fortran_Library @key[is]
-  @key[function] Sqrt (X : Float) @key[return] Float;
-  @key[function] Exp  (X : Float) @key[return] Float;
+  @key[function] Sqrt (X : Float) @key[return] Float@Chg{Version=[3],New=[
+     @key[with] Import => True, Convention => Fortran],Old=[]};
+  @key[function] Exp  (X : Float) @key[return] Float@Chg{Version=[3],New=[
+     @key[with] Import => True, Convention => Fortran],Old=[]};@Chg{Version=[3],New=[],Old=[
 @key[private]
   @key[pragma] Import(Fortran, Sqrt);
-  @key[pragma] Import(Fortran, Exp);
+  @key[pragma] Import(Fortran, Exp);]}
 @key[end] Fortran_Library;
 @end{Example}
 @end{Examples}
@@ -633,6 +728,12 @@ upward compatibility.
   or not the language allowed doing so formally).]}
 @end{Incompatible2005}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Aspects Convention, Import, Export, Link_Name, and External_Name
+  are new; @nt{pragma}s Convention, Import, and Export are now obsolescent.]}
+@end{Extend2005}
 
 
 @LabeledClause{The Package Interfaces}
@@ -742,9 +843,12 @@ precision, respectively.
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00204-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[Support for interfacing to any foreign language is
-optional. However, an implementation shall not provide any attribute, library
-unit, or pragma having the same name as an attribute, library unit, or pragma
+optional. However, an implementation shall not provide any
+@Chg{Version=[3],New=[aspect, ],Old=[]}attribute, library
+unit, or pragma having the same name as an
+@Chg{Version=[3],New=[aspect, ],Old=[]}attribute, library unit, or pragma
 (respectively) specified in the following clauses of this Annex unless the
 provided construct is either as specified in those clauses or is more limited
 in capability than that required by those clauses. A program that attempts to
@@ -770,14 +874,15 @@ contents of the visible part of package Interfaces.]}]}
 @ChgNote{The latter sentence is given previously!}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00204-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[A child package of package Interfaces with the name
 of a convention may be provided independently of whether the convention is
-supported by the pragma Convention and vice versa. Such a child package should
-contain any declarations that would be useful for interfacing to the language
-(implementation) represented by the convention. Any declarations useful for
-interfacing to any language on the given hardware architecture should be
+supported by the @Chg{Version=[3],New=[],Old=[pragma ]}Convention
+@Chg{Version=[3],New=[aspect ],Old=[]}and vice versa. Such a child package
+should contain any declarations that would be useful for interfacing to the
+language (implementation) represented by the convention. Any declarations useful
+for interfacing to any language on the given hardware architecture should be
 provided directly in Interfaces.]}
-
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}@ChgNote{Moved from below}
   @ChgAdded{Version=[2],Text=[For example, package Interfaces.XYZ_Pascal might
@@ -837,15 +942,18 @@ Old=[Interfacing with C]}
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059],ARef=[AI95-00131-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00376-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn{interface to C}
 @Defn{C interface}
 The facilities relevant to interfacing with
 the C language @Chg{Version=[2],New=[and the corresponding subset of
-the C++ language ],Old=[]}are the package Interfaces.C and its children;
-@Chg{New=[],Old=[and ]}support for the Import, Export, and
-Convention pragmas with @i{convention}_@nt{identifier}
-C@Chg{New=[; and support for the Convention pragma with
-@i{convention}_@nt{identifier} C_Pass_By_Copy],Old=[]}.
+the C++ language ],Old=[]}are the package Interfaces.C and its children@Chg{Version=[3],New=[ and],Old=[;
+@Chg{New=[],Old=[and ]}]}support for @Chg{Version=[3],New=[specifying ],Old=[]}the
+@Chg{Version=[3],New=[],Old=[Import, Export, and]}
+Convention @Chg{Version=[3],New=[aspect],Old=[pragmas]}
+with @Chg{Version=[3],New=[@SynI{convention}_@nt{identifier}s],Old=[@SynI{convention}_@nt{identifier}]}
+C@Chg{New=[@Chg{Version=[3],New=[ and],Old=[; and support for the Convention
+pragma with @i{convention}_@nt{identifier}]} C_Pass_By_Copy],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00376-01]}
 The package Interfaces.C contains the basic types, constants and
@@ -1365,8 +1473,11 @@ The C Interface packages support calling such functions.
 @end{DescribeCode}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059],ARef=[AI95-00131-01]}
-@ChgAdded{Version=[1],Text=[A Convention pragma with @i{convention}_@nt{identifier}
-C_Pass_By_Copy shall only be applied to a type.]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[1],Text=[@Chg{Version=[3],New=[The],Old=[A]} Convention
+@Chg{Version=[3],New=[aspect],Old=[pragma]} with @i{convention}_@nt{identifier}
+C_Pass_By_Copy shall only be
+@Chg{Version=[3],New=[specified for],Old=[applied to]} a type.]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059],ARef=[AI95-00131-01]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00216-01]}
@@ -1385,10 +1496,13 @@ also C-compatible.]}
 
 @begin{ImplReq}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059],ARef=[AI95-00131-01]}
-An implementation shall support pragma Convention
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+An implementation shall support @Chg{Version=[3],New=[specifying
+aspect],Old=[pragma]} Convention
 with a C @i{convention}_@nt{identifier} for a
 C-eligible type (see @refsecnum(Interfacing Aspects))@Chg{New=[. An
-implementation shall support pragma Convention with a C_Pass_By_Copy
+implementation shall support @Chg{Version=[3],New=[specifying
+aspect],Old=[pragma]} Convention with a C_Pass_By_Copy
 @i{convention}_@nt{identifier} for a C_Pass_By_Copy-eligible type.],Old=[]}
 @end{ImplReq}
 
@@ -1396,24 +1510,26 @@ implementation shall support pragma Convention with a C_Pass_By_Copy
 An implementation may provide additional declarations in the C
 interface packages.
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0002-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0002-1],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[An implementation need not support
-an interfacing pragma specifying convention C or C_Pass_By_Copy in the
+specifying the Convention aspect with @SynI<convention_>@nt{identifier} C in the
 following cases:]}
 
 @begin{Itemize}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0002-1],ARef=[AI05-0248-1]}
-@ChgAdded{Version=[3],Text=[an Export or Convention pragma applied to a
-subprogram that has a parameter of an unconstrained array subtype;]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0248-1]}
+@ChgAdded{Version=[3],Text=[for a subprogram that has a parameter of an
+unconstrained array subtype, unless the Import aspect has the value True for the
+subprogram;]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[an interfacing pragma applied to a function with an
-unconstrained array result subtype;]}
+@ChgAdded{Version=[3],Text=[for a function with an unconstrained array result
+subtype;]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[an interfacing pragma applied to an object whose
-nominal subtype is an unconstrained array subtype.]}
+@ChgAdded{Version=[3],Text=[for an object whose nominal subtype is an
+unconstrained array subtype.]}
 @end{Itemize}
+
 @begin{ImplNote}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0002-1]}
 @ChgAdded{Version=[3],Text=[These rules ensure that an implementation never
@@ -1541,11 +1657,14 @@ specific numbers and types of parameters.
    @RI{--     into the array pointed to by s1. If copying takes place between objects that overlap, }
    @RI{--     the behavior is undefined. The strcpy function returns the value of s1.}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @RI{-- Note: since the C function's return value is of no interest, the Ada interface is a procedure}
    @key(procedure) Strcpy (Target : @key(out) C.char_array;
-                     Source : @key(in)  C.char_array);
+                     Source : @key(in)  C.char_array)@Chg{Version=[3],New=[
+      @key(with) Import => True, Convention => C, External_Name => "strcpy"],Old=[]};
 
-   @key(pragma) Import(C, Strcpy, "strcpy");
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[   @key(pragma) Import(C, Strcpy, "strcpy");]}
 
    Chars1 :  C.char_array(1..20);
    Chars2 :  C.char_array(1..20);
@@ -1609,7 +1728,7 @@ specific numbers and types of parameters.
 @end{DiffWord95}
 
 @begin{Incompatible2005}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0002-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0002-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
   Added a definition of correspondences for function results. Also added wording
   to make it clear that we do not expect the implementation to conjure bounds
@@ -1624,15 +1743,18 @@ specific numbers and types of parameters.
 @LabeledSubClause{The Package Interfaces.C.Strings}
 
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 The package Interfaces.C.Strings declares types and subprograms
 allowing an Ada program to allocate, reference, update, and free C-style
 strings.
 In particular, the private type chars_ptr
  corresponds to a common
 use of @lquotes@;char *@rquotes@; in C programs, and an object of this type can be
-passed to a subprogram to which @nt(pragma) Import(C,...) has been applied,
+passed to a subprogram to which @Chg{Version=[3],New=[@exam{@key[with] Import => True,
+Convention => C}],Old=[@nt(pragma) Import(C,...)]} has been
+@Chg{Version=[3],New=[specified],Old=[applied]},
 and for which @lquotes@;char *@rquotes@;
- is the type of the argument of the C function.
+is the type of the argument of the C function.
 @end{Intro}
 
 @begin{StaticSem}
@@ -1992,18 +2114,27 @@ following declaration:
 
    @RI{-- C-style Pointer arithmetic}
 
-   @key(function) "+" (Left : @key(in) Pointer;   Right : @key(in) ptrdiff_t) @key(return) Pointer;
-   @key(function) "+" (Left : @key(in) ptrdiff_t; Right : @key(in) Pointer)   @key(return) Pointer;
-   @key(function) "-" (Left : @key(in) Pointer;   Right : @key(in) ptrdiff_t) @key(return) Pointer;
-   @key(function) "-" (Left : @key(in) Pointer;   Right : @key(in) Pointer) @key(return) ptrdiff_t;
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+   @key(function) "+" (Left : @key(in) Pointer;   Right : @key(in) ptrdiff_t) @key(return) Pointer@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
+   @key(function) "+" (Left : @key(in) ptrdiff_t; Right : @key(in) Pointer)   @key(return) Pointer@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
+   @key(function) "-" (Left : @key(in) Pointer;   Right : @key(in) ptrdiff_t) @key(return) Pointer@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
+   @key(function) "-" (Left : @key(in) Pointer;   Right : @key(in) Pointer) @key(return) ptrdiff_t@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
 
-   @key(procedure) @AdaSubDefn{Increment} (Ref : @key(in) @key(out) Pointer);
-   @key(procedure) @AdaSubDefn{Decrement} (Ref : @key(in) @key(out) Pointer);
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+   @key(procedure) @AdaSubDefn{Increment} (Ref : @key(in) @key(out) Pointer)@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
+   @key(procedure) @AdaSubDefn{Decrement} (Ref : @key(in) @key(out) Pointer)@Chg{Version=[3],New=[
+      @key(with) Convention => Intrinsic],Old=[]};
 
-   @key(pragma) Convention (Intrinsic, "+");
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[   @key(pragma) Convention (Intrinsic, "+");
    @key(pragma) Convention (Intrinsic, "-");
    @key(pragma) Convention (Intrinsic, Increment);
-   @key(pragma) Convention (Intrinsic, Decrement);
+   @key(pragma) Convention (Intrinsic, Decrement);]}
 
    @key(function) @AdaSubDefn{Virtual_Length} (Ref        : @key(in) Pointer;
                             Terminator : @key(in) Element := Default_Terminator)
@@ -2241,6 +2372,11 @@ may be specified:]}
 @ChgAdded{Version=[3],Text=[Unchecked_Union@\The type of aspect Unchecked_Union
 is Boolean. If directly specified, the @nt{aspect_definition} shall be a static
 expression. If not specified (including by inheritance), the aspect is False.]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Unchecked_Union],
+    Text=[@ChgAdded{Version=[3],Text=[Type is used to interface to a C union
+      type.]}]}
+
 @end{Description}
 @end{StaticSem}
 
@@ -2454,6 +2590,7 @@ Float'Size = Integer'Size:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[@key<type> T (Flag : Boolean := False) @key<is>
    @key<record>
        @key<case> Flag @key<is>
@@ -2462,8 +2599,9 @@ Float'Size = Integer'Size:]}
            @key<when> True =>
                F2 : Integer := 0;
        @key<end case>;
-    @key<end record>;
-@key<pragma> Unchecked_Union (T);]}
+    @key<end record>@Chg{Version=[3],New=[
+    @key[with] Unchecked_Union],Old=[;
+@key<pragma> Unchecked_Union (T)]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[X : T;
@@ -2503,14 +2641,18 @@ Y : Integer := X.F2; -- @RI[erroneous]]}
 @Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
 @LabeledClause{Interfacing with COBOL}
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn{interface to COBOL}
 @Defn{COBOL interface}
 The facilities relevant to interfacing with
 the COBOL language
  are the package
 Interfaces.COBOL
-and support for the Import, Export and
-Convention pragmas with @i{convention}_@nt{identifier} COBOL.
+and support for
+@Chg{Version=[3],New=[specifying ],Old=[]}the
+@Chg{Version=[3],New=[],Old=[Import, Export and ]}Convention
+@Chg{Version=[3],New=[aspect],Old=[pragmas]} with
+@i{convention}_@nt{identifier} COBOL.
 
 @Leading@;The COBOL interface package supplies several sets of facilities:
 @begin{itemize}
@@ -2933,9 +3075,12 @@ A parameter to the conversion function indicates the desired interpretation
 of the data (e.g., signed leading separate, etc.)
 @end{Itemize}
 
-Pragma Convention(COBOL, T) may be applied to a record type T to direct the
-compiler to choose a COBOL-compatible representation for objects of the
-type.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[The],Old=[Pragma]}
+Convention@Chg{Version=[3],New=[ of],Old=[(COBOL, T) may be
+applied to]} a record type @Chg{Version=[3],New=[may be specified as
+COBOL],Old=[T]} to direct the compiler to choose a COBOL-compatible
+representation for objects of the type.
 
 The package Interfaces.COBOL allows the
 Ada programmer to deal with data from files (or databases) created by a
@@ -2953,7 +3098,9 @@ first).
 @end{StaticSem}
 
 @begin{ImplReq}
-An implementation shall support pragma Convention with
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+An implementation shall support
+@Chg{Version=[3],New=[specifying aspect],Old=[pragma]} Convention with
 a COBOL @i[convention]_@nt[identifier] for a COBOL-eligible type
 (see @RefSecNum(Interfacing Aspects)).
 @begin{ramification}
@@ -3004,8 +3151,11 @@ Ada and COBOL should be supported.]}]}
 @end{ImplAdvice}
 
 @begin[Notes]
-An implementation is not required to support pragma Convention
-for access types, nor is it required to support pragma Import, Export
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+An implementation is not required to support
+@Chg{Version=[3],New=[specifying aspect],Old=[pragma]} Convention
+for access types, nor is it required to support
+@Chg{Version=[3],New=[specifying aspects],Old=[pragma]} Import, Export
 or Convention for functions.
 @begin{reason}
 COBOL does not have a pointer facility, and a COBOL program
@@ -3013,7 +3163,7 @@ does not return a value.@end{reason}
 
 If an Ada subprogram is exported to COBOL, then a call from COBOL
 call may specify
- either @lquotes@;BY CONTENT@rquotes@; or @lquotes@;BY REFERENCE@rquotes@;.
+either @lquotes@;BY CONTENT@rquotes@; or @lquotes@;BY REFERENCE@rquotes@;.
 @end[Notes]
 
 @begin{Examples}
@@ -3035,16 +3185,20 @@ call may specify
 
    @key(type) Salary_Type @key(is) @key(delta) 0.01 @key(digits) 7;
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key(type) COBOL_Record @key(is)
       @key(record)
          Name   : COBOL.Numeric(1..20);
          SSN    : COBOL.Numeric(1..9);
          Salary : COBOL.Binary;  @RI{-- Assume Binary = 32 bits}
-      @key(end) @key(record);
-   @key(pragma) Convention (COBOL, COBOL_Record);
+      @key(end) @key(record)@Chg{Version=[3],New=[
+      @key[with] Convention => COBOL],Old=[;
+   @key(pragma) Convention (COBOL, COBOL_Record)]};
 
-   @key(procedure) Prog (Item : @key(in) @key(out) COBOL_Record);
-   @key(pragma) Import (COBOL, Prog, "PROG");
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+   @key(procedure) Prog (Item : @key(in) @key(out) COBOL_Record)@Chg{Version=[3],New=[
+      @key[with] Import => True, Convention => COBOL],Old=[;
+   @key(pragma) Import (COBOL, Prog, "PROG")]};
 
    @key(package) Salary_Conversions @key(is)
       @key(new) COBOL.Decimal_Conversions(Salary_Type);
@@ -3082,14 +3236,16 @@ call may specify
    @key(type) Salary_Type      @key(is) @key(delta) 0.01  @key(digits) 7;
    @key(type) Adjustments_Type @key(is) @key(delta) 0.001 @key(digits) 6;
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key(type) COBOL_Employee_Record_Type @key(is)  @RI{-- External representation}
       @key(record)
          Name    : COBOL.Alphanumeric(1..20);
          SSN     : COBOL.Alphanumeric(1..9);
          Salary  : COBOL.Byte_Array(1..4);
          Adjust  : COBOL.Numeric(1..7);  @RI{-- Sign and 6 digits}
-      @key(end) @key(record);
-   @key(pragma) Convention (COBOL, COBOL_Employee_Record_Type);
+      @key(end) @key(record)@Chg{Version=[3],New=[
+      @key[with] Convention => COBOL],Old=[;
+   @key(pragma) Convention (COBOL, COBOL_Employee_Record_Type)]};
 
    @key(package) COBOL_Employee_IO @key(is)
       @key(new) COBOL_Sequential_IO(COBOL_Employee_Record_Type);
@@ -3149,11 +3305,14 @@ call may specify
 @LabeledClause{Interfacing with Fortran}
 
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn{interface to Fortran}
 @Defn{Fortran interface}
 The facilities relevant to interfacing with the Fortran language
-are the package Interfaces.Fortran and support for the
-Import, Export and Convention pragmas with
+are the package Interfaces.Fortran and support for
+@Chg{Version=[3],New=[specifying ],Old=[]}the
+@Chg{Version=[3],New=[],Old=[Import, Export and ]}Convention
+@Chg{Version=[3],New=[aspect],Old=[pragmas]} with
 @i{convention}_@nt{identifier} Fortran.
 
 The package Interfaces.Fortran defines Ada types whose representations are
@@ -3235,8 +3394,9 @@ found in Interfaces.COBOL.
 @end{StaticSem}
 
 @begin[ImplReq]
-An implementation shall support @nt[pragma] Convention
-with a Fortran @i[convention]_@nt[identifier] for a Fortran-eligible
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+An implementation shall support @Chg{Version=[3],New=[specifying aspect],Old=[@nt[pragma]]}
+Convention with a Fortran @i[convention]_@nt[identifier] for a Fortran-eligible
 type (see @RefSecNum(Interfacing Aspects)).
 @end[ImplReq]
 
@@ -3309,12 +3469,15 @@ a Fortran @lquotes@;derived type@rquotes@;.
 @key[use] Interfaces.Fortran;
 @key[procedure] Ada_Application @key[is]
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key[type] Fortran_Matrix @key[is] @key[array] (Integer @key[range] <>,
-                                 Integer @key[range] <>) @key[of] Double_Precision;
-   @key[pragma] Convention (Fortran, Fortran_Matrix);    @RI{-- stored in Fortran's}
+                                 Integer @key[range] <>) @key[of] Double_Precision@Chg{Version=[3],New=[
+      @key[with] Convention => Fortran;              ],Old=[;
+   @key[pragma] Convention (Fortran, Fortran_Matrix);]}    @RI{-- stored in Fortran's}
                                                    @RI{-- column-major order}
-   @key[procedure] Invert (Rank : @key[in] Fortran_Integer; X : @key[in] @key[out] Fortran_Matrix);
-   @key[pragma] Import (Fortran, Invert);                @RI{-- a Fortran subroutine}
+   @key[procedure] Invert (Rank : @key[in] Fortran_Integer; X : @key[in] @key[out] Fortran_Matrix)@Chg{Version=[3],New=[
+      @key[with] Import => True, Convention => Fortran;],Old=[;
+   @key[pragma] Import (Fortran, Invert);              ]} @RI{-- a Fortran subroutine}
 
    Rank      : @key[constant] Fortran_Integer := 100;
    My_Matrix : Fortran_Matrix (1 .. Rank, 1 .. Rank);

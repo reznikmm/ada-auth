@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2011/08/06 05:45:24 $}
+@Comment{$Date: 2011/08/13 04:53:57 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.106 $}
+@Comment{$Revision: 1.107 $}
 
 @begin{Intro}
 
@@ -89,12 +89,14 @@ of some task interaction) or @i(ready) to run.
 While ready, a task competes for the available
 @i(execution resources) that it requires to run.
 @begin(Discussion)
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
   @Defn{task dispatching policy}
   @Defn{dispatching policy for tasks}
   The means for selecting which of the ready tasks to run,
   given the currently available execution resources, is determined by the
   @i(task dispatching policy) in effect, which is generally
-  implementation defined, but may be controlled by pragmas
+  implementation defined, but may be controlled by
+  @Chg{Version=[3],New=[aspects, ],Old=[]}pragmas@Chg{Version=[3],New=[, ],Old=[]}
   and operations defined in the Real-Time Annex
   (see @RefSecNum(Priority Scheduling) and @RefSecNum(Dynamic Priorities)).
 @end(Discussion)
@@ -255,8 +257,12 @@ and every @nt{task_body} shall be the completion of some
 task declaration.]}
 @begin(Honest)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The completion can be a @nt{pragma} Import,
-  if the implementation supports it.]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[If],Old=[The completion
+  can be a @nt{pragma} Import, if]} the implementation supports
+  it@Chg{Version=[3],New=[, the task body can be imported
+  (using aspect Import, see @RefSecNum{Interfacing Aspects}),
+  in which case no explicit @nt{task_body} is allowed],Old=[]}.]}
 @end(Honest)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00399-01]}
@@ -1126,8 +1132,12 @@ and every @nt{protected_@!body} shall be the completion of some
 protected declaration.]}
 @begin(Honest)
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The completion can be a @nt{pragma} Import,
-  if the implementation supports it.]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[If],Old=[The completion
+  can be a @nt{pragma} Import, if]} the implementation supports
+  it@Chg{Version=[3],New=[, the protected body can be imported
+  (using aspect Import, see @RefSecNum{Interfacing Aspects}),
+  in which case no explicit @nt{protected_body} is allowed],Old=[]}.]}
 @end(Honest)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00399-01]}
@@ -1758,6 +1768,12 @@ representation aspect may be specified with @nt{aspect_specification} (see
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Synchronization@\If specified, the aspect definition
 shall be a @nt{synchronization_kind}.]}
+
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Synchronization],
+  Text=[@ChgAdded{Version=[3],Text=[Defines whether a given primitive operation
+    of a synchronized interface must be implemented by an entry or protected
+    procedure.]}]}
+
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0030-2],ARef=[AI05-0215-1]}
@@ -2318,8 +2334,12 @@ An @nt<entry_declaration>, unlike a @nt<subprogram_declaration>,
 cannot be completed with a @nt<renaming_@!declaration>.
 @end{Ramification}
 @begin(Honest)
-  The completion can be a @nt{pragma} Import,
-  if the implementation supports it.
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+  @Chg{Version=[3],New=[If],Old=[The completion
+  can be a @nt{pragma} Import, if]} the implementation supports
+  it@Chg{Version=[3],New=[, the entry body can be imported
+  (using aspect Import, see @RefSecNum{Interfacing Aspects}),
+  in which case no explicit @nt{entry_body} is allowed],Old=[]}.
 @end(Honest)
 @begin{Discussion}
 The above applies only to protected entries,
@@ -5479,7 +5499,10 @@ Two actions are sequential if one of the following is true:
   @end(Ramification)
 @end(Itemize)
 
-A @nt{pragma} Atomic or Atomic_Components may also be used to
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Chg{Version=[3],New=[Aspect],Old=[A @nt{pragma}]}
+Atomic or @Chg{Version=[3],New=[aspect ],Old=[]}Atomic_Components may also
+be @Chg{Version=[3],New=[specified],Old=[used]} to
 ensure that certain reads and updates are sequential @em
 see @RefSecNum(Shared Variable Control).
 @begin(Ramification)

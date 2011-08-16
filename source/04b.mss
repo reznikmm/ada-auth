@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:19 $}
+@Comment{$Date: 2011/08/13 04:53:57 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
 @LabeledClause{Type Conversions}
 
@@ -2176,6 +2176,7 @@ the view introduced by the corresponding full constant declaration
 can be static.
 @end{Ramification}
 @begin{Reason}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 The reason for restricting the length of static string constants is so
 that compilers don't have to store giant strings in their symbol tables.
 Since most string constants will be initialized
@@ -2185,8 +2186,8 @@ space.
 We're trying to keep it cheap and simple
 (from the implementer's viewpoint),
 while still allowing, for example,
-the link name of a pragma Import to contain
-a concatenation.
+the @Chg{Version=[3],New=[@nt{aspect_definition} for a Link_Name aspect],
+Old=[link name of a pragma Import]} to contain a concatenation.
 
 The length we're talking about is the maximum number of characters in
 the value represented by a @nt{string_literal},

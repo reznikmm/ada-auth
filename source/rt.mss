@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.100 $ $Date: 2011/08/06 05:45:24 $ $Author: randy $ }
+@comment{ $Revision: 1.101 $ $Date: 2011/08/13 04:53:58 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2011/08/06 05:45:24 $}
+@Comment{$Date: 2011/08/13 04:53:58 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -142,9 +142,19 @@ the following language-defined representation aspects may be specified:]}
 @ChgAdded{Version=[3],Text=[Priority@\The value of aspect Priority is
 an @nt{expression}, which shall be of type Integer.]}
 
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Priority],
+    Text=[@ChgAdded{Version=[3],Text=[Priority of a task object or type, or
+      ceiling priority of a protected object or type; the priority is not in the
+      interrupt range.]}]}
+
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Interrupt_Priority@\The value of aspect
 Interrupt_Priority is an @nt{expression}, which shall be of type Integer.]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Interrupt_Priority],
+    Text=[@ChgAdded{Version=[3],Text=[Priority of a task object or type, or
+      ceiling priority of a protected object or type; the priority is in the
+      interrupt range.]}]}
 
 @end{Description}
 @end{StaticSem}
@@ -597,10 +607,11 @@ execution resources on task dispatching.]}
 An implementation may place implementation-defined restrictions on
 tasks whose active priority is in the Interrupt_Priority range.
 @begin{Ramification}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 For example, on some operating systems,
 it might be necessary to disallow them altogether.
 This permission applies to tasks whose priority is set to interrupt
-level for any reason: via a pragma,
+level for any reason: via @Chg{Version=[3],New=[an aspect],Old=[a pragma]},
 via a call to Dynamic_Priorities.Set_Priority,
 or via priority inheritance.
 @end{Ramification}
@@ -1312,12 +1323,16 @@ Non_Preemptive_FIFO_Within_Priorities and also the locking policy (see
 
 @begin{ImplPerm}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00298-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[Since implementations are allowed to round all
 ceiling priorities in subrange System.Priority to System.Priority'Last (see
 @RefSecNum{Priority Ceiling Locking}), an implementation may allow a task to
 execute within a protected object without raising its active priority provided
-the associated protected unit does not contain pragma Interrupt_Priority,
-Interrupt_Handler, or Attach_Handler.]}
+the associated protected unit does not contain @Chg{Version=[3],New=[any
+subprograms with Interrupt_Handler or Attach_Handler specified nor does the
+unit have aspect],Old=[pragma]} Interrupt_Priority
+@Chg{Version=[3],New=[ Interrupt_Priority specified],Old=[,
+Interrupt_Handler, or Attach_Handler]}.]}
 
 @end{ImplPerm}
 
@@ -1632,6 +1647,11 @@ language-defined representation aspect may be specified:]}
 @ChgAdded{Version=[3],Text=[Relative_Deadline@\The value of aspect
 Relative_Deadline is an @nt{expression}, which shall be of
 type Real_Time.Time_Span.]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Relative_Deadline],
+    Text=[@ChgAdded{Version=[3],Text=[Task parameter used in Earliest Deadline
+      First Dispatching.]}]}
+
 @end{Description}
 
 @end{StaticSem}
@@ -2792,9 +2812,11 @@ then the ceiling priority of a protected object @i<P> is set to the value of
 @i<P>'Priority at the end of each protected action of @i<P>.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00445-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[If the locking policy Ceiling_Locking is in effect,
 then for a protected object @i<P> with either an Attach_Handler or
-Interrupt_Handler pragma applying to one of its procedures, a check is made
+Interrupt_Handler @Chg{Version=[3],New=[aspect specified
+for],Old=[pragma applying to]} one of its procedures, a check is made
 that the value to be assigned to @i<P>'Priority is in the range
 System.Interrupt_Priority. If the check fails, Program_Error is
 raised.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
@@ -5914,10 +5936,12 @@ language-defined representation aspect may be specified:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[CPU@\The value of aspect CPU is an @nt{expression},
 which shall be of type System.Multiprocessors.CPU_Range.]}
+
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[CPU],
+  Text=[@ChgAdded{Version=[3],Text=[Processor on which a given task should
+    run.]}]}
+
 @end{Description}
-
-
-
 @end{StaticSem}
 
 @begin{Legality}
@@ -5958,7 +5982,7 @@ value for the aspect CPU.]}]}
 @ChgAdded{Version=[3],Text=[The CPU value determines the processor on which the
 task will activate and execute; the task is said to be assigned to that
 processor. If the CPU value is Not_A_Specific_CPU then the task is not assigned
-to a processor. A task without a CPU pragma will activate and execute on the
+to a processor. A task without a CPU aspect specified will activate and execute on the
 same processor as its activating task if the activating task is assigned a
 processor. If the CPU value is not in the range of
 System.Multiprocessors.CPU_Range or is greater than Number_Of_CPUs the task is
@@ -6052,6 +6076,11 @@ representation aspect may be specified:]}
 aspect Dispatching_Domain is an @nt{expression}, which shall be of
 type Dispatching_Domains.Dispatching_Domain. This aspect is the domain to
 which the task (or all objects of the task type) are assigned.]}
+
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Dispatching_Domain],
+  Text=[@ChgAdded{Version=[3],Text=[Domain (group of processors) on which a
+    given task should run.]}]}
+
 @end{Description}
 @end{StaticSem}
 

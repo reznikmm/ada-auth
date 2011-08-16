@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.56 $ $Date: 2011/08/06 05:45:24 $ $Author: randy $ }
+@comment{ $Revision: 1.57 $ $Date: 2011/08/13 04:53:57 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2011/08/06 05:45:24 $}
+@Comment{$Date: 2011/08/13 04:53:57 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -425,13 +425,18 @@ The form of a @nt{pragma} Shared_Passive is as follows:
 
 @Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
 @Defn{shared passive library unit}
-A@Chg{Version=[3],New=[ pragma Shared_Passive is used to specify that a
+A@Chg{Version=[3],New=[ @nt{pragma} Shared_Passive is used to specify that a
 library unit is a],Old=[]} @i{shared passive library unit}@Chg{Version=[3],New=[,
 namely that the],Old=[ is
 a library unit to which a]}
 Shared_Passive
 @Chg{Version=[3],New=[aspect of the library unit is True],Old=[pragma applies]}.
 The following restrictions apply to such a library unit:
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Shared_Passive],
+    Text=[@ChgAdded{Version=[3],Text=[A given package is used to represent
+      shared memory in a distributed system.]}]}
+
 @begin{itemize}
 @Redundant[it shall be preelaborable (see @RefSecNum{Elaboration Control});]
 @begin{Ramification}
@@ -575,6 +580,11 @@ namely that the],Old=[ is a library unit to which the pragma]}
 Remote_Types
 @Chg{Version=[3],New=[aspect of the library unit is True],Old=[applies]}.
 The following restrictions apply to the declaration of such a library unit:
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Remote_Types],
+    Text=[@ChgAdded{Version=[3],Text=[Types in a given package are used in
+      remote procedure calls.]}]}
+
 @begin{itemize}
 @Redundant[it shall be preelaborable;]
 
@@ -778,11 +788,13 @@ synchronized, protected, or task interface type.]}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00366-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Remote types that cannot be streamed (that is, have no available stream
   attributes) do not require the specification of stream attributes.
   This is necessary so that most extensions of Limited_Controlled do not
-  need stream attributes defined (otherwise there would be a signficant
+  need stream attributes defined (otherwise there would be a
+  @Chg{Version=[3],New=[significant],Old=[signficant]}
   incompatibility, as Limited_Controlled would need stream attributes, and then
   all extensions of it also would need stream attributes).]}
 @end{Extend95}
@@ -906,6 +918,10 @@ Remote_Call_Interface
 A subprogram declared in the visible part of such a library unit@Chg{New=[,
 or declared by such a library unit,],Old=[]} is called a @i{remote subprogram}.
 
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Remote_Call_Interface],
+    Text=[@ChgAdded{Version=[3],Text=[Subprograms in a given package are used in
+      remote procedure calls.]}]}
+
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1],ARef=[AI05-0243-1]}
 The declaration of an RCI library unit shall be preelaborable
 (see @RefSecNum{Elaboration Control}), and shall depend semantically
@@ -1012,6 +1028,11 @@ the],Old=[applies to a]} library unit@Chg{Version=[3],New=[to which it applies
 to the value True. If the All_Calls_Remote aspect of a library unit is True, the
 library unit shall be a remote call interface.],Old=[]}, the library unit shall
 be a remote call interface.
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[All_Calls_Remote],
+    Text=[@ChgAdded{Version=[3],Text=[All remote procedure calls should use the
+      Partition Communication Subsystem, even if they are local.]}]}
+
 @end{Legality}
 
 @begin{LinkTime}
@@ -1715,6 +1736,11 @@ aspect of the type.]}
 @ChgAdded{Version=[3],Text=[Asynchronous@\The type of aspect Asynchronous is
 Boolean. If directly specified, the @nt{aspect_definition} shall be a static
 expression. If not specified, the aspect is False.]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Asynchronous],
+    Text=[@ChgAdded{Version=[3],Text=[Remote procedure calls are asynchronous;
+      the caller continues without waiting for the call to return.]}]}
+
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}

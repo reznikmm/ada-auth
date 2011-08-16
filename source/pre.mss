@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:20 $}
+@Comment{$Date: 2011/08/13 04:53:58 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.44 $}
+@comment{$Revision: 1.45 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -20,7 +20,7 @@ other library units are children of these:]
 @Leading@Keepnext
 @ChgRef{Version=(1),Kind=(Revised),Ref=(8652/0047),ARef=(AI95-00081-01)}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00424-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0069-1],ARef=[AI05-0166-1],ARef=[AI05-0167-1],ARef=[AI05-0168-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1],ARef=[AI05-0049-1],ARef=[AI05-0069-1],ARef=[AI05-0111-3],ARef=[AI05-0136-1],ARef=[AI05-0137-1],ARef=[AI05-0166-1],ARef=[AI05-0168-1]}
 @ @*@ @;@comment{paragraph number here, paragraph numbers seem to intrude on
 the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @begin{Display}
@@ -335,12 +335,13 @@ The order and lettering of the annexes has been changed.
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0060-1],ARef=[AI05-0206-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added a permission to
   omit pragma Remote_Types from language-defined units if Annex E is
-  not supported. This was later removed, as better method is available.
+  not supported. This was later removed, as a better method of supporting
+  the reason is now available.
   Note that this requires all implementations to provide minimal support for
   the Remote_Types categorization even if Annex E is not supported; being
   unable to compile language-defined units is not allowed.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0049-1],ARef=[AI05-0069-1],ARef=[AI05-0136-1],ARef=[AI05-0137-1],ARef=[AI05-0166-1],ARef=[AI05-0168-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0049-1],ARef=[AI05-0069-1],ARef=[AI05-0111-3],ARef=[AI05-0136-1],ARef=[AI05-0137-1],ARef=[AI05-0166-1],ARef=[AI05-0168-1]}
   @ChgAdded{Version=[3],Text=[Added various new units to the
   list of predefined units.]}
 @end{DiffWord2005}

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.63 $ $Date: 2011/08/06 05:45:24 $ $Author: randy $ }
+@comment{ $Revision: 1.64 $ $Date: 2011/08/13 04:53:58 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2011/08/06 05:45:24 $}
+@Comment{$Date: 2011/08/13 04:53:58 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -57,11 +57,13 @@ Nonetheless, we want implementations to provide access to them so that
 Ada can be used to write systems programs that run in privileged mode.
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn{interface to assembly language}
 @Defn2{Term=[language], Sec=(interface to assembly)}
 @Defn{mixed-language programs}
 @Defn{assembly language}
-The interfacing pragmas (see @RefSecNum{Interface to Other Languages})
+The interfacing @Chg{Version=[3],New=[aspects],Old=[pragmas]}
+(see @RefSecNum{Interface to Other Languages})
 should support interface to assembler;
 the default assembler should be associated with the convention
 identifier Assembler.
@@ -99,9 +101,11 @@ machine code insertions for references to Ada entities.
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The types and attributes used in machine code insertions.]}]}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 The implementation shall document the subprogram calling conventions
 associated with the convention identifiers available for use
-with the interfacing pragmas (Ada and Assembler, at a minimum),
+with the @Chg{Version=[3],New=[Convention aspect],Old=[interfacing pragmas]}
+(Ada and Assembler, at a minimum),
 including register saving,
 exception propagation, parameter passing, and function value returning.
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
@@ -434,10 +438,19 @@ If directly specified, the aspect_definition shall be a static expression.
 @Redundant[This aspect is never inherited;] if not directly specified,
 the aspect is False.]}
 
+@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Interrupt_Handler],
+  Text=[@ChgAdded{Version=[3],Text=[Protected procedure may be attached to
+    interrupts.]}]}
+
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Attach_Handler@\
 The value of aspect Attach_Handler is an @nt{expression}, which shall be of type
 Interrupts.Interrupt_Id. @Redundant[This aspect is never inherited.]]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Attach_Handler],
+    Text=[@ChgAdded{Version=[3],Text=[Protected procedure is attached to an
+      interrupt.]}]}
+
 @end{Description}
 
 @end{StaticSem}
@@ -564,8 +577,10 @@ protected procedures can be attached as
 handlers using the Interrupts package]}, the finalization discussed above
 occurs only as part of the finalization of all library-level packages in
 a partition.
-@Chg{New=[However, objects of a protected type containing an Attach_@!Handler
-pragma need not be at the library level. Thus, an implementation needs to be
+@Chg{New=[However, objects of a protected type containing
+@Chg{Version=[3],New=[procedures with ],Old=[]}an Attach_@!Handler
+@Chg{Version=[3],New=[aspect specified],Old=[pragma]} need not be at the library level.
+Thus, an implementation needs to be
 able to restore handlers during the execution of the program.@Chg{Version=[2],
 New=[ (An object with an Interrupt_@!Handler @Chg{Version=[3],New=[aspect],Old=[pragma]}
 also need not be at the library level, but such
@@ -601,9 +616,11 @@ the most recently attached handler for the same interrupt is not the same as
 the one that was attached at the time the protected object was initialized.]}
 @begin{Discussion}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0068],ARef=[AI95-00121-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[1],Text=[This simplifies implementation of the Attach_@!Handler
-pragma by not requiring a check that the current handler is the same as the
-one attached by the initialization of a protected object.]}
+@Chg{Version=[3],New=[aspect],Old=[pragma]} by not requiring a check that the
+current handler is the same as the one attached by the initialization of a
+protected object.]}
 @end{Discussion}
 @end{Erron}
 
@@ -667,9 +684,12 @@ the Attach_Handler and Interrupt_Handler
 @Chg{Version=[3],New=[aspects],Old=[pragmas]} are allowed to be used
 for other, implementation defined, forms of interrupt handlers.
 @begin{Ramification}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 For example, if an implementation wishes to allow interrupt
-handlers to have parameters, it is allowed to do so via these pragmas;
-it need not invent implementation-defined pragmas for the purpose.
+handlers to have parameters, it is allowed to do so via these
+@Chg{Version=[3],New=[aspects],Old=[pragmas]};
+it need not invent implementation-defined
+@Chg{Version=[3],New=[aspects],Old=[pragmas]} for the purpose.
 @end{Ramification}
 @ChgImplDef{Version=[3],Kind=[AddedNormal],Text=[@Chg{Version=[2],
 New=[Any other forms of interrupt handler supported by the
@@ -750,7 +770,7 @@ a protected procedure that is an interrupt handler.
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
-  Aspects Interrupt_Handler and Attach_Handler are is new; @nt{pragma}s
+  Aspects Interrupt_Handler and Attach_Handler are new; @nt{pragma}s
   Interrupt_Handler and Attach_Handler are now obsolescent.]}
 @end{Extend2005}
 
@@ -1258,45 +1278,127 @@ functions.
 @LabeledClause{Shared Variable Control}
 
 @begin{Intro}
-@Redundant[This clause specifies representation pragmas that control the use of
-shared variables.]
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Redundant[This clause @Chg{Version=[3],New=[defines],Old=[specifies]}
+representation @Chg{Version=[3],New=[aspects],Old=[pragmas]} that control the
+use of shared variables.]
 @end{Intro}
 
 @begin{Syntax}
 @begin{SyntaxText}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
-@Leading@;The form for pragmas Atomic, Volatile,
-@Chg{Version=[3],New=[Independent, ],Old=[]}Atomic_Components,@Chg{Version=[3],New=[],Old=[ and]}
-Volatile_Components@Chg{Version=[3],New=[, and Independent_Components],Old=[]}
-is as follows:
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Type=[Leading],Text=[The form for pragmas Atomic,
+Volatile, Atomic_Components, and Volatile_Components is as follows:]}
 @end{SyntaxText}
 
-@PragmaSyn`@key{pragma} @prag(Atomic)(@Syn2{local_name});'
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Atomic)(@Syn2{local_name});']}
 
-@PragmaSyn`@key{pragma} @prag(Volatile)(@Syn2{local_name});'
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Volatile)(@Syn2{local_name});']}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1]}
-@ChgAdded{Version=[3],Text=`@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Independent>(@SynI{component_}@Syn2{local_name});''}
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Atomic_Components)(@SynI{array_}@Syn2{local_name});']}
 
-@PragmaSyn`@key{pragma} @prag(Atomic_Components)(@SynI{array_}@Syn2{local_name});'
-
-@PragmaSyn`@key{pragma} @prag(Volatile_Components)(@SynI{array_}@Syn2{local_name});'
-
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1]}
-@ChgAdded{Version=[3],Text=`@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Independent_Components>(@Syn2{local_name});''}
+@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Volatile_Components)(@SynI{array_}@Syn2{local_name});']}
 
 @end{Syntax}
 
-@begin{Intro}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00272-01]}
-@Defn{atomic}
-An @i{atomic} type is one to which a pragma Atomic applies.
-An @i{atomic} object (including a component)
-is one to which a
-pragma Atomic applies, or a component of an array to which
-a pragma Atomic_Components applies, or any object of an atomic type@Chg{Version=[2],
-New=[, other than objects obtained by evaluating a slice],Old=[]}.
+@Comment{Original: @begin{Intro}, Replaced with below for Ada 2012}
+@begin{StaticSem}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For an @nt{object_declaration}, a
+@nt{component_declaration}, or a @nt{full_type_declaration}, the following
+representation aspects may be specified:]}
+
+@begin{Description}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Atomic@\The type of aspect Atomic is Boolean.]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Atomic],
+    Text=[@ChgAdded{Version=[3],Text=[Declare that a type, object, or component is
+      atomic.]}]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Independent@\The type of aspect Independent is
+Boolean.]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Independent],
+    Text=[@ChgAdded{Version=[3],Text=[Declare that a type, object, or component
+      is independently addressable.]}]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Volatile@\The type of aspect Volatile is Boolean.]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Volatile],
+    Text=[@ChgAdded{Version=[3],Text=[Declare that a type, object, or component
+      is volatile.]}]}
+
+@end{Description}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a @nt{full_type_declaration} of
+an array type (including the anonymous type of an @nt{object_declaration}
+of an anonymous array object), the following representation aspects may be
+specified:]}
+
+@begin{Description}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Atomic_Components@\The type of aspect
+Atomic_Components is Boolean.]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Atomic_Components],
+    Text=[@ChgAdded{Version=[3],Text=[Declare that the components of
+      an array type or object are atomic.]}]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Volatile_Components@\The type of aspect
+Volatile_Components is Boolean.]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Volatile_Components],
+    Text=[@ChgAdded{Version=[3],Text=[Declare that the components of
+      an array type or object are volatile.]}]}
+
+@end{Description}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a @nt{full_type_declaration}
+(including the anonymous type of an @nt{object_declaration} of an anonymous
+array object), the following representation aspect may be specified:]}
+
+@begin{Description}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Independent_Components@\The type of aspect
+Independent_Components is Boolean.]}
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Independent_Components],
+    Text=[@ChgAdded{Version=[3],Text=[Declare that the components of an array
+      or record type, or an array object, are independently addressable.]}]}
+
+@end{Description}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[If any of these aspects are directly
+specified, the @nt{aspect_definition} shall be a static expression. If not
+specified (including by inheritance), each of these aspects is False.]}
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00272-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@Defn{atomic}
+An @i{atomic} type is one @Chg{Version=[3],New=[for],Old=[to]} which
+@Chg{Version=[3],New=[the aspect],Old=[a pragma]} Atomic
+@Chg{Version=[3],New=[is True],Old=[applies]}.
+An @i{atomic} object (including a component)
+is one @Chg{Version=[3],New=[for],Old=[to]} which
+@Chg{Version=[3],New=[the aspect],Old=[a pragma]} Atomic
+@Chg{Version=[3],New=[is True],Old=[applies]},
+or a component of an array @Chg{Version=[3],New=[for],Old=[to]} which
+@Chg{Version=[3],New=[the aspect],Old=[a pragma]} Atomic_Components
+@Chg{Version=[3],New=[is True for the associated type],Old=[applies]},
+or any object of an atomic type@Chg{Version=[2],
+New=[, other than objects obtained by evaluating a slice],Old=[]}.
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00272-01]}
   @ChgAdded{Version=[2],Text=[A slice of an atomic array object is not itself
@@ -1304,37 +1406,75 @@ New=[, other than objects obtained by evaluating a slice],Old=[]}.
   of components in a single instruction is not possible on many targets.]}
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn{volatile}
-A @i{volatile} type is one to which a pragma Volatile applies.
+A @i{volatile} type is one @Chg{Version=[3],New=[for],Old=[to]} which
+@Chg{Version=[3],New=[the aspect],Old=[a pragma]} Volatile
+@Chg{Version=[3],New=[is True],Old=[applies]}.
 A @i{volatile} object (including a component)
-is one to which a pragma Volatile applies,
-or a component of an array to which a pragma Volatile_@!Components applies,
+is one @Chg{Version=[3],New=[for],Old=[to]} which
+@Chg{Version=[3],New=[the aspect],Old=[a pragma]} Volatile
+@Chg{Version=[3],New=[is True],Old=[applies]},
+or a component of an array @Chg{Version=[3],New=[for],Old=[to]} which
+@Chg{Version=[3],New=[the aspect],Old=[a pragma]} Volatile_@!Components
+@Chg{Version=[3],New=[is True for the associated type],Old=[applies]},
 or any object of a volatile type.
 In addition, every atomic type or object is also defined to be volatile.
 Finally, if an object is volatile, then so
 are all of its subcomponents @Redundant[(the same does not apply to atomic)].
-@end{Intro}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[When True, the aspects Independent and
+Independent_Components @i<specify as independently addressable> the named object
+or component(s), or in the case of a type, all objects of that type. All atomic
+objects are considered to be specified as independently
+addressable.@Defn{specified as independently addressable}@Defn2{Term=[independently addressable],Sec=[specified]}]}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[If the compiler cannot guarantee that an object
+(including a component) for which aspect Independent or aspect
+Independent_Components is True is independently addressable from
+any other nonoverlapping object, then the aspect specification
+must be rejected.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Similarly, an atomic object (including atomic
+components) is always independently addressable from any other nonoverlapping
+object. Any representation item which would prevent this from being true should
+be rejected, notwithstanding what this Standard says elsewhere (specifically,
+in the Recommended Level of Support).]}
+@end{Ramification}
+
+@Comment{Original: @end{Intro}, Replaced with below for Ada 2012}
+@end{StaticSem}
 
 @begin{Resolution}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
-The @nt{local_name} in an Atomic or Volatile pragma shall resolve to denote
-either an @nt{object_declaration}, a non-inherited @nt{component_@!declaration},
-or a @nt{full_type_@!declaration}.@Chg{Version=[3],New=[ The
-@Syni{component_}@nt{local_name} in an Independent pragma
-shall resolve to denote a non-inherited @nt{component_declaration}.],Old=[]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[The @nt{local_name} in an Atomic or Volatile
+pragma shall resolve to denote either an @nt{object_declaration}, a
+non-inherited @nt{component_@!declaration}, or a @nt{full_type_@!declaration}.
 The @SynI{array_}@nt{local_name} in an Atomic_@!Components or
-Volatile_@!Components pragma shall resolve to denote the declaration
-of an array type or an array object of an anonymous type.
-@Chg{Version=[3],New=[ The @nt{local_name} in an Independent_Components pragma
-shall resolve to denote the declaration of an array or record type or an
-array object of an anonymous type.],Old=[]}
+Volatile_@!Components pragma shall resolve to denote the declaration of an array
+type or an array object of an anonymous type.]}
 @end{Resolution}
 
 @begin{Legality}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[If aspect Independent_Components is specified for a
+@nt{full_type_declaration}, the declaration shall be that of an array or record
+type.]}
+
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn{indivisible}
-It is illegal to apply either an Atomic or Atomic_Components pragma to an
+It is illegal to @Chg{Version=[3],New=[specify],Old=[apply]}
+either @Chg{Version=[3],New=[of the aspects],Old=[an]} Atomic or
+Atomic_Components @Chg{Version=[3],New=[],Old=[pragma ]}to
+@Chg{Version=[3],New=[have the value True for ],Old=[]}an
 object or type if the implementation cannot support the indivisible reads
-and updates required by the pragma (see below).
+and updates required by the @Chg{Version=[3],New=[aspect],Old=[pragma]}
+(see below).
 
 It is illegal to specify the Size attribute of an atomic object,
 the Component_Size attribute for an array type with atomic
@@ -1370,9 +1510,13 @@ Corresponding rules apply to volatile objects and types.
 generic formal array type, then the element type of the formal type shall be
 volatile.]}
 
-If a pragma Volatile, Volatile_Components, Atomic, or Atomic_Components
-applies to a stand-alone constant object, then a pragma Import shall
-also apply to it.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+If @Chg{Version=[3],New=[an aspect],Old=[a pragma]} Volatile,
+Volatile_Components, Atomic, or Atomic_Components
+@Chg{Version=[3],New=[is directly specified to have the value
+True for],Old=[applies to]} a stand-alone constant object, then
+@Chg{Version=[3],New=[the aspect],Old=[a pragma]} Import shall
+also @Chg{Version=[3],New=[be specified as True for],Old=[apply to]} it.
 @begin{Ramification}
 Hence, no initialization expression is allowed for such a constant. Note
 that a constant that is atomic or volatile because of its type is allowed.
@@ -1387,25 +1531,32 @@ For an imported stand-alone constant that is not atomic or
 volatile, the implementation can assume that it will not be
 altered.
 @end{Reason}
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0218-1]}
+  @ChgAdded{Version=[3],Text=[Volatile_Components and Atomic_Components actually
+  are aspects of the anonymous array type; this rule only applies when the
+  aspect is specified directly on the constant object and not when the (named)
+  array type has the aspect.]}
+@end{Honest}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1]}
-@ChgAdded{Version=[3],Text=[It is illegal to apply either an Independent or
-Independent_Components pragma to a component, object, or type if the
-implementation cannot provide the independent
-addressability required by the pragma (see @RefSecNum{Shared Variables}).]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Text=[It is illegal to specify the aspect Independent or
+Independent_Components as True for a component, object or type if the
+implementation cannot provide the independent addressability required by the
+aspect (see @RefSecNum{Shared Variables}).]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[It is illegal to specify a representation aspect for
-a component, object, or type to which pragma Independent or
-Independent_Components applies, in a way that
-prevents the implementation from providing the independent addressability
-required by the pragma.]}
+a component, object or type for which the aspect Independent or
+Independent_Components is True, in a way that prevents the implementation from
+providing the independent addressability required by the aspect.]}
 
 @end{Legality}
 
 @begin{StaticSem}
 
-@PDefn2{Term=[representation pragma], Sec=(Atomic)}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgDeleted{Version=[3],Text=[@PDefn2{Term=[representation pragma], Sec=(Atomic)}
 @PDefn2{Term=[pragma, representation], Sec=(Atomic)}
 @PDefn2{Term=[representation pragma], Sec=(Volatile)}
 @PDefn2{Term=[pragma, representation], Sec=(Volatile)}
@@ -1413,37 +1564,10 @@ required by the pragma.]}
 @PDefn2{Term=[pragma, representation], Sec=(Atomic_Components)}
 @PDefn2{Term=[representation pragma], Sec=(Volatile_Components)}
 @PDefn2{Term=[pragma, representation], Sec=(Volatile_Components)}
-@Chg{Version=[3],New=[@PDefn2{Term=[representation pragma], Sec=(Independent)}
-@PDefn2{Term=[pragma, representation], Sec=(Independent)}
-@PDefn2{Term=[representation pragma], Sec=(Independent_Components)}
-@PDefn2{Term=[pragma, representation], Sec=(Independent_Components)}
-],Old=[]}These @nt{pragma}s are representation pragmas
-(see @RefSecNum{Operational and Representation Items}).
-
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1]}
-@ChgAdded{Version=[3],Text=[Pragmas Independent and Independent_Components
-@i<specify as independently addressable> the named object or component(s), or in
-the case of a type, all objects of that type. All atomic objects are considered
-to be specified as independently
-addressable.@Defn{specified as independently addressable}@Defn2{Term=[independently addressable],Sec=[specified]}]}
-
-@begin{Ramification}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[If the compiler cannot guarantee that an object
-(including a component) to which pragma Independent or pragma
-Independent_Components applies is independently addressable from
-any other nonoverlapping object, then the pragma must be rejected.]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Similarly, an atomic object (including atomic
-components) is always independently addressable from any other nonoverlapping
-object. Any representation item which would prevent this from being true should
-be rejected, notwithstanding what this Standard says elsewhere.]}
-@end{Ramification}
+These @nt{pragma}s are representation pragmas
+(see @RefSecNum{Operational and Representation Items}).]}
 
 @end{StaticSem}
-
-
 
 @begin{RunTime}
 
@@ -1621,10 +1745,16 @@ because the pragma was not used to mark variables as shared.
 @end{Incompatible2005}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}@b<Correction:>
-  Pragmas Independent and Independent_Components are new; they eliminate
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Aspects Independent and Independent_Components are new; they eliminate
   ambiguity about independent addressibility.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[Aspects Atomic, Atomic_Components, Volatile,
+  and Volatile_Components are
+  new; @nt{pragma}s Atomic, Atomic_Components, Volatile, and
+  Volatile_Components are now obsolescent.]}
 @end{Extend2005}
 
 @begin{DiffWord2005}

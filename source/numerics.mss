@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.61 $ $Date: 2010/10/15 07:05:38 $ $Author: randy $ }
+@comment{ $Revision: 1.62 $ $Date: 2011/08/13 04:53:58 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:38 $}
+@Comment{$Date: 2011/08/13 04:53:58 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -36,12 +36,14 @@ The Numerics Annex specifies
 @end{Intro}
 
 @begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 If Fortran (respectively, C) is widely supported in the target environment,
 implementations supporting the Numerics Annex should provide the child package
 Interfaces.Fortran (respectively, Interfaces.C) specified in
 @RefSecNum{Interface to Other Languages}
 and should support a @i{convention_}@nt{identifier} of
-Fortran (respectively, C) in the interfacing pragmas
+Fortran (respectively, C) in the @Chg{Version=[3],New=[Convention
+aspect],Old=[interfacing pragmas]}
 (see @RefSecNum{Interface to Other Languages}),
 thus allowing Ada programs to interface with programs written in
 that language.
