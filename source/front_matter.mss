@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.70 $ $Date: 2011/08/13 04:53:58 $}
+@comment{$Revision: 1.71 $ $Date: 2011/08/17 00:29:41 $}
 
 @comment{@begin{Comment} (*Removed the below for Ada 2012, which is supposely going
 to be processed as a revision*)
@@ -839,7 +839,7 @@ The Real-Time Systems Annex now includes the Ravenscar profile for
 high-integrity systems, further dispatching policies such as Round Robin
 and Earliest Deadline First, support for timing events, and support for
 control of CPU time utilization. See clauses @RefSecNum{Priority Scheduling},
-@RefSecNum{Run-time Profiles},
+@RefSecNum{The Ravenscar Profile},
 @RefSecNum{Execution Time}, and
 @RefSecNum{Timing Events}.],Old=[]}
 

@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:20 $}
+@Comment{$Date: 2011/08/17 00:29:40 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1468,6 +1468,7 @@ A @nt{pragma} Suppress gives permission to an
 implementation to omit certain language-defined checks@Chg{Version=[2],
 New=[, while a @nt<pragma> Unsuppress revokes the permission to omit checks.],Old=[]}.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @Defn{language-defined check}
 @Defn2{Term=[check], Sec=(language-defined)}
 @IndexSee{Term=[run-time check],See=(language-defined check)}
@@ -1478,7 +1479,8 @@ one of the situations defined by this International Standard that requires a che
 be made at run time to determine whether some
 condition is true.
 @Defn2{Term=[failure],Sec=(of a language-defined check)}
-A check @i{fails} when the condition being checked is false,
+A check @i{fails} when the condition being checked is
+@Chg{Version=[3],New=[False],Old=[false]},
 causing an exception to be raised.
 @begin{Discussion}
 All such checks are defined under @lquotes@;@RunTimeTitle@rquotes@;

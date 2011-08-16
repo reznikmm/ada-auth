@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.56 $ $Date: 2011/08/13 04:53:58 $ $Author: randy $ }
+@comment{ $Revision: 1.57 $ $Date: 2011/08/17 00:29:41 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:58 $}
+@Comment{$Date: 2011/08/17 00:29:41 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -120,19 +120,26 @@ An @i{interfacing pragma} is a representation
 one of the @nt{pragma}s Import, Export,
 or Convention.
 Their forms, together with that of the related]}
-@nt[pragma] Linker_Options@Chg{Version=[3],New=[is],Old=[, are]} as follows:
+@nt[pragma] Linker_Options@Chg{Version=[3],New=[ is],Old=[, are]} as follows:
 @end{SyntaxText}
-@ChgRef{Version=[3],Kind=[Deleted]}
+
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 5
+through 7 were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Import)(@*
 @ @ @ @ @ [Convention =>] @SynI{convention_}@Syn2{identifier}, [Entity =>] @Syn2{local_name}@*
 @ @ [, [External_Name =>] @SynI{string_}@Syn2{expression}] [, [Link_Name =>] @SynI{string_}@Syn2{expression}]);']}
 
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Export)(@*
 @ @ @ @ @ [Convention =>] @SynI{convention_}@Syn2{identifier}, [Entity =>] @Syn2{local_name}@*
 @ @ [, [External_Name =>] @SynI{string_}@Syn2{expression}] [, [Link_Name =>] @SynI{string_}@Syn2{expression}]);']}
 
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Convention)([Convention =>] @SynI{convention_}@Syn2{identifier},[Entity =>] @Syn2{local_name});']}
 
 @PragmaSyn`@key{pragma} @prag(Linker_Options)(@SynI{string_}@Syn2{expression});'
@@ -366,7 +373,13 @@ specified only for an entity that is either imported or exported.],Old=[]}
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 28
+and 29 were deleted.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[@PDefn2{Term=[representation pragma], Sec=(Import)}
 @PDefn2{Term=[pragma, representation], Sec=(Import)}
 @PDefn2{Term=[representation pragma], Sec=(Export)}
@@ -385,7 +398,7 @@ In addition, Import and Export @nt{pragma}s specify the
 @i{imported} and @i{exported} aspects of representation,
 respectively.]}
 
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[@PDefn2{Term=[program unit pragma], Sec=(Import)}
 @PDefn2{Term=[pragma, program unit], Sec=(Import)}
 @PDefn2{Term=[program unit pragma], Sec=(Export)}
@@ -631,11 +644,17 @@ environment, @Chg{Version=[3],New=[the],Old=[@key(pragma)]} Convention
 access-to-subprogram type and the specific subprogram(s) to which 'Access
 is applied.
 
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 45
+and 46 were deleted.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[It is illegal to specify more than one of
 Import, Export, or Convention for a given entity.]}
 
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[The @nt{local_name}
 in an interfacing pragma can denote more than one
 entity in the case of overloading.
@@ -1489,8 +1508,10 @@ has components with statically constrained subtypes, and each component is
 C-compatible.]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059],ARef=[AI95-00131-01]}
-@ChgAdded{Version=[1],Text=[If a type is C_Pass_By_Copy-compatible then it is
-also C-compatible.]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
+@ChgAdded{Version=[1],Text=[If a type is
+C_Pass_By_Copy-compatible@Chg{Version=[3],New=[,],Old=[]}
+then it is also C-compatible.]}
 
 @end{StaticSem}
 
@@ -1544,6 +1565,7 @@ dropped and thus support is required.]}
 @begin{ImplAdvice}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0060],ARef=[AI95-00037-01]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00285-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}@ChgNote{No change, just a new paragraph number}
 @ChgAdded{Version=[1],Text=[The constants nul@Chg{Version=[2],New=[,],Old=[ and]}
 wide_nul@Chg{Version=[2],New=[, char16_nul, and char32_nul],Old=[]} should
 have a representation of zero.]}
@@ -1846,12 +1868,13 @@ for objects imported from, exported to, or passed to C.@end{discussion}
                        Nul_Check : @key(in) Boolean := False)
    @key(return) chars_ptr;
 @end{Example}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0061],ARef=[AI95-00140-01]}
-@Trailing@;If Item is @key(null), then To_Chars_Ptr returns Null_Ptr.
+@Trailing@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0061],ARef=[AI95-00140-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+If Item is @key(null), then To_Chars_Ptr returns Null_Ptr.
 @Chg{New=[If Item is not @key(null),], Old=[Otherwise, if]} Nul_Check is
 True@Chg{New=[,],Old=[]} and Item.@key(all) does not contain nul, then
 the function propagates Terminator_Error;
-@Chg{New=[otherwise],
+@Chg{New=[otherwise@Chg{Version=[3],New=[,],Old=[]}],
 Old=[if Nul_Check is True and Item.@key(all) does contain nul,]}
 To_Chars_Ptr performs a pointer conversion with no allocation of memory.
 
@@ -1887,9 +1910,11 @@ and resets Item to Null_Ptr.
 @begin{Example}@Keepnext
 @key(function) Value (Item : @key(in) chars_ptr) @key(return) char_array;
 @end{Example}
-@Trailing@;If Item = Null_Ptr then Value propagates Dereference_Error.
-Otherwise Value returns the prefix of the array
-of chars pointed to by Item, up to and including the
+@Trailing@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+If Item = Null_Ptr@Chg{Version=[3],New=[,],Old=[]} then Value propagates
+Dereference_Error.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} Value returns the prefix of the
+array of chars pointed to by Item, up to and including the
 first nul.
 The lower bound of the result is 0.
 If Item does not point to a nul-terminated string, then
@@ -1900,9 +1925,11 @@ execution of Value is erroneous.
    @key(return) char_array;
 @end{Example}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0062],ARef=[AI95-00139-01]}
-@Trailing@;If Item = Null_Ptr then Value@Chg{New=[],Old=[(Item)]} propagates
-Dereference_Error.
-Otherwise Value returns the shorter of two arrays@Chg{New=[, either],Old=[:]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@Trailing@;If Item = Null_Ptr@Chg{Version=[3],New=[,],Old=[]}
+then Value@Chg{New=[],Old=[(Item)]} propagates Dereference_Error.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} Value returns the shorter
+of two arrays@Chg{New=[, either],Old=[:]}
 the first Length chars pointed to by Item, @Chg{New=[or],Old=[and]}
 Value(Item). The lower bound of the result is 0.
 @Chg{New=[If Length is 0, then Value propagates Constraint_Error.],Old=[]}
@@ -2347,16 +2374,23 @@ that the associated type shall be given a representation
 that leaves no space for its discriminant(s).]]}
 @end{Intro}
 
-@begin{Syntax}
 
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2
+through 3 were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+@begin{Syntax}
+@begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Type=[Leading],KeepNext=[T],Text=[
 @Chg{Version=[2],New=[The form of a pragma Unchecked_Union is as follows:],Old=[]}]}
 @Comment{We'd like a conditional insert of Leading, etc., but we don't have that.}
+@end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag{Unchecked_Union} (@Syni<first_subtype_>@Syn2<local_name>);'',Old=[]}]}
 
 @end{Syntax}
@@ -2382,14 +2416,20 @@ expression. If not specified (including by inheritance), the aspect is False.]}
 
 @begin{Legality}
 
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 4
+and 5 were deleted.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[Unchecked_Union is a
 representation pragma, specifying the unchecked union aspect of
 representation.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[The
 @SynI{first_subtype_}@nt{local_name} of a @nt{pragma} Unchecked_Union shall
 denote an unconstrained discriminated record subtype having a
@@ -2880,9 +2920,11 @@ the effect is implementation defined. If Format does have one
 of these values, the following rules apply:
 @begin{itemize}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0066],ARef=[AI95-00071-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 Format=Unsigned: if Item comprises @Chg{New=[],Old=[zero or more leading
 space characters followed by ]}one or more decimal digit
-characters then Valid returns True, else it returns False.
+characters@Chg{Version=[3],New=[,],Old=[]} then
+Valid returns True, else it returns False.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0066],ARef=[AI95-00071-01]}
 Format=Leading_Separate: if Item comprises

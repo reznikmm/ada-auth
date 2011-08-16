@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:57 $}
+@Comment{$Date: 2011/08/17 00:29:39 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @LabeledClause{Type Conversions}
 
@@ -642,11 +642,12 @@ A @nt{type_conversion} that is a value conversion denotes the value
 that is
 the result of converting the value of the operand to the target subtype.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 A @nt{type_conversion} that is a view conversion
 denotes a view of the object denoted by the operand. This
 view is a variable of the target type if the operand denotes
-a variable; otherwise it is a constant of
-the target type.
+a variable; otherwise@Chg{Version=[3],New=[,],Old=[]}
+it is a constant of the target type.
 
 @PDefn2{Term=[nominal subtype], Sec=(associated with a @nt<type_conversion>)}
 The nominal subtype of a @nt<type_conversion> is its target subtype.

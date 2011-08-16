@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.64 $ $Date: 2011/08/13 04:53:58 $ $Author: randy $ }
+@comment{ $Revision: 1.65 $ $Date: 2011/08/17 00:29:41 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2011/08/13 04:53:58 $}
+@Comment{$Date: 2011/08/17 00:29:41 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -393,33 +393,39 @@ is modeled after the rule about exceptions propagated out of task bodies.
 
 @LabeledSubClause{Protected Procedure Handlers}
 
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 1
+through 6 were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 @begin{Syntax}
 @begin{SyntaxText}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Type=[Leading],KeepNext=[T],Text=[The form of a
 @nt{pragma} Interrupt_Handler is as follows:]}
 @end{SyntaxText}
 
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Interrupt_Handler)(@SynI{handler_}@Syn2{name});']}
 
 @begin{SyntaxText}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Type=[Leading],KeepNext=[T],Text=[The form of a
 @nt{pragma} Attach_Handler is as follows:]}
 @end{SyntaxText}
 
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Attach_Handler)(@SynI{handler_}@Syn2{name}, @Syn2{expression});']}
 @end{Syntax}
 
 @begin{Resolution}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[For the Interrupt_Handler and Attach_Handler
 pragmas, the @SynI{handler_}@nt{name} shall resolve to denote a protected
 procedure with a parameterless profile.]}
 
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[For the Attach_Handler pragma, the expected type
 for the @nt{expression} is Interrupts.Interrupt_Id
 (see @RefSecNum{The Package Interrupts}).]}
@@ -603,7 +609,7 @@ hardware priority is higher than the ceiling priority of the corresponding
 protected object, the execution of the program is erroneous.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0068],ARef=[AI95-00121-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[1],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
 If the handlers for a given interrupt attached via
 @Chg{Version=[3],New=[aspect],Old=[pragma]} Attach_Handler
@@ -1284,23 +1290,29 @@ representation @Chg{Version=[3],New=[aspects],Old=[pragmas]} that control the
 use of shared variables.]
 @end{Intro}
 
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2
+through 6 were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 @begin{Syntax}
 @begin{SyntaxText}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Type=[Leading],Text=[The form for pragmas Atomic,
 Volatile, Atomic_Components, and Volatile_Components is as follows:]}
 @end{SyntaxText}
 
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Atomic)(@Syn2{local_name});']}
 
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Volatile)(@Syn2{local_name});']}
 
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Atomic_Components)(@SynI{array_}@Syn2{local_name});']}
 
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Volatile_Components)(@SynI{array_}@Syn2{local_name});']}
 
 @end{Syntax}
@@ -1449,8 +1461,16 @@ in the Recommended Level of Support).]}
 @Comment{Original: @end{Intro}, Replaced with below for Ada 2012}
 @end{StaticSem}
 
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraph 9
+was moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}@ChgNote{We use
+this message rather than the "automatic one" to get rid of the resolution
+subheader}
+@end{NotIso}
+
 @begin{Resolution}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[The @nt{local_name} in an Atomic or Volatile
 pragma shall resolve to denote either an @nt{object_declaration}, a
 non-inherited @nt{component_@!declaration}, or a @nt{full_type_@!declaration}.
@@ -1553,9 +1573,16 @@ providing the independent addressability required by the aspect.]}
 
 @end{Legality}
 
-@begin{StaticSem}
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraph 14
+was moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}@ChgNote{We use
+this message rather than the "automatic one" to get rid of the resolution
+subheader}
+@end{NotIso}
 
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@begin{StaticSem}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[@PDefn2{Term=[representation pragma], Sec=(Atomic)}
 @PDefn2{Term=[pragma, representation], Sec=(Atomic)}
 @PDefn2{Term=[representation pragma], Sec=(Volatile)}
@@ -1566,7 +1593,6 @@ providing the independent addressability required by the aspect.]}
 @PDefn2{Term=[pragma, representation], Sec=(Volatile_Components)}
 These @nt{pragma}s are representation pragmas
 (see @RefSecNum{Operational and Representation Items}).]}
-
 @end{StaticSem}
 
 @begin{RunTime}
@@ -2298,7 +2324,7 @@ programmer must make sure that the task whose attribute is being accessed
 is not yet terminated. Failing to do so could make the program execution
 erroneous.
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00434-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00434-01]}
 @ChgDeleted{Version=[2],Text=[As specified in
 @RefSecNum{The Package Task_Identification}, if the parameter T (in a call
 on a subprogram of an instance of this package) identifies a nonexistent
@@ -2396,21 +2422,28 @@ with a non-null value of type Termination_Handler, and @i<cleared> otherwise.
 When a task is created, its specific handler and fall-back handler are cleared.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The procedure Set_Dependents_Fallback_Handler
-changes the fall-back handler for the calling task; if Handler is @key{null},
-that fall-back handler is cleared, otherwise it is set to be Handler.@key{all}.
+changes the fall-back handler for the calling
+task@Chg{Version=[3],New=[:],Old=[;]} if Handler is @key{null},
+that fall-back handler is cleared@Chg{Version=[3],New=[;],Old=[,]}
+otherwise@Chg{Version=[3],New=[,],Old=[]} it is set to be Handler.@key{all}.
 If a fall-back handler had previously been set it is replaced.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The function Current_Task_Fallback_Handler returns
 the fall-back handler that is currently set for the calling task, if one is
-set; otherwise it returns @key{null}.]}
+set; otherwise@Chg{Version=[3],New=[,],Old=[]} it returns @key{null}.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The procedure Set_Specific_Handler changes the
-specific handler for the task identified by T; if Handler is @key{null}, that
-specific handler is cleared, otherwise it is set to be Handler.@key{all}. If a
-specific handler had previously been set it is replaced.]}
+specific handler for the task identified by
+T@Chg{Version=[3],New=[:],Old=[;]} if Handler is @key{null}, that
+specific handler is cleared@Chg{Version=[3],New=[;],Old=[,]}
+otherwise@Chg{Version=[3],New=[,],Old=[]} it is set to be Handler.@key{all}. If
+a specific handler had previously been set it is replaced.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
@@ -2426,9 +2459,10 @@ specific handler had previously been set it is replaced.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The function Specific_Handler returns the specific
 handler that is currently set for the task identified by T, if one is set;
-otherwise it returns @key{null}.]}
+otherwise@Chg{Version=[3],New=[,],Old=[]} it returns @key{null}.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
 @ChgAdded{Version=[2],Text=[As part of the finalization of a @nt{task_body},

@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:56 $}
+@Comment{$Date: 2011/08/17 00:29:39 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.110 $}
+@Comment{$Revision: 1.111 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1876,6 +1876,7 @@ The following (and no others) represent constants:
 
 @end(itemize)
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @Defn{nominal subtype}
 At the place where a view of an
 object is defined, a @i(nominal subtype) is associated
@@ -1891,8 +1892,8 @@ is an @i(indefinite subtype).
 A subtype is an indefinite subtype if it is an unconstrained array
 subtype, or if it has unknown discriminants or unconstrained
 discriminants without defaults (see @RefSecNum(Discriminants));
-otherwise the subtype is a @i{definite} subtype @Redundant[(all
-elementary subtypes are definite subtypes)].
+otherwise@Chg{Version=[3],New=[,],Old=[]} the subtype is a @i{definite}
+subtype @Redundant[(all elementary subtypes are definite subtypes)].
 @redundant[A class-wide subtype is defined to have unknown discriminants,
 and is therefore an indefinite subtype.
 An indefinite subtype does not by itself
@@ -1991,10 +1992,11 @@ object has a controlled or immutably limited part (see
 @RefSecNum{Limited Types}, @RefSecNum{Assignment and Finalization},
 and @RefSecNum{Data Validity}).]}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 The nominal and actual subtypes of an elementary object are
 always the same. For a discriminated or array object,
-if the nominal subtype is constrained then so is the actual
-subtype.
+if the nominal subtype is constrained@Chg{Version=[3],New=[,],Old=[]} then so is
+the actual subtype.
 @end{Notes}
 
 @begin{Extend83}
@@ -2139,13 +2141,15 @@ of a limited type.]}
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 An @nt<object_declaration> with the reserved word @key(constant)
 declares a constant object.
 @Defn{full constant declaration}
 If it has an initialization expression,
 then it is called a @i(full constant declaration).
 @Defn{deferred constant declaration}
-Otherwise it is called a @i(deferred constant declaration).
+Otherwise@Chg{Version=[3],New=[,],Old=[]} it is called
+a @i(deferred constant declaration).
 The rules for deferred constant declarations are given in clause
 @RefSecNum(Deferred Constants). The rules for full constant declarations
 are given in this subclause.
@@ -4217,6 +4221,7 @@ S'Pred for a modular integer subtype wraps around
 @end(Descexample)
 
      @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
      @NoPrefix@Defn2{Term=[image], Sec=(of a value)}
      The function returns an @Chg{Version=[2],New=[image],Old=[@i(image)]} of
      the value of @i(Arg)@Chg{Version=[2],New=[ as a Wide_String],Old=[,
@@ -4225,7 +4230,8 @@ S'Pred for a modular integer subtype wraps around
      The lower bound of the result is one.@Chg{Version=[2],
      New=[ The image has the same sequence of character as
      defined for S'Wide_Wide_Image if all the graphic characters are defined in
-     Wide_Character; otherwise the sequence of characters is
+     Wide_Character; otherwise@Chg{Version=[3],New=[,],Old=[]}
+     the sequence of characters is
      implementation defined (but no shorter than that of S'Wide_Wide_Image for
      the same value of Arg).],Old=[]}
      @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
@@ -4350,13 +4356,15 @@ deleted if the paragraphs are ever renumbered.}
 @end(Descexample)
 
      @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
      @NoPrefix@;The function returns an image of the value of @i(Arg)
      as a String.]}
      The lower bound of the result is one. The image has the
      same sequence of graphic characters as that defined
      for S'@Chg{Version=[2],New=[Wide_Wide_Image],Old=[Wide_Image]} if all
      the graphic characters are defined in Character;
-     otherwise the sequence of characters is implementation defined (but
+     otherwise@Chg{Version=[3],New=[,],Old=[]}
+     the sequence of characters is implementation defined (but
      no shorter than that of S'@Chg{Version=[2],New=[Wide_Wide_Image],
      Old=[Wide_Image]} for the same value of @i(Arg)).
      @ChgImplDef{Version=[2],Kind=[Revised],Text=[The
@@ -4400,6 +4408,7 @@ deleted if the paragraphs are ever renumbered.}
     as a Wide_Wide_String, ignoring any leading or trailing spaces.]}]}
 
     @ChgRef{Version=[2],Kind=[Added]}
+    @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
     @ChgAdded{Version=[2],NoPrefix=[T],Text=[@PDefn2{Term=[evaluation], Sec=(Wide_Wide_Value)}
     @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
     For the evaluation of a call on S'Wide_Wide_Value
@@ -4411,7 +4420,8 @@ deleted if the paragraphs are ever renumbered.}
     for a nongraphic character of the type),
     the result is the corresponding enumeration value;
     @IndexCheck{Range_Check}
-    otherwise Constraint_Error is raised.]}
+    otherwise@Chg{Version=[3],New=[,],Old=[]}
+    Constraint_Error is raised.]}
     @begin{Discussion}
       @ChgRef{Version=[2],Kind=[Added]}
       @ChgAdded{Version=[2],Text=[It's not crystal clear that Range_Check
@@ -4431,6 +4441,7 @@ deleted if the paragraphs are ever renumbered.}
     @end{Honest}
 
     @ChgRef{Version=[2],Kind=[Added]}
+    @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
     @ChgAdded{Version=[2],NoPrefix=[T],Text=[@Defn2{Term=(Constraint_Error),
     Sec=(raised by failure of run-time check)}
     For the evaluation of a call on S'Wide_Wide_Value for an integer
@@ -4443,7 +4454,8 @@ deleted if the paragraphs are ever renumbered.}
     corresponding numeric value belongs to the base range of the
     type of S, then that value is the result;
     @IndexCheck{Range_Check}
-    otherwise Constraint_Error is raised.]}
+    otherwise@Chg{Version=[3],New=[,],Old=[]}
+    Constraint_Error is raised.]}
 
     @begin(Discussion)
       @ChgRef{Version=[2],Kind=[Added]}
@@ -4484,13 +4496,15 @@ deleted if the paragraphs are ever renumbered.}
 @end{Itemize}
 
     @ChgRef{Version=[2],Kind=[Added]}
+    @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
     @ChgAdded{Version=[2],NoPrefix=[T],Text=[@Defn2{Term=(Constraint_Error),
     Sec=(raised by failure of run-time check)}
     with an optional leading sign character (plus or minus), and if the
     corresponding numeric value belongs to the base range of the
     type of S, then that value is the result;
     @IndexCheck{Range_Check}
-    otherwise Constraint_Error is raised.
+    otherwise@Chg{Version=[3],New=[,],Old=[]}
+    Constraint_Error is raised.
     The sign of a zero value is preserved
     (positive if none has been specified)
     if S'Signed_Zeros is True.]}
@@ -4509,6 +4523,7 @@ deleted if the paragraphs are ever renumbered.}
     spaces.]}@Comment{This marks the end of the Annex text.}
 
     @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+    @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
     @NoPrefix@PDefn2{Term=[evaluation], Sec=(Wide_Value)}
     @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
     For the evaluation of a call on S'Wide_Value
@@ -4520,7 +4535,7 @@ deleted if the paragraphs are ever renumbered.}
     for a @Chg{Version=[2],New=[value],Old=[nongraphic character]} of the type),
     the result is the corresponding enumeration value;
     @IndexCheck{Range_Check}
-    otherwise Constraint_Error is raised.
+    otherwise@Chg{Version=[3],New=[,],Old=[]} Constraint_Error is raised.
     @Chg{Version=[2],New=[For a numeric subtype S,
     the evaluation of a call on S'Wide_Value with @i(Arg) of type Wide_String
     is equivalent to a call on S'Wide_Wide_Value for a corresponding
@@ -4639,6 +4654,7 @@ paragraphs are ever renumbered.}
     as a String, ignoring any leading or trailing spaces.]}
 
     @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+    @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
     @NoPrefix@PDefn2{Term=[evaluation], Sec=(Value)}
     @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
     For the evaluation of a call on S'Value
@@ -4650,7 +4666,7 @@ paragraphs are ever renumbered.}
     for a value of the type),
     the result is the corresponding enumeration value;
     @IndexCheck{Range_Check}
-    otherwise Constraint_Error is raised.
+    otherwise@Chg{Version=[3],New=[,],Old=[]} Constraint_Error is raised.
     For a numeric subtype S,
     the evaluation of a call on S'Value with @i(Arg) of type String
     is equivalent to a call on S'@Chg{Version=[2],New=[Wide_Wide_Value],Old=[Wide_Value]} for a corresponding
@@ -4716,7 +4732,7 @@ the following language-defined representation aspect
 may be specified with an @nt{aspect_specification} (see
 @RefSecNum{Aspect Specifications}):]}
 @begin{Description}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Default_Value@\This aspect
 shall be specified by a static expression, and that
 expression shall be explicit, even if the aspect has a boolean type.

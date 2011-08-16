@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:57 $}
+@Comment{$Date: 2011/08/17 00:29:39 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.118 $}
+@Comment{$Revision: 1.119 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1756,8 +1756,9 @@ These rules were
 In the @nt<record_@!component_@!association_@!list> for a @nt<record_@!aggregate>,
 if there is only one association, it shall be a named association.
 @begin{Reason}
-  Otherwise the construct would be interpreted as a parenthesized
-  expression.
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+  Otherwise@Chg{Version=[3],New=[,],Old=[]} the construct would be interpreted
+  as a parenthesized expression.
   This is considered a syntax rule, since it is relevant to
   overload resolution. We choose not to express it with BNF so we
   can share the definition of @nt<record_component_association_list>
@@ -3933,6 +3934,7 @@ Furthermore,
   result. See @RefSecNum(Overloading of Operators).
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @Defn{lexicographic order}
 For a discrete array type, the predefined ordering operators
 correspond to @i(lexicographic order) using the predefined order
@@ -3940,7 +3942,7 @@ relation of the component type: A null array is lexicographically
 less than any array having at least one component.
 In the case of nonnull arrays, the left operand is lexicographically
 less than the right operand if the first component of
-the left operand is less than that of the right; otherwise
+the left operand is less than that of the right; otherwise@Chg{Version=[3],New=[,],Old=[]}
 the left operand is lexicographically less than the right operand
 only if their first components are equal and the tail of the
 left operand is lexicographically less than that of the right (the
@@ -3976,11 +3978,11 @@ combined with the short-circuit control form @b[or else].]}
 @Leading@;@Chg{Version=[3],New=[An @i{individual membership test}@Defn{individual membership test}],Old=[A
 membership test using @key(in)]} yields the result True if:
 @begin(itemize)
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1],ARef=[AI05-0264-1]}
   @ChgAdded{Version=[3],Text=[The @nt{membership_choice} is a @nt{choice_expression},
   and the @nt{simple_expression} is equal to the value of the @nt{membership_choice}.
   If the tested type is a record type or a limited type, the test uses the
-  primitive equality for the type; otherwise the test uses predefined equality.]}
+  primitive equality for the type; otherwise, the test uses predefined equality.]}
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3],ARef=[AI05-0158-1]}
   @ChgAdded{Version=[3],Text=[The @nt{membership_choice} is a @nt{range}
@@ -4044,7 +4046,8 @@ membership test using @key(in)]} yields the result True if:
   @end{Inneritemize}
 @end(itemize)
 
-Otherwise the test yields the result False.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+Otherwise@Chg{Version=[3],New=[,],Old=[]} the test yields the result False.
 
 A membership test using @key(not in) gives the complementary result to
 the corresponding membership test using @key(in).
@@ -4100,9 +4103,10 @@ X /= Y
 "" < "A" @key(and) "A" < "Aa"     --@RI[  True]
 "Aa" < "B" @key(and) "A" < "A  "  --@RI[  True]
 
-My_Car = @key(null)               --@RI[ true if My_Car has been set to null (see @RefSecNum{Incomplete Type Declarations})]
-My_Car = Your_Car           --@RI[ true if we both share the same car]
-My_Car.@key[all] = Your_Car.@key[all]   --@RI[ true if the two cars are identical]
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+My_Car = @key(null)               --@RI[ @Chg{Version=[3],New=[True],Old=[true]} if My_Car has been set to null (see @RefSecNum{Incomplete Type Declarations})]
+My_Car = Your_Car           --@RI[ @Chg{Version=[3],New=[True],Old=[true]} if we both share the same car]
+My_Car.@key[all] = Your_Car.@key[all]   --@RI[ @Chg{Version=[3],New=[True],Old=[true]} if the two cars are identical]
 
 N @key(not) @key(in) 1 .. 10            --@RI[ range membership test]
 Today @key(in) Mon .. Fri         --@RI[ range membership test]
@@ -5025,7 +5029,7 @@ type @i<T>.@PDefn2{Term=[expected type],Sec=[dependent_expression]}]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[If the @nt{conditional_expression} is the operand
   of a type conversion, the type of the @nt{conditional_expression} is the
-  target type of the conversion; otherwise]}
+  target type of the conversion; otherwise,]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -5046,12 +5050,12 @@ type @i<T>.@PDefn2{Term=[expected type],Sec=[dependent_expression]}]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[If all of the @SynI{dependent_}@nt{expression}s
   are of the same type, the type of the @nt{conditional_expression} is that
-  type; otherwise]}
+  type; otherwise,]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[If a @SynI{dependent_}@nt{expression} is of an
   elementary type, the type of the @nt{conditional_expression} shall be covered
-  by that type; otherwise]}
+  by that type; otherwise,]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}

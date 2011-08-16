@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:57 $}
+@Comment{$Date: 2011/08/17 00:29:39 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.115 $}
+@Comment{$Revision: 1.116 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -587,10 +587,10 @@ formal access parameter of type access-to-@i<T> is interpreted as having type
 access-to-@i<T>'Class. @Redundant[This ensures the expression is
 well-defined for a primitive subprogram of a type descended from @i<T>.]]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Text=[For an attribute_reference with attribute_designator
 Old, if the attribute reference has an expected type or shall resolve to a given
-type, the same applies to the @nt{prefix}; otherwise the @nt{prefix} shall be
+type, the same applies to the @nt{prefix}; otherwise, the @nt{prefix} shall be
 resolved independently of context.]}
 
 @end{Resolution}
@@ -1585,10 +1585,12 @@ the reserved word @key(protected) in its definition.
 The default calling convention is @i{entry} for an entry.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01],ARef=[AI95-00409-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The calling convention for an
 anonymous access-to-subprogram parameter
 or anonymous access-to-subprogram result is @i<protected> if the reserved
-word @key{protected} appears in its definition and otherwise is the convention
+word @key{protected} appears in its definition@Chg{Version=[3],New=[;],Old=[ and]}
+otherwise@Chg{Version=[3],New=[, it],Old=[]} is the convention
 of the subprogram that contains the parameter.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1955,9 +1957,15 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
 @Redundant[Subprograms may be expanded in line at the call site.]
 @end{Intro}
 
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2
+through 4 were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 @begin{Syntax}
 @begin{SyntaxText}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Type=[Leading],KeepNext=[T],Text=[@PDefn2{Term=[program unit pragma], Sec=(Inline)}
 @PDefn2{Term=[pragma, program unit], Sec=(Inline)}
 The form of a @nt{pragma} Inline,
@@ -1965,12 +1973,12 @@ which is a program unit pragma (see @RefSecNum{Pragmas and Program Units}),
 is as follows:]}
 @end{SyntaxText}
 
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Inline)(@Syn2{name} {, @Syn2{name}});']}
 @end{Syntax}
 
 @begin{Legality}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[The @nt{pragma} shall apply to one or more
 callable entities or generic subprograms.]}
 @end{Legality}
@@ -2063,20 +2071,20 @@ so long as the semantics of the program remains unchanged.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00309-01]}
-@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[An implementation may allow
 a @nt{pragma} Inline that has an argument which is a @nt{direct_name} denoting a
 @nt{subprogram_body} of the same @nt{declarative_part}.],Old=[]}]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[This is allowed for
 Ada 83 compatibility. This is only a permission as this usage is considered
 obsolescent.]}]}
 @end{Reason}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[We only need to allow
 this in @nt{declarative_part}s, because a body is only allowed in another body,
 and these all have @nt{declarative_part}s.]}]}
@@ -2084,7 +2092,7 @@ and these all have @nt{declarative_part}s.]}]}
 @end{ImplPerm}
 
 @begin{Notes}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[The @nt{name} in a @nt{pragma} Inline can denote
 more than one entity in the case of overloading.
 Such a @nt{pragma} applies to all of the denoted entities.]}
@@ -3038,7 +3046,7 @@ S1.
 @end{RunTime}
 
 @begin{Erron}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}If
 the nominal subtype of a formal parameter with discriminants is constrained or
 indefinite, and the parameter is passed by reference, then the execution of the
@@ -4133,10 +4141,16 @@ No_Deposit@Defn{No_Deposit aspect} will have to wait for
 Ada @Chg{Version=[3],New=[2020],Old=[2017]}. :-)]}
 @end{Discussion}
 
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2
+and 3 were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 @begin{Syntax}
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Chg{Version=[3],New=[],Old=[The form
 of a @nt{pragma} No_Return, which is a
 representation pragma (see @RefSecNum{Operational and Representation Items}),
@@ -4144,7 +4158,7 @@ is as follows:]}]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgAdded{Version=[2],Text=`@Chg{Version=[3],New=[],Old=[@AddedPragmaSyn`Version=[2],@key{pragma} @prag<No_Return>(@SynI{procedure_}@Syn2{local_name}{, @SynI{procedure_}@Syn2{local_name}});']}'}
 @end{Syntax}
 
@@ -4234,9 +4248,16 @@ procedure declaration, then the renamed procedure shall be non-returning.]}
 
 @end{Legality}
 
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraph 8
+was deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered.}@ChgNote{This special message is needed to get rid of
+the old, now unused, subheader}
+@end{NotIso}
+
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[If a generic procedure
 is non-returning, then so are its instances. If a procedure declared within
 a generic unit is non-returning, then so are the corresponding copies of
@@ -4452,10 +4473,10 @@ conform fully to that of the declaration.@Defn2{Term=[full conformance],Sec=(req
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00348-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[A @nt<null_procedure_declaration> declares a @i<null
 procedure>.@Defn{null procedure}@Defn2{Term=[procedure],Sec=[null]}
-A completion is not allowed for a @nt<null_procedure_declaration>@Chg{Version=[3],New=[,
+A completion is not allowed for a @nt<null_procedure_declaration>@Chg{Version=[3],New=[;
 however, a @nt{null_procedure_declaration} can complete a previous declaration],Old=[]}.]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4580,11 +4601,11 @@ the @nt{expression_@!function_@!declaration}.]}
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Text=[An @nt{expression_@!function_@!declaration} declares
 an @i{expression function}.@Defn{exception function}@Defn2{Term=[function],Sec=[expression]}
 A completion
-is not allowed for an @nt{expression_@!function_@!declaration}, however an
+is not allowed for an @nt{expression_@!function_@!declaration}; however, an
 @nt{expression_@!function_@!declaration} can complete a previous declaration.]}
 @end{StaticSem}
 

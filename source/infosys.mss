@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.39 $ $Date: 2011/08/13 04:53:58 $ $Author: randy $ }
+@comment{ $Revision: 1.40 $ $Date: 2011/08/17 00:29:40 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:58 $}
+@Comment{$Date: 2011/08/17 00:29:40 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -1194,8 +1194,10 @@ of bounded line length (see @RefSec{Get and Put Procedures}).
                Radix_Mark : @key(in) Character := Default_Radix_Mark);
 @end{Example}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 Put copies Image(Item, Pic, Currency, Fill, Separator, Radix_Mark)
-to the given string, right justified. Otherwise unassigned Character values
+to the given string, right justified. Otherwise@Chg{Version=[3],New=[,],Old=[]}
+unassigned Character values
 in To are assigned the space character. If To'Length is less than
 the length of the string resulting from Image, then Layout_Error is raised.
 @end{DescribeCode}

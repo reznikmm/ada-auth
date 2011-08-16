@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.81 $ $Date: 2011/07/30 06:31:10 $ $Author: randy $ }
+@comment{ $Revision: 1.82 $ $Date: 2011/08/17 00:29:41 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2011/07/30 06:31:10 $}
+@Comment{$Date: 2011/08/17 00:29:41 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -58,7 +58,7 @@ less than @i{O}(f(N)), then for any arbitrarily small positive real D, there
 should exist a positive integer M such that for all N > M,
 t(N)/f(N) < D.]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0044-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0044-1]}
 @ChgAdded{Version=[3],Text=[When a formal function is used to provide an
 ordering for a container, it is generally required to define
 a strict weak ordering. A function "<" defines
@@ -965,12 +965,14 @@ an element, and returns False otherwise.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Left and Right denote the same
 vector object, then the function returns True. If Left and Right have different
 lengths, then the function returns False.
 Otherwise, it compares each element in Left to
 the corresponding element in Right using the generic formal equality operator.
-If any such comparison returns False, the function returns False; otherwise it
+If any such comparison returns False, the function returns False;
+otherwise@Chg{Version=[3],New=[,],Old=[]} it
 returns True. Any exception raised during
 evaluation of element equality is propagated.]}
 
@@ -1057,9 +1059,9 @@ element Left followed by the element Right.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[3],New=[If the
-capacity of Container is already greater than or equal to Capacity then
+capacity of Container is already greater than or equal to Capacity, then
 Reserve_Capacity has no effect. Otherwise, ],Old=[]}Reserve_Capacity allocates
 @Chg{Version=[3],New=[additional storage to ensure],Old=[new internal data
 structures such]} that the length of the resulting vector can
@@ -1112,10 +1114,12 @@ propagated and Container is not modified.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Length is larger than the
 capacity of Container, Set_Length calls Reserve_Capacity (Container, Length),
 then sets the length of the Container to Length. If Length is greater than the
-original length of Container, empty elements are added to Container; otherwise
+original length of Container, empty elements are added to Container;
+otherwise@Chg{Version=[3],New=[,],Old=[]}
 elements are removed from Container.]}
 
 @begin{Ramification}
@@ -1206,9 +1210,11 @@ designated by Position.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Index is not in the range
 First_Index (Container) .. Last_Index (Container), then Constraint_Error is
-propagated. Otherwise Replace_Element assigns the value New_Item to the element at
+propagated. Otherwise@Chg{Version=[3],New=[,],Old=[]}
+Replace_Element assigns the value New_Item to the element at
 position Index. Any exception raised during the assignment is propagated. The
 element at position Index is not an empty element after successful call to
 Replace_Element.]}
@@ -1221,9 +1227,11 @@ Replace_Element.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element,
 then Constraint_Error is propagated; if Position does not designate an element
-in Container, then Program_Error is propagated. Otherwise Replace_Element
+in Container, then Program_Error is propagated.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} Replace_Element
 assigns New_Item to the element designated by Position. Any exception raised
 during the assignment is propagated. The element at Position is not an empty
 element after successful call to Replace_Element.]}
@@ -1324,9 +1332,11 @@ not an empty element after successful completion of this operation.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If Position equals No_Element, then
 Constraint_Error is propagated; if Position does not designate an element in
-Container, then Program_Error is propagated. Otherwise Update_Element calls
+Container, then Program_Error is propagated.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} Update_Element calls
 Process.@key{all} with the element designated by Position as the argument.
 Program_Error is propagated if Process.@key{all} tampers with the elements of
 Container. Any exception raised by Process.@key{all} is propagated.]}
@@ -1532,12 +1542,14 @@ Move.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If Before is not in the range First_Index
 (Container) .. Last_Index (Container) + 1, then Constraint_Error is propagated.
 If Length(New_Item) is 0, then Insert does nothing. Otherwise, it computes the
 new length @i<NL> as the sum of the current length and Length (New_Item); if
 the value of Last appropriate for length @i<NL> would be greater than
-Index_Type'Last then Constraint_Error is propagated.]}
+Index_Type'Last@Chg{Version=[3],New=[,],Old=[]} then
+Constraint_Error is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If the current vector capacity is
@@ -1563,12 +1575,14 @@ exception raised during the copying is propagated.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Before is not No_Element, and
 does not designate an element in Container, then Program_Error is propagated.
 Otherwise, if
 Length(New_Item) is 0, then Insert does nothing. If Before is No_Element, then
 the call is equivalent to Insert (Container, Last_Index (Container) + 1,
-New_Item); otherwise the call is equivalent to Insert (Container, To_Index
+New_Item); otherwise@Chg{Version=[3],New=[,],Old=[]}
+the call is equivalent to Insert (Container, To_Index
 (Before), New_Item);]}
 
 @begin{Ramification}
@@ -1653,12 +1667,14 @@ then Position is set to To_Cursor (Container, @i<T>).]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If Before is not in the range
 First_Index (Container) .. Last_Index (Container) + 1, then Constraint_Error is
 propagated. If Count is 0, then Insert does nothing. Otherwise, it
 computes the new length @i<NL> as the sum of the current length and Count; if
 the value of Last appropriate for length @i<NL> would be greater than
-Index_Type'Last then Constraint_Error is propagated.]}
+Index_Type'Last@Chg{Version=[3],New=[,],Old=[]} then
+Constraint_Error is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If the current vector capacity is
@@ -1739,12 +1755,14 @@ and then Position is set to To_Cursor (Container, @i<T>).]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If Before is not in the range
 First_Index (Container) .. Last_Index (Container) + 1, then Constraint_Error is
 propagated. If Count is 0, then Insert_Space does nothing. Otherwise, it
 computes the new length @i<NL> as the sum of the current length and Count; if
 the value of Last appropriate for length @i<NL> would be greater than
-Index_Type'Last then Constraint_Error is propagated.]}
+Index_Type'Last@Chg{Version=[3],New=[,],Old=[]} then
+Constraint_Error is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If the current vector capacity is
@@ -1777,9 +1795,11 @@ and then Position is set to To_Cursor (Container, @i<T>).]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Index is not in the range
 First_Index (Container) .. Last_Index (Container) + 1, then Constraint_Error is
-propagated. If Count is 0, Delete has no effect. Otherwise Delete slides the
+propagated. If Count is 0, Delete has no effect.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} Delete slides the
 elements (if any) starting at position Index + Count down to Index. Any
 exception raised during element assignment is propagated.]}
 
@@ -1819,8 +1839,11 @@ To_Index (Position), Count) is called, and then Position is set to No_Element.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Length (Container) <= Count then
-Delete_Last is equivalent to Clear (Container). Otherwise it is equivalent to
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If
+Length (Container) <= Count@Chg{Version=[3],New=[,],Old=[]} then
+Delete_Last is equivalent to Clear (Container).
+Otherwise@Chg{Version=[3],New=[,],Old=[]} it is equivalent to
 Delete (Container, Index_Type'Val(Index_Type'Pos(Last_Index (Container)) @en
 Count + 1), Count).]}
 
@@ -2011,9 +2034,11 @@ Otherwise, it returns the index of the first equal element encountered.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is not No_Element, and
 does not designate an element in Container, then Program_Error is propagated.
-Otherwise Find searches the elements of Container for an element equal to Item
+Otherwise@Chg{Version=[3],New=[,],Old=[]}
+Find searches the elements of Container for an element equal to Item
 (using the generic formal equality operator). The search starts at
 the first element if Position equals No_Element, and at the element designated by
 Position otherwise. It proceeds towards the last element of Container. If no
@@ -2046,9 +2071,11 @@ encountered.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is not No_Element, and
 does not designate an element in Container, then Program_Error is propagated.
-Otherwise Reverse_Find searches the elements of Container for an element equal
+Otherwise@Chg{Version=[3],New=[,],Old=[]}
+Reverse_Find searches the elements of Container for an element equal
 to Item (using the generic formal equality operator). The search
 starts at the last element if Position equals No_Element, and at the element
 designated by Position otherwise. It proceeds towards the first element of
@@ -3137,12 +3164,14 @@ an element, and returns False otherwise.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Left and Right denote the same
 list object, then the function returns True. If Left and Right have different
 lengths, then the function returns False.
 Otherwise, it compares each element in Left to
 the corresponding element in Right using the generic formal equality operator.
-If any such comparison returns False, the function returns False; otherwise it
+If any such comparison returns False, the function returns False;
+otherwise@Chg{Version=[3],New=[,],Old=[]} it
 returns True. Any exception raised during
 evaluation of element equality is propagated.]}
 @begin{ImplNote}
@@ -3198,9 +3227,11 @@ designated by Position.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element,
 then Constraint_Error is propagated; if Position does not designate an element
-in Container, then Program_Error is propagated. Otherwise Replace_Element
+in Container, then Program_Error is propagated.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} Replace_Element
 assigns the value New_Item to the element designated by Position.]}
 
 @begin{Example}
@@ -3227,9 +3258,11 @@ propagated.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If Position equals No_Element, then
 Constraint_Error is propagated; if Position does not designate an element in
-Container, then Program_Error is propagated. Otherwise Update_Element calls
+Container, then Program_Error is propagated.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} Update_Element calls
 Process.@key{all} with the element designated by Position as the
 argument. Program_Error is propagated if Process.@key{all} tampers with the
 elements of Container. Any exception raised by Process.@key{all} is
@@ -3467,9 +3500,11 @@ No_Element, New_Item, Count).]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
 Constraint_Error is propagated. If Position does not designate an element in
-Container, then Program_Error is propagated. Otherwise Delete removes (from
+Container, then Program_Error is propagated.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} Delete removes (from
 Container) Count elements starting at the element designated by Position (or
 all of the elements starting at Position if there are fewer than Count elements
 starting at Position). Finally, Position is set to No_Element.]}
@@ -3491,8 +3526,11 @@ First (Container), Count).]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Length (Container) <= Count then
-Delete_Last is equivalent to Clear (Container). Otherwise it removes the last
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If
+Length (Container) <= Count@Chg{Version=[3],New=[,],Old=[]} then
+Delete_Last is equivalent to Clear (Container).
+Otherwise@Chg{Version=[3],New=[,],Old=[]} it removes the last
 Count nodes from Container.]}
 
 
@@ -3587,7 +3625,9 @@ set to 0.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is No_Element then
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is
+No_Element@Chg{Version=[3],New=[,],Old=[]} then
 Constraint_Error is propagated. If Before does not equal No_Element, and does
 not designate an element in Target, then Program_Error is propagated. If
 Position does not equal No_Element, and does not designate a node in Source,
@@ -3595,8 +3635,8 @@ then Program_Error is propagated. If Source denotes the same object as Target,
 then there is no effect if Position equals Before, else the element
 designated by Position is moved immediately prior to Before, or, if Before
 equals No_Element, after the last element.
-In both cases, Position and the length of Target are unchanged. Otherwise the
-element
+In both cases, Position and the length of Target are unchanged.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} the element
 designated by Position is removed from Source and moved to Target, immediately
 prior to Before, or, if Before equals No_Element, after the last element of
 Target. The length of Target is incremented, the length of Source is
@@ -3616,7 +3656,9 @@ decremented, and Position is updated to represent an element in Target.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is No_Element then
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is
+No_Element@Chg{Version=[3],New=[,],Old=[]} then
 Constraint_Error is propagated. If Before does not equal No_Element, and does
 not designate an element in Container, then Program_Error is propagated. If
 Position does not equal No_Element, and does not designate a node in Container,
@@ -3631,9 +3673,11 @@ Container is unchanged.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Container is empty, First
-returns the value No_Element. Otherwise it returns a cursor that designates the
-first node in Container.]}
+returns the value No_Element.
+Otherwise@Chg{Version=[3],New=[,],Old=[]}
+it returns a cursor that designates the first node in Container.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3649,9 +3693,10 @@ first node in Container.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Container is empty, Last returns
-the value No_Element. Otherwise it returns a cursor that designates the last
-node in Container.]}
+the value No_Element. Otherwise@Chg{Version=[3],New=[,],Old=[]}
+it returns a cursor that designates the last node in Container.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4509,9 +4554,11 @@ component of the node designated by Position.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element,
 then Constraint_Error is propagated; if Position does not designate an element
-in Container, then Program_Error is propagated. Otherwise Replace_Element
+in Container, then Program_Error is propagated.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} Replace_Element
 assigns New_Item to the element of the node designated by Position.]}
 
 @begin{Example}
@@ -4540,9 +4587,11 @@ propagated.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If Position equals No_Element, then
 Constraint_Error is propagated; if Position does not designate an element in
-Container, then Program_Error is propagated. Otherwise Update_Element calls
+Container, then Program_Error is propagated.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} Update_Element calls
 Process.@key{all} with the key and element from the node designated by Position
 as the arguments. Program_Error is propagated if Process.@key{all} tampers with
 the elements of Container. Any exception raised by Process.@key{all} is
@@ -6188,8 +6237,10 @@ elements are initialized from the corresponding keys and elements of Source.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Container is empty, Delete_First
-has no effect. Otherwise the node designated by First (Container) is removed
+has no effect. Otherwise@Chg{Version=[3],New=[,],Old=[]}
+the node designated by First (Container) is removed
 from Container. Delete_First tampers with the cursors of Container.]}
 
 @begin{Example}
@@ -6198,8 +6249,10 @@ from Container. Delete_First tampers with the cursors of Container.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Container is empty, Delete_Last
-has no effect. Otherwise the node designated by Last (Container) is removed
+has no effect. Otherwise@Chg{Version=[3],New=[,],Old=[]}
+the node designated by Last (Container) is removed
 from Container. Delete_Last tampers with the cursors of Container.]}
 
 @begin{Example}
@@ -6249,8 +6302,10 @@ the last node in Container. If Container is empty, returns No_Element.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
-Previous returns No_Element. Otherwise Previous returns a cursor
+Previous returns No_Element. Otherwise@Chg{Version=[3],New=[,],Old=[]}
+Previous returns a cursor
 designating the node that precedes the one designated by Position. If Position
 designates the first element, then Previous returns No_Element.]}
 
@@ -6269,9 +6324,11 @@ designates the first element, then Previous returns No_Element.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Floor searches for the last node
 whose key is not greater than Key, using the generic formal "<" operator for keys.
-If such a node is found, a cursor that designates it is returned. Otherwise
+If such a node is found, a cursor that designates it is returned.
+Otherwise@Chg{Version=[3],New=[,],Old=[]}
 No_Element is returned.]}
 
 @begin{Example}
@@ -6281,10 +6338,11 @@ No_Element is returned.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Ceiling searches for the first node
 whose key is not less than Key, using the generic formal "<" operator for keys.
-If such a node is found, a cursor that designates it is returned. Otherwise
-No_Element is returned.]}
+If such a node is found, a cursor that designates it is returned.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} No_Element is returned.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -7071,9 +7129,10 @@ elements of Right that are not equivalent to some element of Left.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If an element of Left is equivalent
-to some element of Right, then Overlap returns True. Otherwise it returns
-False.]}
+to some element of Right, then Overlap returns True.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} it returns False.]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -7088,9 +7147,10 @@ False.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If an element of Subset is not
-equivalent to some element of Of_Set, then Is_Subset returns False. Otherwise
-it returns True.]}
+equivalent to some element of Of_Set, then Is_Subset returns False.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} it returns True.]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -8557,8 +8617,10 @@ elements are initialized from the corresponding elements of Source.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Container is empty, Delete_First
-has no effect. Otherwise the element designated by First (Container) is removed
+has no effect. Otherwise@Chg{Version=[3],New=[,],Old=[]}
+the element designated by First (Container) is removed
 from Container. Delete_First tampers with the cursors of Container.]}
 
 @begin{Example}
@@ -8567,8 +8629,10 @@ from Container. Delete_First tampers with the cursors of Container.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Container is empty, Delete_Last
-has no effect. Otherwise the element designated by Last (Container) is removed
+has no effect. Otherwise@Chg{Version=[3],New=[,],Old=[]}
+the element designated by Last (Container) is removed
 from Container. Delete_Last tampers with the cursors of Container.]}
 
 @begin{Example}
@@ -8604,8 +8668,10 @@ Element (Last (Container)).]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
-Previous returns No_Element. Otherwise Previous returns a cursor designating
+Previous returns No_Element. Otherwise@Chg{Version=[3],New=[,],Old=[]}
+Previous returns a cursor designating
 the element that precedes the one designated by Position. If Position
 designates the first element, then Previous returns No_Element.]}
 
@@ -8624,9 +8690,11 @@ designates the first element, then Previous returns No_Element.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Floor searches for the last element
 which is not greater than Item. If such an element is found, a cursor that
-designates it is returned. Otherwise No_Element is returned.]}
+designates it is returned. Otherwise@Chg{Version=[3],New=[,],Old=[]}
+No_Element is returned.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -8635,9 +8703,11 @@ designates it is returned. Otherwise No_Element is returned.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Ceiling searches for the first
 element which is not less than Item. If such an element is found, a cursor that
-designates it is returned. Otherwise No_Element is returned.]}
+designates it is returned. Otherwise@Chg{Version=[3],New=[,],Old=[]}
+No_Element is returned.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}

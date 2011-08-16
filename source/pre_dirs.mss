@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.40 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
+@comment{ $Revision: 1.41 $ $Date: 2011/08/17 00:29:40 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:37 $}
+@Comment{$Date: 2011/08/17 00:29:40 $}
 
 @Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -537,10 +537,12 @@ special files).]}
                   Extension            : @key{in} String := "") @key{return} String;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the name of the external
 file with the specified
 Containing_Directory, Name, and Extension. If Extension is the null string,
-then Name is interpreted as a simple name; otherwise Name is interpreted as a
+then Name is interpreted as a simple name;
+otherwise@Chg{Version=[3],New=[,],Old=[]} Name is interpreted as a
 base name. The exception Name_Error is propagated if the string given as
 Containing_Directory is not null and does not allow the identification of a
 directory, or if the string given as Extension is not null and is not a

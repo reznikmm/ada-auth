@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.66 $ $Date: 2011/05/03 06:34:09 $ $Author: randy $ }
+@comment{ $Revision: 1.67 $ $Date: 2011/08/17 00:29:41 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2011/05/03 06:34:09 $}
+@Comment{$Date: 2011/08/17 00:29:41 $}
 
 @LabeledClause{String Handling}
 
@@ -179,8 +179,10 @@ union of the sets corresponding to Obj(I) for I in Obj'Range.
 @begin{Example}@Keepnext
 @key[function] To_Set (Ranges : @key[in] Character_Ranges) @key[return] Character_Set;
 @end{Example}
-@Trailing@;If Ranges'Length=0 then Null_Set is returned;
-otherwise the returned value represents the set corresponding to Ranges.
+@Trailing@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+If Ranges'Length=0 then Null_Set is returned;
+otherwise@Chg{Version=[3],New=[,],Old=[]}
+the returned value represents the set corresponding to Ranges.
 
 @begin{Example}@Keepnext
 @key[function] To_Set (Span : @key[in] Character_Range) @key[return] Character_Set;
@@ -190,9 +192,11 @@ The returned value represents the set containing each character in Span.
 @begin{Example}@Keepnext
 @key[function] To_Ranges (Set : @key[in] Character_Set) @key[return] Character_Ranges;
 @end{Example}
-@Trailing@;If Set = Null_Set then an empty Character_Ranges array is returned;
-otherwise the shortest array of contiguous ranges of Character
-values in Set, in increasing order of Low, is returned.
+@Trailing@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+If Set = Null_Set@Chg{Version=[3],New=[,],Old=[]}
+then an empty Character_Ranges array is returned;
+otherwise@Chg{Version=[3],New=[,],Old=[]} the shortest array of contiguous
+ranges of Character values in Set, in increasing order of Low, is returned.
 
 @begin{Example}@Keepnext
 @key[function] "=" (Left, Right : @key[in] Character_Set) @key[return] Boolean;
@@ -645,10 +649,11 @@ The effects of the above subprograms are as follows.
                 Justify : @key[in]  Alignment  := Left;
                 Pad     : @key[in]  Character  := Space);
 @end{Example}
-@Leading@;The Move procedure copies characters from Source to Target.
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+The Move procedure copies characters from Source to Target.
 If Source has the same length as Target, then the effect is
 to assign Source to Target.
-If Source is shorter than Target then:
+If Source is shorter than Target@Chg{Version=[3],New=[,],Old=[]} then:
 @begin{itemize}
 If Justify=Left, then Source is copied into the first Source'Length
  characters of Target.
@@ -784,7 +789,8 @@ the parameter Going indicates the direction of the lookup.
 @ChgAdded{Version=[2],Text=[      Index (Source, Pattern, Source'First, Forward, Mapping);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[otherwise returns]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[otherwise@Chg{Version=[3],New=[,],Old=[]} returns]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[      Index (Source, Pattern, Source'Last, Backward, Mapping);]}
@@ -842,7 +848,8 @@ it returns 0 if there is no such Character in Source.]}
 @ChgAdded{Version=[2],Text=[      Index (Source, Set, Source'First, Test, Forward);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[otherwise returns]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[otherwise@Chg{Version=[3],New=[,],Old=[]} returns]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[      Index (Source, Set, Source'Last, Test, Backward);]}
@@ -1009,8 +1016,9 @@ By), Source, Drop, Justify, Pad).
                  New_Item : @key[in] String)
    @key[return] String;
 @end{Example}
-@Trailing@;Propagates Index_Error if Before is not in Source'First .. Source'Last+1;
-otherwise
+@Trailing@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+Propagates Index_Error if Before is not in Source'First .. Source'Last+1;
+otherwise@Chg{Version=[3],New=[,],Old=[]}
 returns Source(Source'First..Before@en@;1) & New_Item &
 Source(Before..Source'Last), but with lower bound 1.
 
@@ -1029,8 +1037,9 @@ Source(Before..Source'Last), but with lower bound 1.
                     New_Item : @key[in] String)
    @key[return] String;
 @end{Example}
-@Trailing@;Propagates Index_Error if Position is not in Source'First .. Source'Last+1;
-otherwise
+@Trailing@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+Propagates Index_Error if Position is not in Source'First .. Source'Last+1;
+otherwise@Chg{Version=[3],New=[,],Old=[]}
 returns the string obtained from Source by consecutively replacing
 characters starting at Position with corresponding characters from
 New_Item. If the end of Source is reached before the characters in
@@ -1053,8 +1062,11 @@ New_Item), Source, Drop).
    @key[return] String;
 @end{Example}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0049],ARef=[AI95-00128-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @Trailing@;If From <= Through, the returned string is Replace_Slice(Source, From,
-Through, ""), otherwise it is Source@Chg{New=[ with lower bound 1],Old=[]}.
+Through, "")@Chg{Version=[3],New=[;],Old=[,]}
+otherwise@Chg{Version=[3],New=[,],Old=[]} it is Source@Chg{New=[ with lower
+bound 1],Old=[]}.
 
 @begin{Example}@Keepnext
 @key[procedure] Delete (Source  : @key[in] @key[out] String;
@@ -1109,8 +1121,10 @@ Justify => Justify, Pad=>Pad).
                Pad    : @key[in] Character := Space)
    @key[return] String;
 @end{Example}
-@Trailing@;Returns a string of length Count. If Count <= Source'Length, the
-string comprises the first Count characters of Source. Otherwise its contents
+@Trailing@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+Returns a string of length Count. If Count <= Source'Length, the
+string comprises the first Count characters of Source.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} its contents
 are Source concatenated with Count@en@;Source'Length Pad characters.
 
 @begin{Example}@Keepnext
@@ -1128,8 +1142,10 @@ Justify=>Justify, Pad=>Pad).
                Pad    : @key[in] Character := Space)
    @key[return] String;
 @end{Example}
-@Trailing@;Returns a string of length Count. If Count <= Source'Length, the
-string comprises the last Count characters of Source. Otherwise its contents
+@Trailing@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+Returns a string of length Count. If Count <= Source'Length, the
+string comprises the last Count characters of Source.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} its contents
 are Count-Source'Length Pad characters concatenated with Source.
 
 @begin{Example}@Keepnext
@@ -1158,10 +1174,11 @@ string if Left = 0 and @Chg{New=[otherwise ],Old=[]}is
 @end{StaticSem}
 
 @begin{Notes}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 In the Index and Count functions taking Pattern and Mapping parameters,
 the actual String parameter passed to Pattern should comprise characters
-occurring as target characters of the mapping. Otherwise the pattern
-will not match.
+occurring as target characters of the mapping.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} the pattern will not match.
 
 In the Insert subprograms, inserting at the end of a string is obtained
 by passing Source'Last+1 as the Before parameter.
@@ -1652,9 +1669,12 @@ Source.
                             Drop   : @key[in] Truncation := Error)
    @key[return] Bounded_String;
 @end{Example}
-@Leading@;If Source'Length <= Max_Length then this function
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+If Source'Length <= Max_Length@Chg{Version=[3],New=[,],Old=[]} then
+this function
 returns a Bounded_String that represents Source.
-Otherwise the effect depends on the value of Drop:
+Otherwise@Chg{Version=[3],New=[,],Old=[]}
+the effect depends on the value of Drop:
 @begin{itemize}
 If Drop=Left, then
 the result is a Bounded_String that represents the string comprising
@@ -2647,7 +2667,7 @@ Character portion of Wide_Character.]}
 If a null Wide_Character_Mapping_Function is passed to any of the
 Wide_String handling subprograms, Constraint_Error is propagated.
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00395-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00395-01]}
 @ChgDeleted{Version=[2],Text=[Each Wide_Character_Set constant in the package
 Strings.Wide_Maps.Wide_Constants contains no values outside the Character
 portion of Wide_Character. Similarly, each Wide_Character_Mapping

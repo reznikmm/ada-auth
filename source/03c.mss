@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:56 $}
+@Comment{$Date: 2011/08/17 00:29:39 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.114 $}
+@Comment{$Revision: 1.115 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3399,6 +3399,7 @@ for how to override this default.]
 @end(ImplNote)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @Defn{anonymous access type}
 @Defn2{Term=[designated subtype], Sec=(of an anonymous access type)}
 @Defn2{Term=[designated type], Sec=(of an anonymous access type)}
@@ -3408,7 +3409,7 @@ anonymous access-to-subprogram type. For a general access type,],
 Old=[access-to-variable type;]} the @nt<subtype_mark> denotes
 its @i(designated subtype)@Chg{Version=[2],New=[; if the
 @nt{general_@!access_@!modifier} @key{constant} appears, the type is an
-access-to-constant type; otherwise it is
+access-to-constant type; otherwise@Chg{Version=[3],New=[,],Old=[]} it is
 an access-to-variable type. For an access-to-subprogram type, the
 @nt{parameter_@!profile} or @nt{parameter_@!and_@!result_@!profile} denotes its
 @i{designated profile}.@Defn2{Term=[designated profile], Sec=(of an anonymous access type)}],
@@ -3493,6 +3494,7 @@ the @nt{subtype_indication} excludes null.]}
 @end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0013],ARef=[AI95-00012-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @PDefn2{Term=[constrained],Sec=(subtype)}
 @PDefn2{Term=[unconstrained],Sec=(subtype)}
 @Redundant[All subtypes of an access-to-subprogram type
@@ -3500,7 +3502,7 @@ are constrained.] The first subtype of a type defined by
 an @Chg{New=[@nt<access_definition>],Old=[@nt<access_type_definition>]} or an
 @nt<access_to_object_definition> is unconstrained if the designated subtype
 is an unconstrained array or discriminated @Chg{New=[subtype],Old=[type]};
-otherwise it is constrained.
+otherwise@Chg{Version=[3],New=[,],Old=[]} it is constrained.
 @begin(TheProof)
   The @LegalityTitle on @nt<range_constraint>s (see @RefSecNum(Scalar Types))
   do not permit the @nt<subtype_mark> of the @nt<subtype_indication> to denote

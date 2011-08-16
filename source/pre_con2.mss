@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.10 $ $Date: 2011/07/30 06:31:10 $ $Author: randy $ }
+@comment{ $Revision: 1.11 $ $Date: 2011/08/17 00:29:40 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -489,7 +489,7 @@ an element, and returns False otherwise.]}]}
                         Right_Position: Cursor) @key{return} Boolean;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1],ARef=[AI05-0264-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Left_Position or Right_Position
   equals No_Element, propagates Constraint_Error. If the number of child nodes
   of the element designated by Left_Position is different from the number of
@@ -503,7 +503,7 @@ an element, and returns False otherwise.]}]}
   False. Otherwise, it calls Equal_Subtree on a cursor designating each child
   element of the element designated by Left_Position and a cursor designated the
   corresponding child element of the element designated by Right_Position. If
-  any such call returns False, the function returns False; otherwise it
+  any such call returns False, the function returns False; otherwise, it
   returns True. Any exception raised during the evaluation of element equality
   is propagated.]}
 
@@ -683,11 +683,11 @@ an element, and returns False otherwise.]}]}
                            New_Item  : @key{in}     Element_Type);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0264-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
   then Constraint_Error is propagated; if Position does not designate an element
   in Container (including if it designates the root node), then Program_Error is
-  propagated. Otherwise Replace_Element assigns the value New_Item to the
+  propagated. Otherwise, Replace_Element assigns the value New_Item to the
   element designated by Position.]}
 
 @begin{Example}
@@ -714,11 +714,11 @@ an element, and returns False otherwise.]}]}
                    (Element : @key{in out} Element_Type));]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0264-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
   then Constraint_Error is propagated; if Position does not designate an element
   in Container (including if it designates the root node), then Program_Error is
-  propagated. Otherwise Update_Element calls Process.@key{all} with the element
+  propagated. Otherwise, Update_Element calls Process.@key{all} with the element
   designated by Position as the argument. Program_Error is propagated if
   Process.@key{all} tampers with the elements of Container. Any exception raised
   by Process.@key{all} is propagated.]}
@@ -891,13 +891,13 @@ an element, and returns False otherwise.]}]}
                           Position  : @key{in out} Cursor);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0264-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
   then Constraint_Error is propagated. If Position does not designate an element
   in Container (including if it designates the root node), then Program_Error is
-  propagated. Otherwise Delete removes (from Container) the subtree designated
-  by Position (that is, the node designated by Position and all of the
-  descendant nodes of that node), and Position is set to No_Element.]}
+  propagated. Otherwise, Delete_Subtree removes (from Container) the subtree
+  designated by Position (that is, the node designated by Position and all of
+  the descendant nodes of that node), and Position is set to No_Element.]}
 
 @begin{Ramification}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1189,7 +1189,7 @@ an element, and returns False otherwise.]}]}
                         Count     : @key{in}     Count_Type := 1);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0257-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0257-1],ARef=[AI05-0264-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Parent equals No_Element, then
   Constraint_Error is propagated. If Parent does not designate a node in
   Container, then Program_Error is propagated. If Before is not equal to
@@ -1199,7 +1199,7 @@ an element, and returns False otherwise.]}]}
   Otherwise, Insert_Child allocates Count nodes, the elements contained in the
   new nodes are initialized by default (see @RefSecNum{Object Declarations}),
   and the new nodes are inserted as children of Parent. If Parent already has
-  child nodes then the new nodes are inserted prior to the node designated by
+  child nodes, then the new nodes are inserted prior to the node designated by
   Before, or, if Before equals No_Element, the new nodes are inserted after the
   last existing child node of Parent. Position designates the first
   newly-inserted node, or if Count equals 0, then Position is assigned the value
@@ -1470,7 +1470,7 @@ an element, and returns False otherwise.]}]}
                            Source_Parent   : @key{in}     Cursor);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1],ARef=[AI05-0264-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target_Parent equals
   No_Element, then Constraint_Error is propagated. If Target_Parent does not
   designate a node in Container, then Program_Error is propagated. If Before is
@@ -1481,7 +1481,7 @@ an element, and returns False otherwise.]}]}
   No_Element, and Container.Parent (Before) is not equal to Target_Parent, then
   Constraint_Error is propagated. If Target_Parent equals Source_Parent there is
   no effect. If Source_Parent is an ancestor of Target_Parent, then
-  Constraint_Error is propagated. Otherwise the child elements (and their
+  Constraint_Error is propagated. Otherwise, the child elements (and their
   descendants) of Source_Parent are moved to be child elements of Target_Parent.
   If Target_Parent already has child elements, then the moved elements are
   inserted prior to the node designated by Before, or, if Before equals
@@ -2789,10 +2789,10 @@ Either Program_Error is raised, or the operation proceeds as defined.]}
 @end{Bounded}
 
 @begin{ImplReq}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For each instance of
 Containers.Vectors and each instance of Containers.Bounded_Vectors,
-if the two instances meet the following conditions
+if the two instances meet the following conditions,
 then the output generated by
 the Vector'Output or Vector'Write subprograms of either instance
 shall be readable by the Vector'Input
@@ -2930,11 +2930,11 @@ Either Program_Error is raised, or the operation proceeds as defined.]}
 @end{Bounded}
 
 @begin{ImplReq}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For each instance of
 Containers.Doubly_Linked_Lists and each instance of
 Containers.Bounded_Doubly_Linked_Lists,
-if the two instances meet the following conditions
+if the two instances meet the following conditions,
 then the output generated by
 the List'Output or List'Write subprograms of either instance
 shall be readable by the List'Input
@@ -3054,7 +3054,7 @@ as Containers.Hashed_Maps except:]}
                  Modulus  : Hash_Type := 0) @key[return] Map;]}
 @end{Example}
 @begin{Indent}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0264-1]}
   @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a map with key/element pairs initialized from the values
     in Source. If Capacity is 0, then the map capacity is the
     length of Source; if Capacity is equal to or greater than
@@ -3062,7 +3062,7 @@ as Containers.Hashed_Maps except:]}
     parameter; otherwise, the operation propagates Capacity_Error.  If
     the Modulus argument is 0, then the map modulus is the value
     returned by a call to Default_Modulus with the map capacity as its
-    argument; otherwise the map modulus is the value of the Modulus parameter.]}
+    argument; otherwise, the map modulus is the value of the Modulus parameter.]}
 @end{Indent}
 
 @end{Itemize}
@@ -3078,10 +3078,10 @@ Either Program_Error is raised, or the operation proceeds as defined.]}
 @end{Bounded}
 
 @begin{ImplReq}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For each instance of
 Containers.Hashed_Maps and each instance of Containers.Bounded_Hashed_Maps,
-if the two instances meet the following conditions
+if the two instances meet the following conditions,
 then the output generated by
 the Map'Output or Map'Write subprograms of either instance
 shall be readable by the Map'Input
@@ -3209,10 +3209,10 @@ Either Program_Error is raised, or the operation proceeds as defined.]}
 @end{Bounded}
 
 @begin{ImplReq}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For each instance of
 Containers.Ordered_Maps and each instance of Containers.Bounded_Ordered_Maps,
-if the two instances meet the following conditions
+if the two instances meet the following conditions,
 then the output generated by
 the Map'Output or Map'Write subprograms of either instance
 shall be readable by the Map'Input
@@ -3331,14 +3331,14 @@ as Containers.Hashed_Sets except:]}
                  Modulus  : Hash_Type := 0) @key[return] Set;]}
 @end{Example}
 @begin{Indent}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0264-1]}
   @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a set whose elements are
     initialized from the values in Source. If Capacity is 0, then the set
     capacity is the length of Source; if Capacity is equal to or greater than
     the length of Source, the set capacity is the value of the Capacity parameter;
     otherwise, the operation propagates Capacity_Error. If the Modulus argument is
     0, then the set modulus is the value returned by a call to Default_Modulus
-    with the set capacity as its argument; otherwise the set modulus is the
+    with the set capacity as its argument; otherwise, the set modulus is the
     value of the Modulus parameter.]}
 @end{Indent}
 
@@ -3355,10 +3355,10 @@ Either Program_Error is raised, or the operation proceeds as defined.]}
 @end{Bounded}
 
 @begin{ImplReq}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For each instance of
 Containers.Hashed_Sets and each instance of Containers.Bounded_Hashed_Sets,
-if the two instances meet the following conditions
+if the two instances meet the following conditions,
 then the output generated by
 the Set'Output or Set'Write subprograms of either instance
 shall be readable by the Set'Input
@@ -3482,10 +3482,10 @@ Either Program_Error is raised, or the operation proceeds as defined.]}
 @end{Bounded}
 
 @begin{ImplReq}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For each instance of
 Containers.Ordered_Sets and each instance of Containers.Bounded_Ordered_Sets,
-if the two instances meet the following conditions
+if the two instances meet the following conditions,
 then the output generated by
 the Set'Output or Set'Write subprograms of either instance
 shall be readable by the Set'Input
@@ -3617,10 +3617,10 @@ Either Program_Error is raised, or the operation proceeds as defined.]}
 @end{Bounded}
 
 @begin{ImplReq}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For each instance of
 Containers.Multiway_Trees and each instance of Containers.Bounded_Multiway_Trees,
-if the two instances meet the following conditions
+if the two instances meet the following conditions,
 then the output generated by
 the Tree'Output or Tree'Write subprograms of either instance
 shall be readable by the Tree'Input
@@ -3844,7 +3844,7 @@ should minimize copying of elements.]}]}
   instance.]}
 @end{Honest}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0248-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[
 The worst-case time complexity of a call on an instance of
 Containers.Generic_Sort should be @i{O}(@i<N>**2) or better,
@@ -3856,7 +3856,7 @@ Text=[Containers.Generic_Sort
 should have an average time complexity better than @i{O}(@i{N}**2) and worst case no
 worse than @i{O}(@i{N}**2).]}]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0248-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[Containers.Generic_Sort
 should minimize should minimize to the generic formal Swap.]}
 @ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
@@ -3938,12 +3938,12 @@ package Containers.Synchronized_Queue_Interfaces has the following declaration:]
    New_Item  : @key[in]     Element_Type) @key[is abstract];]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[A queue type that implements this
 interface may have a bounded @i<capacity>@Defn2{Term=[capacity],Sec=[of a queue]}.
 If the queue object has a bounded
 capacity, and the number of existing elements equals the capacity, then Enqueue
-blocks until storage becomes available; otherwise Enqueue does not block. In any
+blocks until storage becomes available; otherwise, Enqueue does not block. In any
 case, it then copies New_Item onto the queue.]}
 
 @begin{Example}

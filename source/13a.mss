@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:57 $}
+@Comment{$Date: 2011/08/17 00:29:40 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.94 $}
+@Comment{$Revision: 1.95 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1281,19 +1281,25 @@ Some of the more stringent requirements are moved to
 criterion when selecting the representation of a composite type.]
 @end{Intro}
 
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2
+through 4 were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 @begin{Syntax}
 @begin{SyntaxText}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Type=[Leading],KeepNext=[T],Text=[The form of a
 @nt{pragma} Pack is as follows:]}
 @end{SyntaxText}
 
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Pack)(@SynI{first_subtype_}@Syn2{local_name});']}
 @end{Syntax}
 
 @begin{Legality}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[The @SynI{first_subtype_}@nt{local_name} of a
 @nt{pragma} Pack shall denote a composite subtype.]}
 @end{Legality}
@@ -2772,25 +2778,31 @@ A @nt{pragma}]} Storage_Size specifies the amount of storage to be
 reserved for the execution of a task.]
 @end{Intro}
 
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 62
+through 65 were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 @begin{Syntax}
 @begin{SyntaxText}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Type=[Leading],KeepNext=[T],Text=[The form of a
 @nt{pragma} Storage_Size is as follows:]}
 @end{SyntaxText}
 
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Storage_Size)(@Syn2{expression});']}
 
 @begin{SyntaxText}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[A @nt{pragma} Storage_Size is allowed only
 immediately within a @nt{task_definition}.]}
 @end{SyntaxText}
 @end{Syntax}
 
 @begin{Resolution}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[@PDefn2{Term=[expected type],
   Sec=(Storage_Size pragma argument)}
 The @nt{expression} of a @nt<pragma> Storage_Size
@@ -2956,13 +2968,13 @@ denotes an object}:]}
   @key(return) Boolean]}
 @end(Descexample)
 
-   @ChgRef{Version=[3],Kind=[Added]}
+   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0191-1],ARef=[AI05-0264-1]}
    @ChgAdded{Version=[3],NoPrefix=[T],Text=[The actual parameter shall be a name
    that denotes an object. The object denoted by the actual parameter can be of
    any type. This function evaluates the names of the objects involved and
-   returns true if the representation of the object denoted by the actual
+   returns True if the representation of the object denoted by the actual
    parameter occupies exactly the same bits as the representation of the object
-   denoted by X; it is false otherwise.]}]}@Comment{End of Annex text here.}
+   denoted by X; otherwise, it returns False.]}]}@Comment{End of Annex text here.}
 
 @begin{Discussion}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2987,13 +2999,13 @@ denotes an object}:]}
   @key(return) Boolean]}
 @end(Descexample)
 
-   @ChgRef{Version=[3],Kind=[Added]}
+   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0191-1],ARef=[AI05-0264-1]}
    @ChgAdded{Version=[3],NoPrefix=[T],Text=[The actual parameter shall be a name
    that denotes an object. The object denoted by the actual parameter can be of
    any type. This function evaluates the names of the objects involved and
-   returns true if the representation of the object denoted by the actual
+   returns True if the representation of the object denoted by the actual
    parameter shares at least one bit with the representation of the object
-   denoted by X; it is false otherwise.]}]}@Comment{End of Annex text here.}
+   denoted by X; otherwise, it returns False.]}]}@Comment{End of Annex text here.}
 @end(description)
 @end{StaticSem}
 
@@ -4066,8 +4078,10 @@ the @nt{position}, @nt{first_bit}, and @nt{last_bit} of each
 the position and size of the corresponding component.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00133-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[If the nondefault bit ordering
-applies to the type then the layout is determined as follows:]}
+applies to the type@Chg{Version=[3],New=[,],Old=[]} then
+the layout is determined as follows:]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgAdded{Version=[2],Text=[the @nt{component_clause}s for which the value of

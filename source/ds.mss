@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.57 $ $Date: 2011/08/13 04:53:57 $ $Author: randy $ }
+@comment{ $Revision: 1.58 $ $Date: 2011/08/17 00:29:40 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2011/08/13 04:53:57 $}
+@Comment{$Date: 2011/08/17 00:29:40 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -1688,34 +1688,40 @@ remote subprogram call to return prior to completion of the execution
 of the corresponding remote subprogram body.]
 @end{Intro}
 
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2
+through 7 were deleted.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 @begin{Syntax}
 @begin{SyntaxText}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
 Asynchronous is as follows:]}
 @end{SyntaxText}
 
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Asynchronous)(@Syn2{local_name});']}
 @end{Syntax}
 
 @begin{Legality}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Type=[Leading],Text=[The @nt<local_name> of a pragma
 Asynchronous shall denote either:]}
 @begin{Itemize}
-   @ChgRef{Version=[3],Kind=[Deleted]}
+   @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
    @ChgDeleted{Version=[3],Text=[One or more remote procedures;
    the formal parameters of the procedure(s) shall all be of
    mode @key{in};]}
 
-   @ChgRef{Version=[3],Kind=[Deleted]}
+   @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
    @ChgDeleted{Version=[3],Text=[The first subtype of a remote
    access-to-procedure type; the formal parameters
    of the designated profile of
    the type shall all be of mode @key{in};]}
 
-   @ChgRef{Version=[3],Kind=[Deleted]}
+   @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
    @ChgDeleted{Version=[3],Text=[The first subtype of a remote
    access-to-class-wide type.]}
 @end{Itemize}

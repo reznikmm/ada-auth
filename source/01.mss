@@ -12,7 +12,7 @@ I probably ought to add a style just for this purpose)
 
 @begin{WideAbove}
 @noparanum@leading@tabclear()@tabset(P45)
-@Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:@Chg{Version=[2],New=[@Chg{Version=[3],New=[201z(E), Ed. 3],Old=[2007(E), Ed. 3]}],Old=[@Chg{Version=[1], New=[1995(E) with COR.1:2001], Old=[]}]}}]>
+@Swiss<@Grow[@B{INTERNATIONAL STANDARD@\ISO/IEC 8652:@Chg{Version=[2],New=[@Chg{Version=[3],New=[201z(E)],Old=[2007(E), Ed. 3]}],Old=[@Chg{Version=[1], New=[1995(E) with COR.1:2001], Old=[]}]}}]>
 @end{WideAbove}
 
 @thickline
@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2011/08/13 04:53:56 $}
+@Comment{$Date: 2011/08/17 00:29:39 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of

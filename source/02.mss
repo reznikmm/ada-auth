@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:56 $}
+@Comment{$Date: 2011/08/17 00:29:39 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.74 $}
+@Comment{$Revision: 1.75 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -55,7 +55,7 @@ New=[],Old=[Note that our definition for
 
 @begin{Syntax}
 @begin{NotIso}
-@ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2 and 3
+@ChgAdded{Version=[2],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2 and 3
 were deleted.>}]}@Comment{This message should be
 deleted if the paragraphs are ever renumbered.}
 @end{NotIso}
@@ -826,12 +826,12 @@ including any underline character.
 corresponding upper and lower case letters are considered the same.]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0091-1]}
+@ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg],ARef=[AI05-0091-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[The characters
 in category @ntf{other_format} are eliminated.]}]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
-@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0091-1]}
+@ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg],ARef=[AI05-0091-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[The remaining sequence of
 characters is converted to upper case.
 @Defn{case insensitive}]}]}

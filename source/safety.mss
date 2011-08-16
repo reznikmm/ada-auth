@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.52 $ $Date: 2011/08/06 05:45:24 $ $Author: randy $ }
+@Comment{ $Revision: 1.53 $ $Date: 2011/08/17 00:29:41 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2011/08/06 05:45:24 $}
+@Comment{$Date: 2011/08/17 00:29:41 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -1240,9 +1240,10 @@ It specifies the elaboration policy for a partition.
 At most one elaboration policy shall be specified for a partition.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If the Sequential policy is
-specified for a partition then pragma Restrictions (No_Task_Hierarchy) shall
-also be specified for the partition.]}
+specified for a partition@Chg{Version=[3],New=[,],Old=[]} then pragma
+Restrictions (No_Task_Hierarchy) shall also be specified for the partition.]}
 @end{LinkTime}
 
 @begin{RunTime}
@@ -1294,23 +1295,26 @@ main subprogram.]}
 
 @begin{ImplAdvice}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If the partition elaboration policy is Sequential
-and the Environment task becomes permanently blocked during elaboration then
-the partition is deadlocked and it is recommended that the partition be
-immediately terminated.]}
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+and the Environment task becomes permanently blocked during
+elaboration@Chg{Version=[3],New=[,],Old=[]} then the partition is deadlocked and
+it is recommended that the partition be immediately terminated.]}
+@ChgImplAdvice{Version=[3],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[If the partition elaboration policy is Sequential
-and the Environment task becomes permanently blocked during elaboration then
+and the Environment task becomes permanently blocked during
+elaboration@Chg{Version=[3],New=[,],Old=[]} then
 the partition should be immediately terminated.]}]}
 
 @end{ImplAdvice}
 
 @begin{ImplPerm}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If the partition elaboration policy is Sequential
-and any task activation fails then an implementation may immediately terminate
-the active partition to mitigate the hazard posed by continuing to execute with
-a subset of the tasks being active.]}
+and any task activation fails@Chg{Version=[3],New=[,],Old=[]} then an
+implementation may immediately terminate the active partition to mitigate the
+hazard posed by continuing to execute with a subset of the tasks being active.]}
 @end{ImplPerm}
 
 @begin{Notes}

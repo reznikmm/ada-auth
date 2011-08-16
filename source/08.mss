@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:57 $}
+@Comment{$Date: 2011/08/17 00:29:39 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.92 $}
+@Comment{$Revision: 1.93 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1519,7 +1519,7 @@ rhs="@Chg{Version=[2],New=<[@key{not}] @key{overriding}>,Old=<>}"}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00218-03],ARef=[AI95-00348-01],ARef=[AI95-00397-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0177-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[If an
 @nt{abstract_@!subprogram_@!declaration},
 @nt{null_@!procedure_@!declaration},@Chg{Version=[3],New=[

@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:57 $}
+@Comment{$Date: 2011/08/17 00:29:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -2319,7 +2319,7 @@ or an unconstrained subtype with discriminants,
 S'Max_Size_In_Storage_Elements might be very large.
 @end{Ramification}
 
-@ChgAttribute{Version=[3], Kind=[Added], ChginAnnex=[T], Leading=[F],
+@ChgAttribute{Version=[3], Kind=[AddedNormal], ChginAnnex=[T], Leading=[F],
   Prefix=<S>, AttrName=<Max_Alignment_For_Allocation>, ARef=[AI05-0193-1],
   Text=<@Chg{Version=[3],New=[Denotes the maximum value for Alignment that
   could be requested by the implementation via Allocate for an access type
@@ -2329,14 +2329,14 @@ S'Max_Size_In_Storage_Elements might be very large.
 @end{Description}
 @end{StaticSem}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0193-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0193-1]}
 @ChgAdded{Version=[3],Text=[For a type with access discriminants, if the
 implementation allocates space for a coextension in the same pool as that of the
 object having the access discriminant, then these attributes account for any
 calls on Allocate that could be performed to provide space for such
 coextensions.]}
 @begin{Reason}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0193-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0193-1]}
 @ChgAdded{Version=[3],Text=[The values of these attributes should reflect only
 the calls that might be made to the pool specified for an access type with
 designated type S. Thus, if the coextensions would normally be
@@ -2346,7 +2346,7 @@ of an anonymous access discriminant is not followed), then these attributes
 should not reflect any calls on Allocate used to allocate the coextensions.]}
 @end{Reason}
 @begin{Ramification}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0193-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0193-1]}
 @ChgAdded{Version=[3],Text=[Coextensions of coextensions of this type (and so on)
 are included in the values of these attributes if they are allocated from the
 same pool.]}
@@ -4495,9 +4495,9 @@ of the stream elements read and written],Old=[representation used]} by the
 Read and Write attributes of elementary types@Chg{Version=[2],New=[],Old=[ in
 terms of stream elements]}.]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0023-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0023-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Text=[If @i<T> is a discriminated type and its
-discriminants have defaults then
+discriminants have defaults, then
 S'Read first reads the discriminants from the stream without modifying
 @i<Item>. S'Read then creates an object of type @i<T> constrained by these
 discriminants. The value of this object is then converted to the subtype
@@ -4546,13 +4546,14 @@ take place for the created object.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00270-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[Constraint_Error is raised by the predefined Write
 attribute if the value of the elementary item is outside the range of values
 representable using Stream_Size bits. For a signed integer type, an enumeration
 type, or a fixed point type, the range is unsigned only if the integer code for
 the lower bound of the first subtype is nonnegative, and a (symmetric) signed
 range that covers all values of the first subtype would require more than
-Stream_Size bits; otherwise the range is signed.]}
+Stream_Size bits; otherwise@Chg{Version=[3],New=[,],Old=[]} the range is signed.]}
 
 
 @Leading@;For @PrefixType{every subtype S'Class of a class-wide type
@@ -5174,9 +5175,9 @@ exist in the partition at the time of the call, execution is erroneous.]}
   in the program text, possibly through a generic instantiation (see
   @RefSecNum{Generic Instantiation}).]}
 
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0023-1]}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0023-1],ARef=[AI05-0264-1]}
   @ChgAdded{Version=[3],Text=[If @i<T> is a discriminated type and its
-  discriminants have defaults then in two cases an execution of the default
+  discriminants have defaults, then in two cases an execution of the default
   implementation of S'Read is not required to create an anonymous object of
   type @i<T>: If the discriminant values that are read in are equal to the
   corresponding discriminant values of @i<Item>, then no object of type @i<T>

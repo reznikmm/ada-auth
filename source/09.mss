@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:57 $}
+@Comment{$Date: 2011/08/17 00:29:40 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.107 $}
+@Comment{$Revision: 1.108 $}
 
 @begin{Intro}
 
@@ -2643,6 +2643,7 @@ Under certain circumstances (detailed below), an entry of a task
 or protected
 object is checked to see whether it is @i(open) or @i(closed):
 @begin(Itemize)
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @Defn2{Term=[open entry], Sec=(of a task)}
 @Defn2{Term=[closed entry], Sec=(of a task)}
 An entry of a task is open if the task
@@ -2650,14 +2651,16 @@ is blocked on an @nt<accept_statement>
 that corresponds to the entry (see @RefSecNum(Entries and Accept Statements)),
 or on a @nt<selective_accept>
 (see @RefSecNum(Selective Accept)) with an open
-@nt<accept_alternative> that corresponds to the entry; otherwise
-it is closed.
+@nt<accept_alternative> that corresponds to the entry;
+otherwise@Chg{Version=[3],New=[,],Old=[]} it is closed.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @Defn2{Term=[open entry], Sec=(of a protected object)}
 @Defn2{Term=[closed entry], Sec=(of a protected object)}
 An entry of a protected object is open if
 the @nt<condition> of the @nt<entry_barrier> of the
-corresponding @nt<entry_body> evaluates to True; otherwise it is closed.
+corresponding @nt<entry_body> evaluates to True;
+otherwise@Chg{Version=[3],New=[,],Old=[]} it is closed.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 If the evaluation of the @nt<condition> propagates an exception, the
 exception Program_Error is propagated
@@ -5178,6 +5181,7 @@ the following are abort completion points for an execution:
 @end{RunTime}
 
 @begin{Bounded}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @PDefn2{Term=(bounded error),Sec=(cause)}
 An attempt to execute an @nt<asynchronous_select> as
 part of the execution of an abort-deferred operation is a bounded error.
@@ -5186,8 +5190,8 @@ that is included entirely within the execution of
 an abort-deferred operation is a bounded error.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 In both cases, Program_Error is raised if the error is detected
-by the implementation; otherwise the operations proceed
-as they would outside an abort-deferred operation, except
+by the implementation; otherwise@Chg{Version=[3],New=[,],Old=[]} the
+operations proceed as they would outside an abort-deferred operation, except
 that an abort of the @nt<abortable_part>
 or the created task might or might not have an effect.
 @begin(Reason)

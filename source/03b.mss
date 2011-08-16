@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:56 $}
+@Comment{$Date: 2011/08/17 00:29:39 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.90 $}
+@Comment{$Revision: 1.91 $}
 
 @LabeledClause{Array Types}
 
@@ -288,7 +288,7 @@ scalar component type, the following language-defined representation aspect
 may be specified with an @nt{aspect_specification} (see
 @RefSecNum{Aspect Specifications}):]}
 @begin{Description}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Default_Component_Value@\This aspect
 shall be specified by a static expression, and that
 expression shall be explicit, even if the aspect has a boolean type.
@@ -2052,13 +2052,14 @@ A @nt{name} that denotes any component, protected subprogram,
 or entry is allowed within @Chg{Version=[3],New=[an operational or],Old=[a]}
 representation item that occurs within the declaration of the composite type.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 A @nt{name} that denotes a noninherited discriminant
 is allowed within the declaration of the type,
 but not within the @nt{discriminant_part}.
 If the discriminant is used to define the constraint of
 a component, the bounds of an entry family, or
 the constraint of the parent subtype in a
-@nt<derived_type_definition>
+@nt<derived_type_definition>@Chg{Version=[3],New=[,],Old=[]}
 then its name shall appear alone as a @nt<direct_name> (not as
 part of a larger expression or expanded name).
 A discriminant shall not be used to define the constraint of
@@ -2524,8 +2525,9 @@ shall be covered as follows:
 @ChgAdded{Version=[3],Text=[@key{package} I @key{is new} G (Natural); -- @Examcom{Legal}]}
 @end{Example}
 @end{Reason}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
   If the type of the discriminant is a
-  descendant of a generic formal scalar type
+  descendant of a generic formal scalar type@Chg{Version=[3],New=[,],Old=[]}
   then the @nt{variant_part} shall have an @key{others}
   @nt{discrete_choice};
 @begin{Reason}

@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:57 $}
+@Comment{$Date: 2011/08/17 00:29:40 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.94 $}
+@Comment{$Revision: 1.95 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1898,6 +1898,7 @@ unit.
 
 @begin{Resolution}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0032],ARef=[AI95-00192-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 If a @nt<library_unit_body> that is a @nt<subprogram_body> is
 submitted to the compiler, it is interpreted only as a completion
 if a @nt<library_unit_declaration> @Chg{New=[], Old=[for a subprogram
@@ -1905,7 +1906,8 @@ or a generic subprogram ]}with the same @nt<defining_program_unit_name>
 already exists in the environment @Chg{New=[for a subprogram other than
 an instance of a generic subprogram or for a generic subprogram ], Old=[]}
 (even if the profile of the body is not type conformant with that of the
-declaration); otherwise the @nt<subprogram_body> is
+declaration); otherwise@Chg{Version=[3],New=[,],Old=[]} the
+@nt<subprogram_body> is
 interpreted as both the declaration and body of a library subprogram.
 @PDefn{type conformance}
 @begin{Ramification}

@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2010/06/11 07:27:55 $}
+@Comment{$Date: 2011/08/17 00:29:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -529,8 +529,10 @@ additional effects described in subclause
 @begin{Example}@Keepnext
 @key[function] Is_Open(File : @key[in] File_Type) @key[return] Boolean;
 @end{Example}
+    @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
     Returns True if the file is open (that is, if it is associated
-    with an external file), otherwise returns False.
+    with an external file)@Chg{Version=[3],New=[;],Old=[,]}
+    otherwise@Chg{Version=[3],New=[,],Old=[]} returns False.
 @end{DescribeCode}
 @end{StaticSem}
 
@@ -619,8 +621,10 @@ of the external file is exceeded.
 @begin{Example}@Keepnext
 @key[function] End_Of_File(File : @key[in] File_Type) @key[return] Boolean;
 @end{Example}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 Operates on a file of mode In_File. Returns True if no more
-elements can be read from the given file; otherwise returns False.
+elements can be read from the given file;
+otherwise@Chg{Version=[3],New=[,],Old=[]} returns False.
 
 The exception Mode_Error is propagated if the mode is not In_File.
 @end{DescribeCode}
@@ -800,9 +804,10 @@ the external file that is associated with the given file.
 @begin{Example}@Keepnext
 @key[function] End_Of_File(File : @key[in] File_Type) @key[return] Boolean;
 @end{Example}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 Operates on a file of mode In_File or Inout_File. Returns
 True if the current index exceeds the size of the external
-file; otherwise returns False.
+file; otherwise@Chg{Version=[3],New=[,],Old=[]} returns False.
 
 The exception Mode_Error is propagated if the mode of the given file is
 Out_File.
@@ -1787,8 +1792,10 @@ used is not open.
 @key[function] End_Of_Line(File : @key[in] File_Type) @key[return] Boolean;
 @key[function] End_Of_Line @key[return] Boolean;
 @end{Example}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
   Operates on a file of mode In_File. Returns True if a line
-  terminator or a file terminator is next; otherwise returns False.
+  terminator or a file terminator is next;
+  otherwise@Chg{Version=[3],New=[,],Old=[]} returns False.
 
   @Trailing@;The exception Mode_Error is propagated if the mode is not In_File.
 
@@ -1825,10 +1832,11 @@ used is not open.
 @key[function] End_Of_Page(File : @key[in] File_Type) @key[return] Boolean;
 @key[function] End_Of_Page @key[return] Boolean;
 @end{Example}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
   Operates on a file of mode In_File. Returns True if the
   combination of a line terminator and a page terminator is
-  next, or if a file terminator is next; otherwise returns
-  False.
+  next, or if a file terminator is next;
+  otherwise@Chg{Version=[3],New=[,],Old=[]} returns False.
 
   @Trailing@;The exception Mode_Error is propagated if the mode is not In_File.
 
@@ -1837,9 +1845,11 @@ used is not open.
 @key[function] End_Of_File @key[return] Boolean;
 @end{Example}
 
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
   Operates on a file of mode In_File. Returns True if a file
   terminator is next, or if the combination of a line, a page,
-  and a file terminator is next; otherwise returns False.
+  and a file terminator is next;
+  otherwise@Chg{Version=[3],New=[,],Old=[]} returns False.
 
   @Trailing@;The exception Mode_Error is propagated if the mode is not In_File.
 
@@ -2160,14 +2170,14 @@ provided:
                       End_Of_Line : @key[out] Boolean);
 @end{Example}
   @Trailing@ChgRef{Version=[1],Kind=[Revised]}
-  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0038-1]}@Chg{Version=[3],
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0038-1],ARef=[AI05-0264-1]}@Chg{Version=[3],
   New=[Status_Error is propagated if the file is not open. ],Old=[]}Mode_Error
   is propagated if
   the mode of the file is not In_File. Sets End_Of_Line to True if at end of
   line, including if at end of page or at end of file; in each of these cases
   the value of Item is not specified.
   @PDefn{unspecified}
-  Otherwise End_Of_Line is set to
+  Otherwise@Chg{Version=[3],New=[,],Old=[]} End_Of_Line is set to
   False and Item is set to @Chg{New=[],Old=[the ]}the next character (without
   consuming it) from the file.
 
@@ -3479,14 +3489,18 @@ subprograms in Sequential_IO (see @RefSecNum(File Management))]}.
 is not In_File;]}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If positioning is supported for the given external
 file, the function returns True if the current index exceeds the size of the
-external file; otherwise it returns False;]}
+external file; otherwise@Chg{Version=[3],New=[,],Old=[]}
+it returns False;]}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If positioning is not supported for the given
 external file, the function returns True if no more elements can be read from
-the given file; otherwise it returns False.]}
+the given file; otherwise@Chg{Version=[3],New=[,],Old=[]}
+it returns False.]}
 @end{Itemize}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055],ARef=[AI95-00026-01]}

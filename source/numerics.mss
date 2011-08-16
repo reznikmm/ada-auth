@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.62 $ $Date: 2011/08/13 04:53:58 $ $Author: randy $ }
+@comment{ $Revision: 1.63 $ $Date: 2011/08/17 00:29:40 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:58 $}
+@Comment{$Date: 2011/08/17 00:29:40 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -540,8 +540,8 @@ parameter lies on the positive real axis; as another, the sign of the imaginary
 component of the Compose_@!From_@!Polar function should be the same as (resp., the
 opposite of) that of the Argument parameter when that parameter has a value of
 zero and the Modulus parameter has a nonnegative (resp., negative) value.
-@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[If Real'Signed_Zeros is true for Numerics.@!Generic_@!Complex_@!Types,
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[If Real'Signed_Zeros is @Chg{Version=[3],New=[True],Old=[true]} for Numerics.@!Generic_@!Complex_@!Types,
 a rational treatment of the signs of
 zero results and result components should be provided.]}]}
 @end{ImplAdvice}
@@ -940,8 +940,9 @@ cases, the result component should have the sign of the parameter component at
 the origin. Other complex elementary functions have zero components whose sign
 is opposite that of a parameter component at the origin, or is always positive
 or always negative.
-@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[If Complex_Types.Real'Signed_Zeros is true for
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[2],
+Text=[If Complex_Types.Real'Signed_Zeros
+is @Chg{Version=[3],New=[True],Old=[true]} for
 Numerics.@!Generic_@!Complex_@!Elementary_@!Functions,
 a rational treatment of the signs of
 zero results and result components should be provided.]}]}
@@ -1841,12 +1842,13 @@ are defined as follows:
          then the perfect result set contains
          only the value @RI{v};
 
-         otherwise, if truncation applies then it contains only the integer
+         @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+         otherwise, if truncation applies@Chg{Version=[3],New=[,],Old=[]}
+         then it contains only the integer
          multiple of @RI{s} in the direction toward zero,
-         whereas if rounding
-         applies then it contains only the nearest integer multiple of
-         @RI{s} (with
-         ties broken by rounding away from zero).
+         whereas if rounding applies@Chg{Version=[3],New=[,],Old=[]}
+         then it contains only the nearest integer multiple of
+         @RI{s} (with ties broken by rounding away from zero).
       @end(InnerItemize)
 
       @NoPrefix@;The close result set is an implementation-defined set of consecutive
@@ -3171,11 +3173,12 @@ predefined type.]}
 @begin{ImplAdvice}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[Implementations should implement the Solve and
 Inverse functions using established techniques such as LU decomposition with
 row interchanges followed by back and forward substitution. Implementations are
 recommended to refine the result by performing an iteration on the residuals;
-if this is done then it should be documented.]}
+if this is done@Chg{Version=[3],New=[,],Old=[]} then it should be documented.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[Solve and Inverse for Numerics.Generic_Real_Arrays should be
 implemented using established techniques such as LU decomposition and
@@ -4298,10 +4301,11 @@ calling those operations provided that the effect is the same.]}
 @begin{ImplAdvice}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[Implementations should implement the Solve and
 Inverse functions using established techniques. Implementations are recommended
 to refine the result by performing an iteration on the residuals; if this is
-done then it should be documented.]}
+done@Chg{Version=[3],New=[,],Old=[]} then it should be documented.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[Solve and Inverse for Numerics.Generic_Complex_Arrays should be
 implemented using established techniques and the result should be refined

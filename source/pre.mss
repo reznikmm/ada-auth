@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:58 $}
+@Comment{$Date: 2011/08/17 00:29:41 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.45 $}
+@comment{$Revision: 1.46 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -67,9 +67,12 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Indefinite_Multiway_Trees @em @RefSecNum{The Generic Package Containers.Indefinite_Multiway_Trees}
 ), Old=()}@\@\@\Indefinite_Ordered_Maps @em @RefSecNum{The Generic Package Containers.Indefinite_Ordered_Maps}
 @\@\@\Indefinite_Ordered_Sets @em @RefSecNum{The Generic Package Containers.Indefinite_Ordered_Sets}
-@\@\@\Indefinite_Vectors @em @RefSecNum{The Generic Package Containers.Indefinite_Vectors}
-@Chg{Version=[3],New=(@\@\@\Multiway_Trees @em @RefSecNum{The Generic Package Containers.Multiway_Trees}
-), Old=()}@\@\@\Ordered_Maps @em @RefSecNum{The Generic Package Containers.Ordered_Maps}
+@\@\@\Indefinite_Vectors @em @RefSecNum{The Generic Package Containers.Indefinite_Vectors}), Old=()}>@NewColumn@Comment{This should be conditional for version 3, but not with the current generator}
+@Noparanum@shrink<@Chg{Version=[2],New=[@Chg{Version=[3],New=[Standard (@i{...continued})
+@\Ada (@i{...continued})
+@\@\Containers (@i{...continued})
+@\@\@\Multiway_Trees @em @RefSecNum{The Generic Package Containers.Multiway_Trees}
+], Old=()}@\@\@\Ordered_Maps @em @RefSecNum{The Generic Package Containers.Ordered_Maps}
 @\@\@\Ordered_Sets @em @RefSecNum{The Generic Package Containers.Ordered_Sets}
 @Chg{Version=[3],New=(@\@\@\Synchronized_Queue_Interfaces
 @\@\@\@\@\@\@em @RefSecNum{The Generic Package Containers.Synchronized_Queue_Interfaces}
@@ -78,10 +81,10 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Unbounded_Synchronized_Queues
 @\@\@\@\@\@\@em @RefSecNum{The Generic Package Containers.Unbounded_Synchronized_Queues}
 ), Old=()}@\@\@\Vectors @em @RefSecNum{The Generic Package Containers.Vectors}
-), Old=()}>@NewColumn@Comment{This should be conditional for version 2/3, but not with the current generator}
-@Noparanum@shrink<@Chg{Version=[2],New=[Standard (@i{...continued})
+], Old=()}@Comment[** Version=[2] only: >@NewColumn@Comment{This should be conditional for version 2, but not with the current generator}
+@Noparanum@shrink<**end]@Chg{Version=[2],New=[@Chg{Version=[3],New=[],Old=[Standard (@i{...continued})
 @\Ada (@i{...continued})
-@\@\Decimal @em @RefSecNum{The Package Decimal}
+]}],Old=[]}@\@\Decimal @em @RefSecNum{The Package Decimal}
 @\@\Direct_IO @em @RefSecNum{The Generic Package Direct_IO}
 @Chg{Version=[2],New=(@\@\Directories @em @RefSecNum{The Package Directories}
 @Chg{Version=[3],New=(@\@\@\Hierarchical_File_Names @em @RefSecNum{The Package Directories.Hierarchical_File_Names}
@@ -90,9 +93,9 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\EDF @em @RefSecNum{Earliest Deadline First Dispatching}
 @Chg{Version=[3],New=[@\@\@\Non_Preemptive @em @RefSecNum{Non-Preemptive Dispatching}
 ], Old=[]}@\@\@\Round_Robin @em @RefSecNum{Round Robin Dispatching}
-), Old=()}@\@\Dynamic_Priorities @em @RefSecNum{Dynamic Priorities}
-@\@\Environment_Variables @em @RefSecNum{The Package Environment_Variables}
-], Old=()}@\@\Exceptions @em @RefSecNum{The Package Exceptions}
+), Old=()}@\@\Dynamic_Priorities @em @RefSecNum{Dynamic Priorities for Tasks}
+@Chg{Version=[2],New=(@\@\Environment_Variables @em @RefSecNum{The Package Environment_Variables}
+), Old=()}@\@\Exceptions @em @RefSecNum{The Package Exceptions}
 @Chg{Version=[2],New=(@\@\Execution_Time @em @RefSecNum{Execution Time}
 @\@\@\Group_Budgets @em @RefSecNum{Group Execution Time Budgets}
 @Chg{Version=[3],New=(@\@\@\Interrupts @em @RefSecNum{Execution Time of Interrupt Handlers}
@@ -109,7 +112,10 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\IO_Exceptions @em @RefSecNum{Exceptions in Input-Output}
 @Chg{Version=[3],New=(@\@\Iterator_Interfaces @em @RefSecNum{User-Defined Iterator Types}
 @\@\Locales @em @RefSecNum{The Package Locales}
-), Old=()}@\@\Numerics @em @RefSecNum{The Numerics Packages}
+), Old=()}>@NewColumn@Comment{This should be conditional for version 3, but not with the current generator}
+@Noparanum@shrink<@Chg{Version=[3],New=[Standard (@i{...continued})
+@\Ada (@i{...continued})
+],Old=[]}@\@\Numerics @em @RefSecNum{The Numerics Packages}
 @Chg{Version=[2],New=(@\@\@\Complex_Arrays @em @RefSecNum{Complex Vectors and Matrices}
 ), Old=()}@\@\@\Complex_Elementary_Functions @em @RefSecNum{Complex Elementary Functions}
 @\@\@\Complex_Types @em @RefSecNum{Complex Types}
@@ -128,11 +134,11 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 ), Old=()}@\@\Sequential_IO @em @RefSecNum{The Generic Package Sequential_IO}
 @\@\Storage_IO @em @RefSecNum{The Generic Package Storage_IO}
 @\@\Streams @em @RefSecNum{The Package Streams}
-@\@\@\Stream_IO @em @RefSecNum{The Package Streams.Stream_IO}>
-@NewColumn
-@Noparanum@shrink<Standard (@i{...continued})
+@\@\@\Stream_IO @em @RefSecNum{The Package Streams.Stream_IO}
+@Comment{** Version [0-2] only: >@NewColumn@Comment{This should be conditional for versions before 3, but not with the current generator}
+@Noparanum@shrink<**End}@Chg{Version=[3],New=[],Old=[Standard (@i{...continued})
 @\Ada (@i{...continued})
-@\@\Strings @em @RefSecNum{The Package Strings}
+]}@\@\Strings @em @RefSecNum{The Package Strings}
 @\@\@\Bounded @em @RefSecNum{Bounded-Length String Handling}
 @Chg{Version=[3],New=(@\@\@\@\Equal_Case_Insensitive @em @RefSecNum{String Comparison}
 ), Old=()}@Chg{Version=[2],New=(@\@\@\@\Hash @em @RefSecNum{String Hashing}
@@ -160,8 +166,12 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\@\Wide_Strings @em @RefSecNum{String Encoding}
 @\@\@\@\Wide_Wide_Strings @em @RefSecNum{String Encoding}
 ), Old=()}), Old=()}@\@\@\Wide_Bounded @em @RefSecNum{Wide_String Handling}
-@Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
-), Old=()}@\@\@\Wide_Fixed @em @RefSecNum{Wide_String Handling}
+@Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}),
+Old=()}>@NewColumn@Comment{This should be conditional for version 3, but not with the current generator}
+@Noparanum@shrink<@Chg{Version=[3],New=[Standard (@i{...continued})
+@\Ada (@i{...continued})
+@\@\Strings (@i{...continued})
+],Old=[]}@\@\@\Wide_Fixed @em @RefSecNum{Wide_String Handling}
 @Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
 @\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
 ), Old=()}@\@\@\Wide_Maps @em @RefSecNum{Wide_String Handling}
@@ -184,11 +194,11 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @Chg{Version=[2],New=(@\@\@\Generic_Dispatching_Constructor @em @RefSecNum{Tagged Types and Type Extensions}
 ), Old=()}@\@\Task_Attributes @em @RefSecNum{The Package Task_Attributes}
 @\@\Task_Identification @em @RefSecNum{The Package Task_Identification}
-@Chg{Version=[2],New=(@\@\Task_Termination @em @RefSecNum{The Package Task_Termination}), Old=()}>
+@Chg{Version=[2],New=(@\@\Task_Termination @em @RefSecNum{The Package Task_Termination}), Old=()}@Comment{** Version [2] only: >
 @NewColumn@Comment{This should be conditional for version 2, but not with the current generator}
-@Noparanum@shrink<@Chg{Version=[2],New=[Standard (@i{...continued})
+@Noparanum@shrink<  **end}@Chg{Version=[2],New=[@Chg{Version=[3],New=[],Old=[Standard (@i{...continued})
 @\Ada (@i{...continued})
-], Old=()}@\@\Text_IO @em @RefSecNum{The Package Text_IO}
+]}], Old=()}@\@\Text_IO @em @RefSecNum{The Package Text_IO}
 @Chg{Version=[2],New=(@\@\@\Bounded_IO @em @RefSecNum{Input-Output for Bounded Strings}
 ),Old=()}@\@\@\Complex_IO @em @RefSecNum{Complex Input-Output}
 @\@\@\Editing @em @RefSecNum{The Package Text_IO.Editing}
@@ -214,6 +224,7 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Wide_Wide_Bounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @\@\@\Wide_Wide_Unbounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}), Old=()}>
 
+@NewColumn@Comment{This should be conditional for version 3, but not with the current generator}
 @Noparanum@shrink<@\Interfaces @em @RefSecNum{The Package Interfaces}
 @\@\C @em @RefSecNum{Interfacing with C and C++}
 @\@\@\Pointers @em @RefSecNum{The Generic Package Interfaces.C.Pointers}
@@ -221,6 +232,7 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\COBOL @em @RefSecNum{Interfacing with COBOL}
 @\@\Fortran @em @RefSecNum{Interfacing with Fortran}>
 
+@NewColumn@Comment{This should be conditional for version 3, but not with the current generator}
 @Noparanum@shrink<@\System @em @RefSecNum{The Package System}
 @\@\Address_To_Access_Conversions @em @RefSecNum{The Package System.Address_To_Access_Conversions}
 @\@\Machine_Code @em @RefSecNum{Machine Code Insertions}

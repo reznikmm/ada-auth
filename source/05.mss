@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:57 $}
+@Comment{$Date: 2011/08/17 00:29:39 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.48 $}
+@Comment{$Revision: 1.49 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -625,6 +625,7 @@ A @nt{condition} is expected to be of any boolean type.]}
 @end{Resolution}
 
 @begin{RunTime}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @PDefn2{Term=[execution], Sec=(if_statement)}
 For the execution of an @nt{if_statement}, the @nt{condition} specified
 after @key{if}, and any @nt{condition}s specified after @key{elsif}, are
@@ -633,8 +634,9 @@ evaluated in succession (treating a final @key{else} as @key{elsif} True
 all @nt{condition}s are evaluated and
 yield False.
 If a @nt{condition} evaluates to True, then the
-corresponding @nt{sequence_of_statements} is executed; otherwise none of
-them is executed.
+corresponding @nt{sequence_of_statements} is executed;
+otherwise@Chg{Version=[3],New=[,],Old=[]}
+none of them is executed.
 @begin{Ramification}
   The part about all evaluating to False can't happen if
   there is an @key{else}, since that is herein considered equivalent to

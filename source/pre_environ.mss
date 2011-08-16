@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_environ.mss,v $ }
-@comment{ $Revision: 1.9 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
+@comment{ $Revision: 1.10 $ $Date: 2011/08/17 00:29:40 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:37 $}
+@Comment{$Date: 2011/08/17 00:29:40 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Environment_Variables]}
 
@@ -70,9 +70,12 @@ propagated.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00370-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If the external execution environment
 supports environment variables and an environment variable with the given name
-currently exists, then Exists returns True; otherwise it returns False.]}
+currently exists, then Exists returns True;
+otherwise@Chg{Version=[3],New=[,],Old=[]}
+it returns False.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -80,10 +83,12 @@ currently exists, then Exists returns True; otherwise it returns False.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00370-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If the external execution
 environment supports environment variables, then Set first clears any existing
 environment variable with the given name, and then defines a single new
-environment variable with the given name and value. Otherwise Program_Error is
+environment variable with the given name and value.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} Program_Error is
 propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -108,9 +113,11 @@ Clear.],Old=[]}]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00370-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If the external execution
 environment supports environment variables, then Clear deletes all existing
-environment variable with the given name. Otherwise Program_Error is
+environment variable with the given name.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} Program_Error is
 propagated.]}
 
 @begin{Example}
@@ -119,10 +126,12 @@ propagated.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00370-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If the external execution
 environment supports environment variables,
-then Clear deletes all existing environment variables. Otherwise Program_Error
-is propagated.]}
+then Clear deletes all existing environment variables.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} Program_Error is
+propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -132,10 +141,13 @@ is propagated.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00370-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If the external execution environment supports
 environment variables, then Iterate calls the subprogram designated by Process
 for each existing environment variable, passing the name and value of that
-environment variable. Otherwise Program_Error is propagated.]}
+environment variable.
+Otherwise@Chg{Version=[3],New=[,],Old=[]} Program_Error is
+propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[If several environment variables exist that have

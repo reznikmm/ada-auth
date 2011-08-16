@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.101 $ $Date: 2011/08/13 04:53:58 $ $Author: randy $ }
+@comment{ $Revision: 1.102 $ $Date: 2011/08/17 00:29:41 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2011/08/13 04:53:58 $}
+@Comment{$Date: 2011/08/17 00:29:41 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -99,29 +99,35 @@ This Annex is new to Ada 95.
 In addition, the methods for specifying priorities are defined.]
 @end{Intro}
 
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2
+through 6 were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 @begin{Syntax}
 @begin{SyntaxText}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Type=[Leading],KeepNext=[T],Text=[The form of a
 @nt{pragma} Priority is as follows:]}
 @end{SyntaxText}
 
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Priority)(@Syn2{expression});']}
 
 @begin{SyntaxText}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Type=[Leading],KeepNext=[T],Text=[The form of a
 @nt{pragma} Interrupt_Priority is as follows:]}
 @end{SyntaxText}
 
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Interrupt_Priority)[(@Syn2{expression})];']}
 @end{Syntax}
 
 @begin{Resolution}
 
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[@PDefn2{Term=[expected type],
   Sec=(Priority pragma argument)}
 @PDefn2{Term=[expected type],
@@ -1210,10 +1216,10 @@ language-defined library package exists:]}
 @key<end> Ada.Dispatching.Non_Preemptive;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0166-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0166-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Text=[A call of Yield_To_Higher is a task dispatching
 point for this policy. If the task at the head of the highest priority ready
-queue has a higher active priority than the calling task then the calling task
+queue has a higher active priority than the calling task, then the calling task
 is preempted.]}
 
 @begin{Ramification}
@@ -1408,9 +1414,11 @@ If no quantum is set for a Round Robin priority level, Default_Quantum is used.]
 quantum used by the implementation for the priority level Pri.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The function Is_Round_Robin returns True if
 priority Pri is covered by task dispatching policy
-Round_Robin_Within_Priorities; otherwise it returns False.]}
+Round_Robin_Within_Priorities; otherwise@Chg{Version=[3],New=[,],Old=[]}
+it returns False.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
 @ChgAdded{Version=[2],Text=[A call of Actual_Quantum or Set_Quantum raises
@@ -1571,17 +1579,23 @@ this scheme including the case where the newly released task should execute
 before some existing tasks but not preempt the currently executing task.]}
 @end{MetaRules}
 
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 3
+through 6 were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 @begin{Syntax}
 
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Type=[Leading],Keepnext=[T],Text=[@Chg{Version=[2],New=[The
 form of a @nt{pragma} Relative_Deadline is as follows:],Old=[]}]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=`@Chg{Version=[2],New=[@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Relative_Deadline> (@SynI{relative_deadline_}@Syn2{expression});'],Old=[]}'}
 
 @end{Syntax}
@@ -1589,7 +1603,7 @@ form of a @nt{pragma} Relative_Deadline is as follows:],Old=[]}]}
 @begin{Resolution}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[The expected type for
 @SynI{relative_deadline_}@nt{expression} is Real_Time.Time_Span.],Old=[]}]}
 
@@ -1598,7 +1612,7 @@ form of a @nt{pragma} Relative_Deadline is as follows:],Old=[]}]}
 @begin{Legality}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[A Relative_Deadline pragma
 is allowed only immediately within a @nt{task_definition} or
 the @nt{declarative_part} of a @nt{subprogram_body}. At most one such pragma
@@ -1708,10 +1722,10 @@ the value of Real_Time.Clock +
 @Chg{Version=[3],New=[@nt{expression} that is the value of the
 aspect],Old=[@SynI{relative_deadline_}@nt{expression}]}, where
 @Chg{Version=[3],New=[this entire expression, including ],Old=[]}the
-the call of Real_Time.Clock @Chg{Version=[3],New=[, is evaluated],Old=[is made]}
+call of Real_Time.Clock @Chg{Version=[3],New=[, is evaluated],Old=[is made]}
 between task creation and the start of its activation. If
 @Chg{Version=[3],New=[the aspect],Old=[there is no]}
-Relative_Deadline @Chg{Version=[3],New=[is not specified],Old=[pragma]}
+Relative_Deadline @Chg{Version=[3],New=[is not specified,],Old=[pragma]}
 then the initial absolute deadline of a task is the
 value of Default_Deadline. The environment task is also given
 an initial deadline by this rule@Chg{Version=[3],New=[, using the value of
@@ -1867,9 +1881,11 @@ of a task to be delayed for a multiprocessor.]}]}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If two adjacent priority ranges, @i<A>..@i<B> and
 @i<B>+1..@i<C> are specified to have policy
-EDF_Across_Priorities then this is not equivalent to this policy being
+EDF_Across_Priorities@Chg{Version=[3],New=[,],Old=[]} then
+this is not equivalent to this policy being
 specified for the single range, @i<A>..@i<C>.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
@@ -2806,8 +2822,9 @@ be changed by an assignment].]}
 
 @begin{Runtime}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If the locking policy Ceiling_Locking (see
-@RefSecNum{Priority Ceiling Locking}) is in effect
+@RefSecNum{Priority Ceiling Locking}) is in effect@Chg{Version=[3],New=[,],Old=[]}
 then the ceiling priority of a protected object @i<P> is set to the value of
 @i<P>'Priority at the end of each protected action of @i<P>.]}
 
@@ -3967,7 +3984,7 @@ Text=[The metrics for delay statements.]}]}
 
 @begin{Notes}
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00355-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00355-01]}
 @ChgDeleted{Version=[2],Text=[The execution time of a @nt{delay_statement} that
 does not cause the task to be blocked (e.g. @lquotes@;@key[delay]
 0.0;@rquotes@; ) is of interest in situations where delays are used to achieve
@@ -4498,7 +4515,7 @@ Text=[The metrics for entry-less protected objects.]}]}
 
 
 @Comment{TBD: @LabeledAddedRevisedClause{Version=[3],OldVersion=[2],New=[The Ravenscar Profile],Old=[Run-time Profiles]}}
-@LabeledAddedClause{Version=[2],Name=[Run-time Profiles]}
+@LabeledAddedClause{Version=[3],Name=[The Ravenscar Profile]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
@@ -4508,16 +4525,22 @@ Text=[The metrics for entry-less protected objects.]}]}
 Old=[specifies a mechanism for defining run-time profiles.]}]]}
 @end{Intro}
 
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 2
+and 3 were moved to @RefSec{Pragma Restrictions and Pragma Profile}.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 @begin{Syntax}
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0246-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0246-1]}
 @ChgDeleted{Version=[3],Type=[Leading],Keepnext=[T],Text=[@Chg{Version=[2],New=[The
 form of a @nt{pragma} Profile is as follows:],Old=[]}]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=`@Chg[Version=[2],New=[
 @AddedPragmaSyn`Version=[2],@key{pragma} @prag<Profile> (@SynI{profile_}@Syn2{identifier} {, @SynI{profile_}@Syn2{pragma_argument_association}});'],Old=[]]'}
 
@@ -5139,18 +5162,20 @@ execution-time clock are allocated and initialized. If this operation would
 exceed the available resources, Timer_Resource_Error is raised.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The procedures Set_Handler associate the handler
-Handler with the timer TM; if Handler is @key[null], the timer is cleared,
-otherwise it is set. The first procedure Set_Handler loads the timer TM with an
-interval specified by the Time_Span parameter. In this mode, the timer TM
-@i<expires> when the execution time of the task identified by TM.T.@key[all]
-has increased by In_Time; if In_Time is less than or equal to zero, the timer
-expires immediately. The second procedure Set_Handler loads the timer TM with
-the absolute value specified by At_Time. In this mode, the timer TM expires
-when the execution time of the task identified by TM.T.@key[all] reaches
-At_Time; if the value of At_Time has already been reached when Set_Handler is
-called, the timer expires immediately.@Defn2{Term=[expires],
-Sec=[execution timer]}]}
+Handler with the timer TM@Chg{Version=[3],New=[:],Old=[;]}
+if Handler is @key[null], the timer is cleared@Chg{Version=[3],New=[;],Old=[,]}
+otherwise@Chg{Version=[3],New=[,],Old=[]} it is set. The first procedure
+Set_Handler loads the timer TM with an interval specified by the Time_Span
+parameter. In this mode, the timer TM @i<expires> when the execution time of the
+task identified by TM.T.@key[all] has increased by In_Time; if In_Time is less
+than or equal to zero, the timer expires immediately. The second procedure
+Set_Handler loads the timer TM with the absolute value specified by At_Time. In
+this mode, the timer TM expires when the execution time of the task identified
+by TM.T.@key[all] reaches At_Time; if the value of At_Time has already been
+reached when Set_Handler is called, the timer expires
+immediately.@Defn2{Term=[expires], Sec=[execution timer]}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5174,19 +5199,23 @@ executed, passing the timer as parameter. The initial action of the execution
 of the handler is to clear the event.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The function Current_Handler returns the handler
-associated with the timer TM if that timer is set; otherwise it returns
-@b<null>.]}
+associated with the timer TM if that timer is set;
+otherwise@Chg{Version=[3],New=[,],Old=[]} it returns @b<null>.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The procedure Cancel_Handler clears the timer if it
 is set. Cancelled is assigned True if the timer was set prior to it being
-cleared; otherwise it is assigned False.]}
+cleared; otherwise@Chg{Version=[3],New=[,],Old=[]}
+it is assigned False.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The function Time_Remaining returns the execution
 time interval that remains until the timer TM would expire, if that timer is
-set; otherwise it returns Time_Span_Zero.]}
+set; otherwise@Chg{Version=[3],New=[,],Old=[]} it returns Time_Span_Zero.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],Text=[The constant Min_Handler_Ceiling is the
@@ -5246,9 +5275,10 @@ system resources used by the timer shall be deallocated.]}
 @begin{ImplPerm}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[Implementations may limit the number of timers that
-can be defined for each task. If this limit is exceeded then
-Timer_Resource_Error is raised.]}
+can be defined for each task. If this limit is exceeded@Chg{Version=[3],New=[,],Old=[]}
+then Timer_Resource_Error is raised.]}
 
 @end{ImplPerm}
 
@@ -5393,12 +5423,17 @@ GB, Group_Budget_Error is raised. After successful execution of this procedure,
 the task is no longer a member of any group.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The function Is_Member returns True if the task
-identified by T is a member of the group GB; otherwise it return False.]}
+identified by T is a member of the group GB;
+otherwise@Chg{Version=[3],New=[,],Old=[]} it
+@Chg{Version=[3],New=[returns],Old=[return]} False.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The function Is_A_Group_Member returns True if the
-task identified by T is a member of some group; otherwise it returns False.]}
+task identified by T is a member of some group;
+otherwise@Chg{Version=[3],New=[,],Old=[]} it returns False.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
 @ChgAdded{Version=[2],Text=[The function Members returns an array of values of
@@ -5425,9 +5460,10 @@ the budget going to Time_Span_Zero causes the associated handler to be executed
 if the handler of the group budget GB is set.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The function Budget_Has_Expired returns True if the
-budget of group GB is exhausted (equal to Time_Span_Zero); otherwise it
-returns False.]}
+budget of group GB is exhausted (equal to Time_Span_Zero);
+otherwise@Chg{Version=[3],New=[,],Old=[]} it returns False.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
 @ChgAdded{Version=[2],Text=[The function Budget_Remaining returns the remaining
@@ -5435,9 +5471,12 @@ budget for the group GB. If the budget is exhausted it returns Time_Span_Zero.
 This is the minimum value for a budget.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The procedure Set_Handler associates the handler
-Handler with the Group_Budget GB; if Handler is @b<null>, the handler of
-Group_Budget is cleared, otherwise it is set.]}
+Handler with the Group_Budget GB@Chg{Version=[3],New=[:],Old=[;]}
+if Handler is @b<null>, the handler of
+Group_Budget is cleared@Chg{Version=[3],New=[;],Old=[,]}
+otherwise@Chg{Version=[3],New=[,],Old=[]} it is set.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
 @ChgAdded{Version=[2],Text=[A call of Set_Handler for a Group_Budget that
@@ -5445,15 +5484,17 @@ already has a handler set replaces the handler; if Handler is not @b<null>, the
 handler for Group_Budget remains set.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The function Current_Handler returns the handler
 associated with the group budget GB if the handler for that group budget is
-set; otherwise it returns @b<null>.]}
+set; otherwise@Chg{Version=[3],New=[,],Old=[]} it returns @b<null>.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The procedure Cancel_Handler clears the handler for
 the group budget if it is set. Cancelled is assigned True if the handler for
-the group budget was set prior to it being cleared; otherwise it is assigned
-False.]}
+the group budget was set prior to it being cleared;
+otherwise@Chg{Version=[3],New=[,],Old=[]} it is assigned False.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
 @ChgAdded{Version=[2],Text=[The constant Min_Handler_Ceiling is the
@@ -5471,9 +5512,10 @@ Group_Budget all member tasks are removed from the group identified by that
 object.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If a task is a member of a Group_Budget when it
-terminates then as part of the finalization of the task it is removed from the
-group.]}
+terminates@Chg{Version=[3],New=[,],Old=[]} then
+as part of the finalization of the task it is removed from the group.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
 @ChgAdded{Version=[2],Text=[For all the operations defined in this package,
@@ -5591,10 +5633,10 @@ execution time of the interrupt identified by Interrupt. If
 Separate_Interrupt_Clocks_Supported is set to False the function raises
 Program_Error.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Text=[The function Supported returns True if the
 implementation is monitoring the execution time of the interrupt identified by
-Interrupt. Otherwise it returns False. For any Interrupt_Id Interrupt for which
+Interrupt; otherwise, it returns False. For any Interrupt_Id Interrupt for which
 Supported(Interrupt) returns False, the function Clock(Interrupt) will return a
 value equal to Ada.Execution_Time.Time_Of(0).]}
 
@@ -5715,11 +5757,14 @@ occurs. Such a protected procedure is called a @i{handler}.
 @begin{Runtime}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The procedures Set_Handler associate the handler
-Handler with the event Event; if Handler is @key{null}, the event is cleared,
-otherwise it is set. The first procedure Set_Handler sets the execution time
-for the event to be At_Time. The second procedure Set_Handler sets the
-execution time for the event to be Real_Time.Clock + In_Time.]}
+Handler with the event Event@Chg{Version=[3],New=[:],Old=[;]} if Handler
+is @key{null}, the event is cleared@Chg{Version=[3],New=[;],Old=[,]}
+otherwise@Chg{Version=[3],New=[,],Old=[]} it is set. The first procedure
+Set_Handler sets the execution time for the event to be At_Time. The second
+procedure Set_Handler sets the execution time for the event to be
+Real_Time.Clock + In_Time.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],Text=[A call of a procedure Set_Handler for an event that
@@ -5748,9 +5793,10 @@ Handler.@key{all} is Interrupt_Priority'Last. If the check fails, Program_Error
 is raised.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0094-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0094-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[If a procedure Set_Handler is called with zero or
-negative In_Time or with At_Time indicating a time in the past then the handler
+negative In_Time or with At_Time indicating a time in the
+past@Chg{Version=[3],New=[,],Old=[]} then the handler
 is executed @Chg{Version=[3],New=[as soon as possible after the completion of],
 Old=[immediately by the task executing]} the call of Set_Handler.@Chg{Version=[3],
 New=[],Old=[ The timing event Event is cleared.]}]}
@@ -5770,18 +5816,22 @@ before the new handler can start executing.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The function Current_Handler returns the handler
-associated with the event Event if that event is set; otherwise it returns
-@key{null}.]}
+associated with the event Event if that event is set;
+otherwise@Chg{Version=[3],New=[,],Old=[]} it returns @key{null}.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The procedure Cancel_Handler clears the event if it
 is set. Cancelled is assigned True if the event was set prior to it being
-cleared; otherwise it is assigned False.]}
+cleared; otherwise@Chg{Version=[3],New=[,],Old=[]} it is assigned False.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Text=[The function Time_Of_Event returns the time of the
-event if the event is set; otherwise it returns Real_Time.Time_First.]}
+event if the event is set;
+otherwise@Chg{Version=[3],New=[,],Old=[]} it returns Real_Time.Time_First.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],Text=[As part of the finalization of an object
@@ -5978,10 +6028,10 @@ defined on which processor the environment task executes.]}
 Text=[The processor on which the environment task executes in the absence of a
 value for the aspect CPU.]}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Text=[The CPU value determines the processor on which the
 task will activate and execute; the task is said to be assigned to that
-processor. If the CPU value is Not_A_Specific_CPU then the task is not assigned
+processor. If the CPU value is Not_A_Specific_CPU, then the task is not assigned
 to a processor. A task without a CPU aspect specified will activate and execute on the
 same processor as its activating task if the activating task is assigned a
 processor. If the CPU value is not in the range of

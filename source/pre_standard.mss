@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.38 $ $Date: 2011/08/06 05:45:24 $ $Author: randy $ }
+@comment{ $Revision: 1.39 $ $Date: 2011/08/17 00:29:41 $ $Author: randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2011/08/06 05:45:24 $}
+@Comment{$Date: 2011/08/17 00:29:41 $}
 
 @Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
 @LabeledClause{The Package Standard}
@@ -222,8 +222,8 @@ the visible part of package Standard.}
       @RI[st],@\@RI[osc],@\@RI[pm],@\@RI[apc],@\@\@\@\@\--@RI{156 (16#9C#) .. 159 (16#9F#)}
 @comment{blank line}
       ' ',@\'@latin1(161)',@\'@latin1(162)',@\'@latin1(163)',@\'@latin1(164)',@\'@latin1(165)',@\'@latin1(166)',@\'@latin1(167)',@\--@RI{160 (16#A0#) .. 167 (16#A7#)}
-      '@latin1(168)',@\'@latin1(169)',@\'@latin1(170)',@\'@latin1(171)',@Chg{Version=[3],New=[@\@\@\--@RI{168 (16#A8#) .. 171 (16#AB#)}
-      @latin1(172)',@\@RI[soft_hyphen],@\'@latin1(174)',@\'@latin1(175)',@\@\@\--@RI{172 (16#AC#) .. 175 (16#AF#)}],Old=[@\'@latin1(172)',@\'@latin1(173)',@\'@latin1(174)',@\'@latin1(175)',@\--@RI{168 (16#A8#) .. 175 (16#AF#)}]}
+      '@latin1(168)',@\'@latin1(169)',@\'@latin1(170)',@\'@latin1(171)',@Chg{Version=[3],New=[@\@\@\@\@\--@RI{168 (16#A8#) .. 171 (16#AB#)}
+      @latin1(172)',@\@RI[soft_hyphen],@\'@latin1(174)',@\'@latin1(175)',@\@\@\@\--@RI{172 (16#AC#) .. 175 (16#AF#)}],Old=[@\'@latin1(172)',@\'@latin1(173)',@\'@latin1(174)',@\'@latin1(175)',@\--@RI{168 (16#A8#) .. 175 (16#AF#)}]}
 @comment{blank line}
       '@latin1(176)',@\'@latin1(177)',@\'@latin1(178)',@\'@latin1(179)',@\'@latin1(180)',@\'@latin1(181)',@\'@latin1(182)',@\'@latin1(183)',@\--@RI{176 (16#B0#) .. 183 (16#B7#)}
       '@latin1(184)',@\'@latin1(185)',@\'@latin1(186)',@\'@latin1(187)',@\'@latin1(188)',@\'@latin1(189)',@\'@latin1(190)',@\'@latin1(191)',@\--@RI{184 (16#B8#) .. 191 (16#BF#)}

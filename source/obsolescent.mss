@@ -1,10 +1,10 @@
  @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:58 $}
+@Comment{$Date: 2011/08/17 00:29:41 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -101,10 +101,11 @@ The following @nt{library_unit_renaming_declaration}s exist:
 @key[with] System.Machine_Code;
 @key[package] Machine_Code @key[renames] System.Machine_Code; --@RI{ If supported.}
 @end{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1]}
 @begin{Discussion}
-@ChgAdded{Version=[3],Text=[These library units correspond to those declared in
-Ada 83, which did not have the child unit concept or the parent package Ada.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1]}
+  @ChgAdded{Version=[3],Text=[These library units correspond to those declared
+  in Ada 83, which did not have the child unit concept or the parent package
+  Ada.]}
 @end{Discussion}
 @end{StaticSem}
 

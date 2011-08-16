@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2011/07/29 05:59:20 $}
+@Comment{$Date: 2011/08/17 00:29:40 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2292,9 +2292,10 @@ inherited from an interface type)],Old=[]}.
 @Chg{New=[@nt{prefix}],Old=[prefix]} S that denotes a formal indefinite subtype]},
 the following attribute is defined:
 @begin{Description}
-@Attribute{Prefix=<S>, AttrName=<Definite>,
+@ChgAttribute{Version=[3],Kind=(Revised),ChginAnnex=[T],Leading=[F],
+Prefix=<S>, AttrName=<Definite>,ARef=[AI05-0264-1],
   Text=[S'Definite yields True if the actual subtype corresponding
-    to S is definite; otherwise it yields False. The value of this
+    to S is definite; otherwise@Chg{Version=[3],New=[,],Old=[]} it yields False. The value of this
     attribute is of the predefined type Boolean.]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
