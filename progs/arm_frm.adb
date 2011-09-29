@@ -282,8 +282,8 @@ package body ARM_Format is
 	    return T;
 	else
 	    Allocated_Reference_Count := Allocated_Reference_Count + 1;
-	    if Allocated_Reference_Count > 10 then -- Never more than this on one paragraph.
-                Ada.Text_IO.Put_Line ("  ** Too many referenced allocated");
+	    if Allocated_Reference_Count > 20 then -- Never more than this on one paragraph.
+                Ada.Text_IO.Put_Line ("  ** Too many references allocated");
 	    end if;
 	    return new Reference;
 	end if;
@@ -3279,7 +3279,11 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		        ARM_Input.Get_Char (Input_Object, Ch);
 		        if Ch /= Close_Ch then
 			    Len := Len + 1;
-			    Ref_Name(Len) := Ch;
+			    if Len > Ref_Name'Last then
+			        Ada.Text_IO.Put_Line ("  ** Reference too long on line " & ARM_Input.Line_String (Input_Object));
+			    else
+				Ref_Name(Len) := Ch;
+			    end if;
 		        else -- End of the reference.
 			    if Len = 0 then
 			        Ada.Text_IO.Put_Line ("  ** Failed to find reference on line " & ARM_Input.Line_String (Input_Object));
@@ -3330,13 +3334,49 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 	        -- of Revised, Added, or Deleted, and this is followed
 	        -- by the text. As usual, any of the
 	        -- allowed bracketing characters can be used.
-	        Close_Ch : Character;
-	        Kind : ARM_Database.Paragraph_Change_Kind_Type;
-	        Version : ARM_Contents.Change_Version_Type;
-	        Display_It : Boolean;
+	        Close_Ch     : Character;
+	        Kind         : ARM_Database.Paragraph_Change_Kind_Type;
+	        Version	     : ARM_Contents.Change_Version_Type;
+	        Display_It   : Boolean;
 		use type ARM_Database.Paragraph_Change_Kind_Type;
 		Local_Change : ARM_Output.Change_Type;
-		Skip_Header : Boolean := False;
+		Skip_Header  : Boolean := False;
+		Key          : ARM_Index.Index_Key;
+
+
+		Index_It     : Boolean := For_Aspect;
+			-- Do we need to index this aspect?
+		Save_Num     : Boolean;
+
+		procedure Try_Index is
+		    -- Try to index this item; we can only do that when
+		    -- we're in a paragraph.
+		begin
+		    if not Index_It then
+			return; -- Don't need to index it, or already did.
+		    end if;
+		    if not Format_Object.In_Paragraph then
+			return; -- Not in a paragraph.
+		    end if;
+
+		    ARM_Index.Add (Term => "aspects",
+				   Subterm => Format_Object.Aspect_Name (1 .. Format_Object.Aspect_Name_Len),
+				   Kind => ARM_Index.Primary_Term_and_Subterm,
+				   Clause => Clause_String (Format_Object),
+				   Paragraph => Paragraph_String,
+				   Key => Key);
+		    ARM_Output.Index_Target (Output_Object, Key);
+
+		    ARM_Index.Add (Term => Format_Object.Aspect_Name (1 .. Format_Object.Aspect_Name_Len) & " aspect",
+				   Kind => ARM_Index.Primary_Term,
+				   Clause => Clause_String (Format_Object),
+				   Paragraph => Paragraph_String,
+				   Key => Key);
+		    ARM_Output.Index_Target (Output_Object, Key);
+
+		    Index_It := False; -- Indexing done.
+	        end Try_Index;
+
 	    begin
 	        Get_Change_Version (Is_First => True,
 		    Version => Version);
@@ -3459,6 +3499,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		        end;
 		    end if;
 
+		    Try_Index; -- If there is an open paragraph, we want to index there.
+
 		    if Display_It then
 		        Check_End_Paragraph; -- End any paragraph that we're in.
 		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph := Format_Object.Last_Paragraph_Subhead_Type;
@@ -3524,13 +3566,55 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		                ARM_Output.Text_Format (Output_Object,
 							Local_Format);
 			    end;
+
+			    Try_Index; -- Second choice, this at least works.
 			-- else no additional text.
 			end if;
 		    else -- Don't display, skip the text:
 		        ARM_Input.Skip_until_Close_Char (Input_Object,
 			    Close_Ch);
 		        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
+
+			if not Format_Object.In_Paragraph then
+			    -- We have to open a paragraph in order to have somewhere to index this.
+			    -- Looks like trouble; we'll open an annotation
+			    -- paragraph for this purpose (even if we aren't using
+			    -- those).
+		            Check_End_Paragraph; -- End any paragraph that we're in.
+		            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph := Format_Object.Last_Paragraph_Subhead_Type;
+		            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph := Format_Object.Next_Paragraph_Subhead_Type;
+		            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Paragraph_Format := Format_Object.Next_Paragraph_Format_Type;
+		            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops := Format_Object.Paragraph_Tab_Stops;
+		            Format_Object.Next_Paragraph_Format_Type := Bare_Annotation;
+		            Format_Object.Next_Paragraph_Subhead_Type := Bare_Annotation;
+		            Format_Object.Next_Paragraph_Version := Format_Object.Impdef_Version;
+		            Format_Object.Next_Paragraph_Change_Kind := Format_Object.Impdef_Change_Kind;
+		            Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
+			    Save_Num := Format_Object.No_Para_Num;
+			    Format_Object.No_Para_Num := True;
+		            Check_Paragraph;
+		            Format_Object.Last_Paragraph_Subhead_Type := Bare_Annotation;
+		            Format_Object.Last_Non_Space := False;
+			    Try_Index; -- Oughta work.
+			    Check_End_Paragraph; -- Close the paragraph, kill off the annotation.
+			    if Format_Object.Next_Paragraph_Subhead_Type /=
+				    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph then
+			        Format_Object.Last_Paragraph_Subhead_Type :=
+				    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph;
+			    -- else still in same subhead, leave alone. (If
+			    -- we didn't do this, we'd output the subhead
+			    -- multiple times).
+			    end if;
+		            Format_Object.Next_Paragraph_Subhead_Type :=
+ 		                Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph;
+		            Format_Object.Next_Paragraph_Format_Type :=
+		                Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Paragraph_Format;
+		            Format_Object.Paragraph_Tab_Stops :=
+		                Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops;
+			    Format_Object.No_Para_Num := Save_Num;
+			end if;
 		    end if;
+
 	        -- else no parameter. Weird.
 	        end if;
 	    end Gen_Chg_xxxx;
@@ -7899,7 +7983,11 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				        ARM_Input.Get_Char (Input_Object, Ch);
 				        if Ch /= Close_Ch then
 					    Len := Len + 1;
-					    Ref_Name(Len) := Ch;
+					    if Len > Ref_Name'Last then
+					        Ada.Text_IO.Put_Line ("  ** Reference too long on line " & ARM_Input.Line_String (Input_Object));
+					    else
+						Ref_Name(Len) := Ch;
+					    end if;
 				        else -- End of the reference.
 					    if Len = 0 then
 					        Ada.Text_IO.Put_Line ("  ** Failed to find reference on line " & ARM_Input.Line_String (Input_Object));
@@ -8126,6 +8214,11 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			ARM_Input.Get_Char (Input_Object, Ch);
 			while Ch /= Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char loop
 			    Len := Len + 1;
+			    if Len > Value'Last then
+			        Ada.Text_IO.Put_Line ("  ** Latin-1 value too long on line " &
+							    ARM_Input.Line_String (Input_Object));
+				exit;
+			    end if;
 			    Value(Len) := Ch;
 			    ARM_Input.Get_Char (Input_Object, Ch);
 			end loop;
@@ -8153,6 +8246,11 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			ARM_Input.Get_Char (Input_Object, Ch);
 			while Ch /= Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char loop
 			    Len := Len + 1;
+			    if Len > Value'Last then
+			        Ada.Text_IO.Put_Line ("  ** Unicode value too long on line " &
+							    ARM_Input.Line_String (Input_Object));
+				exit;
+			    end if;
 			    Value(Len) := Ch;
 			    ARM_Input.Get_Char (Input_Object, Ch);
 			end loop;
@@ -8811,7 +8909,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    case Format_Object.Impdef_Change_Kind is
 			when ARM_Database.None | ARM_Database.Revised |
 			     ARM_Database.Revised_Inserted_Number =>
-			    if Format_Object.Number_Paragraphs then
+			    if Format_Object.Number_Paragraphs and (not For_Aspect) then
 				return " See @RefSecbyNum{" & DB_Clause_String & "}(" &
 				    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
 				    ").";
@@ -8819,7 +8917,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				return " See @RefSecbyNum{" & DB_Clause_String & "}.";
 			    end if;
 			when ARM_Database.Inserted | ARM_Database.Inserted_Normal_Number =>
-			    if Format_Object.Number_Paragraphs then
+			    if Format_Object.Number_Paragraphs and (not For_Aspect) then
 				return "@Chg{Version=[" & Format_Object.Impdef_Version &
 			            "], New=[ See @RefSecbyNum{" & DB_Clause_String & "}(" &
 				    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
@@ -8832,7 +8930,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			     ARM_Database.Deleted_Inserted_Number |
 			     ARM_Database.Deleted_No_Delete_Message |
 			     ARM_Database.Deleted_Inserted_Number_No_Delete_Message =>
-			    if Format_Object.Number_Paragraphs then
+			    if Format_Object.Number_Paragraphs and (not For_Aspect) then
 				return "@Chg{Version=[" & Format_Object.Impdef_Version &
 				    "], New=[],Old=[ See @RefSecbyNum{" & DB_Clause_String & "}(" &
 				    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &

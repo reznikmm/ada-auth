@@ -10,7 +10,7 @@ package body ARM_Input is
     -- or other entity, and routines to lex the input entities.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2011  AXE Consultants.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -47,6 +47,9 @@ package body ARM_Input is
     -- 12/06/04 - RLB - Expanded Check_One_of_Parameter_Names to take up to
     --			five names.
     --  1/26/05 - RLB - Fixed so that quoted parameters can be skipped.
+    --  8/16/11 - RLB - Added code so that looping operations stop when
+    --			the input is empty. (Otherwise, bad comments cause
+    --			an infinite loop.)
 
     function Is_Open_Char (Open_Char : in Character) return Boolean is
 	-- Return True if character is a parameter opening character
@@ -155,6 +158,10 @@ package body ARM_Input is
 	    elsif Ch = Close_Char then
 	        exit when Start_Ch_Count = 0;
 	        Start_Ch_Count := Start_Ch_Count - 1;
+	    elsif Ch = Ascii.SUB then -- End of file, quit immediately.
+	        Ada.Text_IO.Put_Line ("  ** End of file when recording string on line " &
+			ARM_Input.Line_String (Input_Object));
+		exit;
 	    end if;
 	    if Len >= Buffer'Length then
 	        Ada.Text_IO.Put_Line ("  ** String buffer overflow on line " &
@@ -189,18 +196,32 @@ package body ARM_Input is
 	else
 	    Start_Ch := ARM_Input.Get_Open_Char (Close_Char);
 	end if;
+--Ada.Text_IO.Put_Line ("?? Skip: Start=" & Start_Ch & "; Close=" & Close_Char & " on line " &
+--   ARM_Input.Line_String (Input_Object));
         ARM_Input.Get_Char (Input_Object, Ch);
         loop
 	    if Ch = Start_Ch then
 	        -- In case an inner command uses the same
 	        -- start/end character.
 	        Start_Ch_Count := Start_Ch_Count + 1;
+--Ada.Text_IO.Put_Line ("?? Skip: Start found, cnt=" & Natural'Image(Start_Ch_Count) & " on line " &
+--   ARM_Input.Line_String (Input_Object));
 	    elsif Ch = Close_Char then
+--if Start_Ch_Count = 0 then
+--Ada.Text_IO.Put_Line ("?? Skip: Close found on line " &
+--   ARM_Input.Line_String (Input_Object));
+--end if;
 	        exit when Start_Ch_Count = 0;
 	        Start_Ch_Count := Start_Ch_Count - 1;
+--Ada.Text_IO.Put_Line ("?? Skip: Close found, cnt=" & Natural'Image(Start_Ch_Count) & " on line " &
+--   ARM_Input.Line_String (Input_Object));
+	    elsif Ch = Ascii.SUB then -- End of file, quit immediately.
+	        Ada.Text_IO.Put_Line ("  ** End of file when skipping to end on line " &
+			ARM_Input.Line_String (Input_Object));
+		exit;
 	    end if;
 	    -- Ignore everything until the end character
-	    -- turns up.
+	    -- turns up (or the end of file).
 	    ARM_Input.Get_Char (Input_Object, Ch);
         end loop;
     end Skip_until_Close_Char;

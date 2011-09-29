@@ -811,10 +811,13 @@ procedure Scan (Format_Object : in out Format_Type;
 		end;
 
 	    when Comment =>
+--Ada.Text_IO.Put_Line("Comment with Close=" & Nesting_Stack(Nesting_Stack_Ptr).Close_Char &
+--   " on line " & ARM_File.Line_String (Input_Object));
 	        -- Skip the contents of this command.
 	        ARM_Input.Skip_until_Close_Char (Input_Object,
 		    Nesting_Stack(Nesting_Stack_Ptr).Close_Char);
 		ARM_File.Replace_Char (Input_Object); -- Put the close character back.
+--Ada.Text_IO.Put_Line("Comment done");
 
 	    when others =>
 	        null; -- Not in scanner.
@@ -916,6 +919,7 @@ procedure Scan (Format_Object : in out Format_Type;
         end if;
         ARM_File.Replace_Char (Input_Object);
         Arm_Input.Get_Name (Input_Object, Command_Name);
+--Ada.Text_IO.Put_Line("Command=" & Command_Name & " Nesting=" & Natural'Image(Nesting_Stack_Ptr));
 
         ARM_File.Get_Char (Input_Object, Ch);
         if ARM_Input.Is_Open_Char (Ch) then -- Start parameter:
