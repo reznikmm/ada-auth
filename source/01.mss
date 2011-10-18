@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2011/08/17 00:29:39 $}
+@Comment{$Date: 2011/09/29 06:37:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.74 $}
+@Comment{$Revision: 1.75 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -69,8 +69,8 @@ and point out interesting ramifications of the rules
 and interactions among the rules
 (interesting to language lawyers, that is).
 Differences between Ada 83@Chg{Version=[2],New=[, Ada 95,
-@Chg{Version=[3],New=[],Old=[and ]}Ada 2005@Chg{Version=[3],New=[, and 2012],Old=[]}],Old=[ and Ada 95]}
-are listed.
+@Chg{Version=[3],New=[],Old=[and ]}Ada 2005@Chg{Version=[3],New=[, and Ada
+2012],Old=[]}],Old=[ and Ada 95]} are listed.
 (The text you are reading now is an annotation.)
 
 @ChgRef{Version=[2],Kind=[Revised]}
@@ -386,6 +386,10 @@ The following Annexes are informative:
 @RefSec{Glossary}
 
 @RefSec{Syntax Summary}
+
+@Chgref{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[@RefSec{Language-Defined Entities}]}
+
 @end{Itemize}
 @begin(Discussion)
 The idea of the Specialized Needs Annexes is that implementations
@@ -783,7 +787,7 @@ the next heading does not represent any language change:
 @Defn{wording changes from Ada 83}
 This heading lists some of the non-semantic changes between @Chg{Version=[2],
 New=[the Ada 83 RM],Old=[RM83]} and
-the @Chg{Version=[2],New=[the Ada 95 RM],Old=[RM95]}.
+the @Chg{Version=[2],New=[Ada 95 RM],Old=[RM95]}.
 It is incomplete; we have not attempted to list all wording
 changes, but only the @lquotes@;interesting@rquotes@; ones.
 
@@ -853,7 +857,8 @@ original flawed language definition. Thus,
 these strictly speaking are not incompatibilities between Ada 95 and Ada 2005.
 Practically, however, they very well may be, as early Ada 95 implementations
 may not follow the recommendation. Therefore, some Ada 95 implementations
-may be able to compile the examples, while others may not. In constrast,
+may be able to compile the examples, while others may not. In
+@Chg{Version=[3],New=[contrast],Old=[constrast]},
 Ada 2005 compilers will have consistent behavior. Therefore, we document these
 for completeness.]}
 
@@ -884,7 +889,8 @@ extensions. Thus, these strictly speaking are not extensions of Ada 95;
 they're part of Ada 95. Practically, however, they very well may be extensions,
 as early Ada 95 implementations may not implement the extension. Therefore,
 some Ada 95 implementations may be able to compile the examples, while others
-may not. In constrast, Ada 2005 compilers will always support the extensions.
+may not. In @Chg{Version=[3],New=[contrast],Old=[constrast]},
+Ada 2005 compilers will always support the extensions.
 Therefore, we document these for completeness.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -971,7 +977,8 @@ original flawed language definition. Thus,
 these strictly speaking are not incompatibilities between Ada 2005 and Ada 2012.
 Practically, however, they very well may be, as early Ada 2005 implementations
 may not follow the recommendation. Therefore, some Ada 2005 implementations
-may be able to compile the examples, while others may not. In constrast,
+may be able to compile the examples, while others may not. In
+@Chg{Version=[3],New=[contrast],Old=[constrast]},
 Ada 2012 compilers will have consistent behavior. Therefore, we document these
 for completeness.]}
 
@@ -999,7 +1006,7 @@ are allowed to implement these extensions. Thus, these strictly speaking are not
 extensions of Ada 2005; they're part of Ada 2005. Practically, however, they
 very well may be extensions, as early Ada 2005 implementations may not implement
 the extension. Therefore, some Ada 2005 implementations may be able to compile
-the examples, while others may not. In constrast, Ada 2012 compilers will always
+the examples, while others may not. In contrast, Ada 2012 compilers will always
 support the extensions. Therefore, we document these for completeness.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}

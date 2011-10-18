@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:40 $}
+@Comment{$Date: 2011/09/29 06:37:24 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.95 $}
+@Comment{$Revision: 1.96 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -419,14 +419,14 @@ limited view of a package contains:]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0129-1]}
 @ChgAdded{Version=[2],Text=[For each nested
-@nt{package_declaration}@Chg{Version=[3],New=[ directly in the visible part],Old=[]},
+@nt{package_declaration}@Chg{Version=[3],New=[ immediately within the visible part],Old=[]},
 a declaration of the limited view of that package, with the
 same @nt{defining_program_unit_name}.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06],ARef=[AI95-00326-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0108-1],ARef=[AI05-0129-1]}
 @ChgAdded{Version=[2],Text=[For each @nt{type_declaration}
-@Chg{Version=[3],New=[directly ],Old=[]}in the visible
+@Chg{Version=[3],New=[immediately within],Old=[in]} the visible
 part@Chg{Version=[3],New=[ that is not an
 @nt{incomplete_type_declaration}],Old=[]}, an incomplete view
 of the type@Chg{Version=[3],New=[ with no @nt{discriminant_part}],Old=[]};
@@ -1380,10 +1380,10 @@ any of its descendants],Old=[]};]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0077-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0077-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[within a], Old=[in the same]}
 @nt{context_clause}
-@Chg{Version=[3],New=[for a @nt{library_item} which is],Old=[as, or]}
+@Chg{Version=[3],New=[for a @nt{library_item} that is],Old=[as, or]}
 within the scope of@Chg{Version=[3],New=[],Old=[,]}
 a @nt{nonlimited_with_clause} that mentions the same library package; or]}
 
@@ -1407,10 +1407,10 @@ a @nt{nonlimited_with_clause} that mentions the same library package; or]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00217-06]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0077-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0077-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[within a], Old=[in the same]}
 @nt{context_clause}
-@Chg{Version=[3],New=[for a @nt{library_item} which is],Old=[as, or]}
+@Chg{Version=[3],New=[for a @nt{library_item} that is],Old=[as, or]}
 within the scope of@Chg{Version=[3],New=[],Old=[,]}
 a @nt{use_clause} that names an entity declared within the
 declarative region of the library package.]}
@@ -3775,8 +3775,8 @@ pragma, nor a library unit pragma.
 @PDefn2{Term=[requires a completion], Sec=(declaration to which a @nt{pragma} Elaborate_Body applies)}
 If @Chg{Version=[3],New=[the aspect],Old=[a @nt{pragma}]} Elaborate_Body
 @Chg{Version=[3],New=[is True for],Old=[applies to]} a
-declaration@Chg{Version=[3],New=[@Redundant[(including when @nt{pragma}
-Elaboration_Body applies)]],Old=[]},
+declaration@Chg{Version=[3],New=[ @Redundant[(including when @nt{pragma}
+Elaborate_Body applies)]],Old=[]},
 then the declaration requires a completion @Redundant[(a
 body)].@Chg{Version=[3],New=[@PDefn2{Term=[requires a completion],
 Sec=(declaration for which aspect Elaborate_Body is True)}],Old=[]}

@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:39 $}
+@Comment{$Date: 2011/09/29 06:37:24 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.55 $}
 
 @LabeledClause{Type Conversions}
 
@@ -844,9 +844,9 @@ Access Type Conversion
   unless the target type is an anonymous access type of a stand-alone
   object. If the target type is that of such a stand-alone object, a check is
   made that the accessibility level of the operand type is not deeper than that
-  of the declaration of the stand-alone object @Redundant[; then if the check
+  of the declaration of the stand-alone object@Redundant[; then if the check
   succeeds, the accessibility level of the target type becomes that of the
-  operand type].],Old=[]}.
+  operand type]],Old=[]}.
   @IndexCheck{Accessibility_Check}
 
   @begin{Ramification}
@@ -2350,8 +2350,8 @@ not covered by the corresponding @nt{discrete_choice_list}; or]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
 @ChgAdded{Version=[3],Text=[a @nt{choice_expression} (or a @nt{simple_expression}
-of a @nt{range} which occurs as a @nt{membership_choice} of a
-@nt{membership_choice_list}) of a static membership test which is preceded in
+of a @nt{range} that occurs as a @nt{membership_choice} of a
+@nt{membership_choice_list}) of a static membership test that is preceded in
 the enclosing @nt{membership_choice_list} by another item whose individual
 membership test (see @RefSecNum{Relational Operators and Membership Tests})
 statically yields True.]}
@@ -2367,8 +2367,18 @@ is determined by its left operand]}.
 without performing Overflow_Checks.
 For a static expression that is evaluated:
 @begin{Itemize}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 The expression is illegal if its evaluation fails a language-defined
-check other than Overflow_@!Check.
+check other than Overflow_@!Check.@Chg{Version=[3],New=[ For the purposes of
+this evaluation, the assertion policy is assumed to be Check.],Old=[]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+  @ChgAdded{Version=[3],Text=[Assertion policies can control whether checks are
+  made, but we don't want assertion policies to affect legality. For Ada 2012,
+  subtype predicates are the only checks controlled by the assertion policy that
+  can appear in static expressions.]}
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00269-01]}
 If the expression is not part of a larger static

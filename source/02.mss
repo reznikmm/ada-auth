@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:39 $}
+@Comment{$Date: 2011/09/29 06:37:23 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -560,7 +560,7 @@ and that should be irrelevant to the semantics.
   do not start with these characters (the BOM is encoded as 16#EF# 16#BB#
   16#BF# for UTF-8; the last two characters are not legal in Ada programs
   outside of comments). That means it is possible for a compiler to determine
-  which of these file formats are used without operator intervention.]}
+  which of these file formats is used without operator intervention.]}
 @end{ImplNote}
 @end{Notes}
 
@@ -909,8 +909,8 @@ to accommodate local conventions].
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0227-1]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[For instance, in most languages,
-  the @Chg{Version=[3],New=[simple case folded],Old=[uppercase
-  equivalent]} of LATIN @Chg{Version=[3],New=[CAPITAL],Old=[SMALL]} LETTER I
+  the @Chg{Version=[3],New=[simple case folded],Old=[uppercase]}
+  equivalent of LATIN @Chg{Version=[3],New=[CAPITAL],Old=[SMALL]} LETTER I
   (@Chg{Version=[3],New=[an upper],Old=[a lower]} case letter
   @Chg{Version=[3],New=[without],Old=[with]} a dot above) is
   LATIN @Chg{Version=[3],New=[SMALL],Old=[CAPITAL]} LETTER I
@@ -1687,8 +1687,8 @@ program legal, except as follows:
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
   @ChgAdded{Version=[3],Text=[There are no language-defined pragmas which
   can be completions; @nt{pragma} Import was defined this way in Ada 95
-  and Ada 2005, but in Ada 2012 it sets aspect Import which disallows
-  having any completion.]}
+  and Ada 2005, but in Ada 2012 @nt{pragma} Import just sets aspect Import
+  which disallows having any completion.]}
 @end{Discussion}
 
   A @nt<pragma> used to configure the environment
@@ -1830,7 +1830,8 @@ Some compilers might even ignore the pragma altogether.
 @key[pragma] List(Off); --@Examcom{ turn off listing generation}
 @key[pragma] Optimize(Off); --@Examcom{ turn off optional optimizations}
 @Chg{Version=[3],New=[@key[pragma] Pure(Rational_Numbers); --@Examcom{ set categorization for package}
-@key[pragma] Assert(Exists(File_Name), Message => "Nonexistent file"); --@Examcom{ assert file exists}],
+@key[pragma] Assert(Exists(File_Name),
+              Message => "Nonexistent file"); --@Examcom{ assert file exists}],
 Old=[@key[pragma] Inline(Set_Mask); --@Examcom{ generate code for Set_Mask inline}
 @Chg{Version=[2],New=[@key[pragma] Import(C, Put_Char, External_Name => "putchar"); --@Examcom{ import C putchar function}],
 Old=[@key[pragma] Suppress(Range_Check, On => Index); --@Examcom{ turn off range checking on Index}]}]}
@@ -1859,8 +1860,8 @@ informative annex.
 @end{DiffWord95}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[2],Text=[Updated the example of pragmas, because both
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+  @ChgAdded{Version=[3],Text=[Updated the example of pragmas, because both
   @nt{pragma}s Inline and Import are obsolescent.]}
 @end{DiffWord2005}
 

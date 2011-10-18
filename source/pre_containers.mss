@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.82 $ $Date: 2011/08/17 00:29:41 $ $Author: randy $ }
+@comment{ $Revision: 1.83 $ $Date: 2011/09/29 06:37:25 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:41 $}
+@Comment{$Date: 2011/09/29 06:37:25 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -2175,7 +2175,7 @@ moving the cursor as per the Previous function when used as a reverse iterator.
 Program_Error is propagated if any operation (in particular, the
 @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the returned object exists. The returned object from Iterate
+Container while the iterator object exists. The iterator object
 needs finalization.]}
 
 @begin{Example}
@@ -2195,7 +2195,7 @@ or moving the cursor as per the Previous function when used as a reverse
 iterator. Program_Error is propagated if any operation (in particular, the
 @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the returned object exists. The returned object from Iterate
+Container while the iterator object exists. The iterator object
 needs finalization.]}
 
 @begin{Discussion}
@@ -3867,7 +3867,7 @@ moving the cursor as per the Previous function when used as a reverse iterator.
 Program_Error is propagated if any operation (in particular, the
 @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the returned object exists. The returned object from Iterate
+Container while the iterator object exists. The iterator object
 needs finalization.]}
 
 @begin{Example}
@@ -3887,7 +3887,7 @@ or moving the cursor as per the Previous function when used as a reverse
 iterator. Program_Error is propagated if any operation (in particular, the
 @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the returned object exists. The returned object from Iterate
+Container while the iterator object exists. The iterator object
 needs finalization.]}
 
 @begin{Discussion}
@@ -5807,7 +5807,7 @@ Container, starting with the first node and moving the cursor according to the
 successor relation. Program_Error is propagated if any operation (in particular,
 the @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the returned object exists. The returned object from Iterate
+Container while the iterator object exists. The iterator object
 needs finalization.]}
 
 @end{DescribeCode}
@@ -6419,7 +6419,7 @@ node and moving the cursor according to the predecessor relation when used as a
 reverse iterator. Program_Error is propagated if any operation (in particular,
 the @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the returned object exists. The returned object from Iterate
+Container while the iterator object exists. The iterator object
 needs finalization.]}
 
 @end{DescribeCode}
@@ -7835,7 +7835,7 @@ package Containers.Hashed_Sets has the following declaration:]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] Set)
-      @key[return] Map_Iterator_Interfaces.Forward_Iterator'Class;]}
+      @key[return] Set_Iterator_Interfaces.Forward_Iterator'Class;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{generic}
@@ -8101,7 +8101,7 @@ first hashed element in Container.]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] Set)
-   @key[return] Map_Iterator_Interfaces.Forward_Iterator'Class;]}
+   @key[return] Set_Iterator_Interfaces.Forward_Iterator'Class;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
@@ -8111,7 +8111,7 @@ Container, starting with the first element and moving the cursor according to
 the successor relation. Program_Error is propagated if any operation (in
 particular, the @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the returned object exists. The returned object from Iterate
+Container while the iterator object exists. The iterator object
 needs finalization.]}
 
 @end{DescribeCode}
@@ -8457,7 +8457,7 @@ package Containers.Ordered_Sets has the following declaration:]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] Set)
-      @key[return] Map_Iterator_Interfaces.Reversible_Iterator'Class;]}
+      @key[return] Set_Iterator_Interfaces.Reversible_Iterator'Class;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{generic}
@@ -8772,7 +8772,7 @@ in predecessor order, starting with the last element.]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] Set)
-   @key[return] Map_Iterator_Interfaces.Reversible_Iterator'Class;]}
+   @key[return] Set_Iterator_Interfaces.Reversible_Iterator'Class;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
@@ -8784,7 +8784,7 @@ last element and moving the cursor according to the predecessor relation when
 used as a reverse iterator. Program_Error is propagated if any operation (in
 particular, the @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the returned object exists. The returned object from Iterate
+Container while the iterator object exists. The iterator object from Iterate
 needs finalization.]}
 
 @end{DescribeCode}

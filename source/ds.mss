@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.58 $ $Date: 2011/08/17 00:29:40 $ $Author: randy $ }
+@comment{ $Revision: 1.59 $ $Date: 2011/09/29 06:37:24 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2011/08/17 00:29:40 $}
+@Comment{$Date: 2011/09/29 06:37:24 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -263,9 +263,9 @@ program.]
 @Chg{Version=[3],New=[@Defn{categorization aspect}],Old=[]}@Defn{categorized library unit}
 A @i{categorization pragma} is a library unit pragma
 (see @RefSecNum{Pragmas and Program Units})
-that restricts the declarations, child units, or
-semantic dependences of the library unit to which it applies@Chg{Version=[3],New=[;
-each categorization pragma specifies a corresponding @i{categorization aspect}],Old=[]}. A
+that @Chg{Version=[3],New=[specifies a corresponding @i{categorization aspect}.
+A cateogrization aspect ],Old=[]}restricts the declarations, child units, or
+semantic dependences of the library unit to which it applies. A
 @i{categorized library unit} is a library unit @Chg{Version=[3],New=[that has a
 categorization aspect that is True],Old=[to which a categorization pragma
 applies]}.
@@ -274,24 +274,26 @@ applies]}.
 The pragmas Shared_Passive, Remote_Types, and Remote_Call_Interface
 are categorization pragmas@Chg{Version=[3],New=[,
 and the associated aspects are categorization aspects],Old=[]}.
-In addition, for the purposes of this Annex, the @Chg{Version=[3],New=[aspect],
-Old=[pragma]} Pure (see @RefSecNum{Elaboration Control}) is
-considered a categorization @Chg{Version=[3],New=[aspect], Old=[pragma]}.
+In addition, for the purposes of this Annex, the @Chg{Version=[3],New=[aspect
+Pure (see @RefSecNum{Elaboration Control}) is
+considered a categorization aspect and the],Old=[]}
+pragma Pure @Chg{Version=[3],New=[],Old=[(see @RefSecNum{Elaboration Control}) ]}is
+considered a categorization pragma.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078],ARef=[AI95-00048-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
 @Redundant[@Defn{shared passive library unit}
 A library package or generic library package is called a
 @i{shared passive} library unit if @Chg{Version=[3],New=[the],Old=[a]}
-Shared_Passive @Chg{Version=[3],New=[aspect is True],Old=[pragma applies to it]}.
-@Defn{remote types library unit}
-A library package or generic library package is
-called a @i{remote types} library unit if @Chg{Version=[3],New=[the],Old=[a]}
-Remote_Types @Chg{Version=[3],New=[aspect is True],Old=[pragma applies to it]}.
-@Defn{remote call interface}
-A library @Chg{New=[unit],Old=[package or generic library package]} is called
-a @i{remote call interface} if @Chg{Version=[3],New=[the],Old=[a]}
-Remote_Call_Interface @Chg{Version=[3],New=[aspect is True],Old=[pragma applies to it]}.]
+Shared_Passive @Chg{Version=[3],New=[aspect of the unit is True],Old=[pragma
+applies to it]}. @Defn{remote types library unit} A library package or generic
+library package is called a @i{remote types} library unit if
+@Chg{Version=[3],New=[the],Old=[a]} Remote_Types @Chg{Version=[3],New=[aspect of
+the unit is True],Old=[pragma applies to it]}. @Defn{remote call interface} A
+library @Chg{New=[unit],Old=[package or generic library package]} is called a
+@i{remote call interface} if @Chg{Version=[3],New=[the],Old=[a]}
+Remote_Call_Interface @Chg{Version=[3],New=[aspect of the unit is
+True],Old=[pragma applies to it]}.]
 @Defn{normal library unit}
 A @i{normal library unit} is one to which no categorization
 @Chg{Version=[3],New=[aspect is True],Old=[pragma applies]}.
@@ -381,7 +383,7 @@ Implementations are allowed to define other categorization pragmas.
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0206-1]}
-  @ChgAdded{Version=[3],Text=[We now allow private with of preelaborated
+  @ChgAdded{Version=[3],Text=[We now allow private withs of preelaborated
   units in Remote Types and Remote Call Interface units; this is documented
   as an extension in the sections where this is defined normatively.]}
 
@@ -459,6 +461,12 @@ it shall depend semantically only upon declared pure or shared passive
   refer to the local heap of the active partition including the
   remote types package.
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
+  @ChgAdded{Version=[3],Text=[We say @nt{library_item} here, so that
+  limited views are allowed; those are not library units, but they are
+  @nt{library_item}.]}
+@end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0080],ARef=[AI95-00003-01]}
 it shall not contain a library-level declaration of an access type
@@ -537,7 +545,7 @@ partitions.
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Shared_Passive
-  is now a categorication aspect,
+  is now a categorization aspect,
   so it can be specified by an @nt{aspect_specification} @em
   although the pragma is still preferred by the Standard.]}
 @end{Extend2005}
@@ -582,7 +590,7 @@ Remote_Types
 The following restrictions apply to the declaration of such a library unit:
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Remote_Types],
-    Text=[@ChgAdded{Version=[3],Text=[Types in a given package are used in
+    Text=[@ChgAdded{Version=[3],Text=[Types in a given package may be used in
       remote procedure calls.]}]}
 
 @begin{itemize}
@@ -594,6 +602,13 @@ it shall depend semantically only on declared pure@Chg{Version=[3],New=[
 units],Old=[]}, @Chg{Version=[3],New=[],Old=[or ]}other remote types library
 units@Chg{Version=[3],New=[, or preelaborated normal library units that are
 mentioned only in private with clauses],Old=[]};
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
+  @ChgAdded{Version=[3],Text=[We say declared pure @nt{library_item} here,
+  so that (all) limited views are allowed; those are not library units, but
+  they are declared pure @nt{library_item}s.]}
+@end{Ramification}
 
 it shall not contain the declaration of any variable
 within the visible part of the library unit;
@@ -733,7 +748,9 @@ attribute of a remote access-to-class-wide type yields 0; it is not allowed in
 an @nt{attribute_definition_clause}.],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised]}
-  All three of these restrictions are because
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
+  All @Chg{Version=[3],New=[three ],Old=[]}@ChgNote{There are more than three!}of
+  these restrictions are because
   there is no storage pool associated with a remote
   access-to-class-wide type.@Chg{Version=[2],New=[ The Storage_Size is defined
   to be 0 so that there is no conflict with the rules for pure units.],Old=[]}
@@ -838,7 +855,7 @@ synchronized, protected, or task interface type.]}
   functions were legal, it is not clear what they could have done (as the
   results could not be marshalled). Similarly, RCI functions that return remote
   controlling access types could try to save those values, but it is unlikely
-  that a compiler would know how to to that usefully. Thus, it seems unlikely
+  that a compiler would know how to do that usefully. Thus, it seems unlikely
   that any real programs will be impacted by these changes.]}
 @end{Incompatible2005}
 
@@ -856,7 +873,7 @@ synchronized, protected, or task interface type.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Remote_Types
-  is now a categorication aspect,
+  is now a categorization aspect,
   so it can be specified by an @nt{aspect_specification} @em
   although the pragma is still preferred by the Standard.]}
 @end{Extend2005}
@@ -919,8 +936,8 @@ A subprogram declared in the visible part of such a library unit@Chg{New=[,
 or declared by such a library unit,],Old=[]} is called a @i{remote subprogram}.
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Remote_Call_Interface],
-    Text=[@ChgAdded{Version=[3],Text=[Subprograms in a given package are used in
-      remote procedure calls.]}]}
+    Text=[@ChgAdded{Version=[3],Text=[Subprograms in a given package may be
+      used in remote procedure calls.]}]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1],ARef=[AI05-0243-1]}
 The declaration of an RCI library unit shall be preelaborable
@@ -931,6 +948,13 @@ remote types@Chg{Version=[3],New=[ library units],Old=[]},
 @Chg{Version=[3],New=[],Old=[or ]}other remote call interface library
 units@Chg{Version=[3],New=[, or preelaborated normal library units that are
 mentioned only in private with clauses],Old=[]}.
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
+  @ChgAdded{Version=[3],Text=[We say declared pure @nt{library_item} here,
+  so that (all) limited views are allowed; those are not library units, but
+  they are declared pure @nt{library_item}s.]}
+@end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078],ARef=[AI95-00048-01]}
 @Leading@;In addition, the following restrictions apply to @Chg{New=[],Old=[the
@@ -1024,10 +1048,9 @@ be a remote call interface library unit.
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[A],Old=[If a]} pragma All_Calls_Remote
 @Chg{Version=[3],New=[sets the All_Calls_Remote representation aspect of
-the],Old=[applies to a]} library unit@Chg{Version=[3],New=[to which it applies
-to the value True. If the All_Calls_Remote aspect of a library unit is True, the
-library unit shall be a remote call interface.],Old=[]}, the library unit shall
-be a remote call interface.
+the],Old=[applies to a]} library unit@Chg{Version=[3],New=[ to which the pragma
+applies to the value True. If the All_Calls_Remote aspect of a library unit is True],
+Old=[]}, the library unit shall be a remote call interface.
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[All_Calls_Remote],
     Text=[@ChgAdded{Version=[3],Text=[All remote procedure calls should use the
@@ -1169,7 +1192,7 @@ be supported as an alternative to RPC.]
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
   @ChgAdded{Version=[3],Text=[Remote_Call_Interface
-  is now a categorication aspect, so it can be specified by
+  is now a categorization aspect, so it can be specified by
   an @nt{aspect_specification} @em
   although the pragma is still preferred by the Standard.]}
 @end{Extend2005}
@@ -1518,12 +1541,12 @@ is being called, and then to pass the incoming value of each of the
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 It allocates (or reuses) a stream for the Result,
-unless a @Chg{Version=[3],New=[aspect],Old=[pragma]} Asynchronous is
+unless @Chg{Version=[3],New=[an aspect],Old=[a pragma]} Asynchronous is
 @Chg{Version=[3],New=[specified as True for],Old=[applied to]} the procedure.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-It calls Do_RPC unless a @Chg{Version=[3],New=[aspect],Old=[pragma]}
-Asynchronous @Chg{Version=[3],New=[specified as True for],Old=[applied to]}
+It calls Do_RPC unless @Chg{Version=[3],New=[an aspect],Old=[a pragma]}
+Asynchronous @Chg{Version=[3],New=[is specified as True for],Old=[applied to]}
 the procedure
 in which case it calls Do_APC. An access value designating the message
 stream allocated and initialized above is passed as the Params parameter.

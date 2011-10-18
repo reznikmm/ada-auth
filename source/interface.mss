@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.57 $ $Date: 2011/08/17 00:29:41 $ $Author: randy $ }
+@comment{ $Revision: 1.58 $ $Date: 2011/09/29 06:37:25 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:41 $}
+@Comment{$Date: 2011/09/29 06:37:25 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -52,7 +52,7 @@ a foreign-language subprogram to be called from Ada,
 or a foreign-language variable to be accessed from Ada.
 In contrast,
 @Chg{Version=[3],New=[specifying aspect],Old=[a @nt{pragma}]}
-@Chg{Version=[3],New=[to have the value True ],Old=[]}Export is used to export
+Export @Chg{Version=[3],New=[to have the value True ],Old=[]}is used to export
 an Ada entity to a foreign language, thus allowing
 an Ada subprogram to be called from a foreign language,
 or an Ada object to be accessed from a foreign language.
@@ -165,7 +165,7 @@ type Boolean.]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 The @Chg{Version=[3],New=[Link_Name and External_Name aspects are
-of],Old=[expected]} type The @Chg{Version=[3],New=[],Old=[for a
+of],Old=[expected]} type @Chg{Version=[3],New=[],Old=[for a
 @SynI{string_}@Syn2{expression}@PDefn2{Term=[expected type],
   Sec=(link name)} in an interfacing pragma or in pragma Linker_Options
 is ]}String.
@@ -331,10 +331,9 @@ then the @nt{pragma} Import is the completion of all of them]}.
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Defn{imported entity} @Defn{exported entity}
 An entity @Chg{Version=[3],New=[with a True],Old=[specified
-as the Entity argument to a @nt[pragma]]} Import
+as the Entity argument to a @nt[pragma]]} Import@Chg{Version=[3],New=[ aspect],Old=[]}
 (or @Chg{Version=[3],New=[],Old=[@nt[pragma] ]}Export@Chg{Version=[3],New=[
-aspect],Old=[]})
-is said to be @i{imported}
+aspect],Old=[]}) is said to be @i{imported}
 (respectively, @i{exported}).@Chg{Version=[3],New=[ An entity shall not be both
 imported and exported.],Old=[]}
 
@@ -572,7 +571,7 @@ for objects of @i[L]-compatible types and for
 subprograms, and @Chg{Version=[3],New=[the],Old=[@nt(pragma)]}
 Convention @Chg{Version=[3],New=[aspect ],Old=[]}for @i[L]-eligible types and for subprograms,
 presuming the other language has corresponding features.
-@Chg{Version=[3],New=[specifying the ],Old=[@nt{Pragma}]} Convention
+@Chg{Version=[3],New=[Specifying the ],Old=[@nt{Pragma}]} Convention
 @Chg{Version=[3],New=[aspect ],Old=[]}need not be supported for scalar types.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[For each supported convention @i[L] other than Intrinsic,

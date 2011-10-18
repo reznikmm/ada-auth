@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:39 $}
+@Comment{$Date: 2011/09/29 06:37:23 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.111 $}
+@Comment{$Revision: 1.112 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -40,10 +40,10 @@ is a form of declaration defined as follows.
    | >,Old=<>}],Old=[]}@Syn2{package_declaration}@Chg{Version=[2],New=[@Chg{Version=[3],New=[@\|],Old=[
    |]}],Old=[@\|]} @Syn2{renaming_declaration}@Chg{Version=[2],New=[@Chg{Version=[3],New=[
    | ],Old=[@\|]}],Old=[
-   |]} @Syn2{exception_declaration}@Chg{Version=[2],New=[@Chg{Version=[3],New=[@\|],Old=[
+   | ]}@Syn2{exception_declaration}@Chg{Version=[2],New=[@Chg{Version=[3],New=[@\|],Old=[
    |]}],Old=[@\|]} @Syn2{generic_declaration}@Chg{Version=[2],New=[@Chg{Version=[3],New=[
    | ],Old=[@\|]}],Old=[
-   |]} @Syn2{generic_instantiation}"}
+   | ]}@Syn2{generic_instantiation}"}
 
 @Syn{lhs=<defining_identifier>,rhs="@Syn2{identifier}"}
 @end{Syntax}
@@ -677,7 +677,8 @@ are excluded, the term component is used instead.
 Similarly, a @i(part) of an object or value is used to mean
 the whole object or value, or any set of its subcomponents.@Chg{Version=[2],
 New=[ The terms component, subcomponent, and part are also applied to a type
-meaning the component, subcomponent, or part of objects and values of the type.],Old=[]}
+meaning the component, subcomponent, or part of objects and values of the
+type.@Defn2{Term=[part], Sec=(of a type)}@Defn2{Term=[component], Sec=(of a type)}],Old=[]}
 @begin{Discussion}
   The definition of @lquotes@;part@rquotes@; here is designed to simplify rules
   elsewhere. By design, the intuitive meaning of
@@ -1561,13 +1562,13 @@ to the declared subtype. In addition, predicate specifications apply to
 certain other subtypes:]}
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[For a (first) subtype defined by a derived type
-  declaration, the predicates of the parent subtype and the progenitor subtypes
-  apply.]}
+  @ChgAdded{Version=[3],Text=[For a (first) subtype defined by a derived
+  type declaration, the predicates of the parent subtype and the progenitor
+  subtypes apply.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[For a subtype created by a subtype_indication, the
-  predicate of the subtype denoted by the subtype_mark applies.]}
+  @ChgAdded{Version=[3],Text=[For a subtype created by a @nt{subtype_indication},
+  the predicate of the subtype denoted by the @nt{subtype_mark} applies.]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
@@ -1612,6 +1613,18 @@ the following:@Defn{predicate-static}@Defn2{Term=[expression],Sec=[predicate-sta
   @ChgAdded{Version=[3],Text=[a parenthesized predicate-static @nt{expression}.]}
 @end{Itemize}
 
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[A predicate shall not be specified for an incomplete
+subtype.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The expression of such a predicate could not
+  depend on the properties of the value of the type (since it doesn't have
+  any), so it is useless and we don't want to require the added complexity
+  needed to support it.]}
+@end{Reason}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
 @ChgAdded{Version=[3],Text=[An index subtype, @nt{discrete_range} of an
 @nt{index_constraint} or @nt{slice}, or a
@@ -1624,12 +1637,29 @@ subtype to which predicate specifications apply.]}
 whose @nt{attribute_designator} is First, Last, or Range shall not denote a
 scalar subtype to which predicate specifications apply.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[The @nt{discrete_subtype_definition} of a
-@nt{loop_parameter_specification} or a @nt{discrete_choice} of a
-@nt{named_array_aggregate} shall not denote a subtype to which
+@nt{loop_parameter_specification} shall not denote a subtype to which
 Dynamic_Predicate specifications apply.]}
 
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[The @nt{discrete_choice} of a
+@nt{named_array_aggregate} shall not denote a non-static subtype to which
+predicate specifications apply.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+  @ChgAdded{Version=[3],Text=[This rule prevents non-contiguous
+  dynamically bounded array aggregates, which could be expensive to check for.
+  (Array aggregates have rules to prevent problems with static subtypes.) We
+  define this rule here so that the runtime generic body check applies.]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[In addition to the places
+where @LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
+these rules apply also in the private part of an instance of a generic
+unit.@PDefn{generic contract issue}]}
 @end{Legality}
 
 @begin{Runtime}
@@ -1675,19 +1705,18 @@ Dynamic_Predicate specifications apply.]}
 @end{ImplNote}
 @end{DescribeCode}
 
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[A value @i<satisfies> a predicate if the
+predicate is True for that value.@PDefn2{Term=[satisfies], Sec=(a subtype predicate)}]}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
-@ChgAdded{Version=[3],Text=[If any of the above Legality Rules is violated in an
-instance of a generic unit, Program_Error is raised. In addition to the places
-where @LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
-this rule applies also in the private part of an instance of a generic
-unit.@PDefn{generic contract issue}]}
+@ChgAdded{Version=[3],Text=[If any of the above @LegalityTitle is violated in an
+instance of a generic unit, Program_Error is raised.]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[This is the usual way around the contract model;
-  this applies even in generic bodies. The "In addition..." wording is included
-  for consistency with similar rules, even though it's not really necessary,
-  since Program_Error will be raised anyway.]}
+  this applies even in generic bodies.]}
 @end{Discussion}
 @end{Runtime}
 
@@ -1701,7 +1730,8 @@ to be considered constrained.]}
 remains True for all objects of the subtype, except in the case of uninitialized
 variables and other invalid values. A Dynamic_Predicate, on the other hand, is
 checked as specified above, but can become False at other times. For example,
-the predicate of a record is not checked when a subcomponent is modified.]}
+the predicate of a record subtype is not checked when a subcomponent is
+modified.]}
 @end{Notes}
 
 
@@ -1844,7 +1874,13 @@ The following (and no others) represent constants:
 
   a discriminant;
 
-  a loop parameter, choice parameter, or entry index;
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
+  @ChgAdded{Version=[3],Text=[a loop parameter unless specified to be a variable
+  for a generalized loop (see @RefSecNum{Generalized Loop Iteration});]}
+
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
+  @Chg{Version=[3],New=[],Old=[a loop parameter, ]}choice
+  parameter@Chg{Version=[3],New=[],Old=[,]} or entry index;
 
   the dereference of an access-to-constant value;
 
@@ -2087,6 +2123,7 @@ assigning to an enclosing object.
 @LabeledSubClause{Object Declarations}
 
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @RootDefn{stand-alone object}
 @Defn{explicit initial value}
 @Defn{initialization expression}
@@ -2096,7 +2133,7 @@ value given by an initialization expression.
 @Defn{anonymous array type}
 @Defn{anonymous task type}
 @Defn{anonymous protected type}
-For an array, task, or protected object,
+For an array, @Chg{Version=[3],New=[access, ],Old=[]}task, or protected object,
 the @nt<object_declaration> may include the definition
 of the (anonymous) type of the object.
 @end{Intro}
@@ -2651,7 +2688,7 @@ without an initialization expression.
   @ChgAdded{Version=[3],Text=[Implicit initial values can now be given
   for scalar types and for scalar array components, using the Default_Value
   (see @RefSecNum{Scalar Types}) and Default_Component_Value
-  (see @RefSecNum{Array Types}); the extension is documented there.]}
+  (see @RefSecNum{Array Types}) aspects; the extension is documented there.]}
 @end{DiffWord2005}
 
 
@@ -4221,14 +4258,15 @@ S'Pred for a modular integer subtype wraps around
 @end(Descexample)
 
      @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1],ARef=[AI05-0264-1]}
      @NoPrefix@Defn2{Term=[image], Sec=(of a value)}
      The function returns an @Chg{Version=[2],New=[image],Old=[@i(image)]} of
      the value of @i(Arg)@Chg{Version=[2],New=[ as a Wide_String],Old=[,
      that is, a sequence of characters representing the value in display
      form]}.]}
      The lower bound of the result is one.@Chg{Version=[2],
-     New=[ The image has the same sequence of character as
+     New=[ The image has the same sequence of @Chg{Version=[3],New=[graphic
+     characters],Old=[character]} as
      defined for S'Wide_Wide_Image if all the graphic characters are defined in
      Wide_Character; otherwise@Chg{Version=[3],New=[,],Old=[]}
      the sequence of characters is

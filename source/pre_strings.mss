@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.67 $ $Date: 2011/08/17 00:29:41 $ $Author: randy $ }
+@comment{ $Revision: 1.68 $ $Date: 2011/09/29 06:37:25 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2011/08/17 00:29:41 $}
+@Comment{$Date: 2011/09/29 06:37:25 $}
 
 @LabeledClause{String Handling}
 
@@ -2445,8 +2445,9 @@ are not considered lower case letters by Ada.Sttrings.Maps.Constants.]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[This is to maintain compatibility with the Ada 95
-  definitions of these constants.]}
+  @ChgAdded{Version=[3],Text=[This is to maintain runtime compatibility with the
+  Ada 95 definitions of these constants; exising correct programs could break if
+  the definitions were changed in a way the programs did not anticipate.]}
 @end{Reason}
 @end{Notes}
 

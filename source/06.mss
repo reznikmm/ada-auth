@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:39 $}
+@Comment{$Date: 2011/09/29 06:37:24 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.116 $}
+@Comment{$Revision: 1.117 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -198,7 +198,7 @@ or a @nt{generic_subprogram_declaration}
 requires a completion@Chg{Version=[3],New=[],Old=[:]}
 @Redundant[@Chg{Version=[3],New=[unless the Import aspect (see
 @RefSecNum{Interfacing Aspects}) is True for the declaration; the
-completion will be],Old=[]}a body@Chg{Version=[3],New=[ or],Old=[,]}
+completion shall be ],Old=[]}a body@Chg{Version=[3],New=[ or],Old=[,]}
 a @nt<renaming_declaration>
 (see @RefSecNum(Renaming Declarations))@Chg{Version=[3],New=[],Old=[, or
 a @Chg{Version=[2],New=[@nt{pragma}],
@@ -528,7 +528,7 @@ following language-defined aspects may be specified with an
   descendants; it shall be specified by an @nt{expression}, called a
   @i<class-wide precondition expression>.@Defn{class-wide precondition expression}@Defn2{Term=[precondition expression],Sec=[class-wide]}
   If not specified for an entity, then if no other
-  class-wide precondition applies to the entity,the class-wide precondition
+  class-wide precondition applies to the entity, the class-wide precondition
   expression for the entity is the enumeration literal True.]}
 
 @begin{Ramification}
@@ -579,12 +579,12 @@ postcondition expression is any boolean type.@PDefn2{Term=[expected type],
 Sec=(precondition expression)}@PDefn2{Term=[expected type],
 Sec=(postcondition expression)}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[Within the expression for a Pre'Class or Post'Class aspect for a primitive
 subprogram of a tagged type @i<T>, a name that denotes a formal parameter of type
 @i<T> is interpreted as having type @i<T>'Class. Similarly, a name that denotes a
 formal access parameter of type access-to-@i<T> is interpreted as having type
-access-to-@i<T>'Class. @Redundant[This ensures the expression is
+access-to-@i<T>'Class. @Redundant[This ensures that the expression is
 well-defined for a primitive subprogram of a type descended from @i<T>.]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0264-1]}
@@ -627,7 +627,7 @@ a homograph (see @RefSecNum{Visibility}) of @i<P> from a progenitor type
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[there is a class-wide precondition expression that
   applies to the corresponding primitive subprogram @i<P2> of @i<T2> that does
-  not fully conform to any class-wide precondition expresion that applies to
+  not fully conform to any class-wide precondition expression that applies to
   @i<P1>,]}
 @end{Itemize}
 
@@ -724,6 +724,12 @@ class-wide precondition expression that applies to @i<S1>.]}
 a primitive subprogram of a tagged type @i<T>, then the associated expression
 also applies to the corresponding primitive subprogram of each descendant of
 @i<T>.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[If the
+assertion policy in effect at the point of a subprogram or entry declaration is
+Check, then preconditions and postconditions are considered to be @i<enabled>
+for that subprogram or entry.@Defn2{Term=[enabled],Sec=[precondition]}@Defn2{Term=[enabled],Sec=[postcondition]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} X that
@@ -842,18 +848,18 @@ not specified whether the other class-wide precondition expressions are
 evaluated. The precondition checks and any check for elaboration of the
 subprogram body are performed in an arbitrary order. It is not
 specified whether in a call on a protected operation, the checks are performed
-before or after starting the protected action. For a task or protected entry
+before or after starting the protected action. For an entry
 call, the checks are performed prior to checking whether the entry is open.@PDefn2{Term=(arbitrary order),
   Sec=(allowed)}@PDefn{unspecified}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[If the assertion policy in effect at the point of a
 subprogram or entry declaration is Check, then upon successful return from a
 call of the subprogram or entry, prior to copying back any by-copy @key[in out]
 or @key[out] parameters, the postcondition check is performed. This consists of
 the evaluation of the specific and class-wide postcondition expressions that
 apply to the subprogram or entry. If any of the postcondition expressions
-evaluate to False, then Ada.Assertions.Assertion_Error is raised. The
+evaluate to False, then Assertions.Assertion_Error is raised. The
 postcondition expressions are evaluated in an arbitrary order, and if any
 postcondition expression evaluates to False, it is not specified whether any
 other postcondition expressions are evaluated. The postcondition check and
@@ -868,15 +874,15 @@ parameters are performed in an arbitrary order.@Defn2{Term=[assertion policy],
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The class-wide postcondition expressions of the
   entity itself as well as those of any parent or progentitor operations are
-  evaluated, as these apply to all descendants; in constrast, only the specific
+  evaluated, as these apply to all descendants; in contrast, only the specific
   postcondition of the entity applies. Postconditions can always be evaluated
   inside the invoked body.]}
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[If a precondition or postcondition check fails, the
 exception is raised at the point of the call. @Redundant[The exception cannot
-be handled inside the called subprogram.]]}
+be handled inside the called subprogram or entry.]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
 @ChgAdded{Version=[3],Text=[For any subprogram or entry call (including dispatching calls), the checks
@@ -960,13 +966,10 @@ precondition and postcondition checks performed are determined by the subprogram
 or entry denoted by the prefix of the Access attribute reference that produced
 the value.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[If the assertion policy in effect at the point of a
 subprogram or entry declaration is Ignore, then no precondition or postcondition
-check is performed on a call on that subprogram or entry. If the
-assertion policy in effect at the point of a subprogram or entry declaration is
-Check, then preconditions and postconditions are considered to be @i<enabled>
-for that subprogram or entry.@Defn2{Term=[enabled],Sec=[precondition]}@Defn2{Term=[enabled],Sec=[postcondition]}]}
+check is performed on a call on that subprogram or entry.]}
 @end{Runtime}
 
 @begin{Bounded}
@@ -981,10 +984,10 @@ protected action.]}
 @end{Bounded}
 
 @begin{Notes}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
   @ChgAdded{Version=[3],Text=[A precondition is checked just before the call. If
   another task can change any value that the precondition expression depends on,
-  the precondition may not hold within the subprogram or entry body.]}
+  the precondition need not hold within the subprogram or entry body.]}
 @end{Notes}
 
 @begin{Extend2005}
@@ -1616,8 +1619,8 @@ be that the type and operations all have the same convention.]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 Of these four conventions, only Ada and Intrinsic are
 allowed as a @SynI{convention_}@nt{identifier}
-in @Chg{Version=[3],New=[the specification of aspect],Old=[a @nt{pragma}]}
-Convention@Chg{Version=[3],New=[],Old=[, Import, or Export]}.
+in @Chg{Version=[3],New=[the specification of a],Old=[a @nt{pragma}]}
+Convention@Chg{Version=[3],New=[ aspect],Old=[, Import, or Export]}.
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
   The names of the @i{protected} and @i{entry} calling conventions
@@ -1668,8 +1671,8 @@ designated profiles are subtype conformant.],Old=[]}
 @PDefn2{Term=[statically matching],Sec=(required)}]}
 
 @begin{Itemize}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4]}
-@ChgAdded{Version=[3],Text=[they are type conformant;]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[they are type conformant; and]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4]}
 @ChgAdded{Version=[3],Text=[corresponding parameters have identical modes and
@@ -1698,7 +1701,7 @@ with any other profile.
 @PDefn{generic contract issue}
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0134-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0134-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[]}@Comment{Dummy for conditional leading.}
 @Defn2{Term=[full conformance], Sec=(for profiles)}
 @Defn2{Term=[profile],Sec=(fully conformant)}
@@ -1706,12 +1709,13 @@ Two profiles are @i{fully conformant} if they
 are @Chg{Version=[3],New=[subtype conformant],Old=[subtype-conformant]},
 @Chg{Version=[3],New=[if they have
 access-to-subprogram results whose designated profiles are fully
-conformant,],Old=[]}and corresponding parameters have@Chg{Version=[3],New=[:],
-Old=[ the same names and have @nt<default_expression>s
+conformant, ],Old=[]}and @Chg{Version=[3],New=[for ],Old=[]}
+corresponding parameters@Chg{Version=[3],New=[:],
+Old=[ have the same names and have @nt<default_expression>s
 that are fully conformant with one another.]}
 @begin{Itemize}
-@ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[the same names; and]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[they have the same names; and]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0046-1]}
 @ChgAdded{Version=[3],Text=[both or neither have @nt{null_exclusion}s; and]}
@@ -2569,7 +2573,7 @@ in its full view, and unconstrained in any partial view.]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0234-1]}
 @ChgAdded{Version=[3],Text=[In a function call, the accessibility level of the
 actual object for each explicitly aliased parameter shall not be statically
-deeper than accessibility level of the master of the call
+deeper than the accessibility level of the master of the call
 (see @RefSecNum{Operations of Access Types}).]}
 
 @begin{Discussion}
@@ -2578,7 +2582,8 @@ deeper than accessibility level of the master of the call
   tagged or required to be objects, there is always an object (possibly
   anonymous) to talk about. This is discussing the static accessibility level of
   the actual object; it does not depend on any runtime information (for instance
-  when the actual object is a formal parameter to another call).]}
+  when the actual object is a formal parameter of another subprogram, it does
+  not depend on the actual parameter of that other subprogram).]}
 @end{Discussion}
 
 @begin{Ramification}
@@ -2626,7 +2631,7 @@ renaming declaration whose renamed @SynI{object_}@nt{name} is known to denote
 the same object as the other, the @nt{prefix} of any dereference within
 the renamed @SynI{object_}@nt{name} is not a variable, and any @nt{expression}
 within the renamed @SynI{object_}@nt{name} contains no references to variables
-nor calls on non-static functions.]}
+nor calls on nonstatic functions.]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[This exposes known renamings of
@@ -4373,8 +4378,7 @@ shall be of mode @key[in].],Old=[]}
 A generic function instantiation whose @nt{designator} is an
 @nt{operator_symbol} is only allowed if the specification of the
 generic function has the corresponding number of
-parameters@Chg{Version=[3],New=[ of mode @key[in] and no other
-parameters],Old=[]}.
+parameters@Chg{Version=[3],New=[, and they are all of mode @key[in]],Old=[]}.
 
 @nt{Default_expression}s are not allowed for the parameters of an operator
 (whether the operator is declared with an explicit
@@ -4610,12 +4614,12 @@ is not allowed for an @nt{expression_@!function_@!declaration}; however, an
 @end{StaticSem}
 
 @begin{RunTime}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[ The execution of an expression function is invoked
 by a subprogram call. For the execution of a subprogram call on an expression
-function, the execution of the @nt{subprogram_body} is equivalent to a function
-body containing only a @nt{simple_return_statement} whose @nt{expression} is
-that of the expression function.]}
+function, the execution of the @nt{subprogram_body} exceutes an implicit
+function body containing only a @nt{simple_return_statement} whose
+@nt{expression} is that of the expression function.]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}

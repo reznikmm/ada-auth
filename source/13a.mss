@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:40 $}
+@Comment{$Date: 2011/09/29 06:37:24 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.95 $}
+@Comment{$Revision: 1.96 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -451,7 +451,7 @@ pragma Asynchronous (applies to procedures)
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[3],Text=[While a @nt{aspect_specification} is not
+@ChgAdded{Version=[3],Text=[While an @nt{aspect_specification} is not
 a representation item, a similar categorization applies to the aspect
 that corresponds to each of these representation items (along with
 aspects that do not have associated representation items).]}
@@ -587,7 +587,8 @@ or has any user-defined primitive subprograms.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
 @Chg{New=[Operational and representation],Old=[Representation]} aspects of
 a generic formal parameter are the same as those of the actual.
-@Chg{New=[aspects @Chg{Version=[2],New=[],Old=[of a partial view ]}are the
+@Chg{New=[Operational and representation aspects
+@Chg{Version=[2],New=[],Old=[of a partial view ]}are the
 same @Chg{Version=[2],New=[for all views of a type],Old=[as those of the full view]}.],Old=[]}
 A type-related representation item is not allowed for a
 descendant of a generic formal untagged type.

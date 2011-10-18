@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.40 $ $Date: 2011/08/17 00:29:40 $ $Author: randy $ }
+@comment{ $Revision: 1.41 $ $Date: 2011/09/29 06:37:24 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:40 $}
+@Comment{$Date: 2011/09/29 06:37:24 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -49,8 +49,8 @@ implementations supporting the Information Systems
 Interfaces.COBOL (respectively, Interfaces.C) specified in
 @RefSecNum{Interface to Other Languages}
 and should support a @i{convention_}@nt{identifier} of
-COBOL (respectively, C) in the @Chg{Version=[3],New=[Convention
-aspect],Old=[interfacing pragmas]}
+COBOL (respectively, C) @Chg{Version=[3],New=[for],Old=[in]} the
+@Chg{Version=[3],New=[Convention aspect],Old=[interfacing pragmas]}
 (see @RefSecNum{Interface to Other Languages}),
 thus allowing Ada programs to interface with programs written in
 that language.
@@ -89,8 +89,8 @@ of 2 versus 10 for S'Machine_Radix is not specified.
 @end{Ramification}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Machine_Radix],
-    Text=[@ChgAdded{Version=[3],Text=[Radix (2 or 10) used to represent a
-      decimal fixed point type.]}]}
+    Text=[@ChgAdded{Version=[3],Text=[Radix (2 or 10) that is used to
+      represent a decimal fixed point type.]}]}
 
 @end{StaticSem}
 

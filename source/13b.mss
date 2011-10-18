@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:40 $}
+@Comment{$Date: 2011/09/29 06:37:24 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.86 $}
+@Comment{$Revision: 1.87 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -351,7 +351,7 @@ have been moved to the Real Time Annex.
 
    --@RI{ @Defn2{Term=[address], Sec=(arithmetic)}Address Arithmetic:}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key(function) "+"(Left : Address; Right : Storage_Offset)@Chg{Version=[3],New=[],Old=[
      ]} @key(return) Address@Chg{Version=[3],New=[
       @key(with) Convention => Intrinsic],Old=[]};
@@ -366,7 +366,7 @@ have been moved to the Real Time Annex.
       @key(with) Convention => Intrinsic],Old=[]};
 
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key(function) "@key(mod)"(Left : Address; Right : Storage_Offset)
       @key(return) Storage_Offset@Chg{Version=[3],New=[
          @key(with) Convention => Intrinsic],Old=[]};
@@ -374,7 +374,7 @@ have been moved to the Real Time Annex.
 
    --@RI{ Conversion to/from integers:}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key[type] @AdaTypeDefn{Integer_Address} @key[is] @RI{implementation-defined};
    @key[function] @AdaSubDefn{To_Address}(Value : Integer_Address) @key[return] Address@Chg{Version=[3],New=[
       @key(with) Convention => Intrinsic],Old=[]};
@@ -382,13 +382,13 @@ have been moved to the Real Time Annex.
       @key(with) Convention => Intrinsic],Old=[]};
 
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[],Old=[   @key[pragma] Convention(Intrinsic, "+");
       @RI(-- ...and so on for all language-defined subprograms declared in this package.)
 ]}@key[end] System.Storage_Elements;
 @end{Example}
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 The Convention @Chg{Version=[3],New=[aspects],Old=[@nt{pragma}s]} imply that
 the attribute Access is not allowed for those operations.
 
@@ -516,7 +516,7 @@ converts from that record type to type Address.
    @key[function] @AdaSubDefn{To_Address}(Value : Object_Pointer) @key[return] Address@Chg{Version=[3],New=[
       @key(with) Convention => Intrinsic],Old=[]};
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[],Old=[   @key[pragma] Convention(Intrinsic, To_Pointer);
    @key[pragma] Convention(Intrinsic, To_Address);
 ]}@key[end] System.Address_To_Access_Conversions;
@@ -732,7 +732,7 @@ of the generic function Unchecked_Conversion.]
 @begin{StaticSem}
 @Leading@keepnext@;The following language-defined generic library function exists:
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @key[generic]
    @key[type] Source(<>) @key[is] @key[limited] @key[private];
    @key[type] Target(<>) @key[is] @key[limited] @key[private];
@@ -742,7 +742,7 @@ of the generic function Unchecked_Conversion.]
 @key[pragma] Pure(Ada.Unchecked_Conversion);
 @end{Example}
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 The @Chg{Version=[3],New=[aspect],Old=[@nt{pragma}]} Convention implies that
 the attribute Access is not allowed
 for instances of Unchecked_Conversion.
@@ -2384,7 +2384,7 @@ the generic procedure Unchecked_Deallocation.]
 @begin{StaticSem}
 @leading@keepnext@;The following language-defined generic library procedure exists:
 @begin{Example}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @key[generic]
    @key[type] Object(<>) @key[is] @key[limited] @key[private];
    @key[type] Name   @key[is] @key[access]  Object;
@@ -2394,7 +2394,7 @@ the generic procedure Unchecked_Deallocation.]
 @key[pragma] Preelaborate(Ada.Unchecked_Deallocation);
 @end{Example}
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 The @Chg{Version=[3],New=[aspect],Old=[@nt{pragma}]} Convention implies that
 the attribute Access is not allowed
 for instances of Unchecked_Deallocation.
@@ -5096,7 +5096,7 @@ applies to the result of the Input function.]}
   New=[],Old=[first subtype or ]}base subtype is
   @Chg{Version=[3],New=[allowed],Old=[required]}. Thus, for a scalar
   type with a partial view (which is never scalar), whether the
-  @Chg{Version=[3], New=[],Old=[first subtype or ]} the base subtype is
+  @Chg{Version=[3], New=[],Old=[first subtype or the ]} base subtype is
   @Chg{Version=[3], New=[allowed],Old=[required]} is
   determined by whether the @nt{attribute_definition_clause} occurs before or
   after the full definition of the scalar type.]}

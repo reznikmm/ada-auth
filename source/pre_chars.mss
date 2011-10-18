@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.38 $ $Date: 2011/06/04 05:28:20 $ $Author: randy $ }
+@comment{ $Revision: 1.39 $ $Date: 2011/09/29 06:37:25 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2011/06/04 05:28:20 $}
+@Comment{$Date: 2011/09/29 06:37:25 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -247,8 +247,8 @@ not alphanumeric.
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Text=[Is_Line_Terminator@\True if Item is a character
-True if Item is a character with position 10 .. 13 (Line_Feed, Line_Tabulation,
-Form_Feed, Carriage_Return) or 133 (Next_Line).]}
+with position 10 .. 13 (Line_Feed, Line_Tabulation, Form_Feed, Carriage_Return)
+or 133 (Next_Line).]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Text=[Is_Mark@\Never True (no value of type Character
@@ -407,9 +407,22 @@ are not considered lower case letters by Ada.Characters.Handling.]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[This is to maintain compatibility with the Ada 95
-  definitions of these functions.]}
+  @ChgAdded{Version=[3],Text=[This is to maintain runtime compatibility with
+  the Ada 95 definitions of these functions. We don't list the exact characters
+  involved because they're likely to change in future character set standards;
+  the list for ISO 10646:2003 can be found in
+  @AILink{AI=[AI05-0114-1],Text=[AI05-0114-1]}.]}
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[No version of Ada.Characters.Handling is intended
+  to do portable (Ada-version independent) manipulation of Ada identifiers.
+  Specifically for Ada 2012, Ada.Wide_Characters.Handling has the correct
+  classification of characters, but that is unlikely to be true in future
+  Ada standards (it will have to remain tied to the classifications of
+  ISO 10646:2003 forever in order to avoid breaking programs at runtime, while
+  future Ada standards will move to newer character set standards.]}
+@end{Ramification}
 @end{Notes}
 
 @begin{Extend95}

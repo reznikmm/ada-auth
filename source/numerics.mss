@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.63 $ $Date: 2011/08/17 00:29:40 $ $Author: randy $ }
+@comment{ $Revision: 1.64 $ $Date: 2011/09/29 06:37:24 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:40 $}
+@Comment{$Date: 2011/09/29 06:37:24 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -42,8 +42,8 @@ implementations supporting the Numerics Annex should provide the child package
 Interfaces.Fortran (respectively, Interfaces.C) specified in
 @RefSecNum{Interface to Other Languages}
 and should support a @i{convention_}@nt{identifier} of
-Fortran (respectively, C) in the @Chg{Version=[3],New=[Convention
-aspect],Old=[interfacing pragmas]}
+Fortran (respectively, C) @Chg{Version=[3],New=[for],Old=[in]}
+the @Chg{Version=[3],New=[Convention aspect],Old=[interfacing pragmas]}
 (see @RefSecNum{Interface to Other Languages}),
 thus allowing Ada programs to interface with programs written in
 that language.
@@ -3153,11 +3153,11 @@ Numerics.Generic_Real_Arrays shall be documented.]}]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0047-1]}
   @ChgAdded{Version=[3],Text=[Note moreover that the componentwise accuracy
   requirements are not met by subcubic methods for matrix multiplication such
-  as that devised by Strassen. These methods which are typically used for the
-  fast multiplication of very large matrices (e.g. order more than a few thousands)
-  have normwise accuracy properties. If it desired to use such methods then distinct
-  subprograms should be provided (perhaps in a child package). See Section
-  22.2.2 in the above reference.]}
+  as that devised by Strassen. These methods, which are typically used for the
+  fast multiplication of very large matrices (e.g. order more than a few
+  thousands), have normwise accuracy properties. If it is desired to use such
+  methods, then distinct subprograms should be provided (perhaps in a child
+  package). See Section 22.2.2 in the above reference.]}
 @end{ImplNote}
 @end{DocReq}
 
@@ -3553,7 +3553,7 @@ mathematical result would not.@Defn2{Term=[involve an inner product],Sec=[comple
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0047-1]}
   @ChgAdded{Version=[3],Text=[An inner product never involves implicit complex
   conjugation. If the product of a vector with the conjugate of another (or the
-  same) vector is required then this has to be stated explicitly by writing for
+  same) vector is required, then this has to be stated explicitly by writing for
   example X * Conjugate(Y). This mimics the usual mathematical notation.]}
 @end{Discussion}
 

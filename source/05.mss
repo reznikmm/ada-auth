@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:39 $}
+@Comment{$Date: 2011/09/29 06:37:24 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.49 $}
+@Comment{$Revision: 1.50 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -614,8 +614,8 @@ value of one or more corresponding @nt{condition}s.]
 
 
 @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0147-1]}
-@Syn{lhs=<@Chg{Version=[3],New=[],Old=[condition]}>,
-rhs="@Chg{Version=[3],New=[],Old=[@SynI{boolean_}@Syn2{expression}]}"}
+@DeletedSyn{Version=[3],LHS=<@Chg{Version=[3],New=[],Old=[condition]}>,
+RHS="@Chg{Version=[3],New=[],Old=[@SynI{boolean_}@Syn2{expression}]}"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -730,17 +730,19 @@ Old=[]}as follows:
     @RefSecNum{Variant Parts and Discrete Choices}.]}
   @end{Discussion}
 @begin{itemize}
-  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1],ARef=[AI05-0153-3],ARef=[AI05-0188-1]}
-  If the @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression} is a @nt{name} @Redundant[(including a
-  @nt<type_conversion>@Chg{Version=[3],New=[, a @nt{qualified_expression},],Old=[]}
-  or a @nt<function_call>)] having
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1],ARef=[AI05-0153-3],ARef=[AI05-0188-1],ARef=[AI05-0262-1]}
+  If the @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression} is a @nt{name}
+  @Redundant[(including a
+  @nt<type_conversion>@Chg{Version=[3],New=[, @nt{qualified_expression},],Old=[]}
+  or @Chg{Version=[3],New=[],Old=[a ]}@nt<function_call>)] having
   a static and constrained nominal subtype,@Chg{Version=[3],New=[],Old=[ or
   is a @nt{qualified_expression} whose
   @nt{subtype_mark} denotes a static and constrained
   scalar subtype,]}
   then each non-@key{others} @nt{discrete_choice} shall cover only values in
-  that subtype@Chg{Version=[3],New=[ that satisfy the predicate],Old=[]},
-  and each value of that subtype@Chg{Version=[3],New=[ that satisfies the
+  that subtype@Chg{Version=[3],New=[ that satisfy its
+  predicate (see @RefSecNum{Subtype Predicates})],Old=[]},
+  and each value of that subtype@Chg{Version=[3],New=[ that satisfies its
   predicate],Old=[]} shall be covered by some @nt{discrete_choice}
   @Redundant[(either explicitly or by @key(others))].
   @begin{Ramification}
@@ -1039,7 +1041,7 @@ execution of the @nt{sequence_of_@!statements}; if the value of the
 @nt{condition} is True, the @nt{sequence_of_@!statements} is executed;
 if False, the execution of the @nt{loop_@!statement} is complete.
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2],ARef=[AI05-0262-1]}
 @PDefn2{Term=[execution],
   Sec=(loop_statement with a for iteration_scheme)}
 @PDefn2{Term=[elaboration], Sec=(loop_parameter_specification)}
@@ -1056,8 +1058,9 @@ the execution of the
 @nt{loop_statement} is complete. Otherwise, the
 @nt{sequence_of_@!statements} is executed once for each value of the
 discrete subtype defined by the
-@nt{discrete_@!subtype_@!definition} (or until the loop is left as a
-consequence of a transfer of control).
+@nt{discrete_@!subtype_@!definition}
+@Chg{Version=[3],New=[that satisfies the predicate of the subtype ],Old=[]}(or
+until the loop is left as a consequence of a transfer of control).
 @Defn2{Term=[assignment operation], Sec=(during execution of a @key{for} loop)}
 Prior to each such iteration,
 the corresponding value of the discrete subtype is assigned to the
@@ -1069,6 +1072,12 @@ The order of creating the loop parameter and evaluating the
 @nt{discrete_subtype_definition} doesn't matter,
 since the creation of the loop parameter has no side effects (other
 than possibly raising Storage_Error, but anything can do that).
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[The predicate (if any) necessarily has to be a
+static predicate as a dynamic predicate is explicitly disallowed @em
+see @RefSecNum{Subtype Predicates}.]}
+
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
@@ -1251,7 +1260,7 @@ type @i<T> (including @i<T>'Class).]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Text=[An @i<iterable type> is an indexable type
-with specified Default_iterator and Iterator_Element aspects.@Defn{iterable type}
+with specified Default_Iterator and Iterator_Element aspects.@Defn{iterable type}
 A @i<reversible iterable type> is an iterable type with the default iterator type
 being a reversible iterator type.@Defn{reversible iterable type}
 An @i<iterable object> is an object of an iterable type.@Defn{iterable object}
@@ -1412,12 +1421,12 @@ parameter is the default element subtype for the type of the
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Text=[In a generalized iterator, the loop parameter
-denotes a constant. In an array component iterator, the loop parameter
-denotes a constant if the @SynI<array_>@nt{name} denotes a constant; otherwise
+is a constant. In an array component iterator, the loop parameter
+is a constant if the @SynI<array_>@nt{name} denotes a constant; otherwise
 it denotes a variable. In a container element iterator, the loop parameter
-denotes a constant if the @SynI{iterable_}@nt{name} denotes a constant, or if
+is a constant if the @SynI{iterable_}@nt{name} denotes a constant, or if
 the Variable_Indexing aspect is not specified for the type of the
-@SynI{iterable_}@nt{name}; otherwise it denotes a variable.]}
+@SynI{iterable_}@nt{name}; otherwise it is a variable.]}
 
 @end{StaticSem}
 
@@ -1431,7 +1440,7 @@ if any.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Text=[For a generalized iterator, the loop parameter is
-created, and the @SynI{iterator_}@nt{name} is evaluated and the denoted iterator
+created, the @SynI{iterator_}@nt{name} is evaluated, and the denoted iterator
 object becomes the @i<loop iterator>.@Defn{loop iterator} In a forward
 generalized iterator, the operation First of the iterator type is called on the
 loop iterator, to produce the initial value for the loop parameter. If the

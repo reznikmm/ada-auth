@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:39 $}
+@Comment{$Date: 2011/09/29 06:37:23 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.119 $}
+@Comment{$Revision: 1.120 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1234,7 +1234,7 @@ the same declaration list in which @i<T> is declared. All of such functions
 shall have at least two parameters, the first of which is of type @i<T> or
 @i<T>'Class, or is an access parameter with designated type @i<T> or @i<T>'Class.
 All of such functions shall have a return type that is a reference
-type (see @RefSecNum{User-Defined References}), whose access discriminant
+type (see @RefSecNum{User-Defined References}), whose reference discriminant
 is of an access-to-variable type.]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1252,8 +1252,8 @@ is of an access-to-variable type.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[These aspects are inherited by descendants of @i<T>
-(including the class-wide type @i<T>'Class). The aspects may not be overridden,
-but the functions they denote may be.]}
+(including the class-wide type @i<T>'Class). @Redundant[The aspects shall not
+be overridden, but the functions they denote may be.]]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1273,6 +1273,39 @@ An @i<indexable object> is an object of an indexable type.@Defn{indexable object
 of calling a function named by a Constant_Indexing or Variable_Indexing aspect.]]}
 
 @end{StaticSem}
+
+@begin{Legality}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[The Constant_Indexing or
+Variable_Indexing aspect shall not be specified:]}
+@begin{Itemize}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[on a derived type if the parent type has the
+corresponding aspect specified or inherited; or]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[on a @nt{full_type_declaration} if the type has
+a tagged partial view.]}
+@end{Itemize}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@PDefn{generic contract issue}
+In addition to the places where @LegalityTitle normally apply
+(see @RefSecNum{Generic Instantiation}),
+these rules apply also in the private part of an instance of a generic unit.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[In order to enforce these rules without breaking
+  privacy, we cannot allow a tagged private type to have hidden indexing
+  aspects. There is no problem if the private type is not tagged (as the
+  indexing aspects cannot be specified on descendants in that case).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We don't need an assume-the-worst rule as deriving
+  from formal tagged type is not allowed in generic bodies.]}
+@end{Ramification}
+
+@end{Legality}
 
 @begin{Syntax}
 
@@ -2581,7 +2614,10 @@ We now allow a nonstatic @key(others) choice even if there are
 other array component expressions as well.
 @end{Discussion}
 
-In a @nt<named_array_aggregate> with more than one @nt<discrete_choice>,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
+In a @nt<named_array_aggregate>
+@Chg{Version=[3],New=[where all @nt{discrete_choice}s are
+static],Old=[with more than one @nt<discrete_choice>]},
 no two @nt<discrete_choice>s are allowed to
 cover the same value (see @RefSecNum{Variant Parts and Discrete Choices});
 if there is no @key[others] choice, the @nt<discrete_choice>s taken
@@ -2591,6 +2627,16 @@ exactly cover a contiguous sequence of values of the corresponding index type.
   This implies that each component must be
   specified exactly once. See AI83-309.
 @end{Ramification}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+  @ChgAdded{Version=[3],Text=[This has to apply even if there is only one
+  static @nt{discrete_choice}; a single choice has to represent a contiguous
+  range (a @nt{subtype_mark} with a static predicate might represent a
+  discontiguous set of values). If the (single) choice is a dynamic subtype, we
+  don't need to make this check as no predicates are allowed (see
+  @RefSecNum{Subtype Predicates}) and
+  thus the range has to be contiguous.]}
+@end{Reason}
 
 A bottom level subaggregate of a multidimensional @nt<array_aggregate>
 of a given array type
@@ -3482,14 +3528,17 @@ The equality operators are not defined for @i{every} nonlimited
 type @em see below for the exact rule.
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @Defn{membership test}
 @Defn{in (membership test)}
 @Defn{not in (membership test)}
 A @i(membership test), using @key(in) or @key(not in),
 determines whether or not a value
-belongs to a given subtype or range, or has a tag that identifies
-a type that is covered by a given type.
-Membership tests are allowed for all types.]
+belongs to @chg{Version=[3],New=[any],Old=[a]} given subtype or range,
+@chg{Version=[3],New=[is equal to any given value,],Old=[or]} has a tag
+that identifies a type that is covered by a given type@chg{Version=[3],New=[,
+or is convertible to and with accessibility level appropriate for a given
+access type],Old=[]}. Membership tests are allowed for all types.]
 
 @end{Intro}
 
@@ -3507,7 +3556,7 @@ determined by the @Chg{Version=[3],New=[@nt<membership_choice>s of the
 @nt{membership_choice_list} shall resolve to the same type, which is the tested
 type; or each @nt{membership_choice} shall be of an elementary type, and the
 tested type shall be covered by each of these elementary
-types.],Old=[@nt<subtype_mark>]}. If the tested type is tagged, then the
+types.],Old=[@nt<subtype_mark>. If the tested type is tagged, then the
 @nt<simple_expression> shall resolve to be of a type that
 @Chg{Version=[2],New=[is convertible (see @RefSecNum{Type Conversions})
 to],Old=[covers or is covered by]} the tested type; if untagged, the expected
@@ -3562,8 +3611,8 @@ Untagged types covered by the tagged class-wide type
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
-@ChgAdded{Version=[3],Text=[If a membership test includes one or more choice
-expressions and the tested type of the membership test is limited, then the
+@ChgAdded{Version=[3],Text=[If a membership test includes one or more
+@nt{choice_expression}s and the tested type of the membership test is limited, then the
 tested type of the membership test shall have a visible primitive equality
 operator.]}
 @begin{Reason}
@@ -3687,10 +3736,10 @@ the designated profiles shall be subtype conformant.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
-@ChgAdded{Version=[3],Text=[The explicit declaration of a primitive equality
-operator of an untagged record type, if its profile is type conformant
-with that of the corresponding predefined equality operator, shall occur
-before the type is frozen. If the untagged record type has a nonlimited
+@ChgAdded{Version=[3],Text=[If the profile of an explicitly declared primitive
+equality operator of an untagged record type is type conformant with that of the
+corresponding predefined equality operator, the declaration shall occur before
+the type is frozen. In addition, if the untagged record type has a nonlimited
 partial view, then the declaration shall occur in the visible part
 of the enclosing package.
 @PDefn{generic contract issue}
@@ -3986,7 +4035,7 @@ membership test using @key(in)]} yields the result True if:
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3],ARef=[AI05-0158-1]}
   @ChgAdded{Version=[3],Text=[The @nt{membership_choice} is a @nt{range}
-  @nt{subtype_mark} and the value of the @nt<simple_expression> belongs
+  and the value of the @nt<simple_expression> belongs
   to the given @nt<range>.]}
 
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0158-1]}
@@ -4108,9 +4157,11 @@ My_Car = @key(null)               --@RI[ @Chg{Version=[3],New=[True],Old=[true]}
 My_Car = Your_Car           --@RI[ @Chg{Version=[3],New=[True],Old=[true]} if we both share the same car]
 My_Car.@key[all] = Your_Car.@key[all]   --@RI[ @Chg{Version=[3],New=[True],Old=[true]} if the two cars are identical]
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
 N @key(not) @key(in) 1 .. 10            --@RI[ range membership test]
 Today @key(in) Mon .. Fri         --@RI[ range membership test]
-Today @key(in) Weekday            --@RI[ subtype membership test (see @RefSecNum{Enumeration Types})]
+Today @key(in) Weekday            --@RI[ subtype membership test (see @RefSecNum{Enumeration Types})]@Chg{Version=[3],New=[
+Card @key(in) Clubs | Spades      --@RI[ list membership test (see @RefSecNum{Enumeration Types})]],Old=[]}
 Archive @key(in) Disk_Unit        --@RI[ subtype membership test (see @RefSecNum{Variant Parts and Discrete Choices})]
 Tree.@key(all) @key(in) Addition'Class  --@RI[ class membership test (see @RefSecNum{Type Extensions})]
 @end{Example}
@@ -4871,13 +4922,13 @@ a negative value is provided for the exponent.
 @LabeledAddedSubclause{Version=[3],Name=[Conditional Expressions]}
 
 @begin{Intro}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[A @nt{conditional_expression} selects for evaluation
 at most one of the enclosed @SynI<dependent_>@nt{expression}s, depending
 a decision among the alternatives. One
 kind of @nt{conditional_expression} is the @nt{if_expression}, which selects for
 evaluation a @SynI<dependent_>@nt{expression} depending on the value of one or more
-corresponding conditions. Another kind of @nt{conditional_expression} is the
+corresponding conditions. The other kind of @nt{conditional_expression} is the
 @nt{case_expression}, which selects for evaluation one of a number of alternative
 @SynI<dependent_>@nt{expression}s; the chosen alternative is determined by the
 value of a @SynI<selecting_>@nt{expression}.]}
@@ -4929,9 +4980,9 @@ rhs="@Chg{Version=[3],New=[
         @SynI{dependent_}@Syn2{expression}],Old=<>}"}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
-@ChgAdded{Version=[3],Text=[Wherever the Syntax Rules allow an expression, a
-@nt{conditional_expression} may be used in place of the expression, so long as
-it is immediately surrounded by parentheses.]}
+@ChgAdded{Version=[3],Text=[Wherever the Syntax Rules allow an @nt{expression},
+a @nt{conditional_expression} may be used in place of the @nt{expression}, so
+long as it is immediately surrounded by parentheses.]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
@@ -5109,10 +5160,10 @@ dynamically tagged, or none shall be dynamically tagged; the
 if all of the @SynI{dependent_}@nt{expression}s are tag-indeterminate, and is
 statically tagged otherwise.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[If there is no @key[else]
-@SynI{dependent_}@nt{expression}, all of the @SynI{dependent_}@nt{expression}s
-of the @nt{if_expression} shall be of a boolean type.]}
+@SynI{dependent_}@nt{expression}, the @nt{if_expression} shall be of
+a boolean type.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
 @ChgAdded{Version=[3],Text=[All @LegalityTitle that apply to the
@@ -5158,6 +5209,13 @@ converted to the type of the @nt{if_expression}, and the resulting value is the
 value of the @nt{if_expression}. Otherwise (when there is no @key[else] clause),
 the value of the @nt{if_expression} is True.@PDefn2{Term=[evaluation],Sec=[if_expression]}]}
 
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[@key[Else] is required unless the
+  @nt{if_expression} has a boolean type, so the last sentence can only apply to
+  @nt{if_expression}s with a boolean type.]}
+@end{Ramification}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
 @ChgAdded{Version=[3],Text=[For the evaluation of a @nt{case_expression}, the
 @SynI<selecting_>@nt{expression} is first evaluated.
@@ -5172,12 +5230,6 @@ Otherwise (the value is not covered by any
 @nt{discrete_choice_list}, perhaps due to being outside the base range),
 Constraint_Error is raised.@PDefn2{Term=[evaluation],Sec=[case_expression]}]}
 
-@begin{Ramification}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[@key[Else] is required unless the
-  @nt{if_expression} has a boolean type, so the last sentence can only apply to
-  @nt{if_expression}s with a boolean type.]}
-@end{Ramification}
 @end{Runtime}
 
 
@@ -5279,8 +5331,8 @@ routine on an array A with an index subtype T can be written:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Post => (A'Length < 2
-   @key[or else] (@key[for all] I @key[in] A'First .. T'Pred(A'Last) => A (I) <= A (T'Succ (I))))]}
+@ChgAdded{Version=[3],Text=[Post => (A'Length < 2 @key[or else]
+   (@key[for all] I @key[in] A'First .. T'Pred(A'Last) => A (I) <= A (T'Succ (I))))]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}

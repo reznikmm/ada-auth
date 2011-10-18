@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:40 $}
+@Comment{$Date: 2011/09/29 06:37:24 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.57 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -2694,8 +2694,10 @@ An implementation may extend Get @Redundant[and Put] for floating point
 types to support special values such as infinities and NaNs.
 
 @begin{Discussion}
-See also the similar permission for the Wide_Value attribute in
-@RefSecNum{Scalar Types}.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
+See also the similar permission for the @Chg{Version=[3],New=[Wide_Wide_Value, ],Old=[]}
+Wide_Value@Chg{Version=[3],New=[, and Value attributes],Old=[attribute]}
+in @RefSecNum{Scalar Types}.
 @end{Discussion}
 
 
@@ -2814,16 +2816,18 @@ Default_Setting : Type_Set := Upper_Case;
           Enum'Image(Item), as modified by the Width
           and Set parameters.
 @begin{Discussion}
-  For a character type, the literal might be a Wide_Character
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
+  For a character type, the literal might be a
+  @Chg{Version=[3],New=[Wide_Wide_Character, ],Old=[]}Wide_Character@Chg{Version=[3],New=[,],Old=[]}
   or a control character.
   Whatever Image does for these things is appropriate here,
   too.
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0036-1]}
-@ChgAdded{Version=[3],Text=[The @ldquote@;characters produced@rdquote@;
-defines the @ldquote@;characters to be output@rdquote in the sense of
-@RefSecNum{Get and Put Procedures}, so a result that cannot fit on any
-bounded line will raise Layout_Error.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0036-1]}
+  @ChgAdded{Version=[3],Text=[The @ldquote@;characters produced@rdquote@;
+  defines the @ldquote@;characters to be output@rdquote in the sense of
+  @RefSecNum{Get and Put Procedures}, so a result that cannot fit on any bounded
+  line will raise Layout_Error.]}
 @end{Discussion}
 
 @begin{Example}@Keepnext
@@ -2842,9 +2846,11 @@ bounded line will raise Layout_Error.]}
           character literal does not correspond to a value of the
           subtype Enum.
 @begin{Honest}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   For a character type, it is permissible for the implementation to make
   Get do the inverse of what Put does,
-  in the case of wide @nt{character_literal}s and control characters.
+  in the case of wide@Chg{Version=[3],New=[ and wide_wide],Old=[]}
+  @nt{character_literal}s and control characters.
 @end{Honest}
 
 @begin{Example}@Keepnext

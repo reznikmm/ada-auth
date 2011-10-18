@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:39 $}
+@Comment{$Date: 2011/09/29 06:37:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.115 $}
+@Comment{$Revision: 1.116 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -487,7 +487,7 @@ in the chain is not visible].@Defn2{Term=[descendant],Sec=[at runtime]}]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0115-1]}@ChgNote{Paragraph number changed}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}@ChgNote{Paragraph number changed}
 @ChgAdded{Version=[2],Text=[The function Parent_Tag returns the tag of the
 parent type of the type whose tag is T. If the type does not have a parent type
 (that is, it was not declared by a derived_type_declaration), then No_Tag is
@@ -502,7 +502,7 @@ operation, ignoring privateness is OK.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00405-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0115-1]}@ChgNote{Paragraph number changed}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}@ChgNote{Paragraph number changed}
 @ChgAdded{Version=[2],Text=[The function Interface_Ancestor_Tags returns an
 array containing the tag of each interface ancestor type of the type whose tag
 is T, other than T itself. The lower bound of the returned array is 1, and the
@@ -698,10 +698,11 @@ The tag of a value is the tag of the associated object
 (see @RefSecNum{Formal Parameter Modes}).
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02],ARef=[AI95-00344-01],ARef=[AI95-00405-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0092-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0092-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[Tag_Error is raised by a call of Descendant_Tag,
 Expanded_Name, External_Tag, @Chg{Version=[3],New=[Interface_@!Ancestor_@!Tags],
-Old=[Interface_Ancestor_Tag]},
+Old=[Interface_Ancestor_Tag]},@Chg{Version=[3],New=[
+Is_Abstract,],Old=[]}
 Is_Descendant_@!At_Same_Level,
 @Chg{Version=[3],New=[],Old=[or ]}Parent_Tag@Chg{Version=[3],New=[,
 Wide_Expanded_Name, or Wide_Wide_Expanded_Name],Old=[]} if any
@@ -984,12 +985,12 @@ Tagged types are a new concept.
   fixed if it does occur.]}
 @end{Incompatible2005}
 
-@begin{DiffWord95}
+@begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0115-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> We explicitly define the meaning
   of "descendant" at runtime, so that it does not depend upon visibility
   as does the usual meaning.]}
-@end{DiffWord95}
+@end{DiffWord2005}
 
 
 @LabeledSubClause{Type Extensions}
@@ -4950,11 +4951,15 @@ is the same as that of
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[In the above rules, the operand of a view
 conversion, parenthesized
 expression or @nt{qualified_expression} is considered to be used in a context
 if the view conversion, parenthesized expression or @nt{qualified_expression}
-itself is used in that context.]}
+itself is used in that context.@Chg{Version=[3],New=[
+Similarly, the @SynI{dependent_}@nt{expression} of a @nt{conditional_expression}
+is considered to be used in a context if the @nt{conditional_expression} itself
+is used in that context.],Old=[]}]}
 
 @begin{WideAbove}
 @Leading@Defn{statically deeper}

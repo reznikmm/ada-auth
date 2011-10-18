@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2011/08/13 04:53:57 $}
+@Comment{$Date: 2011/09/29 06:37:24 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.117 $}
+@Comment{$Revision: 1.118 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1248,7 +1248,7 @@ that place, and assignment is allowed after that place.]
 Sec=[of the full view of a type]} of the full view of some ancestor
 of its parent type only if the current view it has of its parent is a
 descendant of the full view of that ancestor. More generally, at any given
-point, a type is descended from the same view of an ancestor as that from which
+place, a type is descended from the same view of an ancestor as that from which
 the current view of its parent is descended. This view determines what
 characteristics are inherited from the ancestor@Redundant[, and, for example,
 whether the type is considered to be a descendant of a record type, or a
@@ -1788,7 +1788,7 @@ following places, on the specified object(s):@Defn2{Term=[assertion policy],
 @ChgAdded{Version=[3],Text=[The invariant check consists of the evaluation of
 each invariant expression that applies to @i<T>, on each of the objects
 specified above. If any of these evaluate to False,
-Ada.Assertions.Assertion_Error is raised at the point of the object
+Assertions.Assertion_Error is raised at the point of the object
 initialization, conversion, or call.@Defn2{Term=(Assertion_Error),
 Sec=(raised by failure of run-time check)} If a given call requires more than one
 evaluation of an invariant expression, either for multiple objects of a single
@@ -1797,7 +1797,7 @@ an arbitrary order, and if one of them evaluates to False, it is not specified w
 the others are evaluated. Any invariant check is performed prior to copying back
 any by-copy @key[in out] or @key[out] parameters. Invariant checks,
 any postcondition check, and any
-any constraint checks associated with by-copy @key[in out] or @key[out]
+constraint checks associated with by-copy @key[in out] or @key[out]
 parameters are performed in an arbitrary order.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1],ARef=[AI05-0250-1]}
@@ -1836,9 +1836,9 @@ performed on a call on that subprogram or entry.]]}
 @begin{Notes}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0250-1]}
   @ChgAdded{Version=[3],Text=[A call of a primitive subprogram of type @i<NT>
-  that is inherited from type @i<T> will need to satisfy the specific invariants
+  that is inherited from type @i<T> needs to satisfy the specific invariants
   of both the types @i<NT> and @i<T>. A call of a primitive subprogram of type
-  @i<NT> that is redefined for type @i<NT> need to satisfy only the specific
+  @i<NT> that is overridden for type @i<NT> needs to satisfy only the specific
   invariants of type @i<NT>.]}
 
 @begin{TheProof}
@@ -1920,13 +1920,15 @@ corresponding full declaration:
   @end{Ramification}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00385-01]}
-  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0062-1]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0062-1],ARef=[AI05-0262-1]}
   If the @Chg{Version=[2],New=[deferred constant declaration includes
-  a],Old=[subtype defined by the]} @nt<subtype_indication> @Chg{Version=[2],
+  a],Old=[subtype defined by the]} @nt<subtype_indication>
+  @Chg{Version=[3],New=[@i<S> ],Old=[]}@Chg{Version=[2],
   New=[that defines a],Old=[in the deferred declaration is]}
   constrained@Chg{Version=[2],New=[ subtype],Old=[]}, then the
   @Chg{Version=[3],New=[constraint],Old=[subtype]} defined
-  by the @nt<subtype_indication> in the full declaration shall match it
+  by the @nt<subtype_indication> in the full declaration shall match
+  @Chg{Version=[3],New=[the constraint defined by @i<S>],Old=[it]}
   statically.@Redundant[ On the other hand,
   if the subtype of the deferred constant is unconstrained,
   then the full declaration is still allowed to impose a constraint.
@@ -2202,7 +2204,8 @@ and ]}the task.
 @ChgAdded{Version=[2],Type=[Leading],Text=[In the following contexts,
 an @nt{expression} of a limited
 type is not permitted unless it is an @nt{aggregate}, a @nt{function_call},
-@Chg{Version=[3],New=[],Old=[or ]}a parenthesized @nt{expression} or
+@Chg{Version=[3],New=[],Old=[or ]}a parenthesized
+@nt{expression}@Chg{Version=[3],New=[,],Old=[]} or
 @nt{qualified_expression} whose operand
 is permitted by this rule@Chg{Version=[3],New=[ or a @nt{conditional_expression}
 all of whose @Syni{dependent_}@nt{expression}s are permitted by this
@@ -3121,7 +3124,7 @@ used by the implementation).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Similarly, an @nt{aggregate} that has
-  a controlled part but it not itself controlled and that is used to
+  a controlled part but is not itself controlled and that is used to
   initialize an object also has to be built in place. This is also a change
   from Ada 95, but it is not an inconsistency as it only serves to restrict
   implementation choices. This avoids problems if a type like Dyn_String
@@ -4052,11 +4055,11 @@ having the implementation complexity of an implicit coextension.]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023],ARef=[AI95-00169-01]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00162-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0066-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0066-1],ARef=[AI05-0262-1]}
 @Chg{Version=[2],New=[In the case of an @nt{expression} that is a master,
 finalization of any (anonymous) objects occurs @Chg{Version=[3],New=[after
 completing],Old=[as the final part of]}
-evaluation of the @nt{expression}@Chg{Version=[3],New=[ and use of the
+evaluation of the @nt{expression}@Chg{Version=[3],New=[ and all use of the
 objects, prior to starting the execution of any subsequent construct],Old=[]}.],
 Old=[@Chg{New=[If a transfer of control or raising of an exception occurs prior to
 performing a finalization of an anonymous object, the anonymous object is
@@ -4284,11 +4287,11 @@ the @nt{allocator}.]}
   if the associated access type is library level.]}
   @end{Reason}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0111-3]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0111-3],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[The implementation may finalize objects created by
 @nt{allocator}s for an access type whose storage pool supports subpools (see
 @RefSecNum{Storage Subpools}) as if the objects were created (in an arbitrary
-order) at the point where the storage pool was elaborated instead of the first
+order) at the point where the storage pool was elaborated instead of at the first
 freezing point of the access type.@PDefn2{Term=[arbitrary order],Sec=[allowed]}]}
 
   @begin{Ramification}

@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2007/02/06 04:48:51 $}
+@Comment{$Date: 2011/09/29 06:37:25 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.26 $}
+@comment{$Revision: 1.27 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -494,9 +494,11 @@ truncating @i{X} to the precision
    of the machine numbers results in a value outside the base range of S.
    A zero result has the sign of @i{X} when S'Signed_Zeros is True.]}
 @begin{Discussion}
+   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
    All of the primitive function attributes except Rounding and Machine
    correspond to subprograms in the Generic_Primitive_Functions
-   generic package proposed as a separate ISO standard (ISO/IEC DIS 11729) for
+   generic package @Chg{Version=[3],New=[that was ],Old=[]}proposed
+   as a separate ISO standard (ISO/IEC DIS 11729) for
    Ada 83. The Scaling, Unbiased_Rounding, and Truncation attributes
    correspond to the Scale, Round, and Truncate functions, respectively, in
    Generic_Primitive_Functions. The Rounding attribute rounds away from zero;

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:40 $}
+@Comment{$Date: 2011/09/29 06:37:24 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1622,8 +1622,7 @@ scheme very well.
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0213-1]}
 @Syn{lhs=<formal_type_declaration>,rhs="
     @Chg{Version=[3],New=[  @Syn2{formal_complete_type_declaration}
-    | @Syn2{formal_incomplete_type_declaration}],Old=<@key{type} @Syn2{defining_identifier}[@Syn2{discriminant_part}] @key{is} @Syn2{formal_type_definition}@Chg{Version=[3],New=<
-        [@Syn2{aspect_specification}]>,Old=[]};>}"}
+    | @Syn2{formal_incomplete_type_declaration}],Old=<@key{type} @Syn2{defining_identifier}[@Syn2{discriminant_part}] @key{is} @Syn2{formal_type_definition};>}"}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0183-1],ARef=[AI05-0213-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<formal_complete_type_declaration>,Old=<>}>,rhs="@Chg{Version=[3],New=<
@@ -2228,7 +2227,7 @@ the ancestor type is a composite type that is not an array type, the formal type
 inherits components from the ancestor type]} (including
 @Chg{Version=[3],New=[components, but excluding ],Old=[]}discriminants if
 @Chg{Version=[3],New=[there is ],Old=[]}a new @nt<discriminant_part>
-@Chg{Version=[3],New=[],Old=[is not ]}specified),
+@Chg{Version=[3],New=[],Old=[is not specified]}),
 @Chg{Version=[3],New=[predefined operators,
 and inherited user-defined primitive subprograms are determined
 by its ancestor type and its progenitor types (if any), in the
@@ -3193,7 +3192,8 @@ be available as possible resolutions as follows:]}
   subprogram except that @i{T} is systematically replaced by @i{T}'Class in the
   types of its profile, is potentially use-visible. The body of such a
   subprogram is as defined in @RefSecNum{Formal Private and Derived Types} for
-  primitive subprograms of a formal type when the actual type is class-wide.]}
+  primitive subprograms of a formal type when the actual type is
+  class-wide.@PDefn{potentially use-visible}]}
 @end{DescribeCode}
 
 @begin{Reason}
@@ -3207,10 +3207,10 @@ be available as possible resolutions as follows:]}
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1],ARef=[AI05-0131-1]}
   @ChgAdded{Version=[3],Text=[Although the above wording seems to require
-  constructing implicit versions of all of the primitive subprograms of type @i{T},
-  it should be clear that a compiler only needs to consider those that could
-  possibly resolve to the corresponding actual subprogram. For instance, if the
-  formal subprogram is a procedure with two parameters, and the actual
+  constructing implicit versions of all of the primitive subprograms of type
+  @i{T}, it should be clear that a compiler only needs to consider those that
+  could possibly resolve to the corresponding actual subprogram. For instance,
+  if the formal subprogram is a procedure with two parameters, and the actual
   subprogram name is Bar (either given explicitly or by default), the compiler
   need not consider primitives that are functions, that have the wrong number of
   parameters, that have defining names other than Bar, and so on; thus it does

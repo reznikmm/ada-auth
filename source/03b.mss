@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:39 $}
+@Comment{$Date: 2011/09/29 06:37:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 
 @LabeledClause{Array Types}
 
@@ -644,8 +644,8 @@ These attributes are not defined if A is a subtype-mark
 An implementation should normally represent
 multidimensional arrays in row-major order, consistent with the notation used
 for multidimensional array aggregates (see @RefSecNum(Array Aggregates)).
-However, if @Chg{Version=[3],New=[convention],Old=[a @key<pragma>
-Convention]}(Fortran@Chg{Version=[3],New=[ is specified
+However, if @Chg{Version=[3],New=[convention ],Old=[a @key<pragma>
+Convention(]}Fortran@Chg{Version=[3],New=[ is specified
 for],Old=[, ...) applies to]} a
 multidimensional array type, then column-major order should be used
 instead (see @RefSec{Interfacing with Fortran}).
@@ -1877,7 +1877,7 @@ discriminated type @Redundant[(after any implicit dereference)]},
 the following attribute is defined:
 @begin(description)
 @ChgAttribute{Version=[3], Kind=[Revised], ChginAnnex=[T],
-  Leading=[F], Prefix=<A>, AttrName=<Constrained>,
+  Leading=[F], Prefix=<A>, AttrName=<Constrained>, ARef=[AI05-0214-1],
   Text=[Yields the value True if A denotes a constant, a value,
   @Chg{Version=[3],New=[a tagged object, ],Old=[]}or a constrained variable,
   and False otherwise.]}
@@ -2456,14 +2456,29 @@ if it appears, shall be the last one in the enclosing construct.
 A @nt<discrete_choice> is defined to @i(cover a value) in the
 following cases:
 @begin(itemize)
-  A @nt{discrete_choice} that is an @nt{expression} covers a value if
-  the value equals the value of the @nt{expression}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
+  A @nt{discrete_choice} that is
+  @Chg{Version=[3],New=[a @nt{choice_expression}],Old=[an @nt{expression}]}
+  covers a value if
+  the value equals the value of
+  the @Chg{Version=[3],New=[@nt{choice_expression}],Old=[@nt{expression}]}
   converted to the expected type.
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3],ARef=[AI05-0262-1]}
   @ChgAdded{Version=[3],Text=[A @nt{discrete_choice} that is a
   @nt{subtype_indication} covers all values (possibly none) that belong to the
-  subtype.]}
+  subtype and that satisfy the static predicate of the subtype
+  (see @RefSecnum{Subtype Predicates}).]}
+
+  @begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+    @ChgAdded{Version=[3],Text=[A dynamic predicate is never allowed in this case
+    (for @nt{variant}s, @nt{case_statement}s, and @nt{case_expression}s,
+    a subtype with a dynamic
+    predicate isn't static and thus isn't allowed in a @nt{discrete_choice},
+    and for a choice in an @nt{array_aggregate}, a dynamic predicate
+    is explicitly disallowed @em see @RefSecnum{Subtype Predicates}).]}
+  @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
   A @nt{discrete_choice} that is a
@@ -2491,14 +2506,15 @@ its @nt{discrete_choice}s covers the value.
 @Leading@keepnext@;The possible values of the discriminant of a @nt{variant_part}
 shall be covered as follows:
 @begin{itemize}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0188-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0188-1],ARef=[AI05-0262-1]}
   If the discriminant is of a static constrained scalar
   subtype@Chg{Version=[3],New=[],Old=[,]}
   then@Chg{Version=[3],New=[, except within an instance of a generic
   unit,],Old=[]} each non-@key{others} @nt{discrete_@!choice} shall cover
-  only values in that subtype@Chg{Version=[3],New=[ that satisfy the
-  predicate],Old=[]}, and each value of that subtype @Chg{Version=[3],New=[that
-  satisfies the predicate ],Old=[]}shall be covered
+  only values in that subtype@Chg{Version=[3],New=[ that satisfy its
+  predicate],Old=[]}, and each value
+  of that subtype @Chg{Version=[3],New=[that
+  satisfies its predicate ],Old=[]}shall be covered
   by some @nt{discrete_@!choice} @Redundant[(either explicitly or
   by @key<others>)];
 
