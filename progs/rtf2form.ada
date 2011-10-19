@@ -6,14 +6,42 @@ with Ada.Text_IO,
 procedure Rtf2Form is
 
     --
-    -- Convert an RTF file for the Rational to a roughly formatted .MSS
-    -- file.
+    -- Convert an RTF file (as in the Rationale) to a roughly formatted .MSS
+    -- file. This tool is part of ARM_Form, the Ada Reference Manual formatter.
+    --
+    -- ---------------------------------------
+    -- Copyright  2006, 2011  AXE Consultants.
+    -- P.O. Box 1512, Madison WI  53701
+    -- E-Mail: randy@rrsoftware.com
+    --
+    -- ARM_Form is free software: you can redistribute it and/or modify
+    -- it under the terms of the GNU General Public License version 3
+    -- as published by the Free Software Foundation.
+    --
+    -- AXE CONSULTANTS MAKES THIS TOOL AND SOURCE CODE AVAILABLE ON AN "AS IS"
+    -- BASIS AND MAKES NO WARRANTY, EXPRESS OR IMPLIED, AS TO THE ACCURACY,
+    -- CAPABILITY, EFFICIENCY, MERCHANTABILITY, OR FUNCTIONING OF THIS TOOL.
+    -- IN NO EVENT WILL AXE CONSULTANTS BE LIABLE FOR ANY GENERAL,
+    -- CONSEQUENTIAL, INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES,
+    -- EVEN IF AXE CONSULTANTS HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+    -- DAMAGES.
+    --
+    -- A copy of the GNU General Public License is available in the file
+    -- gpl-3-0.txt in the standard distribution of the ARM_Form tool.
+    -- Otherwise, see <http://www.gnu.org/licenses/>.
+    --
+    -- If the GPLv3 license is not satisfactory for your needs, a commercial
+    -- use license is available for this tool. Contact Randy at AXE Consultants
+    -- for more information.
+    --
+    -- ---------------------------------------
     --
     -- Edit History:
     --
     --  1/19/06 - RLB - Created program.
     --  1/20/06 - RLB - Changed to generate tab markers for tabs, as John
     --			wants to preserve tabs where possible.
+    -- 10/18/11 - RLB - Changed to GPLv3 license.
 
     use Ada.Strings.Unbounded;
 
@@ -180,7 +208,7 @@ procedure Rtf2Form is
 	Ada.Text_IO.Put_Line (File, "@Part(xxx, Root=""rat.msm"")");
 	Ada.Text_IO.Put_Line (File, "");
 	Ada.Text_IO.Put_Line (File, "@comment($Source: e:\\cvsroot/ARM/Progs/rtf2form.ada,v $)");
-	Ada.Text_IO.Put_Line (File, "@comment($Revision: 1.2 $ $Date: 2006/01/28 06:49:32 $)");
+	Ada.Text_IO.Put_Line (File, "@comment($Revision: 1.3 $ $Date: 2011/10/18 23:27:29 $)");
 	Ada.Text_IO.Put_Line (File, "");
 
 	while Cursor /= null loop

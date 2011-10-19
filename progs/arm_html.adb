@@ -8,7 +8,7 @@ with ARM_Output,
 package body ARM_HTML is
 
     --
-    -- Ada reference manual formatter.
+    -- Ada reference manual formatter (ARM_Form).
     --
     -- This package defines the HTML output object.
     -- Output objects are responsible for implementing the details of
@@ -20,21 +20,9 @@ package body ARM_HTML is
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
-    -- AXE Consultants grants to all users the right to use/modify this
-    -- formatting tool for non-commercial purposes. (ISO/IEC JTC 1 SC 22 WG 9
-    -- activities are explicitly included as "non-commercial purposes".)
-    -- Commercial uses of this software and its source code, including but not
-    -- limited to documents for sale and sales of modified versions of this
-    -- tool, are prohibited without the prior written permission of
-    -- AXE Consultants. All rights not explicitly granted above are reserved
-    -- by AXE Consultants.
-    --
-    -- You use this tool and/or its source code on the condition that you indemnify and hold harmless
-    -- AXE Consultants, its agents, and employees, from any and all liability
-    -- or damages to yourself or your hardware or software, or third parties,
-    -- including attorneys' fees, court costs, and other related costs and
-    -- expenses, arising out of your use of this tool and/or source code irrespective of the
-    -- cause of said liability.
+    -- ARM_Form is free software: you can redistribute it and/or modify
+    -- it under the terms of the GNU General Public License version 3
+    -- as published by the Free Software Foundation.
     --
     -- AXE CONSULTANTS MAKES THIS TOOL AND SOURCE CODE AVAILABLE ON AN "AS IS"
     -- BASIS AND MAKES NO WARRANTY, EXPRESS OR IMPLIED, AS TO THE ACCURACY,
@@ -43,6 +31,15 @@ package body ARM_HTML is
     -- CONSEQUENTIAL, INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES,
     -- EVEN IF AXE CONSULTANTS HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
     -- DAMAGES.
+    --
+    -- A copy of the GNU General Public License is available in the file
+    -- gpl-3-0.txt in the standard distribution of the ARM_Form tool.
+    -- Otherwise, see <http://www.gnu.org/licenses/>.
+    --
+    -- If the GPLv3 license is not satisfactory for your needs, a commercial
+    -- use license is available for this tool. Contact Randy at AXE Consultants
+    -- for more information.
+    --
     -- ---------------------------------------
     --
     -- Edit History:
@@ -171,6 +168,7 @@ package body ARM_HTML is
     --		- RLB - Added limited colors to Text_Format.
     --  1/02/08 - RLB - Made DOS filenames into all CAPS.
     --  5/ 7/09 - RLB - Added code to prevent making links to dead clauses.
+    -- 10/18/11 - RLB - Changed to GPLv3 license.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
