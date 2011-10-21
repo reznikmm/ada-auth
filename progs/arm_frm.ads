@@ -13,7 +13,8 @@ package ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2010, 2011  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2010, 2011
+    --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --

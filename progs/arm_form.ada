@@ -3,13 +3,7 @@ with Ada.Text_IO,
      Ada.Strings.Unbounded,
      Ada.Characters.Handling,
      Ada.Command_Line;
-with ARM_Format,
-     ARM_Output,
-     ARM_Text,
-     ARM_HTML,
-     ARM_RTF,
-     ARM_Corr,
-     ARM_Master,
+with ARM_Master,
      ARM_Contents;
 procedure ARM_Formatter is
 
@@ -22,7 +16,8 @@ procedure ARM_Formatter is
     -- reference manual files (in various formats).
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2011  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2011
+    --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -76,6 +71,7 @@ procedure ARM_Formatter is
     --			properties.
     --  1/12/06 - RLB - Removed Document completely.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    -- 10/19/11 - RLB - Removed junk withs (now in master file handler).
 
     -- Standard commands for Ada standards:
     -- For Original (Ada 95) RM:

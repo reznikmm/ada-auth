@@ -14,7 +14,7 @@ package ARM_RTF is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2011
-    --   AXE Consultants.
+    --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --

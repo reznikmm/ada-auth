@@ -7,7 +7,8 @@ package ARM_Index is
     -- This package contains the routines to manage and generate the index.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2005, 2006, 2011 AXE Consultants.
+    -- Copyright 2000, 2005, 2006, 2011
+    --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --

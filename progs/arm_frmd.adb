@@ -8,7 +8,7 @@ package body ARM_Format.Data is
     -- This package contains various data used by the input file parser.
     --
     -- ---------------------------------------
-    -- Copyright 2011  AXE Consultants.
+    -- Copyright 2011  AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --

@@ -8,7 +8,8 @@ package ARM_Master is
     -- execute it.
     --
     -- ---------------------------------------
-    -- Copyright 2006, 2011  AXE Consultants.
+    -- Copyright 2006, 2011
+    --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --

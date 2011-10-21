@@ -8,7 +8,8 @@ package ARM_File is
     -- This package contains the definition of reading an input file.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2011 AXE Consultants.
+    -- Copyright 2000, 2011
+    --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53704
     -- E-Mail: randy@rrsoftware.com
     --

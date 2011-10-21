@@ -11,7 +11,8 @@ package body ARM_Database is
     -- appendixes.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004, 2005, 2006, 2009, 2011  AXE Consultants.
+    -- Copyright 2000, 2004, 2005, 2006, 2009, 2011
+    --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --

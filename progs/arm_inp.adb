@@ -10,7 +10,8 @@ package body ARM_Input is
     -- or other entity, and routines to lex the input entities.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2011  AXE Consultants.
+    -- Copyright 2000, 2002, 2004, 2005, 2011
+    --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
