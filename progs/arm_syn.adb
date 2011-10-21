@@ -443,8 +443,8 @@ package body ARM_Syntax is
 	end loop;
 	Format_Text ("@end(twocol)" & Ascii.LF, "Suffix");
 	Format_Text ("@end(syntaxdisplay)" & Ascii.LF, "Suffix");
-	-- Probably should free the XRef list here, but we won't do anything
-	-- afterwards, so this doesn't matter.
+	-- Should free the XRef list here, but we won't do anything
+	-- afterwards, so doing so doesn't matter.
     end XRef;
 
 end ARM_Syntax;

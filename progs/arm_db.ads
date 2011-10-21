@@ -47,6 +47,7 @@ package ARM_Database is
     --			Deleted_Inserted_Number_No_Delete_Message change kinds.
     -- 10/18/06 - RLB - Added No_Deleted_Paragraph_Messages to Report.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    -- 10/20/11 - RLB - Added Initial_Version parameter.
 
     type Database_Type is tagged limited private;
 
@@ -69,13 +70,15 @@ package ARM_Database is
 		      Hang_Item : in String;
 		      Text : in String;
 		      Change_Kind : in Paragraph_Change_Kind_Type := ARM_Database.None;
-		      Version : in Character := '0');
+		      Version : in Character := '0';
+		      Initial_Version : in Character := '0');
 	-- Insert an item into the database object.
 	-- Sort_Key is the string on which this item will be sorted (if it
 	-- is sorted). Hang_Item is the item which hangs out for the item
 	-- in the report (if any). Text is the text for the item; the text
 	-- may include formatting codes. Change_Kind and Version are the
-	-- revision status for this item.
+	-- revision status for this item. Initial_Version is the version of
+	-- the initial text for this item.
 
     type Format_Type is
 	(Normal_List, Normal_Indexed_List, Bullet_List, Hanging_List);

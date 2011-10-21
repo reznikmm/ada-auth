@@ -1,6 +1,6 @@
 Ada formatting tool.
 
-Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009 AXE Consultants.
+Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2011 AXE Consultants.
 P.O. Box 1512, Madison WI  53701
 E-Mail: randy@rrsoftware.com
 
@@ -675,6 +675,12 @@ Text commands:
         described for PragmaSyntax. We assume that this command is surrounded
 	by an appropriate @Chg; the purpose of the Version number here is
 	to determine whether (and how) this is entered into Annex L.
+@DeletedPragmaSyn{Version=[<Version>],InitialVersion=[<InitialVersion>],<Text>}
+	Defines a pragma deleted by <Version>, originally added by
+        <InitialVersion>. Otherwise, the text is as
+        described for PragmaSyntax. We assume that this command is surrounded
+	by an appropriate @Chg; the purpose of the Version number here is
+	to determine whether (and how) this is entered into Annex L.
 @PragmaList
 	Dumps the summary list of all pragmas from the pragma database
 	to the output file.
@@ -778,6 +784,10 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 @Prag{<name>} -- Generates an index entry for "pragmas"
 	with a secondary entry of <name> (a Defn2), and also an index entry
         of "<name> pragma" (a Defn). Also puts <name> to the output.
+@AspectDefn{<name>} -- Generates an index entry for "aspects"
+	with a secondary entry of <name> (a Defn2), and also an index entry
+        of "<name> aspect" (a Defn).
+
 
 @PackageList -- Generates the list of language-defined packages.
 @TypeList -- Generates the list of language-defined types and subtypes.
@@ -864,39 +874,54 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	they're conditional on the paragraph text being included in the
 	document (even if it is marked as deleted).
 
-@ChgImplDef{Version=[<version>],Kind=(<kind>),Text=<text>}
+@ChgImplDef{Version=[<version>],Kind=(<kind>),
+        [InitialVersion=[<version>],]Text=<text>}
 	Marks a changed implementation-defined entry. (Essentially a
 	combination of ChgRef and Impldef.) <text> is the
 	implementation-defined entry. See ChgRef and Impldef for details
-	on the handling of the arguments.
+	on the handling of the arguments. The optional InitialVersion parameter
+	specifies the version number for the originally inserted text; if
+	not specified, the Version number is used. (This is appropriate for
+	added items, others should explicitly give an initial version.)
 
-@ChgImplAdvice{Version=[<version>],Kind=(<kind>),Text=<text>}
+@ChgImplAdvice{Version=[<version>],Kind=(<kind>),
+        [InitialVersion=[<version>],]Text=<text>}
 	Marks a new or changed implementation advice entry. All IA entries
 	are new with version 2. The clause and paragraph references (along
 	with <text>) are saved to create part of Annex M. For the AARM,
 	<text> is an annotation; otherwise, it is discarded.
 	See ChgRef for details on the handling of Version and Kind arguments.
+        The optional InitialVersion parameter specifies the version number for
+	the originally inserted text; if not specified, the Version number is
+	used.
 @AddedImplAdviceList{Version=[2]}
 	Generates the implementation advice list; it is inserted with the
 	given version number.
 
-@ChgDocReq{Version=[<version>],Kind=(<kind>),Text=<text>}
+@ChgDocReq{Version=[<version>],Kind=(<kind>),
+        [InitialVersion=[<version>],]Text=<text>}
 	Marks a new or changed documentation requirements entry. All DocReq
 	entries are new with version 2. The clause and paragraph references
 	(along with <text>) are saved to create part of Annex M. For the AARM,
 	<text> is an annotation; otherwise, it is discarded.
 	See ChgRef for details on the handling of Version and Kind arguments.
+        The optional InitialVersion parameter specifies the version number for
+	the originally inserted text; if not specified, the Version number is
+	used.
 @AddedDocReqList{Version=[2]}
 	Generates the documentation requirements list; it is inserted with the
 	given version number.
 
-@ChgAspectDesc{Version=[<version>],Kind=(<kind>),Aspect=[<name>],Text=[<text>]}
+@ChgAspectDesc{Version=[<version>],Kind=(<kind>),Aspect=[<name>],
+        [InitialVersion=[<version>],]Text=<text>}
 	Marks a new or changed aspect description entry. All aspect
         descriptions are new with version 3. The clause and paragraph
         references (along with <name> and <text>) are saved to create part of
 	Annex K. For the AARM, <text> is an annotation; otherwise, it is
 	discarded. See ChgRef for details on the handling of Version and Kind
-	arguments.
+	arguments. The optional InitialVersion parameter specifies the version
+	number for the originally inserted text; if not specified, the Version
+	number is used.
 @AddedDocReqList{Version=[3]}
 	Generates the aspect description list; it is inserted with the
 	given version number.

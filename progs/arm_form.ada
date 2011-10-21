@@ -4,7 +4,8 @@ with Ada.Text_IO,
      Ada.Characters.Handling,
      Ada.Command_Line;
 with ARM_Master,
-     ARM_Contents;
+     ARM_Contents,
+     ARM_Format;
 procedure ARM_Formatter is
 
     --

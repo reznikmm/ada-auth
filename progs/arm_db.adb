@@ -52,6 +52,7 @@ package body ARM_Database is
     -- 11/30/09 - RLB - Made the hang item bigger again (to make room to
     --			handle commands like @ChgAdded).
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    -- 10/20/11 - RLB - Added Initial_Version parameter.
 
     type String_Ptr is access String;
     type Item is record
@@ -62,6 +63,7 @@ package body ARM_Database is
 	Text : String_Ptr;
 	Change_Kind : Paragraph_Change_Kind_Type;
 	Version : Character;
+	Initial_Version : Character;
     end record;
 
     procedure Free is new Ada.Unchecked_Deallocation (Item, Item_List);
@@ -98,13 +100,15 @@ package body ARM_Database is
 		      Hang_Item : in String;
 		      Text : in String;
 		      Change_Kind : in Paragraph_Change_Kind_Type := ARM_Database.None;
-		      Version : in Character := '0') is
+		      Version : in Character := '0';
+		      Initial_Version : in Character := '0') is
 	-- Insert an item into the database object.
 	-- Sort_Key is the string on which this item will be sorted (if it
 	-- is sorted). Hang_Item is the item which hangs out for the item
 	-- in the report (if any). Text is the text for the item; the text
 	-- may include formatting codes. Change_Kind and Version are the
-	-- revision status for this item.
+	-- revision status for this item. Initial_Version is the version of
+	-- the initial text for this item.
 	Temp_Item : Item;
     begin
 	if not Database_Object.Is_Valid then
@@ -124,6 +128,7 @@ package body ARM_Database is
 	Temp_Item.Text := new String'(Text);
 	Temp_Item.Change_Kind := Change_Kind;
 	Temp_Item.Version := Version;
+	Temp_Item.Initial_Version := Initial_Version;
 	Temp_Item.Next := Database_Object.List;
         Database_Object.List := new Item'(Temp_Item);
 	Database_Object.Item_Count := Database_Object.Item_Count + 1;
@@ -154,49 +159,54 @@ package body ARM_Database is
 
 	function Change_if_Needed (Item : in Item_List) return String is
 	begin
+	    -- Note: In the report, we always decide inserted/not inserted
+	    -- determined by the initial version number, and not the
+	    -- original class.
 	    case Item.Change_Kind is
 		when None => return "";
 		when Inserted | Inserted_Normal_Number =>
-		    if Item.Version <= Added_Version then
+		    if Item.Initial_Version <= Added_Version then
 		        return "@ChgRef{Version=[" & Item.Version &
 			    "],Kind=[AddedNormal]}";
 		    else
 		        return "@ChgRef{Version=[" & Item.Version &
 			    "],Kind=[Added]}";
 		    end if;
-		    -- Note: In the report, we always use the insert determined
-		    -- by the version number, and not the original class.
-		when Revised =>
-		    return "@ChgRef{Version=[" & Item.Version &
-			"],Kind=[Revised]}";
-		when Revised_Inserted_Number =>
-		    -- Previously inserted.
-		    return "@ChgRef{Version=[" & Item.Version &
-			"],Kind=[RevisedInserted]}";
-		when Deleted =>
-		    if No_Deleted_Paragraph_Messages then
+		when Revised | Revised_Inserted_Number =>
+		    if Item.Initial_Version <= Added_Version then
 		        return "@ChgRef{Version=[" & Item.Version &
-			    "],Kind=[DeletedNoDelMsg]}";
+			    "],Kind=[Revised]}";
 		    else
 		        return "@ChgRef{Version=[" & Item.Version &
-			    "],Kind=[Deleted]}";
+			    "],Kind=[RevisedAdded]}";
 		    end if;
-		when Deleted_Inserted_Number =>
-		    -- Previously inserted.
-		    if No_Deleted_Paragraph_Messages then
+		when Deleted | Deleted_Inserted_Number =>
+		    if Item.Initial_Version <= Added_Version then
+		        if No_Deleted_Paragraph_Messages then
+		            return "@ChgRef{Version=[" & Item.Version &
+			        "],Kind=[DeletedNoDelMsg]}";
+		        else
+		            return "@ChgRef{Version=[" & Item.Version &
+			        "],Kind=[Deleted]}";
+		        end if;
+		    else
+		        if No_Deleted_Paragraph_Messages then
+		            return "@ChgRef{Version=[" & Item.Version &
+			        "],Kind=[DeletedAddedNoDelMsg]}";
+		        else
+		            return "@ChgRef{Version=[" & Item.Version &
+			        "],Kind=[DeletedAdded]}";
+		        end if;
+		    end if;
+		when Deleted_No_Delete_Message |
+		     Deleted_Inserted_Number_No_Delete_Message =>
+		    if Item.Initial_Version <= Added_Version then
 		        return "@ChgRef{Version=[" & Item.Version &
-			    "],Kind=[DeletedInsertedNoDelMsg]}";
+		            "],Kind=[DeletedNoDelMsg]}";
 		    else
 		        return "@ChgRef{Version=[" & Item.Version &
-			    "],Kind=[DeletedInserted]}";
+			    "],Kind=[DeletedAddedNoDelMsg]}";
 		    end if;
-		when Deleted_No_Delete_Message =>
-		    return "@ChgRef{Version=[" & Item.Version &
-		        "],Kind=[DeletedNoDelMsg]}";
-		when Deleted_Inserted_Number_No_Delete_Message =>
-		    -- Previously inserted.
-		    return "@ChgRef{Version=[" & Item.Version &
-			"],Kind=[DeletedInsertedNoDelMsg]}";
 	    end case;
 	end Change_if_Needed;
 

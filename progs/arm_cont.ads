@@ -51,6 +51,8 @@ package ARM_Contents is
     --  5/06/09 - RLB - Added Versioned_String.
     --  5/07/09 - RLB - Added Dead_Clause.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    -- 10/19/11 - RLB - Added Parent_Clause from Stephen Leake's version.
+
 
     subtype Title_Type is String (1 .. 80);
 	-- The type of a title.
@@ -152,6 +154,14 @@ package ARM_Contents is
 	-- Returns the string of the next clause (in the table of contents)
 	-- for the properly formatted clause string Clause.
 	-- Raises Not_Found_Error if not found.
+
+    function Parent_Clause (Clause : in String) return String;
+        -- Returns the string of the parent clause (in the table of contents)
+        -- for the properly formatted clause string Clause.
+        --
+        -- Result is a null string if Clause is a top level clause;
+        -- Section, Unnumbered_Section, Normative_Annex,
+        -- Informative_Annex, Plain_Annex.
 
     generic
 	with procedure Operate (Title : in Title_Type;

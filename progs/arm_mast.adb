@@ -7,6 +7,7 @@ with ARM_Input,
      ARM_Format,
      ARM_Output,
      ARM_Text,
+     ARM_Texinfo,
      ARM_HTML,
      ARM_RTF,
      ARM_Corr,
@@ -67,6 +68,7 @@ package body ARM_Master is
     --  5/04/09 - RLB - Added the RTFFooter command.
     --  5/06/09 - RLB - Added the RTFVersionName command.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    -- 10/19/11 - RLB - Added Texinfo output (from Stephen Leake).
 
     type Command_Type is (
 	-- Source commands:
@@ -315,7 +317,6 @@ package body ARM_Master is
 
 	    function Get_Single_String return String is
 		-- Returns the (single) parameter of a command.
-		Ch : Character;
 	        Item : String(1..2000);
 	        ILen : Natural := 0;
 	    begin
@@ -1350,7 +1351,7 @@ package body ARM_Master is
 	        begin
 		    ARM_Text.Create (Output,
 				     File_Prefix => +Output_File_Prefix,
-				     Title => Get_Versioned_String(Document_Title,Change_Version));
+				     Title => Get_Versioned_String (Document_Title, Change_Version));
 		    Generate_Sources (Output);
 		    ARM_Text.Close (Output);
 	        end;
@@ -1360,19 +1361,20 @@ package body ARM_Master is
 	        begin
 		    ARM_Corr.Create (Output,
 				     File_Prefix => +Output_File_Prefix,
-				     Title => Get_Versioned_String(Document_Title,Change_Version));
+				     Title => Get_Versioned_String (Document_Title, Change_Version));
 		    Generate_Sources (Output);
 		    ARM_Corr.Close (Output);
 	        end;
 	    when Info =>
-	        null; -- Future use.
-	        --declare
-	        --	Output : ARM_Info.Info_Output_Type;
-	        --begin
-		--      Create (Output, Use_Large_Files => False); -- The latter is not used.
-	        --	Generate_Sources (Output);
-	        --	ARM_Info.Close (Output);
-	        --end;
+	        declare
+	            Output : ARM_TexInfo.Texinfo_Output_Type;
+	        begin
+		    ARM_TexInfo.Create (Output,
+				        File_Prefix => +Output_File_Prefix,
+				        Title => Get_Versioned_String (Document_Title, Change_Version));
+	            Generate_Sources (Output);
+	            ARM_TexInfo.Close (Output);
+	        end;
         end case;
 
     end Read_and_Process_Master_File;

@@ -364,7 +364,7 @@ private
 	-- Glossary:
 	Glossary_Term : String (1..50); -- Glossary term; used only when
 	Glossary_Term_Len : Natural := 0; -- processing [Chg]ToGlossary[Also] commands.
-	Glossary_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
+	Glossary_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type := ARM_Database.None;
 			-- The change kind of the ToGlossary.
 	Glossary_Version : ARM_Contents.Change_Version_Type;
 			-- If the kind is not "None", this is the version
@@ -383,12 +383,15 @@ private
 
 	-- Implementation-defined:
 	Impdef_DB : ARM_Database.Database_Type;
-	-- The next four are used only during processing of ImplDef, ChgImplDef, ChgDocReq, and ChgImplAdv.
+	-- The next four are used only during processing of ImplDef, ChgImplDef,
+	--    ChgDocReq, ChgImplAdv, and ChgAspectDesc.
 	Impdef_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
 			-- The change kind of the impldef.
 	Impdef_Version : ARM_Contents.Change_Version_Type;
 			-- If the kind is not "None", this is the version
 			-- number of the changed paragraph.
+	Impdef_Initial_Version : ARM_Contents.Change_Version_Type;
+			-- This is the version number of the original paragraph.
 	Impdef_Paragraph_String : String (1 .. 10); -- Paragraph number.
 	Impdef_Paragraph_Len : Natural;
 

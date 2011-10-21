@@ -40,6 +40,8 @@ package body ARM_Format.Data is
     --			size of that package.
     --		- RLB - Added aspect index commands.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    -- 10/19/11 - RLB - Added AspectDefn command.
+    -- 10/20/11 - RLB - Added DeletedPragmaSyn command.
 
 
     function Command (Name : in ARM_Input.Command_Name_Type) return Command_Type is
@@ -177,6 +179,8 @@ package body ARM_Format.Data is
 	    return Index_Attr;
 	elsif Canonical_Name = "prag" then
 	    return Index_Pragma;
+	elsif Canonical_Name = "aspectdefn" then
+	    return Index_Aspect;
 	elsif Canonical_Name = "syn" then
 	    return Syntax_Rule;
 	elsif Canonical_Name = "syn2" then
@@ -223,6 +227,8 @@ package body ARM_Format.Data is
 	    return Pragma_List;
 	elsif Canonical_Name = "addedpragmasyn" then
 	    return Added_Pragma_Syntax;
+	elsif Canonical_Name = "deletedpragmasyn" then
+	    return Deleted_Pragma_Syntax;
 	elsif Canonical_Name = "impldef" then
 	    return Implementation_Defined;
 	elsif Canonical_Name = "chgimpldef" then

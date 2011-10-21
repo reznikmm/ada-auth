@@ -134,6 +134,8 @@ package body ARM_RTF is
     -- 10/28/09 - RLB - Added missing with.
     --  3/31/10 - RLB - Adjusted picture scaling to be closer to reality.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    -- 10/20/11 - RLB - Updated to handle extra-wide paragraph numbers
+    --			automatically (there are too many to hand-fix now).
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -168,7 +170,8 @@ package body ARM_RTF is
     Heading_3_Info : Format_Info_Type;
     Heading_4_Info : Format_Info_Type;
     Category_Header_Info : Format_Info_Type;
-    Paragraph_Number_Info : Format_Info_Type;
+    Normal_Paragraph_Number_Info : Format_Info_Type;
+    Wide_Paragraph_Number_Info : Format_Info_Type;
     Header_Info : Format_Info_Type;
     Footer_Info : Format_Info_Type;
     TOC_1_Info : Format_Info_Type;
@@ -523,7 +526,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s4\keepn\adjustright",
 		       Style_String_Suffix => "\cgrid\qc\i \snext0 ");
-	    Set_Style (Paragraph_Number_Info,
+	    Set_Style (Normal_Paragraph_Number_Info,
 		       Font => ARM_Output.Swiss,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 12,
@@ -534,6 +537,19 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s5\keepn\widctlpar\adjustright " &
 			 "\pvpara\phpg\posxo\posy0\absw450\dxfrtext100\dfrmtxtx120\dfrmtxty120"&
+			 "\cgrid\qc",
+		       Style_String_Suffix => "\snext0 "); -- Note: We adjust the space before on use.
+	    Set_Style (Wide_Paragraph_Number_Info,
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
+		       Font_Size => 12,
+		       Style_Indent => 0,
+		       Style_Before => 0,
+		       Style_After =>  0,
+		       Style_Justified => FALSE,
+		       Style_String_Prefix =>
+			 "\s5\keepn\widctlpar\adjustright " &
+			 "\pvpara\phpg\posxo\posy0\absw510\dxfrtext100\dfrmtxtx120\dfrmtxty120"&
 			 "\cgrid\qc",
 		       Style_String_Suffix => "\snext0 "); -- Note: We adjust the space before on use.
 	    Set_Style (Paragraph_Info(ARM_Output.Small, 1), -- Notes
@@ -1400,7 +1416,7 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s4\keepn\adjustright",
 		       Style_String_Suffix => "\cgrid\qc\i \snext0 ");
-	    Set_Style (Paragraph_Number_Info,
+	    Set_Style (Normal_Paragraph_Number_Info,
 		       Font => ARM_Output.Swiss,
 		       Body_Font => Output_Object.Body_Font,
 		       Font_Size => 14,
@@ -1422,6 +1438,20 @@ package body ARM_RTF is
 		-- \dxfrtext - distance of frame from text in all directions (twips);
 		-- \dfrmtxtx - horizontal distance of text from frame (twips);
 		-- \dfrmtxty - vertical distance of text from frame (twips).
+
+	    Set_Style (Wide_Paragraph_Number_Info,
+		       Font => ARM_Output.Swiss,
+		       Body_Font => Output_Object.Body_Font,
+		       Font_Size => 14,
+		       Style_Indent => 0,
+		       Style_Before => 0,
+		       Style_After => 0,
+		       Style_Justified => FALSE,
+		       Style_String_Prefix =>
+			 "\s5\keepn\widctlpar\adjustright " &
+			 "\pvpara\phpg\posxo\posy0\absw660\dxfrtext100\dfrmtxtx150\dfrmtxty150"&
+			 "\cgrid\qc",
+		       Style_String_Suffix => "\snext0 "); -- We adjust the space before for each number.
 
 
 	    Set_Style (Paragraph_Info(ARM_Output.Small, 1), -- Notes
@@ -2245,8 +2275,10 @@ package body ARM_RTF is
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Heading 3;}");
 	Write_Style (Output_Object.Output_File, Category_Header_Info);
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Category Header;}");
-	Write_Style (Output_Object.Output_File, Paragraph_Number_Info);
+	Write_Style (Output_Object.Output_File, Normal_Paragraph_Number_Info);
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Paragraph Number;}");
+	Write_Style (Output_Object.Output_File, Wide_Paragraph_Number_Info);
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Large Paragraph Number;}");
 	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small, 1));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Notes;}");
 	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small, 2));
@@ -2808,13 +2840,21 @@ package body ARM_RTF is
 
 	-- First, write the paragraph number, if any. This has its own style.
 	if Number /= "" then -- We have a paragraph number.
-	    Write_Style_for_Paragraph (Output_Object.Output_File,
-	        Paragraph_Number_Info, Output_Object.Char_Count);
+	    -- Most paragraph numbers are 7 or fewer characters. The box is
+	    -- sized for 7 characters. If we have 8 characters (as in 277.10/2),
+	    -- we need a wider box.
+	    if Number'Length > 7 then
+		Write_Style_for_Paragraph (Output_Object.Output_File,
+	            Wide_Paragraph_Number_Info, Output_Object.Char_Count);
+	    else
+		Write_Style_for_Paragraph (Output_Object.Output_File,
+	            Normal_Paragraph_Number_Info, Output_Object.Char_Count);
+	    end if;
 	    -- Figure the space above: (We use a variable space above so the
 	    -- numbers align with the bottom of the text, not the top).
 	    declare
 		Diff : Natural := (Paragraph_Info(Style, Indent).Size -
-				   Paragraph_Number_Info.Size) +
+				   Normal_Paragraph_Number_Info.Size) +
 				  (Paragraph_Info(Style, Indent).Before/10);
 		-- This would seem to be double the required adjustment for the
 		-- size, but it works. So why question it?
@@ -2833,6 +2873,8 @@ package body ARM_RTF is
 			Character'Val(Diff + Character'Pos('0')) & "0 ");
 		end if;
 	    end;
+--*** Box width??
+
 	    Ada.Text_IO.Put (Output_Object.Output_File, Number);
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "\par}");
 	    Output_Object.Char_Count := 0;

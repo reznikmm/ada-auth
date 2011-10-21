@@ -38,6 +38,8 @@ private package ARM_Format.Data is
     --			size of that package.
     --		- RLB - Added aspect index commands.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    -- 10/19/11 - RLB - Added AspectDefn command.
+    -- 10/20/11 - RLB - Added DeletedPragmaSyn command.
 
 
     type LString is record
@@ -207,7 +209,7 @@ private package ARM_Format.Data is
 	Index_Root_Unit, Index_Child_Unit, Index_Subprogram_Child_Unit,
 	Index_Type, Index_Subtype, Index_Subprogram,
 	Index_Exception, Index_Object, Index_Package,
-	Index_Other, Index_Check, Index_Attr, Index_Pragma,
+	Index_Other, Index_Check, Index_Attr, Index_Pragma, Index_Aspect,
 	-- Clause labels:
 	Labeled_Section, Labeled_Section_No_Break, Labeled_Clause,
 	Labeled_Subclause, Labeled_Subsubclause,
@@ -237,7 +239,7 @@ private package ARM_Format.Data is
 	Glossary_List,
         Prefix_Type, Reset_Prefix_Type, Attribute, Attribute_Leading, Attribute_Text_Param, -- The last is a parameter of Attribute.
 	Attribute_List,
-	Pragma_Syntax, Pragma_List, Added_Pragma_Syntax,
+	Pragma_Syntax, Pragma_List, Added_Pragma_Syntax, Deleted_Pragma_Syntax,
 	Package_List, Type_List, Subprogram_List, Exception_List, Object_List,
 	-- Corrigendum changes:
 	Change, Change_Param_Old, Change_Param_New, -- The latter are the parameters of "Change".
