@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:23 $}
+@Comment{$Date: 2011/10/21 06:41:24 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.112 $}
+@Comment{$Revision: 1.113 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -475,8 +475,9 @@ a value of the type.
   constraints, null exclusions, and predicates],
   Old=[a constraint@Chg{Version=[2],New=[ or null exclusion],Old=[]}]},
   which @Chg{Version=[3],New=[constrain],Old=[constrains]}
-  the values of the subtype to satisfy a certain condition.
-  The values of a subtype are a subset of the values of its type.>}
+  the values of the subtype to satisfy @Chg{Version=[3],New=[],Old=[a ]}certain
+  @Chg{Version=[3],New=[conditions],Old=[condition]}. The values of a subtype
+  are a subset of the values of its type.>}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00442-01]}
 @Chg{Version=[2],New=[@Defn2{Term=[category], Sec=(of types)}],
@@ -1535,7 +1536,7 @@ The description of S'Base has been moved to
 @ChgAdded{Version=[3],Text=[The language-defined @i{predicate aspects}
 Static_Predicate and Dynamic_Predicate may be used to define properties of
 subtypes. A @i{predicate specification} is an @nt{aspect_specification}
-for one of the two predicate aspects.@Defn{predicate aspect}@Defn{predicate specification}@PDefn2{Term=[aspect],Sec=(predicate)}]}
+for one of the two predicate aspects.@Defn{predicate aspect}@Defn{predicate specification}@PDefn2{Term=[aspect],Sec=(predicate)}@AspectDefn{Static_Predicate}@AspectDefn{Dynamic_Predicate}]}
 @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Static_Predicate],
   Text=[@ChgAdded{Version=[3],Text=[Condition that must hold true for objects of
     a given subtype; the subtype may be static.]}]}
@@ -4405,7 +4406,7 @@ deleted if the paragraphs are ever renumbered.}
      the sequence of characters is implementation defined (but
      no shorter than that of S'@Chg{Version=[2],New=[Wide_Wide_Image],
      Old=[Wide_Image]} for the same value of @i(Arg)).
-     @ChgImplDef{Version=[2],Kind=[Revised],Text=[The
+     @ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],Text=[The
      sequence of characters of the value returned by
      S'Image when some of the graphic characters of
      S'@Chg{Version=[2],New=[Wide_Wide_Image],Old=[Wide_Image]} are not
@@ -4774,7 +4775,8 @@ may be specified with an @nt{aspect_specification} (see
 @ChgAdded{Version=[3],Text=[Default_Value@\This aspect
 shall be specified by a static expression, and that
 expression shall be explicit, even if the aspect has a boolean type.
-Default_Value shall be specified only on a @nt{full_type_declaration}.]}
+Default_Value shall be specified only on a
+@nt{full_type_declaration}.@AspectDefn{Default_Value}]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The part about requiring an explicit expression is
@@ -6821,7 +6823,8 @@ evaluation rules.]}
      for nonderived@Chg{New=[ ordinary],Old=[]} fixed point types
      via an @nt{attribute_@!definition_@!clause}
      (see @RefSecNum{Operational and Representation Attributes});
-     the expression of such a clause shall be static.
+     the expression of such a clause shall be
+     static.@Chg{Version=[3],New=[@AspectDefn{Small}],Old=[]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Small],
     Text=[@ChgAdded{Version=[3],Text=[Scale factor for a fixed point type.]}]}

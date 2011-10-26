@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.39 $ $Date: 2011/09/29 06:37:25 $ $Author: randy $ }
+@comment{ $Revision: 1.40 $ $Date: 2011/10/21 06:41:26 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:25 $}
+@Comment{$Date: 2011/10/21 06:41:26 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -1237,7 +1237,7 @@ returned.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns the result of applying the
-To_Lower Wide_Character to Wide_Character conversion to each element of the
+To_Lower conversion to each Wide_Character element of the
 Wide_String designated by Item. The result is the null Wide_String if the value
 of the formal parameter is the null Wide_String. The lower bound of the result
 Wide_String is 1.]}
@@ -1261,7 +1261,7 @@ of Item is returned.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns the result of applying the
-To_Upper Wide_Character to Wide_Character conversion to each element of the
+To_Upper conversion to each Wide_Character element of the
 Wide_String designated by Item. The result is the null Wide_String if the value
 of the formal parameter is the null Wide_String. The lower bound of the result
 Wide_String is 1.]}

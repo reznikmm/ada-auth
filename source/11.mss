@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:40 $}
+@Comment{$Date: 2011/10/21 06:41:25 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -779,7 +779,8 @@ an unnamed @nt{block_statement}.
   This name, as well as each @nt{prefix} of it,
   does not denote a @nt{renaming_declaration}.
 @end{Honest}
-@ChgImplDef{Version=[2],Kind=[Revised],Text=[The result of @Chg{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
+Text=[The result of @Chg{Version=[2],
 New=[Exceptions.@!Wide_@!Wide_@!Exception_@!Name],Old=[Exceptions.@!Exception_@!Name]}
 for @Chg{Version=[2],New=[exceptions],Old=[types]} declared within
 an unnamed @nt{block_statement}.]}

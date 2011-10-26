@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:24 $}
+@Comment{$Date: 2011/10/21 06:41:24 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.50 $}
+@Comment{$Revision: 1.51 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1238,7 +1238,7 @@ operational aspects may be specified for an indexable type @i<T> (see
     Its result subtype is the @i<default iterator subtype> for
     @i<T>.@Defn{default iterator subtype} The iteration cursor subtype for
     the default iterator subtype is the @i<default cursor subtype>
-    for @i<T>.@Defn{default cursor subtype}]}
+    for @i<T>.@Defn{default cursor subtype}@AspectDefn{Default_Iterator}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Default_Iterator],
     Text=[@ChgAdded{Version=[3],Text=[Default iterator to be used in @key[for]
@@ -1247,7 +1247,7 @@ operational aspects may be specified for an indexable type @i<T> (see
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Iterator_Element@\This aspect is specified by a
     @nt{name} that denotes a subtype. This is the @i<default element subtype>
-    for @i<T>.@Defn{default element subtype}]}
+    for @i<T>.@Defn{default element subtype}@AspectDefn{Iterator_Element}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Iterator_Element],
     Text=[@ChgAdded{Version=[3],Text=[Element type to be used for user-defined

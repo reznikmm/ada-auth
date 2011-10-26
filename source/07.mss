@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:24 $}
+@Comment{$Date: 2011/10/21 06:41:25 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.118 $}
+@Comment{$Revision: 1.119 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1644,7 +1644,8 @@ extension, the following language-defined aspects may be specified with an
    expression>.@Defn{invariant expression}
    Type_Invariant may be specified on a @nt{private_type_declaration}, on a
    @nt{private_extension_declaration}, or on a @nt{full_type_declaration} that
-   declares the completion of a private type or private extension.]}
+   declares the completion of a private type or private
+   extension.@AspectDefn{Type_Invariant}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Type_Invariant],
     Text=[@ChgAdded{Version=[3],Text=[A condition that must hold true for all
@@ -1655,7 +1656,7 @@ extension, the following language-defined aspects may be specified with an
    shall be specified by an @nt{expression}, called an @i<invariant
    expression>.
    Type_Invariant'Class may be specified on a @nt{private_type_declaration} or a
-   @nt{private_extension_declaration}.]}
+   @nt{private_extension_declaration}.@AspectDefn{Type_Invariant'Class}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0254-1]}

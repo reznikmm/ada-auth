@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2011/09/29 06:37:23 $}
+@Comment{$Date: 2011/10/21 06:41:24 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -670,7 +670,8 @@ The word @lquotes@;should@rquotes@; is used to indicate that the advice is
 a recommendation, not a requirement.
 It is implementation defined
 whether or not a given recommendation is obeyed.
-@ChgImplDef{Version=[2],Kind=[Revised],Text=[Whether or not each recommendation
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
+Text=[Whether or not each recommendation
 given in @ImplAdviceTitle is followed@Chg{Version=[2],
 New=[ @em see @RefSec{Implementation Advice} for a listing],Old=[]}.]}
 @begin{Discussion}

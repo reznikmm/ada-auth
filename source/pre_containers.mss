@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.83 $ $Date: 2011/09/29 06:37:25 $ $Author: randy $ }
+@comment{ $Revision: 1.84 $ $Date: 2011/10/21 06:41:26 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:25 $}
+@Comment{$Date: 2011/10/21 06:41:26 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -105,10 +105,24 @@ containers are provided:]}
   and containing any nonlimited type;]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Hashed Sets of any nonlimited hashable type; and]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[2],Text=[Hashed Sets of any nonlimited hashable type;@Chg{Version=[3],New=[],Old=[ and]}]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Ordered Sets of any nonlimited ordered type.]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[2],Text=[Ordered Sets of any nonlimited ordered type@Chg{Version=[3],New=[;],Old=[.]}]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0136-1]}
+  @ChgAdded{Version=[3],Text=[Multiway Trees of any nonlimited type;]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0069-1]}
+  @ChgAdded{Version=[3],Text=[Holders of any (indefinite) nonlimited type;]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0159-1]}
+  @ChgAdded{Version=[3],Text=[Synchronized queues of any definite nonlimited type; and]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0159-1]}
+  @ChgAdded{Version=[3],Text=[Priority queues of any definite nonlimited type.]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -279,6 +293,10 @@ elements of a container.]}
 @ChgImpldef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The value of Containers.Hash_Type'Modulus. The value of
 Containers.Count_Type'Last.]}]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[Capacity_Error is raised when the capacity of a
+container is exceeded.]}
 
 @end{StaticSem}
 
@@ -1258,8 +1276,8 @@ element after successful call to Replace_Element.]}
 First_Index (Container) .. Last_Index (Container), then Constraint_Error is
 propagated. Otherwise, Query_Element calls Process.@key{all} with the element at
 position Index as the argument. Program_Error is propagated if Process.@key{all}
-tampers with the elements of Container. Any exception raised by Process.@key{all} is
-propagated.]}
+tampers with the elements of Container. Any exception raised by
+Process.@key{all} is propagated.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1279,11 +1297,14 @@ propagated.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0021-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
 Constraint_Error is propagated. Otherwise, Query_Element calls
 Process.@key{all} with the element designated by Position as the argument.
-Program_Error is propagated if Process.@key{all} tampers with the elements of
-Container. Any exception raised by Process.@key{all} is propagated.]}
+Program_Error is propagated if Process.@key{all}
+tampers with the elements of @Chg{Version=[3],New=[the vector that contains the
+element designated by Position],Old=[Container]}. Any exception raised by
+Process.@key{all} is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1361,8 +1382,8 @@ is not an empty element after successful completion of this operation.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Constant_Reference_Type and
-Reference_Type need finalization.@PDefn2{Term=<needs finalization>,
+@ChgAdded{Version=[3],Type=[Trailing],Text=[The types Constant_Reference_Type
+and Reference_Type need finalization.@PDefn2{Term=<needs finalization>,
 Sec=<language-defined type>}]}
 
 @ChgRef{Version=[3],Kind=[Added]}
@@ -1387,7 +1408,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[This routine (combined with the
+@ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
 Constant_Indexing and Implicit_Dereference aspects) provides a convenient way to
 gain read access to the individual elements of a container starting with an
 index value.]}
@@ -1478,13 +1499,13 @@ element after successful completion of this operation.]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Assign (Target : @key{in out} Vector; Source : @key{in} Vector);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0248-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object as
 Source, the operation has no effect. If the length of Source is greater than the
 capacity of Target, Reserve_Capacity (Target, Length (Source)) is called.
 The elements of Source are then copied to Target as for an
 @nt{assignment_statement} assigning Source to Target (this includes
-setting Target's length to be that of Source).]}
+setting the length of Target to be that of Source).]}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[3],Text=[This routine exists for compatibility with the
@@ -1505,7 +1526,7 @@ setting Target's length to be that of Source).]}
 initialized from the corresponding elements of Source. If Capacity is 0, then
 the vector capacity is the length of Source; if Capacity is equal to or greater
 than the length of Source, the vector capacity is at least the specified value.
-Otherwise, the operation propagated Capacity_Error.]}
+Otherwise, the operation propagates Capacity_Error.]}
 
 
 @begin{Example}
@@ -2156,9 +2177,10 @@ exception raised by Process is propagated.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Iterates over the elements in
-Container as per Iterate, except that elements are traversed in reverse index
-order.]}
+Container as per @Chg{Version=[3],New=[procedure ],Old=[]}Iterate,
+except that elements are traversed in reverse index order.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -2168,15 +2190,15 @@ order.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a reversible
-iterator object that will generate a loop parameter designating each node in
-Container, starting with the first node and moving the cursor as per the Next
-function when used as a forward iterator, and starting with the last node and
-moving the cursor as per the Previous function when used as a reverse iterator.
-Program_Error is propagated if any operation (in particular, the
-@nt{sequence_of_statements} of the @nt{loop_statement} whose
+iterator object that will generate a value for the loop parameter designating
+each node in Container, starting with the first node and moving the cursor as
+per the Next function when used as a forward iterator, and starting with the
+last node and moving the cursor as per the Previous function when used as a
+reverse iterator. Program_Error is propagated if any operation (in particular,
+the @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the iterator object exists. The iterator object
-needs finalization.]}
+Container while the iterator object exists. The iterator object needs
+finalization.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -2188,15 +2210,15 @@ needs finalization.]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does
 not designate an item in Container, then Program_Error is propagated. If Start
 is No_Element, the call is equivalent to Iterate (Container). Otherwise, Iterate
-returns a reversible iterator object that will generate a loop parameter
-designating each node in Container, starting with the node designated by From
-and moving the cursor as per the Next function when used as a forward iterator,
-or moving the cursor as per the Previous function when used as a reverse
-iterator. Program_Error is propagated if any operation (in particular, the
-@nt{sequence_of_statements} of the @nt{loop_statement} whose
+returns a reversible iterator object that will generate a value for the
+loop parameter designating each node in Container, starting with the node
+designated by Start and moving the cursor as per the Next function when used as
+a forward iterator, or moving the cursor as per the Previous function when used
+as a reverse iterator. Program_Error is propagated if any operation (in
+particular, the @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the iterator object exists. The iterator object
-needs finalization.]}
+Container while the iterator object exists. The iterator object needs
+finalization.]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[Added]}
@@ -2217,7 +2239,7 @@ needs finalization.]}
 @end{DescribeCode}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0044-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0044-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[The actual function for the generic formal function
 "<" of Generic_Sorting is expected to return the same value each time it is
 called with a particular pair of element values. It should define a strict
@@ -2225,9 +2247,9 @@ called with a particular pair of element values. It should define a strict
 New=[ (see @RefSecNum{Containers})],Old=[, that is, be irreflexive, asymmetric,
 and transitive]};
 it should not modify Container. If the actual for "<" behaves in some other
-manner, the behavior of the subprograms of Generic_Sorting are unspecified. How
-many times the subprograms of Generic_Sorting call "<" is
-unspecified.@PDefn{unspecified}]}
+manner, the behavior of the subprograms of Generic_Sorting are unspecified.
+@Chg{Version=[3],New=[The number of],Old=[How many]} times the subprograms of
+Generic_Sorting call "<" is unspecified.@PDefn{unspecified}]}
 
 @begin{DescribeCode}
 
@@ -2278,13 +2300,16 @@ provided. Any exception raised during evaluation of "<" is propagated.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Merge removes elements from Source
-and inserts them into Target; afterwards, Target contains the union of the
-elements that were initially in Source and Target; Source is left empty. If
-Target and Source are initially sorted smallest first, then Target is ordered
-smallest first as determined by the generic formal "<" operator; otherwise,
-the order of elements in Target is unspecified. Any exception raised during
-evaluation of "<" is propagated.]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0021-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[3],New=[If Source is
+empty, then Merge does nothing. If Source and Target are the same non-empty
+container object, then Program_Error is propagated. Otherwise, ],Old=[]}Merge
+removes elements from Source and inserts them into Target; afterwards, Target
+contains the union of the elements that were initially in Source and Target;
+Source is left empty. If Target and Source are initially sorted smallest first,
+then Target is ordered smallest first as determined by the generic formal "<"
+operator; otherwise, the order of elements in Target is unspecified. Any
+exception raised during evaluation of "<" is propagated.]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2458,10 +2483,10 @@ designates has been used as the Source or Target of a call to Move;] or]}
 @end{TheProof}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0160-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0160-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[The element it designates has been
-deleted@Chg{Version=[3],New=[ or removed from the vector that contains
-the element],Old=[]}.]}
+deleted@Chg{Version=[3],New=[ or removed from the vector that previously
+contained the element],Old=[]}.]}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
   @ChgAdded{Version=[3],Text=[An element can be removed via calls to Set_Length,
@@ -2512,9 +2537,11 @@ by the call to Reference or Constant_Reference is finalized.]}
 lost upon assignment or scope exit.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[The execution of an @nt{assignment_statement} for
 a vector shall have the effect of copying the elements from the source vector
-object to the target vector object.]}
+object to the target vector object@Chg{Version=[3],New=[ and changing the length
+of the target object to that of the source object],Old=[]}.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3242,12 +3269,14 @@ assigns the value New_Item to the element designated by Position.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0021-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
 Constraint_Error is propagated. Otherwise, Query_Element calls
 Process.@key{all} with the element designated by Position as the
 argument. Program_Error is propagated if Process.@key{all} tampers with the
-elements of Container. Any exception raised by Process.@key{all} is
-propagated.]}
+elements of @Chg{Version=[3],New=[the list that contains the
+element designated by Position],Old=[Container]}. Any exception raised by
+Process.@key{all} is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3292,8 +3321,8 @@ unconstrained.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Constant_Reference_Type and
-Reference_Type need finalization.@PDefn2{Term=<needs finalization>,
+@ChgAdded{Version=[3],Type=[Trailing],Text=[The types Constant_Reference_Type
+and Reference_Type need finalization.@PDefn2{Term=<needs finalization>,
 Sec=<language-defined type>}]}
 
 @ChgRef{Version=[3],Kind=[Added]}
@@ -3390,10 +3419,10 @@ the elements of Source.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1],ARef=[AI05-0248-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Target denotes the same object
 as Source, then @Chg{Version=[3],New=[the operation],Old=[Move]}
-has no effect. Otherwise, @Chg{Version=[3],New=[equivalent
+has no effect. Otherwise, @Chg{Version=[3],New=[the operation is equivalent
 to Assign (Target, Source) followed by Clear (Source)],Old=[Move first calls Clear
 (Target). Then, the nodes in Source are moved to Target (in the original order).
 The length of Target is set to the length of Source, and the length of Source is
@@ -3516,8 +3545,11 @@ starting at Position). Finally, Position is set to No_Element.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Delete (Container,
-First (Container), Count).]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0021-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[3],New=[If Length
+(Container) <= Count, then Delete_First is equivalent to Clear (Container).
+Otherwise, it removes the first Count nodes from Container],Old=[Equivelent to
+Delete (Container, First (Container), Count)]}.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3847,8 +3879,10 @@ exception raised by Process.@key{all} is propagated.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Iterates over the nodes in
-Container as per Iterate, except that elements are traversed in reverse order,
+Container as per @Chg{Version=[3],New=[procedure ],Old=[]}Iterate,
+except that elements are traversed in reverse order,
 starting with the last node and moving the cursor as per the Previous
 function.]}
 
@@ -3860,15 +3894,15 @@ function.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a reversible
-iterator object that will generate a loop parameter designating each node in
-Container, starting with the first node and moving the cursor as per the Next
-function when used as a forward iterator, and starting with the last node and
-moving the cursor as per the Previous function when used as a reverse iterator.
-Program_Error is propagated if any operation (in particular, the
-@nt{sequence_of_statements} of the @nt{loop_statement} whose
+iterator object that will generate a value for the loop parameter designating
+each node in Container, starting with the first node and moving the cursor as
+per the Next function when used as a forward iterator, and starting with the
+last node and moving the cursor as per the Previous function when used as a
+reverse iterator. Program_Error is propagated if any operation (in particular,
+the @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the iterator object exists. The iterator object
-needs finalization.]}
+Container while the iterator object exists. The iterator object needs
+finalization.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -3880,15 +3914,15 @@ needs finalization.]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does
 not designate an item in Container, then Program_Error is propagated. If Start
 is No_Element, the call is equivalent to Iterate (Container). Otherwise, Iterate
-returns a reversible iterator object that will generate a loop parameter
-designating each node in Container, starting with the node designated by From
-and moving the cursor as per the Next function when used as a forward iterator,
-or moving the cursor as per the Previous function when used as a reverse
-iterator. Program_Error is propagated if any operation (in particular, the
-@nt{sequence_of_statements} of the @nt{loop_statement} whose
+returns a reversible iterator object that will generate value for the a loop
+parameter designating each node in Container, starting with the node designated
+by Start and moving the cursor as per the Next function when used as a forward
+iterator, or moving the cursor as per the Previous function when used as a
+reverse iterator. Program_Error is propagated if any operation (in particular,
+the @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the iterator object exists. The iterator object
-needs finalization.]}
+Container while the iterator object exists. The iterator object needs
+finalization.]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[Added]}
@@ -3908,7 +3942,7 @@ needs finalization.]}
 @end{DescribeCode}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0044-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0044-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[The actual function for the generic formal function
 "<" of Generic_Sorting is expected to return the same value each time it is
 called with a particular pair of element values. It should define a strict
@@ -3916,9 +3950,9 @@ called with a particular pair of element values. It should define a strict
 New=[ (see @RefSecNum{Containers})],Old=[, that is, be irreflexive, asymmetric,
 and transitive]}; it
 should not modify Container. If the actual for "<" behaves in some other
-manner, the behavior of the subprograms of Generic_Sorting are unspecified. How
-many times the subprograms of Generic_Sorting call "<" is
-unspecified.@PDefn{unspecified}]}
+manner, the behavior of the subprograms of Generic_Sorting are unspecified.
+@Chg{Version=[3],New=[The number of],Old=[How many]} times the subprograms of
+Generic_Sorting call "<" is unspecified.@PDefn{unspecified}]}
 
 @begin{DescribeCode}
 
@@ -3963,7 +3997,11 @@ evaluation of "<" is propagated.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Merge removes elements from Source
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0021-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[3],New=[If Source is
+empty, then Merge does nothing. If Source and Target are the same non-empty
+container object, then Program_Error is propagated. Otherwise, ],Old=[]}Merge
+removes elements from Source
 and inserts them into Target; afterwards,
 Target contains the union of the elements that were initially
 in Source and Target; Source is left empty.
@@ -4039,9 +4077,9 @@ designates has been used as the Source or Target of a call to Move;] or]}
 @end{TheProof}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0160-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0160-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[The element it designates has been
-@Chg{Version=[3],New=[removed from the list that contains the
+@Chg{Version=[3],New=[removed from the list that previously contained the
 element],Old=[deleted]}.]}
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
@@ -4106,9 +4144,11 @@ finalized.]}
 object shall be lost upon assignment or scope exit.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[The execution of an @nt{assignment_statement} for
 a list shall have the effect of copying the elements from the source list
-object to the target list object.]}
+object to the target list object@Chg{Version=[3],New=[ and changing the length
+of the target object to that of the source object],Old=[]}.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4570,12 +4610,14 @@ assigns New_Item to the element of the node designated by Position.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0021-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
 Constraint_Error is propagated. Otherwise, Query_Element calls
 Process.@key{all} with the key and element from the node designated by Position
 as the arguments. Program_Error is propagated if Process.@key{all} tampers with
-the elements of Container. Any exception raised by Process.@key{all} is
-propagated.]}
+the elements of @Chg{Version=[3],New=[the map that contains the
+element designated by Position],Old=[Container]}. Any exception raised by
+Process.@key{all} is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4621,8 +4663,8 @@ shall be unconstrained.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Constant_Reference_Type and
-Reference_Type need finalization.@PDefn2{Term=<needs finalization>,
+@ChgAdded{Version=[3],Type=[Trailing],Text=[The types Constant_Reference_Type
+and Reference_Type need finalization.@PDefn2{Term=<needs finalization>,
 Sec=<language-defined type>}]}
 
 @ChgRef{Version=[3],Kind=[Added]}
@@ -4742,10 +4784,10 @@ Target.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1],ARef=[AI05-0248-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Target denotes the same object
 as Source, then @Chg{Version=[3],New=[the operation],Old=[Move]}
-has no effect. Otherwise, Chg{Version=[3],New=[equivalent
+has no effect. Otherwise, @Chg{Version=[3],New=[the operation is equivalent
 to Assign (Target, Source) followed by Clear (Source)],Old=[Move first calls
 Clear (Target). Then, each node from Source is removed from Source and inserted
 into Target. The length of Source is 0 after a successful call to Move]}.]}
@@ -5067,10 +5109,10 @@ been used as the Target of a call to Assign, or as the target of an
 been used as the Source or Target of a call to Move; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0160-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0160-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[The node it designates has been
 @Chg{Version=[3],New=[removed],Old=[deleted]} from the map@Chg{Version=[3],New=[
-that contains the node],Old=[]}.]}
+that previously contained the node],Old=[]}.]}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
   @ChgAdded{Version=[3],Text=[This can happen directly via calls to Clear,
@@ -5124,9 +5166,11 @@ finalized.]}
 lost upon assignment or scope exit.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[The execution of an @nt{assignment_statement} for
 a map shall have the effect of copying the elements from the source map
-object to the target map object.]}
+object to the target map object@Chg{Version=[3],New=[ and changing the length
+of the target object to that of the source object],Old=[]}.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5596,11 +5640,12 @@ cursors of Container.]}
   semantics could be preserved by waiting until enough elements are inserted.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[While Reserve_Capacity can be used to reduce the
   capacity of a map, we do not specify whether an implementation actually
   supports reduction of the capacity. Since the actual capacity can be anything
-  greater than or equal to Count, an implementation never has to reduce the
-  capacity.]}
+  greater than or equal to @Chg{Version=[3],New=[Capacity],Old=[Count]},
+  an implementation never has to reduce the capacity.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Reserve_Capacity tampers with the cursors, as
@@ -5801,14 +5846,14 @@ in the cursor in order to implement this function.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a reversible
-iterator object that will generate a loop parameter designating each node in
-Container, starting with the first node and moving the cursor according to the
-successor relation. Program_Error is propagated if any operation (in particular,
-the @nt{sequence_of_statements} of the @nt{loop_statement} whose
-@nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the iterator object exists. The iterator object
-needs finalization.]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns an
+iterator object that will generate a value for the loop parameter designating
+each node in Container, starting with the first node and moving the cursor
+according to the successor relation. Program_Error is propagated if any
+operation (in particular, the @nt{sequence_of_statements} of the
+@nt{loop_statement} whose @nt{iterator_specification} denotes this object)
+tampers with the cursors of Container while the iterator object exists. The
+iterator object needs finalization.]}
 
 @end{DescribeCode}
 @end{StaticSem}
@@ -6208,16 +6253,22 @@ unspecified.@PDefn{unspecified}]}
 @end{ImplNote}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[first node],Sec=[of an ordered map]}
 @Defn2{Term=[last node],Sec=[of an ordered map]}
-@Defn2{Term=[successor node],Sec=[of an ordered map]}
-The first node of a nonempty map is the one whose key is less than the key of
-all the other nodes in the map. The last node of a nonempty map is the one
+@Defn2{Term=[successor node],Sec=[of an ordered map]}@Chg{Version=[3],New=[
+@Defn2{Term=[predecessor node],Sec=[of an ordered map]}],Old=[]}
+The @Chg{Version=[3],New=[@i<first node>],Old=[first node]}
+of a nonempty map is the one whose key is less than the key of
+all the other nodes in the map. The @Chg{Version=[3],New=[@i<last node>],Old=[last node]}
+of a nonempty map is the one
 whose key is greater than the key of all the other elements in the map. The
-successor of a node is the node with the smallest key that is larger than the
-key of the given node. The predecessor of a node is the node with the largest
-key that is smaller than the key of the given node. All comparisons are done
-using the generic formal "<" operator for keys.]}
+@Chg{Version=[3],New=[@i<successor>],Old=[successor]}
+of a node is the node with the smallest key that is larger than the
+key of the given node. The @Chg{Version=[3],New=[@i<predecessor>],Old=[predecessor]}
+of a node is the node with the largest key that is smaller than the key of the
+given node. All comparisons are done using the generic formal "<" operator for
+keys.]}
 
 @begin{DescribeCode}
 
@@ -6302,12 +6353,13 @@ the last node in Container. If Container is empty, returns No_Element.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
 Previous returns No_Element. Otherwise@Chg{Version=[3],New=[,],Old=[]}
-Previous returns a cursor
-designating the node that precedes the one designated by Position. If Position
-designates the first element, then Previous returns No_Element.]}
+Previous returns a cursor designating the @Chg{Version=[3],New=[predecessor
+],Old=[]}node @Chg{Version=[3],New=[of],Old=[that precedes]} the one designated
+by Position. If Position designates the first element, then Previous returns
+No_Element.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -6400,8 +6452,10 @@ Otherwise@Chg{Version=[3],New=[,],Old=[]} No_Element is returned.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Iterates over the nodes in
-Container as per Iterate, with the difference that the nodes are traversed in
+Container as per @Chg{Version=[3],New=[procedure ],Old=[]}Iterate,
+with the difference that the nodes are traversed in
 predecessor order, starting with the last node.]}
 
 @begin{Example}
@@ -6412,15 +6466,15 @@ predecessor order, starting with the last node.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a reversible
-iterator object that will generate a loop parameter designating each node in
-Container, starting with the first node and moving the cursor according to the
-successor relation when used as a forward iterator, and starting with the last
-node and moving the cursor according to the predecessor relation when used as a
-reverse iterator. Program_Error is propagated if any operation (in particular,
-the @nt{sequence_of_statements} of the @nt{loop_statement} whose
-@nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the iterator object exists. The iterator object
-needs finalization.]}
+iterator object that will generate a value for the loop parameter designating
+each node in Container, starting with the first node and moving the cursor
+according to the successor relation when used as a forward iterator, and
+starting with the last node and moving the cursor according to the predecessor
+relation when used as a reverse iterator. Program_Error is propagated if any
+operation (in particular, the @nt{sequence_of_statements} of the
+@nt{loop_statement} whose @nt{iterator_specification} denotes this object)
+tampers with the cursors of Container while the iterator object exists. The
+iterator object needs finalization.]}
 
 @end{DescribeCode}
 @end{StaticSem}
@@ -6822,11 +6876,14 @@ exception raised by the assignment is propagated.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0021-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
 Constraint_Error is propagated. Otherwise, Query_Element calls
 Process.@key{all} with the element designated by Position as the argument.
 Program_Error is propagated if Process.@key{all} tampers with the elements of
-Container. Any exception raised by Process.@key{all} is propagated.]}
+@Chg{Version=[3],New=[the set that contains the
+element designated by Position],Old=[Container]}. Any exception raised by
+Process.@key{all} is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -6836,7 +6893,7 @@ Container. Any exception raised by Process.@key{all} is propagated.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Constant_Reference_Type
+@ChgAdded{Version=[3],Type=[Trailing],Text=[The type Constant_Reference_Type
 needs finalization.@PDefn2{Term=<needs finalization>,
 Sec=<language-defined type>}]}
 
@@ -6901,10 +6958,10 @@ for an @nt{assignment_statement} assigning Source to Target.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1],ARef=[AI05-0248-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Target denotes the same object
 as Source, then @Chg{Version=[3],New=[the operation],Old=[Move]}
-has no effect. Otherwise, @Chg{Version=[3],New=[equivalent
+has no effect. Otherwise, @Chg{Version=[3],New=[the operation is equivalent
 to Assign (Target, Source) followed by Clear (Source)],Old=[Move first clears
 Target. Then, each element from Source is removed from Source and inserted into
 Target. The length of Source is 0 after a successful call to Move]}.]}
@@ -7352,7 +7409,7 @@ unconstrained.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Reference_Type needs
+@ChgAdded{Version=[3],Type=[Trailing],Text=[The type Reference_Type needs
 finalization.@PDefn2{Term=<needs finalization>,
 Sec=<language-defined type>}]}
 
@@ -7381,7 +7438,7 @@ save the key value @i<K>; then returns an object whose discriminant is an access
 value that designates the element designated by Position. Program_Error is
 propagated if any operation tampers with the elements of Container while the
 object returned by Reference_Preserving_Key exists and has not been finalized.
-When the object returned by Reference_PReserving_Key is finalized, a check is
+When the object returned by Reference_Preserving_Key is finalized, a check is
 made if @i<K> determines the same equivalence class as that for the new element;
 if not, the element is removed from the set and Program_Error is propagated.]}
 
@@ -7463,10 +7520,10 @@ created:@Defn2{Term=[invalid cursor],Sec=[of a set]}
   has been used as the Source or Target of a call to Move; or]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0160-1]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0160-1],ARef=[AI05-0262-1]}
   @ChgAdded{Version=[2],Text=[The element it designates has been
   @Chg{Version=[3],New=[removed],Old=[deleted]} from the
-  set@Chg{Version=[3],New=[ that contains the element],Old=[]}.]}
+  set@Chg{Version=[3],New=[ that previously contained the element],Old=[]}.]}
   @begin{Ramification}
     @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1]}
     @ChgAdded{Version=[3],Text=[This can happen directly via calls to Clear,
@@ -7524,9 +7581,11 @@ finalized.]}
 lost upon assignment or scope exit.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[The execution of an @nt{assignment_statement} for
 a set shall have the effect of copying the elements from the source set
-object to the target set object.]}
+object to the target set object@Chg{Version=[3],New=[ and changing the length
+of the target object to that of the source object],Old=[]}.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -8105,14 +8164,14 @@ first hashed element in Container.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a reversible
-iterator object that will generate a loop parameter designating each element in
-Container, starting with the first element and moving the cursor according to
-the successor relation. Program_Error is propagated if any operation (in
-particular, the @nt{sequence_of_statements} of the @nt{loop_statement} whose
-@nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the iterator object exists. The iterator object
-needs finalization.]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns an
+iterator object that will generate a value for the loop parameter designating
+each element in Container, starting with the first element and moving the cursor
+according to the successor relation. Program_Error is propagated if any
+operation (in particular, the @nt{sequence_of_statements} of the
+@nt{loop_statement} whose @nt{iterator_specification} denotes this object)
+tampers with the cursors of Container while the iterator object exists. The
+iterator object needs finalization.]}
 
 @end{DescribeCode}
 
@@ -8589,14 +8648,20 @@ key/element pairs.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[first element],Sec=[of a ordered set]}
 @Defn2{Term=[last element],Sec=[of a ordered set]}
-@Defn2{Term=[successor element],Sec=[of a ordered set]}
-The first element of a nonempty set is the one
-which is less than all the other elements in the set. The last element of a
+@Defn2{Term=[successor element],Sec=[of a ordered set]}@Chg{Version=[3],New=[
+@Defn2{Term=[predecessor element],Sec=[of a ordered set]}],Old=[]}
+The @Chg{Version=[3],New=[@i<first element>],Old=[first element]}
+of a nonempty set is the one
+which is less than all the other elements in the set.
+The @Chg{Version=[3],New=[@i<last element>],Old=[last element]} of a
 nonempty set is the one which is greater than all the other elements in the
-set. The successor of an element is the smallest element that is larger than
-the given element. The predecessor of an element is the largest element that is
+set. The @Chg{Version=[3],New=[@i<successor>],Old=[successor]}
+of an element is the smallest element that is larger than
+the given element. The @Chg{Version=[3],New=[@i<predecessor>],Old=[predecessor]}
+of an element is the largest element that is
 smaller than the given element. All comparisons are done using the generic
 formal "<" operator for elements.]}
 
@@ -8668,12 +8733,13 @@ Element (Last (Container)).]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
 Previous returns No_Element. Otherwise@Chg{Version=[3],New=[,],Old=[]}
 Previous returns a cursor designating
-the element that precedes the one designated by Position. If Position
-designates the first element, then Previous returns No_Element.]}
+the @Chg{Version=[3],New=[predecessor ],Old=[]}element
+@Chg{Version=[3],New=[of],Old=[that precedes]} the one designated by Position.
+If Position designates the first element, then Previous returns No_Element.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -8765,8 +8831,10 @@ No_Element is returned.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Iterates over the elements in
-Container as per Iterate, with the difference that the elements are traversed
+Container as per @Chg{Version=[3],New=[procedure ],Old=[]}Iterate,
+with the difference that the elements are traversed
 in predecessor order, starting with the last element.]}
 
 @begin{Example}
@@ -8777,15 +8845,15 @@ in predecessor order, starting with the last element.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a reversible
-iterator object that will generate a loop parameter designating each element in
-Container, starting with the first element and moving the cursor according to
-the successor relation when used as a forward iterator, and starting with the
-last element and moving the cursor according to the predecessor relation when
-used as a reverse iterator. Program_Error is propagated if any operation (in
-particular, the @nt{sequence_of_statements} of the @nt{loop_statement} whose
-@nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the iterator object exists. The iterator object from Iterate
-needs finalization.]}
+iterator object that will generate a value for the loop parameter designating
+each element in Container, starting with the first element and moving the cursor
+according to the successor relation when used as a forward iterator, and
+starting with the last element and moving the cursor according to the
+predecessor relation when used as a reverse iterator. Program_Error is
+propagated if any operation (in particular, the @nt{sequence_of_statements} of
+the @nt{loop_statement} whose @nt{iterator_specification} denotes this object)
+tampers with the cursors of Container while the iterator object exists. The
+iterator object from Iterate needs finalization.]}
 
 @end{DescribeCode}
 

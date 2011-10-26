@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.65 $ $Date: 2011/08/17 00:29:41 $ $Author: randy $ }
+@comment{ $Revision: 1.66 $ $Date: 2011/10/21 06:41:26 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2011/08/17 00:29:41 $}
+@Comment{$Date: 2011/10/21 06:41:26 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -27,7 +27,8 @@ This Annex is new to Ada 95.
 @begin{Intro}
 @Redundant[This clause specifies rules regarding access to machine instructions
 from within an Ada program.]
-@ChgImplDef{Version=[2],Kind=[Revised],Text=[@Chg{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
+Text=[@Chg{Version=[2],
 New=[Implementation-defined intrinsic subprograms],
 Old=[Support for access to machine instructions]}.]}
 @end{Intro}
@@ -62,9 +63,9 @@ Ada can be used to write systems programs that run in privileged mode.
 @Defn2{Term=[language], Sec=(interface to assembly)}
 @Defn{mixed-language programs}
 @Defn{assembly language}
-The interfacing @Chg{Version=[3],New=[aspects],Old=[pragmas]}
+The @Chg{Version=[3],New=[support for ],Old=[]}interfacing @Chg{Version=[3],New=[aspects],Old=[pragmas]}
 (see @RefSecNum{Interface to Other Languages})
-should support interface to assembler;
+should @Chg{Version=[3],New=[include],Old=[support]} interface to assembler;
 the default assembler should be associated with the convention
 identifier Assembler.
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
@@ -117,7 +118,8 @@ the implementation shall document the mapping
 between the Link_Name string, if specified, or
 the Ada designator, if not, and the external link name used
 for such a subprogram.
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[Implementation-defined aspects of access to machine operations.]}]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The mapping between the Link_Name or Ada designator and the external
@@ -213,7 +215,8 @@ Program units can be connected to non-reserved interrupts. While
 connected, the program unit is said to be @i{attached} to that interrupt.
 The execution of that program unit, the @i{interrupt handler}, is invoked upon
 delivery of the interrupt occurrence.
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[Implementation-defined aspects of interrupts.]}]}
 @begin{Honest}
   As an obsolescent feature,
@@ -407,7 +410,8 @@ should be deleted if the paragraphs are ever renumbered.}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
-@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Interrupt_Handler)(@SynI{handler_}@Syn2{name});']}
+@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
+InitialVersion=[0],@key{pragma} @prag(Interrupt_Handler)(@SynI{handler_}@Syn2{name});']}
 
 @begin{SyntaxText}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
@@ -416,7 +420,8 @@ should be deleted if the paragraphs are ever renumbered.}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
-@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Attach_Handler)(@SynI{handler_}@Syn2{name}, @Syn2{expression});']}
+@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
+InitialVersion=[0],@key{pragma} @prag(Attach_Handler)(@SynI{handler_}@Syn2{name}, @Syn2{expression});']}
 @end{Syntax}
 
 @begin{Resolution}
@@ -442,7 +447,7 @@ specified:]}
 The type of aspect Interrupt_Handler is Boolean.
 If directly specified, the aspect_definition shall be a static expression.
 @Redundant[This aspect is never inherited;] if not directly specified,
-the aspect is False.]}
+the aspect is False.@AspectDefn{Interrupt_Handler}]}
 
 @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Interrupt_Handler],
   Text=[@ChgAdded{Version=[3],Text=[Protected procedure may be attached to
@@ -450,8 +455,9 @@ the aspect is False.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Attach_Handler@\
-The value of aspect Attach_Handler is an @nt{expression}, which shall be of type
-Interrupts.Interrupt_Id. @Redundant[This aspect is never inherited.]]}
+The aspect Attach_Handler is an @nt{expression}, which shall be of type
+Interrupts.Interrupt_Id. @Redundant[This aspect is never
+inherited.]@AspectDefn{Attach_Handler}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Attach_Handler],
     Text=[@ChgAdded{Version=[3],Text=[Protected procedure is attached to an
@@ -471,8 +477,8 @@ protected procedure, the],Old=[pragma is only allowed immediately within the
 @nt{protected_definition} where the corresponding subprogram is declared.
 The]} corresponding @nt{protected_@!type_@!declaration}
 or @nt{single_@!protected_@!declaration}
-shall be a library@Chg{Version=[2],New=[-],Old=[]}level declaration
-@Chg{Version=[3],New=[ and shall not be declared within a
+shall be a library@Chg{Version=[2],New=[-],Old=[]}level
+declaration@Chg{Version=[3],New=[ and shall not be declared within a
 generic body. @PDefn{generic contract issue}In addition
 to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}), this rule also applies
@@ -567,7 +573,7 @@ attached by a procedure in the Interrupts package or if no user
 handler was previously attached to the interrupt, the default treatment is
 restored. @Chg{New=[If @Chg{Version=[3],New=[the],Old=[an]} Attach_@!Handler
 @Chg{Version=[3],New=[aspect],Old=[pragma]} was
-was @Chg{Version=[3],New=[specified],Old=[used]} and the most recently
+@Chg{Version=[3],New=[specified],Old=[used]} and the most recently
 attached handler for the same interrupt is the same as the one that was
 attached at the time the protected object was initialized],
 Old=[Otherwise, @Redundant[that is, if an
@@ -668,7 +674,8 @@ The restrictions may be on the constructs that are allowed within them,
 and on ordinary calls (i.e. not via interrupts) on protected operations in
 these protected objects.
 @end{Ramification}
-@ChgImplDef{Version=[3],Kind=[AddedNormal],Text=[@Chg{Version=[2],
+@ChgImplDef{Version=[3],Kind=[Revised],InitialVersion=[2],
+Text=[@Chg{Version=[2],
 New=[Any restrictions on a protected procedure or its containing type when
 @Chg{Version=[3],New=[an aspect],Old=[a @nt{pragma}]}
 Attach_handler or Interrupt_Handler
@@ -697,7 +704,8 @@ handlers to have parameters, it is allowed to do so via these
 it need not invent implementation-defined
 @Chg{Version=[3],New=[aspects],Old=[pragmas]} for the purpose.
 @end{Ramification}
-@ChgImplDef{Version=[3],Kind=[AddedNormal],Text=[@Chg{Version=[2],
+@ChgImplDef{Version=[3],Kind=[Revised],InitialVersion=[2],
+Text=[@Chg{Version=[2],
 New=[Any other forms of interrupt handler supported by the
 Attach_Handler and Interrupt_Handler
 @Chg{Version=[3],New=[aspects],Old=[pragmas]}.],Old=[]}]}
@@ -953,10 +961,11 @@ Interrupt_Handler @Chg{Version=[3],New=[aspects],Old=[pragmas]},
 but @Chg{Version=[3],New=[does not specify],Old=[not]} the
 Interrupt_Priority @Chg{Version=[3],New=[aspect],Old=[pragma]}.
 @Redundant[This default need not be the same for all interrupts.]
-@ChgDocReq{Version=[3],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgDocReq{Version=[3],Kind=[RevisedAdded],InitialVersion=[2],
+Text=[@ChgAdded{Version=[2],
 Text=[If the Ceiling_Locking policy is in effect, the default ceiling priority
-for a protected object that contains an interrupt
-handler @Chg{Version=[3],New=[aspect],Old=[pragma]}.]}]}
+for a protected object that @Chg{Version=[3],New=[specifies],Old=[contains]}
+an interrupt handler @Chg{Version=[3],New=[aspect],Old=[pragma]}.]}]}
 
 @end{DocReq}
 
@@ -993,7 +1002,7 @@ Device_Priority : @key[constant]
   @key[array] (1..5) of System.Interrupt_Priority := ( ... );@Softpage
 @key[protected] @key[type] Device_Interface
   (Int_Id : Ada.Interrupts.Interrupt_Id) @Chg{Version=[3],New=[
-     @key[with] Interrupt_Priority => Device_Priority(Int_Id)],Old=[]}@key[is]
+     @key[with] Interrupt_Priority => Device_Priority(Int_Id) ],Old=[]}@key[is]
   @key[procedure] Handler@Chg{Version=[3],New=[
      @key[with] Attach_Handler => Int_Id],Old=[;
   @key[pragma] Attach_Handler(Handler, Int_Id)]};
@@ -1125,7 +1134,8 @@ of preelaborated variables allows a partition to be restarted without
 reloading.
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Whether a partition can be restarted without reloading.]}]}
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[Implementation-defined aspects of preelaboration.]}]}
 @begin{discussion}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
@@ -1197,7 +1207,8 @@ a @nt{pragma} Discard_Names is a representation pragma.
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[Representation pragmas are automatically aspects,
+  @ChgAdded{Version=[3],Text=[Representation pragmas automatically
+  specify aspects of the same name,
   so Discard_Names can be used as an @nt{aspect_mark} in an
   @nt{aspect_specification} instead of using the pragma on individual
   entities.]}
@@ -1304,16 +1315,20 @@ Volatile, Atomic_Components, and Volatile_Components is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Atomic)(@Syn2{local_name});']}
+@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
+InitialVersion=[0],@key{pragma} @prag(Atomic)(@Syn2{local_name});']}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Volatile)(@Syn2{local_name});']}
+@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
+InitialVersion=[0],@key{pragma} @prag(Volatile)(@Syn2{local_name});']}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Atomic_Components)(@SynI{array_}@Syn2{local_name});']}
+@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
+InitialVersion=[0],@key{pragma} @prag(Atomic_Components)(@SynI{array_}@Syn2{local_name});']}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Volatile_Components)(@SynI{array_}@Syn2{local_name});']}
+@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
+InitialVersion=[0],@key{pragma} @prag(Volatile_Components)(@SynI{array_}@Syn2{local_name});']}
 
 @end{Syntax}
 
@@ -1327,7 +1342,8 @@ representation aspects may be specified:]}
 
 @begin{Description}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[Atomic@\The type of aspect Atomic is Boolean.]}
+@ChgAdded{Version=[3],Text=[Atomic@\The type of aspect Atomic is
+Boolean.@AspectDefn{Atomic}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Atomic],
     Text=[@ChgAdded{Version=[3],Text=[Declare that a type, object, or component is
@@ -1335,14 +1351,15 @@ representation aspects may be specified:]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Independent@\The type of aspect Independent is
-Boolean.]}
+Boolean.@AspectDefn{Independent}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Independent],
     Text=[@ChgAdded{Version=[3],Text=[Declare that a type, object, or component
       is independently addressable.]}]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[Volatile@\The type of aspect Volatile is Boolean.]}
+@ChgAdded{Version=[3],Text=[Volatile@\The type of aspect Volatile is
+Boolean.@AspectDefn{Volatile}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Volatile],
     Text=[@ChgAdded{Version=[3],Text=[Declare that a type, object, or component
@@ -1359,7 +1376,7 @@ specified:]}
 @begin{Description}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Atomic_Components@\The type of aspect
-Atomic_Components is Boolean.]}
+Atomic_Components is Boolean.@AspectDefn{Atomic_Components}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Atomic_Components],
     Text=[@ChgAdded{Version=[3],Text=[Declare that the components of
@@ -1367,7 +1384,7 @@ Atomic_Components is Boolean.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Volatile_Components@\The type of aspect
-Volatile_Components is Boolean.]}
+Volatile_Components is Boolean.@AspectDefn{Volatile_Components}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Volatile_Components],
     Text=[@ChgAdded{Version=[3],Text=[Declare that the components of
@@ -1383,7 +1400,7 @@ array object), the following representation aspect may be specified:]}
 @begin{Description}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Independent_Components@\The type of aspect
-Independent_Components is Boolean.]}
+Independent_Components is Boolean.@AspectDefn{Independent_Components}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Independent_Components],
     Text=[@ChgAdded{Version=[3],Text=[Declare that the components of an array
@@ -1438,8 +1455,8 @@ are all of its subcomponents @Redundant[(the same does not apply to atomic)].
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[When True, the aspects Independent and
 Independent_Components @i<specify as independently addressable> the named object
-or component(s), or in the case of a type, all objects of that type. All atomic
-objects are considered to be specified as independently
+or component(s), or in the case of a type, all objects or components
+of that type. All atomic objects are considered to be specified as independently
 addressable.@Defn{specified as independently addressable}@Defn2{Term=[independently addressable],Sec=[specified]}]}
 
 @begin{Ramification}
@@ -1789,7 +1806,7 @@ because the pragma was not used to mark variables as shared.
   eliminate overspecification and simply focus on the root requirement (that
   all tasks see the same view of volatile objects). This is not an
   inconsistency; "memory" arguably includes on-chip caches so long as those are
-  kept consistent. Moreover, it is dificult to imagine a program that could tell
+  kept consistent. Moreover, it is difficult to imagine a program that could tell
   the difference.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
@@ -1934,7 +1951,8 @@ interrupt handler@Chg{Version=[2],New=[, or finalization of a task attribute],Ol
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised, or an implementation-defined value of the type
 Task_Id is returned.
-@ChgImplDef{Version=[2],Kind=[Revised],Text=[The value of Current_Task when in
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
+Text=[The value of Current_Task when in
 a protected entry@Chg{Version=[2],New=[,],Old=[ or]} interrupt handler@Chg{Version=[2],
 New=[, or finalization of a task attribute],Old=[]}.]}
 @begin{ImplNote}
@@ -1962,7 +1980,8 @@ the execution of the program is erroneous.
 
 The implementation shall document the effect of calling Current_Task
 from an entry body or interrupt handler.
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[The effect of calling Current_Task from an
 entry body or interrupt handler.]}]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
@@ -2184,7 +2203,8 @@ per task, if such a limit exists.
 
 In addition, if these limits can be configured, the implementation shall
 document how to configure them.
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[@Chg{New=[Limits on the number and size of task attributes, and how to configure them.],
 Old=[Implementation-defined aspects of Task_Attributes.]}]}]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],

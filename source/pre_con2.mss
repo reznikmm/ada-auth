@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.12 $ $Date: 2011/09/29 06:37:24 $ $Author: randy $ }
+@comment{ $Revision: 1.13 $ $Date: 2011/10/21 06:41:25 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -349,7 +349,7 @@ package Containers.Multiway_Trees has the following declaration:]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{private}
-   ... -- @RI[not specified by the language]
+   ... -- @Examcom[not specified by the language]
 @key[end] Ada.Containers.Multiway_Trees;]}
 
 @end{Example}
@@ -702,7 +702,8 @@ an element, and returns False otherwise.]}
   tree, then Program_Error is propagated. Otherwise, Query_Element calls
   Process.@key{all} with the element designated by Position as the argument.
   Program_Error is propagated if Process.@key{all} tampers with the elements of
-  Container. Any exception raised by Process.@key{all} is propagated.]}
+  the tree that contains the element designated by Position. Any exception
+  raised by Process.@key{all} is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -746,8 +747,8 @@ an element, and returns False otherwise.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
-  @ChgAdded{Version=[3],Type=[Trailing],Text=[Constant_Reference_Type and
-  Reference_Type need finalization.]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[The types Constant_Reference_Type
+  and Reference_Type need finalization.@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The default initialization of an object of type
@@ -1073,13 +1074,13 @@ an element, and returns False otherwise.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns an iterator object
-  that will generate a loop parameter designating each node in Container,
-  starting with the root node and proceeding in a depth-first order.
+  that will generate a value for the loop parameter designating each node in
+  Container, starting with the root node and proceeding in a depth-first order.
   Program_Error is propagated if any operation (in particular, the
   @nt{sequence_of_statements} of the @nt{loop_statement} whose
   @nt{iterator_specification} denotes this object) tampers with the cursors of
-  Container while the iterator object exists. The iterator object
-  needs finalization.]}
+  Container while the iterator object exists. The iterator object needs
+  finalization.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1089,15 +1090,15 @@ an element, and returns False otherwise.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate_Subtree returns an
-  iterator object that will generate a loop parameter designating each element
-  in the subtree rooted by the node designated by Position, starting with the
-  node designated by Position and proceeding in a depth-first order. If Position
-  equals No_Element, then Constraint_Error is propagated. Program_Error is
-  propagated if any operation (in particular, the @nt{sequence_of_statements} of
-  the @nt{loop_statement} whose @nt{iterator_specification} denotes this object)
-  tampers with the cursors of the container in which the node designated by
-  Position exists while the iterator object exists. The iterator object
-  needs finalization.]}
+  iterator object that will generate a value for the loop parameter designating
+  each element in the subtree rooted by the node designated by Position,
+  starting with the node designated by Position and proceeding in a depth-first
+  order. If Position equals No_Element, then Constraint_Error is propagated.
+  Program_Error is propagated if any operation (in particular, the
+  @nt{sequence_of_statements} of the @nt{loop_statement} whose
+  @nt{iterator_specification} denotes this object) tampers with the cursors of
+  the container in which the node designated by Position exists while the
+  iterator object exists. The iterator object needs finalization.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1631,18 +1632,18 @@ Process.@key{all} is propagated.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate_Children returns a
-reversible iterator object that will generate a loop parameter designating each
-child node of Parent. If Parent equals No_Element, then Constraint_Error is
-propagated. If Parent does not designate a node in Container, then Program_Error
-is propagated. Otherwise, when used as a forward iterator, the nodes are
-designated starting with the first child node and moving the cursor as per the
-function Next_Sibling; when used as a reverse iterator, the nodes are designated
-starting with the last child node and moving the cursor as per the function
-Previous_Sibling. Program_Error is propagated if any operation (in particular,
-the @nt{sequence_of_statements} of the @nt{loop_statement} whose
-@nt{iterator_specification} denotes this object) tampers with the cursors of
-Container while the iterator object exists. The iterator object
-needs finalization.]}
+reversible iterator object that will generate a value for the loop parameter
+designating each child node of Parent. If Parent equals No_Element, then
+Constraint_Error is propagated. If Parent does not designate a node in
+Container, then Program_Error is propagated. Otherwise, when used as a forward
+iterator, the nodes are designated starting with the first child node and moving
+the cursor as per the function Next_Sibling; when used as a reverse iterator,
+the nodes are designated starting with the last child node and moving the cursor
+as per the function Previous_Sibling. Program_Error is propagated if any
+operation (in particular, the @nt{sequence_of_statements} of the
+@nt{loop_statement} whose @nt{iterator_specification} denotes this object)
+tampers with the cursors of Container while the iterator object exists. The
+iterator object needs finalization.]}
 
 @end{DescribeCode}
 
@@ -1748,10 +1749,11 @@ finalized.]}
 @ChgAdded{Version=[3],Text=[No storage associated with a multiway tree object
 shall be lost upon assignment or scope exit.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[The execution of an @nt{assignment_statement} for
 a tree shall have the effect of copying the elements from the source tree
-object to the target tree object.]}
+object to the target tree object and changing the node count of the target
+object to that of the source object.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2329,7 +2331,7 @@ package Containers.Indefinite_Holders has the following declaration:]}
 @ChgAdded{Version=[3],Text=[@key{private}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   ... -- @RI[not specified by the language]]}
+@ChgAdded{Version=[3],Text=[   ... -- @Examcom[not specified by the language]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{end} Ada.Containers.Indefinite_Holders;]}
@@ -2528,7 +2530,7 @@ exception raised by Process.@key[all] is propagated.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Constant_Reference_Type and Reference_Type
+@ChgAdded{Version=[3],Type=[Trailing],Text=[The types Constant_Reference_Type and Reference_Type
 need finalization.@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
@@ -2552,7 +2554,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[This routine (combined with the
+@ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
 Implicit_Dereference aspect) provides a convenient way to gain read access to
 the contained element of a holder container.]}
 
@@ -3706,7 +3708,7 @@ sorted smallest first as determined by the generic formal "<" operator
 provided. Any exception raised during evaluation of "<" is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0044-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0044-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[The actual function for the generic formal function
 "<" of Generic_Array_Sort is expected to return the same value each time it is
 called with a particular pair of element values. It should define a strict
@@ -3714,8 +3716,9 @@ called with a particular pair of element values. It should define a strict
 New=[ (see @RefSecNum{Containers})],Old=[, that is, be irreflexive, asymmetric,
 and transitive]}; it
 should not modify Container. If the actual for "<" behaves in some other
-manner, the behavior of the instance of Generic_Array_Sort is unspecified. How
-many times Generic_Array_Sort calls "<" is unspecified.@PDefn{unspecified}]}
+manner, the behavior of the instance of Generic_Array_Sort is unspecified.
+@Chg{Version=[3],New=[The number of],Old=[How many]}
+times Generic_Array_Sort calls "<" is unspecified.@PDefn{unspecified}]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3761,7 +3764,7 @@ operator provided. Any exception raised during evaluation of "<" is
 propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0044-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0044-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[The actual function for the generic formal function
 "<" of Generic_Constrained_Array_Sort is expected to return the same value each
 time it is called with a particular pair of element values. It should define a
@@ -3769,8 +3772,9 @@ strict @Chg{Version=[3],New=[weak ],Old=[]}ordering relationship@Chg{Version=[3]
 New=[ (see @RefSecNum{Containers})],Old=[, that is, be irreflexive, asymmetric,
 and transitive]}; it should not modify Container. If the actual for "<" behaves in
 some other manner, the behavior of the instance of
-Generic_Constrained_Array_Sort is unspecified. How many times
-Generic_Constrained_Array_Sort calls "<" is unspecified.@PDefn{unspecified}]}
+Generic_Constrained_Array_Sort is unspecified. @Chg{Version=[3],New=[The number
+of],Old=[How many]} times Generic_Constrained_Array_Sort calls "<" is
+unspecified.@PDefn{unspecified}]}
 
 @end{DescribeCode}
 
@@ -3806,7 +3810,7 @@ It should define a strict weak ordering relationship (see @RefSecNum{Containers}
 it should not modify the elements. The actual function for the generic formal
 Swap should exchange the values of the indicated elements. If the actual for
 either Before or Swap behaves in some other manner, the behavior of
-Generic_Sort is unspecified. How many times the Generic_Sort calls Before
+Generic_Sort is unspecified. The number of times the Generic_Sort calls Before
 or Swap is unspecified.@PDefn{unspecified}]}
 
 @end{DescribeCode}
@@ -3945,7 +3949,7 @@ package Containers.Synchronized_Queue_Interfaces has the following declaration:]
    New_Item  : @key[in]     Element_Type) @key[is abstract];]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0264-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0262-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[A queue type that implements this
 interface may have a bounded @i<capacity>@Defn2{Term=[capacity],Sec=[of a queue]}.
 If the queue object has a bounded
@@ -3997,10 +4001,10 @@ type, or to be an explicit access type that designates the indefinite type.]}
 
   @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[There are no indefinite queues as a useful
-  definition for Dequeue is not possible. Dequeue cannot be a function as Ada
+  @ChgAdded{Version=[3],Text=[There are no indefinite queues, as a useful
+  definition for Dequeue is not possible. Dequeue cannot be a function, as Ada
   does not have entries that are functions (thus conditional and timed calls
-  would not be possible) and moreover protected functions do not allow modifying
+  would not be possible). Moreover, protected functions do not allow modifying
   the queue object (thus it doesn't work even if we decided we didn't care about
   conditional and timed calls). If Dequeue is an entry, then the dequeued object
   would have to be an @key[out] parameter and that would require the queue client to
@@ -4030,13 +4034,13 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 @key[with] Ada.Containers.Synchronized_Queue_Interfaces;
 @key[generic]
    @key[with package] Queue_Interfaces @key[is new] Ada.Containers.Synchronized_Queue_Interfaces (<>);
-   Default_Ceiling: System.Any_Priority := System.Priority'Last;
+   Default_Ceiling : System.Any_Priority := System.Priority'Last;
 @key[package] Ada.Containers.Unbounded_Synchronized_Queues is@ChildUnit{Parent=[Ada.Containers],Child=[Unbounded_Synchronized_Queues]}
    @key[pragma] Preelaborate(Unbounded_Synchronized_Queues);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[package] Implementation @key[is]
-      ... -- @RI[not specified by the language]
+      ... -- @Examcom[not specified by the language]
    @key[end] Implementation;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -4047,9 +4051,9 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
-      @key[entry] @AdaSubDefn{Enqueue} (New_Item: @key[in] Queue_Interfaces.Element_Type);
+      @key[entry] @AdaSubDefn{Enqueue} (New_Item : @key[in] Queue_Interfaces.Element_Type);
       @key[overriding]
-      @key[entry] @AdaSubDefn{Dequeue} (Element: @key[out] Queue_Interfaces.Element_Type);]}
+      @key[entry] @AdaSubDefn{Dequeue} (Element : @key[out] Queue_Interfaces.Element_Type);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
@@ -4059,14 +4063,14 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[private]
-      ... -- @RI[not specified by the language]
+      ... -- @Examcom[not specified by the language]
    @key[end] Queue;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{private}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   ... -- @RI[not specified by the language]]}
+@ChgAdded{Version=[3],Text=[   ... -- @Examcom[not specified by the language]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{end} Ada.Containers.Unbounded_Synchronized_Queues;]}
@@ -4123,13 +4127,13 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 @key[generic]
    @key[with package] Queue_Interfaces @key[is new] Ada.Containers.Synchronized_Queue_Interfaces (<>);
    Default_Capacity : Count_Type;
-   Default_Ceiling: System.Any_Priority := System.Priority'Last;
+   Default_Ceiling  : System.Any_Priority := System.Priority'Last;
 @key[package] Ada.Containers.Bounded_Synchronized_Queues is@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Synchronized_Queues]}
    @key[pragma] Preelaborate(Bounded_Synchronized_Queues);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[package] Implementation @key[is]
-      ... -- @RI[not specified by the language]
+      ... -- @Examcom[not specified by the language]
    @key[end] Implementation;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -4141,9 +4145,9 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
-      @key[entry] @AdaSubDefn{Enqueue} (New_Item: @key[in] Queue_Interfaces.Element_Type);
+      @key[entry] @AdaSubDefn{Enqueue} (New_Item : @key[in] Queue_Interfaces.Element_Type);
       @key[overriding]
-      @key[entry] @AdaSubDefn{Dequeue} (Element: @key[out] Queue_Interfaces.Element_Type);]}
+      @key[entry] @AdaSubDefn{Dequeue} (Element : @key[out] Queue_Interfaces.Element_Type);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
@@ -4153,14 +4157,14 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[private]
-      ... -- @RI[not specified by the language]
+      ... -- @Examcom[not specified by the language]
    @key[end] Queue;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{private}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   ... -- @RI[not specified by the language]]}
+@ChgAdded{Version=[3],Text=[   ... -- @Examcom[not specified by the language]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{end} Ada.Containers.Bounded_Synchronized_Queues;]}
@@ -4221,13 +4225,13 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
      (Element: Queue_Interfaces.Element_Type) @key[return] Queue_Priority is <>;
    @key[with] @key[function] Before
      (Left, Right : Queue_Priority) @key[return] Boolean is <>;
-   Default_Ceiling: System.Any_Priority := System.Priority'Last;
+   Default_Ceiling : System.Any_Priority := System.Priority'Last;
 @key[package] Ada.Containers.Unbounded_Priority_Queues @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Unbounded_Priority_Queues]}
    @key[pragma] Preelaborate(Unbounded_Priority_Queues);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[package] Implementation @key[is]
-      ... -- @RI[not specified by the language]
+      ... -- @Examcom[not specified by the language]
    @key[end] Implementation;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -4238,9 +4242,9 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
-      @key[entry] @AdaSubDefn{Enqueue} (New_Item: @key[in] Queue_Interfaces.Element_Type);
+      @key[entry] @AdaSubDefn{Enqueue} (New_Item : @key[in] Queue_Interfaces.Element_Type);
       @key[overriding]
-      @key[entry] @AdaSubDefn{Dequeue} (Element: @key[out] Queue_Interfaces.Element_Type);]}
+      @key[entry] @AdaSubDefn{Dequeue} (Element : @key[out] Queue_Interfaces.Element_Type);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0251-1]}
 @ChgAdded{Version=[3],Text=[      @key[not overriding]
@@ -4257,14 +4261,14 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[private]
-      ... -- @RI[not specified by the language]
+      ... -- @Examcom[not specified by the language]
    @key[end] Queue;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{private}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   ... -- @RI[not specified by the language]]}
+@ChgAdded{Version=[3],Text=[   ... -- @Examcom[not specified by the language]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{end} Ada.Containers.Unbounded_Priority_Queues;]}
@@ -4305,12 +4309,12 @@ inserted after the existing equivalent elements.]}
   specify that Queue needs finalization, because it is visibly protected.]}
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0251-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0251-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[For a call on Dequeue_Only_High_Priority, if the
 head of the non-empty queue is @i<E>, and the function Before(At_Least,
 Get_Priority(@i<E>)) returns False, then @i<E> is assigned to
 Element and then removed from the queue, and Success is set to True;
-otherwise Success is set to False and Element is unchanged.]}
+otherwise, Success is set to False and Element is unchanged.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0251-1]}
@@ -4354,13 +4358,13 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
    @key[with function] Before
      (Left, Right : Queue_Priority) @key[return] Boolean is <>;
    Default_Capacity : Count_Type;
-   Default_Ceiling: System.Any_Priority := System.Priority'Last;
+   Default_Ceiling  : System.Any_Priority := System.Priority'Last;
 @key[package] Ada.Containers.Bounded_Priority_Queues @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Priority_Queues]}
    @key[pragma] Preelaborate(Bounded_Priority_Queues);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[package] Implementation @key[is]
-      ... -- @RI[not specified by the language]
+      ... -- @Examcom[not specified by the language]
    @key[end] Implementation;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -4372,9 +4376,9 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
-      @key[entry] @AdaSubDefn{Enqueue} (New_Item: @key[in] Queue_Interfaces.Element_Type);
+      @key[entry] @AdaSubDefn{Enqueue} (New_Item : @key[in] Queue_Interfaces.Element_Type);
       @key[overriding]
-      @key[entry] @AdaSubDefn{Dequeue} (Element: @key[out] Queue_Interfaces.Element_Type);]}
+      @key[entry] @AdaSubDefn{Dequeue} (Element : @key[out] Queue_Interfaces.Element_Type);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0251-1]}
 @ChgAdded{Version=[3],Text=[      @key[not overriding]
@@ -4391,14 +4395,14 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[private]
-      ... -- @RI[not specified by the language]
+      ... -- @Examcom[not specified by the language]
    @key[end] Queue;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{private}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   ... -- @RI[not specified by the language]]}
+@ChgAdded{Version=[3],Text=[   ... -- @Examcom[not specified by the language]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{end} Ada.Containers.Bounded_Priority_Queues;]}
@@ -4464,8 +4468,8 @@ The graph is represented by a map from nodes to sets of edges.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[package] Node_Maps @key[is new] Vectors (Node, Node);
-   --  @Examcom{The algorithm builds a map to indicate the node used to reach a given}
-   --  @Examcom{node in the shortest distance.}]}
+   -- @Examcom{The algorithm builds a map to indicate the node used to reach a given}
+   -- @Examcom{node in the shortest distance.}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[package] Adjacency_Lists @key[is new] Doubly_Linked_Lists (Edge);
@@ -4492,7 +4496,7 @@ The graph is represented by a map from nodes to sets of edges.]}
    @key[is]
       @key[use] Adjacency_Lists, Node_Maps, Paths, Graphs;
       Reached  : @key[array] (Node) @key[of] Boolean := (@key[others] => False);
-      --  @ExamCom{The set of nodes whose shortest distance to the source is known.}]}
+      -- @ExamCom{The set of nodes whose shortest distance to the source is known.}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      Reached_From : @key[array] (Node) @key[of] Node;
@@ -4501,64 +4505,64 @@ The graph is represented by a map from nodes to sets of edges.]}
       Nearest_Distance : Distance;
       Next     : Node;
    @key[begin]
-      Reached (Source) := True;
-      So_Far (Source)  := 0.0;]}
+      Reached(Source) := True;
+      So_Far(Source)  := 0.0;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[      @key[while not] Reached (Target) @key[loop]
+@ChgAdded{Version=[3],Text=[      @key[while not] Reached(Target) @key[loop]
          Nearest_Distance := Distance'Last;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[         --  @Examcom{Find closest node not reached yet, by iterating over all nodes.}
-         --  @Examcom{A more efficient algorithm uses a priority queue for this step.}]}
+@ChgAdded{Version=[3],Text=[         -- @Examcom{Find closest node not reached yet, by iterating over all nodes.}
+         -- @Examcom{A more efficient algorithm uses a priority queue for this step.}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[         Next := Source;
          @key[for] N @key[in] Node'First .. Node'Last @key[loop]
-            @key[if not] Reached (N)
-              @key[and then] So_Far (N) < Nearest_Distance @key[then]
+            @key[if not] Reached(N)
+              @key[and then] So_Far(N) < Nearest_Distance @key[then]
                  Next := N;
-                 Nearest_Distance := So_Far (N);
+                 Nearest_Distance := So_Far(N);
             @key[end if];
          @key[end loop];]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[         @key[if] Next = Source @key[then]  --  @Examcom{No next node found, graph is not connected}
+@ChgAdded{Version=[3],Text=[         @key[if] Next = Source @key[then]  -- @Examcom{No next node found, graph is not connected}
             @key[return] Paths.Empty_List;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[         @key[else]
-            Reached (Next) := True;
+            Reached(Next) := True;
          @key[end if];]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[         --  @ExamCom{Update minimum distance to newly reachable nodes.}]}
+@ChgAdded{Version=[3],Text=[         -- @ExamCom{Update minimum distance to newly reachable nodes.}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[         @key[for] E @key[of] G (Next) @key[loop]
-            @key[if not] Reached (E.To) @key[then]
+            @key[if not] Reached(E.To) @key[then]
                Nearest_Distance :=
-                 Distance'Min (So_Far (E.To) + So_Far (Next),
-                               So_Far (E.To));]}
+                 Distance'Min (So_Far(E.To) + So_Far(Next),
+                               So_Far(E.To));]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[               @key[if] Nearest_Distance < So_Far (E.To) @key[then]
-                  Reached_From (E.To) := Next;
-                  So_Far (E.To) := Nearest_Distance;
+@ChgAdded{Version=[3],Text=[               @key[if] Nearest_Distance < So_Far(E.To) @key[then]
+                  Reached_From(E.To) := Next;
+                  So_Far(E.To) := Nearest_Distance;
                @key[end if];
             @key[end if];
          @key[end loop];
       @key[end loop];]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[      --  @ExamCom{Rebuild path from target to source.}]}
+@ChgAdded{Version=[3],Text=[      -- @ExamCom{Rebuild path from target to source.}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[      @key[declare]
          N : Node := Target;
       @key[begin]
          @key[while] N /= Source @key[loop]
-            N := Reached_From (N);
+            N := Reached_From(N);
             Prepend (The_Path, N);
          @key[end loop];
       @key[end];]}
@@ -4598,7 +4602,7 @@ Constant_Indexing aspect (on type Vector) and the Implicit_Dereference aspect
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[for] E @key[of] G (Next) @key[loop]
-   @key[if not] Reached (E.To) @key[then]
+   @key[if not] Reached(E.To) @key[then]
       ...
    @key[end if];
 @key[end loop];]}
@@ -4615,7 +4619,7 @@ Constant_Indexing aspect (on type Vector) and the Implicit_Dereference aspect
    @key[declare]
       E : Edge @key[renames] G (Next)(C).@key[all];
    @key[begin]
-      @key[if not] Reached (E.To) @key[then]
+      @key[if not] Reached(E.To) @key[then]
          ...
       @key[end if];
    @key[end];
@@ -4637,7 +4641,7 @@ Constant_Indexing aspect (on type Vector) and the Implicit_Dereference aspect
       @key[declare]
          E : Edge @key[renames] L(C).@key[all];
       @key[begin]
-         @key[if not] Reached (E.To) @key[then]
+         @key[if not] Reached(E.To) @key[then]
             ...
          @key[end if];
       @key[end];

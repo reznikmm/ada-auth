@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_locales.mss,v $ }
-@comment{ $Revision: 1.4 $ $Date: 2011/04/07 06:18:37 $ $Author: randy $ }
+@comment{ $Revision: 1.5 $ $Date: 2011/10/21 06:41:25 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2011/04/07 06:18:37 $}
+@Comment{$Date: 2011/10/21 06:41:25 $}
 
 @LabeledAddedClause{Version=[3],Name=[The Package Locales]}
 
@@ -56,6 +56,16 @@ partition of the current task.]}
 @ChgAdded{Version=[3],Text=[Language_Code is a lower-case string representation
 of an ISO 639-3 alpha-3 code that identifies a language.]}
 
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Some common language codes are: "eng" @en English;
+  "fra" @en French; "deu" @en German; "zho" @en Chinese. These are the same
+  codes as used by POSIX systems. We considered including
+  constants for the most common languages, but that was rejected as the
+  likely source of continual arguments about the constant names and which
+  languages are important enough to include.]}
+@end{Discussion}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
 @ChgAdded{Version=[3],Text=[Country_Code is an upper-case string representation
 of an ISO 3166-1 alpha-2 code that identifies a country.]}
@@ -65,10 +75,9 @@ of an ISO 3166-1 alpha-2 code that identifies a country.]}
   @ChgAdded{Version=[3],Text=[Some common country codes are: "CA" @en Canada;
   "FR" @en France; "DE" @en Germany; "IT" @en Italy; "ES" @en Spain;
   "GB" @en United Kingdon; "US" @en United States. These are the same codes
-  as used by POSIX systems. We considered including
-  constants for the most common countries, but that was rejected as the
-  likely source of continual arguments about the constant names and which
-  countries are important enough to include.]}
+  as used by POSIX systems. We didn't include any
+  country constants for the same reasons that we didn't include any language
+  constants.]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2],ARef=[AI05-0248-1]}
@@ -76,15 +85,6 @@ of an ISO 3166-1 alpha-2 code that identifies a country.]}
 associated with the active locale. If the Language_Code associated with the
 active locale cannot be determined from the environment, then Language returns
 Language_Unknown.]}
-
-@begin{Discussion}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[Some common language codes are: "eng" @en English;
-  "fra" @en French; "deu" @en German; "zho" @en Chinese. These are the same
-  codes as used by POSIX systems. We didn't include any
-  language constants for the same reasons that we didn't include any country
-  constants.]}
-@end{Discussion}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[Function Country returns the code of the country

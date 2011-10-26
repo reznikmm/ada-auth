@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.53 $ $Date: 2011/08/17 00:29:41 $ $Author: randy $ }
+@Comment{ $Revision: 1.54 $ $Date: 2011/10/21 06:41:26 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:41 $}
+@Comment{$Date: 2011/10/21 06:41:26 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -198,7 +198,8 @@ independently of any compilation unit or partition, or as part of an annotated
 listing for a given unit or partition.
 See also @RefSecNum(Conformity of an Implementation with the Standard), and
 @RefSecNum(Structure).]
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[Information regarding bounded errors and erroneous execution.]}]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[
 The range of effects for each bounded error and each unspecified effect.
@@ -606,7 +607,8 @@ For each inspection point,
 identify a mapping between each inspectable object and the machine resources
 (such as memory locations or registers) from which the object's value
 can be obtained.
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[Implementation-defined aspects of pragma Inspection_Point.]}]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[For each inspection point, a mapping between each inspectable object
@@ -733,13 +735,13 @@ rather than inhibiting what can be in the generic while
 liberalizing where they can be instantiated.]}
 @end[Reason]
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0152-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0152-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],Sec=(No_Anonymous_Allocators)}@Defn{No_Anonymous_Allocators restriction}
-No_Anonymous_Allocators @\@nt{Allocator}s of anonymous access types are not allowed.]}.
+No_Anonymous_Allocators @\There are no @nt{allocator}s of anonymous access types.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],Sec=(No_Coextensions)}@Defn{No_Coextensions restriction}
-No_Coextensions @\There are no coextensions. See @RefSecNum{Operations of Access Types}.]}.
+No_Coextensions @\There are no coextensions. See @RefSecNum{Operations of Access Types}.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
@@ -994,7 +996,8 @@ If a pragma Restrictions(No_Exceptions) is specified, the implementation
 shall document the effects of all constructs where language-defined checks are
 still performed automatically (for example, an overflow check performed
 by the processor).
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[Implementation-defined aspects of pragma Restrictions.]}]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[
 If a pragma Restrictions(No_Exceptions) is specified, the effects of all
@@ -1048,7 +1051,8 @@ still formally erroneous.
 @ChgNote{I can't find any reason in the normative wording for this item;
 therefore I've removed it. The notes below (commented out anyway) refer only
 to a nonstandard mode, which is irrelevant in the Standard.}
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[Any restrictions on pragma Restrictions.]}]}
 
 @begin{Notes}
@@ -1300,7 +1304,8 @@ main subprogram.]}
 and the Environment task becomes permanently blocked during
 elaboration@Chg{Version=[3],New=[,],Old=[]} then the partition is deadlocked and
 it is recommended that the partition be immediately terminated.]}
-@ChgImplAdvice{Version=[3],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[3],Kind=[Revised],InitialVersion=[2],
+Text=[@ChgAdded{Version=[2],
 Text=[If the partition elaboration policy is Sequential
 and the Environment task becomes permanently blocked during
 elaboration@Chg{Version=[3],New=[,],Old=[]} then

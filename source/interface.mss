@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.58 $ $Date: 2011/09/29 06:37:25 $ $Author: randy $ }
+@comment{ $Revision: 1.59 $ $Date: 2011/10/21 06:41:26 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:25 $}
+@Comment{$Date: 2011/10/21 06:41:26 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -44,14 +44,14 @@ aspect that is one of the aspects Import, Export, Link_Name, External_Name, or
 Convention.@Defn{interfacing aspect}@Defn2{Term=[aspect],Sec=[interfacing]}]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-@Chg{Version=[3],New=[Specifying aspect],Old=[A @nt{pragma}]} Import
+@Chg{Version=[3],New=[@AspectDefn{Import}Specifying aspect],Old=[A @nt{pragma}]} Import
 @Chg{Version=[3],New=[to have the value True ],Old=[]}is used to import
 an entity defined in a foreign language into an Ada program,
 thus allowing
 a foreign-language subprogram to be called from Ada,
 or a foreign-language variable to be accessed from Ada.
 In contrast,
-@Chg{Version=[3],New=[specifying aspect],Old=[a @nt{pragma}]}
+@Chg{Version=[3],New=[@AspectDefn{Export}specifying aspect],Old=[a @nt{pragma}]}
 Export @Chg{Version=[3],New=[to have the value True ],Old=[]}is used to export
 an Ada entity to a foreign language, thus allowing
 an Ada subprogram to be called from a foreign language,
@@ -63,7 +63,7 @@ subprograms, although implementations are allowed to support other
 entities.@Chg{Version=[3],New=[ The Link_Name and External_Name aspects are
 used to specify the link name and external name, respectively, to be
 used to identify imported or exported entities in the external
-environment.],Old=[]}
+environment.@AspectDefn{Link_Name}@AspectDefn{External_Name}],Old=[]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Import],
     Text=[@ChgAdded{Version=[3],Text=[Entity is imported from another
@@ -83,8 +83,8 @@ environment.],Old=[]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[The],Old=[A @nt{pragma}]} Convention
-@Chg{Version=[3],New=[aspect ],Old=[]}is used to specify that an Ada entity
-should use the conventions of another language.
+@Chg{Version=[3],New=[aspect@AspectDefn{Convention} ],Old=[]}is used to
+specify that an Ada entity should use the conventions of another language.
 It is intended primarily for types and @lquotes@;callback@rquotes@; subprograms.
 For example,
 @lquotes@;@Chg{Version=[3],New=[@key{with}],Old=[@key{pragma}]}
@@ -130,17 +130,20 @@ should be deleted if the paragraphs are ever renumbered.}
 @end{NotIso}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Import)(@*
+@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
+InitialVersion=[0],@key{pragma} @prag(Import)(@*
 @ @ @ @ @ [Convention =>] @SynI{convention_}@Syn2{identifier}, [Entity =>] @Syn2{local_name}@*
 @ @ [, [External_Name =>] @SynI{string_}@Syn2{expression}] [, [Link_Name =>] @SynI{string_}@Syn2{expression}]);']}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Export)(@*
+@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
+InitialVersion=[0],@key{pragma} @prag(Export)(@*
 @ @ @ @ @ [Convention =>] @SynI{convention_}@Syn2{identifier}, [Entity =>] @Syn2{local_name}@*
 @ @ [, [External_Name =>] @SynI{string_}@Syn2{expression}] [, [Link_Name =>] @SynI{string_}@Syn2{expression}]);']}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Convention)([Convention =>] @SynI{convention_}@Syn2{identifier},[Entity =>] @Syn2{local_name});']}
+@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
+InitialVersion=[0],@key{pragma} @prag(Convention)([Convention =>] @SynI{convention_}@Syn2{identifier},[Entity =>] @Syn2{local_name});']}
 
 @PragmaSyn`@key{pragma} @prag(Linker_Options)(@SynI{string_}@Syn2{expression});'
 
@@ -288,7 +291,7 @@ the convention specified in the pragma.
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
   If each component of a record type is @i[L]-compatible, then
   the record type itself is only @i[L]-compatible if it has
-  @Chg{Version=[3],New=[specified],Old=[a pragma]}
+  @Chg{Version=[3],New=[a specified],Old=[a pragma]}
   Convention.
 @end[Ramification]
 
@@ -318,7 +321,7 @@ then the @nt{pragma} Import is the completion of all of them]}.
   Old=[pragma]} Import @Chg{Version=[3],New=[is True],Old=[explicitly
   as a possible completion]}. For other declarations that
   require completions, we ignore the possibility of
-  @Chg{Version=[3],New=[the],Old=[pragma]} Import@Chg{Version=[3],New=[ being
+  @Chg{Version=[3],New=[the aspect],Old=[pragma]} Import@Chg{Version=[3],New=[ being
   True],Old=[]}.
   Nevertheless, if an implementation chooses to allow
   @Chg{Version=[3],New=[specifying aspect],Old=[a @nt{pragma}]} Import
@@ -525,7 +528,7 @@ otherwise, program execution is erroneous.]}
 @begin{ImplAdvice}
     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
     If an implementation supports @Chg{Version=[3],New=[],Old=[pragma ]}Export
-    to a given language, then it should also
+    @Chg{Version=[3],New=[for],Old=[to]} a given language, then it should also
     allow the main subprogram to be written in that language.
     It should support some mechanism for invoking the elaboration of the
     Ada library units included in the system, and for invoking the
@@ -542,7 +545,8 @@ otherwise, program execution is erroneous.]}
     Sec=[of environment task for a foreign language main subprogram]}],
     Old=[]}@ChgNote{Presentation AI-00052. Index entries only; no
       real change, so no Chgref}
-@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[3],Kind=[RevisedAdded],InitialVersion=[2],
+Text=[@ChgAdded{Version=[2],
 Text=[If @Chg{Version=[3],New=[],Old=[@nt{pragma} ]} Export is supported
 for a language, the main program should
 be able to be written in that language. Subprograms named "adainit" and
@@ -558,7 +562,8 @@ should be provided for elaboration and finalization of the environment task.]}]}
 Automatic elaboration of preelaborated packages should be provided
 when @Chg{Version=[3],New=[specifying],Old=[@nt[pragma]]} Export
 @Chg{Version=[3],New=[as True ],Old=[]}is supported.
-@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[3],Kind=[RevisedAdded],InitialVersion=[2],
+Text=[@ChgAdded{Version=[2],
 Text=[Automatic elaboration of preelaborated packages should be provided
 when @Chg{Version=[3],New=[specifying],Old=[@nt[pragma]]} Export
 @Chg{Version=[3],New=[as True ],Old=[]}is supported.]}]}
@@ -573,7 +578,8 @@ Convention @Chg{Version=[3],New=[aspect ],Old=[]}for @i[L]-eligible types and fo
 presuming the other language has corresponding features.
 @Chg{Version=[3],New=[Specifying the ],Old=[@nt{Pragma}]} Convention
 @Chg{Version=[3],New=[aspect ],Old=[]}need not be supported for scalar types.
-@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[3],Kind=[RevisedAdded],InitialVersion=[2],
+Text=[@ChgAdded{Version=[2],
 Text=[For each supported convention @i[L] other than Intrinsic,
 @Chg{Version=[3],New=[specifying the aspects],Old=[@nt{pragma}s]}
 Import and Export should be supported for
@@ -742,7 +748,7 @@ upward compatibility.
   Note that implementations can still support any type that it wants
   as @i[L]-compatible; such uses will not be portable, however. As such,
   there should be little existing code that will be impacted (compilers
-  probably already rejected cases that could not be translated whether
+  probably already rejected cases that could not be translated, whether
   or not the language allowed doing so formally).]}
 @end{Incompatible2005}
 
@@ -886,7 +892,8 @@ An implementation may provide implementation-defined library units
 that are children of Interfaces,
 and may add declarations to the visible part of Interfaces
 in addition to the ones defined above.
-@ChgImplDef{Version=[2],Kind=[Revised],Text=[Implementation-defined
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
+Text=[Implementation-defined
 children of package Interfaces.@Chg{Version=[2],New=[],Old=[ The
 contents of the visible part of package Interfaces.]}]}
 @ChgNote{The latter sentence is given previously!}
@@ -965,7 +972,7 @@ Old=[Interfacing with C]}
 @Defn{C interface}
 The facilities relevant to interfacing with
 the C language @Chg{Version=[2],New=[and the corresponding subset of
-the C++ language ],Old=[]}are the package Interfaces.C and its children@Chg{Version=[3],New=[ and],Old=[;
+the C++ language ],Old=[]}are the package Interfaces.C and its children@Chg{Version=[3],New=[, and],Old=[;
 @Chg{New=[],Old=[and ]}]}support for @Chg{Version=[3],New=[specifying ],Old=[]}the
 @Chg{Version=[3],New=[],Old=[Import, Export, and]}
 Convention @Chg{Version=[3],New=[aspect],Old=[pragmas]}
@@ -974,7 +981,9 @@ C@Chg{New=[@Chg{Version=[3],New=[ and],Old=[; and support for the Convention
 pragma with @i{convention}_@nt{identifier}]} C_Pass_By_Copy],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00376-01]}
-The package Interfaces.C contains the basic types, constants and
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0262-1]}
+The package Interfaces.C contains the basic types,
+constants@Chg{Version=[3],New=[,],Old=[]} and
 subprograms that allow an Ada program to pass scalars and strings to C
 @Chg{Version=[2],New=[and C++ ],Old=[]}functions.@Chg{Version=[2],New=[ When
 this clause mentions a C entity,
@@ -1190,7 +1199,8 @@ Old=[@RI{implementation-defined}]};
 
 @key(end) Interfaces.C;
 @end{Example}
-@ChgImplDef{Version=[2],Kind=[Added],Text=[@Chg{New=[The definitions of
+@ChgImplDef{Version=[2],Kind=[Added],InitialVersion=[1],
+Text=[@Chg{New=[The definitions of
 @Chg{Version=[2],New=[certain ],Old=[]}types and constants in
 Interfaces.C.],Old=[]}]}
 
@@ -2390,7 +2400,7 @@ should be deleted if the paragraphs are ever renumbered.}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag{Unchecked_Union} (@Syni<first_subtype_>@Syn2<local_name>);'',Old=[]}]}
+@ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=`@DeletedPragmaSyn`Version=[3],InitialVersion=[2],@key{pragma} @prag{Unchecked_Union} (@Syni<first_subtype_>@Syn2<local_name>);'',Old=[]}]}
 
 @end{Syntax}
 
@@ -2404,7 +2414,8 @@ may be specified:]}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Unchecked_Union@\The type of aspect Unchecked_Union
 is Boolean. If directly specified, the @nt{aspect_definition} shall be a static
-expression. If not specified (including by inheritance), the aspect is False.]}
+expression. If not specified (including by inheritance), the aspect is
+False.@AspectDefn{Unchecked_Union}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Unchecked_Union],
     Text=[@ChgAdded{Version=[3],Text=[Type is used to interface to a C union
@@ -2852,7 +2863,8 @@ either an internal or external COBOL representation
    ... -- @RI{not specified by the language}
 @key(end) Interfaces.COBOL;
 @end{Example}
-@ChgImplDef{Version=[1],Kind=[Revised],Text=[The types Floating, Long_Floating, Binary, Long_Binary,
+@ChgImplDef{Version=[1],Kind=[Revised],InitialVersion=[0],
+Text=[The types Floating, Long_Floating, Binary, Long_Binary,
 Decimal_Element, and COBOL_Character; and the initializations
 of the variables Ada_To_COBOL and COBOL_To_Ada, in Interfaces.COBOL@Chg{New=[.],Old=[]}]}
 
@@ -3196,8 +3208,8 @@ Ada and COBOL should be supported.]}]}
 An implementation is not required to support
 @Chg{Version=[3],New=[specifying aspect],Old=[pragma]} Convention
 for access types, nor is it required to support
-@Chg{Version=[3],New=[specifying aspects],Old=[pragma]} Import, Export
-or Convention for functions.
+@Chg{Version=[3],New=[specifying aspects],Old=[pragma]} Import,
+Export@Chg{Version=[3],New=[,],Old=[]} or Convention for functions.
 @begin{reason}
 COBOL does not have a pointer facility, and a COBOL program
 does not return a value.@end{reason}

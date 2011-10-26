@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.64 $ $Date: 2011/09/29 06:37:24 $ $Author: randy $ }
+@comment{ $Revision: 1.65 $ $Date: 2011/10/21 06:41:25 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:24 $}
+@Comment{$Date: 2011/10/21 06:41:25 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -540,7 +540,8 @@ parameter lies on the positive real axis; as another, the sign of the imaginary
 component of the Compose_@!From_@!Polar function should be the same as (resp., the
 opposite of) that of the Argument parameter when that parameter has a value of
 zero and the Modulus parameter has a nonnegative (resp., negative) value.
-@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[3],Kind=[RevisedAdded],InitialVersion=[2],
+Text=[@ChgAdded{Version=[2],
 Text=[If Real'Signed_Zeros is @Chg{Version=[3],New=[True],Old=[true]} for Numerics.@!Generic_@!Complex_@!Types,
 a rational treatment of the signs of
 zero results and result components should be provided.]}]}
@@ -940,7 +941,8 @@ cases, the result component should have the sign of the parameter component at
 the origin. Other complex elementary functions have zero components whose sign
 is opposite that of a parameter component at the origin, or is always positive
 or always negative.
-@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[3],Kind=[RevisedAdded],InitialVersion=[2],
+Text=[@ChgAdded{Version=[2],
 Text=[If Complex_Types.Real'Signed_Zeros
 is @Chg{Version=[3],New=[True],Old=[true]} for
 Numerics.@!Generic_@!Complex_@!Elementary_@!Functions,

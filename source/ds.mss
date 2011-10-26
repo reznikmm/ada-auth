@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.59 $ $Date: 2011/09/29 06:37:24 $ $Author: randy $ }
+@comment{ $Revision: 1.60 $ $Date: 2011/10/21 06:41:25 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2011/09/29 06:37:24 $}
+@Comment{$Date: 2011/10/21 06:41:25 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -322,24 +322,26 @@ units that are mentioned only in private with clauses],Old=[]}.
 @begin{Description}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
 Declared Pure @\Can depend only on other declared
-pure library units@Chg{Version=[3],New=[ and upon limited views],Old=[]};
+pure library units@Chg{Version=[3],New=[ or  upon limited views],Old=[]};
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
 Shared Passive @\Can depend only on other shared passive
-    @Chg{Version=[3],New=[],Old=[or declared pure ]}library
-    units@Chg{Version=[3],New=[, or on one of the above],Old=[]};
+    or declared pure library units@Chg{Version=[3],New=[, or upon
+    limited views],Old=[]};
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1],ARef=[AI05-0243-1]}
 Remote Types @\The declaration of the library unit can depend only
     on other remote types library units,
-    or one of the above@Chg{Version=[3],New=[, or
-    preelaborated normal library units that are mentioned
+    or @Chg{Version=[3],New=[any],Old=[one]} of the
+    above@Chg{Version=[3],New=[ library unit categories, or limited views,
+    or preelaborated normal library units that are mentioned
     only in private with clauses],Old=[]};
     the body of the library unit is unrestricted;
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1],ARef=[AI05-0243-1]}
 Remote Call Interface @\The declaration of the library unit can depend only
-    on other remote call interfaces, or one of the above@Chg{Version=[3],New=[,
+    on other remote call interfaces, or @Chg{Version=[3],New=[any],Old=[one]}
+    of the above@Chg{Version=[3],New=[ library unit categories, or limited views,
     or preelaborated normal library units that are mentioned
     only in private with clauses],Old=[]};
     the body of the library unit is unrestricted;
@@ -432,8 +434,9 @@ library unit is a],Old=[]} @i{shared passive library unit}@Chg{Version=[3],New=[
 namely that the],Old=[ is
 a library unit to which a]}
 Shared_Passive
-@Chg{Version=[3],New=[aspect of the library unit is True],Old=[pragma applies]}.
-The following restrictions apply to such a library unit:
+@Chg{Version=[3],New=[aspect@AspectDefn{Shared_Passive} of the library unit is
+True],Old=[pragma applies]}. The following restrictions apply to such a library
+unit:
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Shared_Passive],
     Text=[@ChgAdded{Version=[3],Text=[A given package is used to represent
@@ -586,8 +589,9 @@ A@Chg{Version=[3],New=[ pragma Remote_Types is used to specify that a library un
 @i{remote types library unit}@Chg{Version=[3],New=[,
 namely that the],Old=[ is a library unit to which the pragma]}
 Remote_Types
-@Chg{Version=[3],New=[aspect of the library unit is True],Old=[applies]}.
-The following restrictions apply to the declaration of such a library unit:
+@Chg{Version=[3],New=[aspect@AspectDefn{Remote_Types} of the library unit is
+True],Old=[applies]}. The following restrictions apply to the declaration of
+such a library unit:
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Remote_Types],
     Text=[@ChgAdded{Version=[3],Text=[Types in a given package may be used in
@@ -931,9 +935,10 @@ A@Chg{Version=[3],New=[ pragma Remote_Call_Interface is used to specify that a
 library unit is a],Old=[]} @i{remote call interface (RCI)}@Chg{Version=[3],New=[,
 namely that the],Old=[ is a library unit to which the pragma]}
 Remote_Call_Interface
-@Chg{Version=[3],New=[aspect of the library unit is True],Old=[applies]}.
-A subprogram declared in the visible part of such a library unit@Chg{New=[,
-or declared by such a library unit,],Old=[]} is called a @i{remote subprogram}.
+@Chg{Version=[3],New=[aspect@AspectDefn{Remote_Call_Interface} of the library
+unit is True],Old=[applies]}. A subprogram declared in the visible part of such
+a library unit@Chg{New=[, or declared by such a library unit,],Old=[]} is called
+a @i{remote subprogram}.
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Remote_Call_Interface],
     Text=[@ChgAdded{Version=[3],Text=[Subprograms in a given package may be
@@ -1048,7 +1053,7 @@ be a remote call interface library unit.
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[A],Old=[If a]} pragma All_Calls_Remote
 @Chg{Version=[3],New=[sets the All_Calls_Remote representation aspect of
-the],Old=[applies to a]} library unit@Chg{Version=[3],New=[ to which the pragma
+@AspectDefn{All_Calls_Remote}the],Old=[applies to a]} library unit@Chg{Version=[3],New=[ to which the pragma
 applies to the value True. If the All_Calls_Remote aspect of a library unit is True],
 Old=[]}, the library unit shall be a remote call interface.
 
@@ -1249,7 +1254,8 @@ It is @Chg{New=[unspecified],Old=[implementation defined]}
 whether there are other events (such as recompilation) that
 result in the version of a compilation unit changing.
 @Chg{New=[@PDefn{unspecified}],Old=[]}
-@ChgImplDef{Version=[1],Kind=[Deleted],Text=[@Chg{New=[],Old=[Events that
+@ChgImplDef{Version=[1],Kind=[Deleted],InitialVersion=[0],
+Text=[@Chg{New=[],Old=[Events that
 cause the version of a compilation unit to change.]}]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0084],ARef=[AI95-00104-01]}
@@ -1725,7 +1731,8 @@ Asynchronous is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Asynchronous)(@Syn2{local_name});']}
+@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
+InitialVersion=[0],@key{pragma} @prag(Asynchronous)(@Syn2{local_name});']}
 @end{Syntax}
 
 @begin{Legality}
@@ -1764,7 +1771,7 @@ aspect of the type.]}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Asynchronous@\The type of aspect Asynchronous is
 Boolean. If directly specified, the @nt{aspect_definition} shall be a static
-expression. If not specified, the aspect is False.]}
+expression. If not specified, the aspect is False.@AspectDefn{Asynchronous}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Asynchronous],
     Text=[@ChgAdded{Version=[3],Text=[Remote procedure calls are asynchronous;
@@ -2151,7 +2158,8 @@ The implementation of the PCS shall document whether
 the RPC-receiver is invoked from concurrent tasks. If there is an
 upper limit on the number of such tasks, this limit shall be documented as
 well, together with the mechanisms to configure it (if this is supported).
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[Implementation-defined aspects of the PCS.]}]}
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Whether the RPC-receiver is invoked from concurrent tasks, and if so,

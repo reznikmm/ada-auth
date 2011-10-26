@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.39 $ $Date: 2008/11/26 23:41:02 $ $Author: randy $ }
+@comment{ $Revision: 1.40 $ $Date: 2011/10/21 06:41:25 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2008/11/26 23:41:02 $}
+@Comment{$Date: 2011/10/21 06:41:25 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -598,7 +598,8 @@ Float having a range of
 The result of the function in an
 instantiation of Numerics.Discrete_Random is delivered as a value of the
 generic formal subtype Result_Subtype.
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],Text=[The
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],Text=[The
 algorithms for random number generation.]}]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[Added]}
@@ -713,7 +714,8 @@ The implementation also shall document the minimum time interval between calls
 to the time-dependent Reset procedure that are guaranteed to initiate
 different sequences, and it shall document the nature of the strings that
 Value will accept without raising Constraint_Error.
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],Text=[The
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],Text=[The
 minimum time interval between
 calls to the time-dependent Reset procedure that are guaranteed to initiate
 different random number sequences.]}]}

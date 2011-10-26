@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:24 $}
+@Comment{$Date: 2011/10/21 06:41:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -155,7 +155,8 @@ The exceptions Storage_Error and Program_Error may be propagated.
 (Program_Error can only be propagated due to errors made by the
 caller of the subprogram.) Finally, exceptions can be propagated
 in certain implementation-defined situations.
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[Any implementation-defined characteristics of the
 input-output packages.]}]}
 @begin{Discussion}
@@ -954,7 +955,8 @@ Out_File, and are associated with two implementation-defined external
 files. Procedures are provided to change the current default input file
 and the current default output file.
 @ChgNote{The following was poorly formatted.}
-@ChgImplDef{Version=[2],Kind=[Revised],Text=[@Chg{Version=[2],New=[The ],
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
+Text=[@Chg{Version=[2],New=[The ],
 Old=[]}external files @Chg{Version=[2],New=[associated with the],Old=[for]} standard
 input, standard output, and standard error@Chg{Version=[2],New=[ files.],Old=[]}]}
 @begin{ImplNote}
@@ -2270,9 +2272,10 @@ Old=[procedures]} are provided:
 
 @begin{Example}@Keepnext
 @key[procedure] Get_Line(File : @key[in] File_Type;
-                              Item : @key[out] String;
-                              Last : @key[out] Natural);
-@key[procedure] Get_Line(Item : @key[out] String;   Last : @key[out] Natural);
+                   Item : @key[out] String;
+                   Last : @key[out] Natural);
+@key[procedure] Get_Line(Item : @key[out] String;
+                   Last : @key[out] Natural);
 @end{Example}
   Reads successive characters from the specified input file and assigns
   them to successive characters of the specified string.
@@ -3861,6 +3864,24 @@ Layout_Error is also propagated on output by an attempt to set column or
 line numbers in excess of specified maximum line or page lengths,
 respectively (excluding the unbounded cases). It is also propagated by an
 attempt to Put too many characters to a string.
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[These exceptions are also propagated by various
+other language-defined packages and operations, see the definition of those
+entities for other reasons that these exceptions are propagated.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This clause is based in Ada 95. Later versions of
+  Ada (starting with Technical Corrigendum 1) have added a number of additional
+  places and reasons that cause these exceptions. In particular, TC1 says that
+  stream attributes need to raise End_Error in some circumstances; Amendment 1
+  adds Ada.Directories and a number of new places and reasons that Name_Error and
+  Use_Error are raised. There are more. We don't want to try to update this text
+  (or even this note!) for every possible reason and place that might raise one
+  of these exceptions, so we add this blanket statement.]}
+@end{Reason}
+
 @end{StaticSem}
 
 

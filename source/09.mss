@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:40 $}
+@Comment{$Date: 2011/10/21 06:41:25 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.108 $}
+@Comment{$Revision: 1.109 $}
 
 @begin{Intro}
 
@@ -1265,8 +1265,8 @@ of an instance of a generic unit.]}
 @end{Legality}
 
 @begin{RunTime}
-@redundant[@PDefn2{Term=[elaboration], Sec=(protected declaration)}
-The elaboration of a protected declaration
+@redundant[@PDefn2{Term=[elaboration], Sec=(protected declaration)}The
+elaboration of a protected declaration
 elaborates the @nt<protected_definition>.
 @PDefn2{Term=[elaboration], Sec=(single_protected_declaration)}
 The elaboration of a @nt<single_@!protected_@!declaration> also creates
@@ -1283,8 +1283,8 @@ subtype;] it also includes the elaboration of the
 @nt<component_declaration>s and @nt<protected_operation_declaration>s
 in the given order.
 
-@redundant[@PDefn2{Term=[initialization], Sec=(of a protected object)}
-As part of the initialization of a protected object,
+@redundant[@PDefn2{Term=[initialization], Sec=(of a protected object)}As
+part of the initialization of a protected object,
 any per-object constraints (see @RefSecNum{Record Types}) are elaborated.]
 @begin{Discussion}
   We do not mention pragmas since each pragma has its
@@ -1362,7 +1362,9 @@ Program_Error is raised at the place of the corresponding
 @key[end] Main;
 @end{Example}
 
-The environment task is queued on PO.EE when PO is finalized.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
+The environment task is queued on PO.@Chg{Version=[3],New=[Ee],Old=[EE]}
+when PO is finalized.
 
 In a real example, a server task might park callers on a local protected
 object for some useful purpose, so we didn't want to disallow this case.
@@ -1767,7 +1769,7 @@ representation aspect may be specified with @nt{aspect_specification} (see
 @begin{Description}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Synchronization@\If specified, the aspect definition
-shall be a @nt{synchronization_kind}.]}
+shall be a @nt{synchronization_kind}.@AspectDefn{Synchronization}]}
 
 @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Synchronization],
   Text=[@ChgAdded{Version=[3],Text=[Defines whether a given primitive operation
@@ -3456,7 +3458,7 @@ year number, a month number, a day number, and a duration, into
 a value of type Time. The operators "+" and "@en@;" for addition
 and subtraction of times and durations, and the relational operators
 for times, have the conventional meaning.
-@ChgImplDef{Version=[2],Kind=[Revised],
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
 Text=[The @Chg{Version=[2],New=[time zone],Old=[timezone]} used for
 package Calendar operations.]}
 
@@ -5340,8 +5342,8 @@ is specified for a given composite object,
 then it is implementation defined whether or not
 two nonoverlapping parts of that composite object
 are independently addressable.]}
-@ChgImplDef{Version=[3],Kind=[Deleted],Text=[@Chg{Version=[3],New=[],
-Old=[Whether or not two
+@ChgImplDef{Version=[3],Kind=[Deleted],InitialVersion=[0],
+Text=[@Chg{Version=[3],New=[],Old=[Whether or not two
 nonoverlapping parts of a composite
 object are independently addressable,
 in the case where packing, record layout, or Component_Size

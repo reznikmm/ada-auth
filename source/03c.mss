@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:23 $}
+@Comment{$Date: 2011/10/21 06:41:24 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.116 $}
+@Comment{$Revision: 1.117 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -367,7 +367,8 @@ an unnamed @nt{block_statement}.
   This name, as well as each @nt{prefix} of it,
   does not denote a @nt{renaming_declaration}.
 @end{Honest}
-@ChgImplDef{Version=[2],Kind=[Revised],Text=[The result of @Chg{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
+Text=[The result of @Chg{Version=[2],
 New=[Tags.Wide_@!Wide_@!Expanded_@!Name],Old=[Tags.Expanded_@!Name]} for types
 declared within an unnamed @nt{block_statement}.]}
 
@@ -828,7 +829,8 @@ We don't require the latter behavior;]} hence the word
 @ChgAdded{Version=[2],Text=[Internal_Tag should return the tag of
 a type@Chg{Version=[3],New=[, if one exists,],Old=[]} whose
 innermost master is @Chg{Version=[3],New=[a],Old=[the]} master of the point of the function call.]}
-@ChgImplAdvice{Version=[3],Kind=[AddedNormal],Text=[@Chg{Version=[2],
+@ChgImplAdvice{Version=[3],Kind=[Revised],InitialVersion=[2],
+Text=[@Chg{Version=[2],
 New=[Tags.Internal_Tag should return the tag of
 a type@Chg{Version=[3],New=[, if one exists,],Old=[]} whose innermost master
 is @Chg{Version=[3],New=[a],Old=[the]} master of the point of the function call.],Old=[]}.]}

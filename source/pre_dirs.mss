@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.41 $ $Date: 2011/08/17 00:29:40 $ $Author: randy $ }
+@comment{ $Revision: 1.42 $ $Date: 2011/10/21 06:41:25 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:40 $}
+@Comment{$Date: 2011/10/21 06:41:25 $}
 
 @Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -722,11 +722,11 @@ needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
                         Filter    : @key{in} Filter_Type := (@key{others} => True));]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Starts a search
 in the directory named by
-Directory for entries matching Pattern. Pattern represents a pattern for
-matching file names. If Pattern is
+Directory for entries matching Pattern@Chg{Version=[3],New=[ and Filter],Old=[]}.
+Pattern represents a pattern for matching file names. If Pattern is
 @Chg{Version=[3],New=[the ],Old=[]}null@Chg{Version=[3],New=[ string],Old=[]},
 all items in the directory are matched; otherwise,
 the interpretation of Pattern is implementation-defined. Only items that match
@@ -791,11 +791,11 @@ altered while a search is in progress.],Old=[]}]}
         Directory_Entry : @key{in} Directory_Entry_Type));]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Searches in the directory named by
-Directory for entries matching Pattern. The subprogram designated by Process
-is called with each matching entry in turn. Pattern represents a pattern for
-matching file names. If Pattern is
+Directory for entries matching Pattern@Chg{Version=[3],New=[ and Filter],Old=[]}.
+The subprogram designated by Process is called with each matching entry in
+turn. Pattern represents a pattern for matching file names. If Pattern is
 @Chg{Version=[3],New=[the ],Old=[]}null@Chg{Version=[3],New=[ string],Old=[]},
 all items in the directory are matched;
 otherwise, the interpretation of Pattern is implementation-defined. Only
@@ -1117,7 +1117,8 @@ these as possible.]}
 @Chg{Version=[3],New=[Name_Error],Old=[Use_Error]} if Pattern is malformed, but
 not if it could represent a file in the directory but does not actually do so.]}
 
-@ChgImplAdvice{Version=[3],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
+@ChgImplAdvice{Version=[3],Kind=[Revised],InitialVersion=[2],
+Text=[@ChgAdded{Version=[2],
 Text=[Directories.Start_Search and Directories.Search should raise
 @Chg{Version=[3],New=[Name_Error],Old=[Use_Error]} for malformed patterns.]}]}
 

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:24 $}
+@Comment{$Date: 2011/10/21 06:41:24 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.117 $}
+@Comment{$Revision: 1.118 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -506,7 +506,8 @@ following language-defined aspects may be specified with an
   @i<specific precondition
   expression>.@Defn{specific precondition expression}@Defn2{Term=[precondition expression],Sec=[specific]}
   If not specified for an entity, the specific precondition
-  expression for the entity is the enumeration literal True.]}
+  expression for the entity is the enumeration literal
+  True.@AspectDefn{Pre}]}
 
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -529,7 +530,8 @@ following language-defined aspects may be specified with an
   @i<class-wide precondition expression>.@Defn{class-wide precondition expression}@Defn2{Term=[precondition expression],Sec=[class-wide]}
   If not specified for an entity, then if no other
   class-wide precondition applies to the entity, the class-wide precondition
-  expression for the entity is the enumeration literal True.]}
+  expression for the entity is the enumeration literal
+  True.@AspectDefn{Pre'Class}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0254-1]}
@@ -553,7 +555,7 @@ following language-defined aspects may be specified with an
   specified by an @nt{expression}, called a @i<specific postcondition
   expression>.@Defn{specific postcondition expression}@Defn2{Term=[postcondition expression],Sec=[specific]}
   If not specified for an entity, the specific postcondition
-  expression for the entity is the enumeration literal True.]}
+  expression for the entity is the enumeration literal True.@AspectDefn{Post}]}
 
 @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Post],
   Text=[@ChgAdded{Version=[3],Text=[Postcondition; a condition that must hold
@@ -565,7 +567,7 @@ following language-defined aspects may be specified with an
   descendants; it shall be specified by an @nt{expression}, called a
   @i<class-wide postcondition expression>.@Defn{class-wide postcondition expression}@Defn2{Term=[postcondition expression],Sec=[class-wide]}
   If not specified for an entity, the class-wide postcondition
-  expression for the entity is the enumeration literal True.]}
+  expression for the entity is the enumeration literal True.@AspectDefn{Post'Class}]}
 @end{Description}
 
 @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Post'Class],
@@ -736,9 +738,10 @@ for that subprogram or entry.@Defn2{Term=[enabled],Sec=[precondition]}@Defn2{Ter
 denotes an object of a nonlimited type}, the following attribute is defined:]}
 @begin(description)
 @ChgAttribute{Version=[3],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<F>, Prefix=<X>, AttrName=<Old>, ARef=[AI05-0145-2],
-  Text=[@Chg{Version=[3],New=[Denotes the value of X at the beginning of the
-  execution of the subprogram or entry. For each X'Old in a postcondition
+  Leading=<F>, Prefix=<X>, AttrName=<Old>, ARef=[AI05-0145-2], ARef=[AI05-0262-1],
+  Text=[@Chg{Version=[3],New=[Within a postcondition expression, denotes the value
+  of X at the beginning of the execution of the subprogram or entry to which the
+  postcondition applies. For each X'Old in a postcondition
   expression that is enabled, a constant is implicitly declared at the beginning
   of the subprogram or entry, of the type of X, initialized to X. The value of
   X'Old in the postcondition expression is the value of this constant. The type
@@ -792,7 +795,7 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
 denotes a function declaration}, the following attribute is defined:]}
 @begin(description)
 @ChgAttribute{Version=[3],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<F>, Prefix=<F>, AttrName=<Result>, ARef=[AI05-0145-2],
+  Leading=<F>, Prefix=<F>, AttrName=<Result>, ARef=[AI05-0145-2], ARef=[AI05-0262-1],
   Text=[@Chg{Version=[3],New=[Within a postcondition expression for function F,
   denotes the result object of the function. The type of this attribute is that
   of the function result except within a Post'Class postcondition expression for
@@ -800,9 +803,12 @@ denotes a function declaration}, the following attribute is defined:]}
   a controlling result, the type of the attribute is @i<T>'Class, where @i<T> is
   the function result type. For a controlling access result, the type of the
   attribute is an anonymous access type whose designated type is @i<T>'Class,
-  where @i<T> is the designated type of the function result type. Use of this
+  where @i<T> is the designated type of the function result type.],Old=[]}]}@Comment{End of Annex text here.}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+  @ChgAdded{Version=[3],NoPrefix=[T],Text=[Use of this
   attribute is allowed only within a postcondition expression
-  for F.],Old=[]}]}@Comment{End of Annex text here.}
+  for F.]}
 @end(description)
 @EndPrefixType{}
 @end{StaticSem}
@@ -852,6 +858,17 @@ before or after starting the protected action. For an entry
 call, the checks are performed prior to checking whether the entry is open.@PDefn2{Term=(arbitrary order),
   Sec=(allowed)}@PDefn{unspecified}]}
 
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We need to explicitly allow short-circuiting
+  of the evaluation of the class-wide precondition check if any expression
+  fails, as it consists of multiple expressions; we don't need a similar
+  permission for the specific precondition check as it consists only of a
+  single expression. Nothing is evaluated for the call after a check fails,
+  as the failed check propagates an exception.]}
+@end{Reason}
+
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[If the assertion policy in effect at the point of a
 subprogram or entry declaration is Check, then upon successful return from a
@@ -884,9 +901,9 @@ parameters are performed in an arbitrary order.@Defn2{Term=[assertion policy],
 exception is raised at the point of the call. @Redundant[The exception cannot
 be handled inside the called subprogram or entry.]]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[For any subprogram or entry call (including dispatching calls), the checks
-that are performed that verify specific precondition expressions and specific
+that are performed to verify specific precondition expressions and specific
 and class-wide postcondition expressions are determined by those for the subprogram
 or entry actually invoked. Note that the class-wide postcondition expressions
 verified by the postcondition check that is part of a call on a primitive
@@ -903,7 +920,7 @@ not apply to the corresponding primitive of @i<T1>].]}
     inherited, but the subprogram might be.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[For concrete subprogram, we require the original
+  @ChgAdded{Version=[3],Text=[For concrete subprograms, we require the original
     specific postcondition to be evaluated as well as the inherited class-wide
     postconditions in order that the semantics of an explicitly defined wrapper
     that does nothing but call the original subprogram is the same as that of
@@ -969,7 +986,24 @@ the value.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[If the assertion policy in effect at the point of a
 subprogram or entry declaration is Ignore, then no precondition or postcondition
-check is performed on a call on that subprogram or entry.]}
+check is performed on a call on that subprogram or entry.
+For a dispatching call, if the assertion policy in effect at the point of the
+declaration of the denoted callable entity is not that same as the assertion
+policy in effect at the point of the declaration of the invoked callable entity,
+it is implementation defined whether any precondition or postcondition checks
+are made.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+  @ChgAdded{Version=[3],Text=[For a dispatching call with different policies,
+  whether a check is made probably will be different for different checks,
+  depending on whether the implementation makes them at the call site, in a
+  wrapper, or inside the called subprogram or entry.]}
+@end{Discussion}
+@ChgImplDef{Version=[3],Kind=[Added],Text=[@Chg{Version=[3],New=[Whether
+precondition or postcondition checks are made for a dispatching call when
+the assertion policy differs between the denoted and
+invoked entity.],Old=[]}]}
 @end{Runtime}
 
 @begin{Bounded}
@@ -1978,7 +2012,8 @@ is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Inline)(@Syn2{name} {, @Syn2{name}});']}
+@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
+InitialVersion=[0],@key{pragma} @prag(Inline)(@Syn2{name} {, @Syn2{name}});']}
 @end{Syntax}
 
 @begin{Legality}
@@ -2006,7 +2041,7 @@ generic subprogram.]}
 aspect Inline is True for a callable entity, inline expansion is desired for all
 calls to that entity. When aspect Inline is True for a generic subprogram,
 inline expansion is desired for all calls to all instances of that generic
-subprogram.]}
+subprogram.@AspectDefn{Inline}]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],NoPrefix=[T],Text=[If directly specified, the
@@ -4164,7 +4199,8 @@ is as follows:]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgAdded{Version=[2],Text=`@Chg{Version=[3],New=[],Old=[@AddedPragmaSyn`Version=[2],@key{pragma} @prag<No_Return>(@SynI{procedure_}@Syn2{local_name}{, @SynI{procedure_}@Syn2{local_name}});']}'}
+@ChgAdded{Version=[2],Text=`@Chg{Version=[3],New=[],Old=[@DeletedPragmaSyn`Version=[3],
+InitialVersion=[2],@key{pragma} @prag<No_Return>(@SynI{procedure_}@Syn2{local_name}{, @SynI{procedure_}@Syn2{local_name}});']}'}
 @end{Syntax}
 
 @begin{StaticSem}
@@ -4176,7 +4212,7 @@ language-defined representation aspect may be specified:]}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[No_Return@\The type of aspect No_Return is Boolean.
 When aspect No_Return is True for an entity, the entity is said to be
-@i<non-returning>.@Defn{non-returning}]}
+@i<non-returning>.@Defn{non-returning}@AspectDefn{No_Return}]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],NoPrefix=[T],Text=[If directly specified, the

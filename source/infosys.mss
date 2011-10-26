@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.41 $ $Date: 2011/09/29 06:37:24 $ $Author: randy $ }
+@comment{ $Revision: 1.42 $ $Date: 2011/10/21 06:41:25 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:24 $}
+@Comment{$Date: 2011/10/21 06:41:25 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -82,7 +82,7 @@ via an @nt{attribute_definition_clause};
 the expression of such a clause shall be static,
 and its value shall be 2 or 10.
 A value of 2 implies a binary base range; a
-value of 10 implies a decimal base range.
+value of 10 implies a decimal base range.@Chg{Version=[3],New=[@AspectDefn{Machine_Radix}],Old=[]}
 @begin{Ramification}
 In the absence of a Machine_Radix clause, the choice
 of 2 versus 10 for S'Machine_Radix is not specified.

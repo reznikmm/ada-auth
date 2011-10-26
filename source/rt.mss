@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.102 $ $Date: 2011/08/17 00:29:41 $ $Author: randy $ }
+@comment{ $Revision: 1.103 $ $Date: 2011/10/21 06:41:26 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2011/08/17 00:29:41 $}
+@Comment{$Date: 2011/10/21 06:41:26 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -19,7 +19,8 @@ The metrics are documentation requirements; an implementation shall
 document the values of the language-defined metrics for at least one
 configuration @Redundant[of hardware or an underlying system] supported by
 the implementation, and shall document the details of that configuration.
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[Values of all @MetricsTitle.]}]}@ChgNote{We're going to document the
 individual metrics sections.}
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
@@ -113,7 +114,8 @@ should be deleted if the paragraphs are ever renumbered.}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Priority)(@Syn2{expression});']}
+@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
+InitialVersion=[0],@key{pragma} @prag(Priority)(@Syn2{expression});']}
 
 @begin{SyntaxText}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
@@ -122,7 +124,8 @@ should be deleted if the paragraphs are ever renumbered.}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@PragmaSyn`@key{pragma} @prag(Interrupt_Priority)[(@Syn2{expression})];']}
+@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
+InitialVersion=[0],@key{pragma} @prag(Interrupt_Priority)[(@Syn2{expression})];']}
 @end{Syntax}
 
 @begin{Resolution}
@@ -145,21 +148,22 @@ the following language-defined representation aspects may be specified:]}
 
 @begin{Description}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[Priority@\The value of aspect Priority is
-an @nt{expression}, which shall be of type Integer.]}
+@ChgAdded{Version=[3],Text=[Priority@\The aspect Priority is
+an @nt{expression}, which shall be of type Integer.@AspectDefn{Priority}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Priority],
     Text=[@ChgAdded{Version=[3],Text=[Priority of a task object or type, or
-      ceiling priority of a protected object or type; the priority is not in the
+      priority of a protected object or type; the priority is not in the
       interrupt range.]}]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[Interrupt_Priority@\The value of aspect
-Interrupt_Priority is an @nt{expression}, which shall be of type Integer.]}
+@ChgAdded{Version=[3],Text=[Interrupt_Priority@\The aspect
+Interrupt_Priority is an @nt{expression}, which shall be of type
+Integer.@AspectDefn{Interrupt_Priority}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Interrupt_Priority],
     Text=[@ChgAdded{Version=[3],Text=[Priority of a task object or type, or
-      ceiling priority of a protected object or type; the priority is in the
+      priority of a protected object or type; the priority is in the
       interrupt range.]}]}
 
 @end{Description}
@@ -193,7 +197,9 @@ aspects may be specified for a given entity.]}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[This includes specifying via pragmas
-  (see @RefSecNum{Pragmas Priority and Interrupt_Priority}).]}
+  (see @RefSecNum{Pragmas Priority and Interrupt_Priority}). Note that
+  @RefSecNum{Operational and Representation Items} prevents multiple
+  specifications of a single representation aspect by any means.]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
@@ -605,7 +611,7 @@ resources, and to define the corresponding allocation policies for them.
 Such resources may have an implementation@Chg{Version=[2],New=[-],Old=[ ]}defined
 effect on task dispatching@Chg{Version=[2],New=[],
 Old=[ (see @RefSecNum{Task Dispatching Pragmas})]}.
-@ChgImplDef{Version=[2],Kind=[Revised],
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
 Text=[The @Chg{Version=[2],New=[effect],Old=[affect]} of
 implementation@Chg{Version=[2],New=[-],Old=[ ]}defined
 execution resources on task dispatching.]}
@@ -739,7 +745,8 @@ The @SynI{policy_}@nt{identifier} @Chg{Version=[2],New=[used in a @nt{pragma}
 Task_Dispatching_Policy shall be the name of a task dispatching policy],
 Old=[shall either be FIFO_Within_Priorities or
 an implementation-defined @Syn2{identifier}]}.
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[Implementation-defined @SynI{policy_}@Syn2{identifier}s allowed
 in a @nt{pragma} Task_Dispatching_Policy.]}]}
 
@@ -781,8 +788,10 @@ pragma are dispatched according to the specified dispatching policy.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[If a partition contains one or more
-Priority_Specific_Dispatching pragmas the dispatching policy for priorities not
+Priority_Specific_Dispatching pragmas@Chg{Version=[3],New=[,],Old=[]}
+the dispatching policy for priorities not
 covered by any Priority_Specific_Dispatching pragmas is
 FIFO_Within_Priorities.]}
 
@@ -840,8 +849,10 @@ to any of the program units comprising a partition, the task dispatching policy
 for that partition is unspecified.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[If a partition contains one or more
-Priority_Specific_Dispatching pragmas a task dispatching point occurs for the
+Priority_Specific_Dispatching pragmas@Chg{Version=[3],New=[,],Old=[]}
+a task dispatching point occurs for the
 currently running task of a processor whenever there is a non-empty ready queue
 for that processor with a higher priority than the priority of the running
 task.]}
@@ -956,7 +967,8 @@ of the implementation (on behalf of lower priority tasks), and]}
 @ChgDeleted{Version=[2],Text=[whether execution of a task can be preempted by
 the implementation processing of delay
 expirations for lower priority tasks, and if so, for how long.]}
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[Implementation-defined aspects of priority inversion.]}]}
 @end{Itemize}
 
@@ -979,7 +991,8 @@ in an implementation defined manner.
 However, a @nt{delay_statement} always corresponds to at least one task
 dispatching point.]}
 
-@ChgImplDef{Version=[2],Kind=[Revised],Text=[Implementation defined task
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
+Text=[Implementation defined task
 dispatching@Chg{Version=[2],New=[ policies],Old=[]}.]}
 
 @end{ImplPerm}
@@ -1020,8 +1033,10 @@ regardless of whether the active priority of the task actually changes.]}
   implementations @i<allow> them to be used together.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[@key{Pragma} Priority_Specific_Dispatching is
-  new; it allows specifying different policies for different priorities.]}
+  new; it allows @Chg{Version=[3],New=[the specification of],Old=[specifying]}
+  different policies for different priorities.]}
 @end{Extend95}
 
 @begin{DiffWord95}
@@ -1231,9 +1246,10 @@ is preempted.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Yield_To_Higher is @i<not> a potentially blocking
-  operation; it can be used during a protected operation. That is allowed as any
+  operation; it can be used during a protected operation. That is allowed,
+  as under the predefined Ceiling_Locking policy any
   task with a higher priority than the protected operation cannot call the
-  operation (that would violate the ceiling locking policy). An
+  operation (that would violate the locking policy). An
   implementation-defined locking policy may need to define the semantics of
   Yield_To_Higher differently.]}
 @end{Ramification}
@@ -1596,7 +1612,7 @@ form of a @nt{pragma} Relative_Deadline is as follows:],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=`@Chg{Version=[2],New=[@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Relative_Deadline> (@SynI{relative_deadline_}@Syn2{expression});'],Old=[]}'}
+@ChgDeleted{Version=[3],Text=`@Chg{Version=[2],New=[@DeletedPragmaSyn`Version=[3],InitialVersion=[2],@key{pragma} @prag<Relative_Deadline> (@SynI{relative_deadline_}@Syn2{expression});'],Old=[]}'}
 
 @end{Syntax}
 
@@ -1658,9 +1674,9 @@ language-defined representation aspect may be specified:]}
 
 @begin{Description}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[Relative_Deadline@\The value of aspect
+@ChgAdded{Version=[3],Text=[Relative_Deadline@\The aspect
 Relative_Deadline is an @nt{expression}, which shall be of
-type Real_Time.Time_Span.]}
+type Real_Time.Time_Span.@AspectDefn{Relative_Deadline}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Relative_Deadline],
     Text=[@ChgAdded{Version=[3],Text=[Task parameter used in Earliest Deadline
@@ -2911,7 +2927,8 @@ abort-deferred operation.
 On a multiprocessor, the implementation shall document any conditions that
 cause the completion of an aborted construct to be delayed later than
 what is specified for a single processor.
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[On a multiprocessor, any conditions that
 cause the completion of an aborted construct to be delayed later than
 what is specified for a single processor.]}]}
@@ -3311,8 +3328,8 @@ within a parameterless library subprogram, nor within the
 @nt{allocator} of a type derived from a formal access type does not use a standard
 storage pool.]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0189-1]}
-@ChgAdded{Version=[3],NoPrefix=[T],Text=[At run-time, Storage_Error is raised if
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0189-1],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],NoPrefix=[T],Text=[At run time, Storage_Error is raised if
 an @nt{allocator} using a standard storage pool is evaluated after the elaboration of
 the @nt{library_item}s of the partition has completed.@Defn2{Term=[Storage_Error],
 Sec=(raised by failure of run-time check)}]}
@@ -3322,7 +3339,8 @@ It is implementation defined whether the use of pragma Restrictions
 results in a reduction in executable program size, storage requirements,
 or execution time. If possible, the implementation should provide
 quantitative descriptions of such effects for each restriction.
-@ChgImplDef{Version=[2],Kind=[Revised],Text=[@Chg{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
+Text=[@Chg{Version=[2],
 New=[Whether the use of],Old=[Implementation-defined aspects of]}
 pragma Restrictions@Chg{Version=[2],New=[ results in a reduction in
 program code or data size or execution time],Old=[]}.]}
@@ -3520,7 +3538,8 @@ monotonic clock package.]
    ... -- @RI{not specified by the language}
 @key[end] Ada.Real_Time;
 @end{example}
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[Implementation-defined aspects of package Real_Time.]}]}
 
 @Defn{real time}
@@ -3933,7 +3952,8 @@ Text=[The minimum value of the delay expression of a
 The implementation shall document the minimum difference between the value of
 the delay expression of a @nt{delay_until_statement} and the value of
 Real_Time.Clock, that causes the task to actually be blocked.
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[Implementation-defined aspects of @nt{delay_statement}s.]}]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[The minimum difference between the value of the delay expression of a
@@ -4457,7 +4477,8 @@ The implementation shall document the
 upper bound on the duration of interrupt blocking caused by the
 implementation. If this is different for different interrupts or
 interrupt priority levels, it should be documented for each case.
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[The upper bound on the duration of interrupt blocking caused by
 the implementation.]}]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
@@ -4542,7 +4563,7 @@ form of a @nt{pragma} Profile is as follows:],Old=[]}]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=`@Chg[Version=[2],New=[
-@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Profile> (@SynI{profile_}@Syn2{identifier} {, @SynI{profile_}@Syn2{pragma_argument_association}});'],Old=[]]'}
+@DeletedPragmaSyn`Version=[3],InitialVersion=[2],@key{pragma} @prag<Profile> (@SynI{profile_}@Syn2{identifier} {, @SynI{profile_}@Syn2{pragma_argument_association}});'],Old=[]]'}
 
 @end{Syntax}
 
@@ -4980,8 +5001,10 @@ of package Execution_Time.]}]}
 the underlying mechanism used to measure execution times, such as the range of
 values supported and any relevant aspects of the underlying hardware or
 operating system facilities used.]}
-@ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[The properties of the mechanism used to implement package Execution_Time@Chg{Version=[3],New=[,
+@ChgDocReq{Version=[3],Kind=[Revised],InitialVersion=[2],
+Text=[@ChgAdded{Version=[2],
+Text=[The properties of the mechanism used to implement
+package Execution_Time@Chg{Version=[3],New=[,
 including the values of the constants defined in the package],Old=[]}.]}]}
 
 @end{DocReq}
@@ -5185,7 +5208,7 @@ immediately.@Defn2{Term=[expires], Sec=[execution timer]}]}
   cannot use the value of the Task_Id other than where this Standard specifies.
   For instance, the Task_Id should be read when the timer is set, but it
   should not be used when the timer expires (as it may designate a different
-  task at that point.]}
+  task at that point).]}
 @end{ImplNote}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
@@ -5734,7 +5757,7 @@ occurs. Such a protected procedure is called a @i{handler}.
 @ChgAdded{Version=[2],Text=[@key{protected body} Toaster @key{is}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} Timer(Event : @key{in out} Timing_Event) @key{is}
+@ChgAdded{Version=[2],Text=[   @key{procedure} Timer (Event : @key{in out} Timing_Event) @key{is}
    @key{begin}
       Pop_Up_Toast (Toaster_Timing_Event(Timing_Event'Class(Event)).Slot);
    @key{end} Timer;]}
@@ -5984,8 +6007,8 @@ language-defined representation aspect may be specified:]}
 
 @begin{Description}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[CPU@\The value of aspect CPU is an @nt{expression},
-which shall be of type System.Multiprocessors.CPU_Range.]}
+@ChgAdded{Version=[3],Text=[CPU@\The aspect CPU is an @nt{expression},
+which shall be of type System.Multiprocessors.CPU_Range.@AspectDefn{CPU}]}
 
 @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[CPU],
   Text=[@ChgAdded{Version=[3],Text=[Processor on which a given task should
@@ -6125,7 +6148,8 @@ representation aspect may be specified:]}
 @ChgAdded{Version=[3],Text=[Dispatching_Domain@\The value of
 aspect Dispatching_Domain is an @nt{expression}, which shall be of
 type Dispatching_Domains.Dispatching_Domain. This aspect is the domain to
-which the task (or all objects of the task type) are assigned.]}
+which the task (or all objects of the task type) are
+assigned.@AspectDefn{Dispatching_Domain}]}
 
 @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Dispatching_Domain],
   Text=[@ChgAdded{Version=[3],Text=[Domain (group of processors) on which a

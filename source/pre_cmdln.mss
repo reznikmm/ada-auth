@@ -1,13 +1,14 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.25 $ $Date: 2011/08/17 00:29:41 $ $Author: randy $ }
+@comment{ $Revision: 1.26 $ $Date: 2011/10/21 06:41:26 $ $Author: randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:41 $}
+@Comment{$Date: 2011/10/21 06:41:26 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program to obtain the values of its
 arguments and to set the exit status code to be returned on normal termination.
-@ChgImplDef{Version=[2],Kind=[Revised],Text=[The meaning of Argument_Count,
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
+Text=[The meaning of Argument_Count,
 Argument, and Command_Name@Chg{Version=[2],New=[ for package Command_Line. The
 bounds of type Command_Line.Exit_Status],Old=[]}.]}
 @end{Intro}

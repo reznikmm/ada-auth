@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:23 $}
+@Comment{$Date: 2011/10/21 06:41:24 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.92 $}
+@Comment{$Revision: 1.93 $}
 
 @LabeledClause{Array Types}
 
@@ -292,7 +292,8 @@ may be specified with an @nt{aspect_specification} (see
 @ChgAdded{Version=[3],Text=[Default_Component_Value@\This aspect
 shall be specified by a static expression, and that
 expression shall be explicit, even if the aspect has a boolean type.
-Default_Value shall be specified only on a @nt{full_type_declaration}.]}
+Default_Value shall be specified only on
+a @nt{full_type_declaration}.@AspectDefn{Default_Component_Value}]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The part about requiring an explicit expression is

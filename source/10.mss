@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:24 $}
+@Comment{$Date: 2011/10/21 06:41:25 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.96 $}
+@Comment{$Revision: 1.97 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3299,7 +3299,8 @@ user-defined subprogram.]}
 Old=[applies to]}
 a library unit@Chg{Version=[3],New=[],Old=[, then it]} is
 @i{preelaborated}@Chg{Version=[3],New=[, namely that the Preelaborate
-aspect of the library unit is True; all compilation units of the
+aspect@AspectDefn{Preelaborate} of the library unit is True; all
+compilation units of the
 library unit are preelaborated],Old=[]}.
 @Chg{Version=[3],New=[],Old=[@Redundant[
 @RootDefn{preelaborated}
@@ -3610,8 +3611,8 @@ task unit, or protected unit.]}
 @Defn{declared pure}
 A @nt{pragma} Pure is used to @Chg{Version=[3],New=[specify],Old=[declare]}
 that a library unit is @Chg{Version=[3],New=[@i{declared pure}, namely
-that the Pure aspect of the library unit is True; all compilation units
-of the library unit are declared ],Old=[]}pure.
+that the Pure aspect@AspectDefn{Pure} of the library unit is True; all
+compilation units of the library unit are declared ],Old=[]}pure.
 @Chg{Version=[3],New=[In addition, the limited view
 of any library package is declared pure. The declaration and
 body of a declared pure library unit, and all subunits that are
@@ -3822,7 +3823,7 @@ The official statement of the semantics of these @nt{pragma}s is given in
 @ChgAdded{Version=[3],Text=[A @nt{pragma} Elaborate_Body sets the Elaborate_Body
 representation aspect of the library unit to which it applies to the value True.
 @Redundant[If the Elaborate_Body aspect of a library unit is True, the body of the library
-unit is elaborated immediately after its declaration.]]}
+unit is elaborated immediately after its declaration.@AspectDefn{Elaborate_Body}]]}
 
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[Added]}

@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:24 $}
+@Comment{$Date: 2011/10/21 06:41:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.87 $}
+@Comment{$Revision: 1.88 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -16,7 +16,8 @@ characteristics.]
 
 @begin{StaticSem}
 @Leading@;The following language-defined library package exists:
-@ChgImplDef{Version=[2],Kind=[Revised],Text=[The contents of the visible part
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
+Text=[The contents of the visible part
 of package System@Chg{Version=[2],New=[],Old=[and its language-defined children]}.]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
@@ -737,7 +738,7 @@ of the generic function Unchecked_Conversion.]
    @key[type] Source(<>) @key[is] @key[limited] @key[private];
    @key[type] Target(<>) @key[is] @key[limited] @key[private];
 @SubChildUnit{Parent=[Ada],Child=[Unchecked_Conversion]}@key[function] Ada.Unchecked_Conversion(S : Source) @key[return] Target@Chg{Version=[3],New=[
-   @key(with) Convention => Intrinsic;],Old=[;
+   @key(with) Convention => Intrinsic],Old=[]};@Chg{Version=[3],New=[],Old=[
 @key[pragma] Convention(Intrinsic, Ada.Unchecked_Conversion);]}
 @key[pragma] Pure(Ada.Unchecked_Conversion);
 @end{Example}
@@ -794,7 +795,8 @@ in particular, the result can be abnormal
 @ChgImplDef{Version=[2],Kind=[Added],Text=[@Chg{Version=[2],New=[The result
 of unchecked conversion for instances with scalar result types whose
 result is not defined by the language.],Old=[]}]}
-@ChgImplDef{Version=[2],Kind=[Revised],Text=[The effect of unchecked
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
+Text=[The effect of unchecked
 conversion@Chg{Version=[2],New=[ for instances
 with nonscalar result types whose effect is not defined by
 the language],Old=[]}.]}
@@ -1637,7 +1639,8 @@ a non-derived access-to-object type)}
 Storage_Size or Storage_Pool may be specified for
 a non-derived access-to-object type
 via an @nt{attribute_@!definition_@!clause};
-the @nt{name} in a Storage_Pool clause shall denote a variable.
+the @nt{name} in a Storage_Pool clause shall denote a
+variable.@Chg{Version=[3],New=[@AspectDefn{Storage_Pool}@AspectDefn{Storage_Size (access)}],Old=[]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Storage_Pool],
     Text=[@ChgAdded{Version=[3],Text=[Pool of memory from which @key[new] will
@@ -1707,7 +1710,8 @@ the exception Storage_Error is raised by an @nt{allocator}
 if there is not enough storage.
 It is implementation defined whether or not the implementation
 provides user-accessible names for the standard pool type(s).
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],Text=[The
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],Text=[The
 manner of choosing a storage pool for an access type when
 Storage_Pool is not specified for the type.]}]}
 @begin{Discussion}
@@ -1744,7 +1748,7 @@ Storage_Error is raised at the point of the
 @nt{attribute_@!definition_@!clause}.
 If neither Storage_Pool nor Storage_Size are specified,
 then the meaning of Storage_Size is implementation defined.
-@ChgImplDef{Version=[2],Kind=[Revised],Text=[The meaning of
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],Text=[The meaning of
 Storage_Size@Chg{Version=[2], New=[ when neither the
 Storage_Size nor the Storage_Pool is specified for an access type],Old=[]}.]}
 @begin{Ramification}
@@ -1805,10 +1809,11 @@ then the program execution is erroneous.
 
 @begin{ImplReq}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The Allocate procedure of a
 user-defined storage pool object @i<P> may be called by the implementation only
-to allocate storage for a type @i<T> whose pool is @i<P> and:]}
+to allocate storage for a type @i<T> whose pool is @i<P>, only at the
+following points:]}
 
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -1937,7 +1942,8 @@ to accept for the Alignment parameter.
 An implementation shall document
 how the standard storage pool is chosen,
 and how storage is allocated by standard storage pools.
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],
 Text=[Implementation-defined aspects of storage pools.]}]}
 @ChgDocReq{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[
 The set of values that a user-defined Allocate procedure needs
@@ -2163,7 +2169,7 @@ for T that takes advantage of the fact that T is of a certain size.
 If T2 is not of that size, then the above will probably not work.
 @end{Reason}
 
-@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0111-3]}
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0111-3]}
 As usual, a derivative of Root_Storage_Pool may define additional
 operations. For example, @Chg{Version=[3],New=[consider the],Old=[presuming that]}
 Mark_Release_Pool_Type @Chg{Version=[3],New=[defined in
@@ -2172,26 +2178,26 @@ two additional operations, Mark and Release,
 the following is a possible use:
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0041],ARef=[AI95-00066-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0111-3]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0111-3]}
 @key[type] Mark_Release_Pool_Type
    (Pool_Size : Storage_Elements.Storage_Count@Chg{Version=[3],New=[],Old=[;
     Block_Size : Storage_Elements.Storage_Count]})
-        @key[is] @key[new] @Chg{Version=[3],New=[Subpools.Root_Storage_Pool_with_Subpools],Old=[Root_Storage_Pool]} @key[with @Chg{New=[],Old=[limited ]}private];@Chg{Version=[3],New=[
+        @key[is] @key[new] @Chg{Version=[3],New=[Subpools.Root_Storage_Pool_With_Subpools],Old=[Root_Storage_Pool]} @key[with @Chg{New=[],Old=[limited ]}private];@Chg{Version=[3],New=[
            -- @Examcom{As defined in package MR_Pool, see @RefSecNum{Storage Subpool Example}}],Old=[]}
 
 ...
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0111-3]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0111-3]}
 @Chg{Version=[3],New=[Our_Pool],Old=[MR_Pool]} : Mark_Release_Pool_Type (Pool_Size => 2000@Chg{Version=[3],New=[],Old=[,
                                   Block_Size => 100]});
 @Chg{Version=[3],New=[My_Mark : MR_Pool.Subpool_Handle; -- @Examcom{See @RefSecNum{Storage Subpool Example}}],Old=[]}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0111-3]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0111-3]}
 @key[type] Acc @key[is] @key[access] ...;
 @key[for] Acc'Storage_Pool @key[use] @Chg{Version=[3],New=[Our_Pool],Old=[MR_Pool]};
 ...
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0111-3]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0111-3]}
 @Chg{Version=[3],New=[My_Mark := ],Old=[]}Mark(@Chg{Version=[3],New=[Our_Pool],Old=[MR_Pool]});
 ... --@RI{ Allocate objects using @lquotes@;@key[new] Designated(...)@rquotes@;.}
 Release(@Chg{Version=[3],New=[My_Mark],Old=[MR_Pool]}); --@RI{ @Chg{Version=[3],New=[Finalize objects and reclaim],Old=[Reclaim the]} storage.}
@@ -2447,7 +2453,7 @@ Old=[]}, as described in
 @Chg{Version=[2],New=[@RefSecNum{Completion and Finalization}],
 Old=[@RefSecNum{Assignment and Finalization}]}.
 It then deallocates the storage occupied by the object designated by
-X@Chg{Version=[2],New=[ (and any coextensions)],Old=[]}
+X@Chg{Version=[2],New=[ (and any coextensions)],Old=[]}.
 If the storage pool is a user-defined object, then
 the storage is deallocated by calling Deallocate@Chg{Version=[3],New=[ as described
 in @RefSecNum{Storage Management}],Old=[,
@@ -2520,26 +2526,30 @@ is not reclaimed prior to task termination.
 @end{Bounded}
 
 @begin{Erron}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0033-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0033-1],ARef=[AI05-0262-1]}
 @Defn{nonexistent}@PDefn2{Term=(erroneous execution),Sec=(cause)}
-Evaluating a name that denotes a nonexistent object @Chg{Version=[3],
-New=[or a protected subprogram whose
-associated object is nonexistent ],Old=[]}is erroneous.
+Evaluating a name that denotes a nonexistent object@Chg{Version=[3],
+New=[, or a protected subprogram or subprogram renaming whose
+associated object (if any) is nonexistent ],Old=[]}is erroneous.
 The execution of a call to an instance of Unchecked_Deallocation is
 erroneous if the object was created other than by an @nt<allocator> for
 an access type whose pool is Name'Storage_Pool.
 
 @begin{Reason}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1]}
-@ChgAdded{Version=[3],Text=[The part about a protected subprogram is
-intended to cover the case of an access-to-protected-subprogram where
-the associated object has been deallocated.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0033-1],ARef=[AI05-0262-1]}
+  @ChgAdded{Version=[3],Text=[The part about a protected subprogram is intended
+  to cover the case of an access-to-protected-subprogram where the associated
+  object has been deallocated. The part about a subprogram renaming is intended
+  to cover the case of a renaming of a prefixed view where the prefix object has
+  been deallocated, or the case of a renaming of an entry or protected
+  subprogram where the associated task or protected object has been
+  deallocated.]}
 @end{Reason}
 @begin{Ramification}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0157-1]}
-@ChgAdded{Version=[3],Text=[This text does not cover the case of
-a name that contains a null access value, as @key[null] does not
-denote an object (rather than denoting a nonexistent object).]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0157-1]}
+  @ChgAdded{Version=[3],Text=[This text does not cover the case of
+  a name that contains a null access value, as @key[null] does not
+  denote an object (rather than denoting a nonexistent object).]}
 @end{Ramification}
 
 @end{Erron}
@@ -2678,10 +2688,10 @@ the pool denoted by the @SynI{storage_pool_}@nt{name}, except within the
 immediate scope of a later pragma Default_Storage_Pool. @Redundant[Thus, an
 inner pragma overrides an outer one.]]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[A @nt{pragma} Default_Storage_Pool shall not be used
 as a configuration pragma that applies to a compilation unit that is within the
-immediate scope of another such pragma.]}
+immediate scope of another @nt{pragma} Default_Storage_Pool.]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2709,16 +2719,34 @@ immediate scope of another such pragma.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[]}@Comment{Conditional leading}
-@Chg{Version=[3],New=[The pragma applies to all nonderived access types
-declared in the places defined above, unless Storage_Pool or
-Storage_Size is specified for the type:],
+@Chg{Version=[3],New=[The language-defined aspect Default_Storage_Pool may be
+used to define the default pool for access types within an instance.@AspectDefn{Default_Storage_Pool}
+The expected type for the
+Default_Storage_Pool aspect is Root_Storage_Pool'Class. The @nt{aspect_definition}
+must be a name that denotes a variable. This aspect overrides any
+Default_Storage_Pool pragma that might apply to the generic unit; if the aspect
+is not specified, the default pool of the instance is that defined for the
+generic unit],
 Old=[@PDefn2{Term=[representation pragma], Sec=(Controlled)}
 @PDefn2{Term=[pragma, representation], Sec=(Controlled)}
 A @nt{pragma} Controlled is a representation pragma
 @PDefn2{Term=[aspect of representation], Sec=(controlled)}
 @Defn2{Term=[controlled], Sec=(aspect of representation)}
-that specifies the @i{controlled} aspect of representation.]}
+that specifies the @i{controlled} aspect of representation]}.
+
+  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Default_Storage_Pool],
+    Text=[@ChgAdded{Version=[3],Text=[Default storage pool for a generic instance.]}]}
+
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[]}@Comment{Conditional leading}
+@Chg{Version=[3],New=[For nonderived access types declared in places where the
+default pool is defined by the pragma or aspect, their Storage_Pool or
+Storage_Size attribute is determined as follows, unless Storage_Pool or
+Storage_Size is specified for the type:],
+Old=[@Defn{garbage collection}
+@i{Garbage collection} is a process that automatically reclaims storage,
+or moves objects to a different address,
+while the objects still exist.]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
@@ -2730,22 +2758,11 @@ that specifies the @i{controlled} aspect of representation.]}
   @ChgAdded{Version=[3],Text=[If the default pool is nonnull, the Storage_Pool
   attribute is that pool.]}
 
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
-  @ChgAdded{Version=[3],Text=[@Redundant[Otherwise, there is no default pool; the standard storage
-  pool is used for the type as described in @RefSecNum{Storage Management}.]]}
 @end{Itemize}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
-@Chg{Version=[3],New=[The language-defined aspect Default_Storage_Pool may be
-used to define the default pool for access types within an instance. The expected
-type for the
-Default_Storage_Pool aspect is Root_Storage_Pool'Class. The @nt{aspect_definition}
-must be a name that denotes a variable. This aspect overrides any
-Default_Storage_Pool pragma that might apply to the generic unit],
-Old=[@Defn{garbage collection}
-@i{Garbage collection} is a process that automatically reclaims storage,
-or moves objects to a different address,
-while the objects still exist]}.
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[Otherwise, there is no default pool; the standard storage
+pool is used for the type as described in @RefSecNum{Storage Management}.]]}
 
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
@@ -3116,7 +3133,7 @@ subpool already belongs to a pool.]}
 @ChgAdded{Version=[3],Text=[When an @nt{allocator} for a type whose storage pool
 supports subpools is evaluated, a call is made on Allocate_From_Subpool passing
 in a Subpool_Handle, in addition to the parameters as defined for calls on
-Allocate (see @RefSecNum{Storage Management}). The subpool denoted by the
+Allocate (see @RefSecNum{Storage Management}). The subpool designated by the
 @Syni{subpool_handle_}@nt{name} is used, if specified in an @nt{allocator}.
 Otherwise, Default_Subpool_for_Pool of the Pool is used to provide a subpool
 handle. All requirements on the Allocate procedure also apply to
@@ -3637,7 +3654,7 @@ and its value shall be nonnegative.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00394-01]}
 The set of @Chg{Version=[2],New=[restrictions],Old=[@ntf{restrictions}]} is
 implementation defined.
-@ChgImplDef{Version=[2],Kind=[Revised],Text=[The set of
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],Text=[The set of
 @Chg{Version=[2],New=[restrictions],Old=[@ntf{restrictions}]}
 allowed in a @nt{pragma} Restrictions.]}
 @end{StaticSem}
@@ -3835,7 +3852,7 @@ restrictions are defined in the Specialized Needs Annexes):]}
 
 @begin{Description}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0242-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0241-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
    Sec=(No_Implementation_Aspect_Specifications)}@Chg{Version=[3],New=[@Defn{No_Implementation_Aspect_Specifications restriction}],
    Old=[]}No_Implementation_Aspect_Specifications @\There
@@ -4317,7 +4334,7 @@ an elementary type @i(T)}, the following representation attribute is defined:]}
   @ChgAdded{Version=[2],NoPrefix=[T],Text=[Stream_Size may be specified for
   first subtypes via an @nt{attribute_definition_clause}; the @nt{expression}
   of such a clause shall be static, nonnegative, and a multiple of
-  Stream_Element'Size.]}
+  Stream_Element'Size.@Chg{Version=[3],New=[@AspectDefn{Stream_Size}],Old=[]}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Stream_Size],
     Text=[@ChgAdded{Version=[3],Text=[Size in bits used to represent elementary
@@ -4490,7 +4507,8 @@ type of any of the extension components
 Old=[which are of a limited type has not been specified,]}
 the attribute of @i(T) shall be directly specified.],Old=[]}
 
-@ChgImplDef{Version=[2],Kind=[Revised],Text=[The @Chg{Version=[2],New=[contents
+@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
+Text=[The @Chg{Version=[2],New=[contents
 of the stream elements read and written],Old=[representation used]} by the
 Read and Write attributes of elementary types@Chg{Version=[2],New=[],Old=[ in
 terms of stream elements]}.]}
@@ -4863,6 +4881,7 @@ attributes, the subtype of the Item parameter shall be the base subtype
 if scalar, and the first subtype otherwise.
 The same rule applies to the result of the Input function.]}
 @ChgNote{Most of the old text is moved down}
+@Chg{Version=[3],New=[@AspectDefn{Read}@AspectDefn{Write}@AspectDefn{Input}@AspectDefn{Output}],Old=[]}
 
 @begin{Reason}@ChgNote{This belongs below}
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00195-01]}

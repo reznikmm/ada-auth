@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:23 $}
+@Comment{$Date: 2011/10/21 06:41:24 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.120 $}
+@Comment{$Revision: 1.121 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1099,7 +1099,8 @@ the following type-related operational aspect may be specified:]}
 @begin{Description}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Implicit_Dereference@\This aspect is specified by a
-name that denotes an access discriminant declared for the type @i<T>.]}
+name that denotes an access discriminant declared for the
+type @i<T>.@AspectDefn{Implicit_Dereference}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Implicit_Dereference],
     Text=[@ChgAdded{Version=[3],Text=[Mechanism for user-defined implicit .@key[all].]}]}
@@ -1221,7 +1222,7 @@ a @nt{name} that denotes one or more functions declared immediately within the
 same declaration list in which @i<T> is declared. All of such functions shall
 have at least two parameters, the first of which is of type @i<T> or
 @i<T>'Class, or is an access-to-constant parameter with designated type @i<T> or
-@i<T>'Class.]}
+@i<T>'Class.@AspectDefn{Constant_Indexing}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Constant_Indexing],
     Text=[@ChgAdded{Version=[3],Text=[Defines function(s) to implement
@@ -1235,7 +1236,7 @@ shall have at least two parameters, the first of which is of type @i<T> or
 @i<T>'Class, or is an access parameter with designated type @i<T> or @i<T>'Class.
 All of such functions shall have a return type that is a reference
 type (see @RefSecNum{User-Defined References}), whose reference discriminant
-is of an access-to-variable type.]}
+is of an access-to-variable type.@AspectDefn{Variable_Indexing}]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[We require these functions to return a reference

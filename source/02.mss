@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:23 $}
+@Comment{$Date: 2011/10/21 06:41:24 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -285,8 +285,8 @@ Old=[Any control function,
 other than a @ntf<format_effector>, that is allowed in a comment; the set of
 @ntf<other_control_function>s allowed in comments is implementation defined.
 @IndexSeeAlso{Term=[control character],See=(other_control_function)}]}
-@ChgImplDef{Version=[2],Kind=[Deleted],Text=[@ChgDeleted{Version=[2],Text=[The
-control functions allowed in comments.]}]}
+@ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[2],Text=[The control functions allowed in comments.]}]}
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}

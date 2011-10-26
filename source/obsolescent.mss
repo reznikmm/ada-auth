@@ -1,10 +1,10 @@
- @Part(obsolescent, Root="ada.mss")
+@Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:41 $}
+@Comment{$Date: 2011/10/21 06:41:26 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -666,18 +666,22 @@ Hence, it is always implementation defined.
 @end{Honest}
 
 @NoPrefix@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @PDefn2{Term=[specifiable], Sec=(of Storage_Size for a task
 first subtype)}
 @NoPrefix@;Storage_Size may be specified for a task first subtype
 @Chg{Version=[2],New=[that is not an interface ],Old=[]}via
-an @nt{attribute_definition_clause}.
+an @nt{attribute_definition_clause}.@Chg{Version=[3],New=[
+When the attribute is specified, the Storage_Size aspect
+is specified to be the value of the given @nt{expression}.],Old=[]}
 @end{Description}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
   @ChgAdded{Version=[3],Text=[When this attribute is specified with an
   @nt{attribute_definition_clause}, the associated aspect is set to the
-  @i<value> of the @nt{expression} given in the @nt{attribute_definition_clause}.
+  @i<value> of the @nt{expression} given in the @nt{attribute_definition_clause},
+  rather than the @nt{expression} itself.
   This value is therefore the same for all objects of the type; in particular,
   it is not re-evaluated when objects are created. This is different than
   when the aspect is specified with an @nt{aspect_specification}
@@ -1355,7 +1359,7 @@ Attach_Handler is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Interrupt_Handler> (@SynI[handler_]@Syn2[name], @Syn2[expression]);']}
+@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Attach_Handler> (@SynI[handler_]@Syn2[name], @Syn2[expression]);']}
 @end{Syntax}
 
 @begin{Resolution}
@@ -1433,7 +1437,7 @@ creation time].]}
 @begin{Syntax}
 @begin{SyntaxText}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[The form for a @nt{pragma}s
+@ChgAdded{Version=[3],Type=[Leading],Text=[The form for @nt{pragma}s
 Atomic, Volatile, Independent, Atomic_Components, and
 Volatile_Components, and Independent_Components is as follows:]}
 @end{SyntaxText}
@@ -1459,7 +1463,7 @@ Volatile_Components, and Independent_Components is as follows:]}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1],ARef=[AI05-0229-1]}
   @ChgAdded{Version=[3],Text=[Pragmas Independent and Independent_Components
-  are born obsolescent; it is defined to provide consistency with the existing
+  are born obsolescent; they are defined to provide consistency with the existing
   shared variable pragmas. As with all obsolescent
   features, these pragmas are not optional; all Ada implementations need to
   implement them. Also note that these pragmas were defined as a @b<Correction>;
@@ -1550,8 +1554,7 @@ System.Multiprocessors.CPU_Range.@PDefn2{Term=[expected type], Sec=(CPU pragma a
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[A CPU pragma is allowed only immediately within a
-@nt{task_definition}, or the @nt{declarative_part} of a @nt{subprogram_body}.
-At most one such pragma shall appear within a given construct.]}
+@nt{task_definition}, or the @nt{declarative_part} of a @nt{subprogram_body}.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[For a CPU pragma that appears in the
@@ -1610,8 +1613,7 @@ System.Multiprocessors.Dispatching_Domains.Dispatching_Domain.
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
 @ChgAdded{Version=[3],Text=[A Dispatching_Domain pragma is allowed only
-immediately within a @nt{task_definition}. At most one such pragma shall appear
-within a given @nt{task_definition}.]}
+immediately within a @nt{task_definition}.]}
 @end{Legality}
 
 @begin{StaticSem}
@@ -1668,8 +1670,7 @@ Integer.@PDefn2{Term=[expected type], Sec=(Priority pragma argument)}
 within a @nt{task_definition}, a @nt{protected_definition}, or the
 @nt{declarative_part} of a @nt{subprogram_body}. An Interrupt_Priority pragma is
 allowed only immediately within a @nt{task_definition} or a
-@nt{protected_definition}. At most one such pragma shall appear within a given
-construct.]}
+@nt{protected_definition}.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[For a Priority pragma that appears in the
@@ -1745,8 +1746,7 @@ Real_Time.Time_Span.@PDefn2{Term=[expected type], Sec=(Relative_Deadline pragma 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[A Relative_Deadline pragma is allowed only
 immediately within a @nt{task_definition} or the @nt{declarative_part}
-of a @nt{subprogram_body}. At most one such pragma shall
-appear within a given construct.]}
+of a @nt{subprogram_body}.]}
 @end{Legality}
 
 @begin{StaticSem}
