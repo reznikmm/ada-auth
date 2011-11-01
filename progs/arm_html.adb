@@ -169,6 +169,7 @@ package body ARM_HTML is
     --  1/02/08 - RLB - Made DOS filenames into all CAPS.
     --  5/ 7/09 - RLB - Added code to prevent making links to dead clauses.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    -- 10/25/11 - RLB - Added old insertion version to Revised_Clause_Header.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -2757,22 +2758,35 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 			     Level : in ARM_Contents.Level_Type;
 			     Clause_Number : in String;
 			     Version : in ARM_Contents.Change_Version_Type;
-			     No_Page_Break : in Boolean := False) is
+			     Old_Version : in ARM_Contents.Change_Version_Type;
+        		     No_Page_Break : in Boolean := False) is
 	-- Output a revised clause header. Both the original and new text will
 	-- be output. The level of the header is specified in Level. The Clause
 	-- Number is as specified.
 	-- These should appear in the table of contents.
 	-- For hyperlinked formats, this should generate a link target.
+	-- Version is the insertion version of the new text; Old_Version is
+	-- the insertion version of the old text.
 	-- If No_Page_Break is True, suppress any page breaks.
 	-- Raises Not_Valid_Error if in a paragraph.
 	function Header_Text return String is
 	begin
 	    if Output_Object.HTML_Kind = HTML_3 then
-		return "<U>" & New_Header_Text & "</U><S>" & Old_Header_Text & "</S>";
-	    else
+	        if Old_Version = '0' then -- Old text is original text
+		    return "<U>" & New_Header_Text & "</U><S>" & Old_Header_Text & "</S>";
+		else
+		    return "<U>" & New_Header_Text & "</U><S><U>" & Old_Header_Text & "</U></S>";
+		end if;
+	    elsif Old_Version = '0' then -- Old text is original text
 		Revision_Used(Version) := True;
 		return "<span class=""insert" & Version & """>" & New_Header_Text &
 		  "</span><span class=""delete" & Version & """>" & Old_Header_Text & "</span>";
+	    else
+		Revision_Used(Version) := True;
+		Revision_Used(Old_Version) := True;
+		return "<span class=""insert" & Version & """>" & New_Header_Text &
+		  "</span><span class=""delete" & Version & """><span class=""insert" & Old_Version & """>" &
+                  Old_Header_Text & "</span></span>";
 	    end if;
 	end Header_Text;
     begin

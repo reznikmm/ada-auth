@@ -390,6 +390,15 @@ Text commands:
 	     breaks to make the printed RM look better.
 @newcolumn - Insert a column break. Only allowed in a multi-column formats.
 	     Ends a paragraph.
+@newpagever{Version=[<version>} - Insert a page break if we are generating
+             <version> (and ends a paragraph). Otherwise, does nothing.
+@rmnewpagever{Version=[<version>} - Insert a page break in the RM (that is,
+             when HideAnnotations is used) and we are generating <version>,
+	     ignored otherwise. Ends a paragraph. Use to insert page
+	     breaks to make the printed RM look better.
+@newcolumnver{Version=[<version>} -  - Insert a column break if we are generating
+             <version>, otherwise does nothing. Only allowed in a multi-column
+	     formats. Ends a paragraph.
 @softpage  - Insert a soft page break in a format that does not generally
 	     allow one. A page is allowed (but not required) at this point.
              [Note: This doesn't seem to work in Word 97, but we've kept it
@@ -432,48 +441,69 @@ Text commands:
 	The formatter assigns subclause numbers.
 @LabeledSubSubClause{<text>} - Start a labeled subsubclause. The title will be "text".
 	The formatter assigns subsubclause numbers.
-@LabeledRevisedAnnex{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
+@LabeledRevisedAnnex{Version=[<version>],
+    [InitialVersion=[<version>],]New=[<new_text>],Old=[<old_text>]} -
 	Start a labeled (unqualified) annex. The title will be "new_text". If
         we are generating an old version of the document, the title is "old_text"
         instead. (Note that annex references in commands always use the
         new_text name.) The formatter assigns annex letters. Version is the
-        version number of the change (see @ChgRef for details).
-@LabeledRevisedNormativeAnnex{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
+        version number of the change (see @ChgRef for details); InitialVersion
+        is the original insertion version of the Old text (this defaults to 0
+        if not given).
+@LabeledRevisedNormativeAnnex{Version=[<version>],
+    [InitialVersion=[<version>],]New=[<new_text>],Old=[<old_text>]} -
 	Start a labeled normative annex. The title will be "new_text". If we
         are generating an old version of the document, the title is "old_text"
         instead. (Note that annex references in commands always use the
         new_text name.) The formatter assigns annex letters. Version is the
-        version number of the change (see @ChgRef for details).
-@LabeledRevisedInformativeAnnex{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
+        version number of the change (see @ChgRef for details); InitialVersion
+        is the original insertion version of the Old text (this defaults to 0
+        if not given).
+@LabeledRevisedInformativeAnnex{Version=[<version>],
+    [InitialVersion=[<version>],]New=[<new_text>],Old=[<old_text>]} -
 	Start a labeled informative annex. The title will be "new_text". If we
         are generating an old version of the document, the title is "old_text"
         instead. (Note that annex references in commands always use the
         new_text name.) The formatter assigns annex letters. Version is the
-        version number of the change (see @ChgRef for details).
-@LabeledRevisedSection{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
+        version number of the change (see @ChgRef for details); InitialVersion
+        is the original insertion version of the Old text (this defaults to 0
+        if not given).
+@LabeledRevisedSection{Version=[<version>],
+    [InitialVersion=[<version>],]New=[<new_text>],Old=[<old_text>]} -
         Start a labeled section (chapter). The title will be "new_text". If we are
         generating an old version of the document, the title is "old_text" instead.
         (Note that clause references in commands always use the new_text name.)
-        The formatter assigns clause numbers. Version is the version number of
-        the change (see @ChgRef for details).
-@LabeledRevisedClause{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
+        The formatter assigns clause numbers. Version is the
+        version number of the change (see @ChgRef for details); InitialVersion
+        is the original insertion version of the Old text (this defaults to 0
+        if not given).
+@LabeledRevisedClause{Version=[<version>],
+    [InitialVersion=[<version>],]New=[<new_text>],Old=[<old_text>]} -
         Start a labeled clause. The title will be "new_text". If we are
         generating an old version of the document, the title is "old_text" instead.
         (Note that clause references in commands always use the new_text name.)
-        The formatter assigns clause numbers. Version is the version number of
-        the change (see @ChgRef for details).
-@LabeledRevisedSubClause{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
+        The formatter assigns clause numbers. Version is the
+        version number of the change (see @ChgRef for details); InitialVersion
+        is the original insertion version of the Old text (this defaults to 0
+        if not given).
+@LabeledRevisedSubClause{Version=[<version>],
+    [InitialVersion=[<version>],]New=[<new_text>],Old=[<old_text>]} -
         Start a labeled subclause. The title will be "new_text". If we are
 	generating an old version of the document, the title is "old_text" instead.
 	(Note that clause references in commands always use the new_text name.)
-        The formatter assigns subclause numbers. Version is the version number
-        of the change (see @ChgRef for details).
-@LabeledRevisedSubSubClause{Version=[<version>],New=[<new_text>],Old=[<old_text>]} -
+        The formatter assigns subclause numbers. Version is the
+        version number of the change (see @ChgRef for details); InitialVersion
+        is the original insertion version of the Old text (this defaults to 0
+        if not given).
+@LabeledRevisedSubSubClause{Version=[<version>],
+    [InitialVersion=[<version>],]New=[<new_text>],Old=[<old_text>]} -
         Start a labeled subsubclause. The title will be "new_text". If we are
 	generating an old version of the document, the title is "old_text" instead.
 	(Note that clause references in commands always use the new_text name.)
-        The formatter assigns subsubclause numbers. Version is the version number
-        of the change (see @ChgRef for details).
+        The formatter assigns subsubclause numbers. Version is the
+        version number of the change (see @ChgRef for details); InitialVersion
+        is the original insertion version of the Old text (this defaults to 0
+        if not given).
 @LabeledAddedSection{Version=[<version>],Name=[<new_text>]} - Start a labeled
         section (chapter). The title will be "new_text". If we are generating an old
 	version of the document, this clause does not exist. (Any clause references
@@ -672,15 +702,17 @@ Text commands:
 	The text is also sent to a database used to later create Annex L.
 @AddedPragmaSyn{Version=[<Version>],<Text>}
 	Defines a pragma added by <Version>. Otherwise, the text is as
-        described for PragmaSyntax. We assume that this command is surrounded
-	by an appropriate @Chg; the purpose of the Version number here is
-	to determine whether (and how) this is entered into Annex L.
+        described for PragmaSyntax. Text includes an appropriate @Chg;
+        the purpose of the Version number here is
+	to determine whether (and how) this is entered into Annex L,
+	along with the cross-reference text.
 @DeletedPragmaSyn{Version=[<Version>],InitialVersion=[<InitialVersion>],<Text>}
 	Defines a pragma deleted by <Version>, originally added by
         <InitialVersion>. Otherwise, the text is as
-        described for PragmaSyntax. We assume that this command is surrounded
-	by an appropriate @Chg; the purpose of the Version number here is
-	to determine whether (and how) this is entered into Annex L.
+        described for PragmaSyntax. Text includes an appropriate @Chg;
+	the purpose of the Version number here is to determine whether
+        (and how) this is entered into Annex L, along with the cross-reference
+        text.
 @PragmaList
 	Dumps the summary list of all pragmas from the pragma database
 	to the output file.

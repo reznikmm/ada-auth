@@ -249,41 +249,71 @@ procedure Scan (Format_Object : in out Format_Type;
 	        declare
 		    Old_Title : ARM_Contents.Title_Type;
 		    Old_Title_Length : Natural;
-		    Ch : Character;
+		    Close_Ch : Character;
 		    Version : ARM_Contents.Change_Version_Type := '0';
+		    Initial_Version : ARM_Contents.Change_Version_Type := '0';
 	        begin
 		    Get_Change_Version (Is_First => True,
 				        Version => Version);
-		    ARM_Input.Check_Parameter_Name (Input_Object,
-		        Param_Name => "New" & (4..ARM_Input.Command_Name_Type'Last => ' '),
-		        Is_First => False,
-		        Param_Close_Bracket => Ch);
-		    if Ch /= ' ' then
+
+		    -- Check for the optional "InitialVersion" parameter,
+		    -- stopping when we reach "New":
+		    declare
+		        Which_Param : ARM_Input.Param_Num;
+		        Ch		: Character;
+		    begin
+		        -- If there is no InitialVersion command, use the same
+		        -- version of the rest of the command.
+		        loop
+		            ARM_Input.Check_One_of_Parameter_Names (Input_Object,
+			        Param_Name_1 => "InitialVersion" & (15..ARM_Input.Command_Name_Type'Last => ' '),
+			        Param_Name_2 => "New" & (4..ARM_Input.Command_Name_Type'Last => ' '),
+			        Is_First => False,
+			        Param_Found => Which_Param,
+			        Param_Close_Bracket => Close_Ch);
+
+			    if Which_Param = 1 and then Close_Ch /= ' ' then
+			        -- Found InitialVersion
+			        ARM_File.Get_Char (Input_Object, Ch);
+			        Initial_Version := Ch;
+			        ARM_File.Get_Char (Input_Object, Ch);
+			        if Ch /= Close_Ch then
+				    Ada.Text_IO.Put_Line ("  ** Bad close for InitialVersion parameter on line " &
+				        ARM_File.Line_String (Input_Object));
+				    ARM_File.Replace_Char (Input_Object);
+			        end if;
+			    else -- We found "New" (or an error)
+			        exit; -- Handling of New is below.
+			    end if;
+		        end loop;
+		    end;
+
+		    if Close_Ch /= ' ' then
 		        -- There is a parameter:
 		        -- Load the new title into the Title string:
 		        ARM_Input.Copy_to_String_until_Close_Char (
 			    Input_Object,
-			    Ch,
+			    Close_Ch,
 			    Title, Title_Length);
 		        Title(Title_Length+1 .. Title'Last) :=
 			    (others => ' ');
 		        ARM_Input.Check_Parameter_Name (Input_Object,
 			    Param_Name => "Old" & (4..ARM_Input.Command_Name_Type'Last => ' '),
 			    Is_First => False,
-			    Param_Close_Bracket => Ch);
-		        if Ch /= ' ' then
+			    Param_Close_Bracket => Close_Ch);
+		        if Close_Ch /= ' ' then
 			    -- There is a parameter:
 			    -- Load the new title into the Title string:
 			    ARM_Input.Copy_to_String_until_Close_Char (
 			        Input_Object,
-			        Ch,
+			        Close_Ch,
 			        Old_Title, Old_Title_Length);
 			    Old_Title(Old_Title_Length+1 .. Old_Title'Last) :=
 			        (others => ' ');
 		        end if;
 		    end if;
-		    ARM_File.Get_Char (Input_Object, Ch);
-		    if Ch /= Nesting_Stack(Nesting_Stack_Ptr).Close_Char then
+		    ARM_File.Get_Char (Input_Object, Close_Ch);
+		    if Close_Ch /= Nesting_Stack(Nesting_Stack_Ptr).Close_Char then
 		        Ada.Text_IO.Put_Line ("  ** Bad close for Labeled_Revised_(SubClause|Annex) on line " & ARM_File.Line_String (Input_Object));
 		        ARM_File.Replace_Char (Input_Object);
 		    end if;
@@ -334,28 +364,32 @@ procedure Scan (Format_Object : in out Format_Type;
 						  Version => Version);
 			        ARM_Contents.Add_Old (Old_Title,
 						  ARM_Contents.Subclause,
-						  Format_Object.Clause_Number);
+						  Format_Object.Clause_Number,
+						  Version => Initial_Version);
 			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Subsubclause then
 			        ARM_Contents.Add (Title, ARM_Contents.Subsubclause,
 						  Format_Object.Clause_Number,
 						  Version => Version);
 			        ARM_Contents.Add_Old (Old_Title,
 						  ARM_Contents.Subsubclause,
-						  Format_Object.Clause_Number);
+						  Format_Object.Clause_Number,
+						  Version => Initial_Version);
 			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Clause then
 			        ARM_Contents.Add (Title, ARM_Contents.Clause,
 						  Format_Object.Clause_Number,
 						  Version => Version);
 			        ARM_Contents.Add_Old (Old_Title,
 						  ARM_Contents.Clause,
-						  Format_Object.Clause_Number);
+						  Format_Object.Clause_Number,
+						  Version => Initial_Version);
 			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Section then
 			        ARM_Contents.Add (Title, ARM_Contents.Section,
 						  Format_Object.Clause_Number,
 						  Version => Version);
 			        ARM_Contents.Add_Old (Old_Title,
 						  ARM_Contents.Section,
-						  Format_Object.Clause_Number);
+						  Format_Object.Clause_Number,
+						  Version => Initial_Version);
 			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Annex then
 			        ARM_Contents.Add (Title,
 						  ARM_Contents.Plain_Annex,
@@ -363,7 +397,8 @@ procedure Scan (Format_Object : in out Format_Type;
 						  Version => Version);
 			        ARM_Contents.Add_Old (Old_Title,
 						  ARM_Contents.Plain_Annex,
-						  Format_Object.Clause_Number);
+						  Format_Object.Clause_Number,
+						  Version => Initial_Version);
 			    elsif Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Normative_Annex then
 			        ARM_Contents.Add (Title,
 						  ARM_Contents.Normative_Annex,
@@ -371,7 +406,8 @@ procedure Scan (Format_Object : in out Format_Type;
 						  Version => Version);
 			        ARM_Contents.Add_Old (Old_Title,
 						  ARM_Contents.Normative_Annex,
-						  Format_Object.Clause_Number);
+						  Format_Object.Clause_Number,
+						  Version => Initial_Version);
 			    else -- Nesting_Stack(Nesting_Stack_Ptr).Command = Labeled_Revised_Informative_Annex then
 			        ARM_Contents.Add (Title,
 						  ARM_Contents.Informative_Annex,
@@ -379,7 +415,8 @@ procedure Scan (Format_Object : in out Format_Type;
 						  Version => Version);
 			        ARM_Contents.Add_Old (Old_Title,
 						  ARM_Contents.Informative_Annex,
-						  Format_Object.Clause_Number);
+						  Format_Object.Clause_Number,
+						  Version => Initial_Version);
 			    end if;
 		    end;
 

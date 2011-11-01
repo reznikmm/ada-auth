@@ -83,6 +83,7 @@ package ARM_RTF is
     --  5/ 4/09 - RLB - Added footer commands.
     --  5/ 6/09 - RLB - Added version names.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    -- 10/25/11 - RLB - Added old insertion version to Revised_Clause_Header.
 
     type RTF_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -202,12 +203,15 @@ package ARM_RTF is
 			     Level : in ARM_Contents.Level_Type;
 			     Clause_Number : in String;
 			     Version : in ARM_Contents.Change_Version_Type;
-			     No_Page_Break : in Boolean := False);
+			     Old_Version : in ARM_Contents.Change_Version_Type;
+        		     No_Page_Break : in Boolean := False);
 	-- Output a revised clause header. Both the original and new text will
 	-- be output. The level of the header is specified in Level. The Clause
 	-- Number is as specified.
 	-- These should appear in the table of contents.
 	-- For hyperlinked formats, this should generate a link target.
+	-- Version is the insertion version of the new text; Old_Version is
+	-- the insertion version of the old text.
 	-- If No_Page_Break is True, suppress any page breaks.
 	-- Raises Not_Valid_Error if in a paragraph.
 

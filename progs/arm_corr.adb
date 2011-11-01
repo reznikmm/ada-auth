@@ -62,6 +62,7 @@ package body ARM_Corr is
     -- 12/18/07 - RLB - Added Plain_Annex.
     -- 12/19/07 - RLB - Added limited colors to Text_Format.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    -- 10/25/11 - RLB - Added old insertion version to Revised_Clause_Header.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -705,16 +706,19 @@ package body ARM_Corr is
 			     Level : in ARM_Contents.Level_Type;
 			     Clause_Number : in String;
 			     Version : in ARM_Contents.Change_Version_Type;
-			     No_Page_Break : in Boolean := False) is
+			     Old_Version : in ARM_Contents.Change_Version_Type;
+        		     No_Page_Break : in Boolean := False) is
 	-- Output a revised clause header. Both the original and new text will
 	-- be output. The level of the header is specified in Level. The Clause
 	-- Number is as specified.
 	-- These should appear in the table of contents.
 	-- For hyperlinked formats, this should generate a link target.
+	-- Version is the insertion version of the new text; Old_Version is
+	-- the insertion version of the old text.
 	-- If No_Page_Break is True, suppress any page breaks.
 	-- Raises Not_Valid_Error if in a paragraph.
 	function Header_Text return String is
-	    -- Note: Version is not used.
+	    -- Note: Version and Old_Version are not used.
 	begin
 	    return '{' & New_Header_Text & "} [" & Old_Header_Text & ']';
 	end Header_Text;

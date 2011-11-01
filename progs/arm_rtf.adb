@@ -136,6 +136,7 @@ package body ARM_RTF is
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/20/11 - RLB - Updated to handle extra-wide paragraph numbers
     --			automatically (there are too many to hand-fix now).
+    -- 10/25/11 - RLB - Added old insertion version to Revised_Clause_Header.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -549,7 +550,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s5\keepn\widctlpar\adjustright " &
-			 "\pvpara\phpg\posxo\posy0\absw510\dxfrtext100\dfrmtxtx120\dfrmtxty120"&
+			 "\pvpara\phpg\posxo\posy0\absw490\dxfrtext100\dfrmtxtx120\dfrmtxty120"&
 			 "\cgrid\qc",
 		       Style_String_Suffix => "\snext0 "); -- Note: We adjust the space before on use.
 	    Set_Style (Paragraph_Info(ARM_Output.Small, 1), -- Notes
@@ -1434,7 +1435,7 @@ package body ARM_RTF is
 		-- \phpg - positions the frame horizonatally within the page;
 		-- \posxo - positions the paragraph outside of the frame;
 		-- \posy0 - positions the paragraph at the top of the frame;
-		-- \absw - frame width in twips (660);
+		-- \absw - frame width in twips (640);
 		-- \dxfrtext - distance of frame from text in all directions (twips);
 		-- \dfrmtxtx - horizontal distance of text from frame (twips);
 		-- \dfrmtxty - vertical distance of text from frame (twips).
@@ -1449,7 +1450,7 @@ package body ARM_RTF is
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
 			 "\s5\keepn\widctlpar\adjustright " &
-			 "\pvpara\phpg\posxo\posy0\absw660\dxfrtext100\dfrmtxtx150\dfrmtxty150"&
+			 "\pvpara\phpg\posxo\posy0\absw640\dxfrtext100\dfrmtxtx150\dfrmtxty150"&
 			 "\cgrid\qc",
 		       Style_String_Suffix => "\snext0 "); -- We adjust the space before for each number.
 
@@ -3368,18 +3369,28 @@ package body ARM_RTF is
 			     Level : in ARM_Contents.Level_Type;
 			     Clause_Number : in String;
 			     Version : in ARM_Contents.Change_Version_Type;
-			     No_Page_Break : in Boolean := False) is
+			     Old_Version : in ARM_Contents.Change_Version_Type;
+        		     No_Page_Break : in Boolean := False) is
 	-- Output a revised clause header. Both the original and new text will
 	-- be output. The level of the header is specified in Level. The Clause
 	-- Number is as specified.
 	-- These should appear in the table of contents.
 	-- For hyperlinked formats, this should generate a link target.
+	-- Version is the insertion version of the new text; Old_Version is
+	-- the insertion version of the old text.
 	-- If No_Page_Break is True, suppress any page breaks.
 	-- Raises Not_Valid_Error if in a paragraph.
 	Count : Natural; -- Not used after being set.
 	function Header_Text return String is
 	begin
-	    return "{\revised\revauth" & Version & " " & New_Header_Text & "}{\deleted\revauthdel" & Version & " " & Old_Header_Text & "}";
+	    if Old_Version = '0' then -- Old is original text
+	        return "{\revised\revauth" & Version & " " & New_Header_Text & "}{\deleted\revauthdel" & Version & " " & Old_Header_Text & "}";
+	    else
+	        return "{\revised\revauth" & Version & " " & New_Header_Text &
+			"}{\deleted\revauthdel" & Version &
+                          "\revised\revauth" & Old_Version &  " " &
+                          Old_Header_Text & "}";
+	    end if;
 	end Header_Text;
     begin
 	if not Output_Object.Is_Valid then

@@ -262,7 +262,9 @@ package body ARM_Format is
     -- 10/20/11 - RLB - Added optional initial version parameter to ChgImplDef
     --			and related commands.
     --		- RLB - Added DeletedPragmaSyn command.
-
+    -- 10/25/11 - RLB - Added optional initial version parameter to
+    --			LabeledRevisedSomething commands.
+    -- 10/26/11 - RLB - Added versioned break commands.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -993,7 +995,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 	-- The following is only used if Command = Change, Change_Added,
 	-- Change_Deleted, Added_Subheading,
 	-- Added_Pragma_Syntax, Deleted_Pragma_Syntax,
-	-- Added_Syntax, and Deleted_Syntax.
+	-- Added_Syntax, Deleted_Syntax,
+	-- New_Page_for_Version, New_Column_for_Version, and
+	-- RM_New_Page_for_Version.
 	Change_Version : ARM_Contents.Change_Version_Type;
 	-- The following are only used if Command = Change,
 	-- Added_Pragma_Syntax, and Deleted_Pragma_Syntax.
@@ -4018,6 +4022,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    Format_Object.Text_Format.Bold := True;
 		    ARM_Output.Text_Format (Output_Object,
 					    Format => Format_Object.Text_Format);
+
 		when Non_Terminal_Format =>
 		    -- No linking here.
 		    Check_Paragraph;
@@ -4201,6 +4206,18 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    end;
 		    Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (Nonterminal)");
+
+		-- Versioned breaking:
+		when New_Page_for_Version | RM_New_Page_for_Version |
+		     New_Column_for_Version =>
+		    declare
+			Version : ARM_Contents.Change_Version_Type;
+		    begin
+		        Get_Change_Version (Is_First => True,
+		            Version => Version);
+		            -- Read a parameter named "Version".
+			Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version := Version;
+		    end;
 
 		-- Tables:
 		when Table =>
@@ -6227,7 +6244,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		     -- syntax text. We handle that by adding a couple of
 		     -- spaces before the text.
 
-Ada.Text_IO.Put_Line ("%% Pragma - normal initialization.");
+--Ada.Text_IO.Put_Line ("%% Pragma - normal initialization.");
 		     -- All we have to do here is output a couple of
 		     -- hard spaces and then start recording.
 		     Check_Paragraph;
@@ -6269,23 +6286,19 @@ Ada.Text_IO.Put_Line ("%% Pragma - normal initialization.");
 			    Operation => ARM_Output.Insertion,
 			    Text_Kind => Disposition);
 
-		        if Disposition = Do_Not_Display_Text then
-Ada.Text_IO.Put_Line ("%% Added pragma - initial no display.");
-			    -- Skip the text:
-			    ARM_Input.Skip_until_Close_Char (Input_Object,
-			        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char);
-			    ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
-			else
-Ada.Text_IO.Put_Line ("%% Added pragma - normal initialization.");
-			    -- All we have to do here is output a couple of
-			    -- hard spaces and then start recording. The outer
-			    -- @Chg will handle the formatting for this.
-			    Check_Paragraph;
+		        -- All we have to do here is output a couple of
+		        -- hard spaces (if anything will be displayed) and then
+			-- start recording. The inner @Chg will handle the
+			-- formatting for this.
+--Ada.Text_IO.Put_Line ("%% Added pragma.");
+		        Check_Paragraph;
+		        if Disposition /= Do_Not_Display_Text then
 			    ARM_Output.Hard_Space (Output_Object);
 			    ARM_Output.Hard_Space (Output_Object);
-			    ARM_Input.Start_Recording (Input_Object);
-			    -- Just handle the text normally.
+		        -- else nothing to display.
 		        end if;
+		        ARM_Input.Start_Recording (Input_Object);
+		        -- Just handle the text normally.
 		    end;
 
 		when Deleted_Pragma_Syntax =>
@@ -6337,23 +6350,19 @@ Ada.Text_IO.Put_Line ("%% Added pragma - normal initialization.");
 			    Operation => ARM_Output.Deletion,
 			    Text_Kind => Disposition);
 
-		        if Disposition = Do_Not_Display_Text then
-Ada.Text_IO.Put_Line ("%% Deleted pragma - initial no display.");
-			    -- Skip the text:
-			    ARM_Input.Skip_until_Close_Char (Input_Object,
-			        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char);
-			    ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
-			else
-Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
-			    -- All we have to do here is output a couple of
-			    -- hard spaces and then start recording. The outer
-			    -- @Chg will handle the formatting for this.
-			    Check_Paragraph;
+--Ada.Text_IO.Put_Line ("%% Deleted pragma.");
+		        -- All we have to do here is output a couple of
+		        -- hard spaces (if anything will be displayed) and then
+			-- start recording. The inner @Chg will handle the
+			-- formatting for this.
+		        Check_Paragraph;
+		        if Disposition /= Do_Not_Display_Text then
 			    ARM_Output.Hard_Space (Output_Object);
 			    ARM_Output.Hard_Space (Output_Object);
-			    ARM_Input.Start_Recording (Input_Object);
-			    -- Just handle the text normally.
+		        -- else nothing to display.
 		        end if;
+		        ARM_Input.Start_Recording (Input_Object);
+		        -- Just handle the text normally.
 		    end;
 
 		-- Clause title and reference commands:
@@ -6493,42 +6502,72 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 			New_Title_Length : Natural;
 			Old_Title : ARM_Contents.Title_Type;
 			Old_Title_Length : Natural;
-			Ch : Character;
-			Version : ARM_Contents.Change_Version_Type := '0';
-			Level : ARM_Contents.Level_Type;
+			Close_Ch  : Character;
+			Version   : ARM_Contents.Change_Version_Type := '0';
+			Initial_Version : ARM_Contents.Change_Version_Type := '0';
+			Level     : ARM_Contents.Level_Type;
 		    begin
 			Get_Change_Version (Is_First => True,
 					    Version => Version);
-			ARM_Input.Check_Parameter_Name (Input_Object,
-			    Param_Name => "New" & (4..ARM_Input.Command_Name_Type'Last => ' '),
-			    Is_First => False,
-			    Param_Close_Bracket => Ch);
-			if Ch /= ' ' then
+
+		        -- Check for the optional "InitialVersion" parameter,
+			-- stopping when we reach "New":
+			declare
+			    Which_Param : ARM_Input.Param_Num;
+			    Ch		: Character;
+			begin
+			    -- If there is no InitialVersion command, use the same
+			    -- version of the rest of the command.
+			    loop
+		                ARM_Input.Check_One_of_Parameter_Names (Input_Object,
+			            Param_Name_1 => "InitialVersion" & (15..ARM_Input.Command_Name_Type'Last => ' '),
+			            Param_Name_2 => "New" & (4..ARM_Input.Command_Name_Type'Last => ' '),
+			            Is_First => False,
+			            Param_Found => Which_Param,
+			            Param_Close_Bracket => Close_Ch);
+
+			        if Which_Param = 1 and then Close_Ch /= ' ' then
+				    -- Found InitialVersion
+			            ARM_Input.Get_Char (Input_Object, Ch);
+				    Initial_Version := Ch;
+			            ARM_Input.Get_Char (Input_Object, Ch);
+			            if Ch /= Close_Ch then
+				        Ada.Text_IO.Put_Line ("  ** Bad close for InitialVersion parameter on line " &
+					    ARM_Input.Line_String (Input_Object));
+				        ARM_Input.Replace_Char (Input_Object);
+			            end if;
+			        else -- We found "New" (or an error)
+				    exit; -- Handling of New is below.
+			        end if;
+			    end loop;
+			end;
+
+			if Close_Ch /= ' ' then
 			    -- There is a parameter:
 			    -- Load the new title into the Title string:
 			    ARM_Input.Copy_to_String_until_Close_Char (
 			        Input_Object,
-			        Ch,
+			        Close_Ch,
 			        New_Title, New_Title_Length);
 			    New_Title(New_Title_Length+1 .. New_Title'Last) :=
 				(others => ' ');
 			    ARM_Input.Check_Parameter_Name (Input_Object,
 			        Param_Name => "Old" & (4..ARM_Input.Command_Name_Type'Last => ' '),
 			        Is_First => False,
-			        Param_Close_Bracket => Ch);
-			    if Ch /= ' ' then
+			        Param_Close_Bracket => Close_Ch);
+			    if Close_Ch /= ' ' then
 			        -- There is a parameter:
 			        -- Load the new title into the Title string:
 			        ARM_Input.Copy_to_String_until_Close_Char (
 			            Input_Object,
-			            Ch,
+			            Close_Ch,
 			            Old_Title, Old_Title_Length);
 			        Old_Title(Old_Title_Length+1 .. Old_Title'Last) :=
 				    (others => ' ');
 			    end if;
 			end if;
-		        ARM_Input.Get_Char (Input_Object, Ch);
-		        if Ch /= Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char then
+		        ARM_Input.Get_Char (Input_Object, Close_Ch);
+		        if Close_Ch /= Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char then
 			    Ada.Text_IO.Put_Line ("  ** Bad close for Labeled_Revised_(SubClause|Annex) on line " & ARM_Input.Line_String (Input_Object));
 			    ARM_Input.Replace_Char (Input_Object);
 		        end if;
@@ -6581,7 +6620,8 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 			        Clause_Number : constant String :=
 				    ARM_Contents.Lookup_Clause_Number (New_Title);
 
-				Disposition : ARM_Output.Change_Type;
+				New_Disposition : ARM_Output.Change_Type;
+				Old_Disposition : ARM_Output.Change_Type;
 				use type ARM_Output.Change_Type;
 			    begin
 			        Check_End_Paragraph; -- End any paragraph that we're in.
@@ -6596,39 +6636,75 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 		            	    Format_Object => Format_Object,
 				    Version => Version,
 				    Operation => ARM_Output.Insertion,
-				    Text_Kind => Disposition);
+				    Text_Kind => New_Disposition);
 				    -- Note: We use insertion here because
 				    -- we want to decide what to do with
 				    -- the New part.
+			        Calc_Change_Disposition (
+		            	    Format_Object => Format_Object,
+				    Version => Initial_Version,
+				    Operation => ARM_Output.Insertion,
+				    Text_Kind => Old_Disposition);
 
-			        if Disposition = Do_Not_Display_Text then
-			            -- Use the old only:
-				    ARM_Output.Clause_Header (Output_Object,
-				        Old_Title(1..Old_Title_Length),
-				        Level => Level,
-				        Clause_Number => Clause_Number);
-			        elsif Disposition = ARM_Output.None then
+			        if New_Disposition = Do_Not_Display_Text then
+			            if Old_Disposition = Do_Not_Display_Text then
+					null; -- Show nothing.
+				    elsif Old_Disposition = ARM_Output.None then
+			                -- Use the old only:
+				        ARM_Output.Clause_Header (Output_Object,
+				            Old_Title(1..Old_Title_Length),
+				            Level => Level,
+				            Clause_Number => Clause_Number);
+				    elsif Old_Disposition = ARM_Output.Deletion then
+			                raise Program_Error; -- A deletion inside of an insertion command!
+				    else -- an insertion of the Old. Show this like an added item:
+				        ARM_Output.Revised_Clause_Header (Output_Object,
+				            New_Header_Text => Old_Title(1..Old_Title_Length),
+				            Old_Header_Text => "",
+				            Level => Level,
+				            Version => Initial_Version,
+				            Old_Version => '0',
+				            Clause_Number => Clause_Number);
+				    end if;
+			        elsif New_Disposition = ARM_Output.None then
 				    -- Use the new only:
 				    ARM_Output.Clause_Header (Output_Object,
 				        New_Title(1..New_Title_Length),
 				        Level => Level,
 				        Clause_Number => Clause_Number);
-			        elsif Disposition = ARM_Output.Deletion then
+					-- In this case, we have no sane
+					-- way to show the old, so we hope that
+					-- isn't expected.
+			        elsif New_Disposition = ARM_Output.Deletion then
 			            raise Program_Error; -- A deletion inside of an insertion command!
 			        else -- Insertion.
-				    if Format_Object.Changes = ARM_Format.New_Changes then
+				    if Format_Object.Changes = ARM_Format.New_Changes or else
+				        Old_Disposition = Do_Not_Display_Text then
 				        ARM_Output.Revised_Clause_Header (Output_Object,
 					    New_Header_Text => New_Title(1..New_Title_Length),
 					    Old_Header_Text => " ",
 					    Level => Level,
 					    Version => Version,
+					    Old_Version => '0',
 					    Clause_Number => Clause_Number);
-				    else
+				    elsif Old_Disposition = ARM_Output.None then
+					-- Show old without any insertion marks:
+				        ARM_Output.Revised_Clause_Header (Output_Object,
+					    New_Header_Text => New_Title(1..New_Title_Length),
+					    Old_Header_Text => Old_Title(1..Old_Title_Length),
+					    Level => Level,
+					    Version => Version,
+					    Old_Version => '0',
+					    Clause_Number => Clause_Number);
+				    elsif Old_Disposition = ARM_Output.Deletion then
+			                raise Program_Error; -- A deletion inside of an insertion command!
+				    else -- An insertion of the Old item:
 				        ARM_Output.Revised_Clause_Header (Output_Object,
 				            New_Header_Text => New_Title(1..New_Title_Length),
 				            Old_Header_Text => Old_Title(1..Old_Title_Length),
 					    Level => Level,
 					    Version => Version,
+					    Old_Version => Initial_Version,
 					    Clause_Number => Clause_Number);
 				    end if;
 				end if;
@@ -6773,6 +6849,7 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 				            Old_Header_Text => "",
 				            Level => Level,
 				            Version => Version,
+				            Old_Version => '0',
 				            Clause_Number => Clause_Number);
 				    end if;
 
@@ -7759,7 +7836,8 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 			           ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
 			           ARM_Database.Deleted_Inserted_Number_No_Delete_Message) then
 			            -- In a deleted paragraph, call Check_Paragraph
-				    -- to trigger the "deleted paragraph" message.
+				    -- to trigger the "deleted paragraph" message and
+				    -- increment the paragraph number.
 				    -- (Otherwise, this may never happen.)
 				    Format_Object.No_Para_Num := NoParanum;
 			            Check_Paragraph;
@@ -8683,8 +8761,9 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 		     Black | Red | Green | Blue |
 		     Keyword | Non_Terminal | Non_Terminal_Format |
 		     Example_Text | Example_Comment |
-		     Up | Down | Tab_Clear | Tab_Set | Table |
-		     Picture_Alone | Picture_Inline |
+		     Up | Down | Tab_Clear | Tab_Set |
+		     New_Page_for_Version | RM_New_Page_for_Version | New_Column_for_Version |
+		     Table | Picture_Alone | Picture_Inline |
 		     Defn | RootDefn | PDefn | Defn2 | RootDefn2 | PDefn2 |
 		     Index_See | Index_See_Also | See_Other | See_Also |
 		     Index_Root_Unit | Index_Child_Unit | Index_Subprogram_Child_Unit |
@@ -9219,6 +9298,37 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 		    -- Close the paragraph.
 		    Check_End_Paragraph;
 
+		when New_Page_for_Version =>
+		    -- The version parameter is stored in Change_Version on
+		    -- the stack.
+		    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version
+			= Format_Object.Change_Version then
+		        Check_End_Paragraph; -- End any paragraph that we're in.
+		        ARM_Output.New_Page (Output_Object, ARM_Output.Any_Page);
+		    -- else do nothing.
+		    end if;
+
+		when RM_New_Page_for_Version =>
+		    -- The version parameter is stored in Change_Version on
+		    -- the stack.
+		    if not Format_Object.Include_Annotations and then
+		       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version
+			= Format_Object.Change_Version then
+		        Check_End_Paragraph; -- End any paragraph that we're in.
+		        ARM_Output.New_Page (Output_Object, ARM_Output.Any_Page);
+		    -- else do nothing.
+		    end if;
+
+		when New_Column_for_Version =>
+		    -- The version parameter is stored in Change_Version on
+		    -- the stack.
+		    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version
+			= Format_Object.Change_Version then
+		        Check_End_Paragraph; -- End any paragraph that we're in.
+		        ARM_Output.New_Column (Output_Object);
+		    -- else do nothing.
+		    end if;
+
 		when Table_Param_Caption =>
 		    ARM_Output.Table_Marker (Output_Object,
 					     ARM_Output.End_Caption);
@@ -9398,7 +9508,8 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 					Format_Object.Glossary_Term(1..Format_Object.Glossary_Term_Len) &
 				        ".}],Old=[]} " & Text_Buffer(1..Text_Buffer_Len),
 			            Change_Kind => Format_Object.Glossary_Change_Kind,
-			            Version => Format_Object.Glossary_Version);
+			            Version => Format_Object.Glossary_Version,
+			            Initial_Version => Format_Object.Glossary_Version);
 
 			    elsif Format_Object.Glossary_Change_Kind = ARM_Database.Deleted then
 			        ARM_Database.Insert (Format_Object.Glossary_DB,
@@ -9474,7 +9585,24 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 				Prefix_Version, Text_Version : in Character) is
 			    -- Write the item to the DB; use Prefix_Kind and
 			    -- Text_Kind for the change kind.
+			    Init_Version : Character;
 			begin
+			    -- Guess the Initial_Version (eventually, we'll
+			    -- add this as an optional parameter):
+			    case Prefix_Kind is
+				when ARM_Database.Revised_Inserted_Number |
+				     ARM_Database.Inserted                |
+				     ARM_Database.Deleted_Inserted_Number |
+				     ARM_Database.Deleted_Inserted_Number_No_Delete_Message =>
+				    Init_Version := Prefix_Version;
+--Ada.Text_IO.Put_Line ("-- Inserted.");
+			        when ARM_Database.None | ARM_Database.Revised |
+			             ARM_Database.Inserted_Normal_Number |
+			             ARM_Database.Deleted |
+				     ARM_Database.Deleted_No_Delete_Message =>
+--Ada.Text_IO.Put_Line ("-- Normal.");
+				    Init_Version := '0';
+			    end case;
 			    if Format_Object.Attr_Leading then
 			        ARM_Database.Insert (Format_Object.Attr_DB,
 				    Sort_Key => Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
@@ -9487,7 +9615,8 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 				        "@leading@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
 				        " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
 				    Change_Kind => Prefix_Kind,
-				    Version => Prefix_Version);
+				    Version => Prefix_Version,
+				    Initial_Version => Init_Version);
 			    else -- not leading:
 			        ARM_Database.Insert (Format_Object.Attr_DB,
 				    Sort_Key => Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
@@ -9500,9 +9629,12 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 				        "@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
 				        " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
 				    Change_Kind => Prefix_Kind,
-				    Version => Prefix_Version);
+				    Version => Prefix_Version,
+				    Initial_Version => Init_Version);
 			    end if;
 			end Write_to_DB;
+
+			use type ARM_Database.Paragraph_Change_Kind_Type;
 
 		    begin
 			Arm_Input.Stop_Recording_and_Read_Result
@@ -9536,18 +9668,19 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 			            elsif Disposition = ARM_Output.None then
 --Ada.Text_IO.Put_Line ("   Inserted: Normal");
 					-- Normal reference:
-				        Write_to_DB (Prefix_Kind => Format_Object.Attr_Change_Kind,
-		 				     Text_Kind => Format_Object.Attr_Change_Kind,
+				        Write_to_DB (Prefix_Kind => ARM_Database.Inserted,
+		 				     Text_Kind => ARM_Database.Inserted,
 						     Prefix_Version => Format_Object.Attr_Version,
 						     Text_Version => Format_Object.Attr_Version);
 				        -- We could get away without any
 					-- insert, except that then the paragraph
 					-- numbers would be wrong. Note (as below),
 					-- the whole thing is an insertion, so
-					-- we ignore the prefix kind and version.
+					-- we ignore the prefix kind and version and force this
+					-- to have an inserted kind.
 			            elsif Disposition = ARM_Output.Deletion then
 			                raise Program_Error; -- A deletion inside of an insertion command!
-			            else -- Insertion or Normal.
+			            else -- Insertion.
 					-- Write inserted text:
 					-- We need to mark everything with
 					-- the kind and version of the *entire* insertion,
@@ -9569,7 +9702,8 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 						    "@leading@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
 					            " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
 					        Change_Kind => Format_Object.Attr_Change_Kind,
-					        Version => Format_Object.Attr_Version);
+					        Version => Format_Object.Attr_Version,
+					        Initial_Version => Format_Object.Attr_Version);
 				        else -- not leading:
 				            ARM_Database.Insert (Format_Object.Attr_DB,
 					        Sort_Key => Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
@@ -9585,7 +9719,8 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 					            "@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
 					            " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
 					        Change_Kind => Format_Object.Attr_Change_Kind,
-					        Version => Format_Object.Attr_Version);
+					        Version => Format_Object.Attr_Version,
+					        Initial_Version => Format_Object.Attr_Version);
 				        end if;
 				    end if;
 				end;
@@ -9613,27 +9748,29 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 			function My_Sort return String is
 			    -- Find and return the @prag argument.
 			begin
-			    if Text_Buffer_Len > 20 and then
-				Text_Buffer(14) = '@' and then
-				(Text_Buffer(15) = 'p' or else Text_Buffer(15) = 'P') and then
-				(Text_Buffer(16) = 'r' or else Text_Buffer(16) = 'R') and then
-				(Text_Buffer(17) = 'a' or else Text_Buffer(17) = 'A') and then
-				(Text_Buffer(18) = 'g' or else Text_Buffer(18) = 'G') and then
-				ARM_Input.Is_Open_Char (Text_Buffer(19)) then
-				-- Formatted as we expect.
-				for I in 20 .. Text_Buffer_Len loop
-				    if Text_Buffer(I) = ARM_Input.Get_Close_Char (Text_Buffer(19)) then
-					return Text_Buffer(20 .. I-1);
-				    end if;
-				end loop;
-				Ada.Text_IO.Put_Line ("** Can't find argument for @prag: " & Text_Buffer(1..Text_Buffer_Len) &
-				    " on line " & ARM_Input.Line_String (Input_Object));
-			        return ""; -- Never found the end of the argument.
-			    else
-				Ada.Text_IO.Put_Line ("** Funny pragma format: " & Text_Buffer(1..Text_Buffer_Len) &
-				    " on line " & ARM_Input.Line_String (Input_Object));
-				return ""; -- Gotta return something.
-			    end if;
+			    for I in 1 .. Text_Buffer_Len - 7 loop
+				if Text_Buffer(I) = '@' and then
+				(Text_Buffer(I+1) = 'p' or else Text_Buffer(I+1) = 'P') and then
+				(Text_Buffer(I+2) = 'r' or else Text_Buffer(I+2) = 'R') and then
+				(Text_Buffer(I+3) = 'a' or else Text_Buffer(I+3) = 'A') and then
+				(Text_Buffer(I+4) = 'g' or else Text_Buffer(I+4) = 'G') and then
+				ARM_Input.Is_Open_Char (Text_Buffer(I+5)) then
+				    -- Found @prag.
+				    for J in I+6 .. Text_Buffer_Len loop
+				        if Text_Buffer(J) = ARM_Input.Get_Close_Char (Text_Buffer(I+5)) then
+					    return Text_Buffer(I+6 .. J-1);
+				        end if;
+				    end loop;
+				    Ada.Text_IO.Put_Line ("** Can't find argument for @prag: " & Text_Buffer(1..Text_Buffer_Len) &
+				        " on line " & ARM_Input.Line_String (Input_Object));
+			            return ""; -- Never found the end of the argument.
+				-- else not @prag, keep looking.
+				end if;
+			    end loop;
+			    -- If we get here, we never found "@prag"
+			    Ada.Text_IO.Put_Line ("** Funny pragma format: " & Text_Buffer(1..Text_Buffer_Len) &
+			        " on line " & ARM_Input.Line_String (Input_Object));
+			    return ""; -- Gotta return something.
 			end My_Sort;
 
 		    begin
@@ -9679,11 +9816,11 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 				        Hang_Item => "",
 				        Text => "@ChgRef{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
 					    "],Kind=[Added]}" &
-					    "@Chg`Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
-					    "],New=`" & Text_Buffer(1..Text_Buffer_Len) &
-					    " @em See @RefSecbyNum<" & Clause_String(Format_Object) & ">.',Old=[]'");
-				    -- Careful: The text can contain [], {}, (), and <>, so we
-				    -- can only use `' for brackets.
+					    Text_Buffer(1..Text_Buffer_Len) &
+					    "@Chg{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
+					    "],New=[" &
+					    " @em See @RefSecbyNum<" & Clause_String(Format_Object) & ">.],Old=[]}");
+				    -- Note: Text includes any needed @Chg commands.
 			        end if;
 		            end;
 			else --if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Deleted_Pragma_Syntax then
@@ -9718,25 +9855,36 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma - normal initialization.");
 				        Text_Kind => Add_Disposition);
 				end if;
 
-				-- Careful: The text can contain [], {}, (), and <>, so we
-				-- can only use `' for brackets in the @Chg command.
 			        if Del_Disposition = Do_Not_Display_Text then
-				    null; -- Not in new versions, omit from Annex.
-Ada.Text_IO.Put_Line ("%% Deleted pragma completely omitted");
+--Ada.Text_IO.Put_Line ("%% Deleted pragma completely omitted");
+				    if Add_Disposition /= Do_Not_Display_Text then
+					-- If this was in older editions, then
+					-- we need a deletion message (and also
+					-- to get the paragraph numbers right).
+--Ada.Text_IO.Put_Line ("   ... but need a deletion message");
+				        ARM_Database.Insert (Format_Object.Pragma_DB,
+					    Sort_Key => My_Sort,
+					    Hang_Item => "",
+				            Text => "@ChgRef{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
+					        "],Kind=[" & Para_Kind & "]}@ ");
+                                    else
+					null; -- Not at all in this version, omit from Annex.
+				    end if;
 			        elsif Del_Disposition = ARM_Output.None then
-Ada.Text_IO.Put_Line ("%% Deleted pragma normal format");
+--Ada.Text_IO.Put_Line ("%% Deleted pragma normal format");
 				    -- Is the initial item inserted or normal?
 				    if Add_Disposition = ARM_Output.Insertion then
-Ada.Text_IO.Put_Line ("... but inserted");
+--Ada.Text_IO.Put_Line ("... but inserted");
 				        -- Inserted reference:
 					ARM_Database.Insert (Format_Object.Pragma_DB,
 				            Sort_Key => My_Sort,
 				            Hang_Item => "",
 				            Text => "@ChgRef{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Prev_Change_Version &
 					        "],Kind=[Added]}" &
-					        "@Chg`Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Prev_Change_Version &
-					        "],New=`" & Text_Buffer(1..Text_Buffer_Len) &
-					        " @em See @RefSecbyNum<" & Clause_String(Format_Object) & ">.',Old=[]'");
+						Text_Buffer(1..Text_Buffer_Len) &
+					        "@Chg{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Prev_Change_Version &
+					        "],New=[" &
+					        " @em See @RefSecbyNum<" & Clause_String(Format_Object) & ">.],Old=[]}");
 				    else -- Anything else.
 				        -- Normal reference:
 					if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Prev_Change_Version = '0' then
@@ -9760,7 +9908,7 @@ Ada.Text_IO.Put_Line ("... but inserted");
 			        elsif Del_Disposition = ARM_Output.Insertion then
 			            raise Program_Error; -- An insertion inside of a deletion command!
 			        else -- Deletion.
-Ada.Text_IO.Put_Line ("%% Deleted pragma deleted text");
+--Ada.Text_IO.Put_Line ("%% Deleted pragma deleted text");
 				    -- Is the initial item inserted or normal?
 				    if Add_Disposition = ARM_Output.Insertion then
 				        ARM_Database.Insert (Format_Object.Pragma_DB,
@@ -9768,14 +9916,12 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma deleted text");
 				            Hang_Item => "",
 				            Text => "@ChgRef{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
 					        "],Kind=[DeletedAdded]}" &
-					        "@Chg`Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Prev_Change_Version &
-					        "],New=`" &
-					        "@Chg`Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
-					        "],New=`',Old=`" & Text_Buffer(1..Text_Buffer_Len) &
-					        " @em See @RefSecbyNum<" & Clause_String(Format_Object) & ">.''',Old=[]'");
-				        -- Careful: The text can contain [], {}, (), and <>, so we
-				        -- can only use `' for brackets.
-
+						Text_Buffer(1..Text_Buffer_Len) &
+					        "@Chg{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Prev_Change_Version &
+					        "],New=[" &
+					        "@Chg{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
+					        "],New=[],Old=[" &
+					        " @em See @RefSecbyNum<" & Clause_String(Format_Object) & ">.]}],Old=[]}");
 				    else -- Anything else.
 				        -- Just a deleted reference:
 				        ARM_Database.Insert (Format_Object.Pragma_DB,
@@ -9783,9 +9929,10 @@ Ada.Text_IO.Put_Line ("%% Deleted pragma deleted text");
 					    Hang_Item => "",
 				            Text => "@ChgRef{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
 					        "],Kind=[" & Para_Kind & "]}" &
-					        "@Chg`Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
-					        "],New=`',Old=`" & Text_Buffer(1..Text_Buffer_Len) &
-					        " @em See @RefSecbyNum<" & Clause_String(Format_Object) & ">.''");
+						Text_Buffer(1..Text_Buffer_Len) &
+					        "@Chg{Version=[" & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version &
+					        "],New=[],Old=[" &
+					        " @em See @RefSecbyNum<" & Clause_String(Format_Object) & ">.]}");
 				        -- Note: We still need the @ChgRef in order
 				        -- to get the paragraph numbers right and for the deleted paragraph message.
 				    end if;

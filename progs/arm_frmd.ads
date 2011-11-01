@@ -40,6 +40,7 @@ private package ARM_Format.Data is
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/19/11 - RLB - Added AspectDefn command.
     -- 10/20/11 - RLB - Added DeletedPragmaSyn command.
+    -- 10/26/11 - RLB - Added versioned break commands.
 
 
     type LString is record
@@ -190,7 +191,8 @@ private package ARM_Format.Data is
     type Command_Type is (
 	-- Paragraphs:
 	Text_Begin, Text_End, Redundant, Comment, Part, New_Page, Soft_Page,
-	New_Column, RM_New_Page,
+	New_Column, RM_New_Page, New_Page_for_Version, New_Column_for_Version,
+	RM_New_Page_for_Version,
 	-- Basic text formatting:
 	Bold, Italic, Roman, Swiss, Fixed, Roman_Italic, Shrink, Grow,
 	Black, Red, Green, Blue,

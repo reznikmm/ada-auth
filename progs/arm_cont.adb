@@ -53,6 +53,7 @@ package body ARM_Contents is
     --  5/07/09 - RLB - Added Dead_Clause.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/19/11 - RLB - Added Parent_Clause from Stephen Leake's version.
+    -- 10/25/11 - RLB - Added version to Old name strings.
 
     function "<" (Left, Right : Clause_Number_Type) return Boolean is
 	-- True if Left comes before Right in the collating order.
@@ -155,9 +156,11 @@ package body ARM_Contents is
 
     procedure Add_Old (Old_Title : in Title_Type;
 		       Level : in Level_Type;
-		       Clause_Number : in Clause_Number_Type) is
+		       Clause_Number : in Clause_Number_Type;
+                       Version : in ARM_Contents.Change_Version_Type := '0') is
 	-- Add an old title for a section or clause to the contents. It has
-	-- the specified characteristics.
+	-- the specified characteristics; the version is the version for which
+	-- it first was present in the document.
     begin
 	if Level /= Subsubclause and then Clause_Number.Subsubclause /= 0 then
 	    raise Program_Error;
@@ -178,7 +181,7 @@ package body ARM_Contents is
 	     Search_Title => Ada.Characters.Handling.To_Lower (Old_Title),
 	     Level => Level,
 	     Clause_Number => Clause_Number,
-             Version => '0');
+             Version => Version);
 --Ada.Text_IO.Put_Line ("  Add_Old " & Old_Title &
 -- " Index=" & Natural'Image(Last_Old_Title) & " Level=" & Level_Type'Image(Level));
 --Ada.Text_IO.Put_Line ("    Section" & Section_Number_Type'Image(Section_Number) &

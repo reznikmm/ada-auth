@@ -42,6 +42,7 @@ package body ARM_Format.Data is
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/19/11 - RLB - Added AspectDefn command.
     -- 10/20/11 - RLB - Added DeletedPragmaSyn command.
+    -- 10/26/11 - RLB - Added versioned break commands.
 
 
     function Command (Name : in ARM_Input.Command_Name_Type) return Command_Type is
@@ -97,6 +98,12 @@ package body ARM_Format.Data is
 	    return Soft_Page;
 	elsif Canonical_Name = "newcolumn" then
 	    return New_Column;
+	elsif Canonical_Name = "newpagever" then
+	    return New_Page_for_Version;
+	elsif Canonical_Name = "rmnewpagever" then
+	    return RM_New_Page_for_Version;
+	elsif Canonical_Name = "newcolumnver" then
+	    return New_Column_for_Version;
 	elsif Canonical_Name = "b" or else Canonical_Name = "bold" then
 	    return Bold;
 	elsif Canonical_Name = "i" or else Canonical_Name = "italics" then

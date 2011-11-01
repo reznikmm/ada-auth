@@ -107,6 +107,9 @@ package body ARM_Text is
     -- 12/18/07 - RLB - Added Plain_Annex.
     -- 12/19/07 - RLB - Added limited colors to Text_Format.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    -- 10/25/11 - RLB - Fixed "hidden" indent (lost due to space for
+    --			paragraph number).
+    --          - RLB - Added old insertion version to Revised_Clause_Header.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -300,7 +303,7 @@ package body ARM_Text is
 	Output_Object.Output_Buffer_Len := 0;
 
 	if ARM_Output."/=" (Indent, 0) then
-	    Output_Object.Indent_Amount := Natural(Indent)*4 + 2;
+	    Output_Object.Indent_Amount := Natural(Indent)*4 + 4;
 	else
 	    Output_Object.Indent_Amount := 0;
 	end if;
@@ -366,23 +369,58 @@ package body ARM_Text is
 		end if;
 	end case;
 	if Number /= "" then
+	    -- Note: The following assumes that Start_Indent is a multiple of 4.
 	    Ada.Text_IO.Put (Output_Object.Output_File, Number);
 	    Output_Object.Char_Count := Output_Object.Char_Count + Number'Length;
-	    for I in Integer'Min(Number'Length + 1, 6) .. 6 loop
+	    for I in Integer'Min(Number'Length + 1, 4) .. 4 loop
+		-- The 'Min here ensures that every number is always followed
+		-- by at least one space.
 		Ada.Text_IO.Put (Output_Object.Output_File, ' ');
 	        Output_Object.Char_Count := Output_Object.Char_Count + 1;
 	    end loop;
-	    if Start_Indent > 6 then -- Add any remaining indent.
-	        for I in 1 .. (Start_Indent-6)/4 loop
+	    -- Add the next four characters of indent (only if needed), taking
+	    -- into account any use of this space by the paragraph number.
+	    if Start_Indent > 4 then -- (Really 8 or more); add the next three characters of the indent, but take into account any paragraph number length.
+		if Number'Length <= 3 then
+	            Ada.Text_IO.Put (Output_Object.Output_File, "    ");
+	            Output_Object.Char_Count := Output_Object.Char_Count + 4;
+		elsif Number'Length = 4 then
+	            Ada.Text_IO.Put (Output_Object.Output_File, "   ");
+	            Output_Object.Char_Count := Output_Object.Char_Count + 3;
+		elsif Number'Length = 5 then
+	            Ada.Text_IO.Put (Output_Object.Output_File, "  ");
+	            Output_Object.Char_Count := Output_Object.Char_Count + 2;
+		elsif Number'Length = 6 then
+	            Ada.Text_IO.Put (Output_Object.Output_File, ' ');
+	            Output_Object.Char_Count := Output_Object.Char_Count + 1;
+		end if;
+	    end if;
+	    -- Add the next four characters of indent (only if needed), taking
+	    -- into account any use of this space by the paragraph number.
+	    if Start_Indent > 8 then -- (Really 12 or more); add the next three characters of the indent, but take into account any paragraph number length.
+		if Number'Length <= 7 then
+	            Ada.Text_IO.Put (Output_Object.Output_File, "    ");
+	            Output_Object.Char_Count := Output_Object.Char_Count + 4;
+		elsif Number'Length = 8 then
+	            Ada.Text_IO.Put (Output_Object.Output_File, "   ");
+	            Output_Object.Char_Count := Output_Object.Char_Count + 3;
+		elsif Number'Length = 9 then
+	            Ada.Text_IO.Put (Output_Object.Output_File, "  ");
+	            Output_Object.Char_Count := Output_Object.Char_Count + 2;
+		elsif Number'Length = 10 then
+	            Ada.Text_IO.Put (Output_Object.Output_File, ' ');
+	            Output_Object.Char_Count := Output_Object.Char_Count + 1;
+		end if;
+	    end if;
+	    if Start_Indent > 12 then -- Add any remaining indent.
+	        for I in 1 .. (Start_Indent-12)/4 loop
 	            Ada.Text_IO.Put (Output_Object.Output_File, "    ");
 	            Output_Object.Char_Count := Output_Object.Char_Count + 4;
 	        end loop;
 	    end if;
 	else -- No paragraph number:
 	    if Start_Indent /= 0 then
-	        Ada.Text_IO.Put (Output_Object.Output_File, "  ");
-	        Output_Object.Char_Count := Output_Object.Char_Count + 2;
-	        for I in 1 .. (Start_Indent-2)/4 loop
+	        for I in 1 .. Start_Indent/4 loop
 		    Ada.Text_IO.Put (Output_Object.Output_File, "    ");
 	            Output_Object.Char_Count := Output_Object.Char_Count + 4;
 	        end loop;
@@ -572,16 +610,19 @@ package body ARM_Text is
 			     Level : in ARM_Contents.Level_Type;
 			     Clause_Number : in String;
 			     Version : in ARM_Contents.Change_Version_Type;
-			     No_Page_Break : in Boolean := False) is
+			     Old_Version : in ARM_Contents.Change_Version_Type;
+        		     No_Page_Break : in Boolean := False) is
 	-- Output a revised clause header. Both the original and new text will
 	-- be output. The level of the header is specified in Level. The Clause
 	-- Number is as specified.
 	-- These should appear in the table of contents.
 	-- For hyperlinked formats, this should generate a link target.
+	-- Version is the insertion version of the new text; Old_Version is
+	-- the insertion version of the old text.
 	-- If No_Page_Break is True, suppress any page breaks.
 	-- Raises Not_Valid_Error if in a paragraph.
 	function Header_Text return String is
-	    -- Note: Version is not used.
+	    -- Note: Version and Old_Version are not used.
 	begin
 	    return '{' & New_Header_Text & "} [" & Old_Header_Text & ']';
 	end Header_Text;

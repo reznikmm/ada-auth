@@ -52,7 +52,7 @@ package ARM_Contents is
     --  5/07/09 - RLB - Added Dead_Clause.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/19/11 - RLB - Added Parent_Clause from Stephen Leake's version.
-
+    -- 10/25/11 - RLB - Added version to Old name strings.
 
     subtype Title_Type is String (1 .. 80);
 	-- The type of a title.
@@ -110,9 +110,11 @@ package ARM_Contents is
 
     procedure Add_Old (Old_Title : in Title_Type;
 		       Level : in Level_Type;
-		       Clause_Number : in Clause_Number_Type);
+		       Clause_Number : in Clause_Number_Type;
+                       Version : in ARM_Contents.Change_Version_Type := '0');
 	-- Add an old title for a section or clause to the contents. It has
-	-- the specified characteristics.
+	-- the specified characteristics; the version is the version for which
+	-- it first was present in the document.
 
     function Make_Clause_Number (Level : in Level_Type;
 		   Clause_Number : in Clause_Number_Type) return String;
