@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:24 $}
+@Comment{$Date: 2011/11/01 05:34:02 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.113 $}
+@Comment{$Revision: 1.114 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1247,11 +1247,13 @@ A @nt{subtype_mark} shall resolve to denote a subtype.
 The type @i(determined by) a @nt<subtype_mark> is the
 type of the subtype denoted by the @nt{subtype_mark}.
 @begin{Ramification}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   Types are never directly named; all @nt{subtype_mark}s denote
   subtypes @em possibly an unconstrained (base) subtype,
   but never the type.
   When we use the term @i(anonymous type) we really
-  mean a type with no namable subtypes.
+  mean a type with no @Chg{Version=[3],New=[nameable],Old=[namable]}
+  subtypes.
 @end{Ramification}
 @end{Resolution}
 
@@ -1880,7 +1882,7 @@ The following (and no others) represent constants:
   for a generalized loop (see @RefSecNum{Generalized Loop Iteration});]}
 
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
-  @Chg{Version=[3],New=[],Old=[a loop parameter, ]}choice
+  a @Chg{Version=[3],New=[],Old=[loop parameter, ]}choice
   parameter@Chg{Version=[3],New=[],Old=[,]} or entry index;
 
   the dereference of an access-to-constant value;
@@ -3252,7 +3254,7 @@ the corresponding subtype of the derived type is defined as follows:
     implementation burden.
 
     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0164-1]}
-    @ChgAdded{Version=[3],Text=[Note that the exception to substitition of the
+    @ChgAdded{Version=[3],Text=[Note that the exception to substitution of the
     parent or progenitor type applies only in the profiles of anonymous
     access-to-subprogram types. The exception is necessary to avoid calling
     an access-to-subprogram with types and/or constraints different than
@@ -3317,7 +3319,7 @@ are evaluated.
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
   @ChgAdded{Version=[2],Text=[We don't mention the @nt{interface_list}, because
-  it does not need elaboration (see @RefSecNum{Interface Types}. This is
+  it does not need elaboration (see @RefSecNum{Interface Types}). This is
   consistent with the handling of @nt{discriminant_part}s, which aren't
   elaborated either.]}
 @end{Discussion}
@@ -3535,7 +3537,7 @@ similar, but not the same.]}
   @ChgAdded{Version=[2],Text=[Defined the term @lquotes@;category of
   types@rquotes and used it in wording elsewhere; also specified the
   language-defined categories that form classes of types (this was never
-  normatively specified in Ada 95.]}
+  normatively specified in Ada 95).]}
 @end{DiffWord95}
 
 @begin{Incompatible2005}
@@ -4187,7 +4189,7 @@ S'Pred for a modular integer subtype wraps around
        T'Wide_Image should raise Program_Error if the value
        is one of the holes (which is a bounded error anyway,
        since holes can be generated only via uninitialized variables and
-       similar things.]}
+       similar things).]}
      @end{ImplNote}
 
      @ChgRef{Version=[2],Kind=[Added]}
@@ -4323,7 +4325,7 @@ deleted if the paragraphs are ever renumbered.}
        T'Wide_Image should raise Program_Error if the value
        is one of the holes (which is a bounded error anyway,
        since holes can be generated only via uninitialized variables and
-       similar things.]}
+       similar things).]}
      @end{ImplNote}
 
      @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
@@ -5327,6 +5329,7 @@ Context is used to resolve their type.
   Wide_Character'Wide_Image will change for such non-graphic characters.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[The language-defined names FFFE and FFFF were
   replaced by a consistent set of language-defined names for all non-graphic
   characters with positions greater than 16#FF#. That means that
@@ -5334,7 +5337,8 @@ Context is used to resolve their type.
   while Ada 95 would have accepted it. Similarly, the result of
   Wide_Character'Wide_Image will change for the position numbers 16#FFFE#
   and 16#FFFF#. It is very unlikely that this will matter in practice,
-  as these names do not represent useable characters.]}
+  as these names do not represent @Chg{Version=[3],New=[usable],Old=[useable]}
+  characters.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
   @ChgAdded{Version=[2],Text=[Because of the previously mentioned changes to

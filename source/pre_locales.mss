@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_locales.mss,v $ }
-@comment{ $Revision: 1.5 $ $Date: 2011/10/21 06:41:25 $ $Author: randy $ }
+@comment{ $Revision: 1.6 $ $Date: 2011/11/01 05:34:04 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:25 $}
+@Comment{$Date: 2011/11/01 05:34:04 $}
 
 @LabeledAddedClause{Version=[3],Name=[The Package Locales]}
 
@@ -74,7 +74,7 @@ of an ISO 3166-1 alpha-2 code that identifies a country.]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Some common country codes are: "CA" @en Canada;
   "FR" @en France; "DE" @en Germany; "IT" @en Italy; "ES" @en Spain;
-  "GB" @en United Kingdon; "US" @en United States. These are the same codes
+  "GB" @en United Kingdom; "US" @en United States. These are the same codes
   as used by POSIX systems. We didn't include any
   country constants for the same reasons that we didn't include any language
   constants.]}

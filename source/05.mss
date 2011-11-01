@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:24 $}
+@Comment{$Date: 2011/11/01 05:34:03 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.51 $}
+@Comment{$Revision: 1.52 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -521,6 +521,7 @@ K := J;  --@RI{  compatible ranges}
 J := K;  --@RI{  will raise Constraint_Error if K > 10}
 @end{Example}
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @begin{WideAbove}
 @leading@keepnext@i{Examples involving array subtype conversions:}
 @end{WideAbove}
@@ -613,16 +614,21 @@ value of one or more corresponding @nt{condition}s.]
     @key{end} @key{if};"}
 
 
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0147-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0147-1]}
 @DeletedSyn{Version=[3],LHS=<@Chg{Version=[3],New=[],Old=[condition]}>,
 RHS="@Chg{Version=[3],New=[],Old=[@SynI{boolean_}@Syn2{expression}]}"}
 @end{Syntax}
 
 @begin{Resolution}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0147-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0147-1]}
 @ChgDeleted{Version=[3],Text=[@PDefn2{Term=[expected type], Sec=(condition)}
 A @nt{condition} is expected to be of any boolean type.]}
 @end{Resolution}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 3 and 4
+were deleted.>}]}@Comment{This message should be
+deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
 
 @begin{RunTime}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
@@ -933,6 +939,7 @@ This change makes the following @nt{case_statement} legal:
 @key[end] @key[case];
 @end{Example}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 Note that the result subtype given in a function
 @nt{renaming_declaration} is ignored;
 for a @nt{case_statement} whose expression calls a such a function, the
@@ -942,7 +949,7 @@ Note that predefined operators such as "+" have an unconstrained result
 subtype (see @RefSecNum{Logical Operators and Short-circuit Control Forms}).
 Note that generic formal functions do not have static result subtypes.
 Note that the result subtype of an inherited subprogram need not
-correspond to any namable subtype;
+correspond to any @Chg{Version=[3],New=[nameable],Old=[namable]} subtype;
 there is still a perfectly good result subtype, though.
 @end{Extend83}
 
@@ -1185,8 +1192,7 @@ The constant-ness of loop parameters is specified in
 language-defined generic library package exists:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada],Child=[Iterator_Interfaces]}
-@key[generic]
+@ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada],Child=[Iterator_Interfaces]}@key[generic]
    @key[type] Cursor;
    @key[with function] Has_Element (Position : Cursor) @key[return] Boolean;
 @key[package] Ada.Iterator_Interfaces @key[is]
@@ -1381,7 +1387,7 @@ type.@PDefn2{Term=[expected type],Sec=[@SynI<iterable_>@nt{name}]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Text=[If the reserved word @key[reverse] appears,
-the iterator_specification is a @i<reverse iterator>;@Defn{reverse iterator}@Defn2{Term=[iterator],Sec=[reverse]}
+the @nt{iterator_specification} is a @i<reverse iterator>;@Defn{reverse iterator}@Defn2{Term=[iterator],Sec=[reverse]}
 otherwise it is a @i<forward iterator>.@Defn{forward iterator}@Defn2{Term=[iterator],Sec=[forward]}
 In a reverse generalized iterator, the
 @SynI<iterator_>@nt{name} shall be of a reversible iterator type.
@@ -1412,9 +1418,9 @@ In a generalized iterator, the nominal subtype of the loop parameter is
 the iterator cursor subtype. In an array component iterator or a
 container element iterator, if a @nt{subtype_indication} is present, it
 determines the nominal subtype of the loop parameter. In an array
-component iterator if a @nt{subtype_indication} is not present, the
+component iterator, if a @nt{subtype_indication} is not present, the
 nominal subtype of the loop parameter is the component subtype of the
-type of the @SynI{array_}@nt{name}. In a container element iterator if a
+type of the @SynI{array_}@nt{name}. In a container element iterator, if a
 @nt{subtype_indication} is not present, the nominal subtype of the loop
 parameter is the default element subtype for the type of the
 @SynI{iterable_}@nt{name}.]}
@@ -1516,7 +1522,9 @@ otherwise it uses the default variable indexing function.]}
 
 
 
-@Comment{@RMNewPage - For Ada 95 thru Ada 2005 versions}
+@RMNewPageVer{Version=[0]}@Comment{For printed version of Ada 95}
+@RMNewPageVer{Version=[1]}@Comment{For printed version of Ada 95 + TC1 RM}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledClause{Block Statements}
 
 @begin{Intro}

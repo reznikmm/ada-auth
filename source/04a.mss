@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:24 $}
+@Comment{$Date: 2011/11/01 05:34:02 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.121 $}
+@Comment{$Revision: 1.122 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -578,7 +578,7 @@ the tagged type visible at the point of the @nt<selected_component>.
 @Chg{Version=[3],New=[The subprogram shall not
 be an implicitly declared primitive operation of type @i<T> that overrides
 an inherited subprogram implemented by an entry or protected subprogram
-visible at the point of the selected component. ],Old=[]}The
+visible at the point of the @nt{selected_component}. ],Old=[]}The
 @nt<selected_component> denotes a view of this subprogram that omits the first
 formal parameter. This view is called a @i{prefixed view} of the subprogram,
 and the @nt{prefix} of the @nt<selected_component> (after any implicit
@@ -776,7 +776,7 @@ My_Object.Do_Something_Else (Flag => True);]}
 @end{DiffWord2005}
 
 
-@Comment{@RMNewPage@ChgNote{Only needed for Ada 2005 version} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledSubClause{Attributes}
 
 @begin{Intro}
@@ -1184,13 +1184,13 @@ named reference object.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[function] Find(C : @key[access] Container; Key : String) @key[return] Ref_Element;
-   -- @Examcom{Return a reference to an element of a container.}]}
+   -- @Examcom{Return a reference to an element of a container}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[...]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Find(C, "abc") := Element'(...);  -- @Examcom{Assign through a reference.}]}
+@ChgAdded{Version=[3],Text=[Find(C, "abc") := Element'(...);  -- @Examcom{Assign through a reference}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[-- @Examcom{This is equivalent to:}
@@ -1219,7 +1219,7 @@ may be specified:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Constant_Indexing@\This aspect shall be specified by
 a @nt{name} that denotes one or more functions declared immediately within the
-same declaration list in which @i<T> is declared. All of such functions shall
+same declaration list in which @i<T> is declared. All such functions shall
 have at least two parameters, the first of which is of type @i<T> or
 @i<T>'Class, or is an access-to-constant parameter with designated type @i<T> or
 @i<T>'Class.@AspectDefn{Constant_Indexing}]}
@@ -1231,7 +1231,7 @@ have at least two parameters, the first of which is of type @i<T> or
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Variable_Indexing@\This aspect shall be specified
 by a @nt{name} that denotes one or more functions declared immediately within
-the same declaration list in which @i<T> is declared. All of such functions
+the same declaration list in which @i<T> is declared. All such functions
 shall have at least two parameters, the first of which is of type @i<T> or
 @i<T>'Class, or is an access parameter with designated type @i<T> or @i<T>'Class.
 All of such functions shall have a return type that is a reference
@@ -1275,6 +1275,7 @@ of calling a function named by a Constant_Indexing or Variable_Indexing aspect.]
 
 @end{StaticSem}
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The Constant_Indexing or
@@ -1602,7 +1603,7 @@ for the meaning of @lquotes@;shall be a single ... type.@rquotes@;
 @ChgAdded{Version=[3],Text=[There are additional rules for each kind of
 aggregate. These aggregate rules are additive; a legal expression needs to
 satisfy all of the applicable rules. That means the rule given here must be
-satisfied even when it is syntactally possible to tell which specific kind of
+satisfied even when it is syntactically possible to tell which specific kind of
 aggregate is being used.]}
 @end{Ramification}
 @end{Resolution}
@@ -2159,7 +2160,7 @@ a record aggregate. Now we do.
 @end{Extend2005}
 
 
-@Comment{@RmNewPage - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledSubClause{Extension Aggregates}
 
 @begin{Intro}
@@ -3553,7 +3554,7 @@ access type],Old=[]}. Membership tests are allowed for all types.]
 The @i(tested type) of a membership test
 is@Chg{Version=[3],New=[],Old=[ the type of the @nt<range> or the type]}
 determined by the @Chg{Version=[3],New=[@nt<membership_choice>s of the
-@nt<membership_choice_list>. Either @nt{membership_choice}s of the
+@nt<membership_choice_list>. Either all @nt{membership_choice}s of the
 @nt{membership_choice_list} shall resolve to the same type, which is the tested
 type; or each @nt{membership_choice} shall be of an elementary type, and the
 tested type shall be covered by each of these elementary
@@ -4002,7 +4003,7 @@ can be null).
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
 @PDefn2{Term=[evaluation], Sec=(membership test)}
 For the evaluation of a membership test@Chg{Version=[3],New=[ using @key[in]
-whose @nt{membership_choice_list} has a single membership_choice],Old=[]},
+whose @nt{membership_choice_list} has a single @nt{membership_choice}],Old=[]},
 the @nt<simple_expression> and the
 @Chg{Version=[3],New=[@nt{membership_choice}],Old=[@nt<range> (if any)]} are
 evaluated in an arbitrary order@Chg{Version=[3],New=[; the result is the
@@ -4041,10 +4042,11 @@ membership test using @key(in)]} yields the result True if:
 
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0158-1]}
   @Chg{Version=[3],New=[The @nt{membership_choice} is a @nt{subtype_mark},
-  the],Old=[The]} tested type is scalar, and the value of the
-  @nt<simple_expression> belongs to the @Chg{Version=[3],New=[],Old=[given
-  @nt<range>, or the ]}range of the named subtype@Chg{Version=[3],New=[, and
-  the predicate of the named subtype evaluates to True.@Defn2{Term=[predicate evaluated],Sec=[membership]}],Old=[; or]}
+  the],Old=[The]} tested type is scalar, @Chg{Version=[3],New=[],Old=[and ]}the
+  value of the @nt<simple_expression> belongs to the
+  @Chg{Version=[3],New=[],Old=[given @nt<range>, or the ]}range of the
+  named subtype@Chg{Version=[3],New=[, and the predicate of the
+  named subtype evaluates to True.@Defn2{Term=[predicate evaluated],Sec=[membership]}],Old=[; or]}
 @begin{Ramification}
     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
     The scalar membership test only does a range check@Chg{Version=[3],New=[
@@ -4233,10 +4235,10 @@ conversions.],Old=[]}
 
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0123-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatiblities with Ada 2005}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
   Late and hidden overriding of equality for untagged record types is now
   prohibited. This is necessary to make composition of equality predictable.
-  It should always be possible to move the overridding to an earlier spot
+  It should always be possible to move the overriding to an earlier spot
   where it will be legal.]}
 @end{Incompatible2005}
 
@@ -4925,7 +4927,7 @@ a negative value is provided for the exponent.
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[A @nt{conditional_expression} selects for evaluation
-at most one of the enclosed @SynI<dependent_>@nt{expression}s, depending
+at most one of the enclosed @SynI<dependent_>@nt{expression}s, depending on
 a decision among the alternatives. One
 kind of @nt{conditional_expression} is the @nt{if_expression}, which selects for
 evaluation a @SynI<dependent_>@nt{expression} depending on the value of one or more
@@ -4993,7 +4995,7 @@ long as it is immediately surrounded by parentheses.]}
   by parentheses.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[The grammar mades the following directly legal:]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[The grammar makes the following directly legal:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}

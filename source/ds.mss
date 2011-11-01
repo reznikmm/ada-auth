@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.60 $ $Date: 2011/10/21 06:41:25 $ $Author: randy $ }
+@comment{ $Revision: 1.61 $ $Date: 2011/11/01 05:34:03 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2011/10/21 06:41:25 $}
+@Comment{$Date: 2011/11/01 05:34:03 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -264,7 +264,7 @@ program.]
 A @i{categorization pragma} is a library unit pragma
 (see @RefSecNum{Pragmas and Program Units})
 that @Chg{Version=[3],New=[specifies a corresponding @i{categorization aspect}.
-A cateogrization aspect ],Old=[]}restricts the declarations, child units, or
+A categorization aspect ],Old=[]}restricts the declarations, child units, or
 semantic dependences of the library unit to which it applies. A
 @i{categorized library unit} is a library unit @Chg{Version=[3],New=[that has a
 categorization aspect that is True],Old=[to which a categorization pragma
@@ -295,7 +295,8 @@ library @Chg{New=[unit],Old=[package or generic library package]} is called a
 Remote_Call_Interface @Chg{Version=[3],New=[aspect of the unit is
 True],Old=[pragma applies to it]}.]
 @Defn{normal library unit}
-A @i{normal library unit} is one to which no categorization
+A @i{normal library unit} is one @Chg{Version=[3],New=[for],Old=[to]}
+which no categorization
 @Chg{Version=[3],New=[aspect is True],Old=[pragma applies]}.
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
@@ -308,45 +309,68 @@ A @i{normal library unit} is one to which no categorization
 interface, but it cannot be a remote types or shared passive library unit.]}
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1],ARef=[AI05-0243-1]}
 @redundant[The various categories of library units and the associated
 restrictions are described in this clause and its subclauses. The categories are
 related hierarchically in that the library units of one category can depend
 semantically only on library units of that category or an earlier one, except
 that the body of a remote types or remote call interface library unit is
-unrestricted@Chg{Version=[3],New=[ and the declaration of a remote types or
+unrestricted@Chg{Version=[3],New=[, the declaration of a remote types or
 remote call interface library unit may depend on preelaborated normal library
-units that are mentioned only in private with clauses],Old=[]}.
+units that are mentioned only in private with clauses, and all categories can
+depend on limited views],Old=[]}.
 
-@Leading@;The overall hierarchy (including declared pure) is as follows:
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
+@Leading@;The overall hierarchy (including declared pure) is as
+follows@Chg{Version=[3],New=[ (with a lower-numbered category being earlier in
+the sense of the previous paragraph)],Old=[]}:
+@begin{Enumerate}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Declared Pure]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Shared Passive]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Remote Types]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Remote Call Interface]}
+
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],Text=[Normal (no restrictions)]}
+@end{Enumerate}
+@begin{NotIso}
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 7 through 11
+were deleted.>}]}@Comment{This message should be
+deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
 @begin{Description}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
-Declared Pure @\Can depend only on other declared
-pure library units@Chg{Version=[3],New=[ or  upon limited views],Old=[]};
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0243-1]}
+@ChgDeleted{Version=[3],Text=[Declared Pure @\Can depend only on other declared
+pure library units;]}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
-Shared Passive @\Can depend only on other shared passive
-    or declared pure library units@Chg{Version=[3],New=[, or upon
-    limited views],Old=[]};
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0243-1]}
+@ChgDeleted{Version=[3],Text=[Shared Passive @\Can depend only on other shared passive
+    or declared pure library units;]}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1],ARef=[AI05-0243-1]}
-Remote Types @\The declaration of the library unit can depend only
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0206-1],ARef=[AI05-0243-1]}
+@ChgDeleted{Version=[3],Text=[Remote Types @\The declaration of the library unit can depend only
     on other remote types library units,
-    or @Chg{Version=[3],New=[any],Old=[one]} of the
-    above@Chg{Version=[3],New=[ library unit categories, or limited views,
+    or one of the
+    above library unit categories, or limited views,
     or preelaborated normal library units that are mentioned
-    only in private with clauses],Old=[]};
-    the body of the library unit is unrestricted;
+    only in private with clauses;
+    the body of the library unit is unrestricted;]}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1],ARef=[AI05-0243-1]}
-Remote Call Interface @\The declaration of the library unit can depend only
-    on other remote call interfaces, or @Chg{Version=[3],New=[any],Old=[one]}
-    of the above@Chg{Version=[3],New=[ library unit categories, or limited views,
-    or preelaborated normal library units that are mentioned
-    only in private with clauses],Old=[]};
-    the body of the library unit is unrestricted;
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0206-1],ARef=[AI05-0243-1]}
+@ChgDeleted{Version=[3],Text=[Remote Call Interface @\The declaration of the library unit can depend only
+    on other remote call interfaces, or one
+    of the above;
+    the body of the library unit is unrestricted;]}
 
-Normal @\Unrestricted.
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0243-1]}
+@ChgDeleted{Version=[3],Text=[Normal @\Unrestricted.]}
 @end{Description}
 
 Declared pure and shared passive library units are preelaborated.
@@ -585,7 +609,7 @@ The form of a @nt{pragma} Remote_Types is as follows:
 
 @Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
 @Defn{remote types library unit}
-A@Chg{Version=[3],New=[ pragma Remote_Types is used to specify that a library unit is a],Old=[]}
+A@Chg{Version=[3],New=[ @nt{pragma} Remote_Types is used to specify that a library unit is a],Old=[]}
 @i{remote types library unit}@Chg{Version=[3],New=[,
 namely that the],Old=[ is a library unit to which the pragma]}
 Remote_Types
@@ -726,18 +750,17 @@ a primitive procedure with the Synchronization aspect specified unless the
 A value of a remote access-to-class-wide type shall be
 explicitly converted only to another remote access-to-class-wide type;
 
-@ChgRef{Version=[1],Kind=[Revised]}
 A value of a remote access-to-class-wide type shall be dereferenced
 (or implicitly converted to an anonymous access type)
 only as part of a dispatching call where the value designates
-a controlling operand of the call (see @RefSec{Remote Subprogram Calls})@Chg{New=[.],Old=[;]}
+a controlling operand of the call (see @RefSec{Remote Subprogram Calls});
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0101-1]}
 @ChgAdded{Version=[3],Text=[A controlling access result value for a primitive
 function with any controlling operands of the corresponding specific type shall
 either be explicitly converted to a remote access-to-class-wide type or be part
 of a dispatching call where the value designates a controlling operand of the
-call.]}
+call;]}
 
 @ChgRef{Version=[1],Kind=[Revised]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
@@ -931,7 +954,7 @@ A @nt{pragma} All_Calls_Remote is a library unit pragma.
 @Defn2{Term=[RCI],Sec=(package)}
 @Defn2{Term=[RCI],Sec=(generic)}
 @Defn{remote subprogram}
-A@Chg{Version=[3],New=[ pragma Remote_Call_Interface is used to specify that a
+A@Chg{Version=[3],New=[ @nt{pragma} Remote_Call_Interface is used to specify that a
 library unit is a],Old=[]} @i{remote call interface (RCI)}@Chg{Version=[3],New=[,
 namely that the],Old=[ is a library unit to which the pragma]}
 Remote_Call_Interface
@@ -1731,8 +1754,8 @@ Asynchronous is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
-InitialVersion=[0],@key{pragma} @prag(Asynchronous)(@Syn2{local_name});']}
+@DeletedPragmaSyn<Version=[3],InitialVersion=[0],@ChgDeleted{Version=[3],
+Text=[@key{pragma} @prag(Asynchronous)(@Syn2{local_name});]}>
 @end{Syntax}
 
 @begin{Legality}

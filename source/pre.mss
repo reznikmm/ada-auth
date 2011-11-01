@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:41 $}
+@Comment{$Date: 2011/11/01 05:34:05 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.46 $}
+@comment{$Revision: 1.47 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -67,8 +67,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Indefinite_Multiway_Trees @em @RefSecNum{The Generic Package Containers.Indefinite_Multiway_Trees}
 ), Old=()}@\@\@\Indefinite_Ordered_Maps @em @RefSecNum{The Generic Package Containers.Indefinite_Ordered_Maps}
 @\@\@\Indefinite_Ordered_Sets @em @RefSecNum{The Generic Package Containers.Indefinite_Ordered_Sets}
-@\@\@\Indefinite_Vectors @em @RefSecNum{The Generic Package Containers.Indefinite_Vectors}), Old=()}>@NewColumn@Comment{This should be conditional for version 3, but not with the current generator}
-@Noparanum@shrink<@Chg{Version=[2],New=[@Chg{Version=[3],New=[Standard (@i{...continued})
+@\@\@\Indefinite_Vectors @em @RefSecNum{The Generic Package Containers.Indefinite_Vectors}), Old=()}>@NewColumnVer{Version=[3]}@Noparanum@shrink<@Chg{Version=[2],
+New=[@Chg{Version=[3],New=[Standard (@i{...continued})
 @\Ada (@i{...continued})
 @\@\Containers (@i{...continued})
 @\@\@\Multiway_Trees @em @RefSecNum{The Generic Package Containers.Multiway_Trees}
@@ -81,8 +81,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\Unbounded_Synchronized_Queues
 @\@\@\@\@\@\@em @RefSecNum{The Generic Package Containers.Unbounded_Synchronized_Queues}
 ), Old=()}@\@\@\Vectors @em @RefSecNum{The Generic Package Containers.Vectors}
-], Old=()}@Comment[** Version=[2] only: >@NewColumn@Comment{This should be conditional for version 2, but not with the current generator}
-@Noparanum@shrink<**end]@Chg{Version=[2],New=[@Chg{Version=[3],New=[],Old=[Standard (@i{...continued})
+], Old=()}>@NewColumnVer{Version=[2]}@Noparanum@shrink<@Chg{Version=[2],
+New=[@Chg{Version=[3],New=[],Old=[Standard (@i{...continued})
 @\Ada (@i{...continued})
 ]}],Old=[]}@\@\Decimal @em @RefSecNum{The Package Decimal}
 @\@\Direct_IO @em @RefSecNum{The Generic Package Direct_IO}
@@ -112,8 +112,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\IO_Exceptions @em @RefSecNum{Exceptions in Input-Output}
 @Chg{Version=[3],New=(@\@\Iterator_Interfaces @em @RefSecNum{User-Defined Iterator Types}
 @\@\Locales @em @RefSecNum{The Package Locales}
-), Old=()}>@NewColumn@Comment{This should be conditional for version 3, but not with the current generator}
-@Noparanum@shrink<@Chg{Version=[3],New=[Standard (@i{...continued})
+), Old=()}>@NewColumnVer{Version=[3]}@Noparanum@shrink<@Chg{Version=[3],
+New=[Standard (@i{...continued})
 @\Ada (@i{...continued})
 ],Old=[]}@\@\Numerics @em @RefSecNum{The Numerics Packages}
 @Chg{Version=[2],New=(@\@\@\Complex_Arrays @em @RefSecNum{Complex Vectors and Matrices}
@@ -135,8 +135,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\Storage_IO @em @RefSecNum{The Generic Package Storage_IO}
 @\@\Streams @em @RefSecNum{The Package Streams}
 @\@\@\Stream_IO @em @RefSecNum{The Package Streams.Stream_IO}
-@Comment{** Version [0-2] only: >@NewColumn@Comment{This should be conditional for versions before 3, but not with the current generator}
-@Noparanum@shrink<**End}@Chg{Version=[3],New=[],Old=[Standard (@i{...continued})
+>@NewColumnVer{Version=[0]}@NewColumnVer{Version=[1]}@NewColumnVer{Version=[2]}@Noparanum@shrink<@Chg{Version=[3],
+New=[],Old=[Standard (@i{...continued})
 @\Ada (@i{...continued})
 ]}@\@\Strings @em @RefSecNum{The Package Strings}
 @\@\@\Bounded @em @RefSecNum{Bounded-Length String Handling}
@@ -167,8 +167,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\@\Wide_Wide_Strings @em @RefSecNum{String Encoding}
 ), Old=()}), Old=()}@\@\@\Wide_Bounded @em @RefSecNum{Wide_String Handling}
 @Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}),
-Old=()}>@NewColumn@Comment{This should be conditional for version 3, but not with the current generator}
-@Noparanum@shrink<@Chg{Version=[3],New=[Standard (@i{...continued})
+Old=()}>@NewColumnVer{Version=[3]}@Noparanum@shrink<@Chg{Version=[3],
+New=[Standard (@i{...continued})
 @\Ada (@i{...continued})
 @\@\Strings (@i{...continued})
 ],Old=[]}@\@\@\Wide_Fixed @em @RefSecNum{Wide_String Handling}
@@ -194,9 +194,9 @@ Old=()}>@NewColumn@Comment{This should be conditional for version 3, but not wit
 @Chg{Version=[2],New=(@\@\@\Generic_Dispatching_Constructor @em @RefSecNum{Tagged Types and Type Extensions}
 ), Old=()}@\@\Task_Attributes @em @RefSecNum{The Package Task_Attributes}
 @\@\Task_Identification @em @RefSecNum{The Package Task_Identification}
-@Chg{Version=[2],New=(@\@\Task_Termination @em @RefSecNum{The Package Task_Termination}), Old=()}@Comment{** Version [2] only: >
-@NewColumn@Comment{This should be conditional for version 2, but not with the current generator}
-@Noparanum@shrink<  **end}@Chg{Version=[2],New=[@Chg{Version=[3],New=[],Old=[Standard (@i{...continued})
+@Chg{Version=[2],New=(@\@\Task_Termination @em @RefSecNum{The Package Task_Termination}), Old=()}>
+@NewColumnVer{Version=[2]}@Noparanum@shrink<@Chg{Version=[2],
+New=[@Chg{Version=[3],New=[],Old=[Standard (@i{...continued})
 @\Ada (@i{...continued})
 ]}], Old=()}@\@\Text_IO @em @RefSecNum{The Package Text_IO}
 @Chg{Version=[2],New=(@\@\@\Bounded_IO @em @RefSecNum{Input-Output for Bounded Strings}
@@ -224,16 +224,14 @@ Old=()}>@NewColumn@Comment{This should be conditional for version 3, but not wit
 @\@\@\Wide_Wide_Bounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @\@\@\Wide_Wide_Unbounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}), Old=()}>
 
-@NewColumn@Comment{This should be conditional for version 3, but not with the current generator}
-@Noparanum@shrink<@\Interfaces @em @RefSecNum{The Package Interfaces}
+@NewColumnVer{Version=[3]}@Noparanum@shrink<@\Interfaces @em @RefSecNum{The Package Interfaces}
 @\@\C @em @RefSecNum{Interfacing with C and C++}
 @\@\@\Pointers @em @RefSecNum{The Generic Package Interfaces.C.Pointers}
 @\@\@\Strings @em @RefSecNum{The Package Interfaces.C.Strings}
 @\@\COBOL @em @RefSecNum{Interfacing with COBOL}
 @\@\Fortran @em @RefSecNum{Interfacing with Fortran}>
 
-@NewColumn@Comment{This should be conditional for version 3, but not with the current generator}
-@Noparanum@shrink<@\System @em @RefSecNum{The Package System}
+@NewColumnVer{Version=[3]}@Noparanum@shrink<@\System @em @RefSecNum{The Package System}
 @\@\Address_To_Access_Conversions @em @RefSecNum{The Package System.Address_To_Access_Conversions}
 @\@\Machine_Code @em @RefSecNum{Machine Code Insertions}
 @Chg{Version=[3],New=(@\@\Multiprocessors @em @RefSecNum{Multiprocessor Implementation}
@@ -287,8 +285,8 @@ denote nonoverlapping objects.
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0048-1]}
-@ChgAdded{Version=[3],Text=[For a descendant of a language-defined
-tagged type, the implementation
+@ChgAdded{Version=[3],Text=[If a descendent of a language-defined tagged
+type is declared, the implementation
 shall ensure that each inherited language-defined subprogram behaves as
 described in this International Standard. In particular, overriding
 a language-defined subprogram shall

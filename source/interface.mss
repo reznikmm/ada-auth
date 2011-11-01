@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.59 $ $Date: 2011/10/21 06:41:26 $ $Author: randy $ }
+@comment{ $Revision: 1.60 $ $Date: 2011/11/01 05:34:04 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:26 $}
+@Comment{$Date: 2011/11/01 05:34:04 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -84,11 +84,12 @@ environment.@AspectDefn{Link_Name}@AspectDefn{External_Name}],Old=[]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[The],Old=[A @nt{pragma}]} Convention
 @Chg{Version=[3],New=[aspect@AspectDefn{Convention} ],Old=[]}is used to
-specify that an Ada entity should use the conventions of another language.
+@Chg{Version=[3],New=[indicate],Old=[specify]}
+that an Ada entity should use the conventions of another language.
 It is intended primarily for types and @lquotes@;callback@rquotes@; subprograms.
 For example,
 @lquotes@;@Chg{Version=[3],New=[@key{with}],Old=[@key{pragma}]}
-Convention@Chg{Version=[3],New=[ => ],Old=[(]}Fortran@Chg{Version=[3],New=[],Old=[, Matrix)]};@rquotes@;
+Convention@Chg{Version=[3],New=[ => ],Old=[(]}Fortran@Chg{Version=[3],New=[],Old=[, Matrix);]}@rquotes@;
 @Chg{Version=[3],New=[on the declaration of an array type Matrix ],Old=[]}implies
 that Matrix should be represented according to the
 conventions of the supported Fortran implementation, namely
@@ -129,21 +130,21 @@ through 7 were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
 should be deleted if the paragraphs are ever renumbered.}
 @end{NotIso}
 
-@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
-InitialVersion=[0],@key{pragma} @prag(Import)(@*
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
+@DeletedPragmaSyn`Version=[3],InitialVersion=[0],@ChgDeleted{Version=[3],
+Text="@key{pragma} @prag(Import)(@*
 @ @ @ @ @ [Convention =>] @SynI{convention_}@Syn2{identifier}, [Entity =>] @Syn2{local_name}@*
-@ @ [, [External_Name =>] @SynI{string_}@Syn2{expression}] [, [Link_Name =>] @SynI{string_}@Syn2{expression}]);']}
+@ @ [, [External_Name =>] @SynI{string_}@Syn2{expression}] [, [Link_Name =>] @SynI{string_}@Syn2{expression}]);"}'
 
-@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
-InitialVersion=[0],@key{pragma} @prag(Export)(@*
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
+@DeletedPragmaSyn`Version=[3],InitialVersion=[0],@ChgDeleted{Version=[3],
+Text="@key{pragma} @prag(Export)(@*
 @ @ @ @ @ [Convention =>] @SynI{convention_}@Syn2{identifier}, [Entity =>] @Syn2{local_name}@*
-@ @ [, [External_Name =>] @SynI{string_}@Syn2{expression}] [, [Link_Name =>] @SynI{string_}@Syn2{expression}]);']}
+@ @ [, [External_Name =>] @SynI{string_}@Syn2{expression}] [, [Link_Name =>] @SynI{string_}@Syn2{expression}]);"}'
 
-@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
-InitialVersion=[0],@key{pragma} @prag(Convention)([Convention =>] @SynI{convention_}@Syn2{identifier},[Entity =>] @Syn2{local_name});']}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
+@DeletedPragmaSyn`Version=[3],InitialVersion=[0],@ChgDeleted{Version=[3],
+Text="@key{pragma} @prag(Convention)([Convention =>] @SynI{convention_}@Syn2{identifier},[Entity =>] @Syn2{local_name});"}'
 
 @PragmaSyn`@key{pragma} @prag(Linker_Options)(@SynI{string_}@Syn2{expression});'
 
@@ -364,10 +365,10 @@ aspect, if any], Old=[convention specified in the corresponding pragma]}.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[The @nt{aspect_definition} (if any) used to directly
-specify an],Old=[The external name and link name @i{string}_@nt[expression]s
+specify an],Old=[The external name and link name @SynI{string_}@nt[expression]s
 of a @nt{pragma}]} Import@Chg{Version=[3],New=[,],Old=[ or]} Export,
 @Chg{Version=[3],New=[External_Name, or Link_Name aspect shall be a static
-@nt{expression}. The],Old=[and the]} @SynI[string]_@nt[expression]
+expression. The],Old=[and the]} @SynI[string_]@nt[expression]
 of a @nt[pragma] Linker_Options@Chg{Version=[3],New=[],Old=[,]} shall be
 static.@Chg{Version=[3],New=[ An External_Name or Link_Name aspect shall be
 specified only for an entity that is either imported or exported.],Old=[]}
@@ -867,13 +868,14 @@ precision, respectively.
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00204-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[Support for interfacing to any foreign language is
 optional. However, an implementation shall not provide any
 @Chg{Version=[3],New=[aspect, ],Old=[]}attribute, library
 unit, or pragma having the same name as an
 @Chg{Version=[3],New=[aspect, ],Old=[]}attribute, library unit, or pragma
-(respectively) specified in the following clauses of this Annex unless the
+(respectively) specified in the @Chg{Version=[3],New=[],Old=[following ]}clauses
+of this Annex unless the
 provided construct is either as specified in those clauses or is more limited
 in capability than that required by those clauses. A program that attempts to
 use an unsupported capability of this Annex shall either be identified by the
@@ -972,13 +974,13 @@ Old=[Interfacing with C]}
 @Defn{C interface}
 The facilities relevant to interfacing with
 the C language @Chg{Version=[2],New=[and the corresponding subset of
-the C++ language ],Old=[]}are the package Interfaces.C and its children@Chg{Version=[3],New=[, and],Old=[;
+the C++ language ],Old=[]}are the package Interfaces.C and its children@Chg{Version=[3],New=[, and ],Old=[;
 @Chg{New=[],Old=[and ]}]}support for @Chg{Version=[3],New=[specifying ],Old=[]}the
 @Chg{Version=[3],New=[],Old=[Import, Export, and]}
 Convention @Chg{Version=[3],New=[aspect],Old=[pragmas]}
-with @Chg{Version=[3],New=[@SynI{convention}_@nt{identifier}s],Old=[@SynI{convention}_@nt{identifier}]}
+with @Chg{Version=[3],New=[@SynI{convention_}@nt{identifier}s],Old=[@SynI{convention_}@nt{identifier}]}
 C@Chg{New=[@Chg{Version=[3],New=[ and],Old=[; and support for the Convention
-pragma with @i{convention}_@nt{identifier}]} C_Pass_By_Copy],Old=[]}.
+pragma with @SynI{convention_}@nt{identifier}]} C_Pass_By_Copy],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00376-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0262-1]}
@@ -1503,7 +1505,7 @@ The C Interface packages support calling such functions.
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0059],ARef=[AI95-00131-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[1],Text=[@Chg{Version=[3],New=[The],Old=[A]} Convention
-@Chg{Version=[3],New=[aspect],Old=[pragma]} with @i{convention}_@nt{identifier}
+@Chg{Version=[3],New=[aspect],Old=[pragma]} with @SynI{convention_}@nt{identifier}
 C_Pass_By_Copy shall only be
 @Chg{Version=[3],New=[specified for],Old=[applied to]} a type.]}
 
@@ -1529,11 +1531,11 @@ then it is also C-compatible.]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 An implementation shall support @Chg{Version=[3],New=[specifying
 aspect],Old=[pragma]} Convention
-with a C @i{convention}_@nt{identifier} for a
+with a C @SynI{convention_}@nt{identifier} for a
 C-eligible type (see @refsecnum(Interfacing Aspects))@Chg{New=[. An
 implementation shall support @Chg{Version=[3],New=[specifying
 aspect],Old=[pragma]} Convention with a C_Pass_By_Copy
-@i{convention}_@nt{identifier} for a C_Pass_By_Copy-eligible type.],Old=[]}
+@SynI{convention_}@nt{identifier} for a C_Pass_By_Copy-eligible type.],Old=[]}
 @end{ImplReq}
 
 @begin{ImplPerm}
@@ -2367,8 +2369,7 @@ Some_Pointer : Pointer := Some_Array(0)'Access;
 
 
 
-@Comment{TBD:---@LabeledAddedRevisedClause{Version=[3],OldVersion=[2],New=[Unchecked Union Types],Old=[Pragma Unchecked_Union]}}
-@LabeledAddedSubClause{Version=[3],Name=[Unchecked Union Types]}
+@LabeledRevisedSubClause{Version=[3],InitialVersion=[2],New=[Unchecked Union Types],Old=[Pragma Unchecked_Union]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
@@ -2400,7 +2401,8 @@ should be deleted if the paragraphs are ever renumbered.}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=`@DeletedPragmaSyn`Version=[3],InitialVersion=[2],@key{pragma} @prag{Unchecked_Union} (@Syni<first_subtype_>@Syn2<local_name>);'',Old=[]}]}
+@DeletedPragmaSyn<Version=[3],InitialVersion=[2],@ChgDeleted{Version=[3],
+Text=[@Chg{Version=[2],New=[@key{pragma} @prag{Unchecked_Union} (@Syni<first_subtype_>@Syn2<local_name>);],Old=[]}]}>
 
 @end{Syntax}
 
@@ -2688,7 +2690,7 @@ Y : Integer := X.F2; -- @RI[erroneous]]}
   and eliminated generic contract issues.]}
 @end{DiffWord2005}
 
-@Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledClause{Interfacing with COBOL}
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
@@ -2702,7 +2704,7 @@ and support for
 @Chg{Version=[3],New=[specifying ],Old=[]}the
 @Chg{Version=[3],New=[],Old=[Import, Export and ]}Convention
 @Chg{Version=[3],New=[aspect],Old=[pragmas]} with
-@i{convention}_@nt{identifier} COBOL.
+@SynI{convention_}@nt{identifier} COBOL.
 
 @Leading@;The COBOL interface package supplies several sets of facilities:
 @begin{itemize}
@@ -3366,7 +3368,7 @@ are the package Interfaces.Fortran and support for
 @Chg{Version=[3],New=[specifying ],Old=[]}the
 @Chg{Version=[3],New=[],Old=[Import, Export and ]}Convention
 @Chg{Version=[3],New=[aspect],Old=[pragmas]} with
-@i{convention}_@nt{identifier} Fortran.
+@SynI{convention_}@nt{identifier} Fortran.
 
 The package Interfaces.Fortran defines Ada types whose representations are
 identical to the default representations of the Fortran intrinsic types

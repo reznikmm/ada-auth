@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.69 $ $Date: 2011/10/21 06:41:26 $ $Author: randy $ }
+@comment{ $Revision: 1.70 $ $Date: 2011/11/01 05:34:05 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2011/10/21 06:41:26 $}
+@Comment{$Date: 2011/11/01 05:34:05 $}
 
 @LabeledClause{String Handling}
 
@@ -72,7 +72,7 @@ common to the string handling packages.
 
 
 
-@Comment{@RmNewPage  Insert page break so printed Ada 95 w/ Corr RM looks better.}
+@RMNewPageVer{Version=[1]}@Comment{Insert page break so printed Ada 95 w/ Corr RM looks better.}
 @LabeledSubClause{The Package Strings.Maps}
 @begin{Intro}
 The package Strings.Maps defines the types, operations, and other
@@ -2287,12 +2287,14 @@ The Element, Replace_Element, and Slice subprograms have the same effect
 as the corresponding bounded-length string subprograms.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00301-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[The function Unbounded_Slice returns the slice at
 positions Low through High in the string represented by Source as an
 Unbounded_String. The procedure Unbounded_Slice sets Target to the
 Unbounded_String representing the slice at positions Low through High in the
-string represented by Source. Both routines propagate Index_Error if Low >
-Length(Source)+1 or High > Length(Source).]}
+string represented by Source. Both
+@Chg{Version=[3],New=[subprograms],Old=[routines]} propagate Index_Error
+if Low > Length(Source)+1 or High > Length(Source).]}
 
 Each of the functions "=", "<", ">", "<=", and ">="
 returns the same result as the corresponding String
@@ -2441,7 +2443,7 @@ character mapping in Characters.Handling
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0114-1]}
 @ChgAdded{Version=[3],Text=[There are certain characters which are defined to be
 lower case letters by ISO 10646 and are therefore allowed in identifiers, but
-are not considered lower case letters by Ada.Sttrings.Maps.Constants.]}
+are not considered lower case letters by Ada.Strings.Maps.Constants.]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3291,7 +3293,7 @@ Strings.Fixed.Less_Case_Insensitive has the following declaration:]}
 @ChgAdded{Version=[3],Text=[@key[with] Ada.Strings.Less_Case_Insensitive;
 @key[function] Ada.Strings.Fixed.Less_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Fixed],Child=[Less_Case_Insensitive]}
    (Left, Right : String) @key[return] Boolean
-   @key[renames] Ada.Strings.Less_Case_Insensitive;
+      @key[renames] Ada.Strings.Less_Case_Insensitive;
 @key[pragma] Pure(Less_Case_Insensitive);]}
 @end{Example}
 
@@ -3385,23 +3387,23 @@ the following declarations:]}
 @ChgAdded{Version=[3],Text=[   @AdaExcDefn{Encoding_Error} : @key[exception];]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_8}    : @key[constant] String :=
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_8}    : @key[constant] UTF_8_String :=
                 Character'Val(16#EF#) &
                 Character'Val(16#BB#) &
                 Character'Val(16#BF#);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_16BE} : @key[constant] String :=
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_16BE} : @key[constant] UTF_String :=
                 Character'Val(16#FE#) &
                 Character'Val(16#FF#);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_16LE} : @key[constant] String :=
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_16LE} : @key[constant] UTF_String :=
                 Character'Val(16#FF#) &
                 Character'Val(16#FE#);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_16}   : @key[constant] Wide_String :=
+@ChgAdded{Version=[3],Text=[   @AdaObjDefn{BOM_16}   : @key[constant] UTF_16_Wide_String :=
                (1 => Wide_Character'Val(16#FEFF#));]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3428,12 +3430,12 @@ the following declarations:]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Convert} (Item          : UTF_String;
                      Input_Scheme  : Encoding_Scheme;
                      Output_BOM    : Boolean := False)
-   @key[return] UTF_16_Wide_String;]}
+      @key[return] UTF_16_Wide_String;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Convert} (Item          : UTF_8_String;
                      Output_BOM    : Boolean := False)
-   @key[return] UTF_16_Wide_String;]}
+      @key[return] UTF_16_Wide_String;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Convert} (Item          : UTF_16_Wide_String;
@@ -3465,7 +3467,7 @@ the following declarations:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encode} (Item       : String;
                     Output_BOM : Boolean  := False)
-   @key[return] UTF_16_Wide_String;]}
+      @key[return] UTF_16_Wide_String;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Decode} (Item         : UTF_String;
@@ -3497,7 +3499,7 @@ the following declarations:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encode} (Item       : Wide_String;
                     Output_BOM : Boolean  := False)
-   @key[return] UTF_16_Wide_String;]}
+      @key[return] UTF_16_Wide_String;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Decode} (Item         : UTF_String;
@@ -3529,7 +3531,7 @@ the following declarations:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encode} (Item       : Wide_Wide_String;
                     Output_BOM : Boolean  := False)
-   @key[return] UTF_16_Wide_String;]}
+      @key[return] UTF_16_Wide_String;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Decode} (Item         : UTF_String;
@@ -3565,15 +3567,36 @@ containing a sequence of values encoded in UTF-16.]}
 @ChgAdded{Version=[3],Text=[The BOM_8, BOM_16BE, BOM_16LE, and BOM_16 constants
 correspond to values used at the start of a string to indicate the encoding.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
-@ChgAdded{Version=[3],Text=[For all Convert and Decode functions, an initial BOM
-in the input that matches the expected encoding scheme is ignored, and a
-different initial BOM causes Encoding_Error to be propagated.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[Each of the Convert and Encode functions returns a UTF_String (respectively
+UTF_8_String and UTF_16_String) value whose characters have position values
+that correspond to the encoding of the Item parameter according to the
+encoding scheme required by the function or specified by its Output_Scheme
+parameter. For UTF_8, no overlong encoding is returned. A BOM is included
+at the start of the returned string if the Output_BOM parameter is set to
+True. The lower bound of the returned string is 1.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
-@ChgAdded{Version=[3],Text=[For all Convert and Encode functions, a BOM is
-included at the start of the output string if the Output_BOM parameter is set to
-True.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[Each of the Encode functions takes a String,
+Wide_String, or Wide_Wide_String Item parameter that is assumed to be an array
+of unencoded characters. Each of the Convert functions takes a UTF_String
+(respectively UTF_8_String and UTF_16_String) Item parameter that is assumed to
+contain characters whose position values correspond to a valid encoding sequence
+according to the encoding scheme required by the function or specified by its
+Input_Scheme parameter.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[Each of the Decode functions takes a UTF_String
+(respectively UTF_8_String and UTF_16_String) Item parameter which is assumed to
+contain characters whose position values correspond to a valid encoding sequence
+according to the encoding scheme required by the function or specified by its
+Input_Scheme parameter, and returns the corresponding String, Wide_String, or
+value. The lower bound of the returned string is 1.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[For each of the Convert and Decode functions, an
+initial BOM in the input that matches the expected encoding scheme is ignored,
+and a different initial BOM causes Encoding_Error to be propagated.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The exception Encoding_Error is also propagated in the following
@@ -3613,32 +3636,6 @@ situations:]}
     whose position is 16#FFFE# or 16#FFFF# are also invalid because they
     conflict with BOM codes.]}
 @end{Itemize}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
-@ChgAdded{Version=[3],Text=[Each of the Convert and Encode functions returns a
-UTF_String (respectively UTF_8_String and UTF_16_String) value whose characters
-have position values that correspond to the encoding of the Item parameter
-according to the encoding scheme required by the function or specified by its
-Output_Scheme parameter. For UTF_8, no overlong encoding is returned. The lower
-bound of the returned string is 1.]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[Each of the Decode functions takes a UTF_String
-(respectively UTF_8_String and UTF_16_String) Item parameter that is
-assumed to contain characters whose position
-values correspond to a valid encoding sequence according to the
-encoding scheme required by the function or specified by its
-Input_Scheme parameter, and returns the corresponding String, Wide_String, or
-Wide_Wide_String value. The lower bound of the returned string is 1.]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[Each of the Encode functions takes a String,
-Wide_String, or Wide_Wide_String Item parameter that is assumed to be an array
-of unencoded characters. Each of the Convert functions takes a UTF_String
-(respectively UTF_8_String and UTF_16_String) Item parameter that is assumed to
-contain characters whose position values correspond to a valid encoding sequence
-according to the encoding scheme required by the function or specified by its
-Input_Scheme parameter.]}
 
 @begin{DescribeCode}
 @begin{Example}

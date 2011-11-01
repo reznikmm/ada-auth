@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:25 $}
+@Comment{$Date: 2011/11/01 05:34:03 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.119 $}
+@Comment{$Revision: 1.120 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -961,8 +961,8 @@ subprograms @Chg{Version=[3],New=[are determined
 by],Old=[from]} its ancestor type@Chg{Version=[2],New=[ and its progenitor
 types (if any)],Old=[]}, in the same way that@Chg{Version=[3],New=[ those
 of],Old=[]} a record extension @Chg{Version=[3],New=[are determined
-by those of its ancestor],Old=[inherits components and user-defined primitive
-subprograms from its parent]} type@Chg{Version=[2],New=[ and its progenitor
+by those of],Old=[inherits components and user-defined primitive
+subprograms from]} its parent type@Chg{Version=[2],New=[ and its progenitor
 types],Old=[]}
 (see @RefSecNum{Derived Types and Classes}@Chg{Version=[3],New=[ and
 @RefSecNum{Private Operations}],Old=[]}).
@@ -1557,7 +1557,7 @@ are also defined for discriminants and inherited components.
    Null_Key : @key[constant] Key := Key'First;
 @key[end] Key_Manager;
 
-
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @key[package] @key[body] Key_Manager @key[is]
    Last_Key : Key := Null_Key;
    @key[procedure] Get_Key(K : @key[out] Key) @key[is]
@@ -1750,7 +1750,7 @@ following places, on the specified object(s):@Defn2{Term=[assertion policy],
   @ChgAdded{Version=[3],Text=[After assigning to a view conversion, outside the
     immediate scope of @i<T>, that converts from @i<T> or one or more record
     extensions (and no private extensions) of @i<T> to an ancestor of type
-    @i<T>, a check is performed on the part of the object that is of type T;
+    @i<T>, a check is performed on the part of the object that is of type @i<T>;
     similarly, for passing a view conversion as an @key[out] or @key[in out]
     parameter outside the immediate scope of @i<T>, this check is performed upon
     successful return;]}
@@ -1883,7 +1883,7 @@ a @i{deferred constant}.
 @PDefn2{Term=[requires a completion], Sec=(deferred constant declaration)}
 A deferred constant declaration requires a completion,
 which shall be a full constant declaration
-(called the @i{full declaration} of the deferred constant)@Chg{Version=[3],New=[
+(called the @i{full declaration} of the deferred constant)@Chg{Version=[3],New=[,
 @Redundant[unless the Import aspect (see @RefSecNum{Interfacing Aspects})
 is True for the deferred constant declaration]],Old=[,
 or a @nt{pragma} Import (see @RefSecNum(Interface to Other Languages))]}.
@@ -2205,10 +2205,9 @@ and ]}the task.
 @ChgAdded{Version=[2],Type=[Leading],Text=[In the following contexts,
 an @nt{expression} of a limited
 type is not permitted unless it is an @nt{aggregate}, a @nt{function_call},
-@Chg{Version=[3],New=[],Old=[or ]}a parenthesized
-@nt{expression}@Chg{Version=[3],New=[,],Old=[]} or
+@Chg{Version=[3],New=[],Old=[or ]}a parenthesized @nt{expression} or
 @nt{qualified_expression} whose operand
-is permitted by this rule@Chg{Version=[3],New=[ or a @nt{conditional_expression}
+is permitted by this rule@Chg{Version=[3],New=[, or a @nt{conditional_expression}
 all of whose @Syni{dependent_}@nt{expression}s are permitted by this
 rule],Old=[]}:]}
 @begin{Itemize}
@@ -2744,7 +2743,7 @@ The type Limited_Controlled is like Controlled, except
 that it is limited and it lacks the primitive subprogram Adjust.
 @begin{Discussion}
 We say @lquotes@;nonlimited controlled type@rquotes@ (rather than just
-@lquotes@;controlled type@rquotes@;; when we want to talk about descendants
+@lquotes@;controlled type@rquotes@;;) when we want to talk about descendants
 of Controlled only.
 @end{Discussion}
 @begin{Reason}
@@ -3154,7 +3153,7 @@ built in place:]}
 @begin{Itemize}
     @ChgRef{Version=[3],Kind=[Added]}
     @ChgAdded{Version=[3],Text=[Upon successful completion of the return
-    statement or @nt{aggregate}, the anonymous object "mutates into" the
+    statement or @nt{aggregate}, the anonymous object @i<mutates into> the
     newly-created object; that is, the anonymous object ceases to exist, and the
     newly-created object appears in its place.@Defn{mutates}]}
 
@@ -3538,7 +3537,7 @@ Controlled types and user-defined finalization are new to Ada 95.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Changed @ldquote@;built in place@rdquote
   to @RuntimeTitle and centralized the rules here. This eliminates the
   fiction that built in place is just a combination of a permission and
-  a requirement; it clearly has noticable semantic effects. This wording
+  a requirement; it clearly has noticeable semantic effects. This wording
   change is not intended to change the semantics of any correct Ada program.]}
 @end{DiffWord2005}
 
@@ -3709,7 +3708,7 @@ For the @i{finalization} of an object:
     @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0099-1]}
     @ChgAdded{Version=[3],Text=[We say @ldquote@;full type@rdquote in this
     and the following bullets as privacy is ignored for the purpose of
-    determing the finalization actions of an object; that is as expected
+    determining the finalization actions of an object; that is as expected
     for @RunTimeTitle rules.]}
   @end{Reason}
 
@@ -4035,7 +4034,7 @@ of the result.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
 @ChgAdded{Version=[3],Text=[We don't do a similar change for other kinds of
 calls, because the extended lifetime of the parameters adds no value, but could
-consistute a storage leak. For instance, such an anonymous object created by a
+constitute a storage leak. For instance, such an anonymous object created by a
 procedure call in the elaboration part of a package body would have to live
 until the end of the program, even though it could not be used after the
 procedure returns (other than via Unchecked_Access).]}

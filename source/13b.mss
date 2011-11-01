@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:25 $}
+@Comment{$Date: 2011/11/01 05:34:03 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.88 $}
+@Comment{$Revision: 1.89 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -2199,7 +2199,7 @@ the following is a possible use:
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0111-3]}
 @Chg{Version=[3],New=[My_Mark := ],Old=[]}Mark(@Chg{Version=[3],New=[Our_Pool],Old=[MR_Pool]});
-... --@RI{ Allocate objects using @lquotes@;@key[new] Designated(...)@rquotes@;.}
+... --@RI{ Allocate objects using @lquotes@;@key[new] @Chg{Version=[3],New=[(My_Mark) ],Old=[]}Designated(...)@rquotes@;.}
 Release(@Chg{Version=[3],New=[My_Mark],Old=[MR_Pool]}); --@RI{ @Chg{Version=[3],New=[Finalize objects and reclaim],Old=[Reclaim the]} storage.}
 @end{Example}
 @end{Examples}
@@ -2307,7 +2307,7 @@ useful in writing user-defined pool types.]
 For @PrefixType{every subtype S},
 the following @Chg{Version=[3],New=[attributes are],Old=[attribute is]} defined:
 @begin{Description}
-@ChgAttribute{Version=[2],Kind=[Revised],ChginAnnex=[T],
+@ChgAttribute{Version=[3],Kind=[Revised],ChginAnnex=[T],
   Leading=<F>, Prefix=<S>, AttrName=<Max_Size_In_Storage_Elements>,
   ARef=[AI95-00256-01],ARef=[AI95-00416-01],ARef=[AI05-0193-1],
   Text=<Denotes the maximum value for Size_In_Storage_Elements
@@ -2373,7 +2373,7 @@ same pool.]}
 
 
 
-@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledSubClause{Unchecked Storage Deallocation}
 
 @begin{Intro}
@@ -2530,7 +2530,7 @@ is not reclaimed prior to task termination.
 @Defn{nonexistent}@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Evaluating a name that denotes a nonexistent object@Chg{Version=[3],
 New=[, or a protected subprogram or subprogram renaming whose
-associated object (if any) is nonexistent ],Old=[]}is erroneous.
+associated object (if any) is nonexistent, ],Old=[]}is erroneous.
 The execution of a call to an instance of Unchecked_Deallocation is
 erroneous if the object was created other than by an @nt<allocator> for
 an access type whose pool is Name'Storage_Pool.
@@ -2642,8 +2642,10 @@ is as follows:
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
-@Chg{Version=[3],New=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Default_Storage_Pool> (@Syn2{storage_pool_indicator});'],
-Old=[@PragmaSyn`@key{pragma} @prag(Controlled)(@SynI{first_subtype_}@Syn2{local_name});']}
+@AddedPragmaSyn<Version=[3],@Chg{Version=[3],
+New=[@key{pragma} @prag<Default_Storage_Pool> (@Syn2{storage_pool_indicator});],Old=[]}>
+@DeletedPragmaSyn<Version=[3],InitialVersion=[0],@Chg{Version=[3],New=[],
+Old=[@key{pragma} @prag(Controlled)(@SynI{first_subtype_}@Syn2{local_name});]}>
 
 @begin{Discussion}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
@@ -3147,7 +3149,7 @@ Allocate_from_Subpool.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Typically, the pool implementer will not override
-  Allocate. In the canoncial definition of the language, it will never be called
+  Allocate. In the canonical definition of the language, it will never be called
   for a pool that supports subpools (there is an @ImplPermName below that allows
   it to be called in certain rare cases).]}
 @end{Discussion}
@@ -3616,7 +3618,7 @@ complete implementation of the classic Mark/Release pool using subpools:]}
 certain restrictions.@Chg{Version=[3],New=[ A @nt{pragma} Profile expresses the
 user's intent to abide by a set of Restrictions or other specified run-time
 policies.],Old=[]}
-@Chg{Version=[3],New=[This],Old=[These]} may facilitate the construction of
+@Chg{Version=[3],New=[These],Old=[This]} may facilitate the construction of
 simpler run-time environments.]
 @end{Intro}
 
@@ -3751,7 +3753,8 @@ provided that every execution of the partition would violate the restriction.]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Profile> (@SynI{profile_}@Syn2{identifier} {, @SynI{profile_}@Syn2{pragma_argument_association}});''}
+@AddedPragmaSyn{Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Profile> (@SynI{profile_}@Syn2{identifier} {, @SynI{profile_}@Syn2{pragma_argument_association}});]}}
 
 @end{Syntax}
 
@@ -3840,14 +3843,13 @@ use of the more efficient and safe one.
 @end{DiffWord2005}
 
 
-@Comment{TBD:---@LabeledAddedRevisedClause{Version=[3],OldVersion=[2],New=[Language-Defined Restrictions and Profiles],Old=[Language-Defined Restrictions]}}
-@LabeledAddedSubclause{Version=[3], Name=[Language-Defined Restrictions and Profiles]}
+@LabeledRevisedSubClause{Version=[3],InitialVersion=[2],New=[Language-Defined Restrictions and Profiles],Old=[Language-Defined Restrictions]}
 
 @begin{StaticSem}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00257-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The following
-@SynI{restriction_}@nt{identifier}s are language-defined (additional
+@SynI{restriction_}@nt{identifier}s are language defined (additional
 restrictions are defined in the Specialized Needs Annexes):]}
 
 @begin{Description}
@@ -4419,7 +4421,7 @@ followed.]}]}
 @end{Itemize}
 @end{ImplAdvice}
 
-@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @begin{StaticSem}
 
 For @PrefixType{every subtype S of a specific type @i(T)},
@@ -4680,8 +4682,8 @@ Old=[Unless overridden by an @nt<attribute_definition_clause>, these
 subprograms execute as follows:]}
 
 @begin{TheProof}
-  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0192-1]}
-  @ChgAdded{Version=[3],Text=[See the note following the inheritancee rules for
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0192-1]}
+  @ChgAdded{Version=[3],Text=[See the note following the inheritance rules for
   the Write attribute, above.]}
 @end{TheProof}
 
@@ -5097,7 +5099,8 @@ determined by the rules for inheriting primitive subprograms (see
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0007-1]}
 @ChgAdded{Version=[2],Text=[For an @nt{attribute_definition_clause} specifying
-one of these attributes, the subtype of the Item parameter shall be the
+one of these attributes, the subtype of the
+@Chg{Version=[3],New=[@i<Item>],Old=[Item]} parameter shall be the
 @Chg{Version=[3],New=[first subtype or the ],Old=[]}base
 subtype if scalar, and the first subtype
 @Chg{Version=[3],New=[if not scalar],Old=[otherwise]}. The same rule

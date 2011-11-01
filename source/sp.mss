@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.66 $ $Date: 2011/10/21 06:41:26 $ $Author: randy $ }
+@comment{ $Revision: 1.67 $ $Date: 2011/11/01 05:34:04 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2011/10/21 06:41:26 $}
+@Comment{$Date: 2011/11/01 05:34:04 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -410,8 +410,8 @@ should be deleted if the paragraphs are ever renumbered.}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
-@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
-InitialVersion=[0],@key{pragma} @prag(Interrupt_Handler)(@SynI{handler_}@Syn2{name});']}
+@DeletedPragmaSyn<Version=[3],InitialVersion=[0],@ChgDeleted{Version=[3],
+Text=[@key{pragma} @prag(Interrupt_Handler)(@SynI{handler_}@Syn2{name});]}>
 
 @begin{SyntaxText}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
@@ -420,8 +420,8 @@ InitialVersion=[0],@key{pragma} @prag(Interrupt_Handler)(@SynI{handler_}@Syn2{na
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
-@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
-InitialVersion=[0],@key{pragma} @prag(Attach_Handler)(@SynI{handler_}@Syn2{name}, @Syn2{expression});']}
+@DeletedPragmaSyn<Version=[3],InitialVersion=[0],@ChgDeleted{Version=[3],
+Text=[@key{pragma} @prag(Attach_Handler)(@SynI{handler_}@Syn2{name}, @Syn2{expression});]}>
 @end{Syntax}
 
 @begin{Resolution}
@@ -472,7 +472,7 @@ inherited.]@AspectDefn{Attach_Handler}]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0033-1],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[If either the],Old=[The]} Attach_Handler
-@Chg{Version=[3],New=[or Interrupt_Handler aspect are specifed for a
+@Chg{Version=[3],New=[or Interrupt_Handler aspect are specified for a
 protected procedure, the],Old=[pragma is only allowed immediately within the
 @nt{protected_definition} where the corresponding subprogram is declared.
 The]} corresponding @nt{protected_@!type_@!declaration}
@@ -803,7 +803,7 @@ a protected procedure that is an interrupt handler.
 
 @Leading@Keepnext@;The following language-defined packages exist:
 @begin{example}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0167-1]}
 @key{with} System;@ChildUnit{Parent=[Ada],Child=[Interrupts]}@Chg{Version=[3],New=[
 @key{with} System.Multiprocessors;],Old=[]}
 @key[package] Ada.Interrupts @key[is]
@@ -835,11 +835,11 @@ a protected procedure that is an interrupt handler.
    @key[procedure] @AdaSubDefn{Detach_Handler}
       (Interrupt : @key[in] Interrupt_Id);
 
-   @key[function] @AdaSubDefn{Reference}(Interrupt : Interrupt_Id)
+   @key[function] @AdaSubDefn{Reference} (Interrupt : Interrupt_Id)
       @key{return} System.Address;
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_CPU}(Interrupt : Interrupt_Id)
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0167-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_CPU} (Interrupt : Interrupt_Id)
       @key{return} System.Multiprocessors.CPU_Range;]}
 
 @key[private]
@@ -1315,20 +1315,20 @@ Volatile, Atomic_Components, and Volatile_Components is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
-InitialVersion=[0],@key{pragma} @prag(Atomic)(@Syn2{local_name});']}
+@DeletedPragmaSyn<Version=[3],InitialVersion=[0],@ChgDeleted{Version=[3],
+Text=[@key{pragma} @prag(Atomic)(@Syn2{local_name});]}>
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
-InitialVersion=[0],@key{pragma} @prag(Volatile)(@Syn2{local_name});']}
+@DeletedPragmaSyn<Version=[3],InitialVersion=[0],@ChgDeleted{Version=[3],
+Text=[@key{pragma} @prag(Volatile)(@Syn2{local_name});]}>
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
-InitialVersion=[0],@key{pragma} @prag(Atomic_Components)(@SynI{array_}@Syn2{local_name});']}
+@DeletedPragmaSyn<Version=[3],InitialVersion=[0],@ChgDeleted{Version=[3],
+Text=[@key{pragma} @prag(Atomic_Components)(@SynI{array_}@Syn2{local_name});]}>
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
-InitialVersion=[0],@key{pragma} @prag(Volatile_Components)(@SynI{array_}@Syn2{local_name});']}
+@DeletedPragmaSyn<Version=[3],InitialVersion=[0],@ChgDeleted{Version=[3],
+Text=[@key{pragma} @prag(Volatile_Components)(@SynI{array_}@Syn2{local_name});]}>
 
 @end{Syntax}
 
@@ -1791,7 +1791,7 @@ because the pragma was not used to mark variables as shared.
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1],ARef=[AI05-0229-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Aspects Independent and Independent_Components are new; they eliminate
-  ambiguity about independent addressibility.]}
+  ambiguity about independent addressability.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
   @ChgAdded{Version=[3],Text=[Aspects Atomic, Atomic_Components, Volatile,
@@ -1923,11 +1923,15 @@ the following attribute is defined:
 @nt<entry_declaration>},
 the following attribute is defined:
 @begin{Description}
-@Attribute{Prefix=<E>, AttrName=<Caller>,
+@ChgAttribute{Version=[3],Kind=[Revised],ChginAnnex=[T],
+    Leading=<F>, Prefix=<E>, AttrName=<Caller>, ARef=[AI05-0262-1],
     Text=[Yields a value of the type Task_Id that identifies the task
        whose call is now being serviced. Use of this attribute is
-       allowed only inside an @nt{entry_body} or @nt{accept_statement}
-       corresponding to the @nt{entry_declaration} denoted by E.]}
+       allowed only inside an
+       @Chg{Version=[3],New=[],Old=[@nt{entry_body} or ]}@nt{accept_statement}
+       @Chg{Version=[3],New=[or @nt{entry_body} (after the
+       @nt{entry_barrier}) ],Old=[]}corresponding
+       to the @nt{entry_declaration} denoted by E.]}
 @end{Description}
 @EndPrefixType{}
 

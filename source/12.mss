@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:24 $}
+@Comment{$Date: 2011/11/01 05:34:03 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -239,7 +239,6 @@ because of confusion with normal formal parameters of subprograms.
   @nt{generic_subprogram_declaration} (as well as a @nt{generic_package_declaration}).
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
-
 
 
 @RmNewPage@Comment{Insert page break so printed RM's look better.}
@@ -1596,7 +1595,7 @@ important benefit, and any change has some cost.
 @end{Extend2005}
 
 
-@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledClause{Formal Types}
 
 @begin{Intro}
@@ -2035,8 +2034,10 @@ because the actual can be any descendant of the ancestor,
 not necessarily a direct descendant.
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 @ChgAdded{Version=[2],Text=[We require the ancestor type to be limited when
-@key{limited} appears so that we avoid oddies like limited integer types.
+@key{limited} appears so that we avoid
+@Chg{Version=[3],New=[oddities],Old=[oddies]} like limited integer types.
 Normally, @key{limited} means @lquotes@;match anything@rquotes for a generic
 formal, but it was felt that allowing limited elementary types to be declared
 was just too weird. Integer still matches a formal limited private type;
@@ -2071,12 +2072,14 @@ type shall be a synchronized tagged type.]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[For a non-formal private extension, we
   require the partial view to be synchronized if the full view is synchronized
   tagged. This does not apply to a formal private extension @em it is OK if
   the formal is not synchronized. Any attempt to extend the formal
   type will be rechecked in the instance, where the rule disallowing
-  extending a sychronized non-interface type will be enforced. This is
+  extending a @Chg{Version=[3],New=[synchronized],Old=[sychronized]}
+  non-interface type will be enforced. This is
   consistent with the @lquotes@;no hidden interfaces@rquotes rule also
   applying only to non-formal private extensions, as well as the rule that
   a limited non-formal private extension implies a limited full type.
@@ -2226,8 +2229,8 @@ word @key(abstract) appears in its declaration.]
 the ancestor type is a composite type that is not an array type, the formal type
 inherits components from the ancestor type]} (including
 @Chg{Version=[3],New=[components, but excluding ],Old=[]}discriminants if
-@Chg{Version=[3],New=[there is ],Old=[]}a new @nt<discriminant_part>
-@Chg{Version=[3],New=[],Old=[is not specified]}),
+@Chg{Version=[3],New=[there is ],Old=[]}a new
+@nt<discriminant_part>@Chg{Version=[3],New=[],Old=[ is not specified]}),
 @Chg{Version=[3],New=[predefined operators,
 and inherited user-defined primitive subprograms are determined
 by its ancestor type and its progenitor types (if any), in the
@@ -2692,7 +2695,7 @@ the same is subsumed.
 @end{DiffWord95}
 
 
-@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledSubClause{Formal Access Types}
 
 @begin{Intro}
@@ -3563,9 +3566,12 @@ given by <>, then the declaration corresponding to those parameters (but
 not the others) are made visible.],Old=[]}
 @end{Ramification}
 @begin{Reason}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 We always want either the actuals
-or the formals of an instance to be namable from outside, but never both.
-If both were namable, one would get some funny anomalies since
+or the formals of an instance to be
+@Chg{Version=[3],New=[nameable],Old=[namable]} from outside, but never both.
+If both were @Chg{Version=[3],New=[nameable],Old=[namable]}, one would get
+some funny anomalies since
 they denote the same entity, but, in the case of types at least,
 they might have different and inconsistent sets of primitive operators
 due to predefined operator @lquotes@;reemergence.@rquotes@; Formal derived types
@@ -3617,7 +3623,7 @@ package with formal package parameters:}]}
 @key[end] Ordered_Join;]}
 @end{Example}
 
-@Comment{@RMNewPage@Comment{For printed Ada 2005 RM only} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[@i{Example of
 an instantiation of a package with formal packages:}]}

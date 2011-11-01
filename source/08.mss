@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:39 $}
+@Comment{$Date: 2011/11/01 05:34:03 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.93 $}
+@Comment{$Revision: 1.94 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -1501,7 +1501,7 @@ complex than they already are.]}
 @end{DiffWord2005}
 
 
-@Comment{@RMNewPage@Comment{For printed Ada 2005 only} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedSubClause{Version=[2],Name=[Overriding Indicators]}
 
 @begin{Intro}
@@ -1653,7 +1653,7 @@ this is a new operation.]}
 @end{DiffWord2005}
 
 
-@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledClause{Use Clauses}
 
 @begin{Intro}
@@ -2360,6 +2360,7 @@ using the type T2 of the previous example:]}
 @end{Extend2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Exception Renaming Declarations}
 
 @begin{Intro}

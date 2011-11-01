@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:25 $}
+@Comment{$Date: 2011/11/01 05:34:03 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.109 $}
+@Comment{$Revision: 1.110 $}
 
 @begin{Intro}
 
@@ -964,7 +964,7 @@ selecting the @nt<terminate_alternative>, but before termination.
 @end{DiffWord95}
 
 
-@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledClause{Protected Units and Protected Objects}
 
 @begin{Intro}
@@ -1051,7 +1051,7 @@ it shall repeat the @nt{defining_identifier}.
 @end{Syntax}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00345-01]}@ChgNote{This was just moved below}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00345-01]}@ChgNote{This was just moved below}
 @ChgDeleted{Version=[2],Text=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{protected_declaration}})}
 A protected declaration requires a completion@redundant[,
 which shall be a @nt{protected_@!body},]
@@ -1063,6 +1063,11 @@ protected declaration.]}
   if the implementation supports it.]}
 @end(Honest)
 @end{Legality}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noparanum=[T],Text=[@Shrink{@i<Paragraph 10 was
+deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered.}
+@end{NotIso}
 
 @begin{StaticSem}
 
@@ -1222,7 +1227,7 @@ access-to-variable parameter.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[For a protected procedure or entry, the protected
 object can be read or written (see
-@RefSecNum{Protected Subprograms and Protected Actions}}. A subprogram
+@RefSecNum{Protected Subprograms and Protected Actions}). A subprogram
 that is implemented by a protected procedure or entry must have a profile
 which reflects that in order to avoid confusion.]}
 @end{Reason}
@@ -1763,7 +1768,7 @@ rhs="@Chg{Version=[3],New=<By_Entry | By_Protected_Procedure | Optional>,Old=<>}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0215-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For the declaration of a primitive
 procedure of a synchronized tagged type the following language-defined
-representation aspect may be specified with @nt{aspect_specification} (see
+representation aspect may be specified with an @nt{aspect_specification} (see
 @RefSecNum{Aspect Specifications}):]}
 
 @begin{Description}
@@ -3032,7 +3037,7 @@ the expiration of a delay.
 @Chg{Version=[3],New=[@Defn{requeue target}],Old=[@Defn2{Term=[target entry], Sec=(of a @nt<requeue_statement>)}]}
 The @Chg{Version=[3],New=[@SynI{procedure_or_entry_}],Old=[@SynI(entry_)]}@nt{name}
 of a @nt{requeue_statement} shall resolve
-to denote an entry (the
+to denote @Chg{Version=[3],New=[a procedure or ],Old=[]}an entry (the
 @Chg{Version=[3],New=[@i{requeue }],Old=[]}@i{target}@Chg{Version=[3],New=[],
 Old=[@i{ entry}]})@Chg{Version=[3],New=[. The profile of
 the entry, or the profile or prefixed profile of the procedure, shall],Old=[that]}
@@ -4858,7 +4863,7 @@ a requeue-with-abort.
 @end{DiffWord83}
 
 
-@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledSubClause{Asynchronous Transfer of Control}
 
 @begin{Intro}
@@ -5417,9 +5422,10 @@ circumstances:
   identifies T @Chg{Version=[3],New=[and a result of True ],Old=[]}(see
   @RefSecNum(The Package Task_Identification));]}
 
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
   If A1 is the action of issuing an entry call, and A2 is
   part of the corresponding execution of the appropriate
-  @nt<entry_body> or @nt<accept_statement>.
+  @nt<entry_body> or @nt<accept_statement>@Chg{Version=[3],New=[;],Old=[.]}
   @begin(Ramification)
     Evaluating the @nt<entry_index> of an @nt<accept_statement>
     is not synchronized with a corresponding entry call,
@@ -5547,9 +5553,9 @@ see @RefSecNum(Shared Variable Control).
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1],ARef=[AI05-0201-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Revised the definition of
-  independent addressibility to exclude conforming representation clauses
+  independent addressability to exclude conforming representation clauses
   and to require that atomic and independent objects always have
-  independent addressibility. This should not change behavior that the
+  independent addressability. This should not change behavior that the
   user sees for any Ada program, so it is not an inconsistency.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0072-1]}

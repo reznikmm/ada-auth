@@ -1,10 +1,10 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.42 $ $Date: 2011/10/21 06:41:25 $ $Author: randy $ }
+@comment{ $Revision: 1.43 $ $Date: 2011/11/01 05:34:03 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:25 $}
+@Comment{$Date: 2011/11/01 05:34:03 $}
 
-@Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
 
 @begin{Intro}
@@ -770,11 +770,13 @@ to Get_Next_Entry for the specified search object, and False otherwise.]}
                           Directory_Entry : @key{out} Directory_Entry_Type);]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the next Directory_Entry
 for the search described by Search
 that matches the pattern and filter. If no further matches are available,
 Status_Error is raised. It is implementation-defined as to whether the results
-returned by this routine are altered if the contents of the directory are
+returned by this @Chg{Version=[3],New=[subprogram],Old=[routine]} are altered
+if the contents of the directory are
 altered while the Search object is valid (for example, by another program). The
 exception Use_Error is propagated if the external environment does not support
 continued searching of the directory represented by Search.]}

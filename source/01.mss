@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2011/10/21 06:41:24 $}
+@Comment{$Date: 2011/11/01 05:34:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1652,6 +1652,8 @@ equivalent to some sequential order.
 @end{Reason}
 @end{Intro}
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+
 @begin{Notes}
 The syntax rules describing structured constructs are presented in a
 form that corresponds to the recommended paragraphing. For example, an
@@ -1887,7 +1889,7 @@ Standards.
 @Defn{639-3:2007, ISO/IEC standard}
 @Defn{Language code standard}
 ISO/IEC 639-3:2007, @i{Terminology and other language and content resources @em
-Codes for the representation of names of languages @em Part 3: Alpha-3 code
+Codes for the representation of names of languages @em Part 3: Alpha-3 code for
 comprehensive coverage of languages}.]}
 
 @Defn{ISO/IEC 646:1991}

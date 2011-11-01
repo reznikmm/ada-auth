@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:25 $}
+@Comment{$Date: 2011/11/01 05:34:03 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -45,13 +45,11 @@ short-hand for @lquotes@;exception occurrence.@rquotes@;
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0043-1],ARef=[AI05-0258-1]}
 @redundant[An @nt{exception_declaration} declares a name for an exception.
-
 An exception @Chg{Version=[3],New=[can be],Old=[is]} raised
 @Chg{Version=[3],New=[explicitly (for example,],Old=[initially either]}
 by a @nt{raise_statement}@Chg{Version=[3],New=[)],Old=[]}
 or@Chg{Version=[3],New=[ implicitly (for example,],Old=[]}
 by the failure of a language-defined check@Chg{Version=[3],New=[)],Old=[]}.
-
 When an exception arises, control can be transferred to a
 user-provided @nt{exception_handler} at the end of a
 @nt{handled_@!sequence_of_@!statements},
@@ -203,6 +201,7 @@ We explicitly define elaboration for @nt{exception_declaration}s.
 @end{Extend2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Exception Handlers}
 
 @begin{Intro}
@@ -607,7 +606,7 @@ are not handled by the handlers of the
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
     @key[procedure] @AdaSubDefn{Raise_Exception}(E : @key[in] Exception_Id;
                               Message : @key[in] String := "")@Chg{Version=[3],New=[],Old=[;]}@Chg{Version=[2],New=[
-        @Chg{Version=[3],New=[@key[with]],Old=[@key[pragma]]} No_Return@Chg{Version=[3],New=[ => True],Old=[(Raise_Exception)]};],Old=[]}
+        @Chg{Version=[3],New=[@key[with]],Old=[@key[pragma]]} No_Return@Chg{Version=[3],New=[],Old=[(Raise_Exception)]};],Old=[]}
     @key[function] @AdaSubDefn{Exception_Message}(X : Exception_Occurrence) @key[return] String;
     @key[procedure] @AdaSubDefn{Reraise_Occurrence}(X : @key[in] Exception_Occurrence);
 
@@ -1215,7 +1214,8 @@ some implementation-defined manner.]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Assert>([Check =>] @SynI{boolean_}@Syn2{expression}[, [Message =>] @SynI{string_}@Syn2{expression}]);''}
+@AddedPragmaSyn<Version=[2],@ChgAdded{Version=[2],
+Text=`@key{pragma} @prag<Assert>([Check =>] @SynI{boolean_}@Syn2{expression}[, [Message =>] @SynI{string_}@Syn2{expression}]);'}>
 
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1228,7 +1228,8 @@ some implementation-defined manner.]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=<@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Assertion_Policy>(@SynI{policy_}@Syn2{identifier});'>}
+@AddedPragmaSyn<Version=[2],@ChgAdded{Version=[2],
+Text=<@key{pragma} @prag<Assertion_Policy>(@SynI{policy_}@Syn2{identifier});>}>
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=[configuration pragma], Sec=(Assertion_Policy)}
@@ -1499,7 +1500,8 @@ in clauses and subclauses throughout the standard.
 @PragmaSyn`@key{pragma} @prag(Suppress)(@Syn2{identifier}@Chg{Version=[2],New=<>,Old=( [, [On =>] @Syn2{name}])});'
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00224-01]}
-@ChgAdded{Version=[2],Text=<@AddedPragmaSyn`Version=[2],@key{pragma} @prag(Unsuppress)(@Syn2{identifier});'>}
+@AddedPragmaSyn<Version=[2],@ChgAdded{Version=[2],
+Text=<@key{pragma} @prag(Unsuppress)(@Syn2{identifier});>}>
 
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}

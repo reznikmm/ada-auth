@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:26 $}
+@Comment{$Date: 2011/11/01 05:34:05 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -284,7 +284,7 @@ primarily to decimal fixed point types now (they apply to
 floating point types only as an obsolescent feature).
 @end{DiffWord83}
 
-@Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledClause{The Constrained Attribute}
 
 @begin{StaticSem}
@@ -599,7 +599,7 @@ interrupt model as specified in the Systems Programming Annex.
 was replaced by @nt{accept_statement}.], Old=[]}
 @end{DiffWord95}
 
-@Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledClause{Mod Clauses}
 
 @begin{Syntax}
@@ -957,13 +957,14 @@ aspect_specifications to specify certain aspects.]}
 @begin{SyntaxText}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
-Inline, which is a program unit pragma (see @RefSecNum{Pragmas and Program Units})
+Inline, which is a program unit pragma (see @RefSecNum{Pragmas and Program Units}),
 is as follows:@PDefn2{Term=[program unit pragma], Sec=(Inline)}
 @PDefn2{Term=[pragma, program unit], Sec=(Inline)}]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Inline> (@Syn2[name] {, @Syn2[name]});']}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Inline> (@Syn2[name]{, @Syn2[name]});]}>
 @end{Syntax}
 
 @begin{Legality}
@@ -1082,7 +1083,8 @@ is as follows:@PDefn2{Term=[representation pragma], Sec=(No_Return)}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<No_Return> (@SynI[procedure_]@Syn2[local_name] {, @SynI[procedure_]@Syn2[local_name]});']}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<No_Return> (@SynI[procedure_]@Syn2[local_name]{, @SynI[procedure_]@Syn2[local_name]});]}>
 @end{Syntax}
 
 @begin{Legality}
@@ -1121,7 +1123,8 @@ is as follows:@PDefn2{Term=[representation pragma], Sec=(Pack)}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Pack> (@SynI[first_subtype_]@Syn2[local_name]);']}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Pack> (@SynI[first_subtype_]@Syn2[local_name]);]}>
 @end{Syntax}
 
 
@@ -1156,7 +1159,8 @@ Storage_Size is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Storage_Size> (@Syn2[expression]);']}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Storage_Size> (@Syn2[expression]);]}>
 
 @begin{SyntaxText}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
@@ -1199,25 +1203,33 @@ to the value of the @nt{expression} of the @nt{pragma}.]}
 @PDefn2{Term=[pragma, interfacing], Sec=(Export)}
 @PDefn2{Term=[interfacing pragma], Sec=(Convention)}
 @PDefn2{Term=[pragma, interfacing], Sec=(Convention)}
-An @i{interfacing pragma} is a representation
-@nt[pragma] that is
+@PDefn2{Term=[representation pragma], Sec=(Import)}
+@PDefn2{Term=[pragma, representation], Sec=(Import)}
+@PDefn2{Term=[representation pragma], Sec=(Export)}
+@PDefn2{Term=[pragma, representation], Sec=(Export)}
+@PDefn2{Term=[representation pragma], Sec=(Convention)}
+@PDefn2{Term=[pragma, representation], Sec=(Convention)}
+An @i{interfacing pragma} is a representation pragma that is
 one of the @nt{pragma}s Import, Export,
 or Convention. Their forms are as follows:]}
 @end{SyntaxText}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag(Import)(@*
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=`@key{pragma} @prag(Import)(@*
 @ @ @ @ @ [Convention =>] @SynI{convention_}@Syn2{identifier}, [Entity =>] @Syn2{local_name}@*
 @ @ [, [External_Name =>] @SynI{external_name_string_}@Syn2{expression}]@*
-@ @ [, [Link_Name =>] @SynI{link_name_string_}@Syn2{expression}]);']}
+@ @ [, [Link_Name =>] @SynI{link_name_string_}@Syn2{expression}]);'}>
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag(Export)(@*
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=`@key{pragma} @prag(Export)(@*
 @ @ @ @ @ [Convention =>] @SynI{convention_}@Syn2{identifier}, [Entity =>] @Syn2{local_name}@*
 @ @ [, [External_Name =>] @SynI{external_name_string_}@Syn2{expression}]@*
-@ @ [, [Link_Name =>] @SynI{link_name_string_}@Syn2{expression}]);']}
+@ @ [, [Link_Name =>] @SynI{link_name_string_}@Syn2{expression}]);'}>
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag(Convention)([Convention =>] @SynI{convention_}@Syn2{identifier},[Entity =>] @Syn2{local_name});']}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=`@key{pragma} @prag(Convention)([Convention =>] @SynI{convention_}@Syn2{identifier},[Entity =>] @Syn2{local_name});'}>
 
 @begin{SyntaxText}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
@@ -1244,7 +1256,7 @@ interfacing pragma shall be the name of a convention
 (see @RefSecNum{Interfacing Aspects}).]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[3],Text=[A pragma Import shall be the completion of a
+@ChgAdded{Version=[3],Text=[A @nt{pragma} Import shall be the completion of a
 declaration. @PDefn{Notwithstanding}Notwithstanding any rule to the
 contrary, a @nt{pragma} Import may serve as the completion of any kind of
 (explicit) declaration if supported by an implementation for that kind of
@@ -1262,7 +1274,7 @@ completion of all of them.]}
 be static.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[3],Text=[The @nt{local_name} of of each of these pragmas
+@ChgAdded{Version=[3],Text=[The @nt{local_name} of each of these pragmas
 shall denote a declaration that may have the similarly named aspect specified.]}
 @end{Legality}
 
@@ -1284,7 +1296,7 @@ various aspects of the entity denoted by the @nt{local_name} as follows:]}
   aspect (see @RefSecNum{Interfacing Aspects}) is True.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[For both pragma Import and Export, if an external
+  @ChgAdded{Version=[3],Text=[For both @nt{pragma} Import and Export, if an external
   name is given in the pragma, the External_Name aspect (see
   @RefSecNum{Interfacing Aspects}) is specified to be
   @SynI{external_name_string_}@nt{expression}. If a link name is given in the
@@ -1314,7 +1326,8 @@ is as follows:@PDefn2{Term=[representation pragma], Sec=(Unchecked_Union)}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Unchecked_Union> (@SynI[first_subtype_]@Syn2[local_name]);']}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Unchecked_Union> (@SynI[first_subtype_]@Syn2[local_name]);]}>
 @end{Syntax}
 
 @begin{Legality}
@@ -1350,7 +1363,8 @@ Interrupt_Handler is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Interrupt_Handler> (@SynI[handler_]@Syn2[name]);']}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Interrupt_Handler> (@SynI[handler_]@Syn2[name]);]}>
 
 @begin{SyntaxText}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
@@ -1359,14 +1373,15 @@ Attach_Handler is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Attach_Handler> (@SynI[handler_]@Syn2[name], @Syn2[expression]);']}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Attach_Handler> (@SynI[handler_]@Syn2[name], @Syn2[expression]);]}>
 @end{Syntax}
 
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[For the Interrupt_Handler and Attach_Handler
-pragmas, the handler_name shall resolve to denote a protected procedure with a
-parameterless profile.]}
+pragmas, the @SynI[handler_]@nt{name} shall resolve to denote a protected
+procedure with a parameterless profile.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[For the Attach_Handler pragma, the expected type for
@@ -1408,7 +1423,7 @@ pragmas are so similar, we want the rules to be the same.]}
 @ChgAdded{Version=[3],Text=[For an implementation that supports Annex C, a
 pragma Interrupt_Handler specifies the Interrupt_Handler aspect (see
 @RefSecNum{Protected Procedure Handlers}) for
-the protected procedure handler_name to have the value True. For an
+the protected procedure @SynI<handler_>@nt{name} to have the value True. For an
 implementation that supports Annex C, a pragma Attach_Handler specifies the
 Attach_Handler aspect (see @RefSecNum{Protected Procedure Handlers}) for
 the protected procedure @SynI{handler_}@nt{name} to
@@ -1443,22 +1458,28 @@ Volatile_Components, and Independent_Components is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Atomic> (@Syn2[local_name]);']}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Atomic> (@Syn2[local_name]);]}>
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Volatile> (@Syn2[local_name]);']}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Volatile> (@Syn2[local_name]);]}>
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Independent> (@SynI[component_]@Syn2[local_name]);']}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Independent> (@SynI[component_]@Syn2[local_name]);]}>
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Atomic_Components> (@SynI[array_]@Syn2[local_name]);']}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Atomic_Components> (@SynI[array_]@Syn2[local_name]);]}>
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Volatile_Components> (@SynI[array_]@Syn2[local_name]);']}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Volatile_Components> (@SynI[array_]@Syn2[local_name]);]}>
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Independent_Components> (@Syn2[local_name]);']}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Independent_Components> (@Syn2[local_name]);]}>
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1],ARef=[AI05-0229-1]}
@@ -1479,7 +1500,7 @@ Volatile_Components, and Independent_Components is as follows:]}
 shall resolve to denote either an @nt{object_declaration}, a non-inherited
 @nt{component_declaration}, or a @nt{full_type_declaration}. The
 @SynI{component_}@nt{local_name} in an Independent pragma shall resolve to
-denote a non-inherited component_declaration. The @SynI{array_}@nt{local_name}
+denote a non-inherited @nt{component_declaration}. The @SynI{array_}@nt{local_name}
 in an Atomic_Components or Volatile_Components pragma shall resolve to denote
 the declaration of an array type or an array object of an anonymous type. The
 @nt{local_name} in an Independent_Components pragma shall resolve to denote the
@@ -1489,9 +1510,9 @@ type.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[3],Text=[These pragmas are representation pragmas
+@ChgAdded{Version=[3],Text=[These @nt{pragma}s are representation pragmas
 (see @RefSecNum{Operational and Representation Items}).
-Each of these pragmas specifies that the similarly named aspect
+Each of these @nt{pragma}s specifies that the similarly named aspect
 (see @RefSecNum{Shared Variable Control}) of the
 type, object, or component denoted by its argument is True.
 @PDefn2{Term=[representation pragma], Sec=(Atomic)}
@@ -1540,7 +1561,8 @@ CPU is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<CPU> (@Syn2[expression]);']}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<CPU> (@Syn2[expression]);]}>
 
 @end{Syntax}
 
@@ -1599,7 +1621,8 @@ that contains the @nt{pragma}.]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=`@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Dispatching_Domain> (@nt{expression});''}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Dispatching_Domain> (@nt{expression});]}>
 
 @end{Syntax}
 
@@ -1643,7 +1666,8 @@ that contains the pragma.]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=`@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Priority> (@nt{expression});''}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Priority> (@nt{expression});]}>
 
 @begin{SyntaxText}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
@@ -1652,7 +1676,8 @@ that contains the pragma.]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=`@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Interrupt_Priority> [(@nt{expression})];''}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Interrupt_Priority> [(@nt{expression})];]}>
 
 @end{Syntax}
 
@@ -1731,7 +1756,8 @@ Interrupt_Priority'Last.]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=`@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Relative_Deadline> (@SynI{relative_deadline_}@nt{expression});''}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Relative_Deadline> (@SynI{relative_deadline_}@nt{expression});]}>
 
 @end{Syntax}
 
@@ -1781,7 +1807,8 @@ is as follows:@PDefn2{Term=[representation pragma], Sec=(Asynchronous)}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@AddedPragmaSyn`Version=[3],@key{pragma} @prag<Asynchronous> (@Syn2[local_name]);']}
+@AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
+Text=[@key{pragma} @prag<Asynchronous> (@Syn2[local_name]);]}>
 @end{Syntax}
 
 @begin{StaticSem}
@@ -1802,7 +1829,7 @@ denote a declaration that may have aspect Asynchronous specified.]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
   @ChgAdded{Version=[3],Text=[This clause is new. Pragma Asynchronous
   was moved here from @RefSecNum{Asynchronous Remote Calls};
-  aspect Asychronous lives there now.]}
+  aspect Asynchronous lives there now.]}
 @end{DiffWord2005}
 
 

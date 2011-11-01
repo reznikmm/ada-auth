@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:24 $}
+@Comment{$Date: 2011/11/01 05:34:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1203,10 +1203,12 @@ as a @nt<name>.
   allowed).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00330-01]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[Clarified that an untagged type conversion
   appearing as a generic actual parameter for a generic @key{in out} formal
   parameter is not a view conversion (and thus is illegal). This confirms
-  the ACATS tests, so all implementations already follow this intepretation.]}
+  the ACATS tests, so all implementations already follow this
+  @Chg{Version=[3],New=[interpretation],Old=[intepretation]}.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00363-01]}
   @ChgAdded{Version=[2],Text=[Rules added by the Corrigendum to eliminate
@@ -1433,7 +1435,7 @@ the @nt<allocator> shall be an uninitialized allocator.]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0111-3]}
 @ChgAdded{Version=[3],Text=[If a @nt{subpool_specification} is given,
 the type of the storage pool of the access type shall be a descendant
-of Root_Storage_Pool_with_Subpools.]}
+of Root_Storage_Pool_With_Subpools.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00344-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded]}@ChgNote{Because the paragraph numbers changed}
@@ -1451,8 +1453,8 @@ deeper than that of the type of the @nt{allocator}.]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0051-1]}
 @ChgAdded{Version=[2],Text=[If the @Chg{Version=[3],New=[subtype determined
 by the @nt{subtype_indication} or @nt{qualified_expression}],Old=[designated
-subtype of the type]} of the
-@nt{allocator} has one or more unconstrained access discriminants, then the
+subtype of the type]} of the @nt{allocator} has one or more
+@Chg{Version=[3],New=[],Old=[unconstrained ]}access discriminants, then the
 accessibility level of the anonymous access type of each access
 discriminant@Chg{Version=[3],New=[],Old=[,
 as determined by the @nt{subtype_indication} or @nt{qualified_expression} of

@@ -1,10 +1,10 @@
 @Part(glossary, Root="ada.mss")
 
-@Comment{$Date: 2010/10/15 07:05:38 $}
+@Comment{$Date: 2011/11/01 05:34:04 $}
 @LabeledAddedInformativeAnnex{Version=[2],Name=[Language-Defined Entities]}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/langdef.mss,v $}
-@comment{$Revision: 1.5 $}
+@comment{$Revision: 1.6 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
@@ -32,7 +32,7 @@ subtypes.@Defn{Language-defined types}@Defn{Language-defined subtypes}]}
 
 @TypeList
 
-@Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[Language-Defined Subprograms]}
 
 @begin{Intro}

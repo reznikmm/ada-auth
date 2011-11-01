@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.103 $ $Date: 2011/10/21 06:41:26 $ $Author: randy $ }
+@comment{ $Revision: 1.104 $ $Date: 2011/11/01 05:34:04 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2011/10/21 06:41:26 $}
+@Comment{$Date: 2011/11/01 05:34:04 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -114,8 +114,8 @@ should be deleted if the paragraphs are ever renumbered.}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
-InitialVersion=[0],@key{pragma} @prag(Priority)(@Syn2{expression});']}
+@DeletedPragmaSyn<Version=[3],InitialVersion=[0],@ChgDeleted{Version=[3],
+Text=[@key{pragma} @prag(Priority)(@Syn2{expression});]}>
 
 @begin{SyntaxText}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
@@ -124,8 +124,8 @@ InitialVersion=[0],@key{pragma} @prag(Priority)(@Syn2{expression});']}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
-InitialVersion=[0],@key{pragma} @prag(Interrupt_Priority)[(@Syn2{expression})];']}
+@DeletedPragmaSyn<Version=[3],InitialVersion=[0],@ChgDeleted{Version=[3],
+Text=[@key{pragma} @prag(Interrupt_Priority)[(@Syn2{expression})];]}>
 @end{Syntax}
 
 @begin{Resolution}
@@ -726,8 +726,8 @@ policies.]]}
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=`@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Priority_Specific_Dispatching> (@*
-@ @ @ @ @ @SynI{policy_}@Syn2{identifier}, @SynI{first_priority_}@Syn2{expression}, @SynI{last_priority_}@Syn2{expression});''}
+@AddedPragmaSyn<Version=[2],@ChgAdded{Version=[2],Text=`@key{pragma} @prag<Priority_Specific_Dispatching> (@*
+@ @ @ @ @ @SynI{policy_}@Syn2{identifier}, @SynI{first_priority_}@Syn2{expression}, @SynI{last_priority_}@Syn2{expression});'}>
 
 @end{Syntax}
 
@@ -1225,7 +1225,7 @@ language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[@key<package> Ada.Dispatching.Non_Preemptive @key<is>@ChildUnit{Parent=[Ada.Dispatching],Child=[Non_Preemptive]}
-  @key<pragma> Preelaborate(Dispatching.Non_Preemptive);
+  @key<pragma> Preelaborate(Non_Preemptive);
   @key<procedure> @AdaSubDefn{Yield_To_Higher};
   @key<procedure> @AdaSubDefn{Yield_To_Same_Or_Higher} @key<renames> Yield;
 @key<end> Ada.Dispatching.Non_Preemptive;]}
@@ -1353,7 +1353,7 @@ execute within a protected object without raising its active priority provided
 the associated protected unit does not contain @Chg{Version=[3],New=[any
 subprograms with Interrupt_Handler or Attach_Handler specified nor does the
 unit have aspect],Old=[pragma]} Interrupt_Priority
-@Chg{Version=[3],New=[ Interrupt_Priority specified],Old=[,
+@Chg{Version=[3],New=[ specified],Old=[,
 Interrupt_Handler, or Attach_Handler]}.]}
 
 @end{ImplPerm}
@@ -1547,7 +1547,7 @@ priority will not be subject to round robin dispatching.]}
 @end{Extend95}
 
 
-@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed RM Ada 2005}
 @LabeledAddedSubClause{Version=[2],Name=[Earliest Deadline First Dispatching]}
 
 @begin{Intro}
@@ -1612,7 +1612,8 @@ form of a @nt{pragma} Relative_Deadline is as follows:],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=`@Chg{Version=[2],New=[@DeletedPragmaSyn`Version=[3],InitialVersion=[2],@key{pragma} @prag<Relative_Deadline> (@SynI{relative_deadline_}@Syn2{expression});'],Old=[]}'}
+@DeletedPragmaSyn<Version=[3],InitialVersion=[2],@ChgDeleted{Version=[3],
+Text=`@Chg{Version=[2],New=[@key{pragma} @prag<Relative_Deadline> (@SynI{relative_deadline_}@Syn2{expression});],Old=[]}'}>
 
 @end{Syntax}
 
@@ -1735,17 +1736,17 @@ subprogram other than the main subprogram.]}
 @Chg{Version=[3],New=[for which aspect],Old=[containing
 pragma]} Relative_Deadline@Chg{Version=[3],New=[ is specified],Old=[]} is
 the value of Real_Time.Clock +
-@Chg{Version=[3],New=[@nt{expression} that is the value of the
+@Chg{Version=[3],New=[the @nt{expression} that is the value of the
 aspect],Old=[@SynI{relative_deadline_}@nt{expression}]}, where
 @Chg{Version=[3],New=[this entire expression, including ],Old=[]}the
-call of Real_Time.Clock @Chg{Version=[3],New=[, is evaluated],Old=[is made]}
+call of Real_Time.Clock@Chg{Version=[3],New=[, is evaluated],Old=[ is made]}
 between task creation and the start of its activation. If
 @Chg{Version=[3],New=[the aspect],Old=[there is no]}
 Relative_Deadline @Chg{Version=[3],New=[is not specified,],Old=[pragma]}
 then the initial absolute deadline of a task is the
 value of Default_Deadline. The environment task is also given
 an initial deadline by this rule@Chg{Version=[3],New=[, using the value of
-Relative_Deadline aspect of the main subprogram],Old=[]}.]}
+the Relative_Deadline aspect of the main subprogram],Old=[]}.]}
 
 @begin{TheProof}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2274,7 +2275,7 @@ calls another protected operation on the same protected object).
 @end{DiffWord2005}
 
 
-@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed RM Ada 2005}
 @LabeledClause{Entry Queuing Policies}
 
 @begin{Intro}
@@ -2804,7 +2805,7 @@ affected tasks.
 @end{DiffWord95}
 
 
-@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed RM Ada 2005}
 @LabeledAddedSubClause{Version=[2],Name=[Dynamic Priorities for Protected Objects]}
 
 @begin{Intro}
@@ -2906,8 +2907,7 @@ completion of the protected action in which it is executed.]}
 @end{Extend95}
 
 
-
-@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed RM Ada 2005}
 @LabeledClause{Preemptive Abort}
 
 @begin{Intro}
@@ -3053,9 +3053,9 @@ construction of highly efficient tasking run-time systems.]
   @Chg{Version=[2],New=[of a type that needs finalization (see
   @RefSecNum{Assignment and Finalization})],Old=[with
   controlled@Chg{New=[, protected, or task],Old=[]} parts]}
-  @Chg{Version=[3],New=[],Old=[and
+  @Chg{Version=[3],New=[are],Old=[and
   access types that designate @Chg{Version=[2],New=[a type that needs
-  finalization],Old=[such objects@Chg{New=[,],Old=[]}]} ]}shall be
+  finalization],Old=[such objects@Chg{New=[,],Old=[]}]} shall be]}
   declared only at library level.@Chg{Version=[3],New=[ If an access type
   does not have library-level accessibility, then there are
   no @nt{allocator}s of the type where the type determined by the
@@ -4535,8 +4535,7 @@ Text=[The metrics for entry-less protected objects.]}]}
 @end{Metrics}
 
 
-@Comment{TBD: @LabeledAddedRevisedClause{Version=[3],OldVersion=[2],New=[The Ravenscar Profile],Old=[Run-time Profiles]}}
-@LabeledAddedClause{Version=[3],Name=[The Ravenscar Profile]}
+@LabeledRevisedClause{Version=[3],InitialVersion=[2],New=[The Ravenscar Profile],Old=[Run-time Profiles]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
@@ -4562,8 +4561,8 @@ form of a @nt{pragma} Profile is as follows:],Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=`@Chg[Version=[2],New=[
-@DeletedPragmaSyn`Version=[3],InitialVersion=[2],@key{pragma} @prag<Profile> (@SynI{profile_}@Syn2{identifier} {, @SynI{profile_}@Syn2{pragma_argument_association}});'],Old=[]]'}
+@DeletedPragmaSyn<Version=[3],InitialVersion=[2],@ChgDeleted{Version=[3],
+Text=`@Chg[Version=[2],New=[@key{pragma} @prag<Profile> (@SynI{profile_}@Syn2{identifier} {, @SynI{profile_}@Syn2{pragma_argument_association}});],Old=[]]'}>
 
 @end{Syntax}
 
@@ -4694,7 +4693,7 @@ restriction of Max_Task_Entries => 0.]}
 @end{DiffWord2005}
 
 @Comment{Moved the following to the previous clause...
-@RMNewPage
+@RMNewPageVer{Version=[2]}@Comment{For printed RM Ada 2005}
 @LabeledAddedSubClause{Version=[2],Name=[The Ravenscar Profile]}
 
 @begin{Intro}
@@ -4816,7 +4815,7 @@ Max_Task_Entries => 0.]}
 end commented out text...}@Comment{End of original Ravenscar}
 
 
-@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed RM Ada 2005}
 @LabeledAddedClause{Version=[2],Name=[Execution Time]}
 
 @begin{Intro}
@@ -5320,7 +5319,7 @@ Timer objects.]}
 @end{Extend95}
 
 
-@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed RM Ada 2005}
 @LabeledAddedSubclause{Version=[2],Name=[Group Execution Time Budgets]}
 
 @begin{Intro}
@@ -6169,7 +6168,7 @@ for a task interface.]}
 @begin{Runtime}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
-@ChgAdded{Version=[3],Text=[The expression specifed for the Dispatching_Domain
+@ChgAdded{Version=[3],Text=[The expression specified for the Dispatching_Domain
 aspect of a task is evaluated for each task object (see
 @RefSecNum{Task Units and Task Objects}). The Dispatching_Domain value is then
 associated with the task object whose task declaration specifies the aspect.]}

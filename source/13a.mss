@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:25 $}
+@Comment{$Date: 2011/11/01 05:34:03 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.97 $}
+@Comment{$Revision: 1.98 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -336,8 +336,9 @@ the corresponding aspects of representation.
 Some representation items directly specify more than one aspect.
 @end{Honest}
 @begin{Discussion}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 For example, a @nt{pragma} Export
-@Chg{Version=[3],New=[(see @RefSecNum{Interfacing Pragmas})) ],Old=[]}specifies the convention
+@Chg{Version=[3],New=[(see @RefSecNum{Interfacing Pragmas}) ],Old=[]}specifies the convention
 of an entity,
 and also specifies that it is exported.@Chg{Version=[3],New=[ Such items are
 obsolescent; directly specifying
@@ -1239,14 +1240,15 @@ Some of the more stringent requirements are moved to
   otherwise. This wording matches the rules with reality.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00444-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[Added wording so that inheritance depends on
   whether operational items are visible rather than whether they occur before
   the declaration (we don't want to look into private parts). Limited
-  operational inheritance to untagged types to avoid anomolies with private
-  extensions (this is not incompatible, no existing operational attribute
-  used this capability). Also added
-  wording to clearly define that subprogram inheritance works like derivation
-  of subprograms.]}
+  operational inheritance to untagged types to avoid
+  @Chg{Version=[3],New=[anomalies],Old=[anomolies]} with private extensions
+  (this is not incompatible, no existing operational attribute used this
+  capability). Also added wording to clearly define that subprogram inheritance
+  works like derivation of subprograms.]}
 @end{DiffWord95}
 
 @begin{Incompatible2005}
@@ -1306,8 +1308,8 @@ should be deleted if the paragraphs are ever renumbered.}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
-InitialVersion=[0],@key{pragma} @prag(Pack)(@SynI{first_subtype_}@Syn2{local_name});']}
+@DeletedPragmaSyn<Version=[3],InitialVersion=[0],@ChgDeleted{Version=[3],
+Text=[@key{pragma} @prag(Pack)(@SynI{first_subtype_}@Syn2{local_name});]}>
 @end{Syntax}
 
 @begin{Legality}
@@ -2807,8 +2809,8 @@ should be deleted if the paragraphs are ever renumbered.}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
-InitialVersion=[0],@key{pragma} @prag(Storage_Size)(@Syn2{expression});']}
+@DeletedPragmaSyn<Version=[3],InitialVersion=[0],@ChgDeleted{Version=[3],
+Text=[@key{pragma} @prag(Storage_Size)(@Syn2{expression});]}>
 
 @begin{SyntaxText}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
@@ -2842,7 +2844,7 @@ type.@AspectDefn{Storage_Size (task)}]}
   @ChgAdded{Version=[3],Text=[This definition somewhat conflicts with the
   "automatic" one for the obsolescent attribute Storage_Size (which can be
   specified). The only difference is where the given expression is evaluated.
-  We intend for the above definition to supercede that "automatic"
+  We intend for the above definition to supersede that "automatic"
   definition for this attribute.]}
 @end{Honest}
 @begin{Ramification}
@@ -3687,7 +3689,7 @@ for particular aspects, as specified elsewhere in this International Standard.]}
 @begin{Runtime}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @ChgAdded{Version=[3],Text=[At the freezing point of the associated entity, the
-aspect_specification is elaborated. The elaboration of the
+@nt{aspect_specification} is elaborated. The elaboration of the
 @nt{aspect_specification} includes the evaluation of the @nt{name} or
 @nt{expression}, if any, unless the aspect itself is an expression. If the
 corresponding aspect represents an expression (as in a precondition), the
@@ -4640,7 +4642,7 @@ The Bit_Order attribute is new to Ada 95.
 
 
 
-@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledClause{Change of Representation}
 
 @begin{Intro}

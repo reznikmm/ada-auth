@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:25 $}
+@Comment{$Date: 2011/11/01 05:34:03 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -187,7 +187,7 @@ be associated with a given external file.
 @end{Diffword95}
 
 
-@Comment{@RMNewPage Break here so printed Ada 95 w/ corrigendum RM looks better.}
+@RMNewPageVer{Version=[1]}@Comment{Break here so printed Ada 95 w/ corrigendum RM looks better.}
 @LabeledClause{Sequential and Direct Files}
 
 @begin{StaticSem}

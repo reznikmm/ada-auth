@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:24 $}
+@Comment{$Date: 2011/11/01 05:34:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.117 $}
+@Comment{$Revision: 1.118 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1403,8 +1403,8 @@ If the call is to a (primitive) function with result type
 @i(T)@Chg{Version=[3],New=[ (a @i{function with a controlling result})],Old=[]},
 then the call has a @i(controlling result) @em
 the context of the call can control the dispatching.@Chg{Version=[2],
-New=[ Similarly, if the call is to a function with access result type
-designating
+New=[ Similarly, if the call is to a function with
+@Chg{Version=[3],New=[an ],Old=[]}access result type designating
 @i(T)@Chg{Version=[3],New=[ (a @i{function with a controlling access result})],Old=[]},
 then the call has a @i(controlling access result), and
 the context can similarly control dispatching.],Old=[]}@Chg{Version=[3],New=[@Defn{controlling access result}@Defn2{Term=[function],Sec=[with a controlling access result]}],Old=[]}
@@ -1790,7 +1790,9 @@ operation;]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0126-1]}
-@ChgAdded{Version=[2],Text=[if the operation is @Chg{Version=[3],New=[implicitly
+@ChgAdded{Version=[2],Text=[if the
+@Chg{Version=[3],New=[corresponding ],Old=[]}operation is
+@Chg{Version=[3],New=[implicitly
 declared for this type and is ],Old=[]}implemented by an entry or
 protected subprogram (see @RefSecNum{Task Units and Task Objects} and
 @RefSecNum{Protected Units and Protected Objects}), then the action comprises a
@@ -1808,11 +1810,11 @@ operator then the action comprises an invocation of that operator;]}
 @ChgAdded{Version=[2],Text=[otherwise, the action is the same as the action for
 the corresponding operation of the parent type@Chg{Version=[3],New=[ or
 progenitor type from which the operation was inherited except that additional
-invariants (see @RefSecnum{Type Invariants}) and class-wide postconditions
-(see @RefSecNum{Preconditions and Postconditions}) may apply. If there is more
-than one such corresponding operation, the action is that for the operation that
-is not a null procedure, if any; otherwise, the action is that of an arbitrary
-one of the operations],Old=[]}.]}
+invariant checks (see @RefSecnum{Type Invariants}) and class-wide postcondition
+checks (see @RefSecNum{Preconditions and Postconditions}) may apply. If there is
+more than one such corresponding operation, the action is that for the operation
+that is not a null procedure, if any; otherwise, the action is that of an
+arbitrary one of the operations],Old=[]}.]}
 @end{Itemize}
 
 @begin{Honest}
@@ -2743,7 +2745,7 @@ derived from interfaces.]}
 @ChgAdded{Version=[2],Text=[The class-wide type associated with a tagged task
 type (including a task interface type) is a task type, because
 @lquotes@;task@rquotes is one of the language-defined classes of types (see
-@RefSecNum{Types and Subtypes}. However, the class-wide type associated with an
+@RefSecNum{Types and Subtypes}). However, the class-wide type associated with an
 interface is @i<not> an interface type, as @lquotes@;interface@rquotes is
 @i<not> one of the language-defined classes (as it is not closed under
 derivation). In this sense, @lquotes@;interface@rquotes is similar to
@@ -3977,7 +3979,7 @@ Old=[@nt{incomplete_type_declaration} are]} as follows:
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0213-1]}
   @ChgAdded{Version=[3],Text=[as a generic actual parameter whose corresponding
   generic formal parameter is a formal incomplete type (see
-  @RefSecNum{Formal Private and Derived Types});]}
+  @RefSecNum{Formal Private and Derived Types}).]}
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
@@ -4524,7 +4526,7 @@ invocation of the entity],Old=[]}.
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0235-1]}
   @ChgAdded{Version=[3],Text=[We use "invocation of" in the parameter case
-  as a master is formally an exceution of something. But we mean this to be
+  as a master is formally an execution of something. But we mean this to be
   interpreted statically (for instance, as the body of the subprogram) for the
   purposes of computing "statically deeper than" (see below).]}
 @end{Honest}
@@ -4866,8 +4868,8 @@ the access type@Chg{Version=[2],New=[, except for an @nt{allocator} of an
 anonymous access type @Chg{Version=[3],New=[(an @i<anonymous allocator>) in
 @Defn{anonymous allocator}certain contexts, as follows: For an anonymous
 allocator that defines the result of a function with an access result, the
-accessibility level is determined as though the allocator were in place of the
-call of the function; in the special case of a call that is the operand of a
+accessibility level is determined as though the @nt{allocator} were in place
+of the call of the function; in the special case of a call that is the operand of a
 type conversion, the level is that of the target access type of the
 conversion],Old=[that defines the value of an access parameter or an access
 discriminant]}. For an @Chg{Version=[3],New=[anonymous
@@ -5671,7 +5673,7 @@ denotes an aliased view of an object}:
 The following attribute is defined for @PrefixType{a @nt{prefix} P that
 denotes a subprogram}:
 @begin(description)
-@ChgAttribute{Version=[2],Kind=[Revised],ChginAnnex=[F], Leading=[F],
+@ChgAttribute{Version=[3],Kind=[Revised],ChginAnnex=[F], Leading=[F],
   Prefix=<P>, AttrName=<Access>,ARef=[AI95-00229-01], ARef=[AI95-00254-01],ARef=[AI05-0239-1],
   Text=<P'Access yields an access value that designates the subprogram
   denoted by P.

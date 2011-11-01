@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.54 $ $Date: 2011/10/21 06:41:26 $ $Author: randy $ }
+@Comment{ $Revision: 1.55 $ $Date: 2011/11/01 05:34:04 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:26 $}
+@Comment{$Date: 2011/11/01 05:34:04 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -1170,7 +1170,8 @@ to detect potentially blocking operations within a protected operation.]}
 @nt{pragma} Detect_Blocking is as follows:]}
 @end{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Detect_Blocking>;']}
+@AddedPragmaSyn<Version=[2],@ChgAdded{Version=[2],
+Text=[@key{pragma} @prag<Detect_Blocking>;]}>
 @end{Syntax}
 
 @begin{LinkTime}
@@ -1208,7 +1209,7 @@ and need not be detected.]}
   Pragma Detect_Blocking is new.]}
 @end{Extend95}
 
-@Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[Pragma Partition_Elaboration_Policy]}
 
 @begin{Intro}
@@ -1224,7 +1225,8 @@ for user control over elaboration policy.]}
 @nt{pragma} Partition_Elaboration_Policy is as follows:]}
 @end{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Partition_Elaboration_Policy> (@SynI<policy_>@Syn2<identifier>);']}
+@AddedPragmaSyn<Version=[2],@ChgAdded{Version=[2],
+Text=[@key{pragma} @prag<Partition_Elaboration_Policy> (@SynI<policy_>@Syn2<identifier>);]}>
 
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[AddedNormal]}

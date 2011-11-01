@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:24 $}
+@Comment{$Date: 2011/11/01 05:34:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.93 $}
+@Comment{$Revision: 1.94 $}
 
 @LabeledClause{Array Types}
 
@@ -206,7 +206,8 @@ constrained first subtype.
 The @i(constraint) of the first subtype consists of the bounds
 of the index ranges.
 @begin{Discussion}
-  Although there is no namable
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
+  Although there is no @Chg{Version=[3],New=[nameable],Old=[namable]}
   unconstrained array subtype in this case, the predefined slicing
   and concatenation operations can operate on and yield
   values that do not necessarily belong to the first array subtype.
@@ -796,6 +797,7 @@ the meaning of the program will be different.]}
   The type Wide_Wide_String is new.]}
 @end{Extend95}
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 
 @LabeledClause{Discriminants}
 
@@ -1037,7 +1039,7 @@ instance of a generic unit.@PDefn{generic contract issue}
   This is important to avoid dangling references to local variables.]}
   @ChgAdded{Version=[3],Text=[A (non-formal) limited private type can always
   have a default for an access discriminant, because having the default itself
-  makes the type inmutably limited. Such a private type must necessarily
+  makes the type immutably limited. Such a private type must necessarily
   have a full type with the same access discriminant with a default, and
   thus the full type will always be immutably limited (if legal).]}
 @end{Ramification}
@@ -1575,7 +1577,7 @@ when the discriminant is initialized.
   @ChgAdded{Version=[2],Text=[Changed the wording to use the new term
   @lquotes@;explicitly limited record@rquotes, which makes the intent
   much clearer (and eliminates confusion with derived types that happen to
-  contain the reserved word @key(limited).]}
+  contain the reserved word @key[limited]).]}
 @end{DiffWord95}
 
 @begin{Incompatible2005}

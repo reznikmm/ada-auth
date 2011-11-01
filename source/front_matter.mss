@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.72 $ $Date: 2011/09/29 06:37:25 $}
+@comment{$Revision: 1.73 $ $Date: 2011/11/01 05:34:04 $}
 
 @comment{@begin{Comment} (*Removed the below for Ada 2012, which is supposely going
 to be processed as a revision*)
@@ -768,7 +768,7 @@ replaces the second edition of 1995. It],Old=[Amendment 1]} modifies the
 @Chg{Version=[3],New=[previous edition],Old=[1995 International Standard]} by
 making changes and additions that improve the capability of the language and
 the reliability of programs written in the language.@Chg{Version=[3],New=[ This
-edition encorporates the changes from Amendment 1 (ISO/IEC 8652:1995:AMD 1:2007),
+edition incorporates the changes from Amendment 1 (ISO/IEC 8652:1995:AMD 1:2007),
 which],Old=[In particular the changes]}
 were designed to improve the portability of programs, interfacing to other
 languages, and both the object-oriented and real-time capabilities.]}

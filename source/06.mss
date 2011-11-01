@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:24 $}
+@Comment{$Date: 2011/11/01 05:34:03 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.118 $}
+@Comment{$Revision: 1.119 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -337,10 +337,10 @@ The @i{types of a profile} are the types of those subtypes.]
 @nt<abstract_subprogram_declaration>
 is abstract; a subprogram declared by a @nt<subprogram_declaration>
 is not. See @RefSec{Abstract Types and Subprograms}.@Chg{Version=[2],New=[
-Similarly, a procedure defined by a
+Similarly, a procedure @Chg{Version=[3],New=[declared],Old=[defined]} by a
 @nt{null_procedure_declaration} is a null procedure; a procedure declared by
 a @nt{subprogram_declaration} is not. See @RefSec{Null Procedures}.@Chg{Version=[3],New=[
-Finally, a function defined by an @nt{expression_function_declaration} is
+Finally, a function declared by an @nt{expression_function_declaration} is
 an expression function; a function declared by
 a @nt{subprogram_declaration} is not. See @RefSec{Expression Functions}.],Old=[]}],Old=[]}]
 
@@ -515,7 +515,7 @@ following language-defined aspects may be specified with an
   about the enumeration literal True declared in package Standard (see
   @RefSecNum{The Package Standard}), and not some
   other value or identifier True. That matters as some rules depend on full
-  conformance of these experessions, which depends on the specific declarations
+  conformance of these expressions, which depends on the specific declarations
   involved.]}
 @end{Honest}
 
@@ -638,12 +638,13 @@ a homograph (see @RefSecNum{Visibility}) of @i<P> from a progenitor type
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[If the type @i<T> is abstract the implicitly
-  declared subprogram is @i<abstract>.]}
+  @ChgAdded{Version=[3],Text=[If the type @i<T> is abstract, the implicitly
+  declared subprogram @i<P> is @i<abstract>.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[Otherwise, the subprogram @i{requires overriding}
-  and shall be overridden with a nonabstract subprogram.@PDefn{requires overriding}]}
+  @ChgAdded{Version=[3],Text=[Otherwise, the subprogram @i<P>
+  @i{requires overriding} and shall be overridden with a
+  nonabstract subprogram.@PDefn{requires overriding}]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -681,7 +682,7 @@ a homograph (see @RefSecNum{Visibility}) of @i<P> from a progenitor type
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[This requires the set of class-wide preconditions that
+  @ChgAdded{Version=[3],Text=[This requires the set of class-wide preconditions
     that apply to the interface routine to be strictly stronger than those that
     apply to the concrete routine. Since full conformance
     requires each name to denote the same declaration, it is unlikely that
@@ -841,7 +842,7 @@ precondition checks are performed as follows:@Defn2{Term=[assertion policy],
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The class-wide precondition expressions of the
-    entity itself as well as those of any parent or progentitor operations are
+    entity itself as well as those of any parent or progenitor operations are
     evaluated, as these expressions apply to the corresponding operations
     of all descendants.]}
 @end{Ramification}
@@ -890,7 +891,7 @@ parameters are performed in an arbitrary order.@Defn2{Term=[assertion policy],
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The class-wide postcondition expressions of the
-  entity itself as well as those of any parent or progentitor operations are
+  entity itself as well as those of any parent or progenitor operations are
   evaluated, as these apply to all descendants; in contrast, only the specific
   postcondition of the entity applies. Postconditions can always be evaluated
   inside the invoked body.]}
@@ -899,7 +900,9 @@ parameters are performed in an arbitrary order.@Defn2{Term=[assertion policy],
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[If a precondition or postcondition check fails, the
 exception is raised at the point of the call. @Redundant[The exception cannot
-be handled inside the called subprogram or entry.]]}
+be handled inside the called subprogram or entry.] An exception raised by the
+evaluation of a precondition or postcondition expression is also raised at the
+point of call.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[For any subprogram or entry call (including dispatching calls), the checks
@@ -988,7 +991,7 @@ the value.]}
 subprogram or entry declaration is Ignore, then no precondition or postcondition
 check is performed on a call on that subprogram or entry.
 For a dispatching call, if the assertion policy in effect at the point of the
-declaration of the denoted callable entity is not that same as the assertion
+declaration of the denoted callable entity is not the same as the assertion
 policy in effect at the point of the declaration of the invoked callable entity,
 it is implementation defined whether any precondition or postcondition checks
 are made.]}
@@ -1056,13 +1059,15 @@ the formal parameter denotes (a view of) the object denoted by the
 actual parameter; reads and updates of the formal parameter directly
 reference the actual parameter object.]
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4],ARef=[AI05-0262-1]}
 @Defn{by-copy type}
 A type is a @i(by-copy type) if it is an elementary type,
 or if it is a descendant of a private type whose full type is a
-by-copy type. A parameter of a by-copy type @Chg{Version=[3],New=[that is not
-explicitly aliased ],Old=[]}is passed by copy.
+by-copy type. A parameter of a by-copy type is passed by
+copy@Chg{Version=[3],New=[, unless the
+formal parameter is explicitly aliased],Old=[]}.
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @leading@keepnext@Defn{by-reference type}
 A type is a @i(by-reference type) if it
 is a descendant of one of the following:
@@ -1962,7 +1967,7 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0134-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Now require
-  full conformance of anonynous access-to-subprogram parameters and results
+  full conformance of anonymous access-to-subprogram parameters and results
   for full conformance. This is necessary so that there is no confusion about
   the default expression that is used for a call. While this is technically
   incompatible with Ada 2005 as defined by Amendment 1, it is a new Ada 2005
@@ -2012,8 +2017,8 @@ is as follows:]}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgDeleted{Version=[3],Text=[@DeletedPragmaSyn`Version=[3],
-InitialVersion=[0],@key{pragma} @prag(Inline)(@Syn2{name} {, @Syn2{name}});']}
+@DeletedPragmaSyn{Version=[3],InitialVersion=[0],@ChgDeleted{Version=[3],
+Text=[@key{pragma} @prag(Inline)(@Syn2{name} {, @Syn2{name}});]}}
 @end{Syntax}
 
 @begin{Legality}
@@ -2171,7 +2176,7 @@ Such a @nt{pragma} applies to all of the denoted entities.]}
 @end{Extend2005}
 
 
-@Comment{@RMNewPage@Comment{For printed RM Ada 2005 only} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledClause{Subprogram Calls}
 
 @begin{Intro}
@@ -2652,8 +2657,8 @@ or]}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[both @nt{name}s are @nt{indexed_component}s, their
 @nt{prefix}es are known to denote the same object, and each of the pairs of
-corresponding index values are either static expressions with the same value
-or @nt{name}s that are known to denote the same object; or]}
+corresponding index values are either bodt static expressions with the same
+value or both @nt{name}s that are known to denote the same object; or]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[both @nt{name}s are @nt{slice}s, their
@@ -3114,7 +3119,7 @@ as it is subsumed by earlier clauses and subclauses.
   @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}
   @b<Correction:> Clarified that
   @key[out] parameters of an access type are not checked for null exclusions
-  when they are passed in (which is similar to the behavior for constraints.
+  when they are passed in (which is similar to the behavior for constraints).
   This was unspecified in Ada 2005, so a program which depends on the
   behavior of an implementation which does check the exclusion may
   malfunction. But a program depending on an exception being raised is unlikely.]}
@@ -3555,7 +3560,7 @@ Constraint_Error is raised if this check fails.]}
   @ChgAdded{Version=[3],Text=[This check is needed so that dispatching
   on controlling access results works for tag-indeterminate functions.
   If it was not made, it would be possible for such functions to return
-  an access to a decendant type, meaning the function could return
+  an access to a descendant type, meaning the function could return
   an object with a tag different than the one assumed by the
   dispatching rules.]}
 @end{Reason}
@@ -3753,7 +3758,7 @@ that object.]}
    case where any access discriminants which the result object might have
    subtypes with "bad" accessibility levels (as determined by the rules of
    @RefSecNum{Operations of Access Types} for determining the accessibility
-   level of the type of of an access discriminant in the @nt{expression} or
+   level of the type of an access discriminant in the @nt{expression} or
    @nt{return_subtype_indication} of a return statement).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3934,7 +3939,7 @@ subtype of this object.]}]}
   @ldquote@;wrong@rdquote discriminants or bounds is abandoned (via an
   exception, or for an extended_return_statement, via an exit or goto
   statement), and then a return statement with the @ldquote@;right@rdquote
-  discrimiants or bounds is executed. The only solution for this problem is to
+  discriminants or bounds is executed. The only solution for this problem is to
   not have the permission at all, but this is too unusual of a case to worry about
   the effects of the permission, especially given the implementation
   difficulties for built-in-place objects that this permission is intended to
@@ -4086,8 +4091,8 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}
   @b<Correction:> The @ImplPermName allowing early raising of Constraint_Error was modified
   to remove the most common of these cases from the permission (returning an
-  object with mutuable discriminants, where the return object is created with
-  one set of discriminants and then changed to another. (The permission was
+  object with mutable discriminants, where the return object is created with
+  one set of discriminants and then changed to another). (The permission was
   also widened to allow the early check for constrained functions when that
   constraint is wrong.) However, there still is an unlikely case where the
   permission would allow an exception to be raised when none would be raised by the canonical
@@ -4164,8 +4169,7 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
 @end{DiffWord2005}
 
 
-@Comment{TBD:---@LabeledAddedRevisedClause{Version=[3],OldVersion=[2],New=[Non-returning Procedures],Old=[Pragma No_Return]}}
-@LabeledAddedSubClause{Version=[3],Name=[Non-returning Procedures]}
+@LabeledRevisedSubClause{Version=[3],InitialVersion=[2],New=[Non-returning Procedures],Old=[Pragma No_Return]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
@@ -4199,8 +4203,8 @@ is as follows:]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgAdded{Version=[2],Text=`@Chg{Version=[3],New=[],Old=[@DeletedPragmaSyn`Version=[3],
-InitialVersion=[2],@key{pragma} @prag<No_Return>(@SynI{procedure_}@Syn2{local_name}{, @SynI{procedure_}@Syn2{local_name}});']}'}
+@DeletedPragmaSyn{Version=[3],InitialVersion=[2],@ChgAdded{Version=[2],
+Text=`@Chg{Version=[3],New=[],Old=[@key{pragma} @prag<No_Return>(@SynI{procedure_}@Syn2{local_name}{, @SynI{procedure_}@Syn2{local_name}});]}'}}
 @end{Syntax}
 
 @begin{StaticSem}
@@ -4344,7 +4348,7 @@ normally, Program_Error is raised at the point of the call.
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[@key(procedure) Fail(Msg : String)@Chg{Version=[3],New=[],Old=[;]}  --@ExamCom[ raises Fatal_Error exception]
-@Chg{Version=[3],New=[   @key(with)],Old=[@key(pragma)]} No_Return@Chg{Version=[3],New=[ => True],Old=[(Fail)]};
+@Chg{Version=[3],New=[   @key(with)],Old=[@key(pragma)]} No_Return@Chg{Version=[3],New=[],Old=[(Fail)]};
    --@ExamCom[ Inform compiler and reader that procedure never returns normally]]}
 @end{Example}
 @end{Examples}
@@ -4436,7 +4440,7 @@ gives the complementary result.@Defn{/= operator}
 user-defined, which means that it will be inherited by a derived type.
 @ldquote@;User-defined@rdquote means @ldquote@;not language-defined@rdquote for
 the purposes of inheritance, that is anything other than predefined operators.
-6.6(6): @Defn{Number of the Beast}]}
+@Defn{Number of the Beast}@Comment{This is 6.6(6) :-)}]}
 @end{Discussion}
 @end{StaticSem}
 
@@ -4483,7 +4487,7 @@ as the result type is not Boolean.
 @end{DiffWord2005}
 
 
-@Comment{@RMNewPage@Comment{For printed RM Ada 2005} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[Null Procedures]}
 
 @begin{Intro}
@@ -4653,7 +4657,7 @@ is not allowed for an @nt{expression_@!function_@!declaration}; however, an
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[ The execution of an expression function is invoked
 by a subprogram call. For the execution of a subprogram call on an expression
-function, the execution of the @nt{subprogram_body} exceutes an implicit
+function, the execution of the @nt{subprogram_body} executes an implicit
 function body containing only a @nt{simple_return_statement} whose
 @nt{expression} is that of the expression function.]}
 

@@ -1,10 +1,11 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.39 $ $Date: 2011/08/17 00:29:41 $ $Author: randy $ }
+@comment{ $Revision: 1.40 $ $Date: 2011/11/01 05:34:05 $ $Author: randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:41 $}
+@Comment{$Date: 2011/11/01 05:34:05 $}
 
-@Comment{@RMNewPage@Comment{For printed version of Ada 2005 RM} - Now Ada 2012}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{The Package Standard}
 
 @begin{Intro}

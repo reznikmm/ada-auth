@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:24 $}
+@Comment{$Date: 2011/11/01 05:34:02 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -706,7 +706,9 @@ of a compound delimiter, or as a character of a @nt{comment},
 @nt{string_literal}, @nt{character_literal}, or
 @nt{numeric_literal}.
 
-@Comment{@rmnewpage@ChgNote{Printed Ada 2005 only}}
+@RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+
 @Leading@keepnext@;The following names are used when referring to compound
 delimiters:@table{Columns=[2],
 Alignment=[Allleft],FirstColWidth=[1],LastColWidth=[4],

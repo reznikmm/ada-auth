@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:25 $}
+@Comment{$Date: 2011/11/01 05:34:03 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.97 $}
+@Comment{$Revision: 1.98 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1123,7 +1123,7 @@ difficulty.@Chg{Version=[2],New=[ (This
 is not exactly equivalent because the latter @nt{with_clause} names
 A and A.B, while the previous one does not. Whether a unit is
 @ldquote@;named@rdquote does not have any effect on visibility, however,
-so it is equivalent for visibility purposes.))],Old=[]}
+so it is equivalent for visibility purposes.)],Old=[]}
 
 @end{Discussion}
 
@@ -2736,7 +2736,7 @@ the order in which they appear in the environment
   Any included @nt{library_unit_declaration} @Chg{Version=[3],New=[for],Old=[to]}
   which @Chg{Version=[3],New=[aspect],Old=[a @nt{pragma}]}
   Elaborate_Body @Chg{Version=[3],New=[is True @Redundant[(including when a
-  pragma Elaborate_Body applies)]],Old=[applies]}
+  @nt{pragma} Elaborate_Body applies)]],Old=[applies]}
   is immediately followed by its @nt{library_unit_body},
   if included.
 @begin{Discussion}
@@ -3165,7 +3165,8 @@ A @nt{pragma} Preelaborate is a library unit pragma.
 @nt{pragma} Preelaborable_Initialization is as follows:]}
 @end{SyntaxText}
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=<@AddedPragmaSyn`Version=[2],@key{pragma} @prag<Preelaborable_Initialization>(@Syn2{direct_name});'>}
+@AddedPragmaSyn{Version=[2],@ChgAdded{Version=[2],
+Text=<@key{pragma} @prag<Preelaborable_Initialization>(@Syn2{direct_name});>}}
 @end{Syntax}
 
 @begin{Legality}
@@ -3257,8 +3258,9 @@ formal subprogram is a user-defined subprogram.]}
 New=[ discriminated formal derived type,],Old=[]} formal private
 type@Chg{Version=[3],New=[, ],Old=[ (]}or
 @Chg{Version=[3],New=[formal private ],Old=[]}extension@Chg{Version=[3],New=[],Old=[)]}
-declared within the formal part of the generic unit is a private
-type (or extension) that does not have preelaborable initialization@Chg{Version=[3],
+declared within the formal part of the generic unit is
+a @Chg{Version=[3],New=[],Old=[private ]}type@Chg{Version=[3],New=[],Old=[ (or extension)]}
+that does not have preelaborable initialization@Chg{Version=[3],
 New=[, unless @nt<pragma>
 Preelaborable_Initialization has been applied to the formal type],Old=[]};]}
 
